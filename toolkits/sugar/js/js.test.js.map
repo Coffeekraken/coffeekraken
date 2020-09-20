@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "js.test.js"
+    ],
+    "names": [
+        "__js",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,IAAI,GAAGC,OAAO,CAAC,OAAD,CAApB;;AACAA,OAAO,CAAC,MAAD,CAAP,CAAgBD,IAAhB",
+    "sourcesContent": [
+        "const __js = require('../js');\nrequire('./js')(__js);"
+    ]
+}

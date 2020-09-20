@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "nodeIndex.js"
+    ],
+    "names": [
+        "nodeIndex",
+        "node",
+        "index",
+        "previousElementSibling"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;;AAoBe,SAASA,SAAT,CAAmBC,IAAnB,EAAyB;AACtC,MAAIC,KAAK,GAAG,CAAZ;;AACA,SAAQD,IAAI,GAAGA,IAAI,CAACE,sBAApB,EAA6C;AAC3CD,IAAAA,KAAK;AACN;;AACD,SAAOA,KAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name      nodeIndex\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Return the inde of the passed node inside the html\n *\n * @param    {HTMLElement}    node    The node to get the index for\n * @return    {Integer}    The index of the node inside the html\n *\n * @example    js\n * import nodeIndex from '@coffeekraken/sugar/js/dom/nodeIndex'\n * // assuming:\n * // <li>item #1</li>\n * // <li class=\"match\">item #2</li>\n * // <li>item #3</li>\n * nodeIndex(document.querySelector('.match')) // 1\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function nodeIndex(node) {\n  let index = 0;\n  while ((node = node.previousElementSibling)) {\n    index++;\n  }\n  return index;\n}\n"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "object.js"
+    ],
+    "names": [
+        "isObject",
+        "value",
+        "constructor",
+        "Object"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,QAAT,CAAkBC,KAAlB,EAAyB;AACtC,SAAOA,KAAK,IAAI,OAAOA,KAAP,KAAiB,QAA1B,IAAsCA,KAAK,CAACC,WAAN,KAAsBC,MAAnE;AACD",
+    "sourcesContent": [
+        "/**\n * @name        isObject\n * @namespace           sugar.js.is\n * @type      Function\n *\n * Check if the passed value is a js object\n *\n * @param    {Mixed}    value    The value to check\n * @return   {Boolean}   true if it's a object, false if not\n *\n * @example    js\n * import isObject from '@coffeekraken/sugar/js/is/object'\n * if (isObject({}) {\n *   // do something\n * }\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isObject(value) {\n  return value && typeof value === 'object' && value.constructor === Object;\n}\n"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "striptags.test.js"
+    ],
+    "names": [
+        "__striptags",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,WAAW,GAAGC,OAAO,CAAC,cAAD,CAA3B;;AACAA,OAAO,CAAC,aAAD,CAAP,CAAuBD,WAAvB",
+    "sourcesContent": [
+        "const __striptags = require('../striptags');\nrequire('./striptags')(__striptags);"
+    ]
+}

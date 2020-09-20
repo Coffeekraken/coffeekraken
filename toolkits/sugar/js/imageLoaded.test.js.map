@@ -1,0 +1,27 @@
+{
+    "version": 3,
+    "sources": [
+        "imageLoaded.test.js"
+    ],
+    "names": [
+        "describe",
+        "document",
+        "head",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "isLoaded",
+        "isError",
+        "then",
+        "catch",
+        "e",
+        "it",
+        "setTimeout",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;AACA;;;;AAEAA,QAAQ,CAAC,0BAAD,EAA6B,MAAM;AACzCC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAGA,MAAMC,IAAI,GAAGH,QAAQ,CAACC,IAAT,CAAcG,aAAd,CAA4B,KAA5B,CAAb;AAEA,MAAIC,QAAQ,GAAG,KAAf;AAAA,MACEC,OAAO,GAAG,KADZ;AAGA,4BAAcH,IAAd,EACGI,IADH,CACQ,MAAM;AACVF,IAAAA,QAAQ,GAAG,IAAX;AACD,GAHH,EAIGG,KAJH,CAIUC,CAAD,IAAO;AACZH,IAAAA,OAAO,GAAG,IAAV;AACD,GANH;AAQA,8BAAgBH,IAAhB,EAAsB,MAAtB;AAEAO,EAAAA,EAAE,CAAC,gDAAD,EAAmD,MAAM;AACzDC,IAAAA,UAAU,CAAC,MAAM;AACfC,MAAAA,MAAM,CAACP,QAAD,CAAN,CAAiBQ,IAAjB,CAAsB,IAAtB;AACAD,MAAAA,MAAM,CAACN,OAAD,CAAN,CAAgBO,IAAhB,CAAqB,KAArB;AACD,KAHS,CAAV;AAID,GALC,CAAF;AAMD,CAzBO,CAAR",
+    "sourcesContent": [
+        "import __imageLoaded from '../imageLoaded';\nimport __dispatchEvent from '../dispatchEvent';\n\ndescribe('sugar.js.dom.imageLoaded', () => {\n  document.head.innerHTML = `\n    <img src=\"src/data/tests/testing.jpg\" />\n  `;\n  const $elm = document.head.querySelector('img');\n\n  let isLoaded = false,\n    isError = false;\n\n  __imageLoaded($elm)\n    .then(() => {\n      isLoaded = true;\n    })\n    .catch((e) => {\n      isError = true;\n    });\n\n  __dispatchEvent($elm, 'load');\n\n  it('Should detect the image loading complete state', () => {\n    setTimeout(() => {\n      expect(isLoaded).toBe(true);\n      expect(isError).toBe(false);\n    });\n  });\n});\n"
+    ]
+}

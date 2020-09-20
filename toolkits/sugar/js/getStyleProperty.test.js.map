@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "sources": [
+        "getStyleProperty.test.js"
+    ],
+    "names": [
+        "describe",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "it",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;;;AAEAA,QAAQ,CAAC,+BAAD,EAAkC,MAAM;AAE9CC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAUA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,UAAvB,CAAb;AAIAC,EAAAA,EAAE,CAAC,iDAAD,EAAoD,MAAM;AAC1DC,IAAAA,MAAM,CAAC,+BAAmBH,IAAnB,EAAyB,SAAzB,CAAD,CAAN,CAA4CI,IAA5C,CAAiD,aAAjD;AACD,GAFC,CAAF;AAGAF,EAAAA,EAAE,CAAC,mDAAD,EAAsD,MAAM;AAC5DC,IAAAA,MAAM,CAAC,+BAAmBH,IAAnB,EAAyB,WAAzB,CAAD,CAAN,CAA8CI,IAA9C,CAAmD,wBAAnD;AACD,GAFC,CAAF;AAID,CAvBO,CAAR",
+    "sourcesContent": [
+        "import __getStyleProperty from '../getStyleProperty';\n\ndescribe('sugar.js.dom.getStyleProperty', () => {\n\n  document.body.innerHTML = `\n      <style>\n          #testing {\n            content: 'hello world';\n            animation: coco 2s ease-in-out 3s;\n          }\n      </style>\n      <div id=\"testing\">\n      </div>\n  `;\n  const $elm = document.querySelector('#testing');\n\n\n\n  it('Should get the \"content\" css property correctly', () => {\n    expect(__getStyleProperty($elm, 'content')).toBe('hello world');\n  });\n  it('Should get the \"animation\" css property correctly', () => {\n    expect(__getStyleProperty($elm, 'animation')).toBe('coco 2s ease-in-out 3s');\n  });\n\n});"
+    ]
+}

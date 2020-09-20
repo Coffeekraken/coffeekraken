@@ -1,0 +1,24 @@
+{
+    "version": 3,
+    "sources": [
+        "snippet.js"
+    ],
+    "names": [
+        "snippet",
+        "data",
+        "content",
+        "length",
+        "slice",
+        "language",
+        "value",
+        "toLowerCase",
+        "code",
+        "Array",
+        "isArray",
+        "join"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;AAae,SAASA,OAAT,CAAiBC,IAAjB,EAAuB;AACpC,MAAIA,IAAI,CAACC,OAAL,IAAgBD,IAAI,CAACC,OAAL,CAAaD,IAAI,CAACC,OAAL,CAAaC,MAAb,GAAsB,CAAnC,MAA0C,EAA9D,EAAkE;AAChEF,IAAAA,IAAI,CAACC,OAAL,GAAeD,IAAI,CAACC,OAAL,CAAaE,KAAb,CAAmB,CAAnB,EAAsB,CAAC,CAAvB,CAAf;AACD;;AACD,SAAO;AACLC,IAAAA,QAAQ,EACN,OAAOJ,IAAI,CAACK,KAAZ,KAAsB,QAAtB,GAAiCL,IAAI,CAACK,KAAL,CAAWC,WAAX,EAAjC,GAA4DN,IAAI,CAACK,KAF9D;AAGLE,IAAAA,IAAI,EAAEC,KAAK,CAACC,OAAN,CAAcT,IAAI,CAACC,OAAnB,IAA8BD,IAAI,CAACC,OAAL,CAAaS,IAAb,CAAkB,IAAlB,CAA9B,GAAwDV,IAAI,CAACC;AAH9D,GAAP;AAKD",
+    "sourcesContent": [
+        "/**\n * @name              snippet\n * @namespace           sugar.js.docblock.tags\n * @type              Function\n *\n * Parse the snippet tag\n *\n * @param       {Object}          data        The data object parsed in the string\n * @snippet      {Object}                      The formated object\n *\n * @since     2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com>\n */\nexport default function snippet(data) {\n  if (data.content && data.content[data.content.length - 1] === '') {\n    data.content = data.content.slice(0, -1);\n  }\n  return {\n    language:\n      typeof data.value === 'string' ? data.value.toLowerCase() : data.value,\n    code: Array.isArray(data.content) ? data.content.join('\\n') : data.content\n  };\n}\n"
+    ]
+}

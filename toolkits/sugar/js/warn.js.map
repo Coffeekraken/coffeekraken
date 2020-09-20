@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "warn.js"
+    ],
+    "names": [
+        "warn",
+        "message",
+        "global",
+        "window",
+        "_sLogDefaultInstance",
+        "__SLog"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;AAgBe,SAASA,IAAT,CAAcC,OAAd,EAAuB;AACpC,MAAI,CAAC,CAACC,MAAM,IAAIC,MAAX,EAAmBC,oBAAxB,EAA8C;AAC5C,KAACF,MAAM,IAAIC,MAAX,EAAmBC,oBAAnB,GAA0C,IAAIC,aAAJ,CAAW,EAAX,CAA1C;AACD;;AACD,SAAO,CAACH,MAAM,IAAIC,MAAX,EAAmBC,oBAAnB,CAAwCJ,IAAxC,CAA6CC,OAA7C,CAAP;AACD",
+    "sourcesContent": [
+        "import __SLog from './SLog';\n\n/**\n * @name              warn\n * @namespace           sugar.js.warn\n * @type              Function\n *\n * This function is a simple wrapper around the SLog class that let you use the warn features quickly\n *\n * @param           {Mixed}             message           The message to log\n * @return          {Promise}                             A promise resolved once your message has been correctly logged\n *\n * @example         js\n * import warn from '@coffeekraken/sugar/js/log/warn';\n * warn('Hello world');\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function warn(message) {\n  if (!(global || window)._sLogDefaultInstance) {\n    (global || window)._sLogDefaultInstance = new __SLog({});\n  }\n  return (global || window)._sLogDefaultInstance.warn(message);\n}\n"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "extractSame.test.js"
+    ],
+    "names": [
+        "__extractSame",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,aAAa,GAAGC,OAAO,CAAC,gBAAD,CAA7B;;AACAA,OAAO,CAAC,eAAD,CAAP,CAAyBD,aAAzB",
+    "sourcesContent": [
+        "const __extractSame = require('../extractSame');\nrequire('./extractSame')(__extractSame);\n"
+    ]
+}

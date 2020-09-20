@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "getAnimationProperties.test.js"
+    ],
+    "names": [
+        "describe",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "props",
+        "it"
+    ],
+    "mappings": ";;AAAA;;;;AAEAA,QAAQ,CAAC,qCAAD,EAAwC,MAAM;AAEpDC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAkBA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,UAAvB,CAAb;AAEA,MAAMC,KAAK,GAAG,qCAAyBF,IAAzB,CAAd;AAEAG,EAAAA,EAAE,CAAC,8DAAD,EAAiE,MAAM,CACvE;AACD,GAFC,CAAF;AAID,CA5BO,CAAR",
+    "sourcesContent": [
+        "import __getAnimationProperties from '../getAnimationProperties';\n\ndescribe('sugar.js.dom.getAnimationProperties', () => {\n\n  document.body.innerHTML = `\n  <style>\n    @keyframes coco {\n      from {\n        opacity: 0;\n      }\n      to {\n        opacity: 1;\n      }\n    }\n    #testing {\n      animation: coco 2s ease-in-out;\n      animation-name: coco;\n    }\n  </style>\n      <div id=\"testing\">\n      </div>\n  `;\n  const $elm = document.querySelector('#testing');\n\n  const props = __getAnimationProperties($elm);\n\n  it('Should find the \"testing\" element that is up in the dom tree', () => {\n    //  expect($testing.id).toBe('testing');\n  });\n\n});"
+    ]
+}

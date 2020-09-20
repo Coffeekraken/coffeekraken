@@ -1,0 +1,34 @@
+{
+    "version": 3,
+    "sources": [
+        "settings.js"
+    ],
+    "names": [
+        "settings",
+        "settingsElm",
+        "document",
+        "createElement",
+        "classList",
+        "add",
+        "body",
+        "appendChild",
+        "_settings",
+        "window",
+        "getComputedStyle",
+        "getPropertyValue",
+        "trim",
+        "replace",
+        "slice",
+        "length",
+        "JSON",
+        "parse",
+        "Object",
+        "assign",
+        "module",
+        "exports"
+    ],
+    "mappings": ";;AAeA;;;;AAfA;;;;;;;;;;;;;AAcA;AAGA;AACA;AACA,IAAIA,QAAQ,GAAG,EAAf,C,CAEA;;AACA,uBAAS,MAAM;AACb,MAAIC,WAAW,GAAGC,QAAQ,CAACC,aAAT,CAAuB,KAAvB,CAAlB;AACAF,EAAAA,WAAW,CAACG,SAAZ,CAAsBC,GAAtB,CAA0B,YAA1B;AACAH,EAAAA,QAAQ,CAACI,IAAT,CAAcC,WAAd,CAA0BN,WAA1B;;AACA,MAAIO,SAAS,GAAGC,MAAM,CACnBC,gBADa,CACIT,WADJ,EACiB,QADjB,EAEbU,gBAFa,CAEI,SAFJ,EAGbC,IAHa,EAAhB;;AAIA,MAAIJ,SAAS,IAAIA,SAAS,KAAK,EAA3B,IAAiCA,SAAS,KAAK,MAAnD,EAA2D;AACzDA,IAAAA,SAAS,GAAGA,SAAS,CAACK,OAAV,CAAkB,MAAlB,EAA0B,GAA1B,CAAZ,CADyD,CAEzD;;AACAL,IAAAA,SAAS,GAAGA,SAAS,CAACK,OAAV,CAAkB,6BAAlB,EAAiD,SAAjD,CAAZ;AACAL,IAAAA,SAAS,GAAGA,SAAS,CAACM,KAAV,CAAgB,CAAhB,EAAmBN,SAAS,CAACO,MAAV,GAAmB,CAAtC,CAAZ;AACAP,IAAAA,SAAS,GAAGQ,IAAI,CAACC,KAAL,CAAWT,SAAX,CAAZ;AACAU,IAAAA,MAAM,CAACC,MAAP,CAAcnB,QAAd,EAAwBQ,SAAxB;AACD;AACF,CAhBD,E,CAkBA;;AACAY,MAAM,CAACC,OAAP,GAAiBrB,QAAjB",
+    "sourcesContent": [
+        "/**\n * @name \t\t        settings\n * @namespace           js.core\n * @type \t\t{Object}\n *\n * Store all the sugar settings grabed from your scss settings\n *\n * @example    js\n * import settings from '@coffeekraken/sugar/js/core/settings';\n * console.log(settings.unit); // => 'rem'\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n\n// imports\nimport domReady from '../dom/domReady';\n\n// prepare a settings object to store\n// the getted settings from the css\nlet settings = {};\n\n// wait the css to be loaded\ndomReady(() => {\n  let settingsElm = document.createElement('div');\n  settingsElm.classList.add('s-settings');\n  document.body.appendChild(settingsElm);\n  let _settings = window\n    .getComputedStyle(settingsElm, ':after')\n    .getPropertyValue('content')\n    .trim();\n  if (_settings && _settings !== '' && _settings !== 'none') {\n    _settings = _settings.replace(/\\\\\"/g, '\"');\n    // handle numbers that does not have initial 0.65\n    _settings = _settings.replace(/([:|\\s])(\\.\\d+)([\\s|,|}]?)/g, '$10$2$3');\n    _settings = _settings.slice(1, _settings.length - 1);\n    _settings = JSON.parse(_settings);\n    Object.assign(settings, _settings);\n  }\n});\n\n// export the settings\nmodule.exports = settings;\n"
+    ]
+}

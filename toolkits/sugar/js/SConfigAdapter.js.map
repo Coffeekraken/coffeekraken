@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "SConfigAdapter.js"
+    ],
+    "names": [
+        "SConfigAdapter",
+        "settings",
+        "name",
+        "test",
+        "Error",
+        "_settings",
+        "value"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;IAyBqBA,c;AACnB;;;;;;;;;;AAWA;;;;;;;;;;;;AAYA,0BAAYC,QAAZ,EAA2B;AAAA,QAAfA,QAAe;AAAfA,MAAAA,QAAe,GAAJ,EAAI;AAAA;;AAAA;;AAAA,uCAdf,EAce;;AACzB,QAAIA,QAAQ,CAACC,IAAT,IAAiB,CAAC,qBAAqBC,IAArB,CAA0BF,QAAQ,CAACC,IAAnC,CAAtB,EAAgE;AAC9D,YAAM,IAAIE,KAAJ,0FAAN;AAGD,KALwB,CAMzB;;;AACA,SAAKC,SAAL,GAAiBJ,QAAjB;AACD;AAED;;;;;;;;;;;;;wBASW;AACT,aAAO,KAAKI,SAAL,CAAeH,IAAtB;AACD,K;sBACQI,K,EAAO;AACd,UAAI,CAAC,qBAAqBH,IAArB,CAA0BG,KAA1B,CAAL,EAAuC;AACrC,cAAM,IAAIF,KAAJ,0FAAN;AAGD;;AACD,WAAKC,SAAL,CAAeH,IAAf,GAAsBI,KAAtB;AACD;AAED;;;;;;;;;;;;wBASe;AACb,aAAO,KAAKD,SAAZ;AACD",
+    "sourcesContent": [
+        "import __deepMerge from '../../object/deepMerge';\n\n/**\n * @name                                SConfigAdapter\n * @namespace           sugar.js.config.adapters\n * @type                                Class\n *\n * Base class for SCache adapters\n *\n * @example             js\n * class SConfigCoolAdapter extends SConfigAdapter {\n *    constructor(settings = {}) {\n *      super(settings);\n *      // settings are accessible through this._settings\n *    }\n *    async load() {\n *      // load the config the way you want and return it in Object format\n *      return {};\n *    }\n *    async save(newConfig) {\n *      // save the newConfig object the way you want and return true when all it ok\n *      return true;\n *    }\n * }\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default class SConfigAdapter {\n  /**\n   * @name                              _settings\n   * @type                              Object\n   * @private\n   *\n   * Store the default settings of the SConfigAdapter instance\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  _settings = {};\n\n  /**\n   * @name                              constructor\n   * @type                              Function\n   *\n   * Construct the SConfigAdapter instance with the settings passed in object format. See description bellow.\n   *\n   * @param         {Object}          [settings={}]             An object to configure the SConfigAdapter instance. This is specific to each adapters.settings.settings...\n   * - name (null) {String}: Specify a simple name for this adapter instance. This name will be used to save the configs, etc...\n   * - ...others: All the settings you need for your specific adapter\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  constructor(settings = {}) {\n    if (settings.name && !/^[a-zA-Z0-9_\\-:]+$/.test(settings.name)) {\n      throw new Error(\n        `The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`\n      );\n    }\n    // store the settings\n    this._settings = settings;\n  }\n\n  /**\n   * @name                  name\n   * @type                  String\n   * @get\n   *\n   * Access the adapter setted name\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  get name() {\n    return this._settings.name;\n  }\n  set name(value) {\n    if (!/^[a-zA-Z0-9_\\-:]+$/.test(value)) {\n      throw new Error(\n        `The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`\n      );\n    }\n    this._settings.name = value;\n  }\n\n  /**\n   * @name                  settings\n   * @type                  Object\n   * @get\n   *\n   * Access the adapter setted settings\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  get settings() {\n    return this._settings;\n  }\n}\n"
+    ]
+}

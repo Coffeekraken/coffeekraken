@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "realHeight.js"
+    ],
+    "names": [
+        "realHeight",
+        "elm",
+        "style",
+        "transition",
+        "overflowY",
+        "height",
+        "scrollHeight"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;AAgBe,SAASA,UAAT,CAAoBC,GAApB,EAAyB;AACtC;AACAA,EAAAA,GAAG,CAACC,KAAJ,CAAUC,UAAV,GAAuB,MAAvB;AACAF,EAAAA,GAAG,CAACC,KAAJ,CAAUE,SAAV,GAAsB,QAAtB,CAHsC,CAItC;;AACA,MAAMC,MAAM,GAAGJ,GAAG,CAACK,YAAnB,CALsC,CAMtC;;AACAL,EAAAA,GAAG,CAACC,KAAJ,CAAUE,SAAV,GAAsB,EAAtB;AACAH,EAAAA,GAAG,CAACC,KAAJ,CAAUC,UAAV,GAAuB,EAAvB,CARsC,CAStC;;AACA,SAAOE,MAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name      realHeight\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Return the full height of an element that has maybe a max-height, etc...\n *\n * @param \t\t{HTMLElement} \t\telm \t\tThe element to process\n * @return \t\t{Number} \t\t\t\t\t\tThe real height of the element\n *\n * @example     js\n * import realHeight from '@coffeekraken/sugar/js/dom/realHeight';\n * realHeight(myCoolHtmlElement);\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function realHeight(elm) {\n  // apply an overflow-y to the element\n  elm.style.transition = 'none';\n  elm.style.overflowY = 'scroll';\n  // get the actual height through the scrollHeight\n  const height = elm.scrollHeight;\n  // reset the overflowY\n  elm.style.overflowY = '';\n  elm.style.transition = '';\n  // return the height\n  return height;\n}\n"
+    ]
+}

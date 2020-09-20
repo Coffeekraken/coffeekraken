@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "class.js"
+    ],
+    "names": [
+        "__isClass",
+        "require",
+        "cls",
+        "Array",
+        "isArray",
+        "i",
+        "length"
+    ],
+    "mappings": ";;;;;;;AAAA,IAAMA,SAAS,GAAGC,OAAO,CAAC,UAAD,CAAzB;AAEA;;;;;;;;;;;;;;;;;;;;;AAmBe,SAASC,GAAT,CAAaA,GAAb,EAAkB;AAC/B,MAAI,CAACC,KAAK,CAACC,OAAN,CAAcF,GAAd,CAAL,EAAyBA,GAAG,GAAG,CAACA,GAAD,CAAN;;AACzB,OAAK,IAAIG,CAAC,GAAG,CAAb,EAAgBA,CAAC,GAAGH,GAAG,CAACI,MAAxB,EAAgCD,CAAC,EAAjC,EAAqC;AACnC,QAAI,CAACL,SAAS,CAACE,GAAG,CAACG,CAAD,CAAJ,CAAd,EAAwB,OAAO,KAAP;AACzB;;AACD,SAAO,IAAP;AACD",
+    "sourcesContent": [
+        "const __isClass = require('is-class');\n\n/**\n * @name                      class\n * @namespace           sugar.js.is\n * @type                      Function\n *\n * Check if the passed variable (or array of variables) is/are plain variable(s)\n *\n * @param         {Mixed|Array}            variable                  The variable(s) to check\n * @return        {Boolean}                                         true if is class(es), false if not\n *\n * @example           js\n * import isClass = from '@coffeekraken/sugar/js/is/class';\n * isClass({ hello: 'world'}); // => false\n * const myCoolClass = class Coco{};\n * isClass(myCoolClass); // => true\n *\n * @see       https://www.npmjs.com/package/is-class\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function cls(cls) {\n  if (!Array.isArray(cls)) cls = [cls];\n  for (let i = 0; i < cls.length; i++) {\n    if (!__isClass(cls[i])) return false;\n  }\n  return true;\n}\n"
+    ]
+}

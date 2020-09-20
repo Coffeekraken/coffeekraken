@@ -1,0 +1,29 @@
+{
+    "version": 3,
+    "sources": [
+        "detectInOutDirection.test.js"
+    ],
+    "names": [
+        "describe",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "isInTriggered",
+        "isOutTriggered",
+        "isThenTriggered",
+        "on",
+        "direction",
+        "then",
+        "value",
+        "it",
+        "setTimeout",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;AACA;;;;AAEAA,QAAQ,CAAC,mCAAD,EAAsC,MAAM;AAClDC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAIA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,UAAvB,CAAb;AAEA,MAAIC,aAAa,GAAG,KAApB;AAAA,MACEC,cAAc,GAAG,KADnB;AAAA,MAEEC,eAAe,GAAG,KAFpB;AAIA,qCAAuBJ,IAAvB,EACGK,EADH,CACM,IADN,EACaC,SAAD,IAAe;AACvBJ,IAAAA,aAAa,GAAG,IAAhB;AACD,GAHH,EAIGG,EAJH,CAIM,KAJN,EAIcC,SAAD,IAAe;AACxBH,IAAAA,cAAc,GAAG,IAAjB;AACD,GANH,EAOGI,IAPH,CAOSC,KAAD,IAAW;AACfJ,IAAAA,eAAe,GAAG,IAAlB;AACD,GATH;AAWA,8BAAgBJ,IAAhB,EAAsB,YAAtB;AACA,8BAAgBA,IAAhB,EAAsB,YAAtB;AAEAS,EAAAA,EAAE,CAAC,8CAAD,EAAiD,MAAM;AACvDC,IAAAA,UAAU,CAAC,MAAM;AACfC,MAAAA,MAAM,CAACT,aAAD,CAAN,CAAsBU,IAAtB,CAA2B,IAA3B;AACD,KAFS,CAAV;AAGD,GAJC,CAAF;AAKAH,EAAAA,EAAE,CAAC,+CAAD,EAAkD,MAAM;AACxDC,IAAAA,UAAU,CAAC,MAAM;AACfC,MAAAA,MAAM,CAACR,cAAD,CAAN,CAAuBS,IAAvB,CAA4B,IAA5B;AACD,KAFS,CAAV;AAGD,GAJC,CAAF;AAKAH,EAAAA,EAAE,CAAC,gDAAD,EAAmD,MAAM;AACzDC,IAAAA,UAAU,CAAC,MAAM;AACfC,MAAAA,MAAM,CAACP,eAAD,CAAN,CAAwBQ,IAAxB,CAA6B,IAA7B;AACD,KAFS,CAAV;AAGD,GAJC,CAAF;AAKD,CAxCO,CAAR",
+    "sourcesContent": [
+        "import __detectInOutDirection from '../detectInOutDirection';\nimport __dispatchEvent from '../dispatchEvent';\n\ndescribe('sugar.js.dom.detectInOutDirection', () => {\n  document.body.innerHTML = `\n      <div id=\"testing\">\n      </div>\n  `;\n  const $elm = document.querySelector('#testing');\n\n  let isInTriggered = false,\n    isOutTriggered = false,\n    isThenTriggered = false;\n\n  __detectInOutDirection($elm)\n    .on('in', (direction) => {\n      isInTriggered = true;\n    })\n    .on('out', (direction) => {\n      isOutTriggered = true;\n    })\n    .then((value) => {\n      isThenTriggered = true;\n    });\n\n  __dispatchEvent($elm, 'mouseenter');\n  __dispatchEvent($elm, 'mouseleave');\n\n  it('Should have trigger the \"in\" stack correctly', () => {\n    setTimeout(() => {\n      expect(isInTriggered).toBe(true);\n    });\n  });\n  it('Should have trigger the \"out\" stack correctly', () => {\n    setTimeout(() => {\n      expect(isOutTriggered).toBe(true);\n    });\n  });\n  it('Should have trigger the \"then\" stack correctly', () => {\n    setTimeout(() => {\n      expect(isThenTriggered).toBe(true);\n    });\n  });\n});\n"
+    ]
+}

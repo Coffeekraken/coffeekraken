@@ -75,7 +75,6 @@ module.exports = class SSugarJsonStreamAction extends __SActionsStreamAction {
         settings
       )
     );
-    this._coco = 'plop';
   }
 
   /**

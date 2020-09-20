@@ -1,0 +1,27 @@
+{
+    "version": 3,
+    "sources": [
+        "removeClassOnAnimationEnd.js"
+    ],
+    "names": [
+        "removeClassOnAnimationEnd",
+        "$elm",
+        "cls",
+        "__SPromise",
+        "resolve",
+        "reject",
+        "trigger",
+        "cancel",
+        "e",
+        "Array",
+        "isArray",
+        "forEach",
+        "_cls",
+        "classList",
+        "remove"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;AAiBe,SAASA,yBAAT,CAAmCC,IAAnC,EAAyCC,GAAzC,EAA8C;AAC3D,SAAO,IAAIC,iBAAJ,CAAe,CAACC,OAAD,EAAUC,MAAV,EAAkBC,OAAlB,EAA2BC,MAA3B,KAAsC;AAC1D;AACA,uCAAuBN,IAAvB,EAA6B,cAA7B,EAA8CO,CAAD,IAAO;AAClD,UAAI,CAACC,KAAK,CAACC,OAAN,CAAcR,GAAd,CAAL,EAAyBA,GAAG,GAAG,CAACA,GAAD,CAAN,CADyB,CAElD;;AACAA,MAAAA,GAAG,CAACS,OAAJ,CAAaC,IAAD,IAAU;AACpBX,QAAAA,IAAI,CAACY,SAAL,CAAeC,MAAf,CAAsBF,IAAtB;AACD,OAFD,EAHkD,CAMlD;;AACAR,MAAAA,OAAO,CAACI,CAAD,CAAP;AACD,KARD;AASD,GAXM,CAAP;AAYD",
+    "sourcesContent": [
+        "import __addEventListenerOnce from './addEventListenerOnce';\nimport __SPromise from '../promise/SPromise';\n\n/**\n * @name      removeClassOnAnimationEnd\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Remove some class on animation end\n *\n * @param    {HTMLElement}    elm    The element to take care of\n * @param    {String|Array}    class    The class or classes (Array) to remove\n * @return   {Promise}                  A promise that will be resolved once the class has been removed and the animation finished\n *\n * @example    js\n * import removeClassOnAnimationEnd from '@coffeekraken/sugar/js/dom/removeClassOnAnimationEnd'\n * removeClassOnAnimationEnd(myCoolElm, 'my-class');\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function removeClassOnAnimationEnd($elm, cls) {\n  return new __SPromise((resolve, reject, trigger, cancel) => {\n    // listen for animation end on the element just once\n    __addEventListenerOnce($elm, 'animationend', (e) => {\n      if (!Array.isArray(cls)) cls = [cls];\n      // remove the cls\n      cls.forEach((_cls) => {\n        $elm.classList.remove(_cls);\n      });\n      // resolve the process\n      resolve(e);\n    });\n  });\n}\n"
+    ]
+}

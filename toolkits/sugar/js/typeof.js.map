@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "sources": [
+        "typeof.js"
+    ],
+    "names": [
+        "typeOf",
+        "value",
+        "settings",
+        "of",
+        "format",
+        "customClass",
+        "type",
+        "resultObj",
+        "Array",
+        "isArray",
+        "undefined",
+        "RegExp",
+        "name",
+        "constructor",
+        "avoidTypes",
+        "indexOf",
+        "loopOn",
+        "keys",
+        "Object",
+        "receivedTypes",
+        "forEach",
+        "valueIndex",
+        "valueToCheck",
+        "typeObj",
+        "push",
+        "toLowerCase",
+        "length",
+        "join"
+    ],
+    "mappings": "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",
+    "sourcesContent": [
+        "import __deepMerge from '../object/deepMerge';\nimport __isInt from '../is/integer';\nimport __isClass from '../is/class';\nimport __upperFirst from '../string/upperFirst';\n\n/**\n * @name          typeof\n * @namespace          sugar.js.value\n * @type          Function\n *\n * This function return the correct type of the passed value.\n * It support the recognition of arrays and return 'Array' as property type.\n * You can olso ask the function to gives you the \"of\" types of the passed value. This mean that if you\n * pass an Array like so \"[10,'Hello',true]\" and that you ask for \"of\" types, it will returns you\n * \"Array<Integer|String|Boolean>\".\n * Another feature is to ask the result as an object like so:\n * {\n *    type: 'Array',\n *    of: ['Integer','String','Boolean']\n * }\n * You can ask also the typeof function to returns you the actual class name if the passed value is an instance\n * of an custom class.\n *\n * @param       {Mixed}    value    The value to get the type of\n * @param       {Object}    [settings={}]         An object of settings to configure your type get process:\n * - of (false) {Boolean}: Specify if you want to get the \"child\" properties types for Objects, Arrays and custom classes\n * - format ('String') {String}: Specify if you want back a String of an Object\n * - customClass (true) {Boolean}: Specify if you want the custom classes to return theirs real names or simply Object\n * @return      {String|Object}               The type in string format, of an object if the setting \"object\" is set to true\n *\n * @example         js\n * import typeof from '@coffeekraken/sugar/js/value/typeof';\n * typeof(true); // => Boolean\n * typeof(10); // => Integer\n * typeof(12.4); // => Number\n * typeof(['Hello']); // => Array\n * typeof(['Hello',true], { of: true }); // => Array<String|Boolean>\n *\n * class MyCoolClass {\n *    // ...\n * }\n * const myInstance = new MyCoolClass();\n * typeof(myInstance, { customClass: true }); // => MyCoolClass\n *\n * @since       2.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function typeOf(value, settings = {}) {\n  settings = __deepMerge(\n    {\n      of: false,\n      format: 'String',\n      customClass: true\n    },\n    settings\n  );\n\n  // get the real type\n  let type,\n    resultObj = {};\n  if (Array.isArray(value)) type = 'Array';\n  else if (value === null) type = 'Null';\n  else if (value === undefined) type = 'Undefined';\n  else if (typeof value === 'string') type = 'String';\n  else if (__isInt(value)) type = 'Integer';\n  else if (typeof value === 'number') type = 'Number';\n  else if (typeof value === 'boolean') type = 'Boolean';\n  else if (value instanceof RegExp) type = 'RegExp';\n  else if (settings.customClass && __isClass(value) && value.name) {\n    type = __upperFirst(value.name);\n  } else if (\n    settings.customClass &&\n    value.constructor &&\n    value.constructor.name\n  ) {\n    type = __upperFirst(value.constructor.name);\n  } else if (!settings.customClass && __isClass(value)) {\n    type = 'Class';\n  } else if (typeof value === 'function') type = 'Function';\n  else if (typeof value === 'object') type = 'Object';\n  else type = 'Unknown';\n\n  // save the type in the resultObj\n  resultObj.type = type;\n\n  // check if need to get the \"child\" types\n  const avoidTypes = [\n    'Null',\n    'Undefined',\n    'String',\n    'Integer',\n    'Number',\n    'Boolean',\n    'Unknown'\n  ];\n  if (settings.of && avoidTypes.indexOf(type) === -1) {\n    const loopOn = Array.isArray(value)\n      ? [...value.keys()]\n      : Object.keys(value);\n    const receivedTypes = [];\n    loopOn.forEach((valueIndex) => {\n      const valueToCheck = value[valueIndex];\n      const typeObj = typeOf(valueToCheck, {\n        format: 'Object',\n        of: false,\n        customClass: settings.customClass\n      });\n      if (receivedTypes.indexOf(typeObj.type) === -1) {\n        receivedTypes.push(typeObj.type);\n      }\n    });\n    // save the \"of\" types in the result obj\n    resultObj.of = receivedTypes;\n  }\n\n  // return the result in the asked format\n  switch (settings.format.toLowerCase()) {\n    case 'object':\n      return resultObj;\n      break;\n    case 'string':\n    default:\n      if (settings.of && resultObj.of && resultObj.of.length) {\n        return `${resultObj.type}${\n          resultObj.of ? `<${resultObj.of.join('|')}>` : ''\n        }`;\n      } else {\n        return `${resultObj.type}`;\n      }\n      break;\n  }\n}\n"
+    ]
+}

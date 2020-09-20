@@ -1,0 +1,31 @@
+{
+    "version": 3,
+    "sources": [
+        "example.js"
+    ],
+    "names": [
+        "__upperFirst",
+        "require",
+        "example",
+        "data",
+        "Array",
+        "isArray",
+        "map",
+        "item",
+        "content",
+        "length",
+        "slice",
+        "language",
+        "value",
+        "toLowerCase",
+        "code",
+        "join",
+        "trim",
+        "replace",
+        "filter"
+    ],
+    "mappings": ";;;;;;;AAAA,IAAMA,YAAY,GAAGC,OAAO,CAAC,yBAAD,CAA5B;AAEA;;;;;;;;;;;;;;;AAae,SAASC,OAAT,CAAiBC,IAAjB,EAAuB;AACpC,MAAI,CAACC,KAAK,CAACC,OAAN,CAAcF,IAAd,CAAL,EAA0BA,IAAI,GAAG,CAACA,IAAD,CAAP;AAC1BA,EAAAA,IAAI,GAAGA,IAAI,CACRG,GADI,CACCC,IAAD,IAAU;AACb,QAAIA,IAAI,CAACC,OAAL,IAAgBD,IAAI,CAACC,OAAL,CAAaD,IAAI,CAACC,OAAL,CAAaC,MAAb,GAAsB,CAAnC,MAA0C,EAA9D,EAAkE;AAChEF,MAAAA,IAAI,CAACC,OAAL,GAAeD,IAAI,CAACC,OAAL,CAAaE,KAAb,CAAmB,CAAnB,EAAsB,CAAC,CAAvB,CAAf;AACD;;AACD,QAAI,CAACH,IAAI,CAACC,OAAV,EAAmB,OAAO,IAAP;AACnB,WAAO;AACLG,MAAAA,QAAQ,EACN,OAAOJ,IAAI,CAACK,KAAZ,KAAsB,QAAtB,GACIL,IAAI,CAACK,KAAL,CAAWC,WAAX,EADJ,GAEIN,IAAI,CAACK,KAJN;AAKLE,MAAAA,IAAI,EAAEV,KAAK,CAACC,OAAN,CAAcE,IAAI,CAACC,OAAnB,IACFD,IAAI,CAACC,OAAL,CAAaO,IAAb,CAAkB,IAAlB,EAAwBC,IAAxB,GAA+BC,OAA/B,CAAuC,KAAvC,EAA8C,GAA9C,CADE,GAEFV,IAAI,CAACC,OAAL,CAAaS,OAAb,CAAqB,KAArB,EAA4B,GAA5B;AAPC,KAAP;AASD,GAfI,EAgBJC,MAhBI,CAgBIX,IAAD,IAAUA,IAAI,KAAK,IAhBtB,CAAP;AAiBA,SAAOJ,IAAP;AACD",
+    "sourcesContent": [
+        "const __upperFirst = require('../../string/upperFirst');\n\n/**\n * @name              example\n * @namespace           sugar.js.docblock.tags\n * @type              Function\n *\n * Parse the example tag\n *\n * @param       {Object}          data        The data object parsed in the string\n * @example      {Object}                      The formated object\n *\n * @since       2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com>\n */\nexport default function example(data) {\n  if (!Array.isArray(data)) data = [data];\n  data = data\n    .map((item) => {\n      if (item.content && item.content[item.content.length - 1] === '') {\n        item.content = item.content.slice(0, -1);\n      }\n      if (!item.content) return null;\n      return {\n        language:\n          typeof item.value === 'string'\n            ? item.value.toLowerCase()\n            : item.value,\n        code: Array.isArray(item.content)\n          ? item.content.join('\\n').trim().replace(/\\\\@/, '@')\n          : item.content.replace(/\\\\@/, '@')\n      };\n    })\n    .filter((item) => item !== null);\n  return data;\n}\n"
+    ]
+}

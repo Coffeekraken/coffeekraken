@@ -1,0 +1,28 @@
+{
+    "version": 3,
+    "sources": [
+        "observeAttributes.test.js"
+    ],
+    "names": [
+        "__observeAttributes",
+        "require",
+        "describe",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "isMutated",
+        "then",
+        "mutation",
+        "setAttribute",
+        "it",
+        "setTimeout",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;AAAA,IAAMA,mBAAmB,GAAGC,OAAO,CAAC,sBAAD,CAAnC;;AAEAC,QAAQ,CAAC,gCAAD,EAAmC,MAAM;AAC/CC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAGA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,UAAvB,CAAb;AAEA,MAAIC,SAAS,GAAG,KAAhB;;AAEAR,EAAAA,mBAAmB,CAACM,IAAD,CAAnB,CAA0BG,IAA1B,CAAgCC,QAAD,IAAc;AAC3CF,IAAAA,SAAS,GAAG,IAAZ;AACD,GAFD;;AAIAF,EAAAA,IAAI,CAACK,YAAL,CAAkB,OAAlB,EAA2B,OAA3B;AAEAC,EAAAA,EAAE,CAAC,iDAAD,EAAoD,MAAM;AAC1DC,IAAAA,UAAU,CAAC,MAAM;AACfC,MAAAA,MAAM,CAACN,SAAD,CAAN,CAAkBO,IAAlB,CAAuB,IAAvB;AACD,KAFS,CAAV;AAGD,GAJC,CAAF;AAKD,CAnBO,CAAR",
+    "sourcesContent": [
+        "const __observeAttributes = require('../observeAttributes');\n\ndescribe('sugar.js.dom.observeAttributes', () => {\n  document.body.innerHTML = `\n    <div id=\"testing\"></div>\n  `;\n  const $elm = document.querySelector('#testing');\n\n  let isMutated = false;\n\n  __observeAttributes($elm).then((mutation) => {\n    isMutated = true;\n  });\n\n  $elm.setAttribute('hello', 'world');\n\n  it('Should observe the attributes updates correctly', () => {\n    setTimeout(() => {\n      expect(isMutated).toBe(true);\n    });\n  });\n});\n"
+    ]
+}

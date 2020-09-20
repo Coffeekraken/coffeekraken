@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "parseAuthorString.js"
+    ],
+    "names": [
+        "parseAuthorString",
+        "string",
+        "reg",
+        "matches",
+        "exec",
+        "trim",
+        "authorObj",
+        "name",
+        "email",
+        "url"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;;;;;AAuBe,SAASA,iBAAT,CAA2BC,MAA3B,EAAmC;AAChD,MAAMC,GAAG,GAAG,4BAAZ;AACA,MAAMC,OAAO,GAAGD,GAAG,CAACE,IAAJ,CAASH,MAAM,CAACI,IAAP,EAAT,CAAhB;AACA,MAAMC,SAAS,GAAG,EAAlB;;AACA,MAAIH,OAAJ,EAAa;AACX,QAAIA,OAAO,CAAC,CAAD,CAAX,EAAgB;AACdG,MAAAA,SAAS,CAACC,IAAV,GAAiBJ,OAAO,CAAC,CAAD,CAAP,CAAWE,IAAX,EAAjB;AACD;;AACD,QAAIF,OAAO,CAAC,CAAD,CAAX,EAAgB;AACdG,MAAAA,SAAS,CAACE,KAAV,GAAkBL,OAAO,CAAC,CAAD,CAAP,CAAWE,IAAX,EAAlB;AACD;;AACD,QAAIF,OAAO,CAAC,CAAD,CAAX,EAAgB;AACdG,MAAAA,SAAS,CAACG,GAAV,GAAgBN,OAAO,CAAC,CAAD,CAAP,CAAWE,IAAX,EAAhB;AACD;AACF;;AACD,SAAOC,SAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name            parseAuthorString\n * @namespace       sugar.js.npm\n * @type            Function\n *\n * This function simply take an author string like \"Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\" and\n * transform it into a plain object with these properties: name, email and url\n *\n * @param       {String}          string          The string to parse\n * @return      {Object}                          The plain object version of the string\n *\n * @example       js\n * import parseAuthorString from '@coffeekraken/sugar/js/npm/parseAuthorString';\n * parseAuthorString(\"Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\")\n * // => {\n *   \"name\": \"Olivier Bossel\",\n *   \"email\": \"olivier.bossel@gmail.com\",\n *   \"url\": \"https://olivierbossel.com\"\n * }\n *\n * @since       2.0.0\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function parseAuthorString(string) {\n  const reg = /(.*)\\s?<(.*)>\\s?\\((.*)\\)/gm;\n  const matches = reg.exec(string.trim());\n  const authorObj = {};\n  if (matches) {\n    if (matches[1]) {\n      authorObj.name = matches[1].trim();\n    }\n    if (matches[2]) {\n      authorObj.email = matches[2].trim();\n    }\n    if (matches[3]) {\n      authorObj.url = matches[3].trim();\n    }\n  }\n  return authorObj;\n}\n"
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "version": 3,
+    "sources": [
+        "inputAdditionalEvents.js"
+    ],
+    "names": [
+        "handleInputAttributes",
+        "e",
+        "field",
+        "target",
+        "tagName",
+        "fastdom",
+        "mutate",
+        "keyCode",
+        "hasAttribute",
+        "eval",
+        "getAttribute",
+        "document",
+        "addEventListener"
+    ],
+    "mappings": ";;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;AAcA;AAEA,SAASA,qBAAT,CAA+BC,CAA/B,EAAkC;AAChC,MAAMC,KAAK,GAAGD,CAAC,CAACE,MAAF,GAAWF,CAAC,CAACE,MAAb,GAAsBF,CAApC;AACA,MAAI,CAACC,KAAD,IAAU,CAACA,KAAK,CAACE,OAArB,EAA8B;;AAC9B,UAAQF,KAAK,CAACE,OAAd;AACE,SAAK,OAAL;AACA,SAAK,UAAL;AACEC,uBAAQC,MAAR,CAAe,MAAM;AACnB,YAAIL,CAAC,CAACM,OAAN,EAAe;AACb,kBAAQN,CAAC,CAACM,OAAV;AACE,iBAAK,EAAL;AAAS;AACP,kBAAIL,KAAK,CAACM,YAAN,CAAmB,SAAnB,CAAJ,EAAmC;AACjCC,gBAAAA,IAAI,CAACP,KAAK,CAACQ,YAAN,CAAmB,SAAnB,CAAD,CAAJ;AACA,4CAAgBR,KAAhB,EAAuB,OAAvB;AACD;;AACD;;AACF,iBAAK,EAAL;AAAS;AACP,kBAAIA,KAAK,CAACM,YAAN,CAAmB,UAAnB,CAAJ,EAAoC;AAClCC,gBAAAA,IAAI,CAACP,KAAK,CAACQ,YAAN,CAAmB,UAAnB,CAAD,CAAJ;AACA,4CAAgBR,KAAhB,EAAuB,QAAvB;AACD;;AACD;AAZJ;AAcD;AACF,OAjBD;;AAkBA;AArBJ;AAuBD;;AAEDS,QAAQ,CAACC,gBAAT,CAA0B,QAA1B,EAAoCZ,qBAApC;AACAW,QAAQ,CAACC,gBAAT,CAA0B,OAA1B,EAAmCZ,qBAAnC",
+    "sourcesContent": [
+        "import fastdom from 'fastdom';\nimport __dispatchEvent from '../dom/dispatchEvent';\n\n/**\n * @name \t\thandleInputAttributes\n * @namespace           sugar.js.feature\n * @type      Feature\n *\n * Add some events on some DOM Elements. Here's the list:\n * **input/textarea**: `onenter`, `onescape`\n *\n * @example \tjs\n * import '@coffeekraken/sugar/js/feature/inputAdditionalEvents'\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n\n// TODO tests\n\nfunction handleInputAttributes(e) {\n  const field = e.target ? e.target : e;\n  if (!field || !field.tagName) return;\n  switch (field.tagName) {\n    case 'INPUT':\n    case 'TEXTAREA':\n      fastdom.mutate(() => {\n        if (e.keyCode) {\n          switch (e.keyCode) {\n            case 13: // enter\n              if (field.hasAttribute('onenter')) {\n                eval(field.getAttribute('onenter'));\n                __dispatchEvent(field, 'enter');\n              }\n              break;\n            case 27: // escape\n              if (field.hasAttribute('onescape')) {\n                eval(field.getAttribute('onescape'));\n                __dispatchEvent(field, 'escape');\n              }\n              break;\n          }\n        }\n      });\n      break;\n  }\n}\n\ndocument.addEventListener('change', handleInputAttributes);\ndocument.addEventListener('keyup', handleInputAttributes);\n"
+    ]
+}

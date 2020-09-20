@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "appendScriptTag.js"
+    ],
+    "names": [
+        "appendScriptTag",
+        "src",
+        "$parent",
+        "document",
+        "body",
+        "$script",
+        "createElement",
+        "appendChild"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;AAgBe,SAASA,eAAT,CAAyBC,GAAzB,EAA8BC,OAA9B,EAAuD;AAAA,MAAzBA,OAAyB;AAAzBA,IAAAA,OAAyB,GAAfC,QAAQ,CAACC,IAAM;AAAA;;AACpE,MAAMC,OAAO,GAAGF,QAAQ,CAACG,aAAT,CAAuB,QAAvB,CAAhB;AACAD,EAAAA,OAAO,CAACJ,GAAR,GAAcA,GAAd;AACAC,EAAAA,OAAO,CAACK,WAAR,CAAoBF,OAApB;AACA,SAAO,2BAAaA,OAAb,CAAP;AACD",
+    "sourcesContent": [
+        "import scriptLoaded from './scriptLoaded';\n\n/**\n * @name        appendScriptTag\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Append a script tag either to the head or the body\n *\n * @param    {String}    src    The script src to load\n * @return    {Promise}    A promise resolved with the script tag when it has fully loaded\n *\n * @example    js\n * import appendScriptTag from '@coffeekraken/sugar/js/dom/appendScriptTag'\n * appendScriptTag('dist/js/app.js')\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function appendScriptTag(src, $parent = document.body) {\n  const $script = document.createElement('script');\n  $script.src = src;\n  $parent.appendChild($script);\n  return scriptLoaded($script);\n}\n"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "email.js"
+    ],
+    "names": [
+        "isEmail",
+        "data",
+        "re",
+        "test"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,OAAT,CAAiBC,IAAjB,EAAuB;AACpC,MAAIC,EAAE,GAAG,wJAAT;AACA,SAAOA,EAAE,CAACC,IAAH,CAAQF,IAAR,CAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name        isEmail\n * @namespace           sugar.js.is\n * @type      Function\n *\n * Check if the passed value is a valid email address\n *\n * @param \t\t{Mixed} \t\tvalue \t\tThe value to check\n * @return \t\t{Boolean} \t\t\t\t\tThe check result\n *\n * @example \tjs\n * import isEmail from '@coffeekraken/sugar/js/is/email';\n * isEmail('john.doe@gmail.com') => true\n * isEmail('plop@yop.com') => true\n * isEmail('hello') => false\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isEmail(data) {\n  var re = /^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/;\n  return re.test(data);\n}\n"
+    ]
+}

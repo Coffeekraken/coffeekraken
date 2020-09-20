@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "injectStyle.js"
+    ],
+    "names": [
+        "injectStyle",
+        "style",
+        "node",
+        "document",
+        "head",
+        "$tag",
+        "createElement",
+        "type",
+        "innerHTML",
+        "appendChild"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;AAiBe,SAASA,WAAT,CAAqBC,KAArB,EAA4BC,IAA5B,EAAkD;AAAA,MAAtBA,IAAsB;AAAtBA,IAAAA,IAAsB,GAAfC,QAAQ,CAACC,IAAM;AAAA;;AAC/D,MAAMC,IAAI,GAAGF,QAAQ,CAACG,aAAT,CAAuB,OAAvB,CAAb;AACAD,EAAAA,IAAI,CAACE,IAAL,GAAY,UAAZ;AACAF,EAAAA,IAAI,CAACG,SAAL,GAAiBP,KAAjB;AACAC,EAAAA,IAAI,CAACO,WAAL,CAAiBJ,IAAjB;AACA,SAAOA,IAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name            injectStyle\n * @namespace           sugar.js.css\n * @type            Function\n *\n * Inject a passed style string in the DOM\n *\n * @param         {String}          style         The style to inject in DOM\n * @param         {HTMLElement}     [node=document.head]    The node in which to inject the new style tag\n * @return                          {HTMLStyleElement}      The injected HTMLStyleElement node\n *\n * @example       js\n * import injectStyle from '@coffeekraken/sugar/js/css/injectStyle';\n * injectStyle('a { color: red; }');\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function injectStyle(style, node = document.head) {\n  const $tag = document.createElement('style');\n  $tag.type = 'text/css';\n  $tag.innerHTML = style;\n  node.appendChild($tag);\n  return $tag;\n}\n"
+    ]
+}

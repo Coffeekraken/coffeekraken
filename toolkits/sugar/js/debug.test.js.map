@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "debug.test.js"
+    ],
+    "names": [
+        "__warn",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,MAAM,GAAGC,OAAO,CAAC,SAAD,CAAtB;;AACAA,OAAO,CAAC,QAAD,CAAP,CAAkBD,MAAlB",
+    "sourcesContent": [
+        "const __warn = require('../warn');\nrequire('./warn')(__warn);"
+    ]
+}

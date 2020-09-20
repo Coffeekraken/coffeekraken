@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "convert.js"
+    ],
+    "names": [
+        "convert",
+        "from",
+        "to",
+        "$elm",
+        "fromUnit",
+        "parseFloat",
+        "toString",
+        "replace",
+        "fromNumber",
+        "pxValue"
+    ],
+    "mappings": ";;;;;;;AAAA;;AAEA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;AAiBe,SAASA,OAAT,CAAiBC,IAAjB,EAAuBC,EAAvB,EAAkCC,IAAlC,EAAwC;AAAA,MAAjBD,EAAiB;AAAjBA,IAAAA,EAAiB,GAAZ,IAAY;AAAA;;AACrD,MAAIE,QAAQ,GAAG,IAAf;;AACA,MAAI,OAAOH,IAAP,KAAgB,QAAhB,IAA4BI,UAAU,CAACJ,IAAD,CAAV,CAAiBK,QAAjB,OAAgCL,IAAhE,EAAsE;AACpEG,IAAAA,QAAQ,GAAGH,IAAI,CAACM,OAAL,CAAa,WAAb,EAA0B,EAA1B,CAAX;AACD;;AACD,MAAMC,UAAU,GAAGH,UAAU,CAACJ,IAAD,CAA7B;AACA,MAAIQ,OAAJ;;AACA,UAAQL,QAAR;AACE,SAAK,IAAL;AACEK,MAAAA,OAAO,GAAGD,UAAV;AACA;;AACF,SAAK,KAAL;AACEC,MAAAA,OAAO,GAAG,oBAASD,UAAT,CAAV;AACA;;AACF,SAAK,IAAL;AACEC,MAAAA,OAAO,GAAG,oBAAQD,UAAR,EAAoBL,IAApB,CAAV;AACA;;AACF;AACE,aAAOF,IAAP;AACA;AAZJ;;AAcA,UAAQC,EAAR;AACE,SAAK,IAAL;AACE,aAAOO,OAAP;AACA;;AACF,SAAK,KAAL;AACE,aAAO,qBAASA,OAAT,CAAP;AACA;;AACF,SAAK,IAAL;AACE,aAAO,oBAAQA,OAAR,EAAiBN,IAAjB,CAAP;AACA;;AACF;AACE,aAAOF,IAAP;AACA;AAZJ;AAcD",
+    "sourcesContent": [
+        "import __em2px from './em2px';\nimport __rem2px from './em2px';\nimport __px2em from './px2em';\nimport __px2rem from './px2rem';\n\n/**\n * @name                  convert\n * @namespace           sugar.js.unit\n * @type                  Function\n *\n * Convert a passed unit to the wanted one. If the passed unit is a number and not a string like \"10rem\", the unit is take as pixels\n *\n * @param         {String|Number}           from            The base value to convert\n * @param         {String}                  [to='px']       The value unit you want back\n * @return        {Number}                                  The converted value\n *\n * @example       js\n * import convert from '@coffeekraken/sugar/js/unit/convert';\n * convert('2rem', 'px');\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function convert(from, to = 'px', $elm) {\n  let fromUnit = 'px';\n  if (typeof from === 'string' && parseFloat(from).toString() !== from) {\n    fromUnit = from.replace(/[0-9.,]+/g, '');\n  }\n  const fromNumber = parseFloat(from);\n  let pxValue;\n  switch (fromUnit) {\n    case 'px':\n      pxValue = fromNumber;\n      break;\n    case 'rem':\n      pxValue = __rem2px(fromNumber);\n      break;\n    case 'em':\n      pxValue = __em2px(fromNumber, $elm);\n      break;\n    default:\n      return from;\n      break;\n  }\n  switch (to) {\n    case 'px':\n      return pxValue;\n      break;\n    case 'rem':\n      return __px2rem(pxValue);\n      break;\n    case 'em':\n      return __px2em(pxValue, $elm);\n      break;\n    default:\n      return from;\n      break;\n  }\n}\n"
+    ]
+}

@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "sources": [
+        "querySelectorAll.js"
+    ],
+    "names": [
+        "querySelectorAll",
+        "selector",
+        "settings",
+        "visible",
+        "inViewport",
+        "rootNode",
+        "document",
+        "body",
+        "results",
+        "elms",
+        "forEach",
+        "call",
+        "elm",
+        "push"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;;;;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;AAyBA;;;;;;;;AAQA;;;;;;;;AAQA;;;;;;;AAQe,SAASA,gBAAT,CAA0BC,QAA1B,EAAoCC,QAApC,EAAmD;AAAA,MAAfA,QAAe;AAAfA,IAAAA,QAAe,GAAJ,EAAI;AAAA;;AAChE;AACAA,EAAAA,QAAQ;AACNC,IAAAA,OAAO,EAAE,IADH;AAENC,IAAAA,UAAU,EAAE,IAFN;AAGNC,IAAAA,QAAQ,EAAEC,QAAQ,CAACC;AAHb,KAIHL,QAJG,CAAR,CAFgE,CAShE;;AACA,MAAMM,OAAO,GAAG,EAAhB,CAVgE,CAYhE;;AACA,MAAMC,IAAI,GAAGP,QAAQ,CAACG,QAAT,CAAkBL,gBAAlB,CAAmCC,QAAnC,CAAb,CAbgE,CAehE;;AACA,KAAGS,OAAH,CAAWC,IAAX,CAAgBF,IAAhB,EAAuBG,GAAD,IAAS;AAC7B;AACA,QAAIV,QAAQ,CAACC,OAAb,EAAsB;AACpB,UAAI,CAAC,wBAAYS,GAAZ,CAAD,IAAqB,CAAC,gCAAoBA,GAApB,CAA1B,EAAoD;AACrD;;AACD,QAAIV,QAAQ,CAACE,UAAb,EAAyB;AACvB,UAAI,CAAC,2BAAeQ,GAAf,CAAL,EAA0B;AAC3B,KAP4B,CAS7B;;;AACAJ,IAAAA,OAAO,CAACK,IAAR,CAAaD,GAAb;AACD,GAXD,EAhBgE,CA6BhE;;AACA,SAAOJ,OAAP;AACD",
+    "sourcesContent": [
+        "import __isVisible from './isVisible';\nimport __isInViewport from './isInViewport';\nimport __closestNotVisible from './closestNotVisible';\n\n/**\n * @name      querySelectorAll\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Enhanced proxy of the Element.querySelectorAll function that let you specify\n * if you want elements that are visible, or even that are in the viewport\n *\n * @param \t\t{String} \t\t\t\tselector \t\t\tThe css selector to search\n * @param \t\t{Object} \t\t\t\tsettings\t \t\tThe settings of the query\n * @return \t\t{Array}<HTMLElement> \t\t\t\t\t\tThe founded elements\n *\n * @example \tjs\n * import querySelectorAll from '@coffeekraken/sugar/js/dom/querySelectorAll';\n * // simple query\n * const elms = querySelectorAll('.a-cool-css-selector');\n *\n * // get elements that are in the viewport\n * const elms = querySelectorAll('.a-cool-css-selector', {\n * \t\tinViewport : true\n * });\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n\n/**\n * If we want only visible elements\n * @setting\n * @name \t\tvisible\n * @type \t\t{Boolean}\n * @default \tfalse\n */\n\n/**\n * If we want only elements that are in the viewport\n * @setting\n * @name \t\tinViewport\n * @type \t\t{Boolean}\n * @default \tfalse\n */\n\n/**\n * The root node to start the query from\n * @setting\n * @name \t\trootNode\n * @type \t\t{HTMLElement}\n * @default \tdocument.body\n */\n\nexport default function querySelectorAll(selector, settings = {}) {\n  // extend settings\n  settings = {\n    visible: null,\n    inViewport: null,\n    rootNode: document.body,\n    ...settings\n  };\n\n  // results array\n  const results = [];\n\n  // grab the element into the dom\n  const elms = settings.rootNode.querySelectorAll(selector);\n\n  // loop on the found elements\n  [].forEach.call(elms, (elm) => {\n    // check settings\n    if (settings.visible) {\n      if (!__isVisible(elm) || !__closestNotVisible(elm)) return;\n    }\n    if (settings.inViewport) {\n      if (!__isInViewport(elm)) return;\n    }\n\n    // add the element to the result array\n    results.push(elm);\n  });\n\n  // return the elements\n  return results;\n}\n"
+    ]
+}

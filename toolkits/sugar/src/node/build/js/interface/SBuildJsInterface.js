@@ -30,18 +30,18 @@ module.exports = class SBuildJsCliInterface extends __SInterface {
       type: 'Boolean',
       alias: 'm',
       description: 'Generate a sourcemap file',
-      default: __sugarConfig('build.js.map') || true,
+      default: __sugarConfig('build.js.map'),
       level: 1
     },
     pack: {
       type: 'Boolean',
       alias: 'p',
       description: 'Pack the files using webpack or just pass babel on them',
-      default: __sugarConfig('build.js.pack') || true,
+      default: __sugarConfig('build.js.pack'),
       level: 1
     },
     prod: {
-      default: __sugarConfig('build.js.prod') || false
+      default: __sugarConfig('build.js.prod')
     },
     buildType: {
       default: 'js'

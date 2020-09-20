@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "emptyNode.js"
+    ],
+    "names": [
+        "emptyNode",
+        "node",
+        "firstChild",
+        "removeChild"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;AAgBe,SAASA,SAAT,CAAmBC,IAAnB,EAAyB;AACtC,SAAOA,IAAI,CAACC,UAAZ,EAAwB;AACtBD,IAAAA,IAAI,CAACE,WAAL,CAAiBF,IAAI,CAACC,UAAtB;AACD;;AACD,SAAOD,IAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name        emptyNode\n * @namespace           sugar.js.dom\n * @type        Function\n *\n * Empty a node by removing each childs one after the other\n *\n * @param           {HTMLElement}         node          The node to empty\n * @return          {HTMLElement}                       The node that was passed to maintain chainability\n *\n * @example       js\n * @import emptyNode from '@coffeekraken/sugar/js/dom/emptyNode';\n * emptyNode(myCoolNode);\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function emptyNode(node) {\n  while (node.firstChild) {\n    node.removeChild(node.firstChild);\n  }\n  return node;\n}\n"
+    ]
+}

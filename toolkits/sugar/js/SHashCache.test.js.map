@@ -1,0 +1,28 @@
+{
+    "version": 3,
+    "sources": [
+        "SHashCache.test.js"
+    ],
+    "names": [
+        "cache",
+        "SHashCache",
+        "adapter",
+        "myObject",
+        "something",
+        "other",
+        "Date",
+        "describe",
+        "test",
+        "done",
+        "set",
+        "hello",
+        "value",
+        "get",
+        "expect",
+        "toEqual"
+    ],
+    "mappings": ";;AAAA;;;;;;;;AAEA,IAAMA,KAAK,GAAG,IAAIC,mBAAJ,CAAe,2BAAf,EAA4C;AACxDC,EAAAA,OAAO,EAAE;AAD+C,CAA5C,CAAd;AAIA,IAAMC,QAAQ,GAAG;AACfC,EAAAA,SAAS,EAAE,MADI;AAEfC,EAAAA,KAAK,EAAE,IAAIC,IAAJ;AAFQ,CAAjB;AAKAC,QAAQ,CAAC,2BAAD,EAA8B,MAAM;AAC1CC,EAAAA,IAAI,CAAC,0BAAD,EAA8BC,IAAD,IAAU;AACzC,sBAAC,aAAY;AACX,YAAMT,KAAK,CAACU,GAAN,CAAUP,QAAV,EAAoB;AACxBQ,QAAAA,KAAK,EAAE;AADiB,OAApB,CAAN;AAGAF,MAAAA,IAAI;AACL,KALD;AAMD,GAPG,CAAJ;AAQAD,EAAAA,IAAI,CAAC,4BAAD,EAAgCC,IAAD,IAAU;AAC3C,sBAAC,aAAY;AACX,UAAMG,KAAK,SAASZ,KAAK,CAACa,GAAN,CAAUV,QAAV,CAApB;AACAW,MAAAA,MAAM,CAACF,KAAD,CAAN,CAAcG,OAAd,CAAsB;AACpBJ,QAAAA,KAAK,EAAE;AADa,OAAtB;AAGAF,MAAAA,IAAI;AACL,KAND;AAOD,GARG,CAAJ;AASD,CAlBO,CAAR",
+    "sourcesContent": [
+        "import SHashCache from '../SHashCache';\n\nconst cache = new SHashCache('sugar-js-cache-SHashCache', {\n  adapter: 'fs'\n});\n\nconst myObject = {\n  something: 'cool',\n  other: new Date()\n};\n\ndescribe('sugar.js.cache.SHashCache', () => {\n  test('Set an item in the cache', (done) => {\n    (async () => {\n      await cache.set(myObject, {\n        hello: 'world'\n      });\n      done();\n    })();\n  });\n  test('Get an item from the cache', (done) => {\n    (async () => {\n      const value = await cache.get(myObject);\n      expect(value).toEqual({\n        hello: 'world'\n      });\n      done();\n    })();\n  });\n});\n"
+    ]
+}

@@ -230,10 +230,10 @@ module.exports = class SOutput extends __SComponent {
 
     args.forEach((data) => {
       if (typeof data === 'string') {
-        const splitedLogs = data.split(/⠀/);
+        const splitedLogs = data.split(/⠀⠀⠀/);
         splitedLogs.forEach((log) => {
           if (log.trim() === '') return;
-          log = log.replace(/⠀{0,9999999}/g, '').trim();
+          log = log.trim();
           const parsedLog = __parse(log);
           if (
             typeof parsedLog === 'object' &&
@@ -268,11 +268,11 @@ module.exports = class SOutput extends __SComponent {
         // apply the interface
         data = __SOutputLogInterface.applyAndComplete(data);
 
-        const splitedLogs = data.value.split(/⠀/);
+        const splitedLogs = data.value.split(/⠀⠀⠀/);
 
         splitedLogs.forEach((log) => {
           if (log.trim() === '') return;
-          log = log.replace(/⠀{0,9999999}/g, '').trim();
+          log = log.trim();
           const parsedLog = __parse(log);
           if (
             typeof parsedLog === 'object' &&

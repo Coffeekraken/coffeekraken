@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "typeMap.js"
+    ],
+    "names": [
+        "__SUrlAction",
+        "require",
+        "module",
+        "exports",
+        "browser",
+        "url"
+    ],
+    "mappings": ";;AAAA,IAAMA,YAAY,GAAGC,OAAO,CAAC,sBAAD,CAA5B;AAEA;;;;;;;;;;;;AAUAC,MAAM,CAACC,OAAP,GAAiB;AACfC,EAAAA,OAAO,EAAE;AACPC,IAAAA,GAAG,EAAEL;AADE;AADM,CAAjB",
+    "sourcesContent": [
+        "const __SUrlAction = require('./browser/SUrlAction');\n\n/**\n * @name            typeMap\n * @namespace       sugar.js.action\n * @type            Object\n *\n * Object that map a string \"type\" like \"url\", \"login\", etc... to his proper SAction class\n *\n * @since         2.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nmodule.exports = {\n  browser: {\n    url: __SUrlAction\n  }\n};\n"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "object.test.js"
+    ],
+    "names": [
+        "__object",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,QAAQ,GAAGC,OAAO,CAAC,WAAD,CAAxB;;AACAA,OAAO,CAAC,UAAD,CAAP,CAAoBD,QAApB",
+    "sourcesContent": [
+        "const __object = require('../object');\nrequire('./object')(__object);"
+    ]
+}

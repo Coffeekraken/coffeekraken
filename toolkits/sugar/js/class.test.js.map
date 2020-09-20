@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "class.test.js"
+    ],
+    "names": [
+        "__class",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,OAAO,GAAGC,OAAO,CAAC,UAAD,CAAvB;;AACAA,OAAO,CAAC,SAAD,CAAP,CAAmBD,OAAnB",
+    "sourcesContent": [
+        "const __class = require('../class');\nrequire('./class')(__class);"
+    ]
+}

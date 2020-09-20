@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "style.js"
+    ],
+    "names": [
+        "style",
+        "elm",
+        "styleObj",
+        "styleAttr",
+        "getAttribute",
+        "cssText"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;;;;;;;AAEA;;;;;;;;;;;;;;;;;;;;AAoBe,SAASA,KAAT,CAAeC,GAAf,EAAoBC,QAApB,EAA8B;AAC3C;AACA,MAAMC,SAAS,GAAGF,GAAG,CAACG,YAAJ,CAAiB,OAAjB,CAAlB;;AAEA,MAAID,SAAJ,EAAe;AACbD,IAAAA,QAAQ,mCACH,iCAAqBC,SAArB,CADG,GAEHD,QAFG,CAAR;AAID,GAT0C,CAW3C;AACA;;;AACAD,EAAAA,GAAG,CAACD,KAAJ,CAAUK,OAAV,GAAoB,iCAAqBH,QAArB,CAApB,CAb2C,CAe3C;;AACA,SAAOD,GAAG,CAACD,KAAX;AACD",
+    "sourcesContent": [
+        "import __uncamelize from '../string/uncamelize';\nimport __styleString2Object from './styleString2Object';\nimport __styleObject2String from './styleObject2String';\n\n/**\n * @name      style\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Set or remove a css style property on an HTMLElement\n *\n * @param \t\t{HTMLElement} \t\t\telm \t\t\tThe element to process\n * @param \t\t{Object} \t\t\t\tstyleObj \t\tAn object of style to apply\n * @return \t\t(Object) \t\t\t\t\t\t\t\tThe element applied style\n *\n * @example \tjs\n * import style from '@coffeekraken/sugar/js/dom/style'\n * style(myCoolHTMLElement, {\n * \t\tpaddingLeft : 20,\n * \t\tdisplay : null\n * });\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function style(elm, styleObj) {\n  // convert style string to object\n  const styleAttr = elm.getAttribute('style');\n\n  if (styleAttr) {\n    styleObj = {\n      ...__styleString2Object(styleAttr),\n      ...styleObj\n    };\n  }\n\n  // apply the style to the element\n  // elm.setAttribute('style', __styleObject2String(current.styleObj));\n  elm.style.cssText = __styleObject2String(styleObj);\n\n  // return the style\n  return elm.style;\n}\n"
+    ]
+}

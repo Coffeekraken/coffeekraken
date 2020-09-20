@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "json.js"
+    ],
+    "names": [
+        "isJson",
+        "value",
+        "JSON",
+        "parse",
+        "e"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,MAAT,CAAgBC,KAAhB,EAAuB;AACpC,MAAI;AACFC,IAAAA,IAAI,CAACC,KAAL,CAAWF,KAAX;AACD,GAFD,CAEE,OAAOG,CAAP,EAAU;AACV,WAAO,KAAP;AACD;;AACD,SAAO,IAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name        isJson\n * @namespace           sugar.js.is\n * @type      Function\n *\n * Check if the passed value is a valid json\n *\n * @param    {Mixed}    value    The value to check\n * @return   {Boolean}   true if it's a valid json, false if not\n *\n * @example    js\n * import isJson from '@coffeekraken/sugar/js/is/json'\n * if (isJson('[{id:10}]')) {\n *   // do something\n * }\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isJson(value) {\n  try {\n    JSON.parse(value);\n  } catch (e) {\n    return false;\n  }\n  return true;\n}\n"
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "md5.js"
+    ],
+    "names": [
+        "__encryptedMessages",
+        "api",
+        "encrypt",
+        "message",
+        "string",
+        "toString",
+        "decrypt",
+        "console",
+        "warn",
+        "md5"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;AAEA,IAAMA,mBAAmB,GAAG,EAA5B;AAEA;;;;;;;;;;AASA,IAAMC,GAAG,GAAG;AACV;;;;;;;;;;;AAWAC,EAAAA,OAAO,EAAE,iBAAUC,OAAV,EAAmB;AAC1B,QAAI,OAAOA,OAAP,KAAmB,QAAvB,EAAiCA,OAAO,GAAG,uBAASA,OAAT,CAAV;AACjC,QAAMC,MAAM,GAAG,iBAAID,OAAJ,EAAaE,QAAb,EAAf;AACAL,IAAAA,mBAAmB,CAACI,MAAD,CAAnB,GAA8BD,OAA9B;AACA,WAAOC,MAAP;AACD,GAjBS;;AAmBV;;;;;;;;;;;AAWAE,EAAAA,OAAO,EAAE,iBAAUH,OAAV,EAAmB;AAC1B,QAAI,CAACH,mBAAmB,CAACG,OAAD,CAAxB,EAAmC;AACjCI,MAAAA,OAAO,CAACC,IAAR,yBAA6BL,OAA7B;AACA;AACD;;AACD,QAAMC,MAAM,GAAGJ,mBAAmB,CAACG,OAAD,CAAlC;AACA,WAAOH,mBAAmB,CAACG,OAAD,CAA1B;AACA,WAAO,oBAAMC,MAAN,CAAP;AACD;AAtCS,CAAZ;AAwCAK,YAAIP,OAAJ,GAAcD,GAAG,CAACC,OAAlB;AACAO,YAAIH,OAAJ,GAAcL,GAAG,CAACK,OAAlB;eACeG,W",
+    "sourcesContent": [
+        "import md5 from 'crypto-js/md5';\nimport toString from '../string/toString';\nimport parse from '../string/parse';\n\nconst __encryptedMessages = {};\n\n/**\n * @name            md5\n * @namespace           sugar.js.crypt\n * @type            Object\n *\n * Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the md5 algorithm\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nconst api = {\n  /**\n   * @name        encrypt\n   * @type          Function\n   *\n   * Encrypt\n   *\n   * @param       {String}      message         The message to encrypt\n   * @return      {String}                      The encrypted string\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  encrypt: function (message) {\n    if (typeof message !== 'string') message = toString(message);\n    const string = md5(message).toString();\n    __encryptedMessages[string] = message;\n    return string;\n  },\n\n  /**\n   * @name        decrypt\n   * @type        Function\n   *\n   * Decrypt\n   *\n   * @param       {String}        message         The message to decrypt\n   * @return      {String}                        The decrypted message\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  decrypt: function (message) {\n    if (!__encryptedMessages[message]) {\n      console.warn(`The message \"${message}\" cannot be decrypted...`);\n      return;\n    }\n    const string = __encryptedMessages[message];\n    delete __encryptedMessages[message];\n    return parse(string);\n  }\n};\nmd5.encrypt = api.encrypt;\nmd5.decrypt = api.decrypt;\nexport default md5;\n"
+    ]
+}

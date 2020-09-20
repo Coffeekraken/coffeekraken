@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "SStaticValidation.js"
+    ],
+    "names": [
+        "SStaticValidation",
+        "value",
+        "object",
+        "property",
+        "constructor",
+        "__SValidation"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;IAUMA,iB;;;;;;;;;;;;;yBAGQC,K,EAAOC,M,EAAQC,Q,EAAU;AACnC,UAAI,oBAAUD,MAAV,CAAJ,EAAuB;AACrB,YAAI,CAACA,MAAM,CAACC,QAAD,CAAX,EAAuB,OAAO,KAAP;AACvB,eAAO,IAAP;AACD,OAHD,MAGO,IAAID,MAAM,CAACE,WAAX,EAAwB;AAC7B,YAAI,CAACF,MAAM,CAACE,WAAP,CAAmBD,QAAnB,CAAL,EAAmC,OAAO,KAAP;AACnC,eAAO,IAAP;AACD;;AACD,aAAO,CAACF,KAAD,EAAQC,MAAR,EAAgBC,QAAhB,CAAP;AACD;;;;EAZ6BE,qB;;gBAA1BL,iB,aAEF,iF;;eAaWA,iB",
+    "sourcesContent": [
+        "import __SValidation from '../../SValidation';\nimport __isClass from '../../../is/class';\n\n/**\n * @name          SStaticValidation\n * @namespace     sugar.js.validation.value.validation\n * @type          Class\n *\n * This class represent the \"static\" validation\n *\n * @since       2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nclass SStaticValidation extends __SValidation {\n  static message =\n    'The passed \"<yellow>%2</yellow>\" property has to be a <green>static</green> one';\n  static exec(value, object, property) {\n    if (__isClass(object)) {\n      if (!object[property]) return false;\n      return true;\n    } else if (object.constructor) {\n      if (!object.constructor[property]) return false;\n      return true;\n    }\n    return [value, object, property];\n  }\n}\n\nexport default SStaticValidation;\n"
+    ]
+}

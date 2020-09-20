@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "SGoogleCustomSearch.test.js"
+    ],
+    "names": [
+        "__SGoogleCustomSearch",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,qBAAqB,GAAGC,OAAO,CAAC,wBAAD,CAArC;;AACAA,OAAO,CAAC,uBAAD,CAAP,CAAiCD,qBAAjC",
+    "sourcesContent": [
+        "const __SGoogleCustomSearch = require('../SGoogleCustomSearch');\nrequire('./SGoogleCustomSearch')(__SGoogleCustomSearch);"
+    ]
+}

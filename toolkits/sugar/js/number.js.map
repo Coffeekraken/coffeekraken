@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "number.js"
+    ],
+    "names": [
+        "isNumber",
+        "source",
+        "isNaN",
+        "parseFloat",
+        "isFinite"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,QAAT,CAAkBC,MAAlB,EAA0B;AACvC,SAAO,CAACC,KAAK,CAACC,UAAU,CAACF,MAAD,CAAX,CAAN,IAA8BG,QAAQ,CAACH,MAAD,CAA7C;AACD",
+    "sourcesContent": [
+        "/**\n * @name        isNumber\n * @namespace           sugar.js.is\n * @type      Function\n *\n * Check if the passed value is a number\n *\n * @param \t\t{Mixed} \t\tvalue \t\tThe value to check\n * @return \t\t{Boolean} \t\t\t\t\tThe check result\n *\n * @example \tjs\n * import isNumber from '@coffeekraken/sugar/js/is/number';\n * isNumber(12) => true\n * isNumber(22.3) => true\n * isNumber('20') => false\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isNumber(source) {\n  return !isNaN(parseFloat(source)) && isFinite(source);\n}\n"
+    ]
+}

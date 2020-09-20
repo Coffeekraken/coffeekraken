@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "whenInViewport.js"
+    ],
+    "names": [
+        "whenInViewport",
+        "elm",
+        "offset",
+        "Promise",
+        "resolve",
+        "reject"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;;AAmBe,SAASA,cAAT,CAAwBC,GAAxB,EAA6BC,MAA7B,EAA0C;AAAA,MAAbA,MAAa;AAAbA,IAAAA,MAAa,GAAJ,EAAI;AAAA;;AACvD,SAAO,IAAIC,OAAJ,CAAY,CAACC,OAAD,EAAUC,MAAV,KAAqB;AACtC,6BACEJ,GADF,EAEE;AACEC,MAAAA,MAAM,EAAEA;AADV,KAFF,EAKE,MAAM;AACJE,MAAAA,OAAO,CAACH,GAAD,CAAP;AACD,KAPH;AASD,GAVM,CAAP;AAWD",
+    "sourcesContent": [
+        "import __inViewport from 'in-viewport';\n\n/**\n * @name      whenInViewport\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Monitor an HTMLElement to be notified when it is in the viewport\n *\n * @param \t\t{HTMLElement} \t\t\t\telm \t\t\t\t\tThe element to monitor\n * @param \t\t{Number} \t\t\t\t\t[offset=50] \t\t\tAn offset that represent the distance before entering the viewport for the detection\n * @return \t\t(Promise) \t\t\t\t\t\t\t\t\t\t\tThe promise that will be resolved when the element is in the viewport\n *\n * @example \tjs\n * import whenInViewport from '@coffeekraken/sugar/js/dom/whenInViewport'\n * whenInViewport(myCoolHTMLElement).then((elm) => {\n * \t\t// do something with your element that has entered the viewport...\n * });\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function whenInViewport(elm, offset = 50) {\n  return new Promise((resolve, reject) => {\n    __inViewport(\n      elm,\n      {\n        offset: offset\n      },\n      () => {\n        resolve(elm);\n      }\n    );\n  });\n}\n"
+    ]
+}

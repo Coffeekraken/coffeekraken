@@ -1,0 +1,45 @@
+{
+    "version": 3,
+    "sources": [
+        "querySelectorLive.js"
+    ],
+    "names": [
+        "_observer",
+        "_selectors",
+        "querySelectorLive",
+        "selector",
+        "cb",
+        "settings",
+        "id",
+        "Object",
+        "assign",
+        "rootNode",
+        "document",
+        "once",
+        "push",
+        "pushNewNode",
+        "node",
+        "sel",
+        "objs",
+        "forEach",
+        "obj",
+        "_querySelectorLive",
+        "MutationObserver",
+        "mutations",
+        "mutation",
+        "addedNodes",
+        "call",
+        "selectors",
+        "keys",
+        "querySelectorAll",
+        "nestedNodes",
+        "nestedNode",
+        "observe",
+        "childList",
+        "subtree"
+    ],
+    "mappings": "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",
+    "sourcesContent": [
+        "import uniqid from '../util/uniqid';\nimport matches from './matches';\n\n/**\n * @name      querySelectorLive\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Observe the dom to get all the elements that matches a passed css selector at any point in time.\n * Be warned that this use the mutation observer API and will monitor all the document for new nodes. Make sure to use it\n * when you don't have the chance to use the custom elements API instead\n *\n * @param\t{String} \t\tselector \t\tThe css selector that we are interested in\n * @param \t{Function} \t\tcb \t\t\t\tThe function to call with the newly added node\n * @param \t{Object} \t\t[settings={}] \tAn optional settings object to specify things like the rootNode to monitor, etc...\n *\n * @example \tjs\n * import querySelectorLive from '@coffeekraken/sugar/js/dom/querySelectorLive'\n * querySelectorLive('.my-cool-item', (node, clearFn) => {\n * \t// do something here with the detected node\n *  // call clearFn if you want to stop listening for this selector\n *  clearFn();\n * });\n *\n * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n\nlet _observer,\n  _selectors = {};\n\nexport default function querySelectorLive(selector, cb, settings = {}) {\n  const id = `${selector} - ${uniqid()}`;\n\n  // extend settings\n  settings = Object.assign(\n    {},\n    {\n      rootNode: document,\n      once: true\n    },\n    settings\n  );\n\n  if (!_selectors[selector]) {\n    _selectors[selector] = [\n      {\n        id: id,\n        selector: selector,\n        cb: cb,\n        settings: settings\n      }\n    ];\n  } else {\n    _selectors[selector].push({\n      id: id,\n      selector: selector,\n      cb: cb,\n      settings: settings\n    });\n  }\n\n  function pushNewNode(node, sel) {\n    const objs = _selectors[sel];\n    if (!objs) return;\n\n    objs.forEach((obj) => {\n      if (obj.settings.once) {\n        if (!node._querySelectorLive) {\n          node._querySelectorLive = {};\n        }\n        if (node._querySelectorLive[obj.id]) return;\n        node._querySelectorLive[obj.id] = true;\n      }\n      obj.cb &&\n        obj.cb(node, () => {\n          delete _selectors[obj.selector];\n        });\n    });\n  }\n\n  // listen for updates in document\n  if (!_observer) {\n    _observer = new MutationObserver((mutations) => {\n      mutations.forEach((mutation) => {\n        if (mutation.addedNodes) {\n          [].forEach.call(mutation.addedNodes, (node) => {\n            // get all the selectors registered\n            const selectors = Object.keys(_selectors);\n\n            // loop on each selectors\n            selectors.forEach((sel) => {\n              if (matches(node, sel)) {\n                pushNewNode(node, sel);\n              }\n            });\n            if (!node.querySelectorAll) return;\n            selectors.forEach((sel) => {\n              const nestedNodes = node.querySelectorAll(sel);\n              [].forEach.call(nestedNodes, (nestedNode) => {\n                pushNewNode(nestedNode, sel);\n              });\n            });\n          });\n        }\n      });\n    });\n    _observer.observe(settings.rootNode, {\n      childList: true,\n      subtree: true\n    });\n  }\n\n  // first search\n  [].forEach.call(settings.rootNode.querySelectorAll(selector), (node) => {\n    pushNewNode(node, selector);\n  });\n}\n\n/**\n * @name \tsettings.rootNode\n * The root node used to detect newly added nodes within\n * @prop\n * @type \t\t{HTMLElement}\n * @default \tdocument\n */\n\n/**\n * @name \tsettings.once\n * Specify if want to detect the node only once. Mean that if the node is removed from the dom and added again, it will not be detected again.\n * @prop\n * @type \t\t{Boolean}\n * @default \ttrue\n */\n"
+    ]
+}

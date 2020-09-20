@@ -1,0 +1,37 @@
+{
+    "version": 3,
+    "sources": [
+        "SError.js"
+    ],
+    "names": [
+        "SError",
+        "message",
+        "Error",
+        "captureStackTrace",
+        "constructor",
+        "stack",
+        "packageRoot",
+        "stackArray",
+        "split",
+        "slice",
+        "filter",
+        "l",
+        "trim",
+        "forEach",
+        "push",
+        "replace",
+        "name",
+        "join",
+        "displayed",
+        "Object",
+        "defineProperty",
+        "get",
+        "set",
+        "value",
+        "_stack"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;IAIqBA,M;;;;;AACnB,kBAAYC,OAAZ,EAAqB;AAAA;;AAAA;;AACnB,8BAAMA,OAAN;AACAC,IAAAA,KAAK,CAACC,iBAAN,gCAA8B,MAAKC,WAAnC;AAEA,QAAMC,KAAK,GAAG,EAAd;AACA,QAAMC,WAAW,GAAG,2BAApB;;AACA,QAAMC,UAAU,GAAG,MAAKF,KAAL,CAAWG,KAAX,CAAiB,MAAjB,EAAyBC,KAAzB,CAA+B,CAA/B,CAAnB;;AACAF,IAAAA,UAAU,CACPG,MADH,CACWC,CAAD,IAAO;AACb,UAAIA,CAAC,CAACC,IAAF,OAAa,OAAjB,EAA0B,OAAO,KAAP;AAC1B,UAAID,CAAC,CAACC,IAAF,OAAa,EAAjB,EAAqB,OAAO,KAAP;AACrB,aAAO,IAAP;AACD,KALH,EAMGC,OANH,CAMYF,CAAD,IAAO;AACd,UAAIA,CAAC,CAACC,IAAF,OAAa,EAAjB,EAAqB;AACrBP,MAAAA,KAAK,CAACS,IAAN,wCAC6BH,CAAC,CAACI,OAAF,CAAUT,WAAV,EAAuB,EAAvB,CAD7B;AAGD,KAXH;AAaA,UAAKU,IAAL,GAAY,MAAKZ,WAAL,CAAiBY,IAA7B;AACA,UAAKf,OAAL,GAAe,wBACb,0DACkB,MAAKe,IAAL,IAAa,MAAKZ,WAAL,CAAiBY,IADhD,yCAGEf,OAHF,uBAKEI,KAAK,CAACY,IAAN,CAAW,EAAX,CALF,YADa,CAAf;AAUA,QAAIC,SAAS,GAAG,KAAhB;AACAC,IAAAA,MAAM,CAACC,cAAP,gCAA4B,OAA5B,EAAqC;AACnCC,MAAAA,GAAG,EAAE,eAAY;AACf,YAAIH,SAAJ,EAAe,OAAO,EAAP;AACfA,QAAAA,SAAS,GAAG,IAAZ;AACA,eAAO,KAAKjB,OAAZ;AACD,OALkC;AAMnCqB,MAAAA,GAAG,EAAE,aAAUC,KAAV,EAAiB;AACpB,aAAKC,MAAL,GAAcD,KAAd;AACD;AARkC,KAArC;AAUA,UAAKlB,KAAL,GAAa,wBAAY,wBAAYA,KAAK,CAACY,IAAN,CAAW,EAAX,CAAZ,CAAZ,CAAb,CA1CmB,CA4CnB;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AAEA;AACA;AACA;AAEA;AACA;AACA;AAEA;AACA;AACA;AACA;AACA;;AA1EmB;AA2EpB,G,CAED;AACA;AACA;AAEA;AACA;AACA;AACA;AACA;AACA;AAEA;AAEA;AACA;AACA;AACA;AACA;;;;iCA/FkCf,K",
+    "sourcesContent": [
+        "import __parseHtml from '../console/parseHtml';\nimport __trimLines from '../string/trimLines.js';\nimport __packageRoot from '../path/packageRoot';\nimport __toString from '../string/toString';\n\n/**\n * @todo    Doc\n */\n\nexport default class SError extends Error {\n  constructor(message) {\n    super(message);\n    Error.captureStackTrace(this, this.constructor);\n\n    const stack = [];\n    const packageRoot = __packageRoot();\n    const stackArray = this.stack.split(' at ').slice(1);\n    stackArray\n      .filter((l) => {\n        if (l.trim() === 'Error') return false;\n        if (l.trim() === '') return false;\n        return true;\n      })\n      .forEach((l) => {\n        if (l.trim() === '') return;\n        stack.push(\n          `<cyan>│</cyan> at <cyan>${l.replace(packageRoot, '')}</cyan>`\n        );\n      });\n\n    this.name = this.constructor.name;\n    this.message = __trimLines(\n      __parseHtml(`\n      <red><underline>${this.name || this.constructor.name}</underline></red>\n\n      ${message}\n\n      ${stack.join('')}\n    `)\n    );\n\n    let displayed = false;\n    Object.defineProperty(this, 'stack', {\n      get: function () {\n        if (displayed) return '';\n        displayed = true;\n        return this.message;\n      },\n      set: function (value) {\n        this._stack = value;\n      }\n    });\n    this.stack = __trimLines(__parseHtml(stack.join('')));\n\n    // if (typeof message === 'object') {\n    //   if (message.syscall) this.syscall = message.syscall;\n    //   if (message.code) this.code = message.code;\n    //   if (message.property) this.property = message.property;\n    //   if (message.message) this.message = message.message;\n    //   if (message.name) this.name = message.name;\n    //   if (message.stack) this.stack = message.stack;\n    // } else if (typeof message !== 'string') {\n    //   this.message = __trimLines(message.toString());\n    //   this.name = this.constructor.name;\n    //   this.stack = message.stack || [];\n    //   this.code = message.code || null;\n    //   this.property = message.property || null;\n    //   this.syscall = message.syscall || null;\n    // } else {\n    //   this.message = __toString(message);\n    // }\n\n    // this.message = __trimLines(\n    //   __parseHtml(`\n    //   <red><underline>${this.name || this.constructor.name}</underline></red>\n\n    //   ${this.message}\n    // `)\n    // );\n\n    // if (this.stack) {\n    //\n    //   // this.message += '\\n' + );\n    //   // this.stack = null;\n    // }\n  }\n\n  // inspect() {\n  //   return this.toString();\n  // }\n\n  // toString() {\n  //   // if (this.message.match(/___$/gm)) return this.message;\n  //   return 'rpl';\n  //   const string = __trimLines(\n  //     __parseHtml(`\n  //     <red><underline>${this.constructor.name}</underline></red>\n\n  //     ${this.message}\n\n  //     ${this._stackString}\n  //   `)\n  //   );\n  //   return string + '___';\n  // }\n}\n"
+    ]
+}

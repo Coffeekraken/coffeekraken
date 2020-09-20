@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "sources": [
+        "toHtml.js"
+    ],
+    "names": [
+        "supportedFromTypes",
+        "convertersByType",
+        "markdown",
+        "__htmlFromMarkdown",
+        "docblocks",
+        "__htmlFromDocblocks",
+        "toHtml",
+        "inputString",
+        "settings",
+        "from",
+        "match",
+        "__SError",
+        "join",
+        "converterFn"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;;;AA2BA,IAAMA,kBAAkB,GAAG,CAAC,UAAD,EAAa,WAAb,CAA3B;AACA,IAAMC,gBAAgB,GAAG;AACvBC,EAAAA,QAAQ,EAAEC,yBADa;AAEvBC,EAAAA,SAAS,EAAEC;AAFY,CAAzB;;AAIe,SAASC,MAAT,CAAgBC,WAAhB,EAA6BC,QAA7B,EAA4C;AAAA,MAAfA,QAAe;AAAfA,IAAAA,QAAe,GAAJ,EAAI;AAAA;;AACzDA,EAAAA,QAAQ,GAAG,wBACT;AACEC,IAAAA,IAAI,EAAE;AADR,GADS,EAITD,QAJS,CAAX,CADyD,CAQzD;;AACA,MAAI,CAACA,QAAQ,CAACC,IAAd,EAAoB;AAClB;AACA,QAAIF,WAAW,CAACG,KAAZ,CAAkB,iBAAlB,CAAJ,EAA0CF,QAAQ,CAACC,IAAT,GAAgB,UAAhB,CAA1C,KACK,IAAIF,WAAW,CAACG,KAAZ,CAAkB,qCAAlB,CAAJ,EACHF,QAAQ,CAACC,IAAT,GAAgB,WAAhB,CADG,KAEA;AACH,YAAM,IAAIE,eAAJ,yFAC6EX,kBAAkB,CAACY,IAAnB,CAC/E,GAD+E,CAD7E,EAAN;AAKD;AACF,GArBwD,CAuBzD;;;AACA,MAAMC,WAAW,GAAGZ,gBAAgB,CAACO,QAAQ,CAACC,IAAV,CAApC;;AAEA,MAAI,CAACI,WAAL,EAAkB;AAChB,UAAM,IAAIF,eAAJ,6FACgFH,QAAQ,CAACC,IADzF,oBAAN;AAGD;;AAED,SAAOI,WAAW,CAACN,WAAD,EAAcC,QAAd,CAAlB;AACD",
+    "sourcesContent": [
+        "import __SError from '../error/SError';\nimport __deepMerge from '../object/deepMerge';\nimport __htmlFromMarkdown from './html/htmlFromMarkdown';\nimport __htmlFromDocblocks from './html/htmlFromDocblocks';\n\n/**\n * @name            toHtml\n * @namespace       sugar.js.convert\n * @type            Function\n *\n * Take a string as input and convert it to HTML.\n *\n * @feature        2.0.0       Supported input types: markdown, docblocks\n * @feature        2.0.0       Try to detect the type automatically. For safer results, specify the \"from\" setting.\n *\n * @param       {String}          inputString         The input string to convert to HTML\n * @param       {Object}          [settings={}]       An object of settings to configure your conversion process:\n * - from (null) {String}: Specify the type of the input string like \"markdown\", \"dockblocks\", and more coming...\n * @return      {String}                              The HTML converted result\n *\n * @example       js\n * import toHtml from '@coffeekraken/sugar/js/convert/toHtml';\n * toHtml(`\n *  # Hello world\n *  How are you?\n * `);\n * // <h1>Hello world</h1>\n * // <p>How are you</p>\n *\n * @since       2.0.0\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nconst supportedFromTypes = ['markdown', 'docblocks'];\nconst convertersByType = {\n  markdown: __htmlFromMarkdown,\n  docblocks: __htmlFromDocblocks\n};\nexport default function toHtml(inputString, settings = {}) {\n  settings = __deepMerge(\n    {\n      from: null\n    },\n    settings\n  );\n\n  // check if we don't have the \"from\" setting\n  if (!settings.from) {\n    // check if is markdown\n    if (inputString.match(/\\s?#{1,6}\\s?.*/g)) settings.from = 'markdown';\n    else if (inputString.match(/(<!--|\\/\\*{2})([\\s\\S]+?)(\\*\\/|-->)/g))\n      settings.from = 'docblocks';\n    else {\n      throw new __SError(\n        `Sorry but the passed inputString does not match any supported type which are: ${supportedFromTypes.join(\n          ','\n        )}`\n      );\n    }\n  }\n\n  // convert the string from the correct type\n  const converterFn = convertersByType[settings.from];\n\n  if (!converterFn) {\n    throw new __SError(\n      `It seems that no converter exists for your inputString which is of type \"<yellow>${settings.from}</yellow>\"...`\n    );\n  }\n\n  return converterFn(inputString, settings);\n}\n"
+    ]
+}

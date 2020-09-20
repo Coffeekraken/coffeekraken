@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "sources": [
+        "paramCase.js"
+    ],
+    "names": [
+        "string"
+    ],
+    "mappings": ";;;;;;;AAAA;;AAEA;;;;;;;;;;;;;;;;;;AAkBe,kBAAUA,MAAV,EAAkB;AAC/B,SAAO,0BAAUA,MAAV,CAAP;AACD",
+    "sourcesContent": [
+        "import { paramCase } from 'param-case';\n\n/**\n * @name          paramCase\n * @namespace           sugar.js.string\n * @type          Function\n *\n * This function transform a string into a param case one like so \"something-cool\"\n *\n * @param       {String}        string          The string to convert\n * @return      {String}                        The converted string\n *\n * @example       js\n * import paramCase from '@coffeekraken/sugar/js/string/paramCase';\n * paramCase('some thoing cool'); // => some-thing-cool\n *\n * @see         https://www.npmjs.com/package/param-case\n * @since       2.0.0\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function (string) {\n  return paramCase(string);\n}\n"
+    ]
+}

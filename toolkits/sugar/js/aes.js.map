@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "aes.js"
+    ],
+    "names": [
+        "encrypt",
+        "message",
+        "key",
+        "AES",
+        "toString",
+        "decrypt",
+        "value",
+        "utf8"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;;;AAEA;;;;;;;;;eASe;AACb;;;;;;;;;;;;AAYAA,EAAAA,OAAO,EAAE,iBAAUC,OAAV,EAAmBC,GAAnB,EAAyD;AAAA,QAAtCA,GAAsC;AAAtCA,MAAAA,GAAsC,GAAhC,8BAAgC;AAAA;;AAChE,QAAI,OAAOD,OAAP,KAAmB,QAAvB,EAAiCA,OAAO,GAAG,uBAASA,OAAT,CAAV;AACjC,WAAOE,aAAIH,OAAJ,CAAYC,OAAZ,EAAqBC,GAArB,EAA0BE,QAA1B,EAAP;AACD,GAhBY;;AAkBb;;;;;;;;;;;;AAYAC,EAAAA,OAAO,EAAE,iBAAUJ,OAAV,EAAmBC,GAAnB,EAAyD;AAAA,QAAtCA,GAAsC;AAAtCA,MAAAA,GAAsC,GAAhC,8BAAgC;AAAA;;AAChE,QAAII,KAAK,GAAGH,aAAIE,OAAJ,CAAYJ,OAAZ,EAAqBC,GAArB,EAA0BE,QAA1B,CAAmCG,eAAnC,CAAZ;;AACA,WAAO,oBAAMD,KAAN,CAAP;AACD;AAjCY,C",
+    "sourcesContent": [
+        "import AES from 'crypto-js/aes';\nimport utf8 from 'crypto-js/enc-utf8';\nimport toString from '../string/toString';\nimport parse from '../string/parse';\n\n/**\n * @name            aes\n * @namespace           sugar.js.crypt\n * @type            Object\n *\n * Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the aes algorithm\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default {\n  /**\n   * @name        encrypt\n   * @type        Function\n   *\n   * Encrypt\n   *\n   * @param       {String}       message        The message to encrypt\n   * @param       {String}       [key='coffeekraken.sugar.crypt.aes']       The secret key to encrypt\n   * @return      {String}                       The encrypted message\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  encrypt: function (message, key = 'coffeekraken.sugar.crypt.aes') {\n    if (typeof message !== 'string') message = toString(message);\n    return AES.encrypt(message, key).toString();\n  },\n\n  /**\n   * @name        decrypt\n   * @type        Function\n   *\n   * Decrypt\n   *\n   * @param       {String}      message         The message to decrypt\n   * @param       {String}      [key='coffeekraken.sugar.crypt.aes']      The secret key to decrypt\n   * @return      {String}                      The decrypted message\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  decrypt: function (message, key = 'coffeekraken.sugar.crypt.aes') {\n    let value = AES.decrypt(message, key).toString(utf8);\n    return parse(value);\n  }\n};\n"
+    ]
+}

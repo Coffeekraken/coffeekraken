@@ -7,6 +7,8 @@ const __path = require('path');
 const __SDocblock = require('../docblock/SDocblock');
 const __toString = require('../string/toString');
 const __removeSync = require('../fs/removeSync');
+const __getFilename = require('../fs/filename');
+const { resolveCname } = require('dns');
 
 /**
  * @name                SDocMap
@@ -43,7 +45,7 @@ module.exports = class SDocMap extends __SPromise {
    * @since         2.0.0
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _entries = [];
+  _entries = {};
 
   /**
    * @name            constructor
@@ -65,6 +67,114 @@ module.exports = class SDocMap extends __SPromise {
         },
         settings
       )
+    );
+  }
+
+  /**
+   * @name          find
+   * @type          Function
+   * @static
+   *
+   * This static method allows you to search for docMap.json files and get back the array of pathes where to
+   * find the found files
+   *
+   * @param       {Object}        [settings={}]       A settings object to configure your reading process
+   * - dirDepth (10) {Integer}: Specify the max directories depth to search for docMap.json files relative to the ```roorDir``` setting
+   * - rootDir (__packageRoot()) {String}: Specify the root directory from where to search for docMap.json files
+   * - filename ('docMap.json') {String|Array<String>}: Specify the file names to search for
+   * - cache (true) {Boolean}: Specify if you want to take advantage of the cache feature or
+   * @return      {SPromise}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static find(settings = {}) {
+    return new __SPromise(
+      (resolve, reject, trigger, cancel) => {
+        settings = __deepMerge(
+          {
+            dirDepth: 5,
+            rootDir: __packageRoot(),
+            filename: 'docMap.json',
+            cache: true
+          },
+          settings
+        );
+
+        let filenamesArray = settings.filename;
+        if (!Array.isArray(filenamesArray)) filenamesArray = [filenamesArray];
+
+        // generate the glob pattern to use
+        const patterns = [];
+        for (let i = 0; i <= settings.dirDepth; i++) {
+          filenamesArray.forEach((filename) => {
+            const p = `${'*/'.repeat(i)}${filename}`;
+            patterns.push(p);
+          });
+        }
+
+        const files = __glob
+          .sync(`{${patterns.join(',')}}`, {
+            cwd: settings.rootDir,
+            symlinks: true
+          })
+          .map((filePath) => {
+            return __path.resolve(settings.rootDir, filePath);
+          });
+
+        resolve(files);
+      },
+      {
+        id: 'SDocMap.find'
+      }
+    );
+  }
+
+  /**
+   * @name          read
+   * @type          Function
+   * @static
+   *
+   * This static method allows you to search for docMap.json files and read them to get
+   * back the content of them in one call. It can take advantage of the cache if
+   * the setting.cache property is setted to true
+   *
+   * @todo      integrate the "cache" feature
+   *
+   * @param       {Object}        [settings={}]       A settings object to configure your reading process
+   * - dirDepth (10) {Integer}: Specify the max directories depth to search for docMap.json files relative to the ```roorDir``` setting
+   * - rootDir (__packageRoot()) {String}: Specify the root directory from where to search for docMap.json files
+   * - filename ('docMap.json') {String|Array<String>}: Specify the file names to search for
+   * - cache (true) {Boolean}: Specify if you want to take advantage of the cache feature or
+   * @return      {SPromise}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static read(settings = {}) {
+    return new __SPromise(
+      async (resolve, reject, trigger, cancel) => {
+        settings = __deepMerge({}, settings);
+
+        const files = await SDocMap.find(settings);
+
+        let docMapJson = {};
+
+        // loop on all files
+        files.forEach((filePath) => {
+          const content = require(filePath);
+          docMapJson = {
+            ...docMapJson,
+            ...content
+          };
+        });
+
+        // return the final docmap
+        resolve(docMapJson);
+      },
+      {
+        id: 'SDocMap.read'
+      }
     );
   }
 
@@ -100,14 +210,24 @@ module.exports = class SDocMap extends __SPromise {
 
           docblocks.forEach((docblock) => {
             if (!docblock.namespace) return;
+            const path = __path.relative(this._settings.outputDir, filepath);
+            const filename = __getFilename(filepath);
             const docblockObj = {
-              path: __path.relative(this._settings.outputDir, filepath),
               name: docblock.name,
               namespace: docblock.namespace,
+              filename,
+              extension: filename.split('.').slice(1)[0],
+              path,
+              directory: path.replace(`/${__getFilename(filepath)}`, ''),
               type: docblock.type,
               description: docblock.description
             };
-            this._entries.push(docblockObj);
+            if (docblock.extends) docblockObj.extends = docblock.extends;
+            if (docblock.static) docblockObj.static = true;
+            if (docblock.since) docblockObj.since = docblock.since;
+            this._entries[
+              `${docblock.namespace}.${docblock.name}`
+            ] = docblockObj;
           });
         }
       }

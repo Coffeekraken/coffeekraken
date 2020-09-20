@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "packageRoot.test.js"
+    ],
+    "names": [
+        "__packageRoot",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,aAAa,GAAGC,OAAO,CAAC,gBAAD,CAA7B;;AACAA,OAAO,CAAC,eAAD,CAAP,CAAyBD,aAAzB",
+    "sourcesContent": [
+        "const __packageRoot = require('../packageRoot');\nrequire('./packageRoot')(__packageRoot);\n"
+    ]
+}

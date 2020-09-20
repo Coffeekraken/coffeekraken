@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                  convert
- * @namespace           js.color
+ * @namespace           sugar.js.color
  * @type                  Function
  *
  * This function take as input any color format like rgba Object, hsl Object, hsv Object, hex String, rgba String, hsl String or hsv String
@@ -60,34 +60,27 @@ function convert(input, format) {
   switch (format) {
     case 'rgba':
       return rgbaObj;
-      break;
 
     case 'hsl':
       return (0, _rgba2hsl.default)(rgbaObj);
-      break;
 
     case 'hsv':
       return (0, _rgba2hsv.default)(rgbaObj);
-      break;
 
     case 'hex':
     case 'hexString':
       return (0, _rgba2hex.default)(rgbaObj);
-      break;
 
     case 'rgbaString':
       return "rgba(".concat(rgbaObj.r, ",").concat(rgbaObj.g, ",").concat(rgbaObj.b, ",").concat(rgbaObj.a, ")");
-      break;
 
     case 'hslString':
       var hslObj = convert(rgbaObj, 'hsl');
       return "hsl(".concat(hslObj.h, ",").concat(hslObj.s, ",").concat(hslObj.l, ")");
-      break;
 
     case 'hsvString':
       var hsvObj = convert(rgbaObj, 'hsv');
       return "hsv(".concat(hsvObj.h, ",").concat(hsvObj.s, ",").concat(hsvObj.v, ")");
-      break;
   } // if nothing supported
 
 

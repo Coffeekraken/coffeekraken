@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "sources": [
+        "set.js"
+    ],
+    "names": [
+        "obj",
+        "path",
+        "value",
+        "a",
+        "split",
+        "o",
+        "length",
+        "n",
+        "shift"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;eAiBe,CAACA,GAAD,EAAMC,IAAN,EAAYC,KAAZ,KAAsB;AACnC,MAAI,CAACD,IAAD,IAASA,IAAI,KAAK,EAAlB,IAAwBA,IAAI,KAAK,GAArC,EAA0C;AACxCD,IAAAA,GAAG,GAAGE,KAAN;AACA;AACD;;AACD,MAAIC,CAAC,GAAGF,IAAI,CAACG,KAAL,CAAW,GAAX,CAAR;AACA,MAAIC,CAAC,GAAGL,GAAR;;AACA,SAAOG,CAAC,CAACG,MAAF,GAAW,CAAlB,EAAqB;AACnB,QAAIC,CAAC,GAAGJ,CAAC,CAACK,KAAF,EAAR;AACA,QAAI,EAAED,CAAC,IAAIF,CAAP,CAAJ,EAAeA,CAAC,CAACE,CAAD,CAAD,GAAO,EAAP;AACfF,IAAAA,CAAC,GAAGA,CAAC,CAACE,CAAD,CAAL;AACD;;AACDF,EAAAA,CAAC,CAACF,CAAC,CAAC,CAAD,CAAF,CAAD,GAAUD,KAAV;AACA,SAAO,kBAAMF,GAAN,EAAWC,IAAX,CAAP;AACD,C",
+    "sourcesContent": [
+        "import __get from './get';\n\n/**\n * @name                                        set\n * @namespace           sugar.js.object\n * @type                                        Function\n *\n * Set an object value using a dotted object path like \"myObject.myProperty.myValue\" to set his position\n *\n * @param                         {Object}                         obj                      The object in which to set the value\n * @param                         {String}                        path                      The object path where to set the value\n * @param                         {Mixed}                         value                     The value to set\n * @return                        {Mixed}                                                   Return the setted value if setted correctly, or undefined if something goes wrong...\n *\n * @example               js\n * import set from '@coffeekraken/sugar/js/object/set';\n * set('myObject.cool.value', 'Hello world'); // => Hello world\n *\n */\nexport default (obj, path, value) => {\n  if (!path || path === '' || path === '.') {\n    obj = value;\n    return;\n  }\n  var a = path.split('.');\n  var o = obj;\n  while (a.length - 1) {\n    var n = a.shift();\n    if (!(n in o)) o[n] = {};\n    o = o[n];\n  }\n  o[a[0]] = value;\n  return __get(obj, path);\n};\n"
+    ]
+}

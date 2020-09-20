@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "parseTypeDefinitionString.test.js"
+    ],
+    "names": [
+        "__parseTypeDefinitionString",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,2BAA2B,GAAGC,OAAO,CAAC,8BAAD,CAA3C;;AACAA,OAAO,CAAC,6BAAD,CAAP,CAAuCD,2BAAvC",
+    "sourcesContent": [
+        "const __parseTypeDefinitionString = require('../parseTypeDefinitionString');\nrequire('./parseTypeDefinitionString')(__parseTypeDefinitionString);\n"
+    ]
+}

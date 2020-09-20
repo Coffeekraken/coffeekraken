@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "throttle.test.js"
+    ],
+    "names": [
+        "__throttle",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,UAAU,GAAGC,OAAO,CAAC,aAAD,CAA1B;;AACAA,OAAO,CAAC,YAAD,CAAP,CAAsBD,UAAtB",
+    "sourcesContent": [
+        "const __throttle = require('../throttle');\nrequire('./throttle')(__throttle);"
+    ]
+}

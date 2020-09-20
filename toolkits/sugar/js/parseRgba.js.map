@@ -1,0 +1,24 @@
+{
+    "version": 3,
+    "sources": [
+        "parseRgba.js"
+    ],
+    "names": [
+        "parseRgba",
+        "rgbaString",
+        "toLowerCase",
+        "string",
+        "replace",
+        "array",
+        "split",
+        "r",
+        "parseInt",
+        "g",
+        "b",
+        "a"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;AAgBe,SAASA,SAAT,CAAmBC,UAAnB,EAA+B;AAC5CA,EAAAA,UAAU,GAAGA,UAAU,CAACC,WAAX,EAAb;AACA,MAAIC,MAAM,GAAGF,UAAU,CACpBG,OADU,CACF,OADE,EACO,EADP,EAEVA,OAFU,CAEF,GAFE,EAEG,EAFH,EAGVA,OAHU,CAGF,KAHE,EAGK,EAHL,CAAb;AAIA,MAAIC,KAAK,GAAGF,MAAM,CAACG,KAAP,CAAa,GAAb,CAAZ;AACA,SAAO;AACLC,IAAAA,CAAC,EAAEC,QAAQ,CAACH,KAAK,CAAC,CAAD,CAAN,CADN;AAELI,IAAAA,CAAC,EAAED,QAAQ,CAACH,KAAK,CAAC,CAAD,CAAN,CAFN;AAGLK,IAAAA,CAAC,EAAEF,QAAQ,CAACH,KAAK,CAAC,CAAD,CAAN,CAHN;AAILM,IAAAA,CAAC,EAAEH,QAAQ,CAACH,KAAK,CAAC,CAAD,CAAN;AAJN,GAAP;AAMD",
+    "sourcesContent": [
+        "/**\n * @name                        parseRgba\n * @namespace           sugar.js.color\n * @type                        Function\n *\n * Parse RGBA string and return an object\n *\n * @param \t          {string}\t            rgbaString\t\t            The rgba string (rgba(r,g,b,a)) to parse\n * @return \t          {object} \t\t\t\t                              \tThe rgba object representation\n *\n * @example           js\n * import parseRgba from '@coffeekraken/sugar/js/color/parseRgba';\n * parseRgba('rgba(20,10,100,20)');\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function parseRgba(rgbaString) {\n  rgbaString = rgbaString.toLowerCase();\n  let string = rgbaString\n    .replace('rgba(', '')\n    .replace(')', '')\n    .replace(/\\s/g, '');\n  let array = string.split(',');\n  return {\n    r: parseInt(array[0]),\n    g: parseInt(array[1]),\n    b: parseInt(array[2]),\n    a: parseInt(array[3])\n  };\n}\n"
+    ]
+}

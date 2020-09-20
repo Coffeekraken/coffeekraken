@@ -9,8 +9,9 @@ module.exports = async (stringArgs = '') => {
       default: null
     }
   });
-
   if (!args.path) {
     throw new Error(`The cli action "config.get" need a "path" argument...`);
   }
+
+  console.log(__sugarConfig(args.path));
 };

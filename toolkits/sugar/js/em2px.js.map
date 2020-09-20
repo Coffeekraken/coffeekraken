@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "em2px.js"
+    ],
+    "names": [
+        "em2px",
+        "em",
+        "$elm",
+        "document",
+        "documentElement",
+        "parseFloat",
+        "getComputedStyle",
+        "fontSize"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;AAiBe,SAASA,KAAT,CAAeC,EAAf,EAAmBC,IAAnB,EAAoD;AAAA,MAAjCA,IAAiC;AAAjCA,IAAAA,IAAiC,GAA1BC,QAAQ,CAACC,eAAiB;AAAA;;AACjE,SAAOH,EAAE,GAAGI,UAAU,CAACC,gBAAgB,CAACJ,IAAD,CAAhB,CAAuBK,QAAvB,IAAmC,MAApC,CAAtB;AACD",
+    "sourcesContent": [
+        "/**\n * @name                    em2px\n * @namespace           sugar.js.unit\n * @type                    Function\n *\n * Convert rem value to a px one\n *\n * @param         {Number}          em           The rem value to convert\n * @param         {HTMLElement}     [$elm=document.documentElement]         The HTMLElement to take as source for calculating the em\n * @return        {Number}                        The pixel value\n *\n * @example         js\n * import em2px from '@coffeekraken/sugar/js/unit/em2px';\n * em2px(2);\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function em2px(em, $elm = document.documentElement) {\n  return em * parseFloat(getComputedStyle($elm).fontSize || '16px');\n}\n"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "sources": [
+        "convert.test.js"
+    ],
+    "names": [
+        "describe",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "it",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;;;AAEAA,QAAQ,CAAC,uBAAD,EAA0B,MAAM;AAEtCC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAQA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,UAAvB,CAAb;AAEAC,EAAAA,EAAE,CAAC,oDAAD,EAAuD,MAAM;AAC7DC,IAAAA,MAAM,CAAC,sBAAU,KAAV,EAAiB,IAAjB,EAAuBH,IAAvB,CAAD,CAAN,CAAqCI,IAArC,CAA0C,EAA1C;AACD,GAFC,CAAF;AAGAF,EAAAA,EAAE,CAAC,qDAAD,EAAwD,MAAM;AAC9DC,IAAAA,MAAM,CAAC,sBAAU,MAAV,EAAkB,IAAlB,CAAD,CAAN,CAAgCC,IAAhC,CAAqC,EAArC;AACD,GAFC,CAAF;AAGAF,EAAAA,EAAE,CAAC,oDAAD,EAAuD,MAAM;AAC7DC,IAAAA,MAAM,CAAC,sBAAU,MAAV,EAAkB,IAAlB,EAAwBH,IAAxB,CAAD,CAAN,CAAsCI,IAAtC,CAA2C,CAA3C;AACD,GAFC,CAAF;AAGAF,EAAAA,EAAE,CAAC,oDAAD,EAAuD,MAAM;AAC7DC,IAAAA,MAAM,CAAC,sBAAU,MAAV,EAAkB,KAAlB,CAAD,CAAN,CAAiCC,IAAjC,CAAsC,CAAtC;AACD,GAFC,CAAF;AAID,CAzBO,CAAR",
+    "sourcesContent": [
+        "import __convert from '../convert';\n\ndescribe('sugar.js.unit.convert', () => {\n\n  document.body.innerHTML = `\n    <style>\n      #testing {\n        font-size: 10px;\n      }\n    </style>\n    <div id=\"testing\"></div>\n  `;\n  const $elm = document.querySelector('#testing');\n\n  it('Should convert the passed em value to px correctly', () => {\n    expect(__convert('2em', 'px', $elm)).toBe(20);\n  });\n  it('Should convert the passed rem value to px correctly', () => {\n    expect(__convert('2rem', 'px')).toBe(32);\n  });\n  it('Should convert the passed px value to em correctly', () => {\n    expect(__convert('20px', 'em', $elm)).toBe(2);\n  });\n  it('Should convert the passed px value to em correctly', () => {\n    expect(__convert('32px', 'rem')).toBe(2);\n  });\n\n});"
+    ]
+}

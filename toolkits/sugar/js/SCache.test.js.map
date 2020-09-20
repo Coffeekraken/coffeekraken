@@ -1,0 +1,25 @@
+{
+    "version": 3,
+    "sources": [
+        "SCache.test.js"
+    ],
+    "names": [
+        "cache",
+        "SCache",
+        "adapter",
+        "test",
+        "done",
+        "set",
+        "hello",
+        "item",
+        "get",
+        "expect",
+        "toEqual",
+        "delete",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;;;;;;;AAEA,IAAMA,KAAK,GAAG,IAAIC,eAAJ,CAAW,uBAAX,EAAoC;AAChDC,EAAAA,OAAO,EAAE;AADuC,CAApC,CAAd;AAIAC,IAAI,CAAC,iDAAD,EAAqDC,IAAD,IAAU;AAChE,oBAAC,aAAY;AACX,UAAMJ,KAAK,CAACK,GAAN,CAAU,YAAV,EAAwB;AAC5BC,MAAAA,KAAK,EAAE;AADqB,KAAxB,CAAN;AAGAF,IAAAA,IAAI;AACL,GALD;AAMD,CAPG,CAAJ;AASAD,IAAI,CAAC,iDAAD,EAAqDC,IAAD,IAAU;AAChE,oBAAC,aAAY;AACX,QAAMG,IAAI,SAASP,KAAK,CAACQ,GAAN,CAAU,YAAV,CAAnB;AACAC,IAAAA,MAAM,CAACF,IAAD,CAAN,CAAaG,OAAb,CAAqB;AACnBJ,MAAAA,KAAK,EAAE;AADY,KAArB;AAGAF,IAAAA,IAAI;AACL,GAND;AAOD,CARG,CAAJ;AAUAD,IAAI,CAAC,oDAAD,EAAwDC,IAAD,IAAU;AACnE,oBAAC,aAAY;AACX,UAAMJ,KAAK,CAACW,MAAN,CAAa,YAAb,CAAN;AACA,QAAMJ,IAAI,SAASP,KAAK,CAACQ,GAAN,CAAU,YAAV,CAAnB;AACAC,IAAAA,MAAM,CAACF,IAAD,CAAN,CAAaK,IAAb,CAAkB,IAAlB;AACAR,IAAAA,IAAI;AACL,GALD;AAMD,CAPG,CAAJ",
+    "sourcesContent": [
+        "import SCache from '../SCache';\n\nconst cache = new SCache('sugar-js-cache-SCache', {\n  adapter: 'ls'\n});\n\ntest('sugar.js.cache.SCache: Set an item in the cache', (done) => {\n  (async () => {\n    await cache.set('myCoolItem', {\n      hello: 'world'\n    });\n    done();\n  })();\n});\n\ntest('sugar.js.cache.SCache: Get an item in the cache', (done) => {\n  (async () => {\n    const item = await cache.get('myCoolItem');\n    expect(item).toEqual({\n      hello: 'world'\n    });\n    done();\n  })();\n});\n\ntest('sugar.js.cache.SCache: Delete an item in the cache', (done) => {\n  (async () => {\n    await cache.delete('myCoolItem');\n    const item = await cache.get('myCoolItem');\n    expect(item).toBe(null);\n    done();\n  })();\n});\n"
+    ]
+}

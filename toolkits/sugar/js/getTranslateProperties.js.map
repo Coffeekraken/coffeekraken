@@ -1,0 +1,43 @@
+{
+    "version": 3,
+    "sources": [
+        "getTranslateProperties.js"
+    ],
+    "names": [
+        "getTranslateProperties",
+        "$elm",
+        "unit",
+        "window",
+        "getComputedStyle",
+        "idx",
+        "mat",
+        "style",
+        "transform",
+        "webkitTransform",
+        "mozTransform",
+        "msTransform",
+        "x",
+        "y",
+        "z",
+        "match",
+        "val",
+        "replace",
+        "split",
+        "map",
+        "v",
+        "trim",
+        "xReg",
+        "yReg",
+        "zReg",
+        "xRegRes",
+        "yRegRes",
+        "zRegRes",
+        "xRes",
+        "yRes",
+        "zRes"
+    ],
+    "mappings": "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",
+    "sourcesContent": [
+        "import __convert from '../unit/convert';\n\n/**\n * @name      getTranslateProperties\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Get a translate properties of an HTMLElement\n *\n * @param \t\t{HTMLElement} \t\t\t\t\t$elm  \t\tThe element to get the properties from\n * @return \t\t{Object} \t\t\t\t\t\t\t\t\tThe translate x,y and z properties\n *\n * @example  \tjs\n * import getTranslateProperties from '@coffeekraken/sugar/js/dom/getTranslateProperties'\n * const props = getTranslateProperties(myCoolHTMLElement);\n * // output format\n * // {\n * // \tx : 100,\n * // \ty : 0,\n * // \tz : 0\n * // }\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function getTranslateProperties($elm, unit = 'px') {\n  if (!window.getComputedStyle) return;\n  let idx, mat, style, transform;\n  style = getComputedStyle($elm);\n  transform =\n    style.transform ||\n    style.webkitTransform ||\n    style.mozTransform ||\n    style.msTransform;\n  if (!transform)\n    return {\n      x: 0,\n      y: 0,\n      z: 0\n    };\n  mat = transform.match(/^matrix3d\\((.+)\\)$/);\n  if (mat) {\n    // preparing the value\n    let val = mat[1]\n      .replace('matrix3d(', '')\n      .replace(')', '')\n      .split(',')\n      .map((v) => v.trim());\n    return {\n      x: __convert(val[12], unit, $elm),\n      y: __convert(val[13], unit, $elm),\n      z: __convert(val[14], unit, $elm)\n    };\n  }\n  mat = transform.match(/^matrix\\((.+)\\)$/);\n  if (mat) {\n    // preparing the value\n    let val = mat[1]\n      .replace('matrix(', '')\n      .replace(')', '')\n      .split(',')\n      .map((v) => v.trim());\n    return {\n      x: __convert(val[4], unit, $elm),\n      y: __convert(val[5], unit, $elm),\n      z: __convert(val[6], unit, $elm) || 0\n    };\n  }\n\n  mat = transform.match(/^translate3d\\((.+)\\)$/);\n  if (mat) {\n    // preparing the value\n    let val = mat[1]\n      .replace('translate3d(', '')\n      .replace(')', '')\n      .split(',')\n      .map((v) => v.trim());\n    return {\n      x: __convert(val[0], unit, $elm),\n      y: __convert(val[1], unit, $elm),\n      z: __convert(val[2], unit, $elm) || 0\n    };\n  }\n\n  mat = transform.match(/^translate\\((.+)\\)$/);\n  if (mat) {\n    // preparing the value\n    let val = mat[1]\n      .replace('translate(', '')\n      .replace(')', '')\n      .split(',')\n      .map((v) => v.trim());\n    return {\n      x: __convert(val[0], unit, $elm),\n      y: __convert(val[1], unit, $elm),\n      z: 0\n    };\n  }\n\n  mat = transform.match(/translate[XYZ]\\((.+)\\)/);\n  if (mat) {\n    // preparing the value\n    const xReg = /translateX\\((\\S+)\\)/;\n    const yReg = /translateY\\((\\S+)\\)/;\n    const zReg = /translateZ\\((\\S+)\\)/;\n\n    const xRegRes = mat[0].match(xReg);\n    const yRegRes = mat[0].match(yReg);\n    const zRegRes = mat[0].match(zReg);\n\n    let xRes = 0;\n    if (xRegRes[1]) {\n      xRes = __convert(xRegRes[1], unit, $elm);\n    }\n    let yRes = 0;\n    if (yRegRes[1]) {\n      yRes = __convert(yRegRes[1], unit, $elm);\n    }\n    let zRes = 0;\n    if (zRegRes[1]) {\n      zRes = __convert(zRegRes[1], unit, $elm);\n    }\n\n    return {\n      x: xRes,\n      y: yRes,\n      z: zRes\n    };\n  }\n\n  return {\n    x: 0,\n    y: 0,\n    z: 0\n  };\n}\n"
+    ]
+}

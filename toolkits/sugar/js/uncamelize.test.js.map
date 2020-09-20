@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "uncamelize.test.js"
+    ],
+    "names": [
+        "__uncamelize",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,YAAY,GAAGC,OAAO,CAAC,eAAD,CAA5B;;AACAA,OAAO,CAAC,cAAD,CAAP,CAAwBD,YAAxB",
+    "sourcesContent": [
+        "const __uncamelize = require('../uncamelize');\nrequire('./uncamelize')(__uncamelize);"
+    ]
+}

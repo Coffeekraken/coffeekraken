@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "sources": [
+        "em2px.test.js"
+    ],
+    "names": [
+        "describe",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "it",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;;;AAEAA,QAAQ,CAAC,qBAAD,EAAwB,MAAM;AAEpCC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAQA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,UAAvB,CAAb;AAEAC,EAAAA,EAAE,CAAC,oDAAD,EAAuD,MAAM;AAC7DC,IAAAA,MAAM,CAAC,oBAAQ,CAAR,EAAWH,IAAX,CAAD,CAAN,CAAyBI,IAAzB,CAA8B,EAA9B;AACD,GAFC,CAAF;AAID,CAhBO,CAAR",
+    "sourcesContent": [
+        "import __em2px from '../em2px';\n\ndescribe('sugar.js.unit.em2px', () => {\n\n  document.body.innerHTML = `\n    <style>\n      #testing {\n        font-size: 10px;\n      }\n    </style>\n    <div id=\"testing\"></div>\n  `;\n  const $elm = document.querySelector('#testing');\n\n  it('Should convert the passed em value to px correctly', () => {\n    expect(__em2px(2, $elm)).toBe(20);\n  });\n\n});"
+    ]
+}

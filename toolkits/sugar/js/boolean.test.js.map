@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "boolean.test.js"
+    ],
+    "names": [
+        "__boolean",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,SAAS,GAAGC,OAAO,CAAC,YAAD,CAAzB;;AACAA,OAAO,CAAC,WAAD,CAAP,CAAqBD,SAArB",
+    "sourcesContent": [
+        "const __boolean = require('../boolean');\nrequire('./boolean')(__boolean);"
+    ]
+}

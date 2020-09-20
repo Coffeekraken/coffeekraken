@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "number.test.js"
+    ],
+    "names": [
+        "__number",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,QAAQ,GAAGC,OAAO,CAAC,WAAD,CAAxB;;AACAA,OAAO,CAAC,UAAD,CAAP,CAAoBD,QAApB",
+    "sourcesContent": [
+        "const __number = require('../number');\nrequire('./number')(__number);"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "deepProxy.test.js"
+    ],
+    "names": [
+        "__deepProxy",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,WAAW,GAAGC,OAAO,CAAC,cAAD,CAA3B;;AACAA,OAAO,CAAC,aAAD,CAAP,CAAuBD,WAAvB",
+    "sourcesContent": [
+        "const __deepProxy = require('../deepProxy');\nrequire('./deepProxy')(__deepProxy);"
+    ]
+}

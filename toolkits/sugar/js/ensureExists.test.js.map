@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "ensureExists.test.js"
+    ],
+    "names": [
+        "__ensureExists",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,cAAc,GAAGC,OAAO,CAAC,iBAAD,CAA9B;;AACAA,OAAO,CAAC,gBAAD,CAAP,CAA0BD,cAA1B",
+    "sourcesContent": [
+        "const __ensureExists = require('../ensureExists');\nrequire('./ensureExists')(__ensureExists);"
+    ]
+}

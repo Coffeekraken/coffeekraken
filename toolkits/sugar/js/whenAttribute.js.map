@@ -1,0 +1,29 @@
+{
+    "version": 3,
+    "sources": [
+        "whenAttribute.js"
+    ],
+    "names": [
+        "whenAttribute",
+        "elm",
+        "attrName",
+        "checkFn",
+        "Promise",
+        "resolve",
+        "reject",
+        "hasAttribute",
+        "value",
+        "getAttribute",
+        "obs",
+        "then",
+        "mutation",
+        "attributeName",
+        "target",
+        "oldValue",
+        "cancel"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;;;AA2Be,SAASA,aAAT,CAAuBC,GAAvB,EAA4BC,QAA5B,EAAsCC,OAAtC,EAAsD;AAAA,MAAhBA,OAAgB;AAAhBA,IAAAA,OAAgB,GAAN,IAAM;AAAA;;AACnE,SAAO,IAAIC,OAAJ,CAAY,CAACC,OAAD,EAAUC,MAAV,KAAqB;AACtC,QAAIL,GAAG,CAACM,YAAJ,CAAiBL,QAAjB,CAAJ,EAAgC;AAC9B,UAAMM,KAAK,GAAG,uBAAWP,GAAG,CAACQ,YAAJ,CAAiBP,QAAjB,CAAX,CAAd;;AACA,UAAIC,OAAO,IAAIA,OAAO,CAACK,KAAD,EAAQA,KAAR,CAAtB,EAAsC;AACpCH,QAAAA,OAAO,CAACG,KAAD,CAAP;AACA;AACD,OAHD,MAGO,IAAI,CAACL,OAAL,EAAc;AACnBE,QAAAA,OAAO,CAACG,KAAD,CAAP;AACA;AACD;AACF;;AAED,QAAME,GAAG,GAAG,gCAAmBT,GAAnB,EAAwBU,IAAxB,CAA8BC,QAAD,IAAc;AACrD,UAAIA,QAAQ,CAACC,aAAT,KAA2BX,QAA/B,EAAyC;AACvC,YAAMM,MAAK,GAAG,uBACZI,QAAQ,CAACE,MAAT,CAAgBL,YAAhB,CAA6BG,QAAQ,CAACC,aAAtC,CADY,CAAd;;AAGA,YAAIV,OAAO,IAAIA,OAAO,CAACK,MAAD,EAAQI,QAAQ,CAACG,QAAjB,CAAtB,EAAkD;AAChDV,UAAAA,OAAO,CAACG,MAAD,CAAP;AACAE,UAAAA,GAAG,CAACM,MAAJ;AACD,SAHD,MAGO,IAAI,CAACb,OAAL,EAAc;AACnBE,UAAAA,OAAO,CAACG,MAAD,CAAP;AACAE,UAAAA,GAAG,CAACM,MAAJ;AACD;AACF;AACF,KAbW,CAAZ;AAcD,GA1BM,CAAP;AA2BD",
+    "sourcesContent": [
+        "import __autoCast from '../string/autoCast';\nimport __observeAttribute from './observeAttributes';\n\n/**\n * @name      whenAttribute\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Resolve a promise when the wanted attribute on the passed HTMLElement exist or pass the check function provided\n *\n * @param \t\t{HTMLElement} \t\t\t\telm \t\t\t\tThe HTMLElement on which to monitor the property\n * @param \t\t{String} \t\t\t\t\tattribute \t\t\tThe attribute to monitor\n * @param \t\t{Function} \t\t\t\t\t[checkFn=null] \t\tAn optional function to check the attribute. The promise is resolved when this function return true\n * @return \t\t(Promise) \t\t\t\t\t\t\t\t\t\tThe promise that will be resolved when the attribute exist on the element (and that it passes the checkFn)\n *\n * @example \tjs\n * import whenAttribute from '@coffeekraken/sugar/js/dom/whenAttribute'\n * whenAttribute(myCoolHTMLElement, 'value').then((value) => {\n * \t\t// the value attribute exist on the element\n * });\n * // with a checkFn\n * whenAttribute(myCoolHTMLElement, 'value', (newVal, oldVal) => {\n * \t\t// make sure the value is a number\n * \t\treturn typeof(newVal) === 'number';\n * }).then((value) => {\n * \t\t// do something with your number value...\n * });\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function whenAttribute(elm, attrName, checkFn = null) {\n  return new Promise((resolve, reject) => {\n    if (elm.hasAttribute(attrName)) {\n      const value = __autoCast(elm.getAttribute(attrName));\n      if (checkFn && checkFn(value, value)) {\n        resolve(value);\n        return;\n      } else if (!checkFn) {\n        resolve(value);\n        return;\n      }\n    }\n\n    const obs = __observeAttribute(elm).then((mutation) => {\n      if (mutation.attributeName === attrName) {\n        const value = __autoCast(\n          mutation.target.getAttribute(mutation.attributeName)\n        );\n        if (checkFn && checkFn(value, mutation.oldValue)) {\n          resolve(value);\n          obs.cancel();\n        } else if (!checkFn) {\n          resolve(value);\n          obs.cancel();\n        }\n      }\n    });\n  });\n}\n"
+    ]
+}

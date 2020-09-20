@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "px2rem.test.js"
+    ],
+    "names": [
+        "describe",
+        "it",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;;;AAEAA,QAAQ,CAAC,sBAAD,EAAyB,MAAM;AAErCC,EAAAA,EAAE,CAAC,qDAAD,EAAwD,MAAM;AAC9DC,IAAAA,MAAM,CAAC,qBAAS,EAAT,CAAD,CAAN,CAAqBC,IAArB,CAA0B,CAA1B;AACD,GAFC,CAAF;AAID,CANO,CAAR",
+    "sourcesContent": [
+        "import __px2rem from '../px2rem';\n\ndescribe('sugar.js.unit.px2rem', () => {\n\n  it('Should convert the passed px value to rem correctly', () => {\n    expect(__px2rem(32)).toBe(2);\n  });\n\n});"
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "decodeHtmlEntities.js"
+    ],
+    "names": [
+        "decodeHtmlEntities",
+        "string",
+        "txt",
+        "document",
+        "createElement",
+        "innerHTML",
+        "value"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;AAiBe,SAASA,kBAAT,CAA4BC,MAA5B,EAAoC;AACjD,MAAMC,GAAG,GAAGC,QAAQ,CAACC,aAAT,CAAuB,UAAvB,CAAZ;AACAF,EAAAA,GAAG,CAACG,SAAJ,GAAgBJ,MAAhB;AACA,SAAOC,GAAG,CAACI,KAAX;AACD",
+    "sourcesContent": [
+        "/**\n * @name        decodeHtmlEntities\n * @namespace           sugar.js.string\n * @type      Function\n *\n * Decode an htmlentities encoded string\n *\n * @param \t\t\t{String} \t\t\tstring \t\t\tThe string to decode\n * @return \t\t\t{String} \t\t\t\t\t\t\tThe decoded string\n *\n * @example     js\n * import decodeHtmlEntities from '@coffeekraken/sugar/js/string/decodeHtmlEntities';\n * decodeHtmlEntities('&#111;&#108;&#105;&#118;&#105;&#101;&#114;&#046;&#098;&#111;&#115;&#115;&#101;&#108;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;');\n * // return => olivier.bossel@gmail.com\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function decodeHtmlEntities(string) {\n  const txt = document.createElement('textarea');\n  txt.innerHTML = string;\n  return txt.value;\n}\n"
+    ]
+}

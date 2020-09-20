@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "testEnv.test.js"
+    ],
+    "names": [
+        "__testEnv",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,SAAS,GAAGC,OAAO,CAAC,YAAD,CAAzB;;AACAA,OAAO,CAAC,WAAD,CAAP,CAAqBD,SAArB",
+    "sourcesContent": [
+        "const __testEnv = require('../testEnv');\nrequire('./testEnv')(__testEnv);\n"
+    ]
+}

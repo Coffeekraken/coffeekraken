@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "sources": [
+        "SHashCache.js"
+    ],
+    "names": [
+        "SHashCache",
+        "name",
+        "settings",
+        "referenceObj",
+        "value",
+        "checksum",
+        "toString",
+        "console",
+        "log",
+        "valueOnly",
+        "__SCache"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;AACA;;AACA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;;;;;;;;;;;;IAqBqBA,U;;;;;AACnB;;;;;;;;;;;AAWA,sBAAYC,IAAZ,EAAkBC,QAAlB,EAAiC;AAAA,QAAfA,QAAe;AAAfA,MAAAA,QAAe,GAAJ,EAAI;AAAA;;AAAA;;AAAA,6BACzBD,IADyB,EACnB,wBAAY,EAAZ,EAAgBC,QAAhB,CADmB;AAEhC;AAED;;;;;;;;;;;;;;;;;;;;;8CAgBUC,Y,EAAcC,K,EAAOF,Q,EAAe;AAAA,YAAfA,QAAe;AAAfA,UAAAA,QAAe,GAAJ,EAAI;AAAA;;AAC5C;AACA,YAAMG,QAAQ,GAAG,iBAAM,uBAAWF,YAAX,CAAN,EAAgCG,QAAhC,EAAjB;AACAC,QAAAA,OAAO,CAACC,GAAR,CAAY,MAAZ,EAAoBH,QAApB,EAH4C,CAI5C;;AACA,mFAAiBA,QAAjB,EAA2BD,KAA3B,EAAkCF,QAAlC;AACD,O;;;;;;;;AAED;;;;;;;;;;;;;;;+CAWUC,Y,EAAcM,S,EAAkB;AAAA,YAAlBA,SAAkB;AAAlBA,UAAAA,SAAkB,GAAN,IAAM;AAAA;;AACxC;AACA,YAAMJ,QAAQ,GAAG,iBAAM,uBAAWF,YAAX,CAAN,EAAgCG,QAAhC,EAAjB,CAFwC,CAGxC;;AACA,mFAAiBD,QAAjB,EAA2BI,SAA3B;AACD,O;;;;;;;;;;;EAxDqCC,gB",
+    "sourcesContent": [
+        "import __deepMerge from '../object/deepMerge';\nimport __convert from '../time/convert';\nimport __isNode from '../is/node';\nimport __SCache from './SCache';\nimport __md5 from '../crypt/md5';\nimport __toString from '../string/toString';\n\n/**\n * @name                                SHashCache\n * @namespace           sugar.js.cache\n * @type                                Class\n * @extends           SCache\n *\n * Gives you the ability to manage cache through some defaults available adapters or using yours.\n * This cache class take care of these features:\n * - Standard and custom TTL by cache item\n * - Delete cache items on expires or not\n *\n * @example             js\n * import SHashCache from '@coffeekraken/sugar/js/cache/SHashCache';\n * const cache = new SHashCache({\n *  ttl: '10s' // 10 seconds\n * });\n * cache.set('myCoolCacheItem', someData);\n *\n * @since     2.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default class SHashCache extends __SCache {\n  /**\n   * @name                              constructor\n   * @type                              Function\n   *\n   * Construct the SHashCache instance with the settings passed in object format. See description bellow.\n   *\n   * @param         {String}        name                  A name for your cache instance. Can have only these characters: [a-zA-Z0-9_-]\n   * @param         {Object}          [settings={}]               The settings for the SCache instance\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  constructor(name, settings = {}) {\n    super(name, __deepMerge({}, settings));\n  }\n\n  /**\n   * @name              set\n   * @type              Function\n   * @async\n   * @override\n   *\n   * Set an item into the cache by passing an object as reference as well as a value to store\n   *\n   * @param             {Object}          referenceObj        The object that will serve as base for calculating the hash used as name\n   * @param             {Mixed}            value              The value to save in cache\n   * @param             {Object}            [settings={}]       A settings object that support all the properties of the SCache.set method\n   * @return            {Promise}                             A promise that will be resolved once the value has been cached\n   *\n   * @since           2.0.0\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  async set(referenceObj, value, settings = {}) {\n    // calculating the checksum\n    const checksum = __md5(__toString(referenceObj)).toString();\n    console.log('SAVE', checksum);\n    // save the value in the cache\n    return super.set(checksum, value, settings);\n  }\n\n  /**\n   * @name            get\n   * @type            Function\n   * @async\n   * @override\n   *\n   * Get an item by passing a referenceObj that will be transformed into a checksum used as cache id.\n   *\n   * @since           2.0.0\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  async get(referenceObj, valueOnly = true) {\n    // calculating the checksum\n    const checksum = __md5(__toString(referenceObj)).toString();\n    // return the value getted from the cache\n    return super.get(checksum, valueOnly);\n  }\n}\n"
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "version": 3,
+    "sources": [
+        "inViewportPercentage.test.js"
+    ],
+    "names": [
+        "__inViewportPercentage",
+        "require",
+        "describe",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "getBoundingClientRect",
+        "jest",
+        "fn",
+        "x",
+        "y",
+        "width",
+        "height",
+        "top",
+        "right",
+        "bottom",
+        "left",
+        "percentage",
+        "it",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;AAAA,IAAMA,sBAAsB,GAAGC,OAAO,CAAC,yBAAD,CAAtC;;AAEAC,QAAQ,CAAC,mCAAD,EAAsC,MAAM;AAElDC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAYA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,UAAvB,CAAb;AAEAD,EAAAA,IAAI,CAACE,qBAAL,GAA6BC,IAAI,CAACC,EAAL,CAAQ,OAAO;AAC1CC,IAAAA,CAAC,EAAE,CAAC,EADsC;AAE1CC,IAAAA,CAAC,EAAE,CAFuC;AAG1CC,IAAAA,KAAK,EAAE,GAHmC;AAI1CC,IAAAA,MAAM,EAAE,GAJkC;AAK1CC,IAAAA,GAAG,EAAE,CALqC;AAM1CC,IAAAA,KAAK,EAAE,EANmC;AAO1CC,IAAAA,MAAM,EAAE,GAPkC;AAQ1CC,IAAAA,IAAI,EAAE,CAAC;AARmC,GAAP,CAAR,CAA7B;;AAWA,MAAMC,UAAU,GAAGnB,sBAAsB,CAACM,IAAD,CAAzC;;AAEAc,EAAAA,EAAE,CAAC,qDAAD,EAAwD,MAAM;AAC9DC,IAAAA,MAAM,CAACF,UAAD,CAAN,CAAmBG,IAAnB,CAAwB,EAAxB;AACD,GAFC,CAAF;AAID,CAjCO,CAAR",
+    "sourcesContent": [
+        "const __inViewportPercentage = require('../inViewportPercentage');\n\ndescribe('sugar.js.dom.inViewportPercentage', () => {\n\n  document.body.innerHTML = `\n    <style>\n      #testing {\n        display: block;\n        width: 100px; height: 100px;\n        background: red;\n        position: absolute;\n        top:0; left: -50px;\n      }\n    </style>\n    <div id=\"testing\"></div>\n  `;\n  const $elm = document.querySelector('#testing');\n\n  $elm.getBoundingClientRect = jest.fn(() => ({\n    x: -50,\n    y: 0,\n    width: 100,\n    height: 100,\n    top: 0,\n    right: 50,\n    bottom: 100,\n    left: -50,\n  }));\n\n  const percentage = __inViewportPercentage($elm);\n\n  it('Should get the percentage in the viewport correctly', () => {\n    expect(percentage).toBe(50);\n  });\n\n});"
+    ]
+}

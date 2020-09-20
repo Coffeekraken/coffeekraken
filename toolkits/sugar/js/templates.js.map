@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "templates.js"
+    ],
+    "names": [
+        "default",
+        "__default",
+        "class",
+        "__class",
+        "function",
+        "__function"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;eAEe;AACbA,EAAAA,OAAO,EAAEC,iBADI;AAEbC,EAAAA,KAAK,EAAEC,cAFM;AAGbC,EAAAA,QAAQ,EAAEC;AAHG,C",
+    "sourcesContent": [
+        "import __class from './templates/class';\nimport __function from './templates/function';\nimport __default from './templates/default';\n\nexport default {\n  default: __default,\n  class: __class,\n  function: __function\n};\n"
+    ]
+}

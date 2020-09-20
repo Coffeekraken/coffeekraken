@@ -1,0 +1,49 @@
+{
+    "version": 3,
+    "sources": [
+        "ofType.js"
+    ],
+    "names": [
+        "ofType",
+        "value",
+        "argTypeDefinition",
+        "definitionArray",
+        "typeOfValue",
+        "issueObj",
+        "$received",
+        "type",
+        "of",
+        "$expected",
+        "$issues",
+        "i",
+        "definitionObj",
+        "Array",
+        "isArray",
+        "loopOn",
+        "keys",
+        "Object",
+        "checkValuesResult",
+        "receivedTypes",
+        "forEach",
+        "valueIndex",
+        "valueToCheck",
+        "typeString",
+        "indexOf",
+        "push",
+        "name",
+        "classesStack",
+        "constructor",
+        "length",
+        "getBaseClass",
+        "targetClass",
+        "stack",
+        "Function",
+        "baseClass",
+        "newBaseClass",
+        "getPrototypeOf"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;AAsBe,SAASA,MAAT,CAAgBC,KAAhB,EAAuBC,iBAAvB,EAA0C;AACvD,MAAIC,eAAe,GAAGD,iBAAtB,CADuD,CAEvD;;AACA,MAAI,OAAOA,iBAAP,KAA6B,QAAjC,EAA2C;AACzCC,IAAAA,eAAe,GAAG,wCAA4BD,iBAA5B,CAAlB;AACD;;AAED,MAAME,WAAW,GAAG,qBAASH,KAAT,CAApB;AACA,MAAMI,QAAQ,GAAG;AACfC,IAAAA,SAAS,EAAE;AACTC,MAAAA,IAAI,EAAE,qBAASN,KAAT,EAAgB;AAAEO,QAAAA,EAAE,EAAE;AAAN,OAAhB,CADG;AAETP,MAAAA;AAFS,KADI;AAKfQ,IAAAA,SAAS,EAAE;AACTF,MAAAA,IAAI,EAAE,gDAAoCJ,eAApC;AADG,KALI;AAQfO,IAAAA,OAAO,EAAE,CAAC,MAAD;AARM,GAAjB;;AARuD,6BAkB9CC,CAlB8C;AAmBrD,QAAMC,aAAa,GAAGT,eAAe,CAACQ,CAAD,CAArC,CAnBqD,CAqBrD;AACA;AACA;AAEA;;AACA,QAAIC,aAAa,CAACL,IAAd,KAAuB,OAAvB,IAAkCK,aAAa,CAACL,IAAd,KAAuB,QAA7D,EAAuE;AACrE;AACA,UAAIK,aAAa,CAACL,IAAd,KAAuB,OAA3B,EAAoC;AAClC;AACA,YAAIH,WAAW,KAAK,OAAhB,IAA2B,CAACQ,aAAa,CAACJ,EAA9C,EAAkD;AAAA,aAAO;AAAP,UAFhB,CAIlC;AACD,OALD,MAKO,IAAII,aAAa,CAACL,IAAd,KAAuB,QAA3B,EAAqC;AAC1C,YAAIH,WAAW,KAAK,QAAhB,IAA4B,CAACQ,aAAa,CAACJ,EAA/C,EAAmD;AAAA,aAAO;AAAP;AACpD;;AAED,UACEI,aAAa,CAACJ,EAAd,KACCK,KAAK,CAACC,OAAN,CAAcb,KAAd,KAAwB,OAAOA,KAAP,KAAiB,QAD1C,CADF,EAGE;AACA,YAAMc,MAAM,GAAGF,KAAK,CAACC,OAAN,CAAcb,KAAd,IACX,CAAC,GAAGA,KAAK,CAACe,IAAN,EAAJ,CADW,GAEXC,MAAM,CAACD,IAAP,CAAYf,KAAZ,CAFJ;AAIA,YAAIiB,iBAAiB,GAAG,IAAxB;AACA,YAAMC,aAAa,GAAG,EAAtB;AACAJ,QAAAA,MAAM,CAACK,OAAP,CAAgBC,UAAD,IAAgB;AAC7B,cAAMC,YAAY,GAAGrB,KAAK,CAACoB,UAAD,CAA1B;;AACA,cAAIrB,MAAM,CAACsB,YAAD,EAAeV,aAAa,CAACJ,EAA7B,CAAN,KAA2C,IAA/C,EAAqD;AACnDU,YAAAA,iBAAiB,GAAG,KAApB;AACD;;AACD,cAAMK,UAAU,GAAG,qBAASD,YAAT,CAAnB;;AACA,cAAIH,aAAa,CAACK,OAAd,CAAsBD,UAAtB,MAAsC,CAAC,CAA3C,EAA8C;AAC5CJ,YAAAA,aAAa,CAACM,IAAd,CAAmBF,UAAnB;AACD;AACF,SATD;AAUA,YAAIL,iBAAJ,EAAuB;AAAA,aAAO;AAAP,UAjBvB,CAkBA;AACA;AACA;AACD;AACF,KApCD,CAsCA;AAtCA,SAuCK,IAAIN,aAAa,CAACL,IAAd,KAAuB,OAA3B,EAAoC;AACvC,YAAI,oBAAUN,KAAV,CAAJ,EAAsB;AAAA,aAAO;AAAP;AACvB,OAFI,CAIL;AAJK,WAKA,IAAIW,aAAa,CAACL,IAAd,KAAuB,KAAvB,IAAgCK,aAAa,CAACL,IAAd,KAAuB,SAA3D,EAAsE;AACzE,cAAI,sBAAQN,KAAR,CAAJ,EAAoB;AAAA,eAAO;AAAP;AACrB,SAFI,CAIL;AAJK,aAKA,IACH,CAAC,SAAD,EAAY,QAAZ,EAAsB,QAAtB,EAAgC,QAAhC,EAA0C,QAA1C,EAAoD,UAApD,EAAgEuB,OAAhE,CACEZ,aAAa,CAACL,IADhB,MAEM,CAAC,CAHJ,EAIH;AACA,gBAAIK,aAAa,CAACL,IAAd,KAAuB,QAA3B,EAAqC;AACnC,kBAAMA,IAAI,GAAGH,WAAb;AACA,kBAAIG,IAAI,KAAK,QAAT,IAAqBA,IAAI,KAAK,SAAlC,EAA6C;AAAA,mBAAO;AAAP;AAC9C,aAHD,MAGO;AACL,kBAAIH,WAAW,KAAKQ,aAAa,CAACL,IAAlC,EAAwC;AAAA,mBAAO;AAAP;AACzC;AACF,WAXI,CAaL;AAbK,eAcA,IAAI,oBAAUN,KAAV,KAAoBA,KAAK,CAACyB,IAA9B,EAAoC;AACvC,kBAAI,qBAASzB,KAAT,MAAoBW,aAAa,CAACL,IAAtC,EAA4C;AAAA,mBAAO;AAAP;AAC5C,kBAAMoB,YAAY,GAAG,8BAAkB1B,KAAlB,CAArB;AACA,kBAAI0B,YAAY,CAACH,OAAb,CAAqBZ,aAAa,CAACL,IAAnC,MAA6C,CAAC,CAAlD,EAAqD;AAAA,mBAAO;AAAP;AACtD,aAJI,MAIE,IAAIN,KAAK,IAAIA,KAAK,CAAC2B,WAAf,IAA8B3B,KAAK,CAAC2B,WAAN,CAAkBF,IAApD,EAA0D;AAC/D,kBAAId,aAAa,CAACL,IAAd,KAAuBN,KAAK,CAAC2B,WAAN,CAAkBF,IAA7C,EAAmD;AAAA,mBAAO;AAAP;AACpD;AA/FoD;;AAkBvD,OAAK,IAAIf,CAAC,GAAG,CAAb,EAAgBA,CAAC,GAAGR,eAAe,CAAC0B,MAApC,EAA4ClB,CAAC,EAA7C,EAAiD;AAAA,qBAAxCA,CAAwC;;AAAA;AA8EhD;;AAED,SAAON,QAAP;AACD;;AAED,SAASyB,YAAT,CAAsBC,WAAtB,EAAmC;AACjC,MAAMC,KAAK,GAAG,EAAd;;AAEA,MAAID,WAAW,YAAYE,QAA3B,EAAqC;AACnC,QAAIC,SAAS,GAAGH,WAAhB;;AAEA,WAAOG,SAAP,EAAkB;AAChB,UAAMC,YAAY,GAAGlB,MAAM,CAACmB,cAAP,CAAsBF,SAAtB,CAArB;;AAEA,UAAIC,YAAY,IAAIA,YAAY,KAAKlB,MAAjC,IAA2CkB,YAAY,CAACT,IAA5D,EAAkE;AAChEM,QAAAA,KAAK,CAACP,IAAN,CAAWU,YAAY,CAACT,IAAxB;AACAQ,QAAAA,SAAS,GAAGC,YAAZ;AACD,OAHD,MAGO;AACL;AACD;AACF;;AAED,WAAOH,KAAP;AACD;AACF",
+    "sourcesContent": [
+        "import __parseTypeDefinitionString from '../validation/utils/parseTypeDefinitionString';\nimport __toString from '../string/toString';\nimport __isClass from './class';\nimport __isInt from './integer';\nimport __upperFirst from '../string/upperFirst';\nimport __typeof from '../value/typeof';\nimport __typeDefinitionArrayObjectToString from '../value/typeDefinitionArrayObjectToString';\nimport __getExtendsStack from '../class/getExtendsStack';\n\n/**\n * @name              ofType\n * @namespace           sugar.js.is\n * @type              Function\n *\n * This function take the value to check and an argument type definition string like \"String\", \"Array<String>\", etc... and return true or false depending\n * if the value pass the test or not...\n *\n * @param       {Mixed}        value          The value to check\n * @param       {String}       argTypeDefinition      The argument type definition string to use for the test\n * @return      {Boolean|Object}                    true if the value pass the test, an object with two sub-objects describing the issue. 1 names \"$expected\" and the othet names \"$received\"\n *\n * @example       js\n * import isOfType from '@coffeekraken/sugar/js/is/ofType';\n * ifOfType(true, 'Boolean'); // => true\n * isOfType(12, 'String|Number'); // => true\n * isOfType(['hello',true], 'Array<String>'); // => { $expected: { type: 'Array<String>' }, $received: { type: 'Array<String|Boolean>' }}\n * isOfType(['hello',true], 'Array<String|Boolean>'); // => true\n *\n * @since       2.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function ofType(value, argTypeDefinition) {\n  let definitionArray = argTypeDefinition;\n  // parsing the argument definition string\n  if (typeof argTypeDefinition === 'string') {\n    definitionArray = __parseTypeDefinitionString(argTypeDefinition);\n  }\n\n  const typeOfValue = __typeof(value);\n  const issueObj = {\n    $received: {\n      type: __typeof(value, { of: true }),\n      value\n    },\n    $expected: {\n      type: __typeDefinitionArrayObjectToString(definitionArray)\n    },\n    $issues: ['type']\n  };\n  for (let i = 0; i < definitionArray.length; i++) {\n    const definitionObj = definitionArray[i];\n\n    // if ((value === null || value === undefined) && definitionObj.type) {\n    //   issueObj.received.type = __typeof(value);\n    // }\n\n    // Array | Object\n    if (definitionObj.type === 'Array' || definitionObj.type === 'Object') {\n      // Array\n      if (definitionObj.type === 'Array') {\n        // make sure the value is an array\n        if (typeOfValue === 'Array' && !definitionObj.of) return true;\n\n        // Object\n      } else if (definitionObj.type === 'Object') {\n        if (typeOfValue === 'Object' && !definitionObj.of) return true;\n      }\n\n      if (\n        definitionObj.of &&\n        (Array.isArray(value) || typeof value === 'object')\n      ) {\n        const loopOn = Array.isArray(value)\n          ? [...value.keys()]\n          : Object.keys(value);\n\n        let checkValuesResult = true;\n        const receivedTypes = [];\n        loopOn.forEach((valueIndex) => {\n          const valueToCheck = value[valueIndex];\n          if (ofType(valueToCheck, definitionObj.of) !== true) {\n            checkValuesResult = false;\n          }\n          const typeString = __typeof(valueToCheck);\n          if (receivedTypes.indexOf(typeString) === -1) {\n            receivedTypes.push(typeString);\n          }\n        });\n        if (checkValuesResult) return true;\n        // if (!checkValuesResult) {\n        //   issueObj.received.type = `${typeOfValue}<${receivedTypes.join('|')}>`;\n        // }\n      }\n    }\n\n    // Class\n    else if (definitionObj.type === 'Class') {\n      if (__isClass(value)) return true;\n    }\n\n    // Integer\n    else if (definitionObj.type === 'Int' || definitionObj.type === 'Integer') {\n      if (__isInt(value)) return true;\n    }\n\n    // check default types\n    else if (\n      ['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(\n        definitionObj.type\n      ) !== -1\n    ) {\n      if (definitionObj.type === 'Number') {\n        const type = typeOfValue;\n        if (type === 'Number' || type === 'Integer') return true;\n      } else {\n        if (typeOfValue === definitionObj.type) return true;\n      }\n    }\n\n    // check for \"custom\" types\n    else if (__isClass(value) && value.name) {\n      if (__typeof(value) === definitionObj.type) return true;\n      const classesStack = __getExtendsStack(value);\n      if (classesStack.indexOf(definitionObj.type) !== -1) return true;\n    } else if (value && value.constructor && value.constructor.name) {\n      if (definitionObj.type === value.constructor.name) return true;\n    }\n  }\n\n  return issueObj;\n}\n\nfunction getBaseClass(targetClass) {\n  const stack = [];\n\n  if (targetClass instanceof Function) {\n    let baseClass = targetClass;\n\n    while (baseClass) {\n      const newBaseClass = Object.getPrototypeOf(baseClass);\n\n      if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {\n        stack.push(newBaseClass.name);\n        baseClass = newBaseClass;\n      } else {\n        break;\n      }\n    }\n\n    return stack;\n  }\n}\n"
+    ]
+}

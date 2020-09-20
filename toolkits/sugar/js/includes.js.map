@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "sources": [
+        "includes.js"
+    ],
+    "names": [
+        "includes",
+        "string",
+        "values",
+        "Array",
+        "isArray",
+        "split",
+        "map",
+        "t",
+        "trim",
+        "valuesThatExists",
+        "forEach",
+        "v",
+        "push",
+        "length"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,QAAT,CAAkBC,MAAlB,EAA0BC,MAA1B,EAAkC;AAC/C,MAAI,CAACC,KAAK,CAACC,OAAN,CAAcF,MAAd,CAAL,EAA4BA,MAAM,GAAGA,MAAM,CAACG,KAAP,CAAa,GAAb,EAAkBC,GAAlB,CAAuBC,CAAD,IAAOA,CAAC,CAACC,IAAF,EAA7B,CAAT;AAC5B,MAAMC,gBAAgB,GAAG,EAAzB;AACAP,EAAAA,MAAM,CAACQ,OAAP,CAAgBC,CAAD,IAAO;AACpB,QAAIV,MAAM,CAACD,QAAP,CAAgBW,CAAhB,CAAJ,EAAwB;AACtBF,MAAAA,gBAAgB,CAACG,IAAjB,CAAsBD,CAAtB;AACD;AACF,GAJD;AAKA,MAAIF,gBAAgB,CAACI,MAArB,EAA6B,OAAOJ,gBAAP;AAC7B,SAAO,KAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name        includes\n * @namespace           sugar.js.string\n * @type      Function\n *\n * Same as the native String.includes function but accept either an array of items\n * or a simple comma separated string like \"something,cool,hello,world\"\n *\n * @param    {String}    string    The string to check\n * @param     {Array|String}    values      An array or comma separated string to check\n * @return    {Boolean|Array}     An array of values that exists in the string or false if nothing match\n *\n * @example    js\n * import includes from '@coffeekraken/sugar/js/string/includes'\n * includes('Hello world', 'world,coco') // ['world']\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function includes(string, values) {\n  if (!Array.isArray(values)) values = values.split(',').map((t) => t.trim());\n  const valuesThatExists = [];\n  values.forEach((v) => {\n    if (string.includes(v)) {\n      valuesThatExists.push(v);\n    }\n  });\n  if (valuesThatExists.length) return valuesThatExists;\n  return false;\n}\n"
+    ]
+}

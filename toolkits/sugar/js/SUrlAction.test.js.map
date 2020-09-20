@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "SUrlAction.test.js"
+    ],
+    "names": [
+        "__SUrlAction",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,YAAY,GAAGC,OAAO,CAAC,eAAD,CAA5B;;AACAA,OAAO,CAAC,cAAD,CAAP,CAAwBD,YAAxB",
+    "sourcesContent": [
+        "const __SUrlAction = require('../SUrlAction');\nrequire('./SUrlAction')(__SUrlAction);\n"
+    ]
+}

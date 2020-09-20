@@ -1,0 +1,32 @@
+{
+    "version": 3,
+    "sources": [
+        "autoScrollAnchorLinks.js"
+    ],
+    "names": [
+        "autoScrollAnchorLinks",
+        "duration",
+        "offset",
+        "easing",
+        "checkPathnames",
+        "__easing",
+        "$link",
+        "addEventListener",
+        "e",
+        "linkUrl",
+        "getAttribute",
+        "currentUrl",
+        "hash",
+        "pathname",
+        "$target",
+        "document",
+        "querySelector",
+        "preventDefault",
+        "history",
+        "pushState"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;;;AAEA;;AAEA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,qBAAT,CACbC,QADa,EAEbC,MAFa,EAGbC,MAHa,EAIbC,cAJa,EAKb;AAAA,MAJAH,QAIA;AAJAA,IAAAA,QAIA,GAJW,GAIX;AAAA;;AAAA,MAHAC,MAGA;AAHAA,IAAAA,MAGA,GAHS,CAGT;AAAA;;AAAA,MAFAC,MAEA;AAFAA,IAAAA,MAEA,GAFSE,uBAET;AAAA;;AAAA,MADAD,cACA;AADAA,IAAAA,cACA,GADiB,IACjB;AAAA;;AACA,kCAAkB,wBAAlB,EAA6CE,KAAD,IAAW;AACrD;AACAA,IAAAA,KAAK,CAACC,gBAAN,CAAuB,OAAvB,EAAiCC,CAAD,IAAO;AACrC;AACA,UAAMC,OAAO,GAAG,uBAASH,KAAK,CAACI,YAAN,CAAmB,MAAnB,CAAT,CAAhB;AACA,UAAMC,UAAU,GAAG,wBAAnB,CAHqC,CAKrC;;AACA,UAAI,CAACF,OAAO,CAACG,IAAT,IAAiBH,OAAO,CAACG,IAAR,KAAiB,GAAtC,EAA2C,OANN,CAQrC;AACA;;AACA,UAAIR,cAAc,IAAIO,UAAU,CAACE,QAAX,KAAwBJ,OAAO,CAACI,QAAtD,EAAgE,OAV3B,CAYrC;;AACA,UAAMC,OAAO,GAAGC,QAAQ,CAACC,aAAT,CAAuBP,OAAO,CAACG,IAA/B,CAAhB,CAbqC,CAerC;;AACA,UAAI,CAACE,OAAL,EAAc,OAhBuB,CAkBrC;;AACAN,MAAAA,CAAC,CAACS,cAAF,GAnBqC,CAqBrC;;AACAC,MAAAA,OAAO,CAACC,SAAR,CAAkB,EAAlB,EAAsB,IAAtB,EAA4BV,OAAO,CAACG,IAApC,EAtBqC,CAwBrC;;AACA,6BAASE,OAAT,EAAkBb,QAAlB,EAA4BE,MAAM,IAAIE,uBAAtC,EAAgDH,MAAhD,EAAwD,KAAxD;AACD,KA1BD;AA2BD,GA7BD;AA8BD",
+    "sourcesContent": [
+        "import __easing from '../easing/easeInOutQuint';\nimport querySelectorLive from './querySelectorLive';\nimport urlParse from 'url-parse';\nimport scrollTo from './scrollTo';\n\n// TODO tests\n\n/**\n * @name        autoScrollAnchorLinks\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Listen for links contains an hash to init them for scroll to target on click\n *\n * @param    {Integer}    [duration=500]    The scroll duration in ms\n * @param    {Integer}    [offset=0]    A scroll offset to apply\n * @param    {Function}    [easing=__easing]    An easing function used to scroll\n * @param    {Boolean}    [checkPathnames=true]    Specify if need to check the pathnames correspondance or not\n *\n * @example    js\n * import autoScrollAnchorLinks from '@coffeekraken/sugar/js/autoScrollAnchorLinks'\n * autoScrollAnchorLinks()\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function autoScrollAnchorLinks(\n  duration = 500,\n  offset = 0,\n  easing = __easing,\n  checkPathnames = true\n) {\n  querySelectorLive('a:not([is])[href*=\"#\"]', ($link) => {\n    // listen for click\n    $link.addEventListener('click', (e) => {\n      // get the hash\n      const linkUrl = urlParse($link.getAttribute('href'));\n      const currentUrl = urlParse();\n\n      // chack that we have an hash\n      if (!linkUrl.hash || linkUrl.hash === '#') return;\n\n      // if it's not the same pathname between the current url and the link one,\n      // we do nothing and we let the link behave as he want\n      if (checkPathnames && currentUrl.pathname !== linkUrl.pathname) return;\n\n      // try to get the target from the hash\n      const $target = document.querySelector(linkUrl.hash);\n\n      // if we don't have any target, let the link behave as he wants\n      if (!$target) return;\n\n      // preventing the link to behave as he wants\n      e.preventDefault();\n\n      // append the hash to the history in the url\n      history.pushState({}, null, linkUrl.hash);\n\n      // all seems to be good, we can scroll to the target\n      scrollTo($target, duration, easing || __easing, offset, 'top');\n    });\n  });\n}\n"
+    ]
+}

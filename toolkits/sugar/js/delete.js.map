@@ -1,0 +1,30 @@
+{
+    "version": 3,
+    "sources": [
+        "delete.js"
+    ],
+    "names": [
+        "del",
+        "object",
+        "dotPath",
+        "parentDotPath",
+        "split",
+        "slice",
+        "join",
+        "replace",
+        "a",
+        "o",
+        "length",
+        "n",
+        "shift",
+        "Array",
+        "isArray",
+        "valueToDelete",
+        "filter",
+        "v"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;;;AAoBe,SAASA,GAAT,CAAaC,MAAb,EAAqBC,OAArB,EAA8B;AAC3C,MAAMC,aAAa,GAAGD,OAAO,CAACE,KAAR,CAAc,GAAd,EAAmBC,KAAnB,CAAyB,CAAzB,EAA4B,CAAC,CAA7B,EAAgCC,IAAhC,CAAqC,GAArC,CAAtB;AAEA,MAAI,CAACJ,OAAD,IAAYA,OAAO,KAAK,EAAxB,IAA8BA,OAAO,KAAK,GAA9C,EAAmD,OAAOD,MAAP;AACnDC,EAAAA,OAAO,GAAGA,OAAO,CAACK,OAAR,CAAgB,YAAhB,EAA8B,KAA9B,CAAV;AACAL,EAAAA,OAAO,GAAGA,OAAO,CAACK,OAAR,CAAgB,KAAhB,EAAuB,EAAvB,CAAV;AACA,MAAIC,CAAC,GAAGN,OAAO,CAACE,KAAR,CAAc,GAAd,CAAR;AACA,MAAIK,CAAC,GAAGR,MAAR;;AACA,SAAOO,CAAC,CAACE,MAAT,EAAiB;AACf,QAAIC,CAAC,GAAGH,CAAC,CAACI,KAAF,EAAR;;AACA,QAAIJ,CAAC,CAACE,MAAF,GAAW,CAAf,EAAkB;AAChB,UAAIG,KAAK,CAACC,OAAN,CAAcL,CAAd,CAAJ,EAAsB;AAAA;AACpB,cAAMM,aAAa,GAAGN,CAAC,CAACE,CAAD,CAAvB;AACAF,UAAAA,CAAC,GAAGA,CAAC,CAACO,MAAF,CAAUC,CAAD,IAAO;AAClB,mBAAOA,CAAC,KAAKF,aAAb;AACD,WAFG,CAAJ;AAFoB;AAKrB,OALD,MAKO;AACL,eAAON,CAAC,CAACE,CAAD,CAAR;AACD;;AACD,wBAAMV,MAAN,EAAcE,aAAd,EAA6BM,CAA7B;AACD,KAVD,MAUO;AACLA,MAAAA,CAAC,GAAGA,CAAC,CAACE,CAAD,CAAL;AACD;AACF;;AACD,SAAOV,MAAP;AACD",
+    "sourcesContent": [
+        "import __set from './set';\n\n/**\n * @name                      delete\n * @namespace           sugar.js.object\n * @type                      Function\n *\n * Delete an object property using a dotPath like \"something.else\"\n *\n * @param         {Object}          object            The object on which you want to delete the property\n * @param         {String}          dotPath           The dotpath to the property you want to delete\n *\n * @example         js\n * import delete from '@coffeekraken/sugar/js/object/delete';\n * const myObject = {\n *    hello: 'world',\n *    plop: 'yop'\n * };\n * delete(myObject, 'plop');\n *\n * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function del(object, dotPath) {\n  const parentDotPath = dotPath.split('.').slice(0, -1).join('.');\n\n  if (!dotPath || dotPath === '' || dotPath === '.') return object;\n  dotPath = dotPath.replace(/\\[(\\w+)\\]/g, '.$1');\n  dotPath = dotPath.replace(/^\\./, '');\n  var a = dotPath.split('.');\n  var o = object;\n  while (a.length) {\n    var n = a.shift();\n    if (a.length < 1) {\n      if (Array.isArray(o)) {\n        const valueToDelete = o[n];\n        o = o.filter((v) => {\n          return v !== valueToDelete;\n        });\n      } else {\n        delete o[n];\n      }\n      __set(object, parentDotPath, o);\n    } else {\n      o = o[n];\n    }\n  }\n  return object;\n}\n"
+    ]
+}

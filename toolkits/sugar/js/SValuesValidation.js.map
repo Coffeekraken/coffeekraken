@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "SValuesValidation.js"
+    ],
+    "names": [
+        "SValuesValidation",
+        "value",
+        "values",
+        "indexOf",
+        "__SValidation"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;IAUMA,iB;;;;;;;;;;;;;yBAGQC,K,EAAOC,M,EAAQ;AACzB,aAAOA,MAAM,CAACC,OAAP,CAAeF,KAAf,MAA0B,CAAC,CAAlC;AACD;;;;EAL6BG,qB;;gBAA1BJ,iB,aAEF,wF;;eAMWA,iB",
+    "sourcesContent": [
+        "import __SValidation from '../../SValidation';\nimport __isOfType from '../../../is/ofType';\n\n/**\n * @name          SValuesValidation\n * @namespace     sugar.js.validation.value.validation\n * @type          Class\n *\n * This class represent the \"values\" validation\n *\n * @since       2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nclass SValuesValidation extends __SValidation {\n  static message =\n    'This value must be one of these \"<green>%1</green>\" but you\\'ve passed \"<red>%0</red>\"';\n  static exec(value, values) {\n    return values.indexOf(value) !== -1;\n  }\n}\n\nexport default SValuesValidation;\n"
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "version": 3,
+    "sources": [
+        "param.js"
+    ],
+    "names": [
+        "__parse",
+        "require",
+        "__upperFirst",
+        "param",
+        "data",
+        "Array",
+        "isArray",
+        "res",
+        "forEach",
+        "value",
+        "parts",
+        "split",
+        "map",
+        "l",
+        "trim",
+        "type",
+        "replace",
+        "variable",
+        "description",
+        "name",
+        "defaultValue",
+        "undefined",
+        "variableMatch",
+        "match",
+        "includes",
+        "variableParts",
+        "length",
+        "default",
+        "content",
+        "join"
+    ],
+    "mappings": ";;;;;;;AAAA,IAAMA,OAAO,GAAGC,OAAO,CAAC,oBAAD,CAAvB;;AACA,IAAMC,YAAY,GAAGD,OAAO,CAAC,yBAAD,CAA5B;AAEA;;;;;;;;;;;;;;;AAae,SAASE,KAAT,CAAeC,IAAf,EAAqB;AAClC,MAAI,CAACC,KAAK,CAACC,OAAN,CAAcF,IAAd,CAAL,EAA0BA,IAAI,GAAG,CAACA,IAAD,CAAP;AAE1B,MAAMG,GAAG,GAAG,EAAZ;AAEAH,EAAAA,IAAI,CAACI,OAAL,CAAcL,KAAD,IAAW;AACtB,QACE,OAAOA,KAAP,KAAiB,QAAjB,IACA,CAACA,KAAK,CAACM,KADP,IAEA,OAAON,KAAK,CAACM,KAAb,KAAuB,QAHzB,EAKE;AACF,QAAMC,KAAK,GAAGP,KAAK,CAACM,KAAN,CAAYE,KAAZ,CAAkB,aAAlB,EAAiCC,GAAjC,CAAsCC,CAAD,IAAOA,CAAC,CAACC,IAAF,EAA5C,CAAd;AACA,QAAIC,IAAI,GACNL,KAAK,IAAIA,KAAK,CAAC,CAAD,CAAd,GACIR,YAAY,CAACQ,KAAK,CAAC,CAAD,CAAL,CAASM,OAAT,CAAiB,GAAjB,EAAsB,EAAtB,EAA0BA,OAA1B,CAAkC,GAAlC,EAAuC,EAAvC,CAAD,CADhB,GAEI,IAHN;AAIA,QAAMC,QAAQ,GAAGP,KAAK,IAAIA,KAAK,CAAC,CAAD,CAAd,GAAoBA,KAAK,CAAC,CAAD,CAAzB,GAA+B,IAAhD;AACA,QAAMQ,WAAW,GAAGR,KAAK,IAAIA,KAAK,CAAC,CAAD,CAAd,GAAoBA,KAAK,CAAC,CAAD,CAAzB,GAA+B,IAAnD;AACA,QAAIS,IAAI,GAAGF,QAAX;AACA,QAAIG,YAAY,GAAGC,SAAnB;AACA,QAAIC,aAAa,GAAG,IAApB;AAEA,QAAIL,QAAQ,IAAI,OAAOA,QAAP,KAAoB,QAApC,EACEK,aAAa,GAAGL,QAAQ,CAACM,KAAT,CAAe,YAAf,CAAhB;;AAEF,QAAIR,IAAI,IAAIA,IAAI,CAACS,QAAL,CAAc,GAAd,CAAZ,EAAgC;AAC9BT,MAAAA,IAAI,GAAGA,IAAI,CAACJ,KAAL,CAAW,GAAX,EAAgBC,GAAhB,CAAqBC,CAAD,IAAOX,YAAY,CAACW,CAAC,CAACC,IAAF,EAAD,CAAvC,CAAP;AACD;;AAED,QAAIQ,aAAJ,EAAmB;AACjB,UAAMG,aAAa,GAAGH,aAAa,CAAC,CAAD,CAAb,CAAiBX,KAAjB,CAAuB,GAAvB,CAAtB;;AACA,UAAIc,aAAa,CAACC,MAAd,KAAyB,CAA7B,EAAgC;AAC9BP,QAAAA,IAAI,GAAGM,aAAa,CAAC,CAAD,CAAb,CAAiBX,IAAjB,EAAP;AACAM,QAAAA,YAAY,GAAGpB,OAAO,CAACyB,aAAa,CAAC,CAAD,CAAb,CAAiBX,IAAjB,EAAD,CAAtB;AACD;AACF;;AAEDP,IAAAA,GAAG,CAACY,IAAD,CAAH,GAAY;AACVA,MAAAA,IADU;AAEVJ,MAAAA,IAFU;AAGVG,MAAAA,WAHU;AAIVS,MAAAA,OAAO,EAAEP;AAJC,KAAZ;AAMA,QAAIjB,KAAK,CAACyB,OAAV,EAAmBrB,GAAG,CAACY,IAAD,CAAH,CAAUS,OAAV,GAAoBzB,KAAK,CAACyB,OAAN,CAAcC,IAAd,CAAmB,IAAnB,CAApB;AACpB,GAxCD;AAyCA,SAAOtB,GAAP;AACD",
+    "sourcesContent": [
+        "const __parse = require('../../string/parse');\nconst __upperFirst = require('../../string/upperFirst');\n\n/**\n * @name              param\n * @namespace           sugar.js.docblock.tags\n * @type              Function\n *\n * Parse the param tag\n *\n * @param       {Object}          data        The data object parsed in the string\n * @param      {Object}                      The formated object\n *\n * @since     2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com>\n */\nexport default function param(data) {\n  if (!Array.isArray(data)) data = [data];\n\n  const res = {};\n\n  data.forEach((param) => {\n    if (\n      typeof param !== 'object' ||\n      !param.value ||\n      typeof param.value !== 'string'\n    )\n      return;\n    const parts = param.value.split(/\\s{2,20000}/).map((l) => l.trim());\n    let type =\n      parts && parts[0]\n        ? __upperFirst(parts[0].replace('{', '').replace('}', ''))\n        : null;\n    const variable = parts && parts[1] ? parts[1] : null;\n    const description = parts && parts[2] ? parts[2] : null;\n    let name = variable;\n    let defaultValue = undefined;\n    let variableMatch = null;\n\n    if (variable && typeof variable === 'string')\n      variableMatch = variable.match(/^\\[(.*)\\]$/);\n\n    if (type && type.includes('|')) {\n      type = type.split('|').map((l) => __upperFirst(l.trim()));\n    }\n\n    if (variableMatch) {\n      const variableParts = variableMatch[1].split('=');\n      if (variableParts.length === 2) {\n        name = variableParts[0].trim();\n        defaultValue = __parse(variableParts[1].trim());\n      }\n    }\n\n    res[name] = {\n      name,\n      type,\n      description,\n      default: defaultValue\n    };\n    if (param.content) res[name].content = param.content.join('\\n');\n  });\n  return res;\n}\n"
+    ]
+}

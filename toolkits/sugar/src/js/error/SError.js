@@ -90,7 +90,6 @@ export default class SError extends Error {
   // }
 
   // toString() {
-  //   // '⠀'
   //   // if (this.message.match(/___$/gm)) return this.message;
   //   return 'rpl';
   //   const string = __trimLines(

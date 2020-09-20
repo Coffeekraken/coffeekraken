@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "toggleFullscreen.js"
+    ],
+    "names": [
+        "toggleFullscreen",
+        "elm",
+        "fullscreenElm",
+        "document",
+        "fullscreenElement",
+        "mozFullScreenElement",
+        "webkitFullscreenElement"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;AAgBe,SAASA,gBAAT,CAA0BC,GAA1B,EAA+B;AAC5C,MAAMC,aAAa,GACjBC,QAAQ,CAACC,iBAAT,IACAD,QAAQ,CAACE,oBADT,IAEAF,QAAQ,CAACG,uBAHX;;AAIA,MAAI,CAACJ,aAAD,IAAkBA,aAAa,KAAKD,GAAxC,EAA6C;AAC3C,WAAO,gCAAkBA,GAAlB,CAAP;AACD,GAFD,MAEO;AACL,WAAO,8BAAP;AACD;AACF",
+    "sourcesContent": [
+        "import requestFullscreen from './requestFullscreen';\nimport exitFullscreen from './exitFullscreen';\n\n/**\n * @name      toggleFullscreen\n * @namespace     sugar.js.dom\n * @type      Function\n *\n * Toggle the fullscreen mode\n *\n * @param    {HTMLElement}    elm    The element on which to request the fullscreen\n * @return    {Promise}   Returns a Promise which is resolved once full-screen mode has been des/activated.\n *\n * @example   js\n * import toggleFullscreen from '@coffeekraken/sugar/js/dom/toggleFullscreen'\n * toggleFullscreen(myDomElm)\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function toggleFullscreen(elm) {\n  const fullscreenElm =\n    document.fullscreenElement ||\n    document.mozFullScreenElement ||\n    document.webkitFullscreenElement;\n  if (!fullscreenElm || fullscreenElm !== elm) {\n    return requestFullscreen(elm);\n  } else {\n    return exitFullscreen();\n  }\n}\n"
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "version": 3,
+    "sources": [
+        "argsToString.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "argsToString",
+        "args",
+        "definitionObj",
+        "settings",
+        "includeAllArgs",
+        "alias",
+        "string",
+        "Object",
+        "keys",
+        "forEach",
+        "key",
+        "cliArray",
+        "argName",
+        "defObj",
+        "undefined",
+        "prefix",
+        "value",
+        "default",
+        "type",
+        "toLowerCase",
+        "includes",
+        "split",
+        "join",
+        "push"
+    ],
+    "mappings": ";;AAAA;;AACA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAgDA;AACA;AAEAA,MAAM,CAACC,OAAP,GAAiB,SAASC,YAAT,CACfC,IADe,EAEfC,aAFe,EAGfC,QAHe,EAIf;AAAA,MAFAD,aAEA;AAFAA,IAAAA,aAEA,GAFgB,IAEhB;AAAA;;AAAA,MADAC,QACA;AADAA,IAAAA,QACA,GADW,EACX;AAAA;;AACAA,EAAAA,QAAQ,GAAG,wBACT;AACEC,IAAAA,cAAc,EAAE,IADlB;AAEEC,IAAAA,KAAK,EAAE;AAFT,GADS,EAKTF,QALS,CAAX;;AAQA,MAAI,OAAOF,IAAP,KAAgB,QAApB,EAA8B;AAC5BA,IAAAA,IAAI,GAAG,wBAAYA,IAAZ,EAAkBC,aAAlB,CAAP;AACD;;AAED,MAAI,CAACA,aAAL,EAAoB;AAClB,QAAII,MAAM,GAAG,EAAb;AACAC,IAAAA,MAAM,CAACC,IAAP,CAAYP,IAAZ,EAAkBQ,OAAlB,CAA2BC,GAAD,IAAS;AACjCJ,MAAAA,MAAM,iBAAUI,GAAV,cAAiB,uBAAWT,IAAI,CAACS,GAAD,CAAf,CAAjB,CAAN;AACD,KAFD;AAGA,WAAOJ,MAAP;AACD;;AAED,MAAMK,QAAQ,GAAG,EAAjB,CArBA,CAsBA;;AACAJ,EAAAA,MAAM,CAACC,IAAP,CAAYN,aAAZ,EAA2BO,OAA3B,CAAoCG,OAAD,IAAa;AAC9C,QAAMC,MAAM,GAAGX,aAAa,CAACU,OAAD,CAA5B;AACA,QAAI,CAACC,MAAL,EAAa;AACb,QAAI,CAACV,QAAQ,CAACC,cAAV,IAA4BH,IAAI,CAACW,OAAD,CAAJ,KAAkBE,SAAlD,EAA6D;AAC7D,QAAMC,MAAM,GACVF,MAAM,CAACR,KAAP,IAAgBF,QAAQ,CAACE,KAAzB,cAAqCQ,MAAM,CAACR,KAA5C,gBAA2DO,OAA3D,CADF;AAGA,QAAII,KAAJ;AACA,QAAIf,IAAI,IAAIA,IAAI,CAACW,OAAD,CAAJ,KAAkBE,SAA9B,EAAyCE,KAAK,GAAGf,IAAI,CAACW,OAAD,CAAZ,CAAzC,KACK,IAAIV,aAAa,CAACU,OAAD,CAAb,IAA0BV,aAAa,CAACU,OAAD,CAAb,CAAuBK,OAArD,EACHD,KAAK,GAAGd,aAAa,CAACU,OAAD,CAAb,CAAuBK,OAA/B;;AACF,QACED,KAAK,KAAKF,SAAV,IACAE,KAAK,KAAK,IAFZ,CAGE;AAHF,MAIE;AACA;AACD;;AACDA,IAAAA,KAAK,GAAG,uBAAWA,KAAX,CAAR;AAEA,QAAIH,MAAM,CAACK,IAAP,CAAYC,WAAZ,OAA8B,QAAlC,EAA4CH,KAAK,eAAOA,KAAP,OAAL,CApBE,CAqB9C;;AACA,QACEH,MAAM,CAACK,IAAP,CAAYC,WAAZ,GAA0BC,QAA1B,CAAmC,QAAnC,KACAP,MAAM,CAACK,IAAP,CAAYC,WAAZ,GAA0BC,QAA1B,CAAmC,OAAnC,CAFF,EAGE;AACAJ,MAAAA,KAAK,eAAOA,KAAK,CAACK,KAAN,CAAY,GAAZ,EAAiBC,IAAjB,CAAsB,GAAtB,CAAP,OAAL;AACD;;AAEDX,IAAAA,QAAQ,CAACY,IAAT,WAAiBR,MAAjB,cAA2BC,KAA3B;AACD,GA9BD;AAgCA,SAAOL,QAAQ,CAACW,IAAT,CAAc,GAAd,CAAP;AACD,CA5DD",
+    "sourcesContent": [
+        "import __toString from '../string/toString';\nimport __parseArgs from './parseArgs';\nimport __deepMerge from '../object/deepMerge';\n\n/**\n * @name                  argsToString\n * @namespace           sugar.js.cli\n * @type                  Function\n *\n * This function take a simple object, a definitionObj object and return you the string version that you can pass\n * directly to the command line interface\n *\n * @param       {Object}        args        The arguments object\n * @param       {Object}        [definitionObj=null]    The definitionObj object that has to be formated like so:\n * - argName: The argument name to describe\n *    - type: The type of the value supported\n *    - alias: The alias of the full name like \"t\", \"l\", etc...\n *    - default: The default value if nothing is specified\n *    - regexp: A regexp that is used to validate the passed value\n *    - validator: A function to validate the passed value. Has to return true or false\n * @param       {Object}      [settings={}]               A settings object to configure your command build process:\n * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definitionObj object in your command line string, or if you just want the one passed in your argsObj argument\n * - alias (true) {Boolean}: Specify if you want to use the aliases or not in the generated command\n *\n * @todo            check documentation\n *\n * @example       js\n * import argsToString from '@coffeekraken/sugar/js/cli/argsToString';\n * argsToString({\n *    arg1: 'Hello',\n *    myOtherArg: 'World'\n * }, {\n *    arg1: {\n *      type: 'String',\n *      alias: 'a',\n *      default: 'Plop'\n *    },\n *    myOtherArg: {\n *      type: 'String'\n *    },\n *    lastArg: {\n *      type: 'String',\n *      alias: 'l',\n *      default: 'Nelson'\n *    }\n * });\n * // => -a Hello --myOtherArg World\n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n\n// TODO: support deep object structure\n// TODO: support required args\n\nmodule.exports = function argsToString(\n  args,\n  definitionObj = null,\n  settings = {}\n) {\n  settings = __deepMerge(\n    {\n      includeAllArgs: true,\n      alias: true\n    },\n    settings\n  );\n\n  if (typeof args === 'string') {\n    args = __parseArgs(args, definitionObj);\n  }\n\n  if (!definitionObj) {\n    let string = '';\n    Object.keys(args).forEach((key) => {\n      string += ` --${key} ${__toString(args[key])}`;\n    });\n    return string;\n  }\n\n  const cliArray = [];\n  // loop on passed args\n  Object.keys(definitionObj).forEach((argName) => {\n    const defObj = definitionObj[argName];\n    if (!defObj) return;\n    if (!settings.includeAllArgs && args[argName] === undefined) return;\n    const prefix =\n      defObj.alias && settings.alias ? `-${defObj.alias}` : `--${argName}`;\n\n    let value;\n    if (args && args[argName] !== undefined) value = args[argName];\n    else if (definitionObj[argName] && definitionObj[argName].default)\n      value = definitionObj[argName].default;\n    if (\n      value === undefined ||\n      value === null\n      // || (defObj.type.toLowerCase() === 'boolean' && value === false)\n    ) {\n      return;\n    }\n    value = __toString(value);\n\n    if (defObj.type.toLowerCase() === 'string') value = `\"${value}\"`;\n    // if (defObj.type.toLowerCase() === 'boolean') value = '';\n    if (\n      defObj.type.toLowerCase().includes('object') ||\n      defObj.type.toLowerCase().includes('array')\n    ) {\n      value = `\"${value.split('\"').join(\"'\")}\"`;\n    }\n\n    cliArray.push(`${prefix} ${value}`);\n  });\n\n  return cliArray.join(' ');\n};\n"
+    ]
+}

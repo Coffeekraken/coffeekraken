@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "imagesLazySrcAttribute.js"
+    ],
+    "names": [
+        "$imgElm",
+        "then",
+        "setAttribute",
+        "getAttribute"
+    ],
+    "mappings": ";;AAAA;;AACA;;;;AAEA;;AAEA;;;;;;;;;;;;;AAaA,gCAAkB,yBAAlB,EAA8CA,OAAD,IAAa;AACxD,+BAAeA,OAAf,EAAwBC,IAAxB,CAA6B,MAAM;AACjCD,IAAAA,OAAO,CAACE,YAAR,CAAqB,KAArB,EAA4BF,OAAO,CAACG,YAAR,CAAqB,UAArB,CAA5B;AACD,GAFD;AAGD,CAJD",
+    "sourcesContent": [
+        "import whenInViewport from '../dom/whenInViewport';\nimport querySelectorLive from '../dom/querySelectorLive';\n\n// TODO tests\n\n/**\n * @name \t\timagesLazySrcAttribute\n * @namespace           sugar.js.feature\n * @type      Feature\n *\n * Add support for the `lazy-src` attribute on `img` elements.\n * The video `src` attribute will be populated when the `img` element enter the viewport\n *\n * @example    html\n * <img lazy-src=\"my-cool-image.jpg\" />\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nquerySelectorLive('img[lazy-src]:not([is])', ($imgElm) => {\n  whenInViewport($imgElm).then(() => {\n    $imgElm.setAttribute('src', $imgElm.getAttribute('lazy-src'));\n  });\n});\n"
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "version": 3,
+    "sources": [
+        "browser.js"
+    ],
+    "names": [
+        "isBrowser",
+        "value",
+        "window"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;AAiBe,SAASA,SAAT,CAAmBC,KAAnB,EAA0B;AACvC,SAAO,OAAOC,MAAP,KAAkB,WAAzB;AACD",
+    "sourcesContent": [
+        "/**\n * @name        isBrowser\n * @namespace           sugar.js.is\n * @type      Function\n *\n * Check if the script is running inside a browser or not\n *\n * @return   {Boolean}   true if it's in a browser, false if not\n *\n * @example    js\n * import isBrowser from '@coffeekraken/sugar/js/is/browser'\n * if (isBrowser() {\n *   // do something\n * }\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isBrowser(value) {\n  return typeof window !== 'undefined';\n}\n"
+    ]
+}

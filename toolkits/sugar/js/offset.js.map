@@ -1,0 +1,34 @@
+{
+    "version": 3,
+    "sources": [
+        "offset.js"
+    ],
+    "names": [
+        "offset",
+        "elm",
+        "body",
+        "box",
+        "clientLeft",
+        "clientTop",
+        "docEl",
+        "left",
+        "scrollLeft",
+        "scrollTop",
+        "top",
+        "translates",
+        "transX",
+        "transY",
+        "getBoundingClientRect",
+        "document",
+        "documentElement",
+        "window",
+        "pageYOffset",
+        "pageXOffset",
+        "Math",
+        "round"
+    ],
+    "mappings": ";;;;;;;AAAA;;AAEA;;;;;;;;;;;;;;;;;AAiBe,SAASA,MAAT,CAAgBC,GAAhB,EAAqB;AAClC,MAAIC,IAAJ,EACEC,GADF,EAEEC,UAFF,EAGEC,SAHF,EAIEC,KAJF,EAKEC,IALF,EAMEC,UANF,EAOEC,SAPF,EAQEC,GARF,EASEC,UATF,EAUEC,MAVF,EAWEC,MAXF;AAYAV,EAAAA,GAAG,GAAGF,GAAG,CAACa,qBAAJ,EAAN;AACAZ,EAAAA,IAAI,GAAGa,QAAQ,CAACb,IAAhB;AACAI,EAAAA,KAAK,GAAGS,QAAQ,CAACC,eAAjB;AACAP,EAAAA,SAAS,GAAGQ,MAAM,CAACC,WAAP,IAAsBZ,KAAK,CAACG,SAA5B,IAAyCP,IAAI,CAACO,SAA1D;AACAD,EAAAA,UAAU,GAAGS,MAAM,CAACE,WAAP,IAAsBb,KAAK,CAACE,UAA5B,IAA0CN,IAAI,CAACM,UAA5D;AACAH,EAAAA,SAAS,GAAGC,KAAK,CAACD,SAAN,IAAmBH,IAAI,CAACG,SAAxB,IAAqC,CAAjD;AACAD,EAAAA,UAAU,GAAGE,KAAK,CAACF,UAAN,IAAoBF,IAAI,CAACE,UAAzB,IAAuC,CAApD,CAnBkC,CAoBlC;AACA;AACA;;AACAM,EAAAA,GAAG,GAAGP,GAAG,CAACO,GAAJ,GAAUD,SAAV,GAAsBJ,SAA5B;AACAE,EAAAA,IAAI,GAAGJ,GAAG,CAACI,IAAJ,GAAWC,UAAX,GAAwBJ,UAA/B;AACA,SAAO;AACLM,IAAAA,GAAG,EAAEU,IAAI,CAACC,KAAL,CAAWX,GAAX,CADA;AAELH,IAAAA,IAAI,EAAEa,IAAI,CAACC,KAAL,CAAWd,IAAX;AAFD,GAAP;AAID",
+    "sourcesContent": [
+        "// import __getTranslateProperties from './getTranslateProperties'\n\n/**\n * @name      offset\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Get the offset top and left of the passed element from the document top left point\n *\n * @param \t\t{HTMLElement} \t\t\t\t\telm  \t\tThe element to get the offset from\n * @return \t\t{Object} \t\t\t\t\t\t\t\t\tThe offset top and left object\n *\n * @example  \tjs\n * import offset from '@coffeekraken/sugar/js/dom/offset'\n * const offsetElm = offset(myCoolElement);\n * // output : { top : 200, left : 300 }\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function offset(elm) {\n  let body,\n    box,\n    clientLeft,\n    clientTop,\n    docEl,\n    left,\n    scrollLeft,\n    scrollTop,\n    top,\n    translates,\n    transX,\n    transY;\n  box = elm.getBoundingClientRect();\n  body = document.body;\n  docEl = document.documentElement;\n  scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;\n  scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;\n  clientTop = docEl.clientTop || body.clientTop || 0;\n  clientLeft = docEl.clientLeft || body.clientLeft || 0;\n  // translates = __getTranslateProperties(elm);\n  // transX = translates.x;\n  // transY = translates.y;\n  top = box.top + scrollTop - clientTop;\n  left = box.left + scrollLeft - clientLeft;\n  return {\n    top: Math.round(top),\n    left: Math.round(left)\n  };\n}\n"
+    ]
+}

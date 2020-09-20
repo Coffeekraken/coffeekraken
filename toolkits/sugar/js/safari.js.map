@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "safari.js"
+    ],
+    "names": [
+        "isSafari",
+        "ua",
+        "navigator",
+        "userAgent",
+        "indexOf"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,QAAT,CAAkBC,EAAlB,EAA4C;AAAA,MAA1BA,EAA0B;AAA1BA,IAAAA,EAA0B,GAArBC,SAAS,CAACC,SAAW;AAAA;;AACzD,SAAOF,EAAE,CAACG,OAAH,CAAW,QAAX,KAAwB,CAAC,CAAzB,IAA8BH,EAAE,CAACG,OAAH,CAAW,QAAX,KAAwB,CAAC,CAA9D;AACD",
+    "sourcesContent": [
+        "/**\n * @name        isSafari\n * @namespace           sugar.js.is\n * @type      Function\n *\n * Detect if is safari\n *\n * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test\n *\n * @example \tjs\n * import isSafari from '@coffeekraken/sugar/js/is/safari'\n * if (isSafari()) {\n *   // do something cool\n * }\n *\n * @return    {Boolean}    true if is safari, false if not\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isSafari(ua = navigator.userAgent) {\n  return ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1;\n}\n"
+    ]
+}

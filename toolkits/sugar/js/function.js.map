@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "function.js"
+    ],
+    "names": [
+        "isFunction",
+        "value",
+        "toString",
+        "call"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,UAAT,CAAoBC,KAApB,EAA2B;AACxC,SAAOA,KAAK,IAAI,GAAGC,QAAH,CAAYC,IAAZ,CAAiBF,KAAjB,MAA4B,mBAA5C;AACD",
+    "sourcesContent": [
+        "/**\n * @name        isFunction\n * @namespace       sugar.js.is\n * @type      Function\n *\n * Check if the passed value is a js function\n *\n * @param    {Mixed}    value    The value to check\n * @return   {Boolean}   true if it's a function, false if not\n *\n * @example    js\n * import isFunction from '@coffeekraken/sugar/js/is/function'\n * if (isFunction(function() {})) {\n *   // do something\n * }\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isFunction(value) {\n  return value && {}.toString.call(value) === '[object Function]';\n}\n"
+    ]
+}

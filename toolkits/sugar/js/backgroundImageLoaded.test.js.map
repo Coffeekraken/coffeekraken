@@ -1,0 +1,29 @@
+{
+    "version": 3,
+    "sources": [
+        "backgroundImageLoaded.test.js"
+    ],
+    "names": [
+        "describe",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "isLoaded",
+        "isError",
+        "promise",
+        "then",
+        "catch",
+        "e",
+        "__$img",
+        "it",
+        "setTimeout",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;AACA;;;;AAEAA,QAAQ,CAAC,oCAAD,EAAuC,MAAM;AACnDC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAQA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,UAAvB,CAAb;AAEA,MAAIC,QAAQ,GAAG,KAAf;AAAA,MACEC,OAAO,GAAG,KADZ;AAGA,MAAMC,OAAO,GAAG,oCAAwBJ,IAAxB,EACbK,IADa,CACR,MAAM;AACVH,IAAAA,QAAQ,GAAG,IAAX;AACD,GAHa,EAIbI,KAJa,CAINC,CAAD,IAAO;AACZJ,IAAAA,OAAO,GAAG,IAAV;AACD,GANa,CAAhB;AAQA,8BAAgBC,OAAO,CAACI,MAAxB,EAAgC,MAAhC;AAEAC,EAAAA,EAAE,CAAC,2DAAD,EAA8D,MAAM;AACpEC,IAAAA,UAAU,CAAC,MAAM;AACfC,MAAAA,MAAM,CAACT,QAAD,CAAN,CAAiBU,IAAjB,CAAsB,IAAtB;AACAD,MAAAA,MAAM,CAACR,OAAD,CAAN,CAAgBS,IAAhB,CAAqB,KAArB;AACD,KAHS,CAAV;AAID,GALC,CAAF;AAMD,CA9BO,CAAR",
+    "sourcesContent": [
+        "import __backgroundImageLoaded from '../backgroundImageLoaded';\nimport __dispatchEvent from '../dispatchEvent';\n\ndescribe('sugar.js.dom.backgroundImageLoaded', () => {\n  document.body.innerHTML = `\n    <style>\n      .testing {\n        background-image: url('/test.jpg');\n      }\n    </style>\n    <div id=\"testing\" class=\"testing\"></div>\n  `;\n  const $elm = document.querySelector('#testing');\n\n  let isLoaded = false,\n    isError = false;\n\n  const promise = __backgroundImageLoaded($elm)\n    .then(() => {\n      isLoaded = true;\n    })\n    .catch((e) => {\n      isError = true;\n    });\n\n  __dispatchEvent(promise.__$img, 'load');\n\n  it('Should detect the background image loading complete state', () => {\n    setTimeout(() => {\n      expect(isLoaded).toBe(true);\n      expect(isError).toBe(false);\n    });\n  });\n});\n"
+    ]
+}

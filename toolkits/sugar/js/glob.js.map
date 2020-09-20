@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "sources": [
+        "glob.js"
+    ],
+    "names": [
+        "string"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;eAkBgBA,MAAD,IAAY;AACzB,SAAO,qBAASA,MAAT,CAAP;AACD,C",
+    "sourcesContent": [
+        "import __isGlob from 'is-glob';\n\n/**\n * @name                                      isGlob\n * @namespace           sugar.js.is\n * @type                                      Function\n *\n * Check if the passed string is a valid glob pattern or not\n *\n * @param                 {String}        $string             The string to check\n * @return                {Boolean}                           true if is a valid glob pattern, false if not\n *\n * @example               js\n * import isGlob from '@coffeekraken/sugar/js/is/js';\n * isGlob('something/*.js); // => true\n *\n * @see       https://www.npmjs.com/package/is-glob\n * @since     2.0.0\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default (string) => {\n  return __isGlob(string);\n};\n"
+    ]
+}

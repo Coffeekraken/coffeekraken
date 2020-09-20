@@ -1,0 +1,29 @@
+{
+    "version": 3,
+    "sources": [
+        "config.js"
+    ],
+    "names": [
+        "__sugarConfig",
+        "window",
+        "sConfig",
+        "localStorage",
+        "getItem",
+        "path",
+        "value",
+        "__base64",
+        "decrypt",
+        "JSON",
+        "parse",
+        "newValue",
+        "configToSave",
+        "stringify",
+        "encryptedConfig",
+        "encrypt",
+        "setItem"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;AAiBA,IAAIA,aAAa,GAAGC,MAAM,CAACC,OAAP,IAAkBC,YAAY,CAACC,OAAb,CAAqB,SAArB,CAAlB,IAAqD,EAAzE,C,CACA;AACA;;;eACe,kBAACC,IAAD,EAAOC,KAAP,EAAwB;AAAA,MAAjBA,KAAiB;AAAjBA,IAAAA,KAAiB,GAAT,IAAS;AAAA;;AACrC;AACA,MAAID,IAAI,KAAK,GAAT,IAAgBA,IAAI,KAAK,EAAzB,IAA+B,CAACA,IAApC,EAA0C;AACxCA,IAAAA,IAAI,GAAG,EAAP;AACD;;AAED,MAAI,mBAAWC,KAAX,CAAJ,EAAuB;AACrBA,IAAAA,KAAK,GAAGC,eAASC,OAAT,CAAiBF,KAAjB,CAAR;AACD;;AACD,MAAI,mBAASA,KAAT,CAAJ,EAAqB;AACnBA,IAAAA,KAAK,GAAGG,IAAI,CAACC,KAAL,CAAWJ,KAAX,CAAR;AACD;;AAED,MAAI,OAAOA,KAAP,KAAiB,QAAjB,KAA8BD,IAAI,KAAK,GAAT,IAAgBA,IAAI,KAAK,EAAzB,IAA+B,CAACA,IAA9D,CAAJ,EAAyE;AACvEL,IAAAA,aAAa,GAAG,wBAAYA,aAAZ,EAA2BM,KAA3B,CAAhB;AACA,WAAON,aAAP;AACD;;AAED,MAAIW,QAAJ,CAlBqC,CAoBrC;;AACA,MAAIL,KAAJ,EAAW;AACTK,IAAAA,QAAQ,GAAG,kBAAMX,aAAN,EAAqBK,IAArB,EAA2BC,KAA3B,CAAX;AACD,GAFD,MAEO;AACL;AACAK,IAAAA,QAAQ,GAAG,kBAAMX,aAAN,EAAqBK,IAArB,CAAX;AACD,GA1BoC,CA4BrC;;;AACA,MAAIO,YAAY,GAAGZ,aAAnB;AACA,MAAI,OAAOY,YAAP,KAAwB,QAA5B,EACEA,YAAY,GAAGH,IAAI,CAACI,SAAL,CAAeD,YAAf,CAAf;;AACF,MAAME,eAAe,GAAGP,eAASQ,OAAT,CAAiBH,YAAjB,CAAxB,CAhCqC,CAkCrC;;;AACAX,EAAAA,MAAM,CAACC,OAAP,GAAiBY,eAAjB;AACAX,EAAAA,YAAY,CAACa,OAAb,CAAqB,SAArB,EAAgCF,eAAhC,EApCqC,CAsCrC;;AACA,SAAOH,QAAP;AACD,C",
+    "sourcesContent": [
+        "import __isBase64 from '../is/base64';\nimport __base64 from '../crypt/base64';\nimport __deepMerge from '../object/deepMerge';\nimport __ensureExist from '../object/ensureExist';\nimport __get from '../object/get';\nimport __set from '../object/set';\nimport __isJson from '../is/json';\n\n/**\n * @name                          config\n * @namespace           js.core\n * @namespace                     Function\n *\n * Access the configuration setted using the \"config(path, value)\" function\n *\n * @param               {String}                  path                        The dotted config path to get like \"log.mail\"\n * @param               {Mixed}                   [value=null]                The value to set. Will return the setted value if passed\n * @return              {Mixed}                                               Return the config value wanted\n *\n * @example           js\n * import config from '@coffeekraken/sugar/js/core/js';\n * config('log.mail.host'); // => gmail.google.com\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com\n */\nlet __sugarConfig = window.sConfig || localStorage.getItem('sConfig') || {};\n// if (typeof __sugarConfig === 'string' && __isBase64(__sugarConfig)) __sugarConfig = __base64.decrypt(__sugarConfig);\n// if (typeof __sugarConfig === 'string' && __isJson(__sugarConfig)) __sugarConfig = JSON.parse(__sugarConfig);\nexport default (path, value = null) => {\n  // process the path\n  if (path === '.' || path === '' || !path) {\n    path = '';\n  }\n\n  if (__isBase64(value)) {\n    value = __base64.decrypt(value);\n  }\n  if (__isJson(value)) {\n    value = JSON.parse(value);\n  }\n\n  if (typeof value === 'object' && (path === '.' || path === '' || !path)) {\n    __sugarConfig = __deepMerge(__sugarConfig, value);\n    return __sugarConfig;\n  }\n\n  let newValue;\n\n  // check if is a set or get process\n  if (value) {\n    newValue = __set(__sugarConfig, path, value);\n  } else {\n    // get the wanted path\n    newValue = __get(__sugarConfig, path);\n  }\n\n  // preparing the value to set in the storage\n  let configToSave = __sugarConfig;\n  if (typeof configToSave !== 'string')\n    configToSave = JSON.stringify(configToSave);\n  const encryptedConfig = __base64.encrypt(configToSave);\n\n  // save the new settings\n  window.sConfig = encryptedConfig;\n  localStorage.setItem('sConfig', encryptedConfig);\n\n  // return the new settings value\n  return newValue;\n};\n"
+    ]
+}

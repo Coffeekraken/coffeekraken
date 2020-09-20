@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "odd.js"
+    ],
+    "names": [
+        "isOdd",
+        "value"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;AAee,SAASA,KAAT,CAAeC,KAAf,EAAsB;AACnC,SAAOA,KAAK,GAAG,CAAR,KAAc,CAArB;AACD",
+    "sourcesContent": [
+        "/**\n * @name        isOdd\n * @namespace           sugar.js.is\n * @type      Function\n *\n * Check if a number is odd or not\n *\n * @param    {Number}    value    The value to check\n * @return    {Boolean}    true if odd, false if not\n *\n * @example    js\n * import isOdd from '@coffeekraken/sugar/js/is/odd'\n * isOdd(1) // true\n * isOdd(2) // false\n */\nexport default function isOdd(value) {\n  return value % 2 === 1;\n}\n"
+    ]
+}

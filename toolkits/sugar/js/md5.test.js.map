@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "md5.test.js"
+    ],
+    "names": [
+        "__md5",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,KAAK,GAAGC,OAAO,CAAC,QAAD,CAArB;;AACAA,OAAO,CAAC,OAAD,CAAP,CAAiBD,KAAjB",
+    "sourcesContent": [
+        "const __md5 = require('../md5');\nrequire('./md5')(__md5);"
+    ]
+}

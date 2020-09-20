@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "sources": [
+        "closest.test.js"
+    ],
+    "names": [
+        "describe",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "it",
+        "$testing",
+        "expect",
+        "id",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;;;AAEAA,QAAQ,CAAC,sBAAD,EAAyB,MAAM;AAErCC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAOA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,SAAvB,CAAb;AAEAC,EAAAA,EAAE,CAAC,8DAAD,EAAiE,MAAM;AACvE,QAAMC,QAAQ,GAAG,sBAAUH,IAAV,EAAgB,UAAhB,CAAjB;AACAI,IAAAA,MAAM,CAACD,QAAQ,CAACE,EAAV,CAAN,CAAoBC,IAApB,CAAyB,SAAzB;AACD,GAHC,CAAF;AAKD,CAhBO,CAAR",
+    "sourcesContent": [
+        "import __closest from '../closest';\n\ndescribe('sugar.js.dom.closest', () => {\n\n  document.body.innerHTML = `\n      <div id=\"testing\">\n        <div class=\"coco\">\n          <div id=\"source\"></div>\n        </div>\n      </div>\n  `;\n  const $elm = document.querySelector('#source');\n\n  it('Should find the \"testing\" element that is up in the dom tree', () => {\n    const $testing = __closest($elm, '#testing');\n    expect($testing.id).toBe('testing');\n  });\n\n});"
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "version": 3,
+    "sources": [
+        "inViewportPercentage.js"
+    ],
+    "names": [
+        "inViewportPercentage",
+        "elm",
+        "bounding",
+        "getBoundingClientRect",
+        "percentageWidth",
+        "percentageHeight",
+        "top",
+        "bottom",
+        "window",
+        "innerHeight",
+        "elmHeight",
+        "Math",
+        "round",
+        "left",
+        "right",
+        "innerWidth",
+        "elmWidth"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;AAiBe,SAASA,oBAAT,CAA8BC,GAA9B,EAAmC;AAChD;AACA,MAAI,CAAC,wBAAYA,GAAZ,CAAL,EAAuB,OAAO,CAAP,CAFyB,CAIhD;;AACA,MAAMC,QAAQ,GAAGD,GAAG,CAACE,qBAAJ,EAAjB;AAEA,MAAIC,eAAe,GAAG,GAAtB;AAAA,MACEC,gBAAgB,GAAG,GADrB,CAPgD,CAUhD;;AACA,MAAIH,QAAQ,CAACI,GAAT,IAAgB,CAAhB,IAAqBJ,QAAQ,CAACK,MAAT,IAAmBC,MAAM,CAACC,WAAnD,EAAgE;AAC9DJ,IAAAA,gBAAgB,GAAG,GAAnB;AACD,GAFD,MAEO;AACL,QAAMK,SAAS,GAAGR,QAAQ,CAACK,MAAT,GAAkBL,QAAQ,CAACI,GAA7C;;AACA,QAAIJ,QAAQ,CAACI,GAAT,GAAe,CAAnB,EAAsB;AACpBD,MAAAA,gBAAgB,IAAK,MAAMK,SAAP,IAAqBR,QAAQ,CAACI,GAAT,GAAe,CAAC,CAArC,CAApB;AACD;;AACD,QAAIJ,QAAQ,CAACK,MAAT,GAAkBC,MAAM,CAACC,WAA7B,EAA0C;AACxCJ,MAAAA,gBAAgB,IACb,MAAMK,SAAP,IAAqBR,QAAQ,CAACK,MAAT,GAAkBC,MAAM,CAACC,WAA9C,CADF;AAED;AACF;;AACDJ,EAAAA,gBAAgB,GAAGM,IAAI,CAACC,KAAL,CAAWP,gBAAX,CAAnB;AACA,MAAIA,gBAAgB,GAAG,CAAvB,EAA0BA,gBAAgB,GAAG,CAAnB;AAC1B,MAAIA,gBAAgB,GAAG,GAAvB,EAA4BA,gBAAgB,GAAG,GAAnB,CAzBoB,CA2BhD;;AACA,MAAIH,QAAQ,CAACW,IAAT,IAAiB,CAAjB,IAAsBX,QAAQ,CAACY,KAAT,IAAkBN,MAAM,CAACO,UAAnD,EAA+D;AAC7DX,IAAAA,eAAe,GAAG,GAAlB;AACD,GAFD,MAEO;AACL,QAAMY,QAAQ,GAAGd,QAAQ,CAACY,KAAT,GAAiBZ,QAAQ,CAACW,IAA3C;;AACA,QAAIX,QAAQ,CAACW,IAAT,GAAgB,CAApB,EAAuB;AACrBT,MAAAA,eAAe,IAAK,MAAMY,QAAP,IAAoBd,QAAQ,CAACW,IAAT,GAAgB,CAAC,CAArC,CAAnB;AACD;;AACD,QAAIX,QAAQ,CAACY,KAAT,GAAiBN,MAAM,CAACO,UAA5B,EAAwC;AACtCX,MAAAA,eAAe,IACZ,MAAMY,QAAP,IAAoBd,QAAQ,CAACY,KAAT,GAAiBN,MAAM,CAACO,UAA5C,CADF;AAED;AACF;;AACDX,EAAAA,eAAe,GAAGO,IAAI,CAACC,KAAL,CAAWR,eAAX,CAAlB;AACA,MAAIA,eAAe,GAAG,CAAtB,EAAyBA,eAAe,GAAG,CAAlB;AACzB,MAAIA,eAAe,GAAG,GAAtB,EAA2BA,eAAe,GAAG,GAAlB,CA1CqB,CA4ChD;;AACA,SAAOO,IAAI,CAACC,KAAL,CAAY,OAAO,MAAM,GAAb,CAAD,IAAuBR,eAAe,GAAGC,gBAAzC,CAAX,CAAP;AACD",
+    "sourcesContent": [
+        "import __isVisible from './isVisible';\n\n/**\n * @name      inViewportPercentage\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Return how many percent the passed element is visible in the viewport\n *\n * @param \t\t{HTMLElement} \t\t\t\telm  \t\tThe element to get the in viewport percentage from\n * @return \t\t{Number} \t\t\t\t\t\t\t\tThe percentage visible in the viewport\n *\n * @example  \tjs\n * import inViewportPercentage from '@coffeekraken/sugar/js/dom/inViewportPercentage'\n * const percentage = inViewportPercentage(myCoolHTMLElement);\n * // 20\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function inViewportPercentage(elm) {\n  // if not visible at all\n  if (!__isVisible(elm)) return 0;\n\n  // calculate the visible percentage\n  const bounding = elm.getBoundingClientRect();\n\n  let percentageWidth = 100,\n    percentageHeight = 100;\n\n  // percentageHeight\n  if (bounding.top >= 0 && bounding.bottom <= window.innerHeight) {\n    percentageHeight = 100;\n  } else {\n    const elmHeight = bounding.bottom - bounding.top;\n    if (bounding.top < 0) {\n      percentageHeight -= (100 / elmHeight) * (bounding.top * -1);\n    }\n    if (bounding.bottom > window.innerHeight) {\n      percentageHeight -=\n        (100 / elmHeight) * (bounding.bottom - window.innerHeight);\n    }\n  }\n  percentageHeight = Math.round(percentageHeight);\n  if (percentageHeight < 0) percentageHeight = 0;\n  if (percentageHeight > 100) percentageHeight = 100;\n\n  // percentageWidth\n  if (bounding.left >= 0 && bounding.right <= window.innerWidth) {\n    percentageWidth = 100;\n  } else {\n    const elmWidth = bounding.right - bounding.left;\n    if (bounding.left < 0) {\n      percentageWidth -= (100 / elmWidth) * (bounding.left * -1);\n    }\n    if (bounding.right > window.innerWidth) {\n      percentageWidth -=\n        (100 / elmWidth) * (bounding.right - window.innerWidth);\n    }\n  }\n  percentageWidth = Math.round(percentageWidth);\n  if (percentageWidth < 0) percentageWidth = 0;\n  if (percentageWidth > 100) percentageWidth = 100;\n\n  // calculate the percentage in total\n  return Math.round((100 / (100 * 100)) * (percentageWidth * percentageHeight));\n}\n"
+    ]
+}

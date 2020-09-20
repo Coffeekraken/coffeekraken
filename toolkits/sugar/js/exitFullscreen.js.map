@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "exitFullscreen.js"
+    ],
+    "names": [
+        "exitFullscreen",
+        "document",
+        "cancelFullScreen",
+        "mozCancelFullScreen",
+        "webkitCancelFullScreen"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;AAee,SAASA,cAAT,GAA0B;AACvC,MAAIC,QAAQ,CAACC,gBAAb,EAA+B;AAC7B,WAAOD,QAAQ,CAACC,gBAAT,EAAP;AACD,GAFD,MAEO,IAAID,QAAQ,CAACE,mBAAb,EAAkC;AACvC,WAAOF,QAAQ,CAACE,mBAAT,EAAP;AACD,GAFM,MAEA,IAAIF,QAAQ,CAACG,sBAAb,EAAqC;AAC1C,WAAOH,QAAQ,CAACG,sBAAT,EAAP;AACD;AACF",
+    "sourcesContent": [
+        "/**\n * @name      exitFullscreen\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Exit the fullscreen mode\n *\n * @return    {Promise}    Returns a Promise which is resolved once full-screen mode has been desactivated.\n *\n * @example    js\n * import exitFullscreen from '@coffeekraken/sugar/js/dom/exitFullscreen'\n * exitFullscreen()\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function exitFullscreen() {\n  if (document.cancelFullScreen) {\n    return document.cancelFullScreen();\n  } else if (document.mozCancelFullScreen) {\n    return document.mozCancelFullScreen();\n  } else if (document.webkitCancelFullScreen) {\n    return document.webkitCancelFullScreen();\n  }\n}\n"
+    ]
+}

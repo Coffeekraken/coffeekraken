@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "sources": [
+        "uniqid.js"
+    ],
+    "names": [
+        "uniqid"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AACA;;;;;;;;;;;;;;;;AAgBe,SAASA,MAAT,GAAkB;AAC/B,SAAO,sBAAP;AACD",
+    "sourcesContent": [
+        "import __uniqid from 'uniqid';\n/**\n * @name          uniqid\n * @namespace           sugar.js.string\n * @type          Function\n *\n * Generate a uniqid string of 8 bytes. Work using the [uniqid](https://www.npmjs.com/package/uniqid) npm package under the hood.\n *\n * @return          {String}                A 8 bytes uniqid string\n *\n * @example       js\n * import uniqid from '@coffeekraken/sugar/js/string/uniqid';\n * console.log(uniqid()); // => 4n5pxq24\n *\n * @see       https://www.npmjs.com/package/uniqid\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function uniqid() {\n  return __uniqid();\n}\n"
+    ]
+}

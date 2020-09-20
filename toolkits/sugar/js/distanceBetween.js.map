@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "sources": [
+        "distanceBetween.js"
+    ],
+    "names": [
+        "distanceBetween",
+        "point1",
+        "point2",
+        "xs",
+        "ys",
+        "x",
+        "y",
+        "Math",
+        "sqrt"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;;;AAqBe,SAASA,eAAT,CAAyBC,MAAzB,EAAiCC,MAAjC,EAAyC;AACtD,MAAIC,EAAE,GAAG,CAAT;AACA,MAAIC,EAAE,GAAG,CAAT;AAEAD,EAAAA,EAAE,GAAGD,MAAM,CAACG,CAAP,GAAWJ,MAAM,CAACI,CAAvB;AACAF,EAAAA,EAAE,GAAGA,EAAE,GAAGA,EAAV;AAEAC,EAAAA,EAAE,GAAGF,MAAM,CAACI,CAAP,GAAWL,MAAM,CAACK,CAAvB;AACAF,EAAAA,EAAE,GAAGA,EAAE,GAAGA,EAAV;AAEA,SAAOG,IAAI,CAACC,IAAL,CAAUL,EAAE,GAAGC,EAAf,CAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name \t\tdistanceBetween\n * @namespace           sugar.js.geom.2d\n * @type      Function\n *\n * Get the distance between two points\n *\n * @param    {Point}    point1    The point 1, x and y value\n * @param    {Point}    point2    The point 2, x and y value\n * @return    {Number}    The distance between the two points\n *\n * @example    js\n * import distanceBetween from '@coffeekraken/sugar/js/geom/2d/distanceBetween'\n * distanceBetween({\n * \tx: 10, y: 20\n * }, {\n * \tx: 10, y: 30\n * }) // 10\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function distanceBetween(point1, point2) {\n  var xs = 0;\n  var ys = 0;\n\n  xs = point2.x - point1.x;\n  xs = xs * xs;\n\n  ys = point2.y - point1.y;\n  ys = ys * ys;\n\n  return Math.sqrt(xs + ys);\n}\n"
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "sources": [
+        "flatten.js"
+    ],
+    "names": [
+        "flatten",
+        "object",
+        "separation",
+        "flattenArrays",
+        "toReturn",
+        "i",
+        "hasOwnProperty",
+        "Array",
+        "isArray",
+        "flatObject",
+        "x"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;;;;AAsBe,SAASA,OAAT,CACbC,MADa,EAEbC,UAFa,EAGbC,aAHa,EAIb;AAAA,MAFAD,UAEA;AAFAA,IAAAA,UAEA,GAFa,GAEb;AAAA;;AAAA,MADAC,aACA;AADAA,IAAAA,aACA,GADgB,KAChB;AAAA;;AACA,MAAIC,QAAQ,GAAG,EAAf;;AAEA,OAAK,IAAIC,CAAT,IAAcJ,MAAd,EAAsB;AACpB,QAAI,CAACA,MAAM,CAACK,cAAP,CAAsBD,CAAtB,CAAL,EAA+B;;AAE/B,QACGE,KAAK,CAACC,OAAN,CAAcP,MAAM,CAACI,CAAD,CAApB,KAA4BF,aAA7B,IACA,CAAC,CAACI,KAAK,CAACC,OAAN,CAAcP,MAAM,CAACI,CAAD,CAApB,CAAD,IAA6B,OAAOJ,MAAM,CAACI,CAAD,CAA3C,KAAmD,QAFrD,EAGE;AACA,UAAII,UAAU,GAAGT,OAAO,CAACC,MAAM,CAACI,CAAD,CAAP,EAAYH,UAAZ,EAAwBC,aAAxB,CAAxB;;AACA,WAAK,IAAIO,CAAT,IAAcD,UAAd,EAA0B;AACxB,YAAI,CAACA,UAAU,CAACH,cAAX,CAA0BI,CAA1B,CAAL,EAAmC;AAEnCN,QAAAA,QAAQ,CAACC,CAAC,GAAGH,UAAJ,GAAiBQ,CAAlB,CAAR,GAA+BD,UAAU,CAACC,CAAD,CAAzC;AACD;AACF,KAVD,MAUO;AACLN,MAAAA,QAAQ,CAACC,CAAD,CAAR,GAAcJ,MAAM,CAACI,CAAD,CAApB;AACD;AACF;;AACD,SAAOD,QAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name                              flatten\n * @namespace           sugar.js.object\n * @type                              Function\n *\n * Transform the passed multiple level object into a single level one\n *\n * @param               {Object}                          object                    The object to flatten\n * @param               {String}                          [separation=\".\"]          The separation character to use for preperty names\n * @param \t\t\t\t\t\t\t{Boolean}\t\t\t\t\t\t\t\t\t\t\t\t\t[flattenArrays=false] \t\tSpecify if you want to flatten arrays or not\n * @return              {Object}                                                    The flatten object\n *\n * @example             js\n * import flatten from '@coffeekraken/sugar/js/object/flatten';\n * flatten({\n *    hello: {\n *      world: 'Coco'\n *    }\n * });\n *\n * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function flatten(\n  object,\n  separation = '.',\n  flattenArrays = false\n) {\n  let toReturn = {};\n\n  for (let i in object) {\n    if (!object.hasOwnProperty(i)) continue;\n\n    if (\n      (Array.isArray(object[i]) && flattenArrays) ||\n      (!Array.isArray(object[i]) && typeof object[i]) == 'object'\n    ) {\n      let flatObject = flatten(object[i], separation, flattenArrays);\n      for (let x in flatObject) {\n        if (!flatObject.hasOwnProperty(x)) continue;\n\n        toReturn[i + separation + x] = flatObject[x];\n      }\n    } else {\n      toReturn[i] = object[i];\n    }\n  }\n  return toReturn;\n}\n"
+    ]
+}

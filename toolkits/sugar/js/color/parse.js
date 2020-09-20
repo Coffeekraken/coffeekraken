@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name            parse
- * @namespace           js.color
+ * @namespace           sugar.js.color
  * @type            Function
  * @private
  *

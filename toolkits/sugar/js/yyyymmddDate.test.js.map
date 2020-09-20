@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "yyyymmddDate.test.js"
+    ],
+    "names": [
+        "__yyyymmddDate",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,cAAc,GAAGC,OAAO,CAAC,iBAAD,CAA9B;;AACAA,OAAO,CAAC,gBAAD,CAAP,CAA0BD,cAA1B",
+    "sourcesContent": [
+        "const __yyyymmddDate = require('../yyyymmddDate');\nrequire('./yyyymmddDate')(__yyyymmddDate);"
+    ]
+}

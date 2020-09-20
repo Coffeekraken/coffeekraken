@@ -1,0 +1,27 @@
+{
+    "version": 3,
+    "sources": [
+        "completeArgsObject.js"
+    ],
+    "names": [
+        "completeArgsObject",
+        "argsObj",
+        "definitionObj",
+        "settings",
+        "Object",
+        "assign",
+        "throw",
+        "keys",
+        "forEach",
+        "argString",
+        "argDefinitionObj",
+        "undefined",
+        "default",
+        "argsValidationResult",
+        "Error"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;AAoBe,SAASA,kBAAT,CACbC,OADa,EAEbC,aAFa,EAGbC,QAHa,EAIb;AAAA,MADAA,QACA;AADAA,IAAAA,QACA,GADW,EACX;AAAA;;AACAF,EAAAA,OAAO,GAAGG,MAAM,CAACC,MAAP,CAAc,EAAd,EAAkBJ,OAAlB,CAAV;AAEAE,EAAAA,QAAQ,GAAG,wBACT;AACEG,IAAAA,KAAK,EAAE;AADT,GADS,EAITH,QAJS,CAAX,CAHA,CAUA;;AACAC,EAAAA,MAAM,CAACG,IAAP,CAAYL,aAAZ,EAA2BM,OAA3B,CAAoCC,SAAD,IAAe;AAChD,QAAMC,gBAAgB,GAAGR,aAAa,CAACO,SAAD,CAAtC,CADgD,CAGhD;;AACA,QACER,OAAO,CAACQ,SAAD,CAAP,KAAuBE,SAAvB,IACAD,gBAAgB,CAACE,OAAjB,KAA6BD,SAF/B,EAGE;AACAV,MAAAA,OAAO,CAACQ,SAAD,CAAP,GAAqBC,gBAAgB,CAACE,OAAtC;AACD;AACF,GAVD,EAXA,CAuBA;;AACA,MAAMC,oBAAoB,GAAG,6BAC3BZ,OAD2B,EAE3BC,aAF2B,EAG3BC,QAH2B,CAA7B;AAMA,MAAIU,oBAAoB,KAAK,IAAzB,IAAiCV,QAAQ,CAACG,KAA9C,EACE,MAAM,IAAIQ,KAAJ,CAAU,uBAAWD,oBAAX,CAAV,CAAN,CADF,KAEK,IAAIA,oBAAoB,KAAK,IAA7B,EAAmC,OAAOA,oBAAP,CAhCxC,CAkCA;;AACA,SAAO,sBAAUZ,OAAV,CAAP;AACD",
+    "sourcesContent": [
+        "import __deepize from '../object/deepize';\nimport __deepMerge from '../object/deepMerge';\nimport __toString from '../string/toString';\nimport __validateObject from '../validation/object/validateObject';\n\n/**\n * @name                completeArgsObject\n * @namespace          sugar.js.cli\n * @type                Function\n *\n * This function take an arguments object and complete it with the definition object default values\n * for missing args\n *\n * @param             {Object}            argsObj         The arguments object to complete\n * @param             {Object}            definitionObj     The definition object to use\n * @param             {Object}            [settings={}]       An object of settings to configure your process:\n * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails\n * @return            {Object}                            The completed arguments object\n *\n * @example         js\n * import completeArgsObject from '@coffeekraken/sugar/js/cli/completeArgsObject';\n *\n * @since       2.0.0\n *\n */\nexport default function completeArgsObject(\n  argsObj,\n  definitionObj,\n  settings = {}\n) {\n  argsObj = Object.assign({}, argsObj);\n\n  settings = __deepMerge(\n    {\n      throw: true\n    },\n    settings\n  );\n\n  // loop on all the arguments\n  Object.keys(definitionObj).forEach((argString) => {\n    const argDefinitionObj = definitionObj[argString];\n\n    // check if we have an argument passed in the properties\n    if (\n      argsObj[argString] === undefined &&\n      argDefinitionObj.default !== undefined\n    ) {\n      argsObj[argString] = argDefinitionObj.default;\n    }\n  });\n\n  // make sure all is ok\n  const argsValidationResult = __validateObject(\n    argsObj,\n    definitionObj,\n    settings\n  );\n\n  if (argsValidationResult !== true && settings.throw)\n    throw new Error(__toString(argsValidationResult));\n  else if (argsValidationResult !== true) return argsValidationResult;\n\n  // return the argsObj\n  return __deepize(argsObj);\n}\n"
+    ]
+}

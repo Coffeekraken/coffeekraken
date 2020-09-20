@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "trimLines.test.js"
+    ],
+    "names": [
+        "__trimLines",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,WAAW,GAAGC,OAAO,CAAC,cAAD,CAA3B;;AACAA,OAAO,CAAC,aAAD,CAAP,CAAuBD,WAAvB",
+    "sourcesContent": [
+        "const __trimLines = require('../trimLines');\nrequire('./trimLines')(__trimLines);\n"
+    ]
+}

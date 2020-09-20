@@ -1,0 +1,36 @@
+{
+    "version": 3,
+    "sources": [
+        "imagesLoaded.test.js"
+    ],
+    "names": [
+        "__imagesLoaded",
+        "require",
+        "__dispatchEvent",
+        "describe",
+        "document",
+        "head",
+        "innerHTML",
+        "$img1",
+        "querySelector",
+        "$img2",
+        "$img3",
+        "isLoaded",
+        "isError",
+        "imgsCount",
+        "on",
+        "_$img",
+        "then",
+        "arrayImages",
+        "catch",
+        "e",
+        "it",
+        "setTimeout",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;AAAA,IAAMA,cAAc,GAAGC,OAAO,CAAC,iBAAD,CAA9B;;AACA,IAAMC,eAAe,GAAGD,OAAO,CAAC,kBAAD,CAA/B;;AAEAE,QAAQ,CAAC,2BAAD,EAA8B,MAAM;AAC1CC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAKA,MAAMC,KAAK,GAAGH,QAAQ,CAACC,IAAT,CAAcG,aAAd,CAA4B,SAA5B,CAAd;AACA,MAAMC,KAAK,GAAGL,QAAQ,CAACC,IAAT,CAAcG,aAAd,CAA4B,SAA5B,CAAd;AACA,MAAME,KAAK,GAAGN,QAAQ,CAACC,IAAT,CAAcG,aAAd,CAA4B,SAA5B,CAAd;AAEA,MAAIG,QAAQ,GAAG,KAAf;AAAA,MACEC,OAAO,GAAG,KADZ;AAAA,MAEEC,SAAS,GAAG,CAFd;;AAIAb,EAAAA,cAAc,CAAC,CAACO,KAAD,EAAQE,KAAR,EAAeC,KAAf,CAAD,CAAd,CACGI,EADH,CACM,YADN,EACqBC,KAAD,IAAW;AAC3BF,IAAAA,SAAS;AACV,GAHH,EAIGG,IAJH,CAISC,WAAD,IAAiB;AACrBN,IAAAA,QAAQ,GAAG,IAAX;AACD,GANH,EAOGO,KAPH,CAOUC,CAAD,IAAO;AACZP,IAAAA,OAAO,GAAG,IAAV;AACD,GATH;;AAWAV,EAAAA,eAAe,CAACK,KAAD,EAAQ,MAAR,CAAf;;AACAL,EAAAA,eAAe,CAACO,KAAD,EAAQ,MAAR,CAAf;;AACAP,EAAAA,eAAe,CAACQ,KAAD,EAAQ,MAAR,CAAf;;AAEAU,EAAAA,EAAE,CAAC,wDAAD,EAA2D,MAAM;AACjEC,IAAAA,UAAU,CAAC,MAAM;AACfC,MAAAA,MAAM,CAACX,QAAD,CAAN,CAAiBY,IAAjB,CAAsB,IAAtB;AACAD,MAAAA,MAAM,CAACV,OAAD,CAAN,CAAgBW,IAAhB,CAAqB,KAArB;AACAD,MAAAA,MAAM,CAACT,SAAD,CAAN,CAAkBU,IAAlB,CAAuB,CAAvB;AACD,KAJS,CAAV;AAKD,GANC,CAAF;AAOD,CApCO,CAAR",
+    "sourcesContent": [
+        "const __imagesLoaded = require('../imagesLoaded');\nconst __dispatchEvent = require('../dispatchEvent');\n\ndescribe('sugar.js.dom.imagesLoaded', () => {\n  document.head.innerHTML = `\n    <img id=\"image1\" src=\"src/data/tests/testing.jpg\" />\n    <img id=\"image2\" src=\"src/data/tests/testing.jpg\" />\n    <img id=\"image3\" src=\"src/data/tests/testing.jpg\" />\n  `;\n  const $img1 = document.head.querySelector('#image1');\n  const $img2 = document.head.querySelector('#image2');\n  const $img3 = document.head.querySelector('#image3');\n\n  let isLoaded = false,\n    isError = false,\n    imgsCount = 0;\n\n  __imagesLoaded([$img1, $img2, $img3])\n    .on('img.loaded', (_$img) => {\n      imgsCount++;\n    })\n    .then((arrayImages) => {\n      isLoaded = true;\n    })\n    .catch((e) => {\n      isError = true;\n    });\n\n  __dispatchEvent($img1, 'load');\n  __dispatchEvent($img2, 'load');\n  __dispatchEvent($img3, 'load');\n\n  it('Should detect when all the images are loaded correctly', () => {\n    setTimeout(() => {\n      expect(isLoaded).toBe(true);\n      expect(isError).toBe(false);\n      expect(imgsCount).toBe(3);\n    });\n  });\n});\n"
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "getKeyByValue.js"
+    ],
+    "names": [
+        "getKeyByValue",
+        "object",
+        "value",
+        "Object",
+        "keys",
+        "find",
+        "key"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;AAiBe,SAASA,aAAT,CAAuBC,MAAvB,EAA+BC,KAA/B,EAAsC;AACnD,SAAOC,MAAM,CAACC,IAAP,CAAYH,MAAZ,EAAoBI,IAApB,CAA0BC,GAAD,IAASL,MAAM,CAACK,GAAD,CAAN,KAAgBJ,KAAlD,CAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name          getKeyByValue\n * @namespace           sugar.js.object\n * @type          Function\n *\n * Return the key that correspond to the passed value in the passed object\n *\n * @param         {Object}        object        The object in which to search for the value\n * @param         {Mixed}         value         The value to find in the object\n * @return        {String}                      The key of the wanted value or false if not found\n *\n * @example       js\n * import getKeyByValue from '@coffeekraken/sugar/js/object/getKeyByValue';\n * console.log(getKeyByValue({ hello: 'world' }, 'world')); // => hello\n *\n * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function getKeyByValue(object, value) {\n  return Object.keys(object).find((key) => object[key] === value);\n}\n"
+    ]
+}

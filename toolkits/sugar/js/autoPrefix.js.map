@@ -1,0 +1,38 @@
+{
+    "version": 3,
+    "sources": [
+        "autoPrefix.js"
+    ],
+    "names": [
+        "autoPrefix",
+        "style",
+        "styleObj",
+        "prefixedStyleObj",
+        "parseCss",
+        "css",
+        "reg",
+        "console",
+        "log",
+        "exec",
+        "deepMap",
+        "object",
+        "handler",
+        "path",
+        "Array",
+        "isArray",
+        "forEach",
+        "item",
+        "i",
+        "newPath",
+        "Object",
+        "keys",
+        "itemName",
+        "itemValue",
+        "split",
+        "pop"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;AAEA;;;;AAEA;;;;;;;;;;;;;AAae,SAASA,UAAT,CAAoBC,KAApB,EAA2B;AACxC,MAAIC,QAAQ,GAAG,OAAOD,KAAP,KAAiB,QAAjB,GAA4BA,KAA5B,GAAoC,EAAnD;AACA,MAAIE,gBAAgB,GAAG,EAAvB,CAFwC,CAIxC;;AACA,MAAI,OAAOF,KAAP,KAAiB,QAArB,EAA+B,CAC7B;AACA;AACD;;AAEDG,EAAAA,QAAQ,CAACH,KAAD,CAAR,CAVwC,CAYxC;AAEA;AAEA;AACA;AAEA;AAEA;AAEA;AACA;AACA;AAEA;AACA;AAEA;AAEA;AAEA;AAEA;AACA;AAEA;;AAEA,SAAO,EAAP;AACD;;AAED,SAASG,QAAT,CAAkBC,GAAlB,EAAuB;AACrB;AACA,MAAMC,GAAG,GAAG,8BAAZ;AACAC,EAAAA,OAAO,CAACC,GAAR,CAAYF,GAAG,CAACG,IAAJ,CAASJ,GAAT,CAAZ;AACD;;AAED,SAASK,OAAT,CAAiBC,MAAjB,EAAyBC,OAAzB,EAAkCC,IAAlC,EAA6C;AAAA,MAAXA,IAAW;AAAXA,IAAAA,IAAW,GAAJ,EAAI;AAAA;;AAC3C,MAAIC,KAAK,CAACC,OAAN,CAAcJ,MAAd,CAAJ,EAA2B;AACzBA,IAAAA,MAAM,CAACK,OAAP,CAAe,CAACC,IAAD,EAAOC,CAAP,KAAa;AAC1B,UAAMC,OAAO,GAAGN,IAAI,KAAK,EAAT,aAAiBK,CAAjB,cAA0BL,IAA1B,cAAkCK,CAAlC,CAAhB;AACAR,MAAAA,OAAO,CAACO,IAAD,EAAOL,OAAP,EAAgBO,OAAhB,CAAP;AACD,KAHD;AAID,GALD,MAKO,IAAI,OAAOR,MAAP,KAAkB,QAAtB,EAAgC;AACrCS,IAAAA,MAAM,CAACC,IAAP,CAAYV,MAAZ,EAAoBK,OAApB,CAA6BM,QAAD,IAAc;AACxC,UAAMC,SAAS,GAAGZ,MAAM,CAACW,QAAD,CAAxB;AACA,UAAMH,OAAO,GAAGN,IAAI,KAAK,EAAT,aAAiBS,QAAjB,cAAiCT,IAAjC,cAAyCS,QAAzC,CAAhB;AACAZ,MAAAA,OAAO,CAACa,SAAD,EAAYX,OAAZ,EAAqBO,OAArB,CAAP;AACD,KAJD;AAKD,GANM,MAMA;AACLP,IAAAA,OAAO,CAACD,MAAD,EAASE,IAAI,CAACW,KAAL,CAAW,GAAX,EAAgBC,GAAhB,EAAT,EAAgCZ,IAAhC,CAAP;AACD;AACF",
+    "sourcesContent": [
+        "import { prefix } from 'inline-style-prefixer';\nimport css from 'css';\nimport __set from '../object/set';\nimport __get from '../object/get';\n\nimport { parse, stringify } from 'scss-parser';\n\n/**\n * @name                autoPrefix\n * @namespace           js.css\n * @type                Function\n *\n * Prefix your passed css style\n *\n * @param         {String}            style             The style you want to prefix in string format\n * @param         {String}            [return=null]     You can tell what you want back between \"string\" and \"object\". By default it will return the same style type that you have passed\n * @return        {String}                              The prefixed style\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function autoPrefix(style) {\n  let styleObj = typeof style === 'object' ? style : {};\n  let prefixedStyleObj = {};\n\n  // check the passed param\n  if (typeof style === 'string') {\n    // styleObj = css.parse(style);\n    // styleObj = parse(style);\n  }\n\n  parseCss(style);\n\n  // __set(styleObj, 'stylesheet.rules.0.selectors.0', 'yououououou');\n\n  // deepMap(styleObj, (value, name, path) => {\n\n  //   if (name === 'value') {\n  //     console.log(`.sel { ${value} }`);\n\n  //     // __set(styleObj, path, 'hello');\n\n  //     // __set(styleObj, path, css.parse(value));\n\n  //     // __set(styleObj, path, css.parse(`\n  //     // .sel { ${value} } `));\n  //   }\n\n  //   // console.log(path, name, value);\n  // });\n\n  // console.log(JSON.stringify(styleObj, null, 4));\n\n  // console.log(__get(styleObj, 'stylesheet.rules.0.selectors.0'));\n\n  // console.log(styleObj.stylesheet.rules[0].declarations);\n\n  // // prefixing the object\n  // prefixedStyleObj = prefix(styleObj);\n\n  // console.log(prefixedStyleObj);\n\n  return '';\n}\n\nfunction parseCss(css) {\n  // const reg = /[\\s\\S]+\\{[\\s\\S]+\\}$/gm;\n  const reg = /(\\/\\*\\@-.*?)(?=\\/\\*\\@-|\\z)/gm;\n  console.log(reg.exec(css));\n}\n\nfunction deepMap(object, handler, path = '') {\n  if (Array.isArray(object)) {\n    object.forEach((item, i) => {\n      const newPath = path === '' ? `${i}` : `${path}.${i}`;\n      deepMap(item, handler, newPath);\n    });\n  } else if (typeof object === 'object') {\n    Object.keys(object).forEach((itemName) => {\n      const itemValue = object[itemName];\n      const newPath = path === '' ? `${itemName}` : `${path}.${itemName}`;\n      deepMap(itemValue, handler, newPath);\n    });\n  } else {\n    handler(object, path.split('.').pop(), path);\n  }\n}\n"
+    ]
+}

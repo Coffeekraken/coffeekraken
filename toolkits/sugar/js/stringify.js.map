@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "sources": [
+        "stringify.js"
+    ],
+    "names": [
+        "stringify",
+        "obj",
+        "replacerOrSettings",
+        "settings",
+        "space",
+        "decircular",
+        "replacer",
+        "newObj",
+        "Object",
+        "assign",
+        "JSON"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;AAwBe,SAASA,SAAT,CACbC,GADa,EAEbC,kBAFa,EAGbC,QAHa,EAIb;AAAA,MAFAD,kBAEA;AAFAA,IAAAA,kBAEA,GAFqB,IAErB;AAAA;;AAAA,MADAC,QACA;AADAA,IAAAA,QACA,GADW,EACX;AAAA;;AACAA,EAAAA,QAAQ,GAAG,wBACT;AACEC,IAAAA,KAAK,EAAE,IADT;AAEEC,IAAAA,UAAU,EAAE;AAFd,GADS,EAKTH,kBAAkB,KAAK,IAAvB,IAA+B,OAAOA,kBAAP,KAA8B,QAA7D,GACIA,kBADJ,GAEIC,QAPK,CAAX;AASA,MAAMG,QAAQ,GACZ,OAAOJ,kBAAP,KAA8B,UAA9B,GAA2CA,kBAA3C,GAAgE,IADlE;AAGA,MAAIK,MAAM,GAAGC,MAAM,CAACC,MAAP,CAAc,EAAd,EAAkBR,GAAlB,CAAb;AACA,MAAIE,QAAQ,CAACE,UAAb,EAAyBE,MAAM,GAAG,yBAAQA,MAAR,CAAT;AACzB,SAAOG,IAAI,CAACV,SAAL,CAAeO,MAAf,EAAuBD,QAAvB,EAAiCH,QAAQ,CAACC,KAA1C,CAAP;AACD",
+    "sourcesContent": [
+        "import __deepMerge from '../object/deepMerge';\nimport { decycle } from 'json-cyclic';\n\n/**\n * @name            stringify\n * @namespace       sugar.js.json\n * @type            Function\n *\n * This function do the same as the ```JSON.stringify``` one but add some features.\n *\n * @feature       2.0.0         Remove circular dependencies by default\n *\n * @param         {Object}        obj       The object to stringify\n * @param         {Function}    [replacerOrSettings=null]       A function that alters the behavior of the stringification process. You can also pass the settings object here\n * @param         {Object}      [settings={}]         An object of settings to configure your process:\n * - space (null) {Number}: A String or Number object that's used to insert white space into the output JSON string\n * - decircular (true) {Boolean}: Specify if you want to remove circular dependencies or not\n *\n * @example         js\n * import stringify from '@coffeekraken/sugar/js/json/stringify';\n * stringify({\n *    hello: 'world'\n * }); // => {\"hello\":\"world\"}\n *\n * @since       2.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function stringify(\n  obj,\n  replacerOrSettings = null,\n  settings = {}\n) {\n  settings = __deepMerge(\n    {\n      space: null,\n      decircular: true\n    },\n    replacerOrSettings !== null && typeof replacerOrSettings === 'object'\n      ? replacerOrSettings\n      : settings\n  );\n  const replacer =\n    typeof replacerOrSettings === 'function' ? replacerOrSettings : null;\n\n  let newObj = Object.assign({}, obj);\n  if (settings.decircular) newObj = decycle(newObj);\n  return JSON.stringify(newObj, replacer, settings.space);\n}\n"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "plainObject.test.js"
+    ],
+    "names": [
+        "__plainObject",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,aAAa,GAAGC,OAAO,CAAC,gBAAD,CAA7B;;AACAA,OAAO,CAAC,eAAD,CAAP,CAAyBD,aAAzB",
+    "sourcesContent": [
+        "const __plainObject = require('../plainObject');\nrequire('./plainObject')(__plainObject);"
+    ]
+}

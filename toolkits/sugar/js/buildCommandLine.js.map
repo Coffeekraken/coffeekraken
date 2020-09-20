@@ -1,0 +1,33 @@
+{
+    "version": 3,
+    "sources": [
+        "buildCommandLine.js"
+    ],
+    "names": [
+        "buildCommandLine",
+        "command",
+        "definitionObj",
+        "args",
+        "settings",
+        "includeAllArgs",
+        "alias",
+        "Object",
+        "assign",
+        "tokens",
+        "match",
+        "forEach",
+        "token",
+        "tokenName",
+        "replace",
+        "tokenValue",
+        "undefined",
+        "default",
+        "tokenValueString",
+        "argsString",
+        "trim"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAmDe,SAASA,gBAAT,CACbC,OADa,EAEbC,aAFa,EAGbC,IAHa,EAIbC,QAJa,EAKb;AAAA,MAFAD,IAEA;AAFAA,IAAAA,IAEA,GAFO,EAEP;AAAA;;AAAA,MADAC,QACA;AADAA,IAAAA,QACA,GADW,EACX;AAAA;;AACAA,EAAAA,QAAQ,GAAG,wBACT;AACEC,IAAAA,cAAc,EAAE,IADlB;AAEEC,IAAAA,KAAK,EAAE;AAFT,GADS,EAKTF,QALS,CAAX;AAQAF,EAAAA,aAAa,GAAGK,MAAM,CAACC,MAAP,CAAc,EAAd,EAAkBN,aAAlB,CAAhB,CATA,CAUA;;AACA,MAAMO,MAAM,GAAGR,OAAO,CAACS,KAAR,CAAc,oBAAd,KAAuC,EAAtD;AACAD,EAAAA,MAAM,CAACE,OAAP,CAAgBC,KAAD,IAAW;AACxB,QAAMC,SAAS,GAAGD,KAAK,CAACE,OAAN,CAAc,GAAd,EAAmB,EAAnB,CAAlB;AACA,QAAID,SAAS,KAAK,WAAlB,EAA+B;AAC/B,QAAME,UAAU,GACdZ,IAAI,IAAIA,IAAI,CAACU,SAAD,CAAJ,KAAoBG,SAA5B,GACIb,IAAI,CAACU,SAAD,CADR,GAEIX,aAAa,CAACW,SAAD,CAAb,GACAX,aAAa,CAACW,SAAD,CAAb,CAAyBI,OADzB,GAEAD,SALN;AAMA,WAAOd,aAAa,CAACW,SAAD,CAApB;;AACA,QAAIE,UAAU,KAAKC,SAAnB,EAA8B;AAC5Bf,MAAAA,OAAO,GAAGA,OAAO,CAACa,OAAR,CAAgBF,KAAhB,EAAuB,EAAvB,CAAV;AACA;AACD;;AACD,QAAIM,gBAAgB,GAAG,uBAAWH,UAAX,CAAvB;AACAd,IAAAA,OAAO,GAAGA,OAAO,CAACa,OAAR,CAAgBF,KAAhB,EAAuBM,gBAAvB,CAAV;AACD,GAhBD,EAZA,CA8BA;;AACA,MAAMC,UAAU,GAAG,2BAAehB,IAAf,EAAqBD,aAArB,EAAoCE,QAApC,EAA8CgB,IAA9C,EAAnB;AACAnB,EAAAA,OAAO,GAAGA,OAAO,CAACa,OAAR,CAAgB,YAAhB,EAA8BK,UAA9B,CAAV;AAEA,SAAOlB,OAAO,CAACmB,IAAR,EAAP;AACD",
+    "sourcesContent": [
+        "import __toString from '../string/toString';\nimport __argsToString from './argsToString';\nimport __deepMerge from '../object/deepMerge';\n\n/**\n * @name            buildCommandLine\n * @namespace           sugar.js.cli\n * @type            Function\n *\n * This function takes as parameters a command line (with tokens), an arguments object and a definition object to\n * generate the final command line string to launch.\n * A token is simply a string that begin with \"[\" and end with \"]\" like so: \"[mytoken]\".\n * Each arguments of the definition object can be a token. If you have an argument called \"hostname\", the corresponding token will be \"[hostname]\".\n * A special token called \"[arguments]\" is needed if you want the passed arguments to be integrated to the builded command line.\n *\n * @param       {String}      command         The tokenized command line to use as base\n * @param       {Object}      definitionObj   The definition object of the command to launch\n * @param       {Object}      [args={}]       An optional arguments/values object to override definition default value\n * @param       {Object}      [settings={}]     An object of settings to configure your command line buildine process:\n * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument\n * - alias (true) {Boolean}: Specify if you want to make use of the aliases in your generated command\n * @return      {String}                      The builded command string\n *\n * @example       js\n * import buildCommandLine from '@coffeekraken/sugar/js/cli/buildCommandLine';\n * buildCommandLine('php [hostname]:[port] [rootDir] [arguments]', {\n *    hostname: {\n *      type: 'String',\n *      description: 'Server hostname',\n *      default: 'localhost'\n *    },\n *    port: {\n *      type: 'Number',\n *      description: 'Server port',\n *      default: 8080\n *    },\n *    rootDir: {\n *      type: 'String',\n *      description: 'Root directory',\n *      default: '.'\n *    },\n *    arg1: {\n *      type: 'Boolean',\n *      alias: 'a',\n *      description: 'Argument 1',\n *      default: true\n *    }\n * }, {\n *    port: 8888\n * });\n * // => php localhost:8888 . -a\n *\n * @since       2.0.0\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function buildCommandLine(\n  command,\n  definitionObj,\n  args = {},\n  settings = {}\n) {\n  settings = __deepMerge(\n    {\n      includeAllArgs: true,\n      alias: true\n    },\n    settings\n  );\n\n  definitionObj = Object.assign({}, definitionObj);\n  // get all the tokens\n  const tokens = command.match(/\\%[a-zA-Z0-9-_]+/gm) || [];\n  tokens.forEach((token) => {\n    const tokenName = token.replace('%', '');\n    if (tokenName === 'arguments') return;\n    const tokenValue =\n      args && args[tokenName] !== undefined\n        ? args[tokenName]\n        : definitionObj[tokenName]\n        ? definitionObj[tokenName].default\n        : undefined;\n    delete definitionObj[tokenName];\n    if (tokenValue === undefined) {\n      command = command.replace(token, '');\n      return;\n    }\n    let tokenValueString = __toString(tokenValue);\n    command = command.replace(token, tokenValueString);\n  });\n\n  // args to string\n  const argsString = __argsToString(args, definitionObj, settings).trim();\n  command = command.replace('%arguments', argsString);\n\n  return command.trim();\n}\n"
+    ]
+}

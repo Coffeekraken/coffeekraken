@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "get.js"
+    ],
+    "names": [
+        "obj",
+        "path",
+        "undefined",
+        "replace",
+        "a",
+        "split",
+        "o",
+        "length",
+        "n",
+        "shift"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;eAgBe,CAACA,GAAD,EAAMC,IAAN,KAAe;AAC5B,MAAID,GAAG,CAACC,IAAD,CAAH,KAAcC,SAAlB,EAA6B,OAAOF,GAAG,CAACC,IAAD,CAAV;AAC7B,MAAI,CAACA,IAAD,IAASA,IAAI,KAAK,EAAlB,IAAwBA,IAAI,KAAK,GAArC,EAA0C,OAAOD,GAAP;AAC1CC,EAAAA,IAAI,GAAGA,IAAI,CAACE,OAAL,CAAa,YAAb,EAA2B,KAA3B,CAAP;AACAF,EAAAA,IAAI,GAAGA,IAAI,CAACE,OAAL,CAAa,KAAb,EAAoB,EAApB,CAAP;AACA,MAAIC,CAAC,GAAGH,IAAI,CAACI,KAAL,CAAW,GAAX,CAAR;AACA,MAAIC,CAAC,GAAGN,GAAR;;AACA,SAAOI,CAAC,CAACG,MAAT,EAAiB;AACf,QAAIC,CAAC,GAAGJ,CAAC,CAACK,KAAF,EAAR;AACA,QAAI,OAAOH,CAAP,KAAa,QAAjB,EAA2B;AAC3B,QAAI,EAAEE,CAAC,IAAIF,CAAP,CAAJ,EAAe;AACfA,IAAAA,CAAC,GAAGA,CAAC,CAACE,CAAD,CAAL;AACD;;AACD,SAAOF,CAAP;AACD,C",
+    "sourcesContent": [
+        "/**\n * @name                          get\n * @namespace           sugar.js.object\n * @type                          Function\n *\n * Retreive an object value using a dotted path like \"myObject.myProperty.myValue\"\n *\n * @param               {Object}                 obj                The object in which to set the value\n * @param               {String}                path                The dotted object path to get\n * @return              {Mixed}                                     The getted value or \"undefined\" if nothing found...\n *\n * @example             js\n * import get from '@coffeekraken/sugar/js/object/get';\n * get('myObject.cool.value'); // => 'Hello world'\n *\n */\nexport default (obj, path) => {\n  if (obj[path] !== undefined) return obj[path];\n  if (!path || path === '' || path === '.') return obj;\n  path = path.replace(/\\[(\\w+)\\]/g, '.$1');\n  path = path.replace(/^\\./, '');\n  var a = path.split('.');\n  var o = obj;\n  while (a.length) {\n    var n = a.shift();\n    if (typeof o !== 'object') return;\n    if (!(n in o)) return;\n    o = o[n];\n  }\n  return o;\n};\n"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "sort.test.js"
+    ],
+    "names": [
+        "__sort",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,MAAM,GAAGC,OAAO,CAAC,SAAD,CAAtB;;AACAA,OAAO,CAAC,QAAD,CAAP,CAAkBD,MAAlB",
+    "sourcesContent": [
+        "const __sort = require('../sort');\nrequire('./sort')(__sort);"
+    ]
+}

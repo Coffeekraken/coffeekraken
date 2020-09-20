@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "sources": [
+        "querySelector.js"
+    ],
+    "names": [
+        "querySelector",
+        "selector",
+        "settings",
+        "visible",
+        "inViewport",
+        "rootNode",
+        "document",
+        "body",
+        "elm",
+        "isVisible",
+        "isInViewport"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;;;;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;AAyBA;;;;;;;;AAQA;;;;;;;;AAQA;;;;;;;AAQe,SAASA,aAAT,CAAuBC,QAAvB,EAAiCC,QAAjC,EAAgD;AAAA,MAAfA,QAAe;AAAfA,IAAAA,QAAe,GAAJ,EAAI;AAAA;;AAC7D;AACAA,EAAAA,QAAQ;AACNC,IAAAA,OAAO,EAAE,IADH;AAENC,IAAAA,UAAU,EAAE,IAFN;AAGNC,IAAAA,QAAQ,EAAEC,QAAQ,CAACC;AAHb,KAIHL,QAJG,CAAR,CAF6D,CAS7D;;AACA,MAAMM,GAAG,GAAGN,QAAQ,CAACG,QAAT,CAAkBL,aAAlB,CAAgCC,QAAhC,CAAZ,CAV6D,CAW7D;;AACA,MAAI,CAACO,GAAL,EAAU,OAAO,IAAP,CAZmD,CAc7D;;AACA,MAAIC,SAAS,GAAG,IAAhB;AACA,MAAIC,YAAY,GAAG,IAAnB,CAhB6D,CAkB7D;;AACA,MAAIR,QAAQ,CAACC,OAAb,EAAsB;AACpB,QAAI,CAAC,wBAAYK,GAAZ,CAAD,IAAqB,CAAC,gCAAoBA,GAApB,CAA1B,EAAoD,OAAO,IAAP;AACrD;;AACD,MAAIN,QAAQ,CAACE,UAAb,EAAyB;AACvB,QAAI,CAAC,2BAAeI,GAAf,CAAL,EAA0B,OAAO,IAAP;AAC3B,GAxB4D,CA0B7D;;;AACA,SAAOA,GAAP;AACD",
+    "sourcesContent": [
+        "import __isVisible from './isVisible';\nimport __isInViewport from './isInViewport';\nimport __closestNotVisible from './closestNotVisible';\n\n/**\n * @name      querySelector\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Enhanced proxy of the Element.querySelector function that let you specify\n * if you want an element that is visible, or even that is in the viewport\n *\n * @param \t\t{String} \t\t\tselector \t\t\tThe css selector to search\n * @param \t\t{Object} \t\t\tsettings\t \t\tThe settings of the query\n * @return \t\t{HTMLElement} \t\t\t\t\t\t\tThe founded element\n *\n * @example \tjs\n * import querySelector from '@coffeekraken/sugar/js/dom/querySelector';\n * // simple query\n * const elm = querySelector('.a-cool-css-selector');\n *\n * // get an element that is in the viewport\n * const elm = querySelector('.a-cool-css-selector', {\n * \t\tinViewport : true\n * });\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n\n/**\n * If we want only a visible element\n * @setting\n * @name \t\tvisible\n * @type \t\t{Boolean}\n * @default \tfalse\n */\n\n/**\n * If we want only an element that is in the viewport\n * @setting\n * @name \t\tinViewport\n * @type \t\t{Boolean}\n * @default \tfalse\n */\n\n/**\n * The root node to start the query from\n * @setting\n * @name \t\trootNode\n * @type \t\t{HTMLElement}\n * @default \tdocument.body\n */\n\nexport default function querySelector(selector, settings = {}) {\n  // extend settings\n  settings = {\n    visible: null,\n    inViewport: null,\n    rootNode: document.body,\n    ...settings\n  };\n\n  // grab the element into the dom\n  const elm = settings.rootNode.querySelector(selector);\n  // if no element, stop here\n  if (!elm) return null;\n\n  // state tracking\n  let isVisible = true;\n  let isInViewport = true;\n\n  // check settings\n  if (settings.visible) {\n    if (!__isVisible(elm) || !__closestNotVisible(elm)) return null;\n  }\n  if (settings.inViewport) {\n    if (!__isInViewport(elm)) return null;\n  }\n\n  // return the element\n  return elm;\n}\n"
+    ]
+}

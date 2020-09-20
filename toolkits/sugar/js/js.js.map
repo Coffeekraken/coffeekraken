@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "sources": [
+        "js.js"
+    ],
+    "names": [
+        "window"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;eAee,MAAM;AACnB,SAAO,OAAOA,MAAP,KAAkB,WAAzB;AACD,C",
+    "sourcesContent": [
+        "/**\n * @name                                      isJs\n * @namespace           sugar.js.is\n * @type                                      Function\n *\n * Check if the current script is running under javascript runtime or not...\n *\n * @return                {Boolean}                           true if running under javascript runtime, false if not...\n *\n * @example               js\n * import isJs from '@coffeekraken/sugar/js/is/js';\n * isJs(); // => true\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default () => {\n  return typeof window !== 'undefined';\n};\n"
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "sources": [
+        "console.js"
+    ],
+    "names": [
+        "__chalk",
+        "level",
+        "console",
+        "text",
+        "black",
+        "tag",
+        "content",
+        "red",
+        "green",
+        "yellow",
+        "blue",
+        "magenta",
+        "cyan",
+        "white",
+        "bgBlack",
+        "bgRed",
+        "bgGreen",
+        "bgYellow",
+        "bgBlue",
+        "bgMagenta",
+        "bgCyan",
+        "bgWhite",
+        "bold",
+        "dim",
+        "italic",
+        "underline",
+        "strike",
+        "br"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;AACAA,eAAQC,KAAR,GAAgB,CAAhB;AAEA;;;;;;;;;;;;;AAYe,SAASC,OAAT,CAAiBC,IAAjB,EAAuB;AACpC,SAAO,0BAAcA,IAAd,EAAoB;AACzBC,IAAAA,KAAK,EAAE,CAACC,GAAD,EAAMC,OAAN,KAAkBN,eAAQI,KAAR,CAAcE,OAAd,CADA;AAEzBC,IAAAA,GAAG,EAAE,CAACF,GAAD,EAAMC,OAAN,KAAkBN,eAAQO,GAAR,CAAYD,OAAZ,CAFE;AAGzBE,IAAAA,KAAK,EAAE,CAACH,GAAD,EAAMC,OAAN,KAAkBN,eAAQQ,KAAR,CAAcF,OAAd,CAHA;AAIzBG,IAAAA,MAAM,EAAE,CAACJ,GAAD,EAAMC,OAAN,KAAkBN,eAAQS,MAAR,CAAeH,OAAf,CAJD;AAKzBI,IAAAA,IAAI,EAAE,CAACL,GAAD,EAAMC,OAAN,KAAkBN,eAAQU,IAAR,CAAaJ,OAAb,CALC;AAMzBK,IAAAA,OAAO,EAAE,CAACN,GAAD,EAAMC,OAAN,KAAkBN,eAAQW,OAAR,CAAgBL,OAAhB,CANF;AAOzBM,IAAAA,IAAI,EAAE,CAACP,GAAD,EAAMC,OAAN,KAAkBN,eAAQY,IAAR,CAAaN,OAAb,CAPC;AAQzBO,IAAAA,KAAK,EAAE,CAACR,GAAD,EAAMC,OAAN,KAAkBN,eAAQa,KAAR,CAAcP,OAAd,CARA;AAUzBQ,IAAAA,OAAO,EAAE,CAACT,GAAD,EAAMC,OAAN,KAAkBN,eAAQc,OAAR,CAAgBR,OAAhB,CAVF;AAWzBS,IAAAA,KAAK,EAAE,CAACV,GAAD,EAAMC,OAAN,KAAkBN,eAAQe,KAAR,CAAcT,OAAd,CAXA;AAYzBU,IAAAA,OAAO,EAAE,CAACX,GAAD,EAAMC,OAAN,KAAkBN,eAAQgB,OAAR,CAAgBV,OAAhB,CAZF;AAazBW,IAAAA,QAAQ,EAAE,CAACZ,GAAD,EAAMC,OAAN,KAAkBN,eAAQiB,QAAR,CAAiBX,OAAjB,CAbH;AAczBY,IAAAA,MAAM,EAAE,CAACb,GAAD,EAAMC,OAAN,KAAkBN,eAAQkB,MAAR,CAAeZ,OAAf,CAdD;AAezBa,IAAAA,SAAS,EAAE,CAACd,GAAD,EAAMC,OAAN,KAAkBN,eAAQmB,SAAR,CAAkBb,OAAlB,CAfJ;AAgBzBc,IAAAA,MAAM,EAAE,CAACf,GAAD,EAAMC,OAAN,KAAkBN,eAAQoB,MAAR,CAAed,OAAf,CAhBD;AAiBzBe,IAAAA,OAAO,EAAE,CAAChB,GAAD,EAAMC,OAAN,KAAkBN,eAAQqB,OAAR,CAAgBf,OAAhB,CAjBF;AAmBzBgB,IAAAA,IAAI,EAAE,CAACjB,GAAD,EAAMC,OAAN,KAAkBN,eAAQsB,IAAR,CAAahB,OAAb,CAnBC;AAoBzBiB,IAAAA,GAAG,EAAE,CAAClB,GAAD,EAAMC,OAAN,KAAkBN,eAAQuB,GAAR,CAAYjB,OAAZ,CApBE;AAqBzBkB,IAAAA,MAAM,EAAE,CAACnB,GAAD,EAAMC,OAAN,KAAkBN,eAAQwB,MAAR,CAAelB,OAAf,CArBD;AAsBzBmB,IAAAA,SAAS,EAAE,CAACpB,GAAD,EAAMC,OAAN,KAAkBN,eAAQyB,SAAR,CAAkBnB,OAAlB,CAtBJ;AAuBzBoB,IAAAA,MAAM,EAAE,CAACrB,GAAD,EAAMC,OAAN,KAAkBN,eAAQ0B,MAAR,CAAepB,OAAf,CAvBD;AAyBzBqB,IAAAA,EAAE,EAAE,CAACtB,GAAD,EAAMC,OAAN,KAAkB;AAzBG,GAApB,CAAP;AA2BD",
+    "sourcesContent": [
+        "import __replaceTags from '../../html/replaceTags';\nimport __chalk from 'chalk';\n__chalk.level = 3;\n\n/**\n * @name                              console\n * @namespace           sugar.js.log.htmlPresets\n * @type                              Function\n *\n * Replace all the \"log\" html tags like \"<red>\", \"<bold>\", etc... with the corresponding syntax for the terminal\n *\n * @param                   {String}                      text                        The text to process\n * @return                  {String}                                                  The processed text ready for the terminal\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function console(text) {\n  return __replaceTags(text, {\n    black: (tag, content) => __chalk.black(content),\n    red: (tag, content) => __chalk.red(content),\n    green: (tag, content) => __chalk.green(content),\n    yellow: (tag, content) => __chalk.yellow(content),\n    blue: (tag, content) => __chalk.blue(content),\n    magenta: (tag, content) => __chalk.magenta(content),\n    cyan: (tag, content) => __chalk.cyan(content),\n    white: (tag, content) => __chalk.white(content),\n\n    bgBlack: (tag, content) => __chalk.bgBlack(content),\n    bgRed: (tag, content) => __chalk.bgRed(content),\n    bgGreen: (tag, content) => __chalk.bgGreen(content),\n    bgYellow: (tag, content) => __chalk.bgYellow(content),\n    bgBlue: (tag, content) => __chalk.bgBlue(content),\n    bgMagenta: (tag, content) => __chalk.bgMagenta(content),\n    bgCyan: (tag, content) => __chalk.bgCyan(content),\n    bgWhite: (tag, content) => __chalk.bgWhite(content),\n\n    bold: (tag, content) => __chalk.bold(content),\n    dim: (tag, content) => __chalk.dim(content),\n    italic: (tag, content) => __chalk.italic(content),\n    underline: (tag, content) => __chalk.underline(content),\n    strike: (tag, content) => __chalk.strike(content),\n\n    br: (tag, content) => '\\n'\n  });\n}\n"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "SValueValidationError.js"
+    ],
+    "names": [
+        "SValueValidationError",
+        "issuesObj",
+        "string",
+        "__SError"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;;;;;;;;;;;;;;;;;AAEA;;;IAIqBA,qB;;;;;AACnB,iCAAYC,SAAZ,EAAuB;AAAA;;AACrB,QAAMC,MAAM,GAAG,wCAA4BD,SAA5B,CAAf;AADqB,6BAEfC,MAFe;AAGtB;;;EAJgDC,gB",
+    "sourcesContent": [
+        "import __SError from './SError';\nimport __validateValueOutputString from '../validation/value/validateValueOutputString';\n\n/**\n * @todo    Doc\n */\n\nexport default class SValueValidationError extends __SError {\n  constructor(issuesObj) {\n    const string = __validateValueOutputString(issuesObj);\n    super(string);\n  }\n}\n"
+    ]
+}

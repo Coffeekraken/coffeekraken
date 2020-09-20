@@ -1,0 +1,31 @@
+{
+    "version": 3,
+    "sources": [
+        "imagesLoaded.js"
+    ],
+    "names": [
+        "imagesLoaded",
+        "$imgs",
+        "__SPromise",
+        "resolve",
+        "reject",
+        "trigger",
+        "cancel",
+        "promises",
+        "loadedImages",
+        "Array",
+        "from",
+        "forEach",
+        "$img",
+        "push",
+        "then",
+        "_$img",
+        "length",
+        "catch",
+        "error"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;AAwBe,SAASA,YAAT,CAAsBC,KAAtB,EAA6B;AAC1C,SAAO,IAAIC,iBAAJ,CAAe,CAACC,OAAD,EAAUC,MAAV,EAAkBC,OAAlB,EAA2BC,MAA3B,KAAsC;AAC1D,QAAMC,QAAQ,GAAG,EAAjB;AAAA,QACEC,YAAY,GAAG,EADjB;AAEAC,IAAAA,KAAK,CAACC,IAAN,CAAWT,KAAX,EAAkBU,OAAlB,CAA2BC,IAAD,IAAU;AAClCL,MAAAA,QAAQ,CAACM,IAAT,CACE,0BAAcD,IAAd,EACGE,IADH,CACSC,KAAD,IAAW;AACfP,QAAAA,YAAY,CAACK,IAAb,CAAkBE,KAAlB;AACAV,QAAAA,OAAO,CAAC,YAAD,EAAeU,KAAf,CAAP;;AACA,YAAIP,YAAY,CAACQ,MAAb,KAAwBf,KAAK,CAACe,MAAlC,EAA0C;AACxCX,UAAAA,OAAO,CAAC,QAAD,EAAWG,YAAX,CAAP;AACAL,UAAAA,OAAO,CAACK,YAAD,CAAP;AACD;AACF,OARH,EASGS,KATH,CASUC,KAAD,IAAW;AAChBd,QAAAA,MAAM,CAACc,KAAD,CAAN;AACD,OAXH,CADF;AAcD,KAfD;AAgBD,GAnBM,CAAP;AAoBD",
+    "sourcesContent": [
+        "import __imageLoaded from './imageLoaded';\nimport __SPromise from '../promise/SPromise';\n\n/**\n * @name      imagesLoaded\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Detect when some images are loaded. This function take advantage of the SPromise class\n * and trigger an event called \"img.loaded\" that will be triggered on each loaded images and another called \"loaded\" once all the images are loaded.\n * See in the example bellow.\n *\n * @param    {Array<HTMLImageElement>}    $imgs    An array (or nodeList) of HTMLImageElement to detect the load\n * @return    {Promise}    A promise resolved when all images are loaded properly\n *\n * @example    js\n * import imagesLoaded from '@coffeekraken/sugar/js/dom/imagesLoaded'\n * imagesLoaded([\n * \t$img1, $img2, $img3\n * ]).on('loaded', $img => {\n *    // do something with the loaded image\n * }).then(() => {\n *   // do something here\n * })\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function imagesLoaded($imgs) {\n  return new __SPromise((resolve, reject, trigger, cancel) => {\n    const promises = [],\n      loadedImages = [];\n    Array.from($imgs).forEach(($img) => {\n      promises.push(\n        __imageLoaded($img)\n          .then((_$img) => {\n            loadedImages.push(_$img);\n            trigger('img.loaded', _$img);\n            if (loadedImages.length === $imgs.length) {\n              trigger('loaded', loadedImages);\n              resolve(loadedImages);\n            }\n          })\n          .catch((error) => {\n            reject(error);\n          })\n      );\n    });\n  });\n}\n"
+    ]
+}

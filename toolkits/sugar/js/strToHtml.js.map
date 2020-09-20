@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "sources": [
+        "strToHtml.js"
+    ],
+    "names": [
+        "strToHtml",
+        "string",
+        "document",
+        "undefined",
+        "createElement",
+        "cont",
+        "innerHTML",
+        "children",
+        "length"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;AAiBe,SAASA,SAAT,CAAmBC,MAAnB,EAA2B;AACxC,MAAIC,QAAQ,KAAKC,SAAb,IAA0BD,QAAQ,CAACE,aAAT,KAA2BD,SAAzD,EAAoE;AAClE,QAAME,IAAI,GAAGH,QAAQ,CAACE,aAAT,CAAuB,KAAvB,CAAb;AACAC,IAAAA,IAAI,CAACC,SAAL,GAAiBL,MAAjB;;AACA,QAAII,IAAI,CAACE,QAAL,CAAcC,MAAd,KAAyB,CAA7B,EAAgC;AAC9B,aAAOH,IAAI,CAACE,QAAL,CAAc,CAAd,CAAP;AACD,KAFD,MAEO;AACL,aAAOF,IAAP;AACD;AACF;;AACD,SAAOJ,MAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name        strToHtml\n * @namespace           sugar.js.html\n * @type      Function\n *\n * Return the html (dom) version of a string\n *\n * @param    {HTMLElement}    html    The string to convert to dom nodes\n * @return    {HTMLElement}    The dom nodes representation of the passed string\n *\n * @example    js\n * import strToHtml from '@coffeekraken/sugar/js/html/strToHtml'\n * const myString = '<p>Hello World</p>'\n * strToHtml(myString) // <p>Hello World</p>\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function strToHtml(string) {\n  if (document !== undefined && document.createElement !== undefined) {\n    const cont = document.createElement('div');\n    cont.innerHTML = string;\n    if (cont.children.length === 1) {\n      return cont.children[0];\n    } else {\n      return cont;\n    }\n  }\n  return string;\n}\n"
+    ]
+}

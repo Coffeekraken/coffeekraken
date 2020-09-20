@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "plainObject.js"
+    ],
+    "names": [
+        "plainObject",
+        "object",
+        "constructor",
+        "name",
+        "Object",
+        "prototype",
+        "toString",
+        "call"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;AAgBe,SAASA,WAAT,CAAqBC,MAArB,EAA6B;AAC1C,MAAI,CAACA,MAAL,EAAa,OAAO,KAAP;AACb,MAAI,OAAOA,MAAP,KAAkB,QAAtB,EAAgC,OAAO,KAAP;AAChC,MAAIA,MAAM,CAACC,WAAP,IAAsBD,MAAM,CAACC,WAAP,CAAmBC,IAAnB,KAA4B,QAAtD,EAAgE,OAAO,KAAP;AAChE,MAAIC,MAAM,CAACC,SAAP,CAAiBC,QAAjB,CAA0BC,IAA1B,CAA+BN,MAA/B,MAA2C,iBAA/C,EACE,OAAO,KAAP;AACF,MAAIA,MAAM,KAAKG,MAAM,CAACH,MAAD,CAArB,EAA+B,OAAO,KAAP;AAC/B,MAAIA,MAAM,CAACC,WAAP,KAAuBE,MAA3B,EAAmC,OAAO,KAAP;AACnC,SAAO,IAAP;AACD",
+    "sourcesContent": [
+        "import __isPlainObject from 'is-plain-object';\n\n/**\n * @name                      plainObject\n * @namespace           sugar.js.is\n * @type                      Function\n *\n * Check if the passed object (or array of objects) is/are plain object(s)\n *\n * @param         {Object|Array}            object                  The object(s) to check\n * @return        {Boolean}                                         true if is plain object(s), false if not\n *\n * @example           js\n * const isPlainObject = require('@coffeekraken/sugar/js/is/plainObject');\n * isPlainObject({ hello: 'world'}); // => true\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function plainObject(object) {\n  if (!object) return false;\n  if (typeof object !== 'object') return false;\n  if (object.constructor && object.constructor.name !== 'Object') return false;\n  if (Object.prototype.toString.call(object) !== '[object Object]')\n    return false;\n  if (object !== Object(object)) return false;\n  if (object.constructor !== Object) return false;\n  return true;\n}\n"
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "version": 3,
+    "sources": [
+        "SSvgFilter.js"
+    ],
+    "names": [
+        "SSvgFilter",
+        "filter_content",
+        "elms",
+        "id",
+        "document",
+        "body",
+        "querySelector",
+        "_injectFiltersContainer",
+        "_insertFilter",
+        "elm",
+        "forEach",
+        "vendor",
+        "style",
+        "push",
+        "idx",
+        "indexOf",
+        "splice",
+        "svg",
+        "div",
+        "createElement",
+        "innerHTML",
+        "defs",
+        "filter",
+        "filtersContainer",
+        "appendChild",
+        "unapplyFrom",
+        "parentNode",
+        "removeChild",
+        "test",
+        "navigator",
+        "userAgent",
+        "join"
+    ],
+    "mappings": "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",
+    "sourcesContent": [
+        "import uniqid from '../util/uniqid';\n\n// TODO tests\n\n/**\n * @name \t\t          SGooeySvgFilter\n * @namespace           sugar.js.filter\n * @type             Class\n *\n * This class allows you to create with ease some complexe SVG filters and to apply it on any HTMLElement that you want\n * by extending this class like so\n *\n * @example \t\tjs\n * class MyBlurFilter extends SSvgFilter {\n *\n * \t\tconstructor(amount = 8) {\n * \t\t\tsuper(`\n * \t\t\t\t<feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"${amount}\" result=\"blur\" />\n * \t\t\t`);\n * \t\t}\n * }\n *\n * // using your filter\n * const myFilter = new MyBlurFilter(10);\n * myFilter.applyTo(myCoolHTMLElement);\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default class SSvgFilter {\n  /**\n   * @name          constructor\n   * @type          Function\n   *\n   * Constructor\n   *\n   * @param \t\t\t{String} \t\t\tfilter          The SVG filter string representation\n   *\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  constructor(filter_content) {\n    // save the reference of each elements\n    this.elms = [];\n\n    // save parameters\n    this.filter_content = filter_content;\n\n    // generate a uniqid\n    this.id = 's-svg-filter-' + uniqid();\n\n    // if need to inject svg\n    if (!document.body.querySelector('#s-svg-filters'))\n      SSvgFilter._injectFiltersContainer();\n\n    // insert the filter\n    this._insertFilter();\n  }\n\n  /**\n   * @name            applyTo\n   * @type            Function\n   *\n   * Apply the filter to an element\n   *\n   * @param \t\t{HTMLElement} \t\t\telm \t\t\tThe element on which to apply the filter\n   *\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  applyTo(elm) {\n    ['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach((vendor) => {\n      elm.style[vendor + 'filter'] = 'url(\"#' + this.id + '\")';\n    });\n    this.elms.push(elm);\n  }\n\n  /**\n   * @name          unapplyFrom\n   * @type          Function\n   *\n   * Unapply from\n   *\n   * @param \t\t{HTMLElement} \t\t\telm \t\t\tThe element from which to remove the filter\n   *\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  unapplyFrom(elm) {\n    ['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach((vendor) => {\n      elm.style[vendor + 'filter'] = null;\n      delete elm.style[vendor + 'filter'];\n    });\n    // remove from stack\n    let idx = this.elms.indexOf(elm);\n    if (idx) this.elms.splice(idx, 1);\n  }\n\n  /**\n   * @name          _insertFilter\n   * @type          Function\n   * @private\n   *\n   * Insert the filter\n   *\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  _insertFilter() {\n    let svg = `\n\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">\n\t\t\t\t<defs>\n\t\t\t\t</defs>\n\t\t\t</svg>\n\t\t`;\n    let div = document.createElement('div');\n    div.innerHTML = svg;\n    let defs = div.querySelector('defs');\n\n    // add the filter to the svg\n    this.filter_content =\n      '<filter id=\"' + this.id + '\">' + this.filter_content + '</filter>';\n    defs.innerHTML = this.filter_content;\n    this.filter = defs.querySelector('#' + this.id);\n    this.svg = div.querySelector('svg');\n    SSvgFilter.filtersContainer.appendChild(this.svg);\n  }\n\n  /**\n   * @name          destroy\n   * @type          Function\n   *\n   * Destroy the filter\n   *\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  destroy() {\n    // loop on each element savec in stack to remove the filter\n    this.elms.forEach((elm) => {\n      this.unapplyFrom(elm);\n    });\n    // remove the filter from the html\n    this.svg.parentNode.removeChild(this.svg);\n  }\n\n  /**\n   * @name          _injectFiltersContainer\n   * @type          Function\n   * @private\n   * @static\n   *\n   * Inject the svg that will contains all the filters created through this class\n   *\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  static _injectFiltersContainer() {\n    let style = ['position:absolute;', 'left:-1000px;', 'top:-300px;'];\n    if (\n      /Chrome/.test(navigator.userAgent) &&\n      /Google Inc/.test(navigator.vendor)\n    ) {\n      style.push('display:none;');\n    }\n    SSvgFilter.filtersContainer = document.createElement('div');\n    SSvgFilter.filtersContainer.id = 's-svg-filters';\n    SSvgFilter.filtersContainer.style = style.join(' ');\n    document.body.appendChild(SSvgFilter.filtersContainer);\n  }\n}\n"
+    ]
+}

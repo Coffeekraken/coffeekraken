@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "noisyProcess.test.js"
+    ],
+    "names": [
+        "__noisyProcess",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,cAAc,GAAGC,OAAO,CAAC,iBAAD,CAA9B;;AACAA,OAAO,CAAC,gBAAD,CAAP,CAA0BD,cAA1B",
+    "sourcesContent": [
+        "const __noisyProcess = require('../noisyProcess');\nrequire('./noisyProcess')(__noisyProcess);\n"
+    ]
+}

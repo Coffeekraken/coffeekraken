@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "sources": [
+        "functionToClass.js"
+    ],
+    "names": [
+        "__funcToClass"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;eAiBeA,sB",
+    "sourcesContent": [
+        "import __funcToClass from 'func-to-classes';\n\n/**\n * @name            functionToClass\n * @namespace       sugar.js.class\n * @type            Function\n *\n * Transform ES5 Functions to ES6 Classes\n *\n * @param       {Function}          function        The function to transform into class\n * @return      {Class}                             An ES6 class version of your function\n *\n * @example         js\n * import functionToClass from '@coffeekraken/sugar/js/class/functionToClass';\n * functionToClass(function coco() {});\n *\n * @since           2.0.0\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default __funcToClass;\n"
+    ]
+}

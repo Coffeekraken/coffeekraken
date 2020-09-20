@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "even.test.js"
+    ],
+    "names": [
+        "__even",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,MAAM,GAAGC,OAAO,CAAC,SAAD,CAAtB;;AACAA,OAAO,CAAC,QAAD,CAAP,CAAkBD,MAAlB",
+    "sourcesContent": [
+        "const __even = require('../even');\nrequire('./even')(__even);"
+    ]
+}

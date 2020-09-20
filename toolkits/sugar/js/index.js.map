@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "index.js"
+    ],
+    "names": [
+        "templates",
+        "blocks"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;eAEe;AACbA,EAAAA,SAAS,EAATA,kBADa;AAEbC,EAAAA,MAAM,EAANA;AAFa,C",
+    "sourcesContent": [
+        "import templates from './templates';\nimport blocks from './blocks';\n\nexport default {\n  templates,\n  blocks\n};\n"
+    ]
+}

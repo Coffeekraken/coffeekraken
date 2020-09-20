@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "linux.js"
+    ],
+    "names": [
+        "linux",
+        "process",
+        "platform",
+        "navigator",
+        "toUpperCase",
+        "indexOf"
+    ],
+    "mappings": ";;;;;;;AAAA;;AAEA;;;;;;;;;;;;;;;AAee,SAASA,KAAT,GAAiB;AAC9B,MAAIC,OAAO,IAAIA,OAAO,CAACC,QAAvB,EAAiC;AAC/B,WAAOD,OAAO,CAACC,QAAR,KAAqB,OAA5B;AACD;;AACD,SAAOC,SAAS,CAACD,QAAV,CAAmBE,WAAnB,GAAiCC,OAAjC,CAAyC,OAAzC,KAAqD,CAA5D;AACD",
+    "sourcesContent": [
+        "// TODO tests\n\n/**\n * @name                            linux\n * @namespace           sugar.js.is\n * @type                            Function\n *\n * Check if the app run on linux\n *\n * @return        {Boolean}                             true if linux, false if not\n *\n * @example       js\n * import isLinux from '@coffeekraken/sugar/js/is/linux';\n * isLinux(); // => true\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function linux() {\n  if (process && process.platform) {\n    return process.platform === 'linux';\n  }\n  return navigator.platform.toUpperCase().indexOf('LINUX') >= 0;\n}\n"
+    ]
+}

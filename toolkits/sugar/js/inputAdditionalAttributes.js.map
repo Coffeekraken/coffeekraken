@@ -1,0 +1,35 @@
+{
+    "version": 3,
+    "sources": [
+        "inputAdditionalAttributes.js"
+    ],
+    "names": [
+        "handleInputAttributes",
+        "eOrElm",
+        "setDirty",
+        "forceDirty",
+        "field",
+        "target",
+        "tagName",
+        "fastdom",
+        "mutate",
+        "type",
+        "value",
+        "hasAttribute",
+        "setAttribute",
+        "removeAttribute",
+        "undefined",
+        "handleFormSubmitOrReset",
+        "e",
+        "forEach",
+        "call",
+        "elements",
+        "elm",
+        "document",
+        "addEventListener"
+    ],
+    "mappings": ";;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;AAiBA;AAEA,SAASA,qBAAT,CAA+BC,MAA/B,EAAuCC,QAAvC,EAAwDC,UAAxD,EAA4E;AAAA,MAArCD,QAAqC;AAArCA,IAAAA,QAAqC,GAA1B,IAA0B;AAAA;;AAAA,MAApBC,UAAoB;AAApBA,IAAAA,UAAoB,GAAP,KAAO;AAAA;;AAC1E,MAAMC,KAAK,GAAGH,MAAM,CAACI,MAAP,GAAgBJ,MAAM,CAACI,MAAvB,GAAgCJ,MAA9C;AACA,MAAI,CAACG,KAAD,IAAU,CAACA,KAAK,CAACE,OAArB,EAA8B;;AAC9B,UAAQF,KAAK,CAACE,OAAd;AACE,SAAK,OAAL;AACA,SAAK,UAAL;AACA,SAAK,QAAL;AACEC,uBAAQC,MAAR,CAAe,MAAM;AACnB,YAAIJ,KAAK,CAACK,IAAN,KAAeL,KAAK,CAACK,IAAN,KAAe,UAAf,IAA6BL,KAAK,CAACK,IAAN,KAAe,OAA3D,CAAJ,EACE;;AACF,YAAIL,KAAK,CAACM,KAAN,IAAe,CAACN,KAAK,CAACO,YAAN,CAAmB,WAAnB,CAApB,EAAqD;AACnDP,UAAAA,KAAK,CAACQ,YAAN,CAAmB,WAAnB,EAAgC,IAAhC;AACAR,UAAAA,KAAK,CAACS,eAAN,CAAsB,OAAtB;AACD,SAHD,MAGO,IACLT,KAAK,CAACM,KAAN,KAAgBI,SAAhB,IACAV,KAAK,CAACM,KAAN,KAAgB,IADhB,IAEAN,KAAK,CAACM,KAAN,KAAgB,EAHX,EAIL;AACAN,UAAAA,KAAK,CAACS,eAAN,CAAsB,WAAtB;AACAT,UAAAA,KAAK,CAACS,eAAN,CAAsB,OAAtB;;AACA,cAAI,CAACT,KAAK,CAACO,YAAN,CAAmB,OAAnB,CAAL,EAAkC;AAChCP,YAAAA,KAAK,CAACQ,YAAN,CAAmB,OAAnB,EAA4B,IAA5B;AACD;AACF;;AACD,YAAIV,QAAJ,EAAc;AACZ,cAAI,CAACE,KAAK,CAACO,YAAN,CAAmB,OAAnB,CAAD,KAAiCP,KAAK,CAACM,KAAN,IAAeP,UAAhD,CAAJ,EAAiE;AAC/DC,YAAAA,KAAK,CAACQ,YAAN,CAAmB,OAAnB,EAA4B,IAA5B;AACD;AACF;AACF,OAtBD;;AAuBA;AA3BJ;AA6BD;;AAED,SAASG,uBAAT,CAAiCC,CAAjC,EAAoC;AAClC;AACA,KAAGC,OAAH,CAAWC,IAAX,CAAgBF,CAAC,CAACX,MAAF,CAASc,QAAzB,EAAoCf,KAAD,IAAW;AAC5C;AACAJ,IAAAA,qBAAqB,CAACI,KAAD,EAAQ,IAAR,EAAc,IAAd,CAArB,CAF4C,CAG5C;;AACA,QAAIY,CAAC,CAACP,IAAF,KAAW,QAAf,EAAyB,OAJmB,CAK5C;;AACAF,qBAAQC,MAAR,CAAe,MAAM;AACnBJ,MAAAA,KAAK,CAACS,eAAN,CAAsB,OAAtB;AACD,KAFD;AAGD,GATD;AAUD;;AAED,gCAAoB,8CAApB,EAAqEO,GAAD,IAAS;AAC3EpB,EAAAA,qBAAqB,CAACoB,GAAD,EAAM,KAAN,CAArB;AACD,CAFD;AAIAC,QAAQ,CAACC,gBAAT,CAA0B,QAA1B,EAAoCtB,qBAApC;AACAqB,QAAQ,CAACC,gBAAT,CAA0B,OAA1B,EAAmCtB,qBAAnC;AACAqB,QAAQ,CAACC,gBAAT,CAA0B,OAA1B,EAAmCP,uBAAnC;AACAM,QAAQ,CAACC,gBAAT,CAA0B,QAA1B,EAAoCP,uBAApC",
+    "sourcesContent": [
+        "import fastdom from 'fastdom';\nimport __querySelectorLive from '../dom/querySelectorLive';\n\n/**\n * @name \t\thandleInputAttributes\n * @namespace           sugar.js.feature\n * @type      Feature\n *\n * Add some attributes on inputs, textarea and select to help with styling purposes and more.\n * Here's the attributes added:\n * - `has-value`: When the input has a value in it\n * - `empty`: When the input is has no value in it\n * - `dirty`: When the input has been touched\n *\n * @example \tjs\n * import '@coffeekraken/sugar/js/feature/inputAdditionalAttributes'\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n\n// TODO tests\n\nfunction handleInputAttributes(eOrElm, setDirty = true, forceDirty = false) {\n  const field = eOrElm.target ? eOrElm.target : eOrElm;\n  if (!field || !field.tagName) return;\n  switch (field.tagName) {\n    case 'INPUT':\n    case 'TEXTAREA':\n    case 'SELECT':\n      fastdom.mutate(() => {\n        if (field.type && (field.type === 'checkbox' || field.type === 'radio'))\n          return;\n        if (field.value && !field.hasAttribute('has-value')) {\n          field.setAttribute('has-value', true);\n          field.removeAttribute('empty');\n        } else if (\n          field.value === undefined ||\n          field.value === null ||\n          field.value === ''\n        ) {\n          field.removeAttribute('has-value');\n          field.removeAttribute('value');\n          if (!field.hasAttribute('empty')) {\n            field.setAttribute('empty', true);\n          }\n        }\n        if (setDirty) {\n          if (!field.hasAttribute('dirty') && (field.value || forceDirty)) {\n            field.setAttribute('dirty', true);\n          }\n        }\n      });\n      break;\n  }\n}\n\nfunction handleFormSubmitOrReset(e) {\n  // loop on each form elements\n  [].forEach.call(e.target.elements, (field) => {\n    // reset the field attributes\n    handleInputAttributes(field, true, true);\n    // stop here if is a submit\n    if (e.type === 'submit') return;\n    // remove dirty attribute\n    fastdom.mutate(() => {\n      field.removeAttribute('dirty');\n    });\n  });\n}\n\n__querySelectorLive('select, textarea, input:not([type=\"submit\"])', (elm) => {\n  handleInputAttributes(elm, false);\n});\n\ndocument.addEventListener('change', handleInputAttributes);\ndocument.addEventListener('keyup', handleInputAttributes);\ndocument.addEventListener('reset', handleFormSubmitOrReset);\ndocument.addEventListener('submit', handleFormSubmitOrReset);\n"
+    ]
+}

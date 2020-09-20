@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "request.js"
+    ],
+    "names": [
+        "request",
+        "settings",
+        "__SRequest",
+        "send"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AA8Be,SAASA,OAAT,CAAiBC,QAAjB,EAAgC;AAAA,MAAfA,QAAe;AAAfA,IAAAA,QAAe,GAAJ,EAAI;AAAA;;AAC7C,MAAMD,OAAO,GAAG,IAAIE,iBAAJ,CAAeD,QAAf,CAAhB;AACA,SAAOD,OAAO,CAACG,IAAR,EAAP;AACD",
+    "sourcesContent": [
+        "import __SRequest from './SRequest';\n\n/**\n * @name                              request\n * @namespace           sugar.js.http\n * @type                              Function\n *\n * Easily create and send an http request. This will return an instance of the SAjax class.\n *\n * @param           {Object}              [settings={}]             The request settings. This support these settings and all the axio ones:\n * - url (null) {String}: The url on which to make the request\n * - baseURL (null) {String}: The base url on which to make the request.\n * - method (get) {String}: The method with the one to make the request. Can be GET,DELETE,HEAD,OPTIONS,POST,PUT,PATCH\n * - headers ({}) {Object}: An object to send through the headers\n * - params ({}) {Object}: Specify some params to be sent through the URL. Must be a plain object or a URLSearchParams object\n * - data ({}) {Object}: Specify some data you want to send with the request. This setting is available only for 'PUT', 'POST', and 'PATCH' requests...\n * - timeout (0) {Number}: Specify time to wait before aborting the actual request. If setted in number format, this will mean milliseconds. You can also specify this settings using string format like so: '2s', '1h', '4m', etc...\n * - sendInterval (1000) {Number}: Set the interval time between each requests if the sendCount setting is specified. If setted in number format, this is taken as millisenconds. You can also set the interval in string format like '34s', '1h', '10ms', '2d', etc...\n * - sendCount (1) {Number}: Set how many times the request has to be sent\n * - responseType (json) {String}: Indicates the type of data that the server will respond with\n *\n * @example               js\n * import request from '@coffeekraken/sugar/js/http/request';\n * request({\n *    url: 'https://api.github.com/something/cool',\n *    method: 'get'\n * }).then(response => {\n *    // do something...\n * });\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function request(settings = {}) {\n  const request = new __SRequest(settings);\n  return request.send();\n}\n"
+    ]
+}

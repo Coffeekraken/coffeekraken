@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "ie.js"
+    ],
+    "names": [
+        "isIe",
+        "ua",
+        "navigator",
+        "userAgent",
+        "indexOf"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,IAAT,CAAcC,EAAd,EAAwC;AAAA,MAA1BA,EAA0B;AAA1BA,IAAAA,EAA0B,GAArBC,SAAS,CAACC,SAAW;AAAA;;AACrD,SAAOF,EAAE,CAACG,OAAH,CAAW,MAAX,IAAqB,CAAC,CAA7B;AACD",
+    "sourcesContent": [
+        "/**\n * @name        isIe\n * @namespace           sugar.js.is\n * @type      Function\n *\n * Detect if is ie (internet explorer)\n *\n * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test\n *\n * @example \tjs\n * import isIe from '@coffeekraken/sugar/js/is/ie'\n * if (isIe()) {\n *   // do something cool\n * }\n *\n * @return    {Boolean}    true if is ie, false if not\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isIe(ua = navigator.userAgent) {\n  return ua.indexOf('MSIE') > -1;\n}\n"
+    ]
+}

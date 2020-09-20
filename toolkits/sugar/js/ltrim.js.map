@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "ltrim.js"
+    ],
+    "names": [
+        "ltrim",
+        "string",
+        "needle",
+        "trimResult",
+        "substr",
+        "length",
+        "trim"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,KAAT,CAAeC,MAAf,EAAuBC,MAAvB,EAA+BC,UAA/B,EAAkD;AAAA,MAAnBA,UAAmB;AAAnBA,IAAAA,UAAmB,GAAN,IAAM;AAAA;;AAC/D,MAAIF,MAAM,CAACG,MAAP,CAAc,CAAd,EAAiBF,MAAM,CAACG,MAAxB,MAAoCH,MAAxC,EAAgD;AAC9C,WAAOC,UAAU,GACbF,MAAM,CAACG,MAAP,CAAcF,MAAM,CAACG,MAArB,EAA6BC,IAA7B,EADa,GAEbL,MAAM,CAACG,MAAP,CAAcF,MAAM,CAACG,MAArB,CAFJ;AAGD,GAL8D,CAM/D;;;AACA,SAAOJ,MAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name        ltrim\n * @namespace           sugar.js.string\n * @type      Function\n *\n * Trim left a specified string\n *\n * @param    {String}    string    The string to trim\n * @param    {String}    needle    The string to find an cut out if found\n * @param    {Boolean}  [trimResult=true]       If you want to trim the resulted ltrim\n * @return    {String}    The trimed string\n *\n * @example    js\n * import ltrim from '@coffeekraken/sugar/js/string/ltrim'\n * ltrim('Hello World', 'Hello') // World\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function ltrim(string, needle, trimResult = true) {\n  if (string.substr(0, needle.length) === needle) {\n    return trimResult\n      ? string.substr(needle.length).trim()\n      : string.substr(needle.length);\n  }\n  // nothing to trim\n  return string;\n}\n"
+    ]
+}

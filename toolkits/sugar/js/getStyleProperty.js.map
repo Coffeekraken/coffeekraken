@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "sources": [
+        "getStyleProperty.js"
+    ],
+    "names": [
+        "getStyleProperty",
+        "elm",
+        "property",
+        "setTimeout",
+        "_sComputedStyle",
+        "computed",
+        "window",
+        "getComputedStyle",
+        "prefixes",
+        "i",
+        "length",
+        "prefix",
+        "value",
+        "trim"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;AAoBe,SAASA,gBAAT,CAA0BC,GAA1B,EAA+BC,QAA/B,EAAyC;AACtD;AACAC,EAAAA,UAAU,CAAC,MAAM;AACfF,IAAAA,GAAG,CAACG,eAAJ,GAAsB,IAAtB;AACD,GAFS,CAAV;AAIA,MAAMC,QAAQ,GAAGJ,GAAG,CAACG,eAAJ,IAAuBE,MAAM,CAACC,gBAAP,CAAwBN,GAAxB,CAAxC;AACAA,EAAAA,GAAG,CAACG,eAAJ,GAAsBC,QAAtB;AAEA,MAAMG,QAAQ,GAAG,CAAC,EAAD,EAAK,SAAL,EAAgB,MAAhB,EAAwB,KAAxB,EAA+B,IAA/B,EAAqC,QAArC,CAAjB;;AACA,OAAK,IAAIC,CAAC,GAAG,CAAb,EAAgBA,CAAC,GAAGD,QAAQ,CAACE,MAA7B,EAAqCD,CAAC,EAAtC,EAA0C;AACxC,QAAME,MAAM,GAAGH,QAAQ,CAACC,CAAD,CAAvB;AACA,QAAMG,KAAK,GAAGP,QAAQ,CAAC,iCAAYM,MAAZ,SAAqBT,QAArB,EAAD,CAAtB;AACA,QAAIU,KAAK,IAAIA,KAAK,CAACC,IAAN,OAAiB,EAA9B,EAAkC,OAAO,uBAASD,KAAT,CAAP;AACnC;;AACD,SAAO,IAAP;AACD",
+    "sourcesContent": [
+        "import camelize from '../string/camelize';\nimport autoCast from '../string/autoCast';\n\n/**\n * @name      getStyleProperty\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Get a style property on the passed element through the computed style.\n * This function try to store the actual style to not trigger more that 1 redraw\n * each js execution loop.\n *\n * @param \t\t{HTMLElement} \t\t\t\t\telm  \t\tThe element to get style from\n * @param \t\t{String} \t\t\t\t\t\tproperty \tThe css property to get\n * @return \t\t{Mixed} \t\t\t\t\t\t\t\t\tThe style value\n *\n * @example  \tjs\n * import getStyleProperty from '@coffeekraken/sugar/js/dom/getStyleProperty'\n * const opacity = getStyleProperty(myCoolHTMLElement, 'opacity');\n *\n * @see \t\thttps://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function getStyleProperty(elm, property) {\n  // caching mecanisme\n  setTimeout(() => {\n    elm._sComputedStyle = null;\n  });\n\n  const computed = elm._sComputedStyle || window.getComputedStyle(elm);\n  elm._sComputedStyle = computed;\n\n  const prefixes = ['', 'webkit-', 'moz-', 'ms-', 'o-', 'khtml-'];\n  for (let i = 0; i < prefixes.length; i++) {\n    const prefix = prefixes[i];\n    const value = computed[camelize(`${prefix}${property}`)];\n    if (value && value.trim() !== '') return autoCast(value);\n  }\n  return null;\n}\n"
+    ]
+}

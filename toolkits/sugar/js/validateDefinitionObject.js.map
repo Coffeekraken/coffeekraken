@@ -1,0 +1,29 @@
+{
+    "version": 3,
+    "sources": [
+        "validateDefinitionObject.js"
+    ],
+    "names": [
+        "validateDefinitionObject",
+        "definitionObject",
+        "settings",
+        "name",
+        "issuesObj",
+        "$name",
+        "$issues",
+        "$messages",
+        "Object",
+        "keys",
+        "forEach",
+        "argName",
+        "argDefinitionObj",
+        "res",
+        "__SDefinitionObjectInterface",
+        "definitionObj",
+        "throw"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;;AA0Be,SAASA,wBAAT,CACbC,gBADa,EAEbC,QAFa,EAGb;AAAA,MADAA,QACA;AADAA,IAAAA,QACA,GADW,EACX;AAAA;;AACAA,EAAAA,QAAQ,GAAG,wBACT;AACEC,IAAAA,IAAI,EAAE;AADR,GADS,EAITD,QAJS,CAAX;AAOA,MAAIE,SAAS,GAAG;AACdC,IAAAA,KAAK,EAAEH,QAAQ,CAACC,IADF;AAEdG,IAAAA,OAAO,EAAE,EAFK;AAGdC,IAAAA,SAAS,EAAE;AAHG,GAAhB,CARA,CAcA;;AACAC,EAAAA,MAAM,CAACC,IAAP,CAAYR,gBAAZ,EAA8BS,OAA9B,CAAuCC,OAAD,IAAa;AACjD,QAAMC,gBAAgB,GAAGX,gBAAgB,CAACU,OAAD,CAAzC,CADiD,CAEjD;;AACA,QAAME,GAAG,GAAG,6BACVD,gBADU,EAEVE,oCAA6BC,aAFnB,EAGV;AACEC,MAAAA,KAAK,EAAE,IADT;AAEEb,MAAAA,IAAI,YAAKD,QAAQ,CAACC,IAAd,cAAsBQ,OAAtB;AAFN,KAHU,CAAZ;AAQD,GAXD;AAYD",
+    "sourcesContent": [
+        "import __deepMerge from '../../object/deepMerge';\nimport __SDefinitionObjectInterface from '../interface/SDefinitionObjectInterface';\nimport __validateObject from './validateObject';\n\n/**\n * @name            validateDefinitionObject\n * @namespace       sugar.js.validation.object\n * @type            Function\n *\n * This function simply take a definition object and validate it\n *\n * @param       {Object}          definitionObject        The definition object to validate\n * @param       {Object}          [settings={}]           An object of settings to configure your validation process:\n * - name (Unnamed) {String}: Specify a name for your definition object validation. It helps a lot when you need to debug things\n *\n * @example       js\n * import validateDefinitionObject from '@coffeekraken/sugar/js/validation/object/validateDefinitionObject';\n * validateDefinitionObject({\n *    myProp: {\n *      type: 'String',\n *      required: true\n *    },\n *    otherProp: {\n *      type: 'Boolean'\n *    }\n * }); // => true\n *\n * @since         2.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function validateDefinitionObject(\n  definitionObject,\n  settings = {}\n) {\n  settings = __deepMerge(\n    {\n      name: 'Unnamed'\n    },\n    settings\n  );\n\n  let issuesObj = {\n    $name: settings.name,\n    $issues: [],\n    $messages: {}\n  };\n\n  // loop on each definition object props\n  Object.keys(definitionObject).forEach((argName) => {\n    const argDefinitionObj = definitionObject[argName];\n    // validate this\n    const res = __validateObject(\n      argDefinitionObj,\n      __SDefinitionObjectInterface.definitionObj,\n      {\n        throw: true,\n        name: `${settings.name}.${argName}`\n      }\n    );\n  });\n}\n"
+    ]
+}

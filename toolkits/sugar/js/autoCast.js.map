@@ -1,0 +1,24 @@
+{
+    "version": 3,
+    "sources": [
+        "autoCast.js"
+    ],
+    "names": [
+        "autoCast",
+        "string",
+        "substr",
+        "length",
+        "presumedNumber",
+        "parseFloat",
+        "isNaN",
+        "toString",
+        "window",
+        "obj",
+        "eval",
+        "e"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,QAAT,CAAkBC,MAAlB,EAA0B;AACvC;AACA,MAAI,OAAOA,MAAP,KAAkB,QAAtB,EAAgC,OAAOA,MAAP,CAFO,CAIvC;;AACA,MAAIA,MAAM,CAACC,MAAP,CAAc,CAAd,EAAiB,CAAjB,MAAwB,GAAxB,IAA+BD,MAAM,CAACC,MAAP,CAAc,CAAC,CAAf,MAAsB,GAAzD,EAA8D;AAC5D,WAAOD,MAAM,CAACC,MAAP,CAAc,CAAd,EAAiBD,MAAM,CAACE,MAAP,GAAgB,CAAjC,CAAP;AACD,GAPsC,CASvC;AACA;;;AACA,MAAMC,cAAc,GAAGC,UAAU,CAACJ,MAAD,CAAjC;;AACA,MAAI,CAACK,KAAK,CAACF,cAAD,CAAV,EAA4B;AAC1B,QAAIA,cAAc,CAACG,QAAf,OAA8BN,MAAlC,EAA0C;AACxC,aAAOG,cAAP;AACD;AACF,GAhBsC,CAkBvC;;;AACA,MAAII,MAAM,CAACP,MAAD,CAAV,EAAoB;AAClB,WAAOA,MAAP;AACD,GArBsC,CAuBvC;AACA;AACA;;;AACA,MAAI;AACF,QAAMQ,GAAG,GAAGC,IAAI,YAAKT,MAAL,OAAhB;AACA,WAAOQ,GAAP;AACD,GAHD,CAGE,OAAOE,CAAP,EAAU;AACV;AACA,WAAOV,MAAP;AACD;AACF",
+    "sourcesContent": [
+        "/**\n * @name        autoCast\n * @namespace           sugar.js.string\n * @type      Function\n *\n * Auto cast the string into the correct variable type\n *\n * @param    {String}    string    The string to auto cast\n * @return    {Mixed}    The casted value\n *\n * @example    js\n * import autoCast from '@coffeekraken/sugar/js/strings/autoCast'\n * autoCast('12') // => 12\n * autoCast('window.HTMLElement') // => HTMLElement\n * autoCast('{\"hello\":\"world\"}') // {hello:'world'}\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function autoCast(string) {\n  // if the passed string is not a string, return the value\n  if (typeof string !== 'string') return string;\n\n  // handle the single quotes strings like '\"hello world\"'\n  if (string.substr(0, 1) === \"'\" && string.substr(-1) === \"'\") {\n    return string.substr(1, string.length - 2);\n  }\n\n  // number\n  // before the window check cause window['0'] correspond to something\n  const presumedNumber = parseFloat(string);\n  if (!isNaN(presumedNumber)) {\n    if (presumedNumber.toString() === string) {\n      return presumedNumber;\n    }\n  }\n\n  // avoid getting item from the window object\n  if (window[string]) {\n    return string;\n  }\n\n  // try to eval the passed string\n  // if no exception, mean that it's a valid\n  // js variable type\n  try {\n    const obj = eval(`(${string})`);\n    return obj;\n  } catch (e) {\n    // assume that the string passed is a string\n    return string;\n  }\n}\n"
+    ]
+}

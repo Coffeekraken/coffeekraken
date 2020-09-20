@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "prependChild.js"
+    ],
+    "names": [
+        "prependChild",
+        "elm",
+        "refElm",
+        "firstChild",
+        "appendChild",
+        "insertBefore"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;AAgBe,SAASA,YAAT,CAAsBC,GAAtB,EAA2BC,MAA3B,EAAmC;AAChD,MAAI,CAACA,MAAM,CAACC,UAAZ,EAAwB;AACtBD,IAAAA,MAAM,CAACE,WAAP,CAAmBH,GAAnB;AACD,GAFD,MAEO;AACLC,IAAAA,MAAM,CAACG,YAAP,CAAoBJ,GAApB,EAAyBC,MAAM,CAACC,UAAhC;AACD;AACF",
+    "sourcesContent": [
+        "/**\n * @name      prependChild\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Prepend an HTMLElement into another HTMLElement\n *\n * @param \t\t{HTMLElement} \t\t\t\telm  \t\tThe element to prepend\n * @param \t\t{HTMLElement} \t\t\t\trefElm \t\tThe element in which to prepend the new element\n *\n * @example  \tjs\n * import prependChild from '@coffeekraken/sugar/js/dom/prependChild'\n * prependChild(myElementToInsert, theReferenceElement);\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function prependChild(elm, refElm) {\n  if (!refElm.firstChild) {\n    refElm.appendChild(elm);\n  } else {\n    refElm.insertBefore(elm, refElm.firstChild);\n  }\n}\n"
+    ]
+}

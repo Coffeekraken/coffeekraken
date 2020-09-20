@@ -1,0 +1,31 @@
+{
+    "version": 3,
+    "sources": [
+        "queryselector-scope.js"
+    ],
+    "names": [
+        "doc",
+        "proto",
+        "querySelector",
+        "err",
+        "forEach",
+        "method",
+        "nativ",
+        "selectors",
+        "test",
+        "id",
+        "Date",
+        "now",
+        "replace",
+        "result",
+        "call",
+        "window",
+        "document",
+        "Element",
+        "prototype"
+    ],
+    "mappings": ";;AAAA;;;;;;;;;;;;;;AAeA;AAEA,CAAC,UAAUA,GAAV,EAAeC,KAAf,EAAsB;AACrB,MAAI;AACF;AACAD,IAAAA,GAAG,CAACE,aAAJ,CAAkB,aAAlB;AACD,GAHD,CAGE,OAAOC,GAAP,EAAY;AACZ;AACA,KAAC,eAAD,EAAkB,kBAAlB,EAAsCC,OAAtC,CAA8C,UAAUC,MAAV,EAAkB;AAC9D,UAAIC,KAAK,GAAGL,KAAK,CAACI,MAAD,CAAjB;;AACAJ,MAAAA,KAAK,CAACI,MAAD,CAAL,GAAgB,UAAUE,SAAV,EAAqB;AACnC,YAAI,iBAAiBC,IAAjB,CAAsBD,SAAtB,CAAJ,EAAsC;AACpC;AACA,cAAIE,EAAE,GAAG,KAAKA,EAAd,CAFoC,CAElB;;AAClB,eAAKA,EAAL,GAAU,QAAQC,IAAI,CAACC,GAAL,EAAlB,CAHoC,CAGN;;AAC9BJ,UAAAA,SAAS,GAAGA,SAAS,CAACK,OAAV,CAAkB,mBAAlB,EAAuC,QAAQ,KAAKH,EAApD,CAAZ,CAJoC,CAIiC;;AACrE,cAAII,MAAM,GAAGb,GAAG,CAACK,MAAD,CAAH,CAAYE,SAAZ,CAAb;AACA,eAAKE,EAAL,GAAUA,EAAV,CANoC,CAMtB;;AACd,iBAAOI,MAAP;AACD,SARD,MAQO;AACL,iBAAOP,KAAK,CAACQ,IAAN,CAAW,IAAX,EAAiBP,SAAjB,CAAP,CADK,CAC+B;AACrC;AACF,OAZD;AAaD,KAfD;AAgBD;AACF,CAvBD,EAuBGQ,MAAM,CAACC,QAvBV,EAuBoBC,OAAO,CAACC,SAvB5B",
+    "sourcesContent": [
+        "/**\n * @name \t\tqueryselector-scope\n * @namespace           sugar.js.polyfill\n * @type      Polyfill\n *\n * Polyfill for the :scope value in the querySelector and querySelectorAll functions\n * To use it, just require this file in your codebase\n *\n * @example \tjs\n * require('@coffeekraken/sugar/js/polyfill/queryselector-scope');\n *\n * @see \t\thttp://stackoverflow.com/questions/6481612/queryselector-search-immediate-children\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n\n// TODO tests\n\n(function (doc, proto) {\n  try {\n    // check if browser supports :scope natively\n    doc.querySelector(':scope body');\n  } catch (err) {\n    // polyfill native methods if it doesn't\n    ['querySelector', 'querySelectorAll'].forEach(function (method) {\n      var nativ = proto[method];\n      proto[method] = function (selectors) {\n        if (/(^|,)\\s*:scope/.test(selectors)) {\n          // only if selectors contains :scope\n          var id = this.id; // remember current element id\n          this.id = 'ID_' + Date.now(); // assign new unique id\n          selectors = selectors.replace(/((^|,)\\s*):scope/g, '$1#' + this.id); // replace :scope with #ID\n          var result = doc[method](selectors);\n          this.id = id; // restore previous id\n          return result;\n        } else {\n          return nativ.call(this, selectors); // use native code for other selectors\n        }\n      };\n    });\n  }\n})(window.document, Element.prototype);\n"
+    ]
+}

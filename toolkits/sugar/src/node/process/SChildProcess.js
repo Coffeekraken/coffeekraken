@@ -379,10 +379,9 @@ class SChildProcess extends __SProcess {
     // stdout data
     if (this._runningProcess.childProcess.stdout) {
       this._runningProcess.childProcess.stdout.on('data', (log) => {
-        const logs = log.toString().split(/⠀{1,99999999}/);
+        const logs = log.toString().split(/⠀⠀⠀/);
         logs.forEach((log) => {
           let logObj = __parse(log);
-
           if (typeof logObj === 'object' && logObj.$file) {
             if (!__fs.existsSync(logObj.$file)) return;
             const logString = __fs.readFileSync(logObj.$file, 'utf8');

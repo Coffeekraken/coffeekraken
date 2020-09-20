@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "sources": [
+        "emptyNode.test.js"
+    ],
+    "names": [
+        "describe",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "it",
+        "expect",
+        "childNodes",
+        "length",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;;;AAEAA,QAAQ,CAAC,wBAAD,EAA2B,MAAM;AAEvCC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAOA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,UAAvB,CAAb;AAEA,0BAAYD,IAAZ;AAEAE,EAAAA,EAAE,CAAC,sCAAD,EAAyC,MAAM;AAC/CC,IAAAA,MAAM,CAACH,IAAI,CAACI,UAAL,CAAgBC,MAAjB,CAAN,CAA+BC,IAA/B,CAAoC,CAApC;AACD,GAFC,CAAF;AAID,CAjBO,CAAR",
+    "sourcesContent": [
+        "import __emptyNode from '../emptyNode';\n\ndescribe('sugar.js.dom.emptyNode', () => {\n\n  document.body.innerHTML = `\n      <div id=\"testing\">\n        <div class=\"coco\">\n        </div>\n        <div id=\"source\"></div>\n      </div>\n  `;\n  const $elm = document.querySelector('#testing');\n\n  __emptyNode($elm);\n\n  it('Should have empty the node correctly', () => {\n    expect($elm.childNodes.length).toBe(0);\n  });\n\n});"
+    ]
+}

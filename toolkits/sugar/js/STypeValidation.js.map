@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "STypeValidation.js"
+    ],
+    "names": [
+        "STypeValidation",
+        "value",
+        "type",
+        "result",
+        "$received",
+        "__SValidation"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;IAUMA,e;;;;;;;;;;;;;yBAGQC,K,EAAOC,I,EAAM;AACvB,UAAMC,MAAM,GAAG,qBAAWF,KAAX,EAAkBC,IAAlB,CAAf;AACA,UAAIC,MAAM,KAAK,IAAf,EAAqB,OAAO,IAAP;AACrB,aAAO,CAACF,KAAD,EAAQC,IAAR,EAAcC,MAAM,CAACC,SAAP,CAAiBF,IAA/B,CAAP;AACD;;;;EAP2BG,qB;;gBAAxBL,e,aAEF,wH;;eAQWA,e",
+    "sourcesContent": [
+        "import __SValidation from '../../SValidation';\nimport __isOfType from '../../../is/ofType';\n\n/**\n * @name          STypeValidation\n * @namespace     sugar.js.validation.value.validation\n * @type          Class\n *\n * This class represent the \"type\" validation\n *\n * @since       2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nclass STypeValidation extends __SValidation {\n  static message =\n    'This value has to be of type \"<yellow>%1</yellow>\" and you\\'ve passed \"<red>%0</red>\" which is of type \"<red>%2</red>\"';\n  static exec(value, type) {\n    const result = __isOfType(value, type);\n    if (result === true) return true;\n    return [value, type, result.$received.type];\n  }\n}\n\nexport default STypeValidation;\n"
+    ]
+}

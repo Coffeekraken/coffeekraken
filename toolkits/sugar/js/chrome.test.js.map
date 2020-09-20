@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "chrome.test.js"
+    ],
+    "names": [
+        "__chrome",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,QAAQ,GAAGC,OAAO,CAAC,WAAD,CAAxB;;AACAA,OAAO,CAAC,UAAD,CAAP,CAAoBD,QAApB",
+    "sourcesContent": [
+        "const __chrome = require('../chrome');\nrequire('./chrome')(__chrome);"
+    ]
+}

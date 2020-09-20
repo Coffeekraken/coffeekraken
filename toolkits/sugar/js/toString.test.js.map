@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "toString.test.js"
+    ],
+    "names": [
+        "__toString",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,UAAU,GAAGC,OAAO,CAAC,aAAD,CAA1B;;AACAA,OAAO,CAAC,YAAD,CAAP,CAAsBD,UAAtB",
+    "sourcesContent": [
+        "const __toString = require('../toString');\nrequire('./toString')(__toString);"
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "version": 3,
+    "sources": [
+        "sendForm.js"
+    ],
+    "names": [
+        "sendForm",
+        "form",
+        "tagName",
+        "toLowerCase",
+        "console",
+        "error",
+        "enctype",
+        "getAttribute",
+        "data",
+        "FormData",
+        "ajx",
+        "SAjax",
+        "url",
+        "method",
+        "contentType",
+        "setAttribute",
+        "promise",
+        "send",
+        "then",
+        "success",
+        "removeAttribute"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;AAmBe,SAASA,QAAT,CAAkBC,IAAlB,EAAwB;AACrC;AACA,MAAI,CAACA,IAAI,CAACC,OAAN,IAAiBD,IAAI,CAACC,OAAL,CAAaC,WAAb,OAA+B,MAApD,EAA4D;AAC1DC,IAAAA,OAAO,CAACC,KAAR,CAAc,kBAAd,EAAkCJ,IAAlC;AACA;AACD,GALoC,CAOrC;;;AACA,MAAMK,OAAO,GACXL,IAAI,CAACM,YAAL,CAAkB,SAAlB,KAAgC,mCADlC,CARqC,CAWrC;;AACA,MAAIC,IAAI,GAAG,IAAX;;AACA,MAAIF,OAAO,KAAK,mCAAhB,EAAqD;AACnD;AACAE,IAAAA,IAAI,GAAG,4BAAgBP,IAAhB,CAAP;AACD,GAHD,MAGO;AACLO,IAAAA,IAAI,GAAG,IAAIC,QAAJ,CAAaR,IAAb,CAAP;AACD,GAlBoC,CAoBrC;;;AACA,MAAMS,GAAG,GAAG,IAAIC,cAAJ,CAAU;AACpBC,IAAAA,GAAG,EAAEX,IAAI,CAACM,YAAL,CAAkB,QAAlB,CADe;AAEpBM,IAAAA,MAAM,EAAEZ,IAAI,CAACM,YAAL,CAAkB,QAAlB,KAA+B,MAFnB;AAGpBC,IAAAA,IAAI,EAAEA,IAHc;AAIpBM,IAAAA,WAAW,EAAER;AAJO,GAAV,CAAZ,CArBqC,CA4BrC;;AACAL,EAAAA,IAAI,CAACc,YAAL,CAAkB,SAAlB,EAA6B,IAA7B,EA7BqC,CA+BrC;;AACA,MAAMC,OAAO,GAAGN,GAAG,CAACO,IAAJ,EAAhB,CAhCqC,CAkCrC;;AACAD,EAAAA,OAAO,CAACE,IAAR,CACGC,OAAD,IAAa;AACXlB,IAAAA,IAAI,CAACmB,eAAL,CAAqB,SAArB;AACD,GAHH,EAIGf,KAAD,IAAW;AACTJ,IAAAA,IAAI,CAACmB,eAAL,CAAqB,SAArB;AACD,GANH,EAnCqC,CA4CrC;;AACA,SAAOJ,OAAP;AACD",
+    "sourcesContent": [
+        "import SAjax from '../http/SAjax';\nimport __formSerialize from 'form-serialize';\n\n/**\n * @name      sendForm\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Send a form through an ajax call and return back a promise resolved with the server response\n *\n * @param \t\t{HTMLFormElement} \t\tform \t\tThe form to send\n * @return     {Promise}                    A promise resolved when the forn has been sent\n *\n * @example \tjs\n * import sendForm from '@coffeekraken/sugar/js/dom/sendForm'\n * const myCoolForm = document.querySelector('.my-cool-form')\n * sentForm(myCoolForm).then((response) => {\n * \t// do something with the response\n * })\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function sendForm(form) {\n  // protect\n  if (!form.tagName || form.tagName.toLowerCase() !== 'form') {\n    console.error('passed arguments', form);\n    throw `The \"form\" parameter passed to the \"sendForm\" function is not a form`;\n  }\n\n  // get the enctype\n  const enctype =\n    form.getAttribute('enctype') || 'application/x-www-form-urlencoded';\n\n  // encode form datas\n  let data = null;\n  if (enctype === 'application/x-www-form-urlencoded') {\n    // serialize the form values\n    data = __formSerialize(form);\n  } else {\n    data = new FormData(form);\n  }\n\n  // create ajax instance\n  const ajx = new SAjax({\n    url: form.getAttribute('action'),\n    method: form.getAttribute('method') || 'POST',\n    data: data,\n    contentType: enctype\n  });\n\n  // set the loading attribute on the form\n  form.setAttribute('loading', true);\n\n  // send and return the promise\n  const promise = ajx.send();\n\n  // listen for the end of loading\n  promise.then(\n    (success) => {\n      form.removeAttribute('loading');\n    },\n    (error) => {\n      form.removeAttribute('loading');\n    }\n  );\n\n  // return the promise\n  return promise;\n}\n"
+    ]
+}

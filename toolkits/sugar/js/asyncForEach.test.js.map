@@ -1,0 +1,25 @@
+{
+    "version": 3,
+    "sources": [
+        "asyncForEach.test.js"
+    ],
+    "names": [
+        "__asyncForEach",
+        "require",
+        "waitFor",
+        "ms",
+        "Promise",
+        "r",
+        "setTimeout",
+        "test",
+        "done",
+        "i",
+        "idx",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;;;;;AAAA,IAAMA,cAAc,GAAGC,OAAO,CAAC,iBAAD,CAA9B;;AACA,IAAMC,OAAO,GAAIC,EAAD,IAAQ,IAAIC,OAAJ,CAAYC,CAAC,IAAIC,UAAU,CAACD,CAAD,EAAIF,EAAJ,CAA3B,CAAxB;;AAEAI,IAAI,CAAC,6DAAD;AAAA,+BAAgE,WAAMC,IAAN,EAAc;AAEhF,QAAIC,CAAC,GAAG,CAAR;AACA,UAAMT,cAAc,CAAC,CAAC,CAAD,EAAI,CAAJ,EAAO,CAAP,EAAU,CAAV,CAAD;AAAA,oCAAe,WAAMU,GAAN,EAAa;AAC9C,cAAMR,OAAO,CAAC,GAAD,CAAb;AACAO,QAAAA,CAAC,IAAIC,GAAL;AACD,OAHmB;;AAAA;AAAA;AAAA;AAAA,QAApB;AAIAC,IAAAA,MAAM,CAACF,CAAD,CAAN,CAAUG,IAAV,CAAe,EAAf;AACAJ,IAAAA,IAAI;AACL,GATG;;AAAA;AAAA;AAAA;AAAA,IAAJ",
+    "sourcesContent": [
+        "const __asyncForEach = require('../asyncForEach');\nconst waitFor = (ms) => new Promise(r => setTimeout(r, ms));\n\ntest('sugar.js.array.asyncForEach: Simple async foreach execution', async done => {\n\n  let i = 0;\n  await __asyncForEach([1, 2, 3, 4], async idx => {\n    await waitFor(200);\n    i += idx;\n  });\n  expect(i).toBe(10);\n  done();\n});"
+    ]
+}

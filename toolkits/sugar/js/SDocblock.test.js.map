@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "SDocblock.test.js"
+    ],
+    "names": [
+        "__SDocblock",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,WAAW,GAAGC,OAAO,CAAC,cAAD,CAA3B;;AACAA,OAAO,CAAC,aAAD,CAAP,CAAuBD,WAAvB",
+    "sourcesContent": [
+        "const __SDocblock = require('../SDocblock');\nrequire('./SDocblock')(__SDocblock);\n"
+    ]
+}

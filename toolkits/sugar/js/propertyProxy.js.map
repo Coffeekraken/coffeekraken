@@ -1,0 +1,39 @@
+{
+    "version": 3,
+    "sources": [
+        "propertyProxy.js"
+    ],
+    "names": [
+        "propertyProxy",
+        "obj",
+        "property",
+        "descriptor",
+        "applySetterAtStart",
+        "objPath",
+        "split",
+        "slice",
+        "join",
+        "pop",
+        "val",
+        "currentDescriptor",
+        "Object",
+        "getOwnPropertyDescriptor",
+        "prototype",
+        "_set",
+        "value",
+        "set",
+        "ret",
+        "get",
+        "d",
+        "defineProperty",
+        "_val",
+        "v",
+        "configurable",
+        "undefined",
+        "enumarable"
+    ],
+    "mappings": "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",
+    "sourcesContent": [
+        "import _get from 'lodash/get';\n/**\n * @name        propertyProxy\n * @namespace           sugar.js.object\n * @type      Function\n *\n * Create a proxy for and object property.\n * This gives you the possibility to process the data of the property\n * when it is getted or setted.\n *\n * @param \t\t{Object} \t\tobj \t\t\tThe object on which to create the proxy\n * @param \t\t{String} \t\tproperty \t\tThe property name that will be proxied\n * @param \t\t{Object} \t\tdescriptor \t\tA descriptor object that contains at least a get or a set method, or both\n * @param \t\t{Boolean} \t\t[applySetterAtStart=false] \tIf need to apply the descriptor setter directly on the current value or not\n *\n * @example \tjs\n * import propertyProxy from '@coffeekraken/sugar/js/object/propertyProxy';\n * const myObject = {\n * \t\ttitle : 'World'\n * };\n * // create the proxy\n * propertyProxy(myObject, 'title', {\n * \t\tget : (value) => {\n * \t\t\treturn `Hello ${value}`;\n * \t\t},\n * \t\tset : (value) => {\n * \t\t\treturn `Youhou ${value}`;\n * \t\t}\n * });\n * console.log(myObject.title) => 'Hello World';\n * myObject.title = 'Universe';\n * console.log(myObject.title) => 'Hello Youhou Universe';\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function propertyProxy(\n  obj,\n  property,\n  descriptor,\n  applySetterAtStart = false\n) {\n  // handle property like \"something.cool\"\n  const objPath = property.split('.').slice(0, -1).join('.');\n  if (objPath) {\n    property = property.split('.').pop();\n    obj = _get(obj, objPath);\n  }\n\n  // store the current value\n  let val = _get(obj, property);\n  let currentDescriptor = Object.getOwnPropertyDescriptor(\n    obj.prototype || obj,\n    property\n  );\n\n  // custom setter check\n  const _set = (value) => {\n    if (descriptor.set) {\n      value = descriptor.set(value);\n    }\n\n    // descriptor\n    if (currentDescriptor && currentDescriptor.set) {\n      let ret = currentDescriptor.set(value);\n      if (ret) {\n        val = ret;\n      } else {\n        val = currentDescriptor.get();\n      }\n    } else {\n      val = value;\n    }\n  };\n\n  // apply the setter if needed\n  if (applySetterAtStart) _set(val);\n\n  // make sure we have the good descriptor\n  let d = Object.getOwnPropertyDescriptor(obj, property);\n  Object.defineProperty(obj, property, {\n    get: () => {\n      let _val = val;\n      if (descriptor.get) {\n        _val = descriptor.get(_val);\n      }\n      if (currentDescriptor && currentDescriptor.get) {\n        _val = currentDescriptor.get();\n      }\n      return _val;\n    },\n    set: (v) => {\n      // const oldValue = val;\n      // internal set to use the good setter\n      _set(v);\n      // notify of new update\n      // this.notify(objPath, val, oldValue);\n    },\n    configurable:\n      descriptor.configurable !== undefined\n        ? descriptor.configurable\n        : currentDescriptor && currentDescriptor.configurable !== undefined\n        ? currentDescriptor.configurable\n        : false,\n    enumarable:\n      descriptor.enumarable !== undefined\n        ? descriptor.enumarable\n        : currentDescriptor && currentDescriptor.enumarable !== undefined\n        ? currentDescriptor.enumarable\n        : true\n    // writable : currentDescriptor && currentDescriptor.writable !== undefined ? currentDescriptor.writable : true\n  });\n\n  // return the value\n  return val;\n}\n"
+    ]
+}

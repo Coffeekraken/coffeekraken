@@ -1,0 +1,39 @@
+{
+    "version": 3,
+    "sources": [
+        "textWidth.js"
+    ],
+    "names": [
+        "textWidth",
+        "source",
+        "elm",
+        "document",
+        "createElement",
+        "style",
+        "whiteSpace",
+        "position",
+        "visibility",
+        "text",
+        "tagName",
+        "toLowerCase",
+        "value",
+        "innerText",
+        "fs",
+        "ff",
+        "ls",
+        "fontSize",
+        "fontFamily",
+        "letterSpacing",
+        "replace",
+        "innerHTML",
+        "body",
+        "appendChild",
+        "width",
+        "offsetWidth",
+        "removeChild"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;;;AAoBe,SAASA,SAAT,CAAmBC,MAAnB,EAA2B;AACxC;AACA,MAAMC,GAAG,GAAGC,QAAQ,CAACC,aAAT,CAAuB,MAAvB,CAAZ;AACAF,EAAAA,GAAG,CAACG,KAAJ,CAAUC,UAAV,GAAuB,QAAvB;AACAJ,EAAAA,GAAG,CAACG,KAAJ,CAAUE,QAAV,GAAqB,UAArB;AACAL,EAAAA,GAAG,CAACG,KAAJ,CAAUG,UAAV,GAAuB,QAAvB;AACA,MAAIC,IAAI,GAAGR,MAAX,CANwC,CAQxC;;AACA,MAAIA,MAAM,CAACS,OAAX,EAAoB;AAClB;AACA,QAAMA,OAAO,GAAGT,MAAM,CAACS,OAAP,CAAeC,WAAf,EAAhB;;AACA,YAAQD,OAAR;AACE,WAAK,OAAL;AACA,WAAK,UAAL;AACED,QAAAA,IAAI,GAAGR,MAAM,CAACW,KAAd;AACA;;AACF;AACEH,QAAAA,IAAI,GAAGR,MAAM,CAACY,SAAd;AACA;AAPJ,KAHkB,CAalB;;;AACA,QAAMC,EAAE,GAAG,+BAAmBb,MAAnB,EAA2B,WAA3B,CAAX;AACA,QAAMc,EAAE,GAAG,+BAAmBd,MAAnB,EAA2B,aAA3B,CAAX;AACA,QAAMe,EAAE,GAAG,+BAAmBf,MAAnB,EAA2B,gBAA3B,CAAX;AACAC,IAAAA,GAAG,CAACG,KAAJ,CAAUY,QAAV,GAAqBH,EAArB;AACAZ,IAAAA,GAAG,CAACG,KAAJ,CAAUa,UAAV,GAAuBH,EAAvB;AACAb,IAAAA,GAAG,CAACG,KAAJ,CAAUc,aAAV,GAA0BH,EAA1B;AACD,GA7BuC,CA+BxC;;;AACAP,EAAAA,IAAI,GAAGA,IAAI,CAACW,OAAL,CAAa,IAAb,EAAmB,QAAnB,CAAP,CAhCwC,CAiCxC;;AACAlB,EAAAA,GAAG,CAACmB,SAAJ,GAAgBZ,IAAhB,CAlCwC,CAmCxC;;AACAN,EAAAA,QAAQ,CAACmB,IAAT,CAAcC,WAAd,CAA0BrB,GAA1B,EApCwC,CAqCxC;;AACA,MAAMsB,KAAK,GAAGtB,GAAG,CAACuB,WAAlB,CAtCwC,CAuCxC;;AACAtB,EAAAA,QAAQ,CAACmB,IAAT,CAAcI,WAAd,CAA0BxB,GAA1B,EAxCwC,CAyCxC;;AACA,SAAOsB,KAAP;AACD",
+    "sourcesContent": [
+        "import __getStyleProperty from './getStyleProperty';\n\n/**\n * @name      textWidth\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Get the text width in px of a passed string or the passed HTMLElement\n *\n * @param \t\t{String|HTMLElement}\t\tsource \t\tThe source to process\n * @return \t\t{Number} \t\t\t\t\t\t\t\tThe calculated width of the text\n *\n * @example \tjs\n * import textWidth from '@coffeekraken/sugar/js/dom/textWidth'\n * // text of an HTMLElement\n * const width = textWidth(myCoolHTMLElement);\n *\n * // text directly (no font-size management so it's less accurate...)\n * const width = textWidth('Hello World');\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function textWidth(source) {\n  // create an element\n  const elm = document.createElement('span');\n  elm.style.whiteSpace = 'nowrap';\n  elm.style.position = 'absolute';\n  elm.style.visibility = 'hidden';\n  let text = source;\n\n  // if the source if an html element\n  if (source.tagName) {\n    // set the text into the element\n    const tagName = source.tagName.toLowerCase();\n    switch (tagName) {\n      case 'input':\n      case 'textarea':\n        text = source.value;\n        break;\n      default:\n        text = source.innerText;\n        break;\n    }\n\n    // get the font properties\n    const fs = __getStyleProperty(source, 'font-size');\n    const ff = __getStyleProperty(source, 'font-family');\n    const ls = __getStyleProperty(source, 'letter-spacing');\n    elm.style.fontSize = fs;\n    elm.style.fontFamily = ff;\n    elm.style.letterSpacing = ls;\n  }\n\n  // replacing spaces\n  text = text.replace(/ /g, '\\u00a0');\n  // set the element content\n  elm.innerHTML = text;\n  // append the element to the body\n  document.body.appendChild(elm);\n  // return the width of the element\n  const width = elm.offsetWidth;\n  // remove the element from the dom\n  document.body.removeChild(elm);\n  // return the width\n  return width;\n}\n"
+    ]
+}

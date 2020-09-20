@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "get.test.js"
+    ],
+    "names": [
+        "__get",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,KAAK,GAAGC,OAAO,CAAC,QAAD,CAArB;;AACAA,OAAO,CAAC,OAAD,CAAP,CAAiBD,KAAjB",
+    "sourcesContent": [
+        "const __get = require('../get');\nrequire('./get')(__get);"
+    ]
+}

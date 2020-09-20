@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "includes.test.js"
+    ],
+    "names": [
+        "__includes",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,UAAU,GAAGC,OAAO,CAAC,aAAD,CAA1B;;AACAA,OAAO,CAAC,YAAD,CAAP,CAAsBD,UAAtB",
+    "sourcesContent": [
+        "const __includes = require('../includes');\nrequire('./includes')(__includes);"
+    ]
+}

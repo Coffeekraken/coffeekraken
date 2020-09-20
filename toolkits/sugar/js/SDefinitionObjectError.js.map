@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "SDefinitionObjectError.js"
+    ],
+    "names": [
+        "SDefinitionObjectError",
+        "issuesObj",
+        "string",
+        "__SError"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;;;;;;;;;;;;;;;;;AAEA;;;IAGqBA,sB;;;;;AACnB,kCAAYC,SAAZ,EAAuB;AAAA;;AACrB,QAAMC,MAAM,GAAG,yDAA6CD,SAA7C,CAAf;AADqB,6BAEfC,MAFe;AAGtB;;;EAJiDC,gB",
+    "sourcesContent": [
+        "import __SError from './SError';\nimport __validateObjectDefinitionObjectOutputString from '../validation/object/validateObjectDefinitionObjectOutputString';\n\n/**\n * @todo      Doc\n */\nexport default class SDefinitionObjectError extends __SError {\n  constructor(issuesObj) {\n    const string = __validateObjectDefinitionObjectOutputString(issuesObj);\n    super(string);\n  }\n}\n"
+    ]
+}

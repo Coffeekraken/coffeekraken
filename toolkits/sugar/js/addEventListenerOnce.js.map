@@ -1,0 +1,30 @@
+{
+    "version": 3,
+    "sources": [
+        "addEventListenerOnce.js"
+    ],
+    "names": [
+        "addEventListenerOnce",
+        "$elm",
+        "eventNames",
+        "callback",
+        "useCapture",
+        "Array",
+        "isArray",
+        "globalPromise",
+        "__SPromise",
+        "eventsStack",
+        "on",
+        "forEach",
+        "eventName",
+        "promise",
+        "cancel",
+        "event",
+        "apply",
+        "trigger"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;AAwBe,SAASA,oBAAT,CACbC,IADa,EAEbC,UAFa,EAGbC,QAHa,EAIbC,UAJa,EAKb;AAAA,MAFAD,QAEA;AAFAA,IAAAA,QAEA,GAFW,IAEX;AAAA;;AAAA,MADAC,UACA;AADAA,IAAAA,UACA,GADa,KACb;AAAA;;AACA,MAAI,CAACC,KAAK,CAACC,OAAN,CAAcJ,UAAd,CAAL,EAAgCA,UAAU,GAAG,CAACA,UAAD,CAAb;AAEhC,MAAMK,aAAa,GAAG,IAAIC,iBAAJ,EAAtB;AAEA,MAAMC,WAAW,GAAG,EAApB;AAEAF,EAAAA,aAAa,CAACG,EAAd,CAAiB,gBAAjB,EAAmC,MAAM;AACvCR,IAAAA,UAAU,CAACS,OAAX,CAAoBC,SAAD,IAAe;AAChCH,MAAAA,WAAW,CAACG,SAAD,CAAX,CAAuBC,OAAvB,CAA+BC,MAA/B;AACD,KAFD;AAGD,GAJD;AAMAZ,EAAAA,UAAU,CAACS,OAAX,CAAoBC,SAAD,IAAe;AAChC,QAAMC,OAAO,GAAG,+BAAmBZ,IAAnB,EAAyBW,SAAzB,EAAoC,IAApC,EAA0CR,UAA1C,CAAhB;AAEAK,IAAAA,WAAW,CAACG,SAAD,CAAX,GAAyB;AACvBC,MAAAA;AADuB,KAAzB;AAIAA,IAAAA,OAAO,CAACH,EAAR,CAAWR,UAAX,EAAwBa,KAAD,IAAW;AAChC,UAAIZ,QAAQ,IAAI,OAAOA,QAAP,KAAoB,UAApC,EAAgD;AAC9CA,QAAAA,QAAQ,CAACa,KAAT,CAAe,IAAf,EAAqB,CAACD,KAAD,CAArB;AACD;;AACDR,MAAAA,aAAa,CAACU,OAAd,CAAsBL,SAAtB,EAAiCG,KAAjC;AACAF,MAAAA,OAAO,CAACC,MAAR;AACD,KAND;AAOD,GAdD;AAgBA,SAAOP,aAAP;AACD",
+    "sourcesContent": [
+        "import __SPromise from '../promise/SPromise';\nimport __addEventListener from './addEventListener';\n\n/**\n * @name        addEventListenerOnce\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Add an event listener that will be trigerred only once\n *\n * @param    {HTMLElement}    $elm    The element to add the event listener on\n * @param    {String}    event    The event to listen for\n * @param    {Function}    [callback=null]    The callback function to call on event\n * @param    {Boolean}    [useCapture=false]    A Boolean value that specifies whether the event should be executed in the capturing or in the bubbling phase\n * @return    {Promise}                   A promise that will be resolved once the event has been called\n *\n * @example    js\n * import addEventListenerOnce from '@coffeekraken/sugar/js/dom/addEventListenerOnce'\n * addEventListenerOnce(myElm, 'click', (e) => {\n *     // do something on click\n * });\n * addEventListenerOnce(myElm, 'click').on('click', (e) => {\n *\n * });\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function addEventListenerOnce(\n  $elm,\n  eventNames,\n  callback = null,\n  useCapture = false\n) {\n  if (!Array.isArray(eventNames)) eventNames = [eventNames];\n\n  const globalPromise = new __SPromise();\n\n  const eventsStack = {};\n\n  globalPromise.on('cancel,finally', () => {\n    eventNames.forEach((eventName) => {\n      eventsStack[eventName].promise.cancel();\n    });\n  });\n\n  eventNames.forEach((eventName) => {\n    const promise = __addEventListener($elm, eventName, null, useCapture);\n\n    eventsStack[eventName] = {\n      promise\n    };\n\n    promise.on(eventNames, (event) => {\n      if (callback && typeof callback === 'function') {\n        callback.apply(this, [event]);\n      }\n      globalPromise.trigger(eventName, event);\n      promise.cancel();\n    });\n  });\n\n  return globalPromise;\n}\n"
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "SOutlineSvgFilter.js"
+    ],
+    "names": [
+        "SOutlineSvgFilter",
+        "radius",
+        "_$morphology",
+        "filter",
+        "querySelector",
+        "value",
+        "setAttribute",
+        "parseFloat",
+        "getAttribute",
+        "SSvgFilter"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;AAEA;;;;;;;;;;;;;;IAcMA,iB;;;;;AACJ;;;;;;;;;;AAUA,6BAAYC,MAAZ,EAAwB;AAAA;;AAAA,QAAZA,MAAY;AAAZA,MAAAA,MAAY,GAAH,CAAG;AAAA;;AAAA;;AACtB,2FACyCA,MADzC;AAKA,UAAKC,YAAL,GAAoB,MAAKC,MAAL,CAAYC,aAAZ,CAA0B,cAA1B,CAApB;AANsB;AAOvB;AAED;;;;;;;;;;;;sBAQWC,K,EAAO;AAChB,WAAKH,YAAL,CAAkBI,YAAlB,CAA+B,QAA/B,EAAyCD,KAAzC;AACD,K;wBACY;AACX,aAAOE,UAAU,CAAC,KAAKL,YAAL,CAAkBM,YAAlB,CAA+B,QAA/B,CAAD,CAAjB;AACD;;;;EAjC6BC,oB,GAoChC;;;eACeT,iB",
+    "sourcesContent": [
+        "import SSvgFilter from './SSvgFilter';\n\n// TODO tests\n\n/**\n * @name \t\t        SOutlineSvgFilter\n * @namespace           sugar.js.filter\n * @type            Class\n * @extends \t    \tSSvgFilter\n *\n * This class represent an outline filter that can be applied on any HTMLElement.\n *\n * @example \t\tjs\n * const filter = new SOutlineSvgFilter();\n * filter.applyTo(myCoolHTMLElement);\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nclass SOutlineSvgFilter extends SSvgFilter {\n  /**\n   * @name            constructor\n   * @type            Function\n   *\n   * Constructor\n   *\n   * @param \t\t{Number} \t\t[radius=8] \t\tThe amount of effect to apply\n   *\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  constructor(radius = 8) {\n    super(`\n\t\t\t<feMorphology operator=\"dilate\" radius=\"${radius}\"\n\t\t\tin=\"SourceGraphic\" result=\"THICKNESS\" />\n\t\t\t<feComposite operator=\"out\" in=\"THICKNESS\" in2=\"SourceGraphic\" ></feComposite>\n\t\t`);\n    this._$morphology = this.filter.querySelector('feMorphology');\n  }\n\n  /**\n   * @name          radius\n   * @type          Number\n   *\n   * Get/Set the radius to produce the effect\n   *\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  set radius(value) {\n    this._$morphology.setAttribute('radius', value);\n  }\n  get radius() {\n    return parseFloat(this._$morphology.getAttribute('radius'));\n  }\n}\n\n// export modules\nexport default SOutlineSvgFilter;\n"
+    ]
+}

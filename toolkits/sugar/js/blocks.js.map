@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "blocks.js"
+    ],
+    "names": [
+        "class",
+        "__class",
+        "function",
+        "__function",
+        "default",
+        "__default"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;eAEe;AACbA,EAAAA,KAAK,EAAEC,cADM;AAEbC,EAAAA,QAAQ,EAAEC,iBAFG;AAGbC,EAAAA,OAAO,EAAEC;AAHI,C",
+    "sourcesContent": [
+        "import __class from './blocks/class';\nimport __function from './blocks/function';\nimport __default from './blocks/default';\n\nexport default {\n  class: __class,\n  function: __function,\n  default: __default\n};\n"
+    ]
+}

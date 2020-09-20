@@ -1,0 +1,33 @@
+{
+    "version": 3,
+    "sources": [
+        "bitbucketApiValidator.js"
+    ],
+    "names": [
+        "__axios",
+        "require",
+        "module",
+        "exports",
+        "authInfo",
+        "Promise",
+        "resolve",
+        "reject",
+        "url",
+        "type",
+        "get",
+        "headers",
+        "then",
+        "response",
+        "catch",
+        "e",
+        "console",
+        "log",
+        "process",
+        "exit",
+        "bitbucketApiValidator"
+    ],
+    "mappings": ";;;;;;AAAA,IAAMA,OAAO,GAAGC,OAAO,CAAC,OAAD,CAAvB;AAEA;;;;;;;;;;;;;;;AAaAC,MAAM,CAACC,OAAP;AAAA,iDAAiB,WAAqCC,QAArC,EAA+C;AAC9D,WAAO,IAAIC,OAAJ;AAAA,mCAAY,WAAOC,OAAP,EAAgBC,MAAhB,EAA2B;AAC5C,YAAMC,GAAG,GAAG,4CAAZ;;AAEA,gBAAQJ,QAAQ,CAACK,IAAjB;AACE,eAAK,OAAL;AACET,YAAAA,OAAO,CACJU,GADH,CACOF,GADP,EACY;AACRG,cAAAA,OAAO,EAAEP,QAAQ,CAACO;AADV,aADZ,EAIGC,IAJH,CAISC,QAAD,IAAc;AAClBP,cAAAA,OAAO,CAAC,IAAD,CAAP;AACD,aANH,EAOGQ,KAPH,CAOUC,CAAD,IAAO;AACZT,cAAAA,OAAO,4DAAP;AACD,aATH;;AAUA;;AACF,eAAK,QAAL;AACEN,YAAAA,OAAO,CACJU,GADH,CACOF,GADP,EACY;AACRG,cAAAA,OAAO,EAAEP,QAAQ,CAACO;AADV,aADZ,EAIGC,IAJH,CAISC,QAAD,IAAc;AAClBG,cAAAA,OAAO,CAACC,GAAR,CAAY,MAAZ,EAAoBJ,QAApB;AACAK,cAAAA,OAAO,CAACC,IAAR;AACAb,cAAAA,OAAO,CAAC,IAAD,CAAP;AACD,aARH,EASGQ,KATH,CASUC,CAAD,IAAO;AACZT,cAAAA,OAAO,qDAAP;AACD,aAXH;;AAYA;AA1BJ;AA4BD,OA/BM;;AAAA;AAAA;AAAA;AAAA,QAAP;AAgCD,GAjCD;;AAAA,WAAgCc,qBAAhC;AAAA;AAAA;;AAAA,SAAgCA,qBAAhC;AAAA",
+    "sourcesContent": [
+        "const __axios = require('axios');\n\n/**\n * @name                            bitbucketApiValidator\n * @namespace           node.auth\n * @type                            Function\n * @async\n *\n * Make sure the bitbucket api authentification has been made correctly\n *\n * @param           {Object}              authInfo            The authentification info\n * @return          {Promise}                                 true if ok, false (or error message) if it's not...\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nmodule.exports = async function bitbucketApiValidator(authInfo) {\n  return new Promise(async (resolve, reject) => {\n    const url = 'https://api.bitbucket.org/2.0/repositories';\n\n    switch (authInfo.type) {\n      case 'basic':\n        __axios\n          .get(url, {\n            headers: authInfo.headers\n          })\n          .then((response) => {\n            resolve(true);\n          })\n          .catch((e) => {\n            resolve(`Your credentials have been declined. Please try again...`);\n          });\n        break;\n      case 'bearer':\n        __axios\n          .get(url, {\n            headers: authInfo.headers\n          })\n          .then((response) => {\n            console.log('resp', response);\n            process.exit();\n            resolve(true);\n          })\n          .catch((e) => {\n            resolve(`Your token has been declined. Please try again...`);\n          });\n        break;\n    }\n  });\n};\n"
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "childProcess.js"
+    ],
+    "names": [
+        "childProcess",
+        "global",
+        "process",
+        "send",
+        "undefined",
+        "env",
+        "IS_CHILD_PROCESS"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;AAee,SAASA,YAAT,GAAwB;AACrC,MAAI,CAACC,MAAD,IAAW,CAACA,MAAM,CAACC,OAAvB,EAAgC,OAAO,KAAP;AAChC,SACED,MAAM,CAACC,OAAP,CAAeC,IAAf,KAAwBC,SAAxB,IAAqCH,MAAM,CAACC,OAAP,CAAeG,GAAf,CAAmBC,gBAD1D;AAGD",
+    "sourcesContent": [
+        "/**\n * @name                            childProcess\n * @namespace           sugar.js.is\n * @type                            Function\n *\n * Check if the current script is running as a child process or not by checking if the ```process.send``` exists, or is the environment variable ```IS_CHILD_PROCESS``` is true.\n *\n * @return        {Boolean}                             true if the process is running as a child process, false if not\n *\n * @example       js\n * import isChildProcess from '@coffeekraken/sugar/node/is/childProcess';\n * isChildProcess(); // => false\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function childProcess() {\n  if (!global || !global.process) return false;\n  return (\n    global.process.send !== undefined || global.process.env.IS_CHILD_PROCESS\n  );\n}\n"
+    ]
+}

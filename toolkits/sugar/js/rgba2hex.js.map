@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "sources": [
+        "rgba2hex.js"
+    ],
+    "names": [
+        "rgba2hex",
+        "r",
+        "g",
+        "b",
+        "a",
+        "alpha",
+        "Math",
+        "round",
+        "parseInt",
+        "toString",
+        "slice"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;AAmBe,SAASA,QAAT,CAAkBC,CAAlB,EAAqBC,CAArB,EAAwBC,CAAxB,EAA2BC,CAA3B,EAAkC;AAAA,MAAPA,CAAO;AAAPA,IAAAA,CAAO,GAAH,CAAG;AAAA;;AAC/C,MAAI,OAAOH,CAAP,KAAa,QAAjB,EAA2B;AACzBC,IAAAA,CAAC,GAAGD,CAAC,CAACC,CAAN;AACAC,IAAAA,CAAC,GAAGF,CAAC,CAACE,CAAN;AACAC,IAAAA,CAAC,GAAGH,CAAC,CAACG,CAAN;AACAH,IAAAA,CAAC,GAAGA,CAAC,CAACA,CAAN;AACD;;AAED,MAAII,KAAK,GAAG,EAAZ;;AACA,MAAID,CAAC,IAAI,CAAL,IAAUA,CAAC,IAAI,GAAnB,EAAwB;AACtB,QAAIA,CAAC,GAAG,CAAR,EAAW;AACTA,MAAAA,CAAC,GAAG,MAAMA,CAAV;AACD,KAFD,MAEO,IAAIA,CAAC,GAAG,CAAR,EAAW;AAChBA,MAAAA,CAAC,GAAI,MAAM,GAAP,GAAcA,CAAlB;AACD;;AACDA,IAAAA,CAAC,GAAGE,IAAI,CAACC,KAAL,CAAWH,CAAX,CAAJ;AACAC,IAAAA,KAAK,GAAGG,QAAQ,CAACJ,CAAD,EAAI,EAAJ,CAAR,CAAgBK,QAAhB,CAAyB,EAAzB,CAAR;AACD;;AACD,SACE,MACA,CAAC,MAAMD,QAAQ,CAACP,CAAD,EAAI,EAAJ,CAAR,CAAgBQ,QAAhB,CAAyB,EAAzB,CAAP,EAAqCC,KAArC,CAA2C,CAAC,CAA5C,CADA,GAEA,CAAC,MAAMF,QAAQ,CAACN,CAAD,EAAI,EAAJ,CAAR,CAAgBO,QAAhB,CAAyB,EAAzB,CAAP,EAAqCC,KAArC,CAA2C,CAAC,CAA5C,CAFA,GAGA,CAAC,MAAMF,QAAQ,CAACL,CAAD,EAAI,EAAJ,CAAR,CAAgBM,QAAhB,CAAyB,EAAzB,CAAP,EAAqCC,KAArC,CAA2C,CAAC,CAA5C,CAHA,GAIAL,KALF;AAOD",
+    "sourcesContent": [
+        "/**\n * @name                rgba2hex\n * @namespace           sugar.js.color\n * @type                Function\n *\n * RGBA to HEX\n *\n * @param       \t{Number|Object}        \tr\t          \tThe red value between 0-255 or an object representing r, g, b, a\n * @param       \t{Number}        \tg\t          \tThe green value between 0-255\n * @param       \t{Number}        \tb\t          \tThe blue value between 0-255\n * @param       \t{Number}        \ta\t          \tThe alpha value between 0-100|0-1\n * @return      \t{string}\t\t                    The hex string representation like #ff004f\n *\n * @example         js\n * import rgba2hex from '@coffeekraken/sugar/js/color/rgba2hex';\n * rgba2hex(10,20,30,10);\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function rgba2hex(r, g, b, a = 1) {\n  if (typeof r === 'object') {\n    g = r.g;\n    b = r.b;\n    a = r.a;\n    r = r.r;\n  }\n\n  let alpha = '';\n  if (a != 1 && a != 100) {\n    if (a < 1) {\n      a = 255 * a;\n    } else if (a > 1) {\n      a = (255 / 100) * a;\n    }\n    a = Math.round(a);\n    alpha = parseInt(a, 10).toString(16);\n  }\n  return (\n    '#' +\n    ('0' + parseInt(r, 10).toString(16)).slice(-2) +\n    ('0' + parseInt(g, 10).toString(16)).slice(-2) +\n    ('0' + parseInt(b, 10).toString(16)).slice(-2) +\n    alpha\n  );\n}\n"
+    ]
+}

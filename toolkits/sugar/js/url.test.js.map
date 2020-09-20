@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "url.test.js"
+    ],
+    "names": [
+        "__url",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,KAAK,GAAGC,OAAO,CAAC,QAAD,CAArB;;AACAA,OAAO,CAAC,OAAD,CAAP,CAAiBD,KAAjB",
+    "sourcesContent": [
+        "const __url = require('../url');\nrequire('./url')(__url);"
+    ]
+}

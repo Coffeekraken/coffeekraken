@@ -1,0 +1,38 @@
+{
+    "version": 3,
+    "sources": [
+        "simplify.js"
+    ],
+    "names": [
+        "simplify",
+        "string",
+        "settings",
+        "specialChars",
+        "lowerCase",
+        "dashSpace",
+        "trim",
+        "map",
+        "A",
+        "a",
+        "E",
+        "e",
+        "I",
+        "i",
+        "O",
+        "o",
+        "U",
+        "u",
+        "C",
+        "c",
+        "N",
+        "n",
+        "toLowerCase",
+        "pattern",
+        "replace",
+        "RegExp"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;AAsBe,SAASA,QAAT,CAAkBC,MAAlB,EAA0BC,QAA1B,EAAyC;AAAA,MAAfA,QAAe;AAAfA,IAAAA,QAAe,GAAJ,EAAI;AAAA;;AACtDA,EAAAA,QAAQ,GAAG,wBACT;AACEC,IAAAA,YAAY,EAAE,IADhB;AAEEC,IAAAA,SAAS,EAAE,IAFb;AAGEC,IAAAA,SAAS,EAAE,IAHb;AAIEC,IAAAA,IAAI,EAAE;AAJR,GADS,EAOTJ,QAPS,CAAX;AAUA,MAAID,MAAM,IAAI,IAAd,EAAoB,OAAO,EAAP;AACpB,MAAIM,GAAG,GAAG;AACRC,IAAAA,CAAC,EAAE,WADK;AAERC,IAAAA,CAAC,EAAE,WAFK;AAGRC,IAAAA,CAAC,EAAE,SAHK;AAIRC,IAAAA,CAAC,EAAE,SAJK;AAKRC,IAAAA,CAAC,EAAE,SALK;AAMRC,IAAAA,CAAC,EAAE,SANK;AAORC,IAAAA,CAAC,EAAE,WAPK;AAQRC,IAAAA,CAAC,EAAE,WARK;AASRC,IAAAA,CAAC,EAAE,WATK;AAURC,IAAAA,CAAC,EAAE,WAVK;AAWRC,IAAAA,CAAC,EAAE,GAXK;AAYRC,IAAAA,CAAC,EAAE,GAZK;AAaRC,IAAAA,CAAC,EAAE,GAbK;AAcRC,IAAAA,CAAC,EAAE;AAdK,GAAV;;AAiBA,MAAInB,QAAQ,CAACG,SAAb,EAAwB;AACtBE,IAAAA,GAAG,CAAC,GAAD,CAAH,GAAW,KAAX;AACD;;AAED,MAAIL,QAAQ,CAACE,SAAb,EAAwB;AACtBH,IAAAA,MAAM,GAAGA,MAAM,CAACqB,WAAP,EAAT;AACD;;AAED,MAAIpB,QAAQ,CAACC,YAAb,EAA2B;AACzB,SAAK,IAAIoB,OAAT,IAAoBhB,GAApB,EAAyB;AACvBN,MAAAA,MAAM,GAAGA,MAAM,CAACuB,OAAP,CAAe,IAAIC,MAAJ,CAAWlB,GAAG,CAACgB,OAAD,CAAd,EAAyB,GAAzB,CAAf,EAA8CA,OAA9C,CAAT;AACD;AACF;;AAED,MAAIrB,QAAQ,CAACI,IAAb,EAAmBL,MAAM,GAAGA,MAAM,CAACK,IAAP,EAAT;AAEnB,SAAOL,MAAP;AACD",
+    "sourcesContent": [
+        "import __deepMerge from '../object/deepMerge';\n\n/**\n * @name          simply\n * @namespace     sugar.js.string\n * @type          Function\n *\n * This function take a string with accents, etc and convert it to a more simply\n * version like \"éàddö\" to \"eaddo\"\n *\n * @param       {String}        string        The string to simplyfy\n * @param       {Object}        [settings={}]       An object of settings to simplify your string as you want:\n * - specialChars (true) {Boolean}: Specify if you want to get rid of the special chars like é, è, etc...\n * - lowerCase (true) {Boolean}: Specify if you want your returned string to be lowercased\n * - dashSpace (true) {Boolean}: Specify if you want to replace the \"_|-\" by a space\n * - trim (true} {Boolean}: Specify if you want your string to be trimed or not\n *\n * @example       js\n * import simplify from '@coffeekraken/sugar/js/string/simplify';\n * simplify('éàddö'); // => eaddo\n *\n * @since     2.0.0\n * @author    João Filipe Ventura Coelho <joaoventura93@outlook.com>\n */\nexport default function simplify(string, settings = {}) {\n  settings = __deepMerge(\n    {\n      specialChars: true,\n      lowerCase: true,\n      dashSpace: true,\n      trim: true\n    },\n    settings\n  );\n\n  if (string == null) return '';\n  var map = {\n    A: 'À|Á|Ã|Â|Ä',\n    a: 'á|à|ã|â|ä',\n    E: 'É|È|Ê|Ë',\n    e: 'é|è|ê|ë',\n    I: 'Í|Ì|Î|Ï',\n    i: 'í|ì|î|ï',\n    O: 'Ó|Ò|Ô|Õ|Ö',\n    o: 'ó|ò|ô|õ|ö',\n    U: 'Ú|Ù|Û|Ü|Ü',\n    u: 'ú|ù|û|ü|ü',\n    C: 'Ç',\n    c: 'ç',\n    N: 'Ñ',\n    n: 'ñ'\n  };\n\n  if (settings.dashSpace) {\n    map[' '] = '_|-';\n  }\n\n  if (settings.lowerCase) {\n    string = string.toLowerCase();\n  }\n\n  if (settings.specialChars) {\n    for (var pattern in map) {\n      string = string.replace(new RegExp(map[pattern], 'g'), pattern);\n    }\n  }\n\n  if (settings.trim) string = string.trim();\n\n  return string;\n}\n"
+    ]
+}

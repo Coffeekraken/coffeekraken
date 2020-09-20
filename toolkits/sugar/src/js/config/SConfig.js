@@ -272,6 +272,12 @@ export default class SConfig {
 
     let value = __get(this._adapters[adapter].config, path);
 
+    // if (typeof value === 'function') {
+    //   console.log('COCOC');
+    //   const _get = this.get.bind(this);
+    //   value = value(_get);
+    // }
+
     if (__isPlainObject(value)) {
       value = __deepMap(value, (val, prop, fullPath) => {
         // check if we get some things to use as variable

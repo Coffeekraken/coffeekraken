@@ -1,0 +1,15 @@
+{
+    "version": 3,
+    "sources": [
+        "SConfigLsAdapter.test.js"
+    ],
+    "names": [
+        "__SConfigLsAdapter",
+        "require",
+        "__SConfig"
+    ],
+    "mappings": ";;AAAA,IAAMA,kBAAkB,GAAGC,OAAO,CAAC,8BAAD,CAAlC;;AACA,IAAMC,SAAS,GAAGD,OAAO,CAAC,YAAD,CAAzB;;AACAA,OAAO,CAAC,oBAAD,CAAP,CAA8BC,SAA9B,EAAyCF,kBAAzC",
+    "sourcesContent": [
+        "const __SConfigLsAdapter = require('../adapters/SConfigLsAdapter');\nconst __SConfig = require('../SConfig');\nrequire('./SConfigLsAdapter')(__SConfig, __SConfigLsAdapter);"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "SRequiredValidation.js"
+    ],
+    "names": [
+        "SRequiredValidation",
+        "value",
+        "undefined",
+        "__SValidation"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;IAUMA,mB;;;;;;;;;;;;;yBAGQC,K,EAAO;AACjB,aAAOA,KAAK,KAAK,IAAV,IAAkBA,KAAK,KAAKC,SAAnC;AACD;;;;EAL+BC,qB;;gBAA5BH,mB,aAEF,4E;;eAMWA,mB",
+    "sourcesContent": [
+        "import __SValidation from '../../SValidation';\n\n/**\n * @name          SRequiredValidation\n * @namespace     sugar.js.validation.value.validation\n * @type          Class\n *\n * This class represent the \"required\" validation\n *\n * @since       2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nclass SRequiredValidation extends __SValidation {\n  static message =\n    'This value is <yellow>required</yellow> and you\\'ve passed \"<red>%0\"</red>';\n  static exec(value) {\n    return value !== null && value !== undefined;\n  }\n}\n\nexport default SRequiredValidation;\n"
+    ]
+}

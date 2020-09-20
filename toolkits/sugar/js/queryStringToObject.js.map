@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "queryStringToObject.js"
+    ],
+    "names": [
+        "queryStringToObject",
+        "str",
+        "decodeURIComponent",
+        "chunks",
+        "split",
+        "obj",
+        "filter",
+        "ch",
+        "c",
+        "length"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;;;AAoBe,SAASA,mBAAT,CAA6BC,GAA7B,EAAkC;AAC/CA,EAAAA,GAAG,GAAG,oBAAMA,GAAN,EAAW,GAAX,CAAN;AACAA,EAAAA,GAAG,GAAGC,kBAAkB,CAACD,GAAD,CAAxB;AACA,MAAIE,MAAM,GAAGF,GAAG,CAACG,KAAJ,CAAU,GAAV,CAAb;AAAA,MACEC,GAAG,GAAG,EADR;AAEAF,EAAAA,MAAM,GAAGA,MAAM,CAACG,MAAP,CAAeC,EAAD,IAAQ;AAC7B,WAAOA,EAAE,KAAK,EAAd;AACD,GAFQ,CAAT;;AAGA,OAAK,IAAIC,CAAC,GAAG,CAAb,EAAgBA,CAAC,GAAGL,MAAM,CAACM,MAA3B,EAAmCD,CAAC,EAApC,EAAwC;AACtC,QAAIJ,KAAK,GAAGD,MAAM,CAACK,CAAD,CAAN,CAAUJ,KAAV,CAAgB,GAAhB,EAAqB,CAArB,CAAZ;AACAC,IAAAA,GAAG,CAACD,KAAK,CAAC,CAAD,CAAN,CAAH,GAAgBA,KAAK,CAAC,CAAD,CAArB;AACD;;AACD,SAAOC,GAAP;AACD",
+    "sourcesContent": [
+        "import ltrim from '../string/ltrim';\n\n/**\n * @name        queryStringToObject\n * @namespace           sugar.js.url\n * @type      Function\n *\n * Transform a query string into his object (key => pairs) representation\n *\n * @param \t{String}  \tqueryString  \tThe query string to process\n * @return \t{Object} \t\t\t\t\tThe object representation of the query string\n *\n * @example    js\n * import queryStringToObject from '@coffeekraken/sugar/js/string/queryStringToObject'\n * queryStringToObject('?var1=value1&var2=value2') // { var1: 'value1', var2: 'value2' }\n *\n * @snippet     js\n * Sugar.js.url.queryStringToObject($1)\n *\n * @see  \thttp://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object\n * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function queryStringToObject(str) {\n  str = ltrim(str, '?');\n  str = decodeURIComponent(str);\n  var chunks = str.split('&'),\n    obj = {};\n  chunks = chunks.filter((ch) => {\n    return ch !== '';\n  });\n  for (var c = 0; c < chunks.length; c++) {\n    var split = chunks[c].split('=', 2);\n    obj[split[0]] = split[1];\n  }\n  return obj;\n}\n"
+    ]
+}

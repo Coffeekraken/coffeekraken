@@ -1,0 +1,25 @@
+{
+    "version": 3,
+    "sources": [
+        "typeDefinitionArrayObjectToString.js"
+    ],
+    "names": [
+        "typeDefinitionArrayObjectToString",
+        "typeDefinitionArrayObj",
+        "parts",
+        "Array",
+        "isArray",
+        "forEach",
+        "definitionObj",
+        "part",
+        "type",
+        "of",
+        "ofString",
+        "push",
+        "join"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAiCe,SAASA,iCAAT,CACbC,sBADa,EAEb;AACA,MAAMC,KAAK,GAAG,EAAd;AAEA,MAAI,CAACC,KAAK,CAACC,OAAN,CAAcH,sBAAd,CAAL,EACEA,sBAAsB,GAAG,CAACA,sBAAD,CAAzB;AAEFA,EAAAA,sBAAsB,CAACI,OAAvB,CAAgCC,aAAD,IAAmB;AAChD,QAAIC,IAAI,GAAGD,aAAa,CAACE,IAAzB;;AACA,QAAIF,aAAa,CAACG,EAAlB,EAAsB;AACpB,UAAMC,QAAQ,GAAGV,iCAAiC,CAACM,aAAa,CAACG,EAAf,CAAlD;AACAF,MAAAA,IAAI,eAAQG,QAAR,MAAJ;AACD;;AACDR,IAAAA,KAAK,CAACS,IAAN,CAAWJ,IAAX;AACD,GAPD;AASA,SAAOL,KAAK,CAACU,IAAN,CAAW,GAAX,CAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name          typeDefinitionArrayObjectToString\n * @namespace     sugar.js.value\n * @type          Function\n *\n * This function take as parameter a type definition object like this one:\n * {\n *    type: [{\n *      type: 'Array',\n *      of: [{\n *        type: 'Boolean'\n *      }]\n *    }]\n * }\n * an transform it to a string like so \"Array<Boolean>\"\n *\n * @param       {Object}        typeDefinitionArrayObj       The type definition array object\n * @return      {String}                                The string representation of the type definition object\n *\n * @example         js\n * import typeDefinitionArrayObjToString from '@coffeekraken/sugar/js/value/typeDefinitionArrayObjectToString'\n * typeDefinitionArrayObjToString([{\n *    type: [{\n *      type: 'Array',\n *      of: [{\n *        type: 'Boolean'\n *      }]\n *    }]\n * }]); // => Array<Boolean>\n *\n * @since       2.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function typeDefinitionArrayObjectToString(\n  typeDefinitionArrayObj\n) {\n  const parts = [];\n\n  if (!Array.isArray(typeDefinitionArrayObj))\n    typeDefinitionArrayObj = [typeDefinitionArrayObj];\n\n  typeDefinitionArrayObj.forEach((definitionObj) => {\n    let part = definitionObj.type;\n    if (definitionObj.of) {\n      const ofString = typeDefinitionArrayObjectToString(definitionObj.of);\n      part += `<${ofString}>`;\n    }\n    parts.push(part);\n  });\n\n  return parts.join('|');\n}\n"
+    ]
+}

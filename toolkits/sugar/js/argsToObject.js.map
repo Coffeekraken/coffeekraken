@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "argsToObject.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "argsToObject",
+        "argsObj",
+        "definitionObj",
+        "settings"
+    ],
+    "mappings": ";;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAoCAA,MAAM,CAACC,OAAP,GAAiB,SAASC,YAAT,CAAsBC,OAAtB,EAA+BC,aAA/B,EAA8CC,QAA9C,EAA6D;AAAA,MAAfA,QAAe;AAAfA,IAAAA,QAAe,GAAJ,EAAI;AAAA;;AAC5E,MAAI,OAAOF,OAAP,KAAmB,QAAvB,EAAiC;AAC/B,WAAO,wBAAYA,OAAZ,EAAqBC,aAArB,CAAP;AACD;;AAED,SAAO,iCAAqBD,OAAO,IAAI,EAAhC,EAAoCC,aAApC,EAAmDC,QAAnD,CAAP;AACD,CAND",
+    "sourcesContent": [
+        "import __parseArgs from './parseArgs';\nimport __completeArgsObject from './completeArgsObject';\n\n/**\n * @name                  argsToObject\n * @namespace           sugar.js.cli\n * @type                  Function\n *\n * This function take a simple object, a definitionObj object and return you the string version that you can pass\n * directly to the command line interface\n *\n * @param       {Object|String}        argsObj        The arguments object or string\n * @param       {Object}             definitionObj    The definitionObj object\n * @param       {Object}            [settings]        The settings object to configure your conversion process:\n * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails\n * @return      {Object}                              The final values object\n *\n * @example       js\n * import argsToObject from '@coffeekraken/sugar/js/cli/argsToObject';\n * argsToObject('-a Yop, {\n *    arg1: {\n *      type: 'String',\n *      alias: 'a',\n *      default: 'Plop'\n *    },\n *    myOtherArg: {\n *      type: 'String'\n *    },\n *    lastArg: {\n *      type: 'String',\n *      alias: 'l',\n *      default: 'Nelson'\n *    }\n * });\n * // => { arg1: 'Yop', lastArg: 'Nelson' }\n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nmodule.exports = function argsToObject(argsObj, definitionObj, settings = {}) {\n  if (typeof argsObj === 'string') {\n    return __parseArgs(argsObj, definitionObj);\n  }\n\n  return __completeArgsObject(argsObj || {}, definitionObj, settings);\n};\n"
+    ]
+}

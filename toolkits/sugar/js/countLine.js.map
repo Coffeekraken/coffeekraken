@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "sources": [
+        "countLine.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "countLine",
+        "line",
+        "count",
+        "htmlTags",
+        "terminalSpecialChars",
+        "newLineChars",
+        "newLine",
+        "replace",
+        "length"
+    ],
+    "mappings": ";;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;AAqBAA,MAAM,CAACC,OAAP,GAAiB,SAASC,SAAT,CAAmBC,IAAnB,EAAyBC,KAAzB,EAAqC;AAAA,MAAZA,KAAY;AAAZA,IAAAA,KAAY,GAAJ,EAAI;AAAA;;AACpDA,EAAAA,KAAK,GAAG,wBACN;AACEC,IAAAA,QAAQ,EAAE,KADZ;AAEEC,IAAAA,oBAAoB,EAAE,KAFxB;AAGEC,IAAAA,YAAY,EAAE;AAHhB,GADM,EAMNH,KANM,CAAR;AASA,MAAII,OAAO,GAAGL,IAAd;;AACA,MAAIC,KAAK,CAACE,oBAAN,KAA+B,KAAnC,EAA0C;AACxCE,IAAAA,OAAO,GAAG,wBAAYA,OAAZ,CAAV;AACD;;AACD,MAAIJ,KAAK,CAACC,QAAN,KAAmB,KAAvB,EAA8B;AAC5BG,IAAAA,OAAO,GAAGA,OAAO,CAACC,OAAR,CAAgB,0BAAhB,EAA4C,EAA5C,CAAV;AACD;;AACD,MAAIL,KAAK,CAACG,YAAN,KAAuB,KAA3B,EAAkC;AAChCC,IAAAA,OAAO,GAAGA,OAAO,CAACC,OAAR,CAAgB,IAAhB,EAAsB,EAAtB,CAAV;AACD;;AAED,SAAOD,OAAO,CAACE,MAAf;AACD,CAtBD",
+    "sourcesContent": [
+        "import __deepMerge from '../object/deepMerge';\nimport __stripAnsi from 'strip-ansi';\n\n/**\n * @name                                  countLine\n * @namespace           sugar.js.string\n * @type                                  Function\n *\n * Count how many characters their is in the passed line.\n * This function will exclude the characters like the html tags like <red>, etc...\n *\n * @param           {String}              line              The line to count\n * @param           {Object}              [count={}]        Specify what you want to count outside of the normal characters of yourse. Here's the list of available options:\n * - htmlTags (false) {Boolean}: Specify if you want to count the html tags or not\n * - terminalSpecialChars (false) {Boolean}: Specify if you want to count the terminal specials chars like \"\\u001b[30m\", etc...\n * - newLineChars (false) {Boolean}: Specify if you want to count the new line special char \"\\n\" or not\n * @return          {Number}                                How many characters their is in the line\n *\n * @example         js\n * const countLine = require('@coffeekraken/sugar/js/string/countLine');\n * countLine('Hello <red>World</red>'); // 11\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nmodule.exports = function countLine(line, count = {}) {\n  count = __deepMerge(\n    {\n      htmlTags: false,\n      terminalSpecialChars: false,\n      newLineChars: false\n    },\n    count\n  );\n\n  let newLine = line;\n  if (count.terminalSpecialChars === false) {\n    newLine = __stripAnsi(newLine);\n  }\n  if (count.htmlTags === false) {\n    newLine = newLine.replace(/<\\/?[a-zA-Z0-9]+\\s?\\/?>/g, '');\n  }\n  if (count.newLineChars === false) {\n    newLine = newLine.replace('\\n', '');\n  }\n\n  return newLine.length;\n};\n"
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "sources": [
+        "description.js"
+    ],
+    "names": [
+        "description",
+        "data",
+        "content",
+        "length",
+        "slice",
+        "map",
+        "c",
+        "trim",
+        "join"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;AAae,SAASA,WAAT,CAAqBC,IAArB,EAA2B;AACxC,MAAIA,IAAI,CAACC,OAAL,IAAgBD,IAAI,CAACC,OAAL,CAAaD,IAAI,CAACC,OAAL,CAAaC,MAAb,GAAsB,CAAnC,MAA0C,EAA9D,EAAkE;AAChEF,IAAAA,IAAI,CAACC,OAAL,GAAeD,IAAI,CAACC,OAAL,CAAaE,KAAb,CAAmB,CAAnB,EAAsB,CAAC,CAAvB,CAAf;AACD;;AACD,MAAI,CAACH,IAAI,CAACC,OAAV,EAAmB,OAAO,EAAP;AACnB,SAAOD,IAAI,CAACC,OAAL,CACJG,GADI,CACCC,CAAD,IAAOA,CAAC,CAACC,IAAF,EADP,EAEJC,IAFI,CAEC,IAFD,EAGJD,IAHI,EAAP;AAID",
+    "sourcesContent": [
+        "/**\n * @name              description\n * @namespace           sugar.js.docblock.tags\n * @type              Function\n *\n * Parse the description tag\n *\n * @param       {Object}          data        The data object parsed in the string\n * @return      {Object}                      The formated object\n *\n * @since     2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com>\n */\nexport default function description(data) {\n  if (data.content && data.content[data.content.length - 1] === '') {\n    data.content = data.content.slice(0, -1);\n  }\n  if (!data.content) return '';\n  return data.content\n    .map((c) => c.trim())\n    .join('\\n')\n    .trim();\n}\n"
+    ]
+}

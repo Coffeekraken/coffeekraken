@@ -1,0 +1,30 @@
+{
+    "version": 3,
+    "sources": [
+        "parseTypeDefinitionString.js"
+    ],
+    "names": [
+        "parseTypeDefinitionString",
+        "argTypeString",
+        "inDepth",
+        "currentPart",
+        "typesArray",
+        "split",
+        "forEach",
+        "character",
+        "Error",
+        "push",
+        "returnArray",
+        "typeDefinitionString",
+        "parts",
+        "type",
+        "ofArray",
+        "ofPart",
+        "slice",
+        "of"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,yBAAT,CAAmCC,aAAnC,EAAkD;AAC/D;AACA,MAAIC,OAAO,GAAG,CAAd;AACA,MAAIC,WAAW,GAAG,EAAlB;AAAA,MACEC,UAAU,GAAG,EADf;AAEAH,EAAAA,aAAa,CAACI,KAAd,CAAoB,EAApB,EAAwBC,OAAxB,CAAiCC,SAAD,IAAe;AAC7C,QAAIA,SAAS,KAAK,GAAlB,EAAuB;AACrB,UAAIL,OAAO,IAAI,CAAf,EAAkB;AAChB,cAAM,IAAIM,KAAJ,gEACmDP,aADnD,sBAAN;AAGD;;AACDC,MAAAA,OAAO;AACPC,MAAAA,WAAW,IAAII,SAAf;AACA;AACD;;AACD,QAAIA,SAAS,KAAK,GAAlB,EAAuB;AACrBL,MAAAA,OAAO;AACPC,MAAAA,WAAW,IAAII,SAAf;AACA;AACD;;AACD,QAAIA,SAAS,KAAK,GAAlB,EAAuB;AACrB,UAAIL,OAAO,GAAG,CAAd,EAAiB;AACfC,QAAAA,WAAW,IAAII,SAAf;AACA;AACD;;AACDH,MAAAA,UAAU,CAACK,IAAX,CAAgBN,WAAhB;AACAA,MAAAA,WAAW,GAAG,EAAd;AACA;AACD;;AACDA,IAAAA,WAAW,IAAII,SAAf;AACD,GA1BD;AA2BAH,EAAAA,UAAU,CAACK,IAAX,CAAgBN,WAAhB,EAhC+D,CAkC/D;;AACA,MAAMO,WAAW,GAAG,EAApB,CAnC+D,CAqC/D;;AACAN,EAAAA,UAAU,CAACE,OAAX,CAAoBK,oBAAD,IAA0B;AAC3C;AACA,QAAMC,KAAK,GAAGD,oBAAoB,CAACN,KAArB,CAA2B,GAA3B,CAAd,CAF2C,CAI3C;;AACA,QAAMQ,IAAI,GAAG,yBAAaD,KAAK,CAAC,CAAD,CAAlB,CAAb,CAL2C,CAO3C;;AACA,QAAIE,OAAO,GAAG,IAAd;;AACA,QAAIF,KAAK,CAAC,CAAD,CAAT,EAAc;AACZ,UAAMG,MAAM,GAAGH,KAAK,CAAC,CAAD,CAAL,CAASI,KAAT,CAAe,CAAf,EAAkB,CAAC,CAAnB,CAAf;AACAF,MAAAA,OAAO,GAAGd,yBAAyB,CAACe,MAAD,CAAnC;AACD,KAZ0C,CAc3C;;;AACAL,IAAAA,WAAW,CAACD,IAAZ,CAAiB;AACfI,MAAAA,IADe;AAEfI,MAAAA,EAAE,EAAEH;AAFW,KAAjB;AAID,GAnBD;AAqBA,SAAOJ,WAAP;AACD",
+    "sourcesContent": [
+        "import __upperFirst from '../../string/upperFirst';\n\n/**\n * @name              parseTypeDefinitionString\n * @namespace           sugar.js.validation.utils\n * @type              Function\n *\n * Thia function take an argument type definition string like \"String\", \"Array<String>\", \"Array|String\", etc... and return an object that represent this.\n *\n * @param       {String}        argTypeString         The argument type definition string\n * @return      {Object}                              The argument type definition string in object format\n *\n * @example       js\n * import parseTypeDefinitionString from '@coffeekraken/sugar/js/parse/parseTypeDefinitionString';\n * parseTypeDefinitionString('Array'); // => [{ type: 'array', of: null }] }\n * parseTypeDefinitionString('Array<String>'); // => [{ type: 'array', of: [{ type: 'string' }] }]\n *\n * @since       2.0.0\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function parseTypeDefinitionString(argTypeString) {\n  // split the string by |\n  let inDepth = 0;\n  let currentPart = '',\n    typesArray = [];\n  argTypeString.split('').forEach((character) => {\n    if (character === '>') {\n      if (inDepth <= 0) {\n        throw new Error(\n          `It seems that your argument type definition string \"${argTypeString}\" is invalid...`\n        );\n      }\n      inDepth--;\n      currentPart += character;\n      return;\n    }\n    if (character === '<') {\n      inDepth++;\n      currentPart += character;\n      return;\n    }\n    if (character === '|') {\n      if (inDepth > 0) {\n        currentPart += character;\n        return;\n      }\n      typesArray.push(currentPart);\n      currentPart = '';\n      return;\n    }\n    currentPart += character;\n  });\n  typesArray.push(currentPart);\n\n  // init the return array\n  const returnArray = [];\n\n  // loop on each types array\n  typesArray.forEach((typeDefinitionString) => {\n    // split the string by <\n    const parts = typeDefinitionString.split('<');\n\n    // get the \"type\"\n    const type = __upperFirst(parts[0]);\n\n    // process the \"of\" part if exist\n    let ofArray = null;\n    if (parts[1]) {\n      const ofPart = parts[1].slice(0, -1);\n      ofArray = parseTypeDefinitionString(ofPart);\n    }\n\n    // build the type object and add it the the returnArray\n    returnArray.push({\n      type,\n      of: ofArray\n    });\n  });\n\n  return returnArray;\n}\n"
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "version": 3,
+    "sources": [
+        "SValidation.js"
+    ],
+    "names": [
+        "SValidation",
+        "args",
+        "checkResult",
+        "exec",
+        "message",
+        "finalArgs",
+        "Array",
+        "isArray",
+        "forEach",
+        "arg",
+        "i",
+        "value",
+        "join",
+        "replace",
+        "packageRoot",
+        "require",
+        "__dirname"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;;;;;;;AAEA;;;;;;;;;;;IAWMA,W;;;;;;;;AACJ;;;;;;;;;;;;;;;4BAesB;AAAA,wCAANC,IAAM;AAANA,QAAAA,IAAM;AAAA;;AACpB,UAAMC,WAAW,GAAG,KAAKC,IAAL,CAAU,GAAGF,IAAb,CAApB;AACA,UAAIC,WAAW,KAAK,IAApB,EAA0B,OAAO,IAAP;AAC1B,UAAIE,OAAO,GAAG,KAAKA,OAAnB;AACA,UAAMC,SAAS,GAAGC,KAAK,CAACC,OAAN,CAAcL,WAAd,IAA6BA,WAA7B,GAA2CD,IAA7D;AACAI,MAAAA,SAAS,CAACG,OAAV,CAAkB,CAACC,GAAD,EAAMC,CAAN,KAAY;AAC5B,YAAIC,KAAK,GAAG,uBAAWF,GAAX,CAAZ;;AACA,YAAIH,KAAK,CAACC,OAAN,CAAcE,GAAd,CAAJ,EAAwB;AACtBE,UAAAA,KAAK,GAAGF,GAAG,CAACG,IAAJ,CAAS,GAAT,CAAR;AACD;;AACDR,QAAAA,OAAO,GAAGA,OAAO,CAACS,OAAR,YAAoBH,CAApB,GAAyBC,KAAzB,CAAV;;AACA,YAAI,oBAAJ,EAAgB;AACd,cAAMG,WAAW,GAAGC,OAAO,CAAC,2CAAD,CAA3B;;AACAX,UAAAA,OAAO,GAAGA,OAAO,CAACS,OAAR,WAAmBC,WAAW,CAACE,SAAD,CAA9B,QAA8C,EAA9C,CAAV;AACAZ,UAAAA,OAAO,GAAGA,OAAO,CAACS,OAAR,WAAmBC,WAAW,EAA9B,QAAqC,EAArC,CAAV;AACD;AACF,OAXD;AAYA,aAAOV,OAAP;AACD;AAED;;;;;;;;;;;;;;;;;;eAcaJ,W",
+    "sourcesContent": [
+        "import __toString from '../string/toString';\nimport __isNode from '../is/node';\n\n/**\n * @name          SValidation\n * @namespace     sugar.js.validation.value.validation\n * @type          Class\n *\n * This class represent the base validation class\n * that can be extended to create some validations like the \"required\" one, etc...\n *\n * @since       2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nclass SValidation {\n  /**\n   * @name          apply\n   * @type          Function\n   * @static\n   *\n   * This static method is the main one when you want to apply a certain\n   * validation on your value. Simply call this method and pass your value to validate.\n   * By default, if the value does not pass the test, this method will\n   * throw an error by using the \"message\" static property of the\n   * validation class. If you don't want that but getting the string message back\n   * insteaf, simply pass in the settings object the property \"throw\" to false\n   *\n   * @since         2.0.0\n   * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  static apply(...args) {\n    const checkResult = this.exec(...args);\n    if (checkResult === true) return true;\n    let message = this.message;\n    const finalArgs = Array.isArray(checkResult) ? checkResult : args;\n    finalArgs.forEach((arg, i) => {\n      let value = __toString(arg);\n      if (Array.isArray(arg)) {\n        value = arg.join(',');\n      }\n      message = message.replace(`%${i}`, value);\n      if (__isNode()) {\n        const packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');\n        message = message.replace(`${packageRoot(__dirname)}/`, '');\n        message = message.replace(`${packageRoot()}/`, '');\n      }\n    });\n    return message;\n  }\n\n  /**\n   * @name          exec\n   * @type          Function\n   * @static\n   *\n   * This static method is the one you have to overrive. It will be called by the ```apply``` one\n   * with the same arguments and you have to return ```true``` or ```false``` depending on your\n   * check result.\n   *\n   * @since         2.0.0\n   * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n}\n\nexport default SValidation;\n"
+    ]
+}

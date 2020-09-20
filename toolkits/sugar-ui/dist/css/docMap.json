@@ -1,9 +1,13 @@
-[
-    {
-        "path": "doc/sugar-ui/scss/07_molecules/ol-classes.css",
+{
+    "sugar-ui.scss.07_molecules.ol-classes": {
         "name": "ol-classes",
         "namespace": "sugar-ui.scss.07_molecules",
+        "filename": "ol-classes.css",
+        "extension": "css",
+        "path": "doc/sugar-ui/scss/07_molecules/ol-classes.css",
+        "directory": "doc/sugar-ui/scss/07_molecules",
         "type": "Mixin",
-        "description": "Describe the ordered lists display"
+        "description": "Describe the ordered lists display",
+        "since": "2.0.0"
     }
-]
+}

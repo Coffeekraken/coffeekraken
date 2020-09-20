@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "keysLast.test.js"
+    ],
+    "names": [
+        "__keysLast",
+        "require",
+        "test",
+        "done",
+        "keys",
+        "expect",
+        "toEqual"
+    ],
+    "mappings": ";;;;;;AAAA,IAAMA,UAAU,GAAGC,OAAO,CAAC,aAAD,CAA1B;;AAEAC,IAAI,CAAC,yBAAD;AAAA,+BAA4B,WAAMC,IAAN,EAAc;AAC5C,QAAMC,IAAI,GAAGJ,UAAU,CAAC,CAAC,GAAD,EAAM,GAAN,EAAW,GAAX,EAAgB,GAAhB,EAAqB,GAArB,CAAD,EAA4B,CAAC,GAAD,EAAM,GAAN,CAA5B,CAAvB;;AACAK,IAAAA,MAAM,CAACD,IAAD,CAAN,CAAaE,OAAb,CAAqB,CAAC,GAAD,EAAM,GAAN,EAAW,GAAX,EAAgB,GAAhB,EAAqB,GAArB,CAArB;AACAH,IAAAA,IAAI;AACL,GAJG;;AAAA;AAAA;AAAA;AAAA,IAAJ",
+    "sourcesContent": [
+        "const __keysLast = require('../keysLast');\n\ntest('sugar.js.array.keysLast', async done => {\n  const keys = __keysLast(['a', 'b', 'd', 'g', 'c'], ['d', 'g'])\n  expect(keys).toEqual(['a', 'b', 'c', 'd', 'g']);\n  done();\n});"
+    ]
+}

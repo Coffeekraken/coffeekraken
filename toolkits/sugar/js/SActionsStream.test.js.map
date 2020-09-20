@@ -1,0 +1,15 @@
+{
+    "version": 3,
+    "sources": [
+        "SActionsStream.test.js"
+    ],
+    "names": [
+        "__SActionsStream",
+        "require",
+        "__SActionsStreamAction"
+    ],
+    "mappings": ";;AAAA,IAAMA,gBAAgB,GAAGC,OAAO,CAAC,mBAAD,CAAhC;;AACA,IAAMC,sBAAsB,GAAGD,OAAO,CAAC,yBAAD,CAAtC;;AACAA,OAAO,CAAC,kBAAD,CAAP,CAA4BD,gBAA5B,EAA8CE,sBAA9C",
+    "sourcesContent": [
+        "const __SActionsStream = require('../SActionsStream');\nconst __SActionsStreamAction = require('../SActionsStreamAction');\nrequire('./SActionsStream')(__SActionsStream, __SActionsStreamAction);\n"
+    ]
+}

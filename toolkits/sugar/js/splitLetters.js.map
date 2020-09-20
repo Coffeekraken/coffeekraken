@@ -1,0 +1,35 @@
+{
+    "version": 3,
+    "sources": [
+        "splitLetters.js"
+    ],
+    "names": [
+        "_decodeHtml",
+        "html",
+        "txt",
+        "document",
+        "createElement",
+        "innerHTML",
+        "value",
+        "splitLetters",
+        "elm",
+        "tag",
+        "tagClass",
+        "string",
+        "_splitLettersOriginalString",
+        "classList",
+        "add",
+        "words",
+        "match",
+        "word",
+        "join",
+        "letters",
+        "split",
+        "hasTagOpened",
+        "letter"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA,SAASA,WAAT,CAAqBC,IAArB,EAA2B;AACzB,MAAIC,GAAG,GAAGC,QAAQ,CAACC,aAAT,CAAuB,UAAvB,CAAV;AACAF,EAAAA,GAAG,CAACG,SAAJ,GAAgBJ,IAAhB;AACA,SAAOC,GAAG,CAACI,KAAX;AACD;AAED;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AA2De,SAASC,YAAT,CACbC,GADa,EAEbC,GAFa,EAGbC,QAHa,EAIb;AAAA,MAFAD,GAEA;AAFAA,IAAAA,GAEA,GAFM,MAEN;AAAA;;AAAA,MADAC,QACA;AADAA,IAAAA,QACA,GADW,eACX;AAAA;;AACA,MAAIC,MAAM,GAAGH,GAAG,CAACI,2BAAjB;;AACA,MAAI,CAACD,MAAL,EAAa;AACXA,IAAAA,MAAM,GAAGH,GAAG,CAACH,SAAb;AACAG,IAAAA,GAAG,CAACI,2BAAJ,GAAkCD,MAAlC;AACD;;AAEDH,EAAAA,GAAG,CAACK,SAAJ,CAAcC,GAAd,CAAkBJ,QAAlB,EAPA,CASA;;AACA,MAAIK,KAAK,GAAGJ,MAAM,CAACK,KAAP,CACV,6DADU,CAAZ,CAVA,CAcA;;AACAD,EAAAA,KAAK,GAAG,mBAAKA,KAAL,EAAaE,IAAD,IAAU;AAC5B,sBAAWR,GAAX,2CAA6CQ,IAA7C,eAAsDR,GAAtD;AACD,GAFO,EAELS,IAFK,CAEA,GAFA,CAAR;;AAIA,MAAIC,OAAO,GAAGnB,WAAW,CAACe,KAAD,CAAX,CAAmBK,KAAnB,CAAyB,EAAzB,CAAd;;AAEA,MAAIC,YAAY,GAAG,KAAnB;AACAF,EAAAA,OAAO,GAAG,mBAAKA,OAAL,EAAeG,MAAD,IAAY;AAClC;AACA,QAAIA,MAAM,KAAK,GAAf,EAAoBD,YAAY,GAAG,IAAf,CAApB,KACK,IAAIC,MAAM,KAAK,GAAf,EAAoB;AACvBD,MAAAA,YAAY,GAAG,KAAf;AACA,aAAOC,MAAP;AACD;AACD,QAAID,YAAJ,EAAkB,OAAOC,MAAP;AAClB,QAAIA,MAAM,KAAK,GAAf,EAAoBA,MAAM,GAAG,QAAT;AACpB,sBAAWb,GAAX,sBAAyBC,QAAzB,mCAAyDD,GAAzD,sBAAuEC,QAAvE,wBAA4FY,MAA5F,eAAuGb,GAAvG,gBAAgHA,GAAhH;AACD,GAVS,CAAV;AAYAD,EAAAA,GAAG,CAACH,SAAJ,GAAgBc,OAAO,CAACD,IAAR,CAAa,EAAb,CAAhB;AAEA,SAAOV,GAAP;AACD",
+    "sourcesContent": [
+        "import _map from 'lodash/map';\n\nfunction _decodeHtml(html) {\n  var txt = document.createElement('textarea');\n  txt.innerHTML = html;\n  return txt.value;\n}\n\n/**\n * @name      splitLetters\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Split each letters inside an HTMLElement by scoping them inside multiple tags.\n * Here's an result sample for : Hello World\n * ```html\n * <span style=\"white-space:nowrap\">\n * \t<span class=\"split-letters\">\n * \t\t<span class=\"split-letters__letter\">H</span>\n * \t</span>\n * \t<span class=\"split-letters\">\n * \t\t<span class=\"split-letters__letter\">e</span>\n * \t</span>\n * \t<span class=\"split-letters\">\n * \t\t<span class=\"split-letters__letter\">l</span>\n * \t</span>\n * \t<span class=\"split-letters\">\n * \t\t<span class=\"split-letters__letter\">l</span>\n * \t</span>\n * \t<span class=\"split-letters\">\n * \t\t<span class=\"split-letters__letter\">o</span>\n * \t</span>\n * </span>\n * <span class=\"split-letters\">\n * \t<span class=\"split-letters__letter\">&nbsp;</span>\n * </span>\n * <span style=\"white-space:nowrap\">\n * \t<span class=\"split-letters\">\n * \t\t<span class=\"split-letters__letter\">W</span>\n * \t</span>\n * \t<span class=\"split-letters\">\n * \t\t<span class=\"split-letters__letter\">o</span>\n * \t</span>\n * \t<span class=\"split-letters\">\n * \t\t<span class=\"split-letters__letter\">r</span>\n * \t</span>\n * \t<span class=\"split-letters\">\n * \t\t<span class=\"split-letters__letter\">l</span>\n * \t</span>\n * \t<span class=\"split-letters\">\n * \t\t<span class=\"split-letters__letter\">d</span>\n * \t</span>\n * </span>\n * ```\n *\n * @param \t{HTMLElement} \t\telm \t\t \tThe HTMLElement to split letters in\n * @param \t{String} \t\t\t[tag=\"span\"] \tThe tag to use to split the letters\n * @param \t{String} \t\t\t[tagClass=\"s-split-letters\"] \t\tThe class to apply on the tags\n * @return \t{HTMLElement} \t\t\t\t\t\tThe HTMLElement processed\n *\n * @example \tjs\n * import __splitLetters from '@coffeekraken/sugar/js/dom/splitLetters'\n * const myCoolElement = document.querySelector('.my-cool-element');\n * __splitLetters(myCoolElement);\n *\n * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function splitLetters(\n  elm,\n  tag = 'span',\n  tagClass = 'split-letters'\n) {\n  let string = elm._splitLettersOriginalString;\n  if (!string) {\n    string = elm.innerHTML;\n    elm._splitLettersOriginalString = string;\n  }\n\n  elm.classList.add(tagClass);\n\n  // wrap each characters inside two spans\n  let words = string.match(\n    /<\\s*(\\w+\\b)(?:(?!<\\s*\\/\\s*\\1\\b)[\\s\\S])*<\\s*\\/\\s*\\1\\s*>|\\S+/g\n  );\n\n  // split words\n  words = _map(words, (word) => {\n    return `<${tag} style=\"white-space:nowrap\">${word}</${tag}>`;\n  }).join(' ');\n\n  let letters = _decodeHtml(words).split('');\n\n  let hasTagOpened = false;\n  letters = _map(letters, (letter) => {\n    // check if a tag has started\n    if (letter === '<') hasTagOpened = true;\n    else if (letter === '>') {\n      hasTagOpened = false;\n      return letter;\n    }\n    if (hasTagOpened) return letter;\n    if (letter === ' ') letter = '&nbsp;';\n    return `<${tag} class=\"${tagClass}__letter-container\"><${tag} class=\"${tagClass}__letter\">${letter}</${tag}></${tag}>`;\n  });\n\n  elm.innerHTML = letters.join('');\n\n  return elm;\n}\n"
+    ]
+}

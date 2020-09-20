@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "unquote.js"
+    ],
+    "names": [
+        "unquote",
+        "string",
+        "quotesToRemove",
+        "trim",
+        "forEach",
+        "quote",
+        "substr",
+        "length"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;AAmBe,SAASA,OAAT,CAAiBC,MAAjB,EAAyBC,cAAzB,EAAgE;AAAA,MAAvCA,cAAuC;AAAvCA,IAAAA,cAAuC,GAAtB,CAAC,GAAD,EAAM,GAAN,EAAW,GAAX,EAAgB,GAAhB,CAAsB;AAAA;;AAC7E;AACAD,EAAAA,MAAM,GAAGA,MAAM,CAACE,IAAP,EAAT,CAF6E,CAG7E;;AACAD,EAAAA,cAAc,CAACE,OAAf,CAAwBC,KAAD,IAAW;AAChC,QAAIJ,MAAM,CAACK,MAAP,CAAc,CAAd,EAAiB,CAAjB,MAAwBD,KAAxB,IAAiCJ,MAAM,CAACK,MAAP,CAAc,CAAC,CAAf,MAAsBD,KAA3D,EAAkE;AAChEJ,MAAAA,MAAM,GAAGA,MAAM,CAACK,MAAP,CAAc,CAAd,CAAT;AACAL,MAAAA,MAAM,GAAGA,MAAM,CAACK,MAAP,CAAc,CAAd,EAAiBL,MAAM,CAACM,MAAP,GAAgB,CAAjC,CAAT,CAFgE,CAGhE;;AACA;AACD;AACF,GAPD,EAJ6E,CAY7E;;AACA,SAAON,MAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name        unquote\n * @namespace           sugar.js.string\n * @type      Function\n *\n * Remove the quotes of a string\n * Types of quotes removed :\n * - `\"`, `'`, `”`, '`'\n *\n * @param    {String}    string    The string to process\n * @param    {Array<String>}    [quotesToRemove=['\"','\\'','”','`']]    The quotes to removes\n * @return    {String}    The unquoted string\n *\n * @example    js\n * import unquote from '@coffeekraken/sugar/js/string/unquote'\n * unquote(\"'Hello world'\") // \"Hello world\"\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function unquote(string, quotesToRemove = ['\"', \"'\", '”', '`']) {\n  // trim the string just in case\n  string = string.trim();\n  // loop on each quotes to remove\n  quotesToRemove.forEach((quote) => {\n    if (string.substr(0, 1) === quote && string.substr(-1) === quote) {\n      string = string.substr(1);\n      string = string.substr(0, string.length - 1);\n      // break the loop to avoid unquoting multiple levels\n      return;\n    }\n  });\n  // return the processed string\n  return string;\n}\n"
+    ]
+}

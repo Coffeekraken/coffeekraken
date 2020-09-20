@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "base64.js"
+    ],
+    "names": [
+        "isBase64",
+        "value",
+        "trim",
+        "reg",
+        "test"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,QAAT,CAAkBC,KAAlB,EAAyB;AACtC,MAAI,OAAOA,KAAP,KAAiB,QAArB,EAA+B,OAAO,KAAP;AAC/B,MAAIA,KAAK,KAAK,EAAV,IAAgBA,KAAK,CAACC,IAAN,OAAiB,EAArC,EAAyC,OAAO,KAAP;AACzC,MAAMC,GAAG,GAAG,kEAAZ;AACA,SAAOA,GAAG,CAACC,IAAJ,CAASH,KAAT,CAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name        isBase64\n * @namespace           sugar.js.is\n * @type      Function\n *\n * Check if the passed value is a base 64 string\n *\n * @param    {Mixed}    value    The value to check\n * @return   {Boolean}   true if it's a Boolean, false if not\n *\n * @example    js\n * import isBase64 from '@coffeekraken/sugar/js/is/base64'\n * if (isBase64(true) {\n *   // do something\n * }\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isBase64(value) {\n  if (typeof value !== 'string') return false;\n  if (value === '' || value.trim() === '') return false;\n  const reg = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;\n  return reg.test(value);\n}\n"
+    ]
+}

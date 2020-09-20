@@ -1,0 +1,32 @@
+{
+    "version": 3,
+    "sources": [
+        "register.js"
+    ],
+    "names": [
+        "_SWebComponentStack",
+        "getComponentMetas",
+        "name",
+        "define",
+        "cls",
+        "settings",
+        "Error",
+        "extend",
+        "key",
+        "__htmlTagToHtmlClassMap",
+        "prototype",
+        "uncamelizedName",
+        "componentName",
+        "dashName",
+        "class",
+        "extends",
+        "window",
+        "customElements",
+        "document",
+        "registerElement"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;AAAA;;AACA;;AACA;;AACA;;AACA;;;;AAMA,IAAMA,mBAAmB,GAAG,EAA5B;;;AAGA,SAASC,iBAAT,CAA2BC,IAA3B,EAAiC;AAC/B,SAAOF,mBAAmB,CAAC,yBAAaE,IAAb,CAAD,CAAnB,IAA2C,EAAlD;AACD;;AAED,SAASC,MAAT,CAAgBD,IAAhB,EAAsBE,GAAtB,EAA2BC,QAA3B,EAA0C;AAAA,MAAfA,QAAe;AAAfA,IAAAA,QAAe,GAAJ,EAAI;AAAA;;AACxC,MAAI,CAACH,IAAL,EACE,MAAM,IAAII,KAAJ,wMAAN;AAIF,MAAIC,MAAM,GAAG,IAAb;;AACA,OAAK,IAAIC,GAAT,IAAgBC,8BAAhB,EAAyC;AACvC,QAAIL,GAAG,CAACM,SAAJ,YAAyBD,+BAAwBD,GAAxB,CAA7B,EAA2D;AACzDD,MAAAA,MAAM,GAAGC,GAAT;AACA;AACD;AACF;;AAED,MAAMG,eAAe,GAAG,yBAAaT,IAAb,CAAxB;AAEAE,EAAAA,GAAG,CAACQ,aAAJ,GAAoBV,IAApB;AAEAF,EAAAA,mBAAmB,CAACW,eAAD,CAAnB,GAAuC;AACrCT,IAAAA,IADqC;AAErCW,IAAAA,QAAQ,EAAEF,eAF2B;AAGrCG,IAAAA,KAAK,EAAEV,GAH8B;AAIrCW,IAAAA,OAAO,EAAER,MAJ4B;AAKrCF,IAAAA;AALqC,GAAvC;;AAQA,MAAIW,MAAM,CAACC,cAAX,EAA2B;AACzBD,IAAAA,MAAM,CAACC,cAAP,CAAsBd,MAAtB,CAA6BQ,eAA7B,EAA8CP,GAA9C,EAAmD;AACjDW,MAAAA,OAAO,EAAER;AADwC,KAAnD;AAGD,GAJD,MAIO,IAAIW,QAAQ,CAACC,eAAb,EAA8B;AACnCD,IAAAA,QAAQ,CAACC,eAAT,CAAyBR,eAAzB,EAA0C;AACxCD,MAAAA,SAAS,EAAEN,GAAG,CAACM,SADyB;AAExCK,MAAAA,OAAO,EAAER;AAF+B,KAA1C;AAID,GALM,MAKA;AACL;AACD;AACF",
+    "sourcesContent": [
+        "import __SWebComponent from './SWebComponent';\nimport __SLitWebComponent from './SLitHtmlWebComponent';\nimport __getHtmlClassFromTagName from '../html/getHtmlClassFromTagName';\nimport __uncamelize from '../string/uncamelize';\nimport __htmlTagToHtmlClassMap from '../html/htmlTagToHtmlClassMap';\n\nexport { __SWebComponent as SWebComponent };\nexport { __SLitWebComponent as SLitHtmlWebComponent };\nexport { define, getComponentMetas };\n\nconst _SWebComponentStack = {};\nexport { _SWebComponentStack as stack };\n\nfunction getComponentMetas(name) {\n  return _SWebComponentStack[__uncamelize(name)] || {};\n}\n\nfunction define(name, cls, settings = {}) {\n  if (!name)\n    throw new Error(\n      `SWebComponent: You must define a name for your webcomponent by setting either a static \"name\" property on your class, of by passing a name as first parameter of the static \"define\" function...`\n    );\n\n  let extend = null;\n  for (let key in __htmlTagToHtmlClassMap) {\n    if (cls.prototype instanceof __htmlTagToHtmlClassMap[key]) {\n      extend = key;\n      break;\n    }\n  }\n\n  const uncamelizedName = __uncamelize(name);\n\n  cls.componentName = name;\n\n  _SWebComponentStack[uncamelizedName] = {\n    name,\n    dashName: uncamelizedName,\n    class: cls,\n    extends: extend,\n    settings\n  };\n\n  if (window.customElements) {\n    window.customElements.define(uncamelizedName, cls, {\n      extends: extend\n    });\n  } else if (document.registerElement) {\n    document.registerElement(uncamelizedName, {\n      prototype: cls.prototype,\n      extends: extend\n    });\n  } else {\n    throw `Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...`;\n  }\n}\n"
+    ]
+}

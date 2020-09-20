@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "extension.js"
+    ],
+    "names": [
+        "extension",
+        "path",
+        "split",
+        "pop"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;AAgBe,SAASA,SAAT,CAAmBC,IAAnB,EAAyB;AACtC,SAAOA,IAAI,CAACC,KAAL,CAAW,GAAX,EAAgBC,GAAhB,EAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name                    extension\n * @namespace           sugar.js.file\n * @type                    Function\n *\n * Return the passed file path extension\n *\n * @param           {String}            path                The file path to get the extension from\n * @return          {String}                                The file extension\n *\n * @example         js\n * import extension from '@coffeekraken/sugar/js/file/extension';\n * extension('hello/world.jpg'); // => jpg\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function extension(path) {\n  return path.split('.').pop();\n}\n"
+    ]
+}

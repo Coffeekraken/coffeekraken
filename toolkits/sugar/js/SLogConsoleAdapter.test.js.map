@@ -1,0 +1,15 @@
+{
+    "version": 3,
+    "sources": [
+        "SLogConsoleAdapter.test.js"
+    ],
+    "names": [
+        "__SLog",
+        "require",
+        "__SLogConsoleAdapter"
+    ],
+    "mappings": ";;AAAA,IAAMA,MAAM,GAAGC,OAAO,CAAC,SAAD,CAAtB;;AACA,IAAMC,oBAAoB,GAAGD,OAAO,CAAC,gCAAD,CAApC;;AACAA,OAAO,CAAC,sBAAD,CAAP,CAAgCD,MAAhC,EAAwCE,oBAAxC",
+    "sourcesContent": [
+        "const __SLog = require('../SLog');\nconst __SLogConsoleAdapter = require('../adapters/SLogConsoleAdapter');\nrequire('./SLogConsoleAdapter')(__SLog, __SLogConsoleAdapter);"
+    ]
+}

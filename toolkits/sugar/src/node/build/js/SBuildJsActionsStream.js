@@ -51,9 +51,9 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
     super(
       {
         filesResolver: __SFsFilesResolverStreamAction,
-        fsCache: __SFsCacheStreamAction,
+        // fsCache: __SFsCacheStreamAction,
         readFile: __SFsReadFileStreamAction,
-        sugarJson: __SSugarJsonStreamAction,
+        // sugarJson: __SSugarJsonStreamAction,
         webpack: __SWebpackStreamAction,
         terser: __STerserStreamAction,
         fsOutput: __SFsOutputStreamAction,

@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "sources": [
+        "closestNotVisible.test.js"
+    ],
+    "names": [
+        "describe",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "it",
+        "$testing",
+        "expect",
+        "id",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;;;AAEAA,QAAQ,CAAC,gCAAD,EAAmC,MAAM;AAE/CC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAYA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,SAAvB,CAAb;AAEAC,EAAAA,EAAE,CAAC,8DAAD,EAAiE,MAAM;AACvE,QAAMC,QAAQ,GAAG,gCAAoBH,IAApB,EAA0B,UAA1B,CAAjB;AACAI,IAAAA,MAAM,CAACD,QAAQ,CAACE,EAAV,CAAN,CAAoBC,IAApB,CAAyB,SAAzB;AACD,GAHC,CAAF;AAKD,CArBO,CAAR",
+    "sourcesContent": [
+        "import __closestNotVisible from '../closestNotVisible';\n\ndescribe('sugar.js.dom.closestNotVisible', () => {\n\n  document.body.innerHTML = `\n  <style>\n    #testing {\n      display: none;\n    }\n  </style>\n      <div id=\"testing\">\n        <div class=\"coco testing\">\n          <div id=\"source\"></div>\n        </div>\n      </div>\n  `;\n  const $elm = document.querySelector('#source');\n\n  it('Should find the \"testing\" element that is up in the dom tree', () => {\n    const $testing = __closestNotVisible($elm, '.testing');\n    expect($testing.id).toBe('testing');\n  });\n\n});"
+    ]
+}

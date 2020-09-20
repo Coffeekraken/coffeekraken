@@ -1,0 +1,15 @@
+{
+    "version": 3,
+    "sources": [
+        "SLogMailAdapter.wip.js"
+    ],
+    "names": [
+        "__SLog",
+        "require",
+        "__SLogMailAdapter"
+    ],
+    "mappings": ";;AAAA,IAAMA,MAAM,GAAGC,OAAO,CAAC,SAAD,CAAtB;;AACA,IAAMC,iBAAiB,GAAGD,OAAO,CAAC,6BAAD,CAAjC;;AACAA,OAAO,CAAC,mBAAD,CAAP,CAA6BD,MAA7B,EAAqCE,iBAArC",
+    "sourcesContent": [
+        "const __SLog = require('../SLog');\nconst __SLogMailAdapter = require('../adapters/SLogMailAdapter');\nrequire('./SLogMailAdapter')(__SLog, __SLogMailAdapter);"
+    ]
+}

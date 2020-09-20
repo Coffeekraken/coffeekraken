@@ -1,1 +1,1 @@
-module.exports = require('./.sugar/babel.config');
+module.exports = require('./.sugar-default/babel.config');

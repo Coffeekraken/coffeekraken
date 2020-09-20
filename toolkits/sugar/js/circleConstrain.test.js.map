@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "circleConstrain.test.js"
+    ],
+    "names": [
+        "__circleConstrain",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,iBAAiB,GAAGC,OAAO,CAAC,oBAAD,CAAjC;;AACAA,OAAO,CAAC,mBAAD,CAAP,CAA6BD,iBAA7B",
+    "sourcesContent": [
+        "const __circleConstrain = require('../circleConstrain');\nrequire('./circleConstrain')(__circleConstrain);"
+    ]
+}

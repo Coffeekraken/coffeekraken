@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "uncamelize.js"
+    ],
+    "names": [
+        "uncamelize",
+        "text",
+        "separator",
+        "res",
+        "replace",
+        "letter",
+        "toLowerCase",
+        "slice"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;AAiBe,SAASA,UAAT,CAAoBC,IAApB,EAA0BC,SAA1B,EAA2C;AAAA,MAAjBA,SAAiB;AAAjBA,IAAAA,SAAiB,GAAL,GAAK;AAAA;;AACxD;AACA,MAAIC,GAAG,GAAG,EAAV;AACAA,EAAAA,GAAG,GAAGF,IAAI,CAACG,OAAL,CAAa,QAAb,EAAuB,UAAUC,MAAV,EAAkB;AAC7C,WAAOH,SAAS,GAAGG,MAAM,CAACC,WAAP,EAAnB;AACD,GAFK,CAAN,CAHwD,CAOxD;;AACA,MAAIH,GAAG,CAACI,KAAJ,CAAU,CAAV,EAAa,CAAb,MAAoBL,SAAxB,EAAmCC,GAAG,GAAGA,GAAG,CAACI,KAAJ,CAAU,CAAV,CAAN;AAEnC,SAAOJ,GAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name        uncamelize\n * @namespace           sugar.js.string\n * @type      Function\n *\n * Uncamelize a string\n *\n * @param    {String}    string    The string to uncamelize\n * @param    {String}    [separator='-']    The separator to use\n * @return    {String}    The uncamelized string\n *\n * @example    js\n * import uncamelize from '@coffeekraken/sugar/js/string/uncamelize'\n * uncamelize('helloWorldAndUniverse') // hello-world-and-universe\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function uncamelize(text, separator = '-') {\n  // Replace all capital letters by separator followed by lowercase one\n  let res = '';\n  res = text.replace(/[A-Z]/g, function (letter) {\n    return separator + letter.toLowerCase();\n  });\n\n  // Remove first separator (to avoid _hello_world name)\n  if (res.slice(0, 1) === separator) res = res.slice(1);\n\n  return res;\n}\n"
+    ]
+}

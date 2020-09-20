@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "setRecursiveTimeout.test.js"
+    ],
+    "names": [
+        "__setRecursiveTimeout",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,qBAAqB,GAAGC,OAAO,CAAC,wBAAD,CAArC;;AACAA,OAAO,CAAC,uBAAD,CAAP,CAAiCD,qBAAjC",
+    "sourcesContent": [
+        "const __setRecursiveTimeout = require('../setRecursiveTimeout');\nrequire('./setRecursiveTimeout')(__setRecursiveTimeout);"
+    ]
+}

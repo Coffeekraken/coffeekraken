@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "map.test.js"
+    ],
+    "names": [
+        "__map",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,KAAK,GAAGC,OAAO,CAAC,QAAD,CAArB;;AACAA,OAAO,CAAC,OAAD,CAAP,CAAiBD,KAAjB",
+    "sourcesContent": [
+        "const __map = require('../map');\nrequire('./map')(__map);"
+    ]
+}

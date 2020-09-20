@@ -31,9 +31,12 @@ module.exports = function sugar(dotPath) {
           name: 'sugar',
           foldername: '.sugar',
           filename: '[name].config.js',
-          defaultConfigPath: __path.resolve(__dirname, '../../../[foldername]'),
-          appConfigPath: `${__packageRoot(process.cwd())}/[foldername]`,
-          userConfigPath: null
+          defaultConfigPath: __path.resolve(
+            __dirname,
+            '../../../.sugar-default'
+          ),
+          appConfigPath: __path.resolve(__dirname, '../../../[foldername]'),
+          userConfigPath: `${__packageRoot(process.cwd())}/[foldername]`
         })
       ]
     });

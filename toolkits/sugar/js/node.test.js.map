@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "node.test.js"
+    ],
+    "names": [
+        "__node",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,MAAM,GAAGC,OAAO,CAAC,SAAD,CAAtB;;AACAA,OAAO,CAAC,QAAD,CAAP,CAAkBD,MAAlB",
+    "sourcesContent": [
+        "const __node = require('../node');\nrequire('./node')(__node);"
+    ]
+}

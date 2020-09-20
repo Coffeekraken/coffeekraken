@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "osx.js"
+    ],
+    "names": [
+        "osx",
+        "process",
+        "platform",
+        "navigator",
+        "toUpperCase",
+        "indexOf"
+    ],
+    "mappings": ";;;;;;;AAAA;;AAEA;;;;;;;;;;;;;;;AAee,SAASA,GAAT,GAAe;AAC5B,MAAIC,OAAO,IAAIA,OAAO,CAACC,QAAvB,EAAiC;AAC/B,WAAOD,OAAO,CAACC,QAAR,KAAqB,QAA5B;AACD;;AACD,SAAOC,SAAS,CAACD,QAAV,CAAmBE,WAAnB,GAAiCC,OAAjC,CAAyC,KAAzC,KAAmD,CAA1D;AACD",
+    "sourcesContent": [
+        "// TODO tests\n\n/**\n * @name                            osx\n * @namespace           sugar.js.is\n * @type                            Function\n *\n * Check if the app run on mac OS X or not\n *\n * @return        {Boolean}                             true if mac OS X, false if not\n *\n * @example       js\n * import isOsx from '@coffeekraken/sugar/js/is/osx';\n * isOsx(); // => true\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function osx() {\n  if (process && process.platform) {\n    return process.platform === 'darwin';\n  }\n  return navigator.platform.toUpperCase().indexOf('MAC') >= 0;\n}\n"
+    ]
+}

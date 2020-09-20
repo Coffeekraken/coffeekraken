@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "extension.test.js"
+    ],
+    "names": [
+        "__extension",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,WAAW,GAAGC,OAAO,CAAC,cAAD,CAA3B;;AACAA,OAAO,CAAC,aAAD,CAAP,CAAuBD,WAAvB",
+    "sourcesContent": [
+        "const __extension = require('../extension');\nrequire('./extension')(__extension);"
+    ]
+}

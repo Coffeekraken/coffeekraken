@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "autoCast.test.js"
+    ],
+    "names": [
+        "__autoCast",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,UAAU,GAAGC,OAAO,CAAC,aAAD,CAA1B;;AACAA,OAAO,CAAC,YAAD,CAAP,CAAsBD,UAAtB",
+    "sourcesContent": [
+        "const __autoCast = require('../autoCast');\nrequire('./autoCast')(__autoCast);"
+    ]
+}

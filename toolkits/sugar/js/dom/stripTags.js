@@ -7,7 +7,7 @@ exports.default = stripTags;
 
 /**
  * @name      stripTags
- * @namespace           js.dom
+ * @namespace           sugar.js.dom
  * @type      Function
  *
  * Strip the tags of the passed text

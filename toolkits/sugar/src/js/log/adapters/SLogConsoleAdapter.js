@@ -109,7 +109,7 @@ export default class SLogConsoleAdapter {
       // log the message
       if (typeof message === 'string') {
         ((global || window).nativeConsole || console)[consoleMethod](
-          __consoleHtmlPreset(message) + '⠀⠀⠀'
+          message + '⠀⠀⠀'
         );
       } else if (typeof message === 'object') {
         ((global || window).nativeConsole || console)[consoleMethod](

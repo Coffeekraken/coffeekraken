@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "typeof.test.js"
+    ],
+    "names": [
+        "__typeof",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,QAAQ,GAAGC,OAAO,CAAC,WAAD,CAAxB;;AACAA,OAAO,CAAC,UAAD,CAAP,CAAoBD,QAApB",
+    "sourcesContent": [
+        "const __typeof = require('../typeof');\nrequire('./typeof')(__typeof);\n"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "requestFullscreen.js"
+    ],
+    "names": [
+        "requestFullscreen",
+        "elm",
+        "mozRequestFullScreen",
+        "webkitRequestFullscreen",
+        "msRequestFullscreen"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;AAgBe,SAASA,iBAAT,CAA2BC,GAA3B,EAAgC;AAC7C,MAAIA,GAAG,CAACD,iBAAR,EAA2B;AACzB,WAAOC,GAAG,CAACD,iBAAJ,EAAP;AACD,GAFD,MAEO,IAAIC,GAAG,CAACC,oBAAR,EAA8B;AACnC,WAAOD,GAAG,CAACC,oBAAJ,EAAP;AACD,GAFM,MAEA,IAAID,GAAG,CAACE,uBAAR,EAAiC;AACtC,WAAOF,GAAG,CAACE,uBAAJ,EAAP;AACD,GAFM,MAEA,IAAIF,GAAG,CAACG,mBAAR,EAA6B;AAClC,WAAOH,GAAG,CAACG,mBAAJ,EAAP;AACD;AACF",
+    "sourcesContent": [
+        "/**\n * @name      requestFullscreen\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Request fullscreen on the passed DOM element\n *\n * @param    {HTMLElement}    elm    The element on which to request the fullscreen\n * @return    {Promise}   Returns a Promise which is resolved once full-screen mode has been activated.\n *\n * @example    js\n * import requestFullscreen from '@coffeekraken/sugar/js/dom/requestFullscreen'\n * requestFullscreen(myDomElm)\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function requestFullscreen(elm) {\n  if (elm.requestFullscreen) {\n    return elm.requestFullscreen();\n  } else if (elm.mozRequestFullScreen) {\n    return elm.mozRequestFullScreen();\n  } else if (elm.webkitRequestFullscreen) {\n    return elm.webkitRequestFullscreen();\n  } else if (elm.msRequestFullscreen) {\n    return elm.msRequestFullscreen();\n  }\n}\n"
+    ]
+}

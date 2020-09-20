@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "uid.test.js"
+    ],
+    "names": [
+        "__uid",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,KAAK,GAAGC,OAAO,CAAC,QAAD,CAArB;;AACAA,OAAO,CAAC,OAAD,CAAP,CAAiBD,KAAjB",
+    "sourcesContent": [
+        "const __uid = require('../uid');\nrequire('./uid')(__uid);"
+    ]
+}

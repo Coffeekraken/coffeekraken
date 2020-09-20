@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "propertyProxy.test.js"
+    ],
+    "names": [
+        "__propertyProxy",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,eAAe,GAAGC,OAAO,CAAC,kBAAD,CAA/B;;AACAA,OAAO,CAAC,iBAAD,CAAP,CAA2BD,eAA3B",
+    "sourcesContent": [
+        "const __propertyProxy = require('../propertyProxy');\nrequire('./propertyProxy')(__propertyProxy);"
+    ]
+}

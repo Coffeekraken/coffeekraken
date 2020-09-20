@@ -1,0 +1,19 @@
+{
+    "version": 3,
+    "sources": [
+        "dispatch.js"
+    ],
+    "names": [
+        "trigger",
+        "name",
+        "value",
+        "window",
+        "_sugarEventSPromise",
+        "__SPromise",
+        "id"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,OAAT,CAAiBC,IAAjB,EAAuBC,KAAvB,EAA8B;AAC3C;AACA,MAAI,CAACC,MAAM,CAACC,mBAAZ,EACED,MAAM,CAACC,mBAAP,GAA6B,IAAIC,iBAAJ,CAAe;AAC1CC,IAAAA,EAAE,EAAE;AADsC,GAAf,CAA7B,CAHyC,CAM3C;;AACAH,EAAAA,MAAM,CAACC,mBAAP,CAA2BJ,OAA3B,CAAmCC,IAAnC,EAAyCC,KAAzC;AACD",
+    "sourcesContent": [
+        "import __SPromise from '../promise/SPromise';\n\n/**\n * @name        trigger\n * @namespace           sugar.js.event\n * @type          Function\n *\n * This function can ben used to trigger an event globally.\n * You can subscribe to these events using the \"sugar.js.event.subscribe\" function\n *\n * @param         {String}        name          The event name you want to trigger to\n * @param         {Mixed}        value          The value you want to send alongside the event\n *\n * @example       js\n * const trigger = require('@coffeekraken/sugar/js/event/trigger');\n * trigger('something', 'Hello world');\n *\n * @since       2.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function trigger(name, value) {\n  // check that the global SPromise exists\n  if (!window._sugarEventSPromise)\n    window._sugarEventSPromise = new __SPromise({\n      id: 'sugarEventSPromise'\n    });\n  // trigger to the event\n  window._sugarEventSPromise.trigger(name, value);\n}\n"
+    ]
+}

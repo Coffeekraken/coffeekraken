@@ -1,0 +1,33 @@
+{
+    "version": 3,
+    "sources": [
+        "querySelectorAllWithStyle.js"
+    ],
+    "names": [
+        "querySelectorAllWithStyle",
+        "selector",
+        "style",
+        "settings",
+        "rootNode",
+        "document",
+        "body",
+        "$elms",
+        "querySelectorAll",
+        "length",
+        "ar$Elms",
+        "Array",
+        "from",
+        "forEach",
+        "$elm",
+        "match",
+        "key",
+        "value",
+        "RegExp",
+        "toString",
+        "push"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;;;;AA4Be,SAASA,yBAAT,CACbC,QADa,EAEbC,KAFa,EAGbC,QAHa,EAIb;AAAA,MADAA,QACA;AADAA,IAAAA,QACA,GADW,EACX;AAAA;;AACA;AACAA,EAAAA,QAAQ;AACNC,IAAAA,QAAQ,EAAEC,QAAQ,CAACC;AADb,KAEHH,QAFG,CAAR,CAFA,CAMA;;AACA,MAAMI,KAAK,GAAGJ,QAAQ,CAACC,QAAT,CAAkBI,gBAAlB,CAAmCP,QAAnC,CAAd,CAPA,CAQA;;AACA,MAAI,CAACM,KAAK,CAACE,MAAX,EAAmB,OAAO,EAAP,CATnB,CAUA;;AACA,MAAMC,OAAO,GAAG,EAAhB,CAXA,CAYA;;AACAC,EAAAA,KAAK,CAACC,IAAN,CAAWL,KAAX,EAAkBM,OAAlB,CAA2BC,IAAD,IAAU;AAClC;AACA,QAAIC,KAAK,GAAG,IAAZ,CAFkC,CAGlC;AACA;;AACA,SAAK,IAAIC,GAAT,IAAgBd,KAAhB,EAAuB;AACrB;AACA,UAAMe,KAAK,GAAG,+BAAiBH,IAAjB,EAAuBE,GAAvB,CAAd,CAFqB,CAGrB;;AACA,UAAId,KAAK,CAACc,GAAD,CAAL,KAAe,IAAf,IAAuB,CAACC,KAA5B,EAAmC;AACjCF,QAAAA,KAAK,GAAG,KAAR;AACA;AACD,OAHD,MAGO,IAAIb,KAAK,CAACc,GAAD,CAAL,KAAe,KAAf,IAAwBC,KAA5B,EAAmC;AACxCF,QAAAA,KAAK,GAAG,KAAR;AACA;AACD,OAHM,MAGA,IACLb,KAAK,CAACc,GAAD,CAAL,YAAsBE,MAAtB,IACA,CAACD,KAAK,CAACE,QAAN,GAAiBJ,KAAjB,CAAuBb,KAAK,CAACc,GAAD,CAA5B,CAFI,EAGL;AACAD,QAAAA,KAAK,GAAG,KAAR;AACA;AACD,OANM,MAMA,IAAI,OAAOb,KAAK,CAACc,GAAD,CAAZ,KAAsB,QAAtB,IAAkCd,KAAK,CAACc,GAAD,CAAL,KAAeC,KAArD,EAA4D;AACjEF,QAAAA,KAAK,GAAG,KAAR;AACA;AACD;AACF,KAzBiC,CA0BlC;AACA;;;AACA,QAAIA,KAAJ,EAAW;AACTL,MAAAA,OAAO,CAACU,IAAR,CAAaN,IAAb;AACD;AACF,GA/BD,EAbA,CA6CA;;AACA,SAAOJ,OAAP;AACD;AAED",
+    "sourcesContent": [
+        "import getStyleProperty from './getStyleProperty';\n\n/**\n * @name      querySelectorAllWithStyle\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Select all node that match the style object passed as parameter\n *\n * @param    {String}    selector    The css selector to use as base filter\n * @param    {Object}    style    The style that has to match\n * @param    {Object}    [settings={}]    A setting object\n * @return    [Array<HTMLElement>]    An array of HTMLElement that matches the style object\n *\n * @example    js\n * import querySelectorAllWithStyle from '@coffeekraken/sugar/js/dom/querySelectorAllWithStyle'\n * querySelectorAllWithStyle('*', {\n * \tbackgroundImage: true\n * })\n *\n * // style object can contains either:\n * const style = {\n * \t backgroundImage: true, // has to have the background-image style\n *   backgroundPosition: false, // has to not have the background-position style\n *   backgroundSize: /cover|contain/, // has to have the background-size set to cover or contain\n *   background: 'none' // has to have to background set to \"none\"\n * }\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function querySelectorAllWithStyle(\n  selector,\n  style,\n  settings = {}\n) {\n  // extend settings\n  settings = {\n    rootNode: document.body,\n    ...settings\n  };\n  // select all the element from the selector\n  const $elms = settings.rootNode.querySelectorAll(selector);\n  // check that we have some nodes to process\n  if (!$elms.length) return [];\n  // init the ar$Elms stack that will be returned at the end\n  const ar$Elms = [];\n  // loop on each elements\n  Array.from($elms).forEach(($elm) => {\n    // track if the $elm match all the properties\n    let match = true;\n    // loop on each properties of the style object\n    // to check it against the dom computed style\n    for (let key in style) {\n      // get the value from the computed dom node\n      const value = getStyleProperty($elm, key);\n      // true as selector\n      if (style[key] === true && !value) {\n        match = false;\n        break;\n      } else if (style[key] === false && value) {\n        match = false;\n        break;\n      } else if (\n        style[key] instanceof RegExp &&\n        !value.toString().match(style[key])\n      ) {\n        match = false;\n        break;\n      } else if (typeof style[key] === 'string' && style[key] !== value) {\n        match = false;\n        break;\n      }\n    }\n    // add the dom node in stack if it match all the\n    // style object\n    if (match) {\n      ar$Elms.push($elm);\n    }\n  });\n  // return the elements found\n  return ar$Elms;\n}\n\n/**\n * @name \tsettings.rootNode\n * The root node used to select the the elements within\n * @setting\n * @type \t\t{HTMLElement}\n * @default \tdocument\n */\n"
+    ]
+}

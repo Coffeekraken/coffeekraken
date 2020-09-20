@@ -1,0 +1,23 @@
+{
+    "version": 3,
+    "sources": [
+        "return.js"
+    ],
+    "names": [
+        "__upperFirst",
+        "require",
+        "returnTag",
+        "data",
+        "stringArray",
+        "value",
+        "trim",
+        "split",
+        "type",
+        "replace",
+        "description"
+    ],
+    "mappings": ";;;;;;;AAAA,IAAMA,YAAY,GAAGC,OAAO,CAAC,yBAAD,CAA5B;AAEA;;;;;;;;;;;;;;;AAae,SAASC,SAAT,CAAmBC,IAAnB,EAAyB;AACtC,MAAMC,WAAW,GAAGD,IAAI,CAACE,KAAL,CAAWC,IAAX,GAAkBC,KAAlB,CAAwB,aAAxB,CAApB;AACA,SAAO;AACLC,IAAAA,IAAI,EAAEJ,WAAW,CAAC,CAAD,CAAX,GACFJ,YAAY,CAACI,WAAW,CAAC,CAAD,CAAX,CAAeK,OAAf,CAAuB,GAAvB,EAA4B,EAA5B,EAAgCA,OAAhC,CAAwC,GAAxC,EAA6C,EAA7C,EAAiDH,IAAjD,EAAD,CADV,GAEF,EAHC;AAILI,IAAAA,WAAW,EAAEN,WAAW,CAAC,CAAD,CAAX,GAAiBA,WAAW,CAAC,CAAD,CAAX,CAAeE,IAAf,EAAjB,GAAyC;AAJjD,GAAP;AAMD",
+    "sourcesContent": [
+        "const __upperFirst = require('../../string/upperFirst');\n\n/**\n * @name              return\n * @namespace           sugar.js.docblock.tags\n * @type              Function\n *\n * Parse the return tag\n *\n * @param       {Object}          data        The data object parsed in the string\n * @return      {Object}                      The formated object\n *\n * @since     2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com>\n */\nexport default function returnTag(data) {\n  const stringArray = data.value.trim().split(/(?<=^\\S+)\\s/);\n  return {\n    type: stringArray[0]\n      ? __upperFirst(stringArray[0].replace('{', '').replace('}', '').trim())\n      : '',\n    description: stringArray[1] ? stringArray[1].trim() : ''\n  };\n}\n"
+    ]
+}

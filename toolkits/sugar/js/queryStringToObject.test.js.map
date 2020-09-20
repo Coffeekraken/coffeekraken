@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "queryStringToObject.test.js"
+    ],
+    "names": [
+        "__queryStringToObject",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,qBAAqB,GAAGC,OAAO,CAAC,wBAAD,CAArC;;AACAA,OAAO,CAAC,uBAAD,CAAP,CAAiCD,qBAAjC",
+    "sourcesContent": [
+        "const __queryStringToObject = require('../queryStringToObject');\nrequire('./queryStringToObject')(__queryStringToObject);"
+    ]
+}

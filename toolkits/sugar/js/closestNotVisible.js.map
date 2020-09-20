@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "closestNotVisible.js"
+    ],
+    "names": [
+        "closestNotVisible",
+        "elm",
+        "originalElm",
+        "parentNode",
+        "ownerDocument"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;;;AAoBe,SAASA,iBAAT,CAA2BC,GAA3B,EAAgC;AAC7C,MAAMC,WAAW,GAAGD,GAApB;AACAA,EAAAA,GAAG,GAAGA,GAAG,CAACE,UAAV;;AACA,SAAOF,GAAG,IAAIA,GAAG,IAAIC,WAAW,CAACE,aAAjC,EAAgD;AAC9C,QAAI,CAAC,wBAAYH,GAAZ,CAAL,EAAuB;AACrB,aAAOA,GAAP;AACD;;AACDA,IAAAA,GAAG,GAAGA,GAAG,CAACE,UAAV;AACD;;AACD,SAAO,IAAP;AACD",
+    "sourcesContent": [
+        "import __isVisible from './isVisible';\n\n/**\n * @name        closestNotVisible\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Go up the dom three to find the first element that is not visible.\n * Not visible mean that has either an opacity to 0, a visibility to hidden or a display to none\n *\n * @param \t\t{HTMLElement} \t\t\t\t\telm  \t\tThe element to start on\n * @return \t\t{HTMLElement} \t\t\t\t\t\t\t\tThe element found or null\n *\n * @example  \tjs\n * import closestNotVisible from 'sugarcss/js/dom/closestNotVisible'\n * const closestElm = closestNotVisible(myCoolElement);\n * if (closestElm) {\n * \t\t// we have found en element that is not visible\n * }\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function closestNotVisible(elm) {\n  const originalElm = elm;\n  elm = elm.parentNode;\n  while (elm && elm != originalElm.ownerDocument) {\n    if (!__isVisible(elm)) {\n      return elm;\n    }\n    elm = elm.parentNode;\n  }\n  return null;\n}\n"
+    ]
+}

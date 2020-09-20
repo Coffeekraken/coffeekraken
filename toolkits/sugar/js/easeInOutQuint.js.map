@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "sources": [
+        "easeInOutQuint.js"
+    ],
+    "names": [
+        "t"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;AAWe,kBAAUA,CAAV,EAAa;AAC1B,SAAOA,CAAC,GAAG,GAAJ,GAAU,KAAKA,CAAL,GAASA,CAAT,GAAaA,CAAb,GAAiBA,CAAjB,GAAqBA,CAA/B,GAAmC,IAAI,KAAK,EAAEA,CAAP,GAAWA,CAAX,GAAeA,CAAf,GAAmBA,CAAnB,GAAuBA,CAArE;AACD",
+    "sourcesContent": [
+        "/**\n * @name      easeInOutQuint\n * @namespace           sugar.js.easing\n * @type      Function\n * Ease in out quint function\n *\n * @param \t\t{Number} \t\tt \t\tThe current time\n * @return \t\t{Number} \t\t\t\tThe value depending on time\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function (t) {\n  return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;\n}\n"
+    ]
+}

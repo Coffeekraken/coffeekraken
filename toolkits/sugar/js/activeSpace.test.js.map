@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "activeSpace.test.js"
+    ],
+    "names": [
+        "__activeSpace",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,aAAa,GAAGC,OAAO,CAAC,gBAAD,CAA7B;;AACAA,OAAO,CAAC,eAAD,CAAP,CAAyBD,aAAzB",
+    "sourcesContent": [
+        "const __activeSpace = require('../activeSpace');\nrequire('./activeSpace')(__activeSpace);\n"
+    ]
+}

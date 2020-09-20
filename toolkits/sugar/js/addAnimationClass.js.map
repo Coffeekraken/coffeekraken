@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "sources": [
+        "addAnimationClass.js"
+    ],
+    "names": [
+        "addAnimationClass",
+        "$elm",
+        "cls",
+        "Array",
+        "isArray",
+        "forEach",
+        "_cls",
+        "classList",
+        "add"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AACA;;;;;;;;;;;;;;;;;;;AAmBe,SAASA,iBAAT,CAA2BC,IAA3B,EAAiCC,GAAjC,EAAsC;AACnD;AACA,MAAI,CAACC,KAAK,CAACC,OAAN,CAAcF,GAAd,CAAL,EAAyBA,GAAG,GAAG,CAACA,GAAD,CAAN,CAF0B,CAGnD;;AACAA,EAAAA,GAAG,CAACG,OAAJ,CAAaC,IAAD,IAAU;AACpBL,IAAAA,IAAI,CAACM,SAAL,CAAeC,GAAf,CAAmBF,IAAnB;AACD,GAFD,EAJmD,CAOnD;;AACA,SAAO,wCAA8BL,IAA9B,EAAoCC,GAApC,CAAP;AACD",
+    "sourcesContent": [
+        "import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';\n/**\n * @name        addAnimationClass\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Add a class that trigger an animation and remove it at the end\n *\n * @param    {HTMLElement}    $elm    The element to take care of\n * @param    {String|Array}    cls    The class or classes (Array) to apply\n * @return    {Promise}               A promise that will be resolved once the class have been removed and the animation finished\n *\n * @example    js\n * import addAnimationClass from '@coffeekraken/sugar/js/dom/addAnimationClass'\n * addAnimationClass(myElm, 'my-cool-class').then($elm => {\n *    // do something at the animation end...\n * });\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function addAnimationClass($elm, cls) {\n  // make sure the cls argument is an Array\n  if (!Array.isArray(cls)) cls = [cls];\n  // add the class to the element\n  cls.forEach((_cls) => {\n    $elm.classList.add(_cls);\n  });\n  // remove the class at the end of the animation\n  return __removeClassesOnAnimationEnd($elm, cls);\n}\n"
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "sort.js"
+    ],
+    "names": [
+        "sort",
+        "object",
+        "keys",
+        "Object",
+        "sortedKeys",
+        "a",
+        "b",
+        "resultObj",
+        "forEach",
+        "k"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;AA4Be,SAASA,IAAT,CAAcC,MAAd,EAAsBD,IAAtB,EAA4B;AACzC;AACA,MAAME,IAAI,GAAGC,MAAM,CAACD,IAAP,CAAYD,MAAZ,CAAb,CAFyC,CAIzC;;AACA,MAAMG,UAAU,GAAGF,IAAI,CAACF,IAAL,CAAU,CAACK,CAAD,EAAIC,CAAJ,KAAU;AACrC;AACA,WAAON,IAAI,CAACC,MAAM,CAACI,CAAD,CAAP,EAAYJ,MAAM,CAACK,CAAD,CAAlB,CAAX;AACD,GAHkB,CAAnB,CALyC,CAUzC;;AACA,MAAMC,SAAS,GAAG,EAAlB,CAXyC,CAYzC;;AACAH,EAAAA,UAAU,CAACI,OAAX,CAAoBC,CAAD,IAAO;AACxB;AACAF,IAAAA,SAAS,CAACE,CAAD,CAAT,GAAeR,MAAM,CAACQ,CAAD,CAArB;AACD,GAHD,EAbyC,CAkBzC;;AACA,SAAOF,SAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name                                sort\n * @namespace           sugar.js.object\n * @type                                Function\n *\n * Sort an object properties the same way as the Array.sort do it\n *\n * @param                 {Object}                  object                The object to sort\n * @param                 {Function}                sort                  The sort function to use\n * @return                {Object}                                        The sorted object\n *\n * @example               js\n * import sortObject from '@coffeekraken/sugar/js/object/sort';\n * sortObject({\n *    coco: { weight: 10 },\n *    lolo: { weight: 2 },\n *    plop: { weight: 5 }\n * }, (a, b) => {\n *   return a.weight - b.weight;\n * });\n * // {\n * //   lolo: { weight: 2 },\n * //   plop: { weight: 5 },\n * //   coco: { weight: 10 }\n * // }\n *\n * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function sort(object, sort) {\n  // get the object keys\n  const keys = Object.keys(object);\n\n  // sort the keys\n  const sortedKeys = keys.sort((a, b) => {\n    // call the sort function passed as parameter\n    return sort(object[a], object[b]);\n  });\n\n  // create the new sorted object\n  const resultObj = {};\n  // loop on each sorted keys\n  sortedKeys.forEach((k) => {\n    // add the property key with the object value\n    resultObj[k] = object[k];\n  });\n\n  // return the result sorted object\n  return resultObj;\n}\n"
+    ]
+}

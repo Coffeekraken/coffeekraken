@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "SNavItem.test.js"
+    ],
+    "names": [
+        "__SNavItem",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,UAAU,GAAGC,OAAO,CAAC,aAAD,CAA1B;;AACAA,OAAO,CAAC,YAAD,CAAP,CAAsBD,UAAtB",
+    "sourcesContent": [
+        "const __SNavItem = require('../SNavItem');\nrequire('./SNavItem')(__SNavItem);\n"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "isHover.js"
+    ],
+    "names": [
+        "isHover",
+        "$elm",
+        "parentElement",
+        "querySelector"
+    ],
+    "mappings": ";;;;;;;AAAA;;AAEA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,OAAT,CAAiBC,IAAjB,EAAuB;AACpC,SAAOA,IAAI,CAACC,aAAL,CAAmBC,aAAnB,CAAiC,QAAjC,MAA+CF,IAAtD;AACD",
+    "sourcesContent": [
+        "// TODO tests\n\n/**\n * @name      isHover\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Check if the mouse is hover the passed HTMLElement\n *\n * @param    {HTMLElement}    $elm    The HTMLElement to check\n *\n * @example    js\n * import isHover from '@coffeekraken/sugar/js/dom/isHover'\n * const $myElm = document.querySelector('.my-elm')\n * if (isHover($myElm)) {\n *   // do something\n * }\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isHover($elm) {\n  return $elm.parentElement.querySelector(':hover') === $elm;\n}\n"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "even.js"
+    ],
+    "names": [
+        "isEven",
+        "value"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;AAee,SAASA,MAAT,CAAgBC,KAAhB,EAAuB;AACpC,SAAOA,KAAK,GAAG,CAAR,KAAc,CAArB;AACD",
+    "sourcesContent": [
+        "/**\n * @name        isEven\n * @namespace           sugar.js.is\n * @type      Function\n *\n * Check if a number is even or not\n *\n * @param    {Number}    value    The value to check\n * @return    {Boolean}    true if even, false if not\n *\n * @example    js\n * import isEven from '@coffeekraken/sugar/js/is/even'\n * isEven(1) // false\n * isEven(2) // true\n */\nexport default function isEven(value) {\n  return value % 2 === 0;\n}\n"
+    ]
+}

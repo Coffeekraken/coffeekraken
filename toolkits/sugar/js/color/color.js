@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name                color
- * @namespace           js.color
+ * @namespace           sugar.js.color
  * @type                Function
  *
  * Simple wrapper to create an SColor instance quickly

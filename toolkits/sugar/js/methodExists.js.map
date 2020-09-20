@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "methodExists.js"
+    ],
+    "names": [
+        "methodExists",
+        "instance",
+        "methods",
+        "missingMethodsArray",
+        "Array",
+        "isArray",
+        "forEach",
+        "method",
+        "push",
+        "length"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;;;AAqBe,SAASA,YAAT,CAAsBC,QAAtB,EAA4C;AAAA,oCAATC,OAAS;AAATA,IAAAA,OAAS;AAAA;;AACzD,MAAMC,mBAAmB,GAAG,EAA5B;AACA,MAAI,CAACC,KAAK,CAACC,OAAN,CAAcH,OAAd,CAAL,EAA6BA,OAAO,GAAG,CAACA,OAAD,CAAV;AAC7BA,EAAAA,OAAO,CAACI,OAAR,CAAiBC,MAAD,IAAY;AAC1B,QAAI,OAAON,QAAQ,CAACM,MAAD,CAAf,KAA4B,UAAhC,EACEJ,mBAAmB,CAACK,IAApB,CAAyBD,MAAzB;AACH,GAHD;AAIA,SAAO,CAACJ,mBAAmB,CAACM,MAArB,GAA8B,IAA9B,GAAqCN,mBAA5C;AACD",
+    "sourcesContent": [
+        "/**\n * @name                                    methodExists\n * @namespace           sugar.js.class\n * @type                                    Function\n *\n * Check if one or more methods exists on a class instance\n *\n * @param           {Object}              instance                The instance to check the methods on\n * @param           {String}              ...methods              The methods to check\n * @return          {Boolean|Array}                               Return true if all is ok, and an array of missing methods if not\n *\n * @example           js\n * class Coco {\n *    hello() {}\n * }\n * import methodExists from '@coffeekraken/sugar/node/class/methodExists';\n * const myInstance = new Coco();\n * methodExists(myInstance, 'hello', 'world'); // => ['world'];\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function methodExists(instance, ...methods) {\n  const missingMethodsArray = [];\n  if (!Array.isArray(methods)) methods = [methods];\n  methods.forEach((method) => {\n    if (typeof instance[method] !== 'function')\n      missingMethodsArray.push(method);\n  });\n  return !missingMethodsArray.length ? true : missingMethodsArray;\n}\n"
+    ]
+}

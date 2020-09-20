@@ -1,0 +1,36 @@
+{
+    "version": 3,
+    "sources": [
+        "slide.js"
+    ],
+    "names": [
+        "$item",
+        "uniqClass",
+        "classList",
+        "add",
+        "slideInValue",
+        "getAttribute",
+        "args",
+        "x",
+        "y",
+        "duration",
+        "delay",
+        "when",
+        "css",
+        "value",
+        "cssIn",
+        "document",
+        "head",
+        "innerHTML",
+        "setTimeout",
+        "$style",
+        "querySelector",
+        "parentNode",
+        "removeChild",
+        "$styleIn"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;eAEe,CAAC,MAAM;AACpB,kCAAoB,YAApB,EAAmCA,KAAD,IAAW;AAC3C;AACA,QAAMC,SAAS,sBAAe,sBAAf,CAAf;AACAD,IAAAA,KAAK,CAACE,SAAN,CAAgBC,GAAhB,CAAoBF,SAApB,EAH2C,CAK3C;;AACA,QAAMG,YAAY,GAAGJ,KAAK,CAACK,YAAN,CAAmB,UAAnB,CAArB;AACA,QAAMC,IAAI,GAAG,wBAAYF,YAAZ,EAA0B;AACrCG,MAAAA,CAAC,EAAE,mBADkC;AAErCC,MAAAA,CAAC,EAAE,mBAFkC;AAGrCC,MAAAA,QAAQ,EAAE,4BAH2B;AAIrCC,MAAAA,KAAK,EAAE,oBAJ8B;AAKrCC,MAAAA,IAAI,EAAE;AAL+B,KAA1B,CAAb,CAP2C,CAe3C;;AACA,QAAMC,GAAG,gCACMX,SADN,mEAGkBK,IAAI,CAACC,CAAL,CAAOM,KAAP,IAAgB,CAHlC,iBAG0CP,IAAI,CAACE,CAAL,CAAOK,KAAP,IAAgB,CAH1D,0BAAT;AAOA,QAAMC,KAAK,gCACIb,SADJ,4CAEWK,IAAI,CAACG,QAAL,CAAcI,KAAd,GAAsB,IAAtB,IAA8B,KAFzC,gFAAX,CAvB2C,CA+B3C;;AACAE,IAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd,kCACehB,SADf,0BAEMW,GAFN;AAKAM,IAAAA,UAAU,CAAC,MAAM;AACfH,MAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd,oCACehB,SADf,+BAEMa,KAFN;AAKD,KANS,EAMP,GANO,CAAV,CArC2C,CA6C3C;;AACAI,IAAAA,UAAU,CAAC,MAAM;AACflB,MAAAA,KAAK,CAACE,SAAN,CAAgBC,GAAhB,CAAoB,IAApB;AACD,KAFS,EAEPG,IAAI,CAACI,KAAL,CAAWG,KAFJ,CAAV;AAIAK,IAAAA,UAAU,CAAC,MAAM;AACf,UAAMC,MAAM,GAAGJ,QAAQ,CAACK,aAAT,iBAAgCnB,SAAhC,EAAf;AACA,UAAIkB,MAAJ,EAAYA,MAAM,CAACE,UAAP,CAAkBC,WAAlB,CAA8BH,MAA9B;AACZ,UAAMI,QAAQ,GAAGR,QAAQ,CAACK,aAAT,iBAAgCnB,SAAhC,SAAjB;AACA,UAAIsB,QAAJ,EAAcA,QAAQ,CAACF,UAAT,CAAoBC,WAApB,CAAgCC,QAAhC;AACf,KALS,EAKPjB,IAAI,CAACI,KAAL,CAAWG,KAAX,GAAmBP,IAAI,CAACG,QAAL,CAAcI,KAL1B,CAAV;AAMD,GAxDD;AAyDD,CA1Dc,G",
+    "sourcesContent": [
+        "import __uniqid from '../../string/uniqid';\nimport __parseArgs from '../../string/parseArgs';\nimport __querySelectorLive from '../../dom/querySelectorLive';\n\nexport default (() => {\n  __querySelectorLive('[slide-in]', ($item) => {\n    // generate a unique id for this node\n    const uniqClass = `slide-in-${__uniqid()}`;\n    $item.classList.add(uniqClass);\n\n    // parse the slide-in value\n    const slideInValue = $item.getAttribute('slide-in');\n    const args = __parseArgs(slideInValue, {\n      x: 'Number -x --x \"0\"',\n      y: 'Number -y --y \"0\"',\n      duration: 'Number -d --duration \"500\"',\n      delay: 'Number --delay \"0\"',\n      when: 'String -w --when \"inViewport\"'\n    });\n\n    // generate the animation css\n    const css = `\n      [slide-in].${uniqClass} {\n        opacity: 0;\n        transform: translate(${args.x.value || 0}px, ${args.y.value || 0}px);\n\n      }\n    `;\n    const cssIn = `\n      [slide-in].${uniqClass}.in {\n        transition: all ${args.duration.value / 1000 || '0.5'}s;\n        opacity: 1;\n        transform: translate(0, 0);\n      }\n    `;\n\n    // append the css into the section\n    document.head.innerHTML += `\n      <style id=\"${uniqClass}\">\n        ${css}\n      </style>\n    `;\n    setTimeout(() => {\n      document.head.innerHTML += `\n        <style id=\"${uniqClass}-in\">\n          ${cssIn}\n        </style>\n      `;\n    }, 100);\n\n    // add the \"in\" class\n    setTimeout(() => {\n      $item.classList.add('in');\n    }, args.delay.value);\n\n    setTimeout(() => {\n      const $style = document.querySelector(`style#${uniqClass}`);\n      if ($style) $style.parentNode.removeChild($style);\n      const $styleIn = document.querySelector(`style#${uniqClass}-in`);\n      if ($styleIn) $styleIn.parentNode.removeChild($styleIn);\n    }, args.delay.value + args.duration.value);\n  });\n})();\n"
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "version": 3,
+    "sources": [
+        "observeAttributes.js"
+    ],
+    "names": [
+        "target",
+        "settings",
+        "__SPromise",
+        "resolve",
+        "reject",
+        "trigger",
+        "cancel",
+        "mutationObserver",
+        "MutationObserver",
+        "mutations",
+        "mutedAttrs",
+        "forEach",
+        "mutation",
+        "attributeName",
+        "observe",
+        "attributes",
+        "on",
+        "disconnect"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;AAsBe,kBAAUA,MAAV,EAAkBC,QAAlB,EAAiC;AAAA,MAAfA,QAAe;AAAfA,IAAAA,QAAe,GAAJ,EAAI;AAAA;;AAC9C,SAAO,IAAIC,iBAAJ,CAAe,CAACC,OAAD,EAAUC,MAAV,EAAkBC,OAAlB,EAA2BC,MAA3B,KAAsC;AAC1D;AACA,QAAMC,gBAAgB,GAAG,IAAIC,gBAAJ,CAAsBC,SAAD,IAAe;AAC3D,UAAIC,UAAU,GAAG,EAAjB,CAD2D,CAE3D;;AACAD,MAAAA,SAAS,CAACE,OAAV,CAAmBC,QAAD,IAAc;AAC9B;AACA,YAAI,CAACF,UAAU,CAACE,QAAQ,CAACC,aAAV,CAAf,EAAyC;AACvCR,UAAAA,OAAO,CAAC,MAAD,EAASO,QAAT,CAAP;AACAF,UAAAA,UAAU,CAACE,QAAQ,CAACC,aAAV,CAAV,GAAqC,IAArC;AACD;AACF,OAND;AAOAH,MAAAA,UAAU,GAAG,EAAb;AACD,KAXwB,CAAzB;AAYAH,IAAAA,gBAAgB,CAACO,OAAjB,CAAyBd,MAAzB;AACEe,MAAAA,UAAU,EAAE;AADd,OAGKd,QAHL;AAKD,GAnBM,EAmBJe,EAnBI,CAmBD,SAnBC,EAmBU,MAAM;AACrBT,IAAAA,gBAAgB,CAACU,UAAjB;AACD,GArBM,CAAP;AAsBD;AAED",
+    "sourcesContent": [
+        "import __SPromise from '../promise/SPromise';\n\n/**\n * @name        observeAttributes\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Observe attributes on an HTMLElement and get mutations through the SPromise instance\n *\n * @param \t\t{HTMLElement} \t\t\t\t\ttarget \t\tThe element to observe\n * @param \t\t{MutationObserverInit} \t\t\tsettings \tThe mutation observer settings\n * @return \t\t{SPromise} \t\t\t\t\t\t\t\tThe SPromise throught which you can have the mutations using the \"then\" callback\n *\n * @example  \tjs\n * import observeAttributes from 'sugarcss/js/dom/observeAttributes'\n * const observer = observeAttributes(myCoolHTMLElement).then(mutation => {\n * \t\t// do something with the mutation\n * });\n * // cancel the observer\n * observer.cancel();\n *\n * @see \t\thttps://developer.mozilla.org/en/docs/Web/API/MutationObserver\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function (target, settings = {}) {\n  return new __SPromise((resolve, reject, trigger, cancel) => {\n    // create a new observer\n    const mutationObserver = new MutationObserver((mutations) => {\n      let mutedAttrs = {};\n      // loop on mutations\n      mutations.forEach((mutation) => {\n        // push mutation\n        if (!mutedAttrs[mutation.attributeName]) {\n          trigger('then', mutation);\n          mutedAttrs[mutation.attributeName] = true;\n        }\n      });\n      mutedAttrs = {};\n    });\n    mutationObserver.observe(target, {\n      attributes: true,\n      // characterData : true,\n      ...settings\n    });\n  }).on('finally', () => {\n    mutationObserver.disconnect();\n  });\n}\n\n/**\n * List of attributes to observe\n * @setting\n * @name \t\tattributes\n * @type \t\t{Array}\n * @default \tnull\n */\n"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "SStaticValidation.test.js"
+    ],
+    "names": [
+        "__SStaticValidation",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,mBAAmB,GAAGC,OAAO,CAAC,sBAAD,CAAnC;;AACAA,OAAO,CAAC,qBAAD,CAAP,CAA+BD,mBAA/B",
+    "sourcesContent": [
+        "const __SStaticValidation = require('../SStaticValidation');\nrequire('./SStaticValidation')(__SStaticValidation);\n"
+    ]
+}

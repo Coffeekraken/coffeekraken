@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "printf.js"
+    ],
+    "names": [
+        "_printf",
+        "args",
+        "__sprintf",
+        "sprintf",
+        "apply"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;;;AAoBe,SAASA,OAAT,GAA0B;AAAA,oCAANC,IAAM;AAANA,IAAAA,IAAM;AAAA;;AACvC,SAAOC,mBAAUC,OAAV,CAAkBC,KAAlB,CAAwB,IAAxB,EAA8BH,IAA9B,CAAP;AACD",
+    "sourcesContent": [
+        "import __sprintf from 'sprintf-js';\n\n/**\n * @name        printf\n * @namespace           sugar.js.string\n * @type      Function\n *\n * printf php equavalent\n *\n * @param \t\t{String} \t\t\t\t\t\tsource \t\t\tThe source in which to replace the tokens\n * @param \t\t{Miyed} \t\t\tvalues... \t\t\t  Any number of arguments to replace the placeholders in the string\n * @return \t{String} \t\t\t\t\t\t\t\t\t\tThe resulting string\n *\n * @example     js\n * import printf from '@coffeekraken/sugar/js/string/printf';\n * printf('Hello %s', 'world'); // => Hello world\n * printf('Hello %s, I\\'m %s', 'world', 'John Doe'); // Hello world, I'm John Doe\n * printf('Hello %(first)s, I\\'m %(name)s', { first : 'world', name : 'John Doe'}); // Hello world, I'm John Doe\n *\n * @see \t\t\t\thttps://www.npmjs.com/package/sprintf-js\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function _printf(...args) {\n  return __sprintf.sprintf.apply(null, args);\n}\n"
+    ]
+}

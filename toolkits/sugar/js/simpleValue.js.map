@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "simpleValue.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "simpleValue",
+        "data",
+        "value",
+        "trim"
+    ],
+    "mappings": ";;AAAA;;;;;;;;;;;;;AAaAA,MAAM,CAACC,OAAP,GAAiB,SAASC,WAAT,CAAqBC,IAArB,EAA2B;AAC1C,MACEA,IAAI,IACJA,IAAI,CAACC,KADL,IAEA,OAAOD,IAAI,CAACC,KAAZ,KAAsB,QAFtB,IAGAD,IAAI,CAACC,KAAL,CAAWC,IAAX,OAAsB,EAJxB,EAKE;AACA,WAAO,IAAP;AACD;;AACD,SAAOF,IAAI,CAACC,KAAZ;AACD,CAVD",
+    "sourcesContent": [
+        "/**\n * @name              simpleValue\n * @namespace           sugar.js.docblock.tags\n * @type              Function\n *\n * Parse the simpleValue tag\n *\n * @param       {Object}          data        The data object parsed in the string\n * @return      {Object}                      The formated object\n *\n * @since     2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com>\n */\nmodule.exports = function simpleValue(data) {\n  if (\n    data &&\n    data.value &&\n    typeof data.value === 'string' &&\n    data.value.trim() === ''\n  ) {\n    return true;\n  }\n  return data.value;\n};\n"
+    ]
+}

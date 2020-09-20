@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "unquote.test.js"
+    ],
+    "names": [
+        "__unquote",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,SAAS,GAAGC,OAAO,CAAC,YAAD,CAAzB;;AACAA,OAAO,CAAC,WAAD,CAAP,CAAqBD,SAArB",
+    "sourcesContent": [
+        "const __unquote = require('../unquote');\nrequire('./unquote')(__unquote);"
+    ]
+}

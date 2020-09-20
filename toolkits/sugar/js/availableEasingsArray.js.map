@@ -1,0 +1,13 @@
+{
+    "version": 3,
+    "sources": [
+        "availableEasingsArray.js"
+    ],
+    "names": [
+        "availableEasingsArray"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;AAYe,SAASA,qBAAT,GAAiC;AAC9C,SAAO,CACL,gBADK,EAEL,eAFK,EAGL,gBAHK,EAIL,gBAJK,EAKL,aALK,EAML,YANK,EAOL,aAPK,EAQL,aARK,EASL,cATK,EAUL,aAVK,EAWL,cAXK,EAYL,cAZK,CAAP;AAcD",
+    "sourcesContent": [
+        "/**\n * @name            availableEasingsArray\n * @namespace           sugar.js.easing\n * @type            Function\n *\n * This function simply return back an array of all the available easings function in the sugar toolkit\n *\n * @return      {Array}             An array of all the easing functions available\n *\n * @since       2.0.0\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function availableEasingsArray() {\n  return [\n    'easeInOutCubic',\n    'easeInOutQuad',\n    'easeInOutQuart',\n    'easeInOutQuint',\n    'easeInCubic',\n    'easeInQuad',\n    'easeInQuart',\n    'easeInQuint',\n    'easeOutCubic',\n    'easeOutQuad',\n    'easeOutQuart',\n    'easeOutQuint'\n  ];\n}\n"
+    ]
+}

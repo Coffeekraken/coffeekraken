@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "toQueryString.js"
+    ],
+    "names": [
+        "toQueryString",
+        "obj",
+        "Object",
+        "keys",
+        "reduce",
+        "a",
+        "k",
+        "push",
+        "encodeURIComponent",
+        "join"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;;AAoBe,SAASA,aAAT,CAAuBC,GAAvB,EAA4B;AACzC,SACE,MACAC,MAAM,CAACC,IAAP,CAAYF,GAAZ,EACGG,MADH,CACU,UAAUC,CAAV,EAAaC,CAAb,EAAgB;AACtBD,IAAAA,CAAC,CAACE,IAAF,CAAOD,CAAC,GAAG,GAAJ,GAAUE,kBAAkB,CAACP,GAAG,CAACK,CAAD,CAAJ,CAAnC;AACA,WAAOD,CAAP;AACD,GAJH,EAIK,EAJL,EAKGI,IALH,CAKQ,GALR,CAFF;AASD",
+    "sourcesContent": [
+        "/**\n * @name        toQueryString\n * @namespace           sugar.js.object\n * @type      Function\n *\n * Transform an object (key => pairs) to a query string like \"?var1=value1&var2\"\n *\n * @param \t\t{Object} \t\tobj \t\tThe object to serialize\n * @return \t\t{String} \t\t\t\t\tThe query string\n *\n * @example \tjs\n * import toQueryString from '@coffeekraken/sugar/js/object/toQueryString'\n * console.log(toQueryString({\n * \tvalue1 : 'coco',\n * \tvalue1 : 'plop'\n * }));\n * // => ?value1=coco&value2=plop\n *\n * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function toQueryString(obj) {\n  return (\n    '?' +\n    Object.keys(obj)\n      .reduce(function (a, k) {\n        a.push(k + '=' + encodeURIComponent(obj[k]));\n        return a;\n      }, [])\n      .join('&')\n  );\n}\n"
+    ]
+}

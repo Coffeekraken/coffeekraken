@@ -1,0 +1,33 @@
+{
+    "version": 3,
+    "sources": [
+        "replaceTags.js"
+    ],
+    "names": [
+        "replaceTags",
+        "text",
+        "tags",
+        "oneLineText",
+        "replace",
+        "Object",
+        "keys",
+        "forEach",
+        "tagName",
+        "reg",
+        "RegExp",
+        "tagsArray",
+        "match",
+        "singleReg",
+        "singleTagsArray",
+        "i",
+        "length",
+        "t",
+        "tagArgs",
+        "tagToReplace",
+        "tagContent"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;;AAmBe,SAASA,WAAT,CAAqBC,IAArB,EAA2BC,IAA3B,EAAiC;AAC9C,MAAI,CAACD,IAAL,EAAWA,IAAI,GAAG,EAAP;AACXA,EAAAA,IAAI,GAAG,uBAAWA,IAAX,CAAP;AACA,MAAIE,WAAW,GAAGF,IAAI,CAACG,OAAL,CAAa,OAAb,EAAsB,MAAtB,CAAlB;AACAD,EAAAA,WAAW,GAAGA,WAAW,CAACC,OAAZ,CAAoB,KAApB,EAA2B,KAA3B,CAAd;AACAD,EAAAA,WAAW,GAAGA,WAAW,CAACC,OAAZ,CAAoB,KAApB,EAA2B,KAA3B,CAAd,CAL8C,CAO9C;;AACAC,EAAAA,MAAM,CAACC,IAAP,CAAYJ,IAAZ,EAAkBK,OAAlB,CAA2BC,OAAD,IAAa;AACrC;AACA,QAAMC,GAAG,GAAG,IAAIC,MAAJ,cACHF,OADG,oCAC+BA,OAD/B,QAEV,GAFU,CAAZ,CAFqC,CAMrC;;AACA,QAAMG,SAAS,GAAGR,WAAW,CAACS,KAAZ,CAAkBH,GAAlB,CAAlB;AAEA,QAAMI,SAAS,GAAG,IAAIH,MAAJ,gBAAmBF,OAAnB,iBAAyC,GAAzC,CAAlB;AACA,QAAMM,eAAe,GAAGX,WAAW,CAACS,KAAZ,CAAkBC,SAAlB,CAAxB;;AAEA,QAAIF,SAAJ,EAAe;AACb,WAAK,IAAII,CAAC,GAAG,CAAb,EAAgBA,CAAC,GAAGJ,SAAS,CAACK,MAA9B,EAAsCD,CAAC,EAAvC,EAA2C;AACzC,YAAME,CAAC,GAAGN,SAAS,CAACI,CAAD,CAAnB;AACA,YAAMG,OAAO,GAAGD,CAAC,CAACL,KAAF,gBACNJ,OADM,oCAC4BA,OAD5B,OAAhB;AAGA,YAAI,CAACU,OAAL,EAAc;AACd,YAAMC,YAAY,GAAGD,OAAO,CAAC,CAAD,CAA5B;AACA,YAAME,UAAU,GAAGF,OAAO,CAAC,CAAD,CAA1B,CAPyC,CASzC;;AACAf,QAAAA,WAAW,GAAGA,WAAW,CAACC,OAAZ,CACZe,YADY,EAEZjB,IAAI,CAACM,OAAD,CAAJ,CAAcA,OAAd,EAAuBY,UAAvB,CAFY,CAAd;AAID;AACF;;AAED,QAAIN,eAAJ,EAAqB;AACnB,WAAK,IAAIC,EAAC,GAAG,CAAb,EAAgBA,EAAC,GAAGD,eAAe,CAACE,MAApC,EAA4CD,EAAC,EAA7C,EAAiD;AAC/C,YAAME,EAAC,GAAGH,eAAe,CAACC,EAAD,CAAzB;;AACA,YAAMG,QAAO,GAAGD,EAAC,CAACL,KAAF,gBAAgBJ,OAAhB,gBAAhB;;AACA,YAAI,CAACU,QAAL,EAAc;AACd,YAAMC,aAAY,GAAGD,QAAO,CAAC,CAAD,CAA5B;AACA,YAAME,WAAU,GAAG,EAAnB,CAL+C,CAO/C;;AACAjB,QAAAA,WAAW,GAAGA,WAAW,CAACC,OAAZ,CACZe,aADY,EAEZjB,IAAI,CAACM,OAAD,CAAJ,CAAcA,OAAd,EAAuBY,WAAvB,CAFY,CAAd;AAID;AACF;AACF,GA7CD;AA+CAjB,EAAAA,WAAW,GAAGA,WAAW,CAACC,OAAZ,CAAoB,SAApB,EAA+B,MAA/B,CAAd;AACAD,EAAAA,WAAW,GAAGA,WAAW,CAACC,OAAZ,CAAoB,QAApB,EAA8B,IAA9B,CAAd;AACAD,EAAAA,WAAW,GAAGA,WAAW,CAACC,OAAZ,CAAoB,QAApB,EAA8B,IAA9B,CAAd;AAEA,SAAOD,WAAP;AACD",
+    "sourcesContent": [
+        "import __toString from '../string/toString';\n\n/**\n * @name                            replaceTags\n * @namespace           sugar.js.html\n * @type                            Function\n *\n * Replace all the html tags that you specify by something else that you can fully choose\n *\n * @param               {String}                 text                           The text in which replace all the tags\n * @param               {Object}                 tags                           An object of tags to replace which have as value the replacement function that take the tag name, the tag content and must return the replacement content\n * @return              {String}                                                The new text\n *\n * @example             js\n * import replaceTags from '@coffeekraken/sugar/js/html/replaceTags';\n * replaceTags('<span>Hello</span> world', {\n *    span: (tag, content) => `<div>${content}</div>`; // => <div>Hello</div> world\n * });\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function replaceTags(text, tags) {\n  if (!text) text = '';\n  text = __toString(text);\n  let oneLineText = text.replace(/\\r\\n/g, '|rn|');\n  oneLineText = oneLineText.replace(/\\n/g, '|n|');\n  oneLineText = oneLineText.replace(/\\r/g, '|r|');\n\n  // loop on the tags\n  Object.keys(tags).forEach((tagName) => {\n    // create the match regex\n    const reg = new RegExp(\n      `<\\s*${tagName}[^>]*>((.*?))<\\\\s*\\/\\\\s*${tagName}>`,\n      'g'\n    );\n    // const reg = new RegExp(`<\\s*${tagName}[^>]*>(([\\S\\s]+)?)<\\\\s*\\/\\\\s*${tagName}>`, 'g');\n    const tagsArray = oneLineText.match(reg);\n\n    const singleReg = new RegExp(`\\\\s?<${tagName}\\\\s?\\/>\\\\s?`, 'g');\n    const singleTagsArray = oneLineText.match(singleReg);\n\n    if (tagsArray) {\n      for (let i = 0; i < tagsArray.length; i++) {\n        const t = tagsArray[i];\n        const tagArgs = t.match(\n          `<\\\\s*${tagName}[^>]*>((.*?))<\\\\s*\\/\\\\s*${tagName}>`\n        );\n        if (!tagArgs) continue;\n        const tagToReplace = tagArgs[0];\n        const tagContent = tagArgs[1];\n\n        // call the replacement function\n        oneLineText = oneLineText.replace(\n          tagToReplace,\n          tags[tagName](tagName, tagContent)\n        );\n      }\n    }\n\n    if (singleTagsArray) {\n      for (let i = 0; i < singleTagsArray.length; i++) {\n        const t = singleTagsArray[i];\n        const tagArgs = t.match(`\\\\s?<${tagName}\\\\s?\\/>\\\\s?`);\n        if (!tagArgs) continue;\n        const tagToReplace = tagArgs[0];\n        const tagContent = '';\n\n        // call the replacement function\n        oneLineText = oneLineText.replace(\n          tagToReplace,\n          tags[tagName](tagName, tagContent)\n        );\n      }\n    }\n  });\n\n  oneLineText = oneLineText.replace(/\\|rn\\|/g, '\\r\\n');\n  oneLineText = oneLineText.replace(/\\|n\\|/g, '\\n');\n  oneLineText = oneLineText.replace(/\\|r\\|/g, '\\r');\n\n  return oneLineText;\n}\n"
+    ]
+}

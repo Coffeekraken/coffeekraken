@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "set.test.js"
+    ],
+    "names": [
+        "__set",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,KAAK,GAAGC,OAAO,CAAC,QAAD,CAArB;;AACAA,OAAO,CAAC,OAAD,CAAP,CAAiBD,KAAjB",
+    "sourcesContent": [
+        "const __set = require('../set');\nrequire('./set')(__set);"
+    ]
+}

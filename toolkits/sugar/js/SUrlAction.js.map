@@ -1,0 +1,35 @@
+{
+    "version": 3,
+    "sources": [
+        "SUrlAction.js"
+    ],
+    "names": [
+        "SUrlAction",
+        "descriptorObj",
+        "settings",
+        "promise",
+        "Error",
+        "setTimeout",
+        "_descriptorObj",
+        "target",
+        "specs",
+        "specsString",
+        "slice",
+        "split",
+        "join",
+        "window",
+        "open",
+        "url",
+        "name",
+        "replace",
+        "document",
+        "location",
+        "complete",
+        "timeout",
+        "__SAction"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;IA8BqBA,U;;;;;AACnB;;;;;;;;;;AAUA,sBAAYC,aAAZ,EAA2BC,QAA3B,EAA0C;AAAA,QAAfA,QAAe;AAAfA,MAAAA,QAAe,GAAJ,EAAI;AAAA;;AAAA;;AAAA,6BAClCD,aADkC,EACnBC,QADmB;AAEzC;AAED;;;;;;;;;;;;;;;;0BAYM;AACJ,UAAMC,OAAO,sEAAb;;AAEA,UAAI,CAAC,uBAAL,EACE,MAAM,IAAIC,KAAJ,0GAAN;AAIFC,MAAAA,UAAU,CAAC,MAAM;AACf;AACA,gBAAQ,KAAKC,cAAL,CAAoBC,MAA5B;AACE,eAAK,QAAL;AACA,eAAK,QAAL;AACE,gBAAMC,KAAK,GAAG,KAAKF,cAAL,CAAoBE,KAApB,IAA6B,EAA3C;AACA,gBAAIC,WAAW,GAAG,4BAAgBD,KAAhB,EACfE,KADe,CACT,CADS,EAEfC,KAFe,CAET,GAFS,EAGfC,IAHe,CAGV,GAHU,CAAlB;AAIAC,YAAAA,MAAM,CAACC,IAAP,CACE,KAAKR,cAAL,CAAoBS,GADtB,EAEE,KAAKT,cAAL,CAAoBU,IAApB,IAA4B,QAF9B,EAGEP,WAAW,IAAI,KAAKH,cAAL,CAAoBC,MAApB,KAA+B,QAA9C,GACI,wBADJ,GAEI,EALN,EAME,KAAKD,cAAL,CAAoBW,OAApB,IAA+B,KANjC;AAQA;;AACF,eAAK,OAAL;AACA;AACEC,YAAAA,QAAQ,CAACC,QAAT,GAAoB,KAAKb,cAAL,CAAoBS,GAAxC;AACA;AApBJ,SAFe,CAyBf;;;AACAZ,QAAAA,OAAO,CAACiB,QAAR;AACD,OA3BS,EA2BP,KAAKd,cAAL,CAAoBe,OAApB,IAA+B,CA3BxB,CAAV;AA6BA,aAAOlB,OAAP;AACD;;;;EAjEqCmB,iB",
+    "sourcesContent": [
+        "import __SAction from '../SAction';\nimport __isBrowser from '../../is/browser';\nimport __toQueryString from '../../object/toQueryString';\n\n/**\n * @name              SUrlAction\n * @namespace         sugar.js.action.browser\n * @type              Class\n *\n * This class represent an URL action that let you change the user page\n * with multiple settings like if you want the url to be opened in a popup,\n * after a timeout, etc...\n *\n * @TODO        Better documentation\n *\n * @param       {Object}        descriptorObj       The action descriptor object\n * - target (_self) {String}: Specify how you want to go to the url. Can be ```_self```, ```_blank``` or ```_popup```\n * - url (null) {String}: Specify the url where you want to send the user\n * - name (null) {String}: Specify the name of the new window. Same as the ```window.open``` name parameter\n * - specs ({}) {Object}: Specify the window specs that you want if your target is ```_blank``` or ```_popup```. Accept all the parameters that the ```window.open``` specs parameter accept in object format\n * - timeout (0) {Number}: Specify a timeout between the time you call the ```run``` method, and the time the user is actually redirected\n * @param       {Object}        [settings={}]       An object of settings to configure your action. See the ```SAction``` class documentation for more info\n *\n * @example       js\n * import SUrlAction from '@coffeekraken/sugar/js/action/browser/SUrlAction';\n * const myAction = new SUrlAction({\n *    url: 'https://google.com',\n *    target: '_popup'\n * });\n * myAction.run();\n *\n * @since       2.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default class SUrlAction extends __SAction {\n  /**\n   * @name          constructor\n   * @type          Function\n   * @constructor\n   *\n   * Constructor\n   *\n   * @since     2.0.0\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  constructor(descriptorObj, settings = {}) {\n    super(descriptorObj, settings);\n  }\n\n  /**\n   * @name            run\n   * @type            Function\n   * @override\n   *\n   * Process to the action execution.\n   *\n   * @return      {SPromise}      An SPromise instance on which you can subscribe for this particular run execution process events\n   *\n   * @since       2.0.0\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  run() {\n    const promise = super.run();\n\n    if (!__isBrowser())\n      throw new Error(\n        `SUrlAction: This action is meant to be used in a browser environment which seems to not be the case...`\n      );\n\n    setTimeout(() => {\n      // switch on the target\n      switch (this._descriptorObj.target) {\n        case '_blank':\n        case '_popup':\n          const specs = this._descriptorObj.specs || {};\n          let specsString = __toQueryString(specs)\n            .slice(1)\n            .split('&')\n            .join(',');\n          window.open(\n            this._descriptorObj.url,\n            this._descriptorObj.name || '_blank',\n            specsString || this._descriptorObj.target === '_popup'\n              ? 'width=1000,height=1000'\n              : '',\n            this._descriptorObj.replace || false\n          );\n          break;\n        case '_self':\n        default:\n          document.location = this._descriptorObj.url;\n          break;\n      }\n\n      // complete\n      promise.complete();\n    }, this._descriptorObj.timeout || 0);\n\n    return promise;\n  }\n}\n"
+    ]
+}

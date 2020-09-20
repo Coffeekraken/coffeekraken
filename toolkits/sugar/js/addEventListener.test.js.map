@@ -1,0 +1,33 @@
+{
+    "version": 3,
+    "sources": [
+        "addEventListener.test.js"
+    ],
+    "names": [
+        "describe",
+        "isCallbackCalled",
+        "isThenCalled",
+        "hasBeenReleased",
+        "hasBeenCanceled",
+        "clickCount",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "listener",
+        "event",
+        "on",
+        "finally",
+        "cancel",
+        "setTimeout",
+        "it",
+        "done",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;AACA;;;;AAEAA,QAAQ,CAAC,+BAAD,EAAkC,MAAM;AAC9C,MAAIC,gBAAgB,GAAG,KAAvB;AAAA,MACEC,YAAY,GAAG,KADjB;AAAA,MAEEC,eAAe,GAAG,KAFpB;AAAA,MAGEC,eAAe,GAAG,KAHpB;AAIA,MAAIC,UAAU,GAAG,CAAjB;AAEAC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAGA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,UAAvB,CAAb;AACA,MAAMC,QAAQ,GAAG,+BAAmBF,IAAnB,EAAyB,OAAzB,EAAmCG,KAAD,IAAW;AAC5DX,IAAAA,gBAAgB,GAAG,IAAnB;AACD,GAFgB,EAGdY,EAHc,CAGX,OAHW,EAGDD,KAAD,IAAW;AACtBV,IAAAA,YAAY,GAAG,IAAf;AACAG,IAAAA,UAAU;AACX,GANc,EAOdS,OAPc,CAOLF,KAAD,IAAW;AAClBT,IAAAA,eAAe,GAAG,IAAlB;AACD,GATc,EAUdU,EAVc,CAUX,QAVW,EAUAD,KAAD,IAAW;AACvBR,IAAAA,eAAe,GAAG,IAAlB;AACD,GAZc,CAAjB;AAcA,8BAAgBK,IAAhB,EAAsB,OAAtB,EAzB8C,CA2B9C;;AACAE,EAAAA,QAAQ,CAACI,MAAT;AAEAC,EAAAA,UAAU,CAAC,MAAM;AACf,gCAAgBP,IAAhB,EAAsB,OAAtB;AACD,GAFS,CAAV;AAIAQ,EAAAA,EAAE,CAAC,oEAAD,EAAwEC,IAAD,IAAU;AACjFC,IAAAA,MAAM,CAAClB,gBAAD,CAAN,CAAyBmB,IAAzB,CAA8B,IAA9B;AACAD,IAAAA,MAAM,CAACjB,YAAD,CAAN,CAAqBkB,IAArB,CAA0B,IAA1B;AACAD,IAAAA,MAAM,CAACd,UAAD,CAAN,CAAmBe,IAAnB,CAAwB,CAAxB;AACAD,IAAAA,MAAM,CAACf,eAAD,CAAN,CAAwBgB,IAAxB,CAA6B,IAA7B;AACAF,IAAAA,IAAI;AACL,GANC,CAAF;AAOD,CAzCO,CAAR",
+    "sourcesContent": [
+        "import __addEventListener from '../addEventListener';\nimport __dispatchEvent from '../dispatchEvent';\n\ndescribe('sugar.js.dom.addEventListener', () => {\n  let isCallbackCalled = false,\n    isThenCalled = false,\n    hasBeenReleased = false,\n    hasBeenCanceled = false;\n  let clickCount = 0;\n\n  document.body.innerHTML = `\n    <div id=\"testing\"></div>\n  `;\n  const $elm = document.querySelector('#testing');\n  const listener = __addEventListener($elm, 'click', (event) => {\n    isCallbackCalled = true;\n  })\n    .on('click', (event) => {\n      isThenCalled = true;\n      clickCount++;\n    })\n    .finally((event) => {\n      hasBeenReleased = true;\n    })\n    .on('cancel', (event) => {\n      hasBeenCanceled = true;\n    });\n\n  __dispatchEvent($elm, 'click');\n\n  // release the listener\n  listener.cancel();\n\n  setTimeout(() => {\n    __dispatchEvent($elm, 'click');\n  });\n\n  it('Should have register the listener correctly and called as expected', (done) => {\n    expect(isCallbackCalled).toBe(true);\n    expect(isThenCalled).toBe(true);\n    expect(clickCount).toBe(1);\n    expect(hasBeenCanceled).toBe(true);\n    done();\n  });\n});\n"
+    ]
+}

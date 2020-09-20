@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "deepize.test.js"
+    ],
+    "names": [
+        "__deepize",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,SAAS,GAAGC,OAAO,CAAC,YAAD,CAAzB;;AACAA,OAAO,CAAC,WAAD,CAAP,CAAqBD,SAArB",
+    "sourcesContent": [
+        "const __deepize = require('../deepize');\nrequire('./deepize')(__deepize);\n"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "getHtmlClassFromTagName.test.js"
+    ],
+    "names": [
+        "__getHtmlClassFromTagName",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,yBAAyB,GAAGC,OAAO,CAAC,4BAAD,CAAzC;;AACAA,OAAO,CAAC,2BAAD,CAAP,CAAqCD,yBAArC",
+    "sourcesContent": [
+        "const __getHtmlClassFromTagName = require('../getHtmlClassFromTagName');\nrequire('./getHtmlClassFromTagName')(__getHtmlClassFromTagName);\n"
+    ]
+}

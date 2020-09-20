@@ -1,0 +1,38 @@
+{
+    "version": 3,
+    "sources": [
+        "mail.js"
+    ],
+    "names": [
+        "mail",
+        "text",
+        "black",
+        "tag",
+        "content",
+        "red",
+        "green",
+        "yellow",
+        "blue",
+        "magenta",
+        "cyan",
+        "white",
+        "bgBlack",
+        "bgRed",
+        "bgGreen",
+        "bgYellow",
+        "bgBlue",
+        "bgMagenta",
+        "bgCyan",
+        "bgWhite",
+        "bold",
+        "dim",
+        "italic",
+        "underline",
+        "strike",
+        "br"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;AAYe,SAASA,IAAT,CAAcC,IAAd,EAAoB;AACjC,SAAO,0BAAcA,IAAd,EAAoB;AACzBC,IAAAA,KAAK,EAAE,CAACC,GAAD,EAAMC,OAAN,4CAAgDA,OAAhD,YADkB;AAEzBC,IAAAA,GAAG,EAAE,CAACF,GAAD,EAAMC,OAAN,8CAAkDA,OAAlD,YAFoB;AAGzBE,IAAAA,KAAK,EAAE,CAACH,GAAD,EAAMC,OAAN,8CAAkDA,OAAlD,YAHkB;AAIzBG,IAAAA,MAAM,EAAE,CAACJ,GAAD,EAAMC,OAAN,8CAAkDA,OAAlD,YAJiB;AAKzBI,IAAAA,IAAI,EAAE,CAACL,GAAD,EAAMC,OAAN,8CAAkDA,OAAlD,YALmB;AAMzBK,IAAAA,OAAO,EAAE,CAACN,GAAD,EAAMC,OAAN,8CAAkDA,OAAlD,YANgB;AAOzBM,IAAAA,IAAI,EAAE,CAACP,GAAD,EAAMC,OAAN,8CAAkDA,OAAlD,YAPmB;AAQzBO,IAAAA,KAAK,EAAE,CAACR,GAAD,EAAMC,OAAN,4CAAgDA,OAAhD,YARkB;AAUzBQ,IAAAA,OAAO,EAAE,CAACT,GAAD,EAAMC,OAAN,uDACkCA,OADlC,YAVgB;AAYzBS,IAAAA,KAAK,EAAE,CAACV,GAAD,EAAMC,OAAN,yDACsCA,OADtC,YAZkB;AAczBU,IAAAA,OAAO,EAAE,CAACX,GAAD,EAAMC,OAAN,yDACoCA,OADpC,YAdgB;AAgBzBW,IAAAA,QAAQ,EAAE,CAACZ,GAAD,EAAMC,OAAN,yDACmCA,OADnC,YAhBe;AAkBzBY,IAAAA,MAAM,EAAE,CAACb,GAAD,EAAMC,OAAN,yDACqCA,OADrC,YAlBiB;AAoBzBa,IAAAA,SAAS,EAAE,CAACd,GAAD,EAAMC,OAAN,yDACkCA,OADlC,YApBc;AAsBzBc,IAAAA,MAAM,EAAE,CAACf,GAAD,EAAMC,OAAN,yDACqCA,OADrC,YAtBiB;AAwBzBe,IAAAA,OAAO,EAAE,CAAChB,GAAD,EAAMC,OAAN,uDACkCA,OADlC,YAxBgB;AA2BzBgB,IAAAA,IAAI,EAAE,CAACjB,GAAD,EAAMC,OAAN,kDACgCA,OADhC,YA3BmB;AA6BzBiB,IAAAA,GAAG,EAAE,CAAClB,GAAD,EAAMC,OAAN,gCAAoCA,OAApC,YA7BoB;AA8BzBkB,IAAAA,MAAM,EAAE,CAACnB,GAAD,EAAMC,OAAN,mDAC+BA,OAD/B,YA9BiB;AAgCzBmB,IAAAA,SAAS,EAAE,CAACpB,GAAD,EAAMC,OAAN,sDAC+BA,OAD/B,YAhCc;AAkCzBoB,IAAAA,MAAM,EAAE,CAACrB,GAAD,EAAMC,OAAN,uDACmCA,OADnC,YAlCiB;AAqCzBqB,IAAAA,EAAE,EAAE,CAACtB,GAAD,EAAMC,OAAN,KAAkB;AArCG,GAApB,CAAP;AAuCD",
+    "sourcesContent": [
+        "import __replaceTags from '../../html/replaceTags';\n\n/**\n * @name                              mail\n * @namespace           sugar.js.log.htmlPresets\n * @type                              Function\n *\n * Replace all the \"log\" html tags like \"<red>\", \"<bold>\", etc... with the corresponding syntax for mail formating\n *\n * @param                   {String}                      text                        The text to process\n * @return                  {String}                                                  The processed text ready for the terminal\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function mail(text) {\n  return __replaceTags(text, {\n    black: (tag, content) => `<span style=\"color: black\">${content}</span>`,\n    red: (tag, content) => `<span style=\"color: #FF0000\">${content}</span>`,\n    green: (tag, content) => `<span style=\"color: #008000\">${content}</span>`,\n    yellow: (tag, content) => `<span style=\"color: #F1C40F\">${content}</span>`,\n    blue: (tag, content) => `<span style=\"color: #0000FF\">${content}</span>`,\n    magenta: (tag, content) => `<span style=\"color: #800080\">${content}</span>`,\n    cyan: (tag, content) => `<span style=\"color: #5DADE2\">${content}</span>`,\n    white: (tag, content) => `<span style=\"color: white\">${content}</span>`,\n\n    bgBlack: (tag, content) =>\n      `<span style=\"background-color: black\">${content}</span>`,\n    bgRed: (tag, content) =>\n      `<span style=\"background-color: #FF0000\">${content}</span>`,\n    bgGreen: (tag, content) =>\n      `<span style=\"background-color: #008000\">${content}</span>`,\n    bgYellow: (tag, content) =>\n      `<span style=\"background-color: #F1C40F\">${content}</span>`,\n    bgBlue: (tag, content) =>\n      `<span style=\"background-color: #0000FF\">${content}</span>`,\n    bgMagenta: (tag, content) =>\n      `<span style=\"background-color: #800080\">${content}</span>`,\n    bgCyan: (tag, content) =>\n      `<span style=\"background-color: #5DADE2\">${content}</span>`,\n    bgWhite: (tag, content) =>\n      `<span style=\"background-color: white\">${content}</span>`,\n\n    bold: (tag, content) =>\n      `<span style=\"font-weight: bold;\">${content}</span>`,\n    dim: (tag, content) => `<span style=\"\">${content}</span>`,\n    italic: (tag, content) =>\n      `<span style=\"font-style: italic;\">${content}</span>`,\n    underline: (tag, content) =>\n      `<span style=\"font-style: underline;\">${content}</span>`,\n    strike: (tag, content) =>\n      `<span text-decoration=\"line-through;\">${content}</span>`,\n\n    br: (tag, content) => '<br />'\n  });\n}\n"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "boolean.js"
+    ],
+    "names": [
+        "isBoolean",
+        "value"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,SAAT,CAAmBC,KAAnB,EAA0B;AACvC,SAAO,OAAOA,KAAP,KAAiB,SAAxB;AACD",
+    "sourcesContent": [
+        "/**\n * @name        isBoolean\n * @namespace           sugar.js.is\n * @type      Function\n *\n * Check if the passed value is a js Boolean\n *\n * @param    {Mixed}    value    The value to check\n * @return   {Boolean}   true if it's a Boolean, false if not\n *\n * @example    js\n * import isBoolean from '@coffeekraken/sugar/js/is/boolean'\n * if (isBoolean(true) {\n *   // do something\n * }\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isBoolean(value) {\n  return typeof value === 'boolean';\n}\n"
+    ]
+}

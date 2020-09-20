@@ -1,0 +1,15 @@
+{
+    "version": 3,
+    "sources": [
+        "mmddyyyyDate.js"
+    ],
+    "names": [
+        "isMmddyyyyDate",
+        "date",
+        "test"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;;AAmBe,SAASA,cAAT,CAAwBC,IAAxB,EAA8B;AAC3C,SAAO,kEAAkEC,IAAlE,CACLD,IADK,CAAP;AAGD",
+    "sourcesContent": [
+        "/**\n * @name        isMmddyyyyDate\n * @namespace           sugar.js.is\n * @type      Function\n *\n * Check if is a valid mm.dd.yyyy date\n * This will match : mm.dd.yyyy | mm/dd/yyyy | mm-dd-yyyy | mm dd yyyy\n *\n * @param    {String}    date    The date to check\n * @return    {Boolean}    true if is valid, false if not\n *\n * @example    js\n * import isMmddyyyyDate from '@coffeekraken/sugar/js/is/mmddyyyyDate'\n * if (isMmddyyyyDate('12.25.2018')) {\n *     // do something cool\n * }\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isMmddyyyyDate(date) {\n  return /^(0[1-9]|1[012])[- \\/.](0[1-9]|[12][0-9]|3[01])[- \\/.]\\d\\d\\d\\d$/.test(\n    date\n  );\n}\n"
+    ]
+}

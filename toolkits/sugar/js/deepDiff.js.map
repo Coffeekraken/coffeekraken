@@ -1,0 +1,31 @@
+{
+    "version": 3,
+    "sources": [
+        "deepDiff.js"
+    ],
+    "names": [
+        "__diff",
+        "require",
+        "diff",
+        "__set",
+        "__get",
+        "module",
+        "exports",
+        "deepDiff",
+        "origin",
+        "compare",
+        "finalObject",
+        "diffs",
+        "console",
+        "log",
+        "forEach",
+        "kind",
+        "path",
+        "join",
+        "rhs"
+    ],
+    "mappings": ";;AAAA,IAAMA,MAAM,GAAGC,OAAO,CAAC,WAAD,CAAP,CAAqBC,IAApC;;AACA,IAAMC,KAAK,GAAGF,OAAO,CAAC,0BAAD,CAArB;;AACA,IAAMG,KAAK,GAAGH,OAAO,CAAC,0BAAD,CAArB;AAEA;;;;;;;;;;;;;;;;;;;;;;AAoBAI,MAAM,CAACC,OAAP,GAAiB,SAASC,QAAT,CAAkBC,MAAlB,EAA0BC,OAA1B,EAAmC;AAClD,MAAMC,WAAW,GAAG,EAApB,CADkD,CAElD;AACA;AACA;AACA;AACA;AACA;;AACA,MAAMC,KAAK,GAAGX,MAAM,CAACQ,MAAD,EAASC,OAAT,CAApB;;AAEAG,EAAAA,OAAO,CAACC,GAAR,CAAYF,KAAZ;AAEAA,EAAAA,KAAK,CAACG,OAAN,CAAeZ,IAAD,IAAU;AACtB,YAAQA,IAAI,CAACa,IAAb;AACE,WAAK,GAAL;AACE;;AACF,WAAK,GAAL;AACE;;AACF,WAAK,GAAL;AACEZ,QAAAA,KAAK,CAACO,WAAD,EAAcR,IAAI,CAACc,IAAL,CAAUC,IAAV,CAAe,GAAf,CAAd,EAAmCf,IAAI,CAACgB,GAAxC,CAAL;;AACA;AAPJ;AASD,GAVD;AAYA,SAAOR,WAAP;AACD,CAzBD",
+    "sourcesContent": [
+        "const __diff = require('deep-diff').diff;\nconst __set = require('../../../node/object/set');\nconst __get = require('../../../node/object/get');\n\n/**\n * @name                            deepDiff\n * @namespace           node.object\n * @type                            Function\n *\n * Take two objects and return an object that contains only the differences between them\n *\n * @param           {Object}              origin              The original object to compare\n * @param           {Object}              compare             The object to compare to the original one\n * @return          {Object}                                  An object that contains only the differences between the two objects\n *\n * @example           js\n * const deepDiff = require('@coffeekraken/sugar/node/object/deepDiff');\n * const origin = { hello: 'world', plop: 'yop' };\n * const compare = { hello: 'world' };\n * deepDiff(origin, compare); // => { plop: 'yop' }\n *\n * @see     https://www.npmjs.com/package/deep-diff\n * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nmodule.exports = function deepDiff(origin, compare) {\n  const finalObject = {};\n  // const diffs = __diff(origin, compare, (path, key) => {\n  //   const p = path.length ? path.join('.') + '.' + key : key;\n  //   const value = __get(origin, p);\n  //   console.log(p, value);\n  //   return value !== undefined || !Array.isArray(value);\n  // });\n  const diffs = __diff(origin, compare);\n\n  console.log(diffs);\n\n  diffs.forEach((diff) => {\n    switch (diff.kind) {\n      case 'D':\n        break;\n      case 'E':\n        break;\n      case 'N':\n        __set(finalObject, diff.path.join('.'), diff.rhs);\n        break;\n    }\n  });\n\n  return finalObject;\n};\n"
+    ]
+}

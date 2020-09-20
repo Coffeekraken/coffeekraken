@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "ofType.test.js"
+    ],
+    "names": [
+        "__ofType",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,QAAQ,GAAGC,OAAO,CAAC,WAAD,CAAxB;;AACAA,OAAO,CAAC,UAAD,CAAP,CAAoBD,QAApB",
+    "sourcesContent": [
+        "const __ofType = require('../ofType');\nrequire('./ofType')(__ofType);\n"
+    ]
+}

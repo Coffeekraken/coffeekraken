@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "previous.js"
+    ],
+    "names": [
+        "previous",
+        "elm",
+        "selector",
+        "previousSibling"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;;;;;AAoBe,SAASA,QAAT,CAAkBC,GAAlB,EAAuBC,QAAvB,EAAiC;AAC9CD,EAAAA,GAAG,GAAGA,GAAG,CAACE,eAAV;;AACA,SAAOF,GAAP,EAAY;AACV,QAAI,sBAAUA,GAAV,EAAeC,QAAf,CAAJ,EAA8B;AAC5B,aAAOD,GAAP;AACD;;AACDA,IAAAA,GAAG,GAAGA,GAAG,CAACE,eAAV;AACD;;AACD,SAAO,KAAP;AACD",
+    "sourcesContent": [
+        "import __matches from './matches';\n\n/**\n * @name      previous\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Browse the passed element previous siblings to find the first element that matches the passed selector\n *\n * @param \t\t{HTMLElement} \t\t\t\t\telm  \t\tThe element to start on\n * @param \t\t{String} \t\t\t\t\t\tselector \tA css selector to search for\n * @return \t\t{HTMLElement} \t\t\t\t\t\t\t\tThe element found or null\n *\n * @example  \tjs\n * import previous from '@coffeekraken/sugar/js/dom/previous'\n * const previousElm = previous(myCoolElement, '.my-cool-class');\n * if (previousElm) {\n * \t\t// we have found en element that matches the selector\n * }\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function previous(elm, selector) {\n  elm = elm.previousSibling;\n  while (elm) {\n    if (__matches(elm, selector)) {\n      return elm;\n    }\n    elm = elm.previousSibling;\n  }\n  return false;\n}\n"
+    ]
+}

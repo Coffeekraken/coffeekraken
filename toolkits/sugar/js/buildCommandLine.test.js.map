@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "buildCommandLine.test.js"
+    ],
+    "names": [
+        "__buildCommandLine",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,kBAAkB,GAAGC,OAAO,CAAC,qBAAD,CAAlC;;AACAA,OAAO,CAAC,oBAAD,CAAP,CAA8BD,kBAA9B",
+    "sourcesContent": [
+        "const __buildCommandLine = require('../buildCommandLine');\nrequire('./buildCommandLine')(__buildCommandLine);\n"
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "version": 3,
+    "sources": [
+        "deepMerge.js"
+    ],
+    "names": [
+        "deepMerge",
+        "settings",
+        "array",
+        "object",
+        "merge",
+        "firstObj",
+        "secondObj",
+        "newObj",
+        "override",
+        "key",
+        "Object",
+        "keys",
+        "Array",
+        "isArray",
+        "newArray",
+        "pick",
+        "toCover",
+        "args",
+        "potentialSettingsObj",
+        "length",
+        "undefined",
+        "pop",
+        "currentObj",
+        "i",
+        "toMergeObj"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;;;;AAsBe,SAASA,SAAT,GAA4B;AACzC,MAAIC,QAAQ,GAAG;AACbC,IAAAA,KAAK,EAAE,KADM;AAEbC,IAAAA,MAAM,EAAE;AAFK,GAAf;;AAKA,WAASC,KAAT,CAAeC,QAAf,EAAyBC,SAAzB,EAAoC;AAClC,QAAMC,MAAM,GAAG,EAAf;AACA,QAAI,CAACF,QAAD,IAAaC,SAAjB,EAA4B,OAAOA,SAAP;AAC5B,QAAI,CAACA,SAAD,IAAcD,QAAlB,EAA4B,OAAOA,QAAP;AAC5B,QAAI,CAACA,QAAD,IAAa,CAACC,SAAlB,EAA6B,OAAO,EAAP;AAC7B,yBAASD,QAAT,EAAmBG,QAAnB,CAA4BD,MAA5B;;AACA,SAAK,IAAME,GAAX,IAAkBC,MAAM,CAACC,IAAP,CAAYL,SAAZ,CAAlB,EAA0C;AACxC;AACA,UACEL,QAAQ,CAACC,KAAT,KAAmB,IAAnB,IACAU,KAAK,CAACC,OAAN,CAAcR,QAAQ,CAACI,GAAD,CAAtB,CADA,IAEAG,KAAK,CAACC,OAAN,CAAcP,SAAS,CAACG,GAAD,CAAvB,CAHF,EAIE;AACA,YAAIK,QAAQ,GAAG,qBAAS,CAAC,GAAGT,QAAQ,CAACI,GAAD,CAAZ,EAAmB,GAAGH,SAAS,CAACG,GAAD,CAA/B,CAAT,CAAf;AACAF,QAAAA,MAAM,CAACE,GAAD,CAAN,GAAcK,QAAd;AACA;AACD,OARD,CAUA;AAVA,WAWK,IACHb,QAAQ,CAACE,MAAT,KAAoB,IAApB,IACA,0BAAgBE,QAAQ,CAACI,GAAD,CAAxB,CADA,IAEA,0BAAgBH,SAAS,CAACG,GAAD,CAAzB,CAHG,EAIH;AACAF,UAAAA,MAAM,CAACE,GAAD,CAAN,GAAcL,KAAK,CAACC,QAAQ,CAACI,GAAD,CAAT,EAAgBH,SAAS,CAACG,GAAD,CAAzB,CAAnB;AACA;AACD;;AACD,2BAASH,SAAT,EAAoBS,IAApB,CAAyBN,GAAzB,EAA8BO,OAA9B,CAAsCT,MAAtC;AACD;;AACD,WAAOA,MAAP;AACD;;AApCwC,oCAANU,IAAM;AAANA,IAAAA,IAAM;AAAA;;AAsCzC,MAAIC,oBAAoB,GAAGD,IAAI,CAACA,IAAI,CAACE,MAAL,GAAc,CAAf,CAAJ,IAAyB,EAApD;;AACA,MACGD,oBAAoB,CAAChB,KAArB,IACC,OAAOgB,oBAAoB,CAAChB,KAA5B,KAAsC,SADxC,IAECgB,oBAAoB,CAACf,MAArB,IACC,OAAOe,oBAAoB,CAACf,MAA5B,KAAuC,SAJ3C,EAKE;AACA,QAAIe,oBAAoB,CAAChB,KAArB,KAA+BkB,SAAnC,EACEnB,QAAQ,CAACC,KAAT,GAAiBgB,oBAAoB,CAAChB,KAAtC;AACF,QAAIgB,oBAAoB,CAACf,MAArB,KAAgCiB,SAApC,EACEnB,QAAQ,CAACE,MAAT,GAAkBe,oBAAoB,CAACf,MAAvC;AACFc,IAAAA,IAAI,CAACI,GAAL;AACD;;AAED,MAAIC,UAAU,GAAG,EAAjB;;AACA,OAAK,IAAIC,CAAC,GAAG,CAAb,EAAgBA,CAAC,GAAGN,IAAI,CAACE,MAAzB,EAAiCI,CAAC,EAAlC,EAAsC;AACpC,QAAMC,UAAU,GAAGP,IAAI,CAACM,CAAD,CAAJ,IAAW,EAA9B;AACAD,IAAAA,UAAU,GAAGlB,KAAK,CAACkB,UAAD,EAAaE,UAAb,CAAlB;AACD;;AAED,SAAOF,UAAP;AACD",
+    "sourcesContent": [
+        "import __copyTo from 'copy-to';\nimport __isPlainObject from '../is/plainObject';\nimport __unique from '../array/unique';\n\n/**\n * @name                deepMerge\n * @namespace           sugar.js.object\n * @type                Function\n *\n * Deep merge one object with another and return the merged object result. This merging implementation support:\n * - Merging object with getters/setters\n * - n numbers of objects as arguments\n *\n * @param           {Object}            args...        Pass all the objects you want to merge\n * @param           {Object}            [settings={}]       Pass as last object the settings one that can contain these properties:\n * - object (true) {Boolean}: Specify if you want to merge the objects\n * - array (false) {Boolean}: Specify if you want to merge the arrays\n * @return          {Object}                              The merged object result\n *\n * @example           js\n * import deepMerge from '@coffeekraken/sugar/node/object/deepMerge';\n * deepMerge({a: {b: {c: 'c', d: 'd'}}}, {a: {b: {e: 'e', f: 'f'}}});\n * // => { a: { b: { c: 'c', d: 'd', e: 'e', f: 'f' } } }\n *\n * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function deepMerge(...args) {\n  let settings = {\n    array: false,\n    object: true\n  };\n\n  function merge(firstObj, secondObj) {\n    const newObj = {};\n    if (!firstObj && secondObj) return secondObj;\n    if (!secondObj && firstObj) return firstObj;\n    if (!firstObj && !secondObj) return {};\n    __copyTo(firstObj).override(newObj);\n    for (const key of Object.keys(secondObj)) {\n      // merging arrays\n      if (\n        settings.array === true &&\n        Array.isArray(firstObj[key]) &&\n        Array.isArray(secondObj[key])\n      ) {\n        let newArray = __unique([...firstObj[key], ...secondObj[key]]);\n        newObj[key] = newArray;\n        continue;\n      }\n\n      // merging objects\n      else if (\n        settings.object === true &&\n        __isPlainObject(firstObj[key]) &&\n        __isPlainObject(secondObj[key])\n      ) {\n        newObj[key] = merge(firstObj[key], secondObj[key]);\n        continue;\n      }\n      __copyTo(secondObj).pick(key).toCover(newObj);\n    }\n    return newObj;\n  }\n\n  let potentialSettingsObj = args[args.length - 1] || {};\n  if (\n    (potentialSettingsObj.array &&\n      typeof potentialSettingsObj.array === 'boolean') ||\n    (potentialSettingsObj.object &&\n      typeof potentialSettingsObj.object === 'boolean')\n  ) {\n    if (potentialSettingsObj.array !== undefined)\n      settings.array = potentialSettingsObj.array;\n    if (potentialSettingsObj.object !== undefined)\n      settings.object = potentialSettingsObj.object;\n    args.pop();\n  }\n\n  let currentObj = {};\n  for (let i = 0; i < args.length; i++) {\n    const toMergeObj = args[i] || {};\n    currentObj = merge(currentObj, toMergeObj);\n  }\n\n  return currentObj;\n}\n"
+    ]
+}

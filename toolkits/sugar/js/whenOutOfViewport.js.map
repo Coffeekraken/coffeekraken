@@ -1,0 +1,41 @@
+{
+    "version": 3,
+    "sources": [
+        "whenOutOfViewport.js"
+    ],
+    "names": [
+        "whenOutOfViewport",
+        "elm",
+        "offset",
+        "Promise",
+        "resolve",
+        "reject",
+        "window",
+        "IntersectionObserver",
+        "isInViewport",
+        "_cb",
+        "observer",
+        "disconnect",
+        "entries",
+        "length",
+        "entry",
+        "intersectionRatio",
+        "root",
+        "rootMargin",
+        "threshold",
+        "observe",
+        "scrollContainerElm",
+        "document",
+        "_inViewportContainer",
+        "overflowContainer",
+        "removeEventListener",
+        "checkViewport",
+        "e",
+        "addEventListener",
+        "setTimeout"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;AAEA;;AAEA;;;;;;;;;;;;;;;;;;;AAmBe,SAASA,iBAAT,CAA2BC,GAA3B,EAAgCC,MAAhC,EAA6C;AAAA,MAAbA,MAAa;AAAbA,IAAAA,MAAa,GAAJ,EAAI;AAAA;;AAC1D,SAAO,IAAIC,OAAJ,CAAY,CAACC,OAAD,EAAUC,MAAV,KAAqB;AACtC,QAAIC,MAAM,CAACC,oBAAX,EAAiC;AAC/B,UAAIC,YAAY,GAAG,KAAnB;AAAA,UACEC,GAAG,GAAG,MAAM;AACV,YAAI,CAACD,YAAL,EAAmB;AACjBE,UAAAA,QAAQ,CAACC,UAAT;AACAP,UAAAA,OAAO,CAACH,GAAD,CAAP;AACD;AACF,OANH;;AAQA,UAAMS,QAAQ,GAAG,IAAIH,oBAAJ,CACf,CAACK,OAAD,EAAUF,QAAV,KAAuB;AACrB,YAAI,CAACE,OAAO,CAACC,MAAb,EAAqB;AACrB,YAAMC,KAAK,GAAGF,OAAO,CAAC,CAAD,CAArB;;AACA,YAAIE,KAAK,CAACC,iBAAN,GAA0B,CAA9B,EAAiC;AAC/BP,UAAAA,YAAY,GAAG,IAAf;AACD,SAFD,MAEO;AACLA,UAAAA,YAAY,GAAG,KAAf;AACD;;AACDC,QAAAA,GAAG;AACJ,OAVc,EAWf;AACEO,QAAAA,IAAI,EAAE,IADR;AACc;AACZC,QAAAA,UAAU,YAAKf,MAAL,OAFZ;AAGEgB,QAAAA,SAAS,EAAE,CAAC,CAAD,EAAI,GAAJ,EAAS,GAAT,EAAc,GAAd,EAAmB,GAAnB,EAAwB,GAAxB,EAA6B,GAA7B,EAAkC,GAAlC,EAAuC,GAAvC,EAA4C,GAA5C,EAAiD,CAAjD;AAHb,OAXe,CAAjB;AAkBAR,MAAAA,QAAQ,CAACS,OAAT,CAAiBlB,GAAjB;AACD,KA5BD,MA4BO;AACL;AACA,UAAImB,kBAAkB,GAAGC,QAAzB;;AACA,UAAI,CAACpB,GAAG,CAACqB,oBAAT,EAA+B;AAC7B,YAAMC,iBAAiB,GAAG,sBACxBtB,GADwB,EAExB,8BAFwB,CAA1B;;AAIA,YAAIsB,iBAAJ,EAAuB;AACrBH,UAAAA,kBAAkB,GAAGG,iBAArB;AACAtB,UAAAA,GAAG,CAACqB,oBAAJ,GAA2BC,iBAA3B;AACD;AACF,OATD,MASO;AACLH,QAAAA,kBAAkB,GAAGnB,GAAG,CAACqB,oBAAzB;AACD;;AAED,UAAId,aAAY,GAAG,IAAnB;AAAA,UACEC,IAAG,GAAG,MAAM;AACV,YAAI,CAACD,aAAL,EAAmB;AACjBY,UAAAA,kBAAkB,CAACI,mBAAnB,CAAuC,QAAvC,EAAiDC,aAAjD;AACAnB,UAAAA,MAAM,CAACkB,mBAAP,CAA2B,QAA3B,EAAqCC,aAArC;AACArB,UAAAA,OAAO,CAACH,GAAD,CAAP;AACD;AACF,OAPH;;AAQA,UAAIwB,aAAa,GAAG,uBAAYC,CAAD,IAAO;AACpClB,QAAAA,aAAY,GAAG,4BAAeP,GAAf,EAAoBC,MAApB,CAAf;;AACAO,QAAAA,IAAG;AACJ,OAHmB,EAGjB,GAHiB,CAApB,CAxBK,CA6BL;;AACAW,MAAAA,kBAAkB,CAACO,gBAAnB,CAAoC,QAApC,EAA8CF,aAA9C;AACAnB,MAAAA,MAAM,CAACqB,gBAAP,CAAwB,QAAxB,EAAkCF,aAAlC;AACAG,MAAAA,UAAU,CAAC,MAAM;AACfH,QAAAA,aAAa,CAAC,IAAD,CAAb;AACD,OAFS,CAAV;AAGD;AACF,GAjEM,CAAP;AAkED",
+    "sourcesContent": [
+        "import __isInViewport from './isInViewport';\nimport __throttle from '../function/throttle';\nimport __closest from './closest';\n\n// TODO tests\n\n/**\n * @name      whenOutOfViewport\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Monitor an HTMLElement to be notified when it exit the viewport\n *\n * @param \t\t{HTMLElement} \t\t\t\telm \t\t\t\tThe element to monitor\n * @param \t\t{Number} \t\t\t\t\t[offset=50] \t\tAn offset that represent the distance before entering the viewport for the detection\n * @return \t\t(Promise) \t\t\t\t\t\t\t\t\t\tThe promise that will be resolved when the element exit the viewport\n *\n * @example \tjs\n * import whenOutOfViewport from '@coffeekraken/sugar/js/dom/whenOutOfViewport'\n * whenOutOfViewport(myCoolHTMLElement).then((elm) => {\n * \t\t// do something with your element that has exit the viewport...\n * });\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function whenOutOfViewport(elm, offset = 50) {\n  return new Promise((resolve, reject) => {\n    if (window.IntersectionObserver) {\n      let isInViewport = false,\n        _cb = () => {\n          if (!isInViewport) {\n            observer.disconnect();\n            resolve(elm);\n          }\n        };\n\n      const observer = new IntersectionObserver(\n        (entries, observer) => {\n          if (!entries.length) return;\n          const entry = entries[0];\n          if (entry.intersectionRatio > 0) {\n            isInViewport = true;\n          } else {\n            isInViewport = false;\n          }\n          _cb();\n        },\n        {\n          root: null, // viewport\n          rootMargin: `${offset}px`,\n          threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]\n        }\n      );\n\n      observer.observe(elm);\n    } else {\n      // try to get the closest element that has an overflow\n      let scrollContainerElm = document;\n      if (!elm._inViewportContainer) {\n        const overflowContainer = __closest(\n          elm,\n          '[data-in-viewport-container]'\n        );\n        if (overflowContainer) {\n          scrollContainerElm = overflowContainer;\n          elm._inViewportContainer = overflowContainer;\n        }\n      } else {\n        scrollContainerElm = elm._inViewportContainer;\n      }\n\n      let isInViewport = true,\n        _cb = () => {\n          if (!isInViewport) {\n            scrollContainerElm.removeEventListener('scroll', checkViewport);\n            window.removeEventListener('resize', checkViewport);\n            resolve(elm);\n          }\n        };\n      let checkViewport = __throttle((e) => {\n        isInViewport = __isInViewport(elm, offset);\n        _cb();\n      }, 100);\n\n      // listen for resize\n      scrollContainerElm.addEventListener('scroll', checkViewport);\n      window.addEventListener('resize', checkViewport);\n      setTimeout(() => {\n        checkViewport(null);\n      });\n    }\n  });\n}\n"
+    ]
+}

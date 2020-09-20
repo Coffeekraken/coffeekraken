@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "sprintf.test.js"
+    ],
+    "names": [
+        "__sprintf",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,SAAS,GAAGC,OAAO,CAAC,YAAD,CAAzB;;AACAA,OAAO,CAAC,WAAD,CAAP,CAAqBD,SAArB",
+    "sourcesContent": [
+        "const __sprintf = require('../sprintf');\nrequire('./sprintf')(__sprintf);"
+    ]
+}

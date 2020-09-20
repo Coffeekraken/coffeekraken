@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "printf.test.js"
+    ],
+    "names": [
+        "__printf",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,QAAQ,GAAGC,OAAO,CAAC,WAAD,CAAxB;;AACAA,OAAO,CAAC,UAAD,CAAP,CAAoBD,QAApB",
+    "sourcesContent": [
+        "const __printf = require('../printf');\nrequire('./printf')(__printf);"
+    ]
+}

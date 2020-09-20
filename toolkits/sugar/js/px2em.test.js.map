@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "sources": [
+        "px2em.test.js"
+    ],
+    "names": [
+        "describe",
+        "document",
+        "body",
+        "innerHTML",
+        "$elm",
+        "querySelector",
+        "it",
+        "expect",
+        "toBe"
+    ],
+    "mappings": ";;AAAA;;;;AAEAA,QAAQ,CAAC,qBAAD,EAAwB,MAAM;AAEpCC,EAAAA,QAAQ,CAACC,IAAT,CAAcC,SAAd;AAQA,MAAMC,IAAI,GAAGH,QAAQ,CAACI,aAAT,CAAuB,UAAvB,CAAb;AAEAC,EAAAA,EAAE,CAAC,oDAAD,EAAuD,MAAM;AAC7DC,IAAAA,MAAM,CAAC,oBAAQ,EAAR,EAAYH,IAAZ,CAAD,CAAN,CAA0BI,IAA1B,CAA+B,CAA/B;AACD,GAFC,CAAF;AAID,CAhBO,CAAR",
+    "sourcesContent": [
+        "import __px2em from '../px2em';\n\ndescribe('sugar.js.unit.px2em', () => {\n\n  document.body.innerHTML = `\n    <style>\n      #testing {\n        font-size: 10px;\n      }\n    </style>\n    <div id=\"testing\"></div>\n  `;\n  const $elm = document.querySelector('#testing');\n\n  it('Should convert the passed px value to em correctly', () => {\n    expect(__px2em(20, $elm)).toBe(2);\n  });\n\n});"
+    ]
+}

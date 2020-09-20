@@ -1,0 +1,29 @@
+{
+    "version": 3,
+    "sources": [
+        "hsv2rgba.js"
+    ],
+    "names": [
+        "hsv2rgba",
+        "h",
+        "s",
+        "v",
+        "a",
+        "parseFloat",
+        "r",
+        "g",
+        "b",
+        "i",
+        "f",
+        "p",
+        "q",
+        "t",
+        "Math",
+        "floor",
+        "round"
+    ],
+    "mappings": "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",
+    "sourcesContent": [
+        "/**\n * @name              hsv2rgba\n * @namespace           sugar.js.color\n * @type              Function\n *\n * HSV to RGBA\n *\n * @param\t        {Number|Object}      \th       \t\tThe hue value between 0-360 or an object representing h, s, v, (a)\n * @param\t        {Number}      \ts       \t\tThe saturation value between 0-100|0-1\n * @param\t        {Number}      \tv       \t\tThe value value between 0-100|0-1\n * @param\t        {Number}      \ta       \t\tThe alpha value between 0-100|0-1\n * @return      \t{object} \t\t              \tThe rgba object representation\n *\n * @example         js\n * import hsv2rgba from '@coffeekraken/sugar/js/color/hsv2rgba';\n * hsv2rgba(10,20,30);\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function hsv2rgba(h, s, v, a = 1) {\n  if (typeof h === 'object') {\n    s = h.s;\n    v = h.v;\n    a = h.a;\n    h = h.h;\n  }\n\n  // manage arguments\n  h = parseFloat(h);\n  s = parseFloat(s);\n  v = parseFloat(v);\n  a = parseFloat(a);\n  if (h > 1) h = (1 / 360) * h;\n  if (s > 1) s = (1 / 100) * s;\n  if (v > 1) v = (1 / 100) * v;\n  if (a > 1) a = (1 / 100) * a;\n\n  var r, g, b, i, f, p, q, t;\n  i = Math.floor(h * 6);\n  f = h * 6 - i;\n  p = v * (1 - s);\n  q = v * (1 - f * s);\n  t = v * (1 - (1 - f) * s);\n  switch (i % 6) {\n    case 0:\n      (r = v), (g = t), (b = p);\n      break;\n    case 1:\n      (r = q), (g = v), (b = p);\n      break;\n    case 2:\n      (r = p), (g = v), (b = t);\n      break;\n    case 3:\n      (r = p), (g = q), (b = v);\n      break;\n    case 4:\n      (r = t), (g = p), (b = v);\n      break;\n    case 5:\n      (r = v), (g = p), (b = q);\n      break;\n  }\n  return {\n    r: Math.round(r * 255),\n    g: Math.round(g * 255),\n    b: Math.round(b * 255),\n    a: a\n  };\n}\n"
+    ]
+}

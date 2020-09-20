@@ -15,7 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * @name            base64
- * @namespace           js.crypt
+ * @namespace           sugar.js.crypt
  * @type            Object
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the base64 algorithm

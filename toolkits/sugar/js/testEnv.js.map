@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "testEnv.js"
+    ],
+    "names": [
+        "isTestEnv",
+        "undefined",
+        "global",
+        "it"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;AAgBe,SAASA,SAAT,GAAqB;AAClC,SACE,kBAAM,UAAN,MAAsB,MAAtB,IACA,kBAAM,gBAAN,MAA4BC,SAD5B,IAEA,OAAOC,MAAM,CAACC,EAAd,KAAqB,UAHvB;AAKD",
+    "sourcesContent": [
+        "import __env from '../core/env';\n\n/**\n * @name          testEnv\n * @namespace     sugar.js.is\n * @type          Function\n *\n * Check if the current environment is in a test process or not\n *\n * @return      {Boolean}         true if in environment environment, false if not\n *\n * @example       js\n * import isTest from '@coffeekraken/sugar/js/is/testEnv';\n * isTest(); // => true\n *\n * @since     2.0.0\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function isTestEnv() {\n  return (\n    __env('NODE_ENV') === 'test' ||\n    __env('JEST_WORKER_ID') !== undefined ||\n    typeof global.it === 'function'\n  );\n}\n"
+    ]
+}

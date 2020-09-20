@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "ensureExists.js"
+    ],
+    "names": [
+        "obj",
+        "path",
+        "value",
+        "v",
+        "undefined"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;;eAmBe,kBAACA,GAAD,EAAMC,IAAN,EAAYC,KAAZ,EAA2B;AAAA,MAAfA,KAAe;AAAfA,IAAAA,KAAe,GAAP,EAAO;AAAA;;AACxC,MAAMC,CAAC,GAAG,kBAAMH,GAAN,EAAWC,IAAX,CAAV;;AACA,MAAIE,CAAC,KAAKC,SAAV,EAAqB;AACnB,sBAAMJ,GAAN,EAAWC,IAAX,EAAiBC,KAAjB;AACD;AACF,C",
+    "sourcesContent": [
+        "import __get from './get';\nimport __set from './set';\n\n/**\n * @name                        ensureExists\n * @namespace           sugar.js.object\n * @type                        Function\n *\n * Pass a string like \"my.cool.object\" and the value it has to be and this function will ensure that this deep object exist\n *\n * @param           {Object}            obj                           The object on which to check the path existence\n * @param           {String}            path                           The dotted object path to check\n * @param           {Mixed}             value                         The value to set to the object path created if not already exist\n *\n * @example           js\n * import ensureExists from '@coffeekraken/sugar/js/object/ensureExists';\n * const myObj = { hello: 'world' }«\n * ensureExists(myObj, 'cool.object', {});\n * // { hello: 'world', cool: { object: {} } }\n *\n * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default (obj, path, value = {}) => {\n  const v = __get(obj, path);\n  if (v === undefined) {\n    __set(obj, path, value);\n  }\n};\n"
+    ]
+}

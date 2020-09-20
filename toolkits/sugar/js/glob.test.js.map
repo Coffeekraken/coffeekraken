@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "glob.test.js"
+    ],
+    "names": [
+        "__glob",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,MAAM,GAAGC,OAAO,CAAC,SAAD,CAAtB;;AACAA,OAAO,CAAC,QAAD,CAAP,CAAkBD,MAAlB",
+    "sourcesContent": [
+        "const __glob = require('../glob');\nrequire('./glob')(__glob);\n"
+    ]
+}

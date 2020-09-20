@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "argsToObject.test.js"
+    ],
+    "names": [
+        "__argsToObject",
+        "require"
+    ],
+    "mappings": ";;AAAA,IAAMA,cAAc,GAAGC,OAAO,CAAC,iBAAD,CAA9B;;AACAA,OAAO,CAAC,gBAAD,CAAP,CAA0BD,cAA1B",
+    "sourcesContent": [
+        "const __argsToObject = require('../argsToObject');\nrequire('./argsToObject')(__argsToObject);\n"
+    ]
+}

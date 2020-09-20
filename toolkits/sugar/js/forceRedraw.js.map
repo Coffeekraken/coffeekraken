@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "forceRedraw.js"
+    ],
+    "names": [
+        "forceRedraw",
+        "$elm",
+        "display",
+        "style",
+        "offsetHeight"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;AAgBe,SAASA,WAAT,CAAqBC,IAArB,EAA2B;AACxC,MAAMC,OAAO,GAAG,+BAAmBD,IAAnB,EAAyB,SAAzB,CAAhB;AACAA,EAAAA,IAAI,CAACE,KAAL,CAAWD,OAAX,GAAqB,MAArB;AACAD,EAAAA,IAAI,CAACG,YAAL;AACAH,EAAAA,IAAI,CAACE,KAAL,CAAWD,OAAX,GAAqBA,OAArB;AACA,SAAOD,IAAP;AACD",
+    "sourcesContent": [
+        "import __getStyleProperty from './getStyleProperty';\n\n/**\n * @name      forceRedraw\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Force the element to be painted again in case of visual issues\n *\n * @param    {HTMLElement}    $elm    The HTMLElement to force the redraw on\n * @return    {HTMLElement}    The HTMLElement to maintain chainability\n *\n * @example    js\n * import forceRedraw from '@coffeekraken/sugar/js/dom/forceRedraw'\n * forceRedraw($elm)\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function forceRedraw($elm) {\n  const display = __getStyleProperty($elm, 'display');\n  $elm.style.display = 'none';\n  $elm.offsetHeight;\n  $elm.style.display = display;\n  return $elm;\n}\n"
+    ]
+}

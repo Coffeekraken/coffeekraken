@@ -14,17 +14,27 @@ const __SInterface = require('../../class/SInterface');
  */
 module.exports = class SFsFileInterface extends __SInterface {
   static definitionObj = {
-    filename: {
+    name: {
       type: 'String',
       description: 'Store the file name',
       required: true
     },
-    filepath: {
+    path: {
       type: 'String',
       description: 'Store the full file path to the file on the system',
       required: true
     },
-    path: {
+    rootDir: {
+      type: 'String',
+      description:
+        'Store the path to the root directory where lives the file. This has to be specified in the settings.rootDir property through the constructor'
+    },
+    relPath: {
+      type: 'String',
+      description:
+        'Store the path to the file relative to the ```rootDir``` property if this one has been setted'
+    },
+    dirPath: {
       type: 'String',
       description: 'Store the file path of the folder where lives the file',
       required: true

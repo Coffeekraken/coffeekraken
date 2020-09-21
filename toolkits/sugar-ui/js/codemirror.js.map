@@ -1,0 +1,30 @@
+{
+    "version": 3,
+    "sources": [
+        "codemirror.js"
+    ],
+    "names": [
+        "document",
+        "addEventListener",
+        "$textareas",
+        "querySelectorAll",
+        "forEach",
+        "call",
+        "$item",
+        "mode",
+        "getAttribute",
+        "$editor",
+        "__codemirror",
+        "fromTextArea",
+        "theme",
+        "lineNumbers",
+        "readOnly",
+        "scrollbarStyle",
+        "viewportMargin",
+        "Infinity"
+    ],
+    "mappings": ";;AAAA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;AACA;;;;AAEAA,QAAQ,CAACC,gBAAT,CAA0B,kBAA1B,EAA8C,MAAM;AAClD,MAAMC,UAAU,GAAGF,QAAQ,CAACG,gBAAT,CAA0B,iBAA1B,CAAnB;AACA,KAAGC,OAAH,CAAWC,IAAX,CAAgBH,UAAhB,EAA6BI,KAAD,IAAW;AACrC,QAAMC,IAAI,GAAGD,KAAK,CAACE,YAAN,CAAmB,MAAnB,KAA8B,WAA3C;;AAEA,QAAMC,OAAO,GAAGC,oBAAaC,YAAb,CAA0BL,KAA1B,EAAiC;AAC/CM,MAAAA,KAAK,EAAE,MADwC;AAE/CC,MAAAA,WAAW,EAAE,IAFkC;AAG/CC,MAAAA,QAAQ,EAAE,IAHqC;AAI/CP,MAAAA,IAJ+C;AAK/CQ,MAAAA,cAAc,EAAE,IAL+B;AAM/CC,MAAAA,cAAc,EAAEC;AAN+B,KAAjC,CAAhB;AAQD,GAXD;AAYD,CAdD",
+    "sourcesContent": [
+        "import __codemirror from 'codemirror';\nimport 'codemirror/mode/htmlmixed/htmlmixed';\nimport 'codemirror/mode/coffeescript/coffeescript';\nimport 'codemirror/mode/css/css';\nimport 'codemirror/mode/javascript/javascript';\nimport 'codemirror/mode/markdown/markdown';\nimport 'codemirror/mode/php/php';\nimport 'codemirror/mode/sass/sass';\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  const $textareas = document.querySelectorAll('textarea#editor');\n  [].forEach.call($textareas, ($item) => {\n    const mode = $item.getAttribute('mode') || 'htmlmixed';\n\n    const $editor = __codemirror.fromTextArea($item, {\n      theme: 'nord',\n      lineNumbers: true,\n      readOnly: true,\n      mode,\n      scrollbarStyle: null,\n      viewportMargin: Infinity\n    });\n  });\n});\n"
+    ]
+}

@@ -204,10 +204,6 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           } else {
             value = res;
           }
-        }
-
-        if (metas.stack.includes('catch')) {
-          console.log('tri', metas.stack);
         } // trigger on the destination promise
 
 

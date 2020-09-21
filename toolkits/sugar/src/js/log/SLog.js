@@ -174,7 +174,10 @@ export default class SLog {
     const env = __env('env') || __env('node_env') || 'production';
     if (env) {
       let adaptersByEnvironment = this._settings.adaptersByEnvironment[env];
-      if (adaptersByEnvironment !== null) {
+      if (
+        adaptersByEnvironment !== null &&
+        adaptersByEnvironment !== undefined
+      ) {
         if (typeof adaptersByEnvironment === 'string')
           adaptersByEnvironment = adaptersByEnvironment
             .split(',')

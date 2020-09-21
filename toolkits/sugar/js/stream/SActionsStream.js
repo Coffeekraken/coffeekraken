@@ -724,9 +724,9 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
             }); // resolve this stream process
 
 
-            _this3.trigger('complete', _this3._currentStream.stats);
+            _this3.trigger('success', {});
 
-            trigger('complete', _this3._currentStream.stats);
+            trigger('success', {});
             resolve(_this3._currentStream.stats);
           }
         });

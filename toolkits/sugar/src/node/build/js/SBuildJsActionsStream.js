@@ -10,6 +10,7 @@ const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAct
 const __SSugarJsonStreamAction = require('../actions/SSugarJsonStreamAction');
 const __SDocMapStreamAction = require('../../stream/actions/SDocMapStreamAction');
 const __path = require('path');
+const { stream } = require('globby');
 
 /**
  * @name            SBuildJsActionsStream
@@ -52,12 +53,12 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
       {
         filesResolver: __SFsFilesResolverStreamAction,
         // fsCache: __SFsCacheStreamAction,
-        readFile: __SFsReadFileStreamAction,
+        readFile: __SFsReadFileStreamAction
         // sugarJson: __SSugarJsonStreamAction,
-        webpack: __SWebpackStreamAction,
-        terser: __STerserStreamAction,
-        fsOutput: __SFsOutputStreamAction,
-        docMap: __SDocMapStreamAction
+        // webpack: __SWebpackStreamAction,
+        // terser: __STerserStreamAction,
+        // fsOutput: __SFsOutputStreamAction,
+        // docMap: __SDocMapStreamAction
       },
       __deepMerge(
         {
@@ -95,16 +96,16 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
       streamObj.outputStack.data = __path.resolve(
         streamObj.outputDir,
         streamObj.prod
-          ? streamObj.filename.replace('.js', '.prod.js')
-          : streamObj.filename.replace('.js', '.js')
+          ? streamObj.inputObj.relPath.replace('.js', '.prod.js')
+          : streamObj.inputObj.relPath.replace('.js', '.js')
       );
     }
     if (streamObj.outputDir && streamObj.filename && streamObj.sourcemapData) {
       streamObj.outputStack.sourcemapData = __path.resolve(
         streamObj.outputDir,
         streamObj.prod
-          ? streamObj.filename.replace('.js', '.prod.js.map')
-          : streamObj.filename.replace('.js', '.js.map')
+          ? streamObj.inputObj.relPath.replace('.js', '.prod.js.map')
+          : streamObj.inputObj.relPath.replace('.js', '.js.map')
       );
     }
     return streamObj;

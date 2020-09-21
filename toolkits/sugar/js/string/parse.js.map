@@ -1,0 +1,18 @@
+{
+    "version": 3,
+    "sources": [
+        "parse.js"
+    ],
+    "names": [
+        "value",
+        "split",
+        "join",
+        "trim",
+        "Function",
+        "e"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;eAgBgBA,KAAD,IAAW;AACxB,MAAI,OAAOA,KAAP,KAAiB,QAArB,EAA+B,OAAOA,KAAP;AAC/BA,EAAAA,KAAK,GAAGA,KAAK,CAACC,KAAN,CAAY,GAAZ,EAAiBC,IAAjB,CAAsB,EAAtB,EAA0BC,IAA1B,EAAR;;AACA,MAAI;AACF,WAAOC,QAAQ,kDAEHJ,KAFG,cAAR,EAAP;AAID,GALD,CAKE,OAAOK,CAAP,EAAU;AACV,WAAOL,KAAP;AACD;AACF,C",
+    "sourcesContent": [
+        "/**\n * @name                                  parse\n * @namespace           sugar.js.string\n * @type                                  Function\n *\n * Parse a string and convert it into his native data type like date, number, boolean, etc...\n *\n * @param             {String}                        value                                 The value to convert\n * @return            {Mixed}                                                               The converted value\n *\n * @example           js\n * import parse from '@coffeekraken/sugar/js/string/parse';\n * parse('10'); // => 10\n *\n * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default (value) => {\n  if (typeof value !== 'string') return value;\n  value = value.split('⠀').join('').trim();\n  try {\n    return Function(`\n      \"use strict\";\n      return (${value});\n    `)();\n  } catch (e) {\n    return value;\n  }\n};\n"
+    ]
+}

@@ -1,3 +1,4 @@
+const __IPC = require('node-ipc').IPC;
 const __fs = require('fs');
 const __tmp = require('tmp');
 const __SError = require('../error/SError');
@@ -16,6 +17,7 @@ const __SProcess = require('../process/SProcess');
 const __isChildProcess = require('../is/childProcess');
 const __parse = require('../string/parse');
 const __hasExitCleanup = require('../process/hasExitCleanup');
+const { isRegExp } = require('lodash');
 
 /**
  * @name              SChildProcess
@@ -71,6 +73,19 @@ class SChildProcess extends __SProcess {
   _processesStack = [];
 
   /**
+   * @name          _ipcChildInstance
+   * @type          Object
+   * @private
+   *
+   * Store the IPC instance that will connect to the parent process IPC server
+   * when the actual process is a child one
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _ipcChildInstance = null;
+
+  /**
    * @name          constructor
    * @type          Function
    * @constructor
@@ -102,43 +117,10 @@ class SChildProcess extends __SProcess {
       },
       settings
     );
-    settings.env.CHILD_PROCESS_TRIGGER_PARENT =
-      typeof settings.triggerParent === 'boolean'
-        ? settings.triggerParent
-        : __toString(settings.triggerParent);
+    settings.env.CHILD_PROCESS_IPC_PARENT_SERVER_ID = settings.id;
 
     super({}, settings);
     this._commandOrPath = commandOrPath;
-  }
-
-  /**
-   * @name            triggerParent
-   * @type            Function
-   * @static
-   *
-   * This method allows you to "pipe" some promise from a child process to a his parent process promise
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  static triggerParent(value, metas = {}) {
-    const logString = __toString({
-      $triggerParent: true,
-      value,
-      metas
-    });
-    if (logString.length >= 8192) {
-      const tmpDir = __tmp.dirSync().name;
-      const tmpName = `${tmpDir}/${metas.id}.txt`;
-      __fs.writeFileSync(tmpName, logString);
-      console.log(
-        __toString({
-          $file: tmpName
-        })
-      );
-    } else {
-      console.log(logString);
-    }
   }
 
   /**
@@ -203,6 +185,7 @@ class SChildProcess extends __SProcess {
         alias: false
       }
     );
+    console.log('COCOC', commandToRun);
 
     // initialize the runningProcess object
     this._runningProcess = {
@@ -376,33 +359,100 @@ class SChildProcess extends __SProcess {
       this._isKilling = false;
     });
 
-    // stdout data
-    if (this._runningProcess.childProcess.stdout) {
-      this._runningProcess.childProcess.stdout.on('data', (log) => {
-        const logs = log.toString().split(/⠀⠀⠀/);
-        logs.forEach((log) => {
-          let logObj = __parse(log);
-          if (typeof logObj === 'object' && logObj.$file) {
-            if (!__fs.existsSync(logObj.$file)) return;
-            const logString = __fs.readFileSync(logObj.$file, 'utf8');
-            logObj = __parse(logString);
-          }
-
-          if (typeof logObj === 'object' && logObj.$triggerParent) {
-            this._runningProcess.promise.trigger(
-              logObj.metas.stack,
-              logObj.value,
-              logObj.metas
-            );
-            return;
-          }
-          this._runningProcess.stdout.push(log);
-          this._runningProcess.promise.trigger(`log`, {
-            value: log
-          });
+    if (!__isChildProcess()) {
+      const ipcInstance = new __IPC();
+      ipcInstance.config.id = `SChildProcess_server_${this._settings.id}`;
+      ipcInstance.config.retry = 1500;
+      ipcInstance.config.silent = true;
+      ipcInstance.serve(() => {
+        ipcInstance.server.on('message', (data, socket) => {
+          this._runningProcess.promise.trigger(
+            data.metas.stack,
+            data.value,
+            data.metas
+          );
         });
       });
+      ipcInstance.server.start();
     }
+
+    // stdout data
+    // if (this._runningProcess.childProcess.stdout) {
+    //   let currentLog = '';
+    //   let logsBuffer = [];
+
+    //   setInterval(() => {
+    //     // nativeConsole.log(logsBuffer[logsBuffer.length - 1]);
+
+    //     return;
+
+    //     logsBuffer = logsBuffer.filter((logObj) => {
+    //       if (logObj.triggered) return false;
+    //       let logString = logObj.log;
+    //       let parsedLog = __parse(logString);
+
+    //       // if (typeof logObj === 'object' && logObj.$file) {
+    //       //   if (!__fs.existsSync(logObj.$file)) return;
+    //       //   logString = __fs.readFileSync(logObj.$file, 'utf8');
+    //       //   logObj = __parse(logString);
+    //       // }
+
+    //       logObj.triggered = true;
+    //       if (typeof parsedLog === 'object' && parsedLog.$triggerParent) {
+    //         this._runningProcess.promise.trigger(
+    //           parsedLog.metas.stack,
+    //           parsedLog.value,
+    //           parsedLog.metas
+    //         );
+    //       } else {
+    //         this._runningProcess.stdout.push(logString);
+    //         this._runningProcess.promise.trigger(`log`, {
+    //           value: logString
+    //         });
+    //       }
+
+    //       return false;
+    //     });
+    //   }, 1000);
+
+    //   this._runningProcess.childProcess.stdout.on('data', (log) => {
+    //     log = log.toString();
+    //     if (log.includes('⠀')) {
+    //       const logs = log.split('⠀');
+    //       logs.forEach((l, i) => {
+    //         if (i === 0) {
+    //           currentLog += l;
+    //           if (currentLog.trim() !== '')
+    //             logsBuffer.push({
+    //               triggered: false,
+    //               log: __parse(currentLog)
+    //             });
+    //           currentLog = '';
+    //         } else if (i < logs.length - 1) {
+    //           if (currentLog.trim() !== '')
+    //             logsBuffer.push({
+    //               triggered: false,
+    //               log: __parse(l)
+    //             });
+    //           currentLog = '';
+    //         } else {
+    //           currentLog += l;
+    //         }
+    //       });
+    //     } else {
+    //       currentLog += log;
+    //     }
+
+    //     nativeConsole.log(logsBuffer[logsBuffer.length - 1]);
+
+    //     // logsBuffer = [];
+
+    //     // const logs = log.toString().split(/⠀/);
+    //     // logs.forEach((log) => {
+
+    //     // });
+    //   });
+    // }
 
     // this._runningProcess.childProcess.on('error', (error) => {
     //   console.log('SOMEHT', error);

@@ -1,6 +1,7 @@
 const __SProcess = require('../../process/SProcess');
 const __SBuildJsActionsStream = require('./SBuildJsActionsStream');
 const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
+const __deepMerge = require('../../object/deepMerge');
 
 /**
  * @name            SBuildJsProcess
@@ -24,19 +25,28 @@ module.exports = class SBuildJsProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(initialParams = {}, settings = {}) {
-    super(initialParams, {
-      id: 'build.js.process',
-      name: 'Build JS Process',
-      deamon: {
-        class: __SFsDeamon,
-        watchArgs: [initialParams.watch, settings],
-        runOn: ['update', 'add', 'unlink'],
-        processParams: (params, data) => {
-          return params;
-        }
-      },
-      ...settings
-    });
+    const deamon = new __SFsDeamon({});
+
+    super(
+      initialParams,
+      __deepMerge(
+        {
+          id: 'build.js.process',
+          name: 'Build JS Process',
+          deamon
+          // deamon: {
+          //   class: __SFsDeamon,
+          //   watchArgs: [initialParams.watch, settings],
+          //   runOn: ['update', 'add', 'unlink'],
+          //   processParams: (params, data) => {
+          //     return params;
+          //   }
+          // },
+        },
+        settings
+      )
+    );
+    console.log('COCOC');
   }
 
   /**

@@ -89,13 +89,16 @@ class SCli extends __SPromise {
         includeAllParams: true,
         output: false,
         defaultParams: {},
-        childProcess: {
+        processSettings: {},
+        childProcessSettings: {
           triggerParent: true
         }
       },
       settings
     );
+
     super(settings);
+
     if (!this._settings.id) this._settings.id = this.constructor.name;
 
     this._paramsObj = __argsToObject(
@@ -112,11 +115,27 @@ class SCli extends __SPromise {
       // run the process
       const SProcessInstance = this.constructor.processClass;
 
-      this._processInstance = new SProcessInstance(this._paramsObj, settings);
+      this._processInstance = new SProcessInstance(
+        this._paramsObj,
+        this._settings.processSettings
+      );
 
-      if (settings.childProcess.triggerParent) {
-        const stacks = Array.isArray(settings.childProcess.triggerParent)
-          ? settings.childProcess.triggerParent.join(',')
+      setTimeout(() => {
+        __SChildProcess.triggerParent(
+          {
+            value: 'PLOP'
+          },
+          {
+            stack: 'log'
+          }
+        );
+      }, 2000);
+
+      if (settings.childProcessSettings.triggerParent) {
+        const stacks = Array.isArray(
+          settings.childProcessSettings.triggerParent
+        )
+          ? settings.childProcessSettings.triggerParent.join(',')
           : '*';
         this._processInstance.on(stacks, (value, metas) => {
           __SChildProcess.triggerParent(value, metas);
@@ -125,14 +144,12 @@ class SCli extends __SPromise {
 
       // Apply the SProcessInterface on the getted process
       // __SProcessInterface.apply(this._processInstance);
-
-      // return this._runningProcess;
     } else {
       const childProcess = new __SChildProcess(this.command, {
         id: settings.id,
         definitionObj: this.interface.definitionObj,
         defaultParams: settings.defaultParams,
-        ...settings.childProcess
+        ...settings.childProcessSettings
       });
 
       childProcess.on('state', (state) => {
@@ -140,6 +157,10 @@ class SCli extends __SPromise {
       });
 
       this._processInstance = childProcess;
+
+      childProcess.on('*', (v, m) => {
+        console.log(m.stack);
+      });
 
       if (settings.output) {
         if (__isClass(settings.output)) {
@@ -274,7 +295,10 @@ class SCli extends __SPromise {
       paramsObj.forceChildProcess = false;
     }
 
-    this._runningProcess = this._processInstance.run(paramsObj, settings);
+    this._runningProcess = this._processInstance.run(
+      paramsObj,
+      settings.processSettings
+    );
 
     this._runningProcess.on('close', (args) => {
       this._runningProcess = null;

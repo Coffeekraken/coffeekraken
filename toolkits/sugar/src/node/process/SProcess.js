@@ -118,6 +118,72 @@ class SProcess extends __SPromise {
   endTime = 0;
 
   /**
+   * @name            triggerParent
+   * @type            Function
+   * @static
+   *
+   * This method allows you to "pipe" some promise from a child process to a his parent process promise
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static triggerParent(value, metas = {}) {
+    if (!__isChildProcess()) return;
+    if (!process.env.CHILD_PROCESS_IPC_PARENT_SERVER_ID) {
+      throw new __SError(
+        `You try to use the "<yellow>triggerParent</yellow>" static method but it seems that you don't have the environment variable "<cyan>CHILD_PROCESS_IPC_PARENT_SERVER_ID</cyan>" setted. This mean that you don't have spawned your child process using the SChildProcess class...`
+      );
+    }
+
+    let ipc;
+    let id = `SChildProcess_client_${process.env.CHILD_PROCESS_IPC_PARENT_SERVER_ID}`;
+    let serverId = `SChildProcess_server_${process.env.CHILD_PROCESS_IPC_PARENT_SERVER_ID}`;
+
+    function whenServerReady() {
+      ipc.of[serverId].emit('message', {
+        value,
+        metas
+      });
+    }
+
+    if (!SChildProcess._ipcChildInstance) {
+      ipc = new __IPC();
+      ipc.config.silent = true;
+      ipc.config.id = id;
+      ipc.config.retry = 1500;
+      ipc.connectTo(serverId, () => {
+        ipc.of[serverId].on('connect', () => {
+          whenServerReady();
+        });
+      });
+      SChildProcess._ipcChildInstance = ipc;
+    } else {
+      ipc = SChildProcess._ipcChildInstance;
+      whenServerReady();
+    }
+
+    // const logString = __toString({
+    //   $triggerParent: true,
+    //   value,
+    //   metas
+    // });
+    // if (typeof value === 'string' && value.trim() === '') return;
+    // // if (logString.length >= 8192) {
+    // //   const tmpDir = __tmp.dirSync().name;
+    // //   const tmpName = `${tmpDir}/${metas.id}.txt`;
+    // //   __fs.writeFileSync(tmpName, logString);
+    // //   console.log(
+    // //     __toString({
+    // //       $file: tmpName
+    // //     })
+    // //   );
+    // // } else {
+    // //   console.log(logString);
+    // // }
+    // console.log(logString);
+  }
+
+  /**
    * @name          constructor
    * @type          Function
    * @constructor
@@ -138,6 +204,15 @@ class SProcess extends __SPromise {
     );
     super(settings);
 
+    this.constructor.triggerParent(
+      {
+        value: 'Hello world'
+      },
+      {
+        stack: 'log'
+      }
+    );
+
     if (settings.deamon && typeof settings.deamon === 'object') {
       __SProcessDeamonSettingInterface.apply(settings.deamon);
 
@@ -149,6 +224,7 @@ class SProcess extends __SPromise {
       const stacks = Array.isArray(settings.deamon.runOn)
         ? settings.deamon.runOn.join(',')
         : '*';
+
       this._deamonInstance.on(stacks, (data, metas) => {
         // check if a process is already running
         if (this._currentPromise) return;

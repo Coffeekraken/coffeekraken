@@ -164,6 +164,7 @@
     "ncp": "^2.0.0",
     "neo-blessed": "^0.2.0",
     "node-clean-exit": "^0.2.1",
+    "node-ipc": "^9.1.1",
     "node-machine-id": "^1.1.12",
     "node-notifier": "^7.0.1",
     "node-sass-glob-importer": "^5.3.2",

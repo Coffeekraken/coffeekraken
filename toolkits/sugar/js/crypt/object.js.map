@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "object.js"
+    ],
+    "names": [
+        "encrypt",
+        "object",
+        "salt",
+        "__encodeObject",
+        "encode_object",
+        "decrypt",
+        "encodedObject",
+        "decode_object"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;eASe;AACb;;;;;;;;;;;;AAYAA,EAAAA,OAAO,EAAE,iBAAUC,MAAV,EAAkBC,IAAlB,EAA4D;AAAA,QAA1CA,IAA0C;AAA1CA,MAAAA,IAA0C,GAAnC,iCAAmC;AAAA;;AACnE,WAAOC,sBAAeC,aAAf,CAA6BH,MAA7B,EAAqC,QAArC,EAA+CC,IAA/C,CAAP;AACD,GAfY;;AAiBb;;;;;;;;;;;;AAYAG,EAAAA,OAAO,EAAE,iBAAUC,aAAV,EAAyBJ,IAAzB,EAAmE;AAAA,QAA1CA,IAA0C;AAA1CA,MAAAA,IAA0C,GAAnC,iCAAmC;AAAA;;AAC1E,WAAOC,sBAAeI,aAAf,CAA6BD,aAA7B,EAA4C,QAA5C,EAAsDJ,IAAtD,CAAP;AACD;AA/BY,C",
+    "sourcesContent": [
+        "import __encodeObject from 'object-encode';\n\n/**\n * @name            object\n * @namespace           sugar.js.crypt\n * @type            Object\n *\n * Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the object algorithm\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default {\n  /**\n   * @name        encrypt\n   * @type        Function\n   *\n   * Encrypt\n   *\n   * @param       {Object}       object         The object to encrypt\n   * @param       {String}       [salt=\"coffeekraken.sugar.crypt.object\"]   The salt to encode the object. Needed to decode correctly the object\n   * @return      {String}                       The encrypted object\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  encrypt: function (object, salt = 'coffeekraken.sugar.crypt.object') {\n    return __encodeObject.encode_object(object, 'base64', salt);\n  },\n\n  /**\n   * @name        decrypt\n   * @type        Function\n   *\n   * Decrypt\n   *\n   * @param       {String}      encodedObject          The object to decrypt\n   * @param       {String}      [salt='coffeekraken.sugar.crypt.object']        The salt to decode the object\n   * @return      {Object}                      The decrypted object\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  decrypt: function (encodedObject, salt = 'coffeekraken.sugar.crypt.object') {\n    return __encodeObject.decode_object(encodedObject, 'base64', salt);\n  }\n};\n"
+    ]
+}

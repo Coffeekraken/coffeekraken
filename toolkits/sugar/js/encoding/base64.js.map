@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "base64.js"
+    ],
+    "names": [
+        "encode",
+        "string",
+        "btoa",
+        "decode",
+        "atob"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;eAee;AACb;;;;;;;;;;;AAWAA,EAAAA,MAAM,EAAE,gBAAUC,MAAV,EAAkB;AACxB,WAAOC,IAAI,CAACD,MAAD,CAAX;AACD,GAdY;;AAgBb;;;;;;;;;;;AAWAE,EAAAA,MAAM,EAAE,gBAAUF,MAAV,EAAkB;AACxB,WAAOG,IAAI,CAACH,MAAD,CAAX;AACD;AA7BY,C",
+    "sourcesContent": [
+        "/**\n * @name                    base64\n * @namespace           sugar.js.encoding\n * @type                    Object\n *\n * This return an object containing the \"encode\" and \"decode\" function that you can use\n * to encode/decode base64 Strings.\n *\n * @example           js\n * import base64 from '@coffeekraken/sugar/js/encoding/base64';\n * base64.encode('Hello world');\n * base64.decode('SGVsbG8gV29ybGQh');\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default {\n  /**\n   * @name        encode\n   * @type        Function\n   *\n   * Encode in base 64\n   *\n   * @param       {String}       string        The string to encode\n   * @return      {String}                       The encoded string\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  encode: function (string) {\n    return btoa(string);\n  },\n\n  /**\n   * @name        decode\n   * @type        Function\n   *\n   * Decode the passed string\n   *\n   * @param       {String}      string         The string to decode\n   * @return      {String}                      The decoded string\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  decode: function (string) {\n    return atob(string);\n  }\n};\n"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "base64.js"
+    ],
+    "names": [
+        "encrypt",
+        "message",
+        "btoa",
+        "decrypt",
+        "atob"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;;;AAEA;;;;;;;;;eASe;AACb;;;;;;;;;;;AAWAA,EAAAA,OAAO,EAAE,iBAAUC,OAAV,EAAmB;AAC1B,QAAI,OAAOA,OAAP,KAAmB,QAAvB,EAAiCA,OAAO,GAAG,uBAASA,OAAT,CAAV;AACjC,WAAOC,IAAI,CAACD,OAAD,CAAX;AACD,GAfY;;AAiBb;;;;;;;;;;;AAWAE,EAAAA,OAAO,EAAE,iBAAUF,OAAV,EAAmB;AAC1BA,IAAAA,OAAO,GAAGG,IAAI,CAACH,OAAD,CAAd;AACA,WAAO,oBAAMA,OAAN,CAAP;AACD;AA/BY,C",
+    "sourcesContent": [
+        "import __isJson from '../is/json';\nimport toString from '../string/toString';\nimport parse from '../string/parse';\n\n/**\n * @name            base64\n * @namespace           sugar.js.crypt\n * @type            Object\n *\n * Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the base64 algorithm\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default {\n  /**\n   * @name        encrypt\n   * @type        Function\n   *\n   * Encrypt\n   *\n   * @param       {String}       message        The message to encrypt\n   * @return      {String}                       The encrypted message\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  encrypt: function (message) {\n    if (typeof message !== 'string') message = toString(message);\n    return btoa(message);\n  },\n\n  /**\n   * @name        decrypt\n   * @type        Function\n   *\n   * Decrypt\n   *\n   * @param       {String}      message         The message to decrypt\n   * @return      {String}                      The decrypted message\n   *\n   * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  decrypt: function (message) {\n    message = atob(message);\n    return parse(message);\n  }\n};\n"
+    ]
+}

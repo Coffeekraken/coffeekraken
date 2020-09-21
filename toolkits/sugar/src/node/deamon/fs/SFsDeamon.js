@@ -16,7 +16,7 @@ const __toString = require('../../string/toString');
  * @param       {Object}        [settings={}]             Specify some settings to configure your filesystem deamon instance
  * - id (deamon.fs.unnamed) {String}: A unique id for your watch instance
  * - name (Unnamed SFsDeamon) {String}: A name for your watch instance
- * - cli ({}) {Object}: Specify some settings that will be passed to the underhood SFsDeamonCli instance
+ * - cliSettings ({}) {Object}: Specify some settings that will be passed to the underhood SFsDeamonCli instance
  *
  * @example       js
  * const SFsDeamon = require('@coffeekraken/sugar/node/deamon/fs/SFsDeamon');
@@ -61,7 +61,7 @@ module.exports = class SFsDeamon extends __SDeamon {
         {
           name: 'Unnamed SFsDeamon',
           id: 'deamon.fs.unnamed',
-          cli: {}
+          cliSettings: {}
         },
         settings
       )
@@ -95,7 +95,7 @@ module.exports = class SFsDeamon extends __SDeamon {
     settings = __deepMerge(this._settings, settings);
     input = typeof input === 'string' ? input : input.input;
     const cli = new __SFsDeamonCli({
-      ...settings.cli,
+      ...settings.cliSettings,
       input
     });
     cli.run({

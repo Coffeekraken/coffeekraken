@@ -23,7 +23,7 @@ exports.default = void 0;
  */
 var _default = value => {
   if (typeof value !== 'string') return value;
-  value = value.split('⠀⠀⠀').join('').trim();
+  value = value.split('⠀').join('').trim();
 
   try {
     return Function("\n      \"use strict\";\n      return (".concat(value, ");\n    "))();

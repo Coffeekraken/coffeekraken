@@ -210,7 +210,7 @@ var SLog = /*#__PURE__*/function () {
         if (env) {
           var adaptersByEnvironment = this._settings.adaptersByEnvironment[env];
 
-          if (adaptersByEnvironment !== null) {
+          if (adaptersByEnvironment !== null && adaptersByEnvironment !== undefined) {
             if (typeof adaptersByEnvironment === 'string') adaptersByEnvironment = adaptersByEnvironment.split(',').map(a => a.trim());
             adapters = adapters.filter(a => {
               return adaptersByEnvironment.indexOf(a) !== -1;

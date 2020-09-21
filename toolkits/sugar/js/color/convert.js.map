@@ -1,0 +1,27 @@
+{
+    "version": 3,
+    "sources": [
+        "convert.js"
+    ],
+    "names": [
+        "convert",
+        "input",
+        "format",
+        "rgbaObj",
+        "r",
+        "undefined",
+        "g",
+        "b",
+        "h",
+        "s",
+        "l",
+        "v",
+        "a",
+        "hslObj",
+        "hsvObj"
+    ],
+    "mappings": ";;;;;;;AAAA;;AACA;;AACA;;AACA;;AACA;;AACA;;;;AAEA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,OAAT,CAAiBC,KAAjB,EAAwBC,MAAxB,EAAyC;AAAA,MAAjBA,MAAiB;AAAjBA,IAAAA,MAAiB,GAAR,MAAQ;AAAA;;AACtD;AACA,MAAIC,OAAO,GAAG,EAAd;;AACA,MAAI,OAAOF,KAAP,KAAiB,QAArB,EAA+B;AAC7BE,IAAAA,OAAO,GAAG,oBAAQF,KAAR,EAAe,MAAf,CAAV;AACD,GAFD,MAEO,IAAI,OAAOA,KAAP,KAAiB,QAArB,EAA+B;AACpC,QACEA,KAAK,CAACG,CAAN,KAAYC,SAAZ,IACAJ,KAAK,CAACK,CAAN,KAAYD,SADZ,IAEAJ,KAAK,CAACM,CAAN,KAAYF,SAHd,EAIE;AACAF,MAAAA,OAAO,GAAGF,KAAV;AACD,KAND,MAMO,IACLA,KAAK,CAACO,CAAN,KAAYH,SAAZ,IACAJ,KAAK,CAACQ,CAAN,KAAYJ,SADZ,IAEAJ,KAAK,CAACS,CAAN,KAAYL,SAHP,EAIL;AACAF,MAAAA,OAAO,GAAG,uBAAWF,KAAX,CAAV;AACD,KANM,MAMA,IACLA,KAAK,CAACO,CAAN,KAAYH,SAAZ,IACAJ,KAAK,CAACQ,CAAN,KAAYJ,SADZ,IAEAJ,KAAK,CAACU,CAAN,KAAYN,SAHP,EAIL;AACAF,MAAAA,OAAO,GAAG,uBAAWF,KAAX,CAAV;AACD;AACF;;AAED,UAAQC,MAAR;AACE,SAAK,MAAL;AACE,aAAOC,OAAP;;AACF,SAAK,KAAL;AACE,aAAO,uBAAWA,OAAX,CAAP;;AACF,SAAK,KAAL;AACE,aAAO,uBAAWA,OAAX,CAAP;;AACF,SAAK,KAAL;AACA,SAAK,WAAL;AACE,aAAO,uBAAWA,OAAX,CAAP;;AACF,SAAK,YAAL;AACE,4BAAeA,OAAO,CAACC,CAAvB,cAA4BD,OAAO,CAACG,CAApC,cAAyCH,OAAO,CAACI,CAAjD,cAAsDJ,OAAO,CAACS,CAA9D;;AACF,SAAK,WAAL;AACE,UAAMC,MAAM,GAAGb,OAAO,CAACG,OAAD,EAAU,KAAV,CAAtB;AACA,2BAAcU,MAAM,CAACL,CAArB,cAA0BK,MAAM,CAACJ,CAAjC,cAAsCI,MAAM,CAACH,CAA7C;;AACF,SAAK,WAAL;AACE,UAAMI,MAAM,GAAGd,OAAO,CAACG,OAAD,EAAU,KAAV,CAAtB;AACA,2BAAcW,MAAM,CAACN,CAArB,cAA0BM,MAAM,CAACL,CAAjC,cAAsCK,MAAM,CAACH,CAA7C;AAjBJ,GA3BsD,CA+CtD;;;AACA,SAAON,SAAP;AACD",
+    "sourcesContent": [
+        "import __parse from './parse';\nimport __hsl2rgba from './hsl2rgba';\nimport __hsv2rgba from './hsv2rgba';\nimport __rgba2hsl from './rgba2hsl';\nimport __rgba2hsv from './rgba2hsv';\nimport __rgba2hex from './rgba2hex';\n\n/**\n * @name                  convert\n * @namespace           sugar.js.color\n * @type                  Function\n *\n * This function take as input any color format like rgba Object, hsl Object, hsv Object, hex String, rgba String, hsl String or hsv String\n * and convert it into the wanted format like \"rgba\", \"hsl\", \"hsv\", \"hex\", \"rgbaString\", \"hslString\" or \"hsvString\"\n *\n * @param           {Mixed}               input           The input color to convert\n * @param           {String}              [format=\"rgba\"]     The format wanted\n * @return          {Mixed}                               The converted color\n *\n * @example         js\n * import convert from '@coffeekraken/sugar/js/color/convert';\n * convert('rgba(10,20,30,100)', 'rgba'); // => { r: 10, g: 20, b: 30, a: 100 }\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function convert(input, format = 'rgba') {\n  // transforming the input into rgba object\n  let rgbaObj = {};\n  if (typeof input === 'string') {\n    rgbaObj = __parse(input, 'rgba');\n  } else if (typeof input === 'object') {\n    if (\n      input.r !== undefined &&\n      input.g !== undefined &&\n      input.b !== undefined\n    ) {\n      rgbaObj = input;\n    } else if (\n      input.h !== undefined &&\n      input.s !== undefined &&\n      input.l !== undefined\n    ) {\n      rgbaObj = __hsl2rgba(input);\n    } else if (\n      input.h !== undefined &&\n      input.s !== undefined &&\n      input.v !== undefined\n    ) {\n      rgbaObj = __hsv2rgba(input);\n    }\n  }\n\n  switch (format) {\n    case 'rgba':\n      return rgbaObj;\n    case 'hsl':\n      return __rgba2hsl(rgbaObj);\n    case 'hsv':\n      return __rgba2hsv(rgbaObj);\n    case 'hex':\n    case 'hexString':\n      return __rgba2hex(rgbaObj);\n    case 'rgbaString':\n      return `rgba(${rgbaObj.r},${rgbaObj.g},${rgbaObj.b},${rgbaObj.a})`;\n    case 'hslString':\n      const hslObj = convert(rgbaObj, 'hsl');\n      return `hsl(${hslObj.h},${hslObj.s},${hslObj.l})`;\n    case 'hsvString':\n      const hsvObj = convert(rgbaObj, 'hsv');\n      return `hsv(${hsvObj.h},${hsvObj.s},${hsvObj.v})`;\n  }\n\n  // if nothing supported\n  return undefined;\n}\n"
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "version": 3,
+    "sources": [
+        "color.js"
+    ],
+    "names": [
+        "color",
+        "__SColor"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;AAEA;;;;;;;;;;;;;;;;AAgBe,SAASA,KAAT,CAAeA,KAAf,EAAsB;AACnC,SAAO,IAAIC,eAAJ,CAAaD,KAAb,CAAP;AACD",
+    "sourcesContent": [
+        "import __SColor from './SColor';\n\n/**\n * @name                color\n * @namespace           sugar.js.color\n * @type                Function\n *\n * Simple wrapper to create an SColor instance quickly\n *\n * @param         {Mixed}             color           A color in any format like rgba Object, hsl Object, hsv Object, hex String, rgba String, hsl String or hsv String\n * @return        {SColor}                            An SColor instance representing your color\n *\n * @example         js\n * import color from '@coffeekraken/sugar/js/color/color';\n * const myColor = color('#ff00ff');\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function color(color) {\n  return new __SColor(color);\n}\n"
+    ]
+}

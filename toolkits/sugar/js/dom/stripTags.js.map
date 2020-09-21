@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "sources": [
+        "stripTags.js"
+    ],
+    "names": [
+        "stripTags",
+        "html",
+        "tmp",
+        "document",
+        "createElement",
+        "innerHTML",
+        "textContent",
+        "innerText"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;AAgBe,SAASA,SAAT,CAAmBC,IAAnB,EAAyB;AACtC,MAAMC,GAAG,GAAGC,QAAQ,CAACC,aAAT,CAAuB,KAAvB,CAAZ;AACAF,EAAAA,GAAG,CAACG,SAAJ,GAAgBJ,IAAhB;AACA,SAAOC,GAAG,CAACI,WAAJ,IAAmBJ,GAAG,CAACK,SAAvB,IAAoC,EAA3C;AACD",
+    "sourcesContent": [
+        "/**\n * @name      stripTags\n * @namespace           sugar.js.dom\n * @type      Function\n *\n * Strip the tags of the passed text\n *\n * @param    {String}    html    the html to process\n * @return    {String}    The html without any tags\n *\n * @example    js\n * import stripTags from '@coffeekraken/sugar/js/dom/stripTags'\n * stripTags('<h1>Hello World</h1>') // => Hello World\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function stripTags(html) {\n  const tmp = document.createElement('div');\n  tmp.innerHTML = html;\n  return tmp.textContent || tmp.innerText || '';\n}\n"
+    ]
+}

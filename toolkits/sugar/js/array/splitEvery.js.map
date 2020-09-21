@@ -1,0 +1,21 @@
+{
+    "version": 3,
+    "sources": [
+        "splitEvery.js"
+    ],
+    "names": [
+        "splitEvery",
+        "array",
+        "every",
+        "i",
+        "j",
+        "finalArray",
+        "length",
+        "push",
+        "slice"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,UAAT,CAAoBC,KAApB,EAA2BC,KAA3B,EAAkC;AAC/C,MAAIC,CAAJ;AAAA,MACEC,CADF;AAAA,MAEEC,UAAU,GAAG,EAFf;;AAGA,OAAKF,CAAC,GAAG,CAAJ,EAAOC,CAAC,GAAGH,KAAK,CAACK,MAAtB,EAA8BH,CAAC,GAAGC,CAAlC,EAAqCD,CAAC,IAAID,KAA1C,EAAiD;AAC/CG,IAAAA,UAAU,CAACE,IAAX,CAAgBN,KAAK,CAACO,KAAN,CAAYL,CAAZ,EAAeA,CAAC,GAAGD,KAAnB,CAAhB;AACD;;AACD,SAAOG,UAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name                                splitEvery\n * @namespace           sugar.js.array\n * @type                                Function\n *\n * Split an array every N items\n *\n * @param           {Array}           array               The array to split\n * @param           {Number}          every               Every how many items to split the array\n * @return          {Array}                               An array of arrays splited\n *\n * @example           js\n * import splitEvery from '@coffeekraken/sugar/js/array/splitEvery';\n * splitEvery([1,2,3,4,5,6,7,8,9], 3);\n * // [[1,2,3],[4,5,6],[7,8,9]]\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function splitEvery(array, every) {\n  let i,\n    j,\n    finalArray = [];\n  for (i = 0, j = array.length; i < j; i += every) {\n    finalArray.push(array.slice(i, i + every));\n  }\n  return finalArray;\n}\n"
+    ]
+}

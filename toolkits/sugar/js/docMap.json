@@ -1945,6 +1945,28 @@
         "type": "Function",
         "description": "Get the distance between two points"
     },
+    "sugar.js.glob.extractGlob": {
+        "name": "extractGlob",
+        "namespace": "sugar.js.glob",
+        "filename": "extractGlob.js",
+        "extension": "js",
+        "path": "../src/js/glob/extractGlob.js",
+        "directory": "../src/js/glob",
+        "type": "Function",
+        "description": "This function simply return you the glob part of a passed string",
+        "since": "2.0.0"
+    },
+    "sugar.js.glob.extractNoneGlob": {
+        "name": "extractNoneGlob",
+        "namespace": "sugar.js.glob",
+        "filename": "extractNoneGlob.js",
+        "extension": "js",
+        "path": "../src/js/glob/extractNoneGlob.js",
+        "directory": "../src/js/glob",
+        "type": "Function",
+        "description": "This function simply return you the none glob part of a passed string",
+        "since": "2.0.0"
+    },
     "sugar.js.google.SGoogleCustomSearch": {
         "name": "SGoogleCustomSearch",
         "namespace": "sugar.js.google",

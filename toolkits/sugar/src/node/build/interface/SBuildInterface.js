@@ -19,7 +19,7 @@ module.exports = class SBuildInterface extends __SInterface {
       type: 'String',
       alias: 'i',
       description: 'Input files glob pattern',
-      required: true,
+      required: false,
       level: 1
     },
     outputDir: {

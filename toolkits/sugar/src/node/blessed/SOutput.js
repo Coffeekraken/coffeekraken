@@ -142,18 +142,18 @@ module.exports = class SOutput extends __SComponent {
       //   value: `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
       // });
     })
-      .on('success', (data) => {
+      .on('success,complete', (data) => {
         this.log({
           value: `#success The process has been finished <green>successfully</green>`
         });
       })
 
-      // .on('error', (error) => {
-      //   this.log({
-      //     error: true,
-      //     ...error
-      //   });
-      // })
+      .on('error', (error) => {
+        this.log({
+          error: true,
+          ...error
+        });
+      })
       .on(this._settings.stacks.join(','), (data, metas) => {
         this.log({
           [metas.stack.split('.').pop()]: true,
@@ -230,7 +230,7 @@ module.exports = class SOutput extends __SComponent {
 
     args.forEach((data) => {
       if (typeof data === 'string') {
-        const splitedLogs = data.split(/⠀⠀⠀/);
+        const splitedLogs = data.split(/⠀/);
         splitedLogs.forEach((log) => {
           if (log.trim() === '') return;
           log = log.trim();
@@ -268,7 +268,7 @@ module.exports = class SOutput extends __SComponent {
         // apply the interface
         data = __SOutputLogInterface.applyAndComplete(data);
 
-        const splitedLogs = data.value.split(/⠀⠀⠀/);
+        const splitedLogs = data.value.split(/⠀/);
 
         splitedLogs.forEach((log) => {
           if (log.trim() === '') return;

@@ -1,0 +1,22 @@
+{
+    "version": 3,
+    "sources": [
+        "toString.js"
+    ],
+    "names": [
+        "toString",
+        "html",
+        "deep",
+        "document",
+        "undefined",
+        "createElement",
+        "cont",
+        "appendChild",
+        "cloneNode",
+        "innerHTML"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;;;;;;;AAkBe,SAASA,QAAT,CAAkBC,IAAlB,EAAwBC,IAAxB,EAAqC;AAAA,MAAbA,IAAa;AAAbA,IAAAA,IAAa,GAAN,IAAM;AAAA;;AAClD,MAAIC,QAAQ,KAAKC,SAAb,IAA0BD,QAAQ,CAACE,aAAT,KAA2BD,SAAzD,EAAoE;AAClE,QAAME,IAAI,GAAGH,QAAQ,CAACE,aAAT,CAAuB,KAAvB,CAAb;AACAC,IAAAA,IAAI,CAACC,WAAL,CAAiBN,IAAI,CAACO,SAAL,CAAeN,IAAf,CAAjB;AACA,WAAOI,IAAI,CAACG,SAAZ;AACD;;AACD,SAAOR,IAAP;AACD",
+    "sourcesContent": [
+        "/**\n * @name            toString\n * @namespace           sugar.js.html\n * @type      Function\n *\n * Return the string version of a dom node or the dom node and his children\n *\n * @param    {HTMLElement}    html    The HTMLElement to convert to string\n * @param    {Boolean}    [deep=true]    Include or not his children\n * @return    {String}    The string version of the dom node\n *\n * @example    js\n * import toString from '@coffeekraken/sugar/js/string/toString'\n * const myDomNode = document.querySelector('.my-dom-node')\n * toString(myDomNode, false) // <div class=\"my-dom-node\"></div>\n *\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default function toString(html, deep = true) {\n  if (document !== undefined && document.createElement !== undefined) {\n    const cont = document.createElement('div');\n    cont.appendChild(html.cloneNode(deep));\n    return cont.innerHTML;\n  }\n  return html;\n}\n"
+    ]
+}

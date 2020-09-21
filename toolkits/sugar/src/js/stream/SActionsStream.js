@@ -799,13 +799,14 @@ export default class SActionStream extends __SPromise {
             's'
           )}s</yellow>`;
           this._currentStream.stats.stdout.push(completeString);
+
           this.log({
             value: completeString
           });
 
           // resolve this stream process
-          this.trigger('complete', this._currentStream.stats);
-          trigger('complete', this._currentStream.stats);
+          this.trigger('success', {});
+          trigger('success', {});
           resolve(this._currentStream.stats);
         }
       },

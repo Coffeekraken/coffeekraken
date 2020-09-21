@@ -153,10 +153,6 @@ export default class SPromise extends Promise {
         }
       }
 
-      if (metas.stack.includes('catch')) {
-        console.log('tri', metas.stack);
-      }
-
       // trigger on the destination promise
       destSPromise.trigger(metas.stack, value, {
         ...metas,

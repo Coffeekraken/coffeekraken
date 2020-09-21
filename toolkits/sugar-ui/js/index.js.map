@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "sources": [
+        "index.js"
+    ],
+    "names": [],
+    "mappings": ";;AAAA",
+    "sourcesContent": [
+        "import './components/codemirror';\n\n/**\n * @name            coco\n * @namespace       sugar-ui.coco\n * @type            Function\n *\n * Hola\n *\n * @since           2.0.0\n */\n"
+    ]
+}

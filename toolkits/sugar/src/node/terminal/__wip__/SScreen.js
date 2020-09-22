@@ -90,10 +90,10 @@ module.exports = class STerminalScreen extends __blessed.screen {
     }
 
     // listen for closing the app
-    this.key(['C-c', 'escape'], function () {
-      this.destroy();
-      process.exit();
-    });
+    // this.key(['C-c', 'escape'], function () {
+    //   this.destroy();
+    //   process.exit();
+    // });
   }
 
   /**

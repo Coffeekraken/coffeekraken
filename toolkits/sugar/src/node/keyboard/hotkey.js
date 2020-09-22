@@ -47,6 +47,12 @@ module.exports = function hotkey(key, settings = {}) {
     __keypress(process.stdin);
 
     process.stdin.on('keypress', function (ch, keyObj) {
+      if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
+        console.log('FF');
+        // process.stdin.pause();
+        process.emit('custom_exit');
+      }
+
       // loop on each promises registered
       Object.keys(hotkeyStack).forEach((id) => {
         const obj = hotkeyStack[id];
@@ -111,6 +117,9 @@ module.exports = function hotkey(key, settings = {}) {
           });
       });
     });
+
+    // process.stdin.setRawMode(true);
+    // process.stdin.resume();
   }
 
   const promise = new __SPromise()

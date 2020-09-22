@@ -18,7 +18,7 @@ module.exports = class SFsDeamonInterface extends __SInterface {
   static implementsArray = [__SDeamonInterface];
 
   static definitionObj = {
-    input: {
+    watch: {
       type: 'String',
       alias: 'i',
       description: 'Specify what to watch using a glob pattern',

@@ -186,6 +186,7 @@
     "printf": "^0.5.3",
     "prompts": "^2.3.2",
     "ps-list": "^7.2.0",
+    "ps-tree": "^1.2.0",
     "q-i": "^2.0.1",
     "query-string": "^6.12.1",
     "renderkid": "^2.0.3",

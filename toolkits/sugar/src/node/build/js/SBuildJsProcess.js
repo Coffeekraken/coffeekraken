@@ -2,6 +2,7 @@ const __SProcess = require('../../process/SProcess');
 const __SBuildJsActionsStream = require('./SBuildJsActionsStream');
 const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
 const __deepMerge = require('../../object/deepMerge');
+const SProcess = require('../../process/SProcess');
 
 /**
  * @name            SBuildJsProcess
@@ -25,28 +26,38 @@ module.exports = class SBuildJsProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(initialParams = {}, settings = {}) {
-    const deamon = new __SFsDeamon({});
-
     super(
       initialParams,
       __deepMerge(
         {
           id: 'build.js.process',
           name: 'Build JS Process',
-          deamon
-          // deamon: {
-          //   class: __SFsDeamon,
-          //   watchArgs: [initialParams.watch, settings],
-          //   runOn: ['update', 'add', 'unlink'],
-          //   processParams: (params, data) => {
-          //     return params;
-          //   }
-          // },
+          deamon: new __SFsDeamon({})
         },
         settings
       )
     );
-    console.log('COCOC');
+  }
+
+  /**
+   * @name              deamonUpdate
+   * @type              Function
+   *
+   * Method that is called by the deamon when something has been detected.
+   * You must return the params that will be passed to the ```run``` method
+   * depending on the input ones that are the ```initialParams``` object and the
+   * ```deamonUpdateObj``` one.
+   * If you don't want to trigger a ```run``` process, just return ```false```
+   *
+   * @param     {Object}      [initialParams={}]      The constructor passed initialParams object
+   * @param     {Object}      [deamonUpdateObj={}]    The deamon update object
+   * @return    {Object|Boolean}                      The new object to pass to the ```run``` method, or ```false``` if you don't want to trigger a ```run```
+   */
+  deamonUpdate(initialParams = {}, deamonUpdateObj = {}) {
+    SProcess.triggerParent('log', {
+      value: initialParams
+    });
+    return initialParams;
   }
 
   /**

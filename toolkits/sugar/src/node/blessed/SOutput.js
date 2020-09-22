@@ -148,12 +148,13 @@ module.exports = class SOutput extends __SComponent {
         });
       })
 
-      .on('error', (error) => {
-        this.log({
-          error: true,
-          ...error
-        });
-      })
+      // .on('error', (error) => {
+      //   console.log('ERRO');
+      //   this.log({
+      //     error: true,
+      //     ...error
+      //   });
+      // })
       .on(this._settings.stacks.join(','), (data, metas) => {
         this.log({
           [metas.stack.split('.').pop()]: true,

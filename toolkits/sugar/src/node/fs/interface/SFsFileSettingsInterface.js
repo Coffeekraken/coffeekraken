@@ -24,7 +24,7 @@ module.exports = class SFsFileSettingsInterface extends __SInterface {
       type: 'String',
       description:
         'Specify a root directory that you want to considere as the root folder where the file live. This will gives you access to properties like ```rootDir``` and ```relPath```',
-      required: true
+      required: false
     }
   };
 };

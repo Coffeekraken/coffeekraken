@@ -63,10 +63,7 @@ class SBuildScssCli extends __SCli {
       __deepMerge(
         {
           id: 'build.scss.cli',
-          name: 'Cli Build Scss',
-          childProcess: {
-            triggerParent: ['log', 'update', 'add', 'unlink', 'state']
-          }
+          name: 'Cli Build Scss'
         },
         settings
       )

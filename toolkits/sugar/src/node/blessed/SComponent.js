@@ -6,6 +6,7 @@ const __tkill = require('tree-kill');
 const __isChildProcess = require('../is/childProcess');
 const __toString = require('../string/toString');
 const __parse = require('../string/parse');
+const __onProcessExit = require('../process/onProcessExit');
 
 let __activeScreen = null;
 
@@ -167,15 +168,14 @@ module.exports = class SComponent extends __blessed.box {
       };
     }
 
-    __hotkey('ctrl+c', {
-      once: true
-    }).on('press', async () => {
+    __onProcessExit(async () => {
       try {
         global._screen && global._screen.destroy();
       } catch (e) {}
       this._destroyed = true;
       this._allowRender = false;
       this.detach();
+      return true;
     });
 
     if (this._settings.attach) {

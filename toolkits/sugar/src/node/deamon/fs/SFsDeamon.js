@@ -3,6 +3,7 @@ const __deepMerge = require('../../object/deepMerge');
 const __SFsDeamonCli = require('./SFsDeamonCli');
 const __SDeamon = require('../SDeamon');
 const __toString = require('../../string/toString');
+const __onProcessExit = require('../../process/onProcessExit');
 
 /**
  * @name            SFsDeamon
@@ -61,6 +62,7 @@ module.exports = class SFsDeamon extends __SDeamon {
         {
           name: 'Unnamed SFsDeamon',
           id: 'deamon.fs.unnamed',
+          updateStacks: ['update', 'add', 'unlink'],
           cliSettings: {}
         },
         settings
@@ -91,15 +93,18 @@ module.exports = class SFsDeamon extends __SDeamon {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  watch(input, settings = {}) {
+  watch(watch, settings = {}) {
     settings = __deepMerge(this._settings, settings);
-    input = typeof input === 'string' ? input : input.input;
+    watch = typeof watch === 'string' ? watch : watch.watch;
     const cli = new __SFsDeamonCli({
       ...settings.cliSettings,
-      input
+      watch
     });
     cli.run({
-      input
+      watch
+    });
+    __onProcessExit(() => {
+      cli.kill();
     });
     cli.on('cancel', () => {
       const idx = this._watchPromisesStack.indexOf(cli);

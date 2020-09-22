@@ -1,19 +1,11 @@
+const __sugarHeading = require('./ascii/sugarHeading');
 const __sugarConfig = require('./config/sugar');
 const __SLog = require('./log/SLog');
 const __handleError = require('./error/handleError');
 const __initEnv = require('./init/initEnv');
-const __isChildProcess = require('./is/childProcess');
-
-// init env
-__initEnv();
-
-// handle the errors
-// if (!__isChildProcess()) {
-// process.on('uncaughtException', __handleError);
-// process.on('unhandledRejection', __handleError);
-// }
-
-__handleError();
+const __onProcessExit = require('./process/onProcessExit');
+const __exitCleanup = require('./process/exitCleanup');
+const __clear = require('clear');
 
 /**
  * @name                    index
@@ -26,6 +18,17 @@ __handleError();
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+// init env
+__initEnv();
+
+// handle the errors
+__handleError();
+
+// exit cleanup
+__onProcessExit(() => {
+  return __exitCleanup;
+});
 
 // Logging
 new __SLog(__sugarConfig('log'));

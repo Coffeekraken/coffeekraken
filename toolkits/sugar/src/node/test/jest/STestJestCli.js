@@ -63,10 +63,7 @@ class STestJestCli extends __SCli {
       __deepMerge(
         {
           id: 'cli.test.jest',
-          name: 'Cli Test Jest',
-          childProcess: {
-            triggerParent: ['log', 'update', 'add', 'unlink', 'state']
-          }
+          name: 'Cli Test Jest'
         },
         settings
       )

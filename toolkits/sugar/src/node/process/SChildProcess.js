@@ -1,3 +1,4 @@
+const __SIpc = require('../ipc/SIpc');
 const __IPC = require('node-ipc').IPC;
 const __fs = require('fs');
 const __tmp = require('tmp');
@@ -17,7 +18,7 @@ const __SProcess = require('../process/SProcess');
 const __isChildProcess = require('../is/childProcess');
 const __parse = require('../string/parse');
 const __hasExitCleanup = require('../process/hasExitCleanup');
-const { isRegExp } = require('lodash');
+const __onProcessExit = require('../process/onProcessExit');
 
 /**
  * @name              SChildProcess
@@ -102,7 +103,7 @@ class SChildProcess extends __SProcess {
         definitionObj: {},
         defaultParams: {},
         killOnCtrlC: !__hasExitCleanup(),
-        triggerParent: false,
+        triggerParent: true,
         method: __isPath(commandOrPath, true) ? 'fork' : 'spawn',
         before: null,
         after: null,
@@ -185,7 +186,6 @@ class SChildProcess extends __SProcess {
         alias: false
       }
     );
-    console.log('COCOC', commandToRun);
 
     // initialize the runningProcess object
     this._runningProcess = {
@@ -252,20 +252,9 @@ class SChildProcess extends __SProcess {
       settings.method || 'spawn'
     ](commandToRun, [], spawnSettings);
 
-    // listen for ctrl+c to kill the child process
-    if (settings.killOnCtrlC) {
-      __hotkey('ctrl+c', {
-        once: true
-      }).on('press', () => {
-        this._runningProcess.childProcess.kill();
-      });
-    }
-
-    // register this child process globally
-    __registerProcess(
-      this._runningProcess.childProcess,
-      this._runningProcess.id
-    );
+    __onProcessExit(() => {
+      this._runningProcess.childProcess.kill();
+    });
 
     // close
     let finished = false;
@@ -321,8 +310,9 @@ class SChildProcess extends __SProcess {
     this._runningProcess.childProcess.on('close', (code, signal) => {
       if (this._runningProcess.stderr.length) {
         this._runningProcess.state = 'error';
+        const error = new __SError(this._runningProcess.stderr.join('\n'));
         this._runningProcess.promise.trigger('log', {
-          value: this._runningProcess.stderr.join('\n')
+          value: `<yellow>Child Process</yellow>\n${error.message}`
         });
       } else if (this._isKilling || (!code && signal)) {
         this._runningProcess.state = 'killed';
@@ -332,6 +322,8 @@ class SChildProcess extends __SProcess {
         this._runningProcess.state = 'error';
       }
       triggerState();
+
+      // console.log('CLOS', this._runningProcess.stderr.join('\n'));
 
       this._runningProcess.promise.trigger(`close`, {
         time: Date.now(),
@@ -359,22 +351,26 @@ class SChildProcess extends __SProcess {
       this._isKilling = false;
     });
 
-    if (!__isChildProcess()) {
-      const ipcInstance = new __IPC();
-      ipcInstance.config.id = `SChildProcess_server_${this._settings.id}`;
-      ipcInstance.config.retry = 1500;
-      ipcInstance.config.silent = true;
-      ipcInstance.serve(() => {
-        ipcInstance.server.on('message', (data, socket) => {
-          this._runningProcess.promise.trigger(
-            data.metas.stack,
-            data.value,
-            data.metas
-          );
-        });
-      });
-      ipcInstance.server.start();
-    }
+    __SIpc.on('message', (data, socket) => {
+      this._runningProcess.promise.trigger(data.stack, data.value, data.metas);
+    });
+
+    // if (__isChildProcess()) {
+    //   const ipcInstance = new __IPC();
+    //   ipcInstance.config.id = `SChildProcess_server_${this._settings.id}`;
+    //   ipcInstance.config.retry = 1500;
+    //   ipcInstance.config.silent = false;
+    //   ipcInstance.serve(() => {
+    //     ipcInstance.server.on('message', (data, socket) => {
+    //       this._runningProcess.promise.trigger(
+    //         data.stack,
+    //         data.value,
+    //         data.metas
+    //       );
+    //     });
+    //   });
+    //   ipcInstance.server.start();
+    // }
 
     // stdout data
     // if (this._runningProcess.childProcess.stdout) {

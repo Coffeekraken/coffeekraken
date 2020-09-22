@@ -922,7 +922,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       return new Promise( /*#__PURE__*/function () {
         var _ref4 = _asyncToGenerator(function* (resolve, reject) {
           // await __wait(0);
-          // check if the stacks is "*"
+          if (!stacks) return _this5; // check if the stacks is "*"
+
           if (typeof stacks === 'string') stacks = stacks.split(',').map(s => s.trim());
           var currentStackResult = initialValue;
 

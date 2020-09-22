@@ -1,5 +1,7 @@
 const __SPromise = require('../promise/SPromise');
 const __SDeamonInterface = require('./interface/SDeamonInterface');
+const __deepMerge = require('../object/deepMerge');
+const __SProcess = require('../process/SProcess');
 
 /**
  * @name                SDeamon
@@ -56,7 +58,39 @@ class SDeamon extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(settings);
+    super(
+      __deepMerge(
+        {
+          updateStacks: []
+        },
+        settings
+      )
+    );
+  }
+
+  /**
+   * @name          on
+   * @type          Function
+   *
+   * Override the ```on``` SPromise method to allow the use of the "update" shortcut.
+   * When using the "update" shortcut, the registered events will actually be the one
+   * specified in the ```settings.updateStacks```.
+   *
+   * @param           {String|Array}      stacks        The stacks in which you want register your callback. Either an Array like ['then','finally'], or a String like "then,finally"
+   * @param           {Function}        callback        The callback function to register
+   * @return          {SPromise}                  The SPromise instance to maintain chainability
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  on(stacks, callback) {
+    if (typeof stacks === 'string')
+      stacks = stacks.split(',').map((l) => l.trim());
+    if (stacks.indexOf('update') !== -1) {
+      stacks.splice(stacks.indexOf('update'), 1);
+      stacks = [...stacks, ...this._settings.updateStacks];
+    }
+    return super.on(stacks.join(','), callback);
   }
 
   /**

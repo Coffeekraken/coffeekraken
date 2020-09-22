@@ -29,9 +29,9 @@ const args =
     .join(' ') || '';
 
 // handle clean exit
-if (!__isChildProcess()) {
-  __exitCleanup();
-}
+// if (!__isChildProcess()) {
+//   __exitCleanup();
+// }
 
 // if theirs nothing as stack or action
 if (!stack) {

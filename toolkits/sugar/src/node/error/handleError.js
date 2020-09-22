@@ -31,8 +31,8 @@ module.exports = function handleError() {
   if (process.env.NODE_ENV === 'test') return;
 
   if (__isChildProcess()) {
-    process.on('uncaughtException', __handleChildProcessErrors);
-    process.on('unhandledRejection', __handleChildProcessErrors);
+    // process.on('uncaughtException', __handleChildProcessErrors);
+    // process.on('unhandledRejection', __handleChildProcessErrors);
   } else {
     process.on('uncaughtException', __handleMainProcessErrors);
     process.on('unhandledRejection', __handleMainProcessErrors);
@@ -96,14 +96,14 @@ function createErrorPanel(error) {
   $bg.focus();
 }
 
-function __handleChildProcessErrors(error) {
-  if (error.toString().includes(`Cannot read property 'itop' of null`)) return;
-  if (error.instanceId) return;
-  // error = error.toString();
-  if (!error) return;
-  console.log(__toString(error));
-  process.exit(1);
-}
+// function __handleChildProcessErrors(error) {
+//   if (error.toString().includes(`Cannot read property 'itop' of null`)) return;
+//   if (error.instanceId) return;
+//   // error = error.toString();
+//   if (!error) return;
+//   console.log(__toString(error));
+//   process.exit(1);
+// }
 
 function __handleMainProcessErrors(error) {
   // @TODO     find a better solution to avoid blessed issues
@@ -122,6 +122,8 @@ function __handleMainProcessErrors(error) {
     const stringErrorReg = /\s?message:\s?((.|\n)*)\s?name:\s/gm;
     const stringErrorMatches = error.match(stringErrorReg);
 
+    console.log(error);
+
     if (stringErrorMatches) {
       const errorString = __parse(
         stringErrorMatches[0]
@@ -137,6 +139,8 @@ function __handleMainProcessErrors(error) {
     createErrorPanel(`${error.name}
 
     ${error.message}
+
+    ${error.stack}
     `);
     return;
   } else {

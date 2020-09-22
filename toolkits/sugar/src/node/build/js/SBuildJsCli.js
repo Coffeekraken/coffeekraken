@@ -63,11 +63,7 @@ class SBuildJsCli extends __SCli {
       __deepMerge(
         {
           id: 'build.js.cli',
-          name: 'Cli Build Js',
-          processSettings: {},
-          childProcessSettings: {
-            triggerParent: true
-          }
+          name: 'Cli Build Js'
         },
         settings
       )

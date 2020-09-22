@@ -63,10 +63,7 @@ class SFrontendServerCli extends __SCli {
       __deepMerge(
         {
           id: 'server.frontend',
-          name: 'Frontend Server',
-          childProcess: {
-            triggerParent: ['log']
-          }
+          name: 'Frontend Server'
         },
         settings
       )

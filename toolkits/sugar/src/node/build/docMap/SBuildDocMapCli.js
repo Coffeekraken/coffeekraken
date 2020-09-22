@@ -52,10 +52,7 @@ module.exports = class SBuildDocMapCli extends __SCli {
       __deepMerge(
         {
           id: 'build.docMap.cli',
-          name: 'Build docMap.json',
-          childProcess: {
-            triggerParent: ['log', 'state']
-          }
+          name: 'Build docMap.json'
         },
         settings
       )

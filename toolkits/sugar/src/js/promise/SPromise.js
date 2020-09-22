@@ -741,6 +741,8 @@ export default class SPromise extends Promise {
     return new Promise(async (resolve, reject) => {
       // await __wait(0);
 
+      if (!stacks) return this;
+
       // check if the stacks is "*"
       if (typeof stacks === 'string')
         stacks = stacks.split(',').map((s) => s.trim());

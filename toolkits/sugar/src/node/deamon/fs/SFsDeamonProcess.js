@@ -46,6 +46,7 @@ module.exports = class SFsDeamonProcess extends __SProcess {
       initialParams,
       __deepMerge(
         {
+          id: 'deamon.fs',
           name: 'Filesystem Deamon'
         },
         settings
@@ -96,14 +97,8 @@ module.exports = class SFsDeamonProcess extends __SProcess {
           value: `#start Starting the "<yellow>${settings.name}</yellow>" filesystem deamon...`
         });
 
-        // if (!Array.isArray(argsObj.input)) argsObj.input = [argsObj.input];
-        // argsObj.input = argsObj.input.map((input) => {
-        //   return input.replace(`${process.cwd()}/`, '');
-        // });
-        // console.log(argsObj.input);
-
         __chokidar
-          .watch(argsObj.input, {
+          .watch(argsObj.watch, {
             persistent: true,
             ignoreInitial: true,
             followSymlinks: true,
@@ -120,8 +115,8 @@ module.exports = class SFsDeamonProcess extends __SProcess {
 
             this.log({
               group: 'Updated files',
-              value: `File updated: "<yellow>${file.filepath.replace(
-                __packageRoot(file.filepath) + '/',
+              value: `File updated: "<yellow>${file.path.replace(
+                __packageRoot(file.path) + '/',
                 ''
               )}</yellow>" <cyan>${file.size}</cyan>mb`
             });
@@ -133,8 +128,8 @@ module.exports = class SFsDeamonProcess extends __SProcess {
 
             this.log({
               group: 'Added files',
-              value: `File added: "<green>${file.filepath.replace(
-                __packageRoot(file.filepath) + '/',
+              value: `File added: "<green>${file.path.replace(
+                __packageRoot(file.path) + '/',
                 ''
               )}</green>" <cyan>${file.size}</cyan>mb`
             });
@@ -146,8 +141,8 @@ module.exports = class SFsDeamonProcess extends __SProcess {
 
             this.log({
               group: 'Deleted files',
-              value: `File deleted: "<red>${file.filepath.replace(
-                __packageRoot(file.filepath) + '/',
+              value: `File deleted: "<red>${file.path.replace(
+                __packageRoot(file.path) + '/',
                 ''
               )}</red>" <cyan>${file.size}</cyan>mb`
             });

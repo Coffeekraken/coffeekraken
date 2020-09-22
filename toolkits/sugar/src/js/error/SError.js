@@ -9,6 +9,16 @@ import __toString from '../string/toString';
 
 export default class SError extends Error {
   constructor(message) {
+    // filter message for integrated stack
+    message = message
+      .split('\n')
+      .filter((line) => {
+        if (line.trim().slice(0, 10) === 'Thrown at:') return false;
+        if (line.trim().slice(0, 3) === 'at ') return false;
+        return true;
+      })
+      .join('\n');
+
     super(message);
     Error.captureStackTrace(this, this.constructor);
 

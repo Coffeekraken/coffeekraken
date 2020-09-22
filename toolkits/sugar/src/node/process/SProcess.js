@@ -1,3 +1,4 @@
+const __IPC = require('node-ipc').IPC;
 const __isChildProcess = require('../is/childProcess');
 const __SPromise = require('../promise/SPromise');
 const __SProcessInterface = require('./interface/SProcessInterface');
@@ -5,6 +6,7 @@ const __SError = require('../error/SError');
 const __toString = require('../string/toString');
 const __deepMerge = require('../object/deepMerge');
 const __SProcessDeamonSettingInterface = require('./interface/SProcessDeamonSettingInterface');
+const __SDeamon = require('../deamon/SDeamon');
 
 /**
  * @name            SProcess
@@ -73,6 +75,17 @@ class SProcess extends __SPromise {
   }
 
   /**
+   * @name          initialParams
+   * @type          Object
+   *
+   * Store the initial params object
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  initialParams = {};
+
+  /**
    * @name          _currentPromise
    * @type          SPromise
    * @private
@@ -127,7 +140,7 @@ class SProcess extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static triggerParent(value, metas = {}) {
+  static triggerParent(stack, value, metas = {}) {
     if (!__isChildProcess()) return;
     if (!process.env.CHILD_PROCESS_IPC_PARENT_SERVER_ID) {
       throw new __SError(
@@ -141,12 +154,13 @@ class SProcess extends __SPromise {
 
     function whenServerReady() {
       ipc.of[serverId].emit('message', {
+        stack,
         value,
         metas
       });
     }
 
-    if (!SChildProcess._ipcChildInstance) {
+    if (!SProcess._ipcChildInstance) {
       ipc = new __IPC();
       ipc.config.silent = true;
       ipc.config.id = id;
@@ -156,9 +170,9 @@ class SProcess extends __SPromise {
           whenServerReady();
         });
       });
-      SChildProcess._ipcChildInstance = ipc;
+      SProcess._ipcChildInstance = ipc;
     } else {
-      ipc = SChildProcess._ipcChildInstance;
+      ipc = SProcess._ipcChildInstance;
       whenServerReady();
     }
 
@@ -198,65 +212,104 @@ class SProcess extends __SPromise {
         id: 'process.unnamed',
         name: 'Unnamed Process',
         deamon: null,
+        watchParams: ['watch'],
         throw: false
       },
       settings
     );
     super(settings);
 
-    this.constructor.triggerParent(
-      {
-        value: 'Hello world'
-      },
-      {
-        stack: 'log'
-      }
-    );
+    this.initialParams = Object.assign({}, initialParams);
 
-    if (settings.deamon && typeof settings.deamon === 'object') {
-      __SProcessDeamonSettingInterface.apply(settings.deamon);
+    // this.constructor.triggerParent(
+    //   {
+    //     value: initialParams
+    //   },
+    //   {
+    //     stack: 'log'
+    //   }
+    // );
 
-      // init the deamon class
-      this._deamonInstance = new settings.deamon.class(
-        settings.deamon.settings || {}
-      );
-
-      const stacks = Array.isArray(settings.deamon.runOn)
-        ? settings.deamon.runOn.join(',')
-        : '*';
-
-      this._deamonInstance.on(stacks, (data, metas) => {
-        // check if a process is already running
-        if (this._currentPromise) return;
-
-        // process the initial params with the "processParams" function if exists
-        let params = Object.assign({}, initialParams);
-        if (
-          settings.deamon.processParams &&
-          typeof settings.deamon.processParams === 'function'
-        ) {
-          params = settings.deamon.processParams(params, data);
-        }
-
-        // launch a new process
-        this.run(params, settings);
-
-        this.log({
-          clear: true,
-          value: `Restarting the process "<yellow>${
-            this._settings.name || this._settings.id
-          }</yellow>" automatically`
-        });
-      });
-
-      // launch the deamon if all is ready
-      if (this._deamonInstance && settings.deamon.watchArgs) {
-        this._deamonInstance.watch.apply(
-          this._deamonInstance,
-          settings.deamon.watchArgs
+    if (settings.deamon) {
+      settings.deamon.on('update', (data, metas) => {
+        this.constructor.triggerParent(
+          'log',
+          {
+            value: metas.stack
+          },
+          {}
         );
+        // do not launch multiple processes at the same time
+        if (this._currentPromise) return;
+        // check if we have a "deamonUpdate" method
+        if (this.deamonUpdate) {
+          const res = this.deamonUpdate(Object.assign({}, initialParams), {
+            ...data,
+            metas
+          });
+
+          console.log(res);
+        }
+      });
+      let watchParam;
+      for (let i = 0; i < this._settings.watchParams.length; i++) {
+        if (this.initialParams[this._settings.watchParams[i]] !== undefined) {
+          watchParam = this._settings.watchParams[i];
+          break;
+        }
       }
+      SProcess.triggerParent(
+        'log',
+        {
+          value: initialParams[watchParam]
+        },
+        {}
+      );
+      settings.deamon.watch(initialParams[watchParam]);
     }
+
+    // if (settings.deamon && typeof settings.deamon === 'object') {
+    //   // init the deamon class
+    //   this._deamonInstance = new settings.deamon.class(
+    //     settings.deamon.settings || {}
+    //   );
+
+    //   const stacks = Array.isArray(settings.deamon.runOn)
+    //     ? settings.deamon.runOn.join(',')
+    //     : '*';
+
+    //   this._deamonInstance.on(stacks, (data, metas) => {
+    //     // check if a process is already running
+    //     if (this._currentPromise) return;
+
+    //     // process the initial params with the "processParams" function if exists
+    //     let params = Object.assign({}, initialParams);
+    //     if (
+    //       settings.deamon.processParams &&
+    //       typeof settings.deamon.processParams === 'function'
+    //     ) {
+    //       params = settings.deamon.processParams(params, data);
+    //     }
+
+    //     // launch a new process
+    //     this.run(params, settings);
+
+    //     this.log({
+    //       clear: true,
+    //       value: `Restarting the process "<yellow>${
+    //         this._settings.name || this._settings.id
+    //       }</yellow>" automatically`
+    //     });
+    //   });
+
+    //   // launch the deamon if all is ready
+    //   if (this._deamonInstance && settings.deamon.watchArgs) {
+    //     this._deamonInstance.watch.apply(
+    //       this._deamonInstance,
+    //       settings.deamon.watchArgs
+    //     );
+    //   }
+    // }
   }
 
   /**
@@ -270,7 +323,7 @@ class SProcess extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get deamon() {
-    return this._deamonInstance || undefined;
+    return this._settings.deamon || undefined;
   }
 
   /**

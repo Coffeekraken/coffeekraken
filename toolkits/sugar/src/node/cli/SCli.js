@@ -120,17 +120,6 @@ class SCli extends __SPromise {
         this._settings.processSettings
       );
 
-      setTimeout(() => {
-        __SChildProcess.triggerParent(
-          {
-            value: 'PLOP'
-          },
-          {
-            stack: 'log'
-          }
-        );
-      }, 2000);
-
       if (settings.childProcessSettings.triggerParent) {
         const stacks = Array.isArray(
           settings.childProcessSettings.triggerParent
@@ -138,7 +127,7 @@ class SCli extends __SPromise {
           ? settings.childProcessSettings.triggerParent.join(',')
           : '*';
         this._processInstance.on(stacks, (value, metas) => {
-          __SChildProcess.triggerParent(value, metas);
+          __SChildProcess.triggerParent(metas.stack, value, metas);
         });
       }
 
@@ -152,15 +141,22 @@ class SCli extends __SPromise {
         ...settings.childProcessSettings
       });
 
+      console.log({
+        id: settings.id,
+        definitionObj: this.interface.definitionObj,
+        defaultParams: settings.defaultParams,
+        ...settings.childProcessSettings
+      });
+
       childProcess.on('state', (state) => {
         this.state = state;
       });
 
       this._processInstance = childProcess;
 
-      childProcess.on('*', (v, m) => {
-        console.log(m.stack);
-      });
+      // childProcess.on('*', (v, m) => {
+      //   console.log(m.stack);
+      // });
 
       if (settings.output) {
         if (__isClass(settings.output)) {

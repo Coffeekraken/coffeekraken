@@ -1,12 +1,10 @@
-const __IPC = require('node-ipc').IPC;
-const __isChildProcess = require('../is/childProcess');
 const __SPromise = require('../promise/SPromise');
 const __SProcessInterface = require('./interface/SProcessInterface');
 const __SError = require('../error/SError');
 const __toString = require('../string/toString');
 const __deepMerge = require('../object/deepMerge');
-const __SProcessDeamonSettingInterface = require('./interface/SProcessDeamonSettingInterface');
-const __SDeamon = require('../deamon/SDeamon');
+const __SIpc = require('../ipc/SIpc');
+const __onProcessExit = require('../process/onProcessExit');
 
 /**
  * @name            SProcess
@@ -141,60 +139,14 @@ class SProcess extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static triggerParent(stack, value, metas = {}) {
-    if (!__isChildProcess()) return;
-    if (!process.env.CHILD_PROCESS_IPC_PARENT_SERVER_ID) {
-      throw new __SError(
-        `You try to use the "<yellow>triggerParent</yellow>" static method but it seems that you don't have the environment variable "<cyan>CHILD_PROCESS_IPC_PARENT_SERVER_ID</cyan>" setted. This mean that you don't have spawned your child process using the SChildProcess class...`
-      );
-    }
-
-    let ipc;
-    let id = `SChildProcess_client_${process.env.CHILD_PROCESS_IPC_PARENT_SERVER_ID}`;
-    let serverId = `SChildProcess_server_${process.env.CHILD_PROCESS_IPC_PARENT_SERVER_ID}`;
-
-    function whenServerReady() {
-      ipc.of[serverId].emit('message', {
-        stack,
-        value,
-        metas
-      });
-    }
-
-    if (!SProcess._ipcChildInstance) {
-      ipc = new __IPC();
-      ipc.config.silent = true;
-      ipc.config.id = id;
-      ipc.config.retry = 1500;
-      ipc.connectTo(serverId, () => {
-        ipc.of[serverId].on('connect', () => {
-          whenServerReady();
-        });
-      });
-      SProcess._ipcChildInstance = ipc;
-    } else {
-      ipc = SProcess._ipcChildInstance;
-      whenServerReady();
-    }
-
-    // const logString = __toString({
-    //   $triggerParent: true,
-    //   value,
-    //   metas
-    // });
-    // if (typeof value === 'string' && value.trim() === '') return;
-    // // if (logString.length >= 8192) {
-    // //   const tmpDir = __tmp.dirSync().name;
-    // //   const tmpName = `${tmpDir}/${metas.id}.txt`;
-    // //   __fs.writeFileSync(tmpName, logString);
-    // //   console.log(
-    // //     __toString({
-    // //       $file: tmpName
-    // //     })
-    // //   );
-    // // } else {
-    // //   console.log(logString);
-    // // }
-    // console.log(logString);
+    const trigger = process.env.GLOBAL_SIPC_TRIGGER_ID
+      ? `${process.env.GLOBAL_SIPC_TRIGGER_ID}.trigger`
+      : 'trigger';
+    __SIpc.trigger(trigger, {
+      stack,
+      value,
+      metas
+    });
   }
 
   /**
@@ -213,6 +165,8 @@ class SProcess extends __SPromise {
         name: 'Unnamed Process',
         deamon: null,
         watchParams: ['watch'],
+        autoStart: true,
+        autoRun: false,
         throw: false
       },
       settings
@@ -221,95 +175,8 @@ class SProcess extends __SPromise {
 
     this.initialParams = Object.assign({}, initialParams);
 
-    // this.constructor.triggerParent(
-    //   {
-    //     value: initialParams
-    //   },
-    //   {
-    //     stack: 'log'
-    //   }
-    // );
-
-    if (settings.deamon) {
-      settings.deamon.on('update', (data, metas) => {
-        this.constructor.triggerParent(
-          'log',
-          {
-            value: metas.stack
-          },
-          {}
-        );
-        // do not launch multiple processes at the same time
-        if (this._currentPromise) return;
-        // check if we have a "deamonUpdate" method
-        if (this.deamonUpdate) {
-          const res = this.deamonUpdate(Object.assign({}, initialParams), {
-            ...data,
-            metas
-          });
-
-          console.log(res);
-        }
-      });
-      let watchParam;
-      for (let i = 0; i < this._settings.watchParams.length; i++) {
-        if (this.initialParams[this._settings.watchParams[i]] !== undefined) {
-          watchParam = this._settings.watchParams[i];
-          break;
-        }
-      }
-      SProcess.triggerParent(
-        'log',
-        {
-          value: initialParams[watchParam]
-        },
-        {}
-      );
-      settings.deamon.watch(initialParams[watchParam]);
-    }
-
-    // if (settings.deamon && typeof settings.deamon === 'object') {
-    //   // init the deamon class
-    //   this._deamonInstance = new settings.deamon.class(
-    //     settings.deamon.settings || {}
-    //   );
-
-    //   const stacks = Array.isArray(settings.deamon.runOn)
-    //     ? settings.deamon.runOn.join(',')
-    //     : '*';
-
-    //   this._deamonInstance.on(stacks, (data, metas) => {
-    //     // check if a process is already running
-    //     if (this._currentPromise) return;
-
-    //     // process the initial params with the "processParams" function if exists
-    //     let params = Object.assign({}, initialParams);
-    //     if (
-    //       settings.deamon.processParams &&
-    //       typeof settings.deamon.processParams === 'function'
-    //     ) {
-    //       params = settings.deamon.processParams(params, data);
-    //     }
-
-    //     // launch a new process
-    //     this.run(params, settings);
-
-    //     this.log({
-    //       clear: true,
-    //       value: `Restarting the process "<yellow>${
-    //         this._settings.name || this._settings.id
-    //       }</yellow>" automatically`
-    //     });
-    //   });
-
-    //   // launch the deamon if all is ready
-    //   if (this._deamonInstance && settings.deamon.watchArgs) {
-    //     this._deamonInstance.watch.apply(
-    //       this._deamonInstance,
-    //       settings.deamon.watchArgs
-    //     );
-    //   }
-    // }
+    // start if autoStart
+    if (settings.autoStart) this.start(this.initialParams, settings);
   }
 
   /**
@@ -352,8 +219,56 @@ class SProcess extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   kill() {
+    if (this._currentPromise && this._currentPromise.cancel) {
+      this._currentPromise.cancel();
+    }
     // update the state
     this.state = 'killed';
+  }
+
+  start(argsObj = {}, settings = {}) {
+    if (this._started) return;
+    this._started = true;
+
+    settings = __deepMerge(this._settings, settings);
+
+    if (this.deamon) {
+      this.deamon.on('update', (data, metas) => {
+        // do not launch multiple processes at the same time
+        if (this._currentPromise) return;
+        // check if we have a "deamonUpdate" method
+        let params = Object.assign({}, argsObj);
+        if (this.deamonUpdate) {
+          params = this.deamonUpdate(params, data);
+        }
+        // run the process again
+        this.run(params, settings);
+        this.log({
+          clear: true,
+          temp: true,
+          value: `Restarting the process "<cyan>${
+            settings.name || settings.id
+          }</cyan>" automatically`
+        });
+      });
+      let watchParam;
+      for (let i = 0; i < settings.watchParams.length; i++) {
+        if (this.initialParams[settings.watchParams[i]] !== undefined) {
+          watchParam = settings.watchParams[i];
+          break;
+        }
+      }
+      this.deamon.watch(this.initialParams[watchParam]);
+      setTimeout(() => {
+        this.state = 'watching';
+      });
+    }
+
+    if (settings.autoRun) {
+      setTimeout(() => {
+        this.run(argsObj, settings);
+      });
+    }
   }
 
   /**
@@ -372,17 +287,17 @@ class SProcess extends __SPromise {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(processPromise, argsObj = {}, settings = {}) {
+  run(processPromise) {
     // check that their's not another processing process
     if (this._currentPromise) {
       if (this._settings.throw) {
         throw new __SError(
-          `Sorry but you cannot launch multiple processes in the sams <yellow>${this.constructor.name}</yellow> instance...`
+          `Sorry but you cannot launch multiple processes in the same <yellow>${this.constructor.name}</yellow> instance...`
         );
       } else {
         this.log({
           error: true,
-          value: `Sorry but you cannot launch multiple processes in the sams <yellow>${this.constructor.name}</yellow> instance...`
+          value: `Sorry but you cannot launch multiple processes in the same <yellow>${this.constructor.name}</yellow> instance...`
         });
       }
       return;
@@ -406,15 +321,19 @@ class SProcess extends __SPromise {
     this.duration = 0;
 
     // listen when the process close to calculate duration
-    processPromise.on('close,cancel,resolve,reject', () => {
+    processPromise.on('close,cancel,resolve,reject', (data, metas) => {
       this.endTime = Date.now();
       this.duration = this.endTime - this.startTime;
+
+      this.state = metas.stack !== 'reject' ? 'success' : 'error';
 
       if (this.deamon && this.deamon.state === 'watching') {
         this.log({
           value: this.deamon.logs.watching
         });
-        this.state = 'watching';
+        setTimeout(() => {
+          this.state = 'watching';
+        }, 1000);
       }
 
       this._currentPromise = null;
@@ -438,8 +357,9 @@ class SProcess extends __SPromise {
   log(...args) {
     // setTimeout(() => {
     args.forEach((arg) => {
-      if (!this._currentPromise) return;
-      this._currentPromise.trigger('log', arg);
+      this.trigger('log', arg);
+      // if (!this._currentPromise) return;
+      // this._currentPromise.trigger('log', arg);
     });
     // });
   }

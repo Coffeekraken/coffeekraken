@@ -2,6 +2,7 @@ const __SPromise = require('../promise/SPromise');
 const __SDeamonInterface = require('./interface/SDeamonInterface');
 const __deepMerge = require('../object/deepMerge');
 const __SProcess = require('../process/SProcess');
+const __onProcessExit = require('../process/onProcessExit');
 
 /**
  * @name                SDeamon
@@ -84,12 +85,16 @@ class SDeamon extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   on(stacks, callback) {
+    // console.log(stacks.join(','));
     if (typeof stacks === 'string')
       stacks = stacks.split(',').map((l) => l.trim());
     if (stacks.indexOf('update') !== -1) {
       stacks.splice(stacks.indexOf('update'), 1);
       stacks = [...stacks, ...this._settings.updateStacks];
     }
+    // __SProcess.triggerParent('log', {
+    //   value: 'cc'
+    // });
     return super.on(stacks.join(','), callback);
   }
 
@@ -125,6 +130,10 @@ class SDeamon extends __SPromise {
         this.state = 'error';
         this.trigger('state', this.state);
       });
+
+    __onProcessExit(() => {
+      watchPromise.cancel();
+    });
 
     return watchPromise;
   }

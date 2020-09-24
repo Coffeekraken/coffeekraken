@@ -15,6 +15,7 @@ const __SCliInterface = require('./interface/SCliInterface');
 const __SInterface = require('../class/SInterface');
 const __sugarHeading = require('../ascii/sugarHeading');
 const __SPromise = require('../promise/SPromise');
+const __SProcess = require('../process/SProcess');
 
 /**
  * @name                SCli
@@ -130,18 +131,8 @@ class SCli extends __SPromise {
           __SChildProcess.triggerParent(metas.stack, value, metas);
         });
       }
-
-      // Apply the SProcessInterface on the getted process
-      // __SProcessInterface.apply(this._processInstance);
     } else {
       const childProcess = new __SChildProcess(this.command, {
-        id: settings.id,
-        definitionObj: this.interface.definitionObj,
-        defaultParams: settings.defaultParams,
-        ...settings.childProcessSettings
-      });
-
-      console.log({
         id: settings.id,
         definitionObj: this.interface.definitionObj,
         defaultParams: settings.defaultParams,
@@ -153,11 +144,9 @@ class SCli extends __SPromise {
       });
 
       this._processInstance = childProcess;
+    }
 
-      // childProcess.on('*', (v, m) => {
-      //   console.log(m.stack);
-      // });
-
+    if (!__isChildProcess()) {
       if (settings.output) {
         if (__isClass(settings.output)) {
           const outputInstance = new settings.output(
@@ -311,7 +300,7 @@ class SCli extends __SPromise {
           this._settings.name || this._settings.id
         }</primary>" process...`
       };
-      this._runningProcess.trigger('log', launchingLogObj);
+      this._processInstance.trigger('log', launchingLogObj);
     }
 
     // save running process params

@@ -8,6 +8,7 @@ const __toString = require('../string/toString');
 const __parse = require('../string/parse');
 const __blessed = require('blessed');
 const __color = require('../color/color');
+const __SIpc = require('../ipc/SIpc');
 
 /**
  * @name                    handleError
@@ -31,8 +32,8 @@ module.exports = function handleError() {
   if (process.env.NODE_ENV === 'test') return;
 
   if (__isChildProcess()) {
-    // process.on('uncaughtException', __handleChildProcessErrors);
-    // process.on('unhandledRejection', __handleChildProcessErrors);
+    process.on('uncaughtException', __handleChildProcessErrors);
+    process.on('unhandledRejection', __handleChildProcessErrors);
   } else {
     process.on('uncaughtException', __handleMainProcessErrors);
     process.on('unhandledRejection', __handleMainProcessErrors);
@@ -96,14 +97,17 @@ function createErrorPanel(error) {
   $bg.focus();
 }
 
-// function __handleChildProcessErrors(error) {
-//   if (error.toString().includes(`Cannot read property 'itop' of null`)) return;
-//   if (error.instanceId) return;
-//   // error = error.toString();
-//   if (!error) return;
-//   console.log(__toString(error));
-//   process.exit(1);
-// }
+function __handleChildProcessErrors(error) {
+  if (error.toString().includes(`Cannot read property 'itop' of null`)) return;
+  if (error.instanceId) return;
+  // // error = error.toString();
+  if (!error) return;
+
+  __SIpc.trigger('error', error.toString());
+
+  console.log(__toString(error));
+  // process.exit(1);
+}
 
 function __handleMainProcessErrors(error) {
   // @TODO     find a better solution to avoid blessed issues

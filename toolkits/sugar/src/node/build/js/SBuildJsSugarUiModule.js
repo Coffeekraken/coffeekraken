@@ -30,20 +30,11 @@ module.exports = class SBuildJsSugarUiModule extends __SSugarUiModule {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   constructor(params = {}, settings = {}) {
-    super(
-      params,
-      __deepMerge(
-        {
-          autorun: true
-        },
-        settings
-      )
-    );
-    this.ready();
+    super(params, __deepMerge({}, settings));
   }
 
   /**
-   * @name          run
+   * @name          start
    * @type          Function
    *
    * This method is the one called by the SugarUi main class when all is ready
@@ -51,8 +42,11 @@ module.exports = class SBuildJsSugarUiModule extends __SSugarUiModule {
    *
    * @since       2.0.0
    */
-  run() {
-    this._process = new __SBuildJsProcess(this.params, this._settings);
-    return super.run(this._process);
+  start() {
+    const pro = new __SBuildJsProcess(
+      this.params,
+      this._settings.processSettings
+    );
+    return super.start(pro);
   }
 };

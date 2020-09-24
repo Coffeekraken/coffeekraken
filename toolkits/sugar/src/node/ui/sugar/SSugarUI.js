@@ -6,7 +6,6 @@ const __isClass = require('../../is/class');
 const __SError = require('../../error/SError');
 const __SSugarUiModule = require('./SSugarUiModule');
 const __SComponent = require('../../blessed/SComponent');
-const SSugarUiModule = require('./SSugarUiModule');
 
 /**
  * @name            SSugarUi
@@ -163,12 +162,14 @@ module.exports = class SSugarUi extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _modulesReady() {
-    for (const [key, moduleObj] of Object.entries(this._modulesObjs)) {
-      if (moduleObj.instance.autorun) {
-        moduleObj.instance.run();
+    setTimeout(() => {
+      for (const [key, moduleObj] of Object.entries(this._modulesObjs)) {
+        if (moduleObj.instance.autorun) {
+          moduleObj.instance.run();
+        }
       }
-    }
-    this.state = 'ready';
+      this.state = 'ready';
+    }, 20);
   }
 
   /**
@@ -226,7 +227,8 @@ module.exports = class SSugarUi extends __SPromise {
       }
       const settings = {
         id: moduleObj.id,
-        name: moduleObj.name
+        name: moduleObj.name,
+        shortcuts: moduleObj.shortcuts
       };
 
       const moduleInstance = new moduleClass(moduleObj.params, settings);

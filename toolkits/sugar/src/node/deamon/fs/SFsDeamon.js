@@ -1,6 +1,7 @@
 const __SPromise = require('../../promise/SPromise');
 const __deepMerge = require('../../object/deepMerge');
 const __SFsDeamonCli = require('./SFsDeamonCli');
+const __SFsDeamonProcess = require('./SFsDeamonProcess');
 const __SDeamon = require('../SDeamon');
 const __toString = require('../../string/toString');
 const __onProcessExit = require('../../process/onProcessExit');
@@ -71,8 +72,8 @@ module.exports = class SFsDeamon extends __SDeamon {
 
     // handle cancel
     this.on('cancel', () => {
-      this._watchPromisesStack.forEach((cli) => {
-        cli.kill();
+      this._watchPromisesStack.forEach((watchProcess) => {
+        watchProcess.kill();
       });
       this._watchPromisesStack = []; // just to be sure
     });
@@ -96,24 +97,18 @@ module.exports = class SFsDeamon extends __SDeamon {
   watch(watch, settings = {}) {
     settings = __deepMerge(this._settings, settings);
     watch = typeof watch === 'string' ? watch : watch.watch;
-    const cli = new __SFsDeamonCli({
-      ...settings.cliSettings,
+    const watchProcess = new __SFsDeamonProcess({}, {});
+    watchProcess.run({
       watch
     });
-    cli.run({
-      watch
-    });
-    __onProcessExit(() => {
-      cli.kill();
-    });
-    cli.on('cancel', () => {
-      const idx = this._watchPromisesStack.indexOf(cli);
+    watchProcess.on('cancel', () => {
+      const idx = this._watchPromisesStack.indexOf(watchProcess);
       if (idx === -1) return;
       this._watchPromisesStack.splice(idx, 1);
     });
     // save the watch process in the stack for later
-    this._watchPromisesStack.push(cli);
+    this._watchPromisesStack.push(watchProcess);
     // return the current promise
-    return super.watch(cli);
+    return super.watch(watchProcess);
   }
 };

@@ -2,6 +2,8 @@ const __SPromise = require('../promise/SPromise');
 const __uniqid = require('../string/uniqid');
 const __keypress = require('keypress');
 const __activeSpace = require('../core/activeSpace');
+const __SIpc = require('../ipc/SIpc');
+const __isChildProcess = require('../is/childProcess');
 
 /**
  * @name                hotkey
@@ -28,118 +30,143 @@ const __activeSpace = require('../core/activeSpace');
  */
 const hotkeyStack = {};
 let isListenerAlreadyAdded = false;
-module.exports = function hotkey(key, settings = {}) {
+function hotkey(key, settings = {}) {
   // extends the settings
   settings = {
     once: false,
     splitKey: '+',
     activeSpace: null,
     disableWhenEditingForm: true,
+    ipc: true,
     ...settings
   };
 
-  // generate a new uniqid for this listener
-  const uniqid = __uniqid();
+  if (!__isChildProcess()) {
+    const uniqid = `hotkey.${__uniqid()}`;
 
-  if (!isListenerAlreadyAdded) {
-    isListenerAlreadyAdded = true;
+    if (!isListenerAlreadyAdded) {
+      isListenerAlreadyAdded = true;
 
-    __keypress(process.stdin);
+      __keypress(process.stdin);
 
-    process.stdin.on('keypress', function (ch, keyObj) {
-      if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
-        console.log('FF');
-        // process.stdin.pause();
-        process.emit('custom_exit');
-      }
-
-      // loop on each promises registered
-      Object.keys(hotkeyStack).forEach((id) => {
-        const obj = hotkeyStack[id];
-        if (!obj || !obj.key) return;
-        // check if an activeSpace is specified
-        if (obj.settings.disableWhenEditingForm) {
-          if (__activeSpace.is('**.form.*')) return;
-        }
-        if (obj.settings.activeSpace) {
-          if (!__activeSpace.is(obj.settings.activeSpace)) return;
-        }
-        // check if an "active" function exists
-        if (obj.settings.active && typeof obj.settings.active === 'function') {
-          if (!obj.settings.active(obj.key)) return;
+      process.stdin.on('keypress', function (ch, keyObj) {
+        if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
+          // process.stdin.pause();
+          process.emit('custom_exit');
         }
 
-        obj.key
-          .toString()
-          .split(',')
-          .map((m) => m.trim())
-          .forEach((key) => {
-            if (ch && ch.toString() === key) {
-              obj.promise.trigger('key', {
-                key,
-                ctrl: keyObj ? keyObj.ctrl : false,
-                meta: keyObj ? keyObj.meta : false,
-                shift: keyObj ? keyObj.shift : false
-              });
-              obj.promise.trigger('press', {
-                key,
-                ctrl: keyObj ? keyObj.ctrl : false,
-                meta: keyObj ? keyObj.meta : false,
-                shift: keyObj ? keyObj.shift : false
-              });
-              return;
-            }
+        // loop on each promises registered
+        Object.keys(hotkeyStack).forEach((id) => {
+          const obj = hotkeyStack[id];
+          if (!obj || !obj.key) return;
+          // check if an activeSpace is specified
+          if (obj.settings.disableWhenEditingForm) {
+            if (__activeSpace.is('**.form.*')) return;
+          }
+          if (obj.settings.activeSpace) {
+            if (!__activeSpace.is(obj.settings.activeSpace)) return;
+          }
+          // check if an "active" function exists
+          if (
+            obj.settings.active &&
+            typeof obj.settings.active === 'function'
+          ) {
+            if (!obj.settings.active(obj.key)) return;
+          }
 
-            if (!keyObj) return;
+          obj.key
+            .toString()
+            .split(',')
+            .map((m) => m.trim())
+            .forEach((key) => {
+              if (ch && ch.toString() === key) {
+                obj.promise.trigger('key', {
+                  key,
+                  ctrl: keyObj ? keyObj.ctrl : false,
+                  meta: keyObj ? keyObj.meta : false,
+                  shift: keyObj ? keyObj.shift : false
+                });
+                obj.promise.trigger('press', {
+                  key,
+                  ctrl: keyObj ? keyObj.ctrl : false,
+                  meta: keyObj ? keyObj.meta : false,
+                  shift: keyObj ? keyObj.shift : false
+                });
+                return;
+              }
 
-            let pressedKey = keyObj.name;
-            if (keyObj.ctrl)
-              pressedKey = `ctrl${obj.settings.splitKey}${pressedKey}`;
-            if (keyObj.shift)
-              pressedKey = `shift${obj.settings.splitKey}${pressedKey}`;
-            if (keyObj.meta)
-              pressedKey = `alt${obj.settings.splitKey}${pressedKey}`;
+              if (!keyObj) return;
 
-            if (pressedKey === key) {
-              obj.promise.trigger('key', {
-                key,
-                ctrl: keyObj ? keyObj.ctrl : false,
-                meta: keyObj ? keyObj.meta : false,
-                shift: keyObj ? keyObj.shift : false
-              });
-              obj.promise.trigger('press', {
-                key,
-                ctrl: keyObj ? keyObj.ctrl : false,
-                meta: keyObj ? keyObj.meta : false,
-                shift: keyObj ? keyObj.shift : false
-              });
-            }
-          });
+              let pressedKey = keyObj.name;
+              if (keyObj.ctrl)
+                pressedKey = `ctrl${obj.settings.splitKey}${pressedKey}`;
+              if (keyObj.shift)
+                pressedKey = `shift${obj.settings.splitKey}${pressedKey}`;
+              if (keyObj.meta)
+                pressedKey = `alt${obj.settings.splitKey}${pressedKey}`;
+
+              if (pressedKey === key) {
+                obj.promise.trigger('key', {
+                  key,
+                  ctrl: keyObj ? keyObj.ctrl : false,
+                  meta: keyObj ? keyObj.meta : false,
+                  shift: keyObj ? keyObj.shift : false
+                });
+                obj.promise.trigger('press', {
+                  key,
+                  ctrl: keyObj ? keyObj.ctrl : false,
+                  meta: keyObj ? keyObj.meta : false,
+                  shift: keyObj ? keyObj.shift : false
+                });
+              }
+            });
+        });
       });
-    });
+    }
 
-    // process.stdin.setRawMode(true);
-    // process.stdin.resume();
+    const promise = new __SPromise()
+      .on('key,press', (key) => {
+        if (settings.once) {
+          promise.cancel();
+        }
+      })
+      .on('finally', () => {
+        // delete the callback from the stack
+        delete hotkeyStack[uniqid];
+      });
+
+    // save the trigger function in the stack
+    hotkeyStack[uniqid] = {
+      key,
+      promise,
+      settings
+    };
+
+    // return the promise
+    return promise;
+  } else if (settings.ipc) {
+    const promise = new __SPromise();
+    // child process
+    __SIpc.on(`keypress.${key}`, (keyObj) => {
+      promise.trigger('key', keyObj);
+      promise.trigger('press', keyObj);
+    });
+    setTimeout(() => {
+      __SIpc.trigger(`keypress`, {
+        key,
+        settings
+      });
+    }, 2000);
+    return promise;
   }
+}
 
-  const promise = new __SPromise()
-    .on('key,press', (key) => {
-      if (settings.once) {
-        promise.cancel();
-      }
-    })
-    .on('finally', () => {
-      // delete the callback from the stack
-      delete hotkeyStack[uniqid];
+if (!__isChildProcess()) {
+  __SIpc.on('keypress', (keyObj) => {
+    hotkey(keyObj.key).on('press', (pressedKeyObj) => {
+      __SIpc.trigger(`keypress.${keyObj.key}`, pressedKeyObj);
     });
+  });
+}
 
-  // save the trigger function in the stack
-  hotkeyStack[uniqid] = {
-    key,
-    promise,
-    settings
-  };
-
-  // return the promise
-  return promise;
-};
+module.exports = hotkey;

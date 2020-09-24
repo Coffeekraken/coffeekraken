@@ -53,12 +53,12 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
       {
         filesResolver: __SFsFilesResolverStreamAction,
         // fsCache: __SFsCacheStreamAction,
-        readFile: __SFsReadFileStreamAction
+        readFile: __SFsReadFileStreamAction,
         // sugarJson: __SSugarJsonStreamAction,
-        // webpack: __SWebpackStreamAction,
-        // terser: __STerserStreamAction,
-        // fsOutput: __SFsOutputStreamAction,
-        // docMap: __SDocMapStreamAction
+        webpack: __SWebpackStreamAction,
+        terser: __STerserStreamAction,
+        fsOutput: __SFsOutputStreamAction,
+        docMap: __SDocMapStreamAction
       },
       __deepMerge(
         {

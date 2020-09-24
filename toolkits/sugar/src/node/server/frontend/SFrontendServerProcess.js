@@ -41,6 +41,9 @@ module.exports = class SFrontendServerProcess extends __SProcess {
    */
   run(argsObj) {
     this._frontendServerProcess = __frontendServer(argsObj);
+    setTimeout(() => {
+      this.state = 'running';
+    });
     return super.run(this._frontendServerProcess);
   }
 

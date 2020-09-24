@@ -41,7 +41,14 @@ module.exports = {
       interface: `${__packageRoot(
         __dirname
       )}/src/node/build/js/interface/SBuildJsInterface`,
-      params: '@config.build.js'
+      params: '@config.build.js',
+      shortcuts: {
+        'ctrl+a': {
+          name: 'Build all',
+          params: '@config.build.js',
+          settings: {}
+        }
+      }
     }
   }
 };

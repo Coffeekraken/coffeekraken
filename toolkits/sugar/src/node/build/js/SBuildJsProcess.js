@@ -2,7 +2,6 @@ const __SProcess = require('../../process/SProcess');
 const __SBuildJsActionsStream = require('./SBuildJsActionsStream');
 const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
 const __deepMerge = require('../../object/deepMerge');
-const SProcess = require('../../process/SProcess');
 
 /**
  * @name            SBuildJsProcess
@@ -54,14 +53,12 @@ module.exports = class SBuildJsProcess extends __SProcess {
    * @return    {Object|Boolean}                      The new object to pass to the ```run``` method, or ```false``` if you don't want to trigger a ```run```
    */
   deamonUpdate(initialParams = {}, deamonUpdateObj = {}) {
-    SProcess.triggerParent('log', {
-      value: initialParams
-    });
+    initialParams.input = deamonUpdateObj.path;
     return initialParams;
   }
 
   /**
-   * @name              run
+   * @name              _run
    * @type              Function
    *
    * Method that execute the frontend server code, listen for errors, etc...

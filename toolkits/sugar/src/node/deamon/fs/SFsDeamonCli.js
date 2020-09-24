@@ -62,8 +62,8 @@ module.exports = class SFsDeamonCli extends __SCli {
       initialParams,
       __deepMerge(
         {
-          id: 'deamon.fs',
-          name: 'Filesystem Deamon'
+          id: 'deamon.fs.cli',
+          name: 'Filesystem Deamon CLI'
         },
         settings
       )

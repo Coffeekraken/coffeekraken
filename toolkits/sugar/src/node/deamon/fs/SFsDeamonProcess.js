@@ -87,7 +87,6 @@ module.exports = class SFsDeamonProcess extends __SProcess {
    */
   run(argsObj, settings = {}) {
     settings = __deepMerge(this._settings, settings);
-
     const promise = new __SPromise(
       (resolve, reject, trigger, cancel) => {
         const runningTests = {};
@@ -112,7 +111,7 @@ module.exports = class SFsDeamonProcess extends __SProcess {
           })
           .on('change', (filepath) => {
             const file = this._getFileInstanceFromPath(filepath);
-
+            delete file._settings;
             this.log({
               group: 'Updated files',
               value: `File updated: "<yellow>${file.path.replace(
@@ -120,12 +119,11 @@ module.exports = class SFsDeamonProcess extends __SProcess {
                 ''
               )}</yellow>" <cyan>${file.size}</cyan>mb`
             });
-
             trigger('update', file);
           })
           .on('add', (filepath) => {
             const file = this._getFileInstanceFromPath(filepath);
-
+            delete file._settings;
             this.log({
               group: 'Added files',
               value: `File added: "<green>${file.path.replace(
@@ -147,13 +145,16 @@ module.exports = class SFsDeamonProcess extends __SProcess {
               )}</red>" <cyan>${file.size}</cyan>mb`
             });
 
-            trigger('unlink', file);
+            trigger('unlink', {
+              path: filepath
+            });
           });
       },
       {
         id: settings.id || 'deamon.fs'
       }
     );
+
     return super.run(promise);
   }
 

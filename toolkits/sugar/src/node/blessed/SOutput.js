@@ -201,6 +201,7 @@ module.exports = class SOutput extends __SComponent {
           this.$logBox.top = 0;
         }
         this.$logBoxChilds = [];
+        this.$logBox.setScrollPerc(0);
         this.update();
       }
     }
@@ -381,18 +382,18 @@ module.exports = class SOutput extends __SComponent {
       // replace the package root in the log
       // logObj.value = logObj.value.split(`${__packageRoot()}/`).join('');
 
-      if (logObj.module && typeof logObj.module === 'object') {
-        if (logObj.module.id && logObj.module.id !== this._currentModuleId) {
-          this._currentModuleId = logObj.module.id;
-          this._content.push({
-            value: __parseMarkdown(
-              `<bgPrimary><black> ${logObj.module.name || logObj.module.id} (${
-                logObj.module.id || logObj.module.idx
-              }) </black></bgPrimary>`
-            )
-          });
-        }
-      }
+      // if (logObj.module && typeof logObj.module === 'object') {
+      //   if (logObj.module.id && logObj.module.id !== this._currentModuleId) {
+      //     this._currentModuleId = logObj.module.id;
+      //     this._content.push({
+      //       value: __parseMarkdown(
+      //         `<bgPrimary><black> ${logObj.module.name || logObj.module.id} (${
+      //           logObj.module.id || logObj.module.idx
+      //         }) </black></bgPrimary>`
+      //       )
+      //     });
+      //   }
+      // }
 
       if (logObj.type && logObj.type === 'header') {
         // generate the header box
@@ -834,7 +835,7 @@ module.exports = class SOutput extends __SComponent {
   _createHeaderBox(logObj) {
     this.$headerBox = __blessed.box({
       width: 'shrink',
-      height: 1,
+      height: 8,
       top: 0,
       left: 1,
       right: 1,
@@ -862,7 +863,7 @@ module.exports = class SOutput extends __SComponent {
 
     const $line = __blessed.box({
       height: 1,
-      bottom: 1,
+      bottom: -1,
       left: 0,
       style: {
         fg: 'yellow'
@@ -873,7 +874,7 @@ module.exports = class SOutput extends __SComponent {
 
     this.$headerBox.on('attach', () => {
       setTimeout(() => {
-        this.$headerBox.height = this.$headerBox.getScrollHeight() + 4;
+        // this.$headerBox.height = this.$headerBox.getScrollHeight() + 4;
         $line.setContent('_'.repeat(this.$headerBox.width));
         this.$headerBox.append($line);
       });
@@ -881,7 +882,7 @@ module.exports = class SOutput extends __SComponent {
 
     this.append(this.$headerBox);
 
-    this.$logBox.top = this.$headerBox.height + 1;
+    this.$logBox.top = this.$headerBox.height - 2;
 
     return this.$headerBox;
   }

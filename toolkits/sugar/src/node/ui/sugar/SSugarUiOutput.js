@@ -1,3 +1,4 @@
+const __upperFirst = require('../../string/upperFirst');
 const __SComponent = require('../../blessed/SComponent');
 const __sugarHeading = require('../../ascii/sugarHeading');
 const __sugarConfig = require('../../config/sugar');
@@ -11,6 +12,7 @@ const __hotkey = require('../../keyboard/hotkey');
 const __packageJson = require('../../package/json');
 const __SNotification = require('../../blessed/notification/SNotification');
 const __ora = require('ora');
+const __SIpc = require('../../ipc/SIpc');
 
 /**
  * @name                SSugarUiOutput
@@ -42,17 +44,40 @@ module.exports = class SSugarUiOutput extends __SComponent {
       screen: true
     });
 
-    this.$welcome = this._initWelcome(initialParams);
-    this.$console = this._initConsole(source);
+    this._sources = source;
+    this._initialParams = Object.assign({}, initialParams);
 
-    __hotkey('c').on('press', () => {
-      if (!this.$console.parent) {
-        this.append(this.$console);
+    this._settings = __sugarConfig('sugar-ui');
+    this._serverSettings = this._initialParams.modules[
+      this._settings.welcome.serverModule
+    ];
+    this._modules = this._settings.modules;
+
+    this.$welcome = this._initWelcome(initialParams);
+    this.$modules = this._initConsoles();
+    this.$bottomBar = this._initBottomBar();
+
+    __hotkey('escape').on('press', () => {
+      if (this.$modules.parent) {
+        this.$modules.detach();
       }
     });
-    __hotkey('escape').on('press', () => {
-      if (this.$console.parent) {
-        this.$console.detach();
+
+    Object.keys(this._modules).forEach((moduleName, i) => {
+      const moduleObj = this._modules[moduleName];
+      __hotkey(`${i + 1}`).on('press', () => {
+        if (!this._modulesReady) return;
+        this._showModule(moduleObj.id);
+        __SIpc.trigger('sugar.ui.displayedModule', moduleObj.id);
+      });
+      // check if are some shortcuts
+      if (moduleObj.shortcuts) {
+        // Object.keys(moduleObj.shortcuts).forEach((shortcut) => {
+        //   const shortcutObj = moduleObj.shortcuts[shortcut];
+        //   __hotkey(shortcut).on('press', () => {
+        //     if (this._getDisplayedModuleObj().id !== moduleObj.id) return;
+        //   });
+        // });
       }
     });
 
@@ -63,8 +88,22 @@ module.exports = class SSugarUiOutput extends __SComponent {
       }
     });
 
+    source.on('module.log', (data, metas) => {
+      const moduleObj = this._findModuleObjById(data.module.id);
+      if (!moduleObj || !moduleObj.$console) return;
+      moduleObj.$console.log(data);
+    });
+
     source.on('module.start', (e, m) => {
-      if (this.$console.parent) return;
+      const moduleObj = this._findModuleObjById(e.module.id);
+      if (moduleObj && moduleObj.$status) {
+        clearTimeout(moduleObj.statusTimeout);
+        moduleObj.$status.style.bg = 'cyan';
+        this.update();
+      }
+
+      if (this._getDisplayedModuleObj().id === moduleObj.id) return;
+
       let msg = e.value || 'Process starting...';
       if (msg.length > 36) msg = msg.slice(0, 33) + '...';
       const $startNotification = new __SNotification(
@@ -73,17 +112,35 @@ module.exports = class SSugarUiOutput extends __SComponent {
         {
           bg: 'yellow',
           onClick: () => {
-            if (!this.$console.parent) {
-              this.append(this.$console);
-            }
+            this._showModule(moduleObj.id);
           }
         }
       );
       this.append($startNotification);
     });
 
-    source.on('module.complete', (e, m) => {
-      if (this.$console.parent) return;
+    source.on('module.state', (e, m) => {
+      const moduleObj = this._modules[e.module.idx];
+      if (!moduleObj.spinner) moduleObj.spinner = __ora();
+      if (!moduleObj) return;
+
+      moduleObj.state = e.value;
+    });
+
+    source.on('module.success', (e, m) => {
+      const moduleObj = this._findModuleObjById(e.module.id);
+      if (moduleObj && moduleObj.$status) {
+        clearTimeout(moduleObj.statusTimeout);
+        moduleObj.$status.style.bg = 'green';
+        this.update();
+        moduleObj.statusTimeout = setTimeout(() => {
+          moduleObj.$status.style.bg = 'blue';
+          this.update();
+        }, 2000);
+      }
+
+      if (this._getDisplayedModuleObj().id === moduleObj.id) return;
+
       let msg = e.value || 'Process finished successfully';
       if (msg.length > 36) msg = msg.slice(0, 33) + '...';
       const $successNotification = new __SNotification(
@@ -92,9 +149,7 @@ module.exports = class SSugarUiOutput extends __SComponent {
         {
           bg: 'green',
           onClick: () => {
-            if (!this.$console.parent) {
-              this.append(this.$console);
-            }
+            this._showModule(moduleObj.id);
           }
         }
       );
@@ -102,7 +157,17 @@ module.exports = class SSugarUiOutput extends __SComponent {
     });
 
     source.on('module.error', (e) => {
-      if (this.$console.parent) return;
+      if (this.$modules.parent) return;
+
+      const moduleObj = this._findModuleObjById(e.module.id);
+      if (moduleObj && moduleObj.$status) {
+        clearTimeout(moduleObj.statusTimeout);
+        moduleObj.$status.style.bg = 'red';
+        this.update();
+      }
+
+      if (this._getDisplayedModuleObj().id === moduleObj.id) return;
+
       let msg = e.value;
       if (msg.length > 36) msg = msg.slice(0, 33) + '...';
       const $errorNotification = new __SNotification(
@@ -111,9 +176,7 @@ module.exports = class SSugarUiOutput extends __SComponent {
         {
           bg: 'red',
           onClick: () => {
-            if (!this.$console.parent) {
-              this.append(this.$console);
-            }
+            this._showModule(moduleObj.id);
           }
         }
       );
@@ -121,12 +184,138 @@ module.exports = class SSugarUiOutput extends __SComponent {
       this.append($errorNotification);
     });
 
+    this.append(this.$bottomBar);
     this.append(this.$welcome);
+
+    // update bottom bar
+    setInterval(() => {
+      this._updateBottomBar();
+    }, 100);
+  }
+
+  _getDisplayedModuleObj() {
+    if (!this._displayedModuleId) return {};
+    if (!this.$modules.parent) return {};
+    return this._findModuleObjById(this._displayedModuleId);
+  }
+
+  _showModule(moduleId) {
+    const moduleObj = this._findModuleObjById(moduleId);
+    if (!moduleObj || !moduleObj.$container) return;
+
+    this._displayedModuleId = moduleObj.id;
+
+    this.$modules.children.forEach(($child) => {
+      $child.detach();
+    });
+
+    if (!this.$modules.parent) {
+      this.append(this.$modules);
+    }
+
+    this.$modules.append(moduleObj.$container);
+  }
+
+  _updateBottomBar() {
+    let content = '';
+    Object.keys(this._initialParams.modules).forEach((moduleName, i) => {
+      const moduleObj = this._modules[moduleName];
+      let bg, fg;
+      switch (moduleObj.state) {
+        case 'success':
+        case 'complete':
+          bg = 'green';
+          fg = 'black';
+          break;
+        case 'running':
+        case 'start':
+          bg = 'blue';
+          fg = 'white';
+          break;
+        case 'watching':
+          bg = 'black';
+          fg = 'white';
+          break;
+        case 'error':
+          bg = 'red';
+          fg = 'black';
+          break;
+        case 'ready':
+          bg = 'black';
+          fg = 'white';
+          break;
+        default:
+          bg = 'yellow';
+          fg = 'black';
+          break;
+      }
+
+      let spinner = '';
+      switch (moduleObj.state) {
+        case 'watching':
+        case 'running':
+        case 'start':
+          spinner = `${moduleObj.spinner.frame()}`;
+          break;
+        case 'success':
+        case 'complete':
+          spinner = `✓ `;
+          break;
+        case 'error':
+          spinner = '✖ ';
+          break;
+        default:
+          spinner = `› `;
+          break;
+      }
+
+      const moduleString = ` ${spinner}${moduleObj.id} `
+        .replace('[36m', '')
+        .replace('[39m', '')
+        .split('')
+        .map((char) => {
+          return `<bg${__upperFirst(
+            bg
+          )}><${fg}>${char}</${fg}></bg${__upperFirst(bg)}>`;
+        })
+        .join('');
+      content += moduleString;
+    });
+
+    this.$bottomBar.setContent(__parseHtml(content));
+  }
+
+  _findModuleObjById(id) {
+    for (let i = 0; i < Object.keys(this._modules).length; i++) {
+      const moduleObj = this._modules[Object.keys(this._modules)[i]];
+      if (moduleObj.id === id) return moduleObj;
+    }
+    return false;
   }
 
   /**
-   * @name
+   * @name              _initBottomBar
+   * @type              Function
+   * @private
+   *
+   * This method init the bottom screen bar
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _initBottomBar() {
+    const $bar = __blessed.box({
+      bottom: 0,
+      left: 0,
+      right: 0,
+      height: 1,
+      style: {
+        bg: 'yellow'
+      }
+    });
+
+    return $bar;
+  }
 
   /**
    * @name              _initWelcome
@@ -138,12 +327,9 @@ module.exports = class SSugarUiOutput extends __SComponent {
    * @param         {Object}        initialParams       An object of initial params used to launch the sugar ui
    *
    * @since         2.0.0
-   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _initWelcome(initialParams) {
-    const welcomeSettings = __sugarConfig('sugar-ui.welcome');
-    const serverSettings = initialParams.modules[welcomeSettings.serverModule];
-
     const $centeredBox = __blessed.box({
       top: 'center',
       left: 'center',
@@ -196,12 +382,11 @@ module.exports = class SSugarUiOutput extends __SComponent {
           ...projectLines,
           ``,
           `WebUI <green>started</green> at`,
-          `<bgYellow><black> http://${serverSettings.hostname}:${serverSettings.port} </black></bgYellow>`,
+          `<bgYellow><black> http://${this._serverSettings.hostname}:${this._serverSettings.port} </black></bgYellow>`,
           '',
-          `Display console <magenta>(c)</magenta>`,
           `<cyan>${Object.keys(initialParams.modules).length}</cyan> module${
             Object.keys(initialParams.modules).length > 1 ? 's' : ''
-          } loaded <magenta>(m)</magenta>`
+          } loaded`
         ];
       }
       let larger = 0;
@@ -223,7 +408,7 @@ module.exports = class SSugarUiOutput extends __SComponent {
     };
     setInterval(() => {
       updateContent();
-    }, 10);
+    }, 100);
 
     $centeredBox.append($logo);
     $centeredBox.append($metasBox);
@@ -232,7 +417,7 @@ module.exports = class SSugarUiOutput extends __SComponent {
   }
 
   /**
-   * @name             _initConsole
+   * @name             _initConsoles
    * @type              Function
    * @private
    *
@@ -243,10 +428,10 @@ module.exports = class SSugarUiOutput extends __SComponent {
    * @since             2.0.0
    *
    */
-  _initConsole(source) {
-    const $console = new __SOutput(source, {
+  _initConsoles() {
+    const $consolesContainer = __blessed.box({
       width: '100%',
-      height: '100%',
+      height: '100%-1',
       top: 0,
       left: 0,
       right: 0,
@@ -271,6 +456,73 @@ module.exports = class SSugarUiOutput extends __SComponent {
         bottom: 2
       }
     });
-    return $console;
+
+    Object.keys(this._modules).forEach((moduleName) => {
+      const moduleObj = this._modules[moduleName];
+
+      const $container = __blessed.box({
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '100%',
+        style: {}
+      });
+
+      const $topBar = __blessed.box({
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 3,
+        style: {
+          bg: 'black'
+        },
+        padding: {
+          top: 1,
+          left: 2,
+          right: 2
+        },
+        content: __parseHtml(
+          `<yellow>${moduleObj.name}</yellow> | <white>${moduleObj.id}</white>`
+        )
+      });
+
+      const $console = new __SOutput([], {
+        width: '100%',
+        height: '100%-3',
+        top: 3,
+        left: 0,
+        right: 0,
+        mouse: true,
+        keys: true,
+        clickable: false,
+        scrollable: true,
+        scrollbar: {
+          ch: ' ',
+          inverse: true
+        },
+        style: {
+          fg: 'white',
+          scrollbar: {
+            bg: __color('terminal.primary').toString()
+          }
+        },
+        padding: {
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 2
+        }
+      });
+
+      $container.append($console);
+      $container.append($topBar);
+
+      moduleObj.$container = $container;
+      moduleObj.$topBar = $topBar;
+      moduleObj.$console = $console;
+    });
+
+    return $consolesContainer;
   }
 };

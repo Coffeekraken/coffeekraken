@@ -3,7 +3,8 @@ const __SPromise = require('../promise/SPromise');
 const __IPC = require('node-ipc').IPC;
 const __deepMerge = require('../object/deepMerge');
 const __isChildProcess = require('../is/childProcess');
-
+const __onProcessExit = require('../process/onProcessExit');
+const __getFreePort = require('../http/getFreePort');
 /**
  * @name            SIpc
  * @namespace       sugar.node.ipc
@@ -18,6 +19,7 @@ const __isChildProcess = require('../is/childProcess');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+let __globalIpcInstance = null;
 class SIpc {
   /**
    * @name                  _settings
@@ -44,6 +46,70 @@ class SIpc {
   _ipcInstance = null;
 
   /**
+   * @name        _socketsByProcesses
+   * @type        Object
+   * @private
+   *
+   * Store all the sockets by processes
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _socketsByProcesses = {};
+
+  /**
+   * @name      isServer
+   * @type      Function
+   * @static
+   *
+   * This static method return true if the global ipc instance is the main server, false if not
+   *
+   * @return    {Boolean}       true if the global ipc instance is the server, false if not
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static async isServer() {
+    const globalIpcInstance = await SIpc.getGlobalIpcInstance();
+    return globalIpcInstance.isServer();
+  }
+
+  /**
+   * @name              getGlobalServerId
+   * @type              Function
+   * @static
+   *
+   * This static method returns you the global ipc server id
+   *
+   * @return    {String}      The global ipc server id
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static getGlobalServerId() {
+    if (!process.env.GLOBAL_IPC_SERVER_ID) {
+      process.env.GLOBAL_IPC_SERVER_ID = `SIpc.${process.pid}`;
+    }
+    return process.env.GLOBAL_IPC_SERVER_ID;
+  }
+
+  /**
+   * @name          initGlobalInstance
+   * @type          Function
+   * @async
+   * @static
+   *
+   * This static method ensure that the global IPC instance is correctly inited
+   * to be available later quickly
+   *
+   * @since         2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  static initGlobalInstance() {
+    return SIpc.getGlobalIpcInstance();
+  }
+
+  /**
    * @name              getGlobalIpcInstance
    * @type              Function
    * @async
@@ -57,30 +123,23 @@ class SIpc {
    */
   static getGlobalIpcInstance(settings = {}) {
     return new __SPromise(async (resolve, reject) => {
-      if (global.globalIpcInstance) {
-        return resolve(global.globalIpcInstance);
+      if (__globalIpcInstance) {
+        return resolve(__globalIpcInstance);
       }
 
-      if (!process.env.GLOBAL_SIPC_INSTANCE_ID) {
-        process.env.GLOBAL_SIPC_INSTANCE_ID = `globalSIpcInstance.${__uniqid()}`;
-      }
+      const globalServerId = SIpc.getGlobalServerId();
 
-      const ipcInstance = new SIpc(
-        __deepMerge(
-          {
-            id: process.env.GLOBAL_SIPC_INSTANCE_ID
-          },
-          settings
-        )
-      );
+      // if (!__getGlobalIpcInstancePromises.length) {
+      const ipcInstance = new SIpc(__deepMerge({}, settings));
+
+      __globalIpcInstance = ipcInstance;
 
       if (__isChildProcess()) {
-        // await ipcInstance.connect(process.env.GLOBAL_SIPC_INSTANCE_ID);
+        await ipcInstance.connect(globalServerId);
       } else {
         await ipcInstance.start();
       }
 
-      global.ipcInstance = ipcInstance;
       resolve(ipcInstance);
     });
   }
@@ -136,7 +195,13 @@ class SIpc {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    this._settings = __deepMerge({}, settings);
+    this._settings = __deepMerge(
+      {
+        id: `SIpc.${process.pid}`,
+        silent: true
+      },
+      settings
+    );
 
     // create the new ipc instance
     this._ipcInstance = new __IPC();
@@ -174,6 +239,20 @@ class SIpc {
   }
 
   /**
+   * @name              id
+   * @type              String
+   * @get
+   *
+   * Access the id.
+   *
+   * @since             2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  get id() {
+    return this._ipcInstance.config.id;
+  }
+
+  /**
    * @name              serverId
    * @type              String
    * @get
@@ -204,27 +283,41 @@ class SIpc {
    */
   start(params = null) {
     return new __SPromise(
-      (resolve, reject) => {
+      async (resolve, reject) => {
+        // make sure the passed port is free
+        let port = await __getFreePort(
+          params && typeof params === 'object'
+            ? params.port || this._ipcInstance.config.port
+            : this._ipcInstance.config.port
+        );
+
         if (!params || typeof params === 'string') {
           this._ipcInstance.serve(() => {
-            // this.trigger('server.ready', {});
+            this._ipcInstance.server.on('_handshake', (processId, socket) => {
+              if (this._socketsByProcesses[processId]) return;
+              this._socketsByProcesses[processId] = socket;
+            });
+
             resolve();
           });
         } else if (typeof params === 'object') {
-          // this._ipcInstance.serveNet(
-          //   params.host || 'localhost',
-          //   params.port || 3435,
-          //   params.UDPType || 'upd4',
-          //   () => {
-          //     // this.trigger('server.ready', {});
-          //     resolve();
-          //   }
-          // );
+          this._ipcInstance.serveNet(
+            params.host || 'localhost',
+            port,
+            params.UDPType || 'upd4',
+            () => {
+              // this.trigger('server.ready', {});
+              resolve();
+            }
+          );
         }
         this._ipcInstance.server.start();
+        __onProcessExit(() => {
+          return this.stop();
+        });
       },
       {
-        id: 'SIpc.start'
+        id: `${this.id}.start`
       }
     );
   }
@@ -247,7 +340,7 @@ class SIpc {
         resolve();
       },
       {
-        id: 'SIpc.stop'
+        id: `${this.id}.stop`
       }
     );
   }
@@ -300,7 +393,7 @@ class SIpc {
         }
       },
       {
-        id: 'SIpc.connect'
+        id: `${this.id}.connect`
       }
     );
   }
@@ -320,7 +413,22 @@ class SIpc {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   trigger(what, arg, metas = {}) {
-    this._ipcInstance.of[this.serverId].emit(what, arg);
+    if (this.isServer()) {
+      if (this._callbacksStack[what]) {
+        this._callbacksStack[what].forEach((callbackFn) => {
+          callbackFn(arg, false);
+        });
+      }
+      Object.keys(this._socketsByProcesses).forEach((processId) => {
+        this._ipcInstance.server.emit(
+          this._socketsByProcesses[processId],
+          what,
+          arg
+        );
+      });
+    } else {
+      this._ipcInstance.of[this.serverId].emit(what, arg);
+    }
     return this;
   }
 
@@ -338,14 +446,18 @@ class SIpc {
    * @since         2.0.0
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
+  _callbacksStack = {};
   on(stacks, callback) {
     if (typeof stacks === 'string')
       stacks = stacks.split(',').map((l) => l.trim());
     if (this.isServer()) {
       stacks.forEach((stack) => {
+        if (!this._callbacksStack[stack]) this._callbacksStack[stack] = [];
+        this._callbacksStack[stack].push(callback);
         this._ipcInstance.server.on(stack, callback);
       });
     } else {
+      this.trigger('_handshake', process.pid);
       stacks.forEach((stack) => {
         this._ipcInstance.of[this.serverId].on(stack, callback);
       });
@@ -353,7 +465,5 @@ class SIpc {
     return this;
   }
 }
-
-SIpc.getGlobalIpcInstance();
 
 module.exports = SIpc;

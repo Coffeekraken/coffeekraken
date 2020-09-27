@@ -20,6 +20,6 @@ export default function author(data) {
   return {
     name: authorNfo[1],
     email: authorNfo[2],
-    website: authorNfo[3]
+    url: authorNfo[3]
   };
 }

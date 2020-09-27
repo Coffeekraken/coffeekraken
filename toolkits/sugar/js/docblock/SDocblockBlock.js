@@ -27,12 +27,6 @@ var _param = _interopRequireDefault(require("./tags/param"));
 
 var _snippet = _interopRequireDefault(require("./tags/snippet"));
 
-var _templates = _interopRequireDefault(require("./markdown/templates"));
-
-var _blocks = _interopRequireDefault(require("./markdown/blocks"));
-
-var _htmlFromMarkdown = _interopRequireDefault(require("../convert/html/htmlFromMarkdown"));
-
 var _SDocblock = _interopRequireDefault(require("./SDocblock"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -64,7 +58,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @example         js
  * import SDocblockBlock from '@coffeekraken/sugar/js/docblock/SDocblockBlock';
  * const myBlock = new SDocblockBlock(myDocblockString);
- * const myBlock.toMarkdown();
+ * const myBlock.toObject();
  *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
@@ -78,16 +72,6 @@ var SDocblockBlock = /*#__PURE__*/function () {
    * Store the default tags mapping to their parsing functions
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-   */
-
-  /**
-   * @name          templates
-   * @type          Object
-   * @static
-   *
-   * Store the available templates like "js", "node", "scss", etc...
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
    */
 
   /**
@@ -145,12 +129,6 @@ var SDocblockBlock = /*#__PURE__*/function () {
     this._source = source.trim();
     this._settings = (0, _deepMerge.default)({
       filepath: null,
-      to: {
-        markdown: {
-          blocks: _blocks.default,
-          template: _templates.default
-        }
-      },
       parse: {
         tags: SDocblockBlock.tagsMap
       }
@@ -159,11 +137,12 @@ var SDocblockBlock = /*#__PURE__*/function () {
     this._blockObj = this.parse();
   }
   /**
-   * @name          object
-   * @type          Object
-   * @get
+   * @name          toString
+   * @type          Function
    *
-   * Access the parsed block object
+   * This method return the passed source string
+   *
+   * @return      {String}              The passed docblock string
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -171,17 +150,6 @@ var SDocblockBlock = /*#__PURE__*/function () {
 
   _createClass(SDocblockBlock, [{
     key: "toString",
-
-    /**
-     * @name          toString
-     * @type          Function
-     *
-     * This method return the passed source string
-     *
-     * @return      {String}              The passed docblock string
-     *
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
     value: function toString() {
       return this._source.trim();
     }
@@ -200,71 +168,6 @@ var SDocblockBlock = /*#__PURE__*/function () {
     key: "toObject",
     value: function toObject() {
       return this._blockObj;
-    }
-    /**
-     * @name          toMarkdown
-     * @type          Function
-     *
-     * This method can be used to convert the docblock object to a markdown string
-     *
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-
-  }, {
-    key: "toMarkdown",
-    value: function toMarkdown() {
-      return this.to('markdown');
-    }
-    /**
-     * @name          toHtml
-     * @type          Function
-     *
-     * This method can be used to convert the docblock object to an HTML string
-     *
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-
-  }, {
-    key: "toHtml",
-    value: function toHtml(settings) {
-      if (settings === void 0) {
-        settings = {};
-      }
-
-      var markdown = this.toMarkdown();
-      return (0, _htmlFromMarkdown.default)(markdown, settings);
-    }
-    /**
-     * @name          to
-     * @type          Function
-     *
-     * This method can be used to convert the docblock to one of the supported output
-     * format like "markdown" and more to come...
-     *
-     * @param         {String}          format        The format wanted as output. Can be actually "markdown" and more to come...
-     * @return        {String}                        The converted docblocks
-     *
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-
-  }, {
-    key: "to",
-    value: function to(format) {
-      // try to get the needed settings for the conversion
-      var convertionSettings = this._settings.to[format];
-      if (!convertionSettings) throw new Error("You try to convert the docblock literals to \"".concat(format, "\" format but this format is not available. Here's the list of available format: ").concat(Object.keys(this._settings.to).join(','), "..."));
-
-      var blockTemplate = this._settings.to[format].blocks[this.object.type.toLowerCase()] || this._settings.to[format].blocks['default'];
-
-      if (!blockTemplate) {
-        throw new Error("You try to convert a docblock of type \"".concat(this.object.type, "\" into \"").concat(format, "\" format but this block type is not supported. Here's the list of blocks supported in \"").concat(format, "\" format: ").concat(Object.keys(convertionSettings.blocks).join(','), "..."));
-      }
-
-      var compiledTemplate = _handlebars.default.compile(blockTemplate, {
-        noEscape: true
-      });
-
-      return compiledTemplate(this.object);
     }
     /**
      * @name          parse
@@ -390,26 +293,6 @@ var SDocblockBlock = /*#__PURE__*/function () {
 
       return docblockObj;
     }
-  }, {
-    key: "object",
-    get: function get() {
-      return this.toObject();
-    }
-    /**
-     * @name          string
-     * @type          String
-     * @get
-     *
-     * Access docblock string version
-     *
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-
-  }, {
-    key: "string",
-    get: function get() {
-      return this.toString();
-    }
   }]);
 
   return SDocblockBlock;
@@ -499,7 +382,5 @@ _defineProperty(SDocblockBlock, "tagsMap", {
   snippet: _snippet.default,
   example: _example.default
 });
-
-_defineProperty(SDocblockBlock, "templates", {});
 
 module.exports = exports.default;

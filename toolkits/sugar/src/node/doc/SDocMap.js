@@ -8,7 +8,7 @@ const __SDocblock = require('../docblock/SDocblock');
 const __toString = require('../string/toString');
 const __removeSync = require('../fs/removeSync');
 const __getFilename = require('../fs/filename');
-const { resolveCname } = require('dns');
+const __unique = require('../array/unique');
 
 /**
  * @name                SDocMap
@@ -93,35 +93,70 @@ module.exports = class SDocMap extends __SPromise {
       (resolve, reject, trigger, cancel) => {
         settings = __deepMerge(
           {
-            dirDepth: 5,
-            rootDir: __packageRoot(),
+            sources: {
+              root: {
+                rootDir: __packageRoot(),
+                dirDepth: 3
+              },
+              nodeModules: {
+                rootDir: `${__packageRoot()}/node_modules`,
+                dirDepth: 3
+              },
+              sugar: {
+                rootDir: `${__packageRoot()}/node_modules/@coffeekraken/sugar`,
+                dirDepth: 3
+              }
+            },
+            dirDepth: 3,
             filename: 'docMap.json',
             cache: true
           },
           settings
         );
 
-        let filenamesArray = settings.filename;
-        if (!Array.isArray(filenamesArray)) filenamesArray = [filenamesArray];
+        // let filenamesArray = settings.filename;
+        // if (!Array.isArray(filenamesArray)) filenamesArray = [filenamesArray];
 
         // generate the glob pattern to use
         const patterns = [];
-        for (let i = 0; i <= settings.dirDepth; i++) {
-          filenamesArray.forEach((filename) => {
-            const p = `${'*/'.repeat(i)}${filename}`;
-            patterns.push(p);
-          });
+
+        Object.keys(settings.sources).forEach((sourceName) => {
+          const sourceObj = __deepMerge(settings, settings.sources[sourceName]);
+          const filenamesArray = !Array.isArray(sourceObj.filename)
+            ? [sourceObj.filename]
+            : sourceObj.filename;
+
+          const patternObj = {
+            rootDir: sourceObj.rootDir,
+            patterns: []
+          };
+
+          for (let i = 0; i <= sourceObj.dirDepth; i++) {
+            filenamesArray.forEach((filename) => {
+              const p = `${'*/'.repeat(i)}${filename}`;
+              patternObj.patterns.push(p);
+            });
+          }
+
+          patterns.push(patternObj);
+        });
+
+        let files = [];
+
+        for (let i = 0; i < patterns.length; i++) {
+          const patternObj = patterns[i];
+          const foundFiles = __glob
+            .sync(`{${patternObj.patterns.join(',')}}`, {
+              cwd: patternObj.rootDir,
+              symlinks: true
+            })
+            .map((filePath) => {
+              return __path.resolve(patternObj.rootDir, filePath);
+            });
+          files = [...files, ...foundFiles];
         }
 
-        const files = __glob
-          .sync(`{${patterns.join(',')}}`, {
-            cwd: settings.rootDir,
-            symlinks: true
-          })
-          .map((filePath) => {
-            return __path.resolve(settings.rootDir, filePath);
-          });
-
+        files = __unique(files);
         resolve(files);
       },
       {
@@ -163,6 +198,14 @@ module.exports = class SDocMap extends __SPromise {
         // loop on all files
         files.forEach((filePath) => {
           const content = require(filePath);
+
+          Object.keys(content).forEach((docMapItemKey) => {
+            content[docMapItemKey].path = __path.resolve(
+              filePath.split('/').slice(0, -1).join('/'),
+              content[docMapItemKey].relPath
+            );
+          });
+
           docMapJson = {
             ...docMapJson,
             ...content
@@ -217,7 +260,7 @@ module.exports = class SDocMap extends __SPromise {
               namespace: docblock.namespace,
               filename,
               extension: filename.split('.').slice(1)[0],
-              path,
+              relPath: path,
               directory: path.replace(`/${__getFilename(filepath)}`, ''),
               type: docblock.type,
               description: docblock.description

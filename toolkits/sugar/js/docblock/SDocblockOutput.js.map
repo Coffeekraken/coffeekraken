@@ -1,0 +1,48 @@
+{
+    "version": 3,
+    "sources": [
+        "SDocblockOutput.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "docblockInstance",
+        "settings",
+        "_settings",
+        "templates",
+        "_docblockInstance",
+        "includedTypes",
+        "__handlebars",
+        "registerHelper",
+        "type",
+        "blocks",
+        "length",
+        "filter",
+        "block",
+        "object",
+        "indexOf",
+        "toLowerCase",
+        "map",
+        "to",
+        "format",
+        "push",
+        "join",
+        "__SPromise",
+        "resolve",
+        "reject",
+        "trigger",
+        "cancel",
+        "blocksArray",
+        "toObject",
+        "firstBlock",
+        "template",
+        "compiledTemplateFn",
+        "compile",
+        "noEscape",
+        "renderedTemplate"
+    ],
+    "mappings": "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",
+    "sourcesContent": [
+        "import __deepMerge from '../object/deepMerge';\nimport __SPromise from '../promise/SPromise';\nimport __handlebars from 'handlebars';\n\n/**\n * @name            SDocblockOutput\n * @namespace       sugar.js.docblock\n * @type            Class\n *\n * This class represent an SDocblock output like \"markdown\", \"html\", etc...\n *\n * @param       {SDocblock}         docblockInstance        The docblock instance you want to output using this class\n * @param       {Object}            [settings={}]           Some settings to configure your output class:\n * - ...\n *\n * @example         js\n * import SDocblock from '@coffeekraken/sugar/js/docblock/SDocblock';\n * import SDocblockOutput from '@coffeekraken/sugar/js/docblock/SDocblockOutput';\n * class MyCoolOutput extends SDocblockOutput {\n *    constructor(docblockInstance, settings = {}) {\n *      super(docblockInstance, settings);\n *    }\n * }\n *\n * @since       2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nmodule.exports = class SDocblockOutput {\n  /**\n   * @name      _settings\n   * @type      Object\n   * @private\n   *\n   * Store the settings\n   *\n   * @since     2.0.0\n   * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  _settings = {};\n\n  /**\n   * @name      _docblockInstance\n   * @type      SDocblock\n   * @private\n   *\n   * Store the SDocblock instance to render\n   *\n   * @since     2.0.0\n   * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  _docblockInstance = null;\n\n  /**\n   * @name        constructor\n   * @type        Function\n   * @constructor\n   *\n   * Constructor\n   *\n   * @since     2.0.0\n   * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  constructor(docblockInstance, settings = {}) {\n    // save the settings\n    this._settings = __deepMerge(\n      {\n        templates: {}\n      },\n      settings\n    );\n    // save the docblock instance\n    this._docblockInstance = docblockInstance;\n  }\n\n  /**\n   * @name          _initHandlerbars\n   * @type          Function\n   * @private\n   *\n   * This method init the handlebar instance that will be used during the rendering process\n   *\n   * @since       2.0.0\n   *\n   */\n  _initHandlerbars() {\n    const includedTypes = [];\n    __handlebars.registerHelper('include', (type) => {\n      if (\n        !this._docblockInstance.blocks ||\n        !this._docblockInstance.blocks.length\n      )\n        return '';\n      // filter blocks\n      const blocks = this._docblockInstance.blocks\n        .filter((block) => {\n          if (!block.object.type) return false;\n          return (\n            (type === '...' &&\n              includedTypes.indexOf(block.object.type.toLowerCase()) === -1) ||\n            (block.object.type.toLowerCase() === type &&\n              includedTypes.indexOf(block.object.type.toLowerCase()) === -1)\n          );\n        })\n        .map((block) => {\n          return block.to(format);\n        });\n      // save this included type\n      includedTypes.push(type);\n\n      return blocks.join('\\n\\n');\n    });\n  }\n\n  /**\n   * @name          render\n   * @type          Function\n   * @async\n   *\n   * This method is the main one that will take each blocks in the docblock instance\n   * and render them by passing each tags to the ```renderTag``` method.\n   *\n   * @param       {Object}        [settings={}]       An object of settings to override the one passed in the constructor\n   * @return      {SPromise}                          An SPromise instance that will be resolved with the rendered string once it has been fully rendered\n   *\n   * @since       2.0.0\n   * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  render(settings = {}) {\n    return new __SPromise(async (resolve, reject, trigger, cancel) => {\n      // get the block in object format\n      const blocksArray = this._docblockInstance.toObject();\n      // get the first block\n      const firstBlock = blocksArray[0];\n      // get the template to render\n      const template = this._settings.templates[firstBlock.type] || 'default';\n      // render the template\n      const compiledTemplateFn = __handlebars.compile(template, {\n        noEscape: true\n      });\n      const renderedTemplate = compiledTemplateFn();\n      // // init the renderStack\n      // const renderStack = [];\n      // // loop on all the blocks\n      // for (let i = 0; i < blocksArray.length; i++) {\n      //   const blockObj = blocksArray[i];\n      //   const renderBlockStack = [];\n      //   // // render the block tags\n      //   // for (let j = 0; j < Object.keys(blockObj).length; j++) {\n      //   //   const tagValue = blockObj[Object.keys(blockObj)[j]];\n      //   //   // render the tag\n      //   //   renderBlockStack.push(\n      //   //     await this.renderTag(Object.keys(blockObj)[j], tagValue)\n      //   //   );\n      //   // }\n      //   // // append the rendered block to the stack\n      //   // renderStack.push(renderBlockStack);\n      // }\n      // resolve the rendering process with the rendered stack\n      resolve(renderedTemplate);\n    });\n  }\n};\n"
+    ]
+}

@@ -18,7 +18,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest --silent",
-    "build.js": "rm -rf dist && babel src/js -d ./js --config-file ./.sugar-default/babel.config.js -w --ignore 'src/**/*.spec.js','src/**/*.test.js'"
+    "build.js": "rm -rf dist && babel src/js -d ./js --copy-files --config-file ./.sugar-default/babel.config.js -w --ignore 'src/**/*.spec.js','src/**/*.test.js'"
   },
   "dependencies": {
     "@babel/cli": "^7.8.4",
@@ -111,6 +111,7 @@
     "glob-to-regexp": "^0.4.1",
     "globby": "^11.0.1",
     "handlebars": "^4.7.6",
+    "handlebars-loader": "^1.7.1",
     "hotkeys-js": "^3.7.3",
     "html2canvas": "^1.0.0-rc.5",
     "image-pixels": "^2.2.2",

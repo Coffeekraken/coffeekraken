@@ -11,10 +11,6 @@ import __exampleTag from './tags/example';
 import __paramTag from './tags/param';
 import __snippetTag from './tags/snippet';
 
-import __markdownTemplate from './markdown/templates';
-import __markdownBlocks from './markdown/blocks';
-
-import __markdownToHtml from '../convert/html/htmlFromMarkdown';
 import __SDocblock from './SDocblock';
 
 /**
@@ -36,7 +32,7 @@ import __SDocblock from './SDocblock';
  * @example         js
  * import SDocblockBlock from '@coffeekraken/sugar/js/docblock/SDocblockBlock';
  * const myBlock = new SDocblockBlock(myDocblockString);
- * const myBlock.toMarkdown();
+ * const myBlock.toObject();
  *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
@@ -147,17 +143,6 @@ export default class SDocblockBlock {
   };
 
   /**
-   * @name          templates
-   * @type          Object
-   * @static
-   *
-   * Store the available templates like "js", "node", "scss", etc...
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
-   */
-  static templates = {};
-
-  /**
    * @name          _source
    * @type          String
    * @private
@@ -204,12 +189,6 @@ export default class SDocblockBlock {
     this._settings = __deepMege(
       {
         filepath: null,
-        to: {
-          markdown: {
-            blocks: __markdownBlocks,
-            template: __markdownTemplate
-          }
-        },
         parse: {
           tags: SDocblockBlock.tagsMap
         }
@@ -218,32 +197,6 @@ export default class SDocblockBlock {
     );
     // parse the docblock string
     this._blockObj = this.parse();
-  }
-
-  /**
-   * @name          object
-   * @type          Object
-   * @get
-   *
-   * Access the parsed block object
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get object() {
-    return this.toObject();
-  }
-
-  /**
-   * @name          string
-   * @type          String
-   * @get
-   *
-   * Access docblock string version
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get string() {
-    return this.toString();
   }
 
   /**
@@ -272,72 +225,6 @@ export default class SDocblockBlock {
    */
   toObject() {
     return this._blockObj;
-  }
-
-  /**
-   * @name          toMarkdown
-   * @type          Function
-   *
-   * This method can be used to convert the docblock object to a markdown string
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  toMarkdown() {
-    return this.to('markdown');
-  }
-
-  /**
-   * @name          toHtml
-   * @type          Function
-   *
-   * This method can be used to convert the docblock object to an HTML string
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  toHtml(settings = {}) {
-    const markdown = this.toMarkdown();
-    return __markdownToHtml(markdown, settings);
-  }
-
-  /**
-   * @name          to
-   * @type          Function
-   *
-   * This method can be used to convert the docblock to one of the supported output
-   * format like "markdown" and more to come...
-   *
-   * @param         {String}          format        The format wanted as output. Can be actually "markdown" and more to come...
-   * @return        {String}                        The converted docblocks
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  to(format) {
-    // try to get the needed settings for the conversion
-    const convertionSettings = this._settings.to[format];
-
-    if (!convertionSettings)
-      throw new Error(
-        `You try to convert the docblock literals to "${format}" format but this format is not available. Here's the list of available format: ${Object.keys(
-          this._settings.to
-        ).join(',')}...`
-      );
-
-    const blockTemplate =
-      this._settings.to[format].blocks[this.object.type.toLowerCase()] ||
-      this._settings.to[format].blocks['default'];
-    if (!blockTemplate) {
-      throw new Error(
-        `You try to convert a docblock of type "${
-          this.object.type
-        }" into "${format}" format but this block type is not supported. Here's the list of blocks supported in "${format}" format: ${Object.keys(
-          convertionSettings.blocks
-        ).join(',')}...`
-      );
-    }
-    const compiledTemplate = __handlebars.compile(blockTemplate, {
-      noEscape: true
-    });
-    return compiledTemplate(this.object);
   }
 
   /**

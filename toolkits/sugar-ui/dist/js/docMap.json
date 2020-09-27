@@ -4,9 +4,10 @@
         "namespace": "sugar-ui.coco",
         "filename": "index.js",
         "extension": "js",
-        "path": "../../src/js/index.js",
+        "relPath": "../../src/js/index.js",
         "directory": "../../src/js",
         "type": "Function",
-        "description": "Hola"
+        "description": "Hola",
+        "since": "2.0.0"
     }
 }

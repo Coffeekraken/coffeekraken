@@ -166,6 +166,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                     }
                   ]
                 },
+                { test: /\.handlebars$/, loader: 'handlebars-loader' },
                 {
                   test: /\.m?js$/,
                   exclude: /(node_modules|bower_components)/,

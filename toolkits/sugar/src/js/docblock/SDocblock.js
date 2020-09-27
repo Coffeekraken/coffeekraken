@@ -1,8 +1,11 @@
+import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';
 import __SDocblockBlock from './SDocblockBlock';
 import __handlebars from 'handlebars';
 import __markdown from './markdown/index';
 import __markdownToHtml from '../convert/html/htmlFromMarkdown';
+import __isNode from '../is/node';
+import __isPath from '../is/path';
 
 /**
  * @name                  Dockblock
@@ -12,7 +15,7 @@ import __markdownToHtml from '../convert/html/htmlFromMarkdown';
  * This is the main class that expose the methods like "parse", etc...
  * You have to instanciate it by passing a settings object. Here's the available options:
  *
- * @param       {String|Object}     source        The docblock source. Can be either a string, a filepath or an array of docblock objects
+ * @param       {String|Object}     source        The docblock source. Can be either a string to parse or a filepath
  * @param       {Object}      [settings={}]       An object of settings to configure the SDocblock instance:
  * - tags ({}) {Object}: An object representing the functions used to parse each tags. The object format is ```{ tagName: parseFn }```
  *
@@ -108,7 +111,23 @@ export default class SDocblock {
       },
       settings
     );
-    this._source = source;
+
+    // check if the source is path
+    if (__isPath(source)) {
+      if (!__isNode())
+        throw new __SError(
+          `Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`
+        );
+      const __fs = require('fs');
+      if (!__fs.existsSync(source))
+        throw new __SError(
+          `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`
+        );
+      this._source = __fs.readFileSync(source, 'utf8');
+    } else {
+      this._source = source;
+    }
+
     // parsing the source
     this.parse();
   }
@@ -198,100 +217,5 @@ export default class SDocblock {
     return this.blocks.map((block) => {
       return block.toObject();
     });
-  }
-
-  /**
-   * @name          toMarkdown
-   * @type          Function
-   *
-   * This method convert the parsed docblocks to a markdown string
-   *
-   * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-   */
-  toMarkdown() {
-    return this.to('markdown');
-  }
-
-  /**
-   * @name          toHtml
-   * @type          Function
-   *
-   * This method convert the parsed docblocks to an HTML string
-   *
-   * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-   */
-  toHtml(settings = {}) {
-    const markdown = this.toMarkdown();
-    return __markdownToHtml(markdown, settings);
-  }
-
-  /**
-   * @name              to
-   * @type              Function
-   *
-   * This method allows you to convert the parsed docblocks to a format like "markdown" and more to come...
-   *
-   * @param       {String}          format          The format in which you want to convert your docblocks.
-   * @return      {String}                          The converted docblocks
-   *
-   * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-   */
-  to(format) {
-    const includedTypes = [];
-    __handlebars.registerHelper('include', (type) => {
-      if (!this.blocks || !this.blocks.length) return '';
-      // filter blocks
-      const blocks = this.blocks
-        .filter((block) => {
-          if (!block.object.type) return false;
-          return (
-            (type === '...' &&
-              includedTypes.indexOf(block.object.type.toLowerCase()) === -1) ||
-            (block.object.type.toLowerCase() === type &&
-              includedTypes.indexOf(block.object.type.toLowerCase()) === -1)
-          );
-        })
-        .map((block) => {
-          return block.to(format);
-        });
-      // save this included type
-      includedTypes.push(type);
-
-      return blocks.join('\n\n');
-    });
-
-    // get the blocks
-    const blocksArray = this.blocks;
-
-    if (!blocksArray || !blocksArray.length) return '';
-
-    // check the first docblock
-    const firstBlock = blocksArray[0];
-    // get the block type
-    const type = firstBlock.object.type
-      ? firstBlock.object.type.toLowerCase()
-      : 'default';
-    // render the good template depending on the first block type
-    const template =
-      this._settings.to[format].templates[type] ||
-      this._settings.to[format].templates.default;
-    if (!template)
-      throw new Error(
-        `You try to convert your docblocks into "${format}" format but the needed "${type}" template is not available for this particular format. Here's the available templates: ${Object.keys(
-          this._settings.to[format].templates
-        ).join(',')}...`
-      );
-    // save the format in which converting the docblocks
-    this._to = format;
-    // render the template
-    const compiledTemplateFn = __handlebars.compile(template, {
-      noEscape: true
-    });
-    const renderedTemplate = compiledTemplateFn();
-    // return the rendered template
-    return renderedTemplate;
   }
 }

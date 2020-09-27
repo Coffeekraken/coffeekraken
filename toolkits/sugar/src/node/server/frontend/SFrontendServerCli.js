@@ -1,6 +1,6 @@
 const __SCli = require('../../cli/SCli');
 const __SFrontendServerProcess = require('./SFrontendServerProcess');
-const __SExpressServerInterface = require('../express/interface/SExpressServerInterface');
+const __SFrontendServerInterface = require('./interface/SFrontendServerInterface');
 const __deepMerge = require('../../object/deepMerge');
 
 /**
@@ -35,7 +35,7 @@ class SFrontendServerCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = __SExpressServerInterface;
+  static interface = __SFrontendServerInterface;
 
   /**
    * @name          processClass
@@ -71,7 +71,7 @@ class SFrontendServerCli extends __SCli {
   }
 }
 
-module.exports = __SExpressServerInterface.implements(
+module.exports = __SFrontendServerInterface.implements(
   SFrontendServerCli,
-  __SExpressServerInterface
+  __SFrontendServerInterface
 );

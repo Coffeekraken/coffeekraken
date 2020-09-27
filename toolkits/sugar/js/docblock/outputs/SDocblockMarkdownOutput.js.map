@@ -1,0 +1,28 @@
+{
+    "version": 3,
+    "sources": [
+        "SDocblockMarkdownOutput.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "docblockInstance",
+        "settings",
+        "templates",
+        "default",
+        "__defaultTemplate",
+        "class",
+        "__classTemplate",
+        "function",
+        "__functionTemplate",
+        "blocks",
+        "__defaultBlock",
+        "__classBlock",
+        "__functionBlock",
+        "__SDocblockOutput"
+    ],
+    "mappings": ";;AAAA;;AACA;;AACA;;AAEA;;AACA;;AACA;;AAEA;;AACA;;AACA;;;;;;;;;;;;;;;;;;;;AAEA;;;;;;;;;;;;;;;;;;;;;AAqBAA,MAAM,CAACC,OAAP;AAAA;;AAAA;;AACE;;;;;;;;;;AAUA,mCAAYC,gBAAZ,EAA8BC,QAA9B,EAA6C;AAAA,QAAfA,QAAe;AAAfA,MAAAA,QAAe,GAAJ,EAAI;AAAA;;AAAA;;AAAA,6BAEzCD,gBAFyC,EAGzC,wBACE;AACEE,MAAAA,SAAS,EAAE;AACTC,QAAAA,OAAO,EAAEC,gBADA;AAETC,QAAAA,KAAK,EAAEC,cAFE;AAGTC,QAAAA,QAAQ,EAAEC;AAHD,OADb;AAMEC,MAAAA,MAAM,EAAE;AACNN,QAAAA,OAAO,EAAEO,iBADH;AAENL,QAAAA,KAAK,EAAEM,eAFD;AAGNJ,QAAAA,QAAQ,EAAEK;AAHJ;AANV,KADF,EAaEX,QAbF,CAHyC;AAmB5C;;AA9BH;AAAA,EAAuDY,yBAAvD",
+    "sourcesContent": [
+        "import __deepMerge from '../../object/deepMerge';\nimport __SDocblockOutput from '../SDocblockOutput';\nimport __toString from '../../string/toString';\n\nimport __defaultTemplate from './markdown/templates/default';\nimport __classTemplate from './markdown/templates/class';\nimport __functionTemplate from './markdown/templates/function';\n\nimport __defaultBlock from './markdown/blocks/default';\nimport __classBlock from './markdown/blocks/class';\nimport __functionBlock from './markdown/blocks/function';\n\n/**\n * @name            SDocblockMarkdownOutput\n * @namespace       sugar.js.docblock\n * @type            Class\n *\n * This class represent an SDocblock output like \"markdown\", \"html\", etc...\n *\n * @param       {SDocblock}         docblockInstance        The docblock instance you want to output using this class\n * @param       {Object}            [settings={}]           Some settings to configure your output class:\n * - ...\n *\n * @example         js\n * import SDocblock from '@coffeekraken/sugar/js/docblock/SDocblock';\n * import SDocblockMarkdownOutput from '@coffeekraken/sugar/js/docblock/SDocblockMarkdownOutput';\n * const docblock = new SDocblock('my/cool/file.js');\n * const docblockOutput = new SDocblockMarkdownOutput(docblock);\n * docblockOutput.render();\n *\n * @since       2.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nmodule.exports = class SDocblockMarkdownOutput extends __SDocblockOutput {\n  /**\n   * @name        constructor\n   * @type        Function\n   * @constructor\n   *\n   * Constructor\n   *\n   * @since     2.0.0\n   * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n  constructor(docblockInstance, settings = {}) {\n    super(\n      docblockInstance,\n      __deepMerge(\n        {\n          templates: {\n            default: __defaultTemplate,\n            class: __classTemplate,\n            function: __functionTemplate\n          },\n          blocks: {\n            default: __defaultBlock,\n            class: __classBlock,\n            function: __functionBlock\n          }\n        },\n        settings\n      )\n    );\n  }\n};\n"
+    ]
+}

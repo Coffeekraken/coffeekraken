@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _SError = _interopRequireDefault(require("../error/SError"));
+
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
 var _SDocblockBlock = _interopRequireDefault(require("./SDocblockBlock"));
@@ -14,6 +16,10 @@ var _handlebars = _interopRequireDefault(require("handlebars"));
 var _index = _interopRequireDefault(require("./markdown/index"));
 
 var _htmlFromMarkdown = _interopRequireDefault(require("../convert/html/htmlFromMarkdown"));
+
+var _node = _interopRequireDefault(require("../is/node"));
+
+var _path = _interopRequireDefault(require("../is/path"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33,7 +39,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * This is the main class that expose the methods like "parse", etc...
  * You have to instanciate it by passing a settings object. Here's the available options:
  *
- * @param       {String|Object}     source        The docblock source. Can be either a string, a filepath or an array of docblock objects
+ * @param       {String|Object}     source        The docblock source. Can be either a string to parse or a filepath
  * @param       {Object}      [settings={}]       An object of settings to configure the SDocblock instance:
  * - tags ({}) {Object}: An object representing the functions used to parse each tags. The object format is ```{ tagName: parseFn }```
  *
@@ -128,8 +134,19 @@ var SDocblock = /*#__PURE__*/function () {
       to: {
         markdown: _index.default
       }
-    }, settings);
-    this._source = source; // parsing the source
+    }, settings); // check if the source is path
+
+    if ((0, _path.default)(source)) {
+      if (!(0, _node.default)()) throw new _SError.default("Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like \"<yellow>".concat(source, "</yellow>\"..."));
+
+      var __fs = require('fs');
+
+      if (!__fs.existsSync(source)) throw new _SError.default("Sorry but the passed source path \"<yellow>".concat(source, "</yellow>\" does not exists on the filesystem..."));
+      this._source = __fs.readFileSync(source, 'utf8');
+    } else {
+      this._source = source;
+    } // parsing the source
+
 
     this.parse();
   }
@@ -229,94 +246,6 @@ var SDocblock = /*#__PURE__*/function () {
       return this.blocks.map(block => {
         return block.toObject();
       });
-    }
-    /**
-     * @name          toMarkdown
-     * @type          Function
-     *
-     * This method convert the parsed docblocks to a markdown string
-     *
-     * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-     */
-
-  }, {
-    key: "toMarkdown",
-    value: function toMarkdown() {
-      return this.to('markdown');
-    }
-    /**
-     * @name          toHtml
-     * @type          Function
-     *
-     * This method convert the parsed docblocks to an HTML string
-     *
-     * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-     */
-
-  }, {
-    key: "toHtml",
-    value: function toHtml(settings) {
-      if (settings === void 0) {
-        settings = {};
-      }
-
-      var markdown = this.toMarkdown();
-      return (0, _htmlFromMarkdown.default)(markdown, settings);
-    }
-    /**
-     * @name              to
-     * @type              Function
-     *
-     * This method allows you to convert the parsed docblocks to a format like "markdown" and more to come...
-     *
-     * @param       {String}          format          The format in which you want to convert your docblocks.
-     * @return      {String}                          The converted docblocks
-     *
-     * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-     */
-
-  }, {
-    key: "to",
-    value: function to(format) {
-      var includedTypes = [];
-
-      _handlebars.default.registerHelper('include', type => {
-        if (!this.blocks || !this.blocks.length) return ''; // filter blocks
-
-        var blocks = this.blocks.filter(block => {
-          if (!block.object.type) return false;
-          return type === '...' && includedTypes.indexOf(block.object.type.toLowerCase()) === -1 || block.object.type.toLowerCase() === type && includedTypes.indexOf(block.object.type.toLowerCase()) === -1;
-        }).map(block => {
-          return block.to(format);
-        }); // save this included type
-
-        includedTypes.push(type);
-        return blocks.join('\n\n');
-      }); // get the blocks
-
-
-      var blocksArray = this.blocks;
-      if (!blocksArray || !blocksArray.length) return ''; // check the first docblock
-
-      var firstBlock = blocksArray[0]; // get the block type
-
-      var type = firstBlock.object.type ? firstBlock.object.type.toLowerCase() : 'default'; // render the good template depending on the first block type
-
-      var template = this._settings.to[format].templates[type] || this._settings.to[format].templates.default;
-      if (!template) throw new Error("You try to convert your docblocks into \"".concat(format, "\" format but the needed \"").concat(type, "\" template is not available for this particular format. Here's the available templates: ").concat(Object.keys(this._settings.to[format].templates).join(','), "...")); // save the format in which converting the docblocks
-
-      this._to = format; // render the template
-
-      var compiledTemplateFn = _handlebars.default.compile(template, {
-        noEscape: true
-      });
-
-      var renderedTemplate = compiledTemplateFn(); // return the rendered template
-
-      return renderedTemplate;
     }
   }, {
     key: "blocks",

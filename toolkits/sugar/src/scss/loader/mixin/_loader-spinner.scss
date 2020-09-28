@@ -1,0 +1,79 @@
+/**
+ * @name      loader-spinner
+ * @namespace           sugar.scss.loader.mixin
+ * @type      function
+ *
+ * Generate a spinner loader
+ *
+ * @param         {Number}        [$size=2em]             Specify the size of the spinner loader
+ * @param         {Number}        [$width=0.3em]          Specify the width of the spinner loader
+ * @param         {Color}         [$color=primary]        Specify the color of the spinner loader
+ * @param         {Color}         [$bgcolor=inherit]        Specify the background color of the spinner loader
+ * @param         {Number}        [$length=3/4]           The length of the spinner loader
+ * @param         {Second}        [$a-duration=1s]        The duration of the spinner loader animation
+ * @param         {String}        [$a-ease=linear]          Specify an ease to use for the spinner loader animation
+ *
+ * @example     scss
+ * .my-cool-loader {
+ *    @include Sugar.loader-spinner();
+ * }
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin loader-spinner(
+  $size: 2em,
+  $width: 0.3em,
+  $color: primary,
+  $bgcolor: inherit,
+  $length: 3/4,
+  $a-duration: 1s,
+  $a-ease: linear
+) {
+  $color: color($color);
+
+  $size: test-argument('Sugar.loader-spinner', 'size', number, $size);
+  $width: test-argument('Sugar.loader-spinner', 'width', number, $width);
+  $color: test-argument('Sugar.loader-spinner', 'color', color, $color);
+  @if $bgcolor != inherit {
+    $bgcolor: test-argument('Sugar.loader-spinner', 'bgcolor', color, $bgcolor);
+  }
+  $length: test-argument('Sugar.loader-spinner', 'length', number, $length);
+  $a-duration: test-argument(
+    'Sugar.loader-spinner',
+    'a-duration',
+    second,
+    $a-duration
+  );
+  $a-ease: test-argument('Sugar.loader-spinner', 'a-ease', string, $a-ease);
+  $a-name: str-unquote('spinner-#{str-unique-id()}');
+  $p-step: 1 / $a-duration;
+
+  & {
+    display: inline-block;
+    font-size: $size;
+    position: relative;
+    top: -0.5em;
+    left: -0.5em;
+    text-indent: -9999em;
+    border-top: $width solid color-transparentize($color, 0.8);
+    border-right: $width solid color-transparentize($color, 0.8);
+    border-bottom: $width solid color-transparentize($color, 0.8);
+    border-left: $width solid color-transparentize($color, 0);
+    animation: $a-name $a-duration $a-ease 0s infinite;
+  }
+  &,
+  &:after {
+    border-radius: 50%;
+    width: 1em;
+    height: 1em;
+  }
+  @keyframes #{$a-name} {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

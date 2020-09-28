@@ -1,0 +1,135 @@
+/**
+ * @name      loader-couch-potato
+ * @namespace           sugar.scss.loader.mixin
+ * @type      function
+ *
+ * Generate a full animated, single element, couch-potato style loader
+ *
+ * @param 		{Number} 		[$size=1em] 				The size of the loader
+ * @param 		{Color} 		[$color=primary] 			The color of the loader
+ * @param 		{Second} 		[$a-duration=1s] 			The overall animation duration
+ * @param 		{Second} 		[$a-delay=0s] 				The delay between two animation cycle
+ * @param 		{String} 		[$a-ease=ease-in-out]		The ease to use for the animation
+ * @param 		{Degree}		[$a-rotate=360deg] 			The animation rotation
+ * @param 		{Number} 		[$a-scale=2] 				The animation scale
+ *
+ * @example     scss
+ * .my-cool-loader {
+ * 		\@include Sugar.loader-couch-potato();
+ * }
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin loader-couch-potato(
+  $size: 1em,
+  $color: primary,
+  $a-duration: 1s,
+  $a-delay: 0s,
+  $a-ease: ease-in-out,
+  $a-rotate: 360deg,
+  $a-scale: 2
+) {
+  $size: test-argument('Sugar.loader-couch-potato', 'size', number, $size);
+  $color: test-argument(
+    'Sugar.loader-couch-potato',
+    'color',
+    'color|list-color|list-string',
+    $color
+  );
+  $a-duration: test-argument(
+    'Sugar.loader-couch-potato',
+    'a-duration',
+    second,
+    $a-duration
+  );
+  $a-delay: test-argument(
+    'Sugar.loader-couch-potato',
+    'a-delay',
+    second,
+    $a-delay
+  );
+  $a-ease: test-argument(
+    'Sugar.loader-couch-potato',
+    'a-ease',
+    string,
+    $a-ease
+  );
+  $a-rotate: test-argument(
+    'Sugar.loader-couch-potato',
+    'a-rotate',
+    degree,
+    $a-rotate
+  );
+  $a-scale: test-argument(
+    'Sugar.loader-couch-potato',
+    'a-scale',
+    number,
+    $a-scale
+  );
+
+  // handle colors
+  $colors: null;
+  @if is($color, list-color) and list-length($color) > 1 {
+    $colors: $color;
+  } @else {
+    $color: color($color);
+  }
+
+  $a-duration: $a-duration + $a-delay;
+
+  $a-name: str-unquote('couch-potato-#{str-unique-id()}');
+
+  display: inline-block;
+  width: $size;
+  height: $size;
+  position: relative;
+  top: $size / 2 * -1;
+  left: $size / 2 * -1;
+
+  $c: $color;
+  @if $colors and list-length($colors) == 2 {
+    $c: list-nth($colors, 1);
+  }
+  &:before {
+    display: block;
+    width: $size;
+    height: $size;
+    content: '';
+    @include translate(-50%, -50%);
+    background: $c;
+    transform-origin: $size/2 $size/2;
+    animation: $a-name $a-duration $a-ease 0s infinite;
+  }
+
+  $p-delay: 0;
+  @if $a-delay > 0 {
+    $p-delay: 1 / $a-duration * $a-delay;
+  }
+  @keyframes #{$a-name} {
+    0% {
+      border-radius: 0;
+      transform: rotate(0deg) scale(1);
+    }
+    #{(100% - math-percentage($p-delay)) / 2} {
+      border-radius: 50%;
+      transform: rotate($a-rotate / 2) scale($a-scale);
+      @if $colors and list-length($colors) == 2 {
+        $c: list-nth($colors, 2);
+      }
+      background: $c;
+    }
+    #{100% - math-percentage($p-delay)} {
+      border-radius: 0;
+      transform: rotate($a-rotate) scale(1);
+      @if $colors and list-length($colors) == 2 {
+        $c: list-nth($colors, 1);
+      }
+      background: $c;
+    }
+    100% {
+      border-radius: 0;
+      transform: rotate($a-rotate) scale(1);
+    }
+  }
+}

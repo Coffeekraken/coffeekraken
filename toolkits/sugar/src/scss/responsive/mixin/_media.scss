@@ -1,0 +1,137 @@
+@use 'sass:meta';
+@use 'sass:string';
+
+/**
+ * @name                  media
+ * @namespace             sugar.scss.responsive.mixin
+ * @type                  Mixin
+ *
+ * This mixin allows you to specify easily which media (defined in the media.config.js file) has to be targeted.
+ * You can specify multiple medias if needed and specify how you want to target the specific media.
+ * Check out the examples for more info.
+ * By default, the Sugar toolkit offer these medias to be targeted:
+ * - mobile
+ * - mobile-portrait
+ * - mobile-landscape
+ * - tablet
+ * - tablet-portrait
+ * - tablet-landscape
+ * - desktop
+ *
+ * You can use some "actions" to specify your target. The available actions are:
+ * - '>': Greater than...
+ * - '<': Lower than...
+ * - '=': Equal...
+ * - '>=': Greater or equal...
+ * - '>=': Lower or equal...
+ *
+ * Your media queries can be something like this: '<tablet', '>mobile <desktop', '=tablet-landscape'.
+ * If you don't specicy any action in your queries, by default the "defaultAction" property in the media.config.js file will
+ * be applied and this default action is setted to ">=". This is setted like this to work in "mobile first" schema by default.
+ *
+ * @param       {String}        $media      The media(s) you want to target.
+ *
+ * @example       scss
+ * .my-cool-container {
+ *    background: red;
+ *
+ *    @include Sugar.media(tablet) {
+ *      background: blue;
+ *    }
+ *
+ *    @include Sugar.media('>=desktop') {
+ *      background: green;
+ *    }
+ * }
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin media($medias) {
+  @if type-of($medias) != string {
+    $medias: inspect($medias);
+  }
+  $medias: str-split($medias, ' ');
+
+  $fullQueriesList: ();
+
+  @each $media in $medias {
+    $firstChar: str-slice($media, 0, 1);
+    $firstTwoChars: str-slice($media, 0, 2);
+    $mediaName: $media;
+    $action: setting('media.defaultAction');
+
+    // determine the real media name and the action to apply
+    @if $firstTwoChars == '>=' or $firstTwoChars == '<=' {
+      $mediaName: str-slice($media, 3);
+      $action: $firstTwoChars;
+    } @else if $firstChar == '<' or $firstChar == '>' or $firstChar == '=' {
+      $mediaName: str-slice($media, 2);
+      $action: $firstChar;
+    }
+
+    // get the media settings and make sure it exists in the config files
+    $mediaSettings: setting('media.queries.#{$mediaName}');
+    @if not $mediaSettings {
+      @error ("It seem's that the requested media \"#{$mediaName}\" does not exist...");
+    }
+
+    $queryList: ();
+    @each $key, $value in $mediaSettings {
+      @if $key ==
+        'min-width' or
+        $key ==
+        'max-width' or
+        $key ==
+        'min-device-width' or
+        $key ==
+        'max-device-width'
+      {
+        @if $action == '>' {
+          @if $key == 'max-width' or $key == 'max-device-width' {
+            $argName: 'min-width';
+            @if str-index($key, '-device') != null {
+              $argName: 'min-device-width';
+            }
+            $queryList: list-append(
+              $queryList,
+              '(#{$argName}: #{to-px($value)+1})'
+            );
+          }
+        } @else if $action == '<' {
+          @if $key == 'min-width' or $key == 'min-device-width' {
+            $argName: 'max-width';
+            @if str-index($key, '-device') != null {
+              $argName: 'max-device-width';
+            }
+            $queryList: list-append(
+              $queryList,
+              '(#{$argName}: #{to-px($value)})'
+            );
+          }
+        } @else if $action == '=' {
+          $queryList: list-append($queryList, '(#{$key}: #{to-px($value)})');
+        } @else if $action == '>=' {
+          @if $key == 'min-width' or $key == 'min-device-width' {
+            $queryList: list-append($queryList, '(#{$key}: #{to-px($value)})');
+          }
+        } @else if $action == '<=' {
+          @if $key == 'max-width' or $key == 'max-device-width' {
+            $queryList: list-append($queryList, '(#{$key}: #{to-px($value)})');
+          }
+        }
+      } @else {
+        $queryList: list-append($queryList, '(#{$key}: #{$value})');
+      }
+    }
+    // append the query list into the full queries list
+    $fullQueriesList: list-append(
+      $fullQueriesList,
+      list-implode($queryList, ' and ')
+    );
+  }
+
+  @media #{list-implode($fullQueriesList, ',')} {
+    @content;
+  }
+}

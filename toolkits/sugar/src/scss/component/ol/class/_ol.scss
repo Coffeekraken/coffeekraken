@@ -1,0 +1,138 @@
+/**
+  * @name            ol-classes
+  * @namespace       sugar.scss.component.ol.class
+  * @type            Mixin
+  *
+  * This mixin generate all the css needed to display properly some ordered lists.
+  *
+  * @feature
+  *
+  * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+  * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
+  * @param       {String}        [$name='ol']       The className to use for the generation
+  *
+  * @example         html
+  * <ol class="#{sel(ol)}">
+  *   <li class="#{sel(ol__li)}">I'm a cool ordered list item</li>
+  *   <li class="#{sel(ol__li)}">I'm a cool ordered list item</li>
+  *   <li class="#{sel(ol__li)}">I'm a cool ordered list item</li>
+  *   <li class="#{sel(ol__li)}">I'm a cool ordered list item</li>
+  *   <li class="#{sel(ol__li)}">I'm a cool ordered list item</li>
+  *   <li class="#{sel(ol__li)}">I'm a cool ordered list item</li>
+  *   <li class="#{sel(ol__li)}">I'm a cool ordered list item</li>
+  * </ol>
+  *
+  * @example           scss
+  * @include Sugar.ol-classes();
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+@mixin ol-classes(
+  $colors: map-keys(setting('colors')),
+  $sizes: map-keys(setting('sizes')),
+  $name: 'ol'
+) {
+  @if class-match-namespace('sugar.component.ol') {
+    @include scope('bare') {
+      @each $size in $sizes {
+        /**
+      * @name              .#{sel(#{$name}--#{$size})}, .#{sel(#{tf-class()})} ol.#{sel($size)}
+      * @namespace         sugar.scss.component
+      * @type              Classname
+      *
+      * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```
+      *
+      * @example         html
+      * <ol class="#{sel(#{$name}--#{$size})}">
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        * </ol>    *
+      * @since       2.0.0
+      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+      }
+    }
+
+    @include scope('style') {
+      @each $color in $colors {
+        /**
+      * @name              .#{sel(#{$name}--#{$color})}, .#{sel(#{tf-class()})} ol.#{sel($color)}
+      * @namespace         sugar.scss.component
+      * @type              Classname
+      *
+      * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$color}```
+      *
+      * @example         html
+      * <ol class="#{sel(#{$name})} #{sel(#{$name}--#{$color})}">
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        *   <li class="#{sel(#{$name}__li)}">I'm a cool ordered list item</li>
+        * </ol>    *
+      * @since       2.0.0
+      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+      }
+    }
+  }
+}
+
+/**
+ * @name              ol-bare
+ * @namespace         sugar.scss.component.mixin.ol
+ * @type              Mixin
+ *
+ * This mixin generate all the bare properties for a list depending on the parameters you set.
+ *
+ * @param       {List}      [$size=default]                 The size you want to for your list
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin ol-bare($size: default) {
+  display: block;
+  line-height: setting('look-and-feel.line-height');
+}
+
+/**
+ * @name              ol-style
+ * @namespace         sugar.scss.component.mixin.ol
+ * @type              Mixin
+ *
+ * This mixin generate all the style properties for a list depending on the parameters you set.
+ *
+ * @param       {List}      [$color=primary]                The color you want for your list
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin ol-style($color: primary, $separator: '.') {
+  list-style: none;
+  counter-reset: li;
+
+  & > li {
+    counter-increment: li;
+    padding-left: 2.5em;
+    position: relative;
+
+    &::before {
+      content: counter(li) '#{$separator}';
+      color: color($color);
+      display: inline-block;
+      width: 2em;
+      position: absolute;
+      top: 0;
+      left: 0;
+      text-align: right;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@use 'sass:meta';
+
+/**
+ * @name    str-is-url
+ * @namespace           sugar.scss.core.string.function
+ * @type      function
+ *
+ * Check if a string is a url or not
+ *
+ * @param 			{String} 				$url 			The string to check
+ * @return 			{Boolean} 								true if is a url, false if not
+ *
+ * @example     scss
+ * Sugar.str-is-url('Hello world') // false
+ *
+ * @since       1.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function str-is-url($url) {
+  @if meta.type-of($url) != 'string' {
+    @return false;
+  }
+  $ext: str-url-ext($url);
+  @if $ext {
+    @return true;
+  } @else {
+    @return false;
+  }
+}

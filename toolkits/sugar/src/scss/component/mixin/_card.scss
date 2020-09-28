@@ -1,0 +1,121 @@
+/**
+  * @name            card-classes
+  * @namespace       sugar.scss.component.mixin
+  * @type            Mixin
+  *
+  * This mixin generate all the css needed to display properly some cards.
+  *
+  * @feature
+  * - Support ```media``` section
+  * - Support ```body``` section
+  * - Support ```footer``` section
+  *
+  * @todo         Finish describing features
+  *
+  * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
+  * @param       {String}        [$name='card']       The className to use for the generation
+  *
+  * @example         html
+  * <div class="s-card">
+  *    <div class="s-card__media">
+  *       <img class="s-card__img" src="https://picsum.photos/500" />
+  *    </div>
+  *    <div class="s-card__body">
+  *       <p class="s-p">Diam cum est tellus tristique enim magna duis aliquam, libero cursus inceptos donec lacinia arcu varius dictumst sodales, mauris volutpat accumsan erat penatibus orci vulputate.</p>
+  *    </div>
+  * </div>
+  *
+  * @example           scss
+  * @include Sugar.card-classes();
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+@mixin card-classes(
+  $border-radius: setting('look-and-feel.border-radius'),
+  $name: 'card'
+) {
+  @include card-bare-classes($name);
+  @include card-style-classes($border-radius, $name);
+}
+
+/**
+   * @name              card-bare-classes
+   * @namespace         sugar.scss.component.mixin.card
+   * @type              Mixin
+   *
+   * This mixin generate all the bare classes depending on the parameters you set.
+   *
+   * @param       {String}      [$name='card']                         The name to use for the generation of the classes
+   *
+   * @since       2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+@mixin card-bare-classes($name: 'card') {
+}
+
+/**
+   * @name              card-style-classes
+   * @namespace         sugar.scss.component.mixin.card
+   * @type              Mixin
+   *
+   * This mixin generate all the style classes depending on the parameters you set.
+   *
+   * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
+   * @param       {String}      [$name='card']                         The name to use for the generation of the classes
+   *
+   * @since       2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+@mixin card-style-classes(
+  $border-radius: setting('look-and-feel.border-radius'),
+  $name: 'card'
+) {
+}
+
+/**
+   * @name              card
+   * @namespace         sugar.scss.component.mixin.card
+   * @type              Mixin
+   *
+   * This mixin generate all the properties for a button depending on the parameters you set.
+   *
+   * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
+   *
+   * @since       2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+@mixin card($border-radius: setting('look-and-feel.border-radius')) {
+  @include card-bare();
+  @include card-style($border-radius);
+}
+
+/**
+   * @name              card-bare
+   * @namespace         sugar.scss.component.mixin.card
+   * @type              Mixin
+   *
+   * This mixin generate all the bare properties for a button depending on the parameters you set.
+   *   *
+   * @since       2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+@mixin card-bare() {
+  display: block;
+}
+
+/**
+   * @name              card-style
+   * @namespace         sugar.scss.component.mixin.card
+   * @type              Mixin
+   *
+   * This mixin generate all the style properties for a button depending on the parameters you set.
+   *
+   * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
+   *
+   * @since       2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+@mixin card-style($border-radius: setting('look-and-feel.border-radius')) {
+  border-radius: $border-radius;
+}

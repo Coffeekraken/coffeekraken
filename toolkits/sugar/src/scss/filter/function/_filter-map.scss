@@ -1,0 +1,62 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "sass:string";
+/**
+ * @name    filter-map
+ * @namespace           sugar.scss.map.function
+ * @type      function
+ *
+ * Take a filter as parameter and parse it to return the {Map} corresponding
+ * The $filter parameter can be either a registered filter name or a filter formated like `filterName(filterValue)`
+ *
+ * @param 			{List}<String> 			$filter 			The registered filter name or the filter string to transform into map
+ * @return 			{Map} 										The corresponding filter map properties
+ *
+ * @example
+ * // register a filter
+ * \@include Sugar.setup((
+ * 		filters : (
+ * 			myCoolFilter : box-shadow(#000 0 0 10px) blur(30px),
+ * 			// other filters...
+ * 		)
+ * ));
+ *
+ * // registered filter
+ * Sugar.filter-map(myCoolFilter);
+ * // {
+ * // 	box-shadow : #000 0 0 10px,
+ * // 	blur : 30px
+ * // }
+ *
+ * // custom filter
+ * Sugar.filter-map(blur(10px));
+ * // {
+ * // 	blur : 10px
+ * // }
+ *
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function filter-map($filter) {
+  $filters: setting('filters');
+  $map: ();
+  @if not $filters {
+    @return $map;
+  }
+  $filters: map.keys($filters);
+  @each $f in $filter {
+    // check if the filter exist in registered ones
+    @if meta.type-of($f) == string and list.index($filters, $f) {
+      // we have a filter
+      $map: map.merge($map, filter-map(setting('filters.#{$f}')));
+    } @else {
+      // split the filter
+      $open_idx: string.index($f, '(');
+      $f_name: string.slice($f, 1, $open_idx - 1);
+      $f_value: string.slice($f, $open_idx + 1, -2);
+      $f_value: str-split($f_value, ' ');
+      $map: map-set($map, $f_name, replace-tokens($f_value));
+    }
+  }
+  @return $map;
+}

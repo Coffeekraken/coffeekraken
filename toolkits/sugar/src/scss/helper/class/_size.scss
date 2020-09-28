@@ -1,0 +1,65 @@
+@mixin classes-helper-size() {
+  @if class-match-namespace('sugar.helper.size.abs.cover') {
+    /**
+    * @name 		#{sel(abs-cover)}
+    * @namespace         sugar.scss.helper.class
+    * @class-namespace     sugar.helper.size.abs.cover
+    * @type        class
+    *
+    * Set a size that will cover the entire parent surface by positionning it in absolute
+    *
+    * @example 	html
+    * <div class="#{sel(ratio-16-9)}">
+    * 	<img src="https://source.unsplash.com/random" class="#{sel(abs-cover)}" />
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(abs-cover)} {
+      @include size(cover, $position: absolute);
+    }
+  }
+  @if class-match-namespace('sugar.helper.size.abs.contain') {
+    /**
+    * @name 		#{sel(abs-contain)}
+    * @namespace         sugar.scss.helper.class
+    * @class-namespace     sugar.helper.size.abs.contain
+    * @type        class
+    *
+    * Set a size that will contain the entire parent surface by positionning it in absolute
+    *
+    * @example 	html
+    * <div class="#{sel(ratio-16-9)}">
+    * 	<img src="https://source.unsplash.com/random" class="#{sel(abs-contain)}" />
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(abs-contain)} {
+      @include size(contain, $position: absolute);
+    }
+  }
+  @if class-match-namespace('sugar.helper.size.abs.fit') {
+    /**
+    * @name 		#{sel(abs-fit)}
+    * @namespace         sugar.scss.helper.class
+    * @class-namespace     sugar.helper.size.abs.fit
+    * @type        class
+    *
+    * Set a size that will fit the entire parent surface by positionning it in absolute
+    *
+    * @example 	html
+    * <div class="#{sel(ratio-16-9)}">
+    * 	<img src="https://source.unsplash.com/random" class="#{sel(abs-fit)}" />
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(abs-fit)} {
+      @include size(fit, $position: absolute);
+    }
+  }
+}

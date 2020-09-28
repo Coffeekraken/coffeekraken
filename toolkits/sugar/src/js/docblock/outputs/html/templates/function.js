@@ -1,5 +1,7 @@
 export default `
-{{include "function"}}
+<div class="s-db-output s-db-output--html s-vr">
+    {{include "function"}}
 
-{{include "..."}}
+    {{include "..."}}
+</div>
 `;

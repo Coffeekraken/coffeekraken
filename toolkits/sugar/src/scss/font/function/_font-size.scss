@@ -1,0 +1,7 @@
+// @TODO    documentation
+@function font-size($size) {
+  @if type-of($size) == string {
+    @return interpolate(setting('typography.font-size'), $size);
+  }
+  @return $size;
+}

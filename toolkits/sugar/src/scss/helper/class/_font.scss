@@ -1,0 +1,164 @@
+@mixin classes-helper-font() {
+  @if class-match-namespace('sugar.helper.font.family') {
+    @each $name, $font in setting('fonts') {
+      @if class-match-namespace('sugar.helper.font.family.#{$name}') {
+        /**
+          * @name       	  #{sel(f-#{$name})}
+          * @namespace       sugar.scss.core.class
+          * @class-namespace           sugar.helper.font.family.#{$name}
+          * @type        class
+          *
+          * Apply the font **#{$name}**
+          *
+          * @example 	html
+          * <div class="#{sel(f-#{$name})}">
+          * 	I have the font "#{$name}" applied
+          * </div>
+          *
+          * @since       1.0.0
+          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        #{sel("f-#{$name}")} {
+          @include font($name);
+        }
+      }
+    }
+  }
+
+  @if class-match-namespace('sugar.helper.font.weight.bold') {
+    /**
+    * @name 		#{sel(f-bold)}
+    * @namespace           sugar.scss.helper.class
+    * @class-namespace     sugar.helper.font.weight.bold
+    * @type        class
+    *
+    * Set the font-weight to ```bold```
+    *
+    * @example 	html
+    * This <span class="#{sel(f-bold)}">word</span> is bold
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(f-bold)} {
+      font-weight: bold;
+    }
+  }
+  @if class-match-namespace('sugar.helper.font.weight.lighter') {
+    /**
+    * @name 		#{sel(f-lighter)}
+    * @namespace           sugar.scss.helper.class
+    * @class-namespace     sugar.helper.font.weight.lighter
+    * @type        class
+    *
+    * Set the font-weight to ```lighter```
+    *
+    * @example 	html
+    * 	This <span class="#{sel(f-lighter)}">word</span> is lighter
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(f-lighter)} {
+      font-weight: lighter;
+    }
+  }
+  @if class-match-namespace('sugar.helper.font.weight.bolder') {
+    /**
+    * @name 		#{sel(f-bolder)}
+    * @namespace           sugar.scss.helper.class
+    * @class-namespace     sugar.helper.font.weight.bolder
+    * @type        class
+    *
+    * Set the font-weight to ```bolder```
+    *
+    * @example 	html
+    * This <span class="#{sel(f-bolder)}">word</span> is bolder
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(f-bolder)} {
+      font-weight: bolder;
+    }
+  }
+  @if class-match-namespace('sugar.helper.font.weight.normal') {
+    /**
+    * @name 		#{sel(f-normal)}
+    * @namespace           sugar.scss.helper.class
+    * @class-namespace     sugar.helper.font.weight.normal
+    * @type        class
+    *
+    * Set the font-weight to ```normal```
+    *
+    * @example 	html
+    * <div class="#{sel(f-bold)}">
+    * 	This <span class="#{sel(f-normal)}">word</span> is normal
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(f-normal)} {
+      font-weight: normal;
+      font-style: normal;
+    }
+  }
+  @if class-match-namespace('sugar.helper.font.style.italic') {
+    /**
+    * @name 		#{sel(f-italic)}
+    * @namespace           sugar.scss.helper.class
+    * @class-namespace     sugar.helper.font.style.italic
+    * @type        class
+    *
+    * Set the font-style to ```italic```
+    *
+    * @example 	html
+    * This <span class="#{sel(f-italic)}">word</span> is italic
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(f-italic)} {
+      font-style: italic;
+    }
+  }
+  @if class-match-namespace('sugar.helper.font.style.oblique') {
+    /**
+    * @name 		#{sel(f-oblique)}
+    * @namespace           sugar.scss.helper.class
+    * @class-namespace     sugar.helper.font.style.oblique
+    * @type        class
+    *
+    * Set the font-style to ```oblique```
+    *
+    * @example 	html
+    * This <span class="#{sel(f-oblique)}">word</span> is oblique
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(f-oblique)} {
+      font-style: oblique;
+    }
+  }
+  @if class-match-namespace('sugar.helper.font.variant.small-caps') {
+    /**
+    * @name 		#{sel(f-small-caps)}
+    * @namespace           sugar.scss.helper.class
+    * @class-namespace     sugar.helper.font.variant.small-caps
+    * @type        class
+    *
+    * Set the font-variant to ```small-caps```
+    *
+    * @example 	html
+    * This <span class="#{sel(f-small-caps)}">word</span> is small-caps
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(f-small-caps)} {
+      font-variant: small-caps;
+    }
+  }
+}

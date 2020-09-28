@@ -102,27 +102,33 @@ module.exports = {
   titles: {
     h1: {
       'font-family': 'title',
-      'font-size': 'bigger'
+      'font-size': 'bigger',
+      'margin-bottom': 'medium'
     },
     h2: {
       'font-family': 'title',
-      'font-size': 'big'
+      'font-size': 'big',
+      'margin-bottom': 'medium'
     },
     h3: {
       'font-family': 'title',
-      'font-size': 'medium'
+      'font-size': 'medium',
+      'margin-bottom': 'default'
     },
     h4: {
       'font-family': 'title',
-      'font-size': 'default'
+      'font-size': 'default',
+      'margin-bottom': 'default'
     },
     h5: {
       'font-family': 'title',
-      'font-size': 'small'
+      'font-size': 'small',
+      'margin-bottom': 'small'
     },
     h6: {
       'font-family': 'title',
-      'font-size': 'smaller'
+      'font-size': 'smaller',
+      'margin-bottom': 'small'
     }
   },
 
@@ -142,12 +148,14 @@ module.exports = {
     default: {
       'font-family': 'title',
       'font-size': 'medium',
-      'line-height': '2rem'
+      'line-height': '2rem',
+      'margin-bottom': 'default'
     },
     head: {
       'font-family': 'default',
       'font-size': 'big',
-      'line-height': '3rem'
+      'line-height': '3rem',
+      'margin-bottom': 'default'
     }
   }
   // blockquote: {

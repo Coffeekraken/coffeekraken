@@ -1,0 +1,23 @@
+@mixin classes-helper-screen-reader() {
+  @if class-match-namespace('sugar.helper.screen-reader.only') {
+    /**
+    * @name 		#{sel(sr-only)}
+    * @namespace         sugar.scss.helper.class
+    * @class-namespace     sugar.helper.screen-reader.only
+    * @type        class
+    *
+    * Display the element only on screen readers
+    *
+    * @example 	html
+    * <div class="ratio-16-9">
+    * 	<img src="https://source.unsplash.com/random" class="s-abs-cover #{sel(sr-only)}" />
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(sr-only)} {
+      @include sr-only();
+    }
+  }
+}

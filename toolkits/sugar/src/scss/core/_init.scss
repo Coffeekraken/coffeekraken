@@ -21,7 +21,7 @@ $_sugar-inited: false;
     $_sugar-inited: true !global;
 
     // reset
-    @if setting("reset") == true {
+    @if setting('reset') == true {
       @include reset();
     }
 
@@ -35,7 +35,7 @@ $_sugar-inited: false;
     // @include init-settings-to-css-variables();
 
     // // border box
-    @if setting("border-box") == true {
+    @if setting('border-box') == true {
       @include init-border-box();
     }
 
@@ -50,6 +50,5 @@ $_sugar-inited: false;
 
     // typography
     @include init-typography();
-
   }
 }

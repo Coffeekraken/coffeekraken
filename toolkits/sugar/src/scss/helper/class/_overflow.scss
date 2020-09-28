@@ -1,0 +1,55 @@
+@mixin classes-helper-overflow() {
+  @if class-match-namespace('sugar.helper.overflow.hidden') {
+    /**
+    * @name 		#{sel(overflow-hidden)}
+    * @namespace           sugar.scss.helper.class
+    * @class-namespace     sugar.helper.overflow.hidden
+    * @type        class
+    *
+    * Set the overflow to hidden
+    *
+    * @example 	html
+    * <div class="#{sel(overflow-hidden)}" style="height:3em;">
+    * 	<p>Hello world</p>
+    * 	<p>Hello world</p>
+    * 	<p>Hello world</p>
+    * 	<p>Hello world</p>
+    * 	<p>Hello world</p>
+    * 	<p>Hello world</p>
+    * </div>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(overflow-hidden)} {
+      overflow: hidden;
+    }
+  }
+
+  @if class-match-namespace('sugar.helper.overflow.auto') {
+    /**
+    * @name 		#{sel(overflow-auto)}
+    * @namespace           sugar.scss.helper.class
+    * @class-namespace     sugar.helper.overflow.auto
+    * @type        class
+    *
+    * Set the overflow to auto
+    *
+    * @example 	html
+    * <div class="#{sel(overflow-auto)}" style="height:3em;">
+    * 	<p>Hello world</p>
+    * 	<p>Hello world</p>
+    * 	<p>Hello world</p>
+    * 	<p>Hello world</p>
+    * 	<p>Hello world</p>
+    * 	<p>Hello world</p>
+    * </div>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(overflow-auto)} {
+      overflow: auto;
+    }
+  }
+}

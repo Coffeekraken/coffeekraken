@@ -1,12 +1,1 @@
-@import "parse-properties";
-@import "replace-tokens";
-@import 'str-index';
-@import 'str-is-url';
-@import 'str-length';
-@import 'str-replace';
-@import 'str-slice';
-@import 'str-split';
-@import 'str-trim';
-@import 'str-unique-id';
-@import 'str-unquote';
-@import 'str-url-ext';
+@import 'function/all';

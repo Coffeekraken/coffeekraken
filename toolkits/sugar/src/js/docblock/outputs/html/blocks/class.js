@@ -3,7 +3,7 @@ export default `
   {{#if name}}<!-- @name    {{name}} -->{{/if}}
 
   {{#if name}}
-    <h1 class="s-db-h1">
+    <h1 class="s-h1">
       {{#if static}}
         <span class="s-db-static">Static</span>span>
       {{/if}}
@@ -19,24 +19,24 @@ export default `
     </h1>
   {{/if}}
   {{#if since}}
-    <h2 class="s-db-h3">
+    <h2 class="s-h3">
       <span class="s-db-since">Since: {{since}}</span>
     </h2>
   {{/if}}
 
   {{#if description}}
-    <p class="s-db-description">{{description}}</p>
+    <p class="s-p">{{description}}</p>
   {{/if}}
 
   {{#if param}}
     <div class="s-db-parameters">
-      <h2 class="s-db-h2">
+      <h2 class="s-h2">
         Parameters
       </h2>
-      <ol class="s-db-ol">
+      <ol class="s-ol">
         {{#each param}}
-        <li class="s-db-li">
-          <h3 class="s-db-h3">{{name}}</h3>
+        <li class="s-li">
+          <h3 class="s-h3">{{name}}</h3>
           {{#if default}}
             <span class="s-db-default">{{default}}</span>
           {{/if}}
@@ -46,7 +46,7 @@ export default `
             </span>
           {{/if}}
           {{#if description}}
-            <p class="s-db-description">
+            <p class="s-p">
               {{description}}
             </p>
           {{/if}}
@@ -63,12 +63,12 @@ export default `
 
   {{#if example}}{{#example}}
     <div class="s-db-example">
-      <h2 class="s-db-h2">
+      <h2 class="s-h2">
         Example <span class="s-db-language">{{language}}</span>
       </h2>
 
-      <pre class="s-db-pre s-db-pre--{{language}}">
-        <code class="s-db-code">
+      <pre class="s-pre s-pre--{{language}}">
+        <code class="s-code">
           {{code}}
         </code>
       </pre>
@@ -77,7 +77,7 @@ export default `
 
   {{#if author}}{{#author}}
     <div class="s-db-author">
-      <h3 class="s-db-h3">
+      <h3 class="s-h3">
         Author
       </h3>
       <span class="s-db-name">{{name}}</span>

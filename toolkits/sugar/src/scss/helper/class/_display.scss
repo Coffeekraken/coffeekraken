@@ -1,0 +1,213 @@
+@mixin classes-helper-display() {
+  @if class-match-namespace('sugar.helper.display.block') {
+    /**
+    * @name 		#{sel(block)}
+    * @namespace             sugar.scss.helper.class
+    * @class-namespace         sugar.helper.display.block
+    * @type        class
+    *
+    * Display the element as ```block```
+    *
+    * @example 	html
+    * <div class="#{sel(block)}">
+    * 	I'm displayed as block
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(block)} {
+      display: block;
+    }
+  }
+  @if class-match-namespace('sugar.helper.display.inline') {
+    /**
+    * @name 		#{sel(inline)}
+    * @namespace             sugar.scss.helper.class
+    * @class-namespace         sugar.helper.display.inline
+    * @type        class
+    *
+    * Display the element as ```inline```
+    *
+    * @example 	html
+    * <div class="#{sel(inline)}">
+    * 	I'm displayed as inline
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(inline)} {
+      display: inline;
+    }
+  }
+  @if class-match-namespace('sugar.helper.display.inline-block') {
+    /**
+    * @name 		#{sel(inline-block)}
+    * @namespace             sugar.scss.helper.class
+    * @class-namespace         sugar.helper.display.inline-block
+    * @type        class
+    *
+    * Display the element as ```inline-block```
+    *
+    * @example 	html
+    * <div class="#{sel(inline-block)}">
+    * 	I'm displayed as inline-block
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(inline-block)} {
+      display: inline-block;
+    }
+  }
+  @if class-match-namespace('sugar.helper.display.show') {
+    /**
+    * @name 		#{sel(show)}
+    * @namespace             sugar.scss.helper.class
+    * @class-namespace         sugar.helper.display.show
+    * @type        class
+    *
+    * Display the element as ```block```
+    *
+    * @example 	html
+    * <div class="#{sel(show)}">
+    * 	I'm displayed
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(show)} {
+      display: block;
+    }
+  }
+  @if class-match-namespace('sugar.helper.display.show-inline') {
+    /**
+    * @name 		#{sel(show-inline)}
+    * @namespace             sugar.scss.helper.class
+    * @class-namespace         sugar.helper.display.show-inline
+    * @type        class
+    *
+    * Display the element as ```inline-block```
+    *
+    * @example 	html
+    * <div class="#{sel(show-inline)}">
+    * 	I'm inline displayed
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(show-inline)} {
+      display: inline-block;
+    }
+  }
+  @if class-match-namespace('sugar.helper.display.hidden') {
+    /**
+    * @name 		#{sel(hidden)}
+    * @namespace             sugar.scss.helper.class
+    * @class-namespace         sugar.helper.display.hidden
+    * @type        class
+    *
+    * Hide the element by setting the display to ```none```
+    *
+    * @example 	html
+    * <div class="#{sel(hidden)}">
+    * 	I'm hidden
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(hidden)} {
+      display: none;
+    }
+  }
+  @if class-match-namespace('sugar.helper.display.hide') {
+    /**
+    * @name 		#{sel(hide)}
+    * @namespace             sugar.scss.helper.class
+    * @class-namespace         sugar.helper.display.hide
+    * @type        class
+    *
+    * Hide the element by setting the display to ```none```
+    *
+    * @example 	html
+    * <div class="#{sel(hide)}">
+    * 	I'm hidden
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(hide)} {
+      display: none;
+    }
+  }
+  @if class-match-namespace('sugar.helper.display.visible') {
+    /**
+    * @name 		#{sel(visible)}
+    * @namespace             sugar.scss.helper.class
+    * @class-namespace         sugar.helper.display.visible
+    * @type        class
+    *
+    * Display the element by setting the visibility to ```visible```
+    *
+    * @example 	html
+    * <div class="#{sel(visible)}">
+    * 	I'm visible
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(visible)} {
+      visibility: visible;
+    }
+  }
+  @if class-match-namespace('sugar.helper.display.invisible') {
+    /**
+    * @name 		#{sel(invisible)}
+    * @namespace             sugar.scss.helper.class
+    * @class-namespace         sugar.helper.display.invisible
+    * @type        class
+    *
+    * Display the element by setting the visibility to ```hidden```
+    *
+    * @example 	html
+    * <div class="#{sel(invisible)}">
+    * 	I'm invisible
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(invisible)} {
+      visibility: hidden;
+    }
+  }
+  @if class-match-namespace('sugar.helper.display.visually-hidden') {
+    /**
+    * @name 		#{sel(visually-hidden)}
+    * @namespace             sugar.scss.helper.class
+    * @class-namespace         sugar.helper.display.visually-hidden
+    * @type        class
+    *
+    * Hide the element from display but not for SEO.
+    * This class use some tricks to make the element dissapear without using some ```display:none;```, etc...
+    *
+    * @example 	html
+    * <div class="#{sel(visually-hidden)}">
+    * 	I'm only visually hidden
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(visually-hidden)} {
+      @include visually-hidden();
+    }
+  }
+}

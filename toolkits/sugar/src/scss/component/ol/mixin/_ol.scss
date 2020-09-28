@@ -1,0 +1,9 @@
+/**
+ * @name          ol
+ * @namespace     sugar.scss.component.ol.mixin
+ * @type            Mixin
+ *
+ * Generate the properties and child css for the ol component
+ *
+ * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+ * @param       {List}      [$size=default]                 The size you want to for your list

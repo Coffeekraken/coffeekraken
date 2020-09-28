@@ -15,7 +15,7 @@
     );
   }
 
-  .#{text-format-class()} {
+  .#{tf-class()} {
 
     @each $key, $config in map-get($typographySettingsMap, format, ()) {
 

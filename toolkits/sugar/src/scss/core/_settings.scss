@@ -12,7 +12,9 @@
  */
 $__settings: () !global;
 
-@if global-variable-exists(sugarUserSettings) and meta.type-of($sugarUserSettings) == 'map' {
+@if global-variable-exists(sugarUserSettings) and
+  meta.type-of($sugarUserSettings) ==
+  'map'
+{
   $__settings: $sugarUserSettings !global;
-  // $__settings: map-extend($__settings, $sugarUserSettings) !global;
 }

@@ -1,10 +1,15 @@
+@import './classes';
+
 @import 'core/all';
 
+@import 'animation/all';
 @import 'coffeekraken/all';
-@import 'components/all';
+@import 'color/all';
+@import 'component/all';
 @import 'effect/all';
+@import 'filter/all';
+@import 'font/all';
 @import 'form/all';
-@import 'format/all';
 @import 'grid/all';
 @import 'helper/all';
 @import 'icon/all';
@@ -13,15 +18,16 @@
 @import 'link/all';
 @import 'list/all';
 @import 'loader/all';
+@import 'look-and-feel/all';
 @import 'meta/all';
 @import 'responsive/all';
 @import 'screen-reader/all';
 @import 'scrollbar/all';
-@import 'shadow/smooth-shadow';
+@import 'selector/all';
+@import 'shadow/all';
 @import 'shape/all';
+@import 'transition/all';
 @import 'typography/all';
 @import 'unit/all';
 @import 'util/all';
 @import 'vendor/all';
-
-@import 'core/helper-classes';

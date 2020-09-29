@@ -1,5 +1,5 @@
 export default `
-<div class="s-db-output s-db-output--html s-vr">
+<div class="s-db-output s-db-output--html">
   {{include "class"}}
 
   <h2 class="s-db-h2">

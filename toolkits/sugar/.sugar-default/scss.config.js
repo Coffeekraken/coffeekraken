@@ -2,6 +2,7 @@ module.exports = {
   // import some settings
   borders: '@config.borders',
   classes: '@config.classes',
+  components: '@config.components',
   colors: '@config.colors',
   fonts: '@config.fonts',
   filters: '@config.filters',

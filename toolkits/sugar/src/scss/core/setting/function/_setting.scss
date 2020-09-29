@@ -29,9 +29,8 @@
 
   // check if has a component
   @if $context {
-    $path: 'contexts.#{$context}.#{$path}';
+    $path: '#{$context}.#{$path}';
   }
-
   $value: map-get($__settings, $path);
 
   @if not $value and $context {

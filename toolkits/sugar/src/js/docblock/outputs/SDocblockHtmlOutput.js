@@ -10,6 +10,13 @@ import __defaultBlock from './html/blocks/default';
 import __classBlock from './html/blocks/class';
 import __functionBlock from './html/blocks/function';
 
+import __handlebars from 'handlebars';
+
+import __headingPartial from './html/partials/heading';
+import __paramsPartial from './html/partials/params';
+import __examplePartial from './html/partials/example';
+import __authorPartial from './html/partials/author';
+
 /**
  * @name            SDocblockHtmlOutput
  * @namespace       sugar.js.docblock.outputs
@@ -84,14 +91,32 @@ module.exports = class SDocblockHtmlOutput extends __SDocblockOutput {
       __deepMerge(
         {
           templates: {
-            default: __defaultTemplate,
-            class: __classTemplate,
-            function: __functionTemplate
+            default:
+              '@coffeekraken/sugar/js/docblock/outputs/html/templates/default.js',
+            class:
+              '@coffeekraken/sugar/js/docblock/outputs/html/templates/class.js',
+            function:
+              '@coffeekraken/sugar/js/docblock/outputs/html/templates/function.js'
           },
           blocks: {
-            default: __defaultBlock,
-            class: __classBlock,
-            function: __functionBlock
+            default:
+              '@coffeekraken/sugar/js/docblock/outputs/html/blocks/default.js',
+            class:
+              '@coffeekraken/sugar/js/docblock/outputs/html/blocks/class.js',
+            function:
+              '@coffeekraken/sugar/js/docblock/outputs/html/blocks/function.js'
+          },
+          partials: {
+            author:
+              '@coffeekraken/sugar/js/docblock/outputs/html/partials/author.js',
+            heading:
+              '@coffeekraken/sugar/js/docblock/outputs/html/partials/heading.js',
+            example:
+              '@coffeekraken/sugar/js/docblock/outputs/html/partials/example.js',
+            params:
+              '@coffeekraken/sugar/js/docblock/outputs/html/partials/params.js',
+            sharings:
+              '@coffeekraken/sugar/js/docblock/outputs/html/partials/sharings.js'
           }
         },
         settings

@@ -7,3 +7,35 @@
  *
  * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
  * @param       {List}      [$size=default]                 The size you want to for your list
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin ol($color: default, $size: default, $separator: '.', $scope: null) {
+  @if scope('bare', $scope) {
+    display: block;
+    line-height: setting('look-and-feel.line-height');
+  }
+
+  @if scope('style', $scope) {
+    list-style: none;
+    counter-reset: li;
+
+    & > li {
+      counter-increment: li;
+      padding-left: 2.5em;
+      position: relative;
+
+      &::before {
+        content: counter(li) '#{$separator}';
+        color: color($color);
+        display: inline-block;
+        width: 2em;
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: right;
+      }
+    }
+  }
+}

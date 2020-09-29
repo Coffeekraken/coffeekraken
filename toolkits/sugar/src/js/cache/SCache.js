@@ -2,6 +2,8 @@ import __deepMerge from '../object/deepMerge';
 import __SCacheAdapter from './adapters/SCacheAdapter';
 import __convert from '../time/convert';
 import __isNode from '../is/node';
+import __md5 from '../crypt/md5';
+import __toString from '../string/toString';
 
 /**
  * @name                                SCache
@@ -153,7 +155,7 @@ export default class SCache {
    *
    * Get a value back from the cache using the specified adapter in the settings
    *
-   * @param               {String}              name              The name of the item to get back from the cache
+   * @param               {String|Array|Object}              name              The name of the item to get back from the cache. If not a string, will be hased using md5 encryption
    * @param               {Boolean}             [valueOnly=true]  Specify if you want the value only or the all cache object
    * @return              {Promise}                               A promise that will be resolved once the item has been getted
    *
@@ -163,6 +165,10 @@ export default class SCache {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async get(name, valueOnly = true) {
+    // check the name
+    if (typeof name !== 'string') {
+      name = __md5(__toString(name)).toString();
+    }
     // get the adapter
     const adapter = await this.getAdapter();
     // using the specified adapter to get the value back
@@ -194,7 +200,7 @@ export default class SCache {
    *
    * Set a value to the cache system using the specified adapter with some settings like described bellow
    *
-   * @param               {String}              name              The name of the item to set in the cache system
+   * @param               {String|Array|Object}              name              The name of the item to get back from the cache. If not a string, will be hased using md5 encryption
    * @param               {Mixed}               value             The value to set.
    * @param               {Object}              [settings={}]
    * The settings for this particular item:
@@ -210,6 +216,11 @@ export default class SCache {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async set(name, value, settings = {}) {
+    // check the name
+    if (typeof name !== 'string') {
+      name = __md5(__toString(name)).toString();
+    }
+
     // test name
     if (!/^[a-zA-Z0-9_\-\+\.]+$/.test(name)) {
       throw new Error(

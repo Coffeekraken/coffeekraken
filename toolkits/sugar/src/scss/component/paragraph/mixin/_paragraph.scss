@@ -1,0 +1,48 @@
+/**
+ * @name              paragraph
+ * @namespace         sugar.scss.component.paragraph.mixin
+ * @type              Mixin
+ *
+ * This mixin generate all the properties for a paragraph depending on the parameters you set.
+ *
+ * @param         {Number}        $level          The paragraph level you want to generate
+ * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"            
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+ @mixin paragraph($name, $scope: null) {
+
+    @if not setting('typography.paragraphs.#{$name}') {
+        @error 'The passed "#{$name}" paragraph does not exist in the "typography.config.js" configuration file...';
+    }
+
+    @include scope('bare', $scope) {
+      display: block;
+      $size: setting('typography.paragraphs.#{$name}.font-size');
+      font-size: font-size($size);
+  
+      @include vr-scope() {
+        margin-bottom: space(
+          setting('typography.paragraphs.#{$name}.margin-bottom')
+        );
+      }
+    }
+    @include scope('style', $scope) {
+      $family: setting('typography.paragraphs.#{$name}.font-family');
+      font-family: font-family($family);
+  
+      $props: setting('typography.paragraphs.#{$name}');
+      @each $prop in map-keys($props) {
+        @if $prop !=
+          'font-size' and
+          $prop !=
+          'font-family' and
+          $prop !=
+          'margin-bottom'
+        {
+          #{$prop}: map-get($props, $prop);
+        }
+      }
+    }
+  }

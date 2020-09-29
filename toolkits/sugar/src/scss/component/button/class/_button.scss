@@ -1,0 +1,125 @@
+/**
+  * @name            button-classes
+  * @namespace       sugar.scss.component.button.class
+  * @type            Mixin
+  *
+  * This mixin generate all the css needed to display properly some buttons.
+  *
+  * @feature
+  * - Support all the registered sugar colors like ```primary```, ```secondary```, etc...
+  * - Support for sizes like ```smaller```, ```small```, ```medium```, etc...
+  * - Support disable state
+  *
+  * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+  * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
+  * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
+  * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
+  * @param       {String}        [$name='btn']       The className to use for the generation
+  *
+  * @example         html
+  * <a class="#{sel(btn)}">I'm a cool button</a>
+  *
+  * @example           scss
+  * @include Sugar.button-classes();
+  * @include Sugar.classes('sugar.component.button');
+  *
+  * @since       2.0.0
+  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+@mixin button-classes(
+  $colors: map-keys(setting('components.button.colors')),
+  $sizes: map-keys(setting('components.button.sizes')),
+  $base-padding: setting('look-and-feel.padding'),
+  $border-radius: setting('look-and-feel.border-radius'),
+  $name: 'btn'
+) {
+  @if class-match-namespace('sugar.component.button') {
+    @if scope('bare') {
+      /**
+        * @name              .#{sel($name)}, .#{sel(#{tf-class()})} button
+        * @namespace         sugar.scss.component.button
+        * @type              Classname
+        *
+        * This class can be applied on any ```#{$name}``` component
+        *
+        * @example         html
+        * <a class="#{sel($name)}">I am a cool button</a>
+        *
+        * @since       2.0.0
+        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+      .#{sel(#{tf-class()})} button,
+      .#{sel($name)} {
+        @include button($scope: 'bare' 'main', $base-padding: $base-padding);
+      }
+
+      @each $size in $sizes {
+        /**
+          * @name              .#{sel(#{$name}--#{$size})}, .#{sel(#{tf-class()})} button.#{sel($size)}
+          * @namespace         sugar.scss.component.button.#{$size}
+          * @type              Classname
+          *
+          * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```
+          *
+          * @example         html
+          * <a class="#{sel($name)} #{sel(#{$name}--#{$size})}">I am a cool #{$size} button</a>
+          *
+          * @since       2.0.0
+          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{sel(#{tf-class()})} button.#{$size},
+        .#{sel('#{$name}--#{$size}')} {
+          @include button(
+            $size: $size,
+            $scope: 'bare',
+            $base-padding: $base-padding
+          );
+        }
+      }
+    }
+
+    @if scope('style') {
+      /**
+        * @name              .#{sel($name)}, .#{sel(#{tf-class()})} button
+        * @namespace         sugar.scss.component.button
+        * @type              Classname
+        *
+        * This class can be applied on any ```#{$name}``` component
+        *
+        * @example         html
+        * <a class="#{sel($name)}">I am a cool button</a>
+        *
+        * @since       2.0.0
+        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+      .#{sel(#{tf-class()})} button,
+      .#{sel($name)} {
+        @include button($scope: 'style' 'main', $border-radius: $border-radius);
+      }
+
+      @each $color in $colors {
+        /**
+          * @name              .#{sel(#{$name}--#{$color})}, .#{sel(#{tf-class()})} button.#{sel($color)}
+          * @namespace         sugar.scss.component.button.#{$color}
+          * @type              Classname
+          *
+          * This class can be applied on any ```#{$name}``` component to specify his color to ```#{$color}```
+          *
+          * @example         html
+          * <a class="#{sel($name)} #{sel(#{$name}--#{$color})}">I am a cool #{$color} button</a>
+          *
+          * @since       2.0.0
+          * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{sel(#{tf-class()})} button.#{$color},
+        .#{sel($name)}.#{sel('#{$name}--#{$color}')} {
+          @include button(
+            $color: $color,
+            $scope: 'style',
+            $border-radius: $border-radius
+          );
+        }
+      }
+    }
+  }
+}

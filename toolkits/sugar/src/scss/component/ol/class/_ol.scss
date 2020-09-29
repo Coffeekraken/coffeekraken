@@ -31,10 +31,11 @@
 @mixin ol-classes(
   $colors: map-keys(setting('colors')),
   $sizes: map-keys(setting('sizes')),
+  $separator: '.',
   $name: 'ol'
 ) {
   @if class-match-namespace('sugar.component.ol') {
-    @include scope('bare') {
+    @if scope('bare') {
       @each $size in $sizes {
         /**
       * @name              .#{sel(#{$name}--#{$size})}, .#{sel(#{tf-class()})} ol.#{sel($size)}
@@ -56,10 +57,18 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+        .#{sel(#{tf-class()})} #{$name}.#{$size},
+        .#{sel($name)}.#{sel('#{$name}--#{$size}')} {
+          @include ol(
+            $size: $size,
+            $separator: $separator,
+            $scope: 'bare'
+          );
+        }
       }
     }
 
-    @include scope('style') {
+    @if scope('style') {
       @each $color in $colors {
         /**
       * @name              .#{sel(#{$name}--#{$color})}, .#{sel(#{tf-class()})} ol.#{sel($color)}
@@ -81,58 +90,15 @@
       * @since       2.0.0
       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+        .#{sel(#{tf-class()})} #{$name}.#{$color},
+        .#{sel($name)}.#{sel('#{$name}--#{$color}')} {
+          @include ol(
+            $color: $color,
+            $scope: 'style',
+            $separator: $separator
+          );
+        }
       }
-    }
-  }
-}
-
-/**
- * @name              ol-bare
- * @namespace         sugar.scss.component.mixin.ol
- * @type              Mixin
- *
- * This mixin generate all the bare properties for a list depending on the parameters you set.
- *
- * @param       {List}      [$size=default]                 The size you want to for your list
- *
- * @since       2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-@mixin ol-bare($size: default) {
-  display: block;
-  line-height: setting('look-and-feel.line-height');
-}
-
-/**
- * @name              ol-style
- * @namespace         sugar.scss.component.mixin.ol
- * @type              Mixin
- *
- * This mixin generate all the style properties for a list depending on the parameters you set.
- *
- * @param       {List}      [$color=primary]                The color you want for your list
- *
- * @since       2.0.0
- * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-@mixin ol-style($color: primary, $separator: '.') {
-  list-style: none;
-  counter-reset: li;
-
-  & > li {
-    counter-increment: li;
-    padding-left: 2.5em;
-    position: relative;
-
-    &::before {
-      content: counter(li) '#{$separator}';
-      color: color($color);
-      display: inline-block;
-      width: 2em;
-      position: absolute;
-      top: 0;
-      left: 0;
-      text-align: right;
     }
   }
 }

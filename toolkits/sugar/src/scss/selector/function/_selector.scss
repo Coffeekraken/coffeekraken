@@ -15,13 +15,15 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@function selector($selector, $prefix: nu) {
-  @if $prefix == null {
+@function selector($selector, $prefix: null) {
+  @if $prefix==null {
     $prefix: setting('classes.generate.prefix');
   }
+
   @if $prefix {
     $selector: '#{$prefix}-#{$selector}';
   }
+
   $selector: str-replace($selector, '--default', '');
   $selector: str-replace($selector, '-default', '');
   $selector: str-replace($selector, '.default', '');

@@ -38,28 +38,20 @@
  *
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin context($name-or-map) {
-  $name-or-map: test-argument(
+@mixin context($name, $settings: null) {
+  $name: test-argument(
     'Sugar.context',
     'name-or-map',
-    'string|map',
-    $name-or-map
+    'string',
+    $name
   );
-  $name: $name-or-map;
 
   // if the passes argument is a context map
   // register this context as new one
-  @if meta.type-of($name-or-map) == 'map' {
-    $name: string.unique-id();
-    @include context-setup($name, $name-or-map);
+  @if $settings != null and type-of($settings) == map {
+    @include context-setup($name, $settings);
   }
 
-  // check if the context exist
-  $cont: map.get($__settings, contexts);
-  $cont: map.get($cont, $name);
-  @if not $cont {
-    @error ("The context #{$name} does not exist. Please use the s-context-setup mixin to register your new context or pass directly a context map to this mixin...");
-  }
   $previous-context: $__current-context;
   $__current-context: $name !global;
   @content;

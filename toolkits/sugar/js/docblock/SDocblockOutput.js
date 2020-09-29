@@ -1,10 +1,18 @@
 "use strict";
 
+var _SError = _interopRequireDefault(require("../error/SError"));
+
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
 var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
 
 var _handlebars = _interopRequireDefault(require("handlebars"));
+
+var _SCache = _interopRequireDefault(require("../cache/SCache"));
+
+var _node = _interopRequireDefault(require("../is/node"));
+
+var _promisedHandlebars = _interopRequireDefault(require("promised-handlebars"));
 
 var _temp;
 
@@ -32,6 +40,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @param       {SDocblock}         docblockInstance        The docblock instance you want to output using this class
  * @param       {Object}            [settings={}]           Some settings to configure your output class:
  * - ...
+ *
+ * @todo      Javascript support
  *
  * @example         js
  * import SDocblock from '@coffeekraken/sugar/js/docblock/SDocblock';
@@ -91,12 +101,16 @@ module.exports = (_temp = /*#__PURE__*/function () {
 
     // save the settings
     this._settings = (0, _deepMerge.default)({
-      templates: {}
+      templates: {},
+      blocks: {},
+      partials: {}
     }, settings); // save the docblock instance
 
     this._docblockInstance = docblockInstance; // init the handlebars helpers
 
     this._registerHandlerbarsHelpers();
+
+    this._cache = new _SCache.default('SDocblockOutput');
   }
   /**
    * @name          _registerHandlerbarsHelpers
@@ -113,21 +127,39 @@ module.exports = (_temp = /*#__PURE__*/function () {
   _createClass(SDocblockOutput, [{
     key: "_registerHandlerbarsHelpers",
     value: function _registerHandlerbarsHelpers() {
-      var includedTypes = [];
+      var _this = this;
 
-      _handlebars.default.registerHelper('include', type => {
-        if (!this._docblockInstance.blocks || !this._docblockInstance.blocks.length) return ''; // filter blocks
+      this._handlebars = (0, _promisedHandlebars.default)(_handlebars.default, {
+        promise: Promise
+      });
 
-        var blocks = this._docblockInstance.blocks.filter(block => {
-          if (!block.toObject().type) return false;
-          return type === '...' && includedTypes.indexOf(block.toObject().type.toLowerCase()) === -1 || block.toObject().type.toLowerCase() === type && includedTypes.indexOf(block.toObject().type.toLowerCase()) === -1;
-        }).map(block => {
-          return this.renderBlock(block.toObject());
-        }); // save this included type
+      this._handlebars.registerHelper('include', type => {
+        return new Promise( /*#__PURE__*/function () {
+          var _ref = _asyncToGenerator(function* (resolve, reject) {
+            if (!_this._docblockInstance.blocks || !_this._docblockInstance.blocks.length) return ''; // filter blocks
 
+            var blocks = _this._docblockInstance.blocks.filter(block => {
+              if (!block.toObject().type) return false;
+              var rendered = block._rendered;
+              block._rendered = true;
+              return rendered !== true;
+            });
 
-        includedTypes.push(type);
-        return blocks.join('\n\n');
+            var renderedBlocks = [];
+
+            for (var i = 0; i < blocks.length; i++) {
+              var block = blocks[i];
+              var result = yield _this.renderBlock(block.toObject());
+              renderedBlocks.push(result);
+            }
+
+            resolve(renderedBlocks.join('\n\n'));
+          });
+
+          return function (_x, _x2) {
+            return _ref.apply(this, arguments);
+          };
+        }());
       });
     }
     /**
@@ -148,26 +180,133 @@ module.exports = (_temp = /*#__PURE__*/function () {
 
   }, {
     key: "renderBlock",
-    value: function renderBlock(blockObj, settings) {
-      if (settings === void 0) {
-        settings = {};
+    value: function () {
+      var _renderBlock = _asyncToGenerator(function* (blockObj, settings) {
+        if (settings === void 0) {
+          settings = {};
+        }
+
+        if (blockObj.toObject && typeof blockObj.toObject === 'function') blockObj = blockObj.toObject();
+        var type = typeof blockObj.type === 'string' ? blockObj.type.toLowerCase() : 'default';
+        var template = this._settings.blocks[type] || this._settings.blocks.default;
+        var compiledTemplateFn;
+        var templateObj = {};
+
+        if ((0, _node.default)()) {
+          // get template object
+          templateObj = this.getTemplateObj(template);
+          var cacheObj = {
+            partialsTemplateObj: this._partialsTemplateObj,
+            template: templateObj,
+            data: blockObj
+          }; // check the cache
+
+          var cachedValue = yield this._cache.get(cacheObj); // console.log('SE', Object.keys(cachedValue));
+
+          if (!cachedValue) {
+            compiledTemplateFn = this._handlebars.compile(templateObj.content, {
+              noEscape: true
+            });
+            var renderedTemplate = yield compiledTemplateFn(blockObj); // save in chache
+
+            this._cache.set(cacheObj, renderedTemplate); // return the rendered template
+
+
+            return renderedTemplate;
+          } else {
+            return cachedValue;
+          }
+        } else {
+          // return rendered template
+          return 'Support for javascript is not available yet...';
+        }
+      });
+
+      function renderBlock(_x3, _x4) {
+        return _renderBlock.apply(this, arguments);
       }
 
-      if (blockObj.toObject && typeof blockObj.toObject === 'function') blockObj = blockObj.toObject();
-      var type = typeof blockObj.type === 'string' ? blockObj.type.toLowerCase() : 'default';
-      var template = this._settings.blocks[type] || this._settings.blocks.default;
-      var compiledTemplateFn;
+      return renderBlock;
+    }()
+    /**
+     * @name          getPartialsTemplateObj
+     * @type        Function
+     * @async
+     *
+     * This method loop on all the partials and read them with their stats if we are in node context
+     *
+     * @return      {Object}          The template object of all the partials
+     *
+     * @since       2.0.0
+     *  @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+     */
 
-      try {
-        compiledTemplateFn = _handlebars.default.compile(template, {
-          noEscape: true
-        });
-      } catch (e) {
-        console.log('BLOC ERROR', e);
+  }, {
+    key: "getPartialsTemplateObj",
+    value: function getPartialsTemplateObj() {
+      var partialsTemplateObj = {};
+      Object.keys(this._settings.partials).forEach(partialName => {
+        var partialPath = this._settings.partials[partialName];
+        partialsTemplateObj[partialName] = this.getTemplateObj(partialPath); // register partials
+
+        this._handlebars.unregisterPartial(partialName);
+
+        this._handlebars.registerPartial(partialName, partialsTemplateObj[partialName].content);
+      });
+      return partialsTemplateObj;
+    }
+    /**
+     * @name          getTemplateObj
+     * @type          Function
+     * @async
+     *
+     * This method take the template url setted in the settings object and
+     * resolve it to get back a full template object with the path and the stats is we are in node context
+     *
+     * @param         {String}        template        The template path to get
+     * @return      {Object}                          The template object with the path and the stats if we are in node context
+     *
+     * @since       2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "getTemplateObj",
+    value: function getTemplateObj(template) {
+      var templateObj = {};
+
+      if ((0, _node.default)()) {
+        var __packageRoot = require('../../node/path/packageRoot');
+
+        var __packageJson = require('../../node/package/json');
+
+        var __fs = require('fs');
+
+        var json = __packageJson();
+
+        var stats, templatePath;
+
+        if (__fs.existsSync(template)) {
+          templatePath = template;
+        } else if (__fs.existsSync("".concat(__packageRoot(), "/node_modules/").concat(template))) {
+          templatePath = "".concat(__packageRoot(), "/node_modules/").concat(template);
+        } else {
+          throw new _SError.default("Sorry but the passed template url \"<yellow>".concat(template, "</yellow>\" does not exists..."));
+        }
+
+        stats = __fs.statSync(templatePath);
+        delete require.cache[require.resolve(templatePath)];
+
+        var content = require(templatePath);
+
+        templateObj = {
+          path: templatePath,
+          content: content,
+          mtime: stats.mtime
+        };
       }
 
-      var renderedTemplate = compiledTemplateFn(blockObj);
-      return renderedTemplate;
+      return templateObj;
     }
     /**
      * @name          render
@@ -187,40 +326,42 @@ module.exports = (_temp = /*#__PURE__*/function () {
   }, {
     key: "render",
     value: function render(settings) {
-      var _this = this;
+      var _this2 = this;
 
       if (settings === void 0) {
         settings = {};
       }
 
+      this._partialsTemplateObj = this.getPartialsTemplateObj();
       return new _SPromise.default( /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {
+        var _ref2 = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {
           // get the block in object format
-          var blocksArray = _this._docblockInstance.toObject(); // get the first block
+          var blocksArray = _this2._docblockInstance.toObject(); // reset all blocks rendered state
 
+
+          blocksArray.forEach(block => {
+            block._rendered = false;
+          }); // get the first block
 
           var firstBlock = blocksArray[0]; // get the template to render
 
-          var type = typeof firstBlock.type === 'string' ? firstBlock.type.toLowerCase : 'default';
-          var template = _this._settings.templates[type] || _this._settings.templates.default; // render the template
+          var type = typeof firstBlock.type === 'string' ? firstBlock.type.toLowerCase() : 'default';
+          var template = _this2._settings.templates[type] || _this2._settings.templates.default;
+
+          var templateObj = _this2.getTemplateObj(template); // render the template
+
 
           var compiledTemplateFn;
-
-          try {
-            compiledTemplateFn = _handlebars.default.compile(template, {
-              noEscape: true
-            });
-          } catch (e) {
-            console.log('E>RROR', e);
-          }
-
-          var renderedTemplate = compiledTemplateFn(); // resolve the rendering process with the rendered stack
+          compiledTemplateFn = _this2._handlebars.compile(templateObj.content, {
+            noEscape: true
+          });
+          var renderedTemplate = yield compiledTemplateFn(); // resolve the rendering process with the rendered stack
 
           resolve(renderedTemplate);
         });
 
-        return function (_x, _x2, _x3, _x4) {
-          return _ref.apply(this, arguments);
+        return function (_x5, _x6, _x7, _x8) {
+          return _ref2.apply(this, arguments);
         };
       }());
     }

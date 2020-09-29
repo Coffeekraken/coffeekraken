@@ -28,5 +28,9 @@
     @return -1;
   }
 
-  @return list.index($list, $value);
+  $idx: list.index($list, $value);
+  @if $idx == null or $idx == -1 {
+    @return -1;
+  }
+  @return $idx;
 }

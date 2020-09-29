@@ -1,9 +1,9 @@
 @mixin classes-shadow() {
-  @if class-match-namespace('sugar.class.shadow') {
+  @if class-match-namespace('sugar.component.shadow') {
     /**
     * @name 		#{sel(shadow)}
     * @namespace           sugar.scss.shadow.class
-    * @class-namespace     sugar.shadow
+    * @class-namespace     sugar.component.shadow
     * @type        class
     *
     * Apply the default shadow to the element
@@ -22,11 +22,11 @@
       @include smooth-shadow();
     }
   }
-  @if class-match-namespace('sugar.shadow.small') {
+  @if class-match-namespace('sugar.component.shadow.small') {
     /**
     * @name 		#{sel(shadow--small)}
     * @namespace           sugar.scss.shadow.class
-    * @class-namespace     sugar.shadow.small
+    * @class-namespace     sugar.component.shadow.small
     * @type        class
     *
     * Apply the small shadow to the element
@@ -45,11 +45,11 @@
       @include smooth-shadow($layers: 3);
     }
   }
-  @if class-match-namespace('sugar.shadow.big') {
+  @if class-match-namespace('sugar.component.shadow.big') {
     /**
     * @name 		#{sel(shadow--big)}
     * @namespace           sugar.scss.shadow.class
-    * @class-namespace     sugar.shadow.big
+    * @class-namespace     sugar.component.shadow.big
     * @type        class
     *
     * Apply the big shadow to the element

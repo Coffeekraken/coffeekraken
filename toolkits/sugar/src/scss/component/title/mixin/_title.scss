@@ -1,0 +1,37 @@
+/**
+ * @name              title
+ * @namespace         sugar.scss.component.title
+ * @type              Mixin
+ *
+ * This mixin generate all the properties for a title depending on the parameters you set.
+ *
+ * @param         {Number}        $level          The title level you want to generate
+ * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"            
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+ @mixin title($level, $scope: null) {
+    @include scope('bare', $scope) {
+      display: block;
+      $size: setting('typography.titles.h#{$level}.font-size');
+      font-size: font-size($size);
+  
+      @include vr-scope() {
+        $margin: setting('typography.titles.h#{$level}.margin-bottom');
+        margin-bottom: space($margin);
+      }
+    }
+    @include scope('style', $scope) {
+      $family: setting('typography.titles.h#{$level}.font-family');
+      font-family: font-family($family);
+  
+      $props: setting('typography.titles.h#{$level}');
+      @each $prop in map-keys($props) {
+        @if $prop != 'font-size' and $prop != 'font-family' {
+          #{$prop}: map-get($props, $prop);
+        }
+      }
+    }
+  }
+  

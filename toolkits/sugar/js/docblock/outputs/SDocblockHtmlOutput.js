@@ -18,6 +18,16 @@ var _class3 = _interopRequireDefault(require("./html/blocks/class"));
 
 var _function2 = _interopRequireDefault(require("./html/blocks/function"));
 
+var _handlebars = _interopRequireDefault(require("handlebars"));
+
+var _heading = _interopRequireDefault(require("./html/partials/heading"));
+
+var _params = _interopRequireDefault(require("./html/partials/params"));
+
+var _example = _interopRequireDefault(require("./html/partials/example"));
+
+var _author = _interopRequireDefault(require("./html/partials/author"));
+
 var _class, _temp;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -108,14 +118,21 @@ module.exports = (_temp = _class = /*#__PURE__*/function (_SDocblockOutput) {
 
     return _super.call(this, docblockInstance, (0, _deepMerge.default)({
       templates: {
-        default: _default.default,
-        class: _class2.default,
-        function: _function.default
+        default: '@coffeekraken/sugar/js/docblock/outputs/html/templates/default.js',
+        class: '@coffeekraken/sugar/js/docblock/outputs/html/templates/class.js',
+        function: '@coffeekraken/sugar/js/docblock/outputs/html/templates/function.js'
       },
       blocks: {
-        default: _default2.default,
-        class: _class3.default,
-        function: _function2.default
+        default: '@coffeekraken/sugar/js/docblock/outputs/html/blocks/default.js',
+        class: '@coffeekraken/sugar/js/docblock/outputs/html/blocks/class.js',
+        function: '@coffeekraken/sugar/js/docblock/outputs/html/blocks/function.js'
+      },
+      partials: {
+        author: '@coffeekraken/sugar/js/docblock/outputs/html/partials/author.js',
+        heading: '@coffeekraken/sugar/js/docblock/outputs/html/partials/heading.js',
+        example: '@coffeekraken/sugar/js/docblock/outputs/html/partials/example.js',
+        params: '@coffeekraken/sugar/js/docblock/outputs/html/partials/params.js',
+        sharings: '@coffeekraken/sugar/js/docblock/outputs/html/partials/sharings.js'
       }
     }, settings));
   }

@@ -13,6 +13,10 @@ var _convert = _interopRequireDefault(require("../time/convert"));
 
 var _node = _interopRequireDefault(require("../is/node"));
 
+var _md = _interopRequireDefault(require("../crypt/md5"));
+
+var _toString = _interopRequireDefault(require("../string/toString"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -194,7 +198,7 @@ var SCache = /*#__PURE__*/function () {
      *
      * Get a value back from the cache using the specified adapter in the settings
      *
-     * @param               {String}              name              The name of the item to get back from the cache
+     * @param               {String|Array|Object}              name              The name of the item to get back from the cache. If not a string, will be hased using md5 encryption
      * @param               {Boolean}             [valueOnly=true]  Specify if you want the value only or the all cache object
      * @return              {Promise}                               A promise that will be resolved once the item has been getted
      *
@@ -212,7 +216,12 @@ var SCache = /*#__PURE__*/function () {
           valueOnly = true;
         }
 
-        // get the adapter
+        // check the name
+        if (typeof name !== 'string') {
+          name = (0, _md.default)((0, _toString.default)(name)).toString();
+        } // get the adapter
+
+
         var adapter = yield this.getAdapter(); // using the specified adapter to get the value back
 
         var rawValue = yield adapter.get("".concat(this._name, ".").concat(name)); // check that we have a value back
@@ -247,7 +256,7 @@ var SCache = /*#__PURE__*/function () {
      *
      * Set a value to the cache system using the specified adapter with some settings like described bellow
      *
-     * @param               {String}              name              The name of the item to set in the cache system
+     * @param               {String|Array|Object}              name              The name of the item to get back from the cache. If not a string, will be hased using md5 encryption
      * @param               {Mixed}               value             The value to set.
      * @param               {Object}              [settings={}]
      * The settings for this particular item:
@@ -271,7 +280,12 @@ var SCache = /*#__PURE__*/function () {
           settings = {};
         }
 
-        // test name
+        // check the name
+        if (typeof name !== 'string') {
+          name = (0, _md.default)((0, _toString.default)(name)).toString();
+        } // test name
+
+
         if (!/^[a-zA-Z0-9_\-\+\.]+$/.test(name)) {
           throw new Error("You try to set an item named \"<yellow>".concat(name, "</yellow>\" in the \"").concat(this._name, "\" SCache instance but an item name can contain only these characters <green>[a-zA-Z0-9_-.]</green> but you've passed \"<red>").concat(name, "</red>\"..."));
         } // get the adapter

@@ -220,6 +220,7 @@ export default class SCache {
     if (typeof name !== 'string') {
       name = __md5(__toString(name)).toString();
     }
+    console.log('NA', name);
 
     // test name
     if (!/^[a-zA-Z0-9_\-\+\.]+$/.test(name)) {

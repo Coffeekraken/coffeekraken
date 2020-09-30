@@ -1,4 +1,5 @@
-$sugarUserSettings: (
+      
+                $sugarUserSettings: (
   borders: (
     sizes: (
       smaller: 1px,
@@ -329,225 +330,144 @@ $sugarUserSettings: (
           
         
          
-          @include Sugar.setup($sugarUserSettings);
-          @include Sugar.init();
+          
+                    
+                @include Sugar.setup($sugarUserSettings);
+                    
+                
+          
+                    
+                
         
-        /**
- * Vendors
- * All external libraries needed in the project.
- */
- /**
- * Vendors
- * All external librarie needed in the project.
- */
-
-
- /**
-  * Setup
-  * Setup all the different parts/modules/libraries.
-  */
- /**
- * Setup
- * Setup all the different parts/modules/libraries.
- */
-
- /**
-  * Utils
-  * Import all the different utils functions, mixins, classes, etc...
-  */
- /**
- * Utils
- * Import all the different utils functions, mixins, classes, etc...
- */
-
-
- /**
-  * Generic
-  * All the generic codebase for the project like typography, resets, etc...
-  */
- /**
- * Generic
- * All the generic codebase for the project like typography, resets, etc...
- */
-@include Sugar.classes(
-    // 'sugar.helper.block'
-    // 'sugar.helper.border'
-    // 'sugar.helper.clear'
-    // 'sugar.helper.clearfix'
-    // 'sugar.helper.color'
-    // 'sugar.helper.display'
-    // 'sugar.helper.filter'
-    // 'sugar.helper.flex'
-    'sugar.helper.font'
-    // 'sugar.helper.link'
-    'sugar.helper.margin'
-    // 'sugar.helper.media'
-    // 'sugar.helper.overflow'
-    'sugar.helper.padding'
-    // 'sugar.helper.pointer'
-    // 'sugar.helper.position'
-    // 'sugar.helper.pull'
-    // 'sugar.helper.ratio'
-    // 'sugar.helper.screen-reader'
-    // 'sugar.helper.size'
-    // 'sugar.helper.text'
-    // 'sugar.helper.transition'
-    // 'sugar.helper.transmation'
-    // 'sugar.helper.user-select'
-    // 'sugar.helper.vertical-align'
-
-    'sugar.component.ol'
-    'sugar.component.title'
-    'sugar.component.paragraph'
-    'sugar.component.button'
-
-    // 'sugar.component.icon'
-    // 'sugar.component.shadow'
-);
-
-@include Sugar.title-classes();
-@include Sugar.paragraph-classes();
-
-
- /**
-  * Templates
-  * All the templates level specific styling.
-  * Templates specific classes have to start with `.t-`.
-  */
- /**
- * Templates
- * All the templates level specific styling.
- */
-
-
-
- /**
-  * Pages
-  * All the pages level specific styling.
-  */
- /**
- * Pages
- * All the pages level specific styling.
- */
-
-
- /**
-  * Organisms
-  * All the organisms styling.
-  * An organism can contain other molecules or atoms and does not have to relay on his ancestors
-  * to be properly displayed.
-  * All organisms specific classes have to start with `.o-`.
-  */
- /**
- * Organisms
- * All the organisms styling.
- * An organism can contain other molecules or atoms and does not have to relay on his ancestors
- * to be properly displayed.
- */
-
-
-body {
-    background: red;
-}
-
-
-
- /**
-  * Molecules
-  * All the molecules styling.
-  * A molecule response to the same rules has the organisms, unless they cannot contain any other molecules.
-  * It normally contains only other atoms.
-  * All molecules classes have to start with `.m-`.
-  */
- /**
- * Molecules
- * All the molecules styling.
- * A molecule response to the same rules has the organisms, unless they cannot contain any other molecules.
- * It normally contains only other atoms.
- */
-
-
- /**
-  * Atoms
-  * All the atoms styling.
-  * An atom is the most basic component. It cannot contain any other atoms or anything else and have to be context free, meaning that
-  * it need to be usable everywhere we want without having to deal with pre-defined margins, etc...
-  * All atoms specific classes have to start with `.a-`.
-  */
- /**
- * Atoms
- * All the atoms styling.
- * An atom is the most basic component. It cannot contain any other atoms or anything else and have to be context free, meaning that
- * it need to be usable everywhere we want without having to deal with pre-defined margins, etc...
- */
-
-
- /**
-  * Views
-  * Import all the views scss files
-  * This need the node-sass-glob-importer package installed :
-  * https://www.npmjs.com/package/node-sass-glob-importer
-  */
- /*** IMPORTED FILE NOT FOUND ***/
-@import '../views/**/*.scss';/*** --- ***/
-
- /**
-  * Trumps
-  * All the things that does not fit in any others directory. Try to keep this folder has small as possible.
-  * If you have to many things in here, that mean that you probably need to refactor your codebase...
-  */
- /**
- * Trumps
- * All the things that does not fit in any others directory. Try to keep this folder has small as possible.
- * If you have to many things in here, that mean that you probably need to refactor your codebase...
- */
-
-
- // DO NOT UPDATE OR ADD CONTENT TO THIS FILE...
-
- @mixin coco($hello) {
-     content: 'something';
-
-     & {
-         content: 'élop';
-     }
- }
-
- .hello,
- .world:after {
-    content: 'sss';
-
- }
-
-.coco, plop {
-   content: 'Hello';
-}
-
-.plop.world #hello {
- width: 100%;
-}
-
-@media(min-width: 500px) and (max-width: 600px){
-    /* Do Something */
-    .hello {
-        content: '#{Sugar.color(primary)}';
-    }
-}
-
- /**
-  * Templates
-  * All the templates level specific styling.
-  * Templates specific classes have to start with `.t-`.
-  */
- // 
-
- @mixin coco($hello) {
-     content: 'something';
-
-     & {
-         content: 'élop';
-     }
- }
         
-      
-        
+ 
+
+
+ 
+ 
+
+ 
+ 
+
+
+ 
+ 
+
+                    
+                
+
+
+                    
+                
+
+                    
+                
+
+
+ 
+ 
+// #{Sugar.sel('ck-header')} {
+//   background: Sugar.color(dark);
+//   height: 70px;
+//   width: calc(100% - 100px);
+//   display: block;
+//   
+                    
+                
+//   
+                    
+                
+//   border-radius: Sugar.look-and-feel(border-radius);
+//   padding: 0 10px;
+// }
+//   .ck-header__logo {
+//     
+                    
+                
+//     width: 100px;
+//   }
+//   .ck-header__title {
+//     color: Sugar.color(white);
+//   }
+
+
+// // .grid-1 {
+// //   
+                    
+                
+// //   height: 100vh;
+
+// //     .area-p,
+// //   .area-1 {
+// //     background: red;
+// //   }
+// //   .area-2 {
+// //     background: blue;
+// //   }
+// //   .area-3 {
+// //     background: yellow;
+// //   }
+// //   .area-4 {
+// //     background: green;
+// //   }
+// //   .area-5 {
+// //     background: magenta;
+// //   }
+// //   .area-9 {
+// //     background: cyan;
+// //   }
+
+// // }
+
+
+
+ 
+ 
+
+
+ 
+ 
+
+                    
+                
+
+
+@import 'node_modules/codemirror/lib/codemirror';
+
+@import 'node_modules/codemirror/theme/nord';
+
+
+                    
+                
+
+                    
+                
+
+                    
+                
+
+
+                    
+                
+
+
+
+ 
+ 
+
+
+                    
+                
+
+
+                    
+                
+
+
+                    
+                
+
+// 
+              
+              @include s-iframe-classes();
+            

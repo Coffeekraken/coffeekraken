@@ -5,44 +5,60 @@
  *
  * This mixin generate all the properties for a paragraph depending on the parameters you set.
  *
- * @param         {Number}        $level          The paragraph level you want to generate
+ * @param         {Number}        [$name=default]          The paragraph "type" you want to generate. These can be found in the 'settings.components.paragraph' settings
+ * @param         {Number}        [$font-size='settings.components.title.h#{level}.font-size']      Specify the font size for the title
+ * @param         {String}        [$font-family='settings.components.title.h#{level}.font-family']      Specify the font family for the title
+ * @param         {Number}        [$vr-margin-bottom='settings.components.title.h#{level}.vr-margin-bottom']      Specify the margin bottom in vertical rhythm context
  * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"            
  *
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
- @mixin paragraph($name, $scope: null) {
-
-    @if not setting('typography.paragraphs.#{$name}') {
-        @error 'The passed "#{$name}" paragraph does not exist in the "typography.config.js" configuration file...';
+@mixin paragraph($name: default, $font-size: null, $font-family: null, $vr-margin-bottom: null, $scope: null) {
+  @include context('components.paragraph.#{$name}') {
+   
+    @if not setting('.') {
+      @error 'The passed "#{$name}" paragraph does not exist in the "settings.components.paragraph" configuration map...';
     }
 
     @include scope('bare', $scope) {
+
+      @if not $font-size {
+        $font-size: setting('font-size');
+      }
+      @if not $vr-margin-bottom {
+        $vr-margin-bottom: setting('vr-margin-bottom');
+      }
+
       display: block;
-      $size: setting('typography.paragraphs.#{$name}.font-size');
-      font-size: font-size($size);
-  
+      font-size: font-size($font-size);
+
       @include vr-scope() {
         margin-bottom: space(
-          setting('typography.paragraphs.#{$name}.margin-bottom')
+          $vr-margin-bottom
         );
       }
     }
     @include scope('style', $scope) {
-      $family: setting('typography.paragraphs.#{$name}.font-family');
-      font-family: font-family($family);
-  
-      $props: setting('typography.paragraphs.#{$name}');
+
+      @if not $font-family {
+        $font-family: setting('font-family');
+      }
+
+      font-family: font-family($font-family);
+
+      $props: setting('.');
       @each $prop in map-keys($props) {
         @if $prop !=
           'font-size' and
           $prop !=
           'font-family' and
           $prop !=
-          'margin-bottom'
+          'vr-margin-bottom'
         {
           #{$prop}: map-get($props, $prop);
         }
       }
     }
   }
+}

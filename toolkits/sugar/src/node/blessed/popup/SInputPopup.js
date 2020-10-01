@@ -1,13 +1,13 @@
 const __deepMerge = require('../../object/deepMerge');
 const __SInput = require('../form/SInput');
-const __SPopup = require('./SPopup');
+const __SBlessedPopup = require('./SBlessedPopup');
 const __activeSpace = require('../../core/activeSpace');
 
 /**
- * @name                  SInputPopup
+ * @name                  SBlessedInputPopup
  * @namespace           sugar.node.blessed.popup
  * @type                  Class
- * @extends               SPopup
+ * @extends               SBlessedPopup
  *
  * This class represent a simple input in a popup
  *
@@ -16,12 +16,12 @@ const __activeSpace = require('../../core/activeSpace');
  * - $input ({}) {Object}: An object of settings passed to the SInput instance constructor
  *
  * @example       js
- * const SInputPopup = require('@coffeekraken/sugar/node/blessed/popup/SInputPopup');
- * new SInputPopup({});
+ * const SBlessedInputPopup = require('@coffeekraken/sugar/node/blessed/popup/SBlessedInputPopup');
+ * new SBlessedInputPopup({});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SInputPopup extends __SPopup {
+module.exports = class SBlessedInputPopup extends __SBlessedPopup {
   /**
    * @name                  constructor
    * @type                  Function

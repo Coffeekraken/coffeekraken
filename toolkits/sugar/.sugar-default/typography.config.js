@@ -85,79 +85,8 @@ module.exports = {
    * @since             1.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'vertical-rhythm-class': 'vr',
+  'vertical-rhythm-class': 'vr'
 
-  /**
-   * @name            titles
-   * @namespace       config.typography
-   * @type            Object
-   * @default         {}
-   *
-   * Set the typography classes parameters like for h1, h2, etc...
-   * These will gives you access to classes formated like that: s-#{$key} => s-h1, s-h2, s-h3, etc...
-   *
-   * @since           1.0.0
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  titles: {
-    h1: {
-      'font-family': 'title',
-      'font-size': 'bigger',
-      'margin-bottom': 'medium'
-    },
-    h2: {
-      'font-family': 'title',
-      'font-size': 'big',
-      'margin-bottom': 'medium'
-    },
-    h3: {
-      'font-family': 'title',
-      'font-size': 'medium',
-      'margin-bottom': 'default'
-    },
-    h4: {
-      'font-family': 'title',
-      'font-size': 'default',
-      'margin-bottom': 'default'
-    },
-    h5: {
-      'font-family': 'title',
-      'font-size': 'small',
-      'margin-bottom': 'small'
-    },
-    h6: {
-      'font-family': 'title',
-      'font-size': 'smaller',
-      'margin-bottom': 'small'
-    }
-  },
-
-  /**
-   * @name            paragraphs
-   * @namespace       config.typography
-   * @type            Object
-   * @default         {}
-   *
-   * Set the typography classes parameters like for all the paragraphs.
-   * These will gives you access to classes formated like that: s-p--#{$key} => s-p, s-p--head, etc...
-   *
-   * @since           1.0.0
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  paragraphs: {
-    default: {
-      'font-family': 'title',
-      'font-size': 'medium',
-      'line-height': '2rem',
-      'margin-bottom': 'default'
-    },
-    head: {
-      'font-family': 'default',
-      'font-size': 'big',
-      'line-height': '3rem',
-      'margin-bottom': 'default'
-    }
-  }
   // blockquote: {
   //   'font-family': 'code',
   //   'font-size': 'default'

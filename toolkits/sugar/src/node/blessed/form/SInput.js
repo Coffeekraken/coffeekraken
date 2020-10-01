@@ -1,5 +1,5 @@
 const __blessed = require('blessed');
-const __SComponent = require('../SComponent');
+const __SBlessedComponent = require('../SBlessedComponent');
 const __deepMerge = require('../../object/deepMerge');
 const __SPromise = require('../../promise/SPromise');
 const __color = require('../../color/color');
@@ -7,7 +7,7 @@ const __escapeStack = require('../../terminal/escapeStack');
 const __activeSpace = require('../../core/activeSpace');
 
 /**
- * @name                  SInput
+ * @name                  SBlessedInput
  * @namespace           sugar.node.blessed.input
  * @type                  Class
  *
@@ -21,12 +21,12 @@ const __activeSpace = require('../../core/activeSpace');
  * // TODO: document the "promise" and "$input" properties
  *
  * @example       js
- * const SInput = require('@coffeekraken/sugar/node/blessed/form/SInput');
- * new SInput({});
+ * const SBlessedInput = require('@coffeekraken/sugar/node/blessed/form/SBlessedInput');
+ * new SBlessedInput({});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SInput extends __SComponent {
+module.exports = class SBlessedInput extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function

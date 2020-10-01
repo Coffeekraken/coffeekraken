@@ -29,7 +29,11 @@
 
   // check if has a component
   @if $context {
-    $path: '#{$context}.#{$path}';
+    $contextedPath: '#{$context}.#{$path}';
+    @if $path == '.' or $path == '' or not $path {
+      $contextedPath: $context;
+    }
+    $path: $contextedPath;
   }
   $value: map-get($__settings, $path);
 

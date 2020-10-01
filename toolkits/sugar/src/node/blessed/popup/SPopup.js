@@ -1,5 +1,5 @@
 const __blessed = require('blessed');
-const __SComponent = require('../SComponent');
+const __SBlessedComponent = require('../SBlessedComponent');
 const __deepMerge = require('../../object/deepMerge');
 const __parseHtml = require('../../terminal/parseHtml');
 const __color = require('../../color/color');
@@ -8,7 +8,7 @@ const __activeSpace = require('../../core/activeSpace');
 const __SPromise = require('../../promise/SPromise');
 
 /**
- * @name                  SPopup
+ * @name                  SBlessedPopup
  * @namespace           sugar.node.blessed.popup
  * @type                  Class
  *
@@ -20,12 +20,12 @@ const __SPromise = require('../../promise/SPromise');
  * - id (popup) {String}: An id to identify the popup. This id will be appended to the "activeSpace" when the popup is opened
  *
  * @example       js
- * const SPopup = require('@coffeekraken/sugar/node/blessed/popup/SPopup');
- * const myPopup = new SPopup();
+ * const SBlessedPopup = require('@coffeekraken/sugar/node/blessed/popup/SBlessedPopup');
+ * const myPopup = new SBlessedPopup();
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SPopup extends __SComponent {
+module.exports = class SBlessedPopup extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function
@@ -155,7 +155,7 @@ module.exports = class SPopup extends __SComponent {
    *
    * This method is simply used to append content inside the popup
    *
-   * @return        {SComponent}            Return this component to maintain chainability
+   * @return        {SBlessedComponent}            Return this component to maintain chainability
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */

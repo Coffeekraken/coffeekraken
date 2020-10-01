@@ -1,4 +1,4 @@
-const __SOutput = require('../blessed/SOutput');
+const __SBlessedOutput = require('../blessed/SBlessedOutput');
 
 /**
  * @name            output
@@ -24,6 +24,6 @@ const __SOutput = require('../blessed/SOutput');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = (source, settings = {}) => {
-  const output = new __SOutput(source, settings);
+  const output = new __SBlessedOutput(source, settings);
   return output;
 };

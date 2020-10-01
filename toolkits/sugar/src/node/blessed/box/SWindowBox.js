@@ -1,5 +1,5 @@
 const __blessed = require('blessed');
-const __SComponent = require('../SComponent');
+const __SBlessedComponent = require('../SBlessedComponent');
 const __deepMerge = require('../../object/deepMerge');
 const __parseHtml = require('../../terminal/parseHtml');
 const __countLine = require('../../string/countLine');
@@ -12,7 +12,7 @@ const __activeSpace = require('../../core/activeSpace');
 const __escapeStack = require('../../terminal/escapeStack');
 
 /**
- * @name                  SWindowBox
+ * @name                  SBlessedWindowBox
  * @namespace           sugar.node.blessed.box
  * @type                  Class
  *
@@ -29,12 +29,12 @@ const __escapeStack = require('../../terminal/escapeStack');
  *    - bg (__color('terminal.primary').toString()) {Color}: The background color to use
  * - ...blessed.box settings
  * @example       js
- * const SWindowBox = require('@coffeekraken/sugar/node/blessed/box/SWindowBox');
- * const box = new SWindowBox(myCoolContent, {});
+ * const SBlessedWindowBox = require('@coffeekraken/sugar/node/blessed/box/SBlessedWindowBox');
+ * const box = new SBlessedWindowBox(myCoolContent, {});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SWindowBox extends __SComponent {
+module.exports = class SBlessedWindowBox extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function

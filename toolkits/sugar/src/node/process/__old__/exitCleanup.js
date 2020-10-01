@@ -6,7 +6,7 @@ const __hotkey = require('../keyboard/hotkey');
 const __parseHtml = require('../terminal/parseHtml');
 const __keypress = require('keypress');
 const __wait = require('../time/wait');
-const __SOutput = require('../blessed/SOutput');
+const __SBlessedOutput = require('../blessed/SBlessedOutput');
 const __sugarHeading = require('../ascii/sugarHeading');
 const __packageJson = require('../package/json');
 const __SChildProcess = require('../process/SChildProcess');
@@ -52,7 +52,7 @@ module.exports = function exitCleanup() {
 
     await __wait(50);
 
-    const $output = new __SOutput([], {
+    const $output = new __SBlessedOutput([], {
       attach: true,
       maxItemsByGroup: 1000
     });

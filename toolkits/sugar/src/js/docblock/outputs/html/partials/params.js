@@ -4,9 +4,9 @@ export default `
       <h2 class="s-h2 s-m-t s-m-b-small">
         Parameters
       </h2>
-      <ol class="s-ol">
+      <ol class="s-ul">
         {{#each param}}
-        <li class="s-li s-m-b-small">
+        <li class="s-m-b-small">
           <p class="s-p s-f-bold">{{name}}</p>
           {{#if default}}
             <span class="s-db-default">{{default}}</span>

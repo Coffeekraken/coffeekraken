@@ -251,6 +251,8 @@ module.exports = class SDocMap extends __SPromise {
 
           const docblocks = new __SDocblock(content).toObject();
 
+          if (!docblocks || !docblocks.length) continue;
+
           docblocks.forEach((docblock) => {
             if (!docblock.namespace) return;
             const path = __path.relative(this._settings.outputDir, filepath);

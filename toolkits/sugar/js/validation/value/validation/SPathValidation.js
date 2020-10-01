@@ -40,7 +40,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @namespace     sugar.js.validation.value.validation
  * @type          Class
  *
- * This class represent the "required" validation
+ * This class represent the "path" validation
  *
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

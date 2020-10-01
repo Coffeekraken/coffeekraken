@@ -1,7 +1,7 @@
 const __deepMerge = require('../../object/deepMerge');
 const __blessed = require('blessed');
 const __color = require('../../color/color');
-const __SComponent = require('../SComponent');
+const __SBlessedComponent = require('../SBlessedComponent');
 const __summaryListPopup = require('../list/summaryListPopup');
 const __ora = require('ora');
 const __countLine = require('../../string/countLine');
@@ -10,7 +10,7 @@ const __isOdd = require('../../is/odd');
 const __SPromise = require('../../promise/SPromise');
 const __SCommand = require('../../terminal/SCommand');
 const __transitionObjectProperties = require('../../transition/objectProperties');
-const __SPopup = require('../../blessed/popup/SPopup');
+const __SBlessedPopup = require('../../blessed/popup/SBlessedPopup');
 const __hotkey = require('../../keyboard/hotkey');
 const __SInputPopup = require('../popup/SInputPopup');
 const __activeSpace = require('../../core/activeSpace');
@@ -39,7 +39,7 @@ const __getExtendsStack = require('../../class/getExtendsStack');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCommandPanel extends __SComponent {
+module.exports = class SCommandPanel extends __SBlessedComponent {
   /**
    * @name          _commands
    * @type          Array|String

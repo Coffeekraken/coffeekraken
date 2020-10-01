@@ -79,46 +79,46 @@
 
  // DO NOT UPDATE OR ADD CONTENT TO THIS FILE...
 
- @mixin coco($hello) {
-     content: 'something';
+//  @mixin coco($hello) {
+//      content: 'something';
 
-     & {
-         content: 'élop';
-     }
- }
+//      & {
+//          content: 'élop';
+//      }
+//  }
 
- .hello,
- .world:after {
-    content: 'sss';
+//  .hello,
+//  .world:after {
+//     content: 'sss';
 
- }
+//  }
 
-.coco, plop {
-   content: 'Hello';
-}
+// .coco, plop {
+//    content: 'Hello';
+// }
 
-.plop.world #hello {
- width: 100%;
-}
+// .plop.world #hello {
+//  width: 100%;
+// }
 
-@media(min-width: 500px) and (max-width: 600px){
-    /* Do Something */
-    .hello {
-        content: '#{Sugar.color(primary)}';
-    }
-}
+// @media(min-width: 500px) and (max-width: 600px){
+//     /* Do Something */
+//     .hello {
+//         content: '#{Sugar.color(primary)}';
+//     }
+// }
 
- /**
-  * Templates
-  * All the templates level specific styling.
-  * Templates specific classes have to start with `.t-`.
-  */
- // @import '04_templates/all';
+//  /**
+//   * Templates
+//   * All the templates level specific styling.
+//   * Templates specific classes have to start with `.t-`.
+//   */
+//  // @import '04_templates/all';
 
- @mixin coco($hello) {
-     content: 'something';
+//  @mixin coco($hello) {
+//      content: 'something';
 
-     & {
-         content: 'élop';
-     }
- }
+//      & {
+//          content: 'élop';
+//      }
+//  }

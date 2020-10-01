@@ -1,9 +1,9 @@
 const __deepMerge = require('../../object/deepMerge');
-const __SPopup = require('../popup/SPopup');
+const __SBlessedPopup = require('../popup/SBlessedPopup');
 const __SSummaryList = require('./SSummaryList');
 
 /**
- * @name                      summaryListPopup
+ * @name                      blessedSummaryListPopup
  * @namespace           sugar.node.blessed.list
  * @type                      Function
  *
@@ -19,8 +19,8 @@ const __SSummaryList = require('./SSummaryList');
  * - attachTo: A simple function that you can use to attach the popup to a blessed element
  *
  * @example         js
- * const summaryListPopup = require('@coffeekraken/sugar/node/blessed/list/summaryListPopup');
- * summaryListPopup({
+ * const blessedSummaryListPopup = require('@coffeekraken/sugar/node/blessed/list/blessedSummaryListPopup');
+ * blessedSummaryListPopup({
  *    title: 'Hello',
  *    description: 'World',
  *    items: [{
@@ -32,7 +32,7 @@ const __SSummaryList = require('./SSummaryList');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function summaryListPopup(settings = {}) {
+module.exports = function blessedSummaryListPopup(settings = {}) {
   settings = __deepMerge(
     {
       title: null,
@@ -42,7 +42,7 @@ module.exports = function summaryListPopup(settings = {}) {
     settings
   );
 
-  const $popupBox = new __SPopup({
+  const $popupBox = new __SBlessedPopup({
     title: settings.title,
     description: settings.description
   });

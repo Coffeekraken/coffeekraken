@@ -29,6 +29,7 @@
   // components
   @include title-classes();
   @include ol-classes();
+  @include ul-classes();
   @include paragraph-classes();
   @include button-classes();
 }

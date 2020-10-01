@@ -105,7 +105,10 @@ function __handleChildProcessErrors(error) {
 
   __SIpc.trigger('error', error.toString());
 
-  console.log(__toString(error));
+  const e = new __SError(error);
+  console.log(e.toString());
+
+  // console.log(__toString(error));
   // process.exit(1);
 }
 

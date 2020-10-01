@@ -6,7 +6,6 @@
   * This mixin generate all the css needed to display properly some titles.
   *
   * @param       {Number}      [$count:6]                                How many titles to generate
-  * @param          {String}        [$name:'h']                 The name you want for your titles
   * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"            
   *
   * @example         html
@@ -20,7 +19,7 @@
   * @since       2.0.0
   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
-  @mixin title-classes($count: 6, $name: 'h', $scope: null) {
+  @mixin title-classes($count: 6, $scope: null, $name: 'h') {
     @if class-match-namespace('sugar.component.title') {
       @for $i from 1 through $count {
         /**
@@ -38,7 +37,7 @@
       */
         .#{sel(#{tf-class()})} h#{$i},
         .#{sel(#{$name}#{$i})} {
-          @include title($i, $scope);
+          @include title($level: $i, $scope: $scope);
         }
       }
     }

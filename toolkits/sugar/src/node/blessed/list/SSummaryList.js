@@ -1,5 +1,5 @@
 const __blessed = require('blessed');
-const __SComponent = require('../SComponent');
+const __SBlessedComponent = require('../SBlessedComponent');
 const __deepMerge = require('../../object/deepMerge');
 const __parseHtml = require('../../terminal/parseHtml');
 const __countLine = require('../../string/countLine');
@@ -12,7 +12,7 @@ const __activeSpace = require('../../core/activeSpace');
 const __escapeStack = require('../../terminal/escapeStack');
 
 /**
- * @name                  SSummaryList
+ * @name                  SBlessedSummaryList
  * @namespace           sugar.node.blessed.list
  * @type                  Class
  *
@@ -26,12 +26,12 @@ const __escapeStack = require('../../terminal/escapeStack');
  * @param        {Object}         [settings = {}]         A settings object to configure your this. Here's the available settings:
  *
  * @example       js
- * const SSummaryList = require('@coffeekraken/sugar/node/blessed/list/SSummaryList');
- * const list = new SSummaryList({});
+ * const SBlessedSummaryList = require('@coffeekraken/sugar/node/blessed/list/SBlessedSummaryList');
+ * const list = new SBlessedSummaryList({});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSummaryList extends __SComponent {
+module.exports = class SBlessedSummaryList extends __SBlessedComponent {
   /**
    * @name                  _editingItemIdx
    * @type                  Number

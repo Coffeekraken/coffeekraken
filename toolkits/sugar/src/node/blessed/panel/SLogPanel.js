@@ -11,7 +11,7 @@ const __color = require('../../color/color');
 const __hotkey = require('../../keyboard/hotkey');
 const __clone = require('../../object/clone');
 
-const __SComponent = require('../SComponent');
+const __SBlessedComponent = require('../SBlessedComponent');
 
 /**
  * @name                    SLogPanel
@@ -36,7 +36,7 @@ const __SComponent = require('../SComponent');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SLogPanel extends __SComponent {
+module.exports = class SLogPanel extends __SBlessedComponent {
   /**
    * @name              _name
    * @type              String

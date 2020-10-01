@@ -85,7 +85,7 @@ module.exports = class SDocMapStreamAction extends __SActionsStreamAction {
         outputDir: streamObj.outputDir
       });
       await docMap.scan(streamObj.docMapInput);
-      await docMap.save();
+      // await docMap.save();
 
       resolve(streamObj);
     });

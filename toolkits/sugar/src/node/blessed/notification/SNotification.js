@@ -3,10 +3,10 @@ const __blessed = require('blessed');
 const __color = require('../../color/color');
 const __hotkey = require('../../keyboard/hotkey');
 const __parseHtml = require('../../terminal/parseHtml');
-const __SComponent = require('../SComponent');
+const __SBlessedComponent = require('../SBlessedComponent');
 
 /**
- * @name                    SNotification
+ * @name                    SBlessedNotification
  * @namespace           sugar.node.blessed.notification
  * @type                    Class
  *
@@ -27,8 +27,8 @@ const __SComponent = require('../SComponent');
  * - fg (black) {String}: Specify the foreground color to apply to the notification
  *
  * @example             js
- * const SNotification = require('@coffeekraken/sugar/node/blessed/notification/SNotification');
- * const notification = new SNotification('Hello', 'This is a cool notif', null, {
+ * const SBlessedNotification = require('@coffeekraken/sugar/node/blessed/notification/SBlessedNotification');
+ * const notification = new SBlessedNotification('Hello', 'This is a cool notif', null, {
  *      onClick: () => {
  *          console.log('Clicked');
  *      }
@@ -37,7 +37,7 @@ const __SComponent = require('../SComponent');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SNotification extends __SComponent {
+module.exports = class SBlessedNotification extends __SBlessedComponent {
   static displayStacks = {
     tl: [],
     tr: [],
@@ -50,24 +50,24 @@ module.exports = class SNotification extends __SComponent {
       left = 2,
       bottom = 1,
       right = 2;
-    SNotification.displayStacks.tl.forEach(($notif) => {
+    SBlessedNotification.displayStacks.tl.forEach(($notif) => {
       $notif.top = top;
       $notif.left = left;
       top += $notif.height + 1;
     });
     top = 1;
-    SNotification.displayStacks.tr.forEach(($notif) => {
+    SBlessedNotification.displayStacks.tr.forEach(($notif) => {
       $notif.top = top;
       $notif.right = right;
       top += $notif.height + 1;
     });
-    SNotification.displayStacks.bl.forEach(($notif) => {
+    SBlessedNotification.displayStacks.bl.forEach(($notif) => {
       $notif.bottom = bottom;
       $notif.left = left;
       bottom += $notif.height + 1;
     });
     bottom = 1;
-    SNotification.displayStacks.br.forEach(($notif) => {
+    SBlessedNotification.displayStacks.br.forEach(($notif) => {
       $notif.bottom = bottom;
       $notif.right = right;
       bottom += $notif.height + 1;
@@ -126,17 +126,17 @@ module.exports = class SNotification extends __SComponent {
     });
 
     this.on('attach', () => {
-      const stack = SNotification.displayStacks[position];
+      const stack = SBlessedNotification.displayStacks[position];
       if (stack.indexOf(this) === -1) {
         stack.push(this);
       }
     });
     this.on('detach', () => {
-      const stack = SNotification.displayStacks[position];
+      const stack = SBlessedNotification.displayStacks[position];
       const idx = stack.indexOf(this);
       if (idx === -1) return;
       stack.splice(idx, 1);
-      SNotification.update();
+      SBlessedNotification.update();
     });
 
     // click
@@ -156,7 +156,7 @@ module.exports = class SNotification extends __SComponent {
   }
 
   update() {
-    SNotification.update();
+    SBlessedNotification.update();
     super.update();
   }
 };

@@ -21,7 +21,6 @@ const __sugarConfig = require('../config/sugar');
  *        - toggle: Simply toggle the "value" property in the key object to true/false
  *        - run: Simply launch the associated command by specifying the property "command" with the command name wanted
           - action: Does nothing by default. Simply specify the action name you want in the "action" property and you'll get access to that by listening "key.action" on the promise
-      - menu: Specify the text wanted in the menu when using this class with an SProcessPanel instance
       - action: Specify an action name when the type is "action"
       - command: Specify a command name to run when the type is "run"
  *

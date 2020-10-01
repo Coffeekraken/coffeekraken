@@ -88,19 +88,19 @@ export default class SDocblock {
       {
         sortFunction: (a, b) => {
           let res = 0;
-          // if (.object.namespace && !a.object.namespace) res -= 1;
-          if (b.object.namespace) res += 1;
-          if (b.object.type && b.object.type.toLowerCase() === 'class')
-            res += 1;
-          if (b.object.constructor) res += 1;
-          if (b.object.private) res += 1;
-          if (b.object.type && b.object.type.toLowerCase() === 'function')
-            res += 1;
-          if (
-            a.object.name &&
-            b.object.name &&
-            b.object.name.length > a.object.name.length
-          )
+
+          if (!b || !a) return res;
+
+          const aObj = a.toObject(),
+            bObj = b.toObject();
+
+          // if (.object.namespace && !aObj.namespace) res -= 1;
+          if (bObj.namespace) res += 1;
+          if (bObj.type && bObj.type.toLowerCase() === 'class') res += 1;
+          if (bObj.constructor) res += 1;
+          if (bObj.private) res += 1;
+          if (bObj.type && bObj.type.toLowerCase() === 'function') res += 1;
+          if (aObj.name && bObj.name && bObj.name.length > aObj.name.length)
             res += 1;
           return res;
         },

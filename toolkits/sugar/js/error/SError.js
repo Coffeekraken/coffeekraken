@@ -50,7 +50,15 @@ var SError = /*#__PURE__*/function (_Error) {
 
     _classCallCheck(this, SError);
 
-    // filter message for integrated stack
+    if (typeof message !== 'string') {
+      if (Array.isArray(message)) {
+        message = message.join('\n');
+      } else {
+        message = (0, _toString.default)(message);
+      }
+    } // filter message for integrated stack
+
+
     message = message.split('\n').filter(line => {
       if (line.trim().slice(0, 10) === 'Thrown at:') return false;
       if (line.trim().slice(0, 3) === 'at ') return false;
@@ -60,17 +68,20 @@ var SError = /*#__PURE__*/function (_Error) {
     Error.captureStackTrace(_assertThisInitialized(_this), _this.constructor);
     var stack = [];
     var packageRoot = (0, _packageRoot.default)();
+    var stackArray = [];
 
-    var stackArray = _this.stack.split(' at ').slice(1);
+    if (_this.stack) {
+      stackArray = _this.stack.split(' at ').slice(1);
+      stackArray.filter(l => {
+        if (l.trim() === 'Error') return false;
+        if (l.trim() === '') return false;
+        return true;
+      }).forEach(l => {
+        if (l.trim() === '') return;
+        stack.push("<cyan>\u2502</cyan> at <cyan>".concat(l.replace(packageRoot, ''), "</cyan>"));
+      });
+    }
 
-    stackArray.filter(l => {
-      if (l.trim() === 'Error') return false;
-      if (l.trim() === '') return false;
-      return true;
-    }).forEach(l => {
-      if (l.trim() === '') return;
-      stack.push("<cyan>\u2502</cyan> at <cyan>".concat(l.replace(packageRoot, ''), "</cyan>"));
-    });
     _this.name = _this.constructor.name;
     _this.message = (0, _trimLines.default)((0, _parseHtml.default)("\n      <red><underline>".concat(_this.name || _this.constructor.name, "</underline></red>\n\n      ").concat(message, "\n\n      ").concat(stack.join(''), "\n    ")));
     var displayed = false;
@@ -84,52 +95,9 @@ var SError = /*#__PURE__*/function (_Error) {
         this._stack = value;
       }
     });
-    _this.stack = (0, _trimLines.default)((0, _parseHtml.default)(stack.join(''))); // if (typeof message === 'object') {
-    //   if (message.syscall) this.syscall = message.syscall;
-    //   if (message.code) this.code = message.code;
-    //   if (message.property) this.property = message.property;
-    //   if (message.message) this.message = message.message;
-    //   if (message.name) this.name = message.name;
-    //   if (message.stack) this.stack = message.stack;
-    // } else if (typeof message !== 'string') {
-    //   this.message = __trimLines(message.toString());
-    //   this.name = this.constructor.name;
-    //   this.stack = message.stack || [];
-    //   this.code = message.code || null;
-    //   this.property = message.property || null;
-    //   this.syscall = message.syscall || null;
-    // } else {
-    //   this.message = __toString(message);
-    // }
-    // this.message = __trimLines(
-    //   __parseHtml(`
-    //   <red><underline>${this.name || this.constructor.name}</underline></red>
-    //   ${this.message}
-    // `)
-    // );
-    // if (this.stack) {
-    //
-    //   // this.message += '\n' + );
-    //   // this.stack = null;
-    // }
-
+    _this.stack = (0, _trimLines.default)((0, _parseHtml.default)(stack.join('')));
     return _this;
-  } // inspect() {
-  //   return this.toString();
-  // }
-  // toString() {
-  //   // if (this.message.match(/___$/gm)) return this.message;
-  //   return 'rpl';
-  //   const string = __trimLines(
-  //     __parseHtml(`
-  //     <red><underline>${this.constructor.name}</underline></red>
-  //     ${this.message}
-  //     ${this._stackString}
-  //   `)
-  //   );
-  //   return string + '___';
-  // }
-
+  }
 
   return SError;
 }( /*#__PURE__*/_wrapNativeSuper(Error));

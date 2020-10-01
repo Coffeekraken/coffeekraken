@@ -120,14 +120,17 @@ var SDocblock = /*#__PURE__*/function () {
 
     this._settings = (0, _deepMerge.default)({
       sortFunction: (a, b) => {
-        var res = 0; // if (.object.namespace && !a.object.namespace) res -= 1;
+        var res = 0;
+        if (!b || !a) return res;
+        var aObj = a.toObject(),
+            bObj = b.toObject(); // if (.object.namespace && !aObj.namespace) res -= 1;
 
-        if (b.object.namespace) res += 1;
-        if (b.object.type && b.object.type.toLowerCase() === 'class') res += 1;
-        if (b.object.constructor) res += 1;
-        if (b.object.private) res += 1;
-        if (b.object.type && b.object.type.toLowerCase() === 'function') res += 1;
-        if (a.object.name && b.object.name && b.object.name.length > a.object.name.length) res += 1;
+        if (bObj.namespace) res += 1;
+        if (bObj.type && bObj.type.toLowerCase() === 'class') res += 1;
+        if (bObj.constructor) res += 1;
+        if (bObj.private) res += 1;
+        if (bObj.type && bObj.type.toLowerCase() === 'function') res += 1;
+        if (aObj.name && bObj.name && bObj.name.length > aObj.name.length) res += 1;
         return res;
       },
       filepath: null,

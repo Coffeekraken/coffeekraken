@@ -144,6 +144,10 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                 ? __getFilename(streamObj.input).replace('.js', '.prod.js')
                 : __getFilename(streamObj.input)
             },
+            externals: {
+              fs: 'commonjs fs',
+              path: 'commonjs path'
+            },
             module: {
               rules: [
                 {
@@ -166,7 +170,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                     }
                   ]
                 },
-                { test: /\.handlebars$/, loader: 'handlebars-loader' },
+                // { test: /\.handlebars$/, loader: 'handlebars-loader' },
                 {
                   test: /\.m?js$/,
                   exclude: /(node_modules|bower_components)/,
@@ -224,42 +228,47 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         )
       );
 
-      compiler.run((error, stats) => {
-        if (stats.hasErrors()) {
-          const sts = stats.toJson();
-          console.error(sts.errors);
-          return reject(sts.errors);
-        }
-        if (stats.hasWarnings()) {
-          const sts = stats.toJson();
-          console.error(sts.warnings);
-          return reject(sts.warnings);
-        }
+      try {
+        compiler.run((error, stats) => {
+          if (stats.hasErrors()) {
+            const sts = stats.toJson();
+            // console.error(sts.errors);
+            return reject(sts.errors);
+          }
+          if (stats.hasWarnings()) {
+            const sts = stats.toJson();
+            // console.error(sts.warnings);
+            // return reject(sts.warnings);
+          }
 
-        // reading the outputed file
-        const output = __fs.readFileSync(
-          __path.resolve(streamObj.outputDir, __getFilename(streamObj.input)),
-          'utf8'
-        );
-
-        // check if is a sourcemap
-        let sourcemapOutput;
-        if (streamObj.map) {
-          sourcemapOutput = __fs.readFileSync(
-            __path.resolve(
-              streamObj.outputDir,
-              __getFilename(streamObj.input) + '.map'
-            ),
+          // reading the outputed file
+          const output = __fs.readFileSync(
+            __path.resolve(streamObj.outputDir, __getFilename(streamObj.input)),
             'utf8'
           );
-        }
 
-        // // if (!streamObj.dataBefore) streamObj.dataBefore = {};
-        streamObj.data = output;
-        if (sourcemapOutput) streamObj.sourcemapData = sourcemapOutput;
+          // check if is a sourcemap
+          let sourcemapOutput;
+          if (streamObj.map) {
+            sourcemapOutput = __fs.readFileSync(
+              __path.resolve(
+                streamObj.outputDir,
+                __getFilename(streamObj.input) + '.map'
+              ),
+              'utf8'
+            );
+          }
 
-        resolve(streamObj);
-      });
+          // // if (!streamObj.dataBefore) streamObj.dataBefore = {};
+          streamObj.data = output;
+          if (sourcemapOutput) streamObj.sourcemapData = sourcemapOutput;
+
+          resolve(streamObj);
+        });
+      } catch (e) {
+        console.log('COCOCOCOC');
+        console.log(e.toString());
+      }
     });
   }
 };

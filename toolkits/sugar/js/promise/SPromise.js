@@ -56,8 +56,14 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 // var originalCatch = Promise.prototype.catch;
-// Promise.prototype.catch = function () {
-//   console.log('PLOP');
+// Promise.prototype.catch = function (...args) {
+//   if (this._coco) {
+//     console.log('XX');
+//   }
+//   if (this._catch && typeof this._catch === 'function') {
+//     console.log('PLOP');
+//     return this._catch(...args);
+//   }
 //   return originalCatch.apply(this, arguments);
 // };
 
@@ -295,7 +301,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       new Promise((rejectPromiseResolve, rejectPromiseReject) => {
         _masterPromiseRejectFn = rejectPromiseReject;
       }).catch(e => {
-        _this.trigger(_this._settings.triggerOnCatch, {
+        _this.trigger('catch', {
           value: e
         });
       });
@@ -343,7 +349,6 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     }); // extend settings
 
     _this._settings = (0, _deepMerge.default)({
-      triggerOnCatch: 'error',
       destroyTimeout: 5000,
       id: (0, _uniqid.default)()
     }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings);
@@ -586,7 +591,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     key: "reject",
     value: function reject(arg, stacksOrder) {
       if (stacksOrder === void 0) {
-        stacksOrder = 'catch,reject,finally';
+        stacksOrder = "catch,reject,finally";
       }
 
       return this._reject(arg, stacksOrder);
@@ -612,7 +617,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       var _this3 = this;
 
       if (stacksOrder === void 0) {
-        stacksOrder = 'catch,reject,finally';
+        stacksOrder = "catch,reject,finally";
       }
 
       if (this._isDestroyed) return;
@@ -732,7 +737,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           metas = {};
         }
 
-        if (this._isDestroyed) return; // triger the passed stacks
+        if (this._isDestroyed) return; // if (what === 'error') console.log('SSS', arg);
+        // triger the passed stacks
 
         return this._triggerStacks(what, arg, metas);
       });
@@ -843,9 +849,16 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
 
           Object.keys(this._stacks).forEach(stackName => {
-            if (stackName === stack) return;
-            var toAvoid = ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'];
-            if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1) return;
+            if (stackName === stack) return; // const toAvoid = [
+            //   'then',
+            //   'catch',
+            //   'resolve',
+            //   'reject',
+            //   'finally',
+            //   'cancel'
+            // ];
+            // if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1)
+            //   return;
 
             if ((0, _minimatch.default)(stack, stackName)) {
               // the glob pattern match the triggered stack so add it to the stack array
@@ -1072,8 +1085,12 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       }
 
       if (args.length === 2 && typeof args[0] === 'function' && typeof args[1] === 'function') {
-        this._masterPromiseResolveFn = args[0];
-        this._masterPromiseRejectFn = args[1];
+        this._masterPromiseResolveFn = args[0]; // const mainRejectFn = this._masterPromiseRejectFn;
+        // this._masterPromiseRejectFn = (...a) => {
+        //   args[1](...a);
+        //   mainRejectFn(...a);
+        // };
+
         return;
       } // super.then(...args);
 
@@ -1107,14 +1124,9 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      */
 
   }, {
-    key: "catch",
+    key: "_catch",
     value: function _catch() {
-      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        args[_key6] = arguments[_key6];
-      }
-
-      // super.catch(...args);
-      return this._registerCallbackInStack(this._settings.triggerOnCatch, ...args);
+      return this._registerCallbackInStack('catch', ...voidargs);
     }
     /**
      * @name                finally
@@ -1142,8 +1154,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "finally",
     value: function _finally() {
-      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        args[_key7] = arguments[_key7];
+      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        args[_key6] = arguments[_key6];
       }
 
       // super.finally(...args);
@@ -1175,8 +1187,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "resolved",
     value: function resolved() {
-      for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        args[_key8] = arguments[_key8];
+      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        args[_key7] = arguments[_key7];
       }
 
       return this._registerCallbackInStack('resolve', ...args);
@@ -1207,8 +1219,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "rejected",
     value: function rejected() {
-      for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        args[_key9] = arguments[_key9];
+      for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        args[_key8] = arguments[_key8];
       }
 
       return this._registerCallbackInStack('reject', ...args);
@@ -1239,8 +1251,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "canceled",
     value: function canceled() {
-      for (var _len10 = arguments.length, args = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-        args[_key10] = arguments[_key10];
+      for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        args[_key9] = arguments[_key9];
       }
 
       return this._registerCallbackInStack('cancel', ...args);

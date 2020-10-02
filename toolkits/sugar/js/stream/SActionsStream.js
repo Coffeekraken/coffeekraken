@@ -33,6 +33,8 @@ var _SCache = _interopRequireDefault(require("../cache/SCache"));
 
 var _sha = _interopRequireDefault(require("../crypt/sha256"));
 
+var _globby = require("globby");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -223,76 +225,73 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
           });
         };
 
-        try {
-          var processFnArray = !Array.isArray(processFn) ? [processFn] : processFn;
-          var isArray = Array.isArray(streamObjOrArray);
-          var streamObjArray = streamObjOrArray;
-          if (!isArray) streamObjArray = [streamObjArray];
+        var processFnArray = !Array.isArray(processFn) ? [processFn] : processFn;
+        var isArray = Array.isArray(streamObjOrArray);
+        var streamObjArray = streamObjOrArray;
+        if (!isArray) streamObjArray = [streamObjArray];
 
-          for (var streamObjArrayIdx in streamObjArray) {
-            var streamObj = streamObjArray[streamObjArrayIdx]; // if (streamObj.$fromCache) return;
-            // set the current action in the streamObj
+        for (var streamObjArrayIdx in streamObjArray) {
+          var streamObj = streamObjArray[streamObjArrayIdx]; // if (streamObj.$fromCache) return;
+          // set the current action in the streamObj
 
-            streamObj.$action = settings.type; // calculate the hash of this particular action
+          streamObj.$action = settings.type; // calculate the hash of this particular action
 
-            var actionHash = _sha.default.encrypt((0, _toString.default)(_objectSpread(_objectSpread({}, (0, _clone.default)(streamObj)), {}, {
-              settings: this._settings
-            }))); // get the value from the cache if available
+          var actionHash = _sha.default.encrypt((0, _toString.default)(_objectSpread(_objectSpread({}, (0, _clone.default)(streamObj)), {}, {
+            settings: this._settings
+          }))); // get the value from the cache if available
 
 
-            if (this._currentStream.currentActionObj.instance && this._currentStream.currentActionObj.instance.settings.cache && this._sCache || this._sCache && !this._currentStream.currentActionObj.instance) {
-              var cachedStreamObj = yield this._sCache.get(actionHash);
+          if (this._currentStream.currentActionObj.instance && this._currentStream.currentActionObj.instance.settings.cache && this._sCache || this._sCache && !this._currentStream.currentActionObj.instance) {
+            var cachedStreamObj = yield this._sCache.get(actionHash);
 
-              if (cachedStreamObj) {
-                streamObj = cachedStreamObj;
-                streamObj.$fromCache = true;
-                streamObjArray[streamObjArrayIdx] = streamObj;
-                this._currentStream.currentActionObj.fromCache++;
-                logActionStatus();
-                return;
-              }
+            if (cachedStreamObj) {
+              streamObj = cachedStreamObj;
+              streamObj.$fromCache = true;
+              streamObjArray[streamObjArrayIdx] = streamObj;
+              this._currentStream.currentActionObj.fromCache++;
+              logActionStatus();
+              return;
             }
+          }
 
-            var processFnArgs = [streamObj, ...settings.processFnArgs];
+          var processFnArgs = [streamObj, ...settings.processFnArgs];
 
-            for (var processFnArrayIdx in processFnArray) {
-              var _processFn = processFnArray[processFnArrayIdx];
+          for (var processFnArrayIdx in processFnArray) {
+            var _processFn = processFnArray[processFnArrayIdx];
 
+            try {
               var processFnResult = _processFn(...processFnArgs);
 
               if (settings.resultProcessor) processFnResult = settings.resultProcessor.bind(this)(processFnResult);
 
               if (processFnResult instanceof Promise) {
+                // processFnResult.catch((e) => {
+                //   throw 'PLCPLC';
+                //   console.log('XXX');
+                //   console.log('XCSCXCXC');
+                // });
                 streamObj = yield processFnResult;
               } else {
                 streamObj = processFnResult;
               }
+            } catch (e) {
+              console.log('SSS');
             }
-
-            streamObjArray[streamObjArrayIdx] = streamObj;
-
-            if (settings.type.match(/.*\.main$/)) {
-              this._currentStream.currentActionObj.processed++;
-              logActionStatus();
-            } // save in cache
-
-
-            if (this._settings.cache) yield this._saveInCache(actionHash, streamObj);
           }
 
-          if (isArray) return streamObjArray;
-          return streamObjArray[0];
-        } catch (e) {
-          if (typeof e === 'object') {
-            this._currentStream.currentActionObj.stats.stderr.push((0, _toString.default)(e));
+          streamObjArray[streamObjArrayIdx] = streamObj;
 
-            this._currentStream.stats.stderr.push((0, _toString.default)(e));
-          } else if (typeof e === 'string') {
-            this._currentStream.currentActionObj.stats.stderr.push(e);
+          if (settings.type.match(/.*\.main$/)) {
+            this._currentStream.currentActionObj.processed++;
+            logActionStatus();
+          } // save in cache
 
-            this._currentStream.stats.stderr.push(e);
-          }
+
+          if (this._settings.cache) yield this._saveInCache(actionHash, streamObj);
         }
+
+        if (isArray) return streamObjArray;
+        return streamObjArray[0];
       });
 
       function _applyFnOnStreamObj(_x, _x2, _x3) {
@@ -514,220 +513,226 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
       this._currentStream.promise = new _SPromise2.default( /*#__PURE__*/function () {
         var _ref2 = _asyncToGenerator(function* (resolve, reject, trigger, cancel) {
           yield (0, _wait.default)(100); // ugly hack to check when have time...
-          // starting log
 
-          var startString = "#start Starting the stream \"<cyan>".concat(settings.name || 'unnamed', "</cyan>\"");
+          try {
+            // starting log
+            var startString = "#start Starting the stream \"<cyan>".concat(settings.name || 'unnamed', "</cyan>\"");
 
-          _this3.log({
-            value: startString
-          });
-
-          _this3.trigger('start', {});
-
-          trigger('start', {});
-          currentStreamObj = yield _this3._applyFnOnStreamObj(currentStreamObj, _this3._settings.before, {
-            type: 'before'
-          });
-
-          if (!_this3.hasCurrentStreamErrors()) {
-            // take the actions order array
-            var actionsOrderedNames = Array.isArray(settings.order) ? settings.order : Object.keys(_this3._actionsObject); // check the order
-
-            actionsOrderedNames.forEach(actionName => {
-              if (!_this3._actionsObject[actionName]) {
-                _this3._currentStream.stats.stderr.push((0, _parseHtml.default)("You have specified the action \"<yellow>".concat(actionName, "</yellow>\" in your SActionsStream instance but it is not available. Here's the available actions: <green>").concat(Object.keys(_this3._actionsObject).join(','), "</green>")));
-              }
+            _this3.log({
+              value: startString
             });
 
-            for (var i = 0; i < actionsOrderedNames.length; i++) {
-              if (_this3._currentStream.canceled || _this3.hasCurrentStreamErrors()) {
-                // this.log('stop');
-                break;
-              }
+            _this3.trigger('start', {});
 
-              var actionName = actionsOrderedNames[i];
-              var actionInstance = void 0;
-              var actionSettings = settings.actions ? settings.actions[actionName] || {} : {}; // make sure we have a "name" property in the actionSettings object
+            trigger('start', {});
+            currentStreamObj = yield _this3._applyFnOnStreamObj(currentStreamObj, _this3._settings.before, {
+              type: 'before'
+            });
 
-              if (!actionSettings.name) {
-                actionSettings.name = actionName;
-              }
+            if (!_this3.hasCurrentStreamErrors()) {
+              // take the actions order array
+              var actionsOrderedNames = Array.isArray(settings.order) ? settings.order : Object.keys(_this3._actionsObject); // check the order
 
-              var skipMessage = null,
-                  skipAction = 'break';
-
-              if (_this3._currentStream.stats.skipNextActions === true) {
-                skipMessage = "#warning Skipping all the next actions after the \"<cyan>".concat(actionsOrderedNames[i - 1], "</cyan>\" one...");
-                skipAction = 'break';
-              } else if (Array.isArray(_this3._currentStream.stats.skipNextActions) && _this3._currentStream.stats.skipNextActions.indexOf(actionName) !== -1) {
-                skipMessage = "#warning Skipping the \"<yellow>".concat(actionName, "</yellow>\" action...");
-                skipAction = 'continue';
-              } else if (typeof _this3._currentStream.stats.skipNextActions === 'number' && _this3._currentStream.stats.skipNextActions > 0) {
-                _this3._currentStream.stats.skipNextActions--;
-                skipMessage = "#warning Skipping the \"<yellow>".concat(actionName, "</yellow>\" action. Reamaining action(s) to skip: <cyan>").concat(_this3._currentStream.stats.skipNextActions, "</cyan>...");
-                skipAction = 'continue';
-              }
-
-              if (skipMessage) {
-                _this3.log({
-                  value: skipMessage
-                });
-
-                if (skipAction === 'continue') continue;else break;
-              } // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
-
-
-              if ((0, _class.default)(_this3._actionsObject[actionName]) && _this3._actionsObject[actionName].prototype instanceof _SActionsStreamAction.default) {
-                actionInstance = new _this3._actionsObject[actionName](actionSettings);
-              } else {
-                _this3._currentStream.stats.stderr.push("Your action \"<yellow>".concat(actionName, "</yellow>\" has to be a class extending the <cyan>SActionsStreamAction</cyan> one..."));
-
-                break;
-              }
-
-              _this3._currentStream.currentActionObj = {
-                name: actionName,
-                sourcesCount: _this3._currentStream.streamObjArray.length,
-                processed: 0,
-                fromCache: 0,
-                instance: actionInstance,
-                stats: {
-                  action: actionName,
-                  startTime: Date.now(),
-                  stderr: [],
-                  stdout: []
+              actionsOrderedNames.forEach(actionName => {
+                if (!_this3._actionsObject[actionName]) {
+                  _this3._currentStream.stats.stderr.push((0, _parseHtml.default)("You have specified the action \"<yellow>".concat(actionName, "</yellow>\" in your SActionsStream instance but it is not available. Here's the available actions: <green>").concat(Object.keys(_this3._actionsObject).join(','), "</green>")));
                 }
-              };
-
-              if (_this3._currentStream.currentActionObj.instance) {
-                _this3._currentStream.currentActionObj.instance.on('reject', value => {
-                  _this3.trigger("".concat(_this3._currentStream.currentActionObj.name, ".reject"), value);
-
-                  trigger("".concat(_this3._currentStream.currentActionObj.name, ".reject"), value);
-                  cancel(value);
-                });
-
-                actionSettings = (0, _deepMerge.default)(_this3._currentStream.currentActionObj.instance._settings, actionSettings);
-              } // trigger some "start" events
-
-
-              _this3.trigger("".concat(_this3._currentStream.currentActionObj.name, ".start"), Object.assign({}, _this3._currentStream.currentActionObj));
-
-              trigger("".concat(_this3._currentStream.currentActionObj.name, ".start"), Object.assign({}, _this3._currentStream.currentActionObj));
-
-              var _startString = "#start Starting the action \"<yellow>".concat(_this3._currentStream.currentActionObj.name, "</yellow>\" on <magenta>").concat(_this3._currentStream.currentActionObj.sourcesCount, "</magenta> sources");
-
-              _this3.log({
-                group: _this3._currentStream.currentActionObj.name,
-                value: _startString
               });
 
-              yield _this3._handleStreamObjArray();
-
-              if (_this3.hasCurrentStreamErrors()) {
-                break;
-              }
-
-              if (_this3.constructor.interface) {
-                var issuesString = _this3.constructor.interface.apply(_this3._currentStream.streamObjArray[0], {
-                  return: 'string',
-                  throw: false
-                });
-
-                if (issuesString !== true) {
-                  _this3._currentStream.stats.stderr.push(issuesString);
-
-                  _this3._currentStream.currentActionObj.stats.stderr.push(issuesString);
+              for (var i = 0; i < actionsOrderedNames.length; i++) {
+                if (_this3._currentStream.canceled || _this3.hasCurrentStreamErrors()) {
+                  // this.log('stop');
+                  break;
                 }
-              } // complete the actionObj
+
+                var actionName = actionsOrderedNames[i];
+                var actionInstance = void 0;
+                var actionSettings = settings.actions ? settings.actions[actionName] || {} : {}; // make sure we have a "name" property in the actionSettings object
+
+                if (!actionSettings.name) {
+                  actionSettings.name = actionName;
+                }
+
+                var skipMessage = null,
+                    skipAction = 'break';
+
+                if (_this3._currentStream.stats.skipNextActions === true) {
+                  skipMessage = "#warning Skipping all the next actions after the \"<cyan>".concat(actionsOrderedNames[i - 1], "</cyan>\" one...");
+                  skipAction = 'break';
+                } else if (Array.isArray(_this3._currentStream.stats.skipNextActions) && _this3._currentStream.stats.skipNextActions.indexOf(actionName) !== -1) {
+                  skipMessage = "#warning Skipping the \"<yellow>".concat(actionName, "</yellow>\" action...");
+                  skipAction = 'continue';
+                } else if (typeof _this3._currentStream.stats.skipNextActions === 'number' && _this3._currentStream.stats.skipNextActions > 0) {
+                  _this3._currentStream.stats.skipNextActions--;
+                  skipMessage = "#warning Skipping the \"<yellow>".concat(actionName, "</yellow>\" action. Reamaining action(s) to skip: <cyan>").concat(_this3._currentStream.stats.skipNextActions, "</cyan>...");
+                  skipAction = 'continue';
+                }
+
+                if (skipMessage) {
+                  _this3.log({
+                    value: skipMessage
+                  });
+
+                  if (skipAction === 'continue') continue;else break;
+                } // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
 
 
-              _this3._currentStream.currentActionObj.stats = _objectSpread(_objectSpread({}, _this3._currentStream.currentActionObj.stats), {}, {
-                endTime: Date.now(),
-                duration: Date.now() - _this3._currentStream.currentActionObj.stats.startTime
-              }); // save the result into the overall actions stats object
+                if ((0, _class.default)(_this3._actionsObject[actionName]) && _this3._actionsObject[actionName].prototype instanceof _SActionsStreamAction.default) {
+                  actionInstance = new _this3._actionsObject[actionName](actionSettings); // actionInstance.on('catch', (e) => {
+                  //   console.log('ERROR');
+                  // });
+                } else {
+                  _this3._currentStream.stats.stderr.push("Your action \"<yellow>".concat(actionName, "</yellow>\" has to be a class extending the <cyan>SActionsStreamAction</cyan> one..."));
 
-              _this3._currentStream.stats.actions[_this3._currentStream.currentActionObj.name] = Object.assign({}, _this3._currentStream.currentActionObj); // trigger an "event"
+                  break;
+                }
 
-              _this3.trigger("".concat(_this3._currentStream.currentActionObj.name, ".complete"), Object.assign({}, _this3._currentStream.currentActionObj));
+                _this3._currentStream.currentActionObj = {
+                  name: actionName,
+                  sourcesCount: _this3._currentStream.streamObjArray.length,
+                  processed: 0,
+                  fromCache: 0,
+                  instance: actionInstance,
+                  stats: {
+                    action: actionName,
+                    startTime: Date.now(),
+                    stderr: [],
+                    stdout: []
+                  }
+                };
 
-              trigger("".concat(_this3._currentStream.currentActionObj.name, ".complete"), Object.assign({}, _this3._currentStream.currentActionObj));
+                if (_this3._currentStream.currentActionObj.instance) {
+                  _this3._currentStream.currentActionObj.instance.on('reject', value => {
+                    _this3.trigger("".concat(_this3._currentStream.currentActionObj.name, ".error"), value);
 
-              if (_this3._currentStream.currentActionObj.stats.stderr.length) {
-                var errorString = "#error <red>Something went wrong during the </red>\"<yellow>".concat(_this3._currentStream.currentActionObj.name, "</yellow>\"<red> action...</red>");
+                    trigger("".concat(_this3._currentStream.currentActionObj.name, ".error"), value);
+                    cancel(value);
+                  });
 
-                _this3._currentStream.currentActionObj.stats.stderr.push(errorString);
+                  actionSettings = (0, _deepMerge.default)(_this3._currentStream.currentActionObj.instance._settings, actionSettings);
+                } // trigger some "start" events
 
-                _this3._currentStream.stats.stderr.push(errorString);
 
-                break;
-              } else {
-                var successString = "#success The action \"<yellow>".concat(_this3._currentStream.currentActionObj.name, "</yellow>\" has finished <green>successfully</green> on <magenta>").concat(_this3._currentStream.currentActionObj.sourcesCount, "</magenta> sources in <yellow>").concat((0, _convert.default)(_this3._currentStream.currentActionObj.stats.duration, 's'), "s</yellow>");
+                _this3.trigger("".concat(_this3._currentStream.currentActionObj.name, ".start"), Object.assign({}, _this3._currentStream.currentActionObj));
 
-                _this3._currentStream.currentActionObj.stats.stdout.push(successString);
+                trigger("".concat(_this3._currentStream.currentActionObj.name, ".start"), Object.assign({}, _this3._currentStream.currentActionObj));
+
+                var _startString = "#start Starting the action \"<yellow>".concat(_this3._currentStream.currentActionObj.name, "</yellow>\" on <magenta>").concat(_this3._currentStream.currentActionObj.sourcesCount, "</magenta> sources");
 
                 _this3.log({
                   group: _this3._currentStream.currentActionObj.name,
-                  value: successString
+                  value: _startString
                 });
+
+                yield _this3._handleStreamObjArray();
+
+                if (_this3.hasCurrentStreamErrors()) {
+                  break;
+                }
+
+                if (_this3.constructor.interface) {
+                  var issuesString = _this3.constructor.interface.apply(_this3._currentStream.streamObjArray[0], {
+                    return: 'string',
+                    throw: false
+                  });
+
+                  if (issuesString !== true) {
+                    _this3._currentStream.stats.stderr.push(issuesString);
+
+                    _this3._currentStream.currentActionObj.stats.stderr.push(issuesString);
+                  }
+                } // complete the actionObj
+
+
+                _this3._currentStream.currentActionObj.stats = _objectSpread(_objectSpread({}, _this3._currentStream.currentActionObj.stats), {}, {
+                  endTime: Date.now(),
+                  duration: Date.now() - _this3._currentStream.currentActionObj.stats.startTime
+                }); // save the result into the overall actions stats object
+
+                _this3._currentStream.stats.actions[_this3._currentStream.currentActionObj.name] = Object.assign({}, _this3._currentStream.currentActionObj); // trigger an "event"
+
+                _this3.trigger("".concat(_this3._currentStream.currentActionObj.name, ".complete"), Object.assign({}, _this3._currentStream.currentActionObj));
+
+                trigger("".concat(_this3._currentStream.currentActionObj.name, ".complete"), Object.assign({}, _this3._currentStream.currentActionObj));
+
+                if (_this3._currentStream.currentActionObj.stats.stderr.length) {
+                  var errorString = "#error <red>Something went wrong during the </red>\"<yellow>".concat(_this3._currentStream.currentActionObj.name, "</yellow>\"<red> action...</red>");
+
+                  _this3._currentStream.currentActionObj.stats.stderr.push(errorString);
+
+                  _this3._currentStream.stats.stderr.push(errorString);
+
+                  break;
+                } else {
+                  var successString = "#success The action \"<yellow>".concat(_this3._currentStream.currentActionObj.name, "</yellow>\" has finished <green>successfully</green> on <magenta>").concat(_this3._currentStream.currentActionObj.sourcesCount, "</magenta> sources in <yellow>").concat((0, _convert.default)(_this3._currentStream.currentActionObj.stats.duration, 's'), "s</yellow>");
+
+                  _this3._currentStream.currentActionObj.stats.stdout.push(successString);
+
+                  _this3.log({
+                    group: _this3._currentStream.currentActionObj.name,
+                    value: successString
+                  });
+                }
               }
             }
-          }
 
-          currentStreamObj = yield _this3._applyFnOnStreamObj(currentStreamObj, _this3._settings.after, {
-            type: 'after'
-          });
-
-          if (_this3.constructor.interface) {
-            var _issuesString = _this3.constructor.interface.apply(_this3._currentStream.streamObjArray[0], {
-              return: 'string',
-              throw: false
+            currentStreamObj = yield _this3._applyFnOnStreamObj(currentStreamObj, _this3._settings.after, {
+              type: 'after'
             });
 
-            if (_issuesString !== true) {
-              _this3._currentStream.stats.stderr.push(_issuesString);
+            if (_this3.constructor.interface) {
+              var _issuesString = _this3.constructor.interface.apply(_this3._currentStream.streamObjArray[0], {
+                return: 'string',
+                throw: false
+              });
+
+              if (_issuesString !== true) {
+                _this3._currentStream.stats.stderr.push(_issuesString);
+              }
+            } // complete the overall stats
+
+
+            _this3._currentStream.stats = _objectSpread(_objectSpread({}, _this3._currentStream.stats), {}, {
+              streamObj: _this3._currentStream.streamObjArray,
+              endTime: Date.now(),
+              duration: Date.now() - _this3._currentStream.stats.startTime
+            });
+
+            if (_this3.hasCurrentStreamErrors() || _this3._currentStream.stats.canceled) {
+              var _errorString = "The stream \"<cyan>".concat(settings.name || 'unnamed', "</cyan>\" has had some issues...");
+
+              _this3._currentStream.stats.stdout.push(_errorString);
+
+              _this3.log({
+                error: true,
+                value: _errorString
+              });
+
+              _this3.log({
+                error: true,
+                value: (0, _trimLines.default)(_this3._currentStream.stats.stderr.join('\n'))
+              });
+
+              _this3.trigger('reject', _this3._currentStream.stats);
+
+              trigger('reject', _this3._currentStream.stats);
+            } else {
+              var completeString = "#success The stream \"<cyan>".concat(_this3._currentStream.settings.name || 'unnamed', "</cyan>\" has finished <green>successfully</green> in <yellow>").concat((0, _convert.default)(_this3._currentStream.stats.duration, 's'), "s</yellow>");
+
+              _this3._currentStream.stats.stdout.push(completeString);
+
+              _this3.log({
+                value: completeString
+              }); // resolve this stream process
+
+
+              _this3.trigger('success', {});
+
+              trigger('success', {});
+              resolve(_this3._currentStream.stats);
             }
-          } // complete the overall stats
-
-
-          _this3._currentStream.stats = _objectSpread(_objectSpread({}, _this3._currentStream.stats), {}, {
-            streamObj: _this3._currentStream.streamObjArray,
-            endTime: Date.now(),
-            duration: Date.now() - _this3._currentStream.stats.startTime
-          });
-
-          if (_this3.hasCurrentStreamErrors() || _this3._currentStream.stats.canceled) {
-            var _errorString = "The stream \"<cyan>".concat(settings.name || 'unnamed', "</cyan>\" has had some issues...");
-
-            _this3._currentStream.stats.stdout.push(_errorString);
-
-            _this3.log({
-              error: true,
-              value: _errorString
-            });
-
-            _this3.log({
-              error: true,
-              value: (0, _trimLines.default)(_this3._currentStream.stats.stderr.join('\n'))
-            });
-
-            _this3.trigger('reject', _this3._currentStream.stats);
-
-            trigger('reject', _this3._currentStream.stats);
-          } else {
-            var completeString = "#success The stream \"<cyan>".concat(_this3._currentStream.settings.name || 'unnamed', "</cyan>\" has finished <green>successfully</green> in <yellow>").concat((0, _convert.default)(_this3._currentStream.stats.duration, 's'), "s</yellow>");
-
-            _this3._currentStream.stats.stdout.push(completeString);
-
-            _this3.log({
-              value: completeString
-            }); // resolve this stream process
-
-
-            _this3.trigger('success', {});
-
-            trigger('success', {});
-            resolve(_this3._currentStream.stats);
+          } catch (e) {
+            console.log('PLOP');
           }
         });
 
@@ -736,7 +741,19 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
         };
       }(), {
         id: this._settings.id
-      });
+      }); // this._currentStream.promise.catch((e) => {
+      //   console.log('CCC');
+      // });
+      // } catch (e) {
+      // if (typeof e === 'object') {
+      //   this._currentStream.currentActionObj.stats.stderr.push(__toString(e));
+      //   this._currentStream.stats.stderr.push(__toString(e));
+      // } else if (typeof e === 'string') {
+      //   this._currentStream.currentActionObj.stats.stderr.push(e);
+      //   this._currentStream.stats.stderr.push(e);
+      // }
+      // }
+
       return this._currentStream.promise;
     }
     /**

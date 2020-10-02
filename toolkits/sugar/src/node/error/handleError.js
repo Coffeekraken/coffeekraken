@@ -1,3 +1,4 @@
+const __copy = require('../clipboard/copy');
 const __isChildProcess = require('../is/childProcess');
 const __packageRoot = require('../path/packageRoot');
 const __SError = require('../error/SError');
@@ -106,6 +107,7 @@ function __handleChildProcessErrors(error) {
   __SIpc.trigger('error', error.toString());
 
   const e = new __SError(error);
+  __copy(e.toString());
   console.log(e.toString());
 
   // console.log(__toString(error));

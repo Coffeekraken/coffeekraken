@@ -1,3 +1,4 @@
+const __copy = require('../../clipboard/copy');
 const __SActionsStream = require('../../stream/SActionsStream');
 const __SWebpackStreamAction = require('./actions/SWebpackStreamAction');
 const __STerserStreamAction = require('./actions/STerserStreamAction');
@@ -65,6 +66,7 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
           id: 'build.js.actionStream',
           name: 'Build JS Actions Stream',
           before: (streamObj) => {
+            __copy(streamObj);
             streamObj.docMapInput = streamObj.input;
             return streamObj;
           },

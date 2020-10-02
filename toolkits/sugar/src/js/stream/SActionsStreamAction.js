@@ -180,9 +180,21 @@ export default class SActionStreamAction extends __SPromise {
    */
   run(streamObj, promiseFn) {
     this.checkStreamObject(streamObj);
-    this._currentPromise = new __SPromise(promiseFn, {
+    this._currentPromise = new __SPromise(() => {}, {
       id: this._settings.id
     });
+    __SPromise.pipe(this._currentPromise, this, {});
+
+    promiseFn(
+      this._currentPromise.resolve.bind(this._currentPromise),
+      this._currentPromise.reject.bind(this._currentPromise),
+      this._currentPromise.trigger.bind(this._currentPromise),
+      this._currentPromise.cancel.bind(this._currentPromise)
+    );
+
+    // .catch((e) => {
+    //   this.trigger()
+    // });
     return this._currentPromise;
   }
 

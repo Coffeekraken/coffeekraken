@@ -2,6 +2,7 @@ const __deepMerge = require('../../../object/deepMerge');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __terser = require('terser');
 const __SBuildJsInterface = require('../interface/SBuildJsInterface');
+const __sugarConfig = require('../../../config/sugar');
 
 /**
  * @name                STerserStreamAction
@@ -76,7 +77,16 @@ module.exports = class STerserStreamAction extends __SActionsStreamAction {
     return super.run(streamObj, (resolve, reject) => {
       // minify the "data"
 
+      settings = __deepMerge(
+        {
+          terser: __sugarConfig('terser')
+        },
+        settings
+      );
+
       if (!streamObj.prod) return resolve(streamObj);
+
+      const terserSettings = Object.assign({}, settings.terser || {});
 
       const terserResult = __terser.minify(
         streamObj.data,
@@ -90,7 +100,7 @@ module.exports = class STerserStreamAction extends __SActionsStreamAction {
               url: streamObj.filename + '.map'
             }
           },
-          settings
+          terserSettings
         )
       );
 

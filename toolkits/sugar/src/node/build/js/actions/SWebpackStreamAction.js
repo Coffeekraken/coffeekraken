@@ -129,6 +129,9 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
       });
 
       let webpackSettings = Object.assign({}, settings.webpack);
+
+      return reject('Hello');
+
       const compiler = __webpack(
         __deepMerge(
           {
@@ -170,7 +173,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                     }
                   ]
                 },
-                // { test: /\.handlebars$/, loader: 'handlebars-loader' },
+                { test: /\.handlebars$/, loader: 'handlebars-loader' },
                 {
                   test: /\.m?js$/,
                   exclude: /(node_modules|bower_components)/,
@@ -233,7 +236,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
           if (stats.hasErrors()) {
             const sts = stats.toJson();
             // console.error(sts.errors);
-            return reject(sts.errors);
+            // return reject(sts.errors);
           }
           if (stats.hasWarnings()) {
             const sts = stats.toJson();
@@ -266,8 +269,8 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
           resolve(streamObj);
         });
       } catch (e) {
-        console.log('COCOCOCOC');
-        console.log(e.toString());
+        // console.log('COCOCOCOC');
+        // console.log(e.toString());
       }
     });
   }

@@ -242,9 +242,16 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
     key: "run",
     value: function run(streamObj, promiseFn) {
       this.checkStreamObject(streamObj);
-      this._currentPromise = new _SPromise2.default(promiseFn, {
+      this._currentPromise = new _SPromise2.default(() => {}, {
         id: this._settings.id
       });
+
+      _SPromise2.default.pipe(this._currentPromise, this, {});
+
+      promiseFn(this._currentPromise.resolve.bind(this._currentPromise), this._currentPromise.reject.bind(this._currentPromise), this._currentPromise.trigger.bind(this._currentPromise), this._currentPromise.cancel.bind(this._currentPromise)); // .catch((e) => {
+      //   this.trigger()
+      // });
+
       return this._currentPromise;
     }
     /**

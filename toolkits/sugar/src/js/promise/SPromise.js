@@ -6,8 +6,14 @@ import __toString from '../string/toString';
 import __env from '../core/env';
 
 // var originalCatch = Promise.prototype.catch;
-// Promise.prototype.catch = function () {
-//   console.log('PLOP');
+// Promise.prototype.catch = function (...args) {
+//   if (this._coco) {
+//     console.log('XX');
+//   }
+//   if (this._catch && typeof this._catch === 'function') {
+//     console.log('PLOP');
+//     return this._catch(...args);
+//   }
 //   return originalCatch.apply(this, arguments);
 // };
 
@@ -211,7 +217,7 @@ export default class SPromise extends Promise {
       new Promise((rejectPromiseResolve, rejectPromiseReject) => {
         _masterPromiseRejectFn = rejectPromiseReject;
       }).catch((e) => {
-        this.trigger(this._settings.triggerOnCatch, {
+        this.trigger('catch', {
           value: e
         });
       });
@@ -260,7 +266,6 @@ export default class SPromise extends Promise {
     // extend settings
     this._settings = __deepMerge(
       {
-        triggerOnCatch: 'error',
         destroyTimeout: 5000,
         id: __uniqid()
       },
@@ -463,7 +468,7 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  reject(arg, stacksOrder = 'catch,reject,finally') {
+  reject(arg, stacksOrder = `catch,reject,finally`) {
     return this._reject(arg, stacksOrder);
   }
 
@@ -481,7 +486,7 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _reject(arg, stacksOrder = 'catch,reject,finally') {
+  _reject(arg, stacksOrder = `catch,reject,finally`) {
     if (this._isDestroyed) return;
     return new Promise(async (resolve, reject) => {
       // update the status
@@ -565,6 +570,8 @@ export default class SPromise extends Promise {
    */
   async trigger(what, arg, metas = {}) {
     if (this._isDestroyed) return;
+
+    // if (what === 'error') console.log('SSS', arg);
 
     // triger the passed stacks
     return this._triggerStacks(what, arg, metas);
@@ -663,16 +670,16 @@ export default class SPromise extends Promise {
       // check if the stack is a glob pattern
       Object.keys(this._stacks).forEach((stackName) => {
         if (stackName === stack) return;
-        const toAvoid = [
-          'then',
-          'catch',
-          'resolve',
-          'reject',
-          'finally',
-          'cancel'
-        ];
-        if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1)
-          return;
+        // const toAvoid = [
+        //   'then',
+        //   'catch',
+        //   'resolve',
+        //   'reject',
+        //   'finally',
+        //   'cancel'
+        // ];
+        // if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1)
+        //   return;
 
         if (__minimatch(stack, stackName)) {
           // the glob pattern match the triggered stack so add it to the stack array
@@ -886,7 +893,11 @@ export default class SPromise extends Promise {
       typeof args[1] === 'function'
     ) {
       this._masterPromiseResolveFn = args[0];
-      this._masterPromiseRejectFn = args[1];
+      // const mainRejectFn = this._masterPromiseRejectFn;
+      // this._masterPromiseRejectFn = (...a) => {
+      //   args[1](...a);
+      //   mainRejectFn(...a);
+      // };
       return;
     }
     // super.then(...args);
@@ -918,12 +929,8 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  catch(...args) {
-    // super.catch(...args);
-    return this._registerCallbackInStack(
-      this._settings.triggerOnCatch,
-      ...args
-    );
+  _catch(...args) {
+    return this._registerCallbackInStack('catch', ...voidargs);
   }
 
   /**

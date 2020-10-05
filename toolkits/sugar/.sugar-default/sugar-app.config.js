@@ -63,7 +63,7 @@ module.exports = {
       )}/src/node/build/js/SBuildJsSugarAppTerminalUi`,
       params: '@config.build.js',
       shortcuts: {
-        'ctrl+a': {
+        'ctrl+b': {
           name: 'Build all',
           params: {},
           settings: {}

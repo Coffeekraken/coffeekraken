@@ -70,118 +70,33 @@ module.exports = class SSugarAppTerminalUi extends __SBlessedComponent {
         this._showModule(moduleObj.id);
         __SIpc.trigger('sugar.ui.displayedModule', moduleObj.id);
       });
-      // check if are some shortcuts
-      if (moduleObj.shortcuts) {
-        // Object.keys(moduleObj.shortcuts).forEach((shortcut) => {
-        //   const shortcutObj = moduleObj.shortcuts[shortcut];
-        //   __hotkey(shortcut).on('press', () => {
-        //     if (this._getDisplayedModuleObj().id !== moduleObj.id) return;
-        //   });
-        // });
-      }
     });
 
     this._modulesReady = false;
-    source.on('state', (state) => {
+    source.on('*.SSugarApp.state', (state) => {
       if (state === 'ready') {
         this._modulesReady = true;
       }
     });
 
-    source.on('module.log', (data, metas) => {
-      const moduleObj = this._findModuleObjById(data.module.id);
-      if (!moduleObj || !moduleObj.$console) return;
-      moduleObj.$console.log(data);
-    });
-
-    source.on('module.start', (e, m) => {
-      const moduleObj = this._findModuleObjById(e.module.id);
-      if (moduleObj && moduleObj.$status) {
-        clearTimeout(moduleObj.statusTimeout);
-        moduleObj.$status.style.bg = 'cyan';
-        this.update();
+    source.on('*.SSugarAppModule.*', (data, metas) => {
+      switch (metas.originalStack) {
+        case 'state':
+          this._moduleState(data, metas);
+          break;
+        case 'log':
+          this._moduleLog(data, metas);
+          break;
+        case 'start':
+          this._moduleStart(data, metas);
+          break;
+        case 'success':
+          this._moduleSuccess(data, metas);
+          break;
+        case 'error':
+          this._moduleError(data, metas);
+          break;
       }
-
-      if (this._getDisplayedModuleObj().id === moduleObj.id) return;
-
-      let msg = e.value || 'Process starting...';
-      if (msg.length > 36) msg = msg.slice(0, 33) + '...';
-      const $startNotification = new __SNotification(
-        e.module.name || e.module.id,
-        msg,
-        {
-          bg: 'yellow',
-          onClick: () => {
-            this._showModule(moduleObj.id);
-          }
-        }
-      );
-      this.append($startNotification);
-    });
-
-    source.on('module.state', (e, m) => {
-      const moduleObj = this._modules[e.module.idx];
-      if (!moduleObj.spinner) moduleObj.spinner = __ora();
-      if (!moduleObj) return;
-
-      moduleObj.state = e.value;
-    });
-
-    source.on('module.success', (e, m) => {
-      const moduleObj = this._findModuleObjById(e.module.id);
-      if (moduleObj && moduleObj.$status) {
-        clearTimeout(moduleObj.statusTimeout);
-        moduleObj.$status.style.bg = 'green';
-        this.update();
-        moduleObj.statusTimeout = setTimeout(() => {
-          moduleObj.$status.style.bg = 'blue';
-          this.update();
-        }, 2000);
-      }
-
-      if (this._getDisplayedModuleObj().id === moduleObj.id) return;
-
-      let msg = e.value || 'Process finished successfully';
-      if (msg.length > 36) msg = msg.slice(0, 33) + '...';
-      const $successNotification = new __SNotification(
-        e.module.name || e.module.id,
-        msg,
-        {
-          bg: 'green',
-          onClick: () => {
-            this._showModule(moduleObj.id);
-          }
-        }
-      );
-      this.append($successNotification);
-    });
-
-    source.on('module.error', (e) => {
-      if (this.$modules.parent) return;
-
-      const moduleObj = this._findModuleObjById(e.module.id);
-      if (moduleObj && moduleObj.$status) {
-        clearTimeout(moduleObj.statusTimeout);
-        moduleObj.$status.style.bg = 'red';
-        this.update();
-      }
-
-      if (this._getDisplayedModuleObj().id === moduleObj.id) return;
-
-      let msg = e.value;
-      if (msg.length > 36) msg = msg.slice(0, 33) + '...';
-      const $errorNotification = new __SNotification(
-        e.module.name || e.module.id,
-        msg,
-        {
-          bg: 'red',
-          onClick: () => {
-            this._showModule(moduleObj.id);
-          }
-        }
-      );
-
-      this.append($errorNotification);
     });
 
     this.append(this.$bottomBar);
@@ -291,6 +206,119 @@ module.exports = class SSugarAppTerminalUi extends __SBlessedComponent {
       if (moduleObj.id === id) return moduleObj;
     }
     return false;
+  }
+
+  /**
+   * @name          _log
+   * @type          Function
+   * @private
+   *
+   * This function log the passed SPromise arguments in the correct module
+   *
+   * @since       2.0.0
+   */
+  _moduleLog(data, metas) {
+    const moduleObj = this._findModuleObjById(data.module.id);
+    if (!moduleObj || !moduleObj.$console) return;
+    moduleObj.$console.log(data);
+  }
+
+  _moduleError(data, metas) {
+    if (this.$modules.parent) return;
+
+    const moduleObj = this._findModuleObjById(data.module.id);
+    if (moduleObj && moduleObj.$status) {
+      clearTimeout(moduleObj.statusTimeout);
+      moduleObj.$status.style.bg = 'red';
+      this.update();
+    }
+
+    if (this._getDisplayedModuleObj().id === moduleObj.id) return;
+
+    let msg = data.value;
+    if (msg.length > 36) msg = msg.slice(0, 33) + '...';
+    const $errorNotification = new __SNotification(
+      data.module.name || data.module.id,
+      msg,
+      {
+        bg: 'red',
+        onClick: () => {
+          this._showModule(moduleObj.id);
+        }
+      }
+    );
+
+    this.append($errorNotification);
+  }
+
+  _moduleStart(value, metas) {
+    const moduleObj = this._modules[value.module.idx];
+    if (!moduleObj.spinner) moduleObj.spinner = __ora();
+    if (!moduleObj) return;
+
+    moduleObj.state = value.value;
+  }
+
+  _moduleSuccess(data, metas) {
+    const moduleObj = this._findModuleObjById(data.module.id);
+    if (moduleObj && moduleObj.$status) {
+      clearTimeout(moduleObj.statusTimeout);
+      moduleObj.$status.style.bg = 'green';
+      this.update();
+      moduleObj.statusTimeout = setTimeout(() => {
+        moduleObj.$status.style.bg = 'blue';
+        this.update();
+      }, 2000);
+    }
+
+    if (this._getDisplayedModuleObj().id === moduleObj.id) return;
+
+    let msg = data.value || 'Process finished successfully';
+    if (msg.length > 36) msg = msg.slice(0, 33) + '...';
+    const $successNotification = new __SNotification(
+      data.module.name || data.module.id,
+      msg,
+      {
+        bg: 'green',
+        onClick: () => {
+          this._showModule(moduleObj.id);
+        }
+      }
+    );
+    this.append($successNotification);
+  }
+
+  _moduleState(data, metas) {
+    const moduleObj = this._modules[data.module.idx];
+    if (!moduleObj.spinner) moduleObj.spinner = __ora();
+    if (!moduleObj) return;
+
+    moduleObj.state = data.value;
+  }
+
+  _moduleStart(data, metas) {
+    const moduleObj = this._findModuleObjById(data.module.id);
+    if (moduleObj && moduleObj.$status) {
+      clearTimeout(moduleObj.statusTimeout);
+      moduleObj.$status.style.bg = 'cyan';
+      this.update();
+    }
+
+    if (this._getDisplayedModuleObj().id === moduleObj.id) return;
+
+    let msg = data.value || 'Process starting...';
+    if (msg.length > 36) msg = msg.slice(0, 33) + '...';
+    const $startNotification = new __SNotification(
+      data.module.name || data.module.id,
+      msg,
+      {
+        bg: 'yellow',
+        onClick: () => {
+          this._showModule(moduleObj.id);
+        }
+      }
+    );
+    this.append($startNotification);
   }
 
   /**
@@ -489,11 +517,8 @@ module.exports = class SSugarAppTerminalUi extends __SBlessedComponent {
 
       let OutputClass;
       if (moduleObj.ui) {
-        console.log(moduleObj.ui);
         const requirePath = __path.relative(__dirname, moduleObj.ui);
-        console.log(requirePath);
         OutputClass = require(requirePath);
-        console.log(OutputClass);
       } else {
         OutputClass = __SBlessedOutput;
       }

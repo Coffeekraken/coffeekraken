@@ -40,6 +40,8 @@ function removeClassOnAnimationEnd($elm, cls) {
 
       resolve(e);
     });
+  }, {
+    id: 'removeClassOnAnimationEnd'
   });
 }
 

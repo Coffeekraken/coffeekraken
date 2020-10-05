@@ -124,7 +124,9 @@ function hotkey(key, settings = {}) {
       });
     }
 
-    const promise = new __SPromise()
+    const promise = new __SPromise({
+      id: 'hotkey'
+    })
       .on('key,press', (key) => {
         if (settings.once) {
           promise.cancel();
@@ -145,7 +147,9 @@ function hotkey(key, settings = {}) {
     // return the promise
     return promise;
   } else if (settings.ipc) {
-    const promise = new __SPromise();
+    const promise = new __SPromise({
+      id: 'hotkey'
+    });
     // child process
     __SIpc.on(`keypress.${key}`, (keyObj) => {
       promise.trigger('key', keyObj);

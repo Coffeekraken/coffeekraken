@@ -189,7 +189,7 @@ module.exports = function doc(req, server, settings = {}) {
       resolve(resultObj);
     },
     {
-      id: 'server.handler.doc'
+      id: 'frontendServerDocHandler'
     }
   );
 };

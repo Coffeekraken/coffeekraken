@@ -62,7 +62,7 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
       __deepMerge(
         {
           name: 'File resolver',
-          id: 'actionStream.action.fs.filesResolver',
+          id: 'SFsFilesResolverStreamAction',
           cache: false,
           ignoreFolders: ['__wip__', '__tests__'],
           out: 'array'

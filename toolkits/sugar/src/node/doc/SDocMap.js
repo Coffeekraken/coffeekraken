@@ -93,6 +93,7 @@ module.exports = class SDocMap extends __SPromise {
       (resolve, reject, trigger, cancel) => {
         settings = __deepMerge(
           {
+            id: 'SDocMap',
             sources: {
               root: {
                 rootDir: __packageRoot(),
@@ -160,7 +161,7 @@ module.exports = class SDocMap extends __SPromise {
         resolve(files);
       },
       {
-        id: 'SDocMap.find'
+        id: settings.id + '.find'
       }
     );
   }
@@ -189,7 +190,12 @@ module.exports = class SDocMap extends __SPromise {
   static read(settings = {}) {
     return new __SPromise(
       async (resolve, reject, trigger, cancel) => {
-        settings = __deepMerge({}, settings);
+        settings = __deepMerge(
+          {
+            id: 'SDocMap'
+          },
+          settings
+        );
 
         const files = await SDocMap.find(settings);
 
@@ -216,7 +222,7 @@ module.exports = class SDocMap extends __SPromise {
         resolve(docMapJson);
       },
       {
-        id: 'SDocMap.read'
+        id: settings.id + '.read'
       }
     );
   }
@@ -235,50 +241,55 @@ module.exports = class SDocMap extends __SPromise {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   scan(sources) {
-    return new __SPromise(async (resolve, reject, trigger, cancel) => {
-      if (!Array.isArray(sources)) sources = [sources];
+    return new __SPromise(
+      async (resolve, reject, trigger, cancel) => {
+        if (!Array.isArray(sources)) sources = [sources];
 
-      for (let i = 0; i < sources.length; i++) {
-        const source = sources[i];
+        for (let i = 0; i < sources.length; i++) {
+          const source = sources[i];
 
-        // scan for files
-        const files = __glob.sync(source);
+          // scan for files
+          const files = __glob.sync(source);
 
-        // loop on each files to check for docblocks
-        for (let j = 0; j < files.length; j++) {
-          const filepath = files[j];
-          const content = __fs.readFileSync(filepath, 'utf8');
+          // loop on each files to check for docblocks
+          for (let j = 0; j < files.length; j++) {
+            const filepath = files[j];
+            const content = __fs.readFileSync(filepath, 'utf8');
 
-          const docblocks = new __SDocblock(content).toObject();
+            const docblocks = new __SDocblock(content).toObject();
 
-          if (!docblocks || !docblocks.length) continue;
+            if (!docblocks || !docblocks.length) continue;
 
-          docblocks.forEach((docblock) => {
-            if (!docblock.namespace) return;
-            const path = __path.relative(this._settings.outputDir, filepath);
-            const filename = __getFilename(filepath);
-            const docblockObj = {
-              name: docblock.name,
-              namespace: docblock.namespace,
-              filename,
-              extension: filename.split('.').slice(1)[0],
-              relPath: path,
-              directory: path.replace(`/${__getFilename(filepath)}`, ''),
-              type: docblock.type,
-              description: docblock.description
-            };
-            if (docblock.extends) docblockObj.extends = docblock.extends;
-            if (docblock.static) docblockObj.static = true;
-            if (docblock.since) docblockObj.since = docblock.since;
-            this._entries[
-              `${docblock.namespace}.${docblock.name}`
-            ] = docblockObj;
-          });
+            docblocks.forEach((docblock) => {
+              if (!docblock.namespace) return;
+              const path = __path.relative(this._settings.outputDir, filepath);
+              const filename = __getFilename(filepath);
+              const docblockObj = {
+                name: docblock.name,
+                namespace: docblock.namespace,
+                filename,
+                extension: filename.split('.').slice(1)[0],
+                relPath: path,
+                directory: path.replace(`/${__getFilename(filepath)}`, ''),
+                type: docblock.type,
+                description: docblock.description
+              };
+              if (docblock.extends) docblockObj.extends = docblock.extends;
+              if (docblock.static) docblockObj.static = true;
+              if (docblock.since) docblockObj.since = docblock.since;
+              this._entries[
+                `${docblock.namespace}.${docblock.name}`
+              ] = docblockObj;
+            });
+          }
         }
-      }
 
-      resolve();
-    });
+        resolve();
+      },
+      {
+        id: this._settings.id + '.scan'
+      }
+    );
   }
 
   /**
@@ -295,18 +306,23 @@ module.exports = class SDocMap extends __SPromise {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   save(output = null) {
-    return new __SPromise((resolve, reject, trigger, cancel) => {
-      if (!output) {
-        output = `${this._settings.outputDir}/${this._settings.filename}`;
+    return new __SPromise(
+      (resolve, reject, trigger, cancel) => {
+        if (!output) {
+          output = `${this._settings.outputDir}/${this._settings.filename}`;
+        }
+        __removeSync(output);
+        __fs.writeFileSync(
+          output,
+          __toString(this._entries, {
+            beautify: true
+          })
+        );
+        resolve();
+      },
+      {
+        id: this._settings.id + '.save'
       }
-      __removeSync(output);
-      __fs.writeFileSync(
-        output,
-        __toString(this._entries, {
-          beautify: true
-        })
-      );
-      resolve();
-    });
+    );
   }
 };

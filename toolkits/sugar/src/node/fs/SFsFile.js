@@ -145,6 +145,7 @@ class SFsFile extends __SPromise {
   constructor(filepath, settings = {}) {
     settings = __deepMerge(
       {
+        id: 'SFsFile',
         checkExistence: true,
         rootDir: null
       },

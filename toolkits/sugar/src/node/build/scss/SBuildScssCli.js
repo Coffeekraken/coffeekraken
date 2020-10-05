@@ -62,7 +62,7 @@ class SBuildScssCli extends __SCli {
       args,
       __deepMerge(
         {
-          id: 'build.scss.cli',
+          id: 'SBuildScssCli',
           name: 'Cli Build Scss'
         },
         settings

@@ -363,7 +363,9 @@ module.exports = (_temp = /*#__PURE__*/function () {
         return function (_x5, _x6, _x7, _x8) {
           return _ref2.apply(this, arguments);
         };
-      }());
+      }(), {
+        id: 'SDocblockOutputRender'
+      });
     }
   }]);
 

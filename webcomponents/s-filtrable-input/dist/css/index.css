@@ -17399,3 +17399,7 @@ s-f-code {
 .s-filtrable-input__list {
   left: 300px !important;
 }
+
+body {
+  background-color: red;
+}

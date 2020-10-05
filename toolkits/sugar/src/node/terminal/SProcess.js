@@ -74,12 +74,17 @@ module.exports = class SProcess {
     const _settings = __deepMerge({}, settings);
 
     // init the SPromise class
-    this._promise = new __SPromise((resolve, reject, trigger, cancel) => {
-      this.resolve = resolve.bind(this);
-      this.reject = reject.bind(this);
-      this.trigger = trigger.bind(this);
-      this.cancel = cancel.bind(this);
-    });
+    this._promise = new __SPromise(
+      (resolve, reject, trigger, cancel) => {
+        this.resolve = resolve.bind(this);
+        this.reject = reject.bind(this);
+        this.trigger = trigger.bind(this);
+        this.cancel = cancel.bind(this);
+      },
+      {
+        id: 'SProcess'
+      }
+    );
     this.on = this._promise.on.bind(this._promise);
 
     // make sure the passed commands are valid

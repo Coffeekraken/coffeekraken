@@ -51,7 +51,9 @@ function addEventListener($elm, eventNames, callback, useCapture) {
   if (!Array.isArray(eventNames)) eventNames = eventNames.split(',').map(e => e.trim());
   if (callback && typeof callback === 'function') callback = callback;else if (callback && typeof callback === 'boolean') useCapture = callback;
   var eventsStack = {};
-  var promise = new _SPromise.default((resolve, reject, trigger, cancel) => {}).on('cancel,finally', () => {
+  var promise = new _SPromise.default((resolve, reject, trigger, cancel) => {}, {
+    id: 'addEventListener'
+  }).on('cancel,finally', () => {
     eventNames.forEach(eventName => {
       var stack = eventsStack[eventName];
       $elm.removeEventListener(eventName, stack.callback, stack.useCapture);

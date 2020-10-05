@@ -19,36 +19,41 @@ import __SPromise from '../promise/SPromise';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function loadScript($script) {
-  return new __SPromise((resolve, reject, trigger, cancel) => {
-    let done = false;
+  return new __SPromise(
+    (resolve, reject, trigger, cancel) => {
+      let done = false;
 
-    $script.onload = handleLoad;
-    $script.onreadystatechange = handleReadyStateChange;
-    $script.onerror = handleError;
+      $script.onload = handleLoad;
+      $script.onreadystatechange = handleReadyStateChange;
+      $script.onerror = handleError;
 
-    function handleLoad() {
-      if (!done) {
-        done = true;
-        resolve($script);
-      }
-    }
-
-    function handleReadyStateChange() {
-      var state;
-      if (!done) {
-        state = $script.readyState;
-        if (state === 'complete') {
-          handleLoad();
+      function handleLoad() {
+        if (!done) {
+          done = true;
+          resolve($script);
         }
       }
-    }
-    function handleError(e) {
-      if (!done) {
-        done = true;
-        reject(new Error(e));
+
+      function handleReadyStateChange() {
+        var state;
+        if (!done) {
+          state = $script.readyState;
+          if (state === 'complete') {
+            handleLoad();
+          }
+        }
       }
+      function handleError(e) {
+        if (!done) {
+          done = true;
+          reject(new Error(e));
+        }
+      }
+    },
+    {
+      id: 'scriptLoaded'
     }
-  }).on('finally', () => {
+  ).on('finally', () => {
     $script.onload = null;
     $script.onreadystatechange = null;
     $script.onerror = null;

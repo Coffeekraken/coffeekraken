@@ -152,6 +152,8 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
     if (!this._settings.filter.function)
       this._settings.filter.function = this.filterItems.bind(this);
 
+    console.log('HELLO');
+
     this._maxDisplayItems = this._settings.maxDisplayItems;
 
     this.on('ready', () => {

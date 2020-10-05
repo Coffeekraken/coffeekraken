@@ -32,25 +32,30 @@ import __SPromise from '../promise/SPromise';
 export default function detectInOutDirection($elm) {
   let mouseEnterHandler, mouseLeaveHandler;
 
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
-    mouseEnterHandler = (e) => {
-      trigger('in', direction);
-      trigger('then', {
-        action: 'in',
-        direction
-      });
-    };
-    mouseLeaveHandler = (e) => {
-      trigger('out', direction);
-      trigger('then', {
-        action: 'out',
-        direction
-      });
-    };
-    // detect when mouseenter/leave the element
-    $elm.addEventListener('mouseenter', mouseEnterHandler);
-    $elm.addEventListener('mouseleave', mouseLeaveHandler);
-  }).on('finally', () => {
+  const promise = new __SPromise(
+    (resolve, reject, trigger, cancel) => {
+      mouseEnterHandler = (e) => {
+        trigger('in', direction);
+        trigger('then', {
+          action: 'in',
+          direction
+        });
+      };
+      mouseLeaveHandler = (e) => {
+        trigger('out', direction);
+        trigger('then', {
+          action: 'out',
+          direction
+        });
+      };
+      // detect when mouseenter/leave the element
+      $elm.addEventListener('mouseenter', mouseEnterHandler);
+      $elm.addEventListener('mouseleave', mouseLeaveHandler);
+    },
+    {
+      id: 'detectInOutDirection'
+    }
+  ).on('finally', () => {
     $elm.removeEventListener('mouseenter', mouseEnterHandler);
     $elm.removeEventListener('mouseleave', mouseLeaveHandler);
   });

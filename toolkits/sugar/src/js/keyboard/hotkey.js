@@ -40,24 +40,29 @@ hotkeys.filter = function (event) {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function (hotkey, settings = {}) {
-  return new __SPromise((resolve, reject, trigger, cancel) => {
-    // merge default settings with passed ones:
-    settings = {
-      element: null,
-      keyup: false,
-      keydown: true,
-      once: false,
-      splitKey: '+',
-      ...settings
-    };
-    // init the hotkey
-    hotkeys(hotkey, settings, (e, h) => {
-      // call the handler function
-      trigger('key', e);
-      // unsubscribe if once is truc
-      if (settings.once) cancel();
-    });
-  }).on('finally', () => {
+  return new __SPromise(
+    (resolve, reject, trigger, cancel) => {
+      // merge default settings with passed ones:
+      settings = {
+        element: null,
+        keyup: false,
+        keydown: true,
+        once: false,
+        splitKey: '+',
+        ...settings
+      };
+      // init the hotkey
+      hotkeys(hotkey, settings, (e, h) => {
+        // call the handler function
+        trigger('key', e);
+        // unsubscribe if once is truc
+        if (settings.once) cancel();
+      });
+    },
+    {
+      id: 'hotkey'
+    }
+  ).on('finally', () => {
     hotkeys.unbind(hotkey);
   });
 }

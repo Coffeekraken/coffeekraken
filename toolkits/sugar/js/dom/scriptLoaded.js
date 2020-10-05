@@ -59,6 +59,8 @@ function loadScript($script) {
         reject(new Error(e));
       }
     }
+  }, {
+    id: 'scriptLoaded'
   }).on('finally', () => {
     $script.onload = null;
     $script.onreadystatechange = null;

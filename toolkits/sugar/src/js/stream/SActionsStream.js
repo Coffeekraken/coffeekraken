@@ -12,7 +12,7 @@ import __wait from '../time/wait';
 import __SActionsStreamAction from './SActionsStreamAction';
 import __SCache from '../cache/SCache';
 import __sha256 from '../crypt/sha256';
-import { stream } from 'globby';
+import __upperFirst from '../string/upperFirst';
 
 /**
  * @name          SActionStream
@@ -87,7 +87,7 @@ export default class SActionStream extends __SPromise {
     super(
       __deepMerge(
         {
-          id: __uniqid(),
+          id: `SActionsStream`,
           cache: false,
           name: null,
           order: null,
@@ -624,9 +624,6 @@ export default class SActionStream extends __SPromise {
                 actionInstance = new this._actionsObject[actionName](
                   actionSettings
                 );
-                // actionInstance.on('catch', (e) => {
-                //   console.log('ERROR');
-                // });
               } else {
                 this._currentStream.stats.stderr.push(
                   `Your action "<yellow>${actionName}</yellow>" has to be a class extending the <cyan>SActionsStreamAction</cyan> one...`
@@ -654,11 +651,15 @@ export default class SActionStream extends __SPromise {
                   (value) => {
                     this.trigger(
                       `${this._currentStream.currentActionObj.name}.error`,
-                      value
+                      {
+                        value
+                      }
                     );
                     trigger(
                       `${this._currentStream.currentActionObj.name}.error`,
-                      value
+                      {
+                        value
+                      }
                     );
                     cancel(value);
                   }

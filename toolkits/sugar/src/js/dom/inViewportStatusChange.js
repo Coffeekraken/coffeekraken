@@ -53,7 +53,7 @@ export default function inViewportStatusChange($elm) {
       }
     },
     {
-      stacks: ['enter', 'exit']
+      id: 'inViewportStatisChange'
     }
   ).on('finally', () => {
     isFinished = true;

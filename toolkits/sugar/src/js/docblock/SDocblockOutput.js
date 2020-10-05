@@ -276,33 +276,38 @@ module.exports = class SDocblockOutput {
   render(settings = {}) {
     this._partialsTemplateObj = this.getPartialsTemplateObj();
 
-    return new __SPromise(async (resolve, reject, trigger, cancel) => {
-      // get the block in object format
-      const blocksArray = this._docblockInstance.toObject();
-      // reset all blocks rendered state
-      blocksArray.forEach((block) => {
-        block._rendered = false;
-      });
-      // get the first block
-      const firstBlock = blocksArray[0];
-      // get the template to render
-      let type =
-        typeof firstBlock.type === 'string'
-          ? firstBlock.type.toLowerCase()
-          : 'default';
-      const template =
-        this._settings.templates[type] || this._settings.templates.default;
+    return new __SPromise(
+      async (resolve, reject, trigger, cancel) => {
+        // get the block in object format
+        const blocksArray = this._docblockInstance.toObject();
+        // reset all blocks rendered state
+        blocksArray.forEach((block) => {
+          block._rendered = false;
+        });
+        // get the first block
+        const firstBlock = blocksArray[0];
+        // get the template to render
+        let type =
+          typeof firstBlock.type === 'string'
+            ? firstBlock.type.toLowerCase()
+            : 'default';
+        const template =
+          this._settings.templates[type] || this._settings.templates.default;
 
-      const templateObj = this.getTemplateObj(template);
+        const templateObj = this.getTemplateObj(template);
 
-      // render the template
-      let compiledTemplateFn;
-      compiledTemplateFn = this._handlebars.compile(templateObj.content, {
-        noEscape: true
-      });
-      const renderedTemplate = await compiledTemplateFn();
-      // resolve the rendering process with the rendered stack
-      resolve(renderedTemplate);
-    });
+        // render the template
+        let compiledTemplateFn;
+        compiledTemplateFn = this._handlebars.compile(templateObj.content, {
+          noEscape: true
+        });
+        const renderedTemplate = await compiledTemplateFn();
+        // resolve the rendering process with the rendered stack
+        resolve(renderedTemplate);
+      },
+      {
+        id: 'SDocblockOutputRender'
+      }
+    );
   }
 };

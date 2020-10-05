@@ -86,6 +86,7 @@ class SCli extends __SPromise {
     // save the settings
     settings = __deepMerge(
       {
+        id: 'SCli',
         name: null,
         includeAllParams: true,
         output: false,

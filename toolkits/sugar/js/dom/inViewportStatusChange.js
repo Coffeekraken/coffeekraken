@@ -65,7 +65,7 @@ function inViewportStatusChange($elm) {
       _whenIn();
     }
   }, {
-    stacks: ['enter', 'exit']
+    id: 'inViewportStatisChange'
   }).on('finally', () => {
     isFinished = true;
   });

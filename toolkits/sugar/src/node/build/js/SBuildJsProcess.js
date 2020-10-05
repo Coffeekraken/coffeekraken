@@ -29,7 +29,7 @@ module.exports = class SBuildJsProcess extends __SProcess {
       initialParams,
       __deepMerge(
         {
-          id: 'build.js.process',
+          id: 'SBuildJsProcess',
           name: 'Build JS Process',
           deamon: new __SFsDeamon({})
         },

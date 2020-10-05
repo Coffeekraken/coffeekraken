@@ -136,7 +136,7 @@ module.exports = function render(viewPath, data = null, settings = {}) {
       resolve(result);
     },
     {
-      id: 'template.render'
+      id: 'templateRender'
     }
   );
 };

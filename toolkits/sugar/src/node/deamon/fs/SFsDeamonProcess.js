@@ -46,7 +46,7 @@ module.exports = class SFsDeamonProcess extends __SProcess {
       initialParams,
       __deepMerge(
         {
-          id: 'deamon.fs',
+          id: 'SFsDeamonProcess',
           name: 'Filesystem Deamon'
         },
         settings
@@ -151,7 +151,7 @@ module.exports = class SFsDeamonProcess extends __SProcess {
           });
       },
       {
-        id: settings.id || 'deamon.fs'
+        id: settings.id + 'Run'
       }
     );
 

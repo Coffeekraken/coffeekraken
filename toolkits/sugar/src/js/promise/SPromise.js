@@ -113,7 +113,7 @@ export default class SPromise extends Promise {
   _promiseState = 'pending';
 
   /**
-   * @name                  pipe
+   * @name                  map
    * @type                  Function
    * @static
    *
@@ -129,11 +129,11 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  static pipe(sourceSPromise, destSPromise, settings = {}) {
+  static map(sourceSPromise, destSPromise, settings = {}) {
     // settings
     settings = __deepMerge(
       {
-        stacks: '*',
+        stacks: 'then,catch,resolve,reject,finally,cancel',
         processor: null,
         filter: null
       },
@@ -157,6 +157,75 @@ export default class SPromise extends Promise {
         } else {
           value = res;
         }
+      }
+
+      if (
+        destSPromise[metas.stack] &&
+        typeof destSPromise[metas.stack] === 'function'
+      ) {
+        destSPromise[metas.stack](value);
+      } else {
+        destSPromise.trigger(metas.stack, value);
+      }
+    });
+  }
+
+  /**
+   * @name                  pipe
+   * @type                  Function
+   * @static
+   *
+   * This static function allows you to redirect some SPromise "events" to another SPromise instance
+   * with the ability to process the linked value before triggering it on the destination SPromise.
+   *
+   * @param         {SPromise}      sourceSPromise        The source SPromise instance on which to listen for "events"
+   * @param         {SPromise}      destSPromise          The destination SPromise instance on which to trigger the listened "events"
+   * @param         {Object}        [settings={}]         An object of settings to configure your pipe process
+   * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
+   * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
+   * - filter (null) {Function}: Specify a function to filter the "events". It will take as parameter the triggered value and the metas object. You must return true or false depending if you want to pipe the particular event or not
+   *
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  static pipe(sourceSPromise, destSPromise, settings = {}) {
+    // settings
+    settings = __deepMerge(
+      {
+        stacks: '*',
+        prefixStack: true,
+        processor: null,
+        exclude: ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'],
+        filter: null
+      },
+      settings
+    );
+    if (
+      !(sourceSPromise instanceof SPromise) ||
+      !(destSPromise instanceof SPromise)
+    )
+      return;
+    // listen for all on the source promise
+    sourceSPromise.on(settings.stacks, (value, metas) => {
+      // check excluded stacks
+      if (settings.exclude.indexOf(metas.stack) !== -1) return;
+      // check if we have a filter setted
+      if (settings.filter && !settings.filter(value, metas)) return;
+      // check if need to process the value
+      if (settings.processor) {
+        const res = settings.processor(value, metas);
+        if (Array.isArray(res) && res.length === 2) {
+          value = res[0];
+          metas = res[1];
+        } else {
+          value = res;
+        }
+      }
+
+      // append the source promise id to the stack
+      let triggerStack = metas.stack;
+      if (settings.prefixStack) {
+        triggerStack = `${sourceSPromise.id}.${metas.stack}`;
+        metas.stack = triggerStack;
       }
 
       // trigger on the destination promise
@@ -280,6 +349,19 @@ export default class SPromise extends Promise {
         }, this._settings.destroyTimeout);
       });
     }
+  }
+
+  /**
+   * @name                    id
+   * @type                    String
+   * @get
+   *
+   * Access the promise id
+   *
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  get id() {
+    return this._settings.id;
   }
 
   /**
@@ -699,6 +781,7 @@ export default class SPromise extends Promise {
     const metasObj = __deepMerge(
       {
         stack,
+        originalStack: stack,
         id: this._settings.id,
         state: this._promiseState,
         time: Date.now(),

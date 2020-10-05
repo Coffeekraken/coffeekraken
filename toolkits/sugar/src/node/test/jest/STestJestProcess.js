@@ -28,7 +28,7 @@ module.exports = class STestJestProcess extends __SProcess {
    */
   constructor(initialParams = {}, settings = {}) {
     super(initialParams, {
-      id: 'process.test.jest',
+      id: 'STestJestProcess',
       name: 'Test Jest Process',
       deamon: {
         class: __SFsDeamon,
@@ -57,23 +57,28 @@ module.exports = class STestJestProcess extends __SProcess {
    */
   run(argsObj, settings = {}) {
     return super.run(
-      new __SPromise((resolve, reject, trigger, cancel) => {
-        const input = argsObj.input;
-        delete argsObj.input;
+      new __SPromise(
+        (resolve, reject, trigger, cancel) => {
+          const input = argsObj.input;
+          delete argsObj.input;
 
-        const commandToRun = __buildCommandLine(
-          `jest ${input}`,
-          __STestJestCliInterface.definitionObj,
-          argsObj
-        );
+          const commandToRun = __buildCommandLine(
+            `jest ${input}`,
+            __STestJestCliInterface.definitionObj,
+            argsObj
+          );
 
-        __childProcess.spawnSync(commandToRun, null, {
-          stdio: 'inherit',
-          shell: true
-        });
+          __childProcess.spawnSync(commandToRun, null, {
+            stdio: 'inherit',
+            shell: true
+          });
 
-        resolve();
-      })
+          resolve();
+        },
+        {
+          id: this._settings.id + '.run'
+        }
+      )
     );
   }
 

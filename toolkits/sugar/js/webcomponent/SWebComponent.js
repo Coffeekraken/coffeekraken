@@ -111,7 +111,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since       2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-var _sWebComponentPromise = new _SPromise.default();
+var _sWebComponentPromise = new _SPromise.default({
+  id: 'SWebComponentPromise'
+});
 
 function SWebComponent(extend) {
   var _temp;
@@ -213,7 +215,9 @@ function SWebComponent(extend) {
         props: _this.constructor.props || {}
       }, _this._metas.settings || {}, settings); // create the SPromise instance
 
-      _this._promise = new _SPromise.default(); // apply the $node class
+      _this._promise = new _SPromise.default({
+        id: _this._settings.id
+      }); // apply the $node class
 
       var currentClassName = _this.getAttribute('class') || '';
 

@@ -98,123 +98,128 @@ module.exports = class SScssCompiler {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   compile(source, settings = {}, streamObj) {
-    return new __SPromise(async (resolve, reject, trigger, cancel) => {
-      settings = __deepMerge(this._settings, settings);
+    return new __SPromise(
+      async (resolve, reject, trigger, cancel) => {
+        settings = __deepMerge(this._settings, settings);
 
-      const startTime = Date.now();
+        const startTime = Date.now();
 
-      let resultObj,
-        resultString = '';
+        let resultObj,
+          resultString = '';
 
-      const sassSettings = __deepMerge(
-        {
-          importer: __globImporter(),
-          sourceMap: true,
-          includePaths: [
-            ...(settings.sass.includePaths || []),
-            `${__packageRoot(process.cwd())}/node_modules`,
-            `${__packageRoot(__dirname)}/src/scss`,
-            `${__packageRoot(process.cwd())}/src/scss`
-          ]
-        },
-        settings.sass || {}
-      );
-
-      if (__isPath(source, true)) {
-        sassSettings.includePaths.unshift(
-          `${source.replace(__getFilename(source), '')}`
+        const sassSettings = __deepMerge(
+          {
+            importer: __globImporter(),
+            sourceMap: true,
+            includePaths: [
+              ...(settings.sass.includePaths || []),
+              `${__packageRoot(process.cwd())}/node_modules`,
+              `${__packageRoot(__dirname)}/src/scss`,
+              `${__packageRoot(process.cwd())}/src/scss`
+            ]
+          },
+          settings.sass || {}
         );
-        source = __fs.readFileSync(source, 'utf8');
-      }
-      sassSettings.data = source;
 
-      if (settings.optimizers.split) {
-        const splitter = new __SCodeSplitter();
+        if (__isPath(source, true)) {
+          sassSettings.includePaths.unshift(
+            `${source.replace(__getFilename(source), '')}`
+          );
+          source = __fs.readFileSync(source, 'utf8');
+        }
+        sassSettings.data = source;
 
-        const splited = splitter.split(source, [
-          __selectorBlockSplitter,
-          __mediaQuerySplitter,
-          __includeInlineSplitter,
-          __includeBlockSplitter,
-          __mixinBlockSplitter
-        ]);
+        if (settings.optimizers.split) {
+          const splitter = new __SCodeSplitter();
 
-        const cache = new __SCache(settings.id, {});
+          const splited = splitter.split(source, [
+            __selectorBlockSplitter,
+            __mediaQuerySplitter,
+            __includeInlineSplitter,
+            __includeBlockSplitter,
+            __mixinBlockSplitter
+          ]);
 
-        // loop on splited blocks
-        const previousBlocks = [];
-        for (let i = 0; i < splited.length; i++) {
-          const block = splited[i];
+          const cache = new __SCache(settings.id, {});
 
-          switch (block.type) {
-            case 'string':
-            case 'mixin.block':
-              previousBlocks.push(block.data);
-              break;
-            default:
-              let stringToCompile = '';
-              previousBlocks.forEach((bl) => {
-                stringToCompile += `      
+          // loop on splited blocks
+          const previousBlocks = [];
+          for (let i = 0; i < splited.length; i++) {
+            const block = splited[i];
+
+            switch (block.type) {
+              case 'string':
+              case 'mixin.block':
+                previousBlocks.push(block.data);
+                break;
+              default:
+                let stringToCompile = '';
+                previousBlocks.forEach((bl) => {
+                  stringToCompile += `      
                     ${bl}
                 `;
-              });
-              stringToCompile += `
+                });
+                stringToCompile += `
                 ${block.data}
                 `;
 
-              //   streamObj.outputStack[`toCompile_${i}`] =
-              //     streamObj.outputDir + `/toCompile_${i}.scss`;
-              //   streamObj[`toCompile_${i}`] = stringToCompile;
+                //   streamObj.outputStack[`toCompile_${i}`] =
+                //     streamObj.outputDir + `/toCompile_${i}.scss`;
+                //   streamObj[`toCompile_${i}`] = stringToCompile;
 
-              let compiledString = '';
+                let compiledString = '';
 
-              const hash = __md5.encrypt(stringToCompile);
-              const cachedValue = await cache.get(hash);
-              if (cachedValue) {
-                compiledString = cachedValue;
-                resultString += compiledString;
-              } else {
-                try {
-                  resultObj = __sass.renderSync({
-                    ...sassSettings,
-                    data: stringToCompile
-                  });
-
-                  const compiledResultString = resultObj.css.toString();
-                  compiledString = compiledResultString.trim();
-
-                  //   streamObj.outputStack[`toCompile_${i}.compiled`] =
-                  //     streamObj.outputDir + `/toCompile_${i}.compiled.scss`;
-                  //   streamObj[`toCompile_${i}.compiled`] = compiledString;
-
+                const hash = __md5.encrypt(stringToCompile);
+                const cachedValue = await cache.get(hash);
+                if (cachedValue) {
+                  compiledString = cachedValue;
                   resultString += compiledString;
-                  // save in cache
-                  await cache.set(hash, compiledString);
-                } catch (e) {
-                  return reject(e.toString());
+                } else {
+                  try {
+                    resultObj = __sass.renderSync({
+                      ...sassSettings,
+                      data: stringToCompile
+                    });
+
+                    const compiledResultString = resultObj.css.toString();
+                    compiledString = compiledResultString.trim();
+
+                    //   streamObj.outputStack[`toCompile_${i}.compiled`] =
+                    //     streamObj.outputDir + `/toCompile_${i}.compiled.scss`;
+                    //   streamObj[`toCompile_${i}.compiled`] = compiledString;
+
+                    resultString += compiledString;
+                    // save in cache
+                    await cache.set(hash, compiledString);
+                  } catch (e) {
+                    return reject(e.toString());
+                  }
                 }
-              }
-              break;
+                break;
+            }
+          }
+        } else {
+          try {
+            resultObj = __sass.renderSync(sassSettings);
+            const compiledResultString = resultObj.css.toString();
+            resultString = compiledResultString.trim();
+          } catch (e) {
+            return reject(e.toString());
           }
         }
-      } else {
-        try {
-          resultObj = __sass.renderSync(sassSettings);
-          const compiledResultString = resultObj.css.toString();
-          resultString = compiledResultString.trim();
-        } catch (e) {
-          return reject(e.toString());
-        }
-      }
 
-      // resolve with the compilation result
-      resolve({
-        streamObj,
-        data: resultString,
-        startTime: startTime,
-        endTime: Date.now(),
-        duration: Date.now() - startTime
-      });
-    });
+        // resolve with the compilation result
+        resolve({
+          streamObj,
+          data: resultString,
+          startTime: startTime,
+          endTime: Date.now(),
+          duration: Date.now() - startTime
+        });
+      },
+      {
+        id: this._settings.id
+      }
+    );
   }
 };

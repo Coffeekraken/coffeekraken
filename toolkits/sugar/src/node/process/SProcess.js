@@ -161,7 +161,7 @@ class SProcess extends __SPromise {
   constructor(initialParams = {}, settings = {}) {
     settings = __deepMerge(
       {
-        id: 'process.unnamed',
+        id: 'SProcess',
         name: 'Unnamed Process',
         deamon: null,
         watchParams: ['watch'],
@@ -233,7 +233,7 @@ class SProcess extends __SPromise {
     settings = __deepMerge(this._settings, settings);
 
     if (this.deamon) {
-      this.deamon.on('update', (data, metas) => {
+      this.deamon.on('update,*.update', (data, metas) => {
         // do not launch multiple processes at the same time
         if (this._currentPromise) return;
         // check if we have a "deamonUpdate" method

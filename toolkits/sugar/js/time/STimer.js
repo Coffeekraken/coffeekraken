@@ -198,6 +198,7 @@ var STimer = /*#__PURE__*/function (_SPromise) {
         _this._tickInterval = (0, _convert.default)(_this._settings.tickInterval, 'ms');
       }
     }, (0, _deepMerge.default)({
+      id: 'STimer',
       tickInterval: 1000,
       tickCount: null,
       loop: false

@@ -62,7 +62,7 @@ class SBuildJsCli extends __SCli {
       initialParams,
       __deepMerge(
         {
-          id: 'build.js.cli',
+          id: 'SBuildJsCli',
           name: 'Cli Build Js'
         },
         settings

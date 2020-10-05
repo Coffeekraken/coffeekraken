@@ -166,6 +166,60 @@ class STemplate {
   }
 
   /**
+   * @name					getViewInfo
+   * @type 					Function
+   * @static
+   *
+   * This static method allows you to give a "potential" view path (with or without the extension) and get
+   * back an object that describe the view with infos like "type", "path", "extension", etc...
+   * If nothing is found, you will get ```false``` back.
+   *
+   * @param       {String}      viewPath        The view path to check. Either a relative path to the @config.frontend.viewsDir configuration, or an absolute path
+   * @return      {Object|Boolean}              Return an object describing the view or ```false``` if not found
+   *
+   * @since
+   * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static getViewInfo(viewPath) {
+    const viewsDir = __sugarConfig('views.rootDir');
+
+    let path = `${viewsDir}/${viewPath}`;
+    if (__path.isAbsolute(viewPath)) {
+      path = viewPath;
+    }
+
+    let finalViewPath, viewType;
+
+    if (__fs.existsSync(path)) {
+      finalViewPath = path;
+      const fileName = path.split('/').slice(-1).join('');
+      viewType = fileName.split('.').slice(1).join('.');
+    } else {
+      for (let i = 0; i < Object.keys(STemplate.engines).length; i++) {
+        const engineExt = Object.keys(STemplate.engines)[i];
+        if (__fs.existsSync(`${path}.${engineExt}`)) {
+          finalViewPath = `${path}.${engineExt}`;
+          viewType = engineExt;
+          break;
+        }
+      }
+    }
+
+    // check if we have a view founded
+    if (!finalViewPath) return false;
+
+    // build the info object
+    const infoObj = {
+      path: finalViewPath,
+      relPath: __path.relative(viewsDir, finalViewPath),
+      type: viewType
+    };
+
+    // return the infos
+    return infoObj;
+  }
+
+  /**
    * @name      constructor
    * @type      Function
    * @constructor
@@ -179,6 +233,7 @@ class STemplate {
     // save the settings
     this._settings = __deepMerge(
       {
+        id: 'STemplate',
         rootDir: [__sugarConfig('views.rootDir')],
         engine: null,
         engineSettings: {},
@@ -186,6 +241,13 @@ class STemplate {
       },
       settings
     );
+
+    Object.keys(STemplate.engines).forEach((ext) => {
+      viewPathOrTemplateString = viewPathOrTemplateString.replace(
+        `.${ext}`,
+        ''
+      );
+    });
 
     // if the "engine" setting is an instance, save it as engineInstance
     if (this._settings.engine instanceof __STemplateEngine) {
@@ -247,85 +309,90 @@ class STemplate {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   render(data = {}, settings = {}) {
-    return new __SPromise(async (resolve, reject, trigger, cancel) => {
-      settings = __deepMerge(this._settings.engineSettings, settings);
-      data = __deepMerge(settings.defaultData, data);
+    return new __SPromise(
+      async (resolve, reject, trigger, cancel) => {
+        settings = __deepMerge(this._settings.engineSettings, settings);
+        data = __deepMerge(settings.defaultData, data);
 
-      if (this._templateString) {
-        if (!this._settings.engine) {
-          // loop on the engines to get the better one
-          for (let i = 0; i < Object.keys(STemplate.engines).length; i++) {
-            const enginePath =
-              STemplate.engines[Object.keys(STemplate.engines)[i]];
-            const EngineClass = require(enginePath);
+        if (this._templateString) {
+          if (!this._settings.engine) {
+            // loop on the engines to get the better one
+            for (let i = 0; i < Object.keys(STemplate.engines).length; i++) {
+              const enginePath =
+                STemplate.engines[Object.keys(STemplate.engines)[i]];
+              const EngineClass = require(enginePath);
+              if (
+                EngineClass.input === 'string' &&
+                EngineClass.canRender(this._templateString)
+              ) {
+                this._settings.engine = Object.keys(STemplate.engines)[i];
+                break;
+              }
+            }
+          } else if (this._settings.engine instanceof __STemplateEngine) {
             if (
-              EngineClass.input === 'string' &&
-              EngineClass.canRender(this._templateString)
+              !this._settings.engine.constructor.canRender(this._templateString)
             ) {
-              this._settings.engine = Object.keys(STemplate.engines)[i];
-              break;
+              throw new __SError(
+                `It seems that you've passed directly an __STemplateEngine engine as the settings.engine option but this engine cannot render your passed template string...`
+              );
             }
           }
-        } else if (this._settings.engine instanceof __STemplateEngine) {
-          if (
-            !this._settings.engine.constructor.canRender(this._templateString)
-          ) {
+          if (!this._settings.engine) {
             throw new __SError(
-              `It seems that you've passed directly an __STemplateEngine engine as the settings.engine option but this engine cannot render your passed template string...`
+              `Sorry but it seems that the passed template string cannot be rendered using any of the available engines:\n- ${Object.keys(
+                STemplate.engines
+              )
+                .map((l) => {
+                  return `<yellow>${l}</yellow>`;
+                })
+                .join('\n- ')}`
             );
           }
-        }
-        if (!this._settings.engine) {
-          throw new __SError(
-            `Sorry but it seems that the passed template string cannot be rendered using any of the available engines:\n- ${Object.keys(
-              STemplate.engines
-            )
-              .map((l) => {
-                return `<yellow>${l}</yellow>`;
-              })
-              .join('\n- ')}`
+        } else if (this._viewPath) {
+          const viewPathWithoutExtension = this._viewPath.replace(
+            `.${this._settings.engine}`,
+            ''
           );
+
+          // loop on each dataHandlers available
+          let dataHandlerFn, dataFilePath;
+          Object.keys(STemplate.dataHandlers).forEach((extension) => {
+            if (dataHandlerFn) return;
+            if (__fs.existsSync(`${viewPathWithoutExtension}.${extension}`)) {
+              dataFilePath = `${viewPathWithoutExtension}.${extension}`;
+              dataHandlerFn = require(STemplate.dataHandlers[extension]);
+            }
+          });
+
+          // check if we have a data file
+          if (dataFilePath && dataHandlerFn) {
+            const dataObj = await dataHandlerFn(dataFilePath);
+            data = __deepMerge(dataObj, data);
+          }
         }
-      } else if (this._viewPath) {
-        const viewPathWithoutExtension = this._viewPath.replace(
-          `.${this._settings.engine}`,
-          ''
+
+        if (!this._engineInstance) {
+          // get the engine class
+          const EngineClass = require(STemplate.engines[this._settings.engine]);
+          this._engineInstance = new EngineClass({
+            ...this._settings.engineSettings
+          });
+        }
+
+        const result = await this._engineInstance.render(
+          this._viewPath || this._templateString,
+          data,
+          settings
         );
 
-        // loop on each dataHandlers available
-        let dataHandlerFn, dataFilePath;
-        Object.keys(STemplate.dataHandlers).forEach((extension) => {
-          if (dataHandlerFn) return;
-          if (__fs.existsSync(`${viewPathWithoutExtension}.${extension}`)) {
-            dataFilePath = `${viewPathWithoutExtension}.${extension}`;
-            dataHandlerFn = require(STemplate.dataHandlers[extension]);
-          }
-        });
-
-        // check if we have a data file
-        if (dataFilePath && dataHandlerFn) {
-          const dataObj = await dataHandlerFn(dataFilePath);
-          data = __deepMerge(dataObj, data);
-        }
+        // resolve the render process
+        resolve(result);
+      },
+      {
+        id: this._settings.id + '.render'
       }
-
-      if (!this._engineInstance) {
-        // get the engine class
-        const EngineClass = require(STemplate.engines[this._settings.engine]);
-        this._engineInstance = new EngineClass({
-          ...this._settings.engineSettings
-        });
-      }
-
-      const result = await this._engineInstance.render(
-        this._viewPath || this._templateString,
-        data,
-        settings
-      );
-
-      // resolve the render process
-      resolve(result);
-    });
+    );
   }
 }
 

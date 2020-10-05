@@ -44,15 +44,14 @@ export default function addEventListener(
 
   let eventsStack = {};
 
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {}).on(
-    'cancel,finally',
-    () => {
-      eventNames.forEach((eventName) => {
-        const stack = eventsStack[eventName];
-        $elm.removeEventListener(eventName, stack.callback, stack.useCapture);
-      });
-    }
-  );
+  const promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {
+    id: 'addEventListener'
+  }).on('cancel,finally', () => {
+    eventNames.forEach((eventName) => {
+      const stack = eventsStack[eventName];
+      $elm.removeEventListener(eventName, stack.callback, stack.useCapture);
+    });
+  });
 
   eventNames.forEach((eventName) => {
     const internalCallback = (event) => {

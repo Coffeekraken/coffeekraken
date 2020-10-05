@@ -71,7 +71,7 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
       },
       __deepMerge(
         {
-          id: 'build.scss.actionsStream',
+          id: 'SBuildScssActionsStream',
           name: 'Build SCSS Actions Stream',
           before: (streamObj) => {
             streamObj.jsObjectToScss = __sugarConfig('scss');

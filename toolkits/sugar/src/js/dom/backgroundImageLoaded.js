@@ -24,24 +24,29 @@ import __SPromise from '../promise/SPromise';
 export default function backgroundImageLoaded($elm) {
   let isCancelled = false,
     $img;
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {
-    // get the background-image property from computed style
-    const backgroundImage = __getStyleProperty($elm, 'background-image');
-    const matches = backgroundImage.match(/.*url\((.*)\).*/);
-    if (!matches || !matches[1]) {
-      reject('No background image url found...');
-      return;
+  const promise = new __SPromise(
+    (resolve, reject, trigger, cancel) => {
+      // get the background-image property from computed style
+      const backgroundImage = __getStyleProperty($elm, 'background-image');
+      const matches = backgroundImage.match(/.*url\((.*)\).*/);
+      if (!matches || !matches[1]) {
+        reject('No background image url found...');
+        return;
+      }
+      // process url
+      const url = __unquote(matches[1]);
+      // make a new image with the image set
+      $img = new Image();
+      $img.src = url;
+      // return the promise of image loaded
+      __imageLoaded($img).then(() => {
+        if (!isCancelled) resolve($elm);
+      });
+    },
+    {
+      id: 'backgroundImageLoaded'
     }
-    // process url
-    const url = __unquote(matches[1]);
-    // make a new image with the image set
-    $img = new Image();
-    $img.src = url;
-    // return the promise of image loaded
-    __imageLoaded($img).then(() => {
-      if (!isCancelled) resolve($elm);
-    });
-  }).on('finally', () => {
+  ).on('finally', () => {
     isCancelled = true;
   });
   promise.__$img = $img;

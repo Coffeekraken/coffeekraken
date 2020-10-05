@@ -108,7 +108,9 @@ var SWatch = /*#__PURE__*/function () {
     this._settings = (0, _deepMerge.default)({
       deep: true
     }, settings);
-    this._promise = new _SPromise.default();
+    this._promise = new _SPromise.default({
+      id: 'SWatch'
+    });
     this._proxiedObject = (0, _deepProxy.default)(object, obj => {
       var path = obj.path;
       var value = obj.value;

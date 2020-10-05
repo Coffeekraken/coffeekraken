@@ -25,7 +25,9 @@ const __hotkey = require('../keyboard/hotkey');
 const escapeStackStack = [];
 let hotkeyInitiated = false;
 module.exports = function escapeStack(callback = null) {
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {});
+  const promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {
+    id: 'escapeStack'
+  });
 
   if (!hotkeyInitiated) {
     hotkeyInitiated = true;

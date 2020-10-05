@@ -1288,6 +1288,8 @@ function _default(target, settings) {
     mutationObserver.observe(target, _objectSpread({
       attributes: true
     }, settings));
+  }, {
+    id: 'observeAttributes'
   }).on('finally', () => {
     mutationObserver.disconnect();
   });
@@ -3802,7 +3804,9 @@ var SWatch = /*#__PURE__*/function () {
     this._settings = (0, _deepMerge.default)({
       deep: true
     }, settings);
-    this._promise = new _SPromise.default();
+    this._promise = new _SPromise.default({
+      id: 'SWatch'
+    });
     this._proxiedObject = (0, _deepProxy.default)(object, obj => {
       var path = obj.path;
       var value = obj.value;
@@ -5062,8 +5066,14 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 } // var originalCatch = Promise.prototype.catch;
-// Promise.prototype.catch = function () {
-//   console.log('PLOP');
+// Promise.prototype.catch = function (...args) {
+//   if (this._coco) {
+//     console.log('XX');
+//   }
+//   if (this._catch && typeof this._catch === 'function') {
+//     console.log('PLOP');
+//     return this._catch(...args);
+//   }
 //   return originalCatch.apply(this, arguments);
 // };
 
@@ -5141,7 +5151,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   var _super = _createSuper(SPromise);
 
   _createClass(SPromise, null, [{
-    key: "pipe",
+    key: "map",
 
     /**
      * @name                  _settings
@@ -5170,7 +5180,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      */
 
     /**
-     * @name                  pipe
+     * @name                  map
      * @type                  Function
      * @static
      *
@@ -5186,14 +5196,14 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    value: function pipe(sourceSPromise, destSPromise, settings) {
+    value: function map(sourceSPromise, destSPromise, settings) {
       if (settings === void 0) {
         settings = {};
       } // settings
 
 
       settings = (0, _deepMerge.default)({
-        stacks: '*',
+        stacks: 'then,catch,resolve,reject,finally,cancel',
         processor: null,
         filter: null
       }, settings);
@@ -5212,6 +5222,73 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           } else {
             value = res;
           }
+        }
+
+        if (destSPromise[metas.stack] && typeof destSPromise[metas.stack] === 'function') {
+          destSPromise[metas.stack](value);
+        } else {
+          destSPromise.trigger(metas.stack, value);
+        }
+      });
+    }
+    /**
+     * @name                  pipe
+     * @type                  Function
+     * @static
+     *
+     * This static function allows you to redirect some SPromise "events" to another SPromise instance
+     * with the ability to process the linked value before triggering it on the destination SPromise.
+     *
+     * @param         {SPromise}      sourceSPromise        The source SPromise instance on which to listen for "events"
+     * @param         {SPromise}      destSPromise          The destination SPromise instance on which to trigger the listened "events"
+     * @param         {Object}        [settings={}]         An object of settings to configure your pipe process
+     * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
+     * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
+     * - filter (null) {Function}: Specify a function to filter the "events". It will take as parameter the triggered value and the metas object. You must return true or false depending if you want to pipe the particular event or not
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
+  }, {
+    key: "pipe",
+    value: function pipe(sourceSPromise, destSPromise, settings) {
+      if (settings === void 0) {
+        settings = {};
+      } // settings
+
+
+      settings = (0, _deepMerge.default)({
+        stacks: '*',
+        prefixStack: true,
+        processor: null,
+        exclude: ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'],
+        filter: null
+      }, settings);
+      if (!(sourceSPromise instanceof SPromise) || !(destSPromise instanceof SPromise)) return; // listen for all on the source promise
+
+      sourceSPromise.on(settings.stacks, (value, metas) => {
+        // check excluded stacks
+        if (settings.exclude.indexOf(metas.stack) !== -1) return; // check if we have a filter setted
+
+        if (settings.filter && !settings.filter(value, metas)) return; // check if need to process the value
+
+        if (settings.processor) {
+          var res = settings.processor(value, metas);
+
+          if (Array.isArray(res) && res.length === 2) {
+            value = res[0];
+            metas = res[1];
+          } else {
+            value = res;
+          }
+        } // append the source promise id to the stack
+
+
+        var triggerStack = metas.stack;
+
+        if (settings.prefixStack) {
+          triggerStack = "".concat(sourceSPromise.id, ".").concat(metas.stack);
+          metas.stack = triggerStack;
         } // trigger on the destination promise
 
 
@@ -5303,7 +5380,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       new Promise((rejectPromiseResolve, rejectPromiseReject) => {
         _masterPromiseRejectFn = rejectPromiseReject;
       }).catch(e => {
-        _this.trigger(_this._settings.triggerOnCatch, {
+        _this.trigger('catch', {
           value: e
         });
       });
@@ -5351,7 +5428,6 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     }); // extend settings
 
     _this._settings = (0, _deepMerge.default)({
-      triggerOnCatch: 'error',
       destroyTimeout: 5000,
       id: (0, _uniqid.default)()
     }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings);
@@ -5367,16 +5443,11 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     return _this;
   }
   /**
-   * @name                    promiseState
+   * @name                    id
    * @type                    String
    * @get
    *
-   * Access the promise state. Can be one of these:
-   * - pending: When the promise is waiting for resolution or rejection
-   * - resolved: When the promise has been resolved
-   * - rejected: When the promise has been rejected
-   * - canceled: When the promise has been canceled
-   * - destroyed: When the promise has been destroyed
+   * Access the promise id
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
@@ -5594,7 +5665,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     key: "reject",
     value: function reject(arg, stacksOrder) {
       if (stacksOrder === void 0) {
-        stacksOrder = 'catch,reject,finally';
+        stacksOrder = "catch,reject,finally";
       }
 
       return this._reject(arg, stacksOrder);
@@ -5620,7 +5691,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       var _this3 = this;
 
       if (stacksOrder === void 0) {
-        stacksOrder = 'catch,reject,finally';
+        stacksOrder = "catch,reject,finally";
       }
 
       if (this._isDestroyed) return;
@@ -5740,7 +5811,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           metas = {};
         }
 
-        if (this._isDestroyed) return; // triger the passed stacks
+        if (this._isDestroyed) return; // if (what === 'error') console.log('SSS', arg);
+        // triger the passed stacks
 
         return this._triggerStacks(what, arg, metas);
       });
@@ -5851,9 +5923,16 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
 
           Object.keys(this._stacks).forEach(stackName => {
-            if (stackName === stack) return;
-            var toAvoid = ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'];
-            if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1) return;
+            if (stackName === stack) return; // const toAvoid = [
+            //   'then',
+            //   'catch',
+            //   'resolve',
+            //   'reject',
+            //   'finally',
+            //   'cancel'
+            // ];
+            // if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1)
+            //   return;
 
             if ((0, _minimatch.default)(stack, stackName)) {
               // the glob pattern match the triggered stack so add it to the stack array
@@ -5871,6 +5950,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         });
         var metasObj = (0, _deepMerge.default)({
           stack,
+          originalStack: stack,
           id: this._settings.id,
           state: this._promiseState,
           time: Date.now(),
@@ -6080,8 +6160,12 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       }
 
       if (args.length === 2 && typeof args[0] === 'function' && typeof args[1] === 'function') {
-        this._masterPromiseResolveFn = args[0];
-        this._masterPromiseRejectFn = args[1];
+        this._masterPromiseResolveFn = args[0]; // const mainRejectFn = this._masterPromiseRejectFn;
+        // this._masterPromiseRejectFn = (...a) => {
+        //   args[1](...a);
+        //   mainRejectFn(...a);
+        // };
+
         return;
       } // super.then(...args);
 
@@ -6115,14 +6199,9 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      */
 
   }, {
-    key: "catch",
+    key: "_catch",
     value: function _catch() {
-      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        args[_key6] = arguments[_key6];
-      } // super.catch(...args);
-
-
-      return this._registerCallbackInStack(this._settings.triggerOnCatch, ...args);
+      return this._registerCallbackInStack('catch', ...voidargs);
     }
     /**
      * @name                finally
@@ -6150,8 +6229,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "finally",
     value: function _finally() {
-      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        args[_key7] = arguments[_key7];
+      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        args[_key6] = arguments[_key6];
       } // super.finally(...args);
 
 
@@ -6183,8 +6262,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "resolved",
     value: function resolved() {
-      for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        args[_key8] = arguments[_key8];
+      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        args[_key7] = arguments[_key7];
       }
 
       return this._registerCallbackInStack('resolve', ...args);
@@ -6215,8 +6294,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "rejected",
     value: function rejected() {
-      for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        args[_key9] = arguments[_key9];
+      for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        args[_key8] = arguments[_key8];
       }
 
       return this._registerCallbackInStack('reject', ...args);
@@ -6247,8 +6326,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "canceled",
     value: function canceled() {
-      for (var _len10 = arguments.length, args = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-        args[_key10] = arguments[_key10];
+      for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        args[_key9] = arguments[_key9];
       }
 
       return this._registerCallbackInStack('cancel', ...args);
@@ -6274,6 +6353,26 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       delete this._settings;
       this._isDestroyed = true;
     }
+  }, {
+    key: "id",
+    get: function get() {
+      return this._settings.id;
+    }
+    /**
+     * @name                    promiseState
+     * @type                    String
+     * @get
+     *
+     * Access the promise state. Can be one of these:
+     * - pending: When the promise is waiting for resolution or rejection
+     * - resolved: When the promise has been resolved
+     * - rejected: When the promise has been rejected
+     * - canceled: When the promise has been canceled
+     * - destroyed: When the promise has been destroyed
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
   }, {
     key: "promiseState",
     get: function get() {
@@ -9121,7 +9220,9 @@ function _defineProperty(obj, key, value) {
  */
 
 
-var _sWebComponentPromise = new _SPromise.default();
+var _sWebComponentPromise = new _SPromise.default({
+  id: 'SWebComponentPromise'
+});
 
 function SWebComponent(extend) {
   var _temp;
@@ -9223,7 +9324,9 @@ function SWebComponent(extend) {
         props: _this.constructor.props || {}
       }, _this._metas.settings || {}, settings); // create the SPromise instance
 
-      _this._promise = new _SPromise.default(); // apply the $node class
+      _this._promise = new _SPromise.default({
+        id: _this._settings.id
+      }); // apply the $node class
 
       var currentClassName = _this.getAttribute('class') || '';
 
@@ -26452,6 +26555,7 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponent) 
     _defineProperty(_assertThisInitialized(_this), "_originalItems", null);
 
     if (!_this._settings.filter.function) _this._settings.filter.function = _this.filterItems.bind(_assertThisInitialized(_this));
+    console.log('HELLO');
     _this._maxDisplayItems = _this._settings.maxDisplayItems;
 
     _this.on('ready', () => {

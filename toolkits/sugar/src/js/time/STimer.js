@@ -165,6 +165,7 @@ export default class STimer extends __SPromise {
       },
       __deepMerge(
         {
+          id: 'STimer',
           tickInterval: 1000,
           tickCount: null,
           loop: false

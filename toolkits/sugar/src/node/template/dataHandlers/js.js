@@ -15,7 +15,12 @@ const __SPromise = require('../../promise/SPromise');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function js(filePath) {
-  return new __SPromise((resolve) => {
-    resolve(require(filePath));
-  });
+  return new __SPromise(
+    (resolve) => {
+      resolve(require(filePath));
+    },
+    {
+      id: 'templateJsDataHandler'
+    }
+  );
 };

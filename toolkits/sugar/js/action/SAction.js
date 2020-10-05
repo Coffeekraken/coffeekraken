@@ -184,6 +184,8 @@ var SAction = /*#__PURE__*/function (_SPromise) {
 
         trigger("run", this);
         this.trigger("run", this);
+      }, {
+        id: SAction._promise.id + 'Run'
       });
 
       promise.complete = () => {
@@ -234,6 +236,8 @@ var SAction = /*#__PURE__*/function (_SPromise) {
 
 exports.default = SAction;
 
-_defineProperty(SAction, "_promise", new _SPromise2.default(() => {}));
+_defineProperty(SAction, "_promise", new _SPromise2.default({
+  id: 'SAction'
+}));
 
 module.exports = exports.default;

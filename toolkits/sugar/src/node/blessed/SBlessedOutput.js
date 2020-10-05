@@ -142,7 +142,7 @@ module.exports = class SOutput extends __SBlessedComponent {
       //   value: `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
       // });
     })
-      .on('success,complete', (data) => {
+      .on('success,*.success,complete,*.complete', (data) => {
         this.log({
           value: `#success The process has been finished <green>successfully</green>`
         });

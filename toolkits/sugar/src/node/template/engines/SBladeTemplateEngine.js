@@ -87,6 +87,7 @@ module.exports = class SBladeTemplateEngine extends __STemplateEngine {
     super(
       __deepMerge(
         {
+          id: 'SBladeTemplateEngine',
           cacheDir: __sugarConfig('views.cacheDir')
         },
         settings
@@ -169,7 +170,7 @@ module.exports = class SBladeTemplateEngine extends __STemplateEngine {
         );
       },
       {
-        id: 'template.engines.blade'
+        id: this._settings.id + '.render'
       }
     );
   }

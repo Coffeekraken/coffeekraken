@@ -41,7 +41,7 @@ module.exports = class SBlessedPopup extends __SBlessedComponent {
         {
           title: null,
           description: null,
-          id: 'popup',
+          id: 'SBlessedPopup',
           width: '80%',
           height: 200,
           top: '50%',
@@ -133,7 +133,9 @@ module.exports = class SBlessedPopup extends __SBlessedComponent {
       },
       ...(this._settings.$content || {})
     });
-    this.promise = new __SPromise();
+    this.promise = new __SPromise({
+      id: this._settings.id
+    });
 
     super.append(this.$content);
     this.promise.trigger('open');

@@ -77,6 +77,8 @@ function _default(hotkey, settings) {
 
       if (settings.once) cancel();
     });
+  }, {
+    id: 'hotkey'
   }).on('finally', () => {
     _hotkeysJs.default.unbind(hotkey);
   });

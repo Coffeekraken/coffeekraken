@@ -35,40 +35,40 @@ module.exports = {
    * @name              rootDir
    * @namespace         config.sugar-ui.modules.frontendServer.settings
    * @type              String
-   * @default           ${__packageRoot(process.cwd())}
+   * @default           ${__packageRoot()}
    *
    * Specify the root directory to use for the frontend server
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  rootDir: `${__packageRoot(process.cwd())}`,
+  rootDir: `${__packageRoot()}`,
 
   /**
    * @name              staticDir
    * @namespace         config.sugar-ui.modules.frontendServer.settings
    * @type              String
-   * @default           ${__packageRoot(process.cwd())}/dist
+   * @default           ${__packageRoot()}/dist
    *
    * Specify a directory that will be served as static files
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  staticDir: `${__packageRoot(process.cwd())}/dist`,
+  staticDir: `${__packageRoot()}/dist`,
 
   /**
    * @name            viewsDir
    * @namespace       config.sugar-ui.modules.frontendServer.settings
    * @type            String
-   * @default         ${__packageRoot(process.cwd())}/views
+   * @default         ${__packageRoot()}/views
    *
    * Specify the views directory path
    *
    * @since         2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  viewsDir: `${__packageRoot(process.cwd())}/views`,
+  viewsDir: `${__packageRoot()}/src/views`,
 
   middlewares: {
     frontspec: {

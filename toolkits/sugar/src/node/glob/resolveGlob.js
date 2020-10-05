@@ -77,7 +77,7 @@ module.exports = function resolveGlob(globs, settings = {}) {
       resolve(filesArray);
     },
     {
-      id: 'glob.resolveGlob'
+      id: 'resolveGlob'
     }
   );
 };

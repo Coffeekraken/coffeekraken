@@ -59,6 +59,8 @@ function _default(target, settings) {
     mutationObserver.observe(target, _objectSpread({
       attributes: true
     }, settings));
+  }, {
+    id: 'observeAttributes'
   }).on('finally', () => {
     mutationObserver.disconnect();
   });

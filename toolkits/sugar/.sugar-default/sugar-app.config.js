@@ -6,7 +6,7 @@ module.exports = {
 
   modules: {
     frontendServer: {
-      id: 'server.frontend',
+      id: 'frontendServer',
       name: 'Sugar App Frontend Server',
       description:
         'Expose an HTTP server using ExpressJs and serve requested files, views, etc...',
@@ -19,7 +19,7 @@ module.exports = {
       params: '@config.frontend'
     },
     buildScss: {
-      id: 'build.scss',
+      id: 'buildScss',
       name: 'Sugar App Build SCSS',
       description:
         'Watch and build the SCSS files to production ready CSS ones',
@@ -49,7 +49,7 @@ module.exports = {
       }
     },
     buildJs: {
-      id: 'build.js',
+      id: 'buildJs',
       name: 'Sugar App Build JS',
       description: 'Watch and build the JS files to production ready ones',
       module: `${__packageRoot(

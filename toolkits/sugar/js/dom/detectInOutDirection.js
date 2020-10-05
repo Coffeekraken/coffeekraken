@@ -60,6 +60,8 @@ function detectInOutDirection($elm) {
 
     $elm.addEventListener('mouseenter', mouseEnterHandler);
     $elm.addEventListener('mouseleave', mouseLeaveHandler);
+  }, {
+    id: 'detectInOutDirection'
   }).on('finally', () => {
     $elm.removeEventListener('mouseenter', mouseEnterHandler);
     $elm.removeEventListener('mouseleave', mouseLeaveHandler);

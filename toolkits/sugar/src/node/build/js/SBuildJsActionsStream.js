@@ -63,7 +63,7 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
       },
       __deepMerge(
         {
-          id: 'build.js.actionStream',
+          id: 'SBuildJsActionsStream',
           name: 'Build JS Actions Stream',
           before: (streamObj) => {
             __copy(streamObj);

@@ -33,7 +33,7 @@ var _SCache = _interopRequireDefault(require("../cache/SCache"));
 
 var _sha = _interopRequireDefault(require("../crypt/sha256"));
 
-var _globby = require("globby");
+var _upperFirst = _interopRequireDefault(require("../string/upperFirst"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -148,7 +148,7 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
     // init SPromise
     _this = _super.call(this, (0, _deepMerge.default)({
-      id: (0, _uniqid.default)(),
+      id: "SActionsStream",
       cache: false,
       name: null,
       order: null,
@@ -578,9 +578,7 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
 
                 if ((0, _class.default)(_this3._actionsObject[actionName]) && _this3._actionsObject[actionName].prototype instanceof _SActionsStreamAction.default) {
-                  actionInstance = new _this3._actionsObject[actionName](actionSettings); // actionInstance.on('catch', (e) => {
-                  //   console.log('ERROR');
-                  // });
+                  actionInstance = new _this3._actionsObject[actionName](actionSettings);
                 } else {
                   _this3._currentStream.stats.stderr.push("Your action \"<yellow>".concat(actionName, "</yellow>\" has to be a class extending the <cyan>SActionsStreamAction</cyan> one..."));
 
@@ -603,9 +601,13 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
                 if (_this3._currentStream.currentActionObj.instance) {
                   _this3._currentStream.currentActionObj.instance.on('reject', value => {
-                    _this3.trigger("".concat(_this3._currentStream.currentActionObj.name, ".error"), value);
+                    _this3.trigger("".concat(_this3._currentStream.currentActionObj.name, ".error"), {
+                      value
+                    });
 
-                    trigger("".concat(_this3._currentStream.currentActionObj.name, ".error"), value);
+                    trigger("".concat(_this3._currentStream.currentActionObj.name, ".error"), {
+                      value
+                    });
                     cancel(value);
                   });
 

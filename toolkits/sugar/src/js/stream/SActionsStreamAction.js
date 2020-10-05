@@ -77,7 +77,7 @@ export default class SActionStreamAction extends __SPromise {
       __deepMerge(
         {
           name: null,
-          id: __uniqid(),
+          id: `SActionsStreamAction`,
           cache: true
         },
         settings
@@ -181,9 +181,9 @@ export default class SActionStreamAction extends __SPromise {
   run(streamObj, promiseFn) {
     this.checkStreamObject(streamObj);
     this._currentPromise = new __SPromise(() => {}, {
-      id: this._settings.id
+      id: this._settings.id + 'Run'
     });
-    __SPromise.pipe(this._currentPromise, this, {});
+    __SPromise.map(this._currentPromise, this);
 
     promiseFn(
       this._currentPromise.resolve.bind(this._currentPromise),
@@ -192,9 +192,6 @@ export default class SActionStreamAction extends __SPromise {
       this._currentPromise.cancel.bind(this._currentPromise)
     );
 
-    // .catch((e) => {
-    //   this.trigger()
-    // });
     return this._currentPromise;
   }
 

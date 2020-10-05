@@ -45,7 +45,9 @@ function addEventListenerOnce($elm, eventNames, callback, useCapture) {
   }
 
   if (!Array.isArray(eventNames)) eventNames = [eventNames];
-  var globalPromise = new _SPromise.default();
+  var globalPromise = new _SPromise.default({
+    id: 'addEventListenerOnce'
+  });
   var eventsStack = {};
   globalPromise.on('cancel,finally', () => {
     eventNames.forEach(eventName => {

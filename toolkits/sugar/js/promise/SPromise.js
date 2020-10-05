@@ -139,7 +139,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   var _super = _createSuper(SPromise);
 
   _createClass(SPromise, null, [{
-    key: "pipe",
+    key: "map",
 
     /**
      * @name                  _settings
@@ -168,7 +168,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      */
 
     /**
-     * @name                  pipe
+     * @name                  map
      * @type                  Function
      * @static
      *
@@ -184,14 +184,14 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    value: function pipe(sourceSPromise, destSPromise, settings) {
+    value: function map(sourceSPromise, destSPromise, settings) {
       if (settings === void 0) {
         settings = {};
       }
 
       // settings
       settings = (0, _deepMerge.default)({
-        stacks: '*',
+        stacks: 'then,catch,resolve,reject,finally,cancel',
         processor: null,
         filter: null
       }, settings);
@@ -210,6 +210,73 @@ var SPromise = /*#__PURE__*/function (_Promise) {
           } else {
             value = res;
           }
+        }
+
+        if (destSPromise[metas.stack] && typeof destSPromise[metas.stack] === 'function') {
+          destSPromise[metas.stack](value);
+        } else {
+          destSPromise.trigger(metas.stack, value);
+        }
+      });
+    }
+    /**
+     * @name                  pipe
+     * @type                  Function
+     * @static
+     *
+     * This static function allows you to redirect some SPromise "events" to another SPromise instance
+     * with the ability to process the linked value before triggering it on the destination SPromise.
+     *
+     * @param         {SPromise}      sourceSPromise        The source SPromise instance on which to listen for "events"
+     * @param         {SPromise}      destSPromise          The destination SPromise instance on which to trigger the listened "events"
+     * @param         {Object}        [settings={}]         An object of settings to configure your pipe process
+     * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
+     * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
+     * - filter (null) {Function}: Specify a function to filter the "events". It will take as parameter the triggered value and the metas object. You must return true or false depending if you want to pipe the particular event or not
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
+  }, {
+    key: "pipe",
+    value: function pipe(sourceSPromise, destSPromise, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      // settings
+      settings = (0, _deepMerge.default)({
+        stacks: '*',
+        prefixStack: true,
+        processor: null,
+        exclude: ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'],
+        filter: null
+      }, settings);
+      if (!(sourceSPromise instanceof SPromise) || !(destSPromise instanceof SPromise)) return; // listen for all on the source promise
+
+      sourceSPromise.on(settings.stacks, (value, metas) => {
+        // check excluded stacks
+        if (settings.exclude.indexOf(metas.stack) !== -1) return; // check if we have a filter setted
+
+        if (settings.filter && !settings.filter(value, metas)) return; // check if need to process the value
+
+        if (settings.processor) {
+          var res = settings.processor(value, metas);
+
+          if (Array.isArray(res) && res.length === 2) {
+            value = res[0];
+            metas = res[1];
+          } else {
+            value = res;
+          }
+        } // append the source promise id to the stack
+
+
+        var triggerStack = metas.stack;
+
+        if (settings.prefixStack) {
+          triggerStack = "".concat(sourceSPromise.id, ".").concat(metas.stack);
+          metas.stack = triggerStack;
         } // trigger on the destination promise
 
 
@@ -364,16 +431,11 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     return _this;
   }
   /**
-   * @name                    promiseState
+   * @name                    id
    * @type                    String
    * @get
    *
-   * Access the promise state. Can be one of these:
-   * - pending: When the promise is waiting for resolution or rejection
-   * - resolved: When the promise has been resolved
-   * - rejected: When the promise has been rejected
-   * - canceled: When the promise has been canceled
-   * - destroyed: When the promise has been destroyed
+   * Access the promise id
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
@@ -876,6 +938,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         });
         var metasObj = (0, _deepMerge.default)({
           stack,
+          originalStack: stack,
           id: this._settings.id,
           state: this._promiseState,
           time: Date.now(),
@@ -1278,6 +1341,26 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       delete this._settings;
       this._isDestroyed = true;
     }
+  }, {
+    key: "id",
+    get: function get() {
+      return this._settings.id;
+    }
+    /**
+     * @name                    promiseState
+     * @type                    String
+     * @get
+     *
+     * Access the promise state. Can be one of these:
+     * - pending: When the promise is waiting for resolution or rejection
+     * - resolved: When the promise has been resolved
+     * - rejected: When the promise has been rejected
+     * - canceled: When the promise has been canceled
+     * - destroyed: When the promise has been destroyed
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+
   }, {
     key: "promiseState",
     get: function get() {

@@ -50,7 +50,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
     super(
       __deepMerge(
         {
-          id: 'actionStream.action.js.webpack'
+          id: 'SWebpackStreamAction'
         },
         settings
       )
@@ -129,8 +129,6 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
       });
 
       let webpackSettings = Object.assign({}, settings.webpack);
-
-      return reject('Hello');
 
       const compiler = __webpack(
         __deepMerge(
@@ -235,13 +233,11 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         compiler.run((error, stats) => {
           if (stats.hasErrors()) {
             const sts = stats.toJson();
-            // console.error(sts.errors);
-            // return reject(sts.errors);
+            return reject(sts.errors);
           }
           if (stats.hasWarnings()) {
             const sts = stats.toJson();
-            // console.error(sts.warnings);
-            // return reject(sts.warnings);
+            return reject(sts.warnings);
           }
 
           // reading the outputed file

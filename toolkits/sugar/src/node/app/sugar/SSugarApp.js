@@ -110,7 +110,7 @@ module.exports = class SSugarApp extends __SPromise {
   constructor(settings = {}) {
     settings = __deepMerge(
       {
-        id: 'sugar.app',
+        id: 'SSugarApp',
         name: 'Sugar App'
       },
       settings
@@ -142,7 +142,7 @@ module.exports = class SSugarApp extends __SPromise {
               value
             };
           }
-          metas.stack = `module.${metas.stack}`;
+          // metas.stack = `module.${metas.stack}`;
 
           return [value, metas];
         }
@@ -163,7 +163,7 @@ module.exports = class SSugarApp extends __SPromise {
   _modulesReady() {
     setTimeout(() => {
       for (const [key, moduleObj] of Object.entries(this._modulesObjs)) {
-        if (moduleObj.instance.autorun) {
+        if (moduleObj.instance.autoRun) {
           moduleObj.instance.run();
         }
       }
@@ -214,7 +214,7 @@ module.exports = class SSugarApp extends __SPromise {
 
       // validate module interface
       __SSugarAppModuleConfigInterface.applyAndComplete(moduleObj, {
-        name: `${this.constructor.name}.modules.${moduleIdx}`
+        name: `${this.constructor.name}.SSugarAppModule.${moduleIdx}`
       });
 
       // require and instanciate the module class
@@ -238,7 +238,7 @@ module.exports = class SSugarApp extends __SPromise {
       }
       moduleObj.instance = moduleInstance;
 
-      moduleInstance.on('state', (state, metas) => {
+      moduleInstance.on('state,*.state', (state, metas) => {
         if (state === 'ready') {
           if (this._modulesInError.indexOf(moduleObj) !== -1) return;
           // update module ready count

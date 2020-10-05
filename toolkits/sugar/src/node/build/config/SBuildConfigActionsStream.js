@@ -1,7 +1,5 @@
 const __SActionsStream = require('../../stream/SActionsStream');
 const __SJsConfigFileToJsonStreamAction = require('./config/SJsConfigFileToJsonStreamAction');
-const __glob = require('glob');
-const __SPromise = require('../../promise/SPromise');
 const __deepMerge = require('../../object/deepMerge');
 const __getFilename = require('../../fs/filename');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');

@@ -30,7 +30,7 @@ module.exports = class SBuildScssProcess extends __SProcess {
       initialParams,
       __deepMerge(
         {
-          id: 'build.scss.process',
+          id: 'SBuildScssProcess',
           name: 'Build SCSS Process',
           deamon: new __SFsDeamon({})
         },

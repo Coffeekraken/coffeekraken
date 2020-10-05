@@ -190,7 +190,9 @@ class SChildProcess extends __SProcess {
     this._runningProcess = {
       instanceId: this._settings.id,
       id: runningProcessId,
-      promise: new __SPromise(),
+      promise: new __SPromise({
+        id: 'SChildProcess.' + this._settings.id
+      }),
       settings: Object.assign({}, settings),
       start: Date.now(),
       end: null,

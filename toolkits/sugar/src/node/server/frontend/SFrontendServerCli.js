@@ -62,7 +62,7 @@ class SFrontendServerCli extends __SCli {
       args,
       __deepMerge(
         {
-          id: 'server.frontend',
+          id: 'SFrontendServerCli',
           name: 'Frontend Server'
         },
         settings

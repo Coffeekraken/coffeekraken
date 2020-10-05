@@ -62,7 +62,7 @@ module.exports = class SFsDeamon extends __SDeamon {
       __deepMerge(
         {
           name: 'Unnamed SFsDeamon',
-          id: 'deamon.fs.unnamed',
+          id: 'SFsDeamon',
           updateStacks: ['update', 'add', 'unlink'],
           cliSettings: {}
         },

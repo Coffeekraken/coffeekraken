@@ -34,7 +34,7 @@ module.exports = class SFrontendServerCommand extends __SCommand {
   constructor(argsObj = {}, commandSettings = {}) {
     // init command
     super(
-      'server.frontend',
+      'coco',
       new __SFrontentServerCli(),
       __deepMerge(
         {

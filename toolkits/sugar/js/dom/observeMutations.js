@@ -61,6 +61,8 @@ function observeMutations($target, settings) {
       });
     });
     mutationObserver.observe($target, settings);
+  }, {
+    id: 'observeMutations'
   }).on('finally', () => {
     mutationObserver && mutationObserver.disconnect();
   });

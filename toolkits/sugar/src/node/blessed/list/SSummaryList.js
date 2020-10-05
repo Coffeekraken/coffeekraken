@@ -147,7 +147,9 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
       __activeSpace.remove('.summaryList');
     });
 
-    this.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
+    this.promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {
+      id: 'SBlessedSummaryList'
+    });
 
     this.on = this.promise.on.bind(this.promise);
     this.then = this.promise.then.bind(this.promise);

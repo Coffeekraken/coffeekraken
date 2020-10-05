@@ -122,26 +122,31 @@ class SIpc {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   static getGlobalIpcInstance(settings = {}) {
-    return new __SPromise(async (resolve, reject) => {
-      if (__globalIpcInstance) {
-        return resolve(__globalIpcInstance);
+    return new __SPromise(
+      async (resolve, reject) => {
+        if (__globalIpcInstance) {
+          return resolve(__globalIpcInstance);
+        }
+
+        const globalServerId = SIpc.getGlobalServerId();
+
+        // if (!__getGlobalIpcInstancePromises.length) {
+        const ipcInstance = new SIpc(__deepMerge({}, settings));
+
+        __globalIpcInstance = ipcInstance;
+
+        if (__isChildProcess()) {
+          await ipcInstance.connect(globalServerId);
+        } else {
+          await ipcInstance.start();
+        }
+
+        resolve(ipcInstance);
+      },
+      {
+        id: 'SIpc'
       }
-
-      const globalServerId = SIpc.getGlobalServerId();
-
-      // if (!__getGlobalIpcInstancePromises.length) {
-      const ipcInstance = new SIpc(__deepMerge({}, settings));
-
-      __globalIpcInstance = ipcInstance;
-
-      if (__isChildProcess()) {
-        await ipcInstance.connect(globalServerId);
-      } else {
-        await ipcInstance.start();
-      }
-
-      resolve(ipcInstance);
-    });
+    );
   }
 
   /**

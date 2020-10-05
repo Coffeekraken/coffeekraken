@@ -59,6 +59,8 @@ function imageLoaded($img, callback) {
 
       $img.addEventListener('error', imgErrorHandler);
     }
+  }, {
+    id: 'imageLoaded'
   }).on('finally', () => {
     imgLoadedHandler && $img.removeEventListener('load', imgLoadedHandler);
     imgErrorHandler && $img.removeEventListener('error', imgErrorHandler);

@@ -145,7 +145,7 @@ module.exports = class SSugarAppModule extends __SPromise {
     super(
       __deepMerge(
         {
-          id: 'sugar.app.module',
+          id: 'SSugarApp',
           name: 'Sugar App Module',
           autoStart: true,
           autoRun: false,
@@ -155,6 +155,7 @@ module.exports = class SSugarAppModule extends __SPromise {
         settings
       )
     );
+    this._settings.id = `SSugarAppModule.${this._settings.id}`;
 
     __SIpc.on('sugar.ui.displayedModule', (moduleId) => {
       this._active = this.id === moduleId;

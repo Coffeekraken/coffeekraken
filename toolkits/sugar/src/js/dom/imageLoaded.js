@@ -22,30 +22,35 @@ import __SPromise from '../promise/SPromise';
 export default function imageLoaded($img, callback = null) {
   let imgLoadedHandler, imgErrorHandler;
 
-  return new __SPromise((resolve, reject, trigger, cancel) => {
-    // check if image is already loaded
-    if ($img.hasAttribute('src') && $img.complete) {
-      // resolve promise
-      resolve($img);
-      // call the callback if exist
-      callback && callback($img);
-    } else {
-      // wait until loaded
-      imgLoadedHandler = (e) => {
-        // resolve the promise
+  return new __SPromise(
+    (resolve, reject, trigger, cancel) => {
+      // check if image is already loaded
+      if ($img.hasAttribute('src') && $img.complete) {
+        // resolve promise
         resolve($img);
-        // callback if exist
+        // call the callback if exist
         callback && callback($img);
-      };
-      $img.addEventListener('load', imgLoadedHandler);
-      // listen for error
-      imgErrorHandler = (e) => {
-        // reject
-        reject(e);
-      };
-      $img.addEventListener('error', imgErrorHandler);
+      } else {
+        // wait until loaded
+        imgLoadedHandler = (e) => {
+          // resolve the promise
+          resolve($img);
+          // callback if exist
+          callback && callback($img);
+        };
+        $img.addEventListener('load', imgLoadedHandler);
+        // listen for error
+        imgErrorHandler = (e) => {
+          // reject
+          reject(e);
+        };
+        $img.addEventListener('error', imgErrorHandler);
+      }
+    },
+    {
+      id: 'imageLoaded'
     }
-  }).on('finally', () => {
+  ).on('finally', () => {
     imgLoadedHandler && $img.removeEventListener('load', imgLoadedHandler);
     imgErrorHandler && $img.removeEventListener('error', imgErrorHandler);
   });

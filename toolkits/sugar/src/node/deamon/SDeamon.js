@@ -62,6 +62,7 @@ class SDeamon extends __SPromise {
     super(
       __deepMerge(
         {
+          id: 'SDeamon',
           updateStacks: []
         },
         settings

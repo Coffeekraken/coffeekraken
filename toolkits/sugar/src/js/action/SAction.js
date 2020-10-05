@@ -64,7 +64,9 @@ export default class SAction extends __SPromise {
    * @since         2.0.0
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static _promise = new __SPromise(() => {});
+  static _promise = new __SPromise({
+    id: 'SAction'
+  });
 
   /**
    * @name              on
@@ -117,11 +119,16 @@ export default class SAction extends __SPromise {
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run() {
-    const promise = new __SPromise((resolve, reject, trigger, cancel) => {
-      SAction._promise.trigger(`${this.constructor.name}.run`, this);
-      trigger(`run`, this);
-      this.trigger(`run`, this);
-    });
+    const promise = new __SPromise(
+      (resolve, reject, trigger, cancel) => {
+        SAction._promise.trigger(`${this.constructor.name}.run`, this);
+        trigger(`run`, this);
+        this.trigger(`run`, this);
+      },
+      {
+        id: SAction._promise.id + 'Run'
+      }
+    );
     promise.complete = () => {
       SAction._promise.trigger(`${this.constructor.name}.complete`, this);
       promise.trigger('complete', this);

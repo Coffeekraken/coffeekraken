@@ -1,18 +1,13 @@
 const __sugarConfig = require('../../config/sugar');
 const __deepMerge = require('../../object/deepMerge');
-const __bladePhp = require('../../template/bladePhp');
-const __deepMap = require('../../object/deepMap');
-const __packageRoot = require('../../path/packageRoot');
-const __standardizeJson = require('../../npm/standardizeJson');
 const __fs = require('fs');
 const __path = require('path');
 const __SPromise = require('../../promise/SPromise');
-const __rimraf = require('rimraf');
-const __render = require('../../template/render');
 const __express = require('express');
 const __trimLines = require('../../string/trimLines');
 const __SError = require('../../error/SError');
 const __STemplate = require('../../template/STemplate');
+const __deepMap = require('../../object/deepMap');
 
 /**
  * @name                express
@@ -38,7 +33,7 @@ module.exports = (args = {}) => {
   const server = __express();
 
   const promise = new __SPromise({
-    id: 'server.frontend'
+    id: 'frontendServer'
   });
 
   // load the middlewares
@@ -70,51 +65,55 @@ module.exports = (args = {}) => {
         response = await handlerPromise;
 
         // handle response
+        let content = response.content || null;
         let code = response.code || 200;
         let view = response.view || 'pages.404';
         let data = response.data || {};
         let title = response.title || 'Page not found';
         let type = response.type || 'text/html';
 
-        // prepariong the result
         let result;
-        switch (type.toLowerCase()) {
-          case 'application/json':
-            result = data;
-            break;
-          case 'text/html':
-            data = {
-              ...res.templateData,
-              title,
-              type,
-              ...data
-            };
-            const settings = {
-              rootDir: [
-                __sugarConfig('views.rootDir'),
-                __path.resolve(__dirname, 'views')
-              ]
-            };
+        if (data && data.body && data.body.includes('<html>')) {
+          result = data.body;
+        } else {
+          switch (type.toLowerCase()) {
+            case 'application/json':
+              result = data;
+              break;
+            case 'text/html':
+              data = {
+                ...res.templateData,
+                title,
+                type,
+                ...data
+              };
+              const settings = {
+                rootDir: [
+                  __sugarConfig('views.rootDir'),
+                  __path.resolve(__dirname, 'views')
+                ]
+              };
 
-            try {
-              const templateInstance = new __STemplate(view, settings);
-              result = await templateInstance.render(data, settings);
-            } catch (e) {
-              const templateInstance = new __STemplate('pages.501', settings);
-              code = 501;
-              result = await templateInstance.render(
-                {
-                  ...data,
-                  error: e
-                },
-                settings
-              );
-            }
-            break;
-          default:
-            result = data;
-            res.type(type);
-            break;
+              try {
+                const templateInstance = new __STemplate(view, settings);
+                result = await templateInstance.render(data, settings);
+              } catch (e) {
+                const templateInstance = new __STemplate('pages.501', settings);
+                code = 501;
+                result = await templateInstance.render(
+                  {
+                    ...data,
+                    body: e
+                  },
+                  settings
+                );
+              }
+              break;
+            default:
+              result = data;
+              res.type(type);
+              break;
+          }
         }
 
         // set the code

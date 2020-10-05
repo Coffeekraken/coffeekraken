@@ -48,7 +48,7 @@ module.exports = function views(req, res, settings = {}) {
       });
     },
     {
-      id: 'server.handler.views'
+      id: 'frontendServerViewsHandler'
     }
   );
 };

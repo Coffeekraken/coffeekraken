@@ -33,7 +33,9 @@ export default function addEventListenerOnce(
 ) {
   if (!Array.isArray(eventNames)) eventNames = [eventNames];
 
-  const globalPromise = new __SPromise();
+  const globalPromise = new __SPromise({
+    id: 'addEventListenerOnce'
+  });
 
   const eventsStack = {};
 

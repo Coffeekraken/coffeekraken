@@ -1,4 +1,4 @@
-const __frontendServer = require('../frontend/frontend');
+const __frontendServer = require('./frontend');
 const __SProcess = require('../../process/SProcess');
 
 /**
@@ -24,7 +24,7 @@ module.exports = class SFrontendServerProcess extends __SProcess {
    */
   constructor(params = {}, settings = {}) {
     super(params, {
-      id: 'process.server.frontend',
+      id: 'SFrontendServerProcess',
       name: 'Frontend Server Process',
       ...settings
     });

@@ -62,7 +62,7 @@ class SSugarAppCli extends __SCli {
       args,
       __deepMerge(
         {
-          id: 'sugar.app.cli',
+          id: 'SSugarAppCli',
           name: 'Sugar App CLI'
         },
         settings

@@ -39,6 +39,7 @@ module.exports = class SBlessedInput extends __SBlessedComponent {
   constructor(settings = {}) {
     const inputSettings = __deepMerge(
       {
+        id: 'SInput',
         focus: true,
         placeholder: null,
         width: '100%',
@@ -68,7 +69,9 @@ module.exports = class SBlessedInput extends __SBlessedComponent {
     this._escapeKeyPromise = null;
 
     this.$input = __blessed.textbox(inputSettings);
-    this.promise = new __SPromise();
+    this.promise = new __SPromise({
+      id: this._settings.id
+    });
 
     this.$input.height =
       inputSettings.padding.top + inputSettings.padding.bottom + 1;

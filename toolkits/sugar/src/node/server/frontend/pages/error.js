@@ -48,7 +48,7 @@ module.exports = function error(data = {}) {
   const server = __express();
 
   const promise = new __SPromise({
-    id: 'server.frontend'
+    id: 'frontendServerError'
   });
 
   // build the "templateData" object to pass to the render engines

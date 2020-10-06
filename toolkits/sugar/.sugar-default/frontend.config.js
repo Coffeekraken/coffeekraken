@@ -241,6 +241,57 @@ module.exports = {
     },
 
     /**
+     * @name            docMap
+     * @namespace       config.frontend.handlers
+     * @type            Object
+     *
+     * Store all the "docMap" configuration access like the slug, the title, etc...
+     *
+     * @since         2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    docMap: {
+      /**
+       * @name          slug
+       * @namespace     config.frontend.handlers.docMap
+       * @type          String
+       * @default       /docMap
+       *
+       * Specify the url slug to use for this "section"
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      slug: '/docMap',
+
+      /**
+       * @name          title
+       * @namespace     config.frontent.pages.docMap
+       * @type          String
+       * @default       docMap | [title]
+       *
+       * Specify the page title wanted. Accessible tokens:
+       * - [title]: Name of the view
+       *
+       * @since       2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      title: 'docMap.json',
+
+      /**
+       * @name            handler
+       * @namespace       config.frontend.handlers.docMap
+       * @type            Function
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: `${__dirname}/../src/node/server/frontend/handlers/docMap`
+    },
+
+    /**
      * @name            doc
      * @namespace       config.frontend.handlers
      * @type            Object

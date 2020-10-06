@@ -249,7 +249,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         stacks: '*',
         prefixStack: true,
         processor: null,
-        exclude: ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'],
+        // exclude: ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'],
+        exclude: [],
         filter: null
       }, settings);
       if (!(sourceSPromise instanceof SPromise) || !(destSPromise instanceof SPromise)) return; // listen for all on the source promise

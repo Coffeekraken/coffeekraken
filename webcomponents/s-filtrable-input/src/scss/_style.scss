@@ -16,15 +16,30 @@
     padding: Sugar.lnf(padding);
 
     &:hover {
+      background-color: Sugar.color(primary, lighter);
+    }
+    &--preselected {
+      background-color: Sugar.color(primary, lighter);
+    }
+    &--preselected:hover {
       background-color: Sugar.color(primary, light);
     }
-    &--selected {
-      font-weight: bold;
-      background-color: Sugar.color(primary);
-    }
-    &--selected:hover {
-      background-color: Sugar.color(primary, dark);
-    }
+  }
+
+  .#{$name}__list-item--selected {
+    background-color: Sugar.color(primary) !important;
+    color: white;
+  }
+  .#{$name}__list-item-title {
+    font-weight: bold;
+    @include Sugar.text-ellipsis();
+  }
+  .#{$name}__list-item-description {
+    @include Sugar.text-ellipsis();
+  }
+  .#{$name}__list-item-highlight {
+    background-color: Sugar.color(primary, dark);
+    color: white;
   }
 
 }

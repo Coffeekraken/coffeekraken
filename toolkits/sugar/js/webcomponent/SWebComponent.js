@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _class2 = _interopRequireDefault(require("../is/class"));
+
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
 
 var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
@@ -19,13 +21,9 @@ var _camelize = _interopRequireDefault(require("../string/camelize"));
 
 var _paramCase = _interopRequireDefault(require("../string/paramCase"));
 
-var _uncamelize = _interopRequireDefault(require("../string/uncamelize"));
-
 var _validateValue = _interopRequireDefault(require("../validation/value/validateValue"));
 
 var _watch = _interopRequireDefault(require("../object/watch"));
-
-var _register = require("./register");
 
 var _uniqid = _interopRequireDefault(require("../string/uniqid"));
 
@@ -34,6 +32,12 @@ var _dispatch = _interopRequireDefault(require("../event/dispatch"));
 var _on = _interopRequireDefault(require("../event/on"));
 
 var _SLitHtmlWebComponent = _interopRequireDefault(require("./SLitHtmlWebComponent"));
+
+var _htmlTagToHtmlClassMap = _interopRequireDefault(require("../html/htmlTagToHtmlClassMap"));
+
+var _uncamelize = _interopRequireDefault(require("../string/uncamelize"));
+
+var _getHtmlClassFromTagName = _interopRequireDefault(require("../html/getHtmlClassFromTagName"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -115,19 +119,125 @@ var _sWebComponentPromise = new _SPromise.default({
   id: 'SWebComponentPromise'
 });
 
-function SWebComponent(extend) {
-  var _temp;
+var _sWebComponentStack = {};
 
-  if (extend === void 0) {
-    extend = HTMLElement;
+function SWebComponentGenerator(extendsSettings) {
+  var _class, _temp;
+
+  if (extendsSettings === void 0) {
+    extendsSettings = {};
   }
 
-  return _temp = /*#__PURE__*/function (_extend) {
-    _inherits(SWebComponent, _extend);
+  extendsSettings = (0, _deepMerge.default)({
+    extends: HTMLElement,
+    name: null
+  }, extendsSettings);
+  return _temp = _class = /*#__PURE__*/function (_extendsSettings$exte) {
+    _inherits(SWebComponent, _extendsSettings$exte);
 
     var _super = _createSuper(SWebComponent);
 
     _createClass(SWebComponent, null, [{
+      key: "getComponentMetas",
+
+      /**
+       * @name					getComponentMetas
+       * @type 					Function
+       * @static
+       *
+       * This static method return the component metas information like:
+       * - name: The camelcase component name
+       * - dashName: The component name in dash case
+       * - class: The component class
+       * - extends: The HTML class that the component extends
+       * - settings: An object of settings
+       *
+       * @param     {String}      name      The component name you want to get the metas of
+       *
+       * @since 					2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      value: function getComponentMetas(name) {
+        return _sWebComponentStack[(0, _uncamelize.default)(name)] || {};
+      }
+      /**
+       * @name					register
+       * @type 					Function
+       * @static
+       *
+       * This method allows you to register your component as a webcomponent recognized by the browser
+       *
+       * @param       {String}      [name=extendsSettings.name]     The component name in camelcase
+       * @param       {Class|Object}    [clsOrSettings={}]          Either the component class you want to register, either an object of settings
+       * @param       {Object}        [settings={}]                 An object of settings to configure your component
+       *
+       * @since 					2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "register",
+      value: function register(name, clsOrSettings, settings) {
+        if (name === void 0) {
+          name = extendsSettings.name;
+        }
+
+        if (clsOrSettings === void 0) {
+          clsOrSettings = {};
+        }
+
+        if (settings === void 0) {
+          settings = null;
+        }
+
+        if (!name) throw new Error("SWebComponent: You must define a name for your webcomponent by setting either a static \"name\" property on your class, of by passing a name as first parameter of the static \"define\" function...");
+        var cls = this;
+        if ((0, _class2.default)(clsOrSettings)) cls = clsOrSettings;else if (typeof clsOrSettings === 'object' && !settings) {
+          settings = clsOrSettings;
+        }
+        var extend = null;
+
+        for (var key in _htmlTagToHtmlClassMap.default) {
+          if (cls.prototype instanceof _htmlTagToHtmlClassMap.default[key]) {
+            extend = key;
+            break;
+          }
+        }
+
+        var uncamelizedName = (0, _uncamelize.default)(name);
+        cls.componentName = name;
+        _sWebComponentStack[uncamelizedName] = {
+          name,
+          dashName: uncamelizedName,
+          class: cls,
+          extends: extend,
+          settings
+        };
+
+        if (window.customElements) {
+          window.customElements.define(uncamelizedName, cls, {
+            extends: extend
+          });
+        } else if (document.registerElement) {
+          document.registerElement(uncamelizedName, {
+            prototype: cls.prototype,
+            extends: extend
+          });
+        } else {
+          throw "Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...";
+        }
+      }
+      /**
+       * @name          constructor
+       * @type          Function
+       * @constructor
+       *
+       * Constructor
+       *
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
       key: "observedAttributes",
 
       /**
@@ -163,6 +273,24 @@ function SWebComponent(extend) {
        */
 
       /**
+       * @name          _metas
+       * @type          Object
+       * @private
+       *
+       * Store the component metas:
+       * - name: The camelcase component name
+       * - dashName: The component name in dash case
+       * - class: The component class
+       * - extends: The HTML class that the component extends
+       * - settings: An object of settings
+       * - instance: The component instance (this),
+       * - $node: The html element (this)
+       *
+       * @since         2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+      /**
        * @name        observedAttributes
        * @type        Function
        * @get
@@ -177,13 +305,14 @@ function SWebComponent(extend) {
         return Object.keys(this.props).map(name => (0, _uncamelize.default)(name));
       }
       /**
-       * @name          constructor
-       * @type          Function
-       * @constructor
+       * @name					componentName
+       * @type 					String
+       * @static
        *
-       * Constructor
+       * Store the name of the component in camelcase
        *
-       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @since 					2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
 
     }]);
@@ -198,7 +327,7 @@ function SWebComponent(extend) {
       _classCallCheck(this, SWebComponent);
 
       // init base html element
-      _this = _super.call(this); // get component metas
+      _this = _super.call(this); // make sure the component has a componentName static prop
 
       _defineProperty(_assertThisInitialized(_this), "_settedAttributesStack", {});
 
@@ -208,7 +337,11 @@ function SWebComponent(extend) {
 
       _defineProperty(_assertThisInitialized(_this), "_settings", {});
 
-      _this._metas = (0, _register.getComponentMetas)(_this.constructor.componentName); // save the settings
+      _defineProperty(_assertThisInitialized(_this), "_metas", {});
+
+      if (!_this.constructor.componentName) throw "Your MUST define a static \"componentName\" camelcase property like \"SFiltrableInput\" for your component to work properly..."; // get component metas
+
+      _this._metas = _this.constructor.getComponentMetas(_this.constructor.componentName); // save the settings
 
       _this._settings = (0, _deepMerge.default)({
         id: _this.getAttribute('id') || (0, _uniqid.default)(),
@@ -221,9 +354,9 @@ function SWebComponent(extend) {
 
       var currentClassName = _this.getAttribute('class') || '';
 
-      _this.setAttribute('class', "".concat(currentClassName, " ").concat(_this.className("node")));
+      _this.setAttribute('class', "".concat(currentClassName, " ").concat(_this.selector("node")));
 
-      _this.on('mounted{1}', () => {
+      _this.on('mounted:1', () => {
         // dispatch a ready event
         if (!_this.lit) {
           // the Lit HTML class dispatch the ready event after having rendering the template the first time
@@ -236,19 +369,87 @@ function SWebComponent(extend) {
       return _this;
     }
     /**
-     * @name          metas
-     * @type          Object
-     * @get
+     * @name					$
+     * @type 					Function
      *
-     * This property store all the component metas informations like the name,
-     * the type, what it is extending, etc...
+     * This method is a shortcut to the ```querySelector``` function
      *
-     * @since       2.0.0
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @param         {String}        path      The selector path
+     * @param         {Object}      [settings={}]     An object of settings to configure your query
+     * @return        {HTMLElement}             The html element getted
+     *
+     * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
+     *
+     * @since 					2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
 
     _createClass(SWebComponent, [{
+      key: "$",
+      value: function $(path, settings) {
+        if (settings === void 0) {
+          settings = {};
+        }
+
+        var $root = settings.$root || this;
+        path = this.selector(path);
+        var $result = $root.querySelector(path);
+
+        if (!$result && !path.includes(".".concat(this.metas.dashName, "__"))) {
+          path = path.replace(/^\./, ".".concat(this.metas.dashName, "__"));
+          $result = $root.querySelector(path);
+        }
+
+        return $result;
+      }
+      /**
+       * @name					$$
+       * @type 					Function
+       *
+       * This method is a shortcut to the ```querySelectorAll``` function
+       *
+       * @param         {String}        path      The selector path
+       * @param         {Object}      [settings={}]     An object of settings to configure your query
+       * @return        {HTMLElement}             The html element(s) getted
+       *
+       * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
+       *
+       * @since 					2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "$$",
+      value: function $$(path, settings) {
+        if (settings === void 0) {
+          settings = {};
+        }
+
+        var $root = settings.$root || this;
+        path = this.selector(path);
+        var $result = $root.querySelectorAll(path);
+
+        if (!$result && !path.includes(".".concat(this.metas.dashName, "__"))) {
+          path = path.replace(/^\./, ".".concat(this.metas.dashName, "__"));
+          $result = $root.querySelectorAll(path);
+        }
+
+        return $result;
+      }
+      /**
+       * @name          metas
+       * @type          Object
+       * @get
+       *
+       * This property store all the component metas informations like the name,
+       * the type, what it is extending, etc...
+       *
+       * @since       2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
       key: "_mount",
 
       /**
@@ -381,6 +582,25 @@ function SWebComponent(extend) {
       key: "on",
       value: function on(event, callback) {
         return this._promise.on(event, callback);
+      }
+      /**
+       * @name          off
+       * @type          Function
+       *
+       * Method used to unsubscribe to a previously subscribed event
+       *
+       * @param       {String}        event         The event you want to unsubscribe for
+       * @param       {Function}      callback      The callback function that has to be called
+       * @return      {SPromise}                    The SPromise used in this instance
+       *
+       * @since       2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "off",
+      value: function off(event, callback) {
+        return this._promise.off(event, callback);
       }
       /**
        * @name          dispatch
@@ -526,10 +746,10 @@ function SWebComponent(extend) {
         this.prop(attrName, newValue);
       }
       /**
-       * @name            className
+       * @name            selector
        * @type            Function
        *
-       * This method return you a className generated depending on the
+       * This method return you a selector generated depending on the
        * webcomponent name
        *
        * @param       {String}      cls         The class name to use
@@ -540,25 +760,33 @@ function SWebComponent(extend) {
        */
 
     }, {
-      key: "className",
-      value: function className(cls) {
+      key: "selector",
+      value: function selector(cls) {
         if (cls === void 0) {
           cls = '';
         }
 
-        var originalName = (0, _uncamelize.default)(this.constructor.name).replace('-web-component', '');
+        if (cls.includes(this.metas.dashName)) {
+          return cls;
+        }
+
         var hasDot = cls.match(/^\./);
         cls = cls.replace('.', '');
         var finalCls;
         if (cls.match(/^(--)/)) finalCls = "".concat(this.metas.dashName).concat(cls);else if (cls !== '') finalCls = "".concat(this.metas.dashName, "__").concat(cls);else finalCls = this.metas.dashName;
-
-        if (cls.match(/^(--)/)) {
-          finalCls = "".concat(hasDot ? '.' : '').concat(originalName, "-bare").concat(cls, " ").concat(hasDot ? '.' : '').concat(finalCls);
-        } else if (cls !== '') {
-          finalCls = "".concat(hasDot ? '.' : '').concat(originalName, "-bare__").concat(cls, " ").concat(hasDot ? '.' : '').concat(finalCls);
-        } else {
-          finalCls = "".concat(hasDot ? '.' : '').concat(originalName, "-bare ").concat(hasDot ? '.' : '').concat(finalCls);
-        }
+        if (hasDot) finalCls = ".".concat(finalCls); // if (cls.match(/^(--)/)) {
+        //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare${cls} ${
+        //     hasDot ? '.' : ''
+        //   }${finalCls}`;
+        // } else if (cls !== '') {
+        //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare__${cls} ${
+        //     hasDot ? '.' : ''
+        //   }${finalCls}`;
+        // } else {
+        //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare ${
+        //     hasDot ? '.' : ''
+        //   }${finalCls}`;
+        // }
 
         return finalCls;
       }
@@ -711,33 +939,30 @@ function SWebComponent(extend) {
     }]);
 
     return SWebComponent;
-  }(extend), _temp;
-}
-/**
- * @name        on
- * @type        Function
- * @static
- *
- * This method can be used to subscribe to some SWebComponent instances events
- * like "SFiltrableInput.ready", etc...
- *
- * @param       {String}      name        The event name to subscribe to
- * @param       {Function}    callback    The callback function to call
- * @return      {Function}                A function that you can use to unsubscribe to this particular event
- *
- * @since       2.0.0
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
+  }(extendsSettings.extends), _defineProperty(_class, "componentName", extendsSettings.name), _temp;
+} // /**
+//  * @name        on
+//  * @type        Function
+//  * @static
+//  *
+//  * This method can be used to subscribe to some SWebComponent instances events
+//  * like "SFiltrableInput.ready", etc...
+//  *
+//  * @param       {String}      name        The event name to subscribe to
+//  * @param       {Function}    callback    The callback function to call
+//  * @return      {Function}                A function that you can use to unsubscribe to this particular event
+//  *
+//  * @since       2.0.0
+//  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//  */
+// SWebComponentGenerator.on = function (name, callback) {
+//   _sWebComponentPromise.on(name, callback);
+//   return () => {
+//     _sWebComponentPromise.off(name, callback);
+//   };
+// };
 
 
-SWebComponent.on = (name, callback) => {
-  _sWebComponentPromise.on(name, callback);
-
-  return () => {
-    _sWebComponentPromise.off(name, callback);
-  };
-};
-
-var _default = SWebComponent;
+var _default = SWebComponentGenerator;
 exports.default = _default;
 module.exports = exports.default;

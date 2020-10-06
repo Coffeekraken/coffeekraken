@@ -10,8 +10,9 @@ const __SFsCacheStreamAction = require('../../stream/actions/SFsCacheStreamActio
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 const __SSugarJsonStreamAction = require('../actions/SSugarJsonStreamAction');
 const __SDocMapStreamAction = require('../../stream/actions/SDocMapStreamAction');
+const __SFrontspecReadStreamAction = require('../../stream/actions/SFrontspecReadStreamAction');
+const __SFrontspecJsStreamAction = require('../../stream/actions/SFrontspecJsStreamAction');
 const __path = require('path');
-const { stream } = require('globby');
 
 /**
  * @name            SBuildJsActionsStream
@@ -55,11 +56,13 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
         filesResolver: __SFsFilesResolverStreamAction,
         // fsCache: __SFsCacheStreamAction,
         readFile: __SFsReadFileStreamAction,
+        frontspecRead: __SFrontspecReadStreamAction,
+        frontspecJs: __SFrontspecJsStreamAction,
         // sugarJson: __SSugarJsonStreamAction,
         webpack: __SWebpackStreamAction,
         terser: __STerserStreamAction,
-        fsOutput: __SFsOutputStreamAction,
-        docMap: __SDocMapStreamAction
+        fsOutput: __SFsOutputStreamAction
+        // docMap: __SDocMapStreamAction
       },
       __deepMerge(
         {
@@ -75,6 +78,10 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
               if (streamObj.input) {
                 streamObj.filename = __getFilename(streamObj.input);
               }
+              return streamObj;
+            },
+            frontspecJs: (streamObj) => {
+              __copy(streamObj.data);
               return streamObj;
             }
           },

@@ -1,42 +1,30 @@
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __deepMerge = require('../../object/deepMerge');
 const __SInterface = require('../../class/SInterface');
-const __SDocMap = require('../../doc/SDocMap');
+const __SFrontspec = require('../../doc/SFrontspec');
 
-class SDocMapStreamActionInterface extends __SInterface {
-  static definitionObj = {
-    outputDir: {
-      type: 'String',
-      required: true
-    },
-    input: {
-      type: 'String',
-      required: true
-    },
-    docMapInput: {
-      type: 'String',
-      required: true
-    }
-  };
+class SFrontspecReadStreamActionInterface extends __SInterface {
+  static definitionObj = {};
 }
 
 /**
- * @name            SDocMapStreamAction
+ * @name            SFrontspecReadStreamAction
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
  *
- * This actions allows you to scan files defined by a glob pattern and generate a ```docMap.json``` file containing the reference of all the
- * finded namespace docblock tags.
+ * This action allows you to search and aggregate the "frontspec.json" files in the current
+ * package as well as in the node modules packages.
+ * The result of this action will be on the streamObj under the "frontspec" property
  *
  * @param       {Object}        [settings={}]          A settings object to configure your action
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SDocMapStreamAction extends __SActionsStreamAction {
+module.exports = class SFrontspecReadStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            interface
    * @type             Object
    * @static
    *
@@ -44,7 +32,7 @@ module.exports = class SDocMapStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SDocMapStreamActionInterface;
+  static interface = SFrontspecReadStreamActionInterface;
 
   /**
    * @name            constructor
@@ -59,7 +47,7 @@ module.exports = class SDocMapStreamAction extends __SActionsStreamAction {
     super(
       __deepMerge(
         {
-          id: 'actionStream.action.docMap'
+          id: 'SFrontspecReadStreamAction'
         },
         settings
       )
@@ -76,16 +64,9 @@ module.exports = class SDocMapStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    if (!streamObj.docMapInput) {
-      streamObj.docMapInput = streamObj.input;
-    }
-
     return super.run(streamObj, async (resolve, reject) => {
-      const docMap = new __SDocMap({
-        outputDir: streamObj.outputDir
-      });
-      await docMap.scan(streamObj.docMapInput);
-      await docMap.save();
+      const res = await __SFrontspec.read();
+      if (res) streamObj.frontspec = res;
       resolve(streamObj);
     });
   }

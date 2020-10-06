@@ -60,7 +60,9 @@ module.exports = {
     modifiers: {
       hover: '-darken 10%',
       light: '-lighten 15%',
-      dark: '-darken 10%'
+      lighter: '-lighten 30%',
+      dark: '-darken 10%',
+      darker: '-darken 30%'
     }
   },
 
@@ -86,7 +88,9 @@ module.exports = {
     modifiers: {
       hover: '-darken 10%',
       light: '-lighten 15%',
-      dark: '-darken 10%'
+      lighter: '-lighten 30%',
+      dark: '-darken 10%',
+      darker: '-darken 30%'
     }
   },
 
@@ -112,7 +116,9 @@ module.exports = {
     modifiers: {
       hover: '-darken 10%',
       light: '-lighten 15%',
-      dark: '-darken 10%'
+      lighter: '-lighten 30%',
+      dark: '-darken 10%',
+      darker: '-darken 30%'
     }
   },
 
@@ -138,7 +144,9 @@ module.exports = {
     modifiers: {
       hover: '-darken 10%',
       light: '-lighten 15%',
-      dark: '-darken 10%'
+      lighter: '-lighten 30%',
+      dark: '-darken 10%',
+      darker: '-darken 30%'
     }
   },
 
@@ -164,7 +172,9 @@ module.exports = {
     modifiers: {
       hover: '-darken 10%',
       light: '-lighten 15%',
-      dark: '-darken 10%'
+      lighter: '-lighten 30%',
+      dark: '-darken 10%',
+      darker: '-darken 30%'
     }
   },
 
@@ -190,7 +200,9 @@ module.exports = {
     modifiers: {
       hover: '-darken 10%',
       light: '-lighten 15%',
-      dark: '-darken 10%'
+      lighter: '-lighten 30%',
+      dark: '-darken 10%',
+      darker: '-darken 30%'
     }
   },
 
@@ -216,7 +228,9 @@ module.exports = {
     modifiers: {
       hover: '-darken 10%',
       light: '-lighten 15%',
-      dark: '-darken 10%'
+      lighter: '-lighten 30%',
+      dark: '-darken 10%',
+      darker: '-darken 30%'
     }
   },
 
@@ -242,7 +256,9 @@ module.exports = {
     modifiers: {
       hover: '-darken 10%',
       light: '-lighten 15%',
-      dark: '-darken 10%'
+      lighter: '-lighten 30%',
+      dark: '-darken 10%',
+      darker: '-darken 30%'
     }
   },
 
@@ -268,7 +284,9 @@ module.exports = {
     modifiers: {
       hover: '-darken 10%',
       light: '-lighten 15%',
-      dark: '-darken 10%'
+      lighter: '-lighten 30%',
+      dark: '-darken 10%',
+      darker: '-darken 30%'
     }
   },
 
@@ -294,7 +312,9 @@ module.exports = {
     modifiers: {
       hover: '-darken 10%',
       light: '-lighten 15%',
-      dark: '-darken 10%'
+      lighter: '-lighten 30%',
+      dark: '-darken 10%',
+      darker: '-darken 30%'
     }
   },
 
@@ -320,7 +340,9 @@ module.exports = {
     modifiers: {
       hover: '-darken 10%',
       light: '-lighten 15%',
-      dark: '-darken 10%'
+      lighter: '-lighten 30%',
+      dark: '-darken 10%',
+      darker: '-darken 30%'
     }
   },
 
@@ -346,7 +368,9 @@ module.exports = {
     modifiers: {
       hover: '-darken 10%',
       light: '-lighten 15%',
-      dark: '-darken 10%'
+      lighter: '-lighten 30%',
+      dark: '-darken 10%',
+      darker: '-darken 30%'
     }
   }
 };

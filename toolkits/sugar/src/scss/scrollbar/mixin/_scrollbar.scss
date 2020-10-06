@@ -2,7 +2,7 @@
  * @todo        Mixin header and documentation
  */
 @mixin scrollbar(
-  $track: color(primary, light),
+  $track: color(primary, lighter),
   $handle: color(primary),
   $radius: lnf(border-radius),
   $width: 5px

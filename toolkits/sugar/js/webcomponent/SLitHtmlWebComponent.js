@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = SLitHtmlWebComponent;
+exports.default = void 0;
 
 var _SWebComponent2 = _interopRequireDefault(require("./SWebComponent"));
 
@@ -59,6 +59,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -104,11 +108,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @see       https://lit-html.polymer-project.org/
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function SLitHtmlWebComponent(extend) {
+function SLitHtmlWebComponentGenerator(extendSettings) {
   var _class, _temp;
 
-  if (extend === void 0) {
-    extend = HTMLElement;
+  if (extendSettings === void 0) {
+    extendSettings = {};
   }
 
   return _temp = _class = /*#__PURE__*/function (_SWebComponent) {
@@ -177,14 +181,15 @@ function SLitHtmlWebComponent(extend) {
       });
 
       _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(function () {
-        var tpl = this.constructor.template(this._props, this, this._settings, this.lit);
+        var tplFn = this.constructor.template.bind(this);
+        var tpl = tplFn(this._props, this._settings, this.lit);
         (0, _litHtml.render)(tpl, this.$container);
       }, 50));
 
       _this.$container = document.createElement('div');
-      _this.$container.className = _this.className(); // wait until mounted to render the component first time
+      _this.$container.className = _this.selector(); // wait until mounted to render the component first time
 
-      _this.on('mounted{1}', () => {
+      _this.on('mounted:1', () => {
         // insert the container in the document
         (0, _insertAfter.default)(_this.$container, _assertThisInitialized(_this)); // render for the first time
 
@@ -208,27 +213,39 @@ function SLitHtmlWebComponent(extend) {
 
     _createClass(SLitHtmlWebComponent, [{
       key: "$",
-      value: function $(path) {
-        var $result = this.$container.querySelector(path);
 
-        if (!$result && !path.includes(".".concat(this.metas.dashName, "__"))) {
-          path = path.replace(/^\./, ".".concat(this.metas.dashName, "__"));
-          $result = this.$container.querySelector(path);
+      /**
+       * @name					$
+       * @type 					Function
+       *
+       * This method is a shortcut to the ```querySelector``` function
+       *
+       * @param         {String}        path      The selector path
+       * @param         {Object}      [settings={}]     An object of settings to configure your query
+       * @return        {HTMLElement}             The html element getted
+       *
+       * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
+       *
+       * @since 					2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      value: function $(path, settings) {
+        if (settings === void 0) {
+          settings = {};
         }
 
-        return $result;
+        settings = (0, _deepMerge.default)({
+          $root: this.$container
+        }, settings);
+        return _get(_getPrototypeOf(SLitHtmlWebComponent.prototype), "$", this).call(this, path, settings);
       }
     }, {
       key: "$$",
       value: function $$(path) {
-        var $result = this.$container.querySelectorAll(path);
-
-        if (!$result && !path.includes(".".concat(this.metas.dashName, "__"))) {
-          path = path.replace(/^\./, ".".concat(this.metas.dashName, "__"));
-          $result = this.$container.querySelectorAll(path);
-        }
-
-        return $result;
+        settings = (0, _deepMerge.default)({
+          $root: this.$container
+        }, settings);
+        return _get(_getPrototypeOf(SLitHtmlWebComponent.prototype), "$$", this).call(this, path, settings);
       }
       /**
        * @name          handleProp
@@ -269,7 +286,9 @@ function SLitHtmlWebComponent(extend) {
     }]);
 
     return SLitHtmlWebComponent;
-  }((0, _SWebComponent2.default)(extend)), _defineProperty(_class, "template", (props, component, html) => html(_templateObject())), _temp;
+  }((0, _SWebComponent2.default)(extendSettings)), _defineProperty(_class, "template", (props, settings, lit) => lit.html(_templateObject())), _temp;
 }
 
+var _default = SLitHtmlWebComponentGenerator;
+exports.default = _default;
 module.exports = exports.default;

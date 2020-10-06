@@ -2,16 +2,12 @@
   "assets": {
     "css": {
       "default": {
-        "name": "main",
-        "path": "/dist/css/index.css",
-        "type": "default"
+        "path": "dist/css/index.css"
       }
     },
     "js": {
       "default": {
-        "name": "main",
-        "path": "/dist/js/index.js",
-        "type": "default"
+        "path": "dist/js/index.js"
       }
     }
   }

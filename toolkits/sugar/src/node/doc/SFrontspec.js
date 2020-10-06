@@ -1,46 +1,44 @@
 const __SPromise = require('../promise/SPromise');
 const __deepMerge = require('../object/deepMerge');
 const __packageRoot = require('../path/packageRoot');
+const __packageJson = require('../package/json');
 const __glob = require('glob');
 const __fs = require('fs');
 const __path = require('path');
-const __SDocblock = require('../docblock/SDocblock');
-const __toString = require('../string/toString');
-const __removeSync = require('../fs/removeSync');
-const __getFilename = require('../fs/filename');
 const __unique = require('../array/unique');
 
 /**
- * @name                SDocMap
+ * @name                SFrontspec
  * @namespace           sugar.node.doc
  * @type                Class
  * @extends             SPromise
  *
- * This class represent the ```docMap.json``` file and allows you to generate it from some sources (glob pattern(s))
+ * This class represent the ```frontspec.json``` file and allows you to generate it from some sources (glob pattern(s))
  * and save it inside a directory you choose.
  *
  * @param           {Object}        [settings={}]           An object of settings to configure your docMap instance:
- * - filename (docMap.json) {String}: Specify the filename you want
+ * - filename (frontspec.json) {String}: Specify the filename you want
  * - outputDir (packageRoot()) {String}: Specify the directory where you want to save your docMap.json file when using the ```save``` method
  *
+ * @todo        update doc
+ *
  * @example             js
- * const SDocMap = require('@coffeekraken/sugar/node/doc/SDocMap');
- * const docMap = new SDocMap({
+ * const SFrontspec = require('@coffeekraken/sugar/node/doc/SFrontspec');
+ * const frontspec = new SFrontspec({
  *  outputDir: '/my/cool/directory'
  * });
- * await docMap.scan('/my/cool/directory/*.js');
- * await docMap.save();
+ * const result = await frontspec.read();
  *
  * @since           2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SDocMap extends __SPromise {
+module.exports = class SFrontspec extends __SPromise {
   /**
    * @name          _entries
    * @type           Array<Object>
    * @private
    *
-   * This store the docMap.json entries
+   * This store the frontspec.json entries
    *
    * @since         2.0.0
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -61,8 +59,8 @@ module.exports = class SDocMap extends __SPromise {
     super(
       __deepMerge(
         {
-          id: 'SDocMap',
-          filename: 'docMap.json',
+          id: 'SFrontspec',
+          filename: 'frontspec.json',
           outputDir: __packageRoot()
         },
         settings
@@ -75,7 +73,7 @@ module.exports = class SDocMap extends __SPromise {
    * @type          Function
    * @static
    *
-   * This static method allows you to search for docMap.json files and get back the array of pathes where to
+   * This static method allows you to search for frontspec.json files and get back the array of pathes where to
    * find the found files
    *
    * @todo      update documentation
@@ -83,7 +81,7 @@ module.exports = class SDocMap extends __SPromise {
    * @param       {Object}        [settings={}]       A settings object to configure your reading process
    * - dirDepth (10) {Integer}: Specify the max directories depth to search for docMap.json files relative to the ```roorDir``` setting
    * - rootDir (__packageRoot()) {String}: Specify the root directory from where to search for docMap.json files
-   * - filename ('docMap.json') {String|Array<String>}: Specify the file names to search for
+   * - filename ('frontspec.json') {String|Array<String>}: Specify the file names to search for
    * - cache (true) {Boolean}: Specify if you want to take advantage of the cache feature or
    * @return      {SPromise}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
    *
@@ -95,7 +93,7 @@ module.exports = class SDocMap extends __SPromise {
       (resolve, reject, trigger, cancel) => {
         settings = __deepMerge(
           {
-            id: 'SDocMap',
+            id: 'SFrontspec',
             sources: {
               root: {
                 rootDir: __packageRoot(),
@@ -111,7 +109,7 @@ module.exports = class SDocMap extends __SPromise {
               }
             },
             dirDepth: 3,
-            filename: 'docMap.json',
+            filename: 'frontspec.json',
             cache: true
           },
           settings
@@ -173,7 +171,7 @@ module.exports = class SDocMap extends __SPromise {
    * @type          Function
    * @static
    *
-   * This static method allows you to search for docMap.json files and read them to get
+   * This static method allows you to search for frontspec.json files and read them to get
    * back the content of them in one call. It can take advantage of the cache if
    * the setting.cache property is setted to true
    *
@@ -181,9 +179,9 @@ module.exports = class SDocMap extends __SPromise {
    * @todo      integrate the "cache" feature
    *
    * @param       {Object}        [settings={}]       A settings object to configure your reading process
-   * - dirDepth (10) {Integer}: Specify the max directories depth to search for docMap.json files relative to the ```roorDir``` setting
-   * - rootDir (__packageRoot()) {String}: Specify the root directory from where to search for docMap.json files
-   * - filename ('docMap.json') {String|Array<String>}: Specify the file names to search for
+   * - dirDepth (10) {Integer}: Specify the max directories depth to search for frontspec.json files relative to the ```roorDir``` setting
+   * - rootDir (__packageRoot()) {String}: Specify the root directory from where to search for frontspec.json files
+   * - filename ('frontspec.json') {String|Array<String>}: Specify the file names to search for
    * - cache (true) {Boolean}: Specify if you want to take advantage of the cache feature or
    * @return      {SPromise}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
    *
@@ -195,138 +193,36 @@ module.exports = class SDocMap extends __SPromise {
       async (resolve, reject, trigger, cancel) => {
         settings = __deepMerge(
           {
-            id: 'SDocMap'
+            id: 'SFrontspec'
           },
           settings
         );
 
-        const files = await SDocMap.find(settings);
+        const files = await SFrontspec.find(settings);
 
-        let docMapJson = {};
+        let frontspecJson = {};
 
         // loop on all files
         files.forEach((filePath) => {
           const content = require(filePath);
 
-          Object.keys(content).forEach((docMapItemKey) => {
-            content[docMapItemKey].path = __path.resolve(
-              filePath.split('/').slice(0, -1).join('/'),
-              content[docMapItemKey].relPath
-            );
-          });
+          const packageJson = __packageJson(filePath);
+          if (packageJson) {
+            if (!content.package) {
+              content.package = packageJson;
+            }
+          }
 
-          docMapJson = {
-            ...docMapJson,
-            ...content
-          };
+          const relPath = __path.relative(__packageRoot(), filePath);
+
+          frontspecJson[relPath] = content;
         });
 
         // return the final docmap
-        resolve(docMapJson);
+        resolve(frontspecJson);
       },
       {
         id: settings.id + '.read'
-      }
-    );
-  }
-
-  /**
-   * @name          scan
-   * @type          Function
-   *
-   * This method allows you to specify one or more glob patterns to scan files for "@namespace" docblock tags
-   * and extract all the necessary informations to generate the docMap.json file
-   *
-   * @param         {String|Array<String>}          sources         The glob pattern(s) you want to scan files in
-   * @return        {SPromise}                                     A promise resolved once the scan process has been finished
-   *
-   * @since         2.0.0
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  scan(sources) {
-    return new __SPromise(
-      async (resolve, reject, trigger, cancel) => {
-        if (!Array.isArray(sources)) sources = [sources];
-
-        for (let i = 0; i < sources.length; i++) {
-          const source = sources[i];
-
-          // scan for files
-          const files = __glob.sync(source);
-
-          // loop on each files to check for docblocks
-          for (let j = 0; j < files.length; j++) {
-            const filepath = files[j];
-            const content = __fs.readFileSync(filepath, 'utf8');
-
-            if (!content) continue;
-
-            const docblocks = new __SDocblock(content).toObject();
-
-            if (!docblocks || !docblocks.length) continue;
-
-            docblocks.forEach((docblock) => {
-              if (!docblock.namespace) return;
-              const path = __path.relative(this._settings.outputDir, filepath);
-              const filename = __getFilename(filepath);
-              const docblockObj = {
-                name: docblock.name,
-                namespace: docblock.namespace,
-                filename,
-                extension: filename.split('.').slice(1)[0],
-                relPath: path,
-                directory: path.replace(`/${__getFilename(filepath)}`, ''),
-                type: docblock.type,
-                description: docblock.description
-              };
-              if (docblock.extends) docblockObj.extends = docblock.extends;
-              if (docblock.static) docblockObj.static = true;
-              if (docblock.since) docblockObj.since = docblock.since;
-              this._entries[
-                `${docblock.namespace}.${docblock.name}`
-              ] = docblockObj;
-            });
-          }
-        }
-
-        resolve();
-      },
-      {
-        id: this._settings.id + '.scan'
-      }
-    );
-  }
-
-  /**
-   * @name              save
-   * @type              Function
-   *
-   * This method save the docMap.json file in the outputDir setted in the settings.
-   * You can specify an output path as parameter to use this instead of the instance level settings.
-   *
-   * @param         {String}            [output=null]           A full output file path where to save the file
-   * @return        {SPromise}                                  An SPromise instance resolved once the file has been saved
-   *
-   * @since         2.0.0
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  save(output = null) {
-    return new __SPromise(
-      (resolve, reject, trigger, cancel) => {
-        if (!output) {
-          output = `${this._settings.outputDir}/${this._settings.filename}`;
-        }
-        __removeSync(output);
-        __fs.writeFileSync(
-          output,
-          __toString(this._entries, {
-            beautify: true
-          })
-        );
-        resolve();
-      },
-      {
-        id: this._settings.id + '.save'
       }
     );
   }

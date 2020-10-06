@@ -3,6 +3,7 @@ const __getFilename = require('../../../fs/filename');
 const __packageRoot = require('../../../path/packageRoot');
 const __deepMerge = require('../../../object/deepMerge');
 const __fs = require('fs');
+const __tmpDir = require('../../../fs/tmpDir');
 const __path = require('path');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SBuildJSInterface = require('../interface/SBuildJsInterface');
@@ -130,11 +131,16 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
 
       let webpackSettings = Object.assign({}, settings.webpack);
 
+      // write a file to compile in the tmp directory
+      const tmpInputPath = `${__tmpDir()}/SWebpackStreamActionInput.js`;
+      __fs.writeFileSync(tmpInputPath, streamObj.data);
+
       const compiler = __webpack(
         __deepMerge(
           {
             mode: streamObj.prod ? 'production' : 'development',
-            entry: streamObj.input,
+            // entry: streamObj.input,
+            entry: tmpInputPath,
             stats: {
               errors: true,
               errorDetails: true
@@ -202,23 +208,26 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
             },
             resolveLoader: {
               modules: [
-                `node_modules`,
+                `${__packageRoot()}/node_modules`,
+                `${__packageRoot()}/src/js`,
                 __path.relative(
-                  __packageRoot(process.cwd()),
+                  __packageRoot(),
                   `${__packageRoot(__dirname)}/node_modules`
-                )
+                ),
+                'node_modules'
               ]
             },
             resolve: {
               symlinks: true,
-              extensions: ['.tsx', '.ts', '.js'],
+              extensions: ['.tsx', '.ts', '.js', '.scss', '.sass'],
               modules: [
-                'node_modules',
-                'src/js',
+                `${__packageRoot()}/node_modules`,
+                `${__packageRoot()}/src/js`,
                 __path.relative(
-                  __packageRoot(process.cwd()),
+                  __packageRoot(),
                   `${__packageRoot(__dirname)}/node_modules`
-                )
+                ),
+                'node_modules'
               ]
             },
             target: 'web',
@@ -230,14 +239,23 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
       );
 
       try {
-        compiler.run((error, stats) => {
-          if (stats.hasErrors()) {
-            const sts = stats.toJson();
-            return reject(sts.errors);
+        compiler.run((err, stats) => {
+          if (err) {
+            let errorString = err.stack || err;
+            if (err.details) {
+              errorString += err.details;
+            }
+            return reject(errorString);
           }
+
+          const info = stats.toJson();
+
+          if (stats.hasErrors()) {
+            return reject(info.errors.join('\n\n'));
+          }
+
           if (stats.hasWarnings()) {
-            const sts = stats.toJson();
-            return reject(sts.warnings);
+            return reject(info.warnings.join('\n\n'));
           }
 
           // reading the outputed file
@@ -265,7 +283,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
           resolve(streamObj);
         });
       } catch (e) {
-        // console.log('COCOCOCOC');
+        console.log('COCOCOCOC');
         // console.log(e.toString());
       }
     });

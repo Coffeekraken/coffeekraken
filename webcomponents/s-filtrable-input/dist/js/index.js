@@ -81,10 +81,582 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/js/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "../../../../../../../../private/var/folders/pr/9cbhttrj5vdckr5krgkb8bs80000gn/T/SWebpackStreamActionInput.js");
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "../../../../../../../../private/var/folders/pr/9cbhttrj5vdckr5krgkb8bs80000gn/T/SWebpackStreamActionInput.js":
+/*!*********************************************************************************************!*\
+  !*** /private/var/folders/pr/9cbhttrj5vdckr5krgkb8bs80000gn/T/SWebpackStreamActionInput.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _index = _interopRequireDefault(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module '@coffeekraken/s-filtrable-input/src/js/index.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
+
+var _deepMerge = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/object/deepMerge */ "../../toolkits/sugar/js/object/deepMerge.js"));
+
+var _on = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/event/on */ "../../toolkits/sugar/js/event/on.js"));
+
+__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module '../scss/_bare.scss'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _clone = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/object/clone */ "../../toolkits/sugar/js/object/clone.js"));
+
+var _throttle = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/function/throttle */ "../../toolkits/sugar/js/function/throttle.js"));
+
+var _nodeIndex = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/dom/nodeIndex */ "../../toolkits/sugar/js/dom/nodeIndex.js"));
+
+var _SRequest = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/http/SRequest */ "../../toolkits/sugar/js/http/SRequest.js"));
+
+var _SLitHtmlWebComponent = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent */ "../../toolkits/sugar/js/webcomponent/SLitHtmlWebComponent.js"));
+
+var _SWebComponent = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/webcomponent/SWebComponent */ "../../toolkits/sugar/js/webcomponent/SWebComponent.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject6() {
+  var data = _taggedTemplateLiteral(["\n                <li class=\"", "__list-item ", " ", "\">\n                  ", "\n                </li>\n              "]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject5() {
+  var data = _taggedTemplateLiteral(["\n      ", "\n      <ul class=\"", "__list\" tabindex=\"1\">\n        ", "\n      </ul>\n    "]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n      ", ""]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n                <div class=\"", "\">\n                  ", "\n                </div>\n              "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n                <div class=\"", "\">\n                    ", "\n                </div>\n              "]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n              ", "\n              ", "\n            "]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+_index.default.register();
+
+// __on('s-filtrable-input.attach', async (e) => {
+//   const docMapRequest = new __SRequest({
+//     url: 'docMap',
+//     method: 'GET',
+//     data: {}
+//   });
+//   const docMapJson = await docMapRequest.send();
+//   const itemsArray = Object.keys(docMapJson.data).map((key) => {
+//     const itemObj = docMapJson.data[key];
+//     return {
+//       title: itemObj.namespace + '.' + itemObj.name,
+//       description: itemObj.description
+//     };
+//   });
+//   e.target.prop('items', itemsArray);
+// });
+// __on('s-filtrable-input.validate', (selectedItem) => {
+//   console.log('SELET', selectedItem);
+// });
+var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
+  _inherits(SFiltrableInputWebComponent, _SLitHtmlWebComponen);
+
+  var _super = _createSuper(SFiltrableInputWebComponent);
+
+  /**
+   * name         _preselectedItemIdx
+   * @type        Number
+   * @private
+   *
+   * Track which is the selected item index
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  /**
+   * @name          _originalItems
+   * @type          Array
+   * @private
+   *
+   * This store the original items before the filter process
+   * to be able to restore them after that
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  /**
+   * @name          constructor
+   * @type          Function
+   * @constructor
+   *
+   * Constructor
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  function SFiltrableInputWebComponent(settings) {
+    var _this;
+
+    if (settings === void 0) {
+      settings = {};
+    }
+
+    _classCallCheck(this, SFiltrableInputWebComponent);
+
+    _this = _super.call(this, (0, _deepMerge.default)({
+      closeOnSelect: true,
+      closeOnSelectTimeout: 300,
+      maxDisplayItems: 50,
+      filter: {
+        throttleTimeout: 100,
+        properties: ['title', 'description'],
+        function: null
+      },
+      template: {
+        item: (itemObj, settings, lit) => lit.html(_templateObject(), itemObj.title ? lit.html(_templateObject2(), _this.selector('list-item-title'), _this.highlightFilter(itemObj.title)) : '', itemObj.description ? lit.html(_templateObject3(), _this.selector('list-item-description'), _this.highlightFilter(itemObj.description)) : '')
+      }
+    }, settings));
+
+    _defineProperty(_assertThisInitialized(_this), "_preselectedItemIdx", -1);
+
+    _defineProperty(_assertThisInitialized(_this), "_originalItems", null);
+
+    if (!_this._settings.filter.function) _this._settings.filter.function = _this.filterItems.bind(_assertThisInitialized(_this));
+    _this._maxDisplayItems = _this._settings.maxDisplayItems;
+
+    _this.on('ready', () => {
+      _this._$list = _this.$('.list');
+      var inputThrottleTimeout;
+
+      _this.addEventListener('input', e => {
+        clearTimeout(inputThrottleTimeout);
+        inputThrottleTimeout = setTimeout(() => {
+          _this.dispatch('input', _this.value);
+        }, _this.prop('inputThrottle'));
+      });
+
+      var filterTimeout;
+
+      _this.addEventListener('input', e => {
+        clearTimeout(filterTimeout);
+        if (_this.prop('loading')) return;
+        filterTimeout = setTimeout( /*#__PURE__*/_asyncToGenerator(function* () {
+          _this.prop('loading', true);
+
+          _this._maxDisplayItems = _this._settings.maxDisplayItems;
+          _this._preselectedItemIdx = -1;
+          _this._selectedItemIdx = -1;
+          _this._filterString = e.srcElement.value;
+          var newItemsArray = yield _this._settings.filter.function(_this._filterString);
+
+          _this.prop('loading', false);
+
+          _this.prop('items', newItemsArray);
+
+          _this._$list.scrollTop = 0;
+        }), _this._settings.filter.throttleTimeout);
+      });
+
+      _this._$list.addEventListener('click', e => {
+        // get the node index in the list
+        var nodeIndex = (0, _nodeIndex.default)(e.srcElement); // select the clicked item
+
+        _this.select(nodeIndex);
+      });
+
+      _this._$list.addEventListener('scroll', e => {
+        if (e.srcElement.scrollHeight - e.srcElement.scrollTop <= e.srcElement.clientHeight + 50) {
+          if (_this._maxDisplayItems < _this._props.items.value.length) {
+            _this._maxDisplayItems += _this._settings.maxDisplayItems;
+
+            _this.render();
+          }
+        }
+      });
+
+      document.addEventListener('keydown', e => {
+        // interact with the component only if it is active
+        if (!_this.isActive()) return;
+
+        switch (e.keyCode) {
+          case 38:
+            // up
+            _this.up();
+
+            break;
+
+          case 40:
+            // down
+            _this.down();
+
+            break;
+
+          case 13:
+            // enter
+            _this.validate();
+
+            break;
+
+          case 27:
+            // escape
+            _this.escape();
+
+            break;
+        }
+      });
+
+      _this.addEventListener('focus', () => {
+        console.log('fo');
+        document.dispatchEvent(new Event('scroll'));
+      });
+
+      document.addEventListener('scroll', e => {
+        var element = _this.$container;
+        var topPos = element.getBoundingClientRect().top;
+
+        if (document.documentElement.clientHeight / 2 < topPos) {
+          _this.$container.classList.add(_this.selector('--ontop'));
+
+          _this._$list.style.maxHeight = "".concat(topPos - 20, "px");
+        } else {
+          _this.$container.classList.remove(_this.selector('--ontop'));
+
+          _this._$list.style.maxHeight = "".concat(document.documentElement.clientHeight - topPos - _this.$container.clientHeight - 20, "px");
+        }
+      });
+    });
+
+    return _this;
+  }
+  /**
+   * @name              isActive
+   * @type              Function
+   *
+   * This method return you if the component is active or not. Active mean that the user is
+   * interacting with it
+   *
+   * @return      {Boolean}               true if the component is active, false if not
+   *
+   * @since     1.0.0
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+
+  _createClass(SFiltrableInputWebComponent, [{
+    key: "isActive",
+    value: function isActive() {
+      if (this === document.activeElement) return true;
+      if (this._$list === document.activeElement) return true;
+      return false;
+    }
+    /**
+     * @name              select
+     * @type              Function
+     *
+     * This method can be called to select an item in the list
+     *
+     * @param       {Number}        idx         The index of the element you want to select
+     * @return      {Boolean}                   true if the select process has been successfull, false if not
+     *
+     * @since       1.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "select",
+    value: function select(idx) {
+      if (typeof idx !== 'number') return false; // check that we have an item with this idx
+
+      if (idx < 0 || idx >= this._props.items.value.length) return false; // set the idx to the selectedItemIndex variable
+
+      this._selectedItemIdx = idx;
+      this._preselectedItemIdx = idx; // render the component
+
+      this.render(); // make a clone of the selected item
+
+      var selectedItem = (0, _clone.default)(this._props.items.value[this._selectedItemIdx]); // set the value into the actual input
+
+      var inputValue;
+      var itemValue = this.prop('itemValue');
+      if (typeof itemValue === 'string') inputValue = selectedItem[itemValue];else if (typeof itemValue === 'function') inputValue = itemValue(selectedItem);
+      if (itemValue) this.setAttribute('value', inputValue); // dispatch a select event
+
+      this.dispatch('select', selectedItem); // close if needed
+
+      if (this._settings.closeOnSelect) {
+        setTimeout(() => {
+          this.escape();
+        }, this._settings.closeOnSelectTimeout);
+      } // return the selected item
+
+
+      return selectedItem;
+    }
+    /**
+     * @name              escape
+     * @type              Function
+     *
+     * This method can be called to "exit" the filtrable input
+     *
+     * @since       1.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "escape",
+    value: function escape() {
+      this.blur();
+
+      this._$list.blur();
+    }
+    /**
+     * @name              validate
+     * @type              Function
+     *
+     * This method can be called to validate a choice in the filtrable input
+     *
+     * @since       1.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "validate",
+    value: function validate() {
+      // check that we have an item selected
+      if (this._preselectedItemIdx === -1) return; // make sure the selected item exist in the stack
+
+      if (!this._props.items.value[this._preselectedItemIdx]) return; // select the item
+
+      return this.select(this._preselectedItemIdx);
+    }
+    /**
+     * @name              up
+     * @type              Function
+     *
+     * This method can be called to select the previous item in the list
+     *
+     * @since       1.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "up",
+    value: function up() {
+      // update the selected index
+      if (this._preselectedItemIdx <= 0) return;
+      this._preselectedItemIdx--; // render the component
+
+      this.render(); // get the selected item in the DOM
+
+      var $preselectedItem = this.$('.list-item--preselected');
+
+      if ($preselectedItem.offsetTop <= this._$list.scrollTop) {
+        this._$list.scrollTop = $preselectedItem.offsetTop;
+      } // dispatch an event
+
+
+      this.dispatch('up', this);
+    }
+    /**
+     * @name              down
+     * @type              Function
+     *
+     * This method can be called to select the next item in the list
+     *
+     * @since       1.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "down",
+    value: function down() {
+      // update the selected index
+      if (this._preselectedItemIdx === this._props.items.value.length - 1) return;
+      this._preselectedItemIdx++; // render the component
+
+      this.render(); // get the selected item in the DOM
+
+      var $preselectedItem = this.$('.list-item--preselected');
+
+      if ($preselectedItem.offsetTop > this._$list.scrollTop + this._$list.clientHeight - $preselectedItem.clientHeight) {
+        this._$list.scrollTop = $preselectedItem.offsetTop - this._$list.clientHeight + $preselectedItem.clientHeight;
+      } // dispatch an event
+
+
+      this.dispatch('down', this);
+    }
+    /**
+     * @name              filterItems
+     * @type              Function
+     *
+     * This method take a string and filter the items using the "settings.filterProps" array
+     *
+     * @param       {String}          filterString        The string to search in the items
+     *
+     * @since       1.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "filterItems",
+    value: function filterItems(filterString) {
+      return new Promise(resolve => {
+        // save the items if needed
+        if (!this._originalItems) {
+          this._originalItems = (0, _clone.default)(this._props.items.value, true);
+        } // search in original items
+
+
+        var newItems = this._originalItems.filter(item => {
+          for (var idx in this._settings.filter.properties) {
+            var prop = this._settings.filter.properties[idx];
+            if (!item[prop] || typeof item[prop] !== 'string') continue;
+            if (item[prop].includes(filterString)) return true;
+          }
+
+          return false;
+        }); // return the new items
+
+
+        resolve(newItems);
+      });
+    }
+    /**
+     * @name            highlightFilter
+     * @type            Function
+     *
+     * This method has to be used in your items template to highlight the words
+     * that correspond to the search
+     *
+     * @param       {String}          string          The string to highlight the search string
+     * @return      {String}                          The highlighted string
+     *
+     * @since       1.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "highlightFilter",
+    value: function highlightFilter(string) {
+      if (!this._filterString) return string;
+      return this.lit.html(_templateObject4(), this.lit.unsafeHTML(string.split(this._filterString).join("<span class=\"".concat(this.selector('list-item-highlight'), "\">___@@@___</span>")).split('___@@@___').join(this._filterString)));
+    }
+  }]);
+
+  return SFiltrableInputWebComponent;
+}((0, _SLitHtmlWebComponent.default)({
+  extends: HTMLInputElement,
+  name: 'SFiltrableInput'
+}));
+
+_defineProperty(SFiltrableInputWebComponent, "props", {
+  items: {
+    type: 'Array<Object>',
+    required: true,
+    physical: false,
+    default: [],
+    watch: true
+  },
+  itemValue: {
+    type: 'String',
+    default: 'title'
+  },
+  inputThrottle: {
+    type: 'Number',
+    default: 0,
+    watch: true
+  },
+  loading: {
+    type: 'Boolean',
+    required: false,
+    physical: true,
+    default: false,
+    watch: true
+  }
+});
+
+_defineProperty(SFiltrableInputWebComponent, "template", function (props, settings, lit) {
+  return lit.html(_templateObject5(), this, this.metas.dashName, props.items.value.map((item, i) => i < this._maxDisplayItems ? lit.html(_templateObject6(), this.metas.dashName, this._preselectedItemIdx === i ? this.selector('list-item--preselected') : '', this._selectedItemIdx === i ? this.selector('list-item--selected') : '', settings.template.item(item, settings, lit)) : ''));
+});
+
+var _default = SFiltrableInputWebComponent;
+exports.default = _default;
+module.exports = exports.default;
+
+/***/ }),
 
 /***/ "../../toolkits/sugar/js/array/proxy.js":
 /*!************************************************************************************************!*\
@@ -2812,6 +3384,703 @@ module.exports = exports.default;
 
 /***/ }),
 
+/***/ "../../toolkits/sugar/js/html/strToHtml.js":
+/*!***************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/js/html/strToHtml.js ***!
+  \***************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = strToHtml;
+/**
+ * @name        strToHtml
+ * @namespace           sugar.js.html
+ * @type      Function
+ *
+ * Return the html (dom) version of a string
+ *
+ * @param    {HTMLElement}    html    The string to convert to dom nodes
+ * @return    {HTMLElement}    The dom nodes representation of the passed string
+ *
+ * @example    js
+ * import strToHtml from '@coffeekraken/sugar/js/html/strToHtml'
+ * const myString = '<p>Hello World</p>'
+ * strToHtml(myString) // <p>Hello World</p>
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+function strToHtml(string) {
+  if (document !== undefined && document.createElement !== undefined) {
+    var cont = document.createElement('div');
+    cont.innerHTML = string;
+
+    if (cont.children.length === 1) {
+      return cont.children[0];
+    } else {
+      return cont;
+    }
+  }
+
+  return string;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/js/html/toString.js":
+/*!**************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/js/html/toString.js ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = toString;
+/**
+ * @name            toString
+ * @namespace           sugar.js.html
+ * @type      Function
+ *
+ * Return the string version of a dom node or the dom node and his children
+ *
+ * @param    {HTMLElement}    html    The HTMLElement to convert to string
+ * @param    {Boolean}    [deep=true]    Include or not his children
+ * @return    {String}    The string version of the dom node
+ *
+ * @example    js
+ * import toString from '@coffeekraken/sugar/js/string/toString'
+ * const myDomNode = document.querySelector('.my-dom-node')
+ * toString(myDomNode, false) // <div class="my-dom-node"></div>
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+function toString(html, deep) {
+  if (deep === void 0) {
+    deep = true;
+  }
+
+  if (document !== undefined && document.createElement !== undefined) {
+    var cont = document.createElement('div');
+    cont.appendChild(html.cloneNode(deep));
+    return cont.innerHTML;
+  }
+
+  return html;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/js/http/SRequest.js":
+/*!**************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/js/http/SRequest.js ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _axios = _interopRequireDefault(__webpack_require__(/*! axios */ "../../toolkits/sugar/node_modules/axios/index.js"));
+
+var _strToHtml = _interopRequireDefault(__webpack_require__(/*! ../html/strToHtml */ "../../toolkits/sugar/js/html/strToHtml.js"));
+
+var _toString = _interopRequireDefault(__webpack_require__(/*! ../html/toString */ "../../toolkits/sugar/js/html/toString.js"));
+
+var _SRequestConfig = _interopRequireDefault(__webpack_require__(/*! ./SRequestConfig */ "../../toolkits/sugar/js/http/SRequestConfig.js"));
+
+var _autoCast = _interopRequireDefault(__webpack_require__(/*! ../string/autoCast */ "../../toolkits/sugar/js/string/autoCast.js"));
+
+var _convert = _interopRequireDefault(__webpack_require__(/*! ../time/convert */ "../../toolkits/sugar/js/time/convert.js"));
+
+var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ../object/deepMerge */ "../../toolkits/sugar/js/object/deepMerge.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+/**
+ * @name 		                    SRequest
+ * @namespace           sugar.js.http
+ * @type                        Class
+ *
+ * Class that allows to simply handle ajax requests with ease.
+ * This class give some useful features like :
+ * - Promise support
+ * - Recursive requests
+ *
+ * @example 	js
+ * const request = new SRequest({
+ * 		url : 'api/...',
+ * 		method : 'GET',
+ * 		data : {
+ * 			myVar : 'myVal'
+ * 		}
+ * });
+ *
+ * // send and listen for data
+ * request.send().then((response) => {
+ * 		// do something with response here...
+ * }).catch((error) => {
+ * 		// something went wrong...
+ * });
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+var SRequest = /*#__PURE__*/function () {
+  /**
+   * @name                      _defaultRequestSettings
+   * @type                      {SRequestConfig}
+   * @private
+   *
+   * Store the request settings to use
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  /**
+   * @name                      _currentRequestSettings
+   * @type                      {SRequestConfig}
+   * @private
+   *
+   * Store the request settings to use
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  /**
+   * @name                      _requestsCount
+   * @type                      Integer
+   * @private
+   *
+   * Store how many requests have been sent
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  /**
+   * @name                              constructor
+   * @type                              Function
+   *
+   * Constructor
+   *
+   * @param           	{SRequestConfig|Object} 		            request 	            	The request object used to make ajax call
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  function SRequest(request) {
+    _classCallCheck(this, SRequest);
+
+    _defineProperty(this, "_defaultRequestSettings", {});
+
+    _defineProperty(this, "_currentRequestSettings", {});
+
+    _defineProperty(this, "_requestsCount", 0); // if the request is not an SRequestConfig, create it
+
+
+    if (!(request instanceof _SRequestConfig.default)) {
+      this._defaultRequestSettings = new _SRequestConfig.default(request);
+    } else {
+      this._defaultRequestSettings = request;
+    }
+  }
+  /**
+   * @name                      _onSuccess
+   * @type                      Function
+   * @private
+   *
+   * Callback when the request has been a success
+   *
+   * @param           {Object}              response                  The axios response object
+   *
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+
+  _createClass(SRequest, [{
+    key: "_onSuccess",
+    value: function _onSuccess(response) {
+      // init the final response
+      var finalResponse = response.data; // get the response content-type header
+
+      var contentType = response.headers['content-type'] || 'text/plain'; // try to get an hash in the settings url
+
+      var hash = this._currentRequestSettings.url.indexOf('#') !== -1 ? this._currentRequestSettings.url.split('#')[1] : false; // if a hash exist, check that we are in the browser to have access to the document and querySelector method
+
+      if (contentType === 'text/html' && hash !== false && document !== undefined && document.querySelector !== undefined) {
+        var $html = (0, _strToHtml.default)(response.data);
+
+        if ($html.id === hash) {
+          finalResponse = (0, _toString.default)($html);
+        } else {
+          var $part = $html.querySelector("#".concat(hash));
+
+          if ($part) {
+            finalResponse = (0, _toString.default)($part);
+          }
+        }
+      } else if (contentType === 'application/json') {
+        finalResponse = JSON.parse(response.data);
+      } // save the processed data in the response object
+
+
+      response.data = finalResponse; // remove some useless response properties
+
+      delete response.config;
+      delete response.request; // append the new response inside the responsesArray
+
+      this._responsesArray.push(response); // check if an "everyResponse" setting has been set
+
+
+      if (this._currentRequestSettings.everyResponse) {
+        // call the callback function
+        this._currentRequestSettings.everyResponse(Object.assign({}, response), this._requestsCount);
+      } // check if it was the last request or not
+
+
+      if (this._requestsCount >= this._currentRequestSettings.sendCount) {
+        // resolve the request session
+        this._resolve(this._responsesArray.length <= 1 ? this._responsesArray[0] : this._responsesArray);
+      } else {
+        // send a new request
+        this._send();
+      }
+    }
+    /**
+     * @name                      _onError
+     * @type                      Function
+     * @private
+     *
+     * Callback when the request return an error
+     *
+     * @param           {Object}              error                  The axios error object
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "_onError",
+    value: function _onError(error) {
+      // something has gone wrong with the request(s) so reject the session
+      this._reject(error);
+    }
+    /**
+     * @name                          _send
+     * @type                          Function
+     * @private
+     *
+     * Send the actual request using axios
+     *
+     * @param         {Object}                [requestSettings={}]            The request settings for this particular request
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "_send",
+    value: function _send(requestSettings) {
+      if (requestSettings === void 0) {
+        requestSettings = {};
+      } // update request count
+
+
+      this._requestsCount++; // process request settings
+
+      requestSettings = (0, _deepMerge.default)(this._defaultRequestSettings, requestSettings);
+
+      if (requestSettings.beforeSend) {
+        requestSettings = requestSettings.beforeSend(requestSettings, this._requestsCount);
+      } // save the current request settings
+
+
+      this._currentRequestSettings = Object.assign(requestSettings); // create the new axios ajax instance
+
+      (0, _axios.default)(requestSettings).then(this._onSuccess.bind(this)).catch(this._onError.bind(this));
+    }
+    /**
+     * @name                retry
+     * @type                Function
+     *
+     * Reset the request settings variables and relaunch the request
+     *
+     * @example           js
+     * myAjax.retry().then(response => {
+     *    // do something...
+     * });
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "retry",
+    value: function retry() {
+      return this.send();
+    }
+    /**
+     * @name              send
+     * @type              Function
+     *
+     * Send the request and return a promise that will be resolved once all the requests
+     * have been made or rejected if one of the requests has returned an error...
+     *
+     * @return 	      {Promise} 	          The promise through which you will be notified when data are here
+     *
+     * @example         js
+     * myAjax.send().then(response => {
+     *    // do something...
+     * }).catch(error => {
+     *    // do something...
+     * });
+     *
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "send",
+    value: function send(requestSettings) {
+      if (requestSettings === void 0) {
+        requestSettings = {};
+      } // return a promise
+
+
+      return new Promise((resolve, reject) => {
+        // // check if a cache exist and if we have the content
+        // if (this._settings.cache) {
+        //   const response = this._settings.cache.get(this._defaultRequestSettings.url);
+        //   if (response) {
+        //     resolve(response);
+        //     return;
+        //   }
+        // }
+        // reset the variables
+        this._requestsCount = 0; // init the data array holder
+
+        this._responsesArray = []; // set the resolve and reject callback in the instance
+
+        this._resolve = resolve;
+        this._reject = reject; // start requests
+
+        this._send(requestSettings);
+      });
+    }
+  }]);
+
+  return SRequest;
+}();
+
+exports.default = SRequest;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/js/http/SRequestConfig.js":
+/*!********************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/js/http/SRequestConfig.js ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _convert = _interopRequireDefault(__webpack_require__(/*! ../time/convert */ "../../toolkits/sugar/js/time/convert.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+/**
+ * @name 	              	SRequestConfig
+ * @namespace           sugar.js.http
+ * @type                  Class
+ *
+ * Class that represent an ajax request that will be passed to an SRequest instance.
+ * All the axios settings are supported by this class
+ *
+ * @example 	js
+ * const request = new SRequestConfig({
+ *  	url : '/api/...',
+ *  	method : 'GET',
+ *  	data : {
+ *  		myVar : 'myVal'
+ *  	}
+ * });
+ *
+ * @see       https://github.com/axios/axios
+ * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+ */
+
+
+var SRequestConfig =
+/**
+ * @name                    url
+ * @type                    String
+ * @default                 null
+ *
+ * The url to call
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name                      baseURL
+ * @type                      String
+ * @default                   null
+ *
+ * Specify the base url to call like "https://api.github.com/2.0" for example.
+ * If the "url" setting is absolute, this setting will don't have any impact on your request...
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name                      method
+ * @type                      String
+ * @values                    GET,DELETE,HEAD,OPTIONS,POST,PUT,PATCH
+ * @default                   GET
+ *
+ * The request method to use like GET, POST, DELETE or PUT
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name                      headers
+ * @type                      Object
+ * @default                   {}
+ *
+ * Specify some headers to add to the request
+ *
+ * @example             js
+ * {
+ *    'X-Requested-With': 'XMLHttpRequest'
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name                  params
+ * @type                  Object
+ * @default               {}
+ *
+ * Specify some params to be sent through the URL.
+ * Must be a plain object or a URLSearchParams object
+ *
+ * @example             js
+ * {
+ *    myCoolData: 'Hello world'
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name                      data
+ * @type                      String|Object|ArrayBuffer|ArrayBufferView|URLSearchParams|FormData|File|Blob|Stream|Buffer
+ * @default                   {}
+ *
+ * Specify some data you want to send with the request.
+ * This setting is available only for 'PUT', 'POST', and 'PATCH' requests...
+ *
+ * @example                 js
+ * {
+ *    firstName: 'Fred'
+ * }
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name                  timeout
+ * @type                  Number
+ * @default               0 (no timeout)
+ *
+ * Specify time to wait before aborting the actual request. If setted in number format, this will mean milliseconds.
+ * You can also specify this settings using string format like so: '2s', '1h', '4m', etc...
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name                      sendInterval
+ * @type                      Number
+ * @setting
+ * @default                   1000
+ *
+ * Set the interval time between each requests if the sendCount setting is specified.
+ * If setted in number format, this is taken as millisenconds. You can also set the interval
+ * in string format like '34s', '1h', '10ms', '2d', etc...
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name                        sendCount
+ * @type                        Number
+ * @setting
+ * @default                     1
+ *
+ * Set how many times the request has to be sent
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name                   everyResponse
+ * @type                    Function
+ * @default                 null
+ *
+ * Specify a function to call on every response. The parameters passed to the function are:
+ * - response {Object}: The actual request response
+ * - requestIdx {Number}: The request index
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name                  responseType
+ * @type                  String
+ * @values                arraybuffer, document, json, text, stream, blob (browser only)
+ * @default               json
+ *
+ * Indicates the type of data that the server will respond with
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+/**
+ * @name                        constructor
+ * @type                        Function
+ *
+ * Constructor
+ *
+ * @param 	      {Object} 	          params 		              The request params in object format
+ */
+function SRequestConfig(params) {
+  _classCallCheck(this, SRequestConfig);
+
+  _defineProperty(this, "url", null);
+
+  _defineProperty(this, "baseURL", null);
+
+  _defineProperty(this, "method", 'GET');
+
+  _defineProperty(this, "headers", {});
+
+  _defineProperty(this, "params", {});
+
+  _defineProperty(this, "data", {});
+
+  _defineProperty(this, "timeout", 0);
+
+  _defineProperty(this, "sendInterval", 1000);
+
+  _defineProperty(this, "sendCount", 1);
+
+  _defineProperty(this, "everyResponse", null);
+
+  _defineProperty(this, "responseType", 'json'); // process params that need something
+
+
+  if (params.timeout && typeof params.timeout === 'string') params.timeout = (0, _convert.default)(params.timeout, 'ms');
+  if (params.sendInterval && typeof params.sendInterval === 'string') params.sendInterval = (0, _convert.default)(params.sendInterval, 'ms'); // set the parameters
+
+  Object.assign(this, params);
+};
+
+exports.default = SRequestConfig;
+module.exports = exports.default;
+
+/***/ }),
+
 /***/ "../../toolkits/sugar/js/is/array.js":
 /*!*********************************************************************************************!*\
   !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/js/is/array.js ***!
@@ -5261,7 +6530,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
         stacks: '*',
         prefixStack: true,
         processor: null,
-        exclude: ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'],
+        // exclude: ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'],
+        exclude: [],
         filter: null
       }, settings);
       if (!(sourceSPromise instanceof SPromise) || !(destSPromise instanceof SPromise)) return; // listen for all on the source promise
@@ -8555,7 +9825,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = SLitHtmlWebComponent;
+exports.default = void 0;
 
 var _SWebComponent2 = _interopRequireDefault(__webpack_require__(/*! ./SWebComponent */ "../../toolkits/sugar/js/webcomponent/SWebComponent.js"));
 
@@ -8639,6 +9909,36 @@ function _createClass(Constructor, protoProps, staticProps) {
   if (protoProps) _defineProperties(Constructor.prototype, protoProps);
   if (staticProps) _defineProperties(Constructor, staticProps);
   return Constructor;
+}
+
+function _get(target, property, receiver) {
+  if (typeof Reflect !== "undefined" && Reflect.get) {
+    _get = Reflect.get;
+  } else {
+    _get = function _get(target, property, receiver) {
+      var base = _superPropBase(target, property);
+
+      if (!base) return;
+      var desc = Object.getOwnPropertyDescriptor(base, property);
+
+      if (desc.get) {
+        return desc.get.call(receiver);
+      }
+
+      return desc.value;
+    };
+  }
+
+  return _get(target, property, receiver || target);
+}
+
+function _superPropBase(object, property) {
+  while (!Object.prototype.hasOwnProperty.call(object, property)) {
+    object = _getPrototypeOf(object);
+    if (object === null) break;
+  }
+
+  return object;
 }
 
 function _inherits(subClass, superClass) {
@@ -8765,11 +10065,11 @@ function _defineProperty(obj, key, value) {
  */
 
 
-function SLitHtmlWebComponent(extend) {
+function SLitHtmlWebComponentGenerator(extendSettings) {
   var _class, _temp;
 
-  if (extend === void 0) {
-    extend = HTMLElement;
+  if (extendSettings === void 0) {
+    extendSettings = {};
   }
 
   return _temp = _class = /*#__PURE__*/function (_SWebComponent) {
@@ -8839,14 +10139,15 @@ function SLitHtmlWebComponent(extend) {
       });
 
       _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(function () {
-        var tpl = this.constructor.template(this._props, this, this._settings, this.lit);
+        var tplFn = this.constructor.template.bind(this);
+        var tpl = tplFn(this._props, this._settings, this.lit);
         (0, _litHtml.render)(tpl, this.$container);
       }, 50));
 
       _this.$container = document.createElement('div');
-      _this.$container.className = _this.className(); // wait until mounted to render the component first time
+      _this.$container.className = _this.selector(); // wait until mounted to render the component first time
 
-      _this.on('mounted{1}', () => {
+      _this.on('mounted:1', () => {
         // insert the container in the document
         (0, _insertAfter.default)(_this.$container, _assertThisInitialized(_this)); // render for the first time
 
@@ -8870,27 +10171,39 @@ function SLitHtmlWebComponent(extend) {
 
     _createClass(SLitHtmlWebComponent, [{
       key: "$",
-      value: function $(path) {
-        var $result = this.$container.querySelector(path);
 
-        if (!$result && !path.includes(".".concat(this.metas.dashName, "__"))) {
-          path = path.replace(/^\./, ".".concat(this.metas.dashName, "__"));
-          $result = this.$container.querySelector(path);
+      /**
+       * @name					$
+       * @type 					Function
+       *
+       * This method is a shortcut to the ```querySelector``` function
+       *
+       * @param         {String}        path      The selector path
+       * @param         {Object}      [settings={}]     An object of settings to configure your query
+       * @return        {HTMLElement}             The html element getted
+       *
+       * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
+       *
+       * @since 					2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      value: function $(path, settings) {
+        if (settings === void 0) {
+          settings = {};
         }
 
-        return $result;
+        settings = (0, _deepMerge.default)({
+          $root: this.$container
+        }, settings);
+        return _get(_getPrototypeOf(SLitHtmlWebComponent.prototype), "$", this).call(this, path, settings);
       }
     }, {
       key: "$$",
       value: function $$(path) {
-        var $result = this.$container.querySelectorAll(path);
-
-        if (!$result && !path.includes(".".concat(this.metas.dashName, "__"))) {
-          path = path.replace(/^\./, ".".concat(this.metas.dashName, "__"));
-          $result = this.$container.querySelectorAll(path);
-        }
-
-        return $result;
+        settings = (0, _deepMerge.default)({
+          $root: this.$container
+        }, settings);
+        return _get(_getPrototypeOf(SLitHtmlWebComponent.prototype), "$$", this).call(this, path, settings);
       }
       /**
        * @name          handleProp
@@ -8931,9 +10244,11 @@ function SLitHtmlWebComponent(extend) {
     }]);
 
     return SLitHtmlWebComponent;
-  }((0, _SWebComponent2.default)(extend)), _defineProperty(_class, "template", (props, component, html) => html(_templateObject())), _temp;
+  }((0, _SWebComponent2.default)(extendSettings)), _defineProperty(_class, "template", (props, settings, lit) => lit.html(_templateObject())), _temp;
 }
 
+var _default = SLitHtmlWebComponentGenerator;
+exports.default = _default;
 module.exports = exports.default;
 
 /***/ }),
@@ -8953,6 +10268,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _class2 = _interopRequireDefault(__webpack_require__(/*! ../is/class */ "../../toolkits/sugar/js/is/class.js"));
+
 var _deepMerge = _interopRequireDefault(__webpack_require__(/*! ../object/deepMerge */ "../../toolkits/sugar/js/object/deepMerge.js"));
 
 var _SPromise = _interopRequireDefault(__webpack_require__(/*! ../promise/SPromise */ "../../toolkits/sugar/js/promise/SPromise.js"));
@@ -8967,13 +10284,9 @@ var _camelize = _interopRequireDefault(__webpack_require__(/*! ../string/cameliz
 
 var _paramCase = _interopRequireDefault(__webpack_require__(/*! ../string/paramCase */ "../../toolkits/sugar/js/string/paramCase.js"));
 
-var _uncamelize = _interopRequireDefault(__webpack_require__(/*! ../string/uncamelize */ "../../toolkits/sugar/js/string/uncamelize.js"));
-
 var _validateValue = _interopRequireDefault(__webpack_require__(/*! ../validation/value/validateValue */ "../../toolkits/sugar/js/validation/value/validateValue.js"));
 
 var _watch = _interopRequireDefault(__webpack_require__(/*! ../object/watch */ "../../toolkits/sugar/js/object/watch.js"));
-
-var _register = __webpack_require__(/*! ./register */ "../../toolkits/sugar/js/webcomponent/register.js");
 
 var _uniqid = _interopRequireDefault(__webpack_require__(/*! ../string/uniqid */ "../../toolkits/sugar/js/string/uniqid.js"));
 
@@ -8982,6 +10295,12 @@ var _dispatch = _interopRequireDefault(__webpack_require__(/*! ../event/dispatch
 var _on = _interopRequireDefault(__webpack_require__(/*! ../event/on */ "../../toolkits/sugar/js/event/on.js"));
 
 var _SLitHtmlWebComponent = _interopRequireDefault(__webpack_require__(/*! ./SLitHtmlWebComponent */ "../../toolkits/sugar/js/webcomponent/SLitHtmlWebComponent.js"));
+
+var _htmlTagToHtmlClassMap = _interopRequireDefault(__webpack_require__(/*! ../html/htmlTagToHtmlClassMap */ "../../toolkits/sugar/js/html/htmlTagToHtmlClassMap.js"));
+
+var _uncamelize = _interopRequireDefault(__webpack_require__(/*! ../string/uncamelize */ "../../toolkits/sugar/js/string/uncamelize.js"));
+
+var _getHtmlClassFromTagName = _interopRequireDefault(__webpack_require__(/*! ../html/getHtmlClassFromTagName */ "../../toolkits/sugar/js/html/getHtmlClassFromTagName.js"));
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
@@ -9224,19 +10543,125 @@ var _sWebComponentPromise = new _SPromise.default({
   id: 'SWebComponentPromise'
 });
 
-function SWebComponent(extend) {
-  var _temp;
+var _sWebComponentStack = {};
 
-  if (extend === void 0) {
-    extend = HTMLElement;
+function SWebComponentGenerator(extendsSettings) {
+  var _class, _temp;
+
+  if (extendsSettings === void 0) {
+    extendsSettings = {};
   }
 
-  return _temp = /*#__PURE__*/function (_extend) {
-    _inherits(SWebComponent, _extend);
+  extendsSettings = (0, _deepMerge.default)({
+    extends: HTMLElement,
+    name: null
+  }, extendsSettings);
+  return _temp = _class = /*#__PURE__*/function (_extendsSettings$exte) {
+    _inherits(SWebComponent, _extendsSettings$exte);
 
     var _super = _createSuper(SWebComponent);
 
     _createClass(SWebComponent, null, [{
+      key: "getComponentMetas",
+
+      /**
+       * @name					getComponentMetas
+       * @type 					Function
+       * @static
+       *
+       * This static method return the component metas information like:
+       * - name: The camelcase component name
+       * - dashName: The component name in dash case
+       * - class: The component class
+       * - extends: The HTML class that the component extends
+       * - settings: An object of settings
+       *
+       * @param     {String}      name      The component name you want to get the metas of
+       *
+       * @since 					2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      value: function getComponentMetas(name) {
+        return _sWebComponentStack[(0, _uncamelize.default)(name)] || {};
+      }
+      /**
+       * @name					register
+       * @type 					Function
+       * @static
+       *
+       * This method allows you to register your component as a webcomponent recognized by the browser
+       *
+       * @param       {String}      [name=extendsSettings.name]     The component name in camelcase
+       * @param       {Class|Object}    [clsOrSettings={}]          Either the component class you want to register, either an object of settings
+       * @param       {Object}        [settings={}]                 An object of settings to configure your component
+       *
+       * @since 					2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "register",
+      value: function register(name, clsOrSettings, settings) {
+        if (name === void 0) {
+          name = extendsSettings.name;
+        }
+
+        if (clsOrSettings === void 0) {
+          clsOrSettings = {};
+        }
+
+        if (settings === void 0) {
+          settings = null;
+        }
+
+        if (!name) throw new Error("SWebComponent: You must define a name for your webcomponent by setting either a static \"name\" property on your class, of by passing a name as first parameter of the static \"define\" function...");
+        var cls = this;
+        if ((0, _class2.default)(clsOrSettings)) cls = clsOrSettings;else if (typeof clsOrSettings === 'object' && !settings) {
+          settings = clsOrSettings;
+        }
+        var extend = null;
+
+        for (var key in _htmlTagToHtmlClassMap.default) {
+          if (cls.prototype instanceof _htmlTagToHtmlClassMap.default[key]) {
+            extend = key;
+            break;
+          }
+        }
+
+        var uncamelizedName = (0, _uncamelize.default)(name);
+        cls.componentName = name;
+        _sWebComponentStack[uncamelizedName] = {
+          name,
+          dashName: uncamelizedName,
+          class: cls,
+          extends: extend,
+          settings
+        };
+
+        if (window.customElements) {
+          window.customElements.define(uncamelizedName, cls, {
+            extends: extend
+          });
+        } else if (document.registerElement) {
+          document.registerElement(uncamelizedName, {
+            prototype: cls.prototype,
+            extends: extend
+          });
+        } else {
+          throw "Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...";
+        }
+      }
+      /**
+       * @name          constructor
+       * @type          Function
+       * @constructor
+       *
+       * Constructor
+       *
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
       key: "observedAttributes",
 
       /**
@@ -9272,6 +10697,24 @@ function SWebComponent(extend) {
        */
 
       /**
+       * @name          _metas
+       * @type          Object
+       * @private
+       *
+       * Store the component metas:
+       * - name: The camelcase component name
+       * - dashName: The component name in dash case
+       * - class: The component class
+       * - extends: The HTML class that the component extends
+       * - settings: An object of settings
+       * - instance: The component instance (this),
+       * - $node: The html element (this)
+       *
+       * @since         2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+      /**
        * @name        observedAttributes
        * @type        Function
        * @get
@@ -9286,13 +10729,14 @@ function SWebComponent(extend) {
         return Object.keys(this.props).map(name => (0, _uncamelize.default)(name));
       }
       /**
-       * @name          constructor
-       * @type          Function
-       * @constructor
+       * @name					componentName
+       * @type 					String
+       * @static
        *
-       * Constructor
+       * Store the name of the component in camelcase
        *
-       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @since 					2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
 
     }]);
@@ -9307,7 +10751,7 @@ function SWebComponent(extend) {
       _classCallCheck(this, SWebComponent); // init base html element
 
 
-      _this = _super.call(this); // get component metas
+      _this = _super.call(this); // make sure the component has a componentName static prop
 
       _defineProperty(_assertThisInitialized(_this), "_settedAttributesStack", {});
 
@@ -9317,7 +10761,11 @@ function SWebComponent(extend) {
 
       _defineProperty(_assertThisInitialized(_this), "_settings", {});
 
-      _this._metas = (0, _register.getComponentMetas)(_this.constructor.componentName); // save the settings
+      _defineProperty(_assertThisInitialized(_this), "_metas", {});
+
+      if (!_this.constructor.componentName) throw "Your MUST define a static \"componentName\" camelcase property like \"SFiltrableInput\" for your component to work properly..."; // get component metas
+
+      _this._metas = _this.constructor.getComponentMetas(_this.constructor.componentName); // save the settings
 
       _this._settings = (0, _deepMerge.default)({
         id: _this.getAttribute('id') || (0, _uniqid.default)(),
@@ -9330,9 +10778,9 @@ function SWebComponent(extend) {
 
       var currentClassName = _this.getAttribute('class') || '';
 
-      _this.setAttribute('class', "".concat(currentClassName, " ").concat(_this.className("node")));
+      _this.setAttribute('class', "".concat(currentClassName, " ").concat(_this.selector("node")));
 
-      _this.on('mounted{1}', () => {
+      _this.on('mounted:1', () => {
         // dispatch a ready event
         if (!_this.lit) {
           // the Lit HTML class dispatch the ready event after having rendering the template the first time
@@ -9345,19 +10793,87 @@ function SWebComponent(extend) {
       return _this;
     }
     /**
-     * @name          metas
-     * @type          Object
-     * @get
+     * @name					$
+     * @type 					Function
      *
-     * This property store all the component metas informations like the name,
-     * the type, what it is extending, etc...
+     * This method is a shortcut to the ```querySelector``` function
      *
-     * @since       2.0.0
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @param         {String}        path      The selector path
+     * @param         {Object}      [settings={}]     An object of settings to configure your query
+     * @return        {HTMLElement}             The html element getted
+     *
+     * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
+     *
+     * @since 					2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
 
     _createClass(SWebComponent, [{
+      key: "$",
+      value: function $(path, settings) {
+        if (settings === void 0) {
+          settings = {};
+        }
+
+        var $root = settings.$root || this;
+        path = this.selector(path);
+        var $result = $root.querySelector(path);
+
+        if (!$result && !path.includes(".".concat(this.metas.dashName, "__"))) {
+          path = path.replace(/^\./, ".".concat(this.metas.dashName, "__"));
+          $result = $root.querySelector(path);
+        }
+
+        return $result;
+      }
+      /**
+       * @name					$$
+       * @type 					Function
+       *
+       * This method is a shortcut to the ```querySelectorAll``` function
+       *
+       * @param         {String}        path      The selector path
+       * @param         {Object}      [settings={}]     An object of settings to configure your query
+       * @return        {HTMLElement}             The html element(s) getted
+       *
+       * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
+       *
+       * @since 					2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "$$",
+      value: function $$(path, settings) {
+        if (settings === void 0) {
+          settings = {};
+        }
+
+        var $root = settings.$root || this;
+        path = this.selector(path);
+        var $result = $root.querySelectorAll(path);
+
+        if (!$result && !path.includes(".".concat(this.metas.dashName, "__"))) {
+          path = path.replace(/^\./, ".".concat(this.metas.dashName, "__"));
+          $result = $root.querySelectorAll(path);
+        }
+
+        return $result;
+      }
+      /**
+       * @name          metas
+       * @type          Object
+       * @get
+       *
+       * This property store all the component metas informations like the name,
+       * the type, what it is extending, etc...
+       *
+       * @since       2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
       key: "_mount",
 
       /**
@@ -9490,6 +11006,25 @@ function SWebComponent(extend) {
       key: "on",
       value: function on(event, callback) {
         return this._promise.on(event, callback);
+      }
+      /**
+       * @name          off
+       * @type          Function
+       *
+       * Method used to unsubscribe to a previously subscribed event
+       *
+       * @param       {String}        event         The event you want to unsubscribe for
+       * @param       {Function}      callback      The callback function that has to be called
+       * @return      {SPromise}                    The SPromise used in this instance
+       *
+       * @since       2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "off",
+      value: function off(event, callback) {
+        return this._promise.off(event, callback);
       }
       /**
        * @name          dispatch
@@ -9635,10 +11170,10 @@ function SWebComponent(extend) {
         this.prop(attrName, newValue);
       }
       /**
-       * @name            className
+       * @name            selector
        * @type            Function
        *
-       * This method return you a className generated depending on the
+       * This method return you a selector generated depending on the
        * webcomponent name
        *
        * @param       {String}      cls         The class name to use
@@ -9649,25 +11184,33 @@ function SWebComponent(extend) {
        */
 
     }, {
-      key: "className",
-      value: function className(cls) {
+      key: "selector",
+      value: function selector(cls) {
         if (cls === void 0) {
           cls = '';
         }
 
-        var originalName = (0, _uncamelize.default)(this.constructor.name).replace('-web-component', '');
+        if (cls.includes(this.metas.dashName)) {
+          return cls;
+        }
+
         var hasDot = cls.match(/^\./);
         cls = cls.replace('.', '');
         var finalCls;
         if (cls.match(/^(--)/)) finalCls = "".concat(this.metas.dashName).concat(cls);else if (cls !== '') finalCls = "".concat(this.metas.dashName, "__").concat(cls);else finalCls = this.metas.dashName;
-
-        if (cls.match(/^(--)/)) {
-          finalCls = "".concat(hasDot ? '.' : '').concat(originalName, "-bare").concat(cls, " ").concat(hasDot ? '.' : '').concat(finalCls);
-        } else if (cls !== '') {
-          finalCls = "".concat(hasDot ? '.' : '').concat(originalName, "-bare__").concat(cls, " ").concat(hasDot ? '.' : '').concat(finalCls);
-        } else {
-          finalCls = "".concat(hasDot ? '.' : '').concat(originalName, "-bare ").concat(hasDot ? '.' : '').concat(finalCls);
-        }
+        if (hasDot) finalCls = ".".concat(finalCls); // if (cls.match(/^(--)/)) {
+        //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare${cls} ${
+        //     hasDot ? '.' : ''
+        //   }${finalCls}`;
+        // } else if (cls !== '') {
+        //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare__${cls} ${
+        //     hasDot ? '.' : ''
+        //   }${finalCls}`;
+        // } else {
+        //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare ${
+        //     hasDot ? '.' : ''
+        //   }${finalCls}`;
+        // }
 
         return finalCls;
       }
@@ -9820,129 +11363,1846 @@ function SWebComponent(extend) {
     }]);
 
     return SWebComponent;
-  }(extend), _temp;
-}
-/**
- * @name        on
- * @type        Function
- * @static
- *
- * This method can be used to subscribe to some SWebComponent instances events
- * like "SFiltrableInput.ready", etc...
- *
- * @param       {String}      name        The event name to subscribe to
- * @param       {Function}    callback    The callback function to call
- * @return      {Function}                A function that you can use to unsubscribe to this particular event
- *
- * @since       2.0.0
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
+  }(extendsSettings.extends), _defineProperty(_class, "componentName", extendsSettings.name), _temp;
+} // /**
+//  * @name        on
+//  * @type        Function
+//  * @static
+//  *
+//  * This method can be used to subscribe to some SWebComponent instances events
+//  * like "SFiltrableInput.ready", etc...
+//  *
+//  * @param       {String}      name        The event name to subscribe to
+//  * @param       {Function}    callback    The callback function to call
+//  * @return      {Function}                A function that you can use to unsubscribe to this particular event
+//  *
+//  * @since       2.0.0
+//  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//  */
+// SWebComponentGenerator.on = function (name, callback) {
+//   _sWebComponentPromise.on(name, callback);
+//   return () => {
+//     _sWebComponentPromise.off(name, callback);
+//   };
+// };
 
 
-SWebComponent.on = (name, callback) => {
-  _sWebComponentPromise.on(name, callback);
-
-  return () => {
-    _sWebComponentPromise.off(name, callback);
-  };
-};
-
-var _default = SWebComponent;
+var _default = SWebComponentGenerator;
 exports.default = _default;
 module.exports = exports.default;
 
 /***/ }),
 
-/***/ "../../toolkits/sugar/js/webcomponent/register.js":
+/***/ "../../toolkits/sugar/node_modules/axios/index.js":
 /*!**********************************************************************************************************!*\
-  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/js/webcomponent/register.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/index.js ***!
   \**********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! ./lib/axios */ "../../toolkits/sugar/node_modules/axios/lib/axios.js");
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/adapters/xhr.js":
+/*!*********************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/adapters/xhr.js ***!
+  \*********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.define = define;
-exports.getComponentMetas = getComponentMetas;
-Object.defineProperty(exports, "SWebComponent", {
-  enumerable: true,
-  get: function get() {
-    return _SWebComponent.default;
+var utils = __webpack_require__(/*! ./../utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+var settle = __webpack_require__(/*! ./../core/settle */ "../../toolkits/sugar/node_modules/axios/lib/core/settle.js");
+var buildURL = __webpack_require__(/*! ./../helpers/buildURL */ "../../toolkits/sugar/node_modules/axios/lib/helpers/buildURL.js");
+var buildFullPath = __webpack_require__(/*! ../core/buildFullPath */ "../../toolkits/sugar/node_modules/axios/lib/core/buildFullPath.js");
+var parseHeaders = __webpack_require__(/*! ./../helpers/parseHeaders */ "../../toolkits/sugar/node_modules/axios/lib/helpers/parseHeaders.js");
+var isURLSameOrigin = __webpack_require__(/*! ./../helpers/isURLSameOrigin */ "../../toolkits/sugar/node_modules/axios/lib/helpers/isURLSameOrigin.js");
+var createError = __webpack_require__(/*! ../core/createError */ "../../toolkits/sugar/node_modules/axios/lib/core/createError.js");
+
+module.exports = function xhrAdapter(config) {
+  return new Promise(function dispatchXhrRequest(resolve, reject) {
+    var requestData = config.data;
+    var requestHeaders = config.headers;
+
+    if (utils.isFormData(requestData)) {
+      delete requestHeaders['Content-Type']; // Let the browser set it
+    }
+
+    var request = new XMLHttpRequest();
+
+    // HTTP basic authentication
+    if (config.auth) {
+      var username = config.auth.username || '';
+      var password = config.auth.password || '';
+      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+    }
+
+    var fullPath = buildFullPath(config.baseURL, config.url);
+    request.open(config.method.toUpperCase(), buildURL(fullPath, config.params, config.paramsSerializer), true);
+
+    // Set the request timeout in MS
+    request.timeout = config.timeout;
+
+    // Listen for ready state
+    request.onreadystatechange = function handleLoad() {
+      if (!request || request.readyState !== 4) {
+        return;
+      }
+
+      // The request errored out and we didn't get a response, this will be
+      // handled by onerror instead
+      // With one exception: request that using file: protocol, most browsers
+      // will return status as 0 even though it's a successful request
+      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+        return;
+      }
+
+      // Prepare the response
+      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+      var response = {
+        data: responseData,
+        status: request.status,
+        statusText: request.statusText,
+        headers: responseHeaders,
+        config: config,
+        request: request
+      };
+
+      settle(resolve, reject, response);
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle browser request cancellation (as opposed to a manual cancellation)
+    request.onabort = function handleAbort() {
+      if (!request) {
+        return;
+      }
+
+      reject(createError('Request aborted', config, 'ECONNABORTED', request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle low level network errors
+    request.onerror = function handleError() {
+      // Real errors are hidden from us by the browser
+      // onerror should only fire if it's a network error
+      reject(createError('Network Error', config, null, request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Handle timeout
+    request.ontimeout = function handleTimeout() {
+      var timeoutErrorMessage = 'timeout of ' + config.timeout + 'ms exceeded';
+      if (config.timeoutErrorMessage) {
+        timeoutErrorMessage = config.timeoutErrorMessage;
+      }
+      reject(createError(timeoutErrorMessage, config, 'ECONNABORTED',
+        request));
+
+      // Clean up request
+      request = null;
+    };
+
+    // Add xsrf header
+    // This is only done if running in a standard browser environment.
+    // Specifically not if we're in a web worker, or react-native.
+    if (utils.isStandardBrowserEnv()) {
+      var cookies = __webpack_require__(/*! ./../helpers/cookies */ "../../toolkits/sugar/node_modules/axios/lib/helpers/cookies.js");
+
+      // Add xsrf header
+      var xsrfValue = (config.withCredentials || isURLSameOrigin(fullPath)) && config.xsrfCookieName ?
+        cookies.read(config.xsrfCookieName) :
+        undefined;
+
+      if (xsrfValue) {
+        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+      }
+    }
+
+    // Add headers to the request
+    if ('setRequestHeader' in request) {
+      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+          // Remove Content-Type if data is undefined
+          delete requestHeaders[key];
+        } else {
+          // Otherwise add header to the request
+          request.setRequestHeader(key, val);
+        }
+      });
+    }
+
+    // Add withCredentials to request if needed
+    if (!utils.isUndefined(config.withCredentials)) {
+      request.withCredentials = !!config.withCredentials;
+    }
+
+    // Add responseType to request if needed
+    if (config.responseType) {
+      try {
+        request.responseType = config.responseType;
+      } catch (e) {
+        // Expected DOMException thrown by browsers not compatible XMLHttpRequest Level 2.
+        // But, this can be suppressed for 'json' type as it can be parsed by default 'transformResponse' function.
+        if (config.responseType !== 'json') {
+          throw e;
+        }
+      }
+    }
+
+    // Handle progress if needed
+    if (typeof config.onDownloadProgress === 'function') {
+      request.addEventListener('progress', config.onDownloadProgress);
+    }
+
+    // Not all browsers support upload events
+    if (typeof config.onUploadProgress === 'function' && request.upload) {
+      request.upload.addEventListener('progress', config.onUploadProgress);
+    }
+
+    if (config.cancelToken) {
+      // Handle cancellation
+      config.cancelToken.promise.then(function onCanceled(cancel) {
+        if (!request) {
+          return;
+        }
+
+        request.abort();
+        reject(cancel);
+        // Clean up request
+        request = null;
+      });
+    }
+
+    if (requestData === undefined) {
+      requestData = null;
+    }
+
+    // Send the request
+    request.send(requestData);
+  });
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/axios.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/axios.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+var bind = __webpack_require__(/*! ./helpers/bind */ "../../toolkits/sugar/node_modules/axios/lib/helpers/bind.js");
+var Axios = __webpack_require__(/*! ./core/Axios */ "../../toolkits/sugar/node_modules/axios/lib/core/Axios.js");
+var mergeConfig = __webpack_require__(/*! ./core/mergeConfig */ "../../toolkits/sugar/node_modules/axios/lib/core/mergeConfig.js");
+var defaults = __webpack_require__(/*! ./defaults */ "../../toolkits/sugar/node_modules/axios/lib/defaults.js");
+
+/**
+ * Create an instance of Axios
+ *
+ * @param {Object} defaultConfig The default config for the instance
+ * @return {Axios} A new instance of Axios
+ */
+function createInstance(defaultConfig) {
+  var context = new Axios(defaultConfig);
+  var instance = bind(Axios.prototype.request, context);
+
+  // Copy axios.prototype to instance
+  utils.extend(instance, Axios.prototype, context);
+
+  // Copy context to instance
+  utils.extend(instance, context);
+
+  return instance;
+}
+
+// Create the default instance to be exported
+var axios = createInstance(defaults);
+
+// Expose Axios class to allow class inheritance
+axios.Axios = Axios;
+
+// Factory for creating new instances
+axios.create = function create(instanceConfig) {
+  return createInstance(mergeConfig(axios.defaults, instanceConfig));
+};
+
+// Expose Cancel & CancelToken
+axios.Cancel = __webpack_require__(/*! ./cancel/Cancel */ "../../toolkits/sugar/node_modules/axios/lib/cancel/Cancel.js");
+axios.CancelToken = __webpack_require__(/*! ./cancel/CancelToken */ "../../toolkits/sugar/node_modules/axios/lib/cancel/CancelToken.js");
+axios.isCancel = __webpack_require__(/*! ./cancel/isCancel */ "../../toolkits/sugar/node_modules/axios/lib/cancel/isCancel.js");
+
+// Expose all/spread
+axios.all = function all(promises) {
+  return Promise.all(promises);
+};
+axios.spread = __webpack_require__(/*! ./helpers/spread */ "../../toolkits/sugar/node_modules/axios/lib/helpers/spread.js");
+
+module.exports = axios;
+
+// Allow use of default import syntax in TypeScript
+module.exports.default = axios;
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/cancel/Cancel.js":
+/*!**********************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/cancel/Cancel.js ***!
+  \**********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * A `Cancel` is an object that is thrown when an operation is canceled.
+ *
+ * @class
+ * @param {string=} message The message.
+ */
+function Cancel(message) {
+  this.message = message;
+}
+
+Cancel.prototype.toString = function toString() {
+  return 'Cancel' + (this.message ? ': ' + this.message : '');
+};
+
+Cancel.prototype.__CANCEL__ = true;
+
+module.exports = Cancel;
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/cancel/CancelToken.js":
+/*!***************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/cancel/CancelToken.js ***!
+  \***************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Cancel = __webpack_require__(/*! ./Cancel */ "../../toolkits/sugar/node_modules/axios/lib/cancel/Cancel.js");
+
+/**
+ * A `CancelToken` is an object that can be used to request cancellation of an operation.
+ *
+ * @class
+ * @param {Function} executor The executor function.
+ */
+function CancelToken(executor) {
+  if (typeof executor !== 'function') {
+    throw new TypeError('executor must be a function.');
   }
-});
-Object.defineProperty(exports, "SLitHtmlWebComponent", {
-  enumerable: true,
-  get: function get() {
-    return _SLitHtmlWebComponent.default;
+
+  var resolvePromise;
+  this.promise = new Promise(function promiseExecutor(resolve) {
+    resolvePromise = resolve;
+  });
+
+  var token = this;
+  executor(function cancel(message) {
+    if (token.reason) {
+      // Cancellation has already been requested
+      return;
+    }
+
+    token.reason = new Cancel(message);
+    resolvePromise(token.reason);
+  });
+}
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+CancelToken.prototype.throwIfRequested = function throwIfRequested() {
+  if (this.reason) {
+    throw this.reason;
   }
-});
-exports.stack = void 0;
+};
 
-var _SWebComponent = _interopRequireDefault(__webpack_require__(/*! ./SWebComponent */ "../../toolkits/sugar/js/webcomponent/SWebComponent.js"));
+/**
+ * Returns an object that contains a new `CancelToken` and a function that, when called,
+ * cancels the `CancelToken`.
+ */
+CancelToken.source = function source() {
+  var cancel;
+  var token = new CancelToken(function executor(c) {
+    cancel = c;
+  });
+  return {
+    token: token,
+    cancel: cancel
+  };
+};
 
-var _SLitHtmlWebComponent = _interopRequireDefault(__webpack_require__(/*! ./SLitHtmlWebComponent */ "../../toolkits/sugar/js/webcomponent/SLitHtmlWebComponent.js"));
+module.exports = CancelToken;
 
-var _getHtmlClassFromTagName = _interopRequireDefault(__webpack_require__(/*! ../html/getHtmlClassFromTagName */ "../../toolkits/sugar/js/html/getHtmlClassFromTagName.js"));
 
-var _uncamelize = _interopRequireDefault(__webpack_require__(/*! ../string/uncamelize */ "../../toolkits/sugar/js/string/uncamelize.js"));
+/***/ }),
 
-var _htmlTagToHtmlClassMap = _interopRequireDefault(__webpack_require__(/*! ../html/htmlTagToHtmlClassMap */ "../../toolkits/sugar/js/html/htmlTagToHtmlClassMap.js"));
+/***/ "../../toolkits/sugar/node_modules/axios/lib/cancel/isCancel.js":
+/*!************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/cancel/isCancel.js ***!
+  \************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    default: obj
+"use strict";
+
+
+module.exports = function isCancel(value) {
+  return !!(value && value.__CANCEL__);
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/core/Axios.js":
+/*!*******************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/core/Axios.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+var buildURL = __webpack_require__(/*! ../helpers/buildURL */ "../../toolkits/sugar/node_modules/axios/lib/helpers/buildURL.js");
+var InterceptorManager = __webpack_require__(/*! ./InterceptorManager */ "../../toolkits/sugar/node_modules/axios/lib/core/InterceptorManager.js");
+var dispatchRequest = __webpack_require__(/*! ./dispatchRequest */ "../../toolkits/sugar/node_modules/axios/lib/core/dispatchRequest.js");
+var mergeConfig = __webpack_require__(/*! ./mergeConfig */ "../../toolkits/sugar/node_modules/axios/lib/core/mergeConfig.js");
+
+/**
+ * Create a new instance of Axios
+ *
+ * @param {Object} instanceConfig The default config for the instance
+ */
+function Axios(instanceConfig) {
+  this.defaults = instanceConfig;
+  this.interceptors = {
+    request: new InterceptorManager(),
+    response: new InterceptorManager()
   };
 }
 
-var _SWebComponentStack = {};
-exports.stack = _SWebComponentStack;
-
-function getComponentMetas(name) {
-  return _SWebComponentStack[(0, _uncamelize.default)(name)] || {};
-}
-
-function define(name, cls, settings) {
-  if (settings === void 0) {
-    settings = {};
+/**
+ * Dispatch a request
+ *
+ * @param {Object} config The config specific for this request (merged with this.defaults)
+ */
+Axios.prototype.request = function request(config) {
+  /*eslint no-param-reassign:0*/
+  // Allow for axios('example/url'[, config]) a la fetch API
+  if (typeof config === 'string') {
+    config = arguments[1] || {};
+    config.url = arguments[0];
+  } else {
+    config = config || {};
   }
 
-  if (!name) throw new Error("SWebComponent: You must define a name for your webcomponent by setting either a static \"name\" property on your class, of by passing a name as first parameter of the static \"define\" function...");
-  var extend = null;
+  config = mergeConfig(this.defaults, config);
 
-  for (var key in _htmlTagToHtmlClassMap.default) {
-    if (cls.prototype instanceof _htmlTagToHtmlClassMap.default[key]) {
-      extend = key;
-      break;
+  // Set config.method
+  if (config.method) {
+    config.method = config.method.toLowerCase();
+  } else if (this.defaults.method) {
+    config.method = this.defaults.method.toLowerCase();
+  } else {
+    config.method = 'get';
+  }
+
+  // Hook up interceptors middleware
+  var chain = [dispatchRequest, undefined];
+  var promise = Promise.resolve(config);
+
+  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+    chain.unshift(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+    chain.push(interceptor.fulfilled, interceptor.rejected);
+  });
+
+  while (chain.length) {
+    promise = promise.then(chain.shift(), chain.shift());
+  }
+
+  return promise;
+};
+
+Axios.prototype.getUri = function getUri(config) {
+  config = mergeConfig(this.defaults, config);
+  return buildURL(config.url, config.params, config.paramsSerializer).replace(/^\?/, '');
+};
+
+// Provide aliases for supported request methods
+utils.forEach(['delete', 'get', 'head', 'options'], function forEachMethodNoData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, config) {
+    return this.request(utils.merge(config || {}, {
+      method: method,
+      url: url
+    }));
+  };
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  /*eslint func-names:0*/
+  Axios.prototype[method] = function(url, data, config) {
+    return this.request(utils.merge(config || {}, {
+      method: method,
+      url: url,
+      data: data
+    }));
+  };
+});
+
+module.exports = Axios;
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/core/InterceptorManager.js":
+/*!********************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/core/InterceptorManager.js ***!
+  \********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+
+function InterceptorManager() {
+  this.handlers = [];
+}
+
+/**
+ * Add a new interceptor to the stack
+ *
+ * @param {Function} fulfilled The function to handle `then` for a `Promise`
+ * @param {Function} rejected The function to handle `reject` for a `Promise`
+ *
+ * @return {Number} An ID used to remove interceptor later
+ */
+InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+  this.handlers.push({
+    fulfilled: fulfilled,
+    rejected: rejected
+  });
+  return this.handlers.length - 1;
+};
+
+/**
+ * Remove an interceptor from the stack
+ *
+ * @param {Number} id The ID that was returned by `use`
+ */
+InterceptorManager.prototype.eject = function eject(id) {
+  if (this.handlers[id]) {
+    this.handlers[id] = null;
+  }
+};
+
+/**
+ * Iterate over all the registered interceptors
+ *
+ * This method is particularly useful for skipping over any
+ * interceptors that may have become `null` calling `eject`.
+ *
+ * @param {Function} fn The function to call for each interceptor
+ */
+InterceptorManager.prototype.forEach = function forEach(fn) {
+  utils.forEach(this.handlers, function forEachHandler(h) {
+    if (h !== null) {
+      fn(h);
+    }
+  });
+};
+
+module.exports = InterceptorManager;
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/core/buildFullPath.js":
+/*!***************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/core/buildFullPath.js ***!
+  \***************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var isAbsoluteURL = __webpack_require__(/*! ../helpers/isAbsoluteURL */ "../../toolkits/sugar/node_modules/axios/lib/helpers/isAbsoluteURL.js");
+var combineURLs = __webpack_require__(/*! ../helpers/combineURLs */ "../../toolkits/sugar/node_modules/axios/lib/helpers/combineURLs.js");
+
+/**
+ * Creates a new URL by combining the baseURL with the requestedURL,
+ * only when the requestedURL is not already an absolute URL.
+ * If the requestURL is absolute, this function returns the requestedURL untouched.
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} requestedURL Absolute or relative URL to combine
+ * @returns {string} The combined full path
+ */
+module.exports = function buildFullPath(baseURL, requestedURL) {
+  if (baseURL && !isAbsoluteURL(requestedURL)) {
+    return combineURLs(baseURL, requestedURL);
+  }
+  return requestedURL;
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/core/createError.js":
+/*!*************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/core/createError.js ***!
+  \*************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var enhanceError = __webpack_require__(/*! ./enhanceError */ "../../toolkits/sugar/node_modules/axios/lib/core/enhanceError.js");
+
+/**
+ * Create an Error with the specified message, config, error code, request and response.
+ *
+ * @param {string} message The error message.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The created error.
+ */
+module.exports = function createError(message, config, code, request, response) {
+  var error = new Error(message);
+  return enhanceError(error, config, code, request, response);
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/core/dispatchRequest.js":
+/*!*****************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/core/dispatchRequest.js ***!
+  \*****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+var transformData = __webpack_require__(/*! ./transformData */ "../../toolkits/sugar/node_modules/axios/lib/core/transformData.js");
+var isCancel = __webpack_require__(/*! ../cancel/isCancel */ "../../toolkits/sugar/node_modules/axios/lib/cancel/isCancel.js");
+var defaults = __webpack_require__(/*! ../defaults */ "../../toolkits/sugar/node_modules/axios/lib/defaults.js");
+
+/**
+ * Throws a `Cancel` if cancellation has been requested.
+ */
+function throwIfCancellationRequested(config) {
+  if (config.cancelToken) {
+    config.cancelToken.throwIfRequested();
+  }
+}
+
+/**
+ * Dispatch a request to the server using the configured adapter.
+ *
+ * @param {object} config The config that is to be used for the request
+ * @returns {Promise} The Promise to be fulfilled
+ */
+module.exports = function dispatchRequest(config) {
+  throwIfCancellationRequested(config);
+
+  // Ensure headers exist
+  config.headers = config.headers || {};
+
+  // Transform request data
+  config.data = transformData(
+    config.data,
+    config.headers,
+    config.transformRequest
+  );
+
+  // Flatten headers
+  config.headers = utils.merge(
+    config.headers.common || {},
+    config.headers[config.method] || {},
+    config.headers
+  );
+
+  utils.forEach(
+    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
+    function cleanHeaderConfig(method) {
+      delete config.headers[method];
+    }
+  );
+
+  var adapter = config.adapter || defaults.adapter;
+
+  return adapter(config).then(function onAdapterResolution(response) {
+    throwIfCancellationRequested(config);
+
+    // Transform response data
+    response.data = transformData(
+      response.data,
+      response.headers,
+      config.transformResponse
+    );
+
+    return response;
+  }, function onAdapterRejection(reason) {
+    if (!isCancel(reason)) {
+      throwIfCancellationRequested(config);
+
+      // Transform response data
+      if (reason && reason.response) {
+        reason.response.data = transformData(
+          reason.response.data,
+          reason.response.headers,
+          config.transformResponse
+        );
+      }
+    }
+
+    return Promise.reject(reason);
+  });
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/core/enhanceError.js":
+/*!**************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/core/enhanceError.js ***!
+  \**************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Update an Error with the specified config, error code, and response.
+ *
+ * @param {Error} error The error to update.
+ * @param {Object} config The config.
+ * @param {string} [code] The error code (for example, 'ECONNABORTED').
+ * @param {Object} [request] The request.
+ * @param {Object} [response] The response.
+ * @returns {Error} The error.
+ */
+module.exports = function enhanceError(error, config, code, request, response) {
+  error.config = config;
+  if (code) {
+    error.code = code;
+  }
+
+  error.request = request;
+  error.response = response;
+  error.isAxiosError = true;
+
+  error.toJSON = function() {
+    return {
+      // Standard
+      message: this.message,
+      name: this.name,
+      // Microsoft
+      description: this.description,
+      number: this.number,
+      // Mozilla
+      fileName: this.fileName,
+      lineNumber: this.lineNumber,
+      columnNumber: this.columnNumber,
+      stack: this.stack,
+      // Axios
+      config: this.config,
+      code: this.code
+    };
+  };
+  return error;
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/core/mergeConfig.js":
+/*!*************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/core/mergeConfig.js ***!
+  \*************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ../utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+
+/**
+ * Config-specific merge-function which creates a new config-object
+ * by merging two configuration objects together.
+ *
+ * @param {Object} config1
+ * @param {Object} config2
+ * @returns {Object} New object resulting from merging config2 to config1
+ */
+module.exports = function mergeConfig(config1, config2) {
+  // eslint-disable-next-line no-param-reassign
+  config2 = config2 || {};
+  var config = {};
+
+  var valueFromConfig2Keys = ['url', 'method', 'params', 'data'];
+  var mergeDeepPropertiesKeys = ['headers', 'auth', 'proxy'];
+  var defaultToConfig2Keys = [
+    'baseURL', 'url', 'transformRequest', 'transformResponse', 'paramsSerializer',
+    'timeout', 'withCredentials', 'adapter', 'responseType', 'xsrfCookieName',
+    'xsrfHeaderName', 'onUploadProgress', 'onDownloadProgress',
+    'maxContentLength', 'validateStatus', 'maxRedirects', 'httpAgent',
+    'httpsAgent', 'cancelToken', 'socketPath'
+  ];
+
+  utils.forEach(valueFromConfig2Keys, function valueFromConfig2(prop) {
+    if (typeof config2[prop] !== 'undefined') {
+      config[prop] = config2[prop];
+    }
+  });
+
+  utils.forEach(mergeDeepPropertiesKeys, function mergeDeepProperties(prop) {
+    if (utils.isObject(config2[prop])) {
+      config[prop] = utils.deepMerge(config1[prop], config2[prop]);
+    } else if (typeof config2[prop] !== 'undefined') {
+      config[prop] = config2[prop];
+    } else if (utils.isObject(config1[prop])) {
+      config[prop] = utils.deepMerge(config1[prop]);
+    } else if (typeof config1[prop] !== 'undefined') {
+      config[prop] = config1[prop];
+    }
+  });
+
+  utils.forEach(defaultToConfig2Keys, function defaultToConfig2(prop) {
+    if (typeof config2[prop] !== 'undefined') {
+      config[prop] = config2[prop];
+    } else if (typeof config1[prop] !== 'undefined') {
+      config[prop] = config1[prop];
+    }
+  });
+
+  var axiosKeys = valueFromConfig2Keys
+    .concat(mergeDeepPropertiesKeys)
+    .concat(defaultToConfig2Keys);
+
+  var otherKeys = Object
+    .keys(config2)
+    .filter(function filterAxiosKeys(key) {
+      return axiosKeys.indexOf(key) === -1;
+    });
+
+  utils.forEach(otherKeys, function otherKeysDefaultToConfig2(prop) {
+    if (typeof config2[prop] !== 'undefined') {
+      config[prop] = config2[prop];
+    } else if (typeof config1[prop] !== 'undefined') {
+      config[prop] = config1[prop];
+    }
+  });
+
+  return config;
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/core/settle.js":
+/*!********************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/core/settle.js ***!
+  \********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var createError = __webpack_require__(/*! ./createError */ "../../toolkits/sugar/node_modules/axios/lib/core/createError.js");
+
+/**
+ * Resolve or reject a Promise based on response status.
+ *
+ * @param {Function} resolve A function that resolves the promise.
+ * @param {Function} reject A function that rejects the promise.
+ * @param {object} response The response.
+ */
+module.exports = function settle(resolve, reject, response) {
+  var validateStatus = response.config.validateStatus;
+  if (!validateStatus || validateStatus(response.status)) {
+    resolve(response);
+  } else {
+    reject(createError(
+      'Request failed with status code ' + response.status,
+      response.config,
+      null,
+      response.request,
+      response
+    ));
+  }
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/core/transformData.js":
+/*!***************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/core/transformData.js ***!
+  \***************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+
+/**
+ * Transform the data for a request or a response
+ *
+ * @param {Object|String} data The data to be transformed
+ * @param {Array} headers The headers for the request or response
+ * @param {Array|Function} fns A single function or Array of functions
+ * @returns {*} The resulting transformed data
+ */
+module.exports = function transformData(data, headers, fns) {
+  /*eslint no-param-reassign:0*/
+  utils.forEach(fns, function transform(fn) {
+    data = fn(data, headers);
+  });
+
+  return data;
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/defaults.js":
+/*!*****************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/defaults.js ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var utils = __webpack_require__(/*! ./utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+var normalizeHeaderName = __webpack_require__(/*! ./helpers/normalizeHeaderName */ "../../toolkits/sugar/node_modules/axios/lib/helpers/normalizeHeaderName.js");
+
+var DEFAULT_CONTENT_TYPE = {
+  'Content-Type': 'application/x-www-form-urlencoded'
+};
+
+function setContentTypeIfUnset(headers, value) {
+  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+    headers['Content-Type'] = value;
+  }
+}
+
+function getDefaultAdapter() {
+  var adapter;
+  if (typeof XMLHttpRequest !== 'undefined') {
+    // For browsers use XHR adapter
+    adapter = __webpack_require__(/*! ./adapters/xhr */ "../../toolkits/sugar/node_modules/axios/lib/adapters/xhr.js");
+  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+    // For node use HTTP adapter
+    adapter = __webpack_require__(/*! ./adapters/http */ "../../toolkits/sugar/node_modules/axios/lib/adapters/xhr.js");
+  }
+  return adapter;
+}
+
+var defaults = {
+  adapter: getDefaultAdapter(),
+
+  transformRequest: [function transformRequest(data, headers) {
+    normalizeHeaderName(headers, 'Accept');
+    normalizeHeaderName(headers, 'Content-Type');
+    if (utils.isFormData(data) ||
+      utils.isArrayBuffer(data) ||
+      utils.isBuffer(data) ||
+      utils.isStream(data) ||
+      utils.isFile(data) ||
+      utils.isBlob(data)
+    ) {
+      return data;
+    }
+    if (utils.isArrayBufferView(data)) {
+      return data.buffer;
+    }
+    if (utils.isURLSearchParams(data)) {
+      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+      return data.toString();
+    }
+    if (utils.isObject(data)) {
+      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+      return JSON.stringify(data);
+    }
+    return data;
+  }],
+
+  transformResponse: [function transformResponse(data) {
+    /*eslint no-param-reassign:0*/
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+      } catch (e) { /* Ignore */ }
+    }
+    return data;
+  }],
+
+  /**
+   * A timeout in milliseconds to abort a request. If set to 0 (default) a
+   * timeout is not created.
+   */
+  timeout: 0,
+
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+
+  maxContentLength: -1,
+
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+
+defaults.headers = {
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  }
+};
+
+utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+  defaults.headers[method] = {};
+});
+
+utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+});
+
+module.exports = defaults;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../process/browser.js */ "../../toolkits/sugar/node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/helpers/bind.js":
+/*!*********************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/helpers/bind.js ***!
+  \*********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function bind(fn, thisArg) {
+  return function wrap() {
+    var args = new Array(arguments.length);
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i];
+    }
+    return fn.apply(thisArg, args);
+  };
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/helpers/buildURL.js":
+/*!*************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/helpers/buildURL.js ***!
+  \*************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+
+function encode(val) {
+  return encodeURIComponent(val).
+    replace(/%40/gi, '@').
+    replace(/%3A/gi, ':').
+    replace(/%24/g, '$').
+    replace(/%2C/gi, ',').
+    replace(/%20/g, '+').
+    replace(/%5B/gi, '[').
+    replace(/%5D/gi, ']');
+}
+
+/**
+ * Build a URL by appending params to the end
+ *
+ * @param {string} url The base of the url (e.g., http://www.google.com)
+ * @param {object} [params] The params to be appended
+ * @returns {string} The formatted url
+ */
+module.exports = function buildURL(url, params, paramsSerializer) {
+  /*eslint no-param-reassign:0*/
+  if (!params) {
+    return url;
+  }
+
+  var serializedParams;
+  if (paramsSerializer) {
+    serializedParams = paramsSerializer(params);
+  } else if (utils.isURLSearchParams(params)) {
+    serializedParams = params.toString();
+  } else {
+    var parts = [];
+
+    utils.forEach(params, function serialize(val, key) {
+      if (val === null || typeof val === 'undefined') {
+        return;
+      }
+
+      if (utils.isArray(val)) {
+        key = key + '[]';
+      } else {
+        val = [val];
+      }
+
+      utils.forEach(val, function parseValue(v) {
+        if (utils.isDate(v)) {
+          v = v.toISOString();
+        } else if (utils.isObject(v)) {
+          v = JSON.stringify(v);
+        }
+        parts.push(encode(key) + '=' + encode(v));
+      });
+    });
+
+    serializedParams = parts.join('&');
+  }
+
+  if (serializedParams) {
+    var hashmarkIndex = url.indexOf('#');
+    if (hashmarkIndex !== -1) {
+      url = url.slice(0, hashmarkIndex);
+    }
+
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+  }
+
+  return url;
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/helpers/combineURLs.js":
+/*!****************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/helpers/combineURLs.js ***!
+  \****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Creates a new URL by combining the specified URLs
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} relativeURL The relative URL
+ * @returns {string} The combined URL
+ */
+module.exports = function combineURLs(baseURL, relativeURL) {
+  return relativeURL
+    ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+    : baseURL;
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/helpers/cookies.js":
+/*!************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/helpers/cookies.js ***!
+  \************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+
+module.exports = (
+  utils.isStandardBrowserEnv() ?
+
+  // Standard browser envs support document.cookie
+    (function standardBrowserEnv() {
+      return {
+        write: function write(name, value, expires, path, domain, secure) {
+          var cookie = [];
+          cookie.push(name + '=' + encodeURIComponent(value));
+
+          if (utils.isNumber(expires)) {
+            cookie.push('expires=' + new Date(expires).toGMTString());
+          }
+
+          if (utils.isString(path)) {
+            cookie.push('path=' + path);
+          }
+
+          if (utils.isString(domain)) {
+            cookie.push('domain=' + domain);
+          }
+
+          if (secure === true) {
+            cookie.push('secure');
+          }
+
+          document.cookie = cookie.join('; ');
+        },
+
+        read: function read(name) {
+          var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
+          return (match ? decodeURIComponent(match[3]) : null);
+        },
+
+        remove: function remove(name) {
+          this.write(name, '', Date.now() - 86400000);
+        }
+      };
+    })() :
+
+  // Non standard browser env (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return {
+        write: function write() {},
+        read: function read() { return null; },
+        remove: function remove() {}
+      };
+    })()
+);
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/helpers/isAbsoluteURL.js":
+/*!******************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/helpers/isAbsoluteURL.js ***!
+  \******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Determines whether the specified URL is absolute
+ *
+ * @param {string} url The URL to test
+ * @returns {boolean} True if the specified URL is absolute, otherwise false
+ */
+module.exports = function isAbsoluteURL(url) {
+  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
+  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
+  // by any combination of letters, digits, plus, period, or hyphen.
+  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/helpers/isURLSameOrigin.js":
+/*!********************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/helpers/isURLSameOrigin.js ***!
+  \********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+
+module.exports = (
+  utils.isStandardBrowserEnv() ?
+
+  // Standard browser envs have full support of the APIs needed to test
+  // whether the request URL is of the same origin as current location.
+    (function standardBrowserEnv() {
+      var msie = /(msie|trident)/i.test(navigator.userAgent);
+      var urlParsingNode = document.createElement('a');
+      var originURL;
+
+      /**
+    * Parse a URL to discover it's components
+    *
+    * @param {String} url The URL to be parsed
+    * @returns {Object}
+    */
+      function resolveURL(url) {
+        var href = url;
+
+        if (msie) {
+        // IE needs attribute set twice to normalize properties
+          urlParsingNode.setAttribute('href', href);
+          href = urlParsingNode.href;
+        }
+
+        urlParsingNode.setAttribute('href', href);
+
+        // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
+        return {
+          href: urlParsingNode.href,
+          protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
+          host: urlParsingNode.host,
+          search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
+          hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
+          hostname: urlParsingNode.hostname,
+          port: urlParsingNode.port,
+          pathname: (urlParsingNode.pathname.charAt(0) === '/') ?
+            urlParsingNode.pathname :
+            '/' + urlParsingNode.pathname
+        };
+      }
+
+      originURL = resolveURL(window.location.href);
+
+      /**
+    * Determine if a URL shares the same origin as the current location
+    *
+    * @param {String} requestURL The URL to test
+    * @returns {boolean} True if URL shares the same origin, otherwise false
+    */
+      return function isURLSameOrigin(requestURL) {
+        var parsed = (utils.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
+        return (parsed.protocol === originURL.protocol &&
+            parsed.host === originURL.host);
+      };
+    })() :
+
+  // Non standard browser envs (web workers, react-native) lack needed support.
+    (function nonStandardBrowserEnv() {
+      return function isURLSameOrigin() {
+        return true;
+      };
+    })()
+);
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/helpers/normalizeHeaderName.js":
+/*!************************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/helpers/normalizeHeaderName.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ../utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+
+module.exports = function normalizeHeaderName(headers, normalizedName) {
+  utils.forEach(headers, function processHeader(value, name) {
+    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+      headers[normalizedName] = value;
+      delete headers[name];
+    }
+  });
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/helpers/parseHeaders.js":
+/*!*****************************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/helpers/parseHeaders.js ***!
+  \*****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var utils = __webpack_require__(/*! ./../utils */ "../../toolkits/sugar/node_modules/axios/lib/utils.js");
+
+// Headers whose duplicates are ignored by node
+// c.f. https://nodejs.org/api/http.html#http_message_headers
+var ignoreDuplicateOf = [
+  'age', 'authorization', 'content-length', 'content-type', 'etag',
+  'expires', 'from', 'host', 'if-modified-since', 'if-unmodified-since',
+  'last-modified', 'location', 'max-forwards', 'proxy-authorization',
+  'referer', 'retry-after', 'user-agent'
+];
+
+/**
+ * Parse headers into an object
+ *
+ * ```
+ * Date: Wed, 27 Aug 2014 08:58:49 GMT
+ * Content-Type: application/json
+ * Connection: keep-alive
+ * Transfer-Encoding: chunked
+ * ```
+ *
+ * @param {String} headers Headers needing to be parsed
+ * @returns {Object} Headers parsed into an object
+ */
+module.exports = function parseHeaders(headers) {
+  var parsed = {};
+  var key;
+  var val;
+  var i;
+
+  if (!headers) { return parsed; }
+
+  utils.forEach(headers.split('\n'), function parser(line) {
+    i = line.indexOf(':');
+    key = utils.trim(line.substr(0, i)).toLowerCase();
+    val = utils.trim(line.substr(i + 1));
+
+    if (key) {
+      if (parsed[key] && ignoreDuplicateOf.indexOf(key) >= 0) {
+        return;
+      }
+      if (key === 'set-cookie') {
+        parsed[key] = (parsed[key] ? parsed[key] : []).concat([val]);
+      } else {
+        parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+      }
+    }
+  });
+
+  return parsed;
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/helpers/spread.js":
+/*!***********************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/helpers/spread.js ***!
+  \***********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Syntactic sugar for invoking a function and expanding an array for arguments.
+ *
+ * Common use case would be to use `Function.prototype.apply`.
+ *
+ *  ```js
+ *  function f(x, y, z) {}
+ *  var args = [1, 2, 3];
+ *  f.apply(null, args);
+ *  ```
+ *
+ * With `spread` this example can be re-written.
+ *
+ *  ```js
+ *  spread(function(x, y, z) {})([1, 2, 3]);
+ *  ```
+ *
+ * @param {Function} callback
+ * @returns {Function}
+ */
+module.exports = function spread(callback) {
+  return function wrap(arr) {
+    return callback.apply(null, arr);
+  };
+};
+
+
+/***/ }),
+
+/***/ "../../toolkits/sugar/node_modules/axios/lib/utils.js":
+/*!**************************************************************************************************************!*\
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/axios/lib/utils.js ***!
+  \**************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var bind = __webpack_require__(/*! ./helpers/bind */ "../../toolkits/sugar/node_modules/axios/lib/helpers/bind.js");
+
+/*global toString:true*/
+
+// utils is a library of generic helper functions non-specific to axios
+
+var toString = Object.prototype.toString;
+
+/**
+ * Determine if a value is an Array
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Array, otherwise false
+ */
+function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is undefined
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if the value is undefined, otherwise false
+ */
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/**
+ * Determine if a value is a Buffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Buffer, otherwise false
+ */
+function isBuffer(val) {
+  return val !== null && !isUndefined(val) && val.constructor !== null && !isUndefined(val.constructor)
+    && typeof val.constructor.isBuffer === 'function' && val.constructor.isBuffer(val);
+}
+
+/**
+ * Determine if a value is an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an ArrayBuffer, otherwise false
+ */
+function isArrayBuffer(val) {
+  return toString.call(val) === '[object ArrayBuffer]';
+}
+
+/**
+ * Determine if a value is a FormData
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an FormData, otherwise false
+ */
+function isFormData(val) {
+  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+}
+
+/**
+ * Determine if a value is a view on an ArrayBuffer
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
+ */
+function isArrayBufferView(val) {
+  var result;
+  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+    result = ArrayBuffer.isView(val);
+  } else {
+    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+  }
+  return result;
+}
+
+/**
+ * Determine if a value is a String
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a String, otherwise false
+ */
+function isString(val) {
+  return typeof val === 'string';
+}
+
+/**
+ * Determine if a value is a Number
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Number, otherwise false
+ */
+function isNumber(val) {
+  return typeof val === 'number';
+}
+
+/**
+ * Determine if a value is an Object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Object, otherwise false
+ */
+function isObject(val) {
+  return val !== null && typeof val === 'object';
+}
+
+/**
+ * Determine if a value is a Date
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Date, otherwise false
+ */
+function isDate(val) {
+  return toString.call(val) === '[object Date]';
+}
+
+/**
+ * Determine if a value is a File
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a File, otherwise false
+ */
+function isFile(val) {
+  return toString.call(val) === '[object File]';
+}
+
+/**
+ * Determine if a value is a Blob
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Blob, otherwise false
+ */
+function isBlob(val) {
+  return toString.call(val) === '[object Blob]';
+}
+
+/**
+ * Determine if a value is a Function
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Function, otherwise false
+ */
+function isFunction(val) {
+  return toString.call(val) === '[object Function]';
+}
+
+/**
+ * Determine if a value is a Stream
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Stream, otherwise false
+ */
+function isStream(val) {
+  return isObject(val) && isFunction(val.pipe);
+}
+
+/**
+ * Determine if a value is a URLSearchParams object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+ */
+function isURLSearchParams(val) {
+  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+}
+
+/**
+ * Trim excess whitespace off the beginning and end of a string
+ *
+ * @param {String} str The String to trim
+ * @returns {String} The String freed of excess whitespace
+ */
+function trim(str) {
+  return str.replace(/^\s*/, '').replace(/\s*$/, '');
+}
+
+/**
+ * Determine if we're running in a standard browser environment
+ *
+ * This allows axios to run in a web worker, and react-native.
+ * Both environments support XMLHttpRequest, but not fully standard globals.
+ *
+ * web workers:
+ *  typeof window -> undefined
+ *  typeof document -> undefined
+ *
+ * react-native:
+ *  navigator.product -> 'ReactNative'
+ * nativescript
+ *  navigator.product -> 'NativeScript' or 'NS'
+ */
+function isStandardBrowserEnv() {
+  if (typeof navigator !== 'undefined' && (navigator.product === 'ReactNative' ||
+                                           navigator.product === 'NativeScript' ||
+                                           navigator.product === 'NS')) {
+    return false;
+  }
+  return (
+    typeof window !== 'undefined' &&
+    typeof document !== 'undefined'
+  );
+}
+
+/**
+ * Iterate over an Array or an Object invoking a function for each item.
+ *
+ * If `obj` is an Array callback will be called passing
+ * the value, index, and complete array for each item.
+ *
+ * If 'obj' is an Object callback will be called passing
+ * the value, key, and complete object for each property.
+ *
+ * @param {Object|Array} obj The object to iterate
+ * @param {Function} fn The callback to invoke for each item
+ */
+function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
+    return;
+  }
+
+  // Force an array if not already something iterable
+  if (typeof obj !== 'object') {
+    /*eslint no-param-reassign:0*/
+    obj = [obj];
+  }
+
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+}
+
+/**
+ * Accepts varargs expecting each argument to be an object, then
+ * immutably merges the properties of each object and returns result.
+ *
+ * When multiple objects contain the same key the later object in
+ * the arguments list will take precedence.
+ *
+ * Example:
+ *
+ * ```js
+ * var result = merge({foo: 123}, {foo: 456});
+ * console.log(result.foo); // outputs 456
+ * ```
+ *
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function merge(/* obj1, obj2, obj3, ... */) {
+  var result = {};
+  function assignValue(val, key) {
+    if (typeof result[key] === 'object' && typeof val === 'object') {
+      result[key] = merge(result[key], val);
+    } else {
+      result[key] = val;
     }
   }
 
-  var uncamelizedName = (0, _uncamelize.default)(name);
-  cls.componentName = name;
-  _SWebComponentStack[uncamelizedName] = {
-    name,
-    dashName: uncamelizedName,
-    class: cls,
-    extends: extend,
-    settings
-  };
-
-  if (window.customElements) {
-    window.customElements.define(uncamelizedName, cls, {
-      extends: extend
-    });
-  } else if (document.registerElement) {
-    document.registerElement(uncamelizedName, {
-      prototype: cls.prototype,
-      extends: extend
-    });
-  } else {
-    throw "Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...";
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
   }
+  return result;
 }
+
+/**
+ * Function equal to merge with the difference being that no reference
+ * to original objects is kept.
+ *
+ * @see merge
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function deepMerge(/* obj1, obj2, obj3, ... */) {
+  var result = {};
+  function assignValue(val, key) {
+    if (typeof result[key] === 'object' && typeof val === 'object') {
+      result[key] = deepMerge(result[key], val);
+    } else if (typeof val === 'object') {
+      result[key] = deepMerge({}, val);
+    } else {
+      result[key] = val;
+    }
+  }
+
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+  return result;
+}
+
+/**
+ * Extends object a by mutably adding to it the properties of object b.
+ *
+ * @param {Object} a The object to be extended
+ * @param {Object} b The object to copy properties from
+ * @param {Object} thisArg The object to bind function to
+ * @return {Object} The resulting value of object a
+ */
+function extend(a, b, thisArg) {
+  forEach(b, function assignValue(val, key) {
+    if (thisArg && typeof val === 'function') {
+      a[key] = bind(val, thisArg);
+    } else {
+      a[key] = val;
+    }
+  });
+  return a;
+}
+
+module.exports = {
+  isArray: isArray,
+  isArrayBuffer: isArrayBuffer,
+  isBuffer: isBuffer,
+  isFormData: isFormData,
+  isArrayBufferView: isArrayBufferView,
+  isString: isString,
+  isNumber: isNumber,
+  isObject: isObject,
+  isUndefined: isUndefined,
+  isDate: isDate,
+  isFile: isFile,
+  isBlob: isBlob,
+  isFunction: isFunction,
+  isStream: isStream,
+  isURLSearchParams: isURLSearchParams,
+  isStandardBrowserEnv: isStandardBrowserEnv,
+  forEach: forEach,
+  merge: merge,
+  deepMerge: deepMerge,
+  extend: extend,
+  trim: trim
+};
+
 
 /***/ }),
 
@@ -13230,131 +16490,6 @@ function notDefined(obj, key) {
     && obj.__lookupSetter__(key) === undefined;
 }
 
-
-/***/ }),
-
-/***/ "../../toolkits/sugar/node_modules/css-loader/dist/cjs.js!../../toolkits/sugar/node_modules/sass-loader/dist/cjs.js?!./src/scss/_bare.scss":
-/*!**************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/css-loader/dist/cjs.js!/Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/sass-loader/dist/cjs.js??ref--4-2!./src/scss/_bare.scss ***!
-  \**************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../toolkits/sugar/node_modules/css-loader/dist/runtime/api.js */ "../../toolkits/sugar/node_modules/css-loader/dist/runtime/api.js");
-exports = ___CSS_LOADER_API_IMPORT___(false);
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Roboto&display=swap);"]);
-exports.push([module.i, "@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap);"]);
-// Module
-exports.push([module.i, "@charset \"UTF-8\";\n/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0-modified | 20110126\n   License: none (public domain)\n*/\n/**\n * @name        __settings\n * @type        {String}\n * @private\n *\n * Store the settings\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name        __current-context\n * @type        {String}\n * @private\n *\n * Store the current context\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name        __generated-vars\n * @type        Map\n * @private\n *\n * Store the map of the generated css vars names to avoid generating another one if already exist\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name          __font-size\n * @type          {Number}\n * @private\n *\n * Store the current registered font size\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name            __svg-icons\n * @type            {Map}\n * @private\n *\n * Store all the registered svg icons\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name          __classes\n * @type          {Map}\n * @private\n *\n * Store all the classes in their namespaces\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name          __classesFiles\n * @type          {Map}\n * @private\n *\n * Store all the classes files that have been registered to be called\n * when the ```Sugar.classes()``` mixin has been called\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n* @name          __classNamespacesWanted\n* @type          {List}\n* @private\n*\n* Store the list of namespaces wanted to be used across the system.\n* By default the value is the ```config.classes.generate.namespace``` setting\n* But will be overrided by the passed value to the ```Sugar.classes({namespaces})``` passed value.\n*\n* @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n*/\n/**\n * @name        settings\n * @type        {Map}\n *\n * Store all the settings\n *\n * @todo        Debug settings extend\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name    init\n * @namespace           sugar.scss.core.mixin\n * @type      mixin\n *\n * Init the sugar toolkit.\n * This has to be called **AFTER** all the [./_s-setup.scss] mixin call\n * and **BEFORE** all the others sugar mixins and functions calls\n *\n * @example     scss\n * \\@include Sugar.init();\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      setup\n * @namespace           sugar.scss.core.mixin\n * @type      mixin\n *\n * Setup sugar toolkit by overriding the default [settings](../_settings.scss)\n * This has to be called **BEFORE** the [s-init mixin](./_s-init.scss)\n *\n * @param \t\t\t{Map} \t\t\t$newSettings \t\tThe settings to override the default one with\n *\n * @example       scss\n * \\@include Sugar.setup((\n * \t\ttypo : (\n * \t\t\tfont-size : 12px\n * \t\t),\n * \t\tsizes : (\n * \t\t\tsmall : 0.5,\n * \t\t\tbig : 1.5\n * \t\t)\n * ));\n * // this mixin can be called as many times as you need\n * // this allows you to separate your configs setup into multiple\n * // files...\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      setting\n * @namespace           sugar.scss.core.setting.function\n * @type    function\n *\n * Get a settings from the global settings stack\n *\n * @param \t\t\t\t{String} \t\t\t$path \t\t\t\t\t\tThe setting path wanted separated by dots\n * @param \t\t\t\t{String} \t\t\t[$context=s-context()] \t\tThe context name to get the setting\n * @param \t\t\t\t{Mixed} \t\t\t[$default=null] \t\t\tThe value to return if no value is found\n * @return \t\t\t\t{Mixed} \t\t\t\t\t\t\t\t\t\tThe setting value¨\n *\n * @example\n * $font-size : Sugar.setting('typography.font-size');\n * // etc...\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      setting-var\n * @namespace           sugar.scss.core.setting.function\n * @type    function\n *\n * Get a settings from the global settings stack and return it in var(...) format\n *\n * @param \t\t\t\t{String} \t\t\t$path \t\t\t\t\t\tThe setting path wanted separated by dots\n * @param \t\t\t\t{String} \t\t\t[$context=s-context()] \t\tThe context name to get the setting\n * @param \t\t\t\t{Mixed} \t\t\t[$default=null] \t\t\tThe value to return if no value is found\n * @return \t\t\t\t{Mixed} \t\t\t\t\t\t\t\t\t\tThe setting value\n *\n * @example       scss\n * .my-cool-element {\n *    color: Sugar.setting-var('typography.font-size');\n * }\n * // etc...\n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    classes\n * @namespace           sugar.scss.core.class\n * @type      mixin\n *\n * Print out all wanted registered classes like padding helpers, margin helpers, font helpers, etc...\n *\n * @param \t\t\t{List}<string> \t\t\t$namespaces \t\tThe classes namespaces wanted\n *\n * @example     scss\n * \\@include Sugar.classes(); // will print out all the classes\n * \\@include Sugar.classes('sugar.font'); // will print all the font classes\n * \\@include Sugar.classes('sugar.clearfix' 'sugar.pull'); // the clearfixes and the pull classes\n * // etc...\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    scope\n * @namespace           sugar.scss.core.class\n * @type      mixin\n *\n * This mixin allows you to wrap css code and specify which scope it refers to.\n * This will allows you to generate only the css scope you want like \"bare\", \"style\" or \"all\"\n *\n * @param \t\t\t{List}<String> \t\t\t$scope \t\tThe scope(s) that define the encapsulated css. \n * @param           {List}<String>        [$currentScope=setting('classes.scope')]          The current scope(s) to generate\n *\n * @example     scss\n * .my-class {\n *    \\@include Sugar.scope('bare') {\n *       width: 200px;  \n *    } \n *    \\@include Sugar.scope('style') {\n *       color: red;\n *    }\n * }\n * // etc...\n *\n * @since           2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name        __settings\n * @type        {String}\n * @private\n *\n * Store the settings\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name        __current-context\n * @type        {String}\n * @private\n *\n * Store the current context\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name        __generated-vars\n * @type        Map\n * @private\n *\n * Store the map of the generated css vars names to avoid generating another one if already exist\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name          __font-size\n * @type          {Number}\n * @private\n *\n * Store the current registered font size\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name            __svg-icons\n * @type            {Map}\n * @private\n *\n * Store all the registered svg icons\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name          __classes\n * @type          {Map}\n * @private\n *\n * Store all the classes in their namespaces\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name          __classesFiles\n * @type          {Map}\n * @private\n *\n * Store all the classes files that have been registered to be called\n * when the ```Sugar.classes()``` mixin has been called\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n* @name          __classNamespacesWanted\n* @type          {List}\n* @private\n*\n* Store the list of namespaces wanted to be used across the system.\n* By default the value is the ```config.classes.generate.namespace``` setting\n* But will be overrided by the passed value to the ```Sugar.classes({namespaces})``` passed value.\n*\n* @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n*/\n/**\n * @name      context\n * @namespace           sugar.scss.core.context.function\n * @type      function\n * Return the name of the context setted with the [../mixins/_context.scss] mixin\n *\n * @param \t\t\t{String} \t\t\t[$default=null] \t\tThe name to return if no context exist\n * @return \t\t\t{String} \t\t\t\t\t\t\t\t\tThe context name\n *\n * @example\n * // register a context\n * \\@include Sugar.context-setup('my-context', (\n * \t\t// override some settings here...\n * ));\n *\n * Sugar.context('hello') // => 'hello'\n * \\@include Sugar.context('my-context') {\n * \t\tSugar.context('hello') // => 'my-context'\n * }\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com);\n */\n/**\n * @name      context-setup\n * @namespace           sugar.scss.core.context.mixin\n * @type      mixin\n *\n * Register a context with a name to use it later\n *\n * @param \t\t\t{String} \t\t$name \t\t\tThe context name\n * @param \t\t\t{Map} \t\t\t$settings \t\tThe settings to override for this context\n *\n * @example       scss\n * \\@include Sugar.context-setup(my-cool-context, (\n * \t\tlook-and-feel : (\n * \t\t\tpadding-vertical : (\n * \t\t\t\tdefault : 0.6em\n * \t\t\t)\n * \t\t)\n * ));\n *\n * // using your context\n * \\@include Sugar.context(my-cool-context) {\n * \t\tSugar.look-and-feel(padding-vertical); // => 0.6em\n * }\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      context\n * @namespace           sugar.scss.core.context.mixin\n * @type      mixin\n *\n * Set a context to be used inside the mixin\n *\n * @param \t\t\t{String|Map} \t\t\t$name-or-map \t\tThe name of a registered context or a map\n *\n * @example     scss\n * // register a context\n * \\@include Sugar.context-setup(my-cool-context, (\n * \t\tlook-and-feel : (\n * \t\t\tpadding-vertical : (\n * \t\t\t\tdefault : 0.6em\n * \t\t\t)\n * \t\t)\n * ));\n *\n * // registered context\n * \\@include Sugar.context(my-cool-context) {\n * \t\t// your code here...\n * }\n *\n * // inline context\n * \\@include Sugar.context((\n * \t\tlook-and-feel : (\n * \t\t\tpadding-vertical : (\n * \t\t\t\tdefault : .3em\n * \t\t\t)\n * \t\t)\n * )) {\n * \t\t// your code here...\n * }\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      _check-property\n * @namespace           sugar.scss.core.dev\n * @type      function\n *\n * Check a property types and values\n *\n * @param         {String}        $property         The property name to check\n * @param         {String}        $type             The property type wanted\n * @param         {Mixed}         $value            The property value to check\n * @param         {Boolean}       [$check-only=false]  Define if we want to throw an error or just send back false on type error\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      _get-property-name\n * @namespace           sugar.scss.core.dev\n * @type      function\n *\n * Return the property name\n *\n * @param       {String}        $property         The property name to get\n * @param       {Map}           [$keywords=()]    The\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      _get-property-type\n * @namespace           sugar.scss.core.dev\n * @type      function\n *\n * Get the property type\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    test-argument\n * @namespace           sugar.scss.core.dev\n * @type    function\n *\n * Test an argument passed to a function or a mixin to ensure his type, value, etc...\n * If the argument does not pass the test, an error will be thrown, unless the $check-only argument is true\n *\n * @param \t\t\t\t{String} \t\t\t\t$method \t\t\t\tThe function/mixin name (debug purpose)\n * @param \t\t\t\t{String} \t\t\t\t$argument \t\t\t\tThe argument name to test (debug purpose)\n * @param \t\t\t\t{List|String} \t\t\t$type-or-values \t\tIf string, the type(s) that the argument must match, if list, the possible values that the argument can take\n * @param \t\t\t\t{Mixed} \t\t\t\t$value \t\t\t\t\tThe actual argument value\n * @param \t\t\t\t{Boolean} \t\t\t\t[$check-only=false]\t\tIf this is true, will not thrown any error\n * @return \t\t\t\t{Mixed} \t\t\t\t\t\t\t\t\t\tThe value if ok, false if not\n *\n * @example     scss\n * \\@mixin my-cool-mixin($argument1, $argument2) {\n *        $argument1 : Sugar.test-argument(my-cool-mixin, argument1, string, $argument1);\n *        $argument2 : Sugar.test-argument(my-cool-mixin, argument2, (hello,world,12), $argument2);\n * }\n * \\@mixin my-cool-mixin(hello, world); // ok\n * \\@mixin my-cool-mixin(hello, universe); // throw an error\n * \\@mixin my-cool-mixin(12, world); // throw an error\n *\n * @author \t\t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      list-append\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Append a value to the passed list\n *\n * @param           {List}        $list               The list to append the value to\n * @param           {Mixed}       $value              The value to append to the list\n * @param           {String}      [$separator=auto]   The separator to use. Can be auto, space or comma\n * @return          {List}                            The new list with the appended value\n *\n * @example     scss\n * Sugar.list-append(hello world, coco, comma); // hello, world, coco\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      list-first\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Return the first element of the passed list\n *\n * @param         {List}        $list         The list to get the first element from\n * @return        {Mixed}                     The first element of the list\n *\n * @example       scss\n * Sugar.list-first(('hello', 'world')); // => 'hello'\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      list-implode\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Join all the list items using the passed glue and return a string\n *\n * @param           {List}          $list           The list to implode\n * @param           {String}        [$glue=\"\"]      The glue to use to implode the list\n * @return          {String}                        The imploded list in string format\n *\n * @example       scss\n * Sugar.list-implode(('hello','world'), '-'); // hello-world\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    list-index\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Return the index of the wanted value in the passed list.\n *\n * @param       {List}      $list       The list to process\n * @param       {Mixed}     $value      The value to search in the list\n * @return      {Number}                The index of the founded value or null\n *\n * @example     scss\n * Sugar.list-index(('hello','world'), 'world'); // => 2\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      list-join\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Return a string representing all the list items\n *\n * @param         {List}        $list1         The list to process\n * @param         {List}        $list2         The list to join with the first one\n * @param         {String}      [$separator=auto]     The separator to use for the list. Can be auto, comma or space\n * @param         {String|Boolean}    [$bracketed=auto]     If true is passed, the list will be bracketed\n * @return        {String}                    The new list\n *\n * @example     scss\n * Sugar.list-join(('hello','world'), ('coco'), space); // ('hello' 'world' 'coco')\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    list-last-nth\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Return the last item of the passed list\n *\n * @param     {List}    $list     The list to get the last item from\n * @return    {Mixed}             The last item of the list\n *\n * @example       scss\n * Sugar.list-last-nth(('hello', 'world')); // 'world'\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      list-length\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Return the number of item in the passed list\n *\n * @param       {List}      $list         The list to check\n * @return      {Number}                  The count of item in the list\n *\n * @example     scss\n * Sugar.list-length(('hello','world')); // => 2\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      list-set-nth\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Set a value in the passed list at the passed index. The original value at the passed index will be replaced with the passed value\n *\n * @param       {List}      $list       The list to process\n * @param       {Number}    $index      The index to set the value in the list\n * @param       {Mixed}     $value      The value to set in the list\n * @return      {List}                  The new processed list\n *\n * @example       scss\n * Sugar.list-set-nth(('hello','world'), 1, 'coco'); // => ('coco','world')\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    list-nth\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Return the item of the list at the passed index\n *\n * @param         {List}        $list         The list to process\n * @param         {Number}      $index        The index of the element to get in the list\n * @return        {Mixed}                     The value at the passed index\n *\n * @example     scss\n * Sugar.list-nth(('hello','world'), 2); // => 'world'\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      list-pop\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Remove the last item of the passed list\n *\n * @param       {List}        $list         The list to process\n * @return      {List}                      The processed list\n *\n * @example       scss\n * Sugar.list-pop(('hello', 'world')); // ('hello')\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    list-prepend\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Prepend a value in the passed list\n *\n * @param         {List}        $list           The list to process\n * @param         {Mixed}       $value          The value to prepend in the list\n * @param         {String}      [$separator=auto]   The separator to use. Can be auto, space or comma\n * @return        {List}                        The new list with his new value\n *\n * @example   scss\n * Sugar.list-prepend(('hello','world'), 'coco'); // => ('coco','hello','world')\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      list-remove-nth\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Remove item from list using an index\n *\n * @param         {List}          $list           The list to process\n * @param         {Number}        $index          The index of the item to remove from the list\n * @return        {List}                          The processes list\n *\n * @example       scss\n * Sugar.list-remove-nth(('hello','world'), 1); // ('hello')\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      list-search\n * @namespace           sugar.scss.core.list.function\n * @type      function\n *\n * Search for the passed value in the passed list and return true if exist, false if not\n *\n * @param           {List}          $list           The list in which to search for the passed value\n * @param           {Mixed}         $value          The value to search in the List\n * @return          {Boolean}                       true if the value exist in the list, false if not\n *\n * @example   scss\n * Sugar.list-search(('hello', 'world'), 'hello'); // => true\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      dash-to-map\n * @namespace           sugar.scss.core.map.function\n * @type        function\n *\n * Transform a dash notation value into a map\n * Dash notation value is : -key1 value1 -key2 value2\n *\n * @param \t\t\t{List} \t\t\t$dash \t\t\tThe dash list notation to transform\n * @return \t\t\t{Map} \t\t\t\t\t\t\tThe map generated\n *\n * @example\n * $dash : -hello world -coco universe\n * Sugar.dash-to-map($dash);\n * // (\n * // \thello : world,\n * // \tcoco : universe\n * // )\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      map-deep-values\n * @namespace           sugar.scss.core.map.function\n * @type      function\n *\n * Get values of a map even if it is deep\n *\n * @param       {Map}       $map        The map to get values from\n * @return      {List}                  The list of map values\n *\n * @example       scss\n * Sugar.map-deep-values((\n *    'hello': 'world',\n *    'coco': (\n *       'plop': 'youhou'\n *    )\n * ));\n * // => ('world', 'youhou')\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      map-extend\n * @namespace           sugar.scss.core.map.function\n * @type      function\n *\n * Extend the passed map with the others passed map(s)\n *\n * @param           {Map}         $map        The map to @extend\n * @param           {Map|List-Map}  $maps     The map(s) used to extend the first one\n * @return          {Map}                     The extended map\n *\n * @example     scss\n * Sugar.map-extend((\n *  'hello': 'world'\n * ), (\n *  'coco': 'plop'\n * ));\n * // returned map:\n * (\n *  'hello': 'world',\n *  'coco': 'plop'\n * )\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      map-filter\n * @namespace           sugar.scss.core.map.function\n * @type      function\n *\n * Filter a map by key, value and the passed processor function\n *\n * @param           {Map}         $map          The map to process\n * @param           {String}      $processor    The processor function name you want to invoke on each values\n * @return          {Map}                       The filtered map\n *\n * @example     scss\n * @function my-cool-function($key, value) {\n *    @return true;\n * }\n * Sugar.map-filter((\n *  'hello.world': 'Hello',\n *  'coco.world': 'Coco',\n *  'hello.that': 'That is cool'\n * ), 'my-cool-function');\n * // return that map:\n * (\n *  'hello.world': 'Hello',\n *  'coco.world': 'Coco',\n *  'hello.that': 'That is cool'\n * )\n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      map-filter-by-namespace\n * @namespace           sugar.scss.core.map.function\n * @type      function\n *\n * Return all the map values that have a key that match the passed namespace\n *\n * @param           {Map}         $map          The map to process\n * @param           {String}      $namespace    The namespace to search like (something.another.thing)\n * @return          {Map}                       The filtered map\n *\n * @example     scss\n * Sugar.map-filter-by-namespace((\n *  'hello.world': 'Hello',\n *  'coco.world': 'Coco',\n *  'hello.that': 'That is cool'\n * ), 'hello');\n * // return that map:\n * (\n *   'hello.world': 'Hello',\n *   'hello.that': 'That is cool'\n * )\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name              map-to-css-variables\n * @namespace         sugar.scss.core.map.function\n * @type              Mixin\n *\n * THis mixin simply take a single level map and convert it to\n * css variables declarations like ```--my-cool-variable: 10px```\n *\n * @param       {Map}         $map        The map to convert to css variables declarations\n *\n * @example       scss\n * $map: (\n *   something-cool: 10px\n * );\n * @include Sugar.map-to-css-variables($map);\n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name            map-flatten\n * @namespace       sugar.scss.core.map.function\n * @type            Function\n *\n * This function take a map (that can be a deep one) and returns you a new map with all the\n * properties flatten using the passed \"separator\"\n *\n * @param       {Map}       $map          The map to flatten\n * @param       {String}    [$separator=\"-\"]      The separator to use in final map keys\n * @return      {Map}                 The flattened map\n *\n * @example       scss\n * $map: (\n *    something: (\n *       cool: 'Hello world'\n *    )\n * )\n * map-flatten($map);\n * (\n *    something-cool: 'Hello world'\n * )\n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      map-get\n * @namespace           sugar.scss.core.map.function\n * @type      function\n *\n * Get a value in the passed map using the passed key\n *\n * @param         {Map}         $map        The map to get the value from\n * @param         {String}      $path        The key to get the value in the map\n * @param         {Midex}       [$default=null]   The default value to return if nothing is found in the map\n * @param         {Mixed}                   The getted value\n *\n * @example       scss\n * Sugar.map-get((\n *  hello: 'world'\n * ), hello); // => 'world'\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name     map-has-key\n * @namespace           sugar.scss.core.map.function\n * @type      function\n *\n * Check if the passed map has the passed key. Return true if has, false if not\n *\n * @param           {Map}         $map        The map to check\n * @param           {String}      $key        The key to check in the map\n * @return          {Boolean}                 true if has the key, false if not\n *\n * @example     scss\n * Sugar.map-has-key((\n *    'hello': 'world',\n *    'coco': 'plop'\n * ), 'hello'); // => true\n *\n * @since      1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name  map-keys\n * @namespace           sugar.scss.core.map.function\n * @type      function\n *\n * Return a comma separated list of the map keys\n *\n * @param       {Map}       $map      The map to process\n * @return      {List}                The list of map keys\n *\n * @example     scss\n * Sugar.map-keys((\n *  'hello': 'world',\n *  'coco': 'plop'\n * )); // => ('hello','coco')\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    map-merge\n * @namespace           sugar.scss.core.map.function\n * @type      function\n *\n * Merge the first passed map with the second passed one and return the result\n *\n * @param           {Map}         $map1         The first map to extend\n * @param           {Map}         $map2         The second map to extend the first one with\n * @return          {Map}                       The extended map\n *\n * @example     scss\n * Sugar.map-merge((\n *  hello: 'world'\n * ), (\n *  coco: 'plop'\n * ));\n * // returned map:\n * (\n *  hello: 'world',\n *  coco: 'plop'\n * )\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    map-remove\n * @namespace           sugar.scss.core.map.function\n * @type      function\n *\n * Remove one or multiple keys from the passed map\n *\n * @param           {Map}         $map          The map to process\n * @param           {String}      $keys...      The key(s) to remove\n * @return          {Map}                       The processed map\n *\n * @example       scss\n * Sugar.map-remove((\n *  hello: 'world',\n *  coco: 'plop'\n * ), coco);\n * // returned map:\n * (\n *  hello: 'world'\n * )\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    map-set\n * @namespace           sugar.scss.core.map.function\n * @type      function\n *\n * Set a map property with the passed value\n * @param \t\t\t{Map} \t\t\t$map \t\tThe map to modify\n * @param       {String}    $key    The key to set the propery to\n * @param       {Mixed}     $value  The value to set\n * @return \t\t\t{Map} \t\t\t\t\t    The updated map\n *\n * @example     scss\n * $my-map : Sugar.map-set($my-map, 'coco', 'Something cool');\n *\n * @since      1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-abs\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Return the absolute version of the passed number\n *\n * @param         {Number}        $number       The number to process\n * @return        {Number}                      The absolute version of the number\n *\n * @example     scss\n * Sugar.math-abs(-10); // => 10\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-acos\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Calculate the cosinus inverse of the passed angle\n *\n * @param         {Number}        $angle          The angle to calculate the cosinus inverse from\n * @param         {String}        [$unit=deg]     The wanted unit. Can de deg, rad, grad or turn\n * @return         {Number}                       The calculated cosinus inverse\n *\n * @example     scss\n * Sugar.math-acos(1, deg); // 0.0559529097deg\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-asin\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Calculate the sinus inverse\n *\n * @param         {Number}        $value        The value to use\n * @param         {String}        [$unit=deg]   The unit wanted. Possible values are deg, rad, grad and turn\n * @return        {Number}                      The calculated asin\n *\n * @example     scss\n * Sugar.math-asin(1, rad); // => 1.5698197643rad\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-atan\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Calculate the tangent inverse of the passed angle\n *\n * @param       {Number}      $angle        The angle to calculate the tangent inverse from\n * @param       {String}      [$unit=deg]   The wanted unit. Can be deg, rad, grad or turn\n * @return      {Number}                    The calculated tangent inverse of the passed angle\n *\n * @example       scss\n * Sugar.math-atan(10, deg); // => 84.2988568542deg\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    math-ceil\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Rounds $number up to the next highest whole number\n *\n * @param       {Number}      $number       The number to process\n * @return      {Number}                    The up rounded number\n *\n * @example     scss\n * Sugar.math-ceil(4.2); // => 5\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    math-convert-angle\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Convert the passed angle into another unit like rad, deg, grad or turn\n *\n * @param           {Number}            $value          The angle value to convert\n * @param           {String}            $unit           The wanted unit. Can be rad, deg, grad or turn\n * @return          {Number}                            The converted angle value\n *\n * @example   scss\n * Sugar.math-convert-angle()\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-cos\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Calculate the cosinus of the passed angle\n *\n * @param         {Number}        $angle      The angle to calculate the cosinus from\n * @return        {Number}                    The calculated cosinus\n *\n * @example     scss\n * Sugar.math-cos(10); // => 6.6645643378\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-deg\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Convert the passed unitless angle to degree\n *\n * @param         {Number}        $angle      The angle to convert to degree\n * @return        {Number}                    The degree version of the angle\n *\n * @example     scss\n * Sugar.math-deg(10); // => 572.9577951308deg\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-even\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Convert the passed value to the closest even value\n *\n * @param \t\t\t{Number} \t\t$value \t\tThe value to convert\n * @return \t\t\t{Number} \t\t\t\t\tThe closest even converted value\n *\n * @example     scss\n * Sugar.math-even(9); // => 10\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-fact\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Returns the factorial of desired number\n *\n * @param         {Number}          $number         The number to calculate the factorial number\n * @return        {Number}                          The calculated factorial of the passed number\n *\n * @example     scss\n * Sugar.math-fact(5); // => 120\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-grad\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Convert the passed unitless angle to gradian\n *\n * @param         {Number}        $angle      The angle to convert to gradian\n * @return        {Number}                    The gradian version of the angle\n *\n * @example     scss\n * Sugar.math-grad(10); // => 636.6197723675grad\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-odd\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Convert the passed value to the closest odd value\n *\n * @param \t\t\t{Number} \t\t$value \t\tThe value to convert\n * @return \t\t\t{Number} \t\t\t\t\tThe closest odd converted value\n *\n * @example     scss\n * Sugar.math-odd(10); // => 9\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-percentage\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Converts a unitless $number (usually a decimal between 0 and 1) to a percentage.\n *\n * @param         {Number}          $number           The number to convert into percentage\n * @return        {Number}                            The percentage converted\n *\n * @example\n * Sugar.math-percentage(0.2); // => 20%\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-pow\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Return the calculated power of the passed base using the passed exponent\n *\n * @param         {Number}        $base         The base number\n * @param         {Number}        $exponent     The exponent used to raise the base\n * @return        {Number}                      The calculated power number\n *\n * @example    scss\n * Sugar.math.pow(7, 3); // => 343\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-rad\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Convert the passed unitless angle to radian\n *\n * @param         {Number}        $angle      The angle to convert to radian\n * @return        {Number}                    The radian version of the angle\n *\n * @example     scss\n * Sugar.math-rad(10); // => 10rad\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    math-random\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * If $limit is null, returns a random decimal number between 0 and 1.\n *\n * @param       {Number}      [$limit:null]     The limit to generate a number under that\n * @return      {Number}                        The generated number\n *\n * @example     scss\n * Sugar.math-random(); // => 0.2821251858\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    render-round\n * @namespace           sugar.scss.core.math.function\n * @type    function\n *\n * Return the passed values in the same unit but that has been rounded on the corresponding px value\n * This ensure that your passed value will be a round px value for final rander in the viewport\n *\n * @param \t\t{Number} \t\t$value \t\t\tThe value to process\n * @return \t\t{Number} \t\t\t\t\t\tThe rounded value in same input unit but px rounded\n *\n * @example     scss\n * // if settings.typography.font-size == 16px\n * Sugar.render-round(5.2rem);\n * // 1. transform to px values : 5.2 * 16px = 83.2px\n * // 2. round even the px value : 83px\n * // 3. transform to passed unit value : 84px / 16px = 5.1875rem\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    render-round-even\n * @namespace           sugar.scss.core.math.function\n * @type    function\n *\n * Return the passed values in the same unit but that has been even rounded on the corresponding px value\n * This ensure that your passed value will be a round px value for final rander in the viewport\n *\n * @param \t\t{Number} \t\t$value \t\t\tThe value to process\n * @return \t\t{Number} \t\t\t\t\t\tThe rounded value in same input unit but px rounded\n *\n * @example     scss\n * // if settings.typography.font-size == 16px\n * Sugar.render-round-even(5.2rem);\n * // 1. transform to px values : 5.2 * 16px = 83.2px\n * // 2. round even the px value : 84px\n * // 3. transform to passed unit value : 84px / 16px = 5.25rem\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      render-round-odd\n * @namespace           sugar.scss.core.math.function\n * @type    function\n *\n * Return the passed values in the same unit but that has been odd rounded on the corresponding px value\n * This ensure that your passed value will be a round px value for final rander in the viewport\n *\n * @param \t\t{Number} \t\t$value \t\t\tThe value to process\n * @return \t\t{Number} \t\t\t\t\t\tThe rounded value in same input unit but px rounded\n *\n * @example     scss\n * // if settings.typography.font-size == 16px\n * Sugar.render-round-odd(5.2rem);\n * // 1. transform to px values : 5.2 * 16px = 83.2px\n * // 2. round odd the px value : 83px\n * // 3. transform to passed unit value : 84px / 16px = 5.1875rem\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    math-round\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Rounds $number to the nearest whole number.\n *\n * @param       {Number}      $number       The number to round\n * @return      {Number}                    The rounded number\n *\n * @example     scss\n * Sugar.math-round(4.2); // => 4\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    math-sin\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Calculate the sinus of the passed angle\n *\n * @param       {Number}      $angle        The angle to calculate the sinus from\n * @return      {Number}                    The calculated sinus\n *\n * @example     scss\n * Sugar.math-sin(10); // => 2.761090926\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name  math-sqrt\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Return the square root of the passed number\n *\n * @param         {Number}        $number       The number to process\n * @return        {Number}                      The square root of the passed number\n *\n * @example   scss\n * Sugar.math-sqrt(2); // => 1.41421356237\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      math-tan\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Calculate the tangent of the passed angle\n *\n * @param         {Number}        $angle        The angle to calculate the tangent from\n * @return        {Number}                      The calculated tangent\n *\n * @example       scss\n * Sugar.math-tan(10); // => 0.4142942863\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @todo      Function header and documentation\n */\n/**\n * @name      math-turn\n * @namespace           sugar.scss.core.math.function\n * @type      function\n *\n * Convert the passed unitless angle to turn\n *\n * @param         {Number}        $angle      The angle to convert to turn\n * @return        {Number}                    The turn version of the angle\n *\n * @example     scss\n * Sugar.math-turn(10); // => 1.5915494309turn\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    interpolate\n * @namespace           sugar.scss.core.size.function\n * @type    function\n *\n * Return the specified or calculated value of the given stack and size\n * depending on the settings.sizes ratios stack\n *\n * @param \t\t{Map} \t\t\t$value \t\t\tThe stack from which to interpolate the value\n * @param \t\t{String} \t\t$size \t\t\tThe size wanted (has to exist in the settings.sizes stack)\n * @return \t\t{Number} \t\t\t\t\t\tThe $value.$size value or the interpolated one depending on the settings.sizes ratios\n *\n * @example     scss\n * // settings.sizes\n * \\@include Sugar.setup((\n * \t\tsizes : (\n * \t\t\tsmall : 0.5,\n * \t\t\tdefault : 1, // default is ALWAYS 1\n * \t\t\tbig : 1.5\n * \t\t)\n * ));\n *\n * $myStack : (\n * \t\tdefault : 3rem,\n * \t\tbig : 6rem\n * )\n *\n * Sugar.interpolate($myStack, big) // 6rem cause specified in the $myStack value\n * Sugar.interpolate($myStack, small) // 1.5rem => calculated like : 3rem * 0.5 = 1.5rem\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      space\n * @namespace           sugar.scss.core.space.function\n * @type    function\n *\n * Return a value interpolated from the settings.spaces stack\n *\n * @param \t\t\t{String} \t\t\t$size \t\t\tThe space size wanted. Must exist in the settings.sizes stack\n * @return \t\t\t{Number} \t\t\t\t\t\t\tThe actual space value\n *\n * @example     scss\n * .my-cool-section {\n * \t\tpadding : Sugar.space(big);\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      parse-properties\n * @namespace           sugar.scss.core.string.function\n * @type    function\n *\n * Parse a given string/list properties and return the Map corresponding to the Map description\n *\n * @param \t\t\t\t{List} \t\t\t\t$properties \t\t\tThe properties to parse\n * @param \t\t\t\t{Map} \t\t\t\t$descriptor \t\t\tThe descriptor map to use to parse the properties\n * @return \t\t\t\t{Map} \t\t\t\t\t\t\t\t\t\tThe properties in map format\n *\n * @example     scss\n * Sugar.parse-properties(10px hello -delay 20s, (\n *  \tmyNumber : Number,\n *  \tmyOtherNumber : Number,\n *  \tmyString : String,\n *  \tmyCoolVar : String,\n *  \tdelay : second\n * ));\n * // => (\n * //  \tmyNumber : 10px,\n * // \tmyString : hello,\n * // \tdelay : 20s\n * // )\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      replace-tokens\n * @namespace           sugar.scss.core.string.function\n * @type    function\n *\n * Search and replace tokens like colors #primary in a passed string, list or map\n * Supported tokens types :\n * 1. Colors : colorName\n *\n * @example     scss\n * Sugar.replace-tokens(12px #primary hello #secondary); // > 12px #ddd hello #fff;\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      str-index\n * @namespace           sugar.scss.core.string.function\n * @type      function\n *\n * Returns the first index of $substring in $string, or null if $string doesn’t contain $substring.\n *\n * @param       {String}      $string       The string to process\n * @param       {String}      $substring    The string to search\n * @return      {Number}                    The index of the finded substring or null if not exist...\n *\n * @example      scss\n * Sugar.str-index('Hello world', 'world'); // => 7\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    str-is-url\n * @namespace           sugar.scss.core.string.function\n * @type      function\n *\n * Check if a string is a url or not\n *\n * @param \t\t\t{String} \t\t\t\t$url \t\t\tThe string to check\n * @return \t\t\t{Boolean} \t\t\t\t\t\t\t\ttrue if is a url, false if not\n *\n * @example     scss\n * Sugar.str-is-url('Hello world') // false\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    str-length\n * @namespace           sugar.scss.core.string.function\n * @type      function\n *\n * Return the number of characters in the passed string\n *\n * @param       {String}      $string       The string to process\n * @return      {Number}                    The number of characters that compose the string\n *\n * @example     scss\n * Sugar.str-length('hello'); // => 4\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    str-replace\n * @namespace           sugar.scss.core.string.function\n * @type      function\n *\n * Replace the passed string with another one in a specific string\n *\n * @param         {String}        $string         The string in which to replace the searched one\n * @param         {String}        $search         The string to replace\n * @param         {String}        [$replace=\"\"]   The string used as replacement\n * @return        {String}                        The processed string\n *\n * @example     scss\n * Sugar.str-replace('Hello world', 'world', 'coco'); // 'Hello coco'\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    str-slice\n * @namespace           sugar.scss.core.string.function\n * @type      function\n *\n * Returns the slice of $string starting at index $start-at and ending at index $end-at (both inclusive).\n *\n * @param         {String}        $string         The string to slice\n * @param         {Number}        $start-at       Where to start slice the string\n * @param         {Number}        [$end-at=-1]    Where to end to slice the string\n *\n * @param       scss\n * Sugar.str-slice('Hello world', 1, 4); // => Hell\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    str-split\n * @namespace           sugar.scss.core.string.function\n * @type      function\n *\n * Split a string using a delimiter\n *\n * @param         {String}          $string             The string to split\n * @param         {String}          [$delimiter=\"\"]     The delimiter to split the string\n * @return        {List}                                A list a the splited string\n *\n * @example       scss\n * Sugar.str-split('hello.world', '.'); // ('hello', 'world')\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    str-trim\n * @namespace           sugar.scss.core.string.function\n * @type      function\n *\n * trim the passed string\n *\n * @param         {String}        $string         The string in which to trim\n * @return        {String}                        The processed string\n *\n * @example     scss\n * Sugar.str-trim('Hello world   '); // 'Hello coco'\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    str-unique-id\n * @namespace           sugar.scss.core.string.function\n * @type      function\n *\n * Generate a unique id in string format\n *\n * @return        {String}          The generated unique id\n *\n * @example     scss\n * Sugar.str-unique-id(); // => uabtrnzug\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      str-unquote\n * @namespace           sugar.scss.core.string.function\n * @type      function\n *\n * Return an unquoted version of the passed string\n *\n * @param         {String}        $string           The string to unquote\n * @return        {String}                          The unquoted string\n *\n * @example       scss\n * Sugar.str-unquote('hello world'); // => hello world\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    str-split\n * @namespace           sugar.scss.core.string.function\n * @type      function\n *\n * Split a string using a delimiter\n *\n * @param         {String}          $string             The string to split\n * @param         {String}          [$delimiter=\"\"]     The delimiter to split the string\n * @return        {List}                                A list a the splited string\n *\n * @example       scss\n * Sugar.str-split('hello.world', '.'); // ('hello', 'world')\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name        str-url-ext\n * @namespace           sugar.scss.core.string.function\n * @type      function\n *\n * Check if a string is a url or not\n *\n * @param \t\t\t{String} \t\t\t\t$url \t\t\tThe string to check\n * @return \t\t\t{Boolean} \t\t\t\t\t\t\t\ttrue if is a url, false if not\n *\n * @example       scss\n * Sugar.str-is-url('Hello world') // false\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name        var-define\n * @namespace     sugar.scss.core.var\n * @type          Function\n *\n * This mixin simply take a variable name (or doted path) and generate the css code to define this variable\n *\n * @param     {String}      $name        The variable name to set\n * @param     {Mixed}       $value       The value to set\n *\n * @example       scss\n * @include Sugar.var-define(my-cool-variable, ());\n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name        var-name\n * @namespace     sugar.scss.core.var\n * @type          Function\n *\n * This function simply take a variable name (or doted path) and generate the sugar scope name for it\n *\n * @param     {String}      $name        The variable name to set\n * @return    {String}                   The setted variable name\n *\n * @example       scss\n * Sugar.var-name(my-cool-variable, ());\n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name              var-output\n * @namespace         sugar.scss.core.var\n * @type              Mixin\n *\n * This mixin simply print out the variables that you have defined in your project\n *\n * @param       {String}        [scope=\":root\"]       The scope of the variables you want to set\n *\n * @example       scss\n * @include var-output():\n *\n * @since     2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name      animation\n * @namespace           sugar.scss.animation.mixin\n * @type      mixin\n *\n * Print out the animation property calculated with the passed arguments\n * This mixin support all the standard css animation properties like name, duration, delay, ease, direction and fill-mode.\n * The $animations argument will be parsed with the [../functions/_s-parse-properties.scss] function.\n * If you specify multiple animations at a time, this mixin will take care\n * of the delay calculation for each animations and make them play one after another\n *\n * @param \t\t\t{List} \t\t\t\t$animations \t\t\tThe animations wanted like : coco .2s ease-in-out reverse\n *\n * @example     scss\n * .my-cool-element {\n * \t\t@include Sugar.animation(my-animation 1s ease-in-out, another-animation 4s);\n * \t\t// animation : my-animation 1s 0s ease-in-out 1 normal forwards, another-animation 4s 1s ease-in-out 1 normal forwards;\n * }\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      coffeekraken-logo\n * @namespace           sugar.scss.coffeekraken.mixin\n * @type      mixin\n *\n * Display a coffeekraken logo with two specified colors\n *\n * @param \t\t{Color} \t\t[$color=default] \tThe base color to use\n * @param \t\t{Color} \t\t[$accent=primary] \tThe accent color to use\n *\n * @example \tscss\n * .my-cool-coffeekraken-logo {\n * \t\\@include Sugar.coffeekraken-logo();\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      color\n * @namespace           sugar.scss.core.color\n * @type      function\n *\n * Get a registered color by name or wrap a new color into a sugar.color call\n * to manipulate it with ease.\n * Supported actions :\n * - hue {Deg}\n * - lighten {Percent}\n * - darken {Percent}\n * - saturate {Percent}\n * - desaturate {Percent}\n * - grayscale {Boolean}\n * - complement {Boolean}\n * - invert {Boolean}\n * - opacity {Percent}\n * - mix {Color}\n * - lightness {Percent}\n * - saturation {Percent}\n *\n * @param \t\t{String|Color} \t\t$color \t\t\t\tThe color name or the color value to manipulate\n * @param \t\t{String|List} \t\t\t[$modifier=null] \tThe color modifier to apply. Can be a registered modifier name or a modifier list\n * @return \t\t{Color} \t\t\t\t\t\t\t\t\tThe actual color value\n *\n * @example \t \tscss\n * // default color (settings.colors.default)\n * $myColor : Sugar.color(default);\n * // primary color (settings.colors.primary)\n * $primary : Sugar.color(primary);\n * // manipulate\n * $primary-dark : Sugar.color(primary, -darken 10%);\n * // registered modifier\n * $primary-light : Sugar.color(primary, light);\n * // $name as list\n * $modified primary : Sugar.color((primary, -darken 10%));\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    color-hue\n * @namespace           sugar.scss.core.color\n * @type          Function\n *\n * Return the hue of the passed color\n *\n * @param       {Color}     $color      The color to process\n * @return      {Number}                The color hue\n *\n * @example   scss\n * Sugar.color-hue(#e1d7d2); // => 20deg\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      color-lightness\n * @namespace           sugar.scss.core.color\n * @type          Function\n *\n * Return the lightness of the passed color\n *\n * @param         {Color}       $color      The color to check\n * @return        {Number}                  The color lightness\n *\n * @example     scss\n * Sugar.color-lightness(#e1d7d2); // => 85.2941176471%\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    color-modifier\n * @namespace           sugar.scss.core.color\n * @type      function\n *\n * Return the color in a modifier list\n *\n * @param \t\t\t{List} \t\t\t$modifiers \t\tThe modifiers list\n * @return \t\t\t{String} \t\t\t\t\t\tThe color name\n *\n * @example\n * $my-color : Sugar.color-modifier(outline primary); // => primary\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    color-opacity\n * @namespace           sugar.scss.core.color\n * @type          Function\n *\n * Return the opacity of the passed color\n *\n * @param       {Color}       $color        The color to prcess\n * @return      {Number}                    The color opacity\n *\n * @example     scss\n * Sugar.color-opacity(#e1d7d2); // => 1\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    color-saturation\n * @namespace           sugar.scss.core.color\n * @type          Function\n *\n * Return the saturation of the passed color\n *\n * @param       {Color}     $color      The color to process\n * @return      {Number}                The color saturation\n *\n * @example   scss\n * Sugar.color-saturation(#e1d7d2); // => 20%\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      color-schema\n * @namespace           sugar.scss.core.color\n * @type      mixin\n *\n * Print out the scoped color schema css\n *\n * @param \t\t{String} \t\t\t$name \t\t\tThe color schema name\n *\n * @example       scss\n * \\@include Sugar.color-schema(light) {\n * \t\th1, h2 {\n * \t\t\tcolor : white;\n * \t\t}\n * }\n * // will print\n * .cs-light h1,\n * .cs-light h2 {\n * \t\tcolor : white;\n * }\n *\n * h1, h2 {\n * \t\t\\@include Sugar.color-schema(light) {\n * \t\t\tcolor : white;\n * \t\t}\n * }\n * // will print\n * .cs-light h1, h1.cs-light,\n * .cs-light h2, h2.cs-light {\n * \t\tcolor : white;\n * }\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    color-transparentize\n * @namespace           sugar.scss.core.color\n * @type          Function\n *\n * Makes $color more transparent.\n * The $amount must be a number between 0 and 1 (inclusive). Decreases the alpha channel of $color by that amount.\n *\n * @param       {Color}       $color        The color to process\n * @param       {Number}      $amount       The amount to transparentize the color. Must be between 0 and 1\n *\n * @example       scss\n * Sugar.color-transparentize(rgba(#036, 0.3), 0.3); // => rgba(0, 51, 102, 0)\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      has-color\n * @namespace           sugar.scss.core.color\n * @type    function\n *\n * Check if the provided color is a registered one or not\n *\n * @param \t\t{String} \t\t$color \t\tThe color nane to check\n * @return \t\t{Boolean} \t\t\t\t\tTrue if exists, false if not\n *\n * @example     scss\n * Sugar.has-color(primary); // => true\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      docblock-colors\n * @namespace           sugar.scss.core.color\n * @type      mixin\n *\n * Print the styleguide docblocks for the registered sugar colors\n *\n * @example     scss\n * @include Sugar.docblock-colors();\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n  * @name            card-classes\n  * @namespace       sugar.scss.component.mixin\n  * @type            Mixin\n  *\n  * This mixin generate all the css needed to display properly some cards.\n  *\n  * @feature\n  * - Support ```media``` section\n  * - Support ```body``` section\n  * - Support ```footer``` section\n  *\n  * @todo         Finish describing features\n  *\n  * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want\n  * @param       {String}        [$name='card']       The className to use for the generation\n  *\n  * @example         html\n  * <div class=\"s-card\">\n  *    <div class=\"s-card__media\">\n  *       <img class=\"s-card__img\" src=\"https://picsum.photos/500\" />\n  *    </div>\n  *    <div class=\"s-card__body\">\n  *       <p class=\"s-p\">Diam cum est tellus tristique enim magna duis aliquam, libero cursus inceptos donec lacinia arcu varius dictumst sodales, mauris volutpat accumsan erat penatibus orci vulputate.</p>\n  *    </div>\n  * </div>\n  *\n  * @example           scss\n  * @include Sugar.card-classes();\n  *\n  * @since       2.0.0\n  * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n  */\n/**\n   * @name              card-bare-classes\n   * @namespace         sugar.scss.component.mixin.card\n   * @type              Mixin\n   *\n   * This mixin generate all the bare classes depending on the parameters you set.\n   *\n   * @param       {String}      [$name='card']                         The name to use for the generation of the classes\n   *\n   * @since       2.0.0\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n/**\n   * @name              card-style-classes\n   * @namespace         sugar.scss.component.mixin.card\n   * @type              Mixin\n   *\n   * This mixin generate all the style classes depending on the parameters you set.\n   *\n   * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want\n   * @param       {String}      [$name='card']                         The name to use for the generation of the classes\n   *\n   * @since       2.0.0\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n/**\n   * @name              card\n   * @namespace         sugar.scss.component.mixin.card\n   * @type              Mixin\n   *\n   * This mixin generate all the properties for a button depending on the parameters you set.\n   *\n   * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want\n   *\n   * @since       2.0.0\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n/**\n   * @name              card-bare\n   * @namespace         sugar.scss.component.mixin.card\n   * @type              Mixin\n   *\n   * This mixin generate all the bare properties for a button depending on the parameters you set.\n   *   *\n   * @since       2.0.0\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n/**\n   * @name              card-style\n   * @namespace         sugar.scss.component.mixin.card\n   * @type              Mixin\n   *\n   * This mixin generate all the style properties for a button depending on the parameters you set.\n   *\n   * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want\n   *\n   * @since       2.0.0\n   * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n   */\n/**\n * @name            user-avatar\n * @namespace       sugar.scss.component.mixin\n * @type            Mixin\n *\n * This mixin display a user-avatar with a name and an image.\n * Their's also the mixin ```user-avatar-bare``` and ```user-avatar-style``` that you\n * can use if you need more controls.\n *\n * @param       {String}        [$name='user-avatar']       The className to use for the generation\n *\n * @example         html\n * <div class=\"s-user-avatar\">\n *   <a href=\"https://olivierbossel.com\" target=\"_blank\" title=\"Olivier Bossel\">\n *     <img class=\"s-user-avatar__img\" src=\"https://www.gravatar.com/avatar/b5df60055b6287bb7c90c0078ce20a5f?s=300\" title=\"Olivier Bossel\">\n *     <span class=\"s-user-avatar__name\">\n *       Olivier Bossel\n *     </span>\n *   </a>\n * </div>\n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n  * @name            button-classes\n  * @namespace       sugar.scss.component.button.class\n  * @type            Mixin\n  *\n  * This mixin generate all the css needed to display properly some buttons.\n  *\n  * @feature\n  * - Support all the registered sugar colors like ```primary```, ```secondary```, etc...\n  * - Support for sizes like ```smaller```, ```small```, ```medium```, etc...\n  * - Support disable state\n  *\n  * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate\n  * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate\n  * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes\n  * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want\n  * @param       {String}        [$name='btn']       The className to use for the generation\n  *\n  * @example         html\n  * <a class=\"sel(btn)\">I'm a cool button</a>\n  *\n  * @example           scss\n  * @include Sugar.button-classes();\n  * @include Sugar.classes('sugar.component.button');\n  *\n  * @since       2.0.0\n  * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n  */\n/**\n * @name              button\n * @namespace         sugar.scss.component.button.mixin\n * @type              Mixin\n *\n * This mixin generate all the properties for a button depending on the parameters you set.\n *\n * @param       {String}      [$color:primary]       The color you want to generate\n * @param       {String}      [$size:default]       The size you want to generate\n * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes\n * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want\n * @param       {String}        [$scope:null]       The scope you want to generate. Can be \"bare\" or \"style\"\n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n.fa,\n.fas,\n.far,\n.fal,\n.fad,\n.fab {\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-font-smoothing: antialiased;\n  display: inline-block;\n  font-style: normal;\n  font-variant: normal;\n  text-rendering: auto;\n  line-height: 1;\n}\n\n/*!\n * Font Awesome Free 5.13.1 by @fontawesome - https://fontawesome.com\n * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)\n */\n@font-face {\n  font-family: \"Font Awesome 5 Brands\";\n  font-style: normal;\n  font-weight: 400;\n  font-display: block;\n  src: url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.eot\");\n  src: url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.eot?#iefix\") format(\"embedded-opentype\"), url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.woff2\") format(\"woff2\"), url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.woff\") format(\"woff\"), url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.ttf\") format(\"truetype\"), url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.svg#fontawesome\") format(\"svg\");\n}\n.fab {\n  font-family: \"Font Awesome 5 Brands\";\n  font-weight: 400;\n}\n\n/*!\n * Font Awesome Free 5.13.1 by @fontawesome - https://fontawesome.com\n * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)\n */\n@font-face {\n  font-family: \"Font Awesome 5 Free\";\n  font-style: normal;\n  font-weight: 400;\n  font-display: block;\n  src: url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.eot\");\n  src: url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.eot?#iefix\") format(\"embedded-opentype\"), url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.woff2\") format(\"woff2\"), url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.woff\") format(\"woff\"), url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.ttf\") format(\"truetype\"), url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.svg#fontawesome\") format(\"svg\");\n}\n.far {\n  font-family: \"Font Awesome 5 Free\";\n  font-weight: 400;\n}\n\n/*!\n * Font Awesome Free 5.13.1 by @fontawesome - https://fontawesome.com\n * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)\n */\n@font-face {\n  font-family: \"Font Awesome 5 Free\";\n  font-style: normal;\n  font-weight: 900;\n  font-display: block;\n  src: url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.eot\");\n  src: url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.eot?#iefix\") format(\"embedded-opentype\"), url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.woff2\") format(\"woff2\"), url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.woff\") format(\"woff\"), url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.ttf\") format(\"truetype\"), url(\"https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.svg#fontawesome\") format(\"svg\");\n}\n.fa,\n.fas {\n  font-family: \"Font Awesome 5 Free\";\n  font-weight: 900;\n}\n\n/**\n * @name      icon\n * @namespace           sugar.scss.icon.mixin\n * @type      mixin\n *\n * Apply an icon on the element. This mixin support font-awesome and custom icons systems that have an icon name formated like \"icon-{name}\"\n * The custom icon style if you pass as name \"user\" will extend %icon, %icon-user, .icon and .icon-user classes\n *\n * @param \t\t{String} \t\t$name \t\tThe icon name to apply\n * @param     {Color}     [$color=null]    The color wanted for the icon\n *\n * @example \tscss\n * .my-cool-icon {\n * \t\\@include Sugar.icon(fa-user, primary);\n * }\n *\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      icons\n * @namespace           sugar.scss.icon.mixin\n * @type    mixin\n *\n * Generate some icon classes like .icon-$icon-name\n *\n * @param         {List}          $icons-names            The list of icons names to generate\n * @param         {Color}         [$color=null]         The color wanted for the generated icons\n *\n * @example       scss\n * \\@include Sugar.icons(fa-user fa-bell fa-circle);\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name register-svg-icon\n * @namespace           sugar.scss.icon.mixin\n * @type      mixin\n *\n * Register a new icon to be used as base64 encoded url.\n * If you want your icon to be colorable, you need to specify this code on your paths: `style=\"fill:%color\"`\n *\n * @param    {String}    $name    The icon name\n * @param    {String}    $svgCode    The icons svg code\n *\n * @example     scss\n * @include Sugar.register-svg-icon(user, 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUwIDUwIiBoZWlnaHQ9IjUwcHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxjaXJjbGUgY3g9IjI1IiBjeT0iMjUiIGZpbGw9Im5vbmUiIHI9IjI0IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2Utd2lkdGg9IjIiLz48cmVjdCBmaWxsPSJub25lIiBoZWlnaHQ9IjUwIiB3aWR0aD0iNTAiLz48cGF0aCBkPSJNMjkuOTMzLDM1LjUyOGMtMC4xNDYtMS42MTItMC4wOS0yLjczNy0wLjA5LTQuMjFjMC43My0wLjM4MywyLjAzOC0yLjgyNSwyLjI1OS00Ljg4OGMwLjU3NC0wLjA0NywxLjQ3OS0wLjYwNywxLjc0NC0yLjgxOCAgYzAuMTQzLTEuMTg3LTAuNDI1LTEuODU1LTAuNzcxLTIuMDY1YzAuOTM0LTIuODA5LDIuODc0LTExLjQ5OS0zLjU4OC0xMi4zOTdjLTAuNjY1LTEuMTY4LTIuMzY4LTEuNzU5LTQuNTgxLTEuNzU5ICBjLTguODU0LDAuMTYzLTkuOTIyLDYuNjg2LTcuOTgxLDE0LjE1NmMtMC4zNDUsMC4yMS0wLjkxMywwLjg3OC0wLjc3MSwyLjA2NWMwLjI2NiwyLjIxMSwxLjE3LDIuNzcxLDEuNzQ0LDIuODE4ICBjMC4yMiwyLjA2MiwxLjU4LDQuNTA1LDIuMzEyLDQuODg4YzAsMS40NzMsMC4wNTUsMi41OTgtMC4wOTEsNC4yMWMtMS4yNjEsMy4zOS03LjczNywzLjY1NS0xMS40NzMsNi45MjQgIGMzLjkwNiwzLjkzMywxMC4yMzYsNi43NDYsMTYuOTE2LDYuNzQ2czE0LjUzMi01LjI3NCwxNS44MzktNi43MTNDMzcuNjg4LDM5LjE4NiwzMS4xOTcsMzguOTMsMjkuOTMzLDM1LjUyOHoiLz48L3N2Zz4=');\n *\n * @since       1.0.0\n * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n  * @name            ol-classes\n  * @namespace       sugar.scss.component.ol.class\n  * @type            Mixin\n  *\n  * This mixin generate all the css needed to display properly some ordered lists.\n  *\n  * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate\n  * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate\n  * @param       {String}    [separator='settings.components.ol.separator']    The separator you want to use\n  * @param       {Number}    [$line-height='settings.components.ol.look-and-feel.line-height | settings.look-and-feel.line-height']      The line-height you want to use\n  * @param       {String}    [$scope=null]         The scope you want to generate. Can be \"bare\" or \"style\"\n  *\n  * @example         html\n  * <ol class=\"sel(ol)\">\n  *   <li>I'm a cool ordered list item</li>\n  *   <li>I'm a cool ordered list item</li>\n  *   <li>I'm a cool ordered list item</li>\n  *   <li>I'm a cool ordered list item</li>\n  *   <li>I'm a cool ordered list item</li>\n  *   <li>I'm a cool ordered list item</li>\n  *   <li>I'm a cool ordered list item</li>\n  * </ol>\n  *\n  * @example           scss\n  * @include Sugar.ol-classes();\n  *\n  * @since       2.0.0\n  * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n  */\n/**\n * @name          ol\n * @namespace     sugar.scss.component.ol.mixin\n * @type            Mixin\n *\n * Generate the properties and child css for the ol component\n *\n * @param       {String}      [$color:default]                   The colors you want to generate\n * @param       {String}    [$size=default]                 The size you want to generate\n * @param       {String}    [separator='settings.components.ol.separator']    The separator you want to use\n * @param       {Number}    [$line-height='settings.components.ol.look-and-feel.line-height | settings.look-and-feel.line-height']      The line-height you want to use\n * @param       {String}    [$scope=null]         The scope you want to generate. Can be \"bare\" or \"style\"\n *\n * @since           2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n  * @name            paragraph-classes\n  * @namespace       sugar.scss.component.paragraph.class\n  * @type            Mixin\n  *\n  * This mixin generate all the css needed to display properly some paragraphs.\n  *\n  * @param       {List<String>}      [$names=map-keys(setting('components.paragraph'))]                                List all paragraphs \"names\" you want to generate\n  * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually \"all\", \"bare\" or \"style\"            \n  * @param          {String}        [$name='p']                 The name you want for your paragraphs\n  *\n  * @example         html\n  * <p class=\"sel(p)\">\n  *   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec facilisis purus ac rhoncus mollis. Mauris lacinia velit purus, sit amet aliquet odio imperdiet in. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis rhoncus magna et dui bibendum, id suscipit dui consectetur. Nulla facilisi. Vivamus a metus nunc. Pellentesque eu lectus a velit consequat condimentum. Donec ac dolor sed enim posuere fringilla et dapibus metus. Nam id vehicula enim. In hac habitasse platea dictumst. Phasellus ultricies eros et neque blandit pulvinar. Proin nec urna auctor, porttitor ligula eu, fermentum risus. Etiam non eros blandit, pellentesque purus quis, viverra arcu.\n  * </p>\n  *\n  * @example           scss\n  * @include Sugar.paragraph-classes();\n  *\n  * @since       2.0.0\n  * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n  */\n/**\n * @name              paragraph\n * @namespace         sugar.scss.component.paragraph.mixin\n * @type              Mixin\n *\n * This mixin generate all the properties for a paragraph depending on the parameters you set.\n *\n * @param         {Number}        [$name=default]          The paragraph \"type\" you want to generate. These can be found in the 'settings.components.paragraph' settings\n * @param         {Number}        [$font-size='settings.components.title.hlevel.font-size']      Specify the font size for the title\n * @param         {String}        [$font-family='settings.components.title.hlevel.font-family']      Specify the font family for the title\n * @param         {Number}        [$vr-margin-bottom='settings.components.title.hlevel.vr-margin-bottom']      Specify the margin bottom in vertical rhythm context\n * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually \"all\", \"bare\" or \"style\"            \n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n  * @name            title-classes\n  * @namespace       sugar.scss.component.title\n  * @type            Mixin\n  *\n  * This mixin generate all the css needed to display properly some titles.\n  *\n  * @param       {Number}      [$count:6]                                How many titles to generate\n  * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually \"all\", \"bare\" or \"style\"            \n  *\n  * @example         html\n  * <h1 class=\"sel(h1)\">My title</h1>\n  * <h2 class=\"sel(h2)\">My title</h2>\n  * <h3 class=\"sel(h3)\">My title</h3>\n  *\n  * @example           scss\n  * @include Sugar.title-classes();\n  *\n  * @since       2.0.0\n  * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n  */\n/**\n * @name              title\n * @namespace         sugar.scss.component.title\n * @type              Mixin\n *\n * This mixin generate all the properties for a title depending on the parameters you set.\n *\n * @param         {Number}        $level          The title level you want to generate. 1, 2, 3, 4, 5, 6\n * @param         {Number}        [$font-size='settings.components.title.hlevel.font-size']      Specify the font size for the title\n * @param         {String}        [$font-family='settings.components.title.hlevel.font-family']      Specify the font family for the title\n * @param         {Number}        [$vr-margin-bottom='settings.components.title.hlevel.vr-margin-bottom']      Specify the margin bottom in vertical rhythm context\n * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually \"all\", \"bare\" or \"style\"            \n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n  * @name            ul-classes\n  * @namespace       sugar.scss.component.ul.class\n  * @type            Mixin\n  *\n  * This mixin generate all the css needed to display properly some unordered lists.\n  *\n  * @feature\n  *\n  * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate\n  * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate\n  * @param       {String}      [$bullet='setting.bullet']         The bullet you want to use\n  * @param       {Number}      [$line-height='setting.look-and-feel.line-height']      Specify the line height you want to use\n  *\n  * @example         html\n  * <ul class=\"sel(ul)\">\n  *   <li>I'm a cool unordered list item</li>\n  *   <li>I'm a cool unordered list item</li>\n  *   <li>I'm a cool unordered list item</li>\n  *   <li>I'm a cool unordered list item</li>\n  *   <li>I'm a cool unordered list item</li>\n  *   <li>I'm a cool unordered list item</li>\n  *   <li>I'm a cool unordered list item</li>\n  * </ul>\n  *\n  * @example           scss\n  * @include Sugar.ul-classes();\n  *\n  * @since       2.0.0\n  * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n  */\n/**\n * @name          ul\n * @namespace     sugar.scss.component.ul.mixin\n * @type            Mixin\n *\n * Generate the properties and child css for the ul component\n *\n * @param       {String}      [$color=default]       The color you want to generate\n * @param       {String}      [$size=default]                 The size you want to for your list\n * @param       {String}      [$bullet='setting.bullet']         The bullet you want to use\n * @param       {Number}      [$line-height='setting.look-and-feel.line-height']      Specify the line height you want to use\n * @param       {String}      [$scope=null]         The scope you want to generate. \"bare\" or \"style\"\n *\n * @since           2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @todo        Mixin header and documentation\n */\n/**\n * @name    effect-bubble\n * @namespace           sugar.scss.effect.mixin\n * @type      mixin\n *\n * Create an arrow bubble effect\n *\n * @param \t\t{String} \t\t\t[$side=bottom] \t\t\t\tThe side (top,right,bottom,left)\n * @param \t\t{String} \t\t\t[$align=center] \t\t\tThe alignement (left,center,right,top,middle,bottom)\n * @param \t\t{Number} \t\t\t[$size=10px] \t\t\t\tThe size of the arrow\n * @param \t\t{Color} \t\t\t[$color=s-color(primary)] \tThe color of the bubble\n * @param \t\t{Number} \t\t\t[$arrow-offset=10px] \t\tThe arrow offset from the side of the bubble\n * @param \t\t{Number} \t\t\t[$border-width=0] \t\t\tThe border width of the bubble\n * @param \t\t{Color} \t\t\t[$border-color=null] \t\tThe border color of the bubble\n *\n * @example     scss\n * .my-cool-bubble {\n * \t\t\\@include Sugar.effect-bubble(\n * \t\t\t$color : Sugar.color(secondary)\n * \t\t);\n * \t\tcolor : white;\n * }\n *\n * @since       1.0.0\n * @see \t\t\thttps://codepen.io/kirkas/pen/otqyJ\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name        effect-depth\n * @namespace           sugar.scss.effect.mixin\n * @type      mixin\n *\n * Generate a drop shadow depending on the depth specified\n *\n * @param \t\t{Integer} \t\t\t$depth \t\t\t\t\t\t\tThe depth wanted (1,2,3,4,etc...)\n * @param \t\t{Color} \t\t\t[$color=rgba(0,0,0,.2)] \t\tThe drop shadow color\n *\n * @example     scss\n * .my-cool-element {\n * \t\t\\@include Sugar.effect-depth(2);\n * }\n *\n * @since       1.0.0\n * @author \t \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      effect-hey\n * @namespace           sugar.scss.effect.mixin\n * @type      mixin\n *\n * Create a poping dot effect to catch user attention on a particular item\n * This mixin affect the :before and :after pseudo selector of the item\n *\n * @param \t\t{String} \t\t[$vertical-align=top] \t\t\tWhere to put the dot verticaly (top,middle,bottom)\n * @param \t\t{String} \t\t[$align=left] \t\t\t\t\tWhere to put the dot horizontaly (left,center,right)\n * @param \t\t{Number} \t\t[$size=20px] \t\t\t\t\tThe size of the dot\n * @param \t\t{Color} \t\t[$color=primary] \t\t\t\tThe color of the dot\n * @param \t\t{Number} \t\t[$offset-top=0] \t\t\t\tThe offset top\n * @param \t\t{Number} \t\t[$offset-right=0] \t\t\t\tThe offset right\n * @param \t\t{Number} \t\t[$offset-bottom=0] \t\t\t\tThe offset bottom\n * @param \t\t{Number} \t\t[$offset-left=0] \t\t\t\tThe offset left\n *\n * @example       scss\n * .my-cool-element {\n * \t\t\\@include Sugar.effect-hey(\n * \t\t\t$align : right,\n * \t\t\t$color : secondary,\n * \t\t\t$size : 10px,\n * \t\t\t$offset-top : -10px,\n * \t\t\t$offset-right : -10px\n * \t\t);\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    effect-long-shadow\n * @namespace           sugar.scss.effect.mixin\n * @type      mixin\n *\n * Generate a long shadow effect like [this](https://www.google.ch/search?q=long+shadow&espv=2&biw=2560&bih=1316&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjjne6x49LPAhVBHRQKHat8AW8Q_AUIBigB)\n *\n * @param \t\t{Color} \t\t[$color=rgba(0,0,0,.3)] \t\t\tThe shadow color\n * @param \t\t{String} \t\t[$type=text] \t\t\t\t\t\tThe shadow type (text,box)\n * @param \t\t{Degree} \t\t[$angle=135deg] \t\t\t\t\tThe shadow angle\n * @param \t\t{Integer} \t\t[$depth=20] \t\t\t\t\t\tThe shadow depth\n * @param \t\t{Boolean} \t\t[$fade=false] \t\t\t\t\t\tIf true, the shadow will fade itself\n * @param \t\t{Number} \t\t[$blur=0] \t\t\t\t\t\t\tThe blur amount of the shadow\n * @param \t\t{Number} \t\t[$blur-ratio=0] \t\t\t\t\tThe ratio to blur each depth more\n *\n * @example       scss\n * .my-cool-title {\n * \t\t\\@include Sugar.effect-long-shadow(\n * \t\t\t$depth : 10\n * \t\t);\n * }\n * .my-cool-box {\n * \t\t\\@include Sugar.effect-long-shadow(\n * \t\t\t$type : box\n * \t\t);\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      effect-side-lined\n * @namespace           sugar.scss.effect.mixin\n * @type      mixin\n *\n * Create side lines around an item\n *\n * @param \t\t\t{String} \t\t[$style=solid] \t\t\tThe line style, same possible values as the border-style property\n * @param \t\t\t{String} \t\t[$side=both] \t\t\tThe side where to put lines (left,right,both)\n * @param \t\t\t{Number} \t\t[$height=1px] \t\t\tThe lines height\n * @param \t\t\t{Number} \t\t[$width=50%] \t\t\tThe width of the lines\n * @param \t\t\t{Color} \t\t[$color=text]\t\t\tThe color of the lines\n * @param \t\t\t{Number} \t\t[$padding=0] \t\t\tThe padding between the lines and the content\n * @param \t\t\t{Number} \t\t[$offset-top=null] \t\tThe line offset top\n *\n * @example     scss\n * h1 {\n * \t\t\\@include Sugar.effect-side-lined(\n * \t\t\t$padding : 20px,\n * \t\t\t$side : right,\n * \t\t\t$width : 100%\n * \t\t);\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    filter-map\n * @namespace           sugar.scss.map.function\n * @type      function\n *\n * Take a filter as parameter and parse it to return the {Map} corresponding\n * The $filter parameter can be either a registered filter name or a filter formated like `filterName(filterValue)`\n *\n * @param \t\t\t{List}<String> \t\t\t$filter \t\t\tThe registered filter name or the filter string to transform into map\n * @return \t\t\t{Map} \t\t\t\t\t\t\t\t\t\tThe corresponding filter map properties\n *\n * @example\n * // register a filter\n * \\@include Sugar.setup((\n * \t\tfilters : (\n * \t\t\tmyCoolFilter : box-shadow(#000 0 0 10px) blur(30px),\n * \t\t\t// other filters...\n * \t\t)\n * ));\n *\n * // registered filter\n * Sugar.filter-map(myCoolFilter);\n * // {\n * // \tbox-shadow : #000 0 0 10px,\n * // \tblur : 30px\n * // }\n *\n * // custom filter\n * Sugar.filter-map(blur(10px));\n * // {\n * // \tblur : 10px\n * // }\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    filter\n * @namespace           sugar.scss.filter.function\n * @type    function\n *\n * Return a list with all the filters that are passed as argument\n * This will use the [./_s-filter-map.scss] function to parse the filters\n *\n * @param \t \t{List}<String> \t\t\t$filters \t\t\tThe registered filter(s) name(s) or the filter(s) string(s) to transform into list\n * @return \t\t{List} \t\t\t\t\t\t\t\t\t\tThe converted filters list to use as css property\n *\n * @example\n * // register a filter\n * \\@include Sugar.setup((\n * \t\tfilters : (\n * \t\t\tmyCoolFilter : box-shadow(#000 0 0 10px) blur(30px),\n * \t\t\t// other filters...\n * \t\t)\n * ));\n *\n * // registered filter\n * .my-cool-elememt {\n * \t\tfilter : Sugar.filter(myCoolFilter);\n * \t\t// filter : box-shadow(#000 0 0 10px) blur(30px);\n * }\n *\n * // custom filter\n * .my-cool-element {\n * \t\tfilter : Sugar.filter(myCoolFilter invert(100%));\n * \t\t// filter : box-shadow(#000 0 0 10px) blur(30px) invert(100%);\n * }\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      filter\n * @namespace           sugar.scss.filter.mixin\n * @type      mixin\n *\n * Print out a list with all the filters that are passed as argument\n * This will use the [../functions/_filter-map.scss] function to parse the filters\n *\n * @param \t \t{List}<String> \t\t\t$filters \t\t\tThe registered filter(s) name(s) or the filter(s) string(s) to transform into list\n *\n * @example     scss\n * // register a filter\n * \\@include Sugar.setup((\n * \t\tfilters : (\n * \t\t\tmyCoolFilter : box-shadow(#000 0 0 10px) blur(30px),\n * \t\t\t// other filters...\n * \t\t)\n * ));\n *\n * // registered filter\n * .my-cool-elememt {\n * \t\t\\@include Sugar.filter(myCoolFilter);\n * \t\t// filter : box-shadow(#000 0 0 10px) blur(30px);\n * }\n *\n * // custom filter\n * .my-cool-element {\n * \t\t\\@include Sugar.filter(myCoolFilter invert(100%));\n * \t\t// filter : box-shadow(#000 0 0 10px) blur(30px) invert(100%);\n * }\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    font-family\n * @namespace           sugar.scss.font.function\n * @type      function\n *\n * Return the font-family string or a registered font\n *\n * @param \t\t\t{String} \t\t$name \t\tThe name of the registered font\n * @return \t\t\t{String} \t\t\t\t\tThe corresponding font-family property to set in your css\n *\n * @example\n * // register a font\n * \\@include Sugar.setup((\n * \t\tfonts : (\n * \t\t\tmyCoolFont : (\n * \t\t\t\tfont-family : 'Helvetica Neue',\n * \t\t\t\tfont-weight : 'bold',\n * \t\t\t\t// etc...\n * \t\t\t),\n * \t\t\t// other fonts...\n * \t\t)\n * ));\n *\n * // apply the font\n * .my-cool-element {\n * \t\tfont-family : Sugar.font-family(myCoolFont);\n * \t\t// 'Helvetica Neue';\n * }\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    font\n * @namespace           sugar.scss.font.function\n * @type    function\n *\n * Return the font {Map} that correspond to the passed arguments\n *\n * @param \t\t{String} \t\t\t[$family=null] \t\t\tThe font family wanted (can be a registered font name)\n * @param \t\t{Color} \t\t\t[$color=null] \t\t\tThe color wanted (can be a registered color name)\n * @param \t\t{Number} \t\t\t[$size=null] \t\t\tThe font-size wanted\n * @param \t\t{String} \t\t\t[$style=null] \t\t\tThe font-style wanted\n * @param \t\t{String} \t\t\t[$variant=null] \t\tThe font-variant wanted\n * @param \t\t{String|Number} \t[$weight=null] \t\t\tThe font-weight wanted\n * @param \t\t{String} \t\t\t[$decoration=null] \t\tThe text-decoration wanted\n * @param \t\t{String} \t\t\t[$align=null] \t\t\tThe text-align wanted\n * @param \t\t{String} \t\t\t[$transform=null] \t\tThe text-transform wanted\n * @param \t\t{String} \t\t\t[$stretch=null] \t\tThe font-stretch wanted\n * @param \t\t{String} \t\t\t[$white-space=null] \tThe white-space wanted\n * @param \t\t{Number} \t\t\t[$height=null] \t\t\tThe line-height wanted\n * @param \t\t{Number} \t\t\t[$spacing=null] \t\tThe letter-spacing wanted\n * @param \t\t{Number} \t\t\t[$indent=null] \t\t\tThe text-indent wanted\n * @param \t\t{String} \t\t\t[$break=null] \t\t\tThe line-break wanted\n * @param \t\t{String} \t\t\t[$wrap=null] \t\t\tThe word-wrap wanted\n * @return \t\t{Map} \t\t\t\t\t\t\t\t\t\tThe corresponding font map\n *\n * @example\n * Sugar.font(\n * \t\t$family : 'Helvetica Neue',\n * \t\t$size : 12px,\n * \t\t$wrap : norwap\n * );\n * // (\n * \t\tfont-family : 'Helvetica Neue',\n * \t\tfont-size : 12px,\n * \t\tword-wrap : nowrap\n * // )\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    font-face\n * @namespace           sugar.scss.font.mixin\n * @type      mixin\n *\n * Helper to print a font-face\n *\n * @param \t\t\t{String} \t\t$font-family \t\t\tThe font-family\n * @param \t\t\t{String} \t\t$src \t\t\t\t\tThe source url (only 1 extension)\n * @param \t\t\t{List} \t\t\t[$extensions=woff2] \tThe extensions list that you have available\n * @param \t\t\t{String} \t\t[$font-weight=normal] \tThe font-weight property\n * @param \t\t\t{String} \t\t[$font-style=normal] \tThe font-style property\n * @param       {String}    [$font-display=auto]    The font-display property\n *\n * @example     scss\n * // if you have these extensions files : .woff .eot .woff2\n * \\@include Sugar.font-face(\n * \t\t$name : my-cool-font,\n * \t\t$src : '/fonts/my-font.eot',\n * \t\t$extensions : eot woff woff2\n * )\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      font\n * @namespace           sugar.scss.font.mixin\n * @type      mixin\n *\n * Print all the fonts properties that correspond to the passed arguments\n *\n * @param \t\t{String} \t\t\t[$family=null] \t\t\tThe font family wanted (can be a registered font name)\n * @param \t\t{Color} \t\t\t[$color=null] \t\t\tThe color wanted (can be a registered color name)\n * @param \t\t{Number} \t\t\t[$size=null] \t\t\tThe font-size wanted\n * @param \t\t{String} \t\t\t[$style=null] \t\t\tThe font-style wanted\n * @param \t\t{String} \t\t\t[$variant=null] \t\tThe font-variant wanted\n * @param \t\t{String|Number} \t[$weight=null] \t\t\tThe font-weight wanted\n * @param \t\t{String} \t\t\t[$decoration=null] \t\tThe text-decoration wanted\n * @param \t\t{String} \t\t\t[$align=null] \t\t\tThe text-align wanted\n * @param \t\t{String} \t\t\t[$transform=null] \t\tThe text-transform wanted\n * @param \t\t{String} \t\t\t[$stretch=null] \t\tThe font-stretch wanted\n * @param \t\t{String} \t\t\t[$white-space=null] \tThe white-space wanted\n * @param \t\t{Number} \t\t\t[$height=null] \t\t\tThe line-height wanted\n * @param \t\t{Number} \t\t\t[$spacing=null] \t\tThe letter-spacing wanted\n * @param \t\t{Number} \t\t\t[$indent=null] \t\t\tThe text-indent wanted\n * @param \t\t{String} \t\t\t[$break=null] \t\t\tThe line-break wanted\n * @param \t\t{String} \t\t\t[$wrap=null] \t\t\tThe word-wrap wanted\n * @return \t\t{Map} \t\t\t\t\t\t\t\t\t\tThe corresponding font map\n *\n * @example     scss\n * .my-cool-elememt {\n * \t\t\\@include Sugar.font(\n * \t\t\t$family : 'Helvetica Neue',\n * \t\t \t$size : 12px,\n * \t\t  $wrap : normal\n *    );\n *    // print\n * \t\tfont-family : 'Helvetica Neue',\n * \t\tfont-size : 12px,\n * \t\tword-wrap : normal\n * }\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      input-placeholder\n * @namespace           sugar.scss.form.mixin\n * @type      mixin\n *\n * Set the placeholder style for inputs, etc...\n *\n * @example \tscss\n * input, textarea {\n * \t\\@include Sugar.input-placeholder() {\n * \t\tcolor : red;\n * \t}\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      is\n * @namespace           sugar.scss.helper.function\n * @type      function\n *\n * Check if the passed value is of a certain type\n *\n * Here's the available types that you can check\n * - mixed => mean anything\n * - null\n * - url\n * - px\n * - pt\n * - rem\n * - em\n * - percent | %\n * - vw\n * - vh\n * - ex\n * - ch\n * - cm\n * - mm\n * - in\n * - pc\n * - s | second\n * - boolean | bool\n * - function\n * - number\n * - int | integer\n * - string\n * - color\n * - list\n * - map\n * - deg | degree\n * - list-{type} => check if is a list of the specified type\n * - map-{type} => check if is a map of the specified type\n *\n * @param \t\t\t{Mixed} \t\t\t$value \t\t\tThe value to check\n * @param \t\t\t{String} \t\t\t$type \t\t\tThe type to check\n * @return \t\t\t{Boolean} \t\t\t\t\t\t\ttrue if match the type, false if not\n *\n * @example       scss\n * Sugar.is(hello, string) // => true\n * Sugar.is('hello', string) // => true\n * Sugar.is(#fff, color) // => true\n * Sugar.is(hello #fff, list-color) // => false\n * Sugar.is(#fff #ddd, list-color) // => true\n * // etc...\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    type-of\n * @namespace           sugar.scss.helper.function\n * @type      function\n *\n * Get the type of the passed variable\n *\n * @param           {Mixed}         $variable       The variable to get the type of\n * @return          {String}                        The type of the variable passed\n *\n * @example     scss\n * Sugar.type-of('hello world'); // => string\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      border-radius\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Apply some border radius\n *\n * @param \t\t{Number} \t\t[$radius=null] \t\t\tThe radius to apply globally\n * @param \t\t{Number} \t\t[$top=null] \t\t\tThe radius to apply on top corners\n * @param \t\t{Number} \t\t[$right=null] \t\t\tThe radius to apply on right corners\n * @param \t\t{Number} \t\t[$bottom=null] \t\t\tThe radius to apply on bottom corners\n * @param \t\t{Number} \t\t[$left=null] \t\t\tThe radius to apply on left corners\n * @param \t\t{Number} \t\t[$top-left=null] \t\tThe radius to apply on top-left corners\n * @param \t\t{Number} \t\t[$top-right=null] \t\tThe radius to apply on top-right corners\n * @param \t\t{Number} \t\t[$bottom-left=null] \tThe radius to apply on bottom-left corners\n * @param \t\t{Number} \t\t[$bottom-right=null] \tThe radius to apply on bottom-right corners\n *\n * @example \tscss\n * .my-cool-item {\n * \t// apply on top left and right corners\n * \t\\@include Sugar.border-radius(\n * \t\t$top : 10px;\n * \t);\n * \t// apply on each corners\n * \t\\@include Sugar.border-radius(10px);\n * \t// etc...\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name  center-block\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Center a block element using margins etc...\n *\n * @example \tscss\n * .my-cool-block-element {\n * \t\\@include Sugar.center-block();\n * }\n *\n * @since       1.0.0\n * @author \tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name \tclearfix\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Apply a clearfix on the element.\n * Supported methods:\n * - micro\n * - facebook\n * - float\n * - micro\n *\n * @param \t\t{String} \t\t[$method=micro] \t\tThe clearfix method to use\n *\n * @example \tscss\n * .my-cool-element {\n *  \\@include Sugar.clearfix();\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      corner\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Apply some border radius\n * @param \t\t{Number} \t\t[$radius=null] \t\t\tThe radius to apply globally\n * @param \t\t{Number} \t\t[$top=null] \t\t\tThe radius to apply on top corners\n * @param \t\t{Number} \t\t[$right=null] \t\t\tThe radius to apply on right corners\n * @param \t\t{Number} \t\t[$bottom=null] \t\t\tThe radius to apply on bottom corners\n * @param \t\t{Number} \t\t[$left=null] \t\t\tThe radius to apply on left corners\n * @param \t\t{Number} \t\t[$top-left=null] \t\tThe radius to apply on top-left corners\n * @param \t\t{Number} \t\t[$top-right=null] \t\tThe radius to apply on top-right corners\n * @param \t\t{Number} \t\t[$bottom-left=null] \tThe radius to apply on bottom-left corners\n * @param \t\t{Number} \t\t[$bottom-right=null] \tThe radius to apply on bottom-right corners\n *\n * @example \tscss\n * .my-cool-item {\n * \t// apply on top left and right corners\n * \t\\@include Sugar.corner(\n * \t\t$top : 10px;\n * \t);\n * \t// apply on each corners\n * \t\\@include Sugar.corner(10px);\n * \t// etc...\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      fit\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Make the element fit his container.\n *\n * @param \t{String} \t\t\t[$position=null] \t\tThe position how to fit the element.\n *\n * @example \tscss\n * .my-cool-element {\n * \t\\@include Sugar.fit(absolute);\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      normalize\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Print out a normalize css\n *\n * @example     scss\n * @include Sugar.normalize();\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      position\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Set a complexe position styling like position:absolute; top:0; left:100%; etc...\n * This mixin gives you some shortcuts to align your element top, bottom, middle, center, etc...\n *\n * @param \t\t{String} \t\t\t[$position=absolute] \t\t\tThe position css property\n * @param \t\t{String} \t\t\t[$vertical-align=top] \t\t\tThe vertical alignement wanted (top,middle,bottom)\n * @param \t\t{String} \t\t\t[$align=left] \t\t\t\t\tThe horizontal alignement wanted (left,center,right)\n * @param \t\t{Number} \t\t\t[$top=null] \t\t\t\t\tThe top property wanted\n * @param \t\t{Number} \t\t\t[$right=null] \t\t\t\t\tThe right property wanted\n * @param \t\t{Number} \t\t\t[$bottom=null] \t\t\t\t\tThe bottom property wanted\n * @param \t\t{Number} \t\t\t[$left=null] \t\t\t\t\tThe left property wanted\n * @return \t\t{Map} \t\t\t\t\t\t\t\t\t\t\t\tThe map representation of the position wanted\n *\n * @example       scss\n * .my-cool-element {\n * \t// absolute top right\n * \t\\@include Sugar.position(absolute, top, right);\n * \t// custom right and bottom values\n * \t\\@include Sugar.position(absolute,\n * \t\t$bottom : 20px,\n * \t\t$right : 20px\n * \t);\n * \t// etc...\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      reset\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Print out a reset css\n *\n * @example     scss\n * @include Sugar.reset();\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      sanitize\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Print out a sanitize css\n *\n * @example     scss\n * @include Sugar.sanitize();\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    size\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Quicky and easily set simple or complexe size to any element\n *\n * @param \t\t{String|Number} \t\t$size-width\t\t\t\tThe size like \"cover\" or \"contain\", or the width in number\n * @param \t\t{Number} \t\t\t\t[$height=null] \t\t\tThe height wanted\n * @param \t\t{String} \t\t\t\t[$position=absolute] \tThe position wanted if the size is \"cover\" or \"contain\"\n *\n * @example \tscss\n * .my-cool-image {\n * \t\\@include Sugar.size(cover);\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    translate\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Quicky set some translates\n * @param \t\t{Number} \t\t[$x=0] \t\tThe x translate value\n * @param \t\t{Number} \t\t[$y=0] \t\tThe y translate value\n * @param \t\t{Number} \t\t[$z=0] \t\tThe z translate value\n *\n * @example     scss\n * .my-cool-element {\n * \t\\@include Sugar.translate(50%, 20px);\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    vertical-aligner\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Vertically align content by using the inline-block middle trick\n *\n * @example \tscss\n * .my-cool-container {\n * \t\\@include Sugar.vertical-aligner();\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      visually-hidden\n * @namespace           sugar.scss.helper.mixin\n * @type      mixin\n *\n * Hide an element only visually. This ensure that the element is still correctly displayed in the page for SEO\n * but will not being visible to the user\n *\n * @example \tscss\n * .my-cool-element {\n * \t\\@include Sugar.visually-hidden();\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      background\n * @namespace           sugar.scss.image.mixin\n * @type      mixin\n *\n * Helper mixin to set a background image\n *\n * @param \t\t\t{String} \t\t\t\t[$repeat=null] \t\t\t\tThe background-repeat property\n * @param \t\t\t{String} \t\t\t\t[$size=null] \t\t\t\tThe background-size property\n * @param \t\t\t{String} \t\t\t\t[$attachment=null] \t\t\tThe background-attachment property\n * @param \t\t\t{String} \t\t\t\t[$blend-mode=null] \t\t\tThe background-blend-mode property\n * @param \t\t\t{String} \t\t\t\t[$clip=null] \t\t\t\tThe background-clip property\n * @param \t\t\t{String} \t\t\t\t[$url=null] \t\t\t\tThe background-image url property\n * @param \t\t\t{Number} \t\t\t\t[$width=null] \t\t\t\tThe background-size width property\n * @param \t\t\t{Number} \t\t\t\t[$height=null] \t\t\t\tThe background-size height property\n * @param \t\t\t{Number} \t\t\t\t[$top=null] \t\t\t\tThe background-position top property\n * @param \t\t\t{Number} \t\t\t\t[$left=null] \t\t\t\tThe background-position left property\n * @param \t\t\t{String} \t\t\t\t[$suffix2x=@2x] \t\t\tThe suffix to add the the url if the 2x resolution if wanted\n * @param \t\t\t{String} \t\t\t\t[$suffix3x=@3x] \t\t\tThe suffix to add the the url if the 3x resolution if wanted\n * @param \t\t\t{String} \t\t\t\t[$suffix4x=@4x] \t\t\tThe suffix to add the the url if the 4x resolution if wanted\n * @param \t\t\t{List} \t\t\t\t\t[$resolution=null] \t\t\tThe resolution wanted like 2x, 3x and 4x\n * @param \t\t\t{List} \t\t\t\t\t[$position=null] \t\t\tThe background-position property\n *\n * @example     scss\n * .my-cool-element {\n * \t\t\\@include Sugar.background(\n * \t\t\t$url : 'img/my-cool-image.jpg',\n * \t\t\t$size : cover,\n * \t\t\t$resolution : 2x 3x 4x\n * \t\t);\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      image-rendering\n * @namespace           sugar.scss.image.mixin\n * @type      mixin\n *\n * Set how to render the image\n *\n * @param \t\t{String} \t\t[$mode=auto] \t\tThe mode to use to render the image\n *\n * @example \tscss\n * img {\n * \t\\@include Sugar.image-rendering(crips-edges);\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      columns-map\n * @namespace           sugar.scss.layout.function\n * @type      function\n *\n * Return the Map representation of a columns properties\n *\n * @param  \t\t{Interger} \t\t\t[$count=null] \t\t\tThe number of columns\n * @param \t\t{Number} \t\t\t[$gap=null] \t\t\tThe gap width between each columns\n * @param \t\t{String} \t\t\t[$fill=null] \t\t\tThe fill property (balance,auto,initial,inherit)\n * @param \t\t{Number} \t\t\t[$width=null] \t\t\tThe width of the columns\n * @param \t\t{Integer|String} \t[$span=null] \t\t\tThe column-span property (1,all,initial,inherit)\n * @param \t\t{List} \t\t\t\t[$rule=null] \t\t\tThe column-rule property\n * @param \t\t{String} \t\t\t[$rule-style=null]  \tThe column-rule-style property\n * @param \t\t{Color} \t\t\t[$rule-color=null] \t\tThe column-rule-color property\n * @param \t\t{Number} \t\t\t[$rule-width=null] \t\tThe column-rule-width property\n * @return \t\t{Map} \t\t\t\t\t\t\t\t\t\tThe map representation or the columns properties\n *\n * @example       scss\n * Sugar.columns-map(2, 20px);\n * // return\n * // (\n * // \tcolumn-count : 2,\n * // \tcolumn-gap : 20px\n * // )\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    columns\n * @namespace           sugar.scss.layout.mixin\n * @type      mixin\n *\n * Create a column layout my setting each columns properties at once\n *\n * @param \t\t{Integer} \t\t[$count=null] \t\tThe number of columns wanted\n * @param \t\t{Number} \t\t[$gap=null] \t\tThe column-gap width wanted\n * @param \t\t{String} \t\t[$fill=null] \t\tThe column-fill wanted\n * @param \t\t{Number} \t\t[$width=null] \t\tTHe width of each columns wanted\n * @param \t\t{String} \t\t[$span=null] \t\tSpecify on how many columns the element has to span across\n * @param \t\t{List} \t\t\t[$rule=null] \t\tSpecify the shorthand version of the column-rule-color, column-rule-style and column-rule-width\n * @param \t\t{String} \t\t[$rule-style=null] \tSpecify the column-rule-style wanted\n * @param \t\t{Color} \t\t[$rule-color=null] \tSpecify the column-rule-color wanted\n * @param \t\t{Number} \t\t[$rule-width=null] \tSpecify the column-rule-width wanted\n *\n * @example \tscss\n * .my-cool-container {\n * \t\\@include Sugar.columns(\n * \t\t$count : 3,\n * \t\t$gap : 30px,\n * \t\t$span : all\n * \t);\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    ratio\n * @namespace           sugar.scss.layout.mixin\n * @type      mixin\n *\n * Apply a ratio css styling. This will apply a before or after content that will make the element keep the specified ratio.\n * The content need to be displayed as absolute top left and fit in size.\n *\n * @param \t\t{Number} \t\t$ratio \t\t\tThe ratio to keep like 16/9, etc...\n *\n * @example \tscss\n * .my-cool-element {\n * \t\\@include Sugar.ratio(16/9);\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name          link-stretched\n * @namespace     sugar.scss.link.mixin\n * @type          Mixin\n *\n * Make a link become the size of it's parent (absolute, relative)\n * but only using the :after pseudo class so visually it will stay the same...\n *\n * @since         2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)\n */\n/**\n * @name      list-bullet\n * @namespace           sugar.scss.list.mixin\n * @type      mixin\n *\n * Set how the list bullet has to be displayed.\n *\n * @param \t\t{String} \t\t[$type=null] \t\t\t\tThe list type to use. Can be all the list-style-type values\n * @param \t\t{Url} \t\t\t[$image=null] \t\t\t\tAn image url to use as bullet\n * @param \t\t{String} \t\t[$icon=null] \t\t\t\tAn icon name to use as bullet. Will use the s-icon mixin under the hood\n * @param \t\t{Color} \t\t[$color=s-color(default)] \tThe color to use for the bullet\n * @param \t\t{Number} \t\t[$size=null] \t\t\t\tThe size to use for the bullet\n * @param \t\t{Number|List<Number>} \t[$offset=null] \t\tA number that represent the top offset, or a list of two numbers that represent the top, left offset\n * @param \t\t{String} \t\t[$font=null] \t\t\t\tThe font name to use for the bullet\n * @param \t\t{Number} \t\t[$space=null] \t\t\t\tThe space between the bullet and the content\n *\n * @todo      Add fontawesome icon support\n *\n * @example \tscss\n * .my-cool-list__item {\n * \t@\\include Sugar.list-bullet(\n * \t\t$image : '../img/my-cool-bullet.svg',\n * \t\t$offset : 5px 10px,\n * \t\t$size : 1em,\n * \t\t$space : 2em\n * \t);\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    list-start\n * @namespace           sugar.scss.list.mixin\n * @type      mixin\n *\n * Start a new list\n *\n * @param \t\t{String} \t\t[$counter-reset=s-list] \t\tA counter name to reset\n *\n * @example     scss\n * .my-cool-list {\n *    Sugar.list-start();\n * }\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      loader-bars\n * @namespace           sugar.scss.loader.mixin\n * @type      function\n *\n * Generate a full animated, single element, bars loader\n *\n * @param \t\t\t{String} \t\t\t[$shape=rect] \t\t\t\tThe shape of the bars (rect,circle)\n * @param \t\t\t{Color} \t\t\t[$color=primary] \t\t\tThe color(s) of the loader. Can be a list of colors\n * @param \t\t\t{Number} \t\t\t[$width=.5em] \t\t\t\tThe width of each bars\n * @param \t\t\t{Number} \t\t\t[$height=2em] \t\t\t\tThe height of each bars\n * @param \t\t\t{Integer} \t\t\t[$count=5] \t\t\t\t\tHow many bars you want\n * @param \t\t\t{Number} \t\t\t[$gap=.5em] \t\t\t\tThe gap between each bars\n * @param \t\t\t{Number} \t\t\t[$opacity=1] \t\t\t\tThe initial opacity of each bars\n * @param \t\t\t{Number} \t\t\t[$a-opacity=null] \t\t\tThe opacity of the animated bars\n * @param \t\t\t{Second} \t\t\t[$a-duration=1s] \t\t\tThe overall animation duration\n * @param \t\t\t{Second} \t\t\t[$a-delay=0s] \t\t\t\tThe delay between two animation cycle\n * @param \t\t\t{Integer} \t\t\t[$a-near=1] \t\t\t\tHow many bars are affected by the animated one\n * @param \t\t\t{String} \t\t\t[$a-ease=ease-in-out] \t\tThe ease to use to animate each bars\n * @param \t\t\t{Number} \t\t\t[$a-offset=1em] \t\t\tThe offset to move the animated bar in em\n * @param \t\t\t{String} \t\t\t[$a-direction=both] \t\tThe direction in which to move the bars (up,down,both)\n * @param \t\t\t{Boolean} \t\t\t[$a-continuous=true] \t\tIf true, the first bars will be animated at same time at the last ones\n *\n * @example     scss\n * .my-cool-loader {\n * \t\t\\@include Sugar.loader-bars(\n * \t\t\t$color : primary,\n * \t\t\t$a-offset : .5em\n * \t\t);\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      loader-circle\n * @namespace           sugar.scss.loader.mixin\n * @type      Mixin\n *\n * Generate a full animated, single element, circle loader\n *\n * @param \t\t\t{Color} \t\t\t[$color=primary] \t\t\tThe color(s) of the loader. Can be a list of colors\n * @param \t\t\t{Number} \t\t\t[$size=.33em] \t\t\t\tThe size of each dot\n * @param \t\t\t{Number} \t\t\t[$radius=2em] \t\t\t\tThe distance of each dot from the center of the loader\n * @param \t\t\t{Integer} \t\t\t[$count=8] \t\t\t\t\tHow many bars you want\n * @param \t\t\t{Number} \t\t\t[$opacity=1] \t\t\t\tThe initial opacity of each bars\n * @param \t\t\t{Number} \t\t\t[$a-opacity=null] \t\t\tThe opacity of the animated bars\n * @param \t\t\t{Second} \t\t\t[$a-duration=1s] \t\t\tThe overall animation duration\n * @param \t\t\t{Second} \t\t\t[$a-delay=0s] \t\t\t\tThe delay between two animation cycle\n * @param \t\t\t{Integer} \t\t\t[$a-near=2] \t\t\t\tHow many bars are affected by the animated one\n * @param \t\t\t{String} \t\t\t[$a-ease=ease-in-out] \t\tThe ease to use to animate each bars\n * @param       {Number}       [$a-spread=2em]        How many distance the points have to be animated\n * @param       {Number}        [$a-rotate=null]      How many degrees have the points to be animated\n * @param       {Number}        [$a-scale=1em]        How many scale have the points to be animated\n *\n * @example     scss\n * .my-cool-loader {\n *    @include Sugar.loader-circle(\n *      $color: Sugar.color(primary)\n *    );\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      loader-couch-potato\n * @namespace           sugar.scss.loader.mixin\n * @type      function\n *\n * Generate a full animated, single element, couch-potato style loader\n *\n * @param \t\t{Number} \t\t[$size=1em] \t\t\t\tThe size of the loader\n * @param \t\t{Color} \t\t[$color=primary] \t\t\tThe color of the loader\n * @param \t\t{Second} \t\t[$a-duration=1s] \t\t\tThe overall animation duration\n * @param \t\t{Second} \t\t[$a-delay=0s] \t\t\t\tThe delay between two animation cycle\n * @param \t\t{String} \t\t[$a-ease=ease-in-out]\t\tThe ease to use for the animation\n * @param \t\t{Degree}\t\t[$a-rotate=360deg] \t\t\tThe animation rotation\n * @param \t\t{Number} \t\t[$a-scale=2] \t\t\t\tThe animation scale\n *\n * @example     scss\n * .my-cool-loader {\n * \t\t\\@include Sugar.loader-couch-potato();\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      loader-flip-ball\n * @namespace           sugar.scss.loader.mixin\n * @type      Mixin\n *\n * Generate a full animated, single element, flip ball style loader\n *\n * @param \t\t{String} \t\t[$shape=circle] \t\t\tThe shape of the loader (circle,rect)\n * @param \t\t{Number} \t\t[$size=2em] \t\t\t\tThe size of the loader\n * @param \t\t{Color} \t\t[$colors=(primary,success,warning,error,info)] \t\t\tThe colors of the loader. Can be a list of colors\n * @param \t\t{Second} \t\t[$a-duration=1s] \t\t\tThe overall animation duration\n * @param \t\t{Second} \t\t[$a-delay=0s] \t\t\t\tThe delay between two animation cycle\n * @param \t\t{String} \t\t[$a-ease=ease-in-out]\t\tThe ease to use for the animation\n *\n * @example       scss\n * .my-cool-loader {\n * \t\t\\@include Sugar.loader-flip-ball();\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      loader-grid\n * @namespace           sugar.scss.loader.mixin\n * @type      function\n *\n * Generate a grid style loader\n *\n * @param       {String}      [$shape=rect]             The shape of the grid items. Can be rect or circle\n * @param       {Color}       [$color=color(primary)]   The color to use for the grid items\n * @param       {Number}      [$cols=3]                 How many columns the grid must have\n * @param       {Number}      [$rows=3]                 How many rows must have the grid\n * @param       {Number}      [$size=10px]              The size of each grid items\n * @param       {Number}      [$gap=5px]                The size of the gaps between the grid items\n * @param       {Number}      [$offset=0]               The offset used for the grid\n * @param       {Number}      [$rotate=0deg]            Apply a rotation to the grid items\n * @param       {String}      [$a-shape=null]           The animation shape to apply to the grid items. Can be rect or circle\n * @param       {Number}      [$a-steps=5]              How many steps must have the animation\n * @param       {Number}      [$a-spread=15px]          How much must the grid items spread during the animation\n * @param       {Number}      [$a-rotate=null]          How many degrees must the grid items rotate during the animation\n * @param       {Number}      [$a-scale=null]           Apply a scale for the animation of the grid items\n * @param       {Number}      [$a-opacity=null]         Apply an opacity to the grid items during the animation\n * @param       {Second}      [$a-duration=1s]          The duration of the animation\n * @param       {Second}      [$a-delay=0s]             How many seconds to wait between each animations\n * @param       {String}      [$a-ease=ease-in-out]     The easing to use for the animation\n *\n * @example     scss\n * .my-cool-loader {\n *    @include Sugar.loader-grid();\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      loader-radial\n * @namespace           sugar.scss.loader.mixin\n * @type      function\n *\n * Generate a radial styled loader\n *\n * @param       {String}      [$shape=circle]       The shape of the items that make the circle. Can be rect or circle\n * @param       {Number}      [$size=3em]           The size of the items\n * @param       {Number}      [$width=0.2em]        The width of the circle loader\n * @param       {String}      [$style=solid]        The style of the items that form the loader. Can be none, hidden, dotted, dashed, solid, double, groove, ridge, inset, outset, initial or inherit\n * @param       {Color}       [$color=primary]     The color to use for the loader\n * @param       {Second}      [$a-duration=2s]      How many time will be the animation\n * @param       {Second}      [$a-delay=0s]         How many time to wait between two animation\n * @param       {Number}      [$a-count=2]          How many circles will be animated\n * @param       {Number}      [$a-spread=1em]         Specify a spread value for the animation of each circles\n * @param       {String}      [$a-ease=linear]      Specify the ease to use for the animation\n *\n * @example       scss\n * .my-cool-loader {\n *    @include Sugar.loader-radial();\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      loader-spinner\n * @namespace           sugar.scss.loader.mixin\n * @type      function\n *\n * Generate a spinner loader\n *\n * @param         {Number}        [$size=2em]             Specify the size of the spinner loader\n * @param         {Number}        [$width=0.3em]          Specify the width of the spinner loader\n * @param         {Color}         [$color=primary]        Specify the color of the spinner loader\n * @param         {Color}         [$bgcolor=inherit]        Specify the background color of the spinner loader\n * @param         {Number}        [$length=3/4]           The length of the spinner loader\n * @param         {Second}        [$a-duration=1s]        The duration of the spinner loader animation\n * @param         {String}        [$a-ease=linear]          Specify an ease to use for the spinner loader animation\n *\n * @example     scss\n * .my-cool-loader {\n *    @include Sugar.loader-spinner();\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    lnf\n * @namespace           sugar.scss.core.look-and-feel\n * @type    function\n *\n * Alias to the [./_look-and-feel.scss] function\n *\n * Return a settings.look-and-feel stack value\n *\n * @param \t\t{String} \t\t$name\t\t\t\t\tThe look and feel value name\n * @return \t\t{Number} \t\t\t\t\t\t\t\tThe look and feel value in em\n *\n * @example\n * .my-cool-element {\n * \t\tpadding : Sugar.lnf(padding-horizontal) Sugar.lnf(padding-vertical);\n * }\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      look-and-feel\n * @namespace           sugar.scss.core.look-and-feel\n * @type    function\n *\n * Return a settings.look-and-feel stack value\n *\n * @param \t\t{String} \t\t$name\t\t\t\t\tThe look and feel value name\n * @return \t\t{Number} \t\t\t\t\t\t\t\tThe look and feel value in em\n *\n * @example\n * .my-cool-element {\n * \t\tpadding : Sugar.look-and-feel(padding-horizontal) Sugar.look-and-feel(padding-vertical);\n * }\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    to-base64-url\n * @namespace           sugar.scss.meta.function\n * @type      function\n *\n * Convert the passed svg code to an embadable base64 url\n *\n * @param       {String}        $svg        The svg code to convert\n * @return      {String}                    The embedable converted base64 url\n *\n * @example       scss\n * Sugar.to-base64-url('<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z\"/></svg>');\n * // url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z'/%3E%3C/svg%3E\")\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      to-base64\n * @namespace           sugar.scss.meta.function\n * @type      function\n *\n * Convert the passed svg code to base64 embedable url\n *\n * @param       {String}        $svg        The svg code to convert\n * @return      {String}                    The base64 converted url code\n *\n * @example     scss\n * Sugar.to-base64('<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z\"/></svg>');\n * // url(\"data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M20.822 18.096c-3.439-.794-6.641-1.49-5.09-4.418 4.719-8.912 1.251-13.678-3.732-13.678-5.081 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-2.979.688-3.178 2.143-3.178 4.663l.005 1.241h10.483l.704-3h1.615l.704 3h10.483l.005-1.241c.001-2.52-.198-3.975-3.177-4.663zm-8.231 1.904h-1.164l-.91-2h2.994l-.92 2z'/%3E%3C/svg%3E\")\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name                  media\n * @namespace             sugar.scss.responsive.mixin\n * @type                  Mixin\n *\n * This mixin allows you to specify easily which media (defined in the media.config.js file) has to be targeted.\n * You can specify multiple medias if needed and specify how you want to target the specific media.\n * Check out the examples for more info.\n * By default, the Sugar toolkit offer these medias to be targeted:\n * - mobile\n * - mobile-portrait\n * - mobile-landscape\n * - tablet\n * - tablet-portrait\n * - tablet-landscape\n * - desktop\n *\n * You can use some \"actions\" to specify your target. The available actions are:\n * - '>': Greater than...\n * - '<': Lower than...\n * - '=': Equal...\n * - '>=': Greater or equal...\n * - '>=': Lower or equal...\n *\n * Your media queries can be something like this: '<tablet', '>mobile <desktop', '=tablet-landscape'.\n * If you don't specicy any action in your queries, by default the \"defaultAction\" property in the media.config.js file will\n * be applied and this default action is setted to \">=\". This is setted like this to work in \"mobile first\" schema by default.\n *\n * @param       {String}        $media      The media(s) you want to target.\n *\n * @example       scss\n * .my-cool-container {\n *    background: red;\n *\n *    @include Sugar.media(tablet) {\n *      background: blue;\n *    }\n *\n *    @include Sugar.media('>=desktop') {\n *      background: green;\n *    }\n * }\n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name            sr-only\n * @namespace       sugar.scss.screen-reader.mixin\n * @type            Mixin\n *\n * Make the element visible only for the screen readers\n *\n * @since       2.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @todo        Mixin header and documentation\n */\n/**\n * @name      _\n * @namespace           sugar.scss.core.selector.function\n * @type    function\n *\n * Selector wrapper to be able to simply generate all of your classes with a prefix for example.\n * This mixin take his settings from @config.classes.generate.prefix\n *\n * @param \t\t{String} \t\t$selector \t\tThe selector to process\n * @return \t\t{String} \t\t\t\t\t\tThe processed selector\n *\n * @example \tscss\n * Sugar.selector('.input--default'); // => .input\n * Sugar.selector('.input-default'); // => .input\n * Sugar.selector('.input.default'); // => .input\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      selector\n * @namespace           sugar.scss.core.selector.function\n * @type    function\n *\n * Process selector to avoid having --default, etc...\n *\n * @param \t\t{String} \t\t$selector \t\tThe selector to process\n * @return \t\t{String} \t\t\t\t\t\tThe processed selector\n *\n * @example \tscss\n * Sugar.selector('.input--default'); // => .input\n * Sugar.selector('.input-default'); // => .input\n * Sugar.selector('.input.default'); // => .input\n *\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @todo          Mixin header and documentation\n */\n/**\n * @name      round-overflow\n * @namespace           sugar.scss.shape.mixin\n * @type      mixin\n *\n * Apply some css to have a rounded element with already an overflow on it\n *\n * @param \t\t{Number} \t\t[$size=null] \t\tThe size (width and height) of the element wanted\n * @param \t\t{Number} \t\t[$width=null] \t\tThe width of the element wanted\n * @param \t\t{Number} \t\t[$height=null] \t\tThe height of the element wanted\n *\n * @example \tscss\n * .my-cool-image {\n * \t\\@include Sugar.round-overflow(100px);\n *\n * \timg {\n * \t\t\\@include Sugar.size(cover);\n * \t}\n * }\n *\n * @since      1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name        triangle\n * @namespace           sugar.scss.shape.mixin\n * @type      mixin\n *\n * Generate a triangle shape\n *\n * @param       {Number}        [$width=1em]              The triangle width\n * @param       {Number}        [$height=1em]             The triangle height\n * @param       {Color}         [$color=color(primary)]    The triangle color\n * @param       {String}        [$direction=right]        The triangle direction. Can be top, right, bottom, left, top-left, top-right, bottom-left or bottom-right\n * @param       {String}        [$transform-origin=center]    The triangle transform origin. Can be center or base\n * @param       {Number}        [$border-width=0]         The border width\n * @param       {Color}         [$border-color=null]      The border color\n *\n * @example     scss\n * .my-cool-triangle {\n *    @include Sugar.triangle();\n * }\n *\n * @since      1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      transition-map\n * @namespace           sugar.scss.core.transition.function\n * @type    function\n *\n * Take a transition as parameter and parse it to return the {Map} corresponding\n * The $transition parameter can be either a registered transition name or a custom css transition like : all .2s ease-in-out 2s\n * The $transition argument will be parsed with the [./_parse-properties.scss] function.\n *\n * @param \t\t\t{List} \t\t\t\t$transition \t\t\tThe registered transition name or the transition string to transform into map\n * @return \t\t\t{Map} \t\t\t\t\t\t\t\t\t\tThe corresponding transition map properties\n *\n * @example     scss\n * // register a transition\n * \\@include Sugar.setup((\n * \t\ttransitions : (\n * \t\t\tfast : all .2s ease-in-out,\n * \t\t\t// other transitions...\n * \t\t)\n * ));\n *\n * // registered transition\n * Sugar.transition-map(fast);\n * // {\n * // \tproperty : all,\n * // \tduration : .2s,\n * // \tease : ease-in-out\n * // }\n *\n * // custom transition\n * Sugar.transition-map(fast -delay .5s);\n * // {\n * // \tproperty : all,\n * // \tduration : .2s,\n * // \tease : ease-in-out,\n * // \tdelay : .5s\n * // }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      transition\n * @namespace           sugar.scss.core.transition.function\n * @type    function\n *\n * Take a transition as parameter and parse it to return the {List} corresponding\n * The $transitions parameter can be either a registered transition name or a custom css transition like : all .2s ease-in-out 2s\n * The $transitions argument will be parsed with the [./_parse-properties.scss] function.\n *\n * @param \t\t\t{List} \t\t\t\t$transitions \t\t\tThe registered transition(s) name(s) or the transition(s) strings(s) to transform into list\n * @return \t\t\t{List} \t\t\t\t\t\t\t\t\t\tThe corresponding transition list properties\n *\n * @example   scss\n * // register a transition\n * \\@include Sugar.setup((\n * \t\ttransitions : (\n * \t\t\tfast : all .2s ease-in-out 0s,\n * \t\t\t// other transitions...\n * \t\t)\n * ));\n *\n * // registered transition\n * .my-cool-element {\n * \t\ttransition : Sugar.transition(fast);\n * \t\t// transition : all .2s ease-in-out 0s;\n * }\n *\n * // custom transition\n * .my-cool-element {\n *  \ttransition : Sugar.transition(fast -delay .5s, fast width ease-in);\n *  \t// transition : all .2s ease-in-out .5s, width .2s ease-in 0s;\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    transition\n * @namespace           sugar.scss.core.transition.mixin\n * @type      mixin\n *\n * Take a transition as parameter and print the corresponding transition property\n * The $transitions parameter can be either a registered transition name or a custom css transition like : all .2s ease-in-out 2s\n * The $transitions argument will be parsed with the [./_parse-properties.scss] function.\n *\n * @param \t\t\t{List} \t\t\t\t$transitions \t\t\tThe registered transition(s) name(s) or the transition(s) strings(s) to transform into list\n * @return \t\t\t{List} \t\t\t\t\t\t\t\t\t\tThe corresponding transition list properties\n *\n * @example     scss\n * // register a transition\n * \\@include Sugar.setup((\n * \t\ttransitions : (\n * \t\t\tfast : all .2s ease-in-out 0s,\n * \t\t\t// other transitions...\n * \t\t)\n * ));\n *\n * // registered transition\n * .my-cool-element {\n * \t\t\\@include Sugar.transition(fast);\n * \t\t// transition : all .2s ease-in-out 0s;\n * }\n *\n * // custom transition\n * .my-cool-element {\n * \t\t\\@include Sugar.transition(fast -delay .5s, fast width ease-in);\n *  \t// transition : all .2s ease-in-out .5s, width .2s ease-in 0s;\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      rhythm-width\n * @namespace           sugar.scss.typography.function\n * @type      function\n *\n * Return the Map properties representation for the rhythme width\n * The rhythme width is the width of an element that target a certain number of letters by line\n *\n * @param \t\t\t{Integer} \t\t\t[$letters-count=settings.typography.line-letters-count] \t\tThe number of letters to target by line\n * @return \t\t\t{Map} \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tThe Map properties representation\n *\n * @example     scss\n * Sugar.rhythm-width(50);\n * // return\n * // (\n * // \tdisplay : block,\n * // \tmax-width : 50ex\n * // )\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      tf-class\n * @namespace           sugar.scss.typography.function\n * @type    function\n *\n * Return the text-format setting scope class\n *\n * @return \t\t{String} \t\tThe text-format scope class from settings.text-format.scope-class\n *\n * @example     scss\n * Sugar.tf-class(); // tf\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      vr-class\n * @namespace           sugar.scss.typography.function\n * @type    function\n *\n * Return the vertical-rhythm setting scope class\n *\n * @return \t\t{String} \t\tThe vertical-rhythm scope class from settings.vertical-rhythm.scope-class\n *\n * @example     scss\n * Sugar.vr-class(); // vr\n *\n * @since       1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name        rhythm-width\n * @namespace           sugar.scss.typography.mixin\n * @type      mixin\n *\n * Print out the css on a container that will make the lines displays a maximum number of characters.\n *\n * @example \tscss\n * h1 {\n * \t\\@include Sugar.rhythm-width(45);\n * }\n *\n * @since      1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    selection\n * @namespace           sugar.scss.typography.mixin\n * @type      mixin\n *\n * Set the user selection styling with ease\n *\n * @example \tscss\n * \\@include Sugar.selection() {\n * \tbackground: red;\n * \tcolor: white;\n * }\n *\n * @since      1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      show-vr\n * @namespace           sugar.scss.typography.mixin\n * @type      mixin\n *\n * Display the vertical rhythme\n *\n * @param \t\t\t{Color}      [$color=#0ff] \t\tThe color wanted\n *\n * @example     scss\n * body {\n * \t\t@include Sugar.show-vr();\n * }\n *\n * @since       1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      text-hide\n * @namespace           sugar.scss.typography.mixin\n * @type      mixin\n *\n * Hide the contained text\n *\n * @example \tscss\n * .my-cool-container {\n * \t\\@include Sugar.text-hide();\n * }\n *\n * @since      1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      text-truncate\n * @namespace           sugar.scss.typography.mixin\n * @type      mixin\n *\n * Print out the style to truncate the text if needed\n *\n * @example \tscss\n * h1 {\n * \t\\@include Sugar.text-truncate();\n * }\n *\n * @since      1.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      tf-scope\n * @namespace           sugar.scss.typography.mixin\n * @type      mixin\n *\n * Scope the content inside the `settings.typography.tf-scope-class` class\n *\n * @example       scss\n * .my-cool-item {\n * \t@include Sugar.tf-scope() {\n * \t\tmargin-bottom: 2em; // will be applied only if .my-cool-item is in the .vr scope\n * \t}\n * }\n *\n * @since       1.0.0\n * @see \t\t\thttps://medium.com/written-in-code/aligning-type-to-baseline-the-right-way-using-sass-e258fce47a9b#.lck2lgbni\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      vr-scope\n * @namespace           sugar.scss.typography.mixin\n * @type      mixin\n *\n * Scope the content inside the `settings.typography.vr-class` class\n *\n * @example       scss\n * .my-cool-item {\n * \t@include Sugar.vr-scope() {\n * \t\tmargin-bottom: 2em; // will be applied only if .my-cool-item is in the .vr scope\n * \t}\n * }\n *\n * @since       1.0.0\n * @see \t\t\thttps://medium.com/written-in-code/aligning-type-to-baseline-the-right-way-using-sass-e258fce47a9b#.lck2lgbni\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      convert\n * @namespace           sugar.scss.unit.function\n * @type      function\n *\n * Convert a passed value to the wanted unit\n * The conversion between some units that depends on a font-size will take the settings.typography.font-size value as reference.\n *\n * Available conversions\n * - from px\n * \t- to em\n * \t- to rem\n * \t- to pt\n * \t- to %\n *\n * - from em\n * \t- to rem\n * \t- to px\n * \t- to pt\n * \t- to %\n *\n * - from pt\n * \t- to em\n * \t- to rem\n * \t- to px\n * \t- to pt\n * \t- to %\n *\n * - from rem\n * \t- to em\n * \t- to px\n * \t- to pt\n * \t- to %\n *\n * @param \t\t\t{Number} \t\t$value \t\t\tThe value to convert\n * @param \t\t\t{String} \t\t$unit \t\t\tThe unit in which to convert the value\n * @return \t\t\t{Number} \t\t\t\t\t\tThe converted value\n *\n * @example     scss\n * // if the settings.typography.font-size === 16px\n * Sugar.convert(24px, rem) // 1.5rem\n * Sugar.convert(3rem, pt) // 36pt\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      is-unitless\n * @namespace           sugar.scss.unit.function\n * @type      function\n *\n * Check if the passed variable is unitless or not\n *\n * @param         {Number}        $number       The number to check\n * @return        {Boolean}                     true if unitless, false if not\n *\n * @example       scss\n * Sugar.is-unitless(20); // => true\n * Sugar.is-unitless(10px); // => false\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    strip-units\n * @namespace           sugar.scss.unit.function\n * @type      function\n *\n * Return a number without any units\n *\n * @param \t\t\t{Number} \t\t$number \t\tThe number to process\n * @return \t\t\t{Number} \t\t\t\t\t\tThe number without units\n *\n * @example       scss\n * Sugar.strip-units(12px); // => 12\n * Sugar.strip-units(30rem); // => 30\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    to-em\n * @namespace           sugar.scss.unit.function\n * @type      function\n *\n * Convert the passed value to em\n *\n * @param \t\t\t{Number} \t\t$value \t\tThe value to convert\n * @return \t\t\t{Number} \t\t\t\t\tThe em converted value\n *\n * @example     scss\n * Sugar.to-em(10px);\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    to-percent\n * @namespace           sugar.scss.unit.function\n * @type      function\n *\n * Convert the passed value to %\n *\n * @param \t\t\t{Number} \t\t$value \t\tThe value to convert\n * @return \t\t\t{Number} \t\t\t\t\tThe % converted value\n *\n * @example     scss\n * Sugar.to-percent(10px);\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      to-pt\n * @namespace           sugar.scss.unit.function\n * @type      function\n *\n * Convert the passed value to pt\n *\n * @param \t\t\t{Number} \t\t$value \t\tThe value to convert\n * @return \t\t\t{Number} \t\t\t\t\tThe pt converted value\n *\n * @example       scss\n * Sugar.to-pt(10px);\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    to-px\n * @namespace           sugar.scss.unit.function\n * @type      function\n *\n * Convert the passed value to px\n *\n * @param \t\t\t{Number} \t\t$value \t\tThe value to convert\n * @return \t\t\t{Number} \t\t\t\t\tThe px converted value\n *\n * @example       scss\n * Sugar.to-px(10rem);\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    to-rem\n * @namespace           sugar.scss.unit.function\n * @type      function\n *\n * Convert the passed value to rem\n *\n * @param \t\t\t{Number} \t\t$value \t\tThe value to convert\n * @return \t\t\t{Number} \t\t\t\t\tThe rem converted value\n *\n * @example     scss\n * Sugar.to-rem(10px);\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    unit\n * @namespace           sugar.scss.unit.function\n * @type      function\n *\n * Return the unit of the passed number\n *\n * @param       {Number}      $number       The number to get the unit from\n * @return      {String}                    The unit\n *\n * @example     scss\n * Sugar.unit(10px); // => px\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name    border-map\n * @namespace           sugar.scss.util.function\n * @type      function\n *\n * Parse and return the Map respresentation of a border property\n * The $border argument will be parsed with the [s-parse-properties](../core/functions/_s-parse-properties.scss) function.\n *\n * @param \t\t{List} \t\t\t$border \t\t\tThe border property to parse\n * @return \t\t{Map} \t\t\t\t\t\t\t\tThe Map represenration of the border\n *\n * @example       scss\n * Sugar.border-map(1px solid white);\n * // return\n * // (\n * // \twidth : 1px,\n * // \tcolor : white,\n * // \tstyle : solid\n * // )\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      margin-map\n * @namespace           sugar.scss.util.function\n * @type      function\n *\n * Parse and return the Map respresentation of a margin property\n * The $margin argument will be parsed with the [s-parse-properties](../core/functions/_s-parse-properties.scss) function.\n *\n * @param \t\t\t{List|Number} \t\t\t$margin \t\t\tThe margin property to parse\n * @return \t\t\t{Map} \t\t\t\t\t\t\t\t\t\tThe map representation\n *\n * @example   scss\n * Sugar.margin-map(10px); // => ( top:10px, right:10px, bottom:10px, left:10px )\n * Sugar.margin-map(10px 20px); // => ( top:10px, right:20px, bottom:10px, left:20px )\n * Sugar.margin-map(5px 10px 15px 20px); // => ( top:5px, right:10px, bottom:15px, left:20px )\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      position-map\n * @namespace           sugar.scss.util.function\n * @type      function\n *\n * Return the representation of a position styling like position:absolute; top:0; left:100%; etc...\n * This function gives you some shortcuts to align your element top, bottom, middle, center, etc...\n *\n * @param \t\t{String} \t\t\t[$position=absolute] \t\t\tThe position css property\n * @param \t\t{String} \t\t\t[$vertical-align=top] \t\t\tThe vertical alignement wanted (top,middle,bottom)\n * @param \t\t{String} \t\t\t[$align=left] \t\t\t\t\tThe horizontal alignement wanted (left,center,right)\n * @param \t\t{Number} \t\t\t[$top=null] \t\t\t\t\tThe top property wanted\n * @param \t\t{Number} \t\t\t[$right=null] \t\t\t\t\tThe right property wanted\n * @param \t\t{Number} \t\t\t[$bottom=null] \t\t\t\t\tThe bottom property wanted\n * @param \t\t{Number} \t\t\t[$left=null] \t\t\t\t\tThe left property wanted\n * @return \t\t{Map} \t\t\t\t\t\t\t\t\t\t\t\tThe map representation of the position wanted\n *\n * @example   scss\n * Sugar.position-map(absolute, top, right);\n * Sugar.position-map(absolute, middle, center);\n * Sugar.position-map(relative, bottom, right);\n * Sugar.position-map(absolute, bottom, center);\n * // etc...\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n/**\n * @name      translate-map\n * @namespace           sugar.scss.util.function\n * @type      function\n *\n * Return the Map properties representation of a translate x,y and z\n *\n * @param \t\t\t{Number} \t\t\t[$x=0] \t\t\tThe x translate value\n * @param \t\t\t{Number} \t\t\t[$y=0] \t\t\tThe y translate value\n * @param \t\t\t{Number} \t\t\t[$z=0] \t\t\tThe z translate value\n * @return \t\t\t{Map} \t\t\t\t\t\t\t\tThe translate Map representation\n *\n * @example     scss\n * Sugar.translate-map(10px,20px);\n * // return\n * // (\n * // \ttransform: translateX(10px) translateY(20px) translateZ(0)\n * // )\n *\n * @since      1.0.0\n * @author \t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n.hello {\n  content: \"world\";\n}\n\nhtml,\nbody,\ndiv,\nspan,\napplet,\nobject,\niframe,\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\np,\nblockquote,\npre,\na,\nabbr,\nacronym,\naddress,\nbig,\ncite,\ncode,\ndel,\ndfn,\nem,\nimg,\nins,\nkbd,\nq,\ns,\nsamp,\nsmall,\nstrike,\nstrong,\nsub,\nsup,\ntt,\nvar,\nb,\nu,\ni,\ncenter,\ndl,\ndt,\ndd,\nol,\nul,\nli,\nfieldset,\nform,\nlabel,\nlegend,\ntable,\ncaption,\ntbody,\ntfoot,\nthead,\ntr,\nth,\ntd,\narticle,\naside,\ncanvas,\ndetails,\nembed,\nfigure,\nfigcaption,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\noutput,\nruby,\nsection,\nsummary,\ntime,\nmark,\naudio,\nvideo {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\n\n/* make sure to set some focus styles for accessibility */\n:focus {\n  outline: 0;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle,\naside,\ndetails,\nfigcaption,\nfigure,\nfooter,\nheader,\nhgroup,\nmenu,\nnav,\nsection {\n  display: block;\n}\n\nbody {\n  line-height: 1;\n}\n\nol,\nul {\n  list-style: none;\n}\n\nblockquote,\nq {\n  quotes: none;\n}\n\nblockquote:before,\nblockquote:after,\nq:before,\nq:after {\n  content: \"\";\n  content: none;\n}\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\ninput[type=search]::-webkit-search-cancel-button,\ninput[type=search]::-webkit-search-decoration,\ninput[type=search]::-webkit-search-results-button,\ninput[type=search]::-webkit-search-results-decoration {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n}\n\ninput[type=search] {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  -webkit-box-sizing: content-box;\n  -moz-box-sizing: content-box;\n  box-sizing: content-box;\n}\n\ntextarea {\n  overflow: auto;\n  vertical-align: top;\n  resize: vertical;\n}\n\n/**\n* Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.\n*/\naudio,\ncanvas,\nvideo {\n  display: inline-block;\n  *display: inline;\n  *zoom: 1;\n  max-width: 100%;\n}\n\n/**\n* Prevent modern browsers from displaying `audio` without controls.\n* Remove excess height in iOS 5 devices.\n*/\naudio:not([controls]) {\n  display: none;\n  height: 0;\n}\n\n/**\n* Address styling not present in IE 7/8/9, Firefox 3, and Safari 4.\n* Known issue: no IE 6 support.\n*/\n[hidden] {\n  display: none;\n}\n\n/**\n* 1. Correct text resizing oddly in IE 6/7 when body `font-size` is set using\n*    `em` units.\n* 2. Prevent iOS text size adjust after orientation change, without disabling\n*    user zoom.\n*/\nhtml {\n  font-size: 100%;\n  /* 1 */\n  -webkit-text-size-adjust: 100%;\n  /* 2 */\n  -ms-text-size-adjust: 100%;\n  /* 2 */\n}\n\n/**\n* Address `outline` inconsistency between Chrome and other browsers.\n*/\na:focus {\n  outline: thin dotted;\n}\n\n/**\n* Improve readability when focused and also mouse hovered in all browsers.\n*/\na:active,\na:hover {\n  outline: 0;\n}\n\n/**\n* 1. Remove border when inside `a` element in IE 6/7/8/9 and Firefox 3.\n* 2. Improve image quality when scaled in IE 7.\n*/\nimg {\n  border: 0;\n  /* 1 */\n  -ms-interpolation-mode: bicubic;\n  /* 2 */\n}\n\n/**\n* Address margin not present in IE 6/7/8/9, Safari 5, and Opera 11.\n*/\nfigure {\n  margin: 0;\n}\n\n/**\n* Correct margin displayed oddly in IE 6/7.\n*/\nform {\n  margin: 0;\n}\n\n/**\n* Define consistent border, margin, and padding.\n*/\nfieldset {\n  border: 1px solid #c0c0c0;\n  margin: 0 2px;\n  padding: 0.35em 0.625em 0.75em;\n}\n\n/**\n* 1. Correct color not being inherited in IE 6/7/8/9.\n* 2. Correct text not wrapping in Firefox 3.\n* 3. Correct alignment displayed oddly in IE 6/7.\n*/\nlegend {\n  border: 0;\n  /* 1 */\n  padding: 0;\n  white-space: normal;\n  /* 2 */\n  *margin-left: -7px;\n  /* 3 */\n}\n\n/**\n* 1. Correct font size not being inherited in all browsers.\n* 2. Address margins set differently in IE 6/7, Firefox 3+, Safari 5,\n*    and Chrome.\n* 3. Improve appearance and consistency in all browsers.\n*/\nbutton,\ninput,\nselect,\ntextarea {\n  font-size: 100%;\n  /* 1 */\n  margin: 0;\n  /* 2 */\n  vertical-align: baseline;\n  /* 3 */\n  *vertical-align: middle;\n  /* 3 */\n}\n\n/**\n* Address Firefox 3+ setting `line-height` on `input` using `!important` in\n* the UA stylesheet.\n*/\nbutton,\ninput {\n  line-height: normal;\n}\n\n/**\n* Address inconsistent `text-transform` inheritance for `button` and `select`.\n* All other form control elements do not inherit `text-transform` values.\n* Correct `button` style inheritance in Chrome, Safari 5+, and IE 6+.\n* Correct `select` style inheritance in Firefox 4+ and Opera.\n*/\nbutton,\nselect {\n  text-transform: none;\n}\n\n/**\n* 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`\n*    and `video` controls.\n* 2. Correct inability to style clickable `input` types in iOS.\n* 3. Improve usability and consistency of cursor style between image-type\n*    `input` and others.\n* 4. Remove inner spacing in IE 7 without affecting normal text inputs.\n*    Known issue: inner spacing remains in IE 6.\n*/\nbutton,\nhtml input[type=button],\ninput[type=reset],\ninput[type=submit] {\n  -webkit-appearance: button;\n  /* 2 */\n  cursor: pointer;\n  /* 3 */\n  *overflow: visible;\n  /* 4 */\n}\n\n/**\n* Re-set default cursor for disabled elements.\n*/\nbutton[disabled],\nhtml input[disabled] {\n  cursor: default;\n}\n\n/**\n* 1. Address box sizing set to content-box in IE 8/9.\n* 2. Remove excess padding in IE 8/9.\n* 3. Remove excess padding in IE 7.\n*    Known issue: excess padding remains in IE 6.\n*/\ninput[type=checkbox],\ninput[type=radio] {\n  box-sizing: border-box;\n  /* 1 */\n  padding: 0;\n  /* 2 */\n  *height: 13px;\n  /* 3 */\n  *width: 13px;\n  /* 3 */\n}\n\n/**\n* 1. Address `appearance` set to `searchfield` in Safari 5 and Chrome.\n* 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome\n*    (include `-moz` to future-proof).\n*/\ninput[type=search] {\n  -webkit-appearance: textfield;\n  /* 1 */\n  -moz-box-sizing: content-box;\n  -webkit-box-sizing: content-box;\n  /* 2 */\n  box-sizing: content-box;\n}\n\n/**\n* Remove inner padding and search cancel button in Safari 5 and Chrome\n* on OS X.\n*/\ninput[type=search]::-webkit-search-cancel-button,\ninput[type=search]::-webkit-search-decoration {\n  -webkit-appearance: none;\n}\n\n/**\n* Remove inner padding and border in Firefox 3+.\n*/\nbutton::-moz-focus-inner,\ninput::-moz-focus-inner {\n  border: 0;\n  padding: 0;\n}\n\n/**\n* 1. Remove default vertical scrollbar in IE 6/7/8/9.\n* 2. Improve readability and alignment in all browsers.\n*/\ntextarea {\n  overflow: auto;\n  /* 1 */\n  vertical-align: top;\n  /* 2 */\n}\n\n/**\n* Remove most spacing between table cells.\n*/\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\nhtml,\nbutton,\ninput,\nselect,\ntextarea {\n  color: #222;\n}\n\n::-moz-selection {\n  background: #b3d4fc;\n  text-shadow: none;\n}\n\n::selection {\n  background: #b3d4fc;\n  text-shadow: none;\n}\n\nimg {\n  vertical-align: middle;\n}\n\nfieldset {\n  border: 0;\n  margin: 0;\n  padding: 0;\n}\n\ntextarea {\n  resize: vertical;\n}\n\n.chromeframe {\n  margin: 0.2em 0;\n  background: #ccc;\n  color: #000;\n  padding: 0.2em 0;\n}\n\nhtml {\n  box-sizing: border-box;\n}\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit;\n}\n\na {\n  color: inherit;\n}\n\nbody {\n  color: #848e91;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n/**\n * @name   \t\t\tquote\n * @styleguide \t\tFonts / Faces\n * @display \t\tfont\n * @font-family \tPalatino, Times, Georgia, serif\n * @font-style \t\tnormal\n * @font-weight \tnormal\n * @font-display    auto\n */\n/**\n * @name   \t\t\tcode\n * @styleguide \t\tFonts / Faces\n * @display \t\tfont\n * @font-family \tMenlo, Monaco, Consolas, Courier New, monospace\n * @font-style \t\tnormal\n * @font-weight \tnormal\n * @font-display    auto\n */\nhtml {\n  font-size: 16px;\n  color: #848e91;\n}\n\nhtml {\n  font-family: \"Roboto\";\n  font-size: 1rem;\n}\n\n.s-filtrable-input {\n  display: inline-block;\n  position: relative;\n}\n\n.s-filtrable-input__list {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  overflow-x: hidden;\n  overflow-y: auto;\n  opacity: 0;\n  pointer-events: none;\n  transition: max-height 0.2s ease-in-out;\n}\n.s-filtrable-input__node:focus + .s-filtrable-input__list, .s-filtrable-input__list:focus {\n  opacity: 1;\n  pointer-events: all;\n}\n.s-filtrable-input--ontop .s-filtrable-input__list {\n  bottom: 100%;\n  top: initial;\n}\n\n.s-filtrable-input__list-item {\n  cursor: pointer;\n}\n.s-filtrable-input__list-item * {\n  pointer-events: none;\n}", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-
-/***/ "../../toolkits/sugar/node_modules/css-loader/dist/runtime/api.js":
-/*!**************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/css-loader/dist/runtime/api.js ***!
-  \**************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-// eslint-disable-next-line func-names
-module.exports = function (useSourceMap) {
-  var list = []; // return the list of modules as css string
-
-  list.toString = function toString() {
-    return this.map(function (item) {
-      var content = cssWithMappingToString(item, useSourceMap);
-
-      if (item[2]) {
-        return "@media ".concat(item[2], " {").concat(content, "}");
-      }
-
-      return content;
-    }).join('');
-  }; // import a list of modules into the list
-  // eslint-disable-next-line func-names
-
-
-  list.i = function (modules, mediaQuery, dedupe) {
-    if (typeof modules === 'string') {
-      // eslint-disable-next-line no-param-reassign
-      modules = [[null, modules, '']];
-    }
-
-    var alreadyImportedModules = {};
-
-    if (dedupe) {
-      for (var i = 0; i < this.length; i++) {
-        // eslint-disable-next-line prefer-destructuring
-        var id = this[i][0];
-
-        if (id != null) {
-          alreadyImportedModules[id] = true;
-        }
-      }
-    }
-
-    for (var _i = 0; _i < modules.length; _i++) {
-      var item = [].concat(modules[_i]);
-
-      if (dedupe && alreadyImportedModules[item[0]]) {
-        // eslint-disable-next-line no-continue
-        continue;
-      }
-
-      if (mediaQuery) {
-        if (!item[2]) {
-          item[2] = mediaQuery;
-        } else {
-          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
-        }
-      }
-
-      list.push(item);
-    }
-  };
-
-  return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
-
-  var cssMapping = item[3];
-
-  if (!cssMapping) {
-    return content;
-  }
-
-  if (useSourceMap && typeof btoa === 'function') {
-    var sourceMapping = toComment(cssMapping);
-    var sourceURLs = cssMapping.sources.map(function (source) {
-      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
-    });
-    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-  }
-
-  return [content].join('\n');
-} // Adapted from convert-source-map (MIT)
-
-
-function toComment(sourceMap) {
-  // eslint-disable-next-line no-undef
-  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
-  return "/*# ".concat(data, " */");
-}
 
 /***/ }),
 
@@ -24537,286 +27672,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ "../../toolkits/sugar/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
-/*!*************************************************************************************************************************************************!*\
-  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
-  \*************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var isOldIE = function isOldIE() {
-  var memo;
-  return function memorize() {
-    if (typeof memo === 'undefined') {
-      // Test for IE <= 9 as proposed by Browserhacks
-      // @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-      // Tests for existence of standard globals is to allow style-loader
-      // to operate correctly into non-standard environments
-      // @see https://github.com/webpack-contrib/style-loader/issues/177
-      memo = Boolean(window && document && document.all && !window.atob);
-    }
-
-    return memo;
-  };
-}();
-
-var getTarget = function getTarget() {
-  var memo = {};
-  return function memorize(target) {
-    if (typeof memo[target] === 'undefined') {
-      var styleTarget = document.querySelector(target); // Special case to return head of iframe instead of iframe itself
-
-      if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
-        try {
-          // This will throw an exception if access to iframe is blocked
-          // due to cross-origin restrictions
-          styleTarget = styleTarget.contentDocument.head;
-        } catch (e) {
-          // istanbul ignore next
-          styleTarget = null;
-        }
-      }
-
-      memo[target] = styleTarget;
-    }
-
-    return memo[target];
-  };
-}();
-
-var stylesInDom = [];
-
-function getIndexByIdentifier(identifier) {
-  var result = -1;
-
-  for (var i = 0; i < stylesInDom.length; i++) {
-    if (stylesInDom[i].identifier === identifier) {
-      result = i;
-      break;
-    }
-  }
-
-  return result;
-}
-
-function modulesToDom(list, options) {
-  var idCountMap = {};
-  var identifiers = [];
-
-  for (var i = 0; i < list.length; i++) {
-    var item = list[i];
-    var id = options.base ? item[0] + options.base : item[0];
-    var count = idCountMap[id] || 0;
-    var identifier = "".concat(id, " ").concat(count);
-    idCountMap[id] = count + 1;
-    var index = getIndexByIdentifier(identifier);
-    var obj = {
-      css: item[1],
-      media: item[2],
-      sourceMap: item[3]
-    };
-
-    if (index !== -1) {
-      stylesInDom[index].references++;
-      stylesInDom[index].updater(obj);
-    } else {
-      stylesInDom.push({
-        identifier: identifier,
-        updater: addStyle(obj, options),
-        references: 1
-      });
-    }
-
-    identifiers.push(identifier);
-  }
-
-  return identifiers;
-}
-
-function insertStyleElement(options) {
-  var style = document.createElement('style');
-  var attributes = options.attributes || {};
-
-  if (typeof attributes.nonce === 'undefined') {
-    var nonce =  true ? __webpack_require__.nc : undefined;
-
-    if (nonce) {
-      attributes.nonce = nonce;
-    }
-  }
-
-  Object.keys(attributes).forEach(function (key) {
-    style.setAttribute(key, attributes[key]);
-  });
-
-  if (typeof options.insert === 'function') {
-    options.insert(style);
-  } else {
-    var target = getTarget(options.insert || 'head');
-
-    if (!target) {
-      throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");
-    }
-
-    target.appendChild(style);
-  }
-
-  return style;
-}
-
-function removeStyleElement(style) {
-  // istanbul ignore if
-  if (style.parentNode === null) {
-    return false;
-  }
-
-  style.parentNode.removeChild(style);
-}
-/* istanbul ignore next  */
-
-
-var replaceText = function replaceText() {
-  var textStore = [];
-  return function replace(index, replacement) {
-    textStore[index] = replacement;
-    return textStore.filter(Boolean).join('\n');
-  };
-}();
-
-function applyToSingletonTag(style, index, remove, obj) {
-  var css = remove ? '' : obj.media ? "@media ".concat(obj.media, " {").concat(obj.css, "}") : obj.css; // For old IE
-
-  /* istanbul ignore if  */
-
-  if (style.styleSheet) {
-    style.styleSheet.cssText = replaceText(index, css);
-  } else {
-    var cssNode = document.createTextNode(css);
-    var childNodes = style.childNodes;
-
-    if (childNodes[index]) {
-      style.removeChild(childNodes[index]);
-    }
-
-    if (childNodes.length) {
-      style.insertBefore(cssNode, childNodes[index]);
-    } else {
-      style.appendChild(cssNode);
-    }
-  }
-}
-
-function applyToTag(style, options, obj) {
-  var css = obj.css;
-  var media = obj.media;
-  var sourceMap = obj.sourceMap;
-
-  if (media) {
-    style.setAttribute('media', media);
-  } else {
-    style.removeAttribute('media');
-  }
-
-  if (sourceMap && btoa) {
-    css += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), " */");
-  } // For old IE
-
-  /* istanbul ignore if  */
-
-
-  if (style.styleSheet) {
-    style.styleSheet.cssText = css;
-  } else {
-    while (style.firstChild) {
-      style.removeChild(style.firstChild);
-    }
-
-    style.appendChild(document.createTextNode(css));
-  }
-}
-
-var singleton = null;
-var singletonCounter = 0;
-
-function addStyle(obj, options) {
-  var style;
-  var update;
-  var remove;
-
-  if (options.singleton) {
-    var styleIndex = singletonCounter++;
-    style = singleton || (singleton = insertStyleElement(options));
-    update = applyToSingletonTag.bind(null, style, styleIndex, false);
-    remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-  } else {
-    style = insertStyleElement(options);
-    update = applyToTag.bind(null, style, options);
-
-    remove = function remove() {
-      removeStyleElement(style);
-    };
-  }
-
-  update(obj);
-  return function updateStyle(newObj) {
-    if (newObj) {
-      if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap) {
-        return;
-      }
-
-      update(obj = newObj);
-    } else {
-      remove();
-    }
-  };
-}
-
-module.exports = function (list, options) {
-  options = options || {}; // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-  // tags it will allow on a page
-
-  if (!options.singleton && typeof options.singleton !== 'boolean') {
-    options.singleton = isOldIE();
-  }
-
-  list = list || [];
-  var lastIdentifiers = modulesToDom(list, options);
-  return function update(newList) {
-    newList = newList || [];
-
-    if (Object.prototype.toString.call(newList) !== '[object Array]') {
-      return;
-    }
-
-    for (var i = 0; i < lastIdentifiers.length; i++) {
-      var identifier = lastIdentifiers[i];
-      var index = getIndexByIdentifier(identifier);
-      stylesInDom[index].references--;
-    }
-
-    var newLastIdentifiers = modulesToDom(newList, options);
-
-    for (var _i = 0; _i < lastIdentifiers.length; _i++) {
-      var _identifier = lastIdentifiers[_i];
-
-      var _index = getIndexByIdentifier(_identifier);
-
-      if (stylesInDom[_index].references === 0) {
-        stylesInDom[_index].updater();
-
-        stylesInDom.splice(_index, 1);
-      }
-    }
-
-    lastIdentifiers = newLastIdentifiers;
-  };
-};
-
-/***/ }),
-
 /***/ "../../toolkits/sugar/node_modules/to-regex-range/index.js":
 /*!*******************************************************************************************************************!*\
   !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/toolkits/sugar/node_modules/to-regex-range/index.js ***!
@@ -26359,572 +29214,6 @@ module.exports = function packageRoot(from, highest) {
   return false;
 };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/process/browser.js */ "../../toolkits/sugar/node_modules/process/browser.js")))
-
-/***/ }),
-
-/***/ "./src/js/index.js":
-/*!*************************!*\
-  !*** ./src/js/index.js ***!
-  \*************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _deepMerge = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/object/deepMerge */ "../../toolkits/sugar/js/object/deepMerge.js"));
-
-var _on = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/event/on */ "../../toolkits/sugar/js/event/on.js"));
-
-__webpack_require__(/*! ../scss/_bare.scss */ "./src/scss/_bare.scss");
-
-var _register = __webpack_require__(/*! @coffeekraken/sugar/js/webcomponent/register */ "../../toolkits/sugar/js/webcomponent/register.js");
-
-var _clone = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/object/clone */ "../../toolkits/sugar/js/object/clone.js"));
-
-var _throttle = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/function/throttle */ "../../toolkits/sugar/js/function/throttle.js"));
-
-var _nodeIndex = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/dom/nodeIndex */ "../../toolkits/sugar/js/dom/nodeIndex.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n                <li class=\"", "__list-item ", "\">\n                  ", "\n                </li>\n              "]);
-
-  _templateObject6 = function _templateObject6() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n      ", "\n      <ul class=\"", "__list\" tabindex=\"1\">\n        ", "\n      </ul>\n    "]);
-
-  _templateObject5 = function _templateObject5() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n      ", ""]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n                <div class=\"", "\">\n                  ", "\n                </div>\n              "]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n                <div class=\"", "\">\n                    ", "\n                </div>\n              "]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n              ", "\n              ", "\n            "]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-// __on('s-filtrable-input.attach', (comp) => {
-//   // rework the items
-//   const itemsArray = __docMap.map((item) => {
-//     return {
-//       title: item.namespace,
-//       description: item.path
-//     };
-//   });
-//   comp.prop('items', itemsArray);
-// });
-// __on('s-filtrable-input.validate', (selectedItem) => {
-//   console.log('SELET', selectedItem);
-// });
-var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponent) {
-  _inherits(SFiltrableInputWebComponent, _SLitHtmlWebComponent);
-
-  var _super = _createSuper(SFiltrableInputWebComponent);
-
-  /**
-   * name         _selectedItemIdx
-   * @type        Number
-   * @private
-   *
-   * Track which is the selected item index
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-  /**
-   * @name          _originalItems
-   * @type          Array
-   * @private
-   *
-   * This store the original items before the filter process
-   * to be able to restore them after that
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-  /**
-   * @name          constructor
-   * @type          Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  function SFiltrableInputWebComponent(settings) {
-    var _this;
-
-    if (settings === void 0) {
-      settings = {};
-    }
-
-    _classCallCheck(this, SFiltrableInputWebComponent);
-
-    _this = _super.call(this, (0, _deepMerge.default)({
-      maxDisplayItems: 50,
-      filter: {
-        throttleTimeout: 100,
-        properties: ['title', 'description'],
-        function: null
-      },
-      template: {
-        item: (itemObj, component, settings, lit, highlightFilter) => lit.html(_templateObject(), itemObj.title ? lit.html(_templateObject2(), component.className('list-item__title'), highlightFilter(itemObj.title)) : '', itemObj.description ? lit.html(_templateObject3(), component.className('list-item__description'), highlightFilter(itemObj.description)) : '')
-      }
-    }, settings));
-
-    _defineProperty(_assertThisInitialized(_this), "_selectedItemIdx", -1);
-
-    _defineProperty(_assertThisInitialized(_this), "_originalItems", null);
-
-    if (!_this._settings.filter.function) _this._settings.filter.function = _this.filterItems.bind(_assertThisInitialized(_this));
-    console.log('HELLO');
-    _this._maxDisplayItems = _this._settings.maxDisplayItems;
-
-    _this.on('ready', () => {
-      _this._$list = _this.$('.list');
-      var inputThrottleTimeout;
-
-      _this.addEventListener('input', e => {
-        clearTimeout(inputThrottleTimeout);
-        inputThrottleTimeout = setTimeout(() => {
-          _this.dispatch('input', _this.value);
-        }, _this.prop('inputThrottle'));
-      });
-
-      var filterTimeout;
-
-      _this.addEventListener('input', e => {
-        clearTimeout(filterTimeout);
-        if (_this.prop('loading')) return;
-        filterTimeout = setTimeout( /*#__PURE__*/_asyncToGenerator(function* () {
-          _this.prop('loading', true);
-
-          _this._maxDisplayItems = _this._settings.maxDisplayItems;
-          _this._selectedItemIdx = -1;
-          _this._filterString = e.srcElement.value;
-          var newItemsArray = yield _this._settings.filter.function(_this._filterString);
-
-          _this.prop('loading', false);
-
-          _this.prop('items', newItemsArray);
-
-          _this._$list.scrollTop = 0;
-        }), _this._settings.filter.throttleTimeout);
-      });
-
-      _this._$list.addEventListener('click', e => {
-        // get the node index in the list
-        var nodeIndex = (0, _nodeIndex.default)(e.srcElement); // select the clicked item
-
-        _this.select(nodeIndex);
-      });
-
-      _this._$list.addEventListener('scroll', e => {
-        if (e.srcElement.scrollHeight - e.srcElement.scrollTop <= e.srcElement.clientHeight + 50) {
-          if (_this._maxDisplayItems < _this._props.items.value.length) {
-            _this._maxDisplayItems += _this._settings.maxDisplayItems;
-
-            _this.render();
-          }
-        }
-      });
-
-      document.addEventListener('keydown', e => {
-        // interact with the component only if it is active
-        if (!_this.isActive()) return;
-
-        switch (e.keyCode) {
-          case 38:
-            // up
-            _this.up();
-
-            break;
-
-          case 40:
-            // down
-            _this.down();
-
-            break;
-
-          case 13:
-            // enter
-            _this.validate();
-
-            break;
-
-          case 27:
-            // escape
-            _this.escape();
-
-            break;
-        }
-      });
-      document.addEventListener('scroll', e => {
-        var element = _this.$container;
-        var topPos = element.getBoundingClientRect().top;
-
-        if (document.documentElement.clientHeight / 2 < topPos) {
-          _this.$container.classList.add(_this.className('--ontop'));
-
-          _this._$list.style.maxHeight = "".concat(topPos - 20, "px");
-        } else {
-          _this.$container.classList.remove(_this.className('--ontop'));
-
-          _this._$list.style.maxHeight = "".concat(document.documentElement.clientHeight - topPos - _this.$container.clientHeight - 20, "px");
-        }
-      });
-      setTimeout(() => {
-        _this._props.items.value.push({
-          name: 'Hello world'
-        });
-      }, 2000);
-      setTimeout(() => {
-        _this._props.items.value.pop();
-      }, 4000);
-    });
-
-    return _this;
-  }
-  /**
-   * @name              isActive
-   * @type              Function
-   *
-   * This method return you if the component is active or not. Active mean that the user is
-   * interacting with it
-   *
-   * @return      {Boolean}               true if the component is active, false if not
-   *
-   * @since     1.0.0
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-
-
-  _createClass(SFiltrableInputWebComponent, [{
-    key: "isActive",
-    value: function isActive() {
-      if (this === document.activeElement) return true;
-      if (this._$list === document.activeElement) return true;
-      return false;
-    }
-    /**
-     * @name              select
-     * @type              Function
-     *
-     * This method can be called to select an item in the list
-     *
-     * @param       {Number}        idx         The index of the element you want to select
-     * @return      {Boolean}                   true if the select process has been successfull, false if not
-     *
-     * @since       1.0.0
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-
-  }, {
-    key: "select",
-    value: function select(idx) {
-      if (typeof idx !== 'number') return false; // check that we have an item with this idx
-
-      if (idx < 0 || idx >= this._props.items.value.length) return false; // set the idx to the selectedItemIndex variable
-
-      this._selectedItemIdx = idx; // render the component
-
-      this.render(); // make a clone of the selected item
-
-      var selectedItem = (0, _clone.default)(this._props.items.value[this._selectedItemIdx]); // dispatch a select event
-
-      this.dispatch('select', selectedItem);
-    }
-    /**
-     * @name              escape
-     * @type              Function
-     *
-     * This method can be called to "exit" the filtrable input
-     *
-     * @since       1.0.0
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-
-  }, {
-    key: "escape",
-    value: function escape() {}
-    /**
-     * @name              validate
-     * @type              Function
-     *
-     * This method can be called to validate a choice in the filtrable input
-     *
-     * @since       1.0.0
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-
-  }, {
-    key: "validate",
-    value: function validate() {
-      // check that we have an item selected
-      if (this._selectedItemIdx === -1) return; // make sure the selected item exist in the stack
-
-      if (!this._props.items.value[this._selectedItemIdx]) return; // clone the selected item
-
-      var selectedItem = (0, _clone.default)(this._props.items.value[this._selectedItemIdx]); // dispatch an event with the selected item
-
-      this.dispatch('validate', selectedItem); // return the selected item
-
-      return selectedItem;
-    }
-    /**
-     * @name              up
-     * @type              Function
-     *
-     * This method can be called to select the previous item in the list
-     *
-     * @since       1.0.0
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-
-  }, {
-    key: "up",
-    value: function up() {
-      // update the selected index
-      if (this._selectedItemIdx <= 0) return;
-      this._selectedItemIdx--; // render the component
-
-      this.render(); // get the selected item in the DOM
-
-      var $selectedItem = this.$(this.className('.list-item--selected'));
-
-      if ($selectedItem.offsetTop <= this._$list.scrollTop) {
-        this._$list.scrollTop = $selectedItem.offsetTop;
-      } // dispatch an event
-
-
-      this.dispatch('up', this);
-    }
-    /**
-     * @name              down
-     * @type              Function
-     *
-     * This method can be called to select the next item in the list
-     *
-     * @since       1.0.0
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-
-  }, {
-    key: "down",
-    value: function down() {
-      // update the selected index
-      if (this._selectedItemIdx === this._props.items.value.length - 1) return;
-      this._selectedItemIdx++; // render the component
-
-      this.render(); // get the selected item in the DOM
-
-      var $selectedItem = this.$(this.className('.list-item--selected'));
-
-      if ($selectedItem.offsetTop > this._$list.scrollTop + this._$list.clientHeight - $selectedItem.clientHeight) {
-        this._$list.scrollTop = $selectedItem.offsetTop - this._$list.clientHeight + $selectedItem.clientHeight;
-      } // dispatch an event
-
-
-      this.dispatch('down', this);
-    }
-    /**
-     * @name              filterItems
-     * @type              Function
-     *
-     * This method take a string and filter the items using the "settings.filterProps" array
-     *
-     * @param       {String}          filterString        The string to search in the items
-     *
-     * @since       1.0.0
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-
-  }, {
-    key: "filterItems",
-    value: function filterItems(filterString) {
-      return new Promise(resolve => {
-        // save the items if needed
-        if (!this._originalItems) {
-          this._originalItems = (0, _clone.default)(this._props.items.value, true);
-        } // search in original items
-
-
-        var newItems = this._originalItems.filter(item => {
-          for (var idx in this._settings.filter.properties) {
-            var prop = this._settings.filter.properties[idx];
-            if (!item[prop] || typeof item[prop] !== 'string') continue;
-            if (item[prop].includes(filterString)) return true;
-          }
-
-          return false;
-        }); // return the new items
-
-
-        resolve(newItems);
-      });
-    }
-    /**
-     * @name            highlightFilter
-     * @type            Function
-     *
-     * This method has to be used in your items template to highlight the words
-     * that correspond to the search
-     *
-     * @param       {String}          string          The string to highlight the search string
-     * @return      {String}                          The highlighted string
-     *
-     * @since       1.0.0
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-
-  }, {
-    key: "highlightFilter",
-    value: function highlightFilter(string) {
-      if (!this._filterString) return string;
-      return this.lit.html(_templateObject4(), this.lit.unsafeHTML(string.split(this._filterString).join("<span class=\"".concat(this.className('list-item__highlighted'), "\">___@@@___</span>")).split('___@@@___').join(this._filterString)));
-    }
-  }]);
-
-  return SFiltrableInputWebComponent;
-}((0, _register.SLitHtmlWebComponent)(HTMLInputElement));
-
-exports.default = SFiltrableInputWebComponent;
-
-_defineProperty(SFiltrableInputWebComponent, "props", {
-  items: {
-    type: 'Array<Object>',
-    required: true,
-    physical: false,
-    default: [],
-    watch: true
-  },
-  inputThrottle: {
-    type: 'Number',
-    default: 0,
-    watch: true
-  },
-  loading: {
-    type: 'Boolean',
-    required: false,
-    physical: true,
-    default: false,
-    watch: true
-  }
-});
-
-_defineProperty(SFiltrableInputWebComponent, "template", (props, component, settings, lit) => {
-  return lit.html(_templateObject5(), component, component.metas.dashName, props.items.value.map((item, i) => i < component._maxDisplayItems ? lit.html(_templateObject6(), omponent.metas.dashName, component._selectedItemIdx === i ? component.className('list-item--selected') : '', settings.template.item(item, component, settings, lit, component.highlightFilter.bind(component))) : ''));
-});
-
-(0, _register.define)('SFiltrableInput', SFiltrableInputWebComponent, {});
-module.exports = exports.default;
-
-/***/ }),
-
-/***/ "./src/scss/_bare.scss":
-/*!*****************************!*\
-  !*** ./src/scss/_bare.scss ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var api = __webpack_require__(/*! ../../../../toolkits/sugar/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "../../toolkits/sugar/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-            var content = __webpack_require__(/*! !../../../../toolkits/sugar/node_modules/css-loader/dist/cjs.js!../../../../toolkits/sugar/node_modules/sass-loader/dist/cjs.js??ref--4-2!./_bare.scss */ "../../toolkits/sugar/node_modules/css-loader/dist/cjs.js!../../toolkits/sugar/node_modules/sass-loader/dist/cjs.js?!./src/scss/_bare.scss");
-
-            content = content.__esModule ? content.default : content;
-
-            if (typeof content === 'string') {
-              content = [[module.i, content, '']];
-            }
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = api(content, options);
-
-
-
-module.exports = content.locals || {};
 
 /***/ }),
 

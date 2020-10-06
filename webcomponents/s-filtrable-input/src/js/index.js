@@ -1,31 +1,40 @@
 import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
 import __on from '@coffeekraken/sugar/js/event/on';
 import '../scss/_bare.scss';
-import {
-  define,
-  SLitHtmlWebComponent
-} from '@coffeekraken/sugar/js/webcomponent/register';
 import __clone from '@coffeekraken/sugar/js/object/clone';
 import __throttle from '@coffeekraken/sugar/js/function/throttle';
 import __nodeIndex from '@coffeekraken/sugar/js/dom/nodeIndex';
 
-// __on('s-filtrable-input.attach', (comp) => {
-//   // rework the items
-//   const itemsArray = __docMap.map((item) => {
+import __SRequest from '@coffeekraken/sugar/js/http/SRequest';
+import __SLitHtmlWebComponent from '@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent';
+import __SWebComponent from '@coffeekraken/sugar/js/webcomponent/SWebComponent';
+
+// __on('s-filtrable-input.attach', async (e) => {
+//   const docMapRequest = new __SRequest({
+//     url: 'docMap',
+//     method: 'GET',
+//     data: {}
+//   });
+//   const docMapJson = await docMapRequest.send();
+
+//   const itemsArray = Object.keys(docMapJson.data).map((key) => {
+//     const itemObj = docMapJson.data[key];
 //     return {
-//       title: item.namespace,
-//       description: item.path
+//       title: itemObj.namespace + '.' + itemObj.name,
+//       description: itemObj.description
 //     };
 //   });
-//   comp.prop('items', itemsArray);
+
+//   e.target.prop('items', itemsArray);
 // });
 // __on('s-filtrable-input.validate', (selectedItem) => {
 //   console.log('SELET', selectedItem);
 // });
 
-export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
-  HTMLInputElement
-) {
+class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
+  extends: HTMLInputElement,
+  name: 'SFiltrableInput'
+}) {
   static props = {
     items: {
       type: 'Array<Object>',
@@ -33,6 +42,10 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
       physical: false,
       default: [],
       watch: true
+    },
+    itemValue: {
+      type: 'String',
+      default: 'title'
     },
     inputThrottle: {
       type: 'Number',
@@ -48,25 +61,23 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
     }
   };
 
-  static template = (props, component, settings, lit) => {
+  static template = function (props, settings, lit) {
     return lit.html`
-      ${component}
-      <ul class="${component.metas.dashName}__list" tabindex="1">
+      ${this}
+      <ul class="${this.metas.dashName}__list" tabindex="1">
         ${props.items.value.map((item, i) =>
-          i < component._maxDisplayItems
+          i < this._maxDisplayItems
             ? lit.html`
-                <li class="${omponent.metas.dashName}__list-item ${
-                component._selectedItemIdx === i
-                  ? component.className('list-item--selected')
+                <li class="${this.metas.dashName}__list-item ${
+                this._preselectedItemIdx === i
+                  ? this.selector('list-item--preselected')
+                  : ''
+              } ${
+                this._selectedItemIdx === i
+                  ? this.selector('list-item--selected')
                   : ''
               }">
-                  ${settings.template.item(
-                    item,
-                    component,
-                    settings,
-                    lit,
-                    component.highlightFilter.bind(component)
-                  )}
+                  ${settings.template.item(item, settings, lit)}
                 </li>
               `
             : ''
@@ -76,7 +87,7 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
   };
 
   /**
-   * name         _selectedItemIdx
+   * name         _preselectedItemIdx
    * @type        Number
    * @private
    *
@@ -84,7 +95,7 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
    *
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _selectedItemIdx = -1;
+  _preselectedItemIdx = -1;
 
   /**
    * @name          _originalItems
@@ -111,6 +122,8 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
     super(
       __deepMerge(
         {
+          closeOnSelect: true,
+          closeOnSelectTimeout: 300,
           maxDisplayItems: 50,
           filter: {
             throttleTimeout: 100,
@@ -118,18 +131,12 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
             function: null
           },
           template: {
-            item: (
-              itemObj,
-              component,
-              settings,
-              lit,
-              highlightFilter
-            ) => lit.html`
+            item: (itemObj, settings, lit) => lit.html`
               ${
                 itemObj.title
                   ? lit.html`
-                <div class="${component.className('list-item__title')}">
-                    ${highlightFilter(itemObj.title)}
+                <div class="${this.selector('list-item-title')}">
+                    ${this.highlightFilter(itemObj.title)}
                 </div>
               `
                   : ''
@@ -137,8 +144,8 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
               ${
                 itemObj.description
                   ? lit.html`
-                <div class="${component.className('list-item__description')}">
-                  ${highlightFilter(itemObj.description)}
+                <div class="${this.selector('list-item-description')}">
+                  ${this.highlightFilter(itemObj.description)}
                 </div>
               `
                   : ''
@@ -151,8 +158,6 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
     );
     if (!this._settings.filter.function)
       this._settings.filter.function = this.filterItems.bind(this);
-
-    console.log('HELLO');
 
     this._maxDisplayItems = this._settings.maxDisplayItems;
 
@@ -174,6 +179,7 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
         filterTimeout = setTimeout(async () => {
           this.prop('loading', true);
           this._maxDisplayItems = this._settings.maxDisplayItems;
+          this._preselectedItemIdx = -1;
           this._selectedItemIdx = -1;
           this._filterString = e.srcElement.value;
           const newItemsArray = await this._settings.filter.function(
@@ -203,7 +209,6 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
           }
         }
       });
-
       document.addEventListener('keydown', (e) => {
         // interact with the component only if it is active
         if (!this.isActive()) return;
@@ -224,15 +229,20 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
         }
       });
 
+      this.addEventListener('focus', () => {
+        console.log('fo');
+        document.dispatchEvent(new Event('scroll'));
+      });
+
       document.addEventListener('scroll', (e) => {
         var element = this.$container;
         var topPos = element.getBoundingClientRect().top;
 
         if (document.documentElement.clientHeight / 2 < topPos) {
-          this.$container.classList.add(this.className('--ontop'));
+          this.$container.classList.add(this.selector('--ontop'));
           this._$list.style.maxHeight = `${topPos - 20}px`;
         } else {
-          this.$container.classList.remove(this.className('--ontop'));
+          this.$container.classList.remove(this.selector('--ontop'));
           this._$list.style.maxHeight = `${
             document.documentElement.clientHeight -
             topPos -
@@ -241,15 +251,6 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
           }px`;
         }
       });
-
-      setTimeout(() => {
-        this._props.items.value.push({
-          name: 'Hello world'
-        });
-      }, 2000);
-      setTimeout(() => {
-        this._props.items.value.pop();
-      }, 4000);
     });
   }
 
@@ -289,14 +290,30 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
     if (idx < 0 || idx >= this._props.items.value.length) return false;
     // set the idx to the selectedItemIndex variable
     this._selectedItemIdx = idx;
+    this._preselectedItemIdx = idx;
     // render the component
     this.render();
     // make a clone of the selected item
     const selectedItem = __clone(
       this._props.items.value[this._selectedItemIdx]
     );
+    // set the value into the actual input
+    let inputValue;
+    const itemValue = this.prop('itemValue');
+    if (typeof itemValue === 'string') inputValue = selectedItem[itemValue];
+    else if (typeof itemValue === 'function')
+      inputValue = itemValue(selectedItem);
+    if (itemValue) this.setAttribute('value', inputValue);
     // dispatch a select event
     this.dispatch('select', selectedItem);
+    // close if needed
+    if (this._settings.closeOnSelect) {
+      setTimeout(() => {
+        this.escape();
+      }, this._settings.closeOnSelectTimeout);
+    }
+    // return the selected item
+    return selectedItem;
   }
 
   /**
@@ -308,7 +325,10 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
    * @since       1.0.0
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  escape() {}
+  escape() {
+    this.blur();
+    this._$list.blur();
+  }
 
   /**
    * @name              validate
@@ -321,17 +341,11 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
    */
   validate() {
     // check that we have an item selected
-    if (this._selectedItemIdx === -1) return;
+    if (this._preselectedItemIdx === -1) return;
     // make sure the selected item exist in the stack
-    if (!this._props.items.value[this._selectedItemIdx]) return;
-    // clone the selected item
-    const selectedItem = __clone(
-      this._props.items.value[this._selectedItemIdx]
-    );
-    // dispatch an event with the selected item
-    this.dispatch('validate', selectedItem);
-    // return the selected item
-    return selectedItem;
+    if (!this._props.items.value[this._preselectedItemIdx]) return;
+    // select the item
+    return this.select(this._preselectedItemIdx);
   }
 
   /**
@@ -345,15 +359,15 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
    */
   up() {
     // update the selected index
-    if (this._selectedItemIdx <= 0) return;
-    this._selectedItemIdx--;
+    if (this._preselectedItemIdx <= 0) return;
+    this._preselectedItemIdx--;
     // render the component
     this.render();
 
     // get the selected item in the DOM
-    const $selectedItem = this.$(this.className('.list-item--selected'));
-    if ($selectedItem.offsetTop <= this._$list.scrollTop) {
-      this._$list.scrollTop = $selectedItem.offsetTop;
+    const $preselectedItem = this.$('.list-item--preselected');
+    if ($preselectedItem.offsetTop <= this._$list.scrollTop) {
+      this._$list.scrollTop = $preselectedItem.offsetTop;
     }
 
     // dispatch an event
@@ -371,23 +385,23 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
    */
   down() {
     // update the selected index
-    if (this._selectedItemIdx === this._props.items.value.length - 1) return;
-    this._selectedItemIdx++;
+    if (this._preselectedItemIdx === this._props.items.value.length - 1) return;
+    this._preselectedItemIdx++;
     // render the component
     this.render();
 
     // get the selected item in the DOM
-    const $selectedItem = this.$(this.className('.list-item--selected'));
+    const $preselectedItem = this.$('.list-item--preselected');
     if (
-      $selectedItem.offsetTop >
+      $preselectedItem.offsetTop >
       this._$list.scrollTop +
         this._$list.clientHeight -
-        $selectedItem.clientHeight
+        $preselectedItem.clientHeight
     ) {
       this._$list.scrollTop =
-        $selectedItem.offsetTop -
+        $preselectedItem.offsetTop -
         this._$list.clientHeight +
-        $selectedItem.clientHeight;
+        $preselectedItem.clientHeight;
     }
 
     // dispatch an event
@@ -446,8 +460,8 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
         string
           .split(this._filterString)
           .join(
-            `<span class="${this.className(
-              'list-item__highlighted'
+            `<span class="${this.selector(
+              'list-item-highlight'
             )}">___@@@___</span>`
           )
           .split('___@@@___')
@@ -456,4 +470,4 @@ export default class SFiltrableInputWebComponent extends SLitHtmlWebComponent(
   }
 }
 
-define('SFiltrableInput', SFiltrableInputWebComponent, {});
+export default SFiltrableInputWebComponent;

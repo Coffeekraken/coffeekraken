@@ -1,3 +1,4 @@
+import __isClass from '../is/class';
 import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';
 import __parse from '../string/parse';
@@ -5,14 +6,15 @@ import __toString from '../string/toString';
 import __when from '../dom/when';
 import __camelize from '../string/camelize';
 import __paramCase from '../string/paramCase';
-import __uncamelize from '../string/uncamelize';
 import __validateValue from '../validation/value/validateValue';
 import __watch from '../object/watch';
-import { getComponentMetas } from './register';
 import __uniqid from '../string/uniqid';
 import __dispatch from '../event/dispatch';
 import __on from '../event/on';
 import __SLitHtmlWebComponent from './SLitHtmlWebComponent';
+import __htmlTagToHtmlClassMap from '../html/htmlTagToHtmlClassMap';
+import __uncamelize from '../string/uncamelize';
+import __getHtmlClassFromTagName from '../html/getHtmlClassFromTagName';
 
 /**
  * @name              SWebComponent
@@ -62,9 +64,18 @@ import __SLitHtmlWebComponent from './SLitHtmlWebComponent';
 const _sWebComponentPromise = new __SPromise({
   id: 'SWebComponentPromise'
 });
+const _sWebComponentStack = {};
 
-function SWebComponent(extend = HTMLElement) {
-  return class SWebComponent extends extend {
+function SWebComponentGenerator(extendsSettings = {}) {
+  extendsSettings = __deepMerge(
+    {
+      extends: HTMLElement,
+      name: null
+    },
+    extendsSettings
+  );
+
+  return class SWebComponent extends extendsSettings.extends {
     _settedAttributesStack = {};
 
     /**
@@ -103,6 +114,25 @@ function SWebComponent(extend = HTMLElement) {
     _settings = {};
 
     /**
+     * @name          _metas
+     * @type          Object
+     * @private
+     *
+     * Store the component metas:
+     * - name: The camelcase component name
+     * - dashName: The component name in dash case
+     * - class: The component class
+     * - extends: The HTML class that the component extends
+     * - settings: An object of settings
+     * - instance: The component instance (this),
+     * - $node: The html element (this)
+     *
+     * @since         2.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _metas = {};
+
+    /**
      * @name        observedAttributes
      * @type        Function
      * @get
@@ -118,6 +148,102 @@ function SWebComponent(extend = HTMLElement) {
     }
 
     /**
+     * @name					componentName
+     * @type 					String
+     * @static
+     *
+     * Store the name of the component in camelcase
+     *
+     * @since 					2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static componentName = extendsSettings.name;
+
+    /**
+     * @name					getComponentMetas
+     * @type 					Function
+     * @static
+     *
+     * This static method return the component metas information like:
+     * - name: The camelcase component name
+     * - dashName: The component name in dash case
+     * - class: The component class
+     * - extends: The HTML class that the component extends
+     * - settings: An object of settings
+     *
+     * @param     {String}      name      The component name you want to get the metas of
+     *
+     * @since 					2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static getComponentMetas(name) {
+      return _sWebComponentStack[__uncamelize(name)] || {};
+    }
+
+    /**
+     * @name					register
+     * @type 					Function
+     * @static
+     *
+     * This method allows you to register your component as a webcomponent recognized by the browser
+     *
+     * @param       {String}      [name=extendsSettings.name]     The component name in camelcase
+     * @param       {Class|Object}    [clsOrSettings={}]          Either the component class you want to register, either an object of settings
+     * @param       {Object}        [settings={}]                 An object of settings to configure your component
+     *
+     * @since 					2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static register(
+      name = extendsSettings.name,
+      clsOrSettings = {},
+      settings = null
+    ) {
+      if (!name)
+        throw new Error(
+          `SWebComponent: You must define a name for your webcomponent by setting either a static "name" property on your class, of by passing a name as first parameter of the static "define" function...`
+        );
+      let cls = this;
+      if (__isClass(clsOrSettings)) cls = clsOrSettings;
+      else if (typeof clsOrSettings === 'object' && !settings) {
+        settings = clsOrSettings;
+      }
+
+      let extend = null;
+      for (let key in __htmlTagToHtmlClassMap) {
+        if (cls.prototype instanceof __htmlTagToHtmlClassMap[key]) {
+          extend = key;
+          break;
+        }
+      }
+
+      const uncamelizedName = __uncamelize(name);
+
+      cls.componentName = name;
+
+      _sWebComponentStack[uncamelizedName] = {
+        name,
+        dashName: uncamelizedName,
+        class: cls,
+        extends: extend,
+        settings
+      };
+
+      if (window.customElements) {
+        window.customElements.define(uncamelizedName, cls, {
+          extends: extend
+        });
+      } else if (document.registerElement) {
+        document.registerElement(uncamelizedName, {
+          prototype: cls.prototype,
+          extends: extend
+        });
+      } else {
+        throw `Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...`;
+      }
+    }
+
+    /**
      * @name          constructor
      * @type          Function
      * @constructor
@@ -129,8 +255,13 @@ function SWebComponent(extend = HTMLElement) {
     constructor(settings = {}) {
       // init base html element
       super();
+      // make sure the component has a componentName static prop
+      if (!this.constructor.componentName)
+        throw `Your MUST define a static "componentName" camelcase property like "SFiltrableInput" for your component to work properly...`;
       // get component metas
-      this._metas = getComponentMetas(this.constructor.componentName);
+      this._metas = this.constructor.getComponentMetas(
+        this.constructor.componentName
+      );
       // save the settings
       this._settings = __deepMerge(
         {
@@ -150,10 +281,10 @@ function SWebComponent(extend = HTMLElement) {
       const currentClassName = this.getAttribute('class') || '';
       this.setAttribute(
         'class',
-        `${currentClassName} ${this.className(`node`)}`
+        `${currentClassName} ${this.selector(`node`)}`
       );
 
-      this.on('mounted{1}', () => {
+      this.on('mounted:1', () => {
         // dispatch a ready event
         if (!this.lit) {
           // the Lit HTML class dispatch the ready event after having rendering the template the first time
@@ -163,6 +294,58 @@ function SWebComponent(extend = HTMLElement) {
 
       // launch the mounting process
       setTimeout(this._mount.bind(this));
+    }
+
+    /**
+     * @name					$
+     * @type 					Function
+     *
+     * This method is a shortcut to the ```querySelector``` function
+     *
+     * @param         {String}        path      The selector path
+     * @param         {Object}      [settings={}]     An object of settings to configure your query
+     * @return        {HTMLElement}             The html element getted
+     *
+     * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
+     *
+     * @since 					2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    $(path, settings = {}) {
+      const $root = settings.$root || this;
+      path = this.selector(path);
+      let $result = $root.querySelector(path);
+      if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
+        path = path.replace(/^\./, `.${this.metas.dashName}__`);
+        $result = $root.querySelector(path);
+      }
+      return $result;
+    }
+
+    /**
+     * @name					$$
+     * @type 					Function
+     *
+     * This method is a shortcut to the ```querySelectorAll``` function
+     *
+     * @param         {String}        path      The selector path
+     * @param         {Object}      [settings={}]     An object of settings to configure your query
+     * @return        {HTMLElement}             The html element(s) getted
+     *
+     * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
+     *
+     * @since 					2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    $$(path, settings = {}) {
+      const $root = settings.$root || this;
+      path = this.selector(path);
+      let $result = $root.querySelectorAll(path);
+      if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
+        path = path.replace(/^\./, `.${this.metas.dashName}__`);
+        $result = $root.querySelectorAll(path);
+      }
+      return $result;
     }
 
     /**
@@ -296,6 +479,23 @@ function SWebComponent(extend = HTMLElement) {
      */
     on(event, callback) {
       return this._promise.on(event, callback);
+    }
+
+    /**
+     * @name          off
+     * @type          Function
+     *
+     * Method used to unsubscribe to a previously subscribed event
+     *
+     * @param       {String}        event         The event you want to unsubscribe for
+     * @param       {Function}      callback      The callback function that has to be called
+     * @return      {SPromise}                    The SPromise used in this instance
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    off(event, callback) {
+      return this._promise.off(event, callback);
     }
 
     /**
@@ -436,10 +636,10 @@ function SWebComponent(extend = HTMLElement) {
     }
 
     /**
-     * @name            className
+     * @name            selector
      * @type            Function
      *
-     * This method return you a className generated depending on the
+     * This method return you a selector generated depending on the
      * webcomponent name
      *
      * @param       {String}      cls         The class name to use
@@ -448,11 +648,10 @@ function SWebComponent(extend = HTMLElement) {
      * @since       2.0.0
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    className(cls = '') {
-      const originalName = __uncamelize(this.constructor.name).replace(
-        '-web-component',
-        ''
-      );
+    selector(cls = '') {
+      if (cls.includes(this.metas.dashName)) {
+        return cls;
+      }
 
       const hasDot = cls.match(/^\./);
       cls = cls.replace('.', '');
@@ -462,19 +661,21 @@ function SWebComponent(extend = HTMLElement) {
       else if (cls !== '') finalCls = `${this.metas.dashName}__${cls}`;
       else finalCls = this.metas.dashName;
 
-      if (cls.match(/^(--)/)) {
-        finalCls = `${hasDot ? '.' : ''}${originalName}-bare${cls} ${
-          hasDot ? '.' : ''
-        }${finalCls}`;
-      } else if (cls !== '') {
-        finalCls = `${hasDot ? '.' : ''}${originalName}-bare__${cls} ${
-          hasDot ? '.' : ''
-        }${finalCls}`;
-      } else {
-        finalCls = `${hasDot ? '.' : ''}${originalName}-bare ${
-          hasDot ? '.' : ''
-        }${finalCls}`;
-      }
+      if (hasDot) finalCls = `.${finalCls}`;
+
+      // if (cls.match(/^(--)/)) {
+      //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare${cls} ${
+      //     hasDot ? '.' : ''
+      //   }${finalCls}`;
+      // } else if (cls !== '') {
+      //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare__${cls} ${
+      //     hasDot ? '.' : ''
+      //   }${finalCls}`;
+      // } else {
+      //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare ${
+      //     hasDot ? '.' : ''
+      //   }${finalCls}`;
+      // }
 
       return finalCls;
     }
@@ -611,26 +812,26 @@ function SWebComponent(extend = HTMLElement) {
   };
 }
 
-/**
- * @name        on
- * @type        Function
- * @static
- *
- * This method can be used to subscribe to some SWebComponent instances events
- * like "SFiltrableInput.ready", etc...
- *
- * @param       {String}      name        The event name to subscribe to
- * @param       {Function}    callback    The callback function to call
- * @return      {Function}                A function that you can use to unsubscribe to this particular event
- *
- * @since       2.0.0
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-SWebComponent.on = (name, callback) => {
-  _sWebComponentPromise.on(name, callback);
-  return () => {
-    _sWebComponentPromise.off(name, callback);
-  };
-};
+// /**
+//  * @name        on
+//  * @type        Function
+//  * @static
+//  *
+//  * This method can be used to subscribe to some SWebComponent instances events
+//  * like "SFiltrableInput.ready", etc...
+//  *
+//  * @param       {String}      name        The event name to subscribe to
+//  * @param       {Function}    callback    The callback function to call
+//  * @return      {Function}                A function that you can use to unsubscribe to this particular event
+//  *
+//  * @since       2.0.0
+//  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//  */
+// SWebComponentGenerator.on = function (name, callback) {
+//   _sWebComponentPromise.on(name, callback);
+//   return () => {
+//     _sWebComponentPromise.off(name, callback);
+//   };
+// };
 
-export default SWebComponent;
+export default SWebComponentGenerator;

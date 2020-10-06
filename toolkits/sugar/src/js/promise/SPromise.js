@@ -194,7 +194,8 @@ export default class SPromise extends Promise {
         stacks: '*',
         prefixStack: true,
         processor: null,
-        exclude: ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'],
+        // exclude: ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'],
+        exclude: [],
         filter: null
       },
       settings

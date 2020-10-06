@@ -41,6 +41,7 @@ module.exports = class SSugarAppModuleTerminalUi extends __SBlessedComponent {
     super(
       __deepMerge(
         {
+          filter: null,
           width: '100%',
           height: '100%',
           style: {
@@ -53,6 +54,7 @@ module.exports = class SSugarAppModuleTerminalUi extends __SBlessedComponent {
 
     // init the log component
     this.$log = new __SBlessedOutput(sources, {
+      filter: this._settings.filter,
       width: '100%',
       height: '100%'
     });

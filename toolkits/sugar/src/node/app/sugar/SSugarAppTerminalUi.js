@@ -220,7 +220,7 @@ module.exports = class SSugarAppTerminalUi extends __SBlessedComponent {
   _moduleLog(data, metas) {
     const moduleObj = this._findModuleObjById(data.module.id);
     if (!moduleObj || !moduleObj.$console) return;
-    moduleObj.$console.log(data);
+    // moduleObj.$console.log(data);
   }
 
   _moduleError(data, metas) {
@@ -523,7 +523,10 @@ module.exports = class SSugarAppTerminalUi extends __SBlessedComponent {
         OutputClass = __SBlessedOutput;
       }
 
-      const $console = new OutputClass([], {
+      const $console = new OutputClass(this._sources, {
+        filter: (logObj) => {
+          return logObj.module && logObj.module.id === moduleObj.id;
+        },
         width: '100%',
         height: '100%-3',
         top: 3,

@@ -45,8 +45,8 @@ import { until } from 'lit-html/directives/until.js';
  * @see       https://lit-html.polymer-project.org/
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function SLitHtmlWebComponent(extend = HTMLElement) {
-  return class SLitHtmlWebComponent extends __SWebComponent(extend) {
+function SLitHtmlWebComponentGenerator(extendSettings = {}) {
+  return class SLitHtmlWebComponent extends __SWebComponent(extendSettings) {
     /**
      * @name        template
      * @type        Function
@@ -59,7 +59,7 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
      *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static template = (props, component, html) => html`
+    static template = (props, settings, lit) => lit.html`
       <p>
         You need to specify a static template property for your component...
       </p>
@@ -104,9 +104,9 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
       super(__deepMerge({}, settings));
       // generate a container for the component
       this.$container = document.createElement('div');
-      this.$container.className = this.className();
+      this.$container.className = this.selector();
       // wait until mounted to render the component first time
-      this.on('mounted{1}', () => {
+      this.on('mounted:1', () => {
         // insert the container in the document
         __insertAfter(this.$container, this);
         // render for the first time
@@ -125,30 +125,44 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     render = __throttle(function () {
-      const tpl = this.constructor.template(
-        this._props,
-        this,
-        this._settings,
-        this.lit
-      );
+      const tplFn = this.constructor.template.bind(this);
+      const tpl = tplFn(this._props, this._settings, this.lit);
       render(tpl, this.$container);
     }, 50);
 
-    $(path) {
-      let $result = this.$container.querySelector(path);
-      if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
-        path = path.replace(/^\./, `.${this.metas.dashName}__`);
-        $result = this.$container.querySelector(path);
-      }
-      return $result;
+    /**
+     * @name					$
+     * @type 					Function
+     *
+     * This method is a shortcut to the ```querySelector``` function
+     *
+     * @param         {String}        path      The selector path
+     * @param         {Object}      [settings={}]     An object of settings to configure your query
+     * @return        {HTMLElement}             The html element getted
+     *
+     * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
+     *
+     * @since 					2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+    $(path, settings = {}) {
+      settings = __deepMerge(
+        {
+          $root: this.$container
+        },
+        settings
+      );
+      return super.$(path, settings);
     }
     $$(path) {
-      let $result = this.$container.querySelectorAll(path);
-      if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
-        path = path.replace(/^\./, `.${this.metas.dashName}__`);
-        $result = this.$container.querySelectorAll(path);
-      }
-      return $result;
+      settings = __deepMerge(
+        {
+          $root: this.$container
+        },
+        settings
+      );
+      return super.$$(path, settings);
     }
 
     /**
@@ -186,3 +200,5 @@ export default function SLitHtmlWebComponent(extend = HTMLElement) {
     }
   };
 }
+
+export default SLitHtmlWebComponentGenerator;

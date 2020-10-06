@@ -3,5 +3,5 @@
 @section('title', 'Documentation')
 
 @section('content')
-    {!! $content !!}
+    <input is="s-filtrable-input" />
 @endsection

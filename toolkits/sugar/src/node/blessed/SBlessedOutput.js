@@ -142,11 +142,14 @@ module.exports = class SOutput extends __SBlessedComponent {
       //   value: `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
       // });
     })
-      .on('success,*.success,complete,*.complete', (data) => {
-        this.log({
-          value: `#success The process has been finished <green>successfully</green>`
-        });
-      })
+      // .on('*', (data, metas) => {
+      //   console.log(metas.stack);
+      // })
+      // .on('success,*.success,complete,*.complete', (data) => {
+      //   this.log({
+      //     value: `#success The process has been finished <green>successfully</green>`
+      //   });
+      // })
 
       // .on('error', (error) => {
       //   console.log('ERRO');
@@ -192,17 +195,19 @@ module.exports = class SOutput extends __SBlessedComponent {
         this._allowClear = false;
         this._content = [];
         this._lastY = 1;
-        this.$logBoxChilds.forEach((child, i) => {
-          child.destroy();
-        });
-        if (this.$headerBox) {
-          this.$headerBox.destroy();
-          this.$headerBox = null;
-          this.$logBox.top = 0;
-        }
-        this.$logBoxChilds = [];
-        this.$logBox.setScrollPerc(0);
-        this.update();
+        try {
+          this.$logBoxChilds.forEach((child, i) => {
+            child.destroy();
+          });
+          if (this.$headerBox) {
+            this.$headerBox.destroy();
+            this.$headerBox = null;
+            this.$logBox.top = 0;
+          }
+          this.$logBoxChilds = [];
+          this.$logBox.setScrollPerc(0);
+          this.update();
+        } catch (e) {}
       }
     }
   }
@@ -362,6 +367,10 @@ module.exports = class SOutput extends __SBlessedComponent {
         const res = this._settings.filter(logObj);
         if (res === false) return;
         if (res !== true) logObj = res;
+      }
+
+      if (!logObj) {
+        return;
       }
 
       if (__isChildProcess()) {

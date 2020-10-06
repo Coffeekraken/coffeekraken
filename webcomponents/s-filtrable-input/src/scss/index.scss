@@ -1,12 +1,3 @@
 @import './style';
 
 @include style();
-
-@include Sugar.classes();
-.s-filtrable-input__list {
-  left: 300px !important;
-}
-
-body {
-  background-color: red;
-}

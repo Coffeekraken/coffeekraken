@@ -8,6 +8,7 @@
     overflow-x: hidden;
     overflow-y: auto;
     opacity: 0;
+    max-width: calc(100vw - 100px);
     pointer-events: none;
     transition: max-height .2s ease-in-out;
 
@@ -29,8 +30,4 @@
     * {
       pointer-events: none; // disable pointer events inside each list items to detect the click correctly
     }
-  }
-
-  .s-filtrable-input__list-item__selected {
-
   }

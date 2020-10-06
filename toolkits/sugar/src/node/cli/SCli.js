@@ -139,7 +139,6 @@ class SCli extends __SPromise {
         defaultParams: settings.defaultParams,
         ...settings.childProcessSettings
       });
-
       childProcess.on('state', (state) => {
         this.state = state;
       });

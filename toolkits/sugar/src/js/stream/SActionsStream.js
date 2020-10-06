@@ -534,7 +534,6 @@ export default class SActionStream extends __SPromise {
           this.log({
             value: startString
           });
-          this.trigger('start', {});
           trigger('start', {});
 
           currentStreamObj = await this._applyFnOnStreamObj(
@@ -649,12 +648,6 @@ export default class SActionStream extends __SPromise {
                 this._currentStream.currentActionObj.instance.on(
                   'reject',
                   (value) => {
-                    this.trigger(
-                      `${this._currentStream.currentActionObj.name}.error`,
-                      {
-                        value
-                      }
-                    );
                     trigger(
                       `${this._currentStream.currentActionObj.name}.error`,
                       {
@@ -671,10 +664,6 @@ export default class SActionStream extends __SPromise {
               }
 
               // trigger some "start" events
-              this.trigger(
-                `${this._currentStream.currentActionObj.name}.start`,
-                Object.assign({}, this._currentStream.currentActionObj)
-              );
               trigger(
                 `${this._currentStream.currentActionObj.name}.start`,
                 Object.assign({}, this._currentStream.currentActionObj)
@@ -719,10 +708,6 @@ export default class SActionStream extends __SPromise {
               ] = Object.assign({}, this._currentStream.currentActionObj);
 
               // trigger an "event"
-              this.trigger(
-                `${this._currentStream.currentActionObj.name}.complete`,
-                Object.assign({}, this._currentStream.currentActionObj)
-              );
               trigger(
                 `${this._currentStream.currentActionObj.name}.complete`,
                 Object.assign({}, this._currentStream.currentActionObj)
@@ -798,7 +783,6 @@ export default class SActionStream extends __SPromise {
               value: __trimLines(this._currentStream.stats.stderr.join('\n'))
             });
 
-            this.trigger('reject', this._currentStream.stats);
             trigger('reject', this._currentStream.stats);
           } else {
             const completeString = `#success The stream "<cyan>${
@@ -814,7 +798,6 @@ export default class SActionStream extends __SPromise {
             });
 
             // resolve this stream process
-            this.trigger('success', {});
             trigger('success', {});
             resolve(this._currentStream.stats);
           }
@@ -840,6 +823,8 @@ export default class SActionStream extends __SPromise {
     //   this._currentStream.stats.stderr.push(e);
     // }
     // }
+
+    __SPromise.pipe(this._currentStream, this);
 
     return this._currentStream.promise;
   }

@@ -522,8 +522,6 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
               value: startString
             });
 
-            _this3.trigger('start', {});
-
             trigger('start', {});
             currentStreamObj = yield _this3._applyFnOnStreamObj(currentStreamObj, _this3._settings.before, {
               type: 'before'
@@ -601,10 +599,6 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
                 if (_this3._currentStream.currentActionObj.instance) {
                   _this3._currentStream.currentActionObj.instance.on('reject', value => {
-                    _this3.trigger("".concat(_this3._currentStream.currentActionObj.name, ".error"), {
-                      value
-                    });
-
                     trigger("".concat(_this3._currentStream.currentActionObj.name, ".error"), {
                       value
                     });
@@ -614,8 +608,6 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
                   actionSettings = (0, _deepMerge.default)(_this3._currentStream.currentActionObj.instance._settings, actionSettings);
                 } // trigger some "start" events
 
-
-                _this3.trigger("".concat(_this3._currentStream.currentActionObj.name, ".start"), Object.assign({}, _this3._currentStream.currentActionObj));
 
                 trigger("".concat(_this3._currentStream.currentActionObj.name, ".start"), Object.assign({}, _this3._currentStream.currentActionObj));
 
@@ -652,8 +644,6 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
                 }); // save the result into the overall actions stats object
 
                 _this3._currentStream.stats.actions[_this3._currentStream.currentActionObj.name] = Object.assign({}, _this3._currentStream.currentActionObj); // trigger an "event"
-
-                _this3.trigger("".concat(_this3._currentStream.currentActionObj.name, ".complete"), Object.assign({}, _this3._currentStream.currentActionObj));
 
                 trigger("".concat(_this3._currentStream.currentActionObj.name, ".complete"), Object.assign({}, _this3._currentStream.currentActionObj));
 
@@ -715,8 +705,6 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
                 value: (0, _trimLines.default)(_this3._currentStream.stats.stderr.join('\n'))
               });
 
-              _this3.trigger('reject', _this3._currentStream.stats);
-
               trigger('reject', _this3._currentStream.stats);
             } else {
               var completeString = "#success The stream \"<cyan>".concat(_this3._currentStream.settings.name || 'unnamed', "</cyan>\" has finished <green>successfully</green> in <yellow>").concat((0, _convert.default)(_this3._currentStream.stats.duration, 's'), "s</yellow>");
@@ -727,8 +715,6 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
                 value: completeString
               }); // resolve this stream process
 
-
-              _this3.trigger('success', {});
 
               trigger('success', {});
               resolve(_this3._currentStream.stats);
@@ -755,6 +741,8 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
       //   this._currentStream.stats.stderr.push(e);
       // }
       // }
+
+      _SPromise2.default.pipe(this._currentStream, this);
 
       return this._currentStream.promise;
     }

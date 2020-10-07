@@ -1188,9 +1188,13 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      */
 
   }, {
-    key: "_catch",
+    key: "catch",
     value: function _catch() {
-      return this._registerCallbackInStack('catch', ...voidargs);
+      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        args[_key6] = arguments[_key6];
+      }
+
+      return this.on('catch', ...args);
     }
     /**
      * @name                finally
@@ -1218,12 +1222,12 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "finally",
     value: function _finally() {
-      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        args[_key6] = arguments[_key6];
+      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        args[_key7] = arguments[_key7];
       }
 
       // super.finally(...args);
-      return this._registerCallbackInStack('finally', ...args);
+      return this.on('finally', ...args);
     }
     /**
      * @name                resolved
@@ -1251,11 +1255,11 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "resolved",
     value: function resolved() {
-      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        args[_key7] = arguments[_key7];
+      for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        args[_key8] = arguments[_key8];
       }
 
-      return this._registerCallbackInStack('resolve', ...args);
+      return this.on('resolve', ...args);
     }
     /**
      * @name                rejected
@@ -1283,11 +1287,11 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "rejected",
     value: function rejected() {
-      for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        args[_key8] = arguments[_key8];
+      for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        args[_key9] = arguments[_key9];
       }
 
-      return this._registerCallbackInStack('reject', ...args);
+      return this.on('reject', ...args);
     }
     /**
      * @name                canceled
@@ -1315,11 +1319,11 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "canceled",
     value: function canceled() {
-      for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        args[_key9] = arguments[_key9];
+      for (var _len10 = arguments.length, args = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+        args[_key10] = arguments[_key10];
       }
 
-      return this._registerCallbackInStack('cancel', ...args);
+      return this.on('cancel', ...args);
     }
     /**
      * @name                      _destroy

@@ -2,7 +2,9 @@
   $name: s-filtrable-input
 ) {
 
-  .#{$name} {}
+  .#{$name}__node {
+    background-color: Sugar.color(primary);
+  }
 
   .#{$name}__list {
     background: white;

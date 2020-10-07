@@ -43,13 +43,12 @@ module.exports = class SBuildScssInterface extends __SInterface {
     prod: {
       default: __sugarConfig('build.scss.prod') || false
     },
-    buildType: {
-      default: 'css'
-    },
-    'import.sugar': {
-      type: 'Boolean',
-      description: 'Import the coffeekraken sugar toolkit',
-      default: __sugarConfig('build.scss.import.sugar') || true,
+    sharedResources: {
+      type: 'String|Array<String>',
+      alias: 'r',
+      description:
+        'Specify some files to load in every imported files using @use or @import',
+      default: __sugarConfig('build.scss.sharedResources'),
       level: 1
     },
     'vendor.sass': {

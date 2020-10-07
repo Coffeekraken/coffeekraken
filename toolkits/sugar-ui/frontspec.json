@@ -1,14 +1,49 @@
 {
-  "assets": {
-    "css": {
-      "default": {
-        "path": "dist/css/index.css"
-      }
+    "assets": {
+        "css": {
+            "default": {
+                "path": "dist/css/index.css"
+            }
+        },
+        "js": {
+            "default": {
+                "path": "dist/js/index.js"
+            }
+        }
     },
-    "js": {
-      "default": {
-        "path": "dist/js/index.js"
-      }
+    "children": {
+        "node_modules/@coffeekraken/s-filtrable-input": {
+            "src": {
+                "scss": {
+                    "style": {
+                        "path": "src/scss/_style.scss",
+                        "code": "@use '@coffeekraken/s-filtrable-input/#{path}' as SFiltrableInput;\n@include SFiltrableInput.style();"
+                    }
+                },
+                "js": {
+                    "main": {
+                        "path": "src/js/index.js",
+                        "code": "import __SFiltrableInput from '@coffeekraken/s-filtrable-input/#{path}';\n__SFiltrableInput.define();"
+                    }
+                }
+            }
+        }
+    },
+    "package": {
+        "name": "@coffeekraken/sugar-ui",
+        "version": "0.0.1",
+        "description": "Sugar webapp that is used to develop nice and clean modern websites",
+        "homepage": "https://coffeekraken.io",
+        "main": "index.js",
+        "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1"
+        },
+        "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+        "license": "MIT",
+        "dependencies": {
+            "@coffeekraken/sugar": "file:../sugar",
+            "@coffeekraken/s-filtrable-input": "file:../../webcomponents/s-filtrable-input",
+            "codemirror": "^5.57.0"
+        }
     }
-  }
 }

@@ -1,10 +1,13 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __getScssImportsStrings = require('../getScssImportsStrings');
+const __getScssSharedResourcesStrings = require('../getScssSharedResourcesStrings');
 const __deepMerge = require('../../../object/deepMerge');
 const __SBuildScssInterface = require('../interface/SBuildScssInterface');
+const __fs = require('fs');
+const __tmpDir = require('../../../fs/tmpDir');
+const __packageRoot = require('../../../path/packageRoot');
 
 /**
- * @name                SImportsStreamAction
+ * @name                SSharedResourcesStreamAction
  * @namespace           sugar.node.build.scss.actions
  * @type                Class
  * @extends             SActionsStreamAction
@@ -16,7 +19,7 @@ const __SBuildScssInterface = require('../interface/SBuildScssInterface');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SImportsStreamAction extends __SActionsStreamAction {
+module.exports = class SSharedResourcesStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -41,8 +44,8 @@ module.exports = class SImportsStreamAction extends __SActionsStreamAction {
     super(
       __deepMerge(
         {
-          name: 'Imports',
-          id: 'actionStream.action.scss.imports'
+          name: 'Shared Ressources',
+          id: 'SSharedResourcesStreamAction'
         },
         settings
       )
@@ -60,30 +63,12 @@ module.exports = class SImportsStreamAction extends __SActionsStreamAction {
    */
   run(streamObj, settings) {
     return super.run(streamObj, async (resolve, reject) => {
-      const importsStrings = __getScssImportsStrings(streamObj.imports);
+      if (!streamObj.sharedResources) return resolve(streamObj);
 
-      streamObj.data = streamObj.data
-        ? `
-        ${importsStrings.prepend}
-        ${streamObj.data}
-        ${importsStrings.append}
-      `
-        : importsStrings.prepend + importsStrings.append;
-
-      const atUseReg = /\s?@use.+/gm;
-      const atUseMatches = streamObj.data.match(atUseReg);
-
-      if (atUseMatches) {
-        // remove all the lines from the string
-        atUseMatches.forEach((atUseLine) => {
-          streamObj.data = streamObj.data.replace(atUseLine, '');
-        });
-        // prepend all the @use statements
-        streamObj.data = `
-          ${atUseMatches.join('\n')}
-          ${streamObj.data}
-        `;
-      }
+      const sharedResourcesStrings = __getScssSharedResourcesStrings(
+        streamObj.sharedResources
+      );
+      streamObj.sharedResources = [sharedResourcesStrings];
 
       // resolve the action
       resolve(streamObj);

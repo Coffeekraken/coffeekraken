@@ -1,9 +1,10 @@
+const __copy = require('../../clipboard/copy');
 const __SActionsStream = require('../../stream/SActionsStream');
 const __deepMerge = require('../../object/deepMerge');
 const __getFilename = require('../../fs/filename');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 const __SJsObjectToScssStreamAction = require('./actions/SJsObjectToScssStreamAction');
-const __SImportsStreamAction = require('./actions/SImportsStreamAction');
+const __SSharedResourcesStreamAction = require('./actions/SSharedResourcesStreamAction');
 const __SBundleScssStreamAction = require('./actions/SBundleScssStreamAction');
 const __SRenderSassStreamAction = require('./actions/SRenderSassStreamAction');
 const __SPostCssStreamAction = require('./actions/SPostCssStreamAction');
@@ -11,9 +12,9 @@ const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesRes
 const __SExtractStreamAction = require('../../stream/actions/SExtractStreamAction');
 const __path = require('path');
 const __sugarConfig = require('../../config/sugar');
-const __SSugarJsonStreamAction = require('../actions/SSugarJsonStreamAction');
 const __SBuildScssInterface = require('./interface/SBuildScssInterface');
 const __SExtractDocblocksIntoFiles = require('../../stream/actions/SExtractDocblocksIntoFilesStreamAction');
+const __SFrontspecScssStreamAction = require('../../stream/actions/SFrontspecScssStreamAction');
 const __SDocMapStreamAction = require('../../stream/actions/SDocMapStreamAction');
 
 /**
@@ -58,10 +59,10 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
     super(
       {
         filesResolver: __SFsFilesResolverStreamAction,
-        bundle: __SBundleScssStreamAction,
-        sugarJson: __SSugarJsonStreamAction,
-        imports: __SImportsStreamAction,
+        frontspecScss: __SFrontspecScssStreamAction,
+        sharedResources: __SSharedResourcesStreamAction,
         jsConfig: __SJsObjectToScssStreamAction,
+        bundle: __SBundleScssStreamAction,
         render: __SRenderSassStreamAction,
         extractDocblocks: __SExtractDocblocksIntoFiles,
         extract: __SExtractStreamAction,
@@ -81,6 +82,9 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
           afterActions: {
             filesResolver: (streamObj) => {
               streamObj.filename = __getFilename(streamObj.input);
+              return streamObj;
+            },
+            frontspecScss: (streamObj) => {
               return streamObj;
             }
           },

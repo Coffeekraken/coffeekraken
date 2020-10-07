@@ -1,22 +1,23 @@
-const __deepMerge = require('../../../object/deepMerge');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __jsObjectToScssMap = require('../jsObjectToScssMap');
-const __SBuildScssInterface = require('../interface/SBuildScssInterface');
+const __deepMerge = require('../../../object/deepMerge');
+const __SBuildFrontspecInterface = require('../interface/SBuildFrontspecInterface');
+const __folderPath = require('../../../fs/folderPath');
+const __SFrontspec = require('../../../doc/SFrontspec');
 
 /**
- * @name                SJsObjectToScssStreamAction
+ * @name                SBuildFrontspecStreamAction
  * @namespace           sugar.node.build.scss.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *
- * This function is responsible of transform a js object to an scss map
+ * This function is responsible of rendering the sass string in the "data" property
  *
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamAction {
+module.exports = class SBuildFrontspecStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -26,7 +27,7 @@ module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamActio
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = __SBuildScssInterface;
+  static interface = __SBuildFrontspecInterface;
 
   /**
    * @name            constructor
@@ -41,8 +42,8 @@ module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamActio
     super(
       __deepMerge(
         {
-          name: 'Js Object to Scss',
-          id: 'actionStream.action.scss.jsObjectToScss'
+          name: 'Build Frontspec',
+          id: 'SBuildFrontspecStreamAction'
         },
         settings
       )
@@ -59,23 +60,28 @@ module.exports = class SJsObjectToScssStreamAction extends __SActionsStreamActio
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    return super.run(streamObj, async (resolve, reject) => {
-      const result = __jsObjectToScssMap(streamObj.jsObjectToScss, settings);
+    return super.run(streamObj, async (resolve, reject, trigger, cancel) => {
+      // compile using the SScssCompiler class
 
-      // set or append in the "data" property
-      if (streamObj.data) streamObj.data = result + streamObj.data;
-      else streamObj.data = result;
+      if (!streamObj.outputStack) streamObj.outputStack = {};
 
-      // set the "resources" stream object to this path
-      if (!streamObj.sharedResources) streamObj.sharedResources = result;
-      else if (Array.isArray(streamObj.sharedResources)) {
-        streamObj.sharedResources.push(result);
-      } else {
-        streamObj.sharedResources = [streamObj.sharedResources];
-        streamObj.sharedResources.push(result);
-      }
+      const frontspec = new __SFrontspec({
+        filename: streamObj.filename,
+        outputDir: streamObj.outputDir,
+        dirDepth: streamObj.dirDepth,
+        cache: streamObj.cache
+      });
 
-      // resolving the action
+      const promise = frontspec.json();
+      promise.catch((e) => {
+        reject(e);
+      });
+      const json = await promise;
+
+      // set in output stack
+      streamObj.data = json;
+      streamObj.outputStack.data = `${streamObj.outputDir}/${streamObj.filename}`;
+
       resolve(streamObj);
     });
   }

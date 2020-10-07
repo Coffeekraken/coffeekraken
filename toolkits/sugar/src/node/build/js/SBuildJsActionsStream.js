@@ -8,9 +8,7 @@ const __getFilename = require('../../fs/filename');
 const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
 const __SFsCacheStreamAction = require('../../stream/actions/SFsCacheStreamAction');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
-const __SSugarJsonStreamAction = require('../actions/SSugarJsonStreamAction');
 const __SDocMapStreamAction = require('../../stream/actions/SDocMapStreamAction');
-const __SFrontspecReadStreamAction = require('../../stream/actions/SFrontspecReadStreamAction');
 const __SFrontspecJsStreamAction = require('../../stream/actions/SFrontspecJsStreamAction');
 const __path = require('path');
 
@@ -56,9 +54,7 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
         filesResolver: __SFsFilesResolverStreamAction,
         // fsCache: __SFsCacheStreamAction,
         readFile: __SFsReadFileStreamAction,
-        frontspecRead: __SFrontspecReadStreamAction,
         frontspecJs: __SFrontspecJsStreamAction,
-        // sugarJson: __SSugarJsonStreamAction,
         webpack: __SWebpackStreamAction,
         terser: __STerserStreamAction,
         fsOutput: __SFsOutputStreamAction
@@ -69,7 +65,6 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
           id: 'SBuildJsActionsStream',
           name: 'Build JS Actions Stream',
           before: (streamObj) => {
-            __copy(streamObj);
             streamObj.docMapInput = streamObj.input;
             return streamObj;
           },
@@ -80,7 +75,7 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
               }
               return streamObj;
             },
-            frontspecJs: (streamObj) => {
+            frontspecRead: (streamObj) => {
               __copy(streamObj.data);
               return streamObj;
             }

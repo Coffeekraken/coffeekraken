@@ -161,11 +161,11 @@ function SWebComponentGenerator(extendsSettings) {
         return _sWebComponentStack[(0, _uncamelize.default)(name)] || {};
       }
       /**
-       * @name					register
+       * @name					define
        * @type 					Function
        * @static
        *
-       * This method allows you to register your component as a webcomponent recognized by the browser
+       * This method allows you to define your component as a webcomponent recognized by the browser
        *
        * @param       {String}      [name=extendsSettings.name]     The component name in camelcase
        * @param       {Class|Object}    [clsOrSettings={}]          Either the component class you want to register, either an object of settings
@@ -176,8 +176,8 @@ function SWebComponentGenerator(extendsSettings) {
        */
 
     }, {
-      key: "register",
-      value: function register(name, clsOrSettings, settings) {
+      key: "define",
+      value: function define(name, clsOrSettings, settings) {
         if (name === void 0) {
           name = extendsSettings.name;
         }
@@ -206,6 +206,7 @@ function SWebComponentGenerator(extendsSettings) {
 
         var uncamelizedName = (0, _uncamelize.default)(name);
         cls.componentName = name;
+        if (_sWebComponentStack[uncamelizedName]) return;
         _sWebComponentStack[uncamelizedName] = {
           name,
           dashName: uncamelizedName,
@@ -215,14 +216,18 @@ function SWebComponentGenerator(extendsSettings) {
         };
 
         if (window.customElements) {
-          window.customElements.define(uncamelizedName, cls, {
-            extends: extend
-          });
+          try {
+            window.customElements.define(uncamelizedName, cls, {
+              extends: extend
+            });
+          } catch (e) {}
         } else if (document.registerElement) {
-          document.registerElement(uncamelizedName, {
-            prototype: cls.prototype,
-            extends: extend
-          });
+          try {
+            document.registerElement(uncamelizedName, {
+              prototype: cls.prototype,
+              extends: extend
+            });
+          } catch (e) {}
         } else {
           throw "Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...";
         }

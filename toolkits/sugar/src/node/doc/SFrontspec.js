@@ -17,8 +17,14 @@ const __unique = require('../array/unique');
  * and save it inside a directory you choose.
  *
  * @param           {Object}        [settings={}]           An object of settings to configure your docMap instance:
- * - filename (frontspec.json) {String}: Specify the filename you want
- * - outputDir (packageRoot()) {String}: Specify the directory where you want to save your docMap.json file when using the ```save``` method
+ *
+ * @setting       {String}      [filename='frontspec.json']       Specify the filename you want
+ * @setting       {String}      [outputDir=packageRoot()]         Specify the directory where you want to save your docMap.json file when using the ```save``` method
+ * @setting       {Integer}     [dirDepth=3]                      Specify the maximum directories the scan will go down
+ * @setting       {Boolean}     [cache=false]                     Specify if you want to take advantage of some cache or not
+ * @setting       {Object}      [sources={}                       Specify some sources folders where the scan process will go search for frontspec.json files
+ * @setting       {String}      [sources.[name].rootDir=__packageRoot()]     Specify the directory where to go search from
+ * @setting       {Integer}     [sources.[name].dirDepth=3]                  Specify the maximum directories the scan will go down
  *
  * @todo        update doc
  *
@@ -61,7 +67,23 @@ module.exports = class SFrontspec extends __SPromise {
         {
           id: 'SFrontspec',
           filename: 'frontspec.json',
-          outputDir: __packageRoot()
+          outputDir: __packageRoot(),
+          dirDepth: 3,
+          cache: false,
+          sources: {
+            root: {
+              rootDir: __packageRoot(),
+              dirDepth: 3
+            },
+            nodeModules: {
+              rootDir: `${__packageRoot()}/node_modules`,
+              dirDepth: 3
+            },
+            sugar: {
+              rootDir: `${__packageRoot()}/node_modules/@coffeekraken/sugar`,
+              dirDepth: 3
+            }
+          }
         },
         settings
       )
@@ -69,51 +91,25 @@ module.exports = class SFrontspec extends __SPromise {
   }
 
   /**
-   * @name          find
+   * @name          search
    * @type          Function
-   * @static
    *
-   * This static method allows you to search for frontspec.json files and get back the array of pathes where to
+   * This method allows you to search for frontspec.json files and get back the array of pathes where to
    * find the found files
    *
    * @todo      update documentation
    *
    * @param       {Object}        [settings={}]       A settings object to configure your reading process
-   * - dirDepth (10) {Integer}: Specify the max directories depth to search for docMap.json files relative to the ```roorDir``` setting
-   * - rootDir (__packageRoot()) {String}: Specify the root directory from where to search for docMap.json files
-   * - filename ('frontspec.json') {String|Array<String>}: Specify the file names to search for
-   * - cache (true) {Boolean}: Specify if you want to take advantage of the cache feature or
+   *
    * @return      {SPromise}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
    *
    * @since       2.0.0
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static find(settings = {}) {
+  search(settings = {}) {
     return new __SPromise(
       (resolve, reject, trigger, cancel) => {
-        settings = __deepMerge(
-          {
-            id: 'SFrontspec',
-            sources: {
-              root: {
-                rootDir: __packageRoot(),
-                dirDepth: 3
-              },
-              nodeModules: {
-                rootDir: `${__packageRoot()}/node_modules`,
-                dirDepth: 3
-              },
-              sugar: {
-                rootDir: `${__packageRoot()}/node_modules/@coffeekraken/sugar`,
-                dirDepth: 3
-              }
-            },
-            dirDepth: 3,
-            filename: 'frontspec.json',
-            cache: true
-          },
-          settings
-        );
+        settings = __deepMerge(this._settings, {}, settings);
 
         // let filenamesArray = settings.filename;
         // if (!Array.isArray(filenamesArray)) filenamesArray = [filenamesArray];
@@ -132,7 +128,7 @@ module.exports = class SFrontspec extends __SPromise {
             patterns: []
           };
 
-          for (let i = 0; i <= sourceObj.dirDepth; i++) {
+          for (let i = 0; i <= (sourceObj.dirDepth || settings.dirDepth); i++) {
             filenamesArray.forEach((filename) => {
               const p = `${'*/'.repeat(i)}${filename}`;
               patternObj.patterns.push(p);
@@ -167,62 +163,60 @@ module.exports = class SFrontspec extends __SPromise {
   }
 
   /**
-   * @name          read
-   * @type          Function
-   * @static
+   * @name					json
+   * @type 					Function
    *
-   * This static method allows you to search for frontspec.json files and read them to get
-   * back the content of them in one call. It can take advantage of the cache if
-   * the setting.cache property is setted to true
+   * Generate the frontspec JSON by searching for "childs" one as well as generating the "root" one
+   * stored at the root of your package.
    *
-   * @todo      update documentation
-   * @todo      integrate the "cache" feature
+   * @param       {Object}        [settings={}]         A setting object to override the instance ones passed in the constructor
+   * @return      {SPromise}                            An SPromise instance that will be resolved with the frontspec JSON once jsond
    *
-   * @param       {Object}        [settings={}]       A settings object to configure your reading process
-   * - dirDepth (10) {Integer}: Specify the max directories depth to search for frontspec.json files relative to the ```roorDir``` setting
-   * - rootDir (__packageRoot()) {String}: Specify the root directory from where to search for frontspec.json files
-   * - filename ('frontspec.json') {String|Array<String>}: Specify the file names to search for
-   * - cache (true) {Boolean}: Specify if you want to take advantage of the cache feature or
-   * @return      {SPromise}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @since 					2.0.0
+   * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static read(settings = {}) {
+  json(settings = {}) {
+    settings = __deepMerge(this._settings, {}, settings);
     return new __SPromise(
       async (resolve, reject, trigger, cancel) => {
-        settings = __deepMerge(
-          {
-            id: 'SFrontspec'
-          },
-          settings
-        );
-
-        const files = await SFrontspec.find(settings);
-
-        let frontspecJson = {};
-
-        // loop on all files
-        files.forEach((filePath) => {
-          const content = require(filePath);
-
-          const packageJson = __packageJson(filePath);
-          if (packageJson) {
-            if (!content.package) {
-              content.package = packageJson;
-            }
+        try {
+          // initiating the frontspecJson object
+          let frontspecJson = {
+            package: __packageRoot(),
+            children: {}
+          };
+          // search for files
+          const files = await this.search(settings);
+          if (!files) resolve(frontspecJson);
+          const rootFilePath = `${__packageRoot()}/${settings.filename}`;
+          if (files.indexOf(rootFilePath) !== -1) {
+            frontspecJson = require(rootFilePath);
+            frontspecJson.package = __packageJson();
+            frontspecJson.children = {};
           }
+          files.forEach((filePath) => {
+            // checking if it's the root one
+            if (filePath !== rootFilePath) {
+              // reading the file
+              const content = require(filePath);
+              // build the relative path to the package
+              let relPath = __path.relative(__packageRoot(), filePath);
+              relPath = relPath
+                .replace(`/${settings.filename}`, '')
+                .replace(settings.filename, '');
+              // save the child frontspec
+              frontspecJson.children[relPath] = content;
+            }
+          });
 
-          const relPath = __path.relative(__packageRoot(), filePath);
-
-          frontspecJson[relPath] = content;
-        });
-
-        // return the final docmap
-        resolve(frontspecJson);
+          // resolve the frontspec Json
+          resolve(frontspecJson);
+        } catch (e) {
+          reject(e.toString());
+        }
       },
       {
-        id: settings.id + '.read'
+        id: settings.id + '.json'
       }
     );
   }

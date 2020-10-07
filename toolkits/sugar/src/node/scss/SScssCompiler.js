@@ -1,3 +1,4 @@
+const __tmpDir = require('../fs/tmpDir');
 const __deepMerge = require('../object/deepMerge');
 const __SPromise = require('../promise/SPromise');
 const __includeBlockSplitter = require('../code/splitters/scss/includeBlockSplitter');
@@ -14,6 +15,8 @@ const __getFilename = require('../fs/filename');
 const __isPath = require('../is/path');
 const __fs = require('fs');
 const __SCodeSplitter = require('../code/SCodeSplitter');
+const __copy = require('../clipboard/copy');
+const __writeFileSync = require('../fs/writeFileSync');
 
 /**
  * @name                SScssCompiler
@@ -76,7 +79,8 @@ module.exports = class SScssCompiler {
         sass: {},
         optimizers: {
           split: true
-        }
+        },
+        putUseOnTop: true
       },
       settings
     );
@@ -107,18 +111,62 @@ module.exports = class SScssCompiler {
         let resultObj,
           resultString = '';
 
+        const includePaths = [
+          ...(settings.sass.includePaths || []),
+          `${__packageRoot()}/node_modules`,
+          `${__packageRoot(__dirname)}/src/scss`,
+          `${__packageRoot()}/src/scss`
+        ];
+
+        let sharedResources = settings.sharedResources || [];
+        if (!Array.isArray(sharedResources))
+          sharedResources = [sharedResources];
+
+        let sassPassedSettings = Object.assign({}, settings.sass || {});
+        delete sassPassedSettings.includePaths;
+        delete sassPassedSettings.sharedResources;
         const sassSettings = __deepMerge(
           {
-            importer: __globImporter(),
+            importer: [
+              __globImporter(),
+              (url, prev, done) => {
+                let filePath,
+                  fileContent = '';
+                for (let i = 0; i < includePaths.length; i++) {
+                  const path = includePaths[i];
+                  const filePotentialPath = `${path}/${url}`;
+                  if (__fs.existsSync(filePotentialPath)) {
+                    filePath = filePotentialPath;
+                    break;
+                  }
+                }
+                // reading the file if needed
+                if (!filePath) return done({ file: url });
+
+                // read the file
+                fileContent = __fs.readFileSync(filePath, 'utf8');
+
+                sharedResources.forEach((resource) => {
+                  const resourceContent = this._getSharedResourceContent(
+                    resource
+                  );
+                  fileContent = `
+                    ${resourceContent}
+                    ${fileContent}
+                  `;
+                });
+
+                // write file in tmp directory
+                const tmpFilePath = `${__tmpDir()}/${url}`;
+                __writeFileSync(tmpFilePath, fileContent);
+                return { file: tmpFilePath };
+              }
+            ],
+            sharedResources,
             sourceMap: true,
-            includePaths: [
-              ...(settings.sass.includePaths || []),
-              `${__packageRoot(process.cwd())}/node_modules`,
-              `${__packageRoot(__dirname)}/src/scss`,
-              `${__packageRoot(process.cwd())}/src/scss`
-            ]
+            includePaths
           },
-          settings.sass || {}
+          sassPassedSettings
         );
 
         if (__isPath(source, true)) {
@@ -129,7 +177,31 @@ module.exports = class SScssCompiler {
         }
         sassSettings.data = source;
 
+        sharedResources.forEach((resource) => {
+          const resourceContent = this._getSharedResourceContent(resource);
+          sassSettings.data = `
+            ${resourceContent}
+            ${sassSettings.data}
+          `;
+        });
+
+        if (settings.putUseOnTop) {
+          // take all the "@use" statements and put them on top
+          const useMatches = sassSettings.data.match(/@use\s.*[^;]/gm);
+          if (useMatches) {
+            useMatches.forEach((useStatement) => {
+              sassSettings.data = sassSettings.data.replace(useStatement, '');
+              sassSettings.data = `
+            ${useStatement}
+            ${sassSettings.data}
+          `;
+            });
+          }
+        }
+
         if (settings.optimizers.split) {
+          throw '"optimizers.split" not fully implemented now...';
+
           const splitter = new __SCodeSplitter();
 
           const splited = splitter.split(source, [
@@ -221,5 +293,14 @@ module.exports = class SScssCompiler {
         id: this._settings.id
       }
     );
+  }
+
+  _getSharedResourceContent(resource) {
+    if (!__isPath(resource)) {
+      return resource;
+    }
+    // load the resource
+    const resourceContent = __fs.readFileSync(resource, 'utf8');
+    return resourceContent;
   }
 };

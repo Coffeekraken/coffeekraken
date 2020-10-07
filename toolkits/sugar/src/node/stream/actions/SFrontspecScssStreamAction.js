@@ -3,7 +3,7 @@ const __deepMerge = require('../../object/deepMerge');
 const __SInterface = require('../../class/SInterface');
 const __SFrontspec = require('../../doc/SFrontspec');
 
-class SFrontspecJsStreamActionInterface extends __SInterface {
+class SFrontspecScssStreamActionInterface extends __SInterface {
   static definitionObj = {
     frontspec: {
       type: 'Boolean|Object'
@@ -12,7 +12,7 @@ class SFrontspecJsStreamActionInterface extends __SInterface {
 }
 
 /**
- * @name            SFrontspecJsStreamAction
+ * @name            SFrontspecScssStreamAction
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
@@ -25,7 +25,7 @@ class SFrontspecJsStreamActionInterface extends __SInterface {
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFrontspecJsStreamAction extends __SActionsStreamAction {
+module.exports = class SFrontspecScssStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -35,7 +35,7 @@ module.exports = class SFrontspecJsStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SFrontspecJsStreamActionInterface;
+  static interface = SFrontspecScssStreamActionInterface;
 
   /**
    * @name            constructor
@@ -51,7 +51,7 @@ module.exports = class SFrontspecJsStreamAction extends __SActionsStreamAction {
       __deepMerge(
         {
           sourceProp: 'data',
-          id: 'SFrontspecJsStreamAction'
+          id: 'SFrontspecScssStreamAction'
         },
         settings
       )
@@ -97,6 +97,7 @@ module.exports = class SFrontspecJsStreamAction extends __SActionsStreamAction {
       }
 
       // prepend the resulting frontspec imports, init, etc... in the streamObj
+      if (!streamObj[settings.sourceProp]) streamObj[settings.sourceProp] = '';
       streamObj[settings.sourceProp] = `
         ${codeString}
         ${streamObj[settings.sourceProp]}
@@ -108,17 +109,17 @@ module.exports = class SFrontspecJsStreamAction extends __SActionsStreamAction {
 
   _processFrontspecObj(frontspecObj) {
     let frontspecCodeString = '';
-    if (!frontspecObj.src || !frontspecObj.src.js) return frontspecCodeString;
-    Object.keys(frontspecObj.src.js).forEach((name) => {
-      const jsObj = frontspecObj.src.js[name];
+    if (!frontspecObj.src || !frontspecObj.src.scss) return frontspecCodeString;
+    Object.keys(frontspecObj.src.scss).forEach((name) => {
+      const jsObj = frontspecObj.src.scss[name];
 
       if (!jsObj.path && !jsObj.code) {
         return reject(
-          `Sorry but the "<yellow>src.js.${name}</yellow>" frontspec object does not contain any "<cyan>path</cyan>" or "<cyan>code</cyan>" properties...`
+          `Sorry but the "<yellow>src.scss.${name}</yellow>" frontspec object does not contain any "<cyan>path</cyan>" or "<cyan>code</cyan>" properties...`
         );
       } else if (!jsObj.path && jsObj.code && jsObj.includes('[path]')) {
         return reject(
-          `Sorry but the "<yellow>src.js.${name}</yellow>" frontspec object does contain a "<cyan>code</cyan>" property that include some "<magenta>[path]</magenta>" token(s) but it does not contain the "<cyan>path</cyan>" required property...`
+          `Sorry but the "<yellow>src.scss.${name}</yellow>" frontspec object does contain a "<cyan>code</cyan>" property that include some "<magenta>[path]</magenta>" token(s) but it does not contain the "<cyan>path</cyan>" required property...`
         );
       }
       let codeString = jsObj.code || '';
@@ -131,7 +132,7 @@ module.exports = class SFrontspecJsStreamAction extends __SActionsStreamAction {
         path !== 'frontspec.json' &&
         frontspecObj.package
       ) {
-        codeString = `import ${frontspecObj.package.name}/${jsObj.path};`;
+        codeString = `@import '${jsObj.path}';`;
       }
 
       frontspecCodeString += `

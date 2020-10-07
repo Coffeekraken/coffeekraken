@@ -1013,8 +1013,8 @@ export default class SPromise extends Promise {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _catch(...args) {
-    return this._registerCallbackInStack('catch', ...voidargs);
+  catch(...args) {
+    return this.on('catch', ...args);
   }
 
   /**
@@ -1041,7 +1041,7 @@ export default class SPromise extends Promise {
    */
   finally(...args) {
     // super.finally(...args);
-    return this._registerCallbackInStack('finally', ...args);
+    return this.on('finally', ...args);
   }
 
   /**
@@ -1067,7 +1067,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   resolved(...args) {
-    return this._registerCallbackInStack('resolve', ...args);
+    return this.on('resolve', ...args);
   }
 
   /**
@@ -1093,7 +1093,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   rejected(...args) {
-    return this._registerCallbackInStack('reject', ...args);
+    return this.on('reject', ...args);
   }
 
   /**
@@ -1119,7 +1119,7 @@ export default class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   canceled(...args) {
-    return this._registerCallbackInStack('cancel', ...args);
+    return this.on('cancel', ...args);
   }
 
   /**

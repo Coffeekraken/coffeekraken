@@ -1,6 +1,21 @@
 const __packageRoot = require('../src/node/path/packageRoot');
 
 module.exports = {
+  /**
+   * @name                frontspec
+   * @namespace           config.build
+   * @type                Boolean
+   * @default             false
+   *
+   * Specify if you want to use the frontspec features (auto import code front frontspec.json files, etc...)
+   * for your build process that support it.
+   * If the "frontspec" config is setted in a particular build process, it will override this one.
+   *
+   * @since               2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  frontspec: false,
+
   scss: {
     /**
      * @name              input
@@ -84,19 +99,34 @@ module.exports = {
     prod: false,
 
     /**
-     * @name                imports
+     * @name                frontspec
+     * @namespace           config.build.scss
+     * @type                Boolean
+     * @default             undefined
+     *
+     * Specify if you want to use the frontspec features (auto import code front frontspec.json files, etc...)
+     * for your scss build process.
+     * If setted to undefined, the config.build.frontspec config will be used
+     *
+     * @since               2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    frontspec: undefined,
+
+    /**
+     * @name                sharedResources
      * @namespace           config.build.scss
      * @type                Boolean
      * @default             ['sugar']
      *
-     * This options tells the sugar scss compiler which "frameworks" or "toolkit" you want to imports automatically.
+     * This options tells the sugar scss compiler which "frameworks" or "toolkit" you want to sharedResources automatically.
      * For now you can specify these:
      * - sugar: Import the coffeekraken sugar scss toolkit in your scss
      *
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    imports: ['sugar'],
+    sharedResources: ['sugar'],
 
     vendors: {
       /**
@@ -202,7 +232,22 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    prod: false
+    prod: false,
+
+    /**
+     * @name                frontspec
+     * @namespace           config.build.scss
+     * @type                Boolean
+     * @default             undefined
+     *
+     * Specify if you want to use the frontspec features (auto import code front frontspec.json files, etc...)
+     * for your js build process.
+     * If setted to undefined, the config.build.frontspec config will be used
+     *
+     * @since               2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    frontspec: undefined
   },
 
   config: {
@@ -347,5 +392,59 @@ module.exports = {
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     watch: `${__packageRoot()}/src/views/**/*.*`
+  },
+
+  frontspecJson: {
+    /**
+     * @name              outputDir
+     * @namespace         config.build.frontspec
+     * @type              String
+     * @default           <appRoot>
+     *
+     * Specify the destination folder where to put the frontspec.json file in
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    outputDir: `${__packageRoot()}`,
+
+    /**
+     * @name            filename
+     * @namespace       config.build.frontspec
+     * @type            String
+     * @default         frontspec.json
+     *
+     * Specify the filename that the frontspec output file must have
+     *
+     * @since           2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    filename: 'frontspec.json',
+
+    /**
+     * @name            dirDepth
+     * @namespace       config.build.frontspec
+     * @type            String
+     * @default         3
+     *
+     * Specify the number of folders the scanning process will go down
+     *
+     * @since           2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    dirDepth: 3,
+
+    /**
+     * @name            cache
+     * @namespace       config.build.frontspec
+     * @type            String
+     * @default         false
+     *
+     * Specify if the build frontspec file process will take advantage of some cache or not
+     *
+     * @since           2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    cache: false
   }
 };

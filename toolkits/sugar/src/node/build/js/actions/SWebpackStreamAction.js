@@ -3,15 +3,15 @@ const __getFilename = require('../../../fs/filename');
 const __packageRoot = require('../../../path/packageRoot');
 const __deepMerge = require('../../../object/deepMerge');
 const __fs = require('fs');
-const __tmpDir = require('../../../fs/tmpDir');
+const __onProcessExit = require('../../../process/onProcessExit');
 const __path = require('path');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SBuildJSInterface = require('../interface/SBuildJsInterface');
 const __sugarConfig = require('../../../config/sugar');
 const __babel = require('@babel/core');
-const __getScssImportsStrings = require('../../scss/getScssImportsStrings');
+const __getScssSharedResourcesString = require('../../scss/getScssSharedResourcesStrings');
 const __jsObjectToScssMap = require('../../scss/jsObjectToScssMap');
-const __SBuildJsInterface = require('../interface/SBuildJsInterface');
+const __folderPath = require('../../../fs/folderPath');
 
 /**
  * @name                SWebpackStreamAction
@@ -114,12 +114,19 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         return resolve(streamObj);
       }
 
-      const scssImportsString = __getScssImportsStrings(settings.scss.imports);
+      const scssImportsString = __getScssSharedResourcesString(
+        settings.scss.imports
+      );
 
       const scssConfig = __jsObjectToScssMap(
         __sugarConfig('scss'),
         settings.scss.config
       );
+
+      // ressources
+      let resources = streamObj.resources ? streamObj.resources : [];
+      if (!Array.isArray(resources)) resources = [resources];
+      resources.push(`${__packageRoot()}/src/scss/_shared.scss`);
 
       this.log({
         group: settings.name,
@@ -131,15 +138,17 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
 
       let webpackSettings = Object.assign({}, settings.webpack);
 
-      // write a file to compile in the tmp directory
-      const tmpInputPath = `${__tmpDir()}/SWebpackStreamActionInput.js`;
+      const tmpInputPath = `${streamObj.input}.tmp`;
       __fs.writeFileSync(tmpInputPath, streamObj.data);
+
+      __onProcessExit(() => {
+        __fs.unlinkSync(tmpInputPath);
+      });
 
       const compiler = __webpack(
         __deepMerge(
           {
             mode: streamObj.prod ? 'production' : 'development',
-            // entry: streamObj.input,
             entry: tmpInputPath,
             stats: {
               errors: true,
@@ -208,31 +217,23 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
             },
             resolveLoader: {
               modules: [
+                __folderPath(streamObj.input),
                 `${__packageRoot()}/node_modules`,
-                `${__packageRoot()}/src/js`,
-                __path.relative(
-                  __packageRoot(),
-                  `${__packageRoot(__dirname)}/node_modules`
-                ),
                 'node_modules'
               ]
             },
             resolve: {
               symlinks: true,
-              extensions: ['.tsx', '.ts', '.js', '.scss', '.sass'],
+              // extensions: ['.tsx', '.ts', '.js', '.scss', '.sass'],
               modules: [
+                __folderPath(streamObj.input),
                 `${__packageRoot()}/node_modules`,
-                `${__packageRoot()}/src/js`,
-                __path.relative(
-                  __packageRoot(),
-                  `${__packageRoot(__dirname)}/node_modules`
-                ),
                 'node_modules'
               ]
             },
             target: 'web',
             devtool: streamObj.map ? 'source-map' : false,
-            context: __packageRoot(process.cwd())
+            context: __packageRoot()
           },
           webpackSettings
         )
@@ -240,6 +241,9 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
 
       try {
         compiler.run((err, stats) => {
+          // delete the tmp file
+          __fs.unlinkSync(tmpInputPath);
+
           if (err) {
             let errorString = err.stack || err;
             if (err.details) {
@@ -283,6 +287,9 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
           resolve(streamObj);
         });
       } catch (e) {
+        // delete the tmp file
+        __fs.unlinkSync(tmpInputPath);
+
         console.log('COCOCOCOC');
         // console.log(e.toString());
       }

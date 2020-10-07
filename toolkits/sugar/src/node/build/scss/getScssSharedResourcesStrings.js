@@ -4,7 +4,7 @@ const __packageRoot = require('../../path/packageRoot');
 const __path = require('path');
 
 /**
- * @name            getScssImportsStrings
+ * @name            getScssSharedResourcesStrings
  * @namespace       sugar.node.build.scss
  * @type            Function
  *
@@ -15,13 +15,10 @@ const __path = require('path');
  *
  * @since       2.0.0
  */
-module.exports = function getScssImportsStrings(array = null) {
-  if (!array) array = __sugarConfig('build.scss.imports');
+module.exports = function getScssSharedResourcesStrings(array = null) {
+  if (!array) array = __sugarConfig('build.scss.sharedResources');
 
-  let importsStrings = {
-    prepend: '',
-    append: ''
-  };
+  let importsStrings = '';
 
   array.forEach((importItem) => {
     if (typeof importItem === 'string') {
@@ -32,12 +29,11 @@ module.exports = function getScssImportsStrings(array = null) {
               'toolkits/sugar/index'
             )
           : '@coffeekraken/sugar/index';
-        importsStrings.prepend += `
+        importsStrings += `
           @use "${path}" as Sugar;
           @include Sugar.setup($sugarUserSettings);
           @include Sugar.init();
         `;
-        importsStrings.append += ``;
       }
     }
   });

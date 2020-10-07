@@ -3876,6 +3876,23 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
+ * @name      text-ellipsis
+ * @namespace           sugar.scss.typography.mixin
+ * @type      mixin
+ *
+ * Crop the text on 1 line if needed
+ *
+ * @param           {String}        [$type=ellipsis]        Specify the type of overflow you want. Can be "ellipsis", "clip", or "ellipsis-word"
+
+ * @example     scss
+ * h2 {
+ * 		@include Sugar.text-ellipsis();
+ * }
+ *
+ * @since       2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
  * @name      text-hide
  * @namespace           sugar.scss.typography.mixin
  * @type      mixin

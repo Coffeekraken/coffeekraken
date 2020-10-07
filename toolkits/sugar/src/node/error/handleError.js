@@ -107,7 +107,6 @@ function __handleChildProcessErrors(error) {
   __SIpc.trigger('error', error.toString());
 
   const e = new __SError(error);
-  __copy(e.toString());
   console.log(e.toString());
 
   // console.log(__toString(error));

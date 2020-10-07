@@ -43,8 +43,11 @@ module.exports = class SBuildJsCliInterface extends __SInterface {
     prod: {
       default: __sugarConfig('build.js.prod')
     },
-    buildType: {
-      default: 'js'
+    frontspec: {
+      default:
+        __sugarConfig('build.js.frontspec') !== undefined
+          ? __sugarConfig('build.js.frontspec')
+          : __sugarConfig('build.frontspec')
     }
   });
 };

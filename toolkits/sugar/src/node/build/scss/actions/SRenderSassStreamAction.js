@@ -3,6 +3,7 @@ const __deepMerge = require('../../../object/deepMerge');
 const __SBuildScssInterface = require('../interface/SBuildScssInterface');
 const __SScssCompiler = require('../../../scss/SScssCompiler');
 const __folderPath = require('../../../fs/folderPath');
+const __copy = require('../../../clipboard/copy');
 
 /**
  * @name                SRenderSassStreamAction
@@ -65,19 +66,21 @@ module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
 
       if (!streamObj.outputStack) streamObj.outputStack = {};
 
-      const compiler = new __SScssCompiler();
-      const result = await compiler.compile(
-        streamObj.data,
-        {
-          sass: {
-            includePaths: [__folderPath(streamObj.input)]
-          },
-          optimizers: {
-            split: false
-          }
+      const compiler = new __SScssCompiler({
+        sharedResources: streamObj.sharedResources
+      });
+      const promise = compiler.compile(streamObj.data, {
+        sass: {
+          includePaths: [__folderPath(streamObj.input)]
+        },
+        optimizers: {
+          split: false
         }
-        // streamObj
-      );
+      });
+      promise.catch((e) => {
+        reject(e);
+      });
+      const result = await promise;
       // streamObj = result.streamObj;
       streamObj.data = result.data;
       resolve(streamObj);

@@ -29,7 +29,7 @@ module.exports = {
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  hostname: '127.0.0.1',
+  hostname: '192.168.201.117',
 
   /**
    * @name              rootDir

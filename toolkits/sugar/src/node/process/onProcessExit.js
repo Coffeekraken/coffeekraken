@@ -24,13 +24,13 @@
 const __onProcessExitCallbacks = [];
 module.exports = function onProcessExit(callback) {
   if (!__onProcessExitCallbacks.length) {
+    process.env.HAS_ON_PROCESS_EXIT_HANDLERS = true;
     async function exitHandler() {
-      process.stdin.resume();
       for (let i = 0; i < __onProcessExitCallbacks.length; i++) {
         const cbFn = __onProcessExitCallbacks[i];
         await cbFn();
       }
-      process.exit();
+      process.kill(process.pid, 'SIGTERM');
     }
     process.on('close', exitHandler);
     process.on('exit', exitHandler);

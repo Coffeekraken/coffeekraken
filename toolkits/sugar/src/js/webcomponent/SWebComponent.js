@@ -15,6 +15,7 @@ import __SLitHtmlWebComponent from './SLitHtmlWebComponent';
 import __htmlTagToHtmlClassMap from '../html/htmlTagToHtmlClassMap';
 import __uncamelize from '../string/uncamelize';
 import __getHtmlClassFromTagName from '../html/getHtmlClassFromTagName';
+import __domReady from '../dom/domReady';
 
 /**
  * @name              SWebComponent
@@ -157,7 +158,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
      * @since 					2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static componentName = extendsSettings.name;
+    static componentName = undefined;
 
     /**
      * @name					getComponentMetas
@@ -187,60 +188,61 @@ function SWebComponentGenerator(extendsSettings = {}) {
      *
      * This method allows you to define your component as a webcomponent recognized by the browser
      *
-     * @param       {String}      [name=extendsSettings.name]     The component name in camelcase
-     * @param       {Class|Object}    [clsOrSettings={}]          Either the component class you want to register, either an object of settings
      * @param       {Object}        [settings={}]                 An object of settings to configure your component
+     *
+     * @setting     {String}        [name=null]                   Specify the component name in CamelCase. MyCoolComponent => <my-cool-component />
      *
      * @since 					2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static define(
-      name = extendsSettings.name,
-      clsOrSettings = {},
-      settings = null
-    ) {
-      if (!name)
-        throw new Error(
-          `SWebComponent: You must define a name for your webcomponent by setting either a static "name" property on your class, of by passing a name as first parameter of the static "define" function...`
-        );
-      let cls = this;
-      if (__isClass(clsOrSettings)) cls = clsOrSettings;
-      else if (typeof clsOrSettings === 'object' && !settings) {
-        settings = clsOrSettings;
-      }
+    static define(settings = {}) {
+      // if (!name)
+      //   throw new Error(
+      //     `SWebComponent: You must define a name for your webcomponent by setting either a static "name" property on your class, of by passing a name as first parameter of the static "define" function...`
+      //   );
+      // let cls = this;
+      // if (__isClass(clsOrSettings)) cls = clsOrSettings;
+      // else if (typeof clsOrSettings === 'object' && !settings) {
+      //   settings = clsOrSettings;
+      // }
 
       let extend = null;
       for (let key in __htmlTagToHtmlClassMap) {
-        if (cls.prototype instanceof __htmlTagToHtmlClassMap[key]) {
+        if (this.prototype instanceof __htmlTagToHtmlClassMap[key]) {
           extend = key;
           break;
         }
       }
 
+      const name = (settings.name || this.componentName || this.name).replace(
+        'WebComponent',
+        ''
+      );
+
       const uncamelizedName = __uncamelize(name);
 
-      cls.componentName = name;
+      this.componentName = name;
 
       if (_sWebComponentStack[uncamelizedName]) return;
 
       _sWebComponentStack[uncamelizedName] = {
         name,
         dashName: uncamelizedName,
-        class: cls,
+        class: this,
         extends: extend,
         settings
       };
 
       if (window.customElements) {
         try {
-          window.customElements.define(uncamelizedName, cls, {
+          window.customElements.define(uncamelizedName, this, {
             extends: extend
           });
         } catch (e) {}
       } else if (document.registerElement) {
         try {
           document.registerElement(uncamelizedName, {
-            prototype: cls.prototype,
+            prototype: this.prototype,
             extends: extend
           });
         } catch (e) {}
@@ -261,6 +263,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
     constructor(settings = {}) {
       // init base html element
       super();
+
       // make sure the component has a componentName static prop
       if (!this.constructor.componentName)
         throw `Your MUST define a static "componentName" camelcase property like "SFiltrableInput" for your component to work properly...`;
@@ -283,13 +286,6 @@ function SWebComponentGenerator(extendsSettings = {}) {
         id: this._settings.id
       });
 
-      // apply the $node class
-      const currentClassName = this.getAttribute('class') || '';
-      this.setAttribute(
-        'class',
-        `${currentClassName} ${this.selector(`node`)}`
-      );
-
       this.on('mounted:1', () => {
         // dispatch a ready event
         if (!this.lit) {
@@ -298,8 +294,20 @@ function SWebComponentGenerator(extendsSettings = {}) {
         }
       });
 
-      // launch the mounting process
-      setTimeout(this._mount.bind(this));
+      __domReady(() => {
+        // handle props
+        this._initProps();
+
+        // apply the $node class
+        const currentClassName = this.getAttribute('class') || '';
+        this.setAttribute(
+          'class',
+          `${currentClassName} ${this.selector(`node`)}`
+        );
+
+        // launch the mounting process
+        this._mount();
+      });
     }
 
     /**
@@ -355,6 +363,68 @@ function SWebComponentGenerator(extendsSettings = {}) {
     }
 
     /**
+     * @name          addClass
+     * @type          Function
+     *
+     * This method can be used to add class(es) to an element in the component.
+     * This will take care of adding the pcomponent name prefix as well as the ```cssName```prefix
+     * if needed
+     *
+     * @param       {String}      cls       The class(es) to add.
+     * @param       {HTMLElement|String}     [$elm=this]       The item on which you want to add the class. Can be a string which will be passed to the ```$``` method to get the HTMLElement itself
+     * @return      {SWebComponent}               Return the component itself to maintain chainability
+     *
+     * @since       2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    addClass(cls, $elm = this) {
+      // split the cls
+      const clsArray = cls.split(' ');
+      clsArray.forEach((className) => {
+        // build the selector
+        const selector = this.selector(className);
+        // split the selector
+        selector.split(' ').forEach((sel) => {
+          // add the class to the element
+          $elm.classList.add(sel);
+        });
+      });
+      // maintain chainability
+      return this;
+    }
+
+    /**
+     * @name          removeClass
+     * @type          Function
+     *
+     * This method can be used to remove class(es) to an element in the component.
+     * This will take care of adding the component name prefix as well as the ```cssName```prefix
+     * if needed
+     *
+     * @param       {String}      cls       The class(es) to add.
+     * @param       {HTMLElement|String}     [$elm=this]       The item on which you want to add the class. Can be a string which will be passed to the ```$``` method to get the HTMLElement itself
+     * @return      {SWebComponent}               Return the component itself to maintain chainability
+     *
+     * @since       2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    removeClass(cls, $elm = this) {
+      // split the cls
+      const clsArray = cls.split(' ');
+      clsArray.forEach((className) => {
+        // build the selector
+        const selector = this.selector(className);
+        // split the selector
+        selector.split(' ').forEach((sel) => {
+          // add the class to the element
+          $elm.classList.remove(sel);
+        });
+      });
+      // maintain chainability
+      return this;
+    }
+
+    /**
      * @name          metas
      * @type          Object
      * @get
@@ -373,22 +443,9 @@ function SWebComponentGenerator(extendsSettings = {}) {
       };
     }
 
-    /**
-     * @name          _mount
-     * @type          Function
-     * @private
-     * @async
-     *
-     * This method handle the mounting of the component
-     *
-     * @since       2.0.0
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    async _mount() {
-      // dispatch mounting event
-      this.dispatch('mounting', this);
-
+    _initProps() {
       // handle props
+
       for (const key in this._settings.props) {
         let attr = this.getAttribute(__uncamelize(key));
         if (!attr && this.hasAttribute(__uncamelize(key))) {
@@ -417,6 +474,22 @@ function SWebComponentGenerator(extendsSettings = {}) {
           });
         }
       }
+    }
+
+    /**
+     * @name          _mount
+     * @type          Function
+     * @private
+     * @async
+     *
+     * This method handle the mounting of the component
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    async _mount() {
+      // dispatch mounting event
+      this.dispatch('mounting', this);
 
       // wait until the component match the mountDependencies and mountWhen status
       await this._mountDependencies();
@@ -655,35 +728,46 @@ function SWebComponentGenerator(extendsSettings = {}) {
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     selector(cls = '') {
-      if (cls.includes(this.metas.dashName)) {
-        return cls;
-      }
-
-      const hasDot = cls.match(/^\./);
-      cls = cls.replace('.', '');
-
-      let finalCls;
-      if (cls.match(/^(--)/)) finalCls = `${this.metas.dashName}${cls}`;
-      else if (cls !== '') finalCls = `${this.metas.dashName}__${cls}`;
-      else finalCls = this.metas.dashName;
-
-      if (hasDot) finalCls = `.${finalCls}`;
-
-      // if (cls.match(/^(--)/)) {
-      //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare${cls} ${
-      //     hasDot ? '.' : ''
-      //   }${finalCls}`;
-      // } else if (cls !== '') {
-      //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare__${cls} ${
-      //     hasDot ? '.' : ''
-      //   }${finalCls}`;
-      // } else {
-      //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare ${
-      //     hasDot ? '.' : ''
-      //   }${finalCls}`;
+      // if (cls.includes(this.metas.dashName)) {
+      //   return cls;
       // }
 
-      return finalCls;
+      const split = cls.split(' ');
+      const finalSelectorArray = [];
+
+      split.forEach((part) => {
+        const hasDot = part.match(/^\./);
+        part = part.replace('.', '');
+
+        let finalClsPart;
+        if (part.match(/^(--)/)) finalClsPart = `${this.metas.dashName}${part}`;
+        else if (part !== '') finalClsPart = `${this.metas.dashName}__${part}`;
+        else finalClsPart = this.metas.dashName;
+        if (hasDot) finalClsPart = `.${finalClsPart}`;
+
+        // add the base class if needed
+        if (this.constructor.cssName) {
+          let baseCls = __uncamelize(this.constructor.cssName).replace(
+            '-web-component',
+            ''
+          );
+          if (!finalClsPart.includes(baseCls)) {
+            let finalBaseCls = '';
+            if (part.match(/^(--)/)) finalBaseCls = `${baseCls}${part}`;
+            else if (part !== '') finalBaseCls = `${baseCls}__${part}`;
+            else finalBaseCls = baseCls;
+            if (hasDot) {
+              finalBaseCls = `.${finalBaseCls}`;
+            } else {
+              finalClsPart += ` ${finalBaseCls}`;
+            }
+          }
+        }
+
+        finalSelectorArray.push(finalClsPart);
+      });
+
+      return finalSelectorArray.join(' ');
     }
 
     /**

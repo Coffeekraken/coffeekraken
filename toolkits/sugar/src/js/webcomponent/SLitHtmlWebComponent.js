@@ -59,7 +59,7 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
      *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static template = (props, settings, lit) => lit.html`
+    static template = (props, component, html) => html`
       <p>
         You need to specify a static template property for your component...
       </p>
@@ -104,7 +104,7 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
       super(__deepMerge({}, settings));
       // generate a container for the component
       this.$container = document.createElement('div');
-      this.$container.className = this.selector();
+      this.addClass('', this.$container);
       // wait until mounted to render the component first time
       this.on('mounted:1', () => {
         // insert the container in the document

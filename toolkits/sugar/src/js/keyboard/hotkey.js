@@ -54,7 +54,7 @@ export default function (hotkey, settings = {}) {
       // init the hotkey
       hotkeys(hotkey, settings, (e, h) => {
         // call the handler function
-        trigger('key', e);
+        trigger('press', e);
         // unsubscribe if once is truc
         if (settings.once) cancel();
       });

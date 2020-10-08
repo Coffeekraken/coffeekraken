@@ -1,2 +1,2 @@
-import __SFiltrableInput from '@coffeekraken/s-filtrable-input';
-__SFiltrableInput.define();
+import __SSugarUiSearchNavigation from './webcomponents/SSugarUiSearchNavigationWebComponent';
+__SSugarUiSearchNavigation.define();

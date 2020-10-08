@@ -73,7 +73,7 @@ function _default(hotkey, settings) {
 
     (0, _hotkeysJs.default)(hotkey, settings, (e, h) => {
       // call the handler function
-      trigger('key', e); // unsubscribe if once is truc
+      trigger('press', e); // unsubscribe if once is truc
 
       if (settings.once) cancel();
     });

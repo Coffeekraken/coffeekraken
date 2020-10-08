@@ -14,6 +14,31 @@
     @include Sugar.smooth-shadow();
     @include Sugar.scrollbar();
   }
+
+  .#{$name}__list {
+    transition: all .1s ease-in-out;
+    transform: translateY(20px);
+
+    .#{$name}__node:focus + &,
+    &:focus {
+      opacity: 1;
+      transform: translateY(0);  
+    }
+    .#{$name}--ontop & {
+      transform: translateY(-50px);
+      bottom: 100%;
+      top: initial;
+    }
+
+  }
+
+  .#{$name}__list-no-item {
+    padding: Sugar.lnf(padding);
+    min-width: 100%;
+  }
+    .#{$name}__list-no-item-text {
+      white-space: nowrap;
+    }
   .#{$name}__list-item {
     padding: Sugar.lnf(padding);
 

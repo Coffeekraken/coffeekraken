@@ -9,8 +9,8 @@ const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SBuildJSInterface = require('../interface/SBuildJsInterface');
 const __sugarConfig = require('../../../config/sugar');
 const __babel = require('@babel/core');
-const __getScssSharedResourcesString = require('../../scss/getScssSharedResourcesStrings');
-const __jsObjectToScssMap = require('../../scss/jsObjectToScssMap');
+// const __getScssSharedResourcesString = require('../../scss/getScssSharedResourcesStrings');
+// const __jsObjectToScssMap = require('../../../scss/jsObjectToScssMap');
 const __folderPath = require('../../../fs/folderPath');
 
 /**
@@ -114,14 +114,14 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         return resolve(streamObj);
       }
 
-      const scssImportsString = __getScssSharedResourcesString(
-        settings.scss.imports
-      );
+      // const scssImportsString = __getScssSharedResourcesString(
+      //   settings.scss.imports
+      // );
 
-      const scssConfig = __jsObjectToScssMap(
-        __sugarConfig('scss'),
-        settings.scss.config
-      );
+      // const scssConfig = __jsObjectToScssMap(
+      //   __sugarConfig('scss'),
+      //   settings.scss.config
+      // );
 
       // ressources
       let resources = streamObj.resources ? streamObj.resources : [];
@@ -177,11 +177,11 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
                     {
                       loader: 'sass-loader',
                       options: {
-                        implementation: require('sass'),
-                        prependData: `
-                          ${scssConfig}
-                          ${scssImportsString.prepend}
-                        `
+                        implementation: require('sass')
+                        // prependData: `
+                        //   ${scssConfig}
+                        //   ${scssImportsString.prepend}
+                        // `
                       }
                     }
                   ]

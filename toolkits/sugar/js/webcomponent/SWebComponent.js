@@ -39,15 +39,17 @@ var _uncamelize = _interopRequireDefault(require("../string/uncamelize"));
 
 var _getHtmlClassFromTagName = _interopRequireDefault(require("../html/getHtmlClassFromTagName"));
 
+var _domReady = _interopRequireDefault(require("../dom/domReady"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -167,9 +169,9 @@ function SWebComponentGenerator(extendsSettings) {
        *
        * This method allows you to define your component as a webcomponent recognized by the browser
        *
-       * @param       {String}      [name=extendsSettings.name]     The component name in camelcase
-       * @param       {Class|Object}    [clsOrSettings={}]          Either the component class you want to register, either an object of settings
        * @param       {Object}        [settings={}]                 An object of settings to configure your component
+       *
+       * @setting     {String}        [name=null]                   Specify the component name in CamelCase. MyCoolComponent => <my-cool-component />
        *
        * @since 					2.0.0
        * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -177,54 +179,51 @@ function SWebComponentGenerator(extendsSettings) {
 
     }, {
       key: "define",
-      value: function define(name, clsOrSettings, settings) {
-        if (name === void 0) {
-          name = extendsSettings.name;
-        }
-
-        if (clsOrSettings === void 0) {
-          clsOrSettings = {};
-        }
-
+      value: function define(settings) {
         if (settings === void 0) {
-          settings = null;
+          settings = {};
         }
 
-        if (!name) throw new Error("SWebComponent: You must define a name for your webcomponent by setting either a static \"name\" property on your class, of by passing a name as first parameter of the static \"define\" function...");
-        var cls = this;
-        if ((0, _class2.default)(clsOrSettings)) cls = clsOrSettings;else if (typeof clsOrSettings === 'object' && !settings) {
-          settings = clsOrSettings;
-        }
+        // if (!name)
+        //   throw new Error(
+        //     `SWebComponent: You must define a name for your webcomponent by setting either a static "name" property on your class, of by passing a name as first parameter of the static "define" function...`
+        //   );
+        // let cls = this;
+        // if (__isClass(clsOrSettings)) cls = clsOrSettings;
+        // else if (typeof clsOrSettings === 'object' && !settings) {
+        //   settings = clsOrSettings;
+        // }
         var extend = null;
 
         for (var key in _htmlTagToHtmlClassMap.default) {
-          if (cls.prototype instanceof _htmlTagToHtmlClassMap.default[key]) {
+          if (this.prototype instanceof _htmlTagToHtmlClassMap.default[key]) {
             extend = key;
             break;
           }
         }
 
+        var name = (settings.name || this.componentName || this.name).replace('WebComponent', '');
         var uncamelizedName = (0, _uncamelize.default)(name);
-        cls.componentName = name;
+        this.componentName = name;
         if (_sWebComponentStack[uncamelizedName]) return;
         _sWebComponentStack[uncamelizedName] = {
           name,
           dashName: uncamelizedName,
-          class: cls,
+          class: this,
           extends: extend,
           settings
         };
 
         if (window.customElements) {
           try {
-            window.customElements.define(uncamelizedName, cls, {
+            window.customElements.define(uncamelizedName, this, {
               extends: extend
             });
           } catch (e) {}
         } else if (document.registerElement) {
           try {
             document.registerElement(uncamelizedName, {
-              prototype: cls.prototype,
+              prototype: this.prototype,
               extends: extend
             });
           } catch (e) {}
@@ -355,11 +354,7 @@ function SWebComponentGenerator(extendsSettings) {
 
       _this._promise = new _SPromise.default({
         id: _this._settings.id
-      }); // apply the $node class
-
-      var currentClassName = _this.getAttribute('class') || '';
-
-      _this.setAttribute('class', "".concat(currentClassName, " ").concat(_this.selector("node")));
+      });
 
       _this.on('mounted:1', () => {
         // dispatch a ready event
@@ -367,10 +362,20 @@ function SWebComponentGenerator(extendsSettings) {
           // the Lit HTML class dispatch the ready event after having rendering the template the first time
           _this.dispatch('ready', _assertThisInitialized(_this));
         }
-      }); // launch the mounting process
+      });
+
+      (0, _domReady.default)(() => {
+        // handle props
+        _this._initProps(); // apply the $node class
 
 
-      setTimeout(_this._mount.bind(_assertThisInitialized(_this)));
+        var currentClassName = _this.getAttribute('class') || '';
+
+        _this.setAttribute('class', "".concat(currentClassName, " ").concat(_this.selector("node"))); // launch the mounting process
+
+
+        _this._mount();
+      });
       return _this;
     }
     /**
@@ -443,6 +448,80 @@ function SWebComponentGenerator(extendsSettings) {
         return $result;
       }
       /**
+       * @name          addClass
+       * @type          Function
+       *
+       * This method can be used to add class(es) to an element in the component.
+       * This will take care of adding the pcomponent name prefix as well as the ```cssName```prefix
+       * if needed
+       *
+       * @param       {String}      cls       The class(es) to add.
+       * @param       {HTMLElement|String}     [$elm=this]       The item on which you want to add the class. Can be a string which will be passed to the ```$``` method to get the HTMLElement itself
+       * @return      {SWebComponent}               Return the component itself to maintain chainability
+       *
+       * @since       2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "addClass",
+      value: function addClass(cls, $elm) {
+        if ($elm === void 0) {
+          $elm = this;
+        }
+
+        // split the cls
+        var clsArray = cls.split(' ');
+        clsArray.forEach(className => {
+          // build the selector
+          var selector = this.selector(className); // split the selector
+
+          selector.split(' ').forEach(sel => {
+            // add the class to the element
+            $elm.classList.add(sel);
+          });
+        }); // maintain chainability
+
+        return this;
+      }
+      /**
+       * @name          removeClass
+       * @type          Function
+       *
+       * This method can be used to remove class(es) to an element in the component.
+       * This will take care of adding the component name prefix as well as the ```cssName```prefix
+       * if needed
+       *
+       * @param       {String}      cls       The class(es) to add.
+       * @param       {HTMLElement|String}     [$elm=this]       The item on which you want to add the class. Can be a string which will be passed to the ```$``` method to get the HTMLElement itself
+       * @return      {SWebComponent}               Return the component itself to maintain chainability
+       *
+       * @since       2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "removeClass",
+      value: function removeClass(cls, $elm) {
+        if ($elm === void 0) {
+          $elm = this;
+        }
+
+        // split the cls
+        var clsArray = cls.split(' ');
+        clsArray.forEach(className => {
+          // build the selector
+          var selector = this.selector(className); // split the selector
+
+          selector.split(' ').forEach(sel => {
+            // add the class to the element
+            $elm.classList.remove(sel);
+          });
+        }); // maintain chainability
+
+        return this;
+      }
+      /**
        * @name          metas
        * @type          Object
        * @get
@@ -455,8 +534,46 @@ function SWebComponentGenerator(extendsSettings) {
        */
 
     }, {
-      key: "_mount",
+      key: "_initProps",
+      value: function _initProps() {
+        var _this2 = this;
 
+        // handle props
+        for (var key in this._settings.props) {
+          var attr = this.getAttribute((0, _uncamelize.default)(key));
+
+          if (!attr && this.hasAttribute((0, _uncamelize.default)(key))) {
+            attr = true;
+          }
+
+          this._props[key] = _objectSpread(_objectSpread({}, this._settings.props[key]), {}, {
+            value: attr ? (0, _parse.default)(attr) : this._settings.props[key].default,
+            previousValue: undefined
+          });
+        } // handle props
+
+
+        var _loop = function _loop(_key) {
+          // if need to be watches deeply
+          if (_this2._props[_key].watch) {
+            _this2._props[_key] = (0, _watch.default)(_this2._props[_key], {
+              deep: _this2._props[_key].watch === 'deep'
+            });
+
+            _this2._props[_key].on('value.*:+(set|delete|push|pop)', update => {
+              if (update.path.split('.').length === 1) {
+                _this2.prop(update.path, update.value);
+              } else {
+                _this2.handleProp(update.path, _this2._props[_key]);
+              }
+            });
+          }
+        };
+
+        for (var _key in this._settings.props) {
+          _loop(_key);
+        }
+      }
       /**
        * @name          _mount
        * @type          Function
@@ -468,48 +585,13 @@ function SWebComponentGenerator(extendsSettings) {
        * @since       2.0.0
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+
+    }, {
+      key: "_mount",
       value: function () {
         var _mount2 = _asyncToGenerator(function* () {
-          var _this2 = this;
-
           // dispatch mounting event
-          this.dispatch('mounting', this); // handle props
-
-          for (var key in this._settings.props) {
-            var attr = this.getAttribute((0, _uncamelize.default)(key));
-
-            if (!attr && this.hasAttribute((0, _uncamelize.default)(key))) {
-              attr = true;
-            }
-
-            this._props[key] = _objectSpread(_objectSpread({}, this._settings.props[key]), {}, {
-              value: attr ? (0, _parse.default)(attr) : this._settings.props[key].default,
-              previousValue: undefined
-            });
-          } // handle props
-
-
-          var _loop = function _loop(_key) {
-            // if need to be watches deeply
-            if (_this2._props[_key].watch) {
-              _this2._props[_key] = (0, _watch.default)(_this2._props[_key], {
-                deep: _this2._props[_key].watch === 'deep'
-              });
-
-              _this2._props[_key].on('value.*:+(set|delete|push|pop)', update => {
-                if (update.path.split('.').length === 1) {
-                  _this2.prop(update.path, update.value);
-                } else {
-                  _this2.handleProp(update.path, _this2._props[_key]);
-                }
-              });
-            }
-          };
-
-          for (var _key in this._settings.props) {
-            _loop(_key);
-          } // wait until the component match the mountDependencies and mountWhen status
-
+          this.dispatch('mounting', this); // wait until the component match the mountDependencies and mountWhen status
 
           yield this._mountDependencies(); // check props definition
 
@@ -771,29 +853,36 @@ function SWebComponentGenerator(extendsSettings) {
           cls = '';
         }
 
-        if (cls.includes(this.metas.dashName)) {
-          return cls;
-        }
-
-        var hasDot = cls.match(/^\./);
-        cls = cls.replace('.', '');
-        var finalCls;
-        if (cls.match(/^(--)/)) finalCls = "".concat(this.metas.dashName).concat(cls);else if (cls !== '') finalCls = "".concat(this.metas.dashName, "__").concat(cls);else finalCls = this.metas.dashName;
-        if (hasDot) finalCls = ".".concat(finalCls); // if (cls.match(/^(--)/)) {
-        //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare${cls} ${
-        //     hasDot ? '.' : ''
-        //   }${finalCls}`;
-        // } else if (cls !== '') {
-        //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare__${cls} ${
-        //     hasDot ? '.' : ''
-        //   }${finalCls}`;
-        // } else {
-        //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare ${
-        //     hasDot ? '.' : ''
-        //   }${finalCls}`;
+        // if (cls.includes(this.metas.dashName)) {
+        //   return cls;
         // }
+        var split = cls.split(' ');
+        var finalSelectorArray = [];
+        split.forEach(part => {
+          var hasDot = part.match(/^\./);
+          part = part.replace('.', '');
+          var finalClsPart;
+          if (part.match(/^(--)/)) finalClsPart = "".concat(this.metas.dashName).concat(part);else if (part !== '') finalClsPart = "".concat(this.metas.dashName, "__").concat(part);else finalClsPart = this.metas.dashName;
+          if (hasDot) finalClsPart = ".".concat(finalClsPart); // add the base class if needed
 
-        return finalCls;
+          if (this.constructor.cssName) {
+            var baseCls = (0, _uncamelize.default)(this.constructor.cssName).replace('-web-component', '');
+
+            if (!finalClsPart.includes(baseCls)) {
+              var finalBaseCls = '';
+              if (part.match(/^(--)/)) finalBaseCls = "".concat(baseCls).concat(part);else if (part !== '') finalBaseCls = "".concat(baseCls, "__").concat(part);else finalBaseCls = baseCls;
+
+              if (hasDot) {
+                finalBaseCls = ".".concat(finalBaseCls);
+              } else {
+                finalClsPart += " ".concat(finalBaseCls);
+              }
+            }
+          }
+
+          finalSelectorArray.push(finalClsPart);
+        });
+        return finalSelectorArray.join(' ');
       }
       /**
        * @name        prop
@@ -944,7 +1033,7 @@ function SWebComponentGenerator(extendsSettings) {
     }]);
 
     return SWebComponent;
-  }(extendsSettings.extends), _defineProperty(_class, "componentName", extendsSettings.name), _temp;
+  }(extendsSettings.extends), _defineProperty(_class, "componentName", undefined), _temp;
 } // /**
 //  * @name        on
 //  * @type        Function

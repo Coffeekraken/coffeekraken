@@ -47,6 +47,10 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
       type: 'String',
       default: 'title'
     },
+    noItemText: {
+      type: 'String',
+      default: 'No result sorry...'
+    },
     inputThrottle: {
       type: 'Number',
       default: 0,
@@ -61,27 +65,38 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
     }
   };
 
+  static cssName = 'SFiltrableInput';
+
   static template = function (props, settings, lit) {
     return lit.html`
       ${this}
-      <ul class="${this.metas.dashName}__list" tabindex="1">
-        ${props.items.value.map((item, i) =>
-          i < this._maxDisplayItems
+      <ul class="${this.selector('list')}" tabindex="1">
+        ${
+          props.items.value.length === 0
             ? lit.html`
-                <li class="${this.metas.dashName}__list-item ${
-                this._preselectedItemIdx === i
-                  ? this.selector('list-item--preselected')
-                  : ''
-              } ${
-                this._selectedItemIdx === i
-                  ? this.selector('list-item--selected')
-                  : ''
-              }">
+              <li class="${this.selector('list-no-item')}">
+                ${settings.template.noItem(settings, lit)}
+              </li>
+            `
+            : lit.html`
+            ${props.items.value.map((item, i) =>
+              i < this._maxDisplayItems
+                ? lit.html`
+                <li class="${this.selector('list-item')} ${
+                    this._preselectedItemIdx === i
+                      ? this.selector('list-item--preselected')
+                      : ''
+                  } ${
+                    this._selectedItemIdx === i
+                      ? this.selector('list-item--selected')
+                      : ''
+                  }">
                   ${settings.template.item(item, settings, lit)}
                 </li>
               `
-            : ''
-        )}
+                : ''
+            )}`
+        }
       </ul>
     `;
   };
@@ -123,7 +138,7 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
       __deepMerge(
         {
           closeOnSelect: true,
-          closeOnSelectTimeout: 300,
+          closeOnSelectTimeout: 200,
           maxDisplayItems: 50,
           filter: {
             throttleTimeout: 100,
@@ -131,6 +146,11 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
             function: null
           },
           template: {
+            noItem: (settings, lit) => lit.html`
+              <div class="${this.selector('list-no-item-text')}">
+                ${this.prop('noItemText')}
+              </div>
+            `,
             item: (itemObj, settings, lit) => lit.html`
               ${
                 itemObj.title
@@ -230,7 +250,6 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
       });
 
       this.addEventListener('focus', () => {
-        console.log('fo');
         document.dispatchEvent(new Event('scroll'));
       });
 
@@ -239,10 +258,10 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
         var topPos = element.getBoundingClientRect().top;
 
         if (document.documentElement.clientHeight / 2 < topPos) {
-          this.$container.classList.add(this.selector('--ontop'));
+          this.addClass('--ontop', this.$container);
           this._$list.style.maxHeight = `${topPos - 20}px`;
         } else {
-          this.$container.classList.remove(this.selector('--ontop'));
+          this.removeClass('--ontop', this.$container);
           this._$list.style.maxHeight = `${
             document.documentElement.clientHeight -
             topPos -

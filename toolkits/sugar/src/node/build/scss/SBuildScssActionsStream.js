@@ -3,7 +3,6 @@ const __SActionsStream = require('../../stream/SActionsStream');
 const __deepMerge = require('../../object/deepMerge');
 const __getFilename = require('../../fs/filename');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
-const __SJsObjectToScssStreamAction = require('./actions/SJsObjectToScssStreamAction');
 const __SSharedResourcesStreamAction = require('./actions/SSharedResourcesStreamAction');
 const __SBundleScssStreamAction = require('./actions/SBundleScssStreamAction');
 const __SRenderSassStreamAction = require('./actions/SRenderSassStreamAction');
@@ -16,6 +15,7 @@ const __SBuildScssInterface = require('./interface/SBuildScssInterface');
 const __SExtractDocblocksIntoFiles = require('../../stream/actions/SExtractDocblocksIntoFilesStreamAction');
 const __SFrontspecScssStreamAction = require('../../stream/actions/SFrontspecScssStreamAction');
 const __SDocMapStreamAction = require('../../stream/actions/SDocMapStreamAction');
+const __SFsReadFileStreamAction = require('../../stream/actions/SFsReadFileStreamAction');
 
 /**
  * @name            SBuildScssActionsStream
@@ -59,16 +59,16 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
     super(
       {
         filesResolver: __SFsFilesResolverStreamAction,
+        readFile: __SFsReadFileStreamAction,
         frontspecScss: __SFrontspecScssStreamAction,
         sharedResources: __SSharedResourcesStreamAction,
-        jsConfig: __SJsObjectToScssStreamAction,
-        bundle: __SBundleScssStreamAction,
+        // bundle: __SBundleScssStreamAction,
         render: __SRenderSassStreamAction,
-        extractDocblocks: __SExtractDocblocksIntoFiles,
-        extract: __SExtractStreamAction,
-        postCss: __SPostCssStreamAction,
-        fsOutput: __SFsOutputStreamAction,
-        docMap: __SDocMapStreamAction
+        // extractDocblocks: __SExtractDocblocksIntoFiles,
+        // extract: __SExtractStreamAction,
+        // postCss: __SPostCssStreamAction,
+        fsOutput: __SFsOutputStreamAction
+        // docMap: __SDocMapStreamAction
       },
       __deepMerge(
         {

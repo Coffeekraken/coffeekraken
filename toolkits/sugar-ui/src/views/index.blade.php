@@ -3,5 +3,5 @@
 @section('title', 'Documentation')
 
 @section('content')
-    <input is="s-filtrable-input" />
+    <input is="s-sugar-ui-search-navigation" no-item-text="coco" />
 @endsection

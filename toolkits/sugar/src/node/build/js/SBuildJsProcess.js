@@ -53,7 +53,9 @@ module.exports = class SBuildJsProcess extends __SProcess {
    * @return    {Object|Boolean}                      The new object to pass to the ```run``` method, or ```false``` if you don't want to trigger a ```run```
    */
   deamonUpdate(initialParams = {}, deamonUpdateObj = {}) {
-    initialParams.input = deamonUpdateObj.path;
+    if (!initialParams.pack) {
+      initialParams.input = deamonUpdateObj.path;
+    }
     return initialParams;
   }
 

@@ -1,10 +1,9 @@
 const __jsonSass = require('json-sass-vars');
-const __deepMerge = require('../../object/deepMerge');
+const __deepMerge = require('../object/deepMerge');
 
 module.exports = function jsObjectToScssMap(object, settings = {}) {
   settings = __deepMerge(
     {
-      settingsVariable: '$sugarUserSettings',
       quoteKeys: ['src', 'import', 'font-family', 'defaultAction']
     },
     settings
@@ -14,7 +13,7 @@ module.exports = function jsObjectToScssMap(object, settings = {}) {
 
   let scssConfigString = __jsonSass.convertJs(jsObject);
 
-  scssConfigString = `${settings.settingsVariable}: ${scssConfigString};`;
+  scssConfigString = `${scssConfigString}`;
 
   scssConfigString.split('\n').forEach((line) => {
     line = line.trim();

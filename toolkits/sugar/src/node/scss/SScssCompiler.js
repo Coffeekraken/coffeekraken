@@ -1,3 +1,6 @@
+const __sugarConfig = require('../config/sugar');
+const __path = require('path');
+const __folderPath = require('../fs/folderPath');
 const __tmpDir = require('../fs/tmpDir');
 const __deepMerge = require('../object/deepMerge');
 const __SPromise = require('../promise/SPromise');
@@ -17,6 +20,8 @@ const __fs = require('fs');
 const __SCodeSplitter = require('../code/SCodeSplitter');
 const __copy = require('../clipboard/copy');
 const __writeFileSync = require('../fs/writeFileSync');
+const __removeSync = require('../fs/removeSync');
+const __putUseStatementsOnTop = require('./putUseStatementsOnTop');
 
 /**
  * @name                SScssCompiler
@@ -80,7 +85,11 @@ module.exports = class SScssCompiler {
         optimizers: {
           split: true
         },
-        putUseOnTop: true
+        putUseOnTop: true,
+        settings: {
+          variableName: '$sugarUserSettings',
+          object: __sugarConfig('scss')
+        }
       },
       settings
     );
@@ -111,16 +120,25 @@ module.exports = class SScssCompiler {
         let resultObj,
           resultString = '';
 
+        const tmpPath = `${__packageRoot()}/SScssCompiler`;
+
+        // __removeSync(tmpPath);
+
         const includePaths = [
+          // tmpPath,
           ...(settings.sass.includePaths || []),
-          `${__packageRoot()}/node_modules`,
-          `${__packageRoot(__dirname)}/src/scss`,
-          `${__packageRoot()}/src/scss`
+          `${__packageRoot()}/node_modules`
+          // `${__packageRoot(__dirname)}/src/scss`,
+          // `${__packageRoot()}/src/scss`
         ];
 
         let sharedResources = settings.sharedResources || [];
         if (!Array.isArray(sharedResources))
           sharedResources = [sharedResources];
+
+        __copy(source);
+
+        let urls = [];
 
         let sassPassedSettings = Object.assign({}, settings.sass || {});
         delete sassPassedSettings.includePaths;
@@ -128,38 +146,111 @@ module.exports = class SScssCompiler {
         const sassSettings = __deepMerge(
           {
             importer: [
-              __globImporter(),
+              // __globImporter(),
               (url, prev, done) => {
+                // if (url.match(/^\.{1,2}\//) || url.includes('src/scss/')) {
+                //   throw 'coco';
+                // }
+
+                if (url === 'stdin') return null;
+
+                const prevFolderPath = __folderPath(prev);
+
                 let filePath,
+                  fileIncludePath = '',
                   fileContent = '';
+
                 for (let i = 0; i < includePaths.length; i++) {
                   const path = includePaths[i];
-                  const filePotentialPath = `${path}/${url}`;
-                  if (__fs.existsSync(filePotentialPath)) {
-                    filePath = filePotentialPath;
-                    break;
+                  if (path === tmpPath) continue;
+
+                  // if (url.match(/\.{1,2}\//)) {
+                  //   url = __path
+                  //     .resolve(path, prevFolderPath, url)
+                  //     .replace(`${path}/`, '')
+                  //     .replace(path, '');
+                  // }
+
+                  let relativeUrl;
+
+                  if (url.match(/\.{1,2}\//) || url.substr(0, 1) !== '/') {
+                    relativeUrl = __path
+                      .resolve(path, prevFolderPath, url)
+                      .replace(`${path}/`, '')
+                      .replace(path, '');
                   }
+
+                  const fileName = __getFilename(url);
+                  const folderPath = __folderPath(url);
+
+                  let potentialPaths = [
+                    `${url}`,
+                    `${url}.scss`,
+                    `${url}.sass`,
+                    `${folderPath}/_${fileName}`,
+                    `${folderPath}/_${fileName}.scss`,
+                    `${folderPath}/_${fileName}.sass`
+                  ];
+
+                  if (relativeUrl) {
+                    const relativeFolderPath = __folderPath(relativeUrl);
+                    potentialPaths = [
+                      `${relativeUrl}`,
+                      `${relativeUrl}.scss`,
+                      `${relativeUrl}.sass`,
+                      `${relativeFolderPath}/_${fileName}`,
+                      `${relativeFolderPath}/_${fileName}.scss`,
+                      `${relativeFolderPath}/_${fileName}.sass`,
+                      ...potentialPaths
+                    ];
+                  }
+
+                  for (let j = 0; j < potentialPaths.length; j++) {
+                    const potentialPath = potentialPaths[j];
+
+                    urls.push(path + ' ' + potentialPath);
+                    __copy(urls.join('\n'));
+
+                    if (__fs.existsSync(`${path}/${potentialPath}`)) {
+                      filePath = potentialPath;
+                      fileIncludePath = path;
+                      break;
+                    }
+                  }
+                  if (filePath) break;
                 }
-                // reading the file if needed
-                if (!filePath) return done({ file: url });
+
+                if (!filePath) return null;
 
                 // read the file
-                fileContent = __fs.readFileSync(filePath, 'utf8');
+                fileContent = __fs.readFileSync(
+                  `${fileIncludePath}/${filePath}`,
+                  'utf8'
+                );
 
                 sharedResources.forEach((resource) => {
                   const resourceContent = this._getSharedResourceContent(
                     resource
                   );
-                  fileContent = `
-                    ${resourceContent}
-                    ${fileContent}
-                  `;
+                  if (resourceContent) {
+                    fileContent = `
+                      ${resourceContent}
+                      ${fileContent}
+                    `;
+                  }
                 });
 
-                // write file in tmp directory
-                const tmpFilePath = `${__tmpDir()}/${url}`;
-                __writeFileSync(tmpFilePath, fileContent);
-                return { file: tmpFilePath };
+                fileContent = __putUseStatementsOnTop(fileContent);
+
+                //__copy(fileContent);
+
+                return { contents: fileContent };
+
+                __writeFileSync(
+                  `${tmpPath}/${includePaths}/${filePath}`,
+                  fileContent
+                );
+                return { file: filePath };
               }
             ],
             sharedResources,
@@ -179,24 +270,16 @@ module.exports = class SScssCompiler {
 
         sharedResources.forEach((resource) => {
           const resourceContent = this._getSharedResourceContent(resource);
-          sassSettings.data = `
+          if (resourceContent) {
+            sassSettings.data = `
             ${resourceContent}
             ${sassSettings.data}
           `;
+          }
         });
 
         if (settings.putUseOnTop) {
-          // take all the "@use" statements and put them on top
-          const useMatches = sassSettings.data.match(/@use\s.*[^;]/gm);
-          if (useMatches) {
-            useMatches.forEach((useStatement) => {
-              sassSettings.data = sassSettings.data.replace(useStatement, '');
-              sassSettings.data = `
-            ${useStatement}
-            ${sassSettings.data}
-          `;
-            });
-          }
+          sassSettings.data = __putUseStatementsOnTop(sassSettings.data);
         }
 
         if (settings.optimizers.split) {

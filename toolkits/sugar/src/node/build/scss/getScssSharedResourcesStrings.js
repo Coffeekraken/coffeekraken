@@ -2,6 +2,7 @@ const __sugarConfig = require('../../config/sugar');
 const __isInPackage = require('../../path/isInPackage');
 const __packageRoot = require('../../path/packageRoot');
 const __path = require('path');
+const __jsObjectToScssMap = require('../../scss/jsObjectToScssMap');
 
 /**
  * @name            getScssSharedResourcesStrings
@@ -23,6 +24,8 @@ module.exports = function getScssSharedResourcesStrings(array = null) {
   array.forEach((importItem) => {
     if (typeof importItem === 'string') {
       if (importItem === 'sugar') {
+        const settings = __sugarConfig('scss');
+        const settingsString = __jsObjectToScssMap(settings);
         const path = __isInPackage('coffeekraken', process.cwd(), true)
           ? __path.resolve(
               __packageRoot(__dirname, true),
@@ -31,8 +34,8 @@ module.exports = function getScssSharedResourcesStrings(array = null) {
           : '@coffeekraken/sugar/index';
         importsStrings += `
           @use "${path}" as Sugar;
+          $sugarUserSettings: ${settingsString};
           @include Sugar.setup($sugarUserSettings);
-          @include Sugar.init();
         `;
       }
     }

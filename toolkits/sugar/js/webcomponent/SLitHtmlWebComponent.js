@@ -187,7 +187,9 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
       }, 50));
 
       _this.$container = document.createElement('div');
-      _this.$container.className = _this.selector(); // wait until mounted to render the component first time
+
+      _this.addClass('', _this.$container); // wait until mounted to render the component first time
+
 
       _this.on('mounted:1', () => {
         // insert the container in the document
@@ -286,7 +288,7 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
     }]);
 
     return SLitHtmlWebComponent;
-  }((0, _SWebComponent2.default)(extendSettings)), _defineProperty(_class, "template", (props, settings, lit) => lit.html(_templateObject())), _temp;
+  }((0, _SWebComponent2.default)(extendSettings)), _defineProperty(_class, "template", (props, component, html) => html(_templateObject())), _temp;
 }
 
 var _default = SLitHtmlWebComponentGenerator;

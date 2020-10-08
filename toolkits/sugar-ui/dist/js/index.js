@@ -97,7 +97,7 @@
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "../../node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "undefined .s-filtrable-input {\n  display: inline-block;\n  position: relative;\n}\n\n.s-filtrable-input__list {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  overflow-x: hidden;\n  overflow-y: auto;\n  opacity: 0;\n  max-width: calc(100vw - 100px);\n  pointer-events: none;\n  transition: max-height 0.2s ease-in-out;\n}\n.s-filtrable-input__node:focus + .s-filtrable-input__list, .s-filtrable-input__list:focus {\n  opacity: 1;\n  pointer-events: all;\n}\n.s-filtrable-input--ontop .s-filtrable-input__list {\n  bottom: 100%;\n  top: initial;\n}\n\n.s-filtrable-input__list-item {\n  cursor: pointer;\n}\n.s-filtrable-input__list-item * {\n  pointer-events: none;\n}", ""]);
+exports.push([module.i, ".s-filtrable-input {\n  display: inline-block;\n  position: relative;\n}\n\n.s-filtrable-input__list {\n  position: absolute;\n  top: 100%;\n  left: 0;\n  overflow-x: hidden;\n  overflow-y: auto;\n  opacity: 0;\n  max-width: calc(100vw - 100px);\n  pointer-events: none;\n  min-width: 100%;\n}\n.s-filtrable-input__node:focus + .s-filtrable-input__list, .s-filtrable-input__list:focus {\n  opacity: 1;\n  pointer-events: all;\n}\n.s-filtrable-input--ontop .s-filtrable-input__list {\n  bottom: 100%;\n  top: initial;\n}\n\n.s-filtrable-input__list-item {\n  cursor: pointer;\n}\n.s-filtrable-input__list-item * {\n  pointer-events: none;\n}", ""]);
 // Exports
 module.exports = exports;
 
@@ -524,8 +524,38 @@ var _SWebComponent = _interopRequireDefault(__webpack_require__(/*! @coffeekrake
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject9() {
+  var data = _taggedTemplateLiteral(["\n                <li class=\"", " ", " ", "\">\n                  ", "\n                </li>\n              "]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject8() {
+  var data = _taggedTemplateLiteral(["\n            ", ""]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject7() {
+  var data = _taggedTemplateLiteral(["\n              <li class=\"", "\">\n                ", "\n              </li>\n            "]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n                <li class=\"", "__list-item ", " ", "\">\n                  ", "\n                </li>\n              "]);
+  var data = _taggedTemplateLiteral(["\n      ", "\n      <ul class=\"", "\" tabindex=\"1\">\n        ", "\n      </ul>\n    "]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -535,19 +565,9 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n      ", "\n      <ul class=\"", "__list\" tabindex=\"1\">\n        ", "\n      </ul>\n    "]);
-
-  _templateObject5 = function _templateObject5() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject4() {
   var data = _taggedTemplateLiteral(["\n      ", ""]);
 
-  _templateObject4 = function _templateObject4() {
+  _templateObject5 = function _templateObject5() {
     return data;
   };
 
@@ -558,8 +578,18 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _templateObject3() {
+function _templateObject4() {
   var data = _taggedTemplateLiteral(["\n                <div class=\"", "\">\n                  ", "\n                </div>\n              "]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n                <div class=\"", "\">\n                    ", "\n                </div>\n              "]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -569,7 +599,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n                <div class=\"", "\">\n                    ", "\n                </div>\n              "]);
+  var data = _taggedTemplateLiteral(["\n              ", "\n              ", "\n            "]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -579,7 +609,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n              ", "\n              ", "\n            "]);
+  var data = _taggedTemplateLiteral(["\n              <div class=\"", "\">\n                ", "\n              </div>\n            "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -677,7 +707,7 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
 
     _this = _super.call(this, (0, _deepMerge.default)({
       closeOnSelect: true,
-      closeOnSelectTimeout: 300,
+      closeOnSelectTimeout: 200,
       maxDisplayItems: 50,
       filter: {
         throttleTimeout: 100,
@@ -685,7 +715,8 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
         function: null
       },
       template: {
-        item: (itemObj, settings, lit) => lit.html(_templateObject(), itemObj.title ? lit.html(_templateObject2(), _this.selector('list-item-title'), _this.highlightFilter(itemObj.title)) : '', itemObj.description ? lit.html(_templateObject3(), _this.selector('list-item-description'), _this.highlightFilter(itemObj.description)) : '')
+        noItem: (settings, lit) => lit.html(_templateObject(), _this.selector('list-no-item-text'), _this.prop('noItemText')),
+        item: (itemObj, settings, lit) => lit.html(_templateObject2(), itemObj.title ? lit.html(_templateObject3(), _this.selector('list-item-title'), _this.highlightFilter(itemObj.title)) : '', itemObj.description ? lit.html(_templateObject4(), _this.selector('list-item-description'), _this.highlightFilter(itemObj.description)) : '')
       }
     }, settings));
 
@@ -778,7 +809,6 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
       });
 
       _this.addEventListener('focus', () => {
-        console.log('fo');
         document.dispatchEvent(new Event('scroll'));
       });
 
@@ -787,11 +817,11 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
         var topPos = element.getBoundingClientRect().top;
 
         if (document.documentElement.clientHeight / 2 < topPos) {
-          _this.$container.classList.add(_this.selector('--ontop'));
+          _this.addClass('--ontop', _this.$container);
 
           _this._$list.style.maxHeight = "".concat(topPos - 20, "px");
         } else {
-          _this.$container.classList.remove(_this.selector('--ontop'));
+          _this.removeClass('--ontop', _this.$container);
 
           _this._$list.style.maxHeight = "".concat(document.documentElement.clientHeight - topPos - _this.$container.clientHeight - 20, "px");
         }
@@ -1011,7 +1041,7 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
     key: "highlightFilter",
     value: function highlightFilter(string) {
       if (!this._filterString) return string;
-      return this.lit.html(_templateObject4(), this.lit.unsafeHTML(string.split(this._filterString).join("<span class=\"".concat(this.selector('list-item-highlight'), "\">___@@@___</span>")).split('___@@@___').join(this._filterString)));
+      return this.lit.html(_templateObject5(), this.lit.unsafeHTML(string.split(this._filterString).join("<span class=\"".concat(this.selector('list-item-highlight'), "\">___@@@___</span>")).split('___@@@___').join(this._filterString)));
     }
   }]);
 
@@ -1033,6 +1063,10 @@ _defineProperty(SFiltrableInputWebComponent, "props", {
     type: 'String',
     default: 'title'
   },
+  noItemText: {
+    type: 'String',
+    default: 'No result sorry...'
+  },
   inputThrottle: {
     type: 'Number',
     default: 0,
@@ -1047,8 +1081,10 @@ _defineProperty(SFiltrableInputWebComponent, "props", {
   }
 });
 
+_defineProperty(SFiltrableInputWebComponent, "cssName", 'SFiltrableInput');
+
 _defineProperty(SFiltrableInputWebComponent, "template", function (props, settings, lit) {
-  return lit.html(_templateObject5(), this, this.metas.dashName, props.items.value.map((item, i) => i < this._maxDisplayItems ? lit.html(_templateObject6(), this.metas.dashName, this._preselectedItemIdx === i ? this.selector('list-item--preselected') : '', this._selectedItemIdx === i ? this.selector('list-item--selected') : '', settings.template.item(item, settings, lit)) : ''));
+  return lit.html(_templateObject6(), this, this.selector('list'), props.items.value.length === 0 ? lit.html(_templateObject7(), this.selector('list-no-item'), settings.template.noItem(settings, lit)) : lit.html(_templateObject8(), props.items.value.map((item, i) => i < this._maxDisplayItems ? lit.html(_templateObject9(), this.selector('list-item'), this._preselectedItemIdx === i ? this.selector('list-item--preselected') : '', this._selectedItemIdx === i ? this.selector('list-item--selected') : '', settings.template.item(item, settings, lit)) : '')));
 });
 
 var _default = SFiltrableInputWebComponent;
@@ -1742,6 +1778,70 @@ function closestNotVisible(elm) {
   }
 
   return null;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../sugar/js/dom/domReady.js":
+/*!***********************************!*\
+  !*** ../sugar/js/dom/domReady.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = domReady;
+
+var _domready = _interopRequireDefault(__webpack_require__(/*! domready */ "../sugar/node_modules/domready/ready.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+/**
+ * @name      domReady
+ * @namespace           sugar.js.dom
+ * @type      Function
+ *
+ * Wait that the dom is ready before resolving the promise
+ *
+ * @param 		{Function} 		cb 			An optional callback that will be called when the dom is ready
+ * @return 		{Promise} 					A promise that will be resolved when the dom is ready
+ *
+ * @example  	js
+ * import domReady from '@coffeekraken/sugar/js/dom/domReady'
+ * // using callback
+ * domReady(() => {
+ * 		// do something
+ * });
+ * // using promise
+ * domReady().then(() => {
+ * 		// do something
+ * });
+ *
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function domReady(cb) {
+  if (cb === void 0) {
+    cb = null;
+  }
+
+  return new Promise((resolve, reject) => {
+    (0, _domready.default)(() => {
+      cb && cb();
+      resolve();
+    });
+  });
 }
 
 module.exports = exports.default;
@@ -5343,6 +5443,151 @@ function stringify(obj, replacerOrSettings, settings) {
   var newObj = Object.assign({}, obj);
   if (settings.decircular) newObj = (0, _jsonCyclic.decycle)(newObj);
   return JSON.stringify(newObj, replacer, settings.space);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "../sugar/js/keyboard/hotkey.js":
+/*!**************************************!*\
+  !*** ../sugar/js/keyboard/hotkey.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _hotkeysJs = _interopRequireDefault(__webpack_require__(/*! hotkeys-js */ "../sugar/node_modules/hotkeys-js/dist/hotkeys.esm.js"));
+
+var _SPromise = _interopRequireDefault(__webpack_require__(/*! ../promise/SPromise */ "../sugar/js/promise/SPromise.js"));
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    default: obj
+  };
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+_hotkeysJs.default.filter = function (event) {
+  return true;
+}; // TODO tests
+
+/**
+ * @name 		hotkey
+ * @namespace           sugar.js.keyboard
+ * @type      Function
+ *
+ * Simple function to add a hotkey like "ctrl+a" and an handler function that will be called when the hotkey has been pressed
+ * The following keys are supported:
+ * - shift, option, alt, ctrl, control, command
+ * - backspace, tab, clear, enter, return, esc, escape, space, up, down, left, right, home, end, pageup, pagedown, del, delete
+ * - from f1 to f19
+ * - all the letters keys
+ *
+ * You can pass an option object to your hotkey function call.
+ *
+ * @param        {String}       hotkey          The hotkey to detect
+ * @param         {Object}      [settings={}]    An option object to configure your hotkey. Here's the list of available settings:
+ * - element (null) {HTMLElement}: Specify an HTMLElement to detect keyboard events from
+ * - keyup (false) {Boolean}: Detect on keyup
+ * - keydown (true) {Boolean}: Detect on keydown
+ * - once (false) {Boolean}: Specify if you want to detect the keyboard event just once
+ * - splitKey (*) {String}: Specify the split key to use in the sequences like "ctrl+a"
+ * @return      {SPromise}                       An SPromise instance on which you can register for "key" stack event
+ *
+ * @example    js
+ * import hotkey from '@coffeekraken/sugar/js/keyboard/hotkey'
+ * const promise = hotkey('ctrl+a');
+ * promise.on('ctrl+a', (e) => {
+ *    // do something...
+ * });
+ * promise.cancel();
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+
+function _default(hotkey, settings) {
+  if (settings === void 0) {
+    settings = {};
+  }
+
+  return new _SPromise.default((resolve, reject, trigger, cancel) => {
+    // merge default settings with passed ones:
+    settings = _objectSpread({
+      element: null,
+      keyup: false,
+      keydown: true,
+      once: false,
+      splitKey: '+'
+    }, settings); // init the hotkey
+
+    (0, _hotkeysJs.default)(hotkey, settings, (e, h) => {
+      // call the handler function
+      trigger('press', e); // unsubscribe if once is truc
+
+      if (settings.once) cancel();
+    });
+  }, {
+    id: 'hotkey'
+  }).on('finally', () => {
+    _hotkeysJs.default.unbind(hotkey);
+  });
 }
 
 module.exports = exports.default;
@@ -10577,7 +10822,9 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
       }, 50));
 
       _this.$container = document.createElement('div');
-      _this.$container.className = _this.selector(); // wait until mounted to render the component first time
+
+      _this.addClass('', _this.$container); // wait until mounted to render the component first time
+
 
       _this.on('mounted:1', () => {
         // insert the container in the document
@@ -10676,7 +10923,7 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
     }]);
 
     return SLitHtmlWebComponent;
-  }((0, _SWebComponent2.default)(extendSettings)), _defineProperty(_class, "template", (props, settings, lit) => lit.html(_templateObject())), _temp;
+  }((0, _SWebComponent2.default)(extendSettings)), _defineProperty(_class, "template", (props, component, html) => html(_templateObject())), _temp;
 }
 
 var _default = SLitHtmlWebComponentGenerator;
@@ -10734,44 +10981,12 @@ var _uncamelize = _interopRequireDefault(__webpack_require__(/*! ../string/uncam
 
 var _getHtmlClassFromTagName = _interopRequireDefault(__webpack_require__(/*! ../html/getHtmlClassFromTagName */ "../sugar/js/html/getHtmlClassFromTagName.js"));
 
+var _domReady = _interopRequireDefault(__webpack_require__(/*! ../dom/domReady */ "../sugar/js/dom/domReady.js"));
+
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
     default: obj
   };
-}
-
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    });
-    keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-
-  return target;
 }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -10808,6 +11023,40 @@ function _asyncToGenerator(fn) {
       _next(undefined);
     });
   };
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
 }
 
 function _classCallCheck(instance, Constructor) {
@@ -11023,9 +11272,9 @@ function SWebComponentGenerator(extendsSettings) {
        *
        * This method allows you to define your component as a webcomponent recognized by the browser
        *
-       * @param       {String}      [name=extendsSettings.name]     The component name in camelcase
-       * @param       {Class|Object}    [clsOrSettings={}]          Either the component class you want to register, either an object of settings
        * @param       {Object}        [settings={}]                 An object of settings to configure your component
+       *
+       * @setting     {String}        [name=null]                   Specify the component name in CamelCase. MyCoolComponent => <my-cool-component />
        *
        * @since 					2.0.0
        * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -11033,54 +11282,51 @@ function SWebComponentGenerator(extendsSettings) {
 
     }, {
       key: "define",
-      value: function define(name, clsOrSettings, settings) {
-        if (name === void 0) {
-          name = extendsSettings.name;
-        }
-
-        if (clsOrSettings === void 0) {
-          clsOrSettings = {};
-        }
-
+      value: function define(settings) {
         if (settings === void 0) {
-          settings = null;
-        }
+          settings = {};
+        } // if (!name)
+        //   throw new Error(
+        //     `SWebComponent: You must define a name for your webcomponent by setting either a static "name" property on your class, of by passing a name as first parameter of the static "define" function...`
+        //   );
+        // let cls = this;
+        // if (__isClass(clsOrSettings)) cls = clsOrSettings;
+        // else if (typeof clsOrSettings === 'object' && !settings) {
+        //   settings = clsOrSettings;
+        // }
 
-        if (!name) throw new Error("SWebComponent: You must define a name for your webcomponent by setting either a static \"name\" property on your class, of by passing a name as first parameter of the static \"define\" function...");
-        var cls = this;
-        if ((0, _class2.default)(clsOrSettings)) cls = clsOrSettings;else if (typeof clsOrSettings === 'object' && !settings) {
-          settings = clsOrSettings;
-        }
+
         var extend = null;
 
         for (var key in _htmlTagToHtmlClassMap.default) {
-          if (cls.prototype instanceof _htmlTagToHtmlClassMap.default[key]) {
+          if (this.prototype instanceof _htmlTagToHtmlClassMap.default[key]) {
             extend = key;
             break;
           }
         }
 
+        var name = (settings.name || this.componentName || this.name).replace('WebComponent', '');
         var uncamelizedName = (0, _uncamelize.default)(name);
-        cls.componentName = name;
+        this.componentName = name;
         if (_sWebComponentStack[uncamelizedName]) return;
         _sWebComponentStack[uncamelizedName] = {
           name,
           dashName: uncamelizedName,
-          class: cls,
+          class: this,
           extends: extend,
           settings
         };
 
         if (window.customElements) {
           try {
-            window.customElements.define(uncamelizedName, cls, {
+            window.customElements.define(uncamelizedName, this, {
               extends: extend
             });
           } catch (e) {}
         } else if (document.registerElement) {
           try {
             document.registerElement(uncamelizedName, {
-              prototype: cls.prototype,
+              prototype: this.prototype,
               extends: extend
             });
           } catch (e) {}
@@ -11211,11 +11457,7 @@ function SWebComponentGenerator(extendsSettings) {
 
       _this._promise = new _SPromise.default({
         id: _this._settings.id
-      }); // apply the $node class
-
-      var currentClassName = _this.getAttribute('class') || '';
-
-      _this.setAttribute('class', "".concat(currentClassName, " ").concat(_this.selector("node")));
+      });
 
       _this.on('mounted:1', () => {
         // dispatch a ready event
@@ -11223,10 +11465,20 @@ function SWebComponentGenerator(extendsSettings) {
           // the Lit HTML class dispatch the ready event after having rendering the template the first time
           _this.dispatch('ready', _assertThisInitialized(_this));
         }
-      }); // launch the mounting process
+      });
+
+      (0, _domReady.default)(() => {
+        // handle props
+        _this._initProps(); // apply the $node class
 
 
-      setTimeout(_this._mount.bind(_assertThisInitialized(_this)));
+        var currentClassName = _this.getAttribute('class') || '';
+
+        _this.setAttribute('class', "".concat(currentClassName, " ").concat(_this.selector("node"))); // launch the mounting process
+
+
+        _this._mount();
+      });
       return _this;
     }
     /**
@@ -11299,6 +11551,80 @@ function SWebComponentGenerator(extendsSettings) {
         return $result;
       }
       /**
+       * @name          addClass
+       * @type          Function
+       *
+       * This method can be used to add class(es) to an element in the component.
+       * This will take care of adding the pcomponent name prefix as well as the ```cssName```prefix
+       * if needed
+       *
+       * @param       {String}      cls       The class(es) to add.
+       * @param       {HTMLElement|String}     [$elm=this]       The item on which you want to add the class. Can be a string which will be passed to the ```$``` method to get the HTMLElement itself
+       * @return      {SWebComponent}               Return the component itself to maintain chainability
+       *
+       * @since       2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "addClass",
+      value: function addClass(cls, $elm) {
+        if ($elm === void 0) {
+          $elm = this;
+        } // split the cls
+
+
+        var clsArray = cls.split(' ');
+        clsArray.forEach(className => {
+          // build the selector
+          var selector = this.selector(className); // split the selector
+
+          selector.split(' ').forEach(sel => {
+            // add the class to the element
+            $elm.classList.add(sel);
+          });
+        }); // maintain chainability
+
+        return this;
+      }
+      /**
+       * @name          removeClass
+       * @type          Function
+       *
+       * This method can be used to remove class(es) to an element in the component.
+       * This will take care of adding the component name prefix as well as the ```cssName```prefix
+       * if needed
+       *
+       * @param       {String}      cls       The class(es) to add.
+       * @param       {HTMLElement|String}     [$elm=this]       The item on which you want to add the class. Can be a string which will be passed to the ```$``` method to get the HTMLElement itself
+       * @return      {SWebComponent}               Return the component itself to maintain chainability
+       *
+       * @since       2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "removeClass",
+      value: function removeClass(cls, $elm) {
+        if ($elm === void 0) {
+          $elm = this;
+        } // split the cls
+
+
+        var clsArray = cls.split(' ');
+        clsArray.forEach(className => {
+          // build the selector
+          var selector = this.selector(className); // split the selector
+
+          selector.split(' ').forEach(sel => {
+            // add the class to the element
+            $elm.classList.remove(sel);
+          });
+        }); // maintain chainability
+
+        return this;
+      }
+      /**
        * @name          metas
        * @type          Object
        * @get
@@ -11311,8 +11637,46 @@ function SWebComponentGenerator(extendsSettings) {
        */
 
     }, {
-      key: "_mount",
+      key: "_initProps",
+      value: function _initProps() {
+        var _this2 = this; // handle props
 
+
+        for (var key in this._settings.props) {
+          var attr = this.getAttribute((0, _uncamelize.default)(key));
+
+          if (!attr && this.hasAttribute((0, _uncamelize.default)(key))) {
+            attr = true;
+          }
+
+          this._props[key] = _objectSpread(_objectSpread({}, this._settings.props[key]), {}, {
+            value: attr ? (0, _parse.default)(attr) : this._settings.props[key].default,
+            previousValue: undefined
+          });
+        } // handle props
+
+
+        var _loop = function _loop(_key) {
+          // if need to be watches deeply
+          if (_this2._props[_key].watch) {
+            _this2._props[_key] = (0, _watch.default)(_this2._props[_key], {
+              deep: _this2._props[_key].watch === 'deep'
+            });
+
+            _this2._props[_key].on('value.*:+(set|delete|push|pop)', update => {
+              if (update.path.split('.').length === 1) {
+                _this2.prop(update.path, update.value);
+              } else {
+                _this2.handleProp(update.path, _this2._props[_key]);
+              }
+            });
+          }
+        };
+
+        for (var _key in this._settings.props) {
+          _loop(_key);
+        }
+      }
       /**
        * @name          _mount
        * @type          Function
@@ -11324,48 +11688,13 @@ function SWebComponentGenerator(extendsSettings) {
        * @since       2.0.0
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+
+    }, {
+      key: "_mount",
       value: function () {
         var _mount2 = _asyncToGenerator(function* () {
-          var _this2 = this; // dispatch mounting event
-
-
-          this.dispatch('mounting', this); // handle props
-
-          for (var key in this._settings.props) {
-            var attr = this.getAttribute((0, _uncamelize.default)(key));
-
-            if (!attr && this.hasAttribute((0, _uncamelize.default)(key))) {
-              attr = true;
-            }
-
-            this._props[key] = _objectSpread(_objectSpread({}, this._settings.props[key]), {}, {
-              value: attr ? (0, _parse.default)(attr) : this._settings.props[key].default,
-              previousValue: undefined
-            });
-          } // handle props
-
-
-          var _loop = function _loop(_key) {
-            // if need to be watches deeply
-            if (_this2._props[_key].watch) {
-              _this2._props[_key] = (0, _watch.default)(_this2._props[_key], {
-                deep: _this2._props[_key].watch === 'deep'
-              });
-
-              _this2._props[_key].on('value.*:+(set|delete|push|pop)', update => {
-                if (update.path.split('.').length === 1) {
-                  _this2.prop(update.path, update.value);
-                } else {
-                  _this2.handleProp(update.path, _this2._props[_key]);
-                }
-              });
-            }
-          };
-
-          for (var _key in this._settings.props) {
-            _loop(_key);
-          } // wait until the component match the mountDependencies and mountWhen status
-
+          // dispatch mounting event
+          this.dispatch('mounting', this); // wait until the component match the mountDependencies and mountWhen status
 
           yield this._mountDependencies(); // check props definition
 
@@ -11625,31 +11954,38 @@ function SWebComponentGenerator(extendsSettings) {
       value: function selector(cls) {
         if (cls === void 0) {
           cls = '';
-        }
-
-        if (cls.includes(this.metas.dashName)) {
-          return cls;
-        }
-
-        var hasDot = cls.match(/^\./);
-        cls = cls.replace('.', '');
-        var finalCls;
-        if (cls.match(/^(--)/)) finalCls = "".concat(this.metas.dashName).concat(cls);else if (cls !== '') finalCls = "".concat(this.metas.dashName, "__").concat(cls);else finalCls = this.metas.dashName;
-        if (hasDot) finalCls = ".".concat(finalCls); // if (cls.match(/^(--)/)) {
-        //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare${cls} ${
-        //     hasDot ? '.' : ''
-        //   }${finalCls}`;
-        // } else if (cls !== '') {
-        //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare__${cls} ${
-        //     hasDot ? '.' : ''
-        //   }${finalCls}`;
-        // } else {
-        //   finalCls = `${hasDot ? '.' : ''}${originalName}-bare ${
-        //     hasDot ? '.' : ''
-        //   }${finalCls}`;
+        } // if (cls.includes(this.metas.dashName)) {
+        //   return cls;
         // }
 
-        return finalCls;
+
+        var split = cls.split(' ');
+        var finalSelectorArray = [];
+        split.forEach(part => {
+          var hasDot = part.match(/^\./);
+          part = part.replace('.', '');
+          var finalClsPart;
+          if (part.match(/^(--)/)) finalClsPart = "".concat(this.metas.dashName).concat(part);else if (part !== '') finalClsPart = "".concat(this.metas.dashName, "__").concat(part);else finalClsPart = this.metas.dashName;
+          if (hasDot) finalClsPart = ".".concat(finalClsPart); // add the base class if needed
+
+          if (this.constructor.cssName) {
+            var baseCls = (0, _uncamelize.default)(this.constructor.cssName).replace('-web-component', '');
+
+            if (!finalClsPart.includes(baseCls)) {
+              var finalBaseCls = '';
+              if (part.match(/^(--)/)) finalBaseCls = "".concat(baseCls).concat(part);else if (part !== '') finalBaseCls = "".concat(baseCls, "__").concat(part);else finalBaseCls = baseCls;
+
+              if (hasDot) {
+                finalBaseCls = ".".concat(finalBaseCls);
+              } else {
+                finalClsPart += " ".concat(finalBaseCls);
+              }
+            }
+          }
+
+          finalSelectorArray.push(finalClsPart);
+        });
+        return finalSelectorArray.join(' ');
       }
       /**
        * @name        prop
@@ -11800,7 +12136,7 @@ function SWebComponentGenerator(extendsSettings) {
     }]);
 
     return SWebComponent;
-  }(extendsSettings.extends), _defineProperty(_class, "componentName", extendsSettings.name), _temp;
+  }(extendsSettings.extends), _defineProperty(_class, "componentName", undefined), _temp;
 } // /**
 //  * @name        on
 //  * @type        Function
@@ -16930,6 +17266,46 @@ function notDefined(obj, key) {
 
 /***/ }),
 
+/***/ "../sugar/node_modules/domready/ready.js":
+/*!***********************************************!*\
+  !*** ../sugar/node_modules/domready/ready.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+  * domready (c) Dustin Diaz 2014 - License MIT
+  */
+!function (name, definition) {
+
+  if (true) module.exports = definition()
+  else {}
+
+}('domready', function () {
+
+  var fns = [], listener
+    , doc = document
+    , hack = doc.documentElement.doScroll
+    , domContentLoaded = 'DOMContentLoaded'
+    , loaded = (hack ? /^loaded|^c/ : /^loaded|^i|^c/).test(doc.readyState)
+
+
+  if (!loaded)
+  doc.addEventListener(domContentLoaded, listener = function () {
+    doc.removeEventListener(domContentLoaded, listener)
+    loaded = 1
+    while (listener = fns.shift()) listener()
+  })
+
+  return function (fn) {
+    loaded ? setTimeout(fn, 0) : fns.push(fn)
+  }
+
+});
+
+
+/***/ }),
+
 /***/ "../sugar/node_modules/fill-range/index.js":
 /*!*************************************************!*\
   !*** ../sugar/node_modules/fill-range/index.js ***!
@@ -17291,6 +17667,575 @@ module.exports = function find(root) {
 };
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../process/browser.js */ "../sugar/node_modules/process/browser.js")))
+
+/***/ }),
+
+/***/ "../sugar/node_modules/hotkeys-js/dist/hotkeys.esm.js":
+/*!************************************************************!*\
+  !*** ../sugar/node_modules/hotkeys-js/dist/hotkeys.esm.js ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/*!
+ * hotkeys-js v3.8.1
+ * A simple micro-library for defining and dispatching keyboard shortcuts. It has no dependencies.
+ * 
+ * Copyright (c) 2020 kenny wong <wowohoo@qq.com>
+ * http://jaywcjlove.github.io/hotkeys
+ * 
+ * Licensed under the MIT license.
+ */
+
+var isff = typeof navigator !== 'undefined' ? navigator.userAgent.toLowerCase().indexOf('firefox') > 0 : false; // 绑定事件
+
+function addEvent(object, event, method) {
+  if (object.addEventListener) {
+    object.addEventListener(event, method, false);
+  } else if (object.attachEvent) {
+    object.attachEvent("on".concat(event), function () {
+      method(window.event);
+    });
+  }
+} // 修饰键转换成对应的键码
+
+
+function getMods(modifier, key) {
+  var mods = key.slice(0, key.length - 1);
+
+  for (var i = 0; i < mods.length; i++) {
+    mods[i] = modifier[mods[i].toLowerCase()];
+  }
+
+  return mods;
+} // 处理传的key字符串转换成数组
+
+
+function getKeys(key) {
+  if (typeof key !== 'string') key = '';
+  key = key.replace(/\s/g, ''); // 匹配任何空白字符,包括空格、制表符、换页符等等
+
+  var keys = key.split(','); // 同时设置多个快捷键，以','分割
+
+  var index = keys.lastIndexOf(''); // 快捷键可能包含','，需特殊处理
+
+  for (; index >= 0;) {
+    keys[index - 1] += ',';
+    keys.splice(index, 1);
+    index = keys.lastIndexOf('');
+  }
+
+  return keys;
+} // 比较修饰键的数组
+
+
+function compareArray(a1, a2) {
+  var arr1 = a1.length >= a2.length ? a1 : a2;
+  var arr2 = a1.length >= a2.length ? a2 : a1;
+  var isIndex = true;
+
+  for (var i = 0; i < arr1.length; i++) {
+    if (arr2.indexOf(arr1[i]) === -1) isIndex = false;
+  }
+
+  return isIndex;
+}
+
+var _keyMap = {
+  backspace: 8,
+  tab: 9,
+  clear: 12,
+  enter: 13,
+  return: 13,
+  esc: 27,
+  escape: 27,
+  space: 32,
+  left: 37,
+  up: 38,
+  right: 39,
+  down: 40,
+  del: 46,
+  delete: 46,
+  ins: 45,
+  insert: 45,
+  home: 36,
+  end: 35,
+  pageup: 33,
+  pagedown: 34,
+  capslock: 20,
+  '⇪': 20,
+  ',': 188,
+  '.': 190,
+  '/': 191,
+  '`': 192,
+  '-': isff ? 173 : 189,
+  '=': isff ? 61 : 187,
+  ';': isff ? 59 : 186,
+  '\'': 222,
+  '[': 219,
+  ']': 221,
+  '\\': 220
+}; // Modifier Keys
+
+var _modifier = {
+  // shiftKey
+  '⇧': 16,
+  shift: 16,
+  // altKey
+  '⌥': 18,
+  alt: 18,
+  option: 18,
+  // ctrlKey
+  '⌃': 17,
+  ctrl: 17,
+  control: 17,
+  // metaKey
+  '⌘': 91,
+  cmd: 91,
+  command: 91
+};
+var modifierMap = {
+  16: 'shiftKey',
+  18: 'altKey',
+  17: 'ctrlKey',
+  91: 'metaKey',
+  shiftKey: 16,
+  ctrlKey: 17,
+  altKey: 18,
+  metaKey: 91
+};
+var _mods = {
+  16: false,
+  18: false,
+  17: false,
+  91: false
+};
+var _handlers = {}; // F1~F12 special key
+
+for (var k = 1; k < 20; k++) {
+  _keyMap["f".concat(k)] = 111 + k;
+}
+
+var _downKeys = []; // 记录摁下的绑定键
+
+var _scope = 'all'; // 默认热键范围
+
+var elementHasBindEvent = []; // 已绑定事件的节点记录
+// 返回键码
+
+var code = function code(x) {
+  return _keyMap[x.toLowerCase()] || _modifier[x.toLowerCase()] || x.toUpperCase().charCodeAt(0);
+}; // 设置获取当前范围（默认为'所有'）
+
+
+function setScope(scope) {
+  _scope = scope || 'all';
+} // 获取当前范围
+
+
+function getScope() {
+  return _scope || 'all';
+} // 获取摁下绑定键的键值
+
+
+function getPressedKeyCodes() {
+  return _downKeys.slice(0);
+} // 表单控件控件判断 返回 Boolean
+// hotkey is effective only when filter return true
+
+
+function filter(event) {
+  var target = event.target || event.srcElement;
+  var tagName = target.tagName;
+  var flag = true; // ignore: isContentEditable === 'true', <input> and <textarea> when readOnly state is false, <select>
+
+  if (target.isContentEditable || (tagName === 'INPUT' || tagName === 'TEXTAREA' || tagName === 'SELECT') && !target.readOnly) {
+    flag = false;
+  }
+
+  return flag;
+} // 判断摁下的键是否为某个键，返回true或者false
+
+
+function isPressed(keyCode) {
+  if (typeof keyCode === 'string') {
+    keyCode = code(keyCode); // 转换成键码
+  }
+
+  return _downKeys.indexOf(keyCode) !== -1;
+} // 循环删除handlers中的所有 scope(范围)
+
+
+function deleteScope(scope, newScope) {
+  var handlers;
+  var i; // 没有指定scope，获取scope
+
+  if (!scope) scope = getScope();
+
+  for (var key in _handlers) {
+    if (Object.prototype.hasOwnProperty.call(_handlers, key)) {
+      handlers = _handlers[key];
+
+      for (i = 0; i < handlers.length;) {
+        if (handlers[i].scope === scope) handlers.splice(i, 1);else i++;
+      }
+    }
+  } // 如果scope被删除，将scope重置为all
+
+
+  if (getScope() === scope) setScope(newScope || 'all');
+} // 清除修饰键
+
+
+function clearModifier(event) {
+  var key = event.keyCode || event.which || event.charCode;
+
+  var i = _downKeys.indexOf(key); // 从列表中清除按压过的键
+
+
+  if (i >= 0) {
+    _downKeys.splice(i, 1);
+  } // 特殊处理 cmmand 键，在 cmmand 组合快捷键 keyup 只执行一次的问题
+
+
+  if (event.key && event.key.toLowerCase() === 'meta') {
+    _downKeys.splice(0, _downKeys.length);
+  } // 修饰键 shiftKey altKey ctrlKey (command||metaKey) 清除
+
+
+  if (key === 93 || key === 224) key = 91;
+
+  if (key in _mods) {
+    _mods[key] = false; // 将修饰键重置为false
+
+    for (var k in _modifier) {
+      if (_modifier[k] === key) hotkeys[k] = false;
+    }
+  }
+}
+
+function unbind(keysInfo) {
+  // unbind(), unbind all keys
+  if (!keysInfo) {
+    Object.keys(_handlers).forEach(function (key) {
+      return delete _handlers[key];
+    });
+  } else if (Array.isArray(keysInfo)) {
+    // support like : unbind([{key: 'ctrl+a', scope: 's1'}, {key: 'ctrl-a', scope: 's2', splitKey: '-'}])
+    keysInfo.forEach(function (info) {
+      if (info.key) eachUnbind(info);
+    });
+  } else if (typeof keysInfo === 'object') {
+    // support like unbind({key: 'ctrl+a, ctrl+b', scope:'abc'})
+    if (keysInfo.key) eachUnbind(keysInfo);
+  } else if (typeof keysInfo === 'string') {
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    // support old method
+    // eslint-disable-line
+    var scope = args[0],
+        method = args[1];
+
+    if (typeof scope === 'function') {
+      method = scope;
+      scope = '';
+    }
+
+    eachUnbind({
+      key: keysInfo,
+      scope: scope,
+      method: method,
+      splitKey: '+'
+    });
+  }
+} // 解除绑定某个范围的快捷键
+
+
+var eachUnbind = function eachUnbind(_ref) {
+  var key = _ref.key,
+      scope = _ref.scope,
+      method = _ref.method,
+      _ref$splitKey = _ref.splitKey,
+      splitKey = _ref$splitKey === void 0 ? '+' : _ref$splitKey;
+  var multipleKeys = getKeys(key);
+  multipleKeys.forEach(function (originKey) {
+    var unbindKeys = originKey.split(splitKey);
+    var len = unbindKeys.length;
+    var lastKey = unbindKeys[len - 1];
+    var keyCode = lastKey === '*' ? '*' : code(lastKey);
+    if (!_handlers[keyCode]) return; // 判断是否传入范围，没有就获取范围
+
+    if (!scope) scope = getScope();
+    var mods = len > 1 ? getMods(_modifier, unbindKeys) : [];
+    _handlers[keyCode] = _handlers[keyCode].map(function (record) {
+      // 通过函数判断，是否解除绑定，函数相等直接返回
+      var isMatchingMethod = method ? record.method === method : true;
+
+      if (isMatchingMethod && record.scope === scope && compareArray(record.mods, mods)) {
+        return {};
+      }
+
+      return record;
+    });
+  });
+}; // 对监听对应快捷键的回调函数进行处理
+
+
+function eventHandler(event, handler, scope) {
+  var modifiersMatch; // 看它是否在当前范围
+
+  if (handler.scope === scope || handler.scope === 'all') {
+    // 检查是否匹配修饰符（如果有返回true）
+    modifiersMatch = handler.mods.length > 0;
+
+    for (var y in _mods) {
+      if (Object.prototype.hasOwnProperty.call(_mods, y)) {
+        if (!_mods[y] && handler.mods.indexOf(+y) > -1 || _mods[y] && handler.mods.indexOf(+y) === -1) {
+          modifiersMatch = false;
+        }
+      }
+    } // 调用处理程序，如果是修饰键不做处理
+
+
+    if (handler.mods.length === 0 && !_mods[16] && !_mods[18] && !_mods[17] && !_mods[91] || modifiersMatch || handler.shortcut === '*') {
+      if (handler.method(event, handler) === false) {
+        if (event.preventDefault) event.preventDefault();else event.returnValue = false;
+        if (event.stopPropagation) event.stopPropagation();
+        if (event.cancelBubble) event.cancelBubble = true;
+      }
+    }
+  }
+} // 处理keydown事件
+
+
+function dispatch(event) {
+  var asterisk = _handlers['*'];
+  var key = event.keyCode || event.which || event.charCode; // 表单控件过滤 默认表单控件不触发快捷键
+
+  if (!hotkeys.filter.call(this, event)) return; // Gecko(Firefox)的command键值224，在Webkit(Chrome)中保持一致
+  // Webkit左右 command 键值不一样
+
+  if (key === 93 || key === 224) key = 91;
+  /**
+   * Collect bound keys
+   * If an Input Method Editor is processing key input and the event is keydown, return 229.
+   * https://stackoverflow.com/questions/25043934/is-it-ok-to-ignore-keydown-events-with-keycode-229
+   * http://lists.w3.org/Archives/Public/www-dom/2010JulSep/att-0182/keyCode-spec.html
+   */
+
+  if (_downKeys.indexOf(key) === -1 && key !== 229) _downKeys.push(key);
+  /**
+   * Jest test cases are required.
+   * ===============================
+   */
+
+  ['ctrlKey', 'altKey', 'shiftKey', 'metaKey'].forEach(function (keyName) {
+    var keyNum = modifierMap[keyName];
+
+    if (event[keyName] && _downKeys.indexOf(keyNum) === -1) {
+      _downKeys.push(keyNum);
+    } else if (!event[keyName] && _downKeys.indexOf(keyNum) > -1) {
+      _downKeys.splice(_downKeys.indexOf(keyNum), 1);
+    } else if (keyName === 'metaKey' && event[keyName] && _downKeys.length === 3) {
+      /**
+       * Fix if Command is pressed:
+       * ===============================
+       */
+      if (!(event.ctrlKey || event.shiftKey || event.altKey)) {
+        _downKeys = _downKeys.slice(_downKeys.indexOf(keyNum));
+      }
+    }
+  });
+  /**
+   * -------------------------------
+   */
+
+  if (key in _mods) {
+    _mods[key] = true; // 将特殊字符的key注册到 hotkeys 上
+
+    for (var k in _modifier) {
+      if (_modifier[k] === key) hotkeys[k] = true;
+    }
+
+    if (!asterisk) return;
+  } // 将 modifierMap 里面的修饰键绑定到 event 中
+
+
+  for (var e in _mods) {
+    if (Object.prototype.hasOwnProperty.call(_mods, e)) {
+      _mods[e] = event[modifierMap[e]];
+    }
+  }
+  /**
+   * https://github.com/jaywcjlove/hotkeys/pull/129
+   * This solves the issue in Firefox on Windows where hotkeys corresponding to special characters would not trigger.
+   * An example of this is ctrl+alt+m on a Swedish keyboard which is used to type μ.
+   * Browser support: https://caniuse.com/#feat=keyboardevent-getmodifierstate
+   */
+
+
+  if (event.getModifierState && !(event.altKey && !event.ctrlKey) && event.getModifierState('AltGraph')) {
+    if (_downKeys.indexOf(17) === -1) {
+      _downKeys.push(17);
+    }
+
+    if (_downKeys.indexOf(18) === -1) {
+      _downKeys.push(18);
+    }
+
+    _mods[17] = true;
+    _mods[18] = true;
+  } // 获取范围 默认为 `all`
+
+
+  var scope = getScope(); // 对任何快捷键都需要做的处理
+
+  if (asterisk) {
+    for (var i = 0; i < asterisk.length; i++) {
+      if (asterisk[i].scope === scope && (event.type === 'keydown' && asterisk[i].keydown || event.type === 'keyup' && asterisk[i].keyup)) {
+        eventHandler(event, asterisk[i], scope);
+      }
+    }
+  } // key 不在 _handlers 中返回
+
+
+  if (!(key in _handlers)) return;
+
+  for (var _i = 0; _i < _handlers[key].length; _i++) {
+    if (event.type === 'keydown' && _handlers[key][_i].keydown || event.type === 'keyup' && _handlers[key][_i].keyup) {
+      if (_handlers[key][_i].key) {
+        var record = _handlers[key][_i];
+        var splitKey = record.splitKey;
+        var keyShortcut = record.key.split(splitKey);
+        var _downKeysCurrent = []; // 记录当前按键键值
+
+        for (var a = 0; a < keyShortcut.length; a++) {
+          _downKeysCurrent.push(code(keyShortcut[a]));
+        }
+
+        if (_downKeysCurrent.sort().join('') === _downKeys.sort().join('')) {
+          // 找到处理内容
+          eventHandler(event, record, scope);
+        }
+      }
+    }
+  }
+} // 判断 element 是否已经绑定事件
+
+
+function isElementBind(element) {
+  return elementHasBindEvent.indexOf(element) > -1;
+}
+
+function hotkeys(key, option, method) {
+  _downKeys = [];
+  var keys = getKeys(key); // 需要处理的快捷键列表
+
+  var mods = [];
+  var scope = 'all'; // scope默认为all，所有范围都有效
+
+  var element = document; // 快捷键事件绑定节点
+
+  var i = 0;
+  var keyup = false;
+  var keydown = true;
+  var splitKey = '+'; // 对为设定范围的判断
+
+  if (method === undefined && typeof option === 'function') {
+    method = option;
+  }
+
+  if (Object.prototype.toString.call(option) === '[object Object]') {
+    if (option.scope) scope = option.scope; // eslint-disable-line
+
+    if (option.element) element = option.element; // eslint-disable-line
+
+    if (option.keyup) keyup = option.keyup; // eslint-disable-line
+
+    if (option.keydown !== undefined) keydown = option.keydown; // eslint-disable-line
+
+    if (typeof option.splitKey === 'string') splitKey = option.splitKey; // eslint-disable-line
+  }
+
+  if (typeof option === 'string') scope = option; // 对于每个快捷键进行处理
+
+  for (; i < keys.length; i++) {
+    key = keys[i].split(splitKey); // 按键列表
+
+    mods = []; // 如果是组合快捷键取得组合快捷键
+
+    if (key.length > 1) mods = getMods(_modifier, key); // 将非修饰键转化为键码
+
+    key = key[key.length - 1];
+    key = key === '*' ? '*' : code(key); // *表示匹配所有快捷键
+    // 判断key是否在_handlers中，不在就赋一个空数组
+
+    if (!(key in _handlers)) _handlers[key] = [];
+
+    _handlers[key].push({
+      keyup: keyup,
+      keydown: keydown,
+      scope: scope,
+      mods: mods,
+      shortcut: keys[i],
+      method: method,
+      key: keys[i],
+      splitKey: splitKey
+    });
+  } // 在全局document上设置快捷键
+
+
+  if (typeof element !== 'undefined' && !isElementBind(element) && window) {
+    elementHasBindEvent.push(element);
+    addEvent(element, 'keydown', function (e) {
+      dispatch(e);
+    });
+    addEvent(window, 'focus', function () {
+      _downKeys = [];
+    });
+    addEvent(element, 'keyup', function (e) {
+      dispatch(e);
+      clearModifier(e);
+    });
+  }
+}
+
+var _api = {
+  setScope: setScope,
+  getScope: getScope,
+  deleteScope: deleteScope,
+  getPressedKeyCodes: getPressedKeyCodes,
+  isPressed: isPressed,
+  filter: filter,
+  unbind: unbind
+};
+
+for (var a in _api) {
+  if (Object.prototype.hasOwnProperty.call(_api, a)) {
+    hotkeys[a] = _api[a];
+  }
+}
+
+if (typeof window !== 'undefined') {
+  var _hotkeys = window.hotkeys;
+
+  hotkeys.noConflict = function (deep) {
+    if (deep && window.hotkeys === hotkeys) {
+      window.hotkeys = _hotkeys;
+    }
+
+    return hotkeys;
+  };
+
+  window.hotkeys = hotkeys;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (hotkeys);
+
 
 /***/ }),
 
@@ -29663,11 +30608,188 @@ module.exports = function packageRoot(from, highest) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _coffeekraken_s_filtrable_input__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @coffeekraken/s-filtrable-input */ "../../webcomponents/s-filtrable-input/src/js/index.js");
-/* harmony import */ var _coffeekraken_s_filtrable_input__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_coffeekraken_s_filtrable_input__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _webcomponents_SSugarUiSearchNavigationWebComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./webcomponents/SSugarUiSearchNavigationWebComponent */ "./src/js/webcomponents/SSugarUiSearchNavigationWebComponent.js");
+/* harmony import */ var _webcomponents_SSugarUiSearchNavigationWebComponent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_webcomponents_SSugarUiSearchNavigationWebComponent__WEBPACK_IMPORTED_MODULE_0__);
 
-_coffeekraken_s_filtrable_input__WEBPACK_IMPORTED_MODULE_0___default.a.define();
+_webcomponents_SSugarUiSearchNavigationWebComponent__WEBPACK_IMPORTED_MODULE_0___default.a.define();
 
+
+/***/ }),
+
+/***/ "./src/js/webcomponents/SSugarUiSearchNavigationWebComponent.js":
+/*!**********************************************************************!*\
+  !*** ./src/js/webcomponents/SSugarUiSearchNavigationWebComponent.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _sFiltrableInput = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/s-filtrable-input */ "../../webcomponents/s-filtrable-input/src/js/index.js"));
+
+var _deepMerge = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/object/deepMerge */ "../sugar/js/object/deepMerge.js"));
+
+var _SRequest = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/http/SRequest */ "../sugar/js/http/SRequest.js"));
+
+var _hotkey = _interopRequireDefault(__webpack_require__(/*! @coffeekraken/sugar/js/keyboard/hotkey */ "../sugar/js/keyboard/hotkey.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (typeof call === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/**
+ * @name                SSugarUiSearchNavigationWebComponent
+ * @namespace           sugar-ui.js.webcomponents
+ * @type                Webcomponent
+ *
+ * Represent the search based navigation in the sugar ui
+ *
+ * @prop        {String}            [docMapApiUrl='docMap']             Specify the docMap api url to reach
+ *
+ * @example             html
+ * <input is="s-sugar-ui-search-navigation" />
+ *
+ * @since               2.0.0
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SFiltrableInputWebC) {
+  _inherits(SSugarUiSearchNavigationWebComponent, _SFiltrableInputWebC);
+
+  var _super = _createSuper(SSugarUiSearchNavigationWebComponent);
+
+  /**
+   * @name            props
+   * @type            Object
+   * @static
+   *
+   * Store all the properties definitions
+   *
+   * @since           2.0.0
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+
+  /**
+   * @name            constructor
+   * @type            Function
+   * @constructor
+   *
+   * Constructor
+   *
+   * @since           2.0.0
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  function SSugarUiSearchNavigationWebComponent(settings) {
+    var _this;
+
+    if (settings === void 0) {
+      settings = {};
+    }
+
+    _classCallCheck(this, SSugarUiSearchNavigationWebComponent);
+
+    _this = _super.call(this, (0, _deepMerge.default)({}, settings));
+
+    _this.on('ready', () => {
+      // init the shortcuts
+      _this._initShortcuts();
+
+      if (_this.prop('docMapApiUrl')) {
+        console.log('LOAD');
+
+        _this._loadDocMapJson();
+      }
+    });
+
+    return _this;
+  }
+
+  _createClass(SSugarUiSearchNavigationWebComponent, [{
+    key: "_initShortcuts",
+    value: function _initShortcuts() {
+      (0, _hotkey.default)('ctrl+p').on('press', e => {
+        // put focus in the field
+        this.focus();
+      });
+    }
+  }, {
+    key: "_loadDocMapJson",
+    value: function () {
+      var _loadDocMapJson2 = _asyncToGenerator(function* () {
+        var request = new _SRequest.default({
+          url: this.prop('docMapApiUrl'),
+          method: 'GET'
+        });
+        var json = yield request.send(); // add the items in the navigation
+
+        var currentItems = this.prop('items');
+        currentItems = [...currentItems, ...Object.keys(json.data).map(key => {
+          var itemObj = json.data[key];
+          return {
+            title: key,
+            description: itemObj.description
+          };
+        })];
+        this.prop('items', currentItems);
+      });
+
+      function _loadDocMapJson() {
+        return _loadDocMapJson2.apply(this, arguments);
+      }
+
+      return _loadDocMapJson;
+    }()
+  }]);
+
+  return SSugarUiSearchNavigationWebComponent;
+}(_sFiltrableInput.default);
+
+exports.default = SSugarUiSearchNavigationWebComponent;
+
+_defineProperty(SSugarUiSearchNavigationWebComponent, "componentName", 'SSugarUiSearchNavigation');
+
+_defineProperty(SSugarUiSearchNavigationWebComponent, "props", _objectSpread(_objectSpread({}, _sFiltrableInput.default.props), {}, {
+  docMapApiUrl: {
+    type: 'String',
+    description: 'Specify the docMap api url to reach in order to get the docMap JSON',
+    default: 'docMap'
+  }
+}));
+
+module.exports = exports.default;
 
 /***/ }),
 

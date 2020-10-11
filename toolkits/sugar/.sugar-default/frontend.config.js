@@ -1,5 +1,4 @@
-// const __docNav = require('../src/node/doc/docNav');
-// const __namespaceSNav = require('../src/node/nav/namespaceSNav');
+const __ipAddress = require('../src/node/network/ipAddress');
 const __packageRoot = require('../src/node/path/packageRoot');
 
 module.exports = {
@@ -22,14 +21,14 @@ module.exports = {
    * @name              hostname
    * @namespace         config.sugar-ui.modules.frontendServer.settings
    * @type              String
-   * @default           127.0.0.1
+   * @default           __ipAddress()
    *
    * Specify the hostname to use for the frontend server
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  hostname: '192.168.201.117',
+  hostname: __ipAddress(),
 
   /**
    * @name              rootDir

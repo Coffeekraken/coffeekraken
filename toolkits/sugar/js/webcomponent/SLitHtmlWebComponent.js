@@ -39,6 +39,8 @@ var _unsafeSvg = require("lit-html/directives/unsafe-svg");
 
 var _until = require("lit-html/directives/until.js");
 
+var _canHaveChildren = _interopRequireDefault(require("../dom/canHaveChildren"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
@@ -58,10 +60,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
-
-function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -161,7 +159,7 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
 
       _classCallCheck(this, SLitHtmlWebComponent);
 
-      _this = _super.call(this, (0, _deepMerge.default)({}, settings)); // generate a container for the component
+      _this = _super.call(this, (0, _deepMerge.default)({}, settings)); // wait until mounted to render the component first time
 
       _defineProperty(_assertThisInitialized(_this), "lit", {
         html: _litHtml.html,
@@ -186,14 +184,22 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
         (0, _litHtml.render)(tpl, this.$container);
       }, 50));
 
-      _this.$container = document.createElement('div');
-
-      _this.addClass('', _this.$container); // wait until mounted to render the component first time
-
-
       _this.on('mounted:1', () => {
         // insert the container in the document
-        (0, _insertAfter.default)(_this.$container, _assertThisInitialized(_this)); // render for the first time
+        if ((0, _canHaveChildren.default)(_assertThisInitialized(_this))) {
+          _this.$container = _assertThisInitialized(_this);
+
+          _this.addClass('', _assertThisInitialized(_this));
+
+          console.log('HA');
+        } else {
+          _this.$container = document.createElement('div');
+
+          _this.addClass('', _this.$container);
+
+          (0, _insertAfter.default)(_this.$container, _assertThisInitialized(_this));
+        } // render for the first time
+
 
         _this.render(); // dispatch a ready event
 
@@ -204,51 +210,20 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
       return _this;
     }
     /**
-     * @name          render
+     * @name          $root
      * @type          Function
+     * @get
      *
-     * This method is called every time an update has been made in the state object
+     * Access the root element of the webcomponent from which the requests like ```$``` and ```$$``` will be executed
      *
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @since         2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
 
     _createClass(SLitHtmlWebComponent, [{
-      key: "$",
+      key: "handleProp",
 
-      /**
-       * @name					$
-       * @type 					Function
-       *
-       * This method is a shortcut to the ```querySelector``` function
-       *
-       * @param         {String}        path      The selector path
-       * @param         {Object}      [settings={}]     An object of settings to configure your query
-       * @return        {HTMLElement}             The html element getted
-       *
-       * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
-       *
-       * @since 					2.0.0
-       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      value: function $(path, settings) {
-        if (settings === void 0) {
-          settings = {};
-        }
-
-        settings = (0, _deepMerge.default)({
-          $root: this.$container
-        }, settings);
-        return _get(_getPrototypeOf(SLitHtmlWebComponent.prototype), "$", this).call(this, path, settings);
-      }
-    }, {
-      key: "$$",
-      value: function $$(path) {
-        settings = (0, _deepMerge.default)({
-          $root: this.$container
-        }, settings);
-        return _get(_getPrototypeOf(SLitHtmlWebComponent.prototype), "$$", this).call(this, path, settings);
-      }
       /**
        * @name          handleProp
        * @type          Function
@@ -273,9 +248,6 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
        * @since     2.0.0
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-
-    }, {
-      key: "handleProp",
       value: function handleProp(prop, propObj) {
         return new Promise((resolve, reject) => {
           // this.render();
@@ -285,10 +257,24 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
           resolve(prop);
         });
       }
+    }, {
+      key: "$root",
+      get: function get() {
+        return this.$container || this;
+      }
+      /**
+       * @name          render
+       * @type          Function
+       *
+       * This method is called every time an update has been made in the state object
+       *
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
     }]);
 
     return SLitHtmlWebComponent;
-  }((0, _SWebComponent2.default)(extendSettings)), _defineProperty(_class, "template", (props, component, html) => html(_templateObject())), _temp;
+  }((0, _SWebComponent2.default)(extendSettings)), _defineProperty(_class, "template", (props, settings, lit) => lit.html(_templateObject())), _temp;
 }
 
 var _default = SLitHtmlWebComponentGenerator;

@@ -15,6 +15,7 @@ import { templateContent } from 'lit-html/directives/template-content';
 import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import { unsafeSVG } from 'lit-html/directives/unsafe-svg';
 import { until } from 'lit-html/directives/until.js';
+import __canHaveChildren from '../dom/canHaveChildren';
 
 /**
  * @name              SLitHtmlWebComponent
@@ -59,7 +60,7 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
      *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static template = (props, component, html) => html`
+    static template = (props, settings, lit) => lit.html`
       <p>
         You need to specify a static template property for your component...
       </p>
@@ -102,18 +103,36 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
      */
     constructor(settings = {}) {
       super(__deepMerge({}, settings));
-      // generate a container for the component
-      this.$container = document.createElement('div');
-      this.addClass('', this.$container);
       // wait until mounted to render the component first time
       this.on('mounted:1', () => {
         // insert the container in the document
-        __insertAfter(this.$container, this);
+        if (__canHaveChildren(this)) {
+          this.$container = this;
+          this.addClass('', this);
+        } else {
+          this.$container = document.createElement('div');
+          this.addClass('', this.$container);
+          __insertAfter(this.$container, this);
+        }
         // render for the first time
         this.render();
         // dispatch a ready event
         this.dispatch('ready', this);
       });
+    }
+
+    /**
+     * @name          $root
+     * @type          Function
+     * @get
+     *
+     * Access the root element of the webcomponent from which the requests like ```$``` and ```$$``` will be executed
+     *
+     * @since         2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get $root() {
+      return this.$container || this;
     }
 
     /**
@@ -129,41 +148,6 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
       const tpl = tplFn(this._props, this._settings, this.lit);
       render(tpl, this.$container);
     }, 50);
-
-    /**
-     * @name					$
-     * @type 					Function
-     *
-     * This method is a shortcut to the ```querySelector``` function
-     *
-     * @param         {String}        path      The selector path
-     * @param         {Object}      [settings={}]     An object of settings to configure your query
-     * @return        {HTMLElement}             The html element getted
-     *
-     * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
-     *
-     * @since 					2.0.0
-     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-
-    $(path, settings = {}) {
-      settings = __deepMerge(
-        {
-          $root: this.$container
-        },
-        settings
-      );
-      return super.$(path, settings);
-    }
-    $$(path) {
-      settings = __deepMerge(
-        {
-          $root: this.$container
-        },
-        settings
-      );
-      return super.$$(path, settings);
-    }
 
     /**
      * @name          handleProp

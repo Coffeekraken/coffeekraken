@@ -16,6 +16,8 @@ import __htmlTagToHtmlClassMap from '../html/htmlTagToHtmlClassMap';
 import __uncamelize from '../string/uncamelize';
 import __getHtmlClassFromTagName from '../html/getHtmlClassFromTagName';
 import __domReady from '../dom/domReady';
+import __getTagNameFromHtmlClass from '../html/getTagNameFromHtmlClass';
+import { findLastKey } from 'lodash';
 
 /**
  * @name              SWebComponent
@@ -196,30 +198,15 @@ function SWebComponentGenerator(extendsSettings = {}) {
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static define(settings = {}) {
-      // if (!name)
-      //   throw new Error(
-      //     `SWebComponent: You must define a name for your webcomponent by setting either a static "name" property on your class, of by passing a name as first parameter of the static "define" function...`
-      //   );
-      // let cls = this;
-      // if (__isClass(clsOrSettings)) cls = clsOrSettings;
-      // else if (typeof clsOrSettings === 'object' && !settings) {
-      //   settings = clsOrSettings;
-      // }
-
-      let extend = null;
-      for (let key in __htmlTagToHtmlClassMap) {
-        if (this.prototype instanceof __htmlTagToHtmlClassMap[key]) {
-          extend = key;
-          break;
-        }
-      }
-
       const name = (settings.name || this.componentName || this.name).replace(
         'WebComponent',
         ''
       );
 
       const uncamelizedName = __uncamelize(name);
+
+      // avoid multi define of the same component
+      if (customElements.get(uncamelizedName)) return;
 
       this.componentName = name;
 
@@ -229,23 +216,31 @@ function SWebComponentGenerator(extendsSettings = {}) {
         name,
         dashName: uncamelizedName,
         class: this,
-        extends: extend,
+        extends: extendsSettings.extends,
         settings
       };
 
+      const defineSettings = {};
+      if (extendsSettings.extends !== HTMLElement)
+        defineSettings.extends = __getTagNameFromHtmlClass(
+          extendsSettings.extends
+        );
+
       if (window.customElements) {
         try {
-          window.customElements.define(uncamelizedName, this, {
-            extends: extend
-          });
-        } catch (e) {}
+          window.customElements.define(uncamelizedName, this, defineSettings);
+        } catch (e) {
+          // @TODO      find why the component is registeres twice...
+          // console.log(e);
+        }
       } else if (document.registerElement) {
         try {
-          document.registerElement(uncamelizedName, {
-            prototype: this.prototype,
-            extends: extend
-          });
-        } catch (e) {}
+          defineSettings.prototype = this.prototype;
+          document.registerElement(uncamelizedName, defineSettings);
+        } catch (e) {
+          // @TODO      find why the component is registeres twice...
+          // console.log(e);
+        }
       } else {
         throw `Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...`;
       }
@@ -295,6 +290,9 @@ function SWebComponentGenerator(extendsSettings = {}) {
       });
 
       __domReady(() => {
+        // get the inital content
+        // this._$initialContent =
+
         // handle props
         this._initProps();
 
@@ -311,29 +309,38 @@ function SWebComponentGenerator(extendsSettings = {}) {
     }
 
     /**
+     * @name          $root
+     * @type          Function
+     * @get
+     *
+     * Access the root element of the webcomponent from which the requests like ```$``` and ```$$``` will be executed
+     *
+     * @since         2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get $root() {
+      return this;
+    }
+
+    /**
      * @name					$
      * @type 					Function
      *
      * This method is a shortcut to the ```querySelector``` function
      *
      * @param         {String}        path      The selector path
-     * @param         {Object}      [settings={}]     An object of settings to configure your query
      * @return        {HTMLElement}             The html element getted
-     *
-     * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
      *
      * @since 					2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    $(path, settings = {}) {
-      const $root = settings.$root || this;
-      path = this.selector(path);
-      let $result = $root.querySelector(path);
-      if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
-        path = path.replace(/^\./, `.${this.metas.dashName}__`);
-        $result = $root.querySelector(path);
+    $(path) {
+      const tries = [this.selector(path), path];
+      for (let i = 0; i < tries.length; i++) {
+        const $tryRes = this.$root.querySelector(tries[i]);
+        if ($tryRes) return $tryRes;
       }
-      return $result;
+      return null;
     }
 
     /**
@@ -343,23 +350,18 @@ function SWebComponentGenerator(extendsSettings = {}) {
      * This method is a shortcut to the ```querySelectorAll``` function
      *
      * @param         {String}        path      The selector path
-     * @param         {Object}      [settings={}]     An object of settings to configure your query
      * @return        {HTMLElement}             The html element(s) getted
-     *
-     * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
      *
      * @since 					2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    $$(path, settings = {}) {
-      const $root = settings.$root || this;
-      path = this.selector(path);
-      let $result = $root.querySelectorAll(path);
-      if (!$result && !path.includes(`.${this.metas.dashName}__`)) {
-        path = path.replace(/^\./, `.${this.metas.dashName}__`);
-        $result = $root.querySelectorAll(path);
+    $$(path) {
+      const tries = [this.selector(path), path];
+      for (let i = 0; i < tries.length; i++) {
+        const $tryRes = this.$root.querySelectorAll(tries[i]);
+        if ($tryRes) return $tryRes;
       }
-      return $result;
+      return null;
     }
 
     /**
@@ -736,14 +738,16 @@ function SWebComponentGenerator(extendsSettings = {}) {
       const finalSelectorArray = [];
 
       split.forEach((part) => {
-        const hasDot = part.match(/^\./);
-        part = part.replace('.', '');
+        const hasDot = part.match(/^\./),
+          hasHash = part.match(/^\#/);
+        part = part.replace('.', '').replace('#', '');
 
         let finalClsPart;
         if (part.match(/^(--)/)) finalClsPart = `${this.metas.dashName}${part}`;
         else if (part !== '') finalClsPart = `${this.metas.dashName}__${part}`;
         else finalClsPart = this.metas.dashName;
         if (hasDot) finalClsPart = `.${finalClsPart}`;
+        if (hasHash) finalClsPart = `#${finalClsPart}`;
 
         // add the base class if needed
         if (this.constructor.cssName) {
@@ -758,6 +762,8 @@ function SWebComponentGenerator(extendsSettings = {}) {
             else finalBaseCls = baseCls;
             if (hasDot) {
               finalBaseCls = `.${finalBaseCls}`;
+            } else if (hasHash) {
+              finalBaseCls = `#${finalBaseCls}`;
             } else {
               finalClsPart += ` ${finalBaseCls}`;
             }

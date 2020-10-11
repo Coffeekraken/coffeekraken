@@ -4,7 +4,7 @@ const __IPC = require('node-ipc').IPC;
 const __deepMerge = require('../object/deepMerge');
 const __isChildProcess = require('../is/childProcess');
 const __onProcessExit = require('../process/onProcessExit');
-const __getFreePort = require('../http/getFreePort');
+const __getFreePort = require('../network/getFreePort');
 /**
  * @name            SIpc
  * @namespace       sugar.node.ipc

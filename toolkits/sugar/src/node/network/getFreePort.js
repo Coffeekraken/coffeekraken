@@ -12,7 +12,7 @@ const __isPortFree = require('./isPortFree');
  * @return          {Promise}                           A promise that will be resolved once a free port has been found
  *
  * @example         js
- * const getFreePort = require('@coffeekraken/sugar/node/http/getFreePort');
+ * const getFreePort = require('@coffeekraken/sugar/node/network/getFreePort');
  * await getFreePort(); // => 22343
  *
  * @since           2.0.0

@@ -219,6 +219,7 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
               modules: [
                 __folderPath(streamObj.input),
                 `${__packageRoot()}/node_modules`,
+                `${__packageRoot()}/node_modules/@coffeekraken/sugar/node_modules`,
                 'node_modules'
               ]
             },
@@ -289,8 +290,6 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
       } catch (e) {
         // delete the tmp file
         __fs.unlinkSync(tmpInputPath);
-
-        console.log('COCOCOCOC');
         // console.log(e.toString());
       }
     });

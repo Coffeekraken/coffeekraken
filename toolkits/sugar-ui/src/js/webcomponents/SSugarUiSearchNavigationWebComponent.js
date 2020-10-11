@@ -1,7 +1,10 @@
-import __SFiltrableInputWebComponent from '@coffeekraken/s-filtrable-input';
+import __SLitHtmlWebComponent from '@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent';
 import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
 import __SRequest from '@coffeekraken/sugar/js/http/SRequest';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+
+import __SFiltrableInputWebComponent from '@coffeekraken/s-filtrable-input';
+__SFiltrableInputWebComponent.define();
 
 /**
  * @name                SSugarUiSearchNavigationWebComponent
@@ -18,7 +21,7 @@ import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
  * @since               2.0.0
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SSugarUiSearchNavigationWebComponent extends __SFiltrableInputWebComponent {
+export default class SSugarUiSearchNavigationWebComponent extends __SLitHtmlWebComponent() {
   static componentName = 'SSugarUiSearchNavigation';
 
   /**
@@ -42,6 +45,21 @@ export default class SSugarUiSearchNavigationWebComponent extends __SFiltrableIn
   };
 
   /**
+   * @name            template
+   * @type            Function
+   * @static
+   *
+   * Define the web component template
+   *
+   * @since           2.0.0
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static template = (props, settings, lit) => lit.html`
+    <input type="text" is="s-filtrable-input" id="search" />
+    <p>Somethinf else</p>
+  `;
+
+  /**
    * @name            constructor
    * @type            Function
    * @constructor
@@ -59,7 +77,6 @@ export default class SSugarUiSearchNavigationWebComponent extends __SFiltrableIn
       this._initShortcuts();
 
       if (this.prop('docMapApiUrl')) {
-        console.log('LOAD');
         this._loadDocMapJson();
       }
     });
@@ -68,7 +85,7 @@ export default class SSugarUiSearchNavigationWebComponent extends __SFiltrableIn
   _initShortcuts() {
     __hotkey('ctrl+p').on('press', (e) => {
       // put focus in the field
-      this.focus();
+      this.$('#search').focus();
     });
   }
 
@@ -91,6 +108,6 @@ export default class SSugarUiSearchNavigationWebComponent extends __SFiltrableIn
         };
       })
     ];
-    this.prop('items', currentItems);
+    this.$('#search').prop('items', currentItems);
   }
 }

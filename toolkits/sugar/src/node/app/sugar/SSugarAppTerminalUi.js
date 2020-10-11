@@ -247,17 +247,16 @@ module.exports = class SSugarAppTerminalUi extends __SBlessedComponent {
         }
       }
     );
-
     this.append($errorNotification);
   }
 
-  _moduleStart(value, metas) {
-    const moduleObj = this._modules[value.module.idx];
-    if (!moduleObj.spinner) moduleObj.spinner = __ora();
-    if (!moduleObj) return;
+  // _moduleStart(value, metas) {
+  //   const moduleObj = this._modules[value.module.idx];
+  //   if (!moduleObj.spinner) moduleObj.spinner = __ora();
+  //   if (!moduleObj) return;
 
-    moduleObj.state = value.value;
-  }
+  //   moduleObj.state = value.value;
+  // }
 
   _moduleSuccess(data, metas) {
     const moduleObj = this._findModuleObjById(data.module.id);

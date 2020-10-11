@@ -21,7 +21,7 @@ module.exports = {
   data: HTMLDataElement,
   datalist: HTMLDataListElement,
   details: HTMLDetailsElement,
-  dialog: HTMLDialogElement,
+  // dialog: HTMLDialogElement,
   dir: HTMLDirectoryElement,
   div: HTMLDivElement,
   html: HTMLDocument,

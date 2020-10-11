@@ -41,6 +41,10 @@ var _getHtmlClassFromTagName = _interopRequireDefault(require("../html/getHtmlCl
 
 var _domReady = _interopRequireDefault(require("../dom/domReady"));
 
+var _getTagNameFromHtmlClass = _interopRequireDefault(require("../html/getTagNameFromHtmlClass"));
+
+var _lodash = require("lodash");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -184,49 +188,35 @@ function SWebComponentGenerator(extendsSettings) {
           settings = {};
         }
 
-        // if (!name)
-        //   throw new Error(
-        //     `SWebComponent: You must define a name for your webcomponent by setting either a static "name" property on your class, of by passing a name as first parameter of the static "define" function...`
-        //   );
-        // let cls = this;
-        // if (__isClass(clsOrSettings)) cls = clsOrSettings;
-        // else if (typeof clsOrSettings === 'object' && !settings) {
-        //   settings = clsOrSettings;
-        // }
-        var extend = null;
-
-        for (var key in _htmlTagToHtmlClassMap.default) {
-          if (this.prototype instanceof _htmlTagToHtmlClassMap.default[key]) {
-            extend = key;
-            break;
-          }
-        }
-
         var name = (settings.name || this.componentName || this.name).replace('WebComponent', '');
-        var uncamelizedName = (0, _uncamelize.default)(name);
+        var uncamelizedName = (0, _uncamelize.default)(name); // avoid multi define of the same component
+
+        if (customElements.get(uncamelizedName)) return;
         this.componentName = name;
         if (_sWebComponentStack[uncamelizedName]) return;
         _sWebComponentStack[uncamelizedName] = {
           name,
           dashName: uncamelizedName,
           class: this,
-          extends: extend,
+          extends: extendsSettings.extends,
           settings
         };
+        var defineSettings = {};
+        if (extendsSettings.extends !== HTMLElement) defineSettings.extends = (0, _getTagNameFromHtmlClass.default)(extendsSettings.extends);
 
         if (window.customElements) {
           try {
-            window.customElements.define(uncamelizedName, this, {
-              extends: extend
-            });
-          } catch (e) {}
+            window.customElements.define(uncamelizedName, this, defineSettings);
+          } catch (e) {// @TODO      find why the component is registeres twice...
+            // console.log(e);
+          }
         } else if (document.registerElement) {
           try {
-            document.registerElement(uncamelizedName, {
-              prototype: this.prototype,
-              extends: extend
-            });
-          } catch (e) {}
+            defineSettings.prototype = this.prototype;
+            document.registerElement(uncamelizedName, defineSettings);
+          } catch (e) {// @TODO      find why the component is registeres twice...
+            // console.log(e);
+          }
         } else {
           throw "Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...";
         }
@@ -365,6 +355,8 @@ function SWebComponentGenerator(extendsSettings) {
       });
 
       (0, _domReady.default)(() => {
+        // get the inital content
+        // this._$initialContent =
         // handle props
         _this._initProps(); // apply the $node class
 
@@ -379,39 +371,41 @@ function SWebComponentGenerator(extendsSettings) {
       return _this;
     }
     /**
-     * @name					$
-     * @type 					Function
+     * @name          $root
+     * @type          Function
+     * @get
      *
-     * This method is a shortcut to the ```querySelector``` function
+     * Access the root element of the webcomponent from which the requests like ```$``` and ```$$``` will be executed
      *
-     * @param         {String}        path      The selector path
-     * @param         {Object}      [settings={}]     An object of settings to configure your query
-     * @return        {HTMLElement}             The html element getted
-     *
-     * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
-     *
-     * @since 					2.0.0
+     * @since         2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
 
     _createClass(SWebComponent, [{
       key: "$",
-      value: function $(path, settings) {
-        if (settings === void 0) {
-          settings = {};
+
+      /**
+       * @name					$
+       * @type 					Function
+       *
+       * This method is a shortcut to the ```querySelector``` function
+       *
+       * @param         {String}        path      The selector path
+       * @return        {HTMLElement}             The html element getted
+       *
+       * @since 					2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      value: function $(path) {
+        var tries = [this.selector(path), path];
+
+        for (var i = 0; i < tries.length; i++) {
+          var $tryRes = this.$root.querySelector(tries[i]);
+          if ($tryRes) return $tryRes;
         }
 
-        var $root = settings.$root || this;
-        path = this.selector(path);
-        var $result = $root.querySelector(path);
-
-        if (!$result && !path.includes(".".concat(this.metas.dashName, "__"))) {
-          path = path.replace(/^\./, ".".concat(this.metas.dashName, "__"));
-          $result = $root.querySelector(path);
-        }
-
-        return $result;
+        return null;
       }
       /**
        * @name					$$
@@ -420,10 +414,7 @@ function SWebComponentGenerator(extendsSettings) {
        * This method is a shortcut to the ```querySelectorAll``` function
        *
        * @param         {String}        path      The selector path
-       * @param         {Object}      [settings={}]     An object of settings to configure your query
        * @return        {HTMLElement}             The html element(s) getted
-       *
-       * @setting     {HTMLElement}     [$root=this]     The root element from which to make the query
        *
        * @since 					2.0.0
        * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -431,21 +422,15 @@ function SWebComponentGenerator(extendsSettings) {
 
     }, {
       key: "$$",
-      value: function $$(path, settings) {
-        if (settings === void 0) {
-          settings = {};
+      value: function $$(path) {
+        var tries = [this.selector(path), path];
+
+        for (var i = 0; i < tries.length; i++) {
+          var $tryRes = this.$root.querySelectorAll(tries[i]);
+          if ($tryRes) return $tryRes;
         }
 
-        var $root = settings.$root || this;
-        path = this.selector(path);
-        var $result = $root.querySelectorAll(path);
-
-        if (!$result && !path.includes(".".concat(this.metas.dashName, "__"))) {
-          path = path.replace(/^\./, ".".concat(this.metas.dashName, "__"));
-          $result = $root.querySelectorAll(path);
-        }
-
-        return $result;
+        return null;
       }
       /**
        * @name          addClass
@@ -859,11 +844,13 @@ function SWebComponentGenerator(extendsSettings) {
         var split = cls.split(' ');
         var finalSelectorArray = [];
         split.forEach(part => {
-          var hasDot = part.match(/^\./);
-          part = part.replace('.', '');
+          var hasDot = part.match(/^\./),
+              hasHash = part.match(/^\#/);
+          part = part.replace('.', '').replace('#', '');
           var finalClsPart;
           if (part.match(/^(--)/)) finalClsPart = "".concat(this.metas.dashName).concat(part);else if (part !== '') finalClsPart = "".concat(this.metas.dashName, "__").concat(part);else finalClsPart = this.metas.dashName;
-          if (hasDot) finalClsPart = ".".concat(finalClsPart); // add the base class if needed
+          if (hasDot) finalClsPart = ".".concat(finalClsPart);
+          if (hasHash) finalClsPart = "#".concat(finalClsPart); // add the base class if needed
 
           if (this.constructor.cssName) {
             var baseCls = (0, _uncamelize.default)(this.constructor.cssName).replace('-web-component', '');
@@ -874,6 +861,8 @@ function SWebComponentGenerator(extendsSettings) {
 
               if (hasDot) {
                 finalBaseCls = ".".concat(finalBaseCls);
+              } else if (hasHash) {
+                finalBaseCls = "#".concat(finalBaseCls);
               } else {
                 finalClsPart += " ".concat(finalBaseCls);
               }
@@ -1021,6 +1010,11 @@ function SWebComponentGenerator(extendsSettings) {
           });
           if (validationResult !== true) throw new Error(validationResult);
         });
+      }
+    }, {
+      key: "$root",
+      get: function get() {
+        return this;
       }
     }, {
       key: "metas",

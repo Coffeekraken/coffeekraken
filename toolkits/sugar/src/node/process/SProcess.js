@@ -1,3 +1,4 @@
+const __packageRoot = require('../path/packageRoot');
 const __SPromise = require('../promise/SPromise');
 const __SProcessInterface = require('./interface/SProcessInterface');
 const __SError = require('../error/SError');
@@ -5,6 +6,7 @@ const __toString = require('../string/toString');
 const __deepMerge = require('../object/deepMerge');
 const __SIpc = require('../ipc/SIpc');
 const __onProcessExit = require('../process/onProcessExit');
+const __notifier = require('node-notifier');
 
 /**
  * @name            SProcess
@@ -19,6 +21,7 @@ const __onProcessExit = require('../process/onProcessExit');
  * - id (process.unnamed) {String}: Specify a unique id for your particular process instance
  * - name (Unnamed Process) {String}: Specify a name for your process instance
  *
+ * @see         https://www.npmjs.com/package/node-notifier
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
@@ -167,6 +170,7 @@ class SProcess extends __SPromise {
         watchParams: ['watch'],
         autoStart: true,
         autoRun: false,
+        notify: true,
         throw: false
       },
       settings
@@ -264,6 +268,14 @@ class SProcess extends __SPromise {
       });
     }
 
+    if (settings.notify) {
+      __notifier.notify({
+        title: `${settings.name} (${settings.id})`,
+        message: `Process has started`,
+        icon: `${__packageRoot(__dirname)}/src/data/notifications/ck_start.png`
+      });
+    }
+
     if (settings.autoRun) {
       setTimeout(() => {
         this.run(argsObj, settings);
@@ -303,6 +315,14 @@ class SProcess extends __SPromise {
       return;
     }
 
+    if (this._settings.notify) {
+      __notifier.notify({
+        title: `${this._settings.name} (${this._settings.id})`,
+        message: `Process is running...`,
+        icon: `${__packageRoot(__dirname)}/src/data/notifications/ck_start.png`
+      });
+    }
+
     // save the current promise
     this._currentPromise = processPromise;
 
@@ -326,6 +346,26 @@ class SProcess extends __SPromise {
       this.duration = this.endTime - this.startTime;
 
       this.state = metas.stack !== 'reject' ? 'success' : 'error';
+
+      if (this._settings.notify) {
+        if (this.state === 'success') {
+          __notifier.notify({
+            title: `${this._settings.name} (${this._settings.id})`,
+            message: `Process has finish successfully`,
+            icon: `${__packageRoot(
+              __dirname
+            )}/src/data/notifications/ck_success.png`
+          });
+        } else {
+          __notifier.notify({
+            title: `${this._settings.name} (${this._settings.id})`,
+            message: `Something went wrong...`,
+            icon: `${__packageRoot(
+              __dirname
+            )}/src/data/notifications/ck_error.png`
+          });
+        }
+      }
 
       if (this.deamon && this.deamon.state === 'watching') {
         this.log({

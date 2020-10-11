@@ -125,6 +125,7 @@
     "inline-style-prefixer": "^6.0.0",
     "inquirer": "^7.1.0",
     "iohook": "^0.6.6",
+    "ip": "^1.1.5",
     "is-base64": "^1.0.0",
     "is-class": "0.0.9",
     "is-equal": "^1.6.1",

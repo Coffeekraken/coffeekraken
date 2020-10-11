@@ -2,6 +2,7 @@ const __SIpc = require('../ipc/SIpc');
 const __IPC = require('node-ipc').IPC;
 const __fs = require('fs');
 const __tmp = require('tmp');
+const __copy = require('../clipboard/copy');
 const __SError = require('../error/SError');
 const __toString = require('../string/toString');
 const __SPromise = require('../promise/SPromise');

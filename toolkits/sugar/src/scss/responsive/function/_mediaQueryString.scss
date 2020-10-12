@@ -1,53 +1,21 @@
-@use 'sass:meta';
-@use 'sass:string';
-
 /**
- * @name                  media
- * @namespace             sugar.scss.responsive.mixin
- * @type                  Mixin
+ * @name            mediaQueryString
+ * @namespace       sugar.scss.responsive.function
+ * @type            Function
  *
- * This mixin allows you to specify easily which media (defined in the media.config.js file) has to be targeted.
- * You can specify multiple medias if needed and specify how you want to target the specific media.
- * Check out the examples for more info.
- * By default, the Sugar toolkit offer these medias to be targeted:
- * - mobile
- * - mobile-portrait
- * - mobile-landscape
- * - tablet
- * - tablet-portrait
- * - tablet-landscape
- * - desktop
+ * This function return the media query string depending on the query asked.
+ * The queries are defined in the config.media.queries configuration.
  *
- * You can use some "actions" to specify your target. The available actions are:
- * - '>': Greater than...
- * - '<': Lower than...
- * - '=': Equal...
- * - '>=': Greater or equal...
- * - '>=': Lower or equal...
+ * @param        {String}          $medias       The media query name(s) you want back
+ * @return       {String}                       The media query string
  *
- * Your media queries can be something like this: '<tablet', '>mobile <desktop', '=tablet-landscape'.
- * If you don't specicy any action in your queries, by default the "defaultAction" property in the media.config.js file will
- * be applied and this default action is setted to ">=". This is setted like this to work in "mobile first" schema by default.
+ * @example         scss
+ * Sugar.mediaQueryString(mobile); // => screen and (max-width: 639)
  *
- * @param       {String}        $media      The media(s) you want to target.
- *
- * @example       scss
- * .my-cool-container {
- *    background: red;
- *
- *    @include Sugar.media(tablet) {
- *      background: blue;
- *    }
- *
- *    @include Sugar.media('>=desktop') {
- *      background: green;
- *    }
- * }
- *
- * @since       2.0.0
+ * @since           2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin media($medias) {
+@function mediaQueryString($medias) {
   @if type-of($medias) != string {
     $medias: inspect($medias);
   }
@@ -72,12 +40,16 @@
 
     // get the media settings and make sure it exists in the config files
     $mediaSettings: setting('media.queries.#{$mediaName}');
+
     @if not $mediaSettings {
       @error ("It seem's that the requested media \"#{$mediaName}\" does not exist...");
     }
 
     $queryList: ();
     @each $key, $value in $mediaSettings {
+      @if $value == null {
+        $value: 0;
+      }
       @if $key ==
         'min-width' or
         $key ==
@@ -124,6 +96,7 @@
         $queryList: list-append($queryList, '(#{$key}: #{$value})');
       }
     }
+   
     // append the query list into the full queries list
     $fullQueriesList: list-append(
       $fullQueriesList,
@@ -131,7 +104,6 @@
     );
   }
 
-  @media #{list-implode($fullQueriesList, ',')} {
-    @content;
-  }
+  @return #{list-implode($fullQueriesList, ',')};
+
 }

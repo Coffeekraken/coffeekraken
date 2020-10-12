@@ -1,7 +1,7 @@
-import __SLitHtmlWebComponent from '@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent';
 import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
 import __SRequest from '@coffeekraken/sugar/js/http/SRequest';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+import __SLitHtmlWebComponent from '@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent';
 
 import __SFiltrableInputWebComponent from '@coffeekraken/s-filtrable-input';
 __SFiltrableInputWebComponent.define();
@@ -44,19 +44,8 @@ export default class SSugarUiSearchNavigationWebComponent extends __SLitHtmlWebC
     }
   };
 
-  /**
-   * @name            template
-   * @type            Function
-   * @static
-   *
-   * Define the web component template
-   *
-   * @since           2.0.0
-   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
   static template = (props, settings, lit) => lit.html`
-    <input type="text" is="s-filtrable-input" id="search" />
-    <p>Somethinf else</p>
+    <input type="text" is="s-filtrable-input" id="search" no-item-text-mobile="MOBILE" />
   `;
 
   /**
@@ -73,10 +62,8 @@ export default class SSugarUiSearchNavigationWebComponent extends __SLitHtmlWebC
     super(__deepMerge({}, settings));
 
     this.on('ready', () => {
-      // init the shortcuts
       this._initShortcuts();
-
-      if (this.prop('docMapApiUrl')) {
+      if (this.props.docMapApiUrl) {
         this._loadDocMapJson();
       }
     });
@@ -85,19 +72,19 @@ export default class SSugarUiSearchNavigationWebComponent extends __SLitHtmlWebC
   _initShortcuts() {
     __hotkey('ctrl+p').on('press', (e) => {
       // put focus in the field
-      this.$('#search').focus();
+      this.$search.focus();
     });
   }
 
   async _loadDocMapJson() {
     const request = new __SRequest({
-      url: this.prop('docMapApiUrl'),
+      url: this.props.docMapApiUrl,
       method: 'GET'
     });
     const json = await request.send();
 
     // add the items in the navigation
-    let currentItems = this.prop('items');
+    let currentItems = this.$search.props.items;
     currentItems = [
       ...currentItems,
       ...Object.keys(json.data).map((key) => {
@@ -108,6 +95,6 @@ export default class SSugarUiSearchNavigationWebComponent extends __SLitHtmlWebC
         };
       })
     ];
-    this.$('#search').prop('items', currentItems);
+    this.$search.props.items = currentItems;
   }
 }

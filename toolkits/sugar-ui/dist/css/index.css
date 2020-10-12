@@ -5588,7 +5588,40 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * @name                  media
+ * @name            mediaQueryString
+ * @namespace       sugar.scss.responsive.function
+ * @type            Function
+ *
+ * This function return the media query string depending on the query asked.
+ * The queries are defined in the config.media.queries configuration.
+ *
+ * @param        {String}          $medias       The media query name(s) you want back
+ * @return       {String}                       The media query string
+ *
+ * @example         scss
+ * Sugar.mediaQueryString(mobile); // => screen and (max-width: 639)
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                initBodyMediaQueries
+ * @namespace           sugar.scss.responsive.mixin
+ * @type                Mixin
+ *
+ * This mixin apply on the body all the media queries defines in the @config.media.queries configuration.
+ * This mixin apply an animation that do nothing but will dispatch the animationEnd event catchable by javascript
+ * So it will be easy to use the "mediaQuery" function that you can find in the "@coffeekraken/sugar/js/responsive/mediaQuery"
+ * namespace.
+ *
+ * @example             scss
+ * @include Sugar.initBodyMediaQueries();
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                  mediaQuery
  * @namespace             sugar.scss.responsive.mixin
  * @type                  Mixin
  *
@@ -7744,7 +7777,40 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * @name                  media
+ * @name            mediaQueryString
+ * @namespace       sugar.scss.responsive.function
+ * @type            Function
+ *
+ * This function return the media query string depending on the query asked.
+ * The queries are defined in the config.media.queries configuration.
+ *
+ * @param        {String}          $medias       The media query name(s) you want back
+ * @return       {String}                       The media query string
+ *
+ * @example         scss
+ * Sugar.mediaQueryString(mobile); // => screen and (max-width: 639)
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                initBodyMediaQueries
+ * @namespace           sugar.scss.responsive.mixin
+ * @type                Mixin
+ *
+ * This mixin apply on the body all the media queries defines in the @config.media.queries configuration.
+ * This mixin apply an animation that do nothing but will dispatch the animationEnd event catchable by javascript
+ * So it will be easy to use the "mediaQuery" function that you can find in the "@coffeekraken/sugar/js/responsive/mediaQuery"
+ * namespace.
+ *
+ * @example             scss
+ * @include Sugar.initBodyMediaQueries();
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                  mediaQuery
  * @namespace             sugar.scss.responsive.mixin
  * @type                  Mixin
  *
@@ -11976,7 +12042,40 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * @name                  media
+ * @name            mediaQueryString
+ * @namespace       sugar.scss.responsive.function
+ * @type            Function
+ *
+ * This function return the media query string depending on the query asked.
+ * The queries are defined in the config.media.queries configuration.
+ *
+ * @param        {String}          $medias       The media query name(s) you want back
+ * @return       {String}                       The media query string
+ *
+ * @example         scss
+ * Sugar.mediaQueryString(mobile); // => screen and (max-width: 639)
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                initBodyMediaQueries
+ * @namespace           sugar.scss.responsive.mixin
+ * @type                Mixin
+ *
+ * This mixin apply on the body all the media queries defines in the @config.media.queries configuration.
+ * This mixin apply an animation that do nothing but will dispatch the animationEnd event catchable by javascript
+ * So it will be easy to use the "mediaQuery" function that you can find in the "@coffeekraken/sugar/js/responsive/mediaQuery"
+ * namespace.
+ *
+ * @example             scss
+ * @include Sugar.initBodyMediaQueries();
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                  mediaQuery
  * @namespace             sugar.scss.responsive.mixin
  * @type                  Mixin
  *
@@ -16208,7 +16307,40 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * @name                  media
+ * @name            mediaQueryString
+ * @namespace       sugar.scss.responsive.function
+ * @type            Function
+ *
+ * This function return the media query string depending on the query asked.
+ * The queries are defined in the config.media.queries configuration.
+ *
+ * @param        {String}          $medias       The media query name(s) you want back
+ * @return       {String}                       The media query string
+ *
+ * @example         scss
+ * Sugar.mediaQueryString(mobile); // => screen and (max-width: 639)
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                initBodyMediaQueries
+ * @namespace           sugar.scss.responsive.mixin
+ * @type                Mixin
+ *
+ * This mixin apply on the body all the media queries defines in the @config.media.queries configuration.
+ * This mixin apply an animation that do nothing but will dispatch the animationEnd event catchable by javascript
+ * So it will be easy to use the "mediaQuery" function that you can find in the "@coffeekraken/sugar/js/responsive/mediaQuery"
+ * namespace.
+ *
+ * @example             scss
+ * @include Sugar.initBodyMediaQueries();
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                  mediaQuery
  * @namespace             sugar.scss.responsive.mixin
  * @type                  Mixin
  *
@@ -20440,7 +20572,40 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * @name                  media
+ * @name            mediaQueryString
+ * @namespace       sugar.scss.responsive.function
+ * @type            Function
+ *
+ * This function return the media query string depending on the query asked.
+ * The queries are defined in the config.media.queries configuration.
+ *
+ * @param        {String}          $medias       The media query name(s) you want back
+ * @return       {String}                       The media query string
+ *
+ * @example         scss
+ * Sugar.mediaQueryString(mobile); // => screen and (max-width: 639)
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                initBodyMediaQueries
+ * @namespace           sugar.scss.responsive.mixin
+ * @type                Mixin
+ *
+ * This mixin apply on the body all the media queries defines in the @config.media.queries configuration.
+ * This mixin apply an animation that do nothing but will dispatch the animationEnd event catchable by javascript
+ * So it will be easy to use the "mediaQuery" function that you can find in the "@coffeekraken/sugar/js/responsive/mediaQuery"
+ * namespace.
+ *
+ * @example             scss
+ * @include Sugar.initBodyMediaQueries();
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                  mediaQuery
  * @namespace             sugar.scss.responsive.mixin
  * @type                  Mixin
  *
@@ -24668,7 +24833,40 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * @name                  media
+ * @name            mediaQueryString
+ * @namespace       sugar.scss.responsive.function
+ * @type            Function
+ *
+ * This function return the media query string depending on the query asked.
+ * The queries are defined in the config.media.queries configuration.
+ *
+ * @param        {String}          $medias       The media query name(s) you want back
+ * @return       {String}                       The media query string
+ *
+ * @example         scss
+ * Sugar.mediaQueryString(mobile); // => screen and (max-width: 639)
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                initBodyMediaQueries
+ * @namespace           sugar.scss.responsive.mixin
+ * @type                Mixin
+ *
+ * This mixin apply on the body all the media queries defines in the @config.media.queries configuration.
+ * This mixin apply an animation that do nothing but will dispatch the animationEnd event catchable by javascript
+ * So it will be easy to use the "mediaQuery" function that you can find in the "@coffeekraken/sugar/js/responsive/mediaQuery"
+ * namespace.
+ *
+ * @example             scss
+ * @include Sugar.initBodyMediaQueries();
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                  mediaQuery
  * @namespace             sugar.scss.responsive.mixin
  * @type                  Mixin
  *
@@ -25867,6 +26065,49 @@ html {
   color: #848e91;
 }
 
+body {
+  animation-duration: 0.001s;
+}
+
+@media (min-width: 0px) {
+  body {
+    animation-name: mq-mobile;
+  }
+}
+@keyframes mq-mobile {
+  from {
+    clip: rect(1px, auto, auto, auto);
+  }
+  to {
+    clip: rect(0px, auto, auto, auto);
+  }
+}
+@media (min-width: 640px) {
+  body {
+    animation-name: mq-tablet;
+  }
+}
+@keyframes mq-tablet {
+  from {
+    clip: rect(1px, auto, auto, auto);
+  }
+  to {
+    clip: rect(0px, auto, auto, auto);
+  }
+}
+@media (min-width: 1280px) {
+  body {
+    animation-name: mq-desktop;
+  }
+}
+@keyframes mq-desktop {
+  from {
+    clip: rect(1px, auto, auto, auto);
+  }
+  to {
+    clip: rect(0px, auto, auto, auto);
+  }
+}
 html {
   font-family: "Roboto";
   font-size: 1rem;
@@ -29387,7 +29628,40 @@ html {
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * @name                  media
+ * @name            mediaQueryString
+ * @namespace       sugar.scss.responsive.function
+ * @type            Function
+ *
+ * This function return the media query string depending on the query asked.
+ * The queries are defined in the config.media.queries configuration.
+ *
+ * @param        {String}          $medias       The media query name(s) you want back
+ * @return       {String}                       The media query string
+ *
+ * @example         scss
+ * Sugar.mediaQueryString(mobile); // => screen and (max-width: 639)
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                initBodyMediaQueries
+ * @namespace           sugar.scss.responsive.mixin
+ * @type                Mixin
+ *
+ * This mixin apply on the body all the media queries defines in the @config.media.queries configuration.
+ * This mixin apply an animation that do nothing but will dispatch the animationEnd event catchable by javascript
+ * So it will be easy to use the "mediaQuery" function that you can find in the "@coffeekraken/sugar/js/responsive/mediaQuery"
+ * namespace.
+ *
+ * @example             scss
+ * @include Sugar.initBodyMediaQueries();
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                  mediaQuery
  * @namespace             sugar.scss.responsive.mixin
  * @type                  Mixin
  *
@@ -36231,7 +36505,40 @@ s-f-code {
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * @name                  media
+ * @name            mediaQueryString
+ * @namespace       sugar.scss.responsive.function
+ * @type            Function
+ *
+ * This function return the media query string depending on the query asked.
+ * The queries are defined in the config.media.queries configuration.
+ *
+ * @param        {String}          $medias       The media query name(s) you want back
+ * @return       {String}                       The media query string
+ *
+ * @example         scss
+ * Sugar.mediaQueryString(mobile); // => screen and (max-width: 639)
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                initBodyMediaQueries
+ * @namespace           sugar.scss.responsive.mixin
+ * @type                Mixin
+ *
+ * This mixin apply on the body all the media queries defines in the @config.media.queries configuration.
+ * This mixin apply an animation that do nothing but will dispatch the animationEnd event catchable by javascript
+ * So it will be easy to use the "mediaQuery" function that you can find in the "@coffeekraken/sugar/js/responsive/mediaQuery"
+ * namespace.
+ *
+ * @example             scss
+ * @include Sugar.initBodyMediaQueries();
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                  mediaQuery
  * @namespace             sugar.scss.responsive.mixin
  * @type                  Mixin
  *
@@ -40461,7 +40768,40 @@ s-f-code {
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * @name                  media
+ * @name            mediaQueryString
+ * @namespace       sugar.scss.responsive.function
+ * @type            Function
+ *
+ * This function return the media query string depending on the query asked.
+ * The queries are defined in the config.media.queries configuration.
+ *
+ * @param        {String}          $medias       The media query name(s) you want back
+ * @return       {String}                       The media query string
+ *
+ * @example         scss
+ * Sugar.mediaQueryString(mobile); // => screen and (max-width: 639)
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                initBodyMediaQueries
+ * @namespace           sugar.scss.responsive.mixin
+ * @type                Mixin
+ *
+ * This mixin apply on the body all the media queries defines in the @config.media.queries configuration.
+ * This mixin apply an animation that do nothing but will dispatch the animationEnd event catchable by javascript
+ * So it will be easy to use the "mediaQuery" function that you can find in the "@coffeekraken/sugar/js/responsive/mediaQuery"
+ * namespace.
+ *
+ * @example             scss
+ * @include Sugar.initBodyMediaQueries();
+ *
+ * @since           2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * @name                  mediaQuery
  * @namespace             sugar.scss.responsive.mixin
  * @type                  Mixin
  *

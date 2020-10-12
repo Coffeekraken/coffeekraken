@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _SError = _interopRequireDefault(require("../error/SError"));
+
 var _class2 = _interopRequireDefault(require("../is/class"));
 
 var _deepMerge = _interopRequireDefault(require("../object/deepMerge"));
@@ -43,7 +45,9 @@ var _domReady = _interopRequireDefault(require("../dom/domReady"));
 
 var _getTagNameFromHtmlClass = _interopRequireDefault(require("../html/getTagNameFromHtmlClass"));
 
-var _lodash = require("lodash");
+var _mediaQuery = _interopRequireDefault(require("../responsive/mediaQuery"));
+
+var _SMediaQuery = _interopRequireDefault(require("../responsive/SMediaQuery"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -250,8 +254,7 @@ function SWebComponentGenerator(extendsSettings) {
        * @type          Object
        * @private
        *
-       * Store all the computed properties setted using the "setProp" method or through the
-       * attributes
+       * Store all the properties (attributes)
        *
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
@@ -329,6 +332,8 @@ function SWebComponentGenerator(extendsSettings) {
 
       _defineProperty(_assertThisInitialized(_this), "_props", {});
 
+      _defineProperty(_assertThisInitialized(_this), "props", {});
+
       _defineProperty(_assertThisInitialized(_this), "_settings", {});
 
       _defineProperty(_assertThisInitialized(_this), "_metas", {});
@@ -349,7 +354,10 @@ function SWebComponentGenerator(extendsSettings) {
       _this.on('mounted:1', () => {
         // dispatch a ready event
         if (!_this.lit) {
-          // the Lit HTML class dispatch the ready event after having rendering the template the first time
+          // refresh references
+          _this._refreshIdReferences(); // the Lit HTML class dispatch the ready event after having rendering the template the first time
+
+
           _this.dispatch('ready', _assertThisInitialized(_this));
         }
       });
@@ -358,7 +366,21 @@ function SWebComponentGenerator(extendsSettings) {
         // get the inital content
         // this._$initialContent =
         // handle props
-        _this._initProps(); // apply the $node class
+        _this._initProps();
+
+        _this._mediaQuery = new _SMediaQuery.default('*');
+
+        _this._mediaQuery.on('match', media => {
+          Object.keys(_this.constructor.props).forEach(prop => {
+            if (!_this._props[prop].responsive || _this._props[prop].responsiveValues[media.name] !== undefined) return;
+
+            if (_this.hasAttribute("".concat((0, _uncamelize.default)(prop), "-").concat(media.name))) {
+              var value = (0, _parse.default)(_this.getAttribute("".concat((0, _uncamelize.default)(prop), "-").concat(media.name)));
+
+              _this.setProp(prop, value, media.name);
+            }
+          });
+        }); // apply the $node class
 
 
         var currentClassName = _this.getAttribute('class') || '';
@@ -371,11 +393,11 @@ function SWebComponentGenerator(extendsSettings) {
       return _this;
     }
     /**
-     * @name          $root
+     * @name          props
      * @type          Function
      * @get
      *
-     * Access the root element of the webcomponent from which the requests like ```$``` and ```$$``` will be executed
+     * Get the properties values object
      *
      * @since         2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -431,6 +453,25 @@ function SWebComponentGenerator(extendsSettings) {
         }
 
         return null;
+      }
+    }, {
+      key: "setProp",
+      value: function setProp(prop, value, media) {
+        if (media === void 0) {
+          media = null;
+        }
+
+        if (!media) return this.props[prop] = value;
+
+        if (!this._props[prop].responsive) {
+          throw new _SError.default("You try to set the responsive property \"".concat(prop, "\" for the media \"").concat(media, "\" but this property is not defined as \"responsive\"..."));
+        }
+
+        console.log('s', prop, media, value);
+        this._props[prop].responsiveValues[media] = value;
+        console.log(this._props[prop]); // trigger a "prop" event
+
+        this._triggerPropsEvents(prop);
       }
       /**
        * @name          addClass
@@ -519,45 +560,116 @@ function SWebComponentGenerator(extendsSettings) {
        */
 
     }, {
+      key: "_refreshIdReferences",
+      value: function _refreshIdReferences() {
+        var $refs = this.$root.querySelectorAll('[id]');
+        Array.from($refs).forEach($item => {
+          if (this["$".concat($item.id)] === $item) return;
+          this["$".concat($item.id)] = $item;
+        });
+      }
+    }, {
       key: "_initProps",
       value: function _initProps() {
         var _this2 = this;
 
-        // handle props
-        for (var key in this._settings.props) {
-          var attr = this.getAttribute((0, _uncamelize.default)(key));
+        var _loop = function _loop(prop) {
+          var attr = _this2.getAttribute((0, _uncamelize.default)(prop));
 
-          if (!attr && this.hasAttribute((0, _uncamelize.default)(key))) {
+          if (!attr && _this2.hasAttribute((0, _uncamelize.default)(prop))) {
             attr = true;
           }
 
-          this._props[key] = _objectSpread(_objectSpread({}, this._settings.props[key]), {}, {
-            value: attr ? (0, _parse.default)(attr) : this._settings.props[key].default,
-            previousValue: undefined
+          _this2.on("prop.".concat(prop, ".*"), update => {
+            _this2._handlePhysicalProps(prop);
+
+            _this2.handleProp(prop, update);
           });
+
+          var originalProp = void 0;
+          if (_this2[prop] !== undefined) originalProp = _this2[prop];
+          Object.defineProperty(_this2._props, prop, {
+            enumerable: false,
+            writable: true,
+            configurable: false,
+            value: _objectSpread(_objectSpread({}, _this2._settings.props[prop]), {}, {
+              previousValue: undefined,
+              value: attr ? (0, _parse.default)(attr) : _this2._settings.props[prop].default,
+              responsiveValues: {}
+            })
+          });
+          Object.defineProperty(_this2.props, prop, {
+            enumerable: true,
+            configurable: false,
+            get: () => {
+              if (_this2._props[prop].responsive && _this2._props[prop].responsiveValues) {
+                if (_this2._props[prop].responsiveValues[_SMediaQuery.default.getActiveMedia()] !== undefined) {
+                  return _this2._props[prop].responsiveValues[_SMediaQuery.default.getActiveMedia()];
+                }
+              }
+
+              return _this2._props[prop].value;
+            },
+            set: value => {
+              _this2._props[prop].previousValue = _this2._props[prop].value;
+              _this2._props[prop].value = value;
+
+              if (originalProp) {
+                Object.getOwnPropertyDescriptor(_this2.prototype, prop).set.call(_this2, value);
+              } // trigger a "prop" event
+
+
+              _this2._triggerPropsEvents(prop);
+            }
+          });
+        };
+
+        // handle props
+        for (var prop in this._settings.props) {
+          _loop(prop);
         } // handle props
 
 
-        var _loop = function _loop(_key) {
+        for (var _prop in this._settings.props) {
           // if need to be watches deeply
-          if (_this2._props[_key].watch) {
-            _this2._props[_key] = (0, _watch.default)(_this2._props[_key], {
-              deep: _this2._props[_key].watch === 'deep'
-            });
-
-            _this2._props[_key].on('value.*:+(set|delete|push|pop)', update => {
-              if (update.path.split('.').length === 1) {
-                _this2.prop(update.path, update.value);
-              } else {
-                _this2.handleProp(update.path, _this2._props[_key]);
-              }
+          if (this._props[_prop].watch) {
+            this._props[_prop] = (0, _watch.default)(this._props[_prop], {
+              deep: this._props[_prop].watch === 'deep'
             });
           }
-        };
-
-        for (var _key in this._settings.props) {
-          _loop(_key);
         }
+      }
+      /**
+       * @name          handleProp
+       * @type          Function
+       * @async
+       *
+       * This method is supposed to be overrided by your component integration
+       * to handle the props updates and delete actions.
+       * The passed description object has this format:
+       * ```js
+       * {
+       *    action: 'set|delete',
+       *    prop: 'cool',
+       *    previousValue: '...',
+       *    value: '...'
+       * }
+       * ```
+       *
+       * @param     {String}      prop      The property name that has been updated or deleted
+       * @param     {Object}      descriptionObj      The description object that describe the update or delete action
+       * @return    {Promise}                A promise that has to be resolved once the update has been handled correctly. You have to pass the prop variable to the resolve function
+       *
+       * @since     2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "handleProp",
+      value: function handleProp(prop, propObj) {
+        return new Promise((resolve, reject) => {
+          resolve(prop);
+        });
       }
       /**
        * @name          _mount
@@ -596,38 +708,6 @@ function SWebComponentGenerator(extendsSettings) {
 
         return _mount;
       }()
-      /**
-       * @name          handleProp
-       * @type          Function
-       * @async
-       *
-       * This method is supposed to be overrided by your component integration
-       * to handle the props updates and delete actions.
-       * The passed description object has this format:
-       * ```js
-       * {
-       *    action: 'set|delete',
-       *    path: 'something.cool',
-       *    oldValue: '...',
-       *    value: '...'
-       * }
-       * ```
-       *
-       * @param     {String}      prop      The property name that has been updated or deleted
-       * @param     {Object}      descriptionObj      The description object that describe the update or delete action
-       * @return    {Promise}                A promise that has to be resolved once the update has been handled correctly. You have to pass the prop variable to the resolve function
-       *
-       * @since     2.0.0
-       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-
-    }, {
-      key: "handleProp",
-      value: function handleProp(prop, descriptionObj) {
-        return new Promise((resolve, reject) => {
-          resolve(prop);
-        });
-      }
       /**
        * @name          on
        * @type          Function
@@ -815,7 +895,7 @@ function SWebComponentGenerator(extendsSettings) {
 
         var newValue = (0, _parse.default)(newVal) || false; // set the value into the props
 
-        this.prop(attrName, newValue);
+        this[attrName] = newValue;
       }
       /**
        * @name            selector
@@ -838,9 +918,6 @@ function SWebComponentGenerator(extendsSettings) {
           cls = '';
         }
 
-        // if (cls.includes(this.metas.dashName)) {
-        //   return cls;
-        // }
         var split = cls.split(' ');
         var finalSelectorArray = [];
         split.forEach(part => {
@@ -885,32 +962,24 @@ function SWebComponentGenerator(extendsSettings) {
        *
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+      // prop(prop, value = undefined) {
+      //   // camelize the attribute name
+      //   prop = __camelize(prop);
+      //   if (value === undefined) {
+      //     return this._props[prop] ? this._props[prop].value : undefined;
+      //   }
+      //   this._props[prop].previousValue = this._props[prop]
+      //     ? this._props[prop].value
+      //     : undefined;
+      //   this._props[prop].value = value;
+      //   this.handleProp(prop, this._props[prop]);
+      //   // handle physical props
+      //   this._handlePhysicalProps(prop);
+      //   // trigger a "prop" event
+      //   this._triggerPropsEvents(prop);
+      //   return value;
+      // }
 
-    }, {
-      key: "prop",
-      value: function prop(_prop, value) {
-        if (value === void 0) {
-          value = undefined;
-        }
-
-        // camelize the attribute name
-        _prop = (0, _camelize.default)(_prop);
-
-        if (value === undefined) {
-          return this._props[_prop] ? this._props[_prop].value : undefined;
-        }
-
-        this._props[_prop].previousValue = this._props[_prop] ? this._props[_prop].value : undefined;
-        this._props[_prop].value = value;
-        this.handleProp(_prop, this._props[_prop]); // handle physical props
-
-        this._handlePhysicalProps(_prop); // trigger a "prop" event
-
-
-        this._triggerPropsEvents(_prop);
-
-        return value;
-      }
       /**
        * @name        _triggerPropsEvents
        * @type        Function
@@ -931,7 +1000,8 @@ function SWebComponentGenerator(extendsSettings) {
           prop,
           action: this._props[prop].previousValue !== null ? this._props[prop].value !== null ? 'set' : 'delete' : 'set',
           value: this._props[prop].value,
-          previousValue: this._props[prop].previousValue
+          previousValue: this._props[prop].previousValue,
+          media: _SMediaQuery.default.getActiveMedia()
         };
         this.dispatch("prop.".concat(prop, ".").concat(eventObj.action), eventObj);
       }
@@ -949,8 +1019,8 @@ function SWebComponentGenerator(extendsSettings) {
     }, {
       key: "_handlePhysicalProps",
       value: function _handlePhysicalProps() {
-        for (var _len = arguments.length, props = new Array(_len), _key2 = 0; _key2 < _len; _key2++) {
-          props[_key2] = arguments[_key2];
+        for (var _len = arguments.length, props = new Array(_len), _key = 0; _key < _len; _key++) {
+          props[_key] = arguments[_key];
         }
 
         if (!props || props.length === 0) props = Object.keys(this._props); // loop on each required props
@@ -997,11 +1067,11 @@ function SWebComponentGenerator(extendsSettings) {
     }, {
       key: "_checkPropsDefinition",
       value: function _checkPropsDefinition() {
-        for (var _len2 = arguments.length, props = new Array(_len2), _key3 = 0; _key3 < _len2; _key3++) {
-          props[_key3] = arguments[_key3];
+        for (var _len2 = arguments.length, props = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          props[_key2] = arguments[_key2];
         }
 
-        if (!props || props.length === 0) props = Object.keys(this._props);
+        if (!props || props.length === 0) props = Object.keys(this.constructor.props);
         props.forEach(prop => {
           var propObj = this._props[prop];
           var validationResult = (0, _validateValue.default)(propObj.value, propObj, {
@@ -1011,6 +1081,22 @@ function SWebComponentGenerator(extendsSettings) {
           if (validationResult !== true) throw new Error(validationResult);
         });
       }
+    }, {
+      key: "props",
+      get: function get() {
+        this.props;
+      }
+      /**
+       * @name          $root
+       * @type          Function
+       * @get
+       *
+       * Access the root element of the webcomponent from which the requests like ```$``` and ```$$``` will be executed
+       *
+       * @since         2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
     }, {
       key: "$root",
       get: function get() {

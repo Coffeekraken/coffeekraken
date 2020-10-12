@@ -180,7 +180,7 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
 
       _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(function () {
         var tplFn = this.constructor.template.bind(this);
-        var tpl = tplFn(this._props, this._settings, this.lit);
+        var tpl = tplFn(this.props, this._settings, this.lit);
         (0, _litHtml.render)(tpl, this.$container);
       }, 50));
 
@@ -190,8 +190,6 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
           _this.$container = _assertThisInitialized(_this);
 
           _this.addClass('', _assertThisInitialized(_this));
-
-          console.log('HA');
         } else {
           _this.$container = document.createElement('div');
 
@@ -201,10 +199,18 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
         } // render for the first time
 
 
-        _this.render(); // dispatch a ready event
+        _this.render(); // refresh references
 
 
-        _this.dispatch('ready', _assertThisInitialized(_this));
+        _this._refreshIdReferences(); // dispatch a ready event
+
+
+        _this.dispatch('ready', _assertThisInitialized(_this)); // listen for media query change to update the view
+
+
+        _this._mediaQuery.on('match', media => {
+          _this.render();
+        });
       });
 
       return _this;

@@ -48,6 +48,9 @@ $_sugar-inited: false;
     // font faces
     @include init-font();
 
+    // body media queries
+    @include initBodyMediaQueries();
+
     // typography
     @include init-typography();
   }

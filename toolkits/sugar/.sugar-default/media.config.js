@@ -32,39 +32,39 @@ module.exports = {
       'max-width': 639
     },
 
-    /**
-     * @name          mobile-portrait
-     * @namespace     config.media.queries
-     * @type          Object
-     * @default       {'min-width': null, 'max-width': 480}
-     *
-     * Specify the media query arguments needed to target mobile-portrait
-     *
-     * @since       2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    'mobile-portrait': {
-      'min-width': null,
-      'max-width': 480,
-      orientation: 'portrait'
-    },
+    // /**
+    //  * @name          mobile-portrait
+    //  * @namespace     config.media.queries
+    //  * @type          Object
+    //  * @default       {'min-width': null, 'max-width': 480}
+    //  *
+    //  * Specify the media query arguments needed to target mobile-portrait
+    //  *
+    //  * @since       2.0.0
+    //  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //  */
+    // 'mobile-portrait': {
+    //   'min-width': null,
+    //   'max-width': 480,
+    //   orientation: 'portrait'
+    // },
 
-    /**
-     * @name          mobile-landscape
-     * @namespace     config.media.queries
-     * @type          Object
-     * @default       {'min-width': null, 'max-width': 639}
-     *
-     * Specify the media query arguments needed to target mobile-landscape
-     *
-     * @since       2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    'mobile-landscape': {
-      'min-width': null,
-      'max-width': 639,
-      oprientation: 'landscape'
-    },
+    // /**
+    //  * @name          mobile-landscape
+    //  * @namespace     config.media.queries
+    //  * @type          Object
+    //  * @default       {'min-width': null, 'max-width': 639}
+    //  *
+    //  * Specify the media query arguments needed to target mobile-landscape
+    //  *
+    //  * @since       2.0.0
+    //  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //  */
+    // 'mobile-landscape': {
+    //   'min-width': null,
+    //   'max-width': 639,
+    //   oprientation: 'landscape'
+    // },
 
     /**
      * @name          tablet
@@ -82,39 +82,39 @@ module.exports = {
       'max-width': 1279
     },
 
-    /**
-     * @name          tablet-portrait
-     * @namespace     config.media.queries
-     * @type          Object
-     * @default       {'min-width': 640, 'max-width': 1023}
-     *
-     * Specify the media query arguments needed to target tablet-portrait
-     *
-     * @since       2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    'tablet-portrait': {
-      'min-width': 640,
-      'max-width': 1023,
-      orientation: 'portrait'
-    },
+    // /**
+    //  * @name          tablet-portrait
+    //  * @namespace     config.media.queries
+    //  * @type          Object
+    //  * @default       {'min-width': 640, 'max-width': 1023}
+    //  *
+    //  * Specify the media query arguments needed to target tablet-portrait
+    //  *
+    //  * @since       2.0.0
+    //  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //  */
+    // 'tablet-portrait': {
+    //   'min-width': 640,
+    //   'max-width': 1023,
+    //   orientation: 'portrait'
+    // },
 
-    /**
-     * @name          tablet-landscape
-     * @namespace     config.media.queries
-     * @type          Object
-     * @default       {'min-width': 1024, 'max-width': 1279}
-     *
-     * Specify the media query arguments needed to target tablet-landscape
-     *
-     * @since       2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    'tablet-landscape': {
-      'min-width': 1024,
-      'max-width': 1279,
-      oprientation: 'landscape'
-    },
+    // /**
+    //  * @name          tablet-landscape
+    //  * @namespace     config.media.queries
+    //  * @type          Object
+    //  * @default       {'min-width': 1024, 'max-width': 1279}
+    //  *
+    //  * Specify the media query arguments needed to target tablet-landscape
+    //  *
+    //  * @since       2.0.0
+    //  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //  */
+    // 'tablet-landscape': {
+    //   'min-width': 1024,
+    //   'max-width': 1279,
+    //   oprientation: 'landscape'
+    // },
 
     /**
      * @name          desktop

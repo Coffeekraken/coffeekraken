@@ -1,16 +1,4 @@
 {
-    "assets": {
-        "css": {
-            "default": {
-                "path": "dist/css/index.css"
-            }
-        },
-        "js": {
-            "default": {
-                "path": "dist/js/index.js"
-            }
-        }
-    },
     "children": {
         "node_modules/@coffeekraken/s-filtrable-input": {
             "src": {

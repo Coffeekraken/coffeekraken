@@ -49,7 +49,8 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
     },
     noItemText: {
       type: 'String',
-      default: 'No result sorry...'
+      default: 'No result sorry...',
+      responsive: true
     },
     inputThrottle: {
       type: 'Number',
@@ -72,14 +73,14 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
       ${this}
       <ul class="${this.selector('list')}" tabindex="1">
         ${
-          props.items.value.length === 0
+          props.items.length === 0
             ? lit.html`
               <li class="${this.selector('list-no-item')}">
                 ${settings.template.noItem(settings, lit)}
               </li>
             `
             : lit.html`
-            ${props.items.value.map((item, i) =>
+            ${props.items.map((item, i) =>
               i < this._maxDisplayItems
                 ? lit.html`
                 <li class="${this.selector('list-item')} ${
@@ -148,7 +149,7 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
           template: {
             noItem: (settings, lit) => lit.html`
               <div class="${this.selector('list-no-item-text')}">
-                ${this.prop('noItemText')}
+                ${this.props.noItemText}
               </div>
             `,
             item: (itemObj, settings, lit) => lit.html`
@@ -189,15 +190,15 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
         clearTimeout(inputThrottleTimeout);
         inputThrottleTimeout = setTimeout(() => {
           this.dispatch('input', this.value);
-        }, this.prop('inputThrottle'));
+        }, this.props.inputThrottle);
       });
 
       let filterTimeout;
       this.addEventListener('input', (e) => {
         clearTimeout(filterTimeout);
-        if (this.prop('loading')) return;
+        if (this.props.loading) return;
         filterTimeout = setTimeout(async () => {
-          this.prop('loading', true);
+          this.props.loading = true;
           this._maxDisplayItems = this._settings.maxDisplayItems;
           this._preselectedItemIdx = -1;
           this._selectedItemIdx = -1;
@@ -205,8 +206,8 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
           const newItemsArray = await this._settings.filter.function(
             this._filterString
           );
-          this.prop('loading', false);
-          this.prop('items', newItemsArray);
+          this.props.loading = false;
+          this.props.items = newItemsArray;
           this._$list.scrollTop = 0;
         }, this._settings.filter.throttleTimeout);
       });
@@ -223,7 +224,7 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
           e.srcElement.scrollHeight - e.srcElement.scrollTop <=
           e.srcElement.clientHeight + 50
         ) {
-          if (this._maxDisplayItems < this._props.items.value.length) {
+          if (this._maxDisplayItems < this.props.items.length) {
             this._maxDisplayItems += this._settings.maxDisplayItems;
             this.render();
           }
@@ -306,19 +307,17 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
   select(idx) {
     if (typeof idx !== 'number') return false;
     // check that we have an item with this idx
-    if (idx < 0 || idx >= this._props.items.value.length) return false;
+    if (idx < 0 || idx >= this.props.items.length) return false;
     // set the idx to the selectedItemIndex variable
     this._selectedItemIdx = idx;
     this._preselectedItemIdx = idx;
     // render the component
     this.render();
     // make a clone of the selected item
-    const selectedItem = __clone(
-      this._props.items.value[this._selectedItemIdx]
-    );
+    const selectedItem = __clone(this.props.items[this._selectedItemIdx]);
     // set the value into the actual input
     let inputValue;
-    const itemValue = this.prop('itemValue');
+    const itemValue = this.props.itemValue;
     if (typeof itemValue === 'string') inputValue = selectedItem[itemValue];
     else if (typeof itemValue === 'function')
       inputValue = itemValue(selectedItem);
@@ -362,7 +361,7 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
     // check that we have an item selected
     if (this._preselectedItemIdx === -1) return;
     // make sure the selected item exist in the stack
-    if (!this._props.items.value[this._preselectedItemIdx]) return;
+    if (!this.items[this._preselectedItemIdx]) return;
     // select the item
     return this.select(this._preselectedItemIdx);
   }
@@ -404,7 +403,7 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
    */
   down() {
     // update the selected index
-    if (this._preselectedItemIdx === this._props.items.value.length - 1) return;
+    if (this._preselectedItemIdx === this.props.items.length - 1) return;
     this._preselectedItemIdx++;
     // render the component
     this.render();
@@ -442,7 +441,7 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
     return new Promise((resolve) => {
       // save the items if needed
       if (!this._originalItems) {
-        this._originalItems = __clone(this._props.items.value, true);
+        this._originalItems = __clone(this.props.items, true);
       }
       // search in original items
       const newItems = this._originalItems.filter((item) => {

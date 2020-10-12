@@ -116,8 +116,14 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
         }
         // render for the first time
         this.render();
+        // refresh references
+        this._refreshIdReferences();
         // dispatch a ready event
         this.dispatch('ready', this);
+        // listen for media query change to update the view
+        this._mediaQuery.on('match', (media) => {
+          this.render();
+        });
       });
     }
 
@@ -145,7 +151,7 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
      */
     render = __throttle(function () {
       const tplFn = this.constructor.template.bind(this);
-      const tpl = tplFn(this._props, this._settings, this.lit);
+      const tpl = tplFn(this.props, this._settings, this.lit);
       render(tpl, this.$container);
     }, 50);
 

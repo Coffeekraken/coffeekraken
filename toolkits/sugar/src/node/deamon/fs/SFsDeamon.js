@@ -1,7 +1,7 @@
 const __SPromise = require('../../promise/SPromise');
 const __deepMerge = require('../../object/deepMerge');
 const __SFsDeamonCli = require('./SFsDeamonCli');
-const __SFsDeamonProcess = require('./SFsDeamonProcess');
+const __SFsDeamonProcessManager = require('./SFsDeamonProcessManager');
 const __SDeamon = require('../SDeamon');
 const __toString = require('../../string/toString');
 const __onProcessExit = require('../../process/onProcessExit');
@@ -97,7 +97,7 @@ module.exports = class SFsDeamon extends __SDeamon {
   watch(watch, settings = {}) {
     settings = __deepMerge(this._settings, settings);
     watch = typeof watch === 'string' ? watch : watch.watch;
-    const watchProcess = new __SFsDeamonProcess({}, {});
+    const watchProcess = new __SFsDeamonProcessManager({}, {});
     watchProcess.run({
       watch
     });

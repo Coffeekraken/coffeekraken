@@ -1,4 +1,4 @@
-const __SProcess = require('../../process/SProcess');
+const __SProcessManager = require('../../process/SProcess');
 const __SBuildFrontspecActionsStream = require('./SBuildFrontspecActionsStream');
 const __deepMerge = require('../../object/deepMerge');
 
@@ -13,7 +13,7 @@ const __deepMerge = require('../../object/deepMerge');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildFrontspecProcess extends __SProcess {
+module.exports = class SBuildFrontspecProcess extends __SProcessManager {
   /**
    * @name          constructor
    * @type          Function

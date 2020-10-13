@@ -1,4 +1,4 @@
-const __SProcess = require('../../process/SProcess');
+const __SProcessManager = require('../../process/SProcess');
 const __SBuildScssActionsStream = require('./SBuildScssActionsStream');
 const __SPromise = require('../../promise/SPromise');
 const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
@@ -15,7 +15,7 @@ const __deepMerge = require('../../object/deepMerge');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildScssProcess extends __SProcess {
+module.exports = class SBuildScssProcess extends __SProcessManager {
   /**
    * @name          constructor
    * @type          Function

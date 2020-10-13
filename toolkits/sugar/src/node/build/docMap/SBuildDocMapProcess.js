@@ -1,4 +1,4 @@
-const __SProcess = require('../../process/SProcess');
+const __SProcessManager = require('../../process/SProcess');
 const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
 const __SBuildDocMapActionsStream = require('./SBuildDocMapActionsStream');
 
@@ -13,7 +13,7 @@ const __SBuildDocMapActionsStream = require('./SBuildDocMapActionsStream');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildDocMapProcess extends __SProcess {
+module.exports = class SBuildDocMapProcess extends __SProcessManager {
   /**
    * @name          constructor
    * @type          Function

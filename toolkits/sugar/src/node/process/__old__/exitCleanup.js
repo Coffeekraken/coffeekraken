@@ -9,7 +9,7 @@ const __wait = require('../time/wait');
 const __SBlessedOutput = require('../blessed/SBlessedOutput');
 const __sugarHeading = require('../ascii/sugarHeading');
 const __packageJson = require('../package/json');
-const __SChildProcess = require('../process/SChildProcess');
+const __SChildProcessManager = require('../process/SChildProcess');
 
 /**
  * @name              exitCleanup
@@ -93,7 +93,7 @@ module.exports = function exitCleanup() {
       group: 'Forgotten processes',
       value: 'Cleaning the forgotten process(es)...'
     });
-    const childProcess = new __SChildProcess('sugar util.kill all', {});
+    const childProcess = new __SChildProcessManager('sugar util.kill all', {});
     await childProcess
       .run()
       .on('log,error', (value) => {

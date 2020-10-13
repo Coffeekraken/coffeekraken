@@ -1,5 +1,5 @@
 const __SInterface = require('../../class/SInterface');
-const __SProcessInterface = require('../../process/SProcess');
+const __SProcessManagerInterface = require('../../process/SProcessManager');
 
 /**
  * @name                SCliInterface
@@ -21,7 +21,7 @@ module.exports = class SCliInterface extends __SInterface {
       static: true
     },
     processClass: {
-      type: 'SProcess',
+      type: 'SProcessManager',
       required: true,
       static: true
     },

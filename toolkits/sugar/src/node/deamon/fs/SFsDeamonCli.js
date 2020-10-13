@@ -1,6 +1,6 @@
 const __SCli = require('../../cli/SCli');
 const __deepMerge = require('../../object/deepMerge');
-const __SFsDeamonProcess = require('./SFsDeamonProcess');
+const __SFsDeamonProcessManager = require('./SFsDeamonProcessManager');
 const __SFsDeamonInterface = require('./interface/SFsDeamonInterface');
 
 /**
@@ -46,7 +46,7 @@ module.exports = class SFsDeamonCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static processClass = __SFsDeamonProcess;
+  static processClass = __SFsDeamonProcessManager;
 
   /**
    * @name          constructor

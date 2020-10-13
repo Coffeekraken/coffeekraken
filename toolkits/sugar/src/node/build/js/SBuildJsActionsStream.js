@@ -11,6 +11,7 @@ const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAct
 const __SDocMapStreamAction = require('../../stream/actions/SDocMapStreamAction');
 const __SFrontspecJsStreamAction = require('../../stream/actions/SFrontspecJsStreamAction');
 const __path = require('path');
+const __SJestStreamAction = require('../../stream/actions/SJestStreamAction');
 
 /**
  * @name            SBuildJsActionsStream
@@ -53,6 +54,7 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
       {
         filesResolver: __SFsFilesResolverStreamAction,
         // fsCache: __SFsCacheStreamAction,
+        jest: __SJestStreamAction,
         readFile: __SFsReadFileStreamAction,
         frontspecJs: __SFrontspecJsStreamAction,
         webpack: __SWebpackStreamAction,

@@ -3,19 +3,19 @@ const __tmp = require('tmp');
 const __isClass = require('../is/class');
 const __packageJson = require('../package/json');
 const __buildCommandLine = require('./buildCommandLine');
-const __SChildProcess = require('../process/SChildProcess');
+const __SChildProcessManager = require('../process/SChildProcessManager');
 const __deepMerge = require('../object/deepMerge');
 const __argsToObject = require('../cli/argsToObject');
 const __isChildProcess = require('../is/childProcess');
 const __output = require('../process/output');
 const __parseArgs = require('../cli/parseArgs');
 const __toString = require('../string/toString');
-const __SProcessInterface = require('../process/interface/SProcessInterface');
+const __SProcessManagerInterface = require('../process/interface/SProcessManagerInterface');
 const __SCliInterface = require('./interface/SCliInterface');
 const __SInterface = require('../class/SInterface');
 const __sugarHeading = require('../ascii/sugarHeading');
 const __SPromise = require('../promise/SPromise');
-const __SProcess = require('../process/SProcess');
+const __SProcessManager = require('../process/SProcessManager');
 
 /**
  * @name                SCli
@@ -115,9 +115,9 @@ class SCli extends __SPromise {
 
     if (!this._paramsObj.forceChildProcess || !this.command) {
       // run the process
-      const SProcessInstance = this.constructor.processClass;
+      const SProcessManagerInstance = this.constructor.processClass;
 
-      this._processInstance = new SProcessInstance(
+      this._processManagerInstance = new SProcessManagerInstance(
         this._paramsObj,
         this._settings.processSettings
       );
@@ -128,40 +128,40 @@ class SCli extends __SPromise {
         )
           ? settings.childProcessSettings.triggerParent.join(',')
           : '*';
-        this._processInstance.on(stacks, (value, metas) => {
-          __SChildProcess.triggerParent(metas.stack, value, metas);
+        this._processManagerInstance.on(stacks, (value, metas) => {
+          __SChildProcessManager.triggerParent(metas.stack, value, metas);
         });
       }
     } else {
-      const childProcess = new __SChildProcess(this.command, {
+      const childProcessManager = new __SChildProcessManager(this.command, {
         id: settings.id,
         definitionObj: this.interface.definitionObj,
         defaultParams: settings.defaultParams,
         ...settings.childProcessSettings
       });
-      childProcess.on('state', (state) => {
-        this.state = state;
-      });
+      // childProcessManager.on('state', (state) => {
+      //   this.state = state;
+      // });
 
-      this._processInstance = childProcess;
+      this._processManagerInstance = childProcessManager;
     }
 
     if (!__isChildProcess()) {
       if (settings.output) {
         if (__isClass(settings.output)) {
           const outputInstance = new settings.output(
-            this._processInstance,
+            this._processManagerInstance,
             this._paramsObj
           );
         } else {
           const outputSettings =
             typeof settings.output === 'object' ? settings.output : {};
-          __output(this._processInstance, outputSettings);
+          __output(this._processManagerInstance, outputSettings);
         }
       }
     }
 
-    __SPromise.pipe(this._processInstance, this);
+    __SPromise.pipe(this._processManagerInstance, this);
   }
 
   /**
@@ -276,11 +276,11 @@ class SCli extends __SPromise {
       paramsObj
     );
 
-    if (this._processInstance instanceof __SChildProcess) {
+    if (this._processManagerInstance instanceof __SChildProcessManager) {
       paramsObj.forceChildProcess = false;
     }
 
-    this._runningProcess = this._processInstance.run(
+    this._runningProcess = this._processManagerInstance.run(
       paramsObj,
       settings.processSettings
     );
@@ -288,6 +288,10 @@ class SCli extends __SPromise {
     this._runningProcess.on('close', (args) => {
       this._runningProcess = null;
     });
+
+    // this._runningProcess.on('*', (d, v) => {
+    //   console.log(v.stack);
+    // });
 
     // ${__sugarHeading({
     //   version: __packageJson(__dirname).version
@@ -300,7 +304,7 @@ class SCli extends __SPromise {
           this._settings.name || this._settings.id
         }</primary>" process...`
       };
-      this._processInstance.trigger('log', launchingLogObj);
+      this._processManagerInstance.trigger('log', launchingLogObj);
     }
 
     // save running process params

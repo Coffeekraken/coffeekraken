@@ -23,11 +23,6 @@ const __isChildProcess = require('./is/childProcess');
 
 // global IPC server
 __SIpc.initGlobalInstance();
-// if (!__isChildProcess()) {
-//   __SIpc.on('error', (data, socket) => {
-//     nativeConsole.log(data);
-//   });
-// }
 
 // init env
 __initEnv();

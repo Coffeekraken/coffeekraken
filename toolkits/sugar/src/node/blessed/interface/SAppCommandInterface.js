@@ -1,6 +1,6 @@
 const __SInterface = require('../../class/SInterface');
 const __SOutputProcessInterface = require('./SOutputProcessInterface');
-const __SProcessInterface = require('../../process/interface/SProcessInterface');
+const __SProcessManagerInterface = require('../../process/interface/SProcessManagerInterface');
 const __SOutputLogInterface = require('./SOutputLogInterface');
 const __SCliInterface = require('../../cli/interface/SCliInterface');
 

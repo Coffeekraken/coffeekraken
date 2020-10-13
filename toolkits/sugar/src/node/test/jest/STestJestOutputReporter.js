@@ -92,4 +92,4 @@ class STestJestOutputReporter {
   }
 }
 
-module.exports = SJestOutputReporter;
+module.exports = STestJestOutputReporter;

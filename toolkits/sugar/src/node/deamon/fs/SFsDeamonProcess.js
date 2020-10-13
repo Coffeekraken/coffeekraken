@@ -6,7 +6,7 @@ const __SFsFile = require('../../fs/SFsFile');
 const __packageRoot = require('../../path/packageRoot');
 
 /**
- * @name                SFsDeamon
+ * @name                SFsDeamonProcess
  * @namespace           sugar.node.deamon.fs
  * @type                Class
  * @extends             SProcess
@@ -15,8 +15,8 @@ const __packageRoot = require('../../path/packageRoot');
  * updated, deleted or created on the filesystem.
  *
  * @example           js
- * const SFsDeamon = require('@coffeekraken/sugar/node/deamon/fs/SFsDeamon');
- * const deamon = new SFsDeamon();
+ * const SFsDeamonProcess = require('@coffeekraken/sugar/node/deamon/fs/SFsDeamonProcess');
+ * const deamon = new SFsDeamonProcess();
  * demon.on('update', up => {
  *    // do somethong on update
  * });
@@ -41,13 +41,12 @@ module.exports = class SFsDeamonProcess extends __SProcess {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(initialParams = {}, settings = {}) {
+  constructor(settings = {}) {
     super(
-      initialParams,
       __deepMerge(
         {
           id: 'SFsDeamonProcess',
-          name: 'Filesystem Deamon'
+          name: 'Filesystem Deamon Process'
         },
         settings
       )
@@ -86,76 +85,71 @@ module.exports = class SFsDeamonProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(argsObj, settings = {}) {
-    settings = __deepMerge(this._settings, settings);
-    const promise = new __SPromise(
-      (resolve, reject, trigger, cancel) => {
-        const runningTests = {};
+    settings = __deepMerge(this._settings, {}, settings);
 
+    this.log({
+      group: 'Initialization',
+      value: `#start Starting the "<yellow>${settings.name}</yellow>" filesystem deamon...`
+    });
+
+    this._watcher = __chokidar
+      .watch(argsObj.watch, {
+        persistent: true,
+        ignoreInitial: true,
+        followSymlinks: true,
+        ...settings
+      })
+      .on('ready', () => {
         this.log({
           group: 'Initialization',
-          value: `#start Starting the "<yellow>${settings.name}</yellow>" filesystem deamon...`
+          value: `#success The "<yellow>${settings.name}</yellow>" deamon is <green>ready</green>`
+        });
+      })
+      .on('change', (filepath) => {
+        const file = this._getFileInstanceFromPath(filepath);
+        delete file._settings;
+        this.log({
+          group: 'Updated files',
+          value: `File updated: "<yellow>${file.path.replace(
+            __packageRoot(file.path) + '/',
+            ''
+          )}</yellow>" <cyan>${file.size}</cyan>mb`
+        });
+        trigger('update', file);
+      })
+      .on('add', (filepath) => {
+        const file = this._getFileInstanceFromPath(filepath);
+        delete file._settings;
+        this.log({
+          group: 'Added files',
+          value: `File added: "<green>${file.path.replace(
+            __packageRoot(file.path) + '/',
+            ''
+          )}</green>" <cyan>${file.size}</cyan>mb`
         });
 
-        __chokidar
-          .watch(argsObj.watch, {
-            persistent: true,
-            ignoreInitial: true,
-            followSymlinks: true,
-            ...settings
-          })
-          .on('ready', () => {
-            this.log({
-              group: 'Initialization',
-              value: `#success The "<yellow>${settings.name}</yellow>" deamon is <green>ready</green>`
-            });
-          })
-          .on('change', (filepath) => {
-            const file = this._getFileInstanceFromPath(filepath);
-            delete file._settings;
-            this.log({
-              group: 'Updated files',
-              value: `File updated: "<yellow>${file.path.replace(
-                __packageRoot(file.path) + '/',
-                ''
-              )}</yellow>" <cyan>${file.size}</cyan>mb`
-            });
-            trigger('update', file);
-          })
-          .on('add', (filepath) => {
-            const file = this._getFileInstanceFromPath(filepath);
-            delete file._settings;
-            this.log({
-              group: 'Added files',
-              value: `File added: "<green>${file.path.replace(
-                __packageRoot(file.path) + '/',
-                ''
-              )}</green>" <cyan>${file.size}</cyan>mb`
-            });
+        trigger('add', file);
+      })
+      .on('unlink', (filepath) => {
+        delete this._filesCache[filepath];
 
-            trigger('add', file);
-          })
-          .on('unlink', (filepath) => {
-            delete this._filesCache[filepath];
+        this.log({
+          group: 'Deleted files',
+          value: `File deleted: "<red>${file.path.replace(
+            __packageRoot(file.path) + '/',
+            ''
+          )}</red>" <cyan>${file.size}</cyan>mb`
+        });
 
-            this.log({
-              group: 'Deleted files',
-              value: `File deleted: "<red>${file.path.replace(
-                __packageRoot(file.path) + '/',
-                ''
-              )}</red>" <cyan>${file.size}</cyan>mb`
-            });
+        trigger('unlink', {
+          path: filepath
+        });
+      });
+  }
 
-            trigger('unlink', {
-              path: filepath
-            });
-          });
-      },
-      {
-        id: settings.id + 'Run'
-      }
-    );
-
-    return super.run(promise);
+  kill() {
+    if (this._watcher) this._watcher.close();
+    super.kill();
   }
 
   _getFileInstanceFromPath(filepath) {

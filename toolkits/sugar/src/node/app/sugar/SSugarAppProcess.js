@@ -1,4 +1,4 @@
-const __SProcess = require('../../process/SProcess');
+const __SProcessManager = require('../../process/SProcess');
 const __SSugarApp = require('./SSugarApp');
 
 /**
@@ -14,7 +14,7 @@ const __SSugarApp = require('./SSugarApp');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSugarAppProcess extends __SProcess {
+module.exports = class SSugarAppProcess extends __SProcessManager {
   /**
    * @name          constructor
    * @type          Function

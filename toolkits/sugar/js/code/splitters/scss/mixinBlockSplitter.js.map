@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "mixinBlockSplitter.js"
+    ],
+    "names": [
+        "type",
+        "prefix",
+        "open",
+        "close"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;eAYe;AACbA,EAAAA,IAAI,EAAE,aADO;AAEbC,EAAAA,MAAM,EAAE,mCAFK;AAGbC,EAAAA,IAAI,EAAE,GAHO;AAIbC,EAAAA,KAAK,EAAE;AAJM,C",
+    "sourcesContent": [
+        "/**\n * @name                mixinBlockSplitter\n * @namespace           sugar.js.code.splitters.scss\n * @type                Object\n *\n * This represent the SCSS mixin splitter.\n * It will match all the mixin blocks like \"@mixin something(...) { ... }\", etc...\n * and split the code accordingly\n *\n * @since           2.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default {\n  type: 'mixin.block',\n  prefix: /@mixin\\s[a-zA-Z0-9-_\\.]+\\([^{]*\\)/,\n  open: '{',\n  close: '}'\n};\n"
+    ]
+}

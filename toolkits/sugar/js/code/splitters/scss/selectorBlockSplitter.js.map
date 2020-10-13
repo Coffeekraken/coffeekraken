@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "sources": [
+        "selectorBlockSplitter.js"
+    ],
+    "names": [
+        "type",
+        "prefix",
+        "prefixMatchIdx",
+        "open",
+        "close"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;eAYe;AACbA,EAAAA,IAAI,EAAE,gBADO;AAEbC,EAAAA,MAAM,EAAE,qDAFK;AAGbC,EAAAA,cAAc,EAAE,CAHH;AAIbC,EAAAA,IAAI,EAAE,GAJO;AAKbC,EAAAA,KAAK,EAAE;AALM,C",
+    "sourcesContent": [
+        "/**\n * @name                selectorBlockSplitter\n * @namespace           sugar.js.code.splitters.scss\n * @type                Object\n *\n * This represent the SCSS selectors splitter.\n * It will match all the selectors blocks like \".hello #world, p:before { ... }\", etc...\n * and split the code accordingly\n *\n * @since           2.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default {\n  type: 'selector.block',\n  prefix: /(^(?!.*@media)[\\t ]*([a-zA-Z#.:*[][^{\\/]*\\s*)\\s?){/m,\n  prefixMatchIdx: 1,\n  open: '{',\n  close: '}'\n};\n"
+    ]
+}

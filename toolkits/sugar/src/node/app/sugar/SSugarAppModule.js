@@ -5,7 +5,7 @@ const __SSugarAppModuleSettingsInterface = require('./interface/SSugarAppModuleS
 const __deepMerge = require('../../object/deepMerge');
 const __hotkey = require('../../keyboard/hotkey');
 const __SIpc = require('../../ipc/SIpc');
-const __SProcess = require('../../process/SProcess');
+const __SProcessManager = require('../../process/SProcess');
 const __blessed = require('blessed');
 
 /**

@@ -15,6 +15,10 @@ const __SInterface = require('../../class/SInterface');
 module.exports = class SProcessInterface extends __SInterface {
   // static extendsArray = ['SProcess', 'SPromise'];
   static definitionObj = {
+    id: {
+      type: 'String',
+      required: true
+    },
     state: {
       type: 'String',
       required: true,
@@ -31,6 +35,16 @@ module.exports = class SProcessInterface extends __SInterface {
     endTime: {
       type: 'Number',
       required: true
+    },
+    stdout: {
+      type: 'Array<String>',
+      required: true,
+      default: []
+    },
+    stderr: {
+      type: 'Array<String>',
+      required: true,
+      default: []
     },
     run: {
       type: 'Function',

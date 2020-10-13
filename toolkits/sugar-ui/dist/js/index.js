@@ -11603,6 +11603,21 @@ function SWebComponentGenerator(extendsSettings) {
 
         return null;
       }
+      /**
+       * @name          setProp
+       * @type          Function
+       *
+       * This method allows you to set a prop and specify the "media" for which you want to set this value
+       * The media parameter can be one of the media queries defined in the configuration config.media.queries
+       *
+       * @param       {String}      prop        The property name you want to set in camelcase
+       * @param       {Mixed}       value       The value to set
+       * @param       {String}    [media=null]    The media for which you want to set the property. Work only on "responsive" defined props
+       *
+       * @since       2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
     }, {
       key: "setProp",
       value: function setProp(prop, value, media) {
@@ -11616,11 +11631,38 @@ function SWebComponentGenerator(extendsSettings) {
           throw new _SError.default("You try to set the responsive property \"".concat(prop, "\" for the media \"").concat(media, "\" but this property is not defined as \"responsive\"..."));
         }
 
-        console.log('s', prop, media, value);
-        this._props[prop].responsiveValues[media] = value;
-        console.log(this._props[prop]); // trigger a "prop" event
+        this._props[prop].responsiveValues[media] = value; // trigger a "prop" event
 
         this._triggerPropsEvents(prop);
+      }
+      /**
+       * @name          getProp
+       * @type          Function
+       *
+       * This method allows you to get a prop and specify the "media" for which you want to get this value
+       * The media parameter can be one of the media queries defined in the configuration config.media.queries
+       *
+       * @param       {String}      prop        The property name you want to set in camelcase
+       * @param       {String}    [media=null]    The media for which you want to set the property. Work only on "responsive" defined props
+       *
+       * @since       2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "getProp",
+      value: function getProp(prop, media) {
+        if (media === void 0) {
+          media = null;
+        }
+
+        if (!media) return this._props[prop].value;
+
+        if (!this._props[prop].responsive) {
+          throw new _SError.default("You try to get the responsive property \"".concat(prop, "\" for the media \"").concat(media, "\" but this property is not defined as \"responsive\"..."));
+        }
+
+        return this._props[prop].responsiveValues[media];
       }
       /**
        * @name          addClass

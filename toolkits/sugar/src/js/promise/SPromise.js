@@ -287,9 +287,7 @@ export default class SPromise extends Promise {
       new Promise((rejectPromiseResolve, rejectPromiseReject) => {
         _masterPromiseRejectFn = rejectPromiseReject;
       }).catch((e) => {
-        this.trigger('catch', {
-          value: e
-        });
+        this.trigger('catch', e);
       });
 
       const executor =

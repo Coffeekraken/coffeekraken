@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "sources": [
+        "getActiveMedia.js"
+    ],
+    "names": [],
+    "mappings": "AAAA",
+    "sourcesContent": [
+        "/**\n * @name\t\t\t\t\tgetActiveMedia\n * @type \t\t\t\t\tFunction\n *\n * This function allows you to get back the active media defined in the config.media.queries.\n * If not\n *\n *\n *\n * @since\n * @author\t\t\t\t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\n"
+    ]
+}

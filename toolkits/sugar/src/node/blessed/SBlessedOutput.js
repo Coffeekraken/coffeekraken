@@ -321,6 +321,22 @@ module.exports = class SOutput extends __SBlessedComponent {
       }
     });
 
+    logsArray = logsArray.map((logObj) => {
+      if (typeof logObj.value !== 'string') return logObj;
+      let hashes = logObj.value.trim().match(/(\s|^)\#[a-zA-Z0-9:]+/gm);
+      if (!hashes) return logObj;
+      hashes.forEach((hash) => {
+        hash = hash.trim();
+        logObj.value = logObj.value.replace(hash, '').trim();
+        hash = hash.replace('#', '');
+        const splits = hash.split(':');
+        const prop = splits[0].trim();
+        const value = __parse(splits[1] || true);
+        logObj[prop] = value;
+      });
+      return logObj;
+    });
+
     return logsArray;
   }
 

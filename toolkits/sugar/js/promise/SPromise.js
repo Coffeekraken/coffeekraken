@@ -369,9 +369,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       new Promise((rejectPromiseResolve, rejectPromiseReject) => {
         _masterPromiseRejectFn = rejectPromiseReject;
       }).catch(e => {
-        _this.trigger('catch', {
-          value: e
-        });
+        _this.trigger('catch', e);
       });
       var executor = typeof executorFnOrSettings === 'function' ? executorFnOrSettings : null;
 

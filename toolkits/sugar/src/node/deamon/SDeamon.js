@@ -1,7 +1,6 @@
 const __SPromise = require('../promise/SPromise');
 const __SDeamonInterface = require('./interface/SDeamonInterface');
 const __deepMerge = require('../object/deepMerge');
-const __SProcess = require('../process/SProcess');
 const __onProcessExit = require('../process/onProcessExit');
 
 /**
@@ -93,9 +92,7 @@ class SDeamon extends __SPromise {
       stacks.splice(stacks.indexOf('update'), 1);
       stacks = [...stacks, ...this._settings.updateStacks];
     }
-    // __SProcess.triggerParent('log', {
-    //   value: 'cc'
-    // });
+
     return super.on(stacks.join(','), callback);
   }
 

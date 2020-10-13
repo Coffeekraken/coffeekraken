@@ -1,5 +1,5 @@
 const __frontendServer = require('./frontend');
-const __SProcess = require('../../process/SProcess');
+const __SProcessManager = require('../../process/SProcess');
 
 /**
  * @name            SFrontendServerProcess
@@ -12,7 +12,7 @@ const __SProcess = require('../../process/SProcess');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFrontendServerProcess extends __SProcess {
+module.exports = class SFrontendServerProcess extends __SProcessManager {
   /**
    * @name          constructor
    * @type          Function

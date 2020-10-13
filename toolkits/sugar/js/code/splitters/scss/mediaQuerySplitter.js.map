@@ -1,0 +1,16 @@
+{
+    "version": 3,
+    "sources": [
+        "mediaQuerySplitter.js"
+    ],
+    "names": [
+        "type",
+        "prefix",
+        "open",
+        "close"
+    ],
+    "mappings": ";;;;;;;AAAA;;;;;;;;;;;;eAYe;AACbA,EAAAA,IAAI,EAAE,YADO;AAEbC,EAAAA,MAAM,EAAE,uBAFK;AAGbC,EAAAA,IAAI,EAAE,GAHO;AAIbC,EAAAA,KAAK,EAAE;AAJM,C",
+    "sourcesContent": [
+        "/**\n * @name                mediaQuerySplitter\n * @namespace           sugar.js.code.splitters.scss\n * @type                Object\n *\n * This represent the SCSS media queries splitter.\n * It will match all the media queries blocks like \"@media (...) { ... }\", etc...\n * and split the code accordingly\n *\n * @since           2.0.0\n * @author \t\tOlivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n */\nexport default {\n  type: 'mediaQuery',\n  prefix: /@media\\s?\\([^{]*\\)\\s?/,\n  open: '{',\n  close: '}'\n};\n"
+    ]
+}

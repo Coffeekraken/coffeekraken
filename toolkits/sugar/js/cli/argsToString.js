@@ -17,17 +17,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * directly to the command line interface
  *
  * @param       {Object}        args        The arguments object
- * @param       {Object}        [definitionObj=null]    The definitionObj object that has to be formated like so:
- * - argName: The argument name to describe
- *    - type: The type of the value supported
- *    - alias: The alias of the full name like "t", "l", etc...
- *    - default: The default value if nothing is specified
- *    - regexp: A regexp that is used to validate the passed value
- *    - validator: A function to validate the passed value. Has to return true or false
  * @param       {Object}      [settings={}]               A settings object to configure your command build process:
  * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definitionObj object in your command line string, or if you just want the one passed in your argsObj argument
  * - alias (true) {Boolean}: Specify if you want to use the aliases or not in the generated command
- *
+ * - definitionObj (null) {Object}: Specify a definition object to use
  * @todo            check documentation
  *
  * @example       js
@@ -36,19 +29,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *    arg1: 'Hello',
  *    myOtherArg: 'World'
  * }, {
- *    arg1: {
- *      type: 'String',
- *      alias: 'a',
- *      default: 'Plop'
- *    },
- *    myOtherArg: {
- *      type: 'String'
- *    },
- *    lastArg: {
- *      type: 'String',
- *      alias: 'l',
- *      default: 'Nelson'
- *    }
+ *    definitionObj: {
+ *      arg1: {
+ *        type: 'String',
+ *       alias: 'a',
+ *       default: 'Plop'
+ *     },
+ *     myOtherArg: {
+ *       type: 'String'
+ *     },
+ *     lastArg: {
+ *       type: 'String',
+ *       alias: 'l',
+ *       default: 'Nelson'
+ *     }
+ *  }
  * });
  * // => -a Hello --myOtherArg World
  *
@@ -57,25 +52,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 // TODO: support deep object structure
 // TODO: support required args
-module.exports = function argsToString(args, definitionObj, settings) {
-  if (definitionObj === void 0) {
-    definitionObj = null;
-  }
-
+module.exports = function argsToString(args, settings) {
   if (settings === void 0) {
     settings = {};
   }
 
   settings = (0, _deepMerge.default)({
+    definitionObj: null,
     includeAllArgs: true,
     alias: true
   }, settings);
 
   if (typeof args === 'string') {
-    args = (0, _parseArgs.default)(args, definitionObj);
+    args = (0, _parseArgs.default)(args, {
+      definitionObj: settings.definitionObj
+    });
   }
 
-  if (!definitionObj) {
+  if (!settings.definitionObj) {
     var string = '';
     Object.keys(args).forEach(key => {
       string += " --".concat(key, " ").concat((0, _toString.default)(args[key]));
@@ -85,13 +79,13 @@ module.exports = function argsToString(args, definitionObj, settings) {
 
   var cliArray = []; // loop on passed args
 
-  Object.keys(definitionObj).forEach(argName => {
-    var defObj = definitionObj[argName];
+  Object.keys(settings.definitionObj).forEach(argName => {
+    var defObj = settings.definitionObj[argName];
     if (!defObj) return;
     if (!settings.includeAllArgs && args[argName] === undefined) return;
     var prefix = defObj.alias && settings.alias ? "-".concat(defObj.alias) : "--".concat(argName);
     var value;
-    if (args && args[argName] !== undefined) value = args[argName];else if (definitionObj[argName] && definitionObj[argName].default) value = definitionObj[argName].default;
+    if (args && args[argName] !== undefined) value = args[argName];else if (settings.definitionObj[argName] && settings.definitionObj[argName].default) value = settings.definitionObj[argName].default;
 
     if (value === undefined || value === null // || (defObj.type.toLowerCase() === 'boolean' && value === false)
     ) {

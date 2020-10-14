@@ -13,6 +13,7 @@ import __SActionsStreamAction from './SActionsStreamAction';
 import __SCache from '../cache/SCache';
 import __sha256 from '../crypt/sha256';
 import __upperFirst from '../string/upperFirst';
+import __isChildProcess from '../is/childProcess';
 
 /**
  * @name          SActionStream
@@ -531,9 +532,9 @@ export default class SActionStream extends __SPromise {
           let startString = `#start Starting the stream "<cyan>${
             settings.name || 'unnamed'
           }</cyan>"`;
-          this.log({
-            value: startString
-          });
+          // this.log({
+          //   value: startString
+          // });
           trigger('start', {});
 
           currentStreamObj = await this._applyFnOnStreamObj(
@@ -736,6 +737,15 @@ export default class SActionStream extends __SPromise {
                   group: this._currentStream.currentActionObj.name,
                   value: successString
                 });
+                if (__isChildProcess()) {
+                  this.log({
+                    value: 'CHILD'
+                  });
+                } else {
+                  this.log({
+                    value: 'MAIN'
+                  });
+                }
               }
             }
           }
@@ -802,7 +812,9 @@ export default class SActionStream extends __SPromise {
             resolve(this._currentStream.stats);
           }
         } catch (e) {
-          console.log('PLOP');
+          this.log({
+            value: e.__toString()
+          });
         }
       },
       {
@@ -824,7 +836,13 @@ export default class SActionStream extends __SPromise {
     // }
     // }
 
-    __SPromise.pipe(this._currentStream, this);
+    // __SPromise.pipe(this._currentStream, this);
+
+    this._currentStream.promise.on('resolve', () => {
+      this.log({
+        value: 'SSS'
+      });
+    });
 
     return this._currentStream.promise;
   }
@@ -845,7 +863,6 @@ export default class SActionStream extends __SPromise {
       if (this._currentStream && this._currentStream.promise) {
         this._currentStream.promise.trigger('log', arg);
       }
-      this.trigger('log', arg);
     });
   }
 }

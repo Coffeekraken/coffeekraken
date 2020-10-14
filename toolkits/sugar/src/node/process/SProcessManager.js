@@ -224,35 +224,12 @@ class SProcessManager extends __SPromise {
     }
 
     this.currentProcess = new __SProcess({
-      promise: processPromise,
       ...settings.processSettings
     });
+    if (processPromise) this.currentProcess.bindSPromise(processPromise);
     __SPromise.pipe(this.currentProcess, this);
     this._processesStack.push(this.currentProcess);
     this.currentProcess.run();
-
-    // const originalResolve = processPromise.resolve.bind(processPromise);
-    // processPromise.resolve = (value) => {
-    //   console.log('resolve');
-    //   originalResolve({
-    //     state: this.state,
-    //     startTime: this.startTime,
-    //     endTime: this.endTime,
-    //     duration: this.duration,
-    //     value
-    //   });
-    // };
-    // const originalReject = processPromise.reject.bind(processPromise);
-    // processPromise.reject = (value) => {
-    //   console.log('reject');
-    //   originalReject({
-    //     state: this.state,
-    //     startTime: this.startTime,
-    //     endTime: this.endTime,
-    //     duration: this.duration,
-    //     value
-    //   });
-    // };
 
     if (this.deamon && this.deamon.state === 'watching') {
       this.currentProcess.log({

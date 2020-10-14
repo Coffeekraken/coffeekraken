@@ -3,10 +3,12 @@ const __parseArgs = require('../../node/cli/parseArgs');
 
 module.exports = async (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
-    highest: {
-      type: 'Boolean',
-      alias: 'h',
-      default: false
+    definitionObj: {
+      highest: {
+        type: 'Boolean',
+        alias: 'h',
+        default: false
+      }
     }
   });
 

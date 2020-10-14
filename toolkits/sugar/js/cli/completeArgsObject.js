@@ -24,8 +24,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * for missing args
  *
  * @param             {Object}            argsObj         The arguments object to complete
- * @param             {Object}            definitionObj     The definition object to use
  * @param             {Object}            [settings={}]       An object of settings to configure your process:
+ * - definitionObj ({}) {Object}: Specify a definitionObj to use
  * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
  * @return            {Object}                            The completed arguments object
  *
@@ -35,25 +35,26 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  *
  */
-function completeArgsObject(argsObj, definitionObj, settings) {
+function completeArgsObject(argsObj, settings) {
   if (settings === void 0) {
     settings = {};
   }
 
   argsObj = Object.assign({}, argsObj);
   settings = (0, _deepMerge.default)({
+    definitionObj: {},
     throw: true
   }, settings); // loop on all the arguments
 
-  Object.keys(definitionObj).forEach(argString => {
-    var argDefinitionObj = definitionObj[argString]; // check if we have an argument passed in the properties
+  Object.keys(settings.definitionObj).forEach(argString => {
+    var argDefinitionObj = settings.definitionObj[argString]; // check if we have an argument passed in the properties
 
     if (argsObj[argString] === undefined && argDefinitionObj.default !== undefined) {
       argsObj[argString] = argDefinitionObj.default;
     }
   }); // make sure all is ok
 
-  var argsValidationResult = (0, _validateObject.default)(argsObj, definitionObj, settings);
+  var argsValidationResult = (0, _validateObject.default)(argsObj, settings.definitionObj, settings);
   if (argsValidationResult !== true && settings.throw) throw new Error((0, _toString.default)(argsValidationResult));else if (argsValidationResult !== true) return argsValidationResult; // return the argsObj
 
   return (0, _deepize.default)(argsObj);

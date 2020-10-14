@@ -35,6 +35,8 @@ var _sha = _interopRequireDefault(require("../crypt/sha256"));
 
 var _upperFirst = _interopRequireDefault(require("../string/upperFirst"));
 
+var _childProcess = _interopRequireDefault(require("../is/childProcess"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -516,11 +518,9 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
           try {
             // starting log
-            var startString = "#start Starting the stream \"<cyan>".concat(settings.name || 'unnamed', "</cyan>\"");
-
-            _this3.log({
-              value: startString
-            });
+            var startString = "#start Starting the stream \"<cyan>".concat(settings.name || 'unnamed', "</cyan>\""); // this.log({
+            //   value: startString
+            // });
 
             trigger('start', {});
             currentStreamObj = yield _this3._applyFnOnStreamObj(currentStreamObj, _this3._settings.before, {
@@ -664,6 +664,16 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
                     group: _this3._currentStream.currentActionObj.name,
                     value: successString
                   });
+
+                  if ((0, _childProcess.default)()) {
+                    _this3.log({
+                      value: 'CHILD'
+                    });
+                  } else {
+                    _this3.log({
+                      value: 'MAIN'
+                    });
+                  }
                 }
               }
             }
@@ -720,7 +730,9 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
               resolve(_this3._currentStream.stats);
             }
           } catch (e) {
-            console.log('PLOP');
+            _this3.log({
+              value: e.__toString()
+            });
           }
         });
 
@@ -741,8 +753,13 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
       //   this._currentStream.stats.stderr.push(e);
       // }
       // }
+      // __SPromise.pipe(this._currentStream, this);
 
-      _SPromise2.default.pipe(this._currentStream, this);
+      this._currentStream.promise.on('resolve', () => {
+        this.log({
+          value: 'SSS'
+        });
+      });
 
       return this._currentStream.promise;
     }
@@ -769,8 +786,6 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
         if (this._currentStream && this._currentStream.promise) {
           this._currentStream.promise.trigger('log', arg);
         }
-
-        this.trigger('log', arg);
       });
     }
   }]);

@@ -12,8 +12,8 @@ import __validateObject from '../validation/object/validateObject';
  * for missing args
  *
  * @param             {Object}            argsObj         The arguments object to complete
- * @param             {Object}            definitionObj     The definition object to use
  * @param             {Object}            [settings={}]       An object of settings to configure your process:
+ * - definitionObj ({}) {Object}: Specify a definitionObj to use
  * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
  * @return            {Object}                            The completed arguments object
  *
@@ -23,23 +23,20 @@ import __validateObject from '../validation/object/validateObject';
  * @since       2.0.0
  *
  */
-export default function completeArgsObject(
-  argsObj,
-  definitionObj,
-  settings = {}
-) {
+export default function completeArgsObject(argsObj, settings = {}) {
   argsObj = Object.assign({}, argsObj);
 
   settings = __deepMerge(
     {
+      definitionObj: {},
       throw: true
     },
     settings
   );
 
   // loop on all the arguments
-  Object.keys(definitionObj).forEach((argString) => {
-    const argDefinitionObj = definitionObj[argString];
+  Object.keys(settings.definitionObj).forEach((argString) => {
+    const argDefinitionObj = settings.definitionObj[argString];
 
     // check if we have an argument passed in the properties
     if (
@@ -53,7 +50,7 @@ export default function completeArgsObject(
   // make sure all is ok
   const argsValidationResult = __validateObject(
     argsObj,
-    definitionObj,
+    settings.definitionObj,
     settings
   );
 

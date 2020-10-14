@@ -46,7 +46,7 @@ module.exports = class SProcessInterface extends __SInterface {
       required: true,
       default: []
     },
-    run: {
+    process: {
       type: 'Function',
       required: true
     },

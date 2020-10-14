@@ -8,12 +8,10 @@ module.exports = {
     `${__path.resolve(__dirname, '../src/node/index.js')}`
   ],
   reporters: [
-    __isChildProcess()
-      ? `${__path.resolve(
-          __dirname,
-          '../src/node/test/jest/STestJestOutputReporter.js'
-        )}`
-      : 'default'
+    `${__path.resolve(
+      __dirname,
+      '../src/node/test/jest/STestJestOutputReporter.js'
+    )}`
   ],
   testRegex: '((\\.|/)(test|spec))\\.[jt]sx?$',
   moduleNameMapper: {

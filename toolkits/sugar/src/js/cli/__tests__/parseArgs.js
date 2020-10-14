@@ -4,29 +4,30 @@ module.exports = (__parseArgs) => {
       const args = __parseArgs(
         '-n "node" -i "/Users/olivierbossel/Home/web/coffeekraken/coffeekraken/toolkits/sugar/src/node/**/!(__tests__)/!(*.test).js" -c "jest %testfile %arguments"',
         {
-          name: {
-            type: 'String',
-            description:
-              'wifj oiefj owiej foiwej foj woiefj wioj efoiwej foijwe oifjew',
-            alias: 'n',
-            required: false
-          },
-          input: {
-            type: 'String',
-            description:
-              'wifj oiefj owiej foiwej foj woiefj wioj efoiwej foijwe oifjew',
-            alias: 'i',
-            required: false
-          },
-          command: {
-            type: 'String',
-            description:
-              'wifj oiefj owiej foiwej foj woiefj wioj efoiwej foijwe oifjew',
-            alias: 'c',
-            required: false
+          definitionObj: {
+            name: {
+              type: 'String',
+              description:
+                'wifj oiefj owiej foiwej foj woiefj wioj efoiwej foijwe oifjew',
+              alias: 'n',
+              required: false
+            },
+            input: {
+              type: 'String',
+              description:
+                'wifj oiefj owiej foiwej foj woiefj wioj efoiwej foijwe oifjew',
+              alias: 'i',
+              required: false
+            },
+            command: {
+              type: 'String',
+              description:
+                'wifj oiefj owiej foiwej foj woiefj wioj efoiwej foijwe oifjew',
+              alias: 'c',
+              required: false
+            }
           }
-        },
-        {}
+        }
       );
 
       expect(args).toEqual({
@@ -43,62 +44,62 @@ module.exports = (__parseArgs) => {
       const args = __parseArgs(
         'hello -i #blop -w 10 yop "hello world" -b --hello.world Nelson --help "coco yep"',
         {
-          action: {
-            type: 'String',
-            description: 'Something',
-            alias: 'a',
-            default: 'Hello World',
-            required: true
-          },
-          id: {
-            type: 'String',
-            description: 'Something',
-            alias: 'i',
-            regexp: /^#([\S]+)$/,
-            required: true
-          },
-          hehe: {
-            type: 'String',
-            description: 'Something',
-            default: 'Nelson the cat',
-            required: true
-          },
-          bool: {
-            type: 'Boolean',
-            description: 'Something',
-            alias: 'b',
-            default: false
-          },
-          'hello.world': {
-            type: 'String',
-            description: 'Something',
-            default: 'plop world',
-            required: true
-          },
-          world: {
-            type: 'Array<String|Number>',
-            description: 'Something',
-            alias: 'w',
-            validator: (value) => {
-              return (
-                Array.isArray(value) ||
-                typeof value === 'number' ||
-                typeof value === 'string'
-              );
+          definitionObj: {
+            action: {
+              type: 'String',
+              description: 'Something',
+              alias: 'a',
+              default: 'Hello World',
+              required: true
+            },
+            id: {
+              type: 'String',
+              description: 'Something',
+              alias: 'i',
+              regexp: /^#([\S]+)$/,
+              required: true
+            },
+            hehe: {
+              type: 'String',
+              description: 'Something',
+              default: 'Nelson the cat',
+              required: true
+            },
+            bool: {
+              type: 'Boolean',
+              description: 'Something',
+              alias: 'b',
+              default: false
+            },
+            'hello.world': {
+              type: 'String',
+              description: 'Something',
+              default: 'plop world',
+              required: true
+            },
+            world: {
+              type: 'Array<String|Number>',
+              description: 'Something',
+              alias: 'w',
+              validator: (value) => {
+                return (
+                  Array.isArray(value) ||
+                  typeof value === 'number' ||
+                  typeof value === 'string'
+                );
+              }
+            },
+            yop: {
+              type: 'String',
+              description: 'Something',
+              alias: 'y'
+            },
+            help: {
+              type: 'String',
+              description: 'Something',
+              alias: 'h'
             }
           },
-          yop: {
-            type: 'String',
-            description: 'Something',
-            alias: 'y'
-          },
-          help: {
-            type: 'String',
-            description: 'Something',
-            alias: 'h'
-          }
-        },
-        {
           defaultObj: {
             yop: 'Hello world'
           }

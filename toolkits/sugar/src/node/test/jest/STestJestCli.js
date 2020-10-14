@@ -1,7 +1,7 @@
 const __SCli = require('../../cli/SCli');
 const __deepMerge = require('../../object/deepMerge');
-const __STestJestCliInterface = require('./interface/STestJestCliInterface');
-const __STestJestProcessManager = require('./STestJestProcessManager');
+const __STestJestCliInterface = require('./interface/STestJestInterface');
+const __STestJestProcess = require('./STestJestProcess');
 
 /**
  * @name            STestJestCli
@@ -46,7 +46,7 @@ class STestJestCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static processClass = __STestJestProcessManager;
+  static processClass = __STestJestProcess;
 
   /**
    * @name          constructor

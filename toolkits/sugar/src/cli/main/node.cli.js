@@ -10,20 +10,22 @@ const __includes = require('../../node/string/includes');
 
 module.exports = async (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
-    source: {
-      type: 'String',
-      alias: 's',
-      default: `${__appRoot.path}/src/node`
-    },
-    destination: {
-      type: 'String',
-      alias: 'd',
-      default: `${__appRoot.path}/node.js`
-    },
-    ignore: {
-      type: 'String',
-      alias: 'i',
-      default: `__tests__,__wip__`
+    definitionObj: {
+      source: {
+        type: 'String',
+        alias: 's',
+        default: `${__appRoot.path}/src/node`
+      },
+      destination: {
+        type: 'String',
+        alias: 'd',
+        default: `${__appRoot.path}/node.js`
+      },
+      ignore: {
+        type: 'String',
+        alias: 'i',
+        default: `__tests__,__wip__`
+      }
     }
   });
 

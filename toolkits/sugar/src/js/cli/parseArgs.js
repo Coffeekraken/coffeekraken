@@ -53,25 +53,50 @@ import __ofType from '../is/ofType';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function parseArgsString(
-  string,
-  definitionObj = {},
-  settings = {}
-) {
+export default function parseArgsString(string, settings = {}) {
   settings = __deepMerge(
     {
+      definitionObj: null,
       defaultObj: {}
     },
     settings
   );
 
   const argsObj = {};
+  const definitionObj = settings.definitionObj;
 
   // process the passed string
   let stringArray = string.match(/(?:[^\s"]+|"[^"]*")+/gm) || [];
   stringArray = stringArray.map((item) => {
     return __unquote(item);
   });
+
+  if (!definitionObj) {
+    const argsObj = {};
+    let currentArgName = -1;
+    let currentValue;
+    stringArray = stringArray.forEach((part) => {
+      if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
+        if (
+          currentValue === undefined &&
+          currentArgName !== -1 &&
+          currentArgName
+        ) {
+          argsObj[currentArgName] = true;
+        }
+        currentArgName = part.replace(/^[-]{1,2}/, '');
+      } else {
+        currentValue = __parse(part);
+        if (currentArgName !== undefined) {
+          argsObj[currentArgName] = __parse(currentValue);
+          currentValue = undefined;
+          currentArgName = undefined;
+        }
+      }
+    });
+
+    return argsObj;
+  }
 
   let currentArgName = null;
   let currentArgType = null;
@@ -166,7 +191,7 @@ export default function parseArgsString(
     }
   }
 
-  return __completeArgsObject(finalObj, definitionObj, settings);
+  return __completeArgsObject(finalObj, settings);
 }
 
 function getArgNameByAlias(alias, definitionObj) {

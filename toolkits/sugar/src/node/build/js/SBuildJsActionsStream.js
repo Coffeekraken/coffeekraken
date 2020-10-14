@@ -54,7 +54,7 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
       {
         filesResolver: __SFsFilesResolverStreamAction,
         // fsCache: __SFsCacheStreamAction,
-        jest: __SJestStreamAction,
+        // jest: __SJestStreamAction,
         readFile: __SFsReadFileStreamAction,
         frontspecJs: __SFrontspecJsStreamAction,
         webpack: __SWebpackStreamAction,

@@ -39,18 +39,6 @@ const __onProcessExit = require('./onProcessExit');
  */
 class SChildProcessManager extends __SProcessManager {
   /**
-   * @name          _commandOrPath
-   * @type          String
-   * @private
-   *
-   * Store the command of path to an executable file
-   *
-   * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _commandOrPath = null;
-
-  /**
    * @name          constructor
    * @type          Function
    * @constructor
@@ -60,13 +48,12 @@ class SChildProcessManager extends __SProcessManager {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(commandOrPath, settings = {}) {
+  constructor(initialParams = {}, settings = {}) {
     settings = __deepMerge(
       {
         id: 'SChildProcessManager',
         name: 'Unnamed Child Process Manager',
         definitionObj: {},
-        defaultParams: {},
         killOnCtrlC: !__hasExitCleanup(),
         triggerParent: true,
         method: __isPath(commandOrPath, true) ? 'fork' : 'spawn',
@@ -84,9 +71,7 @@ class SChildProcessManager extends __SProcessManager {
       settings
     );
 
-    super({}, settings);
-
-    this._commandOrPath = commandOrPath;
+    super(initialParams, settings);
   }
 
   /**
@@ -128,9 +113,12 @@ class SChildProcessManager extends __SProcessManager {
     const processInstance = super.run(null, settings);
 
     // build the command to run depending on the passed command in the constructor and the params
-    const paramsToRun = __deepMerge(settings.defaultParams, params);
+    const paramsToRun = __deepMerge(
+      Object.assign({}, this.initialParams),
+      params
+    );
     const commandToRun = __buildCommandLine(
-      this._commandOrPath,
+      this.constructor.command,
       settings.definitionObj,
       paramsToRun,
       {
@@ -170,6 +158,10 @@ class SChildProcessManager extends __SProcessManager {
         [],
         spawnSettings
       );
+
+      // processInstance.on('*', (d, m) => {
+      //   console.log('CCC', m.stack);
+      // });
 
       __onProcessExit(() => {
         this._currentChildProcess.kill();
@@ -218,31 +210,6 @@ class SChildProcessManager extends __SProcessManager {
         });
       }
     })();
-
-    // initialize the runningProcess object
-    // this.currentProcess = {
-    //   instanceId: this._settings.id,
-    //   id: runningProcessId,
-    //   promise: new __SPromise({
-    //     id: 'SChildProcess.' + this._settings.id
-    //   }),
-    //   settings: Object.assign({}, settings),
-    //   startTime: Date.now(),
-    //   endTime: null,
-    //   duration: null,
-    //   stdout: [],
-    //   stderr: [],
-    //   rawCommand: this._commandOrPath,
-    //   params: paramsToRun,
-    //   command: commandToRun,
-    //   state: 'running',
-    //   before: null,
-    //   after: null
-    // };
-
-    // processInstance.on('*', (data, metas) => {
-    //   console.log('###' + metas.stack);
-    // });
 
     return processInstance;
   }

@@ -180,7 +180,9 @@ class SCli extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static parseArgs(cliString) {
-    return __parseArgs(cliString, this.interface.definitionObj);
+    return __parseArgs(cliString, {
+      definitionObj: this.interface.definitionObj
+    });
   }
 
   /**

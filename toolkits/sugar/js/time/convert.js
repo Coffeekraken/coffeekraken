@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = convert;
+exports.default = void 0;
 
 /**
  * @name                                  convert
@@ -109,4 +109,14 @@ function convert(from, to) {
   }
 }
 
+convert.MILLISECOND = 'ms';
+convert.SECOND = 's';
+convert.MINUTE = 'm';
+convert.HOUR = 'h';
+convert.DAY = 'd';
+convert.WEEK = 'w';
+convert.MONTH = 'month';
+convert.YEAR = 'y';
+var _default = convert;
+exports.default = _default;
 module.exports = exports.default;

@@ -64,7 +64,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function buildCommandLine(command, definitionObj, args, settings) {
+function buildCommandLine(command, args, settings) {
   if (args === void 0) {
     args = {};
   }
@@ -74,14 +74,15 @@ function buildCommandLine(command, definitionObj, args, settings) {
   }
 
   settings = (0, _deepMerge.default)({
+    definitionObj: null,
     includeAllArgs: true,
     alias: true
   }, settings);
-  definitionObj = Object.assign({}, definitionObj); // get all the tokens
+  var definitionObj = Object.assign({}, settings.definitionObj); // get all the tokens
 
   var tokens = command.match(/\%[a-zA-Z0-9-_]+/gm) || [];
   tokens.forEach(token => {
-    var tokenName = token.replace('%', '');
+    var tokenName = token.replace('[', '').replace(']', '').replace('%', '');
     if (tokenName === 'arguments') return;
     var tokenValue = args && args[tokenName] !== undefined ? args[tokenName] : definitionObj[tokenName] ? definitionObj[tokenName].default : undefined;
     delete definitionObj[tokenName];
@@ -95,8 +96,8 @@ function buildCommandLine(command, definitionObj, args, settings) {
     command = command.replace(token, tokenValueString);
   }); // args to string
 
-  var argsString = (0, _argsToString.default)(args, definitionObj, settings).trim();
-  command = command.replace('%arguments', argsString);
+  var argsString = (0, _argsToString.default)(args, settings).trim();
+  command = command.replace('[arguments]', argsString);
   return command.trim();
 }
 

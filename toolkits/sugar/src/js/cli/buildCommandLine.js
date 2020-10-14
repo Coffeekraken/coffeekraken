@@ -53,25 +53,21 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function buildCommandLine(
-  command,
-  definitionObj,
-  args = {},
-  settings = {}
-) {
+export default function buildCommandLine(command, args = {}, settings = {}) {
   settings = __deepMerge(
     {
+      definitionObj: null,
       includeAllArgs: true,
       alias: true
     },
     settings
   );
 
-  definitionObj = Object.assign({}, definitionObj);
+  const definitionObj = Object.assign({}, settings.definitionObj);
   // get all the tokens
   const tokens = command.match(/\%[a-zA-Z0-9-_]+/gm) || [];
   tokens.forEach((token) => {
-    const tokenName = token.replace('%', '');
+    const tokenName = token.replace('[', '').replace(']', '').replace('%', '');
     if (tokenName === 'arguments') return;
     const tokenValue =
       args && args[tokenName] !== undefined
@@ -89,8 +85,8 @@ export default function buildCommandLine(
   });
 
   // args to string
-  const argsString = __argsToString(args, definitionObj, settings).trim();
-  command = command.replace('%arguments', argsString);
+  const argsString = __argsToString(args, settings).trim();
+  command = command.replace('[arguments]', argsString);
 
   return command.trim();
 }

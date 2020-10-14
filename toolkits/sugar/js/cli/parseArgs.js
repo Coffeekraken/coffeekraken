@@ -73,24 +73,49 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function parseArgsString(string, definitionObj, settings) {
-  if (definitionObj === void 0) {
-    definitionObj = {};
-  }
-
+function parseArgsString(string, settings) {
   if (settings === void 0) {
     settings = {};
   }
 
   settings = (0, _deepMerge.default)({
+    definitionObj: null,
     defaultObj: {}
   }, settings);
-  var argsObj = {}; // process the passed string
+  var argsObj = {};
+  var definitionObj = settings.definitionObj; // process the passed string
 
   var stringArray = string.match(/(?:[^\s"]+|"[^"]*")+/gm) || [];
   stringArray = stringArray.map(item => {
     return (0, _unquote.default)(item);
   });
+
+  if (!definitionObj) {
+    var _argsObj = {};
+
+    var _currentArgName = -1;
+
+    var currentValue;
+    stringArray = stringArray.forEach(part => {
+      if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
+        if (currentValue === undefined && _currentArgName !== -1 && _currentArgName) {
+          _argsObj[_currentArgName] = true;
+        }
+
+        _currentArgName = part.replace(/^[-]{1,2}/, '');
+      } else {
+        currentValue = (0, _parse.default)(part);
+
+        if (_currentArgName !== undefined) {
+          _argsObj[_currentArgName] = (0, _parse.default)(currentValue);
+          currentValue = undefined;
+          _currentArgName = undefined;
+        }
+      }
+    });
+    return _argsObj;
+  }
+
   var currentArgName = null;
   var currentArgType = null;
   var currentArgDefinition = null;
@@ -169,7 +194,7 @@ function parseArgsString(string, definitionObj, settings) {
     }
   }
 
-  return (0, _completeArgsObject.default)(finalObj, definitionObj, settings);
+  return (0, _completeArgsObject.default)(finalObj, settings);
 }
 
 function getArgNameByAlias(alias, definitionObj) {

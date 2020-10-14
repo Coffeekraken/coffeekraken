@@ -86,7 +86,6 @@ module.exports = class SJestStreamAction extends __SActionsStreamAction {
       //     reject(e);
       //   });
       const result = await promise;
-      console.log(result.state);
 
       // const cli = new __STestJestCli({
 

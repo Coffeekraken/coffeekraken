@@ -136,34 +136,12 @@ module.exports = class SOutput extends __SBlessedComponent {
    */
   _subscribeToSource(s) {
     // subscribe to data
-    s.on('close', async (data) => {
-      // await __wait();
-      // this.log({
-      //   value: `Closing process with code <red>${data.code}</red> and signal <red>${data.signal}</red>...`
-      // });
-    })
-      // .on('*', (data, metas) => {
-      //   console.log(metas.stack);
-      // })
-      // .on('success,*.success,complete,*.complete', (data) => {
-      //   this.log({
-      //     value: `#success The process has been finished <green>successfully</green>`
-      //   });
-      // })
-
-      // .on('error', (error) => {
-      //   console.log('ERRO');
-      //   this.log({
-      //     error: true,
-      //     ...error
-      //   });
-      // })
-      .on(this._settings.stacks.join(','), (data, metas) => {
-        this.log({
-          [metas.stack.split('.').pop()]: true,
-          ...data
-        });
+    s.on(this._settings.stacks.join(','), (data, metas) => {
+      this.log({
+        [metas.stack.split('.').pop()]: true,
+        ...data
       });
+    });
   }
 
   /**

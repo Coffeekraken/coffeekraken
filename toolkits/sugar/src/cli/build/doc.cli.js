@@ -4,7 +4,9 @@ const __SBuildDocActionsStream = require('../../node/build/doc/SBuildDocActionsS
 const __output = require('../../node/process/output');
 
 module.exports = (stringArgs = '') => {
-  const args = __parseArgs(stringArgs, __SBuildDocCli.interface.definitionObj);
+  const args = __parseArgs(stringArgs, {
+    definitionObj: __SBuildDocCli.interface.definitionObj
+  });
   const stream = new __SBuildDocActionsStream({});
   const proc = stream.start(args);
   __output(proc);

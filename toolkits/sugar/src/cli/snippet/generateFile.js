@@ -25,15 +25,17 @@ module.exports = async (stringArgs = '') => {
   }
 
   const args = __parseArgs(stringArgs, {
-    language: {
-      type: 'String',
-      alias: 'l',
-      default: 'js'
-    },
-    destination: {
-      type: 'String',
-      alias: 'd',
-      default: `[rootDir]/.vscode/sugar.[language].code-snippets`
+    definitionObj: {
+      language: {
+        type: 'String',
+        alias: 'l',
+        default: 'js'
+      },
+      destination: {
+        type: 'String',
+        alias: 'd',
+        default: `[rootDir]/.vscode/sugar.[language].code-snippets`
+      }
     }
   });
   args.destination = args.destination.replace('[language]', args.language);

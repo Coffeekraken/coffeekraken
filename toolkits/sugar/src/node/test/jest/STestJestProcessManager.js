@@ -4,7 +4,7 @@ const __SProcessManager = require('../../process/SProcessManager');
 const __SPromise = require('../../promise/SPromise');
 const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
 const __buildCommandLine = require('../../cli/buildCommandLine');
-const __STestJestCliInterface = require('./interface/STestJestCliInterface');
+const __STestJestInterface = require('./interface/STestJestInterface');
 const __SChildProcessManager = require('../../process/SChildProcessManager');
 const __folderPath = require('../../fs/folderPath');
 const __getFilename = require('../../fs/filename');
@@ -21,7 +21,9 @@ const __copy = require('../../clipboard/copy');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class STestJestProcess extends __SProcessManager {
+module.exports = class STestJestProcess extends __SChildProcessManager {
+  static interface = __STestJestInterface;
+
   /**
    * @name          constructor
    * @type          Function
@@ -53,55 +55,46 @@ module.exports = class STestJestProcess extends __SProcessManager {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(argsObj, settings = {}) {
-    const promise = new __SPromise({
-      id: this._settings.id + '.run'
-    });
-    (async (resolve, reject, trigger, cancel) => {
-      let input = argsObj.input;
-      delete argsObj.input;
+  // run(argsObj, settings = {}) {
+  //     let input = argsObj.input;
+  //     delete argsObj.input;
 
-      const folderPath = __folderPath(input);
-      const fileName = __getFilename(input);
-      const extension = __extension(input);
-      const fileNameWithoutExtension = fileName.replace(`.${extension}`, '');
+  //     const folderPath = __folderPath(input);
+  //     const fileName = __getFilename(input);
+  //     const extension = __extension(input);
+  //     const fileNameWithoutExtension = fileName.replace(`.${extension}`, '');
 
-      const neighbourTestFilePath = `${folderPath}/${fileNameWithoutExtension}.test.${extension}`;
-      const inTestsFolderTestFilePath = `${folderPath}/__tests__/${fileNameWithoutExtension}.test.${extension}`;
+  //     const neighbourTestFilePath = `${folderPath}/${fileNameWithoutExtension}.test.${extension}`;
+  //     const inTestsFolderTestFilePath = `${folderPath}/__tests__/${fileNameWithoutExtension}.test.${extension}`;
 
-      if (__fs.existsSync(neighbourTestFilePath)) {
-        input = neighbourTestFilePath;
-      } else if (__fs.existsSync(inTestsFolderTestFilePath)) {
-        input = inTestsFolderTestFilePath;
-      }
+  //     if (__fs.existsSync(neighbourTestFilePath)) {
+  //       input = neighbourTestFilePath;
+  //     } else if (__fs.existsSync(inTestsFolderTestFilePath)) {
+  //       input = inTestsFolderTestFilePath;
+  //     }
 
-      const commandToRun =
-        __buildCommandLine(
-          `npx jest ${input}`,
-          __STestJestCliInterface.definitionObj,
-          argsObj
-        ) + ' --forceExit --detectOpenHandles';
+  //     const commandToRun =
+  //       __buildCommandLine(
+  //         `npx jest ${input}`,
+  //         __STestJestInterface.definitionObj,
+  //         argsObj
+  //       ) + ' --forceExit --detectOpenHandles';
 
-      const childProcess = new __SChildProcessManager(commandToRun, {});
+  //     const childProcess = new __SChildProcessManager(commandToRun, {});
 
-      const result = childProcess.run();
+  //     const promise = childProcess.run();
+  //     const result = await promise;
 
-      result.on('resolve', () => {
-        // onsole.log('CCOCOC');
-      });
-      // console.log(result);
+  //     if (result.state === 'success') {
+  //       return promise.reject(result.value.stdout.join('\n'));
+  //     }
 
-      if (result.state === 'success') {
-        return promise.reject(result.value.stdout.join('\n'));
-      }
+  //     // __SPromise.pipe(childProcess, promise);
 
-      // __SPromise.pipe(childProcess, promise);
+  //     promise.resolve(result);
 
-      promise.resolve(result);
-    })();
-
-    return super.run(promise);
-  }
+  //   return super.run(promise);
+  // }
 
   /**
    * @name          kill

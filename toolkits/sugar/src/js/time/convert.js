@@ -15,7 +15,7 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function convert(from, to = 'ms') {
+function convert(from, to = 'ms') {
   // init the fromMs variable
   let fromMs = from;
 
@@ -120,3 +120,12 @@ export default function convert(from, to = 'ms') {
       break;
   }
 }
+convert.MILLISECOND = 'ms';
+convert.SECOND = 's';
+convert.MINUTE = 'm';
+convert.HOUR = 'h';
+convert.DAY = 'd';
+convert.WEEK = 'w';
+convert.MONTH = 'month';
+convert.YEAR = 'y';
+export default convert;

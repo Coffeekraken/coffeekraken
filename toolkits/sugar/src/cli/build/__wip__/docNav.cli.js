@@ -4,10 +4,9 @@ const __SBuildDocNavActionsStream = require('../../node/build/docNav/SBuildDocNa
 const __output = require('../../../node/process/output');
 
 module.exports = (stringArgs = '') => {
-  const args = __parseArgs(
-    stringArgs,
-    __SBuildDocNavCli.interface.definitionObj
-  );
+  const args = __parseArgs(stringArgs, {
+    definitionObj: __SBuildDocNavCli.interface.definitionObj
+  });
   const stream = new __SBuildDocNavActionsStream({
     name: 'Build docNav.json'
   });

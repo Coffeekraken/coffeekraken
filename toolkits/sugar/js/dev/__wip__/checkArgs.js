@@ -64,14 +64,16 @@ function checkArgs(func, args, descriptor, throwError) {
   argumentsNames.forEach((argName, i) => {
     // get the argument description object
     var descriptionObj = __parseArgs(descriptor[argName], {
-      types: '["String","Array"] -t --types',
-      values: 'Array -v --values',
-      of: 'Array -o --of /[a-zA-Z]+,?/ "Number,BigInt,String,Boolean,Null,Undefined,Object,Symbol,Function,Array"',
-      greater: 'Number -g --greater /^\\d$/',
-      lower: 'Number -l --lower /^\\d$/',
-      allowUndefined: 'Boolean -u --allow-undefined "false"',
-      allowNull: 'Boolean -n --allow-null "false"',
-      default: "[".concat(availableTypes.map(i => "\"".concat(__upperFirst(i), "\"")).toString(), "] -d --default /\"[\\s\\S]+\"/")
+      definitionObj: {
+        types: '["String","Array"] -t --types',
+        values: 'Array -v --values',
+        of: 'Array -o --of /[a-zA-Z]+,?/ "Number,BigInt,String,Boolean,Null,Undefined,Object,Symbol,Function,Array"',
+        greater: 'Number -g --greater /^\\d$/',
+        lower: 'Number -l --lower /^\\d$/',
+        allowUndefined: 'Boolean -u --allow-undefined "false"',
+        allowNull: 'Boolean -n --allow-null "false"',
+        default: "[".concat(availableTypes.map(i => "\"".concat(__upperFirst(i), "\"")).toString(), "] -d --default /\"[\\s\\S]+\"/")
+      }
     });
 
     if (!descriptor[argName]) return;

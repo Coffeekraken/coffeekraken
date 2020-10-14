@@ -142,7 +142,9 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
       __fs.writeFileSync(tmpInputPath, streamObj.data);
 
       __onProcessExit(() => {
-        __fs.unlinkSync(tmpInputPath);
+        if (__fs.existsSync(tmpInputPath)) {
+          __fs.unlinkSync(tmpInputPath);
+        }
       });
 
       const compiler = __webpack(
@@ -243,7 +245,9 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
       try {
         compiler.run((err, stats) => {
           // delete the tmp file
-          __fs.unlinkSync(tmpInputPath);
+          if (__fs.existsSync(tmpInputPath)) {
+            __fs.unlinkSync(tmpInputPath);
+          }
 
           if (err) {
             let errorString = err.stack || err;
@@ -289,7 +293,9 @@ module.exports = class SWebpackStreamAction extends __SActionsStreamAction {
         });
       } catch (e) {
         // delete the tmp file
-        __fs.unlinkSync(tmpInputPath);
+        if (__fs.existsSync(tmpInputPath)) {
+          __fs.unlinkSync(tmpInputPath);
+        }
         // console.log(e.toString());
       }
     });

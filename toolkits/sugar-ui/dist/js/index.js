@@ -7029,9 +7029,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       new Promise((rejectPromiseResolve, rejectPromiseReject) => {
         _masterPromiseRejectFn = rejectPromiseReject;
       }).catch(e => {
-        _this.trigger('catch', {
-          value: e
-        });
+        _this.trigger('catch', e);
       });
       var executor = typeof executorFnOrSettings === 'function' ? executorFnOrSettings : null;
 
@@ -8971,7 +8969,7 @@ module.exports = exports.default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = convert;
+exports.default = void 0;
 /**
  * @name                                  convert
  * @namespace           sugar.js.time
@@ -9077,6 +9075,16 @@ function convert(from, to) {
   }
 }
 
+convert.MILLISECOND = 'ms';
+convert.SECOND = 's';
+convert.MINUTE = 'm';
+convert.HOUR = 'h';
+convert.DAY = 'd';
+convert.WEEK = 'w';
+convert.MONTH = 'month';
+convert.YEAR = 'y';
+var _default = convert;
+exports.default = _default;
 module.exports = exports.default;
 
 /***/ }),

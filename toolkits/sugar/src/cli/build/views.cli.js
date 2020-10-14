@@ -4,7 +4,9 @@ const __SBuildViewsActionsStream = require('../../node/build/views/SBuildViewsAc
 const __output = require('../../node/process/output');
 
 module.exports = (stringArgs = '') => {
-  const args = __parseArgs(stringArgs, __SBuildViewCli.interface.definitionObj);
+  const args = __parseArgs(stringArgs, {
+    definitionObj: __SBuildViewCli.interface.definitionObj
+  });
   const stream = new __SBuildViewsActionsStream({});
   const proc = stream.start(args);
   __output(proc);

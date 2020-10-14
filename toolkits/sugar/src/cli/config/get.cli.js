@@ -3,10 +3,12 @@ const __sugarConfig = require('../../node/config/sugar');
 
 module.exports = async (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
-    path: {
-      type: 'String',
-      alias: 'p',
-      default: null
+    definitionObj: {
+      path: {
+        type: 'String',
+        alias: 'p',
+        default: null
+      }
     }
   });
   if (!args.path) {

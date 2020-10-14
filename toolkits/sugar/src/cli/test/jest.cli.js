@@ -8,11 +8,10 @@
 //   });
 // };
 
-const __STestJestCli = require('../../node/test/jest/STestJestCli');
+// const __STestJestCli = require('../../node/test/jest/STestJestCli');
+const __STestJestProcess = require('../../node/test/jest/STestJestProcess');
 
 module.exports = (stringArgs = '') => {
-  const cli = new __STestJestCli(stringArgs, {
-    output: {}
-  });
-  cli.run();
+  const pro = new __STestJestProcess();
+  pro.run(stringArgs);
 };

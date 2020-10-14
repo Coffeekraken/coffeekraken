@@ -1,12 +1,10 @@
-const __SBuildJsCli = require('../../node/build/js/SBuildJsCli');
 const __moduleAliases = require('../../node/build/js/moduleAliases');
+const __SBuildJsProcess = require('../../node/build/js/SBuildJsProcess');
 
 module.exports = (stringArgs = '') => {
-  // module aliases
   __moduleAliases();
-
-  const cli = new __SBuildJsCli(stringArgs, {
-    output: {}
+  const pro = new __SBuildJsProcess({
+    runAsChild: true
   });
-  cli.run();
+  pro.run(stringArgs);
 };

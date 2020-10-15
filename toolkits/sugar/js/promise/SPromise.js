@@ -76,9 +76,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * the possibility to resolve it multiple times. Here's a list of the "differences" and the "features" that this class provide:
  *
  * - Pass the normal "resolve" and "reject" function to the passed executor
- * - Pass a new function to the passed executor called "trigger" that let you launch your registered callbacks like "then", "catch", etc... but without resolving the master promise. Here's some examples:
- *    - new SPromise((resolve, reject, trigger, cancel) => { trigger('then', 'myCoolValue'); }).then(value => { ... });
- *    - new SPromise((resolve, reject, trigger, cancel) => { trigger('then,catch', 'myCoolValue') }).then(value => { ... });
+ * - Pass a new function to the passed executor called "trigger" that let you launch your registered callbacks like "resolve", "catch", etc... but without resolving the master promise. Here's some examples:
+ *    - new SPromise((resolve, reject, trigger, cancel) => { trigger('resolve', 'myCoolValue'); }).then(value => { ... });
+ *    - new SPromise((resolve, reject, trigger, cancel) => { trigger('reject', 'myCoolValue') }).catch(value => { ... });
  * - Pass a new function to the passed executor called "cancel" that let you stop/cancel the promise execution without triggering your registered callbacks unless the "cancel" once...
  * - Expose the normal "then" and "catch" methods to register your callbacks
  * - Expose some new callbacks registration functions described here:
@@ -191,7 +191,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
       // settings
       settings = (0, _deepMerge.default)({
-        stacks: 'then,catch,resolve,reject,finally,cancel',
+        // stacks: 'then,catch,resolve,reject,finally,cancel',
+        stacks: 'catch,resolve,reject,finally,cancel',
         processor: null,
         filter: null
       }, settings);
@@ -405,7 +406,6 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       configurable: true,
       enumerable: false,
       value: {
-        then: [],
         catch: [],
         resolve: [],
         reject: [],
@@ -576,7 +576,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * This is the "resolve" method exposed on the promise itself for convinience
      *
      * @param         {Mixed}         arg       The value that you want to return back from the promise
-     * @param       {Array|String}         [stacksOrder='then,resolve,finally']      This specify in which order have to be called the stacks
+     * @param       {Array|String}         [stacksOrder='resolve,finally']      This specify in which order have to be called the stacks
      * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -586,7 +586,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
     key: "resolve",
     value: function resolve(arg, stacksOrder) {
       if (stacksOrder === void 0) {
-        stacksOrder = 'then,resolve,finally';
+        stacksOrder = 'resolve,finally';
       }
 
       return this._resolve(arg, stacksOrder);
@@ -600,7 +600,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * This is the method that will be called by the promise executor passed resolve function
      *
      * @param       {Mixed}         arg           The argument that the promise user is sendind through the resolve function
-     * @param       {Array|String}         [stacksOrder='then,resolve,finally']      This specify in which order have to be called the stacks
+     * @param       {Array|String}         [stacksOrder='resolve,finally']      This specify in which order have to be called the stacks
      * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -612,7 +612,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       var _this2 = this;
 
       if (stacksOrder === void 0) {
-        stacksOrder = 'then,resolve,finally';
+        stacksOrder = 'resolve,finally';
       }
 
       if (this._isDestroyed) return;
@@ -771,20 +771,19 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * @type          Function
      * @async
      *
-     * This is the method that allows you to trigger the callbacks like "then", "catch", "finally", etc... without actually resolving the Promise itself
+     * This is the method that allows you to trigger the callbacks like "catch", "finally", etc... without actually resolving the Promise itself
      *
-     * @param         {String|Array}        what            The callbacks that you want to trigger. Can be "then", "catch", "finally" or "cancel". You can trigger multiple stacks by passing an Array like ['then','finally'], or a string like "then,finally"
+     * @param         {String|Array}        what            The callbacks that you want to trigger. Can be catch", "finally" or "cancel". You can trigger multiple stacks by passing an Array like ['catch','finally'], or a string like "catch,finally"
      * @param         {Mixed}         arg         The argument you want to pass to the callback
      * @return        {Promise}                       A default Promise that will be resolved with the result of the stack execution
      *
      * @example         js
      * new SPromise((resolve, reject, trigger, cancel) => {
-     *    trigger('then', 'hello world');
      *    setTimeout(() => {
      *      resolve('something');
      *    }, 2000);
      * }).then(value => {
-     *    // do something with one time "hello world", and one time "something"...
+     *    // do something with one time "something"
      * });
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -884,7 +883,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      *
      * This function take an Array Stack as parameter and execute it to return the result
      *
-     * @param         {Array|String}             stack             The stack to execute. Can be the stack array directly, or just the stack name like "then", "catch", etc.stack.stack.
+     * @param         {Array|String}             stack             The stack to execute. Can be the stack array directly, or just the stack name like "catch", etc.stack.stack.
      * @param         {Mixed}             initialValue      The initial value to pass to the first stack callback
      * @return        {Promise}                             A promise resolved with the stack result
      *
@@ -911,7 +910,6 @@ var SPromise = /*#__PURE__*/function (_Promise) {
 
           Object.keys(this._stacks).forEach(stackName => {
             if (stackName === stack) return; // const toAvoid = [
-            //   'then',
             //   'catch',
             //   'resolve',
             //   'reject',
@@ -975,7 +973,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * @private
      * @async
      *
-     * This function take as parameters a list of stacks to trigger like an Array ['then','finnaly'], or a string like so "then,finally", and as second parameter,
+     * This function take as parameters a list of stacks to trigger like an Array ['catch','finnaly'], or a string like so "catch,finally", and as second parameter,
      * the initial value to pass to the first callback of the joined stacks...
      *
      * @param         {Array|String}            stacks          The stacks to trigger
@@ -1027,7 +1025,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
-     * @param           {String|Array}      stacks        The stacks in which you want register your callback. Either an Array like ['then','finally'], or a String like "then,finally"
+     * @param           {String|Array}      stacks        The stacks in which you want register your callback. Either an Array like ['catch','finally'], or a String like "catch,finally"
      * @param           {Function}        callback        The callback function to register
      * @return          {SPromise}                  The SPromise instance to maintain chainability
      *
@@ -1035,7 +1033,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * new SPromise((resolve, reject, trigger, cancel) => {
      *    // do something...
      *    resolve('hello world');
-     * }).on('then', value => {
+     * }).on('resolve', value => {
      *    // do something with the value that is "hello world"
      * }).on('catch:1', error => {
      *    // do something that will be called only once
@@ -1110,61 +1108,11 @@ var SPromise = /*#__PURE__*/function (_Promise) {
       return this;
     }
     /**
-     * @name                then
-     * @type                Function
-     *
-     * This method allows the SPromise user to register a function that will be called every time the "resolve" one is called in the executor
-     * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
-     * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
-     * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
-     *
-     * @param           {Number}          [callNumber=-1]     (Optional) How many times you want this callback to be called at max. -1 means unlimited
-     * @param           {Function}        callback        The callback function to register
-     * @return          {SPromise}                  The SPromise instance to maintain chainability
-     *
-     * @example         js
-     * new SPromise((resolve, reject, trigger, cancel) => {
-     *    // do something...
-     *    resolve('hello world');
-     * }).then(value => {
-     *    // do something with the value that is "hello world"
-     *    return new Promise((resolve, reject) => {
-     *       setTimeout(() => resolve('hola'), 1000);
-     *    });
-     * }).then(2, value => {
-     *    // do something that will be executed only twice
-     *    // do something with the value passed "hola"
-     * });
-     *
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-
-  }, {
-    key: "then",
-    value: function then() {
-      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-        args[_key5] = arguments[_key5];
-      }
-
-      if (args.length === 2 && typeof args[0] === 'function' && typeof args[1] === 'function') {
-        this._masterPromiseResolveFn = args[0]; // const mainRejectFn = this._masterPromiseRejectFn;
-        // this._masterPromiseRejectFn = (...a) => {
-        //   args[1](...a);
-        //   mainRejectFn(...a);
-        // };
-
-        return;
-      } // super.then(...args);
-
-
-      return this._registerCallbackInStack('then', ...args);
-    }
-    /**
      * @name                catch
      * @type                Function
      *
      * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
-     * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
+     * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "catch", etc using
      * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
@@ -1188,8 +1136,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "catch",
     value: function _catch() {
-      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        args[_key6] = arguments[_key6];
+      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        args[_key5] = arguments[_key5];
       }
 
       return this.on('catch', ...args);
@@ -1199,7 +1147,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * @type                Function
      *
      * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
-     * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
+     * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "catch", etc using
      * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
@@ -1220,8 +1168,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "finally",
     value: function _finally() {
-      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        args[_key7] = arguments[_key7];
+      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        args[_key6] = arguments[_key6];
       }
 
       // super.finally(...args);
@@ -1232,7 +1180,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * @type                Function
      *
      * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
-     * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
+     * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "catch", etc using
      * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
@@ -1253,8 +1201,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "resolved",
     value: function resolved() {
-      for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        args[_key8] = arguments[_key8];
+      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        args[_key7] = arguments[_key7];
       }
 
       return this.on('resolve', ...args);
@@ -1264,7 +1212,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * @type                Function
      *
      * This method allows the SPromise user to register a function that will be called every time the "reject" one is called in the executor
-     * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
+     * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "catch", etc using
      * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
@@ -1285,8 +1233,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "rejected",
     value: function rejected() {
-      for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        args[_key9] = arguments[_key9];
+      for (var _len8 = arguments.length, args = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        args[_key8] = arguments[_key8];
       }
 
       return this.on('reject', ...args);
@@ -1296,7 +1244,7 @@ var SPromise = /*#__PURE__*/function (_Promise) {
      * @type                Function
      *
      * This method allows the SPromise user to register a function that will be called once when the "revoke" function has been called
-     * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "then", etc using
+     * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "catch", etc using
      * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
      * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
      *
@@ -1317,8 +1265,8 @@ var SPromise = /*#__PURE__*/function (_Promise) {
   }, {
     key: "canceled",
     value: function canceled() {
-      for (var _len10 = arguments.length, args = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-        args[_key10] = arguments[_key10];
+      for (var _len9 = arguments.length, args = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        args[_key9] = arguments[_key9];
       }
 
       return this.on('cancel', ...args);

@@ -1,10 +1,6 @@
-const __SBuildScssCli = require('../../node/build/scss/SBuildScssCli');
+const __SBuildScssProcess = require('../../node/build/scss/SBuildScssProcess');
 
 module.exports = (stringArgs = '') => {
-  const cli = new __SBuildScssCli(stringArgs, {
-    output: {
-      maxItemsByGroup: 2
-    }
-  });
-  cli.run();
+  const pro = new __SBuildScssProcess({});
+  pro.run(stringArgs);
 };

@@ -1,13 +1,6 @@
-const __parseArgs = require('../../node/cli/parseArgs');
-const __SBuildDocMapCli = require('../../node/build/docMap/SBuildDocMapCli');
-const __SBuildDocMapActionsStream = require('../../node/build/docMap/SBuildDocMapActionsStream');
-const __output = require('../../node/process/output');
+const __SBuildDocMapProcess = require('../../node/build/docMap/SBuildDocMapProcess');
 
 module.exports = (stringArgs = '') => {
-  const args = __parseArgs(stringArgs, {
-    definitionObj: __SBuildDocMapCli.interface.definitionObj
-  });
-  const stream = new __SBuildDocMapActionsStream({});
-  const proc = stream.start(args);
-  __output(proc);
+  const pro = new __SBuildDocMapProcess({});
+  pro.run(stringArgs);
 };

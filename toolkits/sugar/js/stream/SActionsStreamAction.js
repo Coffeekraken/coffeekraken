@@ -332,6 +332,16 @@ var SActionStreamAction = /*#__PURE__*/function (_SPromise) {
     get: function get() {
       return this._settings;
     }
+  }, {
+    key: "id",
+    get: function get() {
+      return this._settings.id;
+    }
+  }, {
+    key: "name",
+    get: function get() {
+      return this._settings.name;
+    }
   }]);
 
   return SActionStreamAction;

@@ -1,6 +1,8 @@
 const __SProcessManager = require('../../process/SProcess');
 const __SBuildFrontspecActionsStream = require('./SBuildFrontspecActionsStream');
 const __deepMerge = require('../../object/deepMerge');
+const __SProcess = require('../../process/SProcess');
+const __SBuildFrontspecInterface = require('./interface/SBuildFrontspecInterface');
 
 /**
  * @name            SBuildFrontspecProcess
@@ -13,7 +15,9 @@ const __deepMerge = require('../../object/deepMerge');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildFrontspecProcess extends __SProcessManager {
+module.exports = class SBuildFrontspecProcess extends __SProcess {
+  static interface = __SBuildFrontspecInterface;
+
   /**
    * @name          constructor
    * @type          Function
@@ -23,9 +27,9 @@ module.exports = class SBuildFrontspecProcess extends __SProcessManager {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(initialParams = {}, settings = {}) {
+  constructor(settings = {}) {
     super(
-      initialParams,
+      __filename,
       __deepMerge(
         {
           id: 'SBuildFrontspecProcess',
@@ -37,35 +41,21 @@ module.exports = class SBuildFrontspecProcess extends __SProcessManager {
   }
 
   /**
-   * @name              run
+   * @name              process
    * @type              Function
    *
-   * Method that execute the frontend server code, listen for errors, etc...
+   * Method that execute the actual process
    *
-   * @param       {Object}        argsObj           The arguments object that will be passed to the underlined actions stream instance
+   * @param       {Object}        params           The arguments object that will be passed to the underlined actions stream instance
    * @param       {Object}        [settings={}]     An object of settings passed to the ```start``` method of the ```SBuildFrontspecActionsStream``` instance
    * @return      {Süromise}                        An SPomise instance representing the build process
    *
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(argsObj, settings = {}) {
+  process(params, settings = {}) {
     const actionStream = new __SBuildFrontspecActionsStream(settings);
-    this._buildFrontspecActionsStream = actionStream.start(argsObj);
-    return super.run(this._buildFrontspecActionsStream);
-  }
-
-  /**
-   * @name          kill
-   * @type          Function
-   *
-   * Method that allows you to kill the process
-   *
-   * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  kill() {
-    this._buildFrontspecActionsStream.cancel();
-    super.kill();
+    const actionStreamProcess = actionStream.start(params);
+    this.bindSPromise(actionStreamProcess);
   }
 };

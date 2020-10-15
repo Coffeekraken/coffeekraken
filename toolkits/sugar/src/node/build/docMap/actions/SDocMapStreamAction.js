@@ -1,24 +1,21 @@
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
+const __SDocMap = require('../../../doc/SDocMap');
 const __deepMerge = require('../../../object/deepMerge');
-const __globby = require('globby');
-const __path = require('path');
-const __packageRoot = require('../../../path/packageRoot');
-const __getFilename = require('../../../fs/filename');
 
 /**
- * @name                SExternalDocMapStreamAction
+ * @name                SDocMapStreamActions
  * @namespace           sugar.node.build.docMap.actions
  * @type                Class
  * @extends             SActionsStreamAction
  *
- * This function is responsible of getting docMap.js references into external folders like node_modules, etc...
+ * This function is responsible of generating the docMap.json file at the root of the documentation directory
  *
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SExternalDocMapStreamAction extends __SActionsStreamAction {
+module.exports = class SDocMapStreamActions extends __SActionsStreamAction {
   /**
    * @name            definitionObj
    * @type             Object
@@ -29,11 +26,17 @@ module.exports = class SExternalDocMapStreamAction extends __SActionsStreamActio
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static definitionObj = {
-    externalDirs: {
-      type: 'String|Array<String>',
+    files: {
+      type: 'Array<String>',
+      required: true
+    },
+    output: {
+      type: 'String',
       required: true
     }
   };
+
+  static once = true;
 
   /**
    * @name            constructor
@@ -48,7 +51,7 @@ module.exports = class SExternalDocMapStreamAction extends __SActionsStreamActio
     super(
       __deepMerge(
         {
-          id: 'actionStream.action.docMapExternal'
+          id: 'SDocMapStreamAction'
         },
         settings
       )
@@ -66,25 +69,11 @@ module.exports = class SExternalDocMapStreamAction extends __SActionsStreamActio
    */
   run(streamObj, settings) {
     return super.run(streamObj, async (resolve, reject) => {
-      const files = await __globby(streamObj.externalDocMaps);
-
-      if (!files) return resolve(streamObj);
-
-      files.forEach((filePath) => {
-        const json = require(filePath);
-        const cwd = __path
-          .relative(__packageRoot(), filePath)
-          .replace(`/docMap.json`, '');
-
-        Object.keys(json).forEach((key) => {
-          const itemObj = json[key];
-          if (!itemObj.name || !itemObj.namespace) return;
-          if (streamObj.data[key]) return;
-          itemObj.cwd = cwd;
-          streamObj.data[key] = itemObj;
-        });
-      });
-
+      const docMap = new __SDocMap(settings);
+      const res = await docMap.generate();
+      if (res) {
+        streamObj.data = res;
+      }
       resolve(streamObj);
     });
   }

@@ -3,6 +3,11 @@ const __SPromise = require('../promise/SPromise');
 const __glob = require('glob');
 const __SFsFile = require('../fs/SFsFile');
 const __extractGlob = require('./extractGlob');
+const __isGlob = require('../is/glob');
+const __isPath = require('../is/path');
+const __fs = require('fs');
+const __toRegex = require('to-regex');
+const __isDirectory = require('../is/directory');
 
 /**
  * @name            resolveGlob
@@ -17,10 +22,10 @@ const __extractGlob = require('./extractGlob');
  * @param       {Object}            [settings={}]           An object of settings to configure your glob process
  * @return      {SPromise}                                  An SPromise instance that will be resolved once the search process has been fully finished
  *
- * @setting     {Object}        ...minimatch                All the minimatch (https://www.npmjs.com/package/minimatch) options are supported
  * @setting     {String}        rootDir                     The root directory where to start the glob search process
- * @setting     {Boolean}       symlinks                    Follow or not the symlinks
  * @setting     {Object}        ...glob                     All the glob (https://www.npmjs.com/package/glob) options are supported
+ *
+ * @todo          document the special ":" syntax available
  *
  * @example         js
  * const resolveGlob = require('@coffeekraken/sugar/node/glob/resolveGlob');
@@ -36,7 +41,8 @@ module.exports = function resolveGlob(globs, settings = {}) {
       settings = __deepMerge(
         {
           rootDir: settings.cwd || process.cwd(),
-          symlinks: true
+          symlinks: true,
+          nodir: true
         },
         settings
       );
@@ -49,21 +55,42 @@ module.exports = function resolveGlob(globs, settings = {}) {
         const glob = globs[i];
 
         let rootDir = settings.rootDir,
-          globPattern;
+          globPattern,
+          searchReg;
 
-        if (glob.includes(':')) {
-          globPattern = glob.split(':')[1];
-          rootDir = glob.split(':')[0];
-        } else {
-          globPattern = settings.rootDir
-            ? glob.replace(`${settings.rootDir}/`, '')
-            : __extractGlob(glob);
-        }
+        const splits = glob.split(':');
+        splits.forEach((split) => {
+          if (
+            split.substr(0, 1) === '/' &&
+            split.match(/.*\/[igmsuy]{0,6}]?/)
+          ) {
+            const regSplits = split.split('/').splice(1);
+            const regString = regSplits[0];
+            const flags = regSplits[regSplits.length - 1];
+            searchReg = __toRegex(regString, {
+              flags
+            });
+          } else if (__isGlob(split)) {
+            globPattern = split;
+          } else if (__isPath(split, true)) {
+            rootDir = split;
+          }
+        });
 
-        const pathes = __glob.sync(globPattern, {
+        let pathes = __glob.sync(globPattern, {
           cwd: rootDir,
           ...settings
         });
+
+        // check if need to search for inline content
+        if (searchReg) {
+          pathes = pathes.filter((path) => {
+            if (__isDirectory(path)) return false;
+            const content = __fs.readFileSync(path, 'utf8');
+            if (searchReg.test(content)) return true;
+            return false;
+          });
+        }
 
         pathes.forEach((path) => {
           const sFsFile = new __SFsFile(path, {

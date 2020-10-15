@@ -96,7 +96,13 @@ export default class SActionStream extends __SPromise {
           after: [],
           beforeActions: {},
           afterActions: {},
-          actions: {}
+          actions: {},
+          logs: {
+            start: true,
+            success: true,
+            error: true,
+            exclude: []
+          }
         },
         settings
       )
@@ -174,11 +180,17 @@ export default class SActionStream extends __SPromise {
       if (this._settings.cache) {
         logString += ` | From cache: <yellow>${this._currentStream.currentActionObj.fromCache}</yellow>`;
       }
-      this.log({
-        temp: true,
-        group: this._currentStream.currentActionObj.name,
-        value: logString
-      });
+      if (
+        this._settings.logs.exclude.indexOf(
+          this._currentStream.currentActionObj.id
+        ) === -1
+      ) {
+        this.log({
+          temp: true,
+          group: this._currentStream.currentActionObj.name,
+          value: logString
+        });
+      }
     };
 
     let processFnArray = !Array.isArray(processFn) ? [processFn] : processFn;
@@ -529,12 +541,19 @@ export default class SActionStream extends __SPromise {
 
         try {
           // starting log
-          let startString = `#start Starting the stream "<cyan>${
-            settings.name || 'unnamed'
-          }</cyan>"`;
-          // this.log({
-          //   value: startString
-          // });
+          if (
+            this._settings.logs.exclude.indexOf(
+              this._currentStream.currentActionObj.id
+            ) === -1 &&
+            this._settings.logs.start
+          ) {
+            let startString = `#start Starting the stream "<cyan>${
+              settings.name || 'unnamed'
+            }</cyan>"`;
+            this.log({
+              value: startString
+            });
+          }
           trigger('start', {});
 
           currentStreamObj = await this._applyFnOnStreamObj(
@@ -669,11 +688,17 @@ export default class SActionStream extends __SPromise {
                 `${this._currentStream.currentActionObj.name}.start`,
                 Object.assign({}, this._currentStream.currentActionObj)
               );
-              const startString = `#start Starting the action "<yellow>${this._currentStream.currentActionObj.name}</yellow>" on <magenta>${this._currentStream.currentActionObj.sourcesCount}</magenta> sources`;
-              this.log({
-                group: this._currentStream.currentActionObj.name,
-                value: startString
-              });
+              if (
+                this._settings.logs.exclude.indexOf(
+                  this._currentStream.currentActionObj.id
+                ) === -1
+              ) {
+                const startString = `#start Starting the action "<yellow>${this._currentStream.currentActionObj.name}</yellow>" on <magenta>${this._currentStream.currentActionObj.sourcesCount}</magenta> sources`;
+                this.log({
+                  group: this._currentStream.currentActionObj.name,
+                  value: startString
+                });
+              }
 
               await this._handleStreamObjArray();
 
@@ -733,17 +758,14 @@ export default class SActionStream extends __SPromise {
                 this._currentStream.currentActionObj.stats.stdout.push(
                   successString
                 );
-                this.log({
-                  group: this._currentStream.currentActionObj.name,
-                  value: successString
-                });
-                if (__isChildProcess()) {
+                if (
+                  this._settings.logs.exclude.indexOf(
+                    this._currentStream.currentActionObj.id
+                  ) === -1
+                ) {
                   this.log({
-                    value: 'CHILD'
-                  });
-                } else {
-                  this.log({
-                    value: 'MAIN'
+                    group: this._currentStream.currentActionObj.name,
+                    value: successString
                   });
                 }
               }
@@ -780,41 +802,47 @@ export default class SActionStream extends __SPromise {
             this.hasCurrentStreamErrors() ||
             this._currentStream.stats.canceled
           ) {
-            const errorString = `The stream "<cyan>${
-              settings.name || 'unnamed'
-            }</cyan>" has had some issues...`;
-            this._currentStream.stats.stdout.push(errorString);
-            this.log({
-              error: true,
-              value: errorString
-            });
-            this.log({
-              error: true,
-              value: __trimLines(this._currentStream.stats.stderr.join('\n'))
-            });
+            if (this._settings.logs.error) {
+              const errorString = `The stream "<cyan>${
+                settings.name || 'unnamed'
+              }</cyan>" has had some issues...`;
+              this._currentStream.stats.stdout.push(errorString);
+              this.log({
+                error: true,
+                value: errorString
+              });
+              this.log({
+                error: true,
+                value: __trimLines(this._currentStream.stats.stderr.join('\n'))
+              });
+            }
 
             trigger('reject', this._currentStream.stats);
           } else {
-            const completeString = `#success The stream "<cyan>${
-              this._currentStream.settings.name || 'unnamed'
-            }</cyan>" has finished <green>successfully</green> in <yellow>${__convert(
-              this._currentStream.stats.duration,
-              's'
-            )}s</yellow>`;
-            this._currentStream.stats.stdout.push(completeString);
+            if (this._settings.logs.success) {
+              const completeString = `#success The stream "<cyan>${
+                this._currentStream.settings.name || 'unnamed'
+              }</cyan>" has finished <green>successfully</green> in <yellow>${__convert(
+                this._currentStream.stats.duration,
+                's'
+              )}s</yellow>`;
+              this._currentStream.stats.stdout.push(completeString);
 
-            this.log({
-              value: completeString
-            });
+              this.log({
+                value: completeString
+              });
+            }
 
             // resolve this stream process
             trigger('success', {});
             resolve(this._currentStream.stats);
           }
         } catch (e) {
-          this.log({
-            value: e.__toString()
-          });
+          if (this._settings.logs.error) {
+            this.log({
+              value: e.toString()
+            });
+          }
         }
       },
       {
@@ -837,12 +865,6 @@ export default class SActionStream extends __SPromise {
     // }
 
     // __SPromise.pipe(this._currentStream, this);
-
-    this._currentStream.promise.on('resolve', () => {
-      this.log({
-        value: 'SSS'
-      });
-    });
 
     return this._currentStream.promise;
   }

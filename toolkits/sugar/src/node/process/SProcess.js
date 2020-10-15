@@ -1,3 +1,4 @@
+const __path = require('path');
 const __convert = require('../time/convert');
 const __wait = require('../time/wait');
 const __isClass = require('../is/class');
@@ -199,7 +200,7 @@ module.exports = class SProcess extends __SPromise {
       __deepMerge(
         {
           output: {},
-          runAsChild: false,
+          runAsChild: true,
           definitionObj: {},
           triggerParent: true,
           notifications: {
@@ -251,7 +252,7 @@ module.exports = class SProcess extends __SPromise {
     __SProcessInterface.apply(this);
 
     // add the listeners
-    this.on('resolve,reject,cancel,finally', (data, metas) => {
+    this.on('resolve,reject,cancel', (data, metas) => {
       this.value = data;
       this.endTime = Date.now();
       this.duration = Date.now() - this.startTime;
@@ -261,31 +262,31 @@ module.exports = class SProcess extends __SPromise {
       else this.state = 'idle';
 
       if (this.state === 'success') {
-        // log a success message
-        this.log({
-          value: `<yellow>${'-'.repeat(
-            process.stdout.columns - 4
-          )}</yellow>\nThe <yellow>${this.name}</yellow> (<cyan>${
-            this.id
-          }</cyan>) process has finished <green>successfully</green> in <yellow>${__convert(
-            this.duration,
-            __convert.SECOND
-          )}s</yellow>`
-        });
         if (!__isChildProcess()) {
+          // log a success message
+          this.log({
+            value: `<yellow>${'-'.repeat(
+              process.stdout.columns - 4
+            )}</yellow>\nThe <yellow>${this.name}</yellow> (<cyan>${
+              this.id
+            }</cyan>) process has finished <green>successfully</green> in <yellow>${__convert(
+              this.duration,
+              __convert.SECOND
+            )}s</yellow>`
+          });
           if (this._settings.notifications.enable) {
             __notifier.notify(this._settings.notifications.success);
           }
         }
       } else if (this.state === 'error') {
-        this.log({
-          value: `<red>${'-'.repeat(
-            process.stdout.columns - 4
-          )}</red>\n<red>Something went wrong</red> during the <yellow>${
-            this.name
-          }</yellow> (<cyan>${this.id}</cyan>) process execution`
-        });
         if (!__isChildProcess()) {
+          this.log({
+            value: `<red>${'-'.repeat(
+              process.stdout.columns - 4
+            )}</red>\n<red>Something went wrong</red> during the <yellow>${
+              this.name
+            }</yellow> (<cyan>${this.id}</cyan>) process execution`
+          });
           if (this._settings.notifications.enable) {
             __notifier.notify(this._settings.notifications.error);
           }
@@ -367,15 +368,11 @@ module.exports = class SProcess extends __SPromise {
     }
     this._promise = promise;
     __SPromise.pipe(this._promise, this, {
-      exclude: ['resolve', 'reject', 'cancel', 'finally']
+      // exclude: ['resolve']
     });
-    // __SPromise.map(this._promise, this);
 
-    this._promise.on('resolve,reject,cancel,finally', (data, metas) => {
-      this[metas.stack](data);
-      this.log({
-        value: 'RESO'
-      });
+    this._promise.on('resolve', (data, metas) => {
+      this.resolve(data);
     });
   }
 
@@ -394,6 +391,17 @@ module.exports = class SProcess extends __SPromise {
 
     await __wait(100);
 
+    // log a start message
+    if (!__isChildProcess()) {
+      this.log({
+        value: `Starting the <yellow>${this.name}</yellow> (<cyan>${
+          this.id
+        }</cyan>) process...\n<yellow>${'-'.repeat(
+          process.stdout.columns - 4
+        )}</yellow>`
+      });
+    }
+
     let paramsObj = paramsOrStringArgs;
     if (typeof paramsObj === 'string') {
       paramsObj = __parseArgs(paramsObj, {
@@ -411,7 +419,10 @@ module.exports = class SProcess extends __SPromise {
     if (settings.runAsChild && !__isChildProcess()) {
       // build the command to run depending on the passed command in the constructor and the params
       const commandToRun = __buildCommandLine(
-        'sugar process.runChild [arguments]',
+        `node ${__path.resolve(
+          __dirname,
+          '../../cli/sugar.cli.js'
+        )} process.runChild [arguments]`,
         {
           ...paramsObj,
           processPath: this._processPath
@@ -490,15 +501,6 @@ module.exports = class SProcess extends __SPromise {
       return;
     }
 
-    // log a start message
-    this.log({
-      value: `Starting the <yellow>${this.name}</yellow> (<cyan>${
-        this.id
-      }</cyan>) process...\n<yellow>${'-'.repeat(
-        process.stdout.columns - 4
-      )}</yellow>`
-    });
-
     // run the actual process using the "process" method
     return this.process(paramsObj, settings);
   }
@@ -535,17 +537,6 @@ module.exports = class SProcess extends __SPromise {
     logs.forEach((log) => {
       this.stdout.push(log.value || log.toString());
       this.trigger('log', log);
-      // if (!__isChildProcess()) {
-      // } else {
-      //   __SIpc.trigger(`${process.env.GLOBAL_SIPC_TRIGGER_ID}.trigger`, {
-      //     stack: 'log',
-      //     value: log,
-      //     metas: {
-      //       pid: process.pid,
-      //       stack: 'log'
-      //     }
-      //   });
-      // }
     });
   }
 
@@ -563,17 +554,6 @@ module.exports = class SProcess extends __SPromise {
     errors.forEach((error) => {
       this.stderr.push(error.value || error.toString());
       this.trigger('error', error);
-      // if (!__isChildProcess()) {
-      // } else {
-      //   __SIpc.trigger(`${process.env.GLOBAL_SIPC_TRIGGER_ID}.trigger`, {
-      //     stack: 'error',
-      //     value: error,
-      //     metas: {
-      //       pid: process.pid,
-      //       stack: 'error'
-      //     }
-      //   });
-      // }
     });
   }
 };

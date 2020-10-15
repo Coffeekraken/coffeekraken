@@ -1,6 +1,6 @@
 <!--
 * @name               default
-* @namespace          pages
+* @namespace          sugar-ui.views.pages
 * @type               blade
 *
 * Default view used for all sort of things

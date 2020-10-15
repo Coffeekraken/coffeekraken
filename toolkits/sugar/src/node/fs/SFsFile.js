@@ -6,6 +6,7 @@ const __path = require('path');
 const __extension = require('./extension');
 const __getFilename = require('./filename');
 const __SFsFileSettingsInterface = require('./interface/SFsFileSettingsInterface');
+const __SError = require('../error/SError');
 
 /**
  * @name            SFsFile

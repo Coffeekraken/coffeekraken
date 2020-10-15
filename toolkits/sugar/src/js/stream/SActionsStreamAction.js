@@ -100,6 +100,13 @@ export default class SActionStreamAction extends __SPromise {
     return this._settings;
   }
 
+  get id() {
+    return this._settings.id;
+  }
+  get name() {
+    return this._settings.name;
+  }
+
   /**
    * @name          checkStreamObject
    * @type          Function

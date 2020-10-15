@@ -221,6 +221,7 @@
     "terminal-overwrite": "^2.0.1",
     "terser": "^4.8.0",
     "tmp": "^0.2.1",
+    "to-regex": "^3.0.2",
     "tree-kill": "^1.2.2",
     "uglify-js": "^3.9.4",
     "uniqid": "^5.2.0",

@@ -1,9 +1,8 @@
 const __SActionsStream = require('../../stream/SActionsStream');
 const __deepMerge = require('../../object/deepMerge');
 const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
-const __SDocMapStreamAction = require('./actions/SDocMapStreamActions');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
-const __SExternalDocMapStreamAction = require('./actions/SExternalDocMapStreamAction');
+const __SDocMapStreamAction = require('./actions/SDocMapStreamAction');
 
 /**
  * @name            SBuildDocMapActionsStream
@@ -46,12 +45,11 @@ module.exports = class SBuildDocMapActionsStream extends __SActionsStream {
       {
         filesResolver: __SFsFilesResolverStreamAction,
         docMap: __SDocMapStreamAction,
-        // externalDocMap: __SExternalDocMapStreamAction,
         fsOutput: __SFsOutputStreamAction
       },
       __deepMerge(
         {
-          id: 'build.docMap.actionsStream',
+          id: 'SBuildDocMapActionsStream',
           name: 'Build docMap.json Actions Stream',
           actions: {
             filesResolver: {

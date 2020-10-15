@@ -158,7 +158,13 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
       after: [],
       beforeActions: {},
       afterActions: {},
-      actions: {}
+      actions: {},
+      logs: {
+        start: true,
+        success: true,
+        error: true,
+        exclude: []
+      }
     }, settings)); // check the actions
 
     _defineProperty(_assertThisInitialized(_this), "_actionsObject", {});
@@ -220,11 +226,13 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
             logString += " | From cache: <yellow>".concat(this._currentStream.currentActionObj.fromCache, "</yellow>");
           }
 
-          this.log({
-            temp: true,
-            group: this._currentStream.currentActionObj.name,
-            value: logString
-          });
+          if (this._settings.logs.exclude.indexOf(this._currentStream.currentActionObj.id) === -1) {
+            this.log({
+              temp: true,
+              group: this._currentStream.currentActionObj.name,
+              value: logString
+            });
+          }
         };
 
         var processFnArray = !Array.isArray(processFn) ? [processFn] : processFn;
@@ -518,9 +526,13 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
           try {
             // starting log
-            var startString = "#start Starting the stream \"<cyan>".concat(settings.name || 'unnamed', "</cyan>\""); // this.log({
-            //   value: startString
-            // });
+            if (_this3._settings.logs.exclude.indexOf(_this3._currentStream.currentActionObj.id) === -1 && _this3._settings.logs.start) {
+              var startString = "#start Starting the stream \"<cyan>".concat(settings.name || 'unnamed', "</cyan>\"");
+
+              _this3.log({
+                value: startString
+              });
+            }
 
             trigger('start', {});
             currentStreamObj = yield _this3._applyFnOnStreamObj(currentStreamObj, _this3._settings.before, {
@@ -611,12 +623,14 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
                 trigger("".concat(_this3._currentStream.currentActionObj.name, ".start"), Object.assign({}, _this3._currentStream.currentActionObj));
 
-                var _startString = "#start Starting the action \"<yellow>".concat(_this3._currentStream.currentActionObj.name, "</yellow>\" on <magenta>").concat(_this3._currentStream.currentActionObj.sourcesCount, "</magenta> sources");
+                if (_this3._settings.logs.exclude.indexOf(_this3._currentStream.currentActionObj.id) === -1) {
+                  var _startString = "#start Starting the action \"<yellow>".concat(_this3._currentStream.currentActionObj.name, "</yellow>\" on <magenta>").concat(_this3._currentStream.currentActionObj.sourcesCount, "</magenta> sources");
 
-                _this3.log({
-                  group: _this3._currentStream.currentActionObj.name,
-                  value: _startString
-                });
+                  _this3.log({
+                    group: _this3._currentStream.currentActionObj.name,
+                    value: _startString
+                  });
+                }
 
                 yield _this3._handleStreamObjArray();
 
@@ -660,18 +674,10 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
 
                   _this3._currentStream.currentActionObj.stats.stdout.push(successString);
 
-                  _this3.log({
-                    group: _this3._currentStream.currentActionObj.name,
-                    value: successString
-                  });
-
-                  if ((0, _childProcess.default)()) {
+                  if (_this3._settings.logs.exclude.indexOf(_this3._currentStream.currentActionObj.id) === -1) {
                     _this3.log({
-                      value: 'CHILD'
-                    });
-                  } else {
-                    _this3.log({
-                      value: 'MAIN'
+                      group: _this3._currentStream.currentActionObj.name,
+                      value: successString
                     });
                   }
                 }
@@ -701,38 +707,44 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
             });
 
             if (_this3.hasCurrentStreamErrors() || _this3._currentStream.stats.canceled) {
-              var _errorString = "The stream \"<cyan>".concat(settings.name || 'unnamed', "</cyan>\" has had some issues...");
+              if (_this3._settings.logs.error) {
+                var _errorString = "The stream \"<cyan>".concat(settings.name || 'unnamed', "</cyan>\" has had some issues...");
 
-              _this3._currentStream.stats.stdout.push(_errorString);
+                _this3._currentStream.stats.stdout.push(_errorString);
 
-              _this3.log({
-                error: true,
-                value: _errorString
-              });
+                _this3.log({
+                  error: true,
+                  value: _errorString
+                });
 
-              _this3.log({
-                error: true,
-                value: (0, _trimLines.default)(_this3._currentStream.stats.stderr.join('\n'))
-              });
+                _this3.log({
+                  error: true,
+                  value: (0, _trimLines.default)(_this3._currentStream.stats.stderr.join('\n'))
+                });
+              }
 
               trigger('reject', _this3._currentStream.stats);
             } else {
-              var completeString = "#success The stream \"<cyan>".concat(_this3._currentStream.settings.name || 'unnamed', "</cyan>\" has finished <green>successfully</green> in <yellow>").concat((0, _convert.default)(_this3._currentStream.stats.duration, 's'), "s</yellow>");
+              if (_this3._settings.logs.success) {
+                var completeString = "#success The stream \"<cyan>".concat(_this3._currentStream.settings.name || 'unnamed', "</cyan>\" has finished <green>successfully</green> in <yellow>").concat((0, _convert.default)(_this3._currentStream.stats.duration, 's'), "s</yellow>");
 
-              _this3._currentStream.stats.stdout.push(completeString);
+                _this3._currentStream.stats.stdout.push(completeString);
 
-              _this3.log({
-                value: completeString
-              }); // resolve this stream process
+                _this3.log({
+                  value: completeString
+                });
+              } // resolve this stream process
 
 
               trigger('success', {});
               resolve(_this3._currentStream.stats);
             }
           } catch (e) {
-            _this3.log({
-              value: e.__toString()
-            });
+            if (_this3._settings.logs.error) {
+              _this3.log({
+                value: e.toString()
+              });
+            }
           }
         });
 
@@ -754,12 +766,6 @@ var SActionStream = /*#__PURE__*/function (_SPromise) {
       // }
       // }
       // __SPromise.pipe(this._currentStream, this);
-
-      this._currentStream.promise.on('resolve', () => {
-        this.log({
-          value: 'SSS'
-        });
-      });
 
       return this._currentStream.promise;
     }

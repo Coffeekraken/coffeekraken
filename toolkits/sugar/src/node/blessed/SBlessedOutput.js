@@ -99,8 +99,8 @@ module.exports = class SOutput extends __SBlessedComponent {
     const _settings = __deepMerge(
       {
         filter: null,
-        // maxItems: -1,
-        maxItemsByGroup: 1,
+        maxItems: -1,
+        maxItemsByGroup: 2,
         stacks: ['log', '*.log', 'warning', '*.warning', 'error', '*.error']
       },
       settings

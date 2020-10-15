@@ -1,10 +1,6 @@
-const __SBuildFrontspecCli = require('../../node/build/frontspec/SBuildFrontspecCli');
+const __SBuildFrontspecProcess = require('../../node/build/frontspec/SBuildFrontspecProcess');
 
 module.exports = (stringArgs = '') => {
-  const cli = new __SBuildFrontspecCli(stringArgs, {
-    output: {
-      maxItemsByGroup: 2
-    }
-  });
-  cli.run();
+  const pro = new __SBuildFrontspecProcess({});
+  pro.run(stringArgs);
 };

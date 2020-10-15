@@ -180,7 +180,7 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
       }
 
       if (settings.out !== 'array') {
-        streamObj[settings.out || 'files'] = filesPathes;
+        streamObj[settings.out || 'files'] = filesPathesObj;
         resolve(streamObj);
       } else {
         filesPathesObj.forEach((pathObj) => {

@@ -1,6 +1,8 @@
 const __SProcessManager = require('../../process/SProcess');
 const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
 const __SBuildDocMapActionsStream = require('./SBuildDocMapActionsStream');
+const __SProcess = require('../../process/SProcess');
+const __SBuildDocMapInterface = require('./interface/SBuildDocMapInterface');
 
 /**
  * @name            SBuildDocMapProcess
@@ -13,7 +15,9 @@ const __SBuildDocMapActionsStream = require('./SBuildDocMapActionsStream');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildDocMapProcess extends __SProcessManager {
+module.exports = class SBuildDocMapProcess extends __SProcess {
+  static interface = __SBuildDocMapInterface;
+
   /**
    * @name          constructor
    * @type          Function
@@ -23,52 +27,36 @@ module.exports = class SBuildDocMapProcess extends __SProcessManager {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(initialParams = {}, settings = {}) {
-    super(initialParams, {
-      id: 'build.docMap.process',
+  constructor(settings = {}) {
+    super(__filename, {
+      id: 'SBuildDocMapProcess',
       name: 'Build docMap.json Process',
-      deamon: {
-        class: __SFsDeamon,
-        watchArgs: [initialParams.watch, settings],
-        runOn: ['update', 'add', 'unlink'],
-        processParams: (params, data) => {
-          return params;
-        }
-      },
       ...settings
     });
   }
 
   /**
-   * @name              run
+   * @name              process
    * @type              Function
    *
-   * Method that execute the frontend server code, listen for errors, etc...
+   * Method that execute the actual process code
    *
-   * @param       {Object}        argsObj           The arguments object that will be passed to the underlined actions stream instance
+   * @param       {Object}        params           The arguments object that will be passed to the underlined actions stream instance
    * @param       {Object}        [settings={}]     An object of settings passed to the ```start``` method of the ```SBuildScssActionsStream``` instance
    * @return      {Süromise}                        An SPomise instance representing the build process
    *
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(argsObj, settings = {}) {
-    const docMapStream = new __SBuildDocMapActionsStream(settings);
-    this._buildDocMapActionsStream = docMapStream.start(argsObj);
-    return super.run(this._buildDocMapActionsStream);
-  }
-
-  /**
-   * @name          kill
-   * @type          Function
-   *
-   * Method that allows you to kill the process
-   *
-   * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  kill() {
-    this._buildDocMapActionsStream.cancel();
-    super.kill();
+  process(params, settings = {}) {
+    const docMapStream = new __SBuildDocMapActionsStream({
+      ...settings,
+      logs: {
+        start: false,
+        success: false
+      }
+    });
+    const docMapStreamProcess = docMapStream.start(params);
+    this.bindSPromise(docMapStreamProcess);
   }
 };

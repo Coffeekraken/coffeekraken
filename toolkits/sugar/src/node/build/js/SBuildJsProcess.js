@@ -2,7 +2,6 @@ const __SBuildJsActionsStream = require('./SBuildJsActionsStream');
 const __deepMerge = require('../../object/deepMerge');
 const __SProcess = require('../../process/SProcess');
 const __SBuildJsInterface = require('./interface/SBuildJsInterface');
-const __isChildProcess = require('../../is/childProcess');
 
 /**
  * @name            SBuildJsProcess
@@ -54,8 +53,16 @@ module.exports = class SBuildJsProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   process(params, settings = {}) {
-    const actionStream = new __SBuildJsActionsStream(settings);
-    this._buildJsActionStream = actionStream.start(params);
-    this.bindSPromise(this._buildJsActionStream);
+    setTimeout(() => {
+      const actionStream = new __SBuildJsActionsStream({
+        ...settings,
+        logs: {
+          success: false,
+          start: false
+        }
+      });
+      this._buildJsActionStream = actionStream.start(params);
+      this.bindSPromise(this._buildJsActionStream);
+    }, 1000);
   }
 };

@@ -1,4 +1,4 @@
-@mixin classes-helper-user-select() {
+@mixin helper-user-select-classes() {
   @if class-match-namespace('sugar.helper.user-select.none') {
     /**
     * @name 		#{sel(user-select-none)}

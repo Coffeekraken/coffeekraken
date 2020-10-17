@@ -1,11 +1,11 @@
-@mixin classes-helper-font() {
-  @if class-match-namespace('sugar.helper.font.family') {
+@mixin font-classes() {
+  @if class-match-namespace('sugar.font.family') {
     @each $name, $font in setting('fonts') {
-      @if class-match-namespace('sugar.helper.font.family.#{$name}') {
+      @if class-match-namespace('sugar.font.family.#{$name}') {
         /**
           * @name       	  #{sel(f-#{$name})}
-          * @namespace       sugar.scss.core.class
-          * @class-namespace           sugar.helper.font.family.#{$name}
+          * @namespace       sugar.scss.font.class
+          * @class-namespace           sugar.font.family.#{$name}
           * @type        class
           *
           * Apply the font **#{$name}**
@@ -25,11 +25,11 @@
     }
   }
 
-  @if class-match-namespace('sugar.helper.font.weight.bold') {
+  @if class-match-namespace('sugar.font.weight.bold') {
     /**
     * @name 		#{sel(f-bold)}
-    * @namespace           sugar.scss.helper.class
-    * @class-namespace     sugar.helper.font.weight.bold
+    * @namespace           sugar.scss.font.class
+    * @class-namespace     sugar.font.weight.bold
     * @type        class
     *
     * Set the font-weight to ```bold```
@@ -44,11 +44,11 @@
       font-weight: bold;
     }
   }
-  @if class-match-namespace('sugar.helper.font.weight.lighter') {
+  @if class-match-namespace('sugar.font.weight.lighter') {
     /**
     * @name 		#{sel(f-lighter)}
-    * @namespace           sugar.scss.helper.class
-    * @class-namespace     sugar.helper.font.weight.lighter
+    * @namespace           sugar.scss.font.class
+    * @class-namespace     sugar.font.weight.lighter
     * @type        class
     *
     * Set the font-weight to ```lighter```
@@ -63,11 +63,11 @@
       font-weight: lighter;
     }
   }
-  @if class-match-namespace('sugar.helper.font.weight.bolder') {
+  @if class-match-namespace('sugar.font.weight.bolder') {
     /**
     * @name 		#{sel(f-bolder)}
-    * @namespace           sugar.scss.helper.class
-    * @class-namespace     sugar.helper.font.weight.bolder
+    * @namespace           sugar.scss.font.class
+    * @class-namespace     sugar.font.weight.bolder
     * @type        class
     *
     * Set the font-weight to ```bolder```
@@ -82,11 +82,11 @@
       font-weight: bolder;
     }
   }
-  @if class-match-namespace('sugar.helper.font.weight.normal') {
+  @if class-match-namespace('sugar.font.weight.normal') {
     /**
     * @name 		#{sel(f-normal)}
-    * @namespace           sugar.scss.helper.class
-    * @class-namespace     sugar.helper.font.weight.normal
+    * @namespace           sugar.scss.font.class
+    * @class-namespace     sugar.font.weight.normal
     * @type        class
     *
     * Set the font-weight to ```normal```
@@ -104,11 +104,11 @@
       font-style: normal;
     }
   }
-  @if class-match-namespace('sugar.helper.font.style.italic') {
+  @if class-match-namespace('sugar.font.style.italic') {
     /**
     * @name 		#{sel(f-italic)}
-    * @namespace           sugar.scss.helper.class
-    * @class-namespace     sugar.helper.font.style.italic
+    * @namespace           sugar.scss.font.class
+    * @class-namespace     sugar.font.style.italic
     * @type        class
     *
     * Set the font-style to ```italic```
@@ -123,11 +123,11 @@
       font-style: italic;
     }
   }
-  @if class-match-namespace('sugar.helper.font.style.oblique') {
+  @if class-match-namespace('sugar.font.style.oblique') {
     /**
     * @name 		#{sel(f-oblique)}
-    * @namespace           sugar.scss.helper.class
-    * @class-namespace     sugar.helper.font.style.oblique
+    * @namespace           sugar.scss.font.class
+    * @class-namespace     sugar.font.style.oblique
     * @type        class
     *
     * Set the font-style to ```oblique```
@@ -142,11 +142,11 @@
       font-style: oblique;
     }
   }
-  @if class-match-namespace('sugar.helper.font.variant.small-caps') {
+  @if class-match-namespace('sugar.font.variant.small-caps') {
     /**
     * @name 		#{sel(f-small-caps)}
-    * @namespace           sugar.scss.helper.class
-    * @class-namespace     sugar.helper.font.variant.small-caps
+    * @namespace           sugar.scss.font.class
+    * @class-namespace     sugar.font.variant.small-caps
     * @type        class
     *
     * Set the font-variant to ```small-caps```

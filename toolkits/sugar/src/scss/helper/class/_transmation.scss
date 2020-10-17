@@ -1,4 +1,4 @@
-@mixin classes-helper-transmation() {
+@mixin helper-transmation-classes() {
   @if class-match-namespace('sugar.helper.transition.no') {
     /**
     * @name 		#{sel(no-transition)}

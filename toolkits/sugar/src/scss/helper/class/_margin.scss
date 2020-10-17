@@ -1,4 +1,32 @@
-@mixin classes-helper-margin() {
+/**
+ * @name              helper-margin-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "margin" related helper classes.
+ *
+ * @classname     #{sel(m-[size])}              Set the **margins** to the a special size
+ * @classname     #{sel(m-b-[size])}              Set the **bottom** margin to a special size
+ * @classname     #{sel(m-t-[size])}              Set the **top** margin to a special size
+ * @classname     #{sel(m-l-[size])}              Set the **left** margin to a special size
+ * @classname     #{sel(m-r-[size])}              Set the **right** margin to a special size
+ * @classname     #{sel(m-s-[size])}              Set the **side** margin to a special size
+ * @classname     #{sel(m-y-[size])}              Set the **top and bottom** margins to a special size
+ * @classname     #{sel(no-m)}              Remove **all** the margins
+ * @classname     #{sel(no-m-t)}              Remove **top** the margin
+ * @classname     #{sel(no-m-r)}              Remove **right** the margin
+ * @classname     #{sel(no-m-b)}              Remove **bottom** the margin
+ * @classname     #{sel(no-m-l)}              Remove **left** the margin
+ * @classname     #{sel(no-m-s)}              Remove **side** margins
+ * @classname     #{sel(no-m-y)}              Remove **top and bottom** margins
+ *
+ * @example         scss
+ * @include Sugar.helper-margin-classes();
+ *
+ * @since         2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+@mixin helper-margin-classes() {
   @if class-match-namespace('sugar.helper.margin') {
     $sizes: setting('sizes');
     @each $name, $size in $sizes {
@@ -8,7 +36,7 @@
           * @name       	#{$cname}
           * @namespace       sugar.scss.core.class
           * @class-namespace           sugar.helper.margin.#{$name}
-          * @type        class
+          * @type        Classname
           *
           * Set the **margins** to the **#{$size}** size
           *

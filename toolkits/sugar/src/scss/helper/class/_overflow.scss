@@ -1,4 +1,4 @@
-@mixin classes-helper-overflow() {
+@mixin overflow-classes-classes() {
   @if class-match-namespace('sugar.helper.overflow.hidden') {
     /**
     * @name 		#{sel(overflow-hidden)}

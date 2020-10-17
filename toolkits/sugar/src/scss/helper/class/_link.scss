@@ -1,4 +1,19 @@
-@mixin classes-helper-link() {
+/**
+ * @name              helper-link-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "link" related helper classes.
+ *
+ * @classname     #{sel(link-stretched)}       Make a link become the size of it's parent (absolute, relative) but only using the :after pseudo class so visually it will stay the same...
+ *
+ * @example         scss
+ * @include Sugar.helper-link-classes();
+ *
+ * @since         2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+@mixin helper-link-classes() {
   @if class-match-namespace('sugar.helper.link.stretched') {
     /**
     * @name 		#{sel(link-stretched
@@ -8,6 +23,8 @@
     *
     * Make a link become the size of it's parent (absolute, relative)
     * but only using the :after pseudo class so visually it will stay the same...
+    *
+    * @classname     #{sel(link-stretched)}       Make a link become the size of it's parent (absolute, relative) but only using the :after pseudo class so visually it will stay the same...
     *
     * @example 	html
     * <div class="#{sel(ratio-16-9)} #{sel(bg-primary)}">

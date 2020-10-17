@@ -1,12 +1,12 @@
-@mixin classes-helper-filter() {
+@mixin filter-classes() {
 
   $filters: setting("filters");
   @each $name, $filter in $filters {
-    @if class-match-namespace("sugar.helper.filter.#{$name}") {
+    @if class-match-namespace("sugar.filter.#{$name}") {
       /**
         * @name       	#{sel(fi-#{$name})}
-        * @namespace       sugar.scss.core.class
-        * @class-namespace           sugar.helper.filter.#{$name}
+        * @namespace       sugar.scss.filter.class
+        * @class-namespace           sugar.filter.#{$name}
         * @type        class
         *
         * Apply the filter **#{$name}**

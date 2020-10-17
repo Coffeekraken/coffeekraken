@@ -1,4 +1,22 @@
-@mixin classes-helper-media() {
+/**
+ * @name              helper-media-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "media object" related helper classes.
+ *
+ * @classname     #{sel(mo)}       Famous media object class
+ * @classname     #{sel(mo--center)}       Media object centered
+ * @classname     #{sel(mo--end)}       Media object end
+ * @classname     #{sel(mo__content)}       Media object content
+ *
+ * @example         scss
+ * @include Sugar.helper-media-classes();
+ *
+ * @since         2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+@mixin helper-media-classes() {
   @if class-match-namespace('sugar.helper.media.object') {
     /**
     * @name 		#{sel(mo)} #{sel(mo--center)} #{sel(mo__content)}

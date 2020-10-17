@@ -1,4 +1,4 @@
-@mixin classes-helper-ratio() {
+@mixin helper-ratio-classes() {
   @if class-match-namespace('sugar.helper.ratio.21-9') {
     /**
     * @name 		#{sel(ratio-21-9)}

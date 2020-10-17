@@ -1,10 +1,10 @@
-@mixin classes-helper-text() {
+@mixin helper-text-classes() {
   @if class-match-namespace('sugar.helper.size') {
     @each $size, $value in setting('sizes') {
       @if class-match-namespace('sugar.helper.text.#{$size}') {
         /**
           * @name       	#{sel(t-#{$size})}
-          * @namespace       sugar.scss.core.class
+          * @namespace       sugar.scss.helper.class
           * @class-namespace           sugar.helper.text.#{$size}
           * @type        class
           *
@@ -18,7 +18,7 @@
           * @since       2.0.0
           * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        .#{sel('#{$size}')} {
+        .#{sel('t-#{$size}')} {
           font-size: to-rem($value);
         }
       }
@@ -26,7 +26,7 @@
       @if class-match-namespace('sugar.helper.text.rel.#{$size}') {
         /**
           * @name       	#{sel(t-#{$size}-rel)}
-          * @namespace       sugar.scss.core.class
+          * @namespace       sugar.scss.helper.class
           * @class-namespace           sugar.helper.text.rel.#{$size}
           * @type        class
           *

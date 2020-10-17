@@ -1,16 +1,16 @@
-@mixin classes-helper-transition() {
-  @if class-match-namespace('sugar.helper.transition') {
+@mixin transition-classes() {
+  @if class-match-namespace('sugar.transition') {
 
     // transitions
     $transitions: setting("transitions");
     @each $name, $transition in $transitions {
 
-      @if class-match-namespace("sugar.helper.transition.#{$name}") {
+      @if class-match-namespace("sugar.transition.#{$name}") {
 
         /**
           * @name       	#{sel(tr-#{$name})}
-          * @namespace       sugar.scss.core.class
-          * @class-namespace           sugar.helper.transition.#{$name}
+          * @namespace       sugar.scss.transition.class
+          * @class-namespace           sugar.transition.#{$name}
           * @type        class
           *
           * Apply the transition **#{$name}**

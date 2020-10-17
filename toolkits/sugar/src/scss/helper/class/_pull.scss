@@ -1,4 +1,4 @@
-@mixin classes-helper-pull() {
+@mixin helper-pull-classes() {
   @if class-match-namespace('sugar.helper.pull.left') {
     /**
     * @name 		#{sel(pull-left)}

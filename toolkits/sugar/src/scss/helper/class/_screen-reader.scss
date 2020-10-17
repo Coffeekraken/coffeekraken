@@ -1,4 +1,4 @@
-@mixin classes-helper-screen-reader() {
+@mixin helper-screen-reader-classes() {
   @if class-match-namespace('sugar.helper.screen-reader.only') {
     /**
     * @name 		#{sel(sr-only)}

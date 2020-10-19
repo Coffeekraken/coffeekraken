@@ -1,6 +1,6 @@
-@mixin classes-helper-color() {
+@mixin color-classes() {
 
-  @if class-match-namespace('sugar.helper.color') {
+  @if class-match-namespace('sugar.color') {
 
     // colors
     $colors: setting("colors");
@@ -13,12 +13,12 @@
         }
 
 
-        @if class-match-namespace("sugar.helper.color.#{$name}.color") {
+        @if class-match-namespace("sugar.color.#{$name}.color") {
           $cls: unquote(selector("c-#{$name}"));
           /**
             * @name       	#{$cls}
-            * @namespace       sugar.scss.core.class
-            * @class-namespace           sugar.helper.color.#{$name}
+            * @namespace       sugar.scss.colo.class
+            * @class-namespace           sugar.color.#{$name}
             * @type        class
             *
             * Specify the color to **#{$name}**
@@ -37,12 +37,12 @@
         }
 
 
-        @if class-match-namespace("sugar.helper.color.#{$name}.bg") {
+        @if class-match-namespace("sugar.color.#{$name}.bg") {
           $cls: unquote(selector("bg-#{$name}"));
           /**
             * @name       	#{$cls}
-            * @namespace       sugar.scss.core.class
-            * @class-namespace           sugar.helper.color.#{$name}.bg
+            * @namespace       sugar.scss.color.class
+            * @class-namespace           sugar.color.#{$name}.bg
             * @type        class
             *
             * Specify the background color to **#{$name}**
@@ -64,12 +64,12 @@
         @if $modifiers {
           @each $mod-name, $mod in $modifiers {
 
-            @if class-match-namespace("sugar.helper.color.#{$name}.#{$mod-name}") {
+            @if class-match-namespace("sugar.color.#{$name}.#{$mod-name}") {
               $cls: unquote(selector("c-#{$name}--#{$mod-name}"));
               /**
                 * @name       	#{$cls}
-                * @namespace       sugar.scss.core.class
-                * @class-namespace           sugar.helper.color.#{$name}.#{$mod-name}
+                * @namespace       sugar.scss.color.class
+                * @class-namespace           sugar.color.#{$name}.#{$mod-name}
                 * @type        class
                 *
                 * Specify the color to **#{$name}--#{$mod-name}**
@@ -88,12 +88,12 @@
             }
 
 
-            @if class-match-namespace("sugar.helper.color.#{$name}.#{$mod-name}.bg") {
+            @if class-match-namespace("sugar.color.#{$name}.#{$mod-name}.bg") {
               $cls: unquote(selector("bg-#{$name}--#{$mod-name}"));
               /**
                 * @name       	#{$cls}
-                * @namespace       sugar.scss.core.class
-                * @class-namespace           sugar.helper.color.#{$name}.#{$mod-name}.bg
+                * @namespace       sugar.scss.color.class
+                * @class-namespace           sugar.color.#{$name}.#{$mod-name}.bg
                 * @type        class
                 *
                 * Specify the background color to **#{$name}--#{$mod-name}**

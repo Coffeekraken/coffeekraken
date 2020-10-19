@@ -1,27 +1,80 @@
-@mixin classes-helper-border() {
-  // @if class-match-namespace("sugar.helper.border") {
-  //   /**
-  //   * @name 		#{sel(border)}
-  //   * @namespace           sugar.scss.helper.class
-  //   * @class-namespace     sugar.helper.border
-  //   * @type        class
-  //   *
-  //   * Apply the default borders
-  //   *
-  //   * @example 	html
-  //   * <div class="#{sel(border)} #{sel(ratio-1-1)}">
-  //   * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
-  //   * </div>
-  //   *
-  //   * @since       2.0.0
-  //   * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-  //   */
-  //   .#{sel(border)} {
-  //     border: setting('borders.default') solid color(default);
-  //   }
-  // }
-  [class*='#{sel(border)}'] {
-    border: setting('borders.default') solid color(default);
+/**
+ * @name              helper-border-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "border" related helper classes.
+ *
+ * @classname       #{sel(border)}                 Apply the default border from the @config.borders configuration
+ * @classname       #{sel(border-[size])}          Apply a special size to the borders
+ * @classname       #{sel(border-top-[size])}          Apply a special size to the top border
+ * @classname       #{sel(border-right-[size])}          Apply a special size to the right border
+ * @classname       #{sel(border-bottom-[size])}          Apply a special size to the bottom border
+ * @classname       #{sel(border-left-[size])}          Apply a special size to the left border
+ * @classname       #{sel(border-side-[size])}          Apply a special size to the side borders
+ * @classname       #{sel(border-y-[size])}          Apply a special size to the y (top and bottom) borders
+ * @classname       #{sel(radius-[size])}          Apply a special border radius size to all the corners
+ * @classname       #{sel(radius-top-[size])}      Apply a special border radius size to the top corners
+ * @classname       #{sel(radius-right-[size])}      Apply a special border radius size to the right corners
+ * @classname       #{sel(radius-left-[size])}      Apply a special border radius size to the left corners
+ * @classname       #{sel(radius-bottom-[size])}      Apply a special border radius size to the bottom corners
+ * @classname       #{sel(radius-top-left-[size])}      Apply a special border radius size to the top-left corner
+ * @classname       #{sel(radius-top-right-[size])}      Apply a special border radius size to the top-right corner
+ * @classname       #{sel(radius-bottom-left-[size])}      Apply a special border radius size to the bottom-left corner
+ * @classname       #{sel(radius-bottom-right-[size])}      Apply a special border radius size to the bottom-right corner
+ * @classname       #{sel(radius-circle)}               Apply some borders to make your element a circle
+ * @classname       #{sel(radius-pill)}              Apply some borders to make your element a pill
+ * @classname       #{sel(no-radius)}              Remove all borders radius
+ * @classname       #{sel(no-radius-top)}              Remove all top borders radius
+ * @classname       #{sel(no-radius-right)}              Remove all right borders radius
+ * @classname       #{sel(no-radius-left)}              Remove all left borders radius
+ * @classname       #{sel(no-radius-bottom)}              Remove all bottom borders radius
+ * @classname       #{sel(no-radius-top-left)}              Remove the top left border radius
+ * @classname       #{sel(no-radius-top-right)}              Remove the top right border radius
+ * @classname       #{sel(no-radius-bottom-left)}              Remove the bottom left border radius
+ * @classname       #{sel(no-radius-bottom-right)}              Remove the bottom right border radius
+ * @classname       #{sel(border-[color])}               Apply a special border color to all the borders
+ * @classname       #{sel(border-top-[color])}               Apply a special border color to the top borders
+ * @classname       #{sel(border-right-[color])}               Apply a special border color to the right borders
+ * @classname       #{sel(border-left-[color])}               Apply a special border color to the left borders
+ * @classname       #{sel(border-bottom-[color])}               Apply a special border color to the bottom borders
+ * @classname       #{sel(border-side-[color])}               Apply a special border color to the side borders
+ * @classname       #{sel(border-y-[color])}               Apply a special border color to the y borders
+ * @classname       #{sel(no-border)}                      Remove all the borders
+ * @classname       #{sel(no-border-top)}                      Remove all the top borders
+ * @classname       #{sel(no-border-right)}                      Remove all the right borders
+ * @classname       #{sel(no-border-left)}                      Remove all the left borders
+ * @classname       #{sel(no-border-bottom)}                      Remove all the bottom borders
+ * @classname       #{sel(no-border-side)}                      Remove all the side borders
+ * @classname       #{sel(no-border-y)}                      Remove all the y borders
+ *
+ * @example         scss
+ * @include Sugar.helper-border-classes();
+ *
+ * @since         2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+@mixin helper-border-classes() {
+  @if class-match-namespace("sugar.helper.border") {
+    /**
+    * @name 		#{sel(border)}
+    * @namespace           sugar.scss.helper.class
+    * @class-namespace     sugar.helper.border
+    * @type        class
+    *
+    * Apply the default borders
+    *
+    * @example 	html
+    * <div class="#{sel(border)} #{sel(ratio-1-1)}">
+    * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
+    * </div>
+    *
+    * @since       2.0.0
+    * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    [class*='#{sel(border)}'] {
+      border: setting('borders.default') solid color(default);
+    }
   }
 
   $bordersSizes: setting('borders.sizes');
@@ -202,6 +255,8 @@
       *
       * Apply the **#{$size}** border radius
       *
+      * @classname       radius-[size]          Apply a special border radius size to all the corners
+      *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -224,6 +279,8 @@
       * @type        class
       *
       * Apply the **#{$size}** border top radius
+      *
+      * @classname       radius-top-[size]      Apply a special border radius size to the top corners
       *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -249,6 +306,8 @@
       *
       * Apply the **#{$size}** border right radius
       *
+      * @classname       radius-right-[size]      Apply a special border radius size to the right corners
+      *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -272,6 +331,8 @@
       * @type        class
       *
       * Apply the **#{$size}** border left radius
+      *
+      * @classname       radius-left-[size]      Apply a special border radius size to the left corners
       *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -297,6 +358,8 @@
       *
       * Apply the **#{$size}** border bottom radius
       *
+      * @classname       radius-bottom-[size]      Apply a special border radius size to the bottom corners
+      *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -321,6 +384,8 @@
       *
       * Apply the **#{$size}** border top left radius
       *
+      * @classname       radius-top-left-[size]      Apply a special border radius size to the top-left corner
+      *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -343,6 +408,8 @@
       * @type        class
       *
       * Apply the **#{$size}** border top right radius
+      *
+      * @classname       radius-top-right-[size]      Apply a special border radius size to the top-right corner
       *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -367,6 +434,8 @@
       * @type        class
       *
       * Apply the **#{$size}** border bottom left radius
+      *
+      * @classname       radius-bottom-left-[size]      Apply a special border radius size to the bottom-left corner
       *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -394,6 +463,8 @@
       *
       * Apply the **#{$size}** border bottom right radius
       *
+      * @classname       radius-bottom-right-[size]      Apply a special border radius size to the bottom-right corner
+      *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -418,6 +489,8 @@
     *
     * Apply a circle border radius
     *
+    * @classname       radius-circle              Apply some borders to make your element a circle
+    *
     * @example 	html
     * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -440,6 +513,8 @@
     * @type        class
     *
     * Apply a pill style border radius
+    *
+    * @classname       radius-pill              Apply some borders to make your element a pill
     *
     * @example 	html
     * <div class="#{sel(border)} #{$cls} s-ratio-16-9">
@@ -464,6 +539,8 @@
     *
     * Remove the border radius
     *
+    * @classname       no-radius              Remove all border radius
+    *
     * @example 	html
     * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -486,6 +563,8 @@
     * @type        class
     *
     * Remove the top border radius
+    *
+    * @classname       no-radius-top              Remove all top borders radius
     *
     * @example 	html
     * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
@@ -511,6 +590,8 @@
     *
     * Remove the right border radius
     *
+    * @classname       no-radius-right              Remove all right borders radius
+    *
     * @example 	html
     * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -534,6 +615,8 @@
     * @type        class
     *
     * Remove the left border radius
+    *
+    * @classname       no-radius-left              Remove all left borders radius
     *
     * @example 	html
     * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
@@ -559,6 +642,8 @@
     *
     * Remove the bottom border radius
     *
+    * @classname       no-radius-bottom              Remove all bottom borders radius
+    *
     * @example 	html
     * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -583,6 +668,8 @@
     *
     * Remove the top left border radius
     *
+    * @classname       no-radius-top-left              Remove the top left border radius
+    *
     * @example 	html
     * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -605,6 +692,8 @@
     * @type        class
     *
     * Remove the top right border radius
+    *
+    * @classname       no-radius-top-right              Remove the top right border radius
     *
     * @example 	html
     * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
@@ -629,6 +718,8 @@
     *
     * Remove the bottom left border radius
     *
+    * @classname       no-radius-bottom-left              Remove the bottom left border radius
+    *
     * @example 	html
     * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -651,6 +742,8 @@
     * @type        class
     *
     * Remove the bottom right border radius
+    *
+    * @classname       no-radius-bottom-right              Remove the bottom right border radius
     *
     * @example 	html
     * <div class="#{sel(border)} #{sel(radius)} #{$cls} #{sel(ratio-1-1)}">
@@ -677,6 +770,8 @@
       *
       * Apply the **<#{$color}>#{$color}</#{$color}>** border color
       *
+      * @classname       border-[color]               Apply a special border color to all the borders
+      *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -699,6 +794,8 @@
       * @type        class
       *
       * Apply the **<#{$color}>#{$color}</#{$color}>** border top color
+      *
+      * @classname       border-top-[color]               Apply a special border color to the top borders
       *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -723,6 +820,8 @@
       *
       * Apply the **<#{$color}>#{$color}</#{$color}>** border right color
       *
+      * @classname       border-right-[color]               Apply a special border color to the right borders
+      *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -745,6 +844,8 @@
       * @type        class
       *
       * Apply the **<#{$color}>#{$color}</#{$color}>** border left color
+      *
+      * @classname       border-left-[color]               Apply a special border color to the left borders
       *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -769,6 +870,8 @@
       *
       * Apply the **<#{$color}>#{$color}</#{$color}>** border bottom color
       *
+      * @classname       border-bottom-[color]               Apply a special border color to the bottom borders
+      *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
       * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -791,6 +894,8 @@
       * @type        class
       *
       * Apply the **<#{$color}>#{$color}</#{$color}>** border side (left and right) color
+      *
+      * @classname       border-side-[color]               Apply a special border color to the side borders
       *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -815,6 +920,8 @@
       * @type        class
       *
       * Apply the **<#{$color}>#{$color}</#{$color}>** border y (top and bottom) color
+      *
+      * @classname       border-y-[color]               Apply a special border color to the y borders
       *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -841,6 +948,8 @@
     *
     * Remove the borders
     *
+    * @classname       no-border                      Remove all the borders
+    *
     * @example 	html
     * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -863,6 +972,8 @@
     * @type        class
     *
     * Remove the top border
+    *
+    * @classname       no-border-top                      Remove all the top borders
     *
     * @example 	html
     * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -887,6 +998,8 @@
     *
     * Remove the right border
     *
+    * @classname       no-border-right                      Remove all the right borders
+    *
     * @example 	html
     * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -909,6 +1022,8 @@
     * @type        class
     *
     * Remove the left border
+    *
+    * @classname       no-border-left                      Remove all the left borders
     *
     * @example 	html
     * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -933,6 +1048,8 @@
     *
     * Remove the bottom border
     *
+    * @classname       no-border-bottom                      Remove all the bottom borders
+    *
     * @example 	html
     * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
     * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
@@ -955,6 +1072,8 @@
     * @type        class
     *
     * Remove the side (left and right borders
+    *
+    * @classname       no-border-side                      Remove all the side borders
     *
     * @example 	html
     * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -979,6 +1098,8 @@
     * @type        class
     *
     * Remove the y (top and bottom) borders
+    *
+    * @classname       no-border-y                      Remove all the y borders
     *
     * @example 	html
     * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">

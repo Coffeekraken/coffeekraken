@@ -1,4 +1,4 @@
-@mixin classes-helper-size() {
+@mixin helper-size-classes() {
   @if class-match-namespace('sugar.helper.size.abs.cover') {
     /**
     * @name 		#{sel(abs-cover)}

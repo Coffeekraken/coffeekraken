@@ -1,4 +1,21 @@
-@mixin classes-helper-clear() {
+/**
+ * @name              helper-clear-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "clear" related helper classes.
+ *
+ * @classname       #{sel(clear-left)}           Clear the left side
+ * @classname       #{sel(clear-right)}           Clear the right side
+ * @classname       #{sel(clear)}           Clear both sides
+ *
+ * @example         scss
+ * @include Sugar.helper-clear-classes();
+ *
+ * @since         2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+@mixin helper-clear-classes() {
   @if class-match-namespace('sugar.helper.clear.left') {
     /**
     * @name 		#{sel(clear-left)}
@@ -7,6 +24,8 @@
     * @type        class
     *
     * Clear the left float on the element
+    *
+    * @classname       #{sel(clear-left)}           Clear the left side
     *
     * @example 	html
     * <div class="#{sel(clear-left)}">
@@ -29,6 +48,8 @@
     *
     * Clear the right float on the element
     *
+    * @classname       #{sel(clear-right)}           Clear the right side
+    *
     * @example 	html
     * <div class="#{sel(clear-right)}">
     * 	I clear the right float
@@ -50,6 +71,8 @@
     * @type        class
     *
     * Clear both float on the element
+    *
+    * @classname       #{sel(clear)}           Clear both sides
     *
     * @example 	html
     * <div class="#{sel(clear)}">

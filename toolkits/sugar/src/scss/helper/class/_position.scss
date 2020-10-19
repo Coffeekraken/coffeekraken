@@ -1,4 +1,4 @@
-@mixin classes-helper-position() {
+@mixin helper-position-classes() {
   @if class-match-namespace('sugar.helper.position.relative') {
     /**
     * @name 		#{sel(relative)}

@@ -1,4 +1,23 @@
-@mixin classes-helper-clearfix() {
+/**
+ * @name              helper-clearfix-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "clearfix" related helper classes.
+ *
+ * @classname       #{sel(clearfix)}          Apply the default clearfix
+ * @classname       #{sel(clearfix-float)}          Apply the float clearfix
+ * @classname       #{sel(clearfix-micro)}          Apply the micro clearfix
+ * @classname       #{sel(clearfix-overflow)}          Apply the overflow clearfix
+ * @classname       #{sel(clearfix-facebook)}          Apply the facebook clearfix
+ *
+ * @example         scss
+ * @include Sugar.helper-clearfix-classes();
+ *
+ * @since         2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+@mixin helper-clearfix-classes() {
   @if class-match-namespace('sugar.helper.clearfix') {
     /**
     * @name 		#{sel(clearfix)}
@@ -7,6 +26,8 @@
     * @type        class
     *
     * Apply the micro clearfix on the element
+    *
+    * @classname       #{sel(clearfix)}          Apply the default clearfix
     *
     * @example 	html
     * <div class="#{sel(clearfix)} #{sel(bg-primary)}">
@@ -32,6 +53,8 @@
     *
     * Apply the float clearfix on the element
     *
+    * @classname       #{sel(clearfix-float)}          Apply the float clearfix
+    *
     * @example 	html
     * <div class="#{sel(clearfix-float)} #{sel(bg-primary)}">
     * 	<div class="#{sel(pull-right)}">right pulled</div>
@@ -55,6 +78,8 @@
     * @type        class
     *
     * Apply the micro clearfix on the element
+    *
+    * @classname       #{sel(clearfix-micro)}          Apply the micro clearfix
     *
     * @example 	html
     * <div class="#{sel(clearfix-micro)} #{sel(bg-primary)}">
@@ -80,6 +105,8 @@
     *
     * Apply the overflow clearfix on the element
     *
+    * @classname       #{sel(clearfix-overflow)}          Apply the overflow clearfix
+    *
     * @example 	html
     * <div class="#{sel(clearfix-overflow)} #{sel(bg-primary)}">
     * 	<div class="#{sel(pull-right)}">right pulled</div>
@@ -103,6 +130,8 @@
     * @type        class
     *
     * Apply the facebook clearfix on the element
+    *
+    * @classname       #{sel(clearfix-facebook)}          Apply the facebook clearfix
     *
     * @example 	html
     * <div class="#{sel(clearfix-facebook)} #{sel(bg-primary)}">

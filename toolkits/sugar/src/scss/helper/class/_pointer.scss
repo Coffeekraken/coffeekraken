@@ -1,4 +1,4 @@
-@mixin classes-helper-pointer() {
+@mixin helper-pointer-classes() {
   @if class-match-namespace('sugar.helper.pointer.events.none') {
     /**
     * @name 		#{sel(pointer-events-none)}

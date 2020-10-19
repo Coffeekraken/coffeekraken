@@ -1,4 +1,4 @@
-@mixin classes-helper-padding() {
+@mixin helper-padding-classes() {
   @if class-match-namespace('sugar.helper.padding') {
     $sizes: setting('sizes');
     @each $name, $size in $sizes {

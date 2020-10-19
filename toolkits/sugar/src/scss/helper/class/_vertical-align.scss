@@ -1,4 +1,4 @@
-@mixin classes-helper-vertical-align() {
+@mixin helper-vertical-align-classes() {
   @if class-match-namespace('sugar.helper.vertical-align.top') {
     /**
     * @name 		.#{sel(align-top)}

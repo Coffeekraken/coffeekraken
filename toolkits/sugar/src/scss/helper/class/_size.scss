@@ -1,10 +1,27 @@
+/**
+ * @name              helper-size-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "size" related helper classes.
+ *
+ * @classname     #{sel(abs-cover)}            Set a size that will cover the entire parent surface by positionning it in absolute
+ * @classname     #{sel(abs-contain)}            Set a size that will contain the entire parent surface by positionning it in absolute
+ * @classname     #{sel(abs-fit)}           Set a size that will fit the entire parent surface by positionning it in absolute
+ *
+ * @example         scss
+ * @include Sugar.helper-size-classes();
+ *
+ * @since         2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
 @mixin helper-size-classes() {
   @if class-match-namespace('sugar.helper.size.abs.cover') {
     /**
     * @name 		#{sel(abs-cover)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.size.abs.cover
-    * @type        class
+    * @type        Classname
     *
     * Set a size that will cover the entire parent surface by positionning it in absolute
     *
@@ -25,7 +42,7 @@
     * @name 		#{sel(abs-contain)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.size.abs.contain
-    * @type        class
+    * @type        Classname
     *
     * Set a size that will contain the entire parent surface by positionning it in absolute
     *
@@ -46,7 +63,7 @@
     * @name 		#{sel(abs-fit)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.size.abs.fit
-    * @type        class
+    * @type        Classname
     *
     * Set a size that will fit the entire parent surface by positionning it in absolute
     *

@@ -1,6 +1,4 @@
-const __SProcessManager = require('../../process/SProcess');
 const __SBuildScssActionsStream = require('./SBuildScssActionsStream');
-const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
 const __deepMerge = require('../../object/deepMerge');
 const __SProcess = require('../../process/SProcess');
 const __SBuildScssInterface = require('./interface/SBuildScssInterface');
@@ -30,7 +28,6 @@ module.exports = class SBuildScssProcess extends __SProcess {
    */
   constructor(settings = {}) {
     super(
-      __filename,
       __deepMerge(
         {
           id: 'SBuildScssProcess',

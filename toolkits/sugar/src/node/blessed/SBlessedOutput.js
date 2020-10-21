@@ -100,7 +100,7 @@ module.exports = class SOutput extends __SBlessedComponent {
       {
         filter: null,
         maxItems: -1,
-        maxItemsByGroup: 2,
+        maxItemsByGroup: 1,
         stacks: ['log', '*.log', 'warning', '*.warning', 'error', '*.error']
       },
       settings

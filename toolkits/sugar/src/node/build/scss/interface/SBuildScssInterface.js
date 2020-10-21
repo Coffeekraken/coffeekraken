@@ -20,6 +20,10 @@ module.exports = class SBuildScssInterface extends __SInterface {
     input: {
       default: __sugarConfig('build.scss.input')
     },
+    iconsInput: {
+      type: 'String',
+      default: __sugarConfig('build.scss.iconsInput')
+    },
     outputDir: {
       default: __sugarConfig('build.scss.outputDir')
     },

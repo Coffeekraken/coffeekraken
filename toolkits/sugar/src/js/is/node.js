@@ -14,5 +14,9 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default () => {
-  return typeof process !== 'undefined' && process.release.name === 'node';
+  return (
+    typeof process !== 'undefined' &&
+    process.release &&
+    process.release.name === 'node'
+  );
 };

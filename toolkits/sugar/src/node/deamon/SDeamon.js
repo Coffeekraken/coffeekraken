@@ -12,6 +12,8 @@ const __onProcessExit = require('../process/onProcessExit');
  *
  * This class is the base one for all the "Deamons" classes like SFsDeamon, etc...
  *
+ * @todo        update doc
+ *
  * @event       state       Triggered when the state change
  *
  * @ince          2.0.0
@@ -43,7 +45,7 @@ class SDeamon extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   logs = {
-    watching: `The "<yellow>${this.constructor.name}</yellow>" deamon has been started and watch for changes...`,
+    watching: `The "<yellow>${this.constructor.name}</yellow>" deamon has been <green>started</green> and <green>watch for changes</green>...`,
     paused: `The "<yellow>${this.constructor.name}</yellow>" deamon has been <cyan>paused</cyan>`
   };
 
@@ -62,7 +64,9 @@ class SDeamon extends __SPromise {
       __deepMerge(
         {
           id: 'SDeamon',
-          updateStacks: []
+          updateStacks: [],
+          processParams: null,
+          updateLog: null
         },
         settings
       )
@@ -94,6 +98,54 @@ class SDeamon extends __SPromise {
     }
 
     return super.on(stacks.join(','), callback);
+  }
+
+  /**
+   * @name          getUpdateLog
+   * @type          Function
+   *
+   * This function is used to generate the update log string
+   * depending on the updated file, data, etc...
+   *
+   * @param         {Object}     updateObj           The update object given by the proper deamon type
+   * @return        {String}                          The generated update string
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  updateLog(updateObj) {
+    if (
+      this._settings.updateLog &&
+      typeof this._settings.updateLog === 'function'
+    ) {
+      return this._settings.updateLog(updateObj);
+    }
+    return null;
+  }
+
+  /**
+   * @name          processParams
+   * @type          Function
+   *
+   * This method can be called to process the passed params object
+   * using the function setted in the settings.processParams
+   *
+   * @param       {Object}        params      The params object to process
+   * @param       {Object}        data        The update data object
+   * @return      {Object}                    The processed params
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  processParams(params, data) {
+    params = Object.assign({}, params);
+    if (
+      this._settings.processParams &&
+      typeof this._settings.processParams === 'function'
+    ) {
+      params = this._settings.processParams(params, data);
+    }
+    return params;
   }
 
   /**

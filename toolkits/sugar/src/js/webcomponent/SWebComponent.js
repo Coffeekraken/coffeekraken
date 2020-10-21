@@ -82,9 +82,10 @@ function SWebComponentGenerator(extendsSettings = {}) {
 
   return class SWebComponent extends extendsSettings.extends {
     _settedAttributesStack = {};
+    _isSWebComponent = true;
 
     /**
-     * @name          _promise
+     * @name          promise
      * @type          SPromise
      * @private
      *
@@ -93,7 +94,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
      *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _promise = null;
+    promise = null;
 
     /**
      * @name          _props
@@ -138,6 +139,18 @@ function SWebComponentGenerator(extendsSettings = {}) {
     _metas = {};
 
     /**
+     * @name        _contexts
+     * @type        Array
+     * @private
+     *
+     * Store all the contexts this component will be aware of
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _contexts = [this];
+
+    /**
      * @name        observedAttributes
      * @type        Function
      * @get
@@ -151,6 +164,8 @@ function SWebComponentGenerator(extendsSettings = {}) {
     static get observedAttributes() {
       return Object.keys(this.props).map((name) => __uncamelize(name));
     }
+
+    static customEvents = {};
 
     /**
      * @name					componentName
@@ -268,28 +283,43 @@ function SWebComponentGenerator(extendsSettings = {}) {
       this._metas = this.constructor.getComponentMetas(
         this.constructor.componentName
       );
+
       // save the settings
       this._settings = __deepMerge(
         {
           id: this.getAttribute('id') || __uniqid(),
-          props: this.constructor.props || {}
+          props: {}
         },
         this._metas.settings || {},
         settings
       );
 
+      // add the "this" into the contexts stack
+      this.registerContext(this);
+
       // create the SPromise instance
-      this._promise = new __SPromise({
+      this.promise = new __SPromise({
         id: this._settings.id
       });
 
-      this.on('mounted:1', () => {
+      // init props proxy
+      this._initPropsProxy();
+
+      this.on('ready', (e) => {
+        if (e.target === this) return;
+        if (e.target._isSWebComponent) {
+          e.target.registerContext(this);
+        }
+      });
+
+      this.on('mounted', () => {
         // dispatch a ready event
         if (!this.lit) {
-          // refresh references
-          this._refreshIdReferences();
+          this.update();
           // the Lit HTML class dispatch the ready event after having rendering the template the first time
-          this.dispatch('ready', this);
+          this.dispatch('ready', this, {
+            bubbles: true
+          });
         }
       });
 
@@ -298,7 +328,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
         // this._$initialContent =
 
         // handle props
-        this._initProps();
+        this._initDomProps();
 
         this._mediaQuery = new __SMediaQuery('*');
         this._mediaQuery.on('match', (media) => {
@@ -331,17 +361,17 @@ function SWebComponentGenerator(extendsSettings = {}) {
     }
 
     /**
-     * @name          props
+     * @name          settings
      * @type          Function
      * @get
      *
-     * Get the properties values object
+     * Get the settings object
      *
      * @since         2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    get props() {
-      this.props;
+    get settings() {
+      return this._settings;
     }
 
     /**
@@ -356,6 +386,22 @@ function SWebComponentGenerator(extendsSettings = {}) {
      */
     get $root() {
       return this;
+    }
+
+    /**
+     * @name        update
+     * @type        Function
+     *
+     * This method allows you to update your component manually if needed
+     *
+     * @since       2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    update() {
+      // refresh references
+      this._refreshIdReferences();
+      // physical props
+      this._handlePhysicalProps();
     }
 
     /**
@@ -398,6 +444,24 @@ function SWebComponentGenerator(extendsSettings = {}) {
         if ($tryRes) return $tryRes;
       }
       return null;
+    }
+
+    /**
+     * @name          registerContext
+     * @type          Function
+     *
+     * This method allows you to register some additional contexts that "this"
+     * for the component to be able to find expressions like ```:on-select="doSometing"```
+     * It is used by all the SWebComponent instances to find their parent components for example
+     *
+     * @param       {Object}        context         The context you want to register
+     *
+     * @since       2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    registerContext(context) {
+      if (this._contexts.indexOf(context) !== -1) return;
+      this._contexts.push(context);
     }
 
     /**
@@ -447,6 +511,26 @@ function SWebComponentGenerator(extendsSettings = {}) {
         );
       }
       return this._props[prop].responsiveValues[media];
+    }
+
+    /**
+     * @name          setSettings
+     * @type          Function
+     *
+     * This method allows you to set some settings by merging the actual once with your new once
+     *
+     * @param       {Object}      settings        The settings to setting
+     * @param       {Boolean}     [reactive=true]     Specify if you want yout component to react directly to the settings changes or not
+     * @return      {SWebComponent}           Maintain chainability
+     *
+     * @since     2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    setSettings(settings = {}, reactive = true) {
+      // set the new settings
+      this._settings = __deepMerge(this._settings, settings);
+      // check if is reactive
+      if (reactive) this.update();
     }
 
     /**
@@ -538,20 +622,8 @@ function SWebComponentGenerator(extendsSettings = {}) {
       });
     }
 
-    _initProps() {
-      // handle props
-
-      for (const prop in this._settings.props) {
-        let attr = this.getAttribute(__uncamelize(prop));
-        if (!attr && this.hasAttribute(__uncamelize(prop))) {
-          attr = true;
-        }
-
-        this.on(`prop.${prop}.*`, (update) => {
-          this._handlePhysicalProps(prop);
-          this.handleProp(prop, update);
-        });
-
+    _initPropsProxy() {
+      for (const prop in this.constructor.props) {
         let originalProp;
         if (this[prop] !== undefined) originalProp = this[prop];
         Object.defineProperty(this._props, prop, {
@@ -559,9 +631,9 @@ function SWebComponentGenerator(extendsSettings = {}) {
           writable: true,
           configurable: false,
           value: {
-            ...this._settings.props[prop],
+            ...this.constructor.props[prop],
             previousValue: undefined,
-            value: attr ? __parse(attr) : this._settings.props[prop].default,
+            value: undefined,
             responsiveValues: {}
           }
         });
@@ -569,6 +641,12 @@ function SWebComponentGenerator(extendsSettings = {}) {
           enumerable: true,
           configurable: false,
           get: () => {
+            let returnValue =
+              this._props[prop].value !== undefined
+                ? this._props[prop].value
+                : this._settings.props[prop] !== undefined
+                ? this._settings.props[prop]
+                : this.constructor.props[prop].default;
             if (
               this._props[prop].responsive &&
               this._props[prop].responsiveValues
@@ -578,12 +656,26 @@ function SWebComponentGenerator(extendsSettings = {}) {
                   __SMediaQuery.getActiveMedia()
                 ] !== undefined
               ) {
-                return this._props[prop].responsiveValues[
+                returnValue = this._props[prop].responsiveValues[
                   __SMediaQuery.getActiveMedia()
                 ];
               }
             }
-            return this._props[prop].value;
+
+            // js expression or references
+            if (prop.substr(0, 1) === ':') {
+              if (typeof returnValue !== 'string') {
+                return returnValue;
+              }
+              for (let i = 0; i < this._contexts.length; i++) {
+                const context = this._contexts[i];
+                // check if is a reference in the current component
+                if (context[returnValue] !== undefined)
+                  return context[returnValue];
+              }
+            }
+
+            return returnValue;
           },
           set: (value) => {
             this._props[prop].previousValue = this._props[prop].value;
@@ -598,47 +690,31 @@ function SWebComponentGenerator(extendsSettings = {}) {
             this._triggerPropsEvents(prop);
           }
         });
-      }
-
-      // handle props
-      for (const prop in this._settings.props) {
-        // if need to be watches deeply
-        if (this._props[prop].watch) {
-          this._props[prop] = __watch(this._props[prop], {
-            deep: this._props[prop].watch === 'deep'
-          });
-        }
+        this.promise.on(`props.${prop}.*`, (update) => {
+          console.log('updated', prop);
+          this.update();
+        });
       }
     }
 
-    /**
-     * @name          handleProp
-     * @type          Function
-     * @async
-     *
-     * This method is supposed to be overrided by your component integration
-     * to handle the props updates and delete actions.
-     * The passed description object has this format:
-     * ```js
-     * {
-     *    action: 'set|delete',
-     *    prop: 'cool',
-     *    previousValue: '...',
-     *    value: '...'
-     * }
-     * ```
-     *
-     * @param     {String}      prop      The property name that has been updated or deleted
-     * @param     {Object}      descriptionObj      The description object that describe the update or delete action
-     * @return    {Promise}                A promise that has to be resolved once the update has been handled correctly. You have to pass the prop variable to the resolve function
-     *
-     * @since     2.0.0
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    handleProp(prop, propObj) {
-      return new Promise((resolve, reject) => {
-        resolve(prop);
-      });
+    _initDomProps() {
+      // handle props
+      for (const prop in this.constructor.props) {
+        let attr = this.getAttribute(__uncamelize(prop));
+        if (!attr && this.hasAttribute(__uncamelize(prop))) {
+          attr = true;
+        }
+
+        if (!attr) continue;
+
+        this._props[prop].value = attr
+          ? __parse(attr)
+          : this._props[prop].value !== undefined
+          ? this._props[prop].value
+          : this._settings.props[prop] !== undefined
+          ? this._settings.props[prop]
+          : this.constructor.props[prop].default;
+      }
     }
 
     /**
@@ -662,8 +738,8 @@ function SWebComponentGenerator(extendsSettings = {}) {
       // check props definition
       this._checkPropsDefinition();
 
-      // handle physical props
-      this._handlePhysicalProps();
+      // update
+      this.update();
 
       // dispatch mounted event
       this._isMounted = true;
@@ -692,7 +768,17 @@ function SWebComponentGenerator(extendsSettings = {}) {
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     on(event, callback) {
-      return this._promise.on(event, callback);
+      this.addEventListener(event, (e) => {
+        // if (
+        //   e.detail &&
+        //   e.detail.settings &&
+        //   e.detail.settings.preventSameTarget
+        // ) {
+        //   if (e.target === this) return;
+        // }
+        callback(e);
+      });
+      // return this.promise.on(event, callback);
     }
 
     /**
@@ -709,7 +795,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     off(event, callback) {
-      return this._promise.off(event, callback);
+      // return this.promise.off(event, callback);
     }
 
     /**
@@ -726,32 +812,37 @@ function SWebComponentGenerator(extendsSettings = {}) {
      * @since       2.0.0
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    dispatch(name, value) {
-      // dispatch event through the SPromise internal instance
-      this._promise.trigger(name, value || this);
-      // dispatch a general event
-      __dispatch(`${this.metas.dashName}.${name}`, {
-        target: this,
-        value
+    dispatch(name, value, settings = {}) {
+      const event = new CustomEvent(name, {
+        ...settings,
+        detail: value
       });
-      __dispatch(`${this.metas.dashName}#${this._settings.id}.${name}`, {
-        target: this,
-        value
-      });
-      setTimeout(() => {
-        // dispatch an SWebComponent level event
-        _sWebComponentPromise.trigger(`${this.metas.dashName}.${name}`, {
-          target: this,
-          value
-        });
-        _sWebComponentPromise.trigger(
-          `${this.metas.dashName}#${this._settings.id}.${name}`,
-          {
-            target: this,
-            value
-          }
-        );
-      });
+      this.dispatchEvent(event);
+      // // dispatch event through the SPromise internal instance
+      // this.promise.trigger(name, value || this);
+      // // dispatch a general event
+      // __dispatch(`${this.metas.dashName}.${name}`, {
+      //   target: this,
+      //   value
+      // });
+      // __dispatch(`${this.metas.dashName}#${this._settings.id}.${name}`, {
+      //   target: this,
+      //   value
+      // });
+      // setTimeout(() => {
+      //   // dispatch an SWebComponent level event
+      //   _sWebComponentPromise.trigger(`${this.metas.dashName}.${name}`, {
+      //     target: this,
+      //     value
+      //   });
+      //   _sWebComponentPromise.trigger(
+      //     `${this.metas.dashName}#${this._settings.id}.${name}`,
+      //     {
+      //       target: this,
+      //       value
+      //     }
+      //   );
+      // });
     }
 
     /**
@@ -906,41 +997,6 @@ function SWebComponentGenerator(extendsSettings = {}) {
     }
 
     /**
-     * @name        prop
-     * @type        Function
-     *
-     * Get of set a property
-     *
-     * @param       {String}      prop      The property you want to get/set
-     * @param       {Mixed}       [value=undefined]    The value you want to set
-     * @return      {Mixed}                 The property value
-     *
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    // prop(prop, value = undefined) {
-    //   // camelize the attribute name
-    //   prop = __camelize(prop);
-
-    //   if (value === undefined) {
-    //     return this._props[prop] ? this._props[prop].value : undefined;
-    //   }
-    //   this._props[prop].previousValue = this._props[prop]
-    //     ? this._props[prop].value
-    //     : undefined;
-    //   this._props[prop].value = value;
-
-    //   this.handleProp(prop, this._props[prop]);
-
-    //   // handle physical props
-    //   this._handlePhysicalProps(prop);
-
-    //   // trigger a "prop" event
-    //   this._triggerPropsEvents(prop);
-
-    //   return value;
-    // }
-
-    /**
      * @name        _triggerPropsEvents
      * @type        Function
      * @private
@@ -966,7 +1022,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
         media: __SMediaQuery.getActiveMedia()
       };
 
-      this.dispatch(`prop.${prop}.${eventObj.action}`, eventObj);
+      this.promise.trigger(`props.${prop}.${eventObj.action}`, eventObj);
     }
 
     /**
@@ -1028,37 +1084,14 @@ function SWebComponentGenerator(extendsSettings = {}) {
         props = Object.keys(this.constructor.props);
       props.forEach((prop) => {
         const propObj = this._props[prop];
-
         const validationResult = __validateValue(propObj.value, propObj, {
           name: `${this.constructor.name}.props.${prop}`,
           throw: true
         });
-        if (validationResult !== true) throw new Error(validationResult);
+        // if (validationResult !== true) throw new Error(validationResult);
       });
     }
   };
 }
-
-// /**
-//  * @name        on
-//  * @type        Function
-//  * @static
-//  *
-//  * This method can be used to subscribe to some SWebComponent instances events
-//  * like "SFiltrableInput.ready", etc...
-//  *
-//  * @param       {String}      name        The event name to subscribe to
-//  * @param       {Function}    callback    The callback function to call
-//  * @return      {Function}                A function that you can use to unsubscribe to this particular event
-//  *
-//  * @since       2.0.0
-//  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-//  */
-// SWebComponentGenerator.on = function (name, callback) {
-//   _sWebComponentPromise.on(name, callback);
-//   return () => {
-//     _sWebComponentPromise.off(name, callback);
-//   };
-// };
 
 export default SWebComponentGenerator;

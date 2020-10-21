@@ -65,7 +65,11 @@ var SError = /*#__PURE__*/function (_Error) {
       return true;
     }).join('\n');
     _this = _super.call(this, message);
-    Error.captureStackTrace(_assertThisInitialized(_this), _this.constructor);
+
+    if (Error && Error.captureStackTrace) {
+      Error.captureStackTrace(_assertThisInitialized(_this), _this.constructor);
+    }
+
     var stack = [];
     var packageRoot = (0, _packageRoot.default)();
     var stackArray = [];

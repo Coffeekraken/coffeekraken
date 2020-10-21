@@ -31,6 +31,22 @@ module.exports = {
   },
 
   /**
+   * @name          settingsMode
+   * @namespace     config.scss
+   * @type          String
+   * @values        inline, variables
+   * @default       variables
+   *
+   * Set the settings mode to use.
+   * - inline: The values will be put directly in the css
+   * - variables: The values will be passed using the var(...) css function
+   *
+   * @since         2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  settingsMode: 'variables',
+
+  /**
    * @name          unit
    * @namespace     config.scss
    * @type          String

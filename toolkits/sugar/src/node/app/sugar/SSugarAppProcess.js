@@ -1,5 +1,6 @@
-const __SProcessManager = require('../../process/SProcess');
+const __SProcess = require('../../process/SProcess');
 const __SSugarApp = require('./SSugarApp');
+const __SSugarAppInterface = require('./interface/SSugarAppInterface');
 
 /**
  * @name            SSugarAppProcess
@@ -14,7 +15,9 @@ const __SSugarApp = require('./SSugarApp');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSugarAppProcess extends __SProcessManager {
+module.exports = class SSugarAppProcess extends __SProcess {
+  static interface = __SSugarAppInterface;
+
   /**
    * @name          constructor
    * @type          Function
@@ -33,35 +36,21 @@ module.exports = class SSugarAppProcess extends __SProcessManager {
   }
 
   /**
-   * @name              run
+   * @name              process
    * @type              Function
    *
    * Method that execute the frontend server code, listen for errors, etc...
    *
-   * @param       {Object}        argsObj           The arguments object that will be passed to the underlined actions stream instance
+   * @param       {Object}        params           The arguments object that will be passed to the underlined actions stream instance
    * @param       {Object}        [settings={}]     An object of settings passed to the ```start``` method of the ```SBuildScssActionsStream``` instance
    * @return      {Süromise}                        An SPomise instance representing the build process
    *
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(argsObj, settings = {}) {
+  process(params, settings = {}) {
     // new sugar ui instance
     this._sugarUiInstance = new __SSugarApp({});
-    return super.run(this._sugarUiInstance);
-  }
-
-  /**
-   * @name          kill
-   * @type          Function
-   *
-   * Method that allows you to kill the process
-   *
-   * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  kill() {
-    this._sugarUiInstance.cancel();
-    super.kill();
+    this.bindSPromise(this._sugarUiInstance);
   }
 };

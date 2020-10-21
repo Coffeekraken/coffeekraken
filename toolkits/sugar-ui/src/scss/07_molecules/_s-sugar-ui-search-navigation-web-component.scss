@@ -1,2 +1,2 @@
-@use '@coffeekraken/s-filtrable-input/src/scss/style' as SFiltrableInput;
+@use '@coffeekraken/s-filtrable-input/index' as SFiltrableInput;
 @include SFiltrableInput.style();

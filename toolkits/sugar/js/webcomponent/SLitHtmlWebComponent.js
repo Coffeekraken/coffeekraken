@@ -61,6 +61,10 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
@@ -178,13 +182,11 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
         until: _until.until
       });
 
-      _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(function () {
-        var tplFn = this.constructor.template.bind(this);
-        var tpl = tplFn(this.props, this._settings, this.lit);
-        (0, _litHtml.render)(tpl, this.$container);
+      _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(() => {
+        _this._render();
       }, 50));
 
-      _this.on('mounted:1', () => {
+      _this.on('mounted', e => {
         // insert the container in the document
         if ((0, _canHaveChildren.default)(_assertThisInitialized(_this))) {
           _this.$container = _assertThisInitialized(_this);
@@ -196,16 +198,19 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
           _this.addClass('', _this.$container);
 
           (0, _insertAfter.default)(_this.$container, _assertThisInitialized(_this));
-        } // render for the first time
+        } // // render for the first time
+        // this.render();
+        // // refresh references
+        // this._refreshIdReferences();
 
 
-        _this.render(); // refresh references
+        _this.update(); // dispatch a ready event
 
 
-        _this._refreshIdReferences(); // dispatch a ready event
+        _this.dispatch('ready', _assertThisInitialized(_this), {
+          bubbles: true // preventSameTarget: true
 
-
-        _this.dispatch('ready', _assertThisInitialized(_this)); // listen for media query change to update the view
+        }); // listen for media query change to update the view
 
 
         _this._mediaQuery.on('match', media => {
@@ -228,45 +233,25 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
 
 
     _createClass(SLitHtmlWebComponent, [{
-      key: "handleProp",
+      key: "update",
 
       /**
-       * @name          handleProp
+       * @name          update
        * @type          Function
-       * @async
        *
-       * This method is supposed to be overrided by your component integration
-       * to handle the props updates and delete actions.
-       * The passed description object has this format:
-       * ```js
-       * {
-       *    action: 'set|delete',
-       *    path: 'something.cool',
-       *    oldValue: '...',
-       *    value: '...'
-       * }
-       * ```
+       * This method allows you to update your componment manually if needed.
+       * - call the ```render``` method of this class
+       * - call the ```update``` method of the SWebComponent parent class
        *
-       * @param     {String}      prop      The property name that has been updated or deleted
-       * @param     {Object}      descriptionObj      The description object that describe the update or delete action
-       * @return    {Promise}                A promise that has to be resolved once the update has been handled correctly. You have to pass the prop variable to the resolve function
-       *
-       * @since     2.0.0
+       * @since       2.0.0
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      value: function handleProp(prop, propObj) {
-        return new Promise((resolve, reject) => {
-          // this.render();
-          setTimeout(() => {
-            this.render();
-          });
-          resolve(prop);
-        });
-      }
-    }, {
-      key: "$root",
-      get: function get() {
-        return this.$container || this;
+      value: function update() {
+        // render
+        this._render(); // update parent
+
+
+        _get(_getPrototypeOf(SLitHtmlWebComponent.prototype), "update", this).call(this);
       }
       /**
        * @name          render
@@ -277,6 +262,19 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
 
+    }, {
+      key: "_render",
+      value: function _render() {
+        if (!this.$container) return;
+        var tplFn = this.constructor.template.bind(this);
+        var tpl = tplFn(this.props, this._settings, this.lit);
+        (0, _litHtml.render)(tpl, this.$container);
+      }
+    }, {
+      key: "$root",
+      get: function get() {
+        return this.$container || this;
+      }
     }]);
 
     return SLitHtmlWebComponent;

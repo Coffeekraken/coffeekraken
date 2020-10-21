@@ -73,7 +73,8 @@ module.exports = class SSugarAppTerminalUi extends __SBlessedComponent {
     });
 
     this._modulesReady = false;
-    source.on('*.SSugarApp.state', (state) => {
+    source.on('*.state', (state, metas) => {
+      console.log('SA', state, metas);
       if (state === 'ready') {
         this._modulesReady = true;
       }

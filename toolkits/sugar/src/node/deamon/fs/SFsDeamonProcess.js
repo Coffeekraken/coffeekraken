@@ -4,6 +4,7 @@ const __SPromise = require('../../promise/SPromise');
 const __deepMerge = require('../../object/deepMerge');
 const __SFsFile = require('../../fs/SFsFile');
 const __packageRoot = require('../../path/packageRoot');
+const __SFsDeamonInterface = require('./interface/SFsDeamonInterface');
 
 /**
  * @name                SFsDeamonProcess
@@ -31,6 +32,8 @@ const __packageRoot = require('../../path/packageRoot');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SFsDeamonProcess extends __SProcess {
+  static interface = __SFsDeamonInterface;
+
   /**
    * @name          constructor
    * @type          Function
@@ -66,7 +69,7 @@ module.exports = class SFsDeamonProcess extends __SProcess {
   _filesCache = {};
 
   /**
-   * @name              watch
+   * @name              process
    * @type              Function
    * @async
    *
@@ -84,7 +87,7 @@ module.exports = class SFsDeamonProcess extends __SProcess {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(argsObj, settings = {}) {
+  process(params, settings = {}) {
     settings = __deepMerge(this._settings, {}, settings);
 
     this.log({
@@ -93,7 +96,7 @@ module.exports = class SFsDeamonProcess extends __SProcess {
     });
 
     this._watcher = __chokidar
-      .watch(argsObj.watch, {
+      .watch(params.watch, {
         persistent: true,
         ignoreInitial: true,
         followSymlinks: true,
@@ -107,6 +110,7 @@ module.exports = class SFsDeamonProcess extends __SProcess {
       })
       .on('change', (filepath) => {
         const file = this._getFileInstanceFromPath(filepath);
+        if (!file) return;
         delete file._settings;
         this.log({
           group: 'Updated files',
@@ -115,10 +119,11 @@ module.exports = class SFsDeamonProcess extends __SProcess {
             ''
           )}</yellow>" <cyan>${file.size}</cyan>mb`
         });
-        trigger('update', file);
+        this.trigger('update', file.toObject());
       })
       .on('add', (filepath) => {
         const file = this._getFileInstanceFromPath(filepath);
+        if (!file) return;
         delete file._settings;
         this.log({
           group: 'Added files',
@@ -128,7 +133,7 @@ module.exports = class SFsDeamonProcess extends __SProcess {
           )}</green>" <cyan>${file.size}</cyan>mb`
         });
 
-        trigger('add', file);
+        this.trigger('add', file.toObject());
       })
       .on('unlink', (filepath) => {
         delete this._filesCache[filepath];
@@ -141,7 +146,7 @@ module.exports = class SFsDeamonProcess extends __SProcess {
           )}</red>" <cyan>${file.size}</cyan>mb`
         });
 
-        trigger('unlink', {
+        this.trigger('unlink', {
           path: filepath
         });
       });

@@ -1,6 +1,9 @@
 @mixin init-settings-to-css-variables() {
   $flattenSettings: map-flatten($__settings, '-');
   @each $key, $value in $flattenSettings {
-    $res: var-define($key, $value);
+    @if type-of($value) == number or type-of($value) == string or type-of($value) == color {
+      $res: var-define($key, $value);
+    }
   }
+  @include var-output();
 }

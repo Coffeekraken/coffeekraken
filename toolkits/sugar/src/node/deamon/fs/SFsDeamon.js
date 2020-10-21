@@ -1,10 +1,6 @@
-const __SPromise = require('../../promise/SPromise');
 const __deepMerge = require('../../object/deepMerge');
-const __SFsDeamonCli = require('./SFsDeamonCli');
-const __SFsDeamonProcessManager = require('./SFsDeamonProcessManager');
 const __SDeamon = require('../SDeamon');
-const __toString = require('../../string/toString');
-const __onProcessExit = require('../../process/onProcessExit');
+const __SFsDeamonProcess = require('./SFsDeamonProcess');
 
 /**
  * @name            SFsDeamon
@@ -15,10 +11,11 @@ const __onProcessExit = require('../../process/onProcessExit');
  * This class is a wrapper of the SFsDeamonCli and the SFsDeamonProcess to allows you to
  * start quickly some watch processes and kill them with ease
  *
+ * @todo        update doc
+ *
  * @param       {Object}        [settings={}]             Specify some settings to configure your filesystem deamon instance
  * - id (deamon.fs.unnamed) {String}: A unique id for your watch instance
  * - name (Unnamed SFsDeamon) {String}: A name for your watch instance
- * - cliSettings ({}) {Object}: Specify some settings that will be passed to the underhood SFsDeamonCli instance
  *
  * @example       js
  * const SFsDeamon = require('@coffeekraken/sugar/node/deamon/fs/SFsDeamon');
@@ -64,7 +61,9 @@ module.exports = class SFsDeamon extends __SDeamon {
           name: 'Unnamed SFsDeamon',
           id: 'SFsDeamon',
           updateStacks: ['update', 'add', 'unlink'],
-          cliSettings: {}
+          updateLog: (updateObj) => {
+            return `<yellow>Update</yellow> detected on the file "<magenta>${updateObj.relPath}</magenta>"`;
+          }
         },
         settings
       )
@@ -97,7 +96,7 @@ module.exports = class SFsDeamon extends __SDeamon {
   watch(watch, settings = {}) {
     settings = __deepMerge(this._settings, settings);
     watch = typeof watch === 'string' ? watch : watch.watch;
-    const watchProcess = new __SFsDeamonProcessManager({}, {});
+    const watchProcess = new __SFsDeamonProcess();
     watchProcess.run({
       watch
     });

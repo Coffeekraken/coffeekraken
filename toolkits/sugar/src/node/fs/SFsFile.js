@@ -7,6 +7,7 @@ const __extension = require('./extension');
 const __getFilename = require('./filename');
 const __SFsFileSettingsInterface = require('./interface/SFsFileSettingsInterface');
 const __SError = require('../error/SError');
+const __packageRoot = require('../path/packageRoot');
 
 /**
  * @name            SFsFile
@@ -29,7 +30,7 @@ const __SError = require('../error/SError');
  *
  * @param         {String}          filepath        The file path you want to init
  * @param         {Object}          [settings={}]    An object of settings to configure your file instance:
- * - rootDir (null) {String}: Specify a root directory for the file. This is usefull to have then access to properties like ```relPath```, etc...
+ * - rootDir (__packageRoot()) {String}: Specify a root directory for the file. This is usefull to have then access to properties like ```relPath```, etc...
  * - checkExistence (true) {Boolean}: Specify if you want this inited file to really exists on the disk or not
  *
  * @example           js
@@ -148,7 +149,7 @@ class SFsFile extends __SPromise {
       {
         id: 'SFsFile',
         checkExistence: true,
-        rootDir: null
+        rootDir: __packageRoot()
       },
       settings
     );
@@ -185,6 +186,29 @@ class SFsFile extends __SPromise {
     if (this.exists) {
       this.update();
     }
+  }
+
+  /**
+   * @name            toObject
+   * @type            Function
+   *
+   * This method transform this instance into a plain object
+   *
+   * @return        {Object}        A plain object version of this instance
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  toObject() {
+    return {
+      exists: this.exists,
+      rootDir: this.rootDir,
+      path: this.path,
+      relPath: this.relPath,
+      name: this.name,
+      extension: this.extension,
+      dirPath: this.dirPath
+    };
   }
 
   /**

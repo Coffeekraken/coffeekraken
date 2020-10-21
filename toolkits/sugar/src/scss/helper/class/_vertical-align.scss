@@ -1,10 +1,30 @@
+/**
+ * @name              helper-vertical-align-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "vertical-align" related helper classes.
+ *
+ * @classname     #{sel(align-top)}          Align vertically top
+ * @classname     #{sel(align-bottom)}          Align vertically bottom
+ * @classname     #{sel(align-middle)}          Align vertically middle
+ * @classname     #{sel(align-baseline)}          Align vertically baseline
+ * @classname     #{sel(align-text-top)}          Align vertically text-top
+ * @classname     #{sel(align-text-bottom)}          Align vertically text-bottom
+ *
+ * @example         scss
+ * @include Sugar.helper-vertical-align-classes();
+ *
+ * @since         2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
 @mixin helper-vertical-align-classes() {
   @if class-match-namespace('sugar.helper.vertical-align.top') {
     /**
     * @name 		.#{sel(align-top)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.vertical-align.top
-    * @type        class
+    * @type        Classname
     *
     * Align vertically top
     *
@@ -28,10 +48,10 @@
     * @name 		.#{sel(align-bottom)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.vertical-align.bottom
-    * @type        class
+    * @type        Classname
     *
     * Align vertically bottom
-    *
+    *    
     * @example 	html
     * <div class="#{sel(border)} style="height:200px">
     *   <div class="#{sel(align-bottom)}">
@@ -52,10 +72,10 @@
     * @name 		.#{sel(align-middle)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.vertical-align.middle
-    * @type        class
+    * @type        Classname
     *
     * Align vertically middle
-    *
+    *    
     * @example 	html
     * <div class="#{sel(border)} style="height:200px">
     *   <div class="#{sel(align-middle)}">
@@ -76,7 +96,7 @@
     * @name 		.#{sel(align-baseline)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.vertical-align.baseline
-    * @type        class
+    * @type        Classname
     *
     * Align vertically baseline
     *
@@ -100,7 +120,7 @@
     * @name 		#{sel(align-text-top)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.vertical-align.text-top
-    * @type        class
+    * @type        Classname
     *
     * Align vertically text-top
     *
@@ -124,10 +144,10 @@
     * @name 		#{sel(align-text-bottom)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.vertical-align.text-bottom
-    * @type        class
+    * @type        Classname
     *
     * Align vertically text-bottom
-    *
+    *    
     * @example 	html
     * <div class="#{sel(border)} style="height:200px">
     *   <div class="#{sel(align-text-bottom)}">

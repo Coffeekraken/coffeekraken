@@ -1,10 +1,11 @@
-const __FrontendServerCli = require('../../node/server/frontend/SFrontendServerCli');
-const __output = require('../../node/process/output');
-const __isChildProcess = require('../../node/is/childProcess');
+const __SFrontendServerProcess = require('../../node/server/frontend/SFrontendServerProcess');
+const __SProcessManager = require('../../node/process/SProcessManager');
 
 module.exports = (stringArgs = '') => {
-  const cli = new __FrontendServerCli(stringArgs, {
-    output: {}
+  const manager = new __SProcessManager(__SFrontendServerProcess, {
+    autoRun: true,
+    processSettings: {
+      runAsChild: true
+    }
   });
-  cli.run();
 };

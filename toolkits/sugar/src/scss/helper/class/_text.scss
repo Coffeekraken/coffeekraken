@@ -1,3 +1,40 @@
+/**
+ * @name              helper-text-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "text" related helper classes.
+ *
+ * @classname     #{sel(t-[size])}         Set the size relative to the root element
+ * @classname     #{sel(t-[size]-rel)}         Set the size relative to my parent
+ * @classname     #{sel(t-hidden)}         Hide the text
+ * @classname     #{sel(t-truncate)}         Truncate the text
+ * @classname     #{sel(t-left)}         Align the text to the left
+ * @classname     #{sel(t-right)}         Align the text to the right
+ * @classname     #{sel(t-center)}         Align the text to the center
+ * @classname     #{sel(t-justified)}         Make the text justified
+ * @classname     #{sel(t-lowercase)}         Make the text lowercase
+ * @classname     #{sel(t-uppercase)}         Make the text uppercase
+ * @classname     #{sel(t-capitalize)}         Capizalize the words
+ * @classname     #{sel(t-bold)}         Make the text bold
+ * @classname     #{sel(t-bolder)}         Make the text bolder
+ * @classname     #{sel(t-normal)}         Make the text normal
+ * @classname     #{sel(t-light)}         Make the text light
+ * @classname     #{sel(t-lighter)}         Make the text lighter
+ * @classname     #{sel(t-italic)}         Make the text italic
+ * @classname     #{sel(t-[font])}         Apply a special font
+ * @classname     #{sel(t-reset)}         Reset the text (font-weight, family, color, etc...)
+ * @classname     #{sel(t-decoration-none)}         Remove the text decoration
+ * @classname     #{sel(t-underline)}         Apply the decoration underline
+ * @classname     #{sel(t-line-through)}         Apply the decoration line-through
+ * @classname     #{sel(t-overline)}         Apply the decoration overline
+ *
+ * @example         scss
+ * @include Sugar.helper-text-classes();
+ *
+ * @since         2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
 @mixin helper-text-classes() {
   @if class-match-namespace('sugar.helper.size') {
     @each $size, $value in setting('sizes') {
@@ -28,7 +65,7 @@
           * @name       	#{sel(t-#{$size}-rel)}
           * @namespace       sugar.scss.helper.class
           * @class-namespace           sugar.helper.text.rel.#{$size}
-          * @type        class
+          * @type        Classname
           *
           * Set the size **#{$size}** relative to my parent
           *
@@ -52,7 +89,7 @@
     * @name 		#{sel(t-hidden)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.hidden
-    * @type        class
+    * @type        Classname
     *
     * Hide the text
     *
@@ -73,9 +110,9 @@
     * @name 		#{sel(t-truncate)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.truncate
-    * @type        class
+    * @type        Classname
     *
-    * Hide the text
+    * Truncate the text
     *
     * @example 	html
     * <div class="#{sel(t-truncate)}">
@@ -94,7 +131,7 @@
     * @name 		#{sel(t-left)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.align.left
-    * @type        class
+    * @type        Classname
     *
     * Align the text to the left
     *
@@ -115,7 +152,7 @@
     * @name 		#{sel(t-right)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.align.right
-    * @type        class
+    * @type        Classname
     *
     * Align the text to the right
     *
@@ -136,7 +173,7 @@
     * @name 		#{sel(t-center)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.align.center
-    * @type        class
+    * @type        Classname
     *
     * Align the text to the center
     *
@@ -157,7 +194,7 @@
     * @name 		#{sel(t-justify)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.align.justify
-    * @type        class
+    * @type        Classname
     *
     * Make the text justified
     *
@@ -178,7 +215,7 @@
     * @name 		#{sel(t-lowercase)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.transform.lowercase
-    * @type        class
+    * @type        Classname
     *
     * Transform the text to lowercase
     *
@@ -199,7 +236,7 @@
     * @name 		#{sel(t-uppercase)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.transform.uppercase
-    * @type        class
+    * @type        Classname
     *
     * Transform the text to uppercase
     *
@@ -220,7 +257,7 @@
     * @name 		#{sel(t-capitalize)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.transform.capitalize
-    * @type        class
+    * @type        Classname
     *
     * Capizalize the words
     *
@@ -242,7 +279,7 @@
     * @name 		#{sel(t-bold)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.weight.bold
-    * @type        class
+    * @type        Classname
     *
     * Make the text bold
     *
@@ -264,7 +301,7 @@
     * @name 		#{sel(t-bolder)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.weight.bolder
-    * @type        class
+    * @type        Classname
     *
     * Make the text bolder
     *
@@ -286,7 +323,7 @@
     * @name 		#{sel(t-normal)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.weight.normal
-    * @type        class
+    * @type        Classname
     *
     * Make the text normal
     *
@@ -308,7 +345,7 @@
     * @name 		#{sel(t-light)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.weight.light
-    * @type        class
+    * @type        Classname
     *
     * Make the text light
     *
@@ -330,7 +367,7 @@
     * @name 		#{sel(t-lighter)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.weight.lighter
-    * @type        class
+    * @type        Classname
     *
     * Make the text lighter
     *
@@ -352,7 +389,7 @@
     * @name 		#{sel(t-italic)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.style.italic
-    * @type        class
+    * @type        Classname
     *
     * Make the text italic
     *
@@ -376,7 +413,7 @@
       * @name 		#{sel(t-#{$name})}
       * @namespace         sugar.scss.helper.class
       * @class-namespace     sugar.helper.text.font.#{$name}
-      * @type        class
+      * @type        Classname
       *
       * Apply the font "#{$name}"
       *
@@ -399,7 +436,7 @@
     * @name 		#{sel(t-reset)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.reset
-    * @type        class
+    * @type        Classname
     *
     * Reset the text (font-weight, family, color, etc...)
     *
@@ -430,7 +467,7 @@
     * @name 		#{sel(t-decoration-none)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.decoration.none
-    * @type        class
+    * @type        Classname
     *
     * Remove the text decoration
     *
@@ -452,7 +489,7 @@
     * @name 		#{sel(t-underline)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.decoration.underline
-    * @type        class
+    * @type        Classname
     *
     * Apply the decoration underline
     *
@@ -474,7 +511,7 @@
     * @name 		#{sel(t-line-through)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.decoration.line-through
-    * @type        class
+    * @type        Classname
     *
     * Apply the decoration line-through
     *
@@ -496,7 +533,7 @@
     * @name 		#{sel(t-overline)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.text.decoration.overline
-    * @type        class
+    * @type        Classname
     *
     * Apply the decoration overline
     *

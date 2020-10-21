@@ -1,3 +1,4 @@
+const __completeArgsObject = require('../cli/completeArgsObject');
 const __path = require('path');
 const __convert = require('../time/convert');
 const __wait = require('../time/wait');
@@ -15,7 +16,7 @@ const __buildCommandLine = require('../cli/buildCommandLine');
 const __parseArgs = require('../cli/parseArgs');
 const __childProcess = require('child_process');
 const __output = require('./output');
-const { settings } = require('cluster');
+const __stackTrace = require('stack-trace');
 
 /**
  * @name                SProcess
@@ -56,6 +57,20 @@ module.exports = class SProcess extends __SPromise {
    */
   get name() {
     return this._settings.name;
+  }
+
+  /**
+   * @name      params
+   * @type      String
+   * @get
+   *
+   * Access the process params
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get params() {
+    return this._params;
   }
 
   /**
@@ -195,14 +210,15 @@ module.exports = class SProcess extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(processPath, settings = {}) {
+  constructor(settings = {}) {
     super(
       __deepMerge(
         {
           output: {},
-          runAsChild: true,
+          runAsChild: false,
           definitionObj: {},
           triggerParent: true,
+          processPath: null,
           notifications: {
             enable: true,
             start: {
@@ -239,7 +255,25 @@ module.exports = class SProcess extends __SPromise {
       )
     );
 
-    this._processPath = processPath;
+    this._processPath = this._settings.processPath;
+    for (var callSite of __stackTrace.get()) {
+      if (callSite.getFunctionName() === this.constructor.name) {
+        this._processPath = callSite.getFileName();
+        break;
+      }
+    }
+    if (!this._processPath) {
+      throw new __SError(
+        `An SProcess instance MUST have a "<yellow>processPath</yellow>" property either populated automatically if possible, or specified in the "<cyan>settings.processPath</cyan>" property...`
+      );
+    }
+
+    if (!this.constructor.interface) {
+      throw new __SError(
+        `An SProcess instance MUST have a static "<yellow>interface</yellow>" property and it seems that your "<cyan>${this.constructor.name}</cyan>" instance does not...`
+      );
+    }
+
     if (!this._settings.notifications.start.title) {
       this._settings.notifications.start.title = `${this._settings.name} (${this._settings.id})`;
     }
@@ -272,7 +306,9 @@ module.exports = class SProcess extends __SPromise {
             }</cyan>) process has finished <green>successfully</green> in <yellow>${__convert(
               this.duration,
               __convert.SECOND
-            )}s</yellow>`
+            )}s</yellow>\n<yellow>${'-'.repeat(
+              process.stdout.columns - 4
+            )}</yellow>`
           });
           if (this._settings.notifications.enable) {
             __notifier.notify(this._settings.notifications.success);
@@ -307,18 +343,6 @@ module.exports = class SProcess extends __SPromise {
         });
       });
       return;
-    }
-
-    if (!__isChildProcess()) {
-      if (this._settings.output) {
-        if (__isClass(settings.output)) {
-          const outputInstance = new settings.output(this);
-        } else {
-          const outputSettings =
-            typeof settings.output === 'object' ? settings.output : {};
-          __output(this, outputSettings);
-        }
-      }
     }
   }
 
@@ -391,17 +415,6 @@ module.exports = class SProcess extends __SPromise {
 
     await __wait(100);
 
-    // log a start message
-    if (!__isChildProcess()) {
-      this.log({
-        value: `Starting the <yellow>${this.name}</yellow> (<cyan>${
-          this.id
-        }</cyan>) process...\n<yellow>${'-'.repeat(
-          process.stdout.columns - 4
-        )}</yellow>`
-      });
-    }
-
     let paramsObj = paramsOrStringArgs;
     if (typeof paramsObj === 'string') {
       paramsObj = __parseArgs(paramsObj, {
@@ -413,6 +426,26 @@ module.exports = class SProcess extends __SPromise {
               }
             }
           : null
+      });
+    } else if (typeof paramsObj === 'object') {
+      paramsObj = __completeArgsObject(paramsObj, {
+        definitionObj: this.constructor.interface.definitionObj
+      });
+    }
+
+    // save current process params
+    this._params = Object.assign({}, paramsObj);
+
+    // log a start message
+    if (!__isChildProcess()) {
+      this.log({
+        value: `<yellow>${'-'.repeat(
+          process.stdout.columns - 4
+        )}</yellow>\nStarting the <yellow>${this.name}</yellow> (<cyan>${
+          this.id
+        }</cyan>) process...\n<yellow>${'-'.repeat(
+          process.stdout.columns - 4
+        )}</yellow>`
       });
     }
 

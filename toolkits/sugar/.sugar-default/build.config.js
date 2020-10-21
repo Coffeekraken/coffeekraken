@@ -32,6 +32,20 @@ module.exports = {
     input: `${__packageRoot()}/src/scss/[^_]*.scss`,
 
     /**
+     * @name              iconsInput
+     * @namespace         config.build.scss
+     * @type              String
+     * @default           <appRoot>/src/icons/*.svg
+     *
+     * Specify where to find the icons files to generate the icon font automatically
+     * Glob patterns can be used
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    iconsInput: `${__packageRoot()}/src/icons/*.svg`,
+
+    /**
      * @name              outputDir
      * @namespace         config.build.scss
      * @type              String

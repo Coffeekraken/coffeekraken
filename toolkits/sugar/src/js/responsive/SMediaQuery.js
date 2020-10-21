@@ -53,7 +53,7 @@ class SMediaQuery extends __SPromise {
    * @type              Function
    * @static
    *
-   * Add the global listener based on the "initBodyMediaQueries" scss mixin
+   * Add the global listener based on the "init-body-media-queries" scss mixin
    *
    * @since             2.0.0
    * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -67,7 +67,7 @@ class SMediaQuery extends __SPromise {
    * @type              Function
    * @static
    *
-   * Add the global listener based on the "initBodyMediaQueries" scss mixin
+   * Add the global listener based on the "init-body-media-queries" scss mixin
    *
    * @since             2.0.0
    * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

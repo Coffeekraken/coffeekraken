@@ -21,7 +21,7 @@ exports.default = void 0;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 var _default = () => {
-  return typeof process !== 'undefined' && process.release.name === 'node';
+  return typeof process !== 'undefined' && process.release && process.release.name === 'node';
 };
 
 exports.default = _default;

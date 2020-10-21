@@ -186,6 +186,7 @@
               $spread-map: map-set($spread-map, $count-idx, $s);
             }
             @if $step-idx == $count {
+              // TODO       check for this error
               $map: map-get($spread-map, $count-idx);
               @if $map {
                 $randX: map-get($map, x);

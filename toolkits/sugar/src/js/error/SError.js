@@ -28,7 +28,9 @@ export default class SError extends Error {
       .join('\n');
 
     super(message);
-    Error.captureStackTrace(this, this.constructor);
+    if (Error && Error.captureStackTrace) {
+      Error.captureStackTrace(this, this.constructor);
+    }
 
     const stack = [];
     const packageRoot = __packageRoot();

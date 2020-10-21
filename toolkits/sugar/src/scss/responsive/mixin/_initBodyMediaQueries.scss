@@ -1,5 +1,5 @@
 /**
- * @name                initBodyMediaQueries
+ * @name                init-body-media-queries
  * @namespace           sugar.scss.responsive.mixin
  * @type                Mixin
  *
@@ -9,12 +9,12 @@
  * namespace.
  *
  * @example             scss
- * @include Sugar.initBodyMediaQueries();
+ * @include Sugar.init-body-media-queries();
  *
  * @since           2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin initBodyMediaQueries() {
+@mixin init-body-media-queries() {
   body {
     animation-duration: 0.001s;
   }

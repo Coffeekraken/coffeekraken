@@ -2,8 +2,8 @@
 $_sugar-inited: false;
 /**
  * @name    init
- * @namespace           sugar.scss.core.mixin
- * @type      mixin
+ * @namespace           sugar.scss.core
+ * @type      Mixin
  *
  * Init the sugar toolkit.
  * This has to be called **AFTER** all the [./_s-setup.scss] mixin call
@@ -25,14 +25,8 @@ $_sugar-inited: false;
       @include reset();
     }
 
-    // styleguide
-    // @include styleguide-colors();
-
-    // dom settings (put sugar settings in a "content" property of the .s-settings element
-    // @include init-dom-settings();
-
     // settings to css variables
-    // @include init-settings-to-css-variables();
+    @include init-settings-to-css-variables();
 
     // // border box
     @if setting('border-box') == true {
@@ -49,7 +43,7 @@ $_sugar-inited: false;
     @include init-font();
 
     // body media queries
-    @include initBodyMediaQueries();
+    @include init-body-media-queries();
 
     // typography
     @include init-typography();

@@ -1,30 +1,38 @@
 @mixin generate-classes() {
   // helpers
-  @include classes-helper-block();
-  @include classes-helper-border();
-  @include classes-helper-clear();
-  @include classes-helper-clearfix();
-  @include classes-helper-color();
-  @include classes-helper-display();
-  @include classes-helper-filter();
-  @include classes-helper-flex();
-  @include classes-helper-font();
-  @include classes-helper-link();
-  @include classes-helper-margin();
-  @include classes-helper-media();
-  @include classes-helper-overflow();
-  @include classes-helper-padding();
-  @include classes-helper-pointer();
-  @include classes-helper-position();
-  @include classes-helper-pull();
-  @include classes-helper-ratio();
-  @include classes-helper-screen-reader();
-  @include classes-helper-size();
-  @include classes-helper-text();
-  @include classes-helper-transition();
-  @include classes-helper-transmation();
-  @include classes-helper-user-select();
-  @include classes-helper-vertical-align();
+  @include helper-block-classes();
+  @include helper-border-classes();
+  @include helper-clear-classes();
+  @include helper-clearfix-classes();
+  @include helper-display-classes();
+  @include helper-flex-classes();
+  @include helper-link-classes();
+  @include helper-margin-classes();
+  @include helper-media-classes();
+  @include helper-overflow-classes();
+  @include helper-padding-classes();
+  @include helper-pointer-classes();
+  @include helper-position-classes();
+  @include helper-pull-classes();
+  @include helper-ratio-classes();
+  @include helper-screen-reader-classes();
+  @include helper-size-classes();
+  @include helper-text-classes();
+  @include helper-transmation-classes();
+  @include helper-user-select-classes();
+  @include helper-vertical-align-classes();
+
+  // colors
+  @include color-classes();
+
+  // filters
+  @include filter-classes();
+
+  // fonts
+  @include font-classes();
+
+  // transition
+  @include transition-classes();
 
   // components
   @include title-classes();

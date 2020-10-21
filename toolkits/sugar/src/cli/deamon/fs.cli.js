@@ -1,7 +1,5 @@
-const __SFsDeamonCli = require('../../node/deamon/fs/SFsDeamonCli');
+const __SFsDeamonProcess = require('../../node/deamon/fs/SFsDeamonProcess');
 module.exports = (stringArgs = '') => {
-  const cli = new __SFsDeamonCli(stringArgs, {
-    output: {}
-  });
-  cli.run();
+  const pro = new __SFsDeamonProcess();
+  pro.run(stringArgs);
 };

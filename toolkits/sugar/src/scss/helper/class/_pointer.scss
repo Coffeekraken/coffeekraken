@@ -1,10 +1,26 @@
+/**
+ * @name              helper-pointer-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "pointer" related helper classes.
+ *
+ * @classname     #{sel(pointer-events-none)}        Disable any pointer events
+ * @classname     #{sel(pointer-events-all)}        Enable any pointer events
+ *
+ * @example         scss
+ * @include Sugar.helper-pointer-classes();
+ *
+ * @since         2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
 @mixin helper-pointer-classes() {
   @if class-match-namespace('sugar.helper.pointer.events.none') {
     /**
     * @name 		#{sel(pointer-events-none)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.pointer.event.none
-    * @type        class
+    * @type        Classname
     *
     * Disable any pointer events
     *
@@ -25,13 +41,13 @@
     * @name 		#{sel(pointer-events-all)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.pointer.event.all
-    * @type        class
+    * @type        Classname
     *
-    * Disable any pointer events
+    * Enable any pointer events
     *
     * @example 	html
     * <div class="#{sel(pointer-events-all)}">
-    * 	I will not react to any pointer events
+    * 	I will react to any pointer events
     * </div>
     *
     * @since       1.0.0

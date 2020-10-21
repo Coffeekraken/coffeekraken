@@ -1,10 +1,27 @@
+/**
+ * @name              helper-user-select-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "user-select" related helper classes.
+ *
+ * @classname     #{sel(user-select-none)}       Disable the selection for this element
+ * @classname     #{sel(user-select-all)}       Enable the selection for this element
+ * @classname     #{sel(user-select-text)}       The text can be selected only
+ *
+ * @example         scss
+ * @include Sugar.helper-user-select-classes();
+ *
+ * @since         2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
 @mixin helper-user-select-classes() {
   @if class-match-namespace('sugar.helper.user-select.none') {
     /**
     * @name 		#{sel(user-select-none)}
     * @namespace           sugar.scss.helper.class
     * @class-namespace     sugar.helper.user-select.none
-    * @type        class
+    * @type         Classname
     *
     * Disable the selection for this element
     *
@@ -26,9 +43,9 @@
     * @name 		#{sel(user-select-all)}
     * @namespace           sugar.scss.helper.class
     * @class-namespace     sugar.helper.user-select.all
-    * @type        class
+    * @type        Classname
     *
-    * Disable the selection for this element
+    * Enable the selection for this element
     *
     * @example 	html
     * <p class="#{sel(user-select-all)}">
@@ -48,7 +65,7 @@
     * @name 		#{sel(user-select-text)}
     * @namespace           sugar.scss.helper.class
     * @class-namespace     sugar.helper.user-select.text
-    * @type        class
+    * @type        Classname
     *
     * The text can be selected only
     *

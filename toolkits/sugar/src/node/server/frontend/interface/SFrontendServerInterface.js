@@ -42,11 +42,6 @@ module.exports = class SFrontendServerInterface extends __SInterface {
       default:
         __sugarConfig('frontend.viewsDir') ||
         __packageRoot(process.cwd()) + '/views'
-    },
-    viewEngine: {
-      type: 'String',
-      description: 'Server views rendering engine',
-      default: __sugarConfig('frontend.viewEngine') || 'bladePhp'
     }
   };
 };

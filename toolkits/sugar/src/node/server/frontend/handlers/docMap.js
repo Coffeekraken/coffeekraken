@@ -18,7 +18,8 @@ const __SDocMap = require('../../../doc/SDocMap');
 module.exports = function docMap(req, res, settings = {}) {
   return new __SPromise(
     async (resolve, reject, trigger) => {
-      const docMapJson = await __SDocMap.read();
+      const docMap = new __SDocMap();
+      const docMapJson = await docMap.read();
 
       return resolve({
         type: 'application/json',

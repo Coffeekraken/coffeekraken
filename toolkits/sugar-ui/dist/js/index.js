@@ -88,7 +88,7 @@
 
 /***/ "../../webcomponents/s-filtrable-input/src/js/index.js":
 /*!***************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/webcomponents/s-filtrable-input/src/js/index.js ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/webcomponents/s-filtrable-input/src/js/index.js ***!
   \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -121,8 +121,28 @@ var _SWebComponent = _interopRequireDefault(__webpack_require__(/*! @coffeekrake
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject9() {
+function _templateObject11() {
   var data = _taggedTemplateLiteral(["\n                <li class=\"", " ", " ", "\">\n                  ", "\n                </li>\n              "]);
+
+  _templateObject11 = function _templateObject11() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject10() {
+  var data = _taggedTemplateLiteral(["\n            ", ""]);
+
+  _templateObject10 = function _templateObject10() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject9() {
+  var data = _taggedTemplateLiteral(["\n                ", "\n            "]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -132,7 +152,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n            ", ""]);
+  var data = _taggedTemplateLiteral(["\n              ", "\n            "]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -142,7 +162,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n              <li class=\"", "\">\n                ", "\n              </li>\n            "]);
+  var data = _taggedTemplateLiteral(["\n      ", "\n      <ul class=\"", "\" tabindex=\"1\">\n        ", "\n      </ul>\n    "]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -152,19 +172,9 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n      ", "\n      <ul class=\"", "\" tabindex=\"1\">\n        ", "\n      </ul>\n    "]);
-
-  _templateObject6 = function _templateObject6() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject5() {
   var data = _taggedTemplateLiteral(["\n      ", ""]);
 
-  _templateObject5 = function _templateObject5() {
+  _templateObject6 = function _templateObject6() {
     return data;
   };
 
@@ -175,8 +185,18 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function _templateObject4() {
+function _templateObject5() {
   var data = _taggedTemplateLiteral(["\n                <div class=\"", "\">\n                  ", "\n                </div>\n              "]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n                <div class=\"", "\">\n                    ", "\n                </div>\n              "]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -186,7 +206,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n                <div class=\"", "\">\n                    ", "\n                </div>\n              "]);
+  var data = _taggedTemplateLiteral(["\n              ", "\n              ", "\n            "]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -196,7 +216,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n              ", "\n              ", "\n            "]);
+  var data = _taggedTemplateLiteral(["\n              <div class=\"", "\">\n                <span class=\"", "\"></span>\n                <span class=\"", "\">", "</span>\n              </div>\n            "]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -206,7 +226,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n              <div class=\"", "\">\n                ", "\n              </div>\n            "]);
+  var data = _taggedTemplateLiteral(["\n              <li class=\"", "\"></li>\n                <div class=\"", "\">\n                  ", "\n                </div>\n              </li>\n            "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -303,17 +323,15 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
     _classCallCheck(this, SFiltrableInputWebComponent);
 
     _this = _super.call(this, (0, _deepMerge.default)({
-      closeOnSelect: true,
-      closeOnSelectTimeout: 200,
-      maxDisplayItems: 50,
       filter: {
         throttleTimeout: 100,
         properties: ['title', 'description'],
         function: null
       },
       template: {
-        noItem: (settings, lit) => lit.html(_templateObject(), _this.selector('list-no-item-text'), _this.props.noItemText),
-        item: (itemObj, settings, lit) => lit.html(_templateObject2(), itemObj.title ? lit.html(_templateObject3(), _this.selector('list-item-title'), _this.highlightFilter(itemObj.title)) : '', itemObj.description ? lit.html(_templateObject4(), _this.selector('list-item-description'), _this.highlightFilter(itemObj.description)) : '')
+        noItem: (settings, lit) => lit.html(_templateObject(), _this.selector('list-no-item'), _this.selector('list-no-item-text'), _this.props.noItemText),
+        loading: (settings, lit) => lit.html(_templateObject2(), _this.selector('list-loading'), _this.selector('list-loading-icon'), _this.selector('list-loading-text'), _this.props.loadingText),
+        item: (itemObj, settings, lit) => lit.html(_templateObject3(), itemObj.title ? lit.html(_templateObject4(), _this.selector('list-item-title'), _this.highlightFilter(itemObj.title)) : '', itemObj.description ? lit.html(_templateObject5(), _this.selector('list-item-description'), _this.highlightFilter(itemObj.description)) : '')
       }
     }, settings));
 
@@ -322,27 +340,33 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
     _defineProperty(_assertThisInitialized(_this), "_originalItems", null);
 
     if (!_this._settings.filter.function) _this._settings.filter.function = _this.filterItems.bind(_assertThisInitialized(_this));
-    _this._maxDisplayItems = _this._settings.maxDisplayItems;
+    _this._maxDisplayItems = _this.props.maxDisplayItems;
+
+    _this.promise.on('props.items.*', e => {
+      _this.unselect();
+
+      _this.update();
+    });
 
     _this.on('ready', () => {
-      _this._$list = _this.$('.list');
-      var inputThrottleTimeout;
-
-      _this.addEventListener('input', e => {
-        clearTimeout(inputThrottleTimeout);
-        inputThrottleTimeout = setTimeout(() => {
-          _this.dispatch('input', _this.value);
-        }, _this.props.inputThrottle);
-      });
+      _this._$list = _this.$('.list'); // let inputThrottleTimeout;
+      // this.addEventListener('input', (e) => {
+      //   console.log('IN');
+      //   clearTimeout(inputThrottleTimeout);
+      //   inputThrottleTimeout = setTimeout(() => {
+      //     this.dispatch('input', this.value);
+      //   }, this.props.inputThrottle);
+      // });
 
       var filterTimeout;
 
       _this.addEventListener('input', e => {
+        console.log('IN2');
         clearTimeout(filterTimeout);
         if (_this.props.loading) return;
         filterTimeout = setTimeout( /*#__PURE__*/_asyncToGenerator(function* () {
           _this.props.loading = true;
-          _this._maxDisplayItems = _this._settings.maxDisplayItems;
+          _this._maxDisplayItems = _this.props.maxDisplayItems;
           _this._preselectedItemIdx = -1;
           _this._selectedItemIdx = -1;
           _this._filterString = e.srcElement.value;
@@ -363,7 +387,7 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
       _this._$list.addEventListener('scroll', e => {
         if (e.srcElement.scrollHeight - e.srcElement.scrollTop <= e.srcElement.clientHeight + 50) {
           if (_this._maxDisplayItems < _this.props.items.length) {
-            _this._maxDisplayItems += _this._settings.maxDisplayItems;
+            _this._maxDisplayItems += _this.props.maxDisplayItems;
 
             _this.render();
           }
@@ -395,7 +419,9 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
 
           case 27:
             // escape
-            _this.escape();
+            if (_this.props.closeOnEscape) {
+              _this.escape();
+            }
 
             break;
         }
@@ -445,6 +471,25 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
       return false;
     }
     /**
+     * @name              unselect
+     * @type              Function
+     *
+     * This method can be called to unselect either an item in particular, or all the
+     * items if no parameter is specified
+     *
+     * @param       {Number}        idx         The index of the element you want to select
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "unselect",
+    value: function unselect() {
+      this._selectedItemIdx = -1;
+      this._preselectedItemIdx = -1;
+    }
+    /**
      * @name              select
      * @type              Function
      *
@@ -453,16 +498,27 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
      * @param       {Number}        idx         The index of the element you want to select
      * @return      {Boolean}                   true if the select process has been successfull, false if not
      *
+     * @setting     {Boolean}       [append=false]        Specify if you want to append this item to the current selection or replace the current one
+     *
      * @since       1.0.0
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
 
   }, {
     key: "select",
-    value: function select(idx) {
+    value: function select(idx, settings) {
+      if (settings === void 0) {
+        settings = {};
+      }
+
+      settings = (0, _deepMerge.default)({
+        append: false
+      }, settings);
       if (typeof idx !== 'number') return false; // check that we have an item with this idx
 
-      if (idx < 0 || idx >= this.props.items.length) return false; // set the idx to the selectedItemIndex variable
+      if (idx < 0 || idx >= this.props.items.length) return false; // make sure the focus stay in the input
+
+      this.focus(); // set the idx to the selectedItemIndex variable
 
       this._selectedItemIdx = idx;
       this._preselectedItemIdx = idx; // render the component
@@ -472,16 +528,38 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
       var selectedItem = (0, _clone.default)(this.props.items[this._selectedItemIdx]); // set the value into the actual input
 
       var inputValue;
-      var itemValue = this.props.itemValue;
-      if (typeof itemValue === 'string') inputValue = selectedItem[itemValue];else if (typeof itemValue === 'function') inputValue = itemValue(selectedItem);
-      if (itemValue) this.setAttribute('value', inputValue); // dispatch a select event
+
+      if (selectedItem.inputValue && typeof selectedItem.inputValue === 'string') {
+        inputValue = selectedItem.inputValue;
+      } else {
+        var inputValueProp = this.props.inputValueProp;
+        if (typeof inputValueProp === 'string') inputValue = selectedItem[inputValueProp];else if (typeof inputValueProp === 'function') inputValue = inputValueProp(selectedItem);
+      }
+
+      if (inputValue) this.setAttribute('value', inputValue); // "onSelect" item prop
+
+      if (selectedItem.onSelect && typeof selectedItem.onSelect === 'function') {
+        var onSelectFn = selectedItem.onSelect.bind(this);
+        onSelectFn(selectedItem);
+      } else if (this.props[':onSelect'] && typeof this.props[':onSelect'] === 'function') {
+        var _onSelectFn = this.props[':onSelect'].bind(this);
+
+        _onSelectFn(selectedItem);
+      } else if (selectedItem.href) {
+        window.location = selectedItem.href;
+      } // clear the input
+
+
+      this.value = ''; // reset filter string
+
+      this._filterString = null; // dispatch a select event
 
       this.dispatch('select', selectedItem); // close if needed
 
-      if (this._settings.closeOnSelect) {
+      if (this.props.closeOnSelect || selectedItem.close) {
         setTimeout(() => {
           this.escape();
-        }, this._settings.closeOnSelectTimeout);
+        }, this.props.closeOnSelectTimeout);
       } // return the selected item
 
 
@@ -520,7 +598,7 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
       // check that we have an item selected
       if (this._preselectedItemIdx === -1) return; // make sure the selected item exist in the stack
 
-      if (!this.items[this._preselectedItemIdx]) return; // select the item
+      if (!this.props.items[this._preselectedItemIdx]) return; // select the item
 
       return this.select(this._preselectedItemIdx);
     }
@@ -634,7 +712,7 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
     key: "highlightFilter",
     value: function highlightFilter(string) {
       if (!this._filterString) return string;
-      return this.lit.html(_templateObject5(), this.lit.unsafeHTML(string.split(this._filterString).join("<span class=\"".concat(this.selector('list-item-highlight'), "\">___@@@___</span>")).split('___@@@___').join(this._filterString)));
+      return this.lit.html(_templateObject6(), this.lit.unsafeHTML(string.split(this._filterString).join("<span class=\"".concat(this.selector('list-item-highlight'), "\">___@@@___</span>")).split('___@@@___').join(this._filterString)));
     }
   }]);
 
@@ -652,19 +730,41 @@ _defineProperty(SFiltrableInputWebComponent, "props", {
     default: [],
     watch: true
   },
-  itemValue: {
+  inputValueProp: {
     type: 'String',
     default: 'title'
   },
   noItemText: {
     type: 'String',
-    default: 'No result sorry...',
-    responsive: true
+    default: 'No result sorry...'
+  },
+  loadingText: {
+    type: 'String',
+    default: 'Loading please wait...'
+  },
+  closeOnEscape: {
+    type: 'Boolean',
+    default: true
+  },
+  closeOnSelect: {
+    type: 'Boolean',
+    default: true
+  },
+  closeOnSelectTimeout: {
+    type: 'Integer',
+    default: 200
+  },
+  maxDisplayItems: {
+    type: 'Integer',
+    default: 50
   },
   inputThrottle: {
     type: 'Number',
     default: 0,
     watch: true
+  },
+  ':onSelect': {
+    type: 'String'
   },
   loading: {
     type: 'Boolean',
@@ -675,10 +775,14 @@ _defineProperty(SFiltrableInputWebComponent, "props", {
   }
 });
 
+_defineProperty(SFiltrableInputWebComponent, "customEvents", {
+  select: {}
+});
+
 _defineProperty(SFiltrableInputWebComponent, "cssName", 'SFiltrableInput');
 
 _defineProperty(SFiltrableInputWebComponent, "template", function (props, settings, lit) {
-  return lit.html(_templateObject6(), this, this.selector('list'), props.items.length === 0 ? lit.html(_templateObject7(), this.selector('list-no-item'), settings.template.noItem(settings, lit)) : lit.html(_templateObject8(), props.items.map((item, i) => i < this._maxDisplayItems ? lit.html(_templateObject9(), this.selector('list-item'), this._preselectedItemIdx === i ? this.selector('list-item--preselected') : '', this._selectedItemIdx === i ? this.selector('list-item--selected') : '', settings.template.item(item, settings, lit)) : '')));
+  return lit.html(_templateObject7(), this, this.selector('list'), props.loading ? lit.html(_templateObject8(), settings.template.loading(settings, lit)) : props.items.length === 0 ? lit.html(_templateObject9(), settings.template.noItem(settings, lit)) : lit.html(_templateObject10(), props.items.map((item, i) => i < this._maxDisplayItems ? lit.html(_templateObject11(), this.selector('list-item'), this._preselectedItemIdx === i ? this.selector('list-item--preselected') : '', this._selectedItemIdx === i ? this.selector('list-item--selected') : '', settings.template.item.bind(this)(item, settings, lit)) : '')));
 });
 
 var _default = SFiltrableInputWebComponent;
@@ -689,7 +793,7 @@ module.exports = exports.default;
 
 /***/ "../../webcomponents/s-filtrable-input/src/scss/_bare.scss":
 /*!*******************************************************************************************************************!*\
-  !*** /Users/olivierbossel/Home/web/coffeekraken/coffeekraken/webcomponents/s-filtrable-input/src/scss/_bare.scss ***!
+  !*** /Users/olivierbossel/data/web/coffeekraken/coffeekraken/webcomponents/s-filtrable-input/src/scss/_bare.scss ***!
   \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -2976,7 +3080,11 @@ var SError = /*#__PURE__*/function (_Error) {
       return true;
     }).join('\n');
     _this = _super.call(this, message);
-    Error.captureStackTrace(_assertThisInitialized(_this), _this.constructor);
+
+    if (Error && Error.captureStackTrace) {
+      Error.captureStackTrace(_assertThisInitialized(_this), _this.constructor);
+    }
+
     var stack = [];
     var packageRoot = (0, _packageRoot.default)();
     var stackArray = [];
@@ -4609,7 +4717,7 @@ exports.default = void 0;
  */
 
 var _default = () => {
-  return typeof process !== 'undefined' && process.release.name === 'node';
+  return typeof process !== 'undefined' && process.release && process.release.name === 'node';
 };
 
 exports.default = _default;
@@ -8185,7 +8293,7 @@ var SMediaQuery = /*#__PURE__*/function (_SPromise) {
      * @type              Function
      * @static
      *
-     * Add the global listener based on the "initBodyMediaQueries" scss mixin
+     * Add the global listener based on the "init-body-media-queries" scss mixin
      *
      * @since             2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -8198,7 +8306,7 @@ var SMediaQuery = /*#__PURE__*/function (_SPromise) {
      * @type              Function
      * @static
      *
-     * Add the global listener based on the "initBodyMediaQueries" scss mixin
+     * Add the global listener based on the "init-body-media-queries" scss mixin
      *
      * @since             2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -10626,6 +10734,36 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
+function _get(target, property, receiver) {
+  if (typeof Reflect !== "undefined" && Reflect.get) {
+    _get = Reflect.get;
+  } else {
+    _get = function _get(target, property, receiver) {
+      var base = _superPropBase(target, property);
+
+      if (!base) return;
+      var desc = Object.getOwnPropertyDescriptor(base, property);
+
+      if (desc.get) {
+        return desc.get.call(receiver);
+      }
+
+      return desc.value;
+    };
+  }
+
+  return _get(target, property, receiver || target);
+}
+
+function _superPropBase(object, property) {
+  while (!Object.prototype.hasOwnProperty.call(object, property)) {
+    object = _getPrototypeOf(object);
+    if (object === null) break;
+  }
+
+  return object;
+}
+
 function _inherits(subClass, superClass) {
   if (typeof superClass !== "function" && superClass !== null) {
     throw new TypeError("Super expression must either be null or a function");
@@ -10823,13 +10961,11 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
         until: _until.until
       });
 
-      _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(function () {
-        var tplFn = this.constructor.template.bind(this);
-        var tpl = tplFn(this.props, this._settings, this.lit);
-        (0, _litHtml.render)(tpl, this.$container);
+      _defineProperty(_assertThisInitialized(_this), "render", (0, _throttle.default)(() => {
+        _this._render();
       }, 50));
 
-      _this.on('mounted:1', () => {
+      _this.on('mounted', e => {
         // insert the container in the document
         if ((0, _canHaveChildren.default)(_assertThisInitialized(_this))) {
           _this.$container = _assertThisInitialized(_this);
@@ -10841,16 +10977,19 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
           _this.addClass('', _this.$container);
 
           (0, _insertAfter.default)(_this.$container, _assertThisInitialized(_this));
-        } // render for the first time
+        } // // render for the first time
+        // this.render();
+        // // refresh references
+        // this._refreshIdReferences();
 
 
-        _this.render(); // refresh references
+        _this.update(); // dispatch a ready event
 
 
-        _this._refreshIdReferences(); // dispatch a ready event
+        _this.dispatch('ready', _assertThisInitialized(_this), {
+          bubbles: true // preventSameTarget: true
 
-
-        _this.dispatch('ready', _assertThisInitialized(_this)); // listen for media query change to update the view
+        }); // listen for media query change to update the view
 
 
         _this._mediaQuery.on('match', media => {
@@ -10873,45 +11012,25 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
 
 
     _createClass(SLitHtmlWebComponent, [{
-      key: "handleProp",
+      key: "update",
 
       /**
-       * @name          handleProp
+       * @name          update
        * @type          Function
-       * @async
        *
-       * This method is supposed to be overrided by your component integration
-       * to handle the props updates and delete actions.
-       * The passed description object has this format:
-       * ```js
-       * {
-       *    action: 'set|delete',
-       *    path: 'something.cool',
-       *    oldValue: '...',
-       *    value: '...'
-       * }
-       * ```
+       * This method allows you to update your componment manually if needed.
+       * - call the ```render``` method of this class
+       * - call the ```update``` method of the SWebComponent parent class
        *
-       * @param     {String}      prop      The property name that has been updated or deleted
-       * @param     {Object}      descriptionObj      The description object that describe the update or delete action
-       * @return    {Promise}                A promise that has to be resolved once the update has been handled correctly. You have to pass the prop variable to the resolve function
-       *
-       * @since     2.0.0
+       * @since       2.0.0
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      value: function handleProp(prop, propObj) {
-        return new Promise((resolve, reject) => {
-          // this.render();
-          setTimeout(() => {
-            this.render();
-          });
-          resolve(prop);
-        });
-      }
-    }, {
-      key: "$root",
-      get: function get() {
-        return this.$container || this;
+      value: function update() {
+        // render
+        this._render(); // update parent
+
+
+        _get(_getPrototypeOf(SLitHtmlWebComponent.prototype), "update", this).call(this);
       }
       /**
        * @name          render
@@ -10922,6 +11041,19 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
        * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
 
+    }, {
+      key: "_render",
+      value: function _render() {
+        if (!this.$container) return;
+        var tplFn = this.constructor.template.bind(this);
+        var tpl = tplFn(this.props, this._settings, this.lit);
+        (0, _litHtml.render)(tpl, this.$container);
+      }
+    }, {
+      key: "$root",
+      get: function get() {
+        return this.$container || this;
+      }
     }]);
 
     return SLitHtmlWebComponent;
@@ -11344,7 +11476,7 @@ function SWebComponentGenerator(extendsSettings) {
       key: "observedAttributes",
 
       /**
-       * @name          _promise
+       * @name          promise
        * @type          SPromise
        * @private
        *
@@ -11393,6 +11525,17 @@ function SWebComponentGenerator(extendsSettings) {
        */
 
       /**
+       * @name        _contexts
+       * @type        Array
+       * @private
+       *
+       * Store all the contexts this component will be aware of
+       *
+       * @since       2.0.0
+       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+      /**
        * @name        observedAttributes
        * @type        Function
        * @get
@@ -11406,17 +11549,6 @@ function SWebComponentGenerator(extendsSettings) {
       get: function get() {
         return Object.keys(this.props).map(name => (0, _uncamelize.default)(name));
       }
-      /**
-       * @name					componentName
-       * @type 					String
-       * @static
-       *
-       * Store the name of the component in camelcase
-       *
-       * @since 					2.0.0
-       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-
     }]);
 
     function SWebComponent(settings) {
@@ -11433,7 +11565,9 @@ function SWebComponentGenerator(extendsSettings) {
 
       _defineProperty(_assertThisInitialized(_this), "_settedAttributesStack", {});
 
-      _defineProperty(_assertThisInitialized(_this), "_promise", null);
+      _defineProperty(_assertThisInitialized(_this), "_isSWebComponent", true);
+
+      _defineProperty(_assertThisInitialized(_this), "promise", null);
 
       _defineProperty(_assertThisInitialized(_this), "_props", {});
 
@@ -11443,27 +11577,43 @@ function SWebComponentGenerator(extendsSettings) {
 
       _defineProperty(_assertThisInitialized(_this), "_metas", {});
 
+      _defineProperty(_assertThisInitialized(_this), "_contexts", [_assertThisInitialized(_this)]);
+
       if (!_this.constructor.componentName) throw "Your MUST define a static \"componentName\" camelcase property like \"SFiltrableInput\" for your component to work properly..."; // get component metas
 
       _this._metas = _this.constructor.getComponentMetas(_this.constructor.componentName); // save the settings
 
       _this._settings = (0, _deepMerge.default)({
         id: _this.getAttribute('id') || (0, _uniqid.default)(),
-        props: _this.constructor.props || {}
-      }, _this._metas.settings || {}, settings); // create the SPromise instance
+        props: {}
+      }, _this._metas.settings || {}, settings); // add the "this" into the contexts stack
 
-      _this._promise = new _SPromise.default({
+      _this.registerContext(_assertThisInitialized(_this)); // create the SPromise instance
+
+
+      _this.promise = new _SPromise.default({
         id: _this._settings.id
+      }); // init props proxy
+
+      _this._initPropsProxy();
+
+      _this.on('ready', e => {
+        if (e.target === _assertThisInitialized(_this)) return;
+
+        if (e.target._isSWebComponent) {
+          e.target.registerContext(_assertThisInitialized(_this));
+        }
       });
 
-      _this.on('mounted:1', () => {
+      _this.on('mounted', () => {
         // dispatch a ready event
         if (!_this.lit) {
-          // refresh references
-          _this._refreshIdReferences(); // the Lit HTML class dispatch the ready event after having rendering the template the first time
+          _this.update(); // the Lit HTML class dispatch the ready event after having rendering the template the first time
 
 
-          _this.dispatch('ready', _assertThisInitialized(_this));
+          _this.dispatch('ready', _assertThisInitialized(_this), {
+            bubbles: true
+          });
         }
       });
 
@@ -11471,7 +11621,7 @@ function SWebComponentGenerator(extendsSettings) {
         // get the inital content
         // this._$initialContent =
         // handle props
-        _this._initProps();
+        _this._initDomProps();
 
         _this._mediaQuery = new _SMediaQuery.default('*');
 
@@ -11498,11 +11648,11 @@ function SWebComponentGenerator(extendsSettings) {
       return _this;
     }
     /**
-     * @name          props
+     * @name          settings
      * @type          Function
      * @get
      *
-     * Get the properties values object
+     * Get the settings object
      *
      * @since         2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -11510,8 +11660,24 @@ function SWebComponentGenerator(extendsSettings) {
 
 
     _createClass(SWebComponent, [{
-      key: "$",
+      key: "update",
 
+      /**
+       * @name        update
+       * @type        Function
+       *
+       * This method allows you to update your component manually if needed
+       *
+       * @since       2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      value: function update() {
+        // refresh references
+        this._refreshIdReferences(); // physical props
+
+
+        this._handlePhysicalProps();
+      }
       /**
        * @name					$
        * @type 					Function
@@ -11524,6 +11690,9 @@ function SWebComponentGenerator(extendsSettings) {
        * @since 					2.0.0
        * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+
+    }, {
+      key: "$",
       value: function $(path) {
         var tries = [this.selector(path), path];
 
@@ -11558,6 +11727,27 @@ function SWebComponentGenerator(extendsSettings) {
         }
 
         return null;
+      }
+      /**
+       * @name          registerContext
+       * @type          Function
+       *
+       * This method allows you to register some additional contexts that "this"
+       * for the component to be able to find expressions like ```:on-select="doSometing"```
+       * It is used by all the SWebComponent instances to find their parent components for example
+       *
+       * @param       {Object}        context         The context you want to register
+       *
+       * @since       2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "registerContext",
+      value: function registerContext(context) {
+        if (this._contexts.indexOf(context) !== -1) return;
+
+        this._contexts.push(context);
       }
       /**
        * @name          setProp
@@ -11619,6 +11809,36 @@ function SWebComponentGenerator(extendsSettings) {
         }
 
         return this._props[prop].responsiveValues[media];
+      }
+      /**
+       * @name          setSettings
+       * @type          Function
+       *
+       * This method allows you to set some settings by merging the actual once with your new once
+       *
+       * @param       {Object}      settings        The settings to setting
+       * @param       {Boolean}     [reactive=true]     Specify if you want yout component to react directly to the settings changes or not
+       * @return      {SWebComponent}           Maintain chainability
+       *
+       * @since     2.0.0
+       * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+
+    }, {
+      key: "setSettings",
+      value: function setSettings(settings, reactive) {
+        if (settings === void 0) {
+          settings = {};
+        }
+
+        if (reactive === void 0) {
+          reactive = true;
+        } // set the new settings
+
+
+        this._settings = (0, _deepMerge.default)(this._settings, settings); // check if is reactive
+
+        if (reactive) this.update();
       }
       /**
        * @name          addClass
@@ -11716,32 +11936,20 @@ function SWebComponentGenerator(extendsSettings) {
         });
       }
     }, {
-      key: "_initProps",
-      value: function _initProps() {
+      key: "_initPropsProxy",
+      value: function _initPropsProxy() {
         var _this2 = this;
 
         var _loop = function _loop(prop) {
-          var attr = _this2.getAttribute((0, _uncamelize.default)(prop));
-
-          if (!attr && _this2.hasAttribute((0, _uncamelize.default)(prop))) {
-            attr = true;
-          }
-
-          _this2.on("prop.".concat(prop, ".*"), update => {
-            _this2._handlePhysicalProps(prop);
-
-            _this2.handleProp(prop, update);
-          });
-
           var originalProp = void 0;
           if (_this2[prop] !== undefined) originalProp = _this2[prop];
           Object.defineProperty(_this2._props, prop, {
             enumerable: false,
             writable: true,
             configurable: false,
-            value: _objectSpread(_objectSpread({}, _this2._settings.props[prop]), {}, {
+            value: _objectSpread(_objectSpread({}, _this2.constructor.props[prop]), {}, {
               previousValue: undefined,
-              value: attr ? (0, _parse.default)(attr) : _this2._settings.props[prop].default,
+              value: undefined,
               responsiveValues: {}
             })
           });
@@ -11749,13 +11957,28 @@ function SWebComponentGenerator(extendsSettings) {
             enumerable: true,
             configurable: false,
             get: () => {
+              var returnValue = _this2._props[prop].value !== undefined ? _this2._props[prop].value : _this2._settings.props[prop] !== undefined ? _this2._settings.props[prop] : _this2.constructor.props[prop].default;
+
               if (_this2._props[prop].responsive && _this2._props[prop].responsiveValues) {
                 if (_this2._props[prop].responsiveValues[_SMediaQuery.default.getActiveMedia()] !== undefined) {
-                  return _this2._props[prop].responsiveValues[_SMediaQuery.default.getActiveMedia()];
+                  returnValue = _this2._props[prop].responsiveValues[_SMediaQuery.default.getActiveMedia()];
+                }
+              } // js expression or references
+
+
+              if (prop.substr(0, 1) === ':') {
+                if (typeof returnValue !== 'string') {
+                  return returnValue;
+                }
+
+                for (var i = 0; i < _this2._contexts.length; i++) {
+                  var context = _this2._contexts[i]; // check if is a reference in the current component
+
+                  if (context[returnValue] !== undefined) return context[returnValue];
                 }
               }
 
-              return _this2._props[prop].value;
+              return returnValue;
             },
             set: value => {
               _this2._props[prop].previousValue = _this2._props[prop].value;
@@ -11769,54 +11992,32 @@ function SWebComponentGenerator(extendsSettings) {
               _this2._triggerPropsEvents(prop);
             }
           });
-        }; // handle props
 
+          _this2.promise.on("props.".concat(prop, ".*"), update => {
+            console.log('updated', prop);
 
-        for (var prop in this._settings.props) {
+            _this2.update();
+          });
+        };
+
+        for (var prop in this.constructor.props) {
           _loop(prop);
-        } // handle props
-
-
-        for (var _prop in this._settings.props) {
-          // if need to be watches deeply
-          if (this._props[_prop].watch) {
-            this._props[_prop] = (0, _watch.default)(this._props[_prop], {
-              deep: this._props[_prop].watch === 'deep'
-            });
-          }
         }
       }
-      /**
-       * @name          handleProp
-       * @type          Function
-       * @async
-       *
-       * This method is supposed to be overrided by your component integration
-       * to handle the props updates and delete actions.
-       * The passed description object has this format:
-       * ```js
-       * {
-       *    action: 'set|delete',
-       *    prop: 'cool',
-       *    previousValue: '...',
-       *    value: '...'
-       * }
-       * ```
-       *
-       * @param     {String}      prop      The property name that has been updated or deleted
-       * @param     {Object}      descriptionObj      The description object that describe the update or delete action
-       * @return    {Promise}                A promise that has to be resolved once the update has been handled correctly. You have to pass the prop variable to the resolve function
-       *
-       * @since     2.0.0
-       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-
     }, {
-      key: "handleProp",
-      value: function handleProp(prop, propObj) {
-        return new Promise((resolve, reject) => {
-          resolve(prop);
-        });
+      key: "_initDomProps",
+      value: function _initDomProps() {
+        // handle props
+        for (var prop in this.constructor.props) {
+          var attr = this.getAttribute((0, _uncamelize.default)(prop));
+
+          if (!attr && this.hasAttribute((0, _uncamelize.default)(prop))) {
+            attr = true;
+          }
+
+          if (!attr) continue;
+          this._props[prop].value = attr ? (0, _parse.default)(attr) : this._props[prop].value !== undefined ? this._props[prop].value : this._settings.props[prop] !== undefined ? this._settings.props[prop] : this.constructor.props[prop].default;
+        }
       }
       /**
        * @name          _mount
@@ -11839,11 +12040,10 @@ function SWebComponentGenerator(extendsSettings) {
 
           yield this._mountDependencies(); // check props definition
 
-          this._checkPropsDefinition(); // handle physical props
+          this._checkPropsDefinition(); // update
 
 
-          this._handlePhysicalProps(); // dispatch mounted event
-
+          this.update(); // dispatch mounted event
 
           this._isMounted = true;
           this.dispatch('mounted', this);
@@ -11880,7 +12080,16 @@ function SWebComponentGenerator(extendsSettings) {
     }, {
       key: "on",
       value: function on(event, callback) {
-        return this._promise.on(event, callback);
+        this.addEventListener(event, e => {
+          // if (
+          //   e.detail &&
+          //   e.detail.settings &&
+          //   e.detail.settings.preventSameTarget
+          // ) {
+          //   if (e.target === this) return;
+          // }
+          callback(e);
+        }); // return this.promise.on(event, callback);
       }
       /**
        * @name          off
@@ -11898,8 +12107,7 @@ function SWebComponentGenerator(extendsSettings) {
 
     }, {
       key: "off",
-      value: function off(event, callback) {
-        return this._promise.off(event, callback);
+      value: function off(event, callback) {// return this.promise.off(event, callback);
       }
       /**
        * @name          dispatch
@@ -11918,31 +12126,39 @@ function SWebComponentGenerator(extendsSettings) {
 
     }, {
       key: "dispatch",
-      value: function dispatch(name, value) {
-        // dispatch event through the SPromise internal instance
-        this._promise.trigger(name, value || this); // dispatch a general event
+      value: function dispatch(name, value, settings) {
+        if (settings === void 0) {
+          settings = {};
+        }
 
-
-        (0, _dispatch.default)("".concat(this.metas.dashName, ".").concat(name), {
-          target: this,
-          value
-        });
-        (0, _dispatch.default)("".concat(this.metas.dashName, "#").concat(this._settings.id, ".").concat(name), {
-          target: this,
-          value
-        });
-        setTimeout(() => {
-          // dispatch an SWebComponent level event
-          _sWebComponentPromise.trigger("".concat(this.metas.dashName, ".").concat(name), {
-            target: this,
-            value
-          });
-
-          _sWebComponentPromise.trigger("".concat(this.metas.dashName, "#").concat(this._settings.id, ".").concat(name), {
-            target: this,
-            value
-          });
-        });
+        var event = new CustomEvent(name, _objectSpread(_objectSpread({}, settings), {}, {
+          detail: value
+        }));
+        this.dispatchEvent(event); // // dispatch event through the SPromise internal instance
+        // this.promise.trigger(name, value || this);
+        // // dispatch a general event
+        // __dispatch(`${this.metas.dashName}.${name}`, {
+        //   target: this,
+        //   value
+        // });
+        // __dispatch(`${this.metas.dashName}#${this._settings.id}.${name}`, {
+        //   target: this,
+        //   value
+        // });
+        // setTimeout(() => {
+        //   // dispatch an SWebComponent level event
+        //   _sWebComponentPromise.trigger(`${this.metas.dashName}.${name}`, {
+        //     target: this,
+        //     value
+        //   });
+        //   _sWebComponentPromise.trigger(
+        //     `${this.metas.dashName}#${this._settings.id}.${name}`,
+        //     {
+        //       target: this,
+        //       value
+        //     }
+        //   );
+        // });
       }
       /**
        * @name          _mountDependencies
@@ -12098,36 +12314,6 @@ function SWebComponentGenerator(extendsSettings) {
         return finalSelectorArray.join(' ');
       }
       /**
-       * @name        prop
-       * @type        Function
-       *
-       * Get of set a property
-       *
-       * @param       {String}      prop      The property you want to get/set
-       * @param       {Mixed}       [value=undefined]    The value you want to set
-       * @return      {Mixed}                 The property value
-       *
-       * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      // prop(prop, value = undefined) {
-      //   // camelize the attribute name
-      //   prop = __camelize(prop);
-      //   if (value === undefined) {
-      //     return this._props[prop] ? this._props[prop].value : undefined;
-      //   }
-      //   this._props[prop].previousValue = this._props[prop]
-      //     ? this._props[prop].value
-      //     : undefined;
-      //   this._props[prop].value = value;
-      //   this.handleProp(prop, this._props[prop]);
-      //   // handle physical props
-      //   this._handlePhysicalProps(prop);
-      //   // trigger a "prop" event
-      //   this._triggerPropsEvents(prop);
-      //   return value;
-      // }
-
-      /**
        * @name        _triggerPropsEvents
        * @type        Function
        * @private
@@ -12150,7 +12336,7 @@ function SWebComponentGenerator(extendsSettings) {
           previousValue: this._props[prop].previousValue,
           media: _SMediaQuery.default.getActiveMedia()
         };
-        this.dispatch("prop.".concat(prop, ".").concat(eventObj.action), eventObj);
+        this.promise.trigger("props.".concat(prop, ".").concat(eventObj.action), eventObj);
       }
       /**
        * @name        _handlePhysicalProps
@@ -12224,14 +12410,13 @@ function SWebComponentGenerator(extendsSettings) {
           var validationResult = (0, _validateValue.default)(propObj.value, propObj, {
             name: "".concat(this.constructor.name, ".props.").concat(prop),
             throw: true
-          });
-          if (validationResult !== true) throw new Error(validationResult);
+          }); // if (validationResult !== true) throw new Error(validationResult);
         });
       }
     }, {
-      key: "props",
+      key: "settings",
       get: function get() {
-        this.props;
+        return this._settings;
       }
       /**
        * @name          $root
@@ -12260,29 +12445,8 @@ function SWebComponentGenerator(extendsSettings) {
     }]);
 
     return SWebComponent;
-  }(extendsSettings.extends), _defineProperty(_class, "componentName", undefined), _temp;
-} // /**
-//  * @name        on
-//  * @type        Function
-//  * @static
-//  *
-//  * This method can be used to subscribe to some SWebComponent instances events
-//  * like "SFiltrableInput.ready", etc...
-//  *
-//  * @param       {String}      name        The event name to subscribe to
-//  * @param       {Function}    callback    The callback function to call
-//  * @return      {Function}                A function that you can use to unsubscribe to this particular event
-//  *
-//  * @since       2.0.0
-//  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-//  */
-// SWebComponentGenerator.on = function (name, callback) {
-//   _sWebComponentPromise.on(name, callback);
-//   return () => {
-//     _sWebComponentPromise.off(name, callback);
-//   };
-// };
-
+  }(extendsSettings.extends), _defineProperty(_class, "customEvents", {}), _defineProperty(_class, "componentName", undefined), _temp;
+}
 
 var _default = SWebComponentGenerator;
 exports.default = _default;
@@ -17392,7 +17556,7 @@ function notDefined(obj, key) {
 
 /***/ "../sugar/node_modules/css-loader/dist/cjs.js!../sugar/node_modules/sass-loader/dist/cjs.js?!../../webcomponents/s-filtrable-input/src/scss/_bare.scss":
 /*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ../sugar/node_modules/css-loader/dist/cjs.js!../sugar/node_modules/sass-loader/dist/cjs.js??ref--4-2!/Users/olivierbossel/Home/web/coffeekraken/coffeekraken/webcomponents/s-filtrable-input/src/scss/_bare.scss ***!
+  !*** ../sugar/node_modules/css-loader/dist/cjs.js!../sugar/node_modules/sass-loader/dist/cjs.js??ref--4-2!/Users/olivierbossel/data/web/coffeekraken/coffeekraken/webcomponents/s-filtrable-input/src/scss/_bare.scss ***!
   \************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -31170,8 +31334,32 @@ var _sFiltrableInput = _interopRequireDefault(__webpack_require__(/*! @coffeekra
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n    <div>\n      <i class=\"icon-github\"></i>\n      <input type=\"text\" is=\"s-filtrable-input\" id=\"search\" no-item-text=\"MOBILE\" :on-select=\"onSelect\" />\n    </div>\n    \n  "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _templateObject2() {
+  var data = _taggedTemplateLiteral(["\n                  <div class=\"seach-navigation__item-api\">\n                    <p>", "</p>\n                    <p>", "</p>\n                  </div>\n                "]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n    <input type=\"text\" is=\"s-filtrable-input\" id=\"search\" no-item-text-mobile=\"MOBILE\" />\n  "]);
+  var data = _taggedTemplateLiteral(["\n                  <li class=\"search-navigation__item-main\">\n                    ", "\n                  </li>\n                "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -31181,14 +31369,6 @@ function _templateObject() {
 }
 
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -31266,13 +31446,36 @@ var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebCo
     _classCallCheck(this, SSugarUiSearchNavigationWebComponent);
 
     _this = _super.call(this, (0, _deepMerge.default)({}, settings));
+    _this._navigationStack = [_this._main];
 
-    _this.on('ready', () => {
+    _this.on('ready', e => {
+      _this.$search.setSettings({
+        props: {
+          closeOnSelect: false,
+          closeOnEscape: false
+        },
+        template: {
+          item: function item(itemObj, settings, lit) {
+            switch (itemObj.type) {
+              case 'main':
+                return lit.html(_templateObject(), this.highlightFilter(itemObj.title));
+                break;
+
+              case 'api':
+                return lit.html(_templateObject2(), this.highlightFilter(itemObj.title), this.highlightFilter(itemObj.description));
+                break;
+
+              default:
+                return settings.template.item;
+                break;
+            }
+          }
+        }
+      });
+
+      _this._main();
+
       _this._initShortcuts();
-
-      if (_this.props.docMapApiUrl) {
-        _this._loadDocMapJson();
-      }
     });
 
     return _this;
@@ -31285,33 +31488,160 @@ var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebCo
         // put focus in the field
         this.$search.focus();
       });
+      (0, _hotkey.default)('escape').on('press', e => {
+        console.log('escape');
+        if (this._navigationStack.length <= 1) return; // pop in the stack
+
+        this._navigationStack.pop(); // load the resulting navigation
+
+
+        this._navigationStack[this._navigationStack.length - 1].call(this);
+      });
     }
   }, {
-    key: "_loadDocMapJson",
+    key: "_main",
+    value: function _main() {
+      var items = [{
+        title: 'Get Started',
+        type: 'main'
+      }, {
+        title: 'Sugar Toolkit',
+        type: 'main',
+        onSelect: this._sugarToolkit.bind(this)
+      }, {
+        title: 'Webcomponents',
+        type: 'main',
+        onSelect: this._webcomponents.bind(this)
+      }, {
+        title: 'API References',
+        type: 'main',
+        onSelect: this._apiReferences.bind(this)
+      }, {
+        title: 'Community',
+        type: 'main',
+        onSelect: this._community.bind(this)
+      }];
+      this.$search.props.items = items;
+    }
+  }, {
+    key: "_sugarToolkit",
     value: function () {
-      var _loadDocMapJson2 = _asyncToGenerator(function* () {
+      var _sugarToolkit2 = _asyncToGenerator(function* () {
+        this._navigationStack.push(this._sugarToolkit);
+
+        var items = [{
+          title: 'What is Sugar?',
+          type: 'main',
+          href: '/sugar/what-is-sugar'
+        }, {
+          title: 'Get Started',
+          type: 'main',
+          href: '/sugar/get-started'
+        }, {
+          title: 'API References',
+          type: 'main',
+          href: '/sugar/api-references'
+        }];
+        this.$search.props.items = items;
+      });
+
+      function _sugarToolkit() {
+        return _sugarToolkit2.apply(this, arguments);
+      }
+
+      return _sugarToolkit;
+    }()
+  }, {
+    key: "_webcomponents",
+    value: function () {
+      var _webcomponents2 = _asyncToGenerator(function* () {
+        this._navigationStack.push(this._webcomponents);
+
+        var items = [{
+          title: 'What are Webcomponents?',
+          type: 'main',
+          href: '/webcomponents/what-are-webcomponents'
+        }, {
+          title: 'Build your own',
+          type: 'main',
+          href: '/webcomponents/build-your-own'
+        }, {
+          title: 'API References',
+          type: 'main',
+          href: '/webcomponents/api-references'
+        }];
+        this.$search.props.items = items;
+      });
+
+      function _webcomponents() {
+        return _webcomponents2.apply(this, arguments);
+      }
+
+      return _webcomponents;
+    }()
+  }, {
+    key: "_apiReferences",
+    value: function () {
+      var _apiReferences2 = _asyncToGenerator(function* () {
+        this._navigationStack.push(this._apiReferences); // cache
+
+
+        if (this._apiReferencesItems) {
+          this.$search.props.items = this._apiReferencesItems;
+          return;
+        } // put the input in loading mode
+
+
+        this.$search.props.loading = true;
         var request = new _SRequest.default({
           url: this.props.docMapApiUrl,
           method: 'GET'
         });
         var json = yield request.send(); // add the items in the navigation
 
-        var currentItems = this.$search.props.items;
-        currentItems = [...currentItems, ...Object.keys(json.data).map(key => {
+        var items = Object.keys(json.data).map(key => {
           var itemObj = json.data[key];
           return {
             title: key,
-            description: itemObj.description
+            description: itemObj.description,
+            type: 'api'
           };
-        })];
-        this.$search.props.items = currentItems;
+        });
+        this._apiReferencesItems = items;
+        this.$search.props.loading = false;
+        this.$search.props.items = items;
       });
 
-      function _loadDocMapJson() {
-        return _loadDocMapJson2.apply(this, arguments);
+      function _apiReferences() {
+        return _apiReferences2.apply(this, arguments);
       }
 
-      return _loadDocMapJson;
+      return _apiReferences;
+    }()
+  }, {
+    key: "_community",
+    value: function () {
+      var _community2 = _asyncToGenerator(function* () {
+        this._navigationStack.push(this._community);
+
+        var items = [{
+          title: 'Github',
+          type: 'main',
+          href: 'https://github.com/coffeekraken'
+        }, {
+          title: 'Facebook',
+          type: 'main',
+          href: 'https://facebook.com/coffeekraken'
+        }];
+        this.$search.props.items = items;
+        console.log('community');
+      });
+
+      function _community() {
+        return _community2.apply(this, arguments);
+      }
+
+      return _community;
     }()
   }]);
 
@@ -31322,15 +31652,15 @@ exports.default = SSugarUiSearchNavigationWebComponent;
 
 _defineProperty(SSugarUiSearchNavigationWebComponent, "componentName", 'SSugarUiSearchNavigation');
 
-_defineProperty(SSugarUiSearchNavigationWebComponent, "props", _objectSpread(_objectSpread({}, _sFiltrableInput.default.props), {}, {
+_defineProperty(SSugarUiSearchNavigationWebComponent, "props", {
   docMapApiUrl: {
     type: 'String',
     description: 'Specify the docMap api url to reach in order to get the docMap JSON',
     default: 'docMap'
   }
-}));
+});
 
-_defineProperty(SSugarUiSearchNavigationWebComponent, "template", (props, settings, lit) => lit.html(_templateObject()));
+_defineProperty(SSugarUiSearchNavigationWebComponent, "template", (props, settings, lit) => lit.html(_templateObject3()));
 
 module.exports = exports.default;
 

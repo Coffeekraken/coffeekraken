@@ -56,6 +56,13 @@ $__svg-icons: (
 ) !default;
 
 /**
+ * Some variables used in the math functions
+ */
+ $__math-pi: 3.14159265359 !default;
+ $__math-default-threshold: $__math-pi/180/20 !default;
+ $__math-precision: 10 !default;
+
+/**
  * @name          __classes
  * @type          {Map}
  * @private

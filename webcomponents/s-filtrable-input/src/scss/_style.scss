@@ -32,6 +32,21 @@
 
   }
 
+  .#{$name}__list-loading {
+    padding: Sugar.lnf(padding);
+    min-width: 100%;
+  }
+    .#{$name}__list-loading-icon {
+      @include Sugar.loader-spinner(
+        $color: Sugar.color(primary),
+        $size: 1em
+      );
+      display: inline-block;
+    }
+    .#{$name}__list-loading-text {
+      white-space: nowrap;
+    }
+
   .#{$name}__list-no-item {
     padding: Sugar.lnf(padding);
     min-width: 100%;

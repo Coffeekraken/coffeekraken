@@ -118,6 +118,7 @@
     "handlebars-loader": "^1.7.1",
     "hotkeys-js": "^3.7.3",
     "html2canvas": "^1.0.0-rc.5",
+    "icon-font-generator": "^2.1.10",
     "image-pixels": "^2.2.2",
     "imaging": "^2.1.2",
     "in-view": "^0.6.1",

@@ -1,10 +1,30 @@
+/**
+ * @name              helper-transmation-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "transmation" related helper classes.
+ *
+ * @classname     #{sel(no-transition)}          Disable the transitions **only on the element**
+ * @classname     #{sel(clear-transition)}          Disable the transitions **on the element and all his children**
+ * @classname     #{sel(no-animation)}          Disable the animations **only on the element**
+ * @classname     #{sel(clear-animation)}          Disable the animations **on the element and all his children**
+ * @classname     #{sel(no-transmation)}          Disable the transitions and the animations **only on the element**
+ * @classname     #{sel(clear-transmation)}          Disable the transitions and the animations **on the element and all his children**
+ *
+ * @example         scss
+ * @include Sugar.helper-transmation-classes();
+ *
+ * @since         2.0.0
+ * @author 			Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
 @mixin helper-transmation-classes() {
   @if class-match-namespace('sugar.helper.transition.no') {
     /**
     * @name 		#{sel(no-transition)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace       sugar.helper.transition.no
-    * @type        class
+    * @type        Classname
     *
     * Disable the transitions **only on the element**
     *
@@ -30,10 +50,10 @@
     * @name 		#{sel(clear-transition)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace       sugar.helper.transition.clear
-    * @type        class
+    * @type        Classname
     *
     * Disable the transitions **on the element and all his children**
-    *
+    *    
     * @example 	html
     * <div class="#{sel(clear-transition)}">
     * 	I have no more transitions
@@ -59,7 +79,7 @@
     * @name 		#{sel(no-animation)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace       sugar.helper.animation.no
-    * @type        class
+    * @type        Classname
     *
     * Disable the animations **only on the element**
     *
@@ -85,7 +105,7 @@
     * @name 		#{sel(clear-animation)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace       sugar.helper.animation.clear
-    * @type        class
+    * @type        Classname
     *
     * Disable the transitions **on the element and all his children**
     *
@@ -114,7 +134,7 @@
     * @name 		#{sel(no-transmation)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace       sugar.helper.transmation.no
-    * @type        class
+    * @type        Classname
     *
     * Disable the animations and transitions **only on the element**
     *
@@ -141,7 +161,7 @@
     * @name 		#{sel(clear-transmation)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace       sugar.helper.transmation.clear
-    * @type        class
+    * @type        Classname
     *
     * Disable the animations and transitions **on the element and all his children**
     *

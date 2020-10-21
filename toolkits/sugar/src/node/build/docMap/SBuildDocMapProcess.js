@@ -1,5 +1,3 @@
-const __SProcessManager = require('../../process/SProcess');
-const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
 const __SBuildDocMapActionsStream = require('./SBuildDocMapActionsStream');
 const __SProcess = require('../../process/SProcess');
 const __SBuildDocMapInterface = require('./interface/SBuildDocMapInterface');

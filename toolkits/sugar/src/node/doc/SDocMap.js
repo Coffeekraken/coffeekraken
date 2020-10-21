@@ -110,8 +110,11 @@ module.exports = class SDocMap extends __SPromise {
         // generate the glob pattern to use
         const patterns = [];
 
-        Object.keys(settings.sources).forEach((sourceName) => {
-          const sourceObj = __deepMerge(settings, settings.sources[sourceName]);
+        Object.keys(settings.findSources).forEach((sourceName) => {
+          const sourceObj = __deepMerge(
+            settings,
+            settings.findSources[sourceName]
+          );
           const filenamesArray = !Array.isArray(sourceObj.filename)
             ? [sourceObj.filename]
             : sourceObj.filename;

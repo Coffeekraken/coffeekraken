@@ -104,7 +104,7 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
     constructor(settings = {}) {
       super(__deepMerge({}, settings));
       // wait until mounted to render the component first time
-      this.on('mounted:1', () => {
+      this.on('mounted', (e) => {
         // insert the container in the document
         if (__canHaveChildren(this)) {
           this.$container = this;
@@ -114,12 +114,16 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
           this.addClass('', this.$container);
           __insertAfter(this.$container, this);
         }
-        // render for the first time
-        this.render();
-        // refresh references
-        this._refreshIdReferences();
+        // // render for the first time
+        // this.render();
+        // // refresh references
+        // this._refreshIdReferences();
+        this.update();
         // dispatch a ready event
-        this.dispatch('ready', this);
+        this.dispatch('ready', this, {
+          bubbles: true
+          // preventSameTarget: true
+        });
         // listen for media query change to update the view
         this._mediaQuery.on('match', (media) => {
           this.render();
@@ -142,6 +146,24 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
     }
 
     /**
+     * @name          update
+     * @type          Function
+     *
+     * This method allows you to update your componment manually if needed.
+     * - call the ```render``` method of this class
+     * - call the ```update``` method of the SWebComponent parent class
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    update() {
+      // render
+      this._render();
+      // update parent
+      super.update();
+    }
+
+    /**
      * @name          render
      * @type          Function
      *
@@ -149,45 +171,15 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
      *
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    render = __throttle(function () {
+    _render() {
+      if (!this.$container) return;
       const tplFn = this.constructor.template.bind(this);
       const tpl = tplFn(this.props, this._settings, this.lit);
       render(tpl, this.$container);
-    }, 50);
-
-    /**
-     * @name          handleProp
-     * @type          Function
-     * @async
-     *
-     * This method is supposed to be overrided by your component integration
-     * to handle the props updates and delete actions.
-     * The passed description object has this format:
-     * ```js
-     * {
-     *    action: 'set|delete',
-     *    path: 'something.cool',
-     *    oldValue: '...',
-     *    value: '...'
-     * }
-     * ```
-     *
-     * @param     {String}      prop      The property name that has been updated or deleted
-     * @param     {Object}      descriptionObj      The description object that describe the update or delete action
-     * @return    {Promise}                A promise that has to be resolved once the update has been handled correctly. You have to pass the prop variable to the resolve function
-     *
-     * @since     2.0.0
-     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    handleProp(prop, propObj) {
-      return new Promise((resolve, reject) => {
-        // this.render();
-        setTimeout(() => {
-          this.render();
-        });
-        resolve(prop);
-      });
     }
+    render = __throttle(() => {
+      this._render();
+    }, 50);
   };
 }
 

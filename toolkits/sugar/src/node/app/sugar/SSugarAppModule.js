@@ -185,6 +185,7 @@ module.exports = class SSugarAppModule extends __SPromise {
     // init shortcuts
     this._initShortcuts();
 
+    console.log('READ');
     // mark as ready
     this.ready();
   }
@@ -304,7 +305,6 @@ module.exports = class SSugarAppModule extends __SPromise {
       );
     }
     settings = __deepMerge(this._settings, settings);
-
     this._moduleProcesses[processId].run(params, settings);
   }
 

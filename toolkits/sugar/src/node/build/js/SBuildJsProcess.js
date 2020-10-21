@@ -28,7 +28,6 @@ module.exports = class SBuildJsProcess extends __SProcess {
    */
   constructor(settings = {}) {
     super(
-      __filename,
       __deepMerge(
         {
           id: 'SBuildJsProcess',

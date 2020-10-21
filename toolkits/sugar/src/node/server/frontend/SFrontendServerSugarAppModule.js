@@ -53,10 +53,10 @@ module.exports = class SFrontendServerSugarAppModule extends __SSugarAppModule {
    * @since       2.0.0
    */
   start() {
-    const pro = new __SFrontendServerProcess(
-      this.params,
-      this._settings.processSettings
-    );
+    const pro = new __SFrontendServerProcess({
+      runAsChild: true,
+      ...this._settings.processSettings
+    });
     return super.start(pro);
   }
 };

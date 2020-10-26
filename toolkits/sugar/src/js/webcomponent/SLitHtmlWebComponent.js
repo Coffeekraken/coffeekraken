@@ -119,6 +119,7 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
         // // refresh references
         // this._refreshIdReferences();
         this.update();
+        console.log('Moutned');
         // dispatch a ready event
         this.dispatch('ready', this, {
           bubbles: true

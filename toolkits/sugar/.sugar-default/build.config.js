@@ -163,6 +163,47 @@ module.exports = {
     }
   },
 
+  fonticons: {
+    /**
+     * @name              inputDir
+     * @namespace         config.build.fonticons
+     * @type              String
+     * @default           <appRoot>/src/icons
+     *
+     * Specify the directory to use to find icons to build.
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    inputDir: `${__packageRoot()}/src/icons`,
+
+    /**
+     * @name              outputDir
+     * @namespace         config.build.fonticons
+     * @type              String
+     * @default           <appRoot>/dist/icons
+     *
+     * Specify the destination folder where to put the compiled files in
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    outputDir: `${__packageRoot()}/dist/icons`,
+
+    /**
+     * @name              watch
+     * @namespace         config.build.fonticons
+     * @type              String
+     * @default           src/icons\/**\/*.svg
+     *
+     * Set the watch files that you want to check
+     *
+     * @since             2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    watch: `${__packageRoot()}/src/icons/**/*.svg`
+  },
+
   js: {
     /**
      * @name              input

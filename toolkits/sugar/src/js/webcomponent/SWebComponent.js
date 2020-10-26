@@ -308,6 +308,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
       this.on('ready', (e) => {
         if (e.target === this) return;
         if (e.target._isSWebComponent) {
+          e.stopImmediatePropagation();
           e.target.registerContext(this);
         }
       });

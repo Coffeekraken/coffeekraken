@@ -122,7 +122,7 @@ var _SWebComponent = _interopRequireDefault(__webpack_require__(/*! @coffeekrake
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n                <li class=\"", " ", " ", "\">\n                  ", "\n                </li>\n              "]);
+  var data = _taggedTemplateLiteral(["\n                <li class=\"", " ", " ", " ", "\">\n                  ", "\n                </li>\n              "]);
 
   _templateObject11 = function _templateObject11() {
     return data;
@@ -712,7 +712,7 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
     key: "highlightFilter",
     value: function highlightFilter(string) {
       if (!this._filterString) return string;
-      return this.lit.html(_templateObject6(), this.lit.unsafeHTML(string.split(this._filterString).join("<span class=\"".concat(this.selector('list-item-highlight'), "\">___@@@___</span>")).split('___@@@___').join(this._filterString)));
+      return this.lit.html(_templateObject6(), this.lit.unsafeHTML(string.toLowerCase().split(this._filterString.toLowerCase()).join("<span class=\"".concat(this.selector('list-item-highlight'), "\">___@@@___</span>")).split('___@@@___').join(this._filterString)));
     }
   }]);
 
@@ -764,7 +764,9 @@ _defineProperty(SFiltrableInputWebComponent, "props", {
     watch: true
   },
   ':onSelect': {
-    type: 'String'
+    type: 'String',
+    required: false,
+    default: null
   },
   loading: {
     type: 'Boolean',
@@ -782,7 +784,7 @@ _defineProperty(SFiltrableInputWebComponent, "customEvents", {
 _defineProperty(SFiltrableInputWebComponent, "cssName", 'SFiltrableInput');
 
 _defineProperty(SFiltrableInputWebComponent, "template", function (props, settings, lit) {
-  return lit.html(_templateObject7(), this, this.selector('list'), props.loading ? lit.html(_templateObject8(), settings.template.loading(settings, lit)) : props.items.length === 0 ? lit.html(_templateObject9(), settings.template.noItem(settings, lit)) : lit.html(_templateObject10(), props.items.map((item, i) => i < this._maxDisplayItems ? lit.html(_templateObject11(), this.selector('list-item'), this._preselectedItemIdx === i ? this.selector('list-item--preselected') : '', this._selectedItemIdx === i ? this.selector('list-item--selected') : '', settings.template.item.bind(this)(item, settings, lit)) : '')));
+  return lit.html(_templateObject7(), this, this.selector('list'), props.loading ? lit.html(_templateObject8(), settings.template.loading(settings, lit)) : props.items.length === 0 ? lit.html(_templateObject9(), settings.template.noItem(settings, lit)) : lit.html(_templateObject10(), props.items.map((item, i) => i < this._maxDisplayItems ? lit.html(_templateObject11(), this.selector('list-item'), item.type !== undefined ? this.selector("list-item--".concat(item.type.toLowerCase())) : '', this._preselectedItemIdx === i ? this.selector('list-item--preselected') : '', this._selectedItemIdx === i ? this.selector('list-item--selected') : '', settings.template.item.bind(this)(item, settings, lit)) : '')));
 });
 
 var _default = SFiltrableInputWebComponent;
@@ -9541,6 +9543,10 @@ function validateValue(value, definitionObj, settings) {
     value = definitionObj.default;
   }
 
+  if (value === null || value === undefined && !definitionObj.required) {
+    return true;
+  }
+
   var issueObj = {
     $expected: definitionObj,
     $received: {
@@ -10983,8 +10989,9 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
         // this._refreshIdReferences();
 
 
-        _this.update(); // dispatch a ready event
+        _this.update();
 
+        console.log('Moutned'); // dispatch a ready event
 
         _this.dispatch('ready', _assertThisInitialized(_this), {
           bubbles: true // preventSameTarget: true
@@ -11601,6 +11608,7 @@ function SWebComponentGenerator(extendsSettings) {
         if (e.target === _assertThisInitialized(_this)) return;
 
         if (e.target._isSWebComponent) {
+          e.stopImmediatePropagation();
           e.target.registerContext(_assertThisInitialized(_this));
         }
       });
@@ -31299,18 +31307,18 @@ module.exports = function packageRoot(from, highest) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _webcomponents_SSugarUiSearchNavigationWebComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./webcomponents/SSugarUiSearchNavigationWebComponent */ "./src/js/webcomponents/SSugarUiSearchNavigationWebComponent.js");
-/* harmony import */ var _webcomponents_SSugarUiSearchNavigationWebComponent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_webcomponents_SSugarUiSearchNavigationWebComponent__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _webcomponents_SSugarUiWebComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./webcomponents/SSugarUiWebComponent */ "./src/js/webcomponents/SSugarUiWebComponent.js");
+/* harmony import */ var _webcomponents_SSugarUiWebComponent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_webcomponents_SSugarUiWebComponent__WEBPACK_IMPORTED_MODULE_0__);
 
-_webcomponents_SSugarUiSearchNavigationWebComponent__WEBPACK_IMPORTED_MODULE_0___default.a.define();
+_webcomponents_SSugarUiWebComponent__WEBPACK_IMPORTED_MODULE_0___default.a.define();
 
 
 /***/ }),
 
-/***/ "./src/js/webcomponents/SSugarUiSearchNavigationWebComponent.js":
-/*!**********************************************************************!*\
-  !*** ./src/js/webcomponents/SSugarUiSearchNavigationWebComponent.js ***!
-  \**********************************************************************/
+/***/ "./src/js/webcomponents/SSugarUiWebComponent.js":
+/*!******************************************************!*\
+  !*** ./src/js/webcomponents/SSugarUiWebComponent.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -31334,10 +31342,10 @@ var _sFiltrableInput = _interopRequireDefault(__webpack_require__(/*! @coffeekra
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n    <div>\n      <i class=\"icon-github\"></i>\n      <input type=\"text\" is=\"s-filtrable-input\" id=\"search\" no-item-text=\"MOBILE\" :on-select=\"onSelect\" />\n    </div>\n    \n  "]);
+function _templateObject4() {
+  var data = _taggedTemplateLiteral(["\n      <div class=\"", "\">\n        <a class=\"", "\" href=\"https://coffeekraken.io\" target=\"_blank\">\n          <i class=\"", "\"></i>\n        </a>\n        <div class=\"", "\">\n          <input type=\"text\" is=\"s-sugar-ui-input-navigation\" class=\"", "\" placeholder=\"Search and navigation\" id=\"nav\" no-item-text=\"MOBILE\" />\n        </div>\n        <div class=\"", "\">\n          <a href=\"https://github.com/coffeekraken\" target=\"_blank\">\n            <i class=\"icon-github\"></i>\n          </a>\n        </div>\n      </div>"]);
 
-  _templateObject3 = function _templateObject3() {
+  _templateObject4 = function _templateObject4() {
     return data;
   };
 
@@ -31348,8 +31356,18 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _templateObject3() {
+  var data = _taggedTemplateLiteral(["\n                      <i class=\"icon-", "\"></i> \n                    "]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n                  <div class=\"seach-navigation__item-api\">\n                    <p>", "</p>\n                    <p>", "</p>\n                  </div>\n                "]);
+  var data = _taggedTemplateLiteral(["\n                  <div class=\"seach-navigation__item-api\">\n                    ", "\n                    <p class=\"", "\"><span class=\"", "\">", "</span> ", "</p>\n                    <p class=\"", "\">", "</p>\n                  </div>\n                "]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -31359,7 +31377,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n                  <li class=\"search-navigation__item-main\">\n                    ", "\n                  </li>\n                "]);
+  var data = _taggedTemplateLiteral(["\n                    <i class=\"icon-", "\"></i> ", "\n                "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -31392,9 +31410,11 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-_sFiltrableInput.default.define();
+_sFiltrableInput.default.define({
+  name: 'SSugarUiInputNavigation'
+});
 /**
- * @name                SSugarUiSearchNavigationWebComponent
+ * @name                SSugarUiWebComponent
  * @namespace           sugar-ui.js.webcomponents
  * @type                Webcomponent
  *
@@ -31410,10 +31430,10 @@ _sFiltrableInput.default.define();
  */
 
 
-var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
-  _inherits(SSugarUiSearchNavigationWebComponent, _SLitHtmlWebComponen);
+var SSugarUiWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
+  _inherits(SSugarUiWebComponent, _SLitHtmlWebComponen);
 
-  var _super = _createSuper(SSugarUiSearchNavigationWebComponent);
+  var _super = _createSuper(SSugarUiWebComponent);
 
   /**
    * @name            props
@@ -31436,20 +31456,20 @@ var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebCo
    * @since           2.0.0
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  function SSugarUiSearchNavigationWebComponent(settings) {
+  function SSugarUiWebComponent(settings) {
     var _this;
 
     if (settings === void 0) {
       settings = {};
     }
 
-    _classCallCheck(this, SSugarUiSearchNavigationWebComponent);
+    _classCallCheck(this, SSugarUiWebComponent);
 
     _this = _super.call(this, (0, _deepMerge.default)({}, settings));
     _this._navigationStack = [_this._main];
 
     _this.on('ready', e => {
-      _this.$search.setSettings({
+      _this.$nav.setSettings({
         props: {
           closeOnSelect: false,
           closeOnEscape: false
@@ -31458,11 +31478,11 @@ var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebCo
           item: function item(itemObj, settings, lit) {
             switch (itemObj.type) {
               case 'main':
-                return lit.html(_templateObject(), this.highlightFilter(itemObj.title));
+                return lit.html(_templateObject(), itemObj.icon, this.highlightFilter(itemObj.title));
                 break;
 
               case 'api':
-                return lit.html(_templateObject2(), this.highlightFilter(itemObj.title), this.highlightFilter(itemObj.description));
+                return lit.html(_templateObject2(), itemObj.icon ? lit.html(_templateObject3(), itemObj.icon) : '', this.selector('list-item-title'), this.selector('list-item-extension'), itemObj.extension, this.highlightFilter(itemObj.title), this.selector('list-item-description'), this.highlightFilter(itemObj.description));
                 break;
 
               default:
@@ -31481,16 +31501,22 @@ var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebCo
     return _this;
   }
 
-  _createClass(SSugarUiSearchNavigationWebComponent, [{
+  _createClass(SSugarUiWebComponent, [{
     key: "_initShortcuts",
     value: function _initShortcuts() {
       (0, _hotkey.default)('ctrl+p').on('press', e => {
         // put focus in the field
-        this.$search.focus();
+        this.$nav.focus();
       });
+      console.log('INIT');
       (0, _hotkey.default)('escape').on('press', e => {
-        console.log('escape');
-        if (this._navigationStack.length <= 1) return; // pop in the stack
+        console.log(this._navigationStack);
+
+        if (this._navigationStack.length <= 1) {
+          this.$nav.escape();
+          return;
+        } // pop in the stack
+
 
         this._navigationStack.pop(); // load the resulting navigation
 
@@ -31503,25 +31529,30 @@ var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebCo
     value: function _main() {
       var items = [{
         title: 'Get Started',
+        icon: 'start',
         type: 'main'
       }, {
         title: 'Sugar Toolkit',
+        icon: 'toolkit',
         type: 'main',
         onSelect: this._sugarToolkit.bind(this)
       }, {
         title: 'Webcomponents',
+        icon: 'component',
         type: 'main',
         onSelect: this._webcomponents.bind(this)
       }, {
         title: 'API References',
+        icon: 'api',
         type: 'main',
         onSelect: this._apiReferences.bind(this)
       }, {
         title: 'Community',
+        icon: 'community',
         type: 'main',
         onSelect: this._community.bind(this)
       }];
-      this.$search.props.items = items;
+      this.$nav.props.items = items;
     }
   }, {
     key: "_sugarToolkit",
@@ -31531,18 +31562,21 @@ var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebCo
 
         var items = [{
           title: 'What is Sugar?',
+          icon: 'what',
           type: 'main',
           href: '/sugar/what-is-sugar'
         }, {
           title: 'Get Started',
+          icon: 'start',
           type: 'main',
           href: '/sugar/get-started'
         }, {
           title: 'API References',
+          icon: 'api',
           type: 'main',
           href: '/sugar/api-references'
         }];
-        this.$search.props.items = items;
+        this.$nav.props.items = items;
       });
 
       function _sugarToolkit() {
@@ -31559,18 +31593,21 @@ var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebCo
 
         var items = [{
           title: 'What are Webcomponents?',
+          icon: 'what',
           type: 'main',
           href: '/webcomponents/what-are-webcomponents'
         }, {
           title: 'Build your own',
+          icon: 'build',
           type: 'main',
           href: '/webcomponents/build-your-own'
         }, {
           title: 'API References',
+          icon: 'api',
           type: 'main',
           href: '/webcomponents/api-references'
         }];
-        this.$search.props.items = items;
+        this.$nav.props.items = items;
       });
 
       function _webcomponents() {
@@ -31587,12 +31624,12 @@ var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebCo
 
 
         if (this._apiReferencesItems) {
-          this.$search.props.items = this._apiReferencesItems;
+          this.$nav.props.items = this._apiReferencesItems;
           return;
         } // put the input in loading mode
 
 
-        this.$search.props.loading = true;
+        this.$nav.props.loading = true;
         var request = new _SRequest.default({
           url: this.props.docMapApiUrl,
           method: 'GET'
@@ -31604,12 +31641,13 @@ var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebCo
           return {
             title: key,
             description: itemObj.description,
-            type: 'api'
+            type: 'api',
+            extension: itemObj.extension
           };
         });
         this._apiReferencesItems = items;
-        this.$search.props.loading = false;
-        this.$search.props.items = items;
+        this.$nav.props.loading = false;
+        this.$nav.props.items = items;
       });
 
       function _apiReferences() {
@@ -31633,8 +31671,7 @@ var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebCo
           type: 'main',
           href: 'https://facebook.com/coffeekraken'
         }];
-        this.$search.props.items = items;
-        console.log('community');
+        this.$nav.props.items = items;
       });
 
       function _community() {
@@ -31645,14 +31682,14 @@ var SSugarUiSearchNavigationWebComponent = /*#__PURE__*/function (_SLitHtmlWebCo
     }()
   }]);
 
-  return SSugarUiSearchNavigationWebComponent;
+  return SSugarUiWebComponent;
 }((0, _SLitHtmlWebComponent.default)());
 
-exports.default = SSugarUiSearchNavigationWebComponent;
+exports.default = SSugarUiWebComponent;
 
-_defineProperty(SSugarUiSearchNavigationWebComponent, "componentName", 'SSugarUiSearchNavigation');
+_defineProperty(SSugarUiWebComponent, "componentName", 'SSugarUi');
 
-_defineProperty(SSugarUiSearchNavigationWebComponent, "props", {
+_defineProperty(SSugarUiWebComponent, "props", {
   docMapApiUrl: {
     type: 'String',
     description: 'Specify the docMap api url to reach in order to get the docMap JSON',
@@ -31660,7 +31697,9 @@ _defineProperty(SSugarUiSearchNavigationWebComponent, "props", {
   }
 });
 
-_defineProperty(SSugarUiSearchNavigationWebComponent, "template", (props, settings, lit) => lit.html(_templateObject3()));
+_defineProperty(SSugarUiWebComponent, "template", function (props, settings, lit) {
+  return lit.html(_templateObject4(), this.selector('main'), this.selector('logo'), this.selector('coffeekraken-logo'), this.selector('nav'), this.selector('nav-input'), this.selector('utils'));
+});
 
 module.exports = exports.default;
 

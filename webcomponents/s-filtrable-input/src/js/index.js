@@ -77,7 +77,9 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
       watch: true
     },
     ':onSelect': {
-      type: 'String'
+      type: 'String',
+      required: false,
+      default: null
     },
     loading: {
       type: 'Boolean',
@@ -112,6 +114,10 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
               i < this._maxDisplayItems
                 ? lit.html`
                 <li class="${this.selector('list-item')} ${
+                    item.type !== undefined
+                      ? this.selector(`list-item--${item.type.toLowerCase()}`)
+                      : ''
+                  } ${
                     this._preselectedItemIdx === i
                       ? this.selector('list-item--preselected')
                       : ''
@@ -572,7 +578,8 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
     return this.lit.html`
       ${this.lit.unsafeHTML(
         string
-          .split(this._filterString)
+          .toLowerCase()
+          .split(this._filterString.toLowerCase())
           .join(
             `<span class="${this.selector(
               'list-item-highlight'

@@ -204,8 +204,9 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
         // this._refreshIdReferences();
 
 
-        _this.update(); // dispatch a ready event
+        _this.update();
 
+        console.log('Moutned'); // dispatch a ready event
 
         _this.dispatch('ready', _assertThisInitialized(_this), {
           bubbles: true // preventSameTarget: true

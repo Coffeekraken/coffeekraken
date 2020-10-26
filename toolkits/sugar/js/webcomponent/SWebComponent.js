@@ -364,6 +364,7 @@ function SWebComponentGenerator(extendsSettings) {
         if (e.target === _assertThisInitialized(_this)) return;
 
         if (e.target._isSWebComponent) {
+          e.stopImmediatePropagation();
           e.target.registerContext(_assertThisInitialized(_this));
         }
       });

@@ -1,2 +1,2 @@
-import __SSugarUiSearchNavigation from './webcomponents/SSugarUiSearchNavigationWebComponent';
-__SSugarUiSearchNavigation.define();
+import __SSugarUi from './webcomponents/SSugarUiWebComponent';
+__SSugarUi.define();

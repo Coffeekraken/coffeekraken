@@ -97,6 +97,10 @@ function validateValue(value, definitionObj, settings) {
     value = definitionObj.default;
   }
 
+  if (value === null || value === undefined && !definitionObj.required) {
+    return true;
+  }
+
   var issueObj = {
     $expected: definitionObj,
     $received: {

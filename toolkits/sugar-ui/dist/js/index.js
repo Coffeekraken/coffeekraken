@@ -121,18 +121,8 @@ var _SWebComponent = _interopRequireDefault(__webpack_require__(/*! @coffeekrake
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject11() {
-  var data = _taggedTemplateLiteral(["\n                <li class=\"", " ", " ", " ", "\">\n                  ", "\n                </li>\n              "]);
-
-  _templateObject11 = function _templateObject11() {
-    return data;
-  };
-
-  return data;
-}
-
 function _templateObject10() {
-  var data = _taggedTemplateLiteral(["\n            ", ""]);
+  var data = _taggedTemplateLiteral(["\n                <li class=\"", " ", " ", " ", "\">\n                  ", "\n                </li>\n              "]);
 
   _templateObject10 = function _templateObject10() {
     return data;
@@ -142,7 +132,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = _taggedTemplateLiteral(["\n                ", "\n            "]);
+  var data = _taggedTemplateLiteral(["\n            ", ""]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -152,7 +142,7 @@ function _templateObject9() {
 }
 
 function _templateObject8() {
-  var data = _taggedTemplateLiteral(["\n              ", "\n            "]);
+  var data = _taggedTemplateLiteral(["\n                ", "\n            "]);
 
   _templateObject8 = function _templateObject8() {
     return data;
@@ -162,7 +152,7 @@ function _templateObject8() {
 }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n      ", "\n      <ul class=\"", "\" tabindex=\"1\">\n        ", "\n      </ul>\n    "]);
+  var data = _taggedTemplateLiteral(["\n              ", "\n            "]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -172,7 +162,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = _taggedTemplateLiteral(["\n      ", ""]);
+  var data = _taggedTemplateLiteral(["\n      ", "\n      <ul class=\"", "\" tabindex=\"1\">\n        ", "\n      </ul>\n    "]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -684,7 +674,8 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
           for (var idx in this._settings.filter.properties) {
             var prop = this._settings.filter.properties[idx];
             if (!item[prop] || typeof item[prop] !== 'string') continue;
-            if (item[prop].includes(filterString)) return true;
+            var reg = new RegExp(filterString, 'gi');
+            if (filterString.match(reg)) return true; // if (item[prop].includes(filterString)) return true;
           }
 
           return false;
@@ -712,7 +703,11 @@ var SFiltrableInputWebComponent = /*#__PURE__*/function (_SLitHtmlWebComponen) {
     key: "highlightFilter",
     value: function highlightFilter(string) {
       if (!this._filterString) return string;
-      return this.lit.html(_templateObject6(), this.lit.unsafeHTML(string.toLowerCase().split(this._filterString.toLowerCase()).join("<span class=\"".concat(this.selector('list-item-highlight'), "\">___@@@___</span>")).split('___@@@___').join(this._filterString)));
+      var reg = new RegExp(this._filterString, 'gi');
+      var finalString = string.replace(reg, str => {
+        return "<span class=\"".concat(this.selector('list-item-highlight'), "\">").concat(str, "</span>");
+      });
+      return this.lit.unsafeHTML(finalString);
     }
   }]);
 
@@ -784,7 +779,7 @@ _defineProperty(SFiltrableInputWebComponent, "customEvents", {
 _defineProperty(SFiltrableInputWebComponent, "cssName", 'SFiltrableInput');
 
 _defineProperty(SFiltrableInputWebComponent, "template", function (props, settings, lit) {
-  return lit.html(_templateObject7(), this, this.selector('list'), props.loading ? lit.html(_templateObject8(), settings.template.loading(settings, lit)) : props.items.length === 0 ? lit.html(_templateObject9(), settings.template.noItem(settings, lit)) : lit.html(_templateObject10(), props.items.map((item, i) => i < this._maxDisplayItems ? lit.html(_templateObject11(), this.selector('list-item'), item.type !== undefined ? this.selector("list-item--".concat(item.type.toLowerCase())) : '', this._preselectedItemIdx === i ? this.selector('list-item--preselected') : '', this._selectedItemIdx === i ? this.selector('list-item--selected') : '', settings.template.item.bind(this)(item, settings, lit)) : '')));
+  return lit.html(_templateObject6(), this, this.selector('list'), props.loading ? lit.html(_templateObject7(), settings.template.loading(settings, lit)) : props.items.length === 0 ? lit.html(_templateObject8(), settings.template.noItem(settings, lit)) : lit.html(_templateObject9(), props.items.map((item, i) => i < this._maxDisplayItems ? lit.html(_templateObject10(), this.selector('list-item'), item.type !== undefined ? this.selector("list-item--".concat(item.type.toLowerCase())) : '', this._preselectedItemIdx === i ? this.selector('list-item--preselected') : '', this._selectedItemIdx === i ? this.selector('list-item--selected') : '', settings.template.item.bind(this)(item, settings, lit)) : '')));
 });
 
 var _default = SFiltrableInputWebComponent;
@@ -10983,19 +10978,13 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
           _this.addClass('', _this.$container);
 
           (0, _insertAfter.default)(_this.$container, _assertThisInitialized(_this));
-        } // // render for the first time
-        // this.render();
-        // // refresh references
-        // this._refreshIdReferences();
+        }
 
+        _this.update(); // dispatch a ready event
 
-        _this.update();
-
-        console.log('Moutned'); // dispatch a ready event
 
         _this.dispatch('ready', _assertThisInitialized(_this), {
-          bubbles: true // preventSameTarget: true
-
+          bubbles: true
         }); // listen for media query change to update the view
 
 

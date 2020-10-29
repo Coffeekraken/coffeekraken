@@ -114,16 +114,10 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
           this.addClass('', this.$container);
           __insertAfter(this.$container, this);
         }
-        // // render for the first time
-        // this.render();
-        // // refresh references
-        // this._refreshIdReferences();
         this.update();
-        console.log('Moutned');
         // dispatch a ready event
         this.dispatch('ready', this, {
           bubbles: true
-          // preventSameTarget: true
         });
         // listen for media query change to update the view
         this._mediaQuery.on('match', (media) => {

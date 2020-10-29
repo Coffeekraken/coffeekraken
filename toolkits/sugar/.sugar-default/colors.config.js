@@ -47,10 +47,18 @@ module.exports = {
    * Specify the <default>default</default> color value and modifiers.
    * The color object format has to follow these guidelines:
    * - color (#848e91) {Color}: Specify the default color
-   * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - hover (-darken 10%) {String}: The hover modifier
-   *   - light (-lighten 15%) {String}: The light modifier
-   *   - dark (-darken 10%) {String}: The dark modifier
+   * - modifiers ({}) (Object): Specify the modifiers available for this color
+   *
+   * @modifier      50      -lighten 45%
+   * @modifier      100      -lighten 40%
+   * @modifier      200      -lighten 30%
+   * @modifier      300      -lighten 20%
+   * @modifier      400      -lighten 10%
+   * @modifier      500      -lighten 0%
+   * @modifier      600      -darken 10%
+   * @modifier      700      -darken 20%
+   * @modifier      800      -darken 30%
+   * @modifier      900      -darken 40%
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -58,11 +66,16 @@ module.exports = {
   default: {
     color: '#848e91',
     modifiers: {
-      hover: '-darken 10%',
-      light: '-lighten 15%',
-      lighter: '-lighten 30%',
-      dark: '-darken 10%',
-      darker: '-darken 30%'
+      50: '-lighten 45%',
+      100: '-lighten 40%',
+      200: '-lighten 30%',
+      300: '-lighten 20%',
+      400: '-lighten 10%',
+      500: '-lighten 0%',
+      600: '-darken 10%',
+      700: '-darken 20%',
+      800: '-darken 30%',
+      900: '-darken 40%'
     }
   },
 
@@ -75,10 +88,18 @@ module.exports = {
    * Specify the <title>title</title> color value and modifiers.
    * The color object format has to follow these guidelines:
    * - color (#2b3438) {Color}: Specify the default color
-   * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - hover (-darken 10%) {String}: The hover modifier
-   *   - light (-lighten 15%) {String}: The light modifier
-   *   - dark (-darken 10%) {String}: The dark modifier
+   * - modifiers ({}) (Object): Specify the modifiers available for this color
+   *
+   * @modifier      50      -lighten 45%
+   * @modifier      100      -lighten 40%
+   * @modifier      200      -lighten 30%
+   * @modifier      300      -lighten 20%
+   * @modifier      400      -lighten 10%
+   * @modifier      500      -lighten 0%
+   * @modifier      600      -darken 10%
+   * @modifier      700      -darken 20%
+   * @modifier      800      -darken 30%
+   * @modifier      900      -darken 40%
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -86,11 +107,16 @@ module.exports = {
   title: {
     color: '#2b3438',
     modifiers: {
-      hover: '-darken 10%',
-      light: '-lighten 15%',
-      lighter: '-lighten 30%',
-      dark: '-darken 10%',
-      darker: '-darken 30%'
+      50: '-lighten 45%',
+      100: '-lighten 40%',
+      200: '-lighten 30%',
+      300: '-lighten 20%',
+      400: '-lighten 10%',
+      500: '-lighten 0%',
+      600: '-darken 10%',
+      700: '-darken 20%',
+      800: '-darken 30%',
+      900: '-darken 40%'
     }
   },
 
@@ -103,10 +129,18 @@ module.exports = {
    * Specify the <text>text</text> color value and modifiers.
    * The color object format has to follow these guidelines:
    * - color (#848e91) {Color}: Specify the default color
-   * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - hover (-darken 10%) {String}: The hover modifier
-   *   - light (-lighten 15%) {String}: The light modifier
-   *   - dark (-darken 10%) {String}: The dark modifier
+   * - modifiers ({}) (Object): Specify the modifiers available for this color
+   *
+   * @modifier      50      -lighten 45%
+   * @modifier      100      -lighten 40%
+   * @modifier      200      -lighten 30%
+   * @modifier      300      -lighten 20%
+   * @modifier      400      -lighten 10%
+   * @modifier      500      -lighten 0%
+   * @modifier      600      -darken 10%
+   * @modifier      700      -darken 20%
+   * @modifier      800      -darken 30%
+   * @modifier      900      -darken 40%
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -114,11 +148,16 @@ module.exports = {
   text: {
     color: '#848e91',
     modifiers: {
-      hover: '-darken 10%',
-      light: '-lighten 15%',
-      lighter: '-lighten 30%',
-      dark: '-darken 10%',
-      darker: '-darken 30%'
+      50: '-lighten 45%',
+      100: '-lighten 40%',
+      200: '-lighten 30%',
+      300: '-lighten 20%',
+      400: '-lighten 10%',
+      500: '-lighten 0%',
+      600: '-darken 10%',
+      700: '-darken 20%',
+      800: '-darken 30%',
+      900: '-darken 40%'
     }
   },
 
@@ -131,10 +170,18 @@ module.exports = {
    * Specify the <link>link</link> color value and modifiers.
    * The color object format has to follow these guidelines:
    * - color (#primary) {Color}: Specify the default color
-   * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - hover (-darken 10%) {String}: The hover modifier
-   *   - light (-lighten 15%) {String}: The light modifier
-   *   - dark (-darken 10%) {String}: The dark modifier
+   * - modifiers ({}) (Object): Specify the modifiers available for this color
+   *
+   * @modifier      50      -lighten 45%
+   * @modifier      100      -lighten 40%
+   * @modifier      200      -lighten 30%
+   * @modifier      300      -lighten 20%
+   * @modifier      400      -lighten 10%
+   * @modifier      500      -lighten 0%
+   * @modifier      600      -darken 10%
+   * @modifier      700      -darken 20%
+   * @modifier      800      -darken 30%
+   * @modifier      900      -darken 40%
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -142,67 +189,16 @@ module.exports = {
   link: {
     color: 'primary',
     modifiers: {
-      hover: '-darken 10%',
-      light: '-lighten 15%',
-      lighter: '-lighten 30%',
-      dark: '-darken 10%',
-      darker: '-darken 30%'
-    }
-  },
-
-  /**
-   * @name                light
-   * @namespace           config.colors
-   * @type                Object
-   * @default             #f8f9fa
-   *
-   * Specify the <light>light</light> color value and modifiers.
-   * The color object format has to follow these guidelines:
-   * - color (#f8f9fa) {Color}: Specify the default color
-   * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - hover (-darken 10%) {String}: The hover modifier
-   *   - light (-lighten 15%) {String}: The light modifier
-   *   - dark (-darken 10%) {String}: The dark modifier
-   *
-   * @since       2.0.0
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  light: {
-    color: '#f8f9fa',
-    modifiers: {
-      hover: '-darken 10%',
-      light: '-lighten 15%',
-      lighter: '-lighten 30%',
-      dark: '-darken 10%',
-      darker: '-darken 30%'
-    }
-  },
-
-  /**
-   * @name                dark
-   * @namespace           config.colors
-   * @type                Object
-   * @default             #343a40
-   *
-   * Specify the <dark>dark</dark> color value and modifiers.
-   * The color object format has to follow these guidelines:
-   * - color (#343a40) {Color}: Specify the default color
-   * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - hover (-darken 10%) {String}: The hover modifier
-   *   - light (-lighten 15%) {String}: The light modifier
-   *   - dark (-darken 10%) {String}: The dark modifier
-   *
-   * @since       2.0.0
-   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  dark: {
-    color: '#343a40',
-    modifiers: {
-      hover: '-darken 10%',
-      light: '-lighten 15%',
-      lighter: '-lighten 30%',
-      dark: '-darken 10%',
-      darker: '-darken 30%'
+      50: '-lighten 45%',
+      100: '-lighten 40%',
+      200: '-lighten 30%',
+      300: '-lighten 20%',
+      400: '-lighten 10%',
+      500: '-lighten 0%',
+      600: '-darken 10%',
+      700: '-darken 20%',
+      800: '-darken 30%',
+      900: '-darken 40%'
     }
   },
 
@@ -215,10 +211,18 @@ module.exports = {
    * Specify the <primary>primary</primary> color value and modifiers.
    * The color object format has to follow these guidelines:
    * - color (#f2bc2b) {Color}: Specify the default color
-   * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - hover (-darken 10%) {String}: The hover modifier
-   *   - light (-lighten 15%) {String}: The light modifier
-   *   - dark (-darken 10%) {String}: The dark modifier
+   * - modifiers ({}) (Object): Specify the modifiers available for this color
+   *
+   * @modifier      50      -lighten 45%
+   * @modifier      100      -lighten 40%
+   * @modifier      200      -lighten 30%
+   * @modifier      300      -lighten 20%
+   * @modifier      400      -lighten 10%
+   * @modifier      500      -lighten 0%
+   * @modifier      600      -darken 10%
+   * @modifier      700      -darken 20%
+   * @modifier      800      -darken 30%
+   * @modifier      900      -darken 40%
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -226,11 +230,16 @@ module.exports = {
   primary: {
     color: '#f2bc2b',
     modifiers: {
-      hover: '-darken 10%',
-      light: '-lighten 15%',
-      lighter: '-lighten 30%',
-      dark: '-darken 10%',
-      darker: '-darken 30%'
+      50: '-lighten 45%',
+      100: '-lighten 40%',
+      200: '-lighten 30%',
+      300: '-lighten 20%',
+      400: '-lighten 10%',
+      500: '-lighten 0%',
+      600: '-darken 10%',
+      700: '-darken 20%',
+      800: '-darken 30%',
+      900: '-darken 40%'
     }
   },
 
@@ -243,22 +252,35 @@ module.exports = {
    * Specify the <secondary>secondary</secondary> color value and modifiers.
    * The color object format has to follow these guidelines:
    * - color (#2b3438) {Color}: Specify the default color
-   * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - hover (-darken 10%) {String}: The hover modifier
-   *   - light (-lighten 15%) {String}: The light modifier
-   *   - dark (-darken 10%) {String}: The dark modifier
+   * - modifiers ({}) (Object): Specify the modifiers available for this color
+   *
+   * @modifier      50      -lighten 45%
+   * @modifier      100      -lighten 40%
+   * @modifier      200      -lighten 30%
+   * @modifier      300      -lighten 20%
+   * @modifier      400      -lighten 10%
+   * @modifier      500      -lighten 0%
+   * @modifier      600      -darken 10%
+   * @modifier      700      -darken 20%
+   * @modifier      800      -darken 30%
+   * @modifier      900      -darken 40%
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   secondary: {
-    color: '#2b3438',
+    color: '#6d858f',
     modifiers: {
-      hover: '-darken 10%',
-      light: '-lighten 15%',
-      lighter: '-lighten 30%',
-      dark: '-darken 10%',
-      darker: '-darken 30%'
+      50: '-lighten 45%',
+      100: '-lighten 40%',
+      200: '-lighten 30%',
+      300: '-lighten 20%',
+      400: '-lighten 10%',
+      500: '-lighten 0%',
+      600: '-darken 10%',
+      700: '-darken 20%',
+      800: '-darken 30%',
+      900: '-darken 40%'
     }
   },
 
@@ -271,10 +293,18 @@ module.exports = {
    * Specify the <success>success</success> color value and modifiers.
    * The color object format has to follow these guidelines:
    * - color (#5cb85c) {Color}: Specify the default color
-   * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - hover (-darken 10%) {String}: The hover modifier
-   *   - light (-lighten 15%) {String}: The light modifier
-   *   - dark (-darken 10%) {String}: The dark modifier
+   * - modifiers ({}) (Object): Specify the modifiers available for this color
+   *
+   * @modifier      50      -lighten 45%
+   * @modifier      100      -lighten 40%
+   * @modifier      200      -lighten 30%
+   * @modifier      300      -lighten 20%
+   * @modifier      400      -lighten 10%
+   * @modifier      500      -lighten 0%
+   * @modifier      600      -darken 10%
+   * @modifier      700      -darken 20%
+   * @modifier      800      -darken 30%
+   * @modifier      900      -darken 40%
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -282,11 +312,16 @@ module.exports = {
   success: {
     color: '#5cb85c',
     modifiers: {
-      hover: '-darken 10%',
-      light: '-lighten 15%',
-      lighter: '-lighten 30%',
-      dark: '-darken 10%',
-      darker: '-darken 30%'
+      50: '-lighten 45%',
+      100: '-lighten 40%',
+      200: '-lighten 30%',
+      300: '-lighten 20%',
+      400: '-lighten 10%',
+      500: '-lighten 0%',
+      600: '-darken 10%',
+      700: '-darken 20%',
+      800: '-darken 30%',
+      900: '-darken 40%'
     }
   },
 
@@ -299,10 +334,18 @@ module.exports = {
    * Specify the <warning>warning</warning> color value and modifiers.
    * The color object format has to follow these guidelines:
    * - color (#f0ad4e) {Color}: Specify the default color
-   * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - hover (-darken 10%) {String}: The hover modifier
-   *   - light (-lighten 15%) {String}: The light modifier
-   *   - dark (-darken 10%) {String}: The dark modifier
+   * - modifiers ({}) (Object): Specify the modifiers available for this color
+   *
+   * @modifier      50      -lighten 45%
+   * @modifier      100      -lighten 40%
+   * @modifier      200      -lighten 30%
+   * @modifier      300      -lighten 20%
+   * @modifier      400      -lighten 10%
+   * @modifier      500      -lighten 0%
+   * @modifier      600      -darken 10%
+   * @modifier      700      -darken 20%
+   * @modifier      800      -darken 30%
+   * @modifier      900      -darken 40%
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -310,11 +353,16 @@ module.exports = {
   warning: {
     color: '#f0ad4e',
     modifiers: {
-      hover: '-darken 10%',
-      light: '-lighten 15%',
-      lighter: '-lighten 30%',
-      dark: '-darken 10%',
-      darker: '-darken 30%'
+      50: '-lighten 45%',
+      100: '-lighten 40%',
+      200: '-lighten 30%',
+      300: '-lighten 20%',
+      400: '-lighten 10%',
+      500: '-lighten 0%',
+      600: '-darken 10%',
+      700: '-darken 20%',
+      800: '-darken 30%',
+      900: '-darken 40%'
     }
   },
 
@@ -327,10 +375,18 @@ module.exports = {
    * Specify the <error>error</error> color value and modifiers.
    * The color object format has to follow these guidelines:
    * - color (#d9534f) {Color}: Specify the default color
-   * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - hover (-darken 10%) {String}: The hover modifier
-   *   - light (-lighten 15%) {String}: The light modifier
-   *   - dark (-darken 10%) {String}: The dark modifier
+   * - modifiers ({}) (Object): Specify the modifiers available for this color
+   *
+   * @modifier      50      -lighten 45%
+   * @modifier      100      -lighten 40%
+   * @modifier      200      -lighten 30%
+   * @modifier      300      -lighten 20%
+   * @modifier      400      -lighten 10%
+   * @modifier      500      -lighten 0%
+   * @modifier      600      -darken 10%
+   * @modifier      700      -darken 20%
+   * @modifier      800      -darken 30%
+   * @modifier      900      -darken 40%
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -338,11 +394,16 @@ module.exports = {
   error: {
     color: '#d9534f',
     modifiers: {
-      hover: '-darken 10%',
-      light: '-lighten 15%',
-      lighter: '-lighten 30%',
-      dark: '-darken 10%',
-      darker: '-darken 30%'
+      50: '-lighten 45%',
+      100: '-lighten 40%',
+      200: '-lighten 30%',
+      300: '-lighten 20%',
+      400: '-lighten 10%',
+      500: '-lighten 0%',
+      600: '-darken 10%',
+      700: '-darken 20%',
+      800: '-darken 30%',
+      900: '-darken 40%'
     }
   },
 
@@ -355,10 +416,18 @@ module.exports = {
    * Specify the <info>info</info> color value and modifiers.
    * The color object format has to follow these guidelines:
    * - color (#2199e8) {Color}: Specify the default color
-   * - modifiers ({}) (Object): Specify the modifiers available for this color:
-   *   - hover (-darken 10%) {String}: The hover modifier
-   *   - light (-lighten 15%) {String}: The light modifier
-   *   - dark (-darken 10%) {String}: The dark modifier
+   * - modifiers ({}) (Object): Specify the modifiers available for this color
+   *
+   * @modifier      50      -lighten 45%
+   * @modifier      100      -lighten 40%
+   * @modifier      200      -lighten 30%
+   * @modifier      300      -lighten 20%
+   * @modifier      400      -lighten 10%
+   * @modifier      500      -lighten 0%
+   * @modifier      600      -darken 10%
+   * @modifier      700      -darken 20%
+   * @modifier      800      -darken 30%
+   * @modifier      900      -darken 40%
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -366,11 +435,16 @@ module.exports = {
   info: {
     color: '#2199e8',
     modifiers: {
-      hover: '-darken 10%',
-      light: '-lighten 15%',
-      lighter: '-lighten 30%',
-      dark: '-darken 10%',
-      darker: '-darken 30%'
+      50: '-lighten 45%',
+      100: '-lighten 40%',
+      200: '-lighten 30%',
+      300: '-lighten 20%',
+      400: '-lighten 10%',
+      500: '-lighten 0%',
+      600: '-darken 10%',
+      700: '-darken 20%',
+      800: '-darken 30%',
+      900: '-darken 40%'
     }
   }
 };

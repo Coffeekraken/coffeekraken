@@ -10,8 +10,8 @@
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/sugar": "file:../sugar",
     "@coffeekraken/s-filtrable-input": "file:../../webcomponents/s-filtrable-input",
+    "@coffeekraken/sugar": "file:../sugar",
     "codemirror": "^5.57.0"
   }
 }

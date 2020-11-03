@@ -310,7 +310,7 @@ module.exports = class SScssCompiler {
               default:
                 let stringToCompile = '';
                 previousBlocks.forEach((bl) => {
-                  stringToCompile += `      
+                  stringToCompile += `
                     ${bl}
                 `;
                 });

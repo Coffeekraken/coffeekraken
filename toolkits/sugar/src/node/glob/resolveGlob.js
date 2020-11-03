@@ -58,7 +58,10 @@ module.exports = function resolveGlob(globs, settings = {}) {
           globPattern,
           searchReg;
 
-        const splits = glob.split(':');
+        const splits = glob.split(':').map((split) => {
+          return split.replace(`${rootDir}/`, '').replace(rootDir, '');
+        });
+
         splits.forEach((split) => {
           if (
             split.substr(0, 1) === '/' &&

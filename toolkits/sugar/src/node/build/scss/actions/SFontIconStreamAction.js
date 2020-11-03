@@ -7,6 +7,8 @@ const __copy = require('../../../clipboard/copy');
 const __childProcess = require('child_process');
 const __ensureDirSync = require('../../../fs/ensureDirSync');
 const __removeSync = require('../../../fs/removeSync');
+const __IconFontBuildr = require('icon-font-buildr');
+const __SGlob = require('../../../glob/SGlob');
 
 /**
  * @name                SFontIconStreamAction
@@ -70,18 +72,93 @@ module.exports = class SFontIconStreamAction extends __SActionsStreamAction {
       __removeSync(`${streamObj.outputDir}/icons`);
       __ensureDirSync(`${streamObj.outputDir}/icons`);
 
-      const pro = __childProcess.spawn(
-        `npx @ln-e/icon-font-generator ${streamObj.iconsInput} -o ${streamObj.outputDir}/icons`,
-        [],
-        {
-          shell: true,
-          stdout: 'inherit'
+      // const pro = __childProcess.spawn(
+      //   `npx icon-font-generator ${streamObj.iconsInput} -o ${streamObj.outputDir}/icons`,
+      //   [],
+      //   {
+      //     shell: true,
+      //     stdout: 'inherit'
+      //   }
+      // );
+
+      const glob = new __SGlob(streamObj.iconsInput);
+      const files = await glob.resolve();
+
+      const iconNames = [],
+        sourcesPathes = [];
+
+      files.forEach((file) => {
+        if (sourcesPathes.indexOf(file.dirPath) === -1)
+          sourcesPathes.push(`${file.dirPath}/[icon].svg`);
+        iconNames.push(file.name.replace(`.${file.extension}`, ''));
+      });
+
+      const builder = new __IconFontBuildr({
+        sources: sourcesPathes,
+        icons: iconNames,
+        output: {
+          // codepoints: true, // Enable support for codepoints
+          // ligatures: false, // Disable support for ligatures
+          icons: `${streamObj.outputDir}/icons`, // Where to save the icons, if not provided they won't be stored permanently
+          fonts: `${streamObj.outputDir}/icons`, // Where to save the fonts
+          fontName: 'sugar-icons', // The name of the font to generate
+          formats: [
+            // Font formats to output
+            'eot',
+            'ttf',
+            'woff',
+            'woff2'
+          ]
         }
-      );
+      });
+
+      await builder.build();
+
+      const codepoints = builder.getIconsCodepoints(); // Get a map of icon names to codepoints, useful for generating HTML/CSS/SCSS etc.
+      const ligatures = builder.getIconsLigatures(); // Get a map of icon names to ligatures, useful for generating HTML/CSS/SCSS etc.
+
+      let cssString = '';
+      cssString += `
+      @font-face {
+        font-family: 'Sugar Icons';
+        font-style: normal;
+        font-weight: 400;
+        font-display: block;
+        src: url("./sugar-icons.eot");
+        src: url("./sugar-icons.eot?#iefix") format("embedded-opentype"),
+             url("./sugar-icons.woff2") format("woff2"),
+             url("./sugar-icons.woff") format("woff"),
+             url("./sugar-icons.ttf") format("truetype"),
+             url("./sugar-icons.svg#sugar") format("svg");
+        }
+        [class^="icon-"] {
+          -moz-osx-font-smoothing: grayscale;
+          -webkit-font-smoothing: antialiased;
+          display: inline-block;
+          font-family: 'Sugar Icons';
+          font-style: normal;
+          font-weight: 400;
+          font-variant: normal;
+          text-rendering: auto;
+          line-height: 1;
+        }
+      `;
+
+      Object.keys(codepoints).forEach((iconName) => {
+        const codepoint = codepoints[iconNames][0];
+        cssString += `
+          .icon-${iconName}:before {
+            content: "${codepoint}"; }
+          `;
+      });
+
+      streamObj.iconsCss = cssString;
+      if (!streamObj.outputStack) streamObj.outputStack = {};
+      streamObj.outputStack.iconsCss = `${streamObj.outputDir}/icons/sugar-icons.css`;
 
       // import the icon css into
       streamObj.data = `
-        @import "icons/icons.css";
+        @import "icons/sugar-icons.css";
         ${streamObj.data}
       `;
 

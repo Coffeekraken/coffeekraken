@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import "icons/icons.css";
+@import "icons/sugar-icons.css";
 /**
 * Vendors
 * All external libraries needed in the project.
@@ -74684,14 +74684,14 @@ html {
   border-right: 0.3em solid rgba(242, 188, 43, 0.2);
   border-bottom: 0.3em solid rgba(242, 188, 43, 0.2);
   border-left: 0.3em solid #f2bc2b;
-  animation: spinner-uwdibjf 1s linear 0s infinite;
+  animation: spinner-u64hgsh 1s linear 0s infinite;
 }
 .s-filtrable-input__list-loading-icon, .s-filtrable-input__list-loading-icon:after {
   border-radius: 50%;
   width: 1em;
   height: 1em;
 }
-@keyframes spinner-uwdibjf {
+@keyframes spinner-u64hgsh {
   0% {
     transform: rotate(0deg);
   }

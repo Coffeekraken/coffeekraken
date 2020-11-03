@@ -12,7 +12,7 @@
     border: 2px solid white;
 
     @include Sugar.smooth-shadow();
-    @include Sugar.scrollbar();
+    // @include Sugar.scrollbar();
   }
 
   .#{$name}__list {

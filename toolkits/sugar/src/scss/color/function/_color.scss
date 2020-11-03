@@ -44,12 +44,16 @@
  */
 @function color($name, $actions: null) {
 
+  // @if $actions and type-of($actions) == number {
+  //   $actions: '#{$actions}';
+  // }
+
   // test parameters
   $name: test-argument("color", "name", "color|string", $name);
   $actions: test-argument(
     "color",
     "actions",
-    "map|list|string",
+    "map|list|string|number",
     $actions
   );
 
@@ -75,7 +79,7 @@
 
   @if type-of($actions) == list {
     $actionsMap: dash-to-map($actions);
-  } @else if type-of($actions) == string {
+  } @else if type-of($actions) == string or type-of($actions) == number {
     $modifier: $actions;
     $modifierArgs: setting('colors.#{$name}.modifiers.#{$modifier}');
     @if type-of($modifierArgs) == list or type-of($modifierArgs) == string {
@@ -84,6 +88,8 @@
       $actionsMap: $modifierArgs;
     }
   }
+
+ 
 
   // @if $name != null and $modifier != null {
   //   $varName: var-name('colors.#{$name}.#{$modifier}');

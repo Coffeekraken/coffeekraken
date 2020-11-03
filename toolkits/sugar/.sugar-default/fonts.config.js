@@ -10,8 +10,10 @@ module.exports = {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   default: {
-    'font-family': 'Roboto',
-    import: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap'
+    'font-family': 'Titillium Web',
+    'font-weight': 400,
+    import:
+      'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap'
   },
 
   /**
@@ -25,10 +27,10 @@ module.exports = {
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   title: {
-    'font-family': 'Roboto',
+    'font-family': 'Titillium Web',
     'font-weight': 700,
     import:
-      'https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap'
+      'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap'
   },
 
   /**

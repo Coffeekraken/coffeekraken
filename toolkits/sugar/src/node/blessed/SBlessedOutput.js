@@ -101,7 +101,16 @@ module.exports = class SOutput extends __SBlessedComponent {
         filter: null,
         maxItems: -1,
         maxItemsByGroup: 1,
-        stacks: ['log', '*.log', 'warning', '*.warning', 'error', '*.error']
+        stacks: [
+          'log',
+          '*.log',
+          'warning',
+          '*.warning',
+          'warn',
+          '*.warn',
+          'error',
+          '*.error'
+        ]
       },
       settings
     );

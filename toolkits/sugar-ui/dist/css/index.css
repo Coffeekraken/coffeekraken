@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @charset "UTF-8";
 @import "icons/sugar-icons.css";
 /**
@@ -84432,3 +84433,5 @@ html {
 * All the things that does not fit in any others directory. Try to keep this folder has small as possible.
 * If you have to many things in here, that mean that you probably need to refactor your codebase...
 */
+=======
+>>>>>>> 0e3b87b4747e8492cc0eb17b2378fe37c67f4153

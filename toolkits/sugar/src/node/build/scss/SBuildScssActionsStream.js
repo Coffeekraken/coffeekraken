@@ -8,7 +8,6 @@ const __SRenderSassStreamAction = require('./actions/SRenderSassStreamAction');
 const __SPostCssStreamAction = require('./actions/SPostCssStreamAction');
 const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
 const __path = require('path');
-const __SFontIconsStreamAction = require('./actions/SFontIconStreamAction');
 const __sugarConfig = require('../../config/sugar');
 const __SBuildScssInterface = require('./interface/SBuildScssInterface');
 const __SFrontspecScssStreamAction = require('../../stream/actions/SFrontspecScssStreamAction');
@@ -59,7 +58,6 @@ module.exports = class SBuildScssActionsStream extends __SActionsStream {
         readFile: __SFsReadFileStreamAction,
         frontspecScss: __SFrontspecScssStreamAction,
         sharedResources: __SSharedResourcesStreamAction,
-        fontIcons: __SFontIconsStreamAction,
         render: __SRenderSassStreamAction,
         // postCss: __SPostCssStreamAction,
         fsOutput: __SFsOutputStreamAction

@@ -140,10 +140,10 @@ module.exports = class SFsDeamonProcess extends __SProcess {
 
         this.log({
           group: 'Deleted files',
-          value: `File deleted: "<red>${file.path.replace(
-            __packageRoot(file.path) + '/',
+          value: `File deleted: "<red>${filepath.replace(
+            __packageRoot(filepath) + '/',
             ''
-          )}</red>" <cyan>${file.size}</cyan>mb`
+          )}</red>"`
         });
 
         this.trigger('unlink', {

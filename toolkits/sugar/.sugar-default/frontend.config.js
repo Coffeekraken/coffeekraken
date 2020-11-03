@@ -44,17 +44,19 @@ module.exports = {
   rootDir: `${__packageRoot()}`,
 
   /**
-   * @name              staticDir
+   * @name              staticDirs
    * @namespace         config.sugar-ui.modules.frontendServer.settings
-   * @type              String
-   * @default           ${__packageRoot()}/dist
+   * @type              Object<String>
+   * @default           '/dist': '${__packageRoot()}/dist'
    *
    * Specify a directory that will be served as static files
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  staticDir: `${__packageRoot()}/dist`,
+  staticDirs: {
+    '/dist': `${__packageRoot()}/dist`
+  },
 
   /**
    * @name            viewsDir
@@ -185,58 +187,6 @@ module.exports = {
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       handler: `${__dirname}/../src/node/server/frontend/handlers/views`
-    },
-
-    /**
-     * @name            dist
-     * @namespace       config.frontend.handlers
-     * @type            Object
-     *
-     * Store all the "dist" configuration access like the slug, the title, etc...
-     *
-     * @since         2.0.0
-     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    dist: {
-      /**
-       * @name          slug
-       * @namespace     config.frontend.handlers.dist
-       * @type          String
-       * @default       /dist
-       *
-       * Specify the url slug to use for this "section"
-       *
-       * @since         2.0.0
-       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      slug: '/dist',
-
-      /**
-       * @name            handler
-       * @namespace       config.frontend.handlers.dist
-       * @type            Function
-       *
-       * Specify the handler function that will take care of responding to this "section"
-       *
-       * @since         2.0.0
-       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      handler: `${__dirname}/../src/node/server/frontend/handlers/dist`,
-
-      /**
-       * @name            directories
-       * @namespace       config.frontend.handlers.dist
-       * @type            String|Array<String>
-       *
-       * Specify some directory from where the dist will be served
-       *
-       * @since         2.0.0
-       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      directories: [
-        `${__packageRoot()}/dist`,
-        `${__packageRoot()}/node_modules`
-      ]
     },
 
     /**

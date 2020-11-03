@@ -198,18 +198,13 @@ function SLitHtmlWebComponentGenerator(extendSettings) {
           _this.addClass('', _this.$container);
 
           (0, _insertAfter.default)(_this.$container, _assertThisInitialized(_this));
-        } // // render for the first time
-        // this.render();
-        // // refresh references
-        // this._refreshIdReferences();
-
+        }
 
         _this.update(); // dispatch a ready event
 
 
         _this.dispatch('ready', _assertThisInitialized(_this), {
-          bubbles: true // preventSameTarget: true
-
+          bubbles: true
         }); // listen for media query change to update the view
 
 

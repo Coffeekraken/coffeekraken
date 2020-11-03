@@ -23,8 +23,14 @@
 @function map-get($map, $path, $default: null) {
   $parts: str-split($path, '.');
   $value: $map;
+  $newValue: $default;
   @each $part in $parts {
-    $newValue: map.get($value, $part);
+    $partNumber: to-number($part);
+    @if $partNumber != false and map.has-key($value, $partNumber) {
+      $newValue: map.get($value, $partNumber)
+    } @else {
+      $newValue: map.get($value, $part);
+    }
     @if not $newValue {
       @return $default;
     }

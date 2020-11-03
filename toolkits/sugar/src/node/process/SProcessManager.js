@@ -242,10 +242,20 @@ class SProcessManager extends __SPromise {
         break;
       }
     }
-    this.deamon.watch(this.initialParams[watchParam]);
-    setTimeout(() => {
-      this.state = 'watching';
-    });
+    if (!watchParam) {
+      this.trigger('warn', {
+        value: `You try to use a "<yellow>${
+          this.deamon.constructor.name
+        }</yellow>" deamon which require at least one of these properties "<cyan>${settings.watchProperties.join(
+          ','
+        )}</cyan>" to be available on the process params object...`
+      });
+    } else {
+      this.deamon.watch(this.initialParams[watchParam]);
+      setTimeout(() => {
+        this.state = 'watching';
+      });
+    }
   }
 
   /**

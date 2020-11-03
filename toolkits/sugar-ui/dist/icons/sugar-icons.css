@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "sugar-icons";
+    src: url("./sugar-icons.eot?1bf9b47acca69c3b4b3c0d39317421bb#iefix") format("embedded-opentype"),
+url("./sugar-icons.woff2?1bf9b47acca69c3b4b3c0d39317421bb") format("woff2"),
+url("./sugar-icons.woff?1bf9b47acca69c3b4b3c0d39317421bb") format("woff");
+}
+
+i[class^="icon-"]:before, i[class*=" icon-"]:before {
+    font-family: sugar-icons !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-api:before {
+    content: "\f101";
+}
+.icon-build:before {
+    content: "\f102";
+}
+.icon-community:before {
+    content: "\f103";
+}
+.icon-component:before {
+    content: "\f104";
+}
+.icon-facebook:before {
+    content: "\f105";
+}
+.icon-github:before {
+    content: "\f106";
+}
+.icon-start:before {
+    content: "\f107";
+}
+.icon-toolkit:before {
+    content: "\f108";
+}
+.icon-what:before {
+    content: "\f109";
+}

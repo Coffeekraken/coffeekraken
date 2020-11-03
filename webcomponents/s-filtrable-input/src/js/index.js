@@ -77,7 +77,9 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
       watch: true
     },
     ':onSelect': {
-      type: 'String'
+      type: 'String',
+      required: false,
+      default: null
     },
     loading: {
       type: 'Boolean',
@@ -112,6 +114,10 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
               i < this._maxDisplayItems
                 ? lit.html`
                 <li class="${this.selector('list-item')} ${
+                    item.type !== undefined
+                      ? this.selector(`list-item--${item.type.toLowerCase()}`)
+                      : ''
+                  } ${
                     this._preselectedItemIdx === i
                       ? this.selector('list-item--preselected')
                       : ''
@@ -544,7 +550,9 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
         for (const idx in this._settings.filter.properties) {
           const prop = this._settings.filter.properties[idx];
           if (!item[prop] || typeof item[prop] !== 'string') continue;
-          if (item[prop].includes(filterString)) return true;
+          const reg = new RegExp(filterString, 'gi');
+          if (filterString.match(reg)) return true;
+          // if (item[prop].includes(filterString)) return true;
         }
         return false;
       });
@@ -569,18 +577,13 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
    */
   highlightFilter(string) {
     if (!this._filterString) return string;
-    return this.lit.html`
-      ${this.lit.unsafeHTML(
-        string
-          .split(this._filterString)
-          .join(
-            `<span class="${this.selector(
-              'list-item-highlight'
-            )}">___@@@___</span>`
-          )
-          .split('___@@@___')
-          .join(this._filterString)
-      )}`;
+    const reg = new RegExp(this._filterString, 'gi');
+    const finalString = string.replace(reg, (str) => {
+      return `<span class="${this.selector(
+        'list-item-highlight'
+      )}">${str}</span>`;
+    });
+    return this.lit.unsafeHTML(finalString);
   }
 }
 

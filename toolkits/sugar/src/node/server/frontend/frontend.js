@@ -1,3 +1,4 @@
+const __mimeTypes = require('mime-types');
 const __sugarConfig = require('../../config/sugar');
 const __deepMerge = require('../../object/deepMerge');
 const __fs = require('fs');
@@ -34,6 +35,12 @@ module.exports = (args = {}) => {
 
   const promise = new __SPromise({
     id: 'frontendServer'
+  });
+
+  // static directories
+  Object.keys(settings.staticDirs).forEach((path) => {
+    const fsPath = settings.staticDirs[path];
+    server.use(path, __express.static(fsPath));
   });
 
   // load the middlewares
@@ -110,8 +117,10 @@ module.exports = (args = {}) => {
               }
               break;
             default:
+              const mime = __mimeTypes.contentType(type);
               result = data;
-              res.type(type);
+              console.log(mime);
+              res.type(mime);
               break;
           }
         }

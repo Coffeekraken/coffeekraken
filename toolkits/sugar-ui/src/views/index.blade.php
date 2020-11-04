@@ -3,6 +3,14 @@
 @section('title', 'Documentation')
 
 @section('content')
+
+  <script type="module">
+    import React from 'react';
+    console.log(React);
+  </script>
+
+  <h1>Hello</h1>
+
   <s-sugar-ui></s-sugar-ui>
 
   <style>

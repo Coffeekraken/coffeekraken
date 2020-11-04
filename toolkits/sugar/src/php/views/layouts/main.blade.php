@@ -26,6 +26,7 @@ $package = $package ? json_decode($package) : null;
             @endif
           @endforeach
         @endif
+        <link rel="stylesheet" href="/src/scss/index.scss">
         @if ($settings->assets && $settings->assets->js)
           @foreach ($settings->assets->js as $asset)
              @if (!$asset->body)

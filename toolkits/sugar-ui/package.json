@@ -15,26 +15,25 @@
   "dependencies": {
     "@coffeekraken/s-filtrable-input": "file:../../webcomponents/s-filtrable-input",
     "@coffeekraken/sugar": "file:../sugar",
-<<<<<<< HEAD
-    "codemirror": "^5.57.0"
-=======
-    "@snowpack/plugin-babel": "^0.6.2",
-    "@snowpack/plugin-sass": "^1.1.1",
+    "codemirror": "^5.58.2",
+    "@snowpack/plugin-babel": "^2.1.4",
     "parcel-bundler": "^1.12.4",
-    "postcss": "7.0.30",
-    "postcss-easings": "^2.0.0",
-    "postcss-import": "^12.0.1",
+    "postcss": "8.1.4",
+    "postcss-easings": "^3.0.1",
+    "postcss-import": "^13.0.0",
     "postcss-import-url": "^5.1.0",
     "postcss-preset-env": "6.7.0",
-    "snowpack": "^2.15.1"
+    "react": "^17.0.1"
   },
   "devDependencies": {
     "@csstools/postcss-sass": "^4.0.0",
-    "postcss-cli": "^7.1.1",
+    "@snowpack/plugin-sass": "^1.1.1",
+    "postcss-cli": "^8.2.0",
     "postcss-scss": "^3.0.2",
+    "react": "^17.0.1",
     "rollup-plugin-postcss": "^3.1.8",
     "rollup-plugin-sass": "^1.2.2",
-    "rollup-plugin-scss": "^2.6.1"
->>>>>>> 0e3b87b4747e8492cc0eb17b2378fe37c67f4153
+    "rollup-plugin-scss": "^2.6.1",
+    "snowpack": "^2.16.1"
   }
 }

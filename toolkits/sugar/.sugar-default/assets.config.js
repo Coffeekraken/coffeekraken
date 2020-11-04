@@ -1,7 +1,7 @@
 module.exports = {
   css: {
     main: {
-      path: '[config.build.scss.outputDir]/index.css'
+      path: '/src/scss/index.scss'
     }
   },
   js: {

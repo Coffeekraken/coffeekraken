@@ -17,6 +17,7 @@ const __parseArgs = require('../cli/parseArgs');
 const __childProcess = require('child_process');
 const __output = require('./output');
 const __stackTrace = require('stack-trace');
+const __argsToString = require('../cli/argsToString');
 
 /**
  * @name                SProcess
@@ -407,6 +408,8 @@ module.exports = class SProcess extends __SPromise {
    *
    * Access the process run when this one is finished
    *
+   * @todo      Doc
+   *
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -537,6 +540,101 @@ module.exports = class SProcess extends __SPromise {
     // run the actual process using the "process" method
     return this.process(paramsObj, settings);
   }
+
+  /**
+   * @name      spawn
+   * @type      Function
+   * @async
+   *
+   * This method allows you to spawn a command that will be automatically binded to the
+   * current SProcess instance. This mean that all the stdout and stderr will be proxied
+   * as well as all the "close" events, etc...
+   *
+   * @param         {String}          command         The command to launch. Can contain the token [arguments] that will be replaced by the passed params object or string
+   * @param         {Object|String}     [params={}]     The parameters to pass to the command
+   * @param         {Object}          [settings={}]     A settings object to configure your spawn process
+   *
+   * @setting       {Object}          [definitionObj={}]        A definition object for the command params
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  // async spawn(command, params = {}, settings = {}) {
+  //   settings = __deepMerge(
+  //     {
+  //       env: this._settings.env,
+  //       definitionObj: null
+  //     },
+  //     settings
+  //   );
+  //   let stringParams;
+  //   if (typeof params === 'string') {
+  //     stringParams = params;
+  //   } else if (typeof params === 'object') {
+  //     stringParams = __argsToString(params, {
+  //       definitionObj: settings.definitionObj
+  //     });
+  //   } else {
+  //     throw new __SError(
+  //       `Sorry but the "<yellow>params</yellow>" arguments of the "<cyan>SProcess.spawn</cyan>" method has to be either an <green>Object</green>, either a simple <green>String</green> and you've passed a <red>${typeof params}</red>...`
+  //     );
+  //   }
+
+  //   // build command to run
+  //   const commandToRun = command.replace('[arguments]', stringParams);
+
+  //   const childProcess = __childProcess.spawn(commandToRun, [], {
+  //     env: settings.env,
+  //     shell: true
+  //   });
+
+  //   __onProcessExit(() => {
+  //     childProcess.kill();
+  //   });
+
+  //   childProcess.on('close', (code, signal) => {
+  //     if (this.stderr.length) {
+  //       this.reject(this.stderr.join('\n'));
+  //       const error = new __SError(this.stderr.join('\n'));
+  //       this.error(`<yellow>Child Process</yellow>\n${error.message}`);
+  //     } else if (this._isKilling || (!code && signal)) {
+  //       this.kill();
+  //     } else if (code === 0 && !signal) {
+  //       this.resolve();
+  //     } else {
+  //       this.reject();
+  //     }
+  //     // reset isKilling boolean
+  //     this._isKilling = false;
+  //   });
+
+  //   if (await __SIpc.isServer()) {
+  //     __SIpc.on(
+  //       `${settings.env.GLOBAL_SIPC_TRIGGER_ID}.trigger`,
+  //       (data, socket) => {
+  //         this.trigger(data.stack, data.value, data.metas);
+  //       }
+  //     );
+  //   }
+
+  //   // stdout data
+  //   if (childProcess.stdout) {
+  //     childProcess.stdout.on('data', (data) => {
+  //       this.log({
+  //         value: data.toString()
+  //       });
+  //     });
+  //   }
+  //   // stderr data
+  //   if (childProcess.stderr) {
+  //     childProcess.stderr.on('data', (error) => {
+  //       this.error({
+  //         error: true,
+  //         value: error.toString()
+  //       });
+  //     });
+  //   }
+  // }
 
   /**
    * @name      kill

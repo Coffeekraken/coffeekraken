@@ -6,9 +6,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "del dist",
     "init": "snowpack",
-    "dev": "snowpack dev --polyfill-node",
-    "build": "snowpack build"
+    "dev": "npm run clean && snowpack dev --config ../sugar/snowpack.config.js --reload --polyfill-node",
+    "build": "npm run clean && snowpack build --config ../sugar/snowpack.config.js --reload --polyfill-node"
   },
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@csstools/postcss-sass": "^4.0.0",
     "@snowpack/plugin-sass": "^1.1.1",
+    "del-cli": "^3.0.1",
     "postcss-cli": "^8.2.0",
     "postcss-scss": "^3.0.2",
     "react": "^17.0.1",

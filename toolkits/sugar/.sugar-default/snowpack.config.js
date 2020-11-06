@@ -52,23 +52,28 @@ const config = {
       `${__path.resolve(
         __dirname
       )}/../src/node/snowpack/SSnowpackSettingsPlugin`,
-      {}
+      {
+        // native: true,
+        compilerOptions: {
+          includePaths: [__path.resolve(__packageRoot(), 'node_modules')]
+        }
+      }
     ],
     [
       `${__path.resolve(__dirname)}/../node_modules/@snowpack/plugin-dotenv`,
       {}
     ],
-    [`${__path.resolve(__dirname)}/../node_modules/@snowpack/plugin-babel`, {}],
+    [`${__path.resolve(__dirname)}/../node_modules/@snowpack/plugin-babel`, {}]
     // `${__path.resolve(__dirname)}/../node_modules/@snowpack/plugin-postcss`,
-    [
-      `@snowpack/plugin-sass`,
-      {
-        // native: true,
-        compilerOptions: {
-          loadPath: __path.resolve(__packageRoot(), 'node_modules')
-        }
-      }
-    ]
+    // [
+    //   `@snowpack/plugin-sass`,
+    //   {
+    //     // native: true,
+    //     compilerOptions: {
+    //       loadPath: __path.resolve(__packageRoot(), 'node_modules')
+    //     }
+    //   }
+    // ]
   ]
 };
 

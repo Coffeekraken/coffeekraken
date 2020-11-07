@@ -1,23 +1,47 @@
+const __path = require('path');
+
 module.exports = {
   presets: [
     [
       '@babel/preset-env',
       {
-        targets: {
-          esmodules: true
-        }
+        // targets: {
+        //   esmodules: true
+        // },
+        modules: false
       }
     ]
   ],
   plugins: [
-    'add-module-exports',
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-export-default-from',
-    '@babel/plugin-proposal-export-namespace-from',
-    '@babel/plugin-transform-modules-commonjs',
-    '@babel/plugin-transform-classes',
+    // __path.resolve(
+    //   __dirname,
+    //   '../node_modules/babel-plugin-add-module-exports'
+    // ),
+    __path.resolve(
+      __dirname,
+      '../node_modules/@babel/plugin-proposal-class-properties'
+    ),
+    __path.resolve(
+      __dirname,
+      '../node_modules/@babel/plugin-proposal-export-default-from'
+    ),
+    __path.resolve(
+      __dirname,
+      '../node_modules/@babel/plugin-proposal-export-namespace-from'
+    ),
+    // __path.resolve(
+    //   __dirname,
+    //   '../node_modules/@babel/plugin-transform-modules-commonjs'
+    // ),
+    __path.resolve(
+      __dirname,
+      '../node_modules/@babel/plugin-transform-classes'
+    ),
     [
-      '@babel/plugin-transform-parameters',
+      __path.resolve(
+        __dirname,
+        '../node_modules/@babel/plugin-transform-parameters'
+      ),
       {
         loose: true
       }

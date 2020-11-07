@@ -1,0 +1,25 @@
+.s-filtrable-input {
+  display: inline-block;
+  position: relative; }
+
+.s-filtrable-input__list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  opacity: 0;
+  max-width: calc(100vw - 100px);
+  pointer-events: none;
+  min-width: 100%; }
+  .s-filtrable-input__node:focus + .s-filtrable-input__list, .s-filtrable-input__list:focus {
+    opacity: 1;
+    pointer-events: all; }
+  .s-filtrable-input--ontop .s-filtrable-input__list {
+    bottom: 100%;
+    top: initial; }
+
+.s-filtrable-input__list-item {
+  cursor: pointer; }
+  .s-filtrable-input__list-item * {
+    pointer-events: none; }

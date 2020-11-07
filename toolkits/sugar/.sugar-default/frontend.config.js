@@ -88,34 +88,34 @@ module.exports = {
 
   handlers: {
     /**
-     * @name            index
+     * @name            homepage
      * @namespace       config.frontend.handlers
      * @type            Object
      *
-     * Store all the "index" configuration access like the slug, the title, etc...
+     * Store all the "homepage" configuration access like the slug, the title, etc...
      *
      * @since         2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    index: {
+    homepage: {
       /**
        * @name          slug
-       * @namespace     config.frontend.handlers.index
+       * @namespace     config.frontend.handlers.homepage
        * @type          String
-       * @default       /index
+       * @default       /homepage
        *
        * Specify the url slug to use for this "section"
        *
        * @since         2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      slug: '/index',
+      slug: '/homepage',
 
       /**
        * @name          title
-       * @namespace     config.frontent.pages.index
+       * @namespace     config.frontent.pages.homepage
        * @type          String
-       * @default       index | [title]
+       * @default       homepage | [title]
        *
        * Specify the page title wanted. Accessible tokens:
        * - [title]: Name of the view
@@ -123,11 +123,11 @@ module.exports = {
        * @since       2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      title: 'Welcome | [title]',
+      title: 'homepage | [title]',
 
       /**
        * @name            handler
-       * @namespace       config.frontend.handlers.index
+       * @namespace       config.frontend.handlers.homepage
        * @type            Function
        *
        * Specify the handler function that will take care of responding to this "section"
@@ -135,7 +135,58 @@ module.exports = {
        * @since         2.0.0
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      handler: `${__dirname}/../src/node/server/frontend/handlers/index`
+      handler: `${__dirname}/../src/node/server/frontend/handlers/homepage`
+    },
+
+    /**
+     * @name            sugar
+     * @namespace       config.frontend.handlers
+     * @type            Object
+     *
+     * Store all the "sugar" configuration access like the slug, the title, etc...
+     *
+     * @since         2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    sugar: {
+      /**
+       * @name          slug
+       * @namespace     config.frontend.handlers.sugar
+       * @type          String
+       * @default       /sugar
+       *
+       * Specify the url slug to use for this "section"
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      slug: '/sugar',
+
+      /**
+       * @name          title
+       * @namespace     config.frontent.pages.sugar
+       * @type          String
+       * @default       sugar | [title]
+       *
+       * Specify the page title wanted. Accessible tokens:
+       * - [title]: Name of the view
+       *
+       * @since       2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      title: 'Sugar | [title]',
+
+      /**
+       * @name            handler
+       * @namespace       config.frontend.handlers.sugar
+       * @type            Function
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: `${__dirname}/../src/node/server/frontend/handlers/sugar`
     },
 
     /**

@@ -111,8 +111,6 @@ module.exports = function sassPlugin(_, { native, compilerOptions = {} } = {}) {
       contents = __injectSugarScss(contents);
       contents = __ensureNoDuplicateImportStatements(contents);
 
-      console.log('COM', contents);
-
       const result = sass.renderSync({
         ...compilerOptions,
         importer: [

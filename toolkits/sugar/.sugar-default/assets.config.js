@@ -1,12 +1,16 @@
 module.exports = {
   css: {
     main: {
-      path: '/src/scss/index.scss'
+      path: '/dist/css/index.css'
+    },
+    js: {
+      path: '/temp/js.css'
     }
   },
   js: {
     main: {
-      path: '[config.build.js.outputDir]/index.js'
+      path: '/dist/js/index.js',
+      type: 'module'
     }
   }
 };

@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "del dist",
-    "init": "snowpack",
+    "init": "snowpack --config ../sugar/snowpack.config.js --reload --polyfill-node",
     "dev": "npm run clean && snowpack dev --config ../sugar/snowpack.config.js --reload --polyfill-node",
     "build": "npm run clean && snowpack build --config ../sugar/snowpack.config.js --reload --polyfill-node"
   },

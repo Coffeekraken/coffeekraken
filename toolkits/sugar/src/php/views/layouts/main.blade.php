@@ -30,7 +30,7 @@ $package = $package ? json_decode($package) : null;
         @if ($settings->assets && $settings->assets->js)
           @foreach ($settings->assets->js as $asset)
              @if (!$asset->body)
-              <script type="text/javascript" id="{{ $asset->name }}" src="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $asset->path) }}"></script>
+              <script type="{{ $asset->type or 'text/javascript' }}" id="{{ $asset->name }}" src="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $asset->path) }}"></script>
             @endif
           @endforeach
         @endif
@@ -59,7 +59,7 @@ $package = $package ? json_decode($package) : null;
       @if ($settings->assets && $settings->assets->js)
         @foreach ($settings->assets->js as $asset)
           @if ($asset->body)
-            <script type="text/javascript" id="{{ $asset->name }}" src="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $asset->path) }}"></script>
+            <script type="{{ $asset->type or 'text/javascript' }}" id="{{ $asset->name }}" src="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $asset->path) }}"></script>
           @endif
         @endforeach
       @endif

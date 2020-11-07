@@ -1,0 +1,11 @@
+{
+  "imports": {
+    "@coffeekraken/s-filtrable-input": "./@coffeekraken/s-filtrable-input.js",
+    "@coffeekraken/sugar/js/http/SRequest": "./@coffeekraken/sugar/js/http/SRequest.js",
+    "@coffeekraken/sugar/js/http/request": "./@coffeekraken/sugar/js/http/request.js",
+    "@coffeekraken/sugar/js/keyboard/hotkey": "./@coffeekraken/sugar/js/keyboard/hotkey.js",
+    "@coffeekraken/sugar/js/object/deepMerge": "./@coffeekraken/sugar/js/object/deepMerge.js",
+    "@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent": "./@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent.js",
+    "@coffeekraken/sugar/js/webcomponent/SWebComponent": "./@coffeekraken/sugar/js/webcomponent/SWebComponent.js"
+  }
+}

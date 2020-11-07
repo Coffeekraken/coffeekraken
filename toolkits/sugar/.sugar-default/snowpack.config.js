@@ -1,28 +1,30 @@
 const __path = require('path');
 const __packageRoot = require('../src/node/path/packageRoot');
 const __ipAddress = require('../src/node/network/ipAddress');
-const __sugarConfig = require('../src/node/config/sugar');
 
 const config = {
-  // exclude: [__path.resolve('src/*/**/*.*')],
-  // exclude: ['**/src.old/**'],
+  exclude: [__path.resolve('src/scss/**/[_]*.scss')],
   mount: {
-    src: {
-      url: '/dist',
-      static: false,
-      resolve: true
-    }
+    'node_modules/@coffeekraken/sugar/src/html': {
+      url: '/',
+      static: true,
+      resolve: false
+    },
+    '.cache/temp': '/temp',
+    src: '/dist'
   },
   devOptions: {
-    // hostname: __ipAddress(),
-    port: 8081
-    // port: Math.round(Math.random() * 65535)
+    fallback: 'redirect.html',
+    hostname: __ipAddress(),
+    port: Math.round(Math.random() * 65535),
+    port: 8181
   },
   buildOptions: {
-    out: 'dist'
+    out: 'build',
+    clean: true
   },
-  // install: ['react'],
   installOptions: {
+    dest: '.cache/web_modules',
     rollup: {
       plugins: [
         // require('@rollup/plugin-node-resolve').nodeResolve({
@@ -37,7 +39,7 @@ const config = {
         //   }
         // })
         require('rollup-plugin-scss')({
-          output: 'dist/css/index.css',
+          output: '.cache/temp/js.css',
           cacheLocation: '.cache/sass',
           includePaths: [
             __path.resolve(__packageRoot(), 'node_modules'),
@@ -53,7 +55,6 @@ const config = {
         __dirname
       )}/../src/node/snowpack/SSnowpackSettingsPlugin`,
       {
-        // native: true,
         compilerOptions: {
           includePaths: [__path.resolve(__packageRoot(), 'node_modules')]
         }
@@ -63,7 +64,12 @@ const config = {
       `${__path.resolve(__dirname)}/../node_modules/@snowpack/plugin-dotenv`,
       {}
     ],
-    [`${__path.resolve(__dirname)}/../node_modules/@snowpack/plugin-babel`, {}]
+    [
+      `${__path.resolve(__dirname)}/../node_modules/@snowpack/plugin-babel`,
+      {
+        transformOptions: require('./babel.config') // TODO     Find a way to load using sugarConfig
+      }
+    ]
     // `${__path.resolve(__dirname)}/../node_modules/@snowpack/plugin-postcss`,
     // [
     //   `@snowpack/plugin-sass`,

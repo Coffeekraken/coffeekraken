@@ -53,6 +53,10 @@ module.exports = class SSnowpackBuildProcess extends __SProcess {
     });
     __childProcess.spawn(`snowpack build ${string}`, [], {
       shell: true,
+      env: {
+        ...process.env,
+        SNOWPACK_IS_BUILD: true
+      },
       stdio: 'inherit'
     });
   }

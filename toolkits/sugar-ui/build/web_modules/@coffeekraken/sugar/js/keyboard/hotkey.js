@@ -1,5 +1,5 @@
 import { g as getDefaultExportFromCjs, c as createCommonjsModule } from '../../../../common/deepMerge-c386fdac.js';
-import { S as SPromise_1 } from '../../../../common/SPromise-ea6bff8c.js';
+import { S as SPromise_1 } from '../../../../common/SPromise-437a2ed0.js';
 import '../../../../common/process-2545f00a.js';
 
 /*!

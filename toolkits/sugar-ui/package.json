@@ -7,9 +7,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "del dist",
-    "init": "snowpack --config ../sugar/snowpack.config.js --reload --polyfill-node",
-    "dev": "npm run clean && snowpack dev --config ../sugar/snowpack.config.js --reload --polyfill-node",
-    "build": "npm run clean && SNOWPACK_IS_BUILD=true snowpack build --config ../sugar/snowpack.config.js --reload --polyfill-node"
+    "init": "snowpack init --config ../sugar/snowpack.config.js --reload --polyfill-node",
+    "install": "snowpack install --config ../sugar/snowpack.config.js --reload --polyfill-node",
+    "dev": "npm run clean && snowpack dev --config ../sugar/snowpack.config.js --polyfill-node",
+    "build": "npm run clean && SNOWPACK_IS_BUILD=true snowpack build --config ../sugar/snowpack.config.js --polyfill-node"
   },
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",

@@ -115,9 +115,10 @@ module.exports = function sassPlugin(_, { native, compilerOptions = {} } = {}) {
         ...compilerOptions,
         importer: [
           // __globImporter(),
-          // __sugarScssImporter({
-          //   content: contents
-          // })
+          __sugarScssImporter({
+            content: contents,
+            includePaths
+          })
         ],
         includePaths,
         indentedSyntax: fileExt === '.sass',

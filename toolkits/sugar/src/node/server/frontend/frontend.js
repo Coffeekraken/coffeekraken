@@ -97,7 +97,8 @@ module.exports = (args = {}) => {
               const settings = {
                 rootDir: [
                   __sugarConfig('views.rootDir'),
-                  __path.resolve(__dirname, 'views')
+                  // __path.resolve(__dirname, 'views'),
+                  __path.resolve(__dirname, '../../../php/views/blade')
                 ]
               };
 

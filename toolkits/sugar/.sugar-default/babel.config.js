@@ -5,18 +5,11 @@ module.exports = {
     [
       '@babel/preset-env',
       {
-        // targets: {
-        //   esmodules: true
-        // },
         modules: false
       }
     ]
   ],
   plugins: [
-    // __path.resolve(
-    //   __dirname,
-    //   '../node_modules/babel-plugin-add-module-exports'
-    // ),
     __path.resolve(
       __dirname,
       '../node_modules/@babel/plugin-proposal-class-properties'
@@ -29,10 +22,6 @@ module.exports = {
       __dirname,
       '../node_modules/@babel/plugin-proposal-export-namespace-from'
     ),
-    // __path.resolve(
-    //   __dirname,
-    //   '../node_modules/@babel/plugin-transform-modules-commonjs'
-    // ),
     __path.resolve(
       __dirname,
       '../node_modules/@babel/plugin-transform-classes'

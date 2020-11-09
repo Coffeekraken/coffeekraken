@@ -25,15 +25,19 @@ module.exports = (settings = {}) => {
 
     let content;
 
-    if (!settings.content) {
-      const prevFolderPath = __folderPath(prev);
+    if (url !== 'stdin') {
+      let prevFolderPath = process.cwd();
+      if (prev !== 'stdin') {
+        prevFolderPath = __folderPath(prev);
+      }
 
       let filePath,
         fileIncludePath = '';
 
       for (let i = 0; i < settings.includePaths.length; i++) {
         const path = settings.includePaths[i];
-        if (path === tmpPath) continue;
+
+        // if (path === tmpPath) continue;
 
         let relativeUrl;
 
@@ -80,8 +84,6 @@ module.exports = (settings = {}) => {
         }
         if (filePath) break;
       }
-
-      if (!filePath) return null;
 
       // read the file
       content = __fs.readFileSync(`${fileIncludePath}/${filePath}`, 'utf8');

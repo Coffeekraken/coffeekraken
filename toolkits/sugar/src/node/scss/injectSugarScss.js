@@ -28,6 +28,8 @@ const __path = require('path');
  * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function injectSugarScss(scss) {
+  if (scss.includes(' as Sugar;')) return scss;
+
   const scssSettings = __sugarConfig('scss');
   const settingsString = __jsObjectToScssMap(scssSettings);
   const path = __isInPackage('coffeekraken', process.cwd(), true)
@@ -38,7 +40,6 @@ module.exports = function injectSugarScss(scss) {
       $sugarUserSettings: ${settingsString};
       @include Sugar.setup($sugarUserSettings);
     `;
-  if (scss.includes(' as Sugar;')) return scss;
 
   const res = __putUseStatementsOnTop(`
     ${importsStrings}

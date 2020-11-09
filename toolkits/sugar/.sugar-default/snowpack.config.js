@@ -1,8 +1,24 @@
 const __path = require('path');
 const __packageRoot = require('../src/node/path/packageRoot');
 const __ipAddress = require('../src/node/network/ipAddress');
+const __terser = require('rollup-plugin-terser').terser;
 
 const basePlugins = [
+  // [
+  //   `${__path.resolve(__dirname)}/../node_modules/@snowpack/plugin-run-script`,
+  //   {
+  //     cmd: `${__path.resolve(
+  //       __dirname
+  //     )}/../node_modules/chokidar-cli/index.js "node_modules/@coffeekraken/**/*.js" -c "echo 'plop'" --silent --follow-symlinks`
+  //   }
+  // ],
+  [
+    `${__path.resolve(
+      __dirname,
+      '../src/node/snowpack/plugins/nodeModulesWatcher/SSnowpackNodeModulesWatcherPlugin'
+    )}`,
+    {}
+  ],
   [
     `${__path.resolve(__dirname)}/../src/node/snowpack/SSnowpackSettingsPlugin`,
     {
@@ -18,16 +34,6 @@ const basePlugins = [
       transformOptions: require('./babel.config') // TODO     Find a way to load using sugarConfig
     }
   ]
-  // `${__path.resolve(__dirname)}/../node_modules/@snowpack/plugin-postcss`,
-  // [
-  //   `@snowpack/plugin-sass`,
-  //   {
-  //     // native: true,
-  //     compilerOptions: {
-  //       loadPath: __path.resolve(__packageRoot(), 'node_modules')
-  //     }
-  //   }
-  // ]
 ];
 
 const config = {
@@ -38,7 +44,7 @@ const config = {
       static: true,
       resolve: false
     },
-    '.cache/temp': '/temp',
+    '.dev/temp': '/temp',
     src: '/dist'
   },
   devOptions: {
@@ -48,12 +54,12 @@ const config = {
     port: 8181
   },
   installOptions: {
-    dest: '.cache/web_modules',
+    dest: '.dev/web_modules',
     rollup: {
       plugins: [
         require('rollup-plugin-scss')({
-          output: '.cache/temp/js.css',
-          cacheLocation: '.cache/sass',
+          output: '.dev/temp/js.css',
+          cacheLocation: '.dev/cache/sass',
           includePaths: [
             __path.resolve(__packageRoot(), 'node_modules'),
             __path.resolve(__dirname, 'node_modules')
@@ -68,47 +74,32 @@ const config = {
       clean: true
     },
     plugins: [
-      // ...basePlugins,
+      ...basePlugins,
       [
         `${__path.resolve(
           __dirname,
           '../src/node/snowpack/plugins/bundler/SSnowpackBundlerPlugin'
         )}`,
-        {}
+        {
+          input: '[build]/dist/js/index.js',
+          output: [
+            {
+              format: 'iife',
+              plugins: [],
+              compact: false,
+              sourcemap: true,
+              file: '[build]/js/index.js'
+            },
+            {
+              format: 'iife',
+              plugins: [__terser()],
+              compact: true,
+              sourcemap: true,
+              file: '[build]/js/index.min.js'
+            }
+          ]
+        }
       ]
-      // [
-      //   `${__path.resolve(
-      //     __dirname
-      //   )}/../node_modules/snowpack-plugin-rollup-bundle`,
-      //   {
-      //     emitHtmlFiles: false,
-      //     preserveSourceFiles: false,
-      //     // equivalent to inputOptions.input from Rollup
-      //     entrypoints: {
-      //       index: 'build/dist/js/index.js'
-      //     },
-      //     extendConfig: (config) => {
-      //       // https://rollupjs.org/guide/en/#outputoptions-object
-      //       // config.outputOptions = [
-      //       //   {
-      //       //     dir: 'build',
-      //       //     // file: 'index.js',
-      //       //     format: 'iife'
-      //       //   }
-      //       //   // {
-      //       //   //   dir: 'build',
-      //       //   //   // file: 'index.min.js',
-      //       //   //   format: 'iife'
-      //       //   //   // plugins: [require('rollup-plugin-terser').terser()]
-      //       //   // }
-      //       // ];
-      //       console.log(config.outputOptions);
-      //       // https://rollupjs.org/guide/en/#inputoptions-object
-      //       // config.inputOptions = { ... }
-      //       return config;
-      //     }
-      //   }
-      // ]
     ]
   },
   devSpecific: {

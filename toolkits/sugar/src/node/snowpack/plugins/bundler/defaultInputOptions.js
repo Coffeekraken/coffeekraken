@@ -1,4 +1,4 @@
-const __resolve = require('@rollup/plugin-node-resolve');
+const __resolve = require('@rollup/plugin-node-resolve').nodeResolve;
 const __commonjs = require('@rollup/plugin-commonjs');
 const __styles = require('rollup-plugin-styles');
 const __url = require('@rollup/plugin-url');
@@ -6,9 +6,6 @@ const __path = require('path');
 
 module.exports = function defaultInputOptions(buildDirectory, tmpDir) {
   return {
-    // input: {
-    //   index: 'dist/js/index.js'
-    // },
     plugins: [
       __resolve({ browser: true }),
       __styles({

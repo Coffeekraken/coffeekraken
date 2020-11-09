@@ -22,6 +22,6 @@ module.exports = {
      * @since           2.0.0
      * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: `${__packageRoot()}/.cache`
+    rootDir: `${__packageRoot()}/.dev/cache`
   }
 };

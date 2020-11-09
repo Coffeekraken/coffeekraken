@@ -109,7 +109,9 @@ export default class SSugarUiWebComponent extends __SLitHtmlWebComponent() {
                     }
                     <p class="${this.selector(
                       'list-item-title'
-                    )}"><span class="${this.selector('list-item-extension')}">${
+                    )}"><span class="${this.selector(
+                  'list-item-extension'
+                )}" extension="${itemObj.extension}">${
                   itemObj.extension
                 }</span> ${this.highlightFilter(itemObj.title)}</p>
                     <p class="${this.selector(
@@ -136,9 +138,7 @@ export default class SSugarUiWebComponent extends __SLitHtmlWebComponent() {
       // put focus in the field
       this.$nav.focus();
     });
-    console.log('INIT');
     __hotkey('escape').on('press', (e) => {
-      console.log(this._navigationStack);
       if (this._navigationStack.length <= 1) {
         this.$nav.escape();
         return;

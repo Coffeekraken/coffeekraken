@@ -446,5 +446,54 @@ module.exports = {
       800: '-darken 30%',
       900: '-darken 40%'
     }
+  },
+
+  /**
+   * @name                extension
+   * @namespace           config.colors
+   * @type                Color
+   * @default             #2b3438
+   *
+   * Specify the <primary>extension</primary> color value and modifiers.
+   * The color object format has to follow these guidelines:
+   * - color (#2b3438) {Color}: Specify the default color
+   * - modifiers ({}) (Object): Specify the modifiers available for this color
+   *
+   * @modifier      50      -lighten 45%
+   * @modifier      100      -lighten 40%
+   * @modifier      200      -lighten 30%
+   * @modifier      300      -lighten 20%
+   * @modifier      400      -lighten 10%
+   * @modifier      500      -lighten 0%
+   * @modifier      600      -darken 10%
+   * @modifier      700      -darken 20%
+   * @modifier      800      -darken 30%
+   * @modifier      900      -darken 40%
+   *
+   * @since             2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  extension: {
+    color: 'primary',
+    modifiers: {
+      blade: '#ff2d20',
+      php: '#8892BF',
+      js: '#f7df1e',
+      node: '#68A063',
+      css: '#498FE1',
+      scss: '#CF649A',
+      sass: '#CF649A',
+      json: '#000000',
+      jpg: '#B2C0E1',
+      jpeg: '#B2C0E1',
+      pdf: '#E7786E',
+      doc: '#60D7FD',
+      psd: '#F9D659',
+      mp3: '#E98C61',
+      png: '#C29DFB',
+      aac: '#B1C5C9',
+      zip: '#9CC04E',
+      dmg: '#E36E4B'
+    }
   }
 };

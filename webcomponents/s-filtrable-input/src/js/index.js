@@ -9,28 +9,6 @@ import __SRequest from '@coffeekraken/sugar/js/http/SRequest';
 import __SLitHtmlWebComponent from '@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent';
 import __SWebComponent from '@coffeekraken/sugar/js/webcomponent/SWebComponent';
 
-// __on('s-filtrable-input.attach', async (e) => {
-//   const docMapRequest = new __SRequest({
-//     url: 'docMap',
-//     method: 'GET',
-//     data: {}
-//   });
-//   const docMapJson = await docMapRequest.send();
-
-//   const itemsArray = Object.keys(docMapJson.data).map((key) => {
-//     const itemObj = docMapJson.data[key];
-//     return {
-//       title: itemObj.namespace + '.' + itemObj.name,
-//       description: itemObj.description
-//     };
-//   });
-
-//   e.target.prop('items', itemsArray);
-// });
-// __on('s-filtrable-input.validate', (selectedItem) => {
-//   console.log('SELET', selectedItem);
-// });
-
 class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
   extends: HTMLInputElement,
   name: 'SFiltrableInput'
@@ -66,6 +44,10 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
     closeOnSelectTimeout: {
       type: 'Integer',
       default: 200
+    },
+    preselectFirst: {
+      type: 'Boolean',
+      default: true
     },
     maxDisplayItems: {
       type: 'Integer',
@@ -242,13 +224,16 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
 
       let filterTimeout;
       this.addEventListener('input', (e) => {
-        console.log('IN2');
         clearTimeout(filterTimeout);
         if (this.props.loading) return;
         filterTimeout = setTimeout(async () => {
           this.props.loading = true;
           this._maxDisplayItems = this.props.maxDisplayItems;
-          this._preselectedItemIdx = -1;
+          if (this.props.preselectFirst) {
+            this._preselectedItemIdx = 0;
+          } else {
+            this._preselectedItemIdx = -1;
+          }
           this._selectedItemIdx = -1;
           this._filterString = e.srcElement.value;
           const newItemsArray = await this._settings.filter.function(

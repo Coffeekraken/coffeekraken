@@ -2,19 +2,22 @@ const __path = require('path');
 const __terser = require('rollup-plugin-terser').terser;
 
 module.exports = function defaultOutputOptions(buildDirectory) {
-  return {
-    format: 'es',
-    plugins: [__terser()],
-    manualChunks: (id) => {
-      if (id.includes('web_modules')) {
-        return __path.parse(id).name;
-      }
+  return [
+    {
+      format: 'iife',
+      plugins: [],
+      compact: false,
+      sourcemap: true,
+      file: '[name].js'
+      // dir: buildDirectory
     },
-    assetFileNames: 'css/[name]-[hash].[ext]',
-    chunkFileNames: 'chunks/[name]-[hash].chunk.js',
-    compact: true,
-    sourcemap: true,
-    entryFileNames: '[name]-[hash].js',
-    dir: buildDirectory
-  };
+    {
+      format: 'iife',
+      plugins: [__terser()],
+      compact: true,
+      sourcemap: true,
+      file: '[name].min.js'
+      // dir: buildDirectory
+    }
+  ];
 };

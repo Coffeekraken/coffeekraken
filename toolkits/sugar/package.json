@@ -18,7 +18,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest --silent",
-    "build.js": "rm -rf dist && babel src/js -d ./js --copy-files --config-file ./.sugar-default/babel.config.js -w --ignore 'src/**/*.spec.js','src/**/*.test.js'"
+    "build.js": "rm -rf dist && babel src/js -d ./js --copy-files --config-file ./dev/sugar.babel.config.js -w --ignore 'src/**/*.spec.js','src/**/*.test.js'"
   },
   "dependencies": {
     "@babel/cli": "^7.12.1",
@@ -43,6 +43,7 @@
     "@snowpack/plugin-babel": "^2.1.4",
     "@snowpack/plugin-dotenv": "^2.0.4",
     "@snowpack/plugin-postcss": "^1.0.7",
+    "@snowpack/plugin-run-script": "^2.2.0",
     "@snowpack/plugin-sass": "^1.1.1",
     "@snowpack/plugin-webpack": "^2.1.1",
     "@std/esm": "^0.26.0",
@@ -67,6 +68,7 @@
     "chalk": "^4.1.0",
     "check-types": "^11.1.2",
     "chokidar": "^3.4.3",
+    "chokidar-cli": "^2.1.0",
     "class-mixins": "^0.1.2",
     "clean-text-utils": "^1.1.17",
     "clear": "^0.1.0",
@@ -186,6 +188,7 @@
     "node-machine-id": "^1.1.12",
     "node-notifier": "^8.0.0",
     "node-sass": "^5.0.0",
+    "node-sass-chokidar": "^1.5.0",
     "node-sass-glob-importer": "^5.3.2",
     "nodemailer": "^6.4.14",
     "object-diff": "0.0.4",

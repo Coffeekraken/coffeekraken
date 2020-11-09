@@ -41,20 +41,24 @@ module.exports = function SSnowpackNodeModulesWatcherPlugin(
         console.log(`Mark changed: ${path}`);
         clearTimeout(INSTALL_TIMEOUT);
         INSTALL_TIMEOUT = setTimeout(() => {
-          __childProcess.spawn(
+          __childProcess.exec(
             `snowpack install --config ${__path.resolve(
               __packageRoot(),
               '../sugar/snowpack.config.js'
             )} --reload --polyfill-node`,
-            [],
             {
               cwd: __packageRoot(),
               env: {
                 ...process.env,
                 SNOWPACK_IS_INSTALL: true
               },
-              stdio: 'inherit',
+              // stdio: 'inherit',
               shell: true
+            },
+            (error, stdout, stderr) => {
+              console.log(error);
+              console.log(stdout);
+              console.log(stderr);
             }
           );
         }, 1000);

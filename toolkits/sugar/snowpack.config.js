@@ -32,8 +32,8 @@ delete finalConfig.devSpecific;
 delete finalConfig.buildSpecific;
 delete finalConfig.installSpecific;
 
-if (__isChildProcess()) {
-  console.log(finalConfig.installOptions.rollup.plugins);
-  throw 'coco';
-}
+// if (__isChildProcess()) {
+console.log(finalConfig.installOptions.rollup.plugins);
+// throw 'coco';
+// }
 module.exports = finalConfig;

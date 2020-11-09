@@ -7,29 +7,43 @@ module.exports = function SSnowpackNodeModulesWatcherPlugin(
 ) {
   return {
     name: 'SSnowpackNodeModulesWatcherPlugin',
-    resolve: {
-      input: ['.js'],
-      output: ['.js']
-    },
+    // resolve: {
+    //   input: ['.js'],
+    //   output: ['.js']
+    // },
     config(config) {
-      //   const watcher = __chokidar.watch(
-      //     `${__packageRoot()}/node_modules/**/*.js`,
-      //     {
-      //       ignored: /(^|[\/\\])\../, // ignore dotfiles
-      //       persistent: true
-      //     }
-      //   );
-      //   watcher.on('change', (path) => {
-      //     this.markChanged(path);
-      //     console.log(`Updated file: ${path.replace(`${__packageRoot()}/`, '')}`);
-      //   });
-    },
+      const watcher = __chokidar.watch(
+        [
+          `${__packageRoot()}/node_modules/@coffeekraken/sugar/js/**/*.js`,
+          `${__packageRoot()}/node_modules/@coffeekraken/sugar/node/**/*.js`
+        ],
+        {
+          ignored: /(^|[\/\\])\../, // ignore dotfiles
+          persistent: true
+        }
+      );
+      watcher.on('change', (path) => {
+        const parts = path.split('@coffeekraken/');
+        path =
+          '@coffeekraken/' + parts.pop().replace('.js', '').replace('/src', '');
+
+        console.log(`Mark changed: ${path}`);
+        this.markChanged(
+          '/web_modules/@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent.js'
+        );
+        this.markChanged(
+          '/web_modules/@coffeekraken/sugar/js/webcomponent/SWebComponent.js'
+        );
+        // this.markChanged(`${path}`);
+        // this.markChanged(`./${path}.js`);
+      });
+    }
     // onChange({ filePath }) {
     //   console.log('CHANGFED', filePath);
     // }
-    async load({ filePath, isDev }) {
-      console.log(filePath);
-      return filePath;
-    }
+    // async load({ filePath, isDev }) {
+    //   console.log(filePath);
+    //   return filePath;
+    // }
   };
 };

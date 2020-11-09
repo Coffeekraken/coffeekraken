@@ -37,7 +37,7 @@ const basePlugins = [
 ];
 
 const config = {
-  exclude: [__path.resolve('src/scss/**/[_]*.scss')],
+  // exclude: [__path.resolve('src/scss/**/[_]*.scss'), '!node_modules/**'],
   mount: {
     'node_modules/@coffeekraken/sugar/src/html': {
       url: '/',

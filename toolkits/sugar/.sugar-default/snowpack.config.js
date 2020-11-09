@@ -3,6 +3,19 @@ const __packageRoot = require('../src/node/path/packageRoot');
 const __ipAddress = require('../src/node/network/ipAddress');
 const __terser = require('rollup-plugin-terser').terser;
 
+const baseRollupPlugins = [
+  require(`${__path.resolve(
+    __dirname
+  )}/../node_modules/rollup-plugin-scss/index.cjs`)({
+    output: '.dev/temp/js.css',
+    cacheLocation: '.dev/cache/sass',
+    includePaths: [
+      __path.resolve(__packageRoot(), 'node_modules'),
+      __path.resolve(__dirname, '../node_modules')
+    ]
+  })
+];
+
 const basePlugins = [
   // [
   //   `${__path.resolve(__dirname)}/../node_modules/@snowpack/plugin-run-script`,
@@ -56,17 +69,11 @@ const config = {
   installOptions: {
     dest: '.dev/web_modules',
     rollup: {
-      plugins: [
-        require('rollup-plugin-scss')({
-          output: '.dev/temp/js.css',
-          cacheLocation: '.dev/cache/sass',
-          includePaths: [
-            __path.resolve(__packageRoot(), 'node_modules'),
-            __path.resolve(__dirname, 'node_modules')
-          ]
-        })
-      ]
+      plugins: [...baseRollupPlugins]
     }
+  },
+  installSpecific: {
+    plugins: [...basePlugins]
   },
   buildSpecific: {
     buildOptions: {

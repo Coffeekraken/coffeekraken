@@ -1,5 +1,9 @@
 const __chokidar = require('chokidar');
 const __packageRoot = require('../../../path/packageRoot');
+const __childProcess = require('child_process');
+const __path = require('path');
+
+let INSTALL_TIMEOUT;
 
 module.exports = function SSnowpackNodeModulesWatcherPlugin(
   snowpackConfig,
@@ -27,13 +31,39 @@ module.exports = function SSnowpackNodeModulesWatcherPlugin(
         path =
           '@coffeekraken/' + parts.pop().replace('.js', '').replace('/src', '');
 
+        console.log(
+          'ddd',
+          `snowpack install --config ${__path.resolve(
+            __packageRoot(),
+            '../sugar/snowpack.config.js'
+          )} --reload --polyfill-node`
+        );
         console.log(`Mark changed: ${path}`);
-        this.markChanged(
-          '/web_modules/@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent.js'
-        );
-        this.markChanged(
-          '/web_modules/@coffeekraken/sugar/js/webcomponent/SWebComponent.js'
-        );
+        clearTimeout(INSTALL_TIMEOUT);
+        INSTALL_TIMEOUT = setTimeout(() => {
+          __childProcess.spawn(
+            `snowpack install --config ${__path.resolve(
+              __packageRoot(),
+              '../sugar/snowpack.config.js'
+            )} --reload --polyfill-node`,
+            [],
+            {
+              cwd: __packageRoot(),
+              env: {
+                ...process.env,
+                SNOWPACK_IS_INSTALL: true
+              },
+              stdio: 'inherit',
+              shell: true
+            }
+          );
+        }, 1000);
+        // this.markChanged(
+        //   '/web_modules/@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent.js'
+        // );
+        // this.markChanged(
+        //   '/web_modules/@coffeekraken/sugar/js/webcomponent/SWebComponent.js'
+        // );
         // this.markChanged(`${path}`);
         // this.markChanged(`./${path}.js`);
       });

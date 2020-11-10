@@ -1,4 +1,5 @@
 const __fs = require('fs');
+const __deepMerge = require('../object/deepMerge');
 
 /**
  * @name            directory
@@ -19,6 +20,21 @@ const __fs = require('fs');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function isDirectory(path) {
-  return __fs.existsSync(path) && __fs.lstatSync(path).isDirectory();
+module.exports = function isDirectory(path, settings = {}) {
+  settings = __deepMerge(
+    {
+      symlink: true
+    },
+    settings
+  );
+
+  let isMatching = __fs.existsSync(path);
+  if (!isMatching) return false;
+  if (settings.symlink && __fs.lstatSync(path).isSymbolicLink()) {
+    const realPath = __fs.realpathSync(path);
+    isMatching = isMatching && __fs.lstatSync(realPath).isDirectory();
+  } else {
+    isMatching = isMatching && __fs.lstatSync(path).isDirectory();
+  }
+  return isMatching;
 };

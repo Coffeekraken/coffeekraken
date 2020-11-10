@@ -1,6 +1,6 @@
 import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
 import __on from '@coffeekraken/sugar/js/event/on';
-import '../scss/_bare.scss';
+
 import __clone from '@coffeekraken/sugar/js/object/clone';
 import __throttle from '@coffeekraken/sugar/js/function/throttle';
 import __nodeIndex from '@coffeekraken/sugar/js/dom/nodeIndex';
@@ -341,7 +341,7 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
    */
   unselect() {
     this._selectedItemIdx = -1;
-    this._preselectedItemIdx = -1;
+    // this._preselectedItemIdx = -1;
   }
 
   /**
@@ -534,14 +534,14 @@ class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
       const newItems = this._originalItems.filter((item) => {
         for (const idx in this._settings.filter.properties) {
           const prop = this._settings.filter.properties[idx];
+          console.log(prop, item);
           if (!item[prop] || typeof item[prop] !== 'string') continue;
           const reg = new RegExp(filterString, 'gi');
-          if (filterString.match(reg)) return true;
+          if (item[prop].match(reg)) return true;
           // if (item[prop].includes(filterString)) return true;
         }
         return false;
       });
-
       // return the new items
       resolve(newItems);
     });

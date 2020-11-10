@@ -6,8 +6,10 @@ module.exports = {
       '@babel/preset-env',
       {
         targets: {
-          esmodules: true
+          esmodules: true,
+          node: 'current'
         }
+        // modules: false
       }
     ]
   ],
@@ -30,11 +32,11 @@ module.exports = {
     ),
     __path.resolve(
       __dirname,
-      '../node_modules/@babel/plugin-transform-modules-commonjs'
+      '../node_modules/@babel/plugin-transform-classes'
     ),
     __path.resolve(
       __dirname,
-      '../node_modules/@babel/plugin-transform-classes'
+      '../node_modules/@babel/plugin-syntax-dynamic-import'
     ),
     [
       __path.resolve(

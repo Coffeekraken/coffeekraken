@@ -2,8 +2,10 @@ const __path = require('path');
 const __packageRoot = require('../src/node/path/packageRoot');
 const __ipAddress = require('../src/node/network/ipAddress');
 const __terser = require('rollup-plugin-terser').terser;
+const __nodeResolve = require('@rollup/plugin-node-resolve').nodeResolve;
 
 const baseRollupPlugins = [
+  __nodeResolve(),
   require(`${__path.resolve(
     __dirname
   )}/../node_modules/rollup-plugin-scss/index.cjs`)({
@@ -22,15 +24,28 @@ const basePlugins = [
   //   {
   //     cmd: `${__path.resolve(
   //       __dirname
-  //     )}/../node_modules/chokidar-cli/index.js "node_modules/@coffeekraken/**/*.js" -c "echo 'plop'" --silent --follow-symlinks`
+  //     )}/../node_modules/chokidar-cli/index.js "node_modules/@coffeekraken/sugar/js/**/*.js" -c "snowpack install --config ${__path.resolve(
+  //       __packageRoot(__dirname),
+  //       'snowpack.config.js'
+  //     )} --reload --polyfill-node" --silent --follow-symlinks`
   //   }
+  // ],
+  // [
+  //   `${__path.resolve(
+  //     __dirname,
+  //     '../src/node/snowpack/plugins/nodeModulesWatcher/SSnowpackNodeModulesWatcherPlugin'
+  //   )}`,
+  //   {}
   // ],
   [
     `${__path.resolve(
-      __dirname,
-      '../src/node/snowpack/plugins/nodeModulesWatcher/SSnowpackNodeModulesWatcherPlugin'
-    )}`,
-    {}
+      __dirname
+    )}/../src/node/snowpack/plugins/resolveAlias/SSnowpackResolveAliasPlugin`,
+    {
+      extension: ['.js'],
+      devPath: 'src/js',
+      noWarning: true
+    }
   ],
   [
     `${__path.resolve(__dirname)}/../src/node/snowpack/SSnowpackSettingsPlugin`,
@@ -57,6 +72,11 @@ const config = {
       static: true,
       resolve: false
     },
+    node_modules: {
+      url: '/node_modules',
+      static: false,
+      resolve: true
+    },
     '.dev/temp': '/temp',
     src: '/dist'
   },
@@ -71,6 +91,9 @@ const config = {
     rollup: {
       plugins: [...baseRollupPlugins]
     }
+  },
+  alias: {
+    '@coffeekraken': './node_modules/@coffeekraken'
   },
   installSpecific: {
     plugins: [...basePlugins]

@@ -1,4 +1,4 @@
-const __validateValue = require('../../../../js/validation/value/validateValue');
+const __validateValue = require('../_js/validation/value/validateValue');
 const __isPath = require('../../fs/isPath');
 
 /**

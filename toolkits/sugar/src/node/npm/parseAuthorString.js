@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.npm
- * @src               ../../../js/npm/parseAuthorString.js
+ * @src               ../_js/npm/parseAuthorString.js
  */
-module.exports = require('../../../js/npm/parseAuthorString');
+module.exports = require('../_js/npm/parseAuthorString');

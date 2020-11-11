@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.cli
- * @src             ../../../js/cli/argsToString.js
+ * @src             ../_js/cli/argsToString.js
  */
-module.exports = require('../../../js/cli/argsToString');
+module.exports = require('../_js/cli/argsToString');

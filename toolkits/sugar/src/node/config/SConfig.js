@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.config
- * @src             ../../../js/config/SConfig.js
+ * @src             ../_js/config/SConfig.js
  */
-module.exports = require('../../../js/config/SConfig');
+module.exports = require('../_js/config/SConfig');

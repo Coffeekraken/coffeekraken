@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.is
- * @src               ../../../js/is/samsungBrowser.js
+ * @src               ../_js/is/samsungBrowser.js
  */
-module.exports = require('../../../js/is/samsungBrowser');
+module.exports = require('../_js/is/samsungBrowser');

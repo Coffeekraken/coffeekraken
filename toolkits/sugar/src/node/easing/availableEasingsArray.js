@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.easing
- * @src             ../../../js/easing/availableEasingsArray.js
+ * @src             ../_js/easing/availableEasingsArray.js
  */
-module.exports = require('../../../js/easing/availableEasingsArray');
+module.exports = require('../_js/easing/availableEasingsArray');

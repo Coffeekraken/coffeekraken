@@ -2,7 +2,7 @@ const __replaceTags = require('../html/replaceTags');
 const __sugarConfig = require('../config/sugar');
 const __upperFirst = require('../string/upperFirst');
 const __chalk = require('chalk');
-const __tagsMap = require('../../../js/console/parseHtml').tagsMap;
+const __tagsMap = require('../_js/console/parseHtml').tagsMap;
 __chalk.level = 3;
 
 // TODO tests

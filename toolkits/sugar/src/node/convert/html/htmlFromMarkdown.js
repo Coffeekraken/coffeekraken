@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.convert
- * @src             ../../../js/convert/html/htmlFromMarkdown.js
+ * @src             ../../_js/convert/html/htmlFromMarkdown.js
  */
-module.exports = require('../../../js/convert/html/htmlFromMarkdown');
+module.exports = require('../../_js/convert/html/htmlFromMarkdown');

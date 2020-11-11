@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/autoCast.js
+ * @src             ../_js/string/autoCast.js
  */
-module.exports = require('../../../js/string/autoCast');
+module.exports = require('../_js/string/autoCast');

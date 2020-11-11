@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/flatten.js
+ * @src             ../_js/object/flatten.js
  */
-module.exports = require('../../../js/object/flatten');
+module.exports = require('../_js/object/flatten');

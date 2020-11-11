@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.is
- * @src               ../../../js/is/ucBrowser.js
+ * @src               ../_js/is/ucBrowser.js
  */
-module.exports = require('../../../js/is/ucBrowser');
+module.exports = require('../_js/is/ucBrowser');

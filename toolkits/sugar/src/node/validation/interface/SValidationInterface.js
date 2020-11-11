@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.validation.interface
- * @src             ../../../js/validation/interface/SValidationInterface
+ * @src             ../../_js/validation/interface/SValidationInterface
  */
-module.exports = require('../../../../js/validation/interface/SValidationInterface');
+module.exports = require('../../_js/validation/interface/SValidationInterface');

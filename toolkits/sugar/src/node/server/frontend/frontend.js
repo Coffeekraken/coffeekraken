@@ -9,6 +9,7 @@ const __trimLines = require('../../string/trimLines');
 const __SError = require('../../error/SError');
 const __STemplate = require('../../template/STemplate');
 const __deepMap = require('../../object/deepMap');
+const __extension = require('../../fs/extension');
 
 /**
  * @name                express
@@ -63,76 +64,94 @@ module.exports = (args = {}) => {
 
     const handlerFn = require(handlerSettings.handler);
 
-    server.get(
-      [`${handlerSettings.slug}/*`, `${handlerSettings.slug}`],
-      async (req, res) => {
-        const handlerPromise = handlerFn(req, server, handlerSettings);
-        __SPromise.pipe(handlerPromise, promise);
+    let method = handlerSettings.method || 'get',
+      slug = handlerSettings.slug || '*',
+      extension = handlerSettings.extension
+        ? Array.isArray(handlerSettings.extension)
+          ? Array.isArray(handlerSettings.extension)
+          : [handlerSettings.extension]
+        : null;
 
-        response = await handlerPromise;
+    if (slug !== '*') {
+      slug = [`${slug}/*`, `${slug}`];
+    }
 
-        // handle response
-        let content = response.content || null;
-        let code = response.code || 200;
-        let view = response.view || 'pages.404';
-        let data = response.data || {};
-        let title = response.title || 'Page not found';
-        let type = response.type || 'text/html';
+    server[method](slug, async (req, res, next) => {
+      const reqPathExtension = __extension(req.path);
 
-        let result;
-        if (data && data.body && data.body.includes('<html>')) {
-          result = data.body;
-        } else {
-          switch (type.toLowerCase()) {
-            case 'application/json':
-              result = data;
-              break;
-            case 'text/html':
-              data = {
-                ...res.templateData,
-                title,
-                type,
-                ...data
-              };
-              const settings = {
-                rootDir: [
-                  __sugarConfig('views.rootDir'),
-                  // __path.resolve(__dirname, 'views'),
-                  __path.resolve(__dirname, '../../../php/views/blade')
-                ]
-              };
-
-              try {
-                const templateInstance = new __STemplate(view, settings);
-                result = await templateInstance.render(data, settings);
-              } catch (e) {
-                const templateInstance = new __STemplate('pages.501', settings);
-                code = 501;
-                result = await templateInstance.render(
-                  {
-                    ...data,
-                    body: e
-                  },
-                  settings
-                );
-              }
-              break;
-            default:
-              const mime = __mimeTypes.contentType(type);
-              result = data;
-              console.log(mime);
-              res.type(mime);
-              break;
-          }
+      if (extension) {
+        if (
+          extension.indexOf(reqPathExtension) === -1 &&
+          extension.indexOf('.' + reqPathExtension) === -1
+        ) {
+          return next();
         }
-
-        // set the code
-        res.status(code);
-
-        // send the result to the client
-        res.send(result);
       }
-    );
+
+      const handlerPromise = handlerFn(req, server, handlerSettings);
+      __SPromise.pipe(handlerPromise, promise);
+
+      response = await handlerPromise;
+
+      // handle response
+      let code = response.code || 200;
+      let view = response.view || 'pages.404';
+      let data = response.data || {};
+      let title = response.title || 'Page not found';
+      let type = response.type || 'text/html';
+
+      let result;
+      if (data && data.body && data.body.includes('<html>')) {
+        result = data.body;
+      } else {
+        switch (type.toLowerCase()) {
+          case 'application/json':
+            result = data;
+            break;
+          case 'text/html':
+            data = {
+              ...res.templateData,
+              title,
+              type,
+              ...data
+            };
+            const settings = {
+              rootDir: [
+                __sugarConfig('views.rootDir'),
+                // __path.resolve(__dirname, 'views'),
+                __path.resolve(__dirname, '../../../php/views/blade')
+              ]
+            };
+
+            try {
+              const templateInstance = new __STemplate(view, settings);
+              result = await templateInstance.render(data, settings);
+            } catch (e) {
+              const templateInstance = new __STemplate('pages.501', settings);
+              code = 501;
+              result = await templateInstance.render(
+                {
+                  ...data,
+                  body: e
+                },
+                settings
+              );
+            }
+            break;
+          default:
+            const mime = __mimeTypes.contentType(type);
+            result = data;
+            res.type(mime);
+            break;
+        }
+      }
+
+      // set the code
+      res.status(code);
+
+      // send the result to the client
+      res.send(result);
+    });
   });
 
   server

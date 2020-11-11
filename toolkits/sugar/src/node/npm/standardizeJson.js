@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.npm
- * @src               ../../../js/npm/standardizeJson.js
+ * @src               ../_js/npm/standardizeJson.js
  */
-module.exports = require('../../../js/npm/standardizeJson');
+module.exports = require('../_js/npm/standardizeJson');

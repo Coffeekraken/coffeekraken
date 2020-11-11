@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/toString.js
+ * @src             ../_js/string/toString.js
  */
-module.exports = require('../../../js/string/toString');
+module.exports = require('../_js/string/toString');

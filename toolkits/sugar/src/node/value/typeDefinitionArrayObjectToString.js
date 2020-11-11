@@ -1,6 +1,6 @@
 /**
  * @namespace           sugar.node.value
- * @src             ../../../js/value/typeDefinitionArrayObjectToString.js
+ * @src             ../_js/value/typeDefinitionArrayObjectToString.js
  * @todo            tests
  */
-module.exports = require('../../../js/value/typeDefinitionArrayObjectToString');
+module.exports = require('../_js/value/typeDefinitionArrayObjectToString');

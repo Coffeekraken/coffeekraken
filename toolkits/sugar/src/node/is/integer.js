@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.is
- * @src               ../../../js/is/integer.js
+ * @src               ../_js/is/integer.js
  */
-module.exports = require('../../../js/is/integer');
+module.exports = require('../_js/is/integer');

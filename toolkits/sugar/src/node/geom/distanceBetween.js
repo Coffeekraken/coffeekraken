@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.geom
- * @src             ../../../js/geom/distanceBetween.js
+ * @src             ../_js/geom/distanceBetween.js
  */
-module.exports = require('../../../js/geom/distanceBetween');
+module.exports = require('../_js/geom/distanceBetween');

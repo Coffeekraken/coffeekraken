@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/propertyProxy.js
+ * @src             ../_js/object/propertyProxy.js
  */
-module.exports = require('../../../js/object/propertyProxy');
+module.exports = require('../_js/object/propertyProxy');

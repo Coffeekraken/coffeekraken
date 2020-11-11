@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.time
- * @src             ../../../js/time/convert.js
+ * @src             ../_js/time/convert.js
  */
-module.exports = require('../../../js/time/convert');
+module.exports = require('../_js/time/convert');

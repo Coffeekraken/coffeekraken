@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/splitEvery.js
+ * @src             ../_js/string/splitEvery.js
  */
-module.exports = require('../../../js/string/splitEvery');
+module.exports = require('../_js/string/splitEvery');

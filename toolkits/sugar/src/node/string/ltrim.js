@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/ltrim.js
+ * @src             ../_js/string/ltrim.js
  */
-module.exports = require('../../../js/string/ltrim');
+module.exports = require('../_js/string/ltrim');

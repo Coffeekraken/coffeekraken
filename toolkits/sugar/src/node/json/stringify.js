@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.json
- * @src               ../../../js/json/stringify.js
+ * @src               ../_js/json/stringify.js
  */
-module.exports = require('../../../js/json/stringify');
+module.exports = require('../_js/json/stringify');

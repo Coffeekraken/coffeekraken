@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.cli
- * @src             ../../../js/cli/completeArgsObject.js
+ * @src             ../_js/cli/completeArgsObject.js
  */
-module.exports = require('../../../js/cli/completeArgsObject');
+module.exports = require('../_js/cli/completeArgsObject');

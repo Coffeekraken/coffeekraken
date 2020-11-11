@@ -1,2 +1,2 @@
 const __debounce = require('../debounce');
-require('../../../js/function/__tests__/debounce')(__debounce);
+require('../_js/function/__tests__/debounce')(__debounce);

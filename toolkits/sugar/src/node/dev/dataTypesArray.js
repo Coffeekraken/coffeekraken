@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.dev
- * @src             ../../../js/dev/dataTypesArray.js
+ * @src             ../_js/dev/dataTypesArray.js
  */
-module.exports = require('../../../js/dev/dataTypesArray');
+module.exports = require('../_js/dev/dataTypesArray');

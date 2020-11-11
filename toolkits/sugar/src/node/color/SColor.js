@@ -1,9 +1,9 @@
-const __SColor = require('../../../js/color/SColor');
+const __SColor = require('../_js/color/SColor');
 const __sugarConfig = require('../config/sugar');
 
 /**
  * @namespace           sugar.node.color
- * @src             ../../../js/color/SColor.js
+ * @src             ../_js/color/SColor.js
  * @extends         SColor
  */
 module.exports = class SColor extends __SColor {

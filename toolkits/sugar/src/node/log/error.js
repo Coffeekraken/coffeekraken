@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.log
- * @src               ../../../js/log/error.js
+ * @src               ../_js/log/error.js
  */
-module.exports = require('../../../js/log/error');
+module.exports = require('../_js/log/error');

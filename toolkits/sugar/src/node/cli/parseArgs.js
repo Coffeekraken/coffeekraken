@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.cli
- * @src             ../../../js/cli/parseArgs.js
+ * @src             ../_js/cli/parseArgs.js
  */
-module.exports = require('../../../js/cli/parseArgs');
+module.exports = require('../_js/cli/parseArgs');

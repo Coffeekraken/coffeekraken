@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.convert
- * @src             ../../../js/convert/toHtml.js
+ * @src             ../_js/convert/toHtml.js
  */
-module.exports = require('../../../js/convert/toHtml');
+module.exports = require('../_js/convert/toHtml');

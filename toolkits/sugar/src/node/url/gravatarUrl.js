@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.url
- * @src             ../../../js/url/gravatarUrl.js
+ * @src             ../_js/url/gravatarUrl.js
  */
-module.exports = require('../../../js/url/gravatarUrl');
+module.exports = require('../_js/url/gravatarUrl');

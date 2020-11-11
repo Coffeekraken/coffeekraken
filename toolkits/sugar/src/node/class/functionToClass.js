@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.class
- * @src             ../../../js/class/functionToClass.js
+ * @src             ../_js/class/functionToClass.js
  */
-module.exports = require('../../../js/class/functionToClass');
+module.exports = require('../_js/class/functionToClass');

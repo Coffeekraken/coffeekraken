@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.class
- * @src             ../../../js/class/multipleExtends.js
+ * @src             ../_js/class/multipleExtends.js
  */
-module.exports = require('../../../js/class/multipleExtends');
+module.exports = require('../_js/class/multipleExtends');

@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.time
- * @src             ../../../js/time/STimer.js
+ * @src             ../_js/time/STimer.js
  */
-module.exports = require('../../../js/time/STimer');
+module.exports = require('../_js/time/STimer');

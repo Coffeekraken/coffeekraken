@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.core
- * @src             ../../../js/core/activeSpace.js
+ * @src             ../_js/core/activeSpace.js
  */
-module.exports = require('../../../js/core/activeSpace');
+module.exports = require('../_js/core/activeSpace');

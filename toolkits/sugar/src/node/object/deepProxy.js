@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/deepProxy.js
+ * @src             ../_js/object/deepProxy.js
  */
-module.exports = require('../../../js/object/deepProxy');
+module.exports = require('../_js/object/deepProxy');

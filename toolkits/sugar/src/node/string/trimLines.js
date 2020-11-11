@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/trimLines.js
+ * @src             ../_js/string/trimLines.js
  */
-module.exports = require('../../../js/string/trimLines');
+module.exports = require('../_js/string/trimLines');

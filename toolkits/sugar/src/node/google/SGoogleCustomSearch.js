@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.google
- * @src             ../../../js/google/SGoogleCustomSearch.js
+ * @src             ../_js/google/SGoogleCustomSearch.js
  */
-module.exports = require('../../../js/google/SGoogleCustomSearch');
+module.exports = require('../_js/google/SGoogleCustomSearch');

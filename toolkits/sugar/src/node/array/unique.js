@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.array
- * @src             ../../../js/array/unique.js
+ * @src             ../_js/array/unique.js
  */
-module.exports = require('../../../js/array/unique');
+module.exports = require('../_js/array/unique');

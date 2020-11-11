@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/deepMerge.js
+ * @src             ../_js/object/deepMerge.js
  */
-module.exports = require('../../../js/object/deepMerge');
+module.exports = require('../_js/object/deepMerge');

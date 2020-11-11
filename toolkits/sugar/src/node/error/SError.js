@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.error
- * @src             ../../../js/error/SError.js
+ * @src             ../_js/error/SError.js
  */
-module.exports = require('../../../js/error/SError');
+module.exports = require('../_js/error/SError');

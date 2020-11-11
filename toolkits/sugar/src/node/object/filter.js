@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/filter.js
+ * @src             ../_js/object/filter.js
  */
-module.exports = require('../../../js/object/filter');
+module.exports = require('../_js/object/filter');

@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.class
- * @src             ../../../js/class/methodExists.js
+ * @src             ../_js/class/methodExists.js
  */
-module.exports = require('../../../js/class/methodExists');
+module.exports = require('../_js/class/methodExists');

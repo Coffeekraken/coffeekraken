@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/delete.js
+ * @src             ../_js/object/delete.js
  */
-module.exports = require('../../../js/object/delete');
+module.exports = require('../_js/object/delete');

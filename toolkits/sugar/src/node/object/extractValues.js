@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/extractValues.js
+ * @src             ../_js/object/extractValues.js
  */
-module.exports = require('../../../js/object/extractValues');
+module.exports = require('../_js/object/extractValues');

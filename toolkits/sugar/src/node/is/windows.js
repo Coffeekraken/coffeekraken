@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.is
- * @src               ../../../js/is/windows.js
+ * @src               ../_js/is/windows.js
  */
-module.exports = require('../../../js/is/windows');
+module.exports = require('../_js/is/windows');

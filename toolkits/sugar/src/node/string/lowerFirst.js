@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/lowerFirst.js
+ * @src             ../_js/string/lowerFirst.js
  */
-module.exports = require('../../../js/string/lowerFirst');
+module.exports = require('../_js/string/lowerFirst');

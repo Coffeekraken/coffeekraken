@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.array
- * @src             ../../../js/array/asyncForEach.js
+ * @src             ../_js/array/asyncForEach.js
  */
-module.exports = require('../../../js/array/asyncForEach');
+module.exports = require('../_js/array/asyncForEach');

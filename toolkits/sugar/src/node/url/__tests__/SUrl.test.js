@@ -1,2 +1,2 @@
 const __SUrl = require('../SUrl');
-require('../../../js/url/__tests__/SUrl')(__SUrl);
+require('../_js/url/__tests__/SUrl')(__SUrl);

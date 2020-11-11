@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/diff.js
+ * @src             ../_js/object/diff.js
  */
-module.exports = require('../../../js/object/diff');
+module.exports = require('../_js/object/diff');

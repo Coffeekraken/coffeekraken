@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/upperFirst.js
+ * @src             ../_js/string/upperFirst.js
  */
-module.exports = require('../../../js/string/upperFirst');
+module.exports = require('../_js/string/upperFirst');

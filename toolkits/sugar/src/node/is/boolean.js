@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.is
- * @src               ../../../js/is/boolean.js
+ * @src               ../_js/is/boolean.js
  */
-module.exports = require('../../../js/is/boolean');
+module.exports = require('../_js/is/boolean');

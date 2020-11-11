@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.code.splitters.scss
- * @src             ../../../../../js/code/splitters/scss/selectorBlockSplitter.js
+ * @src             ../../../_js/code/splitters/scss/selectorBlockSplitter.js
  */
-module.exports = require('../../../../../js/code/splitters/scss/selectorBlockSplitter');
+module.exports = require('../../../_js/code/splitters/scss/selectorBlockSplitter');

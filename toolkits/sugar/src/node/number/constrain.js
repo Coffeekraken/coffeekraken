@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.number
- * @src               ../../../js/number/constrain.js
+ * @src               ../_js/number/constrain.js
  */
-module.exports = require('../../../js/number/constrain');
+module.exports = require('../_js/number/constrain');

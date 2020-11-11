@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.http
- * @src               ../../../js/http/SRequest.js
+ * @src               ../_js/http/SRequest.js
  */
-module.exports = require('../../../js/http/SRequest');
+module.exports = require('../_js/http/SRequest');

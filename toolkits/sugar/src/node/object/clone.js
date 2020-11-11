@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/clone.js
+ * @src             ../_js/object/clone.js
  */
-module.exports = require('../../../js/object/clone');
+module.exports = require('../_js/object/clone');

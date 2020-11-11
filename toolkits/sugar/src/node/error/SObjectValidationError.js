@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.error
- * @src             ../../../js/error/SObjectValidationError.js
+ * @src             ../_js/error/SObjectValidationError.js
  */
-module.exports = require('../../../js/error/SObjectValidationError');
+module.exports = require('../_js/error/SObjectValidationError');

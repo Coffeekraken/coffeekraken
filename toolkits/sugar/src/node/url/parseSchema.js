@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.url
- * @src             ../../../js/url/parseSchema.js
+ * @src             ../_js/url/parseSchema.js
  */
-module.exports = require('../../../js/url/parseSchema');
+module.exports = require('../_js/url/parseSchema');

@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.is
- * @src               ../../../js/is/ddmmyyyyDate.js
+ * @src               ../_js/is/ddmmyyyyDate.js
  */
-module.exports = require('../../../js/is/ddmmyyyyDate');
+module.exports = require('../_js/is/ddmmyyyyDate');

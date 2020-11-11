@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.is
- * @src               ../../../js/is/mobile.js
+ * @src               ../_js/is/mobile.js
  */
-module.exports = require('../../../js/is/mobile');
+module.exports = require('../_js/is/mobile');

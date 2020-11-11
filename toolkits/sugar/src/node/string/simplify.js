@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/simplify.js
+ * @src             ../_js/string/simplify.js
  */
-module.exports = require('../../../js/string/simplify');
+module.exports = require('../_js/string/simplify');

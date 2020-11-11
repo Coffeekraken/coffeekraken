@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.ascii
- * @src             ../../../js/ascii/sugarHeading.js
+ * @src             ../_js/ascii/sugarHeading.js
  */
-module.exports = require('../../../js/ascii/sugarHeading');
+module.exports = require('../_js/ascii/sugarHeading');

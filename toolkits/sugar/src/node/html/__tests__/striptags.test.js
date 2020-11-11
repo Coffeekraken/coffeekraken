@@ -1,2 +1,2 @@
 const __striptags = require('../striptags');
-require('../../../js/html/__tests__/striptags')(__striptags);
+require('../_js/html/__tests__/striptags')(__striptags);

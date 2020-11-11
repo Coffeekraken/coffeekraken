@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/uniqid.js
+ * @src             ../_js/string/uniqid.js
  */
-module.exports = require('../../../js/string/uniqid');
+module.exports = require('../_js/string/uniqid');

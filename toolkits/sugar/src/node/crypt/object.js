@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.crypt
- * @src             ../../../js/crypt/object.js
+ * @src             ../_js/crypt/object.js
  */
-module.exports = require('../../../js/crypt/object');
+module.exports = require('../_js/crypt/object');

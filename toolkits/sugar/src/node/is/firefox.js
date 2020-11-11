@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.is
- * @src               ../../../js/is/firefox.js
+ * @src               ../_js/is/firefox.js
  */
-module.exports = require('../../../js/is/firefox');
+module.exports = require('../_js/is/firefox');

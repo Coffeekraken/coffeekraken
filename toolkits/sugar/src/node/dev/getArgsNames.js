@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.dev
- * @src             ../../../js/dev/getArgsNames.js
+ * @src             ../_js/dev/getArgsNames.js
  */
-module.exports = require('../../../js/dev/getArgsNames');
+module.exports = require('../_js/dev/getArgsNames');

@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/ensureExists.js
+ * @src             ../_js/object/ensureExists.js
  */
-module.exports = require('../../../js/object/ensureExists');
+module.exports = require('../_js/object/ensureExists');

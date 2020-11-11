@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/crop.js
+ * @src             ../_js/string/crop.js
  */
-module.exports = require('../../../js/string/crop');
+module.exports = require('../_js/string/crop');

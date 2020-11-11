@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/printf.js
+ * @src             ../_js/string/printf.js
  */
-module.exports = require('../../../js/string/printf');
+module.exports = require('../_js/string/printf');

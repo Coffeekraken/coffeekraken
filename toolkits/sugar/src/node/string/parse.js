@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/parse.js
+ * @src             ../_js/string/parse.js
  */
-module.exports = require('../../../js/string/parse');
+module.exports = require('../_js/string/parse');

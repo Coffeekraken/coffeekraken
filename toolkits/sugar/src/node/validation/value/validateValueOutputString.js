@@ -1,6 +1,6 @@
 /**
  * @namespace           sugar.node.validation.value
- * @src             ../../../js/validation/value/validateValueOutputString
+ * @src             ../../_js/validation/value/validateValueOutputString
  * @todo            tests
  */
-module.exports = require('../../../../js/validation/value/validateValueOutputString');
+module.exports = require('../../_js/validation/value/validateValueOutputString');

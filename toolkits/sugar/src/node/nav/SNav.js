@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.nav
- * @src               ../../../js/nav/SNav.js
+ * @src               ../_js/nav/SNav.js
  */
-module.exports = require('../../../js/nav/SNav');
+module.exports = require('../_js/nav/SNav');

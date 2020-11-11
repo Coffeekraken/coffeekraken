@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/countLine.js
+ * @src             ../_js/string/countLine.js
  */
-module.exports = require('../../../js/string/countLine');
+module.exports = require('../_js/string/countLine');

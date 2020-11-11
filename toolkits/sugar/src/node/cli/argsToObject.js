@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.cli
- * @src             ../../../js/cli/argsToObject.js
+ * @src             ../_js/cli/argsToObject.js
  */
-module.exports = require('../../../js/cli/argsToObject');
+module.exports = require('../_js/cli/argsToObject');

@@ -2,8 +2,7 @@ import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';
 import __SDocblockBlock from './SDocblockBlock';
 import __handlebars from 'handlebars';
-import __markdown from './markdown/index';
-import __markdownToHtml from '../convert/html/htmlFromMarkdown';
+// import __markdown from './markdown/index';
 import __isNode from '../is/node';
 import __isPath from '../is/path';
 
@@ -106,7 +105,7 @@ export default class SDocblock {
         },
         filepath: null,
         to: {
-          markdown: __markdown
+          // markdown: __markdown
         }
       },
       settings

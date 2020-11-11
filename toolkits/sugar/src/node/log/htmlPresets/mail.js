@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.log.htmlPresets
- * @src               ../../../../js/log/htmlPresets/mail.js
+ * @src               ../../_js/log/htmlPresets/mail.js
  */
-module.exports = require('../../../../js/log/htmlPresets/mail');
+module.exports = require('../../_js/log/htmlPresets/mail');

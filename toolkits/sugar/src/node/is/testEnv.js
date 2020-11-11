@@ -1,5 +1,5 @@
 /**
  * @namespace       sugar.node.is
- * @src               ../../../js/is/testEnv.js
+ * @src               ../_js/is/testEnv.js
  */
-module.exports = require('../../../js/is/testEnv');
+module.exports = require('../_js/is/testEnv');

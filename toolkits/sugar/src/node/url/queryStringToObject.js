@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.url
- * @src             ../../../js/url/queryStringToObject.js
+ * @src             ../_js/url/queryStringToObject.js
  */
-module.exports = require('../../../js/url/queryStringToObject');
+module.exports = require('../_js/url/queryStringToObject');

@@ -1,5 +1,5 @@
 /**
  * @namespace           noisyProcess.is
- * @src               ../../../js/is/noisyProcess.js
+ * @src               ../_js/is/noisyProcess.js
  */
-module.exports = require('../../../js/is/noisyProcess');
+module.exports = require('../_js/is/noisyProcess');

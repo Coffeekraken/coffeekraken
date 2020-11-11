@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.time
- * @src             ../../../js/time/wait.js
+ * @src             ../_js/time/wait.js
  */
-module.exports = require('../../../js/time/wait');
+module.exports = require('../_js/time/wait');

@@ -1,2 +1,2 @@
 const __error = require('../error');
-require('../../../js/log/__tests__/error')(__error);
+require('../_js/log/__tests__/error')(__error);

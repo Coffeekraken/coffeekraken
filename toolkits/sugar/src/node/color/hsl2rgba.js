@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.color
- * @src             ../../../js/color/hsl2rgba.js
+ * @src             ../_js/color/hsl2rgba.js
  */
-module.exports = require('../../../js/color/hsl2rgba');
+module.exports = require('../_js/color/hsl2rgba');

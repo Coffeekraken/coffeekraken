@@ -22,6 +22,8 @@ exports.default = extension;
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function extension(path) {
+  var lastPart = path.split('/').pop();
+  if (!lastPart.includes('.')) return '';
   return path.split('.').pop();
 }
 

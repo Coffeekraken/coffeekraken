@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.is
- * @src               ../../../js/is/safari.js
+ * @src               ../_js/is/safari.js
  */
-module.exports = require('../../../js/is/safari');
+module.exports = require('../_js/is/safari');

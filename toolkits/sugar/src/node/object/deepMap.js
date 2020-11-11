@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/deepMap.js
+ * @src             ../_js/object/deepMap.js
  */
-module.exports = require('../../../js/object/deepMap');
+module.exports = require('../_js/object/deepMap');

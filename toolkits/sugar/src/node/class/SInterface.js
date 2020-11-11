@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.class
- * @src             ../../../js/class/SInterface.js
+ * @src             ../_js/class/SInterface.js
  */
-module.exports = require('../../../js/class/SInterface');
+module.exports = require('../_js/class/SInterface');

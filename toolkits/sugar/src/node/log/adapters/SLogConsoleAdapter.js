@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.log.adapters
- * @src               ../../../../js/log/adapters/SLogConsoleAdapter.js
+ * @src               ../../_js/log/adapters/SLogConsoleAdapter.js
  */
-module.exports = require('../../../../js/log/adapters/SLogConsoleAdapter');
+module.exports = require('../../_js/log/adapters/SLogConsoleAdapter');

@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.array
- * @src             ../../../js/array/keysLast.js
+ * @src             ../_js/array/keysLast.js
  */
-module.exports = require('../../../js/array/keysLast');
+module.exports = require('../_js/array/keysLast');

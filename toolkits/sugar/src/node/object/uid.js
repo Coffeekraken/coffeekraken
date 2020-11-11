@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/uid.js
+ * @src             ../_js/object/uid.js
  */
-module.exports = require('../../../js/object/uid');
+module.exports = require('../_js/object/uid');

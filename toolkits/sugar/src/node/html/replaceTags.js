@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.html
- * @src             ../../../js/html/replaceTags.js
+ * @src             ../_js/html/replaceTags.js
  */
-module.exports = require('../../../js/html/replaceTags');
+module.exports = require('../_js/html/replaceTags');

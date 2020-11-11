@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/constructorName.js
+ * @src             ../_js/object/constructorName.js
  */
-module.exports = require('../../../js/object/constructorName');
+module.exports = require('../_js/object/constructorName');

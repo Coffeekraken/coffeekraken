@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.convert
- * @src             ../../../js/convert/html/htmlFromDocblocks.js
+ * @src             ../../_js/convert/html/htmlFromDocblocks.js
  */
-module.exports = require('../../../js/convert/html/htmlFromDocblocks');
+module.exports = require('../../_js/convert/html/htmlFromDocblocks');

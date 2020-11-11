@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/dedupe.js
+ * @src             ../_js/string/dedupe.js
  */
-module.exports = require('../../../js/string/dedupe');
+module.exports = require('../_js/string/dedupe');

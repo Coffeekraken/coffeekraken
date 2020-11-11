@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.validation.utils
- * @src             ../../../js/validation/utils/parseTypeDefinitionString
+ * @src             ../../_js/validation/utils/parseTypeDefinitionString
  */
-module.exports = require('../../../../js/validation/utils/parseTypeDefinitionString');
+module.exports = require('../../_js/validation/utils/parseTypeDefinitionString');

@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.easing
- * @src             ../../../js/easing/easeInOutQuart.js
+ * @src             ../_js/easing/easeInOutQuart.js
  */
-module.exports = require('../../../js/easing/easeInOutQuart');
+module.exports = require('../_js/easing/easeInOutQuart');

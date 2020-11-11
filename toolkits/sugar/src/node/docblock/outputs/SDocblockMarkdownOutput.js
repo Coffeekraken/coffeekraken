@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.docblock.outputs
- * @src             ../../../../js/docblock/outputs/SDocblockMarkdownOutput.js
+ * @src             ../../_js/docblock/outputs/SDocblockMarkdownOutput.js
  */
-module.exports = require('../../../../js/docblock/outputs/SDocblockMarkdownOutput');
+module.exports = require('../../_js/docblock/outputs/SDocblockMarkdownOutput');

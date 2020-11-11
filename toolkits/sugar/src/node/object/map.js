@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/map.js
+ * @src             ../_js/object/map.js
  */
-module.exports = require('../../../js/object/map');
+module.exports = require('../_js/object/map');

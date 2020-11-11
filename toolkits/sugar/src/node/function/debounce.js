@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.function
- * @src             ../../../js/function/debounce.js
+ * @src             ../_js/function/debounce.js
  */
-module.exports = require('../../../js/function/debounce');
+module.exports = require('../_js/function/debounce');

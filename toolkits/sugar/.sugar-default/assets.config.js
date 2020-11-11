@@ -9,7 +9,7 @@ module.exports = {
   },
   js: {
     main: {
-      path: '/dist/js/index.js',
+      path: '/src/js/index.js',
       type: 'module'
     }
   }

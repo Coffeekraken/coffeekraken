@@ -1,2 +1,2 @@
 const __filter = require('../filter');
-require('../../../js/object/__tests__/filter')(__filter);
+require('../_js/object/__tests__/filter')(__filter);

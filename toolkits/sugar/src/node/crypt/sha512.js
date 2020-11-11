@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.crypt
- * @src             ../../../js/crypt/sha512.js
+ * @src             ../_js/crypt/sha512.js
  */
-module.exports = require('../../../js/crypt/sha512');
+module.exports = require('../_js/crypt/sha512');

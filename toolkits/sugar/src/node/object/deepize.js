@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/deepize.js
+ * @src             ../_js/object/deepize.js
  */
-module.exports = require('../../../js/object/deepize');
+module.exports = require('../_js/object/deepize');

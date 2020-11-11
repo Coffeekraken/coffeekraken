@@ -15,5 +15,7 @@
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function extension(path) {
+  const lastPart = path.split('/').pop();
+  if (!lastPart.includes('.')) return '';
   return path.split('.').pop();
 }

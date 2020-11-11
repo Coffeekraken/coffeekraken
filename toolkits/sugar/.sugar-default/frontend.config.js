@@ -72,6 +72,30 @@ module.exports = {
   viewsDir: `${__packageRoot()}/src/views`,
 
   middlewares: {
+    resolveExtensionFreePath: {
+      path: `${__dirname}/../src/node/server/frontend/middleware/resolveExtensionFreePath`,
+      settings: {
+        extensions: [
+          'js',
+          'jsx',
+          'json',
+          'ts',
+          'tsx',
+          'mjs',
+          'cjs',
+          'css',
+          'scss',
+          'sass',
+          'jpg',
+          'jpeg',
+          'png',
+          'gif',
+          'svg',
+          'html',
+          'htm'
+        ]
+      }
+    },
     frontspec: {
       path: `${__dirname}/../src/node/server/frontend/middleware/frontspecMiddleware`,
       settings: {}
@@ -136,6 +160,48 @@ module.exports = {
        * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       handler: `${__dirname}/../src/node/server/frontend/handlers/homepage`
+    },
+
+    /**
+     * @name            js
+     * @namespace       config.frontend.handlers
+     * @type            Object
+     *
+     * Handler for .js files
+     *
+     * @since         2.0.0
+     * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    js: {
+      /**
+       * @name          extension
+       * @namespace     config.frontend.handlers.sugar
+       * @type          String
+       * @default       .js
+       *
+       * Specify the url slug to use for this "section"
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      extension: '.js',
+
+      /**
+       * @name            handler
+       * @namespace       config.frontend.handlers.sugar
+       * @type            Function
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: `${__dirname}/../src/node/server/frontend/handlers/js`,
+
+      nodeModulesDir: [
+        'node_modules',
+        'node_modules/@coffeekraken/sugar/node_modules'
+      ]
     },
 
     /**

@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/sort.js
+ * @src             ../_js/object/sort.js
  */
-module.exports = require('../../../js/object/sort');
+module.exports = require('../_js/object/sort');

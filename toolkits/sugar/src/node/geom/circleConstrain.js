@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.geom
- * @src             ../../../js/geom/circleConstrain.js
+ * @src             ../_js/geom/circleConstrain.js
  */
-module.exports = require('../../../js/geom/circleConstrain');
+module.exports = require('../_js/geom/circleConstrain');

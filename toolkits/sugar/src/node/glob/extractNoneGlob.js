@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.glob
- * @src             ../../../js/glob/extractNoneGlob.js
+ * @src             ../_js/glob/extractNoneGlob.js
  */
-module.exports = require('../../../js/glob/extractNoneGlob');
+module.exports = require('../_js/glob/extractNoneGlob');

@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.is
- * @src               ../../../js/is/chrome.js
+ * @src               ../_js/is/chrome.js
  */
-module.exports = require('../../../js/is/chrome');
+module.exports = require('../_js/is/chrome');

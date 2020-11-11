@@ -6,7 +6,7 @@ const __removeSync = require('../../fs/removeSync');
 const __sugarConfig = require('../../config/sugar');
 const __toString = require('../../string/toString');
 
-const __SCacheAdapter = require('../../../../js/cache/adapters/SCacheAdapter');
+const __SCacheAdapter = require('../_js/cache/adapters/SCacheAdapter');
 
 /**
  * @name                                SCacheFsAdapter

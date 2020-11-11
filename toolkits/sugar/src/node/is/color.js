@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.is
- * @src               ../../../js/is/color.js
+ * @src               ../_js/is/color.js
  */
-module.exports = require('../../../js/is/color');
+module.exports = require('../_js/is/color');

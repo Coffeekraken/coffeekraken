@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.object
- * @src             ../../../js/object/set.js
+ * @src             ../_js/object/set.js
  */
-module.exports = require('../../../js/object/set');
+module.exports = require('../_js/object/set');

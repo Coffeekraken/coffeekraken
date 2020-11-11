@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.string
- * @src             ../../../js/string/camelize.js
+ * @src             ../_js/string/camelize.js
  */
-module.exports = require('../../../js/string/camelize');
+module.exports = require('../_js/string/camelize');

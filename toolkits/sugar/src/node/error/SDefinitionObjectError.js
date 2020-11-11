@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.error
- * @src             ../../../js/error/SDefinitionObjectError.js
+ * @src             ../_js/error/SDefinitionObjectError.js
  */
-module.exports = require('../../../js/error/SDefinitionObjectError');
+module.exports = require('../_js/error/SDefinitionObjectError');

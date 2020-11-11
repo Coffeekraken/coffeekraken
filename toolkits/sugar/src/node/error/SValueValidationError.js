@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.error
- * @src             ../../../js/error/SValueValidationError.js
+ * @src             ../_js/error/SValueValidationError.js
  */
-module.exports = require('../../../js/error/SValueValidationError');
+module.exports = require('../_js/error/SValueValidationError');

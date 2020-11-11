@@ -13,10 +13,6 @@ var _SDocblockBlock = _interopRequireDefault(require("./SDocblockBlock"));
 
 var _handlebars = _interopRequireDefault(require("handlebars"));
 
-var _index = _interopRequireDefault(require("./markdown/index"));
-
-var _htmlFromMarkdown = _interopRequireDefault(require("../convert/html/htmlFromMarkdown"));
-
 var _node = _interopRequireDefault(require("../is/node"));
 
 var _path = _interopRequireDefault(require("../is/path"));
@@ -134,8 +130,7 @@ var SDocblock = /*#__PURE__*/function () {
         return res;
       },
       filepath: null,
-      to: {
-        markdown: _index.default
+      to: {// markdown: __markdown
       }
     }, settings); // check if the source is path
 

@@ -1,2 +1,2 @@
 const __SWatch = require('../SWatch');
-require('../../../js/object/__tests__/SWatch')(__SWatch);
+require('../_js/object/__tests__/SWatch')(__SWatch);

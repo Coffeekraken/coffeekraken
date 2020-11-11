@@ -1,5 +1,5 @@
 /**
  * @namespace           sugar.node.is
- * @src               ../../../js/is/opera.js
+ * @src               ../_js/is/opera.js
  */
-module.exports = require('../../../js/is/opera');
+module.exports = require('../_js/is/opera');

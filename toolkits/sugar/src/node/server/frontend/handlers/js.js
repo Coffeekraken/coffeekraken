@@ -22,9 +22,44 @@ const __uniqid = require('../../../string/uniqid');
 const __builtInNodeModules = require('../../../module/buildInNodeModules');
 const { parse } = require('path');
 const __unquote = require('../../../string/unquote');
-const __isBrowser = require('../../../is/browser');
 const __decomment = require('decomment');
-const __browserResolve = require('browser-resolve');
+const __esbuild = require('esbuild');
+
+const rootDir = __sugarConfig('frontend.rootDir');
+
+let exampleOnResolvePlugin = {
+  name: 'example',
+  setup(build) {
+    let path = require('path');
+
+    // Redirect all paths starting with "images/" to "./public/images/"
+    Object.keys(__builtInNodeModules).forEach((path) => {
+      const builtInObj = __builtInNodeModules[path];
+      if (builtInObj.polyfill && builtInObj.polyfill.browser) {
+        build.onResolve({ filter: new RegExp(`^${path}$`) }, (args) => {
+          let resolvedPath = __resolve.sync(builtInObj.polyfill.browser, {
+            basedir: rootDir,
+            moduleDirectory: ['node_modules'],
+            includeCoreModules: false,
+            preserveSymlinks: true,
+            packageFilter: (pkg, dir) => {
+              if (pkg.browser) {
+                if (typeof pkg.browser === 'string') {
+                  pkg.main = pkg.browser;
+                } else if (typeof pkg.browser === 'object') {
+                  pkg.main = pkg.browser[Object.keys(pkg.browser)[0]];
+                }
+              }
+              return pkg;
+            }
+          });
+          return { path: resolvedPath };
+          // return { path: path.join(args.resolveDir, 'public', args.path) };
+        });
+      }
+    });
+  }
+};
 
 /**
  * @name                js
@@ -48,15 +83,43 @@ module.exports = async function js(req, res, settings = {}) {
   let content = 'not found...';
   let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
 
-  const rootDir = __sugarConfig('frontend.rootDir');
   const potentialPath = __path.resolve(rootDir, filePath);
 
   // try to get the file
-  if (__fs.existsSync(potentialPath)) {
-    content = __fs.readFileSync(potentialPath, 'utf8');
-  }
+  // if (__fs.existsSync(potentialPath)) {
+  //   content = __fs.readFileSync(potentialPath, 'utf8');
+  // }
 
-  if (content) {
+  const promise = new __SPromise({
+    id: 'frontendServerJsHandler'
+  });
+
+  const buildRes = __esbuild
+    .build({
+      entryPoints: [filePath],
+      platform: 'browser',
+      bundle: true,
+      logLevel: 'silent',
+      // format: 'esm',
+      mainFields: ['browser', 'main'],
+      write: false,
+      plugins: [exampleOnResolvePlugin]
+      // outfile: 'out.js'
+    })
+    .then((myRes) => {
+      // console.log(myRes);
+      promise.resolve({
+        data: `
+          const process = {};
+          ${myRes.outputFiles[0].text}
+        `,
+        type: 'text/javascript'
+      });
+    });
+
+  return promise;
+
+  if (false && content) {
     // const parsedContent = __babelParser.parse(content, {
     //   allowImportExportEverywhere: true
     // });
@@ -210,16 +273,4 @@ module.exports = async function js(req, res, settings = {}) {
     //       });
     //   }
   }
-
-  return new __SPromise(
-    (resolve, reject, trigger) => {
-      return resolve({
-        data: content,
-        type: 'text/javascript'
-      });
-    },
-    {
-      id: 'frontendServerJsHandler'
-    }
-  );
 };

@@ -692,7 +692,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
           }
         });
         this.promise.on(`props.${prop}.*`, (update) => {
-          console.log('updated', prop, update);
+          console.log('up', prop, update);
           this.update();
         });
       }

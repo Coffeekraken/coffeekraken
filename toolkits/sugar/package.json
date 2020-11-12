@@ -110,6 +110,7 @@
     "entities": "^2.1.0",
     "envinfo": "^7.7.3",
     "es6-object-assign": "^1.1.0",
+    "esbuild": "^0.8.6",
     "escape-string-regexp": "^4.0.0",
     "exec-php": "0.0.5",
     "express": "^4.17.1",

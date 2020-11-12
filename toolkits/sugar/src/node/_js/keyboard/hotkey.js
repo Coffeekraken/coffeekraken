@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = _default;
 
-var _hotkeysJs = _interopRequireDefault(require("hotkeys-js"));
+var _hotkeys = _interopRequireDefault(require("hotkeys-js/dist/hotkeys.common"));
 
 var _SPromise = _interopRequireDefault(require("../promise/SPromise"));
 
@@ -17,7 +17,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-_hotkeysJs.default.filter = function (event) {
+_hotkeys.default.filter = function (event) {
   return true;
 }; // TODO tests
 
@@ -71,7 +71,7 @@ function _default(hotkey, settings) {
       splitKey: '+'
     }, settings); // init the hotkey
 
-    (0, _hotkeysJs.default)(hotkey, settings, (e, h) => {
+    (0, _hotkeys.default)(hotkey, settings, (e, h) => {
       // call the handler function
       trigger('press', e); // unsubscribe if once is truc
 
@@ -80,7 +80,7 @@ function _default(hotkey, settings) {
   }, {
     id: 'hotkey'
   }).on('finally', () => {
-    _hotkeysJs.default.unbind(hotkey);
+    _hotkeys.default.unbind(hotkey);
   });
 }
 

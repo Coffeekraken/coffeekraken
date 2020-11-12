@@ -63,13 +63,11 @@ var SPathValidation = /*#__PURE__*/function (_SValidation) {
         checkExistence = true;
       }
 
-      if ((0, _node.default)()) {
-        var checkPath = require('@coffeekraken/sugar/node/fs/isPath');
-
-        return checkPath(value, checkExistence);
-      } else {
-        return (0, _path.default)(value);
-      }
+      // if (__isNode()) {
+      //   const checkPath = require('@coffeekraken/sugar/node/fs/isPath');
+      //   return checkPath(value, checkExistence);
+      // } else {
+      return (0, _path.default)(value); // }
     }
   }]);
 

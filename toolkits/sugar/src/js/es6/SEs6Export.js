@@ -1,5 +1,45 @@
-import { parse } from 'micromatch';
+import * as __babelParser from '@babel/parser';
+import __babelGenerator from '@babel/generator';
 import __parseEs6Imports from 'parse-es6-imports';
+import __babelTraverse from '@babel/traverse';
+
+const code = `
+    export let name1, name2; // also var, const
+    export let name1 = 'plop', name2 = coco, nameN; // also var, const
+    export function functionName(arg, arg2 = 'adf'){ const hello = arg2; }
+    export class ClassName {}
+    export let name1; // also var, const
+    
+    // Export list
+    export { name1, name2, nameN };
+    
+    // Renaming exports
+    export { variable1 as name1, variable2 as name2, nameN };
+    
+    // Exporting destructured assignments with renaming
+    export const { name1, name2: bar } = o;
+    
+    // Default exports
+    export default expression;
+    export default function () {} // also class, function*
+    export default function name1() {} // also class, function*
+    export { name1 as default };
+    
+    // Aggregating modules
+    export * from 'something'; // does not set the default export
+    export * as name1 from 'something'; // Draft ECMAScript® 2O21
+    export { name1, name2, nameN } from 'something';
+    export { import1 as name1, import2 as name2, nameN } from 'something';
+    export { default } from 'something';
+    
+    if (process.env.NODE_ENV === 'production') {
+      // eslint-disable-next-line global-require
+      export { default } from './dist/hotkeys.common.min.js';
+    } else {
+      // eslint-disable-next-line global-require
+      export { default } from './dist/hotkeys.common.js';
+    }
+    `;
 
 /**
  * @name            SEs6Export
@@ -39,15 +79,20 @@ export default class SEs6Export {
    */
   static parseCode(code) {
     // search for statements
-    const reg = /^[\s]{0,999999}export\s[^\r\n;].*/gm;
-    let matches = code.match(reg);
-    if (!matches) {
-      return [];
-    }
-    matches = matches.map((statement) => {
-      return new SEs6Export(statement.trim());
+    const parts = code.split();
+
+    const ast = __babelParser.parse(code, {
+      allowImportExportEverywhere: true,
+      allowUndeclaredExports: true,
+      sourceType: 'script',
+      strictMode: false
     });
-    return matches;
+
+    __babelTraverse(ast, {
+      ExportNamedDeclaration: function (path) {
+        console.log('path');
+      }
+    });
   }
 
   /**
@@ -119,21 +164,88 @@ export default class SEs6Export {
    */
   constructor(statement) {
     console.log(statement);
-    const parsedStatement = __parseEs6Imports(
-      statement.replace('export ', 'import ')
-    )[0];
-    if (parsedStatement) {
-      this.raw = statement;
-      this.path = parsedStatement.fromModule;
-      this.default = parsedStatement.defaultImport;
-      this.star = parsedStatement.starImport;
-      this.named = parsedStatement.namedImports.map((n) => {
-        return {
-          name: n.name,
-          as: n.value
-        };
-      });
+
+    const line = statement;
+    const parsed = __babelParser.parse(line, {
+      allowImportExportEverywhere: true
+    }).program.body[0];
+    let exportObj = {
+      named: []
+    };
+    console.log(parsed);
+    switch (parsed.type) {
+      case 'ExportNamedDeclaration':
+        if (parsed.declaration && parsed.declaration.type) {
+          switch (parsed.declaration.type) {
+            case 'VariableDeclaration':
+              const declarations =
+                parsed.declaration && parsed.declaration.declarations
+                  ? parsed.declaration.declarations
+                  : parsed.declarations
+                  ? parsed.declarations
+                  : [];
+
+              declarations.forEach((declaration) => {
+                if (declaration.id && declaration.id.properties) {
+                  declaration.id.properties.forEach((prop) => {
+                    const parts = __babelGenerator(prop).code.split(':');
+                    let value = null;
+                    if (parts.length > 1) {
+                      value = __unquote(parts.pop().trim());
+                    }
+                    exportObj.named.push({
+                      name: prop.value.name,
+                      value
+                    });
+                  });
+                  return;
+                }
+
+                const parts = line
+                  .slice(declaration.start, declaration.end)
+                  .split('=');
+                let value = null;
+                if (parts.length > 1) {
+                  value = __unquote(parts.pop().trim());
+                }
+                exportObj.named.push({
+                  name: declaration.id.name,
+                  value
+                });
+              });
+              break;
+            case 'ClassDeclaration':
+            case 'FunctionDeclaration':
+              const codeAst = parsed.declaration;
+              const value = __babelGenerator(codeAst).code;
+              exportObj.named.push({
+                name: parsed.declaration.id.name,
+                value
+              });
+              break;
+          }
+          break;
+        } else if (parsed.specifiers) {
+          const parts = __babelGenerator(parsed).code.split('=');
+          let value = null;
+          if (parts.length > 1) {
+            value = __unquote(parts.pop().trim());
+          }
+          parsed.specifiers.forEach((specifier) => {
+            console.log(specifier.exported);
+            exportObj.named.push({
+              name: specifier.local.name,
+              as:
+                specifier.exported.name !== specifier.local.name
+                  ? specifier.exported.name
+                  : null,
+              value
+            });
+          });
+        }
     }
+
+    console.log(exportObj);
   }
 
   /**

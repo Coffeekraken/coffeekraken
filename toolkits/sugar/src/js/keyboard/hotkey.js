@@ -1,4 +1,4 @@
-import hotkeys from 'hotkeys-js';
+import hotkeys from 'hotkeys-js/dist/hotkeys.common';
 import __SPromise from '../promise/SPromise';
 hotkeys.filter = function (event) {
   return true;

@@ -58,14 +58,11 @@ function validateValueOutputString(validateValueResultObj, settings) {
   if (validateValueResultObj.$received) {
     var string = "<yellow>\u2502</yellow> - Received value: <yellow>".concat((0, _toString.default)(validateValueResultObj.$received.value, {
       beautify: true
-    }), "</yellow>");
-
-    if ((0, _node.default)()) {
-      var __packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
-
-      string = string.replace("".concat(__packageRoot(), "/"), '');
-      string = string.replace("".concat(__packageRoot(__dirname), "/"), '');
-    }
+    }), "</yellow>"); // if (__isNode()) {
+    //   const __packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
+    //   string = string.replace(`${__packageRoot()}/`, '');
+    //   string = string.replace(`${__packageRoot(__dirname)}/`, '');
+    // }
 
     issuesArray.push(string);
   }

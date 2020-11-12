@@ -27,15 +27,33 @@ module.exports = {
     // //   __dirname,
     // //   '../node_modules/@babel/plugin-proposal-export-namespace-from'
     // // ),
-    __path.resolve(
-      __dirname,
-      '../node_modules/babel-plugin-transform-commonjs-es2015-modules'
-    ),
+    // __path.resolve(
+    //   __dirname,
+    //   '../node_modules/babel-plugin-transform-commonjs-es2015-modules'
+    // ),
+    [
+      __path.resolve(
+        __dirname,
+        '../src/node/babel/plugins/plugin-transform-commonjs-es2015.js'
+      ),
+      {}
+    ],
+
     __path.resolve(
       __dirname,
       '../node_modules/@babel/plugin-proposal-class-properties'
-    ),
-    __path.resolve(__dirname, '../node_modules/@babel/plugin-transform-classes')
+    )
+    // __path.resolve(
+    //   __dirname,
+    //   '../node_modules/@babel/plugin-transform-classes'
+    // ),
+    // [
+    //   __path.resolve(
+    //     __dirname,
+    //     '../src/node/babel/plugins/plugin-node-native-modules-browser-polyfill.js'
+    //   ),
+    //   {}
+    // ]
     // __path.resolve(
     //   __dirname,
     //   '../node_modules/@babel/plugin-syntax-dynamic-import'

@@ -5,11 +5,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _micromatch = require("micromatch");
+var __babelParser = _interopRequireWildcard(require("@babel/parser"));
+
+var _generator = _interopRequireDefault(require("@babel/generator"));
 
 var _parseEs6Imports = _interopRequireDefault(require("parse-es6-imports"));
 
+var _traverse = _interopRequireDefault(require("@babel/traverse"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -19,6 +27,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var code = "\n    export let name1, name2; // also var, const\n    export let name1 = 'plop', name2 = coco, nameN; // also var, const\n    export function functionName(arg, arg2 = 'adf'){ const hello = arg2; }\n    export class ClassName {}\n    export let name1; // also var, const\n    \n    // Export list\n    export { name1, name2, nameN };\n    \n    // Renaming exports\n    export { variable1 as name1, variable2 as name2, nameN };\n    \n    // Exporting destructured assignments with renaming\n    export const { name1, name2: bar } = o;\n    \n    // Default exports\n    export default expression;\n    export default function () {} // also class, function*\n    export default function name1() {} // also class, function*\n    export { name1 as default };\n    \n    // Aggregating modules\n    export * from 'something'; // does not set the default export\n    export * as name1 from 'something'; // Draft ECMAScript\xAE 2O21\n    export { name1, name2, nameN } from 'something';\n    export { import1 as name1, import2 as name2, nameN } from 'something';\n    export { default } from 'something';\n    \n    if (process.env.NODE_ENV === 'production') {\n      // eslint-disable-next-line global-require\n      export { default } from './dist/hotkeys.common.min.js';\n    } else {\n      // eslint-disable-next-line global-require\n      export { default } from './dist/hotkeys.common.js';\n    }\n    ";
 /**
  * @name            SEs6Export
  * @namespace       sugar.js.es6
@@ -40,6 +49,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @since           2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
+
 var SEs6Export = /*#__PURE__*/function () {
   _createClass(SEs6Export, null, [{
     key: "parseCode",
@@ -60,17 +70,20 @@ var SEs6Export = /*#__PURE__*/function () {
      */
     value: function parseCode(code) {
       // search for statements
-      var reg = /^[\s]{0,999999}export\s[^\r\n;].*/gm;
-      var matches = code.match(reg);
+      var parts = code.split();
 
-      if (!matches) {
-        return [];
-      }
-
-      matches = matches.map(statement => {
-        return new SEs6Export(statement.trim());
+      var ast = __babelParser.parse(code, {
+        allowImportExportEverywhere: true,
+        allowUndeclaredExports: true,
+        sourceType: 'script',
+        strictMode: false
       });
-      return matches;
+
+      (0, _traverse.default)(ast, {
+        ExportNamedDeclaration: function ExportNamedDeclaration(path) {
+          console.log('path');
+        }
+      });
     }
     /**
      * @name      raw
@@ -108,20 +121,88 @@ var SEs6Export = /*#__PURE__*/function () {
     _defineProperty(this, "named", []);
 
     console.log(statement);
-    var parsedStatement = (0, _parseEs6Imports.default)(statement.replace('export ', 'import '))[0];
+    var line = statement;
 
-    if (parsedStatement) {
-      this.raw = statement;
-      this.path = parsedStatement.fromModule;
-      this.default = parsedStatement.defaultImport;
-      this.star = parsedStatement.starImport;
-      this.named = parsedStatement.namedImports.map(n => {
-        return {
-          name: n.name,
-          as: n.value
-        };
-      });
+    var parsed = __babelParser.parse(line, {
+      allowImportExportEverywhere: true
+    }).program.body[0];
+
+    var exportObj = {
+      named: []
+    };
+    console.log(parsed);
+
+    switch (parsed.type) {
+      case 'ExportNamedDeclaration':
+        if (parsed.declaration && parsed.declaration.type) {
+          switch (parsed.declaration.type) {
+            case 'VariableDeclaration':
+              var declarations = parsed.declaration && parsed.declaration.declarations ? parsed.declaration.declarations : parsed.declarations ? parsed.declarations : [];
+              declarations.forEach(declaration => {
+                if (declaration.id && declaration.id.properties) {
+                  declaration.id.properties.forEach(prop => {
+                    var parts = (0, _generator.default)(prop).code.split(':');
+                    var value = null;
+
+                    if (parts.length > 1) {
+                      value = __unquote(parts.pop().trim());
+                    }
+
+                    exportObj.named.push({
+                      name: prop.value.name,
+                      value
+                    });
+                  });
+                  return;
+                }
+
+                var parts = line.slice(declaration.start, declaration.end).split('=');
+                var value = null;
+
+                if (parts.length > 1) {
+                  value = __unquote(parts.pop().trim());
+                }
+
+                exportObj.named.push({
+                  name: declaration.id.name,
+                  value
+                });
+              });
+              break;
+
+            case 'ClassDeclaration':
+            case 'FunctionDeclaration':
+              var codeAst = parsed.declaration;
+              var value = (0, _generator.default)(codeAst).code;
+              exportObj.named.push({
+                name: parsed.declaration.id.name,
+                value
+              });
+              break;
+          }
+
+          break;
+        } else if (parsed.specifiers) {
+          var parts = (0, _generator.default)(parsed).code.split('=');
+          var _value = null;
+
+          if (parts.length > 1) {
+            _value = __unquote(parts.pop().trim());
+          }
+
+          parsed.specifiers.forEach(specifier => {
+            console.log(specifier.exported);
+            exportObj.named.push({
+              name: specifier.local.name,
+              as: specifier.exported.name !== specifier.local.name ? specifier.exported.name : null,
+              value: _value
+            });
+          });
+        }
+
     }
+
+    console.log(exportObj);
   }
   /**
    * @name          toString

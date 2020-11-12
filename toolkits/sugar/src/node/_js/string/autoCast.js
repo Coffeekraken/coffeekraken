@@ -16,7 +16,7 @@ exports.default = autoCast;
  * @return    {Mixed}    The casted value
  *
  * @example    js
- * import autoCast from '@coffeekraken/sugar/js/strings/autoCast'
+ * import autoCast from '@coffeekraken/sugar/js/string/autoCast'
  * autoCast('12') // => 12
  * autoCast('window.HTMLElement') // => HTMLElement
  * autoCast('{"hello":"world"}') // {hello:'world'}

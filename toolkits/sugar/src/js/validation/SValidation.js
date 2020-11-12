@@ -39,11 +39,11 @@ class SValidation {
         value = arg.join(',');
       }
       message = message.replace(`%${i}`, value);
-      if (__isNode()) {
-        const packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
-        message = message.replace(`${packageRoot(__dirname)}/`, '');
-        message = message.replace(`${packageRoot()}/`, '');
-      }
+      // if (__isNode()) {
+      //   const packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
+      //   message = message.replace(`${packageRoot(__dirname)}/`, '');
+      //   message = message.replace(`${packageRoot()}/`, '');
+      // }
     });
     return message;
   }

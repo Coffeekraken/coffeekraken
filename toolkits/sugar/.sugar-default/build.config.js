@@ -140,7 +140,7 @@ module.exports = {
      * @since             2.0.0
      * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    sharedResources: ['sugar'],
+    sharedResources: '@config.scss.sharedResources',
 
     vendors: {
       /**

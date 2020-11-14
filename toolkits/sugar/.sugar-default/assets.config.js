@@ -1,11 +1,11 @@
 module.exports = {
   css: {
     main: {
-      path: '/dist/css/index.css'
-    },
-    js: {
-      path: '/temp/js.css'
+      path: '/src/css/index.scss'
     }
+    // js: {
+    //   path: '/temp/js.css'
+    // }
   },
   js: {
     main: {

@@ -758,7 +758,7 @@ function SWebComponentGenerator(extendsSettings) {
           });
 
           _this2.promise.on("props.".concat(prop, ".*"), update => {
-            console.log('updated', prop, update);
+            console.log('up', prop, update);
 
             _this2.update();
           });

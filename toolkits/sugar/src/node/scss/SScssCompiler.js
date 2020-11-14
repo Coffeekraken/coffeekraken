@@ -1,5 +1,9 @@
+const __extension = require('../fs/extension');
+const __SCache = require('../cache/SCache');
+const __unquote = require('../string/unquote');
 const __sugarConfig = require('../config/sugar');
 const __path = require('path');
+const __stripCssComments = require('../css/stripCssComments');
 const __folderPath = require('../fs/folderPath');
 const __tmpDir = require('../fs/tmpDir');
 const __deepMerge = require('../object/deepMerge');
@@ -9,7 +13,6 @@ const __includeInlineSplitter = require('../code/splitters/scss/includeInlineSpl
 const __mixinBlockSplitter = require('../code/splitters/scss/mixinBlockSplitter');
 const __mediaQuerySplitter = require('../code/splitters/scss/mediaQuerySplitter');
 const __selectorBlockSplitter = require('../code/splitters/scss/selectorBlockSplitter');
-const __SCache = require('../cache/SCache');
 const __md5 = require('../crypt/md5');
 const __sass = require('sass');
 const __globImporter = require('node-sass-glob-importer');
@@ -21,7 +24,9 @@ const __SCodeSplitter = require('../code/SCodeSplitter');
 const __copy = require('../clipboard/copy');
 const __writeFileSync = require('../fs/writeFileSync');
 const __removeSync = require('../fs/removeSync');
+const __getSharedResourcesString = require('./getSharedResourcesString');
 const __putUseStatementsOnTop = require('./putUseStatementsOnTop');
+const __glob = require('glob');
 
 /**
  * @name                SScssCompiler
@@ -81,9 +86,12 @@ module.exports = class SScssCompiler {
     this._settings = __deepMerge(
       {
         id: this.constructor.name,
+        cache: false,
+        stripComments: true,
         sass: {},
+        rootDir: __sugarConfig('frontend.rootDir'),
         optimizers: {
-          split: true
+          split: false
         },
         putUseOnTop: true,
         settings: {
@@ -110,22 +118,20 @@ module.exports = class SScssCompiler {
    * @since             2.0.0
    * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  compile(source, settings = {}, streamObj) {
+  compile(source, settings = {}) {
     return new __SPromise(
       async (resolve, reject, trigger, cancel) => {
         settings = __deepMerge(this._settings, settings);
 
         const startTime = Date.now();
+        let folderContext = settings.rootDir;
 
         let resultObj,
           resultString = '';
 
-        const tmpPath = `${__packageRoot()}/SScssCompiler`;
-
-        // __removeSync(tmpPath);
-
         const includePaths = [
           // tmpPath,
+          ...(settings.rootDir || []),
           ...(settings.sass.includePaths || []),
           `${__packageRoot()}/node_modules`
           // `${__packageRoot(__dirname)}/src/scss`,
@@ -135,10 +141,6 @@ module.exports = class SScssCompiler {
         let sharedResources = settings.sharedResources || [];
         if (!Array.isArray(sharedResources))
           sharedResources = [sharedResources];
-
-        __copy(source);
-
-        let urls = [];
 
         let sassPassedSettings = Object.assign({}, settings.sass || {});
         delete sassPassedSettings.includePaths;
@@ -155,112 +157,106 @@ module.exports = class SScssCompiler {
           sassPassedSettings
         );
 
-        if (__isPath(source, true)) {
-          sassSettings.includePaths.unshift(
-            `${source.replace(__getFilename(source), '')}`
-          );
-          source = __fs.readFileSync(source, 'utf8');
+        if (source.slice(0, 1) === '/') {
+          source = source.slice(1);
         }
-        sassSettings.data = source;
 
-        sharedResources.forEach((resource) => {
-          const resourceContent = this._getSharedResourceContent(resource);
-          if (resourceContent) {
-            sassSettings.data = `
+        if (__isPath(source)) {
+          source = __path.resolve(settings.rootDir, source);
+          if (__fs.existsSync(source)) {
+            folderContext = __folderPath(source);
+            sassSettings.includePaths.unshift(folderContext);
+            source = __fs.readFileSync(source, 'utf8');
+          }
+        }
+
+        sassSettings.data = this._settings.stripComments
+          ? __stripCssComments(source)
+          : source;
+
+        const importStatements = sassSettings.data.match(
+          /^((?!\/\/)[\s]{0,999999999999}?)@import\s['"].*['"];/gm
+        );
+        if (importStatements) {
+          importStatements.forEach(async (importStatement) => {
+            const importStatementPath = __unquote(
+              importStatement.replace('@import ', '').replace(';', '').trim()
+            );
+            let importAbsolutePath = __path.resolve(
+              folderContext,
+              importStatementPath
+            );
+            const extension = __extension(importAbsolutePath);
+            const filename = __getFilename(importAbsolutePath);
+            const folderPath = __folderPath(importAbsolutePath);
+            let pattern;
+            if (!extension) {
+              pattern = `${folderPath}/?(_)${filename}.*`;
+            } else {
+              pattern = `${folderPath}/?(_)${filename}`;
+            }
+            const potentialPaths = __glob.sync(pattern);
+            if (potentialPaths && potentialPaths.length) {
+              let result;
+              // check if we use the cache or not
+              if (this._settings.cache) {
+                // get the file stats
+                const stats = __fs.statSync(potentialPaths[0]);
+                const mTimeMs = stats.mtimeMs;
+                // engage the cache
+                const cache = new __SCache(this._settings.id, {
+                  ttl: '10d'
+                });
+                // try to get from cache
+                const cacheId = __md5.encrypt(
+                  `${potentialPaths[0]}-${mTimeMs}`
+                );
+                const cachedContent = cache.get(cacheId);
+                if (cachedContent) result = cachedContent;
+              }
+              if (!result) {
+                // compile the finded path
+                result = await this.compile(potentialPaths[0], {
+                  ...settings,
+                  rootDir: folderContext
+                });
+                console.log('compiled');
+              }
+              // replace the import statement with the compiled
+              // result
+              sassSettings.data = sassSettings.data.replace(
+                importStatement,
+                this._settings.stripComments
+                  ? __stripCssComments(result.data)
+                  : result.data
+              );
+              // console.log(sassSettings.data);
+              throw 'coco';
+            }
+          });
+        }
+
+        const resourceContent = __getSharedResourcesString(sharedResources);
+        if (resourceContent) {
+          sassSettings.data = `
             ${resourceContent}
             ${sassSettings.data}
           `;
-          }
-        });
-
-        if (settings.putUseOnTop) {
-          sassSettings.data = __putUseStatementsOnTop(sassSettings.data);
         }
 
-        if (settings.optimizers.split) {
-          throw '"optimizers.split" not fully implemented now...';
+        // if (settings.putUseOnTop) {
+        //   sassSettings.data = __putUseStatementsOnTop(sassSettings.data);
+        // }
 
-          const splitter = new __SCodeSplitter();
+        console.log('compile', sassSettings.data);
 
-          const splited = splitter.split(source, [
-            __selectorBlockSplitter,
-            __mediaQuerySplitter,
-            __includeInlineSplitter,
-            __includeBlockSplitter,
-            __mixinBlockSplitter
-          ]);
-
-          const cache = new __SCache(settings.id, {});
-
-          // loop on splited blocks
-          const previousBlocks = [];
-          for (let i = 0; i < splited.length; i++) {
-            const block = splited[i];
-
-            switch (block.type) {
-              case 'string':
-              case 'mixin.block':
-                previousBlocks.push(block.data);
-                break;
-              default:
-                let stringToCompile = '';
-                previousBlocks.forEach((bl) => {
-                  stringToCompile += `
-                    ${bl}
-                `;
-                });
-                stringToCompile += `
-                ${block.data}
-                `;
-
-                //   streamObj.outputStack[`toCompile_${i}`] =
-                //     streamObj.outputDir + `/toCompile_${i}.scss`;
-                //   streamObj[`toCompile_${i}`] = stringToCompile;
-
-                let compiledString = '';
-
-                const hash = __md5.encrypt(stringToCompile);
-                const cachedValue = await cache.get(hash);
-                if (cachedValue) {
-                  compiledString = cachedValue;
-                  resultString += compiledString;
-                } else {
-                  try {
-                    resultObj = __sass.renderSync({
-                      ...sassSettings,
-                      data: stringToCompile
-                    });
-
-                    const compiledResultString = resultObj.css.toString();
-                    compiledString = compiledResultString.trim();
-
-                    //   streamObj.outputStack[`toCompile_${i}.compiled`] =
-                    //     streamObj.outputDir + `/toCompile_${i}.compiled.scss`;
-                    //   streamObj[`toCompile_${i}.compiled`] = compiledString;
-
-                    resultString += compiledString;
-                    // save in cache
-                    await cache.set(hash, compiledString);
-                  } catch (e) {
-                    return reject(e.toString());
-                  }
-                }
-                break;
-            }
-          }
-        } else {
-          try {
-            resultObj = __sass.renderSync(sassSettings);
-            const compiledResultString = resultObj.css.toString();
-            resultString = compiledResultString.trim();
-          } catch (e) {
-            return reject(e.toString());
-          }
-        }
+        // compile
+        resultObj = __sass.renderSync(sassSettings);
+        const compiledResultString = resultObj.css.toString();
+        resultString = compiledResultString.trim();
 
         // resolve with the compilation result
         resolve({
-          streamObj,
           data: resultString,
           startTime: startTime,
           endTime: Date.now(),
@@ -271,14 +267,5 @@ module.exports = class SScssCompiler {
         id: this._settings.id
       }
     );
-  }
-
-  _getSharedResourceContent(resource) {
-    if (!__isPath(resource)) {
-      return resource;
-    }
-    // load the resource
-    const resourceContent = __fs.readFileSync(resource, 'utf8');
-    return resourceContent;
   }
 };

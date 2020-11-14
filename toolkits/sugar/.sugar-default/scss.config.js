@@ -31,6 +31,21 @@ module.exports = {
   },
 
   /**
+   * @name                sharedResources
+   * @namespace           config.scss
+   * @type                Boolean
+   * @default             ['sugar']
+   *
+   * This options tells the sugar scss compiler which "frameworks" or "toolkit" you want to sharedResources automatically.
+   * For now you can specify these:
+   * - sugar: Import the coffeekraken sugar scss toolkit in your scss
+   *
+   * @since             2.0.0
+   * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  sharedResources: ['sugar'],
+
+  /**
    * @name          settingsMode
    * @namespace     config.scss
    * @type          String

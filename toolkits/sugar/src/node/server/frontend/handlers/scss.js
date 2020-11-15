@@ -20,15 +20,20 @@ const rootDir = __sugarConfig('frontend.rootDir');
 module.exports = async function scss(req, res, settings = {}) {
   let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
 
-  const promise = new __SPromise({
-    id: 'frontendServerScssHandler'
-  });
-
-  const compiler = new __SScssCompiler({
-    sharedResources: ['sugar']
-  });
-  const compileRes = await compiler.compile(req.path);
-  // console.log(compileRes);
-
-  return promise;
+  return new __SPromise(
+    async (resolve, reject) => {
+      const compiler = new __SScssCompiler({
+        sharedResources: ['sugar']
+      });
+      const compileRes = await compiler.compile(req.path);
+      resolve({
+        data: compileRes.css,
+        type: 'text/css'
+      });
+      // console.log(compileRes);
+    },
+    {
+      id: 'frontendServerScssHandler'
+    }
+  );
 };

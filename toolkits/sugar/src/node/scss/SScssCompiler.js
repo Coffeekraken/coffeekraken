@@ -81,7 +81,7 @@ module.exports = class SScssCompiler {
     this._settings = __deepMerge(
       {
         id: this.constructor.name,
-        cache: true,
+        cache: false,
         stripComments: true,
         sass: {},
         rootDir: __sugarConfig('frontend.rootDir'),
@@ -116,23 +116,29 @@ module.exports = class SScssCompiler {
   compile(source, settings = {}) {
     return new __SPromise(
       async (resolve, reject, trigger, cancel) => {
-        settings = __deepMerge(this._settings, settings);
+        settings = __deepMerge(
+          this._settings,
+          {
+            _isChild: false
+          },
+          settings
+        );
 
         const startTime = Date.now();
-        let folderContext = settings.rootDir;
 
-        let resultObj,
-          resultString = '';
+        let dataObj = {
+          imports: [],
+          scss: null,
+          css: null,
+          mixinsAndVariables: null
+        };
 
         source = source.trim();
 
         const includePaths = [
-          // tmpPath,
           ...(settings.rootDir || []),
           ...(settings.sass.includePaths || []),
           `${__packageRoot()}/node_modules`
-          // `${__packageRoot(__dirname)}/src/scss`,
-          // `${__packageRoot()}/src/scss`
         ];
 
         let sharedResources = settings.sharedResources || [];
@@ -147,159 +153,128 @@ module.exports = class SScssCompiler {
             importer: [
               // __globImporter(),
             ],
-            sharedResources,
             sourceMap: true,
             includePaths
           },
           sassPassedSettings
         );
 
-        if (source.slice(0, 3) !== '/**' && source.slice(0, 1) === '/') {
-          source = source.slice(1);
-        }
+        // engage the cache
+        const cache = new __SCache(this._settings.id, {
+          ttl: '10d'
+        });
+        let cacheId;
 
-        let isPath = false;
         if (__isPath(source)) {
-          source = __path.resolve(settings.rootDir, source);
-          if (__fs.existsSync(source)) {
-            folderContext = __folderPath(source);
-            sassSettings.includePaths.unshift(folderContext);
-            source = __fs.readFileSync(source, 'utf8');
+          if (!__fs.existsSync(source) && source.slice(0, 1) === '/') {
+            source = source.slice(1);
           }
-          isPath = true;
+          source = __path.resolve(settings.rootDir, source);
+          const sourcePath = this._getRealFilePath(source);
+          if (sourcePath) {
+            // get the file stats
+            const stats = __fs.statSync(sourcePath);
+            const mTimeMs = stats.mtimeMs;
+            // try to get from cache
+            cacheId = __md5.encrypt(`${sourcePath}-${mTimeMs}`);
+            // add the folder path in the includePaths setting
+            const filePath = __folderPath(sourcePath);
+            sassSettings.includePaths.unshift(filePath);
+            settings.rootDir = filePath;
+            // read the file to get his content
+            dataObj.scss = __fs.readFileSync(source, 'utf8');
+          }
+        } else {
+          // set the scss property with the source
+          dataObj.scss = source;
+          // create the cache id using the source code
+          cacheId = __md5.encrypt(source);
         }
 
-        sassSettings.data = this._settings.stripComments
-          ? __stripCssComments(source)
-          : source;
+        // try to get from cache
+        // const cachedObj = await cache.get(cacheId);
+        // if (this._settings.cache && cachedObj) {
+        //   // build the css code to return
+        //   dataObj = cachedObj;
+        //   // resolve the compilation using this generated
+        //   return resolve({
+        //     ...dataObj,
+        //     startTime: startTime,
+        //     endTime: Date.now(),
+        //     duration: Date.now() - startTime
+        //   });
+        // }
+
+        // extract the things that can be used
+        // by others like mixins and variables declarations$
+        const ast = __parseScss(dataObj.scss);
+        const $ = __createQueryWrapper(ast);
+        let mixinsVariablesString = '';
+        const nodes = $('stylesheet')
+          .children()
+          .filter((node) => {
+            return (
+              (node.node.type === 'atrule' &&
+                node.node.value[0].value === 'mixin') ||
+              node.node.type === 'declaration'
+            );
+          });
+        nodes.nodes.forEach((node) => {
+          mixinsVariablesString += `
+            ${__stringifyScss(node.node)}
+          `;
+        });
+
+        // save the mixin and variables resources
+        dataObj.mixinsAndVariables = mixinsVariablesString;
+
+        // strip comments of not
+        dataObj.scss = settings.stripComments
+          ? __stripCssComments(dataObj.scss)
+          : dataObj.scss;
 
         const resourceContent = __getSharedResourcesString(sharedResources);
         if (resourceContent) {
-          sassSettings.data = `
+          dataObj.scss = `
               ${resourceContent}
-              ${sassSettings.data}
+              ${dataObj.scss}
             `;
         }
 
-        const importStatements = sassSettings.data.match(
+        const importStatements = dataObj.scss.match(
           /^((?!\/\/)[\s]{0,999999999999}?)@import\s['"].*['"];/gm
         );
         if (importStatements) {
-          for (let i = 0; i < importStatements.length; i++) {
-            const importStatement = importStatements[i];
-            const importStatementPath = __unquote(
-              importStatement.replace('@import ', '').replace(';', '').trim()
-            );
-            let importAbsolutePath = __path.resolve(
-              folderContext,
-              importStatementPath
-            );
-
-            const extension = __extension(importAbsolutePath);
-            const filename = __getFilename(importAbsolutePath);
-            const folderPath = __folderPath(importAbsolutePath);
-            let pattern;
-            if (!extension) {
-              pattern = `${folderPath}/?(_)${filename}.*`;
-            } else {
-              pattern = `${folderPath}/?(_)${filename}`;
-            }
-            const potentialPaths = __glob.sync(pattern);
-            if (potentialPaths && potentialPaths.length) {
-              let result;
-              // engage the cache
-              const cache = new __SCache(this._settings.id, {
-                ttl: '10d'
-              });
-              // get the file stats
-              const stats = __fs.statSync(potentialPaths[0]);
-              const mTimeMs = stats.mtimeMs;
-              // try to get from cache
-              const cacheId = __md5.encrypt(`${potentialPaths[0]}-${mTimeMs}`);
-              // check if we use the cache or not
-              if (this._settings.cache) {
-                console.log('try to get cache');
-                result = await cache.get(cacheId);
-                if (result) {
-                  console.log('cache found', potentialPaths[0]);
-                }
-              }
-              // if nothing from the cache
-              if (!result) {
-                // init result object
-                result = {};
-                // read the file to get code
-                const childContent = __fs.readFileSync(
-                  potentialPaths[0],
-                  'utf8'
-                );
-                // extract the things that can be used
-                // by others like mixins and variables declarations
-                const ast = __parseScss(childContent);
-                const $ = __createQueryWrapper(ast);
-                let mixinsVariablesString = '';
-                const nodes = $('stylesheet')
-                  .children()
-                  .filter((node) => {
-                    return (
-                      node.node.type === 'atrule' ||
-                      node.node.type === 'declaration'
-                    );
-                  });
-                nodes.nodes.forEach((node) => {
-                  mixinsVariablesString += `
-                    ${__stringifyScss(node.node)}
-                  `;
-                });
-
-                // save the mixin and variables resources
-                result.mixinsAndVariables = mixinsVariablesString;
-
-                // compile the finded path
-                const compileRes = await this.compile(childContent, {
-                  ...settings,
-                  rootDir: __folderPath(potentialPaths[0])
-                });
-
-                // set in the result object
-                result.css = compileRes.data;
-
-                // save in cache if needed
-                if (this._settings.cache) {
-                  console.log('saving cache', potentialPaths[0]);
-                  await cache.set(cacheId, result);
-                }
-              }
-              // replace the import statement with the compiled
-              // result
-              const resultString = `
-                ${result.mixinsAndVariables || ''}
-                ${result.css || ''}
-              `;
-              sassSettings.data = sassSettings.data.replace(
-                importStatement,
-                this._settings.stripComments
-                  ? __stripCssComments(resultString)
-                  : resultString
-              );
-            }
-          }
+          // save the import statements in the dataObj
+          dataObj.imports = importStatements;
+          // compile the import statements
+          dataObj.scss = await this._compileImports(
+            importStatements,
+            dataObj.scss,
+            settings
+          );
         }
 
         if (settings.putUseOnTop) {
-          sassSettings.data = __putUseStatementsOnTop(sassSettings.data);
+          dataObj.scss = __putUseStatementsOnTop(dataObj.scss);
         }
 
-        __copy(sassSettings.data);
-
         // compile
-        resultObj = __sass.renderSync(sassSettings);
-        const compiledResultString = resultObj.css.toString();
-        resultString = compiledResultString.trim();
+        const renderObj = __sass.renderSync({
+          ...sassSettings,
+          data: dataObj.scss
+        });
+        const compiledResultString = renderObj.css.toString();
+        dataObj.css = compiledResultString.trim();
+
+        if (!settings._isChild) {
+          console.log('finished');
+          __copy(dataObj.css);
+        }
 
         // resolve with the compilation result
         resolve({
-          data: resultString,
+          ...dataObj,
           startTime: startTime,
           endTime: Date.now(),
           duration: Date.now() - startTime
@@ -309,5 +284,59 @@ module.exports = class SScssCompiler {
         id: this._settings.id
       }
     );
+  }
+
+  async _compileImports(importStatements, scss, settings) {
+    // loop on each imports
+    for (let i = 0; i < importStatements.length; i++) {
+      const importStatement = importStatements[i];
+      const importStatementPath = __unquote(
+        importStatement.replace('@import ', '').replace(';', '').trim()
+      );
+      let importAbsolutePath = __path.resolve(
+        settings.rootDir,
+        importStatementPath
+      );
+      const importPath = this._getRealFilePath(importAbsolutePath);
+      if (importPath) {
+        // compile the finded path
+        const compileRes = await this.compile(importPath, {
+          ...settings,
+          _isChild: true,
+          rootDir: __folderPath(importPath)
+        });
+
+        // replace the import statement with the compiled
+        // result
+        const resultString = `
+          ${compileRes.mixinsAndVariables || ''}
+          ${compileRes.css || ''}
+        `;
+        scss = scss.replace(
+          importStatement,
+          settings.stripComments
+            ? __stripCssComments(resultString)
+            : resultString
+        );
+      }
+    }
+    return scss;
+  }
+
+  _getRealFilePath(path) {
+    const extension = __extension(path);
+    const filename = __getFilename(path);
+    const folderPath = __folderPath(path);
+    let pattern;
+    if (!extension) {
+      pattern = `${folderPath}/?(_)${filename}.*`;
+    } else {
+      pattern = `${folderPath}/?(_)${filename}`;
+    }
+    const potentialPaths = __glob.sync(pattern);
+    if (potentialPaths && potentialPaths.length) {
+      return potentialPaths[0];
+    }
+    return null;
   }
 };

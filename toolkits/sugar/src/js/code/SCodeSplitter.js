@@ -90,6 +90,19 @@ export default class SCodeSplitter {
     while (thingsToExtract) {
       const splittersMatches = [];
       splitters.forEach((extractorObj) => {
+        if (extractorObj.regex) {
+          const matches = code.matchAll(extractorObj.regex);
+          console.log(matches);
+          process.exit();
+          matches.forEach((match) => {
+            blocks.push({
+              type: extractorObj.type,
+              data: match
+            });
+          });
+          return;
+        }
+
         if (extractorObj.prefix) {
           const matches = code.match(extractorObj.prefix);
           if (matches) {

@@ -128,15 +128,28 @@ var SCodeSplitter = /*#__PURE__*/function () {
       var _loop = function _loop() {
         var splittersMatches = [];
         splitters.forEach(extractorObj => {
-          if (extractorObj.prefix) {
-            var matches = code.match(extractorObj.prefix);
+          if (extractorObj.regex) {
+            var matches = code.matchAll(extractorObj.regex);
+            console.log(matches);
+            process.exit();
+            matches.forEach(match => {
+              blocks.push({
+                type: extractorObj.type,
+                data: match
+              });
+            });
+            return;
+          }
 
-            if (matches) {
+          if (extractorObj.prefix) {
+            var _matches = code.match(extractorObj.prefix);
+
+            if (_matches) {
               splittersMatches.push({
                 extractorObj,
                 match: {
-                  index: matches.index,
-                  string: matches[extractorObj.prefixMatchIdx || 0]
+                  index: _matches.index,
+                  string: _matches[extractorObj.prefixMatchIdx || 0]
                 }
               });
             }

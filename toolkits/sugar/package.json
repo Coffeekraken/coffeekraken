@@ -226,6 +226,7 @@
     "ps-list": "^7.2.0",
     "ps-tree": "^1.2.0",
     "q-i": "^2.0.1",
+    "query-ast": "^1.0.3",
     "query-string": "^6.13.6",
     "react": "^17.0.1",
     "renderkid": "^2.0.4",

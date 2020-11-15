@@ -2,6 +2,6 @@
     "files.exclude": {
         // "**/sugar/js/**": true,
         "**/sugar/node/**": true,
-        "**/sugar/src/node/_js": true
+        // "**/sugar/src/node/_js": true
     }
 }

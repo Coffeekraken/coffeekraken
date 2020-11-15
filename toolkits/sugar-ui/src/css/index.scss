@@ -1,14 +1,14 @@
-/**
- * Vendors
- * All external libraries needed in the project.
- */
- @import './00_vendors/all';
+// /**
+//  * Vendors
+//  * All external libraries needed in the project.
+//  */
+//  @import './00_vendors/all';
 
 //  /**
 //   * Setup
 //   * Setup all the different parts/modules/libraries.
 //   */
-   // @import './01_setup/all'; // weifjoiwejfiewjfoijewi
+//    @import './01_setup/all'; // weifjoiwejfiewjfoijewi
 
 //  /**
 //   * Utils
@@ -16,11 +16,11 @@
 //   */
 //  @import './02_utils/all';
 
-//  /**
-//   * Generic
-//   * All the generic codebase for the project like typography, resets, etc...
-//   */
-//  @import './03_generic/all';
+ /**
+  * Generic
+  * All the generic codebase for the project like typography, resets, etc...
+  */
+ @import './03_generic/all';
 
 //  /**
 //   * Templates

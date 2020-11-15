@@ -40,6 +40,7 @@ export default function stripCssComments(css, settings = {}) {
     settings
   );
   if (settings.block) {
+    // css = css.replace(/\/\*{2}([\s\S]+?)\*\//g, '');
     css = __stripCssComments(css);
   }
   if (settings.line) {

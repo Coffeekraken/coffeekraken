@@ -59,7 +59,7 @@ export default class SCache {
    */
   _defaultAdaptersPaths = {
     ls: '@coffeekraken/sugar/js/cache/adapters/SCacheLsAdapter',
-    fs: `@coffeekraken/sugar/node/cache/adapters/SCacheFsAdapter`
+    fs: `../../cache/adapters/SCacheFsAdapter`
   };
 
   /**

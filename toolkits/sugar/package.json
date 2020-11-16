@@ -94,6 +94,7 @@
     "css": "^3.0.0",
     "css-loader": "^5.0.0",
     "cssnano": "^4.1.10",
+    "csso": "^4.1.1",
     "custom-event": "^1.0.1",
     "decomment": "^0.9.3",
     "deep-diff": "^1.0.2",

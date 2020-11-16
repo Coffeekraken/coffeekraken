@@ -22,6 +22,7 @@ const __glob = require('glob');
 const __parseScss = require('scss-parser').parse;
 const __stringifyScss = require('scss-parser').stringify;
 const __createQueryWrapper = require('query-ast');
+const __csso = require('csso');
 
 /**
  * @name                SScssCompiler
@@ -81,18 +82,13 @@ module.exports = class SScssCompiler {
     this._settings = __deepMerge(
       {
         id: this.constructor.name,
-        cache: false,
+        cache: true,
+        clearCache: false,
         stripComments: true,
+        minify: true,
         sass: {},
         rootDir: __sugarConfig('frontend.rootDir'),
-        optimizers: {
-          split: false
-        },
-        putUseOnTop: true,
-        settings: {
-          variableName: '$sugarUserSettings',
-          object: __sugarConfig('scss')
-        }
+        putUseOnTop: true
       },
       settings
     );
@@ -125,14 +121,14 @@ module.exports = class SScssCompiler {
         );
 
         const startTime = Date.now();
-
         let dataObj = {
-          imports: [],
+          children: {},
+          importStatements: [],
+          sharedResources: null,
+          mixinsAndVariables: null,
           scss: null,
-          css: null,
-          mixinsAndVariables: null
+          css: null
         };
-
         source = source.trim();
 
         const includePaths = [
@@ -163,6 +159,9 @@ module.exports = class SScssCompiler {
         const cache = new __SCache(this._settings.id, {
           ttl: '10d'
         });
+        if (settings.clearCache && !settings._isChild) {
+          await cache.clear();
+        }
         let cacheId;
 
         if (__isPath(source)) {
@@ -192,84 +191,100 @@ module.exports = class SScssCompiler {
         }
 
         // try to get from cache
-        // const cachedObj = await cache.get(cacheId);
-        // if (this._settings.cache && cachedObj) {
-        //   // build the css code to return
-        //   dataObj = cachedObj;
-        //   // resolve the compilation using this generated
-        //   return resolve({
-        //     ...dataObj,
-        //     startTime: startTime,
-        //     endTime: Date.now(),
-        //     duration: Date.now() - startTime
-        //   });
-        // }
+        const cachedObj = await cache.get(cacheId);
+        if (this._settings.cache && cachedObj) {
+          // build the css code to return
+          dataObj = cachedObj;
+          dataObj.fromCache = true;
+        }
 
         // extract the things that can be used
         // by others like mixins and variables declarations$
-        const ast = __parseScss(dataObj.scss);
-        const $ = __createQueryWrapper(ast);
-        let mixinsVariablesString = '';
-        const nodes = $('stylesheet')
-          .children()
-          .filter((node) => {
-            return (
-              (node.node.type === 'atrule' &&
-                node.node.value[0].value === 'mixin') ||
-              node.node.type === 'declaration'
-            );
-          });
-        nodes.nodes.forEach((node) => {
-          mixinsVariablesString += `
-            ${__stringifyScss(node.node)}
-          `;
-        });
-
-        // save the mixin and variables resources
-        dataObj.mixinsAndVariables = mixinsVariablesString;
-
-        // strip comments of not
-        dataObj.scss = settings.stripComments
-          ? __stripCssComments(dataObj.scss)
-          : dataObj.scss;
-
-        const resourceContent = __getSharedResourcesString(sharedResources);
-        if (resourceContent) {
-          dataObj.scss = `
-              ${resourceContent}
-              ${dataObj.scss}
+        if (!dataObj.fromCache) {
+          const ast = __parseScss(dataObj.scss);
+          const $ = __createQueryWrapper(ast);
+          let mixinsVariablesString = '';
+          const nodes = $('stylesheet')
+            .children()
+            .filter((node) => {
+              return (
+                (node.node.type === 'atrule' &&
+                  node.node.value[0].value === 'mixin') ||
+                node.node.type === 'declaration'
+              );
+            });
+          nodes.nodes.forEach((node) => {
+            mixinsVariablesString += `
+              ${__stringifyScss(node.node)}
             `;
+          });
+          // save the mixin and variables resources
+          dataObj.mixinsAndVariables = mixinsVariablesString;
+
+          // strip comments of not
+          dataObj.scss = settings.stripComments
+            ? __stripCssComments(dataObj.scss)
+            : dataObj.scss;
+
+          const resourceContent = __getSharedResourcesString(sharedResources);
+          if (resourceContent) {
+            dataObj.sharedResources = resourceContent;
+          }
         }
 
-        const importStatements = dataObj.scss.match(
-          /^((?!\/\/)[\s]{0,999999999999}?)@import\s['"].*['"];/gm
-        );
-        if (importStatements) {
-          // save the import statements in the dataObj
-          dataObj.imports = importStatements;
-          // compile the import statements
-          dataObj.scss = await this._compileImports(
-            importStatements,
-            dataObj.scss,
-            settings
+        if (!dataObj.fromCache) {
+          const findedImports = dataObj.scss.match(
+            /^((?!\/\/)[\s]{0,999999999999}?)@import\s['"].*['"];/gm
           );
+          if (findedImports && findedImports.length) {
+            // save imports
+            dataObj.importStatements = findedImports.map((s) => s.trim());
+          }
         }
+
+        // go down children
+        const { children, scss } = await this._compileImports(
+          dataObj.importStatements,
+          dataObj.scss,
+          settings
+        );
+        dataObj.children = children;
+        dataObj.scss = scss;
 
         if (settings.putUseOnTop) {
           dataObj.scss = __putUseStatementsOnTop(dataObj.scss);
         }
 
-        // compile
-        const renderObj = __sass.renderSync({
-          ...sassSettings,
-          data: dataObj.scss
-        });
-        const compiledResultString = renderObj.css.toString();
-        dataObj.css = compiledResultString.trim();
+        let toCompile = `
+            ${dataObj.sharedResources}
+          `;
 
         if (!settings._isChild) {
-          console.log('finished');
-          __copy(dataObj.css);
+          toCompile += this._bundleChildren(dataObj);
+          toCompile += dataObj.scss;
+        } else {
+          toCompile += dataObj.scss;
+        }
+
+        // compile
+        if (!dataObj.fromCache || !settings._isChild) {
+          const renderObj = __sass.renderSync({
+            ...sassSettings,
+            data: toCompile
+          });
+          const compiledResultString = settings.stripComments
+            ? __stripCssComments(renderObj.css.toString())
+            : renderObj.css.toString();
+          dataObj.css = settings.stripComments = compiledResultString.trim();
+
+          // set in cache if needed
+          if (settings.cache) {
+            cache.set(cacheId, dataObj);
+          }
+        }
+
+        if (settings.minify && !settings._isChild) {
+          dataObj.css = __csso.minify(dataObj.css);
         }
 
         // resolve with the compilation result
@@ -286,8 +301,27 @@ module.exports = class SScssCompiler {
     );
   }
 
+  _bundleChildren(object) {
+    if (!object.children) {
+      return '';
+    }
+    let resultString = '';
+    Object.keys(object.children).forEach((importPath) => {
+      const childObj = object.children[importPath];
+      if (childObj.children) {
+        resultString += this._bundleChildren(childObj);
+      }
+      resultString += `
+        ${childObj.css || ''}
+      `;
+    });
+    return resultString;
+  }
+
   async _compileImports(importStatements, scss, settings) {
     // loop on each imports
+    const childrenObj = {};
+
     for (let i = 0; i < importStatements.length; i++) {
       const importStatement = importStatements[i];
       const importStatementPath = __unquote(
@@ -305,22 +339,14 @@ module.exports = class SScssCompiler {
           _isChild: true,
           rootDir: __folderPath(importPath)
         });
-
-        // replace the import statement with the compiled
-        // result
-        const resultString = `
-          ${compileRes.mixinsAndVariables || ''}
-          ${compileRes.css || ''}
-        `;
-        scss = scss.replace(
-          importStatement,
-          settings.stripComments
-            ? __stripCssComments(resultString)
-            : resultString
-        );
+        childrenObj[importStatementPath] = compileRes;
+        scss = scss.replace(importStatement, '');
       }
     }
-    return scss;
+    return {
+      children: childrenObj,
+      scss
+    };
   }
 
   _getRealFilePath(path) {

@@ -20,7 +20,7 @@
   * Generic
   * All the generic codebase for the project like typography, resets, etc...
   */
- @import './03_generic/all';
+@import './03_generic/all';
 
 //  /**
 //   * Templates
@@ -78,3 +78,7 @@
 //  @import './09_trumps/all';
 
 //  // DO NOT UPDATE OR ADD CONTENT TO THIS FILE...
+
+body {
+    background: magenta;
+}

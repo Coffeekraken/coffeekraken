@@ -30,7 +30,6 @@ module.exports = async function scss(req, res, settings = {}) {
         data: compileRes.css,
         type: 'text/css'
       });
-      // console.log(compileRes);
     },
     {
       id: 'frontendServerScssHandler'

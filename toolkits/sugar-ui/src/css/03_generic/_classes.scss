@@ -28,6 +28,10 @@
 // @include Sugar.classes('sugar.helper.user-select');
 // @include Sugar.classes('sugar.helper.vertical-align');
 
+.youhou {
+    content: 'plopissime';
+}
+
 @include Sugar.classes('sugar.component.ul');
 @include Sugar.classes('sugar.component.ol');
 @include Sugar.classes('sugar.component.title');

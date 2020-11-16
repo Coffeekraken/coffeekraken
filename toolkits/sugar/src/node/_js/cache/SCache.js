@@ -127,7 +127,7 @@ var SCache = /*#__PURE__*/function () {
 
     _defineProperty(this, "_defaultAdaptersPaths", {
       ls: '@coffeekraken/sugar/js/cache/adapters/SCacheLsAdapter',
-      fs: "@coffeekraken/sugar/node/cache/adapters/SCacheFsAdapter"
+      fs: "../../cache/adapters/SCacheFsAdapter"
     });
 
     _defineProperty(this, "_adapter", null);

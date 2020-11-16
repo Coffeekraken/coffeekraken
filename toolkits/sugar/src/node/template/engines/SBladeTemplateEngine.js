@@ -9,6 +9,7 @@ const __folderPath = require('../../fs/folderPath');
 const __getFilename = require('../../fs/filename');
 const __copy = require('../../clipboard/copy');
 const __childProcess = require('child_process');
+const __unique = require('../../array/unique');
 
 /**
  * @name          SBladeTemplateEngine
@@ -113,7 +114,7 @@ module.exports = class SBladeTemplateEngine extends __STemplateEngine {
   render(viewPath, data = {}, settings = {}) {
     settings = __deepMerge(
       {
-        rootDir: []
+        rootDirs: []
       },
       this._settings,
       settings
@@ -141,10 +142,10 @@ module.exports = class SBladeTemplateEngine extends __STemplateEngine {
             }
             const viewDirPath = __folderPath(viewPath);
             const viewFilename = __getFilename(viewPath);
-            settings.rootDir.push(viewDirPath);
+            settings.rootDirs.push(viewDirPath);
             // execute the php engine and get back the result
             php.compile(
-              [...settings.rootDir],
+              __unique([...settings.rootDirs]),
               viewFilename.replace('.blade.php', '').split('/').join('.'),
               data,
               settings.cacheDir,

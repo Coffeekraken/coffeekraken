@@ -1,8 +1,9 @@
 const __sugarConfig = require('../../../config/sugar');
-const __request = require('../../../http/request');
-const __SPromise = require('../../../promise/SPromise');
-const __fs = require('fs');
 const __path = require('path');
+const __render = require('../../../template/render');
+const __STemplate = require('../../../template/STemplate');
+const __fs = require('fs');
+const __SDuration = require('../../../time/SDuration');
 
 /**
  * @name                views
@@ -18,61 +19,66 @@ const __path = require('path');
  * @since       2.0.0
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function views(req, res, settings = {}) {
-  return new __SPromise(
-    (resolve, reject, trigger) => {
-      let params = req.params[0].split('/');
+module.exports = async function views(req, res, settings = {}) {
+  let params = req.params[0].split('/');
 
-      // const rootDirs = [
-      //   __sugarConfig('views.rootDir'),
-      //   __path.resolve(__dirname, '../views')
-      // ];
-      // if (settings.rootDir) {
-      //   rootDirs.unshift(settings.rootDir);
-      // }
+  const duration = new __SDuration();
 
-      // for (let i = 0; i < rootDirs.length; i++) {
-      //   const rootDir = rootDirs[i];
-      //   const viewPath = __path.resolve(rootDir, params.join('/'));
-      //   // if (__fs.existsSync())
-      //   //       if (__fs.existsSync(__path.resolve(rootDir, params.join('/'))))
-      // }
+  let rootDirs = __STemplate.getRootDirs(settings.rootDir || []);
 
-      return resolve({
-        view: params.join('.'),
-        data: {
-          ...(req.query || {}),
-          title: `Hi there!!!`,
-          body: 'Something goes wrong...'
+  for (let i = 0; i < rootDirs.length; i++) {
+    const rootDir = rootDirs[i];
+
+    for (let j = 0; j < Object.keys(__STemplate.engines).length; j++) {
+      const engineExt = Object.keys(__STemplate.engines)[j];
+
+      const viewPath =
+        __path.resolve(rootDir, params.join('/')) + `.${engineExt}`;
+
+      if (__fs.existsSync(viewPath)) {
+        const relativeViewPath = __path.relative(rootDir, viewPath);
+        const templateInstance = new __STemplate(relativeViewPath, {
+          rootDirs
+        });
+        const resultObj = await templateInstance.render({
+          ...(res.templateData || {})
+        });
+
+        if (settings.log) {
+          console.log(
+            `<bgGreen><black> views </black></bgGreen> View "<yellow>${
+              req.path
+            }</yellow> served in <cyan>${duration.end()}s</cyan>"`
+          );
         }
-      });
-    },
-    {
-      id: 'frontendServerViewsHandler'
+
+        res.status(200);
+        res.type('text/html');
+        return res.send(resultObj.content);
+      }
     }
-  );
+  }
+
+  // view not found
+  const notFoundTemplateInstance = new __STemplate('pages.404', {
+    rootDir: rootDirs
+  });
+
+  const notFoundObj = await notFoundTemplateInstance.render({
+    ...(res.templateData || {}),
+    title: `View not found...`,
+    error: `The requested view "${
+      req.path
+    }" does not exists in any of these directories:
+    <ol>  
+    ${notFoundTemplateInstance._settings.rootDir.map((dir) => {
+      return `<li>${dir}</li>`;
+    })}
+    </ol>
+    `
+  });
+
+  res.status(404);
+  res.type('text/html');
+  res.send(notFoundObj.content);
 };
-// module.exports = function views(req, server) {
-//   return new Promise(async (resolve, reject) => {
-//     const viewEngine = server.get('view engine');
-
-//     if (viewEngine === 'bladePhp') {
-//       const bladeSettings = __sugarConfig('blade');
-//       const viewsSettings = __sugarConfig('views');
-
-//       const renderedView = await __request({
-//         url: `http://${bladeSettings.server.hostname}:${
-//           bladeSettings.server.port
-//         }${req.path.substr(6)}?rootDir=${viewsSettings.rootDir}&cacheDir=${
-//           viewsSettings.cacheDir
-//         }`,
-//         method: 'POST'
-//       }).catch((e) => {
-//         console.log(e);
-//       });
-//       resolve(renderedView.data);
-//     }
-
-//     // resolve(path);
-//   });
-// };

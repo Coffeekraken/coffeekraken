@@ -1,3 +1,4 @@
+const __unique = require('../array/unique');
 const __deepMerge = require('../object/deepMerge');
 const __sugarConfig = require('../config/sugar');
 const __path = require('path');
@@ -112,6 +113,41 @@ class STemplate {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static dataHandlers = {};
+
+  /**
+   * @name      defaultRootDirs
+   * @type      Array
+   * @static
+   * 
+   * This static property store the default root directories where the class
+   * will search for views to render
+   * 
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static defaultRootDirs = [
+    __sugarConfig('views.rootDir'),
+    __path.resolve(__dirname, '../../php/views/blade')
+  ];
+
+  /**
+   * @name      getRootDirs
+   * @type      Function
+   * @static
+   * 
+   * This function accept an array of root directories
+   * and return the final array with the default root directories
+   * added correctly
+   * 
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static getRootDirs(rootDirs = []) {
+    return __unique([
+      ...(Array.isArray(rootDirs) ? rootDirs : [rootDirs]),
+      ...STemplate.defaultRootDirs
+    ]);
+  }
 
   /**
    * @name      registerEngine
@@ -234,13 +270,14 @@ class STemplate {
     this._settings = __deepMerge(
       {
         id: 'STemplate',
-        rootDir: [__sugarConfig('views.rootDir')],
+        rootDirs: [],
         engine: null,
         engineSettings: {},
         defaultData: {}
       },
       settings
     );
+    this._settings.rootDirs = this.constructor.getRootDirs(settings.rootDirs || []);
 
     Object.keys(STemplate.engines).forEach((ext) => {
       viewPathOrTemplateString = viewPathOrTemplateString.replace(
@@ -269,8 +306,8 @@ class STemplate {
         this._viewPath = viewPathOrTemplateString;
       } else if (!viewPathOrTemplateString.match(/\//gm)) {
         // doted path
-        for (let i = 0; i < this._settings.rootDir.length; i++) {
-          const rootDir = this._settings.rootDir[i];
+        for (let i = 0; i < this._settings.rootDirs.length; i++) {
+          const rootDir = this._settings.rootDirs[i];
           const viewPath = `${rootDir}/${viewPathOrTemplateString
             .split('.')
             .join('/')}.[!data]*`;
@@ -311,11 +348,10 @@ class STemplate {
   render(data = {}, settings = {}) {
     return new __SPromise(
       async (resolve, reject, trigger, cancel) => {
-        settings = __deepMerge(this._settings.engineSettings, settings);
+        settings = __deepMerge(this._settings, settings);
         data = __deepMerge(settings.defaultData, data);
-
         if (this._templateString) {
-          if (!this._settings.engine) {
+          if (!settings.engine) {
             // loop on the engines to get the better one
             for (let i = 0; i < Object.keys(STemplate.engines).length; i++) {
               const enginePath =
@@ -325,20 +361,20 @@ class STemplate {
                 EngineClass.input === 'string' &&
                 EngineClass.canRender(this._templateString)
               ) {
-                this._settings.engine = Object.keys(STemplate.engines)[i];
+                settings.engine = Object.keys(STemplate.engines)[i];
                 break;
               }
             }
           } else if (this._settings.engine instanceof __STemplateEngine) {
             if (
-              !this._settings.engine.constructor.canRender(this._templateString)
+              !settings.engine.constructor.canRender(this._templateString)
             ) {
               throw new __SError(
                 `It seems that you've passed directly an __STemplateEngine engine as the settings.engine option but this engine cannot render your passed template string...`
               );
             }
           }
-          if (!this._settings.engine) {
+          if (!settings.engine) {
             throw new __SError(
               `Sorry but it seems that the passed template string cannot be rendered using any of the available engines:\n- ${Object.keys(
                 STemplate.engines
@@ -351,7 +387,7 @@ class STemplate {
           }
         } else if (this._viewPath) {
           const viewPathWithoutExtension = this._viewPath.replace(
-            `.${this._settings.engine}`,
+            `.${settings.engine}`,
             ''
           );
 
@@ -374,9 +410,9 @@ class STemplate {
 
         if (!this._engineInstance) {
           // get the engine class
-          const EngineClass = require(STemplate.engines[this._settings.engine]);
+          const EngineClass = require(STemplate.engines[settings.engine]);
           this._engineInstance = new EngineClass({
-            ...this._settings.engineSettings
+            ...settings.engineSettings
           });
         }
 
@@ -387,10 +423,14 @@ class STemplate {
         );
 
         // resolve the render process
-        resolve(result);
+        resolve({
+          view: this._viewPath,
+          engine: settings.engine,
+          content: result
+        });
       },
       {
-        id: this._settings.id + '.render'
+        id: settings.id + '.render'
       }
     );
   }

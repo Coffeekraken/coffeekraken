@@ -10,6 +10,7 @@ const __SError = require('../../error/SError');
 const __STemplate = require('../../template/STemplate');
 const __deepMap = require('../../object/deepMap');
 const __extension = require('../../fs/extension');
+const __packageRoot = require('../../path/packageRoot');
 
 /**
  * @name                express
@@ -60,98 +61,51 @@ module.exports = (args = {}) => {
 
   // loop on handlers
   Object.keys(settings.handlers).forEach(async (pageName) => {
-    const handlerSettings = settings.handlers[pageName];
+    const handlerSettings = __deepMerge(
+      {
+        log: true
+      },
+      settings.handlers[pageName]
+    );
+    let handlerPath = handlerSettings.handler;
+    if (handlerPath.slice(-3) !== '.js') handlerPath += '.js';
 
-    const handlerFn = require(handlerSettings.handler);
+    if (!__fs.existsSync(handlerPath)) {
+      console.warn(
+        `Frontend handler "<cyan>${__path.relative(
+          __packageRoot(),
+          handlerPath
+        )}</cyan>" does not exists...`
+      );
+    } else {
+      const handlerFn = require(handlerPath);
 
-    let method = handlerSettings.method || 'get',
-      slug = handlerSettings.slug || '*',
-      extension = handlerSettings.extension
-        ? Array.isArray(handlerSettings.extension)
+      let method = handlerSettings.method || 'get',
+        slug = handlerSettings.slug || '*',
+        extension = handlerSettings.extension
           ? Array.isArray(handlerSettings.extension)
-          : [handlerSettings.extension]
-        : null;
+            ? Array.isArray(handlerSettings.extension)
+            : [handlerSettings.extension]
+          : null;
 
-    if (slug !== '*') {
-      slug = [`${slug}/*`, `${slug}`];
+      if (slug !== '*') {
+        slug = [`${slug}/*`, `${slug}`];
+      }
+
+      server[method](slug, async (req, res, next) => {
+        const reqPathExtension = __extension(req.path);
+        if (extension) {
+          if (
+            extension.indexOf(reqPathExtension) === -1 &&
+            extension.indexOf('.' + reqPathExtension) === -1
+          ) {
+            return next();
+          }
+        }
+
+        handlerFn(req, res, handlerSettings);
+      });
     }
-
-    server[method](slug, async (req, res, next) => {
-      const reqPathExtension = __extension(req.path);
-
-      if (extension) {
-        if (
-          extension.indexOf(reqPathExtension) === -1 &&
-          extension.indexOf('.' + reqPathExtension) === -1
-        ) {
-          return next();
-        }
-      }
-
-      const handlerPromise = handlerFn(req, server, handlerSettings);
-      __SPromise.pipe(handlerPromise, promise);
-
-      response = await handlerPromise;
-
-      // handle response
-      let code = response.code || 200;
-      let view = response.view || 'pages.404';
-      let data = response.data || {};
-      let title = response.title || 'Page not found';
-      let type = response.type || 'text/html';
-
-      let result;
-      if (data && data.body && data.body.includes('<html>')) {
-        result = data.body;
-      } else {
-        switch (type.toLowerCase()) {
-          case 'application/json':
-            result = data;
-            break;
-          case 'text/html':
-            data = {
-              ...res.templateData,
-              title,
-              type,
-              ...data
-            };
-            const settings = {
-              rootDir: [
-                __sugarConfig('views.rootDir'),
-                // __path.resolve(__dirname, 'views'),
-                __path.resolve(__dirname, '../../../php/views/blade')
-              ]
-            };
-
-            try {
-              const templateInstance = new __STemplate(view, settings);
-              result = await templateInstance.render(data, settings);
-            } catch (e) {
-              const templateInstance = new __STemplate('pages.501', settings);
-              code = 501;
-              result = await templateInstance.render(
-                {
-                  ...data,
-                  body: e
-                },
-                settings
-              );
-            }
-            break;
-          default:
-            const mime = __mimeTypes.contentType(type);
-            result = data;
-            res.type(mime);
-            break;
-        }
-      }
-
-      // set the code
-      res.status(code);
-
-      // send the result to the client
-      res.send(result);
-    });
   });
 
   server

@@ -75,6 +75,7 @@ module.exports = {
     resolveExtensionFreePath: {
       path: `${__dirname}/../src/node/server/frontend/middleware/resolveExtensionFreePath`,
       settings: {
+        exclude: ['/docMap'],
         extensions: [
           'js',
           'jsx',

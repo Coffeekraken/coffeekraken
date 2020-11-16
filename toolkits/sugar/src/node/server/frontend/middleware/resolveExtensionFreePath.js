@@ -27,7 +27,16 @@ const __extension = require('../../../fs/extension');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function resolveExtensionFreePath(settings = {}) {
+  settings = __deepMerge(
+    {
+      exclude: []
+    },
+    settings
+  );
   return function (req, res, next) {
+    if (settings.exclude.indexOf(req.path) !== -1) {
+      return next();
+    }
     const pathExtension = __extension(req.path).trim();
     if (pathExtension) return next();
 

@@ -3,7 +3,7 @@ const __sugarConfig = require('../../../config/sugar');
 const __resolve = require('resolve');
 const __builtInNodeModules = require('../../../module/buildInNodeModules');
 const __esbuild = require('esbuild');
-
+const __SDuration = require('../../../time/SDuration');
 const rootDir = __sugarConfig('frontend.rootDir');
 
 let exampleOnResolvePlugin = {
@@ -52,11 +52,7 @@ let exampleOnResolvePlugin = {
  */
 module.exports = async function js(req, res, settings = {}) {
   let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
-
-  const promise = new __SPromise({
-    id: 'frontendServerJsHandler'
-  });
-
+  const duration = new __SDuration();
   const buildService = await __esbuild.startService();
   buildService
     .build({
@@ -71,14 +67,19 @@ module.exports = async function js(req, res, settings = {}) {
       // outfile: 'out.js'
     })
     .then((myRes) => {
-      promise.resolve({
-        data: `
-          const process = {};
-          ${myRes.outputFiles[0].text}
-        `,
-        type: 'text/javascript'
-      });
-    });
+      if (settings.log) {
+        console.log(
+          `<bgGreen><black> js </black></bgGreen> Js file "<yellow>${
+            req.path
+          }</yellow> served in <cyan>${duration.end()}s</cyan>"`
+        );
+      }
 
-  return promise;
+      res.type('text/javascript');
+      res.status(200);
+      res.send(`
+        const process = {};
+        ${myRes.outputFiles[0].text}
+      `);
+    });
 };

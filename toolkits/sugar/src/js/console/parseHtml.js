@@ -23,6 +23,7 @@ export const tagsMap = {
   magenta: (tag, content) => __chalk.magenta(content),
   cyan: (tag, content) => __chalk.cyan(content),
   white: (tag, content) => __chalk.white(content),
+  grey: (tag, content) => __chalk.grey(content),
 
   bgBlack: (tag, content) => __chalk.bgBlack(content),
   bgRed: (tag, content) => __chalk.bgRed(content),

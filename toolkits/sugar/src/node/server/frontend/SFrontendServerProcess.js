@@ -49,9 +49,5 @@ module.exports = class SFrontendServerProcess extends __SProcess {
   process(params, settings = {}) {
     this._frontendServerProcess = __frontendServer(params);
     this.bindSPromise(this._frontendServerProcess);
-    // setTimeout(() => {
-    //   this.state = 'running';
-    // });
-    // return super.run(this._frontendServerProcess);
   }
 };

@@ -4,12 +4,9 @@
 
 @section('content')
 
-  <script type="module">
-    import React from 'react';
-    console.log(React);
-  </script>
+  <h1>{{ $title }}</h1>
 
-  <h1>Hello</h1>
+  <p>{!! $content !!}</p>
 
   <s-sugar-ui></s-sugar-ui>
 

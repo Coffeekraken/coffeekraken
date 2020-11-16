@@ -35,6 +35,7 @@ var tagsMap = {
   magenta: (tag, content) => _chalk.default.magenta(content),
   cyan: (tag, content) => _chalk.default.cyan(content),
   white: (tag, content) => _chalk.default.white(content),
+  grey: (tag, content) => _chalk.default.grey(content),
   bgBlack: (tag, content) => _chalk.default.bgBlack(content),
   bgRed: (tag, content) => _chalk.default.bgRed(content),
   bgGreen: (tag, content) => _chalk.default.bgGreen(content),

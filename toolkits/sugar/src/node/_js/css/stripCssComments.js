@@ -53,7 +53,9 @@ function stripCssComments(css, settings) {
 
   if (settings.block) {
     // css = css.replace(/\/\*{2}([\s\S]+?)\*\//g, '');
-    css = (0, _stripCssComments.default)(css);
+    css = (0, _stripCssComments.default)(css, {
+      preserve: false
+    });
   }
 
   if (settings.line) {

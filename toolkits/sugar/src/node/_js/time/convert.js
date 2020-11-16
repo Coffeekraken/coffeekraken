@@ -41,7 +41,7 @@ function convert(from, to) {
       fromMs = fromNumber * 1000;
     } else if (fromString === 'm' || fromString === 'minute' || fromString === 'minutes') {
       fromMs = fromNumber * 60 * 1000;
-    } else if (fromString === 'h' || fromString === 'hour' || fromString === 'months') {
+    } else if (fromString === 'h' || fromString === 'hour' || fromString === 'hours') {
       fromMs = fromNumber * 60 * 60 * 1000;
     } else if (fromString === 'd' || fromString === 'day' || fromString === 'days') {
       fromMs = fromNumber * 24 * 60 * 60 * 1000;

@@ -3,7 +3,7 @@
 
 @section('content')
 
-  <h1>{{ $title }}</h1>
-  <p>{{ $error }}</p>
+  <h1>{!! $title !!}</h1>
+  <p>{!! $error !!}</p>
   
 @endsection

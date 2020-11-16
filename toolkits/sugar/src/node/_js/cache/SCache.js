@@ -283,9 +283,8 @@ var SCache = /*#__PURE__*/function () {
         // check the name
         if (typeof name !== 'string') {
           name = (0, _md.default)((0, _toString.default)(name)).toString();
-        }
+        } // test name
 
-        console.log('NA', name); // test name
 
         if (!/^[a-zA-Z0-9_\-\+\.]+$/.test(name)) {
           throw new Error("You try to set an item named \"<yellow>".concat(name, "</yellow>\" in the \"").concat(this._name, "\" SCache instance but an item name can contain only these characters <green>[a-zA-Z0-9_-.]</green> but you've passed \"<red>").concat(name, "</red>\"..."));

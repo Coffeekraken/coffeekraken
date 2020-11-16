@@ -1,7 +1,7 @@
 const __SPromise = require('../../../promise/SPromise');
 const __sugarConfig = require('../../../config/sugar');
 const __SScssCompiler = require('../../../scss/SScssCompiler');
-const rootDir = __sugarConfig('frontend.rootDir');
+const __SDuration = require('../../../time/SDuration');
 
 /**
  * @name                scss
@@ -18,21 +18,21 @@ const rootDir = __sugarConfig('frontend.rootDir');
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = async function scss(req, res, settings = {}) {
-  let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
-
-  return new __SPromise(
-    async (resolve, reject) => {
-      const compiler = new __SScssCompiler({
-        sharedResources: ['sugar']
-      });
-      const compileRes = await compiler.compile(req.path);
-      resolve({
-        data: compileRes.css,
-        type: 'text/css'
-      });
-    },
-    {
-      id: 'frontendServerScssHandler'
-    }
-  );
+  const compiler = new __SScssCompiler({
+    sharedResources: ['sugar']
+  });
+  const duration = new __SDuration();
+  const compileRes = await compiler.compile(req.path, {
+    query: req.query || {}
+  });
+  if (settings.log) {
+    console.log(
+      `<bgGreen><black> scss </black></bgGreen> Scss file "<yellow>${
+        req.path
+      }</yellow> served in <cyan>${duration.end()}s</cyan>"`
+    );
+  }
+  res.type('text/css');
+  res.status(200);
+  res.send(compileRes.css);
 };

@@ -46,7 +46,7 @@ function convert(from, to = 'ms') {
     } else if (
       fromString === 'h' ||
       fromString === 'hour' ||
-      fromString === 'months'
+      fromString === 'hours'
     ) {
       fromMs = fromNumber * 60 * 60 * 1000;
     } else if (

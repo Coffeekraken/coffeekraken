@@ -1,7 +1,6 @@
 let __fs = require('fs');
 let __SScssCompiler = require('../../../../scss/SScssCompiler');
 let __tmpDir = require('../../../../fs/tmpDir');
-const { result } = require('lodash');
 
 module.exports = {
   name: 'esbuildScssLoaderPlugin',

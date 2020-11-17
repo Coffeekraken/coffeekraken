@@ -1,42 +1,43 @@
 {
-  "name": "@coffeekraken/sugar-ui",
-  "version": "0.0.1",
-  "description": "Sugar webapp that is used to develop nice and clean modern websites",
-  "homepage": "https://coffeekraken.io",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "del dist",
-    "init": "snowpack init --config ../sugar/snowpack.config.js --reload --polyfill-node",
-    "install": "snowpack install --config ../sugar/snowpack.config.js --reload --polyfill-node",
-    "dev": "npm run clean && snowpack dev --config ../sugar/snowpack.config.js --reload --polyfill-node",
-    "build": "npm run clean && SNOWPACK_IS_BUILD=true snowpack build --config ../sugar/snowpack.config.js --polyfill-node"
-  },
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/s-filtrable-input": "file:../../webcomponents/s-filtrable-input",
-    "@coffeekraken/sugar": "file:../sugar",
-    "codemirror": "^5.58.2",
-    "@snowpack/plugin-babel": "^2.1.4",
-    "parcel-bundler": "^1.12.4",
-    "postcss": "8.1.4",
-    "postcss-easings": "^3.0.1",
-    "postcss-import": "^13.0.0",
-    "postcss-import-url": "^5.1.0",
-    "postcss-preset-env": "6.7.0",
-    "react": "^17.0.1"
-  },
-  "devDependencies": {
-    "@csstools/postcss-sass": "^4.0.0",
-    "@snowpack/plugin-sass": "^1.1.1",
-    "del-cli": "^3.0.1",
-    "postcss-cli": "^8.2.0",
-    "postcss-scss": "^3.0.2",
-    "react": "^17.0.1",
-    "rollup-plugin-postcss": "^3.1.8",
-    "rollup-plugin-sass": "^1.2.2",
-    "rollup-plugin-scss": "^2.6.1",
-    "snowpack": "^2.16.1"
-  }
+    "name": "@coffeekraken/sugar-ui",
+    "version": "0.0.1",
+    "description": "Sugar webapp that is used to develop nice and clean modern websites",
+    "homepage": "https://coffeekraken.io",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "clean": "del dist",
+        "init": "snowpack init --config ../sugar/snowpack.config.js --reload --polyfill-node",
+        "install": "snowpack install --config ../sugar/snowpack.config.js --reload --polyfill-node",
+        "dev": "npm run clean && snowpack dev --config ../sugar/snowpack.config.js --reload --polyfill-node",
+        "build": "npm run clean && SNOWPACK_IS_BUILD=true snowpack build --config ../sugar/snowpack.config.js --polyfill-node"
+    },
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-filtrable-input": "file:../../webcomponents/s-filtrable-input",
+        "@coffeekraken/sugar": "file:../sugar",
+        "codemirror": "^5.58.2",
+        "@snowpack/plugin-babel": "^2.1.4",
+        "parcel-bundler": "^1.12.4",
+        "postcss": "8.1.4",
+        "postcss-easings": "^3.0.1",
+        "postcss-import": "^13.0.0",
+        "postcss-import-url": "^5.1.0",
+        "postcss-preset-env": "6.7.0",
+        "react": "^17.0.1"
+    },
+    "devDependencies": {
+        "@csstools/postcss-sass": "^4.0.0",
+        "@snowpack/plugin-sass": "^1.1.1",
+        "del-cli": "^3.0.1",
+        "postcss-cli": "^8.2.0",
+        "postcss-scss": "^3.0.2",
+        "react": "^17.0.1",
+        "rollup-plugin-postcss": "^3.1.8",
+        "rollup-plugin-sass": "^1.2.2",
+        "rollup-plugin-scss": "^2.6.1",
+        "snowpack": "^2.16.1"
+    },
+    "frontspec": "dist/frontspec.json"
 }

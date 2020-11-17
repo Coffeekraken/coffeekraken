@@ -2,7 +2,7 @@ const __ipAddress = require('../src/node/network/ipAddress');
 const __packageRoot = require('../src/node/path/packageRoot');
 
 module.exports = {
-  assets: '@config.assets',
+  assets: '[config.assets]',
 
   /**
    * @name              port

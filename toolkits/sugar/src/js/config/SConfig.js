@@ -282,12 +282,11 @@ export default class SConfig {
       value = __deepMap(value, (val, prop, fullPath) => {
         // check if we get some things to use as variable
         if (typeof val === 'string') {
-          if (val.substr(0, 7) === '@config') {
-            val = this.get(val.replace('@config.', ''), adapter);
-            return val;
-          }
-
-          const reg = /\[config.[a-zA-Z0-9.]+\]/gm;
+          // if (val.substr(0, 7) === '@config') {
+          //   val = this.get(val.replace('@config.', ''), adapter);
+          //   return val;
+          // }
+          const reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
           const matches = val.match(reg);
           if (matches && matches.length) {
             if (matches.length === 1 && val === matches[0]) {
@@ -313,8 +312,25 @@ export default class SConfig {
 
         return val;
       });
-    } else if (typeof value === 'string' && value.substr(0, 7) === '@config') {
-      value = this.get(value.replace('@config.', ''), adapter);
+    } else if (typeof value === 'string') {
+      const reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
+      const matches = value.match(reg);
+      if (matches) {
+        if (matches.length === 1 && value === matches[0]) {
+          value = this.get(
+            matches[0].replace('[config.', '').replace(']', ''),
+            adapter
+          );
+          return value;
+        } else {
+          matches.forEach((match) => {
+            value = value.replace(
+              match,
+              this.get(match.replace('[config.', '').replace(']', ''), adapter)
+            );
+          });
+        }
+      }
     }
 
     if (settings.throwErrorOnUndefinedConfig && value === undefined) {

@@ -16,7 +16,7 @@
  * filter({
  *    coco: 'hello',
  *    plop: true
- * }, (item, name) => typeof item === 'string');
+ * }, (key, item) => typeof item === 'string');
  * // { coco: 'hello' }
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -28,7 +28,7 @@ export default function filter(object, filter) {
   // loop on the object keys
   Object.keys(object).forEach((propertyName) => {
     // pass the property in the filter function
-    if (filter(object[propertyName], propertyName)) {
+    if (filter(propertyName, object[propertyName])) {
       // add the property in the new object
       result[propertyName] = object[propertyName];
     }

@@ -146,7 +146,7 @@ class SProcessManager extends __SPromise {
     }
 
     // start if autoStart
-    if (settings.autoStart) this.start(settings);
+    if (settings.autoStart) this.start(this._settings);
   }
 
   /**

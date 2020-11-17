@@ -1,5 +1,5 @@
 const __packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
 
 module.exports = {
-  frontspec: false
+  useFrontspec: false
 };

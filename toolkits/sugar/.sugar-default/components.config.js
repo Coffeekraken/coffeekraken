@@ -46,9 +46,9 @@ module.exports = {
 
   button: {
     colors: {
-      primary: '@config.colors.primary',
-      secondary: '@config.colors.secondary',
-      default: '@config.colors.primary'
+      primary: '[config.colors.primary]',
+      secondary: '[config.colors.secondary]',
+      default: '[config.colors.primary]'
     },
     sizes: {
       smaller: 0.6,

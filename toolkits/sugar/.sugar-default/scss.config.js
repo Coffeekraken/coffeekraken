@@ -1,17 +1,17 @@
 module.exports = {
   // import some settings
-  borders: '@config.borders',
-  classes: '@config.classes',
-  components: '@config.components',
-  colors: '@config.colors',
-  fonts: '@config.fonts',
-  filters: '@config.filters',
-  'look-and-feel': '@config.look-and-feel',
-  media: '@config.media',
-  sizes: '@config.sizes',
-  spaces: '@config.spaces',
-  transitions: '@config.transitions',
-  typography: '@config.typography',
+  borders: '[config.borders]',
+  classes: '[config.classes]',
+  components: '[config.components]',
+  colors: '[config.colors]',
+  fonts: '[config.fonts]',
+  filters: '[config.filters]',
+  'look-and-feel': '[config.look-and-feel]',
+  media: '[config.media]',
+  sizes: '[config.sizes]',
+  spaces: '[config.spaces]',
+  transitions: '[config.transitions]',
+  typography: '[config.typography]',
 
   helpers: {
     flex: {

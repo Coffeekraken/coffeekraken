@@ -1,16 +1,10 @@
-const __SBuildScssProcess = require('../../node/build/scss/SBuildScssProcess');
+const __SBuildScssProcess = require('../../node/scss/build/SBuildScssProcess');
 const __SProcessManager = require('../../node/process/SProcessManager');
-const __SFsDeamon = require('../../node/deamon/fs/SFsDeamon');
 
 module.exports = (stringArgs = '') => {
-  const manager = new __SProcessManager(__SBuildScssProcess, {
+  new __SProcessManager(__SBuildScssProcess, {
     autoRun: true,
-    deamon: new __SFsDeamon({
-      processParams: (params, file) => {
-        // params.input = file.path;
-        return params;
-      }
-    }),
+    initialParams: stringArgs,
     processSettings: {
       runAsChild: true
     }

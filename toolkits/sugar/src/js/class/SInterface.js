@@ -19,6 +19,8 @@ import __set from '../object/set';
  * This class allows you to define an interface that you can later apply to an object instance
  * to make sure this particular instance has all the features, methods and properties you want.
  *
+ * @todo      Enhance the interface validation for things like missing "type" property, etc...
+ *
  * @example         js
  * import SInterface from '@coffeekraken/sugar/js/class/SInterface';
  * class MyCoolInterface extends SInterface {
@@ -191,6 +193,23 @@ export default class SInterface {
       default:
         return SInterface.outputString(issueObj, settings);
     }
+  }
+
+  /**
+   * @name          getDefaultValues
+   * @type          Function
+   * @static
+   *
+   * This static method allows you to get the default values object
+   * that this interface represent
+   *
+   * @return      {Object}        An object of all default values represented by this interface
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static getDefaultValues() {
+    return this.applyAndComplete({});
   }
 
   /**

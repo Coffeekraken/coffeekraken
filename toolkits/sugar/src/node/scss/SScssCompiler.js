@@ -1,8 +1,6 @@
-const __toString = require('../string/toString');
 const __extension = require('../fs/extension');
 const __SCache = require('../cache/SCache');
 const __unquote = require('../string/unquote');
-const __sugarConfig = require('../config/sugar');
 const __path = require('path');
 const __stripCssComments = require('../css/stripCssComments');
 const __folderPath = require('../fs/folderPath');
@@ -10,7 +8,6 @@ const __deepMerge = require('../object/deepMerge');
 const __SPromise = require('../promise/SPromise');
 const __md5 = require('../crypt/md5');
 const __sass = require('sass');
-const __globImporter = require('node-sass-glob-importer');
 const __packageRoot = require('../path/packageRoot');
 const __getFilename = require('../fs/filename');
 const __isPath = require('../is/path');
@@ -23,7 +20,9 @@ const __stringifyScss = require('scss-parser').stringify;
 const __createQueryWrapper = require('query-ast');
 const __csso = require('csso');
 const __isGlob = require('is-glob');
-const __copy = require('../clipboard/copy');
+const __unique = require('../array/unique');
+const __SBuildScssInterface = require('./build/interface/SBuildScssInterface');
+const { start } = require('repl');
 
 /**
  * @name                SScssCompiler
@@ -43,6 +42,7 @@ const __copy = require('../clipboard/copy');
  * @setting         {Boolean}       [optimizers.split=true]     Specify if you want to make use of the splitting code technique to compile only what's really changed
  *
  * @todo            tests
+ * @todo            check for map output when no file path
  *
  * @example         js
  * const SScssCompiler = require('@coffeekraken/sugar/node/scss/SScssCompiler');
@@ -69,6 +69,8 @@ module.exports = class SScssCompiler {
    */
   _settings = {};
 
+  _includePaths = [];
+
   /**
    * @name            constructor
    * @type             Function
@@ -83,16 +85,20 @@ module.exports = class SScssCompiler {
     this._settings = __deepMerge(
       {
         id: this.constructor.name,
-        cache: true,
-        clearCache: false,
-        stripComments: true,
-        minify: false,
-        sass: {},
-        rootDir: __sugarConfig('frontend.rootDir'),
+        ...__SBuildScssInterface.getDefaultValues(),
+        includePaths: [],
         putUseOnTop: true
       },
       settings
     );
+
+    // prod
+    if (this._settings.prod) {
+      this._settings.cache = false;
+      this._settings.style = 'compressed';
+      this._settings.minify = true;
+      this._settings.stripComments = true;
+    }
   }
 
   /**
@@ -118,8 +124,7 @@ module.exports = class SScssCompiler {
           {
             _isChild: false
           },
-          settings,
-          settings.query || {}
+          settings
         );
 
         const startTime = Date.now();
@@ -133,23 +138,81 @@ module.exports = class SScssCompiler {
         };
         source = source.trim();
 
-        const includePaths = [
-          ...(settings.rootDir || []),
-          ...(settings.sass.includePaths || []),
+        const includePaths = __unique([
+          ...(this._settings.includePaths
+            ? !Array.isArray(this._settings.includePaths)
+              ? [this._settings.includePaths]
+              : this._settings.includePaths
+            : []),
+          ...(settings.rootDir
+            ? !Array.isArray(settings.rootDir)
+              ? [settings.rootDir]
+              : settings.rootDir
+            : []),
+          ...(settings.sass.includePaths
+            ? !Array.isArray(settings.sass.includePaths)
+              ? [settings.sass.includePaths]
+              : settings.sass.includePaths
+            : []),
           `${__packageRoot()}/node_modules`
-        ];
+          // '/'
+        ]);
+        this._includePaths = includePaths;
 
         let sharedResources = settings.sharedResources || [];
         if (!Array.isArray(sharedResources))
           sharedResources = [sharedResources];
+
+        const resourceContent = __getSharedResourcesString(sharedResources);
+        if (resourceContent) {
+          dataObj.sharedResources = resourceContent;
+        }
 
         let sassPassedSettings = Object.assign({}, settings.sass || {});
         delete sassPassedSettings.includePaths;
         delete sassPassedSettings.sharedResources;
         const sassSettings = __deepMerge(
           {
-            importer: [],
-            sourceMap: true,
+            importer: [
+              (url, prev, done) => {
+                if (resourceContent) {
+                  const realPath = this._findDependency(url);
+                  if (realPath) {
+                    let content = __fs.readFileSync(realPath, 'utf8');
+                    const importMatches = content.match(
+                      /@import\s['"].*['"];/gm
+                    );
+                    if (importMatches) {
+                      importMatches.forEach((importStatement) => {
+                        let replaceImportStatement = importStatement;
+                        const importPathMatches = importStatement.match(
+                          /['"].*['"]/g
+                        );
+                        if (importPathMatches) {
+                          const importPath = __unquote(importPathMatches[0]);
+                          const absoluteImportPath = __path.resolve(
+                            __folderPath(realPath),
+                            importPath
+                          );
+                          content = content.replace(
+                            importStatement,
+                            `@import "${absoluteImportPath}";`
+                          );
+                        }
+                      });
+                    }
+                    return {
+                      contents: `
+                        ${resourceContent}
+                        ${content}
+                      `
+                    };
+                  }
+                }
+                return null;
+              }
+            ],
+            sourceMap: this._settings.map,
             includePaths
           },
           sassPassedSettings
@@ -225,11 +288,6 @@ module.exports = class SScssCompiler {
           dataObj.scss = settings.stripComments
             ? __stripCssComments(dataObj.scss)
             : dataObj.scss;
-
-          const resourceContent = __getSharedResourcesString(sharedResources);
-          if (resourceContent) {
-            dataObj.sharedResources = resourceContent;
-          }
         }
 
         if (!dataObj.fromCache) {
@@ -252,18 +310,12 @@ module.exports = class SScssCompiler {
         dataObj.scss = scss;
 
         let toCompile = `
-            ${dataObj.sharedResources}
+            ${dataObj.sharedResources || ''}
           `;
 
         if (!settings._isChild) {
           toCompile += this._bundleChildren(dataObj);
           toCompile += dataObj.scss;
-
-          __copy(
-            __toString(dataObj, {
-              beautify: true
-            })
-          );
         } else {
           toCompile += dataObj.scss;
         }
@@ -281,7 +333,10 @@ module.exports = class SScssCompiler {
           let compiledResultString = settings.stripComments
             ? __stripCssComments(renderObj.css.toString())
             : renderObj.css.toString();
-          dataObj.css = settings.stripComments = compiledResultString.trim();
+          dataObj.css = compiledResultString.trim();
+          if (renderObj.map) {
+            dataObj.map = renderObj.map.toString();
+          }
 
           // set in cache if needed
           if (settings.cache) {
@@ -300,6 +355,14 @@ module.exports = class SScssCompiler {
           } catch (e) {}
         }
 
+        // banner
+        if (!settings._isChild && settings.banner) {
+          dataObj.css = `
+            ${settings.banner}
+            ${dataObj.css}
+          `.trim();
+        }
+
         // resolve with the compilation result
         resolve({
           ...dataObj,
@@ -314,6 +377,15 @@ module.exports = class SScssCompiler {
     );
   }
 
+  _findDependency(path) {
+    for (let i = 0; i < this._includePaths.length; i++) {
+      const includePath = this._includePaths[i];
+      const realPath = this._getRealFilePath(`${includePath}/${path}`);
+      if (realPath) return realPath;
+    }
+    return null;
+  }
+
   _bundleChildren(object) {
     if (!object.children) {
       return '';
@@ -322,7 +394,8 @@ module.exports = class SScssCompiler {
     Object.keys(object.children).forEach((importPath) => {
       const childObj = object.children[importPath];
       if (childObj.children) {
-        resultString += this._bundleChildren(childObj);
+        const ch = this._bundleChildren(childObj);
+        if (ch) resultString += ch;
       }
       resultString += `
         ${childObj.css || ''}

@@ -16,7 +16,7 @@ module.exports = {
       interface: `${__packageRoot(
         __dirname
       )}/src/node/server/frontend/interface/SFrontendServerInterface`,
-      params: '@config.frontend'
+      params: '[config.frontend]'
     }
     // buildScss: {
     //   id: 'buildScss',

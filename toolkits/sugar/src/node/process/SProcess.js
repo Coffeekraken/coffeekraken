@@ -18,6 +18,8 @@ const __childProcess = require('child_process');
 const __output = require('./output');
 const __stackTrace = require('stack-trace');
 const __argsToString = require('../cli/argsToString');
+const __toString = require('../string/toString');
+const __copy = require('../clipboard/copy');
 
 /**
  * @name                SProcess
@@ -453,6 +455,12 @@ module.exports = class SProcess extends __SPromise {
     }
 
     if (settings.runAsChild && !__isChildProcess()) {
+      // __copy(
+      //   __toString(paramsObj, {
+      //     beautify: true
+      //   })
+      // );
+      // throw 'cco';
       // build the command to run depending on the passed command in the constructor and the params
       const commandToRun = __buildCommandLine(
         `node ${__path.resolve(

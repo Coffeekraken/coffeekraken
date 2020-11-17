@@ -1,5 +1,5 @@
 @use '@coffeekraken/s-filtrable-input/index' as SFiltrableInput;
-// @include SFiltrableInput.style();
+@include SFiltrableInput.style();
 
 $primaryColor: #15191b;
 $secondaryColor: #2b3438;

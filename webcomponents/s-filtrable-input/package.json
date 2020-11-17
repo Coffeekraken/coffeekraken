@@ -1,5 +1,6 @@
 {
   "name": "@coffeekraken/s-filtrable-input",
+  "type": "webcomponent",
   "version": "1.0.0",
   "description": "Filtrable input",
   "homepage": "https://coffeekraken.io",

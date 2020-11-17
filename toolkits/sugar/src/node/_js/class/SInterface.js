@@ -65,6 +65,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * This class allows you to define an interface that you can later apply to an object instance
  * to make sure this particular instance has all the features, methods and properties you want.
  *
+ * @todo      Enhance the interface validation for things like missing "type" property, etc...
+ *
  * @example         js
  * import SInterface from '@coffeekraken/sugar/js/class/SInterface';
  * class MyCoolInterface extends SInterface {
@@ -228,6 +230,25 @@ var SInterface = /*#__PURE__*/function () {
         default:
           return SInterface.outputString(issueObj, settings);
       }
+    }
+    /**
+     * @name          getDefaultValues
+     * @type          Function
+     * @static
+     *
+     * This static method allows you to get the default values object
+     * that this interface represent
+     *
+     * @return      {Object}        An object of all default values represented by this interface
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+
+  }, {
+    key: "getDefaultValues",
+    value: function getDefaultValues() {
+      return this.applyAndComplete({});
     }
     /**
      * @name          applyAndThrow

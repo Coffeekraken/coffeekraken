@@ -1,7 +1,6 @@
-const __SPromise = require('../../../promise/SPromise');
-const __sugarConfig = require('../../../config/sugar');
 const __SScssCompiler = require('../../../scss/SScssCompiler');
 const __SDuration = require('../../../time/SDuration');
+const __SBuildScssInterface = require('../../../scss/build/interface/SBuildScssInterface');
 
 /**
  * @name                scss
@@ -18,12 +17,11 @@ const __SDuration = require('../../../time/SDuration');
  * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = async function scss(req, res, settings = {}) {
-  const compiler = new __SScssCompiler({
-    sharedResources: ['sugar']
-  });
+  const defaultValuesObj = __SBuildScssInterface.getDefaultValues();
+  const compiler = new __SScssCompiler(defaultValuesObj);
   const duration = new __SDuration();
   const compileRes = await compiler.compile(req.path, {
-    query: req.query || {}
+    ...(req.query || {})
   });
   if (settings.log) {
     console.log(

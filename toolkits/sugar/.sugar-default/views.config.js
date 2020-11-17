@@ -19,14 +19,14 @@ module.exports = {
    * @name            cacheDir
    * @namespace       config.views
    * @type            String
-   * @default          @config.cache.fs.rootDir
+   * @default          [config.cache.fs.rootDir]
    *
    * Specify the views template rendering cache directory
    *
    * @since       2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  cacheDir: `@config.cache.fs.rootDir`,
+  cacheDir: `[config.cache.fs.rootDir]`,
 
   /**
    * @name      engines

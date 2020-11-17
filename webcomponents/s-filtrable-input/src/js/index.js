@@ -9,68 +9,13 @@ import __SRequest from '@coffeekraken/sugar/js/http/SRequest';
 import __SLitHtmlWebComponent from '@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent';
 import __SWebComponent from '@coffeekraken/sugar/js/webcomponent/SWebComponent';
 
+import '../scss/_bare.scss';
+
 class SFiltrableInputWebComponent extends __SLitHtmlWebComponent({
   extends: HTMLInputElement,
   name: 'SFiltrableInput'
 }) {
-  static props = {
-    items: {
-      type: 'Array<Object>',
-      required: true,
-      physical: false,
-      default: [],
-      watch: true
-    },
-    inputValueProp: {
-      type: 'String',
-      default: 'title'
-    },
-    noItemText: {
-      type: 'String',
-      default: 'No result sorry...'
-    },
-    loadingText: {
-      type: 'String',
-      default: 'Loading please wait...'
-    },
-    closeOnEscape: {
-      type: 'Boolean',
-      default: true
-    },
-    closeOnSelect: {
-      type: 'Boolean',
-      default: true
-    },
-    closeOnSelectTimeout: {
-      type: 'Integer',
-      default: 200
-    },
-    preselectFirst: {
-      type: 'Boolean',
-      default: true
-    },
-    maxDisplayItems: {
-      type: 'Integer',
-      default: 50
-    },
-    inputThrottle: {
-      type: 'Number',
-      default: 0,
-      watch: true
-    },
-    ':onSelect': {
-      type: 'String',
-      required: false,
-      default: null
-    },
-    loading: {
-      type: 'Boolean',
-      required: false,
-      physical: true,
-      default: false,
-      watch: true
-    }
-  };
+  static props = {};
 
   static customEvents = {
     select: {}

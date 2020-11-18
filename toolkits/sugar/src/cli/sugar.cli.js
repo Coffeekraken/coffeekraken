@@ -1,8 +1,6 @@
 #!/usr/bin/env node --trace-warnings --trace-uncaught
-
 require('../node/index');
-const __isChildProcess = require('../node/is/childProcess');
-const __exitCleanup = require('../node/process/exitCleanup');
+// const __exitCleanup = require('../node/process/exitCleanup');
 
 /**
  * @name            sugar.cli

@@ -1,13 +1,10 @@
-const __sugarHeading = require('./ascii/sugarHeading');
 const __sugarConfig = require('./config/sugar');
 const __SLog = require('./log/SLog');
 const __handleError = require('./error/handleError');
 const __initEnv = require('./init/initEnv');
 const __onProcessExit = require('./process/onProcessExit');
 const __exitCleanup = require('./process/exitCleanup');
-const __clear = require('clear');
 const __SIpc = require('./ipc/SIpc');
-const __isChildProcess = require('./is/childProcess');
 
 /**
  * @name                    index

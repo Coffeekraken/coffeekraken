@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
   "scripts": {
-    "start": "npm run install-lerna && lerna bootstrap && npx lerna link && npm run init-sugar",
+    "start": "node ./toolkits/sugar/src/cli/sugar.cli.js bootstrap.monorepo",
     "install-lerna": "(npm list -g | grep lerna > /dev/null 2>&1) || npm install -g lerna",
     "init-sugar": "(cd toolkits/sugar && npm link && npm i)",
     "install-all": "lerna exec --parallel -- npm i"

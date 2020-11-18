@@ -8,14 +8,14 @@ module.exports = {
    * @name              port
    * @namespace         config.sugar-ui.modules.frontendServer.settings
    * @type              Number
-   * @default           3000
+   * @default           666
    *
    * Specify the port to use for the frontend server
    *
    * @since             2.0.0
    * @author 			Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  port: 3000,
+  port: 666,
 
   /**
    * @name              hostname

@@ -6,8 +6,18 @@
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run-scripts", "debug"],
+      "runtimeArgs": [
+        "run-scripts",
+        "debug"
+      ],
       "port": 9229
+    },
+    {
+      "name": "Docker Node.js Launch",
+      "type": "docker",
+      "request": "launch",
+      "preLaunchTask": "docker-run: debug",
+      "platform": "node"
     }
   ]
 }

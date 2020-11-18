@@ -1,0 +1,22 @@
+{
+	"name": "Coffeekraken",
+  "dockerFile": "Dockerfile",
+	"forwardPorts": [
+		666
+  ],
+  "runArgs": [
+    "--name=coffeekraken"
+  ],
+	"extensions": [
+		"editorconfig.editorconfig",
+		"eamodio.gitlens",
+		"cjhowe7.laravel-blade",
+		"bierner.lit-html",
+		"pkief.material-icon-theme",
+		"esbenp.prettier-vscode",
+		"shinnn.stylelint",
+		"robbowen.synthwave-vscode",
+		"msjsdiag.debugger-for-chrome",
+		"firefox-devtools.vscode-firefox-debug"
+  ]
+}

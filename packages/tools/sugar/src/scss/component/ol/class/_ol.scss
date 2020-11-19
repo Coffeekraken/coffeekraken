@@ -1,0 +1,104 @@
+/**
+  * @name            ol-classes
+  * @namespace       sugar.scss.component.ol.class
+  * @type            Mixin
+  *
+  * This mixin generate all the css needed to display properly some ordered lists.
+  *
+  * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
+  * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
+  * @param       {String}    [separator='settings.components.ol.separator']    The separator you want to use
+  * @param       {Number}    [$line-height='settings.components.ol.look-and-feel.line-height | settings.look-and-feel.line-height']      The line-height you want to use
+  * @param       {String}    [$scope=null]         The scope you want to generate. Can be "bare" or "style"
+  *
+  * @example         html
+  * <ol class="#{sel(ol)}">
+  *   <li>I'm a cool ordered list item</li>
+  *   <li>I'm a cool ordered list item</li>
+  *   <li>I'm a cool ordered list item</li>
+  *   <li>I'm a cool ordered list item</li>
+  *   <li>I'm a cool ordered list item</li>
+  *   <li>I'm a cool ordered list item</li>
+  *   <li>I'm a cool ordered list item</li>
+  * </ol>
+  *
+  * @example           scss
+  * @include Sugar.ol-classes();
+  *
+  * @since       2.0.0
+  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  */
+@mixin ol-classes(
+  $colors: map-keys(setting('colors')),
+  $sizes: map-keys(setting('sizes')),
+  $separator: '.',
+  $name: 'ol'
+) {
+  @if class-match-namespace('sugar.component.ol') {
+    @if scope('bare') {
+      @each $size in $sizes {
+        /**
+      * @name              .#{sel(#{$name}--#{$size})}, .#{sel(#{tf-class()})} ol.#{sel($size)}
+      * @namespace         sugar.scss.component
+      * @type              Classname
+      *
+      * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$size}```
+      *
+      * @example         html
+      * <ol class="#{sel(#{$name}--#{$size})}">
+        *   <li>I'm a cool ordered list item</li>
+        *   <li>I'm a cool ordered list item</li>
+        *   <li>I'm a cool ordered list item</li>
+        *   <li>I'm a cool ordered list item</li>
+        *   <li>I'm a cool ordered list item</li>
+        *   <li>I'm a cool ordered list item</li>
+        *   <li>I'm a cool ordered list item</li>
+        * </ol>    *
+      * @since       2.0.0
+      * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+        .#{sel(#{tf-class()})} #{$name}.#{$size},
+        .#{sel($name)}.#{sel('#{$name}--#{$size}')} {
+          @include ol(
+            $size: $size,
+            $separator: $separator,
+            $scope: 'bare'
+          );
+        }
+      }
+    }
+
+    @if scope('style') {
+      @each $color in $colors {
+        /**
+      * @name              .#{sel(#{$name}--#{$color})}, .#{sel(#{tf-class()})} ol.#{sel($color)}
+      * @namespace         sugar.scss.component
+      * @type              Classname
+      *
+      * This class can be applied on any ```#{$name}``` component to specify his size to ```#{$color}```
+      *
+      * @example         html
+      * <ol class="#{sel(#{$name})} #{sel(#{$name}--#{$color})}">
+        *   <li>I'm a cool ordered list item</li>
+        *   <li>I'm a cool ordered list item</li>
+        *   <li>I'm a cool ordered list item</li>
+        *   <li>I'm a cool ordered list item</li>
+        *   <li>I'm a cool ordered list item</li>
+        *   <li>I'm a cool ordered list item</li>
+        *   <li>I'm a cool ordered list item</li>
+        * </ol>    *
+      * @since       2.0.0
+      * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+        .#{sel(#{tf-class()})} #{$name}.#{$color},
+        .#{sel($name)}.#{sel('#{$name}--#{$color}')} {
+          @include ol(
+            $color: $color,
+            $scope: 'style',
+            $separator: $separator
+          );
+        }
+      }
+    }
+  }
+}

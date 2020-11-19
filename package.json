@@ -4,9 +4,10 @@
   "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
   "scripts": {
     "start": "node ./toolkits/sugar/src/cli/sugar.cli.js bootstrap.monorepo",
-    "install-lerna": "(npm list -g | grep lerna > /dev/null 2>&1) || npm install -g lerna",
-    "init-sugar": "(cd toolkits/sugar && npm link && npm i)",
-    "install-all": "lerna exec --parallel -- npm i"
+    "dev": "npm run dev.js; npm run dev.node",
+    "dev.js": "tsc -p tsconfig.js.json --watch",
+    "dev.node": "tsc -p tsconfig.node.json --watch",
+    "init-sugar": "(cd toolkits/sugar && npm link && npm i)"
   },
   "pre-commit": [],
   "repository": {
@@ -37,14 +38,6 @@
     "trailingComma": "none"
   },
   "homepage": "https://github.com/Coffeekraken/coffeekraken#readme",
-  "_moduleAliases": {
-    "@coffeekraken/webpack-coffee-loader": "webpack/coffee-loader",
-    "@coffeekraken/coffeebuilder": "terminal/coffeebuilder",
-    "@coffeekraken/webpack-concat-dependencies-vendors-plugin": "webpack/concat-dependencies-vendors-plugin",
-    "@coffeekraken/webpack-lazy-dom-load-plugin": "webpack/lazy-dom-load-plugin",
-    "@coffeekraken/sugar/js": "util/sugar/dist/js",
-    "@coffeekraken/sugar/node": "util/sugar/src/node"
-  },
   "dependencies": {
     "@coffeekraken/s-filtrable-input": "file:webcomponents/s-filtrable-input",
     "@coffeekraken/sugar": "file:toolkits/sugar"
@@ -53,6 +46,7 @@
   "devDependencies": {
     "@shopify/jest-dom-mocks": "^2.8.11",
     "@testing-library/jest-dom": "^5.3.0",
+    "@types/node": "^14.14.8",
     "babel-loader": "^8.1.0",
     "babel-plugin-add-module-exports": "^1.0.2",
     "eslint": "^7.8.0",
@@ -73,7 +67,10 @@
     "puppeteer": "^2.1.1",
     "replace-in-files": "^2.0.3",
     "rimraf": "^3.0.2",
+    "semistandard": "^16.0.0",
     "symlink-dir": "^3.1.1",
+    "ts-standard": "^9.0.0",
+    "typescript": "^4.0.5",
     "webpack-cli": "^3.3.10"
   }
 }

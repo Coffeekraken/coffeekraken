@@ -1,0 +1,42 @@
+/**
+ * @name              helper-block-classes
+ * @namespace         sugar.scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "block" related helper classes.
+ *
+ * @classname       #{sel(block-center)}          Make an element a block and center it
+ *
+ * @example         scss
+ * @include Sugar.helper-block-classes();
+ *
+ * @since         2.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+@mixin helper-block-classes() {
+  @if class-match-namespace('sugar.helper.block.align.center') {
+    /**
+      * @name 		#{sel(block-center)}
+      * @namespace           sugar.scss.helper.class
+      * @class-namespace     sugar.helper.block.align.center
+      * @type        class
+      *
+      * Set the element to as ```display:block``` and center it
+      *
+      * @classname       #{sel(block-center)}          Make an element a block and center it
+      *
+      * @example 	html
+      * <div class="#{sel(block-center)} #{sel(bg-primary)}" style="width:100px;">
+      * 	I'm a centered block
+      * </div>
+      *
+      * @since       1.0.0
+      * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+      */
+    .#{sel(block-center)} {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}

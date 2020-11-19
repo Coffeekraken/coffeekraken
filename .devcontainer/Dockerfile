@@ -41,3 +41,7 @@ RUN apt -y install mysql-server
 # installing git
 RUN echo "\n\e[33mInstalling GIT\e[0m"
 RUN apt -y install git-all
+
+# installing global npm packages
+RUN npm i -g typescript
+RUN npm i -g standard

@@ -1,0 +1,29 @@
+/**
+ * @name    str-trim
+ * @namespace           sugar.scss.core.string.function
+ * @type      function
+ *
+ * trim the passed string
+ *
+ * @param         {String}        $string         The string in which to trim
+ * @return        {String}                        The processed string
+ *
+ * @example     scss
+ * Sugar.str-trim('Hello world   '); // 'Hello coco'
+ *
+ * @since       1.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+@function str-trim($string) {
+  $first: (str-slice($string, 1, 1) == ' ');
+  $last: (str-slice($string, -1) == ' ');
+
+  @if ($first or $last) {
+    $string: if($first, str-slice($string, 2), $string);
+    $string: if($last, str-slice($string, 1, -2), $string);
+    $string: str-trim($string);
+  }
+
+  @return $string;
+}

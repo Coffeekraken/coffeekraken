@@ -1,0 +1,29 @@
+@use 'sass:math';
+/**
+ * @name    math-sin
+ * @namespace           sugar.scss.core.math.function
+ * @type      function
+ *
+ * Calculate the sinus of the passed angle
+ *
+ * @param       {Number}      $angle        The angle to calculate the sinus from
+ * @return      {Number}                    The calculated sinus
+ *
+ * @example     scss
+ * Sugar.math-sin(10); // => 2.761090926
+ *
+ * @since       1.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function math-sin($angle) {
+  $angle: test-argument('Sugar.math-sin', 'angle', number, $angle);
+
+  $a: math-to-unitless-rad($angle);
+  $sin: $a;
+  @for $n from 1 through $__math-precision {
+    $sin: $sin +
+      (math-pow(-1, $n) / math-fact(2 * $n + 1)) *
+      math-pow($a, (2 * $n + 1));
+  }
+  @return $sin;
+}

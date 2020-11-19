@@ -1,0 +1,165 @@
+/**
+ * @name      position-map
+ * @namespace           sugar.scss.util.function
+ * @type      function
+ *
+ * Return the representation of a position styling like position:absolute; top:0; left:100%; etc...
+ * This function gives you some shortcuts to align your element top, bottom, middle, center, etc...
+ *
+ * @param 		{String} 			[$position=absolute] 			The position css property
+ * @param 		{String} 			[$vertical-align=top] 			The vertical alignement wanted (top,middle,bottom)
+ * @param 		{String} 			[$align=left] 					The horizontal alignement wanted (left,center,right)
+ * @param 		{Number} 			[$top=null] 					The top property wanted
+ * @param 		{Number} 			[$right=null] 					The right property wanted
+ * @param 		{Number} 			[$bottom=null] 					The bottom property wanted
+ * @param 		{Number} 			[$left=null] 					The left property wanted
+ * @return 		{Map} 												The map representation of the position wanted
+ *
+ * @example   scss
+ * Sugar.position-map(absolute, top, right);
+ * Sugar.position-map(absolute, middle, center);
+ * Sugar.position-map(relative, bottom, right);
+ * Sugar.position-map(absolute, bottom, center);
+ * // etc...
+ *
+ * @since      1.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function position-map(
+  $position: absolute,
+  $vertical-align: top,
+  $align: left,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
+  $position: test-argument(
+    'Sugar.position-map',
+    'position',
+    (fixed, relative, absolute),
+    $position
+  );
+  $vertical-align: test-argument(
+    'Sugar.position-map',
+    'vertical-align',
+    (top, middle, bottom),
+    $vertical-align
+  );
+  $align: test-argument(
+    'Sugar.position-map',
+    'align',
+    (left, center, right),
+    $align
+  );
+  $top: test-argument('Sugar.position-map', 'top', 'number|null', $top);
+  $right: test-argument('Sugar.position-map', 'right', 'number|null', $right);
+  $bottom: test-argument(
+    'Sugar.position-map',
+    'bottom',
+    'number|null',
+    $bottom
+  );
+  $left: test-argument('Sugar.position-map', 'left', 'number|null', $left);
+
+  $return: ();
+
+  @if $position {
+    $return: map-set($return, position, $position);
+  }
+  @if $vertical-align or $align {
+    // top
+    @if $vertical-align == top {
+      $return: map-set($return, top, 0%);
+      @if $align == left {
+        $return: map-set($return, left, 0%);
+      } @else if $align == center {
+        $return: map-set($return, left, 50%);
+        $return: map-merge($return, translate-map(-50%, 0%));
+      } @else if $align == right {
+        $return: map-set($return, right, 0%);
+      } @else {
+        $return: map-set($return, left, 0%);
+      }
+    } @else if $vertical-align == middle {
+      $return: map-set($return, top, 50%);
+      @if $align == left {
+        $return: map-set($return, left, 0%);
+        $return: map-merge($return, translate-map(0, -50%));
+      } @else if $align == center {
+        $return: map-set($return, left, 50%);
+        $return: map-merge($return, translate-map(-50%, -50%));
+      } @else if $align == right {
+        $return: map-set($return, right, 0%);
+        $return: map-merge($return, translate-map(0, -50%));
+      } @else {
+        $return: map-merge($return, translate-map(-50%, 0%));
+      }
+    } @else if $vertical-align == bottom {
+      $return: map-set($return, bottom, 0%);
+      @if $align == left {
+        $return: map-set($return, left, 0%);
+      } @else if $align == center {
+        $return: map-set($return, left, 50%);
+        $return: map-merge($return, translate-map(-50%, 0%));
+      } @else if $align == right {
+        $return: map-set($return, right, 0%);
+      } @else {
+        $return: map-set($return, left, 0%);
+      }
+    } @else if $align == left {
+      $return: map-set($return, left, 0%);
+      @if $vertical-align == top {
+        $return: map-set($return, top, 0%);
+      } @else if $vertical-align == middle {
+        $return: map-set($return, top, 50%);
+        $return: map-merge($return, translate-map(0, -50%));
+      } @else if $vertical-align == bottom {
+        $return: map-set($return, bottom, 0%);
+      } @else {
+        $return: map-set($return, top, 0%);
+      }
+    } @else if $align == center {
+      $return: map-set($return, left, 50%);
+      @if $vertical-align == top {
+        $return: map-set($return, top, 0%);
+        $return: map-merge($return, translate-map(-50%, 0%));
+      } @else if $vertical-align == middle {
+        $return: map-set($return, top, 50%);
+        $return: map-merge($return, translate-map(-50%, -50%));
+      } @else if $vertical-align == bottom {
+        $return: map-set($return, bottom, 0%);
+        $return: map-merge($return, translate-map(-50%, 0%));
+      } @else {
+        $return: map-set($return, top, 0%);
+      }
+    } @else if $align == right {
+      $return: map-set($return, right, 0%);
+      @if $vertical-align == top {
+        $return: map-set($return, top, 0%);
+      } @else if $vertical-align == middle {
+        $return: map-set($return, top, 50%);
+        $return: map-merge($return, translate-map(0, -50%));
+      } @else if $vertical-align == bottom {
+        $return: map-set($return, bottom, 0%);
+      } @else {
+        $return: map-set($return, top, 0%);
+      }
+    }
+  }
+  @if $top {
+    $return: map-set($return, top, $top);
+  }
+  @if $right {
+    $return: map-set($return, right, $right);
+  }
+  @if $bottom {
+    $return: map-set($return, bottom, $bottom);
+  }
+  @if $left {
+    $return: map-set($return, left, $left);
+  }
+
+  // return map
+  @return $return;
+}

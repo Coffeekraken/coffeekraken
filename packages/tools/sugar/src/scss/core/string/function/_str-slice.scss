@@ -1,0 +1,24 @@
+@use 'sass:string';
+/**
+ * @name    str-slice
+ * @namespace           sugar.scss.core.string.function
+ * @type      function
+ *
+ * Returns the slice of $string starting at index $start-at and ending at index $end-at (both inclusive).
+ *
+ * @param         {String}        $string         The string to slice
+ * @param         {Number}        $start-at       Where to start slice the string
+ * @param         {Number}        [$end-at=-1]    Where to end to slice the string
+ *
+ * @param       scss
+ * Sugar.str-slice('Hello world', 1, 4); // => Hell
+ *
+ * @since       1.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function str-slice($string, $start-at, $end-at: -1) {
+  $string: test-argument('Sugar.str-slice', 'string', string, $string);
+  $start-at: test-argument('Sugar.str-slice', 'start-at', number, $start-at);
+  $end-at: test-argument('Sugar.str-slice', 'end-at', number, $end-at);
+  @return string.slice($string, $start-at, $end-at);
+}

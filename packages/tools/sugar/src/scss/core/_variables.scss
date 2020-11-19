@@ -1,0 +1,102 @@
+/**
+ * @name        __settings
+ * @type        {String}
+ * @private
+ *
+ * Store the settings
+ *
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+ $__settings: () !default;
+
+/**
+ * @name        __current-context
+ * @type        {String}
+ * @private
+ *
+ * Store the current context
+ *
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+$__current-context: default !default;
+
+/**
+ * @name        __generated-vars
+ * @type        Map
+ * @private
+ *
+ * Store the map of the generated css vars names to avoid generating another one if already exist
+ *
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+ $__generated-vars: () !default;
+
+/**
+ * @name          __font-size
+ * @type          {Number}
+ * @private
+ *
+ * Store the current registered font size
+ *
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+$__font-size: null !default;
+
+/**
+ * @name            __svg-icons
+ * @type            {Map}
+ * @private
+ *
+ * Store all the registered svg icons
+ *
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+$__svg-icons: (
+  test-user: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUwIDUwIiBoZWlnaHQ9IjUwcHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCA1MCIgd2lkdGg9IjUwcHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxyZWN0IGZpbGw9Im5vbmUiIGhlaWdodD0iNTAiIHdpZHRoPSI1MCIvPjxwYXRoIGQ9Ik0zMC45MzMsMzIuNTI4Yy0wLjE0Ni0xLjYxMi0wLjA5LTIuNzM3LTAuMDktNC4yMWMwLjczLTAuMzgzLDIuMDM4LTIuODI1LDIuMjU5LTQuODg4YzAuNTc0LTAuMDQ3LDEuNDc5LTAuNjA3LDEuNzQ0LTIuODE4ICBjMC4xNDMtMS4xODctMC40MjUtMS44NTUtMC43NzEtMi4wNjVjMC45MzQtMi44MDksMi44NzQtMTEuNDk5LTMuNTg4LTEyLjM5N2MtMC42NjUtMS4xNjgtMi4zNjgtMS43NTktNC41ODEtMS43NTkgIGMtOC44NTQsMC4xNjMtOS45MjIsNi42ODYtNy45ODEsMTQuMTU2Yy0wLjM0NSwwLjIxLTAuOTEzLDAuODc4LTAuNzcxLDIuMDY1YzAuMjY2LDIuMjExLDEuMTcsMi43NzEsMS43NDQsMi44MTggIGMwLjIyLDIuMDYyLDEuNTgsNC41MDUsMi4zMTIsNC44ODhjMCwxLjQ3MywwLjA1NSwyLjU5OC0wLjA5MSw0LjIxQzE5LjM2NywzNy4yMzgsNy41NDYsMzUuOTE2LDcsNDVoMzggIEM0NC40NTUsMzUuOTE2LDMyLjY4NSwzNy4yMzgsMzAuOTMzLDMyLjUyOHoiLz48L3N2Zz4='
+) !default;
+
+/**
+ * Some variables used in the math functions
+ */
+ $__math-pi: 3.14159265359 !default;
+ $__math-default-threshold: $__math-pi/180/20 !default;
+ $__math-precision: 10 !default;
+
+/**
+ * @name          __classes
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes in their namespaces
+ *
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+$__classes: () !default; // store all the classes in their namespaces
+
+/**
+ * @name          __classesFiles
+ * @type          {Map}
+ * @private
+ *
+ * Store all the classes files that have been registered to be called
+ * when the ```Sugar.classes()``` mixin has been called
+ *
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+$__classesFiles: () !default;
+
+ /**
+ * @name          __classNamespacesWanted
+ * @type          {List}
+ * @private
+ *
+ * Store the list of namespaces wanted to be used across the system.
+ * By default the value is the ```config.classes.generate.namespace``` setting
+ * But will be overrided by the passed value to the ```Sugar.classes({namespaces})``` passed value.
+ *
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+$__classNamespacesWanted: setting('classes.generate.namespace') !default;
+
+
+$classesImportString: null !default;

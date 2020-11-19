@@ -1,0 +1,20 @@
+/**
+ * @name      math-grad
+ * @namespace           sugar.scss.core.math.function
+ * @type      function
+ *
+ * Convert the passed unitless angle to gradian
+ *
+ * @param         {Number}        $angle      The angle to convert to gradian
+ * @return        {Number}                    The gradian version of the angle
+ *
+ * @example     scss
+ * Sugar.math-grad(10); // => 636.6197723675grad
+ *
+ * @since       1.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function math-grad($angle) {
+  $angle: test-argument('Sugar.math-grad', 'angle', number, $angle);
+  @return math-convert-angle($angle, grad);
+}

@@ -2,7 +2,7 @@
 
 # Coffeekraken
 
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Coffeekraken/coffeekraken/blob/master/LICENSE) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Coffeekraken/coffeekraken) [![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/Coffeekraken/coffeekraken/releases) [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/Coffeekraken/coffeekraken/blob/master/LICENSE) [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Coffeekraken/coffeekraken) [![GitHub release](https://img.shields.io/github/release/Naereen/StrapDown.js.svg)](https://github.com/Coffeekraken/coffeekraken/releases) [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 # Start working
 

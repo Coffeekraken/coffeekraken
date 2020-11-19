@@ -1,0 +1,36 @@
+@use 'sass:list';
+@use 'sass:meta';
+/**
+ * @name    list-index
+ * @namespace           sugar.scss.core.list.function
+ * @type      function
+ *
+ * Return the index of the wanted value in the passed list.
+ *
+ * @param       {List}      $list       The list to process
+ * @param       {Mixed}     $value      The value to search in the list
+ * @return      {Number}                The index of the founded value or null
+ *
+ * @example     scss
+ * Sugar.list-index(('hello','world'), 'world'); // => 2
+ *
+ * @since       1.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function list-index($list, $value) {
+  $list: test-argument('Sugar.list-index', 'list', 'list|string', $list);
+  $index: test-argument('Sugar.list-index', 'value', mixed, $value);
+
+  @if meta.type-of($list) == 'string' {
+    @if $list == $value {
+      @return 1;
+    }
+    @return -1;
+  }
+
+  $idx: list.index($list, $value);
+  @if $idx == null or $idx == -1 {
+    @return -1;
+  }
+  @return $idx;
+}

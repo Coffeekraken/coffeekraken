@@ -1,0 +1,26 @@
+/**
+ * @name      text-ellipsis
+ * @namespace           sugar.scss.typography.mixin
+ * @type      mixin
+ *
+ * Crop the text on 1 line if needed
+ *
+ * @param           {String}        [$type=ellipsis]        Specify the type of overflow you want. Can be "ellipsis", "clip", or "ellipsis-word"
+
+ * @example     scss
+ * h2 {
+ * 		@include Sugar.text-ellipsis();
+ * }
+ *
+ * @since       2.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+ @mixin text-ellipsis(
+     $type: ellipsis
+ ) {
+    text-overflow: $type;
+
+    /* Required for text-overflow to do anything */
+    white-space: nowrap;
+    overflow: hidden;
+ }

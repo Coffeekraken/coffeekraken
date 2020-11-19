@@ -1,0 +1,25 @@
+@use 'sass:map';
+
+/**
+ * @name    map-set
+ * @namespace           sugar.scss.core.map.function
+ * @type      function
+ *
+ * Set a map property with the passed value
+ * @param 			{Map} 			$map 		The map to modify
+ * @param       {String}    $key    The key to set the propery to
+ * @param       {Mixed}     $value  The value to set
+ * @return 			{Map} 					    The updated map
+ *
+ * @example     scss
+ * $my-map : Sugar.map-set($my-map, 'coco', 'Something cool');
+ *
+ * @since      1.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function map-set($map, $key, $value) {
+  $new: (
+    $key: $value
+  );
+  @return map.merge($map, $new);
+}

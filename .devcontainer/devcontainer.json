@@ -13,10 +13,10 @@
 		"cjhowe7.laravel-blade",
 		"bierner.lit-html",
 		"pkief.material-icon-theme",
-		"esbenp.prettier-vscode",
 		"shinnn.stylelint",
 		"robbowen.synthwave-vscode",
 		"msjsdiag.debugger-for-chrome",
-		"firefox-devtools.vscode-firefox-debug"
-  ]
+		"firefox-devtools.vscode-firefox-debug",
+		"chenxsan.vscode-standardjs"
+	]
 }

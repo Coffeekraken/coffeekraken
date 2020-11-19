@@ -1,0 +1,49 @@
+/**
+ * @name              transition-classes
+ * @namespace         sugar.scss.transition.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "transition" related classes.
+ *
+ * @classname       #{sel("tr-[name]")}        Apply the transition [name]
+ *
+ * @example         scss
+ * @include Sugar.transition-classes();
+ *
+ * @since         2.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+@mixin transition-classes() {
+  @if class-match-namespace('sugar.transition') {
+
+    // transitions
+    $transitions: setting("transitions");
+    @each $name, $transition in $transitions {
+
+      @if class-match-namespace("sugar.transition.#{$name}") {
+
+        /**
+          * @name       	#{sel(tr-#{$name})}
+          * @namespace       sugar.scss.transition.class
+          * @class-namespace           sugar.transition.#{$name}
+          * @type        Classname
+          *
+          * Apply the transition **#{$name}**
+          *
+          * @example 	html
+          * <div class="#{sel(tr-#{$name})}">
+          * 	I'm transitionned with #{$name}
+          * </div>
+          *
+          * @since       1.0.0
+          * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{sel("tr-#{$name}")} {
+          @include transition($transition);
+        }
+      }
+    }
+
+  }
+
+}

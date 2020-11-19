@@ -1,0 +1,35 @@
+@use 'sass:list';
+/**
+ * @name      list-implode
+ * @namespace           sugar.scss.core.list.function
+ * @type      function
+ *
+ * Join all the list items using the passed glue and return a string
+ *
+ * @param           {List}          $list           The list to implode
+ * @param           {String}        [$glue=""]      The glue to use to implode the list
+ * @return          {String}                        The imploded list in string format
+ *
+ * @example       scss
+ * Sugar.list-implode(('hello','world'), '-'); // hello-world
+ *
+ * @since       1.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function list-implode($list, $glue: '') {
+  $res: ();
+  $idx: 1;
+  @each $l in $list {
+    $res: list.append($res, $l);
+    @if $idx < list.length($list) {
+      $res: list.append($res, $glue);
+    }
+    $idx: $idx + 1;
+  }
+
+  $resString: '';
+  @each $item in $res {
+    $resString: '#{$resString}#{$item}';
+  }
+  @return $resString;
+}

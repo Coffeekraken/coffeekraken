@@ -1,0 +1,52 @@
+/**
+ * @name    ratio
+ * @namespace           sugar.scss.layout.mixin
+ * @type      mixin
+ *
+ * Apply a ratio css styling. This will apply a before or after content that will make the element keep the specified ratio.
+ * The content need to be displayed as absolute top left and fit in size.
+ *
+ * @param 		{Number} 		$ratio 			The ratio to keep like 16/9, etc...
+ *
+ * @example 	scss
+ * .my-cool-element {
+ * 	\@include Sugar.ratio(16/9);
+ * }
+ *
+ * @since       1.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin ratio($ratio) {
+  $ratio: test-argument('Sugar.ratio', 'ratio', number, $ratio);
+
+  position: relative;
+  &::before {
+    /* This will setup the aspect ratio of our screen */
+    content: '';
+    display: block;
+    /* content-box makes sure padding adds to declared height */
+    box-sizing: content-box;
+    width: 100%;
+    height: 0;
+    /* Vertical padding is based on parent element's width */
+    /* So we want 9/16, converted to % as our vertical padding */
+    padding: 0 0 100% / $ratio;
+  }
+  // &::after { /* to clear float */
+  //   content: "";
+  //   display: table;
+  //   clear: both;
+  // }
+
+  // position: relative;
+  // &::before {
+  //   content: "";
+  //   padding-top: math-percentage(1 / $ratio);
+  //   float: left;
+  // }
+  // &::after {
+  //   content: "";
+  //   display: block;
+  //   clear: both;
+  // }
+}

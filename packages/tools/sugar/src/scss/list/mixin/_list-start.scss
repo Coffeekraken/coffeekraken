@@ -1,0 +1,26 @@
+/**
+ * @name    list-start
+ * @namespace           sugar.scss.list.mixin
+ * @type      mixin
+ *
+ * Start a new list
+ *
+ * @param 		{String} 		[$counter-reset=s-list] 		A counter name to reset
+ *
+ * @example     scss
+ * .my-cool-list {
+ *    Sugar.list-start();
+ * }
+ *
+ * @since       1.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin list-start($counter-reset: s-list) {
+  $counter-reset: test-argument(
+    'Sugar.list',
+    'counter-reset',
+    string,
+    $counter-reset
+  );
+  counter-reset: $counter-reset;
+}

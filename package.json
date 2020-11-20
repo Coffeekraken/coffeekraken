@@ -7,6 +7,7 @@
     "dev": "npm run dev.js; npm run dev.node",
     "dev.js": "tsc -p tsconfig.js.json --watch",
     "dev.node": "tsc -p tsconfig.node.json --watch",
+    "container": "docker exec -it coffeekraken /bin/bash",
     "init-sugar": "(cd toolkits/sugar && npm link && npm i)"
   },
   "pre-commit": [],

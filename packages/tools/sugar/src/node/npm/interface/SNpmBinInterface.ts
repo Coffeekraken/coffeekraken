@@ -1,6 +1,6 @@
-const _SInterface = require('../../../node/class/SInterface');
+import _SInterface from '../../class/SInterface'
 
-module.exports = class SNpmBinCliInterface extends _SInterface {
+export = class SNpmBinInterface extends _SInterface {
 
   static definitionObj = {
     action: {

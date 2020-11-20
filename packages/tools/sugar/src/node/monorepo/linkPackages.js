@@ -2,38 +2,13 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const ensureDirSync_1 = __importDefault(require("../fs/ensureDirSync"));
 const path_1 = __importDefault(require("path"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const findPackages_1 = __importDefault(require("./findPackages"));
 const child_process_1 = __importDefault(require("child_process"));
 const fs_1 = __importDefault(require("fs"));
-/**
- * @name            linkPackages
- * @namespace       sugar.node.monorepo
- * @type            Function
- * @async
- *
- * This function simply check all the packages available in the monorepo
- * and link then together using symbolic links in each node_modules folders
- *
- * @param       {Object}        [settings={}]         A settings object to configure your linking process
- * @return      {SPromise}                           A promise that will be resolved once the process is finished
- *
- * @setting     {String}      [rootDir=process.cwd()]       Specify the root directory from where to start the process
- *
- *
- * @todo        document settings
- *
- * @example       js
- * const linkPackages = require('@coffeekraken/sugar/node/monorepo/linkPackages');
- * await linkPackages();
- *
- * @since       2.0.0
- * @author      Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-async function linkPackages(settings = {}) {
+module.exports = async function linkPackages(settings = {}) {
     settings = {
         rootDir: process.cwd(),
         ...settings
@@ -91,5 +66,4 @@ async function linkPackages(settings = {}) {
         // resolvee
         resolve();
     });
-}
-exports.default = linkPackages;
+};

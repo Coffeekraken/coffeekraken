@@ -9,6 +9,8 @@ import _validateObjectOutputString from '../validation/object/validateObjectOutp
 import _typeof from '../value/typeof'
 import _set from '../object/set'
 
+type Constructor = new(...args: any[]) => any
+
 /**
  * @name              SInterface
  * @namespace           sugar.js.class
@@ -52,6 +54,8 @@ abstract class STsAbstractInterface {
   static d: object
   static desc: object
   static readonly extendsArray?: string[]
+  static readonly implementsArray?: string[]
+  abstract implements (instance: object, implementsArray: string[], settings: ISTsInterfaceSettings): void
 }
 
 // interface ISTsInterfaceProperty {
@@ -125,36 +129,36 @@ export = class STsInterface extends STsAbstractInterface {
     const extendsStack = _getExtendsStack(instance)
 
     // check if the passed instance base class already implements this insterface
-    if (
-      instance.constructor.__interfaces !== undefined &&
-      Array.isArray(instance.constructor.__interfaces)
-    ) {
-      if (instance.constructor.__interfaces.indexOf(this) !== -1) return true
-    } else if (instance.__interfaces !== undefined && Array.isArray(instance.__interfaces)) {
-      if (instance.__interfaces.indexOf(this) !== -1) return true
-    }
+    // if (
+    //   instance.constructor.__interfaces !== undefined &&
+    //   Array.isArray(instance.constructor.__interfaces)
+    // ) {
+    //   if (instance.constructor.__interfaces.indexOf(this) !== -1) return true
+    // } else if (instance.__interfaces !== undefined && Array.isArray(instance.__interfaces)) {
+    //   if (instance.__interfaces.indexOf(this) !== -1) return true
+    // }
 
     // extends array
-    if (Array.isArray(this.extendsArray)) {
-      this.extendsArray.forEach((cls) => {
-        if (!extendsStack.includes(cls)) {
-          setTimeout(() => {
-            throw new _SError(
-              `Your class|instance "<yellow>${
-                instance.constructor.name
-              }</yellow>" that implements the "<cyan>${
-                this.name
-              }</cyan>" interface has to extend the "<green>${cls}</green>" class...`
-            )
-          })
-        }
-      })
-    }
+    // if (Array.isArray(this.extendsArray)) {
+    //   this.extendsArray.forEach((cls) => {
+    //     if (!extendsStack.includes(cls)) {
+    //       setTimeout(() => {
+    //         throw new _SError(
+    //           `Your class|instance "<yellow>${
+    //             instance.constructor.name
+    //           }</yellow>" that implements the "<cyan>${
+    //             this.name
+    //           }</cyan>" interface has to extend the "<green>${cls}</green>" class...`
+    //         )
+    //       })
+    //     }
+    //   })
+    // }
 
-    // implements array
-    if (this.implementsArray && Array.isArray(this.implementsArray)) {
-      this.implements(instance, this.implementsArray, settings)
-    }
+    // // implements array
+    // if (this.implementsArray !== undefined && Array.isArray(this.implementsArray)) {
+    //   this.implements(instance, this.implementsArray, settings)
+    // }
 
     // definition object
     if (this.definitionObj) {
@@ -209,6 +213,48 @@ export = class STsInterface extends STsAbstractInterface {
       default:
         return SInterface.outputString(issueObj, settings)
     }
+  }
+
+  /**
+   * @name          implements
+   * @type          Function
+   * @static
+   *
+   * This static method allows you to tell that a particular instance of a class implements
+   * one or more interfaces. This allows you after to specify the property "implements" with an array
+   * of SInterface classes that you want your property to implements
+   *
+   * @param         {SInterface}          ...interfaces           The interfaces you want to implements
+   *
+   * @since         2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static implements (instance: Constructor, interfaces: object[]|null = null, settings: ISTsInterfaceSettings = {}): object {
+    if (interfaces === null) interfaces = [this]
+    if (!Array.isArray(interfaces)) interfaces = [interfaces]
+
+    // if (_isClass(instance)) {
+    //   // return instance;
+    //   class SInterfaceImplementsMiddleClass extends instance implements Constructor {
+    //     constructor (...args: any[]) {
+    //       super(...args)
+    //       STsInterface.implements(this, interfaces, settings)
+    //     }
+    //   }
+    //   Object.defineProperty(SInterfaceImplementsMiddleClass, 'name', {
+    //     value: instance.name
+    //   })
+
+    //   return SInterfaceImplementsMiddleClass
+    // }
+
+    // make sure the instance has all the interfaces requirements
+    interfaces.forEach((Interface) => {
+      Interface.apply(instance, {
+        ...settings,
+        interface: Interface.name
+      })
+    })
   }
 }
 
@@ -277,66 +323,6 @@ class SInterface {
     const completedObject = this.complete(object, settings)
     this.applyAndThrow(completedObject, settings)
     return completedObject
-  }
-
-  /**
-   * @name          implements
-   * @type          Function
-   * @static
-   *
-   * This static method allows you to tell that a particular instance of a class implements
-   * one or more interfaces. This allows you after to specify the property "implements" with an array
-   * of SInterface classes that you want your property to implements
-   *
-   * @param         {SInterface}          ...interfaces           The interfaces you want to implements
-   *
-   * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  static implements (instance, interfaces = null, settings = {}) {
-    if (interfaces === null) interfaces = [this]
-    if (!Array.isArray(interfaces)) interfaces = [interfaces]
-
-    if (_isClass(instance)) {
-      // return instance;
-      class SInterfaceImplementsMiddleClass extends instance {
-        constructor (...args) {
-          super(...args)
-          SInterface.implements(this, interfaces, settings)
-        }
-      }
-      Object.defineProperty(SInterfaceImplementsMiddleClass, 'name', {
-        value: instance.name
-      })
-
-      // if (settings.applyOnStatic) {
-      //   const staticFns = Object.getOwnPropertyNames(instance).filter(
-      //     (prop) => typeof instance[prop] === 'function'
-      //   );
-      //   staticFns.forEach((fnName) => {
-      //     SInterfaceImplementsMiddleClass[fnName] = function (...args) {
-      //       interfaces.forEach((Interface) => {
-      //         Interface.apply(SInterfaceImplementsMiddleClass, {
-      //           ...settings,
-      //           interface: Interface.name
-      //         });
-      //       });
-
-      //       return instance[fnName](...args);
-      //     };
-      //   });
-      // }
-
-      return SInterfaceImplementsMiddleClass
-    }
-
-    // make sure the instance has all the interfaces requirements
-    interfaces.forEach((Interface) => {
-      Interface.apply(instance, {
-        ...settings,
-        interface: Interface.name
-      })
-    })
   }
 
   /**

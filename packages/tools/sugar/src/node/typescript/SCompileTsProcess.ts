@@ -1,6 +1,5 @@
-const __frontendServer = require('./frontend')
-const __SProcess = require('../../process/SProcess')
-const __SFrontendServerInterface = require('./interface/SFrontendServerInterface')
+const _SProcess = require('../../process/SProcess')
+import { ISCompileTsProcessParams } from './interface/ISCompileTsProcess'
 
 /**
  * @name            STypescriptToJsProcess
@@ -13,8 +12,8 @@ const __SFrontendServerInterface = require('./interface/SFrontendServerInterface
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class STypescriptToJsProcess extends __SProcess {
-  static interface = __SFrontendServerInterface
+module.exports = class STypescriptToJsProcess extends _SProcess {
+  // static interface = __SFrontendServerInterface
 
   /**
    * @name          constructor
@@ -28,7 +27,7 @@ module.exports = class STypescriptToJsProcess extends __SProcess {
   constructor (settings = {}) {
     super({
       id: 'STypescriptToJsProcess',
-      name: 'Frontend Server Process',
+      name: 'Typescript to Js Process',
       ...settings
     })
   }
@@ -46,8 +45,8 @@ module.exports = class STypescriptToJsProcess extends __SProcess {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  process (params, settings = {}) {
-    this._frontendServerProcess = __frontendServer(params)
-    this.bindSPromise(this._frontendServerProcess)
+  process (params: ISCompileTsProcessParams, settings = {}): void {
+    // this._frontendServerProcess = __frontendServer(params)
+    // this.bindSPromise(this._frontendServerProcess)
   }
 }

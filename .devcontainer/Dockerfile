@@ -44,6 +44,5 @@ RUN apt -y install git-all
 
 # installing global npm packages
 RUN npm i -g typescript
-RUN npm i -g standard
-RUN npm i -g ts-standard
 RUN npm i -g jest
+RUN npm i -g eslint

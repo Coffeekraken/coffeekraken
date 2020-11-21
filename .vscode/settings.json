@@ -4,7 +4,11 @@
         "**/sugar/node/**": true,
         "**/sugar/src/node/_js": true
     },
-    "javascript.validate.enable": false,
-    "standard.autoFixOnSave": true,
-    "standard.engine": "ts-standard"
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+    "[javascript]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    }
 }

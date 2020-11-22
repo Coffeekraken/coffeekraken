@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @name                putUseStatementsOnTop
  * @namespace           sugar.node.scss
@@ -22,17 +23,17 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function putUseStatementsOnTop(content) {
-  // take all the "@use" statements and put them on top
-  const useMatches = content.match(/@use\s.*[^;]/gm);
-  if (useMatches) {
-    for (let i = useMatches.length; i > 0; i--) {
-      const useStatement = useMatches[i - 1];
-      content = content.replace(useStatement, '');
-      content = `
+    // take all the "@use" statements and put them on top
+    const useMatches = content.match(/@use\s.*[^;]/gm);
+    if (useMatches) {
+        for (let i = useMatches.length; i > 0; i--) {
+            const useStatement = useMatches[i - 1];
+            content = content.replace(useStatement, '');
+            content = `
             ${useStatement}
             ${content}
         `;
+        }
     }
-  }
-  return content;
+    return content;
 };

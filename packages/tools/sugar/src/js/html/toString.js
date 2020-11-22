@@ -17,10 +17,10 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function toString(html, deep = true) {
-  if (document !== undefined && document.createElement !== undefined) {
-    const cont = document.createElement('div');
-    cont.appendChild(html.cloneNode(deep));
-    return cont.innerHTML;
-  }
-  return html;
+    if (document !== undefined && document.createElement !== undefined) {
+        const cont = document.createElement('div');
+        cont.appendChild(html.cloneNode(deep));
+        return cont.innerHTML;
+    }
+    return html;
 }

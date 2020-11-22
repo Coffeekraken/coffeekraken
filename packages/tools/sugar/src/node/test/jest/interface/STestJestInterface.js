@@ -1,8 +1,9 @@
+"use strict";
+var _a;
 const __SInterface = require('../../../class/SInterface');
 const __STestInterface = require('../../interface/STestInterface');
 const __sugarConfig = require('../../../config/sugar');
 const __deepMerge = require('../../../object/deepMerge');
-
 /**
  * @name                STestJestCliInterface
  * @namespace           sugar.node.test.jest.interface
@@ -15,13 +16,14 @@ const __deepMerge = require('../../../object/deepMerge');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class STestJestCliInterface extends __SInterface {
-  static definitionObj = __deepMerge(__STestInterface.definitionObj, {
-    input: {
-      default: __sugarConfig('jest.cli.input')
+module.exports = (_a = class STestJestCliInterface extends __SInterface {
     },
-    watch: {
-      default: __sugarConfig('jest.cli.watch')
-    }
-  });
-};
+    _a.definitionObj = __deepMerge(__STestInterface.definitionObj, {
+        input: {
+            default: __sugarConfig('jest.cli.input')
+        },
+        watch: {
+            default: __sugarConfig('jest.cli.watch')
+        }
+    }),
+    _a);

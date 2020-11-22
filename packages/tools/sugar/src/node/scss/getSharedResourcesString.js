@@ -1,9 +1,9 @@
+"use strict";
 const __sugarConfig = require('../config/sugar');
 const __isInPackage = require('../path/isInPackage');
 const __packageRoot = require('../path/packageRoot');
 const __path = require('path');
 const __jsObjectToScssMap = require('./jsObjectToScssMap');
-
 /**
  * @name            getScssSharedResourcesString
  * @namespace       sugar.node.scss
@@ -17,33 +17,29 @@ const __jsObjectToScssMap = require('./jsObjectToScssMap');
  * @since       2.0.0
  */
 module.exports = function getScssSharedResourcesString(array = null) {
-  if (!array) array = __sugarConfig('scss.sharedResources');
-
-  let importsStrings = '';
-
-  array.forEach((importItem) => {
-    if (typeof importItem === 'string') {
-      if (importItem === 'sugar') {
-        const settings = __sugarConfig('scss');
-        const settingsString = __jsObjectToScssMap(settings);
-        const path = __isInPackage('coffeekraken', process.cwd(), true)
-          ? __path.resolve(
-              __packageRoot(__dirname, true),
-              'toolkits/sugar/index'
-            )
-          : '@coffeekraken/sugar/index';
-        importsStrings += `
+    if (!array)
+        array = __sugarConfig('scss.sharedResources');
+    let importsStrings = '';
+    array.forEach((importItem) => {
+        if (typeof importItem === 'string') {
+            if (importItem === 'sugar') {
+                const settings = __sugarConfig('scss');
+                const settingsString = __jsObjectToScssMap(settings);
+                const path = __isInPackage('coffeekraken', process.cwd(), true)
+                    ? __path.resolve(__packageRoot(__dirname, true), 'toolkits/sugar/index')
+                    : '@coffeekraken/sugar/index';
+                importsStrings += `
           @use "${path}" as Sugar;
           $sugarUserSettings: ${settingsString};
           @include Sugar.setup($sugarUserSettings);
         `;
-      } else {
-        importsStrings += `
+            }
+            else {
+                importsStrings += `
           ${importItem}
         `;
-      }
-    }
-  });
-
-  return importsStrings;
+            }
+        }
+    });
+    return importsStrings;
 };

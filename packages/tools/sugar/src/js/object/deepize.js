@@ -26,9 +26,9 @@ import __set from './set';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function deepize(object) {
-  const finalObject = {};
-  for (const key in object) {
-    __set(finalObject, key, object[key]);
-  }
-  return finalObject;
+    const finalObject = {};
+    for (const key in object) {
+        __set(finalObject, key, object[key]);
+    }
+    return finalObject;
 }

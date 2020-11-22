@@ -1,5 +1,5 @@
+"use strict";
 const __packageRoot = require('../path/packageRoot');
-
 /**
  * @name                initEnv
  * @namespace           sugar.node.init
@@ -14,5 +14,5 @@ const __packageRoot = require('../path/packageRoot');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
  */
 module.exports = function initEnv() {
-  process.env.PACKAGE_ROOT = __packageRoot();
+    process.env.PACKAGE_ROOT = __packageRoot();
 };

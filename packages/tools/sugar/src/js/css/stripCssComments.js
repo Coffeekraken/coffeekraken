@@ -1,6 +1,5 @@
 import __deepMerge from '../object/deepMerge';
 import __stripCssComments from 'strip-css-comments';
-
 /**
  * @name          stripCssComments
  * @namespace     sugar.js.css
@@ -32,21 +31,18 @@ import __stripCssComments from 'strip-css-comments';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function stripCssComments(css, settings = {}) {
-  settings = __deepMerge(
-    {
-      block: true,
-      line: true
-    },
-    settings
-  );
-  if (settings.block) {
-    // css = css.replace(/\/\*{2}([\s\S]+?)\*\//g, '');
-    css = __stripCssComments(css, {
-      preserve: false
-    });
-  }
-  if (settings.line) {
-    css = css.replace(/^[\s]{0,99999999}\/\/.*$/gm, '');
-  }
-  return css;
+    settings = __deepMerge({
+        block: true,
+        line: true
+    }, settings);
+    if (settings.block) {
+        // css = css.replace(/\/\*{2}([\s\S]+?)\*\//g, '');
+        css = __stripCssComments(css, {
+            preserve: false
+        });
+    }
+    if (settings.line) {
+        css = css.replace(/^[\s]{0,99999999}\/\/.*$/gm, '');
+    }
+    return css;
 }

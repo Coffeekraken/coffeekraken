@@ -15,8 +15,6 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function rem2px(rem) {
-  return (
-    rem *
-    parseFloat(getComputedStyle(document.documentElement).fontSize || '16px')
-  );
+    return (rem *
+        parseFloat(getComputedStyle(document.documentElement).fontSize || '16px'));
 }

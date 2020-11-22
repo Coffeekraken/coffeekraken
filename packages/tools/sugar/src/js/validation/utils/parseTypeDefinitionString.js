@@ -1,5 +1,4 @@
 import __upperFirst from '../../string/upperFirst';
-
 /**
  * @name              parseTypeDefinitionString
  * @namespace           sugar.js.validation.utils
@@ -19,63 +18,54 @@ import __upperFirst from '../../string/upperFirst';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function parseTypeDefinitionString(argTypeString) {
-  // split the string by |
-  let inDepth = 0;
-  let currentPart = '',
-    typesArray = [];
-  argTypeString.split('').forEach((character) => {
-    if (character === '>') {
-      if (inDepth <= 0) {
-        throw new Error(
-          `It seems that your argument type definition string "${argTypeString}" is invalid...`
-        );
-      }
-      inDepth--;
-      currentPart += character;
-      return;
-    }
-    if (character === '<') {
-      inDepth++;
-      currentPart += character;
-      return;
-    }
-    if (character === '|') {
-      if (inDepth > 0) {
+    // split the string by |
+    let inDepth = 0;
+    let currentPart = '', typesArray = [];
+    argTypeString.split('').forEach((character) => {
+        if (character === '>') {
+            if (inDepth <= 0) {
+                throw new Error(`It seems that your argument type definition string "${argTypeString}" is invalid...`);
+            }
+            inDepth--;
+            currentPart += character;
+            return;
+        }
+        if (character === '<') {
+            inDepth++;
+            currentPart += character;
+            return;
+        }
+        if (character === '|') {
+            if (inDepth > 0) {
+                currentPart += character;
+                return;
+            }
+            typesArray.push(currentPart);
+            currentPart = '';
+            return;
+        }
         currentPart += character;
-        return;
-      }
-      typesArray.push(currentPart);
-      currentPart = '';
-      return;
-    }
-    currentPart += character;
-  });
-  typesArray.push(currentPart);
-
-  // init the return array
-  const returnArray = [];
-
-  // loop on each types array
-  typesArray.forEach((typeDefinitionString) => {
-    // split the string by <
-    const parts = typeDefinitionString.split('<');
-
-    // get the "type"
-    const type = __upperFirst(parts[0]);
-
-    // process the "of" part if exist
-    let ofArray = null;
-    if (parts[1]) {
-      const ofPart = parts[1].slice(0, -1);
-      ofArray = parseTypeDefinitionString(ofPart);
-    }
-
-    // build the type object and add it the the returnArray
-    returnArray.push({
-      type,
-      of: ofArray
     });
-  });
-
-  return returnArray;
+    typesArray.push(currentPart);
+    // init the return array
+    const returnArray = [];
+    // loop on each types array
+    typesArray.forEach((typeDefinitionString) => {
+        // split the string by <
+        const parts = typeDefinitionString.split('<');
+        // get the "type"
+        const type = __upperFirst(parts[0]);
+        // process the "of" part if exist
+        let ofArray = null;
+        if (parts[1]) {
+            const ofPart = parts[1].slice(0, -1);
+            ofArray = parseTypeDefinitionString(ofPart);
+        }
+        // build the type object and add it the the returnArray
+        returnArray.push({
+            type,
+            of: ofArray
+        });
+    });
+    return returnArray;
 }

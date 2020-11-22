@@ -1,7 +1,6 @@
+"use strict";
 const __extension = require('./extension');
-
 // TODO tests
-
 /**
  * @name                       filename
  * @namespace           sugar.node.fs
@@ -20,9 +19,9 @@ const __extension = require('./extension');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function filename(path, withExtension = true) {
-  let filename = path.split('/').pop();
-  if (!withExtension) {
-    filename = filename.replace(__extension(filename), '');
-  }
-  return filename;
+    let filename = path.split('/').pop();
+    if (!withExtension) {
+        filename = filename.replace(__extension(filename), '');
+    }
+    return filename;
 };

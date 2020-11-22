@@ -1,5 +1,4 @@
 import __SColor from './SColor';
-
 /**
  * @name                color
  * @namespace           sugar.js.color
@@ -17,5 +16,5 @@ import __SColor from './SColor';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function color(color) {
-  return new __SColor(color);
+    return new __SColor(color);
 }

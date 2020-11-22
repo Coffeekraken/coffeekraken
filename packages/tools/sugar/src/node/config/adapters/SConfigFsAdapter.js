@@ -1,11 +1,10 @@
+"use strict";
 const __fs = require('fs');
 const __deepMerge = require('../../object/deepMerge');
 const __tmpDir = require('../../fs/tmpDir');
 const __writeFileSync = require('../../fs/writeFileSync');
 const __diff = require('../../object/diff');
-
 const __SConfigAdapter = require('./SConfigAdapter');
-
 /**
  * @name                  SConfigFsAdapter
  * @namespace           sugar.node.config.adapters
@@ -24,93 +23,57 @@ const __SConfigAdapter = require('./SConfigAdapter');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
 module.exports = class SConfigFsAdapter extends __SConfigAdapter {
-  constructor(settings = {}) {
-    settings = __deepMerge(
-      {
-        name: null,
-        filename: '[name].config.js',
-        defaultConfigPath: null,
-        appConfigPath: `${process.cwd()}/[filename]`,
-        userConfigPath: `${__tmpDir()}/[filename]`
-      },
-      settings
-    );
-    super(settings);
-
-    this.settings.filename = this.settings.filename.replace(
-      '[name]',
-      this.name
-    );
-    if (this.settings.defaultConfigPath)
-      this.settings.defaultConfigPath = this.settings.defaultConfigPath.replace(
-        '[filename]',
-        this.settings.filename
-      );
-    if (this.settings.appConfigPath)
-      this.settings.appConfigPath = this.settings.appConfigPath.replace(
-        '[filename]',
-        this.settings.filename
-      );
-    if (this.settings.userConfigPath)
-      this.settings.userConfigPath = this.settings.userConfigPath.replace(
-        '[filename]',
-        this.settings.filename
-      );
-  }
-
-  load() {
-    this._defaultConfig = {};
-    this._appConfig = {};
-    this._userConfig = {};
-
-    // load the default config if exists
-    if (
-      this.settings.defaultConfigPath &&
-      __fs.existsSync(this.settings.defaultConfigPath)
-    ) {
-      this._defaultConfig = require(`${this.settings.defaultConfigPath}`);
+    constructor(settings = {}) {
+        settings = __deepMerge({
+            name: null,
+            filename: '[name].config.js',
+            defaultConfigPath: null,
+            appConfigPath: `${process.cwd()}/[filename]`,
+            userConfigPath: `${__tmpDir()}/[filename]`
+        }, settings);
+        super(settings);
+        this.settings.filename = this.settings.filename.replace('[name]', this.name);
+        if (this.settings.defaultConfigPath)
+            this.settings.defaultConfigPath = this.settings.defaultConfigPath.replace('[filename]', this.settings.filename);
+        if (this.settings.appConfigPath)
+            this.settings.appConfigPath = this.settings.appConfigPath.replace('[filename]', this.settings.filename);
+        if (this.settings.userConfigPath)
+            this.settings.userConfigPath = this.settings.userConfigPath.replace('[filename]', this.settings.filename);
     }
-
-    // load the app config if exists
-    if (
-      this.settings.appConfigPath &&
-      __fs.existsSync(this.settings.appConfigPath)
-    ) {
-      this._appConfig = require(`${this.settings.appConfigPath}`);
+    load() {
+        this._defaultConfig = {};
+        this._appConfig = {};
+        this._userConfig = {};
+        // load the default config if exists
+        if (this.settings.defaultConfigPath &&
+            __fs.existsSync(this.settings.defaultConfigPath)) {
+            this._defaultConfig = require(`${this.settings.defaultConfigPath}`);
+        }
+        // load the app config if exists
+        if (this.settings.appConfigPath &&
+            __fs.existsSync(this.settings.appConfigPath)) {
+            this._appConfig = require(`${this.settings.appConfigPath}`);
+        }
+        // load the user config
+        if (this.settings.userConfigPath &&
+            __fs.existsSync(this.settings.userConfigPath)) {
+            this._userConfig = require(`${this.settings.userConfigPath}`);
+        }
+        // mix the configs and save them in the instance
+        return __deepMerge(this._defaultConfig, this._appConfig, this._userConfig);
     }
-
-    // load the user config
-    if (
-      this.settings.userConfigPath &&
-      __fs.existsSync(this.settings.userConfigPath)
-    ) {
-      this._userConfig = require(`${this.settings.userConfigPath}`);
-    }
-
-    // mix the configs and save them in the instance
-    return __deepMerge(this._defaultConfig, this._appConfig, this._userConfig);
-  }
-
-  save(newConfig = {}) {
-    if (!this.settings.userConfigPath) {
-      throw new Error(
-        `You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`
-      );
-    }
-
-    const baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
-
-    newConfig = __diff(baseConfig, newConfig);
-
-    let newConfigString = `
+    save(newConfig = {}) {
+        if (!this.settings.userConfigPath) {
+            throw new Error(`You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`);
+        }
+        const baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
+        newConfig = __diff(baseConfig, newConfig);
+        let newConfigString = `
       module.exports = ${JSON.stringify(newConfig)};
     `;
-
-    // write the new config file
-    __writeFileSync(this.settings.userConfigPath, newConfigString);
-
-    return true;
-  }
+        // write the new config file
+        __writeFileSync(this.settings.userConfigPath, newConfigString);
+        return true;
+    }
 };

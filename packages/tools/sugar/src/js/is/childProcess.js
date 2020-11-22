@@ -14,8 +14,7 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function childProcess() {
-  if (!global || !global.process) return false;
-  return (
-    global.process.send !== undefined || global.process.env.IS_CHILD_PROCESS
-  );
+    if (!global || !global.process)
+        return false;
+    return (global.process.send !== undefined || global.process.env.IS_CHILD_PROCESS);
 }

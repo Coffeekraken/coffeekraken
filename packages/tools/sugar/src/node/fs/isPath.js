@@ -1,8 +1,7 @@
+"use strict";
 const __isValidPath = require('is-valid-path');
 const __fs = require('fs');
-
 // TODO tests
-
 /**
  * @name                            isPath
  * @namespace           sugar.node.fs
@@ -22,14 +21,14 @@ const __fs = require('fs');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function isPath(path, checkExistence = false) {
-  // check if the path is valid or not
-  if (!__isValidPath(path)) return false;
-
-  // if we have to check the path existence
-  if (checkExistence) {
-    if (!__fs.existsSync(path)) return false;
-  }
-
-  // otherwise, all is ok
-  return true;
+    // check if the path is valid or not
+    if (!__isValidPath(path))
+        return false;
+    // if we have to check the path existence
+    if (checkExistence) {
+        if (!__fs.existsSync(path))
+            return false;
+    }
+    // otherwise, all is ok
+    return true;
 };

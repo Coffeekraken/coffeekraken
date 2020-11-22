@@ -1,5 +1,4 @@
 import __getStyleProperty from './getStyleProperty';
-
 /**
  * @name      forceRedraw
  * @namespace           sugar.js.dom
@@ -17,9 +16,9 @@ import __getStyleProperty from './getStyleProperty';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function forceRedraw($elm) {
-  const display = __getStyleProperty($elm, 'display');
-  $elm.style.display = 'none';
-  $elm.offsetHeight;
-  $elm.style.display = display;
-  return $elm;
+    const display = __getStyleProperty($elm, 'display');
+    $elm.style.display = 'none';
+    $elm.offsetHeight;
+    $elm.style.display = display;
+    return $elm;
 }

@@ -16,5 +16,5 @@
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function getKeyByValue(object, value) {
-  return Object.keys(object).find((key) => object[key] === value);
+    return Object.keys(object).find((key) => object[key] === value);
 }

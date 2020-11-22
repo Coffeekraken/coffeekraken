@@ -1,5 +1,5 @@
+"use strict";
 const __base64 = require('../../crypt/base64');
-
 /**
  * @name                          bearerFormater
  * @namespace           node.auth.formaters
@@ -13,11 +13,11 @@ const __base64 = require('../../crypt/base64');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function bearerFormater(authInfo) {
-  // build the formated auth object
-  return {
-    token: authInfo.token,
-    headers: {
-      Authorization: `Bearer ${authInfo.token}`
-    }
-  };
+    // build the formated auth object
+    return {
+        token: authInfo.token,
+        headers: {
+            Authorization: `Bearer ${authInfo.token}`
+        }
+    };
 };

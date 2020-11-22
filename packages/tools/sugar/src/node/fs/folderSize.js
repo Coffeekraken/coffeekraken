@@ -1,8 +1,7 @@
+"use strict";
 const __getSize = require('get-folder-size');
 const __filesize = require('filesize');
-
 // TODO tests
-
 /**
  * @name                            folderSize
  * @namespace           sugar.node.fs
@@ -24,10 +23,11 @@ const __filesize = require('filesize');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function folderSize(folderPath, rawFormat = false) {
-  return new Promise((resolve, reject) => {
-    __getSize(folderPath, (error, size) => {
-      if (error) throw error;
-      resolve(rawFormat ? size : __filesize(size));
+    return new Promise((resolve, reject) => {
+        __getSize(folderPath, (error, size) => {
+            if (error)
+                throw error;
+            resolve(rawFormat ? size : __filesize(size));
+        });
     });
-  });
 };

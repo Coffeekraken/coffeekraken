@@ -1,5 +1,5 @@
+"use strict";
 const __fs = require('fs');
-
 /**
  * @name            symlink
  * @namespace           sugar.node.is
@@ -20,5 +20,5 @@ const __fs = require('fs');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function isSymlink(path) {
-  return __fs.existsSync(path) && __fs.lstatSync(path).isSymbolicLink();
+    return __fs.existsSync(path) && __fs.lstatSync(path).isSymbolicLink();
 };

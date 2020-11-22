@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isIe(ua = navigator.userAgent) {
-  return ua.indexOf('MSIE') > -1;
+    return ua.indexOf('MSIE') > -1;
 }

@@ -1,9 +1,9 @@
+"use strict";
 const __SConfig = require('./SConfig');
 const __SConfigFolderAdapter = require('./adapters/SConfigFolderAdapter');
 const __path = require('path');
 const __packageRoot = require('../path/packageRoot');
 const __resolveTokens = require('../object/resolveTokens');
-
 /**
  * @name                  sugar
  * @namespace           sugar.node.config
@@ -24,25 +24,22 @@ const __resolveTokens = require('../object/resolveTokens');
  */
 let sugarConfigInstance;
 module.exports = function sugar(dotPath) {
-  if (!sugarConfigInstance) {
-    sugarConfigInstance = new __SConfig('sugar', {
-      adapters: [
-        new __SConfigFolderAdapter({
-          name: 'sugar',
-          foldername: '.sugar',
-          filename: '[name].config.js',
-          defaultConfigPath: __path.resolve(
-            __dirname,
-            '../../../.sugar-default'
-          ),
-          appConfigPath: `${__packageRoot(process.cwd())}/[foldername]`,
-          userConfigPath: null
-        })
-      ]
+    if (!sugarConfigInstance) {
+        sugarConfigInstance = new __SConfig('sugar', {
+            adapters: [
+                new __SConfigFolderAdapter({
+                    name: 'sugar',
+                    foldername: '.sugar',
+                    filename: '[name].config.js',
+                    defaultConfigPath: __path.resolve(__dirname, '../../../.sugar-default'),
+                    appConfigPath: `${__packageRoot(process.cwd())}/[foldername]`,
+                    userConfigPath: null
+                })
+            ]
+        });
+    }
+    // get the config
+    return sugarConfigInstance.get(dotPath, undefined, {
+        throwErrorOnUndefinedConfig: false
     });
-  }
-  // get the config
-  return sugarConfigInstance.get(dotPath, undefined, {
-    throwErrorOnUndefinedConfig: false
-  });
 };

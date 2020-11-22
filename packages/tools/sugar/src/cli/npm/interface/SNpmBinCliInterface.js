@@ -1,9 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var _a;
-const SInterface_1 = __importDefault(require("../../../node/class/SInterface"));
+const SInterface_1 = require("../../../node/class/SInterface");
 module.exports = (_a = class SNpmBinInterface extends SInterface_1.default {
     },
     _a.definitionObj = {

@@ -1,6 +1,5 @@
 import __scrollTo from './scrollTo';
 import __easeing from '../easing/easeInOutQuint';
-
 /**
  * @name      scrollToLocationHash
  * @namespace           sugar.js.dom
@@ -19,28 +18,21 @@ import __easeing from '../easing/easeInOutQuint';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) (https://olivierbossel.com)
  */
-export default function scrollToLocationHash(
-  duration = 500,
-  offset = 0,
-  easing = __easeing
-) {
-  // check if we have an hash in the url
-  const hash = document.location.hash;
-
-  // if not, do nothing
-  if (!hash) return;
-
-  // try to get the hash target in the page
-  const targetElm = document.querySelector(hash);
-
-  // if no target found, do nothing
-  if (!targetElm) return;
-
-  // tell the browser that we handle the scroll restoration manually
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-  }
-
-  // scroll to target
-  __scrollTo(targetElm, duration, easing, offset, 'top');
+export default function scrollToLocationHash(duration = 500, offset = 0, easing = __easeing) {
+    // check if we have an hash in the url
+    const hash = document.location.hash;
+    // if not, do nothing
+    if (!hash)
+        return;
+    // try to get the hash target in the page
+    const targetElm = document.querySelector(hash);
+    // if no target found, do nothing
+    if (!targetElm)
+        return;
+    // tell the browser that we handle the scroll restoration manually
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    // scroll to target
+    __scrollTo(targetElm, duration, easing, offset, 'top');
 }

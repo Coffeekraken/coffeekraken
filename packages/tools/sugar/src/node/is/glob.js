@@ -1,5 +1,24 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const is_glob_1 = require("is-glob");
 /**
- * @namespace           sugar.node.is
- * @src               ../_js/is/glob.js
+ * @name                                      isGlob
+ * @namespace           sugar.js.is
+ * @type                                      Function
+ *
+ * Check if the passed string is a valid glob pattern or not
+ *
+ * @param                 {String}        $string             The string to check
+ * @return                {Boolean}                           true if is a valid glob pattern, false if not
+ *
+ * @example               js
+ * import isGlob from '@coffeekraken/sugar/js/is/js';
+ * isGlob('something/*.js); // => true
+ *
+ * @see       https://www.npmjs.com/package/is-glob
+ * @since     2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/is/glob');
+exports.default = (string) => {
+    return is_glob_1.default(string);
+};

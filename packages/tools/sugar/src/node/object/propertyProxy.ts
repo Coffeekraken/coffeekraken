@@ -1,0 +1,1 @@
+../../../js/object/propertyProxy.ts

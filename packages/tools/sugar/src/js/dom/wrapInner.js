@@ -26,11 +26,11 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel@gmail.com)
  */
 export default function wrapInner($parent, $wrapper) {
-  if (typeof $wrapper === 'string') {
-    $wrapper = document.createElement($wrapper);
-  }
-  $parent.appendChild($wrapper);
-  while ($parent.firstChild !== $wrapper) {
-    $wrapper.appendChild($parent.firstChild);
-  }
+    if (typeof $wrapper === 'string') {
+        $wrapper = document.createElement($wrapper);
+    }
+    $parent.appendChild($wrapper);
+    while ($parent.firstChild !== $wrapper) {
+        $wrapper.appendChild($parent.firstChild);
+    }
 }

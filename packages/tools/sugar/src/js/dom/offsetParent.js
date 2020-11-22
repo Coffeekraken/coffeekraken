@@ -17,10 +17,10 @@ import __offset from './offset';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function offsetParent(elm) {
-  const parentOffset = __offset(elm.parentNode);
-  const offset = __offset(elm);
-  return {
-    top: offset.top - parentOffset.top,
-    left: offset.left - parentOffset.left
-  };
+    const parentOffset = __offset(elm.parentNode);
+    const offset = __offset(elm);
+    return {
+        top: offset.top - parentOffset.top,
+        left: offset.left - parentOffset.left
+    };
 }

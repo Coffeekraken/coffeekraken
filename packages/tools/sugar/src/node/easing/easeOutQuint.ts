@@ -1,0 +1,1 @@
+../../../js/easing/easeOutQuint.ts

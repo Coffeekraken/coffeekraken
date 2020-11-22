@@ -2,9 +2,7 @@ import __easing from '../easing/easeInOutQuint';
 import querySelectorLive from './querySelectorLive';
 import urlParse from 'url-parse';
 import scrollTo from './scrollTo';
-
 // TODO tests
-
 /**
  * @name        autoScrollAnchorLinks
  * @namespace           sugar.js.dom
@@ -23,40 +21,31 @@ import scrollTo from './scrollTo';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function autoScrollAnchorLinks(
-  duration = 500,
-  offset = 0,
-  easing = __easing,
-  checkPathnames = true
-) {
-  querySelectorLive('a:not([is])[href*="#"]', ($link) => {
-    // listen for click
-    $link.addEventListener('click', (e) => {
-      // get the hash
-      const linkUrl = urlParse($link.getAttribute('href'));
-      const currentUrl = urlParse();
-
-      // chack that we have an hash
-      if (!linkUrl.hash || linkUrl.hash === '#') return;
-
-      // if it's not the same pathname between the current url and the link one,
-      // we do nothing and we let the link behave as he want
-      if (checkPathnames && currentUrl.pathname !== linkUrl.pathname) return;
-
-      // try to get the target from the hash
-      const $target = document.querySelector(linkUrl.hash);
-
-      // if we don't have any target, let the link behave as he wants
-      if (!$target) return;
-
-      // preventing the link to behave as he wants
-      e.preventDefault();
-
-      // append the hash to the history in the url
-      history.pushState({}, null, linkUrl.hash);
-
-      // all seems to be good, we can scroll to the target
-      scrollTo($target, duration, easing || __easing, offset, 'top');
+export default function autoScrollAnchorLinks(duration = 500, offset = 0, easing = __easing, checkPathnames = true) {
+    querySelectorLive('a:not([is])[href*="#"]', ($link) => {
+        // listen for click
+        $link.addEventListener('click', (e) => {
+            // get the hash
+            const linkUrl = urlParse($link.getAttribute('href'));
+            const currentUrl = urlParse();
+            // chack that we have an hash
+            if (!linkUrl.hash || linkUrl.hash === '#')
+                return;
+            // if it's not the same pathname between the current url and the link one,
+            // we do nothing and we let the link behave as he want
+            if (checkPathnames && currentUrl.pathname !== linkUrl.pathname)
+                return;
+            // try to get the target from the hash
+            const $target = document.querySelector(linkUrl.hash);
+            // if we don't have any target, let the link behave as he wants
+            if (!$target)
+                return;
+            // preventing the link to behave as he wants
+            e.preventDefault();
+            // append the hash to the history in the url
+            history.pushState({}, null, linkUrl.hash);
+            // all seems to be good, we can scroll to the target
+            scrollTo($target, duration, easing || __easing, offset, 'top');
+        });
     });
-  });
 }

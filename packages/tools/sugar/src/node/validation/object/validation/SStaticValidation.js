@@ -1,5 +1,29 @@
+import __SValidation from '../../SValidation';
+import __isClass from '../../../is/class';
 /**
- * @namespace           sugar.node.validation.object.validation
- * @src             ../../../_js/validation/object/validation/SStaticValidation
+ * @name          SStaticValidation
+ * @namespace     sugar.js.validation.value.validation
+ * @type          Class
+ *
+ * This class represent the "static" validation
+ *
+ * @since       2.0.0
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../../../_js/validation/object/validation/SStaticValidation');
+class SStaticValidation extends __SValidation {
+    static exec(value, object, property) {
+        if (__isClass(object)) {
+            if (!object[property])
+                return false;
+            return true;
+        }
+        else if (object.constructor) {
+            if (!object.constructor[property])
+                return false;
+            return true;
+        }
+        return [value, object, property];
+    }
+}
+SStaticValidation.message = 'The passed "<yellow>%2</yellow>" property has to be a <green>static</green> one';
+export default SStaticValidation;

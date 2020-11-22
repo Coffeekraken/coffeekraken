@@ -1,3 +1,4 @@
+"use strict";
 const __blessed = require('blessed');
 const __SBlessedComponent = require('../SBlessedComponent');
 const __deepMerge = require('../../object/deepMerge');
@@ -10,7 +11,6 @@ const __SInput = require('../form/SInput');
 const __multiple = require('../../class/multipleExtends');
 const __activeSpace = require('../../core/activeSpace');
 const __escapeStack = require('../../terminal/escapeStack');
-
 /**
  * @name                  SBlessedWindowBox
  * @namespace           sugar.node.blessed.box
@@ -35,55 +35,46 @@ const __escapeStack = require('../../terminal/escapeStack');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBlessedWindowBox extends __SBlessedComponent {
-  /**
-   * @name                  constructor
-   * @type                  Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor($content, settings = {}) {
-    super(
-      __deepMerge(
-        {
-          style: {
-            fg: 'black',
-            bg: __color('terminal.primary').toString()
-          },
-          padding: {
-            top: 1,
-            left: 2,
-            right: 2,
-            bottom: 1
-          }
-        },
-        settings
-      )
-    );
-
-    this._$body = __blessed.box({
-      width: '100%',
-      height: '100%',
-      position: {
-        top: 0,
-        left: 0
-      },
-      style: {
-        fg: 'white',
-        bg: 'black'
-      }
-    });
-
-    this.append(this._$body);
-
-    this.update();
-  }
-
-  update() {
-    setTimeout(() => {
-      super.update();
-    });
-  }
+    /**
+     * @name                  constructor
+     * @type                  Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor($content, settings = {}) {
+        super(__deepMerge({
+            style: {
+                fg: 'black',
+                bg: __color('terminal.primary').toString()
+            },
+            padding: {
+                top: 1,
+                left: 2,
+                right: 2,
+                bottom: 1
+            }
+        }, settings));
+        this._$body = __blessed.box({
+            width: '100%',
+            height: '100%',
+            position: {
+                top: 0,
+                left: 0
+            },
+            style: {
+                fg: 'white',
+                bg: 'black'
+            }
+        });
+        this.append(this._$body);
+        this.update();
+    }
+    update() {
+        setTimeout(() => {
+            super.update();
+        });
+    }
 };

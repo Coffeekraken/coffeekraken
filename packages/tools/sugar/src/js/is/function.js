@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isFunction(value) {
-  return value && {}.toString.call(value) === '[object Function]';
+    return value && {}.toString.call(value) === '[object Function]';
 }

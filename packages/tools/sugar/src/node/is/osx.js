@@ -1,5 +1,25 @@
+"use strict";
+// TODO tests
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * @namespace           sugar.node.is
- * @src               ../_js/is/osx.js
+ * @name                            osx
+ * @namespace           sugar.js.is
+ * @type                            Function
+ *
+ * Check if the app run on mac OS X or not
+ *
+ * @return        {Boolean}                             true if mac OS X, false if not
+ *
+ * @example       js
+ * import isOsx from '@coffeekraken/sugar/js/is/osx';
+ * isOsx(); // => true
+ *
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/is/osx');
+function osx() {
+    if (process && process.platform) {
+        return process.platform === 'darwin';
+    }
+    return navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+}
+exports.default = osx;

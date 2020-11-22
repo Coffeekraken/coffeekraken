@@ -1,6 +1,6 @@
+"use strict";
 const __SPromise = require('../promise/SPromise');
 const __hotkey = require('../keyboard/hotkey');
-
 /**
  * @name                          escapeStack
  * @namespace           sugar.node.blessed
@@ -25,61 +25,53 @@ const __hotkey = require('../keyboard/hotkey');
 const escapeStackStack = [];
 let hotkeyInitiated = false;
 module.exports = function escapeStack(callback = null) {
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {
-    id: 'escapeStack'
-  });
-
-  if (!hotkeyInitiated) {
-    hotkeyInitiated = true;
-    __hotkey('escape', {
-      disableWhenEditingForm: false
-    }).on('press', (key) => {
-      if (escapeStackStack.length === 0) return;
-      const lastPromise = escapeStackStack[escapeStackStack.length - 1];
-      lastPromise.resolve();
-      escapeStackStack.splice(-1, 1);
+    const promise = new __SPromise((resolve, reject, trigger, cancel) => { }, {
+        id: 'escapeStack'
     });
-  }
-
-  if (callback) {
-    promise.on('resolve', callback);
-  }
-
-  // append the promise in the stack
-  escapeStackStack.push(promise);
-
-  // handle cancel
-  promise.on('cancel,finally', () => {
-    escapeStackStack.splice(escapeStackStack.indexOf(promise), 1);
-  });
-
-  // return the promise
-  return promise;
-
-  // if (!escapeStackCallbacks[escapeStackCurrentIndex.toString()]) {
-  //   escapeStackCallbacks[escapeStackCurrentIndex.toString()] = [];
-  // }
-  // escapeStackCallbacks[escapeStackCurrentIndex.toString()].push(callback);
-  // escapeStackCurrentIndex++;
-
-  // if (!hotkeyInitiated) {
-  //   hotkeyInitiated = true;
-
-  //   __hotkey('escape').on('press', (key) => {
-  //     if (escapeStackCurrentIndex <= 0) {
-  //       return;
-  //     }
-  //     escapeStackCurrentIndex--;
-  //     if (escapeStackCallbacks[escapeStackCurrentIndex.toString()]) {
-  //       escapeStackCallbacks[escapeStackCurrentIndex.toString()].forEach(
-  //         (callback) => {
-  //           callback(escapeStackCurrentIndex);
-  //         }
-  //       );
-  //       escapeStackCallbacks[escapeStackCurrentIndex.toString()] = [];
-  //     }
-  //   });
-  // }
-
-  return;
+    if (!hotkeyInitiated) {
+        hotkeyInitiated = true;
+        __hotkey('escape', {
+            disableWhenEditingForm: false
+        }).on('press', (key) => {
+            if (escapeStackStack.length === 0)
+                return;
+            const lastPromise = escapeStackStack[escapeStackStack.length - 1];
+            lastPromise.resolve();
+            escapeStackStack.splice(-1, 1);
+        });
+    }
+    if (callback) {
+        promise.on('resolve', callback);
+    }
+    // append the promise in the stack
+    escapeStackStack.push(promise);
+    // handle cancel
+    promise.on('cancel,finally', () => {
+        escapeStackStack.splice(escapeStackStack.indexOf(promise), 1);
+    });
+    // return the promise
+    return promise;
+    // if (!escapeStackCallbacks[escapeStackCurrentIndex.toString()]) {
+    //   escapeStackCallbacks[escapeStackCurrentIndex.toString()] = [];
+    // }
+    // escapeStackCallbacks[escapeStackCurrentIndex.toString()].push(callback);
+    // escapeStackCurrentIndex++;
+    // if (!hotkeyInitiated) {
+    //   hotkeyInitiated = true;
+    //   __hotkey('escape').on('press', (key) => {
+    //     if (escapeStackCurrentIndex <= 0) {
+    //       return;
+    //     }
+    //     escapeStackCurrentIndex--;
+    //     if (escapeStackCallbacks[escapeStackCurrentIndex.toString()]) {
+    //       escapeStackCallbacks[escapeStackCurrentIndex.toString()].forEach(
+    //         (callback) => {
+    //           callback(escapeStackCurrentIndex);
+    //         }
+    //       );
+    //       escapeStackCallbacks[escapeStackCurrentIndex.toString()] = [];
+    //     }
+    //   });
+    // }
+    return;
 };

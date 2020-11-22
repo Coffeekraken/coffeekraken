@@ -1,6 +1,5 @@
 import __isPlainObject from '../is/plainObject';
 import __deepMerge from '../object/deepMerge';
-
 /**
  * @name            deepMap
  * @namespace           sugar.js.object
@@ -26,55 +25,50 @@ import __deepMerge from '../object/deepMerge';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function deepMap(object, processor, settings = {}, _path = []) {
-  settings = __deepMerge(
-    {
-      deepFirst: false,
-      processObjects: false,
-      handleArray: true
-    },
-    settings
-  );
-  Object.keys(object).forEach((prop) => {
-    const descriptor = Object.getOwnPropertyDescriptor(object, prop);
-
-    if (
-      descriptor.get &&
-      typeof descriptor.get === 'function' &&
-      !descriptor.set
-    ) {
-      return;
-    }
-
-    if (!settings.deepFirst) {
-      if (
-        __isPlainObject(object[prop]) ||
-        (Array.isArray(object[prop]) && settings.handleArray)
-      ) {
-        object[prop] = deepMap(object[prop], processor, settings, [
-          ..._path,
-          prop
-        ]);
-        if (!settings.processObjects) return;
-      }
-      const res = processor(object[prop], prop, [..._path, prop].join('.'));
-      if (res === -1) delete object[prop];
-      else object[prop] = res;
-    } else {
-      const res = processor(object[prop], prop, [..._path, prop].join('.'));
-      if (res === -1) delete object[prop];
-      else object[prop] = res;
-
-      if (
-        __isPlainObject(object[prop]) ||
-        (Array.isArray(object[prop]) && settings.handleArray)
-      ) {
-        object[prop] = deepMap(object[prop], processor, settings, [
-          ..._path,
-          prop
-        ]);
-        if (!settings.processObjects) return;
-      }
-    }
-  });
-  return object;
+    settings = __deepMerge({
+        deepFirst: false,
+        processObjects: false,
+        handleArray: true
+    }, settings);
+    Object.keys(object).forEach((prop) => {
+        const descriptor = Object.getOwnPropertyDescriptor(object, prop);
+        if (descriptor.get &&
+            typeof descriptor.get === 'function' &&
+            !descriptor.set) {
+            return;
+        }
+        if (!settings.deepFirst) {
+            if (__isPlainObject(object[prop]) ||
+                (Array.isArray(object[prop]) && settings.handleArray)) {
+                object[prop] = deepMap(object[prop], processor, settings, [
+                    ..._path,
+                    prop
+                ]);
+                if (!settings.processObjects)
+                    return;
+            }
+            const res = processor(object[prop], prop, [..._path, prop].join('.'));
+            if (res === -1)
+                delete object[prop];
+            else
+                object[prop] = res;
+        }
+        else {
+            const res = processor(object[prop], prop, [..._path, prop].join('.'));
+            if (res === -1)
+                delete object[prop];
+            else
+                object[prop] = res;
+            if (__isPlainObject(object[prop]) ||
+                (Array.isArray(object[prop]) && settings.handleArray)) {
+                object[prop] = deepMap(object[prop], processor, settings, [
+                    ..._path,
+                    prop
+                ]);
+                if (!settings.processObjects)
+                    return;
+            }
+        }
+    });
+    return object;
 }

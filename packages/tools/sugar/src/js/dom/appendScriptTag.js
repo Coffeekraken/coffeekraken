@@ -1,5 +1,4 @@
 import scriptLoaded from './scriptLoaded';
-
 /**
  * @name        appendScriptTag
  * @namespace           sugar.js.dom
@@ -17,8 +16,8 @@ import scriptLoaded from './scriptLoaded';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function appendScriptTag(src, $parent = document.body) {
-  const $script = document.createElement('script');
-  $script.src = src;
-  $parent.appendChild($script);
-  return scriptLoaded($script);
+    const $script = document.createElement('script');
+    $script.src = src;
+    $parent.appendChild($script);
+    return scriptLoaded($script);
 }

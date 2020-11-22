@@ -1,5 +1,6 @@
+"use strict";
+var _a;
 const __SInterface = require('../../class/SInterface');
-
 /**
  * @name                SProcessInterface
  * @namespace           sugar.node.process.interface
@@ -12,55 +13,54 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SProcessInterface extends __SInterface {
-  // static extendsArray = ['SProcess', 'SPromise'];
-  static definitionObj = {
-    id: {
-      type: 'String',
-      required: true
+module.exports = (_a = class SProcessInterface extends __SInterface {
     },
-    state: {
-      type: 'String',
-      required: true,
-      values: ['idle', 'running', 'killed', 'error', 'success', 'watching']
+    // static extendsArray = ['SProcess', 'SPromise'];
+    _a.definitionObj = {
+        id: {
+            type: 'String',
+            required: true
+        },
+        state: {
+            type: 'String',
+            required: true,
+            values: ['idle', 'running', 'killed', 'error', 'success', 'watching']
+        },
+        duration: {
+            type: 'Number',
+            required: true
+        },
+        startTime: {
+            type: 'Number',
+            required: true
+        },
+        endTime: {
+            type: 'Number',
+            required: true
+        },
+        stdout: {
+            type: 'Array<String>',
+            required: true,
+            default: []
+        },
+        stderr: {
+            type: 'Array<String>',
+            required: true,
+            default: []
+        },
+        process: {
+            type: 'Function',
+            required: true
+        },
+        kill: {
+            type: 'Function',
+            required: true
+        },
+        log: {
+            type: 'Function',
+            required: true
+        }
     },
-    duration: {
-      type: 'Number',
-      required: true
-    },
-    startTime: {
-      type: 'Number',
-      required: true
-    },
-    endTime: {
-      type: 'Number',
-      required: true
-    },
-    stdout: {
-      type: 'Array<String>',
-      required: true,
-      default: []
-    },
-    stderr: {
-      type: 'Array<String>',
-      required: true,
-      default: []
-    },
-    process: {
-      type: 'Function',
-      required: true
-    },
-    kill: {
-      type: 'Function',
-      required: true
-    },
-    log: {
-      type: 'Function',
-      required: true
-    }
-  };
-
-  static title = 'SProcess elements Interface';
-  static description =
-    'This interface represent the minimum requirements that MUST have the instance that run some commands etc across the entire toolkit';
-};
+    _a.title = 'SProcess elements Interface',
+    _a.description = 'This interface represent the minimum requirements that MUST have the instance that run some commands etc across the entire toolkit',
+    _a);

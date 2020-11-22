@@ -1,13 +1,11 @@
+"use strict";
 module.exports = (__testFn) => {
-
-  describe('sugar.js.is.plainObject', () => {
-
-    it('Should detect the passed variable type correctly', () => {
-      class myClass { }
-      expect(__testFn({ hello: 'world' })).toBe(true);
-      expect(__testFn(new myClass())).toBe(false);
+    describe('sugar.js.is.plainObject', () => {
+        it('Should detect the passed variable type correctly', () => {
+            class myClass {
+            }
+            expect(__testFn({ hello: 'world' })).toBe(true);
+            expect(__testFn(new myClass())).toBe(false);
+        });
     });
-
-  });
-
-}
+};

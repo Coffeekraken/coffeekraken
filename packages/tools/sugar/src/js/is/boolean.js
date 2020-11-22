@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isBoolean(value) {
-  return typeof value === 'boolean';
+    return typeof value === 'boolean';
 }

@@ -1,5 +1,4 @@
 import __parseAuthorString from './parseAuthorString';
-
 /**
  * @name            standardizeJson
  * @namespace       sugar.js.npm
@@ -31,29 +30,29 @@ import __parseAuthorString from './parseAuthorString';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function standardizeJson(json) {
-  // author
-  if (json.author && typeof json.author === 'string') {
-    json.author = __parseAuthorString(json.author);
-  } else if (json.author && Array.isArray(json.author)) {
-    json.author = json.author.map((string) => {
-      if (typeof string === 'string') {
-        return __parseAuthorString(string);
-      }
-      return string;
-    });
-  }
-
-  // contributors
-  if (json.contributors && typeof json.contributors === 'string') {
-    json.contributors = __parsecontributorsString(json.contributors);
-  } else if (json.contributors && Array.isArray(json.contributors)) {
-    json.contributors = json.contributors.map((string) => {
-      if (typeof string === 'string') {
-        return __parseAuthorString(string);
-      }
-      return string;
-    });
-  }
-
-  return json;
+    // author
+    if (json.author && typeof json.author === 'string') {
+        json.author = __parseAuthorString(json.author);
+    }
+    else if (json.author && Array.isArray(json.author)) {
+        json.author = json.author.map((string) => {
+            if (typeof string === 'string') {
+                return __parseAuthorString(string);
+            }
+            return string;
+        });
+    }
+    // contributors
+    if (json.contributors && typeof json.contributors === 'string') {
+        json.contributors = __parsecontributorsString(json.contributors);
+    }
+    else if (json.contributors && Array.isArray(json.contributors)) {
+        json.contributors = json.contributors.map((string) => {
+            if (typeof string === 'string') {
+                return __parseAuthorString(string);
+            }
+            return string;
+        });
+    }
+    return json;
 }

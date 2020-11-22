@@ -1,5 +1,6 @@
+"use strict";
+var _a;
 const __SInterface = require('../../class/SInterface');
-
 /**
  * @name                SDeamonInterface
  * @namespace           sugar.node.deamon.interface
@@ -13,21 +14,22 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SDeamonInterface extends __SInterface {
-  static extendsArray = ['SPromise'];
-  static definitionObj = {
-    logs: {
-      type: 'Object',
-      required: true
+module.exports = (_a = class SDeamonInterface extends __SInterface {
     },
-    watch: {
-      type: 'Function',
-      required: true
+    _a.extendsArray = ['SPromise'],
+    _a.definitionObj = {
+        logs: {
+            type: 'Object',
+            required: true
+        },
+        watch: {
+            type: 'Function',
+            required: true
+        },
+        state: {
+            type: 'String',
+            required: true,
+            values: ['idle', 'watching', 'error']
+        }
     },
-    state: {
-      type: 'String',
-      required: true,
-      values: ['idle', 'watching', 'error']
-    }
-  };
-};
+    _a);

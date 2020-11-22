@@ -14,33 +14,32 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {
-  /**
-   * @name        encode
-   * @type        Function
-   *
-   * Encode in base 64
-   *
-   * @param       {String}       string        The string to encode
-   * @return      {String}                       The encoded string
-   *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  encode: function (string) {
-    return btoa(string);
-  },
-
-  /**
-   * @name        decode
-   * @type        Function
-   *
-   * Decode the passed string
-   *
-   * @param       {String}      string         The string to decode
-   * @return      {String}                      The decoded string
-   *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  decode: function (string) {
-    return atob(string);
-  }
+    /**
+     * @name        encode
+     * @type        Function
+     *
+     * Encode in base 64
+     *
+     * @param       {String}       string        The string to encode
+     * @return      {String}                       The encoded string
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    encode: function (string) {
+        return btoa(string);
+    },
+    /**
+     * @name        decode
+     * @type        Function
+     *
+     * Decode the passed string
+     *
+     * @param       {String}      string         The string to decode
+     * @return      {String}                      The decoded string
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    decode: function (string) {
+        return atob(string);
+    }
 };

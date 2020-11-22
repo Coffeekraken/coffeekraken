@@ -17,10 +17,11 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isJson(value) {
-  try {
-    JSON.parse(value);
-  } catch (e) {
-    return false;
-  }
-  return true;
+    try {
+        JSON.parse(value);
+    }
+    catch (e) {
+        return false;
+    }
+    return true;
 }

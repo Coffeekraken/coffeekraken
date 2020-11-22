@@ -19,7 +19,7 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function sleep(time) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, time);
-  });
+    return new Promise((resolve) => {
+        setTimeout(resolve, time);
+    });
 }

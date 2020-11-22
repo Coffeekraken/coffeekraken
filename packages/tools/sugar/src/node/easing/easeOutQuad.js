@@ -1,5 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * @namespace           sugar.node.easing
- * @src             ../_js/easing/easeOutQuad.js
+ * @name      easeOutQuad
+ * @namespace           sugar.js.easing
+ * @type      Function
+ *
+ * Ease out quad function
+ *
+ * @param 		{Number} 		t 		The current time
+ * @return 		{Number} 				The value depending on time
+ *
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/easing/easeOutQuad');
+function default_1(t) {
+    return t * (2 - t);
+}
+exports.default = default_1;

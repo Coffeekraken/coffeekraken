@@ -1,36 +1,28 @@
-import __get from '../../object/get';
 import __SValueValidationError from '../../error/SValueValidationError';
-import __isOfType from '../../is/ofType';
 import __deepMerge from '../../object/deepMerge';
 import __typeof from '../../value/typeof';
-import __isNode from '../../is/node';
-import __isPath from '../../is/path';
-import __toString from '../../string/toString';
-
 import __SRequiredValidation from './validation/SRequiredValidation';
 import __SPathValidation from './validation/SPathValidation';
 import __STypeValidation from './validation/STypeValidation';
 import __SValuesValidation from './validation/SValuesValidation';
-
 const _validationsObj = {
-  required: {
-    class: __SRequiredValidation,
-    args: []
-  },
-  path: {
-    class: __SPathValidation,
-    args: ['%definitionObj.path.exists']
-  },
-  type: {
-    class: __STypeValidation,
-    args: ['%definitionObj.type']
-  },
-  values: {
-    class: __SValuesValidation,
-    args: ['%definitionObj.values']
-  }
+    required: {
+        class: __SRequiredValidation,
+        args: []
+    },
+    path: {
+        class: __SPathValidation,
+        args: ['%definitionObj.path.exists']
+    },
+    type: {
+        class: __STypeValidation,
+        args: ['%definitionObj.type']
+    },
+    values: {
+        class: __SValuesValidation,
+        args: ['%definitionObj.values']
+    }
 };
-
 /**
  * @name          validateValue
  * @namespace     sugar.js.validation.value
@@ -63,85 +55,64 @@ const _validationsObj = {
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function validateValue(value, definitionObj, settings = {}) {
-  settings = __deepMerge(
-    {
-      name: 'unnamed',
-      throw: true,
-      extendFn: null,
-      validationsObj: _validationsObj
-    },
-    settings
-  );
-
-  if (
-    (value === null || value === undefined) &&
-    definitionObj.default !== undefined
-  ) {
-    value = definitionObj.default;
-  }
-
-  if (value === null || (value === undefined && !definitionObj.required)) {
-    return true;
-  }
-
-  let issueObj = {
-    $expected: definitionObj,
-    $received: {
-      type: __typeof(value),
-      value
-    },
-    $name: settings.name,
-    $issues: [],
-    $messages: {}
-  };
-
-  Object.keys(settings.validationsObj).forEach((validationName, i) => {
-    if (!_validationsObj[validationName]) {
-      issueObj.$issues.push(`definitionObj.${validationName}.unknown`);
-      issueObj.$messages[
-        `definitionObj.${validationName}.unknown`
-      ] = `The specified "<yellow>${validationName}</yellow>" validation is <red>not supported</red>`;
+    settings = __deepMerge({
+        name: 'unnamed',
+        throw: true,
+        extendFn: null,
+        validationsObj: _validationsObj
+    }, settings);
+    if ((value === null || value === undefined) &&
+        definitionObj.default !== undefined) {
+        value = definitionObj.default;
     }
-    if (!definitionObj[validationName]) return;
-
-    const validationObj = Object.assign(
-      {},
-      settings.validationsObj[validationName]
-    );
-
-    validationObj.args = validationObj.args.map((arg) => {
-      if (typeof arg === 'string' && arg.slice(0, 15) === '%definitionObj.') {
-        arg = definitionObj[arg.replace('%definitionObj.', '')];
-      }
-      return arg;
+    if (value === null || (value === undefined && !definitionObj.required)) {
+        return true;
+    }
+    let issueObj = {
+        $expected: definitionObj,
+        $received: {
+            type: __typeof(value),
+            value
+        },
+        $name: settings.name,
+        $issues: [],
+        $messages: {}
+    };
+    Object.keys(settings.validationsObj).forEach((validationName, i) => {
+        if (!_validationsObj[validationName]) {
+            issueObj.$issues.push(`definitionObj.${validationName}.unknown`);
+            issueObj.$messages[`definitionObj.${validationName}.unknown`] = `The specified "<yellow>${validationName}</yellow>" validation is <red>not supported</red>`;
+        }
+        if (!definitionObj[validationName])
+            return;
+        const validationObj = Object.assign({}, settings.validationsObj[validationName]);
+        validationObj.args = validationObj.args.map((arg) => {
+            if (typeof arg === 'string' && arg.slice(0, 15) === '%definitionObj.') {
+                arg = definitionObj[arg.replace('%definitionObj.', '')];
+            }
+            return arg;
+        });
+        const validationResult = validationObj.class.apply(value, ...validationObj.args);
+        if (validationResult !== true) {
+            issueObj.$issues.push(validationName);
+            issueObj.$messages[validationName] = validationResult;
+        }
     });
-
-    const validationResult = validationObj.class.apply(
-      value,
-      ...validationObj.args
-    );
-    if (validationResult !== true) {
-      issueObj.$issues.push(validationName);
-      issueObj.$messages[validationName] = validationResult;
+    if (settings.extendFn && typeof settings.extendFn === 'function') {
+        const additionalIssues = settings.extendFn(value, definitionObj, settings) || [];
+        issueObj.$issues = [
+            ...issueObj.$issues,
+            ...(additionalIssues.$issues || [])
+        ];
+        issueObj.$messages = [
+            ...issueObj.$messages,
+            ...(additionalIssues.$messages || [])
+        ];
     }
-  });
-
-  if (settings.extendFn && typeof settings.extendFn === 'function') {
-    const additionalIssues =
-      settings.extendFn(value, definitionObj, settings) || [];
-    issueObj.$issues = [
-      ...issueObj.$issues,
-      ...(additionalIssues.$issues || [])
-    ];
-    issueObj.$messages = [
-      ...issueObj.$messages,
-      ...(additionalIssues.$messages || [])
-    ];
-  }
-
-  if (!issueObj.$issues.length) return true;
-  if (settings.throw) {
-    throw new __SValueValidationError(issueObj);
-  }
-  return issueObj;
+    if (!issueObj.$issues.length)
+        return true;
+    if (settings.throw) {
+        throw new __SValueValidationError(issueObj);
+    }
+    return issueObj;
 }

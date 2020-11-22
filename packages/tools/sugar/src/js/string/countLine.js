@@ -1,6 +1,5 @@
 import __deepMerge from '../object/deepMerge';
 import __stripAnsi from 'strip-ansi';
-
 /**
  * @name                                  countLine
  * @namespace           sugar.js.string
@@ -23,25 +22,20 @@ import __stripAnsi from 'strip-ansi';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function countLine(line, count = {}) {
-  count = __deepMerge(
-    {
-      htmlTags: false,
-      terminalSpecialChars: false,
-      newLineChars: false
-    },
-    count
-  );
-
-  let newLine = line;
-  if (count.terminalSpecialChars === false) {
-    newLine = __stripAnsi(newLine);
-  }
-  if (count.htmlTags === false) {
-    newLine = newLine.replace(/<\/?[a-zA-Z0-9]+\s?\/?>/g, '');
-  }
-  if (count.newLineChars === false) {
-    newLine = newLine.replace('\n', '');
-  }
-
-  return newLine.length;
+    count = __deepMerge({
+        htmlTags: false,
+        terminalSpecialChars: false,
+        newLineChars: false
+    }, count);
+    let newLine = line;
+    if (count.terminalSpecialChars === false) {
+        newLine = __stripAnsi(newLine);
+    }
+    if (count.htmlTags === false) {
+        newLine = newLine.replace(/<\/?[a-zA-Z0-9]+\s?\/?>/g, '');
+    }
+    if (count.newLineChars === false) {
+        newLine = newLine.replace('\n', '');
+    }
+    return newLine.length;
 };

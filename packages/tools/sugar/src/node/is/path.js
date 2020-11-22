@@ -1,5 +1,5 @@
+"use strict";
 const __isPath = require('../fs/isPath');
-
 /**
  * @name                            path
  * @namespace           sugar.node.is
@@ -18,5 +18,5 @@ const __isPath = require('../fs/isPath');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function path(path, checkExistence = false) {
-  return __isPath(path, checkExistence);
+    return __isPath(path, checkExistence);
 };

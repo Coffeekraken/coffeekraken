@@ -1,5 +1,6 @@
+"use strict";
+var _a;
 const __SInterface = require('../../class/SInterface');
-
 /**
  * @name                SProcessManagerInterface
  * @namespace           sugar.node.process.interface
@@ -12,20 +13,19 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SProcessManagerInterface extends __SInterface {
-  // static extendsArray = ['SProcess', 'SPromise'];
-  static definitionObj = {
-    run: {
-      type: 'Function',
-      required: true
+module.exports = (_a = class SProcessManagerInterface extends __SInterface {
     },
-    kill: {
-      type: 'Function',
-      required: true
-    }
-  };
-
-  static title = 'SProcess elements Interface';
-  static description =
-    'This interface represent the minimum requirements that MUST have the instance that run some commands etc across the entire toolkit';
-};
+    // static extendsArray = ['SProcess', 'SPromise'];
+    _a.definitionObj = {
+        run: {
+            type: 'Function',
+            required: true
+        },
+        kill: {
+            type: 'Function',
+            required: true
+        }
+    },
+    _a.title = 'SProcess elements Interface',
+    _a.description = 'This interface represent the minimum requirements that MUST have the instance that run some commands etc across the entire toolkit',
+    _a);

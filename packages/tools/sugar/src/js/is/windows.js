@@ -1,5 +1,4 @@
 // TODO tests
-
 /**
  * @name                            windows
  * @namespace           sugar.js.is
@@ -16,8 +15,8 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function windows() {
-  if (process && process.platform) {
-    return process.platform === 'win32';
-  }
-  return navigator.platform.toUpperCase().indexOf('WIN') > -1;
+    if (process && process.platform) {
+        return process.platform === 'win32';
+    }
+    return navigator.platform.toUpperCase().indexOf('WIN') > -1;
 }

@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isEdge(ua = navigator.userAgent) {
-  return ua.indexOf('Edg/') > -1;
+    return ua.indexOf('Edg/') > -1;
 }

@@ -1,5 +1,21 @@
 /**
- * @namespace           sugar.node.is
- * @src               ../_js/is/regexp.js
+ * @name        isRegexp
+ * @namespace           sugar.js.is
+ * @type      Function
+ *
+ * Check if the passed value is a js Regexp
+ *
+ * @param    {Mixed}    value    The value to check
+ * @return   {Regexp}   true if it's a Regexp, false if not
+ *
+ * @example    js
+ * import isRegexp from '@coffeekraken/sugar/js/is/regexp'
+ * if (isRegexp(/^hello$/g) {
+ *   // do something
+ * }
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/is/regexp');
+export default function isRegexp(value) {
+    return value && typeof value === 'object' && value.constructor === RegExp;
+}

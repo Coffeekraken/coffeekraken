@@ -1,5 +1,41 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const node_1 = require("../is/node");
 /**
- * @namespace           sugar.node.dev
- * @src             ../_js/dev/dataTypesArray.js
+ * @name                    dataTypesArray
+ * @namespace           sugar.js.dev
+ * @type                    Array
+ *
+ * This is just a list of data types available in the
+ * current language (node/js)
+ *
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/dev/dataTypesArray');
+if (node_1.default()) {
+    module.exports = [
+        'Number',
+        'String',
+        'Symbol',
+        'Boolean',
+        'Null',
+        'Undefined',
+        'Object',
+        'Array',
+        'JSON',
+        'Function'
+    ];
+}
+else {
+    module.exports = [
+        'Number',
+        'String',
+        'Symbol',
+        'Boolean',
+        'Null',
+        'Undefined',
+        'Object',
+        'Array',
+        'JSON',
+        'Function'
+    ];
+}

@@ -1,6 +1,7 @@
+"use strict";
+var _a;
 const __SInterface = require('../../../class/SInterface');
 const __SDeamonInterface = require('../../interface/SDeamonInterface');
-
 /**
  * @name                SFsDeamonInterface
  * @namespace           sugar.node.deamon.fs.interface
@@ -14,16 +15,16 @@ const __SDeamonInterface = require('../../interface/SDeamonInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsDeamonInterface extends __SInterface {
-  static implementsArray = [__SDeamonInterface];
-
-  static definitionObj = {
-    watch: {
-      type: 'String',
-      alias: 'i',
-      description: 'Specify what to watch using a glob pattern',
-      required: true,
-      level: 1
-    }
-  };
-};
+module.exports = (_a = class SFsDeamonInterface extends __SInterface {
+    },
+    _a.implementsArray = [__SDeamonInterface],
+    _a.definitionObj = {
+        watch: {
+            type: 'String',
+            alias: 'i',
+            description: 'Specify what to watch using a glob pattern',
+            required: true,
+            level: 1
+        }
+    },
+    _a);

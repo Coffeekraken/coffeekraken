@@ -1,0 +1,1 @@
+../../../js/class/functionToClass.ts

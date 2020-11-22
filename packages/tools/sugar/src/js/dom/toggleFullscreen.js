@@ -1,6 +1,5 @@
 import requestFullscreen from './requestFullscreen';
 import exitFullscreen from './exitFullscreen';
-
 /**
  * @name      toggleFullscreen
  * @namespace     sugar.js.dom
@@ -18,13 +17,13 @@ import exitFullscreen from './exitFullscreen';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function toggleFullscreen(elm) {
-  const fullscreenElm =
-    document.fullscreenElement ||
-    document.mozFullScreenElement ||
-    document.webkitFullscreenElement;
-  if (!fullscreenElm || fullscreenElm !== elm) {
-    return requestFullscreen(elm);
-  } else {
-    return exitFullscreen();
-  }
+    const fullscreenElm = document.fullscreenElement ||
+        document.mozFullScreenElement ||
+        document.webkitFullscreenElement;
+    if (!fullscreenElm || fullscreenElm !== elm) {
+        return requestFullscreen(elm);
+    }
+    else {
+        return exitFullscreen();
+    }
 }

@@ -1,5 +1,5 @@
+"use strict";
 const __uniquid = require('../string/uniqid');
-
 /**
  * @name              registerProcess
  * @namespace           sugar.node.process
@@ -19,11 +19,12 @@ const __uniquid = require('../string/uniqid');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function registerProcess(pro, name = __uniquid()) {
-  if (!global._registeredProcesses) global._registeredProcesses = {};
-  global._registeredProcesses[name] = pro;
-  if (pro && typeof pro.on === 'function') {
-    pro.on('close', () => {
-      delete global._registeredProcesses[name];
-    });
-  }
+    if (!global._registeredProcesses)
+        global._registeredProcesses = {};
+    global._registeredProcesses[name] = pro;
+    if (pro && typeof pro.on === 'function') {
+        pro.on('close', () => {
+            delete global._registeredProcesses[name];
+        });
+    }
 };

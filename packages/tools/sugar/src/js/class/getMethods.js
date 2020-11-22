@@ -21,15 +21,16 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function getMethods(toCheck) {
-  var props = [];
-  var obj = toCheck;
-  do {
-    const _props = Object.getOwnPropertyNames(obj);
-    if (_props.indexOf('__defineGetter__') !== -1) continue;
-    props = props.concat(_props);
-  } while ((obj = Object.getPrototypeOf(obj)));
-
-  return props.sort().filter(function (e, i, arr) {
-    if (e != arr[i + 1] && typeof toCheck[e] == 'function') return true;
-  });
+    var props = [];
+    var obj = toCheck;
+    do {
+        const _props = Object.getOwnPropertyNames(obj);
+        if (_props.indexOf('__defineGetter__') !== -1)
+            continue;
+        props = props.concat(_props);
+    } while ((obj = Object.getPrototypeOf(obj)));
+    return props.sort().filter(function (e, i, arr) {
+        if (e != arr[i + 1] && typeof toCheck[e] == 'function')
+            return true;
+    });
 }

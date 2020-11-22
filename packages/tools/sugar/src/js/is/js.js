@@ -14,5 +14,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default () => {
-  return typeof window !== 'undefined';
+    return typeof window !== 'undefined';
 };

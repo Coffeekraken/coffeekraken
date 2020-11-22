@@ -1,12 +1,8 @@
-import __set from '../../object/set';
-import __get from '../../object/get';
 import __toString from '../../string/toString';
 import __parse from '../../string/parse';
-import __stringifyObject from 'stringify-object';
 import __deepMerge from '../../object/deepMerge';
 import __SConfigAdapter from './SConfigAdapter';
 import __diff from '../../object/diff';
-
 /**
  * @name                  SConfigLsAdapter
  * @namespace           sugar.js.config.adapters
@@ -24,37 +20,23 @@ import __diff from '../../object/diff';
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
 module.exports = class SConfigLsAdapter extends __SConfigAdapter {
-  constructor(settings = {}) {
-    super(settings);
-  }
-
-  load() {
-    // try to get the config from the localstorage
-    const config = __parse(localStorage.getItem(this._settings.name)) || {};
-
-    // mix the configs and save them in the instance
-    return __deepMerge(
-      config.default || {},
-      config.app || {},
-      config.user || {}
-    );
-  }
-
-  save(newConfig = {}) {
-    const baseConfig = __deepMerge(
-      this._settings.defaultConfig,
-      this._settings.appConfig
-    );
-    localStorage.setItem(
-      this._settings.name,
-      __toString({
-        default: this._settings.defaultConfig,
-        app: this._settings.appConfig,
-        user: __diff(baseConfig, newConfig)
-      })
-    );
-    return true;
-  }
+    constructor(settings = {}) {
+        super(settings);
+    }
+    load() {
+        // try to get the config from the localstorage
+        const config = __parse(localStorage.getItem(this._settings.name)) || {};
+        // mix the configs and save them in the instance
+        return __deepMerge(config.default || {}, config.app || {}, config.user || {});
+    }
+    save(newConfig = {}) {
+        const baseConfig = __deepMerge(this._settings.defaultConfig, this._settings.appConfig);
+        localStorage.setItem(this._settings.name, __toString({
+            default: this._settings.defaultConfig,
+            app: this._settings.appConfig,
+            user: __diff(baseConfig, newConfig)
+        }));
+        return true;
+    }
 };

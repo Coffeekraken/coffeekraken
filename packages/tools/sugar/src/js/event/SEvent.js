@@ -20,8 +20,8 @@
  * @see 		https://www.npmjs.com/package/customevent
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default from 'custom-event';
-
+export default from;
+'custom-event';
 /**
  * @name                        constructor
  * @type                        Function
@@ -33,7 +33,6 @@ export default from 'custom-event';
  *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-
 /**
  * @name                        settings.cancelable
  * @type                        Boolean
@@ -43,7 +42,6 @@ export default from 'custom-event';
  *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-
 /**
  * @name                        settings.bubbles
  * @type                        Boolean
@@ -53,7 +51,6 @@ export default from 'custom-event';
  *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-
 /**
  * @name                        settings.detail
  * @type                        Object

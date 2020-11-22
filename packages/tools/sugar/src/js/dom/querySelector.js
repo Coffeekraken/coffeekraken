@@ -1,7 +1,6 @@
 import __isVisible from './isVisible';
 import __isInViewport from './isInViewport';
 import __closestNotVisible from './closestNotVisible';
-
 /**
  * @name      querySelector
  * @namespace           sugar.js.dom
@@ -26,7 +25,6 @@ import __closestNotVisible from './closestNotVisible';
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
 /**
  * If we want only a visible element
  * @setting
@@ -34,7 +32,6 @@ import __closestNotVisible from './closestNotVisible';
  * @type 		{Boolean}
  * @default 	false
  */
-
 /**
  * If we want only an element that is in the viewport
  * @setting
@@ -42,7 +39,6 @@ import __closestNotVisible from './closestNotVisible';
  * @type 		{Boolean}
  * @default 	false
  */
-
 /**
  * The root node to start the query from
  * @setting
@@ -50,33 +46,26 @@ import __closestNotVisible from './closestNotVisible';
  * @type 		{HTMLElement}
  * @default 	document.body
  */
-
 export default function querySelector(selector, settings = {}) {
-  // extend settings
-  settings = {
-    visible: null,
-    inViewport: null,
-    rootNode: document.body,
-    ...settings
-  };
-
-  // grab the element into the dom
-  const elm = settings.rootNode.querySelector(selector);
-  // if no element, stop here
-  if (!elm) return null;
-
-  // state tracking
-  let isVisible = true;
-  let isInViewport = true;
-
-  // check settings
-  if (settings.visible) {
-    if (!__isVisible(elm) || !__closestNotVisible(elm)) return null;
-  }
-  if (settings.inViewport) {
-    if (!__isInViewport(elm)) return null;
-  }
-
-  // return the element
-  return elm;
+    // extend settings
+    settings = Object.assign({ visible: null, inViewport: null, rootNode: document.body }, settings);
+    // grab the element into the dom
+    const elm = settings.rootNode.querySelector(selector);
+    // if no element, stop here
+    if (!elm)
+        return null;
+    // state tracking
+    let isVisible = true;
+    let isInViewport = true;
+    // check settings
+    if (settings.visible) {
+        if (!__isVisible(elm) || !__closestNotVisible(elm))
+            return null;
+    }
+    if (settings.inViewport) {
+        if (!__isInViewport(elm))
+            return null;
+    }
+    // return the element
+    return elm;
 }

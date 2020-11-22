@@ -1,3 +1,4 @@
+"use strict";
 const __SActionsStream = require('../../stream/SActionsStream');
 const __SJsConfigFileToJsonStreamAction = require('./config/SJsConfigFileToJsonStreamAction');
 const __deepMerge = require('../../object/deepMerge');
@@ -5,7 +6,6 @@ const __getFilename = require('../../fs/filename');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 const __SGlobResolverStreamAction = require('../../stream/actions/SGlobResolverStreamAction');
 const __path = require('path');
-
 /**
  * @name            SBuildConfigActionsStream
  * @namespace       node.build.config
@@ -32,54 +32,46 @@ const __path = require('path');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildConfigActionsStream extends __SActionsStream {
-  /**
-   * @name        constructor
-   * @type        Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(settings = {}) {
-    // init actions stream
-    super(
-      {
-        globResolver: __SGlobResolverStreamAction,
-        jsToJson: __SJsConfigFileToJsonStreamAction,
-        fsOutput: __SFsOutputStreamAction
-      },
-      __deepMerge(
-        {
-          id: 'build.config.actionsStream',
-          name: 'Build Config Actions Stream',
-          before: (streamObj) => {
-            streamObj.globProperty = 'input';
-            return streamObj;
-          },
-          afterActions: {
-            globResolver: (streamObj) => {
-              if (streamObj.input) {
-                streamObj.filename = __getFilename(streamObj.input);
-              }
-              return streamObj;
+    /**
+     * @name        constructor
+     * @type        Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(settings = {}) {
+        // init actions stream
+        super({
+            globResolver: __SGlobResolverStreamAction,
+            jsToJson: __SJsConfigFileToJsonStreamAction,
+            fsOutput: __SFsOutputStreamAction
+        }, __deepMerge({
+            id: 'build.config.actionsStream',
+            name: 'Build Config Actions Stream',
+            before: (streamObj) => {
+                streamObj.globProperty = 'input';
+                return streamObj;
+            },
+            afterActions: {
+                globResolver: (streamObj) => {
+                    if (streamObj.input) {
+                        streamObj.filename = __getFilename(streamObj.input);
+                    }
+                    return streamObj;
+                }
+            },
+            beforeActions: {
+                fsOutput: (streamObj) => {
+                    if (!streamObj.outputStack)
+                        streamObj.outputStack = {};
+                    if (streamObj.outputDir && streamObj.filename && streamObj.data) {
+                        streamObj.outputStack.data = __path.resolve(streamObj.outputDir, streamObj.filename);
+                    }
+                    return streamObj;
+                }
             }
-          },
-          beforeActions: {
-            fsOutput: (streamObj) => {
-              if (!streamObj.outputStack) streamObj.outputStack = {};
-              if (streamObj.outputDir && streamObj.filename && streamObj.data) {
-                streamObj.outputStack.data = __path.resolve(
-                  streamObj.outputDir,
-                  streamObj.filename
-                );
-              }
-              return streamObj;
-            }
-          }
-        },
-        settings
-      )
-    );
-  }
+        }, settings));
+    }
 };

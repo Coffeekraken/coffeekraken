@@ -1,5 +1,4 @@
 import __striptags from 'striptags';
-
 /**
  * @name        striptags
  * @namespace           sugar.js.html
@@ -21,5 +20,5 @@ import __striptags from 'striptags';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function striptags(html, allowedTags, tagReplacement) {
-  return __striptags(html, allowedTags, tagReplacement);
+    return __striptags(html, allowedTags, tagReplacement);
 }

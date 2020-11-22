@@ -1,5 +1,4 @@
 import { paramCase } from 'param-case';
-
 /**
  * @name          paramCase
  * @namespace           sugar.js.string
@@ -19,5 +18,5 @@ import { paramCase } from 'param-case';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function (string) {
-  return paramCase(string);
+    return paramCase(string);
 }

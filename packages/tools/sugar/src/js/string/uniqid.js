@@ -16,5 +16,5 @@ import __uniqid from 'uniqid';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function uniqid() {
-  return __uniqid();
+    return __uniqid();
 }

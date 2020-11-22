@@ -1,5 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * @namespace           sugar.node.easing
- * @src             ../_js/easing/easeInOutCubic.js
+ * @name      easeInOutCubic
+ * @namespace           sugar.js.easing
+ * @type      Function
+ * Ease in out cubic function
+ *
+ * @param 		{Number} 		t 		The current time
+ * @return 		{Number} 				The value depending on time
+ *
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/easing/easeInOutCubic');
+function default_1(t) {
+    return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+}
+exports.default = default_1;

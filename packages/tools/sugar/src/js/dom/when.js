@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 /**
  * @name                              when
  * @namespace           sugar.js.dom
@@ -35,53 +44,46 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function when($node, state, settings = {}) {
-  return new Promise(async (resolve, reject) => {
-    // check the state to detect
-    let importPromise, args;
-    switch (state) {
-      case 'attribute':
-        importPromise = import(
-          /* webpackChunkName: "whenAttribute" */ /* webpackMode: "lazy" */ './whenAttribute'
-        );
-        args = [$node, settings.attribute, settings.checkFn];
-        break;
-      case 'inViewport':
-        importPromise = import(
-          /* webpackChunkName: "whenInViewport" */ /* webpackMode: "lazy" */ './whenInViewport'
-        );
-        args = [$node, settings.offset];
-        break;
-      case 'outOfViewport':
-        importPromise = import(
-          /* webpackChunkName: "whenOutOfViewport" */ /* webpackMode: "lazy" */ './whenOutOfViewport'
-        );
-        args = [$node, settings.offset];
-        break;
-      case 'transitionEnd':
-        importPromise = import(
-          /* webpackChunkName: "whenTransitionEnd" */ /* webpackMode: "lazy" */ './whenTransitionEnd'
-        );
-        args = [$node, settings.callback];
-        break;
-      case 'visible':
-        importPromise = import(
-          /* webpackChunkName: "whenVisible" */ /* webpackMode: "lazy" */ './whenVisible'
-        );
-        args = [$node, settings.callback];
-        break;
-      default:
-        resolve($node);
-        return;
-        break;
-    }
-
-    // wait until the module is loaded
-    const module = await importPromise;
-
-    // call the when... function
-    module.default.apply(null, args).then(() => {
-      // resolve the promise
-      resolve($node);
-    });
-  });
+    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        // check the state to detect
+        let importPromise, args;
+        switch (state) {
+            case 'attribute':
+                importPromise = import(
+                /* webpackChunkName: "whenAttribute" */ /* webpackMode: "lazy" */ './whenAttribute');
+                args = [$node, settings.attribute, settings.checkFn];
+                break;
+            case 'inViewport':
+                importPromise = import(
+                /* webpackChunkName: "whenInViewport" */ /* webpackMode: "lazy" */ './whenInViewport');
+                args = [$node, settings.offset];
+                break;
+            case 'outOfViewport':
+                importPromise = import(
+                /* webpackChunkName: "whenOutOfViewport" */ /* webpackMode: "lazy" */ './whenOutOfViewport');
+                args = [$node, settings.offset];
+                break;
+            case 'transitionEnd':
+                importPromise = import(
+                /* webpackChunkName: "whenTransitionEnd" */ /* webpackMode: "lazy" */ './whenTransitionEnd');
+                args = [$node, settings.callback];
+                break;
+            case 'visible':
+                importPromise = import(
+                /* webpackChunkName: "whenVisible" */ /* webpackMode: "lazy" */ './whenVisible');
+                args = [$node, settings.callback];
+                break;
+            default:
+                resolve($node);
+                return;
+                break;
+        }
+        // wait until the module is loaded
+        const module = yield importPromise;
+        // call the when... function
+        module.default.apply(null, args).then(() => {
+            // resolve the promise
+            resolve($node);
+        });
+    }));
 }

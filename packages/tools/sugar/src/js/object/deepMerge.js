@@ -1,7 +1,6 @@
 import __copyTo from 'copy-to';
 import __isPlainObject from '../is/plainObject';
 import __unique from '../array/unique';
-
 /**
  * @name                deepMerge
  * @namespace           sugar.js.object
@@ -25,62 +24,54 @@ import __unique from '../array/unique';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function deepMerge(...args) {
-  let settings = {
-    array: false,
-    object: true
-  };
-
-  function merge(firstObj, secondObj) {
-    const newObj = {};
-    if (!firstObj && secondObj) return secondObj;
-    if (!secondObj && firstObj) return firstObj;
-    if (!firstObj && !secondObj) return {};
-    __copyTo(firstObj).override(newObj);
-    for (const key of Object.keys(secondObj)) {
-      // merging arrays
-      if (
-        settings.array === true &&
-        Array.isArray(firstObj[key]) &&
-        Array.isArray(secondObj[key])
-      ) {
-        let newArray = __unique([...firstObj[key], ...secondObj[key]]);
-        newObj[key] = newArray;
-        continue;
-      }
-
-      // merging objects
-      else if (
-        settings.object === true &&
-        __isPlainObject(firstObj[key]) &&
-        __isPlainObject(secondObj[key])
-      ) {
-        newObj[key] = merge(firstObj[key], secondObj[key]);
-        continue;
-      }
-      __copyTo(secondObj).pick(key).toCover(newObj);
+    let settings = {
+        array: false,
+        object: true
+    };
+    function merge(firstObj, secondObj) {
+        const newObj = {};
+        if (!firstObj && secondObj)
+            return secondObj;
+        if (!secondObj && firstObj)
+            return firstObj;
+        if (!firstObj && !secondObj)
+            return {};
+        __copyTo(firstObj).override(newObj);
+        for (const key of Object.keys(secondObj)) {
+            // merging arrays
+            if (settings.array === true &&
+                Array.isArray(firstObj[key]) &&
+                Array.isArray(secondObj[key])) {
+                let newArray = __unique([...firstObj[key], ...secondObj[key]]);
+                newObj[key] = newArray;
+                continue;
+            }
+            // merging objects
+            else if (settings.object === true &&
+                __isPlainObject(firstObj[key]) &&
+                __isPlainObject(secondObj[key])) {
+                newObj[key] = merge(firstObj[key], secondObj[key]);
+                continue;
+            }
+            __copyTo(secondObj).pick(key).toCover(newObj);
+        }
+        return newObj;
     }
-    return newObj;
-  }
-
-  let potentialSettingsObj = args[args.length - 1] || {};
-  if (
-    (potentialSettingsObj.array &&
-      typeof potentialSettingsObj.array === 'boolean') ||
-    (potentialSettingsObj.object &&
-      typeof potentialSettingsObj.object === 'boolean')
-  ) {
-    if (potentialSettingsObj.array !== undefined)
-      settings.array = potentialSettingsObj.array;
-    if (potentialSettingsObj.object !== undefined)
-      settings.object = potentialSettingsObj.object;
-    args.pop();
-  }
-
-  let currentObj = {};
-  for (let i = 0; i < args.length; i++) {
-    const toMergeObj = args[i] || {};
-    currentObj = merge(currentObj, toMergeObj);
-  }
-
-  return currentObj;
+    let potentialSettingsObj = args[args.length - 1] || {};
+    if ((potentialSettingsObj.array &&
+        typeof potentialSettingsObj.array === 'boolean') ||
+        (potentialSettingsObj.object &&
+            typeof potentialSettingsObj.object === 'boolean')) {
+        if (potentialSettingsObj.array !== undefined)
+            settings.array = potentialSettingsObj.array;
+        if (potentialSettingsObj.object !== undefined)
+            settings.object = potentialSettingsObj.object;
+        args.pop();
+    }
+    let currentObj = {};
+    for (let i = 0; i < args.length; i++) {
+        const toMergeObj = args[i] || {};
+        currentObj = merge(currentObj, toMergeObj);
+    }
+    return currentObj;
 }

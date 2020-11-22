@@ -1,19 +1,18 @@
+"use strict";
 const __parseArgs = require('../../node/cli/parseArgs');
 const __sugarConfig = require('../../node/config/sugar');
-
 module.exports = async (stringArgs = '') => {
-  const args = __parseArgs(stringArgs, {
-    definitionObj: {
-      path: {
-        type: 'String',
-        alias: 'p',
-        default: null
-      }
+    const args = __parseArgs(stringArgs, {
+        definitionObj: {
+            path: {
+                type: 'String',
+                alias: 'p',
+                default: null
+            }
+        }
+    });
+    if (!args.path) {
+        throw new Error(`The cli action "config.get" need a "path" argument...`);
     }
-  });
-  if (!args.path) {
-    throw new Error(`The cli action "config.get" need a "path" argument...`);
-  }
-
-  console.log(__sugarConfig(args.path));
+    console.log(__sugarConfig(args.path));
 };

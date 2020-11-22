@@ -1,5 +1,4 @@
 import getStyleProperty from './getStyleProperty';
-
 /**
  * @name      querySelectorAllWithStyle
  * @namespace           sugar.js.dom
@@ -28,59 +27,53 @@ import getStyleProperty from './getStyleProperty';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function querySelectorAllWithStyle(
-  selector,
-  style,
-  settings = {}
-) {
-  // extend settings
-  settings = {
-    rootNode: document.body,
-    ...settings
-  };
-  // select all the element from the selector
-  const $elms = settings.rootNode.querySelectorAll(selector);
-  // check that we have some nodes to process
-  if (!$elms.length) return [];
-  // init the ar$Elms stack that will be returned at the end
-  const ar$Elms = [];
-  // loop on each elements
-  Array.from($elms).forEach(($elm) => {
-    // track if the $elm match all the properties
-    let match = true;
-    // loop on each properties of the style object
-    // to check it against the dom computed style
-    for (let key in style) {
-      // get the value from the computed dom node
-      const value = getStyleProperty($elm, key);
-      // true as selector
-      if (style[key] === true && !value) {
-        match = false;
-        break;
-      } else if (style[key] === false && value) {
-        match = false;
-        break;
-      } else if (
-        style[key] instanceof RegExp &&
-        !value.toString().match(style[key])
-      ) {
-        match = false;
-        break;
-      } else if (typeof style[key] === 'string' && style[key] !== value) {
-        match = false;
-        break;
-      }
-    }
-    // add the dom node in stack if it match all the
-    // style object
-    if (match) {
-      ar$Elms.push($elm);
-    }
-  });
-  // return the elements found
-  return ar$Elms;
+export default function querySelectorAllWithStyle(selector, style, settings = {}) {
+    // extend settings
+    settings = Object.assign({ rootNode: document.body }, settings);
+    // select all the element from the selector
+    const $elms = settings.rootNode.querySelectorAll(selector);
+    // check that we have some nodes to process
+    if (!$elms.length)
+        return [];
+    // init the ar$Elms stack that will be returned at the end
+    const ar$Elms = [];
+    // loop on each elements
+    Array.from($elms).forEach(($elm) => {
+        // track if the $elm match all the properties
+        let match = true;
+        // loop on each properties of the style object
+        // to check it against the dom computed style
+        for (let key in style) {
+            // get the value from the computed dom node
+            const value = getStyleProperty($elm, key);
+            // true as selector
+            if (style[key] === true && !value) {
+                match = false;
+                break;
+            }
+            else if (style[key] === false && value) {
+                match = false;
+                break;
+            }
+            else if (style[key] instanceof RegExp &&
+                !value.toString().match(style[key])) {
+                match = false;
+                break;
+            }
+            else if (typeof style[key] === 'string' && style[key] !== value) {
+                match = false;
+                break;
+            }
+        }
+        // add the dom node in stack if it match all the
+        // style object
+        if (match) {
+            ar$Elms.push($elm);
+        }
+    });
+    // return the elements found
+    return ar$Elms;
 }
-
 /**
  * @name 	settings.rootNode
  * The root node used to select the the elements within

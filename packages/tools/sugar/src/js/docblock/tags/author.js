@@ -12,14 +12,12 @@
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 export default function author(data) {
-  const authorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(
-    data.value
-  );
-  if (!authorNfo) return null;
-
-  return {
-    name: authorNfo[1],
-    email: authorNfo[2],
-    url: authorNfo[3]
-  };
+    const authorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(data.value);
+    if (!authorNfo)
+        return null;
+    return {
+        name: authorNfo[1],
+        email: authorNfo[2],
+        url: authorNfo[3]
+    };
 }

@@ -1,5 +1,4 @@
 import __aggregation from 'aggregation/es5';
-
 /**
  * @name                multipleExtends
  * @namespace           sugar.js.class
@@ -17,5 +16,5 @@ import __aggregation from 'aggregation/es5';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default (...classes) => {
-  return __aggregation(...classes);
+    return __aggregation(...classes);
 };

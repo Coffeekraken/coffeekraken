@@ -1,5 +1,4 @@
 import __deepMerge from '../object/deepMerge';
-
 /**
  * @name          simply
  * @namespace     sugar.js.string
@@ -23,49 +22,42 @@ import __deepMerge from '../object/deepMerge';
  * @author    João Filipe Ventura Coelho <joaoventura93@outlook.com>
  */
 export default function simplify(string, settings = {}) {
-  settings = __deepMerge(
-    {
-      specialChars: true,
-      lowerCase: true,
-      dashSpace: true,
-      trim: true
-    },
-    settings
-  );
-
-  if (string == null) return '';
-  var map = {
-    A: 'À|Á|Ã|Â|Ä',
-    a: 'á|à|ã|â|ä',
-    E: 'É|È|Ê|Ë',
-    e: 'é|è|ê|ë',
-    I: 'Í|Ì|Î|Ï',
-    i: 'í|ì|î|ï',
-    O: 'Ó|Ò|Ô|Õ|Ö',
-    o: 'ó|ò|ô|õ|ö',
-    U: 'Ú|Ù|Û|Ü|Ü',
-    u: 'ú|ù|û|ü|ü',
-    C: 'Ç',
-    c: 'ç',
-    N: 'Ñ',
-    n: 'ñ'
-  };
-
-  if (settings.dashSpace) {
-    map[' '] = '_|-';
-  }
-
-  if (settings.lowerCase) {
-    string = string.toLowerCase();
-  }
-
-  if (settings.specialChars) {
-    for (var pattern in map) {
-      string = string.replace(new RegExp(map[pattern], 'g'), pattern);
+    settings = __deepMerge({
+        specialChars: true,
+        lowerCase: true,
+        dashSpace: true,
+        trim: true
+    }, settings);
+    if (string == null)
+        return '';
+    var map = {
+        A: 'À|Á|Ã|Â|Ä',
+        a: 'á|à|ã|â|ä',
+        E: 'É|È|Ê|Ë',
+        e: 'é|è|ê|ë',
+        I: 'Í|Ì|Î|Ï',
+        i: 'í|ì|î|ï',
+        O: 'Ó|Ò|Ô|Õ|Ö',
+        o: 'ó|ò|ô|õ|ö',
+        U: 'Ú|Ù|Û|Ü|Ü',
+        u: 'ú|ù|û|ü|ü',
+        C: 'Ç',
+        c: 'ç',
+        N: 'Ñ',
+        n: 'ñ'
+    };
+    if (settings.dashSpace) {
+        map[' '] = '_|-';
     }
-  }
-
-  if (settings.trim) string = string.trim();
-
-  return string;
+    if (settings.lowerCase) {
+        string = string.toLowerCase();
+    }
+    if (settings.specialChars) {
+        for (var pattern in map) {
+            string = string.replace(new RegExp(map[pattern], 'g'), pattern);
+        }
+    }
+    if (settings.trim)
+        string = string.trim();
+    return string;
 }

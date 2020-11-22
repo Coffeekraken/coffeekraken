@@ -1,11 +1,6 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const SDescriptor_1 = __importDefault(require("../SDescriptor"));
+import SDescriptor from '../SDescriptor';
 describe('sugar.js.convert.toHtml', () => {
-    class MyDescriptor extends SDescriptor_1.default {
+    class MyDescriptor extends SDescriptor {
     }
     MyDescriptor.rules = {
         myProperty: {

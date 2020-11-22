@@ -1,5 +1,5 @@
+"use strict";
 const __SUrlAction = require('./browser/SUrlAction');
-
 /**
  * @name            typeMap
  * @namespace       sugar.js.action
@@ -11,7 +11,7 @@ const __SUrlAction = require('./browser/SUrlAction');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = {
-  browser: {
-    url: __SUrlAction
-  }
+    browser: {
+        url: __SUrlAction
+    }
 };

@@ -1,5 +1,5 @@
+"use strict";
 const __deepMerge = require('../../../object/deepMerge');
-
 /**
  * @name                              axiosInjector
  * @namespace           node.auth.injectors
@@ -14,15 +14,11 @@ const __deepMerge = require('../../../object/deepMerge');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function axiosInjector(authInfo, requestConfig) {
-  switch (authInfo.type) {
-    case 'basic':
-    case 'bearer':
-      requestConfig.headers = __deepMerge(
-        requestConfig.headers || {},
-        authInfo.headers
-      );
-      break;
-  }
-
-  return requestConfig;
+    switch (authInfo.type) {
+        case 'basic':
+        case 'bearer':
+            requestConfig.headers = __deepMerge(requestConfig.headers || {}, authInfo.headers);
+            break;
+    }
+    return requestConfig;
 };

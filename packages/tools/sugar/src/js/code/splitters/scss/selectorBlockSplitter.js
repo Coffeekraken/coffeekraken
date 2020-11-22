@@ -11,9 +11,9 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {
-  type: 'selector.block',
-  prefix: /(^(?!.*@media)[\t ]*([a-zA-Z#.:*[][^{\/]*\s*)\s?){/m,
-  prefixMatchIdx: 1,
-  open: '{',
-  close: '}'
+    type: 'selector.block',
+    prefix: /(^(?!.*@media)[\t ]*([a-zA-Z#.:*[][^{\/]*\s*)\s?){/m,
+    prefixMatchIdx: 1,
+    open: '{',
+    close: '}'
 };

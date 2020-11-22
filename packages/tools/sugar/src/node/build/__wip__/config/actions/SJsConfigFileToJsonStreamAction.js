@@ -1,3 +1,5 @@
+"use strict";
+var _a;
 const __webpack = require('webpack');
 const __getFilename = require('../../../fs/filename');
 const __packageRoot = require('../../../path/packageRoot');
@@ -7,7 +9,6 @@ const __path = require('path');
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SBuildJsCli = require('../../SBuildJsCli');
 const { stream } = require('globby');
-
 /**
  * @name                SJsConfigFileToJsonStreamAction
  * @namespace           sugar.node.build.config.actions
@@ -21,62 +22,54 @@ const { stream } = require('globby');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SJsConfigFileToJsonStreamAction extends __SActionsStreamAction {
-  /**
-   * @name            definitionObj
-   * @type             Object
-   * @static
-   *
-   * Store the definition object that specify the streamObj required properties, types, etc...
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  static definitionObj = {
-    input: {
-      type: 'String',
-      required: true
-    }
-  };
-
-  /**
-   * @name            constructor
-   * @type            Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(settings = {}) {
-    super(
-      __deepMerge(
-        {
-          id: 'actionStream.action.config.configFileToJson'
-        },
-        settings
-      )
-    );
-  }
-
-  /**
-   * @name          run
-   * @type          Function
-   * @async
-   *
-   * Override the base class run method
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  run(streamObj, settings) {
-    return super.run(streamObj, (resolve, reject) => {
-      // get the config object from input file
-      const config = require(streamObj.input);
-
-      // transform the config to JSON
-      streamObj.data = JSON.stringify(config, null, 4);
-
-      // resolve the action
-      resolve(streamObj);
-    });
-  }
-};
+module.exports = (_a = class SJsConfigFileToJsonStreamAction extends __SActionsStreamAction {
+        /**
+         * @name            constructor
+         * @type            Function
+         * @constructor
+         *
+         * Constructor
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        constructor(settings = {}) {
+            super(__deepMerge({
+                id: 'actionStream.action.config.configFileToJson'
+            }, settings));
+        }
+        /**
+         * @name          run
+         * @type          Function
+         * @async
+         *
+         * Override the base class run method
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        run(streamObj, settings) {
+            return super.run(streamObj, (resolve, reject) => {
+                // get the config object from input file
+                const config = require(streamObj.input);
+                // transform the config to JSON
+                streamObj.data = JSON.stringify(config, null, 4);
+                // resolve the action
+                resolve(streamObj);
+            });
+        }
+    },
+    /**
+     * @name            definitionObj
+     * @type             Object
+     * @static
+     *
+     * Store the definition object that specify the streamObj required properties, types, etc...
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _a.definitionObj = {
+        input: {
+            type: 'String',
+            required: true
+        }
+    },
+    _a);

@@ -1,5 +1,21 @@
 /**
- * @namespace           sugar.node.is
- * @src               ../_js/is/string.js
+ * @name        isString
+ * @namespace           sugar.js.is
+ * @type      Function
+ *
+ * Check if the passed value is a js String
+ *
+ * @param    {Mixed}    value    The value to check
+ * @return   {Boolean}   true if it's a String, false if not
+ *
+ * @example    js
+ * import isString from '@coffeekraken/sugar/js/is/String'
+ * if (isString({}) {
+ *   // do something
+ * }
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/is/string');
+export default function isString(value) {
+    return typeof value === 'string' || value instanceof String;
+}

@@ -1,7 +1,7 @@
+"use strict";
 const __winston = require('winston');
 const SlackHook = require('winston-slack-webhook-transport');
 const __getAppMeta = require('../app/getAppMetas');
-
 /**
  * @name                    setupSlackTransport
  * @namespace           sugar.node.log
@@ -31,83 +31,75 @@ const __getAppMeta = require('../app/getAppMetas');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function setupSlackTransport(
-  webhookUrl = process.env.LOG_SLACK_WEBHOOKURL,
-  level = 'error',
-  winstonSlackSettings = {}
-) {
-  // get the app meta
-  const appMeta = __getAppMetas();
-
-  // format message
-  const formatArray = [];
-  if (appMeta.name) {
-    formatArray.push({
-      text: `- *Application:* ${appMeta.name}`
+module.exports = function setupSlackTransport(webhookUrl = process.env.LOG_SLACK_WEBHOOKURL, level = 'error', winstonSlackSettings = {}) {
+    // get the app meta
+    const appMeta = __getAppMetas();
+    // format message
+    const formatArray = [];
+    if (appMeta.name) {
+        formatArray.push({
+            text: `- *Application:* ${appMeta.name}`
+        });
+    }
+    if (appMeta.version) {
+        formatArray.push({
+            text: `- *Version:* ${appMeta.version}`
+        });
+    }
+    if (appMeta.homepage) {
+        formatArray.push({
+            text: `- *Homepage:* <${appMeta.homepage}>`
+        });
+    }
+    if (appMeta.license) {
+        formatArray.push({
+            text: `- *License:* ${appMeta.license}`
+        });
+    }
+    if (appMeta.author) {
+        formatArray.push({
+            text: `- *Author:* ${appMeta.author}`
+        });
+    }
+    if (appMeta.contributors) {
+        let contributorsArray = [];
+        appMeta.contributors.forEach((cont) => {
+            contributorsArray.push(`<mailto:${cont.email}|${cont.name}>`);
+        });
+        formatArray.push({
+            text: `- *Contributors:* ${contributorsArray.join(', ')}`
+        });
+    }
+    // init the slack transport
+    const slackTransport = new SlackHook({
+        webhookUrl: webhookUrl,
+        channel: process.env.LOG_SLACK_CHANNEL,
+        username: process.env.LOG_SLACK_USERNAME || appMeta.name || 'Coffeekraken logger',
+        iconUrl: process.env.LOG_SLACK_STATUS_ICON,
+        formatter: (info) => {
+            return {
+                // text: `${info.level}: ${info.message}`,
+                attachments: [
+                    {
+                        text: `- *Level:* ${info.level}`
+                    }
+                ].concat(formatArray),
+                blocks: [
+                    {
+                        type: 'section',
+                        text: {
+                            type: 'mrkdwn',
+                            text: `${info.message}`
+                        }
+                    }
+                ]
+            };
+        },
+        level: level,
+        unfurlLinks: false,
+        unfurlMedia: false,
+        mrkdwn: true,
+        ...winstonSlackSettings
     });
-  }
-  if (appMeta.version) {
-    formatArray.push({
-      text: `- *Version:* ${appMeta.version}`
-    });
-  }
-  if (appMeta.homepage) {
-    formatArray.push({
-      text: `- *Homepage:* <${appMeta.homepage}>`
-    });
-  }
-  if (appMeta.license) {
-    formatArray.push({
-      text: `- *License:* ${appMeta.license}`
-    });
-  }
-  if (appMeta.author) {
-    formatArray.push({
-      text: `- *Author:* ${appMeta.author}`
-    });
-  }
-  if (appMeta.contributors) {
-    let contributorsArray = [];
-    appMeta.contributors.forEach((cont) => {
-      contributorsArray.push(`<mailto:${cont.email}|${cont.name}>`);
-    });
-    formatArray.push({
-      text: `- *Contributors:* ${contributorsArray.join(', ')}`
-    });
-  }
-
-  // init the slack transport
-  const slackTransport = new SlackHook({
-    webhookUrl: webhookUrl,
-    channel: process.env.LOG_SLACK_CHANNEL,
-    username:
-      process.env.LOG_SLACK_USERNAME || appMeta.name || 'Coffeekraken logger',
-    iconUrl: process.env.LOG_SLACK_STATUS_ICON,
-    formatter: (info) => {
-      return {
-        // text: `${info.level}: ${info.message}`,
-        attachments: [
-          {
-            text: `- *Level:* ${info.level}`
-          }
-        ].concat(formatArray),
-        blocks: [
-          {
-            type: 'section',
-            text: {
-              type: 'mrkdwn',
-              text: `${info.message}`
-            }
-          }
-        ]
-      };
-    },
-    level: level,
-    unfurlLinks: false,
-    unfurlMedia: false,
-    mrkdwn: true,
-    ...winstonSlackSettings
-  });
-
-  global._sLogger.add(slackTransport);
+    global._sLogger.add(slackTransport);
 };

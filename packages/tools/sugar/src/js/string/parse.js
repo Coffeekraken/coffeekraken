@@ -15,14 +15,16 @@
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default (value) => {
-  if (typeof value !== 'string') return value;
-  value = value.split('⠀').join('').trim();
-  try {
-    return Function(`
+    if (typeof value !== 'string')
+        return value;
+    value = value.split('⠀').join('').trim();
+    try {
+        return Function(`
       "use strict";
       return (${value});
     `)();
-  } catch (e) {
-    return value;
-  }
+    }
+    catch (e) {
+        return value;
+    }
 };

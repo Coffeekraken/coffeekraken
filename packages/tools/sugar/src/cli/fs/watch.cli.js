@@ -1,8 +1,8 @@
+"use strict";
 const __argsToObject = require('../../node/cli/argsToObject');
 const __chokidar = require('chokidar');
 const __packageRoot = require('../../node/path/packageRoot');
 const __path = require('path');
-
 /**
  * @name                watch
  * @namespace           cli.fs
@@ -21,54 +21,55 @@ const __path = require('path');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
 const definition = {
-  pattern: {
-    type: 'String',
-    alias: 'p',
-    description: 'Files glob pattern(s)',
-    required: true
-  },
-  type: {
-    type: 'String',
-    alias: 't',
-    description: 'What you want to watch',
-    default: 'new,update,delete'
-  },
-  persistent: {
-    type: 'Boolean',
-    description: 'Specify if the process shoud stay alive',
-    default: true
-  },
-  ignore: {
-    type: 'String',
-    alias: 'i',
-    description: 'Some glob patterns to ignore'
-  }
+    pattern: {
+        type: 'String',
+        alias: 'p',
+        description: 'Files glob pattern(s)',
+        required: true
+    },
+    type: {
+        type: 'String',
+        alias: 't',
+        description: 'What you want to watch',
+        default: 'new,update,delete'
+    },
+    persistent: {
+        type: 'Boolean',
+        description: 'Specify if the process shoud stay alive',
+        default: true
+    },
+    ignore: {
+        type: 'String',
+        alias: 'i',
+        description: 'Some glob patterns to ignore'
+    }
 };
 module.exports = (stringArgs = '') => {
-  const args = __argsToObject(stringArgs, definition);
-  const watcher = __chokidar.watch(args.pattern.split(','), {
-    persistent: args.persistent,
-    ignored: args.ignore,
-    ignoreInitial: true,
-    followSymlinks: true,
-    cwd: __packageRoot(process.cwd()),
-    ignorePermissionErrors: false
-  });
-
-  watcher
-    .on('add', (path) => {
-      if (args.type.split(',').indexOf('new') === -1) return;
-      console.log(`new:${__path.resolve(path)}`);
+    const args = __argsToObject(stringArgs, definition);
+    const watcher = __chokidar.watch(args.pattern.split(','), {
+        persistent: args.persistent,
+        ignored: args.ignore,
+        ignoreInitial: true,
+        followSymlinks: true,
+        cwd: __packageRoot(process.cwd()),
+        ignorePermissionErrors: false
+    });
+    watcher
+        .on('add', (path) => {
+        if (args.type.split(',').indexOf('new') === -1)
+            return;
+        console.log(`new:${__path.resolve(path)}`);
     })
-    .on('change', (path) => {
-      if (args.type.split(',').indexOf('update') === -1) return;
-      console.log(`update:${__path.resolve(path)}`);
+        .on('change', (path) => {
+        if (args.type.split(',').indexOf('update') === -1)
+            return;
+        console.log(`update:${__path.resolve(path)}`);
     })
-    .on('unlink', (path) => {
-      if (args.type.split(',').indexOf('delete') === -1) return;
-      console.log(`delete:${__path.resolve(path)}`);
+        .on('unlink', (path) => {
+        if (args.type.split(',').indexOf('delete') === -1)
+            return;
+        console.log(`delete:${__path.resolve(path)}`);
     });
 };
 module.exports.definition = definition;

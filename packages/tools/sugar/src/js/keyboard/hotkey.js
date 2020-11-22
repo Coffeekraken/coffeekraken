@@ -1,11 +1,9 @@
 import hotkeys from 'hotkeys-js/dist/hotkeys.common';
 import __SPromise from '../promise/SPromise';
 hotkeys.filter = function (event) {
-  return true;
+    return true;
 };
-
 // TODO tests
-
 /**
  * @name 		hotkey
  * @namespace           sugar.js.keyboard
@@ -40,29 +38,20 @@ hotkeys.filter = function (event) {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function (hotkey, settings = {}) {
-  return new __SPromise(
-    (resolve, reject, trigger, cancel) => {
-      // merge default settings with passed ones:
-      settings = {
-        element: null,
-        keyup: false,
-        keydown: true,
-        once: false,
-        splitKey: '+',
-        ...settings
-      };
-      // init the hotkey
-      hotkeys(hotkey, settings, (e, h) => {
-        // call the handler function
-        trigger('press', e);
-        // unsubscribe if once is truc
-        if (settings.once) cancel();
-      });
-    },
-    {
-      id: 'hotkey'
-    }
-  ).on('finally', () => {
-    hotkeys.unbind(hotkey);
-  });
+    return new __SPromise((resolve, reject, trigger, cancel) => {
+        // merge default settings with passed ones:
+        settings = Object.assign({ element: null, keyup: false, keydown: true, once: false, splitKey: '+' }, settings);
+        // init the hotkey
+        hotkeys(hotkey, settings, (e, h) => {
+            // call the handler function
+            trigger('press', e);
+            // unsubscribe if once is truc
+            if (settings.once)
+                cancel();
+        });
+    }, {
+        id: 'hotkey'
+    }).on('finally', () => {
+        hotkeys.unbind(hotkey);
+    });
 }

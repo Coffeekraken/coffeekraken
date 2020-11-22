@@ -1,6 +1,6 @@
+"use strict";
 const __request = require('request');
 const __getAuthToken = require('./getAuthToken');
-
 /**
  * @name            listFolder
  * @namespace           sugar.node.github
@@ -21,23 +21,21 @@ const __getAuthToken = require('./getAuthToken');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function (repo, path = '') {
-  return new Promise((resolve, reject) => {
-    const authToken = __getAuthToken();
-
-    const options = {
-      url: `https://api.github.com/repos/${repo}/contents/${path}`,
-      headers: {
-        'User-Agent': 'coffeekraken-sugar-node-github-listFolder',
-        Authorization: `token ${authToken.token}`
-      }
-    };
-
-    __request(options, async (error, response, body) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve(JSON.parse(body));
+    return new Promise((resolve, reject) => {
+        const authToken = __getAuthToken();
+        const options = {
+            url: `https://api.github.com/repos/${repo}/contents/${path}`,
+            headers: {
+                'User-Agent': 'coffeekraken-sugar-node-github-listFolder',
+                Authorization: `token ${authToken.token}`
+            }
+        };
+        __request(options, async (error, response, body) => {
+            if (error) {
+                reject(error);
+                return;
+            }
+            resolve(JSON.parse(body));
+        });
     });
-  });
 };

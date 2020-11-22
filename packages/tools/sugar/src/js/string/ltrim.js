@@ -17,11 +17,11 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ltrim(string, needle, trimResult = true) {
-  if (string.substr(0, needle.length) === needle) {
-    return trimResult
-      ? string.substr(needle.length).trim()
-      : string.substr(needle.length);
-  }
-  // nothing to trim
-  return string;
+    if (string.substr(0, needle.length) === needle) {
+        return trimResult
+            ? string.substr(needle.length).trim()
+            : string.substr(needle.length);
+    }
+    // nothing to trim
+    return string;
 }

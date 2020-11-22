@@ -1,5 +1,4 @@
 import __globParent from 'glob-parent';
-
 /**
  * @name                extractGlob
  * @namespace           sugar.js.glob
@@ -19,8 +18,9 @@ import __globParent from 'glob-parent';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function extractGlob(string) {
-  const parent = __globParent(string);
-  let final = string.replace(parent, '');
-  if (final.slice(0, 1) === '/') final = final.slice(1);
-  return final;
+    const parent = __globParent(string);
+    let final = string.replace(parent, '');
+    if (final.slice(0, 1) === '/')
+        final = final.slice(1);
+    return final;
 }

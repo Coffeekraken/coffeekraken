@@ -18,17 +18,17 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
-  // trim the string just in case
-  string = string.trim();
-  // loop on each quotes to remove
-  quotesToRemove.forEach((quote) => {
-    if (string.substr(0, 1) === quote && string.substr(-1) === quote) {
-      string = string.substr(1);
-      string = string.substr(0, string.length - 1);
-      // break the loop to avoid unquoting multiple levels
-      return;
-    }
-  });
-  // return the processed string
-  return string;
+    // trim the string just in case
+    string = string.trim();
+    // loop on each quotes to remove
+    quotesToRemove.forEach((quote) => {
+        if (string.substr(0, 1) === quote && string.substr(-1) === quote) {
+            string = string.substr(1);
+            string = string.substr(0, string.length - 1);
+            // break the loop to avoid unquoting multiple levels
+            return;
+        }
+    });
+    // return the processed string
+    return string;
 }

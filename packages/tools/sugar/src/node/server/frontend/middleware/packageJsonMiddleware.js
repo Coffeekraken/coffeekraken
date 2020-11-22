@@ -1,7 +1,7 @@
+"use strict";
 const __packageRoot = require('../../../path/packageRoot');
 const __fs = require('fs');
 const __standardizeJson = require('../../../npm/standardizeJson');
-
 /**
  * @name            packageJsonMiddleware
  * @namespace       sugar.node.server.frontend.middleware
@@ -25,18 +25,18 @@ const __standardizeJson = require('../../../npm/standardizeJson');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function packageJsonMiddleware(settings = {}) {
-  return function (req, res, next) {
-    const packageJsonPath = `${__packageRoot()}/package.json`;
-    let package;
-    if (!__fs.existsSync(packageJsonPath)) {
-    } else {
-      package = require(packageJsonPath);
-      res.templateData = {
-        ...(res.templateData || {}),
-        packageJson: __standardizeJson(package)
-      };
-    }
-
-    next();
-  };
+    return function (req, res, next) {
+        const packageJsonPath = `${__packageRoot()}/package.json`;
+        let package;
+        if (!__fs.existsSync(packageJsonPath)) {
+        }
+        else {
+            package = require(packageJsonPath);
+            res.templateData = {
+                ...(res.templateData || {}),
+                packageJson: __standardizeJson(package)
+            };
+        }
+        next();
+    };
 };

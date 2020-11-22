@@ -23,10 +23,10 @@
  */
 import __domReady from 'domready';
 export default function domReady(cb = null) {
-  return new Promise((resolve, reject) => {
-    __domReady(() => {
-      cb && cb();
-      resolve();
+    return new Promise((resolve, reject) => {
+        __domReady(() => {
+            cb && cb();
+            resolve();
+        });
     });
-  });
 }

@@ -1,5 +1,31 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * @namespace           sugar.node.easing
- * @src             ../_js/easing/availableEasingsArray.js
+ * @name            availableEasingsArray
+ * @namespace           sugar.js.easing
+ * @type            Function
+ *
+ * This function simply return back an array of all the available easings function in the sugar toolkit
+ *
+ * @return      {Array}             An array of all the easing functions available
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/easing/availableEasingsArray');
+function availableEasingsArray() {
+    return [
+        'easeInOutCubic',
+        'easeInOutQuad',
+        'easeInOutQuart',
+        'easeInOutQuint',
+        'easeInCubic',
+        'easeInQuad',
+        'easeInQuart',
+        'easeInQuint',
+        'easeOutCubic',
+        'easeOutQuad',
+        'easeOutQuart',
+        'easeOutQuint'
+    ];
+}
+exports.default = availableEasingsArray;

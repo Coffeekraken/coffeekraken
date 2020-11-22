@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @name              simpleValue
  * @namespace           sugar.js.docblock.tags
@@ -12,13 +13,11 @@
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 module.exports = function simpleValue(data) {
-  if (
-    data &&
-    data.value &&
-    typeof data.value === 'string' &&
-    data.value.trim() === ''
-  ) {
-    return true;
-  }
-  return data.value;
+    if (data &&
+        data.value &&
+        typeof data.value === 'string' &&
+        data.value.trim() === '') {
+        return true;
+    }
+    return data.value;
 };

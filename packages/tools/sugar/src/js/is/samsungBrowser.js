@@ -1,5 +1,3 @@
-import MobileDetect from 'mobile-detect';
-
 /**
  * @name        isSamsumgBrowser
  * @namespace           sugar.js.is
@@ -18,5 +16,5 @@ import MobileDetect from 'mobile-detect';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isSamsumgBrowser(ua = navigator.userAgent) {
-  return ua.match(/SamsungBrowser/i) !== null;
+    return ua.match(/SamsungBrowser/i) !== null;
 }

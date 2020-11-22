@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @name					getActiveMedia
  * @type 					Function

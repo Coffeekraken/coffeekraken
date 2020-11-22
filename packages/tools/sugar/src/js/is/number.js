@@ -17,5 +17,5 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isNumber(source) {
-  return !isNaN(parseFloat(source)) && isFinite(source);
+    return !isNaN(parseFloat(source)) && isFinite(source);
 }

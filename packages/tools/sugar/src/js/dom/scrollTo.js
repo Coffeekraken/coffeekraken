@@ -25,87 +25,73 @@ let isUserScrolling = false;
 let userScrollingTimeout;
 let isScrollingHappening = false;
 document.addEventListener('mousewheel', (e) => {
-  if (!isScrollingHappening) return;
-  isUserScrolling = true;
-  clearTimeout(userScrollingTimeout);
-  userScrollingTimeout = setTimeout(() => {
-    isUserScrolling = false;
-  }, 200);
+    if (!isScrollingHappening)
+        return;
+    isUserScrolling = true;
+    clearTimeout(userScrollingTimeout);
+    userScrollingTimeout = setTimeout(() => {
+        isUserScrolling = false;
+    }, 200);
 });
-
-function scrollTo(
-  target,
-  duration = 1000,
-  easing = easeInOutQuad,
-  offset = 0,
-  align = 'top',
-  onFinish = null
-) {
-  var docElem = document.documentElement; // to facilitate minification better
-  var windowHeight = docElem.clientHeight;
-  var maxScroll =
-    'scrollMaxY' in window
-      ? window.scrollMaxY
-      : docElem.scrollHeight - windowHeight;
-  var currentY = window.pageYOffset;
-
-  isScrollingHappening = true;
-
-  var targetY = currentY;
-  var elementBounds = isNaN(target) ? target.getBoundingClientRect() : 0;
-
-  if (align === 'center') {
-    targetY += elementBounds.top + elementBounds.height / 2;
-    targetY -= windowHeight / 2;
-    targetY -= offset;
-  } else if (align === 'bottom') {
-    targetY += elementBounds.bottom;
-    targetY -= windowHeight;
-    targetY += offset;
-  } else {
-    // top, undefined
-    targetY += elementBounds.top;
-    targetY -= offset;
-  }
-  targetY = Math.max(Math.min(maxScroll, targetY), 0);
-
-  var deltaY = targetY - currentY;
-
-  var obj = {
-    targetY: targetY,
-    deltaY: deltaY,
-    duration: duration,
-    easing: easing,
-    onFinish: onFinish,
-    startTime: Date.now(),
-    lastY: currentY,
-    step: scrollTo.step
-  };
-  requestAnimationFrame(obj.step.bind(obj));
+function scrollTo(target, duration = 1000, easing = easeInOutQuad, offset = 0, align = 'top', onFinish = null) {
+    var docElem = document.documentElement; // to facilitate minification better
+    var windowHeight = docElem.clientHeight;
+    var maxScroll = 'scrollMaxY' in window
+        ? window.scrollMaxY
+        : docElem.scrollHeight - windowHeight;
+    var currentY = window.pageYOffset;
+    isScrollingHappening = true;
+    var targetY = currentY;
+    var elementBounds = isNaN(target) ? target.getBoundingClientRect() : 0;
+    if (align === 'center') {
+        targetY += elementBounds.top + elementBounds.height / 2;
+        targetY -= windowHeight / 2;
+        targetY -= offset;
+    }
+    else if (align === 'bottom') {
+        targetY += elementBounds.bottom;
+        targetY -= windowHeight;
+        targetY += offset;
+    }
+    else {
+        // top, undefined
+        targetY += elementBounds.top;
+        targetY -= offset;
+    }
+    targetY = Math.max(Math.min(maxScroll, targetY), 0);
+    var deltaY = targetY - currentY;
+    var obj = {
+        targetY: targetY,
+        deltaY: deltaY,
+        duration: duration,
+        easing: easing,
+        onFinish: onFinish,
+        startTime: Date.now(),
+        lastY: currentY,
+        step: scrollTo.step
+    };
+    requestAnimationFrame(obj.step.bind(obj));
 }
-
 scrollTo.step = function () {
-  if (this.lastY !== window.pageYOffset && this.onFinish) {
-    isScrollingHappening = false;
-    this.onFinish();
-    return;
-  }
-
-  // Calculate how much time has passed
-  var t = Math.min((Date.now() - this.startTime) / this.duration, 1);
-
-  // Scroll window amount determined by easing
-  var y = this.targetY - (1 - this.easing(t)) * this.deltaY;
-  window.scrollTo(window.scrollX, y);
-
-  // Continue animation as long as duration hasn't surpassed
-  if (t !== 1 && !isUserScrolling) {
-    this.lastY = window.pageYOffset;
-    requestAnimationFrame(this.step.bind(this));
-  } else {
-    isScrollingHappening = false;
-    if (this.onFinish) this.onFinish();
-  }
+    if (this.lastY !== window.pageYOffset && this.onFinish) {
+        isScrollingHappening = false;
+        this.onFinish();
+        return;
+    }
+    // Calculate how much time has passed
+    var t = Math.min((Date.now() - this.startTime) / this.duration, 1);
+    // Scroll window amount determined by easing
+    var y = this.targetY - (1 - this.easing(t)) * this.deltaY;
+    window.scrollTo(window.scrollX, y);
+    // Continue animation as long as duration hasn't surpassed
+    if (t !== 1 && !isUserScrolling) {
+        this.lastY = window.pageYOffset;
+        requestAnimationFrame(this.step.bind(this));
+    }
+    else {
+        isScrollingHappening = false;
+        if (this.onFinish)
+            this.onFinish();
+    }
 };
-
 export default scrollTo;

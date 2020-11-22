@@ -22,19 +22,19 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function parseAuthorString(string) {
-  const reg = /(.*)\s?<(.*)>\s?\((.*)\)/gm;
-  const matches = reg.exec(string.trim());
-  const authorObj = {};
-  if (matches) {
-    if (matches[1]) {
-      authorObj.name = matches[1].trim();
+    const reg = /(.*)\s?<(.*)>\s?\((.*)\)/gm;
+    const matches = reg.exec(string.trim());
+    const authorObj = {};
+    if (matches) {
+        if (matches[1]) {
+            authorObj.name = matches[1].trim();
+        }
+        if (matches[2]) {
+            authorObj.email = matches[2].trim();
+        }
+        if (matches[3]) {
+            authorObj.url = matches[3].trim();
+        }
     }
-    if (matches[2]) {
-      authorObj.email = matches[2].trim();
-    }
-    if (matches[3]) {
-      authorObj.url = matches[3].trim();
-    }
-  }
-  return authorObj;
+    return authorObj;
 }

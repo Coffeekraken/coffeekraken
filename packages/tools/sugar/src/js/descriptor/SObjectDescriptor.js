@@ -189,10 +189,7 @@ class SDefinitionObject {
      */
     static applyAndThrow(instance, settings = {}) {
         const apply = SDefinitionObject.apply.bind(this);
-        return apply(instance, {
-            ...settings,
-            throw: true
-        });
+        return apply(instance, Object.assign(Object.assign({}, settings), { throw: true }));
     }
     /**
      * @name          applyAndComplete
@@ -268,10 +265,7 @@ class SDefinitionObject {
         }
         // make sure the instance has all the interfaces requirements
         interfaces.forEach((Interface) => {
-            Interface.apply(instance, {
-                ...settings,
-                interface: Interface.name
-            });
+            Interface.apply(instance, Object.assign(Object.assign({}, settings), { interface: Interface.name }));
         });
     }
     /**

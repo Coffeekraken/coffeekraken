@@ -1,6 +1,5 @@
 import whenInViewport from '../dom/whenInViewport';
 import querySelectorLive from '../dom/querySelectorLive';
-
 /**
  * @name 		videoLazySrcAttribute
  * @namespace           sugar.js.feature
@@ -14,11 +13,9 @@ import querySelectorLive from '../dom/querySelectorLive';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
 // TODO tests
-
 querySelectorLive('video[lazy-src]:not([is])', ($videoElm) => {
-  whenInViewport($videoElm).then(() => {
-    $videoElm.setAttribute('src', $videoElm.getAttribute('lazy-src'));
-  });
+    whenInViewport($videoElm).then(() => {
+        $videoElm.setAttribute('src', $videoElm.getAttribute('lazy-src'));
+    });
 });

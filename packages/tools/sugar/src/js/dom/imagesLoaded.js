@@ -1,6 +1,5 @@
 import __imageLoaded from './imageLoaded';
 import __SPromise from '../promise/SPromise';
-
 /**
  * @name      imagesLoaded
  * @namespace           sugar.js.dom
@@ -26,24 +25,21 @@ import __SPromise from '../promise/SPromise';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function imagesLoaded($imgs) {
-  return new __SPromise((resolve, reject, trigger, cancel) => {
-    const promises = [],
-      loadedImages = [];
-    Array.from($imgs).forEach(($img) => {
-      promises.push(
-        __imageLoaded($img)
-          .then((_$img) => {
-            loadedImages.push(_$img);
-            trigger('img.loaded', _$img);
-            if (loadedImages.length === $imgs.length) {
-              trigger('loaded', loadedImages);
-              resolve(loadedImages);
-            }
-          })
-          .catch((error) => {
-            reject(error);
-          })
-      );
+    return new __SPromise((resolve, reject, trigger, cancel) => {
+        const promises = [], loadedImages = [];
+        Array.from($imgs).forEach(($img) => {
+            promises.push(__imageLoaded($img)
+                .then((_$img) => {
+                loadedImages.push(_$img);
+                trigger('img.loaded', _$img);
+                if (loadedImages.length === $imgs.length) {
+                    trigger('loaded', loadedImages);
+                    resolve(loadedImages);
+                }
+            })
+                .catch((error) => {
+                reject(error);
+            }));
+        });
     });
-  });
 }

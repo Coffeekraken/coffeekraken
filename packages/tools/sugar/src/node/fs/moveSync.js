@@ -1,7 +1,6 @@
+"use strict";
 const __fs = require('fs-extra');
-
 // TODO tests
-
 /**
  * @name        moveSync
  * @namespace           sugar.node.fs
@@ -22,5 +21,5 @@ const __fs = require('fs-extra');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function moveSync(src, dest) {
-  _fs.moveSync(src, dest);
+    _fs.moveSync(src, dest);
 };

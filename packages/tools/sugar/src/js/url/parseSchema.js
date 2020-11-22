@@ -1,5 +1,4 @@
 import __parseString from '../string/parse';
-
 /**
  * @name                                parseSchema
  * @namespace           sugar.js.url
@@ -55,133 +54,121 @@ import __parseString from '../string/parse';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export default function parseSchema(url, schema) {
-  const rawSchemaString = schema;
-  const rawUrlString = url;
-
-  // remove query string
-  url = url.split('?')[0];
-
-  // get the pathname of the url
-  let pathname;
-  try {
-    pathname = new URL(url).pathname;
-  } catch (e) {
-    pathname = url;
-  }
-  if (pathname.slice(0, 1) === '/') pathname = pathname.slice(1);
-
-  // init the params object
-  const params = {};
-  const errors = {};
-  let match = true;
-
-  // split the schema
-  let schemaParts = schema.split('/');
-
-  // analyze all the schema parts
-  schemaParts = schemaParts
-    .map((part) => {
-      // check if is a param
-      if (part.slice(0, 1) === '{' && part.slice(-1) === '}') {
-        const isOptional = part.slice(0, 2) === '{?' || part.slice(-2) === '?}';
-        const isType = part.indexOf(':') !== -1;
-
-        let type = null;
-        let name = null;
-        if (isType) {
-          name = part.split(':')[0].slice(1);
-          type = part.split(':')[1].slice(0, -1);
-          if (name.slice(0, 1) === '?') name = name.slice(1);
-          if (type.slice(-1) === '?') type = type.slice(0, -1);
-        } else {
-          name = part.slice(1, -1);
-          if (name.slice(-1) === '?') name = name.slice(0, -1);
-          if (name.slice(0, 1) === '?') name = name.slice(1);
+    const rawSchemaString = schema;
+    const rawUrlString = url;
+    // remove query string
+    url = url.split('?')[0];
+    // get the pathname of the url
+    let pathname;
+    try {
+        pathname = new URL(url).pathname;
+    }
+    catch (e) {
+        pathname = url;
+    }
+    if (pathname.slice(0, 1) === '/')
+        pathname = pathname.slice(1);
+    // init the params object
+    const params = {};
+    const errors = {};
+    let match = true;
+    // split the schema
+    let schemaParts = schema.split('/');
+    // analyze all the schema parts
+    schemaParts = schemaParts
+        .map((part) => {
+        // check if is a param
+        if (part.slice(0, 1) === '{' && part.slice(-1) === '}') {
+            const isOptional = part.slice(0, 2) === '{?' || part.slice(-2) === '?}';
+            const isType = part.indexOf(':') !== -1;
+            let type = null;
+            let name = null;
+            if (isType) {
+                name = part.split(':')[0].slice(1);
+                type = part.split(':')[1].slice(0, -1);
+                if (name.slice(0, 1) === '?')
+                    name = name.slice(1);
+                if (type.slice(-1) === '?')
+                    type = type.slice(0, -1);
+            }
+            else {
+                name = part.slice(1, -1);
+                if (name.slice(-1) === '?')
+                    name = name.slice(0, -1);
+                if (name.slice(0, 1) === '?')
+                    name = name.slice(1);
+            }
+            return {
+                name,
+                type,
+                raw: part,
+                optional: isOptional
+            };
         }
-
-        return {
-          name,
-          type,
-          raw: part,
-          optional: isOptional
-        };
-      }
-
-      // this is not a parameter so return as is
-      return part;
+        // this is not a parameter so return as is
+        return part;
     })
-    .filter((l) => l !== '');
-
-  schemaParts.forEach((part) => {
-    if (!part.name) return;
-    params[part.name] = {
-      ...part
-    };
-    delete params[part.name].name;
-  });
-
-  // loop on the schema to get the params values
-  // const pathname = url.pathname.slice(1);
-  const splitedPathname = pathname.split('/');
-
-  for (let i = 0; i < schemaParts.length; i++) {
-    // get the schema for this part
-    const schema = schemaParts[i];
-
-    // get the part to check
-    const part = splitedPathname[i];
-
-    // if it's not an object, mean that it's a simple string part
-    if (typeof schema !== 'object') {
-      if (part !== schema) match = false;
-      continue;
-    }
-
-    if (!part && !schema.optional) {
-      let errorObj = {
-        type: 'optional',
-        description: `This param "${schema.name}" cannot be null...`
-      };
-      errors[schema.name] = errorObj;
-      params[schema.name].error = errorObj;
-      match = false;
-      continue;
-    } else if (!part && schema.optional) {
-      params[schema.name].value = null;
-      continue;
-    }
-
-    // check that all correspond to the schema
-    if (schema.type) {
-      const type = schema.type;
-      if (type !== typeof __parseString(part)) {
-        match = false;
-        const errorObj = {
-          type: 'type',
-          requested: type,
-          passed: typeof __parseString(part),
-          description: `This param "${
-            schema.name
-          }" has to be a "${type}" but he's a "${typeof __parseString(
-            part
-          )}"...`
-        };
-        errors[schema.name] = errorObj;
-        params[schema.name].error = errorObj;
+        .filter((l) => l !== '');
+    schemaParts.forEach((part) => {
+        if (!part.name)
+            return;
+        params[part.name] = Object.assign({}, part);
+        delete params[part.name].name;
+    });
+    // loop on the schema to get the params values
+    // const pathname = url.pathname.slice(1);
+    const splitedPathname = pathname.split('/');
+    for (let i = 0; i < schemaParts.length; i++) {
+        // get the schema for this part
+        const schema = schemaParts[i];
+        // get the part to check
+        const part = splitedPathname[i];
+        // if it's not an object, mean that it's a simple string part
+        if (typeof schema !== 'object') {
+            if (part !== schema)
+                match = false;
+            continue;
+        }
+        if (!part && !schema.optional) {
+            let errorObj = {
+                type: 'optional',
+                description: `This param "${schema.name}" cannot be null...`
+            };
+            errors[schema.name] = errorObj;
+            params[schema.name].error = errorObj;
+            match = false;
+            continue;
+        }
+        else if (!part && schema.optional) {
+            params[schema.name].value = null;
+            continue;
+        }
+        // check that all correspond to the schema
+        if (schema.type) {
+            const type = schema.type;
+            if (type !== typeof __parseString(part)) {
+                match = false;
+                const errorObj = {
+                    type: 'type',
+                    requested: type,
+                    passed: typeof __parseString(part),
+                    description: `This param "${schema.name}" has to be a "${type}" but he's a "${typeof __parseString(part)}"...`
+                };
+                errors[schema.name] = errorObj;
+                params[schema.name].error = errorObj;
+                params[schema.name].value = __parseString(part);
+                continue;
+            }
+        }
+        // this part match the schema so we add it to the params
         params[schema.name].value = __parseString(part);
-        continue;
-      }
     }
-
-    // this part match the schema so we add it to the params
-    params[schema.name].value = __parseString(part);
-  }
-  // return the schema result
-  return {
-    errors: !Object.keys(errors).length ? null : errors,
-    params: !Object.keys(params).length ? null : params,
-    match,
-    schema: rawSchemaString,
-    url: rawUrlString
-  };
+    // return the schema result
+    return {
+        errors: !Object.keys(errors).length ? null : errors,
+        params: !Object.keys(params).length ? null : params,
+        match,
+        schema: rawSchemaString,
+        url: rawUrlString
+    };
 }

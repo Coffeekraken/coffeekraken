@@ -19,5 +19,5 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function constructorName(obj) {
-  return obj.constructor && obj.constructor.name ? obj.constructor.name : null;
+    return obj.constructor && obj.constructor.name ? obj.constructor.name : null;
 }

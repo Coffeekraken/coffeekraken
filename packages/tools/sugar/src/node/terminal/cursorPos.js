@@ -1,7 +1,6 @@
+"use strict";
 const __terminalKit = require('terminal-kit').terminal;
-
 // TODO tests
-
 /**
  * @name                                      cursorPos
  * @namespace           sugar.node.terminal
@@ -19,12 +18,13 @@ const __terminalKit = require('terminal-kit').terminal;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function cursorPos() {
-  return new Promise(async (resolve, reject) => {
-    __terminalKit.once('terminal', (name, data) => {
-      resolve(data);
+    return new Promise(async (resolve, reject) => {
+        __terminalKit.once('terminal', (name, data) => {
+            resolve(data);
+        });
+        try {
+            await __terminalKit.getCursorLocation();
+        }
+        catch (e) { }
     });
-    try {
-      await __terminalKit.getCursorLocation();
-    } catch (e) {}
-  });
 };

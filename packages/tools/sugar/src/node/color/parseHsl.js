@@ -1,5 +1,32 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * @namespace           sugar.node.color
- * @src             ../_js/color/parseHsl.js
+ * @name                    parseHsl
+ * @namespace           sugar.js.color
+ * @type                    Function
+ *
+ * Parse HSL
+ *
+ * @param 	      {string}	        hslString			      The hsl string (hsl(h,s,l)) to parse
+ * @return 	        {object} 					                  	The hsl object representation
+ *
+ * @example         js
+ * import parseHsl from '@coffeekraken/sugar/color/parseHsl';
+ * parseHsl('hsl(20,20,20)');
+ *
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/color/parseHsl');
+function parseHsl(hslString) {
+    hslString = hslString.toLowerCase();
+    let string = hslString
+        .replace('hsl(', '')
+        .replace(')', '')
+        .replace(/\s/g, '');
+    let array = string.split(',');
+    return {
+        h: parseFloat(array[0]),
+        s: parseFloat(array[1]),
+        l: parseFloat(array[2])
+    };
+}
+exports.default = parseHsl;

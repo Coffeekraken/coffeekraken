@@ -1,5 +1,5 @@
+"use strict";
 const __clipboardy = require('clipboardy');
-
 /**
  * @name            paste
  * @namespace       sugar.node.clipboard
@@ -21,5 +21,5 @@ const __clipboardy = require('clipboardy');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function paste(text) {
-  return __clipboardy.readSync();
+    return __clipboardy.readSync();
 };

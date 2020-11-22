@@ -1,5 +1,5 @@
+"use strict";
 const __SBlessedOutput = require('../blessed/SBlessedOutput');
-
 /**
  * @name            output
  * @namespace           sugar.node.process
@@ -24,6 +24,6 @@ const __SBlessedOutput = require('../blessed/SBlessedOutput');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = (source, settings = {}) => {
-  const output = new __SBlessedOutput(source, settings);
-  return output;
+    const output = new __SBlessedOutput(source, settings);
+    return output;
 };

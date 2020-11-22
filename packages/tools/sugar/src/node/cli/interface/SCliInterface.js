@@ -1,6 +1,7 @@
+"use strict";
+var _a;
 const __SInterface = require('../../class/SInterface');
 const __SProcessManagerInterface = require('../../process/SProcessManager');
-
 /**
  * @name                SCliInterface
  * @namespace           sugar.node.blessed.interface
@@ -13,22 +14,23 @@ const __SProcessManagerInterface = require('../../process/SProcessManager');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCliInterface extends __SInterface {
-  static definitionObj = {
-    interface: {
-      type: 'SInterface',
-      required: true,
-      static: true
+module.exports = (_a = class SCliInterface extends __SInterface {
     },
-    processClass: {
-      type: 'SProcessManager',
-      required: true,
-      static: true
+    _a.definitionObj = {
+        interface: {
+            type: 'SInterface',
+            required: true,
+            static: true
+        },
+        processClass: {
+            type: 'SProcessManager',
+            required: true,
+            static: true
+        },
+        command: {
+            type: 'String',
+            required: true,
+            static: true
+        }
     },
-    command: {
-      type: 'String',
-      required: true,
-      static: true
-    }
-  };
-};
+    _a);

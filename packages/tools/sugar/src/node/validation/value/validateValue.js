@@ -1,6 +1,6 @@
+"use strict";
 const __validateValue = require('../_js/validation/value/validateValue');
 const __isPath = require('../../fs/isPath');
-
 /**
  * @name            validateValue
  * @namespace       sugar.node.validation.value
@@ -32,16 +32,12 @@ const __isPath = require('../../fs/isPath');
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function validateValue(value, definitionObj, settings = {}) {
-  // validate value using the base javascript intergration
-  return __validateValue(value, definitionObj, {
-    ...settings,
-    extendFn: (value, definitionObj, settings) => {
-      const issuesObj = {
-        $issues: [],
-        $messages: {}
-      };
-
-      return issuesObj;
-    }
-  });
+    // validate value using the base javascript intergration
+    return __validateValue(value, definitionObj, Object.assign(Object.assign({}, settings), { extendFn: (value, definitionObj, settings) => {
+            const issuesObj = {
+                $issues: [],
+                $messages: {}
+            };
+            return issuesObj;
+        } }));
 };

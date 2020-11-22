@@ -1,7 +1,7 @@
+"use strict";
 const __SCommand = require('../../terminal/SCommand');
 const __deepMerge = require('../../object/deepMerge');
 const __SPhpServerCli = require('./SPhpServerCli');
-
 /**
  * @name              SPhpServerCommand
  * @namespace           sugar.node.server.php
@@ -21,31 +21,24 @@ const __SPhpServerCli = require('./SPhpServerCli');
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 module.exports = class SPhpServerCommand extends __SCommand {
-  /**
-   * @name          constructor
-   * @type          Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  constructor(argsObj = {}, commandSettings = {}) {
-    // init command
-    super(
-      'server.php',
-      new __SPhpServerCli(),
-      __deepMerge(
-        {
-          argsObj,
-          title: 'PHP Server',
-          key: 'p',
-          concurrent: false,
-          namespace: 'server.php'
-        },
-        commandSettings
-      )
-    );
-  }
+    /**
+     * @name          constructor
+     * @type          Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    constructor(argsObj = {}, commandSettings = {}) {
+        // init command
+        super('server.php', new __SPhpServerCli(), __deepMerge({
+            argsObj,
+            title: 'PHP Server',
+            key: 'p',
+            concurrent: false,
+            namespace: 'server.php'
+        }, commandSettings));
+    }
 };

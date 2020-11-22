@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isArray(value) {
-  return value && typeof value === 'object' && value.constructor === Array;
+    return value && typeof value === 'object' && value.constructor === Array;
 }

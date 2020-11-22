@@ -11,18 +11,18 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function availableEasingsArray() {
-  return [
-    'easeInOutCubic',
-    'easeInOutQuad',
-    'easeInOutQuart',
-    'easeInOutQuint',
-    'easeInCubic',
-    'easeInQuad',
-    'easeInQuart',
-    'easeInQuint',
-    'easeOutCubic',
-    'easeOutQuad',
-    'easeOutQuart',
-    'easeOutQuint'
-  ];
+    return [
+        'easeInOutCubic',
+        'easeInOutQuad',
+        'easeInOutQuart',
+        'easeInOutQuint',
+        'easeInCubic',
+        'easeInQuad',
+        'easeInQuart',
+        'easeInQuint',
+        'easeOutCubic',
+        'easeOutQuad',
+        'easeOutQuart',
+        'easeOutQuint'
+    ];
 }

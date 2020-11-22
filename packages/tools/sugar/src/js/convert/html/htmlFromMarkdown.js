@@ -1,7 +1,5 @@
-import __SError from '../../error/SError';
 import __deepMerge from '../../object/deepMerge';
 import __marked from 'marked';
-
 /**
  * @name            htmlFromMarkdown
  * @namespace       sugar.js.convert
@@ -27,7 +25,7 @@ import __marked from 'marked';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function htmlFromMarkdown(inputString, settings = {}) {
-  settings = __deepMerge({}, settings);
-  __marked.setOptions(settings);
-  return __marked(inputString);
+    settings = __deepMerge({}, settings);
+    __marked.setOptions(settings);
+    return __marked(inputString);
 }

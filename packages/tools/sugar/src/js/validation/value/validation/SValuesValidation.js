@@ -1,6 +1,4 @@
 import __SValidation from '../../SValidation';
-import __isOfType from '../../../is/ofType';
-
 /**
  * @name          SValuesValidation
  * @namespace     sugar.js.validation.value.validation
@@ -12,11 +10,9 @@ import __isOfType from '../../../is/ofType';
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SValuesValidation extends __SValidation {
-  static message =
-    'This value must be one of these "<green>%1</green>" but you\'ve passed "<red>%0</red>"';
-  static exec(value, values) {
-    return values.indexOf(value) !== -1;
-  }
+    static exec(value, values) {
+        return values.indexOf(value) !== -1;
+    }
 }
-
+SValuesValidation.message = 'This value must be one of these "<green>%1</green>" but you\'ve passed "<red>%0</red>"';
 export default SValuesValidation;

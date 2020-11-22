@@ -1,0 +1,1 @@
+../../../js/url/gravatarUrl.ts

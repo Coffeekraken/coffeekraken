@@ -1,5 +1,4 @@
 import __matches from './matches';
-
 /**
  * @name        closest
  * @namespace           sugar.js.dom
@@ -25,15 +24,17 @@ import __matches from './matches';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function closest($elm, selector) {
-  const originalElm = $elm;
-  $elm = $elm.parentNode;
-  while ($elm && $elm != originalElm.ownerDocument) {
-    if (typeof selector === 'function') {
-      if (selector($elm)) return $elm;
-    } else if (typeof selector === 'string' && __matches($elm, selector)) {
-      return $elm;
-    }
+    const originalElm = $elm;
     $elm = $elm.parentNode;
-  }
-  return null;
+    while ($elm && $elm != originalElm.ownerDocument) {
+        if (typeof selector === 'function') {
+            if (selector($elm))
+                return $elm;
+        }
+        else if (typeof selector === 'string' && __matches($elm, selector)) {
+            return $elm;
+        }
+        $elm = $elm.parentNode;
+    }
+    return null;
 }

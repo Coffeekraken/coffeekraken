@@ -1,9 +1,9 @@
+"use strict";
 // TODO: More tests
-
 module.exports = (__SDocblock) => {
-  describe('sugar.js.docblock.SDocblockParser', () => {
-    it('Should parse a simple docblick correctly', (done) => {
-      const docblock = `
+    describe('sugar.js.docblock.SDocblockParser', () => {
+        it('Should parse a simple docblick correctly', (done) => {
+            const docblock = `
       /**
        * @name                  DockblockParser
        * @namespace           js.docblock
@@ -76,12 +76,10 @@ module.exports = (__SDocblock) => {
        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
       `;
-
-      const parser = new __SDocblock(docblock);
-      const renderedBlocks = parser.toMarkdown();
-      // console.log(renderedBlocks);
-
-      done();
+            const parser = new __SDocblock(docblock);
+            const renderedBlocks = parser.toMarkdown();
+            // console.log(renderedBlocks);
+            done();
+        });
     });
-  });
 };

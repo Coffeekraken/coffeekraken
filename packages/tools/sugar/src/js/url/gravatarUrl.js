@@ -1,5 +1,4 @@
 import __md5 from '../crypt/md5';
-
 /**
  * @name            gravatarUrl
  * @namespace           sugar.js.url
@@ -18,5 +17,5 @@ import __md5 from '../crypt/md5';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function gravatarUrl(email, size = 200) {
-  return `https://www.gravatar.com/avatar/${__md5.encrypt(email)}?s=${size}`;
+    return `https://www.gravatar.com/avatar/${__md5.encrypt(email)}?s=${size}`;
 }

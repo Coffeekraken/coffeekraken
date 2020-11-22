@@ -1,22 +1,6 @@
+var _a;
 import __deepMerge from '../../object/deepMerge';
 import __SDocblockOutput from '../SDocblockOutput';
-import __toString from '../../string/toString';
-
-import __defaultTemplate from './html/templates/default';
-import __classTemplate from './html/templates/class';
-import __functionTemplate from './html/templates/function';
-
-import __defaultBlock from './html/blocks/default';
-import __classBlock from './html/blocks/class';
-import __functionBlock from './html/blocks/function';
-
-import __handlebars from 'handlebars';
-
-import __headingPartial from './html/partials/heading';
-import __paramsPartial from './html/partials/params';
-import __examplePartial from './html/partials/example';
-import __authorPartial from './html/partials/author';
-
 /**
  * @name            SDocblockHtmlOutput
  * @namespace       sugar.js.docblock.outputs
@@ -50,77 +34,60 @@ import __authorPartial from './html/partials/author';
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SDocblockHtmlOutput extends __SDocblockOutput {
-  /**
-   * @name        supportedTags
-   * @type        Array<String>
-   * @static
-   *
-   * Store the list of supported docblock tags
-   *
-   * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  static supportedTags = [
-    '@type',
-    '@namespace',
-    '@name',
-    '@static',
-    '@get',
-    '@set',
-    '@since',
-    '@description',
-    '@param',
-    '@example',
-    '@author'
-  ];
-
-  /**
-   * @name        constructor
-   * @type        Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since     2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(docblockInstance, settings = {}) {
-    super(
-      docblockInstance,
-      __deepMerge(
-        {
-          templates: {
-            default:
-              '@coffeekraken/sugar/js/docblock/outputs/html/templates/default.js',
-            class:
-              '@coffeekraken/sugar/js/docblock/outputs/html/templates/class.js',
-            function:
-              '@coffeekraken/sugar/js/docblock/outputs/html/templates/function.js'
-          },
-          blocks: {
-            default:
-              '@coffeekraken/sugar/js/docblock/outputs/html/blocks/default.js',
-            class:
-              '@coffeekraken/sugar/js/docblock/outputs/html/blocks/class.js',
-            function:
-              '@coffeekraken/sugar/js/docblock/outputs/html/blocks/function.js'
-          },
-          partials: {
-            author:
-              '@coffeekraken/sugar/js/docblock/outputs/html/partials/author.js',
-            heading:
-              '@coffeekraken/sugar/js/docblock/outputs/html/partials/heading.js',
-            example:
-              '@coffeekraken/sugar/js/docblock/outputs/html/partials/example.js',
-            params:
-              '@coffeekraken/sugar/js/docblock/outputs/html/partials/params.js',
-            sharings:
-              '@coffeekraken/sugar/js/docblock/outputs/html/partials/sharings.js'
-          }
-        },
-        settings
-      )
-    );
-  }
-};
+module.exports = (_a = class SDocblockHtmlOutput extends __SDocblockOutput {
+        /**
+         * @name        constructor
+         * @type        Function
+         * @constructor
+         *
+         * Constructor
+         *
+         * @since     2.0.0
+         * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        constructor(docblockInstance, settings = {}) {
+            super(docblockInstance, __deepMerge({
+                templates: {
+                    default: '@coffeekraken/sugar/js/docblock/outputs/html/templates/default.js',
+                    class: '@coffeekraken/sugar/js/docblock/outputs/html/templates/class.js',
+                    function: '@coffeekraken/sugar/js/docblock/outputs/html/templates/function.js'
+                },
+                blocks: {
+                    default: '@coffeekraken/sugar/js/docblock/outputs/html/blocks/default.js',
+                    class: '@coffeekraken/sugar/js/docblock/outputs/html/blocks/class.js',
+                    function: '@coffeekraken/sugar/js/docblock/outputs/html/blocks/function.js'
+                },
+                partials: {
+                    author: '@coffeekraken/sugar/js/docblock/outputs/html/partials/author.js',
+                    heading: '@coffeekraken/sugar/js/docblock/outputs/html/partials/heading.js',
+                    example: '@coffeekraken/sugar/js/docblock/outputs/html/partials/example.js',
+                    params: '@coffeekraken/sugar/js/docblock/outputs/html/partials/params.js',
+                    sharings: '@coffeekraken/sugar/js/docblock/outputs/html/partials/sharings.js'
+                }
+            }, settings));
+        }
+    },
+    /**
+     * @name        supportedTags
+     * @type        Array<String>
+     * @static
+     *
+     * Store the list of supported docblock tags
+     *
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _a.supportedTags = [
+        '@type',
+        '@namespace',
+        '@name',
+        '@static',
+        '@get',
+        '@set',
+        '@since',
+        '@description',
+        '@param',
+        '@example',
+        '@author'
+    ],
+    _a);

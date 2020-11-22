@@ -1,7 +1,8 @@
+"use strict";
+var _a;
 const __SCli = require('../../cli/SCli');
 const __deepMerge = require('../../object/deepMerge');
 const __SBuildViewsInterface = require('./interface/SBuildViewsInterface');
-
 /**
  * @name            SBuildViewsCli
  * @namespace           sugar.node.build.views
@@ -13,47 +14,41 @@ const __SBuildViewsInterface = require('./interface/SBuildViewsInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildViewsCli extends __SCli {
-  /**
-   * @name          command
-   * @type          String
-   * @static
-   *
-   * Store the command string
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  static command = 'sugar build.views %arguments';
-
-  /**
-   * @name          interface
-   * @type          SInterface
-   * @static
-   *
-   * Store the definition object
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  static interface = __SBuildViewsInterface;
-
-  /**
-   * @name          constructor
-   * @type          Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(settings = {}) {
-    super(
-      __deepMerge(
-        {
-          id: 'build.views',
-          name: 'Build Views'
-        },
-        settings
-      )
-    );
-  }
-};
+module.exports = (_a = class SBuildViewsCli extends __SCli {
+        /**
+         * @name          constructor
+         * @type          Function
+         * @constructor
+         *
+         * Constructor
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        constructor(settings = {}) {
+            super(__deepMerge({
+                id: 'build.views',
+                name: 'Build Views'
+            }, settings));
+        }
+    },
+    /**
+     * @name          command
+     * @type          String
+     * @static
+     *
+     * Store the command string
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _a.command = 'sugar build.views %arguments',
+    /**
+     * @name          interface
+     * @type          SInterface
+     * @static
+     *
+     * Store the definition object
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _a.interface = __SBuildViewsInterface,
+    _a);

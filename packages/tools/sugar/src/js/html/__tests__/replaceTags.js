@@ -1,8 +1,7 @@
+"use strict";
 module.exports = (__replaceTags) => {
-
-  describe('sugar.js.html.replaceTags', () => {
-
-    const html = `
+    describe('sugar.js.html.replaceTags', () => {
+        const html = `
   <div>
     <bold>Hello world</bold>
     <h1>
@@ -10,14 +9,12 @@ module.exports = (__replaceTags) => {
     </h1>
   </div>
 `;
-
-    const res = __replaceTags(html, {
-      bold: (tag, content) => `<yop>${content}</yop>`,
-      h1: (tag, content) => content
-    });
-
-    it('Should have replace the tags correctly', () => {
-      expect(res.replace(/\s/g, '')).toBe(`
+        const res = __replaceTags(html, {
+            bold: (tag, content) => `<yop>${content}</yop>`,
+            h1: (tag, content) => content
+        });
+        it('Should have replace the tags correctly', () => {
+            expect(res.replace(/\s/g, '')).toBe(`
 <div>
 <yop>Hello world</yop>
 
@@ -25,8 +22,6 @@ module.exports = (__replaceTags) => {
 
 </div>
 `.replace(/\s/g, ''));
+        });
     });
-
-  });
-
-}
+};

@@ -1,5 +1,4 @@
 import __getTransitionProperties from './getTransitionProperties';
-
 /**
  * @name      whenTransitionEnd
  * @namespace           sugar.js.dom
@@ -20,11 +19,11 @@ import __getTransitionProperties from './getTransitionProperties';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function whenTransitionEnd(elm, cb = null) {
-  return new Promise((resolve, reject) => {
-    const transition = __getTransitionProperties(elm);
-    setTimeout(() => {
-      resolve();
-      cb && cb();
-    }, transition.totalDuration);
-  });
+    return new Promise((resolve, reject) => {
+        const transition = __getTransitionProperties(elm);
+        setTimeout(() => {
+            resolve();
+            cb && cb();
+        }, transition.totalDuration);
+    });
 }

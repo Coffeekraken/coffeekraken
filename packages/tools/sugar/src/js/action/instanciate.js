@@ -1,7 +1,6 @@
 import __typeMap from './typeMap';
 import __get from '../object/get';
 import __flatten from '../object/flatten';
-
 /**
  * @name            instanciate
  * @namespace       sugar.js.action
@@ -29,28 +28,17 @@ import __flatten from '../object/flatten';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function instanciate(actionObj) {
-  if (!actionObj.type) {
-    throw new Error(
-      `instanciate: The actionObj parameter MUST have a <cyan>type</cyan> property...`
-    );
-  }
-  if (!actionObj.descriptorObj) {
-    throw new Error(
-      `instanciate: The actionObj parameter MUST have a <cyan>descriptorObj</cyan> property of type Object...`
-    );
-  }
-
-  const cls = __get(__typeMap, actionObj.type);
-
-  if (!cls) {
-    throw new Error(
-      `instanciate: Your passed "type" is not valid and must be one of those: ${Object.keys(
-        __flatten(__typeMap)
-      ).join(', ')}...`
-    );
-  }
-
-  // instanciate the object
-  const instance = new cls(actionObj.descriptorObj, actionObj.settings || {});
-  return instance;
+    if (!actionObj.type) {
+        throw new Error(`instanciate: The actionObj parameter MUST have a <cyan>type</cyan> property...`);
+    }
+    if (!actionObj.descriptorObj) {
+        throw new Error(`instanciate: The actionObj parameter MUST have a <cyan>descriptorObj</cyan> property of type Object...`);
+    }
+    const cls = __get(__typeMap, actionObj.type);
+    if (!cls) {
+        throw new Error(`instanciate: Your passed "type" is not valid and must be one of those: ${Object.keys(__flatten(__typeMap)).join(', ')}...`);
+    }
+    // instanciate the object
+    const instance = new cls(actionObj.descriptorObj, actionObj.settings || {});
+    return instance;
 }

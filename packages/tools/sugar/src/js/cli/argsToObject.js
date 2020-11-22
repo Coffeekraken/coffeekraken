@@ -1,6 +1,5 @@
 import __parseArgs from './parseArgs';
 import __completeArgsObject from './completeArgsObject';
-
 /**
  * @name                  argsToObject
  * @namespace           sugar.js.cli
@@ -40,11 +39,10 @@ import __completeArgsObject from './completeArgsObject';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function argsToObject(argsObj, settings = {}) {
-  if (typeof argsObj === 'string') {
-    return __parseArgs(argsObj, {
-      definitionObj: settings.definitionObj
-    });
-  }
-
-  return __completeArgsObject(argsObj || {}, settings);
+    if (typeof argsObj === 'string') {
+        return __parseArgs(argsObj, {
+            definitionObj: settings.definitionObj
+        });
+    }
+    return __completeArgsObject(argsObj || {}, settings);
 };

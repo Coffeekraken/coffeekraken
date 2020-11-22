@@ -1,7 +1,6 @@
+"use strict";
 const __fs = require('fs-extra');
-
 // TODO tests
-
 /**
  * @name        removeSync
  * @namespace           sugar.node.fs
@@ -21,5 +20,5 @@ const __fs = require('fs-extra');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function removeSync(path) {
-  return __fs.removeSync(path);
+    return __fs.removeSync(path);
 };

@@ -1,5 +1,4 @@
 import __inViewport from 'in-viewport';
-
 /**
  * @name      whenInViewport
  * @namespace           sugar.js.dom
@@ -20,15 +19,11 @@ import __inViewport from 'in-viewport';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function whenInViewport(elm, offset = 50) {
-  return new Promise((resolve, reject) => {
-    __inViewport(
-      elm,
-      {
-        offset: offset
-      },
-      () => {
-        resolve(elm);
-      }
-    );
-  });
+    return new Promise((resolve, reject) => {
+        __inViewport(elm, {
+            offset: offset
+        }, () => {
+            resolve(elm);
+        });
+    });
 }

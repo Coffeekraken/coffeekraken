@@ -1,0 +1,1 @@
+../../../../js/validation/object/validateObject.ts

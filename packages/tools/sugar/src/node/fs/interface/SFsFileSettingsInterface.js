@@ -1,5 +1,6 @@
+"use strict";
+var _a;
 const __SInterface = require('../../class/SInterface');
-
 /**
  * @name                SFsFileSettingsInterface
  * @namespace           sugar.node.fs.interface
@@ -12,19 +13,18 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsFileSettingsInterface extends __SInterface {
-  static definitionObj = {
-    checkExistence: {
-      type: 'Boolean',
-      description:
-        'Specify if you want to check or not the file existence on the filesystem',
-      required: true
+module.exports = (_a = class SFsFileSettingsInterface extends __SInterface {
     },
-    rootDir: {
-      type: 'String',
-      description:
-        'Specify a root directory that you want to considere as the root folder where the file live. This will gives you access to properties like ```rootDir``` and ```relPath```',
-      required: false
-    }
-  };
-};
+    _a.definitionObj = {
+        checkExistence: {
+            type: 'Boolean',
+            description: 'Specify if you want to check or not the file existence on the filesystem',
+            required: true
+        },
+        rootDir: {
+            type: 'String',
+            description: 'Specify a root directory that you want to considere as the root folder where the file live. This will gives you access to properties like ```rootDir``` and ```relPath```',
+            required: false
+        }
+    },
+    _a);

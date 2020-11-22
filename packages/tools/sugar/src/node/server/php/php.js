@@ -1,5 +1,5 @@
+"use strict";
 const __PhpSCli = require('./SPhpServerCli');
-
 /**
  * @name                php
  * @namespace           sugar.node.server.php
@@ -23,6 +23,6 @@ const __PhpSCli = require('./SPhpServerCli');
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 module.exports = (args = {}) => {
-  const cli = new __PhpSCli();
-  return cli.spawn(args);
+    const cli = new __PhpSCli();
+    return cli.spawn(args);
 };

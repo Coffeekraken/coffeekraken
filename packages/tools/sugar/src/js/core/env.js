@@ -3,7 +3,6 @@ import __get from '../object/get';
 import __set from '../object/set';
 import __delete from '../object/delete';
 import __parse from '../string/parse';
-
 /**
  * @name                    env
  * @namespace           sugar.js.core
@@ -23,18 +22,20 @@ import __parse from '../string/parse';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function env(dotPath, value) {
-  if (!__isNode()) {
-    if (!window.process) window.process = {};
-    if (!window.process.env) window.process.env = {};
-  }
-  const targetObj = __isNode() ? global.process.env : window.process.env;
-
-  if (value === null) {
-    // delete the variable
-    __delete(targetObj, dotPath.toUpperCase());
-  } else if (value !== undefined) {
-    __set(targetObj, dotPath.toUpperCase(), __parse(value));
-  }
-  // return the variable value
-  return __parse(__get(targetObj, dotPath.toUpperCase()));
+    if (!__isNode()) {
+        if (!window.process)
+            window.process = {};
+        if (!window.process.env)
+            window.process.env = {};
+    }
+    const targetObj = __isNode() ? global.process.env : window.process.env;
+    if (value === null) {
+        // delete the variable
+        __delete(targetObj, dotPath.toUpperCase());
+    }
+    else if (value !== undefined) {
+        __set(targetObj, dotPath.toUpperCase(), __parse(value));
+    }
+    // return the variable value
+    return __parse(__get(targetObj, dotPath.toUpperCase()));
 }

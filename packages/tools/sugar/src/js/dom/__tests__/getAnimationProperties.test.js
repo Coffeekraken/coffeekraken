@@ -1,8 +1,6 @@
 import __getAnimationProperties from '../getAnimationProperties';
-
 describe('sugar.js.dom.getAnimationProperties', () => {
-
-  document.body.innerHTML = `
+    document.body.innerHTML = `
   <style>
     @keyframes coco {
       from {
@@ -20,12 +18,9 @@ describe('sugar.js.dom.getAnimationProperties', () => {
       <div id="testing">
       </div>
   `;
-  const $elm = document.querySelector('#testing');
-
-  const props = __getAnimationProperties($elm);
-
-  it('Should find the "testing" element that is up in the dom tree', () => {
-    //  expect($testing.id).toBe('testing');
-  });
-
+    const $elm = document.querySelector('#testing');
+    const props = __getAnimationProperties($elm);
+    it('Should find the "testing" element that is up in the dom tree', () => {
+        //  expect($testing.id).toBe('testing');
+    });
 });

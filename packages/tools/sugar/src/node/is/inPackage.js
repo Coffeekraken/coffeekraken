@@ -1,5 +1,5 @@
+"use strict";
 const __isInPackage = require('../path/isInPackage');
-
 /**
  * @name            inPackage
  * @namespace           sugar.node.is
@@ -19,10 +19,6 @@ const __isInPackage = require('../path/isInPackage');
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = function inPackage(
-  name,
-  from = process.cwd(),
-  highest = false
-) {
-  return __isInPackage(name, from, highest);
+module.exports = function inPackage(name, from = process.cwd(), highest = false) {
+    return __isInPackage(name, from, highest);
 };

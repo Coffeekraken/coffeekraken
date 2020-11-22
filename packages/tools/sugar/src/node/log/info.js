@@ -1,5 +1,26 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const SLog_1 = require("./SLog");
 /**
- * @namespace           sugar.node.log
- * @src               ../_js/log/info.js
+ * @name              info
+ * @namespace           sugar.js.info
+ * @type              Function
+ *
+ * This function is a simple wrapper around the SLog class that let you use the info features quickly
+ *
+ * @param           {Mixed}             message           The message to log
+ * @return          {Promise}                             A promise resolved once your message has been correctly infoged
+ *
+ * @example         js
+ * import info from '@coffeekraken/sugar/js/log/info';
+ * info('Hello world');
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/log/info');
+function info(message) {
+    if (!(global || window)._sLogDefaultInstance) {
+        (global || window)._sLogDefaultInstance = new SLog_1.default({});
+    }
+    return (global || window)._sLogDefaultInstance.info(message);
+}
+exports.default = info;

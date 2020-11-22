@@ -6,7 +6,6 @@ import __hsl2rgba from './hsl2rgba';
 import __hex2rgba from './hex2rgba';
 import __rgba2hsl from './rgba2hsl';
 import __rgba2hsv from './rgba2hsv';
-
 /**
  * @name            parse
  * @namespace           sugar.js.color
@@ -26,29 +25,31 @@ import __rgba2hsv from './rgba2hsv';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function parse(color, format = 'rgba') {
-  color = color.replace(/\s/g, '');
-  if (color.indexOf('rgb') != -1) {
-    color = __parseRgba(color);
-  } else if (color.indexOf('hsv') != -1) {
-    color = __parseHsv(color);
-    color = __hsv2rgba(color.h, color.s, color.v);
-  } else if (color.indexOf('hsl') != -1) {
-    color = __parseHsl(color);
-    color = __hsl2rgba(color.h, color.s, color.l);
-  } else if (color.substring(0, 1) == '#') {
-    color = __hex2rgba(color);
-  }
-
-  switch (format) {
-    case 'hsl':
-      return __rgba2hsl(color);
-      break;
-    case 'hsv':
-      return __rgba2hsv(color);
-      break;
-    case 'rgba':
-    default:
-      return color;
-      break;
-  }
+    color = color.replace(/\s/g, '');
+    if (color.indexOf('rgb') != -1) {
+        color = __parseRgba(color);
+    }
+    else if (color.indexOf('hsv') != -1) {
+        color = __parseHsv(color);
+        color = __hsv2rgba(color.h, color.s, color.v);
+    }
+    else if (color.indexOf('hsl') != -1) {
+        color = __parseHsl(color);
+        color = __hsl2rgba(color.h, color.s, color.l);
+    }
+    else if (color.substring(0, 1) == '#') {
+        color = __hex2rgba(color);
+    }
+    switch (format) {
+        case 'hsl':
+            return __rgba2hsl(color);
+            break;
+        case 'hsv':
+            return __rgba2hsv(color);
+            break;
+        case 'rgba':
+        default:
+            return color;
+            break;
+    }
 }

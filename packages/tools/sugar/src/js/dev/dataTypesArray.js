@@ -1,5 +1,4 @@
 import __isNode from '../is/node';
-
 /**
  * @name                    dataTypesArray
  * @namespace           sugar.js.dev
@@ -11,29 +10,30 @@ import __isNode from '../is/node';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 if (__isNode()) {
-  module.exports = [
-    'Number',
-    'String',
-    'Symbol',
-    'Boolean',
-    'Null',
-    'Undefined',
-    'Object',
-    'Array',
-    'JSON',
-    'Function'
-  ];
-} else {
-  module.exports = [
-    'Number',
-    'String',
-    'Symbol',
-    'Boolean',
-    'Null',
-    'Undefined',
-    'Object',
-    'Array',
-    'JSON',
-    'Function'
-  ];
+    module.exports = [
+        'Number',
+        'String',
+        'Symbol',
+        'Boolean',
+        'Null',
+        'Undefined',
+        'Object',
+        'Array',
+        'JSON',
+        'Function'
+    ];
+}
+else {
+    module.exports = [
+        'Number',
+        'String',
+        'Symbol',
+        'Boolean',
+        'Null',
+        'Undefined',
+        'Object',
+        'Array',
+        'JSON',
+        'Function'
+    ];
 }

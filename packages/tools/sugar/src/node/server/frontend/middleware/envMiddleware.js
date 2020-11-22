@@ -1,7 +1,7 @@
+"use strict";
 const __packageRoot = require('../../../path/packageRoot');
 const __fs = require('fs');
 const __env = require('../../../core/env');
-
 /**
  * @name            envMiddleware
  * @namespace       sugar.node.server.frontend.middleware
@@ -24,11 +24,11 @@ const __env = require('../../../core/env');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function envMiddleware(settings = {}) {
-  return function (req, res, next) {
-    res.templateData = {
-      ...(res.templateData || {}),
-      env: __env('NODE_ENV') || 'development'
+    return function (req, res, next) {
+        res.templateData = {
+            ...(res.templateData || {}),
+            env: __env('NODE_ENV') || 'development'
+        };
+        next();
     };
-    next();
-  };
 };

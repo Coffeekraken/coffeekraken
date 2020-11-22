@@ -16,7 +16,7 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function decodeHtmlEntities(string) {
-  const txt = document.createElement('textarea');
-  txt.innerHTML = string;
-  return txt.value;
+    const txt = document.createElement('textarea');
+    txt.innerHTML = string;
+    return txt.value;
 }

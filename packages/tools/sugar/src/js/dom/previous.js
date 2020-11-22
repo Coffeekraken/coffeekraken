@@ -1,5 +1,4 @@
 import __matches from './matches';
-
 /**
  * @name      previous
  * @namespace           sugar.js.dom
@@ -21,12 +20,12 @@ import __matches from './matches';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function previous(elm, selector) {
-  elm = elm.previousSibling;
-  while (elm) {
-    if (__matches(elm, selector)) {
-      return elm;
-    }
     elm = elm.previousSibling;
-  }
-  return false;
+    while (elm) {
+        if (__matches(elm, selector)) {
+            return elm;
+        }
+        elm = elm.previousSibling;
+    }
+    return false;
 }

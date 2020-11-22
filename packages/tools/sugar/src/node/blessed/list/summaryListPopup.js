@@ -1,7 +1,7 @@
+"use strict";
 const __deepMerge = require('../../object/deepMerge');
 const __SBlessedPopup = require('../popup/SBlessedPopup');
 const __SSummaryList = require('./SSummaryList');
-
 /**
  * @name                      blessedSummaryListPopup
  * @namespace           sugar.node.blessed.list
@@ -33,34 +33,29 @@ const __SSummaryList = require('./SSummaryList');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function blessedSummaryListPopup(settings = {}) {
-  settings = __deepMerge(
-    {
-      title: null,
-      description: null,
-      items: []
-    },
-    settings
-  );
-
-  const $popupBox = new __SBlessedPopup({
-    title: settings.title,
-    description: settings.description
-  });
-  const $summaryListBox = new __SSummaryList(settings.items, {});
-  $popupBox.append($summaryListBox);
-  $summaryListBox.promise.on('finally,cancel', () => {
-    $popupBox.remove($summaryListBox);
-    $popupBox.detach();
-  });
-
-  return {
-    $popup: $popupBox,
-    $list: $summaryListBox,
-    on: $summaryListBox.on,
-    then: $summaryListBox.then,
-    catch: $summaryListBox.catch,
-    attach: (parent) => {
-      parent.append($popupBox);
-    }
-  };
+    settings = __deepMerge({
+        title: null,
+        description: null,
+        items: []
+    }, settings);
+    const $popupBox = new __SBlessedPopup({
+        title: settings.title,
+        description: settings.description
+    });
+    const $summaryListBox = new __SSummaryList(settings.items, {});
+    $popupBox.append($summaryListBox);
+    $summaryListBox.promise.on('finally,cancel', () => {
+        $popupBox.remove($summaryListBox);
+        $popupBox.detach();
+    });
+    return {
+        $popup: $popupBox,
+        $list: $summaryListBox,
+        on: $summaryListBox.on,
+        then: $summaryListBox.then,
+        catch: $summaryListBox.catch,
+        attach: (parent) => {
+            parent.append($popupBox);
+        }
+    };
 };

@@ -1,3 +1,4 @@
+"use strict";
 // module.exports = (stringArgs = '') => {
 //   const jestConfig = __sugarConfig('jest');
 //   const defaultJestConfig = __argsToString(jestConfig.cli);
@@ -7,11 +8,9 @@
 //     shell: true
 //   });
 // };
-
 // const __STestJestCli = require('../../node/test/jest/STestJestCli');
 const __STestJestProcess = require('../../node/test/jest/STestJestProcess');
-
 module.exports = (stringArgs = '') => {
-  const pro = new __STestJestProcess();
-  pro.run(stringArgs);
+    const pro = new __STestJestProcess();
+    pro.run(stringArgs);
 };

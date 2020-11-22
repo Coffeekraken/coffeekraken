@@ -1,7 +1,8 @@
+"use strict";
+var _a;
 const __SInterface = require('../../class/SInterface');
 const __sugarConfig = require('../../config/sugar');
 const __deepMerge = require('../../object/deepMerge');
-
 /**
  * @name                STestInterface
  * @namespace           sugar.node.test.interface
@@ -14,20 +15,21 @@ const __deepMerge = require('../../object/deepMerge');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class STestInterface extends __SInterface {
-  static definitionObj = {
-    input: {
-      type: 'String',
-      alias: 'i',
-      description: 'Input files glob pattern',
-      required: true,
-      level: 1
+module.exports = (_a = class STestInterface extends __SInterface {
     },
-    watch: {
-      type: 'String|Object',
-      alias: 'w',
-      description: 'Watch files glob pattern or settings object',
-      level: 1
-    }
-  };
-};
+    _a.definitionObj = {
+        input: {
+            type: 'String',
+            alias: 'i',
+            description: 'Input files glob pattern',
+            required: true,
+            level: 1
+        },
+        watch: {
+            type: 'String|Object',
+            alias: 'w',
+            description: 'Watch files glob pattern or settings object',
+            level: 1
+        }
+    },
+    _a);

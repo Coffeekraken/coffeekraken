@@ -1,5 +1,5 @@
+"use strict";
 const __deepMerge = require('../object/deepMerge');
-
 /**
  * @name            findImportStatements
  * @namespace       sugar.node.scss
@@ -33,53 +33,47 @@ const __deepMerge = require('../object/deepMerge');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function findImportStatements(string, settings = {}) {
-  settings = __deepMerge(
-    {
-      use: true,
-      import: true
-    },
-    settings
-  );
-
-  // split lines
-  const lines = string.split('\n');
-
-  const reg = /\@(use|import)\s*['"](.*?)['"](\sas\s([a-zA-Z0-9-_]+))?/g;
-
-  const statements = [];
-
-  // loop on each lines
-  lines.forEach((line, index) => {
-    const matches = line.match(reg);
-    if (!matches) return;
-    matches.forEach((match) => {
-      const statementObj = {
-        raw: match + ';'
-      };
-      if (match.match(/^@import\s/)) {
-        statementObj.type = 'import';
-      } else {
-        statementObj.type = 'use';
-      }
-      match = match.replace(/^@import\s/, '').replace(/^@use\s/, '');
-      if (statementObj.type === 'use' && match.match(/\sas\s/)) {
-        const parts = match.split(' as ');
-        statementObj.path = parts[0];
-        statementObj.as = parts[1];
-      } else {
-        statementObj.path = match;
-      }
-      statementObj.line = index;
-
-      statementObj.path = statementObj.path.slice(1, -1);
-
-      if (settings.use && statementObj.type === 'use') {
-        statements.push(statementObj);
-      } else if (settings.import && statementObj.type === 'import') {
-        statements.push(statementObj);
-      }
+    settings = __deepMerge({
+        use: true,
+        import: true
+    }, settings);
+    // split lines
+    const lines = string.split('\n');
+    const reg = /\@(use|import)\s*['"](.*?)['"](\sas\s([a-zA-Z0-9-_]+))?/g;
+    const statements = [];
+    // loop on each lines
+    lines.forEach((line, index) => {
+        const matches = line.match(reg);
+        if (!matches)
+            return;
+        matches.forEach((match) => {
+            const statementObj = {
+                raw: match + ';'
+            };
+            if (match.match(/^@import\s/)) {
+                statementObj.type = 'import';
+            }
+            else {
+                statementObj.type = 'use';
+            }
+            match = match.replace(/^@import\s/, '').replace(/^@use\s/, '');
+            if (statementObj.type === 'use' && match.match(/\sas\s/)) {
+                const parts = match.split(' as ');
+                statementObj.path = parts[0];
+                statementObj.as = parts[1];
+            }
+            else {
+                statementObj.path = match;
+            }
+            statementObj.line = index;
+            statementObj.path = statementObj.path.slice(1, -1);
+            if (settings.use && statementObj.type === 'use') {
+                statements.push(statementObj);
+            }
+            else if (settings.import && statementObj.type === 'import') {
+                statements.push(statementObj);
+            }
+        });
     });
-  });
-
-  return statements;
+    return statements;
 };

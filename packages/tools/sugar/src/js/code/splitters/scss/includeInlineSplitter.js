@@ -11,10 +11,10 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {
-  type: 'include.inline',
-  prefix: /@include\s[a-zA-Z0-9-_\.]+/,
-  suffix: /;/,
-  open: '(',
-  close: ')',
-  exclude: [/@include Sugar\.setup\(.*\);/]
+    type: 'include.inline',
+    prefix: /@include\s[a-zA-Z0-9-_\.]+/,
+    suffix: /;/,
+    open: '(',
+    close: ')',
+    exclude: [/@include Sugar\.setup\(.*\);/]
 };

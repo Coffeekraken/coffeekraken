@@ -1,5 +1,4 @@
 // import __getTranslateProperties from './getTranslateProperties'
-
 /**
  * @name      offset
  * @namespace           sugar.js.dom
@@ -18,32 +17,21 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function offset(elm) {
-  let body,
-    box,
-    clientLeft,
-    clientTop,
-    docEl,
-    left,
-    scrollLeft,
-    scrollTop,
-    top,
-    translates,
-    transX,
-    transY;
-  box = elm.getBoundingClientRect();
-  body = document.body;
-  docEl = document.documentElement;
-  scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-  scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
-  clientTop = docEl.clientTop || body.clientTop || 0;
-  clientLeft = docEl.clientLeft || body.clientLeft || 0;
-  // translates = __getTranslateProperties(elm);
-  // transX = translates.x;
-  // transY = translates.y;
-  top = box.top + scrollTop - clientTop;
-  left = box.left + scrollLeft - clientLeft;
-  return {
-    top: Math.round(top),
-    left: Math.round(left)
-  };
+    let body, box, clientLeft, clientTop, docEl, left, scrollLeft, scrollTop, top, translates, transX, transY;
+    box = elm.getBoundingClientRect();
+    body = document.body;
+    docEl = document.documentElement;
+    scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+    scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+    clientTop = docEl.clientTop || body.clientTop || 0;
+    clientLeft = docEl.clientLeft || body.clientLeft || 0;
+    // translates = __getTranslateProperties(elm);
+    // transX = translates.x;
+    // transY = translates.y;
+    top = box.top + scrollTop - clientTop;
+    left = box.left + scrollLeft - clientLeft;
+    return {
+        top: Math.round(top),
+        left: Math.round(left)
+    };
 }

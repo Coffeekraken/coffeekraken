@@ -1,3 +1,4 @@
+"use strict";
 const __isPortFree = require('./isPortFree');
 /**
  * @name            getFreePort
@@ -19,13 +20,14 @@ const __isPortFree = require('./isPortFree');
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 module.exports = function getFreePort(port = null) {
-  return new Promise(async (resolve) => {
-    if (!port) port = Math.round(Math.random() * 65535);
-    let isFree = await __isPortFree(port);
-    do {
-      port = Math.round(Math.random() * 65535);
-      isFree = await __isPortFree(port);
-    } while (!isFree);
-    resolve(port);
-  });
+    return new Promise(async (resolve) => {
+        if (!port)
+            port = Math.round(Math.random() * 65535);
+        let isFree = await __isPortFree(port);
+        do {
+            port = Math.round(Math.random() * 65535);
+            isFree = await __isPortFree(port);
+        } while (!isFree);
+        resolve(port);
+    });
 };

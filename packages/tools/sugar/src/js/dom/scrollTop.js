@@ -12,5 +12,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) (https://olivierbossel.com)
  */
 export default function scrollTop() {
-  return window.pageYOffset || document.scrollTop || document.body.scrollTop;
+    return window.pageYOffset || document.scrollTop || document.body.scrollTop;
 }

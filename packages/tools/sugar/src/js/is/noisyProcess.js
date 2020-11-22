@@ -1,5 +1,4 @@
 import __env from '../core/env';
-
 /**
  * @name              isNoisyProcess
  * @namespace         sugar.js.is
@@ -21,10 +20,10 @@ import __env from '../core/env';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isNoisyProcess() {
-  const noisy = __env('NOISY_PROCESS');
-  return noisy !== undefined
-    ? typeof noisy === 'boolean'
-      ? noisy
-      : true
-    : false;
+    const noisy = __env('NOISY_PROCESS');
+    return noisy !== undefined
+        ? typeof noisy === 'boolean'
+            ? noisy
+            : true
+        : false;
 }

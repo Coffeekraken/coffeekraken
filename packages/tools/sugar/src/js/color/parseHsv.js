@@ -15,15 +15,15 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function parseHsv(hsvString) {
-  hsvString = hsvString.toLowerCase();
-  let string = hsvString
-    .replace('hsv(', '')
-    .replace(')', '')
-    .replace(/\s/g, '');
-  let array = string.split(',');
-  return {
-    h: parseFloat(array[0]),
-    s: parseFloat(array[1]),
-    v: parseFloat(array[2])
-  };
+    hsvString = hsvString.toLowerCase();
+    let string = hsvString
+        .replace('hsv(', '')
+        .replace(')', '')
+        .replace(/\s/g, '');
+    let array = string.split(',');
+    return {
+        h: parseFloat(array[0]),
+        s: parseFloat(array[1]),
+        v: parseFloat(array[2])
+    };
 }

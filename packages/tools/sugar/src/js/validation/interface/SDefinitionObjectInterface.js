@@ -1,5 +1,4 @@
 import __validateObject from '../object/validateObject';
-
 /**
  * @name                SDefinitionObjectInterface
  * @namespace           sugar.js.validation.object.interface
@@ -13,41 +12,40 @@ import __validateObject from '../object/validateObject';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SDefinitionObjectInterface {
-  static definitionObj = {
+    static apply(instance) {
+        return __validateObject(instance, this.definitionObj);
+    }
+}
+SDefinitionObjectInterface.definitionObj = {
     type: {
-      type: 'String',
-      required: true
+        type: 'String',
+        required: true
     },
     required: {
-      type: 'Boolean'
+        type: 'Boolean'
     },
     description: {
-      type: 'String'
+        type: 'String'
     },
     default: {
-      type: null
+        type: null
     },
     static: {
-      type: 'Boolean'
+        type: 'Boolean'
     },
     values: {
-      type: 'Array'
+        type: 'Array'
     },
     regexp: {
-      type: 'RegExp'
+        type: 'RegExp'
     },
     validator: {
-      type: 'Function'
+        type: 'Function'
     },
     alias: {
-      type: 'String'
+        type: 'String'
     },
     level: {
-      type: 'Integer'
+        type: 'Integer'
     }
-  };
-
-  static apply(instance) {
-    return __validateObject(instance, this.definitionObj);
-  }
-}
+};

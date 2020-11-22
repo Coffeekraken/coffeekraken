@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @name                hasExitCleanup
  * @namespace           sugar.node.process
@@ -18,7 +19,7 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function hasExitCleanup() {
-  return process.env.EXIT_CLEANUP !== undefined
-    ? process.env.EXIT_CLEANUP
-    : false;
+    return process.env.EXIT_CLEANUP !== undefined
+        ? process.env.EXIT_CLEANUP
+        : false;
 };

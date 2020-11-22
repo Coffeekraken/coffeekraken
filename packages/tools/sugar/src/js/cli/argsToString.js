@@ -1,7 +1,6 @@
 import __toString from '../string/toString';
 import __parseArgs from './parseArgs';
 import __deepMerge from '../object/deepMerge';
-
 /**
  * @name                  argsToString
  * @namespace           sugar.js.cli
@@ -44,70 +43,56 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
 // TODO: support deep object structure
 // TODO: support required args
-
 module.exports = function argsToString(args, settings = {}) {
-  settings = __deepMerge(
-    {
-      definitionObj: null,
-      includeAllArgs: true,
-      alias: true
-    },
-    settings
-  );
-
-  if (typeof args === 'string') {
-    args = __parseArgs(args, {
-      definitionObj: settings.definitionObj
-    });
-  }
-
-  if (!settings.definitionObj) {
-    let string = '';
-    Object.keys(args).forEach((key) => {
-      string += ` --${key} ${__toString(args[key])}`;
-    });
-    return string;
-  }
-
-  const cliArray = [];
-  // loop on passed args
-  Object.keys(settings.definitionObj).forEach((argName) => {
-    const defObj = settings.definitionObj[argName];
-    if (!defObj) return;
-    if (!settings.includeAllArgs && args[argName] === undefined) return;
-    const prefix =
-      defObj.alias && settings.alias ? `-${defObj.alias}` : `--${argName}`;
-
-    let value;
-    if (args && args[argName] !== undefined) value = args[argName];
-    else if (
-      settings.definitionObj[argName] &&
-      settings.definitionObj[argName].default
-    )
-      value = settings.definitionObj[argName].default;
-    if (
-      value === undefined ||
-      value === null
-      // || (defObj.type.toLowerCase() === 'boolean' && value === false)
-    ) {
-      return;
+    settings = __deepMerge({
+        definitionObj: null,
+        includeAllArgs: true,
+        alias: true
+    }, settings);
+    if (typeof args === 'string') {
+        args = __parseArgs(args, {
+            definitionObj: settings.definitionObj
+        });
     }
-    value = __toString(value);
-
-    if (defObj.type.toLowerCase() === 'string') value = `"${value}"`;
-    // if (defObj.type.toLowerCase() === 'boolean') value = '';
-    if (
-      defObj.type.toLowerCase().includes('object') ||
-      defObj.type.toLowerCase().includes('array')
-    ) {
-      value = `"${value.split('"').join("'")}"`;
+    if (!settings.definitionObj) {
+        let string = '';
+        Object.keys(args).forEach((key) => {
+            string += ` --${key} ${__toString(args[key])}`;
+        });
+        return string;
     }
-
-    cliArray.push(`${prefix} ${value}`);
-  });
-
-  return cliArray.join(' ');
+    const cliArray = [];
+    // loop on passed args
+    Object.keys(settings.definitionObj).forEach((argName) => {
+        const defObj = settings.definitionObj[argName];
+        if (!defObj)
+            return;
+        if (!settings.includeAllArgs && args[argName] === undefined)
+            return;
+        const prefix = defObj.alias && settings.alias ? `-${defObj.alias}` : `--${argName}`;
+        let value;
+        if (args && args[argName] !== undefined)
+            value = args[argName];
+        else if (settings.definitionObj[argName] &&
+            settings.definitionObj[argName].default)
+            value = settings.definitionObj[argName].default;
+        if (value === undefined ||
+            value === null
+        // || (defObj.type.toLowerCase() === 'boolean' && value === false)
+        ) {
+            return;
+        }
+        value = __toString(value);
+        if (defObj.type.toLowerCase() === 'string')
+            value = `"${value}"`;
+        // if (defObj.type.toLowerCase() === 'boolean') value = '';
+        if (defObj.type.toLowerCase().includes('object') ||
+            defObj.type.toLowerCase().includes('array')) {
+            value = `"${value.split('"').join("'")}"`;
+        }
+        cliArray.push(`${prefix} ${value}`);
+    });
+    return cliArray.join(' ');
 };

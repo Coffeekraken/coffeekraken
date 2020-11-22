@@ -1,5 +1,4 @@
 // TODO tests
-
 /**
  * @name      isInViewport
  * @namespace           sugar.js.dom
@@ -20,25 +19,23 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isInViewport(elm, offset = 50) {
-  // handle offset
-  let offsetTop = offset;
-  let offsetRight = offset;
-  let offsetBottom = offset;
-  let offsetLeft = offset;
-  if (typeof offset === 'object') {
-    offsetTop = offset.top || 0;
-    offsetRight = offset.right || 0;
-    offsetBottom = offset.bottom || 0;
-    offsetLeft = offset.left || 0;
-  }
-  const containerHeight =
-    window.innerHeight || document.documentElement.clientHeight;
-  const containerWidth =
-    window.innerWidth || document.documentElement.clientWidth;
-  const rect = elm.getBoundingClientRect();
-  const isTopIn = rect.top - containerHeight - offsetBottom <= 0;
-  const isBottomIn = rect.bottom - offsetTop >= 0;
-  const isLeftIn = rect.left - containerWidth - offsetRight <= 0;
-  const isRightIn = rect.right - offsetLeft >= 0;
-  return isTopIn && isBottomIn && isLeftIn && isRightIn;
+    // handle offset
+    let offsetTop = offset;
+    let offsetRight = offset;
+    let offsetBottom = offset;
+    let offsetLeft = offset;
+    if (typeof offset === 'object') {
+        offsetTop = offset.top || 0;
+        offsetRight = offset.right || 0;
+        offsetBottom = offset.bottom || 0;
+        offsetLeft = offset.left || 0;
+    }
+    const containerHeight = window.innerHeight || document.documentElement.clientHeight;
+    const containerWidth = window.innerWidth || document.documentElement.clientWidth;
+    const rect = elm.getBoundingClientRect();
+    const isTopIn = rect.top - containerHeight - offsetBottom <= 0;
+    const isBottomIn = rect.bottom - offsetTop >= 0;
+    const isLeftIn = rect.left - containerWidth - offsetRight <= 0;
+    const isRightIn = rect.right - offsetLeft >= 0;
+    return isTopIn && isBottomIn && isLeftIn && isRightIn;
 }

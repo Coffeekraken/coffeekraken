@@ -1,5 +1,4 @@
 import __sprintf from 'sprintf-js';
-
 /**
  * @name        printf
  * @namespace           sugar.js.string
@@ -21,5 +20,5 @@ import __sprintf from 'sprintf-js';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function _printf(...args) {
-  return __sprintf.sprintf.apply(null, args);
+    return __sprintf.sprintf.apply(null, args);
 }

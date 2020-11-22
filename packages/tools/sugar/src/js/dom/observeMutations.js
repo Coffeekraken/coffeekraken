@@ -1,5 +1,4 @@
 import __SPromise from '../promise/SPromise';
-
 /**
  * @name      observeMutations
  * @namespace           sugar.js.dom
@@ -26,31 +25,21 @@ import __SPromise from '../promise/SPromise';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function observeMutations($target, settings = {}) {
-  settings = {
-    attributes: true,
-    childList: false,
-    subtree: false,
-    ...settings
-  };
-
-  let mutationObserver;
-
-  return new __SPromise(
-    (resolve, reject, trigger, cancel) => {
-      // create a new observer
-      mutationObserver = new MutationObserver((mutations) => {
-        // loop on mutations
-        mutations.forEach((mutation) => {
-          // trigger the then stack
-          trigger('then', mutation);
+    settings = Object.assign({ attributes: true, childList: false, subtree: false }, settings);
+    let mutationObserver;
+    return new __SPromise((resolve, reject, trigger, cancel) => {
+        // create a new observer
+        mutationObserver = new MutationObserver((mutations) => {
+            // loop on mutations
+            mutations.forEach((mutation) => {
+                // trigger the then stack
+                trigger('then', mutation);
+            });
         });
-      });
-      mutationObserver.observe($target, settings);
-    },
-    {
-      id: 'observeMutations'
-    }
-  ).on('finally', () => {
-    mutationObserver && mutationObserver.disconnect();
-  });
+        mutationObserver.observe($target, settings);
+    }, {
+        id: 'observeMutations'
+    }).on('finally', () => {
+        mutationObserver && mutationObserver.disconnect();
+    });
 }

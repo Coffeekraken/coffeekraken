@@ -1,6 +1,5 @@
 import __clone from 'lodash.clone';
 import __deepClone from 'lodash.clonedeep';
-
 /**
  * @name                clone
  * @type                Function
@@ -20,8 +19,8 @@ import __deepClone from 'lodash.clonedeep';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function clone(object, deep = false) {
-  if (deep) {
-    return __deepClone(object);
-  }
-  return __clone(object);
+    if (deep) {
+        return __deepClone(object);
+    }
+    return __clone(object);
 }

@@ -1,5 +1,4 @@
 import __matches from './matches';
-
 /**
  * @name      next
  * @namespace           sugar.js.dom
@@ -21,12 +20,12 @@ import __matches from './matches';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function next(elm, selector) {
-  elm = elm.nextSibling;
-  while (elm) {
-    if (__matches(elm, selector)) {
-      return elm;
-    }
     elm = elm.nextSibling;
-  }
-  return false;
+    while (elm) {
+        if (__matches(elm, selector)) {
+            return elm;
+        }
+        elm = elm.nextSibling;
+    }
+    return false;
 }

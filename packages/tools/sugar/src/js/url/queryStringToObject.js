@@ -1,5 +1,4 @@
 import ltrim from '../string/ltrim';
-
 /**
  * @name        queryStringToObject
  * @namespace           sugar.js.url
@@ -21,16 +20,15 @@ import ltrim from '../string/ltrim';
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function queryStringToObject(str) {
-  str = ltrim(str, '?');
-  str = decodeURIComponent(str);
-  var chunks = str.split('&'),
-    obj = {};
-  chunks = chunks.filter((ch) => {
-    return ch !== '';
-  });
-  for (var c = 0; c < chunks.length; c++) {
-    var split = chunks[c].split('=', 2);
-    obj[split[0]] = split[1];
-  }
-  return obj;
+    str = ltrim(str, '?');
+    str = decodeURIComponent(str);
+    var chunks = str.split('&'), obj = {};
+    chunks = chunks.filter((ch) => {
+        return ch !== '';
+    });
+    for (var c = 0; c < chunks.length; c++) {
+        var split = chunks[c].split('=', 2);
+        obj[split[0]] = split[1];
+    }
+    return obj;
 }

@@ -1,9 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const glob_1 = __importDefault(require("glob"));
-const folderPath_1 = __importDefault(require("../fs/folderPath"));
+const glob_1 = require("glob");
+const folderPath_1 = require("../fs/folderPath");
 module.exports = async function findPackages(rootDir = process.cwd()) {
     const packagesObj = {};
     const packagesPaths = glob_1.default

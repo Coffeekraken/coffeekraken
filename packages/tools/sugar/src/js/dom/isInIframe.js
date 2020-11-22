@@ -1,5 +1,4 @@
 // TODO tests
-
 /**
  * @name      isInIframe
  * @namespace           sugar.js.dom
@@ -18,9 +17,10 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isInIframe() {
-  try {
-    return window.self !== window.top;
-  } catch (e) {
-    return true;
-  }
+    try {
+        return window.self !== window.top;
+    }
+    catch (e) {
+        return true;
+    }
 }

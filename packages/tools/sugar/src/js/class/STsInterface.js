@@ -1,17 +1,13 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var _a;
-const getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
-const argsToObject_1 = __importDefault(require("../cli/argsToObject"));
-const SError_1 = __importDefault(require("../error/SError"));
-const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-const trimLines_1 = __importDefault(require("../string/trimLines"));
-const validateObject_1 = __importDefault(require("../validation/object/validateObject"));
-const validateObjectOutputString_1 = __importDefault(require("../validation/object/validateObjectOutputString"));
-const typeof_1 = __importDefault(require("../value/typeof"));
-const set_1 = __importDefault(require("../object/set"));
+import _getExtendsStack from '../class/getExtendsStack';
+import _argsToObject from '../cli/argsToObject';
+import _SError from '../error/SError';
+import _deepMerge from '../object/deepMerge';
+import _trimLines from '../string/trimLines';
+import _validateObject from '../validation/object/validateObject';
+import _validateObjectOutputString from '../validation/object/validateObjectOutputString';
+import _typeof from '../value/typeof';
+import _set from '../object/set';
 /**
  * @name              SInterface
  * @namespace           sugar.js.class
@@ -85,10 +81,7 @@ class SInterface {
      */
     static applyAndThrow(instance, settings = {}) {
         const apply = SInterface.apply.bind(this);
-        return apply(instance, {
-            ...settings,
-            throw: true
-        });
+        return apply(instance, Object.assign(Object.assign({}, settings), { throw: true }));
     }
     /**
      * @name          applyAndComplete
@@ -107,7 +100,7 @@ class SInterface {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static applyAndComplete(object, settings = {}) {
-        settings = deepMerge_1.default({
+        settings = _deepMerge({
             duplicate: false
         }, settings);
         const completedObject = this.complete(object, settings);
@@ -129,7 +122,7 @@ class SInterface {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static complete(data, settings = {}) {
-        settings = deepMerge_1.default({
+        settings = _deepMerge({
             duplicate: false
         }, settings);
         let argsObj = data;
@@ -142,7 +135,7 @@ class SInterface {
             // check if we have an argument passed in the properties
             if (argsObj[argString] === undefined &&
                 argDefinitionObj.default !== undefined) {
-                set_1.default(argsObj, argString, argDefinitionObj.default);
+                _set(argsObj, argString, argDefinitionObj.default);
             }
         });
         return argsObj;
@@ -163,8 +156,8 @@ class SInterface {
      */
     static outputString(resultObj, settings = {}) {
         const headerString = this._outputHeaderString(settings);
-        const string = validateObjectOutputString_1.default(resultObj, settings);
-        return trimLines_1.default(`${headerString}${string}`);
+        const string = _validateObjectOutputString(resultObj, settings);
+        return _trimLines(`${headerString}${string}`);
     }
     /**
      * @name          output
@@ -223,7 +216,7 @@ class SInterface {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static parse(string) {
-        const args = argsToObject_1.default(string, this.definitionObj);
+        const args = _argsToObject(string, this.definitionObj);
         return args;
     }
     /**
@@ -242,7 +235,7 @@ class SInterface {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static parseAndComplete(string) {
-        let args = argsToObject_1.default(string, this.definitionObj);
+        let args = _argsToObject(string, this.definitionObj);
         args = this.complete(args);
         return args;
     }
@@ -264,178 +257,8 @@ class SInterface {
     static extends(extendsObj) {
         class ExtendedInterface extends this {
         }
-        ExtendedInterface.definitionObj = deepMerge_1.default(ExtendedInterface.definitionObj, extendsObj.definitionObj || {});
-        ExtendedInterface.settings = deepMerge_1.default(ExtendedInterface.settings, extendsObj.settings || {});
+        ExtendedInterface.definitionObj = _deepMerge(ExtendedInterface.definitionObj, extendsObj.definitionObj || {});
+        ExtendedInterface.settings = _deepMerge(ExtendedInterface.settings, extendsObj.settings || {});
         return ExtendedInterface;
     }
 }
-module.exports = (_a = class STsInterface extends STsAbstractInterface {
-        /**
-         * @name              apply
-         * @type              Function
-         * @static
-         *
-         * This static method allows you to apply the interface on an object instance.
-         * By default, if something is wrong in your class implementation, an error with the
-         * description of what's wrong will be thrown. You can change that behavior if you prefer having
-         * true returned when all is ok, or a string describing the current issue by specify the "settings.throw" property to false.
-         *
-         * @param       {Object}                instance              The instance to apply the interface on
-         * @param       {Object}              [settings={}]         An object of settings to configure your apply process
-         * - throw (false) {Boolean}: Specify if you want that an error is throwned if the test does not pass
-         * - return (String) {String}: Specify in which return you want the result back. Can be "String" of "Object".
-         * @return      {Boolean|String}                              true if all is ok, a string describing the issue if not...
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        static apply(instance, settings = {}) {
-            settings = deepMerge_1.default(this.settings, settings);
-            // name
-            if (settings.name !== null) {
-                settings.name = instance.constructor.name !== null ? instance.constructor.name : instance.name;
-            }
-            const instanceType = typeof_1.default(instance, {
-                customClass: false
-            });
-            if (instanceType !== 'Object' && instanceType !== 'Class') {
-                throw new SError_1.default(`Sorry but the "<yellow>instance</yellow>" argument of the "<cyan>SInterface.apply</cyan>" static method have to be an <green>Object</green> and you've passed an <red>${typeof_1.default(instance)}</red>...`);
-            }
-            let issueObj = {
-                $issues: []
-            };
-            let implementationValidationResult;
-            const extendsStack = getExtendsStack_1.default(instance);
-            // check if the passed instance base class already implements this insterface
-            // if (
-            //   instance.constructor.__interfaces !== undefined &&
-            //   Array.isArray(instance.constructor.__interfaces)
-            // ) {
-            //   if (instance.constructor.__interfaces.indexOf(this) !== -1) return true
-            // } else if (instance.__interfaces !== undefined && Array.isArray(instance.__interfaces)) {
-            //   if (instance.__interfaces.indexOf(this) !== -1) return true
-            // }
-            // extends array
-            // if (Array.isArray(this.extendsArray)) {
-            //   this.extendsArray.forEach((cls) => {
-            //     if (!extendsStack.includes(cls)) {
-            //       setTimeout(() => {
-            //         throw new _SError(
-            //           `Your class|instance "<yellow>${
-            //             instance.constructor.name
-            //           }</yellow>" that implements the "<cyan>${
-            //             this.name
-            //           }</cyan>" interface has to extend the "<green>${cls}</green>" class...`
-            //         )
-            //       })
-            //     }
-            //   })
-            // }
-            // // implements array
-            // if (this.implementsArray !== undefined && Array.isArray(this.implementsArray)) {
-            //   this.implements(instance, this.implementsArray, settings)
-            // }
-            // definition object
-            if (this.definitionObj) {
-                implementationValidationResult = validateObject_1.default(instance, this.definitionObj, {
-                    throw: false,
-                    name: settings.name,
-                    interface: settings.interface
-                });
-                if (implementationValidationResult !== true) {
-                    issueObj = deepMerge_1.default(issueObj, implementationValidationResult, {
-                        array: true
-                    });
-                }
-            }
-            if (!issueObj.$issues.length) {
-                // save on the instance and the constructor that we implements this interface correctly
-                if (!instance.__interfaces) {
-                    Object.defineProperty(instance, '__interfaces', {
-                        enumerable: false,
-                        writable: true,
-                        value: [this]
-                    });
-                }
-                else if (Array.isArray(instance.__interfaces)) {
-                    instance.__interfaces.push(this);
-                }
-                if (!instance.constructor.__interfaces) {
-                    Object.defineProperty(instance.constructor, '__interfaces', {
-                        enumerable: false,
-                        writable: true,
-                        value: [this]
-                    });
-                }
-                else if (Array.isArray(instance.constructor.__interfaces)) {
-                    instance.constructor.__interfaces.push(this);
-                }
-                return true;
-            }
-            if (settings.throw) {
-                throw new SError_1.default(this.outputString(issueObj, settings));
-            }
-            switch (settings.return.toLowerCase()) {
-                case 'object':
-                    return issueObj;
-                case 'string':
-                default:
-                    return SInterface.outputString(issueObj, settings);
-            }
-        }
-        /**
-         * @name          implements
-         * @type          Function
-         * @static
-         *
-         * This static method allows you to tell that a particular instance of a class implements
-         * one or more interfaces. This allows you after to specify the property "implements" with an array
-         * of SInterface classes that you want your property to implements
-         *
-         * @param         {SInterface}          ...interfaces           The interfaces you want to implements
-         *
-         * @since         2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        static implements(instance, interfaces = null, settings = {}) {
-            if (interfaces === null)
-                interfaces = [this];
-            if (!Array.isArray(interfaces))
-                interfaces = [interfaces];
-            // if (_isClass(instance)) {
-            //   // return instance;
-            //   class SInterfaceImplementsMiddleClass extends instance implements Constructor {
-            //     constructor (...args: any[]) {
-            //       super(...args)
-            //       STsInterface.implements(this, interfaces, settings)
-            //     }
-            //   }
-            //   Object.defineProperty(SInterfaceImplementsMiddleClass, 'name', {
-            //     value: instance.name
-            //   })
-            //   return SInterfaceImplementsMiddleClass
-            // }
-            // make sure the instance has all the interfaces requirements
-            interfaces.forEach((Interface) => {
-                Interface.apply(instance, {
-                    ...settings,
-                    interface: Interface.name
-                });
-            });
-        }
-    },
-    /**
-     * @name              settings
-     * @type              Object
-     * @static
-     *
-     * Store the default settings that will be passed to the ```apply``` function
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    _a.settings = {
-        throw: true,
-        return: 'String'
-    },
-    _a);

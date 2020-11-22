@@ -1,7 +1,6 @@
+"use strict";
 const __fs = require('fs-extra');
-
 // TODO tests
-
 /**
  * @name        writeFileSync
  * @namespace           sugar.node.fs
@@ -23,5 +22,5 @@ const __fs = require('fs-extra');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function writeFileSync(path, data, options = {}) {
-  return __fs.outputFileSync(path, data, options);
+    return __fs.outputFileSync(path, data, options);
 };

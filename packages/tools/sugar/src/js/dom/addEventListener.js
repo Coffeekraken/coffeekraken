@@ -1,5 +1,4 @@
 import __SPromise from '../promise/SPromise';
-
 /**
  * @name        addEventListener
  * @namespace           sugar.js.dom
@@ -30,42 +29,33 @@ import __SPromise from '../promise/SPromise';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function addEventListener(
-  $elm,
-  eventNames,
-  callback = null,
-  useCapture = false
-) {
-  if (!Array.isArray(eventNames))
-    eventNames = eventNames.split(',').map((e) => e.trim());
-
-  if (callback && typeof callback === 'function') callback = callback;
-  else if (callback && typeof callback === 'boolean') useCapture = callback;
-
-  let eventsStack = {};
-
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {
-    id: 'addEventListener'
-  }).on('cancel,finally', () => {
-    eventNames.forEach((eventName) => {
-      const stack = eventsStack[eventName];
-      $elm.removeEventListener(eventName, stack.callback, stack.useCapture);
+export default function addEventListener($elm, eventNames, callback = null, useCapture = false) {
+    if (!Array.isArray(eventNames))
+        eventNames = eventNames.split(',').map((e) => e.trim());
+    if (callback && typeof callback === 'function')
+        callback = callback;
+    else if (callback && typeof callback === 'boolean')
+        useCapture = callback;
+    let eventsStack = {};
+    const promise = new __SPromise((resolve, reject, trigger, cancel) => { }, {
+        id: 'addEventListener'
+    }).on('cancel,finally', () => {
+        eventNames.forEach((eventName) => {
+            const stack = eventsStack[eventName];
+            $elm.removeEventListener(eventName, stack.callback, stack.useCapture);
+        });
     });
-  });
-
-  eventNames.forEach((eventName) => {
-    const internalCallback = (event) => {
-      if (callback) callback.apply(this, [event]);
-      promise.trigger(eventName, event);
-    };
-
-    eventsStack[eventName] = {
-      callback: internalCallback,
-      useCapture
-    };
-
-    $elm.addEventListener(eventName, internalCallback, useCapture);
-  });
-
-  return promise;
+    eventNames.forEach((eventName) => {
+        const internalCallback = (event) => {
+            if (callback)
+                callback.apply(this, [event]);
+            promise.trigger(eventName, event);
+        };
+        eventsStack[eventName] = {
+            callback: internalCallback,
+            useCapture
+        };
+        $elm.addEventListener(eventName, internalCallback, useCapture);
+    });
+    return promise;
 }

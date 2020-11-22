@@ -15,9 +15,10 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function prependChild(elm, refElm) {
-  if (!refElm.firstChild) {
-    refElm.appendChild(elm);
-  } else {
-    refElm.insertBefore(elm, refElm.firstChild);
-  }
+    if (!refElm.firstChild) {
+        refElm.appendChild(elm);
+    }
+    else {
+        refElm.insertBefore(elm, refElm.firstChild);
+    }
 }

@@ -1,6 +1,6 @@
+"use strict";
 const __packageRoot = require('./rootPath');
 const __fs = require('fs');
-
 /**
  * @name          json
  * @namespace     sugar.node.package
@@ -19,7 +19,8 @@ const __fs = require('fs');
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 module.exports = function json(from = process.cwd(), highest = false) {
-  const path = `${__packageRoot(from, highest)}/package.json`;
-  if (!__fs.existsSync(path)) return false;
-  return require(path);
+    const path = `${__packageRoot(from, highest)}/package.json`;
+    if (!__fs.existsSync(path))
+        return false;
+    return require(path);
 };

@@ -12,12 +12,13 @@
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 export default function description(data) {
-  if (data.content && data.content[data.content.length - 1] === '') {
-    data.content = data.content.slice(0, -1);
-  }
-  if (!data.content) return '';
-  return data.content
-    .map((c) => c.trim())
-    .join('\n')
-    .trim();
+    if (data.content && data.content[data.content.length - 1] === '') {
+        data.content = data.content.slice(0, -1);
+    }
+    if (!data.content)
+        return '';
+    return data.content
+        .map((c) => c.trim())
+        .join('\n')
+        .trim();
 }

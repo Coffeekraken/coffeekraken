@@ -1,5 +1,5 @@
+"use strict";
 const __ip = require('ip');
-
 /**
  * @name              ipAddress
  * @namespace         sugar.node.network
@@ -18,5 +18,5 @@ const __ip = require('ip');
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 module.exports = function ipAddress() {
-  return __ip.address();
+    return __ip.address();
 };

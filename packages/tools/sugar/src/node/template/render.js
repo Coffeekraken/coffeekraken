@@ -1,3 +1,4 @@
+"use strict";
 const __sugarConfig = require('../config/sugar');
 const __getFilename = require('../fs/filename');
 const __fs = require('fs');
@@ -9,7 +10,6 @@ const __SPromise = require('../promise/SPromise');
 const __SError = require('../error/SError');
 const __STemplate = require('./STemplate');
 const __unique = require('../array/unique');
-
 /**
  * @name              render
  * @namespace         sugar.node.template
@@ -35,35 +35,30 @@ const __unique = require('../array/unique');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function render(viewPath, data = null, settings = {}) {
-  return new __SPromise(
-    async (resolve, reject, trigger, cancel) => {
-      const templateInstance = new __STemplate(viewPath, {
-        ...settings
-      });
-      let resultObj;
-      try {
-        resultObj = await templateInstance.render(data, settings);
-        resultObj.status = 200;
-        return resolve({
-          ...resultObj
+    return new __SPromise(async (resolve, reject, trigger, cancel) => {
+        const templateInstance = new __STemplate(viewPath, {
+            ...settings
         });
-      } catch (e) {
-        const errorTemplateInstance = new __STemplate('pages.501', settings);
-        resultObj = await errorTemplateInstance.render(
-          {
-            ...data,
-            error: e
-          },
-          settings
-        );
-        resultObj.status = 501;
-        return reject({
-          ...resultObj
-        });
-      }
-    },
-    {
-      id: 'templateRender'
-    }
-  );
+        let resultObj;
+        try {
+            resultObj = await templateInstance.render(data, settings);
+            resultObj.status = 200;
+            return resolve({
+                ...resultObj
+            });
+        }
+        catch (e) {
+            const errorTemplateInstance = new __STemplate('pages.501', settings);
+            resultObj = await errorTemplateInstance.render({
+                ...data,
+                error: e
+            }, settings);
+            resultObj.status = 501;
+            return reject({
+                ...resultObj
+            });
+        }
+    }, {
+        id: 'templateRender'
+    });
 };

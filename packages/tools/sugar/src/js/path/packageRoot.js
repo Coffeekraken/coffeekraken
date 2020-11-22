@@ -1,5 +1,4 @@
 import __env from '../core/env';
-
 /**
  * @name                  packageRoot
  * @namespace             sugar.js.path
@@ -21,7 +20,8 @@ import __env from '../core/env';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
  */
 export default function packageRoot() {
-  const environment = __env('node_env') || __env('environment') || __env('env');
-  if (environment !== 'development' && environment !== 'test') return '';
-  return __env('package_root') || '';
+    const environment = __env('node_env') || __env('environment') || __env('env');
+    if (environment !== 'development' && environment !== 'test')
+        return '';
+    return __env('package_root') || '';
 }

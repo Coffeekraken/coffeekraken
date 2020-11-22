@@ -1,7 +1,7 @@
+"use strict";
 const __STemplateEngineInterface = require('./interface/STemplateEngineInterface');
 const __deepMerge = require('../../object/deepMerge');
 const __sugarConfig = require('../../config/sugar');
-
 /**
  * @name          STemplateEngine
  * @namespace     sugar.node.template.engines
@@ -41,32 +41,30 @@ const __sugarConfig = require('../../config/sugar');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class STemplateEngine {
-  /**
-   * @name      _settings
-   * @type      Object
-   * @private
-   *
-   * Store the settings passed in the constructor
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _settings = {};
-
-  /**
-   * @name      constructor
-   * @type      Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(settings = {}) {
-    this._settings = __deepMerge({}, settings);
-  }
+    /**
+     * @name      constructor
+     * @type      Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(settings = {}) {
+        /**
+         * @name      _settings
+         * @type      Object
+         * @private
+         *
+         * Store the settings passed in the constructor
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this._settings = {};
+        this._settings = __deepMerge({}, settings);
+    }
 }
-
 module.exports = STemplateEngine;
 // module.exports = __STemplateEngineInterface.implements(STemplateEngine);

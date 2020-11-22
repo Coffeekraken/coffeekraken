@@ -1,5 +1,5 @@
+"use strict";
 const __SColor = require('./SColor');
-
 /**
  * @name                color
  * @namespace           sugar.node.color
@@ -17,5 +17,5 @@ const __SColor = require('./SColor');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function color(color) {
-  return new __SColor(color);
+    return new __SColor(color);
 };

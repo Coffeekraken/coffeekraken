@@ -1,6 +1,6 @@
+"use strict";
 const __fs = require('fs');
 const __deepMerge = require('../object/deepMerge');
-
 /**
  * @name            directory
  * @namespace           sugar.node.is
@@ -21,20 +21,18 @@ const __deepMerge = require('../object/deepMerge');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function isDirectory(path, settings = {}) {
-  settings = __deepMerge(
-    {
-      symlink: true
-    },
-    settings
-  );
-
-  let isMatching = __fs.existsSync(path);
-  if (!isMatching) return false;
-  if (settings.symlink && __fs.lstatSync(path).isSymbolicLink()) {
-    const realPath = __fs.realpathSync(path);
-    isMatching = isMatching && __fs.lstatSync(realPath).isDirectory();
-  } else {
-    isMatching = isMatching && __fs.lstatSync(path).isDirectory();
-  }
-  return isMatching;
+    settings = __deepMerge({
+        symlink: true
+    }, settings);
+    let isMatching = __fs.existsSync(path);
+    if (!isMatching)
+        return false;
+    if (settings.symlink && __fs.lstatSync(path).isSymbolicLink()) {
+        const realPath = __fs.realpathSync(path);
+        isMatching = isMatching && __fs.lstatSync(realPath).isDirectory();
+    }
+    else {
+        isMatching = isMatching && __fs.lstatSync(path).isDirectory();
+    }
+    return isMatching;
 };

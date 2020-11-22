@@ -1,11 +1,10 @@
+"use strict";
 const __listFolder = require('./listFolder');
 const __downloadFile = require('../file/downloadFile');
 const __downloadsFolder = require('downloads-folder');
 const __path = require('path');
 const __mkdirp = require('mkdirp');
-
 // TODO tests
-
 /**
  * @name            downloadFolder
  * @namespace           sugar.node.github
@@ -27,48 +26,39 @@ const __mkdirp = require('mkdirp');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function downloadFolder(
-  repo,
-  path,
-  destinationPath = __downloadsFolder()
-) {
-  return new Promise((resolve, reject) => {
-    const parsedDestinationPath = __path.parse(destinationPath);
-    const parsedPath = __path.parse(path);
-    if (destinationPath.slice(-1) !== '/') {
-      destinationPath = destinationPath + '/' + parsedPath.base;
-    }
-
-    // make sure the folder exist
-    __mkdirp(destinationPath, (error) => {
-      if (error) return console.error(error);
-
-      // first we list the wanted folder
-      __listFolder(repo, path)
-        .then((response) => {
-          const downloadFilesPromises = [];
-          // loop on each files in the folder
-          response.forEach((fileObj) => {
-            // check if exist a downloadUrl
-            if (!fileObj.download_url && fileObj.type === 'dir') {
-              downloadFilesPromises.push(
-                downloadFolder(repo, fileObj.path, destinationPath)
-              );
-              return;
-            }
-            // download the file
-            downloadFilesPromises.push(
-              __downloadFile(fileObj.download_url, destinationPath)
-            );
-          });
-          // waiting for all downloads to be finished
-          Promise.all(downloadFilesPromises)
-            .then((files) => {
-              resolve(files.flat(Infinity));
+module.exports = function downloadFolder(repo, path, destinationPath = __downloadsFolder()) {
+    return new Promise((resolve, reject) => {
+        const parsedDestinationPath = __path.parse(destinationPath);
+        const parsedPath = __path.parse(path);
+        if (destinationPath.slice(-1) !== '/') {
+            destinationPath = destinationPath + '/' + parsedPath.base;
+        }
+        // make sure the folder exist
+        __mkdirp(destinationPath, (error) => {
+            if (error)
+                return console.error(error);
+            // first we list the wanted folder
+            __listFolder(repo, path)
+                .then((response) => {
+                const downloadFilesPromises = [];
+                // loop on each files in the folder
+                response.forEach((fileObj) => {
+                    // check if exist a downloadUrl
+                    if (!fileObj.download_url && fileObj.type === 'dir') {
+                        downloadFilesPromises.push(downloadFolder(repo, fileObj.path, destinationPath));
+                        return;
+                    }
+                    // download the file
+                    downloadFilesPromises.push(__downloadFile(fileObj.download_url, destinationPath));
+                });
+                // waiting for all downloads to be finished
+                Promise.all(downloadFilesPromises)
+                    .then((files) => {
+                    resolve(files.flat(Infinity));
+                })
+                    .catch(reject);
             })
-            .catch(reject);
-        })
-        .catch(reject);
+                .catch(reject);
+        });
     });
-  });
 };

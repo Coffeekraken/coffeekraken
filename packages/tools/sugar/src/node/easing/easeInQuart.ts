@@ -1,0 +1,1 @@
+../../../js/easing/easeInQuart.ts

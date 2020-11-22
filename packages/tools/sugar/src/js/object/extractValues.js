@@ -24,10 +24,11 @@
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function extractValues(arrayOfObjects, keyName) {
-  const finalArray = [];
-  arrayOfObjects.forEach((object) => {
-    if (object[keyName] === undefined) return;
-    finalArray.push(object[keyName]);
-  });
-  return finalArray;
+    const finalArray = [];
+    arrayOfObjects.forEach((object) => {
+        if (object[keyName] === undefined)
+            return;
+        finalArray.push(object[keyName]);
+    });
+    return finalArray;
 }

@@ -16,5 +16,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function em2px(em, $elm = document.documentElement) {
-  return em * parseFloat(getComputedStyle($elm).fontSize || '16px');
+    return em * parseFloat(getComputedStyle($elm).fontSize || '16px');
 }

@@ -1,5 +1,4 @@
 import __toRegex from 'to-regex';
-
 /**
  * @name        dedupe
  * @namespace   sugar.js.string
@@ -21,16 +20,16 @@ import __toRegex from 'to-regex';
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function dedupe(str, statement) {
-  let reg = __toRegex(`(${statement})`, {
-    contains: true,
-    flags: 'g'
-  });
-  return str
-    .split(reg)
-    .reverse()
-    .filter(function (e, i, arr) {
-      return arr.indexOf(e, i + 1) === -1;
+    let reg = __toRegex(`(${statement})`, {
+        contains: true,
+        flags: 'g'
+    });
+    return str
+        .split(reg)
+        .reverse()
+        .filter(function (e, i, arr) {
+        return arr.indexOf(e, i + 1) === -1;
     })
-    .reverse()
-    .join('');
+        .reverse()
+        .join('');
 }

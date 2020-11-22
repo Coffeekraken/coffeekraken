@@ -1,5 +1,4 @@
 import { sprintf as _sprintf } from 'sprintf-js';
-
 /**
  * @name        sprintf
  * @namespace           sugar.js.string
@@ -22,5 +21,5 @@ import { sprintf as _sprintf } from 'sprintf-js';
  * @see    https://github.com/alexei/sprintf.js
  */
 export default function sprintf() {
-  return _sprintf.apply(this, arguments);
+    return _sprintf.apply(this, arguments);
 }

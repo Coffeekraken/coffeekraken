@@ -16,10 +16,8 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isInteger(data) {
-  return (
-    !isNaN(data) &&
-    (function (x) {
-      return (x | 0) === x;
-    })(parseFloat(data))
-  );
+    return (!isNaN(data) &&
+        (function (x) {
+            return (x | 0) === x;
+        })(parseFloat(data)));
 }

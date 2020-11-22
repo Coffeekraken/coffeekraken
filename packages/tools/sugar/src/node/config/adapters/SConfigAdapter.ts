@@ -1,0 +1,1 @@
+../../../../js/config/adapters/SConfigAdapter.ts

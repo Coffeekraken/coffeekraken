@@ -1,5 +1,6 @@
+"use strict";
+var _a;
 const __SInterface = require('../../class/SInterface');
-
 /**
  * @name                SOutputProcessInterface
  * @namespace           sugar.node.blessed
@@ -12,11 +13,12 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SOutputProcessInterface extends __SInterface {
-  static definitionObj = {
-    on: {
-      type: 'Function',
-      required: true
-    }
-  };
-};
+module.exports = (_a = class SOutputProcessInterface extends __SInterface {
+    },
+    _a.definitionObj = {
+        on: {
+            type: 'Function',
+            required: true
+        }
+    },
+    _a);

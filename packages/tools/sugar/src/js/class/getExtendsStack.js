@@ -1,5 +1,4 @@
 import __isClass from '../is/class';
-
 /**
  * @name            getExtendsStack
  * @namespace       sugar.js.class
@@ -20,25 +19,21 @@ import __isClass from '../is/class';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function getExtendsStack(cls) {
-  const stack = [];
-
-  if (!__isClass(cls)) {
-    cls = cls.constructor;
-  }
-
-  // if (cls instanceof Function) {
-  let baseClass = cls;
-
-  while (baseClass) {
-    const newBaseClass = Object.getPrototypeOf(baseClass);
-
-    if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {
-      stack.push(newBaseClass.name);
-      baseClass = newBaseClass;
-    } else {
-      break;
+    const stack = [];
+    if (!__isClass(cls)) {
+        cls = cls.constructor;
     }
-  }
-
-  return stack;
+    // if (cls instanceof Function) {
+    let baseClass = cls;
+    while (baseClass) {
+        const newBaseClass = Object.getPrototypeOf(baseClass);
+        if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {
+            stack.push(newBaseClass.name);
+            baseClass = newBaseClass;
+        }
+        else {
+            break;
+        }
+    }
+    return stack;
 }

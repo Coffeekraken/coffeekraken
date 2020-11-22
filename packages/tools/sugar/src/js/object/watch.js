@@ -1,6 +1,4 @@
 import __SWatch from './SWatch';
-import __uniqid from '../string/uniqid';
-
 /**
  * @name                      watch
  * @namespace           sugar.js.object
@@ -24,6 +22,6 @@ import __uniqid from '../string/uniqid';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function watch(target, settings = {}) {
-  const watchedObj = new __SWatch(target, settings);
-  return watchedObj;
+    const watchedObj = new __SWatch(target, settings);
+    return watchedObj;
 }

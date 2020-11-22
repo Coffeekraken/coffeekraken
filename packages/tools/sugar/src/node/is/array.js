@@ -1,5 +1,21 @@
 /**
- * @namespace           sugar.node.is
- * @src               ../_js/is/array.js
+ * @name        isArray
+ * @namespace           sugar.js.is
+ * @type      Function
+ *
+ * Check if the passed value is a js Array
+ *
+ * @param    {Mixed}    value    The value to check
+ * @return   {Boolean}   true if it's a Array, false if not
+ *
+ * @example    js
+ * import isArray from '@coffeekraken/sugar/js/is/array'
+ * if (isArray([]) {
+ *   // do something
+ * }
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/is/array');
+export default function isArray(value) {
+    return value && typeof value === 'object' && value.constructor === Array;
+}

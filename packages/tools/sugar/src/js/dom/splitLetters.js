@@ -1,11 +1,9 @@
 import _map from 'lodash/map';
-
 function _decodeHtml(html) {
-  var txt = document.createElement('textarea');
-  txt.innerHTML = html;
-  return txt.value;
+    var txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
 }
-
 /**
  * @name      splitLetters
  * @namespace           sugar.js.dom
@@ -65,45 +63,35 @@ function _decodeHtml(html) {
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function splitLetters(
-  elm,
-  tag = 'span',
-  tagClass = 'split-letters'
-) {
-  let string = elm._splitLettersOriginalString;
-  if (!string) {
-    string = elm.innerHTML;
-    elm._splitLettersOriginalString = string;
-  }
-
-  elm.classList.add(tagClass);
-
-  // wrap each characters inside two spans
-  let words = string.match(
-    /<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g
-  );
-
-  // split words
-  words = _map(words, (word) => {
-    return `<${tag} style="white-space:nowrap">${word}</${tag}>`;
-  }).join(' ');
-
-  let letters = _decodeHtml(words).split('');
-
-  let hasTagOpened = false;
-  letters = _map(letters, (letter) => {
-    // check if a tag has started
-    if (letter === '<') hasTagOpened = true;
-    else if (letter === '>') {
-      hasTagOpened = false;
-      return letter;
+export default function splitLetters(elm, tag = 'span', tagClass = 'split-letters') {
+    let string = elm._splitLettersOriginalString;
+    if (!string) {
+        string = elm.innerHTML;
+        elm._splitLettersOriginalString = string;
     }
-    if (hasTagOpened) return letter;
-    if (letter === ' ') letter = '&nbsp;';
-    return `<${tag} class="${tagClass}__letter-container"><${tag} class="${tagClass}__letter">${letter}</${tag}></${tag}>`;
-  });
-
-  elm.innerHTML = letters.join('');
-
-  return elm;
+    elm.classList.add(tagClass);
+    // wrap each characters inside two spans
+    let words = string.match(/<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g);
+    // split words
+    words = _map(words, (word) => {
+        return `<${tag} style="white-space:nowrap">${word}</${tag}>`;
+    }).join(' ');
+    let letters = _decodeHtml(words).split('');
+    let hasTagOpened = false;
+    letters = _map(letters, (letter) => {
+        // check if a tag has started
+        if (letter === '<')
+            hasTagOpened = true;
+        else if (letter === '>') {
+            hasTagOpened = false;
+            return letter;
+        }
+        if (hasTagOpened)
+            return letter;
+        if (letter === ' ')
+            letter = '&nbsp;';
+        return `<${tag} class="${tagClass}__letter-container"><${tag} class="${tagClass}__letter">${letter}</${tag}></${tag}>`;
+    });
+    elm.innerHTML = letters.join('');
+    return elm;
 }

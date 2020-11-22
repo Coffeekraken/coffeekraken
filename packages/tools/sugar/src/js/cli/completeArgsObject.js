@@ -2,7 +2,6 @@ import __deepize from '../object/deepize';
 import __deepMerge from '../object/deepMerge';
 import __toString from '../string/toString';
 import __validateObject from '../validation/object/validateObject';
-
 /**
  * @name                completeArgsObject
  * @namespace          sugar.js.cli
@@ -24,40 +23,26 @@ import __validateObject from '../validation/object/validateObject';
  *
  */
 export default function completeArgsObject(argsObj, settings = {}) {
-  argsObj = Object.assign({}, argsObj);
-
-  settings = __deepMerge(
-    {
-      definitionObj: {},
-      throw: true
-    },
-    settings
-  );
-
-  // loop on all the arguments
-  Object.keys(settings.definitionObj).forEach((argString) => {
-    const argDefinitionObj = settings.definitionObj[argString];
-
-    // check if we have an argument passed in the properties
-    if (
-      argsObj[argString] === undefined &&
-      argDefinitionObj.default !== undefined
-    ) {
-      argsObj[argString] = argDefinitionObj.default;
-    }
-  });
-
-  // make sure all is ok
-  const argsValidationResult = __validateObject(
-    argsObj,
-    settings.definitionObj,
-    settings
-  );
-
-  if (argsValidationResult !== true && settings.throw)
-    throw new Error(__toString(argsValidationResult));
-  else if (argsValidationResult !== true) return argsValidationResult;
-
-  // return the argsObj
-  return __deepize(argsObj);
+    argsObj = Object.assign({}, argsObj);
+    settings = __deepMerge({
+        definitionObj: {},
+        throw: true
+    }, settings);
+    // loop on all the arguments
+    Object.keys(settings.definitionObj).forEach((argString) => {
+        const argDefinitionObj = settings.definitionObj[argString];
+        // check if we have an argument passed in the properties
+        if (argsObj[argString] === undefined &&
+            argDefinitionObj.default !== undefined) {
+            argsObj[argString] = argDefinitionObj.default;
+        }
+    });
+    // make sure all is ok
+    const argsValidationResult = __validateObject(argsObj, settings.definitionObj, settings);
+    if (argsValidationResult !== true && settings.throw)
+        throw new Error(__toString(argsValidationResult));
+    else if (argsValidationResult !== true)
+        return argsValidationResult;
+    // return the argsObj
+    return __deepize(argsObj);
 }

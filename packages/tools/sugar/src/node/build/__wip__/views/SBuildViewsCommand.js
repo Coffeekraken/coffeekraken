@@ -1,8 +1,8 @@
+"use strict";
 const __SCommand = require('../../terminal/SCommand');
 const __deepMerge = require('../../object/deepMerge');
 const __SBuildViewsCli = require('./SBuildViewsCli');
 const __sugarConfig = require('../../config/sugar');
-
 /**
  * @name              SBuildViewsCommand
  * @namespace           sugar.node.build.views
@@ -24,32 +24,25 @@ const __sugarConfig = require('../../config/sugar');
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 module.exports = class SBuildViewsCommand extends __SCommand {
-  /**
-   * @name          constructor
-   * @type          Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  constructor(argsObj = {}, commandSettings = {}) {
-    // init command
-    super(
-      'build.views',
-      new __SBuildViewsCli(),
-      __deepMerge(
-        {
-          argsObj,
-          title: 'Build Views',
-          key: 'v',
-          concurrent: false,
-          namespace: 'build.views',
-          watch: __sugarConfig('build.views.watch')
-        },
-        commandSettings
-      )
-    );
-  }
+    /**
+     * @name          constructor
+     * @type          Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    constructor(argsObj = {}, commandSettings = {}) {
+        // init command
+        super('build.views', new __SBuildViewsCli(), __deepMerge({
+            argsObj,
+            title: 'Build Views',
+            key: 'v',
+            concurrent: false,
+            namespace: 'build.views',
+            watch: __sugarConfig('build.views.watch')
+        }, commandSettings));
+    }
 };

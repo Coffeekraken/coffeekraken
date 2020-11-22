@@ -1,6 +1,5 @@
 import __deepMerge from '../object/deepMerge';
 import __convert from './convert';
-
 /**
  * @name                SDuration
  * @namespace           sugar.js.time
@@ -25,97 +24,87 @@ import __convert from './convert';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export default class SDuration {
-  /**
-   * @name            _settings
-   * @type            Object
-   * @private
-   *
-   * Store the settings
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  _settings = {};
-
-  /**
-   * @name            startTime
-   * @type            Number
-   * @private
-   *
-   * Store the start timestamp
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  startTime = null;
-
-  /**
-   * @name            endTime
-   * @type            Number
-   * @private
-   *
-   * Store the end timestamp
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  endTime = null;
-
-  /**
-   * @name            constructor
-   * @type            Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  constructor(settings = {}) {
-    this._settings = __deepMerge(
-      {
-        format: 's',
-        suffix: true
-      },
-      settings
-    );
-    this.start();
-  }
-
-  /**
-   * @name      start
-   * @type      Function
-   *
-   * Start the duration process either with the current timestamp, or with a passed timestamp you prefer
-   *
-   * @param         {Number}            [startTime=null]            Specify the timestamp you want
-   *
-   * @since         2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  start(startTime = null) {
-    this.startTime = startTime || Date.now();
-  }
-
-  /**
-   * @name      end
-   * @type      Function
-   *
-   * Stop the duration counter and return the result in the passed format or in the format setted in the settings
-   *
-   * @param       {Object}            [settings={}]           An object of settings to use
-   * @return        {Mixed}                         Return the duration depending on your settings
-   *
-   * @since         2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  end(settings = {}) {
-    settings = __deepMerge(this._settings, settings);
-    this.endTime = Date.now();
-
-    let durationMs = this.endTime - this.startTime;
-    let durationConverted = __convert(durationMs, settings.format);
-
-    return settings.suffix ? durationConverted : parseFloat(durationConverted);
-  }
+    /**
+     * @name            constructor
+     * @type            Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    constructor(settings = {}) {
+        /**
+         * @name            _settings
+         * @type            Object
+         * @private
+         *
+         * Store the settings
+         *
+         * @since       2.0.0
+         * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+         */
+        this._settings = {};
+        /**
+         * @name            startTime
+         * @type            Number
+         * @private
+         *
+         * Store the start timestamp
+         *
+         * @since       2.0.0
+         * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+         */
+        this.startTime = null;
+        /**
+         * @name            endTime
+         * @type            Number
+         * @private
+         *
+         * Store the end timestamp
+         *
+         * @since       2.0.0
+         * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+         */
+        this.endTime = null;
+        this._settings = __deepMerge({
+            format: 's',
+            suffix: true
+        }, settings);
+        this.start();
+    }
+    /**
+     * @name      start
+     * @type      Function
+     *
+     * Start the duration process either with the current timestamp, or with a passed timestamp you prefer
+     *
+     * @param         {Number}            [startTime=null]            Specify the timestamp you want
+     *
+     * @since         2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    start(startTime = null) {
+        this.startTime = startTime || Date.now();
+    }
+    /**
+     * @name      end
+     * @type      Function
+     *
+     * Stop the duration counter and return the result in the passed format or in the format setted in the settings
+     *
+     * @param       {Object}            [settings={}]           An object of settings to use
+     * @return        {Mixed}                         Return the duration depending on your settings
+     *
+     * @since         2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    end(settings = {}) {
+        settings = __deepMerge(this._settings, settings);
+        this.endTime = Date.now();
+        let durationMs = this.endTime - this.startTime;
+        let durationConverted = __convert(durationMs, settings.format);
+        return settings.suffix ? durationConverted : parseFloat(durationConverted);
+    }
 }

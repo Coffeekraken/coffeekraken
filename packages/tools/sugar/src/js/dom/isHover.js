@@ -1,5 +1,4 @@
 // TODO tests
-
 /**
  * @name      isHover
  * @namespace           sugar.js.dom
@@ -19,5 +18,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isHover($elm) {
-  return $elm.parentElement.querySelector(':hover') === $elm;
+    return $elm.parentElement.querySelector(':hover') === $elm;
 }

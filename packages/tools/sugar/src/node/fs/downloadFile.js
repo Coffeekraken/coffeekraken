@@ -1,9 +1,8 @@
+"use strict";
 const __downloadsFolder = require('downloads-folder');
 const __path = require('path');
 const __download = require('download-file');
-
 // TODO tests
-
 /**
  * @name              downloadFile
  * @namespace           sugar.node.fs
@@ -24,40 +23,34 @@ const __download = require('download-file');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function (
-  downloadUrl,
-  destinationPath = __downloadsFolder(),
-  callback = null
-) {
-  return new Promise((resolve, reject) => {
-    let fileStreamDest;
-    let parsedDestinationPath = __path.parse(destinationPath);
-    let parsedDownloadUrl = __path.parse(downloadUrl);
-
-    if (parsedDestinationPath.ext) {
-      fileStreamDest = destination;
-    } else if (destinationPath.slice(-1) === '/' && parsedDownloadUrl.base) {
-      fileStreamDest = destinationPath + parsedDownloadUrl.base;
-    } else if (parsedDownloadUrl.base) {
-      fileStreamDest = `${destinationPath}/${parsedDownloadUrl.base}`;
-    }
-
-    // download the file
-    __download(
-      downloadUrl,
-      {
-        directory: __path.parse(fileStreamDest).dir,
-        filename: __path.parse(fileStreamDest).base
-      },
-      function (err) {
-        if (err) {
-          reject(err);
-          if (callback) return callback(err);
-          return;
+module.exports = function (downloadUrl, destinationPath = __downloadsFolder(), callback = null) {
+    return new Promise((resolve, reject) => {
+        let fileStreamDest;
+        let parsedDestinationPath = __path.parse(destinationPath);
+        let parsedDownloadUrl = __path.parse(downloadUrl);
+        if (parsedDestinationPath.ext) {
+            fileStreamDest = destination;
         }
-        resolve(fileStreamDest);
-        if (callback) return callback(fileStreamDest);
-      }
-    );
-  });
+        else if (destinationPath.slice(-1) === '/' && parsedDownloadUrl.base) {
+            fileStreamDest = destinationPath + parsedDownloadUrl.base;
+        }
+        else if (parsedDownloadUrl.base) {
+            fileStreamDest = `${destinationPath}/${parsedDownloadUrl.base}`;
+        }
+        // download the file
+        __download(downloadUrl, {
+            directory: __path.parse(fileStreamDest).dir,
+            filename: __path.parse(fileStreamDest).base
+        }, function (err) {
+            if (err) {
+                reject(err);
+                if (callback)
+                    return callback(err);
+                return;
+            }
+            resolve(fileStreamDest);
+            if (callback)
+                return callback(fileStreamDest);
+        });
+    });
 };

@@ -1,5 +1,4 @@
 // TODO tests
-
 /**
  * @name                            linux
  * @namespace           sugar.js.is
@@ -16,8 +15,8 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function linux() {
-  if (process && process.platform) {
-    return process.platform === 'linux';
-  }
-  return navigator.platform.toUpperCase().indexOf('LINUX') >= 0;
+    if (process && process.platform) {
+        return process.platform === 'linux';
+    }
+    return navigator.platform.toUpperCase().indexOf('LINUX') >= 0;
 }

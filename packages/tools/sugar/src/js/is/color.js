@@ -18,7 +18,7 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isColor(value) {
-  var ele = document.createElement('div');
-  ele.style.color = value;
-  return ele.style.color.split(/\s+/).join('').toLowerCase() !== '';
+    var ele = document.createElement('div');
+    ele.style.color = value;
+    return ele.style.color.split(/\s+/).join('').toLowerCase() !== '';
 }

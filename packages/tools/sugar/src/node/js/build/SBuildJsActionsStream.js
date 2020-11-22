@@ -1,3 +1,4 @@
+"use strict";
 const __SActionsStream = require('../../stream/SActionsStream');
 const __deepMerge = require('../../object/deepMerge');
 const __getFilename = require('../../fs/filename');
@@ -5,7 +6,6 @@ const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesRes
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 const __SCompileJsStreamAction = require('./actions/SCompileJsStreamAction');
 const __path = require('path');
-
 /**
  * @name            SBuildJsActionsStream
  * @namespace           sugar.node.build.js
@@ -32,71 +32,59 @@ const __path = require('path');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildJsActionsStream extends __SActionsStream {
-  /**
-   * @name        constructor
-   * @type        Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(settings = {}) {
-    // init actions stream
-    super(
-      {
-        filesResolver: __SFsFilesResolverStreamAction,
-        compile: __SCompileJsStreamAction,
-        fsOutput: __SFsOutputStreamAction
-      },
-      __deepMerge(
-        {
-          id: 'SBuildJsActionsStream',
-          name: 'Build JS Actions Stream',
-          before: (streamObj) => {
-            streamObj.docMapInput = streamObj.input;
-            return streamObj;
-          },
-          afterActions: {
-            filesResolver: (streamObj) => {
-              if (streamObj.input) {
-                streamObj.filename = __getFilename(streamObj.input);
-              }
-              return streamObj;
+    /**
+     * @name        constructor
+     * @type        Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(settings = {}) {
+        // init actions stream
+        super({
+            filesResolver: __SFsFilesResolverStreamAction,
+            compile: __SCompileJsStreamAction,
+            fsOutput: __SFsOutputStreamAction
+        }, __deepMerge({
+            id: 'SBuildJsActionsStream',
+            name: 'Build JS Actions Stream',
+            before: (streamObj) => {
+                streamObj.docMapInput = streamObj.input;
+                return streamObj;
             },
-            frontspecRead: (streamObj) => {
-              return streamObj;
+            afterActions: {
+                filesResolver: (streamObj) => {
+                    if (streamObj.input) {
+                        streamObj.filename = __getFilename(streamObj.input);
+                    }
+                    return streamObj;
+                },
+                frontspecRead: (streamObj) => {
+                    return streamObj;
+                }
+            },
+            beforeActions: {
+                fsOutput: (streamObj) => {
+                    return this._ensureOutputStack(streamObj);
+                }
             }
-          },
-          beforeActions: {
-            fsOutput: (streamObj) => {
-              return this._ensureOutputStack(streamObj);
-            }
-          }
-        },
-        settings
-      )
-    );
-  }
-
-  _ensureOutputStack(streamObj) {
-    if (!streamObj.outputStack) streamObj.outputStack = {};
-    if (streamObj.outputDir && streamObj.filename) {
-      streamObj.outputStack.data = __path.resolve(
-        streamObj.outputDir,
-        streamObj.prod
-          ? streamObj.inputObj.relPath.replace('.js', '.prod.js')
-          : streamObj.inputObj.relPath.replace('.js', '.js')
-      );
+        }, settings));
     }
-    if (streamObj.outputDir && streamObj.filename && streamObj.sourcemapData) {
-      streamObj.outputStack.sourcemapData = __path.resolve(
-        streamObj.outputDir,
-        streamObj.prod
-          ? streamObj.inputObj.relPath.replace('.js', '.prod.js.map')
-          : streamObj.inputObj.relPath.replace('.js', '.js.map')
-      );
+    _ensureOutputStack(streamObj) {
+        if (!streamObj.outputStack)
+            streamObj.outputStack = {};
+        if (streamObj.outputDir && streamObj.filename) {
+            streamObj.outputStack.data = __path.resolve(streamObj.outputDir, streamObj.prod
+                ? streamObj.inputObj.relPath.replace('.js', '.prod.js')
+                : streamObj.inputObj.relPath.replace('.js', '.js'));
+        }
+        if (streamObj.outputDir && streamObj.filename && streamObj.sourcemapData) {
+            streamObj.outputStack.sourcemapData = __path.resolve(streamObj.outputDir, streamObj.prod
+                ? streamObj.inputObj.relPath.replace('.js', '.prod.js.map')
+                : streamObj.inputObj.relPath.replace('.js', '.js.map'));
+        }
+        return streamObj;
     }
-    return streamObj;
-  }
 };

@@ -1,7 +1,7 @@
+"use strict";
 const __deepMerge = require('../object/deepMerge');
 const __findImportStatements = require('./findImportStatements');
 const __dedupe = require('../string/dedupe');
-
 /**
  * @name            ensureNoDuplicateImportStatements
  * @namespace       sugar.node.scss
@@ -29,20 +29,14 @@ const __dedupe = require('../string/dedupe');
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function ensureNoDuplicateImportStatements(
-  string,
-  settings = {}
-) {
-  settings = __deepMerge(
-    {
-      use: true,
-      import: true
-    },
-    settings
-  );
-  const statementsArray = __findImportStatements(string, settings);
-  statementsArray.forEach((statementObj) => {
-    string = __dedupe(string, statementObj.raw);
-  });
-  return string;
+module.exports = function ensureNoDuplicateImportStatements(string, settings = {}) {
+    settings = __deepMerge({
+        use: true,
+        import: true
+    }, settings);
+    const statementsArray = __findImportStatements(string, settings);
+    statementsArray.forEach((statementObj) => {
+        string = __dedupe(string, statementObj.raw);
+    });
+    return string;
 };

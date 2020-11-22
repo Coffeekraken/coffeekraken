@@ -1,5 +1,29 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const lodash_clone_1 = require("lodash.clone");
+const lodash_clonedeep_1 = require("lodash.clonedeep");
 /**
- * @namespace           sugar.node.object
- * @src             ../_js/object/clone.js
+ * @name                clone
+ * @type                Function
+ *
+ * This function allows you to clone an object either at 1 level, or deeply.
+ *
+ * @param       {Object}        object        The object to copy
+ * @param       {Boolean}       [deep=false]  Specify if you want to clone the object deeply
+ *
+ * @example       js
+ * import clone from '@coffeekraken/sugar/js/object/clone';
+ * clone({
+ *    hello: 'world'
+ * });
+ *
+ * @see       https://www.npmjs.com/package/lodash
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/object/clone');
+function clone(object, deep = false) {
+    if (deep) {
+        return lodash_clonedeep_1.default(object);
+    }
+    return lodash_clone_1.default(object);
+}
+exports.default = clone;

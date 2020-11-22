@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isFirefox(ua = navigator.userAgent) {
-  return ua.indexOf('Firefox') > -1;
+    return ua.indexOf('Firefox') > -1;
 }

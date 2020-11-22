@@ -1,9 +1,4 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const SDescriptor_1 = __importDefault(require("../SDescriptor"));
+import SDescriptor from '../SDescriptor';
 /**
  * @name              SObjectDescriptor
  * @namespace           sugar.js.descriptor.object
@@ -38,6 +33,6 @@ const SDescriptor_1 = __importDefault(require("../SDescriptor"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
  */
-const Cls = class SObjectDescriptor extends SDescriptor_1.default {
+const Cls = class SObjectDescriptor extends SDescriptor {
 };
-exports.default = Cls;
+export default Cls;

@@ -1,9 +1,9 @@
+"use strict";
 const __deepMerge = require('../object/deepMerge');
 const __blessed = require('blessed');
 const __parseHtml = require('./parseHtml');
 const __splitEvery = require('../string/splitEvery');
 const __countLine = require('../string/countLine');
-
 /**
  * @name                    SHeader
  * @namespace           sugar.node.terminal
@@ -24,69 +24,60 @@ const __countLine = require('../string/countLine');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SHeader extends __blessed.box {
-  /**
-   * @name              _title
-   * @type              String
-   * @private
-   *
-   * Store the header title
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _title = null;
-
-  /**
-   * @name              _settings
-   * @type              Object
-   * @private
-   *
-   * Store the header settings
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _settings = {};
-
-  /**
-   * @name              constructor
-   * @type              Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(title, settings = {}) {
-    // save the settings
-    const _settings = __deepMerge(
-      {
-        blessed: {
-          tags: true,
-          padding: {
-            top: 1,
-            bottom: 0,
-            left: 2,
-            right: 1
-          }
-        }
-      },
-      settings
-    );
-
-    // extend from blessed.box
-    super(_settings.blessed);
-    // save settings
-    this._settings = _settings;
-
-    // save the title
-    this._title = title;
-
-    // set the size
-    this.height = 3;
-
-    // set the header content
-    this.setContent(__parseHtml(title));
-
-    // render the screen
-    if (this.screen) this.screen.render();
-  }
+    /**
+     * @name              constructor
+     * @type              Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(title, settings = {}) {
+        // save the settings
+        const _settings = __deepMerge({
+            blessed: {
+                tags: true,
+                padding: {
+                    top: 1,
+                    bottom: 0,
+                    left: 2,
+                    right: 1
+                }
+            }
+        }, settings);
+        // extend from blessed.box
+        super(_settings.blessed);
+        /**
+         * @name              _title
+         * @type              String
+         * @private
+         *
+         * Store the header title
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this._title = null;
+        /**
+         * @name              _settings
+         * @type              Object
+         * @private
+         *
+         * Store the header settings
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this._settings = {};
+        // save settings
+        this._settings = _settings;
+        // save the title
+        this._title = title;
+        // set the size
+        this.height = 3;
+        // set the header content
+        this.setContent(__parseHtml(title));
+        // render the screen
+        if (this.screen)
+            this.screen.render();
+    }
 };

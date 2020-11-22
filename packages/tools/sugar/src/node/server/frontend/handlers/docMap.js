@@ -1,6 +1,6 @@
+"use strict";
 const __SPromise = require('../../../promise/SPromise');
 const __SDocMap = require('../../../doc/SDocMap');
-
 /**
  * @name                docMap
  * @namespace           sugar.node.server.frontend.handlers
@@ -16,9 +16,9 @@ const __SDocMap = require('../../../doc/SDocMap');
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = async function docMap(req, res, settings = {}) {
-  const docMap = new __SDocMap();
-  const docMapJson = await docMap.read();
-  res.status(200);
-  res.type('application/json');
-  res.send(docMapJson);
+    const docMap = new __SDocMap();
+    const docMapJson = await docMap.read();
+    res.status(200);
+    res.type('application/json');
+    res.send(docMapJson);
 };

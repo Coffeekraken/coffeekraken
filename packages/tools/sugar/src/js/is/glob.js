@@ -1,5 +1,4 @@
 import __isGlob from 'is-glob';
-
 /**
  * @name                                      isGlob
  * @namespace           sugar.js.is
@@ -19,5 +18,5 @@ import __isGlob from 'is-glob';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default (string) => {
-  return __isGlob(string);
+    return __isGlob(string);
 };

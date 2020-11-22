@@ -16,5 +16,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function px2em(px, $elm = document.documentElement) {
-  return px / parseFloat(getComputedStyle($elm).fontSize || '16px');
+    return px / parseFloat(getComputedStyle($elm).fontSize || '16px');
 }

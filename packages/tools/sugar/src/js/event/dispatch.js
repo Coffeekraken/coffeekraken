@@ -1,5 +1,4 @@
 import __SPromise from '../promise/SPromise';
-
 /**
  * @name        trigger
  * @namespace           sugar.js.event
@@ -19,11 +18,11 @@ import __SPromise from '../promise/SPromise';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function trigger(name, value) {
-  // check that the global SPromise exists
-  if (!window._sugarEventSPromise)
-    window._sugarEventSPromise = new __SPromise({
-      id: 'sugarEventSPromise'
-    });
-  // trigger to the event
-  window._sugarEventSPromise.trigger(name, value);
+    // check that the global SPromise exists
+    if (!window._sugarEventSPromise)
+        window._sugarEventSPromise = new __SPromise({
+            id: 'sugarEventSPromise'
+        });
+    // trigger to the event
+    window._sugarEventSPromise.trigger(name, value);
 }

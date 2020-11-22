@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @name            isPortFree
  * @namespace       sugar.node.http
@@ -18,15 +19,15 @@
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 module.exports = function isPortFree(port) {
-  return new Promise((resolve) => {
-    const server = require('http')
-      .createServer()
-      .listen(port, () => {
-        server.close();
-        resolve(true);
-      })
-      .on('error', () => {
-        resolve(false);
-      });
-  });
+    return new Promise((resolve) => {
+        const server = require('http')
+            .createServer()
+            .listen(port, () => {
+            server.close();
+            resolve(true);
+        })
+            .on('error', () => {
+            resolve(false);
+        });
+    });
 };

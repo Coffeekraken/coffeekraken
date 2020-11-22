@@ -1,5 +1,5 @@
+"use strict";
 const __SPromise = require('../promise/SPromise');
-
 /**
  * @name        dispatch
  * @namespace           sugar.node.event
@@ -19,11 +19,11 @@ const __SPromise = require('../promise/SPromise');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function dispatch(name, value) {
-  // check that the global SPromise exists
-  if (!global._sugarEventSPromise)
-    global._sugarEventSPromise = new __SPromise({
-      id: 'sugarEventSPromise'
-    });
-  // dispatch to the event
-  global._sugarEventSPromise.trigger(name, value);
+    // check that the global SPromise exists
+    if (!global._sugarEventSPromise)
+        global._sugarEventSPromise = new __SPromise({
+            id: 'sugarEventSPromise'
+        });
+    // dispatch to the event
+    global._sugarEventSPromise.trigger(name, value);
 };

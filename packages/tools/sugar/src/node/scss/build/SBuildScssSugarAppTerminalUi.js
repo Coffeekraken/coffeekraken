@@ -1,5 +1,5 @@
+"use strict";
 const __SSugarAppModuleTerminalUi = require('../../app/sugar/SSugarAppModuleTerminalUi');
-
 /**
  * @name            SBuildScssSugarAppTerminalUi
  * @namespace       sugar.node.build.scss
@@ -14,17 +14,17 @@ const __SSugarAppModuleTerminalUi = require('../../app/sugar/SSugarAppModuleTerm
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildScssSugarAppTerminalUi extends __SSugarAppModuleTerminalUi {
-  /**
-   * @name            constructor
-   * @type            Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since           2.0.0
-   * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(sources, settings = {}) {
-    super(sources, settings);
-  }
+    /**
+     * @name            constructor
+     * @type            Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since           2.0.0
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(sources, settings = {}) {
+        super(sources, settings);
+    }
 };

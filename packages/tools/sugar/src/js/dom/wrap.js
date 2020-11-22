@@ -26,15 +26,16 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function wrap($elm, $wrapper) {
-  if (typeof $wrapper === 'string') {
-    $wrapper = document.createElement($wrapper);
-  }
-  const $parent = $elm.parentNode;
-  const $sibling = $elm.nextSibling;
-  if ($sibling) {
-    $parent.insertBefore($wrapper, $sibling);
-  } else {
-    $parent.appendChild($wrapper);
-  }
-  return $wrapper.appendChild($elm);
+    if (typeof $wrapper === 'string') {
+        $wrapper = document.createElement($wrapper);
+    }
+    const $parent = $elm.parentNode;
+    const $sibling = $elm.nextSibling;
+    if ($sibling) {
+        $parent.insertBefore($wrapper, $sibling);
+    }
+    else {
+        $parent.appendChild($wrapper);
+    }
+    return $wrapper.appendChild($elm);
 }

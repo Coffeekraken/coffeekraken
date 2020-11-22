@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @name        getAuthToken
  * @namespace           sugar.node.github
@@ -14,5 +15,5 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function getAuthToken() {
-  return global.githubAuthToken || false;
+    return global.githubAuthToken || false;
 };

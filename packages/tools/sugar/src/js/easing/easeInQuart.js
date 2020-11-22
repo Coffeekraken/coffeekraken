@@ -11,5 +11,5 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function (t) {
-  return t * t * t * t;
+    return t * t * t * t;
 }

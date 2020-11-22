@@ -1,5 +1,5 @@
+"use strict";
 const __isPath = require('./isPath');
-
 /**
  * @name                folderPath
  * @namespace           sugar.node.fs
@@ -21,12 +21,13 @@ const __isPath = require('./isPath');
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function folderPath(path, checkExistence = false) {
-  if (checkExistence) {
-    if (!__isPath(path, true)) return false;
-  }
-  const parts = path.split('/');
-  if (parts.length <= 1) {
-    return '';
-  }
-  return parts.slice(0, -1).join('/');
+    if (checkExistence) {
+        if (!__isPath(path, true))
+            return false;
+    }
+    const parts = path.split('/');
+    if (parts.length <= 1) {
+        return '';
+    }
+    return parts.slice(0, -1).join('/');
 };

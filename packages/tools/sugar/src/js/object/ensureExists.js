@@ -1,6 +1,5 @@
 import __get from './get';
 import __set from './set';
-
 /**
  * @name                        ensureExists
  * @namespace           sugar.js.object
@@ -21,8 +20,8 @@ import __set from './set';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default (obj, path, value = {}) => {
-  const v = __get(obj, path);
-  if (v === undefined) {
-    __set(obj, path, value);
-  }
+    const v = __get(obj, path);
+    if (v === undefined) {
+        __set(obj, path, value);
+    }
 };

@@ -1,5 +1,147 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepProxy_1 = require("./deepProxy");
+const deepMerge_1 = require("../object/deepMerge");
+const SPromise_1 = require("../promise/SPromise");
 /**
- * @namespace           sugar.node.object
- * @src             ../_js/object/SWatch.js
+ * @name 		            SWatch
+ * @namespace           sugar.js.object
+ * @type                Class
+ *
+ * This class allows you to easily monitor some object properties and get the new and old value of it
+ *
+ * @param       {Object}      object        The object to watch
+ * @param       {Object}      [settings={}]       An object of settings to configure your watch process
+ * - deep (true) {Boolean}: Specify if you want to watch the object deeply or just the first level
+ *
+ * @example 	js
+ * // create the watcher instance
+ * const watchedObj = new SWatch({
+ * 		title : 'Hello World'
+ * });
+ *
+ * // watch the object
+ * watchedObj.on('title:set', watchResult => {
+ *  	// do something when the title changes
+ * });
+ *
+ * // update the title
+ * watchedObj.title = 'Hello Universe';
+ *
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/object/SWatch');
+class SWatch {
+    /**
+     * @name                      constructor
+     * @type                      Function
+     *
+     * Constructor
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(object, settings = {}) {
+        /**
+         * @name                    _watchStack
+         * @type                    Object
+         * @private
+         *
+         * Watch stack
+         *
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this._watchStack = {};
+        /**
+         * @name            _settings
+         * @type            Object
+         * @private
+         *
+         * Store the settings object to configure your watch instance
+         *
+         * @since         2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this._settings = {};
+        // check if the passed object is already an SWatch instance
+        if (object.__$SWatch)
+            return object;
+        this._settings = deepMerge_1.default({
+            deep: true
+        }, settings);
+        this._promise = new SPromise_1.default({
+            id: 'SWatch'
+        });
+        this._proxiedObject = deepProxy_1.default(object, (obj) => {
+            let path = obj.path;
+            let value = obj.value;
+            let oldValue = obj.oldValue;
+            if (path.slice(0, 1) === '.')
+                path = path.slice(1);
+            // build the object to pass to the handler
+            const watchResult = {
+                object: this._proxiedObject,
+                path,
+                action: obj.action,
+                oldValue,
+                value
+            };
+            if (watchResult.action === 'get' &&
+                (path === 'on' || path === 'unwatch'))
+                return;
+            // trigger event through promise
+            setTimeout(() => {
+                // this._promise.trigger(`${path}`, watchResult);
+                this._promise.trigger(`${path}:${watchResult.action}`, watchResult);
+            });
+        }, {
+            deep: this._settings.deep
+        });
+        const onPropertyObj = {
+            writable: true,
+            configurable: false,
+            enumerable: false,
+            value: this._promise.on.bind(this._promise)
+        };
+        if (this._proxiedObject.on !== undefined) {
+            Object.defineProperties(this._proxiedObject, {
+                $on: onPropertyObj
+            });
+        }
+        else {
+            Object.defineProperties(this._proxiedObject, {
+                on: onPropertyObj
+            });
+        }
+        const unwatchPropertyObj = {
+            writable: true,
+            configurable: false,
+            enumerable: false,
+            value: this.unwatch.bind(this)
+        };
+        if (this._proxiedObject.unwatch !== undefined) {
+            Object.defineProperties(this._proxiedObject, {
+                $unwatch: unwatchPropertyObj
+            });
+        }
+        else {
+            Object.defineProperties(this._proxiedObject, {
+                unwatch: unwatchPropertyObj
+            });
+        }
+        // set a property that is usefull to check if the object
+        // is a SWatch watched one...
+        Object.defineProperty(this._proxiedObject, '__$SWatch', {
+            writable: false,
+            configurable: false,
+            enumerable: false,
+            value: true
+        });
+        return this._proxiedObject;
+    }
+    unwatch() {
+        // cancel the promise
+        this._promise.cancel();
+        // revoke proxy on the proxied object
+        return this._proxiedObject.revoke();
+    }
+}
+exports.default = SWatch;

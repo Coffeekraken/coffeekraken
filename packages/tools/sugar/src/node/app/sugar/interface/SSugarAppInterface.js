@@ -1,6 +1,6 @@
+"use strict";
 const __SInterface = require('../../../class/SInterface');
 const __sugarConfig = require('../../../config/sugar');
-
 /**
  * @name                SSugarAppInterface
  * @namespace           sugar.node.ui.sugar.interface
@@ -14,21 +14,17 @@ const __sugarConfig = require('../../../config/sugar');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SSugarAppInterface extends __SInterface {
-  static definitionObj = {};
 }
-
+SSugarAppInterface.definitionObj = {};
 const modules = __sugarConfig('sugar-app.modules');
 Object.keys(modules).forEach((moduleId) => {
-  const moduleObj = modules[moduleId];
-  const interfacePath = moduleObj.interface;
-  if (interfacePath) {
-    const ModuleInterface = require(interfacePath);
-    Object.keys(ModuleInterface.definitionObj).forEach((argName) => {
-      SSugarAppInterface.definitionObj[
-        `modules.${moduleId}.${argName}`
-      ] = Object.assign({}, ModuleInterface.definitionObj[argName]);
-    });
-  }
+    const moduleObj = modules[moduleId];
+    const interfacePath = moduleObj.interface;
+    if (interfacePath) {
+        const ModuleInterface = require(interfacePath);
+        Object.keys(ModuleInterface.definitionObj).forEach((argName) => {
+            SSugarAppInterface.definitionObj[`modules.${moduleId}.${argName}`] = Object.assign({}, ModuleInterface.definitionObj[argName]);
+        });
+    }
 });
-
 module.exports = SSugarAppInterface;

@@ -1,9 +1,4 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const SDescriptor_1 = __importDefault(require("../SDescriptor"));
+import SDescriptor from '../SDescriptor';
 const ruleObj = {
     name: 'Required',
     id: 'required',
@@ -23,5 +18,5 @@ const ruleObj = {
     }
 };
 // register the new rule
-SDescriptor_1.default.registerRule(ruleObj);
-exports.default = ruleObj;
+SDescriptor.registerRule(ruleObj);
+export default ruleObj;

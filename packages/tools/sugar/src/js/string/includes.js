@@ -17,13 +17,15 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function includes(string, values) {
-  if (!Array.isArray(values)) values = values.split(',').map((t) => t.trim());
-  const valuesThatExists = [];
-  values.forEach((v) => {
-    if (string.includes(v)) {
-      valuesThatExists.push(v);
-    }
-  });
-  if (valuesThatExists.length) return valuesThatExists;
-  return false;
+    if (!Array.isArray(values))
+        values = values.split(',').map((t) => t.trim());
+    const valuesThatExists = [];
+    values.forEach((v) => {
+        if (string.includes(v)) {
+            valuesThatExists.push(v);
+        }
+    });
+    if (valuesThatExists.length)
+        return valuesThatExists;
+    return false;
 }

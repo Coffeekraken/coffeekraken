@@ -15,5 +15,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function lowerFirst(string) {
-  return string.charAt(0).toLowerCase() + string.slice(1);
+    return string.charAt(0).toLowerCase() + string.slice(1);
 }

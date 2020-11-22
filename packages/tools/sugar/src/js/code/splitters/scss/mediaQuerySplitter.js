@@ -11,8 +11,8 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {
-  type: 'mediaQuery',
-  prefix: /@media\s?\([^{]*\)\s?/,
-  open: '{',
-  close: '}'
+    type: 'mediaQuery',
+    prefix: /@media\s?\([^{]*\)\s?/,
+    open: '{',
+    close: '}'
 };

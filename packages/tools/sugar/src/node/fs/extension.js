@@ -1,5 +1,5 @@
+"use strict";
 // TODO tests
-
 /**
  * @name                    extension
  * @namespace           sugar.node.fs
@@ -17,7 +17,8 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function extension(path) {
-  const lastPart = path.split('/').pop();
-  if (!lastPart.includes('.')) return '';
-  return path.split('.').pop();
+    const lastPart = path.split('/').pop();
+    if (!lastPart.includes('.'))
+        return '';
+    return path.split('.').pop();
 };

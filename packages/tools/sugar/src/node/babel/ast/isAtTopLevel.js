@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @name            isAtTopLevel
  * @namespace       sugar.node.babel.ast
@@ -16,6 +17,7 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function isAtTopLevel(path) {
-  if (!path.scope || !path.scope.path || !path.scope.path.type) return false;
-  return path.scope.path.type === 'Program';
+    if (!path.scope || !path.scope.path || !path.scope.path.type)
+        return false;
+    return path.scope.path.type === 'Program';
 };

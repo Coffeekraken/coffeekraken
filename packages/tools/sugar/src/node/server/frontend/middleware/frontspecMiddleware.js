@@ -1,9 +1,9 @@
+"use strict";
 const __packageRoot = require('../../../path/packageRoot');
 const __fs = require('fs');
 const __sugarConfig = require('../../../config/sugar');
 const __deepMerge = require('../../../object/deepMerge');
 const __deepMap = require('../../../object/deepMap');
-
 /**
  * @name            frontspecMiddleware
  * @namespace       sugar.node.server.frontend.middleware
@@ -27,29 +27,26 @@ const __deepMap = require('../../../object/deepMap');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function frontspecMiddleware(settings = {}) {
-  return function (req, res, next) {
-    const defaultFrontSpec = __sugarConfig('frontspec') || {};
-    const frontspecPath = `${__packageRoot()}/frontspec.json`;
-    let frontspec = defaultFrontSpec;
-    if (__fs.existsSync(frontspecPath)) {
-      const frontspecFile = require(frontspecPath);
-      frontspec = __deepMerge(frontspec, frontspecFile);
-    }
-
-    frontspec = __deepMap(frontspec, (value, prop, fullPath) => {
-      if (typeof value === 'string') {
-        return value
-          .replace(`${__packageRoot()}/`, '')
-          .replace(__packageRoot(), '');
-      }
-      return value;
-    });
-
-    res.templateData = {
-      ...(res.templateData || {}),
-      frontspec
+    return function (req, res, next) {
+        const defaultFrontSpec = __sugarConfig('frontspec') || {};
+        const frontspecPath = `${__packageRoot()}/frontspec.json`;
+        let frontspec = defaultFrontSpec;
+        if (__fs.existsSync(frontspecPath)) {
+            const frontspecFile = require(frontspecPath);
+            frontspec = __deepMerge(frontspec, frontspecFile);
+        }
+        frontspec = __deepMap(frontspec, (value, prop, fullPath) => {
+            if (typeof value === 'string') {
+                return value
+                    .replace(`${__packageRoot()}/`, '')
+                    .replace(__packageRoot(), '');
+            }
+            return value;
+        });
+        res.templateData = {
+            ...(res.templateData || {}),
+            frontspec
+        };
+        next();
     };
-
-    next();
-  };
 };

@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isString(value) {
-  return typeof value === 'string' || value instanceof String;
+    return typeof value === 'string' || value instanceof String;
 }

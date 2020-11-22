@@ -1,3 +1,4 @@
+"use strict";
 module.exports = {
-  title: 'Data from gile'
+    title: 'Data from gile'
 };

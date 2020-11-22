@@ -1,5 +1,4 @@
 import __get from './get';
-
 /**
  * @name                                        set
  * @namespace           sugar.js.object
@@ -18,17 +17,18 @@ import __get from './get';
  *
  */
 export default (obj, path, value) => {
-  if (!path || path === '' || path === '.') {
-    obj = value;
-    return;
-  }
-  var a = path.split('.');
-  var o = obj;
-  while (a.length - 1) {
-    var n = a.shift();
-    if (!(n in o)) o[n] = {};
-    o = o[n];
-  }
-  o[a[0]] = value;
-  return __get(obj, path);
+    if (!path || path === '' || path === '.') {
+        obj = value;
+        return;
+    }
+    var a = path.split('.');
+    var o = obj;
+    while (a.length - 1) {
+        var n = a.shift();
+        if (!(n in o))
+            o[n] = {};
+        o = o[n];
+    }
+    o[a[0]] = value;
+    return __get(obj, path);
 };

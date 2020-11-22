@@ -1,5 +1,20 @@
 /**
- * @namespace           sugar.node.is
- * @src               ../_js/is/node.js
+ * @name                                      isNode
+ * @namespace           sugar.js.is
+ * @type                                      Function
+ *
+ * Check if the current script is running under node runtime or not...
+ *
+ * @return                {Boolean}                           true if running under javascript runtime, false if not...
+ *
+ * @example               js
+ * import isNode from '@coffeekraken/sugar/js/is/node';
+ * isNode(); // => true
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/is/node');
+export default () => {
+    return (typeof process !== 'undefined' &&
+        process.release &&
+        process.release.name === 'node');
+};

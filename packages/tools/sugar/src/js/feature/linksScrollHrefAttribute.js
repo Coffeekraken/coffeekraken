@@ -1,7 +1,6 @@
 import querySelectorLive from '../dom/querySelectorLive';
 import scrollTo from '../dom/scrollTo';
 import easeInOutQuint from '../easing/easeInOutQuint';
-
 /**
  * @name 		linksScrollHrefAttribute
  * @namespace           sugar.js.feature
@@ -14,16 +13,13 @@ import easeInOutQuint from '../easing/easeInOutQuint';
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
 // TODO tests
-
 querySelectorLive('[href^="scroll:#"]', ($scrollElm) => {
-  $scrollElm.addEventListener('click', (e) => {
-    e.preventDefault();
-    const $target = document.querySelector(
-      `${$scrollElm.getAttribute('href').substr(7)}`
-    );
-    if (!$target) return;
-    scrollTo($target, 400, easeInOutQuint);
-  });
+    $scrollElm.addEventListener('click', (e) => {
+        e.preventDefault();
+        const $target = document.querySelector(`${$scrollElm.getAttribute('href').substr(7)}`);
+        if (!$target)
+            return;
+        scrollTo($target, 400, easeInOutQuint);
+    });
 });

@@ -15,13 +15,16 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function requestFullscreen(elm) {
-  if (elm.requestFullscreen) {
-    return elm.requestFullscreen();
-  } else if (elm.mozRequestFullScreen) {
-    return elm.mozRequestFullScreen();
-  } else if (elm.webkitRequestFullscreen) {
-    return elm.webkitRequestFullscreen();
-  } else if (elm.msRequestFullscreen) {
-    return elm.msRequestFullscreen();
-  }
+    if (elm.requestFullscreen) {
+        return elm.requestFullscreen();
+    }
+    else if (elm.mozRequestFullScreen) {
+        return elm.mozRequestFullScreen();
+    }
+    else if (elm.webkitRequestFullscreen) {
+        return elm.webkitRequestFullscreen();
+    }
+    else if (elm.msRequestFullscreen) {
+        return elm.msRequestFullscreen();
+    }
 }

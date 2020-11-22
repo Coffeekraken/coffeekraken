@@ -2,7 +2,6 @@ import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';
 import __htmlFromMarkdown from './html/htmlFromMarkdown';
 import __htmlFromDocblocks from './html/htmlFromDocblocks';
-
 /**
  * @name            toHtml
  * @namespace       sugar.js.convert
@@ -32,40 +31,28 @@ import __htmlFromDocblocks from './html/htmlFromDocblocks';
  */
 const supportedFromTypes = ['markdown', 'docblocks'];
 const convertersByType = {
-  markdown: __htmlFromMarkdown,
-  docblocks: __htmlFromDocblocks
+    markdown: __htmlFromMarkdown,
+    docblocks: __htmlFromDocblocks
 };
 export default function toHtml(inputString, settings = {}) {
-  settings = __deepMerge(
-    {
-      from: null
-    },
-    settings
-  );
-
-  // check if we don't have the "from" setting
-  if (!settings.from) {
-    // check if is markdown
-    if (inputString.match(/\s?#{1,6}\s?.*/g)) settings.from = 'markdown';
-    else if (inputString.match(/(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g))
-      settings.from = 'docblocks';
-    else {
-      throw new __SError(
-        `Sorry but the passed inputString does not match any supported type which are: ${supportedFromTypes.join(
-          ','
-        )}`
-      );
+    settings = __deepMerge({
+        from: null
+    }, settings);
+    // check if we don't have the "from" setting
+    if (!settings.from) {
+        // check if is markdown
+        if (inputString.match(/\s?#{1,6}\s?.*/g))
+            settings.from = 'markdown';
+        else if (inputString.match(/(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g))
+            settings.from = 'docblocks';
+        else {
+            throw new __SError(`Sorry but the passed inputString does not match any supported type which are: ${supportedFromTypes.join(',')}`);
+        }
     }
-  }
-
-  // convert the string from the correct type
-  const converterFn = convertersByType[settings.from];
-
-  if (!converterFn) {
-    throw new __SError(
-      `It seems that no converter exists for your inputString which is of type "<yellow>${settings.from}</yellow>"...`
-    );
-  }
-
-  return converterFn(inputString, settings);
+    // convert the string from the correct type
+    const converterFn = convertersByType[settings.from];
+    if (!converterFn) {
+        throw new __SError(`It seems that no converter exists for your inputString which is of type "<yellow>${settings.from}</yellow>"...`);
+    }
+    return converterFn(inputString, settings);
 }

@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @name                    appRoutes
  * @namespace           sugar.node.express
@@ -7,23 +8,10 @@
  *
  */
 module.exports = function (expressInstance) {
-  // add the "config" internal squid route
-  expressInstance.get(
-    '/app/config',
-    require('./controllers/AppControllers').config
-  );
-  expressInstance.get(
-    '/app/config/*',
-    require('./controllers/AppControllers').config
-  );
-
-  // add the "app" internal squid route
-  expressInstance.get(
-    '/app/meta',
-    require('./controllers/AppControllers').meta
-  );
-  expressInstance.get(
-    '/app/meta/*',
-    require('./controllers/AppControllers').meta
-  );
+    // add the "config" internal squid route
+    expressInstance.get('/app/config', require('./controllers/AppControllers').config);
+    expressInstance.get('/app/config/*', require('./controllers/AppControllers').config);
+    // add the "app" internal squid route
+    expressInstance.get('/app/meta', require('./controllers/AppControllers').meta);
+    expressInstance.get('/app/meta/*', require('./controllers/AppControllers').meta);
 };

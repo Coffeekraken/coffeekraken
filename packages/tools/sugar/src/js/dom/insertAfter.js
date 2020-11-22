@@ -15,11 +15,12 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function insertAfter(elm, refElm) {
-  // next sibling of ref elm
-  const nextSibling = refElm.nextSibling;
-  if (!nextSibling) {
-    refElm.parentNode.appendChild(elm);
-  } else {
-    refElm.parentNode.insertBefore(elm, nextSibling);
-  }
+    // next sibling of ref elm
+    const nextSibling = refElm.nextSibling;
+    if (!nextSibling) {
+        refElm.parentNode.appendChild(elm);
+    }
+    else {
+        refElm.parentNode.insertBefore(elm, nextSibling);
+    }
 }

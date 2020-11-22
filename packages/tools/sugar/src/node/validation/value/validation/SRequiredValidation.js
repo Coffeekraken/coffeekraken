@@ -1,5 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const SValidation_1 = require("../../SValidation");
 /**
- * @namespace           sugar.node.validation.value.validation
- * @src             ../../../_js/validation/value/validation/SRequiredValidation
+ * @name          SRequiredValidation
+ * @namespace     sugar.js.validation.value.validation
+ * @type          Class
+ *
+ * This class represent the "required" validation
+ *
+ * @since       2.0.0
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../../../_js/validation/value/validation/SRequiredValidation');
+class SRequiredValidation extends SValidation_1.default {
+    static exec(value) {
+        return value !== null && value !== undefined;
+    }
+}
+SRequiredValidation.message = 'This value is <yellow>required</yellow> and you\'ve passed "<red>%0"</red>';
+exports.default = SRequiredValidation;

@@ -1,5 +1,3 @@
-import __SPromise from '../promise/SPromise';
-
 /**
  * @name					mediaQuery
  * @type 					Function
@@ -22,5 +20,4 @@ import __SPromise from '../promise/SPromise';
  */
 const __mediaQueryPromisesStack = {};
 let __activeMedia;
-
-export default function mediaQuery(mediaName = '*') {}
+export default function mediaQuery(mediaName = '*') { }

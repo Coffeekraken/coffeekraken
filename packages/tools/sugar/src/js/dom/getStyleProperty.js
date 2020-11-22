@@ -1,6 +1,5 @@
 import camelize from '../string/camelize';
 import autoCast from '../string/autoCast';
-
 /**
  * @name      getStyleProperty
  * @namespace           sugar.js.dom
@@ -22,19 +21,18 @@ import autoCast from '../string/autoCast';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function getStyleProperty(elm, property) {
-  // caching mecanisme
-  setTimeout(() => {
-    elm._sComputedStyle = null;
-  });
-
-  const computed = elm._sComputedStyle || window.getComputedStyle(elm);
-  elm._sComputedStyle = computed;
-
-  const prefixes = ['', 'webkit-', 'moz-', 'ms-', 'o-', 'khtml-'];
-  for (let i = 0; i < prefixes.length; i++) {
-    const prefix = prefixes[i];
-    const value = computed[camelize(`${prefix}${property}`)];
-    if (value && value.trim() !== '') return autoCast(value);
-  }
-  return null;
+    // caching mecanisme
+    setTimeout(() => {
+        elm._sComputedStyle = null;
+    });
+    const computed = elm._sComputedStyle || window.getComputedStyle(elm);
+    elm._sComputedStyle = computed;
+    const prefixes = ['', 'webkit-', 'moz-', 'ms-', 'o-', 'khtml-'];
+    for (let i = 0; i < prefixes.length; i++) {
+        const prefix = prefixes[i];
+        const value = computed[camelize(`${prefix}${property}`)];
+        if (value && value.trim() !== '')
+            return autoCast(value);
+    }
+    return null;
 }

@@ -14,5 +14,5 @@
  * isOdd(2) // false
  */
 export default function isOdd(value) {
-  return value % 2 === 1;
+    return value % 2 === 1;
 }

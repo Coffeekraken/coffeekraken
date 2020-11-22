@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @name                            childProcess
  * @namespace           sugar.node.is
@@ -14,7 +15,5 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function childProcess() {
-  return (
-    process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined
-  );
+    return (process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined);
 };

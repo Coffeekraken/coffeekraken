@@ -31,22 +31,17 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function typeDefinitionArrayObjectToString(
-  typeDefinitionArrayObj
-) {
-  const parts = [];
-
-  if (!Array.isArray(typeDefinitionArrayObj))
-    typeDefinitionArrayObj = [typeDefinitionArrayObj];
-
-  typeDefinitionArrayObj.forEach((definitionObj) => {
-    let part = definitionObj.type;
-    if (definitionObj.of) {
-      const ofString = typeDefinitionArrayObjectToString(definitionObj.of);
-      part += `<${ofString}>`;
-    }
-    parts.push(part);
-  });
-
-  return parts.join('|');
+export default function typeDefinitionArrayObjectToString(typeDefinitionArrayObj) {
+    const parts = [];
+    if (!Array.isArray(typeDefinitionArrayObj))
+        typeDefinitionArrayObj = [typeDefinitionArrayObj];
+    typeDefinitionArrayObj.forEach((definitionObj) => {
+        let part = definitionObj.type;
+        if (definitionObj.of) {
+            const ofString = typeDefinitionArrayObjectToString(definitionObj.of);
+            part += `<${ofString}>`;
+        }
+        parts.push(part);
+    });
+    return parts.join('|');
 }

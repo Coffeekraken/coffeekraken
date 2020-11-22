@@ -17,6 +17,6 @@ import MobileDetect from 'mobile-detect';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isMobile(ua = navigator.userAgent) {
-  const md = new MobileDetect(ua);
-  return md.mobile() !== null;
+    const md = new MobileDetect(ua);
+    return md.mobile() !== null;
 }

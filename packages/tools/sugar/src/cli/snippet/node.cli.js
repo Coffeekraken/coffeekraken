@@ -1,4 +1,5 @@
+"use strict";
 const __generateFile = require('./generateFile');
 module.exports = (stringArgs = '') => {
-  __generateFile('node ' + stringArgs);
+    __generateFile('node ' + stringArgs);
 };

@@ -16,7 +16,6 @@ import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 import { unsafeSVG } from 'lit-html/directives/unsafe-svg';
 import { until } from 'lit-html/directives/until.js';
 import __canHaveChildren from '../dom/canHaveChildren';
-
 /**
  * @name              SLitHtmlWebComponent
  * @namespace           sugar.js.webcomponent
@@ -47,135 +46,133 @@ import __canHaveChildren from '../dom/canHaveChildren';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function SLitHtmlWebComponentGenerator(extendSettings = {}) {
-  return class SLitHtmlWebComponent extends __SWebComponent(extendSettings) {
-    /**
-     * @name        template
-     * @type        Function
-     * @static
-     *
-     * This static variable store a function that has as parameter the state object
-     * of your component and the lit-html ```html``` function that you can use in your template.
-     * This function MUST return a template string representing your component HTML depending on the state
-     * object at this point.
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    static template = (props, settings, lit) => lit.html`
+    var _a;
+    return _a = class SLitHtmlWebComponent extends __SWebComponent(extendSettings) {
+            /**
+             * @name        constructor
+             * @type        Function
+             * @constructor
+             *
+             * Constructor
+             *
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            constructor(settings = {}) {
+                super(__deepMerge({}, settings));
+                /**
+                 * @name        lit
+                 * @type        Object
+                 *
+                 * Store all the litHtml functions that you may need
+                 *
+                 * @see       https://lit-html.polymer-project.org/guide/template-reference
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                this.lit = {
+                    html,
+                    render,
+                    asyncReplace,
+                    asyncAppend,
+                    cache,
+                    classMap,
+                    ifDefined,
+                    guard,
+                    repeat,
+                    styleMap,
+                    templateContent,
+                    unsafeHTML,
+                    unsafeSVG,
+                    until
+                };
+                this.render = __throttle(() => {
+                    this._render();
+                }, 50);
+                // wait until mounted to render the component first time
+                this.on('mounted', (e) => {
+                    // insert the container in the document
+                    if (__canHaveChildren(this)) {
+                        this.$container = this;
+                        this.addClass('', this);
+                    }
+                    else {
+                        this.$container = document.createElement('div');
+                        this.addClass('', this.$container);
+                        __insertAfter(this.$container, this);
+                    }
+                    this.update();
+                    // dispatch a ready event
+                    this.dispatch('ready', this, {
+                        bubbles: true
+                    });
+                    // listen for media query change to update the view
+                    this._mediaQuery.on('match', (media) => {
+                        this.render();
+                    });
+                });
+            }
+            /**
+             * @name          $root
+             * @type          Function
+             * @get
+             *
+             * Access the root element of the webcomponent from which the requests like ```$``` and ```$$``` will be executed
+             *
+             * @since         2.0.0
+             * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            get $root() {
+                return this.$container || this;
+            }
+            /**
+             * @name          update
+             * @type          Function
+             *
+             * This method allows you to update your componment manually if needed.
+             * - call the ```render``` method of this class
+             * - call the ```update``` method of the SWebComponent parent class
+             *
+             * @since       2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            update() {
+                // render
+                this._render();
+                // update parent
+                super.update();
+            }
+            /**
+             * @name          render
+             * @type          Function
+             *
+             * This method is called every time an update has been made in the state object
+             *
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            _render() {
+                if (!this.$container)
+                    return;
+                const tplFn = this.constructor.template.bind(this);
+                const tpl = tplFn(this.props, this._settings, this.lit);
+                render(tpl, this.$container);
+            }
+        },
+        /**
+         * @name        template
+         * @type        Function
+         * @static
+         *
+         * This static variable store a function that has as parameter the state object
+         * of your component and the lit-html ```html``` function that you can use in your template.
+         * This function MUST return a template string representing your component HTML depending on the state
+         * object at this point.
+         *
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        _a.template = (props, settings, lit) => lit.html `
       <p>
         You need to specify a static template property for your component...
       </p>
-    `;
-
-    /**
-     * @name        lit
-     * @type        Object
-     *
-     * Store all the litHtml functions that you may need
-     *
-     * @see       https://lit-html.polymer-project.org/guide/template-reference
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    lit = {
-      html,
-      render,
-      asyncReplace,
-      asyncAppend,
-      cache,
-      classMap,
-      ifDefined,
-      guard,
-      repeat,
-      styleMap,
-      templateContent,
-      unsafeHTML,
-      unsafeSVG,
-      until
-    };
-
-    /**
-     * @name        constructor
-     * @type        Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    constructor(settings = {}) {
-      super(__deepMerge({}, settings));
-      // wait until mounted to render the component first time
-      this.on('mounted', (e) => {
-        // insert the container in the document
-        if (__canHaveChildren(this)) {
-          this.$container = this;
-          this.addClass('', this);
-        } else {
-          this.$container = document.createElement('div');
-          this.addClass('', this.$container);
-          __insertAfter(this.$container, this);
-        }
-        this.update();
-        // dispatch a ready event
-        this.dispatch('ready', this, {
-          bubbles: true
-        });
-        // listen for media query change to update the view
-        this._mediaQuery.on('match', (media) => {
-          this.render();
-        });
-      });
-    }
-
-    /**
-     * @name          $root
-     * @type          Function
-     * @get
-     *
-     * Access the root element of the webcomponent from which the requests like ```$``` and ```$$``` will be executed
-     *
-     * @since         2.0.0
-     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    get $root() {
-      return this.$container || this;
-    }
-
-    /**
-     * @name          update
-     * @type          Function
-     *
-     * This method allows you to update your componment manually if needed.
-     * - call the ```render``` method of this class
-     * - call the ```update``` method of the SWebComponent parent class
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    update() {
-      // render
-      this._render();
-      // update parent
-      super.update();
-    }
-
-    /**
-     * @name          render
-     * @type          Function
-     *
-     * This method is called every time an update has been made in the state object
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    _render() {
-      if (!this.$container) return;
-      const tplFn = this.constructor.template.bind(this);
-      const tpl = tplFn(this.props, this._settings, this.lit);
-      render(tpl, this.$container);
-    }
-    render = __throttle(() => {
-      this._render();
-    }, 50);
-  };
+    `,
+        _a;
 }
-
 export default SLitHtmlWebComponentGenerator;

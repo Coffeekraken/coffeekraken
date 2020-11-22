@@ -19,13 +19,11 @@
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function toQueryString(obj) {
-  return (
-    '?' +
-    Object.keys(obj)
-      .reduce(function (a, k) {
-        a.push(k + '=' + encodeURIComponent(obj[k]));
-        return a;
-      }, [])
-      .join('&')
-  );
+    return ('?' +
+        Object.keys(obj)
+            .reduce(function (a, k) {
+            a.push(k + '=' + encodeURIComponent(obj[k]));
+            return a;
+        }, [])
+            .join('&'));
 }

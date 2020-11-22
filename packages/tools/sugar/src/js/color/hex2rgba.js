@@ -15,18 +15,18 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function hex2rgba(hex) {
-  hex = hex.replace('#', '');
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
-  let a = 1;
-  if (hex.length == 8) {
-    a = (1 / 255) * parseInt(hex.substring(6, 8), 16);
-  }
-  return {
-    r: r,
-    g: g,
-    b: b,
-    a: a
-  };
+    hex = hex.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    let a = 1;
+    if (hex.length == 8) {
+        a = (1 / 255) * parseInt(hex.substring(6, 8), 16);
+    }
+    return {
+        r: r,
+        g: g,
+        b: b,
+        a: a
+    };
 }

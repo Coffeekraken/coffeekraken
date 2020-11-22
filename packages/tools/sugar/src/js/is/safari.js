@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isSafari(ua = navigator.userAgent) {
-  return ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1;
+    return ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1;
 }

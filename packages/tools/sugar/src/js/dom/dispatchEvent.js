@@ -1,5 +1,4 @@
 import __SEvent from '../event/SEvent';
-
 /**
  * @name      dispatchEvent
  * @namespace           sugar.js.dom
@@ -20,11 +19,11 @@ import __SEvent from '../event/SEvent';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function dispatchEvent($target, name, data = null) {
-  // create new event
-  const e = new __SEvent(name, {
-    detail: data,
-    bubbles: true,
-    cancelable: true
-  });
-  $target.dispatchEvent(e);
+    // create new event
+    const e = new __SEvent(name, {
+        detail: data,
+        bubbles: true,
+        cancelable: true
+    });
+    $target.dispatchEvent(e);
 }

@@ -1,7 +1,6 @@
+"use strict";
 const __fs = require('fs-extra');
-
 // TODO tests
-
 /**
  * @name        ensureFile
  * @namespace           sugar.node.fs
@@ -23,5 +22,5 @@ const __fs = require('fs-extra');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function ensureFile(file) {
-  return __fs.ensureFile(file);
+    return __fs.ensureFile(file);
 };

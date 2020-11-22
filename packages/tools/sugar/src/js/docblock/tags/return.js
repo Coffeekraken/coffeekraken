@@ -1,5 +1,4 @@
 const __upperFirst = require('../../string/upperFirst');
-
 /**
  * @name              return
  * @namespace           sugar.js.docblock.tags
@@ -14,11 +13,11 @@ const __upperFirst = require('../../string/upperFirst');
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 export default function returnTag(data) {
-  const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
-  return {
-    type: stringArray[0]
-      ? __upperFirst(stringArray[0].replace('{', '').replace('}', '').trim())
-      : '',
-    description: stringArray[1] ? stringArray[1].trim() : ''
-  };
+    const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
+    return {
+        type: stringArray[0]
+            ? __upperFirst(stringArray[0].replace('{', '').replace('}', '').trim())
+            : '',
+        description: stringArray[1] ? stringArray[1].trim() : ''
+    };
 }

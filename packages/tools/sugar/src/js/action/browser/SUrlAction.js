@@ -1,7 +1,6 @@
 import __SAction from '../SAction';
 import __isBrowser from '../../is/browser';
 import __toQueryString from '../../object/toQueryString';
-
 /**
  * @name              SUrlAction
  * @namespace         sugar.js.action.browser
@@ -33,69 +32,57 @@ import __toQueryString from '../../object/toQueryString';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SUrlAction extends __SAction {
-  /**
-   * @name          constructor
-   * @type          Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(descriptorObj, settings = {}) {
-    super(descriptorObj, settings);
-  }
-
-  /**
-   * @name            run
-   * @type            Function
-   * @override
-   *
-   * Process to the action execution.
-   *
-   * @return      {SPromise}      An SPromise instance on which you can subscribe for this particular run execution process events
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  run() {
-    const promise = super.run();
-
-    if (!__isBrowser())
-      throw new Error(
-        `SUrlAction: This action is meant to be used in a browser environment which seems to not be the case...`
-      );
-
-    setTimeout(() => {
-      // switch on the target
-      switch (this._descriptorObj.target) {
-        case '_blank':
-        case '_popup':
-          const specs = this._descriptorObj.specs || {};
-          let specsString = __toQueryString(specs)
-            .slice(1)
-            .split('&')
-            .join(',');
-          window.open(
-            this._descriptorObj.url,
-            this._descriptorObj.name || '_blank',
-            specsString || this._descriptorObj.target === '_popup'
-              ? 'width=1000,height=1000'
-              : '',
-            this._descriptorObj.replace || false
-          );
-          break;
-        case '_self':
-        default:
-          document.location = this._descriptorObj.url;
-          break;
-      }
-
-      // complete
-      promise.complete();
-    }, this._descriptorObj.timeout || 0);
-
-    return promise;
-  }
+    /**
+     * @name          constructor
+     * @type          Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(descriptorObj, settings = {}) {
+        super(descriptorObj, settings);
+    }
+    /**
+     * @name            run
+     * @type            Function
+     * @override
+     *
+     * Process to the action execution.
+     *
+     * @return      {SPromise}      An SPromise instance on which you can subscribe for this particular run execution process events
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    run() {
+        const promise = super.run();
+        if (!__isBrowser())
+            throw new Error(`SUrlAction: This action is meant to be used in a browser environment which seems to not be the case...`);
+        setTimeout(() => {
+            // switch on the target
+            switch (this._descriptorObj.target) {
+                case '_blank':
+                case '_popup':
+                    const specs = this._descriptorObj.specs || {};
+                    let specsString = __toQueryString(specs)
+                        .slice(1)
+                        .split('&')
+                        .join(',');
+                    window.open(this._descriptorObj.url, this._descriptorObj.name || '_blank', specsString || this._descriptorObj.target === '_popup'
+                        ? 'width=1000,height=1000'
+                        : '', this._descriptorObj.replace || false);
+                    break;
+                case '_self':
+                default:
+                    document.location = this._descriptorObj.url;
+                    break;
+            }
+            // complete
+            promise.complete();
+        }, this._descriptorObj.timeout || 0);
+        return promise;
+    }
 }

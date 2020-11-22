@@ -4,7 +4,6 @@ import __hsv2rgba from './hsv2rgba';
 import __rgba2hsl from './rgba2hsl';
 import __rgba2hsv from './rgba2hsv';
 import __rgba2hex from './rgba2hex';
-
 /**
  * @name                  convert
  * @namespace           sugar.js.color
@@ -24,52 +23,47 @@ import __rgba2hex from './rgba2hex';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function convert(input, format = 'rgba') {
-  // transforming the input into rgba object
-  let rgbaObj = {};
-  if (typeof input === 'string') {
-    rgbaObj = __parse(input, 'rgba');
-  } else if (typeof input === 'object') {
-    if (
-      input.r !== undefined &&
-      input.g !== undefined &&
-      input.b !== undefined
-    ) {
-      rgbaObj = input;
-    } else if (
-      input.h !== undefined &&
-      input.s !== undefined &&
-      input.l !== undefined
-    ) {
-      rgbaObj = __hsl2rgba(input);
-    } else if (
-      input.h !== undefined &&
-      input.s !== undefined &&
-      input.v !== undefined
-    ) {
-      rgbaObj = __hsv2rgba(input);
+    // transforming the input into rgba object
+    let rgbaObj = {};
+    if (typeof input === 'string') {
+        rgbaObj = __parse(input, 'rgba');
     }
-  }
-
-  switch (format) {
-    case 'rgba':
-      return rgbaObj;
-    case 'hsl':
-      return __rgba2hsl(rgbaObj);
-    case 'hsv':
-      return __rgba2hsv(rgbaObj);
-    case 'hex':
-    case 'hexString':
-      return __rgba2hex(rgbaObj);
-    case 'rgbaString':
-      return `rgba(${rgbaObj.r},${rgbaObj.g},${rgbaObj.b},${rgbaObj.a})`;
-    case 'hslString':
-      const hslObj = convert(rgbaObj, 'hsl');
-      return `hsl(${hslObj.h},${hslObj.s},${hslObj.l})`;
-    case 'hsvString':
-      const hsvObj = convert(rgbaObj, 'hsv');
-      return `hsv(${hsvObj.h},${hsvObj.s},${hsvObj.v})`;
-  }
-
-  // if nothing supported
-  return undefined;
+    else if (typeof input === 'object') {
+        if (input.r !== undefined &&
+            input.g !== undefined &&
+            input.b !== undefined) {
+            rgbaObj = input;
+        }
+        else if (input.h !== undefined &&
+            input.s !== undefined &&
+            input.l !== undefined) {
+            rgbaObj = __hsl2rgba(input);
+        }
+        else if (input.h !== undefined &&
+            input.s !== undefined &&
+            input.v !== undefined) {
+            rgbaObj = __hsv2rgba(input);
+        }
+    }
+    switch (format) {
+        case 'rgba':
+            return rgbaObj;
+        case 'hsl':
+            return __rgba2hsl(rgbaObj);
+        case 'hsv':
+            return __rgba2hsv(rgbaObj);
+        case 'hex':
+        case 'hexString':
+            return __rgba2hex(rgbaObj);
+        case 'rgbaString':
+            return `rgba(${rgbaObj.r},${rgbaObj.g},${rgbaObj.b},${rgbaObj.a})`;
+        case 'hslString':
+            const hslObj = convert(rgbaObj, 'hsl');
+            return `hsl(${hslObj.h},${hslObj.s},${hslObj.l})`;
+        case 'hsvString':
+            const hsvObj = convert(rgbaObj, 'hsv');
+            return `hsv(${hsvObj.h},${hsvObj.s},${hsvObj.v})`;
+    }
+    // if nothing supported
+    return undefined;
 }

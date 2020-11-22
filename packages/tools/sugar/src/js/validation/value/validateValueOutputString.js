@@ -1,8 +1,6 @@
 import __parseHtml from '../../console/parseHtml';
 import __toString from '../../string/toString';
 import __deepMerge from '../../object/deepMerge';
-import __isNode from '../../is/node';
-
 /**
  * @name                validateValueOutputString
  * @namespace           sugar.js.validation.value
@@ -28,43 +26,28 @@ import __isNode from '../../is/node';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function validateValueOutputString(
-  validateValueResultObj,
-  settings = {}
-) {
-  let issuesArray = [];
-
-  settings = __deepMerge({
-    name: settings.name || validateValueResultObj.$name,
-    interface: settings.interface || validateValueResultObj.$interface
-  });
-
-  if (settings.name) {
-    issuesArray.push(`<yellow>│</yellow> ${settings.name}\n<yellow>│</yellow>`);
-  }
-
-  if (validateValueResultObj.$received) {
-    let string = `<yellow>│</yellow> - Received value: <yellow>${__toString(
-      validateValueResultObj.$received.value,
-      { beautify: true }
-    )}</yellow>`;
-
-    // if (__isNode()) {
-    //   const __packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
-    //   string = string.replace(`${__packageRoot()}/`, '');
-    //   string = string.replace(`${__packageRoot(__dirname)}/`, '');
-    // }
-
-    issuesArray.push(string);
-  }
-
-  validateValueResultObj.$issues.forEach((issue) => {
-    if (validateValueResultObj.$messages[issue]) {
-      issuesArray.push(
-        `<yellow>│</yellow> - ${validateValueResultObj.$messages[issue]}`
-      );
+export default function validateValueOutputString(validateValueResultObj, settings = {}) {
+    let issuesArray = [];
+    settings = __deepMerge({
+        name: settings.name || validateValueResultObj.$name,
+        interface: settings.interface || validateValueResultObj.$interface
+    });
+    if (settings.name) {
+        issuesArray.push(`<yellow>│</yellow> ${settings.name}\n<yellow>│</yellow>`);
     }
-  });
-
-  return __parseHtml(issuesArray.join('\n')) + '\n';
+    if (validateValueResultObj.$received) {
+        let string = `<yellow>│</yellow> - Received value: <yellow>${__toString(validateValueResultObj.$received.value, { beautify: true })}</yellow>`;
+        // if (__isNode()) {
+        //   const __packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
+        //   string = string.replace(`${__packageRoot()}/`, '');
+        //   string = string.replace(`${__packageRoot(__dirname)}/`, '');
+        // }
+        issuesArray.push(string);
+    }
+    validateValueResultObj.$issues.forEach((issue) => {
+        if (validateValueResultObj.$messages[issue]) {
+            issuesArray.push(`<yellow>│</yellow> - ${validateValueResultObj.$messages[issue]}`);
+        }
+    });
+    return __parseHtml(issuesArray.join('\n')) + '\n';
 }

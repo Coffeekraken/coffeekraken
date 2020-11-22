@@ -1,7 +1,6 @@
+"use strict";
 const __fs = require('fs-extra');
-
 // TODO tests
-
 /**
  * @name        emptyDirSync
  * @namespace           sugar.node.fs
@@ -21,5 +20,5 @@ const __fs = require('fs-extra');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function emptyDirSync(dir) {
-  __fs.emptyDirSync(dir);
+    __fs.emptyDirSync(dir);
 };

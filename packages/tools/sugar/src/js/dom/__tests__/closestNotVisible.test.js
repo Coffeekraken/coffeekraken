@@ -1,8 +1,6 @@
 import __closestNotVisible from '../closestNotVisible';
-
 describe('sugar.js.dom.closestNotVisible', () => {
-
-  document.body.innerHTML = `
+    document.body.innerHTML = `
   <style>
     #testing {
       display: none;
@@ -14,11 +12,9 @@ describe('sugar.js.dom.closestNotVisible', () => {
         </div>
       </div>
   `;
-  const $elm = document.querySelector('#source');
-
-  it('Should find the "testing" element that is up in the dom tree', () => {
-    const $testing = __closestNotVisible($elm, '.testing');
-    expect($testing.id).toBe('testing');
-  });
-
+    const $elm = document.querySelector('#source');
+    it('Should find the "testing" element that is up in the dom tree', () => {
+        const $testing = __closestNotVisible($elm, '.testing');
+        expect($testing.id).toBe('testing');
+    });
 });

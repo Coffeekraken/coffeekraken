@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @name              setAuthToken
  * @namespace           sugar.node.github
@@ -15,9 +16,9 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function setAuthToken(username, token) {
-  // save the auth information globally
-  global.githubAuthToken = {
-    username,
-    token
-  };
+    // save the auth information globally
+    global.githubAuthToken = {
+        username,
+        token
+    };
 };

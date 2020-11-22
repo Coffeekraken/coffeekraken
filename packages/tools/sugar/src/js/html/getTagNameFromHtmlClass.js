@@ -1,6 +1,4 @@
-import __upperFirst from '../string/upperFirst';
 import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
-
 /**
  * @name            getHtmlhtmlClassFromHtmlClass
  * @namespace       sugar.js.html
@@ -20,11 +18,11 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function getHtmlhtmlClassFromHtmlClass(htmlClass) {
-  if (!htmlClass) return false;
-
-  for (let key in __htmlTagToHtmlClassMap) {
-    if (__htmlTagToHtmlClassMap[key] === htmlClass) return key;
-  }
-
-  return false;
+    if (!htmlClass)
+        return false;
+    for (let key in __htmlTagToHtmlClassMap) {
+        if (__htmlTagToHtmlClassMap[key] === htmlClass)
+            return key;
+    }
+    return false;
 }

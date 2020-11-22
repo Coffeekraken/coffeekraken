@@ -1,6 +1,6 @@
+"use strict";
 const __packageRoot = require('./packageRoot');
 const __fs = require('fs');
-
 /**
  * @name                    isInPackage
  * @namespace           sugar.node.path
@@ -20,35 +20,29 @@ const __fs = require('fs');
  * @see       https://www.npmjs.com/package/find-package-json
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function isInPackage(
-  name,
-  from = process.cwd(),
-  highest = false
-) {
-  const packageRoot = __packageRoot(from);
-  if (!packageRoot) return false;
-
-  if (!__fs.existsSync(`${packageRoot}/package.json`)) return false;
-  const pkg = require(`${packageRoot}/package.json`);
-
-  let names = name;
-  if (typeof names === 'string') names = names.split(',').map((f) => f.trim());
-  for (let i = 0; i < names.length; i++) {
-    if (names[i] === pkg.name) {
-      return true;
+module.exports = function isInPackage(name, from = process.cwd(), highest = false) {
+    const packageRoot = __packageRoot(from);
+    if (!packageRoot)
+        return false;
+    if (!__fs.existsSync(`${packageRoot}/package.json`))
+        return false;
+    const pkg = require(`${packageRoot}/package.json`);
+    let names = name;
+    if (typeof names === 'string')
+        names = names.split(',').map((f) => f.trim());
+    for (let i = 0; i < names.length; i++) {
+        if (names[i] === pkg.name) {
+            return true;
+        }
     }
-  }
-
-  let newPath = packageRoot
-    .split('/')
-    .slice(0, -1)
-    // .filter((i) => i !== '')
-    .join('/');
-
-  // no package found... check if we need to check higher
-  if (highest) {
-    return isInPackage(name, newPath, highest);
-  }
-
-  return false;
+    let newPath = packageRoot
+        .split('/')
+        .slice(0, -1)
+        // .filter((i) => i !== '')
+        .join('/');
+    // no package found... check if we need to check higher
+    if (highest) {
+        return isInPackage(name, newPath, highest);
+    }
+    return false;
 };

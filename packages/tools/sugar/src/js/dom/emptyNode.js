@@ -15,8 +15,8 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function emptyNode(node) {
-  while (node.firstChild) {
-    node.removeChild(node.firstChild);
-  }
-  return node;
+    while (node.firstChild) {
+        node.removeChild(node.firstChild);
+    }
+    return node;
 }

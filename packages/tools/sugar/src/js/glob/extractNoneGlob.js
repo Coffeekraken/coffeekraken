@@ -1,5 +1,4 @@
 import __globParent from 'glob-parent';
-
 /**
  * @name                extractNoneGlob
  * @namespace           sugar.js.glob
@@ -19,6 +18,6 @@ import __globParent from 'glob-parent';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function extractNoneGlob(string) {
-  const parent = __globParent(string);
-  return parent;
+    const parent = __globParent(string);
+    return parent;
 }

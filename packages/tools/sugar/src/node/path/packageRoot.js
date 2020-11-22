@@ -1,5 +1,5 @@
+"use strict";
 const __findPkgJson = require('find-package-json');
-
 /**
  * @name                    packageRoot
  * @namespace           sugar.node.path
@@ -19,23 +19,23 @@ const __findPkgJson = require('find-package-json');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function packageRoot(from = process.cwd(), highest = false) {
-  const f = __findPkgJson(from);
-  let file = f.next();
-
-  if (!highest) {
-    const filename = file.filename || false;
-    if (!filename) return filename;
-    return filename.split('/').slice(0, -1).join('/');
-  }
-
-  let finalFile;
-  while (!file.done) {
-    if (file.done) break;
-    finalFile = file;
-    file = f.next();
-  }
-  if (finalFile.filename) {
-    return finalFile.filename.split('/').slice(0, -1).join('/');
-  }
-  return false;
+    const f = __findPkgJson(from);
+    let file = f.next();
+    if (!highest) {
+        const filename = file.filename || false;
+        if (!filename)
+            return filename;
+        return filename.split('/').slice(0, -1).join('/');
+    }
+    let finalFile;
+    while (!file.done) {
+        if (file.done)
+            break;
+        finalFile = file;
+        file = f.next();
+    }
+    if (finalFile.filename) {
+        return finalFile.filename.split('/').slice(0, -1).join('/');
+    }
+    return false;
 };

@@ -1,6 +1,5 @@
 import __upperFirst from '../string/upperFirst';
 import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
-
 /**
  * @name            getHtmlClassFromTagName
  * @namespace       sugar.js.html
@@ -20,13 +19,12 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function getHtmlClassFromTagName(tagName) {
-  if (!tagName) return HTMLElement;
-
-  const tagNameUpperFirst = __upperFirst(tagName);
-  if (window[`HTML${tagNameUpperFirst}Element`])
-    return window[`HTML${tagNameUpperFirst}Element`];
-
-  if (__htmlTagToHtmlClassMap[tagName]) return __htmlTagToHtmlClassMap[tagName];
-
-  return HTMLElement;
+    if (!tagName)
+        return HTMLElement;
+    const tagNameUpperFirst = __upperFirst(tagName);
+    if (window[`HTML${tagNameUpperFirst}Element`])
+        return window[`HTML${tagNameUpperFirst}Element`];
+    if (__htmlTagToHtmlClassMap[tagName])
+        return __htmlTagToHtmlClassMap[tagName];
+    return HTMLElement;
 }

@@ -27,23 +27,20 @@
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function sort(object, sort) {
-  // get the object keys
-  const keys = Object.keys(object);
-
-  // sort the keys
-  const sortedKeys = keys.sort((a, b) => {
-    // call the sort function passed as parameter
-    return sort(object[a], object[b]);
-  });
-
-  // create the new sorted object
-  const resultObj = {};
-  // loop on each sorted keys
-  sortedKeys.forEach((k) => {
-    // add the property key with the object value
-    resultObj[k] = object[k];
-  });
-
-  // return the result sorted object
-  return resultObj;
+    // get the object keys
+    const keys = Object.keys(object);
+    // sort the keys
+    const sortedKeys = keys.sort((a, b) => {
+        // call the sort function passed as parameter
+        return sort(object[a], object[b]);
+    });
+    // create the new sorted object
+    const resultObj = {};
+    // loop on each sorted keys
+    sortedKeys.forEach((k) => {
+        // add the property key with the object value
+        resultObj[k] = object[k];
+    });
+    // return the result sorted object
+    return resultObj;
 }

@@ -1,5 +1,5 @@
+"use strict";
 const __SSugarAppModuleTerminalUi = require('../../app/sugar/SSugarAppModuleTerminalUi');
-
 /**
  * @name            SBuildFrontspecSugarAppTerminalUi
  * @namespace       sugar.node.build.frontspec
@@ -14,17 +14,17 @@ const __SSugarAppModuleTerminalUi = require('../../app/sugar/SSugarAppModuleTerm
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildFrontspecSugarAppTerminalUi extends __SSugarAppModuleTerminalUi {
-  /**
-   * @name            constructor
-   * @type            Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since           2.0.0
-   * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(sources, settings = {}) {
-    super(sources, settings);
-  }
+    /**
+     * @name            constructor
+     * @type            Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since           2.0.0
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(sources, settings = {}) {
+        super(sources, settings);
+    }
 };

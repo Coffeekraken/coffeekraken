@@ -21,15 +21,14 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function throttle(fn, threshhold) {
-  threshhold || (threshhold = 250);
-  var last;
-  return function () {
-    var context = this;
-    var now = new Date(),
-      args = arguments;
-    if (!last || last <= now - threshhold) {
-      last = now;
-      fn.apply(context, args);
-    }
-  };
+    threshhold || (threshhold = 250);
+    var last;
+    return function () {
+        var context = this;
+        var now = new Date(), args = arguments;
+        if (!last || last <= now - threshhold) {
+            last = now;
+            fn.apply(context, args);
+        }
+    };
 }

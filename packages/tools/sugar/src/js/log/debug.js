@@ -1,5 +1,4 @@
 import __SLog from './SLog';
-
 /**
  * @name              debug
  * @namespace           sugar.js.debug
@@ -17,8 +16,8 @@ import __SLog from './SLog';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function debug(message) {
-  if (!(global || window)._sLogDefaultInstance) {
-    (global || window)._sLogDefaultInstance = new __SLog({});
-  }
-  return (global || window)._sLogDefaultInstance.debug(message);
+    if (!(global || window)._sLogDefaultInstance) {
+        (global || window)._sLogDefaultInstance = new __SLog({});
+    }
+    return (global || window)._sLogDefaultInstance.debug(message);
 }

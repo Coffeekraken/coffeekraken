@@ -1,5 +1,11 @@
+import __SError from './SError';
+import __validateObjectOutputString from '../validation/object/validateObjectOutputString';
 /**
- * @namespace           sugar.node.error
- * @src             ../_js/error/SObjectValidationError.js
+ * @todo    Doc
  */
-module.exports = require('../_js/error/SObjectValidationError');
+export default class SObjectValidationError extends __SError {
+    constructor(issuesObj) {
+        const string = __validateObjectOutputString(issuesObj);
+        super(string);
+    }
+}

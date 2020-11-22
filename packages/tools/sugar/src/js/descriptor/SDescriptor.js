@@ -1,10 +1,5 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 var _a;
-Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+import _deepMerge from '../object/deepMerge';
 /**
  * @name                SDescriptor
  * @namespace           sugar.js.descriptor
@@ -40,7 +35,7 @@ const Cls = (_a = class SDescriptor {
          */
         constructor(settings) {
             // save the settings
-            this._settings = deepMerge_1.default({}, settings);
+            this._settings = _deepMerge({}, settings);
             // check that the descriptor class has a static "description" property
         }
         /**
@@ -115,4 +110,4 @@ const Cls = (_a = class SDescriptor {
      */
     _a.rulesMap = {},
     _a);
-exports.default = Cls;
+export default Cls;

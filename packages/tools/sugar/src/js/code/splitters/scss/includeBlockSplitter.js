@@ -11,8 +11,8 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {
-  type: 'include.block',
-  prefix: /@include\s[a-zA-Z0-9-_\.]+\([^{]*\)/,
-  open: '{',
-  close: '}'
+    type: 'include.block',
+    prefix: /@include\s[a-zA-Z0-9-_\.]+\([^{]*\)/,
+    open: '{',
+    close: '}'
 };

@@ -14,11 +14,13 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function exitFullscreen() {
-  if (document.cancelFullScreen) {
-    return document.cancelFullScreen();
-  } else if (document.mozCancelFullScreen) {
-    return document.mozCancelFullScreen();
-  } else if (document.webkitCancelFullScreen) {
-    return document.webkitCancelFullScreen();
-  }
+    if (document.cancelFullScreen) {
+        return document.cancelFullScreen();
+    }
+    else if (document.mozCancelFullScreen) {
+        return document.mozCancelFullScreen();
+    }
+    else if (document.webkitCancelFullScreen) {
+        return document.webkitCancelFullScreen();
+    }
 }

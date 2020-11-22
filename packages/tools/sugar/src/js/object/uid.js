@@ -1,7 +1,6 @@
 import __encryptObject from '../crypt/object';
 import __filter from '../object/filter';
 import __crypto from 'crypto';
-
 /**
  * @name                            uid
  * @namespace           node.object
@@ -24,41 +23,39 @@ import __crypto from 'crypto';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function uid() {
-  // init the uid
-  let uid = '';
-
-  let format = 'sha256';
-  let key = 'sugar.js.object.uid';
-  const args = __filter(Object.assign(arguments), (item) => {
-    if (typeof item === 'string') {
-      if (['sha256', 'full'].indexOf(item) !== -1) {
-        format = item;
-      } else {
-        key = item;
-      }
-      return false;
+    // init the uid
+    let uid = '';
+    let format = 'sha256';
+    let key = 'sugar.js.object.uid';
+    const args = __filter(Object.assign(arguments), (item) => {
+        if (typeof item === 'string') {
+            if (['sha256', 'full'].indexOf(item) !== -1) {
+                format = item;
+            }
+            else {
+                key = item;
+            }
+            return false;
+        }
+        return true;
+    });
+    // loop on each arguments
+    Object.keys(args).forEach((idx) => {
+        uid += __encryptObject.encrypt(args[idx], key);
+    });
+    switch (format.toLowerCase()) {
+        case 'full':
+            // return the uid
+            return uid;
+            break;
+        case 'sha256':
+        default:
+            let hash = __crypto
+                .createHash('sha256')
+                .update(uid)
+                .digest('hex')
+                .toString();
+            return hash;
+            break;
     }
-    return true;
-  });
-
-  // loop on each arguments
-  Object.keys(args).forEach((idx) => {
-    uid += __encryptObject.encrypt(args[idx], key);
-  });
-
-  switch (format.toLowerCase()) {
-    case 'full':
-      // return the uid
-      return uid;
-      break;
-    case 'sha256':
-    default:
-      let hash = __crypto
-        .createHash('sha256')
-        .update(uid)
-        .digest('hex')
-        .toString();
-      return hash;
-      break;
-  }
 }

@@ -1,3 +1,5 @@
+"use strict";
+var _a;
 const __SActionsStreamAction = require('../SActionsStreamAction');
 const __packageRoot = require('../../path/packageRoot');
 const __fs = require('fs');
@@ -6,11 +8,9 @@ const __deepMerge = require('../../object/deepMerge');
 const __md5 = require('../../crypt/md5');
 const __writeJsonSync = require('../../fs/writeJsonSync');
 const __SInterface = require('../../class/SInterface');
-
 class SExtractStreamActionInterface extends __SInterface {
-  static definitionObj = {};
 }
-
+SExtractStreamActionInterface.definitionObj = {};
 /**
  * @name            SExtractStreamAction
  * @namespace           sugar.node.stream.actions
@@ -26,65 +26,59 @@ class SExtractStreamActionInterface extends __SInterface {
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SExtractStreamAction extends __SActionsStreamAction {
-  /**
-   * @name            interface
-   * @type             Object
-   * @static
-   *
-   * Store the definition object that specify the streamObj required properties, types, etc...
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  static interface = SExtractStreamActionInterface;
-
-  /**
-   * @name            constructor
-   * @type            Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(settings = {}) {
-    super(
-      __deepMerge(
-        {
-          id: 'actionStream.action.extract',
-          sourceProp: 'data'
-        },
-        settings
-      )
-    );
-    this.constructor.definitionObj = {
-      [this._settings.sourceProp]: {
-        type: 'String',
-        required: true
-      }
-    };
-  }
-
-  /**
-   * @name          run
-   * @type          Function
-   * @async
-   *
-   * Override the base class run method
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  run(streamObj, settings) {
-    return super.run(streamObj, async (resolve, reject) => {
-      const reg = /\/\*\s?extract:([a-zA-Z0-9-_]+)\s?\*\/(((?!\/\*\s?extract\s?\*\/)(.|\n))*)\/\*\s?extract\s?\*\//g;
-      const source = streamObj[settings.sourceProp];
-      let myArray;
-      while ((myArray = reg.exec(source)) !== null) {
-        const prop = myArray[1];
-        const string = myArray[2];
-        streamObj[prop] = string;
-      }
-      resolve(streamObj);
-    });
-  }
-};
+module.exports = (_a = class SExtractStreamAction extends __SActionsStreamAction {
+        /**
+         * @name            constructor
+         * @type            Function
+         * @constructor
+         *
+         * Constructor
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        constructor(settings = {}) {
+            super(__deepMerge({
+                id: 'actionStream.action.extract',
+                sourceProp: 'data'
+            }, settings));
+            this.constructor.definitionObj = {
+                [this._settings.sourceProp]: {
+                    type: 'String',
+                    required: true
+                }
+            };
+        }
+        /**
+         * @name          run
+         * @type          Function
+         * @async
+         *
+         * Override the base class run method
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        run(streamObj, settings) {
+            return super.run(streamObj, async (resolve, reject) => {
+                const reg = /\/\*\s?extract:([a-zA-Z0-9-_]+)\s?\*\/(((?!\/\*\s?extract\s?\*\/)(.|\n))*)\/\*\s?extract\s?\*\//g;
+                const source = streamObj[settings.sourceProp];
+                let myArray;
+                while ((myArray = reg.exec(source)) !== null) {
+                    const prop = myArray[1];
+                    const string = myArray[2];
+                    streamObj[prop] = string;
+                }
+                resolve(streamObj);
+            });
+        }
+    },
+    /**
+     * @name            interface
+     * @type             Object
+     * @static
+     *
+     * Store the definition object that specify the streamObj required properties, types, etc...
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _a.interface = SExtractStreamActionInterface,
+    _a);

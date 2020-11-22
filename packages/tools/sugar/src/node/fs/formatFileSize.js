@@ -1,7 +1,6 @@
+"use strict";
 const __filesize = require('filesize');
-
 // TODO tests
-
 /**
  * @name                                    formatFileSize
  * @namespace           sugar.node.fs
@@ -22,5 +21,5 @@ const __filesize = require('filesize');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function formatFileSize(size, settings = {}) {
-  return __filesize(size, settings);
+    return __filesize(size, settings);
 };

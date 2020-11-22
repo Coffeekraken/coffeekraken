@@ -1,5 +1,5 @@
+"use strict";
 const __sugarConfig = require('../config/sugar');
-
 /**
  * @name            classname
  * @namespace       sugar.node.css
@@ -18,7 +18,8 @@ const __sugarConfig = require('../config/sugar');
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 module.exports = function classname(classname) {
-  const prefix = __sugarConfig('classes.generate.prefix');
-  if (prefix) return `${prefix}-${classname}`;
-  return classname;
+    const prefix = __sugarConfig('classes.generate.prefix');
+    if (prefix)
+        return `${prefix}-${classname}`;
+    return classname;
 };

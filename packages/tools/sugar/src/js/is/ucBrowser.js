@@ -16,5 +16,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isUcBrowser(ua = navigator.userAgent) {
-  return ua.match(/UCBrowser/i) !== null;
+    return ua.match(/UCBrowser/i) !== null;
 }

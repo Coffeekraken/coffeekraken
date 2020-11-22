@@ -1,6 +1,4 @@
-/**
- * @namespace           sugar.node.value
- * @src             ../_js/value/typeof.js
- * @todo            tests
- */
-module.exports = require('../_js/value/typeof');
+import _deepMerge from '../object/deepMerge';
+import _isInt from '../is/integer';
+import _isClass from '../is/class';
+import _upperFirst from '../string/upperFirst';

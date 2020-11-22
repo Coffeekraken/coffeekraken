@@ -19,9 +19,9 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function nodeIndex(node) {
-  let index = 0;
-  while ((node = node.previousElementSibling)) {
-    index++;
-  }
-  return index;
+    let index = 0;
+    while ((node = node.previousElementSibling)) {
+        index++;
+    }
+    return index;
 }

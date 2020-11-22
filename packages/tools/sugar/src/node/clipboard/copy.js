@@ -1,6 +1,6 @@
+"use strict";
 const __clipboardy = require('clipboardy');
 const __toString = require('../string/toString');
-
 /**
  * @name            copy
  * @namespace       sugar.node.clipboard
@@ -20,6 +20,6 @@ const __toString = require('../string/toString');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function copy(text) {
-  text = __toString(text);
-  __clipboardy.writeSync(text);
+    text = __toString(text);
+    __clipboardy.writeSync(text);
 };

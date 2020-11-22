@@ -1,5 +1,4 @@
 import __SRequest from './SRequest';
-
 /**
  * @name                              request
  * @namespace           sugar.js.http
@@ -31,6 +30,6 @@ import __SRequest from './SRequest';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function request(settings = {}) {
-  const request = new __SRequest(settings);
-  return request.send();
+    const request = new __SRequest(settings);
+    return request.send();
 }

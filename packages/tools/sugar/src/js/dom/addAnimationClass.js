@@ -19,12 +19,13 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function addAnimationClass($elm, cls) {
-  // make sure the cls argument is an Array
-  if (!Array.isArray(cls)) cls = [cls];
-  // add the class to the element
-  cls.forEach((_cls) => {
-    $elm.classList.add(_cls);
-  });
-  // remove the class at the end of the animation
-  return __removeClassesOnAnimationEnd($elm, cls);
+    // make sure the cls argument is an Array
+    if (!Array.isArray(cls))
+        cls = [cls];
+    // add the class to the element
+    cls.forEach((_cls) => {
+        $elm.classList.add(_cls);
+    });
+    // remove the class at the end of the animation
+    return __removeClassesOnAnimationEnd($elm, cls);
 }

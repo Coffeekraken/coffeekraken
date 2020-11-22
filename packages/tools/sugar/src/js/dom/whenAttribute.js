@@ -1,6 +1,5 @@
 import __autoCast from '../string/autoCast';
 import __observeAttribute from './observeAttributes';
-
 /**
  * @name      whenAttribute
  * @namespace           sugar.js.dom
@@ -29,31 +28,30 @@ import __observeAttribute from './observeAttributes';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function whenAttribute(elm, attrName, checkFn = null) {
-  return new Promise((resolve, reject) => {
-    if (elm.hasAttribute(attrName)) {
-      const value = __autoCast(elm.getAttribute(attrName));
-      if (checkFn && checkFn(value, value)) {
-        resolve(value);
-        return;
-      } else if (!checkFn) {
-        resolve(value);
-        return;
-      }
-    }
-
-    const obs = __observeAttribute(elm).then((mutation) => {
-      if (mutation.attributeName === attrName) {
-        const value = __autoCast(
-          mutation.target.getAttribute(mutation.attributeName)
-        );
-        if (checkFn && checkFn(value, mutation.oldValue)) {
-          resolve(value);
-          obs.cancel();
-        } else if (!checkFn) {
-          resolve(value);
-          obs.cancel();
+    return new Promise((resolve, reject) => {
+        if (elm.hasAttribute(attrName)) {
+            const value = __autoCast(elm.getAttribute(attrName));
+            if (checkFn && checkFn(value, value)) {
+                resolve(value);
+                return;
+            }
+            else if (!checkFn) {
+                resolve(value);
+                return;
+            }
         }
-      }
+        const obs = __observeAttribute(elm).then((mutation) => {
+            if (mutation.attributeName === attrName) {
+                const value = __autoCast(mutation.target.getAttribute(mutation.attributeName));
+                if (checkFn && checkFn(value, mutation.oldValue)) {
+                    resolve(value);
+                    obs.cancel();
+                }
+                else if (!checkFn) {
+                    resolve(value);
+                    obs.cancel();
+                }
+            }
+        });
     });
-  });
 }

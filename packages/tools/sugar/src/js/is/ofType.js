@@ -1,12 +1,9 @@
 import __parseTypeDefinitionString from '../validation/utils/parseTypeDefinitionString';
-import __toString from '../string/toString';
 import __isClass from './class';
 import __isInt from './integer';
-import __upperFirst from '../string/upperFirst';
 import __typeof from '../value/typeof';
 import __typeDefinitionArrayObjectToString from '../value/typeDefinitionArrayObjectToString';
 import __getExtendsStack from '../class/getExtendsStack';
-
 /**
  * @name              ofType
  * @namespace           sugar.js.is
@@ -30,123 +27,115 @@ import __getExtendsStack from '../class/getExtendsStack';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ofType(value, argTypeDefinition) {
-  let definitionArray = argTypeDefinition;
-  // parsing the argument definition string
-  if (typeof argTypeDefinition === 'string') {
-    definitionArray = __parseTypeDefinitionString(argTypeDefinition);
-  }
-
-  const typeOfValue = __typeof(value);
-  const issueObj = {
-    $received: {
-      type: __typeof(value, { of: true }),
-      value
-    },
-    $expected: {
-      type: __typeDefinitionArrayObjectToString(definitionArray)
-    },
-    $issues: ['type']
-  };
-  for (let i = 0; i < definitionArray.length; i++) {
-    const definitionObj = definitionArray[i];
-
-    // if ((value === null || value === undefined) && definitionObj.type) {
-    //   issueObj.received.type = __typeof(value);
-    // }
-
-    // Array | Object
-    if (definitionObj.type === 'Array' || definitionObj.type === 'Object') {
-      // Array
-      if (definitionObj.type === 'Array') {
-        // make sure the value is an array
-        if (typeOfValue === 'Array' && !definitionObj.of) return true;
-
-        // Object
-      } else if (definitionObj.type === 'Object') {
-        if (typeOfValue === 'Object' && !definitionObj.of) return true;
-      }
-
-      if (
-        definitionObj.of &&
-        (Array.isArray(value) || typeof value === 'object')
-      ) {
-        const loopOn = Array.isArray(value)
-          ? [...value.keys()]
-          : Object.keys(value);
-
-        let checkValuesResult = true;
-        const receivedTypes = [];
-        loopOn.forEach((valueIndex) => {
-          const valueToCheck = value[valueIndex];
-          if (ofType(valueToCheck, definitionObj.of) !== true) {
-            checkValuesResult = false;
-          }
-          const typeString = __typeof(valueToCheck);
-          if (receivedTypes.indexOf(typeString) === -1) {
-            receivedTypes.push(typeString);
-          }
-        });
-        if (checkValuesResult) return true;
-        // if (!checkValuesResult) {
-        //   issueObj.received.type = `${typeOfValue}<${receivedTypes.join('|')}>`;
+    let definitionArray = argTypeDefinition;
+    // parsing the argument definition string
+    if (typeof argTypeDefinition === 'string') {
+        definitionArray = __parseTypeDefinitionString(argTypeDefinition);
+    }
+    const typeOfValue = __typeof(value);
+    const issueObj = {
+        $received: {
+            type: __typeof(value, { of: true }),
+            value
+        },
+        $expected: {
+            type: __typeDefinitionArrayObjectToString(definitionArray)
+        },
+        $issues: ['type']
+    };
+    for (let i = 0; i < definitionArray.length; i++) {
+        const definitionObj = definitionArray[i];
+        // if ((value === null || value === undefined) && definitionObj.type) {
+        //   issueObj.received.type = __typeof(value);
         // }
-      }
+        // Array | Object
+        if (definitionObj.type === 'Array' || definitionObj.type === 'Object') {
+            // Array
+            if (definitionObj.type === 'Array') {
+                // make sure the value is an array
+                if (typeOfValue === 'Array' && !definitionObj.of)
+                    return true;
+                // Object
+            }
+            else if (definitionObj.type === 'Object') {
+                if (typeOfValue === 'Object' && !definitionObj.of)
+                    return true;
+            }
+            if (definitionObj.of &&
+                (Array.isArray(value) || typeof value === 'object')) {
+                const loopOn = Array.isArray(value)
+                    ? [...value.keys()]
+                    : Object.keys(value);
+                let checkValuesResult = true;
+                const receivedTypes = [];
+                loopOn.forEach((valueIndex) => {
+                    const valueToCheck = value[valueIndex];
+                    if (ofType(valueToCheck, definitionObj.of) !== true) {
+                        checkValuesResult = false;
+                    }
+                    const typeString = __typeof(valueToCheck);
+                    if (receivedTypes.indexOf(typeString) === -1) {
+                        receivedTypes.push(typeString);
+                    }
+                });
+                if (checkValuesResult)
+                    return true;
+                // if (!checkValuesResult) {
+                //   issueObj.received.type = `${typeOfValue}<${receivedTypes.join('|')}>`;
+                // }
+            }
+        }
+        // Class
+        else if (definitionObj.type === 'Class') {
+            if (__isClass(value))
+                return true;
+        }
+        // Integer
+        else if (definitionObj.type === 'Int' || definitionObj.type === 'Integer') {
+            if (__isInt(value))
+                return true;
+        }
+        // check default types
+        else if (['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(definitionObj.type) !== -1) {
+            if (definitionObj.type === 'Number') {
+                const type = typeOfValue;
+                if (type === 'Number' || type === 'Integer')
+                    return true;
+            }
+            else {
+                if (typeOfValue === definitionObj.type)
+                    return true;
+            }
+        }
+        // check for "custom" types
+        else if (__isClass(value) && value.name) {
+            if (__typeof(value) === definitionObj.type)
+                return true;
+            const classesStack = __getExtendsStack(value);
+            if (classesStack.indexOf(definitionObj.type) !== -1)
+                return true;
+        }
+        else if (value && value.constructor && value.constructor.name) {
+            if (definitionObj.type === value.constructor.name)
+                return true;
+        }
     }
-
-    // Class
-    else if (definitionObj.type === 'Class') {
-      if (__isClass(value)) return true;
-    }
-
-    // Integer
-    else if (definitionObj.type === 'Int' || definitionObj.type === 'Integer') {
-      if (__isInt(value)) return true;
-    }
-
-    // check default types
-    else if (
-      ['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(
-        definitionObj.type
-      ) !== -1
-    ) {
-      if (definitionObj.type === 'Number') {
-        const type = typeOfValue;
-        if (type === 'Number' || type === 'Integer') return true;
-      } else {
-        if (typeOfValue === definitionObj.type) return true;
-      }
-    }
-
-    // check for "custom" types
-    else if (__isClass(value) && value.name) {
-      if (__typeof(value) === definitionObj.type) return true;
-      const classesStack = __getExtendsStack(value);
-      if (classesStack.indexOf(definitionObj.type) !== -1) return true;
-    } else if (value && value.constructor && value.constructor.name) {
-      if (definitionObj.type === value.constructor.name) return true;
-    }
-  }
-
-  return issueObj;
+    return issueObj;
 }
-
 function getBaseClass(targetClass) {
-  const stack = [];
-
-  if (targetClass instanceof Function) {
-    let baseClass = targetClass;
-
-    while (baseClass) {
-      const newBaseClass = Object.getPrototypeOf(baseClass);
-
-      if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {
-        stack.push(newBaseClass.name);
-        baseClass = newBaseClass;
-      } else {
-        break;
-      }
+    const stack = [];
+    if (targetClass instanceof Function) {
+        let baseClass = targetClass;
+        while (baseClass) {
+            const newBaseClass = Object.getPrototypeOf(baseClass);
+            if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {
+                stack.push(newBaseClass.name);
+                baseClass = newBaseClass;
+            }
+            else {
+                break;
+            }
+        }
+        return stack;
     }
-
-    return stack;
-  }
 }

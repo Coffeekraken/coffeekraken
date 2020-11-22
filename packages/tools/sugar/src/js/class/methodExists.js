@@ -20,11 +20,12 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function methodExists(instance, ...methods) {
-  const missingMethodsArray = [];
-  if (!Array.isArray(methods)) methods = [methods];
-  methods.forEach((method) => {
-    if (typeof instance[method] !== 'function')
-      missingMethodsArray.push(method);
-  });
-  return !missingMethodsArray.length ? true : missingMethodsArray;
+    const missingMethodsArray = [];
+    if (!Array.isArray(methods))
+        methods = [methods];
+    methods.forEach((method) => {
+        if (typeof instance[method] !== 'function')
+            missingMethodsArray.push(method);
+    });
+    return !missingMethodsArray.length ? true : missingMethodsArray;
 }

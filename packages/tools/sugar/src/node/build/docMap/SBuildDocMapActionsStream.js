@@ -1,9 +1,9 @@
+"use strict";
 const __SActionsStream = require('../../stream/SActionsStream');
 const __deepMerge = require('../../object/deepMerge');
 const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
 const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
 const __SDocMapStreamAction = require('./actions/SDocMapStreamAction');
-
 /**
  * @name            SBuildDocMapActionsStream
  * @namespace           sugar.node.build.docMap
@@ -30,45 +30,40 @@ const __SDocMapStreamAction = require('./actions/SDocMapStreamAction');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildDocMapActionsStream extends __SActionsStream {
-  /**
-   * @name        constructor
-   * @type        Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  constructor(settings = {}) {
-    // init actions stream
-    super(
-      {
-        filesResolver: __SFsFilesResolverStreamAction,
-        docMap: __SDocMapStreamAction,
-        fsOutput: __SFsOutputStreamAction
-      },
-      __deepMerge(
-        {
-          id: 'SBuildDocMapActionsStream',
-          name: 'Build docMap.json Actions Stream',
-          actions: {
-            filesResolver: {
-              ignoreFolders: [],
-              out: 'files'
+    /**
+     * @name        constructor
+     * @type        Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(settings = {}) {
+        // init actions stream
+        super({
+            filesResolver: __SFsFilesResolverStreamAction,
+            docMap: __SDocMapStreamAction,
+            fsOutput: __SFsOutputStreamAction
+        }, __deepMerge({
+            id: 'SBuildDocMapActionsStream',
+            name: 'Build docMap.json Actions Stream',
+            actions: {
+                filesResolver: {
+                    ignoreFolders: [],
+                    out: 'files'
+                }
+            },
+            beforeActions: {
+                fsOutput: (streamObj) => {
+                    if (!streamObj.outputStack)
+                        streamObj.outputStack = {};
+                    if (streamObj.output && streamObj.data) {
+                        streamObj.outputStack.data = streamObj.output;
+                    }
+                    return streamObj;
+                }
             }
-          },
-          beforeActions: {
-            fsOutput: (streamObj) => {
-              if (!streamObj.outputStack) streamObj.outputStack = {};
-              if (streamObj.output && streamObj.data) {
-                streamObj.outputStack.data = streamObj.output;
-              }
-              return streamObj;
-            }
-          }
-        },
-        settings
-      )
-    );
-  }
+        }, settings));
+    }
 };

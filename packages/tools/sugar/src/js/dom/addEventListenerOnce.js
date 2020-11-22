@@ -1,6 +1,5 @@
 import __SPromise from '../promise/SPromise';
 import __addEventListener from './addEventListener';
-
 /**
  * @name        addEventListenerOnce
  * @namespace           sugar.js.dom
@@ -25,41 +24,30 @@ import __addEventListener from './addEventListener';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function addEventListenerOnce(
-  $elm,
-  eventNames,
-  callback = null,
-  useCapture = false
-) {
-  if (!Array.isArray(eventNames)) eventNames = [eventNames];
-
-  const globalPromise = new __SPromise({
-    id: 'addEventListenerOnce'
-  });
-
-  const eventsStack = {};
-
-  globalPromise.on('cancel,finally', () => {
+export default function addEventListenerOnce($elm, eventNames, callback = null, useCapture = false) {
+    if (!Array.isArray(eventNames))
+        eventNames = [eventNames];
+    const globalPromise = new __SPromise({
+        id: 'addEventListenerOnce'
+    });
+    const eventsStack = {};
+    globalPromise.on('cancel,finally', () => {
+        eventNames.forEach((eventName) => {
+            eventsStack[eventName].promise.cancel();
+        });
+    });
     eventNames.forEach((eventName) => {
-      eventsStack[eventName].promise.cancel();
+        const promise = __addEventListener($elm, eventName, null, useCapture);
+        eventsStack[eventName] = {
+            promise
+        };
+        promise.on(eventNames, (event) => {
+            if (callback && typeof callback === 'function') {
+                callback.apply(this, [event]);
+            }
+            globalPromise.trigger(eventName, event);
+            promise.cancel();
+        });
     });
-  });
-
-  eventNames.forEach((eventName) => {
-    const promise = __addEventListener($elm, eventName, null, useCapture);
-
-    eventsStack[eventName] = {
-      promise
-    };
-
-    promise.on(eventNames, (event) => {
-      if (callback && typeof callback === 'function') {
-        callback.apply(this, [event]);
-      }
-      globalPromise.trigger(eventName, event);
-      promise.cancel();
-    });
-  });
-
-  return globalPromise;
+    return globalPromise;
 }

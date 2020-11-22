@@ -28,10 +28,12 @@
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function map(object, processor) {
-  Object.keys(object).forEach((prop) => {
-    const res = processor(object[prop], prop);
-    if (res === -1) delete object[prop];
-    else object[prop] = res;
-  });
-  return object;
+    Object.keys(object).forEach((prop) => {
+        const res = processor(object[prop], prop);
+        if (res === -1)
+            delete object[prop];
+        else
+            object[prop] = res;
+    });
+    return object;
 }

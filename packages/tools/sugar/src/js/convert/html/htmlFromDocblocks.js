@@ -1,7 +1,5 @@
-import __SError from '../../error/SError';
 import __deepMerge from '../../object/deepMerge';
 import __SDocblock from '../../docblock/SDocblock';
-
 /**
  * @name            htmlFromDocblocks
  * @namespace       sugar.js.convert
@@ -26,7 +24,7 @@ import __SDocblock from '../../docblock/SDocblock';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function htmlFromDocblocks(inputString, settings = {}) {
-  settings = __deepMerge({}, settings);
-  const sDocblock = new __SDocblock(inputString, settings);
-  return sDocblock.toHtml(settings);
+    settings = __deepMerge({}, settings);
+    const sDocblock = new __SDocblock(inputString, settings);
+    return sDocblock.toHtml(settings);
 }

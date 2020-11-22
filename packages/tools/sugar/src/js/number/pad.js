@@ -16,8 +16,8 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function pad(number, width, character = '0') {
-  number = number + '';
-  return number.length >= width
-    ? number
-    : new Array(width - number.length + 1).join(character) + number;
+    number = number + '';
+    return number.length >= width
+        ? number
+        : new Array(width - number.length + 1).join(character) + number;
 }

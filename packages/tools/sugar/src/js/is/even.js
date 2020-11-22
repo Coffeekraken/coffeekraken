@@ -14,5 +14,5 @@
  * isEven(2) // true
  */
 export default function isEven(value) {
-  return value % 2 === 0;
+    return value % 2 === 0;
 }

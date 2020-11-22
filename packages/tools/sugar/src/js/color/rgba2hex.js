@@ -18,28 +18,26 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function rgba2hex(r, g, b, a = 1) {
-  if (typeof r === 'object') {
-    g = r.g;
-    b = r.b;
-    a = r.a;
-    r = r.r;
-  }
-
-  let alpha = '';
-  if (a != 1 && a != 100) {
-    if (a < 1) {
-      a = 255 * a;
-    } else if (a > 1) {
-      a = (255 / 100) * a;
+    if (typeof r === 'object') {
+        g = r.g;
+        b = r.b;
+        a = r.a;
+        r = r.r;
     }
-    a = Math.round(a);
-    alpha = parseInt(a, 10).toString(16);
-  }
-  return (
-    '#' +
-    ('0' + parseInt(r, 10).toString(16)).slice(-2) +
-    ('0' + parseInt(g, 10).toString(16)).slice(-2) +
-    ('0' + parseInt(b, 10).toString(16)).slice(-2) +
-    alpha
-  );
+    let alpha = '';
+    if (a != 1 && a != 100) {
+        if (a < 1) {
+            a = 255 * a;
+        }
+        else if (a > 1) {
+            a = (255 / 100) * a;
+        }
+        a = Math.round(a);
+        alpha = parseInt(a, 10).toString(16);
+    }
+    return ('#' +
+        ('0' + parseInt(r, 10).toString(16)).slice(-2) +
+        ('0' + parseInt(g, 10).toString(16)).slice(-2) +
+        ('0' + parseInt(b, 10).toString(16)).slice(-2) +
+        alpha);
 }

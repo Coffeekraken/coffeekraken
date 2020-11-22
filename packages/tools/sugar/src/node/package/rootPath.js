@@ -1,5 +1,5 @@
+"use strict";
 const __packageRoot = require('../path/packageRoot');
-
 /**
  * @name          rootPath
  * @namespace     sugar.node.package
@@ -19,5 +19,5 @@ const __packageRoot = require('../path/packageRoot');
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 module.exports = function rootPath(from = process.cwd(), highest = false) {
-  return __packageRoot(from, highest);
+    return __packageRoot(from, highest);
 };

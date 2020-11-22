@@ -1,5 +1,18 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * @namespace           sugar.node.easing
- * @src             ../_js/easing/easeInQuint.js
+ * @name      easeInQuint
+ * @namespace           sugar.js.easing
+ * @type      Function
+ *
+ * Ease in quint function
+ *
+ * @param 		{Number} 		t 		The current time
+ * @return 		{Number} 				The value depending on time
+ *
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = require('../_js/easing/easeInQuint');
+function default_1(t) {
+    return t * t * t * t * t;
+}
+exports.default = default_1;

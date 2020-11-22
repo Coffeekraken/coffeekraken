@@ -17,5 +17,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isChrome(ua = navigator.userAgent) {
-  return ua.indexOf('Chrome') > -1;
+    return ua.indexOf('Chrome') > -1;
 }

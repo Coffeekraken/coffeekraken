@@ -1,13 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const ensureDirSync_1 = __importDefault(require("../fs/ensureDirSync"));
-const path_1 = __importDefault(require("path"));
-const SPromise_1 = __importDefault(require("../promise/SPromise"));
-const findPackages_1 = __importDefault(require("./findPackages"));
-const child_process_1 = __importDefault(require("child_process"));
-const fs_1 = __importDefault(require("fs"));
+const ensureDirSync_1 = require("../fs/ensureDirSync");
+const path_1 = require("path");
+const SPromise_1 = require("../promise/SPromise");
+const findPackages_1 = require("./findPackages");
+const child_process_1 = require("child_process");
+const fs_1 = require("fs");
 module.exports = async function linkPackages(settings = {}) {
     settings = {
         rootDir: process.cwd(),

@@ -2,9 +2,9 @@
     "files.exclude": {
         "**/sugar/js/**": true,
         "**/sugar/node/**": true,
-        // "**/*.js": {
-        //     "when": "$(basename).ts"
-        // },
+        "**/*.js": {
+            "when": "$(basename).ts"
+        },
         "**/*.js.map": true
     },
     // Default (format when you paste)

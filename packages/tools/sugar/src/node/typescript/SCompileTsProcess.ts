@@ -1,5 +1,9 @@
-const _SProcess = require('../../process/SProcess')
-import { ISCompileTsProcessParams } from './interface/ISCompileTsProcess'
+const SProcess = require('../process/SProcess');
+import ISCompileTsProcess, {
+  ISCompileTsProcessParams,
+  ISCompileTsProcessSettings,
+  ISCompileTsProcessCtor
+} from './interface/ISCompileTsProcess';
 
 /**
  * @name            STypescriptToJsProcess
@@ -12,9 +16,9 @@ import { ISCompileTsProcessParams } from './interface/ISCompileTsProcess'
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class STypescriptToJsProcess extends _SProcess {
-  // static interface = __SFrontendServerInterface
-
+const Cls: ISCompileTsProcessCtor = class SCompileTsProcess
+  extends SProcess
+  implements ISCompileTsProcess {
   /**
    * @name          constructor
    * @type          Function
@@ -24,12 +28,12 @@ module.exports = class STypescriptToJsProcess extends _SProcess {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor (settings = {}) {
+  constructor(settings?: ISCompileTsProcessSettings) {
     super({
-      id: 'STypescriptToJsProcess',
-      name: 'Typescript to Js Process',
-      ...settings
-    })
+      id: 'SCompileTsProcess',
+      name: 'Compile TS Process',
+      ...(settings || {})
+    });
   }
 
   /**
@@ -45,8 +49,13 @@ module.exports = class STypescriptToJsProcess extends _SProcess {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  process (params: ISCompileTsProcessParams, settings = {}): void {
-    // this._frontendServerProcess = __frontendServer(params)
-    // this.bindSPromise(this._frontendServerProcess)
+  async process(
+    params?: ISCompileTsProcessParams,
+    settings?: ISCompileTsProcessSettings
+  ): Promise<any> {
+    console.log('PROCESS', params);
+    return 'coco';
   }
-}
+};
+
+export default Cls;

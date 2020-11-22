@@ -17,7 +17,8 @@
 		"robbowen.synthwave-vscode",
 		"msjsdiag.debugger-for-chrome",
 		"firefox-devtools.vscode-firefox-debug",
-		"rvest.vs-code-prettier-eslint",
-		"bruce.rona"
+		"bruce.rona",
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint"
 	]
 }

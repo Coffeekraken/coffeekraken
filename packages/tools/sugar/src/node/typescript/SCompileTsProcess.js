@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const _SProcess = require('../../process/SProcess');
+const SProcess = require('../process/SProcess');
 /**
  * @name            STypescriptToJsProcess
  * @namespace           sugar.node.typescript
@@ -12,8 +12,7 @@ const _SProcess = require('../../process/SProcess');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class STypescriptToJsProcess extends _SProcess {
-    // static interface = __SFrontendServerInterface
+const Cls = class SCompileTsProcess extends SProcess {
     /**
      * @name          constructor
      * @type          Function
@@ -23,11 +22,11 @@ module.exports = class STypescriptToJsProcess extends _SProcess {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(settings = {}) {
+    constructor(settings) {
         super({
-            id: 'STypescriptToJsProcess',
-            name: 'Typescript to Js Process',
-            ...settings
+            id: 'SCompileTsProcess',
+            name: 'Compile TS Process',
+            ...(settings || {})
         });
     }
     /**
@@ -43,8 +42,9 @@ module.exports = class STypescriptToJsProcess extends _SProcess {
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    process(params, settings = {}) {
-        // this._frontendServerProcess = __frontendServer(params)
-        // this.bindSPromise(this._frontendServerProcess)
+    async process(params, settings) {
+        console.log('PROCESS', params);
+        return 'coco';
     }
 };
+exports.default = Cls;

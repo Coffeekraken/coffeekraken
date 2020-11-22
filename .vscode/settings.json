@@ -2,13 +2,14 @@
     "files.exclude": {
         "**/sugar/js/**": true,
         "**/sugar/node/**": true,
+        "**/*.js": {
+            "when": "$(basename).ts"
+        },
+        "**/*.js.map": true,
         "**/sugar/src/node/_js": true
     },
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-    "[javascript]": {
-        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
-    }
+    // Default (format when you paste)
+    "editor.formatOnPaste": true,
+    // Default (format when you save)
+    "editor.formatOnSave": true,
 }

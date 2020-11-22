@@ -46,3 +46,6 @@ RUN apt -y install git-all
 RUN npm i -g typescript
 RUN npm i -g jest
 RUN npm i -g eslint
+
+# installing internal packages globally
+RUN cd /workspaces/coffeekraken && node packages/tools/sugar/src/cli/sugar.cli.js npm.bin i -p @coffeekraken/sugar -g

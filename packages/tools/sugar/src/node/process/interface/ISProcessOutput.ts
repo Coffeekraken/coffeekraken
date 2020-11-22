@@ -1,7 +1,16 @@
+import ISPromise from '../../promise/interface/ISPromise';
 export interface ISProcessOutputSettings {
-  something?: string
+  something?: string;
 }
+
+export interface ISProcessOutputCtor {
+  new (
+    source: ISPromise | ISPromise[],
+    settings: ISProcessOutputSettings
+  ): ISProcessOutput;
+}
+
 export default interface ISProcessOutput {
-  new (settings: ISProcessOutputSettings): ISProcessOutput
-  _settings: ISProcessOutputSettings
+  _settings: ISProcessOutputSettings;
+  _sources: ISPromise[];
 }

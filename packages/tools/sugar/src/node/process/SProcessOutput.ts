@@ -1,6 +1,8 @@
 import ISProcessOutput, {
+  ISProcessOutputCtor,
   ISProcessOutputSettings
 } from './interface/ISProcessOutput';
+import ISPromise from '../promise/interface/ISPromise';
 import _deepMerge from '../object/deepMerge';
 
 /**
@@ -25,7 +27,8 @@ import _deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SProcessOutput implements ISProcessOutput {
+const Cls: ISProcessOutputCtor = class SProcessOutput
+  implements ISProcessOutput {
   /**
    * @name      _settings
    * @type      ISProcessOutputSettings
@@ -36,7 +39,19 @@ export default class SProcessOutput implements ISProcessOutput {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _settings: {};
+  _settings: ISProcessOutputSettings = {};
+
+  /**
+   * @name      _sources
+   * @type      Array<SPromise>
+   * @private
+   *
+   * Store sources passed in the contructor
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _sources: ISPromise[];
 
   /**
    * @name      constructor
@@ -48,7 +63,13 @@ export default class SProcessOutput implements ISProcessOutput {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings: ISProcessOutputSettings = {}) {
+  constructor(
+    source: ISPromise | ISPromise[],
+    settings: ISProcessOutputSettings = {}
+  ) {
+    this._sources = Array.isArray(source) ? source : [source];
     this._settings = _deepMerge({}, settings);
   }
-}
+};
+
+export default Cls;

@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SBlessedProcessOutput = void 0;
 const SProcessOutput_1 = __importDefault(require("../SProcessOutput"));
+const SBlessedOutput_1 = __importDefault(require("../../blessed/SBlessedOutput"));
 /**
  * @name          SBlessedProcessOutput
  * @namespace     sugar.node.process.output
@@ -25,6 +25,20 @@ const SProcessOutput_1 = __importDefault(require("../SProcessOutput"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SBlessedProcessOutput extends SProcessOutput_1.default {
-}
-exports.SBlessedProcessOutput = SBlessedProcessOutput;
+const Cls = class SBlessedProcessOutput extends SProcessOutput_1.default {
+    /**
+     * @name          constructor
+     * @type          Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(source, settings) {
+        super(source, settings);
+        new SBlessedOutput_1.default(this._sources, this._settings);
+    }
+};
+exports.default = Cls;

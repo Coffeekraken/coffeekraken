@@ -1,0 +1,1 @@
+../../../js/promise/interface/ISPromise.ts

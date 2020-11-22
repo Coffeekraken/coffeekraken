@@ -26,7 +26,7 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SProcessOutput {
+const Cls = class SProcessOutput {
     /**
      * @name      constructor
      * @type      Function
@@ -37,8 +37,20 @@ class SProcessOutput {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(settings = {}) {
+    constructor(source, settings = {}) {
+        /**
+         * @name      _settings
+         * @type      ISProcessOutputSettings
+         * @private
+         *
+         * Store the process output settings
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this._settings = {};
+        this._sources = Array.isArray(source) ? source : [source];
         this._settings = deepMerge_1.default({}, settings);
     }
-}
-exports.default = SProcessOutput;
+};
+exports.default = Cls;

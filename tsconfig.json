@@ -1,5 +1,6 @@
 {
   "include": [
+    "packages/*/*/src/cli/**/*",
     "packages/*/*/src/js/**/*",
     "packages/*/*/src/node/**/*"    
   ],

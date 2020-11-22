@@ -220,7 +220,6 @@ module.exports = class SProcess extends __SPromise {
           output: {},
           runAsChild: false,
           definitionObj: {},
-          triggerParent: true,
           processPath: null,
           notifications: {
             enable: true,

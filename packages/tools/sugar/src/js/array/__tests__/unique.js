@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__unique) => {
     describe('sugar.js.array.unique', () => {
         it('Should unique an array correctly', (done) => {

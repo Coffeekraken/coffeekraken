@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -15,7 +14,7 @@ module.exports = (__request) => {
         });
         return;
     }
-    test('Making simple ajax request', (done) => __awaiter(void 0, void 0, void 0, function* () {
+    test('Making simple ajax request', (done) => __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield __request({
                 url: 'http://dummy.restapiexample.com/api/v1/employees',
@@ -28,7 +27,7 @@ module.exports = (__request) => {
             done(e);
         }
     }));
-    test('Making an ajax request with multiple send count', (done) => __awaiter(void 0, void 0, void 0, function* () {
+    test('Making an ajax request with multiple send count', (done) => __awaiter(this, void 0, void 0, function* () {
         try {
             const response = yield __request({
                 url: 'http://dummy.restapiexample.com/api/v1/employees',

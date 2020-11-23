@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @name            HtmlTagToHtmlClassMap
  * @namespace       sugar.js.html

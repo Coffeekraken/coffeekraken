@@ -1,4 +1,3 @@
-"use strict";
 const __path = require('path');
 /**
  * @TODO            more tests

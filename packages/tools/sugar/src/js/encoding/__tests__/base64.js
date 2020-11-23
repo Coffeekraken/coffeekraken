@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__base64) => {
     describe('sugar.js.encoding.base64', () => {
         it('Should encode then decode the string "hello world" correctly', () => {

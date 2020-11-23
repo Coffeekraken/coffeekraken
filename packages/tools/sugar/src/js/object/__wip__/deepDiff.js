@@ -1,4 +1,3 @@
-"use strict";
 const __diff = require('deep-diff').diff;
 const __set = require('../../../node/object/set');
 const __get = require('../../../node/object/get');

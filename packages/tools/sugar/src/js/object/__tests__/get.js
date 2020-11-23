@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__get) => {
     describe('sugar.js.object.get', () => {
         it('Should get the object property correctly', done => {

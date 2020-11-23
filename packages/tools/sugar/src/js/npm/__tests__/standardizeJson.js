@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__standardizeJson) => {
     describe('sugar.js.nav.SNav', () => {
         it('Should standardize the passed json', (done) => {

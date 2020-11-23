@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__getArgsNames) => {
     describe('sugar.js.dev.getArgsNames', () => {
         it('Should get the args names correctly', () => {

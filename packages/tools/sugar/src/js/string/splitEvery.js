@@ -1,4 +1,3 @@
-"use strict";
 const __countLine = require('./countLine');
 /**
  * @name                          splitEvery

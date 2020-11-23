@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__testFn) => {
     describe('sugar.js.is.yyyymmdd', () => {
         it('Should detect the passed variable type correctly', () => {

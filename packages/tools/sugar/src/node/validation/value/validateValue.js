@@ -1,4 +1,3 @@
-"use strict";
 const __validateValue = require('../_js/validation/value/validateValue');
 const __isPath = require('../../fs/isPath');
 /**

@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__filter) => {
     describe('sugar.js.object.filter', () => {
         it('Should filter the object correctly', done => {

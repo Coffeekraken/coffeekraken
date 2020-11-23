@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__methodExists) => {
     class MyClass {
         constructor(name) {

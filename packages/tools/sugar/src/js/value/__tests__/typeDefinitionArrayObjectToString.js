@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__typeDefinitionArrayObjectToString) => {
     describe('sugar.js.value.typeDefinitionArrayObjectToString', () => {
         it('Should return the correct typeDefinitionArrayObjectToString of the passed values', () => {

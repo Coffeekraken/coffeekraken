@@ -1,4 +1,3 @@
-"use strict";
 const __appendStylesheetLink = require('../appendStylesheetLink');
 describe('sugar.js.dom.appendStylesheetLink', () => {
     __appendStylesheetLink('hello.css');

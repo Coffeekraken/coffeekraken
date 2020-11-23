@@ -1,4 +1,3 @@
-"use strict";
 // TODO check the smtp connection...
 module.exports = (__SLog, __SLogMailAdapter) => {
     describe('sugar.js.log.SLogMailAdapter', () => {

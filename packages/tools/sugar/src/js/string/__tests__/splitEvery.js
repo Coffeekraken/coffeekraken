@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__splitEvery) => {
     describe('sugar.js.string.splitEvery', () => {
         it('Should process the passed string correctly', done => {

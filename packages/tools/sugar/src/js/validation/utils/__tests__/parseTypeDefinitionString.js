@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__parseTypeDefinitiSnString) => {
     describe('sugar.js.validation.utils.parseTypeDefinitiSnString', () => {
         it('Should parse these arguments types definitions correctly', () => {

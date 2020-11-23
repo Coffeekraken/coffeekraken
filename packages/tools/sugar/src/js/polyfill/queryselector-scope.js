@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @name 		queryselector-scope
  * @namespace           sugar.js.polyfill

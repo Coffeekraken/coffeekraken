@@ -1,4 +1,3 @@
-"use strict";
 const __deepMerge = require('../../../object/deepMerge');
 /**
  * @name                              axiosInjector

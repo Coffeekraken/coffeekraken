@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__argsToObject) => {
     describe('sugar.js.cli.argsToObject', () => {
         it('Should process the passed args object correctly', (done) => {

@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__SWatch) => {
     let obj = {
         a: 'hello',

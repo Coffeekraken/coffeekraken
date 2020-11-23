@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__extractSame) => {
     describe('sugar.js.string.extractSame', () => {
         it('Should process the passed string correctly', (done) => {

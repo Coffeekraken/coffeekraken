@@ -1,4 +1,3 @@
-"use strict";
 const __path = require('path');
 module.exports = (__SPathValidation) => {
     describe('sugar.js.validation.value.validation.SPathValidation', () => {

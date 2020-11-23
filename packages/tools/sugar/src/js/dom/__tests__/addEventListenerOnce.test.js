@@ -1,4 +1,3 @@
-"use strict";
 const __addEventListenerOnce = require('../addEventListenerOnce');
 const __dispatchEvent = require('../dispatchEvent');
 describe('sugar.js.dom.addEventListenerOnce', () => {

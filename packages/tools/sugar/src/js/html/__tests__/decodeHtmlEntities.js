@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__decodeHtmlEntities) => {
     describe('sugar.js.string.decodeHtmlEntities', () => {
         it('Should process the passed string correctly', done => {

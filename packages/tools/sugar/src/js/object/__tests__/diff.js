@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__diff) => {
     describe('sugar.js.object.diff', () => {
         it('Should merge the passed objects correctly', done => {

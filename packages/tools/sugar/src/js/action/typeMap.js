@@ -1,4 +1,3 @@
-"use strict";
 const __SUrlAction = require('./browser/SUrlAction');
 /**
  * @name            typeMap

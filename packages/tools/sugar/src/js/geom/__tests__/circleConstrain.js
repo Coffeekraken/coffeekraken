@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__circleConstrain) => {
     describe('sugar.js.geom.circleConstrain', () => {
         const res = __circleConstrain({

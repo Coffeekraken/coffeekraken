@@ -1,4 +1,3 @@
-"use strict";
 const __findPkgJson = require('find-package-json');
 /**
  * @name                    packageRoot

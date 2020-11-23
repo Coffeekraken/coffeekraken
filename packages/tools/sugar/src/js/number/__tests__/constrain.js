@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__constrain) => {
     describe('sugar.js.number.constrain', () => {
         it('Should constrain the passed numbers correctly', () => {

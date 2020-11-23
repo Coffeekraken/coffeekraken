@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__set) => {
     describe('sugar.js.object.set', () => {
         it('Should set the object property correctly', done => {

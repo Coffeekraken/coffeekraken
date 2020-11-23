@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__autoPrefix) => {
     describe('sugar.js.css.autoPrefix', () => {
         const style = `

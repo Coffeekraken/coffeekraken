@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__map) => {
     describe('sugar.js.object.map', () => {
         it('Should be processed correctly using the map function', done => {

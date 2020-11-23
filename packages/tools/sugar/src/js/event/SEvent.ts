@@ -20,7 +20,8 @@
  * @see 		https://www.npmjs.com/package/customevent
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default from 'custom-event';
+import customEvent from 'custom-event';
+export default customEvent;
 
 /**
  * @name                        constructor

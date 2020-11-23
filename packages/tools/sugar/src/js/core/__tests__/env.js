@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__env) => {
     describe('sugar.js.dev.env', () => {
         it('Should get the environment variable correctly', () => {

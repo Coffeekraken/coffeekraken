@@ -1,4 +1,3 @@
-"use strict";
 const __observeAttributes = require('../observeAttributes');
 describe('sugar.js.dom.observeAttributes', () => {
     document.body.innerHTML = `

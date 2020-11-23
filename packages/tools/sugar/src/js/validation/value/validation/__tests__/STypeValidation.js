@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__STypeValidation) => {
     describe('sugar.js.validation.value.validation.STypeValidation', () => {
         it('Should validate the passed value correctly', () => {

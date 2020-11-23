@@ -1,4 +1,3 @@
-"use strict";
 const __base64 = require('../../../crypt/base64');
 /**
  * @name                          basicFormater

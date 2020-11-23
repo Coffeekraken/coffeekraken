@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__SActionsStream) => {
     describe('sugar.js.stream.SActionsStream', () => {
         let stepsCalled = 0, action1StepCalled = 0, startCalled = 0, errorCalled = 0;

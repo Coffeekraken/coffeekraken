@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__toPlainObject) => {
     class MyClass {
         constructor(name) {

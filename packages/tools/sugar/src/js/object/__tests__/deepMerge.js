@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__deepMerge) => {
     describe('sugar.js.object.deepMerge', () => {
         it('Should merge the passed objects correctly', (done) => {

@@ -40,10 +40,7 @@
     "trailingComma": "none"
   },
   "homepage": "https://github.com/Coffeekraken/coffeekraken#readme",
-  "dependencies": {
-    "@coffeekraken/s-filtrable-input": "file:webcomponents/s-filtrable-input",
-    "@coffeekraken/sugar": "file:toolkits/sugar"
-  },
+  "dependencies": {},
   "globalDependencies": {},
   "devDependencies": {
     "@shopify/jest-dom-mocks": "^2.8.11",
@@ -74,6 +71,7 @@
     "rimraf": "^3.0.2",
     "semistandard": "^16.0.0",
     "symlink-dir": "^3.1.1",
+    "ts-migrate": "^0.1.10",
     "typescript": "^4.1.2",
     "webpack-cli": "^3.3.10"
   }

@@ -1,4 +1,3 @@
-"use strict";
 const __SLog = require('../../../node/log/SLog');
 module.exports = (__isOfType) => {
     describe('sugar.js.is.ofType', () => {

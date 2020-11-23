@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__crop) => {
     describe('sugar.js.string.crop', () => {
         it('Should process the passed string correctly', done => {

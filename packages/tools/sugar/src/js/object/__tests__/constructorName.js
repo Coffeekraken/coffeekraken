@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__constructorName) => {
     describe('sugar.js.object.constructorName', () => {
         it('Should get the constructor name correctly', () => {

@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__unquote) => {
     describe('sugar.js.string.unquote', () => {
         it('Should process the passed string correctly', done => {

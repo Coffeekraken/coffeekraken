@@ -1,4 +1,3 @@
-"use strict";
 const __imagesLoaded = require('../imagesLoaded');
 const __dispatchEvent = require('../dispatchEvent');
 describe('sugar.js.dom.imagesLoaded', () => {

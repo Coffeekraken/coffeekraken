@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__ltrim) => {
     describe('sugar.js.string.ltrim', () => {
         it('Should process the passed string correctly', done => {

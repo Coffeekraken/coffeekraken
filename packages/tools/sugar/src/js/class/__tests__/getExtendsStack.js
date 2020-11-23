@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__getExtendsStack) => {
     class MyClass {
     }

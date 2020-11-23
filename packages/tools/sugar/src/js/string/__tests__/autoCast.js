@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__autoCast) => {
     describe('sugar.js.string.autoCast', () => {
         it('Should process the passed string correctly', done => {

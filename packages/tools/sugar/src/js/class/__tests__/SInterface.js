@@ -1,4 +1,3 @@
-"use strict";
 const __stripAnsi = require('strip-ansi');
 module.exports = (__SInterface) => {
     describe('sugar.js.class.SInterface', () => {

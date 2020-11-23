@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__sprintf) => {
     describe('sugar.js.string.sprintf', () => {
         it('Should process the passed string correctly', done => {

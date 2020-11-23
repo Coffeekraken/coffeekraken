@@ -1,4 +1,3 @@
-"use strict";
 /**
  * @name              simpleValue
  * @namespace           sugar.js.docblock.tags

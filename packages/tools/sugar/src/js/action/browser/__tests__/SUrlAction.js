@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__SUrlAction) => {
     describe('sugar.js.action.SUrlAction', () => {
         it('Should return the correct JSON object', () => {

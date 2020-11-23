@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__distanceBetween) => {
     describe('sugar.js.geom.distanceBetween', () => {
         const res = __distanceBetween({

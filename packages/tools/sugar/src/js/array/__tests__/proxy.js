@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__proxy) => {
     describe('sugar.js.array.proxy', () => {
         it('Should proxy an array correctly', (done) => {

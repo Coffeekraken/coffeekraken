@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__toQueryString) => {
     describe('sugar.js.object.toQueryString', () => {
         it('Should transformt the object into a correctly formatted query string', done => {

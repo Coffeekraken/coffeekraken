@@ -1,4 +1,3 @@
-"use strict";
 const __SPromise = require('../promise/SPromise');
 /**
  * @name        on

@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__trimLines) => {
     describe('sugar.js.string.trimLines', () => {
         it('Should trim the lines correctly', (done) => {

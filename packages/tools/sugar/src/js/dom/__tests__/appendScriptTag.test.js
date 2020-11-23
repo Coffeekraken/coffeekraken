@@ -1,4 +1,3 @@
-"use strict";
 const __appendScriptTag = require('../appendScriptTag');
 describe('sugar.js.dom.appendScriptTag', () => {
     __appendScriptTag('hello.js');

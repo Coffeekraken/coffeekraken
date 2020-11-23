@@ -1,4 +1,3 @@
-"use strict";
 module.exports = (__SNav, __SNavItem) => {
     describe('sugar.js.nav.SNav', () => {
         it('Should create and update a nav correctly', (done) => {

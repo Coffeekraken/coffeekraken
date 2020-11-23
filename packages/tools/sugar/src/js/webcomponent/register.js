@@ -1,4 +1,3 @@
-"use strict";
 // import __SWebComponent from './SWebComponent';
 // export { __SWebComponent as SWebComponent };
 // export { __SLitWebComponent as SLitHtmlWebComponent };

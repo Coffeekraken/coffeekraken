@@ -1,7 +1,7 @@
-const __SFrontendServerProcess = require('../../node/server/frontend/SFrontendServerProcess');
-const __SProcessManager = require('../../node/process/SProcessManager');
+import __SFrontendServerProcess from '../../node/server/frontend/SFrontendServerProcess';
+import __SProcessManager from '../../node/process/SProcessManager';
 
-module.exports = (stringArgs = '') => {
+export default (stringArgs = '') => {
   const manager = new __SProcessManager(__SFrontendServerProcess, {
     autoRun: true,
     processSettings: {

@@ -1,7 +1,7 @@
-const __SBuildFrontspecProcess = require('../../node/frontspec/build/SBuildFrontspecProcess');
-const __SProcessManager = require('../../node/process/SProcessManager');
+import __SBuildFrontspecProcess from '../../node/frontspec/build/SBuildFrontspecProcess';
+import __SProcessManager from '../../node/process/SProcessManager';
 
-module.exports = async (stringArgs = '') => {
+export default async (stringArgs = '') => {
   new __SProcessManager(__SBuildFrontspecProcess, {
     autoRun: true,
     initialParams: stringArgs

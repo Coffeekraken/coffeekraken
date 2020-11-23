@@ -1,7 +1,7 @@
-const __SSugarAppTerminalUi = require('../../node/app/sugar/SSugarAppTerminalUi');
-const __SSugarAppProcess = require('../../node/app/sugar/SSugarAppProcess');
+import __SSugarAppTerminalUi from '../../node/app/sugar/SSugarAppTerminalUi';
+import __SSugarAppProcess from '../../node/app/sugar/SSugarAppProcess';
 
-module.exports = function (stringArgs = '') {
+export default function (stringArgs = '') {
   const sugarAppProcess = new __SSugarAppProcess({
     runAsChild: false,
     output: __SSugarAppTerminalUi

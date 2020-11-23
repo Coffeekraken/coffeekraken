@@ -1,5 +1,5 @@
 import SCompileTsProcess from '../../node/typescript/SCompileTsProcess';
 
-export = function compileTs(stringArgs = '') {
+export default function compileTs(stringArgs = '') {
   const pro = new SCompileTsProcess();
-};
+}

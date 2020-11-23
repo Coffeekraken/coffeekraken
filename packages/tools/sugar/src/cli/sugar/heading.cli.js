@@ -1,7 +1,8 @@
 "use strict";
-const __sugarHeading = require('../../node/ascii/sugarHeading');
-const __packageJson = require('../../node/package/json');
-module.exports = function (stringArgs = '') {
+import __sugarHeading from '../../node/ascii/sugarHeading';
+import __packageJson from '../../node/package/json';
+
+export default function (stringArgs = '') {
     console.log(__sugarHeading({
         version: __packageJson(__dirname).version
     }));

@@ -1,3 +1,5 @@
-module.exports = (stringArgs = '') => {
-  require('./monorepo.cli')(stringArgs);
+import monorepo from './monorepo.cli';
+
+export default (stringArgs = '') => {
+  monorepo(stringArgs);
 };

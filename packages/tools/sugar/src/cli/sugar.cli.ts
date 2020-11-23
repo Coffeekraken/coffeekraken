@@ -49,7 +49,5 @@ if (!action) {
   }
 }
 
-console.log(`./${stack}/${action}.cli.js`);
 const pkg = require(`./${stack}/${action}.cli.js`);
-console.log(pkg);
 require(`./${stack}/${action}.cli.js`)(args);

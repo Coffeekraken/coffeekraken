@@ -1,4 +1,5 @@
 "use strict";
-module.exports = (stringArgs = '') => {
+
+export default (stringArgs = '') => {
     require('./monorepo.cli')(stringArgs);
 };

@@ -1,7 +1,7 @@
-const __SBuildScssProcess = require('../../node/scss/build/SBuildScssProcess');
-const __SProcessManager = require('../../node/process/SProcessManager');
+import __SBuildScssProcess from '../../node/scss/build/SBuildScssProcess';
+import __SProcessManager from '../../node/process/SProcessManager';
 
-module.exports = (stringArgs = '') => {
+export default (stringArgs = '') => {
   new __SProcessManager(__SBuildScssProcess, {
     autoRun: true,
     initialParams: stringArgs,

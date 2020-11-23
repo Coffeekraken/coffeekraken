@@ -1,3 +1,5 @@
-module.exports = (stringArgs = '') => {
-  require('./link.cli')(stringArgs);
+import _link from './link.cli';
+
+export default async (stringArgs = '') => {
+  await _link(stringArgs);
 };

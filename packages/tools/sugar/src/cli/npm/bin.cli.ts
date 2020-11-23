@@ -1,13 +1,13 @@
-const _parseArgs = require('../../node/cli/parseArgs')
-const _SNpmBinCliInterface = require('./interface/SNpmBinCliInterface')
-const _childProcess = require('child_process')
-const __packageRoot = require('../../node/path/packageRoot')
-const _glob = require('glob')
-const _fs = require('fs')
-const _path = require('path')
-const _findPackages = require('../../node/monorepo/findPackages')
+import _parseArgs from '../../node/cli/parseArgs';
+import _SNpmBinCliInterface from './interface/SNpmBinCliInterface';
+import _childProcess from 'child_process';
+import __packageRoot from '../../node/path/packageRoot';
+import _glob from 'glob';
+import _fs from 'fs';
+import _path from 'path';
+import _findPackages from '../../node/monorepo/findPackages';
 
-module.exports = async function bin (stringArgs = '') {
+export default async function bin (stringArgs = '') {
   const argsObj = _parseArgs(stringArgs, {
     definitionObj: _SNpmBinCliInterface.definitionObj
   })
@@ -64,4 +64,4 @@ module.exports = async function bin (stringArgs = '') {
       }
     })
   }
-}
+};

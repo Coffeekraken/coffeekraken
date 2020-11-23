@@ -1,7 +1,8 @@
 "use strict";
-const __packageRoot = require('../../node/path/packageRoot');
-const __parseArgs = require('../../node/cli/parseArgs');
-module.exports = async (stringArgs = '') => {
+import __packageRoot from '../../node/path/packageRoot';
+import __parseArgs from '../../node/cli/parseArgs';
+
+export default async (stringArgs = '') => {
     const args = __parseArgs(stringArgs, {
         definitionObj: {
             highest: {

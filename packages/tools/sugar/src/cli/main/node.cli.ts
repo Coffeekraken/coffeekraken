@@ -1,14 +1,14 @@
-const __fs = require('fs');
-const __find = require('find-in-files');
-const __path = require('path');
-const __writeFileSync = require('../../node/fs/writeFileSync');
-const __set = require('../../node/object/set');
-const __appRoot = require('app-root-path');
-const __parseArgs = require('../../node/cli/parseArgs');
-const __parse = require('../../node/docblock/parse');
-const __includes = require('../../node/string/includes');
+import __fs from 'fs';
+import __find from 'find-in-files';
+import __path from 'path';
+import __writeFileSync from '../../node/fs/writeFileSync';
+import __set from '../../node/object/set';
+import __appRoot from 'app-root-path';
+import __parseArgs from '../../node/cli/parseArgs';
+import __parse from '../../node/docblock/parse';
+import __includes from '../../node/string/includes';
 
-module.exports = async (stringArgs = '') => {
+export default async (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
     definitionObj: {
       source: {

@@ -1,6 +1,6 @@
 #!/usr/bin/env node --trace-warnings --trace-uncaught
 "use strict";
-require('../node/index');
+import '../node/index';
 // const __exitCleanup = require('../node/process/exitCleanup');
 /**
  * @name            sugar.cli

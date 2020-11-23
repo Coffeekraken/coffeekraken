@@ -1,7 +1,8 @@
 "use strict";
-const __SSugarAppTerminalUi = require('../../node/app/sugar/SSugarAppTerminalUi');
-const __SSugarAppProcess = require('../../node/app/sugar/SSugarAppProcess');
-module.exports = function (stringArgs = '') {
+import __SSugarAppTerminalUi from '../../node/app/sugar/SSugarAppTerminalUi';
+import __SSugarAppProcess from '../../node/app/sugar/SSugarAppProcess';
+
+export default function (stringArgs = '') {
     const sugarAppProcess = new __SSugarAppProcess({
         runAsChild: false,
         output: __SSugarAppTerminalUi

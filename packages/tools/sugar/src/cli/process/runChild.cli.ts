@@ -1,7 +1,11 @@
-const __parseArgs = require('../../node/cli/parseArgs');
+import __parseArgs from '../../node/cli/parseArgs';
 
-module.exports = (stringArgs = '') => {
-  const args = __parseArgs(stringArgs);
+interface IProcessRunChildOptions {
+  processPath: string;
+}
+
+export default (stringArgs = '') => {
+  const args: IProcessRunChildOptions = __parseArgs(stringArgs);
   if (!args.processPath) {
     throw `Sorry but to use this endpont you have to specify at least a "--processPath" parameter...`;
   }

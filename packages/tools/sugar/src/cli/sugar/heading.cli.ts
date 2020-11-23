@@ -1,10 +1,10 @@
-const __sugarHeading = require('../../node/ascii/sugarHeading');
-const __packageJson = require('../../node/package/json');
+import _sugarHeading from '../../node/ascii/sugarHeading';
+import _packageJson from '../../node/package/json';
 
-module.exports = function (stringArgs = '') {
+export default function (stringArgs = '') {
   console.log(
-    __sugarHeading({
-      version: __packageJson(__dirname).version
+    _sugarHeading({
+      version: _packageJson(__dirname).version
     })
   );
-};
+}

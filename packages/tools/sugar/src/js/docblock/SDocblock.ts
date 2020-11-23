@@ -5,6 +5,7 @@ import __handlebars from 'handlebars';
 // import __markdown from './markdown/index';
 import __isNode from '../is/node';
 import __isPath from '../is/path';
+import __fs from 'fs';
 
 /**
  * @name                  Dockblock
@@ -117,7 +118,6 @@ export default class SDocblock {
         throw new __SError(
           `Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`
         );
-      const __fs = require('fs');
       if (!__fs.existsSync(source))
         throw new __SError(
           `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`

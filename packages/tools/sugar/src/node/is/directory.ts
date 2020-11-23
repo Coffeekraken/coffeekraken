@@ -1,5 +1,5 @@
-const __fs = require('fs');
-const __deepMerge = require('../object/deepMerge');
+import __fs from 'fs';
+import __deepMerge from '../object/deepMerge';
 
 /**
  * @name            directory
@@ -12,7 +12,7 @@ const __deepMerge = require('../object/deepMerge');
  * @return    {Boolean}                   true if is a directory, false if not
  *
  * @example     js
- * const isDirectory = require('@coffeekraken/sugar/node/is/directory');
+ * import isDirectory from '@coffeekraken/sugar/node/is/directory';
  * isDirectory('something/cool');
  *
  * @todo        Tests
@@ -20,7 +20,7 @@ const __deepMerge = require('../object/deepMerge');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function isDirectory(path, settings = {}) {
+export default function isDirectory(path, settings = {}) {
   settings = __deepMerge(
     {
       symlink: true
@@ -37,4 +37,4 @@ module.exports = function isDirectory(path, settings = {}) {
     isMatching = isMatching && __fs.lstatSync(path).isDirectory();
   }
   return isMatching;
-};
+}

@@ -1,9 +1,9 @@
-const __sugarConfig = require('../config/sugar');
-const __jsObjectToScssMap = require('./jsObjectToScssMap');
-const __putUseStatementsOnTop = require('./putUseStatementsOnTop');
-const __packageRoot = require('../path/packageRoot');
-const __isInPackage = require('../is/inPackage');
-const __path = require('path');
+import __sugarConfig from '../config/sugar';
+import __jsObjectToScssMap from './jsObjectToScssMap';
+import __putUseStatementsOnTop from './putUseStatementsOnTop';
+import __packageRoot from '../path/packageRoot';
+import __isInPackage from '../is/inPackage';
+import __path from 'path';
 
 /**
  * @name            injectSugarScss
@@ -17,7 +17,7 @@ const __path = require('path');
  * @return      {String}                        The new string with the sugar scss init code injected
  *
  * @example       js
- * const injectSugarScss = require('@coffeekraken/sugar/node/scss/injectSugarScss');
+ * import injectSugarScss from '@coffeekraken/sugar/node/scss/injectSugarScss';
  * injectSugarScss(``
  *    body {
  *      color: Sugar.color('primary');
@@ -27,7 +27,7 @@ const __path = require('path');
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function injectSugarScss(scss) {
+export default function injectSugarScss(scss) {
   if (scss.includes(' as Sugar;')) return scss;
 
   const scssSettings = __sugarConfig('scss');
@@ -47,4 +47,4 @@ module.exports = function injectSugarScss(scss) {
   `);
 
   return res;
-};
+}

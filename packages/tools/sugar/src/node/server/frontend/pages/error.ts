@@ -1,4 +1,4 @@
-const __deepMerge = require('../../../object/deepMerge');
+import __deepMerge from '../../../object/deepMerge';
 
 /**
  * @name                error
@@ -18,7 +18,7 @@ const __deepMerge = require('../../../object/deepMerge');
  * - ctas.target (_self) {String}: The target of the cta.
  *
  * @example             js
- * const 404 = require('@coffeekraken/sugar/node/server/frontend/pages/404');
+ * import 404 from '@coffeekraken/sugar/node/server/frontend/pages/404';
  * const content = await 404('Error', 'Something wrong happened', null, [{
  *    text: 'Go to Google',
  *    href: 'https://google.com'
@@ -27,7 +27,7 @@ const __deepMerge = require('../../../object/deepMerge');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function error(data = {}) {
+export default function error(data = {}) {
   data = __deepMerge(
     {
       title: 'Error',
@@ -58,4 +58,4 @@ module.exports = function error(data = {}) {
     settings: JSON.stringify(settings),
     packageJson: __standardizeJson(require(__packageRoot() + '/package.json'))
   };
-};
+}

@@ -1,5 +1,5 @@
-const __SInterface = require('../../class/SInterface');
-const __SProcessManagerInterface = require('../../process/SProcessManager');
+import __SInterface from '../../class/SInterface';
+import __SProcessManagerInterface from '../../process/SProcessManager';
 
 /**
  * @name                SCliInterface
@@ -13,7 +13,7 @@ const __SProcessManagerInterface = require('../../process/SProcessManager');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCliInterface extends __SInterface {
+export default class SCliInterface extends __SInterface {
   static definitionObj = {
     interface: {
       type: 'SInterface',

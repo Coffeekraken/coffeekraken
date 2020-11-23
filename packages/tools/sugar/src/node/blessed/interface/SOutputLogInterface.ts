@@ -1,4 +1,4 @@
-const __SInterface = require('../../class/SInterface');
+import __SInterface from '../../class/SInterface';
 
 /**
  * @name                SOutputLogInterface
@@ -12,7 +12,7 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SOutputLogInterface extends __SInterface {
+export default class SOutputLogInterface extends __SInterface {
   static definitionObj = {
     value: {
       // type: 'Function',
@@ -48,4 +48,4 @@ module.exports = class SOutputLogInterface extends __SInterface {
       default: 1
     }
   };
-};
+}

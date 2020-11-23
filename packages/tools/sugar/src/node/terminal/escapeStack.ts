@@ -1,5 +1,5 @@
-const __SPromise = require('../promise/SPromise');
-const __hotkey = require('../keyboard/hotkey');
+import __SPromise from '../promise/SPromise';
+import __hotkey from '../keyboard/hotkey';
 
 /**
  * @name                          escapeStack
@@ -15,7 +15,7 @@ const __hotkey = require('../keyboard/hotkey');
  * @param         {Number}            [index=null]    Optionally the index under which you want to register your callback. If not specified, will be automatically setted
  *
  * @example       js
- * const escapeStack = require('@coffeekraken/sugar/node/terminal/escapeStack');
+ * import escapeStack from '@coffeekraken/sugar/node/terminal/escapeStack';
  * escapeStack(() => {
  *    // do something
  * });
@@ -24,7 +24,8 @@ const __hotkey = require('../keyboard/hotkey');
  */
 const escapeStackStack = [];
 let hotkeyInitiated = false;
-module.exports = function escapeStack(callback = null) {
+
+export default function escapeStack(callback = null) {
   const promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {
     id: 'escapeStack'
   });
@@ -82,4 +83,4 @@ module.exports = function escapeStack(callback = null) {
   // }
 
   return;
-};
+}

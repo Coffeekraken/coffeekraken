@@ -1,14 +1,14 @@
-const __copy = require('../clipboard/copy');
-const __SPromise = require('../promise/SPromise');
-const __deepMerge = require('../object/deepMerge');
-const __packageRoot = require('../path/packageRoot');
-const __packageJson = require('../package/json');
-const __glob = require('glob');
-const __toString = require('../string/toString');
-const __fs = require('fs');
-const __path = require('path');
-const __unique = require('../array/unique');
-const __sugarConfig = require('../config/sugar');
+import __copy from '../clipboard/copy';
+import __SPromise from '../promise/SPromise';
+import __deepMerge from '../object/deepMerge';
+import __packageRoot from '../path/packageRoot';
+import __packageJson from '../package/json';
+import __glob from 'glob';
+import __toString from '../string/toString';
+import __fs from 'fs';
+import __path from 'path';
+import __unique from '../array/unique';
+import __sugarConfig from '../config/sugar';
 
 /**
  * @name                SFrontspec
@@ -32,7 +32,7 @@ const __sugarConfig = require('../config/sugar');
  * @todo        update doc
  *
  * @example             js
- * const SFrontspec = require('@coffeekraken/sugar/node/doc/SFrontspec');
+ * import SFrontspec from '@coffeekraken/sugar/node/doc/SFrontspec';
  * const frontspec = new SFrontspec({
  *  outputDir: '/my/cool/directory'
  * });
@@ -41,7 +41,7 @@ const __sugarConfig = require('../config/sugar');
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFrontspec extends __SPromise {
+export default class SFrontspec extends __SPromise {
   /**
    * @name          _entries
    * @type           Array<Object>
@@ -224,4 +224,4 @@ module.exports = class SFrontspec extends __SPromise {
       }
     );
   }
-};
+}

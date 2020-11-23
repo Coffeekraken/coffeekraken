@@ -1,7 +1,7 @@
-const __deepMerge = require('../object/deepMerge');
-const __SPromise = require('../promise/SPromise');
-const __SCommand = require('./SCommand');
-const __sugarConfig = require('../config/sugar');
+import __deepMerge from '../object/deepMerge';
+import __SPromise from '../promise/SPromise';
+import __SCommand from './SCommand';
+import __sugarConfig from '../config/sugar';
 
 /**
  * @name                    SProcess
@@ -25,7 +25,7 @@ const __sugarConfig = require('../config/sugar');
       - command: Specify a command name to run when the type is "run"
  *
  * @example         js
- * const SProcess = require('@coffeekraken/sugar/node/terminal/SProcess');
+ * import SProcess from '@coffeekraken/sugar/node/terminal/SProcess';
  * const app = new SProcess({
  *    install: {
  *      command: 'npm install something'
@@ -37,7 +37,7 @@ const __sugarConfig = require('../config/sugar');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SProcess {
+export default class SProcess {
   /**
    * @name              _settings
    * @type              Object
@@ -234,4 +234,4 @@ module.exports = class SProcess {
     // return the promise
     return command.run();
   }
-};
+}

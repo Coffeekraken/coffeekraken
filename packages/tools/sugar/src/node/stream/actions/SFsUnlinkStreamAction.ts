@@ -1,7 +1,7 @@
-const __SActionsStreamAction = require('../SActionsStreamAction');
-const __rimraf = require('rimraf');
-const __deepMerge = require('../../object/deepMerge');
-const __SInterface = require('../../class/SInterface');
+import __SActionsStreamAction from '../SActionsStreamAction';
+import __rimraf from 'rimraf';
+import __deepMerge from '../../object/deepMerge';
+import __SInterface from '../../class/SInterface';
 
 class SFsUnlinkStreamActionInterface extends __SInterface {
   static definitionObj = {
@@ -28,7 +28,7 @@ class SFsUnlinkStreamActionInterface extends __SInterface {
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsUnlinkStreamAction extends __SActionsStreamAction {
+export default class SFsUnlinkStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -76,4 +76,4 @@ module.exports = class SFsUnlinkStreamAction extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-};
+}

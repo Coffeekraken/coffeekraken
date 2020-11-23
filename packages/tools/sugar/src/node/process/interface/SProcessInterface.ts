@@ -1,4 +1,4 @@
-const __SInterface = require('../../class/SInterface');
+import __SInterface from '../../class/SInterface';
 
 /**
  * @name                SProcessInterface
@@ -12,7 +12,7 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SProcessInterface extends __SInterface {
+export default class SProcessInterface extends __SInterface {
   // static extendsArray = ['SProcess', 'SPromise'];
   static definitionObj = {
     id: {
@@ -63,4 +63,4 @@ module.exports = class SProcessInterface extends __SInterface {
   static title = 'SProcess elements Interface';
   static description =
     'This interface represent the minimum requirements that MUST have the instance that run some commands etc across the entire toolkit';
-};
+}

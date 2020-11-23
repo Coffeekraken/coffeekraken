@@ -1,4 +1,4 @@
-const __findPkgJson = require('find-package-json');
+import __findPkgJson from 'find-package-json';
 
 /**
  * @name                    packageRoot
@@ -12,13 +12,13 @@ const __findPkgJson = require('find-package-json');
  * @return          {String}                                      The finded package path or false if not finded
  *
  * @example         js
- * const packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
+ * import packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  * const root = packageRoot();
  *
  * @see       https://www.npmjs.com/package/find-package-json
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function packageRoot(from = process.cwd(), highest = false) {
+export default function packageRoot(from = process.cwd(), highest = false) {
   const f = __findPkgJson(from);
   let file = f.next();
 
@@ -38,4 +38,4 @@ module.exports = function packageRoot(from = process.cwd(), highest = false) {
     return finalFile.filename.split('/').slice(0, -1).join('/');
   }
   return false;
-};
+}

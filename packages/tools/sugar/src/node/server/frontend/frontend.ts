@@ -1,16 +1,16 @@
-const __mimeTypes = require('mime-types');
-const __sugarConfig = require('../../config/sugar');
-const __deepMerge = require('../../object/deepMerge');
-const __fs = require('fs');
-const __path = require('path');
-const __SPromise = require('../../promise/SPromise');
-const __express = require('express');
-const __trimLines = require('../../string/trimLines');
-const __SError = require('../../error/SError');
-const __STemplate = require('../../template/STemplate');
-const __deepMap = require('../../object/deepMap');
-const __extension = require('../../fs/extension');
-const __packageRoot = require('../../path/packageRoot');
+import __mimeTypes from 'mime-types';
+import __sugarConfig from '../../config/sugar';
+import __deepMerge from '../../object/deepMerge';
+import __fs from 'fs';
+import __path from 'path';
+import __SPromise from '../../promise/SPromise';
+import __express from 'express';
+import __trimLines from '../../string/trimLines';
+import __SError from '../../error/SError';
+import __STemplate from '../../template/STemplate';
+import __deepMap from '../../object/deepMap';
+import __extension from '../../fs/extension';
+import __packageRoot from '../../path/packageRoot';
 
 /**
  * @name                express
@@ -25,13 +25,13 @@ const __packageRoot = require('../../path/packageRoot');
  * @event         log       Some informations that you can or not display to your users
  *
  * @example       js
- * const frontendServer = require('@coffeekraken/sugar/node/server/frontend/frontend');
+ * import frontendServer from '@coffeekraken/sugar/node/server/frontend/frontend';
  * frontendServer({});
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = (args = {}) => {
+export default (args = {}) => {
   const settings = __deepMerge(__sugarConfig('frontend'), args);
   const server = __express();
 

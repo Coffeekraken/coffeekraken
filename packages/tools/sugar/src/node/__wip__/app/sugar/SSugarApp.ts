@@ -1,10 +1,10 @@
-const __deepMerge = require('../../object/deepMerge');
-const __SPromise = require('../../promise/SPromise');
-const __sugarConfig = require('../../config/sugar');
-const __SSugarAppModuleConfigInterface = require('./interface/SSugarAppModuleConfigInterface');
-const __isClass = require('../../is/class');
-const __SError = require('../../error/SError');
-const __SSugarAppModule = require('./SSugarAppModule');
+import __deepMerge from '../../object/deepMerge';
+import __SPromise from '../../promise/SPromise';
+import __sugarConfig from '../../config/sugar';
+import __SSugarAppModuleConfigInterface from './interface/SSugarAppModuleConfigInterface';
+import __isClass from '../../is/class';
+import __SError from '../../error/SError';
+import __SSugarAppModule from './SSugarAppModule';
 
 /**
  * @name            SSugarApp
@@ -24,13 +24,13 @@ const __SSugarAppModule = require('./SSugarAppModule');
  * -
  *
  * @example         js
- * const SSugarApp = require('@coffeekraken/sugar/node/ui/sugar/SSugarApp');
+ * import SSugarApp from @coffeekraken/sugar/node/ui/sugar/SSugarApp';
  * const sugarUi = new SSugarApp();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSugarApp extends __SPromise {
+export default class SSugarApp extends __SPromise {
   /**
    * @name              _modulesObjs
    * @type              Object<Object>
@@ -258,4 +258,4 @@ module.exports = class SSugarApp extends __SPromise {
       this._modulesObjs[moduleIdx] = moduleObj;
     });
   }
-};
+}

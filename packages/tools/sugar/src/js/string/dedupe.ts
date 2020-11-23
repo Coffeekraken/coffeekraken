@@ -14,7 +14,7 @@ import __toRegex from 'to-regex';
  * @return          {String}                      The deduplicated string
  *
  * @example       js
- * const dedupe = require('@coffeekraken/sugar/js/string/dedupe');
+ * import dedupe from '@coffeekraken/sugar/js/string/dedupe';
  * dedupe('hello world hello your', 'hello'); // => hello world your
  *
  * @since       2.0.0

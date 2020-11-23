@@ -1,6 +1,6 @@
-const __STemplateEngineInterface = require('./interface/STemplateEngineInterface');
-const __deepMerge = require('../../object/deepMerge');
-const __sugarConfig = require('../../config/sugar');
+import __STemplateEngineInterface from './interface/STemplateEngineInterface';
+import __deepMerge from '../../object/deepMerge';
+import __sugarConfig from '../../config/sugar';
 
 /**
  * @name          STemplateEngine
@@ -19,8 +19,8 @@ const __sugarConfig = require('../../config/sugar');
  * @Todo      documentation
  *
  * @example     js
- * const STemplateEngine = require('@coffeekraken/sugar/node/template/engines/STemplateEngine');
- * module.exports = class MyTemplateEngine extends STemplateEngine {
+ * import STemplateEngine from '@coffeekraken/sugar/node/template/engines/STemplateEngine';
+ * export default class MyTemplateEngine extends STemplateEngine {
  *    static input = 'path';
  *    static canRender(templateString) {
  *      // ...
@@ -40,7 +40,7 @@ const __sugarConfig = require('../../config/sugar');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class STemplateEngine {
+export default class STemplateEngine {
   /**
    * @name      _settings
    * @type      Object
@@ -67,6 +67,3 @@ class STemplateEngine {
     this._settings = __deepMerge({}, settings);
   }
 }
-
-module.exports = STemplateEngine;
-// module.exports = __STemplateEngineInterface.implements(STemplateEngine);

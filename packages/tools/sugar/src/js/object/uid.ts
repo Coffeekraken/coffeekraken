@@ -18,7 +18,7 @@ import __crypto from 'crypto';
  * @return      {String}                                The uniqid generate based on the objects passed
  *
  * @example       js
- * const uid = require('@coffeekraken/sugar/node/object/uid');
+ * import uid from '@coffeekraken/sugar/node/object/uid';
  * uid({ hello: 'world' }, { plop: 'coco' }); // => ijfw89uf98jhw9ef8whef87hw7e8q87wegfh78wgf87gw8fgw8e7fzghwz8efgw8fwzuheihgbweuzf
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

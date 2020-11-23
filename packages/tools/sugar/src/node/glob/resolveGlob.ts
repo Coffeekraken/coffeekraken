@@ -1,13 +1,13 @@
-const __deepMerge = require('../object/deepMerge');
-const __SPromise = require('../promise/SPromise');
-const __glob = require('glob');
-const __SFsFile = require('../fs/SFsFile');
-const __extractGlob = require('./extractGlob');
-const __isGlob = require('../is/glob');
-const __isPath = require('../is/path');
-const __fs = require('fs');
-const __toRegex = require('to-regex');
-const __isDirectory = require('../is/directory');
+import __deepMerge from '../object/deepMerge';
+import __SPromise from '../promise/SPromise';
+import __glob from 'glob';
+import __SFsFile from '../fs/SFsFile';
+import __extractGlob from './extractGlob';
+import __isGlob from '../is/glob';
+import __isPath from '../is/path';
+import __fs from 'fs';
+import __toRegex from 'to-regex';
+import __isDirectory from '../is/directory';
 
 /**
  * @name            resolveGlob
@@ -28,14 +28,14 @@ const __isDirectory = require('../is/directory');
  * @todo          document the special ":" syntax available
  *
  * @example         js
- * const resolveGlob = require('@coffeekraken/sugar/node/glob/resolveGlob');
+ * import resolveGlob from '@coffeekraken/sugar/node/glob/resolveGlob';
  * await resolveGlob('/my/cool/pattern/*.js');
  *
  * @see         https://www.npmjs.com/package/glob
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function resolveGlob(globs, settings = {}) {
+export default function resolveGlob(globs, settings = {}) {
   return new __SPromise(
     (resolve, reject, trigger, cancel) => {
       settings = __deepMerge(
@@ -110,4 +110,4 @@ module.exports = function resolveGlob(globs, settings = {}) {
       id: 'resolveGlob'
     }
   );
-};
+}

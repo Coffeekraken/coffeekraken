@@ -1,4 +1,4 @@
-module.exports = (__SConfig, __SConfigFsAdapter) => {
+export default (__SConfig, __SConfigFsAdapter) => {
   const config = new __SConfig('myCoolConfig', {
     adapters: [
       new __SConfigFsAdapter({

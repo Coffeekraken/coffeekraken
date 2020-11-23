@@ -1,4 +1,4 @@
-const __fs = require('fs');
+import __fs from 'fs';
 
 /**
  * @name            symlink
@@ -11,7 +11,7 @@ const __fs = require('fs');
  * @return    {Boolean}                   true if is a sySlink, false if not
  *
  * @example     js
- * const isSymlink = require('@coffeekraken/sugar/node/is/symlink');
+ * import isSymlink from '@coffeekraken/sugar/node/is/symlink';
  * isSymlink('something/cool');
  *
  * @todo        Tests
@@ -19,6 +19,6 @@ const __fs = require('fs');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function isSymlink(path) {
+export default function isSymlink(path) {
   return __fs.existsSync(path) && __fs.lstatSync(path).isSymbolicLink();
-};
+}

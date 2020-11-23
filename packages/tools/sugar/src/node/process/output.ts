@@ -1,4 +1,4 @@
-const __SBlessedOutput = require('../blessed/SBlessedOutput');
+import __SBlessedOutput from '../blessed/SBlessedOutput';
 
 /**
  * @name            output
@@ -15,15 +15,15 @@ const __SBlessedOutput = require('../blessed/SBlessedOutput');
  * @param         {Object}            [settings={}]     An object of blessed settings that will be passed to the main blessed.box instance
  *
  * @example       js
- * const output = require('@coffeekraken/sugar/node/process/output');
- * const spawn = require('@coffeekraken/sugar/node/process/spawn');
+ * import output from '@coffeekraken/sugar/node/process/output';
+ * import spawn from '@coffeekraken/sugar/node/process/spawn';
  * const proc = spawn('ls -la');
  * output(proc);
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (source, settings = {}) => {
+export default (source, settings = {}) => {
   const output = new __SBlessedOutput(source, settings);
   return output;
 };

@@ -1,8 +1,8 @@
-const __sugarConfig = require('../config/sugar');
-const __isInPackage = require('../path/isInPackage');
-const __packageRoot = require('../path/packageRoot');
-const __path = require('path');
-const __jsObjectToScssMap = require('./jsObjectToScssMap');
+import __sugarConfig from '../config/sugar';
+import __isInPackage from '../path/isInPackage';
+import __packageRoot from '../path/packageRoot';
+import __path from 'path';
+import __jsObjectToScssMap from './jsObjectToScssMap';
 
 /**
  * @name            getScssSharedResourcesString
@@ -16,7 +16,7 @@ const __jsObjectToScssMap = require('./jsObjectToScssMap');
  *
  * @since       2.0.0
  */
-module.exports = function getScssSharedResourcesString(array = null) {
+export default function getScssSharedResourcesString(array = null) {
   if (!array) array = __sugarConfig('scss.sharedResources');
 
   let importsStrings = '';

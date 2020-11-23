@@ -1,10 +1,10 @@
-const __deepMerge = require('../../object/deepMerge');
-const __packageRoot = require('../../path/packageRoot');
-const __fs = require('fs');
-const __Fuse = require('fuse.js');
-const __SSearchResultItem = require('../SSearchResultItem');
-const __searchQueryParser = require('search-query-parser');
-const __SUrlAction = require('../../action/browser/SUrlAction');
+import __deepMerge from '../../object/deepMerge';
+import __packageRoot from '../../path/packageRoot';
+import __fs from 'fs';
+import __Fuse from 'fuse.js';
+import __SSearchResultItem from '../SSearchResultItem';
+import __searchQueryParser from 'search-query-parser';
+import __SUrlAction from '../../action/browser/SUrlAction';
 
 /**
  * @name                search
@@ -21,7 +21,7 @@ const __SUrlAction = require('../../action/browser/SUrlAction');
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function search(searchString, settings = {}) {
+export default function search(searchString, settings = {}) {
   settings = __deepMerge(
     {
       filePath: __packageRoot() + '/docMap.json',
@@ -99,4 +99,4 @@ module.exports = function search(searchString, settings = {}) {
     // resolving the handler with the results array
     resolve(results);
   });
-};
+}

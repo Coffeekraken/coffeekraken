@@ -1,7 +1,7 @@
-const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __deepMerge = require('../../../object/deepMerge');
-const __SBuildScssInterface = require('../interface/SBuildScssInterface');
-const __SScssCompiler = require('../../SScssCompiler');
+import __SActionsStreamAction from '../../../stream/SActionsStreamAction';
+import __deepMerge from '../../../object/deepMerge';
+import __SBuildScssInterface from '../interface/SBuildScssInterface';
+import __SScssCompiler from '../../SScssCompiler';
 
 /**
  * @name                SRenderSassStreamAction
@@ -16,7 +16,7 @@ const __SScssCompiler = require('../../SScssCompiler');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
+export default class SRenderSassStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -73,4 +73,4 @@ module.exports = class SRenderSassStreamAction extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-};
+}

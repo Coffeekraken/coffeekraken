@@ -1,11 +1,11 @@
-const __deepMerge = require('../object/deepMerge');
-const __SPromise = require('../promise/SPromise');
-const __esbuild = require('esbuild');
-const __builtInNodeModules = require('../module/buildInNodeModules');
-const __resolve = require('resolve');
-const __filter = require('../object/filter');
-const __SBuildJsInterface = require('./build/interface/SBuildJsInterface');
-const __esbuildScssLoaderPlugin = require('./build/plugins/esbuild/esbuildScssLoaderPlugin');
+import __deepMerge from '../object/deepMerge';
+import __SPromise from '../promise/SPromise';
+import __esbuild from 'esbuild';
+import __builtInNodeModules from '../module/buildInNodeModules';
+import __resolve from 'resolve';
+import __filter from '../object/filter';
+import __SBuildJsInterface from './build/interface/SBuildJsInterface';
+import __esbuildScssLoaderPlugin from './build/plugins/esbuild/esbuildScssLoaderPlugin';
 
 /**
  * @name                SJsCompiler
@@ -23,7 +23,7 @@ const __esbuildScssLoaderPlugin = require('./build/plugins/esbuild/esbuildScssLo
  * @todo            tests
  *
  * @example         js
- * const SJsCompiler = require('@coffeekraken/sugar/node/scss/SJsCompiler');
+ * import SJsCompiler from '@coffeekraken/sugar/node/scss/SJsCompiler';
  * const compiler = new SJsCompiler();
  * const compiledFile = await compiler.compile('my/cool/code.scss');
  * const compiledCode = await compiler.compile(`
@@ -36,7 +36,7 @@ const __esbuildScssLoaderPlugin = require('./build/plugins/esbuild/esbuildScssLo
  */
 let _rootDir;
 
-module.exports = class SJsCompiler {
+export default class SJsCompiler {
   /**
    * @name            _settings
    * @type            Object
@@ -226,4 +226,4 @@ module.exports = class SJsCompiler {
       }
     );
   }
-};
+}

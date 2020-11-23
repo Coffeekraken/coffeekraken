@@ -1,5 +1,5 @@
-const __deepMerge = require('../object/deepMerge');
-const __countLine = require('../string/countLine');
+import __deepMerge from '../object/deepMerge';
+import __countLine from '../string/countLine';
 
 /**
  * @name                                    center
@@ -16,12 +16,12 @@ const __countLine = require('../string/countLine');
  * @return                {String}                                          The centered text
  *
  * @example             js
- * const center = require('@coffeekraken/sugar/node/terminal/center');
+ * import center from '@coffeekraken/sugar/node/terminal/center';
  * center('Hello world'); // => '                 Hello world'
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function center(text, settings = {}) {
+export default function center(text, settings = {}) {
   settings = __deepMerge(
     {
       spaceChar: '~'
@@ -38,4 +38,4 @@ module.exports = function center(text, settings = {}) {
       .join(' ');
   });
   return Array.isArray(text) ? lines : lines.join('\n');
-};
+}

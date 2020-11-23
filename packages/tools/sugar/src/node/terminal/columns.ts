@@ -1,6 +1,6 @@
-const __splitLineEvery = require('./__wip__/splitLineEvery');
-const __countLine = require('../string/countLine');
-const __deepMerge = require('../object/deepMerge');
+import __splitLineEvery from './__wip__/splitLineEvery';
+import __countLine from '../string/countLine';
+import __deepMerge from '../object/deepMerge';
 
 /**
  * @name                                          columns
@@ -16,7 +16,7 @@ const __deepMerge = require('../object/deepMerge');
  * @return                {String}                                                  The string to log in the terminal
  *
  * @example               js
- * const columns = require('@coffeekraken/sugar/node/terminal/columns');
+ * import columns from '@coffeekraken/sugar/node/terminal/columns';
  * columns([
  *  'Hello world',
  *  'How are you?'
@@ -24,7 +24,7 @@ const __deepMerge = require('../object/deepMerge');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function columns(content, settings = {}) {
+export default function columns(content, settings = {}) {
   settings = __deepMerge(
     {
       width: process.env.STDOUT_COLUMNS || process.stdout.columns,
@@ -112,4 +112,4 @@ module.exports = function columns(content, settings = {}) {
   }
 
   return lines.join('\n');
-};
+}

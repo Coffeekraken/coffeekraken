@@ -9,7 +9,7 @@
  * or some others to come depending on the needs...
  *
  * @example             js
- * const builtInNodeModules = require('@coffeekraken/sugar/node/module/builtInNodeModules');
+ * import builtInNodeModules from '@coffeekraken/sugar/node/module/builtInNodeModules';
  * // {
  * //   os: {
  * //     polyfill: {
@@ -22,7 +22,7 @@
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = {
+export default {
   assert: {
     polyfill: {
       browser: 'assert'

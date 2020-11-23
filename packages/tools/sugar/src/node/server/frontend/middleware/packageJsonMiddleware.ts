@@ -1,6 +1,6 @@
-const __packageRoot = require('../../../path/packageRoot');
-const __fs = require('fs');
-const __standardizeJson = require('../../../npm/standardizeJson');
+import __packageRoot from '../../../path/packageRoot';
+import __fs from 'fs';
+import __standardizeJson from '../../../npm/standardizeJson';
 
 /**
  * @name            packageJsonMiddleware
@@ -15,8 +15,8 @@ const __standardizeJson = require('../../../npm/standardizeJson');
  * @param           {Function}          next            The next function to call when the middleware has finished his job
  *
  * @example         js
- * const express = require('express');
- * const packageJsonMiddleware = require('@coffeekraken/sugar/server/frontend/middleware/packageJsonMiddleware');
+ * import express from 'express';
+ * import packageJsonMiddleware from '@coffeekraken/sugar/server/frontend/middleware/packageJsonMiddleware';
  * const server = express();
  * server.use(packageJsonMiddleware);
  * server.listen(3000);
@@ -24,7 +24,7 @@ const __standardizeJson = require('../../../npm/standardizeJson');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function packageJsonMiddleware(settings = {}) {
+export default function packageJsonMiddleware(settings = {}) {
   return function (req, res, next) {
     const packageJsonPath = `${__packageRoot()}/package.json`;
     let package;
@@ -39,4 +39,4 @@ module.exports = function packageJsonMiddleware(settings = {}) {
 
     next();
   };
-};
+}

@@ -1,13 +1,13 @@
-const __deepMerge = require('../object/deepMerge');
-const __SPromise = require('../promise/SPromise');
-const __SFsFileInterface = require('./interface/SFsFileInterface');
-const __fs = require('fs');
-const __path = require('path');
-const __extension = require('./extension');
-const __getFilename = require('./filename');
-const __SFsFileSettingsInterface = require('./interface/SFsFileSettingsInterface');
-const __SError = require('../error/SError');
-const __packageRoot = require('../path/packageRoot');
+import __deepMerge from '../object/deepMerge';
+import __SPromise from '../promise/SPromise';
+import __SFsFileInterface from './interface/SFsFileInterface';
+import __fs from 'fs';
+import __path from 'path';
+import __extension from './extension';
+import __getFilename from './filename';
+import __SFsFileSettingsInterface from './interface/SFsFileSettingsInterface';
+import __SError from '../error/SError';
+import __packageRoot from '../path/packageRoot';
 
 /**
  * @name            SFsFile
@@ -34,7 +34,7 @@ const __packageRoot = require('../path/packageRoot');
  * - checkExistence (true) {Boolean}: Specify if you want this inited file to really exists on the disk or not
  *
  * @example           js
- * const SFsFile = require('@coffeekraken/sugar/node/fs/SFsFile');
+ * import SFsFile from '@coffeekraken/sugar/node/fs/SFsFile';
  * const file = new SFsFile('something/cool/sugar.json');
  * file.extension; // => json
  * file.exists; // => true
@@ -230,4 +230,4 @@ class SFsFile extends __SPromise {
   }
 }
 
-module.exports = __SFsFileInterface.implements(SFsFile);
+export default __SFsFileInterface.implements(SFsFile);

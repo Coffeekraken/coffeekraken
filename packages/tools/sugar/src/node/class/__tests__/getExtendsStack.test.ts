@@ -1,2 +1,2 @@
-const __getExtendsStack = require('../getExtendsStack');
-require('../_js/class/__tests__/getExtendsStack')(__getExtendsStack);
+import __getExtendsStack from '../getExtendsStack';
+throw 'WIP';

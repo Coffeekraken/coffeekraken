@@ -1,7 +1,7 @@
-const __SActionsStreamAction = require('../SActionsStreamAction');
-const __ncp = require('ncp').ncp;
-const __deepMerge = require('../../object/deepMerge');
-const __SInterface = require('../../class/SInterface');
+import __SActionsStreamAction from '../SActionsStreamAction';
+import __deepMerge from '../../object/deepMerge';
+import __SInterface from '../../class/SInterface';
+import { ncp as __ncp } from 'ncp';
 
 class SFsCopyStreamActionInterface extends __SInterface {
   static definitionObj = {
@@ -29,7 +29,7 @@ class SFsCopyStreamActionInterface extends __SInterface {
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsCopyStreamAction extends __SActionsStreamAction {
+export default class SFsCopyStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -78,4 +78,4 @@ module.exports = class SFsCopyStreamAction extends __SActionsStreamAction {
       });
     });
   }
-};
+}

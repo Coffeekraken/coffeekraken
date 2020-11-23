@@ -1,6 +1,6 @@
-const __downloadsFolder = require('downloads-folder');
-const __path = require('path');
-const __download = require('download-file');
+import __downloadsFolder from 'downloads-folder';
+import __path from 'path';
+import __download from 'download-file';
 
 // TODO tests
 
@@ -17,14 +17,14 @@ const __download = require('download-file');
  * @return            {Promise}                                 A promise that will be resolved with the final absolute file path, or rejected with the error passed
  *
  * @example       js
- * const downloadFile = require('@coffeekraken/node/fs/downloadFile');
+ * import downloadFile from '@coffeekraken/node/fs/downloadFile';
  * downloadFile('https://myCoolFileUrl.ch/coco.json').then((dest) => {
  *    console.log('file downloeaded and saved here', dest);
  * }).catch(err) => {});
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function (
+export default function (
   downloadUrl,
   destinationPath = __downloadsFolder(),
   callback = null
@@ -60,4 +60,4 @@ module.exports = function (
       }
     );
   });
-};
+}

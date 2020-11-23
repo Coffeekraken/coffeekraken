@@ -8,8 +8,8 @@
  * @return      {Boolean}             true if the exit cleanup has been registered, false if not
  *
  * @example         js
- * const hasExitCleanup = require('@coffeekraken/sugar/node/process/hasExitCleanup');
- * const exitCleanup = require('@coffeekraken/sugar/node/process/exitCleanup');
+ * import hasExitCleanup from '@coffeekraken/sugar/node/process/hasExitCleanup';
+ * import exitCleanup from '@coffeekraken/sugar/node/process/exitCleanup';
  * hasExitCleanup(); // => false;
  * exitCleanup();
  * hasExitCleanup(); // => true
@@ -17,8 +17,8 @@
  * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function hasExitCleanup() {
+export default function hasExitCleanup() {
   return process.env.EXIT_CLEANUP !== undefined
     ? process.env.EXIT_CLEANUP
     : false;
-};
+}

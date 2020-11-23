@@ -1,5 +1,5 @@
-const __isValidPath = require('is-valid-path');
-const __fs = require('fs');
+import __isValidPath from 'is-valid-path';
+import __fs from 'fs';
 
 // TODO tests
 
@@ -15,13 +15,13 @@ const __fs = require('fs');
  * @return        {Boolean}                             true if the path is valide, false if not
  *
  * @example       js
- * const isPath = require('@coffeekraken/sugar/node/fs/isPath');
+ * import isPath from '@coffeekraken/sugar/node/fs/isPath';
  * isPath('hello/world'); // => true
  *
  * @see       https://www.npmjs.com/package/is-valid-path
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function isPath(path, checkExistence = false) {
+export default function isPath(path, checkExistence = false) {
   // check if the path is valid or not
   if (!__isValidPath(path)) return false;
 
@@ -32,4 +32,4 @@ module.exports = function isPath(path, checkExistence = false) {
 
   // otherwise, all is ok
   return true;
-};
+}

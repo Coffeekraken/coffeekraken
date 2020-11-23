@@ -1,7 +1,7 @@
-const __SPromise = require('../promise/SPromise');
-const __SDeamonInterface = require('./interface/SDeamonInterface');
-const __deepMerge = require('../object/deepMerge');
-const __onProcessExit = require('../process/onProcessExit');
+import __SPromise from '../promise/SPromise';
+import __SDeamonInterface from './interface/SDeamonInterface';
+import __deepMerge from '../object/deepMerge';
+import __onProcessExit from '../process/onProcessExit';
 
 /**
  * @name                SDeamon
@@ -189,5 +189,4 @@ class SDeamon extends __SPromise {
   }
 }
 
-module.exports = SDeamon;
-// module.exports = __SDeamonInterface.implements(SDeamon);
+export default SDeamon;

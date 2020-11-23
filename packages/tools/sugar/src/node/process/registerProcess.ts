@@ -1,4 +1,4 @@
-const __uniquid = require('../string/uniqid');
+import __uniquid from '../string/uniqid';
 
 /**
  * @name              registerProcess
@@ -12,13 +12,13 @@ const __uniquid = require('../string/uniqid');
  * @param       {String}      [name=null]       A specific name for your process. By default a uniqid will be generated
  *
  * @example         js
- * const registerProcess = require('@coffeekraken/sugar/node/process/registerProcess');
+ * import registerProcess from '@coffeekraken/sugar/node/process/registerProcess';
  * registerProcess(childProcess.exec('ls -la'));
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function registerProcess(pro, name = __uniquid()) {
+export default function registerProcess(pro, name = __uniquid()) {
   if (!global._registeredProcesses) global._registeredProcesses = {};
   global._registeredProcesses[name] = pro;
   if (pro && typeof pro.on === 'function') {
@@ -26,4 +26,4 @@ module.exports = function registerProcess(pro, name = __uniquid()) {
       delete global._registeredProcesses[name];
     });
   }
-};
+}

@@ -11,13 +11,13 @@
  * @return          {String}                                The file extension
  *
  * @example         js
- * const extension = require('@coffeekraken/sugar/node/fs/extension');
+ * import extension from '@coffeekraken/sugar/node/fs/extension';
  * extension('hello/world.jpg'); // => jpg
  *
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function extension(path) {
+export default function extension(path) {
   const lastPart = path.split('/').pop();
   if (!lastPart.includes('.')) return '';
   return path.split('.').pop();
-};
+}

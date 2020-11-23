@@ -1,11 +1,11 @@
-const __path = require('path');
-const __fs = require('fs');
-const __packageRoot = require('../../../path/packageRoot');
-const __SPromise = require('../../../promise/SPromise');
-const __packageJson = require('../../../package/json');
-const __sugarConfig = require('../../../config/sugar');
-const __STemplate = require('../../../template/STemplate');
-const STemplate = require('../../../template/STemplate');
+import __path from 'path';
+import __fs from 'fs';
+import __packageRoot from '../../../path/packageRoot';
+import __SPromise from '../../../promise/SPromise';
+import __packageJson from '../../../package/json';
+import __sugarConfig from '../../../config/sugar';
+import __STemplate from '../../../template/STemplate';
+import STemplate from '../../../template/STemplate';
 
 /**
  * @name                homepage
@@ -21,7 +21,7 @@ const STemplate = require('../../../template/STemplate');
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function homepage(req, res, settings = {}) {
+export default function homepage(req, res, settings = {}) {
   // search for the view to render
   const packageRoot = __packageRoot();
   const packageJson = __packageJson();
@@ -71,4 +71,4 @@ module.exports = function homepage(req, res, settings = {}) {
       id: 'frontendServerHomepageHandler'
     }
   );
-};
+}

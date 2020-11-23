@@ -1,8 +1,8 @@
-const __blessed = require('blessed');
-const __SBlessedComponent = require('./SBlessedComponent');
-const __deepMerge = require('../object/deepMerge');
-const __parseHtml = require('../terminal/parseHtml');
-const __color = require('../color/color');
+import __blessed from 'blessed';
+import __SBlessedComponent from './SBlessedComponent';
+import __deepMerge from '../object/deepMerge';
+import __parseHtml from '../terminal/parseHtml';
+import __color from '../color/color';
 
 /**
  * @name                  SBlessedComponent
@@ -14,7 +14,7 @@ const __color = require('../color/color');
  * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
  *
  * @example       js
- * const SBlessedComponent = require('@coffeekraken/sugar/node/blessed/SBlessedComponent');
+ * import SBlessedComponent from '@coffeekraken/sugar/node/blessed/SBlessedComponent';
  * class MyCoolComponent extends SBlessedComponent {
  *    constructor(settings = {}) {
  *      super(settings);
@@ -23,7 +23,7 @@ const __color = require('../color/color');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SHeader extends __SBlessedComponent {
+export default class SHeader extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function
@@ -78,4 +78,4 @@ module.exports = class SHeader extends __SBlessedComponent {
   update() {
     super.update();
   }
-};
+}

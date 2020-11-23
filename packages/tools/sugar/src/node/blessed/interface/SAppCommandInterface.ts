@@ -1,8 +1,8 @@
-const __SInterface = require('../../class/SInterface');
-const __SOutputProcessInterface = require('./SOutputProcessInterface');
-const __SProcessManagerInterface = require('../../process/interface/SProcessManagerInterface');
-const __SOutputLogInterface = require('./SOutputLogInterface');
-const __SCliInterface = require('../../cli/interface/SCliInterface');
+import __SInterface from '../../class/SInterface';
+import __SOutputProcessInterface from './SOutputProcessInterface';
+import __SProcessManagerInterface from '../../process/interface/SProcessManagerInterface';
+import __SOutputLogInterface from './SOutputLogInterface';
+import __SCliInterface from '../../cli/interface/SCliInterface';
 
 /**
  * @name                SAppCommandInterface
@@ -16,7 +16,7 @@ const __SCliInterface = require('../../cli/interface/SCliInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SAppCommandInterface extends __SInterface {
+export default class SAppCommandInterface extends __SInterface {
   // static implementsArray = [__SCliInterface];
 
   // static definitionObj = {};
@@ -24,4 +24,4 @@ module.exports = class SAppCommandInterface extends __SInterface {
   static title = 'SApp Command Interface';
   static description =
     'This interface represent the minimum requirements that MUST have the instances passed in an SApp based application';
-};
+}

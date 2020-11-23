@@ -1,8 +1,8 @@
-const __deepMerge = require('../object/deepMerge');
-const __blessed = require('blessed');
-const __parseHtml = require('./parseHtml');
-const __splitEvery = require('../string/splitEvery');
-const __countLine = require('../string/countLine');
+import __deepMerge from '../object/deepMerge';
+import __blessed from 'blessed';
+import __parseHtml from './parseHtml';
+import __splitEvery from '../string/splitEvery';
+import __countLine from '../string/countLine';
 
 /**
  * @name                    SHeader
@@ -17,13 +17,13 @@ const __countLine = require('../string/countLine');
  * - screen (true) {Boolean}: Specify if you want your header wrapped inside an "blessed"(https://www.npmjs.com/package/blessed) screen object. Useful when you just want to render your header in the terminal. If you have your own screen object
  *
  * @example         js
- * const SHeader = require('@coffeekraken/sugar/node/terminal/SHeader');
+ * import SHeader from '@coffeekraken/sugar/node/terminal/SHeader';
  * const header = new SHeader('Hello world', {});
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SHeader extends __blessed.box {
+export default class SHeader extends __blessed.box {
   /**
    * @name              _title
    * @type              String
@@ -89,4 +89,4 @@ module.exports = class SHeader extends __blessed.box {
     // render the screen
     if (this.screen) this.screen.render();
   }
-};
+}

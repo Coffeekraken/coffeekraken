@@ -1,5 +1,5 @@
-const __getFilename = require('../../fs/filename');
-const __packageRoot = require('../../path/packageRoot');
+import __getFilename from '../../fs/filename';
+import __packageRoot from '../../path/packageRoot';
 
 // my-custom-reporter.js
 class STestJestOutputReporter {
@@ -92,4 +92,4 @@ class STestJestOutputReporter {
   }
 }
 
-module.exports = STestJestOutputReporter;
+export default STestJestOutputReporter;

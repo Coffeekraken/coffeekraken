@@ -1,6 +1,6 @@
-const __SScssCompiler = require('../../../scss/SScssCompiler');
-const __SDuration = require('../../../time/SDuration');
-const __SBuildScssInterface = require('../../../scss/build/interface/SBuildScssInterface');
+import __SScssCompiler from '../../../scss/SScssCompiler';
+import __SDuration from '../../../time/SDuration';
+import __SBuildScssInterface from '../../../scss/build/interface/SBuildScssInterface';
 
 /**
  * @name                scss
@@ -16,7 +16,7 @@ const __SBuildScssInterface = require('../../../scss/build/interface/SBuildScssI
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function scss(req, res, settings = {}) {
+export default async function scss(req, res, settings = {}) {
   const defaultValuesObj = __SBuildScssInterface.getDefaultValues();
   const compiler = new __SScssCompiler(defaultValuesObj);
   const duration = new __SDuration();
@@ -33,4 +33,4 @@ module.exports = async function scss(req, res, settings = {}) {
   res.type('text/css');
   res.status(200);
   res.send(compileRes.css);
-};
+}

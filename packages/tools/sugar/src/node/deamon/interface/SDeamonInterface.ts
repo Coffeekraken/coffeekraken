@@ -1,4 +1,4 @@
-const __SInterface = require('../../class/SInterface');
+import __SInterface from '../../class/SInterface';
 
 /**
  * @name                SDeamonInterface
@@ -13,7 +13,7 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SDeamonInterface extends __SInterface {
+export default class SDeamonInterface extends __SInterface {
   static extendsArray = ['SPromise'];
   static definitionObj = {
     logs: {
@@ -30,4 +30,4 @@ module.exports = class SDeamonInterface extends __SInterface {
       values: ['idle', 'watching', 'error']
     }
   };
-};
+}

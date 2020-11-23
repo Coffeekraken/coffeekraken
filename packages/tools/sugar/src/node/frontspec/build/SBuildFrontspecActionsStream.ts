@@ -1,8 +1,8 @@
-const __SActionsStream = require('../../stream/SActionsStream');
-const __deepMerge = require('../../object/deepMerge');
-const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
-const __SBuildFrontspecInterface = require('./interface/SBuildFrontspecInterface');
-const __SBuildFrontspecStreamAction = require('./actions/SBuildFrontspecStreamAction');
+import __SActionsStream from '../../stream/SActionsStream';
+import __deepMerge from '../../object/deepMerge';
+import __SFsOutputStreamAction from '../../stream/actions/SFsOutputStreamAction';
+import __SBuildFrontspecInterface from './interface/SBuildFrontspecInterface';
+import __SBuildFrontspecStreamAction from './actions/SBuildFrontspecStreamAction';
 
 /**
  * @name            SBuildFrontspecActionsStream
@@ -17,7 +17,7 @@ const __SBuildFrontspecStreamAction = require('./actions/SBuildFrontspecStreamAc
  * @todo        Document the streamObj required properties
  *
  * @example         js
- * const SBuildFrontspecActionsStream = require('@coffeekraken/sugar/node/build/frontspec/SBuildFrontspecActionsStream');
+ * import SBuildFrontspecActionsStream from '@coffeekraken/sugar/node/build/frontspec/SBuildFrontspecActionsStream';
  * const myStream = new SBuildFrontspecActionsStream();
  * myStream.start({
  *    input: '...',
@@ -29,7 +29,7 @@ const __SBuildFrontspecStreamAction = require('./actions/SBuildFrontspecStreamAc
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildFrontspecActionsStream extends __SActionsStream {
+export default class SBuildFrontspecActionsStream extends __SActionsStream {
   static interface = __SBuildFrontspecInterface;
 
   /**
@@ -59,4 +59,4 @@ module.exports = class SBuildFrontspecActionsStream extends __SActionsStream {
       )
     );
   }
-};
+}

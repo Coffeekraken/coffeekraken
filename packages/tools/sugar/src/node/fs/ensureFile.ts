@@ -1,4 +1,4 @@
-const __fs = require('fs-extra');
+import __fs from 'fs-extra';
 
 // TODO tests
 
@@ -14,7 +14,7 @@ const __fs = require('fs-extra');
  * @return      {Promise}                           A promise that will be resolved once the file has been created if needed...
  *
  * @example       js
- * const ensureFile = require('@coffeekraken/node/fs/ensureFile');
+ * import ensureFile from '@coffeekraken/node/fs/ensureFile';
  * ensureFile('my/cool/file.jpg').then(() => {
  *    // do something...
  * });
@@ -22,6 +22,6 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function ensureFile(file) {
+export default function ensureFile(file) {
   return __fs.ensureFile(file);
-};
+}

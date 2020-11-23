@@ -1,4 +1,4 @@
-const __fs = require('fs-extra');
+import __fs from 'fs-extra';
 
 // TODO tests
 
@@ -16,7 +16,7 @@ const __fs = require('fs-extra');
  * @return      {Promise}                           A promise that will be resolved when the writeFile is completed
  *
  * @example       js
- * const writeFile = require('@coffeekraken/node/fs/writeFile');
+ * import writeFile from '@coffeekraken/node/fs/writeFile';
  * writeFile('my/cool/file.txt', 'Hello World').then(() => {
  *    // do something on complete...
  * });
@@ -24,6 +24,6 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function writeFile(path, data, options = {}) {
+export default function writeFile(path, data, options = {}) {
   return __fs.outputFile(path, data, options);
-};
+}

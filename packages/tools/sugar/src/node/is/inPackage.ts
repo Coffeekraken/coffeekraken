@@ -1,4 +1,4 @@
-const __isInPackage = require('../path/isInPackage');
+import __isInPackage from '../path/isInPackage';
 
 /**
  * @name            inPackage
@@ -13,16 +13,12 @@ const __isInPackage = require('../path/isInPackage');
  * @return      {Boolean}                           true if is in the passed package, false if not
  *
  * @example       js
- * const isInPackage = require('@coffeekraken/sugar/node/is/inPackage');
+ * import isInPackage from '@coffeekraken/sugar/node/is/inPackage';
  * isInPackage('@coffeekraken/sugar'); // => true
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = function inPackage(
-  name,
-  from = process.cwd(),
-  highest = false
-) {
+export default function inPackage(name, from = process.cwd(), highest = false) {
   return __isInPackage(name, from, highest);
-};
+}

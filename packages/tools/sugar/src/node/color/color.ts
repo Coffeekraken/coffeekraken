@@ -1,4 +1,4 @@
-const __SColor = require('./SColor');
+import __SColor from './SColor';
 
 /**
  * @name                color
@@ -16,6 +16,6 @@ const __SColor = require('./SColor');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function color(color) {
+export default function color(color) {
   return new __SColor(color);
 };

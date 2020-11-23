@@ -1,17 +1,16 @@
-const __deepMerge = require('../../object/deepMerge');
-const __blessed = require('blessed');
-const __parseHtml = require('../../terminal/parseHtml');
-const __splitEvery = require('../../string/splitEvery');
-const __countLine = require('../../string/countLine');
-const __uniqid = require('../../string/uniqid');
-const __sugarConfig = require('../../config/sugar');
-const { print, stringify } = require('q-i');
-const __SPromise = require('../../promise/SPromise');
-const __color = require('../../color/color');
-const __hotkey = require('../../keyboard/hotkey');
-const __clone = require('../../object/clone');
-
-const __SBlessedComponent = require('../SBlessedComponent');
+import __deepMerge from '../../object/deepMerge';
+import __blessed from 'blessed';
+import __parseHtml from '../../terminal/parseHtml';
+import __splitEvery from '../../string/splitEvery';
+import __countLine from '../../string/countLine';
+import __uniqid from '../../string/uniqid';
+import __sugarConfig from '../../config/sugar';
+import __SPromise from '../../promise/SPromise';
+import __color from '../../color/color';
+import __hotkey from '../../keyboard/hotkey';
+import __clone from '../../object/clone';
+import __SBlessedComponent from '../SBlessedComponent';
+import { print, stringify } from 'q-i';
 
 /**
  * @name                    SLogPanel
@@ -26,7 +25,7 @@ const __SBlessedComponent = require('../SBlessedComponent');
  * - screen (true) {Boolean}: Specify if you want your panel wrapped inside an "blessed"(https://www.npmjs.com/package/blessed) screen object. Useful when you just want to render your panel in the terminal. If you have your own screen object
  *
  * @example         js
- * const SLogPanel = require('@coffeekraken/sugar/node/terminal/SLogPanel');
+ * import SLogPanel from '@coffeekraken/sugar/node/terminal/SLogPanel';
  * const panel = new SLogPanel('my-cool-pannel', {
  * });
  * panel.log('Hello world');
@@ -36,7 +35,7 @@ const __SBlessedComponent = require('../SBlessedComponent');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SLogPanel extends __SBlessedComponent {
+export default class SLogPanel extends __SBlessedComponent {
   /**
    * @name              _name
    * @type              String
@@ -365,4 +364,4 @@ module.exports = class SLogPanel extends __SBlessedComponent {
     // return the lines
     return lines;
   }
-};
+}

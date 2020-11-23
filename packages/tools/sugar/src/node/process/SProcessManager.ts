@@ -1,15 +1,15 @@
-const __argsToObject = require('../cli/argsToObject');
-const __isClass = require('../is/class');
-const __isChildProcess = require('../is/childProcess');
-const __packageRoot = require('../path/packageRoot');
-const __SPromise = require('../promise/SPromise');
-const __SProcessManagerInterface = require('./interface/SProcessManagerInterface');
-const __SError = require('../error/SError');
-const __deepMerge = require('../object/deepMerge');
-const __SIpc = require('../ipc/SIpc');
-const __getExtendsStack = require('../class/getExtendsStack');
-const __output = require('./output');
-const { watch } = require('chokidar');
+import __argsToObject from '../cli/argsToObject';
+import __isClass from '../is/class';
+import __isChildProcess from '../is/childProcess';
+import __packageRoot from '../path/packageRoot';
+import __SPromise from '../promise/SPromise';
+import __SProcessManagerInterface from './interface/SProcessManagerInterface';
+import __SError from '../error/SError';
+import __deepMerge from '../object/deepMerge';
+import __SIpc from '../ipc/SIpc';
+import __getExtendsStack from '../class/getExtendsStack';
+import __output from './output';
+import { watch } from 'chokidar';
 
 /**
  * @name            SProcessManager
@@ -321,8 +321,6 @@ class SProcessManager extends __SPromise {
     return this.currentProcess;
   }
 }
-
-// module.exports = SProcess;
-module.exports = __SProcessManagerInterface.implements(SProcessManager, [
+export default __SProcessManagerInterface.implements(SProcessManager, [
   __SProcessManagerInterface
 ]);

@@ -1,4 +1,4 @@
-const __SPromise = require('../promise/SPromise');
+import __SPromise from '../promise/SPromise';
 
 /**
  * @name        on
@@ -13,7 +13,7 @@ const __SPromise = require('../promise/SPromise');
  * @return        {Function}                    Return an "unsubscribe" function callable when you want to stop executing the callback
  *
  * @example       js
- * const on = require('@coffeekraken/sugar/node/event/on');
+ * import on from '@coffeekraken/sugar/node/event/on';
  * on('something', () => {
  *    // do something
  * });
@@ -21,7 +21,7 @@ const __SPromise = require('../promise/SPromise');
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function on(name, callback) {
+export default function on(name, callback) {
   // check that the global SPromise exists
   if (!global._sugarEventSPromise)
     global._sugarEventSPromise = new __SPromise({
@@ -33,4 +33,4 @@ module.exports = function on(name, callback) {
   return () => {
     global._sugarEventSPromise.off(name, callback);
   };
-};
+}

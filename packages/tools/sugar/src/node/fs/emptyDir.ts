@@ -1,4 +1,4 @@
-const __fs = require('fs-extra');
+import __fs from 'fs-extra';
 
 // TODO tests
 
@@ -14,7 +14,7 @@ const __fs = require('fs-extra');
  * @return      {Promise}                           A promise that will be resolved once the directory has been cleaned
  *
  * @example       js
- * const emptyDir = require('@coffeekraken/node/fs/emptyDir');
+ * import emptyDir from '@coffeekraken/node/fs/emptyDir';
  * emptyDir('my/cool/directory').then(() => {
  *    // do something...
  * });
@@ -22,6 +22,6 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function emptyDir(dir) {
+export default function emptyDir(dir) {
   return __fs.emptyDir(dir);
-};
+}

@@ -1,4 +1,4 @@
-const __fs = require('fs-extra');
+import __fs from 'fs-extra';
 
 // TODO tests
 
@@ -12,7 +12,7 @@ const __fs = require('fs-extra');
  * @param       {String}              path           The file/directory path to delete
  *
  * @example       js
- * const removeSync = require('@coffeekraken/node/fs/removeSync');
+ * import removeSync from '@coffeekraken/node/fs/removeSync';
  * try {
  *    removeSync('my/cool/file.json');
  * } catch(e) {}
@@ -20,6 +20,6 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function removeSync(path) {
+export default function removeSync(path) {
   return __fs.removeSync(path);
-};
+}

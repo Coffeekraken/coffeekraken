@@ -1,4 +1,5 @@
-const __isPortFree = require('./isPortFree');
+import __isPortFree from './isPortFree';
+
 /**
  * @name            getFreePort
  * @namespace       sugar.node.http
@@ -12,13 +13,13 @@ const __isPortFree = require('./isPortFree');
  * @return          {Promise}                           A promise that will be resolved once a free port has been found
  *
  * @example         js
- * const getFreePort = require('@coffeekraken/sugar/node/network/getFreePort');
+ * import getFreePort from '@coffeekraken/sugar/node/network/getFreePort';
  * await getFreePort(); // => 22343
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = function getFreePort(port = null) {
+export default function getFreePort(port = null) {
   return new Promise(async (resolve) => {
     if (!port) port = Math.round(Math.random() * 65535);
     let isFree = await __isPortFree(port);
@@ -28,4 +29,4 @@ module.exports = function getFreePort(port = null) {
     } while (!isFree);
     resolve(port);
   });
-};
+}

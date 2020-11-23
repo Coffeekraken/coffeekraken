@@ -1,4 +1,4 @@
-const __fs = require('fs-extra');
+import __fs from 'fs-extra';
 
 // TODO tests
 
@@ -12,7 +12,7 @@ const __fs = require('fs-extra');
  * @param       {String}              dir           The directory path to empty
  *
  * @example       js
- * const emptyDirSync = require('@coffeekraken/node/fs/emptyDirSync');
+ * import emptyDirSync from '@coffeekraken/node/fs/emptyDirSync';
  * try {
  *    emptyDirSync('my/cool/directory');
  * } catch(e) {}
@@ -20,6 +20,6 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function emptyDirSync(dir) {
+export default function emptyDirSync(dir) {
   __fs.emptyDirSync(dir);
-};
+}

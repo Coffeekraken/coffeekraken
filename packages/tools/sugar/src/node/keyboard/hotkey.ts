@@ -1,10 +1,9 @@
-const __SPromise = require('../promise/SPromise');
-const __uniqid = require('../string/uniqid');
-const __keypress = require('keypress');
-const __activeSpace = require('../core/activeSpace');
-const __SIpc = require('../ipc/SIpc');
-const __isChildProcess = require('../is/childProcess');
-// const __ioHook = require('iohook');
+import __SPromise from '../promise/SPromise';
+import __uniqid from '../string/uniqid';
+import __keypress from 'keypress';
+import __activeSpace from '../core/activeSpace';
+import __SIpc from '../ipc/SIpc';
+import __isChildProcess from '../is/childProcess';
 
 /**
  * @name                hotkey
@@ -22,7 +21,7 @@ const __isChildProcess = require('../is/childProcess');
  * @return      {SPromise}                       An SPromise instance on which you can register for "key" stack event
  *
  * @example         js
- * const hotkey = require('@coffeekraken/sugar/node/keyboard/hotkey');
+ * import hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
  * const promise = hotkey('ctrl+a').on('key', (e) => {
  *    // do something...
  * });
@@ -192,4 +191,4 @@ if (!__isChildProcess()) {
   });
 }
 
-module.exports = hotkey;
+export default hotkey;

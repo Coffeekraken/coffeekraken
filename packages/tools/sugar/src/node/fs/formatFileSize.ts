@@ -1,4 +1,4 @@
-const __filesize = require('filesize');
+import __filesize from 'filesize';
 
 // TODO tests
 
@@ -15,12 +15,12 @@ const __filesize = require('filesize');
  * @return              {String}                                      The human readable version of the passed size
  *
  * @example             js
- * const formatFilesize = require('@coffeekraken/sugar/node/fs/formatFileSize');
+ * import formatFilesize from '@coffeekraken/sugar/node/fs/formatFileSize';
  * formatFileSize(163931); // => 326.86 KB
  *
  * @see             https://www.npmjs.com/package/filesize
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function formatFileSize(size, settings = {}) {
+export default function formatFileSize(size, settings = {}) {
   return __filesize(size, settings);
-};
+}

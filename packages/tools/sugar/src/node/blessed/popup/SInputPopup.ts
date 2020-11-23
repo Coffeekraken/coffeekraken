@@ -1,7 +1,7 @@
-const __deepMerge = require('../../object/deepMerge');
-const __SInput = require('../form/SInput');
-const __SBlessedPopup = require('./SBlessedPopup');
-const __activeSpace = require('../../core/activeSpace');
+import __deepMerge from '../../object/deepMerge';
+import __SInput from '../form/SInput';
+import __SBlessedPopup from './SBlessedPopup';
+import __activeSpace from '../../core/activeSpace';
 
 /**
  * @name                  SBlessedInputPopup
@@ -16,12 +16,12 @@ const __activeSpace = require('../../core/activeSpace');
  * - $input ({}) {Object}: An object of settings passed to the SInput instance constructor
  *
  * @example       js
- * const SBlessedInputPopup = require('@coffeekraken/sugar/node/blessed/popup/SBlessedInputPopup');
+ * import SBlessedInputPopup from '@coffeekraken/sugar/node/blessed/popup/SBlessedInputPopup';
  * new SBlessedInputPopup({});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedInputPopup extends __SBlessedPopup {
+export default class SBlessedInputPopup extends __SBlessedPopup {
   /**
    * @name                  constructor
    * @type                  Function
@@ -64,4 +64,4 @@ module.exports = class SBlessedInputPopup extends __SBlessedPopup {
     super.update();
     this.height = this.$content.getScrollHeight() + 5;
   }
-};
+}

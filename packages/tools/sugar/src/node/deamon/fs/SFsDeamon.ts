@@ -1,6 +1,6 @@
-const __deepMerge = require('../../object/deepMerge');
-const __SDeamon = require('../SDeamon');
-const __SFsDeamonProcess = require('./SFsDeamonProcess');
+import __deepMerge from '../../object/deepMerge';
+import __SDeamon from '../SDeamon';
+import __SFsDeamonProcess from './SFsDeamonProcess';
 
 /**
  * @name            SFsDeamon
@@ -18,7 +18,7 @@ const __SFsDeamonProcess = require('./SFsDeamonProcess');
  * - name (Unnamed SFsDeamon) {String}: A name for your watch instance
  *
  * @example       js
- * const SFsDeamon = require('@coffeekraken/sugar/node/deamon/fs/SFsDeamon');
+ * import SFsDeamon from '@coffeekraken/sugar/node/deamon/fs/SFsDeamon';
  * const deamon = new SFsDeamon({});
  * deamon.watch('/my/cool/path/*.js').on('update', file => {
  *    // do something
@@ -31,7 +31,7 @@ const __SFsDeamonProcess = require('./SFsDeamonProcess');
  * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsDeamon extends __SDeamon {
+export default class SFsDeamon extends __SDeamon {
   /**
    * @name          _watchPromisesStack
    * @type          Array<SPromise>
@@ -110,4 +110,4 @@ module.exports = class SFsDeamon extends __SDeamon {
     // return the current promise
     return super.watch(watchProcess);
   }
-};
+}

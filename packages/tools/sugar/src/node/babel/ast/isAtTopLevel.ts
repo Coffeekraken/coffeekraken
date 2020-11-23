@@ -8,14 +8,16 @@
  * @param           {Path}          path          The path to check
  * @return          {Boolean}                       true if is at top level, false if not
  *
+ * @todo          interface
+ *
  * @example         js
- * const isAtTopLevel = require('@coffeekraken/sugar/node/babel/ast/isAtTopLevel');
+ * import isAtTopLevel from 'coffeekraken/sugar/node/babel/ast/isAtTopLevel';
  * isAtTopLevel(path); // => true|false
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function isAtTopLevel(path) {
+export default function isAtTopLevel(path: any) {
   if (!path.scope || !path.scope.path || !path.scope.path.type) return false;
   return path.scope.path.type === 'Program';
-};
+}

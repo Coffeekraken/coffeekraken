@@ -1,4 +1,4 @@
-const __SInterface = require('../../class/SInterface');
+import __SInterface from '../../class/SInterface';
 
 /**
  * @name                SFsFileSettingsInterface
@@ -12,7 +12,7 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsFileSettingsInterface extends __SInterface {
+export default class SFsFileSettingsInterface extends __SInterface {
   static definitionObj = {
     checkExistence: {
       type: 'Boolean',
@@ -27,4 +27,4 @@ module.exports = class SFsFileSettingsInterface extends __SInterface {
       required: false
     }
   };
-};
+}

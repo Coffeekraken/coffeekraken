@@ -1,7 +1,7 @@
-const __SSugarAppModule = require('../../app/sugar/SSugarAppModule');
-const __SBuildFrontspecInterface = require('./interface/SBuildFrontspecInterface');
-const __deepMerge = require('../../object/deepMerge');
-const __SBuildFrontspecProcess = require('./SBuildFrontspecProcess');
+import __SSugarAppModule from '../../app/sugar/SSugarAppModule';
+import __SBuildFrontspecInterface from './interface/SBuildFrontspecInterface';
+import __deepMerge from '../../object/deepMerge';
+import __SBuildFrontspecProcess from './SBuildFrontspecProcess';
 
 /**
  * @name                SBuildFrontspecSugarAppModule
@@ -16,7 +16,7 @@ const __SBuildFrontspecProcess = require('./SBuildFrontspecProcess');
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = class SBuildFrontspecSugarAppModule extends __SSugarAppModule {
+export default class SBuildFrontspecSugarAppModule extends __SSugarAppModule {
   static interface = __SBuildFrontspecInterface;
 
   /**
@@ -49,4 +49,4 @@ module.exports = class SBuildFrontspecSugarAppModule extends __SSugarAppModule {
     );
     return super.start(pro);
   }
-};
+}

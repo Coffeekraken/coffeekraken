@@ -1,15 +1,15 @@
-const __blessed = require('blessed');
-const __SBlessedComponent = require('../SBlessedComponent');
-const __deepMerge = require('../../object/deepMerge');
-const __parseHtml = require('../../terminal/parseHtml');
-const __countLine = require('../../string/countLine');
-const __hotkey = require('../../keyboard/hotkey');
-const __color = require('../../color/color');
-const __SPromise = require('../../promise/SPromise');
-const __SInput = require('../form/SInput');
-const __multiple = require('../../class/multipleExtends');
-const __activeSpace = require('../../core/activeSpace');
-const __escapeStack = require('../../terminal/escapeStack');
+import __blessed from 'blessed';
+import __SBlessedComponent from '../SBlessedComponent';
+import __deepMerge from '../../object/deepMerge';
+import __parseHtml from '../../terminal/parseHtml';
+import __countLine from '../../string/countLine';
+import __hotkey from '../../keyboard/hotkey';
+import __color from '../../color/color';
+import __SPromise from '../../promise/SPromise';
+import __SInput from '../form/SInput';
+import __multiple from '../../class/multipleExtends';
+import __activeSpace from '../../core/activeSpace';
+import __escapeStack from '../../terminal/escapeStack';
 
 /**
  * @name                  SBlessedSummaryList
@@ -26,12 +26,12 @@ const __escapeStack = require('../../terminal/escapeStack');
  * @param        {Object}         [settings = {}]         A settings object to configure your this. Here's the available settings:
  *
  * @example       js
- * const SBlessedSummaryList = require('@coffeekraken/sugar/node/blessed/list/SBlessedSummaryList');
+ * import SBlessedSummaryList from '@coffeekraken/sugar/node/blessed/list/SBlessedSummaryList';
  * const list = new SBlessedSummaryList({});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedSummaryList extends __SBlessedComponent {
+export default class SBlessedSummaryList extends __SBlessedComponent {
   /**
    * @name                  _editingItemIdx
    * @type                  Number
@@ -387,4 +387,4 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
       super.update();
     });
   }
-};
+}

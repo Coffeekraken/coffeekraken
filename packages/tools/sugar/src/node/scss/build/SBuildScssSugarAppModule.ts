@@ -1,8 +1,8 @@
-const __SSugarAppModule = require('../../app/sugar/SSugarAppModule');
-const __SBuildScssInterface = require('./interface/SBuildScssInterface');
-const __deepMerge = require('../../object/deepMerge');
-const __SBuildScssCli = require('./SBuildScssCli');
-const __SBuildScssProcess = require('./SBuildScssProcess');
+import __SSugarAppModule from '../../app/sugar/SSugarAppModule';
+import __SBuildScssInterface from './interface/SBuildScssInterface';
+import __deepMerge from '../../object/deepMerge';
+import __SBuildScssCli from './SBuildScssCli';
+import __SBuildScssProcess from './SBuildScssProcess';
 
 /**
  * @name                SBuildScssSugarAppModule
@@ -17,7 +17,7 @@ const __SBuildScssProcess = require('./SBuildScssProcess');
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = class SBuildScssSugarAppModule extends __SSugarAppModule {
+export default class SBuildScssSugarAppModule extends __SSugarAppModule {
   static interface = __SBuildScssInterface;
 
   /**
@@ -50,4 +50,4 @@ module.exports = class SBuildScssSugarAppModule extends __SSugarAppModule {
     );
     return super.start(pro);
   }
-};
+}

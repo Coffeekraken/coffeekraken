@@ -1,5 +1,5 @@
-const __SDuration = require('../../../time/SDuration');
-const __SJsCompiler = require('../../../js/SJsCompiler');
+import __SDuration from '../../../time/SDuration';
+import __SJsCompiler from '../../../js/SJsCompiler';
 
 /**
  * @name                js
@@ -15,7 +15,7 @@ const __SJsCompiler = require('../../../js/SJsCompiler');
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function js(req, res, settings = {}) {
+export default async function js(req, res, settings = {}) {
   let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
   const duration = new __SDuration();
 
@@ -33,4 +33,4 @@ module.exports = async function js(req, res, settings = {}) {
   res.type('text/javascript');
   res.status(200);
   res.send(resultObj.js);
-};
+}

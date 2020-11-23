@@ -1,14 +1,14 @@
-const __extension = require('../../fs/extension');
-const __fs = require('fs');
-const __SProcessManager = require('../../process/SProcessManager');
-const __SPromise = require('../../promise/SPromise');
-const __SFsDeamon = require('../../deamon/fs/SFsDeamon');
-const __buildCommandLine = require('../../cli/buildCommandLine');
-const __STestJestInterface = require('./interface/STestJestInterface');
-const __SChildProcessManager = require('../../process/SChildProcessManager');
-const __folderPath = require('../../fs/folderPath');
-const __getFilename = require('../../fs/filename');
-const __copy = require('../../clipboard/copy');
+import __extension from '../../fs/extension';
+import __fs from 'fs';
+import __SProcessManager from '../../process/SProcessManager';
+import __SPromise from '../../promise/SPromise';
+import __SFsDeamon from '../../deamon/fs/SFsDeamon';
+import __buildCommandLine from '../../cli/buildCommandLine';
+import __STestJestInterface from './interface/STestJestInterface';
+import __SChildProcessManager from '../../process/SChildProcessManager';
+import __folderPath from '../../fs/folderPath';
+import __getFilename from '../../fs/filename';
+import __copy from '../../clipboard/copy';
 
 /**
  * @name            STestJestProcess
@@ -21,7 +21,7 @@ const __copy = require('../../clipboard/copy');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class STestJestProcess extends __SChildProcessManager {
+export default class STestJestProcess extends __SChildProcessManager {
   static interface = __STestJestInterface;
 
   /**
@@ -108,4 +108,4 @@ module.exports = class STestJestProcess extends __SChildProcessManager {
   kill() {
     super.kill();
   }
-};
+}

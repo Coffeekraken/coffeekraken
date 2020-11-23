@@ -1,5 +1,5 @@
-const __getSize = require('get-folder-size');
-const __filesize = require('filesize');
+import __getSize from 'get-folder-size';
+import __filesize from 'filesize';
 
 // TODO tests
 
@@ -16,18 +16,18 @@ const __filesize = require('filesize');
  * @return            {Promise}                                           A promise that will be resolved once the folder size has been calculated
  *
  * @example           js
- * const folderSize = require('@coffeekraken/sugar/node/fs/folderSize');
+ * import folderSize from '@coffeekraken/sugar/node/fs/folderSize';
  * folderSize('my/cool/folder').then((size) => {
  *      // do something...
  * });
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function folderSize(folderPath, rawFormat = false) {
+export default function folderSize(folderPath, rawFormat = false) {
   return new Promise((resolve, reject) => {
     __getSize(folderPath, (error, size) => {
       if (error) throw error;
       resolve(rawFormat ? size : __filesize(size));
     });
   });
-};
+}

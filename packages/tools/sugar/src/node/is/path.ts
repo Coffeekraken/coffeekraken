@@ -1,4 +1,4 @@
-const __isPath = require('../fs/isPath');
+import __isPath from '../fs/isPath';
 
 /**
  * @name                            path
@@ -12,11 +12,11 @@ const __isPath = require('../fs/isPath');
  * @return        {Boolean}                             true if the path is valide, false if not
  *
  * @example       js
- * const isPath = require('@coffeekraken/sugar/node/is/path');
+ * import isPath from '@coffeekraken/sugar/node/is/path';
  * isPath('hello/world'); // => true
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function path(path, checkExistence = false) {
+export default function path(path, checkExistence = false) {
   return __isPath(path, checkExistence);
-};
+}

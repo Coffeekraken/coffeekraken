@@ -1,4 +1,4 @@
-const __fs = require('fs-extra');
+import __fs from 'fs-extra';
 
 // TODO tests
 
@@ -15,7 +15,7 @@ const __fs = require('fs-extra');
  * @return      {Promise}                           A promise that will be resolved when the copy is completed
  *
  * @example       js
- * const copy = require('@coffeekraken/node/fs/copy');
+ * import copy from '@coffeekraken/node/fs/copy';
  * copy('my/cool/file.jpg', 'my/new/file.jpg').then(() => {
  *    // do something on complete...
  * });
@@ -23,6 +23,6 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function copy(src, dest) {
+export default function copy(src, dest) {
   return __fs.copy(src, dest);
-};
+}

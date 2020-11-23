@@ -1,4 +1,4 @@
-const __countLine = require('./countLine');
+import __countLine from './countLine';
 
 /**
  * @name                          splitEvery
@@ -13,7 +13,7 @@ const __countLine = require('./countLine');
  * @return              {Array}                                             An array of the splited text parts
  *
  * @example           js
- * const splitEvery = require('@coffeekraken/node/string/splitEvery');
+ * import splitEvery from '@coffeekraken/node/string/splitEvery';
  * splitEvery('Hello World', 2, true); // => ['He','ll','o ','Wo','rl','d']
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -21,7 +21,7 @@ const __countLine = require('./countLine');
 
 // TODO: Add support for special characters like terminal colors, html tags, etc...
 
-module.exports = function splitEvery(text, every, splitWords = false) {
+export default function splitEvery(text, every, splitWords = false) {
   if (splitWords) {
     const reg = new RegExp(`.{1,${every}}`, 'g');
     return [...text.matchAll(reg)].map((o) => o[0]);
@@ -108,4 +108,4 @@ module.exports = function splitEvery(text, every, splitWords = false) {
     lines = lines.filter((l) => l !== '');
     return lines;
   }
-};
+}

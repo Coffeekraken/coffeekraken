@@ -1,5 +1,5 @@
-import _glob from 'glob'
-import _folderPath from '../fs/folderPath'
+import _glob from 'glob';
+import _folderPath from '../fs/folderPath';
 
 /**
  * @name            findPackages
@@ -15,25 +15,25 @@ import _folderPath from '../fs/folderPath'
  * @return        {Promise}                                       A promise that will be resolved once the process is finished with the resulting object
  *
  * @example       js
- * const findPackages = require('@coffeekraken/sugar/node/monorepo/findPackages');
+ * import findPackages from '@coffeekraken/sugar/node/monorepo/findPackages';
  * const packages = await findPackages();
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = async function findPackages (rootDir = process.cwd()): Promise<object> {
+export = async function findPackages(rootDir = process.cwd()): Promise<object> {
   interface IPackagesObj {
-    [key: string]: string
+    [key: string]: string;
   }
-  const packagesObj: IPackagesObj = {}
+  const packagesObj: IPackagesObj = {};
   const packagesPaths = _glob
     .sync('**/package.json', {
       cwd: rootDir,
       ignore: '**/node_modules/**'
     })
-    .filter((path) => path !== 'package.json')
+    .filter((path) => path !== 'package.json');
   packagesPaths.forEach((path) => {
-    packagesObj[_folderPath(path)] = require(`${rootDir}/${path}`)
-  })
-  return packagesObj
-}
+    packagesObj[_folderPath(path)] = require(`${rootDir}/${path}`);
+  });
+  return packagesObj;
+};

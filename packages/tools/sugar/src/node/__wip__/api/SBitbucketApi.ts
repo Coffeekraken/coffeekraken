@@ -1,8 +1,8 @@
-const __deepMerge = require('../object/deepMerge');
-const __machineId = require('node-machine-id').machineIdSync;
+import __deepMerge from 'object/deepMerge';
+import __SAuth from 'auth/SAuth';
+import __SApi from 'SApi';
 
-const __SAuth = require('../auth/SAuth');
-const __SApi = require('./SApi');
+import { machineIdSync as __machineId } from 'node-machine-id';
 
 /**
  * @name                            SBitbucketApi
@@ -17,7 +17,7 @@ const __SApi = require('./SApi');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBitbucketApi extends __SApi {
+export default class SBitbucketApi extends __SApi {
   /**
    * @name                          constructor
    * @type                          Function
@@ -48,4 +48,4 @@ module.exports = class SBitbucketApi extends __SApi {
       )
     );
   }
-};
+}

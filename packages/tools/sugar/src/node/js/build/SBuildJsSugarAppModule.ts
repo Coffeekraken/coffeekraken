@@ -1,7 +1,7 @@
-const __SSugarAppModule = require('../../app/sugar/SSugarAppModule');
-const __SBuildJsInterface = require('./interface/SBuildJsInterface');
-const __deepMerge = require('../../object/deepMerge');
-const __SBuildJsProcess = require('./SBuildJsProcess');
+import __SSugarAppModule from '../../app/sugar/SSugarAppModule';
+import __SBuildJsInterface from './interface/SBuildJsInterface';
+import __deepMerge from '../../object/deepMerge';
+import __SBuildJsProcess from './SBuildJsProcess';
 
 /**
  * @name                SBuildJsSugarAppModule
@@ -16,7 +16,7 @@ const __SBuildJsProcess = require('./SBuildJsProcess');
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = class SBuildJsSugarAppModule extends __SSugarAppModule {
+export default class SBuildJsSugarAppModule extends __SSugarAppModule {
   static interface = __SBuildJsInterface;
 
   /**
@@ -49,4 +49,4 @@ module.exports = class SBuildJsSugarAppModule extends __SSugarAppModule {
     );
     return super.start(pro);
   }
-};
+}

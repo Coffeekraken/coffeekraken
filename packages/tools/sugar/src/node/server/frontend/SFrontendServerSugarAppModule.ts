@@ -1,8 +1,8 @@
-const __SSugarAppModule = require('../../app/sugar/SSugarAppModule');
-const __SFrontendServerInterface = require('./interface/SFrontendServerInterface');
-const __frontend = require('../../server/frontend/frontend');
-const __deepMerge = require('../../object/deepMerge');
-const __SFrontendServerProcess = require('../../server/frontend/SFrontendServerProcess');
+import __SSugarAppModule from '../../app/sugar/SSugarAppModule';
+import __SFrontendServerInterface from './interface/SFrontendServerInterface';
+import __frontend from '../../server/frontend/frontend';
+import __deepMerge from '../../object/deepMerge';
+import __SFrontendServerProcess from '../../server/frontend/SFrontendServerProcess';
 
 /**
  * @name                SFrontendServerSugarAppModule
@@ -17,7 +17,7 @@ const __SFrontendServerProcess = require('../../server/frontend/SFrontendServerP
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = class SFrontendServerSugarAppModule extends __SSugarAppModule {
+export default class SFrontendServerSugarAppModule extends __SSugarAppModule {
   static interface = __SFrontendServerInterface;
 
   /**
@@ -59,4 +59,4 @@ module.exports = class SFrontendServerSugarAppModule extends __SSugarAppModule {
     });
     return super.start(pro);
   }
-};
+}

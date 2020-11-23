@@ -1,4 +1,4 @@
-const __fs = require('fs-extra');
+import __fs from 'fs-extra';
 
 // TODO tests
 
@@ -13,7 +13,7 @@ const __fs = require('fs-extra');
  * @return      {Promise}                           A promise that will be resolved when the remove is completed
  *
  * @example       js
- * const remove = require('@coffeekraken/node/fs/remove');
+ * import remove from '@coffeekraken/node/fs/remove';
  * remove('my/cool/file.json').then(() => {
  *    // do something on complete...
  * });
@@ -21,6 +21,6 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function remove(path) {
+export default function remove(path) {
   return __fs.remove(path);
-};
+}

@@ -1,4 +1,4 @@
-module.exports = (__SCli, __SInterface) => {
+export default (__SCli, __SInterface) => {
   describe('sugar.node.cli.SCli', () => {
     it('Check that the SCli class work correctly', () => {
       class MyInterface extends __SInterface {

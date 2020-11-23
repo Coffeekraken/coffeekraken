@@ -13,7 +13,7 @@
  * @param       {Function}          callback            The callback function you want to call
  *
  * @example         js
- * const onProcessExit = require('@coffeekraken/sugar/node/process/onProcessExit');
+ * import onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
  * onProcessExit(() => {
  *      // do something
  * });
@@ -22,7 +22,8 @@
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 const __onProcessExitCallbacks = [];
-module.exports = function onProcessExit(callback) {
+
+export default function onProcessExit(callback) {
   if (!__onProcessExitCallbacks.length) {
     process.env.HAS_ON_PROCESS_EXIT_HANDLERS = true;
     async function exitHandler() {
@@ -42,4 +43,4 @@ module.exports = function onProcessExit(callback) {
   }
   if (__onProcessExitCallbacks.indexOf(callback) !== -1) return;
   __onProcessExitCallbacks.push(callback);
-};
+}

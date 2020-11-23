@@ -1,4 +1,4 @@
-const __fs = require('fs-extra');
+import __fs from 'fs-extra';
 
 // TODO tests
 
@@ -14,7 +14,7 @@ const __fs = require('fs-extra');
  * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeJsonSync()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
  *
  * @example       js
- * const writeJsonSync = require('@coffeekraken/node/fs/writeJsonSync');
+ * import writeJsonSync from '@coffeekraken/node/fs/writeJsonSync';
  * try {
  *    writeJsonSync('my/cool/file.json', { hello: 'world' });
  * } catch(e) {}
@@ -22,6 +22,6 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function writeJsonSync(path, data, options = {}) {
+export default function writeJsonSync(path, data, options = {}) {
   __fs.outputJsonSync(path, data, options);
-};
+}

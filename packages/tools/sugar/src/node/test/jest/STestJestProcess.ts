@@ -1,11 +1,11 @@
-const __extension = require('../../fs/extension');
-const __fs = require('fs');
-const __buildCommandLine = require('../../cli/buildCommandLine');
-const __STestJestInterface = require('./interface/STestJestInterface');
-const __folderPath = require('../../fs/folderPath');
-const __getFilename = require('../../fs/filename');
-const __SProcess = require('../../process/SProcess');
-const __childProces = require('child_process');
+import __extension from '../../fs/extension';
+import __fs from 'fs';
+import __buildCommandLine from '../../cli/buildCommandLine';
+import __STestJestInterface from './interface/STestJestInterface';
+import __folderPath from '../../fs/folderPath';
+import __getFilename from '../../fs/filename';
+import __SProcess from '../../process/SProcess';
+import __childProces from 'child_process';
 
 /**
  * @name            STestJestProcess
@@ -18,7 +18,7 @@ const __childProces = require('child_process');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class STestJestProcess extends __SProcess {
+export default class STestJestProcess extends __SProcess {
   static interface = __STestJestInterface;
 
   /**
@@ -95,4 +95,4 @@ module.exports = class STestJestProcess extends __SProcess {
       }
     });
   }
-};
+}

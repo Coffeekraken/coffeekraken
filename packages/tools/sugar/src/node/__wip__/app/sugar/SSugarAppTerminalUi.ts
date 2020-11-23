@@ -1,33 +1,18 @@
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __path = require('path');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __upperFirst = require('../../string/upperFirst');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __SBlessedComponent = require('../../blessed/SBlessedComponent');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __sugarHeading = require('../../ascii/sugarHeading');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __sugarConfig = require('../../config/sugar');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __blessed = require('blessed');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __parseHtml = require('../../terminal/parseHtml');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __countLine = require('../../string/countLine');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __SBlessedOutput = require('../../blessed/SBlessedOutput');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __color = require('../../color/color');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __hotkey = require('../../keyboard/hotkey');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __packageJson = require('../../package/json');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __SNotification = require('../../blessed/notification/SNotification');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __ora = require('ora');
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-const __SIpc = require('../../ipc/SIpc');
+import __path from 'path';
+import __upperFirst from '../../string/upperFirst';
+import __SBlessedComponent from '../../blessed/SBlessedComponent';
+import __sugarHeading from '../../ascii/sugarHeading';
+import __sugarConfig from '../../config/sugar';
+import __blessed from 'blessed';
+import __parseHtml from '../../terminal/parseHtml';
+import __countLine from '../../string/countLine';
+import __SBlessedOutput from '../../blessed/SBlessedOutput';
+import __color from '../../color/color';
+import __hotkey from '../../keyboard/hotkey';
+import __packageJson from '../../package/json';
+import __SNotification from '../../blessed/notification/SNotification';
+import __ora from 'ora';
+import __SIpc from '../../ipc/SIpc';
 
 /**
  * @name                SSugarAppTerminalUi
@@ -43,8 +28,7 @@ const __SIpc = require('../../ipc/SIpc');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
-module.exports = class SSugarAppTerminalUi extends __SBlessedComponent {
+export default class SSugarAppTerminalUi extends __SBlessedComponent {
   /**
    * @name            constructor
    * @type            Function
@@ -630,4 +614,4 @@ module.exports = class SSugarAppTerminalUi extends __SBlessedComponent {
 
     return $consolesContainer;
   }
-};
+}

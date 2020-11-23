@@ -1,4 +1,4 @@
-const __sugarConfig = require('../config/sugar');
+import __sugarConfig from '../config/sugar';
 
 /**
  * @name            classname
@@ -11,14 +11,14 @@ const __sugarConfig = require('../config/sugar');
  * @return      {String}                                    The correctly preffixed classname
  *
  * @example         js
- * const classname = require('@coffeekraken/sugar/node/css/classname');
+ * import classname from '@coffeekraken/sugar/node/css/classname';
  * classname('coco'); // => s-coco
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = function classname(classname) {
+export default function classname(classname) {
   const prefix = __sugarConfig('classes.generate.prefix');
   if (prefix) return `${prefix}-${classname}`;
   return classname;
-};
+}

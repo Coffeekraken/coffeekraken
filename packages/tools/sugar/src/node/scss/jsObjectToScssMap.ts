@@ -1,66 +1,8 @@
-const __copy = require('../clipboard/copy');
-// const __jsonSass = require('json-sass-vars');
-// module.exports = function jsObjectToScssMap(object, settings = {}) {
-//   settings = __deepMerge(
-//     {
-//       quoteKeys: ['src', 'import', 'font-family', 'defaultAction']
-//     },
-//     settings
-//   );
+import __copy from '../clipboard/copy';
 
-//   const jsObject = object;
+import __deepMerge from '../object/deepMerge';
 
-//   let scssConfigString = __jsonSass.convertJs(jsObject);
-
-//   console.log(scssConfigString);
-//   throw 'coco';
-
-//   scssConfigString = `${scssConfigString}`;
-
-//   scssConfigString.split('\n').forEach((line) => {
-//     line = line.trim();
-//     const isComma = line.substr(-1) === ',';
-//     if (isComma) {
-//       line = line.slice(0, -1);
-//     }
-//     const prop = line.split(':')[0];
-//     let value = line.split(':').slice(1).join(':').trim();
-
-//     if (value.slice(0, 1) === '#') {
-//       console.log(line);
-//       console.log(prop, value);
-//     }
-
-//     if (prop === '),' || prop === ')' || value === '(') return;
-
-//     // process arrays
-//     const arrayReg = /^\((.*)\),?/;
-//     const arrayMatches = value.match(arrayReg);
-//     if (arrayMatches) {
-//       const res = arrayMatches[1]
-//         .split(',')
-//         .map((val) => {
-//           return `'${val.trim()}'`;
-//         })
-//         .join(', ');
-//       value = value.replace(arrayMatches[1], res);
-//       scssConfigString = scssConfigString.replace(line, `${prop}: ${value}`);
-//       return;
-//     }
-//     if (
-//       settings.quoteKeys.indexOf(prop) === -1
-//       // && value.split(' ').length === 1
-//     )
-//       return;
-//     scssConfigString = scssConfigString.replace(line, `${prop}: "${value}"`);
-//   });
-
-//   // set or append in the "data" property
-//   return scssConfigString;
-// };
-
-const __deepMerge = require('../object/deepMerge');
-const __isPlainObject = require('../is/plainObject');
+import __isPlainObject from '../is/plainObject';
 let { isArray } = Array;
 
 function jsToScssString(value, settings = {}) {
@@ -147,4 +89,4 @@ function isNotUndefined(value) {
   return typeof value !== 'undefined';
 }
 
-module.exports = jsToScssString;
+export default jsToScssString;

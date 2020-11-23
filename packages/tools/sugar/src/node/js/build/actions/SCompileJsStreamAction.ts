@@ -1,7 +1,7 @@
-const __deepMerge = require('../../../object/deepMerge');
-const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __SBuildJsInterface = require('../interface/SBuildJsInterface');
-const __SJsCompiler = require('../../SJsCompiler');
+import __deepMerge from '../../../object/deepMerge';
+import __SActionsStreamAction from '../../../stream/SActionsStreamAction';
+import __SBuildJsInterface from '../interface/SBuildJsInterface';
+import __SJsCompiler from '../../SJsCompiler';
 
 /**
  * @name                SCompileJsStreamAction
@@ -16,7 +16,7 @@ const __SJsCompiler = require('../../SJsCompiler');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCompileJsStreamAction extends __SActionsStreamAction {
+export default class SCompileJsStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -74,4 +74,4 @@ module.exports = class SCompileJsStreamAction extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-};
+}

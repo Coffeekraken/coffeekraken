@@ -1,10 +1,10 @@
-const __blessed = require('blessed');
-const __SBlessedComponent = require('../SBlessedComponent');
-const __deepMerge = require('../../object/deepMerge');
-const __SPromise = require('../../promise/SPromise');
-const __color = require('../../color/color');
-const __escapeStack = require('../../terminal/escapeStack');
-const __activeSpace = require('../../core/activeSpace');
+import __blessed from 'blessed';
+import __SBlessedComponent from '../SBlessedComponent';
+import __deepMerge from '../../object/deepMerge';
+import __SPromise from '../../promise/SPromise';
+import __color from '../../color/color';
+import __escapeStack from '../../terminal/escapeStack';
+import __activeSpace from '../../core/activeSpace';
 
 /**
  * @name                  SBlessedInput
@@ -21,12 +21,12 @@ const __activeSpace = require('../../core/activeSpace');
  * // TODO: document the "promise" and "$input" properties
  *
  * @example       js
- * const SBlessedInput = require('@coffeekraken/sugar/node/blessed/form/SBlessedInput');
+ * import SBlessedInput from '@coffeekraken/sugar/node/blessed/form/SBlessedInput';
  * new SBlessedInput({});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedInput extends __SBlessedComponent {
+export default class SBlessedInput extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function
@@ -160,4 +160,4 @@ module.exports = class SBlessedInput extends __SBlessedComponent {
 
     this.append(this.$input);
   }
-};
+}

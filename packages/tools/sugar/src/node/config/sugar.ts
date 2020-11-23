@@ -1,8 +1,8 @@
-const __SConfig = require('./SConfig');
-const __SConfigFolderAdapter = require('./adapters/SConfigFolderAdapter');
-const __path = require('path');
-const __packageRoot = require('../path/packageRoot');
-const __resolveTokens = require('../object/resolveTokens');
+import __SConfig from './SConfig';
+import __SConfigFolderAdapter from './adapters/SConfigFolderAdapter';
+import __path from 'path';
+import __packageRoot from '../path/packageRoot';
+import __resolveTokens from '../object/resolveTokens';
 
 /**
  * @name                  sugar
@@ -17,13 +17,14 @@ const __resolveTokens = require('../object/resolveTokens');
  * @return        {Mixed}                         Return the value if exists, undefined if not
  *
  * @example             js
- * const sugar = require('@coffeekraken/sugar/node/config/sugar');
+ * import sugar from '@coffeekraken/sugar/node/config/sugar';
  * sugar('scss.unit'); // => rem
  *
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 let sugarConfigInstance;
-module.exports = function sugar(dotPath) {
+
+export default function sugar(dotPath) {
   if (!sugarConfigInstance) {
     sugarConfigInstance = new __SConfig('sugar', {
       adapters: [
@@ -45,4 +46,4 @@ module.exports = function sugar(dotPath) {
   return sugarConfigInstance.get(dotPath, undefined, {
     throwErrorOnUndefinedConfig: false
   });
-};
+}

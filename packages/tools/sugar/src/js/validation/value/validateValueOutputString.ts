@@ -49,12 +49,6 @@ export default function validateValueOutputString(
       { beautify: true }
     )}</yellow>`;
 
-    // if (__isNode()) {
-    //   const __packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
-    //   string = string.replace(`${__packageRoot()}/`, '');
-    //   string = string.replace(`${__packageRoot(__dirname)}/`, '');
-    // }
-
     issuesArray.push(string);
   }
 

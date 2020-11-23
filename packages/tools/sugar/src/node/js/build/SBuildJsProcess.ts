@@ -1,7 +1,7 @@
-const __SBuildJsActionsStream = require('./SBuildJsActionsStream');
-const __deepMerge = require('../../object/deepMerge');
-const __SProcess = require('../../process/SProcess');
-const __SBuildJsInterface = require('./interface/SBuildJsInterface');
+import __SBuildJsActionsStream from './SBuildJsActionsStream';
+import __deepMerge from '../../object/deepMerge';
+import __SProcess from '../../process/SProcess';
+import __SBuildJsInterface from './interface/SBuildJsInterface';
 
 /**
  * @name            SBuildJsProcess
@@ -14,7 +14,7 @@ const __SBuildJsInterface = require('./interface/SBuildJsInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildJsProcess extends __SProcess {
+export default class SBuildJsProcess extends __SProcess {
   static interface = __SBuildJsInterface;
 
   /**
@@ -64,4 +64,4 @@ module.exports = class SBuildJsProcess extends __SProcess {
       this.bindSPromise(this._buildJsActionStream);
     }, 1000);
   }
-};
+}

@@ -1,9 +1,9 @@
-const __packageRoot = require('../../../path/packageRoot');
-const __fs = require('fs');
-const __sugarConfig = require('../../../config/sugar');
-const __deepMerge = require('../../../object/deepMerge');
-const __deepMap = require('../../../object/deepMap');
-const __extension = require('../../../fs/extension');
+import __packageRoot from '../../../path/packageRoot';
+import __fs from 'fs';
+import __sugarConfig from '../../../config/sugar';
+import __deepMerge from '../../../object/deepMerge';
+import __deepMap from '../../../object/deepMap';
+import __extension from '../../../fs/extension';
 
 /**
  * @name            resolveExtensionFreePath
@@ -17,8 +17,8 @@ const __extension = require('../../../fs/extension');
  * @param           {Function}          next            The next function to call when the middleware has finished his job
  *
  * @example         js
- * const express = require('express');
- * const resolveExtensionFreePath = require('@coffeekraken/sugar/server/frontend/middleware/resolveExtensionFreePath');
+ * import express from 'express';
+ * import resolveExtensionFreePath from '@coffeekraken/sugar/server/frontend/middleware/resolveExtensionFreePath';
  * const server = express();
  * server.use(resolveExtensionFreePath);
  * server.listen(3000);
@@ -26,7 +26,7 @@ const __extension = require('../../../fs/extension');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function resolveExtensionFreePath(settings = {}) {
+export default function resolveExtensionFreePath(settings = {}) {
   settings = __deepMerge(
     {
       exclude: []
@@ -56,4 +56,4 @@ module.exports = function resolveExtensionFreePath(settings = {}) {
 
     next();
   };
-};
+}

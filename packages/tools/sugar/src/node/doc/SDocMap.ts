@@ -1,15 +1,15 @@
-const __SPromise = require('../promise/SPromise');
-const __deepMerge = require('../object/deepMerge');
-const __packageRoot = require('../path/packageRoot');
-const __glob = require('glob');
-const __fs = require('fs');
-const __path = require('path');
-const __SDocblock = require('../docblock/SDocblock');
-const __toString = require('../string/toString');
-const __removeSync = require('../fs/removeSync');
-const __getFilename = require('../fs/filename');
-const __unique = require('../array/unique');
-const __SGlob = require('../glob/SGlob');
+import __SPromise from '../promise/SPromise';
+import __deepMerge from '../object/deepMerge';
+import __packageRoot from '../path/packageRoot';
+import __glob from 'glob';
+import __fs from 'fs';
+import __path from 'path';
+import __SDocblock from '../docblock/SDocblock';
+import __toString from '../string/toString';
+import __removeSync from '../fs/removeSync';
+import __getFilename from '../fs/filename';
+import __unique from '../array/unique';
+import __SGlob from '../glob/SGlob';
 
 /**
  * @name                SDocMap
@@ -25,7 +25,7 @@ const __SGlob = require('../glob/SGlob');
  * - outputDir (packageRoot()) {String}: Specify the directory where you want to save your docMap.json file when using the ```save``` method
  *
  * @example             js
- * const SDocMap = require('@coffeekraken/sugar/node/doc/SDocMap');
+ * import SDocMap from 'coffeekraken/sugar/node/doc/SDocMap';
  * const docMap = new SDocMap({
  *  outputDir: '/my/cool/directory'
  * });
@@ -35,7 +35,7 @@ const __SGlob = require('../glob/SGlob');
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SDocMap extends __SPromise {
+export default class SDocMap extends __SPromise {
   /**
    * @name          _entries
    * @type           Array<Object>
@@ -323,4 +323,4 @@ module.exports = class SDocMap extends __SPromise {
       }
     );
   }
-};
+}

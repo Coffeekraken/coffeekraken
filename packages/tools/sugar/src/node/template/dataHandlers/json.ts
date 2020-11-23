@@ -1,4 +1,4 @@
-const __SPromise = require('../../promise/SPromise');
+import __SPromise from '../../promise/SPromise';
 
 /**
  * @name          json
@@ -14,7 +14,7 @@ const __SPromise = require('../../promise/SPromise');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function js(filePath) {
+export default function js(filePath) {
   return new __SPromise(
     (resolve) => {
       resolve(require(filePath));
@@ -23,4 +23,4 @@ module.exports = function js(filePath) {
       id: 'templateJsonDataHandler'
     }
   );
-};
+}

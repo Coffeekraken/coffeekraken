@@ -1,10 +1,10 @@
-const __SActionsStreamAction = require('../SActionsStreamAction');
-const __glob = require('glob');
-const __clone = require('../../object/clone');
-const __extractSame = require('../../string/extractSame');
-const __getFilename = require('../../fs/filename');
-const __deepMerge = require('../../object/deepMerge');
-const __SInterface = require('../../class/SInterface');
+import __SActionsStreamAction from '../SActionsStreamAction';
+import __glob from 'glob';
+import __clone from '../../object/clone';
+import __extractSame from '../../string/extractSame';
+import __getFilename from '../../fs/filename';
+import __deepMerge from '../../object/deepMerge';
+import __SInterface from '../../class/SInterface';
 
 class SGlobResolverStreamActionInterface extends __SInterface {
   static definitionObj = {
@@ -29,7 +29,7 @@ class SGlobResolverStreamActionInterface extends __SInterface {
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SGlobResolverStreamAction extends __SActionsStreamAction {
+export default class SGlobResolverStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -114,4 +114,4 @@ module.exports = class SGlobResolverStreamAction extends __SActionsStreamAction 
       resolve(streamObjArray);
     });
   }
-};
+}

@@ -1,4 +1,4 @@
-const SProcess = require('../process/SProcess');
+import SProcess from '../process/SProcess';
 import ISCompileTsProcess, {
   ISCompileTsProcessParams,
   ISCompileTsProcessSettings,

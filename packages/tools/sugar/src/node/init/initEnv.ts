@@ -1,4 +1,4 @@
-const __packageRoot = require('../path/packageRoot');
+import __packageRoot from '../path/packageRoot';
 
 /**
  * @name                initEnv
@@ -13,6 +13,6 @@ const __packageRoot = require('../path/packageRoot');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
  */
-module.exports = function initEnv() {
+export default function initEnv() {
   process.env.PACKAGE_ROOT = __packageRoot();
 };

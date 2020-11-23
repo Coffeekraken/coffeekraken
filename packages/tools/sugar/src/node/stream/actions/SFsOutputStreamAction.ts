@@ -1,10 +1,10 @@
-const __SActionsStreamAction = require('../SActionsStreamAction');
-const __writeFile = require('../../fs/writeFile');
-const __toString = require('../../string/toString');
-const __packageRoot = require('../../path/packageRoot');
-const __deepMerge = require('../../object/deepMerge');
-const __get = require('../../object/get');
-const __SInterface = require('../../class/SInterface');
+import __SActionsStreamAction from '../SActionsStreamAction';
+import __writeFile from '../../fs/writeFile';
+import __toString from '../../string/toString';
+import __packageRoot from '../../path/packageRoot';
+import __deepMerge from '../../object/deepMerge';
+import __get from '../../object/get';
+import __SInterface from '../../class/SInterface';
 
 class SFsOutputStreamActionInterface extends __SInterface {
   static definitionObj = {
@@ -27,7 +27,7 @@ class SFsOutputStreamActionInterface extends __SInterface {
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
+export default class SFsOutputStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -99,4 +99,4 @@ module.exports = class SFsOutputStreamAction extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-};
+}

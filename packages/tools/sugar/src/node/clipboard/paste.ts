@@ -1,4 +1,4 @@
-const __clipboardy = require('clipboardy');
+import __clipboardy from 'clipboardy';
 
 /**
  * @name            paste
@@ -11,8 +11,8 @@ const __clipboardy = require('clipboardy');
  * @return       {String}             The text to paste
  *
  * @example       js
- * const paste = require('@coffeekraken/sugar/node/clipboard/paste');
- * const copy = require('@coffeekraken/sugar/node/clipboard/copy');
+ * import paste from '@coffeekraken/sugar/node/clipboard/paste';
+ * import copy from '@coffeekraken/sugar/node/clipboard/copy';
  * copy('Hello world');
  * past(); // => Hello world
  *
@@ -20,6 +20,6 @@ const __clipboardy = require('clipboardy');
  * @see         https://www.npmjs.com/package/clipboardy
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function paste(text) {
+export default function paste(text) {
   return __clipboardy.readSync();
-};
+}

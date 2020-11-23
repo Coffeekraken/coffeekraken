@@ -1,10 +1,10 @@
-const __blessed = require('blessed');
-const __SBlessedComponent = require('./SBlessedComponent');
-const __deepMerge = require('../object/deepMerge');
-const __parseHtml = require('../terminal/parseHtml');
-const __color = require('../color/color');
-const __ora = require('ora');
-const __countLine = require('../string/countLine');
+import __blessed from 'blessed';
+import __SBlessedComponent from './SBlessedComponent';
+import __deepMerge from '../object/deepMerge';
+import __parseHtml from '../terminal/parseHtml';
+import __color from '../color/color';
+import __ora from 'ora';
+import __countLine from '../string/countLine';
 
 /**
  * @name                  SBlessedFooter
@@ -16,12 +16,12 @@ const __countLine = require('../string/countLine');
  * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
  *
  * @example       js
- * const SBlessedFooter = require('@coffeekraken/sugar/node/blessed/SBlessedFooter');
+ * import SBlessedFooter from '@coffeekraken/sugar/node/blessed/SBlessedFooter';
  * new SBlessedFooter({});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedFooter extends __SBlessedComponent {
+export default class SBlessedFooter extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function
@@ -195,4 +195,4 @@ module.exports = class SBlessedFooter extends __SBlessedComponent {
 
     super.update();
   }
-};
+}

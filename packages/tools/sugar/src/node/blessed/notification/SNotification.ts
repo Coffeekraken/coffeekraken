@@ -1,9 +1,9 @@
-const __deepMerge = require('../../object/deepMerge');
-const __blessed = require('blessed');
-const __color = require('../../color/color');
-const __hotkey = require('../../keyboard/hotkey');
-const __parseHtml = require('../../terminal/parseHtml');
-const __SBlessedComponent = require('../SBlessedComponent');
+import __deepMerge from '../../object/deepMerge';
+import __blessed from 'blessed';
+import __color from '../../color/color';
+import __hotkey from '../../keyboard/hotkey';
+import __parseHtml from '../../terminal/parseHtml';
+import __SBlessedComponent from '../SBlessedComponent';
 
 /**
  * @name                    SBlessedNotification
@@ -27,7 +27,7 @@ const __SBlessedComponent = require('../SBlessedComponent');
  * - fg (black) {String}: Specify the foreground color to apply to the notification
  *
  * @example             js
- * const SBlessedNotification = require('@coffeekraken/sugar/node/blessed/notification/SBlessedNotification');
+ * import SBlessedNotification from '@coffeekraken/sugar/node/blessed/notification/SBlessedNotification';
  * const notification = new SBlessedNotification('Hello', 'This is a cool notif', null, {
  *      onClick: () => {
  *          console.log('Clicked');
@@ -37,7 +37,7 @@ const __SBlessedComponent = require('../SBlessedComponent');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedNotification extends __SBlessedComponent {
+export default class SBlessedNotification extends __SBlessedComponent {
   static displayStacks = {
     tl: [],
     tr: [],
@@ -159,4 +159,4 @@ module.exports = class SBlessedNotification extends __SBlessedComponent {
     SBlessedNotification.update();
     super.update();
   }
-};
+}

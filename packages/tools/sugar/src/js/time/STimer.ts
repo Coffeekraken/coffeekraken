@@ -30,7 +30,7 @@ import __deepMerge from '../object/deepMerge';
  * - loop (false) {Boolean}: Specify if you want the timer to loop or not.
  *
  * @example 	js
- * const STimer = require('@coffeekraken/sugar/js/time/STimer');
+ * import STimer from '@coffeekraken/sugar/js/time/STimer';
  * const myTimer = new STimer(2000, {
  * 		tickCount : 5
  * })

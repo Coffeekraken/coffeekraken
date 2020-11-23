@@ -1,5 +1,5 @@
-const __validateValue = require('../_js/validation/value/validateValue');
-const __isPath = require('../../fs/isPath');
+import __validateValue from '../_js/validation/value/validateValue';
+import __isPath from '../../fs/isPath';
 
 /**
  * @name            validateValue
@@ -31,7 +31,7 @@ const __isPath = require('../../fs/isPath');
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function validateValue(value, definitionObj, settings = {}) {
+export default function validateValue(value, definitionObj, settings = {}) {
   // validate value using the base javascript intergration
   return __validateValue(value, definitionObj, {
     ...settings,
@@ -44,4 +44,4 @@ module.exports = function validateValue(value, definitionObj, settings = {}) {
       return issuesObj;
     }
   });
-};
+}

@@ -1,5 +1,5 @@
-const __SInterface = require('../../../class/SInterface');
-const __SDeamonInterface = require('../../interface/SDeamonInterface');
+import __SInterface from '../../../class/SInterface';
+import __SDeamonInterface from '../../interface/SDeamonInterface';
 
 /**
  * @name                SFsDeamonInterface
@@ -14,7 +14,7 @@ const __SDeamonInterface = require('../../interface/SDeamonInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsDeamonInterface extends __SInterface {
+export default class SFsDeamonInterface extends __SInterface {
   static implementsArray = [__SDeamonInterface];
 
   static definitionObj = {
@@ -26,4 +26,4 @@ module.exports = class SFsDeamonInterface extends __SInterface {
       level: 1
     }
   };
-};
+}

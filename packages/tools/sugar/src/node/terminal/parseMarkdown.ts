@@ -1,4 +1,4 @@
-const __parseHtml = require('./parseHtml');
+import __parseHtml from './parseHtml';
 
 // TODO tests
 
@@ -14,7 +14,7 @@ const __parseHtml = require('./parseHtml');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function parseMarkdown(message) {
+export default function parseMarkdown(message) {
   let isArray = false;
   if (Array.isArray(message)) {
     isArray = true;

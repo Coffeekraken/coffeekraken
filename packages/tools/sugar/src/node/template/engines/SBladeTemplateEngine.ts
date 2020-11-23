@@ -1,15 +1,15 @@
-const __STemplateEngine = require('./STemplateEngine');
-const __deepMerge = require('../../object/deepMerge');
-const __SPromise = require('../../promise/SPromise');
-const __sugarConfig = require('../../config/sugar');
-const __fs = require('fs');
-const __execPhp = require('exec-php');
-const __SError = require('../../error/SError');
-const __folderPath = require('../../fs/folderPath');
-const __getFilename = require('../../fs/filename');
-const __copy = require('../../clipboard/copy');
-const __childProcess = require('child_process');
-const __unique = require('../../array/unique');
+import __STemplateEngine from './STemplateEngine';
+import __deepMerge from '../../object/deepMerge';
+import __SPromise from '../../promise/SPromise';
+import __sugarConfig from '../../config/sugar';
+import __fs from 'fs';
+import __execPhp from 'exec-php';
+import __SError from '../../error/SError';
+import __folderPath from '../../fs/folderPath';
+import __getFilename from '../../fs/filename';
+import __copy from '../../clipboard/copy';
+import __childProcess from 'child_process';
+import __unique from '../../array/unique';
 
 /**
  * @name          SBladeTemplateEngine
@@ -25,7 +25,7 @@ const __unique = require('../../array/unique');
  * @Todo      documentation
  *
  * @example     js
- * const SBladeTemplateEngine = require('@coffeekraken/sugar/node/template/engines/SBladeTemplateEngine');
+ * import SBladeTemplateEngine from '@coffeekraken/sugar/node/template/engines/SBladeTemplateEngine';
  * const engine = new SBladeTemplateEngine({});
  * await engine.render('/something/cool/myView.blade.php', {
  *    title: 'Hello'
@@ -34,7 +34,7 @@ const __unique = require('../../array/unique');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBladeTemplateEngine extends __STemplateEngine {
+export default class SBladeTemplateEngine extends __STemplateEngine {
   /**
    * @name      input
    * @type      String
@@ -175,4 +175,4 @@ module.exports = class SBladeTemplateEngine extends __STemplateEngine {
       }
     );
   }
-};
+}

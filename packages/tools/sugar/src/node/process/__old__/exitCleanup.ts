@@ -1,15 +1,15 @@
-const __deepMerge = require('../object/deepMerge');
-const __getRegisteredProcessed = require('./getRegisteredProcesses');
-const __clear = require('clear');
-const __fkill = require('fkill');
-const __hotkey = require('../keyboard/hotkey');
-const __parseHtml = require('../terminal/parseHtml');
-const __keypress = require('keypress');
-const __wait = require('../time/wait');
-const __SBlessedOutput = require('../blessed/SBlessedOutput');
-const __sugarHeading = require('../ascii/sugarHeading');
-const __packageJson = require('../package/json');
-const __SChildProcessManager = require('../process/SChildProcess');
+import __deepMerge from '../object/deepMerge';
+import __getRegisteredProcessed from './getRegisteredProcesses';
+import __clear from 'clear';
+import __fkill from 'fkill';
+import __hotkey from '../keyboard/hotkey';
+import __parseHtml from '../terminal/parseHtml';
+import __keypress from 'keypress';
+import __wait from '../time/wait';
+import __SBlessedOutput from '../blessed/SBlessedOutput';
+import __sugarHeading from '../ascii/sugarHeading';
+import __packageJson from '../package/json';
+import __SChildProcessManager from '../process/SChildProcess';
 
 /**
  * @name              exitCleanup
@@ -23,14 +23,14 @@ const __SChildProcessManager = require('../process/SChildProcess');
  * - childProcess (true) {Boolean}: Specify if you want to clean the child processes or not
  *
  * @example         js
- * const exitCleanup = require('@coffeekraken/sugar/node/process/exitCleanup');
+ * import exitCleanup from '@coffeekraken/sugar/node/process/exitCleanup';
  * exitCleanup();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 process.env.EXIT_CLEANUP = false;
-module.exports = function exitCleanup() {
+export default function exitCleanup() {
   if (process.env.EXIT_CLEANUP === true) return;
   process.env.EXIT_CLEANUP = true;
   __hotkey('ctrl+c', {
@@ -121,4 +121,4 @@ module.exports = function exitCleanup() {
         process.exit();
       });
   });
-};
+}

@@ -1,6 +1,6 @@
-import _SProcess from '../process/SProcess'
-import _SNpmBinInterface from './interface/SNpmBinInterface'
-import _deepMerge from '../object/deepMerge'
+import _SProcess from '../process/SProcess';
+import _SNpmBinInterface from './interface/SNpmBinInterface';
+import _deepMerge from '../object/deepMerge';
 
 /**
  * @name              SNpmBinProcess
@@ -13,7 +13,7 @@ import _deepMerge from '../object/deepMerge'
  * @param         {Object}       [settings={}]         An object of settings to configure your instance
  *
  * @example       js
- * const SNpmBinProcess = require('@coffeekraken/sugar/node/npm/SNpmBinProcess');
+ * import SNpmBinProcess from '@coffeekraken/sugar/node/npm/SNpmBinProcess';
  * const p = new SNpmBinProcess();
  * p.run({
  *  action: 'install',
@@ -25,7 +25,7 @@ import _deepMerge from '../object/deepMerge'
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SNpmBinProcess extends _SProcess {
-  static interface = _SNpmBinInterface
+  static interface = _SNpmBinInterface;
 
   /**
    * @name          constructor
@@ -36,7 +36,7 @@ export = class SNpmBinProcess extends _SProcess {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor (settings = {}) {
+  constructor(settings = {}) {
     super(
       _deepMerge(
         {
@@ -45,7 +45,7 @@ export = class SNpmBinProcess extends _SProcess {
         },
         settings
       )
-    )
+    );
   }
 
   /**
@@ -61,7 +61,7 @@ export = class SNpmBinProcess extends _SProcess {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  process (params, settings = {}) {
+  process(params, settings = {}) {
     setTimeout(() => {
       const actionStream = new __SBuildJsActionsStream({
         ...settings,
@@ -69,9 +69,9 @@ export = class SNpmBinProcess extends _SProcess {
           success: false,
           start: false
         }
-      })
-      this._buildJsActionStream = actionStream.start(params)
-      this.bindSPromise(this._buildJsActionStream)
-    }, 1000)
+      });
+      this._buildJsActionStream = actionStream.start(params);
+      this.bindSPromise(this._buildJsActionStream);
+    }, 1000);
   }
-}
+};

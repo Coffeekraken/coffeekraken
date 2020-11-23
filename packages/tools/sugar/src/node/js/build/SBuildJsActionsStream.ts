@@ -1,10 +1,10 @@
-const __SActionsStream = require('../../stream/SActionsStream');
-const __deepMerge = require('../../object/deepMerge');
-const __getFilename = require('../../fs/filename');
-const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
-const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
-const __SCompileJsStreamAction = require('./actions/SCompileJsStreamAction');
-const __path = require('path');
+import __SActionsStream from '../../stream/SActionsStream';
+import __deepMerge from '../../object/deepMerge';
+import __getFilename from '../../fs/filename';
+import __SFsFilesResolverStreamAction from '../../stream/actions/SFsFilesResolverStreamAction';
+import __SFsOutputStreamAction from '../../stream/actions/SFsOutputStreamAction';
+import __SCompileJsStreamAction from './actions/SCompileJsStreamAction';
+import __path from 'path';
 
 /**
  * @name            SBuildJsActionsStream
@@ -19,7 +19,7 @@ const __path = require('path');
  * @todo        Document the streamObj required properties
  *
  * @example         js
- * const SBuildJsActionsStream = require('@coffeekraken/sugar/node/build/SBuildJsActionsStream');
+ * import SBuildJsActionsStream from '@coffeekraken/sugar/node/build/SBuildJsActionsStream';
  * const myStream = new SBuildJsActionsStream();
  * myStream.start({
  *    input: '...',
@@ -31,7 +31,7 @@ const __path = require('path');
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildJsActionsStream extends __SActionsStream {
+export default class SBuildJsActionsStream extends __SActionsStream {
   /**
    * @name        constructor
    * @type        Function
@@ -99,4 +99,4 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
     }
     return streamObj;
   }
-};
+}

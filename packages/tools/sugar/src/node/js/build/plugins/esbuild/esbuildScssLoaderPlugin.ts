@@ -1,8 +1,8 @@
-let __fs = require('fs');
-let __SScssCompiler = require('../../../../scss/SScssCompiler');
-let __tmpDir = require('../../../../fs/tmpDir');
+import __fs from 'fs';
+import __SScssCompiler from '../../../../scss/SScssCompiler';
+import __tmpDir from '../../../../fs/tmpDir';
 
-module.exports = {
+export default {
   name: 'esbuildScssLoaderPlugin',
   setup(build) {
     // Load ".txt" files and return an array of words

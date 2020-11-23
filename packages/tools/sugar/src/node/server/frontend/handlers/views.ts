@@ -1,9 +1,9 @@
-const __sugarConfig = require('../../../config/sugar');
-const __path = require('path');
-const __render = require('../../../template/render');
-const __STemplate = require('../../../template/STemplate');
-const __fs = require('fs');
-const __SDuration = require('../../../time/SDuration');
+import __sugarConfig from '../../../config/sugar';
+import __path from 'path';
+import __render from '../../../template/render';
+import __STemplate from '../../../template/STemplate';
+import __fs from 'fs';
+import __SDuration from '../../../time/SDuration';
 
 /**
  * @name                views
@@ -19,7 +19,7 @@ const __SDuration = require('../../../time/SDuration');
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function views(req, res, settings = {}) {
+export default async function views(req, res, settings = {}) {
   let params = req.params[0].split('/');
 
   const duration = new __SDuration();
@@ -81,4 +81,4 @@ module.exports = async function views(req, res, settings = {}) {
   res.status(404);
   res.type('text/html');
   res.send(notFoundObj.content);
-};
+}

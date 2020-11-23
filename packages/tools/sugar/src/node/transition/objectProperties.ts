@@ -1,8 +1,8 @@
-const __deepMerge = require('../object/deepMerge');
-const __convert = require('../time/convert');
-const __STimer = require('../time/STimer');
-const __availableEasingsArray = require('../easing/availableEasingsArray');
-const __SPromise = require('../promise/SPromise');
+import __deepMerge from '../object/deepMerge';
+import __convert from '../time/convert';
+import __STimer from '../time/STimer';
+import __availableEasingsArray from '../easing/availableEasingsArray';
+import __SPromise from '../promise/SPromise';
 
 // TODO: tests
 
@@ -26,7 +26,7 @@ const __SPromise = require('../promise/SPromise');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function objectProperties(startObj, targetObj, settings = {}) {
+export default function objectProperties(startObj, targetObj, settings = {}) {
   return new __SPromise(
     (resolve, reject, trigger, cancel) => {
       settings = __deepMerge(

@@ -43,7 +43,7 @@ import __functionBlock from './markdown/blocks/function';
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SDocblockMarkdownOutput extends __SDocblockOutput {
+export default class SDocblockMarkdownOutput extends __SDocblockOutput {
   /**
    * @name        supportedTags
    * @type        Array<String>
@@ -98,4 +98,4 @@ module.exports = class SDocblockMarkdownOutput extends __SDocblockOutput {
       )
     );
   }
-};
+}

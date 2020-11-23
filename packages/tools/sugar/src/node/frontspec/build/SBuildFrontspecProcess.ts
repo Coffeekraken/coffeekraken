@@ -1,7 +1,7 @@
-const __SBuildFrontspecActionsStream = require('./SBuildFrontspecActionsStream');
-const __deepMerge = require('../../object/deepMerge');
-const __SProcess = require('../../process/SProcess');
-const __SBuildFrontspecInterface = require('./interface/SBuildFrontspecInterface');
+import __SBuildFrontspecActionsStream from './SBuildFrontspecActionsStream';
+import __deepMerge from '../../object/deepMerge';
+import __SProcess from '../../process/SProcess';
+import __SBuildFrontspecInterface from './interface/SBuildFrontspecInterface';
 
 /**
  * @name            SBuildFrontspecProcess
@@ -14,7 +14,7 @@ const __SBuildFrontspecInterface = require('./interface/SBuildFrontspecInterface
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildFrontspecProcess extends __SProcess {
+export default class SBuildFrontspecProcess extends __SProcess {
   static interface = __SBuildFrontspecInterface;
 
   /**
@@ -56,4 +56,4 @@ module.exports = class SBuildFrontspecProcess extends __SProcess {
     const actionStreamProcess = actionStream.start(params);
     this.bindSPromise(actionStreamProcess);
   }
-};
+}

@@ -17,12 +17,12 @@ import __stripAnsi from 'strip-ansi';
  * @return          {Number}                                How many characters their is in the line
  *
  * @example         js
- * const countLine = require('@coffeekraken/sugar/js/string/countLine');
+ * import countLine from '@coffeekraken/sugar/js/string/countLine';
  * countLine('Hello <red>World</red>'); // 11
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function countLine(line, count = {}) {
+export default function countLine(line, count = {}) {
   count = __deepMerge(
     {
       htmlTags: false,
@@ -44,4 +44,4 @@ module.exports = function countLine(line, count = {}) {
   }
 
   return newLine.length;
-};
+}

@@ -1,13 +1,13 @@
-const __SActionsStreamAction = require('../SActionsStreamAction');
-const __packageRoot = require('../../path/packageRoot');
-const __packageJson = require('../../package/json');
-const __fs = require('fs');
-const __removeSync = require('../../fs/removeSync');
-const __ensureDirSync = require('../../fs/ensureDirSync');
-const __deepMerge = require('../../object/deepMerge');
-const __md5 = require('../../crypt/md5');
-const __writeJsonSync = require('../../fs/writeJsonSync');
-const __SInterface = require('../../class/SInterface');
+import __SActionsStreamAction from '../SActionsStreamAction';
+import __packageRoot from '../../path/packageRoot';
+import __packageJson from '../../package/json';
+import __fs from 'fs';
+import __removeSync from '../../fs/removeSync';
+import __ensureDirSync from '../../fs/ensureDirSync';
+import __deepMerge from '../../object/deepMerge';
+import __md5 from '../../crypt/md5';
+import __writeJsonSync from '../../fs/writeJsonSync';
+import __SInterface from '../../class/SInterface';
 
 class SExtractDocblocksIntoFilesInterface extends __SInterface {
   static definitionObj = {
@@ -36,7 +36,7 @@ class SExtractDocblocksIntoFilesInterface extends __SInterface {
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SExtractDocblocksIntoFiles extends __SActionsStreamAction {
+export default class SExtractDocblocksIntoFiles extends __SActionsStreamAction {
   /**
    * @name            definitionObj
    * @type             Object
@@ -125,4 +125,4 @@ module.exports = class SExtractDocblocksIntoFiles extends __SActionsStreamAction
       resolve(streamObj);
     });
   }
-};
+}

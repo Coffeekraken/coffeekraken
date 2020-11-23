@@ -1,7 +1,7 @@
-const __psList = require('ps-list');
-const __fkill = require('fkill');
-const __deepMerge = require('../object/deepMerge');
-const __minimatch = require('minimatch');
+import __psList from 'ps-list';
+import __fkill from 'fkill';
+import __deepMerge from '../object/deepMerge';
+import __minimatch from 'minimatch';
 
 /**
  * @name              exitCleanup
@@ -13,13 +13,13 @@ const __minimatch = require('minimatch');
  * the main process has been terminated
  *
  * @example         js
- * const exitCleanup = require('@coffeekraken/sugar/node/process/exitCleanup');
+ * import exitCleanup from '@coffeekraken/sugar/node/process/exitCleanup';
  * await exitCleanup();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function exitCleanup(settings = {}) {
+export default function exitCleanup(settings = {}) {
   return new Promise((resolve, reject) => {
     settings = __deepMerge(
       {
@@ -51,4 +51,4 @@ module.exports = function exitCleanup(settings = {}) {
       resolve();
     })();
   });
-};
+}

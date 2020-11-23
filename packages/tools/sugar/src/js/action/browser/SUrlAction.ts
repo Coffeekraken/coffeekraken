@@ -11,7 +11,8 @@ import __toQueryString from '../../object/toQueryString';
  * with multiple settings like if you want the url to be opened in a popup,
  * after a timeout, etc...
  *
- * @TODO        Better documentation
+ * @todo        Better documentation
+ * @todo        tests
  *
  * @param       {Object}        descriptorObj       The action descriptor object
  * - target (_self) {String}: Specify how you want to go to the url. Can be ```_self```, ```_blank``` or ```_popup```

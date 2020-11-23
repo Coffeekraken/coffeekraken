@@ -1,18 +1,18 @@
-const __packageRoot = require('../path/packageRoot');
-const __deepMerge = require('../object/deepMerge');
-const __blessed = require('blessed');
-const __color = require('../color/color');
-const __SBlessedComponent = require('./SBlessedComponent');
-const __parseMarkdown = require('../terminal/parseMarkdown');
-const __isChildProcess = require('../is/childProcess');
-const __parse = require('../string/parse');
-const __toString = require('../string/toString');
-const __stripAnsi = require('strip-ansi');
-const __trimLines = require('../string/trimLines');
-const __extractValues = require('../object/extractValues');
-const __SOutputLogInterface = require('./interface/SOutputLogInterface');
-const __SOutputSourceInterface = require('./interface/SOutputSourceInterface');
-const __wait = require('../time/wait');
+import __packageRoot from '../path/packageRoot';
+import __deepMerge from '../object/deepMerge';
+import __blessed from 'blessed';
+import __color from '../color/color';
+import __SBlessedComponent from './SBlessedComponent';
+import __parseMarkdown from '../terminal/parseMarkdown';
+import __isChildProcess from '../is/childProcess';
+import __parse from '../string/parse';
+import __toString from '../string/toString';
+import __stripAnsi from 'strip-ansi';
+import __trimLines from '../string/trimLines';
+import __extractValues from '../object/extractValues';
+import __SOutputLogInterface from './interface/SOutputLogInterface';
+import __SOutputSourceInterface from './interface/SOutputSourceInterface';
+import __wait from '../time/wait';
 
 /**
  * @name                  SOutput
@@ -32,14 +32,14 @@ const __wait = require('../time/wait');
  * @todo        Listen for errors and display them correctly
  *
  * @example         js
- * const SOutput = require('@coffeekraken/sugar/node/terminal/SOutput');
+ * import SOutput from '@coffeekraken/sugar/node/terminal/SOutput';
  * const myPanel = new SOutput(myProcess, {
  *    screen: true
  * });
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SOutput extends __SBlessedComponent {
+export default class SOutput extends __SBlessedComponent {
   /**
    * @name          _process
    * @type          SOutput
@@ -943,4 +943,4 @@ module.exports = class SOutput extends __SBlessedComponent {
 
     this.append(this.$logBox);
   }
-};
+}

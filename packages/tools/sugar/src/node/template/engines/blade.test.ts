@@ -1,7 +1,7 @@
-const __path = require('path');
-const __tmp = require('tmp');
-const __SBladeTemplateEngine = require('./SBladeTemplateEngine');
-const __STemplate = require('../STemplate');
+import __path from 'path';
+import __tmp from 'tmp';
+import __SBladeTemplateEngine from './SBladeTemplateEngine';
+import __STemplate from '../STemplate';
 
 (async () => {
   // const engine = new __SBladeTemplateEngine({

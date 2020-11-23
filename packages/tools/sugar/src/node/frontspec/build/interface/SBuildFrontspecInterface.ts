@@ -1,6 +1,6 @@
-const __SInterface = require('../../../class/SInterface');
-const __sugarConfig = require('../../../config/sugar');
-const __deepMerge = require('../../../object/deepMerge');
+import __SInterface from '../../../class/SInterface';
+import __sugarConfig from '../../../config/sugar';
+import __deepMerge from '../../../object/deepMerge';
 
 /**
  * @name                SBuildScssInterface
@@ -14,7 +14,7 @@ const __deepMerge = require('../../../object/deepMerge');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildScssInterface extends __SInterface {
+export default class SBuildScssInterface extends __SInterface {
   static definitionObj = {
     outputDir: {
       type: 'String',
@@ -56,4 +56,4 @@ module.exports = class SBuildScssInterface extends __SInterface {
       level: 1
     }
   };
-};
+}

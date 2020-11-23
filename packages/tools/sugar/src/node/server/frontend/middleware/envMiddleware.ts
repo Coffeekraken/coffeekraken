@@ -1,6 +1,6 @@
-const __packageRoot = require('../../../path/packageRoot');
-const __fs = require('fs');
-const __env = require('../../../core/env');
+import __packageRoot from '../../../path/packageRoot';
+import __fs from 'fs';
+import __env from '../../../core/env';
 
 /**
  * @name            envMiddleware
@@ -14,8 +14,8 @@ const __env = require('../../../core/env');
  * @param           {Function}          next            The next function to call when the middleware has finished his job
  *
  * @example         js
- * const express = require('express');
- * const envMiddleware = require('@coffeekraken/sugar/server/frontend/middleware/envMiddleware');
+ * import express from 'express';
+ * import envMiddleware from '@coffeekraken/sugar/server/frontend/middleware/envMiddleware';
  * const server = express();
  * server.use(envMiddleware);
  * server.listen(3000);
@@ -23,7 +23,7 @@ const __env = require('../../../core/env');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function envMiddleware(settings = {}) {
+export default function envMiddleware(settings = {}) {
   return function (req, res, next) {
     res.templateData = {
       ...(res.templateData || {}),
@@ -31,4 +31,4 @@ module.exports = function envMiddleware(settings = {}) {
     };
     next();
   };
-};
+}

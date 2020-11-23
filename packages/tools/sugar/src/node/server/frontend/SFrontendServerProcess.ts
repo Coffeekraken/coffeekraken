@@ -1,6 +1,6 @@
-const __frontendServer = require('./frontend');
-const __SProcess = require('../../process/SProcess');
-const __SFrontendServerInterface = require('./interface/SFrontendServerInterface');
+import __frontendServer from './frontend';
+import __SProcess from '../../process/SProcess';
+import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 
 /**
  * @name            SFrontendServerProcess
@@ -13,7 +13,7 @@ const __SFrontendServerInterface = require('./interface/SFrontendServerInterface
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFrontendServerProcess extends __SProcess {
+export default class SFrontendServerProcess extends __SProcess {
   static interface = __SFrontendServerInterface;
 
   /**
@@ -50,4 +50,4 @@ module.exports = class SFrontendServerProcess extends __SProcess {
     this._frontendServerProcess = __frontendServer(params);
     this.bindSPromise(this._frontendServerProcess);
   }
-};
+}

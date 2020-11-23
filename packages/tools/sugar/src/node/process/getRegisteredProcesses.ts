@@ -8,13 +8,13 @@
  * @return      {Object}              The registered processes stack
  *
  * @example         js
- * const getRegisteredProcesses = require('@coffeekraken/sugar/node/process/getRegisteredProcesses');
+ * import getRegisteredProcesses from '@coffeekraken/sugar/node/process/getRegisteredProcesses';
  * getRegisteredProcesses();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function getRegisteredProcesses() {
+export default function getRegisteredProcesses() {
   if (!global._registeredProcesses) global._registeredProcesses = {};
   return global._registeredProcesses;
-};
+}

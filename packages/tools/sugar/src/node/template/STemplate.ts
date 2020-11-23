@@ -1,12 +1,12 @@
-const __unique = require('../array/unique');
-const __deepMerge = require('../object/deepMerge');
-const __sugarConfig = require('../config/sugar');
-const __path = require('path');
-const __fs = require('fs');
-const __SError = require('../error/SError');
-const __glob = require('glob');
-const __STemplateEngine = require('./engines/STemplateEngine');
-const __SPromise = require('../promise/SPromise');
+import __unique from '../array/unique';
+import __deepMerge from '../object/deepMerge';
+import __sugarConfig from '../config/sugar';
+import __path from 'path';
+import __fs from 'fs';
+import __SError from '../error/SError';
+import __glob from 'glob';
+import __STemplateEngine from './engines/STemplateEngine';
+import __SPromise from '../promise/SPromise';
 
 /**
  * @name          STemplate
@@ -26,7 +26,7 @@ const __SPromise = require('../promise/SPromise');
  * - defaultData ({}) {Object}: A data object to use by default when calling the ```render``` method. Can be overrided obviously in the ```render``` method
  *
  * @example       js
- * const STemplate = require('@coffeekraken/sugar/node/template/STemplate');
+ * import STemplate from '@coffeekraken/sugar/node/template/STemplate';
  * const myTemplate = new STemplate('my.cool.view', {
  *    title: 'Hello'
  * }, {
@@ -118,10 +118,10 @@ class STemplate {
    * @name      defaultRootDirs
    * @type      Array
    * @static
-   * 
+   *
    * This static property store the default root directories where the class
    * will search for views to render
-   * 
+   *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -134,11 +134,11 @@ class STemplate {
    * @name      getRootDirs
    * @type      Function
    * @static
-   * 
+   *
    * This function accept an array of root directories
    * and return the final array with the default root directories
    * added correctly
-   * 
+   *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -277,7 +277,9 @@ class STemplate {
       },
       settings
     );
-    this._settings.rootDirs = this.constructor.getRootDirs(settings.rootDirs || []);
+    this._settings.rootDirs = this.constructor.getRootDirs(
+      settings.rootDirs || []
+    );
 
     Object.keys(STemplate.engines).forEach((ext) => {
       viewPathOrTemplateString = viewPathOrTemplateString.replace(
@@ -366,9 +368,7 @@ class STemplate {
               }
             }
           } else if (this._settings.engine instanceof __STemplateEngine) {
-            if (
-              !settings.engine.constructor.canRender(this._templateString)
-            ) {
+            if (!settings.engine.constructor.canRender(this._templateString)) {
               throw new __SError(
                 `It seems that you've passed directly an __STemplateEngine engine as the settings.engine option but this engine cannot render your passed template string...`
               );
@@ -446,4 +446,4 @@ Object.keys(defaultDataHandlers).forEach((extension) => {
   STemplate.registerDataHandler(extension, defaultDataHandlers[extension]);
 });
 
-module.exports = STemplate;
+export default STemplate;

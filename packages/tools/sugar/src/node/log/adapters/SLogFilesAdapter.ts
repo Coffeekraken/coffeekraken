@@ -1,7 +1,7 @@
-const __deepMerge = require('../../object/deepMerge');
-const __prependFile = require('prepend-file');
-const __makeDir = require('make-dir');
-const __filesPreset = require('../htmlPresets/files');
+import __deepMerge from '../../object/deepMerge';
+import __prependFile from 'prepend-file';
+import __makeDir from 'make-dir';
+import __filesPreset from '../htmlPresets/files';
 
 /**
  * @name                    SLogFilesAdapter
@@ -11,8 +11,8 @@ const __filesPreset = require('../htmlPresets/files');
  * This class allows you to log your messages, errors, etc... easily and store them in some files where you want on your file system.
  *
  * @example               js
- * conse SLog = require('@coffeekraken/sugar/js/log/SLog');
- * const SLogFilesAdapter = require('@coffeekraken/sugar/node/log/adapters/SLogFilesAdapter');
+ * import SLog from '@coffeekraken/sugar/js/log/SLog';
+ * import SLogFilesAdapter from '@coffeekraken/sugar/node/log/adapters/SLogFilesAdapter';
  * const logger = new SLog({
  *    adapters: [
  *      new SLogFilesAdapter()

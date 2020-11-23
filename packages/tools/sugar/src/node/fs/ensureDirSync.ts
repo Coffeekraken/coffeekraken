@@ -1,4 +1,4 @@
-const __fs = require('fs-extra');
+import __fs from 'fs-extra';
 
 // TODO tests
 
@@ -13,7 +13,7 @@ const __fs = require('fs-extra');
  * @return      {Promise}                           A promise that will be resolved once the directory has been created if needed...
  *
  * @example       js
- * const ensureDirSync = require('@coffeekraken/node/fs/ensureDirSync');
+ * import ensureDirSync from '@coffeekraken/node/fs/ensureDirSync';
  * try {
  *    ensureDirSync('my/cool/dir');
  * } catch(e) {}
@@ -21,6 +21,6 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function ensureDirSync(dir) {
+export default function ensureDirSync(dir) {
   __fs.ensureDirSync(dir);
-};
+}

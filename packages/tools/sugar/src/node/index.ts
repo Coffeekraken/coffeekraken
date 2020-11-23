@@ -1,10 +1,10 @@
-const __sugarConfig = require('./config/sugar');
-const __SLog = require('./log/SLog');
-const __handleError = require('./error/handleError');
-const __initEnv = require('./init/initEnv');
-const __onProcessExit = require('./process/onProcessExit');
-const __exitCleanup = require('./process/exitCleanup');
-const __SIpc = require('./ipc/SIpc');
+import __sugarConfig from './config/sugar';
+import __SLog from './log/SLog';
+import __handleError from './error/handleError';
+import __initEnv from './init/initEnv';
+import __onProcessExit from './process/onProcessExit';
+import __exitCleanup from './process/exitCleanup';
+import __SIpc from './ipc/SIpc';
 
 /**
  * @name                    index

@@ -1,15 +1,14 @@
-const __blessed = require('blessed');
-const __SBlessedComponent = require('../SBlessedComponent');
-const __deepMerge = require('../../object/deepMerge');
-const __parseHtml = require('../../terminal/parseHtml');
-const __countLine = require('../../string/countLine');
-const __hotkey = require('../../keyboard/hotkey');
-const __color = require('../../color/color');
-const __SPromise = require('../../promise/SPromise');
-const __SInput = require('../form/SInput');
-const __multiple = require('../../class/multipleExtends');
-const __activeSpace = require('../../core/activeSpace');
-const __escapeStack = require('../../terminal/escapeStack');
+import __blessed from 'blessed';
+import __SBlessedComponent from '../SBlessedComponent';
+import __deepMerge from '../../object/deepMerge';
+import __parseHtml from '../../terminal/parseHtml';
+import __countLine from '../../string/countLine';
+import __hotkey from '../../keyboard/hotkey';
+import __color from '../../color/color';
+import __SPromise from '../../promise/SPromise';
+import __multiple from '../../class/multipleExtends';
+import __activeSpace from '../../core/activeSpace';
+import __escapeStack from '../../terminal/escapeStack';
 
 /**
  * @name                  SBlessedWindowBox
@@ -29,12 +28,12 @@ const __escapeStack = require('../../terminal/escapeStack');
  *    - bg (__color('terminal.primary').toString()) {Color}: The background color to use
  * - ...blessed.box settings
  * @example       js
- * const SBlessedWindowBox = require('@coffeekraken/sugar/node/blessed/box/SBlessedWindowBox');
+ * import SBlessedWindowBox from '@coffeekraken/sugar/node/blessed/box/SBlessedWindowBox';
  * const box = new SBlessedWindowBox(myCoolContent, {});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedWindowBox extends __SBlessedComponent {
+export default class SBlessedWindowBox extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function

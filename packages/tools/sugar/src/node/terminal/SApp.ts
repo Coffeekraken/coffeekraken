@@ -1,13 +1,13 @@
-const __childProcess = require('child_process');
-const __deepMerge = require('../object/deepMerge');
-const __blessed = require('blessed');
-const __parseHtml = require('./parseHtml');
-const __splitEvery = require('../string/splitEvery');
-const __countLine = require('../string/countLine');
-const __parseSchema = require('../url/parseSchema');
-const __sugarConfig = require('../config/sugar');
-const __SPanel = require('../terminal/SPanel');
-const __packageRoot = require('../path/packageRoot');
+import __childProcess from 'child_process';
+import __deepMerge from '../object/deepMerge';
+import __blessed from 'blessed';
+import __parseHtml from './parseHtml';
+import __splitEvery from '../string/splitEvery';
+import __countLine from '../string/countLine';
+import __parseSchema from '../url/parseSchema';
+import __sugarConfig from '../config/sugar';
+import __SPanel from '../terminal/SPanel';
+import __packageRoot from '../path/packageRoot';
 
 /**
  * @name                    SApp
@@ -21,14 +21,14 @@ const __packageRoot = require('../path/packageRoot');
  * @param           {Object}          [settings={}]   An object of settings described bellow:
  *
  * @example         js
- * const SApp = require('@coffeekraken/sugar/node/terminal/SApp');
+ * import SApp from '@coffeekraken/sugar/node/terminal/SApp';
  * const app = new SApp('My Cool Application', {
  * });
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SApp extends __blessed.screen {
+export default class SApp extends __blessed.screen {
   /**
    * @name              _name
    * @type              String
@@ -291,4 +291,4 @@ module.exports = class SApp extends __blessed.screen {
     // render the screen
     this.render();
   }
-};
+}

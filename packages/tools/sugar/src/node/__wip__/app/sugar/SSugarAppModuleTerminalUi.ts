@@ -1,8 +1,8 @@
-const __blessed = require('blessed');
-const __SBlessedComponent = require('../../blessed/SBlessedComponent');
-const __deepMerge = require('../../object/deepMerge');
-const __SBlessedOutput = require('../../blessed/SBlessedOutput');
-const __parseHtml = require('../../terminal/parseHtml');
+import __blessed from 'blessed';
+import __SBlessedComponent from '../../blessed/SBlessedComponent';
+import __deepMerge from '../../object/deepMerge';
+import __SBlessedOutput from '../../blessed/SBlessedOutput';
+import __parseHtml from '../../terminal/parseHtml';
 
 /**
  * @name            SSugarAppModuleTerminalUi
@@ -16,7 +16,7 @@ const __parseHtml = require('../../terminal/parseHtml');
  * @param           {Object}        [settings={}]           An object of settings to configure your terminal interface
  *
  * @example         js
- * const SSugarAppModuleTerminalUi = require('@coffeekraken/sugar/node/app/sugar/SSugarAppModuleTerminalUi');
+ * import SSugarAppModuleTerminalUi from '@coffeekraken/sugar/node/app/sugar/SSugarAppModuleTerminalUi';
  * class MyUi extends SSugarAppModuleTerminalUi {
  *      constructor(settings = {}) {
  *          super(settings);
@@ -26,7 +26,7 @@ const __parseHtml = require('../../terminal/parseHtml');
  * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSugarAppModuleTerminalUi extends __SBlessedComponent {
+export default class SSugarAppModuleTerminalUi extends __SBlessedComponent {
   /**
    * @name        constructor
    * @type         Function
@@ -96,4 +96,4 @@ module.exports = class SSugarAppModuleTerminalUi extends __SBlessedComponent {
   log(...args) {
     this.$log.log(...args);
   }
-};
+}

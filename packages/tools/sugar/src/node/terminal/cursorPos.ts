@@ -1,4 +1,4 @@
-const __terminalKit = require('terminal-kit').terminal;
+import { terminal as __terminalKit } from 'terminal-kit';
 
 // TODO tests
 
@@ -12,13 +12,13 @@ const __terminalKit = require('terminal-kit').terminal;
  * @return              {Promise}                         A promise resolved once the position has been getted
  *
  * @example             js
- * const cursorPos = require('@coffeekraken/sugar/node/terminal/cursorPos');
+ * import cursorPos from '@coffeekraken/sugar/node/terminal/cursorPos';
  * await cursorPos(); // => { x: 10, y: 20 }
  *
  * @see       https://www.npmjs.com/package/terminal-kit
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function cursorPos() {
+export default function cursorPos() {
   return new Promise(async (resolve, reject) => {
     __terminalKit.once('terminal', (name, data) => {
       resolve(data);
@@ -27,4 +27,4 @@ module.exports = function cursorPos() {
       await __terminalKit.getCursorLocation();
     } catch (e) {}
   });
-};
+}

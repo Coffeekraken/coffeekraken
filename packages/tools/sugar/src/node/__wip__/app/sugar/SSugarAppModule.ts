@@ -1,12 +1,12 @@
-const __SPromise = require('../../promise/SPromise');
-const __SError = require('../../error/SError');
-const __toString = require('../../string/toString');
-const __SSugarAppModuleSettingsInterface = require('./interface/SSugarAppModuleSettingsInterface');
-const __deepMerge = require('../../object/deepMerge');
-const __hotkey = require('../../keyboard/hotkey');
-const __SIpc = require('../../ipc/SIpc');
-const __SProcessManager = require('../../process/SProcess');
-const __blessed = require('blessed');
+import __SPromise from '../../promise/SPromise';
+import __SError from '../../error/SError';
+import __toString from '../../string/toString';
+import __SSugarAppModuleSettingsInterface from './interface/SSugarAppModuleSettingsInterface';
+import __deepMerge from '../../object/deepMerge';
+import __hotkey from '../../keyboard/hotkey';
+import __SIpc from '../../ipc/SIpc';
+import __SProcessManager from '../../process/SProcess';
+import __blessed from 'blessed';
 
 /**
  * @name            SSugarAppModule
@@ -21,7 +21,7 @@ const __blessed = require('blessed');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSugarAppModule extends __SPromise {
+export default class SSugarAppModule extends __SPromise {
   /**
    * @name          state
    * @type          String
@@ -398,4 +398,4 @@ module.exports = class SSugarAppModule extends __SPromise {
       });
     });
   }
-};
+}

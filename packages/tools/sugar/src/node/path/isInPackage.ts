@@ -1,5 +1,5 @@
-const __packageRoot = require('./packageRoot');
-const __fs = require('fs');
+import __packageRoot from './packageRoot';
+import __fs from 'fs';
 
 /**
  * @name                    isInPackage
@@ -14,13 +14,13 @@ const __fs = require('fs');
  * @return          {String}                                      The finded package path or false if not finded
  *
  * @example         js
- * const isInPackage = require('@coffeekraken/sugar/node/path/isInPackage');
+ * import isInPackage from '@coffeekraken/sugar/node/path/isInPackage';
  * const root = isInPackage();
  *
  * @see       https://www.npmjs.com/package/find-package-json
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function isInPackage(
+export default function isInPackage(
   name,
   from = process.cwd(),
   highest = false
@@ -51,4 +51,4 @@ module.exports = function isInPackage(
   }
 
   return false;
-};
+}

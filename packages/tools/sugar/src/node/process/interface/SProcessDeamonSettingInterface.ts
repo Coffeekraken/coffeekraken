@@ -1,4 +1,4 @@
-const __SInterface = require('../../class/SInterface');
+import __SInterface from '../../class/SInterface';
 
 /**
  * @name                SProcessDeamonSettingInterface
@@ -12,7 +12,7 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SProcessDeamonSettingInterface extends __SInterface {
+export default class SProcessDeamonSettingInterface extends __SInterface {
   static definitionObj = {
     class: {
       type: 'Class',
@@ -31,4 +31,4 @@ module.exports = class SProcessDeamonSettingInterface extends __SInterface {
         'An optional function that will take as arguments the initial process params and the data send by the deamon. You then can update the params depending on the data from the deamon and return the new params object to send to the "run" process method'
     }
   };
-};
+}

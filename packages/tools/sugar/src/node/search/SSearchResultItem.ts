@@ -1,12 +1,12 @@
-const __deepMerge = require('../object/deepMerge');
-const __isPath = require('../is/path');
-const __fs = require('fs');
-const __SDocblock = require('../docblock/SDocblock');
-const __path = require('path');
-const __packageRoot = require('../path/packageRoot');
-const __stripTags = require('../html/striptags');
-const __getFilename = require('../fs/filename');
-const __namespace = require('../package/namespace');
+import __deepMerge from '../object/deepMerge';
+import __isPath from '../is/path';
+import __fs from 'fs';
+import __SDocblock from '../docblock/SDocblock';
+import __path from 'path';
+import __packageRoot from '../path/packageRoot';
+import __stripTags from '../html/striptags';
+import __getFilename from '../fs/filename';
+import __namespace from '../package/namespace';
 
 /**
  * @name              SSearchResultItem
@@ -19,13 +19,13 @@ const __namespace = require('../package/namespace');
  * @param      {Object}       [settings={}]     A settings object with these properties availble:
  *
  * @example       js
- * const SSearchResultItem = require('@coffeekraken/sugar/node/doc/SSearchResultItem');
+ * import SSearchResultItem from '@coffeekraken/sugar/node/doc/SSearchResultItem';
  * const myDocMapItem = new SSearchResultItem('something/cool.js');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSearchResultItem {
+export default class SSearchResultItem {
   /**
    * @name        _settings
    * @type        Object
@@ -141,4 +141,4 @@ module.exports = class SSearchResultItem {
       action: this.action.toJson()
     };
   }
-};
+}

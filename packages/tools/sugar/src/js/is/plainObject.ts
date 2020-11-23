@@ -11,7 +11,7 @@ import __isPlainObject from 'is-plain-object';
  * @return        {Boolean}                                         true if is plain object(s), false if not
  *
  * @example           js
- * const isPlainObject = require('@coffeekraken/sugar/js/is/plainObject');
+ * import isPlainObject from '@coffeekraken/sugar/js/is/plainObject';
  * isPlainObject({ hello: 'world'}); // => true
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

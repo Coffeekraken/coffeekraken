@@ -1,3 +1,3 @@
-const __SConfigFsAdapter = require('../adapters/SConfigFsAdapter');
-const __SConfig = require('../SConfig');
+import __SConfigFsAdapter from '../adapters/SConfigFsAdapter';
+import __SConfig from '../SConfig';
 require('./SConfigFsAdapter')(__SConfig, __SConfigFsAdapter);

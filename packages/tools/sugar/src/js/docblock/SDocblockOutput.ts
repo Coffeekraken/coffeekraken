@@ -31,7 +31,7 @@ import __promisedHandlebars from 'promised-handlebars';
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SDocblockOutput {
+export default class SDocblockOutput {
   /**
    * @name      _settings
    * @type      Object

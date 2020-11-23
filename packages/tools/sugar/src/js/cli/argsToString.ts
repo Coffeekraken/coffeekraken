@@ -48,7 +48,7 @@ import __deepMerge from '../object/deepMerge';
 // TODO: support deep object structure
 // TODO: support required args
 
-module.exports = function argsToString(args, settings = {}) {
+export default function argsToString(args, settings = {}) {
   settings = __deepMerge(
     {
       definitionObj: null,

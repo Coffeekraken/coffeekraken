@@ -1,9 +1,8 @@
-const __fs = require('fs');
-const __deepMerge = require('../../object/deepMerge');
-const __writeFileSync = require('../../fs/writeFileSync');
-const __diff = require('../../object/diff');
-
-const __SConfigAdapter = require('./SConfigAdapter');
+import __fs from 'fs';
+import __deepMerge from '../../object/deepMerge';
+import __writeFileSync from '../../fs/writeFileSync';
+import __diff from '../../object/diff';
+import __SConfigAdapter from './SConfigAdapter';
 
 /**
  * @name                  SConfigFolderAdapter
@@ -24,7 +23,7 @@ const __SConfigAdapter = require('./SConfigAdapter');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
+export default class SConfigFolderAdapter extends __SConfigAdapter {
   constructor(settings = {}) {
     super(settings);
     this.settings.foldername = this.settings.foldername.replace(

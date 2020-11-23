@@ -1,6 +1,6 @@
-const __deepMerge = require('../object/deepMerge');
-const __findImportStatements = require('./findImportStatements');
-const __dedupe = require('../string/dedupe');
+import __deepMerge from '../object/deepMerge';
+import __findImportStatements from './findImportStatements';
+import __dedupe from '../string/dedupe';
 
 /**
  * @name            ensureNoDuplicateImportStatements
@@ -17,7 +17,7 @@ const __dedupe = require('../string/dedupe');
  * @setting      {Boolean}      [imports=true]    Specify if you want to extract the @import statements
  *
  * @example       js
- * const ensureNoDuplicateImportStatements = require('@coffeekraken/sugar/node/scss/ensureNoDuplicateImportStatements');
+ * import ensureNoDuplicateImportStatements from '@coffeekraken/sugar/node/scss/ensureNoDuplicateImportStatements';
  * ensureNoDuplicateImportStatements(`
  *    @use 'something/cool' as Hello;
  *    @import 'other/cool/thing';
@@ -29,7 +29,7 @@ const __dedupe = require('../string/dedupe');
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function ensureNoDuplicateImportStatements(
+export default function ensureNoDuplicateImportStatements(
   string,
   settings = {}
 ) {
@@ -45,4 +45,4 @@ module.exports = function ensureNoDuplicateImportStatements(
     string = __dedupe(string, statementObj.raw);
   });
   return string;
-};
+}

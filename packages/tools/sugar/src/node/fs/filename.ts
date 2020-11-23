@@ -1,4 +1,4 @@
-const __extension = require('./extension');
+import __extension from './extension';
 
 // TODO tests
 
@@ -14,15 +14,15 @@ const __extension = require('./extension');
  * @return          {String}                                  The requested filename
  *
  * @example       js
- * const filename = require('@coffeekraken/sugar/node/fs/filename');
+ * import filename from '@coffeekraken/sugar/node/fs/filename';
  * filename('hello/world.js'); // => world.js
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function filename(path, withExtension = true) {
+export default function filename(path, withExtension = true) {
   let filename = path.split('/').pop();
   if (!withExtension) {
     filename = filename.replace(__extension(filename), '');
   }
   return filename;
-};
+}

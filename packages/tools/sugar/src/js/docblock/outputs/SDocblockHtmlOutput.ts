@@ -50,7 +50,7 @@ import __authorPartial from './html/partials/author';
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SDocblockHtmlOutput extends __SDocblockOutput {
+export default class SDocblockHtmlOutput extends __SDocblockOutput {
   /**
    * @name        supportedTags
    * @type        Array<String>
@@ -123,4 +123,4 @@ module.exports = class SDocblockHtmlOutput extends __SDocblockOutput {
       )
     );
   }
-};
+}

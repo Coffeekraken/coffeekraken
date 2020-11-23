@@ -1,17 +1,17 @@
-const __path = require('path');
-const __SActionsStreamAction = require('../SActionsStreamAction');
-const __glob = require('glob');
-const __deepMerge = require('../../object/deepMerge');
-const __fs = require('fs');
-const __packageRoot = require('../../path/packageRoot');
-const __SPromise = require('../../promise/SPromise');
-const __SError = require('../../error/SError');
-const __SInterface = require('../../class/SInterface');
-const __extractGlob = require('../../glob/extractGlob');
-const __extractNoneGlob = require('../../glob/extractNoneGlob');
-const __getFilename = require('../../fs/filename');
-const __extension = require('../../fs/extension');
-const __resolveGlob = require('../../glob/resolveGlob');
+import __path from 'path';
+import __SActionsStreamAction from '../SActionsStreamAction';
+import __glob from 'glob';
+import __deepMerge from '../../object/deepMerge';
+import __fs from 'fs';
+import __packageRoot from '../../path/packageRoot';
+import __SPromise from '../../promise/SPromise';
+import __SError from '../../error/SError';
+import __SInterface from '../../class/SInterface';
+import __extractGlob from '../../glob/extractGlob';
+import __extractNoneGlob from '../../glob/extractNoneGlob';
+import __getFilename from '../../fs/filename';
+import __extension from '../../fs/extension';
+import __resolveGlob from '../../glob/resolveGlob';
 
 class SFsFilesResolverStreamActionInterface extends __SInterface {
   static definitionObj = {
@@ -36,7 +36,7 @@ class SFsFilesResolverStreamActionInterface extends __SInterface {
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
+export default class SFindInFileStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -208,4 +208,4 @@ module.exports = class SFindInFileStreamAction extends __SActionsStreamAction {
       }
     });
   }
-};
+}

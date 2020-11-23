@@ -1,7 +1,7 @@
-const __json = require('./json');
-const __deepMerge = require('../object/deepMerge');
-const __getFilename = require('../fs/filename');
-const __sugarConfig = require('../config/sugar');
+import __json from './json';
+import __deepMerge from '../object/deepMerge';
+import __getFilename from '../fs/filename';
+import __sugarConfig from '../config/sugar';
 
 /**
  * @name          namespace
@@ -16,13 +16,13 @@ const __sugarConfig = require('../config/sugar');
  * @return      {String}                    The generated namespace
  *
  * @example     js
- * const namespace = require('@coffeekraken/sugar/node/package/namespace');
+ * import namespace from '@coffeekraken/sugar/node/package/namespace';
  * namespace('something.cool'); => // coffeekraken.sugar.something.cool
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = function namespace(path, settings = {}) {
+export default function namespace(path, settings = {}) {
   settings = __deepMerge(__sugarConfig('core.namespace') || {}, settings);
   // get the package json content
   const json = __json(settings.context || process.cwd());
@@ -53,4 +53,4 @@ module.exports = function namespace(path, settings = {}) {
     .split('..')
     .join('.');
   return resultNamespace;
-};
+}

@@ -1,7 +1,7 @@
-const __deepMerge = require('../object/deepMerge');
-const __resolveGlob = require('./resolveGlob');
-const __extractGlob = require('./extractGlob');
-const __extractNoneGlob = require('./extractNoneGlob');
+import __deepMerge from '../object/deepMerge';
+import __resolveGlob from './resolveGlob';
+import __extractGlob from './extractGlob';
+import __extractNoneGlob from './extractNoneGlob';
 
 /**
  * @name                SGlob
@@ -17,7 +17,7 @@ const __extractNoneGlob = require('./extractNoneGlob');
  * @todo               tests
  *
  * @example         js
- * const SGlob = require('@coffeekraken/sugar/node/glob/SGlob');
+ * import SGlob from '@coffeekraken/sugar/node/glob/SGlob';
  * const glob = new SGlob('my/cool/glob/*.js');
  * const files = await glob.resolve();
  * await SGlob.resolve('my/cool/glob/*.js');
@@ -25,7 +25,7 @@ const __extractNoneGlob = require('./extractNoneGlob');
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SGlob {
+export default class SGlob {
   /**
    * @name            _settings
    * @type            Object
@@ -176,4 +176,4 @@ module.exports = class SGlob {
       SGlob.extractNoneGlob(glob);
     });
   }
-};
+}

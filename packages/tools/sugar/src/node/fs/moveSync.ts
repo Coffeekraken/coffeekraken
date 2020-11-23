@@ -1,4 +1,4 @@
-const __fs = require('fs-extra');
+import __fs from 'fs-extra';
 
 // TODO tests
 
@@ -13,7 +13,7 @@ const __fs = require('fs-extra');
  * @param       {String}              dest          The destination path
  *
  * @example       js
- * const moveSync = require('@coffeekraken/node/fs/moveSync');
+ * import moveSync from '@coffeekraken/node/fs/moveSync';
  * try {
  *    moveSync('my/cool/dir', 'another/place/for/directory');
  * } catch(e) {}
@@ -21,6 +21,6 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function moveSync(src, dest) {
+export default function moveSync(src, dest) {
   _fs.moveSync(src, dest);
-};
+}

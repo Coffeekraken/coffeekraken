@@ -1,4 +1,4 @@
-const __SSugarAppModuleTerminalUi = require('../../app/sugar/SSugarAppModuleTerminalUi');
+import __SSugarAppModuleTerminalUi from '../../app/sugar/SSugarAppModuleTerminalUi';
 
 /**
  * @name            SBuildScssSugarAppTerminalUi
@@ -13,7 +13,7 @@ const __SSugarAppModuleTerminalUi = require('../../app/sugar/SSugarAppModuleTerm
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildScssSugarAppTerminalUi extends __SSugarAppModuleTerminalUi {
+export default class SBuildScssSugarAppTerminalUi extends __SSugarAppModuleTerminalUi {
   /**
    * @name            constructor
    * @type            Function
@@ -27,4 +27,4 @@ module.exports = class SBuildScssSugarAppTerminalUi extends __SSugarAppModuleTer
   constructor(sources, settings = {}) {
     super(sources, settings);
   }
-};
+}

@@ -1,15 +1,15 @@
-const __copy = require('../clipboard/copy');
-const __isChildProcess = require('../is/childProcess');
-const __packageRoot = require('../path/packageRoot');
-const __SError = require('../error/SError');
-const __parseHtml = require('../terminal/parseHtml');
-const __keypress = require('keypress');
-const __hotkey = require('../keyboard/hotkey');
-const __toString = require('../string/toString');
-const __parse = require('../string/parse');
-const __blessed = require('blessed');
-const __color = require('../color/color');
-const __SIpc = require('../ipc/SIpc');
+import __copy from '../clipboard/copy';
+import __isChildProcess from '../is/childProcess';
+import __packageRoot from '../path/packageRoot';
+import __SError from '../error/SError';
+import __parseHtml from '../terminal/parseHtml';
+import __keypress from 'keypress';
+import __hotkey from '../keyboard/hotkey';
+import __toString from '../string/toString';
+import __parse from '../string/parse';
+import __blessed from 'blessed';
+import __color from '../color/color';
+import __SIpc from '../ipc/SIpc';
 
 /**
  * @name                    handleError
@@ -21,7 +21,7 @@ const __SIpc = require('../ipc/SIpc');
  * pass this function as the handler one and that's it...
  *
  * @example           js
- * const handleError = require('@coffeekraken/sugar/node/error/handleError');
+ * import handleError from '@coffeekraken/sugar/node/error/handleError';
  * process.on('uncaughtException', handleError);
  * process.on('unhandledRejection', handleError);
  *
@@ -29,7 +29,8 @@ const __SIpc = require('../ipc/SIpc');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 const errorPanels = [];
-module.exports = function handleError() {
+
+export default function handleError() {
   if (process.env.NODE_ENV === 'test') return;
 
   if (__isChildProcess()) {
@@ -44,7 +45,7 @@ module.exports = function handleError() {
       $panel.destroy();
     });
   }
-};
+}
 
 function createErrorPanel(error) {
   if (!global.screen) return;

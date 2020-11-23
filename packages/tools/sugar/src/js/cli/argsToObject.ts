@@ -39,7 +39,7 @@ import __completeArgsObject from './completeArgsObject';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function argsToObject(argsObj, settings = {}) {
+export default function argsToObject(argsObj, settings = {}) {
   if (typeof argsObj === 'string') {
     return __parseArgs(argsObj, {
       definitionObj: settings.definitionObj

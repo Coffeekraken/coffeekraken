@@ -1,14 +1,14 @@
-const __sugarConfig = require('../config/sugar');
-const __getFilename = require('../fs/filename');
-const __fs = require('fs');
-const __path = require('path');
-const __getExt = require('../fs/extension');
-const __deepMerge = require('../object/deepMerge');
-const __toString = require('../string/toString');
-const __SPromise = require('../promise/SPromise');
-const __SError = require('../error/SError');
-const __STemplate = require('./STemplate');
-const __unique = require('../array/unique');
+import __sugarConfig from '../config/sugar';
+import __getFilename from '../fs/filename';
+import __fs from 'fs';
+import __path from 'path';
+import __getExt from '../fs/extension';
+import __deepMerge from '../object/deepMerge';
+import __toString from '../string/toString';
+import __SPromise from '../promise/SPromise';
+import __SError from '../error/SError';
+import __STemplate from './STemplate';
+import __unique from '../array/unique';
 
 /**
  * @name              render
@@ -26,7 +26,7 @@ const __unique = require('../array/unique');
  * - rootDir (__sugarConfig('views.rootDir')) {String|Array<String>}: Specify the root directory where to search for views. Can be an array of directories in which the engine will search through if needed
  *
  * @example       js
- * const render = require('@coffeekraken/sugar/node/template/render');
+ * import render from '@coffeekraken/sugar/node/template/render';
  * const result = await render('my.cool.template, {
  *    hello: 'world'
  * });
@@ -34,7 +34,7 @@ const __unique = require('../array/unique');
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function render(viewPath, data = null, settings = {}) {
+export default function render(viewPath, data = null, settings = {}) {
   return new __SPromise(
     async (resolve, reject, trigger, cancel) => {
       const templateInstance = new __STemplate(viewPath, {
@@ -66,4 +66,4 @@ module.exports = function render(viewPath, data = null, settings = {}) {
       id: 'templateRender'
     }
   );
-};
+}

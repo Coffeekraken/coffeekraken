@@ -1,11 +1,11 @@
-const __blessed = require('blessed');
-const __SBlessedComponent = require('../SBlessedComponent');
-const __deepMerge = require('../../object/deepMerge');
-const __parseHtml = require('../../terminal/parseHtml');
-const __color = require('../../color/color');
-const __escapeStack = require('../../terminal/escapeStack');
-const __activeSpace = require('../../core/activeSpace');
-const __SPromise = require('../../promise/SPromise');
+import __blessed from 'blessed';
+import __SBlessedComponent from '../SBlessedComponent';
+import __deepMerge from '../../object/deepMerge';
+import __parseHtml from '../../terminal/parseHtml';
+import __color from '../../color/color';
+import __escapeStack from '../../terminal/escapeStack';
+import __activeSpace from '../../core/activeSpace';
+import __SPromise from '../../promise/SPromise';
 
 /**
  * @name                  SBlessedPopup
@@ -20,12 +20,12 @@ const __SPromise = require('../../promise/SPromise');
  * - id (popup) {String}: An id to identify the popup. This id will be appended to the "activeSpace" when the popup is opened
  *
  * @example       js
- * const SBlessedPopup = require('@coffeekraken/sugar/node/blessed/popup/SBlessedPopup');
+ * import SBlessedPopup from '@coffeekraken/sugar/node/blessed/popup/SBlessedPopup';
  * const myPopup = new SBlessedPopup();
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedPopup extends __SBlessedComponent {
+export default class SBlessedPopup extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function
@@ -183,4 +183,4 @@ module.exports = class SBlessedPopup extends __SBlessedComponent {
 
     super.update();
   }
-};
+}

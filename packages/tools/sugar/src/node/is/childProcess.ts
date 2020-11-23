@@ -8,13 +8,13 @@
  * @return        {Boolean}                             true if the process is running as a child process, false if not
  *
  * @example       js
- * const isChildProcess = require('@coffeekraken/sugar/node/is/childProcess');
+ * import isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
  * isChildProcess(); // => false
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function childProcess() {
+export default function childProcess() {
   return (
     process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined
   );
-};
+}

@@ -1,4 +1,4 @@
-const __SInterface = require('../../class/SInterface');
+import __SInterface from '../../class/SInterface';
 
 /**
  * @name                SFsFileInterface
@@ -12,7 +12,7 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsFileInterface extends __SInterface {
+export default class SFsFileInterface extends __SInterface {
   static definitionObj = {
     name: {
       type: 'String',
@@ -61,4 +61,4 @@ module.exports = class SFsFileInterface extends __SInterface {
       required: true
     }
   };
-};
+}

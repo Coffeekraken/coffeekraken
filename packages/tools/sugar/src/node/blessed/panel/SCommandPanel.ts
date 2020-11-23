@@ -1,24 +1,24 @@
-const __deepMerge = require('../../object/deepMerge');
-const __blessed = require('blessed');
-const __color = require('../../color/color');
-const __SBlessedComponent = require('../SBlessedComponent');
-const __summaryListPopup = require('../list/summaryListPopup');
-const __ora = require('ora');
-const __countLine = require('../../string/countLine');
-const __parseHtml = require('../../terminal/parseHtml');
-const __isOdd = require('../../is/odd');
-const __SPromise = require('../../promise/SPromise');
-const __SCommand = require('../../terminal/SCommand');
-const __transitionObjectProperties = require('../../transition/objectProperties');
-const __SBlessedPopup = require('../../blessed/popup/SBlessedPopup');
-const __hotkey = require('../../keyboard/hotkey');
-const __SInputPopup = require('../popup/SInputPopup');
-const __activeSpace = require('../../core/activeSpace');
-const __SWindowBox = require('../box/SWindowBox');
-const __convert = require('../../time/convert');
-const __SOutput = require('../SOutput');
-const __SAppCommandInterface = require('../interface/SAppCommandInterface');
-const __getExtendsStack = require('../../class/getExtendsStack');
+import __deepMerge from '../../object/deepMerge';
+import __blessed from 'blessed';
+import __color from '../../color/color';
+import __SBlessedComponent from '../SBlessedComponent';
+import __summaryListPopup from '../list/summaryListPopup';
+import __ora from 'ora';
+import __countLine from '../../string/countLine';
+import __parseHtml from '../../terminal/parseHtml';
+import __isOdd from '../../is/odd';
+import __SPromise from '../../promise/SPromise';
+import __SCommand from '../../terminal/SCommand';
+import __transitionObjectProperties from '../../transition/objectProperties';
+import __SBlessedPopup from '../../blessed/popup/SBlessedPopup';
+import __hotkey from '../../keyboard/hotkey';
+import __SInputPopup from '../popup/SInputPopup';
+import __activeSpace from '../../core/activeSpace';
+import __SWindowBox from '../box/SWindowBox';
+import __convert from '../../time/convert';
+import __SOutput from '../SOutput';
+import __SAppCommandInterface from '../interface/SAppCommandInterface';
+import __getExtendsStack from '../../class/getExtendsStack';
 
 /**
  * @name                  SCommandPanel
@@ -32,14 +32,14 @@ const __getExtendsStack = require('../../class/getExtendsStack');
  * @param         {Object}              [settings={}]     The settings object to configure your SCommandPanel
  *
  * @example         js
- * const SCommandPanel = require('@coffeekraken/sugar/node/terminal/SCommandPanel');
+ * import SCommandPanel from '@coffeekraken/sugar/node/terminal/SCommandPanel';
  * const myPanel = new SCommandPanel(myProcess, {
  *    screen: true
  * });
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCommandPanel extends __SBlessedComponent {
+export default class SCommandPanel extends __SBlessedComponent {
   /**
    * @name          _commands
    * @type          Array|String
@@ -1100,4 +1100,4 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
       super.update();
     });
   }
-};
+}

@@ -1,4 +1,4 @@
-const SCache = require('../SCache');
+import SCache from '../SCache';
 
 const cache = new SCache('sugar-node-cache-SCache');
 

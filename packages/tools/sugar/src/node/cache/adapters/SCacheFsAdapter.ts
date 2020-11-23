@@ -1,12 +1,11 @@
-const __deepMerge = require('../../object/deepMerge');
-const __tmpDir = require('../../fs/tmpDir');
-const __fs = require('fs');
-const __ensureDirSync = require('../../fs/ensureDirSync');
-const __removeSync = require('../../fs/removeSync');
-const __sugarConfig = require('../../config/sugar');
-const __toString = require('../../string/toString');
-
-const __SCacheAdapter = require('../../_js/cache/adapters/SCacheAdapter');
+import __deepMerge from '../../object/deepMerge';
+import __tmpDir from '../../fs/tmpDir';
+import __fs from 'fs';
+import __ensureDirSync from '../../fs/ensureDirSync';
+import __removeSync from '../../fs/removeSync';
+import __sugarConfig from '../../config/sugar';
+import __toString from '../../string/toString';
+import __SCacheAdapter from '../../_js/cache/adapters/SCacheAdapter';
 
 /**
  * @name                                SCacheFsAdapter
@@ -25,7 +24,7 @@ const __SCacheAdapter = require('../../_js/cache/adapters/SCacheAdapter');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCacheFsAdapter extends __SCacheAdapter {
+export default class SCacheFsAdapter extends __SCacheAdapter {
   /**
    * @name                              constructor
    * @type                              Function

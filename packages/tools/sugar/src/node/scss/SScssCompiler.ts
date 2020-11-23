@@ -1,28 +1,28 @@
-const __extension = require('../fs/extension');
-const __SCache = require('../cache/SCache');
-const __unquote = require('../string/unquote');
-const __path = require('path');
-const __stripCssComments = require('../css/stripCssComments');
-const __folderPath = require('../fs/folderPath');
-const __deepMerge = require('../object/deepMerge');
-const __SPromise = require('../promise/SPromise');
-const __md5 = require('../crypt/md5');
-const __sass = require('sass');
-const __packageRoot = require('../path/packageRoot');
-const __getFilename = require('../fs/filename');
-const __isPath = require('../is/path');
-const __fs = require('fs');
-const __getSharedResourcesString = require('./getSharedResourcesString');
-const __putUseStatementsOnTop = require('./putUseStatementsOnTop');
-const __glob = require('glob');
-const __parseScss = require('scss-parser').parse;
-const __stringifyScss = require('scss-parser').stringify;
-const __createQueryWrapper = require('query-ast');
-const __csso = require('csso');
-const __isGlob = require('is-glob');
-const __unique = require('../array/unique');
-const __SBuildScssInterface = require('./build/interface/SBuildScssInterface');
-const { start } = require('repl');
+import __extension from '../fs/extension';
+import __SCache from '../cache/SCache';
+import __unquote from '../string/unquote';
+import __path from 'path';
+import __stripCssComments from '../css/stripCssComments';
+import __folderPath from '../fs/folderPath';
+import __deepMerge from '../object/deepMerge';
+import __SPromise from '../promise/SPromise';
+import __md5 from '../crypt/md5';
+import __sass from 'sass';
+import __packageRoot from '../path/packageRoot';
+import __getFilename from '../fs/filename';
+import __isPath from '../is/path';
+import __fs from 'fs';
+import __getSharedResourcesString from './getSharedResourcesString';
+import __putUseStatementsOnTop from './putUseStatementsOnTop';
+import __glob from 'glob';
+import { parse as __parseScss } from 'scss-parser';
+import { stringify as __stringifyScss } from 'scss-parser';
+import __createQueryWrapper from 'query-ast';
+import __csso from 'csso';
+import __isGlob from 'is-glob';
+import __unique from '../array/unique';
+import __SBuildScssInterface from './build/interface/SBuildScssInterface';
+import { start } from 'repl';
 
 /**
  * @name                SScssCompiler
@@ -45,7 +45,7 @@ const { start } = require('repl');
  * @todo            check for map output when no file path
  *
  * @example         js
- * const SScssCompiler = require('@coffeekraken/sugar/node/scss/SScssCompiler');
+ * import SScssCompiler from '@coffeekraken/sugar/node/scss/SScssCompiler';
  * const compiler = new SScssCompiler();
  * const compiledFile = await compiler.compile('my/cool/code.scss');
  * const compiledCode = await compiler.compile(`
@@ -56,7 +56,7 @@ const { start } = require('repl');
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SScssCompiler {
+export default class SScssCompiler {
   /**
    * @name            _settings
    * @type            Object
@@ -493,4 +493,4 @@ module.exports = class SScssCompiler {
     }
     return null;
   }
-};
+}

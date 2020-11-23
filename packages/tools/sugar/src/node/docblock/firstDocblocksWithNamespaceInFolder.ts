@@ -1,11 +1,11 @@
-const __deepMerge = require('../object/deepMerge');
-const __findInFiles = require('find-in-files');
-const __minimatch = require('minimatch');
-const __fs = require('fs');
-const __path = require('path');
-const __getFilename = require('../fs/filename');
-const __extension = require('../fs/extension');
-const __SDocblock = require('./SDocblock');
+import __deepMerge from '../object/deepMerge';
+import __findInFiles from 'find-in-files';
+import __minimatch from 'minimatch';
+import __fs from 'fs';
+import __path from 'path';
+import __getFilename from '../fs/filename';
+import __extension from '../fs/extension';
+import __SDocblock from './SDocblock';
 
 /**
  * @name                  firstDocblockWithNamespaceInFolder
@@ -22,13 +22,13 @@ const __SDocblock = require('./SDocblock');
  * @return        {Object}                                    An object containing the docblocks holded in each namespaces as properties
  *
  * @example       js
- * const firstDocblockWithNamespaceInFolder = require('@coffeekraken/sugar/node/nav/firstDocblockWithNamespaceInFolder);
+ * import firstDocblockWithNamespaceInFolder from '@coffeekraken/sugar/node/nav/firstDocblockWithNamespaceInFolder';
  * firstDocblockWithNamespaceInFolder('my/cool/folder');
  *
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function firstDocblockWithNamespaceInFolder(
+export default async function firstDocblockWithNamespaceInFolder(
   directory,
   settings = {}
 ) {
@@ -70,4 +70,4 @@ module.exports = async function firstDocblockWithNamespaceInFolder(
   });
 
   return namespaceObj;
-};
+}

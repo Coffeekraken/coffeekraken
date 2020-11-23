@@ -1,4 +1,4 @@
-const __isClass = require('is-class');
+import __isClass from 'is-class';
 
 /**
  * @name                      class

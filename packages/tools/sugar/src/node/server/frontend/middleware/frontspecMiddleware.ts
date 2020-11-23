@@ -1,8 +1,8 @@
-const __packageRoot = require('../../../path/packageRoot');
-const __fs = require('fs');
-const __sugarConfig = require('../../../config/sugar');
-const __deepMerge = require('../../../object/deepMerge');
-const __deepMap = require('../../../object/deepMap');
+import __packageRoot from '../../../path/packageRoot';
+import __fs from 'fs';
+import __sugarConfig from '../../../config/sugar';
+import __deepMerge from '../../../object/deepMerge';
+import __deepMap from '../../../object/deepMap';
 
 /**
  * @name            frontspecMiddleware
@@ -17,8 +17,8 @@ const __deepMap = require('../../../object/deepMap');
  * @param           {Function}          next            The next function to call when the middleware has finished his job
  *
  * @example         js
- * const express = require('express');
- * const frontspecMiddleware = require('@coffeekraken/sugar/server/frontend/middleware/frontspecMiddleware');
+ * import express from 'express';
+ * import frontspecMiddleware from '@coffeekraken/sugar/server/frontend/middleware/frontspecMiddleware';
  * const server = express();
  * server.use(frontspecMiddleware);
  * server.listen(3000);
@@ -26,7 +26,7 @@ const __deepMap = require('../../../object/deepMap');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function frontspecMiddleware(settings = {}) {
+export default function frontspecMiddleware(settings = {}) {
   return function (req, res, next) {
     const defaultFrontSpec = __sugarConfig('frontspec') || {};
     const frontspecPath = `${__packageRoot()}/frontspec.json`;
@@ -52,4 +52,4 @@ module.exports = function frontspecMiddleware(settings = {}) {
 
     next();
   };
-};
+}

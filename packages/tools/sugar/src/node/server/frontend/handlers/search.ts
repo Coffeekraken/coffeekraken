@@ -1,8 +1,8 @@
-const __sugarConfig = require('../../../config/sugar');
-const __fs = require('fs');
-const __marked = require('marked');
-const __jsDom = require('jsdom').JSDOM;
-const __filter = require('../../../object/filter');
+import __sugarConfig from '../../../config/sugar';
+import __fs from 'fs';
+import __marked from 'marked';
+import __filter from '../../../object/filter';
+import { JSDOM as __jsDom } from 'jsdom';
 
 /**
  * @name                search
@@ -18,7 +18,7 @@ const __filter = require('../../../object/filter');
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function search(req, server) {
+export default function search(req, server) {
   return new Promise(async (resolve, reject) => {
     let title = `Search results | 18 results`;
 
@@ -56,4 +56,4 @@ module.exports = function search(req, server) {
       type: 'application/json'
     });
   });
-};
+}

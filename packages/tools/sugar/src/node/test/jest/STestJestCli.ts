@@ -1,7 +1,7 @@
-const __SCli = require('../../cli/SCli');
-const __deepMerge = require('../../object/deepMerge');
-const __STestJestCliInterface = require('./interface/STestJestInterface');
-const __STestJestProcess = require('./STestJestProcess');
+import __SCli from '../../cli/SCli';
+import __deepMerge from '../../object/deepMerge';
+import __STestJestCliInterface from './interface/STestJestInterface';
+import __STestJestProcess from './STestJestProcess';
 
 /**
  * @name            STestJestCli
@@ -14,7 +14,7 @@ const __STestJestProcess = require('./STestJestProcess');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class STestJestCli extends __SCli {
+export default class STestJestCli extends __SCli {
   /**
    * @name          command
    * @type          String
@@ -70,6 +70,3 @@ class STestJestCli extends __SCli {
     );
   }
 }
-
-// module.exports = STestJestCli;
-module.exports = __STestJestCliInterface.implements(STestJestCli);

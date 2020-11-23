@@ -1,10 +1,10 @@
-const __SProcess = require('../../process/SProcess');
-const __chokidar = require('chokidar');
-const __SPromise = require('../../promise/SPromise');
-const __deepMerge = require('../../object/deepMerge');
-const __SFsFile = require('../../fs/SFsFile');
-const __packageRoot = require('../../path/packageRoot');
-const __SFsDeamonInterface = require('./interface/SFsDeamonInterface');
+import __SProcess from '../../process/SProcess';
+import __chokidar from 'chokidar';
+import __SPromise from '../../promise/SPromise';
+import __deepMerge from '../../object/deepMerge';
+import __SFsFile from '../../fs/SFsFile';
+import __packageRoot from '../../path/packageRoot';
+import __SFsDeamonInterface from './interface/SFsDeamonInterface';
 
 /**
  * @name                SFsDeamonProcess
@@ -16,7 +16,7 @@ const __SFsDeamonInterface = require('./interface/SFsDeamonInterface');
  * updated, deleted or created on the filesystem.
  *
  * @example           js
- * const SFsDeamonProcess = require('@coffeekraken/sugar/node/deamon/fs/SFsDeamonProcess');
+ * import SFsDeamonProcess from '@coffeekraken/sugar/node/deamon/fs/SFsDeamonProcess';
  * const deamon = new SFsDeamonProcess();
  * demon.on('update', up => {
  *    // do somethong on update
@@ -31,7 +31,7 @@ const __SFsDeamonInterface = require('./interface/SFsDeamonInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsDeamonProcess extends __SProcess {
+export default class SFsDeamonProcess extends __SProcess {
   static interface = __SFsDeamonInterface;
 
   /**
@@ -168,4 +168,4 @@ module.exports = class SFsDeamonProcess extends __SProcess {
     }
     return file;
   }
-};
+}

@@ -1,25 +1,25 @@
-const __completeArgsObject = require('../cli/completeArgsObject');
-const __path = require('path');
-const __convert = require('../time/convert');
-const __wait = require('../time/wait');
-const __isClass = require('../is/class');
-const __onProcessExit = require('./onProcessExit');
-const __SPromise = require('../promise/SPromise');
-const __SProcessInterface = require('./interface/SProcessInterface');
-const __notifier = require('node-notifier');
-const __deepMerge = require('../object/deepMerge');
-const __packageRoot = require('../path/packageRoot');
-const __isChildProcess = require('../is/childProcess');
-const __SIpc = require('../ipc/SIpc');
-const __SError = require('../error/SError');
-const __buildCommandLine = require('../cli/buildCommandLine');
-const __parseArgs = require('../cli/parseArgs');
-const __childProcess = require('child_process');
-const __output = require('./output');
-const __stackTrace = require('stack-trace');
-const __argsToString = require('../cli/argsToString');
-const __toString = require('../string/toString');
-const __copy = require('../clipboard/copy');
+import __completeArgsObject from '../cli/completeArgsObject';
+import __path from 'path';
+import __convert from '../time/convert';
+import __wait from '../time/wait';
+import __isClass from '../is/class';
+import __onProcessExit from './onProcessExit';
+import __SPromise from '../promise/SPromise';
+import __SProcessInterface from './interface/SProcessInterface';
+import __notifier from 'node-notifier';
+import __deepMerge from '../object/deepMerge';
+import __packageRoot from '../path/packageRoot';
+import __isChildProcess from '../is/childProcess';
+import __SIpc from '../ipc/SIpc';
+import __SError from '../error/SError';
+import __buildCommandLine from '../cli/buildCommandLine';
+import __parseArgs from '../cli/parseArgs';
+import __childProcess from 'child_process';
+import __output from './output';
+import __stackTrace from 'stack-trace';
+import __argsToString from '../cli/argsToString';
+import __toString from '../string/toString';
+import __copy from '../clipboard/copy';
 
 /**
  * @name                SProcess
@@ -33,7 +33,7 @@ const __copy = require('../clipboard/copy');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SProcess extends __SPromise {
+export default class SProcess extends __SPromise {
   /**
    * @name      id
    * @type      String

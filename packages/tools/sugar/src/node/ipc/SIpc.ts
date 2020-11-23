@@ -1,10 +1,10 @@
-const __uniqid = require('../string/uniqid');
-const __SPromise = require('../promise/SPromise');
-const __IPC = require('node-ipc').IPC;
-const __deepMerge = require('../object/deepMerge');
-const __isChildProcess = require('../is/childProcess');
-const __onProcessExit = require('../process/onProcessExit');
-const __getFreePort = require('../network/getFreePort');
+import __uniqid from '../string/uniqid';
+import __SPromise from '../promise/SPromise';
+import { IPC as __IPC } from 'node-ipc';
+import __deepMerge from '../object/deepMerge';
+import __isChildProcess from '../is/childProcess';
+import __onProcessExit from '../process/onProcessExit';
+import __getFreePort from '../network/getFreePort';
 /**
  * @name            SIpc
  * @namespace       sugar.node.ipc
@@ -471,4 +471,4 @@ class SIpc {
   }
 }
 
-module.exports = SIpc;
+export default SIpc;

@@ -1,5 +1,5 @@
-const __SPromise = require('../../../promise/SPromise');
-const __SDocMap = require('../../../doc/SDocMap');
+import __SPromise from '../../../promise/SPromise';
+import __SDocMap from '../../../doc/SDocMap';
 
 /**
  * @name                docMap
@@ -15,10 +15,10 @@ const __SDocMap = require('../../../doc/SDocMap');
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function docMap(req, res, settings = {}) {
+export default async function docMap(req, res, settings = {}) {
   const docMap = new __SDocMap();
   const docMapJson = await docMap.read();
   res.status(200);
   res.type('application/json');
   res.send(docMapJson);
-};
+}

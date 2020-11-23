@@ -1,10 +1,10 @@
-const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __deepMerge = require('../../../object/deepMerge');
-const __SBuildFrontspecInterface = require('../interface/SBuildFrontspecInterface');
-const __SFrontspec = require('../../SFrontspec');
-const __packageRoot = require('../../../path/packageRoot');
-const __fs = require('fs');
-const __path = require('path');
+import __SActionsStreamAction from '../../../stream/SActionsStreamAction';
+import __deepMerge from '../../../object/deepMerge';
+import __SBuildFrontspecInterface from '../interface/SBuildFrontspecInterface';
+import __SFrontspec from '../../SFrontspec';
+import __packageRoot from '../../../path/packageRoot';
+import __fs from 'fs';
+import __path from 'path';
 
 /**
  * @name                SBuildFrontspecStreamAction
@@ -19,7 +19,7 @@ const __path = require('path');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildFrontspecStreamAction extends __SActionsStreamAction {
+export default class SBuildFrontspecStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -98,4 +98,4 @@ module.exports = class SBuildFrontspecStreamAction extends __SActionsStreamActio
       resolve(streamObj);
     });
   }
-};
+}

@@ -1,10 +1,9 @@
-const __fs = require('fs');
-const __deepMerge = require('../../object/deepMerge');
-const __tmpDir = require('../../fs/tmpDir');
-const __writeFileSync = require('../../fs/writeFileSync');
-const __diff = require('../../object/diff');
-
-const __SConfigAdapter = require('./SConfigAdapter');
+import __fs from 'fs';
+import __deepMerge from '../../object/deepMerge';
+import __tmpDir from '../../fs/tmpDir';
+import __writeFileSync from '../../fs/writeFileSync';
+import __diff from '../../object/diff';
+import __SConfigAdapter from './SConfigAdapter';
 
 /**
  * @name                  SConfigFsAdapter
@@ -25,7 +24,7 @@ const __SConfigAdapter = require('./SConfigAdapter');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-module.exports = class SConfigFsAdapter extends __SConfigAdapter {
+export default class SConfigFsAdapter extends __SConfigAdapter {
   constructor(settings = {}) {
     settings = __deepMerge(
       {

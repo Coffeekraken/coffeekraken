@@ -1,21 +1,21 @@
-const __fs = require('fs');
-const __tmp = require('tmp');
-const __isClass = require('../is/class');
-const __packageJson = require('../package/json');
-const __buildCommandLine = require('./buildCommandLine');
-const __SChildProcessManager = require('../process/SChildProcessManager');
-const __deepMerge = require('../object/deepMerge');
-const __argsToObject = require('../cli/argsToObject');
-const __isChildProcess = require('../is/childProcess');
-const __output = require('../process/output');
-const __parseArgs = require('../cli/parseArgs');
-const __toString = require('../string/toString');
-const __SProcessManagerInterface = require('../process/interface/SProcessManagerInterface');
-const __SCliInterface = require('./interface/SCliInterface');
-const __SInterface = require('../class/SInterface');
-const __sugarHeading = require('../ascii/sugarHeading');
-const __SPromise = require('../promise/SPromise');
-const __SProcessManager = require('../process/SProcessManager');
+import __fs from 'fs';
+import __tmp from 'tmp';
+import __isClass from '../is/class';
+import __packageJson from '../package/json';
+import __buildCommandLine from './buildCommandLine';
+import __SChildProcessManager from '../process/SChildProcessManager';
+import __deepMerge from '../object/deepMerge';
+import __argsToObject from '../cli/argsToObject';
+import __isChildProcess from '../is/childProcess';
+import __output from '../process/output';
+import __parseArgs from '../cli/parseArgs';
+import __toString from '../string/toString';
+import __SProcessManagerInterface from '../process/interface/SProcessManagerInterface';
+import __SCliInterface from './interface/SCliInterface';
+import __SInterface from '../class/SInterface';
+import __sugarHeading from '../ascii/sugarHeading';
+import __SPromise from '../promise/SPromise';
+import __SProcessManager from '../process/SProcessManager';
 
 /**
  * @name                SCli
@@ -36,7 +36,7 @@ const __SProcessManager = require('../process/SProcessManager');
  * @TODO            check the documentation
  *
  * @example         js
- * const SCli = require('@coffeekraken/sugar/js/cli/SCli');
+ * import SCli from '@coffeekraken/sugar/js/cli/SCli';
  * class MyCli extends SCli {
  *    static command = 'php %hostname:%port %rootDir %arguments';
  *    static interface = MyCoolSInterface;
@@ -370,6 +370,4 @@ class SCli extends __SPromise {
     } catch (e) {}
   }
 }
-
-// module.exports = SCli;
-module.exports = __SCliInterface.implements(SCli);
+export default __SCliInterface.implements(SCli);

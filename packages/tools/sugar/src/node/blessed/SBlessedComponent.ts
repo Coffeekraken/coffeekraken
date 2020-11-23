@@ -1,14 +1,14 @@
-const __blessed = require('blessed');
-const __deepMerge = require('../object/deepMerge');
-const __color = require('../color/color');
-const __hotkey = require('../keyboard/hotkey');
-const __tkill = require('tree-kill');
-const __isChildProcess = require('../is/childProcess');
-const __toString = require('../string/toString');
-const __parse = require('../string/parse');
-const __onProcessExit = require('../process/onProcessExit');
+import __blessed from 'blessed';
+import __deepMerge from '../object/deepMerge';
+import __color from '../color/color';
+import __hotkey from '../keyboard/hotkey';
+import __tkill from 'tree-kill';
+import __isChildProcess from '../is/childProcess';
+import __toString from '../string/toString';
+import __parse from '../string/parse';
+import __onProcessExit from '../process/onProcessExit';
 
-let __activeScreen = null;
+let __activeScreen: any = null;
 
 /**
  * @name                  SBlessedComponent
@@ -20,7 +20,7 @@ let __activeScreen = null;
  * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
  *
  * @example       js
- * const SBlessedComponent = require('@coffeekraken/sugar/node/blessed/SBlessedComponent');
+ * import SBlessedComponent from '@coffeekraken/sugar/node/blessed/SBlessedComponent';
  * class MyCoolComponent extends SBlessedComponent {
  *    constructor(settings = {}) {
  *      super(settings);
@@ -36,7 +36,7 @@ let __activeScreen = null;
 //   if (!global.screen) return;
 //   global.screen.destroy();
 // });
-module.exports = class SBlessedComponent extends __blessed.box {
+export default class SBlessedComponent extends __blessed.box {
   /**
    * @name                  _settings
    * @type                  Object
@@ -289,4 +289,4 @@ module.exports = class SBlessedComponent extends __blessed.box {
   allowRender() {
     return this._allowRender;
   }
-};
+}

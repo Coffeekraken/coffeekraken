@@ -1,5 +1,5 @@
-const __clipboardy = require('clipboardy');
-const __toString = require('../string/toString');
+import __clipboardy from 'clipboardy';
+import __toString from '../string/toString';
 
 /**
  * @name            copy
@@ -12,14 +12,14 @@ const __toString = require('../string/toString');
  * @param       {String}      text        The text to copy
  *
  * @example       js
- * const copy = require('@coffeekraken/sugar/node/clipboard/copy');
+ * import copy from '@coffeekraken/sugar/node/clipboard/copy';
  * copy('Hello world');
  *
  * @since       2.0.0
  * @see         https://www.npmjs.com/package/clipboardy
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function copy(text) {
+export default function copy(text) {
   text = __toString(text);
   __clipboardy.writeSync(text);
-};
+}

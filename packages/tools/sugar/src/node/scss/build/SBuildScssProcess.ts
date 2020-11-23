@@ -1,7 +1,7 @@
-const __SBuildScssActionsStream = require('./SBuildScssActionsStream');
-const __deepMerge = require('../../object/deepMerge');
-const __SProcess = require('../../process/SProcess');
-const __SBuildScssInterface = require('./interface/SBuildScssInterface');
+import __SBuildScssActionsStream from './SBuildScssActionsStream';
+import __deepMerge from '../../object/deepMerge';
+import __SProcess from '../../process/SProcess';
+import __SBuildScssInterface from './interface/SBuildScssInterface';
 
 /**
  * @name            SBuildScssProcess
@@ -14,7 +14,7 @@ const __SBuildScssInterface = require('./interface/SBuildScssInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildScssProcess extends __SProcess {
+export default class SBuildScssProcess extends __SProcess {
   static interface = __SBuildScssInterface;
 
   /**
@@ -62,4 +62,4 @@ module.exports = class SBuildScssProcess extends __SProcess {
     const actionStreamProcess = actionStream.start(params);
     this.bindSPromise(actionStreamProcess);
   }
-};
+}

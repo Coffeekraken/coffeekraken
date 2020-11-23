@@ -1,4 +1,4 @@
-const __packageRoot = require('../path/packageRoot');
+import __packageRoot from '../path/packageRoot';
 
 /**
  * @name          rootPath
@@ -12,12 +12,12 @@ const __packageRoot = require('../path/packageRoot');
  * @return    {String}          The current working package root path
  *
  * @example     js
- * const json = require('@coffeekraken/sugar/node/package/rootPath');
+ * import json from '@coffeekraken/sugar/node/package/rootPath';
  * rootPath(); => // /something/cool/myCoolPackage'
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = function rootPath(from = process.cwd(), highest = false) {
+export default function rootPath(from = process.cwd(), highest = false) {
   return __packageRoot(from, highest);
-};
+}

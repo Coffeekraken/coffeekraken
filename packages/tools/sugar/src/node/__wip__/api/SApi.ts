@@ -1,13 +1,13 @@
-const __deepMerge = require('../object/deepMerge');
-const __SCache = require('../cache/SCache');
-const __SAuth = require('../auth/SAuth');
-const __path = require('path');
-const __axios = require('axios');
-const __objectUid = require('../object/uid');
-const __convert = require('../time/convert');
-const __machineId = require('node-machine-id').machineIdSync;
+import __deepMerge from '../object/deepMerge';
+import __SCache from '../cache/SCache';
+import __SAuth from '../auth/SAuth';
+import __path from 'path';
+import __axios from 'axios';
+import __objectUid from '../object/uid';
+import __convert from '../time/convert';
+import { machineIdSync as __machineId } from 'node-machine-id';
 
-const __isPlainObject = require('../is/plainObject');
+import __isPlainObject from '../is/plainObject';
 
 /**
  * @name                            SApi
@@ -21,7 +21,7 @@ const __isPlainObject = require('../is/plainObject');
  * - And more...
  *
  * @example           js
- * const SApi = require('@coffeekraken/sugar/node/api/SApi');
+ * import SApi from '@coffeekraken/sugar/node/api/SApi';
  * class MyCoolApi extends SApi {
  *    constructor(name, settings = {}) {
  *      super(name, settings);
@@ -30,7 +30,7 @@ const __isPlainObject = require('../is/plainObject');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SApi {
+export default class SApi {
   /**
    * @name                          _name
    * @type                          String
@@ -474,4 +474,4 @@ module.exports = class SApi {
     // return the response
     return true;
   }
-};
+}

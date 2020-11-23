@@ -1,5 +1,8 @@
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 const __SProcess = require('../../process/SProcess');
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 const __SSugarApp = require('./SSugarApp');
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
 const __SSugarAppInterface = require('./interface/SSugarAppInterface');
 
 /**
@@ -15,6 +18,7 @@ const __SSugarAppInterface = require('./interface/SSugarAppInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+// @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'module'. Do you need to install ... Remove this comment to see the full error message
 module.exports = class SSugarAppProcess extends __SProcess {
   static interface = __SSugarAppInterface;
 
@@ -48,9 +52,11 @@ module.exports = class SSugarAppProcess extends __SProcess {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  process(params, settings = {}) {
+  process(params: any, settings = {}) {
     // new sugar ui instance
+    // @ts-expect-error ts-migrate(2339) FIXME: Property '_sugarUiInstance' does not exist on type... Remove this comment to see the full error message
     this._sugarUiInstance = new __SSugarApp({});
+    // @ts-expect-error ts-migrate(2339) FIXME: Property 'bindSPromise' does not exist on type 'SS... Remove this comment to see the full error message
     this.bindSPromise(this._sugarUiInstance);
   }
 };

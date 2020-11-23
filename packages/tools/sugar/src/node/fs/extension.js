@@ -1,5 +1,6 @@
 "use strict";
 // TODO tests
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                    extension
  * @namespace           sugar.node.fs
@@ -11,14 +12,15 @@
  * @return          {String}                                The file extension
  *
  * @example         js
- * const extension = require('@coffeekraken/sugar/node/fs/extension');
+ * import extension from '@coffeekraken/sugar/node/fs/extension';
  * extension('hello/world.jpg'); // => jpg
  *
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function extension(path) {
+function extension(path) {
     const lastPart = path.split('/').pop();
     if (!lastPart.includes('.'))
         return '';
     return path.split('.').pop();
-};
+}
+exports.default = extension;

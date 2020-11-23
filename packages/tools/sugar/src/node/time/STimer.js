@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const convert_1 = require("./convert");
-const SPromise_1 = require("../promise/SPromise");
-const deepMerge_1 = require("../object/deepMerge");
+const convert_1 = __importDefault(require("./convert"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name 		            STimer
  * @namespace           sugar.js.time
@@ -31,7 +34,7 @@ const deepMerge_1 = require("../object/deepMerge");
  * - loop (false) {Boolean}: Specify if you want the timer to loop or not.
  *
  * @example 	js
- * const STimer = require('@coffeekraken/sugar/js/time/STimer');
+ * import STimer from '@coffeekraken/sugar/js/time/STimer';
  * const myTimer = new STimer(2000, {
  * 		tickCount : 5
  * })

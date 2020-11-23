@@ -1,11 +1,11 @@
 "use strict";
-var _a;
-const __deepMerge = require('../../object/deepMerge');
-const __blessed = require('blessed');
-const __color = require('../../color/color');
-const __hotkey = require('../../keyboard/hotkey');
-const __parseHtml = require('../../terminal/parseHtml');
-const __SBlessedComponent = require('../SBlessedComponent');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const parseHtml_1 = __importDefault(require("../../terminal/parseHtml"));
+const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
 /**
  * @name                    SBlessedNotification
  * @namespace           sugar.node.blessed.notification
@@ -28,7 +28,7 @@ const __SBlessedComponent = require('../SBlessedComponent');
  * - fg (black) {String}: Specify the foreground color to apply to the notification
  *
  * @example             js
- * const SBlessedNotification = require('@coffeekraken/sugar/node/blessed/notification/SBlessedNotification');
+ * import SBlessedNotification from '@coffeekraken/sugar/node/blessed/notification/SBlessedNotification';
  * const notification = new SBlessedNotification('Hello', 'This is a cool notif', null, {
  *      onClick: () => {
  *          console.log('Clicked');
@@ -38,114 +38,114 @@ const __SBlessedComponent = require('../SBlessedComponent');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SBlessedNotification extends __SBlessedComponent {
-        /**
-         * @name            constructor
-         * @type            Function
-         * @constructor
-         *
-         * Constructor
-         *
-         * @since           2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        constructor(title, body, settings = {}) {
-            settings = __deepMerge({
-                onClick: null,
-                position: 'tr',
-                timeout: 5000,
+class SBlessedNotification extends SBlessedComponent_1.default {
+    /**
+     * @name            constructor
+     * @type            Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(title, body, settings = {}) {
+        settings = deepMerge_1.default({
+            onClick: null,
+            position: 'tr',
+            timeout: 5000,
+            bg: 'yellow',
+            fg: 'black',
+            hover: {
                 bg: 'yellow',
-                fg: 'black',
+                fg: 'black'
+            }
+        }, settings);
+        let position = settings.position;
+        delete settings.position;
+        super({
+            ...settings,
+            width: 40,
+            height: 4,
+            style: {
+                bg: settings.bg,
+                fg: settings.fg,
                 hover: {
-                    bg: 'yellow',
-                    fg: 'black'
+                    bg: settings.hover.bg,
+                    fg: settings.hover.fg
                 }
-            }, settings);
-            let position = settings.position;
-            delete settings.position;
-            super({
-                ...settings,
-                width: 40,
-                height: 4,
-                style: {
-                    bg: settings.bg,
-                    fg: settings.fg,
-                    hover: {
-                        bg: settings.hover.bg,
-                        fg: settings.hover.fg
-                    }
-                },
-                padding: {
-                    top: 1,
-                    left: 2,
-                    right: 2,
-                    bottom: 0
-                },
-                clickable: settings.onClick !== null,
-                content: __parseHtml([`<bold>${title}</bold>`, `${body}`, ''].join('\n'))
-            });
-            this.on('attach', () => {
-                const stack = SBlessedNotification.displayStacks[position];
-                if (stack.indexOf(this) === -1) {
-                    stack.push(this);
-                }
-            });
-            this.on('detach', () => {
-                const stack = SBlessedNotification.displayStacks[position];
-                const idx = stack.indexOf(this);
-                if (idx === -1)
-                    return;
-                stack.splice(idx, 1);
-                SBlessedNotification.update();
-            });
-            // click
-            if (settings.onClick) {
-                this.on('click', () => {
-                    settings.onClick();
-                    this.destroy();
-                });
+            },
+            padding: {
+                top: 1,
+                left: 2,
+                right: 2,
+                bottom: 0
+            },
+            clickable: settings.onClick !== null,
+            content: parseHtml_1.default([`<bold>${title}</bold>`, `${body}`, ''].join('\n'))
+        });
+        this.on('attach', () => {
+            const stack = SBlessedNotification.displayStacks[position];
+            if (stack.indexOf(this) === -1) {
+                stack.push(this);
             }
-            // timeout
-            if (settings.timeout !== -1) {
-                setTimeout(() => {
-                    this.destroy();
-                }, settings.timeout);
-            }
-        }
-        static update() {
-            let top = 1, left = 2, bottom = 1, right = 2;
-            SBlessedNotification.displayStacks.tl.forEach(($notif) => {
-                $notif.top = top;
-                $notif.left = left;
-                top += $notif.height + 1;
-            });
-            top = 1;
-            SBlessedNotification.displayStacks.tr.forEach(($notif) => {
-                $notif.top = top;
-                $notif.right = right;
-                top += $notif.height + 1;
-            });
-            SBlessedNotification.displayStacks.bl.forEach(($notif) => {
-                $notif.bottom = bottom;
-                $notif.left = left;
-                bottom += $notif.height + 1;
-            });
-            bottom = 1;
-            SBlessedNotification.displayStacks.br.forEach(($notif) => {
-                $notif.bottom = bottom;
-                $notif.right = right;
-                bottom += $notif.height + 1;
-            });
-        }
-        update() {
+        });
+        this.on('detach', () => {
+            const stack = SBlessedNotification.displayStacks[position];
+            const idx = stack.indexOf(this);
+            if (idx === -1)
+                return;
+            stack.splice(idx, 1);
             SBlessedNotification.update();
-            super.update();
+        });
+        // click
+        if (settings.onClick) {
+            this.on('click', () => {
+                settings.onClick();
+                this.destroy();
+            });
         }
-    },
-    _a.displayStacks = {
-        tl: [],
-        tr: [],
-        bl: [],
-        br: []
-    },
-    _a);
+        // timeout
+        if (settings.timeout !== -1) {
+            setTimeout(() => {
+                this.destroy();
+            }, settings.timeout);
+        }
+    }
+    static update() {
+        let top = 1, left = 2, bottom = 1, right = 2;
+        SBlessedNotification.displayStacks.tl.forEach(($notif) => {
+            $notif.top = top;
+            $notif.left = left;
+            top += $notif.height + 1;
+        });
+        top = 1;
+        SBlessedNotification.displayStacks.tr.forEach(($notif) => {
+            $notif.top = top;
+            $notif.right = right;
+            top += $notif.height + 1;
+        });
+        SBlessedNotification.displayStacks.bl.forEach(($notif) => {
+            $notif.bottom = bottom;
+            $notif.left = left;
+            bottom += $notif.height + 1;
+        });
+        bottom = 1;
+        SBlessedNotification.displayStacks.br.forEach(($notif) => {
+            $notif.bottom = bottom;
+            $notif.right = right;
+            bottom += $notif.height + 1;
+        });
+    }
+    update() {
+        SBlessedNotification.update();
+        super.update();
+    }
+}
+exports.default = SBlessedNotification;
+SBlessedNotification.displayStacks = {
+    tl: [],
+    tr: [],
+    bl: [],
+    br: []
+};

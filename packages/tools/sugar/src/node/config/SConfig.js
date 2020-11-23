@@ -1,11 +1,14 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = require("../object/deepMerge");
-const get_1 = require("../object/get");
-const set_1 = require("../object/set");
-const plainObject_1 = require("../is/plainObject");
-const deepMap_1 = require("../object/deepMap");
-const SConfigAdapter_1 = require("./adapters/SConfigAdapter");
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const get_1 = __importDefault(require("../object/get"));
+const set_1 = __importDefault(require("../object/set"));
+const plainObject_1 = __importDefault(require("../is/plainObject"));
+const deepMap_1 = __importDefault(require("../object/deepMap"));
+const SConfigAdapter_1 = __importDefault(require("./adapters/SConfigAdapter"));
 // TODO: Add a "catch" method that allows to get the saving errors, etc...
 /**
  * @name                                            config

@@ -1,13 +1,13 @@
 "use strict";
-const __SApp = require('./SApp');
-const __SHeader = require('./SHeader');
-const __deepMerge = require('../object/deepMerge');
-const __blessed = require('blessed');
-const __parseHtml = require('./parseHtml');
-const __splitEvery = require('../string/splitEvery');
-const __countLine = require('../string/countLine');
-const __parseSchema = require('../url/parseSchema');
-const __sugarConfig = require('../config/sugar');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SApp_1 = __importDefault(require("./SApp"));
+const SHeader_1 = __importDefault(require("./SHeader"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const blessed_1 = __importDefault(require("blessed"));
+const sugar_1 = __importDefault(require("../config/sugar"));
 /**
  * @name                    SSimpleApp
  * @namespace           sugar.node.terminal
@@ -20,14 +20,14 @@ const __sugarConfig = require('../config/sugar');
  * @param           {Object}          [settings={}]   An object of settings described bellow:
  *
  * @example         js
- * const SSimpleApp = require('@coffeekraken/sugar/node/terminal/SSimpleApp');
+ * import SSimpleApp from '@coffeekraken/sugar/node/terminal/SSimpleApp';
  * const app = new SSimpleApp('My Cool Application', {
  * });
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSimpleApp extends __SApp {
+class SSimpleApp extends SApp_1.default {
     /**
      * @name              constructor
      * @type              Function
@@ -39,7 +39,7 @@ module.exports = class SSimpleApp extends __SApp {
      */
     constructor(name, settings = {}) {
         // extend from blessed.box
-        super(name, __deepMerge({}, settings));
+        super(name, deepMerge_1.default({}, settings));
         this._settings.layout = this._layout.bind(this);
     }
     /**
@@ -53,7 +53,7 @@ module.exports = class SSimpleApp extends __SApp {
      */
     _layout(content) {
         // make a container box
-        const container = __blessed.box({
+        const container = blessed_1.default.box({
             width: '100%',
             height: '100%'
         });
@@ -66,10 +66,10 @@ module.exports = class SSimpleApp extends __SApp {
                 : `<black> ${menuObj.title} </black>`;
         });
         let headerContent = `<black>Coffeekraken Sugar</black>\n` + `{right}${menuString}{/right}`;
-        const header = new __SHeader(headerContent, {
+        const header = new SHeader_1.default(headerContent, {
             blessed: {
                 style: {
-                    bg: __sugarConfig('colors.primary.color')
+                    bg: sugar_1.default('colors.primary.color')
                 }
             }
         });
@@ -80,4 +80,5 @@ module.exports = class SSimpleApp extends __SApp {
         // return the container
         return container;
     }
-};
+}
+exports.default = SSimpleApp;

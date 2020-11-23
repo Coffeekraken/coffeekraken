@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isInteger
  * @namespace           sugar.js.is
@@ -15,9 +17,10 @@
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isInteger(data) {
+function isInteger(data) {
     return (!isNaN(data) &&
         (function (x) {
             return (x | 0) === x;
         })(parseFloat(data)));
 }
+exports.default = isInteger;

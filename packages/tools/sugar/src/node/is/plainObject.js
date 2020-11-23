@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                      plainObject
  * @namespace           sugar.js.is
@@ -9,12 +11,12 @@
  * @return        {Boolean}                                         true if is plain object(s), false if not
  *
  * @example           js
- * const isPlainObject = require('@coffeekraken/sugar/js/is/plainObject');
+ * import isPlainObject from '@coffeekraken/sugar/js/is/plainObject';
  * isPlainObject({ hello: 'world'}); // => true
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function plainObject(object) {
+function plainObject(object) {
     if (!object)
         return false;
     if (typeof object !== 'object')
@@ -29,3 +31,4 @@ export default function plainObject(object) {
         return false;
     return true;
 }
+exports.default = plainObject;

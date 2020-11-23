@@ -1,3 +1,7 @@
 "use strict";
-const __argsToString = require('../argsToString');
-require('../_js/cli/__tests__/argsToString')(__argsToString);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const argsToString_1 = __importDefault(require("../argsToString"));
+require('../_js/cli/__tests__/argsToString')(argsToString_1.default);

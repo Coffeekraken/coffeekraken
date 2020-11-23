@@ -1,9 +1,11 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
-const __blessed = require('blessed');
-const __parseHtml = require('./parseHtml');
-const __splitEvery = require('../string/splitEvery');
-const __countLine = require('../string/countLine');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const blessed_1 = __importDefault(require("blessed"));
+const parseHtml_1 = __importDefault(require("./parseHtml"));
 /**
  * @name                    SHeader
  * @namespace           sugar.node.terminal
@@ -17,13 +19,13 @@ const __countLine = require('../string/countLine');
  * - screen (true) {Boolean}: Specify if you want your header wrapped inside an "blessed"(https://www.npmjs.com/package/blessed) screen object. Useful when you just want to render your header in the terminal. If you have your own screen object
  *
  * @example         js
- * const SHeader = require('@coffeekraken/sugar/node/terminal/SHeader');
+ * import SHeader from '@coffeekraken/sugar/node/terminal/SHeader';
  * const header = new SHeader('Hello world', {});
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SHeader extends __blessed.box {
+class SHeader extends blessed_1.default.box {
     /**
      * @name              constructor
      * @type              Function
@@ -35,7 +37,7 @@ module.exports = class SHeader extends __blessed.box {
      */
     constructor(title, settings = {}) {
         // save the settings
-        const _settings = __deepMerge({
+        const _settings = deepMerge_1.default({
             blessed: {
                 tags: true,
                 padding: {
@@ -75,9 +77,10 @@ module.exports = class SHeader extends __blessed.box {
         // set the size
         this.height = 3;
         // set the header content
-        this.setContent(__parseHtml(title));
+        this.setContent(parseHtml_1.default(title));
         // render the screen
         if (this.screen)
             this.screen.render();
     }
-};
+}
+exports.default = SHeader;

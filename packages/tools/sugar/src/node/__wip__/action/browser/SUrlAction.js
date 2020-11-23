@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const SAction_1 = require("../SAction");
-const browser_1 = require("../../is/browser");
-const toQueryString_1 = require("../../object/toQueryString");
+const SAction_1 = __importDefault(require("../SAction"));
+const browser_1 = __importDefault(require("../../is/browser"));
+const toQueryString_1 = __importDefault(require("../../object/toQueryString"));
 /**
  * @name              SUrlAction
  * @namespace         sugar.js.action.browser
@@ -12,7 +15,8 @@ const toQueryString_1 = require("../../object/toQueryString");
  * with multiple settings like if you want the url to be opened in a popup,
  * after a timeout, etc...
  *
- * @TODO        Better documentation
+ * @todo        Better documentation
+ * @todo        tests
  *
  * @param       {Object}        descriptorObj       The action descriptor object
  * - target (_self) {String}: Specify how you want to go to the url. Can be ```_self```, ```_blank``` or ```_popup```

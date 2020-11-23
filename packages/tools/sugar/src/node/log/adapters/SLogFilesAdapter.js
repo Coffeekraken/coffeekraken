@@ -1,9 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const __deepMerge = require('../../object/deepMerge');
-const __prependFile = require('prepend-file');
-const __makeDir = require('make-dir');
-const __filesPreset = require('../htmlPresets/files');
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const prepend_file_1 = __importDefault(require("prepend-file"));
+const make_dir_1 = __importDefault(require("make-dir"));
+const files_1 = __importDefault(require("../htmlPresets/files"));
 /**
  * @name                    SLogFilesAdapter
  * @namespace           js.log
@@ -12,8 +15,8 @@ const __filesPreset = require('../htmlPresets/files');
  * This class allows you to log your messages, errors, etc... easily and store them in some files where you want on your file system.
  *
  * @example               js
- * conse SLog = require('@coffeekraken/sugar/js/log/SLog');
- * const SLogFilesAdapter = require('@coffeekraken/sugar/node/log/adapters/SLogFilesAdapter');
+ * import SLog from '@coffeekraken/sugar/js/log/SLog';
+ * import SLogFilesAdapter from '@coffeekraken/sugar/node/log/adapters/SLogFilesAdapter';
  * const logger = new SLog({
  *    adapters: [
  *      new SLogFilesAdapter()
@@ -48,7 +51,7 @@ class SLogFilesAdapter {
          */
         this._settings = {};
         // extend settings
-        this._settings = __deepMerge({
+        this._settings = deepMerge_1.default({
             path: process.cwd() + '/.logs'
         }, settings);
     }
@@ -71,10 +74,10 @@ class SLogFilesAdapter {
     async log(message, level) {
         return new Promise((resolve, reject) => {
             // ensure the log directory exist
-            __makeDir.sync(this._settings.path);
+            make_dir_1.default.sync(this._settings.path);
             // prepend the new log
-            const newLog = `# ${new Date().toISOString()}\n# ${__filesPreset(message)}\n\n`;
-            __prependFile.sync(`${this._settings.path}/${level}.log`, newLog);
+            const newLog = `# ${new Date().toISOString()}\n# ${files_1.default(message)}\n\n`;
+            prepend_file_1.default.sync(`${this._settings.path}/${level}.log`, newLog);
             // resolving the file logging
             resolve();
         });

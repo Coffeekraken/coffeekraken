@@ -1,12 +1,16 @@
 "use strict";
-const __blessed = require('blessed');
-const __SBlessedComponent = require('../SBlessedComponent');
-const __deepMerge = require('../../object/deepMerge');
-const __parseHtml = require('../../terminal/parseHtml');
-const __color = require('../../color/color');
-const __escapeStack = require('../../terminal/escapeStack');
-const __activeSpace = require('../../core/activeSpace');
-const __SPromise = require('../../promise/SPromise');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const blessed_1 = __importDefault(require("blessed"));
+const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const parseHtml_1 = __importDefault(require("../../terminal/parseHtml"));
+const color_1 = __importDefault(require("../../color/color"));
+const escapeStack_1 = __importDefault(require("../../terminal/escapeStack"));
+const activeSpace_1 = __importDefault(require("../../core/activeSpace"));
+const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 /**
  * @name                  SBlessedPopup
  * @namespace           sugar.node.blessed.popup
@@ -20,12 +24,12 @@ const __SPromise = require('../../promise/SPromise');
  * - id (popup) {String}: An id to identify the popup. This id will be appended to the "activeSpace" when the popup is opened
  *
  * @example       js
- * const SBlessedPopup = require('@coffeekraken/sugar/node/blessed/popup/SBlessedPopup');
+ * import SBlessedPopup from '@coffeekraken/sugar/node/blessed/popup/SBlessedPopup';
  * const myPopup = new SBlessedPopup();
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedPopup extends __SBlessedComponent {
+class SBlessedPopup extends SBlessedComponent_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -36,7 +40,7 @@ module.exports = class SBlessedPopup extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        super(__deepMerge({
+        super(deepMerge_1.default({
             title: null,
             description: null,
             id: 'SBlessedPopup',
@@ -45,8 +49,8 @@ module.exports = class SBlessedPopup extends __SBlessedComponent {
             top: '50%',
             left: '50%',
             style: {
-                bg: __color('terminal.primary').toString(),
-                fg: __color('terminal.black').toString()
+                bg: color_1.default('terminal.primary').toString(),
+                fg: color_1.default('terminal.black').toString()
             },
             padding: {
                 top: 0,
@@ -67,8 +71,8 @@ module.exports = class SBlessedPopup extends __SBlessedComponent {
             $description: {
                 height: 2,
                 style: {
-                    bg: __color('terminal.black').toString(),
-                    fg: __color('terminal.white').toString()
+                    bg: color_1.default('terminal.black').toString(),
+                    fg: color_1.default('terminal.white').toString()
                 },
                 padding: {
                     top: 1,
@@ -97,17 +101,17 @@ module.exports = class SBlessedPopup extends __SBlessedComponent {
             }
         }, settings));
         if (this._settings.title) {
-            this.$title = __blessed.box({
+            this.$title = blessed_1.default.box({
                 style: this._settings.style,
                 ...this._settings.$title,
-                content: __parseHtml(this._settings.title)
+                content: parseHtml_1.default(this._settings.title)
             });
         }
         if (this._settings.description) {
-            this.$description = __blessed.box({
+            this.$description = blessed_1.default.box({
                 ...this._settings.$description,
                 top: this.$title ? this.$title.height : 0,
-                content: __parseHtml(this._settings.description)
+                content: parseHtml_1.default(this._settings.description)
             });
         }
         if (this.$title)
@@ -119,23 +123,23 @@ module.exports = class SBlessedPopup extends __SBlessedComponent {
             contentTop += this.$title.height;
         if (this.$description)
             contentTop += this.$description.height;
-        this.$content = __blessed.box({
+        this.$content = blessed_1.default.box({
             top: contentTop,
             style: {
                 scrollbar: {
-                    bg: this._settings.style.bg || __color('terminal.primary').toString()
+                    bg: this._settings.style.bg || color_1.default('terminal.primary').toString()
                 }
             },
             ...(this._settings.$content || {})
         });
-        this.promise = new __SPromise({
+        this.promise = new SPromise_1.default({
             id: this._settings.id
         });
         super.append(this.$content);
         this.promise.trigger('open');
-        __activeSpace.append(this._settings.id);
-        const escape = __escapeStack(() => {
-            __activeSpace.previous();
+        activeSpace_1.default.append(this._settings.id);
+        const escape = escapeStack_1.default(() => {
+            activeSpace_1.default.previous();
             escape.cancel();
             this.promise.trigger('close');
             this.detach();
@@ -171,4 +175,5 @@ module.exports = class SBlessedPopup extends __SBlessedComponent {
         this.left = `50%-${Math.round(this.width / 2)}`;
         super.update();
     }
-};
+}
+exports.default = SBlessedPopup;

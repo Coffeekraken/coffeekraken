@@ -1,5 +1,9 @@
 "use strict";
-const __SColor = require('./SColor');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SColor_1 = __importDefault(require("./SColor"));
 /**
  * @name                color
  * @namespace           sugar.node.color
@@ -16,6 +20,8 @@ const __SColor = require('./SColor');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function color(color) {
-    return new __SColor(color);
-};
+function color(color) {
+    return new SColor_1.default(color);
+}
+exports.default = color;
+;

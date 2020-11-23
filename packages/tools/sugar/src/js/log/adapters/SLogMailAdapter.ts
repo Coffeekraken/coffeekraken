@@ -3,15 +3,18 @@ import __isNode from '../../is/node';
 import Email from './vendors/smtp.js';
 import __mailHtmlPreset from '../htmlPresets/mail';
 
-// TODO finish the dev and make tests...
-
 /**
  * @name                    SLogMailAdapter
  * @namespace           sugar.js.log
  * @type                    Class
+ * @wip
  *
  * This class allows you to log your messages, errors, etc... easily through some adapters that cover some targets like "console" of course,
  * "mail", "slack", etc...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example               js
  * import SLog from '@coffeekraken/sugar/js/log/SLog';
@@ -23,6 +26,7 @@ import __mailHtmlPreset from '../htmlPresets/mail';
  * });
  * logger.log('Something cool happend...');
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SLogMailAdapter {
@@ -92,7 +96,7 @@ export default class SLogMailAdapter {
         imageData = canvas.toDataURL('image/jpeg');
       }
 
-      let list = [];
+      const list = [];
       Object.keys(this._settings.metas).forEach((metaName) => {
         list.push(
           `<li><strong>${metaName}</strong>: ${this._settings.metas[metaName]}</li>`
@@ -111,8 +115,8 @@ export default class SLogMailAdapter {
       );
       const subject = this._settings.subject.replace('[level]', level);
 
-      let keys = Object.keys(this._settings);
-      let newobj = {};
+      const keys = Object.keys(this._settings);
+      const newobj = {};
       keys.forEach((key) => {
         if (
           ['host', 'username', 'password', 'to', 'from', 'securetoken'].indexOf(

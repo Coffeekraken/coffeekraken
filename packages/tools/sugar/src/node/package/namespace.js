@@ -1,8 +1,12 @@
 "use strict";
-const __json = require('./json');
-const __deepMerge = require('../object/deepMerge');
-const __getFilename = require('../fs/filename');
-const __sugarConfig = require('../config/sugar');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const json_1 = __importDefault(require("./json"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const filename_1 = __importDefault(require("../fs/filename"));
+const sugar_1 = __importDefault(require("../config/sugar"));
 /**
  * @name          namespace
  * @namespace     sugar.node.package
@@ -16,16 +20,16 @@ const __sugarConfig = require('../config/sugar');
  * @return      {String}                    The generated namespace
  *
  * @example     js
- * const namespace = require('@coffeekraken/sugar/node/package/namespace');
+ * import namespace from '@coffeekraken/sugar/node/package/namespace';
  * namespace('something.cool'); => // coffeekraken.sugar.something.cool
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = function namespace(path, settings = {}) {
-    settings = __deepMerge(__sugarConfig('core.namespace') || {}, settings);
+function namespace(path, settings = {}) {
+    settings = deepMerge_1.default(sugar_1.default('core.namespace') || {}, settings);
     // get the package json content
-    const json = __json(settings.context || process.cwd());
+    const json = json_1.default(settings.context || process.cwd());
     let packageName = '', packageVersion = '';
     if (json && json.name)
         packageName = json.name.replace('@', '').split('/').join('.').trim();
@@ -33,7 +37,7 @@ module.exports = function namespace(path, settings = {}) {
         packageVersion = json.version.split('.').join('-');
     // sanitize the passed path
     let sanitizedPath = path;
-    const filename = __getFilename(path);
+    const filename = filename_1.default(path);
     if (filename && sanitizedPath.split('/').length > 1) {
         sanitizedPath = sanitizedPath
             .replace('/' + filename, '')
@@ -51,4 +55,5 @@ module.exports = function namespace(path, settings = {}) {
         .split('..')
         .join('.');
     return resultNamespace;
-};
+}
+exports.default = namespace;

@@ -1,5 +1,9 @@
 "use strict";
-const __fs = require('fs-extra');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_extra_1 = __importDefault(require("fs-extra"));
 // TODO tests
 /**
  * @name        removeSync
@@ -11,7 +15,7 @@ const __fs = require('fs-extra');
  * @param       {String}              path           The file/directory path to delete
  *
  * @example       js
- * const removeSync = require('@coffeekraken/node/fs/removeSync');
+ * import removeSync from '@coffeekraken/node/fs/removeSync';
  * try {
  *    removeSync('my/cool/file.json');
  * } catch(e) {}
@@ -19,6 +23,7 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function removeSync(path) {
-    return __fs.removeSync(path);
-};
+function removeSync(path) {
+    return fs_extra_1.default.removeSync(path);
+}
+exports.default = removeSync;

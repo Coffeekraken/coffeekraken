@@ -7,11 +7,16 @@ import __SPromise from '../promise/SPromise';
  * @name        backgroundImageLoaded
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Detect when a background image has been loaded on an HTMLElement
  *
  * @param    {HTMLElement}    $elm    The HTMLElement on which to detect the background image load
  * @return    {SPromise}    A promise that will be resolved when the background image has been loaded
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example    js
  * import backgroundImageLoaded from '@coffeekraken/sugar/js/dom/backgroundImageLoaded'
@@ -19,6 +24,7 @@ import __SPromise from '../promise/SPromise';
  *   // do something when loaded
  * })
  *
+ * @since     1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function backgroundImageLoaded($elm) {

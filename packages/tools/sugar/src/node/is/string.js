@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isString
  * @namespace           sugar.js.is
@@ -16,6 +18,7 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isString(value) {
+function isString(value) {
     return typeof value === 'string' || value instanceof String;
 }
+exports.default = isString;

@@ -2,12 +2,17 @@
  * @name                                sort
  * @namespace           sugar.js.object
  * @type                                Function
+ * @stable
  *
  * Sort an object properties the same way as the Array.sort do it
  *
  * @param                 {Object}                  object                The object to sort
  * @param                 {Function}                sort                  The sort function to use
  * @return                {Object}                                        The sorted object
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example               js
  * import sortObject from '@coffeekraken/sugar/js/object/sort';
@@ -24,6 +29,7 @@
  * //   coco: { weight: 10 }
  * // }
  *
+ * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function sort(object, sort) {

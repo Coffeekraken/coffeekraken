@@ -6,10 +6,15 @@ import __SCache from '../cache/SCache';
 import __isNode from '../is/node';
 import __promisedHandlebars from 'promised-handlebars';
 
+import __packageRoot from '../../node/path/packageRoot';
+import __packageJson from '../../node/package/json';
+import __fs from 'fs';
+
 /**
  * @name            SDocblockOutput
  * @namespace       sugar.js.docblock
  * @type            Class
+ * @wip
  *
  * This class represent an SDocblock output like "markdown", "html", etc...
  *
@@ -17,6 +22,8 @@ import __promisedHandlebars from 'promised-handlebars';
  * @param       {Object}            [settings={}]           Some settings to configure your output class:
  * - ...
  *
+ * @todo        interface
+ * @todo        doc
  * @todo      Javascript support
  *
  * @example         js
@@ -145,7 +152,7 @@ export default class SDocblockOutput {
   async renderBlock(blockObj, settings = {}) {
     if (blockObj.toObject && typeof blockObj.toObject === 'function')
       blockObj = blockObj.toObject();
-    let type =
+    const type =
       typeof blockObj.type === 'string'
         ? blockObj.type.toLowerCase()
         : 'default';
@@ -227,14 +234,11 @@ export default class SDocblockOutput {
    * @since       2.0.0
    * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
    */
-  getTemplateObj(template) {
+  async getTemplateObj(template) {
     let templateObj = {};
     if (__isNode()) {
-      const __packageRoot = require('../../node/path/packageRoot');
-      const __packageJson = require('../../node/package/json');
-      const __fs = require('fs');
       const json = __packageJson();
-      let stats, templatePath;
+      let templatePath;
       if (__fs.existsSync(template)) {
         templatePath = template;
       } else if (
@@ -246,10 +250,10 @@ export default class SDocblockOutput {
           `Sorry but the passed template url "<yellow>${template}</yellow>" does not exists...`
         );
       }
-      stats = __fs.statSync(templatePath);
+      const stats = __fs.statSync(templatePath);
       delete require.cache[require.resolve(templatePath)];
 
-      const content = require(templatePath);
+      const content = await import(templatePath);
       templateObj = {
         path: templatePath,
         content: content,
@@ -287,7 +291,7 @@ export default class SDocblockOutput {
         // get the first block
         const firstBlock = blocksArray[0];
         // get the template to render
-        let type =
+        const type =
           typeof firstBlock.type === 'string'
             ? firstBlock.type.toLowerCase()
             : 'default';
@@ -298,9 +302,12 @@ export default class SDocblockOutput {
 
         // render the template
         let compiledTemplateFn;
-        compiledTemplateFn = this._handlebars.compile(templateObj.content, {
-          noEscape: true
-        });
+        const compiledTemplateFn = this._handlebars.compile(
+          templateObj.content,
+          {
+            noEscape: true
+          }
+        );
         const renderedTemplate = await compiledTemplateFn();
         // resolve the rendering process with the rendered stack
         resolve(renderedTemplate);
@@ -310,4 +317,4 @@ export default class SDocblockOutput {
       }
     );
   }
-};
+}

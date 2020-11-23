@@ -1,18 +1,21 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const clone_1 = require("../object/clone");
-const parseHtml_1 = require("../console/parseHtml");
-const SError_1 = require("../error/SError");
-const class_1 = require("../is/class");
-const deepMerge_1 = require("../object/deepMerge");
-const SPromise_1 = require("../promise/SPromise");
-const toString_1 = require("../string/toString");
-const trimLines_1 = require("../string/trimLines");
-const convert_1 = require("../time/convert");
-const wait_1 = require("../time/wait");
-const SActionsStreamAction_1 = require("./SActionsStreamAction");
-const SCache_1 = require("../cache/SCache");
-const sha256_1 = require("../crypt/sha256");
+const clone_1 = __importDefault(require("../object/clone"));
+const parseHtml_1 = __importDefault(require("../console/parseHtml"));
+const SError_1 = __importDefault(require("../error/SError"));
+const class_1 = __importDefault(require("../is/class"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const toString_1 = __importDefault(require("../string/toString"));
+const trimLines_1 = __importDefault(require("../string/trimLines"));
+const convert_1 = __importDefault(require("../time/convert"));
+const wait_1 = __importDefault(require("../time/wait"));
+const SActionsStreamAction_1 = __importDefault(require("./SActionsStreamAction"));
+const SCache_1 = __importDefault(require("../cache/SCache"));
+const sha256_1 = __importDefault(require("../crypt/sha256"));
 /**
  * @name          SActionStream
  * @namespace           sugar.js.stream

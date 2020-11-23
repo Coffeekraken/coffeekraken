@@ -416,7 +416,7 @@ export default class SInterface {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static _outputHeaderString(settings = {}) {
-    let array = [];
+    const array = [];
     if (settings.title) {
       array.push(`<red><underline>${settings.title}</underline></red>`);
       array.push(' ');

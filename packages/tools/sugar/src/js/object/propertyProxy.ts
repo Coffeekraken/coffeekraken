@@ -3,6 +3,7 @@ import _get from 'lodash/get';
  * @name        propertyProxy
  * @namespace           sugar.js.object
  * @type      Function
+ * @beta
  *
  * Create a proxy for and object property.
  * This gives you the possibility to process the data of the property
@@ -12,6 +13,10 @@ import _get from 'lodash/get';
  * @param 		{String} 		property 		The property name that will be proxied
  * @param 		{Object} 		descriptor 		A descriptor object that contains at least a get or a set method, or both
  * @param 		{Boolean} 		[applySetterAtStart=false] 	If need to apply the descriptor setter directly on the current value or not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * import propertyProxy from '@coffeekraken/sugar/js/object/propertyProxy';
@@ -31,6 +36,7 @@ import _get from 'lodash/get';
  * myObject.title = 'Universe';
  * console.log(myObject.title) => 'Hello Youhou Universe';
  *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function propertyProxy(
@@ -48,7 +54,7 @@ export default function propertyProxy(
 
   // store the current value
   let val = _get(obj, property);
-  let currentDescriptor = Object.getOwnPropertyDescriptor(
+  const currentDescriptor = Object.getOwnPropertyDescriptor(
     obj.prototype || obj,
     property
   );
@@ -61,7 +67,7 @@ export default function propertyProxy(
 
     // descriptor
     if (currentDescriptor && currentDescriptor.set) {
-      let ret = currentDescriptor.set(value);
+      const ret = currentDescriptor.set(value);
       if (ret) {
         val = ret;
       } else {
@@ -76,7 +82,7 @@ export default function propertyProxy(
   if (applySetterAtStart) _set(val);
 
   // make sure we have the good descriptor
-  let d = Object.getOwnPropertyDescriptor(obj, property);
+  const d = Object.getOwnPropertyDescriptor(obj, property);
   Object.defineProperty(obj, property, {
     get: () => {
       let _val = val;

@@ -1,7 +1,7 @@
 import _map from 'lodash/map';
 
 function _decodeHtml(html) {
-  var txt = document.createElement('textarea');
+  const txt = document.createElement('textarea');
   txt.innerHTML = html;
   return txt.value;
 }
@@ -10,6 +10,7 @@ function _decodeHtml(html) {
  * @name      splitLetters
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Split each letters inside an HTMLElement by scoping them inside multiple tags.
  * Here's an result sample for : Hello World
@@ -58,11 +59,16 @@ function _decodeHtml(html) {
  * @param 	{String} 			[tagClass="s-split-letters"] 		The class to apply on the tags
  * @return 	{HTMLElement} 						The HTMLElement processed
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example 	js
  * import __splitLetters from '@coffeekraken/sugar/js/dom/splitLetters'
  * const myCoolElement = document.querySelector('.my-cool-element');
  * __splitLetters(myCoolElement);
  *
+ * @since       1.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function splitLetters(

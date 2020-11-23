@@ -25,10 +25,10 @@ export default function rgba2hsv(r, g, b, a = 1) {
     r = r.r;
   }
 
-  let min = Math.min(r, g, b),
+  const min = Math.min(r, g, b),
     max = Math.max(r, g, b),
-    delta = max - min,
-    h,
+    delta = max - min;
+  let h,
     s,
     v = max;
 

@@ -1,26 +1,27 @@
 "use strict";
-import __fs from 'fs';
-import __find from 'find-in-files';
-import __path from 'path';
-import __writeFileSync from '../../node/fs/writeFileSync';
-import __set from '../../node/object/set';
-import __appRoot from 'app-root-path';
-import __parseArgs from '../../node/cli/parseArgs';
-import __parse from '../../node/docblock/parse';
-import __includes from '../../node/string/includes';
-
-export default async (stringArgs = '') => {
-    const args = __parseArgs(stringArgs, {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const find_in_files_1 = __importDefault(require("find-in-files"));
+const path_1 = __importDefault(require("path"));
+const writeFileSync_1 = __importDefault(require("../../node/fs/writeFileSync"));
+const app_root_path_1 = __importDefault(require("app-root-path"));
+const parseArgs_1 = __importDefault(require("../../node/cli/parseArgs"));
+const parse_1 = __importDefault(require("../../node/docblock/parse"));
+const includes_1 = __importDefault(require("../../node/string/includes"));
+exports.default = async (stringArgs = '') => {
+    const args = parseArgs_1.default(stringArgs, {
         definitionObj: {
             source: {
                 type: 'String',
                 alias: 's',
-                default: `${__appRoot.path}/src/node`
+                default: `${app_root_path_1.default.path}/src/node`
             },
             destination: {
                 type: 'String',
                 alias: 'd',
-                default: `${__appRoot.path}/node.js`
+                default: `${app_root_path_1.default.path}/node.js`
             },
             ignore: {
                 type: 'String',
@@ -38,14 +39,14 @@ const api = {};
     ];
     const stackFn = {};
     const stack = {};
-    const files = await __find.find('@namespace', args.source, '.js$');
+    const files = await find_in_files_1.default.find('@namespace', args.source, '.js$');
     for (let i = 0; i < Object.keys(files).length; i++) {
         const filepath = Object.keys(files)[i];
-        if (__includes(filepath, args.ignore))
+        if (includes_1.default(filepath, args.ignore))
             continue;
         // let fileContent = __fs.readFileSync(filepath).toString();
         // parse the file docblocks
-        const docObj = __parse(filepath, {
+        const docObj = parse_1.default(filepath, {
             preprocessor: (blockString) => {
                 blockString = blockString.replace('sugar.js', 'sugar.node');
                 blockString = blockString.replace('Sugar.js', 'Sugar.node');
@@ -53,7 +54,7 @@ const api = {};
                 return blockString;
             }
         })[0];
-        const relativeFilePath = __path.relative(args.destination.split('/').slice(0, -1).join('/'), docObj._.filepath);
+        const relativeFilePath = path_1.default.relative(args.destination.split('/').slice(0, -1).join('/'), docObj._.filepath);
         // check the type of the parsed file
         switch (docObj.type.toLowerCase()) {
             case 'function':
@@ -81,5 +82,5 @@ Object.defineProperty(api.${docObj.namespace.split('.').slice(1).join('.')}, '${
     }
     // export the API
     itemsArray.push(`module.exports = api;`);
-    __writeFileSync(args.destination, itemsArray.join('\n'));
+    writeFileSync_1.default(args.destination, itemsArray.join('\n'));
 };

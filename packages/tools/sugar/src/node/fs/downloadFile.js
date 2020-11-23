@@ -1,7 +1,11 @@
 "use strict";
-const __downloadsFolder = require('downloads-folder');
-const __path = require('path');
-const __download = require('download-file');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const downloads_folder_1 = __importDefault(require("downloads-folder"));
+const path_1 = __importDefault(require("path"));
+const download_file_1 = __importDefault(require("download-file"));
 // TODO tests
 /**
  * @name              downloadFile
@@ -16,18 +20,18 @@ const __download = require('download-file');
  * @return            {Promise}                                 A promise that will be resolved with the final absolute file path, or rejected with the error passed
  *
  * @example       js
- * const downloadFile = require('@coffeekraken/node/fs/downloadFile');
+ * import downloadFile from '@coffeekraken/node/fs/downloadFile';
  * downloadFile('https://myCoolFileUrl.ch/coco.json').then((dest) => {
  *    console.log('file downloeaded and saved here', dest);
  * }).catch(err) => {});
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function (downloadUrl, destinationPath = __downloadsFolder(), callback = null) {
+function default_1(downloadUrl, destinationPath = downloads_folder_1.default(), callback = null) {
     return new Promise((resolve, reject) => {
         let fileStreamDest;
-        let parsedDestinationPath = __path.parse(destinationPath);
-        let parsedDownloadUrl = __path.parse(downloadUrl);
+        let parsedDestinationPath = path_1.default.parse(destinationPath);
+        let parsedDownloadUrl = path_1.default.parse(downloadUrl);
         if (parsedDestinationPath.ext) {
             fileStreamDest = destination;
         }
@@ -38,9 +42,9 @@ module.exports = function (downloadUrl, destinationPath = __downloadsFolder(), c
             fileStreamDest = `${destinationPath}/${parsedDownloadUrl.base}`;
         }
         // download the file
-        __download(downloadUrl, {
-            directory: __path.parse(fileStreamDest).dir,
-            filename: __path.parse(fileStreamDest).base
+        download_file_1.default(downloadUrl, {
+            directory: path_1.default.parse(fileStreamDest).dir,
+            filename: path_1.default.parse(fileStreamDest).base
         }, function (err) {
             if (err) {
                 reject(err);
@@ -53,4 +57,5 @@ module.exports = function (downloadUrl, destinationPath = __downloadsFolder(), c
                 return callback(fileStreamDest);
         });
     });
-};
+}
+exports.default = default_1;

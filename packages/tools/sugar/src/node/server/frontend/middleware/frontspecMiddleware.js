@@ -1,9 +1,13 @@
 "use strict";
-const __packageRoot = require('../../../path/packageRoot');
-const __fs = require('fs');
-const __sugarConfig = require('../../../config/sugar');
-const __deepMerge = require('../../../object/deepMerge');
-const __deepMap = require('../../../object/deepMap');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const packageRoot_1 = __importDefault(require("../../../path/packageRoot"));
+const fs_1 = __importDefault(require("fs"));
+const sugar_1 = __importDefault(require("../../../config/sugar"));
+const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
+const deepMap_1 = __importDefault(require("../../../object/deepMap"));
 /**
  * @name            frontspecMiddleware
  * @namespace       sugar.node.server.frontend.middleware
@@ -17,8 +21,8 @@ const __deepMap = require('../../../object/deepMap');
  * @param           {Function}          next            The next function to call when the middleware has finished his job
  *
  * @example         js
- * const express = require('express');
- * const frontspecMiddleware = require('@coffeekraken/sugar/server/frontend/middleware/frontspecMiddleware');
+ * import express from 'express';
+ * import frontspecMiddleware from '@coffeekraken/sugar/server/frontend/middleware/frontspecMiddleware';
  * const server = express();
  * server.use(frontspecMiddleware);
  * server.listen(3000);
@@ -26,20 +30,20 @@ const __deepMap = require('../../../object/deepMap');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function frontspecMiddleware(settings = {}) {
+function frontspecMiddleware(settings = {}) {
     return function (req, res, next) {
-        const defaultFrontSpec = __sugarConfig('frontspec') || {};
-        const frontspecPath = `${__packageRoot()}/frontspec.json`;
+        const defaultFrontSpec = sugar_1.default('frontspec') || {};
+        const frontspecPath = `${packageRoot_1.default()}/frontspec.json`;
         let frontspec = defaultFrontSpec;
-        if (__fs.existsSync(frontspecPath)) {
+        if (fs_1.default.existsSync(frontspecPath)) {
             const frontspecFile = require(frontspecPath);
-            frontspec = __deepMerge(frontspec, frontspecFile);
+            frontspec = deepMerge_1.default(frontspec, frontspecFile);
         }
-        frontspec = __deepMap(frontspec, (value, prop, fullPath) => {
+        frontspec = deepMap_1.default(frontspec, (value, prop, fullPath) => {
             if (typeof value === 'string') {
                 return value
-                    .replace(`${__packageRoot()}/`, '')
-                    .replace(__packageRoot(), '');
+                    .replace(`${packageRoot_1.default()}/`, '')
+                    .replace(packageRoot_1.default(), '');
             }
             return value;
         });
@@ -49,4 +53,5 @@ module.exports = function frontspecMiddleware(settings = {}) {
         };
         next();
     };
-};
+}
+exports.default = frontspecMiddleware;

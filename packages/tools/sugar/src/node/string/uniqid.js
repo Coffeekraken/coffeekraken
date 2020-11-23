@@ -1,4 +1,9 @@
-import __uniqid from 'uniqid';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const uniqid_1 = __importDefault(require("uniqid"));
 /**
  * @name          uniqid
  * @namespace           sugar.js.string
@@ -15,6 +20,7 @@ import __uniqid from 'uniqid';
  * @see       https://www.npmjs.com/package/uniqid
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function uniqid() {
-    return __uniqid();
+function uniqid() {
+    return uniqid_1.default();
 }
+exports.default = uniqid;

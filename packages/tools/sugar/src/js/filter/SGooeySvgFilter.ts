@@ -1,12 +1,11 @@
 import SSvgFilter from './SSvgFilter';
 
-// TODO tests
-
 /**
  * @name 		        SGooeySvgFilter
  * @namespace           sugar.js.filter
  * @type           Class
  * @extends       SSvgFilter
+ * @stable
  *
  * This class represent a gooey SVG filter that can be applied on any HTMLElement.
  * Here's the values that you can control on it:
@@ -15,10 +14,15 @@ import SSvgFilter from './SSvgFilter';
  * - shrink: The amount of shrink you want
  * - amout: The overall amount of effect you want
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example 		js
  * const filter = new SGooeySvgFilter();
  * filter.applyTo(myCoolHTMLElement);
  *
+ * @since         1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SGooeySvgFilter extends SSvgFilter {

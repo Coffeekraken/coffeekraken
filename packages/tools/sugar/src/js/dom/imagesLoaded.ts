@@ -5,6 +5,7 @@ import __SPromise from '../promise/SPromise';
  * @name      imagesLoaded
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Detect when some images are loaded. This function take advantage of the SPromise class
  * and trigger an event called "img.loaded" that will be triggered on each loaded images and another called "loaded" once all the images are loaded.
@@ -12,6 +13,10 @@ import __SPromise from '../promise/SPromise';
  *
  * @param    {Array<HTMLImageElement>}    $imgs    An array (or nodeList) of HTMLImageElement to detect the load
  * @return    {Promise}    A promise resolved when all images are loaded properly
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example    js
  * import imagesLoaded from '@coffeekraken/sugar/js/dom/imagesLoaded'
@@ -23,6 +28,7 @@ import __SPromise from '../promise/SPromise';
  *   // do something here
  * })
  *
+ * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function imagesLoaded($imgs) {

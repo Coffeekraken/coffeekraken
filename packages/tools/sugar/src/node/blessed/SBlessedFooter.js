@@ -1,11 +1,15 @@
 "use strict";
-const __blessed = require('blessed');
-const __SBlessedComponent = require('./SBlessedComponent');
-const __deepMerge = require('../object/deepMerge');
-const __parseHtml = require('../terminal/parseHtml');
-const __color = require('../color/color');
-const __ora = require('ora');
-const __countLine = require('../string/countLine');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const blessed_1 = __importDefault(require("blessed"));
+const SBlessedComponent_1 = __importDefault(require("./SBlessedComponent"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const parseHtml_1 = __importDefault(require("../terminal/parseHtml"));
+const color_1 = __importDefault(require("../color/color"));
+const ora_1 = __importDefault(require("ora"));
+const countLine_1 = __importDefault(require("../string/countLine"));
 /**
  * @name                  SBlessedFooter
  * @namespace           sugar.node.blessed
@@ -16,12 +20,12 @@ const __countLine = require('../string/countLine');
  * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
  *
  * @example       js
- * const SBlessedFooter = require('@coffeekraken/sugar/node/blessed/SBlessedFooter');
+ * import SBlessedFooter from '@coffeekraken/sugar/node/blessed/SBlessedFooter';
  * new SBlessedFooter({});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedFooter extends __SBlessedComponent {
+class SBlessedFooter extends SBlessedComponent_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -32,7 +36,7 @@ module.exports = class SBlessedFooter extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        super(__deepMerge({
+        super(deepMerge_1.default({
             authors: [],
             website: null,
             width: '100%',
@@ -42,8 +46,8 @@ module.exports = class SBlessedFooter extends __SBlessedComponent {
                 left: 0
             },
             style: {
-                bg: __color('terminal.primary').toString(),
-                fg: __color('terminal.black').toString()
+                bg: color_1.default('terminal.primary').toString(),
+                fg: color_1.default('terminal.black').toString()
             },
             padding: {
                 top: 0,
@@ -57,8 +61,8 @@ module.exports = class SBlessedFooter extends __SBlessedComponent {
             this._settings.authors.forEach((auth) => {
                 authArray.push(auth.name);
             });
-            let content = __parseHtml(` Made by <bold>${authArray.join(', ')}</bold>`);
-            this._authorsBox = __blessed.box({
+            let content = parseHtml_1.default(` Made by <bold>${authArray.join(', ')}</bold>`);
+            this._authorsBox = blessed_1.default.box({
                 top: 0,
                 right: 0,
                 height: 1,
@@ -76,18 +80,18 @@ module.exports = class SBlessedFooter extends __SBlessedComponent {
             this._authorsBox.setContent(content);
             this.append(this._authorsBox);
         }
-        this._copyrightBox = __blessed.text({
+        this._copyrightBox = blessed_1.default.text({
             left: 0,
             style: {
                 bg: this._settings.style.bg,
                 fg: this._settings.style.fg
             },
-            content: __parseHtml(`MIT ©${new Date().getFullYear()} Coffeekraken`)
+            content: parseHtml_1.default(`MIT ©${new Date().getFullYear()} Coffeekraken`)
         });
         this.append(this._copyrightBox);
-        this._commandsStatusBox = __blessed.text({
+        this._commandsStatusBox = blessed_1.default.text({
             position: {
-                right: __countLine(this._authorsBox.getContent())
+                right: countLine_1.default(this._authorsBox.getContent())
             },
             style: {
                 bg: this._settings.style.bg,
@@ -115,28 +119,28 @@ module.exports = class SBlessedFooter extends __SBlessedComponent {
         for (let key in this._settings.commands) {
             const commandInstance = this._settings.commands[key];
             if (!commandInstance._footerSpinner) {
-                commandInstance._footerSpinner = __ora(commandInstance.name);
+                commandInstance._footerSpinner = ora_1.default(commandInstance.name);
             }
             if (commandInstance.state === 'running') {
                 commandInstance._footerSpinner.color = 'black';
-                commandsStatusTextArray.push(`{${__color('terminal.cyan').toString()}-bg} ${commandInstance._footerSpinner.frame()} (${commandInstance.key}) {/${__color('terminal.cyan').toString()}-bg}`);
+                commandsStatusTextArray.push(`{${color_1.default('terminal.cyan').toString()}-bg} ${commandInstance._footerSpinner.frame()} (${commandInstance.key}) {/${color_1.default('terminal.cyan').toString()}-bg}`);
             }
             else if (commandInstance.isWatching()) {
                 commandInstance._footerSpinner.color = 'black';
-                commandsStatusTextArray.push(`{${__color('terminal.primary').toString()}-bg} ${commandInstance._footerSpinner.frame()} (${commandInstance.key}) {/${__color('terminal.primary').toString()}-bg}`);
+                commandsStatusTextArray.push(`{${color_1.default('terminal.primary').toString()}-bg} ${commandInstance._footerSpinner.frame()} (${commandInstance.key}) {/${color_1.default('terminal.primary').toString()}-bg}`);
             }
             else if (commandInstance.state === 'success') {
                 commandInstance._footerSpinner.color = 'black';
-                commandsStatusTextArray.push(`{${__color('terminal.green').toString()}-bg} ${commandInstance._footerSpinner.frame()} (${commandInstance.key}) {/${__color('terminal.green').toString()}-bg}`);
+                commandsStatusTextArray.push(`{${color_1.default('terminal.green').toString()}-bg} ${commandInstance._footerSpinner.frame()} (${commandInstance.key}) {/${color_1.default('terminal.green').toString()}-bg}`);
             }
             else if (commandInstance.state === 'error') {
                 commandInstance._footerSpinner.color = 'black';
-                commandsStatusTextArray.push(`{${__color('terminal.red').toString()}-bg} ${commandInstance._footerSpinner.frame()} (${commandInstance.key}) {/${__color('terminal.red').toString()}-bg}`);
+                commandsStatusTextArray.push(`{${color_1.default('terminal.red').toString()}-bg} ${commandInstance._footerSpinner.frame()} (${commandInstance.key}) {/${color_1.default('terminal.red').toString()}-bg}`);
             }
         }
-        this._commandsStatusBox.width = __countLine(__blessed.stripTags(commandsStatusTextArray.join('')));
+        this._commandsStatusBox.width = countLine_1.default(blessed_1.default.stripTags(commandsStatusTextArray.join('')));
         this._commandsStatusBox.right =
-            __countLine(this._authorsBox.getContent()) + 1;
+            countLine_1.default(this._authorsBox.getContent()) + 1;
         this._commandsStatusBox.setContent(commandsStatusTextArray.join(''));
     }
     /**
@@ -150,11 +154,12 @@ module.exports = class SBlessedFooter extends __SBlessedComponent {
      */
     update() {
         if (this._authorsBox) {
-            this._authorsBox.width = __countLine(this._authorsBox.content) + 1;
+            this._authorsBox.width = countLine_1.default(this._authorsBox.content) + 1;
         }
         this.position.height = 1;
         // update status bar
         // this._updateStatusBar();
         super.update();
     }
-};
+}
+exports.default = SBlessedFooter;

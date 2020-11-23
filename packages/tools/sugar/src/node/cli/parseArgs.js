@@ -1,9 +1,14 @@
-import __deepMerge from '../object/deepMerge';
-import __parse from '../string/parse';
-import __completeArgsObject from './completeArgsObject';
-import __unquote from '../string/unquote';
-import __parseTypeDefinitionString from '../validation/utils/parseTypeDefinitionString';
-import __ofType from '../is/ofType';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const parse_1 = __importDefault(require("../string/parse"));
+const completeArgsObject_1 = __importDefault(require("./completeArgsObject"));
+const unquote_1 = __importDefault(require("../string/unquote"));
+const parseTypeDefinitionString_1 = __importDefault(require("../validation/utils/parseTypeDefinitionString"));
+const ofType_1 = __importDefault(require("../is/ofType"));
 /**
  * @name                        parseArgs
  * @namespace           sugar.js.cli
@@ -46,8 +51,8 @@ import __ofType from '../is/ofType';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function parseArgsString(string, settings = {}) {
-    settings = __deepMerge({
+function parseArgsString(string, settings = {}) {
+    settings = deepMerge_1.default({
         definitionObj: null,
         defaultObj: {}
     }, settings);
@@ -56,7 +61,7 @@ export default function parseArgsString(string, settings = {}) {
     // process the passed string
     let stringArray = string.match(/(?:[^\s"]+|"[^"]*")+/gm) || [];
     stringArray = stringArray.map((item) => {
-        return __unquote(item);
+        return unquote_1.default(item);
     });
     if (!definitionObj) {
         const argsObj = {};
@@ -72,9 +77,9 @@ export default function parseArgsString(string, settings = {}) {
                 currentArgName = part.replace(/^[-]{1,2}/, '');
             }
             else {
-                currentValue = __parse(part);
+                currentValue = parse_1.default(part);
                 if (currentArgName !== undefined) {
-                    argsObj[currentArgName] = __parse(currentValue);
+                    argsObj[currentArgName] = parse_1.default(currentValue);
                     currentValue = undefined;
                     currentArgName = undefined;
                 }
@@ -104,7 +109,7 @@ export default function parseArgsString(string, settings = {}) {
                     .join('\n')}`);
             }
             currentArgDefinition = definitionObj[realArgName];
-            currentArgType = __parseTypeDefinitionString(currentArgDefinition.type);
+            currentArgType = parseTypeDefinitionString_1.default(currentArgDefinition.type);
             argsObj[realArgName] = true;
             return false;
         }
@@ -112,8 +117,8 @@ export default function parseArgsString(string, settings = {}) {
         if (!lastArgObjKey) {
             for (const key in definitionObj) {
                 const obj = definitionObj[key];
-                const value = __parse(part);
-                if (__ofType(value, obj.type)) {
+                const value = parse_1.default(part);
+                if (ofType_1.default(value, obj.type)) {
                     if (obj.validator && !obj.validator(value)) {
                         continue;
                     }
@@ -123,14 +128,14 @@ export default function parseArgsString(string, settings = {}) {
             }
         }
         else if (lastArgObjKey) {
-            const value = __parse(part);
+            const value = parse_1.default(part);
             if (currentArgType[0].type.toLowerCase() === 'array') {
                 if (Array.isArray(value))
                     argsObj[lastArgObjKey] = value;
                 else if (!Array.isArray(argsObj[lastArgObjKey]))
                     argsObj[lastArgObjKey] = [];
                 if (currentArgType[0].of) {
-                    if (__ofType(value, currentArgType[0].of)) {
+                    if (ofType_1.default(value, currentArgType[0].of)) {
                         if (currentArgDefinition.validator &&
                             !currentArgDefinition.validator(value)) {
                             return true;
@@ -163,8 +168,9 @@ export default function parseArgsString(string, settings = {}) {
             finalObj[key] = argsObj[key];
         }
     }
-    return __completeArgsObject(finalObj, settings);
+    return completeArgsObject_1.default(finalObj, settings);
 }
+exports.default = parseArgsString;
 function getArgNameByAlias(alias, definitionObj) {
     const argNames = Object.keys(definitionObj);
     for (let i = 0; i < argNames.length; i++) {

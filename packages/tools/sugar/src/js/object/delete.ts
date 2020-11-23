@@ -4,11 +4,16 @@ import __set from './set';
  * @name                      delete
  * @namespace           sugar.js.object
  * @type                      Function
+ * @stable
  *
  * Delete an object property using a dotPath like "something.else"
  *
  * @param         {Object}          object            The object on which you want to delete the property
  * @param         {String}          dotPath           The dotpath to the property you want to delete
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import delete from '@coffeekraken/sugar/js/object/delete';
@@ -18,6 +23,7 @@ import __set from './set';
  * };
  * delete(myObject, 'plop');
  *
+ * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function del(object, dotPath) {
@@ -26,10 +32,10 @@ export default function del(object, dotPath) {
   if (!dotPath || dotPath === '' || dotPath === '.') return object;
   dotPath = dotPath.replace(/\[(\w+)\]/g, '.$1');
   dotPath = dotPath.replace(/^\./, '');
-  var a = dotPath.split('.');
-  var o = object;
+  const a = dotPath.split('.');
+  let o = object;
   while (a.length) {
-    var n = a.shift();
+    const n = a.shift();
     if (a.length < 1) {
       if (Array.isArray(o)) {
         const valueToDelete = o[n];

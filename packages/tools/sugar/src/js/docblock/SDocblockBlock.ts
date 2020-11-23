@@ -11,6 +11,9 @@ import __exampleTag from './tags/example';
 import __paramTag from './tags/param';
 import __snippetTag from './tags/snippet';
 
+import __fs from 'fs';
+import __path from 'path';
+
 import __SDocblock from './SDocblock';
 
 /**
@@ -323,9 +326,6 @@ export default class SDocblockBlock {
     });
 
     if (docblockObj['src'] && __isNode() && this._settings.filepath) {
-      const __fs = require('fs');
-      const __path = require('path');
-
       const absoluteFilepath = __path.resolve(
         this._settings.filepath,
         docblockObj['src']

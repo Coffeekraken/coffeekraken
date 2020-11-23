@@ -1,6 +1,9 @@
 "use strict";
-var _a;
-const __SInterface = require('../../class/SInterface');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SInterface_1 = __importDefault(require("../../class/SInterface"));
 /**
  * @name                SDeamonInterface
  * @namespace           sugar.node.deamon.interface
@@ -14,22 +17,22 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SDeamonInterface extends __SInterface {
+class SDeamonInterface extends SInterface_1.default {
+}
+exports.default = SDeamonInterface;
+SDeamonInterface.extendsArray = ['SPromise'];
+SDeamonInterface.definitionObj = {
+    logs: {
+        type: 'Object',
+        required: true
     },
-    _a.extendsArray = ['SPromise'],
-    _a.definitionObj = {
-        logs: {
-            type: 'Object',
-            required: true
-        },
-        watch: {
-            type: 'Function',
-            required: true
-        },
-        state: {
-            type: 'String',
-            required: true,
-            values: ['idle', 'watching', 'error']
-        }
+    watch: {
+        type: 'Function',
+        required: true
     },
-    _a);
+    state: {
+        type: 'String',
+        required: true,
+        values: ['idle', 'watching', 'error']
+    }
+};

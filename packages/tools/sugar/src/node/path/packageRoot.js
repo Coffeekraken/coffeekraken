@@ -1,4 +1,9 @@
-const __findPkgJson = require('find-package-json');
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const find_package_json_1 = __importDefault(require("find-package-json"));
 /**
  * @name                    packageRoot
  * @namespace           sugar.node.path
@@ -11,14 +16,14 @@ const __findPkgJson = require('find-package-json');
  * @return          {String}                                      The finded package path or false if not finded
  *
  * @example         js
- * const packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
+ * import packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  * const root = packageRoot();
  *
  * @see       https://www.npmjs.com/package/find-package-json
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function packageRoot(from = process.cwd(), highest = false) {
-    const f = __findPkgJson(from);
+function packageRoot(from = process.cwd(), highest = false) {
+    const f = find_package_json_1.default(from);
     let file = f.next();
     if (!highest) {
         const filename = file.filename || false;
@@ -37,4 +42,5 @@ module.exports = function packageRoot(from = process.cwd(), highest = false) {
         return finalFile.filename.split('/').slice(0, -1).join('/');
     }
     return false;
-};
+}
+exports.default = packageRoot;

@@ -1,4 +1,9 @@
-import __isClass from '../is/class';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const class_1 = __importDefault(require("../is/class"));
 /**
  * @name            getExtendsStack
  * @namespace       sugar.js.class
@@ -18,9 +23,9 @@ import __isClass from '../is/class';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function getExtendsStack(cls) {
+function getExtendsStack(cls) {
     const stack = [];
-    if (!__isClass(cls)) {
+    if (!class_1.default(cls)) {
         cls = cls.constructor;
     }
     // if (cls instanceof Function) {
@@ -37,3 +42,4 @@ export default function getExtendsStack(cls) {
     }
     return stack;
 }
+exports.default = getExtendsStack;

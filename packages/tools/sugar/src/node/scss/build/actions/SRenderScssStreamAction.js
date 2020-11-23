@@ -1,9 +1,12 @@
 "use strict";
-var _a;
-const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __deepMerge = require('../../../object/deepMerge');
-const __SBuildScssInterface = require('../interface/SBuildScssInterface');
-const __SScssCompiler = require('../../SScssCompiler');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SActionsStreamAction_1 = __importDefault(require("../../../stream/SActionsStreamAction"));
+const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
+const SBuildScssInterface_1 = __importDefault(require("../interface/SBuildScssInterface"));
+const SScssCompiler_1 = __importDefault(require("../../SScssCompiler"));
 /**
  * @name                SRenderSassStreamAction
  * @namespace           sugar.node.build.scss.actions
@@ -17,54 +20,54 @@ const __SScssCompiler = require('../../SScssCompiler');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SRenderSassStreamAction extends __SActionsStreamAction {
-        /**
-         * @name            constructor
-         * @type            Function
-         * @constructor
-         *
-         * Constructor
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        constructor(settings = {}) {
-            super(__deepMerge({
-                name: 'Render',
-                id: 'actionStream.action.scss.render'
-            }, settings));
-        }
-        /**
-         * @name          run
-         * @type          Function
-         * @async
-         *
-         * Override the base class run method
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        run(streamObj, settings) {
-            return super.run(streamObj, async (resolve, reject, trigger, cancel) => {
-                // compile using the SScssCompiler class
-                if (!streamObj.outputStack)
-                    streamObj.outputStack = {};
-                const compiler = new __SScssCompiler(streamObj);
-                const compileRes = await compiler.compile(streamObj.input);
-                streamObj.data = compileRes.css;
-                if (compileRes.map) {
-                    streamObj.sourcemapData = compileRes.map;
-                }
-                resolve(streamObj);
-            });
-        }
-    },
+class SRenderSassStreamAction extends SActionsStreamAction_1.default {
     /**
-     * @name            interface
-     * @type             Object
-     * @static
+     * @name            constructor
+     * @type            Function
+     * @constructor
      *
-     * Store the definition object that specify the streamObj required properties, types, etc...
+     * Constructor
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = __SBuildScssInterface,
-    _a);
+    constructor(settings = {}) {
+        super(deepMerge_1.default({
+            name: 'Render',
+            id: 'actionStream.action.scss.render'
+        }, settings));
+    }
+    /**
+     * @name          run
+     * @type          Function
+     * @async
+     *
+     * Override the base class run method
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    run(streamObj, settings) {
+        return super.run(streamObj, async (resolve, reject, trigger, cancel) => {
+            // compile using the SScssCompiler class
+            if (!streamObj.outputStack)
+                streamObj.outputStack = {};
+            const compiler = new SScssCompiler_1.default(streamObj);
+            const compileRes = await compiler.compile(streamObj.input);
+            streamObj.data = compileRes.css;
+            if (compileRes.map) {
+                streamObj.sourcemapData = compileRes.map;
+            }
+            resolve(streamObj);
+        });
+    }
+}
+exports.default = SRenderSassStreamAction;
+/**
+ * @name            interface
+ * @type             Object
+ * @static
+ *
+ * Store the definition object that specify the streamObj required properties, types, etc...
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+SRenderSassStreamAction.interface = SBuildScssInterface_1.default;

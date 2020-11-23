@@ -1,7 +1,11 @@
 "use strict";
-const __deepMerge = require('../../object/deepMerge');
-const __SBlessedPopup = require('../popup/SBlessedPopup');
-const __SSummaryList = require('./SSummaryList');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const SBlessedPopup_1 = __importDefault(require("../popup/SBlessedPopup"));
+const SSummaryList_1 = __importDefault(require("./SSummaryList"));
 /**
  * @name                      blessedSummaryListPopup
  * @namespace           sugar.node.blessed.list
@@ -19,7 +23,7 @@ const __SSummaryList = require('./SSummaryList');
  * - attachTo: A simple function that you can use to attach the popup to a blessed element
  *
  * @example         js
- * const blessedSummaryListPopup = require('@coffeekraken/sugar/node/blessed/list/blessedSummaryListPopup');
+ * import blessedSummaryListPopup from 'coffeekraken/sugar/node/blessed/list/blessedSummaryListPopup';
  * blessedSummaryListPopup({
  *    title: 'Hello',
  *    description: 'World',
@@ -32,17 +36,17 @@ const __SSummaryList = require('./SSummaryList');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function blessedSummaryListPopup(settings = {}) {
-    settings = __deepMerge({
+function blessedSummaryListPopup(settings = {}) {
+    settings = deepMerge_1.default({
         title: null,
         description: null,
         items: []
     }, settings);
-    const $popupBox = new __SBlessedPopup({
+    const $popupBox = new SBlessedPopup_1.default({
         title: settings.title,
         description: settings.description
     });
-    const $summaryListBox = new __SSummaryList(settings.items, {});
+    const $summaryListBox = new SSummaryList_1.default(settings.items, {});
     $popupBox.append($summaryListBox);
     $summaryListBox.promise.on('finally,cancel', () => {
         $popupBox.remove($summaryListBox);
@@ -58,4 +62,5 @@ module.exports = function blessedSummaryListPopup(settings = {}) {
             parent.append($popupBox);
         }
     };
-};
+}
+exports.default = blessedSummaryListPopup;

@@ -22,9 +22,12 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+interface IAsyncForEach {
+  (value: any, index: number, array: any[]): void;
+}
 export default async function asyncForEach(
   array: any[],
-  asyncFn: Function
+  asyncFn: IAsyncForEach
 ): Promise<any> {
   return new Promise(async (resolve, reject) => {
     for (let index = 0; index < array.length; index++) {

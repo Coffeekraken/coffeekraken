@@ -1,10 +1,14 @@
 "use strict";
-const __replaceTags = require('../html/replaceTags');
-const __sugarConfig = require('../config/sugar');
-const __upperFirst = require('../string/upperFirst');
-const __chalk = require('chalk');
-const __tagsMap = require('../_js/console/parseHtml').tagsMap;
-__chalk.level = 3;
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const replaceTags_1 = __importDefault(require("../html/replaceTags"));
+const sugar_1 = __importDefault(require("../config/sugar"));
+const upperFirst_1 = __importDefault(require("../string/upperFirst"));
+const chalk_1 = __importDefault(require("chalk"));
+const parseHtml_1 = require("../_js/console/parseHtml");
+chalk_1.default.level = 3;
 // TODO tests
 /**
  * @name                                parseHtml
@@ -18,7 +22,7 @@ __chalk.level = 3;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function parseHtml(message) {
+function parseHtml(message) {
     let isArray = false;
     if (Array.isArray(message)) {
         isArray = true;
@@ -26,25 +30,27 @@ module.exports = function parseHtml(message) {
     else {
         message = [message];
     }
-    const tagsMap = Object.assign({}, __tagsMap);
-    const sugarColors = Object.keys(__sugarConfig('colors')).filter((c) => c !== 'terminal');
-    const terminalColors = Object.keys(__sugarConfig('terminal.colors'));
+    const tagsMap = Object.assign({}, parseHtml_1.tagsMap);
+    const sugarColors = Object.keys(sugar_1.default('colors')).filter((c) => c !== 'terminal');
+    const terminalColors = Object.keys(sugar_1.default('terminal.colors'));
     const colorsObj = {};
     sugarColors.forEach((name) => {
-        colorsObj[name] = __sugarConfig(`colors.${name}.color`);
+        colorsObj[name] = sugar_1.default(`colors.${name}.color`);
     });
     terminalColors.forEach((name) => {
-        colorsObj[name] = __sugarConfig(`terminal.colors.${name}.color`);
+        colorsObj[name] = sugar_1.default(`terminal.colors.${name}.color`);
     });
     message = message.map((m) => {
         Object.keys(colorsObj).forEach((c) => {
             const cValue = colorsObj[c];
-            tagsMap[c] = (tag, content) => __chalk.hex(cValue)(content);
-            tagsMap[`bg${__upperFirst(c)}`] = (tag, content) => __chalk.bgHex(cValue)(content);
+            tagsMap[c] = (tag, content) => chalk_1.default.hex(cValue)(content);
+            tagsMap[`bg${upperFirst_1.default(c)}`] = (tag, content) => chalk_1.default.bgHex(cValue)(content);
         });
-        return __replaceTags(m, tagsMap);
+        return replaceTags_1.default(m, tagsMap);
     });
     if (isArray)
         return message;
     return message[0];
-};
+}
+exports.default = parseHtml;
+;

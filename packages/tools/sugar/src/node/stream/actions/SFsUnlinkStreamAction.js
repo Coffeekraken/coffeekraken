@@ -1,10 +1,13 @@
 "use strict";
-var _a;
-const __SActionsStreamAction = require('../SActionsStreamAction');
-const __rimraf = require('rimraf');
-const __deepMerge = require('../../object/deepMerge');
-const __SInterface = require('../../class/SInterface');
-class SFsUnlinkStreamActionInterface extends __SInterface {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SActionsStreamAction_1 = __importDefault(require("../SActionsStreamAction"));
+const rimraf_1 = __importDefault(require("rimraf"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const SInterface_1 = __importDefault(require("../../class/SInterface"));
+class SFsUnlinkStreamActionInterface extends SInterface_1.default {
 }
 SFsUnlinkStreamActionInterface.definitionObj = {
     unlink: {
@@ -28,46 +31,46 @@ SFsUnlinkStreamActionInterface.definitionObj = {
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SFsUnlinkStreamAction extends __SActionsStreamAction {
-        /**
-         * @name            constructor
-         * @type            Function
-         * @constructor
-         *
-         * Constructor
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        constructor(settings = {}) {
-            super(__deepMerge({
-                id: 'actionStream.action.fs.unlink'
-            }, settings));
-        }
-        /**
-         * @name          run
-         * @type          Function
-         * @async
-         *
-         * Override the base class run method
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        run(streamObj, settings = this._settings) {
-            return super.run(streamObj, async (resolve, reject) => {
-                __rimraf.sync(streamObj.unlink);
-                delete streamObj.unlink;
-                resolve(streamObj);
-            });
-        }
-    },
+class SFsUnlinkStreamAction extends SActionsStreamAction_1.default {
     /**
-     * @name            interface
-     * @type             Object
-     * @static
+     * @name            constructor
+     * @type            Function
+     * @constructor
      *
-     * Store the definition object that specify the streamObj required properties, types, etc...
+     * Constructor
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SFsUnlinkStreamActionInterface,
-    _a);
+    constructor(settings = {}) {
+        super(deepMerge_1.default({
+            id: 'actionStream.action.fs.unlink'
+        }, settings));
+    }
+    /**
+     * @name          run
+     * @type          Function
+     * @async
+     *
+     * Override the base class run method
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    run(streamObj, settings = this._settings) {
+        return super.run(streamObj, async (resolve, reject) => {
+            rimraf_1.default.sync(streamObj.unlink);
+            delete streamObj.unlink;
+            resolve(streamObj);
+        });
+    }
+}
+exports.default = SFsUnlinkStreamAction;
+/**
+ * @name            interface
+ * @type             Object
+ * @static
+ *
+ * Store the definition object that specify the streamObj required properties, types, etc...
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+SFsUnlinkStreamAction.interface = SFsUnlinkStreamActionInterface;

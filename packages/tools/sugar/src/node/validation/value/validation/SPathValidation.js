@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const SValidation_1 = require("../../SValidation");
-const path_1 = require("../../../is/path");
+const SValidation_1 = __importDefault(require("../../SValidation"));
+const path_1 = __importDefault(require("../../../is/path"));
 /**
  * @name          SPathValidation
  * @namespace     sugar.js.validation.value.validation
@@ -14,12 +17,7 @@ const path_1 = require("../../../is/path");
  */
 class SPathValidation extends SValidation_1.default {
     static exec(value, checkExistence = true) {
-        // if (__isNode()) {
-        //   const checkPath = require('@coffeekraken/sugar/node/fs/isPath');
-        //   return checkPath(value, checkExistence);
-        // } else {
         return path_1.default(value);
-        // }
     }
 }
 SPathValidation.message = 'This value must be a valid <yellow>path</yellow> and you\'ve passed "<red>%0</red>"';

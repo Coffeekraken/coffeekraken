@@ -1,8 +1,13 @@
-import __isNode from '../is/node';
-import __get from '../object/get';
-import __set from '../object/set';
-import __delete from '../object/delete';
-import __parse from '../string/parse';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const node_1 = __importDefault(require("../is/node"));
+const get_1 = __importDefault(require("../object/get"));
+const set_1 = __importDefault(require("../object/set"));
+const delete_1 = __importDefault(require("../object/delete"));
+const parse_1 = __importDefault(require("../string/parse"));
 /**
  * @name                    env
  * @namespace           sugar.js.core
@@ -21,21 +26,22 @@ import __parse from '../string/parse';
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function env(dotPath, value) {
-    if (!__isNode()) {
+function env(dotPath, value) {
+    if (!node_1.default()) {
         if (!window.process)
             window.process = {};
         if (!window.process.env)
             window.process.env = {};
     }
-    const targetObj = __isNode() ? global.process.env : window.process.env;
+    const targetObj = node_1.default() ? global.process.env : window.process.env;
     if (value === null) {
         // delete the variable
-        __delete(targetObj, dotPath.toUpperCase());
+        delete_1.default(targetObj, dotPath.toUpperCase());
     }
     else if (value !== undefined) {
-        __set(targetObj, dotPath.toUpperCase(), __parse(value));
+        set_1.default(targetObj, dotPath.toUpperCase(), parse_1.default(value));
     }
     // return the variable value
-    return __parse(__get(targetObj, dotPath.toUpperCase()));
+    return parse_1.default(get_1.default(targetObj, dotPath.toUpperCase()));
 }
+exports.default = env;

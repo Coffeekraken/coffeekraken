@@ -1,12 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = require("../object/deepMerge");
-const rgba2hex_1 = require("./rgba2hex");
-const hsv2rgba_1 = require("./hsv2rgba");
-const hsl2rgba_1 = require("./hsl2rgba");
-const rgba2hsv_1 = require("./rgba2hsv");
-const rgba2hsl_1 = require("./rgba2hsl");
-const convert_1 = require("./convert");
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const rgba2hex_1 = __importDefault(require("./rgba2hex"));
+const hsv2rgba_1 = __importDefault(require("./hsv2rgba"));
+const hsl2rgba_1 = __importDefault(require("./hsl2rgba"));
+const rgba2hsv_1 = __importDefault(require("./rgba2hsv"));
+const rgba2hsl_1 = __importDefault(require("./rgba2hsl"));
+const convert_1 = __importDefault(require("./convert"));
 /**
  * @name 		SColor
  * @namespace           sugar.js.color

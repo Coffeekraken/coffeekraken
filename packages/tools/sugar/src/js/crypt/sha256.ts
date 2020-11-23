@@ -8,9 +8,14 @@ const __encryptedMessages = {};
  * @name            sha256
  * @namespace           sugar.js.crypt
  * @type            Object
+ * @wip
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the sha256 algorithm
  *
+ * @todo        interface
+ * @todo        doc
+ *
+ * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {

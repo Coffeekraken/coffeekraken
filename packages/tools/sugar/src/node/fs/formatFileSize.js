@@ -1,5 +1,9 @@
 "use strict";
-const __filesize = require('filesize');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const filesize_1 = __importDefault(require("filesize"));
 // TODO tests
 /**
  * @name                                    formatFileSize
@@ -14,12 +18,13 @@ const __filesize = require('filesize');
  * @return              {String}                                      The human readable version of the passed size
  *
  * @example             js
- * const formatFilesize = require('@coffeekraken/sugar/node/fs/formatFileSize');
+ * import formatFilesize from '@coffeekraken/sugar/node/fs/formatFileSize';
  * formatFileSize(163931); // => 326.86 KB
  *
  * @see             https://www.npmjs.com/package/filesize
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function formatFileSize(size, settings = {}) {
-    return __filesize(size, settings);
-};
+function formatFileSize(size, settings = {}) {
+    return filesize_1.default(size, settings);
+}
+exports.default = formatFileSize;

@@ -11,6 +11,7 @@ import __getExtendsStack from '../class/getExtendsStack';
  * @name              ofType
  * @namespace           sugar.js.is
  * @type              Function
+ * @beta
  *
  * This function take the value to check and an argument type definition string like "String", "Array<String>", etc... and return true or false depending
  * if the value pass the test or not...
@@ -18,6 +19,10 @@ import __getExtendsStack from '../class/getExtendsStack';
  * @param       {Mixed}        value          The value to check
  * @param       {String}       argTypeDefinition      The argument type definition string to use for the test
  * @return      {Boolean|Object}                    true if the value pass the test, an object with two sub-objects describing the issue. 1 names "$expected" and the othet names "$received"
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import isOfType from '@coffeekraken/sugar/js/is/ofType';

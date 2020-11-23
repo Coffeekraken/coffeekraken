@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = require("../object/deepMerge");
-const SLogConsoleAdapter_1 = require("./adapters/SLogConsoleAdapter");
-const env_1 = require("../core/env");
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SLogConsoleAdapter_1 = __importDefault(require("./adapters/SLogConsoleAdapter"));
+const env_1 = __importDefault(require("../core/env"));
 /**
  * @name                    SLog
  * @namespace           sugar.js.log

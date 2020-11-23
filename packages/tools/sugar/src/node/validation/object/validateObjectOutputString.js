@@ -1,6 +1,11 @@
-import __validateValueOutputString from '../value/validateValueOutputString';
-import __parseHtml from '../../console/parseHtml';
-import __trimLines from '../../string/trimLines';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const validateValueOutputString_1 = __importDefault(require("../value/validateValueOutputString"));
+const parseHtml_1 = __importDefault(require("../../console/parseHtml"));
+const trimLines_1 = __importDefault(require("../../string/trimLines"));
 /**
  * @name                validateObjectOutputString
  * @namespace           sugar.js.validation.object
@@ -35,9 +40,9 @@ import __trimLines from '../../string/trimLines';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function validateObjectOutputString(validateObjectResultObj, settings = {}) {
+function validateObjectOutputString(validateObjectResultObj, settings = {}) {
     const stringsArray = [];
-    stringsArray.push(__trimLines(`
+    stringsArray.push(trimLines_1.default(`
   <underline><green>Object validation</green></underline>
 
   ${validateObjectResultObj.$interface
@@ -52,11 +57,12 @@ export default function validateObjectOutputString(validateObjectResultObj, sett
         .join(', ')}`));
     validateObjectResultObj.$issues.forEach((attrName) => {
         const attrIssueObj = validateObjectResultObj[attrName];
-        const string = __validateValueOutputString(attrIssueObj, {
+        const string = validateValueOutputString_1.default(attrIssueObj, {
             interface: validateObjectResultObj.$interface,
             name: `<yellow>${validateObjectResultObj.$name}</yellow>.<magenta>${attrName}</magenta>`
         });
         stringsArray.push(string);
     });
-    return __parseHtml(stringsArray.join('\n\n'));
+    return parseHtml_1.default(stringsArray.join('\n\n'));
 }
+exports.default = validateObjectOutputString;

@@ -5,17 +5,23 @@ import SSvgFilter from './SSvgFilter';
  * @namespace           sugar.js.filter
  * @type      Class
  * @extends 		SSvgFilter
+ * @stable
  *
  * This SVG filter class apply either a linear or a radial gradient of your choice
  * on an HTMLElement.
  * This is useful cause the gradient will only be applied on part of the elements that is really visible and will respect the opacity
  * of each parts
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example 		js
  * const filter = new SGradientSvgFilter();
  * filter.linear(['red','blue','green']);
  * filter.applyTo(myCoolHTMLElement);
  *
+ * @since           1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SGradientSvgFilter extends SSvgFilter {
@@ -48,16 +54,16 @@ class SGradientSvgFilter extends SSvgFilter {
    * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   linear(colors, settings = {}) {
-    let width = settings.width || 512,
+    const width = settings.width || 512,
       height = settings.height || 512,
       x0 = settings.x0 || 0,
       x1 = settings.x1 || width,
       y0 = settings.y0 || 0,
       y1 = settings.y1 || 0;
-    let can = document.createElement('canvas');
+    const can = document.createElement('canvas');
     can.setAttribute('width', width);
     can.setAttribute('height', height);
-    let ctx = can.getContext('2d'),
+    const ctx = can.getContext('2d'),
       grad = ctx.createLinearGradient(x0, y0, x1, y1);
     // loop on each colors
     let i = 0;
@@ -89,7 +95,7 @@ class SGradientSvgFilter extends SSvgFilter {
    * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   radial(colors, settings = {}) {
-    let width = settings.width || 512,
+    const width = settings.width || 512,
       height = settings.height || 512,
       x0 = settings.x0 || width / 2,
       x1 = settings.x1 || width / 2,
@@ -97,10 +103,10 @@ class SGradientSvgFilter extends SSvgFilter {
       y0 = settings.y0 || height / 2,
       y1 = settings.y1 || height / 2,
       r1 = settings.r1 || width;
-    let can = document.createElement('canvas');
+    const can = document.createElement('canvas');
     can.setAttribute('width', width);
     can.setAttribute('height', height);
-    let ctx = can.getContext('2d'),
+    const ctx = can.getContext('2d'),
       grad = ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
     // loop on each colors
     let i = 0;
@@ -173,7 +179,7 @@ class SGradientSvgFilter extends SSvgFilter {
    * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _setImageSize() {
-    let width = this.elms[0].offsetWidth,
+    const width = this.elms[0].offsetWidth,
       height = this.elms[0].offsetHeight;
     if (width >= height) {
       this._image.setAttribute('width', width);

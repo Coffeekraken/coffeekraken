@@ -5,6 +5,7 @@ import { decycle } from 'json-cyclic';
  * @name            stringify
  * @namespace       sugar.js.json
  * @type            Function
+ * @beta
  *
  * This function do the same as the ```JSON.stringify``` one but add some features.
  *
@@ -15,6 +16,10 @@ import { decycle } from 'json-cyclic';
  * @param         {Object}      [settings={}]         An object of settings to configure your process:
  * - space (null) {Number}: A String or Number object that's used to insert white space into the output JSON string
  * - decircular (true) {Boolean}: Specify if you want to remove circular dependencies or not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import stringify from '@coffeekraken/sugar/js/json/stringify';

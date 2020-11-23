@@ -1,6 +1,10 @@
 "use strict";
-const __getSize = require('get-folder-size');
-const __filesize = require('filesize');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const get_folder_size_1 = __importDefault(require("get-folder-size"));
+const filesize_1 = __importDefault(require("filesize"));
 // TODO tests
 /**
  * @name                            folderSize
@@ -15,19 +19,20 @@ const __filesize = require('filesize');
  * @return            {Promise}                                           A promise that will be resolved once the folder size has been calculated
  *
  * @example           js
- * const folderSize = require('@coffeekraken/sugar/node/fs/folderSize');
+ * import folderSize from '@coffeekraken/sugar/node/fs/folderSize';
  * folderSize('my/cool/folder').then((size) => {
  *      // do something...
  * });
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function folderSize(folderPath, rawFormat = false) {
+function folderSize(folderPath, rawFormat = false) {
     return new Promise((resolve, reject) => {
-        __getSize(folderPath, (error, size) => {
+        get_folder_size_1.default(folderPath, (error, size) => {
             if (error)
                 throw error;
-            resolve(rawFormat ? size : __filesize(size));
+            resolve(rawFormat ? size : filesize_1.default(size));
         });
     });
-};
+}
+exports.default = folderSize;

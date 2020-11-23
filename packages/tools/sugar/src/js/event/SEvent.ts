@@ -2,9 +2,14 @@
  * @name 		                SEvent
  * @namespace           sugar.js.event
  * @type                    Class
+ * @stable
  *
  * Proxy class to create custom events that can be dispatched
  * through the standard dispatch method on any HTMLElement
+ *
+ * @todo            interface
+ * @todo            doc
+ * @todo            tests
  *
  * @example 	          js
  * let myEvent = new SEvent('myCoolEvent', {
@@ -18,6 +23,7 @@
  * myHTMLElement.dispatch(myEvent);
  *
  * @see 		https://www.npmjs.com/package/customevent
+ * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 import customEvent from 'custom-event';

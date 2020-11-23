@@ -1,15 +1,11 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-import __minimatch from 'minimatch';
-import __deepMerge from '../object/deepMerge';
-import __uniqid from '../string/uniqid';
+Object.defineProperty(exports, "__esModule", { value: true });
+const minimatch_1 = __importDefault(require("minimatch"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const uniqid_1 = __importDefault(require("../string/uniqid"));
 // var originalCatch = Promise.prototype.catch;
 // Promise.prototype.catch = function (...args) {
 //   if (this._coco) {
@@ -87,7 +83,7 @@ import __uniqid from '../string/uniqid';
  *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default class SPromise extends Promise {
+class SPromise extends Promise {
     /**
      * @name                  constructor
      * @type                  Function
@@ -201,9 +197,9 @@ export default class SPromise extends Promise {
             }
         });
         // extend settings
-        this._settings = __deepMerge({
+        this._settings = deepMerge_1.default({
             destroyTimeout: 5000,
-            id: __uniqid()
+            id: uniqid_1.default()
         }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings);
         if (this._settings.destroyTimeout !== -1) {
             this.on('finally', () => {
@@ -232,7 +228,7 @@ export default class SPromise extends Promise {
      */
     static map(sourceSPromise, destSPromise, settings = {}) {
         // settings
-        settings = __deepMerge({
+        settings = deepMerge_1.default({
             // stacks: 'then,catch,resolve,reject,finally,cancel',
             stacks: 'catch,resolve,reject,finally,cancel',
             processor: null,
@@ -285,7 +281,7 @@ export default class SPromise extends Promise {
      */
     static pipe(sourceSPromise, destSPromise, settings = {}) {
         // settings
-        settings = __deepMerge({
+        settings = deepMerge_1.default({
             stacks: '*',
             prefixStack: true,
             processor: null,
@@ -322,7 +318,10 @@ export default class SPromise extends Promise {
                 metas.stack = triggerStack;
             }
             // trigger on the destination promise
-            destSPromise.trigger(metas.stack, value, Object.assign(Object.assign({}, metas), { level: metas.level + 1 }));
+            destSPromise.trigger(metas.stack, value, {
+                ...metas,
+                level: metas.level + 1
+            });
         });
     }
     /**
@@ -491,16 +490,16 @@ export default class SPromise extends Promise {
     _resolve(arg, stacksOrder = 'resolve,finally') {
         if (this._isDestroyed)
             return;
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        return new Promise(async (resolve, reject) => {
             // update the status
             this._promiseState = 'resolved';
             // exec the wanted stacks
-            const stacksResult = yield this._triggerStacks(stacksOrder, arg);
+            const stacksResult = await this._triggerStacks(stacksOrder, arg);
             // resolve the master promise
             this._masterPromiseResolveFn(stacksResult);
             // return the stack result
             resolve(stacksResult);
-        }));
+        });
     }
     /**
      * @name          reject
@@ -535,16 +534,16 @@ export default class SPromise extends Promise {
     _reject(arg, stacksOrder = `catch,reject,finally`) {
         if (this._isDestroyed)
             return;
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        return new Promise(async (resolve, reject) => {
             // update the status
             this._promiseState = 'rejected';
             // exec the wanted stacks
-            const stacksResult = yield this._triggerStacks(stacksOrder, arg);
+            const stacksResult = await this._triggerStacks(stacksOrder, arg);
             // resolve the master promise
             this._masterPromiseRejectFn(arg);
             // return the stack result
             resolve(stacksResult);
-        }));
+        });
     }
     /**
      * @name          cancel
@@ -579,16 +578,16 @@ export default class SPromise extends Promise {
     _cancel(arg, stacksOrder = 'cancel,finally') {
         if (this._isDestroyed)
             return;
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        return new Promise(async (resolve, reject) => {
             // update the status
             this._promiseState = 'canceled';
             // exec the wanted stacks
-            const stacksResult = yield this._triggerStacks(stacksOrder, arg);
+            const stacksResult = await this._triggerStacks(stacksOrder, arg);
             // resolve the master promise
             this._masterPromiseResolveFn(stacksResult);
             // return the stack result
             resolve(stacksResult);
-        }));
+        });
     }
     /**
      * @name          trigger
@@ -612,14 +611,12 @@ export default class SPromise extends Promise {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    trigger(what, arg, metas = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (this._isDestroyed)
-                return;
-            // if (what === 'error') console.log('SSS', arg);
-            // triger the passed stacks
-            return this._triggerStacks(what, arg, metas);
-        });
+    async trigger(what, arg, metas = {}) {
+        if (this._isDestroyed)
+            return;
+        // if (what === 'error') console.log('SSS', arg);
+        // triger the passed stacks
+        return this._triggerStacks(what, arg, metas);
     }
     /**
      * @name            _registerNewStacks
@@ -694,70 +691,68 @@ export default class SPromise extends Promise {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    _triggerStack(stack, initialValue, metas = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let currentCallbackReturnedValue = initialValue;
-            if (!this._stacks || Object.keys(this._stacks).length === 0)
-                return currentCallbackReturnedValue;
-            let stackArray = [];
-            if (typeof stack === 'string') {
-                if (this._stacks[stack]) {
-                    stackArray = [...stackArray, ...this._stacks[stack]];
-                }
-                // check if the stack is a glob pattern
-                Object.keys(this._stacks).forEach((stackName) => {
-                    if (stackName === stack)
-                        return;
-                    // const toAvoid = [
-                    //   'catch',
-                    //   'resolve',
-                    //   'reject',
-                    //   'finally',
-                    //   'cancel'
-                    // ];
-                    // if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1)
-                    //   return;
-                    if (__minimatch(stack, stackName)) {
-                        // the glob pattern match the triggered stack so add it to the stack array
-                        stackArray = [...stackArray, ...this._stacks[stackName]];
-                    }
-                });
-            }
-            // filter the catchStack
-            stackArray.map((item) => item.called++);
-            stackArray = stackArray.filter((item) => {
-                if (item.callNumber === -1)
-                    return true;
-                if (item.called <= item.callNumber)
-                    return true;
-                return false;
-            });
-            const metasObj = __deepMerge({
-                stack,
-                originalStack: stack,
-                id: this._settings.id,
-                state: this._promiseState,
-                time: Date.now(),
-                level: 1
-            }, metas);
-            for (let i = 0; i < stackArray.length; i++) {
-                // get the actual item in the array
-                const item = stackArray[i];
-                // make sure the stack exist
-                if (!item.callback)
-                    return currentCallbackReturnedValue;
-                // call the callback function
-                let callbackResult = item.callback(currentCallbackReturnedValue, metasObj);
-                // check if the callback result is a promise
-                callbackResult = yield callbackResult;
-                // if the settings tells that we have to pass each returned value to the next callback
-                if (callbackResult !== undefined) {
-                    currentCallbackReturnedValue = callbackResult;
-                }
-            }
-            // return the result
+    async _triggerStack(stack, initialValue, metas = {}) {
+        let currentCallbackReturnedValue = initialValue;
+        if (!this._stacks || Object.keys(this._stacks).length === 0)
             return currentCallbackReturnedValue;
+        let stackArray = [];
+        if (typeof stack === 'string') {
+            if (this._stacks[stack]) {
+                stackArray = [...stackArray, ...this._stacks[stack]];
+            }
+            // check if the stack is a glob pattern
+            Object.keys(this._stacks).forEach((stackName) => {
+                if (stackName === stack)
+                    return;
+                // const toAvoid = [
+                //   'catch',
+                //   'resolve',
+                //   'reject',
+                //   'finally',
+                //   'cancel'
+                // ];
+                // if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1)
+                //   return;
+                if (minimatch_1.default(stack, stackName)) {
+                    // the glob pattern match the triggered stack so add it to the stack array
+                    stackArray = [...stackArray, ...this._stacks[stackName]];
+                }
+            });
+        }
+        // filter the catchStack
+        stackArray.map((item) => item.called++);
+        stackArray = stackArray.filter((item) => {
+            if (item.callNumber === -1)
+                return true;
+            if (item.called <= item.callNumber)
+                return true;
+            return false;
         });
+        const metasObj = deepMerge_1.default({
+            stack,
+            originalStack: stack,
+            id: this._settings.id,
+            state: this._promiseState,
+            time: Date.now(),
+            level: 1
+        }, metas);
+        for (let i = 0; i < stackArray.length; i++) {
+            // get the actual item in the array
+            const item = stackArray[i];
+            // make sure the stack exist
+            if (!item.callback)
+                return currentCallbackReturnedValue;
+            // call the callback function
+            let callbackResult = item.callback(currentCallbackReturnedValue, metasObj);
+            // check if the callback result is a promise
+            callbackResult = await callbackResult;
+            // if the settings tells that we have to pass each returned value to the next callback
+            if (callbackResult !== undefined) {
+                currentCallbackReturnedValue = callbackResult;
+            }
+        }
+        // return the result
+        return currentCallbackReturnedValue;
     }
     /**
      * @name          _triggerStacks
@@ -775,7 +770,7 @@ export default class SPromise extends Promise {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     _triggerStacks(stacks, initialValue, metas = {}) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        return new Promise(async (resolve, reject) => {
             // await __wait(0);
             if (!stacks)
                 return this;
@@ -784,13 +779,13 @@ export default class SPromise extends Promise {
                 stacks = stacks.split(',').map((s) => s.trim());
             let currentStackResult = initialValue;
             for (let i = 0; i < stacks.length; i++) {
-                const stackResult = yield this._triggerStack(stacks[i], currentStackResult, metas);
+                const stackResult = await this._triggerStack(stacks[i], currentStackResult, metas);
                 if (stackResult !== undefined) {
                     currentStackResult = stackResult;
                 }
             }
             resolve(currentStackResult);
-        }));
+        });
     }
     /**
      * @name                on
@@ -1020,3 +1015,4 @@ export default class SPromise extends Promise {
         this._isDestroyed = true;
     }
 }
+exports.default = SPromise;

@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                          get
  * @namespace           sugar.js.object
@@ -14,7 +16,7 @@
  * get('myObject.cool.value'); // => 'Hello world'
  *
  */
-export default (obj, path) => {
+exports.default = (obj, path) => {
     if (obj[path] !== undefined)
         return obj[path];
     if (!path || path === '' || path === '.')

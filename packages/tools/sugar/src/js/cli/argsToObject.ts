@@ -47,4 +47,4 @@ export default function argsToObject(argsObj, settings = {}) {
   }
 
   return __completeArgsObject(argsObj || {}, settings);
-};
+}

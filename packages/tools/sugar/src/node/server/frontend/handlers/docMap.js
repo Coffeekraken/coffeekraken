@@ -1,6 +1,9 @@
 "use strict";
-const __SPromise = require('../../../promise/SPromise');
-const __SDocMap = require('../../../doc/SDocMap');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SDocMap_1 = __importDefault(require("../../../doc/SDocMap"));
 /**
  * @name                docMap
  * @namespace           sugar.node.server.frontend.handlers
@@ -15,10 +18,11 @@ const __SDocMap = require('../../../doc/SDocMap');
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function docMap(req, res, settings = {}) {
-    const docMap = new __SDocMap();
+async function docMap(req, res, settings = {}) {
+    const docMap = new SDocMap_1.default();
     const docMapJson = await docMap.read();
     res.status(200);
     res.type('application/json');
     res.send(docMapJson);
-};
+}
+exports.default = docMap;

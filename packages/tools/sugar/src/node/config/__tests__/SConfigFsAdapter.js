@@ -1,5 +1,6 @@
 "use strict";
-module.exports = (__SConfig, __SConfigFsAdapter) => {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (__SConfig, __SConfigFsAdapter) => {
     const config = new __SConfig('myCoolConfig', {
         adapters: [
             new __SConfigFsAdapter({

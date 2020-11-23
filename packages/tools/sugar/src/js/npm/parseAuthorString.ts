@@ -2,12 +2,17 @@
  * @name            parseAuthorString
  * @namespace       sugar.js.npm
  * @type            Function
+ * @stable
  *
  * This function simply take an author string like "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)" and
  * transform it into a plain object with these properties: name, email and url
  *
  * @param       {String}          string          The string to parse
  * @return      {Object}                          The plain object version of the string
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import parseAuthorString from '@coffeekraken/sugar/js/npm/parseAuthorString';

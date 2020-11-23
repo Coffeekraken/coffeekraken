@@ -1,14 +1,18 @@
-const __upperFirst = require('../../string/upperFirst');
+import __upperFirst from '../../string/upperFirst';
 
 /**
  * @name              return
  * @namespace           sugar.js.docblock.tags
  * @type              Function
+ * @wip
  *
  * Parse the return tag
  *
  * @param       {Object}          data        The data object parsed in the string
  * @return      {Object}                      The formated object
+ *
+ * @todo      interface
+ * @todo      doc
  *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>

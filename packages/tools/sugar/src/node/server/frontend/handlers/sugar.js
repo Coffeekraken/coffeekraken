@@ -1,12 +1,15 @@
 "use strict";
-const __path = require('path');
-const __fs = require('fs');
-const __packageRoot = require('../../../path/packageRoot');
-const __SPromise = require('../../../promise/SPromise');
-const __packageJson = require('../../../package/json');
-const __sugarConfig = require('../../../config/sugar');
-const __STemplate = require('../../../template/STemplate');
-const STemplate = require('../../../template/STemplate');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = __importDefault(require("fs"));
+const packageRoot_1 = __importDefault(require("../../../path/packageRoot"));
+const SPromise_1 = __importDefault(require("../../../promise/SPromise"));
+const json_1 = __importDefault(require("../../../package/json"));
+const sugar_1 = __importDefault(require("../../../config/sugar"));
+const STemplate_1 = __importDefault(require("../../../template/STemplate"));
+const STemplate_2 = __importDefault(require("../../../template/STemplate"));
 /**
  * @name                sugar
  * @namespace           sugar.node.server.frontend.handlers
@@ -21,21 +24,21 @@ const STemplate = require('../../../template/STemplate');
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function sugar(req, res, settings = {}) {
+function sugar(req, res, settings = {}) {
     // search for the view to render
-    const packageRoot = __packageRoot();
-    const packageJson = __packageJson();
+    const packageRoot = packageRoot_1.default();
+    const packageJson = json_1.default();
     let body, content, view, title, error;
     // index.html file at root
-    if (__fs.existsSync(`${packageRoot}/index.html`)) {
-        const html = __fs.readFileSync(`${packageRoot}/index.html`, 'utf8');
+    if (fs_1.default.existsSync(`${packageRoot}/index.html`)) {
+        const html = fs_1.default.readFileSync(`${packageRoot}/index.html`, 'utf8');
         body = html;
         title = packageJson.name;
         view = 'pages.index';
     }
     else {
-        const viewsDir = __sugarConfig('frontend.viewsDir');
-        const viewInfoObj = __STemplate.getViewInfo(`${viewsDir}/index`);
+        const viewsDir = sugar_1.default('frontend.viewsDir');
+        const viewInfoObj = STemplate_1.default.getViewInfo(`${viewsDir}/index`);
         if (viewInfoObj) {
             view = viewInfoObj.relPath;
         }
@@ -44,15 +47,15 @@ module.exports = function sugar(req, res, settings = {}) {
             title = `Index view not found...`;
             error = `No index view has been found. You have these choices:
       - index.html
-      ${Object.keys(STemplate.engines)
+      ${Object.keys(STemplate_2.default.engines)
                 .map((engine) => {
-                return `- ${viewsDir}/index.${engine}`.replace(`${__packageRoot()}/`, '');
+                return `- ${viewsDir}/index.${engine}`.replace(`${packageRoot_1.default()}/`, '');
             })
                 .join('\n-')}
       `;
         }
     }
-    return new __SPromise((resolve, reject, trigger) => {
+    return new SPromise_1.default((resolve, reject, trigger) => {
         return resolve({
             content,
             view,
@@ -65,4 +68,5 @@ module.exports = function sugar(req, res, settings = {}) {
     }, {
         id: 'frontendServerSugarHandler'
     });
-};
+}
+exports.default = sugar;

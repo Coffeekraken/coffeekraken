@@ -1,9 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const SError_1 = require("../error/SError");
-const deepMerge_1 = require("../object/deepMerge");
-const htmlFromMarkdown_1 = require("./html/htmlFromMarkdown");
-const htmlFromDocblocks_1 = require("./html/htmlFromDocblocks");
+const SError_1 = __importDefault(require("../error/SError"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const htmlFromMarkdown_1 = __importDefault(require("./html/htmlFromMarkdown"));
+const htmlFromDocblocks_1 = __importDefault(require("./html/htmlFromDocblocks"));
 /**
  * @name            toHtml
  * @namespace       sugar.js.convert

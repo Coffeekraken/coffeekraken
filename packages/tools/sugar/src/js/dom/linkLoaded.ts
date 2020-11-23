@@ -1,9 +1,8 @@
-// TODO tests
-
 /**
  * @name      linkLoaded
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Wait until the passed HTMLLinkElement is fully loaded
  *
@@ -11,18 +10,23 @@
  * @param 		{Function}					[cb=null] 	An optional callback to call
  * @return 		{Promise} 								The promise that will be resolved
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example  	js
  * import linkLoaded from '@coffeekraken/sugar/js/dom/linkLoaded'
  * linkLoaded(myCoolHTMLLinlElement).then((link) => {
  * 		// do something when the link is loaded
  * });
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function alreadyLoaded(link) {
   const href = link.href;
   let result = false;
-  for (var i = 0; i < document.styleSheets.length; i++) {
+  for (let i = 0; i < document.styleSheets.length; i++) {
     if (
       document.styleSheets[i].href &&
       document.styleSheets[i].href.match(href)

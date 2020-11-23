@@ -1,7 +1,11 @@
 "use strict";
-const __splitLineEvery = require('./__wip__/splitLineEvery');
-const __countLine = require('../string/countLine');
-const __deepMerge = require('../object/deepMerge');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const splitLineEvery_1 = __importDefault(require("./__wip__/splitLineEvery"));
+const countLine_1 = __importDefault(require("../string/countLine"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name                                          columns
  * @namespace           sugar.node.terminal
@@ -16,7 +20,7 @@ const __deepMerge = require('../object/deepMerge');
  * @return                {String}                                                  The string to log in the terminal
  *
  * @example               js
- * const columns = require('@coffeekraken/sugar/node/terminal/columns');
+ * import columns from '@coffeekraken/sugar/node/terminal/columns';
  * columns([
  *  'Hello world',
  *  'How are you?'
@@ -24,8 +28,8 @@ const __deepMerge = require('../object/deepMerge');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function columns(content, settings = {}) {
-    settings = __deepMerge({
+function columns(content, settings = {}) {
+    settings = deepMerge_1.default({
         width: process.env.STDOUT_COLUMNS || process.stdout.columns,
         padding: process.env.STDOUT_PADDING || 3
     }, settings);
@@ -39,7 +43,7 @@ module.exports = function columns(content, settings = {}) {
             : i === content.length - 1
                 ? settings.padding
                 : settings.padding * 2;
-        let lines = __splitLineEvery(c, maxColumnWidth - columnsPadding);
+        let lines = splitLineEvery_1.default(c, maxColumnWidth - columnsPadding);
         splitedContent['column_' + i] = {
             lines: lines,
             padding: columnsPadding
@@ -64,7 +68,7 @@ module.exports = function columns(content, settings = {}) {
             else {
                 const columnContentString = columnLinesArray[i];
                 let restOfLineCount = maxColumnWidth -
-                    __countLine(columnContentString || '') -
+                    countLine_1.default(columnContentString || '') -
                     (hasColumnLeftAndRightPadding
                         ? settings.padding * 2
                         : settings.padding);
@@ -95,4 +99,5 @@ module.exports = function columns(content, settings = {}) {
         currentLine = '';
     }
     return lines.join('\n');
-};
+}
+exports.default = columns;

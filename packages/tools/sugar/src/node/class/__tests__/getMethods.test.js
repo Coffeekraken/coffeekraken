@@ -1,3 +1,3 @@
 "use strict";
-const __getMethods = require('../getMethods');
-require('../_js/class/__tests__/getMethods')(__getMethods);
+Object.defineProperty(exports, "__esModule", { value: true });
+throw 'WIP';

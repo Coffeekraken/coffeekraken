@@ -1,10 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const axios_1 = require("axios");
-const strToHtml_1 = require("../html/strToHtml");
-const toString_1 = require("../html/toString");
-const SRequestConfig_1 = require("./SRequestConfig");
-const deepMerge_1 = require("../object/deepMerge");
+const axios_1 = __importDefault(require("axios"));
+const strToHtml_1 = __importDefault(require("../html/strToHtml"));
+const toString_1 = __importDefault(require("../html/toString"));
+const SRequestConfig_1 = __importDefault(require("./SRequestConfig"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name 		                    SRequest
  * @namespace           sugar.js.http

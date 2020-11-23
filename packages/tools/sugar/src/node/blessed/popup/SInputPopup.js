@@ -1,8 +1,11 @@
 "use strict";
-const __deepMerge = require('../../object/deepMerge');
-const __SInput = require('../form/SInput');
-const __SBlessedPopup = require('./SBlessedPopup');
-const __activeSpace = require('../../core/activeSpace');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const SInput_1 = __importDefault(require("../form/SInput"));
+const SBlessedPopup_1 = __importDefault(require("./SBlessedPopup"));
 /**
  * @name                  SBlessedInputPopup
  * @namespace           sugar.node.blessed.popup
@@ -16,12 +19,12 @@ const __activeSpace = require('../../core/activeSpace');
  * - $input ({}) {Object}: An object of settings passed to the SInput instance constructor
  *
  * @example       js
- * const SBlessedInputPopup = require('@coffeekraken/sugar/node/blessed/popup/SBlessedInputPopup');
+ * import SBlessedInputPopup from '@coffeekraken/sugar/node/blessed/popup/SBlessedInputPopup';
  * new SBlessedInputPopup({});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedInputPopup extends __SBlessedPopup {
+class SBlessedInputPopup extends SBlessedPopup_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -32,12 +35,12 @@ module.exports = class SBlessedInputPopup extends __SBlessedPopup {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        super(__deepMerge({
+        super(deepMerge_1.default({
             closeDelay: 500,
             $input: {}
         }, settings));
         // create an input
-        this.$input = new __SInput(this._settings.$input);
+        this.$input = new SInput_1.default(this._settings.$input);
         this.on('detach', () => {
             if (!this.$input.promise.isPending())
                 return;
@@ -55,4 +58,5 @@ module.exports = class SBlessedInputPopup extends __SBlessedPopup {
         super.update();
         this.height = this.$content.getScrollHeight() + 5;
     }
-};
+}
+exports.default = SBlessedInputPopup;

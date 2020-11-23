@@ -1,7 +1,11 @@
 "use strict";
-const __deepMerge = require('../../object/deepMerge');
-const __SDeamon = require('../SDeamon');
-const __SFsDeamonProcess = require('./SFsDeamonProcess');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const SDeamon_1 = __importDefault(require("../SDeamon"));
+const SFsDeamonProcess_1 = __importDefault(require("./SFsDeamonProcess"));
 /**
  * @name            SFsDeamon
  * @namespace       sugar.node.deamon.fs
@@ -18,7 +22,7 @@ const __SFsDeamonProcess = require('./SFsDeamonProcess');
  * - name (Unnamed SFsDeamon) {String}: A name for your watch instance
  *
  * @example       js
- * const SFsDeamon = require('@coffeekraken/sugar/node/deamon/fs/SFsDeamon');
+ * import SFsDeamon from '@coffeekraken/sugar/node/deamon/fs/SFsDeamon';
  * const deamon = new SFsDeamon({});
  * deamon.watch('/my/cool/path/*.js').on('update', file => {
  *    // do something
@@ -31,7 +35,7 @@ const __SFsDeamonProcess = require('./SFsDeamonProcess');
  * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFsDeamon extends __SDeamon {
+class SFsDeamon extends SDeamon_1.default {
     /**
      * @name          constructor
      * @type          Function
@@ -43,7 +47,7 @@ module.exports = class SFsDeamon extends __SDeamon {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        super(__deepMerge({
+        super(deepMerge_1.default({
             name: 'Unnamed SFsDeamon',
             id: 'SFsDeamon',
             updateStacks: ['update', 'add', 'unlink'],
@@ -86,9 +90,9 @@ module.exports = class SFsDeamon extends __SDeamon {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     watch(watch, settings = {}) {
-        settings = __deepMerge(this._settings, settings);
+        settings = deepMerge_1.default(this._settings, settings);
         watch = typeof watch === 'string' ? watch : watch.watch;
-        const watchProcess = new __SFsDeamonProcess();
+        const watchProcess = new SFsDeamonProcess_1.default();
         watchProcess.run({
             watch
         });
@@ -103,4 +107,5 @@ module.exports = class SFsDeamon extends __SDeamon {
         // return the current promise
         return super.watch(watchProcess);
     }
-};
+}
+exports.default = SFsDeamon;

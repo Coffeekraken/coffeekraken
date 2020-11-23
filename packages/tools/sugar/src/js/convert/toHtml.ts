@@ -7,6 +7,7 @@ import __htmlFromDocblocks from './html/htmlFromDocblocks';
  * @name            toHtml
  * @namespace       sugar.js.convert
  * @type            Function
+ * @wip
  *
  * Take a string as input and convert it to HTML.
  *
@@ -17,6 +18,9 @@ import __htmlFromDocblocks from './html/htmlFromDocblocks';
  * @param       {Object}          [settings={}]       An object of settings to configure your conversion process:
  * - from (null) {String}: Specify the type of the input string like "markdown", "dockblocks", and more coming...
  * @return      {String}                              The HTML converted result
+ *
+ * @todo        interface
+ * @todo        doc
  *
  * @example       js
  * import toHtml from '@coffeekraken/sugar/js/convert/toHtml';

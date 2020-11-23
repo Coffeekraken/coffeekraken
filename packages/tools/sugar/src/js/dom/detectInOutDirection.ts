@@ -4,6 +4,7 @@ import __SPromise from '../promise/SPromise';
  * @name      detectInOutDirection
  * @namespace           sugar.js.dom
  * @type      Function
+ * @wip
  *
  * Detect the mouse direction when entered on the passed element. The direction can be up, down, left or right and will be passed to the two callbacks available.
  * The first one is the `onIn` callback, and the second one is the `onOut`.
@@ -12,6 +13,10 @@ import __SPromise from '../promise/SPromise';
  * @param    {Function}    onIn    The onIn callback. The direction and the $elm will be passed to it
  * @param    {Function}    onOut    The onOut callback. The direction and the $elm will be passed to it
  * @return    {HTMLElement}    The $elm to maintain chainability
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example     js
  * import detectInOutDirection from '@coffeekraken/sugar/js/dom/detectInOutDirection'
@@ -27,6 +32,7 @@ import __SPromise from '../promise/SPromise';
  * // cancel the detection process
  * detect.cancel();
  *
+ * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function detectInOutDirection($elm) {
@@ -64,8 +70,8 @@ export default function detectInOutDirection($elm) {
 
 let oldX = 0,
   oldY = 0,
-  threshold = 0,
   direction = null;
+const threshold = 0;
 document.addEventListener('mousemove', (e) => {
   calculateDirection(e);
 });

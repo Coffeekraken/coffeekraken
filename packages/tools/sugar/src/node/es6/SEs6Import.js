@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const parse_es6_imports_1 = require("parse-es6-imports");
+const parse_es6_imports_1 = __importDefault(require("parse-es6-imports"));
 /**
  * @name            SEs6Import
  * @namespace       sugar.js.es6

@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const md5_1 = require("../crypt/md5");
+const md5_1 = __importDefault(require("../crypt/md5"));
 /**
  * @name            gravatarUrl
  * @namespace           sugar.js.url

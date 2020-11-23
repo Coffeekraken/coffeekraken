@@ -110,4 +110,4 @@ export default function argsToString(args, settings = {}) {
   });
 
   return cliArray.join(' ');
-};
+}

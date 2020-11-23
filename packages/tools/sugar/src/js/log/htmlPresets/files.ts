@@ -4,12 +4,18 @@ import __replaceTags from '../../html/replaceTags';
  * @name                              files
  * @namespace           sugar.js.log.htmlPresets
  * @type                              Function
+ * @wip
  *
  * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for the files
  *
  * @param                   {String}                      text                        The text to process
  * @return                  {String}                                                  The processed text ready for the terminal
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function files(text) {

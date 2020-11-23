@@ -80,7 +80,7 @@ export default function buildCommandLine(command, args = {}, settings = {}) {
       command = command.replace(token, '');
       return;
     }
-    let tokenValueString = __toString(tokenValue);
+    const tokenValueString = __toString(tokenValue);
     command = command.replace(token, tokenValueString);
   });
 

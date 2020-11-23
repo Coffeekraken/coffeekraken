@@ -1,19 +1,19 @@
 "use strict";
-import __fs from 'fs';
-import __find from 'find-in-files';
-import __path from 'path';
-import __writeJsonSync from '../../node/fs/writeJsonSync';
-import __writeFileSync from '../../node/fs/writeFileSync';
-import __set from '../../node/object/set';
-import __parse from '../../node/docblock/parse';
-import __deepMerge from '../../node/object/deepMerge';
-import __upperFirst from '../../node/string/upperFirst';
-import __appRootPath from 'app-root-path';
-import __findPkgJson from 'find-package-json';
-import __parseArgs from '../../node/cli/parseArgs';
-
-export default async (stringArgs = '') => {
-    const f = __findPkgJson(__dirname);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = __importDefault(require("fs"));
+const find_in_files_1 = __importDefault(require("find-in-files"));
+const path_1 = __importDefault(require("path"));
+const writeFileSync_1 = __importDefault(require("../../node/fs/writeFileSync"));
+const parse_1 = __importDefault(require("../../node/docblock/parse"));
+const deepMerge_1 = __importDefault(require("../../node/object/deepMerge"));
+const upperFirst_1 = __importDefault(require("../../node/string/upperFirst"));
+const find_package_json_1 = __importDefault(require("find-package-json"));
+const parseArgs_1 = __importDefault(require("../../node/cli/parseArgs"));
+exports.default = async (stringArgs = '') => {
+    const f = find_package_json_1.default(__dirname);
     let file = f.next();
     let finalFile, rootPath;
     while (!file.done) {
@@ -25,7 +25,7 @@ export default async (stringArgs = '') => {
     if (finalFile.filename) {
         rootPath = finalFile.filename.split('/').slice(0, -1).join('/');
     }
-    const args = __parseArgs(stringArgs, {
+    const args = parseArgs_1.default(stringArgs, {
         definitionObj: {
             language: {
                 type: 'String',
@@ -44,7 +44,7 @@ export default async (stringArgs = '') => {
     const snippetScope = args.language === 'js' ? 'javascript' : args.language;
     const snippetsObj = {};
     const filepathesProcessed = [];
-    const files = await __find.find('@namespace', `${__dirname}/../../${args.language}`, '.js$');
+    const files = await find_in_files_1.default.find('@namespace', `${__dirname}/../../${args.language}`, '.js$');
     for (let i = 0; i < Object.keys(files).length; i++) {
         const filepath = Object.keys(files)[i];
         if (filepath.includes('__wip__'))
@@ -56,10 +56,10 @@ export default async (stringArgs = '') => {
         if (filepath.includes('generateSnippetsFile'))
             continue;
         filepathesProcessed.push(filepath);
-        let fileContent = __fs.readFileSync(filepath).toString();
+        let fileContent = fs_1.default.readFileSync(filepath).toString();
         let fileNamespace;
-        let docObjs = __parse(fileContent);
-        const folderPath = __path
+        let docObjs = parse_1.default(fileContent);
+        const folderPath = path_1.default
             .relative(__dirname, filepath)
             .split('/')
             .slice(0, -1);
@@ -69,15 +69,15 @@ export default async (stringArgs = '') => {
         // check if the file has a @src tag in the forst block
         const firstBlock = docObjs[0];
         if (firstBlock.src) {
-            const relativeSrcPath = __path.resolve(__dirname, firstBlock.src.replace('../'.repeat(folderPath.length), ''));
+            const relativeSrcPath = path_1.default.resolve(__dirname, firstBlock.src.replace('../'.repeat(folderPath.length), ''));
             // read the source path
-            let srcContent = __fs.readFileSync(relativeSrcPath).toString();
+            let srcContent = fs_1.default.readFileSync(relativeSrcPath).toString();
             // if we have a content, parse it
             if (srcContent) {
-                const srcDocObjs = __parse(srcContent);
+                const srcDocObjs = parse_1.default(srcContent);
                 srcDocObjs.forEach((srcDocObj, i) => {
                     if (i === 0) {
-                        docObjs[0] = __deepMerge(srcDocObj, firstBlock);
+                        docObjs[0] = deepMerge_1.default(srcDocObj, firstBlock);
                         delete docObjs[0].src;
                     }
                     else {
@@ -98,13 +98,13 @@ export default async (stringArgs = '') => {
             let body;
             if (!docObj.snippet) {
                 if (docObj.type === 'Class') {
-                    body = `new ${__upperFirst(namespace)}.${docObj.name}(`;
+                    body = `new ${upperFirst_1.default(namespace)}.${docObj.name}(`;
                 }
                 else if (docObj.type === 'Function') {
-                    body = `${__upperFirst(namespace)}.${docObj.name}(`;
+                    body = `${upperFirst_1.default(namespace)}.${docObj.name}(`;
                 }
                 else {
-                    body = `${__upperFirst(namespace)}.${docObj.name}`;
+                    body = `${upperFirst_1.default(namespace)}.${docObj.name}`;
                 }
                 if (docObj.param) {
                     const paramsStringArray = [];
@@ -133,18 +133,18 @@ export default async (stringArgs = '') => {
             // build the snippet object
             const snippet = {
                 scope: snippetScope,
-                prefix: `${__upperFirst(namespace)}.${docObj.name}`,
+                prefix: `${upperFirst_1.default(namespace)}.${docObj.name}`,
                 body,
                 description
             };
             // add this snippet to the snippets object
-            snippetsObj[`${__upperFirst(namespace)}.${docObj.name}`] = snippet;
+            snippetsObj[`${upperFirst_1.default(namespace)}.${docObj.name}`] = snippet;
         });
     }
     // write the file
     if (args.destination) {
         try {
-            __writeFileSync(args.destination, JSON.stringify(snippetsObj, null, 4));
+            writeFileSync_1.default(args.destination, JSON.stringify(snippetsObj, null, 4));
         }
         catch (e) {
             console.log(e);

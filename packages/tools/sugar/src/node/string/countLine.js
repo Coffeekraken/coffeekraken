@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = require("../object/deepMerge");
-const strip_ansi_1 = require("strip-ansi");
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const strip_ansi_1 = __importDefault(require("strip-ansi"));
 /**
  * @name                                  countLine
  * @namespace           sugar.js.string
@@ -18,12 +21,12 @@ const strip_ansi_1 = require("strip-ansi");
  * @return          {Number}                                How many characters their is in the line
  *
  * @example         js
- * const countLine = require('@coffeekraken/sugar/js/string/countLine');
+ * import countLine from '@coffeekraken/sugar/js/string/countLine';
  * countLine('Hello <red>World</red>'); // 11
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function countLine(line, count = {}) {
+function countLine(line, count = {}) {
     count = deepMerge_1.default({
         htmlTags: false,
         terminalSpecialChars: false,
@@ -40,4 +43,5 @@ module.exports = function countLine(line, count = {}) {
         newLine = newLine.replace('\n', '');
     }
     return newLine.length;
-};
+}
+exports.default = countLine;

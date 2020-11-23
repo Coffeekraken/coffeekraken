@@ -1,5 +1,9 @@
 "use strict";
-const __parseHtml = require('./parseHtml');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const parseHtml_1 = __importDefault(require("./parseHtml"));
 // TODO tests
 /**
  * @name                                parseMarkdown
@@ -13,7 +17,7 @@ const __parseHtml = require('./parseHtml');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function parseMarkdown(message) {
+function parseMarkdown(message) {
     let isArray = false;
     if (Array.isArray(message)) {
         isArray = true;
@@ -47,9 +51,11 @@ module.exports = function parseMarkdown(message) {
         if (m.match(/^#warn\s/)) {
             m = `<iWarn/> ${m.replace(/^#warn\s/, '')}`;
         }
-        return __parseHtml(m.trim());
+        return parseHtml_1.default(m.trim());
     });
     if (isArray)
         return message;
     return message[0];
-};
+}
+exports.default = parseMarkdown;
+;

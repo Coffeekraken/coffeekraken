@@ -1,5 +1,9 @@
 "use strict";
-const __isPath = require('./isPath');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const isPath_1 = __importDefault(require("./isPath"));
 /**
  * @name                folderPath
  * @namespace           sugar.node.fs
@@ -14,15 +18,15 @@ const __isPath = require('./isPath');
  * @return          {String|Boolean}                    The folder path or false if not exists
  *
  * @example         js
- * const folderPath = require('@coffeekraken/sugar/node/fs/folderPath');
+ * import folderPath from '@coffeekraken/sugar/node/fs/folderPath';
  * folderPath('my/cool/path.js'); // => true
  *
  * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function folderPath(path, checkExistence = false) {
+function folderPath(path, checkExistence = false) {
     if (checkExistence) {
-        if (!__isPath(path, true))
+        if (!isPath_1.default(path, true))
             return false;
     }
     const parts = path.split('/');
@@ -30,4 +34,5 @@ module.exports = function folderPath(path, checkExistence = false) {
         return '';
     }
     return parts.slice(0, -1).join('/');
-};
+}
+exports.default = folderPath;

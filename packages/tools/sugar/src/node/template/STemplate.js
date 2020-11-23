@@ -1,13 +1,17 @@
 "use strict";
-const __unique = require('../array/unique');
-const __deepMerge = require('../object/deepMerge');
-const __sugarConfig = require('../config/sugar');
-const __path = require('path');
-const __fs = require('fs');
-const __SError = require('../error/SError');
-const __glob = require('glob');
-const __STemplateEngine = require('./engines/STemplateEngine');
-const __SPromise = require('../promise/SPromise');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const unique_1 = __importDefault(require("../array/unique"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const sugar_1 = __importDefault(require("../config/sugar"));
+const path_1 = __importDefault(require("path"));
+const fs_1 = __importDefault(require("fs"));
+const SError_1 = __importDefault(require("../error/SError"));
+const glob_1 = __importDefault(require("glob"));
+const STemplateEngine_1 = __importDefault(require("./engines/STemplateEngine"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
 /**
  * @name          STemplate
  * @namespace     sugar.node.template
@@ -26,7 +30,7 @@ const __SPromise = require('../promise/SPromise');
  * - defaultData ({}) {Object}: A data object to use by default when calling the ```render``` method. Can be overrided obviously in the ```render``` method
  *
  * @example       js
- * const STemplate = require('@coffeekraken/sugar/node/template/STemplate');
+ * import STemplate from '@coffeekraken/sugar/node/template/STemplate';
  * const myTemplate = new STemplate('my.cool.view', {
  *    title: 'Hello'
  * }, {
@@ -98,7 +102,7 @@ class STemplate {
          */
         this._engineInstance = null;
         // save the settings
-        this._settings = __deepMerge({
+        this._settings = deepMerge_1.default({
             id: 'STemplate',
             rootDirs: [],
             engine: null,
@@ -110,16 +114,16 @@ class STemplate {
             viewPathOrTemplateString = viewPathOrTemplateString.replace(`.${ext}`, '');
         });
         // if the "engine" setting is an instance, save it as engineInstance
-        if (this._settings.engine instanceof __STemplateEngine) {
+        if (this._settings.engine instanceof STemplateEngine_1.default) {
             this._engineInstance = this._settings.engine;
         }
         // detect and save the view doted path or the view template string
         if (viewPathOrTemplateString.split(' ').length === 1 &&
             viewPathOrTemplateString.trim() === viewPathOrTemplateString) {
             // check if we can find the view path passed
-            if (__path.isAbsolute(viewPathOrTemplateString)) {
-                if (!__fs.existsSync(viewPathOrTemplateString)) {
-                    throw new __SError(`Sorry but the absolute path to the view "<cyan>${viewPathOrTemplateString}</cyan>" does not exist...`);
+            if (path_1.default.isAbsolute(viewPathOrTemplateString)) {
+                if (!fs_1.default.existsSync(viewPathOrTemplateString)) {
+                    throw new SError_1.default(`Sorry but the absolute path to the view "<cyan>${viewPathOrTemplateString}</cyan>" does not exist...`);
                 }
                 this._viewPath = viewPathOrTemplateString;
             }
@@ -130,7 +134,7 @@ class STemplate {
                     const viewPath = `${rootDir}/${viewPathOrTemplateString
                         .split('.')
                         .join('/')}.[!data]*`;
-                    const matches = __glob.sync(viewPath);
+                    const matches = glob_1.default.sync(viewPath);
                     if (matches && matches.length) {
                         this._viewPath = matches[0];
                         const extension = this._viewPath.split('.').slice(1).join('.');
@@ -140,7 +144,7 @@ class STemplate {
                     }
                 }
                 if (!this._viewPath) {
-                    throw new __SError(`Sorry but the passed dot path "<cyan>${viewPathOrTemplateString}</cyan>" does not resolve to any existing views...`);
+                    throw new SError_1.default(`Sorry but the passed dot path "<cyan>${viewPathOrTemplateString}</cyan>" does not resolve to any existing views...`);
                 }
             }
             else {
@@ -163,7 +167,7 @@ class STemplate {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static getRootDirs(rootDirs = []) {
-        return __unique([
+        return unique_1.default([
             ...(Array.isArray(rootDirs) ? rootDirs : [rootDirs]),
             ...STemplate.defaultRootDirs
         ]);
@@ -186,8 +190,8 @@ class STemplate {
         if (enginePath.slice(-3) !== '.js')
             enginePath += '.js';
         // make sure the engine path exists
-        if (!__fs.existsSync(enginePath)) {
-            throw new __SError(`Sorry but the engine "<yellow>${extension}</yellow>" that you want to register using the path "<cyan>${enginePath}</cyan>" does not exists...`);
+        if (!fs_1.default.existsSync(enginePath)) {
+            throw new SError_1.default(`Sorry but the engine "<yellow>${extension}</yellow>" that you want to register using the path "<cyan>${enginePath}</cyan>" does not exists...`);
         }
         // register the engine in the stack
         STemplate.engines[extension] = enginePath;
@@ -210,8 +214,8 @@ class STemplate {
         if (handlerPath.slice(-3) !== '.js')
             handlerPath += '.js';
         // make sure the engine path exists
-        if (!__fs.existsSync(handlerPath)) {
-            throw new __SError(`Sorry but the data handler "<yellow>${extension}</yellow>" that you want to register using the path "<cyan>${handlerPath}</cyan>" does not exists...`);
+        if (!fs_1.default.existsSync(handlerPath)) {
+            throw new SError_1.default(`Sorry but the data handler "<yellow>${extension}</yellow>" that you want to register using the path "<cyan>${handlerPath}</cyan>" does not exists...`);
         }
         // register the engine in the stack
         STemplate.dataHandlers[extension] = handlerPath;
@@ -232,13 +236,13 @@ class STemplate {
      * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static getViewInfo(viewPath) {
-        const viewsDir = __sugarConfig('views.rootDir');
+        const viewsDir = sugar_1.default('views.rootDir');
         let path = `${viewsDir}/${viewPath}`;
-        if (__path.isAbsolute(viewPath)) {
+        if (path_1.default.isAbsolute(viewPath)) {
             path = viewPath;
         }
         let finalViewPath, viewType;
-        if (__fs.existsSync(path)) {
+        if (fs_1.default.existsSync(path)) {
             finalViewPath = path;
             const fileName = path.split('/').slice(-1).join('');
             viewType = fileName.split('.').slice(1).join('.');
@@ -246,7 +250,7 @@ class STemplate {
         else {
             for (let i = 0; i < Object.keys(STemplate.engines).length; i++) {
                 const engineExt = Object.keys(STemplate.engines)[i];
-                if (__fs.existsSync(`${path}.${engineExt}`)) {
+                if (fs_1.default.existsSync(`${path}.${engineExt}`)) {
                     finalViewPath = `${path}.${engineExt}`;
                     viewType = engineExt;
                     break;
@@ -259,7 +263,7 @@ class STemplate {
         // build the info object
         const infoObj = {
             path: finalViewPath,
-            relPath: __path.relative(viewsDir, finalViewPath),
+            relPath: path_1.default.relative(viewsDir, finalViewPath),
             type: viewType
         };
         // return the infos
@@ -280,9 +284,9 @@ class STemplate {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     render(data = {}, settings = {}) {
-        return new __SPromise(async (resolve, reject, trigger, cancel) => {
-            settings = __deepMerge(this._settings, settings);
-            data = __deepMerge(settings.defaultData, data);
+        return new SPromise_1.default(async (resolve, reject, trigger, cancel) => {
+            settings = deepMerge_1.default(this._settings, settings);
+            data = deepMerge_1.default(settings.defaultData, data);
             if (this._templateString) {
                 if (!settings.engine) {
                     // loop on the engines to get the better one
@@ -296,13 +300,13 @@ class STemplate {
                         }
                     }
                 }
-                else if (this._settings.engine instanceof __STemplateEngine) {
+                else if (this._settings.engine instanceof STemplateEngine_1.default) {
                     if (!settings.engine.constructor.canRender(this._templateString)) {
-                        throw new __SError(`It seems that you've passed directly an __STemplateEngine engine as the settings.engine option but this engine cannot render your passed template string...`);
+                        throw new SError_1.default(`It seems that you've passed directly an __STemplateEngine engine as the settings.engine option but this engine cannot render your passed template string...`);
                     }
                 }
                 if (!settings.engine) {
-                    throw new __SError(`Sorry but it seems that the passed template string cannot be rendered using any of the available engines:\n- ${Object.keys(STemplate.engines)
+                    throw new SError_1.default(`Sorry but it seems that the passed template string cannot be rendered using any of the available engines:\n- ${Object.keys(STemplate.engines)
                         .map((l) => {
                         return `<yellow>${l}</yellow>`;
                     })
@@ -316,7 +320,7 @@ class STemplate {
                 Object.keys(STemplate.dataHandlers).forEach((extension) => {
                     if (dataHandlerFn)
                         return;
-                    if (__fs.existsSync(`${viewPathWithoutExtension}.${extension}`)) {
+                    if (fs_1.default.existsSync(`${viewPathWithoutExtension}.${extension}`)) {
                         dataFilePath = `${viewPathWithoutExtension}.${extension}`;
                         dataHandlerFn = require(STemplate.dataHandlers[extension]);
                     }
@@ -324,7 +328,7 @@ class STemplate {
                 // check if we have a data file
                 if (dataFilePath && dataHandlerFn) {
                     const dataObj = await dataHandlerFn(dataFilePath);
-                    data = __deepMerge(dataObj, data);
+                    data = deepMerge_1.default(dataObj, data);
                 }
             }
             if (!this._engineInstance) {
@@ -380,15 +384,15 @@ STemplate.dataHandlers = {};
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 STemplate.defaultRootDirs = [
-    __sugarConfig('views.rootDir'),
-    __path.resolve(__dirname, '../../php/views/blade')
+    sugar_1.default('views.rootDir'),
+    path_1.default.resolve(__dirname, '../../php/views/blade')
 ];
-const defaultEngines = __sugarConfig('views.engines') || {};
+const defaultEngines = sugar_1.default('views.engines') || {};
 Object.keys(defaultEngines).forEach((extension) => {
     STemplate.registerEngine(extension, defaultEngines[extension]);
 });
-const defaultDataHandlers = __sugarConfig('views.dataHandlers') || {};
+const defaultDataHandlers = sugar_1.default('views.dataHandlers') || {};
 Object.keys(defaultDataHandlers).forEach((extension) => {
     STemplate.registerDataHandler(extension, defaultDataHandlers[extension]);
 });
-module.exports = STemplate;
+exports.default = STemplate;

@@ -1,9 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const proxy_1 = require("../array/proxy");
-const deepMap_1 = require("../object/deepMap");
-const clone_1 = require("../object/clone");
-const deepMerge_1 = require("../object/deepMerge");
+const proxy_1 = __importDefault(require("../array/proxy"));
+const deepMap_1 = __importDefault(require("../object/deepMap"));
+const clone_1 = __importDefault(require("../object/clone"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name                            deepProxy
  * @namespace           sugar.js.object

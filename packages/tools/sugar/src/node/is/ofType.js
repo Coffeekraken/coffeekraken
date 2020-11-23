@@ -1,9 +1,14 @@
-import __parseTypeDefinitionString from '../validation/utils/parseTypeDefinitionString';
-import __isClass from './class';
-import __isInt from './integer';
-import __typeof from '../value/typeof';
-import __typeDefinitionArrayObjectToString from '../value/typeDefinitionArrayObjectToString';
-import __getExtendsStack from '../class/getExtendsStack';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const parseTypeDefinitionString_1 = __importDefault(require("../validation/utils/parseTypeDefinitionString"));
+const class_1 = __importDefault(require("./class"));
+const integer_1 = __importDefault(require("./integer"));
+const typeof_1 = __importDefault(require("../value/typeof"));
+const typeDefinitionArrayObjectToString_1 = __importDefault(require("../value/typeDefinitionArrayObjectToString"));
+const getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
 /**
  * @name              ofType
  * @namespace           sugar.js.is
@@ -26,20 +31,20 @@ import __getExtendsStack from '../class/getExtendsStack';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ofType(value, argTypeDefinition) {
+function ofType(value, argTypeDefinition) {
     let definitionArray = argTypeDefinition;
     // parsing the argument definition string
     if (typeof argTypeDefinition === 'string') {
-        definitionArray = __parseTypeDefinitionString(argTypeDefinition);
+        definitionArray = parseTypeDefinitionString_1.default(argTypeDefinition);
     }
-    const typeOfValue = __typeof(value);
+    const typeOfValue = typeof_1.default(value);
     const issueObj = {
         $received: {
-            type: __typeof(value, { of: true }),
+            type: typeof_1.default(value, { of: true }),
             value
         },
         $expected: {
-            type: __typeDefinitionArrayObjectToString(definitionArray)
+            type: typeDefinitionArrayObjectToString_1.default(definitionArray)
         },
         $issues: ['type']
     };
@@ -73,7 +78,7 @@ export default function ofType(value, argTypeDefinition) {
                     if (ofType(valueToCheck, definitionObj.of) !== true) {
                         checkValuesResult = false;
                     }
-                    const typeString = __typeof(valueToCheck);
+                    const typeString = typeof_1.default(valueToCheck);
                     if (receivedTypes.indexOf(typeString) === -1) {
                         receivedTypes.push(typeString);
                     }
@@ -87,12 +92,12 @@ export default function ofType(value, argTypeDefinition) {
         }
         // Class
         else if (definitionObj.type === 'Class') {
-            if (__isClass(value))
+            if (class_1.default(value))
                 return true;
         }
         // Integer
         else if (definitionObj.type === 'Int' || definitionObj.type === 'Integer') {
-            if (__isInt(value))
+            if (integer_1.default(value))
                 return true;
         }
         // check default types
@@ -108,10 +113,10 @@ export default function ofType(value, argTypeDefinition) {
             }
         }
         // check for "custom" types
-        else if (__isClass(value) && value.name) {
-            if (__typeof(value) === definitionObj.type)
+        else if (class_1.default(value) && value.name) {
+            if (typeof_1.default(value) === definitionObj.type)
                 return true;
-            const classesStack = __getExtendsStack(value);
+            const classesStack = getExtendsStack_1.default(value);
             if (classesStack.indexOf(definitionObj.type) !== -1)
                 return true;
         }
@@ -122,6 +127,7 @@ export default function ofType(value, argTypeDefinition) {
     }
     return issueObj;
 }
+exports.default = ofType;
 function getBaseClass(targetClass) {
     const stack = [];
     if (targetClass instanceof Function) {

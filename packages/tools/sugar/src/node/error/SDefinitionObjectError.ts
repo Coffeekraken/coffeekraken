@@ -1,1 +1,0 @@
-../../../js/error/SDefinitionObjectError.ts

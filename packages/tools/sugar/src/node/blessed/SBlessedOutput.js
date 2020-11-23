@@ -1,19 +1,21 @@
 "use strict";
-const __packageRoot = require('../path/packageRoot');
-const __deepMerge = require('../object/deepMerge');
-const __blessed = require('blessed');
-const __color = require('../color/color');
-const __SBlessedComponent = require('./SBlessedComponent');
-const __parseMarkdown = require('../terminal/parseMarkdown');
-const __isChildProcess = require('../is/childProcess');
-const __parse = require('../string/parse');
-const __toString = require('../string/toString');
-const __stripAnsi = require('strip-ansi');
-const __trimLines = require('../string/trimLines');
-const __extractValues = require('../object/extractValues');
-const __SOutputLogInterface = require('./interface/SOutputLogInterface');
-const __SOutputSourceInterface = require('./interface/SOutputSourceInterface');
-const __wait = require('../time/wait');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const blessed_1 = __importDefault(require("blessed"));
+const color_1 = __importDefault(require("../color/color"));
+const SBlessedComponent_1 = __importDefault(require("./SBlessedComponent"));
+const parseMarkdown_1 = __importDefault(require("../terminal/parseMarkdown"));
+const childProcess_1 = __importDefault(require("../is/childProcess"));
+const parse_1 = __importDefault(require("../string/parse"));
+const toString_1 = __importDefault(require("../string/toString"));
+const strip_ansi_1 = __importDefault(require("strip-ansi"));
+const trimLines_1 = __importDefault(require("../string/trimLines"));
+const extractValues_1 = __importDefault(require("../object/extractValues"));
+const SOutputLogInterface_1 = __importDefault(require("./interface/SOutputLogInterface"));
+const SOutputSourceInterface_1 = __importDefault(require("./interface/SOutputSourceInterface"));
 /**
  * @name                  SOutput
  * @namespace           sugar.node.blessed
@@ -32,14 +34,14 @@ const __wait = require('../time/wait');
  * @todo        Listen for errors and display them correctly
  *
  * @example         js
- * const SOutput = require('@coffeekraken/sugar/node/terminal/SOutput');
+ * import SOutput from '@coffeekraken/sugar/node/terminal/SOutput';
  * const myPanel = new SOutput(myProcess, {
  *    screen: true
  * });
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SOutput extends __SBlessedComponent {
+class SOutput extends SBlessedComponent_1.default {
     /**
      * @name          constructor
      * @type          Function
@@ -50,7 +52,7 @@ module.exports = class SOutput extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(source, settings = {}) {
-        const _settings = __deepMerge({
+        const _settings = deepMerge_1.default({
             filter: null,
             maxItems: -1,
             maxItemsByGroup: 1,
@@ -151,7 +153,7 @@ module.exports = class SOutput extends __SBlessedComponent {
         if (!Array.isArray(source))
             source = [source];
         source.forEach((s) => {
-            __SOutputSourceInterface.apply(s, {
+            SOutputSourceInterface_1.default.apply(s, {
                 title: 'SOutput source issue',
                 description: 'One of the passed "source" for the SOutput class does not answer the minimal requirements of the "SOutputSourceInterface"...'
             });
@@ -179,8 +181,8 @@ module.exports = class SOutput extends __SBlessedComponent {
         });
     }
     clear() {
-        if (__isChildProcess()) {
-            console.log(__toString({
+        if (childProcess_1.default()) {
+            console.log(toString_1.default({
                 clear: true
             }));
         }
@@ -212,7 +214,7 @@ module.exports = class SOutput extends __SBlessedComponent {
     }
     _processMarkdown(content) {
         content = content.trim();
-        content = __parseMarkdown(content);
+        content = parseMarkdown_1.default(content);
         return content;
     }
     /**
@@ -238,20 +240,20 @@ module.exports = class SOutput extends __SBlessedComponent {
                     if (log.trim() === '')
                         return;
                     log = log.trim();
-                    const parsedLog = __parse(log);
+                    const parsedLog = parse_1.default(log);
                     if (typeof parsedLog === 'object' &&
                         parsedLog.value &&
                         typeof parsedLog.value === 'string') {
-                        parsedLog = __SOutputLogInterface.applyAndComplete(parsedLog);
+                        parsedLog = SOutputLogInterface_1.default.applyAndComplete(parsedLog);
                         logsArray.push(parsedLog);
                     }
                     else if (typeof parsedLog === 'string') {
                         if (parsedLog.includes(' -v ') || parsedLog.includes(' --value ')) {
-                            const args = __SOutputLogInterface.parseAndComplete(parsedLog);
+                            const args = SOutputLogInterface_1.default.parseAndComplete(parsedLog);
                             logsArray.push(args);
                         }
                         else {
-                            const args = __SOutputLogInterface.complete({
+                            const args = SOutputLogInterface_1.default.complete({
                                 value: parsedLog
                             });
                             logsArray.push(args);
@@ -259,7 +261,7 @@ module.exports = class SOutput extends __SBlessedComponent {
                     }
                     else {
                         logsArray.push({
-                            value: __toString(parsedLog, {
+                            value: toString_1.default(parsedLog, {
                                 beautify: true
                             })
                         });
@@ -270,17 +272,17 @@ module.exports = class SOutput extends __SBlessedComponent {
                 data.value &&
                 typeof data.value === 'string') {
                 // apply the interface
-                data = __SOutputLogInterface.applyAndComplete(data);
+                data = SOutputLogInterface_1.default.applyAndComplete(data);
                 const splitedLogs = data.value.split(/⠀/);
                 splitedLogs.forEach((log) => {
                     if (log.trim() === '')
                         return;
                     log = log.trim();
-                    const parsedLog = __parse(log);
+                    const parsedLog = parse_1.default(log);
                     if (typeof parsedLog === 'object' &&
                         parsedLog.value &&
                         typeof parsedLog.value === 'string') {
-                        __SOutputLogInterface.apply(parsedLog);
+                        SOutputLogInterface_1.default.apply(parsedLog);
                         logsArray.push({
                             ...data,
                             ...parsedLog
@@ -288,7 +290,7 @@ module.exports = class SOutput extends __SBlessedComponent {
                     }
                     else if (typeof parsedLog === 'string') {
                         if (parsedLog.includes(' -v ') || parsedLog.includes(' --value ')) {
-                            const args = __SOutputLogInterface.parseAndComplete(parsedLog);
+                            const args = SOutputLogInterface_1.default.parseAndComplete(parsedLog);
                             logsArray.push({
                                 ...data,
                                 ...args
@@ -303,7 +305,7 @@ module.exports = class SOutput extends __SBlessedComponent {
                     }
                     else {
                         logsArray.push({
-                            value: __toString(parsedLog, {
+                            value: toString_1.default(parsedLog, {
                                 beautify: true
                             })
                         });
@@ -312,7 +314,7 @@ module.exports = class SOutput extends __SBlessedComponent {
             }
             else {
                 logsArray.push({
-                    value: __toString(data, {
+                    value: toString_1.default(data, {
                         beautify: true
                     })
                 });
@@ -330,7 +332,7 @@ module.exports = class SOutput extends __SBlessedComponent {
                 hash = hash.replace('#', '');
                 const splits = hash.split(':');
                 const prop = splits[0].trim();
-                const value = __parse(splits[1] || true);
+                const value = parse_1.default(splits[1] || true);
                 logObj[prop] = value;
             });
             return logObj;
@@ -370,18 +372,18 @@ module.exports = class SOutput extends __SBlessedComponent {
             if (!logObj) {
                 return;
             }
-            if (__isChildProcess()) {
-                console.log(__toString(logObj));
+            if (childProcess_1.default()) {
+                console.log(toString_1.default(logObj));
                 return;
             }
-            const toStringValue = __toString(logObj.value);
+            const toStringValue = toString_1.default(logObj.value);
             if (logObj.value.includes('[?1049h')) {
                 logObj.value = logObj.value.slice(40);
             } // ugly hack that need to be checked...
-            if (__stripAnsi(logObj.value).trim().length === 0)
+            if (strip_ansi_1.default(logObj.value).trim().length === 0)
                 return;
             if (typeof logObj.value !== 'string')
-                logObj.value = __toString(logObj.value);
+                logObj.value = toString_1.default(logObj.value);
             // replace the package root in the log
             // logObj.value = logObj.value.split(`${__packageRoot()}/`).join('');
             // if (logObj.module && typeof logObj.module === 'object') {
@@ -447,7 +449,7 @@ module.exports = class SOutput extends __SBlessedComponent {
         this.update();
     }
     update() {
-        if (__isChildProcess())
+        if (childProcess_1.default())
             return;
         // if (!this.allowRender()) return;
         if (!this.isDisplayed())
@@ -472,12 +474,12 @@ module.exports = class SOutput extends __SBlessedComponent {
                     else {
                         contentArray = item.content;
                     }
-                    const logsString = __extractValues(contentArray, 'value')
+                    const logsString = extractValues_1.default(contentArray, 'value')
                         .map((l) => {
-                        return __parseMarkdown(l);
+                        return parseMarkdown_1.default(l);
                     })
                         .join('\n');
-                    item.$box.setContent(__trimLines(`${item.$box.title}
+                    item.$box.setContent(trimLines_1.default(`${item.$box.title}
                ${logsString}`));
                     item.$box.height = logsString.split('\n').length + 1;
                     item.$box.$line.height = logsString.split('\n').length + 1;
@@ -574,7 +576,7 @@ module.exports = class SOutput extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _simpleTextBox(text) {
-        const $box = __blessed.box({
+        const $box = blessed_1.default.box({
             width: this.$logBox.width -
                 this.$logBox.padding.left -
                 this.$logBox.padding.right,
@@ -589,7 +591,7 @@ module.exports = class SOutput extends __SBlessedComponent {
                 right: 0,
                 bottom: 0
             },
-            content: __parseMarkdown(text)
+            content: parseMarkdown_1.default(text)
         });
         // const $line = __blessed.box({
         //   width: 1,
@@ -624,7 +626,7 @@ module.exports = class SOutput extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _errorTextBox(text) {
-        const $box = __blessed.box({
+        const $box = blessed_1.default.box({
             width: this.$logBox.width -
                 this.$logBox.padding.left -
                 this.$logBox.padding.right,
@@ -639,16 +641,16 @@ module.exports = class SOutput extends __SBlessedComponent {
                 right: 0,
                 bottom: 0
             },
-            content: __parseMarkdown(text)
+            content: parseMarkdown_1.default(text)
         });
-        const $line = __blessed.box({
+        const $line = blessed_1.default.box({
             width: 1,
             height: 1,
             top: 0,
             left: $box.padding.left * -1,
             bottom: 0,
             style: {
-                bg: __color('terminal.red').toString()
+                bg: color_1.default('terminal.red').toString()
             }
         });
         $box.on('attach', () => {
@@ -675,7 +677,7 @@ module.exports = class SOutput extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _warningTextBox(text) {
-        const $box = __blessed.box({
+        const $box = blessed_1.default.box({
             width: this.$logBox.width -
                 this.$logBox.padding.left -
                 this.$logBox.padding.right,
@@ -690,16 +692,16 @@ module.exports = class SOutput extends __SBlessedComponent {
                 right: 0,
                 bottom: 0
             },
-            content: __parseMarkdown(text)
+            content: parseMarkdown_1.default(text)
         });
-        const $line = __blessed.box({
+        const $line = blessed_1.default.box({
             width: 1,
             height: 1,
             top: 0,
             left: $box.padding.left * -1,
             bottom: 0,
             style: {
-                bg: __color('terminal.yellow').toString()
+                bg: color_1.default('terminal.yellow').toString()
             }
         });
         $box.on('attach', () => {
@@ -726,7 +728,7 @@ module.exports = class SOutput extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _groupBox(group, textsArray) {
-        const $box = __blessed.box({
+        const $box = blessed_1.default.box({
             width: this.$logBox.width -
                 this.$logBox.padding.left -
                 this.$logBox.padding.right,
@@ -743,7 +745,7 @@ module.exports = class SOutput extends __SBlessedComponent {
             }
         });
         const color = group.toLowerCase().includes('error') ? 'red' : 'yellow';
-        const title = __parseMarkdown(group.toLowerCase().includes('error')
+        const title = parseMarkdown_1.default(group.toLowerCase().includes('error')
             ? `<red>${group}</red>`
             : `<yellow>${group}</yellow>`);
         $box.title = title;
@@ -761,7 +763,7 @@ module.exports = class SOutput extends __SBlessedComponent {
         //   ${__parseMarkdown(logsString)}`)
         //   );
         // }
-        const $line = __blessed.box({
+        const $line = blessed_1.default.box({
             width: 1,
             height: 1,
             top: 0,
@@ -799,7 +801,7 @@ module.exports = class SOutput extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _createHeaderBox(logObj) {
-        this.$headerBox = __blessed.box({
+        this.$headerBox = blessed_1.default.box({
             width: 'shrink',
             height: 8,
             top: 0,
@@ -818,7 +820,7 @@ module.exports = class SOutput extends __SBlessedComponent {
             //   fg: __color('terminal.primary').toString()
             // },
             },
-            content: __parseMarkdown(logObj.value),
+            content: parseMarkdown_1.default(logObj.value),
             padding: {
                 top: 1,
                 left: 1,
@@ -826,7 +828,7 @@ module.exports = class SOutput extends __SBlessedComponent {
                 bottom: 1
             }
         });
-        const $line = __blessed.box({
+        const $line = blessed_1.default.box({
             height: 1,
             bottom: -1,
             left: 0,
@@ -860,7 +862,7 @@ module.exports = class SOutput extends __SBlessedComponent {
         //   this.$logBox.destroy();
         //   this.$logBox = null;
         // }
-        this.$logBox = __blessed.box({
+        this.$logBox = blessed_1.default.box({
             // width: '100%-4',
             top: 0,
             left: 0,
@@ -876,7 +878,7 @@ module.exports = class SOutput extends __SBlessedComponent {
             },
             style: {
                 scrollbar: {
-                    bg: __color('terminal.primary').toString()
+                    bg: color_1.default('terminal.primary').toString()
                 }
             },
             padding: {
@@ -888,4 +890,5 @@ module.exports = class SOutput extends __SBlessedComponent {
         });
         this.append(this.$logBox);
     }
-};
+}
+exports.default = SOutput;

@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const env_1 = require("../core/env");
+const env_1 = __importDefault(require("../core/env"));
 /**
  * @name          testEnv
  * @namespace     sugar.js.is

@@ -4,12 +4,17 @@ import __matches from './matches';
  * @name      next
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Browse the passed element next siblings to find the first element that matches the passed selector
  *
  * @param 		{HTMLElement} 					elm  		The element to start on
  * @param 		{String} 						selector 	A css selector to search for
  * @return 		{HTMLElement} 								The element found or null
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example  	js
  * import next from '@coffeekraken/sugar/js/dom/next'
@@ -18,6 +23,7 @@ import __matches from './matches';
  * 		// we have found en element that matches the selector
  * }
  *
+ * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function next(elm, selector) {

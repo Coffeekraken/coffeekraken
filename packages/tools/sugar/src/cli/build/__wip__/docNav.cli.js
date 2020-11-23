@@ -1,10 +1,9 @@
 "use strict";
-import __parseArgs from '../../../node/cli/parseArgs';
-import __SBuildDocNavCli from '../../node/build/docNav/SBuildDocNavCli';
-import __SBuildDocNavActionsStream from '../../node/build/docNav/SBuildDocNavActionsStream';
-import __output from '../../../node/process/output';
-
-export default (stringArgs = '') => {
+const __parseArgs = require('../../../node/cli/parseArgs');
+const __SBuildDocNavCli = require('../../node/build/docNav/SBuildDocNavCli');
+const __SBuildDocNavActionsStream = require('../../node/build/docNav/SBuildDocNavActionsStream');
+const __output = require('../../../node/process/output');
+module.exports = (stringArgs = '') => {
     const args = __parseArgs(stringArgs, {
         definitionObj: __SBuildDocNavCli.interface.definitionObj
     });

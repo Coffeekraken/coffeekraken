@@ -1,7 +1,10 @@
 "use strict";
-var _a;
-const __SInterface = require('../../../class/SInterface');
-const __SDeamonInterface = require('../../interface/SDeamonInterface');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SInterface_1 = __importDefault(require("../../../class/SInterface"));
+const SDeamonInterface_1 = __importDefault(require("../../interface/SDeamonInterface"));
 /**
  * @name                SFsDeamonInterface
  * @namespace           sugar.node.deamon.fs.interface
@@ -15,16 +18,16 @@ const __SDeamonInterface = require('../../interface/SDeamonInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SFsDeamonInterface extends __SInterface {
-    },
-    _a.implementsArray = [__SDeamonInterface],
-    _a.definitionObj = {
-        watch: {
-            type: 'String',
-            alias: 'i',
-            description: 'Specify what to watch using a glob pattern',
-            required: true,
-            level: 1
-        }
-    },
-    _a);
+class SFsDeamonInterface extends SInterface_1.default {
+}
+exports.default = SFsDeamonInterface;
+SFsDeamonInterface.implementsArray = [SDeamonInterface_1.default];
+SFsDeamonInterface.definitionObj = {
+    watch: {
+        type: 'String',
+        alias: 'i',
+        description: 'Specify what to watch using a glob pattern',
+        required: true,
+        level: 1
+    }
+};

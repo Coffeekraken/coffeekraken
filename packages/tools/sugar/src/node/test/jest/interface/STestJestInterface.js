@@ -1,9 +1,12 @@
 "use strict";
-var _a;
-const __SInterface = require('../../../class/SInterface');
-const __STestInterface = require('../../interface/STestInterface');
-const __sugarConfig = require('../../../config/sugar');
-const __deepMerge = require('../../../object/deepMerge');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SInterface_1 = __importDefault(require("../../../class/SInterface"));
+const STestInterface_1 = __importDefault(require("../../interface/STestInterface"));
+const sugar_1 = __importDefault(require("../../../config/sugar"));
+const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
 /**
  * @name                STestJestCliInterface
  * @namespace           sugar.node.test.jest.interface
@@ -16,14 +19,14 @@ const __deepMerge = require('../../../object/deepMerge');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class STestJestCliInterface extends __SInterface {
+class STestJestCliInterface extends SInterface_1.default {
+}
+exports.default = STestJestCliInterface;
+STestJestCliInterface.definitionObj = deepMerge_1.default(STestInterface_1.default.definitionObj, {
+    input: {
+        default: sugar_1.default('jest.cli.input')
     },
-    _a.definitionObj = __deepMerge(__STestInterface.definitionObj, {
-        input: {
-            default: __sugarConfig('jest.cli.input')
-        },
-        watch: {
-            default: __sugarConfig('jest.cli.watch')
-        }
-    }),
-    _a);
+    watch: {
+        default: sugar_1.default('jest.cli.watch')
+    }
+});

@@ -2,6 +2,7 @@
  * @name                              when
  * @namespace           sugar.js.dom
  * @type                              Function
+ * @stable
  *
  * Return a promise that will be resolved when the wanted status has been applied on the passed HTMLElement.
  * The status that can be requested are:
@@ -26,12 +27,17 @@
  * @param               {Object}                      [settings={}]       The settings to configure the check process
  * @return              {Promise}                                         A promise that will be resolved when the state is detected
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example             js
  * import when from '@coffeekraken/sugar/js/dom/when';
  * when(myCoolNode, 'inViewport').then(() => {
  *    // do something...
  * });
  *
+ * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function when($node, state, settings = {}) {

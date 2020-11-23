@@ -1,9 +1,13 @@
 "use strict";
-const __blessed = require('blessed');
-const __SBlessedComponent = require('../../blessed/SBlessedComponent');
-const __deepMerge = require('../../object/deepMerge');
-const __SBlessedOutput = require('../../blessed/SBlessedOutput');
-const __parseHtml = require('../../terminal/parseHtml');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const blessed_1 = __importDefault(require("blessed"));
+const SBlessedComponent_1 = __importDefault(require("../../blessed/SBlessedComponent"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const SBlessedOutput_1 = __importDefault(require("../../blessed/SBlessedOutput"));
+const parseHtml_1 = __importDefault(require("../../terminal/parseHtml"));
 /**
  * @name            SSugarAppModuleTerminalUi
  * @namespace       sugar.node.app.sugar
@@ -16,7 +20,7 @@ const __parseHtml = require('../../terminal/parseHtml');
  * @param           {Object}        [settings={}]           An object of settings to configure your terminal interface
  *
  * @example         js
- * const SSugarAppModuleTerminalUi = require('@coffeekraken/sugar/node/app/sugar/SSugarAppModuleTerminalUi');
+ * import SSugarAppModuleTerminalUi from '@coffeekraken/sugar/node/app/sugar/SSugarAppModuleTerminalUi';
  * class MyUi extends SSugarAppModuleTerminalUi {
  *      constructor(settings = {}) {
  *          super(settings);
@@ -26,7 +30,7 @@ const __parseHtml = require('../../terminal/parseHtml');
  * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSugarAppModuleTerminalUi extends __SBlessedComponent {
+class SSugarAppModuleTerminalUi extends SBlessedComponent_1.default {
     /**
      * @name        constructor
      * @type         Function
@@ -38,7 +42,7 @@ module.exports = class SSugarAppModuleTerminalUi extends __SBlessedComponent {
      * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(sources, settings = {}) {
-        super(__deepMerge({
+        super(deepMerge_1.default({
             filter: null,
             width: '100%',
             height: '100%',
@@ -47,7 +51,7 @@ module.exports = class SSugarAppModuleTerminalUi extends __SBlessedComponent {
             }
         }, settings));
         // init the log component
-        this.$log = new __SBlessedOutput(sources, {
+        this.$log = new SBlessedOutput_1.default(sources, {
             filter: this._settings.filter,
             width: '100%',
             height: '100%'
@@ -61,7 +65,7 @@ module.exports = class SSugarAppModuleTerminalUi extends __SBlessedComponent {
                 shortcutsArray.push(` ${shortcutObj.name} <yellow>${shortcut}</yellow> `);
             });
             this.$log.height = '100%-1';
-            this.$shortcuts = __blessed.box({
+            this.$shortcuts = blessed_1.default.box({
                 width: '100%',
                 height: 1,
                 top: '100%-1',
@@ -69,7 +73,7 @@ module.exports = class SSugarAppModuleTerminalUi extends __SBlessedComponent {
                     bg: 'black',
                     fg: 'white'
                 },
-                content: __parseHtml(shortcutsArray.join('|'))
+                content: parseHtml_1.default(shortcutsArray.join('|'))
             });
             this.append(this.$shortcuts);
         }
@@ -86,4 +90,5 @@ module.exports = class SSugarAppModuleTerminalUi extends __SBlessedComponent {
     log(...args) {
         this.$log.log(...args);
     }
-};
+}
+exports.default = SSugarAppModuleTerminalUi;

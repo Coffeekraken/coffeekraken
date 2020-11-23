@@ -1,5 +1,10 @@
-import __isPlainObject from '../is/plainObject';
-import __deepMerge from '../object/deepMerge';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const plainObject_1 = __importDefault(require("../is/plainObject"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name            deepMap
  * @namespace           sugar.js.object
@@ -24,8 +29,8 @@ import __deepMerge from '../object/deepMerge';
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function deepMap(object, processor, settings = {}, _path = []) {
-    settings = __deepMerge({
+function deepMap(object, processor, settings = {}, _path = []) {
+    settings = deepMerge_1.default({
         deepFirst: false,
         processObjects: false,
         handleArray: true
@@ -38,7 +43,7 @@ export default function deepMap(object, processor, settings = {}, _path = []) {
             return;
         }
         if (!settings.deepFirst) {
-            if (__isPlainObject(object[prop]) ||
+            if (plainObject_1.default(object[prop]) ||
                 (Array.isArray(object[prop]) && settings.handleArray)) {
                 object[prop] = deepMap(object[prop], processor, settings, [
                     ..._path,
@@ -59,7 +64,7 @@ export default function deepMap(object, processor, settings = {}, _path = []) {
                 delete object[prop];
             else
                 object[prop] = res;
-            if (__isPlainObject(object[prop]) ||
+            if (plainObject_1.default(object[prop]) ||
                 (Array.isArray(object[prop]) && settings.handleArray)) {
                 object[prop] = deepMap(object[prop], processor, settings, [
                     ..._path,
@@ -72,3 +77,4 @@ export default function deepMap(object, processor, settings = {}, _path = []) {
     });
     return object;
 }
+exports.default = deepMap;

@@ -1,13 +1,18 @@
-import __getExtendsStack from '../class/getExtendsStack';
-import __argsToObject from '../cli/argsToObject';
-import __SError from '../error/SError';
-import __isClass from '../is/class';
-import __deepMerge from '../object/deepMerge';
-import __trimLines from '../string/trimLines';
-import __validateObject from '../validation/object/validateObject';
-import __validateObjectOutputString from '../validation/object/validateObjectOutputString';
-import __typeof from '../value/typeof';
-import __set from '../object/set';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
+const argsToObject_1 = __importDefault(require("../cli/argsToObject"));
+const SError_1 = __importDefault(require("../error/SError"));
+const class_1 = __importDefault(require("../is/class"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const trimLines_1 = __importDefault(require("../string/trimLines"));
+const validateObject_1 = __importDefault(require("../validation/object/validateObject"));
+const validateObjectOutputString_1 = __importDefault(require("../validation/object/validateObjectOutputString"));
+const typeof_1 = __importDefault(require("../value/typeof"));
+const set_1 = __importDefault(require("../object/set"));
 /**
  * @name              SInterface
  * @namespace           sugar.js.class
@@ -44,7 +49,7 @@ import __set from '../object/set';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
  */
-export default class SInterface {
+class SInterface {
     /**
      * @name              apply
      * @type              Function
@@ -65,22 +70,22 @@ export default class SInterface {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static apply(instance, settings = {}) {
-        settings = __deepMerge(this.settings, settings);
+        settings = deepMerge_1.default(this.settings, settings);
         // name
         if (!settings.name) {
             settings.name = instance.constructor.name || instance.name;
         }
-        const instanceType = __typeof(instance, {
+        const instanceType = typeof_1.default(instance, {
             customClass: false
         });
         if (instanceType !== 'Object' && instanceType !== 'Class') {
-            throw new __SError(`Sorry but the "<yellow>instance</yellow>" argument of the "<cyan>SInterface.apply</cyan>" static method have to be an <green>Object</green> and you've passed an <red>${__typeof(instance)}</red>...`);
+            throw new SError_1.default(`Sorry but the "<yellow>instance</yellow>" argument of the "<cyan>SInterface.apply</cyan>" static method have to be an <green>Object</green> and you've passed an <red>${typeof_1.default(instance)}</red>...`);
         }
         let issueObj = {
             $issues: []
         };
         let implementationValidationResult;
-        const extendsStack = __getExtendsStack(instance);
+        const extendsStack = getExtendsStack_1.default(instance);
         // check if the passed instance base class already implements this insterface
         if (instance.constructor.__interfaces &&
             Array.isArray(instance.constructor.__interfaces)) {
@@ -96,7 +101,7 @@ export default class SInterface {
             this.extendsArray.forEach((cls) => {
                 if (extendsStack.indexOf(cls) === -1) {
                     setTimeout(() => {
-                        throw new __SError(`Your class|instance "<yellow>${instance.name || instance.constructor.name}</yellow>" that implements the "<cyan>${this.name}</cyan>" interface has to extend the "<green>${cls}</green>" class...`);
+                        throw new SError_1.default(`Your class|instance "<yellow>${instance.name || instance.constructor.name}</yellow>" that implements the "<cyan>${this.name}</cyan>" interface has to extend the "<green>${cls}</green>" class...`);
                     });
                 }
             });
@@ -107,13 +112,13 @@ export default class SInterface {
         }
         // definition object
         if (this.definitionObj) {
-            implementationValidationResult = __validateObject(instance, this.definitionObj, {
+            implementationValidationResult = validateObject_1.default(instance, this.definitionObj, {
                 throw: false,
                 name: settings.name,
                 interface: settings.interface
             });
             if (implementationValidationResult !== true) {
-                issueObj = __deepMerge(issueObj, implementationValidationResult, {
+                issueObj = deepMerge_1.default(issueObj, implementationValidationResult, {
                     array: true
                 });
             }
@@ -143,7 +148,7 @@ export default class SInterface {
             return true;
         }
         if (settings.throw) {
-            throw new __SError(this.outputString(issueObj, settings));
+            throw new SError_1.default(this.outputString(issueObj, settings));
         }
         switch (settings.return.toLowerCase()) {
             case 'object':
@@ -184,7 +189,10 @@ export default class SInterface {
      */
     static applyAndThrow(instance, settings = {}) {
         const apply = SInterface.apply.bind(this);
-        return apply(instance, Object.assign(Object.assign({}, settings), { throw: true }));
+        return apply(instance, {
+            ...settings,
+            throw: true
+        });
     }
     /**
      * @name          applyAndComplete
@@ -203,7 +211,7 @@ export default class SInterface {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static applyAndComplete(object, settings = {}) {
-        settings = __deepMerge({
+        settings = deepMerge_1.default({
             duplicate: false
         }, settings);
         const completedObject = this.complete(object, settings);
@@ -229,7 +237,7 @@ export default class SInterface {
             interfaces = [this];
         if (!Array.isArray(interfaces))
             interfaces = [interfaces];
-        if (__isClass(instance)) {
+        if (class_1.default(instance)) {
             // return instance;
             class SInterfaceImplementsMiddleClass extends instance {
                 constructor(...args) {
@@ -260,7 +268,10 @@ export default class SInterface {
         }
         // make sure the instance has all the interfaces requirements
         interfaces.forEach((Interface) => {
-            Interface.apply(instance, Object.assign(Object.assign({}, settings), { interface: Interface.name }));
+            Interface.apply(instance, {
+                ...settings,
+                interface: Interface.name
+            });
         });
     }
     /**
@@ -278,7 +289,7 @@ export default class SInterface {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static complete(data, settings = {}) {
-        settings = __deepMerge({
+        settings = deepMerge_1.default({
             duplicate: false
         }, settings);
         let argsObj = data;
@@ -291,7 +302,7 @@ export default class SInterface {
             // check if we have an argument passed in the properties
             if (argsObj[argString] === undefined &&
                 argDefinitionObj.default !== undefined) {
-                __set(argsObj, argString, argDefinitionObj.default);
+                set_1.default(argsObj, argString, argDefinitionObj.default);
             }
         });
         return argsObj;
@@ -312,8 +323,8 @@ export default class SInterface {
      */
     static outputString(resultObj, settings = {}) {
         const headerString = this._outputHeaderString(settings);
-        const string = __validateObjectOutputString(resultObj, settings);
-        return __trimLines(`${headerString}${string}`);
+        const string = validateObjectOutputString_1.default(resultObj, settings);
+        return trimLines_1.default(`${headerString}${string}`);
     }
     /**
      * @name          output
@@ -372,7 +383,7 @@ export default class SInterface {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static parse(string) {
-        const args = __argsToObject(string, this.definitionObj);
+        const args = argsToObject_1.default(string, this.definitionObj);
         return args;
     }
     /**
@@ -391,7 +402,7 @@ export default class SInterface {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static parseAndComplete(string) {
-        let args = __argsToObject(string, this.definitionObj);
+        let args = argsToObject_1.default(string, this.definitionObj);
         args = this.complete(args);
         return args;
     }
@@ -413,11 +424,12 @@ export default class SInterface {
     static extends(extendsObj) {
         class ExtendedInterface extends this {
         }
-        ExtendedInterface.definitionObj = __deepMerge(ExtendedInterface.definitionObj, extendsObj.definitionObj || {});
-        ExtendedInterface.settings = __deepMerge(ExtendedInterface.settings, extendsObj.settings || {});
+        ExtendedInterface.definitionObj = deepMerge_1.default(ExtendedInterface.definitionObj, extendsObj.definitionObj || {});
+        ExtendedInterface.settings = deepMerge_1.default(ExtendedInterface.settings, extendsObj.settings || {});
         return ExtendedInterface;
     }
 }
+exports.default = SInterface;
 /**
  * @name              settings
  * @type              Object

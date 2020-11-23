@@ -8,6 +8,7 @@ import __closest from './closest';
  * @name      whenOutOfViewport
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Monitor an HTMLElement to be notified when it exit the viewport
  *
@@ -15,24 +16,29 @@ import __closest from './closest';
  * @param 		{Number} 					[offset=50] 		An offset that represent the distance before entering the viewport for the detection
  * @return 		(Promise) 										The promise that will be resolved when the element exit the viewport
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example 	js
  * import whenOutOfViewport from '@coffeekraken/sugar/js/dom/whenOutOfViewport'
  * whenOutOfViewport(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that has exit the viewport...
  * });
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function whenOutOfViewport(elm, offset = 50) {
   return new Promise((resolve, reject) => {
     if (window.IntersectionObserver) {
-      let isInViewport = false,
-        _cb = () => {
-          if (!isInViewport) {
-            observer.disconnect();
-            resolve(elm);
-          }
-        };
+      let isInViewport = false;
+      const _cb = () => {
+        if (!isInViewport) {
+          observer.disconnect();
+          resolve(elm);
+        }
+      };
 
       const observer = new IntersectionObserver(
         (entries, observer) => {
@@ -69,15 +75,15 @@ export default function whenOutOfViewport(elm, offset = 50) {
         scrollContainerElm = elm._inViewportContainer;
       }
 
-      let isInViewport = true,
-        _cb = () => {
-          if (!isInViewport) {
-            scrollContainerElm.removeEventListener('scroll', checkViewport);
-            window.removeEventListener('resize', checkViewport);
-            resolve(elm);
-          }
-        };
-      let checkViewport = __throttle((e) => {
+      let isInViewport = true;
+      const _cb = () => {
+        if (!isInViewport) {
+          scrollContainerElm.removeEventListener('scroll', checkViewport);
+          window.removeEventListener('resize', checkViewport);
+          resolve(elm);
+        }
+      };
+      const checkViewport = __throttle((e) => {
         isInViewport = __isInViewport(elm, offset);
         _cb();
       }, 100);

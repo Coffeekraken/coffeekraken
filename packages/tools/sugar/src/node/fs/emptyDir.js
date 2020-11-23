@@ -1,5 +1,9 @@
 "use strict";
-const __fs = require('fs-extra');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_extra_1 = __importDefault(require("fs-extra"));
 // TODO tests
 /**
  * @name        emptyDir
@@ -13,7 +17,7 @@ const __fs = require('fs-extra');
  * @return      {Promise}                           A promise that will be resolved once the directory has been cleaned
  *
  * @example       js
- * const emptyDir = require('@coffeekraken/node/fs/emptyDir');
+ * import emptyDir from '@coffeekraken/node/fs/emptyDir';
  * emptyDir('my/cool/directory').then(() => {
  *    // do something...
  * });
@@ -21,6 +25,7 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function emptyDir(dir) {
-    return __fs.emptyDir(dir);
-};
+function emptyDir(dir) {
+    return fs_extra_1.default.emptyDir(dir);
+}
+exports.default = emptyDir;

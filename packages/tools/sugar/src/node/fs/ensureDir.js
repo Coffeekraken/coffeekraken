@@ -1,5 +1,9 @@
 "use strict";
-const __fs = require('fs-extra');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_extra_1 = __importDefault(require("fs-extra"));
 // TODO tests
 /**
  * @name        ensureDir
@@ -13,7 +17,7 @@ const __fs = require('fs-extra');
  * @return      {Promise}                           A promise that will be resolved once the directory has been created if needed...
  *
  * @example       js
- * const ensureDir = require('@coffeekraken/node/fs/ensureDir');
+ * import ensureDir from '@coffeekraken/node/fs/ensureDir';
  * ensureDir('my/cool/dir').then(() => {
  *    // do something...
  * });
@@ -21,6 +25,7 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function ensureDir(dir) {
-    return __fs.ensureDir(dir);
-};
+function ensureDir(dir) {
+    return fs_extra_1.default.ensureDir(dir);
+}
+exports.default = ensureDir;

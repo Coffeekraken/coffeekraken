@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = require("../../object/deepMerge");
-const SDocblock_1 = require("../../docblock/SDocblock");
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const SDocblock_1 = __importDefault(require("../../docblock/SDocblock"));
 /**
  * @name            htmlFromDocblocks
  * @namespace       sugar.js.convert

@@ -181,7 +181,7 @@ export default function parseArgsString(string, settings = {}) {
   });
 
   const finalObj = {};
-  for (let key in definitionObj) {
+  for (const key in definitionObj) {
     const value = argsObj[key];
     if (value === undefined && settings.defaultObj[key] !== undefined) {
       finalObj[key] = settings.defaultObj[key];

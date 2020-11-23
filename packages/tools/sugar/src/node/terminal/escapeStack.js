@@ -1,6 +1,10 @@
 "use strict";
-const __SPromise = require('../promise/SPromise');
-const __hotkey = require('../keyboard/hotkey');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
 /**
  * @name                          escapeStack
  * @namespace           sugar.node.blessed
@@ -15,7 +19,7 @@ const __hotkey = require('../keyboard/hotkey');
  * @param         {Number}            [index=null]    Optionally the index under which you want to register your callback. If not specified, will be automatically setted
  *
  * @example       js
- * const escapeStack = require('@coffeekraken/sugar/node/terminal/escapeStack');
+ * import escapeStack from '@coffeekraken/sugar/node/terminal/escapeStack';
  * escapeStack(() => {
  *    // do something
  * });
@@ -24,13 +28,13 @@ const __hotkey = require('../keyboard/hotkey');
  */
 const escapeStackStack = [];
 let hotkeyInitiated = false;
-module.exports = function escapeStack(callback = null) {
-    const promise = new __SPromise((resolve, reject, trigger, cancel) => { }, {
+function escapeStack(callback = null) {
+    const promise = new SPromise_1.default((resolve, reject, trigger, cancel) => { }, {
         id: 'escapeStack'
     });
     if (!hotkeyInitiated) {
         hotkeyInitiated = true;
-        __hotkey('escape', {
+        hotkey_1.default('escape', {
             disableWhenEditingForm: false
         }).on('press', (key) => {
             if (escapeStackStack.length === 0)
@@ -74,4 +78,5 @@ module.exports = function escapeStack(callback = null) {
     //   });
     // }
     return;
-};
+}
+exports.default = escapeStack;

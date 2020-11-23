@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const url_parse_1 = require("url-parse");
-const deepMerge_1 = require("../object/deepMerge");
-const parseSchema_1 = require("./parseSchema");
+const url_parse_1 = __importDefault(require("url-parse"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const parseSchema_1 = __importDefault(require("./parseSchema"));
 /**
  * @name            SUrl
  * @namespace           sugar.js.url

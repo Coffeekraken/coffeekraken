@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        upperFirst
  * @namespace           sugar.js.string
@@ -14,6 +16,7 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function upperFirst(string) {
+function upperFirst(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+exports.default = upperFirst;

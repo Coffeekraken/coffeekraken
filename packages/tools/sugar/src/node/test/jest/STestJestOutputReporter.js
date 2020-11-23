@@ -1,6 +1,10 @@
 "use strict";
-const __getFilename = require('../../fs/filename');
-const __packageRoot = require('../../path/packageRoot');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const filename_1 = __importDefault(require("../../fs/filename"));
+const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
 // my-custom-reporter.js
 class STestJestOutputReporter {
     constructor(globalConfig, options) {
@@ -11,15 +15,15 @@ class STestJestOutputReporter {
         console.log(`<bgYellow><black> Starting tests </black></bgYellow> estimated time: <yellow>${vars.estimatedTime}s</yellow>`);
     }
     onTestStart(obj) {
-        console.log(`#temp #mb:0 <yellow>│</yellow> <bgCyan> ${__getFilename(obj.path)} </bgCyan> ${obj.path.replace(`${__packageRoot()}/`, '')}`);
+        console.log(`#temp #mb:0 <yellow>│</yellow> <bgCyan> ${filename_1.default(obj.path)} </bgCyan> ${obj.path.replace(`${packageRoot_1.default()}/`, '')}`);
     }
     onTestResult(obj, result) {
         // console.log('test result', result);
         if (result.numFailingTests === 0) {
-            console.log(`<yellow>│</yellow> <bgGreen><black> ${__getFilename(obj.path)} </black></bgGreen> ${obj.path.replace(`${__packageRoot()}/`, '')}`);
+            console.log(`<yellow>│</yellow> <bgGreen><black> ${filename_1.default(obj.path)} </black></bgGreen> ${obj.path.replace(`${packageRoot_1.default()}/`, '')}`);
         }
         else {
-            console.log(`#mb:0 <yellow>│</yellow> <bgRed><black> ${__getFilename(obj.path)} </black></bgRed> ${obj.path.replace(`${__packageRoot()}/`, '')}`);
+            console.log(`#mb:0 <yellow>│</yellow> <bgRed><black> ${filename_1.default(obj.path)} </black></bgRed> ${obj.path.replace(`${packageRoot_1.default()}/`, '')}`);
             console.log(`<yellow>│</yellow>`);
             result.testResults.forEach((resObj) => {
                 if (resObj.status === 'passed') {
@@ -34,7 +38,7 @@ class STestJestOutputReporter {
     onRunComplete(contexts, result) {
         result.testResults.forEach((resultObj) => {
             if (resultObj.failureMessage) {
-                console.log(`<bgRed><black> ${resultObj.testFilePath.replace(`${__packageRoot()}/`, '')} </black></bgRed>`);
+                console.log(`<bgRed><black> ${resultObj.testFilePath.replace(`${packageRoot_1.default()}/`, '')} </black></bgRed>`);
                 const lines = resultObj.failureMessage.split('\n').map((line, i) => {
                     if (i === 0) {
                         return `<yellow>${line}</yellow>`;
@@ -60,4 +64,4 @@ class STestJestOutputReporter {
         console.log(`- <red>failed</red> tests: <red>${result.numFailedTests}</red>`);
     }
 }
-module.exports = STestJestOutputReporter;
+exports.default = STestJestOutputReporter;

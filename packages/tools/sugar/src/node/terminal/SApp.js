@@ -1,14 +1,14 @@
 "use strict";
-const __childProcess = require('child_process');
-const __deepMerge = require('../object/deepMerge');
-const __blessed = require('blessed');
-const __parseHtml = require('./parseHtml');
-const __splitEvery = require('../string/splitEvery');
-const __countLine = require('../string/countLine');
-const __parseSchema = require('../url/parseSchema');
-const __sugarConfig = require('../config/sugar');
-const __SPanel = require('../terminal/SPanel');
-const __packageRoot = require('../path/packageRoot');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const child_process_1 = __importDefault(require("child_process"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const blessed_1 = __importDefault(require("blessed"));
+const parseSchema_1 = __importDefault(require("../url/parseSchema"));
+const SPanel_1 = __importDefault(require("../terminal/SPanel"));
+const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 /**
  * @name                    SApp
  * @namespace           sugar.node.terminal
@@ -21,14 +21,14 @@ const __packageRoot = require('../path/packageRoot');
  * @param           {Object}          [settings={}]   An object of settings described bellow:
  *
  * @example         js
- * const SApp = require('@coffeekraken/sugar/node/terminal/SApp');
+ * import SApp from '@coffeekraken/sugar/node/terminal/SApp';
  * const app = new SApp('My Cool Application', {
  * });
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SApp extends __blessed.screen {
+class SApp extends blessed_1.default.screen {
     /**
      * @name              constructor
      * @type              Function
@@ -40,7 +40,7 @@ module.exports = class SApp extends __blessed.screen {
      */
     constructor(name, settings = {}) {
         // save the settings
-        const _settings = __deepMerge({
+        const _settings = deepMerge_1.default({
             blessed: {
                 screen: {
                     smartCSR: true
@@ -113,7 +113,7 @@ module.exports = class SApp extends __blessed.screen {
         // loop on each routes
         for (let i = 0; i < Object.keys(this._settings.routes).length; i++) {
             // copmpare the url to the route
-            const parsedSchema = __parseSchema(url, Object.keys(this._settings.routes)[i]);
+            const parsedSchema = parseSchema_1.default(url, Object.keys(this._settings.routes)[i]);
             if (parsedSchema.match) {
                 return {
                     ...this._settings.routes[Object.keys(this._settings.routes)[i]],
@@ -214,7 +214,7 @@ module.exports = class SApp extends __blessed.screen {
         if (!this._currentPanes[routeObj.url]) {
             this._currentPanes[routeObj.url] = {};
             // creating the panel to host the logs
-            contentPanel = new __SPanel({
+            contentPanel = new SPanel_1.default({
                 beforeLog: () => {
                     return '<blue><time/></blue> ';
                 }
@@ -223,13 +223,13 @@ module.exports = class SApp extends __blessed.screen {
             // - string: Launch a new child process with the specified command
             const content = await routeObj.content(routeObj.params);
             if (typeof content === 'string') {
-                contentProcess = __childProcess.spawn(content, [], {
+                contentProcess = child_process_1.default.spawn(content, [], {
                     env: {
                         ...process.env,
                         IS_CHILD_PROCESS: true
                     },
                     detached: true,
-                    cwd: __packageRoot(process.cwd()),
+                    cwd: packageRoot_1.default(process.cwd()),
                     shell: true
                 });
                 contentProcess.stdout.on('data', (data) => {
@@ -261,4 +261,5 @@ module.exports = class SApp extends __blessed.screen {
         // render the screen
         this.render();
     }
-};
+}
+exports.default = SApp;

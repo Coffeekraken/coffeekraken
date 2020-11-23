@@ -1,8 +1,12 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
-const __resolveGlob = require('./resolveGlob');
-const __extractGlob = require('./extractGlob');
-const __extractNoneGlob = require('./extractNoneGlob');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const resolveGlob_1 = __importDefault(require("./resolveGlob"));
+const extractGlob_1 = __importDefault(require("./extractGlob"));
+const extractNoneGlob_1 = __importDefault(require("./extractNoneGlob"));
 /**
  * @name                SGlob
  * @namespace           sugar.node.glob
@@ -17,7 +21,7 @@ const __extractNoneGlob = require('./extractNoneGlob');
  * @todo               tests
  *
  * @example         js
- * const SGlob = require('@coffeekraken/sugar/node/glob/SGlob');
+ * import SGlob from '@coffeekraken/sugar/node/glob/SGlob';
  * const glob = new SGlob('my/cool/glob/*.js');
  * const files = await glob.resolve();
  * await SGlob.resolve('my/cool/glob/*.js');
@@ -25,7 +29,7 @@ const __extractNoneGlob = require('./extractNoneGlob');
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SGlob {
+class SGlob {
     /**
      * @name          constructor
      * @type          Function
@@ -59,7 +63,7 @@ module.exports = class SGlob {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this._globs = null;
-        this._settings = __deepMerge({}, settings);
+        this._settings = deepMerge_1.default({}, settings);
         this._globs = Array.isArray(globs) ? globs : [globs];
     }
     /**
@@ -78,7 +82,7 @@ module.exports = class SGlob {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static resolve(globs, settings = {}) {
-        return __resolveGlob(globs, settings);
+        return resolveGlob_1.default(globs, settings);
     }
     /**
      * @name                extractGlob
@@ -94,7 +98,7 @@ module.exports = class SGlob {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static extractGlob(string) {
-        return __extractGlob(string);
+        return extractGlob_1.default(string);
     }
     /**
      * @name                extractNoneGlob
@@ -110,7 +114,7 @@ module.exports = class SGlob {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static extractNoneGlob(string) {
-        return __extractNoneGlob(string);
+        return extractNoneGlob_1.default(string);
     }
     /**
      * @name                resolve
@@ -127,7 +131,7 @@ module.exports = class SGlob {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     resolve(settings = {}) {
-        settings = __deepMerge(this._settings, {}, settings);
+        settings = deepMerge_1.default(this._settings, {}, settings);
         return SGlob.resolve(this._globs, settings);
     }
     /**
@@ -168,4 +172,5 @@ module.exports = class SGlob {
             SGlob.extractNoneGlob(glob);
         });
     }
-};
+}
+exports.default = SGlob;

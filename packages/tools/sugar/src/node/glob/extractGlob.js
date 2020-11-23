@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const glob_parent_1 = require("glob-parent");
+const glob_parent_1 = __importDefault(require("glob-parent"));
 /**
  * @name                extractGlob
  * @namespace           sugar.js.glob

@@ -5,6 +5,7 @@ import __stripCssComments from 'strip-css-comments';
  * @name          stripCssComments
  * @namespace     sugar.js.css
  * @type          Function
+ * @wip
  *
  * This function simply remove all the css comments like:
  * - Multiline blocks css comments begining with /* *, ending with * /
@@ -18,6 +19,8 @@ import __stripCssComments from 'strip-css-comments';
  * @setting     {Boolean}     [line=true]       Remove the line comments
  *
  * @todo        tests
+ * @todo        interface
+ * @todo        doc
  *
  * @example       js
  * import stripCssComments from '@coffeekraken/sugar/js/css/stripCssComments';

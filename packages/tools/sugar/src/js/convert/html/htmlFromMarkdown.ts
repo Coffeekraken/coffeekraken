@@ -6,12 +6,16 @@ import __marked from 'marked';
  * @name            htmlFromMarkdown
  * @namespace       sugar.js.convert
  * @type            Function
+ * @wip
  *
  * Take a markdown string as input and convert it to HTML.
  *
  * @param       {String}          inputString         The input string to convert to HTML
  * @param       {Object}          [settings={}]       An object of settings to configure your conversion process. All the ```marked``` settings are supported
  * @return      {String}                              The HTML converted result
+ *
+ * @todo        interface
+ * @todo        doc
  *
  * @example       js
  * import htmlFromMarkdown from '@coffeekraken/sugar/js/convert/html/htmlFromMarkdown';

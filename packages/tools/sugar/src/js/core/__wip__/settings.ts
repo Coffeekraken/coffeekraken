@@ -17,11 +17,11 @@ import domReady from '../dom/domReady';
 
 // prepare a settings object to store
 // the getted settings from the css
-let settings = {};
+const settings = {};
 
 // wait the css to be loaded
 domReady(() => {
-  let settingsElm = document.createElement('div');
+  const settingsElm = document.createElement('div');
   settingsElm.classList.add('s-settings');
   document.body.appendChild(settingsElm);
   let _settings = window

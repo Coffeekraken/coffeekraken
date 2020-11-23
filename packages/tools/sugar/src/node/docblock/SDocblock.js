@@ -1,11 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const SError_1 = require("../error/SError");
-const deepMerge_1 = require("../object/deepMerge");
-const SDocblockBlock_1 = require("./SDocblockBlock");
+const SError_1 = __importDefault(require("../error/SError"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SDocblockBlock_1 = __importDefault(require("./SDocblockBlock"));
 // import __markdown from './markdown/index';
-const node_1 = require("../is/node");
-const path_1 = require("../is/path");
+const node_1 = __importDefault(require("../is/node"));
+const path_1 = __importDefault(require("../is/path"));
+const fs_1 = __importDefault(require("fs"));
 /**
  * @name                  Dockblock
  * @namespace           sugar.js.docblock
@@ -109,10 +113,9 @@ class SDocblock {
         if (path_1.default(source)) {
             if (!node_1.default())
                 throw new SError_1.default(`Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`);
-            const __fs = require('fs');
-            if (!__fs.existsSync(source))
+            if (!fs_1.default.existsSync(source))
                 throw new SError_1.default(`Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`);
-            this._source = __fs.readFileSync(source, 'utf8');
+            this._source = fs_1.default.readFileSync(source, 'utf8');
         }
         else {
             this._source = source;

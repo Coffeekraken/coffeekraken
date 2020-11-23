@@ -3,12 +3,18 @@ import __deepClone from 'lodash.clonedeep';
 
 /**
  * @name                clone
+ * @namespace           sugar.js.object
  * @type                Function
+ * @stable
  *
  * This function allows you to clone an object either at 1 level, or deeply.
  *
  * @param       {Object}        object        The object to copy
  * @param       {Boolean}       [deep=false]  Specify if you want to clone the object deeply
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import clone from '@coffeekraken/sugar/js/object/clone';
@@ -17,6 +23,7 @@ import __deepClone from 'lodash.clonedeep';
  * });
  *
  * @see       https://www.npmjs.com/package/lodash
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function clone(object, deep = false) {

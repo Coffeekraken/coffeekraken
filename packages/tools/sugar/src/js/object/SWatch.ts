@@ -13,12 +13,17 @@ import __clone from '../object/clone';
  * @name 		            SWatch
  * @namespace           sugar.js.object
  * @type                Class
+ * @wip
  *
  * This class allows you to easily monitor some object properties and get the new and old value of it
  *
  * @param       {Object}      object        The object to watch
  * @param       {Object}      [settings={}]       An object of settings to configure your watch process
  * - deep (true) {Boolean}: Specify if you want to watch the object deeply or just the first level
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * // create the watcher instance
@@ -34,6 +39,7 @@ import __clone from '../object/clone';
  * // update the title
  * watchedObj.title = 'Hello Universe';
  *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SWatch {
@@ -87,8 +93,8 @@ export default class SWatch {
       object,
       (obj) => {
         let path = obj.path;
-        let value = obj.value;
-        let oldValue = obj.oldValue;
+        const value = obj.value;
+        const oldValue = obj.oldValue;
         if (path.slice(0, 1) === '.') path = path.slice(1);
         // build the object to pass to the handler
         const watchResult = {

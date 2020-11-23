@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const SWatch_1 = require("./SWatch");
+const SWatch_1 = __importDefault(require("./SWatch"));
 /**
  * @name                      watch
  * @namespace           sugar.js.object

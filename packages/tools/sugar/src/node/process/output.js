@@ -1,5 +1,9 @@
 "use strict";
-const __SBlessedOutput = require('../blessed/SBlessedOutput');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SBlessedOutput_1 = __importDefault(require("../blessed/SBlessedOutput"));
 /**
  * @name            output
  * @namespace           sugar.node.process
@@ -15,15 +19,15 @@ const __SBlessedOutput = require('../blessed/SBlessedOutput');
  * @param         {Object}            [settings={}]     An object of blessed settings that will be passed to the main blessed.box instance
  *
  * @example       js
- * const output = require('@coffeekraken/sugar/node/process/output');
- * const spawn = require('@coffeekraken/sugar/node/process/spawn');
+ * import output from '@coffeekraken/sugar/node/process/output';
+ * import spawn from '@coffeekraken/sugar/node/process/spawn';
  * const proc = spawn('ls -la');
  * output(proc);
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (source, settings = {}) => {
-    const output = new __SBlessedOutput(source, settings);
+exports.default = (source, settings = {}) => {
+    const output = new SBlessedOutput_1.default(source, settings);
     return output;
 };

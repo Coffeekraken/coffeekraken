@@ -1,16 +1,19 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = require("../object/deepMerge");
-const map_1 = require("../object/map");
-const node_1 = require("../is/node");
-const author_1 = require("./tags/author");
-const simpleValue_1 = require("./tags/simpleValue");
-const description_1 = require("./tags/description");
-const return_1 = require("./tags/return");
-const example_1 = require("./tags/example");
-const param_1 = require("./tags/param");
-const snippet_1 = require("./tags/snippet");
-const SDocblock_1 = require("./SDocblock");
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const map_1 = __importDefault(require("../object/map"));
+const node_1 = __importDefault(require("../is/node"));
+const author_1 = __importDefault(require("./tags/author"));
+const simpleValue_1 = __importDefault(require("./tags/simpleValue"));
+const description_1 = __importDefault(require("./tags/description"));
+const return_1 = __importDefault(require("./tags/return"));
+const example_1 = __importDefault(require("./tags/example"));
+const param_1 = __importDefault(require("./tags/param"));
+const snippet_1 = __importDefault(require("./tags/snippet"));
+const SDocblock_1 = __importDefault(require("./SDocblock"));
 /**
  * @name          SDocblockBlock
  * @namespace           sugar.js.docblock

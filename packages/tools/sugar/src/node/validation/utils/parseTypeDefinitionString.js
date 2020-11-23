@@ -1,4 +1,9 @@
-import __upperFirst from '../../string/upperFirst';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const upperFirst_1 = __importDefault(require("../../string/upperFirst"));
 /**
  * @name              parseTypeDefinitionString
  * @namespace           sugar.js.validation.utils
@@ -17,7 +22,7 @@ import __upperFirst from '../../string/upperFirst';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function parseTypeDefinitionString(argTypeString) {
+function parseTypeDefinitionString(argTypeString) {
     // split the string by |
     let inDepth = 0;
     let currentPart = '', typesArray = [];
@@ -54,7 +59,7 @@ export default function parseTypeDefinitionString(argTypeString) {
         // split the string by <
         const parts = typeDefinitionString.split('<');
         // get the "type"
-        const type = __upperFirst(parts[0]);
+        const type = upperFirst_1.default(parts[0]);
         // process the "of" part if exist
         let ofArray = null;
         if (parts[1]) {
@@ -69,3 +74,4 @@ export default function parseTypeDefinitionString(argTypeString) {
     });
     return returnArray;
 }
+exports.default = parseTypeDefinitionString;

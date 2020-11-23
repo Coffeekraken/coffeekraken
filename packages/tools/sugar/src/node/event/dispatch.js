@@ -1,5 +1,9 @@
 "use strict";
-const __SPromise = require('../promise/SPromise');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
 /**
  * @name        dispatch
  * @namespace           sugar.node.event
@@ -12,18 +16,19 @@ const __SPromise = require('../promise/SPromise');
  * @param         {Mixed}        value          The value you want to send alongside the event
  *
  * @example       js
- * const dispatch = require('@coffeekraken/sugar/node/event/dispatch');
+ * import dispatch from '@coffeekraken/sugar/node/event/dispatch';
  * dispatch('something', 'Hello world');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function dispatch(name, value) {
+function dispatch(name, value) {
     // check that the global SPromise exists
     if (!global._sugarEventSPromise)
-        global._sugarEventSPromise = new __SPromise({
+        global._sugarEventSPromise = new SPromise_1.default({
             id: 'sugarEventSPromise'
         });
     // dispatch to the event
     global._sugarEventSPromise.trigger(name, value);
-};
+}
+exports.default = dispatch;

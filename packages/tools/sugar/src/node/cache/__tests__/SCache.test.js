@@ -1,6 +1,10 @@
 "use strict";
-const SCache = require('../SCache');
-const cache = new SCache('sugar-node-cache-SCache');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SCache_1 = __importDefault(require("../SCache"));
+const cache = new SCache_1.default('sugar-node-cache-SCache');
 test('sugar.node.cache.SCache: Set an item in the cache', (done) => {
     (async () => {
         await cache.set('myCoolItem', {

@@ -1,5 +1,9 @@
 "use strict";
-const __extension = require('./extension');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const extension_1 = __importDefault(require("./extension"));
 // TODO tests
 /**
  * @name                       filename
@@ -13,15 +17,16 @@ const __extension = require('./extension');
  * @return          {String}                                  The requested filename
  *
  * @example       js
- * const filename = require('@coffeekraken/sugar/node/fs/filename');
+ * import filename from '@coffeekraken/sugar/node/fs/filename';
  * filename('hello/world.js'); // => world.js
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function filename(path, withExtension = true) {
+function filename(path, withExtension = true) {
     let filename = path.split('/').pop();
     if (!withExtension) {
-        filename = filename.replace(__extension(filename), '');
+        filename = filename.replace(extension_1.default(filename), '');
     }
     return filename;
-};
+}
+exports.default = filename;

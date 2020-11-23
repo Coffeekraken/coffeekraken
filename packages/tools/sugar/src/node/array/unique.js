@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name              unique
  * @namespace           sugar.js.array
@@ -16,7 +18,7 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function unique(array) {
+function unique(array) {
     let a = array.concat();
     for (let i = 0; i < a.length; ++i) {
         for (let j = i + 1; j < a.length; ++j) {
@@ -26,3 +28,4 @@ export default function unique(array) {
     }
     return a;
 }
+exports.default = unique;

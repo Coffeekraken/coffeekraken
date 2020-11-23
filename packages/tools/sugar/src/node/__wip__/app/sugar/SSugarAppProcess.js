@@ -1,8 +1,11 @@
 "use strict";
-var _a;
-const __SProcess = require('../../process/SProcess');
-const __SSugarApp = require('./SSugarApp');
-const __SSugarAppInterface = require('./interface/SSugarAppInterface');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SProcess_1 = __importDefault(require("../../process/SProcess"));
+const SSugarApp_1 = __importDefault(require("./SSugarApp"));
+const SSugarAppInterface_1 = __importDefault(require("./interface/SSugarAppInterface"));
 /**
  * @name            SSugarAppProcess
  * @namespace           sugar.node.ui.sugar
@@ -16,41 +19,43 @@ const __SSugarAppInterface = require('./interface/SSugarAppInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SSugarAppProcess extends __SProcess {
-        /**
-         * @name          constructor
-         * @type          Function
-         * @constructor
-         *
-         * Constructor
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        constructor(settings = {}) {
-            super({
-                id: 'sugar.app.process',
-                name: 'Sugar App Process',
-                ...settings
-            });
-        }
-        /**
-         * @name              process
-         * @type              Function
-         *
-         * Method that execute the frontend server code, listen for errors, etc...
-         *
-         * @param       {Object}        params           The arguments object that will be passed to the underlined actions stream instance
-         * @param       {Object}        [settings={}]     An object of settings passed to the ```start``` method of the ```SBuildScssActionsStream``` instance
-         * @return      {Süromise}                        An SPomise instance representing the build process
-         *
-         * @since         2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        process(params, settings = {}) {
-            // new sugar ui instance
-            this._sugarUiInstance = new __SSugarApp({});
-            this.bindSPromise(this._sugarUiInstance);
-        }
-    },
-    _a.interface = __SSugarAppInterface,
-    _a);
+class SSugarAppProcess extends SProcess_1.default {
+    /**
+     * @name          constructor
+     * @type          Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(settings = {}) {
+        super({
+            id: 'sugar.app.process',
+            name: 'Sugar App Process',
+            ...settings
+        });
+    }
+    /**
+     * @name              process
+     * @type              Function
+     *
+     * Method that execute the frontend server code, listen for errors, etc...
+     *
+     * @param       {Object}        params           The arguments object that will be passed to the underlined actions stream instance
+     * @param       {Object}        [settings={}]     An object of settings passed to the ```start``` method of the ```SBuildScssActionsStream``` instance
+     * @return      {Süromise}                        An SPomise instance representing the build process
+     *
+     * @since         2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    process(params, settings = {}) {
+        // new sugar ui instance
+        // @ts-expect-error ts-migrate(2339) FIXME: Property '_sugarUiInstance' does not exist on type... Remove this comment to see the full error message
+        this._sugarUiInstance = new SSugarApp_1.default({});
+        // @ts-expect-error ts-migrate(2339) FIXME: Property 'bindSPromise' does not exist on type 'SS... Remove this comment to see the full error message
+        this.bindSPromise(this._sugarUiInstance);
+    }
+}
+exports.default = SSugarAppProcess;
+SSugarAppProcess.interface = SSugarAppInterface_1.default;

@@ -1,22 +1,18 @@
 "use strict";
-const __fs = require('fs');
-const __tmp = require('tmp');
-const __isClass = require('../is/class');
-const __packageJson = require('../package/json');
-const __buildCommandLine = require('./buildCommandLine');
-const __SChildProcessManager = require('../process/SChildProcessManager');
-const __deepMerge = require('../object/deepMerge');
-const __argsToObject = require('../cli/argsToObject');
-const __isChildProcess = require('../is/childProcess');
-const __output = require('../process/output');
-const __parseArgs = require('../cli/parseArgs');
-const __toString = require('../string/toString');
-const __SProcessManagerInterface = require('../process/interface/SProcessManagerInterface');
-const __SCliInterface = require('./interface/SCliInterface');
-const __SInterface = require('../class/SInterface');
-const __sugarHeading = require('../ascii/sugarHeading');
-const __SPromise = require('../promise/SPromise');
-const __SProcessManager = require('../process/SProcessManager');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const class_1 = __importDefault(require("../is/class"));
+const buildCommandLine_1 = __importDefault(require("./buildCommandLine"));
+const SChildProcessManager_1 = __importDefault(require("../process/SChildProcessManager"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const argsToObject_1 = __importDefault(require("../cli/argsToObject"));
+const childProcess_1 = __importDefault(require("../is/childProcess"));
+const output_1 = __importDefault(require("../process/output"));
+const parseArgs_1 = __importDefault(require("../cli/parseArgs"));
+const SCliInterface_1 = __importDefault(require("./interface/SCliInterface"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
 /**
  * @name                SCli
  * @namespace           sugar.node.cli
@@ -36,7 +32,7 @@ const __SProcessManager = require('../process/SProcessManager');
  * @TODO            check the documentation
  *
  * @example         js
- * const SCli = require('@coffeekraken/sugar/js/cli/SCli');
+ * import SCli from '@coffeekraken/sugar/js/cli/SCli';
  * class MyCli extends SCli {
  *    static command = 'php %hostname:%port %rootDir %arguments';
  *    static interface = MyCoolSInterface;
@@ -50,7 +46,7 @@ const __SProcessManager = require('../process/SProcessManager');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SCli extends __SPromise {
+class SCli extends SPromise_1.default {
     /**
      * @name        constructor
      * @type        Function
@@ -62,7 +58,7 @@ class SCli extends __SPromise {
      */
     constructor(initialParams = {}, settings = {}) {
         // save the settings
-        settings = __deepMerge({
+        settings = deepMerge_1.default({
             id: 'SCli',
             name: null,
             includeAllParams: true,
@@ -96,8 +92,8 @@ class SCli extends __SPromise {
         this._runningParamsObj = {};
         if (!this._settings.id)
             this._settings.id = this.constructor.name;
-        this._paramsObj = __argsToObject(initialParams, this.interface.definitionObj);
-        this._paramsObj = __deepMerge(this._settings.defaultParams, this._paramsObj);
+        this._paramsObj = argsToObject_1.default(initialParams, this.interface.definitionObj);
+        this._paramsObj = deepMerge_1.default(this._settings.defaultParams, this._paramsObj);
         if (!this._paramsObj.forceChildProcess || !this.command) {
             // run the process
             const SProcessManagerInstance = this.constructor.processClass;
@@ -107,12 +103,12 @@ class SCli extends __SPromise {
                     ? settings.childProcessSettings.triggerParent.join(',')
                     : '*';
                 this._processManagerInstance.on(stacks, (value, metas) => {
-                    __SChildProcessManager.triggerParent(metas.stack, value, metas);
+                    SChildProcessManager_1.default.triggerParent(metas.stack, value, metas);
                 });
             }
         }
         else {
-            const childProcessManager = new __SChildProcessManager(this.command, {
+            const childProcessManager = new SChildProcessManager_1.default(this.command, {
                 id: settings.id,
                 definitionObj: this.interface.definitionObj,
                 defaultParams: settings.defaultParams,
@@ -123,18 +119,18 @@ class SCli extends __SPromise {
             // });
             this._processManagerInstance = childProcessManager;
         }
-        if (!__isChildProcess()) {
+        if (!childProcess_1.default()) {
             if (settings.output) {
-                if (__isClass(settings.output)) {
+                if (class_1.default(settings.output)) {
                     const outputInstance = new settings.output(this._processManagerInstance, this._paramsObj);
                 }
                 else {
                     const outputSettings = typeof settings.output === 'object' ? settings.output : {};
-                    __output(this._processManagerInstance, outputSettings);
+                    output_1.default(this._processManagerInstance, outputSettings);
                 }
             }
         }
-        __SPromise.pipe(this._processManagerInstance, this);
+        SPromise_1.default.pipe(this._processManagerInstance, this);
     }
     /**
      * @name        parseArgs
@@ -152,7 +148,7 @@ class SCli extends __SPromise {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static parseArgs(cliString) {
-        return __parseArgs(cliString, {
+        return parseArgs_1.default(cliString, {
             definitionObj: this.interface.definitionObj
         });
     }
@@ -230,15 +226,15 @@ class SCli extends __SPromise {
         if (this._runningProcess) {
             throw new Error(`You cannot spawn multiple "${this.constructor.name}" process at the same time. Please kill the currently running one using the "kill" method...`);
         }
-        settings = __deepMerge(this._settings, settings);
+        settings = deepMerge_1.default(this._settings, settings);
         if (typeof paramsObj === 'string') {
-            paramsObj = __argsToObject(paramsObj, this.interface.definitionObj);
+            paramsObj = argsToObject_1.default(paramsObj, this.interface.definitionObj);
         }
         else if (!paramsObj) {
             paramsObj = Object.assign({}, this._paramsObj);
         }
-        paramsObj = __deepMerge(Object.assign({}, this._paramsObj || {}), paramsObj);
-        if (this._processManagerInstance instanceof __SChildProcessManager) {
+        paramsObj = deepMerge_1.default(Object.assign({}, this._paramsObj || {}), paramsObj);
+        if (this._processManagerInstance instanceof SChildProcessManager_1.default) {
             paramsObj.forceChildProcess = false;
         }
         this._runningProcess = this._processManagerInstance.run(paramsObj, settings.processSettings);
@@ -251,7 +247,7 @@ class SCli extends __SPromise {
         // ${__sugarHeading({
         //   version: __packageJson(__dirname).version
         // })}\n\n
-        if (!__isChildProcess()) {
+        if (!childProcess_1.default()) {
             const launchingLogObj = {
                 temp: true,
                 value: `Launching the SCli "<primary>${this._settings.name || this._settings.id}</primary>" process...`
@@ -280,7 +276,7 @@ class SCli extends __SPromise {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     toString(paramsObj = {}, includeAllParams = this._settings.includeAllParams) {
-        return __buildCommandLine(this.command, this.interface.definitionObj, paramsObj, includeAllParams);
+        return buildCommandLine_1.default(this.command, this.interface.definitionObj, paramsObj, includeAllParams);
     }
     /**
      * @name        isRunning
@@ -311,5 +307,4 @@ class SCli extends __SPromise {
         catch (e) { }
     }
 }
-// module.exports = SCli;
-module.exports = __SCliInterface.implements(SCli);
+exports.default = SCliInterface_1.default.implements(SCli);

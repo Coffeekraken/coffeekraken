@@ -1,4 +1,9 @@
-const __isClass = require('is-class');
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const is_class_1 = __importDefault(require("is-class"));
 /**
  * @name                      class
  * @namespace           sugar.js.is
@@ -18,12 +23,13 @@ const __isClass = require('is-class');
  * @see       https://www.npmjs.com/package/is-class
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function cls(cls) {
+function cls(cls) {
     if (!Array.isArray(cls))
         cls = [cls];
     for (let i = 0; i < cls.length; i++) {
-        if (!__isClass(cls[i]))
+        if (!is_class_1.default(cls[i]))
             return false;
     }
     return true;
 }
+exports.default = cls;

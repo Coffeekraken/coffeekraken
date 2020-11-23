@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const SProcessOutput_1 = require("../SProcessOutput");
-const SBlessedOutput_1 = require("../../blessed/SBlessedOutput");
+const SProcessOutput_1 = __importDefault(require("../SProcessOutput"));
+const SBlessedOutput_1 = __importDefault(require("../../blessed/SBlessedOutput"));
 /**
  * @name          SBlessedProcessOutput
  * @namespace     sugar.node.process.output

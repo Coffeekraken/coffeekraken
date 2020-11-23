@@ -2,22 +2,28 @@
  * @name                            getArgsNames
  * @namespace           sugar.js.dev
  * @type                            Function
+ * @wip
  *
  * Get the arguments names of the passed function. Return an array of the arguments names
  *
  * @param             {Function}              func                  The function reference of which get the arguments names
  * @return            {Array}                                       An array of arguments names
  *
+ * @todo        interface
+ * @todo        doc
+ * @todo        move this into the "function" folder
+ *
  * @example         js
  * import getArgsNames from '@coffeekraken/sugar/js/dev/getArgsNames';
  * function hello(world, coco, plop) { }
  * getArgsNames(hello); // => ['world', 'coco', 'plop']
  *
+ * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function getArgsNames(func) {
   // String representaation of the function code
-  var str = func.toString();
+  let str = func.toString();
   // Remove comments of the form /* ... */
   // Removing comments of the form //
   // Remove body of the function { ... }
@@ -30,14 +36,14 @@ export default function getArgsNames(func) {
     .trim();
 
   // Start parameter names after first '('
-  var start = str.indexOf('(') + 1;
+  const start = str.indexOf('(') + 1;
 
   // End parameter names is just before last ')'
-  var end = str.length - 1;
+  const end = str.length - 1;
 
-  var result = str.substring(start, end).split(', ');
+  const result = str.substring(start, end).split(', ');
 
-  var params = [];
+  const params = [];
 
   result.forEach((element) => {
     // Removing any default value

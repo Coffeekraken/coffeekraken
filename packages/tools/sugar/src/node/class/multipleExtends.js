@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const es5_1 = require("aggregation/es5");
+const es5_1 = __importDefault(require("aggregation/es5"));
 /**
  * @name                multipleExtends
  * @namespace           sugar.js.class

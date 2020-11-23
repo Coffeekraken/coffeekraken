@@ -4,12 +4,17 @@ import __SPromise from '../promise/SPromise';
  * @name        trigger
  * @namespace           sugar.js.event
  * @type          Function
+ * @stable
  *
  * This function can ben used to trigger an event globally.
  * You can subscribe to these events using the "sugar.js.event.subscribe" function
  *
  * @param         {String}        name          The event name you want to trigger to
  * @param         {Mixed}        value          The value you want to send alongside the event
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * const trigger = require('@coffeekraken/sugar/js/event/trigger');

@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                                      isNode
  * @namespace           sugar.js.is
@@ -13,7 +15,7 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default () => {
+exports.default = () => {
     return (typeof process !== 'undefined' &&
         process.release &&
         process.release.name === 'node');

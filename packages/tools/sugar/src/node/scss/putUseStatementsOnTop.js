@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                putUseStatementsOnTop
  * @namespace           sugar.node.scss
@@ -11,7 +12,7 @@
  * @return      {String}                                The processed content
  *
  * @example         js
- * const putUseStatementsOnTop = require('@coffeekraken/sugar/node/scss/putUseStatementsOnTop');
+ * import putUseStatementsOnTop from '@coffeekraken/sugar/node/scss/putUseStatementsOnTop';
  * putUseStatementsOnTop(`
  *     $something: 'cool';
  *     \@use 'my/cool/library' as MyCoolLibrary;
@@ -22,7 +23,7 @@
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function putUseStatementsOnTop(content) {
+function putUseStatementsOnTop(content) {
     // take all the "@use" statements and put them on top
     const useMatches = content.match(/@use\s.*[^;]/gm);
     if (useMatches) {
@@ -36,4 +37,5 @@ module.exports = function putUseStatementsOnTop(content) {
         }
     }
     return content;
-};
+}
+exports.default = putUseStatementsOnTop;

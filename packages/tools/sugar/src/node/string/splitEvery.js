@@ -1,5 +1,9 @@
 "use strict";
-const __countLine = require('./countLine');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const countLine_1 = __importDefault(require("./countLine"));
 /**
  * @name                          splitEvery
  * @namespace           sugar.js.string
@@ -13,13 +17,13 @@ const __countLine = require('./countLine');
  * @return              {Array}                                             An array of the splited text parts
  *
  * @example           js
- * const splitEvery = require('@coffeekraken/node/string/splitEvery');
+ * import splitEvery from '@coffeekraken/node/string/splitEvery';
  * splitEvery('Hello World', 2, true); // => ['He','ll','o ','Wo','rl','d']
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 // TODO: Add support for special characters like terminal colors, html tags, etc...
-module.exports = function splitEvery(text, every, splitWords = false) {
+function splitEvery(text, every, splitWords = false) {
     if (splitWords) {
         const reg = new RegExp(`.{1,${every}}`, 'g');
         return [...text.matchAll(reg)].map((o) => o[0]);
@@ -65,7 +69,7 @@ module.exports = function splitEvery(text, every, splitWords = false) {
                 //   finalLines[finalLines.length - 1] += '-';
                 const restLines = splitEvery(rest, every);
                 finalLines = [...finalLines, ...restLines];
-                lineCount = __countLine(finalLines[finalLines.length - 1]);
+                lineCount = countLine_1.default(finalLines[finalLines.length - 1]);
             }
             else {
                 lineCount += item.length;
@@ -103,4 +107,5 @@ module.exports = function splitEvery(text, every, splitWords = false) {
         lines = lines.filter((l) => l !== '');
         return lines;
     }
-};
+}
+exports.default = splitEvery;

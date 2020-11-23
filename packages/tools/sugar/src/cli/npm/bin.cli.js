@@ -1,34 +1,36 @@
 "use strict";
-import _parseArgs from '../../node/cli/parseArgs';
-import _SNpmBinCliInterface from './interface/SNpmBinCliInterface';
-import _childProcess from 'child_process';
-import __packageRoot from '../../node/path/packageRoot';
-import _glob from 'glob';
-import _fs from 'fs';
-import _path from 'path';
-import _findPackages from '../../node/monorepo/findPackages';
-
-export default async function bin(stringArgs = '') {
-    const argsObj = _parseArgs(stringArgs, {
-        definitionObj: _SNpmBinCliInterface.definitionObj
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const parseArgs_1 = __importDefault(require("../../node/cli/parseArgs"));
+const SNpmBinCliInterface_1 = __importDefault(require("./interface/SNpmBinCliInterface"));
+const child_process_1 = __importDefault(require("child_process"));
+const packageRoot_1 = __importDefault(require("../../node/path/packageRoot"));
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
+const findPackages_1 = __importDefault(require("../../node/monorepo/findPackages"));
+async function bin(stringArgs = '') {
+    const argsObj = parseArgs_1.default(stringArgs, {
+        definitionObj: SNpmBinCliInterface_1.default.definitionObj
     });
     const binCommand = `npm bin ${argsObj.global ? '-g' : ''}`;
-    const binFolderPath = _childProcess.execSync(binCommand).toString();
+    const binFolderPath = child_process_1.default.execSync(binCommand).toString();
     let packagePath;
     if (!argsObj.package) {
-        packagePath = __packageRoot();
-        if (!_fs.existsSync(`${packagePath}/package.json`)) {
+        packagePath = packageRoot_1.default();
+        if (!fs_1.default.existsSync(`${packagePath}/package.json`)) {
             throw 'Sorry but you\'re not in any package folder to take the bin from...';
         }
     }
     else {
-        const packagesObj = await _findPackages();
+        const packagesObj = await findPackages_1.default();
         let packageJson;
         for (let i = 0; i < Object.keys(packagesObj).length; i++) {
             const json = packagesObj[Object.keys(packagesObj)[i]];
             if (json.name === argsObj.package) {
                 packageJson = json;
-                packageJson.absolutePath = _path.resolve(process.cwd(), Object.keys(packagesObj)[i]);
+                packageJson.absolutePath = path_1.default.resolve(process.cwd(), Object.keys(packagesObj)[i]);
                 break;
             }
         }
@@ -40,16 +42,16 @@ export default async function bin(stringArgs = '') {
             throw `Sorry but the package named "<yellow>${packageJson.name}</yellow>" does not have any bin's to install...`;
         Object.keys(packageJson.bin).forEach(binName => {
             const binPath = packageJson.bin[binName];
-            const binAbsolutePath = _path.resolve(packageJson.absolutePath, binPath);
+            const binAbsolutePath = path_1.default.resolve(packageJson.absolutePath, binPath);
             switch (argsObj.action) {
                 case 'i':
                 case 'install':
                     // console.log('ln -s ../../../workspaces/coffeekraken/packages/tools/sugar/src/cli/sugar.cli.js sugar')
                     // console.log(`ln -s ${_path.relative(binFolderPath, binAbsolutePath)} ${binName}`)
-                    const symlinkCommand = `cd ${binFolderPath} && rm -rf ${binFolderPath}/${binName} && ln -s ${_path.relative(binFolderPath, binAbsolutePath)} ${binName}`;
+                    const symlinkCommand = `cd ${binFolderPath} && rm -rf ${binFolderPath}/${binName} && ln -s ${path_1.default.relative(binFolderPath, binAbsolutePath)} ${binName}`;
                     // console.log(symlinkCommand)
                     console.log(`The "<yellow>${binName}</yellow>" bin from the package "<cyan>${packageJson.name}</cyan>" has been successfully installed ${argsObj.global ? '<magenta>globaly</magenta>' : ''}`);
-                    _childProcess.spawnSync(symlinkCommand, [], {
+                    child_process_1.default.spawnSync(symlinkCommand, [], {
                         shell: true
                     });
                     // _fs.symlinkSync(binAbsolutePath, `${binFolderPath}/${binName}`);
@@ -65,4 +67,6 @@ export default async function bin(stringArgs = '') {
             }
         });
     }
-};
+}
+exports.default = bin;
+;

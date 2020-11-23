@@ -1,11 +1,14 @@
 "use strict";
-const __uniqid = require('../string/uniqid');
-const __SPromise = require('../promise/SPromise');
-const __IPC = require('node-ipc').IPC;
-const __deepMerge = require('../object/deepMerge');
-const __isChildProcess = require('../is/childProcess');
-const __onProcessExit = require('../process/onProcessExit');
-const __getFreePort = require('../network/getFreePort');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const node_ipc_1 = require("node-ipc");
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const childProcess_1 = __importDefault(require("../is/childProcess"));
+const onProcessExit_1 = __importDefault(require("../process/onProcessExit"));
+const getFreePort_1 = __importDefault(require("../network/getFreePort"));
 /**
  * @name            SIpc
  * @namespace       sugar.node.ipc
@@ -92,12 +95,12 @@ class SIpc {
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
         this._callbacksStack = {};
-        this._settings = __deepMerge({
+        this._settings = deepMerge_1.default({
             id: `SIpc.${process.pid}`,
             silent: true
         }, settings);
         // create the new ipc instance
-        this._ipcInstance = new __IPC();
+        this._ipcInstance = new node_ipc_1.IPC();
         Object.assign(this._ipcInstance.config, this._settings);
     }
     /**
@@ -162,15 +165,15 @@ class SIpc {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     static getGlobalIpcInstance(settings = {}) {
-        return new __SPromise(async (resolve, reject) => {
+        return new SPromise_1.default(async (resolve, reject) => {
             if (__globalIpcInstance) {
                 return resolve(__globalIpcInstance);
             }
             const globalServerId = SIpc.getGlobalServerId();
             // if (!__getGlobalIpcInstancePromises.length) {
-            const ipcInstance = new SIpc(__deepMerge({}, settings));
+            const ipcInstance = new SIpc(deepMerge_1.default({}, settings));
             __globalIpcInstance = ipcInstance;
-            if (__isChildProcess()) {
+            if (childProcess_1.default()) {
                 await ipcInstance.connect(globalServerId);
             }
             else {
@@ -278,9 +281,9 @@ class SIpc {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     start(params = null) {
-        return new __SPromise(async (resolve, reject) => {
+        return new SPromise_1.default(async (resolve, reject) => {
             // make sure the passed port is free
-            let port = await __getFreePort(params && typeof params === 'object'
+            let port = await getFreePort_1.default(params && typeof params === 'object'
                 ? params.port || this._ipcInstance.config.port
                 : this._ipcInstance.config.port);
             if (!params || typeof params === 'string') {
@@ -300,7 +303,7 @@ class SIpc {
                 });
             }
             this._ipcInstance.server.start();
-            __onProcessExit(() => {
+            onProcessExit_1.default(() => {
                 return this.stop();
             });
         }, {
@@ -319,7 +322,7 @@ class SIpc {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     stop() {
-        return new __SPromise((resolve, reject) => {
+        return new SPromise_1.default((resolve, reject) => {
             this._ipcInstance.server.stop();
             resolve();
         }, {
@@ -342,7 +345,7 @@ class SIpc {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     connect(params) {
-        return new __SPromise((resolve, reject) => {
+        return new SPromise_1.default((resolve, reject) => {
             if (typeof params === 'string') {
                 this._ipcInstance.connectTo(params, () => {
                     this._serverId = params;
@@ -421,4 +424,4 @@ class SIpc {
         return this;
     }
 }
-module.exports = SIpc;
+exports.default = SIpc;

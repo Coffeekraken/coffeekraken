@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const to_regex_1 = require("to-regex");
+const to_regex_1 = __importDefault(require("to-regex"));
 /**
  * @name        dedupe
  * @namespace   sugar.js.string
@@ -15,7 +18,7 @@ const to_regex_1 = require("to-regex");
  * @return          {String}                      The deduplicated string
  *
  * @example       js
- * const dedupe = require('@coffeekraken/sugar/js/string/dedupe');
+ * import dedupe from '@coffeekraken/sugar/js/string/dedupe';
  * dedupe('hello world hello your', 'hello'); // => hello world your
  *
  * @since       2.0.0

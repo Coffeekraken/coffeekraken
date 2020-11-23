@@ -1,6 +1,6 @@
 "use strict";
-
-export default () => {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = () => {
     require('./js.cli')();
     require('./node.cli')();
 };

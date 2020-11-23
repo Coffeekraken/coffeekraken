@@ -1,5 +1,9 @@
 "use strict";
-const __fs = require('fs-extra');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_extra_1 = __importDefault(require("fs-extra"));
 // TODO tests
 /**
  * @name        writeFileSync
@@ -13,7 +17,7 @@ const __fs = require('fs-extra');
  * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeFileSync()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
  *
  * @example       js
- * const writeFileSync = require('@coffeekraken/node/fs/writeFileSync');
+ * import writeFileSync from '@coffeekraken/node/fs/writeFileSync';
  * try {
  *    writeFileSync('my/cool/file.txt', 'Hello World');
  * } catch(e) {}
@@ -21,6 +25,7 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function writeFileSync(path, data, options = {}) {
-    return __fs.outputFileSync(path, data, options);
-};
+function writeFileSync(path, data, options = {}) {
+    return fs_extra_1.default.outputFileSync(path, data, options);
+}
+exports.default = writeFileSync;

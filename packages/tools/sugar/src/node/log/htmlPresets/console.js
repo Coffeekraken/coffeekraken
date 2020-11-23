@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const replaceTags_1 = require("../../html/replaceTags");
-const chalk_1 = require("chalk");
+const replaceTags_1 = __importDefault(require("../../html/replaceTags"));
+const chalk_1 = __importDefault(require("chalk"));
 chalk_1.default.level = 3;
 /**
  * @name                              console

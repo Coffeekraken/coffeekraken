@@ -1,3 +1,8 @@
+/**
+ * @wip
+ * @todo      interface
+ * @todo      doc
+ */
 export default `
 {{#if author}}{{#author}}
 <div class="s-db-author">

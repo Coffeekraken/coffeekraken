@@ -1,5 +1,9 @@
 "use strict";
-const __fs = require('fs-extra');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_extra_1 = __importDefault(require("fs-extra"));
 // TODO tests
 /**
  * @name        ensureDirSync
@@ -12,7 +16,7 @@ const __fs = require('fs-extra');
  * @return      {Promise}                           A promise that will be resolved once the directory has been created if needed...
  *
  * @example       js
- * const ensureDirSync = require('@coffeekraken/node/fs/ensureDirSync');
+ * import ensureDirSync from '@coffeekraken/node/fs/ensureDirSync';
  * try {
  *    ensureDirSync('my/cool/dir');
  * } catch(e) {}
@@ -20,6 +24,7 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function ensureDirSync(dir) {
-    __fs.ensureDirSync(dir);
-};
+function ensureDirSync(dir) {
+    fs_extra_1.default.ensureDirSync(dir);
+}
+exports.default = ensureDirSync;

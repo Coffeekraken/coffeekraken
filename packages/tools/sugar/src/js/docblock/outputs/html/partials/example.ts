@@ -1,3 +1,8 @@
+/**
+ * @wip
+ * @todo      interface
+ * @todo      doc
+ */
 export default `
 {{#if example}}{{#example}}
 <div class="s-db-example">

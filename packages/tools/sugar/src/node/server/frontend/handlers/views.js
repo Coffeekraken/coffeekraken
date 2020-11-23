@@ -1,10 +1,12 @@
 "use strict";
-const __sugarConfig = require('../../../config/sugar');
-const __path = require('path');
-const __render = require('../../../template/render');
-const __STemplate = require('../../../template/STemplate');
-const __fs = require('fs');
-const __SDuration = require('../../../time/SDuration');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const path_1 = __importDefault(require("path"));
+const STemplate_1 = __importDefault(require("../../../template/STemplate"));
+const fs_1 = __importDefault(require("fs"));
+const SDuration_1 = __importDefault(require("../../../time/SDuration"));
 /**
  * @name                views
  * @namespace           sugar.node.server.frontend.handlers
@@ -19,18 +21,18 @@ const __SDuration = require('../../../time/SDuration');
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function views(req, res, settings = {}) {
+async function views(req, res, settings = {}) {
     let params = req.params[0].split('/');
-    const duration = new __SDuration();
-    let rootDirs = __STemplate.getRootDirs(settings.rootDir || []);
+    const duration = new SDuration_1.default();
+    let rootDirs = STemplate_1.default.getRootDirs(settings.rootDir || []);
     for (let i = 0; i < rootDirs.length; i++) {
         const rootDir = rootDirs[i];
-        for (let j = 0; j < Object.keys(__STemplate.engines).length; j++) {
-            const engineExt = Object.keys(__STemplate.engines)[j];
-            const viewPath = __path.resolve(rootDir, params.join('/')) + `.${engineExt}`;
-            if (__fs.existsSync(viewPath)) {
-                const relativeViewPath = __path.relative(rootDir, viewPath);
-                const templateInstance = new __STemplate(relativeViewPath, {
+        for (let j = 0; j < Object.keys(STemplate_1.default.engines).length; j++) {
+            const engineExt = Object.keys(STemplate_1.default.engines)[j];
+            const viewPath = path_1.default.resolve(rootDir, params.join('/')) + `.${engineExt}`;
+            if (fs_1.default.existsSync(viewPath)) {
+                const relativeViewPath = path_1.default.relative(rootDir, viewPath);
+                const templateInstance = new STemplate_1.default(relativeViewPath, {
                     rootDirs
                 });
                 const resultObj = await templateInstance.render({
@@ -46,7 +48,7 @@ module.exports = async function views(req, res, settings = {}) {
         }
     }
     // view not found
-    const notFoundTemplateInstance = new __STemplate('pages.404', {
+    const notFoundTemplateInstance = new STemplate_1.default('pages.404', {
         rootDir: rootDirs
     });
     const notFoundObj = await notFoundTemplateInstance.render({
@@ -63,4 +65,5 @@ module.exports = async function views(req, res, settings = {}) {
     res.status(404);
     res.type('text/html');
     res.send(notFoundObj.content);
-};
+}
+exports.default = views;

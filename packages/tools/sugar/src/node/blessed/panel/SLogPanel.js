@@ -1,17 +1,16 @@
 "use strict";
-const __deepMerge = require('../../object/deepMerge');
-const __blessed = require('blessed');
-const __parseHtml = require('../../terminal/parseHtml');
-const __splitEvery = require('../../string/splitEvery');
-const __countLine = require('../../string/countLine');
-const __uniqid = require('../../string/uniqid');
-const __sugarConfig = require('../../config/sugar');
-const { print, stringify } = require('q-i');
-const __SPromise = require('../../promise/SPromise');
-const __color = require('../../color/color');
-const __hotkey = require('../../keyboard/hotkey');
-const __clone = require('../../object/clone');
-const __SBlessedComponent = require('../SBlessedComponent');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const parseHtml_1 = __importDefault(require("../../terminal/parseHtml"));
+const splitEvery_1 = __importDefault(require("../../string/splitEvery"));
+const countLine_1 = __importDefault(require("../../string/countLine"));
+const uniqid_1 = __importDefault(require("../../string/uniqid"));
+const color_1 = __importDefault(require("../../color/color"));
+const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
+const q_i_1 = require("q-i");
 /**
  * @name                    SLogPanel
  * @namespace           sugar.node.blessed
@@ -25,7 +24,7 @@ const __SBlessedComponent = require('../SBlessedComponent');
  * - screen (true) {Boolean}: Specify if you want your panel wrapped inside an "blessed"(https://www.npmjs.com/package/blessed) screen object. Useful when you just want to render your panel in the terminal. If you have your own screen object
  *
  * @example         js
- * const SLogPanel = require('@coffeekraken/sugar/node/terminal/SLogPanel');
+ * import SLogPanel from '@coffeekraken/sugar/node/terminal/SLogPanel';
  * const panel = new SLogPanel('my-cool-pannel', {
  * });
  * panel.log('Hello world');
@@ -35,7 +34,7 @@ const __SBlessedComponent = require('../SBlessedComponent');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SLogPanel extends __SBlessedComponent {
+class SLogPanel extends SBlessedComponent_1.default {
     /**
      * @name              constructor
      * @type              Function
@@ -47,8 +46,8 @@ module.exports = class SLogPanel extends __SBlessedComponent {
      */
     constructor(settings = {}) {
         // save the settings
-        super(__deepMerge({
-            name: __uniqid(),
+        super(deepMerge_1.default({
+            name: uniqid_1.default(),
             beforeLog: '',
             beforeEachLine: '',
             padBeforeLog: true,
@@ -83,9 +82,9 @@ module.exports = class SLogPanel extends __SBlessedComponent {
                 inverse: true
             },
             style: {
-                bg: __color('terminal.black').toString(),
+                bg: color_1.default('terminal.black').toString(),
                 scrollbar: {
-                    bg: __color('terminal.primary').toString()
+                    bg: color_1.default('terminal.primary').toString()
                 }
             },
             padding: {
@@ -259,18 +258,18 @@ module.exports = class SLogPanel extends __SBlessedComponent {
     log(message, settings = {}) {
         if (!Array.isArray(message))
             message = [message];
-        const logSettings = __deepMerge(this._settings, settings);
+        const logSettings = deepMerge_1.default(this._settings, settings);
         let lines = [];
         message.forEach((m) => {
             // check message type
             switch (typeof m) {
                 case 'object':
-                    m = stringify(m);
+                    m = q_i_1.stringify(m);
                     break;
             }
             if (Array.isArray(m))
-                m = stringify(m);
-            m = __parseHtml(m || '');
+                m = q_i_1.stringify(m);
+            m = parseHtml_1.default(m || '');
             let beforeLog = logSettings.beforeLog;
             if (beforeLog) {
                 if (typeof beforeLog === 'function') {
@@ -295,23 +294,23 @@ module.exports = class SLogPanel extends __SBlessedComponent {
             else {
                 beforeEachLine = '';
             }
-            let formatedBeforeEachLine = __parseHtml(beforeEachLine);
-            let formatedBeforeLog = __parseHtml(beforeLog);
+            let formatedBeforeEachLine = parseHtml_1.default(beforeEachLine);
+            let formatedBeforeLog = parseHtml_1.default(beforeLog);
             let formatedMessage = m;
             // split lines
             formatedMessage = formatedMessage.split('\n');
             formatedMessage.map((line, i) => {
-                line = __splitEvery(line, this.width -
+                line = splitEvery_1.default(line, this.width -
                     logSettings.padding.left -
                     logSettings.padding.right -
-                    __countLine(formatedBeforeLog) -
-                    __countLine(formatedBeforeEachLine));
+                    countLine_1.default(formatedBeforeLog) -
+                    countLine_1.default(formatedBeforeEachLine));
                 line = line.map((l, j) => {
                     if (i === 0 && j === 0) {
                         return formatedBeforeLog + formatedBeforeEachLine + l;
                     }
                     else {
-                        return (' '.repeat(__countLine(formatedBeforeLog)) +
+                        return (' '.repeat(countLine_1.default(formatedBeforeLog)) +
                             formatedBeforeEachLine +
                             l);
                     }
@@ -326,4 +325,5 @@ module.exports = class SLogPanel extends __SBlessedComponent {
         // return the lines
         return lines;
     }
-};
+}
+exports.default = SLogPanel;

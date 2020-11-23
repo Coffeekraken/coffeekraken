@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const distanceBetween_1 = require("./distanceBetween");
+const distanceBetween_1 = __importDefault(require("./distanceBetween"));
 /**
  * @name 		circleConstrain
  * @namespace           sugar.js.geom.2d

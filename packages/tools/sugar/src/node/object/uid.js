@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const object_1 = require("../crypt/object");
-const filter_1 = require("../object/filter");
-const crypto_1 = require("crypto");
+const object_1 = __importDefault(require("../crypt/object"));
+const filter_1 = __importDefault(require("../object/filter"));
+const crypto_1 = __importDefault(require("crypto"));
 /**
  * @name                            uid
  * @namespace           node.object
@@ -19,7 +22,7 @@ const crypto_1 = require("crypto");
  * @return      {String}                                The uniqid generate based on the objects passed
  *
  * @example       js
- * const uid = require('@coffeekraken/sugar/node/object/uid');
+ * import uid from '@coffeekraken/sugar/node/object/uid';
  * uid({ hello: 'world' }, { plop: 'coco' }); // => ijfw89uf98jhw9ef8whef87hw7e8q87wegfh78wgf87gw8fgw8e7fzghwz8efgw8fwzuheihgbweuzf
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

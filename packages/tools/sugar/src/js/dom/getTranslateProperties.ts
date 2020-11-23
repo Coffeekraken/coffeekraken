@@ -4,11 +4,16 @@ import __convert from '../unit/convert';
  * @name      getTranslateProperties
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Get a translate properties of an HTMLElement
  *
  * @param 		{HTMLElement} 					$elm  		The element to get the properties from
  * @return 		{Object} 									The translate x,y and z properties
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example  	js
  * import getTranslateProperties from '@coffeekraken/sugar/js/dom/getTranslateProperties'
@@ -20,13 +25,14 @@ import __convert from '../unit/convert';
  * // 	z : 0
  * // }
  *
+ * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function getTranslateProperties($elm, unit = 'px') {
   if (!window.getComputedStyle) return;
-  let idx, mat, style, transform;
-  style = getComputedStyle($elm);
-  transform =
+  let idx, mat;
+  const style = getComputedStyle($elm);
+  const transform =
     style.transform ||
     style.webkitTransform ||
     style.mozTransform ||
@@ -40,7 +46,7 @@ export default function getTranslateProperties($elm, unit = 'px') {
   mat = transform.match(/^matrix3d\((.+)\)$/);
   if (mat) {
     // preparing the value
-    let val = mat[1]
+    const val = mat[1]
       .replace('matrix3d(', '')
       .replace(')', '')
       .split(',')
@@ -54,7 +60,7 @@ export default function getTranslateProperties($elm, unit = 'px') {
   mat = transform.match(/^matrix\((.+)\)$/);
   if (mat) {
     // preparing the value
-    let val = mat[1]
+    const val = mat[1]
       .replace('matrix(', '')
       .replace(')', '')
       .split(',')
@@ -69,7 +75,7 @@ export default function getTranslateProperties($elm, unit = 'px') {
   mat = transform.match(/^translate3d\((.+)\)$/);
   if (mat) {
     // preparing the value
-    let val = mat[1]
+    const val = mat[1]
       .replace('translate3d(', '')
       .replace(')', '')
       .split(',')
@@ -84,7 +90,7 @@ export default function getTranslateProperties($elm, unit = 'px') {
   mat = transform.match(/^translate\((.+)\)$/);
   if (mat) {
     // preparing the value
-    let val = mat[1]
+    const val = mat[1]
       .replace('translate(', '')
       .replace(')', '')
       .split(',')

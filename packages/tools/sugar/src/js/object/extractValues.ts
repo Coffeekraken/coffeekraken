@@ -2,6 +2,7 @@
  * @name            extractValues
  * @namespace       sugar.js.object
  * @type            Function
+ * @stable
  *
  * This function take an array of objects and a key name as parameters and return an array containing
  * only the specified object key value.
@@ -9,6 +10,10 @@
  * @param       {Array<Object>}         arrayOfObjects            An array of objects as source
  * @param       {String}                keyName                   The key name you want to extract of the objects
  * @return      {Array}                                           An array containing only the values of the property specified
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import extractValues from '@coffeekraken/sugar/js/object/extractValues';

@@ -1,5 +1,9 @@
 "use strict";
-const __SPromise = require('../../promise/SPromise');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 /**
  * @name          json
  * @namespace     sugar.node.template.dataHandlers
@@ -14,10 +18,11 @@ const __SPromise = require('../../promise/SPromise');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function js(filePath) {
-    return new __SPromise((resolve) => {
+function js(filePath) {
+    return new SPromise_1.default((resolve) => {
         resolve(require(filePath));
     }, {
         id: 'templateJsonDataHandler'
     });
-};
+}
+exports.default = js;

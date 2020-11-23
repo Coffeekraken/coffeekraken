@@ -1,11 +1,15 @@
 "use strict";
-const __deepMerge = require('../../object/deepMerge');
-const __SPromise = require('../../promise/SPromise');
-const __sugarConfig = require('../../config/sugar');
-const __SSugarAppModuleConfigInterface = require('./interface/SSugarAppModuleConfigInterface');
-const __isClass = require('../../is/class');
-const __SError = require('../../error/SError');
-const __SSugarAppModule = require('./SSugarAppModule');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const SPromise_1 = __importDefault(require("../../promise/SPromise"));
+const sugar_1 = __importDefault(require("../../config/sugar"));
+const SSugarAppModuleConfigInterface_1 = __importDefault(require("./interface/SSugarAppModuleConfigInterface"));
+const class_1 = __importDefault(require("../../is/class"));
+const SError_1 = __importDefault(require("../../error/SError"));
+const SSugarAppModule_1 = __importDefault(require("./SSugarAppModule"));
 /**
  * @name            SSugarApp
  * @namespace       sugar.node.ui.sugar
@@ -24,13 +28,13 @@ const __SSugarAppModule = require('./SSugarAppModule');
  * -
  *
  * @example         js
- * const SSugarApp = require('@coffeekraken/sugar/node/ui/sugar/SSugarApp');
+ * import SSugarApp from @coffeekraken/sugar/node/ui/sugar/SSugarApp';
  * const sugarUi = new SSugarApp();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SSugarApp extends __SPromise {
+class SSugarApp extends SPromise_1.default {
     /**
      * @name              constructor
      * @type              Function
@@ -42,7 +46,7 @@ module.exports = class SSugarApp extends __SPromise {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        settings = __deepMerge({
+        settings = deepMerge_1.default({
             id: 'SSugarApp',
             name: 'Sugar App'
         }, settings);
@@ -82,11 +86,11 @@ module.exports = class SSugarApp extends __SPromise {
          */
         this._state = 'loading';
         // load and check each modules
-        this._loadModules(__sugarConfig('sugar-app.modules'));
+        this._loadModules(sugar_1.default('sugar-app.modules'));
         // Pipe all the modules "events"
         Object.keys(this._modulesObjs).forEach((moduleIdx) => {
             const moduleObj = this._modulesObjs[moduleIdx];
-            __SPromise.pipe(moduleObj.instance, this, {
+            SPromise_1.default.pipe(moduleObj.instance, this, {
                 processor: (value, metas) => {
                     if (typeof value === 'object') {
                         value.module = {
@@ -119,7 +123,7 @@ module.exports = class SSugarApp extends __SPromise {
     }
     _setState(value) {
         if (['loading', 'ready', 'error'].indexOf(value) === -1) {
-            throw new __SError(`Sorry but the "<yellow>state</yellow>" property setted to "<magenta>${__toString(value)}</magenta>" of your "<cyan>${this.constructor.name}</cyan>" class can contain only one of these values: ${[
+            throw new SError_1.default(`Sorry but the "<yellow>state</yellow>" property setted to "<magenta>${__toString(value)}</magenta>" of your "<cyan>${this.constructor.name}</cyan>" class can contain only one of these values: ${[
                 'loading',
                 'ready',
                 'error'
@@ -192,13 +196,13 @@ module.exports = class SSugarApp extends __SPromise {
                 moduleObj.module += '.js';
             }
             // validate module interface
-            __SSugarAppModuleConfigInterface.applyAndComplete(moduleObj, {
+            SSugarAppModuleConfigInterface_1.default.applyAndComplete(moduleObj, {
                 name: `${this.constructor.name}.SSugarAppModule.${moduleIdx}`
             });
             // require and instanciate the module class
             const moduleClass = require(moduleObj.module);
-            if (!__isClass(moduleClass)) {
-                throw new __SError(`The passed module file "<cyan>${moduleObj.module}</cyan>" does not export a <green>proper Class</green> for the module "<yellow>${moduleObj.name}</yellow>"...`);
+            if (!class_1.default(moduleClass)) {
+                throw new SError_1.default(`The passed module file "<cyan>${moduleObj.module}</cyan>" does not export a <green>proper Class</green> for the module "<yellow>${moduleObj.name}</yellow>"...`);
             }
             const settings = {
                 id: moduleObj.id,
@@ -206,8 +210,8 @@ module.exports = class SSugarApp extends __SPromise {
                 shortcuts: moduleObj.shortcuts
             };
             const moduleInstance = new moduleClass(moduleObj.params, settings);
-            if (!(moduleInstance instanceof __SSugarAppModule)) {
-                throw new __SError(`It seems that the passed class for your module "<yellow>${moduleObj.name}</yellow>" does not extends the sugar "<green>SSugarAppModule</green>" one...`);
+            if (!(moduleInstance instanceof SSugarAppModule_1.default)) {
+                throw new SError_1.default(`It seems that the passed class for your module "<yellow>${moduleObj.name}</yellow>" does not extends the sugar "<green>SSugarAppModule</green>" one...`);
             }
             moduleObj.instance = moduleInstance;
             moduleInstance.on('state,*.state', (state, metas) => {
@@ -231,4 +235,5 @@ module.exports = class SSugarApp extends __SPromise {
             this._modulesObjs[moduleIdx] = moduleObj;
         });
     }
-};
+}
+exports.default = SSugarApp;

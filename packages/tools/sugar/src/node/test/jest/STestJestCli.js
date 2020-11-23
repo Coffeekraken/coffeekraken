@@ -1,8 +1,12 @@
 "use strict";
-const __SCli = require('../../cli/SCli');
-const __deepMerge = require('../../object/deepMerge');
-const __STestJestCliInterface = require('./interface/STestJestInterface');
-const __STestJestProcess = require('./STestJestProcess');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SCli_1 = __importDefault(require("../../cli/SCli"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const STestJestInterface_1 = __importDefault(require("./interface/STestJestInterface"));
+const STestJestProcess_1 = __importDefault(require("./STestJestProcess"));
 /**
  * @name            STestJestCli
  * @namespace           sugar.node.test.jest
@@ -14,7 +18,7 @@ const __STestJestProcess = require('./STestJestProcess');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class STestJestCli extends __SCli {
+class STestJestCli extends SCli_1.default {
     /**
      * @name          constructor
      * @type          Function
@@ -25,12 +29,13 @@ class STestJestCli extends __SCli {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(args = {}, settings = {}) {
-        super(args, __deepMerge({
+        super(args, deepMerge_1.default({
             id: 'cli.test.jest',
             name: 'Cli Test Jest'
         }, settings));
     }
 }
+exports.default = STestJestCli;
 /**
  * @name          command
  * @type          String
@@ -50,7 +55,7 @@ STestJestCli.command = 'sugar test.jest %arguments';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-STestJestCli.interface = __STestJestCliInterface;
+STestJestCli.interface = STestJestInterface_1.default;
 /**
  * @name          processClass
  * @type          SProcess
@@ -60,6 +65,4 @@ STestJestCli.interface = __STestJestCliInterface;
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-STestJestCli.processClass = __STestJestProcess;
-// module.exports = STestJestCli;
-module.exports = __STestJestCliInterface.implements(STestJestCli);
+STestJestCli.processClass = STestJestProcess_1.default;

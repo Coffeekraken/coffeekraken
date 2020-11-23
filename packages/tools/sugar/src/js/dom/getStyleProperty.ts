@@ -5,6 +5,7 @@ import autoCast from '../string/autoCast';
  * @name      getStyleProperty
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Get a style property on the passed element through the computed style.
  * This function try to store the actual style to not trigger more that 1 redraw
@@ -14,11 +15,16 @@ import autoCast from '../string/autoCast';
  * @param 		{String} 						property 	The css property to get
  * @return 		{Mixed} 									The style value
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example  	js
  * import getStyleProperty from '@coffeekraken/sugar/js/dom/getStyleProperty'
  * const opacity = getStyleProperty(myCoolHTMLElement, 'opacity');
  *
  * @see 		https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function getStyleProperty(elm, property) {

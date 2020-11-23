@@ -1,14 +1,16 @@
-const __upperFirst = require('../../string/upperFirst');
-
 /**
  * @name              example
  * @namespace           sugar.js.docblock.tags
  * @type              Function
+ * @wip
  *
  * Parse the example tag
  *
  * @param       {Object}          data        The data object parsed in the string
  * @example      {Object}                      The formated object
+ *
+ * @todo        interface
+ * @todo        doc
  *
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>

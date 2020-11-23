@@ -1,12 +1,11 @@
 import SSvgFilter from './SSvgFilter';
 
-// TODO tests
-
 /**
  * @name 		        SOutlineSvgFilter
  * @namespace           sugar.js.filter
  * @type            Class
  * @extends 	    	SSvgFilter
+ * @stable
  *
  * This class represent an outline filter that can be applied on any HTMLElement.
  *
@@ -14,6 +13,11 @@ import SSvgFilter from './SSvgFilter';
  * const filter = new SOutlineSvgFilter();
  * filter.applyTo(myCoolHTMLElement);
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since         1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SOutlineSvgFilter extends SSvgFilter {

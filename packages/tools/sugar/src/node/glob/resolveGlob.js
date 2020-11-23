@@ -1,14 +1,17 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
-const __SPromise = require('../promise/SPromise');
-const __glob = require('glob');
-const __SFsFile = require('../fs/SFsFile');
-const __extractGlob = require('./extractGlob');
-const __isGlob = require('../is/glob');
-const __isPath = require('../is/path');
-const __fs = require('fs');
-const __toRegex = require('to-regex');
-const __isDirectory = require('../is/directory');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const glob_1 = __importDefault(require("glob"));
+const SFsFile_1 = __importDefault(require("../fs/SFsFile"));
+const glob_2 = __importDefault(require("../is/glob"));
+const path_1 = __importDefault(require("../is/path"));
+const fs_1 = __importDefault(require("fs"));
+const to_regex_1 = __importDefault(require("to-regex"));
+const directory_1 = __importDefault(require("../is/directory"));
 /**
  * @name            resolveGlob
  * @namespace       sugar.node.glob
@@ -28,16 +31,16 @@ const __isDirectory = require('../is/directory');
  * @todo          document the special ":" syntax available
  *
  * @example         js
- * const resolveGlob = require('@coffeekraken/sugar/node/glob/resolveGlob');
+ * import resolveGlob from '@coffeekraken/sugar/node/glob/resolveGlob';
  * await resolveGlob('/my/cool/pattern/*.js');
  *
  * @see         https://www.npmjs.com/package/glob
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function resolveGlob(globs, settings = {}) {
-    return new __SPromise((resolve, reject, trigger, cancel) => {
-        settings = __deepMerge({
+function resolveGlob(globs, settings = {}) {
+    return new SPromise_1.default((resolve, reject, trigger, cancel) => {
+        settings = deepMerge_1.default({
             rootDir: settings.cwd || process.cwd(),
             symlinks: true,
             nodir: true
@@ -57,34 +60,34 @@ module.exports = function resolveGlob(globs, settings = {}) {
                     const regSplits = split.split('/').splice(1);
                     const regString = regSplits[0];
                     const flags = regSplits[regSplits.length - 1];
-                    searchReg = __toRegex(regString, {
+                    searchReg = to_regex_1.default(regString, {
                         flags
                     });
                 }
-                else if (__isGlob(split)) {
+                else if (glob_2.default(split)) {
                     globPattern = split;
                 }
-                else if (__isPath(split, true)) {
+                else if (path_1.default(split, true)) {
                     rootDir = split;
                 }
             });
-            let pathes = __glob.sync(globPattern, {
+            let pathes = glob_1.default.sync(globPattern, {
                 cwd: rootDir,
                 ...settings
             });
             // check if need to search for inline content
             if (searchReg) {
                 pathes = pathes.filter((path) => {
-                    if (__isDirectory(path))
+                    if (directory_1.default(path))
                         return false;
-                    const content = __fs.readFileSync(path, 'utf8');
+                    const content = fs_1.default.readFileSync(path, 'utf8');
                     if (searchReg.test(content))
                         return true;
                     return false;
                 });
             }
             pathes.forEach((path) => {
-                const sFsFile = new __SFsFile(path, {
+                const sFsFile = new SFsFile_1.default(path, {
                     rootDir
                 });
                 filesArray.push(sFsFile);
@@ -95,4 +98,5 @@ module.exports = function resolveGlob(globs, settings = {}) {
     }, {
         id: 'resolveGlob'
     });
-};
+}
+exports.default = resolveGlob;

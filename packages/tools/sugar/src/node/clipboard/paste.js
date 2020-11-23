@@ -1,5 +1,9 @@
 "use strict";
-const __clipboardy = require('clipboardy');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const clipboardy_1 = __importDefault(require("clipboardy"));
 /**
  * @name            paste
  * @namespace       sugar.node.clipboard
@@ -11,8 +15,8 @@ const __clipboardy = require('clipboardy');
  * @return       {String}             The text to paste
  *
  * @example       js
- * const paste = require('@coffeekraken/sugar/node/clipboard/paste');
- * const copy = require('@coffeekraken/sugar/node/clipboard/copy');
+ * import paste from '@coffeekraken/sugar/node/clipboard/paste';
+ * import copy from '@coffeekraken/sugar/node/clipboard/copy';
  * copy('Hello world');
  * past(); // => Hello world
  *
@@ -20,6 +24,7 @@ const __clipboardy = require('clipboardy');
  * @see         https://www.npmjs.com/package/clipboardy
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function paste(text) {
-    return __clipboardy.readSync();
-};
+function paste(text) {
+    return clipboardy_1.default.readSync();
+}
+exports.default = paste;

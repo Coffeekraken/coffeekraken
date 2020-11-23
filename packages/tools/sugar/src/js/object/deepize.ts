@@ -3,6 +3,7 @@ import __set from './set';
  * @name          deepize
  * @namespace     sugar.js.object
  * @type          Function
+ * @stable
  *
  * This function simply take an object like this one:
  * {
@@ -17,6 +18,10 @@ import __set from './set';
  *
  * @param       {Object}        object        The object to convert
  * @return      {Object}                      The converted object
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import deepize from '@coffeekraken/sugar/js/object/deepize';

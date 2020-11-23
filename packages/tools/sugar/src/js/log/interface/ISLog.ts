@@ -3,7 +3,7 @@ export interface ISLogObj {
 }
 
 export interface ISLogAdapter {
-  _settings: object;
+  _settings: Record<string, unknown>;
 }
 
 export interface ISLogAdaptersSettingObj {
@@ -32,8 +32,10 @@ export interface ISLogSettings {
   overrideNativeConsole: boolean;
 }
 
-export default interface ISLog {
+export interface ISLogCtor {
   new (settings: ISLogSettings): ISLog;
+}
+export default interface ISLog {
   log(...args: ISLogObj[]): Promise<any>;
   info(...args: ISLogObj[]): Promise<any>;
   warn(...args: ISLogObj[]): Promise<any>;

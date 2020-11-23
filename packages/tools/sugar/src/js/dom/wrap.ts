@@ -2,11 +2,16 @@
  * @name      wrap
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Wrap an HTMLElement inside another `$wrapper` one
  *
  * @param    {HTMLElement}    $toWrap    The element to wrap
  * @param    {HTMLElement}    $wrapper    The wrapper element
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example    js
  * import wrap from '@coffeekraken/sugar/js/dom/wrap'
@@ -23,6 +28,7 @@
  * //   </div>
  * // </div>
  *
+ * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function wrap($elm, $wrapper) {

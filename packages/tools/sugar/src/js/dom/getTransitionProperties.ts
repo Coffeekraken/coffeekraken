@@ -1,17 +1,20 @@
 import __getStyleProperty from './getStyleProperty';
 import __convert from '../time/convert';
 
-// TODO tests
-
 /**
  * @name      getTransitionProperties
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Get the css transition properties from an HTMLElement in an object format
  *
  * @param 		{HTMLElement} 					elm  		The element to get the properties from
  * @return 		{Object} 									The animation properties
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example  	js
  * import getTransitionProperties from '@coffeekraken/sugar/js/dom/getTransitionProperties'
@@ -25,6 +28,7 @@ import __convert from '../time/convert';
  * // 	totalDuration : 200
  * // }
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 

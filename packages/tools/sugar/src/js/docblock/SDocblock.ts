@@ -11,6 +11,7 @@ import __fs from 'fs';
  * @name                  Dockblock
  * @namespace           sugar.js.docblock
  * @type                  Class
+ * @wip
  *
  * This is the main class that expose the methods like "parse", etc...
  * You have to instanciate it by passing a settings object. Here's the available options:
@@ -20,6 +21,8 @@ import __fs from 'fs';
  * - tags ({}) {Object}: An object representing the functions used to parse each tags. The object format is ```{ tagName: parseFn }```
  *
  * @todo        tests
+ * @todo        interface
+ * @todo        doc
  *
  * @example         js
  * import SDocblock from '@coffeekraken/sugar/js/docblock/SSDocblock';

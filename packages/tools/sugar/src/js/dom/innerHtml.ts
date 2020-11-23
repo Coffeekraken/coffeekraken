@@ -3,12 +3,11 @@ import __injectStyle from '../css/injectStyle';
 import __emptyNode from './emptyNode';
 import __convert from '../time/convert';
 
-// TODO tests
-
 /**
  * @name            innerHtml
  * @namespace           sugar.js.dom
  * @type            Function
+ * @stable
  *
  * Change the content of a Node with the possibility to animate the change using one of these animations:
  * - fade
@@ -22,6 +21,10 @@ import __convert from '../time/convert';
  * @param           {String}                 content        The new content of the node
  * @param           {Object}                 [settings={}]  The settings to change the content like 'animIn', 'animOut', and more...
  * @return          {Promise}                               A promise resolved when the change has been made
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import innerHtml from '@coffeekraken/sugar/js/dom/innerHtml'
@@ -39,6 +42,7 @@ import __convert from '../time/convert';
  *    // do something when the change has been made...
  * });
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function innerHtml(node, content, settings = {}) {

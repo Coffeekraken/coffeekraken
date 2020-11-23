@@ -5,6 +5,7 @@ import __parseEs6Imports from 'parse-es6-imports';
  * @name            SEs6Import
  * @namespace       sugar.js.es6
  * @type            Class
+ * @wip
  *
  * This class represent an es6 import statement with properties like:
  * - path {String}: The import path
@@ -14,6 +15,10 @@ import __parseEs6Imports from 'parse-es6-imports';
  * - raw {String}: The raw import statement
  *
  * @param           {String}        statement           The import statement
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example             js
  * import SEs6Import from '@coffeekraken/sugar/js/es6/SEs6Import';

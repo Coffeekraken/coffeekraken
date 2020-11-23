@@ -1,29 +1,32 @@
 "use strict";
-const __extension = require('../fs/extension');
-const __SCache = require('../cache/SCache');
-const __unquote = require('../string/unquote');
-const __path = require('path');
-const __stripCssComments = require('../css/stripCssComments');
-const __folderPath = require('../fs/folderPath');
-const __deepMerge = require('../object/deepMerge');
-const __SPromise = require('../promise/SPromise');
-const __md5 = require('../crypt/md5');
-const __sass = require('sass');
-const __packageRoot = require('../path/packageRoot');
-const __getFilename = require('../fs/filename');
-const __isPath = require('../is/path');
-const __fs = require('fs');
-const __getSharedResourcesString = require('./getSharedResourcesString');
-const __putUseStatementsOnTop = require('./putUseStatementsOnTop');
-const __glob = require('glob');
-const __parseScss = require('scss-parser').parse;
-const __stringifyScss = require('scss-parser').stringify;
-const __createQueryWrapper = require('query-ast');
-const __csso = require('csso');
-const __isGlob = require('is-glob');
-const __unique = require('../array/unique');
-const __SBuildScssInterface = require('./build/interface/SBuildScssInterface');
-const { start } = require('repl');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const extension_1 = __importDefault(require("../fs/extension"));
+const SCache_1 = __importDefault(require("../cache/SCache"));
+const unquote_1 = __importDefault(require("../string/unquote"));
+const path_1 = __importDefault(require("path"));
+const stripCssComments_1 = __importDefault(require("../css/stripCssComments"));
+const folderPath_1 = __importDefault(require("../fs/folderPath"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const md5_1 = __importDefault(require("../crypt/md5"));
+const sass_1 = __importDefault(require("sass"));
+const packageRoot_1 = __importDefault(require("../path/packageRoot"));
+const filename_1 = __importDefault(require("../fs/filename"));
+const path_2 = __importDefault(require("../is/path"));
+const fs_1 = __importDefault(require("fs"));
+const getSharedResourcesString_1 = __importDefault(require("./getSharedResourcesString"));
+const putUseStatementsOnTop_1 = __importDefault(require("./putUseStatementsOnTop"));
+const glob_1 = __importDefault(require("glob"));
+const scss_parser_1 = require("scss-parser");
+const scss_parser_2 = require("scss-parser");
+const query_ast_1 = __importDefault(require("query-ast"));
+const csso_1 = __importDefault(require("csso"));
+const is_glob_1 = __importDefault(require("is-glob"));
+const unique_1 = __importDefault(require("../array/unique"));
+const SBuildScssInterface_1 = __importDefault(require("./build/interface/SBuildScssInterface"));
 /**
  * @name                SScssCompiler
  * @namespace           sugar.node.scss
@@ -45,7 +48,7 @@ const { start } = require('repl');
  * @todo            check for map output when no file path
  *
  * @example         js
- * const SScssCompiler = require('@coffeekraken/sugar/node/scss/SScssCompiler');
+ * import SScssCompiler from '@coffeekraken/sugar/node/scss/SScssCompiler';
  * const compiler = new SScssCompiler();
  * const compiledFile = await compiler.compile('my/cool/code.scss');
  * const compiledCode = await compiler.compile(`
@@ -56,7 +59,7 @@ const { start } = require('repl');
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SScssCompiler {
+class SScssCompiler {
     /**
      * @name            constructor
      * @type             Function
@@ -80,9 +83,9 @@ module.exports = class SScssCompiler {
          */
         this._settings = {};
         this._includePaths = [];
-        this._settings = __deepMerge({
+        this._settings = deepMerge_1.default({
             id: this.constructor.name,
-            ...__SBuildScssInterface.getDefaultValues(),
+            ...SBuildScssInterface_1.default.getDefaultValues(),
             includePaths: [],
             putUseOnTop: true
         }, settings);
@@ -110,8 +113,8 @@ module.exports = class SScssCompiler {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     compile(source, settings = {}) {
-        return new __SPromise(async (resolve, reject, trigger, cancel) => {
-            settings = __deepMerge(this._settings, {
+        return new SPromise_1.default(async (resolve, reject, trigger, cancel) => {
+            settings = deepMerge_1.default(this._settings, {
                 _isChild: false
             }, settings);
             const startTime = Date.now();
@@ -124,7 +127,7 @@ module.exports = class SScssCompiler {
                 css: null
             };
             source = source.trim();
-            const includePaths = __unique([
+            const includePaths = unique_1.default([
                 ...(this._settings.includePaths
                     ? !Array.isArray(this._settings.includePaths)
                         ? [this._settings.includePaths]
@@ -140,35 +143,35 @@ module.exports = class SScssCompiler {
                         ? [settings.sass.includePaths]
                         : settings.sass.includePaths
                     : []),
-                `${__packageRoot()}/node_modules`
+                `${packageRoot_1.default()}/node_modules`
                 // '/'
             ]);
             this._includePaths = includePaths;
             let sharedResources = settings.sharedResources || [];
             if (!Array.isArray(sharedResources))
                 sharedResources = [sharedResources];
-            const resourceContent = __getSharedResourcesString(sharedResources);
+            const resourceContent = getSharedResourcesString_1.default(sharedResources);
             if (resourceContent) {
                 dataObj.sharedResources = resourceContent;
             }
             let sassPassedSettings = Object.assign({}, settings.sass || {});
             delete sassPassedSettings.includePaths;
             delete sassPassedSettings.sharedResources;
-            const sassSettings = __deepMerge({
+            const sassSettings = deepMerge_1.default({
                 importer: [
                     (url, prev, done) => {
                         if (resourceContent) {
                             const realPath = this._findDependency(url);
                             if (realPath) {
-                                let content = __fs.readFileSync(realPath, 'utf8');
+                                let content = fs_1.default.readFileSync(realPath, 'utf8');
                                 const importMatches = content.match(/@import\s['"].*['"];/gm);
                                 if (importMatches) {
                                     importMatches.forEach((importStatement) => {
                                         let replaceImportStatement = importStatement;
                                         const importPathMatches = importStatement.match(/['"].*['"]/g);
                                         if (importPathMatches) {
-                                            const importPath = __unquote(importPathMatches[0]);
-                                            const absoluteImportPath = __path.resolve(__folderPath(realPath), importPath);
+                                            const importPath = unquote_1.default(importPathMatches[0]);
+                                            const absoluteImportPath = path_1.default.resolve(folderPath_1.default(realPath), importPath);
                                             content = content.replace(importStatement, `@import "${absoluteImportPath}";`);
                                         }
                                     });
@@ -188,38 +191,38 @@ module.exports = class SScssCompiler {
                 includePaths
             }, sassPassedSettings);
             // engage the cache
-            const cache = new __SCache(this._settings.id, {
+            const cache = new SCache_1.default(this._settings.id, {
                 ttl: '10d'
             });
             if (settings.clearCache && !settings._isChild) {
                 await cache.clear();
             }
             let cacheId;
-            if (__isPath(source)) {
-                if (!__fs.existsSync(source) && source.slice(0, 1) === '/') {
+            if (path_2.default(source)) {
+                if (!fs_1.default.existsSync(source) && source.slice(0, 1) === '/') {
                     source = source.slice(1);
                 }
-                source = __path.resolve(settings.rootDir, source);
+                source = path_1.default.resolve(settings.rootDir, source);
                 const sourcePath = this._getRealFilePath(source);
                 if (sourcePath) {
                     // get the file stats
-                    const stats = __fs.statSync(sourcePath);
+                    const stats = fs_1.default.statSync(sourcePath);
                     const mTimeMs = stats.mtimeMs;
                     // try to get from cache
-                    cacheId = __md5.encrypt(`${sourcePath}-${mTimeMs}`);
+                    cacheId = md5_1.default.encrypt(`${sourcePath}-${mTimeMs}`);
                     // add the folder path in the includePaths setting
-                    const filePath = __folderPath(sourcePath);
+                    const filePath = folderPath_1.default(sourcePath);
                     sassSettings.includePaths.unshift(filePath);
                     settings.rootDir = filePath;
                     // read the file to get his content
-                    dataObj.scss = __fs.readFileSync(source, 'utf8');
+                    dataObj.scss = fs_1.default.readFileSync(source, 'utf8');
                 }
             }
             else {
                 // set the scss property with the source
                 dataObj.scss = source;
                 // create the cache id using the source code
-                cacheId = __md5.encrypt(source);
+                cacheId = md5_1.default.encrypt(source);
             }
             // try to get from cache
             const cachedObj = await cache.get(cacheId);
@@ -231,8 +234,8 @@ module.exports = class SScssCompiler {
             // extract the things that can be used
             // by others like mixins and variables declarations$
             if (!dataObj.fromCache) {
-                const ast = __parseScss(dataObj.scss);
-                const $ = __createQueryWrapper(ast);
+                const ast = scss_parser_1.parse(dataObj.scss);
+                const $ = query_ast_1.default(ast);
                 let mixinsVariablesString = '';
                 const nodes = $('stylesheet')
                     .children()
@@ -243,14 +246,14 @@ module.exports = class SScssCompiler {
                 });
                 nodes.nodes.forEach((node) => {
                     mixinsVariablesString += `
-              ${__stringifyScss(node.node)}
+              ${scss_parser_2.stringify(node.node)}
             `;
                 });
                 // save the mixin and variables resources
                 dataObj.mixinsAndVariables = mixinsVariablesString;
                 // strip comments of not
                 dataObj.scss = settings.stripComments
-                    ? __stripCssComments(dataObj.scss)
+                    ? stripCssComments_1.default(dataObj.scss)
                     : dataObj.scss;
             }
             if (!dataObj.fromCache) {
@@ -277,14 +280,14 @@ module.exports = class SScssCompiler {
             // compile
             if (!dataObj.fromCache || !settings._isChild) {
                 if (settings.putUseOnTop) {
-                    toCompile = __putUseStatementsOnTop(toCompile);
+                    toCompile = putUseStatementsOnTop_1.default(toCompile);
                 }
-                const renderObj = __sass.renderSync({
+                const renderObj = sass_1.default.renderSync({
                     ...sassSettings,
                     data: toCompile
                 });
                 let compiledResultString = settings.stripComments
-                    ? __stripCssComments(renderObj.css.toString())
+                    ? stripCssComments_1.default(renderObj.css.toString())
                     : renderObj.css.toString();
                 dataObj.css = compiledResultString.trim();
                 if (renderObj.map) {
@@ -296,7 +299,7 @@ module.exports = class SScssCompiler {
                 }
             }
             if (settings.minify && !settings._isChild) {
-                dataObj.css = __csso.minify(dataObj.css).css;
+                dataObj.css = csso_1.default.minify(dataObj.css).css;
             }
             // remove empty lines
             if (dataObj.css) {
@@ -356,9 +359,9 @@ module.exports = class SScssCompiler {
         let finalImports = {};
         for (let i = 0; i < importStatements.length; i++) {
             const importStatement = importStatements[i].trim();
-            const importStatementPath = __unquote(importStatement.replace('@import ', '').replace(';', '').trim());
-            let importAbsolutePath = __path.resolve(settings.rootDir, importStatementPath);
-            if (__isGlob(importAbsolutePath)) {
+            const importStatementPath = unquote_1.default(importStatement.replace('@import ', '').replace(';', '').trim());
+            let importAbsolutePath = path_1.default.resolve(settings.rootDir, importStatementPath);
+            if (is_glob_1.default(importAbsolutePath)) {
                 if (!finalImports[importStatement]) {
                     finalImports[importStatement] = {
                         rawStatement: importStatement,
@@ -366,12 +369,12 @@ module.exports = class SScssCompiler {
                         paths: []
                     };
                 }
-                const globPaths = __glob.sync(importAbsolutePath, {});
+                const globPaths = glob_1.default.sync(importAbsolutePath, {});
                 if (globPaths && globPaths.length) {
                     globPaths.forEach((path) => {
                         finalImports[importStatement].paths.push({
                             absolutePath: path,
-                            relativePath: __path.relative(settings.rootDir, path)
+                            relativePath: path_1.default.relative(settings.rootDir, path)
                         });
                     });
                 }
@@ -383,7 +386,7 @@ module.exports = class SScssCompiler {
                 paths: [
                     {
                         absolutePath: importAbsolutePath,
-                        relativePath: __path.relative(settings.rootDir, importAbsolutePath)
+                        relativePath: path_1.default.relative(settings.rootDir, importAbsolutePath)
                     }
                 ]
             };
@@ -398,7 +401,7 @@ module.exports = class SScssCompiler {
                     const compileRes = await this.compile(importPath, {
                         ...settings,
                         _isChild: true,
-                        rootDir: __folderPath(importPath)
+                        rootDir: folderPath_1.default(importPath)
                     });
                     childrenObj[pathObj.absolutePath] = compileRes;
                 }
@@ -411,9 +414,9 @@ module.exports = class SScssCompiler {
         };
     }
     _getRealFilePath(path) {
-        const extension = __extension(path);
-        const filename = __getFilename(path);
-        const folderPath = __folderPath(path);
+        const extension = extension_1.default(path);
+        const filename = filename_1.default(path);
+        const folderPath = folderPath_1.default(path);
         let pattern;
         if (!extension) {
             pattern = `${folderPath}/?(_)${filename}.*`;
@@ -421,10 +424,11 @@ module.exports = class SScssCompiler {
         else {
             pattern = `${folderPath}/?(_)${filename}`;
         }
-        const potentialPaths = __glob.sync(pattern);
+        const potentialPaths = glob_1.default.sync(pattern);
         if (potentialPaths && potentialPaths.length) {
             return potentialPaths[0];
         }
         return null;
     }
-};
+}
+exports.default = SScssCompiler;

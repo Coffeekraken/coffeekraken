@@ -1,4 +1,9 @@
-import __deepMerge from '../object/deepMerge';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name          trimLines
  * @namespace     sugar.js.string
@@ -24,8 +29,8 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function trimLines(string, settings = {}) {
-    settings = __deepMerge({
+function trimLines(string, settings = {}) {
+    settings = deepMerge_1.default({
         leftPadding: 0,
         rightPadding: 0,
         keepEmptyLines: true
@@ -48,3 +53,4 @@ export default function trimLines(string, settings = {}) {
         .join('\n');
     return string;
 }
+exports.default = trimLines;

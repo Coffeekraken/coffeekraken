@@ -4,6 +4,7 @@ import __SEvent from '../event/SEvent';
  * @name      dispatchEvent
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Helper to quickly display an event with some optional data attached to it
  *
@@ -11,12 +12,17 @@ import __SEvent from '../event/SEvent';
  * @param 		{String} 						name 			The event name to dispatch
  * @param 		{Mixed} 						data 			The data to attache to the event
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example  	js
  * import dispatchEvent from '@coffeekraken/sugar/js/dom/dispatchEvent'
  * dispatchEvent(myCoolHTMLElement, 'myCoolEventName', {
  * 		var1 : 'value1'
  * });
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function dispatchEvent($target, name, data = null) {

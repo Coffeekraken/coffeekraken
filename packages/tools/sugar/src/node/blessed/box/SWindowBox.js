@@ -1,16 +1,12 @@
 "use strict";
-const __blessed = require('blessed');
-const __SBlessedComponent = require('../SBlessedComponent');
-const __deepMerge = require('../../object/deepMerge');
-const __parseHtml = require('../../terminal/parseHtml');
-const __countLine = require('../../string/countLine');
-const __hotkey = require('../../keyboard/hotkey');
-const __color = require('../../color/color');
-const __SPromise = require('../../promise/SPromise');
-const __SInput = require('../form/SInput');
-const __multiple = require('../../class/multipleExtends');
-const __activeSpace = require('../../core/activeSpace');
-const __escapeStack = require('../../terminal/escapeStack');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const blessed_1 = __importDefault(require("blessed"));
+const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const color_1 = __importDefault(require("../../color/color"));
 /**
  * @name                  SBlessedWindowBox
  * @namespace           sugar.node.blessed.box
@@ -29,12 +25,12 @@ const __escapeStack = require('../../terminal/escapeStack');
  *    - bg (__color('terminal.primary').toString()) {Color}: The background color to use
  * - ...blessed.box settings
  * @example       js
- * const SBlessedWindowBox = require('@coffeekraken/sugar/node/blessed/box/SBlessedWindowBox');
+ * import SBlessedWindowBox from '@coffeekraken/sugar/node/blessed/box/SBlessedWindowBox';
  * const box = new SBlessedWindowBox(myCoolContent, {});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedWindowBox extends __SBlessedComponent {
+class SBlessedWindowBox extends SBlessedComponent_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -45,10 +41,10 @@ module.exports = class SBlessedWindowBox extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor($content, settings = {}) {
-        super(__deepMerge({
+        super(deepMerge_1.default({
             style: {
                 fg: 'black',
-                bg: __color('terminal.primary').toString()
+                bg: color_1.default('terminal.primary').toString()
             },
             padding: {
                 top: 1,
@@ -57,7 +53,7 @@ module.exports = class SBlessedWindowBox extends __SBlessedComponent {
                 bottom: 1
             }
         }, settings));
-        this._$body = __blessed.box({
+        this._$body = blessed_1.default.box({
             width: '100%',
             height: '100%',
             position: {
@@ -77,4 +73,6 @@ module.exports = class SBlessedWindowBox extends __SBlessedComponent {
             super.update();
         });
     }
-};
+}
+exports.default = SBlessedWindowBox;
+;

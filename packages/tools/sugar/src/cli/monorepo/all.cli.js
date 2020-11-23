@@ -1,5 +1,9 @@
 "use strict";
-
-export default (stringArgs = '') => {
-    require('./link.cli')(stringArgs);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const link_cli_1 = __importDefault(require("./link.cli"));
+exports.default = async (stringArgs = '') => {
+    await link_cli_1.default(stringArgs);
 };

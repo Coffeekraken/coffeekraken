@@ -5,11 +5,16 @@ import __formSerialize from 'form-serialize';
  * @name      sendForm
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Send a form through an ajax call and return back a promise resolved with the server response
  *
  * @param 		{HTMLFormElement} 		form 		The form to send
  * @return     {Promise}                    A promise resolved when the forn has been sent
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * import sendForm from '@coffeekraken/sugar/js/dom/sendForm'
@@ -18,6 +23,7 @@ import __formSerialize from 'form-serialize';
  * 	// do something with the response
  * })
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function sendForm(form) {

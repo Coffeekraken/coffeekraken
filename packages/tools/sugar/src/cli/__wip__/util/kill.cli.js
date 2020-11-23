@@ -1,10 +1,12 @@
 "use strict";
-import __parseHtml from '../../node/terminal/parseHtml';
-import __fkill from 'fkill';
-import psList from 'ps-list';
-import __SPromise from '../../node/promise/SPromise';
-
-export default async (stringArgs = '') => {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const parseHtml_1 = __importDefault(require("../../node/terminal/parseHtml"));
+const fkill_1 = __importDefault(require("fkill"));
+const ps_list_1 = __importDefault(require("ps-list"));
+exports.default = async (stringArgs = '') => {
     if (!stringArgs) {
         throw new Error(`You must specify a sugar process(s) to kill using the following format:
       - sugar util.kill server // this will kill all the sugar processes that starts with "server"
@@ -16,15 +18,15 @@ export default async (stringArgs = '') => {
         stringArgs = '';
     }
     const processesArray = [];
-    console.log(__parseHtml(`Listing all the processes that need to be killed...`));
+    console.log(parseHtml_1.default(`Listing all the processes that need to be killed...`));
     let processesObj;
     try {
-        processesObj = await psList();
+        processesObj = await ps_list_1.default();
     }
     catch (e) {
     }
     if (!processesObj) {
-        console.log(__parseHtml('No processes to kill...'));
+        console.log(parseHtml_1.default('No processes to kill...'));
         process.exit();
     }
     Object.keys(processesObj).forEach((key) => {
@@ -44,18 +46,18 @@ export default async (stringArgs = '') => {
         processesArray.push(processObj);
     });
     if (processesArray.length === 0) {
-        console.log(__parseHtml(`<green>Theirs's no process to kill...</green>`));
+        console.log(parseHtml_1.default(`<green>Theirs's no process to kill...</green>`));
         process.exit();
     }
-    console.log(__parseHtml(`Process(es) to kill: <primary>${processesArray.length}</primary>`));
+    console.log(parseHtml_1.default(`Process(es) to kill: <primary>${processesArray.length}</primary>`));
     for (let obj in processesArray) {
         const processObj = processesArray[obj];
-        console.log(__parseHtml(`Killing the process <primary>${processObj.cmd}</primary> with the PID <cyan>${processObj.pid}</cyan>`));
-        await __fkill(parseInt(processObj.pid), {
+        console.log(parseHtml_1.default(`Killing the process <primary>${processObj.cmd}</primary> with the PID <cyan>${processObj.pid}</cyan>`));
+        await fkill_1.default(parseInt(processObj.pid), {
             force: true
             // silent: true
         });
     }
-    console.log(__parseHtml(`<primary>${processesArray.length}</primary> process(es) have been killed <green>successfully</green>`));
+    console.log(parseHtml_1.default(`<primary>${processesArray.length}</primary> process(es) have been killed <green>successfully</green>`));
     process.exit();
 };

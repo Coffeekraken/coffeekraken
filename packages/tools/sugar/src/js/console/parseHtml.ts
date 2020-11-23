@@ -12,6 +12,10 @@ __chalk.level = 3;
  * @param           {String|Array}                  message                 The message to format of an array of messages to format
  * @return          {String}                                          The formated message
  *
+ * @todo        interface
+ * @todo        doc
+ *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export const tagsMap = {

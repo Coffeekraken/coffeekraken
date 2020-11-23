@@ -1,5 +1,9 @@
 "use strict";
-const __isInPackage = require('../path/isInPackage');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const isInPackage_1 = __importDefault(require("../path/isInPackage"));
 /**
  * @name            inPackage
  * @namespace           sugar.node.is
@@ -13,12 +17,13 @@ const __isInPackage = require('../path/isInPackage');
  * @return      {Boolean}                           true if is in the passed package, false if not
  *
  * @example       js
- * const isInPackage = require('@coffeekraken/sugar/node/is/inPackage');
+ * import isInPackage from '@coffeekraken/sugar/node/is/inPackage';
  * isInPackage('@coffeekraken/sugar'); // => true
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = function inPackage(name, from = process.cwd(), highest = false) {
-    return __isInPackage(name, from, highest);
-};
+function inPackage(name, from = process.cwd(), highest = false) {
+    return isInPackage_1.default(name, from, highest);
+}
+exports.default = inPackage;

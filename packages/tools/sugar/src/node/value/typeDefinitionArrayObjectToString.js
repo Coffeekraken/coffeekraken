@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name          typeDefinitionArrayObjectToString
  * @namespace     sugar.js.value
@@ -31,7 +33,7 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function typeDefinitionArrayObjectToString(typeDefinitionArrayObj) {
+function typeDefinitionArrayObjectToString(typeDefinitionArrayObj) {
     const parts = [];
     if (!Array.isArray(typeDefinitionArrayObj))
         typeDefinitionArrayObj = [typeDefinitionArrayObj];
@@ -45,3 +47,4 @@ export default function typeDefinitionArrayObjectToString(typeDefinitionArrayObj
     });
     return parts.join('|');
 }
+exports.default = typeDefinitionArrayObjectToString;

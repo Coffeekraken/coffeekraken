@@ -1,8 +1,13 @@
 "use strict";
-import __argsToObject from '../../node/cli/argsToObject';
-import __chokidar from 'chokidar';
-import __packageRoot from '../../node/path/packageRoot';
-import __path from 'path';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.definition = void 0;
+const argsToObject_1 = __importDefault(require("../../node/cli/argsToObject"));
+const chokidar_1 = __importDefault(require("chokidar"));
+const packageRoot_1 = __importDefault(require("../../node/path/packageRoot"));
+const path_1 = __importDefault(require("path"));
 /**
  * @name                watch
  * @namespace           cli.fs
@@ -45,33 +50,31 @@ const definition = {
         description: 'Some glob patterns to ignore'
     }
 };
-
-export default (stringArgs = '') => {
-    const args = __argsToObject(stringArgs, definition);
-    const watcher = __chokidar.watch(args.pattern.split(','), {
+exports.definition = definition;
+exports.default = (stringArgs = '') => {
+    const args = argsToObject_1.default(stringArgs, definition);
+    const watcher = chokidar_1.default.watch(args.pattern.split(','), {
         persistent: args.persistent,
         ignored: args.ignore,
         ignoreInitial: true,
         followSymlinks: true,
-        cwd: __packageRoot(process.cwd()),
+        cwd: packageRoot_1.default(process.cwd()),
         ignorePermissionErrors: false
     });
     watcher
         .on('add', (path) => {
         if (args.type.split(',').indexOf('new') === -1)
             return;
-        console.log(`new:${__path.resolve(path)}`);
+        console.log(`new:${path_1.default.resolve(path)}`);
     })
         .on('change', (path) => {
         if (args.type.split(',').indexOf('update') === -1)
             return;
-        console.log(`update:${__path.resolve(path)}`);
+        console.log(`update:${path_1.default.resolve(path)}`);
     })
         .on('unlink', (path) => {
         if (args.type.split(',').indexOf('delete') === -1)
             return;
-        console.log(`delete:${__path.resolve(path)}`);
+        console.log(`delete:${path_1.default.resolve(path)}`);
     });
 };
-
-export { definition };

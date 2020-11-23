@@ -1,14 +1,19 @@
-import __SObjectValidationError from '../../error/SObjectValidationError';
-import __isPlainObject from '../../is/plainObject';
-import __deepMerge from '../../object/deepMerge';
-import __filter from '../../object/filter';
-import __get from '../../object/get';
-import __typeof from '../../value/typeof';
-import __validateValue from '../value/validateValue';
-import __SStaticValidation from './validation/SStaticValidation';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SObjectValidationError_1 = __importDefault(require("../../error/SObjectValidationError"));
+const plainObject_1 = __importDefault(require("../../is/plainObject"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const filter_1 = __importDefault(require("../../object/filter"));
+const get_1 = __importDefault(require("../../object/get"));
+const typeof_1 = __importDefault(require("../../value/typeof"));
+const validateValue_1 = __importDefault(require("../value/validateValue"));
+const SStaticValidation_1 = __importDefault(require("./validation/SStaticValidation"));
 const _validationsObj = {
     static: {
-        class: __SStaticValidation,
+        class: SStaticValidation_1.default,
         args: ['%object', '%property']
     }
 };
@@ -50,8 +55,8 @@ const _validationsObj = {
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function validateObject(objectToCheck, definitionObj, settings = {}, _argPath = []) {
-    settings = __deepMerge({
+function validateObject(objectToCheck, definitionObj, settings = {}, _argPath = []) {
+    settings = deepMerge_1.default({
         throw: true,
         name: null,
         interface: null,
@@ -71,7 +76,7 @@ export default function validateObject(objectToCheck, definitionObj, settings = 
         const argName = Object.keys(definitionObj)[i];
         const argDefinition = definitionObj[argName];
         // __SObjectDefinitionInterface.apply(argDefinition);
-        let value = __get(objectToCheck, argName);
+        let value = get_1.default(objectToCheck, argName);
         if (value === undefined || value === null) {
             if (objectToCheck.constructor &&
                 objectToCheck.constructor[argName] !== undefined) {
@@ -85,19 +90,19 @@ export default function validateObject(objectToCheck, definitionObj, settings = 
         issuesObj[argName] = {
             $name: argName,
             $received: {
-                type: __typeof(value),
+                type: typeof_1.default(value),
                 value
             },
             $expected: argDefinition,
             $issues: [],
             $messages: {}
         };
-        const validationRes = __validateValue(value, argDefinition, {
+        const validationRes = validateValue_1.default(value, argDefinition, {
             name: argName,
             throw: settings.throw
         });
         if (validationRes !== true) {
-            issuesObj[argName] = __deepMerge(issuesObj[argName], validationRes || {}, {
+            issuesObj[argName] = deepMerge_1.default(issuesObj[argName], validationRes || {}, {
                 array: true
             });
         }
@@ -119,7 +124,7 @@ export default function validateObject(objectToCheck, definitionObj, settings = 
             const validationObj = Object.assign({}, settings.validationsObj[validationName]);
             validationObj.args = validationObj.args.map((arg) => {
                 if (typeof arg === 'string' && arg.slice(0, 15) === '%definitionObj.') {
-                    arg = __get(definitionObj, arg.replace('%definitionObj.', ''));
+                    arg = get_1.default(definitionObj, arg.replace('%definitionObj.', ''));
                 }
                 if (typeof arg === 'string' && arg === '%object') {
                     arg = objectToCheck;
@@ -153,7 +158,11 @@ export default function validateObject(objectToCheck, definitionObj, settings = 
                 Object.defineProperty(objectToCheck, argName, {
                     set: (value) => {
                         // validate the passed value
-                        const validationResult = __validateValue(value, argDefinition, Object.assign(Object.assign({}, settings), { throw: true, name: `${settings.name}.${argName}` }));
+                        const validationResult = validateValue_1.default(value, argDefinition, {
+                            ...settings,
+                            throw: true,
+                            name: `${settings.name}.${argName}`
+                        });
                         if (descriptor && descriptor.set)
                             return descriptor.set(value);
                         objectToCheck[`__${argName}`] = value;
@@ -177,10 +186,10 @@ export default function validateObject(objectToCheck, definitionObj, settings = 
             issuesObj[argName] = settings.extendsFn(argName, argDefinition, value, issuesObj[argName]);
         }
         // filter args that have no issues
-        issuesObj = __filter(issuesObj, (item, key) => {
+        issuesObj = filter_1.default(issuesObj, (item, key) => {
             if (Array.isArray(item))
                 return true;
-            if (__isPlainObject(item) && item.$issues) {
+            if (plainObject_1.default(item) && item.$issues) {
                 if (!item.$issues.length)
                     return false;
                 if (issuesObj.$issues.indexOf(key) === -1)
@@ -193,7 +202,10 @@ export default function validateObject(objectToCheck, definitionObj, settings = 
         if (argDefinition.definitionObj &&
             (argDefinition.required ||
                 (objectToCheck !== null && objectToCheck !== undefined))) {
-            const childrenValidation = validateObject(objectToCheck || {}, argDefinition.definitionObj, Object.assign(Object.assign({}, settings), { throw: false }), [..._argPath, argName]);
+            const childrenValidation = validateObject(objectToCheck || {}, argDefinition.definitionObj, {
+                ...settings,
+                throw: false
+            }, [..._argPath, argName]);
             // console.log('CC', childrenValidation);
             if (childrenValidation !== true && childrenValidation.$issues) {
                 childrenValidation.$issues.forEach((issue) => {
@@ -208,7 +220,8 @@ export default function validateObject(objectToCheck, definitionObj, settings = 
     if (!issuesObj.$issues.length)
         return true;
     if (settings.throw) {
-        throw new __SObjectValidationError(issuesObj);
+        throw new SObjectValidationError_1.default(issuesObj);
     }
     return issuesObj;
 }
+exports.default = validateObject;

@@ -1,11 +1,15 @@
 "use strict";
-const __deepMerge = require('../../object/deepMerge');
-const __packageRoot = require('../../path/packageRoot');
-const __fs = require('fs');
-const __Fuse = require('fuse.js');
-const __SSearchResultItem = require('../SSearchResultItem');
-const __searchQueryParser = require('search-query-parser');
-const __SUrlAction = require('../../action/browser/SUrlAction');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
+const fs_1 = __importDefault(require("fs"));
+const fuse_js_1 = __importDefault(require("fuse.js"));
+const SSearchResultItem_1 = __importDefault(require("../SSearchResultItem"));
+const search_query_parser_1 = __importDefault(require("search-query-parser"));
+const SUrlAction_1 = __importDefault(require("../../action/browser/SUrlAction"));
 /**
  * @name                search
  * @namespace           sugar.node.search.handlers
@@ -21,14 +25,14 @@ const __SUrlAction = require('../../action/browser/SUrlAction');
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function search(searchString, settings = {}) {
-    settings = __deepMerge({
-        filePath: __packageRoot() + '/docMap.json',
+function search(searchString, settings = {}) {
+    settings = deepMerge_1.default({
+        filePath: packageRoot_1.default() + '/docMap.json',
         action: {
             url: '/doc[path]'
         }
     }, settings);
-    let queryObj = __searchQueryParser.parse(searchString.trim(), {
+    let queryObj = search_query_parser_1.default.parse(searchString.trim(), {
         keywords: ['name', 'namespace', 'path']
     });
     delete queryObj.offsets;
@@ -39,11 +43,11 @@ module.exports = function search(searchString, settings = {}) {
     }
     return new Promise((resolve, reject) => {
         // load the docmap
-        if (!__fs.existsSync(settings.filePath)) {
+        if (!fs_1.default.existsSync(settings.filePath)) {
             throw new Error(`You try to make a research using the <primary>docMap</primary> search handler but it seems that your configuration point to a file that does not exists "<cyan>${settings.filePath}</cyan>"...`);
         }
         const docMap = require(settings.filePath);
-        const fuse = new __Fuse(docMap, {
+        const fuse = new fuse_js_1.default(docMap, {
             includeScore: true,
             includeMatches: true,
             minMatchCharLength: 2,
@@ -79,14 +83,15 @@ module.exports = function search(searchString, settings = {}) {
                 action = settings.action(item);
             }
             else if (typeof settings.action === 'object') {
-                action = new __SUrlAction({
+                action = new SUrlAction_1.default({
                     url: settings.action.url.replace('[path]', item.path),
                     target: '_self'
                 });
             }
-            return new __SSearchResultItem(item.name, item.namespace, action, {});
+            return new SSearchResultItem_1.default(item.name, item.namespace, action, {});
         });
         // resolving the handler with the results array
         resolve(results);
     });
-};
+}
+exports.default = search;

@@ -21,6 +21,7 @@ import __authorPartial from './html/partials/author';
  * @name            SDocblockHtmlOutput
  * @namespace       sugar.js.docblock.outputs
  * @type            Class
+ * @wip
  *
  * This class represent an SDocblock output like "html", "html", etc...
  * Supported docblock tags:
@@ -39,6 +40,10 @@ import __authorPartial from './html/partials/author';
  * @param       {SDocblock}         docblockInstance        The docblock instance you want to output using this class
  * @param       {Object}            [settings={}]           Some settings to configure your output class:
  * - ...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import SDocblock from '@coffeekraken/sugar/js/docblock/SDocblock';

@@ -1,16 +1,18 @@
 "use strict";
-const __argsToObject = require('../cli/argsToObject');
-const __isClass = require('../is/class');
-const __isChildProcess = require('../is/childProcess');
-const __packageRoot = require('../path/packageRoot');
-const __SPromise = require('../promise/SPromise');
-const __SProcessManagerInterface = require('./interface/SProcessManagerInterface');
-const __SError = require('../error/SError');
-const __deepMerge = require('../object/deepMerge');
-const __SIpc = require('../ipc/SIpc');
-const __getExtendsStack = require('../class/getExtendsStack');
-const __output = require('./output');
-const { watch } = require('chokidar');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const argsToObject_1 = __importDefault(require("../cli/argsToObject"));
+const class_1 = __importDefault(require("../is/class"));
+const childProcess_1 = __importDefault(require("../is/childProcess"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const SProcessManagerInterface_1 = __importDefault(require("./interface/SProcessManagerInterface"));
+const SError_1 = __importDefault(require("../error/SError"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SIpc_1 = __importDefault(require("../ipc/SIpc"));
+const getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
+const output_1 = __importDefault(require("./output"));
 /**
  * @name            SProcessManager
  * @namespace       sugar.node.process
@@ -28,7 +30,7 @@ const { watch } = require('chokidar');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SProcessManager extends __SPromise {
+class SProcessManager extends SPromise_1.default {
     /**
      * @name          constructor
      * @type          Function
@@ -39,7 +41,7 @@ class SProcessManager extends __SPromise {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(ProcessClass, settings = {}) {
-        settings = __deepMerge({
+        settings = deepMerge_1.default({
             id: 'SProcessManager',
             name: 'Unnamed Process Manager',
             deamon: null,
@@ -74,23 +76,23 @@ class SProcessManager extends __SPromise {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this.currentProcess = null;
-        if (__getExtendsStack(ProcessClass).indexOf('SProcess') === -1) {
-            throw new __SError(`Sorry but the <yellow>SProcessManager</yellow> class can handle only <cyan>SProcess</cyan> based process classes...`);
+        if (getExtendsStack_1.default(ProcessClass).indexOf('SProcess') === -1) {
+            throw new SError_1.default(`Sorry but the <yellow>SProcessManager</yellow> class can handle only <cyan>SProcess</cyan> based process classes...`);
         }
         this._ProcessClass = ProcessClass;
-        this._settings.initialParams = __argsToObject(this._settings.initialParams, {
+        this._settings.initialParams = argsToObject_1.default(this._settings.initialParams, {
             definitionObj: ProcessClass.interface.definitionObj
         });
-        if (!__isChildProcess()) {
+        if (!childProcess_1.default()) {
             if (this._settings.output) {
-                if (__isClass(this._settings.output)) {
+                if (class_1.default(this._settings.output)) {
                     const outputInstance = new this._settings.output(this, this._settings.initialParams);
                 }
                 else {
                     const outputSettings = typeof this._settings.output === 'object'
                         ? this._settings.output
                         : {};
-                    __output(this, outputSettings);
+                    output_1.default(this, outputSettings);
                 }
             }
         }
@@ -124,7 +126,7 @@ class SProcessManager extends __SPromise {
         const trigger = process.env.GLOBAL_SIPC_TRIGGER_ID
             ? `${process.env.GLOBAL_SIPC_TRIGGER_ID}.trigger`
             : 'trigger';
-        __SIpc.trigger(trigger, {
+        SIpc_1.default.trigger(trigger, {
             stack,
             value,
             metas
@@ -162,7 +164,7 @@ class SProcessManager extends __SPromise {
         if (this._started)
             return;
         this._started = true;
-        settings = __deepMerge(this._settings, settings);
+        settings = deepMerge_1.default(this._settings, settings);
         // deamon
         if (this.deamon)
             this._initDeamon(settings);
@@ -186,7 +188,7 @@ class SProcessManager extends __SPromise {
      *
      */
     _initDeamon(settings = {}) {
-        settings = __deepMerge(this._settings, settings);
+        settings = deepMerge_1.default(this._settings, settings);
         this.deamon.on('update,*.update', (data, metas) => {
             // do not launch multiple processes at the same time
             if (this.currentProcess)
@@ -245,12 +247,12 @@ class SProcessManager extends __SPromise {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     run(params = {}, settings = {}) {
-        settings = __deepMerge(this._settings, {}, settings);
-        params = __deepMerge(Object.assign(settings.initialParams), params);
+        settings = deepMerge_1.default(this._settings, {}, settings);
+        params = deepMerge_1.default(Object.assign(settings.initialParams), params);
         // check that their's not another processing process
         if (this.currentProcess) {
             if (settings.throw) {
-                throw new __SError(`Sorry but you cannot launch multiple processes in the same <yellow>${this.constructor.name}</yellow> instance...`);
+                throw new SError_1.default(`Sorry but you cannot launch multiple processes in the same <yellow>${this.constructor.name}</yellow> instance...`);
             }
             else {
                 this.trigger('log', {
@@ -263,7 +265,7 @@ class SProcessManager extends __SPromise {
         this.currentProcess = new this._ProcessClass({
             ...settings.processSettings
         });
-        __SPromise.pipe(this.currentProcess, this);
+        SPromise_1.default.pipe(this.currentProcess, this);
         this._processesStack.push(this.currentProcess);
         this.currentProcess.run(params);
         if (this.deamon && this.deamon.state === 'watching') {
@@ -285,7 +287,6 @@ class SProcessManager extends __SPromise {
         return this.currentProcess;
     }
 }
-// module.exports = SProcess;
-module.exports = __SProcessManagerInterface.implements(SProcessManager, [
-    __SProcessManagerInterface
+exports.default = SProcessManagerInterface_1.default.implements(SProcessManager, [
+    SProcessManagerInterface_1.default
 ]);

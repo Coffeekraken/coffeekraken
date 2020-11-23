@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isNumber
  * @namespace           sugar.js.is
@@ -16,6 +18,7 @@
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isNumber(source) {
+function isNumber(source) {
     return !isNaN(parseFloat(source)) && isFinite(source);
 }
+exports.default = isNumber;

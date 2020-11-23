@@ -1,11 +1,15 @@
 "use strict";
-const __blessed = require('blessed');
-const __SBlessedComponent = require('../SBlessedComponent');
-const __deepMerge = require('../../object/deepMerge');
-const __SPromise = require('../../promise/SPromise');
-const __color = require('../../color/color');
-const __escapeStack = require('../../terminal/escapeStack');
-const __activeSpace = require('../../core/activeSpace');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const blessed_1 = __importDefault(require("blessed"));
+const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const SPromise_1 = __importDefault(require("../../promise/SPromise"));
+const color_1 = __importDefault(require("../../color/color"));
+const escapeStack_1 = __importDefault(require("../../terminal/escapeStack"));
+const activeSpace_1 = __importDefault(require("../../core/activeSpace"));
 /**
  * @name                  SBlessedInput
  * @namespace           sugar.node.blessed.input
@@ -21,12 +25,12 @@ const __activeSpace = require('../../core/activeSpace');
  * // TODO: document the "promise" and "$input" properties
  *
  * @example       js
- * const SBlessedInput = require('@coffeekraken/sugar/node/blessed/form/SBlessedInput');
+ * import SBlessedInput from '@coffeekraken/sugar/node/blessed/form/SBlessedInput';
  * new SBlessedInput({});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedInput extends __SBlessedComponent {
+class SBlessedInput extends SBlessedComponent_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -37,7 +41,7 @@ module.exports = class SBlessedInput extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        const inputSettings = __deepMerge({
+        const inputSettings = deepMerge_1.default({
             id: 'SInput',
             focus: true,
             placeholder: null,
@@ -47,8 +51,8 @@ module.exports = class SBlessedInput extends __SBlessedComponent {
             mouse: true,
             inputOnFocus: true,
             style: {
-                bg: __color('terminal.cyan').toString(),
-                fg: __color('terminal.black').toString()
+                bg: color_1.default('terminal.cyan').toString(),
+                fg: color_1.default('terminal.black').toString()
             },
             padding: {
                 top: 1,
@@ -62,8 +66,8 @@ module.exports = class SBlessedInput extends __SBlessedComponent {
         // height: null,
         });
         this._escapeKeyPromise = null;
-        this.$input = __blessed.textbox(inputSettings);
-        this.promise = new __SPromise({
+        this.$input = blessed_1.default.textbox(inputSettings);
+        this.promise = new SPromise_1.default({
             id: this._settings.id
         });
         this.$input.height =
@@ -76,9 +80,9 @@ module.exports = class SBlessedInput extends __SBlessedComponent {
             }
         });
         this.$input.on('focus', () => {
-            __activeSpace.append('form.input');
-            this._escapeKeyPromise = __escapeStack(() => {
-                __activeSpace.remove('.form.input');
+            activeSpace_1.default.append('form.input');
+            this._escapeKeyPromise = escapeStack_1.default(() => {
+                activeSpace_1.default.remove('.form.input');
             });
         });
         this.$input.on('attach', () => {
@@ -121,28 +125,28 @@ module.exports = class SBlessedInput extends __SBlessedComponent {
                 });
                 this.$input.on('submit', (value) => {
                     this.promise.resolve(value);
-                    this.$input.style.bg = __color('terminal.green').toString();
+                    this.$input.style.bg = color_1.default('terminal.green').toString();
                     if (inputSettings.width === 'auto') {
                         this.$input.width =
                             this.$input.getValue().length +
                                 this.$input.padding.left +
                                 this.$input.padding.right;
                     }
-                    __activeSpace.remove('.form.input');
+                    activeSpace_1.default.remove('.form.input');
                     if (this._escapeKeyPromise)
                         this._escapeKeyPromise.cancel();
                     this.update();
                 });
                 this.$input.on('cancel', () => {
                     this.promise.cancel();
-                    this.$input.style.bg = __color('terminal.red').toString();
+                    this.$input.style.bg = color_1.default('terminal.red').toString();
                     if (inputSettings.width === 'auto') {
                         this.$input.width =
                             this.$input.getValue().length +
                                 this.$input.padding.left +
                                 this.$input.padding.right;
                     }
-                    __activeSpace.remove('.form.input');
+                    activeSpace_1.default.remove('.form.input');
                     if (this._escapeKeyPromise)
                         this._escapeKeyPromise.cancel();
                     this.update();
@@ -152,4 +156,5 @@ module.exports = class SBlessedInput extends __SBlessedComponent {
         });
         this.append(this.$input);
     }
-};
+}
+exports.default = SBlessedInput;

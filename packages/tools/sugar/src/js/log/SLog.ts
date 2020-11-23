@@ -7,9 +7,14 @@ import __isPlainObject from '../is/plainObject';
  * @name                    SLog
  * @namespace           sugar.js.log
  * @type                    Class
+ * @beta
  *
  * This class allows you to log your messages, errors, etc... easily through some adapters that cover some targets like "console" of course,
  * "mail", "slack", etc...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example               js
  * import SLog from '@coffeekraken/sugar/js/log/SLog';
@@ -21,6 +26,7 @@ import __isPlainObject from '../is/plainObject';
  * });
  * logger.log('Something cool happend...');
  *
+ * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SLog {
@@ -79,9 +85,9 @@ export default class SLog {
     );
 
     // ensure every adapters are a class instance
-    Object.keys(this._settings.adapters).forEach((adapterName) => {
+    Object.keys(this._settings.adapters).forEach(async (adapterName) => {
       if (typeof this._settings.adapters[adapterName] === 'string') {
-        const cls = require(this._settings.adapters[adapterName]);
+        const cls = await import(this._settings.adapters[adapterName]);
         this._settings.adapters[adapterName] = new cls();
       }
     });
@@ -104,7 +110,7 @@ export default class SLog {
    */
   _overrideNativeConsole() {
     // check if need to override the native console methods
-    const _this = this;
+    const _this = this; // eslint-disable-line
     const newConsole = (function (oldCons) {
       (global || window).nativeConsole = Object.assign({}, oldCons);
       return {

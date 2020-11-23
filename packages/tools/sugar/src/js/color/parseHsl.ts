@@ -16,11 +16,11 @@
  */
 export default function parseHsl(hslString) {
   hslString = hslString.toLowerCase();
-  let string = hslString
+  const string = hslString
     .replace('hsl(', '')
     .replace(')', '')
     .replace(/\s/g, '');
-  let array = string.split(',');
+  const array = string.split(',');
   return {
     h: parseFloat(array[0]),
     s: parseFloat(array[1]),

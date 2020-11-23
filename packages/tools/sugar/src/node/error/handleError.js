@@ -1,16 +1,14 @@
 "use strict";
-const __copy = require('../clipboard/copy');
-const __isChildProcess = require('../is/childProcess');
-const __packageRoot = require('../path/packageRoot');
-const __SError = require('../error/SError');
-const __parseHtml = require('../terminal/parseHtml');
-const __keypress = require('keypress');
-const __hotkey = require('../keyboard/hotkey');
-const __toString = require('../string/toString');
-const __parse = require('../string/parse');
-const __blessed = require('blessed');
-const __color = require('../color/color');
-const __SIpc = require('../ipc/SIpc');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const childProcess_1 = __importDefault(require("../is/childProcess"));
+const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
+const toString_1 = __importDefault(require("../string/toString"));
+const parse_1 = __importDefault(require("../string/parse"));
+const blessed_1 = __importDefault(require("blessed"));
+const color_1 = __importDefault(require("../color/color"));
 /**
  * @name                    handleError
  * @namespace               sugar.node.error
@@ -21,7 +19,7 @@ const __SIpc = require('../ipc/SIpc');
  * pass this function as the handler one and that's it...
  *
  * @example           js
- * const handleError = require('@coffeekraken/sugar/node/error/handleError');
+ * import handleError from '@coffeekraken/sugar/node/error/handleError';
  * process.on('uncaughtException', handleError);
  * process.on('unhandledRejection', handleError);
  *
@@ -29,34 +27,35 @@ const __SIpc = require('../ipc/SIpc');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 const errorPanels = [];
-module.exports = function handleError() {
+function handleError() {
     if (process.env.NODE_ENV === 'test')
         return;
-    if (__isChildProcess()) {
+    if (childProcess_1.default()) {
         process.on('uncaughtException', __handleChildProcessErrors);
         process.on('unhandledRejection', __handleChildProcessErrors);
     }
     else {
         process.on('uncaughtException', __handleMainProcessErrors);
         process.on('unhandledRejection', __handleMainProcessErrors);
-        __hotkey('escape', {}).on('press', () => {
+        hotkey_1.default('escape', {}).on('press', () => {
             if (!errorPanels.length)
                 return;
             const $panel = errorPanels.pop();
             $panel.destroy();
         });
     }
-};
+}
+exports.default = handleError;
 function createErrorPanel(error) {
     if (!global.screen)
         return;
-    const $bg = __blessed.box({
+    const $bg = blessed_1.default.box({
         width: '100%-10',
         height: '100%-6',
         top: 3,
         left: 5,
         style: {
-            bg: __color('terminal.red').toString()
+            bg: color_1.default('terminal.red').toString()
         },
         padding: {
             top: 1,
@@ -65,16 +64,16 @@ function createErrorPanel(error) {
             bottom: 1
         }
     });
-    const $box = __blessed.box({
+    const $box = blessed_1.default.box({
         width: '100%-4',
         height: '100%-2',
         top: 0,
         left: 0,
         style: {
             fg: 'white',
-            bg: __color('terminal.black').toString(),
+            bg: color_1.default('terminal.black').toString(),
             scrollbar: {
-                bg: __color('terminal.primary').toString()
+                bg: color_1.default('terminal.primary').toString()
             }
         },
         scrollable: true,
@@ -88,7 +87,7 @@ function createErrorPanel(error) {
             right: 2,
             bottom: 1
         },
-        content: __toString(error)
+        content: toString_1.default(error)
     });
     $bg.append($box);
     global.screen.append($bg);
@@ -126,7 +125,7 @@ function __handleMainProcessErrors(error) {
         const stringErrorMatches = error.match(stringErrorReg);
         console.log(error);
         if (stringErrorMatches) {
-            const errorString = __parse(stringErrorMatches[0]
+            const errorString = parse_1.default(stringErrorMatches[0]
                 .replace(/\s?message:\s?/, '')
                 .replace(/\s?name:\s?/, '')
                 .trim()
@@ -145,7 +144,7 @@ function __handleMainProcessErrors(error) {
         return;
     }
     else {
-        createErrorPanel(__toString(error));
+        createErrorPanel(toString_1.default(error));
         return;
     }
 }

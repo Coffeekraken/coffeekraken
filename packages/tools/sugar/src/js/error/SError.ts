@@ -4,7 +4,9 @@ import __packageRoot from '../path/packageRoot';
 import __toString from '../string/toString';
 
 /**
- * @todo    Doc
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  */
 
 export default class SError extends Error {

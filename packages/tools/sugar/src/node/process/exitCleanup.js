@@ -1,8 +1,11 @@
 "use strict";
-const __psList = require('ps-list');
-const __fkill = require('fkill');
-const __deepMerge = require('../object/deepMerge');
-const __minimatch = require('minimatch');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const ps_list_1 = __importDefault(require("ps-list"));
+const fkill_1 = __importDefault(require("fkill"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name              exitCleanup
  * @namespace           sugar.node.process
@@ -13,20 +16,20 @@ const __minimatch = require('minimatch');
  * the main process has been terminated
  *
  * @example         js
- * const exitCleanup = require('@coffeekraken/sugar/node/process/exitCleanup');
+ * import exitCleanup from '@coffeekraken/sugar/node/process/exitCleanup';
  * await exitCleanup();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function exitCleanup(settings = {}) {
+function exitCleanup(settings = {}) {
     return new Promise((resolve, reject) => {
-        settings = __deepMerge({
+        settings = deepMerge_1.default({
             pid: [],
             cmd: [/.*\/bin\/sugar\s.*/]
         }, settings);
         (async () => {
-            const processes = await __psList();
+            const processes = await ps_list_1.default();
             const processesToKill = processes.filter((p) => {
                 if (p.pid === process.pid)
                     return false;
@@ -42,11 +45,12 @@ module.exports = function exitCleanup(settings = {}) {
                 return false;
             });
             for (let j = 0; j < processesToKill.length; j++) {
-                await __fkill(processesToKill[j].pid, {
+                await fkill_1.default(processesToKill[j].pid, {
                     force: true
                 });
             }
             resolve();
         })();
     });
-};
+}
+exports.default = exitCleanup;

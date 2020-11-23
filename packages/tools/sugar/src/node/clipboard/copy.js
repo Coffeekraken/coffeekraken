@@ -1,6 +1,10 @@
 "use strict";
-const __clipboardy = require('clipboardy');
-const __toString = require('../string/toString');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const clipboardy_1 = __importDefault(require("clipboardy"));
+const toString_1 = __importDefault(require("../string/toString"));
 /**
  * @name            copy
  * @namespace       sugar.node.clipboard
@@ -12,14 +16,15 @@ const __toString = require('../string/toString');
  * @param       {String}      text        The text to copy
  *
  * @example       js
- * const copy = require('@coffeekraken/sugar/node/clipboard/copy');
+ * import copy from '@coffeekraken/sugar/node/clipboard/copy';
  * copy('Hello world');
  *
  * @since       2.0.0
  * @see         https://www.npmjs.com/package/clipboardy
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function copy(text) {
-    text = __toString(text);
-    __clipboardy.writeSync(text);
-};
+function copy(text) {
+    text = toString_1.default(text);
+    clipboardy_1.default.writeSync(text);
+}
+exports.default = copy;

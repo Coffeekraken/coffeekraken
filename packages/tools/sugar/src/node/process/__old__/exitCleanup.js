@@ -1,16 +1,17 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
-const __getRegisteredProcessed = require('./getRegisteredProcesses');
-const __clear = require('clear');
-const __fkill = require('fkill');
-const __hotkey = require('../keyboard/hotkey');
-const __parseHtml = require('../terminal/parseHtml');
-const __keypress = require('keypress');
-const __wait = require('../time/wait');
-const __SBlessedOutput = require('../blessed/SBlessedOutput');
-const __sugarHeading = require('../ascii/sugarHeading');
-const __packageJson = require('../package/json');
-const __SChildProcessManager = require('../process/SChildProcess');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const getRegisteredProcesses_1 = __importDefault(require("./getRegisteredProcesses"));
+const fkill_1 = __importDefault(require("fkill"));
+const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
+const keypress_1 = __importDefault(require("keypress"));
+const wait_1 = __importDefault(require("../time/wait"));
+const SBlessedOutput_1 = __importDefault(require("../blessed/SBlessedOutput"));
+const sugarHeading_1 = __importDefault(require("../ascii/sugarHeading"));
+const json_1 = __importDefault(require("../package/json"));
+const SChildProcess_1 = __importDefault(require("../process/SChildProcess"));
 /**
  * @name              exitCleanup
  * @namespace           sugar.node.process
@@ -23,38 +24,38 @@ const __SChildProcessManager = require('../process/SChildProcess');
  * - childProcess (true) {Boolean}: Specify if you want to clean the child processes or not
  *
  * @example         js
- * const exitCleanup = require('@coffeekraken/sugar/node/process/exitCleanup');
+ * import exitCleanup from '@coffeekraken/sugar/node/process/exitCleanup';
  * exitCleanup();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 process.env.EXIT_CLEANUP = false;
-module.exports = function exitCleanup() {
+function exitCleanup() {
     if (process.env.EXIT_CLEANUP === true)
         return;
     process.env.EXIT_CLEANUP = true;
-    __hotkey('ctrl+c', {
+    hotkey_1.default('ctrl+c', {
         once: true
     }).on('press', async () => {
         // check if all processes are closed
-        const processes = __getRegisteredProcessed();
+        const processes = getRegisteredProcesses_1.default();
         const remainingProcessesCount = Object.keys(processes).length;
         console.log(processes);
-        __hotkey('ctrl+c', {
+        hotkey_1.default('ctrl+c', {
             once: true
         }).on('press', () => {
             process.exit();
         });
-        __keypress.disableMouse(process.stdout);
-        await __wait(50);
-        const $output = new __SBlessedOutput([], {
+        keypress_1.default.disableMouse(process.stdout);
+        await wait_1.default(50);
+        const $output = new SBlessedOutput_1.default([], {
             attach: true,
             maxItemsByGroup: 1000
         });
         $output.log({
-            value: `${__sugarHeading({
-                version: __packageJson(__dirname).version
+            value: `${sugarHeading_1.default({
+                version: json_1.default(__dirname).version
             })}`
         });
         $output.log({
@@ -69,7 +70,7 @@ module.exports = function exitCleanup() {
                         group: key,
                         value: `Killing the process with the PID <cyan>${processObj.pid}</cyan>`
                     });
-                    await __fkill(processObj.pid);
+                    await fkill_1.default(processObj.pid);
                     $output.log({
                         group: key,
                         value: `#success The process has been killed <green>successfully</green>`
@@ -86,7 +87,7 @@ module.exports = function exitCleanup() {
             group: 'Forgotten processes',
             value: 'Cleaning the forgotten process(es)...'
         });
-        const childProcess = new __SChildProcessManager('sugar util.kill all', {});
+        const childProcess = new SChildProcess_1.default('sugar util.kill all', {});
         await childProcess
             .run()
             .on('log,error', (value) => {
@@ -102,12 +103,13 @@ module.exports = function exitCleanup() {
                 group: 'Forgotten processes',
                 value: `#success All of the forgotten process(es) have been <green>successfully</green> killed`
             });
-            await __wait(20);
+            await wait_1.default(20);
             $output.log({
                 value: `Closing the main process in <yellow>5s</yellow>...\n<cyan>ctrl+c</cyan> to close directly`
             });
-            await __wait(5000);
+            await wait_1.default(5000);
             process.exit();
         });
     });
-};
+}
+exports.default = exitCleanup;

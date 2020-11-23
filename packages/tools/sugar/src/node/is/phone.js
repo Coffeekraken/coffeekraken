@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mobile_detect_1 = require("mobile-detect");
+const mobile_detect_1 = __importDefault(require("mobile-detect"));
 /**
  * @name        isPhone
  * @namespace           sugar.js.is

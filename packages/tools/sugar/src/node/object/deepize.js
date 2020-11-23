@@ -1,4 +1,9 @@
-import __set from './set';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const set_1 = __importDefault(require("./set"));
 /**
  * @name          deepize
  * @namespace     sugar.js.object
@@ -25,10 +30,11 @@ import __set from './set';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function deepize(object) {
+function deepize(object) {
     const finalObject = {};
     for (const key in object) {
-        __set(finalObject, key, object[key]);
+        set_1.default(finalObject, key, object[key]);
     }
     return finalObject;
 }
+exports.default = deepize;

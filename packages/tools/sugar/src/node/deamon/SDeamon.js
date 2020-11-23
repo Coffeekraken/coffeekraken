@@ -1,8 +1,11 @@
 "use strict";
-const __SPromise = require('../promise/SPromise');
-const __SDeamonInterface = require('./interface/SDeamonInterface');
-const __deepMerge = require('../object/deepMerge');
-const __onProcessExit = require('../process/onProcessExit');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const onProcessExit_1 = __importDefault(require("../process/onProcessExit"));
 /**
  * @name                SDeamon
  * @namespace           sugar.node.deamon
@@ -19,7 +22,7 @@ const __onProcessExit = require('../process/onProcessExit');
  * @ince          2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SDeamon extends __SPromise {
+class SDeamon extends SPromise_1.default {
     /**
      * @name        constructor
      * @type        Function
@@ -31,7 +34,7 @@ class SDeamon extends __SPromise {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        super(__deepMerge({
+        super(deepMerge_1.default({
             id: 'SDeamon',
             updateStacks: [],
             processParams: null,
@@ -148,7 +151,7 @@ class SDeamon extends __SPromise {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     watch(watchPromise) {
-        __SPromise.pipe(watchPromise, this);
+        SPromise_1.default.pipe(watchPromise, this);
         // update state
         this.state = 'watching';
         this.trigger('state', this.state);
@@ -162,11 +165,10 @@ class SDeamon extends __SPromise {
             this.state = 'error';
             this.trigger('state', this.state);
         });
-        __onProcessExit(() => {
+        onProcessExit_1.default(() => {
             watchPromise.cancel();
         });
         return watchPromise;
     }
 }
-module.exports = SDeamon;
-// module.exports = __SDeamonInterface.implements(SDeamon);
+exports.default = SDeamon;

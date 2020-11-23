@@ -1,6 +1,10 @@
 "use strict";
-const __fs = require('fs');
-const __deepMerge = require('../object/deepMerge');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = __importDefault(require("fs"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name            directory
  * @namespace           sugar.node.is
@@ -12,7 +16,7 @@ const __deepMerge = require('../object/deepMerge');
  * @return    {Boolean}                   true if is a directory, false if not
  *
  * @example     js
- * const isDirectory = require('@coffeekraken/sugar/node/is/directory');
+ * import isDirectory from '@coffeekraken/sugar/node/is/directory';
  * isDirectory('something/cool');
  *
  * @todo        Tests
@@ -20,19 +24,20 @@ const __deepMerge = require('../object/deepMerge');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function isDirectory(path, settings = {}) {
-    settings = __deepMerge({
+function isDirectory(path, settings = {}) {
+    settings = deepMerge_1.default({
         symlink: true
     }, settings);
-    let isMatching = __fs.existsSync(path);
+    let isMatching = fs_1.default.existsSync(path);
     if (!isMatching)
         return false;
-    if (settings.symlink && __fs.lstatSync(path).isSymbolicLink()) {
-        const realPath = __fs.realpathSync(path);
-        isMatching = isMatching && __fs.lstatSync(realPath).isDirectory();
+    if (settings.symlink && fs_1.default.lstatSync(path).isSymbolicLink()) {
+        const realPath = fs_1.default.realpathSync(path);
+        isMatching = isMatching && fs_1.default.lstatSync(realPath).isDirectory();
     }
     else {
-        isMatching = isMatching && __fs.lstatSync(path).isDirectory();
+        isMatching = isMatching && fs_1.default.lstatSync(path).isDirectory();
     }
     return isMatching;
-};
+}
+exports.default = isDirectory;

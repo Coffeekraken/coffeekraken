@@ -1,2 +1,2 @@
-const __SInterface = require('../SInterface');
-require('./SInterface')(__SInterface);
+import __SInterface from '../SInterface';
+throw 'WIP';

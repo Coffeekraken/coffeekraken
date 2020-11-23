@@ -6,6 +6,7 @@ import __isGlob from 'is-glob';
  * @name                    activeSpace
  * @namespace           sugar.js.core
  * @type                    Object
+ * @wip
  *
  * This object expose some functions that are usefull to manage the "active" space of your application.
  * An active space is represented by a string formated like so "something.cool.hello". This mean that your app is
@@ -18,6 +19,10 @@ import __isGlob from 'is-glob';
  * - previous: This allows you to go back 1 activeSpace in the stack
  * - on: This allows you to register callbacks attached to an activeSpace
  * - append: This allows you to append an activeSpace string to the current one
+ *
+ * @todo        interface
+ * @todo        doc
+ * @todo        rethink scope and potential utility of this
  *
  * @example           js
  * const activeSpace = require('@coffeekraken/sugar/core/activeSpace');

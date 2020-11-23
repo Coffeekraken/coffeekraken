@@ -5,6 +5,7 @@ import __throttle from '../function/throttle';
  * @name      splitLines
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Split each lines inside an HTMLElement by scoping them inside some tags.
  * Here's an result sample for :
@@ -21,11 +22,16 @@ import __throttle from '../function/throttle';
  * @param 	{String} 			[tagClass="s-split-lines"] 		The class to apply on the tags
  * @return 	{HTMLElement} 						The HTMLElement processed
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example 	js
  * import splitLines from '@coffeekraken/sugar/js/dom/splitLines'
  * const myCoolElement = document.querySelector('.my-cool-element');
  * splitLines(myCoolElement);
  *
+ * @since       1.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function splitLines(elm, tag = 'p', tagClass = 'split-lines') {

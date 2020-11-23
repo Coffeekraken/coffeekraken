@@ -1,7 +1,11 @@
 "use strict";
-const __SScssCompiler = require('../../../scss/SScssCompiler');
-const __SDuration = require('../../../time/SDuration');
-const __SBuildScssInterface = require('../../../scss/build/interface/SBuildScssInterface');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SScssCompiler_1 = __importDefault(require("../../../scss/SScssCompiler"));
+const SDuration_1 = __importDefault(require("../../../time/SDuration"));
+const SBuildScssInterface_1 = __importDefault(require("../../../scss/build/interface/SBuildScssInterface"));
 /**
  * @name                scss
  * @namespace           sugar.node.server.frontend.handlers
@@ -16,10 +20,10 @@ const __SBuildScssInterface = require('../../../scss/build/interface/SBuildScssI
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function scss(req, res, settings = {}) {
-    const defaultValuesObj = __SBuildScssInterface.getDefaultValues();
-    const compiler = new __SScssCompiler(defaultValuesObj);
-    const duration = new __SDuration();
+async function scss(req, res, settings = {}) {
+    const defaultValuesObj = SBuildScssInterface_1.default.getDefaultValues();
+    const compiler = new SScssCompiler_1.default(defaultValuesObj);
+    const duration = new SDuration_1.default();
     const compileRes = await compiler.compile(req.path, {
         ...(req.query || {})
     });
@@ -29,4 +33,5 @@ module.exports = async function scss(req, res, settings = {}) {
     res.type('text/css');
     res.status(200);
     res.send(compileRes.css);
-};
+}
+exports.default = scss;

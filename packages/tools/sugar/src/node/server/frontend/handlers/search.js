@@ -1,9 +1,10 @@
 "use strict";
-const __sugarConfig = require('../../../config/sugar');
-const __fs = require('fs');
-const __marked = require('marked');
-const __jsDom = require('jsdom').JSDOM;
-const __filter = require('../../../object/filter');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const sugar_1 = __importDefault(require("../../../config/sugar"));
+const filter_1 = __importDefault(require("../../../object/filter"));
 /**
  * @name                search
  * @namespace           sugar.node.server.frontend.handlers
@@ -18,14 +19,14 @@ const __filter = require('../../../object/filter');
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function search(req, server) {
+function search(req, server) {
     return new Promise(async (resolve, reject) => {
         let title = `Search results | 18 results`;
         let keyword = req.params[0] ? req.params[0].split(' ')[0] : 'doc';
         let searchString = req.params[0] ? req.params[0].replace(keyword, '') : '';
-        const searchRules = __sugarConfig('frontend.handlers.search.settings.rules');
+        const searchRules = sugar_1.default('frontend.handlers.search.settings.rules');
         // preparing the handlers to use for the research
-        let handlers = __filter(searchRules, (rule) => {
+        let handlers = filter_1.default(searchRules, (rule) => {
             if (rule.keyword && rule.keyword === keyword)
                 return true;
             return false;
@@ -49,4 +50,5 @@ module.exports = function search(req, server) {
             type: 'application/json'
         });
     });
-};
+}
+exports.default = search;

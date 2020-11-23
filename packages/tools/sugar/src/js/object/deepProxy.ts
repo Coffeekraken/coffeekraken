@@ -8,6 +8,7 @@ import __deepMerge from '../object/deepMerge';
  * @name                            deepProxy
  * @namespace           sugar.js.object
  * @type                            Function
+ * @wip
  *
  * This function allows you to add Proxy to an object in deep fashion.
  * Normally the Proxy process only the level on which it has been added. Here we add Proxy to all the
@@ -29,6 +30,10 @@ import __deepMerge from '../object/deepMerge';
  * - handleDelete (true) {Boolean}: Specify if you want to handle the "delete" action
  * @return          {Object}                                  The proxied object
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example           js
  * import deepProxy from '@coffeekraken/sugar/js/object/deepProxy';
  * const a = deepProxy({
@@ -38,6 +43,7 @@ import __deepMerge from '../object/deepMerge';
  * });
  * a.hello = 'coco';
  *
+ * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function deepProxy(object, handlerFn, settings = {}) {
@@ -105,7 +111,7 @@ export default function deepProxy(object, handlerFn, settings = {}) {
         if (Reflect.has(target, key)) {
           // unproxy(target, key);
           const oldValue = target[key];
-          let deleted = Reflect.deleteProperty(target, key);
+          const deleted = Reflect.deleteProperty(target, key);
           if (deleted) {
             handlerFn({
               object,
@@ -128,7 +134,7 @@ export default function deepProxy(object, handlerFn, settings = {}) {
     if (obj === null) return obj;
 
     if (settings.deep) {
-      for (let key of Object.keys(obj)) {
+      for (const key of Object.keys(obj)) {
         if (Array.isArray(obj[key])) {
           obj[key] = __proxy(obj[key]);
           obj[key].watch(
@@ -146,7 +152,7 @@ export default function deepProxy(object, handlerFn, settings = {}) {
       }
     }
 
-    let p = Proxy.revocable(obj, makeHandler(path));
+    const p = Proxy.revocable(obj, makeHandler(path));
 
     // preproxy.set(p, obj);
     const revokePropertyObj = {

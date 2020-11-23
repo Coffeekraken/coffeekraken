@@ -6,6 +6,7 @@ import __unique from '../array/unique';
  * @name                deepMerge
  * @namespace           sugar.js.object
  * @type                Function
+ * @stable
  *
  * Deep merge one object with another and return the merged object result. This merging implementation support:
  * - Merging object with getters/setters
@@ -17,15 +18,20 @@ import __unique from '../array/unique';
  * - array (false) {Boolean}: Specify if you want to merge the arrays
  * @return          {Object}                              The merged object result
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example           js
  * import deepMerge from '@coffeekraken/sugar/node/object/deepMerge';
  * deepMerge({a: {b: {c: 'c', d: 'd'}}}, {a: {b: {e: 'e', f: 'f'}}});
  * // => { a: { b: { c: 'c', d: 'd', e: 'e', f: 'f' } } }
  *
+ * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function deepMerge(...args) {
-  let settings = {
+  const settings = {
     array: false,
     object: true
   };
@@ -43,7 +49,7 @@ export default function deepMerge(...args) {
         Array.isArray(firstObj[key]) &&
         Array.isArray(secondObj[key])
       ) {
-        let newArray = __unique([...firstObj[key], ...secondObj[key]]);
+        const newArray = __unique([...firstObj[key], ...secondObj[key]]);
         newObj[key] = newArray;
         continue;
       }
@@ -62,7 +68,7 @@ export default function deepMerge(...args) {
     return newObj;
   }
 
-  let potentialSettingsObj = args[args.length - 1] || {};
+  const potentialSettingsObj = args[args.length - 1] || {};
   if (
     (potentialSettingsObj.array &&
       typeof potentialSettingsObj.array === 'boolean') ||

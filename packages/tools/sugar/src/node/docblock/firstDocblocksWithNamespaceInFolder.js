@@ -1,12 +1,16 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
-const __findInFiles = require('find-in-files');
-const __minimatch = require('minimatch');
-const __fs = require('fs');
-const __path = require('path');
-const __getFilename = require('../fs/filename');
-const __extension = require('../fs/extension');
-const __SDocblock = require('./SDocblock');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const find_in_files_1 = __importDefault(require("find-in-files"));
+const minimatch_1 = __importDefault(require("minimatch"));
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
+const filename_1 = __importDefault(require("../fs/filename"));
+const extension_1 = __importDefault(require("../fs/extension"));
+const SDocblock_1 = __importDefault(require("./SDocblock"));
 /**
  * @name                  firstDocblockWithNamespaceInFolder
  * @namespace           sugar.node.docblock
@@ -22,37 +26,38 @@ const __SDocblock = require('./SDocblock');
  * @return        {Object}                                    An object containing the docblocks holded in each namespaces as properties
  *
  * @example       js
- * const firstDocblockWithNamespaceInFolder = require('@coffeekraken/sugar/node/nav/firstDocblockWithNamespaceInFolder);
+ * import firstDocblockWithNamespaceInFolder from '@coffeekraken/sugar/node/nav/firstDocblockWithNamespaceInFolder';
  * firstDocblockWithNamespaceInFolder('my/cool/folder');
  *
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function firstDocblockWithNamespaceInFolder(directory, settings = {}) {
-    settings = __deepMerge({
+async function firstDocblockWithNamespaceInFolder(directory, settings = {}) {
+    settings = deepMerge_1.default({
         exclude: '**/+(__tests__|__wip__)/**'
     }, settings);
-    if (!__fs.existsSync(directory))
+    if (!fs_1.default.existsSync(directory))
         return {};
-    let founded = await __findInFiles.find(`@namespace`, directory);
+    let founded = await find_in_files_1.default.find(`@namespace`, directory);
     const namespaceObj = {};
     Object.keys(founded).forEach((path) => {
-        const relativePath = __path.relative(directory, path);
-        if (__minimatch(relativePath, settings.exclude))
+        const relativePath = path_1.default.relative(directory, path);
+        if (minimatch_1.default(relativePath, settings.exclude))
             return;
-        const content = __fs.readFileSync(path, 'utf8');
+        const content = fs_1.default.readFileSync(path, 'utf8');
         // console.log(content);
-        const docblocks = new __SDocblock(content);
+        const docblocks = new SDocblock_1.default(content);
         const docblock = docblocks.blocks[0] ? docblocks.blocks[0] : null;
         if (!docblock)
             return;
         delete docblock.object.raw;
         const name = docblock.object.name ||
-            __getFilename(path).replace(`.${__extension(path)}`, '');
+            filename_1.default(path).replace(`.${extension_1.default(path)}`, '');
         namespaceObj[docblock.object.namespace + '.' + name] = {
             ...docblock.object,
             path: relativePath
         };
     });
     return namespaceObj;
-};
+}
+exports.default = firstDocblockWithNamespaceInFolder;

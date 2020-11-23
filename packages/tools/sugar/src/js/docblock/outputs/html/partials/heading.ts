@@ -1,3 +1,8 @@
+/**
+ * @wip
+ * @todo      interface
+ * @todo      doc
+ */
 export default `
 {{#if namespace}}<!-- @namespace    {{namespace}} -->{{/if}}
   {{#if name}}<!-- @name    {{name}} -->{{/if}}

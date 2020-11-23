@@ -8,6 +8,7 @@ import __parse from '../string/parse';
  * @name                    env
  * @namespace           sugar.js.core
  * @type                    Function
+ * @wip
  *
  * This function allows you to access environment variables through the same method in node and javascript
  *
@@ -15,11 +16,15 @@ import __parse from '../string/parse';
  * @param           {Mixed}           [value=null]    The value you want to assign. If null, you will just get the wanted variable back
  * @return          {Mixed}                           The variable value
  *
+ * @todo        interface
+ * @todo        doc
+ *
  * @example         js
  * import env from '@coffeekraken/sugar/js/dev/env';
  * console.log(env('node_env')); // => production
  * env('something.cool', { hello: 'world' });
  *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function env(dotPath, value) {

@@ -4,11 +4,16 @@ import __getStyleProperty from './getStyleProperty';
  * @name      textWidth
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Get the text width in px of a passed string or the passed HTMLElement
  *
  * @param 		{String|HTMLElement}		source 		The source to process
  * @return 		{Number} 								The calculated width of the text
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * import textWidth from '@coffeekraken/sugar/js/dom/textWidth'
@@ -18,6 +23,7 @@ import __getStyleProperty from './getStyleProperty';
  * // text directly (no font-size management so it's less accurate...)
  * const width = textWidth('Hello World');
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function textWidth(source) {

@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = require("../object/deepMerge");
-const strip_css_comments_1 = require("strip-css-comments");
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const strip_css_comments_1 = __importDefault(require("strip-css-comments"));
 /**
  * @name          stripCssComments
  * @namespace     sugar.js.css

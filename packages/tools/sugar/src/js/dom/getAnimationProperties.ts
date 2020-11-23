@@ -1,17 +1,20 @@
 import __getStyleProperty from './getStyleProperty';
 import __convert from '../time/convert';
 
-// TODO tests
-
 /**
  * @name      getAnimationProperties
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Get the css animation properties from an HTMLElement in an object format
  *
  * @param 		{HTMLElement} 					elm  		The element to get the properties from
  * @return 		{Object} 									The animation properties
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example  	js
  * import getAnimationProperties from '@coffeekraken/sugar/js/dom/getAnimationProperties'
@@ -27,15 +30,9 @@ import __convert from '../time/convert';
  * // 	totalDuration : 200
  * // }
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
-function splitIfNeeded(what, separator) {
-  if (what.indexOf(separator) !== -1) {
-    return what.split(separator).map((item) => item.trim());
-  }
-  return what;
-}
 export default function getAnimationProperties(elm) {
   // get the animation properties
   const name = __getStyleProperty(elm, 'animation-name') || '';
@@ -57,7 +54,7 @@ export default function getAnimationProperties(elm) {
     direction: direction.split(',')
   };
   let totalDuration = 0;
-  let i = 0;
+  const i = 0;
   const delays = [0].concat(props.delay);
   [0].concat(props.duration).forEach((val) => {
     if (val + delays[i] > totalDuration) {

@@ -4,6 +4,7 @@ import getStyleProperty from './getStyleProperty';
  * @name      querySelectorAllWithStyle
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Select all node that match the style object passed as parameter
  *
@@ -11,6 +12,10 @@ import getStyleProperty from './getStyleProperty';
  * @param    {Object}    style    The style that has to match
  * @param    {Object}    [settings={}]    A setting object
  * @return    [Array<HTMLElement>]    An array of HTMLElement that matches the style object
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example    js
  * import querySelectorAllWithStyle from '@coffeekraken/sugar/js/dom/querySelectorAllWithStyle'
@@ -26,6 +31,7 @@ import getStyleProperty from './getStyleProperty';
  *   background: 'none' // has to have to background set to "none"
  * }
  *
+ * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function querySelectorAllWithStyle(
@@ -50,7 +56,7 @@ export default function querySelectorAllWithStyle(
     let match = true;
     // loop on each properties of the style object
     // to check it against the dom computed style
-    for (let key in style) {
+    for (const key in style) {
       // get the value from the computed dom node
       const value = getStyleProperty($elm, key);
       // true as selector

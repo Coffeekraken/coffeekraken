@@ -1,5 +1,9 @@
 "use strict";
-const __deepMerge = require('../../../object/deepMerge');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
 /**
  * @name                error
  * @namespace           sugar.node.server.frontend.pages
@@ -18,7 +22,7 @@ const __deepMerge = require('../../../object/deepMerge');
  * - ctas.target (_self) {String}: The target of the cta.
  *
  * @example             js
- * const 404 = require('@coffeekraken/sugar/node/server/frontend/pages/404');
+ * import 404 from '@coffeekraken/sugar/node/server/frontend/pages/404';
  * const content = await 404('Error', 'Something wrong happened', null, [{
  *    text: 'Go to Google',
  *    href: 'https://google.com'
@@ -27,8 +31,8 @@ const __deepMerge = require('../../../object/deepMerge');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function error(data = {}) {
-    data = __deepMerge({
+function error(data = {}) {
+    data = deepMerge_1.default({
         title: 'Error',
         intro: 'Somethings wrong happend',
         body: null,
@@ -40,7 +44,7 @@ module.exports = function error(data = {}) {
             }
         ]
     }, data);
-    const settings = __deepMerge(__sugarConfig('frontend'), args);
+    const settings = deepMerge_1.default(__sugarConfig('frontend'), args);
     const server = __express();
     const promise = new __SPromise({
         id: 'frontendServerError'
@@ -52,4 +56,5 @@ module.exports = function error(data = {}) {
         settings: JSON.stringify(settings),
         packageJson: __standardizeJson(require(__packageRoot() + '/package.json'))
     };
-};
+}
+exports.default = error;

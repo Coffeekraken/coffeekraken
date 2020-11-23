@@ -1,5 +1,9 @@
-const __validateValue = require('../_js/validation/value/validateValue');
-const __isPath = require('../../fs/isPath');
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const validateValue_1 = __importDefault(require("../_js/validation/value/validateValue"));
 /**
  * @name            validateValue
  * @namespace       sugar.node.validation.value
@@ -30,13 +34,17 @@ const __isPath = require('../../fs/isPath');
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function validateValue(value, definitionObj, settings = {}) {
+function validateValue(value, definitionObj, settings = {}) {
     // validate value using the base javascript intergration
-    return __validateValue(value, definitionObj, Object.assign(Object.assign({}, settings), { extendFn: (value, definitionObj, settings) => {
+    return validateValue_1.default(value, definitionObj, {
+        ...settings,
+        extendFn: (value, definitionObj, settings) => {
             const issuesObj = {
                 $issues: [],
                 $messages: {}
             };
             return issuesObj;
-        } }));
-};
+        }
+    });
+}
+exports.default = validateValue;

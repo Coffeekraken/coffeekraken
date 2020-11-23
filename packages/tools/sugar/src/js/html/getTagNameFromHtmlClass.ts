@@ -5,12 +5,17 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @name            getHtmlhtmlClassFromHtmlClass
  * @namespace       sugar.js.html
  * @type            Function
+ * @stable
  *
  * This function simply return the tagname depending on the passed HTML class
  * like HTMLAnchorElement, HTMLLinkElement, etc...
  *
  * @param       {HTMLElement}      htmlClass       The htmlClass to get the tag for
  * @return      {String}               The tagname that correspond to the passed HTMLElement class
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import getHtmlhtmlClassFromHtmlClass from '@coffeekraken/sugar/js/html/getHtmlhtmlClassFromHtmlClass';
@@ -22,7 +27,7 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
 export default function getHtmlhtmlClassFromHtmlClass(htmlClass) {
   if (!htmlClass) return false;
 
-  for (let key in __htmlTagToHtmlClassMap) {
+  for (const key in __htmlTagToHtmlClassMap) {
     if (__htmlTagToHtmlClassMap[key] === htmlClass) return key;
   }
 

@@ -1,8 +1,12 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
-const __SPromise = require('../promise/SPromise');
-const __SCommand = require('./SCommand');
-const __sugarConfig = require('../config/sugar');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const SCommand_1 = __importDefault(require("./SCommand"));
+const sugar_1 = __importDefault(require("../config/sugar"));
 /**
  * @name                    SProcess
  * @namespace           sugar.node.terminal
@@ -25,7 +29,7 @@ const __sugarConfig = require('../config/sugar');
       - command: Specify a command name to run when the type is "run"
  *
  * @example         js
- * const SProcess = require('@coffeekraken/sugar/node/terminal/SProcess');
+ * import SProcess from '@coffeekraken/sugar/node/terminal/SProcess';
  * const app = new SProcess({
  *    install: {
  *      command: 'npm install something'
@@ -37,7 +41,7 @@ const __sugarConfig = require('../config/sugar');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SProcess {
+class SProcess {
     /**
      * @name              constructor
      * @type              Function
@@ -69,9 +73,9 @@ module.exports = class SProcess {
          */
         this._commands = {};
         // save the settings
-        const _settings = __deepMerge({}, settings);
+        const _settings = deepMerge_1.default({}, settings);
         // init the SPromise class
-        this._promise = new __SPromise((resolve, reject, trigger, cancel) => {
+        this._promise = new SPromise_1.default((resolve, reject, trigger, cancel) => {
             this.resolve = resolve.bind(this);
             this.reject = reject.bind(this);
             this.trigger = trigger.bind(this);
@@ -89,7 +93,7 @@ module.exports = class SProcess {
             if (typeof command === 'string') {
                 newCommandsObj[`command${i + 1}`] = {
                     command,
-                    color: Object.keys(__sugarConfig('terminal.colors'))[i + 1].color ||
+                    color: Object.keys(sugar_1.default('terminal.colors'))[i + 1].color ||
                         'yellow',
                     run: true
                 };
@@ -113,17 +117,17 @@ module.exports = class SProcess {
             if (commandName.length > this._biggestCommandName.length)
                 this._biggestCommandName = commandName;
             const commandObj = commands[commandName];
-            if (commandObj instanceof __SCommand) {
+            if (commandObj instanceof SCommand_1.default) {
                 this._commands[commandName] = commandObj;
             }
             else {
                 if (typeof commandObj === 'string') {
-                    this._commands[commandName] = new __SCommand(commandName, commandObj, {});
+                    this._commands[commandName] = new SCommand_1.default(commandName, commandObj, {});
                 }
                 else if (typeof commandObj === 'object' && commandObj.command) {
                     const commandSettings = Object.assign({}, commandObj);
                     delete commandSettings.command;
-                    this._commands[commandName] = new __SCommand(commandName, commandObj.command, commandSettings || {});
+                    this._commands[commandName] = new SCommand_1.default(commandName, commandObj.command, commandSettings || {});
                 }
             }
         });
@@ -145,7 +149,7 @@ module.exports = class SProcess {
         // loop on each commands
         Object.keys(this._commands).forEach((name) => {
             const command = this._commands[name];
-            __SPromise.pipe(command, this);
+            SPromise_1.default.pipe(command, this);
         });
     }
     /**
@@ -208,4 +212,5 @@ module.exports = class SProcess {
         // return the promise
         return command.run();
     }
-};
+}
+exports.default = SProcess;

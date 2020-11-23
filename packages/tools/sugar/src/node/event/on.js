@@ -1,5 +1,9 @@
 "use strict";
-const __SPromise = require('../promise/SPromise');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
 /**
  * @name        on
  * @namespace           sugar.node.event
@@ -13,7 +17,7 @@ const __SPromise = require('../promise/SPromise');
  * @return        {Function}                    Return an "unsubscribe" function callable when you want to stop executing the callback
  *
  * @example       js
- * const on = require('@coffeekraken/sugar/node/event/on');
+ * import on from '@coffeekraken/sugar/node/event/on';
  * on('something', () => {
  *    // do something
  * });
@@ -21,10 +25,10 @@ const __SPromise = require('../promise/SPromise');
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function on(name, callback) {
+function on(name, callback) {
     // check that the global SPromise exists
     if (!global._sugarEventSPromise)
-        global._sugarEventSPromise = new __SPromise({
+        global._sugarEventSPromise = new SPromise_1.default({
             id: 'sugarEventSPromise'
         });
     // subscribe to the event
@@ -33,4 +37,5 @@ module.exports = function on(name, callback) {
     return () => {
         global._sugarEventSPromise.off(name, callback);
     };
-};
+}
+exports.default = on;

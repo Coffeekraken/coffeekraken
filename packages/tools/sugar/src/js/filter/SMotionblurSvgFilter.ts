@@ -3,21 +3,25 @@ import SSvgFilter from './SSvgFilter';
 import fastdom from 'fastdom';
 import forceRedraw from '../dom/forceRedraw';
 
-// TODO tests
-
 /**
  * @name 		SMotionblurSvgFilter
  * @namespace           sugar.js.filter
  * @type      Class
+ * @stable
  *
  * This class represent a motion blur svg filter that will blur your
  * element depending on his movements, direction and speed
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 		js
  * const filter = new SMotionblurSvgFilter();
  * filter.applyTo(myCoolHTMLElement);
  * // now when your element will move, it will be blured accordingly
  *
+ * @since         1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SMotionblurSvgFilter extends SSvgFilter {
@@ -183,7 +187,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
     if (!this._isMoving) return;
 
     // set the motion blur and get the moving difference
-    let diff = this._setMotionBlur();
+    const diff = this._setMotionBlur();
 
     // recusrive call to apply the blur with requestAnimationFrame for performances
     this._animationFrame = requestAnimationFrame(() => {
@@ -202,9 +206,9 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
    */
   _setMotionBlur() {
     this._currentPos = __offset(this.elms[0]);
-    let xDiff =
+    const xDiff =
       Math.abs(this._currentPos.left - this._lastPos.left) * this.amount;
-    let yDiff =
+    const yDiff =
       Math.abs(this._currentPos.top - this._lastPos.top) * this.amount;
 
     // set the blur

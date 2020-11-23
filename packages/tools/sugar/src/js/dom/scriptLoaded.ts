@@ -4,11 +4,16 @@ import __SPromise from '../promise/SPromise';
  * @name      scriptLoaded
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Detect when a script has been fully loaded
  *
  * @param    {HTMLScriptElement}    $script    The script element to detect the loading state
  * @return    {Promise}    The promise that will be resolved when the script is fully loaded
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example    js
  * import scriptLoaded from '@coffeekraken/sugar/js/dom/scriptLoaded'
@@ -16,6 +21,7 @@ import __SPromise from '../promise/SPromise';
  *   // do something here
  * })
  *
+ * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function loadScript($script) {
@@ -35,7 +41,7 @@ export default function loadScript($script) {
       }
 
       function handleReadyStateChange() {
-        var state;
+        let state;
         if (!done) {
           state = $script.readyState;
           if (state === 'complete') {

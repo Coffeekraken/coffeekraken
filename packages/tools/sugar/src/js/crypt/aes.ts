@@ -7,9 +7,14 @@ import parse from '../string/parse';
  * @name            aes
  * @namespace           sugar.js.crypt
  * @type            Object
+ * @wip
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the aes algorithm
  *
+ * @todo        interface
+ * @todo        doc
+ *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {
@@ -43,7 +48,7 @@ export default {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   decrypt: function (message, key = 'coffeekraken.sugar.crypt.aes') {
-    let value = AES.decrypt(message, key).toString(utf8);
+    const value = AES.decrypt(message, key).toString(utf8);
     return parse(value);
   }
 };

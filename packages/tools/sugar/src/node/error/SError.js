@@ -1,18 +1,23 @@
-import __parseHtml from '../console/parseHtml';
-import __trimLines from '../string/trimLines.js';
-import __packageRoot from '../path/packageRoot';
-import __toString from '../string/toString';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const parseHtml_1 = __importDefault(require("../console/parseHtml"));
+const trimLines_js_1 = __importDefault(require("../string/trimLines.js"));
+const packageRoot_1 = __importDefault(require("../path/packageRoot"));
+const toString_1 = __importDefault(require("../string/toString"));
 /**
  * @todo    Doc
  */
-export default class SError extends Error {
+class SError extends Error {
     constructor(message) {
         if (typeof message !== 'string') {
             if (Array.isArray(message)) {
                 message = message.join('\n');
             }
             else {
-                message = __toString(message);
+                message = toString_1.default(message);
             }
         }
         // filter message for integrated stack
@@ -31,7 +36,7 @@ export default class SError extends Error {
             Error.captureStackTrace(this, this.constructor);
         }
         const stack = [];
-        const packageRoot = __packageRoot();
+        const packageRoot = packageRoot_1.default();
         let stackArray = [];
         if (this.stack) {
             stackArray = this.stack.split(' at ').slice(1);
@@ -50,7 +55,7 @@ export default class SError extends Error {
             });
         }
         this.name = this.constructor.name;
-        this.message = __trimLines(__parseHtml(`
+        this.message = trimLines_js_1.default(parseHtml_1.default(`
       <red><underline>${this.name || this.constructor.name}</underline></red>
 
       ${message}
@@ -69,6 +74,7 @@ export default class SError extends Error {
                 this._stack = value;
             }
         });
-        this.stack = __trimLines(__parseHtml(stack.join('')));
+        this.stack = trimLines_js_1.default(parseHtml_1.default(stack.join('')));
     }
 }
+exports.default = SError;

@@ -1,6 +1,10 @@
 "use strict";
-const __packageRoot = require('./packageRoot');
-const __fs = require('fs');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const packageRoot_1 = __importDefault(require("./packageRoot"));
+const fs_1 = __importDefault(require("fs"));
 /**
  * @name                    isInPackage
  * @namespace           sugar.node.path
@@ -14,17 +18,17 @@ const __fs = require('fs');
  * @return          {String}                                      The finded package path or false if not finded
  *
  * @example         js
- * const isInPackage = require('@coffeekraken/sugar/node/path/isInPackage');
+ * import isInPackage from '@coffeekraken/sugar/node/path/isInPackage';
  * const root = isInPackage();
  *
  * @see       https://www.npmjs.com/package/find-package-json
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function isInPackage(name, from = process.cwd(), highest = false) {
-    const packageRoot = __packageRoot(from);
+function isInPackage(name, from = process.cwd(), highest = false) {
+    const packageRoot = packageRoot_1.default(from);
     if (!packageRoot)
         return false;
-    if (!__fs.existsSync(`${packageRoot}/package.json`))
+    if (!fs_1.default.existsSync(`${packageRoot}/package.json`))
         return false;
     const pkg = require(`${packageRoot}/package.json`);
     let names = name;
@@ -45,4 +49,5 @@ module.exports = function isInPackage(name, from = process.cwd(), highest = fals
         return isInPackage(name, newPath, highest);
     }
     return false;
-};
+}
+exports.default = isInPackage;

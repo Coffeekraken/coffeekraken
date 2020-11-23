@@ -1,6 +1,6 @@
 #!/usr/bin/env node --trace-warnings --trace-uncaught
 "use strict";
-import '../node/index';
+require('../node/index');
 // const __exitCleanup = require('../node/process/exitCleanup');
 /**
  * @name            sugar.cli
@@ -42,7 +42,5 @@ if (!action) {
         action = config.default;
     }
 }
-console.log(`./${stack}/${action}.cli.js`);
 const pkg = require(`./${stack}/${action}.cli.js`);
-console.log(pkg);
 require(`./${stack}/${action}.cli.js`)(args);

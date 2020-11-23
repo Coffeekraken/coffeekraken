@@ -5,6 +5,7 @@ import __observeAttribute from './observeAttributes';
  * @name      whenAttribute
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Resolve a promise when the wanted attribute on the passed HTMLElement exist or pass the check function provided
  *
@@ -12,6 +13,10 @@ import __observeAttribute from './observeAttributes';
  * @param 		{String} 					attribute 			The attribute to monitor
  * @param 		{Function} 					[checkFn=null] 		An optional function to check the attribute. The promise is resolved when this function return true
  * @return 		(Promise) 										The promise that will be resolved when the attribute exist on the element (and that it passes the checkFn)
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * import whenAttribute from '@coffeekraken/sugar/js/dom/whenAttribute'
@@ -26,6 +31,7 @@ import __observeAttribute from './observeAttributes';
  * 		// do something with your number value...
  * });
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function whenAttribute(elm, attrName, checkFn = null) {

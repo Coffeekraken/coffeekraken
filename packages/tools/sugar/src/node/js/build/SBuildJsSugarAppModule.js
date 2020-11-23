@@ -1,9 +1,12 @@
 "use strict";
-var _a;
-const __SSugarAppModule = require('../../app/sugar/SSugarAppModule');
-const __SBuildJsInterface = require('./interface/SBuildJsInterface');
-const __deepMerge = require('../../object/deepMerge');
-const __SBuildJsProcess = require('./SBuildJsProcess');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SSugarAppModule_1 = __importDefault(require("../../app/sugar/SSugarAppModule"));
+const SBuildJsInterface_1 = __importDefault(require("./interface/SBuildJsInterface"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const SBuildJsProcess_1 = __importDefault(require("./SBuildJsProcess"));
 /**
  * @name                SBuildJsSugarAppModule
  * @namespace           sugar.node.build.js
@@ -17,33 +20,33 @@ const __SBuildJsProcess = require('./SBuildJsProcess');
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = (_a = class SBuildJsSugarAppModule extends __SSugarAppModule {
-        /**
-         * @name            constructor
-         * @type             Function
-         * @constructor
-         *
-         * Constructor
-         *
-         * @since       2.0.0
-         * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-         */
-        constructor(params = {}, settings = {}) {
-            super(params, __deepMerge({}, settings));
-        }
-        /**
-         * @name          start
-         * @type          Function
-         *
-         * This method is the one called by the SugarUi main class when all is ready
-         * to run the modules. Take this as your kind of "launcher" function.
-         *
-         * @since       2.0.0
-         */
-        start() {
-            const pro = new __SBuildJsProcess(this.params, this._settings.processSettings);
-            return super.start(pro);
-        }
-    },
-    _a.interface = __SBuildJsInterface,
-    _a);
+class SBuildJsSugarAppModule extends SSugarAppModule_1.default {
+    /**
+     * @name            constructor
+     * @type             Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    constructor(params = {}, settings = {}) {
+        super(params, deepMerge_1.default({}, settings));
+    }
+    /**
+     * @name          start
+     * @type          Function
+     *
+     * This method is the one called by the SugarUi main class when all is ready
+     * to run the modules. Take this as your kind of "launcher" function.
+     *
+     * @since       2.0.0
+     */
+    start() {
+        const pro = new SBuildJsProcess_1.default(this.params, this._settings.processSettings);
+        return super.start(pro);
+    }
+}
+exports.default = SBuildJsSugarAppModule;
+SBuildJsSugarAppModule.interface = SBuildJsInterface_1.default;

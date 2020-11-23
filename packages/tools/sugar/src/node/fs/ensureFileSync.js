@@ -1,5 +1,9 @@
 "use strict";
-const __fs = require('fs-extra');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_extra_1 = __importDefault(require("fs-extra"));
 // TODO tests
 /**
  * @name        ensureFileSync
@@ -11,7 +15,7 @@ const __fs = require('fs-extra');
  * @param       {String}              file           The file to ensure that it exists...
  *
  * @example       js
- * const ensureFileSync = require('@coffeekraken/node/fs/ensureFileSync');
+ * import ensureFileSync from '@coffeekraken/node/fs/ensureFileSync';
  * try {
  *    ensureFileSync('my/cool/file.jpg');
  * } catch(e) {}
@@ -19,6 +23,7 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function ensureFileSync(file) {
-    __fs.ensureFileSync(file);
-};
+function ensureFileSync(file) {
+    fs_extra_1.default.ensureFileSync(file);
+}
+exports.default = ensureFileSync;

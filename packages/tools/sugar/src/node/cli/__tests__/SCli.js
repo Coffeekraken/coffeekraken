@@ -1,5 +1,6 @@
 "use strict";
-module.exports = (__SCli, __SInterface) => {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = (__SCli, __SInterface) => {
     describe('sugar.node.cli.SCli', () => {
         it('Check that the SCli class work correctly', () => {
             class MyInterface extends __SInterface {

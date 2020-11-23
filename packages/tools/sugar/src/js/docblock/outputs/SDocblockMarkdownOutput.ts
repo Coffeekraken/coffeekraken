@@ -14,6 +14,7 @@ import __functionBlock from './markdown/blocks/function';
  * @name            SDocblockMarkdownOutput
  * @namespace       sugar.js.docblock.outputs
  * @type            Class
+ * @wip
  *
  * This class represent an SDocblock output like "markdown", "html", etc...
  * Supported docblock tags:
@@ -32,6 +33,10 @@ import __functionBlock from './markdown/blocks/function';
  * @param       {SDocblock}         docblockInstance        The docblock instance you want to output using this class
  * @param       {Object}            [settings={}]           Some settings to configure your output class:
  * - ...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import SDocblock from '@coffeekraken/sugar/js/docblock/SDocblock';

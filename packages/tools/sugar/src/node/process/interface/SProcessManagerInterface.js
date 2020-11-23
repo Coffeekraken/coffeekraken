@@ -1,6 +1,9 @@
 "use strict";
-var _a;
-const __SInterface = require('../../class/SInterface');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SInterface_1 = __importDefault(require("../../class/SInterface"));
 /**
  * @name                SProcessManagerInterface
  * @namespace           sugar.node.process.interface
@@ -13,19 +16,19 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SProcessManagerInterface extends __SInterface {
+class SProcessManagerInterface extends SInterface_1.default {
+}
+exports.default = SProcessManagerInterface;
+// static extendsArray = ['SProcess', 'SPromise'];
+SProcessManagerInterface.definitionObj = {
+    run: {
+        type: 'Function',
+        required: true
     },
-    // static extendsArray = ['SProcess', 'SPromise'];
-    _a.definitionObj = {
-        run: {
-            type: 'Function',
-            required: true
-        },
-        kill: {
-            type: 'Function',
-            required: true
-        }
-    },
-    _a.title = 'SProcess elements Interface',
-    _a.description = 'This interface represent the minimum requirements that MUST have the instance that run some commands etc across the entire toolkit',
-    _a);
+    kill: {
+        type: 'Function',
+        required: true
+    }
+};
+SProcessManagerInterface.title = 'SProcess elements Interface';
+SProcessManagerInterface.description = 'This interface represent the minimum requirements that MUST have the instance that run some commands etc across the entire toolkit';

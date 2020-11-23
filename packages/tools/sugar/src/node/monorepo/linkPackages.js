@@ -1,10 +1,13 @@
 "use strict";
-const ensureDirSync_1 = require("../fs/ensureDirSync");
-const path_1 = require("path");
-const SPromise_1 = require("../promise/SPromise");
-const findPackages_1 = require("./findPackages");
-const child_process_1 = require("child_process");
-const fs_1 = require("fs");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+const ensureDirSync_1 = __importDefault(require("../fs/ensureDirSync"));
+const path_1 = __importDefault(require("path"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const findPackages_1 = __importDefault(require("./findPackages"));
+const child_process_1 = __importDefault(require("child_process"));
+const fs_1 = __importDefault(require("fs"));
 module.exports = async function linkPackages(settings = {}) {
     settings = {
         rootDir: process.cwd(),
@@ -15,8 +18,6 @@ module.exports = async function linkPackages(settings = {}) {
         if (!fs_1.default.existsSync(`${settings.rootDir}/package.json`)) {
             return reject(`Sorry but the rootDir passed "<yellow>${settings.rootDir}</yellow>" does not contain any "<cyan>package.json</cyan>" file...`);
         }
-        // read the package json
-        // const json = require(`${settings.rootDir}/package.json`);
         // search for packages of the monorepo
         const packagesObj = await findPackages_1.default(settings.rootDir);
         // loop on each packages

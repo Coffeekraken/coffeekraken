@@ -4,11 +4,16 @@ import __uncamelize from '../string/uncamelize';
  * @name      styleObject2String
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Transform a style object to inline string separated by ;
  *
  * @param 		{Object} 				styleObj 		An object of style to apply
  * @return 		(String) 								The string style representation
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * import styleObject2String from '@coffeekraken/sugar/js/dom/styleObject2String'
@@ -18,12 +23,13 @@ import __uncamelize from '../string/uncamelize';
  * });
  * // output => padding-left:20px; display:block;
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function styleObject2String(styleObj) {
   // process the style object
-  let propertiesArray = [];
-  for (let key in styleObj) {
+  const propertiesArray = [];
+  for (const key in styleObj) {
     const value = styleObj[key];
     // if the value is ''
     // mean that we need to get rid of

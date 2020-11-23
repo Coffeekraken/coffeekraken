@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const node_1 = require("../is/node");
+const node_1 = __importDefault(require("../is/node"));
 /**
  * @name                    dataTypesArray
  * @namespace           sugar.js.dev
@@ -12,7 +15,7 @@ const node_1 = require("../is/node");
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 if (node_1.default()) {
-    module.exports = [
+    export default [
         'Number',
         'String',
         'Symbol',
@@ -26,7 +29,7 @@ if (node_1.default()) {
     ];
 }
 else {
-    module.exports = [
+    export default [
         'Number',
         'String',
         'Symbol',

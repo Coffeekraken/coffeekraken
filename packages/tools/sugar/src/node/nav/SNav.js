@@ -1,9 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = require("../object/deepMerge");
-const SNavItem_1 = require("./SNavItem");
-const pretty_1 = require("pretty");
-const SPromise_1 = require("../promise/SPromise");
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SNavItem_1 = __importDefault(require("./SNavItem"));
+const pretty_1 = __importDefault(require("pretty"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
 /**
  * @name              SNav
  * @namespace           sugar.js.nav

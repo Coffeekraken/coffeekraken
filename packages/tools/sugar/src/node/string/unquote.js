@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        unquote
  * @namespace           sugar.js.string
@@ -17,7 +19,7 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
+function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
     // trim the string just in case
     string = string.trim();
     // loop on each quotes to remove
@@ -32,3 +34,4 @@ export default function unquote(string, quotesToRemove = ['"', "'", '”', '`'])
     // return the processed string
     return string;
 }
+exports.default = unquote;

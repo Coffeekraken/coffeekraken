@@ -5,6 +5,7 @@ import matches from './matches';
  * @name      querySelectorLive
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Observe the dom to get all the elements that matches a passed css selector at any point in time.
  * Be warned that this use the mutation observer API and will monitor all the document for new nodes. Make sure to use it
@@ -14,6 +15,10 @@ import matches from './matches';
  * @param 	{Function} 		cb 				The function to call with the newly added node
  * @param 	{Object} 		[settings={}] 	An optional settings object to specify things like the rootNode to monitor, etc...
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example 	js
  * import querySelectorLive from '@coffeekraken/sugar/js/dom/querySelectorLive'
  * querySelectorLive('.my-cool-item', (node, clearFn) => {
@@ -22,11 +27,12 @@ import matches from './matches';
  *  clearFn();
  * });
  *
+ * @since       1.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-let _observer,
-  _selectors = {};
+let _observer;
+const _selectors = {};
 
 export default function querySelectorLive(selector, cb, settings = {}) {
   const id = `${selector} - ${uniqid()}`;

@@ -6,6 +6,7 @@ import __toString from '../string/toString';
  * @name      dataset
  * @namespace           sugar.js.dom
  * @type      Function
+ * @wip
  *
  * Get or set a value on the passed element with the passed name
  *
@@ -14,10 +15,15 @@ import __toString from '../string/toString';
  * @param       {Mixed}             [value=null]  The value to set
  * @return      {Mixed}                         Return the value wanted or setted
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example     js
  * import dataset from '@coffeekraken/sugar/js/dom/dataset';
  * dataset(myCoolElement, 'hello', 'world'); // => 'world';
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function dataset($elm, key, value = null) {
@@ -28,7 +34,7 @@ export default function dataset($elm, key, value = null) {
     return __autoCast(v);
   } else {
     // try to set the value
-    let dataset = $elm.dataset;
+    const dataset = $elm.dataset;
     if (dataset) {
       $elm.dataset[key] = __toString(value);
     } else {

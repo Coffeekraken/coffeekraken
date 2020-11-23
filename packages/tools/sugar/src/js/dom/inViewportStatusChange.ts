@@ -3,17 +3,20 @@ import __isInViewport from './isInViewport';
 import __whenInViewport from './whenInViewport';
 import __whenOutOfViewport from './whenOutOfViewport';
 
-// TODO tests
-
 /**
  * @name      inViewportStatusChange
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Monitor when the passed element enter or exit the viewport
  *
  * @param 		{HTMLElement} 						elm  		The element to monitor
  * @return 		{SPromise} 		                    The SPromise on wich you can register your callbacks. Available callbacks registration function are "enter" and "exit"
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example  	js
  * import inViewportStatusChange from '@coffeekraken/sugar/js/dom/inViewportStatusChange';
@@ -23,6 +26,7 @@ import __whenOutOfViewport from './whenOutOfViewport';
  *    // do something...
  * });
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function inViewportStatusChange($elm) {

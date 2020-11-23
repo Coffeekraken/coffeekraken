@@ -1,11 +1,14 @@
 "use strict";
-const __SPromise = require('../promise/SPromise');
-const __uniqid = require('../string/uniqid');
-const __keypress = require('keypress');
-const __activeSpace = require('../core/activeSpace');
-const __SIpc = require('../ipc/SIpc');
-const __isChildProcess = require('../is/childProcess');
-// const __ioHook = require('iohook');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const uniqid_1 = __importDefault(require("../string/uniqid"));
+const keypress_1 = __importDefault(require("keypress"));
+const activeSpace_1 = __importDefault(require("../core/activeSpace"));
+const SIpc_1 = __importDefault(require("../ipc/SIpc"));
+const childProcess_1 = __importDefault(require("../is/childProcess"));
 /**
  * @name                hotkey
  * @namespace           sugar.node.keyboard
@@ -22,7 +25,7 @@ const __isChildProcess = require('../is/childProcess');
  * @return      {SPromise}                       An SPromise instance on which you can register for "key" stack event
  *
  * @example         js
- * const hotkey = require('@coffeekraken/sugar/node/keyboard/hotkey');
+ * import hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
  * const promise = hotkey('ctrl+a').on('key', (e) => {
  *    // do something...
  * });
@@ -45,11 +48,11 @@ function _handleKeypress(ch, keyObj) {
             return;
         // check if an activeSpace is specified
         if (obj.settings.disableWhenEditingForm) {
-            if (__activeSpace.is('**.form.*'))
+            if (activeSpace_1.default.is('**.form.*'))
                 return;
         }
         if (obj.settings.activeSpace) {
-            if (!__activeSpace.is(obj.settings.activeSpace))
+            if (!activeSpace_1.default.is(obj.settings.activeSpace))
                 return;
         }
         // check if an "active" function exists
@@ -114,8 +117,8 @@ function hotkey(key, settings = {}) {
         ipc: true,
         ...settings
     };
-    if (!__isChildProcess()) {
-        const uniqid = `hotkey.${__uniqid()}`;
+    if (!childProcess_1.default()) {
+        const uniqid = `hotkey.${uniqid_1.default()}`;
         if (!isListenerAlreadyAdded || !isSystemWideAlreadyAdded) {
             if (settings.systemWide && !isSystemWideAlreadyAdded) {
                 isSystemWideAlreadyAdded = true;
@@ -133,13 +136,13 @@ function hotkey(key, settings = {}) {
             }
             else if (!isListenerAlreadyAdded) {
                 isListenerAlreadyAdded = true;
-                __keypress(process.stdin);
+                keypress_1.default(process.stdin);
                 process.stdin.on('keypress', _handleKeypress);
                 // process.stdin.setRawMode(true);
                 // process.stdin.resume();
             }
         }
-        const promise = new __SPromise({
+        const promise = new SPromise_1.default({
             id: 'hotkey'
         })
             .on('press', (key) => {
@@ -161,16 +164,16 @@ function hotkey(key, settings = {}) {
         return promise;
     }
     else if (settings.ipc) {
-        const promise = new __SPromise({
+        const promise = new SPromise_1.default({
             id: 'hotkey'
         });
         // child process
-        __SIpc.on(`keypress.${key}`, (keyObj) => {
+        SIpc_1.default.on(`keypress.${key}`, (keyObj) => {
             promise.trigger('key', keyObj);
             promise.trigger('press', keyObj);
         });
         setTimeout(() => {
-            __SIpc.trigger(`keypress`, {
+            SIpc_1.default.trigger(`keypress`, {
                 key,
                 settings
             });
@@ -178,11 +181,11 @@ function hotkey(key, settings = {}) {
         return promise;
     }
 }
-if (!__isChildProcess()) {
-    __SIpc.on('keypress', (keyObj) => {
+if (!childProcess_1.default()) {
+    SIpc_1.default.on('keypress', (keyObj) => {
         hotkey(keyObj.key).on('press', (pressedKeyObj) => {
-            __SIpc.trigger(`keypress.${keyObj.key}`, pressedKeyObj);
+            SIpc_1.default.trigger(`keypress.${keyObj.key}`, pressedKeyObj);
         });
     });
 }
-module.exports = hotkey;
+exports.default = hotkey;

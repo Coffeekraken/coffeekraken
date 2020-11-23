@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                        filter
  * @namespace           sugar.js.object
@@ -21,7 +23,7 @@
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function filter(object, filter) {
+function filter(object, filter) {
     // init the new object to return
     const result = {};
     // loop on the object keys
@@ -35,3 +37,4 @@ export default function filter(object, filter) {
     // return the filtered object
     return result;
 }
+exports.default = filter;

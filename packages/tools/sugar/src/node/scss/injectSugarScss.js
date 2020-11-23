@@ -1,10 +1,14 @@
 "use strict";
-const __sugarConfig = require('../config/sugar');
-const __jsObjectToScssMap = require('./jsObjectToScssMap');
-const __putUseStatementsOnTop = require('./putUseStatementsOnTop');
-const __packageRoot = require('../path/packageRoot');
-const __isInPackage = require('../is/inPackage');
-const __path = require('path');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const sugar_1 = __importDefault(require("../config/sugar"));
+const jsObjectToScssMap_1 = __importDefault(require("./jsObjectToScssMap"));
+const putUseStatementsOnTop_1 = __importDefault(require("./putUseStatementsOnTop"));
+const packageRoot_1 = __importDefault(require("../path/packageRoot"));
+const inPackage_1 = __importDefault(require("../is/inPackage"));
+const path_1 = __importDefault(require("path"));
 /**
  * @name            injectSugarScss
  * @namespace       sugar.node.scss
@@ -17,7 +21,7 @@ const __path = require('path');
  * @return      {String}                        The new string with the sugar scss init code injected
  *
  * @example       js
- * const injectSugarScss = require('@coffeekraken/sugar/node/scss/injectSugarScss');
+ * import injectSugarScss from '@coffeekraken/sugar/node/scss/injectSugarScss';
  * injectSugarScss(``
  *    body {
  *      color: Sugar.color('primary');
@@ -27,22 +31,23 @@ const __path = require('path');
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function injectSugarScss(scss) {
+function injectSugarScss(scss) {
     if (scss.includes(' as Sugar;'))
         return scss;
-    const scssSettings = __sugarConfig('scss');
-    const settingsString = __jsObjectToScssMap(scssSettings);
-    const path = __isInPackage('coffeekraken', process.cwd(), true)
-        ? __path.resolve(__packageRoot(__dirname, true), 'toolkits/sugar/index')
+    const scssSettings = sugar_1.default('scss');
+    const settingsString = jsObjectToScssMap_1.default(scssSettings);
+    const path = inPackage_1.default('coffeekraken', process.cwd(), true)
+        ? path_1.default.resolve(packageRoot_1.default(__dirname, true), 'toolkits/sugar/index')
         : '@coffeekraken/sugar/index';
     const importsStrings = `
       @use "${path}" as Sugar;
       $sugarUserSettings: ${settingsString};
       @include Sugar.setup($sugarUserSettings);
     `;
-    const res = __putUseStatementsOnTop(`
+    const res = putUseStatementsOnTop_1.default(`
     ${importsStrings}
     ${scss}
   `);
     return res;
-};
+}
+exports.default = injectSugarScss;

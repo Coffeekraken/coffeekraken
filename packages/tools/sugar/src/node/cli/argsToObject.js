@@ -1,5 +1,10 @@
-import __parseArgs from './parseArgs';
-import __completeArgsObject from './completeArgsObject';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const parseArgs_1 = __importDefault(require("./parseArgs"));
+const completeArgsObject_1 = __importDefault(require("./completeArgsObject"));
 /**
  * @name                  argsToObject
  * @namespace           sugar.js.cli
@@ -38,11 +43,13 @@ import __completeArgsObject from './completeArgsObject';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function argsToObject(argsObj, settings = {}) {
+function argsToObject(argsObj, settings = {}) {
     if (typeof argsObj === 'string') {
-        return __parseArgs(argsObj, {
+        return parseArgs_1.default(argsObj, {
             definitionObj: settings.definitionObj
         });
     }
-    return __completeArgsObject(argsObj || {}, settings);
-};
+    return completeArgsObject_1.default(argsObj || {}, settings);
+}
+exports.default = argsToObject;
+;

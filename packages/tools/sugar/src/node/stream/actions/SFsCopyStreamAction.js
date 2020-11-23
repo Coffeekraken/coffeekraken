@@ -1,10 +1,13 @@
 "use strict";
-var _a;
-const __SActionsStreamAction = require('../SActionsStreamAction');
-const __ncp = require('ncp').ncp;
-const __deepMerge = require('../../object/deepMerge');
-const __SInterface = require('../../class/SInterface');
-class SFsCopyStreamActionInterface extends __SInterface {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SActionsStreamAction_1 = __importDefault(require("../SActionsStreamAction"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const SInterface_1 = __importDefault(require("../../class/SInterface"));
+const ncp_1 = require("ncp");
+class SFsCopyStreamActionInterface extends SInterface_1.default {
 }
 SFsCopyStreamActionInterface.definitionObj = {
     input: {
@@ -29,48 +32,48 @@ SFsCopyStreamActionInterface.definitionObj = {
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SFsCopyStreamAction extends __SActionsStreamAction {
-        /**
-         * @name            constructor
-         * @type            Function
-         * @constructor
-         *
-         * Constructor
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        constructor(settings = {}) {
-            super(__deepMerge({
-                id: 'actionStream.action.fs.copy'
-            }, settings));
-        }
-        /**
-         * @name          run
-         * @type          Function
-         * @async
-         *
-         * Override the base class run method
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        run(streamObj, settings = this._settings) {
-            return super.run(streamObj, async (resolve, reject) => {
-                __ncp(streamObj.input, streamObj.outputDir, (e) => {
-                    if (e)
-                        return reject(e);
-                    resolve(streamObj);
-                });
-            });
-        }
-    },
+class SFsCopyStreamAction extends SActionsStreamAction_1.default {
     /**
-     * @name            interface
-     * @type             Object
-     * @static
+     * @name            constructor
+     * @type            Function
+     * @constructor
      *
-     * Store the definition object that specify the streamObj required properties, types, etc...
+     * Constructor
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SFsCopyStreamActionInterface,
-    _a);
+    constructor(settings = {}) {
+        super(deepMerge_1.default({
+            id: 'actionStream.action.fs.copy'
+        }, settings));
+    }
+    /**
+     * @name          run
+     * @type          Function
+     * @async
+     *
+     * Override the base class run method
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    run(streamObj, settings = this._settings) {
+        return super.run(streamObj, async (resolve, reject) => {
+            ncp_1.ncp(streamObj.input, streamObj.outputDir, (e) => {
+                if (e)
+                    return reject(e);
+                resolve(streamObj);
+            });
+        });
+    }
+}
+exports.default = SFsCopyStreamAction;
+/**
+ * @name            interface
+ * @type             Object
+ * @static
+ *
+ * Store the definition object that specify the streamObj required properties, types, etc...
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+SFsCopyStreamAction.interface = SFsCopyStreamActionInterface;

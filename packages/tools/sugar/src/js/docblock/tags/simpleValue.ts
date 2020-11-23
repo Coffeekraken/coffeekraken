@@ -2,16 +2,20 @@
  * @name              simpleValue
  * @namespace           sugar.js.docblock.tags
  * @type              Function
+ * @wip
  *
  * Parse the simpleValue tag
  *
  * @param       {Object}          data        The data object parsed in the string
  * @return      {Object}                      The formated object
  *
+ * @todo      interface
+ * @todo      doc
+ *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-module.exports = function simpleValue(data) {
+export default function simpleValue(data) {
   if (
     data &&
     data.value &&
@@ -21,4 +25,4 @@ module.exports = function simpleValue(data) {
     return true;
   }
   return data.value;
-};
+}

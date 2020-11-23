@@ -1,5 +1,9 @@
 "use strict";
-const __packageRoot = require('../path/packageRoot');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 /**
  * @name          rootPath
  * @namespace     sugar.node.package
@@ -12,12 +16,13 @@ const __packageRoot = require('../path/packageRoot');
  * @return    {String}          The current working package root path
  *
  * @example     js
- * const json = require('@coffeekraken/sugar/node/package/rootPath');
+ * import json from '@coffeekraken/sugar/node/package/rootPath';
  * rootPath(); => // /something/cool/myCoolPackage'
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-module.exports = function rootPath(from = process.cwd(), highest = false) {
-    return __packageRoot(from, highest);
-};
+function rootPath(from = process.cwd(), highest = false) {
+    return packageRoot_1.default(from, highest);
+}
+exports.default = rootPath;

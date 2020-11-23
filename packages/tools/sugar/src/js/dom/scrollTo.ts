@@ -4,6 +4,7 @@ import requestAnimationFrame from './requestAnimationFrame';
  * @name      scrollTo
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Function that let you make a smooth page scroll to a specific element in the page
  *
@@ -14,11 +15,16 @@ import requestAnimationFrame from './requestAnimationFrame';
  * @param 		{String} 					[align='top'] 			The destination align (top, center, bottom)
  * @param 		{Function} 					[onFinish=null] 		A callback to call when the animation if finished
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example 	js
  * import scrollTop from '@coffeekraken/sugar/js/dom/scrollTo'
  * import easeInOutQuad from '@coffeekraken/sugar/js/easings/easeInOutQuad'
  * scrollTo(myCoolHTMLElement);
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 let isUserScrolling = false;
@@ -41,18 +47,18 @@ function scrollTo(
   align = 'top',
   onFinish = null
 ) {
-  var docElem = document.documentElement; // to facilitate minification better
-  var windowHeight = docElem.clientHeight;
-  var maxScroll =
+  const docElem = document.documentElement; // to facilitate minification better
+  const windowHeight = docElem.clientHeight;
+  const maxScroll =
     'scrollMaxY' in window
       ? window.scrollMaxY
       : docElem.scrollHeight - windowHeight;
-  var currentY = window.pageYOffset;
+  const currentY = window.pageYOffset;
 
   isScrollingHappening = true;
 
-  var targetY = currentY;
-  var elementBounds = isNaN(target) ? target.getBoundingClientRect() : 0;
+  let targetY = currentY;
+  const elementBounds = isNaN(target) ? target.getBoundingClientRect() : 0;
 
   if (align === 'center') {
     targetY += elementBounds.top + elementBounds.height / 2;
@@ -69,9 +75,9 @@ function scrollTo(
   }
   targetY = Math.max(Math.min(maxScroll, targetY), 0);
 
-  var deltaY = targetY - currentY;
+  const deltaY = targetY - currentY;
 
-  var obj = {
+  const obj = {
     targetY: targetY,
     deltaY: deltaY,
     duration: duration,
@@ -92,10 +98,10 @@ scrollTo.step = function () {
   }
 
   // Calculate how much time has passed
-  var t = Math.min((Date.now() - this.startTime) / this.duration, 1);
+  const t = Math.min((Date.now() - this.startTime) / this.duration, 1);
 
   // Scroll window amount determined by easing
-  var y = this.targetY - (1 - this.easing(t)) * this.deltaY;
+  const y = this.targetY - (1 - this.easing(t)) * this.deltaY;
   window.scrollTo(window.scrollX, y);
 
   // Continue animation as long as duration hasn't surpassed

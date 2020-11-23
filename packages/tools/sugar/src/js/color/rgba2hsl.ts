@@ -26,16 +26,15 @@ export default function rgba2hsl(r, g, b, a = 1) {
   }
 
   (r /= 255), (g /= 255), (b /= 255);
-  let max = Math.max(r, g, b),
+  const max = Math.max(r, g, b),
     min = Math.min(r, g, b);
-  let h,
-    s,
-    l = (max + min) / 2;
+  let h, s;
+  const l = (max + min) / 2;
 
   if (max == min) {
     h = s = 0; // achromatic
   } else {
-    var d = max - min;
+    const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
     switch (max) {
       case r:

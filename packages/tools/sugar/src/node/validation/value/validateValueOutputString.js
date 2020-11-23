@@ -1,6 +1,11 @@
-import __parseHtml from '../../console/parseHtml';
-import __toString from '../../string/toString';
-import __deepMerge from '../../object/deepMerge';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const parseHtml_1 = __importDefault(require("../../console/parseHtml"));
+const toString_1 = __importDefault(require("../../string/toString"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 /**
  * @name                validateValueOutputString
  * @namespace           sugar.js.validation.value
@@ -26,9 +31,9 @@ import __deepMerge from '../../object/deepMerge';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function validateValueOutputString(validateValueResultObj, settings = {}) {
+function validateValueOutputString(validateValueResultObj, settings = {}) {
     let issuesArray = [];
-    settings = __deepMerge({
+    settings = deepMerge_1.default({
         name: settings.name || validateValueResultObj.$name,
         interface: settings.interface || validateValueResultObj.$interface
     });
@@ -36,12 +41,7 @@ export default function validateValueOutputString(validateValueResultObj, settin
         issuesArray.push(`<yellow>│</yellow> ${settings.name}\n<yellow>│</yellow>`);
     }
     if (validateValueResultObj.$received) {
-        let string = `<yellow>│</yellow> - Received value: <yellow>${__toString(validateValueResultObj.$received.value, { beautify: true })}</yellow>`;
-        // if (__isNode()) {
-        //   const __packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
-        //   string = string.replace(`${__packageRoot()}/`, '');
-        //   string = string.replace(`${__packageRoot(__dirname)}/`, '');
-        // }
+        let string = `<yellow>│</yellow> - Received value: <yellow>${toString_1.default(validateValueResultObj.$received.value, { beautify: true })}</yellow>`;
         issuesArray.push(string);
     }
     validateValueResultObj.$issues.forEach((issue) => {
@@ -49,5 +49,6 @@ export default function validateValueOutputString(validateValueResultObj, settin
             issuesArray.push(`<yellow>│</yellow> - ${validateValueResultObj.$messages[issue]}`);
         }
     });
-    return __parseHtml(issuesArray.join('\n')) + '\n';
+    return parseHtml_1.default(issuesArray.join('\n')) + '\n';
 }
+exports.default = validateValueOutputString;

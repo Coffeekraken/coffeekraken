@@ -1,14 +1,18 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
-const __SPromise = require('../promise/SPromise');
-const __SFsFileInterface = require('./interface/SFsFileInterface');
-const __fs = require('fs');
-const __path = require('path');
-const __extension = require('./extension');
-const __getFilename = require('./filename');
-const __SFsFileSettingsInterface = require('./interface/SFsFileSettingsInterface');
-const __SError = require('../error/SError');
-const __packageRoot = require('../path/packageRoot');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const SFsFileInterface_1 = __importDefault(require("./interface/SFsFileInterface"));
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
+const extension_1 = __importDefault(require("./extension"));
+const filename_1 = __importDefault(require("./filename"));
+const SFsFileSettingsInterface_1 = __importDefault(require("./interface/SFsFileSettingsInterface"));
+const SError_1 = __importDefault(require("../error/SError"));
+const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 /**
  * @name            SFsFile
  * @namespace       sugar.node.fs
@@ -34,7 +38,7 @@ const __packageRoot = require('../path/packageRoot');
  * - checkExistence (true) {Boolean}: Specify if you want this inited file to really exists on the disk or not
  *
  * @example           js
- * const SFsFile = require('@coffeekraken/sugar/node/fs/SFsFile');
+ * import SFsFile from '@coffeekraken/sugar/node/fs/SFsFile';
  * const file = new SFsFile('something/cool/sugar.json');
  * file.extension; // => json
  * file.exists; // => true
@@ -42,7 +46,7 @@ const __packageRoot = require('../path/packageRoot');
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SFsFile extends __SPromise {
+class SFsFile extends SPromise_1.default {
     /**
      * @name        constructor
      * @type        Function
@@ -54,12 +58,12 @@ class SFsFile extends __SPromise {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(filepath, settings = {}) {
-        settings = __deepMerge({
+        settings = deepMerge_1.default({
             id: 'SFsFile',
             checkExistence: true,
-            rootDir: __packageRoot()
+            rootDir: packageRoot_1.default()
         }, settings);
-        __SFsFileSettingsInterface.applyAndThrow(settings);
+        SFsFileSettingsInterface_1.default.applyAndThrow(settings);
         super(settings);
         /**
          * @name        name
@@ -145,23 +149,23 @@ class SFsFile extends __SPromise {
          */
         this.sizeInBytes = 0;
         if (settings.rootDir && !filepath.includes(settings.rootDir)) {
-            filepath = __path.resolve(settings.rootDir, filepath);
+            filepath = path_1.default.resolve(settings.rootDir, filepath);
         }
         // check if the file exists
-        this.exists = __fs.existsSync(filepath);
+        this.exists = fs_1.default.existsSync(filepath);
         // check if need to check for the file existence or not...
         if (settings.checkExistence && !this.exists) {
-            throw new __SError(`The passed filepath "<cyan>${filepath}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`);
+            throw new SError_1.default(`The passed filepath "<cyan>${filepath}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`);
         }
         if (this._settings.rootDir) {
             this.rootDir = this._settings.rootDir;
-            this.relPath = __path.relative(this.rootDir, filepath);
+            this.relPath = path_1.default.relative(this.rootDir, filepath);
         }
         // save the file path
         this.path = filepath;
-        this.name = __getFilename(filepath);
-        this.extension = __extension(filepath);
-        this.dirPath = __path.dirname(filepath);
+        this.name = filename_1.default(filepath);
+        this.extension = extension_1.default(filepath);
+        this.dirPath = path_1.default.dirname(filepath);
         if (this.exists) {
             this.update();
         }
@@ -202,9 +206,9 @@ class SFsFile extends __SPromise {
         if (!this.exists)
             return;
         // get the file stats
-        const stats = __fs.statSync(this.path);
+        const stats = fs_1.default.statSync(this.path);
         this.sizeInBytes = stats.size;
         this.size = stats.size / 1000000;
     }
 }
-module.exports = __SFsFileInterface.implements(SFsFile);
+exports.default = SFsFileInterface_1.default.implements(SFsFile);

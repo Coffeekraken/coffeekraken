@@ -1,10 +1,9 @@
 "use strict";
-var _a;
-const __SInterface = require('../../class/SInterface');
-const __SOutputProcessInterface = require('./SOutputProcessInterface');
-const __SProcessManagerInterface = require('../../process/interface/SProcessManagerInterface');
-const __SOutputLogInterface = require('./SOutputLogInterface');
-const __SCliInterface = require('../../cli/interface/SCliInterface');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SInterface_1 = __importDefault(require("../../class/SInterface"));
 /**
  * @name                SAppCommandInterface
  * @namespace           sugar.node.blessed.interface
@@ -17,10 +16,10 @@ const __SCliInterface = require('../../cli/interface/SCliInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SAppCommandInterface extends __SInterface {
-    },
-    // static implementsArray = [__SCliInterface];
-    // static definitionObj = {};
-    _a.title = 'SApp Command Interface',
-    _a.description = 'This interface represent the minimum requirements that MUST have the instances passed in an SApp based application',
-    _a);
+class SAppCommandInterface extends SInterface_1.default {
+}
+exports.default = SAppCommandInterface;
+// static implementsArray = [__SCliInterface];
+// static definitionObj = {};
+SAppCommandInterface.title = 'SApp Command Interface';
+SAppCommandInterface.description = 'This interface represent the minimum requirements that MUST have the instances passed in an SApp based application';

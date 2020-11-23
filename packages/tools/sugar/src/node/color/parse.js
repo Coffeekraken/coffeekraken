@@ -1,13 +1,16 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const parseRgba_1 = require("./parseRgba");
-const parseHsv_1 = require("./parseHsv");
-const hsv2rgba_1 = require("./hsv2rgba");
-const parseHsl_1 = require("./parseHsl");
-const hsl2rgba_1 = require("./hsl2rgba");
-const hex2rgba_1 = require("./hex2rgba");
-const rgba2hsl_1 = require("./rgba2hsl");
-const rgba2hsv_1 = require("./rgba2hsv");
+const parseRgba_1 = __importDefault(require("./parseRgba"));
+const parseHsv_1 = __importDefault(require("./parseHsv"));
+const hsv2rgba_1 = __importDefault(require("./hsv2rgba"));
+const parseHsl_1 = __importDefault(require("./parseHsl"));
+const hsl2rgba_1 = __importDefault(require("./hsl2rgba"));
+const hex2rgba_1 = __importDefault(require("./hex2rgba"));
+const rgba2hsl_1 = __importDefault(require("./rgba2hsl"));
+const rgba2hsv_1 = __importDefault(require("./rgba2hsv"));
 /**
  * @name            parse
  * @namespace           sugar.js.color

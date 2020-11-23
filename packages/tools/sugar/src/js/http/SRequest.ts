@@ -10,11 +10,16 @@ import __deepMerge from '../object/deepMerge';
  * @name 		                    SRequest
  * @namespace           sugar.js.http
  * @type                        Class
+ * @wip
  *
  * Class that allows to simply handle ajax requests with ease.
  * This class give some useful features like :
  * - Promise support
  * - Recursive requests
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * const request = new SRequest({
@@ -32,6 +37,7 @@ import __deepMerge from '../object/deepMerge';
  * 		// something went wrong...
  * });
  *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SRequest {

@@ -1,5 +1,9 @@
 "use strict";
-const __fs = require('fs-extra');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_extra_1 = __importDefault(require("fs-extra"));
 // TODO tests
 /**
  * @name        emptyDirSync
@@ -11,7 +15,7 @@ const __fs = require('fs-extra');
  * @param       {String}              dir           The directory path to empty
  *
  * @example       js
- * const emptyDirSync = require('@coffeekraken/node/fs/emptyDirSync');
+ * import emptyDirSync from '@coffeekraken/node/fs/emptyDirSync';
  * try {
  *    emptyDirSync('my/cool/directory');
  * } catch(e) {}
@@ -19,6 +23,7 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function emptyDirSync(dir) {
-    __fs.emptyDirSync(dir);
-};
+function emptyDirSync(dir) {
+    fs_extra_1.default.emptyDirSync(dir);
+}
+exports.default = emptyDirSync;

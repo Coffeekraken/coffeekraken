@@ -1,11 +1,15 @@
 "use strict";
-const __SActionsStream = require('../../stream/SActionsStream');
-const __deepMerge = require('../../object/deepMerge');
-const __getFilename = require('../../fs/filename');
-const __SFsFilesResolverStreamAction = require('../../stream/actions/SFsFilesResolverStreamAction');
-const __SFsOutputStreamAction = require('../../stream/actions/SFsOutputStreamAction');
-const __SCompileJsStreamAction = require('./actions/SCompileJsStreamAction');
-const __path = require('path');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SActionsStream_1 = __importDefault(require("../../stream/SActionsStream"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const filename_1 = __importDefault(require("../../fs/filename"));
+const SFsFilesResolverStreamAction_1 = __importDefault(require("../../stream/actions/SFsFilesResolverStreamAction"));
+const SFsOutputStreamAction_1 = __importDefault(require("../../stream/actions/SFsOutputStreamAction"));
+const SCompileJsStreamAction_1 = __importDefault(require("./actions/SCompileJsStreamAction"));
+const path_1 = __importDefault(require("path"));
 /**
  * @name            SBuildJsActionsStream
  * @namespace           sugar.node.build.js
@@ -19,7 +23,7 @@ const __path = require('path');
  * @todo        Document the streamObj required properties
  *
  * @example         js
- * const SBuildJsActionsStream = require('@coffeekraken/sugar/node/build/SBuildJsActionsStream');
+ * import SBuildJsActionsStream from '@coffeekraken/sugar/node/build/SBuildJsActionsStream';
  * const myStream = new SBuildJsActionsStream();
  * myStream.start({
  *    input: '...',
@@ -31,7 +35,7 @@ const __path = require('path');
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildJsActionsStream extends __SActionsStream {
+class SBuildJsActionsStream extends SActionsStream_1.default {
     /**
      * @name        constructor
      * @type        Function
@@ -44,10 +48,10 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
     constructor(settings = {}) {
         // init actions stream
         super({
-            filesResolver: __SFsFilesResolverStreamAction,
-            compile: __SCompileJsStreamAction,
-            fsOutput: __SFsOutputStreamAction
-        }, __deepMerge({
+            filesResolver: SFsFilesResolverStreamAction_1.default,
+            compile: SCompileJsStreamAction_1.default,
+            fsOutput: SFsOutputStreamAction_1.default
+        }, deepMerge_1.default({
             id: 'SBuildJsActionsStream',
             name: 'Build JS Actions Stream',
             before: (streamObj) => {
@@ -57,7 +61,7 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
             afterActions: {
                 filesResolver: (streamObj) => {
                     if (streamObj.input) {
-                        streamObj.filename = __getFilename(streamObj.input);
+                        streamObj.filename = filename_1.default(streamObj.input);
                     }
                     return streamObj;
                 },
@@ -76,15 +80,16 @@ module.exports = class SBuildJsActionsStream extends __SActionsStream {
         if (!streamObj.outputStack)
             streamObj.outputStack = {};
         if (streamObj.outputDir && streamObj.filename) {
-            streamObj.outputStack.data = __path.resolve(streamObj.outputDir, streamObj.prod
+            streamObj.outputStack.data = path_1.default.resolve(streamObj.outputDir, streamObj.prod
                 ? streamObj.inputObj.relPath.replace('.js', '.prod.js')
                 : streamObj.inputObj.relPath.replace('.js', '.js'));
         }
         if (streamObj.outputDir && streamObj.filename && streamObj.sourcemapData) {
-            streamObj.outputStack.sourcemapData = __path.resolve(streamObj.outputDir, streamObj.prod
+            streamObj.outputStack.sourcemapData = path_1.default.resolve(streamObj.outputDir, streamObj.prod
                 ? streamObj.inputObj.relPath.replace('.js', '.prod.js.map')
                 : streamObj.inputObj.relPath.replace('.js', '.js.map'));
         }
         return streamObj;
     }
-};
+}
+exports.default = SBuildJsActionsStream;

@@ -4,12 +4,17 @@ import __SPromise from '../promise/SPromise';
  * @name        observeAttributes
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Observe attributes on an HTMLElement and get mutations through the SPromise instance
  *
  * @param 		{HTMLElement} 					target 		The element to observe
  * @param 		{MutationObserverInit} 			settings 	The mutation observer settings
  * @return 		{SPromise} 								The SPromise throught which you can have the mutations using the "then" callback
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example  	js
  * import observeAttributes from 'sugarcss/js/dom/observeAttributes'
@@ -20,6 +25,7 @@ import __SPromise from '../promise/SPromise';
  * observer.cancel();
  *
  * @see 		https://developer.mozilla.org/en/docs/Web/API/MutationObserver
+ * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function (target, settings = {}) {

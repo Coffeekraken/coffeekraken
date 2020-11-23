@@ -1,9 +1,13 @@
 "use strict";
-const __fs = require('fs');
-const __deepMerge = require('../../object/deepMerge');
-const __writeFileSync = require('../../fs/writeFileSync');
-const __diff = require('../../object/diff');
-const __SConfigAdapter = require('./SConfigAdapter');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = __importDefault(require("fs"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const writeFileSync_1 = __importDefault(require("../../fs/writeFileSync"));
+const diff_1 = __importDefault(require("../../object/diff"));
+const SConfigAdapter_1 = __importDefault(require("./SConfigAdapter"));
 /**
  * @name                  SConfigFolderAdapter
  * @namespace           sugar.node.config.adapters
@@ -23,7 +27,7 @@ const __SConfigAdapter = require('./SConfigAdapter');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
+class SConfigFolderAdapter extends SConfigAdapter_1.default {
     constructor(settings = {}) {
         super(settings);
         this.settings.foldername = this.settings.foldername.replace('[name]', this.name);
@@ -45,9 +49,9 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
         //   __fs.existsSync(this.settings.defaultConfigPath)
         // ) {
         if (this.settings.defaultConfigPath &&
-            __fs.existsSync(this.settings.defaultConfigPath)) {
+            fs_1.default.existsSync(this.settings.defaultConfigPath)) {
             process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`] = true;
-            __fs.readdirSync(this.settings.defaultConfigPath).forEach((file) => {
+            fs_1.default.readdirSync(this.settings.defaultConfigPath).forEach((file) => {
                 if (!file.includes(this.settings.filename.replace('[name]', '')))
                     return;
                 if (this._defaultConfig[file.replace('.config.js', '')] !== undefined)
@@ -68,9 +72,9 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
         // ) {
         if (this.settings.defaultConfigPath !== this.settings.appConfigPath &&
             this.settings.appConfigPath &&
-            __fs.existsSync(this.settings.appConfigPath)) {
+            fs_1.default.existsSync(this.settings.appConfigPath)) {
             process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`] = true; // intermediate value
-            __fs.readdirSync(this.settings.appConfigPath).forEach((file) => {
+            fs_1.default.readdirSync(this.settings.appConfigPath).forEach((file) => {
                 if (!file.includes(this.settings.filename.replace('[name]', '')))
                     return;
                 this._appConfig[file.replace('.config.js', '')] = require(`${this.settings.appConfigPath}/${file}`);
@@ -91,9 +95,9 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
         if (this.settings.defaultConfigPath !== this.settings.userConfigPath &&
             this.settings.appConfigPath !== this.settings.userConfigPath &&
             this.settings.userConfigPath &&
-            __fs.existsSync(this.settings.userConfigPath)) {
+            fs_1.default.existsSync(this.settings.userConfigPath)) {
             process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`] = true; // intermediate value
-            __fs.readdirSync(this.settings.userConfigPath).forEach((file) => {
+            fs_1.default.readdirSync(this.settings.userConfigPath).forEach((file) => {
                 if (!file.includes(this.settings.filename.replace('[name]', '')))
                     return;
                 this._userConfig[file.replace('.config.js', '')] = require(`${this.settings.userConfigPath}/${file}`);
@@ -104,24 +108,26 @@ module.exports = class SConfigFolderAdapter extends __SConfigAdapter {
             this._userConfig = JSON.parse(process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`]);
         }
         // mix the configs and save them in the instance
-        const n = __deepMerge(this._defaultConfig, this._appConfig, this._userConfig);
+        const n = deepMerge_1.default(this._defaultConfig, this._appConfig, this._userConfig);
         return n;
     }
     save(newConfig = {}) {
         if (!this.settings.userConfigPath) {
             throw new Error(`You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`);
         }
-        const baseConfig = __deepMerge(this._defaultConfig, this._appConfig);
+        const baseConfig = deepMerge_1.default(this._defaultConfig, this._appConfig);
         Object.keys(baseConfig).forEach((name) => {
-            const configToSave = __diff(baseConfig[name], newConfig[name] || {});
+            const configToSave = diff_1.default(baseConfig[name], newConfig[name] || {});
             let newConfigString = `
       module.exports = ${JSON.stringify(configToSave)};
     `;
             // write the new config file
-            __writeFileSync(this.settings.userConfigPath +
+            writeFileSync_1.default(this.settings.userConfigPath +
                 '/' +
                 this.settings.filename.replace('[name]', name), newConfigString);
         });
         return true;
     }
-};
+}
+exports.default = SConfigFolderAdapter;
+;

@@ -1,3 +1,8 @@
+/**
+ * @wip
+ * @todo      interface
+ * @todo      doc
+ */
 export default `
 {{#if param}}
     <div class="s-db-parameters">

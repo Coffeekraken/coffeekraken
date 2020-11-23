@@ -556,11 +556,11 @@ class SColor {
     return this._convert2('hsl').l;
   }
   set l(value) {
-    let hsl = this._convert2('hsl');
+    const hsl = this._convert2('hsl');
     value = parseInt(value);
     value = value > 100 ? 100 : value;
     hsl.l = value;
-    let rgba = __hsl2rgba(hsl.h, hsl.s, hsl.l);
+    const rgba = __hsl2rgba(hsl.h, hsl.s, hsl.l);
     this.r = rgba.r;
     this.g = rgba.g;
     this.b = rgba.b;
@@ -582,11 +582,11 @@ class SColor {
     return this._convert2('hsl').s;
   }
   set s(value) {
-    let hsl = this._convert2('hsl');
+    const hsl = this._convert2('hsl');
     value = parseInt(value);
     value = value > 100 ? 100 : value;
     hsl.s = value;
-    let rgba = __hsl2rgba(hsl.h, hsl.s, hsl.l);
+    const rgba = __hsl2rgba(hsl.h, hsl.s, hsl.l);
     this.r = rgba.r;
     this.g = rgba.g;
     this.b = rgba.b;
@@ -608,11 +608,11 @@ class SColor {
     return this._convert2('hsv').v;
   }
   set v(value) {
-    let hsv = this._convert2('hsv');
+    const hsv = this._convert2('hsv');
     value = parseInt(value);
     value = value > 100 ? 100 : value;
     hsv.v = value;
-    let rgba = __hsv2rgba(hsv.h, hsv.s, hsv.v);
+    const rgba = __hsv2rgba(hsv.h, hsv.s, hsv.v);
     this.r = rgba.r;
     this.g = rgba.g;
     this.b = rgba.b;
@@ -634,11 +634,11 @@ class SColor {
     return this._convert2('hsl').h;
   }
   set h(value) {
-    let hsl = this._convert2('hsl');
+    const hsl = this._convert2('hsl');
     value = parseInt(value);
     value = value > 360 ? 360 : value;
     hsl.h = value;
-    let rgba = __hsl2rgba(hsl.h, hsl.s, hsl.l);
+    const rgba = __hsl2rgba(hsl.h, hsl.s, hsl.l);
     this.r = rgba.r;
     this.g = rgba.g;
     this.b = rgba.b;
@@ -753,7 +753,7 @@ class SColor {
    */
   spin(amount, returnNewInstance = this._settings.returnNewInstance) {
     amount = parseInt(amount);
-    let hue = this.h;
+    const hue = this.h;
     let newHue = hue + amount;
     if (newHue > 360) {
       newHue -= 360;

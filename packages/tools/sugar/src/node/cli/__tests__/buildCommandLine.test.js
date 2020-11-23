@@ -1,3 +1,7 @@
 "use strict";
-const __buildCommandLine = require('../buildCommandLine');
-require('../_js/cli/__tests__/buildCommandLine')(__buildCommandLine);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const buildCommandLine_1 = __importDefault(require("../buildCommandLine"));
+require('../_js/cli/__tests__/buildCommandLine')(buildCommandLine_1.default);

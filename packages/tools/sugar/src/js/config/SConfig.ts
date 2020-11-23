@@ -183,7 +183,7 @@ export default class SConfig {
       return this._adapters[adapter].config;
     }
 
-    let config = this._adapters[adapter].instance.load();
+    const config = this._adapters[adapter].instance.load();
     if (config instanceof Promise) {
       return new Promise((resolve) => {
         config.then((c) => {

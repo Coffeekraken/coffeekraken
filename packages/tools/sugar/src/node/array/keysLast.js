@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const uniq_1 = require("lodash/uniq");
+const uniq_1 = __importDefault(require("lodash/uniq"));
 /**
  * @name        keysLast
  * @namespace           sugar.js.array

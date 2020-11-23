@@ -1,5 +1,9 @@
 "use strict";
-const __fs = require('fs-extra');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_extra_1 = __importDefault(require("fs-extra"));
 // TODO tests
 /**
  * @name        writeJson
@@ -15,7 +19,7 @@ const __fs = require('fs-extra');
  * @return      {Promise}                           A promise that will be resolved when the writeJson is completed
  *
  * @example       js
- * const writeJson = require('@coffeekraken/node/fs/writeJson');
+ * import writeJson from '@coffeekraken/node/fs/writeJson';
  * writeJson('my/cool/file.json', { hello: 'world' }).then(() => {
  *    // do something on complete...
  * });
@@ -23,6 +27,7 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function writeJson(path, data, options = {}) {
-    return __fs.outputJson(path, data, options);
-};
+function writeJson(path, data, options = {}) {
+    return fs_extra_1.default.outputJson(path, data, options);
+}
+exports.default = writeJson;

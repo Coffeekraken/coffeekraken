@@ -1,16 +1,20 @@
 "use strict";
-const __SPromise = require('../promise/SPromise');
-const __deepMerge = require('../object/deepMerge');
-const __packageRoot = require('../path/packageRoot');
-const __glob = require('glob');
-const __fs = require('fs');
-const __path = require('path');
-const __SDocblock = require('../docblock/SDocblock');
-const __toString = require('../string/toString');
-const __removeSync = require('../fs/removeSync');
-const __getFilename = require('../fs/filename');
-const __unique = require('../array/unique');
-const __SGlob = require('../glob/SGlob');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const packageRoot_1 = __importDefault(require("../path/packageRoot"));
+const glob_1 = __importDefault(require("glob"));
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
+const SDocblock_1 = __importDefault(require("../docblock/SDocblock"));
+const toString_1 = __importDefault(require("../string/toString"));
+const removeSync_1 = __importDefault(require("../fs/removeSync"));
+const filename_1 = __importDefault(require("../fs/filename"));
+const unique_1 = __importDefault(require("../array/unique"));
+const SGlob_1 = __importDefault(require("../glob/SGlob"));
 /**
  * @name                SDocMap
  * @namespace           sugar.node.doc
@@ -25,7 +29,7 @@ const __SGlob = require('../glob/SGlob');
  * - outputDir (packageRoot()) {String}: Specify the directory where you want to save your docMap.json file when using the ```save``` method
  *
  * @example             js
- * const SDocMap = require('@coffeekraken/sugar/node/doc/SDocMap');
+ * import SDocMap from 'coffeekraken/sugar/node/doc/SDocMap';
  * const docMap = new SDocMap({
  *  outputDir: '/my/cool/directory'
  * });
@@ -35,7 +39,7 @@ const __SGlob = require('../glob/SGlob');
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SDocMap extends __SPromise {
+class SDocMap extends SPromise_1.default {
     /**
      * @name            constructor
      * @type            Function
@@ -47,21 +51,21 @@ module.exports = class SDocMap extends __SPromise {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        super(__deepMerge({
+        super(deepMerge_1.default({
             id: 'SDocMap',
             filename: 'docMap.json',
-            outputDir: __packageRoot(),
+            outputDir: packageRoot_1.default(),
             findSources: {
                 root: {
-                    rootDir: __packageRoot(),
+                    rootDir: packageRoot_1.default(),
                     dirDepth: 3
                 },
                 nodeModules: {
-                    rootDir: `${__packageRoot()}/node_modules`,
+                    rootDir: `${packageRoot_1.default()}/node_modules`,
                     dirDepth: 3
                 },
                 sugar: {
-                    rootDir: `${__packageRoot()}/node_modules/@coffeekraken/sugar`,
+                    rootDir: `${packageRoot_1.default()}/node_modules/@coffeekraken/sugar`,
                     dirDepth: 3
                 }
             },
@@ -97,12 +101,12 @@ module.exports = class SDocMap extends __SPromise {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     find(settings = {}) {
-        settings = __deepMerge(this._settings, {}, settings);
-        return new __SPromise((resolve, reject, trigger, cancel) => {
+        settings = deepMerge_1.default(this._settings, {}, settings);
+        return new SPromise_1.default((resolve, reject, trigger, cancel) => {
             // generate the glob pattern to use
             const patterns = [];
             Object.keys(settings.findSources).forEach((sourceName) => {
-                const sourceObj = __deepMerge(settings, settings.findSources[sourceName]);
+                const sourceObj = deepMerge_1.default(settings, settings.findSources[sourceName]);
                 const filenamesArray = !Array.isArray(sourceObj.filename)
                     ? [sourceObj.filename]
                     : sourceObj.filename;
@@ -121,17 +125,17 @@ module.exports = class SDocMap extends __SPromise {
             let files = [];
             for (let i = 0; i < patterns.length; i++) {
                 const patternObj = patterns[i];
-                const foundFiles = __glob
+                const foundFiles = glob_1.default
                     .sync(`{${patternObj.patterns.join(',')}}`, {
                     cwd: patternObj.rootDir,
                     symlinks: true
                 })
                     .map((filePath) => {
-                    return __path.resolve(patternObj.rootDir, filePath);
+                    return path_1.default.resolve(patternObj.rootDir, filePath);
                 });
                 files = [...files, ...foundFiles];
             }
-            files = __unique(files);
+            files = unique_1.default(files);
             resolve(files);
         }, {
             id: settings.id + '.find'
@@ -155,15 +159,15 @@ module.exports = class SDocMap extends __SPromise {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     read(settings = {}) {
-        settings = __deepMerge(this._settings, {}, settings);
-        return new __SPromise(async (resolve, reject, trigger, cancel) => {
+        settings = deepMerge_1.default(this._settings, {}, settings);
+        return new SPromise_1.default(async (resolve, reject, trigger, cancel) => {
             const files = await this.find(settings);
             let docMapJson = {};
             // loop on all files
             files.forEach((filePath) => {
                 const content = require(filePath);
                 Object.keys(content).forEach((docMapItemKey) => {
-                    content[docMapItemKey].path = __path.resolve(filePath.split('/').slice(0, -1).join('/'), content[docMapItemKey].relPath);
+                    content[docMapItemKey].path = path_1.default.resolve(filePath.split('/').slice(0, -1).join('/'), content[docMapItemKey].relPath);
                 });
                 docMapJson = {
                     ...docMapJson,
@@ -190,36 +194,36 @@ module.exports = class SDocMap extends __SPromise {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     generate(settings = {}) {
-        settings = __deepMerge(this._settings, {}, settings);
-        return new __SPromise(async (resolve, reject, trigger, cancel) => {
+        settings = deepMerge_1.default(this._settings, {}, settings);
+        return new SPromise_1.default(async (resolve, reject, trigger, cancel) => {
             let globs = settings.inputGlobs;
             if (!Array.isArray(globs))
                 globs = [globs];
             for (let i = 0; i < globs.length; i++) {
                 const glob = globs[i];
                 // scan for files
-                const files = await __SGlob.resolve(glob);
+                const files = await SGlob_1.default.resolve(glob);
                 // loop on each files to check for docblocks
                 for (let j = 0; j < files.length; j++) {
                     const filepath = files[j].path;
-                    const content = __fs.readFileSync(filepath, 'utf8');
+                    const content = fs_1.default.readFileSync(filepath, 'utf8');
                     if (!content)
                         continue;
-                    const docblocks = new __SDocblock(content).toObject();
+                    const docblocks = new SDocblock_1.default(content).toObject();
                     if (!docblocks || !docblocks.length)
                         continue;
                     docblocks.forEach((docblock) => {
                         if (!docblock.namespace)
                             return;
-                        const path = __path.relative(settings.outputDir, filepath);
-                        const filename = __getFilename(filepath);
+                        const path = path_1.default.relative(settings.outputDir, filepath);
+                        const filename = filename_1.default(filepath);
                         const docblockObj = {
                             name: docblock.name,
                             namespace: docblock.namespace,
                             filename,
                             extension: filename.split('.').slice(1)[0],
                             relPath: path,
-                            directory: path.replace(`/${__getFilename(filepath)}`, ''),
+                            directory: path.replace(`/${filename_1.default(filepath)}`, ''),
                             type: docblock.type,
                             description: docblock.description
                         };
@@ -254,21 +258,21 @@ module.exports = class SDocMap extends __SPromise {
     save(outputOrSettings = null, settings = {}) {
         let output;
         if (typeof outputOrSettings === 'object') {
-            settings = __deepMerge(this._settings, {}, outputOrSettings);
+            settings = deepMerge_1.default(this._settings, {}, outputOrSettings);
         }
         else if (typeof outputOrSettings === 'string') {
             output = outputOrSettings;
         }
-        settings = __deepMerge(this._settings, {}, settings);
-        return new __SPromise(async (resolve, reject, trigger, cancel) => {
+        settings = deepMerge_1.default(this._settings, {}, settings);
+        return new SPromise_1.default(async (resolve, reject, trigger, cancel) => {
             if (!this._entries.length) {
                 await this.generate(settings);
             }
             if (!output) {
                 output = `${settings.outputDir}/${settings.filename}`;
             }
-            __removeSync(output);
-            __fs.writeFileSync(output, __toString(this._entries, {
+            removeSync_1.default(output);
+            fs_1.default.writeFileSync(output, toString_1.default(this._entries, {
                 beautify: true
             }));
             resolve();
@@ -276,4 +280,5 @@ module.exports = class SDocMap extends __SPromise {
             id: settings.id + '.save'
         });
     }
-};
+}
+exports.default = SDocMap;

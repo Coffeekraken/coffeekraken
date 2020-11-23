@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const SValidation_1 = require("../../SValidation");
+const SValidation_1 = __importDefault(require("../../SValidation"));
 /**
  * @name          SRequiredValidation
  * @namespace     sugar.js.validation.value.validation

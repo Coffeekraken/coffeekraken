@@ -1,7 +1,9 @@
 "use strict";
-const __packageRoot = require('../../../path/packageRoot');
-const __fs = require('fs');
-const __env = require('../../../core/env');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const env_1 = __importDefault(require("../../../core/env"));
 /**
  * @name            envMiddleware
  * @namespace       sugar.node.server.frontend.middleware
@@ -14,8 +16,8 @@ const __env = require('../../../core/env');
  * @param           {Function}          next            The next function to call when the middleware has finished his job
  *
  * @example         js
- * const express = require('express');
- * const envMiddleware = require('@coffeekraken/sugar/server/frontend/middleware/envMiddleware');
+ * import express from 'express';
+ * import envMiddleware from '@coffeekraken/sugar/server/frontend/middleware/envMiddleware';
  * const server = express();
  * server.use(envMiddleware);
  * server.listen(3000);
@@ -23,12 +25,13 @@ const __env = require('../../../core/env');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function envMiddleware(settings = {}) {
+function envMiddleware(settings = {}) {
     return function (req, res, next) {
         res.templateData = {
             ...(res.templateData || {}),
-            env: __env('NODE_ENV') || 'development'
+            env: env_1.default('NODE_ENV') || 'development'
         };
         next();
     };
-};
+}
+exports.default = envMiddleware;

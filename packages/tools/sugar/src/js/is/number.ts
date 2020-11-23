@@ -2,11 +2,16 @@
  * @name        isNumber
  * @namespace           sugar.js.is
  * @type      Function
+ * @stable
  *
  * Check if the passed value is a number
  *
  * @param 		{Mixed} 		value 		The value to check
  * @return 		{Boolean} 					The check result
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * import isNumber from '@coffeekraken/sugar/js/is/number';
@@ -14,6 +19,7 @@
  * isNumber(22.3) => true
  * isNumber('20') => false
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isNumber(source) {

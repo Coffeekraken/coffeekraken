@@ -3,12 +3,11 @@ import querySelectorLive from './querySelectorLive';
 import urlParse from 'url-parse';
 import scrollTo from './scrollTo';
 
-// TODO tests
-
 /**
  * @name        autoScrollAnchorLinks
- * @namespace           sugar.js.dom
+ * @namespace           sugar.js.feature
  * @type      Function
+ * @stable
  *
  * Listen for links contains an hash to init them for scroll to target on click
  *
@@ -17,10 +16,15 @@ import scrollTo from './scrollTo';
  * @param    {Function}    [easing=__easing]    An easing function used to scroll
  * @param    {Boolean}    [checkPathnames=true]    Specify if need to check the pathnames correspondance or not
  *
+ * @todo            interface
+ * @todo            doc
+ * @todo            tests
+ *
  * @example    js
  * import autoScrollAnchorLinks from '@coffeekraken/sugar/js/autoScrollAnchorLinks'
  * autoScrollAnchorLinks()
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function autoScrollAnchorLinks(

@@ -1,12 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const SError_1 = require("../error/SError");
-const deepMerge_1 = require("../object/deepMerge");
-const SPromise_1 = require("../promise/SPromise");
-const handlebars_1 = require("handlebars");
-const SCache_1 = require("../cache/SCache");
-const node_1 = require("../is/node");
-const promised_handlebars_1 = require("promised-handlebars");
+const SError_1 = __importDefault(require("../error/SError"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const handlebars_1 = __importDefault(require("handlebars"));
+const SCache_1 = __importDefault(require("../cache/SCache"));
+const node_1 = __importDefault(require("../is/node"));
+const promised_handlebars_1 = __importDefault(require("promised-handlebars"));
 /**
  * @name            SDocblockOutput
  * @namespace       sugar.js.docblock
@@ -32,7 +35,7 @@ const promised_handlebars_1 = require("promised-handlebars");
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SDocblockOutput {
+class SDocblockOutput {
     /**
      * @name        constructor
      * @type        Function
@@ -277,4 +280,6 @@ module.exports = class SDocblockOutput {
             id: 'SDocblockOutputRender'
         });
     }
-};
+}
+exports.default = SDocblockOutput;
+;

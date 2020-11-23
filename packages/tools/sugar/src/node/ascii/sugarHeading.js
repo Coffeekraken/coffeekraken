@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = require("../object/deepMerge");
-const parseHtml_1 = require("../console/parseHtml");
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const parseHtml_1 = __importDefault(require("../console/parseHtml"));
 /**
  * @name          sugarHeading
  * @namespace     sugar.js.ascii

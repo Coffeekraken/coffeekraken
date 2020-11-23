@@ -1,5 +1,10 @@
-import __SValidation from '../../SValidation';
-import __isClass from '../../../is/class';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SValidation_1 = __importDefault(require("../../SValidation"));
+const class_1 = __importDefault(require("../../../is/class"));
 /**
  * @name          SStaticValidation
  * @namespace     sugar.js.validation.value.validation
@@ -10,9 +15,9 @@ import __isClass from '../../../is/class';
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SStaticValidation extends __SValidation {
+class SStaticValidation extends SValidation_1.default {
     static exec(value, object, property) {
-        if (__isClass(object)) {
+        if (class_1.default(object)) {
             if (!object[property])
                 return false;
             return true;
@@ -26,4 +31,4 @@ class SStaticValidation extends __SValidation {
     }
 }
 SStaticValidation.message = 'The passed "<yellow>%2</yellow>" property has to be a <green>static</green> one';
-export default SStaticValidation;
+exports.default = SStaticValidation;

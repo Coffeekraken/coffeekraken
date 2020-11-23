@@ -1,6 +1,10 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
-const __countLine = require('../string/countLine');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const countLine_1 = __importDefault(require("../string/countLine"));
 /**
  * @name                                    center
  * @namespace           sugar.node.terminal
@@ -16,22 +20,23 @@ const __countLine = require('../string/countLine');
  * @return                {String}                                          The centered text
  *
  * @example             js
- * const center = require('@coffeekraken/sugar/node/terminal/center');
+ * import center from '@coffeekraken/sugar/node/terminal/center';
  * center('Hello world'); // => '                 Hello world'
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function center(text, settings = {}) {
-    settings = __deepMerge({
+function center(text, settings = {}) {
+    settings = deepMerge_1.default({
         spaceChar: '~'
     }, settings);
     const maxWidth = process.stdout.columns - (process.env.STDOUT_PADDING || 0) * 2;
     let lines = Array.isArray(text) ? text : text.split('\n');
     lines = lines.map((l) => {
-        const lineLenght = __countLine(l);
+        const lineLenght = countLine_1.default(l);
         return (' '.repeat(Math.round(maxWidth / 2 - lineLenght / 2)) + l)
             .split(settings.spaceChar)
             .join(' ');
     });
     return Array.isArray(text) ? lines : lines.join('\n');
-};
+}
+exports.default = center;

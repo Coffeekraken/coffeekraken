@@ -1,9 +1,12 @@
 "use strict";
-const __SConfig = require('./SConfig');
-const __SConfigFolderAdapter = require('./adapters/SConfigFolderAdapter');
-const __path = require('path');
-const __packageRoot = require('../path/packageRoot');
-const __resolveTokens = require('../object/resolveTokens');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SConfig_1 = __importDefault(require("./SConfig"));
+const SConfigFolderAdapter_1 = __importDefault(require("./adapters/SConfigFolderAdapter"));
+const path_1 = __importDefault(require("path"));
+const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 /**
  * @name                  sugar
  * @namespace           sugar.node.config
@@ -17,22 +20,22 @@ const __resolveTokens = require('../object/resolveTokens');
  * @return        {Mixed}                         Return the value if exists, undefined if not
  *
  * @example             js
- * const sugar = require('@coffeekraken/sugar/node/config/sugar');
+ * import sugar from '@coffeekraken/sugar/node/config/sugar';
  * sugar('scss.unit'); // => rem
  *
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 let sugarConfigInstance;
-module.exports = function sugar(dotPath) {
+function sugar(dotPath) {
     if (!sugarConfigInstance) {
-        sugarConfigInstance = new __SConfig('sugar', {
+        sugarConfigInstance = new SConfig_1.default('sugar', {
             adapters: [
-                new __SConfigFolderAdapter({
+                new SConfigFolderAdapter_1.default({
                     name: 'sugar',
                     foldername: '.sugar',
                     filename: '[name].config.js',
-                    defaultConfigPath: __path.resolve(__dirname, '../../../.sugar-default'),
-                    appConfigPath: `${__packageRoot(process.cwd())}/[foldername]`,
+                    defaultConfigPath: path_1.default.resolve(__dirname, '../../../.sugar-default'),
+                    appConfigPath: `${packageRoot_1.default(process.cwd())}/[foldername]`,
                     userConfigPath: null
                 })
             ]
@@ -42,4 +45,5 @@ module.exports = function sugar(dotPath) {
     return sugarConfigInstance.get(dotPath, undefined, {
         throwErrorOnUndefinedConfig: false
     });
-};
+}
+exports.default = sugar;

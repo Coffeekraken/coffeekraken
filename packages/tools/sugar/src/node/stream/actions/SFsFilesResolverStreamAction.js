@@ -1,20 +1,18 @@
 "use strict";
-var _a;
-const __path = require('path');
-const __SActionsStreamAction = require('../SActionsStreamAction');
-const __glob = require('glob');
-const __deepMerge = require('../../object/deepMerge');
-const __fs = require('fs');
-const __packageRoot = require('../../path/packageRoot');
-const __SPromise = require('../../promise/SPromise');
-const __SError = require('../../error/SError');
-const __SInterface = require('../../class/SInterface');
-const __extractGlob = require('../../glob/extractGlob');
-const __extractNoneGlob = require('../../glob/extractNoneGlob');
-const __getFilename = require('../../fs/filename');
-const __extension = require('../../fs/extension');
-const __resolveGlob = require('../../glob/resolveGlob');
-class SFsFilesResolverStreamActionInterface extends __SInterface {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SActionsStreamAction_1 = __importDefault(require("../SActionsStreamAction"));
+const glob_1 = __importDefault(require("glob"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const fs_1 = __importDefault(require("fs"));
+const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
+const SError_1 = __importDefault(require("../../error/SError"));
+const SInterface_1 = __importDefault(require("../../class/SInterface"));
+const extractGlob_1 = __importDefault(require("../../glob/extractGlob"));
+const extractNoneGlob_1 = __importDefault(require("../../glob/extractNoneGlob"));
+class SFsFilesResolverStreamActionInterface extends SInterface_1.default {
 }
 SFsFilesResolverStreamActionInterface.definitionObj = {
     input: {
@@ -36,153 +34,153 @@ SFsFilesResolverStreamActionInterface.definitionObj = {
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SFindInFileStreamAction extends __SActionsStreamAction {
-        /**
-         * @name            constructor
-         * @type            Function
-         * @constructor
-         *
-         * Constructor
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        constructor(settings = {}) {
-            super(__deepMerge({
-                name: 'File resolver',
-                id: 'SFsFilesResolverStreamAction',
-                cache: false,
-                ignoreFolders: ['__wip__', '__tests__'],
-                out: 'array'
-            }, settings));
-        }
-        /**
-         * @name          run
-         * @type          Function
-         * @async
-         *
-         * Override the base class run method
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        run(streamObj, settings = {}) {
-            settings = __deepMerge(this._settings, settings);
-            return super.run(streamObj, (resolve, reject, trigger) => {
-                let filesPathesObj = [];
-                const streamObjArray = [];
-                let input;
-                if (streamObj.input)
-                    input = Array.isArray(streamObj.input)
-                        ? streamObj.input
-                        : [streamObj.input];
-                let inputs = [];
-                inputs = [
-                    ...input.map((inputString) => {
-                        if (inputString.includes(':')) {
-                            return {
-                                rootDir: inputString.split(':')[0],
-                                glob: inputString.split(':')[1]
-                            };
-                        }
-                        return {
-                            rootDir: __extractNoneGlob(inputString),
-                            glob: __extractGlob(inputString)
-                        };
-                    })
-                ];
-                inputs.forEach((inputObj) => {
-                    // // check if the input path is a path or a glob
-                    // if (!__isGlob(searchPath) && !__isPath(searchPath, true)) {
-                    //   filesPathes.push(searchPath);
-                    //   this.warn(
-                    //     `One of the passed inputs is either not a valid glob pattern, either not a valid file path and will be treated as a simple String...`
-                    //   );
-                    //   return;
-                    // }
-                    const path = __glob
-                        .sync(inputObj.glob || '**/*', {
-                        cwd: inputObj.rootDir || __packageRoot(),
-                        ignore: settings.ignoreFolders.map((f) => {
-                            return `**/${f}/**`;
-                        })
-                    })
-                        .map((p) => {
-                        return {
-                            ...inputObj,
-                            relPath: p,
-                            path: __path.resolve(inputObj.rootDir, p),
-                            finename: __getFilename(p),
-                            extension: __extension(p)
-                        };
-                    });
-                    // append to the filePathes
-                    filesPathesObj = [...filesPathesObj, ...path];
-                    // const reg = new RegExp(`\s?${searchPattern}\s?`, 'gm');
-                    // path.forEach((p) => {
-                    //   if (__isDirectory(p)) {
-                    //     const filesPathArray = __glob.sync(`${p}/*.*`);
-                    //     filesPathArray.forEach((filePath) => {
-                    //       if (searchPattern) {
-                    //         const content = __fs.readFileSync(filePath, 'utf8');
-                    //         const matches = content.match(reg);
-                    //         if (matches) {
-                    //           if (filesPathes.indexOf(filePath) === -1)
-                    //             filesPathes.push(filePath);
-                    //         }
-                    //       } else {
-                    //         if (filesPathes.indexOf(filePath) === -1)
-                    //           filesPathes.push(filePath);
-                    //       }
-                    //     });
-                    //   } else if (!__isSymlink(p)) {
-                    //     if (searchPattern) {
-                    //       const content = __fs.readFileSync(p, 'utf8');
-                    //       const matches = content.match(reg);
-                    //       if (matches) {
-                    //         if (filesPathes.indexOf(p) === -1) filesPathes.push(p);
-                    //       }
-                    //     } else {
-                    //       if (filesPathes.indexOf(p) === -1) filesPathes.push(p);
-                    //     }
-                    //   }
-                    // });
-                });
-                if (!filesPathesObj.length) {
-                    throw new __SError(`Sorry but your <primary>input</primary> streamObj property setted to "<cyan>${streamObj.input.replace(`${__packageRoot()}/`, '')}</cyan>" does not resolve to any files...`);
-                }
-                if (settings.out !== 'array') {
-                    streamObj[settings.out || 'files'] = filesPathesObj;
-                    resolve(streamObj);
-                }
-                else {
-                    filesPathesObj.forEach((pathObj) => {
-                        const stats = __fs.statSync(pathObj.path);
-                        streamObjArray.push(Object.assign({}, {
-                            ...streamObj,
-                            input: pathObj.path,
-                            inputObj: {
-                                ...pathObj,
-                                stats: {
-                                    size: stats.size,
-                                    mtime: stats.mtime,
-                                    ctime: stats.ctime,
-                                    birthtime: stats.birthtime
-                                }
-                            }
-                        }));
-                    });
-                    resolve(streamObjArray);
-                }
-            });
-        }
-    },
+class SFindInFileStreamAction extends SActionsStreamAction_1.default {
     /**
-     * @name            interface
-     * @type             Object
-     * @static
+     * @name            constructor
+     * @type            Function
+     * @constructor
      *
-     * Store the definition object that specify the streamObj required properties, types, etc...
+     * Constructor
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SFsFilesResolverStreamActionInterface,
-    _a);
+    constructor(settings = {}) {
+        super(deepMerge_1.default({
+            name: 'File resolver',
+            id: 'SFsFilesResolverStreamAction',
+            cache: false,
+            ignoreFolders: ['__wip__', '__tests__'],
+            out: 'array'
+        }, settings));
+    }
+    /**
+     * @name          run
+     * @type          Function
+     * @async
+     *
+     * Override the base class run method
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    run(streamObj, settings = {}) {
+        settings = deepMerge_1.default(this._settings, settings);
+        return super.run(streamObj, (resolve, reject, trigger) => {
+            let filesPathesObj = [];
+            const streamObjArray = [];
+            let input;
+            if (streamObj.input)
+                input = Array.isArray(streamObj.input)
+                    ? streamObj.input
+                    : [streamObj.input];
+            let inputs = [];
+            inputs = [
+                ...input.map((inputString) => {
+                    if (inputString.includes(':')) {
+                        return {
+                            rootDir: inputString.split(':')[0],
+                            glob: inputString.split(':')[1]
+                        };
+                    }
+                    return {
+                        rootDir: extractNoneGlob_1.default(inputString),
+                        glob: extractGlob_1.default(inputString)
+                    };
+                })
+            ];
+            inputs.forEach((inputObj) => {
+                // // check if the input path is a path or a glob
+                // if (!__isGlob(searchPath) && !__isPath(searchPath, true)) {
+                //   filesPathes.push(searchPath);
+                //   this.warn(
+                //     `One of the passed inputs is either not a valid glob pattern, either not a valid file path and will be treated as a simple String...`
+                //   );
+                //   return;
+                // }
+                const path = glob_1.default
+                    .sync(inputObj.glob || '**/*', {
+                    cwd: inputObj.rootDir || packageRoot_1.default(),
+                    ignore: settings.ignoreFolders.map((f) => {
+                        return `**/${f}/**`;
+                    })
+                })
+                    .map((p) => {
+                    return {
+                        ...inputObj,
+                        relPath: p,
+                        path: path_1.default.resolve(inputObj.rootDir, p),
+                        finename: filename_1.default(p),
+                        extension: extension_1.default(p)
+                    };
+                });
+                // append to the filePathes
+                filesPathesObj = [...filesPathesObj, ...path];
+                // const reg = new RegExp(`\s?${searchPattern}\s?`, 'gm');
+                // path.forEach((p) => {
+                //   if (__isDirectory(p)) {
+                //     const filesPathArray = __glob.sync(`${p}/*.*`);
+                //     filesPathArray.forEach((filePath) => {
+                //       if (searchPattern) {
+                //         const content = __fs.readFileSync(filePath, 'utf8');
+                //         const matches = content.match(reg);
+                //         if (matches) {
+                //           if (filesPathes.indexOf(filePath) === -1)
+                //             filesPathes.push(filePath);
+                //         }
+                //       } else {
+                //         if (filesPathes.indexOf(filePath) === -1)
+                //           filesPathes.push(filePath);
+                //       }
+                //     });
+                //   } else if (!__isSymlink(p)) {
+                //     if (searchPattern) {
+                //       const content = __fs.readFileSync(p, 'utf8');
+                //       const matches = content.match(reg);
+                //       if (matches) {
+                //         if (filesPathes.indexOf(p) === -1) filesPathes.push(p);
+                //       }
+                //     } else {
+                //       if (filesPathes.indexOf(p) === -1) filesPathes.push(p);
+                //     }
+                //   }
+                // });
+            });
+            if (!filesPathesObj.length) {
+                throw new SError_1.default(`Sorry but your <primary>input</primary> streamObj property setted to "<cyan>${streamObj.input.replace(`${packageRoot_1.default()}/`, '')}</cyan>" does not resolve to any files...`);
+            }
+            if (settings.out !== 'array') {
+                streamObj[settings.out || 'files'] = filesPathesObj;
+                resolve(streamObj);
+            }
+            else {
+                filesPathesObj.forEach((pathObj) => {
+                    const stats = fs_1.default.statSync(pathObj.path);
+                    streamObjArray.push(Object.assign({}, {
+                        ...streamObj,
+                        input: pathObj.path,
+                        inputObj: {
+                            ...pathObj,
+                            stats: {
+                                size: stats.size,
+                                mtime: stats.mtime,
+                                ctime: stats.ctime,
+                                birthtime: stats.birthtime
+                            }
+                        }
+                    }));
+                });
+                resolve(streamObjArray);
+            }
+        });
+    }
+}
+exports.default = SFindInFileStreamAction;
+/**
+ * @name            interface
+ * @type             Object
+ * @static
+ *
+ * Store the definition object that specify the streamObj required properties, types, etc...
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+SFindInFileStreamAction.interface = SFsFilesResolverStreamActionInterface;

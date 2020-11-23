@@ -1,4 +1,9 @@
-import __set from './set';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const set_1 = __importDefault(require("./set"));
 /**
  * @name                      delete
  * @namespace           sugar.js.object
@@ -19,7 +24,7 @@ import __set from './set';
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function del(object, dotPath) {
+function del(object, dotPath) {
     const parentDotPath = dotPath.split('.').slice(0, -1).join('.');
     if (!dotPath || dotPath === '' || dotPath === '.')
         return object;
@@ -39,7 +44,7 @@ export default function del(object, dotPath) {
             else {
                 delete o[n];
             }
-            __set(object, parentDotPath, o);
+            set_1.default(object, parentDotPath, o);
         }
         else {
             o = o[n];
@@ -47,3 +52,4 @@ export default function del(object, dotPath) {
     }
     return object;
 }
+exports.default = del;

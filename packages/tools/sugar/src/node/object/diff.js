@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const plainObject_1 = require("../is/plainObject");
-const is_equal_1 = require("is-equal");
+const plainObject_1 = __importDefault(require("../is/plainObject"));
+const is_equal_1 = __importDefault(require("is-equal"));
 /**
  * @name                      diff
  * @namespace           sugar.js.object

@@ -1,6 +1,9 @@
 "use strict";
-import __generateFile from './generateFile';
-
-export default (stringArgs = '') => {
-    __generateFile('node ' + stringArgs);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const generateFile_1 = __importDefault(require("./generateFile"));
+exports.default = (stringArgs = '') => {
+    generateFile_1.default('node ' + stringArgs);
 };

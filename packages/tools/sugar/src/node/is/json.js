@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isJson
  * @namespace           sugar.js.is
@@ -16,7 +18,7 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isJson(value) {
+function isJson(value) {
     try {
         JSON.parse(value);
     }
@@ -25,3 +27,4 @@ export default function isJson(value) {
     }
     return true;
 }
+exports.default = isJson;

@@ -1,6 +1,10 @@
 "use strict";
-const __SDuration = require('../../../time/SDuration');
-const __SJsCompiler = require('../../../js/SJsCompiler');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SDuration_1 = __importDefault(require("../../../time/SDuration"));
+const SJsCompiler_1 = __importDefault(require("../../../js/SJsCompiler"));
 /**
  * @name                js
  * @namespace           sugar.node.server.frontend.handlers
@@ -15,10 +19,10 @@ const __SJsCompiler = require('../../../js/SJsCompiler');
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = async function js(req, res, settings = {}) {
+async function js(req, res, settings = {}) {
     let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
-    const duration = new __SDuration();
-    const compiler = new __SJsCompiler({});
+    const duration = new SDuration_1.default();
+    const compiler = new SJsCompiler_1.default({});
     const resultObj = await compiler.compile(filePath);
     if (settings.log) {
         console.log(`<bgGreen><black> js </black></bgGreen> Js file "<yellow>${req.path}</yellow> served in <cyan>${duration.end()}s</cyan>"`);
@@ -26,4 +30,5 @@ module.exports = async function js(req, res, settings = {}) {
     res.type('text/javascript');
     res.status(200);
     res.send(resultObj.js);
-};
+}
+exports.default = js;

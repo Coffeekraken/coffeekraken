@@ -1,9 +1,13 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
-const __convert = require('../time/convert');
-const __STimer = require('../time/STimer');
-const __availableEasingsArray = require('../easing/availableEasingsArray');
-const __SPromise = require('../promise/SPromise');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const convert_1 = __importDefault(require("../time/convert"));
+const STimer_1 = __importDefault(require("../time/STimer"));
+const availableEasingsArray_1 = __importDefault(require("../easing/availableEasingsArray"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
 // TODO: tests
 /**
  * @name              objectProperties
@@ -25,17 +29,17 @@ const __SPromise = require('../promise/SPromise');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function objectProperties(startObj, targetObj, settings = {}) {
-    return new __SPromise((resolve, reject, trigger, cancel) => {
-        settings = __deepMerge({
+function objectProperties(startObj, targetObj, settings = {}) {
+    return new SPromise_1.default((resolve, reject, trigger, cancel) => {
+        settings = deepMerge_1.default({
             duration: '1s',
             stepsCount: null,
             stepsInterval: null,
             easing: 'easeInOutQuint',
             round: true
         }, settings);
-        const availableEasingsArray = __availableEasingsArray();
-        const duration = __convert(settings.duration, 'ms');
+        const availableEasingsArray = availableEasingsArray_1.default();
+        const duration = convert_1.default(settings.duration, 'ms');
         let stepsCount = settings.stepsCount;
         let stepsInterval = settings.stepsInterval;
         // check the easing wanted
@@ -61,7 +65,7 @@ module.exports = function objectProperties(startObj, targetObj, settings = {}) {
             }
         });
         const currentTransitionObj = {};
-        const timer = new __STimer(settings.duration, {
+        const timer = new STimer_1.default(settings.duration, {
             tickCount: stepsCount
         })
             .on('tick', () => {
@@ -106,4 +110,6 @@ module.exports = function objectProperties(startObj, targetObj, settings = {}) {
     }, {
         id: 'objectProperties'
     });
-};
+}
+exports.default = objectProperties;
+;

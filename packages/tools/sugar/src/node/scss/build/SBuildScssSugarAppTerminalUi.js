@@ -1,5 +1,9 @@
 "use strict";
-const __SSugarAppModuleTerminalUi = require('../../app/sugar/SSugarAppModuleTerminalUi');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SSugarAppModuleTerminalUi_1 = __importDefault(require("../../app/sugar/SSugarAppModuleTerminalUi"));
 /**
  * @name            SBuildScssSugarAppTerminalUi
  * @namespace       sugar.node.build.scss
@@ -13,7 +17,7 @@ const __SSugarAppModuleTerminalUi = require('../../app/sugar/SSugarAppModuleTerm
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildScssSugarAppTerminalUi extends __SSugarAppModuleTerminalUi {
+class SBuildScssSugarAppTerminalUi extends SSugarAppModuleTerminalUi_1.default {
     /**
      * @name            constructor
      * @type            Function
@@ -27,4 +31,5 @@ module.exports = class SBuildScssSugarAppTerminalUi extends __SSugarAppModuleTer
     constructor(sources, settings = {}) {
         super(sources, settings);
     }
-};
+}
+exports.default = SBuildScssSugarAppTerminalUi;

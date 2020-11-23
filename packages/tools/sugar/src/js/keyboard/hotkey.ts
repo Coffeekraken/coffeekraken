@@ -4,12 +4,11 @@ hotkeys.filter = function (event) {
   return true;
 };
 
-// TODO tests
-
 /**
  * @name 		hotkey
  * @namespace           sugar.js.keyboard
  * @type      Function
+ * @beta
  *
  * Simple function to add a hotkey like "ctrl+a" and an handler function that will be called when the hotkey has been pressed
  * The following keys are supported:
@@ -29,6 +28,10 @@ hotkeys.filter = function (event) {
  * - splitKey (*) {String}: Specify the split key to use in the sequences like "ctrl+a"
  * @return      {SPromise}                       An SPromise instance on which you can register for "key" stack event
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example    js
  * import hotkey from '@coffeekraken/sugar/js/keyboard/hotkey'
  * const promise = hotkey('ctrl+a');
@@ -37,6 +40,7 @@ hotkeys.filter = function (event) {
  * });
  * promise.cancel();
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function (hotkey, settings = {}) {

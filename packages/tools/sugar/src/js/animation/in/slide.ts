@@ -2,6 +2,10 @@ import __uniqid from '../../string/uniqid';
 import __parseArgs from '../../string/parseArgs';
 import __querySelectorLive from '../../dom/querySelectorLive';
 
+/**
+ * @todo        documentation
+ */
+
 export default (() => {
   __querySelectorLive('[slide-in]', ($item) => {
     // generate a unique id for this node

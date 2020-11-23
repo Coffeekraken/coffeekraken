@@ -4,11 +4,16 @@ import __SRequest from '../http/SRequest';
  * @name 		                SGoogleCustomSearch
  * @namespace           sugar.js.google
  * @type                    Class
+ * @stable
  *
  * This class let you make with ease search requests to the google custom search service
  * with useful features like:
  * - Simple pagination system
  * - Promise support
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	            js
  * // create a google search instance
@@ -25,6 +30,7 @@ import __SRequest from '../http/SRequest';
  * });
  *
  * @see 		https://developers.google.com/custom-search/
+ * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export default class SGoogleCustomSearch {
@@ -150,7 +156,7 @@ export default class SGoogleCustomSearch {
   _generateSearchUrl() {
     // construct url
     let queryString = '';
-    for (let key in this._settings) {
+    for (const key in this._settings) {
       queryString += `&${key}=${this._settings[key]}`;
     }
     queryString = queryString.substr(1);

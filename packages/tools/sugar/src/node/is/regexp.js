@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isRegexp
  * @namespace           sugar.js.is
@@ -16,6 +18,7 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isRegexp(value) {
+function isRegexp(value) {
     return value && typeof value === 'object' && value.constructor === RegExp;
 }
+exports.default = isRegexp;

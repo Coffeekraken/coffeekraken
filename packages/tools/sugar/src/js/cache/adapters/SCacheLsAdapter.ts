@@ -8,6 +8,9 @@ import __SCacheAdapter from './SCacheAdapter';
  *
  * A filesystem SCache adapter that allows you to store your cache items on the user system
  *
+ * @todo      interface
+ * @todo      doc
+ *
  * @example             js
  * const cache = new SCache({
  *    ttl: 100,

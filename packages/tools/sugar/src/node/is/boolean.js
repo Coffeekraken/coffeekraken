@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isBoolean
  * @namespace           sugar.js.is
@@ -16,6 +18,7 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isBoolean(value) {
+function isBoolean(value) {
     return typeof value === 'boolean';
 }
+exports.default = isBoolean;

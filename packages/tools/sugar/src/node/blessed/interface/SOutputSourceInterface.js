@@ -1,6 +1,9 @@
 "use strict";
-var _a;
-const __SInterface = require('../../class/SInterface');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SInterface_1 = __importDefault(require("../../class/SInterface"));
 /**
  * @name                SOutputSourceInterface
  * @namespace           sugar.node.blessed.interface
@@ -13,12 +16,12 @@ const __SInterface = require('../../class/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SOutputSourceInterface extends __SInterface {
-    },
-    _a.definitionObj = {
-        on: {
-            type: 'Function',
-            required: true
-        }
-    },
-    _a);
+class SOutputSourceInterface extends SInterface_1.default {
+}
+exports.default = SOutputSourceInterface;
+SOutputSourceInterface.definitionObj = {
+    on: {
+        type: 'Function',
+        required: true
+    }
+};

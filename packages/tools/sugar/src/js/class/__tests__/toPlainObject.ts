@@ -1,5 +1,4 @@
 module.exports = (__toPlainObject) => {
-
   class MyClass {
     _settings = {
       hello: 'world'
@@ -15,9 +14,7 @@ module.exports = (__toPlainObject) => {
   myInstance.testing('hello');
 
   describe('sugar.js.class.toPlainObject', () => {
-
     it('Should convert a simple custom class instance into a plain object', () => {
-
       const plainObject = __toPlainObject(myInstance);
 
       expect(plainObject).toEqual({
@@ -27,9 +24,6 @@ module.exports = (__toPlainObject) => {
         _name: 'coffeekraken',
         _plop: 'hello'
       });
-
     });
-
   });
-
-}
+};

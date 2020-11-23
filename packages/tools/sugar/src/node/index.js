@@ -1,11 +1,15 @@
 "use strict";
-const __sugarConfig = require('./config/sugar');
-const __SLog = require('./log/SLog');
-const __handleError = require('./error/handleError');
-const __initEnv = require('./init/initEnv');
-const __onProcessExit = require('./process/onProcessExit');
-const __exitCleanup = require('./process/exitCleanup');
-const __SIpc = require('./ipc/SIpc');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const sugar_1 = __importDefault(require("./config/sugar"));
+const SLog_1 = __importDefault(require("./log/SLog"));
+const handleError_1 = __importDefault(require("./error/handleError"));
+const initEnv_1 = __importDefault(require("./init/initEnv"));
+const onProcessExit_1 = __importDefault(require("./process/onProcessExit"));
+const exitCleanup_1 = __importDefault(require("./process/exitCleanup"));
+const SIpc_1 = __importDefault(require("./ipc/SIpc"));
 /**
  * @name                    index
  * @namespace           node
@@ -18,14 +22,14 @@ const __SIpc = require('./ipc/SIpc');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 // global IPC server
-__SIpc.initGlobalInstance();
+SIpc_1.default.initGlobalInstance();
 // init env
-__initEnv();
+initEnv_1.default();
 // handle the errors
-__handleError();
+handleError_1.default();
 // exit cleanup
-__onProcessExit(() => {
-    return __exitCleanup;
+onProcessExit_1.default(() => {
+    return exitCleanup_1.default;
 });
 // Logging
-new __SLog(__sugarConfig('log'));
+new SLog_1.default(sugar_1.default('log'));

@@ -1,5 +1,9 @@
 "use strict";
-const __packageRoot = require('../path/packageRoot');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 /**
  * @name                initEnv
  * @namespace           sugar.node.init
@@ -13,6 +17,8 @@ const __packageRoot = require('../path/packageRoot');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
  */
-module.exports = function initEnv() {
-    process.env.PACKAGE_ROOT = __packageRoot();
-};
+function initEnv() {
+    process.env.PACKAGE_ROOT = packageRoot_1.default();
+}
+exports.default = initEnv;
+;

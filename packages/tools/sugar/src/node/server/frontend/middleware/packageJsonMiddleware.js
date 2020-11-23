@@ -1,7 +1,11 @@
 "use strict";
-const __packageRoot = require('../../../path/packageRoot');
-const __fs = require('fs');
-const __standardizeJson = require('../../../npm/standardizeJson');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const packageRoot_1 = __importDefault(require("../../../path/packageRoot"));
+const fs_1 = __importDefault(require("fs"));
+const standardizeJson_1 = __importDefault(require("../../../npm/standardizeJson"));
 /**
  * @name            packageJsonMiddleware
  * @namespace       sugar.node.server.frontend.middleware
@@ -15,8 +19,8 @@ const __standardizeJson = require('../../../npm/standardizeJson');
  * @param           {Function}          next            The next function to call when the middleware has finished his job
  *
  * @example         js
- * const express = require('express');
- * const packageJsonMiddleware = require('@coffeekraken/sugar/server/frontend/middleware/packageJsonMiddleware');
+ * import express from 'express';
+ * import packageJsonMiddleware from '@coffeekraken/sugar/server/frontend/middleware/packageJsonMiddleware';
  * const server = express();
  * server.use(packageJsonMiddleware);
  * server.listen(3000);
@@ -24,19 +28,20 @@ const __standardizeJson = require('../../../npm/standardizeJson');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function packageJsonMiddleware(settings = {}) {
+function packageJsonMiddleware(settings = {}) {
     return function (req, res, next) {
-        const packageJsonPath = `${__packageRoot()}/package.json`;
+        const packageJsonPath = `${packageRoot_1.default()}/package.json`;
         let package;
-        if (!__fs.existsSync(packageJsonPath)) {
+        if (!fs_1.default.existsSync(packageJsonPath)) {
         }
         else {
             package = require(packageJsonPath);
             res.templateData = {
                 ...(res.templateData || {}),
-                packageJson: __standardizeJson(package)
+                packageJson: standardizeJson_1.default(package)
             };
         }
         next();
     };
-};
+}
+exports.default = packageJsonMiddleware;

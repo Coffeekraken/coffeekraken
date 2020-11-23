@@ -1,4 +1,9 @@
-import __get from './get';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const get_1 = __importDefault(require("./get"));
 /**
  * @name                                        set
  * @namespace           sugar.js.object
@@ -16,7 +21,7 @@ import __get from './get';
  * set('myObject.cool.value', 'Hello world'); // => Hello world
  *
  */
-export default (obj, path, value) => {
+exports.default = (obj, path, value) => {
     if (!path || path === '' || path === '.') {
         obj = value;
         return;
@@ -30,5 +35,5 @@ export default (obj, path, value) => {
         o = o[n];
     }
     o[a[0]] = value;
-    return __get(obj, path);
+    return get_1.default(obj, path);
 };

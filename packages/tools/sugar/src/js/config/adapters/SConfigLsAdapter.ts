@@ -25,7 +25,9 @@ import __diff from '../../object/diff';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-module.exports = class SConfigLsAdapter extends __SConfigAdapter {
+module.exports = class SConfigLsAdapter extends (
+  __SConfigAdapter
+) {
   constructor(settings = {}) {
     super(settings);
   }

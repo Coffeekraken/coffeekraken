@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name            wait
  * @namespace           sugar.js.time
@@ -15,10 +17,11 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function wait(timeout) {
+function wait(timeout) {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve();
         }, timeout);
     });
 }
+exports.default = wait;

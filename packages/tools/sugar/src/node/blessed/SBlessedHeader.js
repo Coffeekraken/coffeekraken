@@ -1,9 +1,13 @@
 "use strict";
-const __blessed = require('blessed');
-const __SBlessedComponent = require('./SBlessedComponent');
-const __deepMerge = require('../object/deepMerge');
-const __parseHtml = require('../terminal/parseHtml');
-const __color = require('../color/color');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const blessed_1 = __importDefault(require("blessed"));
+const SBlessedComponent_1 = __importDefault(require("./SBlessedComponent"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const parseHtml_1 = __importDefault(require("../terminal/parseHtml"));
+const color_1 = __importDefault(require("../color/color"));
 /**
  * @name                  SBlessedComponent
  * @namespace           sugar.node.blessed
@@ -14,7 +18,7 @@ const __color = require('../color/color');
  * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
  *
  * @example       js
- * const SBlessedComponent = require('@coffeekraken/sugar/node/blessed/SBlessedComponent');
+ * import SBlessedComponent from '@coffeekraken/sugar/node/blessed/SBlessedComponent';
  * class MyCoolComponent extends SBlessedComponent {
  *    constructor(settings = {}) {
  *      super(settings);
@@ -23,7 +27,7 @@ const __color = require('../color/color');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SHeader extends __SBlessedComponent {
+class SHeader extends SBlessedComponent_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -34,13 +38,13 @@ module.exports = class SHeader extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        super(__deepMerge({
+        super(deepMerge_1.default({
             title: 'Coffeekraken <bgBlack><yellow>Sugar</yellow></bgBlack> based application',
             width: '100%',
             height: 3,
             style: {
-                bg: __color('terminal.primary').toString(),
-                fg: __color('terminal.black').toString()
+                bg: color_1.default('terminal.primary').toString(),
+                fg: color_1.default('terminal.black').toString()
             },
             padding: {
                 top: 1,
@@ -49,12 +53,12 @@ module.exports = class SHeader extends __SBlessedComponent {
                 right: 1
             }
         }, settings));
-        this._titleBox = __blessed.box({
+        this._titleBox = blessed_1.default.box({
             style: {
                 bg: this._settings.style.bg,
                 fg: this._settings.style.fg
             },
-            content: __parseHtml(this._settings.title)
+            content: parseHtml_1.default(this._settings.title)
         });
         this.append(this._titleBox);
     }
@@ -70,4 +74,5 @@ module.exports = class SHeader extends __SBlessedComponent {
     update() {
         super.update();
     }
-};
+}
+exports.default = SHeader;

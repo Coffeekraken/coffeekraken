@@ -1,14 +1,17 @@
 import uniqid from '../util/uniqid';
 
-// TODO tests
-
 /**
  * @name 		          SGooeySvgFilter
  * @namespace           sugar.js.filter
  * @type             Class
+ * @stable
  *
  * This class allows you to create with ease some complexe SVG filters and to apply it on any HTMLElement that you want
  * by extending this class like so
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 		js
  * class MyBlurFilter extends SSvgFilter {
@@ -24,6 +27,7 @@ import uniqid from '../util/uniqid';
  * const myFilter = new MyBlurFilter(10);
  * myFilter.applyTo(myCoolHTMLElement);
  *
+ * @since           1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SSvgFilter {
@@ -88,7 +92,7 @@ export default class SSvgFilter {
       delete elm.style[vendor + 'filter'];
     });
     // remove from stack
-    let idx = this.elms.indexOf(elm);
+    const idx = this.elms.indexOf(elm);
     if (idx) this.elms.splice(idx, 1);
   }
 
@@ -102,15 +106,15 @@ export default class SSvgFilter {
    * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _insertFilter() {
-    let svg = `
+    const svg = `
 			<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
 				<defs>
 				</defs>
 			</svg>
 		`;
-    let div = document.createElement('div');
+    const div = document.createElement('div');
     div.innerHTML = svg;
-    let defs = div.querySelector('defs');
+    const defs = div.querySelector('defs');
 
     // add the filter to the svg
     this.filter_content =
@@ -149,7 +153,7 @@ export default class SSvgFilter {
    * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static _injectFiltersContainer() {
-    let style = ['position:absolute;', 'left:-1000px;', 'top:-300px;'];
+    const style = ['position:absolute;', 'left:-1000px;', 'top:-300px;'];
     if (
       /Chrome/.test(navigator.userAgent) &&
       /Google Inc/.test(navigator.vendor)

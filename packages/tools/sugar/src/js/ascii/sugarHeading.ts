@@ -19,7 +19,13 @@ import __parseHtml from '../console/parseHtml';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function sugarHeading(settings = {}) {
+interface ISugarHeadingSettings {
+  version?: string;
+  borders?: boolean;
+}
+export default function sugarHeading(
+  settings: ISugarHeadingSettings = {}
+): string {
   settings = __deepMerge(
     {
       version: '2.0.0',

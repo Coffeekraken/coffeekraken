@@ -7,6 +7,9 @@ import __deepMerge from '../../object/deepMerge';
  *
  * Base class for SCache adapters
  *
+ * @todo        interface
+ * @todo        doc
+ *
  * @example             js
  * class SCacheCoolAdapter extends SCacheAdapter {
  *    constructor(settings = {}) {
@@ -31,7 +34,7 @@ import __deepMerge from '../../object/deepMerge';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCacheAdapter {
+export default class SCacheAdapter {
   /**
    * @name                              _settings
    * @type                              Object
@@ -57,4 +60,4 @@ module.exports = class SCacheAdapter {
     // store the settings
     this._settings = settings;
   }
-};
+}

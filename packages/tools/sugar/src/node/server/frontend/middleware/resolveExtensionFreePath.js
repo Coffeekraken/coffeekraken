@@ -1,10 +1,12 @@
 "use strict";
-const __packageRoot = require('../../../path/packageRoot');
-const __fs = require('fs');
-const __sugarConfig = require('../../../config/sugar');
-const __deepMerge = require('../../../object/deepMerge');
-const __deepMap = require('../../../object/deepMap');
-const __extension = require('../../../fs/extension');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = __importDefault(require("fs"));
+const sugar_1 = __importDefault(require("../../../config/sugar"));
+const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
+const extension_1 = __importDefault(require("../../../fs/extension"));
 /**
  * @name            resolveExtensionFreePath
  * @namespace       sugar.node.server.frontend.middleware
@@ -17,8 +19,8 @@ const __extension = require('../../../fs/extension');
  * @param           {Function}          next            The next function to call when the middleware has finished his job
  *
  * @example         js
- * const express = require('express');
- * const resolveExtensionFreePath = require('@coffeekraken/sugar/server/frontend/middleware/resolveExtensionFreePath');
+ * import express from 'express';
+ * import resolveExtensionFreePath from '@coffeekraken/sugar/server/frontend/middleware/resolveExtensionFreePath';
  * const server = express();
  * server.use(resolveExtensionFreePath);
  * server.listen(3000);
@@ -26,24 +28,24 @@ const __extension = require('../../../fs/extension');
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function resolveExtensionFreePath(settings = {}) {
-    settings = __deepMerge({
+function resolveExtensionFreePath(settings = {}) {
+    settings = deepMerge_1.default({
         exclude: []
     }, settings);
     return function (req, res, next) {
         if (settings.exclude.indexOf(req.path) !== -1) {
             return next();
         }
-        const pathExtension = __extension(req.path).trim();
+        const pathExtension = extension_1.default(req.path).trim();
         if (pathExtension)
             return next();
-        const rootDir = __sugarConfig('frontend.rootDir');
+        const rootDir = sugar_1.default('frontend.rootDir');
         let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
         // check if the file is on filesystem using the extensions listed in the frontend.config.js file
         for (let i = 0; i < settings.extensions.length; i++) {
             const ext = settings.extensions[i];
             const potentialFilePath = `${rootDir}/${filePath}.${ext}`;
-            if (__fs.existsSync(potentialFilePath)) {
+            if (fs_1.default.existsSync(potentialFilePath)) {
                 req.path = `/${filePath}.${ext}`;
                 req.url = `/${filePath}.${ext}`;
                 break;
@@ -51,4 +53,5 @@ module.exports = function resolveExtensionFreePath(settings = {}) {
         }
         next();
     };
-};
+}
+exports.default = resolveExtensionFreePath;

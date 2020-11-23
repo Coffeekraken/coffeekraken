@@ -1,15 +1,16 @@
 "use strict";
-const __copy = require('../clipboard/copy');
-const __SPromise = require('../promise/SPromise');
-const __deepMerge = require('../object/deepMerge');
-const __packageRoot = require('../path/packageRoot');
-const __packageJson = require('../package/json');
-const __glob = require('glob');
-const __toString = require('../string/toString');
-const __fs = require('fs');
-const __path = require('path');
-const __unique = require('../array/unique');
-const __sugarConfig = require('../config/sugar');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const packageRoot_1 = __importDefault(require("../path/packageRoot"));
+const json_1 = __importDefault(require("../package/json"));
+const glob_1 = __importDefault(require("glob"));
+const path_1 = __importDefault(require("path"));
+const unique_1 = __importDefault(require("../array/unique"));
+const sugar_1 = __importDefault(require("../config/sugar"));
 /**
  * @name                SFrontspec
  * @namespace           sugar.node.doc
@@ -32,7 +33,7 @@ const __sugarConfig = require('../config/sugar');
  * @todo        update doc
  *
  * @example             js
- * const SFrontspec = require('@coffeekraken/sugar/node/doc/SFrontspec');
+ * import SFrontspec from '@coffeekraken/sugar/node/doc/SFrontspec';
  * const frontspec = new SFrontspec({
  *  outputDir: '/my/cool/directory'
  * });
@@ -41,7 +42,7 @@ const __sugarConfig = require('../config/sugar');
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SFrontspec extends __SPromise {
+class SFrontspec extends SPromise_1.default {
     /**
      * @name            constructor
      * @type            Function
@@ -53,14 +54,14 @@ module.exports = class SFrontspec extends __SPromise {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        super(__deepMerge({
+        super(deepMerge_1.default({
             id: 'SFrontspec',
-            search: __sugarConfig('build.frontspec.search'),
-            filename: __sugarConfig('build.frontspec.filename'),
-            outputDir: __sugarConfig('build.frontspec.outputDir'),
-            dirDepth: __sugarConfig('build.frontspec.dirDepth'),
-            cache: __sugarConfig('build.frontspec.cache'),
-            sources: __sugarConfig('build.frontspec.sources')
+            search: sugar_1.default('build.frontspec.search'),
+            filename: sugar_1.default('build.frontspec.filename'),
+            outputDir: sugar_1.default('build.frontspec.outputDir'),
+            dirDepth: sugar_1.default('build.frontspec.dirDepth'),
+            cache: sugar_1.default('build.frontspec.cache'),
+            sources: sugar_1.default('build.frontspec.sources')
         }, settings));
         /**
          * @name          _entries
@@ -91,14 +92,14 @@ module.exports = class SFrontspec extends __SPromise {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     search(settings = {}) {
-        return new __SPromise((resolve, reject, trigger, cancel) => {
-            settings = __deepMerge(this._settings, {}, settings);
+        return new SPromise_1.default((resolve, reject, trigger, cancel) => {
+            settings = deepMerge_1.default(this._settings, {}, settings);
             // let filenamesArray = settings.filename;
             // if (!Array.isArray(filenamesArray)) filenamesArray = [filenamesArray];
             // generate the glob pattern to use
             const patterns = [];
             Object.keys(settings.sources).forEach((sourceName) => {
-                const sourceObj = __deepMerge(settings, settings.sources[sourceName]);
+                const sourceObj = deepMerge_1.default(settings, settings.sources[sourceName]);
                 const filenamesArray = !Array.isArray(sourceObj.search)
                     ? [sourceObj.search]
                     : sourceObj.search;
@@ -117,17 +118,17 @@ module.exports = class SFrontspec extends __SPromise {
             let files = [];
             for (let i = 0; i < patterns.length; i++) {
                 const patternObj = patterns[i];
-                const foundFiles = __glob
+                const foundFiles = glob_1.default
                     .sync(`{${patternObj.patterns.join(',')}}`, {
                     cwd: patternObj.rootDir,
                     symlinks: true
                 })
                     .map((filePath) => {
-                    return __path.resolve(patternObj.rootDir, filePath);
+                    return path_1.default.resolve(patternObj.rootDir, filePath);
                 });
                 files = [...files, ...foundFiles];
             }
-            files = __unique(files);
+            files = unique_1.default(files);
             resolve(files);
         }, {
             id: settings.id + '.find'
@@ -147,11 +148,11 @@ module.exports = class SFrontspec extends __SPromise {
      * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     json(settings = {}) {
-        settings = __deepMerge(this._settings, {}, settings);
-        return new __SPromise(async (resolve, reject, trigger, cancel) => {
+        settings = deepMerge_1.default(this._settings, {}, settings);
+        return new SPromise_1.default(async (resolve, reject, trigger, cancel) => {
             try {
                 // initiating the frontspecJson object
-                const packageJson = __packageJson();
+                const packageJson = json_1.default();
                 delete packageJson.dependencies;
                 delete packageJson.devDependencies;
                 delete packageJson.scripts;
@@ -163,18 +164,18 @@ module.exports = class SFrontspec extends __SPromise {
                 const files = await this.search(settings);
                 if (!files)
                     resolve(frontspecJson);
-                const rootFilePath = `${__packageRoot()}/${settings.filename}`;
+                const rootFilePath = `${packageRoot_1.default()}/${settings.filename}`;
                 if (files.indexOf(rootFilePath) !== -1) {
                     frontspecJson = require(rootFilePath);
-                    frontspecJson.package = __packageJson();
+                    frontspecJson.package = json_1.default();
                     frontspecJson.children = {};
                 }
                 files.forEach((filePath) => {
                     // checking if it's the root one
                     if (filePath !== rootFilePath) {
                         // build the relative path to the package
-                        let relPath = __path.relative(__packageRoot(), filePath);
-                        const outPath = __path.relative(__packageRoot(), `${this._settings.outputDir}/${this._settings.filename}`);
+                        let relPath = path_1.default.relative(packageRoot_1.default(), filePath);
+                        const outPath = path_1.default.relative(packageRoot_1.default(), `${this._settings.outputDir}/${this._settings.filename}`);
                         // if the founded file is the same as the output one
                         if (relPath === outPath)
                             return;
@@ -197,4 +198,5 @@ module.exports = class SFrontspec extends __SPromise {
             id: settings.id + '.json'
         });
     }
-};
+}
+exports.default = SFrontspec;

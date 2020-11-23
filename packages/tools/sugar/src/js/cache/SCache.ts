@@ -15,6 +15,9 @@ import __toString from '../string/toString';
  * - Standard and custom TTL by cache item
  * - Delete cache items on expires or not
  *
+ * @todo        doc
+ * @todo        interfaces
+ *
  * @example             js
  * import SCache from '@coffeekraken/sugar/js/cache/SCache';
  * const cache = new SCache({
@@ -131,7 +134,7 @@ export default class SCache {
     // check if we have already an adapter setted for this instance
     if (this._adapter) return this._adapter;
     // get the adapter specified in the settings
-    let adapter = this._settings.adapter;
+    const adapter = this._settings.adapter;
     // check the type
     if (typeof adapter === 'string' && this._defaultAdaptersPaths[adapter]) {
       let adptr = await import(

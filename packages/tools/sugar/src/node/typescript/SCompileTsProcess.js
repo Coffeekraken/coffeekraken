@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const SProcess = require('../process/SProcess');
+const SProcess_1 = __importDefault(require("../process/SProcess"));
 /**
  * @name            STypescriptToJsProcess
  * @namespace           sugar.node.typescript
@@ -12,7 +15,7 @@ const SProcess = require('../process/SProcess');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls = class SCompileTsProcess extends SProcess {
+const Cls = class SCompileTsProcess extends SProcess_1.default {
     /**
      * @name          constructor
      * @type          Function

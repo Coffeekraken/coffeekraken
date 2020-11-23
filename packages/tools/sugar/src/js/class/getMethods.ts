@@ -21,8 +21,8 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function getMethods(toCheck) {
-  var props = [];
-  var obj = toCheck;
+  let props = [];
+  let obj = toCheck;
   do {
     const _props = Object.getOwnPropertyNames(obj);
     if (_props.indexOf('__defineGetter__') !== -1) continue;

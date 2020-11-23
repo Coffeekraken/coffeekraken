@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const parseAuthorString_1 = require("./parseAuthorString");
+const parseAuthorString_1 = __importDefault(require("./parseAuthorString"));
 /**
  * @name            standardizeJson
  * @namespace       sugar.js.npm

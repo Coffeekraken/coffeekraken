@@ -4,6 +4,7 @@ import __SRequest from './SRequest';
  * @name                              request
  * @namespace           sugar.js.http
  * @type                              Function
+ * @wip
  *
  * Easily create and send an http request. This will return an instance of the SAjax class.
  *
@@ -19,6 +20,10 @@ import __SRequest from './SRequest';
  * - sendCount (1) {Number}: Set how many times the request has to be sent
  * - responseType (json) {String}: Indicates the type of data that the server will respond with
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example               js
  * import request from '@coffeekraken/sugar/js/http/request';
  * request({
@@ -28,6 +33,7 @@ import __SRequest from './SRequest';
  *    // do something...
  * });
  *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function request(settings = {}) {

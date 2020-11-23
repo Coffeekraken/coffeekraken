@@ -1,5 +1,9 @@
 "use strict";
-const __fs = require('fs-extra');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_extra_1 = __importDefault(require("fs-extra"));
 // TODO tests
 /**
  * @name        copySync
@@ -12,7 +16,7 @@ const __fs = require('fs-extra');
  * @param       {String}              dest          The destination path
  *
  * @example       js
- * const copySync = require('@coffeekraken/node/fs/copySync');
+ * import copySync from '@coffeekraken/node/fs/copySync';
  * try {
  *    copySync('my/cool/file.jpg', 'my/new/file.jpg');
  * } catch(e) {}
@@ -20,6 +24,7 @@ const __fs = require('fs-extra');
  * @see             https://github.com/jprichardson/node-fs-extra
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function copySync(src, dest) {
-    __fs.copySync(src, dest);
-};
+function copySync(src, dest) {
+    fs_extra_1.default.copySync(src, dest);
+}
+exports.default = copySync;

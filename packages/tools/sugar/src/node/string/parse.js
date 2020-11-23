@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                                  parse
  * @namespace           sugar.js.string
@@ -14,7 +16,7 @@
  *
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default (value) => {
+exports.default = (value) => {
     if (typeof value !== 'string')
         return value;
     value = value.split('⠀').join('').trim();

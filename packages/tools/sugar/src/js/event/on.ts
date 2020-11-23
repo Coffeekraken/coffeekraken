@@ -1,9 +1,10 @@
-const __SPromise = require('../promise/SPromise');
+import __SPromise from '../promise/SPromise';
 
 /**
  * @name        on
  * @namespace           sugar.js.event
  * @type          Function
+ * @stable
  *
  * This function allows you to subscribe to global events triggered by the "sugar.js.event.dispatch" function
  * It use under the hood an SPromise instance
@@ -11,6 +12,10 @@ const __SPromise = require('../promise/SPromise');
  * @param         {String}        name          The event name you want to subscribe to
  * @param         {Function}      callback      The callback function you want to call
  * @return        {Function}                    Return an "unsubscribe" function callable when you want to stop executing the callback
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * const on = require('@coffeekraken/sugar/js/event/on');
@@ -21,16 +26,16 @@ const __SPromise = require('../promise/SPromise');
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function on(name, callback) {
+export default function on(name, callback) {
   // check that the global SPromise exists
-  if (!global._sugarEventSPromise)
-    global._sugarEventSPromise = new __SPromise({
+  if (!window._sugarEventSPromise)
+    window._sugarEventSPromise = new __SPromise({
       id: 'sugarEventSPromise'
     });
   // subscribe to the event
-  global._sugarEventSPromise.on(name, callback);
+  window._sugarEventSPromise.on(name, callback);
   // return the unsubscribe function
   return () => {
-    global._sugarEventSPromise.off(name, callback);
+    window._sugarEventSPromise.off(name, callback);
   };
-};
+}

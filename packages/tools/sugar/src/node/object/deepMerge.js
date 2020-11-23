@@ -1,6 +1,11 @@
-import __copyTo from 'copy-to';
-import __isPlainObject from '../is/plainObject';
-import __unique from '../array/unique';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const copy_to_1 = __importDefault(require("copy-to"));
+const plainObject_1 = __importDefault(require("../is/plainObject"));
+const unique_1 = __importDefault(require("../array/unique"));
 /**
  * @name                deepMerge
  * @namespace           sugar.js.object
@@ -23,7 +28,7 @@ import __unique from '../array/unique';
  *
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function deepMerge(...args) {
+function deepMerge(...args) {
     let settings = {
         array: false,
         object: true
@@ -36,24 +41,24 @@ export default function deepMerge(...args) {
             return firstObj;
         if (!firstObj && !secondObj)
             return {};
-        __copyTo(firstObj).override(newObj);
+        copy_to_1.default(firstObj).override(newObj);
         for (const key of Object.keys(secondObj)) {
             // merging arrays
             if (settings.array === true &&
                 Array.isArray(firstObj[key]) &&
                 Array.isArray(secondObj[key])) {
-                let newArray = __unique([...firstObj[key], ...secondObj[key]]);
+                let newArray = unique_1.default([...firstObj[key], ...secondObj[key]]);
                 newObj[key] = newArray;
                 continue;
             }
             // merging objects
             else if (settings.object === true &&
-                __isPlainObject(firstObj[key]) &&
-                __isPlainObject(secondObj[key])) {
+                plainObject_1.default(firstObj[key]) &&
+                plainObject_1.default(secondObj[key])) {
                 newObj[key] = merge(firstObj[key], secondObj[key]);
                 continue;
             }
-            __copyTo(secondObj).pick(key).toCover(newObj);
+            copy_to_1.default(secondObj).pick(key).toCover(newObj);
         }
         return newObj;
     }
@@ -75,3 +80,4 @@ export default function deepMerge(...args) {
     }
     return currentObj;
 }
+exports.default = deepMerge;

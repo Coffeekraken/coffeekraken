@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepProxy_1 = require("./deepProxy");
-const deepMerge_1 = require("../object/deepMerge");
-const SPromise_1 = require("../promise/SPromise");
+const deepProxy_1 = __importDefault(require("./deepProxy"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
 /**
  * @name 		            SWatch
  * @namespace           sugar.js.object

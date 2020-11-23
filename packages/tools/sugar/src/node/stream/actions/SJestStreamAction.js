@@ -1,15 +1,13 @@
 "use strict";
-var _a;
-const __SActionsStreamAction = require('../SActionsStreamAction');
-const __glob = require('glob');
-const __clone = require('../../object/clone');
-const __extractSame = require('../../string/extractSame');
-const __getFilename = require('../../fs/filename');
-const __deepMerge = require('../../object/deepMerge');
-const __SInterface = require('../../class/SInterface');
-const __STestJestCli = require('../../test/jest/STestJestCli');
-const __STestJestProcess = require('../../test/jest/STestJestProcessManager');
-class SJestStreamActionInterface extends __SInterface {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SActionsStreamAction_1 = __importDefault(require("../SActionsStreamAction"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const SInterface_1 = __importDefault(require("../../class/SInterface"));
+const STestJestProcessManager_1 = __importDefault(require("../../test/jest/STestJestProcessManager"));
+class SJestStreamActionInterface extends SInterface_1.default {
 }
 SJestStreamActionInterface.definitionObj = {};
 /**
@@ -25,57 +23,57 @@ SJestStreamActionInterface.definitionObj = {};
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SJestStreamAction extends __SActionsStreamAction {
-        /**
-         * @name            constructor
-         * @type            Function
-         * @constructor
-         *
-         * Constructor
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        constructor(settings = {}) {
-            super(__deepMerge({
-                id: 'SJestStreamAction'
-            }, settings));
-        }
-        /**
-         * @name          run
-         * @type          Function
-         * @async
-         *
-         * Override the base class run method
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        run(streamObj, settings = this._settings) {
-            return super.run(streamObj, async (resolve, reject) => {
-                // if (!streamObj.pack) return resolve(streamObj);
-                const input = streamObj.updatedFilePath || streamObj.input;
-                const jestProcess = new __STestJestProcess({}, {
-                    deamon: null
-                });
-                const promise = jestProcess.run({
-                    input
-                });
-                //   promise.catch((e) => {
-                //     reject(e);
-                //   });
-                const result = await promise;
-                // const cli = new __STestJestCli({
-                // })
-            });
-        }
-    },
+class SJestStreamAction extends SActionsStreamAction_1.default {
     /**
-     * @name            interface
-     * @type             Object
-     * @static
+     * @name            constructor
+     * @type            Function
+     * @constructor
      *
-     * Store the definition object that specify the streamObj required properties, types, etc...
+     * Constructor
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SJestStreamActionInterface,
-    _a);
+    constructor(settings = {}) {
+        super(deepMerge_1.default({
+            id: 'SJestStreamAction'
+        }, settings));
+    }
+    /**
+     * @name          run
+     * @type          Function
+     * @async
+     *
+     * Override the base class run method
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    run(streamObj, settings = this._settings) {
+        return super.run(streamObj, async (resolve, reject) => {
+            // if (!streamObj.pack) return resolve(streamObj);
+            const input = streamObj.updatedFilePath || streamObj.input;
+            const jestProcess = new STestJestProcessManager_1.default({}, {
+                deamon: null
+            });
+            const promise = jestProcess.run({
+                input
+            });
+            //   promise.catch((e) => {
+            //     reject(e);
+            //   });
+            const result = await promise;
+            // const cli = new __STestJestCli({
+            // })
+        });
+    }
+}
+exports.default = SJestStreamAction;
+/**
+ * @name            interface
+ * @type             Object
+ * @static
+ *
+ * Store the definition object that specify the streamObj required properties, types, etc...
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+SJestStreamAction.interface = SJestStreamActionInterface;

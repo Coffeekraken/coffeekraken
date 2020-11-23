@@ -1,25 +1,21 @@
 "use strict";
-const __deepMerge = require('../../object/deepMerge');
-const __blessed = require('blessed');
-const __color = require('../../color/color');
-const __SBlessedComponent = require('../SBlessedComponent');
-const __summaryListPopup = require('../list/summaryListPopup');
-const __ora = require('ora');
-const __countLine = require('../../string/countLine');
-const __parseHtml = require('../../terminal/parseHtml');
-const __isOdd = require('../../is/odd');
-const __SPromise = require('../../promise/SPromise');
-const __SCommand = require('../../terminal/SCommand');
-const __transitionObjectProperties = require('../../transition/objectProperties');
-const __SBlessedPopup = require('../../blessed/popup/SBlessedPopup');
-const __hotkey = require('../../keyboard/hotkey');
-const __SInputPopup = require('../popup/SInputPopup');
-const __activeSpace = require('../../core/activeSpace');
-const __SWindowBox = require('../box/SWindowBox');
-const __convert = require('../../time/convert');
-const __SOutput = require('../SOutput');
-const __SAppCommandInterface = require('../interface/SAppCommandInterface');
-const __getExtendsStack = require('../../class/getExtendsStack');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const blessed_1 = __importDefault(require("blessed"));
+const color_1 = __importDefault(require("../../color/color"));
+const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
+const ora_1 = __importDefault(require("ora"));
+const countLine_1 = __importDefault(require("../../string/countLine"));
+const parseHtml_1 = __importDefault(require("../../terminal/parseHtml"));
+const odd_1 = __importDefault(require("../../is/odd"));
+const SPromise_1 = __importDefault(require("../../promise/SPromise"));
+const objectProperties_1 = __importDefault(require("../../transition/objectProperties"));
+const hotkey_1 = __importDefault(require("../../keyboard/hotkey"));
+const activeSpace_1 = __importDefault(require("../../core/activeSpace"));
+const SOutput_1 = __importDefault(require("../SOutput"));
 /**
  * @name                  SCommandPanel
  * @namespace           sugar.node.blessed
@@ -32,14 +28,14 @@ const __getExtendsStack = require('../../class/getExtendsStack');
  * @param         {Object}              [settings={}]     The settings object to configure your SCommandPanel
  *
  * @example         js
- * const SCommandPanel = require('@coffeekraken/sugar/node/terminal/SCommandPanel');
+ * import SCommandPanel from '@coffeekraken/sugar/node/terminal/SCommandPanel';
  * const myPanel = new SCommandPanel(myProcess, {
  *    screen: true
  * });
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCommandPanel extends __SBlessedComponent {
+class SCommandPanel extends SBlessedComponent_1.default {
     /**
      * @name          constructor
      * @type          Function
@@ -50,7 +46,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(commands, settings = {}) {
-        const _settings = __deepMerge({
+        const _settings = deepMerge_1.default({
             framerate: 10
         }, settings);
         // extends SPanel
@@ -119,15 +115,15 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
         // this._summaryFakeCommand.on = () => this._summaryFakeCommand;
         // this._commands.unshift(this._summaryFakeCommand);
         // set the first active space to the first command key
-        __activeSpace.set(`SCommandPanel.${this._commands[0].key}`);
+        activeSpace_1.default.set(`SCommandPanel.${this._commands[0].key}`);
         // pipe all commands "events" to the _sPromise internal promise
-        this._sPromise = new __SPromise();
+        this._sPromise = new SPromise_1.default();
         this._commands.forEach((commandObj, i) => {
             // instanciate the command instance
             const commandClass = require(commandObj.path);
             commandObj.instance = new commandClass(commandObj.settings);
         });
-        this.promise = new __SPromise(() => { });
+        this.promise = new SPromise_1.default(() => { });
         // generate the UI
         this._generateUI();
         // init command boxes
@@ -214,7 +210,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
                 else {
                     this._displayedCommands.push(item.commandObj);
                 }
-                __activeSpace.set(`SCommandPanel.${item.commandObj.key}`);
+                activeSpace_1.default.set(`SCommandPanel.${item.commandObj.key}`);
             }
             else if (!this._multiSelect) {
                 const displayCommandIdx = this._displayedCommands.indexOf(item.commandObj);
@@ -250,8 +246,8 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
         this._commands.forEach((commandObj, i) => {
             const boxObj = {};
             if (commandObj.key) {
-                __hotkey(`${commandObj.key}`).on('press', () => {
-                    if (__activeSpace.get() === `SCommandPanel.${commandObj.key}` &&
+                hotkey_1.default(`${commandObj.key}`).on('press', () => {
+                    if (activeSpace_1.default.get() === `SCommandPanel.${commandObj.key}` &&
                         commandObj.instance &&
                         commandObj.instance.on) {
                         if (commandObj.instance.state == 'running' &&
@@ -264,7 +260,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
                         }
                     }
                     else {
-                        __activeSpace.set(`SCommandPanel.${commandObj.key}`);
+                        activeSpace_1.default.set(`SCommandPanel.${commandObj.key}`);
                         this._selectListItem(i);
                     }
                 });
@@ -273,11 +269,11 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
             //   if (__activeSpace.is(`SCommandPanel.${commandObj.key}`)) return true;
             //   return false;
             // };
-            commandObj.$box = __blessed.box({
+            commandObj.$box = blessed_1.default.box({
                 height: 3,
                 style: {
-                    bg: __color('terminal.primary').toString(),
-                    fg: __color('terminal.black').toString()
+                    bg: color_1.default('terminal.primary').toString(),
+                    fg: color_1.default('terminal.black').toString()
                 },
                 padding: {
                     top: 1,
@@ -293,7 +289,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
                 right: 0,
                 clickable: true
             });
-            commandObj.$log = new __SOutput(commandObj.instance, {
+            commandObj.$log = new SOutput_1.default(commandObj.instance, {
                 width: '100%-4',
                 height: 0,
                 top: 0,
@@ -312,7 +308,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
                 },
                 style: {
                     scrollbar: {
-                        bg: __color('terminal.primary').toString()
+                        bg: color_1.default('terminal.primary').toString()
                     }
                 },
                 padding: {
@@ -322,14 +318,14 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
                     bottom: 0
                 }
             });
-            commandObj.$actions = __blessed.box({
+            commandObj.$actions = blessed_1.default.box({
                 top: 0,
                 right: 0,
                 width: 'shrink',
                 height: 1,
                 style: {}
             });
-            commandObj.$header = __blessed.box({
+            commandObj.$header = blessed_1.default.box({
                 top: -1,
                 left: 0,
                 right: 0,
@@ -368,8 +364,8 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
                 this.update();
             });
             commandObj.spinner = {
-                ora: __ora({
-                    text: __parseHtml(commandObj.title || commandObj.name),
+                ora: ora_1.default({
+                    text: parseHtml_1.default(commandObj.title || commandObj.name),
                     color: 'black'
                 })
             };
@@ -395,8 +391,8 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
         const itemsArray = [];
         this._commands.forEach((commandObj) => {
             commandObj._spinner = {
-                ora: __ora({
-                    text: __parseHtml(commandObj.name),
+                ora: ora_1.default({
+                    text: parseHtml_1.default(commandObj.name),
                     color: 'black'
                 })
             };
@@ -409,7 +405,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
                 media = medias[width];
             }
         });
-        this.$list = __blessed.list({
+        this.$list = blessed_1.default.list({
             width: `${media}%-1`,
             top: 0,
             left: 0,
@@ -427,7 +423,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
                 selected: {},
                 item: {},
                 scrollbar: {
-                    bg: __color('terminal.primary').toString()
+                    bg: color_1.default('terminal.primary').toString()
                 }
             },
             items: itemsArray,
@@ -457,7 +453,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
                 this._multiSelect = false;
             });
         };
-        __hotkey('tab').on('press', () => {
+        hotkey_1.default('tab').on('press', () => {
             if (!pressTimeout) {
                 pressInitialiser = 'tab';
                 pressTimeout = setTimeout(() => {
@@ -469,7 +465,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
                 pressed();
             }
         });
-        __hotkey('return').on('press', () => {
+        hotkey_1.default('return').on('press', () => {
             if (!pressTimeout) {
                 pressInitialiser = 'return';
                 pressTimeout = setTimeout(() => {
@@ -481,7 +477,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
                 pressed();
             }
         });
-        this.$log = __blessed.box({
+        this.$log = blessed_1.default.box({
             width: `${100 - media}%`,
             top: 0,
             left: `${media}%+1`,
@@ -500,7 +496,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
             },
             style: {
                 scrollbar: {
-                    bg: __color('terminal.primary').toString()
+                    bg: color_1.default('terminal.primary').toString()
                 }
             },
             padding: {
@@ -553,7 +549,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
         this._commands.forEach((commandObj, i) => {
             const item = this.$list.getItem(i);
             if (!item.$key) {
-                item.$key = __blessed.box({
+                item.$key = blessed_1.default.box({
                     width: 3,
                     height: 1,
                     top: 0,
@@ -576,7 +572,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
                 item.append(item.$key);
             }
             if (!item.$state) {
-                item.$state = __blessed.box({
+                item.$state = blessed_1.default.box({
                     width: 3,
                     height: 1,
                     top: 0,
@@ -625,13 +621,13 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
             else if (commandObj.instance.state === 'error') {
                 name = `${commandObj.name}`;
                 item.$state.setContent('×');
-                item.$state.style.fg = __color('terminal.red').toString();
+                item.$state.style.fg = color_1.default('terminal.red').toString();
                 // item.$state.style.bg = __color('terminal.red').toString();
             }
             else if (commandObj.instance.state === 'success') {
                 name = `${commandObj.name}`;
                 item.$state.setContent('✔');
-                item.$state.style.fg = __color('terminal.green').toString();
+                item.$state.style.fg = color_1.default('terminal.green').toString();
                 // item.$state.style.bg = __color('terminal.white').toString();
             }
             else {
@@ -640,32 +636,32 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
             if (item.active) {
                 name = `> ${name}`;
             }
-            let spaces = Math.round(this.$list.width - __countLine(name) - 1);
+            let spaces = Math.round(this.$list.width - countLine_1.default(name) - 1);
             if (spaces < 0)
                 spaces = 0;
             name = name + ' '.repeat(spaces);
             if (item.active || item.selected) {
-                item.style.fg = __color('terminal.primary').toString();
+                item.style.fg = color_1.default('terminal.primary').toString();
             }
             else {
-                item.style.fg = __color('terminal.white').toString();
+                item.style.fg = color_1.default('terminal.white').toString();
             }
             if (commandObj.instance.state === 'running') {
-                item.style.fg = __color('terminal.cyan').toString();
+                item.style.fg = color_1.default('terminal.cyan').toString();
             }
             else if (item.active || item.selected) {
-                item.style.fg = __color('terminal.primary').toString();
+                item.style.fg = color_1.default('terminal.primary').toString();
             }
             else if (commandObj.instance.state === 'watching') {
-                item.style.fg = __color('terminal.white').toString();
+                item.style.fg = color_1.default('terminal.white').toString();
             }
             else if (commandObj.instance.state === 'error') {
-                item.style.fg = __color('terminal.red').toString();
+                item.style.fg = color_1.default('terminal.red').toString();
             }
             else if (commandObj.instance.state === 'success') {
-                item.style.fg = __color('terminal.green').toString();
+                item.style.fg = color_1.default('terminal.green').toString();
             }
-            this.$list.setItem(i, __parseHtml(name));
+            this.$list.setItem(i, parseHtml_1.default(name));
         });
     }
     /**
@@ -690,38 +686,38 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
             if (commandObj.instance &&
                 (commandObj.instance.state === 'error' ||
                     commandObj.instance.state === 'killed')) {
-                commandObj.$box.style.bg = __color('terminal.red').toString();
+                commandObj.$box.style.bg = color_1.default('terminal.red').toString();
                 clearInterval(commandObj.spinner.interval);
-                commandObj.$header.setContent(__parseHtml(`<iCross/>  ${boxTitle} (${commandObj.instance.state})`));
+                commandObj.$header.setContent(parseHtml_1.default(`<iCross/>  ${boxTitle} (${commandObj.instance.state})`));
                 commandObj.$box.screen.render();
             }
             else if (commandObj.instance.state === 'watching') {
-                commandObj.$box.style.bg = __color('terminal.yellow').toString();
+                commandObj.$box.style.bg = color_1.default('terminal.yellow').toString();
                 clearInterval(commandObj.spinner.interval);
                 commandObj.spinner.interval = setInterval(() => {
-                    commandObj.spinner.ora.text = __parseHtml(`${boxTitle} (watching)`);
+                    commandObj.spinner.ora.text = parseHtml_1.default(`${boxTitle} (watching)`);
                     commandObj.$header.setContent(commandObj.spinner.ora.frame());
                 }, 50);
             }
             else if (commandObj.instance &&
                 commandObj.instance.state === 'success') {
-                commandObj.$box.style.bg = __color('terminal.green').toString();
+                commandObj.$box.style.bg = color_1.default('terminal.green').toString();
                 clearInterval(commandObj.spinner.interval);
-                commandObj.$header.setContent(__parseHtml(`<iCheck/>  ${boxTitle}`));
+                commandObj.$header.setContent(parseHtml_1.default(`<iCheck/>  ${boxTitle}`));
                 commandObj.$box.screen.render();
             }
             else if (commandObj.instance &&
                 commandObj.instance.state === 'running') {
-                commandObj.$box.style.bg = __color('terminal.cyan').toString();
+                commandObj.$box.style.bg = color_1.default('terminal.cyan').toString();
                 clearInterval(commandObj.spinner.interval);
                 commandObj.spinner.interval = setInterval(() => {
-                    commandObj.spinner.ora.text = __parseHtml(`${boxTitle}`);
+                    commandObj.spinner.ora.text = parseHtml_1.default(`${boxTitle}`);
                     commandObj.$header.setContent(commandObj.spinner.ora.frame());
                 }, 50);
             }
             else {
                 commandObj.$box.style.bg = 'white';
-                commandObj.$header.setContent(__parseHtml(`<iStart/>  ${boxTitle} (idle)`));
+                commandObj.$header.setContent(parseHtml_1.default(`<iStart/>  ${boxTitle} (idle)`));
                 commandObj.$box.screen.render();
             }
             commandObj.$header.style.bg = commandObj.$box.style.bg;
@@ -759,7 +755,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
             right: commandObj.$box.right,
             bottom: commandObj.$box.bottom
         };
-        commandObj._openTransition = __transitionObjectProperties(commandObj._closedBoxStateObj, {
+        commandObj._openTransition = objectProperties_1.default(commandObj._closedBoxStateObj, {
             width: commandObj.$box.parent.width,
             height: commandObj.$box.parent.height,
             top: 0,
@@ -796,7 +792,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
         }
         if (commandObj._closeTransition)
             return;
-        commandObj._closeTransition = __transitionObjectProperties({
+        commandObj._closeTransition = objectProperties_1.default({
             width: commandObj.$box.width,
             height: commandObj.$box.height,
             top: commandObj.$box.top,
@@ -904,7 +900,7 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
             switch (layout) {
                 case 'two':
                     width =
-                        i === 1 && __isOdd(process.stdout.columns) ? '50%-2' : '50%-1';
+                        i === 1 && odd_1.default(process.stdout.columns) ? '50%-2' : '50%-1';
                     height = '100%';
                     top = 0;
                     left = i === 0 ? 0 : '50%+1';
@@ -1034,4 +1030,5 @@ module.exports = class SCommandPanel extends __SBlessedComponent {
             super.update();
         });
     }
-};
+}
+exports.default = SCommandPanel;

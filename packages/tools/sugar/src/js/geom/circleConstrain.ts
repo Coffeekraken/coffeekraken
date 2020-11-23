@@ -4,6 +4,7 @@ import distanceBetween from './distanceBetween';
  * @name 		circleConstrain
  * @namespace           sugar.js.geom.2d
  * @type      Function
+ * @stable
  *
  * Take as parameter a central point, a radius and a points to constrain inside the circle defined by the radius
  *
@@ -11,6 +12,10 @@ import distanceBetween from './distanceBetween';
  * @param    {Number}    radius    The radius to constrain the point in
  * @param    {Vector2}    point    The point to constrain
  * @return    {Vector2}    The new constrained value for the point
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example    js
  * import circleConstrain from '@coffeekraken/sugar/js/geom/2d/circleConstrain'
@@ -21,16 +26,17 @@ import distanceBetween from './distanceBetween';
  * })
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @since       2.0.0
  * @see    https://stackoverflow.com/questions/8515900/how-to-constrain-movement-within-the-area-of-a-circle
  */
 export default function circleConstrain(center, radius, point) {
-  var dist = distanceBetween(center, point);
+  const dist = distanceBetween(center, point);
   if (dist <= radius) {
     return point;
   } else {
     const x = point.x - center.x;
     const y = point.y - center.y;
-    var radians = Math.atan2(y, x);
+    const radians = Math.atan2(y, x);
     return {
       x: Math.cos(radians) * radius + center.x,
       y: Math.sin(radians) * radius + center.y

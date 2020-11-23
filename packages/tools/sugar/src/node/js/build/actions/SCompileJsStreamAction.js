@@ -1,9 +1,12 @@
 "use strict";
-var _a;
-const __deepMerge = require('../../../object/deepMerge');
-const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
-const __SBuildJsInterface = require('../interface/SBuildJsInterface');
-const __SJsCompiler = require('../../SJsCompiler');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
+const SActionsStreamAction_1 = __importDefault(require("../../../stream/SActionsStreamAction"));
+const SBuildJsInterface_1 = __importDefault(require("../interface/SBuildJsInterface"));
+const SJsCompiler_1 = __importDefault(require("../../SJsCompiler"));
 /**
  * @name                SCompileJsStreamAction
  * @namespace           sugar.node.build.js.actions
@@ -17,54 +20,54 @@ const __SJsCompiler = require('../../SJsCompiler');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SCompileJsStreamAction extends __SActionsStreamAction {
-        /**
-         * @name            constructor
-         * @type            Function
-         * @constructor
-         *
-         * Constructor
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        constructor(settings = {}) {
-            super(__deepMerge({
-                id: 'SCompileJsStreamAction'
-            }, settings));
-        }
-        /**
-         * @name          run
-         * @type          Function
-         * @async
-         *
-         * Override the base class run method
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        run(streamObj, settings) {
-            return super.run(streamObj, async (resolve, reject) => {
-                const compiler = new __SJsCompiler(streamObj);
-                const compileRes = await compiler.compile(streamObj.input);
-                // otherwise, save the new data in the streamObj
-                streamObj.data = compileRes.js;
-                // set the map if has been generated
-                if (compileRes.map)
-                    streamObj.sourcemapData = compileRes.map;
-                // resolve the new streamObj
-                resolve(streamObj);
-            });
-        }
-    },
+class SCompileJsStreamAction extends SActionsStreamAction_1.default {
     /**
-     * @name            interface
-     * @type             Object
-     * @static
+     * @name            constructor
+     * @type            Function
+     * @constructor
      *
-     * Store the definition object that specify the streamObj required properties, types, etc...
+     * Constructor
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = __SBuildJsInterface.extends({
-        definitionObj: {}
-    }),
-    _a);
+    constructor(settings = {}) {
+        super(deepMerge_1.default({
+            id: 'SCompileJsStreamAction'
+        }, settings));
+    }
+    /**
+     * @name          run
+     * @type          Function
+     * @async
+     *
+     * Override the base class run method
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    run(streamObj, settings) {
+        return super.run(streamObj, async (resolve, reject) => {
+            const compiler = new SJsCompiler_1.default(streamObj);
+            const compileRes = await compiler.compile(streamObj.input);
+            // otherwise, save the new data in the streamObj
+            streamObj.data = compileRes.js;
+            // set the map if has been generated
+            if (compileRes.map)
+                streamObj.sourcemapData = compileRes.map;
+            // resolve the new streamObj
+            resolve(streamObj);
+        });
+    }
+}
+exports.default = SCompileJsStreamAction;
+/**
+ * @name            interface
+ * @type             Object
+ * @static
+ *
+ * Store the definition object that specify the streamObj required properties, types, etc...
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+SCompileJsStreamAction.interface = SBuildJsInterface_1.default.extends({
+    definitionObj: {}
+});

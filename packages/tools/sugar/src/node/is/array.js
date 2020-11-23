@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isArray
  * @namespace           sugar.js.is
@@ -16,6 +18,7 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isArray(value) {
+function isArray(value) {
     return value && typeof value === 'object' && value.constructor === Array;
 }
+exports.default = isArray;

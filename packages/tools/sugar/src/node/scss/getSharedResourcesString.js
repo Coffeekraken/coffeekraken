@@ -1,9 +1,13 @@
 "use strict";
-const __sugarConfig = require('../config/sugar');
-const __isInPackage = require('../path/isInPackage');
-const __packageRoot = require('../path/packageRoot');
-const __path = require('path');
-const __jsObjectToScssMap = require('./jsObjectToScssMap');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const sugar_1 = __importDefault(require("../config/sugar"));
+const isInPackage_1 = __importDefault(require("../path/isInPackage"));
+const packageRoot_1 = __importDefault(require("../path/packageRoot"));
+const path_1 = __importDefault(require("path"));
+const jsObjectToScssMap_1 = __importDefault(require("./jsObjectToScssMap"));
 /**
  * @name            getScssSharedResourcesString
  * @namespace       sugar.node.scss
@@ -16,17 +20,17 @@ const __jsObjectToScssMap = require('./jsObjectToScssMap');
  *
  * @since       2.0.0
  */
-module.exports = function getScssSharedResourcesString(array = null) {
+function getScssSharedResourcesString(array = null) {
     if (!array)
-        array = __sugarConfig('scss.sharedResources');
+        array = sugar_1.default('scss.sharedResources');
     let importsStrings = '';
     array.forEach((importItem) => {
         if (typeof importItem === 'string') {
             if (importItem === 'sugar') {
-                const settings = __sugarConfig('scss');
-                const settingsString = __jsObjectToScssMap(settings);
-                const path = __isInPackage('coffeekraken', process.cwd(), true)
-                    ? __path.resolve(__packageRoot(__dirname, true), 'toolkits/sugar/index')
+                const settings = sugar_1.default('scss');
+                const settingsString = jsObjectToScssMap_1.default(settings);
+                const path = isInPackage_1.default('coffeekraken', process.cwd(), true)
+                    ? path_1.default.resolve(packageRoot_1.default(__dirname, true), 'toolkits/sugar/index')
                     : '@coffeekraken/sugar/index';
                 importsStrings += `
           @use "${path}" as Sugar;
@@ -42,4 +46,6 @@ module.exports = function getScssSharedResourcesString(array = null) {
         }
     });
     return importsStrings;
-};
+}
+exports.default = getScssSharedResourcesString;
+;

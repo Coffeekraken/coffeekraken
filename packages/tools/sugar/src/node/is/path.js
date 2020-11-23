@@ -1,5 +1,9 @@
 "use strict";
-const __isPath = require('../fs/isPath');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const isPath_1 = __importDefault(require("../fs/isPath"));
 /**
  * @name                            path
  * @namespace           sugar.node.is
@@ -12,11 +16,12 @@ const __isPath = require('../fs/isPath');
  * @return        {Boolean}                             true if the path is valide, false if not
  *
  * @example       js
- * const isPath = require('@coffeekraken/sugar/node/is/path');
+ * import isPath from '@coffeekraken/sugar/node/is/path';
  * isPath('hello/world'); // => true
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function path(path, checkExistence = false) {
-    return __isPath(path, checkExistence);
-};
+function path(path, checkExistence = false) {
+    return isPath_1.default(path, checkExistence);
+}
+exports.default = path;

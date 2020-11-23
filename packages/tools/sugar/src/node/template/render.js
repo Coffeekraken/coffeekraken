@@ -1,15 +1,10 @@
 "use strict";
-const __sugarConfig = require('../config/sugar');
-const __getFilename = require('../fs/filename');
-const __fs = require('fs');
-const __path = require('path');
-const __getExt = require('../fs/extension');
-const __deepMerge = require('../object/deepMerge');
-const __toString = require('../string/toString');
-const __SPromise = require('../promise/SPromise');
-const __SError = require('../error/SError');
-const __STemplate = require('./STemplate');
-const __unique = require('../array/unique');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const STemplate_1 = __importDefault(require("./STemplate"));
 /**
  * @name              render
  * @namespace         sugar.node.template
@@ -26,7 +21,7 @@ const __unique = require('../array/unique');
  * - rootDir (__sugarConfig('views.rootDir')) {String|Array<String>}: Specify the root directory where to search for views. Can be an array of directories in which the engine will search through if needed
  *
  * @example       js
- * const render = require('@coffeekraken/sugar/node/template/render');
+ * import render from '@coffeekraken/sugar/node/template/render';
  * const result = await render('my.cool.template, {
  *    hello: 'world'
  * });
@@ -34,9 +29,9 @@ const __unique = require('../array/unique');
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function render(viewPath, data = null, settings = {}) {
-    return new __SPromise(async (resolve, reject, trigger, cancel) => {
-        const templateInstance = new __STemplate(viewPath, {
+function render(viewPath, data = null, settings = {}) {
+    return new SPromise_1.default(async (resolve, reject, trigger, cancel) => {
+        const templateInstance = new STemplate_1.default(viewPath, {
             ...settings
         });
         let resultObj;
@@ -48,7 +43,7 @@ module.exports = function render(viewPath, data = null, settings = {}) {
             });
         }
         catch (e) {
-            const errorTemplateInstance = new __STemplate('pages.501', settings);
+            const errorTemplateInstance = new STemplate_1.default('pages.501', settings);
             resultObj = await errorTemplateInstance.render({
                 ...data,
                 error: e
@@ -61,4 +56,5 @@ module.exports = function render(viewPath, data = null, settings = {}) {
     }, {
         id: 'templateRender'
     });
-};
+}
+exports.default = render;

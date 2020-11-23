@@ -3,6 +3,7 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * @name        addAnimationClass
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Add a class that trigger an animation and remove it at the end
  *
@@ -10,12 +11,17 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * @param    {String|Array}    cls    The class or classes (Array) to apply
  * @return    {Promise}               A promise that will be resolved once the class have been removed and the animation finished
  *
+ * @todo        interface
+ * @todo        doc
+ * @todo        tests
+ *
  * @example    js
  * import addAnimationClass from '@coffeekraken/sugar/js/dom/addAnimationClass'
  * addAnimationClass(myElm, 'my-cool-class').then($elm => {
  *    // do something at the animation end...
  * });
  *
+ * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function addAnimationClass($elm, cls) {

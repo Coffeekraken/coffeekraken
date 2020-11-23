@@ -1,16 +1,20 @@
 "use strict";
-let __fs = require('fs');
-let __SScssCompiler = require('../../../../scss/SScssCompiler');
-let __tmpDir = require('../../../../fs/tmpDir');
-module.exports = {
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs_1 = __importDefault(require("fs"));
+const SScssCompiler_1 = __importDefault(require("../../../../scss/SScssCompiler"));
+const tmpDir_1 = __importDefault(require("../../../../fs/tmpDir"));
+exports.default = {
     name: 'esbuildScssLoaderPlugin',
     setup(build) {
         // Load ".txt" files and return an array of words
         build.onLoad({ filter: /\.scss$/ }, async (args) => {
-            let text = await __fs.promises.readFile(args.path, 'utf8');
-            const filePath = `${__tmpDir()}/esbuildScssLoaderPlugin.scss`;
-            __fs.writeFileSync(filePath, text);
-            const compiler = new __SScssCompiler({
+            let text = await fs_1.default.promises.readFile(args.path, 'utf8');
+            const filePath = `${tmpDir_1.default()}/esbuildScssLoaderPlugin.scss`;
+            fs_1.default.writeFileSync(filePath, text);
+            const compiler = new SScssCompiler_1.default({
                 sharedResources: [],
                 prod: true
             });

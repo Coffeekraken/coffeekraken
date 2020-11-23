@@ -1,5 +1,9 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name            findImportStatements
  * @namespace       sugar.node.scss
@@ -15,7 +19,7 @@ const __deepMerge = require('../object/deepMerge');
  * @setting      {Boolean}      [imports=true]    Specify if you want to extract the @import statements
  *
  * @example       js
- * const findImportStatements = require('@coffeekraken/sugar/node/scss/findImportStatements');
+ * import findImportStatements from '@coffeekraken/sugar/node/scss/findImportStatements';
  * findImportStatements(`
  *    @use 'something/cool' as Hello;
  *    @import 'other/cool/thing';
@@ -32,8 +36,8 @@ const __deepMerge = require('../object/deepMerge');
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function findImportStatements(string, settings = {}) {
-    settings = __deepMerge({
+function findImportStatements(string, settings = {}) {
+    settings = deepMerge_1.default({
         use: true,
         import: true
     }, settings);
@@ -76,4 +80,5 @@ module.exports = function findImportStatements(string, settings = {}) {
         });
     });
     return statements;
-};
+}
+exports.default = findImportStatements;

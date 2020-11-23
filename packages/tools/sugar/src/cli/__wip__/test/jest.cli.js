@@ -1,18 +1,11 @@
 "use strict";
-
-// module.exports = (stringArgs = '') => {
-//   const jestConfig = __sugarConfig('jest');
-//   const defaultJestConfig = __argsToString(jestConfig.cli);
-//   stringArgs = `${defaultJestConfig} ${stringArgs}`;
-//   __childProcess.spawn(`jest ${stringArgs}`, null, {
-//     stdio: 'inherit',
-//     shell: true
-//   });
-// };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 // const __STestJestCli = require('../../node/test/jest/STestJestCli');
-import __STestJestProcess from '../../node/test/jest/STestJestProcess';
-
-export default (stringArgs = '') => {
-    const pro = new __STestJestProcess();
+const STestJestProcess_1 = __importDefault(require("../../node/test/jest/STestJestProcess"));
+exports.default = (stringArgs = '') => {
+    const pro = new STestJestProcess_1.default();
     pro.run(stringArgs);
 };

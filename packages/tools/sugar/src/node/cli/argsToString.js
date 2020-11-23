@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const toString_1 = require("../string/toString");
-const parseArgs_1 = require("./parseArgs");
-const deepMerge_1 = require("../object/deepMerge");
+const toString_1 = __importDefault(require("../string/toString"));
+const parseArgs_1 = __importDefault(require("./parseArgs"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name                  argsToString
  * @namespace           sugar.js.cli
@@ -47,7 +50,7 @@ const deepMerge_1 = require("../object/deepMerge");
  */
 // TODO: support deep object structure
 // TODO: support required args
-module.exports = function argsToString(args, settings = {}) {
+function argsToString(args, settings = {}) {
     settings = deepMerge_1.default({
         definitionObj: null,
         includeAllArgs: true,
@@ -97,4 +100,6 @@ module.exports = function argsToString(args, settings = {}) {
         cliArray.push(`${prefix} ${value}`);
     });
     return cliArray.join(' ');
-};
+}
+exports.default = argsToString;
+;

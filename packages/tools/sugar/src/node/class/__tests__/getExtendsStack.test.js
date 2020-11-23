@@ -1,3 +1,3 @@
 "use strict";
-const __getExtendsStack = require('../getExtendsStack');
-require('../_js/class/__tests__/getExtendsStack')(__getExtendsStack);
+Object.defineProperty(exports, "__esModule", { value: true });
+throw 'WIP';

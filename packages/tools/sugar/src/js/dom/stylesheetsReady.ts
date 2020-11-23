@@ -3,12 +3,17 @@ import linkLoaded from './linkLoaded';
  * @name      stylesheetsReady
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Wait until all the HTMLLinkElement's are properly loaded
  *
  * @param 		{Array}<HTMLLinkElement> 		links 			The HTMLLinkElement tags to process
  * @param 		{Function} 						[cb=null] 		An optional callback function to call when all the links are loaded
  * @return 		{Promise} 										The promise that will be resolved when all the links are loaded
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * import stylesheetsReady from '@coffeekraken/sugar/js/dom/stylesheetsReady'
@@ -19,13 +24,14 @@ import linkLoaded from './linkLoaded';
  * 		// do something when all the links are loaded
  * });
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function stylesheetsReady(links, cb = null) {
-  let neededStylesheetsStack = links;
-  let neededStylesheetsCount = links.length;
+  const neededStylesheetsStack = links;
+  const neededStylesheetsCount = links.length;
   let loadedStylesheedsCount = 0;
-  let loadedStylesheetsCallbacks = [];
+  const loadedStylesheetsCallbacks = [];
   let loadedStylesheedsProcess = false;
   let stylesheetsDependenciesStatus = false;
 

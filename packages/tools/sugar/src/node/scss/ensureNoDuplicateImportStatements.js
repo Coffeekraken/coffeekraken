@@ -1,7 +1,11 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
-const __findImportStatements = require('./findImportStatements');
-const __dedupe = require('../string/dedupe');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const findImportStatements_1 = __importDefault(require("./findImportStatements"));
+const dedupe_1 = __importDefault(require("../string/dedupe"));
 /**
  * @name            ensureNoDuplicateImportStatements
  * @namespace       sugar.node.scss
@@ -17,7 +21,7 @@ const __dedupe = require('../string/dedupe');
  * @setting      {Boolean}      [imports=true]    Specify if you want to extract the @import statements
  *
  * @example       js
- * const ensureNoDuplicateImportStatements = require('@coffeekraken/sugar/node/scss/ensureNoDuplicateImportStatements');
+ * import ensureNoDuplicateImportStatements from '@coffeekraken/sugar/node/scss/ensureNoDuplicateImportStatements';
  * ensureNoDuplicateImportStatements(`
  *    @use 'something/cool' as Hello;
  *    @import 'other/cool/thing';
@@ -29,14 +33,15 @@ const __dedupe = require('../string/dedupe');
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = function ensureNoDuplicateImportStatements(string, settings = {}) {
-    settings = __deepMerge({
+function ensureNoDuplicateImportStatements(string, settings = {}) {
+    settings = deepMerge_1.default({
         use: true,
         import: true
     }, settings);
-    const statementsArray = __findImportStatements(string, settings);
+    const statementsArray = findImportStatements_1.default(string, settings);
     statementsArray.forEach((statementObj) => {
-        string = __dedupe(string, statementObj.raw);
+        string = dedupe_1.default(string, statementObj.raw);
     });
     return string;
-};
+}
+exports.default = ensureNoDuplicateImportStatements;

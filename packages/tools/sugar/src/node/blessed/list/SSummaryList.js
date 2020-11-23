@@ -1,16 +1,19 @@
 "use strict";
-const __blessed = require('blessed');
-const __SBlessedComponent = require('../SBlessedComponent');
-const __deepMerge = require('../../object/deepMerge');
-const __parseHtml = require('../../terminal/parseHtml');
-const __countLine = require('../../string/countLine');
-const __hotkey = require('../../keyboard/hotkey');
-const __color = require('../../color/color');
-const __SPromise = require('../../promise/SPromise');
-const __SInput = require('../form/SInput');
-const __multiple = require('../../class/multipleExtends');
-const __activeSpace = require('../../core/activeSpace');
-const __escapeStack = require('../../terminal/escapeStack');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const blessed_1 = __importDefault(require("blessed"));
+const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const parseHtml_1 = __importDefault(require("../../terminal/parseHtml"));
+const countLine_1 = __importDefault(require("../../string/countLine"));
+const hotkey_1 = __importDefault(require("../../keyboard/hotkey"));
+const color_1 = __importDefault(require("../../color/color"));
+const SPromise_1 = __importDefault(require("../../promise/SPromise"));
+const SInput_1 = __importDefault(require("../form/SInput"));
+const activeSpace_1 = __importDefault(require("../../core/activeSpace"));
+const escapeStack_1 = __importDefault(require("../../terminal/escapeStack"));
 /**
  * @name                  SBlessedSummaryList
  * @namespace           sugar.node.blessed.list
@@ -26,12 +29,12 @@ const __escapeStack = require('../../terminal/escapeStack');
  * @param        {Object}         [settings = {}]         A settings object to configure your this. Here's the available settings:
  *
  * @example       js
- * const SBlessedSummaryList = require('@coffeekraken/sugar/node/blessed/list/SBlessedSummaryList');
+ * import SBlessedSummaryList from '@coffeekraken/sugar/node/blessed/list/SBlessedSummaryList';
  * const list = new SBlessedSummaryList({});
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBlessedSummaryList extends __SBlessedComponent {
+class SBlessedSummaryList extends SBlessedComponent_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -42,16 +45,16 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(items, settings = {}) {
-        super(__deepMerge({
+        super(deepMerge_1.default({
             style: {
-                bg: __color('terminal.black').toString(),
+                bg: color_1.default('terminal.black').toString(),
                 item: {
-                    bg: __color('terminal.black').toString(),
-                    fg: __color('terminal.white').toString()
+                    bg: color_1.default('terminal.black').toString(),
+                    fg: color_1.default('terminal.white').toString()
                 },
                 selected: {
-                    bg: __color('terminal.cyan').toString(),
-                    fg: __color('terminal.white').toString()
+                    bg: color_1.default('terminal.cyan').toString(),
+                    fg: color_1.default('terminal.white').toString()
                 }
             }
         }, settings));
@@ -107,7 +110,7 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
          */
         this._items = [];
         // init the actual list component
-        this.$list = __blessed.list({
+        this.$list = blessed_1.default.list({
             keys: false,
             mouse: false,
             interactive: true,
@@ -124,13 +127,13 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
         });
         this._editingItemIdx = null;
         this.on('attach', () => {
-            __activeSpace.append('summaryList');
+            activeSpace_1.default.append('summaryList');
             this._rebuildList();
         });
         this.on('detach', () => {
-            __activeSpace.remove('.summaryList');
+            activeSpace_1.default.remove('.summaryList');
         });
-        this.promise = new __SPromise((resolve, reject, trigger, cancel) => { }, {
+        this.promise = new SPromise_1.default((resolve, reject, trigger, cancel) => { }, {
             id: 'SBlessedSummaryList'
         });
         this.on = this.promise.on.bind(this.promise);
@@ -160,7 +163,7 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
      */
     _initHotkeys() {
         let escapeStackPromise;
-        this._escapeHotkey = __hotkey('escape', {
+        this._escapeHotkey = hotkey_1.default('escape', {
             activeSpace: '**.summaryList'
         }).on('press', (key) => {
             if (escapeStackPromise)
@@ -173,7 +176,7 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
                 this.promise.cancel();
             }
         });
-        this._downHotkey = __hotkey('down', {
+        this._downHotkey = hotkey_1.default('down', {
             activeSpace: '**.summaryList'
         }).on('press', (key) => {
             if (this._isEditing)
@@ -182,7 +185,7 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
             this._selectedItemIdx = this.$list.selected;
             this._rebuildList();
         });
-        this._upHotkey = __hotkey('up', {
+        this._upHotkey = hotkey_1.default('up', {
             activeSpace: '**.summaryList'
         }).on('press', (key) => {
             if (this._isEditing)
@@ -191,7 +194,7 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
             this._selectedItemIdx = this.$list.selected;
             this._rebuildList();
         });
-        this._enterHotkey = __hotkey('enter', {
+        this._enterHotkey = hotkey_1.default('enter', {
             activeSpace: '**.summaryList'
         }).on('press', (key) => {
             if (!this._isEditing) {
@@ -207,10 +210,10 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
                     return;
                 }
                 // init an new empty escape stack
-                escapeStackPromise = __escapeStack(() => { });
+                escapeStackPromise = escapeStack_1.default(() => { });
                 this._isEditing = true;
                 this._editingItemIdx = this.$list.selected;
-                this.$editInput = new __SInput({
+                this.$editInput = new SInput_1.default({
                     width: 'auto',
                     placeholder: this._items[this.$list.selected].default,
                     top: this.$list.selected,
@@ -301,7 +304,7 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
                 : item.default;
             if (this._editingItemIdx === i)
                 value = '';
-            return __parseHtml((i === this._selectedItemIdx ? ' ' : '') +
+            return parseHtml_1.default((i === this._selectedItemIdx ? ' ' : '') +
                 item.text +
                 ' '.repeat(longestItemText.length - item.text.length) +
                 ' '.repeat(i === this._selectedItemIdx ? 4 : 5) +
@@ -310,7 +313,7 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
                 '</yellow>');
         });
         listItems.push((this._selectedItemIdx === this._items.length ? ' ' : '') +
-            __parseHtml(`<bold>Validate!</bold>`) +
+            parseHtml_1.default(`<bold>Validate!</bold>`) +
             (this._selectedItemIdx === this._items.length ? ' ' : ''));
         return listItems;
     }
@@ -329,16 +332,16 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
         this.$list.setItems(listItems);
         this.$list.select(this._selectedItemIdx);
         this.$list.items[this._items.length].top += 1;
-        this.style.bg = __color('terminal.black').toString();
+        this.style.bg = color_1.default('terminal.black').toString();
         this.$list.items.forEach((item) => {
-            item.style.bg = __color('terminal.black').toString();
+            item.style.bg = color_1.default('terminal.black').toString();
         });
         const selectedItem = this.$list.items[this._selectedItemIdx];
         if (!this._isEditing) {
-            selectedItem.style.bg = __color('terminal.cyan').toString();
+            selectedItem.style.bg = color_1.default('terminal.cyan').toString();
         }
         selectedItem.position.width =
-            __countLine(this._buildBlessedListItemsArray()[this._selectedItemIdx]) +
+            countLine_1.default(this._buildBlessedListItemsArray()[this._selectedItemIdx]) +
                 (this._selectedItemIdx === this._items.length ? 2 : 1);
         this.update();
     }
@@ -349,4 +352,5 @@ module.exports = class SBlessedSummaryList extends __SBlessedComponent {
             super.update();
         });
     }
-};
+}
+exports.default = SBlessedSummaryList;

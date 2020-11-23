@@ -1,13 +1,16 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
-const __SCache = require('../cache/SCache');
-const __SAuth = require('../auth/SAuth');
-const __path = require('path');
-const __axios = require('axios');
-const __objectUid = require('../object/uid');
-const __convert = require('../time/convert');
-const __machineId = require('node-machine-id').machineIdSync;
-const __isPlainObject = require('../is/plainObject');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SCache_1 = __importDefault(require("../cache/SCache"));
+const SAuth_1 = __importDefault(require("../auth/SAuth"));
+const axios_1 = __importDefault(require("axios"));
+const uid_1 = __importDefault(require("../object/uid"));
+const convert_1 = __importDefault(require("../time/convert"));
+const node_machine_id_1 = require("node-machine-id");
+const plainObject_1 = __importDefault(require("../is/plainObject"));
 /**
  * @name                            SApi
  * @namespace           sugar.node.api
@@ -20,7 +23,7 @@ const __isPlainObject = require('../is/plainObject');
  * - And more...
  *
  * @example           js
- * const SApi = require('@coffeekraken/sugar/node/api/SApi');
+ * import SApi from '@coffeekraken/sugar/node/api/SApi';
  * class MyCoolApi extends SApi {
  *    constructor(name, settings = {}) {
  *      super(name, settings);
@@ -29,7 +32,7 @@ const __isPlainObject = require('../is/plainObject');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SApi {
+class SApi {
     /**
      * @name                          constructor
      * @type                          Function
@@ -70,8 +73,8 @@ module.exports = class SApi {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this._settings = null;
-        settings = __deepMerge({
-            name: `SApi-${__machineId()}`
+        settings = deepMerge_1.default({
+            name: `SApi-${node_machine_id_1.machineIdSync()}`
         }, settings);
         // store the name
         if (!/^[a-zA-Z0-9_\-\+]+$/.test(settings.name)) {
@@ -79,25 +82,25 @@ module.exports = class SApi {
         }
         // handle settings
         let sCacheSettings = {};
-        if (__isPlainObject(settings.cache)) {
+        if (plainObject_1.default(settings.cache)) {
             sCacheSettings = Object.assign(settings.cache);
             delete settings.cache;
         }
         let sAuthSettings = {};
-        if (__isPlainObject(settings.auth)) {
+        if (plainObject_1.default(settings.auth)) {
             sAuthSettings = Object.assign(settings.auth);
             delete settings.auth;
         }
-        this._settings = __deepMerge({
+        this._settings = deepMerge_1.default({
             baseUrl: null,
-            cache: new __SCache(`SApi-${settings.name}`, sCacheSettings),
-            auth: new __SAuth(`SApi-${settings.name}`, sAuthSettings),
+            cache: new SCache_1.default(`SApi-${settings.name}`, sCacheSettings),
+            auth: new SAuth_1.default(`SApi-${settings.name}`, sAuthSettings),
             defaultRequestSettings: {
                 cache: true,
                 auth: true
             }
         }, settings);
-        this._axios = __axios.create({
+        this._axios = axios_1.default.create({
             baseURL: this._settings.baseUrl,
             headers: { 'Request-Provider': '@coffeekraken/sugar/node/api/SApi' }
         });
@@ -120,7 +123,7 @@ module.exports = class SApi {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     async get(path, settings = {}) {
-        return await this.request(path, __deepMerge({
+        return await this.request(path, deepMerge_1.default({
             method: 'get'
         }, settings));
     }
@@ -142,7 +145,7 @@ module.exports = class SApi {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     async post(path, settings = {}) {
-        return await this.request(path, __deepMerge({
+        return await this.request(path, deepMerge_1.default({
             method: 'post'
         }, settings));
     }
@@ -164,7 +167,7 @@ module.exports = class SApi {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     async delete(path, settings = {}) {
-        return await this.request(path, __deepMerge({
+        return await this.request(path, deepMerge_1.default({
             method: 'delete'
         }, settings));
     }
@@ -186,7 +189,7 @@ module.exports = class SApi {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     async head(path, settings = {}) {
-        return await this.request(path, __deepMerge({
+        return await this.request(path, deepMerge_1.default({
             method: 'head'
         }, settings));
     }
@@ -208,7 +211,7 @@ module.exports = class SApi {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     async options(path, settings = {}) {
-        return await this.request(path, __deepMerge({
+        return await this.request(path, deepMerge_1.default({
             method: 'options'
         }, settings));
     }
@@ -230,7 +233,7 @@ module.exports = class SApi {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     async put(path, settings = {}) {
-        return await this.request(path, __deepMerge({
+        return await this.request(path, deepMerge_1.default({
             method: 'put'
         }, settings));
     }
@@ -252,7 +255,7 @@ module.exports = class SApi {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     async patch(path, settings = {}) {
-        return await this.request(path, __deepMerge({
+        return await this.request(path, deepMerge_1.default({
             method: 'patch'
         }, settings));
     }
@@ -287,15 +290,15 @@ module.exports = class SApi {
             requestConfig = this._settings.auth.inject('axios', {}, authInfo);
         }
         // generate the final request config
-        const finalRequestConfig = __deepMerge(requestConfig, {
+        const finalRequestConfig = deepMerge_1.default(requestConfig, {
             url: path,
             method: 'get',
             ...this._settings.defaultRequestSettings
         }, settings);
         // calculate the timeout
-        finalRequestConfig.timeout = __convert(finalRequestConfig.timeout || 0, 'ms');
+        finalRequestConfig.timeout = convert_1.default(finalRequestConfig.timeout || 0, 'ms');
         // generate a uid for this request
-        let uid = __objectUid(finalRequestConfig);
+        let uid = uid_1.default(finalRequestConfig);
         // try to get the response back from cache
         if (finalRequestConfig.cache && this._settings.cache) {
             const cachedResponse = await this._getFromCache(uid);
@@ -390,4 +393,5 @@ module.exports = class SApi {
         // return the response
         return true;
     }
-};
+}
+exports.default = SApi;

@@ -1,8 +1,11 @@
 "use strict";
-const __deepMerge = require('../object/deepMerge');
-const __machineId = require('node-machine-id').machineIdSync;
-const __SAuth = require('../auth/SAuth');
-const __SApi = require('./SApi');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("object/deepMerge"));
+const SApi_1 = __importDefault(require("SApi"));
+const node_machine_id_1 = require("node-machine-id");
 /**
  * @name                            SBitbucketApi
  * @namespace           sugar.node.api
@@ -16,7 +19,7 @@ const __SApi = require('./SApi');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBitbucketApi extends __SApi {
+class SBitbucketApi extends SApi_1.default {
     /**
      * @name                          constructor
      * @type                          Function
@@ -31,8 +34,8 @@ module.exports = class SBitbucketApi extends __SApi {
      */
     constructor(settings = {}) {
         // init SApi instance
-        super(__deepMerge({
-            name: `SBitbucketApi-${__machineId()}`,
+        super(deepMerge_1.default({
+            name: `SBitbucketApi-${node_machine_id_1.machineIdSync()}`,
             baseUrl: 'https://api.bitbucket.org/2.0',
             auth: {
                 title: 'Bitbucket API Auth',
@@ -42,4 +45,5 @@ module.exports = class SBitbucketApi extends __SApi {
             }
         }, settings));
     }
-};
+}
+exports.default = SBitbucketApi;

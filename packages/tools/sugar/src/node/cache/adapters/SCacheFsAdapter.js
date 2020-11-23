@@ -1,12 +1,15 @@
 "use strict";
-const __deepMerge = require('../../object/deepMerge');
-const __tmpDir = require('../../fs/tmpDir');
-const __fs = require('fs');
-const __ensureDirSync = require('../../fs/ensureDirSync');
-const __removeSync = require('../../fs/removeSync');
-const __sugarConfig = require('../../config/sugar');
-const __toString = require('../../string/toString');
-const __SCacheAdapter = require('../../_js/cache/adapters/SCacheAdapter');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const tmpDir_1 = __importDefault(require("../../fs/tmpDir"));
+const fs_1 = __importDefault(require("fs"));
+const ensureDirSync_1 = __importDefault(require("../../fs/ensureDirSync"));
+const removeSync_1 = __importDefault(require("../../fs/removeSync"));
+const sugar_1 = __importDefault(require("../../config/sugar"));
+const SCacheAdapter_1 = __importDefault(require("../../_js/cache/adapters/SCacheAdapter"));
 /**
  * @name                                SCacheFsAdapter
  * @namespace           sugar.node.fs.cacheAdapters
@@ -24,7 +27,7 @@ const __SCacheAdapter = require('../../_js/cache/adapters/SCacheAdapter');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SCacheFsAdapter extends __SCacheAdapter {
+class SCacheFsAdapter extends SCacheAdapter_1.default {
     /**
      * @name                              constructor
      * @type                              Function
@@ -37,8 +40,8 @@ module.exports = class SCacheFsAdapter extends __SCacheAdapter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        super(__deepMerge({
-            rootDir: __sugarConfig('cache.fs.rootDir') || `${__tmpDir()}/SCache`
+        super(deepMerge_1.default({
+            rootDir: sugar_1.default('cache.fs.rootDir') || `${tmpDir_1.default()}/SCache`
         }, settings));
     }
     /**
@@ -63,9 +66,9 @@ module.exports = class SCacheFsAdapter extends __SCacheAdapter {
         // generate the item fs name
         const fsName = `${this._settings.name}/${name}.json`;
         // ensure we have the folder
-        __ensureDirSync(`${this._settings.rootDir}/${fsName.split('/').slice(0, -1).join('/')}`);
+        ensureDirSync_1.default(`${this._settings.rootDir}/${fsName.split('/').slice(0, -1).join('/')}`);
         // write the json file
-        __fs.writeFileSync(`${this._settings.rootDir}/${fsName}`, value);
+        fs_1.default.writeFileSync(`${this._settings.rootDir}/${fsName}`, value);
         // write has been done correctly
         return true;
     }
@@ -87,10 +90,10 @@ module.exports = class SCacheFsAdapter extends __SCacheAdapter {
         // generate the item fs name
         const fsName = `${this._settings.name}/${name}.json`;
         // check that the file exists
-        if (!__fs.existsSync(`${this._settings.rootDir}/${fsName}`))
+        if (!fs_1.default.existsSync(`${this._settings.rootDir}/${fsName}`))
             return null;
         // read the json file
-        return __fs.readFileSync(`${this._settings.rootDir}/${fsName}`, 'utf8');
+        return fs_1.default.readFileSync(`${this._settings.rootDir}/${fsName}`, 'utf8');
     }
     /**
      * @name                          delete
@@ -110,7 +113,7 @@ module.exports = class SCacheFsAdapter extends __SCacheAdapter {
         // generate the item fs name
         const fsName = `${this._settings.name}/${name}.json`;
         // read the json file
-        return __fs.unlinkSync(`${this._settings.rootDir}/${fsName}`);
+        return fs_1.default.unlinkSync(`${this._settings.rootDir}/${fsName}`);
     }
     /**
      * @name                          clear
@@ -128,6 +131,8 @@ module.exports = class SCacheFsAdapter extends __SCacheAdapter {
      */
     async clear(cacheName) {
         // read the json file
-        return __removeSync(`${this._settings.rootDir}/${cacheName}`);
+        return removeSync_1.default(`${this._settings.rootDir}/${cacheName}`);
     }
-};
+}
+exports.default = SCacheFsAdapter;
+;

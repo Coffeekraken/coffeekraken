@@ -1,2 +1,3 @@
 "use strict";
-module.exports = { "something": { "cool": "Hello world" }, "other": { "cool": "Yop yop Nelson" } };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = { "something": { "cool": "Hello world" }, "other": { "cool": "Yop yop Nelson" } };

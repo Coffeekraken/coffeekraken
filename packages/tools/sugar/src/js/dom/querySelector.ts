@@ -6,6 +6,7 @@ import __closestNotVisible from './closestNotVisible';
  * @name      querySelector
  * @namespace           sugar.js.dom
  * @type      Function
+ * @stable
  *
  * Enhanced proxy of the Element.querySelector function that let you specify
  * if you want an element that is visible, or even that is in the viewport
@@ -13,6 +14,10 @@ import __closestNotVisible from './closestNotVisible';
  * @param 		{String} 			selector 			The css selector to search
  * @param 		{Object} 			settings	 		The settings of the query
  * @return 		{HTMLElement} 							The founded element
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * import querySelector from '@coffeekraken/sugar/js/dom/querySelector';
@@ -24,6 +29,7 @@ import __closestNotVisible from './closestNotVisible';
  * 		inViewport : true
  * });
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
@@ -66,8 +72,8 @@ export default function querySelector(selector, settings = {}) {
   if (!elm) return null;
 
   // state tracking
-  let isVisible = true;
-  let isInViewport = true;
+  const isVisible = true;
+  const isInViewport = true;
 
   // check settings
   if (settings.visible) {

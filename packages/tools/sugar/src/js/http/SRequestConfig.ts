@@ -4,9 +4,14 @@ import __convert from '../time/convert';
  * @name 	              	SRequestConfig
  * @namespace           sugar.js.http
  * @type                  Class
+ * @wip
  *
  * Class that represent an ajax request that will be passed to an SRequest instance.
  * All the axios settings are supported by this class
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * const request = new SRequestConfig({
@@ -18,6 +23,7 @@ import __convert from '../time/convert';
  * });
  *
  * @see       https://github.com/axios/axios
+ * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export default class SRequestConfig {

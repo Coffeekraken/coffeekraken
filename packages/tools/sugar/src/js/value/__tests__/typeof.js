@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__typeof) => {
     describe('sugar.js.value.typeof', () => {
         it('Should return the correct typeof of the passed values', () => {

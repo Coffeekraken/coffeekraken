@@ -1,7 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name          typeDefinitionArrayObjectToString
  * @namespace     sugar.js.value
  * @type          Function
+ * @beta
  *
  * This function take as parameter a type definition object like this one:
  * {
@@ -17,6 +20,10 @@
  * @param       {Object}        typeDefinitionArrayObj       The type definition array object
  * @return      {String}                                The string representation of the type definition object
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import typeDefinitionArrayObjToString from '@coffeekraken/sugar/js/value/typeDefinitionArrayObjectToString'
  * typeDefinitionArrayObjToString([{
@@ -31,7 +38,7 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function typeDefinitionArrayObjectToString(typeDefinitionArrayObj) {
+function typeDefinitionArrayObjectToString(typeDefinitionArrayObj) {
     const parts = [];
     if (!Array.isArray(typeDefinitionArrayObj))
         typeDefinitionArrayObj = [typeDefinitionArrayObj];
@@ -45,3 +52,4 @@ export default function typeDefinitionArrayObjectToString(typeDefinitionArrayObj
     });
     return parts.join('|');
 }
+exports.default = typeDefinitionArrayObjectToString;

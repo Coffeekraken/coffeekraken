@@ -1,17 +1,18 @@
-import _deepMerge from '../object/deepMerge'
-import _isInt from '../is/integer'
-import _isClass from '../is/class'
-import _upperFirst from '../string/upperFirst'
+import _deepMerge from '../object/deepMerge';
+import _isInt from '../is/integer';
+import _isClass from '../is/class';
+import _upperFirst from '../string/upperFirst';
 
 interface ITypeofSettings {
-  of?: boolean
-  customClass?: boolean
+  of?: boolean;
+  customClass?: boolean;
 }
 
 /**
  * @name          typeof
  * @namespace          sugar.js.value
  * @type          Function
+ * @beta
  *
  * This function return the correct type of the passed value.
  * It support the recognition of arrays and return 'Array' as property type.
@@ -33,6 +34,10 @@ interface ITypeofSettings {
  * - customClass (true) {Boolean}: Specify if you want the custom classes to return theirs real names or simply Object
  * @return      {String|Object}               The type in string format, of an object if the setting "object" is set to true
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import typeof from '@coffeekraken/sugar/js/value/typeof';
  * typeof(true); // => Boolean
@@ -50,38 +55,42 @@ interface ITypeofSettings {
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = function typeOf (value: any, settings: ITypeofSettings = {}): string {
+export = function typeOf(value: any, settings: ITypeofSettings = {}): string {
   settings = _deepMerge(
     {
       of: false,
       customClass: true
     },
     settings
-  )
+  );
 
   // get the real type
-  let type: string
-  if (Array.isArray(value)) type = 'Array'
-  else if (value === null) type = 'Null'
-  else if (value === undefined) type = 'Undefined'
-  else if (typeof value === 'string') type = 'String'
-  else if (_isInt(value)) type = 'Integer'
-  else if (typeof value === 'number') type = 'Number'
-  else if (typeof value === 'boolean') type = 'Boolean'
-  else if (value instanceof RegExp) type = 'RegExp'
-  else if (settings.customClass === true && _isClass(value) && value.name !== undefined) {
-    type = _upperFirst(value.name)
+  let type: string;
+  if (Array.isArray(value)) type = 'Array';
+  else if (value === null) type = 'Null';
+  else if (value === undefined) type = 'Undefined';
+  else if (typeof value === 'string') type = 'String';
+  else if (_isInt(value)) type = 'Integer';
+  else if (typeof value === 'number') type = 'Number';
+  else if (typeof value === 'boolean') type = 'Boolean';
+  else if (value instanceof RegExp) type = 'RegExp';
+  else if (
+    settings.customClass === true &&
+    _isClass(value) &&
+    value.name !== undefined
+  ) {
+    type = _upperFirst(value.name);
   } else if (
     settings.customClass === true &&
     value.constructor !== undefined &&
     value.constructor.name !== undefined
   ) {
-    type = _upperFirst(value.constructor.name)
+    type = _upperFirst(value.constructor.name);
   } else if (settings.customClass === false && _isClass(value)) {
-    type = 'Class'
-  } else if (typeof value === 'function') type = 'Function'
-  else if (typeof value === 'object') type = 'Object'
-  else type = 'Unknown'
+    type = 'Class';
+  } else if (typeof value === 'function') type = 'Function';
+  else if (typeof value === 'object') type = 'Object';
+  else type = 'Unknown';
 
   // check if need to get the "child" types
   const avoidTypes = [
@@ -92,25 +101,25 @@ export = function typeOf (value: any, settings: ITypeofSettings = {}): string {
     'Number',
     'Boolean',
     'Unknown'
-  ]
+  ];
   if (settings.of === true && !avoidTypes.includes(type)) {
     const loopOn = Array.isArray(value)
       ? [...value.keys()]
-      : Object.keys(value)
-    const receivedTypes: string[] = []
+      : Object.keys(value);
+    const receivedTypes: string[] = [];
     loopOn.forEach((valueIndex: any) => {
-      const valueToCheck = value[valueIndex]
+      const valueToCheck = value[valueIndex];
       const childType: string = typeOf(valueToCheck, {
         of: false,
         customClass: settings.customClass
-      })
+      });
       if (!receivedTypes.includes(childType)) {
-        receivedTypes.push(childType)
+        receivedTypes.push(childType);
       }
-    })
+    });
     // save the "of" types in the result obj
-    type += `<${receivedTypes.join('|')}>`
+    type += `<${receivedTypes.join('|')}>`;
   }
 
-  return type
-}
+  return type;
+};

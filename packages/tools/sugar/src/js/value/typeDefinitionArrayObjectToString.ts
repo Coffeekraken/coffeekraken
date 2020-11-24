@@ -2,6 +2,7 @@
  * @name          typeDefinitionArrayObjectToString
  * @namespace     sugar.js.value
  * @type          Function
+ * @beta
  *
  * This function take as parameter a type definition object like this one:
  * {
@@ -16,6 +17,10 @@
  *
  * @param       {Object}        typeDefinitionArrayObj       The type definition array object
  * @return      {String}                                The string representation of the type definition object
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import typeDefinitionArrayObjToString from '@coffeekraken/sugar/js/value/typeDefinitionArrayObjectToString'

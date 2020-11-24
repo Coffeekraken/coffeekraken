@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SColor from './SColor';
 
 /**
@@ -16,6 +18,7 @@ import __SColor from './SColor';
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function color(color) {
+function color(color) {
   return new __SColor(color);
 }
+export = color;

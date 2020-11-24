@@ -1,4 +1,0 @@
-{
-  "extends": "./tsconfig.base.json",
-  "files": ["packages/tools/sugar/src/js/array/keysFirst.ts"]
-}

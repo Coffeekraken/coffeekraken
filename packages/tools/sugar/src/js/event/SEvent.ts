@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name 		                SEvent
  * @namespace           sugar.js.event
@@ -27,7 +29,7 @@
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 import customEvent from 'custom-event';
-export default customEvent;
+export = customEvent;
 
 /**
  * @name                        constructor

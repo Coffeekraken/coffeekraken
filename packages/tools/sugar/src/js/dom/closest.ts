@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __matches from './matches';
 
 /**
@@ -30,7 +32,7 @@ import __matches from './matches';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function closest($elm, selector) {
+function closest($elm, selector) {
   const originalElm = $elm;
   $elm = $elm.parentNode;
   while ($elm && $elm != originalElm.ownerDocument) {
@@ -43,3 +45,4 @@ export default function closest($elm, selector) {
   }
   return null;
 }
+export = closest;

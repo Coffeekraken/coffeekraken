@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isNode from '../is/node';
 
 /**
@@ -17,7 +19,7 @@ import __isNode from '../is/node';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 if (__isNode()) {
-  export default [
+  export = [
     'Number',
     'String',
     'Symbol',
@@ -30,7 +32,7 @@ if (__isNode()) {
     'Function'
   ];
 } else {
-  export default [
+  export = [
     'Number',
     'String',
     'Symbol',

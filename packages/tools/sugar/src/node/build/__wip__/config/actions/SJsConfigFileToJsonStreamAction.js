@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 var _a;
 const __webpack = require('webpack');
 const __getFilename = require('../../../fs/filename');

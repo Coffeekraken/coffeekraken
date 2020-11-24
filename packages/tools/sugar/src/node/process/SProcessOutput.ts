@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import ISProcessOutput, {
   ISProcessOutputCtor,
   ISProcessOutputSettings
@@ -9,11 +11,16 @@ import _deepMerge from '../object/deepMerge';
  * @name          SProcessOutput
  * @namespace     sugar.node.process
  * @type          Class
+ * @wip
  *
  * This class represent the base one for all the process "output"
  * compatible setting.
  *
  * @param     {ISProcessOutputSettings}     [settings={}]       Some settings to configure your output
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import SProcessOutput from '@coffeekraken/sugar/node/process/SProcessOutput';
@@ -72,4 +79,4 @@ const Cls: ISProcessOutputCtor = class SProcessOutput
   }
 };
 
-export default Cls;
+export = Cls;

@@ -1,19 +1,17 @@
-import __funcToClass from 'func-to-classes';
-/**
- * @name            functionToClass
- * @namespace       sugar.js.class
- * @type            Function
- *
- * Transform ES5 Functions to ES6 Classes
- *
- * @param       {Function}          function        The function to transform into class
- * @return      {Class}                             An ES6 class version of your function
- *
- * @example         js
- * import functionToClass from '@coffeekraken/sugar/js/class/functionToClass';
- * functionToClass(function coco() {});
- *
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export default __funcToClass;
+// @ts-nocheck
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "func-to-classes"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var func_to_classes_1 = __importDefault(require("func-to-classes"));
+    return func_to_classes_1.default;
+});

@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__delete) => {
     describe('sugar.js.object.delete', () => {
         it('Should delete correctly a simple property', () => {

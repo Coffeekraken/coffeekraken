@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SActionsStreamAction from '../SActionsStreamAction';
 import __deepMerge from '../../object/deepMerge';
 import __SInterface from '../../class/SInterface';
@@ -16,6 +18,7 @@ class SFrontspecScssStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
+ * @wip
  *
  * This action take care of integrating the previous finded "frontspec.json" files
  * into the actual codebase handled by this stream action.
@@ -23,9 +26,14 @@ class SFrontspecScssStreamActionInterface extends __SInterface {
  * @param       {Object}        [settings={}]          A settings object to configure your action
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SFrontspecScssStreamAction extends __SActionsStreamAction {
+export = class SFrontspecScssStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object

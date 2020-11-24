@@ -1,3 +1,18 @@
+"use strict";
+// @ts-nocheck
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,11 +22,38 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const __SAuthAdapter = require('./SAuthAdapter');
-const __blessed = require('blessed');
-const __terminalKit = require('terminal-kit');
-const __parseHtml = require('../../../terminal/parseHtml');
-const __ora = require('ora');
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __SAuthAdapter = require('./SAuthAdapter');
+var __blessed = require('blessed');
+var __terminalKit = require('terminal-kit');
+var __parseHtml = require('../../../terminal/parseHtml');
+var __ora = require('ora');
 /**
  * @name                            STerminalAuthAdapter
  * @namespace           node.auth.adapters
@@ -21,7 +63,8 @@ const __ora = require('ora');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
+module.exports = /** @class */ (function (_super) {
+    __extends(STerminalAuthAdapter, _super);
     /**
      * @name                          constructor
      * @type                          Function
@@ -30,10 +73,10 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor() {
-        super(['basic', 'bearer']);
+    function STerminalAuthAdapter() {
+        return _super.call(this, ['basic', 'bearer']) || this;
     }
-    _resetScreen() {
+    STerminalAuthAdapter.prototype._resetScreen = function () {
         // if (this._screen) this._screen.destroy();
         if (!this._screen) {
             this._screen = __blessed.screen({
@@ -59,7 +102,7 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
             }
         });
         this._screen.append(this._container);
-    }
+    };
     /**
      * @name                      _success
      * @type                      Function
@@ -69,25 +112,26 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _success() {
-        return new Promise((resolve, reject) => {
-            this._isValidating = false;
-            clearTimeout(this._validationTimeout);
-            this._resetScreen();
-            const success = __blessed.box({
+    STerminalAuthAdapter.prototype._success = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            _this._isValidating = false;
+            clearTimeout(_this._validationTimeout);
+            _this._resetScreen();
+            var success = __blessed.box({
                 width: '100%',
                 content: __parseHtml('<green>✓ Your auth info have been validated!</green>'),
                 align: 'center'
             });
-            this._container.height = 1;
-            this._container.append(success);
-            this._screen.render();
-            setTimeout(() => {
+            _this._container.height = 1;
+            _this._container.append(success);
+            _this._screen.render();
+            setTimeout(function () {
                 resolve();
-                this._screen.destroy();
+                _this._screen.destroy();
             }, 2000);
         });
-    }
+    };
     /**
      * @name                      _validation
      * @type                      Function
@@ -97,29 +141,33 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _validation() {
-        return __awaiter(this, void 0, void 0, function* () {
-            if (!this._isValidating)
-                this._isValidating = true;
-            this._resetScreen();
-            if (!this._oraLoader) {
-                this._oraLoader = __ora('Please wait while your auth info are validated...');
-            }
-            const loading = __blessed.text({
-                content: this._oraLoader.frame(),
-                align: 'center'
+    STerminalAuthAdapter.prototype._validation = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var loading;
+            var _this = this;
+            return __generator(this, function (_a) {
+                if (!this._isValidating)
+                    this._isValidating = true;
+                this._resetScreen();
+                if (!this._oraLoader) {
+                    this._oraLoader = __ora('Please wait while your auth info are validated...');
+                }
+                loading = __blessed.text({
+                    content: this._oraLoader.frame(),
+                    align: 'center'
+                });
+                this._container.height = 1;
+                this._container.append(loading);
+                this._screen.render();
+                if (this._isValidating) {
+                    this._validationTimeout = setTimeout(function () {
+                        _this._validation();
+                    }, 20);
+                }
+                return [2 /*return*/, true];
             });
-            this._container.height = 1;
-            this._container.append(loading);
-            this._screen.render();
-            if (this._isValidating) {
-                this._validationTimeout = setTimeout(() => {
-                    this._validation();
-                }, 20);
-            }
-            return true;
         });
-    }
+    };
     /**
      * @name                      _basic
      * @type                      Function
@@ -135,13 +183,15 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _basic(settings = {}) {
-        return new Promise((resolve, reject) => {
-            this._resetScreen();
-            this._isValidating = false;
-            clearTimeout(this._validationTimeout);
-            const titleY = 0;
-            const title = __blessed.text({
+    STerminalAuthAdapter.prototype._basic = function (settings) {
+        var _this = this;
+        if (settings === void 0) { settings = {}; }
+        return new Promise(function (resolve, reject) {
+            _this._resetScreen();
+            _this._isValidating = false;
+            clearTimeout(_this._validationTimeout);
+            var titleY = 0;
+            var title = __blessed.text({
                 height: 1,
                 top: titleY,
                 style: {
@@ -149,16 +199,16 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
                 },
                 content: settings.title || 'Basic auth'
             });
-            const infoY = settings.info ? titleY + 2 : titleY;
-            const info = __blessed.text({
+            var infoY = settings.info ? titleY + 2 : titleY;
+            var info = __blessed.text({
                 top: infoY,
                 style: {
                     fg: 'white'
                 },
                 content: settings.info || ''
             });
-            const errorY = settings.error ? infoY + 2 : infoY;
-            const error = __blessed.text({
+            var errorY = settings.error ? infoY + 2 : infoY;
+            var error = __blessed.text({
                 height: 1,
                 top: errorY,
                 style: {
@@ -166,8 +216,8 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
                 },
                 content: settings.error || ''
             });
-            const usernameLabelY = errorY + 2;
-            const usernameLabel = __blessed.text({
+            var usernameLabelY = errorY + 2;
+            var usernameLabel = __blessed.text({
                 height: 1,
                 top: usernameLabelY,
                 style: {
@@ -175,8 +225,8 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
                 },
                 content: 'Username: '
             });
-            const usernameY = usernameLabelY + 2;
-            const username = __blessed.textbox({
+            var usernameY = usernameLabelY + 2;
+            var username = __blessed.textbox({
                 name: 'username',
                 height: 3,
                 top: usernameY,
@@ -197,8 +247,8 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
                     right: 2
                 }
             });
-            const passwordLabelY = usernameY + 4;
-            const passwordLabel = __blessed.text({
+            var passwordLabelY = usernameY + 4;
+            var passwordLabel = __blessed.text({
                 height: 1,
                 top: passwordLabelY,
                 style: {
@@ -206,8 +256,8 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
                 },
                 content: 'Password: '
             });
-            const passwordY = passwordLabelY + 2;
-            const password = __blessed.textbox({
+            var passwordY = passwordLabelY + 2;
+            var password = __blessed.textbox({
                 name: 'password',
                 height: 3,
                 top: passwordY,
@@ -229,8 +279,8 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
                     right: 2
                 }
             });
-            const buttonY = passwordY + 4;
-            const button = __blessed.button({
+            var buttonY = passwordY + 4;
+            var button = __blessed.button({
                 height: 3,
                 width: 15,
                 top: buttonY,
@@ -252,37 +302,37 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
                     right: 2
                 }
             });
-            this._container.append(title);
+            _this._container.append(title);
             if (settings.info) {
-                this._container.append(info);
+                _this._container.append(info);
             }
             if (settings.error) {
-                this._container.append(error);
+                _this._container.append(error);
             }
-            this._container.append(usernameLabel);
-            this._container.append(username);
-            this._container.append(passwordLabel);
-            this._container.append(password);
-            this._container.append(button);
-            this._screen.render();
+            _this._container.append(usernameLabel);
+            _this._container.append(username);
+            _this._container.append(passwordLabel);
+            _this._container.append(password);
+            _this._container.append(button);
+            _this._screen.render();
             username.focus();
-            username.key(['enter'], (e) => {
-                this._container.submit();
+            username.key(['enter'], function (e) {
+                _this._container.submit();
             });
-            password.key(['enter'], (e) => {
-                this._container.submit();
+            password.key(['enter'], function (e) {
+                _this._container.submit();
             });
-            button.on('press', (e) => {
-                this._container.submit();
+            button.on('press', function (e) {
+                _this._container.submit();
             });
-            this._container.on('submit', (e) => {
+            _this._container.on('submit', function (e) {
                 resolve({
                     username: e.username,
                     password: e.password
                 });
             });
         });
-    }
+    };
     /**
      * @name                      _bearer
      * @type                      Function
@@ -298,13 +348,15 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _bearer(settings = {}) {
-        return new Promise((resolve, reject) => {
-            this._resetScreen();
-            this._isValidating = false;
-            clearTimeout(this._validationTimeout);
-            const titleY = 0;
-            const title = __blessed.text({
+    STerminalAuthAdapter.prototype._bearer = function (settings) {
+        var _this = this;
+        if (settings === void 0) { settings = {}; }
+        return new Promise(function (resolve, reject) {
+            _this._resetScreen();
+            _this._isValidating = false;
+            clearTimeout(_this._validationTimeout);
+            var titleY = 0;
+            var title = __blessed.text({
                 height: 1,
                 top: titleY,
                 style: {
@@ -312,24 +364,24 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
                 },
                 content: settings.title || 'Bearer auth'
             });
-            const infoY = settings.info ? titleY + 2 : titleY;
-            const info = __blessed.text({
+            var infoY = settings.info ? titleY + 2 : titleY;
+            var info = __blessed.text({
                 top: infoY,
                 style: {
                     fg: 'white'
                 },
                 content: settings.info || ''
             });
-            const errorY = settings.error ? infoY + 2 : infoY;
-            const error = __blessed.text({
+            var errorY = settings.error ? infoY + 2 : infoY;
+            var error = __blessed.text({
                 top: errorY,
                 style: {
                     fg: 'red'
                 },
                 content: settings.error || ''
             });
-            const tokenLabelY = errorY + 2;
-            const tokenLabel = __blessed.text({
+            var tokenLabelY = errorY + 2;
+            var tokenLabel = __blessed.text({
                 height: 1,
                 top: tokenLabelY,
                 style: {
@@ -337,8 +389,8 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
                 },
                 content: 'Bearer token: '
             });
-            const tokenY = tokenLabelY + 2;
-            const token = __blessed.textbox({
+            var tokenY = tokenLabelY + 2;
+            var token = __blessed.textbox({
                 name: 'token',
                 height: 3,
                 top: tokenY,
@@ -359,8 +411,8 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
                     right: 2
                 }
             });
-            const buttonY = tokenY + 4;
-            const button = __blessed.button({
+            var buttonY = tokenY + 4;
+            var button = __blessed.button({
                 height: 3,
                 width: 15,
                 top: buttonY,
@@ -382,29 +434,30 @@ module.exports = class STerminalAuthAdapter extends __SAuthAdapter {
                     right: 2
                 }
             });
-            this._container.append(title);
+            _this._container.append(title);
             if (settings.info) {
-                this._container.append(info);
+                _this._container.append(info);
             }
             if (settings.error) {
-                this._container.append(error);
+                _this._container.append(error);
             }
-            this._container.append(tokenLabel);
-            this._container.append(token);
-            this._container.append(button);
-            this._screen.render();
+            _this._container.append(tokenLabel);
+            _this._container.append(token);
+            _this._container.append(button);
+            _this._screen.render();
             token.focus();
-            token.key(['enter'], (e) => {
-                this._container.submit();
+            token.key(['enter'], function (e) {
+                _this._container.submit();
             });
-            button.on('press', (e) => {
-                this._container.submit();
+            button.on('press', function (e) {
+                _this._container.submit();
             });
-            this._container.on('submit', (e) => {
+            _this._container.on('submit', function (e) {
                 resolve({
                     token: e.token
                 });
             });
         });
-    }
-};
+    };
+    return STerminalAuthAdapter;
+}(__SAuthAdapter));

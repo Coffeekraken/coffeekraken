@@ -1,4 +1,14 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -12,7 +22,7 @@ const deepMerge_1 = __importDefault(require("../../node/object/deepMerge"));
 const upperFirst_1 = __importDefault(require("../../node/string/upperFirst"));
 const find_package_json_1 = __importDefault(require("find-package-json"));
 const parseArgs_1 = __importDefault(require("../../node/cli/parseArgs"));
-exports.default = async (stringArgs = '') => {
+exports.default = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function* () {
     const f = find_package_json_1.default(__dirname);
     let file = f.next();
     let finalFile, rootPath;
@@ -44,7 +54,7 @@ exports.default = async (stringArgs = '') => {
     const snippetScope = args.language === 'js' ? 'javascript' : args.language;
     const snippetsObj = {};
     const filepathesProcessed = [];
-    const files = await find_in_files_1.default.find('@namespace', `${__dirname}/../../${args.language}`, '.js$');
+    const files = yield find_in_files_1.default.find('@namespace', `${__dirname}/../../${args.language}`, '.js$');
     for (let i = 0; i < Object.keys(files).length; i++) {
         const filepath = Object.keys(files)[i];
         if (filepath.includes('__wip__'))
@@ -150,4 +160,4 @@ exports.default = async (stringArgs = '') => {
             console.log(e);
         }
     }
-};
+});

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __convert from '../unit/convert';
 
 /**
@@ -28,7 +30,7 @@ import __convert from '../unit/convert';
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function getTranslateProperties($elm, unit = 'px') {
+function getTranslateProperties($elm, unit = 'px') {
   if (!window.getComputedStyle) return;
   let idx, mat;
   const style = getComputedStyle($elm);
@@ -139,3 +141,4 @@ export default function getTranslateProperties($elm, unit = 'px') {
     z: 0
   };
 }
+export = getTranslateProperties;

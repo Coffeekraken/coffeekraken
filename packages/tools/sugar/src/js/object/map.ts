@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                map
  * @namespace           sugar.js.object
@@ -33,7 +35,7 @@
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function map(object, processor) {
+function map(object, processor) {
   Object.keys(object).forEach((prop) => {
     const res = processor(object[prop], prop);
     if (res === -1) delete object[prop];
@@ -41,3 +43,4 @@ export default function map(object, processor) {
   });
   return object;
 }
+export = map;

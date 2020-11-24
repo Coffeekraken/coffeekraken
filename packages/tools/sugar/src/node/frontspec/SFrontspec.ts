@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __copy from '../clipboard/copy';
 import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
@@ -15,6 +17,7 @@ import __sugarConfig from '../config/sugar';
  * @namespace           sugar.node.doc
  * @type                Class
  * @extends             SPromise
+ * @wip
  *
  * This class represent the ```frontspec.json``` file and allows you to generate it from some sources (glob pattern(s))
  * and save it inside a directory you choose.
@@ -29,7 +32,9 @@ import __sugarConfig from '../config/sugar';
  * @setting       {String}      [sources.[name].rootDir=__packageRoot()]     Specify the directory where to go search from
  * @setting       {Integer}     [sources.[name].dirDepth=3]                  Specify the maximum directories the scan will go down
  *
- * @todo        update doc
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example             js
  * import SFrontspec from '@coffeekraken/sugar/node/doc/SFrontspec';
@@ -41,7 +46,7 @@ import __sugarConfig from '../config/sugar';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SFrontspec extends __SPromise {
+export = class SFrontspec extends __SPromise {
   /**
    * @name          _entries
    * @type           Array<Object>

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __webpack = require('webpack');
 const __getFilename = require('../../../fs/filename');
 const __packageRoot = require('../../../path/packageRoot');

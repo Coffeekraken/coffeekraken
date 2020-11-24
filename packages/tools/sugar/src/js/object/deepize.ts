@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __set from './set';
 /**
  * @name          deepize
@@ -30,10 +32,11 @@ import __set from './set';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function deepize(object) {
+function deepize(object) {
   const finalObject = {};
   for (const key in object) {
     __set(finalObject, key, object[key]);
   }
   return finalObject;
 }
+export = deepize;

@@ -1,10 +1,16 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const filename_1 = __importDefault(require("../../fs/filename"));
 const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
+/**
+ * @wip
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ */
 // my-custom-reporter.js
 class STestJestOutputReporter {
     constructor(globalConfig, options) {
@@ -64,4 +70,4 @@ class STestJestOutputReporter {
         console.log(`- <red>failed</red> tests: <red>${result.numFailedTests}</red>`);
     }
 }
-exports.default = STestJestOutputReporter;
+module.exports = STestJestOutputReporter;

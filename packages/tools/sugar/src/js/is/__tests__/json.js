@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__testFn) => {
     describe('sugar.js.is.json', () => {
         it('Should detect the passed variable type correctly', () => {

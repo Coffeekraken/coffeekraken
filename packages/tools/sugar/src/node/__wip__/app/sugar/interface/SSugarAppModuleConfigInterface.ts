@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __SInterface = require('../../../class/SInterface');
 const __sugarConfig = require('../../../config/sugar');
 
@@ -6,9 +8,14 @@ const __sugarConfig = require('../../../config/sugar');
  * @namespace           sugar.node.ui.sugar.interface
  * @type                Class
  * @extends             SInterface
+ * @wip
  *
  * This class represent the interface that describe a sugar ui module object
  * structure and requirements
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

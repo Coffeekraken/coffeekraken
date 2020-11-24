@@ -1,8 +1,17 @@
+// @ts-nocheck
+
+/**
+ * @wip
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ */
+
 import __fs from 'fs';
 import __SScssCompiler from '../../../../scss/SScssCompiler';
 import __tmpDir from '../../../../fs/tmpDir';
 
-export default {
+export = {
   name: 'esbuildScssLoaderPlugin',
   setup(build) {
     // Load ".txt" files and return an array of words

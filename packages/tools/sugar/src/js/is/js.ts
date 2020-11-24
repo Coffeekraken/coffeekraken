@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                                      isJs
  * @namespace           sugar.js.is
@@ -19,6 +21,6 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default () => {
+export = () => {
   return typeof window !== 'undefined';
 };

@@ -1,9 +1,12 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 
 /**
  * @name            findImportStatements
  * @namespace       sugar.node.scss
  * @type            Function
+ * @beta
  *
  * This function simply parse the passed string to extract all the @import and @use statements
  *
@@ -13,6 +16,10 @@ import __deepMerge from '../object/deepMerge';
  *
  * @setting      {Boolean}       [use=true]      Specify if you want to extract the @use statements
  * @setting      {Boolean}      [imports=true]    Specify if you want to extract the @import statements
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import findImportStatements from '@coffeekraken/sugar/node/scss/findImportStatements';
@@ -32,7 +39,7 @@ import __deepMerge from '../object/deepMerge';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function findImportStatements(string, settings = {}) {
+function findImportStatements(string, settings = {}) {
   settings = __deepMerge(
     {
       use: true,
@@ -83,3 +90,4 @@ export default function findImportStatements(string, settings = {}) {
 
   return statements;
 }
+export = findImportStatements;

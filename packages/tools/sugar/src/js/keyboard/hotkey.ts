@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import hotkeys from 'hotkeys-js/dist/hotkeys.common';
 import __SPromise from '../promise/SPromise';
 hotkeys.filter = function (event) {
@@ -43,7 +45,7 @@ hotkeys.filter = function (event) {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function (hotkey, settings = {}) {
+function hotkey (hotkey, settings = {}) {
   return new __SPromise(
     (resolve, reject, trigger, cancel) => {
       // merge default settings with passed ones:
@@ -70,3 +72,4 @@ export default function (hotkey, settings = {}) {
     hotkeys.unbind(hotkey);
   });
 }
+export = hotkey;

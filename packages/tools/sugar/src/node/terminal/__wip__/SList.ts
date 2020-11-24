@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __terminalKit = require('terminal-kit').terminal;
 
 const __cursorPos = require('./cursorPos');

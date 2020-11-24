@@ -1,11 +1,18 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 
 /**
  * @name                                SConfigAdapter
  * @namespace           sugar.js.config.adapters
  * @type                                Class
+ * @beta
  *
  * Base class for SCache adapters
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example             js
  * class SConfigCoolAdapter extends SConfigAdapter {
@@ -23,9 +30,10 @@ import __deepMerge from '../../object/deepMerge';
  *    }
  * }
  *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SConfigAdapter {
+export = class SConfigAdapter {
   /**
    * @name                              _settings
    * @type                              Object

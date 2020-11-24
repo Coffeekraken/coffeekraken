@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __toString from '../string/toString';
 import __parseArgs from './parseArgs';
 import __deepMerge from '../object/deepMerge';
@@ -6,6 +8,7 @@ import __deepMerge from '../object/deepMerge';
  * @name                  argsToString
  * @namespace           sugar.js.cli
  * @type                  Function
+ * @beta
  *
  * This function take a simple object, a definitionObj object and return you the string version that you can pass
  * directly to the command line interface
@@ -15,7 +18,10 @@ import __deepMerge from '../object/deepMerge';
  * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definitionObj object in your command line string, or if you just want the one passed in your argsObj argument
  * - alias (true) {Boolean}: Specify if you want to use the aliases or not in the generated command
  * - definitionObj (null) {Object}: Specify a definition object to use
- * @todo            check documentation
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import argsToString from '@coffeekraken/sugar/js/cli/argsToString';
@@ -48,7 +54,7 @@ import __deepMerge from '../object/deepMerge';
 // TODO: support deep object structure
 // TODO: support required args
 
-export default function argsToString(args, settings = {}) {
+function argsToString(args, settings = {}) {
   settings = __deepMerge(
     {
       definitionObj: null,
@@ -111,3 +117,4 @@ export default function argsToString(args, settings = {}) {
 
   return cliArray.join(' ');
 }
+export = argsToString;

@@ -1,4 +1,9 @@
-import __dispatchEvent from '../dispatchEvent';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const dispatchEvent_1 = __importDefault(require("../dispatchEvent"));
 describe('sugar.js.dom.dispatchEvent', () => {
     document.body.innerHTML = `
       <div id="testing">
@@ -11,7 +16,7 @@ describe('sugar.js.dom.dispatchEvent', () => {
             return;
         isDetected = true;
     });
-    __dispatchEvent($elm, 'coco', {
+    dispatchEvent_1.default($elm, 'coco', {
         custom: true
     });
     it('Should detect the dispatched custom event with custom data attached', () => {

@@ -1,5 +1,6 @@
 #!/usr/bin/env node --trace-warnings --trace-uncaught
 "use strict";
+// @ts-nocheck
 require('../node/index');
 // const __exitCleanup = require('../node/process/exitCleanup');
 /**

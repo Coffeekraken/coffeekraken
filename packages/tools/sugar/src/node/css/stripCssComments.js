@@ -1,14 +1,15 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const strip_css_comments_1 = __importDefault(require("strip-css-comments"));
 /**
  * @name          stripCssComments
  * @namespace     sugar.js.css
  * @type          Function
+ * @wip
  *
  * This function simply remove all the css comments like:
  * - Multiline blocks css comments begining with /* *, ending with * /
@@ -22,6 +23,8 @@ const strip_css_comments_1 = __importDefault(require("strip-css-comments"));
  * @setting     {Boolean}     [line=true]       Remove the line comments
  *
  * @todo        tests
+ * @todo        interface
+ * @todo        doc
  *
  * @example       js
  * import stripCssComments from '@coffeekraken/sugar/js/css/stripCssComments';
@@ -51,4 +54,4 @@ function stripCssComments(css, settings = {}) {
     }
     return css;
 }
-exports.default = stripCssComments;
+module.exports = stripCssComments;

@@ -1,9 +1,11 @@
+// @ts-nocheck
+
 /**
  * @wip
  * @todo      interface
  * @todo      doc
  */
-export default `
+export = `
 {{#if param}}
     <div class="s-db-parameters">
       <h2 class="s-h2 s-m-t s-m-b-small">

@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const packageRoot_1 = __importDefault(require("../../../path/packageRoot"));
 const fs_1 = __importDefault(require("fs"));
 const sugar_1 = __importDefault(require("../../../config/sugar"));
@@ -12,6 +12,7 @@ const deepMap_1 = __importDefault(require("../../../object/deepMap"));
  * @name            frontspecMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
+ * @wip
  *
  * This function describe the middleware that will fetch the ```frontspec.json``` file at the root of
  * your server directory and add it to the template data sended to the rendered view
@@ -19,6 +20,10 @@ const deepMap_1 = __importDefault(require("../../../object/deepMap"));
  * @param           {Object}            req             The request made on the express server
  * @param           {Object}            res             The response object of the express server
  * @param           {Function}          next            The next function to call when the middleware has finished his job
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import express from 'express';
@@ -47,11 +52,8 @@ function frontspecMiddleware(settings = {}) {
             }
             return value;
         });
-        res.templateData = {
-            ...(res.templateData || {}),
-            frontspec
-        };
+        res.templateData = Object.assign(Object.assign({}, (res.templateData || {})), { frontspec });
         next();
     };
 }
-exports.default = frontspecMiddleware;
+module.exports = frontspecMiddleware;

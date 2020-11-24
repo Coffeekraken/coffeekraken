@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __packageRoot from '../../../path/packageRoot';
 import __fs from 'fs';
 import __sugarConfig from '../../../config/sugar';
@@ -9,12 +11,17 @@ import __extension from '../../../fs/extension';
  * @name            resolveExtensionFreePath
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
+ * @wip
  *
  * This function will try to resolve extension free requests like node modules, etc...
  *
  * @param           {Object}            req             The request made on the express server
  * @param           {Object}            res             The response object of the express server
  * @param           {Function}          next            The next function to call when the middleware has finished his job
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import express from 'express';
@@ -26,7 +33,7 @@ import __extension from '../../../fs/extension';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function resolveExtensionFreePath(settings = {}) {
+function resolveExtensionFreePath(settings = {}) {
   settings = __deepMerge(
     {
       exclude: []
@@ -57,3 +64,4 @@ export default function resolveExtensionFreePath(settings = {}) {
     next();
   };
 }
+export = resolveExtensionFreePath;

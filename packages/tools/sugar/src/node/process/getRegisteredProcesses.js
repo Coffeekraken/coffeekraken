@@ -1,13 +1,18 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name              getRegisteredProcesses
  * @namespace           sugar.node.process
  * @type              Function
+ * @wip
  *
  * This function gives you back the processes stack registered using the "registerProcess" function.
  *
  * @return      {Object}              The registered processes stack
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import getRegisteredProcesses from '@coffeekraken/sugar/node/process/getRegisteredProcesses';
@@ -21,4 +26,4 @@ function getRegisteredProcesses() {
         global._registeredProcesses = {};
     return global._registeredProcesses;
 }
-exports.default = getRegisteredProcesses;
+module.exports = getRegisteredProcesses;

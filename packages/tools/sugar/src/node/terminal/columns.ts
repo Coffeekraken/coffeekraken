@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __splitLineEvery from './__wip__/splitLineEvery';
 import __countLine from '../string/countLine';
 import __deepMerge from '../object/deepMerge';
@@ -6,6 +8,7 @@ import __deepMerge from '../object/deepMerge';
  * @name                                          columns
  * @namespace           sugar.node.terminal
  * @type                                          Function
+ * @beta
  *
  * Display your content using columns. The number of columns is defined by the number of items in the content array
  *
@@ -15,6 +18,11 @@ import __deepMerge from '../object/deepMerge';
  * - padding (process.env.STDOUT_PADDING || 3) {Number}: The padding to apply on the sides
  * @return                {String}                                                  The string to log in the terminal
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ * @todo      move in "format" folder
+ *
  * @example               js
  * import columns from '@coffeekraken/sugar/node/terminal/columns';
  * columns([
@@ -22,9 +30,10 @@ import __deepMerge from '../object/deepMerge';
  *  'How are you?'
  * ]);
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function columns(content, settings = {}) {
+function columns(content, settings = {}) {
   settings = __deepMerge(
     {
       width: process.env.STDOUT_COLUMNS || process.stdout.columns,
@@ -113,3 +122,4 @@ export default function columns(content, settings = {}) {
 
   return lines.join('\n');
 }
+export = columns;

@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const md5_1 = __importDefault(require("crypto-js/md5"));
 const toString_1 = __importDefault(require("../string/toString"));
 const parse_1 = __importDefault(require("../string/parse"));
@@ -11,9 +11,14 @@ const __encryptedMessages = {};
  * @name            md5
  * @namespace           sugar.js.crypt
  * @type            Object
+ * @wip
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the md5 algorithm
  *
+ * @todo        interface
+ * @todo        doc
+ *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 const api = {
@@ -58,4 +63,4 @@ const api = {
 };
 md5_1.default.encrypt = api.encrypt;
 md5_1.default.decrypt = api.decrypt;
-exports.default = md5_1.default;
+module.exports = md5_1.default;

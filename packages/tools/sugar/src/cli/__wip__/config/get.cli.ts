@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseArgs from '../../node/cli/parseArgs';
 import __sugarConfig from '../../node/config/sugar';
 

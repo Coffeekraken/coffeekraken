@@ -1,9 +1,12 @@
+// @ts-nocheck
+
 import __parseString from '../string/parse';
 
 /**
  * @name                                parseSchema
  * @namespace           sugar.js.url
  * @type                                Function
+ * @wip
  *
  * This function take two arguments. The first one is the url to parse and the second is a schema to scan the url with.
  * The schema describe the pathname of an url and tell's how to analyze it.
@@ -21,6 +24,10 @@ import __parseString from '../string/parse';
  * - errors (null) {Object}: An object with all the params in error with the description of the error for each
  * - params (null) {Object}: An object containing every params grabed from the url with their values for each
  * - match (true) {Object}: A boolean that tells you if the parsed url match the passed schema or not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import parseSchema from '@coffeekraken/sugar/js/url/parseSchema';
@@ -52,9 +59,10 @@ import __parseString from '../string/parse';
  * //   }
  * // }
  *
+ * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default function parseSchema(url, schema) {
+function parseSchema(url, schema) {
   const rawSchemaString = schema;
   const rawUrlString = url;
 
@@ -138,7 +146,7 @@ export default function parseSchema(url, schema) {
     }
 
     if (!part && !schema.optional) {
-      let errorObj = {
+      const errorObj = {
         type: 'optional',
         description: `This param "${schema.name}" cannot be null...`
       };
@@ -185,3 +193,4 @@ export default function parseSchema(url, schema) {
     url: rawUrlString
   };
 }
+export = parseSchema;

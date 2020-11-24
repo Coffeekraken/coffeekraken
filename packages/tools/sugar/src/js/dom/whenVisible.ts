@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isVisible from './isVisible';
 import __closestNotVisible from './closestNotVisible';
 
@@ -26,7 +28,7 @@ import __closestNotVisible from './closestNotVisible';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function whenVisible(elm, cb = null) {
+function whenVisible(elm, cb = null) {
   return new Promise((resolve, reject) => {
     // variables
     let isSelfVisible = false,
@@ -153,3 +155,4 @@ export default function whenVisible(elm, cb = null) {
     _cb();
   });
 }
+export = whenVisible;

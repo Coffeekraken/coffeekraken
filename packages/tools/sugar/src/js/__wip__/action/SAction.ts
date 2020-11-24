@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __autoCast from '../string/autoCast';
 import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';

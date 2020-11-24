@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import MobileDetect from 'mobile-detect';
 /**
  * @name        isMobile
@@ -24,7 +26,8 @@ import MobileDetect from 'mobile-detect';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isMobile(ua = navigator.userAgent) {
+function isMobile(ua = navigator.userAgent) {
   const md = new MobileDetect(ua);
   return md.mobile() !== null;
 }
+export = isMobile;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __blessed from 'blessed';
 import __parseHtml from '../../terminal/parseHtml';
@@ -16,6 +18,7 @@ import { print, stringify } from 'q-i';
  * @name                    SLogPanel
  * @namespace           sugar.node.blessed
  * @type                    Class
+ * @wip
  *
  * This class define a "panel" in the terminal that you can easily configure to have the look and feel that you want
  * through simple settings described bellow.
@@ -23,6 +26,10 @@ import { print, stringify } from 'q-i';
  * @param           {String}          name            Specify a name for this panel. The name has to stick to this characters only ```[a-zA-Z0-9_-]```
  * @param           {Object}          [settings={}]   An object of settings described bellow:
  * - screen (true) {Boolean}: Specify if you want your panel wrapped inside an "blessed"(https://www.npmjs.com/package/blessed) screen object. Useful when you just want to render your panel in the terminal. If you have your own screen object
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import SLogPanel from '@coffeekraken/sugar/node/terminal/SLogPanel';
@@ -35,7 +42,7 @@ import { print, stringify } from 'q-i';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SLogPanel extends __SBlessedComponent {
+export = class SLogPanel extends __SBlessedComponent {
   /**
    * @name              _name
    * @type              String
@@ -322,8 +329,8 @@ export default class SLogPanel extends __SBlessedComponent {
         beforeEachLine = '';
       }
 
-      let formatedBeforeEachLine = __parseHtml(beforeEachLine);
-      let formatedBeforeLog = __parseHtml(beforeLog);
+      const formatedBeforeEachLine = __parseHtml(beforeEachLine);
+      const formatedBeforeLog = __parseHtml(beforeLog);
       let formatedMessage = m;
 
       // split lines

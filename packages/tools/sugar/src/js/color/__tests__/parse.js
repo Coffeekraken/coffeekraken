@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__parse) => {
     describe('sugar.js.color.parse', () => {
         it('Should parse the string #ff00ff to rgba object correctly', () => {

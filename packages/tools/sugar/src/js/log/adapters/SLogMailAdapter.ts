@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __isNode from '../../is/node';
 import Email from './vendors/smtp.js';
@@ -29,7 +31,7 @@ import __mailHtmlPreset from '../htmlPresets/mail';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SLogMailAdapter {
+export = class SLogMailAdapter {
   /**
    * @name          _settings
    * @type          Object

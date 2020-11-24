@@ -1,16 +1,22 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../node/object/deepMerge"));
 /**
  * @name            replaceTokens
  * @namespace           sugar.js.string
  * @type            Function
+ * @stable
  *
  * This function takes as parameter a tokened string like "something [cool]", an object
  * of arguments/values and return the processed string with the tokens replaced by the arguments values.
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ * @todo      add setting to define tokens delimiter
  *
  * @param       {String}          string          The string to process
  * @param       {Object}          argsObj         The arguments/value object
@@ -39,4 +45,4 @@ function replaceTokens(string, argsObj, settings = {}) {
     }
     return string;
 }
-exports.default = replaceTokens;
+module.exports = replaceTokens;

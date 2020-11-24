@@ -1,20 +1,28 @@
+// @ts-nocheck
+
 /**
  * @name                        parseRgba
  * @namespace           sugar.js.color
  * @type                        Function
+ * @stable
  *
  * Parse RGBA string and return an object
  *
  * @param 	          {string}	            rgbaString		            The rgba string (rgba(r,g,b,a)) to parse
  * @return 	          {object} 				                              	The rgba object representation
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example           js
  * import parseRgba from '@coffeekraken/sugar/js/color/parseRgba';
  * parseRgba('rgba(20,10,100,20)');
  *
+ * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function parseRgba(rgbaString) {
+function parseRgba(rgbaString) {
   rgbaString = rgbaString.toLowerCase();
   const string = rgbaString
     .replace('rgba(', '')
@@ -28,3 +36,4 @@ export default function parseRgba(rgbaString) {
     a: parseInt(array[3])
   };
 }
+export = parseRgba;

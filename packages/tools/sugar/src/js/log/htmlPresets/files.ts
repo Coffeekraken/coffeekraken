@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __replaceTags from '../../html/replaceTags';
 
 /**
@@ -18,7 +20,7 @@ import __replaceTags from '../../html/replaceTags';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function files(text) {
+function files(text) {
   return __replaceTags(text, {
     black: (tag, content) => content,
     red: (tag, content) => content,
@@ -47,3 +49,4 @@ export default function files(text) {
     br: (tag, content) => '\n'
   });
 }
+export = files;

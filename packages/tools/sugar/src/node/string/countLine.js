@@ -1,14 +1,15 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const strip_ansi_1 = __importDefault(require("strip-ansi"));
 /**
  * @name                                  countLine
  * @namespace           sugar.js.string
  * @type                                  Function
+ * @stable
  *
  * Count how many characters their is in the passed line.
  * This function will exclude the characters like the html tags like <red>, etc...
@@ -20,10 +21,15 @@ const strip_ansi_1 = __importDefault(require("strip-ansi"));
  * - newLineChars (false) {Boolean}: Specify if you want to count the new line special char "\n" or not
  * @return          {Number}                                How many characters their is in the line
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import countLine from '@coffeekraken/sugar/js/string/countLine';
  * countLine('Hello <red>World</red>'); // 11
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function countLine(line, count = {}) {
@@ -44,4 +50,4 @@ function countLine(line, count = {}) {
     }
     return newLine.length;
 }
-exports.default = countLine;
+module.exports = countLine;

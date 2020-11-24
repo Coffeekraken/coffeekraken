@@ -1,12 +1,20 @@
+// @ts-nocheck
+
 import __deepMerge from '../../node/object/deepMerge';
 
 /**
  * @name            replaceTokens
  * @namespace           sugar.js.string
  * @type            Function
+ * @stable
  *
  * This function takes as parameter a tokened string like "something [cool]", an object
  * of arguments/values and return the processed string with the tokens replaced by the arguments values.
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ * @todo      add setting to define tokens delimiter
  *
  * @param       {String}          string          The string to process
  * @param       {Object}          argsObj         The arguments/value object
@@ -21,7 +29,7 @@ import __deepMerge from '../../node/object/deepMerge';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function replaceTokens(string, argsObj, settings = {}) {
+function replaceTokens(string, argsObj, settings = {}) {
   settings = __deepMerge(
     {
       regexp: '\\[([a-zA-Z0-9-_]+)\\]',
@@ -37,3 +45,4 @@ export default function replaceTokens(string, argsObj, settings = {}) {
   }
   return string;
 }
+export = replaceTokens;

@@ -1,12 +1,13 @@
-import __fs from 'fs-extra';
+// @ts-nocheck
 
-// TODO tests
+import __fs from 'fs-extra';
 
 /**
  * @name        writeJson
  * @namespace           sugar.node.fs
  * @type          Function
  * @async
+ * @stable
  *
  * Write a JSON file. If don't exist, will be created as well as the directory structure if needed... ( (async)
  *
@@ -15,6 +16,10 @@ import __fs from 'fs-extra';
  * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeJson()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
  * @return      {Promise}                           A promise that will be resolved when the writeJson is completed
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import writeJson from '@coffeekraken/node/fs/writeJson';
  * writeJson('my/cool/file.json', { hello: 'world' }).then(() => {
@@ -22,8 +27,10 @@ import __fs from 'fs-extra';
  * });
  *
  * @see             https://github.com/jprichardson/node-fs-extra
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function writeJson(path, data, options = {}) {
+function writeJson(path, data, options = {}) {
   return __fs.outputJson(path, data, options);
 }
+export = writeJson;

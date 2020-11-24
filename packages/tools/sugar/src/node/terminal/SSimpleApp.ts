@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SApp from './SApp';
 import __SHeader from './SHeader';
 import __deepMerge from '../object/deepMerge';
@@ -12,6 +14,7 @@ import __sugarConfig from '../config/sugar';
  * @name                    SSimpleApp
  * @namespace           sugar.node.terminal
  * @type                    Class
+ * @wip
  *
  * This class define an application in the terminal that you can easily configure to have the look and feel that you want
  * through simple settings described bellow.
@@ -24,10 +27,14 @@ import __sugarConfig from '../config/sugar';
  * const app = new SSimpleApp('My Cool Application', {
  * });
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SSimpleApp extends __SApp {
+export = class SSimpleApp extends __SApp {
   /**
    * @name              constructor
    * @type              Function

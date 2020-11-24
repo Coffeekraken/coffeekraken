@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      exitFullscreen
  * @namespace           sugar.js.dom
@@ -19,7 +21,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function exitFullscreen() {
+function exitFullscreen() {
   if (document.cancelFullScreen) {
     return document.cancelFullScreen();
   } else if (document.mozCancelFullScreen) {
@@ -28,3 +30,4 @@ export default function exitFullscreen() {
     return document.webkitCancelFullScreen();
   }
 }
+export = exitFullscreen;

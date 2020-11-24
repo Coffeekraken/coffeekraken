@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -18,37 +19,25 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SCacheAdapter_1 = __importDefault(require("./adapters/SCacheAdapter"));
 const convert_1 = __importDefault(require("../time/convert"));
 const node_1 = __importDefault(require("../is/node"));
 const md5_1 = __importDefault(require("../crypt/md5"));
 const toString_1 = __importDefault(require("../string/toString"));
-/**
- * @name                                SCache
- * @namespace           sugar.js.cache
- * @type                                Class
- *
- * Gives you the ability to manage cache through some defaults available adapters or using yours.
- * This cache class take care of these features:
- * - Standard and custom TTL by cache item
- * - Delete cache items on expires or not
- *
- * @example             js
- * import SCache from '@coffeekraken/sugar/js/cache/SCache';
- * const cache = new SCache({
- *  ttl: '10s' // 10 seconds
- * });
- * cache.set('myCoolCacheItem', someData);
- *
- * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SCache {
+module.exports = class SCache {
     /**
      * @name                              constructor
      * @type                              Function
@@ -137,25 +126,27 @@ class SCache {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async getAdapter() {
-        // check if we have already an adapter setted for this instance
-        if (this._adapter)
+    getAdapter() {
+        return __awaiter(this, void 0, void 0, function* () {
+            // check if we have already an adapter setted for this instance
+            if (this._adapter)
+                return this._adapter;
+            // get the adapter specified in the settings
+            const adapter = this._settings.adapter;
+            // check the type
+            if (typeof adapter === 'string' && this._defaultAdaptersPaths[adapter]) {
+                let adptr = yield Promise.resolve().then(() => __importStar(require(
+                /* webpackChunkName: "SCacheAdapter" */ this._defaultAdaptersPaths[adapter])));
+                if (adptr.default)
+                    adptr = adptr.default;
+                this._adapter = new adptr(this._settings);
+            }
+            else if (adapter instanceof SCacheAdapter_1.default) {
+                this._adapter = adapter;
+            }
+            // return the adapter
             return this._adapter;
-        // get the adapter specified in the settings
-        let adapter = this._settings.adapter;
-        // check the type
-        if (typeof adapter === 'string' && this._defaultAdaptersPaths[adapter]) {
-            let adptr = await Promise.resolve().then(() => __importStar(require(
-            /* webpackChunkName: "SCacheAdapter" */ this._defaultAdaptersPaths[adapter])));
-            if (adptr.default)
-                adptr = adptr.default;
-            this._adapter = new adptr(this._settings);
-        }
-        else if (adapter instanceof SCacheAdapter_1.default) {
-            this._adapter = adapter;
-        }
-        // return the adapter
-        return this._adapter;
+        });
     }
     /**
      * @name                            get
@@ -173,35 +164,37 @@ class SCache {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async get(name, valueOnly = true) {
-        // check the name
-        if (typeof name !== 'string') {
-            name = md5_1.default(toString_1.default(name)).toString();
-        }
-        // get the adapter
-        const adapter = await this.getAdapter();
-        // using the specified adapter to get the value back
-        const rawValue = await adapter.get(`${this._name}.${name}`);
-        // check that we have a value back
-        if (!rawValue || typeof rawValue !== 'string')
-            return null;
-        // parse the raw value back to an object
-        const value = adapter.parse
-            ? adapter.parse(rawValue)
-            : this._parse(rawValue);
-        // check if the item is too old...
-        if (value.deleteAt !== -1 && value.deleteAt < new Date().getTime()) {
-            // this item has to be deleted
-            if (value.deleteOnExpire)
-                await adapter.delete(name);
-            // return null cause the item is too old
-            return null;
-        }
-        // otherwise, this is good so return the item
-        // either the value only, or the full cache object
-        if (valueOnly)
-            return value.value;
-        return value;
+    get(name, valueOnly = true) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // check the name
+            if (typeof name !== 'string') {
+                name = md5_1.default(toString_1.default(name)).toString();
+            }
+            // get the adapter
+            const adapter = yield this.getAdapter();
+            // using the specified adapter to get the value back
+            const rawValue = yield adapter.get(`${this._name}.${name}`);
+            // check that we have a value back
+            if (!rawValue || typeof rawValue !== 'string')
+                return null;
+            // parse the raw value back to an object
+            const value = adapter.parse
+                ? adapter.parse(rawValue)
+                : this._parse(rawValue);
+            // check if the item is too old...
+            if (value.deleteAt !== -1 && value.deleteAt < new Date().getTime()) {
+                // this item has to be deleted
+                if (value.deleteOnExpire)
+                    yield adapter.delete(name);
+                // return null cause the item is too old
+                return null;
+            }
+            // otherwise, this is good so return the item
+            // either the value only, or the full cache object
+            if (valueOnly)
+                return value.value;
+            return value;
+        });
     }
     /**
      * @name                            set
@@ -225,45 +218,47 @@ class SCache {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async set(name, value, settings = {}) {
-        // check the name
-        if (typeof name !== 'string') {
-            name = md5_1.default(toString_1.default(name)).toString();
-        }
-        // test name
-        if (!/^[a-zA-Z0-9_\-\+\.]+$/.test(name)) {
-            throw new Error(`You try to set an item named "<yellow>${name}</yellow>" in the "${this._name}" SCache instance but an item name can contain only these characters <green>[a-zA-Z0-9_-.]</green> but you've passed "<red>${name}</red>"...`);
-        }
-        // get the adapter
-        const adapter = await this.getAdapter();
-        // try to get the value to update it
-        const existingValue = await this.get(name, false);
-        // merge the default and the item settings
-        const finalSettings = deepMerge_1.default({
-            ttl: this._settings.ttl,
-            deleteOnExpire: this._settings.deleteOnExpire
-        }, settings);
-        // initial the object that will be saved in the cache
-        const deleteAt = finalSettings.ttl === -1
-            ? -1
-            : new Date().getTime() +
-                convert_1.default(typeof finalSettings.ttl === 'number'
-                    ? `${finalSettings.ttl}s`
-                    : finalSettings.ttl, 'ms');
-        const valueToSave = {
-            name,
-            value,
-            created: existingValue ? existingValue.created : new Date().getTime(),
-            updated: new Date().getTime(),
-            deleteAt,
-            settings: finalSettings
-        };
-        // stringify the value to save
-        const stringifiedValueToSave = adapter.stringify
-            ? adapter.stringify(valueToSave)
-            : this._stringify(valueToSave);
-        // use the adapter to save the value
-        return adapter.set(`${this._name}.${name}`, stringifiedValueToSave);
+    set(name, value, settings = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // check the name
+            if (typeof name !== 'string') {
+                name = md5_1.default(toString_1.default(name)).toString();
+            }
+            // test name
+            if (!/^[a-zA-Z0-9_\-\+\.]+$/.test(name)) {
+                throw new Error(`You try to set an item named "<yellow>${name}</yellow>" in the "${this._name}" SCache instance but an item name can contain only these characters <green>[a-zA-Z0-9_-.]</green> but you've passed "<red>${name}</red>"...`);
+            }
+            // get the adapter
+            const adapter = yield this.getAdapter();
+            // try to get the value to update it
+            const existingValue = yield this.get(name, false);
+            // merge the default and the item settings
+            const finalSettings = deepMerge_1.default({
+                ttl: this._settings.ttl,
+                deleteOnExpire: this._settings.deleteOnExpire
+            }, settings);
+            // initial the object that will be saved in the cache
+            const deleteAt = finalSettings.ttl === -1
+                ? -1
+                : new Date().getTime() +
+                    convert_1.default(typeof finalSettings.ttl === 'number'
+                        ? `${finalSettings.ttl}s`
+                        : finalSettings.ttl, 'ms');
+            const valueToSave = {
+                name,
+                value,
+                created: existingValue ? existingValue.created : new Date().getTime(),
+                updated: new Date().getTime(),
+                deleteAt,
+                settings: finalSettings
+            };
+            // stringify the value to save
+            const stringifiedValueToSave = adapter.stringify
+                ? adapter.stringify(valueToSave)
+                : this._stringify(valueToSave);
+            // use the adapter to save the value
+            return adapter.set(`${this._name}.${name}`, stringifiedValueToSave);
+        });
     }
     /**
      * @name                                exists
@@ -280,13 +275,15 @@ class SCache {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async exists(name) {
-        // check
-        const value = await this.get(name);
-        // return the status
-        if (value)
-            return true;
-        return false;
+    exists(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // check
+            const value = yield this.get(name);
+            // return the status
+            if (value)
+                return true;
+            return false;
+        });
     }
     /**
      * @name                                delete
@@ -302,11 +299,13 @@ class SCache {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async delete(name) {
-        // get the adapter
-        const adapter = await this.getAdapter();
-        // delete the item
-        return adapter.delete(`${this._name}.${name}`);
+    delete(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // get the adapter
+            const adapter = yield this.getAdapter();
+            // delete the item
+            return adapter.delete(`${this._name}.${name}`);
+        });
     }
     /**
      * @name                                clear
@@ -321,11 +320,13 @@ class SCache {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async clear() {
-        // get the adapter
-        const adapter = await this.getAdapter();
-        // clear the cache
-        return adapter.clear(this._name);
+    clear() {
+        return __awaiter(this, void 0, void 0, function* () {
+            // get the adapter
+            const adapter = yield this.getAdapter();
+            // clear the cache
+            return adapter.clear(this._name);
+        });
     }
     /**
      * @name                                _parse
@@ -359,5 +360,4 @@ class SCache {
     _stringify(object) {
         return this._settings.stringify(object);
     }
-}
-exports.default = SCache;
+};

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __SUrlAction = require('./browser/SUrlAction');
 
 /**

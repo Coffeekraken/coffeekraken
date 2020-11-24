@@ -1,8 +1,17 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const find_in_files_1 = __importDefault(require("find-in-files"));
 const path_1 = __importDefault(require("path"));
 const writeFileSync_1 = __importDefault(require("../../node/fs/writeFileSync"));
@@ -10,7 +19,7 @@ const app_root_path_1 = __importDefault(require("app-root-path"));
 const parseArgs_1 = __importDefault(require("../../node/cli/parseArgs"));
 const parse_1 = __importDefault(require("../../node/docblock/parse"));
 const includes_1 = __importDefault(require("../../node/string/includes"));
-exports.default = async (stringArgs = '') => {
+module.exports = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function* () {
     const args = parseArgs_1.default(stringArgs, {
         definitionObj: {
             source: {
@@ -39,7 +48,7 @@ const api = {};
     ];
     const stackFn = {};
     const stack = {};
-    const files = await find_in_files_1.default.find('@namespace', args.source, '.js$');
+    const files = yield find_in_files_1.default.find('@namespace', args.source, '.js$');
     for (let i = 0; i < Object.keys(files).length; i++) {
         const filepath = Object.keys(files)[i];
         if (includes_1.default(filepath, args.ignore))
@@ -83,4 +92,4 @@ Object.defineProperty(api.${docObj.namespace.split('.').slice(1).join('.')}, '${
     // export the API
     itemsArray.push(`module.exports = api;`);
     writeFileSync_1.default(args.destination, itemsArray.join('\n'));
-};
+});

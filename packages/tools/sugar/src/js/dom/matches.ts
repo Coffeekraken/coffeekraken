@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      matches
  * @namespace           sugar.js.dom
@@ -24,7 +26,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function matches(el, selector) {
+function matches(el, selector) {
   if (el.nodeName == '#comment' || el.nodeName == '#text') {
     return false;
   }
@@ -39,3 +41,4 @@ export default function matches(el, selector) {
     };
   return f.call(el, selector);
 }
+export = matches;

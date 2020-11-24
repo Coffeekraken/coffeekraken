@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __scrollTo from './scrollTo';
 import __easeing from '../easing/easeInOutQuint';
 
@@ -25,7 +27,7 @@ import __easeing from '../easing/easeInOutQuint';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) (https://olivierbossel.com)
  */
-export default function scrollToLocationHash(
+function scrollToLocationHash(
   duration = 500,
   offset = 0,
   easing = __easeing
@@ -50,3 +52,4 @@ export default function scrollToLocationHash(
   // scroll to target
   __scrollTo(targetElm, duration, easing, offset, 'top');
 }
+export = scrollToLocationHash;

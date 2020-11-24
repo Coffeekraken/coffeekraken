@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__md5) => {
     describe('sugar.js.crypt.md5', () => {
         it('Should encrypt then decrypt the string "hello world" correctly', () => {

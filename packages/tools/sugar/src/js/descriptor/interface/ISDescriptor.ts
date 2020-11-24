@@ -1,5 +1,8 @@
+// @ts-nocheck
+
 export interface ISDescriptorSettings {
   arrayAsValue: boolean;
+  throwOnMissingRule: boolean;
 }
 
 export interface ISDescriptorDescription {
@@ -15,7 +18,7 @@ export interface ISDescriptorRuleApplyFn {
   ): ISDescriptorResultObj;
 }
 
-export interface ISDescriptorRulesMap {
+export interface ISDescriptorRules {
   [key: string]: ISDescriptorRule;
 }
 
@@ -29,8 +32,10 @@ export interface ISDescriptorRule {
 
 export interface ISDescriptorResultObj {}
 
+export interface ISDescriptionValidationResult {}
 export interface ISDescriptorCtor {
-  rulesMap: ISDescriptorRulesMap;
+  rules: ISDescriptorRulesMap;
+  type: string;
   new (settings?: ISDescriptorSettings): ISDescriptor;
   registerRule(rule: ISDescriptorRule): void;
   apply(value: any, settings?: ISDescriptorSettings): ISDescriptorResultObj;

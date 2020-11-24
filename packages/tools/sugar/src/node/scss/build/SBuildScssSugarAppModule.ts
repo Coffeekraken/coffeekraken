@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SSugarAppModule from '../../app/sugar/SSugarAppModule';
 import __SBuildScssInterface from './interface/SBuildScssInterface';
 import __deepMerge from '../../object/deepMerge';
@@ -9,15 +11,20 @@ import __SBuildScssProcess from './SBuildScssProcess';
  * @namespace           sugar.node.build.scss
  * @type                Class
  * @extends             SSugarAppModule
+ * @wip
  *
  * This class represent the build SCSS module for the Sugar UI.
  *
  * @param         {Object}          [settings={}]           An object of arguments passed by the SSugarUi main class
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default class SBuildScssSugarAppModule extends __SSugarAppModule {
+export = class SBuildScssSugarAppModule extends __SSugarAppModule {
   static interface = __SBuildScssInterface;
 
   /**

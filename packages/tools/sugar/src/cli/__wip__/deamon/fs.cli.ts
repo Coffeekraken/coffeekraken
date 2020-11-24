@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import _SFsDeamonProcess from '../../node/deamon/fs/SFsDeamonProcess';
 
 export default (stringArgs = '') => {

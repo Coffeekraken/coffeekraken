@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __imageLoaded from './imageLoaded';
 import __SPromise from '../promise/SPromise';
 
@@ -31,7 +33,7 @@ import __SPromise from '../promise/SPromise';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function imagesLoaded($imgs) {
+function imagesLoaded($imgs) {
   return new __SPromise((resolve, reject, trigger, cancel) => {
     const promises = [],
       loadedImages = [];
@@ -53,3 +55,4 @@ export default function imagesLoaded($imgs) {
     });
   });
 }
+export = imagesLoaded;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';
 import __SDocblockBlock from './SDocblockBlock';
@@ -33,7 +35,7 @@ import __fs from 'fs';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-export default class SDocblock {
+export = class SDocblock {
   /**
    * @name              _settings
    * @type              Object

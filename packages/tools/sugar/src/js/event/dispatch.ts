@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 
 /**
@@ -23,7 +25,7 @@ import __SPromise from '../promise/SPromise';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function trigger(name, value) {
+function trigger(name, value) {
   // check that the global SPromise exists
   if (!window._sugarEventSPromise)
     window._sugarEventSPromise = new __SPromise({
@@ -32,3 +34,4 @@ export default function trigger(name, value) {
   // trigger to the event
   window._sugarEventSPromise.trigger(name, value);
 }
+export = trigger;

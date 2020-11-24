@@ -1,12 +1,18 @@
 "use strict";
+// @ts-nocheck
 const __SDependency = require('./SDependency');
 /**
  * @name                    SPhpDependency
  * @namespace           sugar.node.dependency
  * @type                    Class
+ * @wip
  *
  * This class is the one that take care of installing php on your system depending on the platform on which you are.
- * *
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * const SPhpDependency = require('@coffeekraken/sugar/node/dependency/SPhpDependency');
  * const promise = SPhpDependency.install();

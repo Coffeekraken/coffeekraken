@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';
 import __glob from 'glob';
@@ -14,6 +16,7 @@ import __isDirectory from '../is/directory';
  * @namespace       sugar.node.glob
  * @type            Function
  * @async
+ * @beta
  *
  * This function simply resolve the passed glob pattern(s) and resolve his promise
  * with an Array of SFsFile instances to work with
@@ -25,6 +28,9 @@ import __isDirectory from '../is/directory';
  * @setting     {String}        rootDir                     The root directory where to start the glob search process
  * @setting     {Object}        ...glob                     All the glob (https://www.npmjs.com/package/glob) options are supported
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  * @todo          document the special ":" syntax available
  *
  * @example         js
@@ -35,7 +41,7 @@ import __isDirectory from '../is/directory';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function resolveGlob(globs, settings = {}) {
+function resolveGlob(globs, settings = {}) {
   return new __SPromise(
     (resolve, reject, trigger, cancel) => {
       settings = __deepMerge(
@@ -111,3 +117,4 @@ export default function resolveGlob(globs, settings = {}) {
     }
   );
 }
+export = resolveGlob;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __get from './get';
 import __set from './set';
 
@@ -26,7 +28,7 @@ import __set from './set';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default (obj, path, value = {}) => {
+export = (obj, path, value = {}) => {
   const v = __get(obj, path);
   if (v === undefined) {
     __set(obj, path, value);

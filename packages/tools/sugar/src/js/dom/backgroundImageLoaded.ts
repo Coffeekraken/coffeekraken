@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __getStyleProperty from './getStyleProperty';
 import __imageLoaded from './imageLoaded';
 import __unquote from '../string/unquote';
@@ -27,7 +29,7 @@ import __SPromise from '../promise/SPromise';
  * @since     1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function backgroundImageLoaded($elm) {
+function backgroundImageLoaded($elm) {
   let isCancelled = false,
     $img;
   const promise = new __SPromise(
@@ -58,3 +60,4 @@ export default function backgroundImageLoaded($elm) {
   promise.__$img = $img;
   return promise;
 }
+export = backgroundImageLoaded;

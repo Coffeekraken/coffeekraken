@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const sugar_1 = __importDefault(require("../../../config/sugar"));
 const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
@@ -11,12 +11,17 @@ const extension_1 = __importDefault(require("../../../fs/extension"));
  * @name            resolveExtensionFreePath
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
+ * @wip
  *
  * This function will try to resolve extension free requests like node modules, etc...
  *
  * @param           {Object}            req             The request made on the express server
  * @param           {Object}            res             The response object of the express server
  * @param           {Function}          next            The next function to call when the middleware has finished his job
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import express from 'express';
@@ -54,4 +59,4 @@ function resolveExtensionFreePath(settings = {}) {
         next();
     };
 }
-exports.default = resolveExtensionFreePath;
+module.exports = resolveExtensionFreePath;

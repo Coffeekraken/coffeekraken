@@ -1,4 +1,14 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var _a;
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __deepMerge = require('../../../object/deepMerge');
@@ -48,7 +58,7 @@ module.exports = (_a = class SFantasticonStreamAction extends __SActionsStreamAc
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings) {
-            return super.run(streamObj, async (resolve, reject, trigger, cancel) => {
+            return super.run(streamObj, (resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
                 __removeSync(streamObj.outputDir);
                 __ensureDirSync(streamObj.outputDir);
                 // Default options
@@ -72,7 +82,7 @@ module.exports = (_a = class SFantasticonStreamAction extends __SActionsStreamAc
                 }, __fantasticonConfig)).then((results) => {
                     resolve(streamObj);
                 });
-            });
+            }));
         }
     },
     /**

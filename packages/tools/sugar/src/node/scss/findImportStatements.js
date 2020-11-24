@@ -1,13 +1,14 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name            findImportStatements
  * @namespace       sugar.node.scss
  * @type            Function
+ * @beta
  *
  * This function simply parse the passed string to extract all the @import and @use statements
  *
@@ -17,6 +18,10 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  *
  * @setting      {Boolean}       [use=true]      Specify if you want to extract the @use statements
  * @setting      {Boolean}      [imports=true]    Specify if you want to extract the @import statements
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import findImportStatements from '@coffeekraken/sugar/node/scss/findImportStatements';
@@ -81,4 +86,4 @@ function findImportStatements(string, settings = {}) {
     });
     return statements;
 }
-exports.default = findImportStatements;
+module.exports = findImportStatements;

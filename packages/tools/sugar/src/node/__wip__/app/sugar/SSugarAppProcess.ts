@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SProcess from '../../process/SProcess';
 import __SSugarApp from './SSugarApp';
 import __SSugarAppInterface from './interface/SSugarAppInterface';
@@ -7,10 +9,15 @@ import __SSugarAppInterface from './interface/SSugarAppInterface';
  * @namespace           sugar.node.ui.sugar
  * @type            Class
  * @extends         SProcess
+ * @wip
  *
  * This class represent the process that expose every registered "modules"
  * through through a socket connection and handle the talk between
  * the backend parts with the frontend parts of each modules.
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

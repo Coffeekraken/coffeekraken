@@ -40,7 +40,11 @@
     "trailingComma": "none"
   },
   "homepage": "https://github.com/Coffeekraken/coffeekraken#readme",
-  "dependencies": {},
+  "dependencies": {
+    "chokidar": "^3.4.3",
+    "get-symlinks": "^3.0.1",
+    "tsc-transpile-only": "0.0.3"
+  },
   "globalDependencies": {},
   "devDependencies": {
     "@shopify/jest-dom-mocks": "^2.8.11",

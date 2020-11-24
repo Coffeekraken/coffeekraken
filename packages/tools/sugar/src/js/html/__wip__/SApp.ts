@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __get from '../object/get';
 import __isBase64 from '../is/base64';
 import __base64 from '../crypt/base64';

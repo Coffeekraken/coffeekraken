@@ -1,9 +1,12 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 
 /**
  * @name          trimLines
  * @namespace     sugar.js.string
  * @type          Function
+ * @stable
  *
  * This function take a string and trim each lines
  *
@@ -12,6 +15,10 @@ import __deepMerge from '../object/deepMerge';
  * - leftPadding (0) {Number}: Specify a left padding to set. 1 padding represent 1 space character
  * - rightPadding (0) {Number}: Specify a right padding to set.
  * - keepEmptyLines (true) {Boolean}: Specify if you want to keep empty lines or not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import trimLines from '@coffeekraken/sugar/js/string/trimLines';
@@ -25,7 +32,7 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function trimLines(string, settings = {}) {
+function trimLines(string, settings = {}) {
   settings = __deepMerge(
     {
       leftPadding: 0,
@@ -53,3 +60,4 @@ export default function trimLines(string, settings = {}) {
 
   return string;
 }
+export = trimLines;

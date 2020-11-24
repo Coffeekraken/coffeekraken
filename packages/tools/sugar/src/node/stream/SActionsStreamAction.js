@@ -1,33 +1,12 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const validateDefinitionObject_1 = __importDefault(require("../validation/object/validateDefinitionObject"));
-/**
- * @name          SActionStreamAction
- * @namespace           sugar.js.stream
- * @type          Class
- * @extends       SPromise
- *
- * This class represent the base of a actions stream action.
- * An action stream action represent an action that you can register in the SActionsStream instance and
- * prodive you some usefull features like "trigger" some events, set/get data from the streamObj, defining some required streamObj properties
- * to work with, etc...
- *
- * @param       {Object}        actions         An object of actions to execute one after the other. The object has to be formatted like ```{ actionName: actionFunction }```
- * @param       {Object}        [settings={}]   A settings object to configure your instance:
- * - name (null) {String}: A simple name for your stream that will be used in the logs
- * - order (null) {Array}: An array of action names that specify the order you want to execute them. If not specified, take the actions object properties order.
- * - actions ({}) {Object}: An object formated like ```{ actionName: settings }``` that contain specific settings for each actions and that will be passed as a second parameter to each actions.
- * - cache (true) {Boolean}: Specify if this action is aware of the cache or not
- *
- * @since     2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SActionStreamAction extends SPromise_1.default {
+module.exports = class SActionStreamAction extends SPromise_1.default {
     /**
      * @name            constructor
      * @type            Function
@@ -174,7 +153,7 @@ class SActionStreamAction extends SPromise_1.default {
      */
     run(streamObj, promiseFn) {
         this.checkStreamObject(streamObj);
-        this._currentPromise = new SPromise_1.default(() => { }, {
+        this._currentPromise = new SPromise_1.default({
             id: this._settings.id + 'Run'
         });
         SPromise_1.default.map(this._currentPromise, this);
@@ -250,5 +229,4 @@ class SActionStreamAction extends SPromise_1.default {
             }
         });
     }
-}
-exports.default = SActionStreamAction;
+};

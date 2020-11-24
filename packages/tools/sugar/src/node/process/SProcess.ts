@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __completeArgsObject from '../cli/completeArgsObject';
 import __path from 'path';
 import __convert from '../time/convert';
@@ -26,14 +28,19 @@ import __copy from '../clipboard/copy';
  * @namespace           sugar.node.process
  * @type                Class
  * @extends             SPromise
+ * @wip
  *
  * This class represent an SProcess run iteration that store things like
  * the value, the startTime, endTime, duration, state, etc...
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SProcess extends __SPromise {
+export = class SProcess extends __SPromise {
   /**
    * @name      id
    * @type      String
@@ -694,4 +701,4 @@ export default class SProcess extends __SPromise {
       this.trigger('error', error);
     });
   }
-};
+}

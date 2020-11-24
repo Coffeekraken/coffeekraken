@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __convert from './convert';
 import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
@@ -7,6 +9,7 @@ import __deepMerge from '../object/deepMerge';
  * @namespace           sugar.js.time
  * @type                  Class
  * @extends               SPromise
+ * @beta
  *
  * Class that let you create and handle timer with ease.
  * With this class you can set some callback function that will be
@@ -29,6 +32,10 @@ import __deepMerge from '../object/deepMerge';
  * - tickCount (null) {Number}: Specify how many ticks you want during the timer process
  * - loop (false) {Boolean}: Specify if you want the timer to loop or not.
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example 	js
  * import STimer from '@coffeekraken/sugar/js/time/STimer';
  * const myTimer = new STimer(2000, {
@@ -42,7 +49,7 @@ import __deepMerge from '../object/deepMerge';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class STimer extends __SPromise {
+export = class STimer extends __SPromise {
   /**
    * @name          _duration
    * @type          Number

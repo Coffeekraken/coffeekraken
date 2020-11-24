@@ -1,19 +1,24 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const env_1 = __importDefault(require("../../../core/env"));
 /**
  * @name            envMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
+ * @beta
  *
  * This function describe the middleware that will add the "env" property to the ```res.templateData``` object
  *
  * @param           {Object}            req             The request made on the express server
  * @param           {Object}            res             The response object of the express server
  * @param           {Function}          next            The next function to call when the middleware has finished his job
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import express from 'express';
@@ -27,11 +32,8 @@ const env_1 = __importDefault(require("../../../core/env"));
  */
 function envMiddleware(settings = {}) {
     return function (req, res, next) {
-        res.templateData = {
-            ...(res.templateData || {}),
-            env: env_1.default('NODE_ENV') || 'development'
-        };
+        res.templateData = Object.assign(Object.assign({}, (res.templateData || {})), { env: env_1.default('NODE_ENV') || 'development' });
         next();
     };
 }
-exports.default = envMiddleware;
+module.exports = envMiddleware;

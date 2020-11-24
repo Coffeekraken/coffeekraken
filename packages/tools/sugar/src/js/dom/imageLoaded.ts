@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 
 /**
@@ -25,7 +27,7 @@ import __SPromise from '../promise/SPromise';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function imageLoaded($img, callback = null) {
+function imageLoaded($img, callback = null) {
   let imgLoadedHandler, imgErrorHandler;
 
   return new __SPromise(
@@ -61,3 +63,4 @@ export default function imageLoaded($img, callback = null) {
     imgErrorHandler && $img.removeEventListener('error', imgErrorHandler);
   });
 }
+export = imageLoaded;

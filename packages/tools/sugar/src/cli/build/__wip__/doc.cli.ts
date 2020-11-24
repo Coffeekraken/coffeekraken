@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseArgs from '../../node/cli/parseArgs';
 import __SBuildDocCli from '../../node/build/doc/SBuildDocCli';
 import __SBuildDocActionsStream from '../../node/build/doc/SBuildDocActionsStream';

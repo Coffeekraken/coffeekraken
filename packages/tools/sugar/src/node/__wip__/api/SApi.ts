@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __SCache from '../cache/SCache';
 import __SAuth from '../auth/SAuth';
@@ -13,12 +15,17 @@ import __isPlainObject from '../is/plainObject';
  * @name                            SApi
  * @namespace           sugar.node.api
  * @type                            Class
+ * @wip
  *
  * Base class that extends all the S...Api classes. This class gives some features like:
  * - Caching requests
  * - Auth support through the SAuth class
  * - Promise based methods like "get", "post", etc...
  * - And more...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example           js
  * import SApi from '@coffeekraken/sugar/node/api/SApi';
@@ -28,6 +35,7 @@ import __isPlainObject from '../is/plainObject';
  *    }
  * }
  *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SApi {

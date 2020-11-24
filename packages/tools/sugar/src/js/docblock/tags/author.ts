@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name              author
  * @namespace           sugar.js.docblock.tags
@@ -15,7 +17,7 @@
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-export default function author(data) {
+function author(data) {
   const authorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(
     data.value
   );
@@ -27,3 +29,4 @@ export default function author(data) {
     url: authorNfo[3]
   };
 }
+export = author;

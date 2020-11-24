@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __deepMerge = require('../object/deepMerge');
 const __SPromise = require('../promise/SPromise');
 const __isPath = require('../is/path');
@@ -10,12 +12,17 @@ const __awaitSpawn = require('await-spawn');
  * @name                    SDependency
  * @namespace           sugar.node.dependency
  * @type                    Class
+ * @wip
  *
  * This class is the base one for dependencys like PHP, Node, etc... It allows you to check if you have already the dependency installed,
  * if you can update it, etc...
  *
  * @param           {String}          name            The dependency name like "php", "node", etc...
  * @param           {Object}          [settings={}]   An object of settings described bellow:
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * const SDependency = require('@coffeekraken/sugar/node/dependency/SDependency');

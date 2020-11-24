@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import _glob from 'glob';
 import _folderPath from '../fs/folderPath';
 
@@ -6,6 +8,7 @@ import _folderPath from '../fs/folderPath';
  * @namespace       sugar.node.monorepo
  * @type            Function
  * @async
+ * @beta
  *
  * This function simply let you search for packages (that are not dependencies) inside
  * the passed folder and returns a object with relative paths as keys and package.json
@@ -13,6 +16,10 @@ import _folderPath from '../fs/folderPath';
  *
  * @param         {String}          [rootDir=process.cwd()]       The root directory from where to search for packages
  * @return        {Promise}                                       A promise that will be resolved once the process is finished with the resulting object
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import findPackages from '@coffeekraken/sugar/node/monorepo/findPackages';

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isJson
  * @namespace           sugar.js.is
@@ -22,7 +24,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isJson(value) {
+function isJson(value) {
   try {
     JSON.parse(value);
   } catch (e) {
@@ -30,3 +32,4 @@ export default function isJson(value) {
   }
   return true;
 }
+export = isJson;

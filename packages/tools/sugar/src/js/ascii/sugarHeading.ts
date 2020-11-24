@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __parseHtml from '../console/parseHtml';
 
@@ -5,12 +7,17 @@ import __parseHtml from '../console/parseHtml';
  * @name          sugarHeading
  * @namespace     sugar.js.ascii
  * @type          Function
+ * @stable
  *
  * This function returns an ascii version of the sugar logo
  *
  * @param     {Object}      [settings={}]       A settings object:
  * - version (2.0.0) {String}: The version you want to display
  * - borders (true) {Boolean}: If you want to display the border left or not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example     js
  * import sugarHeading from '@coffeekraken/sugar/js/ascii/sugarHeading';
@@ -23,7 +30,7 @@ interface ISugarHeadingSettings {
   version?: string;
   borders?: boolean;
 }
-export default function sugarHeading(
+function sugarHeading(
   settings: ISugarHeadingSettings = {}
 ): string {
   settings = __deepMerge(
@@ -62,3 +69,5 @@ export default function sugarHeading(
 
   return value;
 }
+
+export = sugarHeading;

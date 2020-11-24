@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';
 import __SFsFileInterface from './interface/SFsFileInterface';
@@ -15,6 +17,7 @@ import __packageRoot from '../path/packageRoot';
  * @type            Class
  * @implements      SFsFileInterface
  * @extends         SPromise
+ * @beta
  *
  * This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,
  * and get access to all the nice meta data like:
@@ -32,6 +35,10 @@ import __packageRoot from '../path/packageRoot';
  * @param         {Object}          [settings={}]    An object of settings to configure your file instance:
  * - rootDir (__packageRoot()) {String}: Specify a root directory for the file. This is usefull to have then access to properties like ```relPath```, etc...
  * - checkExistence (true) {Boolean}: Specify if you want this inited file to really exists on the disk or not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example           js
  * import SFsFile from '@coffeekraken/sugar/node/fs/SFsFile';
@@ -230,4 +237,4 @@ class SFsFile extends __SPromise {
   }
 }
 
-export default __SFsFileInterface.implements(SFsFile);
+export = __SFsFileInterface.implements(SFsFile);

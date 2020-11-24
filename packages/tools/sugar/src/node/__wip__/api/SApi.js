@@ -1,4 +1,14 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -15,12 +25,17 @@ const plainObject_1 = __importDefault(require("../is/plainObject"));
  * @name                            SApi
  * @namespace           sugar.node.api
  * @type                            Class
+ * @wip
  *
  * Base class that extends all the S...Api classes. This class gives some features like:
  * - Caching requests
  * - Auth support through the SAuth class
  * - Promise based methods like "get", "post", etc...
  * - And more...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example           js
  * import SApi from '@coffeekraken/sugar/node/api/SApi';
@@ -30,6 +45,7 @@ const plainObject_1 = __importDefault(require("../is/plainObject"));
  *    }
  * }
  *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SApi {
@@ -122,10 +138,12 @@ class SApi {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async get(path, settings = {}) {
-        return await this.request(path, deepMerge_1.default({
-            method: 'get'
-        }, settings));
+    get(path, settings = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.request(path, deepMerge_1.default({
+                method: 'get'
+            }, settings));
+        });
     }
     /**
      * @name                                post
@@ -144,10 +162,12 @@ class SApi {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async post(path, settings = {}) {
-        return await this.request(path, deepMerge_1.default({
-            method: 'post'
-        }, settings));
+    post(path, settings = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.request(path, deepMerge_1.default({
+                method: 'post'
+            }, settings));
+        });
     }
     /**
      * @name                                delete
@@ -166,10 +186,12 @@ class SApi {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async delete(path, settings = {}) {
-        return await this.request(path, deepMerge_1.default({
-            method: 'delete'
-        }, settings));
+    delete(path, settings = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.request(path, deepMerge_1.default({
+                method: 'delete'
+            }, settings));
+        });
     }
     /**
      * @name                                head
@@ -188,10 +210,12 @@ class SApi {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async head(path, settings = {}) {
-        return await this.request(path, deepMerge_1.default({
-            method: 'head'
-        }, settings));
+    head(path, settings = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.request(path, deepMerge_1.default({
+                method: 'head'
+            }, settings));
+        });
     }
     /**
      * @name                                options
@@ -210,10 +234,12 @@ class SApi {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async options(path, settings = {}) {
-        return await this.request(path, deepMerge_1.default({
-            method: 'options'
-        }, settings));
+    options(path, settings = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.request(path, deepMerge_1.default({
+                method: 'options'
+            }, settings));
+        });
     }
     /**
      * @name                                put
@@ -232,10 +258,12 @@ class SApi {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async put(path, settings = {}) {
-        return await this.request(path, deepMerge_1.default({
-            method: 'put'
-        }, settings));
+    put(path, settings = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.request(path, deepMerge_1.default({
+                method: 'put'
+            }, settings));
+        });
     }
     /**
      * @name                                patch
@@ -254,10 +282,12 @@ class SApi {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async patch(path, settings = {}) {
-        return await this.request(path, deepMerge_1.default({
-            method: 'patch'
-        }, settings));
+    patch(path, settings = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.request(path, deepMerge_1.default({
+                method: 'patch'
+            }, settings));
+        });
     }
     /**
      * @name                                request
@@ -279,64 +309,62 @@ class SApi {
      * - timeout (0) {Number|String}: Specify the number of milliseconds before the request is aborted. Can be a string like '10s', '20m', '1h', etc...
      * - Axios config object (null) {Object}: All the axios config parameters are available. @see https://github.com/axios/axios
      */
-    async request(path, settings = {}) {
-        // init requestConfig object
-        let requestConfig = {};
-        // check auth if used for this request
-        if (this._settings.defaultRequestSettings.auth && settings.auth !== false) {
-            // authenticate
-            const authInfo = await this.auth();
-            // inject the auth info
-            requestConfig = this._settings.auth.inject('axios', {}, authInfo);
-        }
-        // generate the final request config
-        const finalRequestConfig = deepMerge_1.default(requestConfig, {
-            url: path,
-            method: 'get',
-            ...this._settings.defaultRequestSettings
-        }, settings);
-        // calculate the timeout
-        finalRequestConfig.timeout = convert_1.default(finalRequestConfig.timeout || 0, 'ms');
-        // generate a uid for this request
-        let uid = uid_1.default(finalRequestConfig);
-        // try to get the response back from cache
-        if (finalRequestConfig.cache && this._settings.cache) {
-            const cachedResponse = await this._getFromCache(uid);
-            if (cachedResponse) {
-                return cachedResponse;
+    request(path, settings = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // init requestConfig object
+            let requestConfig = {};
+            // check auth if used for this request
+            if (this._settings.defaultRequestSettings.auth && settings.auth !== false) {
+                // authenticate
+                const authInfo = yield this.auth();
+                // inject the auth info
+                requestConfig = this._settings.auth.inject('axios', {}, authInfo);
             }
-        }
-        // proceed to the request
-        let rawResponse = null;
-        let response = {};
-        try {
-            // make the request
-            if (typeof finalRequestConfig.auth !== 'object')
-                delete finalRequestConfig.auth;
-            rawResponse = await this._axios.request(finalRequestConfig);
-            // build the response
-            response = {
-                status: rawResponse.status,
-                statusText: rawResponse.statusText,
-                headers: rawResponse.headers,
-                method: rawResponse.request.method,
-                baseUrl: rawResponse.config.baseURL,
-                path: rawResponse.request.path,
-                aborted: rawResponse.request.aborted,
-                timeout: rawResponse.config.timeout,
-                data: rawResponse.data
-            };
-        }
-        catch (e) {
-            console.log(e);
-            process.exit();
-        }
-        // save the request response into cache
-        if (finalRequestConfig.cache && this._settings.cache) {
-            this._setIntoCache(uid, response);
-        }
-        // return the response
-        return response;
+            // generate the final request config
+            const finalRequestConfig = deepMerge_1.default(requestConfig, Object.assign({ url: path, method: 'get' }, this._settings.defaultRequestSettings), settings);
+            // calculate the timeout
+            finalRequestConfig.timeout = convert_1.default(finalRequestConfig.timeout || 0, 'ms');
+            // generate a uid for this request
+            let uid = uid_1.default(finalRequestConfig);
+            // try to get the response back from cache
+            if (finalRequestConfig.cache && this._settings.cache) {
+                const cachedResponse = yield this._getFromCache(uid);
+                if (cachedResponse) {
+                    return cachedResponse;
+                }
+            }
+            // proceed to the request
+            let rawResponse = null;
+            let response = {};
+            try {
+                // make the request
+                if (typeof finalRequestConfig.auth !== 'object')
+                    delete finalRequestConfig.auth;
+                rawResponse = yield this._axios.request(finalRequestConfig);
+                // build the response
+                response = {
+                    status: rawResponse.status,
+                    statusText: rawResponse.statusText,
+                    headers: rawResponse.headers,
+                    method: rawResponse.request.method,
+                    baseUrl: rawResponse.config.baseURL,
+                    path: rawResponse.request.path,
+                    aborted: rawResponse.request.aborted,
+                    timeout: rawResponse.config.timeout,
+                    data: rawResponse.data
+                };
+            }
+            catch (e) {
+                console.log(e);
+                process.exit();
+            }
+            // save the request response into cache
+            if (finalRequestConfig.cache && this._settings.cache) {
+                this._setIntoCache(uid, response);
+            }
+            // return the response
+            return response;
+        });
     }
     /**
      * @name                                auth
@@ -352,9 +380,11 @@ class SApi {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async auth() {
-        // request the auth informations using the SAuth instance
-        return await this._settings.auth.authInfo();
+    auth() {
+        return __awaiter(this, void 0, void 0, function* () {
+            // request the auth informations using the SAuth instance
+            return yield this._settings.auth.authInfo();
+        });
     }
     /**
      * @name                                      _getFromCache
@@ -368,11 +398,13 @@ class SApi {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async _getFromCache(requestUid) {
-        // check from the cache if we can get the request response from
-        const cachedResponse = await this._settings.cache.get(requestUid);
-        // return the response
-        return cachedResponse || false;
+    _getFromCache(requestUid) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // check from the cache if we can get the request response from
+            const cachedResponse = yield this._settings.cache.get(requestUid);
+            // return the response
+            return cachedResponse || false;
+        });
     }
     /**
      * @name                                      _setIntoCache
@@ -387,11 +419,13 @@ class SApi {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async _setIntoCache(requestUid, response) {
-        // check from the cache if we can get the request response from
-        await this._settings.cache.set(requestUid, response);
-        // return the response
-        return true;
+    _setIntoCache(requestUid, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // check from the cache if we can get the request response from
+            yield this._settings.cache.set(requestUid, response);
+            // return the response
+            return true;
+        });
     }
 }
 exports.default = SApi;

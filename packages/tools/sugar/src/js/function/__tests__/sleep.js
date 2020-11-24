@@ -1,20 +1,12 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+"use strict";
 module.exports = (__sleep) => {
     describe('sugar.js.function.sleep', () => {
         let start, end;
-        (() => __awaiter(this, void 0, void 0, function* () {
+        (async () => {
             start = Date.now();
-            yield __sleep(200);
+            await __sleep(200);
             end = Date.now();
-        }))();
+        })();
         it('Sould a difference between the start and the end time greater that 200', done => {
             setTimeout(() => {
                 expect(end - start).toBeGreaterThan(195);

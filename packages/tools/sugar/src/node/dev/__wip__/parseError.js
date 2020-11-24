@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 /**
  * @name                                  parseError
  * @namespace           sugar.node.dev

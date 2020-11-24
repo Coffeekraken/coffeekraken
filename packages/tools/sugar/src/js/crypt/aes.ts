@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import AES from 'crypto-js/aes';
 import utf8 from 'crypto-js/enc-utf8';
 import toString from '../string/toString';
@@ -17,7 +19,7 @@ import parse from '../string/parse';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default {
+export = {
   /**
    * @name        encrypt
    * @type        Function

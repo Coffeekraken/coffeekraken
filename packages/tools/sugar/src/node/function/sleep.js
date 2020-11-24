@@ -1,14 +1,19 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name          sleep
  * @namespace           sugar.js.function
  * @type          Function
+ * @stable
  *
  * Simple sleep function that can be used using "await" syntax in an "async" function
  *
  * @param         {Number}          time          The sleep duration in ms
  * @return        {Promise}                       A promise that will be resolved at the end of the sleep time
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import sleep from '@coffeekraken/sugar/js/function/sleep';
@@ -18,6 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *  console.log('World');
  * }
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function sleep(time) {
@@ -25,4 +31,4 @@ function sleep(time) {
         setTimeout(resolve, time);
     });
 }
-exports.default = sleep;
+module.exports = sleep;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseArgs from './parseArgs';
 import __completeArgsObject from './completeArgsObject';
 
@@ -5,6 +7,7 @@ import __completeArgsObject from './completeArgsObject';
  * @name                  argsToObject
  * @namespace           sugar.js.cli
  * @type                  Function
+ * @beta
  *
  * This function take a simple object, a definitionObj object and return you the string version that you can pass
  * directly to the command line interface
@@ -14,6 +17,10 @@ import __completeArgsObject from './completeArgsObject';
  * - definitionObj (null) {Object}: Specify a definitionObj to use
  * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
  * @return      {Object}                              The final values object
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import argsToObject from '@coffeekraken/sugar/js/cli/argsToObject';
@@ -39,7 +46,7 @@ import __completeArgsObject from './completeArgsObject';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function argsToObject(argsObj, settings = {}) {
+function argsToObject(argsObj, settings = {}) {
   if (typeof argsObj === 'string') {
     return __parseArgs(argsObj, {
       definitionObj: settings.definitionObj
@@ -48,3 +55,4 @@ export default function argsToObject(argsObj, settings = {}) {
 
   return __completeArgsObject(argsObj || {}, settings);
 }
+export = argsToObject;

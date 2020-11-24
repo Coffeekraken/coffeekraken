@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import SProcess from '../process/SProcess';
 import ISCompileTsProcess, {
   ISCompileTsProcessParams,
@@ -10,8 +12,13 @@ import ISCompileTsProcess, {
  * @namespace           sugar.node.typescript
  * @type            Class
  * @extends         SProcess
+ * @wip
  *
  * This class represent the tsc compilation process to compile typescript to js
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -53,9 +60,8 @@ const Cls: ISCompileTsProcessCtor = class SCompileTsProcess
     params?: ISCompileTsProcessParams,
     settings?: ISCompileTsProcessSettings
   ): Promise<any> {
-    console.log('PROCESS', params);
     return 'coco';
   }
 };
 
-export default Cls;
+export = Cls;

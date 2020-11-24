@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __globParent from 'glob-parent';
 
 /**
@@ -23,9 +25,10 @@ import __globParent from 'glob-parent';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function extractGlob(string) {
+function extractGlob(string) {
   const parent = __globParent(string);
   let final = string.replace(parent, '');
   if (final.slice(0, 1) === '/') final = final.slice(1);
   return final;
 }
+export = extractGlob;

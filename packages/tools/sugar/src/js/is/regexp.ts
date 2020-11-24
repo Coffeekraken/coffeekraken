@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isRegexp
  * @namespace           sugar.js.is
@@ -22,6 +24,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isRegexp(value) {
+function isRegexp(value) {
   return value && typeof value === 'object' && value.constructor === RegExp;
 }
+export = isRegexp;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 import __uniqid from '../string/uniqid';
 import __keypress from 'keypress';
@@ -9,6 +11,7 @@ import __isChildProcess from '../is/childProcess';
  * @name                hotkey
  * @namespace           sugar.node.keyboard
  * @type                Function
+ * @beta
  *
  * This function allows you to add keyboard listening process and subscribe to some sequences
  * using the SPromise instance returned.
@@ -20,6 +23,10 @@ import __isChildProcess from '../is/childProcess';
  * - systemWide (false) {Boolean}: Specify if the listener have to listen for the application only events, or for the system level ones
  * @return      {SPromise}                       An SPromise instance on which you can register for "key" stack event
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
  * const promise = hotkey('ctrl+a').on('key', (e) => {
@@ -27,6 +34,7 @@ import __isChildProcess from '../is/childProcess';
  * });
  * promise.cancel();
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 const hotkeyStack = {};
@@ -191,4 +199,4 @@ if (!__isChildProcess()) {
   });
 }
 
-export default hotkey;
+export = hotkey;

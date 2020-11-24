@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __uniqid from '../string/uniqid';
 import __injectStyle from '../css/injectStyle';
 import __emptyNode from './emptyNode';
@@ -45,7 +47,7 @@ import __convert from '../time/convert';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function innerHtml(node, content, settings = {}) {
+function innerHtml(node, content, settings = {}) {
   return new Promise((resolve, reject) => {
     // process the settings
     settings = {
@@ -342,3 +344,4 @@ export default function innerHtml(node, content, settings = {}) {
     }
   });
 }
+export = innerHtml;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __env from '../core/env';
 
 /**
@@ -5,6 +7,7 @@ import __env from '../core/env';
  * @namespace             sugar.js.path
  * @type                  Function
  * @env                   development
+ * @beta
  *
  * This function return the path where stands the package in the filesystem.
  * !!! This function works only in development mode cause it will be dangerous to
@@ -13,6 +16,10 @@ import __env from '../core/env';
  *
  * @return        {String}                Either the package root path if available, or an empty string if not...
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example     js
  * import packageRoot from '@coffeekraken/sugar/js/path/packageRoot';
  * packageRoot(); // => /Users/something/hello/world
@@ -20,8 +27,9 @@ import __env from '../core/env';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
  */
-export default function packageRoot() {
+function packageRoot() {
   const environment = __env('node_env') || __env('environment') || __env('env');
   if (environment !== 'development' && environment !== 'test') return '';
   return __env('package_root') || '';
 }
+export = packageRoot;

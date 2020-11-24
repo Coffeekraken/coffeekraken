@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name              example
  * @namespace           sugar.js.docblock.tags
@@ -15,7 +17,7 @@
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-export default function example(data) {
+function example(data) {
   if (!Array.isArray(data)) data = [data];
   data = data
     .map((item) => {
@@ -36,3 +38,4 @@ export default function example(data) {
     .filter((item) => item !== null);
   return data;
 }
+export = example;

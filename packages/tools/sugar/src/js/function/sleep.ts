@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name          sleep
  * @namespace           sugar.js.function
@@ -24,8 +26,9 @@
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function sleep(time) {
+function sleep(time) {
   return new Promise((resolve) => {
     setTimeout(resolve, time);
   });
 }
+export = sleep;

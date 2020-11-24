@@ -1,8 +1,36 @@
 "use strict";
+// @ts-nocheck
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SError_1 = __importDefault(require("../error/SError"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
@@ -10,32 +38,10 @@ const handlebars_1 = __importDefault(require("handlebars"));
 const SCache_1 = __importDefault(require("../cache/SCache"));
 const node_1 = __importDefault(require("../is/node"));
 const promised_handlebars_1 = __importDefault(require("promised-handlebars"));
-/**
- * @name            SDocblockOutput
- * @namespace       sugar.js.docblock
- * @type            Class
- *
- * This class represent an SDocblock output like "markdown", "html", etc...
- *
- * @param       {SDocblock}         docblockInstance        The docblock instance you want to output using this class
- * @param       {Object}            [settings={}]           Some settings to configure your output class:
- * - ...
- *
- * @todo      Javascript support
- *
- * @example         js
- * import SDocblock from '@coffeekraken/sugar/js/docblock/SDocblock';
- * import SDocblockOutput from '@coffeekraken/sugar/js/docblock/SDocblockOutput';
- * class MyCoolOutput extends SDocblockOutput {
- *    constructor(docblockInstance, settings = {}) {
- *      super(docblockInstance, settings);
- *    }
- * }
- *
- * @since       2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SDocblockOutput {
+const packageRoot_1 = __importDefault(require("../../node/path/packageRoot"));
+const json_1 = __importDefault(require("../../node/package/json"));
+const fs_1 = __importDefault(require("fs"));
+module.exports = class SDocblockOutput {
     /**
      * @name        constructor
      * @type        Function
@@ -96,7 +102,7 @@ class SDocblockOutput {
             promise: Promise
         });
         this._handlebars.registerHelper('include', (type) => {
-            return new Promise(async (resolve, reject) => {
+            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                 if (!this._docblockInstance.blocks ||
                     !this._docblockInstance.blocks.length)
                     return '';
@@ -111,11 +117,11 @@ class SDocblockOutput {
                 const renderedBlocks = [];
                 for (let i = 0; i < blocks.length; i++) {
                     const block = blocks[i];
-                    const result = await this.renderBlock(block.toObject());
+                    const result = yield this.renderBlock(block.toObject());
                     renderedBlocks.push(result);
                 }
                 resolve(renderedBlocks.join('\n\n'));
-            });
+            }));
         });
     }
     /**
@@ -133,44 +139,46 @@ class SDocblockOutput {
      * @since       2.0.0
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async renderBlock(blockObj, settings = {}) {
-        if (blockObj.toObject && typeof blockObj.toObject === 'function')
-            blockObj = blockObj.toObject();
-        let type = typeof blockObj.type === 'string'
-            ? blockObj.type.toLowerCase()
-            : 'default';
-        const template = this._settings.blocks[type] || this._settings.blocks.default;
-        let compiledTemplateFn;
-        let templateObj = {};
-        if (node_1.default()) {
-            // get template object
-            templateObj = this.getTemplateObj(template);
-            const cacheObj = {
-                partialsTemplateObj: this._partialsTemplateObj,
-                template: templateObj,
-                data: blockObj
-            };
-            // check the cache
-            const cachedValue = await this._cache.get(cacheObj);
-            // console.log('SE', Object.keys(cachedValue));
-            if (!cachedValue) {
-                compiledTemplateFn = this._handlebars.compile(templateObj.content, {
-                    noEscape: true
-                });
-                const renderedTemplate = await compiledTemplateFn(blockObj);
-                // save in chache
-                this._cache.set(cacheObj, renderedTemplate);
-                // return the rendered template
-                return renderedTemplate;
+    renderBlock(blockObj, settings = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (blockObj.toObject && typeof blockObj.toObject === 'function')
+                blockObj = blockObj.toObject();
+            const type = typeof blockObj.type === 'string'
+                ? blockObj.type.toLowerCase()
+                : 'default';
+            const template = this._settings.blocks[type] || this._settings.blocks.default;
+            let compiledTemplateFn;
+            let templateObj = {};
+            if (node_1.default()) {
+                // get template object
+                templateObj = this.getTemplateObj(template);
+                const cacheObj = {
+                    partialsTemplateObj: this._partialsTemplateObj,
+                    template: templateObj,
+                    data: blockObj
+                };
+                // check the cache
+                const cachedValue = yield this._cache.get(cacheObj);
+                // console.log('SE', Object.keys(cachedValue));
+                if (!cachedValue) {
+                    compiledTemplateFn = this._handlebars.compile(templateObj.content, {
+                        noEscape: true
+                    });
+                    const renderedTemplate = yield compiledTemplateFn(blockObj);
+                    // save in chache
+                    this._cache.set(cacheObj, renderedTemplate);
+                    // return the rendered template
+                    return renderedTemplate;
+                }
+                else {
+                    return cachedValue;
+                }
             }
             else {
-                return cachedValue;
+                // return rendered template
+                return 'Support for javascript is not available yet...';
             }
-        }
-        else {
-            // return rendered template
-            return 'Support for javascript is not available yet...';
-        }
+        });
     }
     /**
      * @name          getPartialsTemplateObj
@@ -210,32 +218,31 @@ class SDocblockOutput {
      * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
      */
     getTemplateObj(template) {
-        let templateObj = {};
-        if (node_1.default()) {
-            const __packageRoot = require('../../node/path/packageRoot');
-            const __packageJson = require('../../node/package/json');
-            const __fs = require('fs');
-            const json = __packageJson();
-            let stats, templatePath;
-            if (__fs.existsSync(template)) {
-                templatePath = template;
+        return __awaiter(this, void 0, void 0, function* () {
+            let templateObj = {};
+            if (node_1.default()) {
+                const json = json_1.default();
+                let templatePath;
+                if (fs_1.default.existsSync(template)) {
+                    templatePath = template;
+                }
+                else if (fs_1.default.existsSync(`${packageRoot_1.default()}/node_modules/${template}`)) {
+                    templatePath = `${packageRoot_1.default()}/node_modules/${template}`;
+                }
+                else {
+                    throw new SError_1.default(`Sorry but the passed template url "<yellow>${template}</yellow>" does not exists...`);
+                }
+                const stats = fs_1.default.statSync(templatePath);
+                delete require.cache[require.resolve(templatePath)];
+                const content = yield Promise.resolve().then(() => __importStar(require(templatePath)));
+                templateObj = {
+                    path: templatePath,
+                    content: content,
+                    mtime: stats.mtime
+                };
             }
-            else if (__fs.existsSync(`${__packageRoot()}/node_modules/${template}`)) {
-                templatePath = `${__packageRoot()}/node_modules/${template}`;
-            }
-            else {
-                throw new SError_1.default(`Sorry but the passed template url "<yellow>${template}</yellow>" does not exists...`);
-            }
-            stats = __fs.statSync(templatePath);
-            delete require.cache[require.resolve(templatePath)];
-            const content = require(templatePath);
-            templateObj = {
-                path: templatePath,
-                content: content,
-                mtime: stats.mtime
-            };
-        }
-        return templateObj;
+            return templateObj;
+        });
     }
     /**
      * @name          render
@@ -253,7 +260,7 @@ class SDocblockOutput {
      */
     render(settings = {}) {
         this._partialsTemplateObj = this.getPartialsTemplateObj();
-        return new SPromise_1.default(async (resolve, reject, trigger, cancel) => {
+        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
             // get the block in object format
             const blocksArray = this._docblockInstance.toObject();
             // reset all blocks rendered state
@@ -263,23 +270,21 @@ class SDocblockOutput {
             // get the first block
             const firstBlock = blocksArray[0];
             // get the template to render
-            let type = typeof firstBlock.type === 'string'
+            const type = typeof firstBlock.type === 'string'
                 ? firstBlock.type.toLowerCase()
                 : 'default';
             const template = this._settings.templates[type] || this._settings.templates.default;
             const templateObj = this.getTemplateObj(template);
             // render the template
             let compiledTemplateFn;
-            compiledTemplateFn = this._handlebars.compile(templateObj.content, {
+            const compiledTemplateFn = this._handlebars.compile(templateObj.content, {
                 noEscape: true
             });
-            const renderedTemplate = await compiledTemplateFn();
+            const renderedTemplate = yield compiledTemplateFn();
             // resolve the rendering process with the rendered stack
             resolve(renderedTemplate);
-        }, {
+        }), {
             id: 'SDocblockOutputRender'
         });
     }
-}
-exports.default = SDocblockOutput;
-;
+};

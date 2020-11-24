@@ -1,214 +1,258 @@
-import __SObjectValidationError from '../../error/SObjectValidationError';
-import __isPlainObject from '../../is/plainObject';
-import __deepMerge from '../../object/deepMerge';
-import __filter from '../../object/filter';
-import __get from '../../object/get';
-import __typeof from '../../value/typeof';
-import __validateValue from '../value/validateValue';
-import __SStaticValidation from './validation/SStaticValidation';
-const _validationsObj = {
-    static: {
-        class: __SStaticValidation,
-        args: ['%object', '%property']
-    }
-};
-/**
- * @name            validateObject
- * @namespace           sugar.js.validation.object
- * @type            Function
- *
- * This function take an object, a definition object and validate this one depending on the definition...
- * A definition object is a plain object that specify for each properties, some requirerments like the type, if it is required or not, etc...
- * For more documentation about the definition objects, check the "validateDefinitionObject" function doc.
- *
- * @param       {Object}        objectToCheck       The object to check using the definition one
- * @param       {Object}        definitionObj       The definition object to use
- * @param       {String}        [name='unnamed']    Specify a name for your object. This will be useful during the validation process
- * @param       {Object}        [settings={}]         An object of settings to configure your validation process:
- * - throw (true) {Boolean}: Specify if you want to throw an error when something goes wrong
- * - extendsFn (null) {Function}: Specify a function that will be called for each properties with the arguments "argName", "argDefinition" and "value" to let you the possibility to extend this validation function
- * @return      {Boolean|Array<String>}                    Return true if all is ok, and an Array of string that describe the issue if it's not
- *
- * @todo        tests and documentation refactoring
- *
- * @example         js
- * import validateObject from '@coffeekraken/sugar/js/validation/object/validateObject';
- * validateObject({
- *    arg1: 'hello',
- *    arg2: false
- * }, {
- *    arg1: {
- *      type: 'String',
- *      required: true
- *    },
- *    arg2: {
- *      type: 'Boolean',
- *      required: true
- *    }
- * }); // => true
- *
- * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export default function validateObject(objectToCheck, definitionObj, settings = {}, _argPath = []) {
-    settings = __deepMerge({
-        throw: true,
-        name: null,
-        interface: null,
-        validationsObj: _validationsObj
-    }, settings);
-    let issuesObj = {
-        $name: settings.name ||
-            objectToCheck.constructor.name ||
-            objectToCheck.name ||
-            'Unnamed',
-        $interface: settings.interface,
-        $issues: [],
-        $messages: {}
+// @ts-nocheck
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
     };
-    // loop on the definition object properties
-    for (let i = 0; i < Object.keys(definitionObj).length; i++) {
-        const argName = Object.keys(definitionObj)[i];
-        const argDefinition = definitionObj[argName];
-        // __SObjectDefinitionInterface.apply(argDefinition);
-        let value = __get(objectToCheck, argName);
-        if (value === undefined || value === null) {
-            if (objectToCheck.constructor &&
-                objectToCheck.constructor[argName] !== undefined) {
-                value = objectToCheck.constructor[argName];
-            }
+    return __assign.apply(this, arguments);
+};
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "../../error/SObjectValidationError", "../../is/plainObject", "../../object/deepMerge", "../../object/filter", "../../object/get", "../../value/typeof", "../value/validateValue", "./validation/SStaticValidation"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var SObjectValidationError_1 = __importDefault(require("../../error/SObjectValidationError"));
+    var plainObject_1 = __importDefault(require("../../is/plainObject"));
+    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
+    var filter_1 = __importDefault(require("../../object/filter"));
+    var get_1 = __importDefault(require("../../object/get"));
+    var typeof_2 = __importDefault(require("../../value/typeof"));
+    var validateValue_1 = __importDefault(require("../value/validateValue"));
+    var SStaticValidation_1 = __importDefault(require("./validation/SStaticValidation"));
+    var _validationsObj = {
+        static: {
+            class: SStaticValidation_1.default,
+            args: ['%object', '%property']
         }
-        if (!argDefinition.required && (value === undefined || value === null)) {
-            // the value is not required so we pass the checks...
-            break;
-        }
-        issuesObj[argName] = {
-            $name: argName,
-            $received: {
-                type: __typeof(value),
-                value
-            },
-            $expected: argDefinition,
+    };
+    /**
+     * @name            validateObject
+     * @namespace           sugar.js.validation.object
+     * @type            Function
+     * @wip
+     *
+     * This function take an object, a definition object and validate this one depending on the definition...
+     * A definition object is a plain object that specify for each properties, some requirerments like the type, if it is required or not, etc...
+     * For more documentation about the definition objects, check the "validateDefinitionObject" function doc.
+     *
+     * @param       {Object}        objectToCheck       The object to check using the definition one
+     * @param       {Object}        definitionObj       The definition object to use
+     * @param       {String}        [name='unnamed']    Specify a name for your object. This will be useful during the validation process
+     * @param       {Object}        [settings={}]         An object of settings to configure your validation process:
+     * - throw (true) {Boolean}: Specify if you want to throw an error when something goes wrong
+     * - extendsFn (null) {Function}: Specify a function that will be called for each properties with the arguments "argName", "argDefinition" and "value" to let you the possibility to extend this validation function
+     * @return      {Boolean|Array<String>}                    Return true if all is ok, and an Array of string that describe the issue if it's not
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @example         js
+     * import validateObject from '@coffeekraken/sugar/js/validation/object/validateObject';
+     * validateObject({
+     *    arg1: 'hello',
+     *    arg2: false
+     * }, {
+     *    arg1: {
+     *      type: 'String',
+     *      required: true
+     *    },
+     *    arg2: {
+     *      type: 'Boolean',
+     *      required: true
+     *    }
+     * }); // => true
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    function validateObject(objectToCheck, definitionObj, settings, _argPath) {
+        if (settings === void 0) { settings = {}; }
+        if (_argPath === void 0) { _argPath = []; }
+        settings = deepMerge_2.default({
+            throw: true,
+            name: null,
+            interface: null,
+            validationsObj: _validationsObj
+        }, settings);
+        var issuesObj = {
+            $name: settings.name ||
+                objectToCheck.constructor.name ||
+                objectToCheck.name ||
+                'Unnamed',
+            $interface: settings.interface,
             $issues: [],
             $messages: {}
         };
-        const validationRes = __validateValue(value, argDefinition, {
-            name: argName,
-            throw: settings.throw
-        });
-        if (validationRes !== true) {
-            issuesObj[argName] = __deepMerge(issuesObj[argName], validationRes || {}, {
-                array: true
-            });
-        }
-        else {
-        }
-        Object.keys(settings.validationsObj).forEach((validationName) => {
-            if (!_validationsObj[validationName]) {
-                issuesObj.$issues.push(`definitionObj.${validationName}.unknown`);
-                issuesObj.$messages[`definitionObj.${validationName}.unknown`] = `The specified "<yellow>${validationName}</yellow>" validation is <red>not supported</red>`;
+        var _loop_1 = function (i) {
+            var argName = Object.keys(definitionObj)[i];
+            var argDefinition = definitionObj[argName];
+            // __SObjectDefinitionInterface.apply(argDefinition);
+            var value = get_1.default(objectToCheck, argName);
+            if (value === undefined || value === null) {
+                if (objectToCheck.constructor &&
+                    objectToCheck.constructor[argName] !== undefined) {
+                    value = objectToCheck.constructor[argName];
+                }
             }
-            if (validationName === 'static' &&
-                definitionObj.static &&
-                definitionObj.static !== true)
-                return;
-            if (!definitionObj.hasOwnProperty(validationName))
-                return;
-            if (!definitionObj[validationName])
-                return;
-            const validationObj = Object.assign({}, settings.validationsObj[validationName]);
-            validationObj.args = validationObj.args.map((arg) => {
-                if (typeof arg === 'string' && arg.slice(0, 15) === '%definitionObj.') {
-                    arg = __get(definitionObj, arg.replace('%definitionObj.', ''));
-                }
-                if (typeof arg === 'string' && arg === '%object') {
-                    arg = objectToCheck;
-                }
-                if (typeof arg === 'string' && arg === '%property') {
-                    arg = argName;
-                }
-                return arg;
-            });
-            const validationResult = validationObj.class.apply(value, ...validationObj.args);
-            if (validationResult !== true) {
-                issuesObj[argName].$issues.push(validationName);
-                issuesObj[argName].$messages[validationName] = validationResult;
+            if (!argDefinition.required && (value === undefined || value === null)) {
+                return "break";
             }
-        });
-        // handle "lazy" properties
-        if ((argDefinition.lazy && objectToCheck[argName] === null) ||
-            objectToCheck[argName] === undefined) {
-            if (!objectToCheck.__validateObjectObservedProperties) {
-                Object.defineProperty(objectToCheck, '__validateObjectObservedProperties', {
-                    value: [],
-                    writable: true,
-                    enumerable: false
+            issuesObj[argName] = {
+                $name: argName,
+                $received: {
+                    type: typeof_2.default(value),
+                    value: value
+                },
+                $expected: argDefinition,
+                $issues: [],
+                $messages: {}
+            };
+            var validationRes = validateValue_1.default(value, argDefinition, {
+                name: argName,
+                throw: settings.throw
+            });
+            if (validationRes !== true) {
+                issuesObj[argName] = deepMerge_2.default(issuesObj[argName], validationRes || {}, {
+                    array: true
                 });
-            }
-            if (objectToCheck.__validateObjectObservedProperties.indexOf(argName) !== -1) {
             }
             else {
-                const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(objectToCheck), argName);
-                objectToCheck.__validateObjectObservedProperties.push(argName);
-                Object.defineProperty(objectToCheck, argName, {
-                    set: (value) => {
-                        // validate the passed value
-                        const validationResult = __validateValue(value, argDefinition, Object.assign(Object.assign({}, settings), { throw: true, name: `${settings.name}.${argName}` }));
-                        if (descriptor && descriptor.set)
-                            return descriptor.set(value);
-                        objectToCheck[`__${argName}`] = value;
-                        return value;
-                    },
-                    get: () => {
-                        if (descriptor && descriptor.get)
-                            descriptor.get();
-                        return objectToCheck[`__${argName}`];
+            }
+            Object.keys(settings.validationsObj).forEach(function (validationName) {
+                var _a;
+                if (!_validationsObj[validationName]) {
+                    issuesObj.$issues.push("definitionObj." + validationName + ".unknown");
+                    issuesObj.$messages["definitionObj." + validationName + ".unknown"] = "The specified \"<yellow>" + validationName + "</yellow>\" validation is <red>not supported</red>";
+                }
+                if (validationName === 'static' &&
+                    definitionObj.static &&
+                    definitionObj.static !== true)
+                    return;
+                if (!definitionObj.hasOwnProperty(validationName))
+                    return;
+                if (!definitionObj[validationName])
+                    return;
+                var validationObj = Object.assign({}, settings.validationsObj[validationName]);
+                validationObj.args = validationObj.args.map(function (arg) {
+                    if (typeof arg === 'string' && arg.slice(0, 15) === '%definitionObj.') {
+                        arg = get_1.default(definitionObj, arg.replace('%definitionObj.', ''));
                     }
+                    if (typeof arg === 'string' && arg === '%object') {
+                        arg = objectToCheck;
+                    }
+                    if (typeof arg === 'string' && arg === '%property') {
+                        arg = argName;
+                    }
+                    return arg;
                 });
+                var validationResult = (_a = validationObj.class).apply.apply(_a, __spreadArrays([value], validationObj.args));
+                if (validationResult !== true) {
+                    issuesObj[argName].$issues.push(validationName);
+                    issuesObj[argName].$messages[validationName] = validationResult;
+                }
+            });
+            // handle "lazy" properties
+            if ((argDefinition.lazy && objectToCheck[argName] === null) ||
+                objectToCheck[argName] === undefined) {
+                if (!objectToCheck.__validateObjectObservedProperties) {
+                    Object.defineProperty(objectToCheck, '__validateObjectObservedProperties', {
+                        value: [],
+                        writable: true,
+                        enumerable: false
+                    });
+                }
+                if (objectToCheck.__validateObjectObservedProperties.indexOf(argName) !== -1) {
+                }
+                else {
+                    var descriptor_1 = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(objectToCheck), argName);
+                    objectToCheck.__validateObjectObservedProperties.push(argName);
+                    Object.defineProperty(objectToCheck, argName, {
+                        set: function (value) {
+                            // validate the passed value
+                            var validationResult = validateValue_1.default(value, argDefinition, __assign(__assign({}, settings), { throw: true, name: settings.name + "." + argName }));
+                            if (descriptor_1 && descriptor_1.set)
+                                return descriptor_1.set(value);
+                            objectToCheck["__" + argName] = value;
+                            return value;
+                        },
+                        get: function () {
+                            if (descriptor_1 && descriptor_1.get)
+                                descriptor_1.get();
+                            return objectToCheck["__" + argName];
+                        }
+                    });
+                }
             }
-        }
-        // check if is an extendsFn
-        if (settings.extendsFn) {
-            if (!issuesObj[argName]) {
-                issuesObj[argName] = {
-                    $issues: []
-                };
+            // check if is an extendsFn
+            if (settings.extendsFn) {
+                if (!issuesObj[argName]) {
+                    issuesObj[argName] = {
+                        $issues: []
+                    };
+                }
+                issuesObj[argName] = settings.extendsFn(argName, argDefinition, value, issuesObj[argName]);
             }
-            issuesObj[argName] = settings.extendsFn(argName, argDefinition, value, issuesObj[argName]);
-        }
-        // filter args that have no issues
-        issuesObj = __filter(issuesObj, (item, key) => {
-            if (Array.isArray(item))
+            // filter args that have no issues
+            issuesObj = filter_1.default(issuesObj, function (item, key) {
+                if (Array.isArray(item))
+                    return true;
+                if (plainObject_1.default(item) && item.$issues) {
+                    if (!item.$issues.length)
+                        return false;
+                    if (issuesObj.$issues.indexOf(key) === -1)
+                        issuesObj.$issues.push(key);
+                }
                 return true;
-            if (__isPlainObject(item) && item.$issues) {
-                if (!item.$issues.length)
-                    return false;
-                if (issuesObj.$issues.indexOf(key) === -1)
-                    issuesObj.$issues.push(key);
+            });
+            // TODO implement the "children" support
+            // check if we have some "children" properties
+            if (argDefinition.definitionObj &&
+                (argDefinition.required ||
+                    (objectToCheck !== null && objectToCheck !== undefined))) {
+                var childrenValidation_1 = validateObject(objectToCheck || {}, argDefinition.definitionObj, __assign(__assign({}, settings), { throw: false }), __spreadArrays(_argPath, [argName]));
+                // console.log('CC', childrenValidation);
+                if (childrenValidation_1 !== true && childrenValidation_1.$issues) {
+                    childrenValidation_1.$issues.forEach(function (issue) {
+                        var issueObj = childrenValidation_1[issue];
+                        issueObj.$name = argName + "." + issueObj.name;
+                        issuesObj.$issues.push(argName + "." + issue);
+                        issuesObj[argName + "." + issue] = issueObj;
+                    });
+                }
             }
-            return true;
-        });
-        // TODO implement the "children" support
-        // check if we have some "children" properties
-        if (argDefinition.definitionObj &&
-            (argDefinition.required ||
-                (objectToCheck !== null && objectToCheck !== undefined))) {
-            const childrenValidation = validateObject(objectToCheck || {}, argDefinition.definitionObj, Object.assign(Object.assign({}, settings), { throw: false }), [..._argPath, argName]);
-            // console.log('CC', childrenValidation);
-            if (childrenValidation !== true && childrenValidation.$issues) {
-                childrenValidation.$issues.forEach((issue) => {
-                    const issueObj = childrenValidation[issue];
-                    issueObj.$name = `${argName}.${issueObj.name}`;
-                    issuesObj.$issues.push(`${argName}.${issue}`);
-                    issuesObj[`${argName}.${issue}`] = issueObj;
-                });
-            }
+        };
+        // loop on the definition object properties
+        for (var i = 0; i < Object.keys(definitionObj).length; i++) {
+            var state_1 = _loop_1(i);
+            if (state_1 === "break")
+                break;
         }
+        if (!issuesObj.$issues.length)
+            return true;
+        if (settings.throw) {
+            throw new SObjectValidationError_1.default(issuesObj);
+        }
+        return issuesObj;
     }
-    if (!issuesObj.$issues.length)
-        return true;
-    if (settings.throw) {
-        throw new __SObjectValidationError(issuesObj);
-    }
-    return issuesObj;
-}
+    return validateObject;
+});

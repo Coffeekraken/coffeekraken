@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __typeMap from './typeMap';
 import __get from '../object/get';
 import __flatten from '../object/flatten';

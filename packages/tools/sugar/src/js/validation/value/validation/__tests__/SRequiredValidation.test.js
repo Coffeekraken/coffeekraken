@@ -1,2 +1,2 @@
-const __SRequiredValidation = require('../SRequiredValidation');
+var __SRequiredValidation = require('../SRequiredValidation');
 require('./SRequiredValidation')(__SRequiredValidation);

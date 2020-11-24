@@ -1,8 +1,17 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const getRegisteredProcesses_1 = __importDefault(require("./getRegisteredProcesses"));
 const fkill_1 = __importDefault(require("fkill"));
 const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
@@ -37,7 +46,7 @@ function exitCleanup() {
     process.env.EXIT_CLEANUP = true;
     hotkey_1.default('ctrl+c', {
         once: true
-    }).on('press', async () => {
+    }).on('press', () => __awaiter(this, void 0, void 0, function* () {
         // check if all processes are closed
         const processes = getRegisteredProcesses_1.default();
         const remainingProcessesCount = Object.keys(processes).length;
@@ -48,7 +57,7 @@ function exitCleanup() {
             process.exit();
         });
         keypress_1.default.disableMouse(process.stdout);
-        await wait_1.default(50);
+        yield wait_1.default(50);
         const $output = new SBlessedOutput_1.default([], {
             attach: true,
             maxItemsByGroup: 1000
@@ -63,14 +72,14 @@ function exitCleanup() {
         });
         // processed that have been registered during the process
         if (remainingProcessesCount > 0) {
-            Object.keys(processes).forEach(async (key) => {
+            Object.keys(processes).forEach((key) => __awaiter(this, void 0, void 0, function* () {
                 const processObj = processes[key];
                 if (!processObj.exitCode && process.pid !== processObj.pid) {
                     $output.log({
                         group: key,
                         value: `Killing the process with the PID <cyan>${processObj.pid}</cyan>`
                     });
-                    await fkill_1.default(processObj.pid);
+                    yield fkill_1.default(processObj.pid);
                     $output.log({
                         group: key,
                         value: `#success The process has been killed <green>successfully</green>`
@@ -80,7 +89,7 @@ function exitCleanup() {
                 else {
                     // processKilled();
                 }
-            });
+            }));
         }
         // Forgotten processes
         $output.log({
@@ -88,7 +97,7 @@ function exitCleanup() {
             value: 'Cleaning the forgotten process(es)...'
         });
         const childProcess = new SChildProcess_1.default('sugar util.kill all', {});
-        await childProcess
+        yield childProcess
             .run()
             .on('log,error', (value) => {
             if (value.value.includes('#success')) {
@@ -98,18 +107,18 @@ function exitCleanup() {
                 });
             }
         })
-            .on('cancel,finally', async () => {
+            .on('cancel,finally', () => __awaiter(this, void 0, void 0, function* () {
             $output.log({
                 group: 'Forgotten processes',
                 value: `#success All of the forgotten process(es) have been <green>successfully</green> killed`
             });
-            await wait_1.default(20);
+            yield wait_1.default(20);
             $output.log({
                 value: `Closing the main process in <yellow>5s</yellow>...\n<cyan>ctrl+c</cyan> to close directly`
             });
-            await wait_1.default(5000);
+            yield wait_1.default(5000);
             process.exit();
-        });
-    });
+        }));
+    }));
 }
-exports.default = exitCleanup;
+module.exports = exitCleanup;

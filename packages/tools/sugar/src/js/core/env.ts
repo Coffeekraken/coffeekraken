@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isNode from '../is/node';
 import __get from '../object/get';
 import __set from '../object/set';
@@ -27,7 +29,7 @@ import __parse from '../string/parse';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function env(dotPath, value) {
+function env(dotPath, value) {
   if (!__isNode()) {
     if (!window.process) window.process = {};
     if (!window.process.env) window.process.env = {};
@@ -43,3 +45,5 @@ export default function env(dotPath, value) {
   // return the variable value
   return __parse(__get(targetObj, dotPath.toUpperCase()));
 }
+
+export = env;

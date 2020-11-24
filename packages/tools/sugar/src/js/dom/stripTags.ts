@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      stripTags
  * @namespace           sugar.js.dom
@@ -20,8 +22,9 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function stripTags(html) {
+function stripTags(html) {
   const tmp = document.createElement('div');
   tmp.innerHTML = html;
   return tmp.textContent || tmp.innerText || '';
 }
+export = stripTags;

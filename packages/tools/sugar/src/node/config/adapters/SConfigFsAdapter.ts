@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __fs from 'fs';
 import __deepMerge from '../../object/deepMerge';
 import __tmpDir from '../../fs/tmpDir';
@@ -9,6 +11,7 @@ import __SConfigAdapter from './SConfigAdapter';
  * @name                  SConfigFsAdapter
  * @namespace           sugar.node.config.adapters
  * @type                  Class
+ * @beta
  *
  * The JSON data adapter for the SConfig class that let you define a filename where you want to save your configs, how you want to encrypt/decrypt it
  * and then you just have to use the SConfig class and that's it...
@@ -21,10 +24,15 @@ import __SConfigAdapter from './SConfigAdapter';
  * - userConfigPath (${__tmpDir()}/[filename]) {String}: This specify the path to the "user" config file
  * @return                  {Promise}                                         A promise that will be resolved once the data has been getted/saved...
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export default class SConfigFsAdapter extends __SConfigAdapter {
+export = class SConfigFsAdapter extends __SConfigAdapter {
   constructor(settings = {}) {
     settings = __deepMerge(
       {
@@ -103,7 +111,7 @@ export default class SConfigFsAdapter extends __SConfigAdapter {
 
     newConfig = __diff(baseConfig, newConfig);
 
-    let newConfigString = `
+    const newConfigString = `
       module.exports = ${JSON.stringify(newConfig)};
     `;
 
@@ -112,4 +120,4 @@ export default class SConfigFsAdapter extends __SConfigAdapter {
 
     return true;
   }
-};
+}

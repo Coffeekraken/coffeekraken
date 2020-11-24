@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SActionsStream from '../../stream/SActionsStream';
 import __deepMerge from '../../object/deepMerge';
 import __SFsOutputStreamAction from '../../stream/actions/SFsOutputStreamAction';
@@ -9,11 +11,15 @@ import __SBuildFrontspecStreamAction from './actions/SBuildFrontspecStreamAction
  * @namespace           sugar.node.build.frontspec
  * @type            Class
  * @extends         SActionsStream
+ * @wip
  *
  * This class represent a pre-configured action stream to build easily frontspec files
  *
  * @param           {Object}          [settings={}]         The settings object to configure your instance
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  * @todo        Document the streamObj required properties
  *
  * @example         js
@@ -29,7 +35,7 @@ import __SBuildFrontspecStreamAction from './actions/SBuildFrontspecStreamAction
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBuildFrontspecActionsStream extends __SActionsStream {
+export = class SBuildFrontspecActionsStream extends __SActionsStream {
   static interface = __SBuildFrontspecInterface;
 
   /**

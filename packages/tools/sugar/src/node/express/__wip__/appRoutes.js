@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 /**
  * @name                    appRoutes
  * @namespace           sugar.node.express

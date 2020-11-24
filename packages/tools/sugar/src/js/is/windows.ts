@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                            windows
  * @namespace           sugar.js.is
@@ -19,9 +21,10 @@
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function windows() {
+function windows() {
   if (process && process.platform) {
     return process.platform === 'win32';
   }
   return navigator.platform.toUpperCase().indexOf('WIN') > -1;
 }
+export = windows;

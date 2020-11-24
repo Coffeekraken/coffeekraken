@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      requestFullscreen
  * @namespace           sugar.js.dom
@@ -20,7 +22,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function requestFullscreen(elm) {
+function requestFullscreen(elm) {
   if (elm.requestFullscreen) {
     return elm.requestFullscreen();
   } else if (elm.mozRequestFullScreen) {
@@ -31,3 +33,4 @@ export default function requestFullscreen(elm) {
     return elm.msRequestFullscreen();
   }
 }
+export = requestFullscreen;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                                sort
  * @namespace           sugar.js.object
@@ -32,7 +34,7 @@
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function sort(object, sort) {
+function sort(object, sort) {
   // get the object keys
   const keys = Object.keys(object);
 
@@ -53,3 +55,4 @@ export default function sort(object, sort) {
   // return the result sorted object
   return resultObj;
 }
+export = sort;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __convert from './convert';
 
@@ -5,6 +7,7 @@ import __convert from './convert';
  * @name                SDuration
  * @namespace           sugar.js.time
  * @type                Class
+ * @beta
  *
  * This class represent a duration tracking process. Simply instanciate it,
  * then call the ```instance.get()``` method and you will get back
@@ -15,6 +18,10 @@ import __convert from './convert';
  * @setting      {String}           [format='s']            Specify the format you want for your instance. Can be 'ms|millisecond(s)', 's|second(s)', 'm|minute(s)', 'h|hour(s)', 'd|day', 'w|week(s)', 'month(s)', 'y|year(s)'
  * @setting      {Boolean}          [suffix=true]             Specify if you want the duration returned with the corresponding suffix like 'ms', 's', etc...
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example             js
  * import SDuration from '@coffeekraken/sugar/js/time/SDuration';
  * const duration = new SDuration();
@@ -24,7 +31,7 @@ import __convert from './convert';
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default class SDuration {
+export = class SDuration {
   /**
    * @name            _settings
    * @type            Object
@@ -113,8 +120,8 @@ export default class SDuration {
     settings = __deepMerge(this._settings, settings);
     this.endTime = Date.now();
 
-    let durationMs = this.endTime - this.startTime;
-    let durationConverted = __convert(durationMs, settings.format);
+    const durationMs = this.endTime - this.startTime;
+    const durationConverted = __convert(durationMs, settings.format);
 
     return settings.suffix ? durationConverted : parseFloat(durationConverted);
   }

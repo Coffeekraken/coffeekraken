@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { parse } from 'micromatch';
 import __parseEs6Imports from 'parse-es6-imports';
 
@@ -27,7 +29,7 @@ import __parseEs6Imports from 'parse-es6-imports';
  * @since           2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-export default class SEs6Import {
+export = class SEs6Import {
   /**
    * @name            parseCode
    * @type            Function

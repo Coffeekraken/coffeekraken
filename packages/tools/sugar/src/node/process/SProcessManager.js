@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const argsToObject_1 = __importDefault(require("../cli/argsToObject"));
 const class_1 = __importDefault(require("../is/class"));
 const childProcess_1 = __importDefault(require("../is/childProcess"));
@@ -19,12 +19,17 @@ const output_1 = __importDefault(require("./output"));
  * @type            Class
  * @extends         SPromise
  * @implements      SProcessManagerInterface
+ * @wip
  *
  * This class represent a process handler class that will fire up some SProcess processes
  *
  * @param         {Object}          [settings={}]           An object of settings to configure your process instance:
  * - id (processHandler.unnamed) {String}: Specify a unique id for your particular process instance
  * - name (Unnamed Process Handler) {String}: Specify a name for your process instance
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @see         https://www.npmjs.com/package/node-notifier
  * @since       2.0.0
@@ -262,9 +267,7 @@ class SProcessManager extends SPromise_1.default {
             }
             return;
         }
-        this.currentProcess = new this._ProcessClass({
-            ...settings.processSettings
-        });
+        this.currentProcess = new this._ProcessClass(Object.assign({}, settings.processSettings));
         SPromise_1.default.pipe(this.currentProcess, this);
         this._processesStack.push(this.currentProcess);
         this.currentProcess.run(params);
@@ -287,6 +290,6 @@ class SProcessManager extends SPromise_1.default {
         return this.currentProcess;
     }
 }
-exports.default = SProcessManagerInterface_1.default.implements(SProcessManager, [
+module.exports = SProcessManagerInterface_1.default.implements(SProcessManager, [
     SProcessManagerInterface_1.default
 ]);

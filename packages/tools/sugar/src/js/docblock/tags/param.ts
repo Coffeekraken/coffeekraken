@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parse from '../../string/parse';
 import __upperFirst from '../../string/upperFirst';
 
@@ -18,7 +20,7 @@ import __upperFirst from '../../string/upperFirst';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-export default function param(data) {
+function param(data) {
   if (!Array.isArray(data)) data = [data];
 
   const res = {};
@@ -66,3 +68,4 @@ export default function param(data) {
   });
   return res;
 }
+export = param;

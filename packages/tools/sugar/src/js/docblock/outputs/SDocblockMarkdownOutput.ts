@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __SDocblockOutput from '../SDocblockOutput';
 import __toString from '../../string/toString';
@@ -48,7 +50,7 @@ import __functionBlock from './markdown/blocks/function';
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SDocblockMarkdownOutput extends __SDocblockOutput {
+export = class SDocblockMarkdownOutput extends __SDocblockOutput {
   /**
    * @name        supportedTags
    * @type        Array<String>

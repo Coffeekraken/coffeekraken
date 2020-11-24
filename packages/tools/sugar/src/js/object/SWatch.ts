@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __constructorName from './constructorName';
 import __get from './get';
 import __set from './set';
@@ -42,7 +44,7 @@ import __clone from '../object/clone';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SWatch {
+export = class SWatch {
   /**
    * @name                    _watchStack
    * @type                    Object

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __getExtendsStack from '../class/getExtendsStack';
 import __argsToObject from '../cli/argsToObject';
 import __SError from '../error/SError';
@@ -54,4 +56,4 @@ const Cls: ISObjectDescriptorCtor = class SObjectDescriptor
   extends SDescriptor
   implements ISObjectDescriptor {};
 
-export default Cls;
+export = Cls;

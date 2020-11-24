@@ -1,20 +1,25 @@
 "use strict";
-// TODO tests
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name                    extension
  * @namespace           sugar.node.fs
  * @type                    Function
+ * @stable
  *
  * Return the passed file path extension
  *
  * @param           {String}            path                The file path to get the extension from
  * @return          {String}                                The file extension
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import extension from '@coffeekraken/sugar/node/fs/extension';
  * extension('hello/world.jpg'); // => jpg
  *
+ * @since         2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function extension(path) {
@@ -23,4 +28,4 @@ function extension(path) {
         return '';
     return path.split('.').pop();
 }
-exports.default = extension;
+module.exports = extension;

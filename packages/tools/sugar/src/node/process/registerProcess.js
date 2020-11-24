@@ -1,19 +1,24 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const uniqid_1 = __importDefault(require("../string/uniqid"));
 /**
  * @name              registerProcess
  * @namespace           sugar.node.process
  * @type              Function
+ * @wip
  *
  * This function register a (child) process in a global stack.
  * You can access these registered processes using the "getRegisteredProcesses" function.
  *
  * @param       {Process}         pro         The process you want to register
  * @param       {String}      [name=null]       A specific name for your process. By default a uniqid will be generated
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import registerProcess from '@coffeekraken/sugar/node/process/registerProcess';
@@ -32,4 +37,4 @@ function registerProcess(pro, name = uniqid_1.default()) {
         });
     }
 }
-exports.default = registerProcess;
+module.exports = registerProcess;

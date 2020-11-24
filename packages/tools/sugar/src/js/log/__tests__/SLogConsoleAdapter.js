@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__SLog, __SLogConsoleAdapter) => {
     describe('sugar.js.log.SLogConsoleAdapter', () => {
         const logger = new __SLog({

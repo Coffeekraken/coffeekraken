@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __resolveGlob from './resolveGlob';
 import __extractGlob from './extractGlob';
@@ -7,6 +9,7 @@ import __extractNoneGlob from './extractNoneGlob';
  * @name                SGlob
  * @namespace           sugar.node.glob
  * @type                Class
+ * @beta
  *
  * This class represent a glob pattern and can be used to resolve some globs and get back
  * an array of SFile instances or to extract some part of the pattern, etc...
@@ -14,7 +17,9 @@ import __extractNoneGlob from './extractNoneGlob';
  * @param           {String|Array<String>}          globs            The glob pattern(s) you want to use with this instance
  * @param           {Object}                [settings={}]           An object of settings to configure your glob instance
  *
- * @todo               tests
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import SGlob from '@coffeekraken/sugar/node/glob/SGlob';
@@ -25,7 +30,7 @@ import __extractNoneGlob from './extractNoneGlob';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SGlob {
+export = class SGlob {
   /**
    * @name            _settings
    * @type            Object

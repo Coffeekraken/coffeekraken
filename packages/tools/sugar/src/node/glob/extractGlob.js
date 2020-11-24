@@ -1,18 +1,23 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const glob_parent_1 = __importDefault(require("glob-parent"));
 /**
  * @name                extractGlob
  * @namespace           sugar.js.glob
  * @type                Function
+ * @stable
  *
  * This function simply return you the glob part of a passed string
  *
  * @param       {String}            string          The string from which to extract the glob part
  * @return      {String}                            The glob part of the passed string
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import extractGlob from '@coffeekraken/sugar/js/glob/extractGlob';
@@ -29,4 +34,4 @@ function extractGlob(string) {
         final = final.slice(1);
     return final;
 }
-exports.default = extractGlob;
+module.exports = extractGlob;

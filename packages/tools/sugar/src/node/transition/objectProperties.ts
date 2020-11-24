@@ -1,15 +1,16 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __convert from '../time/convert';
 import __STimer from '../time/STimer';
 import __availableEasingsArray from '../easing/availableEasingsArray';
 import __SPromise from '../promise/SPromise';
 
-// TODO: tests
-
 /**
  * @name              objectProperties
  * @namespace           sugar.node.transition
  * @type              Function
+ * @beta
  *
  * This function take a start object and a target object and proceed to the transition of all properties
  * depending on the passed settings object that is documented bellow.
@@ -23,12 +24,16 @@ import __SPromise from '../promise/SPromise';
  * - stepsInterval (null) {Number}: Specify the interval that you want between each steps in miliseconds
  * - round (true) {Boolean}: Specify if you want the returned transition object values to be rounded or not
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function objectProperties(startObj, targetObj, settings = {}) {
+function objectProperties(startObj, targetObj, settings = {}) {
   return new __SPromise(
-    (resolve, reject, trigger, cancel) => {
+    async (resolve, reject, trigger, cancel) => {
       settings = __deepMerge(
         {
           duration: '1s',
@@ -43,7 +48,7 @@ export default function objectProperties(startObj, targetObj, settings = {}) {
       const availableEasingsArray = __availableEasingsArray();
       const duration = __convert(settings.duration, 'ms');
       let stepsCount = settings.stepsCount;
-      let stepsInterval = settings.stepsInterval;
+      const stepsInterval = settings.stepsInterval;
 
       // check the easing wanted
       if (availableEasingsArray.indexOf(settings.easing) === -1) {
@@ -57,7 +62,7 @@ export default function objectProperties(startObj, targetObj, settings = {}) {
       }
 
       // require the easing function
-      const easingFn = require(`../easing/${settings.easing}`);
+      const easingFn = await import(`../easing/${settings.easing}`);
 
       // check if we have a steps passed, or calculate automatically
       if (!stepsCount && !stepsInterval) {
@@ -129,4 +134,5 @@ export default function objectProperties(startObj, targetObj, settings = {}) {
       id: 'objectProperties'
     }
   );
-};
+}
+export = objectProperties;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        constructorName
  * @namespace           sugar.js.object
@@ -24,6 +26,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function constructorName(obj) {
+function constructorName(obj) {
   return obj.constructor && obj.constructor.name ? obj.constructor.name : null;
 }
+export = constructorName;

@@ -1,3 +1,4 @@
+"use strict";
 const __injectStyle = require('../injectStyle');
 describe('sugar.js.css.injectStyle', () => {
     it('Should inject the string style properly', () => {

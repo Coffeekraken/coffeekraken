@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      onSwipe
  * @namespace           sugar.js.dom
@@ -31,7 +33,7 @@
  * @since         1.0.0
  * @see 		https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d 	Based on
  */
-export default function onSwipe(elm, cb, threshold = 100) {
+function onSwipe(elm, cb, threshold = 100) {
   let touchstartX = 0;
   let touchstartY = 0;
   let touchendX = 0;
@@ -78,3 +80,4 @@ export default function onSwipe(elm, cb, threshold = 100) {
     }
   }
 }
+export = onSwipe;

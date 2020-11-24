@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __packageRoot = require('../../../path/packageRoot');
 const __SPromise = require('../../../promise/SPromise');
 const __toHtml = require('../../../convert/toHtml');

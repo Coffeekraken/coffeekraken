@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __SBlessedPopup from '../popup/SBlessedPopup';
 import __SSummaryList from './SSummaryList';
@@ -6,6 +8,7 @@ import __SSummaryList from './SSummaryList';
  * @name                      blessedSummaryListPopup
  * @namespace           sugar.node.blessed.list
  * @type                      Function
+ * @wip
  *
  * This function init and display a summary list popup and return an SPromise instance on which you can subscribe for response, etc...
  *
@@ -17,6 +20,10 @@ import __SSummaryList from './SSummaryList';
  * - then: The "then" function mapped from the list.promise SPromise instance
  * - catch: The "catch" function mapped from the list.promise SPromise instance
  * - attachTo: A simple function that you can use to attach the popup to a blessed element
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import blessedSummaryListPopup from 'coffeekraken/sugar/node/blessed/list/blessedSummaryListPopup';
@@ -30,9 +37,10 @@ import __SSummaryList from './SSummaryList';
  *    }]
  * }).attachTo(myCoolBlessedParent);
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function blessedSummaryListPopup(settings = {}) {
+function blessedSummaryListPopup(settings = {}) {
   settings = __deepMerge(
     {
       title: null,
@@ -64,3 +72,4 @@ export default function blessedSummaryListPopup(settings = {}) {
     }
   };
 }
+export = blessedSummaryListPopup;

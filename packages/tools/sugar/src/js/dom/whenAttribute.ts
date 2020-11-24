@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __autoCast from '../string/autoCast';
 import __observeAttribute from './observeAttributes';
 
@@ -34,7 +36,7 @@ import __observeAttribute from './observeAttributes';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function whenAttribute(elm, attrName, checkFn = null) {
+function whenAttribute(elm, attrName, checkFn = null) {
   return new Promise((resolve, reject) => {
     if (elm.hasAttribute(attrName)) {
       const value = __autoCast(elm.getAttribute(attrName));
@@ -63,3 +65,4 @@ export default function whenAttribute(elm, attrName, checkFn = null) {
     });
   });
 }
+export = whenAttribute;

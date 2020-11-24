@@ -1,5 +1,14 @@
+// @ts-nocheck
+
 import __getFilename from '../../fs/filename';
 import __packageRoot from '../../path/packageRoot';
+
+/**
+ * @wip
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ */
 
 // my-custom-reporter.js
 class STestJestOutputReporter {
@@ -92,4 +101,4 @@ class STestJestOutputReporter {
   }
 }
 
-export default STestJestOutputReporter;
+export = STestJestOutputReporter;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __countLine from './countLine';
 
@@ -5,6 +7,7 @@ import __countLine from './countLine';
  * @name                                        crop
  * @namespace           sugar.js.string
  * @type                                        Function
+ * @stable
  *
  * Allows you to crop a string at a certain length (this length take care of the croping characters like "...")
  *
@@ -15,13 +18,18 @@ import __countLine from './countLine';
  * - splitWords (false) {Boolean}: Specify if you want to split words or not. If not, the function will make sure the final text does not exceeds the wanted length
  * @return              {String}                                            The cropped text
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import crop from '@coffeekraken/sugar/js/string/crop';
  * crop('Hello World', 10); // => Hello w...
  *
+ * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function crop(text, length, settings = {}) {
+function crop(text, length, settings = {}) {
   settings = __deepMerge(
     {
       chars: '...',
@@ -33,7 +41,7 @@ export default function crop(text, length, settings = {}) {
   text = text.replace(/\s/gm, '¯');
 
   // split the text on spaces or every characters if the splitWords settings is to true
-  let splitReg = /(<([^>]+)>|\S|\s)/gm;
+  const splitReg = /(<([^>]+)>|\S|\s)/gm;
   const parts = text
     .split(splitReg)
     .filter((c) => {
@@ -53,7 +61,7 @@ export default function crop(text, length, settings = {}) {
   let result = '';
   let currentWord = '';
   let currentLength = 0;
-  let openedHtmlTagsArray = [];
+  const openedHtmlTagsArray = [];
 
   for (let i = 0; i < parts.length; i++) {
     const c = parts[i];
@@ -138,3 +146,4 @@ export default function crop(text, length, settings = {}) {
 
   return result;
 }
+export = crop;

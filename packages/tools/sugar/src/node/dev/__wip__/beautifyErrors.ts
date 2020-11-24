@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __log = require('../../log/log');
 const __parseError = require('./parseError');
 

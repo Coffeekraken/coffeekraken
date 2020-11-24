@@ -1,4 +1,14 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 const __deepMerge = require('../object/deepMerge');
 const __SPromise = require('../promise/SPromise');
 const __isPath = require('../is/path');
@@ -10,12 +20,17 @@ const __awaitSpawn = require('await-spawn');
  * @name                    SDependency
  * @namespace           sugar.node.dependency
  * @type                    Class
+ * @wip
  *
  * This class is the base one for dependencys like PHP, Node, etc... It allows you to check if you have already the dependency installed,
  * if you can update it, etc...
  *
  * @param           {String}          name            The dependency name like "php", "node", etc...
  * @param           {Object}          [settings={}]   An object of settings described bellow:
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * const SDependency = require('@coffeekraken/sugar/node/dependency/SDependency');
@@ -158,7 +173,7 @@ module.exports = class SDependency {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _execCommands(commands) {
-        return new __SPromise(async (resolve, reject, trigger, cancel) => {
+        return new __SPromise((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
             commands = [...commands];
             for (let i = 0; i < commands.length; i++) {
                 const child = __awaitSpawn(commands[i], {
@@ -173,9 +188,9 @@ module.exports = class SDependency {
                 child.child.stderr.on('data', (error) => {
                     trigger('error', error);
                 });
-                await child;
+                yield child;
             }
-        }, {
+        }), {
             stacks: 'data,error'
         });
     }

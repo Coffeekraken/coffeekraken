@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __getTransitionProperties from './getTransitionProperties';
 
 /**
@@ -25,7 +27,7 @@ import __getTransitionProperties from './getTransitionProperties';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function whenTransitionEnd(elm, cb = null) {
+function whenTransitionEnd(elm, cb = null) {
   return new Promise((resolve, reject) => {
     const transition = __getTransitionProperties(elm);
     setTimeout(() => {
@@ -34,3 +36,4 @@ export default function whenTransitionEnd(elm, cb = null) {
     }, transition.totalDuration);
   });
 }
+export = whenTransitionEnd;

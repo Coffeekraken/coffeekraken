@@ -1,9 +1,12 @@
+// @ts-nocheck
+
 import __countLine from './countLine';
 
 /**
  * @name                          splitEvery
  * @namespace           sugar.js.string
  * @type                          Function
+ * @stable
  *
  * Split a string every n chars either by taking care of not spliting the words, or by simply spliting without any attention to that...
  *
@@ -12,16 +15,21 @@ import __countLine from './countLine';
  * @param               {Boolean}                 [splitWords=false]        If you want to split the words or not...
  * @return              {Array}                                             An array of the splited text parts
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example           js
  * import splitEvery from '@coffeekraken/node/string/splitEvery';
  * splitEvery('Hello World', 2, true); // => ['He','ll','o ','Wo','rl','d']
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
 // TODO: Add support for special characters like terminal colors, html tags, etc...
 
-export default function splitEvery(text, every, splitWords = false) {
+function splitEvery(text, every, splitWords = false) {
   if (splitWords) {
     const reg = new RegExp(`.{1,${every}}`, 'g');
     return [...text.matchAll(reg)].map((o) => o[0]);
@@ -32,7 +40,7 @@ export default function splitEvery(text, every, splitWords = false) {
       'g'
     );
     // const reg = new RegExp(`(?:(?:\033\[[0-9;]*m)*.?){1,${every}}`, 'g');
-    let chunks = text
+    const chunks = text
       .split(reg)
       .filter((m) => m != '' && m != null && m != undefined)
       .map((item) => {
@@ -109,3 +117,4 @@ export default function splitEvery(text, every, splitWords = false) {
     return lines;
   }
 }
+export = splitEvery;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __toString from '../string/toString';
 import __argsToString from './argsToString';
 import __deepMerge from '../object/deepMerge';
@@ -6,6 +8,7 @@ import __deepMerge from '../object/deepMerge';
  * @name            buildCommandLine
  * @namespace           sugar.js.cli
  * @type            Function
+ * @beta
  *
  * This function takes as parameters a command line (with tokens), an arguments object and a definition object to
  * generate the final command line string to launch.
@@ -20,6 +23,10 @@ import __deepMerge from '../object/deepMerge';
  * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
  * - alias (true) {Boolean}: Specify if you want to make use of the aliases in your generated command
  * @return      {String}                      The builded command string
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import buildCommandLine from '@coffeekraken/sugar/js/cli/buildCommandLine';
@@ -53,7 +60,7 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function buildCommandLine(command, args = {}, settings = {}) {
+function buildCommandLine(command, args = {}, settings = {}) {
   settings = __deepMerge(
     {
       definitionObj: null,
@@ -90,3 +97,4 @@ export default function buildCommandLine(command, args = {}, settings = {}) {
 
   return command.trim();
 }
+export = buildCommandLine;

@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SError_1 = __importDefault(require("../error/SError"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SDocblockBlock_1 = __importDefault(require("./SDocblockBlock"));
@@ -10,30 +10,7 @@ const SDocblockBlock_1 = __importDefault(require("./SDocblockBlock"));
 const node_1 = __importDefault(require("../is/node"));
 const path_1 = __importDefault(require("../is/path"));
 const fs_1 = __importDefault(require("fs"));
-/**
- * @name                  Dockblock
- * @namespace           sugar.js.docblock
- * @type                  Class
- *
- * This is the main class that expose the methods like "parse", etc...
- * You have to instanciate it by passing a settings object. Here's the available options:
- *
- * @param       {String|Object}     source        The docblock source. Can be either a string to parse or a filepath
- * @param       {Object}      [settings={}]       An object of settings to configure the SDocblock instance:
- * - tags ({}) {Object}: An object representing the functions used to parse each tags. The object format is ```{ tagName: parseFn }```
- *
- * @todo        tests
- *
- * @example         js
- * import SDocblock from '@coffeekraken/sugar/js/docblock/SSDocblock';
- * new SDocblock(source, {
- *    // override some settings here...
- * });
- *
- * @since     2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com>
- */
-class SDocblock {
+module.exports = class SDocblock {
     /**
      * @name            constructor
      * @type            Function
@@ -207,5 +184,4 @@ class SDocblock {
             return block.toObject();
         });
     }
-}
-exports.default = SDocblock;
+};

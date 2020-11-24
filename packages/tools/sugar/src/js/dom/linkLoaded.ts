@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      linkLoaded
  * @namespace           sugar.js.dom
@@ -40,7 +42,7 @@ function alreadyLoaded(link) {
   return result;
 }
 
-export default function linkLoaded(link, callback = null) {
+function linkLoaded(link, callback = null) {
   return new Promise((resolve, reject) => {
     // check if image is already loaded
     if (alreadyLoaded(link)) {
@@ -76,3 +78,4 @@ export default function linkLoaded(link, callback = null) {
     }
   });
 }
+export = linkLoaded;

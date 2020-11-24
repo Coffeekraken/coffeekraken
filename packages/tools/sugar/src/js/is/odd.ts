@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isOdd
  * @namespace           sugar.js.is
@@ -21,6 +23,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isOdd(value) {
+function isOdd(value) {
   return value % 2 === 1;
 }
+export = isOdd;

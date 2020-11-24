@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __tmpDir from '../../fs/tmpDir';
 import __fs from 'fs';
@@ -11,6 +13,7 @@ import __SCacheAdapter from '../../_js/cache/adapters/SCacheAdapter';
  * @name                                SCacheFsAdapter
  * @namespace           sugar.node.fs.cacheAdapters
  * @type                                Class
+ * @beta
  *
  * A filesystem SCache adapter that allows you to store your cache items on the user system
  *
@@ -22,9 +25,14 @@ import __SCacheAdapter from '../../_js/cache/adapters/SCacheAdapter';
  *    })
  * });
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SCacheFsAdapter extends __SCacheAdapter {
+export = class SCacheFsAdapter extends __SCacheAdapter {
   /**
    * @name                              constructor
    * @type                              Function
@@ -140,4 +148,4 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
     // read the json file
     return __removeSync(`${this._settings.rootDir}/${cacheName}`);
   }
-};
+}

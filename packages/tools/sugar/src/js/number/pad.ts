@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        pad
  * @namespace           sugar.js.number
@@ -21,9 +23,10 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function pad(number, width, character = '0') {
+function pad(number, width, character = '0') {
   number = number + '';
   return number.length >= width
     ? number
     : new Array(width - number.length + 1).join(character) + number;
 }
+export = pad;

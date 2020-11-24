@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isPlainObject from '../is/plainObject';
 import __deepMerge from '../object/deepMerge';
 
@@ -31,7 +33,7 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function deepMap(object, processor, settings = {}, _path = []) {
+function deepMap(object, processor, settings = {}, _path = []) {
   settings = __deepMerge(
     {
       deepFirst: false,
@@ -84,3 +86,4 @@ export default function deepMap(object, processor, settings = {}, _path = []) {
   });
   return object;
 }
+export = deepMap;

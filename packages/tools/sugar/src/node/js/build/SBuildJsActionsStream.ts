@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SActionsStream from '../../stream/SActionsStream';
 import __deepMerge from '../../object/deepMerge';
 import __getFilename from '../../fs/filename';
@@ -11,11 +13,15 @@ import __path from 'path';
  * @namespace           sugar.node.build.js
  * @type            Class
  * @extends         SActionsStream
+ * @wip
  *
  * This class represent a pre-configured action stream to build easily some javascript files
  *
  * @param           {Object}          [settings={}]         The settings object to configure your instance
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  * @todo        Document the streamObj required properties
  *
  * @example         js
@@ -31,7 +37,7 @@ import __path from 'path';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBuildJsActionsStream extends __SActionsStream {
+export = class SBuildJsActionsStream extends __SActionsStream {
   /**
    * @name        constructor
    * @type        Function

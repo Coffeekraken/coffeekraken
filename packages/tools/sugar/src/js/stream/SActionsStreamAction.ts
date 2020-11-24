@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';
 import __uniqid from '../string/uniqid';
@@ -9,6 +11,7 @@ import __validateDefinitionObject from '../validation/object/validateDefinitionO
  * @namespace           sugar.js.stream
  * @type          Class
  * @extends       SPromise
+ * @beta
  *
  * This class represent the base of a actions stream action.
  * An action stream action represent an action that you can register in the SActionsStream instance and
@@ -22,10 +25,14 @@ import __validateDefinitionObject from '../validation/object/validateDefinitionO
  * - actions ({}) {Object}: An object formated like ```{ actionName: settings }``` that contain specific settings for each actions and that will be passed as a second parameter to each actions.
  * - cache (true) {Boolean}: Specify if this action is aware of the cache or not
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SActionStreamAction extends __SPromise {
+export = class SActionStreamAction extends __SPromise {
   /**
    * @name            _skipNextActions
    * @type            Number|Array<String>
@@ -187,7 +194,7 @@ export default class SActionStreamAction extends __SPromise {
    */
   run(streamObj, promiseFn) {
     this.checkStreamObject(streamObj);
-    this._currentPromise = new __SPromise(() => {}, {
+    this._currentPromise = new __SPromise({
       id: this._settings.id + 'Run'
     });
     __SPromise.map(this._currentPromise, this);

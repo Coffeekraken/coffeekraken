@@ -1,21 +1,24 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const to_regex_1 = __importDefault(require("to-regex"));
 /**
  * @name        dedupe
  * @namespace   sugar.js.string
  * @type        Function
+ * @stable
  *
  * This function simple make sure that you don't have duplicate statements in the passed string
- *
- * @todo            tests
  *
  * @param           {String}        string        The string to process
  * @param           {String}        statement       The statement to check
  * @return          {String}                      The deduplicated string
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import dedupe from '@coffeekraken/sugar/js/string/dedupe';
@@ -25,7 +28,7 @@ const to_regex_1 = __importDefault(require("to-regex"));
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function dedupe(str, statement) {
-    let reg = to_regex_1.default(`(${statement})`, {
+    const reg = to_regex_1.default(`(${statement})`, {
         contains: true,
         flags: 'g'
     });
@@ -38,4 +41,4 @@ function dedupe(str, statement) {
         .reverse()
         .join('');
 }
-exports.default = dedupe;
+module.exports = dedupe;

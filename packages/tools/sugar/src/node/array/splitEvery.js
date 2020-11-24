@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name                                splitEvery
  * @namespace           sugar.js.array
@@ -19,10 +19,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function splitEvery(array, every) {
-    let i, j, finalArray = [];
+    let i, j;
+    const finalArray = [];
     for (i = 0, j = array.length; i < j; i += every) {
         finalArray.push(array.slice(i, i + every));
     }
     return finalArray;
 }
-exports.default = splitEvery;
+module.exports = splitEvery;

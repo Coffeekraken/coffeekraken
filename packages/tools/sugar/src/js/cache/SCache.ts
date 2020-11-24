@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __SCacheAdapter from './adapters/SCacheAdapter';
 import __convert from '../time/convert';
@@ -9,6 +11,7 @@ import __toString from '../string/toString';
  * @name                                SCache
  * @namespace           sugar.js.cache
  * @type                                Class
+ * @beta
  *
  * Gives you the ability to manage cache through some defaults available adapters or using yours.
  * This cache class take care of these features:
@@ -17,6 +20,7 @@ import __toString from '../string/toString';
  *
  * @todo        doc
  * @todo        interfaces
+ * @todo        tests
  *
  * @example             js
  * import SCache from '@coffeekraken/sugar/js/cache/SCache';
@@ -28,7 +32,7 @@ import __toString from '../string/toString';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SCache {
+export = class SCache {
   /**
    * @name                              _name
    * @type                              String

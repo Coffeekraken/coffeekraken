@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __findPkgJson from 'find-package-json';
 
 /**
@@ -18,7 +20,7 @@ import __findPkgJson from 'find-package-json';
  * @see       https://www.npmjs.com/package/find-package-json
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function packageRoot(from = process.cwd(), highest = false) {
+function packageRoot(from = process.cwd(), highest = false) {
   const f = __findPkgJson(from);
   let file = f.next();
 
@@ -39,3 +41,4 @@ export default function packageRoot(from = process.cwd(), highest = false) {
   }
   return false;
 }
+export = packageRoot;

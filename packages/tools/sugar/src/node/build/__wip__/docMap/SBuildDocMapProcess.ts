@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __SBuildDocMapActionsStream = require('./SBuildDocMapActionsStream');
 const __SProcess = require('../../process/SProcess');
 const __SBuildDocMapInterface = require('./interface/SBuildDocMapInterface');

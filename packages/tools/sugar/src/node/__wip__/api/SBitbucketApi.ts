@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from 'object/deepMerge';
 import __SAuth from 'auth/SAuth';
 import __SApi from 'SApi';

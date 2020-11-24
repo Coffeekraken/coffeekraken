@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__toHtml) => {
     describe('sugar.js.convert.toHtml', () => {
         //     it('Should take a markdown inputString and convert it correctly to HTML', () => {

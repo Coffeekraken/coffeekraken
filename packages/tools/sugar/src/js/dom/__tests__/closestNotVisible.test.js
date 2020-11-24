@@ -1,4 +1,9 @@
-import __closestNotVisible from '../closestNotVisible';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const closestNotVisible_1 = __importDefault(require("../closestNotVisible"));
 describe('sugar.js.dom.closestNotVisible', () => {
     document.body.innerHTML = `
   <style>
@@ -14,7 +19,7 @@ describe('sugar.js.dom.closestNotVisible', () => {
   `;
     const $elm = document.querySelector('#source');
     it('Should find the "testing" element that is up in the dom tree', () => {
-        const $testing = __closestNotVisible($elm, '.testing');
+        const $testing = closestNotVisible_1.default($elm, '.testing');
         expect($testing.id).toBe('testing');
     });
 });

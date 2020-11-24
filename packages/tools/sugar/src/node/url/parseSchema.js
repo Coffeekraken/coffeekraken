@@ -1,13 +1,14 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const parse_1 = __importDefault(require("../string/parse"));
 /**
  * @name                                parseSchema
  * @namespace           sugar.js.url
  * @type                                Function
+ * @wip
  *
  * This function take two arguments. The first one is the url to parse and the second is a schema to scan the url with.
  * The schema describe the pathname of an url and tell's how to analyze it.
@@ -25,6 +26,10 @@ const parse_1 = __importDefault(require("../string/parse"));
  * - errors (null) {Object}: An object with all the params in error with the description of the error for each
  * - params (null) {Object}: An object containing every params grabed from the url with their values for each
  * - match (true) {Object}: A boolean that tells you if the parsed url match the passed schema or not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import parseSchema from '@coffeekraken/sugar/js/url/parseSchema';
@@ -56,6 +61,7 @@ const parse_1 = __importDefault(require("../string/parse"));
  * //   }
  * // }
  *
+ * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function parseSchema(url, schema) {
@@ -117,9 +123,7 @@ function parseSchema(url, schema) {
     schemaParts.forEach((part) => {
         if (!part.name)
             return;
-        params[part.name] = {
-            ...part
-        };
+        params[part.name] = Object.assign({}, part);
         delete params[part.name].name;
     });
     // loop on the schema to get the params values
@@ -137,7 +141,7 @@ function parseSchema(url, schema) {
             continue;
         }
         if (!part && !schema.optional) {
-            let errorObj = {
+            const errorObj = {
                 type: 'optional',
                 description: `This param "${schema.name}" cannot be null...`
             };
@@ -179,4 +183,4 @@ function parseSchema(url, schema) {
         url: rawUrlString
     };
 }
-exports.default = parseSchema;
+module.exports = parseSchema;

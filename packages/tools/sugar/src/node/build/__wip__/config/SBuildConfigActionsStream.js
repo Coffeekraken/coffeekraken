@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 const __SActionsStream = require('../../stream/SActionsStream');
 const __SJsConfigFileToJsonStreamAction = require('./config/SJsConfigFileToJsonStreamAction');
 const __deepMerge = require('../../object/deepMerge');

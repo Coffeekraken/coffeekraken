@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name            toString
  * @namespace           sugar.js.html
@@ -22,7 +24,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function toString(html, deep = true) {
+function toString(html, deep = true) {
   if (document !== undefined && document.createElement !== undefined) {
     const cont = document.createElement('div');
     cont.appendChild(html.cloneNode(deep));
@@ -30,3 +32,4 @@ export default function toString(html, deep = true) {
   }
   return html;
 }
+export = toString;

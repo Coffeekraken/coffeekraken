@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 export interface ISPromiseSettings {
   id: string;
   destroyTimeout: number;
@@ -53,12 +55,23 @@ export interface ISPromisePipeFn {
   (destPromise: ISPromise, settings: ISPromiseMapSettings): void;
 }
 
+export interface ISPromiseResolveRejectFn {
+  (arg: any): void;
+}
+
+export interface ISPromiseTriggerFn {
+  (what: string, value: any): void;
+}
+
+export interface ISPromiseCancelFn {
+  (arg: any): void;
+}
 export interface ISPromiseExecutorFn {
   (
-    resolve: Function,
-    reject: Function,
-    trigger: Function,
-    cancel: Function
+    resolve: ISPromiseResolveRejectFn,
+    reject: ISPromiseResolveRejectFn,
+    trigger: ISPromiseTriggerFn,
+    cancel: ISPromiseCancelFn
   ): void;
 }
 
@@ -70,6 +83,11 @@ export interface ISPromiseCtor {
   map: ISPromiseStaticMapFn;
   pipe: ISPromiseStaticPipeFn;
 }
+
+export interface ISPromiseOnCallbackFn {
+  (value: any, metas: ISPromiseMetas): ISPromise;
+}
+
 export default interface ISPromise {
   _settings: ISPromiseSettings;
   _promiseState: 'pending' | 'resolved' | 'rejected' | 'canceled' | 'destroyed';
@@ -88,8 +106,8 @@ export default interface ISPromise {
   reject(arg: any, stacksOrder: string): Promise<any>;
   cancel(arg: any, stacksOrder: string): Promise<any>;
   trigger(what: string, arg: any, metas: ISPromiseMetas): Promise<any>;
-  on(stacks: string | string[], callback: Function): ISPromise;
-  off(stack: string, callback?: Function): ISPromise;
+  on(stacks: string | string[], callback: ISPromiseOnCallbackFn): ISPromise;
+  off(stack: string, callback?: ISPromiseOnCallbackFn): ISPromise;
   catch(...args: any): ISPromise;
   finally(...args: any): ISPromise;
   resolved(...args: any): ISPromise;

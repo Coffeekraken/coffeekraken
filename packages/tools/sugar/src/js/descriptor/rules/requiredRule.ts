@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { interface } from '../../../node/npm/SNpmBinProcess';
 import {
   ISDescriptorRule,
@@ -51,4 +53,4 @@ const ruleObj: ISDescriptorRule = {
 // register the new rule
 SDescriptor.registerRule(ruleObj);
 
-export default ruleObj;
+export = ruleObj;

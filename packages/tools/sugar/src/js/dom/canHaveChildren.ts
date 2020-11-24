@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name          canHaveChildren
  * @namespace     sugar.js.dom
@@ -22,7 +24,7 @@
  * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function canHaveChildren(element) {
+function canHaveChildren(element) {
   if (typeof element === 'string') {
     element = document.createElement(element);
   } else if (!(element instanceof HTMLElement)) {
@@ -35,3 +37,4 @@ export default function canHaveChildren(element) {
     return true;
   return false;
 }
+export = canHaveChildren;

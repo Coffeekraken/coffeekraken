@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__toString) => {
     describe('sugar.js.html.toString', () => {
         const html = `

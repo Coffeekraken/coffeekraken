@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__watch) => {
     let obj = {
         a: 'hello',

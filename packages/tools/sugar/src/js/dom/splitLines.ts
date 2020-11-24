@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import _map from 'lodash/map';
 import __throttle from '../function/throttle';
 
@@ -34,7 +36,7 @@ import __throttle from '../function/throttle';
  * @since       1.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function splitLines(elm, tag = 'p', tagClass = 'split-lines') {
+function splitLines(elm, tag = 'p', tagClass = 'split-lines') {
   // apply again on resize
   window.addEventListener(
     'resize',
@@ -88,3 +90,4 @@ function _splitLines(elm, tag, tagClass) {
     })
     .join('');
 }
+export = splitLines;

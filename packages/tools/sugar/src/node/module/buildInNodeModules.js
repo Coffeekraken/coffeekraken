@@ -1,30 +1,6 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * @name            buildInNodeModules
- * @namespace       sugar.node.module
- * @type            Object
- *
- * This object store the list of built-in node module
- * with a polyfill property for each that point to some
- * polyfill depending on the context wanted. It can be "browser"
- * or some others to come depending on the needs...
- *
- * @example             js
- * import builtInNodeModules from '@coffeekraken/sugar/node/module/builtInNodeModules';
- * // {
- * //   os: {
- * //     polyfill: {
- * //        browser: 'os-browserify'
- * //     }
- * //   },
- * //   ...
- * // }
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-exports.default = {
+// @ts-nocheck
+module.exports = {
     assert: {
         polyfill: {
             browser: 'assert'

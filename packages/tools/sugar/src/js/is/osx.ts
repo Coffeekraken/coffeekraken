@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // TODO tests
 
 /**
@@ -21,9 +23,10 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function osx() {
+function osx() {
   if (process && process.platform) {
     return process.platform === 'darwin';
   }
   return navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 }
+export = osx;

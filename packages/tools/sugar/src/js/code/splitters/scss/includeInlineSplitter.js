@@ -1,20 +1,20 @@
-/**
- * @name                includeInlineSplitter
- * @namespace           sugar.js.code.splitters.scss
- * @type                Object
- *
- * This represent the SCSS "@include..." splitter.
- * It will match all the inline includes like "@include something('hello');", etc...
- * and split the code accordingly
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export default {
-    type: 'include.inline',
-    prefix: /@include\s[a-zA-Z0-9-_\.]+/,
-    suffix: /;/,
-    open: '(',
-    close: ')',
-    exclude: [/@include Sugar\.setup\(.*\);/]
-};
+// @ts-nocheck
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    return {
+        type: 'include.inline',
+        prefix: /@include\s[a-zA-Z0-9-_\.]+/,
+        suffix: /;/,
+        open: '(',
+        close: ')',
+        exclude: [/@include Sugar\.setup\(.*\);/]
+    };
+});

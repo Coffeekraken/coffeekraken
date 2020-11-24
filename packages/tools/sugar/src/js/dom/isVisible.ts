@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      isVisible
  * @namespace           sugar.js.dom
@@ -23,7 +25,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isVisible(elm) {
+function isVisible(elm) {
   // assume that the script tag is always visible
   if (elm.nodeName.toLowerCase() === 'script') return true;
 
@@ -35,3 +37,4 @@ export default function isVisible(elm) {
   return '0' !== opacity && 'none' !== display && 'hidden' !== visibility;
 }
 window.__isVisible = isVisible;
+export = isVisible;

@@ -1,7 +1,7 @@
-module.exports = (__SUrlAction) => {
-    describe('sugar.js.action.SUrlAction', () => {
-        it('Should return the correct JSON object', () => {
-            const action = new __SUrlAction({
+module.exports = function (__SUrlAction) {
+    describe('sugar.js.action.SUrlAction', function () {
+        it('Should return the correct JSON object', function () {
+            var action = new __SUrlAction({
                 target: '_blank',
                 url: 'https://google.com'
             });

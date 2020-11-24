@@ -1,33 +1,21 @@
-"use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const SBlessedOutput_1 = __importDefault(require("../blessed/SBlessedOutput"));
-/**
- * @name            output
- * @namespace           sugar.node.process
- * @type            Function
- *
- * This function simply take a SProcess compatible process instance and display the output
- * accordingly to the context where this process is running. If the output is in a childProcess,
- * it will just console.log the log, error, etc... to the terminal but if the
- * process is in the main terminal instance, it will be wrapped inside a blessed box instance
- * and displayed nicely.
- *
- * @param         {SProcess}          proc        The process to display output for
- * @param         {Object}            [settings={}]     An object of blessed settings that will be passed to the main blessed.box instance
- *
- * @example       js
- * import output from '@coffeekraken/sugar/node/process/output';
- * import spawn from '@coffeekraken/sugar/node/process/spawn';
- * const proc = spawn('ls -la');
- * output(proc);
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-exports.default = (source, settings = {}) => {
-    const output = new SBlessedOutput_1.default(source, settings);
-    return output;
-};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "../blessed/SBlessedOutput"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var SBlessedOutput_1 = __importDefault(require("../blessed/SBlessedOutput"));
+    return function (source, settings) {
+        if (settings === void 0) { settings = {}; }
+        var output = new SBlessedOutput_1.default(source, settings);
+        return output;
+    };
+});

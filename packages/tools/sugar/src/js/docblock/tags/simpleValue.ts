@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name              simpleValue
  * @namespace           sugar.js.docblock.tags
@@ -15,7 +17,7 @@
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-export default function simpleValue(data) {
+function simpleValue(data) {
   if (
     data &&
     data.value &&
@@ -26,3 +28,4 @@ export default function simpleValue(data) {
   }
   return data.value;
 }
+export = simpleValue;

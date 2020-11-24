@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __getStyleProperty from './getStyleProperty';
 
 /**
@@ -22,10 +24,11 @@ import __getStyleProperty from './getStyleProperty';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function forceRedraw($elm) {
+function forceRedraw($elm) {
   const display = __getStyleProperty($elm, 'display');
   $elm.style.display = 'none';
   $elm.offsetHeight;
   $elm.style.display = display;
   return $elm;
 }
+export = forceRedraw;

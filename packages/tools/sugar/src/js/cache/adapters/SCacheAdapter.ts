@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 
 /**
@@ -34,7 +36,7 @@ import __deepMerge from '../../object/deepMerge';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SCacheAdapter {
+export = class SCacheAdapter {
   /**
    * @name                              _settings
    * @type                              Object

@@ -1,35 +1,13 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const resolveGlob_1 = __importDefault(require("./resolveGlob"));
 const extractGlob_1 = __importDefault(require("./extractGlob"));
 const extractNoneGlob_1 = __importDefault(require("./extractNoneGlob"));
-/**
- * @name                SGlob
- * @namespace           sugar.node.glob
- * @type                Class
- *
- * This class represent a glob pattern and can be used to resolve some globs and get back
- * an array of SFile instances or to extract some part of the pattern, etc...
- *
- * @param           {String|Array<String>}          globs            The glob pattern(s) you want to use with this instance
- * @param           {Object}                [settings={}]           An object of settings to configure your glob instance
- *
- * @todo               tests
- *
- * @example         js
- * import SGlob from '@coffeekraken/sugar/node/glob/SGlob';
- * const glob = new SGlob('my/cool/glob/*.js');
- * const files = await glob.resolve();
- * await SGlob.resolve('my/cool/glob/*.js');
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SGlob {
+module.exports = class SGlob {
     /**
      * @name          constructor
      * @type          Function
@@ -172,5 +150,4 @@ class SGlob {
             SGlob.extractNoneGlob(glob);
         });
     }
-}
-exports.default = SGlob;
+};

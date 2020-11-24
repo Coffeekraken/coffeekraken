@@ -1,12 +1,13 @@
-import __fs from 'fs-extra';
+// @ts-nocheck
 
-// TODO tests
+import __fs from 'fs-extra';
 
 /**
  * @name        writeFile
  * @namespace           sugar.node.fs
  * @type          Function
  * @async
+ * @stable
  *
  * CWrite a file. If don't exist, will be created as well as the directory structure if needed... ( (async)
  *
@@ -15,6 +16,10 @@ import __fs from 'fs-extra';
  * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeFile()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
  * @return      {Promise}                           A promise that will be resolved when the writeFile is completed
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import writeFile from '@coffeekraken/node/fs/writeFile';
  * writeFile('my/cool/file.txt', 'Hello World').then(() => {
@@ -22,8 +27,10 @@ import __fs from 'fs-extra';
  * });
  *
  * @see             https://github.com/jprichardson/node-fs-extra
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function writeFile(path, data, options = {}) {
+function writeFile(path, data, options = {}) {
   return __fs.outputFile(path, data, options);
 }
+export = writeFile;

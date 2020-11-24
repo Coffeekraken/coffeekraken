@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SInterface from '../../../class/SInterface';
 import __SDeamonInterface from '../../interface/SDeamonInterface';
 
@@ -6,15 +8,20 @@ import __SDeamonInterface from '../../interface/SDeamonInterface';
  * @namespace           sugar.node.deamon.fs.interface
  * @type                Class
  * @extends             SInterface
+ * @wip
  *
  * This class represent the interface that describe the minimum requirement
  * needed for an element that is capable of "watching" some events/actions, and respond
  * to it by launching function, or whatever you want.
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SFsDeamonInterface extends __SInterface {
+export = class SFsDeamonInterface extends __SInterface {
   static implementsArray = [__SDeamonInterface];
 
   static definitionObj = {

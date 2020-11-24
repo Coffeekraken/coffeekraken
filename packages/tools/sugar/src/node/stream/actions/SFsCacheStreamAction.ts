@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SActionsStreamAction from '../SActionsStreamAction';
 import __packageRoot from '../../path/packageRoot';
 import __fs from 'fs';
@@ -26,6 +28,7 @@ class SFsCacheStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
+ * @wip
  *
  * This action allows you to make profit of the filesystem cache.
  * You can specify which streamObj property will be the cache id as well as
@@ -35,9 +38,14 @@ class SFsCacheStreamActionInterface extends __SInterface {
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SFsCacheStreamAction extends __SActionsStreamAction {
+export = class SFsCacheStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object

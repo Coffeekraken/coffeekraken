@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__getMethods) => {
     class MyClass {
         constructor(name) {

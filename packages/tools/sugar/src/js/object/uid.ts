@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __encryptObject from '../crypt/object';
 import __filter from '../object/filter';
 import __crypto from 'crypto';
@@ -30,7 +32,7 @@ import __crypto from 'crypto';
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function uid(obj, settings = {}) {
+function uid(obj, settings = {}) {
   settings = {
     format: 'sha256',
     key: 'sugar.js.object.uid',
@@ -59,3 +61,4 @@ export default function uid(obj, settings = {}) {
       break;
   }
 }
+export = uid;

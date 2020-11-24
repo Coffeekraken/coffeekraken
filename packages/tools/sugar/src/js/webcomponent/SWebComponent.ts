@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SError from '../error/SError';
 import __isClass from '../is/class';
 import __deepMerge from '../object/deepMerge';
@@ -16,7 +18,7 @@ import __SLitHtmlWebComponent from './SLitHtmlWebComponent';
 import __htmlTagToHtmlClassMap from '../html/htmlTagToHtmlClassMap';
 import __uncamelize from '../string/uncamelize';
 import __getHtmlClassFromTagName from '../html/getHtmlClassFromTagName';
-import __domReady from '../dom/domReady';
+import __domReady from '../dom/domready';
 import __getTagNameFromHtmlClass from '../html/getTagNameFromHtmlClass';
 import __mediaQuery from '../responsive/mediaQuery';
 import __SMediaQuery from '../responsive/SMediaQuery';
@@ -26,6 +28,7 @@ import __SMediaQuery from '../responsive/SMediaQuery';
  * @namespace           sugar.js.webcomponent
  * @type              Class
  * @extends           HTMLElement
+ * @wip
  *
  * // TODO: example
  *
@@ -51,6 +54,10 @@ import __SMediaQuery from '../responsive/SMediaQuery';
  * - defaultProps ({}) {Object}: Specify the default properties values
  * - physicalProps ([]) {Array<String>}: List all the properties that need to be ALWAYS on the html element (for styling purpose for example...)
  * - requiredProps ([]) {Array<String>}: List all the properties that MUST be passed to the component
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import SWebComponent from '@coffeekraken/sugar/js/webcomponent/SWebComponent';
@@ -1095,4 +1102,4 @@ function SWebComponentGenerator(extendsSettings = {}) {
   };
 }
 
-export default SWebComponentGenerator;
+export = SWebComponentGenerator;

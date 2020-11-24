@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SBuildNodeCli from '../../node/build/node/SBuildNodeCli';
 import __SBuildNodeActionsStream from '../../node/build/node/SBuildNodeActionsStream';
 import __output from '../../node/process/output';

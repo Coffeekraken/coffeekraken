@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 /**
  * @name                header
  * @namespace           sugar.node.log.presets

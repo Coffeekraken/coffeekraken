@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __prependFile from 'prepend-file';
 import __makeDir from 'make-dir';
@@ -7,8 +9,13 @@ import __filesPreset from '../htmlPresets/files';
  * @name                    SLogFilesAdapter
  * @namespace           js.log
  * @type                    Class
+ * @wip
  *
  * This class allows you to log your messages, errors, etc... easily and store them in some files where you want on your file system.
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example               js
  * import SLog from '@coffeekraken/sugar/js/log/SLog';
@@ -20,9 +27,10 @@ import __filesPreset from '../htmlPresets/files';
  * });
  * logger.log('Something cool happend...');
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SLogFilesAdapter {
+export = class SLogFilesAdapter {
   /**
    * @name          _settings
    * @type          Object

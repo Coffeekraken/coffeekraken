@@ -1,25 +1,28 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name            directory
  * @namespace           sugar.node.is
  * @type            Function
+ * @stable
  *
  * This function check if the passed string path is a directory or not
  *
  * @param     {String}        path        The path to check
  * @return    {Boolean}                   true if is a directory, false if not
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example     js
  * import isDirectory from '@coffeekraken/sugar/node/is/directory';
  * isDirectory('something/cool');
- *
- * @todo        Tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -40,4 +43,4 @@ function isDirectory(path, settings = {}) {
     }
     return isMatching;
 }
-exports.default = isDirectory;
+module.exports = isDirectory;

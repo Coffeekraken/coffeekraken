@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseHtml from '../../node/terminal/parseHtml';
 import __fkill from 'fkill';
 import psList from 'ps-list';

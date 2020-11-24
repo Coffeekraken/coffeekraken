@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __blessed from 'blessed';
 import __SBlessedComponent from './SBlessedComponent';
 import __deepMerge from '../object/deepMerge';
@@ -8,10 +10,15 @@ import __color from '../color/color';
  * @name                  SBlessedComponent
  * @namespace           sugar.node.blessed
  * @type                  Class
+ * @wip
  *
  * This class is the base one for all the sugar blessed components like input, panel, etc...
  *
  * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import SBlessedComponent from '@coffeekraken/sugar/node/blessed/SBlessedComponent';
@@ -21,9 +28,10 @@ import __color from '../color/color';
  *    }
  * }
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SHeader extends __SBlessedComponent {
+export = class SHeader extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function

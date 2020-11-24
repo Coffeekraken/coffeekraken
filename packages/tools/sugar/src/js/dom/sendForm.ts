@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import SAjax from '../http/SAjax';
 import __formSerialize from 'form-serialize';
 
@@ -26,7 +28,7 @@ import __formSerialize from 'form-serialize';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function sendForm(form) {
+function sendForm(form) {
   // protect
   if (!form.tagName || form.tagName.toLowerCase() !== 'form') {
     console.error('passed arguments', form);
@@ -73,3 +75,4 @@ export default function sendForm(form) {
   // return the promise
   return promise;
 }
+export = sendForm;

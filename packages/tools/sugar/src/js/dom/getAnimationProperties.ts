@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __getStyleProperty from './getStyleProperty';
 import __convert from '../time/convert';
 
@@ -33,7 +35,7 @@ import __convert from '../time/convert';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function getAnimationProperties(elm) {
+function getAnimationProperties(elm) {
   // get the animation properties
   const name = __getStyleProperty(elm, 'animation-name') || '';
   const duration = __getStyleProperty(elm, 'animation-duration') || '0s';
@@ -64,3 +66,4 @@ export default function getAnimationProperties(elm) {
   props.totalDuration = totalDuration;
   return props;
 }
+export = getAnimationProperties;

@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const minimatch_1 = __importDefault(require("minimatch"));
 const is_glob_1 = __importDefault(require("is-glob"));
@@ -10,6 +10,7 @@ const is_glob_1 = __importDefault(require("is-glob"));
  * @name                    activeSpace
  * @namespace           sugar.js.core
  * @type                    Object
+ * @wip
  *
  * This object expose some functions that are usefull to manage the "active" space of your application.
  * An active space is represented by a string formated like so "something.cool.hello". This mean that your app is
@@ -22,6 +23,10 @@ const is_glob_1 = __importDefault(require("is-glob"));
  * - previous: This allows you to go back 1 activeSpace in the stack
  * - on: This allows you to register callbacks attached to an activeSpace
  * - append: This allows you to append an activeSpace string to the current one
+ *
+ * @todo        interface
+ * @todo        doc
+ * @todo        rethink scope and potential utility of this
  *
  * @example           js
  * const activeSpace = require('@coffeekraken/sugar/core/activeSpace');
@@ -240,4 +245,4 @@ const activeSpaceApi = {
         });
     }
 };
-exports.default = activeSpaceApi;
+module.exports = activeSpaceApi;

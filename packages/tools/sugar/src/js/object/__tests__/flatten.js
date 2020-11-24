@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__flatten) => {
     describe('sugar.js.object.flatten', () => {
         it('Should flatten the object correctly', done => {

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      isInIframe
  * @namespace           sugar.js.dom
@@ -21,10 +23,11 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isInIframe() {
+function isInIframe() {
   try {
     return window.self !== window.top;
   } catch (e) {
     return true;
   }
 }
+export = isInIframe;

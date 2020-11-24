@@ -1,8 +1,17 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const STemplate_1 = __importDefault(require("./STemplate"));
 /**
@@ -10,6 +19,7 @@ const STemplate_1 = __importDefault(require("./STemplate"));
  * @namespace         sugar.node.template
  * @type              Function
  * @async
+ * @wip
  *
  * This function take a view path, a data object and optionaly a settings object to compile
  * the view and return a simple Promise that will be resolved or rejected depending on the
@@ -19,6 +29,10 @@ const STemplate_1 = __importDefault(require("./STemplate"));
  * @param       {Object}        [data={}]       An object of data to use to compile the view correctly
  * @param       {Object}        [settings={}]   An object of settings to configure your rendering process. Here's the list of available settings:
  * - rootDir (__sugarConfig('views.rootDir')) {String|Array<String>}: Specify the root directory where to search for views. Can be an array of directories in which the engine will search through if needed
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import render from '@coffeekraken/sugar/node/template/render';
@@ -30,31 +44,22 @@ const STemplate_1 = __importDefault(require("./STemplate"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function render(viewPath, data = null, settings = {}) {
-    return new SPromise_1.default(async (resolve, reject, trigger, cancel) => {
-        const templateInstance = new STemplate_1.default(viewPath, {
-            ...settings
-        });
+    return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+        const templateInstance = new STemplate_1.default(viewPath, Object.assign({}, settings));
         let resultObj;
         try {
-            resultObj = await templateInstance.render(data, settings);
+            resultObj = yield templateInstance.render(data, settings);
             resultObj.status = 200;
-            return resolve({
-                ...resultObj
-            });
+            return resolve(Object.assign({}, resultObj));
         }
         catch (e) {
             const errorTemplateInstance = new STemplate_1.default('pages.501', settings);
-            resultObj = await errorTemplateInstance.render({
-                ...data,
-                error: e
-            }, settings);
+            resultObj = yield errorTemplateInstance.render(Object.assign(Object.assign({}, data), { error: e }), settings);
             resultObj.status = 501;
-            return reject({
-                ...resultObj
-            });
+            return reject(Object.assign({}, resultObj));
         }
-    }, {
+    }), {
         id: 'templateRender'
     });
 }
-exports.default = render;
+module.exports = render;

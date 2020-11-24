@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __getKeyByValue from '../../object/getKeyByValue';
 import __querySelectorLive from '../../dom/querySelectorLive';
 

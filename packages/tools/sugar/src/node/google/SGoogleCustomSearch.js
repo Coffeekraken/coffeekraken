@@ -1,37 +1,19 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SRequest_1 = __importDefault(require("../http/SRequest"));
-/**
- * @name 		                SGoogleCustomSearch
- * @namespace           sugar.js.google
- * @type                    Class
- *
- * This class let you make with ease search requests to the google custom search service
- * with useful features like:
- * - Simple pagination system
- * - Promise support
- *
- * @example 	            js
- * // create a google search instance
- * const googleSearch = new SGoogleCustomSearch('myApiKey', 'myCustomSearchContextKey');
- *
- * // make a search...
- * googleSearch.search('hello world').then((response) => {
- * 		// do something with the google response...
- * });
- *
- * // get the nexts results
- * googleSearch.next().then((response) => {
- * 		// do something with the new response...
- * });
- *
- * @see 		https://developers.google.com/custom-search/
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
-class SGoogleCustomSearch {
+module.exports = class SGoogleCustomSearch {
     /**
      * @name                constructor
      * @type                Function
@@ -146,7 +128,7 @@ class SGoogleCustomSearch {
     _generateSearchUrl() {
         // construct url
         let queryString = '';
-        for (let key in this._settings) {
+        for (const key in this._settings) {
             queryString += `&${key}=${this._settings[key]}`;
         }
         queryString = queryString.substr(1);
@@ -165,30 +147,25 @@ class SGoogleCustomSearch {
      * @param       	{Object} 	          settings            	The settings object
      * @return      	{Promise} 		                        		A promise of results
      */
-    async search(keywords, settings = {}) {
-        // save the keywords into the instance
-        this._keywords = keywords;
-        // reset the page count
-        this._page = settings.page || 1;
-        // construct query object
-        const num = settings.num || 10;
-        this._settings = {
-            key: this._apiKey,
-            cx: this._cx,
-            q: keywords,
-            num: num,
-            start: (this._page - 1) * num + 1,
-            ...settings
-        };
-        // get the url
-        const url = this._generateSearchUrl();
-        // process to the ajax query
-        const ajx = new SRequest_1.default({
-            method: 'GET',
-            url
+    search(keywords, settings = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // save the keywords into the instance
+            this._keywords = keywords;
+            // reset the page count
+            this._page = settings.page || 1;
+            // construct query object
+            const num = settings.num || 10;
+            this._settings = Object.assign({ key: this._apiKey, cx: this._cx, q: keywords, num: num, start: (this._page - 1) * num + 1 }, settings);
+            // get the url
+            const url = this._generateSearchUrl();
+            // process to the ajax query
+            const ajx = new SRequest_1.default({
+                method: 'GET',
+                url
+            });
+            // launch the request end send back the promise
+            return ajx.send();
         });
-        // launch the request end send back the promise
-        return ajx.send();
     }
     /**
      * @name            next
@@ -201,11 +178,10 @@ class SGoogleCustomSearch {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    async next() {
-        // update the page count
-        return this.search(this._keywords, {
-            ...this._settings,
-            page: this._page + 1
+    next() {
+        return __awaiter(this, void 0, void 0, function* () {
+            // update the page count
+            return this.search(this._keywords, Object.assign(Object.assign({}, this._settings), { page: this._page + 1 }));
         });
     }
     /**
@@ -219,12 +195,10 @@ class SGoogleCustomSearch {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    async previous() {
-        // update the page count
-        return this.search(this._keywords, {
-            ...this._settings,
-            page: this._page - (this._page <= 1 ? 0 : 1)
+    previous() {
+        return __awaiter(this, void 0, void 0, function* () {
+            // update the page count
+            return this.search(this._keywords, Object.assign(Object.assign({}, this._settings), { page: this._page - (this._page <= 1 ? 0 : 1) }));
         });
     }
-}
-exports.default = SGoogleCustomSearch;
+};

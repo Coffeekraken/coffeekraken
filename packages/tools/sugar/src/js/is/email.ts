@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isEmail
  * @namespace           sugar.js.is
@@ -22,7 +24,8 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isEmail(data) {
+function isEmail(data) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(data);
 }
+export = isEmail;

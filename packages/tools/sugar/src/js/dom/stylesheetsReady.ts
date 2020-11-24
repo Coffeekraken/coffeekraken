@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import linkLoaded from './linkLoaded';
 /**
  * @name      stylesheetsReady
@@ -27,7 +29,7 @@ import linkLoaded from './linkLoaded';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function stylesheetsReady(links, cb = null) {
+function stylesheetsReady(links, cb = null) {
   const neededStylesheetsStack = links;
   const neededStylesheetsCount = links.length;
   let loadedStylesheedsCount = 0;
@@ -96,3 +98,4 @@ export default function stylesheetsReady(links, cb = null) {
     }
   });
 }
+export = stylesheetsReady;

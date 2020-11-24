@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      insertAfter
  * @namespace           sugar.js.dom
@@ -20,7 +22,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function insertAfter(elm, refElm) {
+function insertAfter(elm, refElm) {
   // next sibling of ref elm
   const nextSibling = refElm.nextSibling;
   if (!nextSibling) {
@@ -29,3 +31,4 @@ export default function insertAfter(elm, refElm) {
     refElm.parentNode.insertBefore(elm, nextSibling);
   }
 }
+export = insertAfter;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import uniqid from '../util/uniqid';
 
 /**
@@ -30,7 +32,7 @@ import uniqid from '../util/uniqid';
  * @since           1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SSvgFilter {
+export = class SSvgFilter {
   /**
    * @name          constructor
    * @type          Function

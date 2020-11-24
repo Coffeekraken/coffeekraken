@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import whenInViewport from '../dom/whenInViewport';
 import querySelectorLive from '../dom/querySelectorLive';
 
@@ -27,7 +29,7 @@ import querySelectorLive from '../dom/querySelectorLive';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function videoLazySrcAttribute(settings = {}) {
+function videoLazySrcAttribute(settings = {}) {
   settings = {
     offset: 50,
     ...settings
@@ -38,3 +40,4 @@ export default function videoLazySrcAttribute(settings = {}) {
     });
   });
 }
+export = videoLazySrcAttribute;

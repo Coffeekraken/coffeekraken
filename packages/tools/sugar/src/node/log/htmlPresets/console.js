@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const replaceTags_1 = __importDefault(require("../../html/replaceTags"));
 const chalk_1 = __importDefault(require("chalk"));
 chalk_1.default.level = 3;
@@ -10,15 +10,21 @@ chalk_1.default.level = 3;
  * @name                              console
  * @namespace           sugar.js.log.htmlPresets
  * @type                              Function
+ * @wip
  *
  * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for the terminal
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @param                   {String}                      text                        The text to process
  * @return                  {String}                                                  The processed text ready for the terminal
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function console(text) {
+function consoleFn(text) {
     return replaceTags_1.default(text, {
         black: (tag, content) => chalk_1.default.black(content),
         red: (tag, content) => chalk_1.default.red(content),
@@ -44,4 +50,4 @@ function console(text) {
         br: (tag, content) => '\n'
     });
 }
-exports.default = console;
+module.exports = consoleFn;

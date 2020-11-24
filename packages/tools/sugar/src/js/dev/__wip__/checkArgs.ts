@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __getArgsNames = require('./getArgsNames');
 const __check = require('check-types');
 const __parseArgs = require('../string/parseArgs');

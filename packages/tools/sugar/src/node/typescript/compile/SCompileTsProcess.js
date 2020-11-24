@@ -1,16 +1,30 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SProcess_1 = __importDefault(require("../process/SProcess"));
 /**
  * @name            STypescriptToJsProcess
  * @namespace           sugar.node.typescript
  * @type            Class
  * @extends         SProcess
+ * @wip
  *
  * This class represent the tsc compilation process to compile typescript to js
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -26,11 +40,7 @@ const Cls = class SCompileTsProcess extends SProcess_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings) {
-        super({
-            id: 'SCompileTsProcess',
-            name: 'Compile TS Process',
-            ...(settings || {})
-        });
+        super(Object.assign({ id: 'SCompileTsProcess', name: 'Compile TS Process' }, (settings || {})));
     }
     /**
      * @name              process
@@ -45,9 +55,10 @@ const Cls = class SCompileTsProcess extends SProcess_1.default {
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async process(params, settings) {
-        console.log('PROCESS', params);
-        return 'coco';
+    process(params, settings) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return 'coco';
+        });
     }
 };
-exports.default = Cls;
+module.exports = Cls;

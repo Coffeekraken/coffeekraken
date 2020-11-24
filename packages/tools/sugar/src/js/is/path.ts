@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isValidPath from 'is-valid-path';
 
 /**
@@ -22,9 +24,10 @@ import __isValidPath from 'is-valid-path';
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function path(path) {
+function path(path) {
   // check if the path is valid or not
   if (!__isValidPath(path)) return false;
   // otherwise, all is ok
   return true;
 }
+export = path;

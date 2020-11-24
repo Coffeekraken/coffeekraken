@@ -1,12 +1,19 @@
+// @ts-nocheck
+
 /**
  * @name        autoCast
  * @namespace           sugar.js.string
  * @type      Function
+ * @stable
  *
  * Auto cast the string into the correct variable type
  *
  * @param    {String}    string    The string to auto cast
  * @return    {Mixed}    The casted value
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example    js
  * import autoCast from '@coffeekraken/sugar/js/string/autoCast'
@@ -14,9 +21,10 @@
  * autoCast('window.HTMLElement') // => HTMLElement
  * autoCast('{"hello":"world"}') // {hello:'world'}
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function autoCast(string) {
+function autoCast(string) {
   // if the passed string is not a string, return the value
   if (typeof string !== 'string') return string;
 
@@ -50,3 +58,4 @@ export default function autoCast(string) {
     return string;
   }
 }
+export = autoCast;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isObject
  * @namespace           sugar.js.is
@@ -22,6 +24,7 @@
  * @since         1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isObject(value) {
+function isObject(value) {
   return value && typeof value === 'object' && value.constructor === Object;
 }
+export = isObject;

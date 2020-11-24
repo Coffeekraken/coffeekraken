@@ -1,14 +1,19 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name        autoCast
  * @namespace           sugar.js.string
  * @type      Function
+ * @stable
  *
  * Auto cast the string into the correct variable type
  *
  * @param    {String}    string    The string to auto cast
  * @return    {Mixed}    The casted value
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example    js
  * import autoCast from '@coffeekraken/sugar/js/string/autoCast'
@@ -16,6 +21,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * autoCast('window.HTMLElement') // => HTMLElement
  * autoCast('{"hello":"world"}') // {hello:'world'}
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function autoCast(string) {
@@ -50,4 +56,4 @@ function autoCast(string) {
         return string;
     }
 }
-exports.default = autoCast;
+module.exports = autoCast;

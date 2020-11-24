@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SCli from '../../cli/SCli';
 import __deepMerge from '../../object/deepMerge';
 import __STestJestCliInterface from './interface/STestJestInterface';
@@ -8,13 +10,18 @@ import __STestJestProcess from './STestJestProcess';
  * @namespace           sugar.node.test.jest
  * @type            Class
  * @extends         SCli
+ * @wip
  *
  * This class represent the tests jest cli
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class STestJestCli extends __SCli {
+export = class STestJestCli extends __SCli {
   /**
    * @name          command
    * @type          String

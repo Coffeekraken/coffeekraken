@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __psList from 'ps-list';
 import __fkill from 'fkill';
 import __deepMerge from '../object/deepMerge';
@@ -8,9 +10,14 @@ import __minimatch from 'minimatch';
  * @namespace           sugar.node.process
  * @type              Function
  * @async
+ * @wip
  *
  * This function simply cleanup all the processes and other things that stay alive after that
  * the main process has been terminated
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import exitCleanup from '@coffeekraken/sugar/node/process/exitCleanup';
@@ -19,7 +26,7 @@ import __minimatch from 'minimatch';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function exitCleanup(settings = {}) {
+function exitCleanup(settings = {}) {
   return new Promise((resolve, reject) => {
     settings = __deepMerge(
       {
@@ -52,3 +59,4 @@ export default function exitCleanup(settings = {}) {
     })();
   });
 }
+export = exitCleanup;

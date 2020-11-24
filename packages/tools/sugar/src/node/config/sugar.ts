@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SConfig from './SConfig';
 import __SConfigFolderAdapter from './adapters/SConfigFolderAdapter';
 import __path from 'path';
@@ -8,6 +10,7 @@ import __resolveTokens from '../object/resolveTokens';
  * @name                  sugar
  * @namespace           sugar.node.config
  * @type                  Function
+ * @beta
  *
  * This function allows you to access easily the configurations stored in the ```sugar.config.js```.
  * The returned configuration is the result of the default sugar config stored in the toolkit and the
@@ -16,15 +19,20 @@ import __resolveTokens from '../object/resolveTokens';
  * @param         {String}        dotPath         The dot path to the config wanted
  * @return        {Mixed}                         Return the value if exists, undefined if not
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example             js
  * import sugar from '@coffeekraken/sugar/node/config/sugar';
  * sugar('scss.unit'); // => rem
  *
+ * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 let sugarConfigInstance;
 
-export default function sugar(dotPath) {
+function sugar(dotPath) {
   if (!sugarConfigInstance) {
     sugarConfigInstance = new __SConfig('sugar', {
       adapters: [
@@ -47,3 +55,4 @@ export default function sugar(dotPath) {
     throwErrorOnUndefinedConfig: false
   });
 }
+export = sugar;

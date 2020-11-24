@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        throttle
  * @namespace           sugar.js.function
@@ -27,7 +29,7 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /*eslint-disable */
-export default function throttle(fn, threshhold) {
+function throttle(fn, threshhold) {
   threshhold || (threshhold = 250);
   let last;
   return function () {
@@ -41,3 +43,4 @@ export default function throttle(fn, threshhold) {
   };
 }
 /*eslint-enable */
+export = throttle;

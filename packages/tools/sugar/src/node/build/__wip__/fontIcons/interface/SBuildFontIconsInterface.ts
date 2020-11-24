@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __SInterface = require('../../../class/SInterface');
 const __SBuildInterface = require('../../interface/SBuildInterface');
 const __sugarConfig = require('../../../config/sugar');

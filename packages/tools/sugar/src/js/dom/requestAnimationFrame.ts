@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      requestAnimationFrame
  * @namespace           sugar.js.dom
@@ -22,7 +24,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default window.requestAnimationFrame ||
+export = window.requestAnimationFrame ||
   window.webkitRequestAnimationFrame ||
   window.mozRequestAnimationFrame ||
   window.oRequestAnimationFrame ||

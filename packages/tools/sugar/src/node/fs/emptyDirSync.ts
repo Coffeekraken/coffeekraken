@@ -1,15 +1,20 @@
-import __fs from 'fs-extra';
+// @ts-nocheck
 
-// TODO tests
+import __fs from 'fs-extra';
 
 /**
  * @name        emptyDirSync
  * @namespace           sugar.node.fs
  * @type          Function
+ * @stable
  *
  * Empty a directory (sync)
  *
  * @param       {String}              dir           The directory path to empty
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import emptyDirSync from '@coffeekraken/node/fs/emptyDirSync';
@@ -18,8 +23,10 @@ import __fs from 'fs-extra';
  * } catch(e) {}
  *
  * @see             https://github.com/jprichardson/node-fs-extra
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function emptyDirSync(dir) {
+function emptyDirSync(dir) {
   __fs.emptyDirSync(dir);
 }
+export = emptyDirSync;

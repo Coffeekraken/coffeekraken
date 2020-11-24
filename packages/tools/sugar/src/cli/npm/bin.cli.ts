@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import _parseArgs from '../../node/cli/parseArgs';
 import _SNpmBinCliInterface from './interface/SNpmBinCliInterface';
 import _childProcess from 'child_process';
@@ -7,7 +9,7 @@ import _fs from 'fs';
 import _path from 'path';
 import _findPackages from '../../node/monorepo/findPackages';
 
-export default async function bin (stringArgs = '') {
+export = async function bin (stringArgs = '') {
   const argsObj = _parseArgs(stringArgs, {
     definitionObj: _SNpmBinCliInterface.definitionObj
   })

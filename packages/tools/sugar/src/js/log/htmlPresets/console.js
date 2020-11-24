@@ -1,41 +1,63 @@
-import __replaceTags from '../../html/replaceTags';
-import __chalk from 'chalk';
-__chalk.level = 3;
-/**
- * @name                              console
- * @namespace           sugar.js.log.htmlPresets
- * @type                              Function
- *
- * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for the terminal
- *
- * @param                   {String}                      text                        The text to process
- * @return                  {String}                                                  The processed text ready for the terminal
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export default function console(text) {
-    return __replaceTags(text, {
-        black: (tag, content) => __chalk.black(content),
-        red: (tag, content) => __chalk.red(content),
-        green: (tag, content) => __chalk.green(content),
-        yellow: (tag, content) => __chalk.yellow(content),
-        blue: (tag, content) => __chalk.blue(content),
-        magenta: (tag, content) => __chalk.magenta(content),
-        cyan: (tag, content) => __chalk.cyan(content),
-        white: (tag, content) => __chalk.white(content),
-        bgBlack: (tag, content) => __chalk.bgBlack(content),
-        bgRed: (tag, content) => __chalk.bgRed(content),
-        bgGreen: (tag, content) => __chalk.bgGreen(content),
-        bgYellow: (tag, content) => __chalk.bgYellow(content),
-        bgBlue: (tag, content) => __chalk.bgBlue(content),
-        bgMagenta: (tag, content) => __chalk.bgMagenta(content),
-        bgCyan: (tag, content) => __chalk.bgCyan(content),
-        bgWhite: (tag, content) => __chalk.bgWhite(content),
-        bold: (tag, content) => __chalk.bold(content),
-        dim: (tag, content) => __chalk.dim(content),
-        italic: (tag, content) => __chalk.italic(content),
-        underline: (tag, content) => __chalk.underline(content),
-        strike: (tag, content) => __chalk.strike(content),
-        br: (tag, content) => '\n'
-    });
-}
+// @ts-nocheck
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "../../html/replaceTags", "chalk"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var replaceTags_1 = __importDefault(require("../../html/replaceTags"));
+    var chalk_1 = __importDefault(require("chalk"));
+    chalk_1.default.level = 3;
+    /**
+     * @name                              console
+     * @namespace           sugar.js.log.htmlPresets
+     * @type                              Function
+     * @wip
+     *
+     * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for the terminal
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @param                   {String}                      text                        The text to process
+     * @return                  {String}                                                  The processed text ready for the terminal
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    function consoleFn(text) {
+        return replaceTags_1.default(text, {
+            black: function (tag, content) { return chalk_1.default.black(content); },
+            red: function (tag, content) { return chalk_1.default.red(content); },
+            green: function (tag, content) { return chalk_1.default.green(content); },
+            yellow: function (tag, content) { return chalk_1.default.yellow(content); },
+            blue: function (tag, content) { return chalk_1.default.blue(content); },
+            magenta: function (tag, content) { return chalk_1.default.magenta(content); },
+            cyan: function (tag, content) { return chalk_1.default.cyan(content); },
+            white: function (tag, content) { return chalk_1.default.white(content); },
+            bgBlack: function (tag, content) { return chalk_1.default.bgBlack(content); },
+            bgRed: function (tag, content) { return chalk_1.default.bgRed(content); },
+            bgGreen: function (tag, content) { return chalk_1.default.bgGreen(content); },
+            bgYellow: function (tag, content) { return chalk_1.default.bgYellow(content); },
+            bgBlue: function (tag, content) { return chalk_1.default.bgBlue(content); },
+            bgMagenta: function (tag, content) { return chalk_1.default.bgMagenta(content); },
+            bgCyan: function (tag, content) { return chalk_1.default.bgCyan(content); },
+            bgWhite: function (tag, content) { return chalk_1.default.bgWhite(content); },
+            bold: function (tag, content) { return chalk_1.default.bold(content); },
+            dim: function (tag, content) { return chalk_1.default.dim(content); },
+            italic: function (tag, content) { return chalk_1.default.italic(content); },
+            underline: function (tag, content) { return chalk_1.default.underline(content); },
+            strike: function (tag, content) { return chalk_1.default.strike(content); },
+            br: function (tag, content) { return '\n'; }
+        });
+    }
+    return consoleFn;
+});

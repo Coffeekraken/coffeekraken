@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isOpera
  * @namespace           sugar.js.is
@@ -22,6 +24,7 @@
  * @since         1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isOpera(ua = navigator.userAgent) {
+ function isOpera(ua = navigator.userAgent) {
   return ua.toLowerCase().indexOf('op') > -1;
 }
+export = isOpera;

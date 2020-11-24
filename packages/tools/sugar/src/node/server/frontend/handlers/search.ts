@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __sugarConfig from '../../../config/sugar';
 import __fs from 'fs';
 import __marked from 'marked';
@@ -8,6 +10,7 @@ import { JSDOM as __jsDom } from 'jsdom';
  * @name                search
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
+ * @wip
  *
  * This function is responsible of responding to express requests made on the "search" section
  *
@@ -15,10 +18,14 @@ import { JSDOM as __jsDom } from 'jsdom';
  * @param         {Object}          server          The express server instance
  * @return        {Promise}                         A promise that will be resolved with the response to send to the client
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function search(req, server) {
+function search(req, server) {
   return new Promise(async (resolve, reject) => {
     let title = `Search results | 18 results`;
 
@@ -57,3 +64,4 @@ export default function search(req, server) {
     });
   });
 }
+export = search;

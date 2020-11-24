@@ -1,18 +1,43 @@
+// @ts-nocheck
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
-const argsToObject_1 = __importDefault(require("../cli/argsToObject"));
-const SError_1 = __importDefault(require("../error/SError"));
-const class_1 = __importDefault(require("../is/class"));
-const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-const trimLines_1 = __importDefault(require("../string/trimLines"));
-const validateObject_1 = __importDefault(require("../validation/object/validateObject"));
-const validateObjectOutputString_1 = __importDefault(require("../validation/object/validateObjectOutputString"));
-const typeof_1 = __importDefault(require("../value/typeof"));
-const set_1 = __importDefault(require("../object/set"));
+var getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
+var argsToObject_1 = __importDefault(require("../cli/argsToObject"));
+var SError_1 = __importDefault(require("../error/SError"));
+var class_1 = __importDefault(require("../is/class"));
+var deepMerge_1 = __importDefault(require("../object/deepMerge"));
+var trimLines_1 = __importDefault(require("../string/trimLines"));
+var validateObject_1 = __importDefault(require("../validation/object/validateObject"));
+var validateObjectOutputString_1 = __importDefault(require("../validation/object/validateObjectOutputString"));
+var typeof_1 = __importDefault(require("../value/typeof"));
+var set_1 = __importDefault(require("../object/set"));
 /**
  * @name              SDefinitionObject
  * @namespace           sugar.js.definitionObject
@@ -49,7 +74,9 @@ const set_1 = __importDefault(require("../object/set"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
  */
-class SDefinitionObject {
+var SDefinitionObject = /** @class */ (function () {
+    function SDefinitionObject() {
+    }
     /**
      * @name              apply
      * @type              Function
@@ -69,23 +96,25 @@ class SDefinitionObject {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static apply(instance, settings = {}) {
+    SDefinitionObject.apply = function (instance, settings) {
+        var _this = this;
+        if (settings === void 0) { settings = {}; }
         settings = deepMerge_1.default(this.settings, settings);
         // name
         if (!settings.name) {
             settings.name = instance.constructor.name || instance.name;
         }
-        const instanceType = typeof_1.default(instance, {
+        var instanceType = typeof_1.default(instance, {
             customClass: false
         });
         if (instanceType !== 'Object' && instanceType !== 'Class') {
-            throw new SError_1.default(`Sorry but the "<yellow>instance</yellow>" argument of the "<cyan>SDefinitionObject.apply</cyan>" static method have to be an <green>Object</green> and you've passed an <red>${typeof_1.default(instance)}</red>...`);
+            throw new SError_1.default("Sorry but the \"<yellow>instance</yellow>\" argument of the \"<cyan>SDefinitionObject.apply</cyan>\" static method have to be an <green>Object</green> and you've passed an <red>" + typeof_1.default(instance) + "</red>...");
         }
-        let issueObj = {
+        var issueObj = {
             $issues: []
         };
-        let implementationValidationResult;
-        const extendsStack = getExtendsStack_1.default(instance);
+        var implementationValidationResult;
+        var extendsStack = getExtendsStack_1.default(instance);
         // check if the passed instance base class already implements this insterface
         if (instance.constructor.__interfaces &&
             Array.isArray(instance.constructor.__interfaces)) {
@@ -98,10 +127,10 @@ class SDefinitionObject {
         }
         // extends array
         if (this.extendsArray && Array.isArray(this.extendsArray)) {
-            this.extendsArray.forEach((cls) => {
+            this.extendsArray.forEach(function (cls) {
                 if (extendsStack.indexOf(cls) === -1) {
-                    setTimeout(() => {
-                        throw new SError_1.default(`Your class|instance "<yellow>${instance.name || instance.constructor.name}</yellow>" that implements the "<cyan>${this.name}</cyan>" interface has to extend the "<green>${cls}</green>" class...`);
+                    setTimeout(function () {
+                        throw new SError_1.default("Your class|instance \"<yellow>" + (instance.name || instance.constructor.name) + "</yellow>\" that implements the \"<cyan>" + _this.name + "</cyan>\" interface has to extend the \"<green>" + cls + "</green>\" class...");
                     });
                 }
             });
@@ -157,7 +186,7 @@ class SDefinitionObject {
             default:
                 return SDefinitionObject.outputString(issueObj, settings);
         }
-    }
+    };
     /**
      * @name          getDefaultValues
      * @type          Function
@@ -171,9 +200,9 @@ class SDefinitionObject {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static getDefaultValues() {
+    SDefinitionObject.getDefaultValues = function () {
         return this.applyAndComplete({});
-    }
+    };
     /**
      * @name          applyAndThrow
      * @type          Function
@@ -187,10 +216,11 @@ class SDefinitionObject {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static applyAndThrow(instance, settings = {}) {
-        const apply = SDefinitionObject.apply.bind(this);
-        return apply(instance, Object.assign(Object.assign({}, settings), { throw: true }));
-    }
+    SDefinitionObject.applyAndThrow = function (instance, settings) {
+        if (settings === void 0) { settings = {}; }
+        var apply = SDefinitionObject.apply.bind(this);
+        return apply(instance, __assign(__assign({}, settings), { throw: true }));
+    };
     /**
      * @name          applyAndComplete
      * @type          Function
@@ -207,14 +237,15 @@ class SDefinitionObject {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static applyAndComplete(object, settings = {}) {
+    SDefinitionObject.applyAndComplete = function (object, settings) {
+        if (settings === void 0) { settings = {}; }
         settings = deepMerge_1.default({
             duplicate: false
         }, settings);
-        const completedObject = this.complete(object, settings);
+        var completedObject = this.complete(object, settings);
         this.applyAndThrow(completedObject, settings);
         return completedObject;
-    }
+    };
     /**
      * @name          implements
      * @type          Function
@@ -229,19 +260,28 @@ class SDefinitionObject {
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static implements(instance, interfaces = null, settings = {}) {
+    SDefinitionObject.implements = function (instance, interfaces, settings) {
+        if (interfaces === void 0) { interfaces = null; }
+        if (settings === void 0) { settings = {}; }
         if (interfaces === null)
             interfaces = [this];
         if (!Array.isArray(interfaces))
             interfaces = [interfaces];
         if (class_1.default(instance)) {
             // return instance;
-            class SDefinitionObjectImplementsMiddleClass extends instance {
-                constructor(...args) {
-                    super(...args);
-                    SDefinitionObject.implements(this, interfaces, settings);
+            var SDefinitionObjectImplementsMiddleClass = /** @class */ (function (_super) {
+                __extends(SDefinitionObjectImplementsMiddleClass, _super);
+                function SDefinitionObjectImplementsMiddleClass() {
+                    var args = [];
+                    for (var _i = 0; _i < arguments.length; _i++) {
+                        args[_i] = arguments[_i];
+                    }
+                    var _this = _super.apply(this, args) || this;
+                    SDefinitionObject.implements(_this, interfaces, settings);
+                    return _this;
                 }
-            }
+                return SDefinitionObjectImplementsMiddleClass;
+            }(instance));
             Object.defineProperty(SDefinitionObjectImplementsMiddleClass, 'name', {
                 value: instance.name
             });
@@ -264,10 +304,10 @@ class SDefinitionObject {
             return SDefinitionObjectImplementsMiddleClass;
         }
         // make sure the instance has all the interfaces requirements
-        interfaces.forEach((Interface) => {
-            Interface.apply(instance, Object.assign(Object.assign({}, settings), { interface: Interface.name }));
+        interfaces.forEach(function (Interface) {
+            Interface.apply(instance, __assign(__assign({}, settings), { interface: Interface.name }));
         });
-    }
+    };
     /**
      * @name          complete
      * @type          Function
@@ -282,17 +322,19 @@ class SDefinitionObject {
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static complete(data, settings = {}) {
+    SDefinitionObject.complete = function (data, settings) {
+        var _this = this;
+        if (settings === void 0) { settings = {}; }
         settings = deepMerge_1.default({
             duplicate: false
         }, settings);
-        let argsObj = data;
+        var argsObj = data;
         if (settings.duplicate) {
             argsObj = Object.assign({}, data);
         }
         // loop on all the arguments
-        Object.keys(this.definitionObj).forEach((argString) => {
-            const argDefinitionObj = this.definitionObj[argString];
+        Object.keys(this.definitionObj).forEach(function (argString) {
+            var argDefinitionObj = _this.definitionObj[argString];
             // check if we have an argument passed in the properties
             if (argsObj[argString] === undefined &&
                 argDefinitionObj.default !== undefined) {
@@ -300,7 +342,7 @@ class SDefinitionObject {
             }
         });
         return argsObj;
-    }
+    };
     /**
      * @name          outputString
      * @type          Function
@@ -315,11 +357,12 @@ class SDefinitionObject {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static outputString(resultObj, settings = {}) {
-        const headerString = this._outputHeaderString(settings);
-        const string = validateObjectOutputString_1.default(resultObj, settings);
-        return trimLines_1.default(`${headerString}${string}`);
-    }
+    SDefinitionObject.outputString = function (resultObj, settings) {
+        if (settings === void 0) { settings = {}; }
+        var headerString = this._outputHeaderString(settings);
+        var string = validateObjectOutputString_1.default(resultObj, settings);
+        return trimLines_1.default("" + headerString + string);
+    };
     /**
      * @name          output
      * @type          Function
@@ -334,10 +377,11 @@ class SDefinitionObject {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static output(resultObj, settings = {}) {
-        const string = this.outputString(resultObj, settings);
+    SDefinitionObject.output = function (resultObj, settings) {
+        if (settings === void 0) { settings = {}; }
+        var string = this.outputString(resultObj, settings);
         console.log(string);
-    }
+    };
     /**
      * @name                _outputHeaderString
      * @type                Function
@@ -350,18 +394,19 @@ class SDefinitionObject {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static _outputHeaderString(settings = {}) {
-        let array = [];
+    SDefinitionObject._outputHeaderString = function (settings) {
+        if (settings === void 0) { settings = {}; }
+        var array = [];
         if (settings.title) {
-            array.push(`<red><underline>${settings.title}</underline></red>`);
+            array.push("<red><underline>" + settings.title + "</underline></red>");
             array.push(' ');
         }
         if (settings.description) {
-            array.push(`${settings.description}`);
+            array.push("" + settings.description);
             array.push(' ');
         }
         return array.join('\n');
-    }
+    };
     /**
      * @name                parse
      * @type                Function
@@ -376,10 +421,10 @@ class SDefinitionObject {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static parse(string) {
-        const args = argsToObject_1.default(string, this.definitionObj);
+    SDefinitionObject.parse = function (string) {
+        var args = argsToObject_1.default(string, this.definitionObj);
         return args;
-    }
+    };
     /**
      * @name                parseAndComplete
      * @type                Function
@@ -395,11 +440,11 @@ class SDefinitionObject {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static parseAndComplete(string) {
-        let args = argsToObject_1.default(string, this.definitionObj);
+    SDefinitionObject.parseAndComplete = function (string) {
+        var args = argsToObject_1.default(string, this.definitionObj);
         args = this.complete(args);
         return args;
-    }
+    };
     /**
      * @name          extends
      * @type          Function
@@ -415,14 +460,20 @@ class SDefinitionObject {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static extends(extendsObj) {
-        class ExtendedInterface extends this {
-        }
+    SDefinitionObject.extends = function (extendsObj) {
+        var ExtendedInterface = /** @class */ (function (_super) {
+            __extends(ExtendedInterface, _super);
+            function ExtendedInterface() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            return ExtendedInterface;
+        }(this));
         ExtendedInterface.definitionObj = deepMerge_1.default(ExtendedInterface.definitionObj, extendsObj.definitionObj || {});
         ExtendedInterface.settings = deepMerge_1.default(ExtendedInterface.settings, extendsObj.settings || {});
         return ExtendedInterface;
-    }
-}
+    };
+    return SDefinitionObject;
+}());
 exports.default = SDefinitionObject;
 /**
  * @name              settings

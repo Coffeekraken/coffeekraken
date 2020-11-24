@@ -1,3 +1,12 @@
+// @ts-nocheck
+
+/**
+ * @wip
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ */
+
 import ISPromise from '../../../promise/interface/ISPromise';
 import ISProcessOutput, {
   ISProcessOutputSettings

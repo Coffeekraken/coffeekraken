@@ -1,8 +1,17 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const extension_1 = __importDefault(require("../fs/extension"));
 const SCache_1 = __importDefault(require("../cache/SCache"));
 const unquote_1 = __importDefault(require("../string/unquote"));
@@ -27,39 +36,7 @@ const csso_1 = __importDefault(require("csso"));
 const is_glob_1 = __importDefault(require("is-glob"));
 const unique_1 = __importDefault(require("../array/unique"));
 const SBuildScssInterface_1 = __importDefault(require("./build/interface/SBuildScssInterface"));
-/**
- * @name                SScssCompiler
- * @namespace           sugar.node.scss
- * @type                Class
- *
- * This class wrap the "sass" compiler with some additional features which are:
- *
- * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
- * @feature         2.0.0       Optimize the render time as much as 6x faster
- *
- * @param           {Object}            [settings={}]       An object of settings to configure your instance
- *
- * @setting         {String}        [id=this.constructor.name]          An id for your compiler. Used for cache, etc...
- * @setting         {Object}        [sass={}]        Pass the "sass" (https://www.npmjs.com/package/sass) options here. ! The "file" and "data" properties are overrided by the first parameter of the "compile" method
- * @setting         {Onject}       [optimizers={}]     Pass an object of optimizing settings
- * @setting         {Boolean}       [optimizers.split=true]     Specify if you want to make use of the splitting code technique to compile only what's really changed
- *
- * @todo            tests
- * @todo            check for map output when no file path
- *
- * @example         js
- * import SScssCompiler from '@coffeekraken/sugar/node/scss/SScssCompiler';
- * const compiler = new SScssCompiler();
- * const compiledFile = await compiler.compile('my/cool/code.scss');
- * const compiledCode = await compiler.compile(`
- *      \@include myCoolMixin();
- * `);
- *
- * @see             https://www.npmjs.com/package/sass
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SScssCompiler {
+module.exports = class SScssCompiler {
     /**
      * @name            constructor
      * @type             Function
@@ -83,12 +60,7 @@ class SScssCompiler {
          */
         this._settings = {};
         this._includePaths = [];
-        this._settings = deepMerge_1.default({
-            id: this.constructor.name,
-            ...SBuildScssInterface_1.default.getDefaultValues(),
-            includePaths: [],
-            putUseOnTop: true
-        }, settings);
+        this._settings = deepMerge_1.default(Object.assign(Object.assign({ id: this.constructor.name }, SBuildScssInterface_1.default.getDefaultValues()), { includePaths: [], putUseOnTop: true }), settings);
         // prod
         if (this._settings.prod) {
             this._settings.cache = false;
@@ -113,7 +85,7 @@ class SScssCompiler {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     compile(source, settings = {}) {
-        return new SPromise_1.default(async (resolve, reject, trigger, cancel) => {
+        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
             settings = deepMerge_1.default(this._settings, {
                 _isChild: false
             }, settings);
@@ -195,7 +167,7 @@ class SScssCompiler {
                 ttl: '10d'
             });
             if (settings.clearCache && !settings._isChild) {
-                await cache.clear();
+                yield cache.clear();
             }
             let cacheId;
             if (path_2.default(source)) {
@@ -225,7 +197,7 @@ class SScssCompiler {
                 cacheId = md5_1.default.encrypt(source);
             }
             // try to get from cache
-            const cachedObj = await cache.get(cacheId);
+            const cachedObj = yield cache.get(cacheId);
             if (this._settings.cache && cachedObj) {
                 // build the css code to return
                 dataObj = cachedObj;
@@ -264,7 +236,7 @@ class SScssCompiler {
                 }
             }
             // go down children
-            const { children, scss } = await this._compileImports(dataObj.importStatements, dataObj.scss, settings);
+            const { children, scss } = yield this._compileImports(dataObj.importStatements, dataObj.scss, settings);
             dataObj.children = children;
             dataObj.scss = scss;
             let toCompile = `
@@ -282,10 +254,7 @@ class SScssCompiler {
                 if (settings.putUseOnTop) {
                     toCompile = putUseStatementsOnTop_1.default(toCompile);
                 }
-                const renderObj = sass_1.default.renderSync({
-                    ...sassSettings,
-                    data: toCompile
-                });
+                const renderObj = sass_1.default.renderSync(Object.assign(Object.assign({}, sassSettings), { data: toCompile }));
                 let compiledResultString = settings.stripComments
                     ? stripCssComments_1.default(renderObj.css.toString())
                     : renderObj.css.toString();
@@ -316,13 +285,8 @@ class SScssCompiler {
           `.trim();
             }
             // resolve with the compilation result
-            resolve({
-                ...dataObj,
-                startTime: startTime,
-                endTime: Date.now(),
-                duration: Date.now() - startTime
-            });
-        }, {
+            resolve(Object.assign(Object.assign({}, dataObj), { startTime: startTime, endTime: Date.now(), duration: Date.now() - startTime }));
+        }), {
             id: this._settings.id
         });
     }
@@ -353,65 +317,63 @@ class SScssCompiler {
         });
         return resultString;
     }
-    async _compileImports(importStatements, scss, settings) {
-        // loop on each imports
-        const childrenObj = {};
-        let finalImports = {};
-        for (let i = 0; i < importStatements.length; i++) {
-            const importStatement = importStatements[i].trim();
-            const importStatementPath = unquote_1.default(importStatement.replace('@import ', '').replace(';', '').trim());
-            let importAbsolutePath = path_1.default.resolve(settings.rootDir, importStatementPath);
-            if (is_glob_1.default(importAbsolutePath)) {
-                if (!finalImports[importStatement]) {
-                    finalImports[importStatement] = {
-                        rawStatement: importStatement,
-                        rawPath: importStatementPath,
-                        paths: []
-                    };
-                }
-                const globPaths = glob_1.default.sync(importAbsolutePath, {});
-                if (globPaths && globPaths.length) {
-                    globPaths.forEach((path) => {
-                        finalImports[importStatement].paths.push({
-                            absolutePath: path,
-                            relativePath: path_1.default.relative(settings.rootDir, path)
-                        });
-                    });
-                }
-                continue;
-            }
-            finalImports[importStatement] = {
-                rawStatement: importStatement,
-                rawPath: importStatementPath,
-                paths: [
-                    {
-                        absolutePath: importAbsolutePath,
-                        relativePath: path_1.default.relative(settings.rootDir, importAbsolutePath)
+    _compileImports(importStatements, scss, settings) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // loop on each imports
+            const childrenObj = {};
+            let finalImports = {};
+            for (let i = 0; i < importStatements.length; i++) {
+                const importStatement = importStatements[i].trim();
+                const importStatementPath = unquote_1.default(importStatement.replace('@import ', '').replace(';', '').trim());
+                let importAbsolutePath = path_1.default.resolve(settings.rootDir, importStatementPath);
+                if (is_glob_1.default(importAbsolutePath)) {
+                    if (!finalImports[importStatement]) {
+                        finalImports[importStatement] = {
+                            rawStatement: importStatement,
+                            rawPath: importStatementPath,
+                            paths: []
+                        };
                     }
-                ]
-            };
-        }
-        for (let i = 0; i < Object.keys(finalImports).length; i++) {
-            const importObj = finalImports[Object.keys(finalImports)[i]];
-            for (let j = 0; j < importObj.paths.length; j++) {
-                const pathObj = importObj.paths[j];
-                const importPath = this._getRealFilePath(pathObj.absolutePath);
-                if (importPath) {
-                    // compile the finded path
-                    const compileRes = await this.compile(importPath, {
-                        ...settings,
-                        _isChild: true,
-                        rootDir: folderPath_1.default(importPath)
-                    });
-                    childrenObj[pathObj.absolutePath] = compileRes;
+                    const globPaths = glob_1.default.sync(importAbsolutePath, {});
+                    if (globPaths && globPaths.length) {
+                        globPaths.forEach((path) => {
+                            finalImports[importStatement].paths.push({
+                                absolutePath: path,
+                                relativePath: path_1.default.relative(settings.rootDir, path)
+                            });
+                        });
+                    }
+                    continue;
                 }
+                finalImports[importStatement] = {
+                    rawStatement: importStatement,
+                    rawPath: importStatementPath,
+                    paths: [
+                        {
+                            absolutePath: importAbsolutePath,
+                            relativePath: path_1.default.relative(settings.rootDir, importAbsolutePath)
+                        }
+                    ]
+                };
             }
-            scss = scss.replace(importObj.rawStatement, '');
-        }
-        return {
-            children: childrenObj,
-            scss
-        };
+            for (let i = 0; i < Object.keys(finalImports).length; i++) {
+                const importObj = finalImports[Object.keys(finalImports)[i]];
+                for (let j = 0; j < importObj.paths.length; j++) {
+                    const pathObj = importObj.paths[j];
+                    const importPath = this._getRealFilePath(pathObj.absolutePath);
+                    if (importPath) {
+                        // compile the finded path
+                        const compileRes = yield this.compile(importPath, Object.assign(Object.assign({}, settings), { _isChild: true, rootDir: folderPath_1.default(importPath) }));
+                        childrenObj[pathObj.absolutePath] = compileRes;
+                    }
+                }
+                scss = scss.replace(importObj.rawStatement, '');
+            }
+            return {
+                children: childrenObj,
+                scss
+            };
+        });
     }
     _getRealFilePath(path) {
         const extension = extension_1.default(path);
@@ -430,5 +392,4 @@ class SScssCompiler {
         }
         return null;
     }
-}
-exports.default = SScssCompiler;
+};

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';
@@ -38,7 +40,7 @@ import __fs from 'fs';
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SDocblockOutput {
+export = class SDocblockOutput {
   /**
    * @name      _settings
    * @type      Object

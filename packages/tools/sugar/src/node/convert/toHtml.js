@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SError_1 = __importDefault(require("../error/SError"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const htmlFromMarkdown_1 = __importDefault(require("./html/htmlFromMarkdown"));
@@ -11,6 +11,7 @@ const htmlFromDocblocks_1 = __importDefault(require("./html/htmlFromDocblocks"))
  * @name            toHtml
  * @namespace       sugar.js.convert
  * @type            Function
+ * @wip
  *
  * Take a string as input and convert it to HTML.
  *
@@ -21,6 +22,9 @@ const htmlFromDocblocks_1 = __importDefault(require("./html/htmlFromDocblocks"))
  * @param       {Object}          [settings={}]       An object of settings to configure your conversion process:
  * - from (null) {String}: Specify the type of the input string like "markdown", "dockblocks", and more coming...
  * @return      {String}                              The HTML converted result
+ *
+ * @todo        interface
+ * @todo        doc
  *
  * @example       js
  * import toHtml from '@coffeekraken/sugar/js/convert/toHtml';
@@ -61,4 +65,4 @@ function toHtml(inputString, settings = {}) {
     }
     return converterFn(inputString, settings);
 }
-exports.default = toHtml;
+module.exports = toHtml;

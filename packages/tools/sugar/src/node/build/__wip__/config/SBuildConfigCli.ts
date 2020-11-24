@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __SCli = require('../../cli/SCli');
 const __deepMerge = require('../../object/deepMerge');
 const __SBuildConfigInterface = require('./interface/SBuildConfigInterface');

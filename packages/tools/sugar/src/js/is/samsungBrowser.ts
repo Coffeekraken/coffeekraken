@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isSamsumgBrowser
  * @namespace           sugar.js.is
@@ -22,6 +24,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isSamsumgBrowser(ua = navigator.userAgent) {
+function isSamsumgBrowser(ua = navigator.userAgent) {
   return ua.match(/SamsungBrowser/i) !== null;
 }
+export = isSamsumgBrowser;

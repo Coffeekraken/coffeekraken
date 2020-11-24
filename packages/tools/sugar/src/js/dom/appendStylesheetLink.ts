@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import linkLoaded from './linkLoaded';
 
 /**
@@ -22,7 +24,7 @@ import linkLoaded from './linkLoaded';
  * @since     1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function appendStylesheetLink(href) {
+function appendStylesheetLink(href) {
   const $link = document.createElement('link');
   $link.type = 'text/css';
   $link.rel = 'stylesheet';
@@ -30,3 +32,4 @@ export default function appendStylesheetLink(href) {
   document.head.appendChild($link);
   return linkLoaded($link);
 }
+export = appendStylesheetLink;

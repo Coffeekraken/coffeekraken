@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isNumber
  * @namespace           sugar.js.is
@@ -22,6 +24,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isNumber(source) {
+function isNumber(source) {
   return !isNaN(parseFloat(source)) && isFinite(source);
 }
+export = isNumber;

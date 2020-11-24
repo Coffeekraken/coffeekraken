@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SValidation from '../../SValidation';
 import __isClass from '../../../is/class';
 
@@ -5,8 +7,13 @@ import __isClass from '../../../is/class';
  * @name          SStaticValidation
  * @namespace     sugar.js.validation.value.validation
  * @type          Class
+ * @wip
  *
  * This class represent the "static" validation
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -26,4 +33,4 @@ class SStaticValidation extends __SValidation {
   }
 }
 
-export default SStaticValidation;
+export = SStaticValidation;

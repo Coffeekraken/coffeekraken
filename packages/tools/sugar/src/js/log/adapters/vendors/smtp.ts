@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 ﻿/* SmtpJS.com - v3.0.0 */
 const Email = {
   send: function (a) {
@@ -38,4 +40,4 @@ const Email = {
     );
   }
 };
-export default Email;
+export = Email;

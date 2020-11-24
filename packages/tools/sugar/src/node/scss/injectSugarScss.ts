@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __sugarConfig from '../config/sugar';
 import __jsObjectToScssMap from './jsObjectToScssMap';
 import __putUseStatementsOnTop from './putUseStatementsOnTop';
@@ -9,12 +11,17 @@ import __path from 'path';
  * @name            injectSugarScss
  * @namespace       sugar.node.scss
  * @type            Function
+ * @wip
  *
  * This function simply inject the sugar scss init code in a string.
  * It check if it has already been injected and does nothing if it's the case.
  *
  * @param       {String}          scss          The scss string in which to inject the init code
  * @return      {String}                        The new string with the sugar scss init code injected
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import injectSugarScss from '@coffeekraken/sugar/node/scss/injectSugarScss';
@@ -27,7 +34,7 @@ import __path from 'path';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function injectSugarScss(scss) {
+function injectSugarScss(scss) {
   if (scss.includes(' as Sugar;')) return scss;
 
   const scssSettings = __sugarConfig('scss');
@@ -48,3 +55,4 @@ export default function injectSugarScss(scss) {
 
   return res;
 }
+export = injectSugarScss;

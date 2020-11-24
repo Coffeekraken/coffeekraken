@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 
 /**
@@ -26,7 +28,7 @@ import __SPromise from '../promise/SPromise';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function on(name, callback) {
+function on(name, callback) {
   // check that the global SPromise exists
   if (!window._sugarEventSPromise)
     window._sugarEventSPromise = new __SPromise({
@@ -39,3 +41,4 @@ export default function on(name, callback) {
     window._sugarEventSPromise.off(name, callback);
   };
 }
+export = on;

@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__geKeyByValue) => {
     describe('sugar.js.object.geKeyByValue', () => {
         it('Should find the correct key passing a value', done => {

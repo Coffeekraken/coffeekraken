@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __blessed from 'blessed';
 import __SBlessedComponent from '../SBlessedComponent';
 import __deepMerge from '../../object/deepMerge';
@@ -15,6 +17,7 @@ import __escapeStack from '../../terminal/escapeStack';
  * @name                  SBlessedSummaryList
  * @namespace           sugar.node.blessed.list
  * @type                  Class
+ * @wip
  *
  * This class gives you the ability to display an editable list of informations.
  * This is very useful to display for example a summary of a command to launch, or whatever...
@@ -25,13 +28,18 @@ import __escapeStack from '../../terminal/escapeStack';
  * - default (null) {String}: The item default value
  * @param        {Object}         [settings = {}]         A settings object to configure your this. Here's the available settings:
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import SBlessedSummaryList from '@coffeekraken/sugar/node/blessed/list/SBlessedSummaryList';
  * const list = new SBlessedSummaryList({});
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBlessedSummaryList extends __SBlessedComponent {
+export = class SBlessedSummaryList extends __SBlessedComponent {
   /**
    * @name                  _editingItemIdx
    * @type                  Number
@@ -147,7 +155,7 @@ export default class SBlessedSummaryList extends __SBlessedComponent {
       __activeSpace.remove('.summaryList');
     });
 
-    this.promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {
+    this.promise = new __SPromise({
       id: 'SBlessedSummaryList'
     });
 
@@ -230,7 +238,7 @@ export default class SBlessedSummaryList extends __SBlessedComponent {
         }
 
         // init an new empty escape stack
-        escapeStackPromise = __escapeStack(() => {});
+        escapeStackPromise = __escapeStack();
 
         this._isEditing = true;
         this._editingItemIdx = this.$list.selected;
@@ -252,7 +260,6 @@ export default class SBlessedSummaryList extends __SBlessedComponent {
           .on('resolve', (value) => {
             this._items[this.$list.selected].value = value;
           })
-          .on('cancel', () => {})
           .on('cancel,finally', () => {
             setTimeout(() => {
               this._isEditing = false;
@@ -321,7 +328,7 @@ export default class SBlessedSummaryList extends __SBlessedComponent {
    */
   _buildBlessedListItemsArray() {
     const longestItemText = this.getLongestListItemName();
-    let listItems = this._items.map((item, i) => {
+    const listItems = this._items.map((item, i) => {
       let value =
         this._items[i].value !== undefined
           ? this._items[i].value
@@ -356,7 +363,7 @@ export default class SBlessedSummaryList extends __SBlessedComponent {
    *
    */
   _rebuildList() {
-    let listItems = this._buildBlessedListItemsArray();
+    const listItems = this._buildBlessedListItemsArray();
     this.$list.clearItems();
     this.$list.setItems(listItems);
     this.$list.select(this._selectedItemIdx);

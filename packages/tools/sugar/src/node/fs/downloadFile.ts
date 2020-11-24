@@ -1,13 +1,14 @@
+// @ts-nocheck
+
 import __downloadsFolder from 'downloads-folder';
 import __path from 'path';
 import __download from 'download-file';
-
-// TODO tests
 
 /**
  * @name              downloadFile
  * @namespace           sugar.node.fs
  * @type              Function
+ * @stable
  *
  * Download a file and save it on the file system
  *
@@ -16,15 +17,22 @@ import __download from 'download-file';
  * @param             {Function}        [callback=null]           A callback function to call on success or on error. In case of success it will take as parameter the final file path on the file system, otherwise it will be the error passed
  * @return            {Promise}                                 A promise that will be resolved with the final absolute file path, or rejected with the error passed
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import downloadFile from '@coffeekraken/node/fs/downloadFile';
  * downloadFile('https://myCoolFileUrl.ch/coco.json').then((dest) => {
  *    console.log('file downloeaded and saved here', dest);
  * }).catch(err) => {});
  *
+ * @see           https://www.npmjs.com/package/downloads-folder
+ * @see           https://www.npmjs.com/package/download-file
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function (
+function downloadFileFn (
   downloadUrl,
   destinationPath = __downloadsFolder(),
   callback = null
@@ -61,3 +69,4 @@ export default function (
     );
   });
 }
+export = downloadFileFn;

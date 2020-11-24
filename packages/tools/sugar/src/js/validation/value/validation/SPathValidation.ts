@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SValidation from '../../SValidation';
 import __isPath from '../../../is/path';
 import __isNode from '../../../is/node';
@@ -6,8 +8,13 @@ import __isNode from '../../../is/node';
  * @name          SPathValidation
  * @namespace     sugar.js.validation.value.validation
  * @type          Class
+ * @wip
  *
  * This class represent the "path" validation
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -20,4 +27,4 @@ class SPathValidation extends __SValidation {
   }
 }
 
-export default SPathValidation;
+export = SPathValidation;

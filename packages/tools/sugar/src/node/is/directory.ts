@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __fs from 'fs';
 import __deepMerge from '../object/deepMerge';
 
@@ -5,22 +7,25 @@ import __deepMerge from '../object/deepMerge';
  * @name            directory
  * @namespace           sugar.node.is
  * @type            Function
+ * @stable
  *
  * This function check if the passed string path is a directory or not
  *
  * @param     {String}        path        The path to check
  * @return    {Boolean}                   true if is a directory, false if not
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example     js
  * import isDirectory from '@coffeekraken/sugar/node/is/directory';
  * isDirectory('something/cool');
  *
- * @todo        Tests
- *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isDirectory(path, settings = {}) {
+function isDirectory(path, settings = {}) {
   settings = __deepMerge(
     {
       symlink: true
@@ -38,3 +43,4 @@ export default function isDirectory(path, settings = {}) {
   }
   return isMatching;
 }
+export = isDirectory;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                            getArgsNames
  * @namespace           sugar.js.dev
@@ -21,7 +23,7 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function getArgsNames(func) {
+function getArgsNames(func) {
   // String representaation of the function code
   let str = func.toString();
   // Remove comments of the form /* ... */
@@ -54,3 +56,4 @@ export default function getArgsNames(func) {
 
   return params;
 }
+export = getArgsNames;

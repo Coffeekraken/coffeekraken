@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name            extractValues
  * @namespace       sugar.js.object
@@ -28,7 +30,7 @@
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function extractValues(arrayOfObjects, keyName) {
+function extractValues(arrayOfObjects, keyName) {
   const finalArray = [];
   arrayOfObjects.forEach((object) => {
     if (object[keyName] === undefined) return;
@@ -36,3 +38,4 @@ export default function extractValues(arrayOfObjects, keyName) {
   });
   return finalArray;
 }
+export = extractValues;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
 /**
  * @name        addAnimationClass
@@ -24,7 +26,7 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function addAnimationClass($elm, cls) {
+function addAnimationClass($elm, cls) {
   // make sure the cls argument is an Array
   if (!Array.isArray(cls)) cls = [cls];
   // add the class to the element
@@ -34,3 +36,4 @@ export default function addAnimationClass($elm, cls) {
   // remove the class at the end of the animation
   return __removeClassesOnAnimationEnd($elm, cls);
 }
+export = addAnimationClass;

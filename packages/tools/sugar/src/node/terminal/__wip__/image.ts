@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __imaging = require('imaging');
 const __deepMerge = require('../object/deepMerge');
 const __colorConvert = require('color-convert');

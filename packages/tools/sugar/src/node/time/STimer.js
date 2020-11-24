@@ -1,52 +1,12 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const convert_1 = __importDefault(require("./convert"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-/**
- * @name 		            STimer
- * @namespace           sugar.js.time
- * @type                  Class
- * @extends               SPromise
- *
- * Class that let you create and handle timer with ease.
- * With this class you can set some callback function that will be
- * called each x ms or tell that you want your callbacks to be called
- * a certain number of time during the timer time.
- * This class extends the SPromise one, meaning that you can subscribe to differents "events" triggered by the timer instance. Here's the list:
- * - complete: Triggered when the timer is completed
- * - tick: Triggered at each ticks depending on your settings
- * - duration: Triggered when the duration has been changed
- * - tickCount: Triggered when the tickCount has been changed
- * - reset: Triggered when the timer has been reseted
- * - start: Triggered when the timer starts
- * - pause: Triggered when the timer has been paused
- * - stop: Triggered when the timer has been stoped
- * - destroy: Triggered when the timer has been destroyed
- *
- * @param     {Number|String}     duration      The duration of the timer. Can be a Number that will be treated as miliseconds, or a string like "1s", "2m", etc...
- * @param     {Object}            [settings={}]     A settings object to configure your timer more deeply:
- * - tickInterval (1000) {Number}: Specify the interval wanted between each ticks in miliseconds
- * - tickCount (null) {Number}: Specify how many ticks you want during the timer process
- * - loop (false) {Boolean}: Specify if you want the timer to loop or not.
- *
- * @example 	js
- * import STimer from '@coffeekraken/sugar/js/time/STimer';
- * const myTimer = new STimer(2000, {
- * 		tickCount : 5
- * })
- * myTimer.on('tick', myTimer => {
- * 		// do something here...
- * })
- * myTimer.start()
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class STimer extends SPromise_1.default {
+module.exports = class STimer extends SPromise_1.default {
     /**
      * @name          constructor
      * @type          Function
@@ -416,5 +376,4 @@ class STimer extends SPromise_1.default {
     isStarted() {
         return this._startTime && !this._pauseTime;
     }
-}
-exports.default = STimer;
+};

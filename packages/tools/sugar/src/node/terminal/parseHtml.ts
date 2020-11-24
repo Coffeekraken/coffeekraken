@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __replaceTags from '../html/replaceTags';
 import __sugarConfig from '../config/sugar';
 import __upperFirst from '../string/upperFirst';
@@ -11,16 +13,23 @@ __chalk.level = 3;
  * @name                                parseHtml
  * @namespace           sugar.node.terminal
  * @type                                Function
+ * @wip
  *
  * Parse the simple html tags to format the terminal message
  *
  * @param           {String|Array}                  message                 The message to format of an array of messages to format
  * @return          {String}                                          The formated message
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ * @todo      move in "format" folder
+ *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export default function parseHtml(message) {
+function parseHtml(message) {
   let isArray = false;
   if (Array.isArray(message)) {
     isArray = true;
@@ -55,4 +64,5 @@ export default function parseHtml(message) {
 
   if (isArray) return message;
   return message[0];
-};
+}
+export = parseHtml;

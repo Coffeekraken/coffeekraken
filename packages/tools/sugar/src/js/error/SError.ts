@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseHtml from '../console/parseHtml';
 import __trimLines from '../string/trimLines.js';
 import __packageRoot from '../path/packageRoot';
@@ -9,7 +11,7 @@ import __toString from '../string/toString';
  * @todo      tests
  */
 
-export default class SError extends Error {
+export = class SError extends Error {
   constructor(message) {
     if (typeof message !== 'string') {
       if (Array.isArray(message)) {

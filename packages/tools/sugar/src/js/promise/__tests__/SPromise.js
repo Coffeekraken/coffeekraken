@@ -1,12 +1,4 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+"use strict";
 module.exports = (__SPromise) => {
     describe('sugar.js.promise.SPromise', () => {
         const finallyStack = [], thenStack = [], thenOnceStack = [], catchStack = [], catchOnceStack = [], resolvedStack = [], rejectedStack = [];
@@ -23,7 +15,7 @@ module.exports = (__SPromise) => {
         let resolvedWithFunctionCallResult = null;
         let canceledWithFunctionCallResult = null;
         let noExecutorFunctionPromiseResult;
-        (() => __awaiter(this, void 0, void 0, function* () {
+        (async () => {
             const resolvePromise = new __SPromise((resolve, reject, trigger, cancel) => {
                 setTimeout(() => {
                     resolve('hello');
@@ -51,7 +43,7 @@ module.exports = (__SPromise) => {
             myPromise.trigger('start', 'coco');
             myPromise.trigger('youhou', 'Hello');
             myPromise.trigger('sss', true);
-            myPromiseCancelResult = yield new __SPromise((resolve, reject, trigger, cancel) => {
+            myPromiseCancelResult = await new __SPromise((resolve, reject, trigger, cancel) => {
                 trigger('then', 'hello');
                 trigger('coco', 'hey!');
                 setTimeout(() => {
@@ -84,7 +76,7 @@ module.exports = (__SPromise) => {
                 unsubscribePromise.off('unsubscribeCallbackTest');
                 unsubscribePromise.trigger('unsubscribeCallbackTest', true);
             }, 10);
-            const res = yield new __SPromise((resolve, reject, trigger, cancel) => {
+            const res = await new __SPromise((resolve, reject, trigger, cancel) => {
                 trigger('then', 'world');
                 trigger('then', 'hello');
                 trigger('catch', 'error');
@@ -121,7 +113,7 @@ module.exports = (__SPromise) => {
                 onThenCatchStack.push(value + 'onThenCatch');
             });
             isPassedAwait = true;
-            myPromiseWithPromisesResult = yield new __SPromise((resolve, reject, trigger, cancel) => {
+            myPromiseWithPromisesResult = await new __SPromise((resolve, reject, trigger, cancel) => {
                 resolve('coco1');
             })
                 .then((value) => {
@@ -147,7 +139,7 @@ module.exports = (__SPromise) => {
                 return value + 'plop';
             });
             isPassedPromiseWithPromises = true;
-        }))();
+        })();
         it('Should have the good resolved value in a non executor function promise', () => {
             expect(noExecutorFunctionPromiseResult).toBe('plop');
         });

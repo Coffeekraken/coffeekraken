@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import SSvgFilter from './SSvgFilter';
 
 /**
@@ -194,4 +196,4 @@ class SGradientSvgFilter extends SSvgFilter {
 }
 
 // export modules
-export default SGradientSvgFilter;
+export = SGradientSvgFilter;

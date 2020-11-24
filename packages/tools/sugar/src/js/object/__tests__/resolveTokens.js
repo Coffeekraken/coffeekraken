@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__resolveTokens) => {
     describe('sugar.js.object.resolveTokens', () => {
         it('Should apply the proxy correctly and return the good value when is some tokens', (done) => {

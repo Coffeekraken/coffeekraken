@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name 		        settings
  * @namespace           js.core

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepProxy from './deepProxy';
 import __get from './get';
 
@@ -29,7 +31,7 @@ import __get from './get';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function resolveTokens(object) {
+function resolveTokens(object) {
   // proxy the object
   const proxiedObject = __deepProxy(
     object,
@@ -65,3 +67,4 @@ export default function resolveTokens(object) {
   // return the proxied object
   return proxiedObject;
 }
+export = resolveTokens;

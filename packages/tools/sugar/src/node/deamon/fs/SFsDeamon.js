@@ -1,41 +1,12 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const SDeamon_1 = __importDefault(require("../SDeamon"));
 const SFsDeamonProcess_1 = __importDefault(require("./SFsDeamonProcess"));
-/**
- * @name            SFsDeamon
- * @namespace       sugar.node.deamon.fs
- * @type            Class
- * @extends         SDeamon
- *
- * This class is a wrapper of the SFsDeamonCli and the SFsDeamonProcess to allows you to
- * start quickly some watch processes and kill them with ease
- *
- * @todo        update doc
- *
- * @param       {Object}        [settings={}]             Specify some settings to configure your filesystem deamon instance
- * - id (deamon.fs.unnamed) {String}: A unique id for your watch instance
- * - name (Unnamed SFsDeamon) {String}: A name for your watch instance
- *
- * @example       js
- * import SFsDeamon from '@coffeekraken/sugar/node/deamon/fs/SFsDeamon';
- * const deamon = new SFsDeamon({});
- * deamon.watch('/my/cool/path/*.js').on('update', file => {
- *    // do something
- * });
- * const otherDeamon = deamon.watch('something/*.js');
- * otherDeamon.on('unlink', file => {});
- * otherDeamon.cancel();
- * deamon.cancel(); // kill all the watch processes
- *
- * @since         2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SFsDeamon extends SDeamon_1.default {
+module.exports = class SFsDeamon extends SDeamon_1.default {
     /**
      * @name          constructor
      * @type          Function
@@ -107,5 +78,4 @@ class SFsDeamon extends SDeamon_1.default {
         // return the current promise
         return super.watch(watchProcess);
     }
-}
-exports.default = SFsDeamon;
+};

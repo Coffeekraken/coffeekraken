@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SActionsStream_1 = __importDefault(require("../../stream/SActionsStream"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const filename_1 = __importDefault(require("../../fs/filename"));
@@ -10,32 +10,7 @@ const SFsFilesResolverStreamAction_1 = __importDefault(require("../../stream/act
 const SFsOutputStreamAction_1 = __importDefault(require("../../stream/actions/SFsOutputStreamAction"));
 const SCompileJsStreamAction_1 = __importDefault(require("./actions/SCompileJsStreamAction"));
 const path_1 = __importDefault(require("path"));
-/**
- * @name            SBuildJsActionsStream
- * @namespace           sugar.node.build.js
- * @type            Class
- * @extends         SActionsStream
- *
- * This class represent a pre-configured action stream to build easily some javascript files
- *
- * @param           {Object}          [settings={}]         The settings object to configure your instance
- *
- * @todo        Document the streamObj required properties
- *
- * @example         js
- * import SBuildJsActionsStream from '@coffeekraken/sugar/node/build/SBuildJsActionsStream';
- * const myStream = new SBuildJsActionsStream();
- * myStream.start({
- *    input: '...',
- *    output: '...'
- * }).on('resolve', (result) => {
- *    // do something
- * });
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SBuildJsActionsStream extends SActionsStream_1.default {
+module.exports = class SBuildJsActionsStream extends SActionsStream_1.default {
     /**
      * @name        constructor
      * @type        Function
@@ -91,5 +66,4 @@ class SBuildJsActionsStream extends SActionsStream_1.default {
         }
         return streamObj;
     }
-}
-exports.default = SBuildJsActionsStream;
+};

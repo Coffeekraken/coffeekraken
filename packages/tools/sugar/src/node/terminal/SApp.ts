@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __childProcess from 'child_process';
 import __deepMerge from '../object/deepMerge';
 import __blessed from 'blessed';
@@ -13,12 +15,17 @@ import __packageRoot from '../path/packageRoot';
  * @name                    SApp
  * @namespace           sugar.node.terminal
  * @type                    Class
+ * @wip
  *
  * This class define an application in the terminal that you can easily configure to have the look and feel that you want
  * through simple settings described bellow.
  *
  * @param           {String}          name            Specify a name for this application
  * @param           {Object}          [settings={}]   An object of settings described bellow:
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import SApp from '@coffeekraken/sugar/node/terminal/SApp';
@@ -28,7 +35,7 @@ import __packageRoot from '../path/packageRoot';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SApp extends __blessed.screen {
+export = class SApp extends __blessed.screen {
   /**
    * @name              _name
    * @type              String

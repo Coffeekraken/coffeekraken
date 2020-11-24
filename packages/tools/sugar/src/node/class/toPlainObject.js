@@ -1,14 +1,19 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name                          toPlainObject
  * @namespace          sugar.js.class
  * @type                          Function
+ * @stable
  *
  * This function take a instance as parameter and return a plain object of it
  *
  * @param               {Mixed}               instance                Any class instance to transform into a plain object
  * @return              {Object}                                      A plain object version of the the class instance
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example             js
  * import toPlainObject from '@coffeekraken/sugar/js/class/toPlainObject';
@@ -19,6 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * }
  * toPlainObject(new Coco()); // => { hello: 'world' }
  *
+ * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function toPlainObject(theClass) {
@@ -29,4 +35,4 @@ function toPlainObject(theClass) {
         return classAsObj;
     }, {});
 }
-exports.default = toPlainObject;
+module.exports = toPlainObject;

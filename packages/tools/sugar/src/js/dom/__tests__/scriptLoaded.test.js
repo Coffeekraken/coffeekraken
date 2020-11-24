@@ -1,11 +1,16 @@
-import __scriptLoaded from '../scriptLoaded';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const scriptLoaded_1 = __importDefault(require("../scriptLoaded"));
 describe('sugar.js.dom.scriptLoaded', () => {
     document.head.innerHTML = `
     <script type="text/javascript" src="src/data/tests/testing.js"></script>
   `;
     const $elm = document.head.querySelector('script');
     let isLoaded = false, isError = false;
-    __scriptLoaded($elm)
+    scriptLoaded_1.default($elm)
         .then(() => {
         isLoaded = true;
     })

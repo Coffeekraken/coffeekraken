@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isVisible from './isVisible';
 
 /**
@@ -23,7 +25,7 @@ import __isVisible from './isVisible';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function inViewportPercentage(elm) {
+function inViewportPercentage(elm) {
   // if not visible at all
   if (!__isVisible(elm)) return 0;
 
@@ -70,3 +72,4 @@ export default function inViewportPercentage(elm) {
   // calculate the percentage in total
   return Math.round((100 / (100 * 100)) * (percentageWidth * percentageHeight));
 }
+export = inViewportPercentage;

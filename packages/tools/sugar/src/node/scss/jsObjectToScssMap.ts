@@ -1,9 +1,16 @@
+// @ts-nocheck
+
 import __copy from '../clipboard/copy';
-
 import __deepMerge from '../object/deepMerge';
-
 import __isPlainObject from '../is/plainObject';
 let { isArray } = Array;
+
+/**
+ * @wip
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ */
 
 function jsToScssString(value, settings = {}) {
   settings = __deepMerge(
@@ -89,4 +96,4 @@ function isNotUndefined(value) {
   return typeof value !== 'undefined';
 }
 
-export default jsToScssString;
+export = jsToScssString;

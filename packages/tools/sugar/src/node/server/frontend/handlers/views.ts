@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __sugarConfig from '../../../config/sugar';
 import __path from 'path';
 import __render from '../../../template/render';
@@ -9,6 +11,7 @@ import __SDuration from '../../../time/SDuration';
  * @name                views
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
+ * @wip
  *
  * This function is responsible of responding to express requests made on the "views" section
  *
@@ -16,10 +19,14 @@ import __SDuration from '../../../time/SDuration';
  * @param         {Object}          server          The express server instance
  * @return        {Promise}                         A promise that will be resolved with the response to send to the client
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default async function views(req, res, settings = {}) {
+export = async function views(req, res, settings = {}) {
   let params = req.params[0].split('/');
 
   const duration = new __SDuration();

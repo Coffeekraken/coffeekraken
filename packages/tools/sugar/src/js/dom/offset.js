@@ -1,37 +1,43 @@
-// import __getTranslateProperties from './getTranslateProperties'
-/**
- * @name      offset
- * @namespace           sugar.js.dom
- * @type      Function
- *
- * Get the offset top and left of the passed element from the document top left point
- *
- * @param 		{HTMLElement} 					elm  		The element to get the offset from
- * @return 		{Object} 									The offset top and left object
- *
- * @example  	js
- * import offset from '@coffeekraken/sugar/js/dom/offset'
- * const offsetElm = offset(myCoolElement);
- * // output : { top : 200, left : 300 }
- *
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export default function offset(elm) {
-    let body, box, clientLeft, clientTop, docEl, left, scrollLeft, scrollTop, top, translates, transX, transY;
-    box = elm.getBoundingClientRect();
-    body = document.body;
-    docEl = document.documentElement;
-    scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-    scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
-    clientTop = docEl.clientTop || body.clientTop || 0;
-    clientLeft = docEl.clientLeft || body.clientLeft || 0;
-    // translates = __getTranslateProperties(elm);
-    // transX = translates.x;
-    // transY = translates.y;
-    top = box.top + scrollTop - clientTop;
-    left = box.left + scrollLeft - clientLeft;
-    return {
-        top: Math.round(top),
-        left: Math.round(left)
-    };
-}
+// @ts-nocheck
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    /**
+     * @name      offset
+     * @namespace           sugar.js.dom
+     * @type      Function
+     * @stable
+     *
+     * Get the offset top and left of the passed element from the document top left point
+     *
+     * @param 		{HTMLElement} 					elm  		The element to get the offset from
+     * @return 		{Object} 									The offset top and left object
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @example  	js
+     * import offset from '@coffeekraken/sugar/js/dom/offset'
+     * const offsetElm = offset(myCoolElement);
+     * // output : { top : 200, left : 300 }
+     *
+     * @since         1.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    function offset(elm) {
+        var box = elm.getBoundingClientRect(), body = document.body, docEl = document.documentElement, scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop, scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft, clientTop = docEl.clientTop || body.clientTop || 0, clientLeft = docEl.clientLeft || body.clientLeft || 0, top = box.top + scrollTop - clientTop, left = box.left + scrollLeft - clientLeft;
+        return {
+            top: Math.round(top),
+            left: Math.round(left)
+        };
+    }
+    return offset;
+});

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import distanceBetween from './distanceBetween';
 
 /**
@@ -29,7 +31,7 @@ import distanceBetween from './distanceBetween';
  * @since       2.0.0
  * @see    https://stackoverflow.com/questions/8515900/how-to-constrain-movement-within-the-area-of-a-circle
  */
-export default function circleConstrain(center, radius, point) {
+function circleConstrain(center, radius, point) {
   const dist = distanceBetween(center, point);
   if (dist <= radius) {
     return point;
@@ -43,3 +45,4 @@ export default function circleConstrain(center, radius, point) {
     };
   }
 }
+export = circleConstrain;

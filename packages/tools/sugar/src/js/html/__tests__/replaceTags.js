@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__replaceTags) => {
     describe('sugar.js.html.replaceTags', () => {
         const html = `

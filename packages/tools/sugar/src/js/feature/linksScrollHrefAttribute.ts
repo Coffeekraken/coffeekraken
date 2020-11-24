@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import querySelectorLive from '../dom/querySelectorLive';
 import scrollTo from '../dom/scrollTo';
 import easeInOutQuint from '../easing/easeInOutQuint';
@@ -29,7 +31,7 @@ import easeInOutQuint from '../easing/easeInOutQuint';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function linksScrollHrefAttribute(settings = {}) {
+function linksScrollHrefAttribute(settings = {}) {
   settings = {
     duration: 400,
     easing: easeInOutQuint,
@@ -46,3 +48,4 @@ export default function linksScrollHrefAttribute(settings = {}) {
     });
   });
 }
+export = linksScrollHrefAttribute;

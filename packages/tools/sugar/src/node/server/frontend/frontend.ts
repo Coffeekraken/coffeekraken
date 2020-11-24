@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __mimeTypes from 'mime-types';
 import __sugarConfig from '../../config/sugar';
 import __deepMerge from '../../object/deepMerge';
@@ -16,6 +18,7 @@ import __packageRoot from '../../path/packageRoot';
  * @name                express
  * @namespace           sugar.node.server.frontend
  * @type                Function
+ * @wip
  *
  * This function take care of starting a frontend express based server
  *
@@ -24,6 +27,10 @@ import __packageRoot from '../../path/packageRoot';
  *
  * @event         log       Some informations that you can or not display to your users
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import frontendServer from '@coffeekraken/sugar/node/server/frontend/frontend';
  * frontendServer({});
@@ -31,7 +38,7 @@ import __packageRoot from '../../path/packageRoot';
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default (args = {}) => {
+export = async (args = {}) => {
   const settings = __deepMerge(__sugarConfig('frontend'), args);
   const server = __express();
 
@@ -47,7 +54,7 @@ export default (args = {}) => {
 
   // load the middlewares
   const middlewaresObj = settings.middlewares || {};
-  for (let [key, middleware] of Object.entries(middlewaresObj)) {
+  for (const [key, middleware] of Object.entries(middlewaresObj)) {
     if (middleware.path.slice(-3) !== '.js') middleware.path += '.js';
     middleware.path = __path.resolve(middleware.path);
     if (!__fs.existsSync(middleware.path)) {
@@ -56,7 +63,7 @@ export default (args = {}) => {
       );
     }
     // register the middleware
-    server.use(require(middleware.path)(middleware.settings || {}));
+    server.use(await import(middleware.path)(middleware.settings || {}));
   }
 
   // loop on handlers
@@ -78,15 +85,15 @@ export default (args = {}) => {
         )}</cyan>" does not exists...`
       );
     } else {
-      const handlerFn = require(handlerPath);
+      const handlerFn = await import(handlerPath);
 
-      let method = handlerSettings.method || 'get',
-        slug = handlerSettings.slug || '*',
-        extension = handlerSettings.extension
+      const method = handlerSettings.method || 'get';
+      let slug = handlerSettings.slug || '*';
+      const extension = handlerSettings.extension
+        ? Array.isArray(handlerSettings.extension)
           ? Array.isArray(handlerSettings.extension)
-            ? Array.isArray(handlerSettings.extension)
-            : [handlerSettings.extension]
-          : null;
+          : [handlerSettings.extension]
+        : null;
 
       if (slug !== '*') {
         slug = [`${slug}/*`, `${slug}`];

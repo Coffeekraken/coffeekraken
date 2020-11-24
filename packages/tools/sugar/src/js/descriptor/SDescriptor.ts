@@ -1,10 +1,15 @@
-import _deepMerge from '../object/deepMerge';
+// @ts-nocheck
+
+import __isOfType from '../is/ofType';
+import __typeof from '../value/typeof';
+import __deepMerge from '../object/deepMerge';
 import ISDescriptor, {
   ISDescriptorCtor,
   ISDescriptorRule,
   ISDescriptorSettings,
-  ISDescriptorRulesMap,
+  ISDescriptorRules,
   ISDescriptorResultObj,
+  ISDescriptionValidationResult,
   ISDescriptorRuleApplyFn
 } from './interface/ISDescriptor';
 
@@ -44,7 +49,19 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
   _settings: ISDescriptorSettings;
 
   /**
-   * @name      rulesMap
+   * @name      _registeredRules
+   * @type      Object
+   * @static
+   *
+   * Store the registered _registeredRules into a simple object
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com>
+   */
+  static _registeredRules: ISDescriptorRules = {};
+
+  /**
+   * @name      rules
    * @type      Object
    * @static
    *
@@ -53,7 +70,25 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com>
    */
-  static rulesMap: ISDescriptorRulesMap = {};
+  static rules: ISDescriptorRules = {};
+
+  /**
+   * @name      type
+   * @type      String
+   * @static
+   * @default     Object
+   *
+   * Specify the type of the values that this descriptor is made for.
+   * Can be:
+   * - String|Array<String>
+   * - Object
+   * - Number
+   * - Integer
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com>
+   */
+  static type: string = 'Object';
 
   /**
    * @name      registerRule
@@ -72,7 +107,7 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
     if (rule.id === undefined || typeof rule.id !== 'string') {
       throw `Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...`;
     }
-    this.rulesMap[rule.id] = rule;
+    this._registeredRules[rule.id] = rule;
   }
 
   /**
@@ -110,7 +145,13 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
    */
   constructor(settings?: ISDescriptorSettings) {
     // save the settings
-    this._settings = _deepMerge({}, settings);
+    this._settings = __deepMerge(
+      {
+        arrayAsValue: false,
+        throwOnMissingRule: true
+      },
+      settings
+    );
     // check that the descriptor class has a static "description" property
   }
 
@@ -135,10 +176,74 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
     value: any,
     settings?: ISDescriptorSettings
   ): ISDescriptorResultObj | true {
-    console.log('apply');
+    // handle settings
+    settings = __deepMerge(this._settings, settings);
+
+    // check the passed value type correspond to the descriptor type
+    if (!__isOfType(value, this.constructor.type)) {
+      throw `Sorry but this descriptor "<yellow>${
+        this.constructor.name
+      }</yellow>" does not accept values of type "<cyan>${__typeof(
+        value
+      )}</cyan>" but only "<green>${this.constructor.type}</green>"...`;
+    }
+
+    // check the type to validate correctly the value
+    if (Array.isArray(value) && !settings.arrayAsValue) {
+      // loop on each items
+      value.forEach((item) => {});
+    } else if (typeof value === 'object') {
+      // loop on each object properties
+      Object.keys(value).forEach((propName) => {
+        const propValue = value[propName];
+        // validate the object property
+        this._validate(propValue, propName, settings);
+      });
+    } else {
+      // validate the passed value
+    }
 
     return true;
   }
+
+  /**
+   * @name          _validate
+   * @type          Function
+   * @private
+   *
+   * This method take a value and validate it using the defined rules
+   *
+   * @param       {Any}       value       The value to validate
+   * @return      {ISDescriptionValidationResult|true}        true if the validation has been made correctly, an object describing the issue if not
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _validate(
+    value: any,
+    propName?: string,
+    settings?: ISDescriptorSettings
+  ): ISDescriptionValidationResult | true {
+    // check if we have a propName, meaning that we are validating an object
+    let rules = this.constructor.rules;
+    if (propName !== undefined) {
+      if (this.constructor.rules[propName] === undefined) return true;
+      rules = this.constructor.rules[propName];
+    }
+    // loop on the rules object
+    Object.keys(rules).forEach((ruleName) => {
+      const ruleValue = rules[ruleName];
+      // make sure we have this rule registered
+      if (this.constructor._registeredRules[ruleName] === undefined) {
+        if (settings.throwOnMissingRule) {
+          throw `Sorry but you try to validate a value using the "<yellow>${ruleName}</yellow>" rule but this rule is not registered. Here's the available rules:
+          - ${Object.keys(this.constructor._registeredRules).join('\n- ')}`;
+        }
+      } else {
+        console.log('validte', ruleName);
+      }
+    });
+  }
 };
 
-export default Cls;
+export = Cls;

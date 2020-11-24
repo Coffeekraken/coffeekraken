@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const packageRoot_1 = __importDefault(require("../../../path/packageRoot"));
 const SPromise_1 = __importDefault(require("../../../promise/SPromise"));
@@ -14,12 +14,17 @@ const STemplate_2 = __importDefault(require("../../../template/STemplate"));
  * @name                homepage
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
+ * @wip
  *
  * This function is responsible of responding to express requests made on the home page
  *
  * @param         {Object}          req             The express request object
  * @param         {Object}          res             The express response object
  * @param         {Object}         [settings={}]    The handler settings
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -69,4 +74,4 @@ function homepage(req, res, settings = {}) {
         id: 'frontendServerHomepageHandler'
     });
 }
-exports.default = homepage;
+module.exports = homepage;

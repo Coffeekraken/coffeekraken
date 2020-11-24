@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __getStyleProperty from './getStyleProperty';
 
 /**
@@ -26,7 +28,7 @@ import __getStyleProperty from './getStyleProperty';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function textWidth(source) {
+function textWidth(source) {
   // create an element
   const elm = document.createElement('span');
   elm.style.whiteSpace = 'nowrap';
@@ -70,3 +72,4 @@ export default function textWidth(source) {
   // return the width
   return width;
 }
+export = textWidth;

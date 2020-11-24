@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 import __SDeamonInterface from './interface/SDeamonInterface';
 import __deepMerge from '../object/deepMerge';
@@ -9,10 +11,13 @@ import __onProcessExit from '../process/onProcessExit';
  * @type                Class
  * @extends             SPromise
  * @implments           SDeamonInterface
+ * @wip
  *
  * This class is the base one for all the "Deamons" classes like SFsDeamon, etc...
  *
- * @todo        update doc
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @event       state       Triggered when the state change
  *
@@ -189,4 +194,4 @@ class SDeamon extends __SPromise {
   }
 }
 
-export default SDeamon;
+export = SDeamon;

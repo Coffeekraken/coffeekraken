@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__deepMap) => {
     describe('sugar.js.object.deepMap', () => {
         it('Should map the passed objects correctly', (done) => {

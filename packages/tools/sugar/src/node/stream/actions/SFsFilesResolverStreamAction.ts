@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __path from 'path';
 import __SActionsStreamAction from '../SActionsStreamAction';
 import __glob from 'glob';
@@ -27,6 +29,7 @@ class SFsFilesResolverStreamActionInterface extends __SInterface {
  * @namespace       node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
+ * @beta
  *
  * This class is a stream action that allows you search inside files for a certain string/pattern
  * And get back the list of founded files.
@@ -34,9 +37,14 @@ class SFsFilesResolverStreamActionInterface extends __SInterface {
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SFindInFileStreamAction extends __SActionsStreamAction {
+export = class SFindInFileStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object

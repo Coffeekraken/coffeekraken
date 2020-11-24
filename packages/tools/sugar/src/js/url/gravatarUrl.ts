@@ -1,9 +1,12 @@
+// @ts-nocheck
+
 import __md5 from '../crypt/md5';
 
 /**
  * @name            gravatarUrl
  * @namespace           sugar.js.url
  * @type            Function
+ * @stable
  *
  * Return a gravatar url depending on the passed user email and size
  *
@@ -11,12 +14,19 @@ import __md5 from '../crypt/md5';
  * @param           {Number}            [size=200]        The wanted image size. From 1 to 2048
  * @return          {String}                              The generated gravatar url
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ * @todo      move into "gravatar" folder
+ *
  * @example       js
  * import gravatarUrl from '@coffeekraken/sugar/js/util/gravatarUrl';
  * console.log(gravatarUrl('olivier.bossel@gmail.com')); // https://www.gravatar.com/avatar/b5df60055b6287bb7c90c0078ce20a5f
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function gravatarUrl(email, size = 200) {
+function gravatarUrl(email, size = 200) {
   return `https://www.gravatar.com/avatar/${__md5.encrypt(email)}?s=${size}`;
 }
+export = gravatarUrl;

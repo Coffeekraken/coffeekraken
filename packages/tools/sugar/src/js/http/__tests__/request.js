@@ -1,12 +1,4 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+"use strict";
 module.exports = (__request) => {
     if (process.env.GITHUB_WORKFLOW !== undefined) {
         test('Bypass these tests cause we are in Github actions env', (done) => {
@@ -14,9 +6,9 @@ module.exports = (__request) => {
         });
         return;
     }
-    test('Making simple ajax request', (done) => __awaiter(this, void 0, void 0, function* () {
+    test('Making simple ajax request', async (done) => {
         try {
-            const response = yield __request({
+            const response = await __request({
                 url: 'http://dummy.restapiexample.com/api/v1/employees',
                 method: 'get'
             });
@@ -26,10 +18,10 @@ module.exports = (__request) => {
         catch (e) {
             done(e);
         }
-    }));
-    test('Making an ajax request with multiple send count', (done) => __awaiter(this, void 0, void 0, function* () {
+    });
+    test('Making an ajax request with multiple send count', async (done) => {
         try {
-            const response = yield __request({
+            const response = await __request({
                 url: 'http://dummy.restapiexample.com/api/v1/employees',
                 method: 'get',
                 sendCount: 2
@@ -40,5 +32,5 @@ module.exports = (__request) => {
         catch (e) {
             done(e);
         }
-    }));
+    });
 };

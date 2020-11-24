@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__deepize) => {
     describe('sugar.js.object.deepize', () => {
         it('Should deepize the passed objects correctly', (done) => {

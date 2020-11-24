@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __unique from '../array/unique';
 import __deepMerge from '../object/deepMerge';
 import __sugarConfig from '../config/sugar';
@@ -12,6 +14,7 @@ import __SPromise from '../promise/SPromise';
  * @name          STemplate
  * @namespace     sugar.node.template
  * @type          Class
+ * @wip
  *
  * This class represent a template that can be rendered using all the supported render engines listed in the features bellow.
  *
@@ -24,6 +27,10 @@ import __SPromise from '../promise/SPromise';
  * - engine (null) {String|STemplateEngine}: Specify the engine to use in order to render your template. By default it will try to automatically detect the engine but you can specify it yourself. Can be a string like "blade.php" that identify a registered template engine, or directly an STemplateEngine based template engine instance
  * - engineSettings ({}) {Object}: Specify some settings that will be passed to the corresponding engine
  * - defaultData ({}) {Object}: A data object to use by default when calling the ```render``` method. Can be overrided obviously in the ```render``` method
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import STemplate from '@coffeekraken/sugar/node/template/STemplate';
@@ -446,4 +453,4 @@ Object.keys(defaultDataHandlers).forEach((extension) => {
   STemplate.registerDataHandler(extension, defaultDataHandlers[extension]);
 });
 
-export default STemplate;
+export = STemplate;

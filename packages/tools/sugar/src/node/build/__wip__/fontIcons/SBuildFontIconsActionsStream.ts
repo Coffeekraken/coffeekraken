@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __SActionsStream = require('../../stream/SActionsStream');
 const __deepMerge = require('../../object/deepMerge');
 const __SFantasticonsStreamAction = require('./actions/SFantasticonStreamAction');

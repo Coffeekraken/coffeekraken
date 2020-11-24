@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__debounce) => {
     describe('sugar.js.function.debounce', () => {
         let calledCount = 0;

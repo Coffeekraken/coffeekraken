@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__sort) => {
     describe('sugar.js.object.sort', () => {
         it('Should sort the object correctly', done => {

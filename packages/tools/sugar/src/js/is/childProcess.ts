@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                            childProcess
  * @namespace           sugar.js.is
@@ -19,9 +21,10 @@
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function childProcess() {
+function childProcess() {
   if (!global || !global.process) return false;
   return (
     global.process.send !== undefined || global.process.env.IS_CHILD_PROCESS
   );
 }
+export = childProcess;

@@ -1,15 +1,7 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+"use strict";
 module.exports = (__SUrl) => {
     describe('sugar.js.url.SUrl', () => {
-        it('Should build a simple url and parse it', (done) => __awaiter(this, void 0, void 0, function* () {
+        it('Should build a simple url and parse it', async (done) => {
             const url = new __SUrl('https://coffeekraken.io:9999/something/cool?item1=hello&item2=world#toMake');
             expect(url.protocol).toBe('https:');
             expect(url.hash).toBe('#toMake');
@@ -21,8 +13,8 @@ module.exports = (__SUrl) => {
             expect(url.port).toBe(9999);
             expect(url.hostname).toBe('coffeekraken.io');
             done();
-        }));
-        it('Should nuild a complexe url with a schema and parse it', (done) => __awaiter(this, void 0, void 0, function* () {
+        });
+        it('Should nuild a complexe url with a schema and parse it', async (done) => {
             const url = new __SUrl('https://coffeekraken.io:9999/something/cool/2?item1=hello&item2=world#toMake', {
                 schema: '{param1:string}/{param2}/{?param3:number}'
             });
@@ -95,6 +87,6 @@ module.exports = (__SUrl) => {
                 }
             });
             done();
-        }));
+        });
     });
 };

@@ -5,7 +5,7 @@ module.exports = {
     [
       '@babel/preset-env',
       {
-        modules: false
+        modules: 'commonjs'
       }
     ]
   ],
@@ -23,26 +23,21 @@ module.exports = {
     //   __dirname,
     //   '../node_modules/@babel/plugin-proposal-export-default-from'
     // ),
-    // // __path.resolve(
-    // //   __dirname,
-    // //   '../node_modules/@babel/plugin-proposal-export-namespace-from'
-    // // ),
+    // __path.resolve(
+    //   __dirname,
+    //   '../node_modules/@babel/plugin-proposal-export-namespace-from'
+    // ),
     // __path.resolve(
     //   __dirname,
     //   '../node_modules/babel-plugin-transform-commonjs-es2015-modules'
-    // ),
-    [
-      __path.resolve(
-        __dirname,
-        '../src/node/babel/plugins/plugin-transform-commonjs-es2015.js'
-      ),
-      {}
-    ],
-
-    __path.resolve(
-      __dirname,
-      '../node_modules/@babel/plugin-proposal-class-properties'
-    )
+    // )
+    // [
+    //   __path.resolve(
+    //     __dirname,
+    //     '../src/node/babel/plugins/plugin-transform-commonjs-es2015.js'
+    //   ),
+    //   {}
+    // ],
     // __path.resolve(
     //   __dirname,
     //   '../node_modules/@babel/plugin-transform-classes'

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __SDocblockOutput from '../SDocblockOutput';
 import __toString from '../../string/toString';
@@ -55,7 +57,7 @@ import __authorPartial from './html/partials/author';
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SDocblockHtmlOutput extends __SDocblockOutput {
+export = class SDocblockHtmlOutput extends __SDocblockOutput {
   /**
    * @name        supportedTags
    * @type        Array<String>

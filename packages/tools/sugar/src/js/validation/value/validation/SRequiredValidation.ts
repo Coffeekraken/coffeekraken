@@ -1,11 +1,18 @@
+// @ts-nocheck
+
 import __SValidation from '../../SValidation';
 
 /**
  * @name          SRequiredValidation
  * @namespace     sugar.js.validation.value.validation
  * @type          Class
+ * @wip
  *
  * This class represent the "required" validation
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -18,4 +25,4 @@ class SRequiredValidation extends __SValidation {
   }
 }
 
-export default SRequiredValidation;
+export = SRequiredValidation;

@@ -1,9 +1,11 @@
+// @ts-nocheck
+
 /**
  * @wip
  * @todo      interface
  * @todo      doc
  */
-export default `
+export = `
 <div class="s-db-output s-db-output--html">
     {{include "..."}}
 </div>

@@ -1,2 +1,3 @@
-const __SInterface = require('../SInterface');
-require('./SInterface')(__SInterface);
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+throw 'WIP';

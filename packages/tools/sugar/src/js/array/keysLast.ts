@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import uniq from 'lodash/uniq';
 
 /**
@@ -17,7 +19,7 @@ import uniq from 'lodash/uniq';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function keysLast(array, keys) {
+function keysLast(array, keys) {
   // all the keys has to exist in the array stack
   // otherwise we filter it out
   keys = keys.filter((key) => {
@@ -34,3 +36,5 @@ export default function keysLast(array, keys) {
   // return the result
   return res;
 }
+
+export = keysLast;

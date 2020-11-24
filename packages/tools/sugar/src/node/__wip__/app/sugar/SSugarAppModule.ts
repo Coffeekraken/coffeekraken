@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../../promise/SPromise';
 import __SError from '../../error/SError';
 import __toString from '../../string/toString';
@@ -13,10 +15,15 @@ import __blessed from 'blessed';
  * @namespace           sugar.node.ui.sugar
  * @type            Class
  * @extends         SPromise
+ * @wip
  *
  * This class represent the process that expose every registered "modules"
  * through through a socket connection and handle the talk between
  * the backend parts with the frontend parts of each modules.
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

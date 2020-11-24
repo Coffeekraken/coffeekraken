@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name          getKeyByValue
  * @namespace           sugar.js.object
@@ -21,6 +23,7 @@
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function getKeyByValue(object, value) {
+function getKeyByValue(object, value) {
   return Object.keys(object).find((key) => object[key] === value);
 }
+export = getKeyByValue;

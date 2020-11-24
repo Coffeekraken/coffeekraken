@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __convert from '../time/convert';
 
 /**
@@ -26,7 +28,7 @@ import __convert from '../time/convert';
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default class SRequestConfig {
+export = class SRequestConfig {
   /**
    * @name                    url
    * @type                    String

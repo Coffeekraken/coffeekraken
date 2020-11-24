@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __blessed from 'blessed';
 import __color from '../../color/color';
@@ -9,6 +11,7 @@ import __SBlessedComponent from '../SBlessedComponent';
  * @name                    SBlessedNotification
  * @namespace           sugar.node.blessed.notification
  * @type                    Class
+ * @wip
  *
  * This class represent a notification that will be in a corner of the terminal
  * with some features like:
@@ -26,6 +29,10 @@ import __SBlessedComponent from '../SBlessedComponent';
  * - bg (yellow) {String}: Specify the background color to apply to the notification
  * - fg (black) {String}: Specify the foreground color to apply to the notification
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example             js
  * import SBlessedNotification from '@coffeekraken/sugar/node/blessed/notification/SBlessedNotification';
  * const notification = new SBlessedNotification('Hello', 'This is a cool notif', null, {
@@ -37,7 +44,7 @@ import __SBlessedComponent from '../SBlessedComponent';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBlessedNotification extends __SBlessedComponent {
+export = class SBlessedNotification extends __SBlessedComponent {
   static displayStacks = {
     tl: [],
     tr: [],
@@ -47,9 +54,9 @@ export default class SBlessedNotification extends __SBlessedComponent {
 
   static update() {
     let top = 1,
-      left = 2,
-      bottom = 1,
-      right = 2;
+      bottom = 1;
+    const left = 2;
+    const right = 2;
     SBlessedNotification.displayStacks.tl.forEach(($notif) => {
       $notif.top = top;
       $notif.left = left;
@@ -100,7 +107,7 @@ export default class SBlessedNotification extends __SBlessedComponent {
       settings
     );
 
-    let position = settings.position;
+    const position = settings.position;
     delete settings.position;
 
     super({

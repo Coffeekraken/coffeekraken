@@ -1,14 +1,15 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
 /**
  * @name                          escapeStack
  * @namespace           sugar.node.blessed
  * @type                          Function
+ * @wip
  *
  * This function allows you to register a callback to know when it's time to "close" or do whatever you want on escape click.
  * The principle is that when you register a callback, the system will save the "index" at which you have registered this callback
@@ -18,12 +19,18 @@ const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
  * @param         {Function}          callback        The function you want to call on escape click
  * @param         {Number}            [index=null]    Optionally the index under which you want to register your callback. If not specified, will be automatically setted
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ * @todo      move in "format" folder
+ *
  * @example       js
  * import escapeStack from '@coffeekraken/sugar/node/terminal/escapeStack';
  * escapeStack(() => {
  *    // do something
  * });
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 const escapeStackStack = [];
@@ -79,4 +86,4 @@ function escapeStack(callback = null) {
     // }
     return;
 }
-exports.default = escapeStack;
+module.exports = escapeStack;

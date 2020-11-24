@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __findInFiles from 'find-in-files';
 import __minimatch from 'minimatch';
@@ -12,6 +14,7 @@ import __SDocblock from './SDocblock';
  * @namespace           sugar.node.docblock
  * @type                  Function
  * @async
+ * @wip
  *
  * This function search in the passed folder for files containing a "@namespace" tag (and an "@name" optional one)
  * and generate a SNav instance with all these founded files as sources...
@@ -21,6 +24,10 @@ import __SDocblock from './SDocblock';
  * - exclude ('**\/+(__tests__ | __wip__)\/**') {String}: Specify a glob pattern representing the files to exclude from the generation
  * @return        {Object}                                    An object containing the docblocks holded in each namespaces as properties
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import firstDocblockWithNamespaceInFolder from '@coffeekraken/sugar/node/nav/firstDocblockWithNamespaceInFolder';
  * firstDocblockWithNamespaceInFolder('my/cool/folder');
@@ -28,7 +35,7 @@ import __SDocblock from './SDocblock';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default async function firstDocblockWithNamespaceInFolder(
+export = async function firstDocblockWithNamespaceInFolder(
   directory,
   settings = {}
 ) {

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __replaceTags from '../../html/replaceTags';
 
 /**
@@ -18,7 +20,7 @@ import __replaceTags from '../../html/replaceTags';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function mail(text) {
+function mail(text) {
   return __replaceTags(text, {
     black: (tag, content) => `<span style="color: black">${content}</span>`,
     red: (tag, content) => `<span style="color: #FF0000">${content}</span>`,
@@ -59,3 +61,4 @@ export default function mail(text) {
     br: (tag, content) => '<br />'
   });
 }
+export = mail;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                          get
  * @namespace           sugar.js.object
@@ -21,7 +23,7 @@
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default (obj, path) => {
+export = (obj, path) => {
   if (obj[path] !== undefined) return obj[path];
   if (!path || path === '' || path === '.') return obj;
   path = path.replace(/\[(\w+)\]/g, '.$1');

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __sugarConfig from './config/sugar';
 import __SLog from './log/SLog';
 import __handleError from './error/handleError';

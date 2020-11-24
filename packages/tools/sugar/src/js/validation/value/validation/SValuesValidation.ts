@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SValidation from '../../SValidation';
 import __isOfType from '../../../is/ofType';
 
@@ -5,8 +7,13 @@ import __isOfType from '../../../is/ofType';
  * @name          SValuesValidation
  * @namespace     sugar.js.validation.value.validation
  * @type          Class
+ * @wip
  *
  * This class represent the "values" validation
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -19,4 +26,4 @@ class SValuesValidation extends __SValidation {
   }
 }
 
-export default SValuesValidation;
+export = SValuesValidation;

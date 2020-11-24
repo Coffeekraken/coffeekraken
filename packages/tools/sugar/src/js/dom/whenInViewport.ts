@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __inViewport from 'in-viewport';
 
 /**
@@ -25,7 +27,7 @@ import __inViewport from 'in-viewport';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function whenInViewport(elm, offset = 50) {
+function whenInViewport(elm, offset = 50) {
   return new Promise((resolve, reject) => {
     __inViewport(
       elm,
@@ -38,3 +40,4 @@ export default function whenInViewport(elm, offset = 50) {
     );
   });
 }
+export = whenInViewport;

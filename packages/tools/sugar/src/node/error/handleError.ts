@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __copy from '../clipboard/copy';
 import __isChildProcess from '../is/childProcess';
 import __packageRoot from '../path/packageRoot';
@@ -15,10 +17,15 @@ import __SIpc from '../ipc/SIpc';
  * @name                    handleError
  * @namespace               sugar.node.error
  * @type                    Function
+ * @wip
  *
  * This function take a thrown error and try to display it the best way possible.
  * Simply add the "uncaughtException" and the "unhandledRejection" listeners on the process object,
  * pass this function as the handler one and that's it...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example           js
  * import handleError from '@coffeekraken/sugar/node/error/handleError';
@@ -30,7 +37,7 @@ import __SIpc from '../ipc/SIpc';
  */
 const errorPanels = [];
 
-export default function handleError() {
+function handleError() {
   if (process.env.NODE_ENV === 'test') return;
 
   if (__isChildProcess()) {
@@ -105,7 +112,7 @@ function __handleChildProcessErrors(error) {
   // // error = error.toString();
   if (!error) return;
 
-  let errorStringArray = [error.stack];
+  const errorStringArray = [error.stack];
 
   // __SIpc.trigger('error', errorStringArray.join('\n'));
   console.log(errorStringArray.join('\n'));
@@ -157,3 +164,4 @@ function __handleMainProcessErrors(error) {
     return;
   }
 }
+export = handleError;

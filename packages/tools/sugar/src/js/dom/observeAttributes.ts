@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 
 /**
@@ -28,7 +30,7 @@ import __SPromise from '../promise/SPromise';
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function (target, settings = {}) {
+function observeAttributes (target, settings = {}) {
   return new __SPromise(
     (resolve, reject, trigger, cancel) => {
       // create a new observer
@@ -65,3 +67,4 @@ export default function (target, settings = {}) {
  * @type 		{Array}
  * @default 	null
  */
+export = observeAttributes;

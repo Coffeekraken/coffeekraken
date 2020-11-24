@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = () => {
+// @ts-nocheck
+module.exports = () => {
     require('./node.cli')();
 };

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __consoleHtmlPreset from '../htmlPresets/console';
 import __isChildProcess from '../../is/childProcess';
@@ -31,7 +33,7 @@ import __formatObject from 'fmt-obj';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SLogConsoleAdapter {
+export = class SLogConsoleAdapter {
   /**
    * @name          _settings
    * @type          Object

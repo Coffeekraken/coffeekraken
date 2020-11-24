@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SActionsStreamAction from '../SActionsStreamAction';
 import __rimraf from 'rimraf';
 import __deepMerge from '../../object/deepMerge';
@@ -17,6 +19,7 @@ class SFsUnlinkStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
+ * @beta
  *
  * This class is an action that allows you to delete some files / folders depending on the "unlink" property of the streamObj.
  * You can specify some glob patterns if you want
@@ -24,11 +27,15 @@ class SFsUnlinkStreamActionInterface extends __SInterface {
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @see       https://www.npmjs.com/package/rimraf
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SFsUnlinkStreamAction extends __SActionsStreamAction {
+export = class SFsUnlinkStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object

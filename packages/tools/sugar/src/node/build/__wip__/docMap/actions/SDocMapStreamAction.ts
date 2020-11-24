@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SDocMap = require('../../../doc/SDocMap');
 const __deepMerge = require('../../../object/deepMerge');

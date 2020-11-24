@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __packageRoot from './packageRoot';
 import __fs from 'fs';
 
@@ -20,7 +22,7 @@ import __fs from 'fs';
  * @see       https://www.npmjs.com/package/find-package-json
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isInPackage(
+function isInPackage(
   name,
   from = process.cwd(),
   highest = false
@@ -52,3 +54,4 @@ export default function isInPackage(
 
   return false;
 }
+export = isInPackage;

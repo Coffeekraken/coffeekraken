@@ -1,8 +1,10 @@
+// @ts-nocheck
+
 import _scss from './scss.cli';
 import _js from './js.cli';
 import _frontspec from './frontspec.cli';
 
-export default () => {
+export = () => {
   _scss();
   _js();
   _frontspec();

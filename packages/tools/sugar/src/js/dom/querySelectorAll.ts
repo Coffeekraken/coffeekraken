@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isVisible from './isVisible';
 import __isInViewport from './isInViewport';
 import __closestNotVisible from './closestNotVisible';
@@ -57,7 +59,7 @@ import __closestNotVisible from './closestNotVisible';
  * @default 	document.body
  */
 
-export default function querySelectorAll(selector, settings = {}) {
+function querySelectorAll(selector, settings = {}) {
   // extend settings
   settings = {
     visible: null,
@@ -89,3 +91,4 @@ export default function querySelectorAll(selector, settings = {}) {
   // return the elements
   return results;
 }
+export = querySelectorAll;

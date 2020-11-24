@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __encodeObject from 'object-encode';
 
 /**
@@ -14,7 +16,7 @@ import __encodeObject from 'object-encode';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default {
+export = {
   /**
    * @name        encrypt
    * @type        Function

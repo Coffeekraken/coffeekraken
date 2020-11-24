@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__convert) => {
     describe('sugar.js.color.convert', () => {
         it('Should convert the color string #ff00ff to rgba object correctly', () => {

@@ -1,13 +1,14 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const get_1 = __importDefault(require("lodash/get"));
 /**
  * @name        propertyProxy
  * @namespace           sugar.js.object
  * @type      Function
+ * @beta
  *
  * Create a proxy for and object property.
  * This gives you the possibility to process the data of the property
@@ -17,6 +18,10 @@ const get_1 = __importDefault(require("lodash/get"));
  * @param 		{String} 		property 		The property name that will be proxied
  * @param 		{Object} 		descriptor 		A descriptor object that contains at least a get or a set method, or both
  * @param 		{Boolean} 		[applySetterAtStart=false] 	If need to apply the descriptor setter directly on the current value or not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * import propertyProxy from '@coffeekraken/sugar/js/object/propertyProxy';
@@ -36,6 +41,7 @@ const get_1 = __importDefault(require("lodash/get"));
  * myObject.title = 'Universe';
  * console.log(myObject.title) => 'Hello Youhou Universe';
  *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
@@ -47,7 +53,7 @@ function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
     }
     // store the current value
     let val = get_1.default(obj, property);
-    let currentDescriptor = Object.getOwnPropertyDescriptor(obj.prototype || obj, property);
+    const currentDescriptor = Object.getOwnPropertyDescriptor(obj.prototype || obj, property);
     // custom setter check
     const _set = (value) => {
         if (descriptor.set) {
@@ -55,7 +61,7 @@ function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
         }
         // descriptor
         if (currentDescriptor && currentDescriptor.set) {
-            let ret = currentDescriptor.set(value);
+            const ret = currentDescriptor.set(value);
             if (ret) {
                 val = ret;
             }
@@ -71,7 +77,7 @@ function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
     if (applySetterAtStart)
         _set(val);
     // make sure we have the good descriptor
-    let d = Object.getOwnPropertyDescriptor(obj, property);
+    const d = Object.getOwnPropertyDescriptor(obj, property);
     Object.defineProperty(obj, property, {
         get: () => {
             let _val = val;
@@ -105,4 +111,4 @@ function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
     // return the value
     return val;
 }
-exports.default = propertyProxy;
+module.exports = propertyProxy;

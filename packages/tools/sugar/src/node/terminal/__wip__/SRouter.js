@@ -1,4 +1,14 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 const __fs = require('fs');
 const __parse = require('../url/parse');
 const __isClass = require('../is/class');
@@ -84,55 +94,57 @@ module.exports = class SRouter {
      *
      * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async goto(path) {
-        let viewContent, viewData, route, parsedUrl;
-        // check what is the path and if a route exist with the passed value name
-        if (!path.includes('/') && this._routes[path]) {
-            // we have a route passed
-            route = this._routes[path];
-        }
-        else {
-            // it seems that it is a url passed. We have to check them one after the other...
-            for (let i = 0; i < Object.keys(this._routes).length; i++) {
-                const routeObj = this._routes[Object.keys(this._routes)[i]];
-                const _parsedUrl = __parse(path, {
-                    schema: routeObj.url
-                });
-                if (_parsedUrl.match) {
-                    route = routeObj;
-                    parsedUrl = _parsedUrl;
-                    break;
+    goto(path) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let viewContent, viewData, route, parsedUrl;
+            // check what is the path and if a route exist with the passed value name
+            if (!path.includes('/') && this._routes[path]) {
+                // we have a route passed
+                route = this._routes[path];
+            }
+            else {
+                // it seems that it is a url passed. We have to check them one after the other...
+                for (let i = 0; i < Object.keys(this._routes).length; i++) {
+                    const routeObj = this._routes[Object.keys(this._routes)[i]];
+                    const _parsedUrl = __parse(path, {
+                        schema: routeObj.url
+                    });
+                    if (_parsedUrl.match) {
+                        route = routeObj;
+                        parsedUrl = _parsedUrl;
+                        break;
+                    }
                 }
             }
-        }
-        // if we don't have any route that match the request,
-        // simply redirect the user to the 404 layout
-        if (!route && this._routes['404']) {
-            return this.goto('404');
-        }
-        // check if we have a data adapter specified
-        viewData =
-            parsedUrl && parsedUrl.params
-                ? parsedUrl.params
-                : route.defaultParams || {};
-        if (route.dataAdapter) {
-            viewData = await require(route.dataAdapter)(viewData);
-        }
-        // generate the new view using the specified layout
-        // and passing the viewData to it
-        const layout = require(route.layout);
-        if (__isClass(layout)) {
-            viewContent = new layout(viewData);
-        }
-        else {
-            viewContent = await layout(viewData);
-        }
-        // check if we have an output specified in the settings
-        if (this._settings.output) {
-            if (this._settings.output.append && this._settings.output.screen) {
-                this._settings.output.append(viewContent);
-                this._settings.output.screen.render();
+            // if we don't have any route that match the request,
+            // simply redirect the user to the 404 layout
+            if (!route && this._routes['404']) {
+                return this.goto('404');
             }
-        }
+            // check if we have a data adapter specified
+            viewData =
+                parsedUrl && parsedUrl.params
+                    ? parsedUrl.params
+                    : route.defaultParams || {};
+            if (route.dataAdapter) {
+                viewData = yield require(route.dataAdapter)(viewData);
+            }
+            // generate the new view using the specified layout
+            // and passing the viewData to it
+            const layout = require(route.layout);
+            if (__isClass(layout)) {
+                viewContent = new layout(viewData);
+            }
+            else {
+                viewContent = yield layout(viewData);
+            }
+            // check if we have an output specified in the settings
+            if (this._settings.output) {
+                if (this._settings.output.append && this._settings.output.screen) {
+                    this._settings.output.append(viewContent);
+                    this._settings.output.screen.render();
+                }
+            }
+        });
     }
 };

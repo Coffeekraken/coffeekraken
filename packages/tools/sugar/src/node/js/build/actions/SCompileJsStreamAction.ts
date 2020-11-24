@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../../object/deepMerge';
 import __SActionsStreamAction from '../../../stream/SActionsStreamAction';
 import __SBuildJsInterface from '../interface/SBuildJsInterface';
@@ -8,15 +10,21 @@ import __SJsCompiler from '../../SJsCompiler';
  * @namespace           sugar.node.build.js.actions
  * @type                Class
  * @extends             SActionsStreamAction
+ * @wip
  *
  * This function is responsible of compiling the passed file
  *
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SCompileJsStreamAction extends __SActionsStreamAction {
+export = class SCompileJsStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object

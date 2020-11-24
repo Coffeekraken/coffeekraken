@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isClass from 'is-class';
 
 /**
@@ -25,10 +27,11 @@ import __isClass from 'is-class';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function cls(cls) {
+function cls(cls) {
   if (!Array.isArray(cls)) cls = [cls];
   for (let i = 0; i < cls.length; i++) {
     if (!__isClass(cls[i])) return false;
   }
   return true;
 }
+export = cls;

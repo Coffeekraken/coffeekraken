@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      offset
  * @namespace           sugar.js.dom
@@ -21,7 +23,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function offset(elm) {
+function offset(elm) {
   const box = elm.getBoundingClientRect(),
     body = document.body,
     docEl = document.documentElement,
@@ -36,3 +38,4 @@ export default function offset(elm) {
     left: Math.round(left)
   };
 }
+export = offset;

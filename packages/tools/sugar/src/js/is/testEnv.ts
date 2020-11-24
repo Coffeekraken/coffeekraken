@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __env from '../core/env';
 
 /**
@@ -21,10 +23,11 @@ import __env from '../core/env';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isTestEnv() {
+function isTestEnv() {
   return (
     __env('NODE_ENV') === 'test' ||
     __env('JEST_WORKER_ID') !== undefined ||
     typeof global.it === 'function'
   );
 }
+export = isTestEnv;

@@ -1,40 +1,55 @@
-"use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-const set_1 = __importDefault(require("./set"));
-/**
- * @name          deepize
- * @namespace     sugar.js.object
- * @type          Function
- *
- * This function simply take an object like this one:
- * {
- *    'something.cool': 'hello'
- * }
- * and convert it to something like this:
- * {
- *    something: {
- *      cool: 'hello'
- *    }
- * }
- *
- * @param       {Object}        object        The object to convert
- * @return      {Object}                      The converted object
- *
- * @example       js
- * import deepize from '@coffeekraken/sugar/js/object/deepize';
- * deepize({ 'something.cool': 'hello' }); // => { something: { cool: 'hello' } }
- *
- * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function deepize(object) {
-    const finalObject = {};
-    for (const key in object) {
-        set_1.default(finalObject, key, object[key]);
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
     }
-    return finalObject;
-}
-exports.default = deepize;
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "./set"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var set_2 = __importDefault(require("./set"));
+    /**
+     * @name          deepize
+     * @namespace     sugar.js.object
+     * @type          Function
+     * @stable
+     *
+     * This function simply take an object like this one:
+     * {
+     *    'something.cool': 'hello'
+     * }
+     * and convert it to something like this:
+     * {
+     *    something: {
+     *      cool: 'hello'
+     *    }
+     * }
+     *
+     * @param       {Object}        object        The object to convert
+     * @return      {Object}                      The converted object
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @example       js
+     * import deepize from '@coffeekraken/sugar/js/object/deepize';
+     * deepize({ 'something.cool': 'hello' }); // => { something: { cool: 'hello' } }
+     *
+     * @since       2.0.0
+     * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    function deepize(object) {
+        var finalObject = {};
+        for (var key in object) {
+            set_2.default(finalObject, key, object[key]);
+        }
+        return finalObject;
+    }
+    return deepize;
+});

@@ -1,7 +1,10 @@
+// @ts-nocheck
+
 /**
  * @name                rgba2hex
  * @namespace           sugar.js.color
  * @type                Function
+ * @stable
  *
  * RGBA to HEX
  *
@@ -11,13 +14,18 @@
  * @param       	{Number}        	a	          	The alpha value between 0-100|0-1
  * @return      	{string}		                    The hex string representation like #ff004f
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import rgba2hex from '@coffeekraken/sugar/js/color/rgba2hex';
  * rgba2hex(10,20,30,10);
  *
+ * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function rgba2hex(r, g, b, a = 1) {
+function rgba2hex(r, g, b, a = 1) {
   if (typeof r === 'object') {
     g = r.g;
     b = r.b;
@@ -43,3 +51,4 @@ export default function rgba2hex(r, g, b, a = 1) {
     alpha
   );
 }
+export = rgba2hex;

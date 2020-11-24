@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __proxy from '../array/proxy';
 import __deepMap from '../object/deepMap';
 import __clone from '../object/clone';
@@ -46,7 +48,7 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function deepProxy(object, handlerFn, settings = {}) {
+function deepProxy(object, handlerFn, settings = {}) {
   const preproxy = new WeakMap();
   let isRevoked = false;
   settings = __deepMerge(
@@ -201,3 +203,4 @@ export default function deepProxy(object, handlerFn, settings = {}) {
   }
   return proxify(object, []);
 }
+export = deepProxy;

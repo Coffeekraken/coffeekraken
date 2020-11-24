@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __winston = require('winston');
 const SlackHook = require('winston-slack-webhook-transport');
 const __getAppMeta = require('../app/getAppMetas');

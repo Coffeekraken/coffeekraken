@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      scrollLeft
  * @namespace           sugar.js.dom
@@ -17,6 +19,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivier.bossel@gmail.com)
  */
-export default function scrollLeft() {
+function scrollLeft() {
   return window.pageXOffset || document.scrollLeft || document.body.scrollLeft;
 }
+export = scrollLeft;

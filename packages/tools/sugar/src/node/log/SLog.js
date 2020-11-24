@@ -1,32 +1,40 @@
 "use strict";
+// @ts-nocheck
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SLogConsoleAdapter_1 = __importDefault(require("./adapters/SLogConsoleAdapter"));
 const env_1 = __importDefault(require("../core/env"));
-/**
- * @name                    SLog
- * @namespace           sugar.js.log
- * @type                    Class
- *
- * This class allows you to log your messages, errors, etc... easily through some adapters that cover some targets like "console" of course,
- * "mail", "slack", etc...
- *
- * @example               js
- * import SLog from '@coffeekraken/sugar/js/log/SLog';
- * import SLogConsoleAdapter from '@coffeekraken/sugar/js/log/adapters/SLogConsoleAdapter';
- * const logger = new SLog({
- *    adapters: {
- *      console: new SLogConsoleAdapter()
- *    }
- * });
- * logger.log('Something cool happend...');
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SLog {
+module.exports = class SLog {
     /**
      * @name          constructor
      * @type          Function
@@ -77,12 +85,12 @@ class SLog {
             overrideNativeConsole: false
         }, settings);
         // ensure every adapters are a class instance
-        Object.keys(this._settings.adapters).forEach((adapterName) => {
+        Object.keys(this._settings.adapters).forEach((adapterName) => __awaiter(this, void 0, void 0, function* () {
             if (typeof this._settings.adapters[adapterName] === 'string') {
-                const cls = require(this._settings.adapters[adapterName]);
+                const cls = yield Promise.resolve().then(() => __importStar(require(this._settings.adapters[adapterName])));
                 this._settings.adapters[adapterName] = new cls();
             }
-        });
+        }));
         // if needed, override the native console
         if (this._settings.overrideNativeConsole) {
             this._overrideNativeConsole();
@@ -100,7 +108,7 @@ class SLog {
      */
     _overrideNativeConsole() {
         // check if need to override the native console methods
-        const _this = this;
+        const _this = this; // eslint-disable-line
         const newConsole = (function (oldCons) {
             (global || window).nativeConsole = Object.assign({}, oldCons);
             return {
@@ -138,63 +146,65 @@ class SLog {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async _log(...args) {
-        let adapters = null, level = 'log', messages = [];
-        args.forEach((v) => {
-            if (typeof v === 'string') {
-                if (['log', 'warn', 'info', 'error', 'debug', 'trace'].indexOf(v) !== -1) {
-                    level = v;
-                    return;
+    _log(...args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let adapters = null, level = 'log', messages = [];
+            args.forEach((v) => {
+                if (typeof v === 'string') {
+                    if (['log', 'warn', 'info', 'error', 'debug', 'trace'].indexOf(v) !== -1) {
+                        level = v;
+                        return;
+                    }
+                }
+                messages.push(v);
+            });
+            messages = messages.filter((m) => {
+                if (m === null || m === '')
+                    return false;
+                if (typeof m === 'string' && m.trim() === '')
+                    return false;
+                return true;
+            });
+            // process the adapters argument
+            if (adapters === null)
+                adapters = this._settings.adaptersByLevel[level];
+            if (adapters === null)
+                adapters = Object.keys(this._settings.adapters);
+            else if (typeof adapters === 'string')
+                adapters = adapters.split(',').map((a) => a.trim());
+            const env = env_1.default('env') || env_1.default('node_env') || 'production';
+            if (env) {
+                let adaptersByEnvironment = this._settings.adaptersByEnvironment[env];
+                if (adaptersByEnvironment !== null &&
+                    adaptersByEnvironment !== undefined) {
+                    if (typeof adaptersByEnvironment === 'string')
+                        adaptersByEnvironment = adaptersByEnvironment
+                            .split(',')
+                            .map((a) => a.trim());
+                    adapters = adapters.filter((a) => {
+                        return adaptersByEnvironment.indexOf(a) !== -1;
+                    });
                 }
             }
-            messages.push(v);
-        });
-        messages = messages.filter((m) => {
-            if (m === null || m === '')
-                return false;
-            if (typeof m === 'string' && m.trim() === '')
-                return false;
-            return true;
-        });
-        // process the adapters argument
-        if (adapters === null)
-            adapters = this._settings.adaptersByLevel[level];
-        if (adapters === null)
-            adapters = Object.keys(this._settings.adapters);
-        else if (typeof adapters === 'string')
-            adapters = adapters.split(',').map((a) => a.trim());
-        const env = env_1.default('env') || env_1.default('node_env') || 'production';
-        if (env) {
-            let adaptersByEnvironment = this._settings.adaptersByEnvironment[env];
-            if (adaptersByEnvironment !== null &&
-                adaptersByEnvironment !== undefined) {
-                if (typeof adaptersByEnvironment === 'string')
-                    adaptersByEnvironment = adaptersByEnvironment
-                        .split(',')
-                        .map((a) => a.trim());
-                adapters = adapters.filter((a) => {
-                    return adaptersByEnvironment.indexOf(a) !== -1;
-                });
-            }
-        }
-        if (!Array.isArray(adapters))
-            return;
-        // init the promises stack
-        const adaptersLogStack = [];
-        // loop on all the adapters to log the message
-        adapters.forEach((adapterName) => {
-            // check if the adapter exists
-            if (!this._settings.adapters[adapterName])
+            if (!Array.isArray(adapters))
                 return;
-            // loop on all messages to log
-            messages.forEach((message) => {
-                // make the actual log call to this adapter and add it's result to the
-                // adaptersLogStack array
-                adaptersLogStack.push(this._settings.adapters[adapterName].log(message, level));
+            // init the promises stack
+            const adaptersLogStack = [];
+            // loop on all the adapters to log the message
+            adapters.forEach((adapterName) => {
+                // check if the adapter exists
+                if (!this._settings.adapters[adapterName])
+                    return;
+                // loop on all messages to log
+                messages.forEach((message) => {
+                    // make the actual log call to this adapter and add it's result to the
+                    // adaptersLogStack array
+                    adaptersLogStack.push(this._settings.adapters[adapterName].log(message, level));
+                });
             });
+            // return the result of all the adapters promises
+            return Promise.all(adaptersLogStack);
         });
-        // return the result of all the adapters promises
-        return Promise.all(adaptersLogStack);
     }
     /**
      * @name            log
@@ -211,9 +221,11 @@ class SLog {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async log(...args) {
-        // call the internal _log method and return his result
-        return this._log(...args);
+    log(...args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // call the internal _log method and return his result
+            return this._log(...args);
+        });
     }
     /**
      * @name            info
@@ -230,9 +242,11 @@ class SLog {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async info(...args) {
-        // call the internal _log method and return his result
-        return this._log(...args, 'info');
+    info(...args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // call the internal _log method and return his result
+            return this._log(...args, 'info');
+        });
     }
     /**
      * @name            warn
@@ -249,9 +263,11 @@ class SLog {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async warn(...args) {
-        // call the internal _log method and return his result
-        return this._log(...args, 'warn');
+    warn(...args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // call the internal _log method and return his result
+            return this._log(...args, 'warn');
+        });
     }
     /**
      * @name            debug
@@ -268,9 +284,11 @@ class SLog {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async debug(...args) {
-        // call the internal _log method and return his result
-        return this._log(...args, 'debug');
+    debug(...args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // call the internal _log method and return his result
+            return this._log(...args, 'debug');
+        });
     }
     /**
      * @name            error
@@ -287,9 +305,11 @@ class SLog {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async error(...args) {
-        // call the internal _log method and return his result
-        return this._log(...args, 'error');
+    error(...args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // call the internal _log method and return his result
+            return this._log(...args, 'error');
+        });
     }
     /**
      * @name            trace
@@ -306,9 +326,10 @@ class SLog {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async trace(...args) {
-        // call the internal _log method and return his result
-        return this._log(...args, 'trace');
+    trace(...args) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // call the internal _log method and return his result
+            return this._log(...args, 'trace');
+        });
     }
-}
-exports.default = SLog;
+};

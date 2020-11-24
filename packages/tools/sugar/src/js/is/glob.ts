@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isGlob from 'is-glob';
 
 /**
@@ -23,6 +25,6 @@ import __isGlob from 'is-glob';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default (string) => {
+export = (string) => {
   return __isGlob(string);
 };

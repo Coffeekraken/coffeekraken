@@ -1,13 +1,14 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SRequest_1 = __importDefault(require("./SRequest"));
 /**
  * @name                              request
  * @namespace           sugar.js.http
  * @type                              Function
+ * @wip
  *
  * Easily create and send an http request. This will return an instance of the SAjax class.
  *
@@ -23,6 +24,10 @@ const SRequest_1 = __importDefault(require("./SRequest"));
  * - sendCount (1) {Number}: Set how many times the request has to be sent
  * - responseType (json) {String}: Indicates the type of data that the server will respond with
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example               js
  * import request from '@coffeekraken/sugar/js/http/request';
  * request({
@@ -32,10 +37,11 @@ const SRequest_1 = __importDefault(require("./SRequest"));
  *    // do something...
  * });
  *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function request(settings = {}) {
     const request = new SRequest_1.default(settings);
     return request.send();
 }
-exports.default = request;
+module.exports = request;

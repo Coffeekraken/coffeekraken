@@ -1,16 +1,21 @@
-import __fs from 'fs-extra';
+// @ts-nocheck
 
-// TODO tests
+import __fs from 'fs-extra';
 
 /**
  * @name        remove
  * @namespace           sugar.node.fs
  * @type          Function
+ * @stable
  *
  * Removes a file or directory. The directory can have contents. If the path does not exist, silently does nothing. Like rm -rf (async)
  *
  * @param       {String}              path           The file/directory path to delete
  * @return      {Promise}                           A promise that will be resolved when the remove is completed
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import remove from '@coffeekraken/node/fs/remove';
@@ -19,8 +24,10 @@ import __fs from 'fs-extra';
  * });
  *
  * @see             https://github.com/jprichardson/node-fs-extra
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function remove(path) {
+function remove(path) {
   return __fs.remove(path);
 }
+export = remove;

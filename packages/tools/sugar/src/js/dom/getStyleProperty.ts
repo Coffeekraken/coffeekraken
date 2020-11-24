@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import camelize from '../string/camelize';
 import autoCast from '../string/autoCast';
 
@@ -27,7 +29,7 @@ import autoCast from '../string/autoCast';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function getStyleProperty(elm, property) {
+function getStyleProperty(elm, property) {
   // caching mecanisme
   setTimeout(() => {
     elm._sComputedStyle = null;
@@ -44,3 +46,4 @@ export default function getStyleProperty(elm, property) {
   }
   return null;
 }
+export = getStyleProperty;

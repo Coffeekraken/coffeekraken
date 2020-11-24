@@ -1,9 +1,10 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name        ltrim
  * @namespace           sugar.js.string
  * @type      Function
+ * @stable
  *
  * Trim left a specified string
  *
@@ -12,10 +13,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param    {Boolean}  [trimResult=true]       If you want to trim the resulted ltrim
  * @return    {String}    The trimed string
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example    js
  * import ltrim from '@coffeekraken/sugar/js/string/ltrim'
  * ltrim('Hello World', 'Hello') // World
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function ltrim(string, needle, trimResult = true) {
@@ -27,4 +33,4 @@ function ltrim(string, needle, trimResult = true) {
     // nothing to trim
     return string;
 }
-exports.default = ltrim;
+module.exports = ltrim;

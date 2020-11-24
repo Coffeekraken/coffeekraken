@@ -1,9 +1,12 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 
 /**
  * @name          simply
  * @namespace     sugar.js.string
  * @type          Function
+ * @stable
  *
  * This function take a string with accents, etc and convert it to a more simply
  * version like "éàddö" to "eaddo"
@@ -15,6 +18,10 @@ import __deepMerge from '../object/deepMerge';
  * - dashSpace (true) {Boolean}: Specify if you want to replace the "_|-" by a space
  * - trim (true} {Boolean}: Specify if you want your string to be trimed or not
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import simplify from '@coffeekraken/sugar/js/string/simplify';
  * simplify('éàddö'); // => eaddo
@@ -22,7 +29,7 @@ import __deepMerge from '../object/deepMerge';
  * @since     2.0.0
  * @author    João Filipe Ventura Coelho <joaoventura93@outlook.com>
  */
-export default function simplify(string, settings = {}) {
+function simplify(string, settings = {}) {
   settings = __deepMerge(
     {
       specialChars: true,
@@ -34,7 +41,7 @@ export default function simplify(string, settings = {}) {
   );
 
   if (string == null) return '';
-  var map = {
+  const map = {
     A: 'À|Á|Ã|Â|Ä',
     a: 'á|à|ã|â|ä',
     E: 'É|È|Ê|Ë',
@@ -60,7 +67,7 @@ export default function simplify(string, settings = {}) {
   }
 
   if (settings.specialChars) {
-    for (var pattern in map) {
+    for (const pattern in map) {
       string = string.replace(new RegExp(map[pattern], 'g'), pattern);
     }
   }
@@ -69,3 +76,4 @@ export default function simplify(string, settings = {}) {
 
   return string;
 }
+export = simplify;

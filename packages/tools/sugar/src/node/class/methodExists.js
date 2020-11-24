@@ -1,15 +1,20 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name                                    methodExists
  * @namespace           sugar.js.class
  * @type                                    Function
+ * @stable
  *
  * Check if one or more methods exists on a class instance
  *
  * @param           {Object}              instance                The instance to check the methods on
  * @param           {String}              ...methods              The methods to check
  * @return          {Boolean|Array}                               Return true if all is ok, and an array of missing methods if not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example           js
  * class Coco {
@@ -19,6 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * const myInstance = new Coco();
  * methodExists(myInstance, 'hello', 'world'); // => ['world'];
  *
+ * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function methodExists(instance, ...methods) {
@@ -31,4 +37,4 @@ function methodExists(instance, ...methods) {
     });
     return !missingMethodsArray.length ? true : missingMethodsArray;
 }
-exports.default = methodExists;
+module.exports = methodExists;

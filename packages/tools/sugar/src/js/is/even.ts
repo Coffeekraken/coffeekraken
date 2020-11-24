@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isEven
  * @namespace           sugar.js.is
@@ -21,6 +23,7 @@
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isEven(value) {
+function isEven(value) {
   return value % 2 === 0;
 }
+export = isEven;

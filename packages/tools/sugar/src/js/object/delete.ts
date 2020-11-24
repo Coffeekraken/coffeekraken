@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __set from './set';
 
 /**
@@ -26,7 +28,7 @@ import __set from './set';
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function del(object, dotPath) {
+function del(object, dotPath) {
   const parentDotPath = dotPath.split('.').slice(0, -1).join('.');
 
   if (!dotPath || dotPath === '' || dotPath === '.') return object;
@@ -52,3 +54,4 @@ export default function del(object, dotPath) {
   }
   return object;
 }
+export = del;

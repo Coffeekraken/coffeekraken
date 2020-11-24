@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __striptags from 'striptags';
 
 /**
@@ -26,6 +28,7 @@ import __striptags from 'striptags';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function striptags(html, allowedTags, tagReplacement) {
+function striptags(html, allowedTags, tagReplacement) {
   return __striptags(html, allowedTags, tagReplacement);
 }
+export = striptags;

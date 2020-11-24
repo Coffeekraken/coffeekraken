@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __replaceTags from '../html/replaceTags';
 import __chalk from 'chalk';
 __chalk.level = 3;
@@ -88,7 +90,7 @@ export const tagsMap = {
   br: (tag, content) => '\n'
 };
 
-export default function parseHtml(message) {
+function parseHtml(message) {
   let isArray = false;
   if (Array.isArray(message)) {
     isArray = true;
@@ -103,3 +105,4 @@ export default function parseHtml(message) {
   if (isArray) return message;
   return message[0];
 }
+export = parseHtml;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseRgba from './parseRgba';
 import __parseHsv from './parseHsv';
 import __hsv2rgba from './hsv2rgba';
@@ -12,6 +14,7 @@ import __rgba2hsv from './rgba2hsv';
  * @namespace           sugar.js.color
  * @type            Function
  * @private
+ * @stable
  *
  * Parse a string and return you the wanted object format like "rgba", "hsl" or "hsv".
  *
@@ -19,13 +22,18 @@ import __rgba2hsv from './rgba2hsv';
  * @param       {String}      [format='rgba']       The object format wanted. Can be "rgba", "hsl" or "hsv"
  * @return      {Object}                  The rgba representation of the passed color
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import parse from '@coffeekraken/sugar/js/color/parse';
  * parse('rgba(10,20,30,100)'); // => { r: 10, b: 20, b: 30, a: 100 }
  *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function parse(color, format = 'rgba') {
+function parse(color, format = 'rgba') {
   color = color.replace(/\s/g, '');
   if (color.indexOf('rgb') != -1) {
     color = __parseRgba(color);
@@ -52,3 +60,4 @@ export default function parse(color, format = 'rgba') {
       break;
   }
 }
+export = parse;

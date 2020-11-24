@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__info) => {
     describe('sugar.js.log.info', () => {
         const promises = [];

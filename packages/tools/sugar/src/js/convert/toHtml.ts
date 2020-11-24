@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';
 import __htmlFromMarkdown from './html/htmlFromMarkdown';
@@ -39,7 +41,7 @@ const convertersByType = {
   markdown: __htmlFromMarkdown,
   docblocks: __htmlFromDocblocks
 };
-export default function toHtml(inputString, settings = {}) {
+function toHtml(inputString, settings = {}) {
   settings = __deepMerge(
     {
       from: null
@@ -73,3 +75,4 @@ export default function toHtml(inputString, settings = {}) {
 
   return converterFn(inputString, settings);
 }
+export = toHtml;

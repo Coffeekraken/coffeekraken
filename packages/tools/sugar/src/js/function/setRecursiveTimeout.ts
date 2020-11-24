@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        setRecursiveTimeout
  * @namespace           sugar.js.function
@@ -25,7 +27,7 @@
  * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function setRecursiveTimeout(fn, timeout, duration, spread = 0) {
+function setRecursiveTimeout(fn, timeout, duration, spread = 0) {
   let idx = 0;
   let currentDuration = 0;
   let timeoutFn = null;
@@ -51,3 +53,4 @@ export default function setRecursiveTimeout(fn, timeout, duration, spread = 0) {
     clearTimeout(timeoutFn);
   };
 }
+export = setRecursiveTimeout;

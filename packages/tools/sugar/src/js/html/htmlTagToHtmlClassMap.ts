@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name            HtmlTagToHtmlClassMap
  * @namespace       sugar.js.html
@@ -16,7 +18,7 @@
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default {
+export = {
   a: HTMLAnchorElement,
   audio: HTMLAudioElement,
   body: HTMLBodyElement,

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __countLine from '../string/countLine';
 
@@ -5,7 +7,8 @@ import __countLine from '../string/countLine';
  * @name                                    center
  * @namespace           sugar.node.terminal
  * @type                                    Function
- * @test                ./__tests__/center.test.js
+ * @beta
+ *
  *
  * Allow to center one or more lines in the terminal depending on the process.env.STDOUT_PADDING environment variable
  * Settings:
@@ -15,13 +18,19 @@ import __countLine from '../string/countLine';
  * @param                 {Object}                  [settings={}]           An object of settings
  * @return                {String}                                          The centered text
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ * @todo      move in "format" folder
+ *
  * @example             js
  * import center from '@coffeekraken/sugar/node/terminal/center';
  * center('Hello world'); // => '                 Hello world'
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function center(text, settings = {}) {
+function center(text, settings = {}) {
   settings = __deepMerge(
     {
       spaceChar: '~'
@@ -39,3 +48,4 @@ export default function center(text, settings = {}) {
   });
   return Array.isArray(text) ? lines : lines.join('\n');
 }
+export = center;

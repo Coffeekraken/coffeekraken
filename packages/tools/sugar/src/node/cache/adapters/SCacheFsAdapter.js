@@ -1,8 +1,17 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const tmpDir_1 = __importDefault(require("../../fs/tmpDir"));
 const fs_1 = __importDefault(require("fs"));
@@ -10,24 +19,7 @@ const ensureDirSync_1 = __importDefault(require("../../fs/ensureDirSync"));
 const removeSync_1 = __importDefault(require("../../fs/removeSync"));
 const sugar_1 = __importDefault(require("../../config/sugar"));
 const SCacheAdapter_1 = __importDefault(require("../../_js/cache/adapters/SCacheAdapter"));
-/**
- * @name                                SCacheFsAdapter
- * @namespace           sugar.node.fs.cacheAdapters
- * @type                                Class
- *
- * A filesystem SCache adapter that allows you to store your cache items on the user system
- *
- * @example             js
- * const cache = new SCache({
- *    ttl: 100,
- *    adapter: new SCacheFsAdapter({
- *      rootDir: '/my/cool/folder
- *    })
- * });
- *
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SCacheFsAdapter extends SCacheAdapter_1.default {
+module.exports = class SCacheFsAdapter extends SCacheAdapter_1.default {
     /**
      * @name                              constructor
      * @type                              Function
@@ -62,15 +54,17 @@ class SCacheFsAdapter extends SCacheAdapter_1.default {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async set(name, value) {
-        // generate the item fs name
-        const fsName = `${this._settings.name}/${name}.json`;
-        // ensure we have the folder
-        ensureDirSync_1.default(`${this._settings.rootDir}/${fsName.split('/').slice(0, -1).join('/')}`);
-        // write the json file
-        fs_1.default.writeFileSync(`${this._settings.rootDir}/${fsName}`, value);
-        // write has been done correctly
-        return true;
+    set(name, value) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // generate the item fs name
+            const fsName = `${this._settings.name}/${name}.json`;
+            // ensure we have the folder
+            ensureDirSync_1.default(`${this._settings.rootDir}/${fsName.split('/').slice(0, -1).join('/')}`);
+            // write the json file
+            fs_1.default.writeFileSync(`${this._settings.rootDir}/${fsName}`, value);
+            // write has been done correctly
+            return true;
+        });
     }
     /**
      * @name                          get
@@ -86,14 +80,16 @@ class SCacheFsAdapter extends SCacheAdapter_1.default {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async get(name) {
-        // generate the item fs name
-        const fsName = `${this._settings.name}/${name}.json`;
-        // check that the file exists
-        if (!fs_1.default.existsSync(`${this._settings.rootDir}/${fsName}`))
-            return null;
-        // read the json file
-        return fs_1.default.readFileSync(`${this._settings.rootDir}/${fsName}`, 'utf8');
+    get(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // generate the item fs name
+            const fsName = `${this._settings.name}/${name}.json`;
+            // check that the file exists
+            if (!fs_1.default.existsSync(`${this._settings.rootDir}/${fsName}`))
+                return null;
+            // read the json file
+            return fs_1.default.readFileSync(`${this._settings.rootDir}/${fsName}`, 'utf8');
+        });
     }
     /**
      * @name                          delete
@@ -109,11 +105,13 @@ class SCacheFsAdapter extends SCacheAdapter_1.default {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async delete(name) {
-        // generate the item fs name
-        const fsName = `${this._settings.name}/${name}.json`;
-        // read the json file
-        return fs_1.default.unlinkSync(`${this._settings.rootDir}/${fsName}`);
+    delete(name) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // generate the item fs name
+            const fsName = `${this._settings.name}/${name}.json`;
+            // read the json file
+            return fs_1.default.unlinkSync(`${this._settings.rootDir}/${fsName}`);
+        });
     }
     /**
      * @name                          clear
@@ -129,10 +127,10 @@ class SCacheFsAdapter extends SCacheAdapter_1.default {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async clear(cacheName) {
-        // read the json file
-        return removeSync_1.default(`${this._settings.rootDir}/${cacheName}`);
+    clear(cacheName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // read the json file
+            return removeSync_1.default(`${this._settings.rootDir}/${cacheName}`);
+        });
     }
-}
-exports.default = SCacheFsAdapter;
-;
+};

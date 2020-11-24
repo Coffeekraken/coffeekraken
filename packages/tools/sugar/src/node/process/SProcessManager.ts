@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __argsToObject from '../cli/argsToObject';
 import __isClass from '../is/class';
 import __isChildProcess from '../is/childProcess';
@@ -17,12 +19,17 @@ import { watch } from 'chokidar';
  * @type            Class
  * @extends         SPromise
  * @implements      SProcessManagerInterface
+ * @wip
  *
  * This class represent a process handler class that will fire up some SProcess processes
  *
  * @param         {Object}          [settings={}]           An object of settings to configure your process instance:
  * - id (processHandler.unnamed) {String}: Specify a unique id for your particular process instance
  * - name (Unnamed Process Handler) {String}: Specify a name for your process instance
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @see         https://www.npmjs.com/package/node-notifier
  * @since       2.0.0
@@ -321,6 +328,6 @@ class SProcessManager extends __SPromise {
     return this.currentProcess;
   }
 }
-export default __SProcessManagerInterface.implements(SProcessManager, [
+export = __SProcessManagerInterface.implements(SProcessManager, [
   __SProcessManagerInterface
 ]);

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import _map from 'lodash/map';
 
 /**
@@ -32,7 +34,7 @@ import _map from 'lodash/map';
  * @since       1.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function splitWords(
+function splitWords(
   elm,
   tag = 'span',
   tagClass = 'split-words'
@@ -61,3 +63,4 @@ function _splitWords(elm, tag, tagClass) {
   }).join(' ');
   elm.innerHTML = words;
 }
+export = splitWords;

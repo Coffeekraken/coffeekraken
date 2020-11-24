@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SWebComponent from './SWebComponent';
 import { render, html } from 'lit-html';
 import __throttle from '../function/throttle';
@@ -22,6 +24,7 @@ import __canHaveChildren from '../dom/canHaveChildren';
  * @namespace           sugar.js.webcomponent
  * @type              Class
  * @extends           SWebComponent
+ * @wip
  *
  * // TODO: example
  *
@@ -31,6 +34,10 @@ import __canHaveChildren from '../dom/canHaveChildren';
  * - defaultProps ({}) {Object}: Specify the default properties values
  * - physicalProps ([]) {Array<String>}: List all the properties that need to be ALWAYS on the html element (for styling purpose for example...)
  * - requiredProps ([]) {Array<String>}: List all the properties that MUST be passed to the component
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import SLitHtmlWebComponent from '@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent';
@@ -178,4 +185,4 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
   };
 }
 
-export default SLitHtmlWebComponentGenerator;
+export = SLitHtmlWebComponentGenerator;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __uncamelize from '../string/uncamelize';
 import __autoCast from '../string/autoCast';
 import __toString from '../string/toString';
@@ -26,7 +28,7 @@ import __toString from '../string/toString';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function dataset($elm, key, value = null) {
+function dataset($elm, key, value = null) {
   if (!$elm.getAttribute) return;
   if (!value) {
     const v =
@@ -46,3 +48,4 @@ export default function dataset($elm, key, value = null) {
     return $elm;
   }
 }
+export = dataset;

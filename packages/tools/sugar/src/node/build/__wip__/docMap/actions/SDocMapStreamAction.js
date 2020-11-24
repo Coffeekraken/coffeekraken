@@ -1,4 +1,14 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var _a;
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __SDocMap = require('../../../doc/SDocMap');
@@ -41,14 +51,14 @@ module.exports = (_a = class SDocMapStreamActions extends __SActionsStreamAction
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings) {
-            return super.run(streamObj, async (resolve, reject) => {
+            return super.run(streamObj, (resolve, reject) => __awaiter(this, void 0, void 0, function* () {
                 const docMap = new __SDocMap(settings);
-                const res = await docMap.generate();
+                const res = yield docMap.generate();
                 if (res) {
                     streamObj.data = res;
                 }
                 resolve(streamObj);
-            });
+            }));
         }
     },
     /**

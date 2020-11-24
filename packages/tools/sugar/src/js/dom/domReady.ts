@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      domReady
  * @namespace           sugar.js.dom
@@ -28,7 +30,7 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 import __domReady from 'domready';
-export default function domReady(cb = null) {
+function domReady(cb = null) {
   return new Promise((resolve, reject) => {
     __domReady(() => {
       cb && cb();
@@ -36,3 +38,4 @@ export default function domReady(cb = null) {
     });
   });
 }
+export = domReady;

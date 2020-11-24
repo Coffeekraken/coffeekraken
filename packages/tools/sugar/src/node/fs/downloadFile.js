@@ -1,16 +1,16 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const downloads_folder_1 = __importDefault(require("downloads-folder"));
 const path_1 = __importDefault(require("path"));
 const download_file_1 = __importDefault(require("download-file"));
-// TODO tests
 /**
  * @name              downloadFile
  * @namespace           sugar.node.fs
  * @type              Function
+ * @stable
  *
  * Download a file and save it on the file system
  *
@@ -19,15 +19,22 @@ const download_file_1 = __importDefault(require("download-file"));
  * @param             {Function}        [callback=null]           A callback function to call on success or on error. In case of success it will take as parameter the final file path on the file system, otherwise it will be the error passed
  * @return            {Promise}                                 A promise that will be resolved with the final absolute file path, or rejected with the error passed
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import downloadFile from '@coffeekraken/node/fs/downloadFile';
  * downloadFile('https://myCoolFileUrl.ch/coco.json').then((dest) => {
  *    console.log('file downloeaded and saved here', dest);
  * }).catch(err) => {});
  *
+ * @see           https://www.npmjs.com/package/downloads-folder
+ * @see           https://www.npmjs.com/package/download-file
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function default_1(downloadUrl, destinationPath = downloads_folder_1.default(), callback = null) {
+function downloadFileFn(downloadUrl, destinationPath = downloads_folder_1.default(), callback = null) {
     return new Promise((resolve, reject) => {
         let fileStreamDest;
         let parsedDestinationPath = path_1.default.parse(destinationPath);
@@ -58,4 +65,4 @@ function default_1(downloadUrl, destinationPath = downloads_folder_1.default(), 
         });
     });
 }
-exports.default = default_1;
+module.exports = downloadFileFn;

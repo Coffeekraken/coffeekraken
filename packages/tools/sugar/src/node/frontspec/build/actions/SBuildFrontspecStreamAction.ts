@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SActionsStreamAction from '../../../stream/SActionsStreamAction';
 import __deepMerge from '../../../object/deepMerge';
 import __SBuildFrontspecInterface from '../interface/SBuildFrontspecInterface';
@@ -11,15 +13,21 @@ import __path from 'path';
  * @namespace           sugar.node.build.scss.actions
  * @type                Class
  * @extends             SActionsStreamAction
+ * @wip
  *
  * This function is responsible of rendering the sass string in the "data" property
  *
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBuildFrontspecStreamAction extends __SActionsStreamAction {
+export = class SBuildFrontspecStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object

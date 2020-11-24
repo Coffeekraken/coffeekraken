@@ -1,5 +1,10 @@
-import __detectInOutDirection from '../detectInOutDirection';
-import __dispatchEvent from '../dispatchEvent';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const detectInOutDirection_1 = __importDefault(require("../detectInOutDirection"));
+const dispatchEvent_1 = __importDefault(require("../dispatchEvent"));
 describe('sugar.js.dom.detectInOutDirection', () => {
     document.body.innerHTML = `
       <div id="testing">
@@ -7,7 +12,7 @@ describe('sugar.js.dom.detectInOutDirection', () => {
   `;
     const $elm = document.querySelector('#testing');
     let isInTriggered = false, isOutTriggered = false, isThenTriggered = false;
-    __detectInOutDirection($elm)
+    detectInOutDirection_1.default($elm)
         .on('in', (direction) => {
         isInTriggered = true;
     })
@@ -17,8 +22,8 @@ describe('sugar.js.dom.detectInOutDirection', () => {
         .then((value) => {
         isThenTriggered = true;
     });
-    __dispatchEvent($elm, 'mouseenter');
-    __dispatchEvent($elm, 'mouseleave');
+    dispatchEvent_1.default($elm, 'mouseenter');
+    dispatchEvent_1.default($elm, 'mouseleave');
     it('Should have trigger the "in" stack correctly', () => {
         setTimeout(() => {
             expect(isInTriggered).toBe(true);

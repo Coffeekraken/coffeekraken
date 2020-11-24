@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // TODO: tests
 import __toString from '../../string/toString';
 import __SObjectValidationError from '../../error/SObjectValidationError';
@@ -23,6 +25,7 @@ const _validationsObj = {
  * @name            validateObject
  * @namespace           sugar.js.validation.object
  * @type            Function
+ * @wip
  *
  * This function take an object, a definition object and validate this one depending on the definition...
  * A definition object is a plain object that specify for each properties, some requirerments like the type, if it is required or not, etc...
@@ -36,7 +39,9 @@ const _validationsObj = {
  * - extendsFn (null) {Function}: Specify a function that will be called for each properties with the arguments "argName", "argDefinition" and "value" to let you the possibility to extend this validation function
  * @return      {Boolean|Array<String>}                    Return true if all is ok, and an Array of string that describe the issue if it's not
  *
- * @todo        tests and documentation refactoring
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import validateObject from '@coffeekraken/sugar/js/validation/object/validateObject';
@@ -57,7 +62,7 @@ const _validationsObj = {
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function validateObject(
+function validateObject(
   objectToCheck,
   definitionObj,
   settings = {},
@@ -285,3 +290,4 @@ export default function validateObject(
 
   return issuesObj;
 }
+export = validateObject;

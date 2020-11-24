@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SActionsStreamAction from '../SActionsStreamAction';
 import __packageRoot from '../../path/packageRoot';
 import __packageJson from '../../package/json';
@@ -27,6 +29,7 @@ class SExtractDocblocksIntoFilesInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
+ * @wip
  *
  * This actions allows you to extract the docblocks into separated files depending on their "namespace" tag
  *
@@ -34,9 +37,14 @@ class SExtractDocblocksIntoFilesInterface extends __SInterface {
  * - sourceProp ('data') {String}: Specify the source property you want to extract data from
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SExtractDocblocksIntoFiles extends __SActionsStreamAction {
+export = class SExtractDocblocksIntoFiles extends __SActionsStreamAction {
   /**
    * @name            definitionObj
    * @type             Object

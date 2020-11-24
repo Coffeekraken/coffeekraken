@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __deepMerge = require('../../../object/deepMerge');
 
 /**

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __clone from 'lodash.clone';
 import __deepClone from 'lodash.clonedeep';
 
@@ -26,9 +28,10 @@ import __deepClone from 'lodash.clonedeep';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function clone(object, deep = false) {
+function clone(object, deep = false) {
   if (deep) {
     return __deepClone(object);
   }
   return __clone(object);
 }
+export = clone;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import _map from 'lodash/map';
 
 function _decodeHtml(html) {
@@ -71,7 +73,7 @@ function _decodeHtml(html) {
  * @since       1.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function splitLetters(
+function splitLetters(
   elm,
   tag = 'span',
   tagClass = 'split-letters'
@@ -113,3 +115,4 @@ export default function splitLetters(
 
   return elm;
 }
+export = splitLetters;

@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -23,11 +24,16 @@ const SIpc_1 = __importDefault(require("../../ipc/SIpc"));
  * @namespace           sugar.node.ui.sugar
  * @type                Class
  * @extends             SBlessedComponent
+ * @wip
  *
  * This class represent the Sugar UI interface in the terminal.
  *
  * @param           {SPromise}          source        The source from where to get data
  * @param           {Object}          [initialParams={}]        An object of initial params
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -516,37 +522,22 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                 OutputClass = SBlessedOutput_1.default;
             }
             // @ts-expect-error ts-migrate(2339) FIXME: Property '_sources' does not exist on type 'SSugar... Remove this comment to see the full error message
-            const $console = new OutputClass(this._sources, {
-                filter: (logObj) => {
+            const $console = new OutputClass(this._sources, Object.assign({ filter: (logObj) => {
                     return logObj.module && logObj.module.id === moduleObj.id;
-                },
-                width: '100%',
-                height: '100%-3',
-                top: 3,
-                left: 0,
-                right: 0,
-                mouse: true,
-                keys: true,
-                clickable: false,
-                scrollable: true,
-                scrollbar: {
+                }, width: '100%', height: '100%-3', top: 3, left: 0, right: 0, mouse: true, keys: true, clickable: false, scrollable: true, scrollbar: {
                     ch: ' ',
                     inverse: true
-                },
-                style: {
+                }, style: {
                     fg: 'white',
                     scrollbar: {
                         bg: color_1.default('terminal.primary').toString()
                     }
-                },
-                padding: {
+                }, padding: {
                     top: 0,
                     left: 0,
                     right: 0,
                     bottom: 2
-                },
-                ...moduleObj
-            });
+                } }, moduleObj));
             $container.append($console);
             $container.append($topBar);
             moduleObj.$container = $container;

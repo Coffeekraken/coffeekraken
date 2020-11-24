@@ -1,30 +1,12 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const SInput_1 = __importDefault(require("../form/SInput"));
 const SBlessedPopup_1 = __importDefault(require("./SBlessedPopup"));
-/**
- * @name                  SBlessedInputPopup
- * @namespace           sugar.node.blessed.popup
- * @type                  Class
- * @extends               SBlessedPopup
- *
- * This class represent a simple input in a popup
- *
- * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
- * - closeDelay (500) {Number}: The delay before closing the popup when the input has been validated
- * - $input ({}) {Object}: An object of settings passed to the SInput instance constructor
- *
- * @example       js
- * import SBlessedInputPopup from '@coffeekraken/sugar/node/blessed/popup/SBlessedInputPopup';
- * new SBlessedInputPopup({});
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SBlessedInputPopup extends SBlessedPopup_1.default {
+module.exports = class SBlessedInputPopup extends SBlessedPopup_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -58,5 +40,4 @@ class SBlessedInputPopup extends SBlessedPopup_1.default {
         super.update();
         this.height = this.$content.getScrollHeight() + 5;
     }
-}
-exports.default = SBlessedInputPopup;
+};

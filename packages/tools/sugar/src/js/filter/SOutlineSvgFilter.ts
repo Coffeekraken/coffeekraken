@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import SSvgFilter from './SSvgFilter';
 
 /**
@@ -57,4 +59,4 @@ class SOutlineSvgFilter extends SSvgFilter {
 }
 
 // export modules
-export default SOutlineSvgFilter;
+export = SOutlineSvgFilter;

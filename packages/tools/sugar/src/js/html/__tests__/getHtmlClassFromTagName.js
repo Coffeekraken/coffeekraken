@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__getHtmlClassFromTagName) => {
     describe('sugar.js.string.getHtmlClassFromTagName', () => {
         it('Should get back the correct HTMLElement class from passed tags', (done) => {

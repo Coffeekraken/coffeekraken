@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import sha512 from 'crypto-js/sha512';
 import toString from '../string/toString';
 import parse from '../string/parse';
@@ -18,7 +20,7 @@ const __encryptedMessages = {};
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default {
+export = {
   /**
    * @name        encrypt
    * @type          Function

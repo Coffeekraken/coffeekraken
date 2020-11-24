@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name              description
  * @namespace           sugar.js.docblock.tags
@@ -15,7 +17,7 @@
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-export default function description(data) {
+function description(data) {
   if (data.content && data.content[data.content.length - 1] === '') {
     data.content = data.content.slice(0, -1);
   }
@@ -25,3 +27,4 @@ export default function description(data) {
     .join('\n')
     .trim();
 }
+export = description;

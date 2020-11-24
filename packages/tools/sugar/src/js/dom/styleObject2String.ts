@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __uncamelize from '../string/uncamelize';
 
 /**
@@ -26,7 +28,7 @@ import __uncamelize from '../string/uncamelize';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function styleObject2String(styleObj) {
+function styleObject2String(styleObj) {
   // process the style object
   const propertiesArray = [];
   for (const key in styleObj) {
@@ -42,3 +44,4 @@ export default function styleObject2String(styleObj) {
   // return the css text
   return propertiesArray.join(' ');
 }
+export = styleObject2String;

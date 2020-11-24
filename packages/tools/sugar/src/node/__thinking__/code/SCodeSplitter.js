@@ -1,43 +1,10 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-/**
- * @name              SCodeSplitter
- * @namespace         sugar.js.code
- * @type              Class
- *
- * This class allows you to specify some "splitters" that will be used to split the code accordingly.
- * A "splitter" is an object of these properties:
- * - type (null) {String}: A simple word used as "type" to define the splitted blocks
- * - prefix (null) {Regex}: A regex used to detect the start of a block
- * - suffix (null) {Regex}: A regex used to detect what can be after the block
- * - open ('{') {String}: A 1 character string that specify the opening of a code block like "{", etc...
- * - close ('}') {String}: A 1 character string that specify the closing of a code block like "}", etc...
- * - exclude (null) {Array<Regex>}: An array of regex used to exclude some previously matched blocks of this splitter
- *
- * @param       {Object}      [settings={}]         An object of settings to configure your code splitter instance:
- *
- * @todo        enhance documentation
- *
- * @example       js
- * import SCodeSplitter from '@coffeekraken/sugar/js/code/SCodeSplitter';
- * const splitter = new SCodeSplitter();
- * const splitStack = splitter.split([{
- *    type: 'include',
- *    prefix: /@include\s[a-zA-Z0-9-_\.]+/,
- *    suffix: /;/,
- *    open: '(',
- *    close: ')',
- *    exclude: [/@include Sugar\.setup\(.*\);/]
- * }]);
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SCodeSplitter {
+module.exports = class SCodeSplitter {
     /**
      * @name        constructor
      * @type        Function
@@ -119,14 +86,7 @@ class SCodeSplitter {
             splittersMatches.forEach((obj) => {
                 if (obj.match.index < idx) {
                     idx = obj.match.index;
-                    extractorObj = {
-                        opened: false,
-                        closed: false,
-                        openCount: 0,
-                        closeCount: 0,
-                        ...obj.extractorObj,
-                        match: obj.match
-                    };
+                    extractorObj = Object.assign(Object.assign({ opened: false, closed: false, openCount: 0, closeCount: 0 }, obj.extractorObj), { match: obj.match });
                 }
             });
             if (extractorObj) {
@@ -194,5 +154,4 @@ class SCodeSplitter {
         }
         return blocks;
     }
-}
-exports.default = SCodeSplitter;
+};

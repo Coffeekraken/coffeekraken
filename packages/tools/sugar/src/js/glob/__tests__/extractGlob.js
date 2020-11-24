@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__extractGlob) => {
     describe('sugar.js.glob.extractGlob', () => {
         it('Should extract none glob part correctly', () => {

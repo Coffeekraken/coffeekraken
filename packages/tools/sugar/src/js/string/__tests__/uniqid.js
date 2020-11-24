@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__uniqid) => {
     describe('sugar.js.string.uniqid', () => {
         it('Should process the passed string correctly', (done) => {

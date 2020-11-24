@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import _SInterface from '../../../node/class/SInterface';
 
 export = class SNpmBinInterface extends _SInterface {

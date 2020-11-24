@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SError from '../../error/SError';
 import __deepMerge from '../../object/deepMerge';
 import __SDocblock from '../../docblock/SDocblock';
@@ -29,8 +31,9 @@ import __SDocblock from '../../docblock/SDocblock';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function htmlFromDocblocks(inputString, settings = {}) {
+function htmlFromDocblocks(inputString, settings = {}) {
   settings = __deepMerge({}, settings);
   const sDocblock = new __SDocblock(inputString, settings);
   return sDocblock.toHtml(settings);
 }
+export = htmlFromDocblocks;

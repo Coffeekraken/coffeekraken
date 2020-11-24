@@ -1,2 +1,2 @@
-const __SValuesValidation = require('../SValuesValidation');
+var __SValuesValidation = require('../SValuesValidation');
 require('./SValuesValidation')(__SValuesValidation);

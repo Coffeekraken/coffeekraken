@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 var _a;
 const __SInterface = require('../../../class/SInterface');
 const __SBuildInterface = require('../../interface/SBuildInterface');

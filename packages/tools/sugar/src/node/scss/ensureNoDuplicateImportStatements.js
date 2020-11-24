@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const findImportStatements_1 = __importDefault(require("./findImportStatements"));
 const dedupe_1 = __importDefault(require("../string/dedupe"));
@@ -10,6 +10,7 @@ const dedupe_1 = __importDefault(require("../string/dedupe"));
  * @name            ensureNoDuplicateImportStatements
  * @namespace       sugar.node.scss
  * @type            Function
+ * @beta
  *
  * This function simply parse the passed string and make sure their's no duplicate import and use statements
  *
@@ -19,6 +20,10 @@ const dedupe_1 = __importDefault(require("../string/dedupe"));
  *
  * @setting      {Boolean}       [use=true]      Specify if you want to extract the @use statements
  * @setting      {Boolean}      [imports=true]    Specify if you want to extract the @import statements
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import ensureNoDuplicateImportStatements from '@coffeekraken/sugar/node/scss/ensureNoDuplicateImportStatements';
@@ -44,4 +49,4 @@ function ensureNoDuplicateImportStatements(string, settings = {}) {
     });
     return string;
 }
-exports.default = ensureNoDuplicateImportStatements;
+module.exports = ensureNoDuplicateImportStatements;

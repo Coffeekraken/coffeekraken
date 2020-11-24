@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const glob_1 = __importDefault(require("glob"));
@@ -17,6 +17,7 @@ const directory_1 = __importDefault(require("../is/directory"));
  * @namespace       sugar.node.glob
  * @type            Function
  * @async
+ * @beta
  *
  * This function simply resolve the passed glob pattern(s) and resolve his promise
  * with an Array of SFsFile instances to work with
@@ -28,6 +29,9 @@ const directory_1 = __importDefault(require("../is/directory"));
  * @setting     {String}        rootDir                     The root directory where to start the glob search process
  * @setting     {Object}        ...glob                     All the glob (https://www.npmjs.com/package/glob) options are supported
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  * @todo          document the special ":" syntax available
  *
  * @example         js
@@ -71,10 +75,7 @@ function resolveGlob(globs, settings = {}) {
                     rootDir = split;
                 }
             });
-            let pathes = glob_1.default.sync(globPattern, {
-                cwd: rootDir,
-                ...settings
-            });
+            let pathes = glob_1.default.sync(globPattern, Object.assign({ cwd: rootDir }, settings));
             // check if need to search for inline content
             if (searchReg) {
                 pathes = pathes.filter((path) => {
@@ -99,4 +100,4 @@ function resolveGlob(globs, settings = {}) {
         id: 'resolveGlob'
     });
 }
-exports.default = resolveGlob;
+module.exports = resolveGlob;

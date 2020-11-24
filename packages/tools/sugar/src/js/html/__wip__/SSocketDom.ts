@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __appendScriptTag from '../dom/appendScriptTag';
 import __innerHtml from '../dom/innerHtml';
 

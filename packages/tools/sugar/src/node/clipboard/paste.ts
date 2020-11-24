@@ -1,14 +1,21 @@
+// @ts-nocheck
+
 import __clipboardy from 'clipboardy';
 
 /**
  * @name            paste
  * @namespace       sugar.node.clipboard
  * @type            Function
+ * @stable
  *
  * Simple function to paste things from the system clipboard.
  * This is using https://www.npmjs.com/package/clipboardy under the hood.
  *
  * @return       {String}             The text to paste
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import paste from '@coffeekraken/sugar/node/clipboard/paste';
@@ -20,6 +27,7 @@ import __clipboardy from 'clipboardy';
  * @see         https://www.npmjs.com/package/clipboardy
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function paste(text) {
+function paste(text) {
   return __clipboardy.readSync();
 }
+export = paste;

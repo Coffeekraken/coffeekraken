@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      isInViewport
  * @namespace           sugar.js.dom
@@ -23,7 +25,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isInViewport(elm, offset = 50) {
+function isInViewport(elm, offset = 50) {
   // handle offset
   let offsetTop = offset;
   let offsetRight = offset;
@@ -46,3 +48,4 @@ export default function isInViewport(elm, offset = 50) {
   const isRightIn = rect.right - offsetLeft >= 0;
   return isTopIn && isBottomIn && isLeftIn && isRightIn;
 }
+export = isInViewport;

@@ -1,4 +1,9 @@
-import __getTranslateProperties from '../getTranslateProperties';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const getTranslateProperties_1 = __importDefault(require("../getTranslateProperties"));
 describe('sugar.js.dom.getTranslateProperties', () => {
     document.body.innerHTML = `
     <style>
@@ -35,7 +40,7 @@ describe('sugar.js.dom.getTranslateProperties', () => {
     const $elmTranslate = document.querySelector('#testing-translate');
     const $elmDefault = document.querySelector('#testing-default');
     it('Should get the translate properties from a matrix css declaration', () => {
-        const translate = __getTranslateProperties($elmMatrix);
+        const translate = getTranslateProperties_1.default($elmMatrix);
         expect(translate).toEqual({
             x: 10,
             y: 20,
@@ -43,7 +48,7 @@ describe('sugar.js.dom.getTranslateProperties', () => {
         });
     });
     it('Should get the translate properties from a matrix3d css declaration', () => {
-        const translate = __getTranslateProperties($elmMatrix3d);
+        const translate = getTranslateProperties_1.default($elmMatrix3d);
         expect(translate).toEqual({
             x: 10,
             y: 20,
@@ -51,7 +56,7 @@ describe('sugar.js.dom.getTranslateProperties', () => {
         });
     });
     it('Should get the translate properties from a translate3d css declaration', () => {
-        const translate = __getTranslateProperties($elmtranslate3d);
+        const translate = getTranslateProperties_1.default($elmtranslate3d);
         expect(translate).toEqual({
             x: 12,
             y: '50%',
@@ -59,7 +64,7 @@ describe('sugar.js.dom.getTranslateProperties', () => {
         });
     });
     it('Should get the translate properties from a translate css declaration', () => {
-        const translate = __getTranslateProperties($elmTranslate);
+        const translate = getTranslateProperties_1.default($elmTranslate);
         expect(translate).toEqual({
             x: 20,
             y: 32,
@@ -67,7 +72,7 @@ describe('sugar.js.dom.getTranslateProperties', () => {
         });
     });
     it('Should get the translate properties from a default translateX, translateY and translateZ css declaration', () => {
-        const translate = __getTranslateProperties($elmDefault);
+        const translate = getTranslateProperties_1.default($elmDefault);
         expect(translate).toEqual({
             x: 48,
             y: 10,

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __imageLoaded from '../dom/imageLoaded';
 import __deepMerge from '../object/deepMerge';
 
@@ -23,7 +25,7 @@ import __deepMerge from '../object/deepMerge';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function imagesLoadedAttribute(settings = {}) {
+function imagesLoadedAttribute(settings = {}) {
   settings = __deepMerge({}, settings);
   document.addEventListener(
     'load',
@@ -42,3 +44,4 @@ export default function imagesLoadedAttribute(settings = {}) {
     });
   });
 }
+export = imagesLoadedAttribute;

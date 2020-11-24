@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      easeOutQuint
  * @namespace           sugar.js.easing
@@ -16,6 +18,7 @@
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function (t) {
+function ease (t) {
   return 1 + --t * t * t * t * t;
 }
+export = ease;

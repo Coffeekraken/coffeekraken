@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                              when
  * @namespace           sugar.js.dom
@@ -40,7 +42,7 @@
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function when($node, state, settings = {}) {
+function when($node, state, settings = {}) {
   return new Promise(async (resolve, reject) => {
     // check the state to detect
     let importPromise, args;
@@ -91,3 +93,4 @@ export default function when($node, state, settings = {}) {
     });
   });
 }
+export = when;

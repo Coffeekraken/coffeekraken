@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__sha256) => {
     describe('sugar.js.crypt.sha256', () => {
         it('Should encrypt then decrypt the string "hello world" correctly', () => {

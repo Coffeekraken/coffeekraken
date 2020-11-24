@@ -1,18 +1,23 @@
-import __fs from 'fs-extra';
+// @ts-nocheck
 
-// TODO tests
+import __fs from 'fs-extra';
 
 /**
  * @name        copy
  * @namespace           sugar.node.fs
  * @type          Function
  * @async
+ * @stable
  *
  * Copy a file or directory (async)
  *
  * @param       {String}              src           The source path to copy
  * @param       {String}              dest          The destination path
  * @return      {Promise}                           A promise that will be resolved when the copy is completed
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import copy from '@coffeekraken/node/fs/copy';
@@ -21,8 +26,10 @@ import __fs from 'fs-extra';
  * });
  *
  * @see             https://github.com/jprichardson/node-fs-extra
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function copy(src, dest) {
+function copy(src, dest) {
   return __fs.copy(src, dest);
 }
+export = copy;

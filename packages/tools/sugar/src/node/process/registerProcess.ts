@@ -1,15 +1,22 @@
+// @ts-nocheck
+
 import __uniquid from '../string/uniqid';
 
 /**
  * @name              registerProcess
  * @namespace           sugar.node.process
  * @type              Function
+ * @wip
  *
  * This function register a (child) process in a global stack.
  * You can access these registered processes using the "getRegisteredProcesses" function.
  *
  * @param       {Process}         pro         The process you want to register
  * @param       {String}      [name=null]       A specific name for your process. By default a uniqid will be generated
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import registerProcess from '@coffeekraken/sugar/node/process/registerProcess';
@@ -18,7 +25,7 @@ import __uniquid from '../string/uniqid';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function registerProcess(pro, name = __uniquid()) {
+function registerProcess(pro, name = __uniquid()) {
   if (!global._registeredProcesses) global._registeredProcesses = {};
   global._registeredProcesses[name] = pro;
   if (pro && typeof pro.on === 'function') {
@@ -27,3 +34,4 @@ export default function registerProcess(pro, name = __uniquid()) {
     });
   }
 }
+export = registerProcess;

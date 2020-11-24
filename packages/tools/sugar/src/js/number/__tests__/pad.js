@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__pad) => {
     describe('sugar.js.number.pad', () => {
         it('Should pad the passed numbers correctly', () => {

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __upperFirst from '../string/upperFirst';
 import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
 
@@ -24,7 +26,7 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function getHtmlClassFromTagName(tagName) {
+function getHtmlClassFromTagName(tagName) {
   if (!tagName) return HTMLElement;
 
   const tagNameUpperFirst = __upperFirst(tagName);
@@ -35,3 +37,4 @@ export default function getHtmlClassFromTagName(tagName) {
 
   return HTMLElement;
 }
+export = getHtmlClassFromTagName;

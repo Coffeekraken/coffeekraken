@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { ISLogObj } from '../../log/interface/ISLog';
 import ISPromise from '../../promise/interface/ISPromise';
 import ISProcessOutput from './ISProcessOutput';
@@ -29,18 +31,20 @@ export interface ISProcessSettings {
   name?: string;
   output?: ISProcessOutput;
   runAsChild?: boolean;
-  definitionObj?: object;
+  definitionObj?: Record<string, unknown>;
   processPath?: string | null;
   notifications?: ISProcessNotificationSettings;
-  env?: object;
+  env?: Record<string, unknown>;
 }
 
-export default interface ISProcess {
+export interface ISProcessCtor {
   new (settings: ISProcessSettings): ISProcess;
+}
+export default interface ISProcess {
   toObject(): ISProcessObject;
   bindSPromise(promise: ISPromise): void;
   run(
-    paramsOrStringArgs: object | string,
+    paramsOrStringArgs: Record<string, unknown> | string,
     settings: ISProcessSettings
   ): Promise<any>;
   kill(): void;

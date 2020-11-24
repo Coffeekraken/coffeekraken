@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SEvent from '../event/SEvent';
 
 /**
@@ -25,7 +27,7 @@ import __SEvent from '../event/SEvent';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function dispatchEvent($target, name, data = null) {
+function dispatchEvent($target, name, data = null) {
   // create new event
   const e = new __SEvent(name, {
     detail: data,
@@ -34,3 +36,4 @@ export default function dispatchEvent($target, name, data = null) {
   });
   $target.dispatchEvent(e);
 }
+export = dispatchEvent;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepize from '../object/deepize';
 import __deepMerge from '../object/deepMerge';
 import __toString from '../string/toString';
@@ -7,6 +9,7 @@ import __validateObject from '../validation/object/validateObject';
  * @name                completeArgsObject
  * @namespace          sugar.js.cli
  * @type                Function
+ * @beta
  *
  * This function take an arguments object and complete it with the definition object default values
  * for missing args
@@ -17,13 +20,17 @@ import __validateObject from '../validation/object/validateObject';
  * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
  * @return            {Object}                            The completed arguments object
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import completeArgsObject from '@coffeekraken/sugar/js/cli/completeArgsObject';
  *
  * @since       2.0.0
- *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function completeArgsObject(argsObj, settings = {}) {
+function completeArgsObject(argsObj, settings = {}) {
   argsObj = Object.assign({}, argsObj);
 
   settings = __deepMerge(
@@ -61,3 +68,4 @@ export default function completeArgsObject(argsObj, settings = {}) {
   // return the argsObj
   return __deepize(argsObj);
 }
+export = completeArgsObject;

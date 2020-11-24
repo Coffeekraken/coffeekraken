@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isPlainObject from '../is/plainObject';
 import __isEqual from 'is-equal';
 
@@ -46,7 +48,7 @@ import __isEqual from 'is-equal';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function diff(object1, object2, settings = {}) {
+function diff(object1, object2, settings = {}) {
   settings = {
     deep: true,
     added: true,
@@ -119,3 +121,4 @@ export default function diff(object1, object2, settings = {}) {
 
   return finalObj;
 }
+export = diff;

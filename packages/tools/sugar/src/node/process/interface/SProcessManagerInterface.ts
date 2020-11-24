@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SInterface from '../../class/SInterface';
 
 /**
@@ -12,7 +14,7 @@ import __SInterface from '../../class/SInterface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SProcessManagerInterface extends __SInterface {
+export = class SProcessManagerInterface extends __SInterface {
   // static extendsArray = ['SProcess', 'SPromise'];
   static definitionObj = {
     run: {

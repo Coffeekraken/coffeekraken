@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                              asyncForEach
  * @namespace           sugar.js.array
@@ -25,7 +27,7 @@
 interface IAsyncForEach {
   (value: any, index: number, array: any[]): void;
 }
-export default async function asyncForEach(
+export = async function asyncForEach(
   array: any[],
   asyncFn: IAsyncForEach
 ): Promise<any> {

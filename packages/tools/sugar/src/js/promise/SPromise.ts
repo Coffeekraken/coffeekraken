@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __minimatch from 'minimatch';
 import __deepMerge from '../object/deepMerge';
 import __uniqid from '../string/uniqid';
@@ -5,22 +7,11 @@ import __wait from '../time/wait';
 import __toString from '../string/toString';
 import __env from '../core/env';
 
-// var originalCatch = Promise.prototype.catch;
-// Promise.prototype.catch = function (...args) {
-//   if (this._coco) {
-//     console.log('XX');
-//   }
-//   if (this._catch && typeof this._catch === 'function') {
-//     console.log('PLOP');
-//     return this._catch(...args);
-//   }
-//   return originalCatch.apply(this, arguments);
-// };
-
 /**
  * @name                  SPromise
  * @namespace           sugar.js.promise
  * @type                  Class
+ * @stable
  *
  * This class works the same as the default Promise one. The difference is that you have more control on this one like
  * the possibility to resolve it multiple times. Here's a list of the "differences" and the "features" that this class provide:
@@ -60,6 +51,10 @@ import __env from '../core/env';
  *      console.log(result); // => helloWorldPromise
  *    ```
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ * 
  * @example         js
  * import SPromise from '@coffeekraken/sugar/js/promise/SPromise';
  * function myCoolFunction() {
@@ -81,9 +76,10 @@ import __env from '../core/env';
  *    // do something with the returned reason of failure...
  * });
  *
+ * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default class SPromise extends Promise {
+export = class SPromise extends Promise {
   /**
    * @name                  _settings
    * @type                  Object

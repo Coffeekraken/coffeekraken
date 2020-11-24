@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SProcess from '../../process/SProcess';
 import __chokidar from 'chokidar';
 import __SPromise from '../../promise/SPromise';
@@ -11,9 +13,14 @@ import __SFsDeamonInterface from './interface/SFsDeamonInterface';
  * @namespace           sugar.node.deamon.fs
  * @type                Class
  * @extends             SProcess
+ * @wip
  *
  * This class allows you to simply launch some watch processes in order to be notified when some files are
  * updated, deleted or created on the filesystem.
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example           js
  * import SFsDeamonProcess from '@coffeekraken/sugar/node/deamon/fs/SFsDeamonProcess';
@@ -31,7 +38,7 @@ import __SFsDeamonInterface from './interface/SFsDeamonInterface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SFsDeamonProcess extends __SProcess {
+export = class SFsDeamonProcess extends __SProcess {
   static interface = __SFsDeamonInterface;
 
   /**

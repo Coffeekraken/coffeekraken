@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 
 /**
@@ -35,7 +37,7 @@ import __SPromise from '../promise/SPromise';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function detectInOutDirection($elm) {
+function detectInOutDirection($elm) {
   let mouseEnterHandler, mouseLeaveHandler;
 
   const promise = new __SPromise(
@@ -111,3 +113,4 @@ function calculateDirection(e) {
     direction = null;
   }
 }
+export = detectInOutDirection;

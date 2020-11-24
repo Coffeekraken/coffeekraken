@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __fs from 'fs';
 import __tmp from 'tmp';
 import __isClass from '../is/class';
@@ -22,6 +24,7 @@ import __SProcessManager from '../process/SProcessManager';
  * @namespace           sugar.node.cli
  * @implements          SCliInterface
  * @type                Class
+ * @wip
  *
  * This class represent a basic CLI command with his definition object, his command string, etc...
  *
@@ -33,7 +36,9 @@ import __SProcessManager from '../process/SProcessManager';
  * - defaultParams ({}) {Object}: Specify some defaults for your accepted and described params of the definition object
  * - childProcess: ({}) {Object}: Specify some settings to pass to the SChildProcess instance like "pipe", etc...
  *
- * @TODO            check the documentation
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import SCli from '@coffeekraken/sugar/js/cli/SCli';
@@ -370,4 +375,4 @@ class SCli extends __SPromise {
     } catch (e) {}
   }
 }
-export default __SCliInterface.implements(SCli);
+export = __SCliInterface.implements(SCli);

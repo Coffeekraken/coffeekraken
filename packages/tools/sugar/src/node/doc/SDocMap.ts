@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
 import __packageRoot from '../path/packageRoot';
@@ -16,6 +18,7 @@ import __SGlob from '../glob/SGlob';
  * @namespace           sugar.node.doc
  * @type                Class
  * @extends             SPromise
+ * @wip
  *
  * This class represent the ```docMap.json``` file and allows you to generate it from some sources (glob pattern(s))
  * and save it inside a directory you choose.
@@ -23,6 +26,10 @@ import __SGlob from '../glob/SGlob';
  * @param           {Object}        [settings={}]           An object of settings to configure your docMap instance:
  * - filename (docMap.json) {String}: Specify the filename you want
  * - outputDir (packageRoot()) {String}: Specify the directory where you want to save your docMap.json file when using the ```save``` method
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example             js
  * import SDocMap from 'coffeekraken/sugar/node/doc/SDocMap';
@@ -35,7 +42,7 @@ import __SGlob from '../glob/SGlob';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SDocMap extends __SPromise {
+export = class SDocMap extends __SPromise {
   /**
    * @name          _entries
    * @type           Array<Object>

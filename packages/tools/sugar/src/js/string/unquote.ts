@@ -1,7 +1,10 @@
+// @ts-nocheck
+
 /**
  * @name        unquote
  * @namespace           sugar.js.string
  * @type      Function
+ * @stable
  *
  * Remove the quotes of a string
  * Types of quotes removed :
@@ -11,13 +14,18 @@
  * @param    {Array<String>}    [quotesToRemove=['"','\'','”','`']]    The quotes to removes
  * @return    {String}    The unquoted string
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example    js
  * import unquote from '@coffeekraken/sugar/js/string/unquote'
  * unquote("'Hello world'") // "Hello world"
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
+function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
   // trim the string just in case
   string = string.trim();
   // loop on each quotes to remove
@@ -32,3 +40,4 @@ export default function unquote(string, quotesToRemove = ['"', "'", '”', '`'])
   // return the processed string
   return string;
 }
+export = unquote;

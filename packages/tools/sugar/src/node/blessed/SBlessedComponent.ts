@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __blessed from 'blessed';
 import __deepMerge from '../object/deepMerge';
 import __color from '../color/color';
@@ -14,10 +16,15 @@ let __activeScreen: any = null;
  * @name                  SBlessedComponent
  * @namespace           sugar.node.blessed
  * @type                  Class
+ * @wip
  *
  * This class is the base one for all the sugar blessed components like input, panel, etc...
  *
  * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import SBlessedComponent from '@coffeekraken/sugar/node/blessed/SBlessedComponent';
@@ -27,6 +34,7 @@ let __activeScreen: any = null;
  *    }
  * }
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
@@ -36,7 +44,7 @@ let __activeScreen: any = null;
 //   if (!global.screen) return;
 //   global.screen.destroy();
 // });
-export default class SBlessedComponent extends __blessed.box {
+export = class SBlessedComponent extends __blessed.box {
   /**
    * @name                  _settings
    * @type                  Object

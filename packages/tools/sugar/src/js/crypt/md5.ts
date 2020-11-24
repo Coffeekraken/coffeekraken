@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import md5 from 'crypto-js/md5';
 import toString from '../string/toString';
 import parse from '../string/parse';
@@ -60,4 +62,4 @@ const api = {
 };
 md5.encrypt = api.encrypt;
 md5.decrypt = api.decrypt;
-export default md5;
+export = md5;

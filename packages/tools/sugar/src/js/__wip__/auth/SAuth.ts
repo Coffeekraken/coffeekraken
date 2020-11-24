@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __machineIdSync = require('node-machine-id').machineIdSync;
 
 const __deepMerge = require('../object/deepMerge');

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __blessed from 'blessed';
 import __color from '../../color/color';
@@ -24,6 +26,7 @@ import __getExtendsStack from '../../class/getExtendsStack';
  * @name                  SCommandPanel
  * @namespace           sugar.node.blessed
  * @type                  Class
+ * @wip
  *
  * This class is a simple SPanel extended one that accesp an SCommandPanel instance
  * to log the data's from and display an simple UI depending on the SCommandPanel configured keys
@@ -31,15 +34,20 @@ import __getExtendsStack from '../../class/getExtendsStack';
  * @param         {SCommandPanel}            process           The SCommandPanel instance you want to attach
  * @param         {Object}              [settings={}]     The settings object to configure your SCommandPanel
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import SCommandPanel from '@coffeekraken/sugar/node/terminal/SCommandPanel';
  * const myPanel = new SCommandPanel(myProcess, {
  *    screen: true
  * });
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SCommandPanel extends __SBlessedComponent {
+export = class SCommandPanel extends __SBlessedComponent {
   /**
    * @name          _commands
    * @type          Array|String
@@ -135,13 +143,13 @@ export default class SCommandPanel extends __SBlessedComponent {
 
     // pipe all commands "events" to the _sPromise internal promise
     this._sPromise = new __SPromise();
-    this._commands.forEach((commandObj, i) => {
+    this._commands.forEach(async (commandObj, i) => {
       // instanciate the command instance
-      const commandClass = require(commandObj.path);
+      const commandClass = await import(commandObj.path);
       commandObj.instance = new commandClass(commandObj.settings);
     });
 
-    this.promise = new __SPromise(() => {});
+    this.promise = new __SPromise();
 
     // generate the UI
     this._generateUI();
@@ -435,7 +443,7 @@ export default class SCommandPanel extends __SBlessedComponent {
         })
       };
 
-      let name = commandObj.name;
+      const name = commandObj.name;
 
       itemsArray.push(name);
     });
@@ -649,7 +657,7 @@ export default class SCommandPanel extends __SBlessedComponent {
       };
       item.top = i * 2;
 
-      let key = `${commandObj.key}`;
+      const key = `${commandObj.key}`;
       item.$key.setContent(key);
 
       let name = commandObj.name;
@@ -940,7 +948,7 @@ export default class SCommandPanel extends __SBlessedComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _updateCommandBoxesLayout() {
-    let currentTop = 0;
+    const currentTop = 0;
 
     // this._commands.forEach((commandObj) => {
     //   let boxObj = this._boxesObjectsMap.get(commandObj);

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SBuildScssActionsStream from './SBuildScssActionsStream';
 import __deepMerge from '../../object/deepMerge';
 import __SProcess from '../../process/SProcess';
@@ -8,13 +10,18 @@ import __SBuildScssInterface from './interface/SBuildScssInterface';
  * @namespace           sugar.node.build.scss
  * @type            Class
  * @extends         SProcess
+ * @wip
  *
  * This class represent the process that build the SCSS files into CSS
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBuildScssProcess extends __SProcess {
+export = class SBuildScssProcess extends __SProcess {
   static interface = __SBuildScssInterface;
 
   /**

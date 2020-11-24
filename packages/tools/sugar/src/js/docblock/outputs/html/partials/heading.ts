@@ -1,9 +1,11 @@
+// @ts-nocheck
+
 /**
  * @wip
  * @todo      interface
  * @todo      doc
  */
-export default `
+export = `
 {{#if namespace}}<!-- @namespace    {{namespace}} -->{{/if}}
   {{#if name}}<!-- @name    {{name}} -->{{/if}}
 

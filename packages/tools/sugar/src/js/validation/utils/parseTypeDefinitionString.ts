@@ -1,14 +1,21 @@
+// @ts-nocheck
+
 import __upperFirst from '../../string/upperFirst';
 
 /**
  * @name              parseTypeDefinitionString
  * @namespace           sugar.js.validation.utils
  * @type              Function
+ * @wip
  *
  * Thia function take an argument type definition string like "String", "Array<String>", "Array|String", etc... and return an object that represent this.
  *
  * @param       {String}        argTypeString         The argument type definition string
  * @return      {Object}                              The argument type definition string in object format
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import parseTypeDefinitionString from '@coffeekraken/sugar/js/parse/parseTypeDefinitionString';
@@ -18,7 +25,7 @@ import __upperFirst from '../../string/upperFirst';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function parseTypeDefinitionString(argTypeString) {
+function parseTypeDefinitionString(argTypeString) {
   // split the string by |
   let inDepth = 0;
   let currentPart = '',
@@ -79,3 +86,4 @@ export default function parseTypeDefinitionString(argTypeString) {
 
   return returnArray;
 }
+export = parseTypeDefinitionString;

@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const blessed_1 = __importDefault(require("blessed"));
 const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
@@ -11,25 +11,7 @@ const color_1 = __importDefault(require("../../color/color"));
 const escapeStack_1 = __importDefault(require("../../terminal/escapeStack"));
 const activeSpace_1 = __importDefault(require("../../core/activeSpace"));
 const SPromise_1 = __importDefault(require("../../promise/SPromise"));
-/**
- * @name                  SBlessedPopup
- * @namespace           sugar.node.blessed.popup
- * @type                  Class
- *
- * This class is the base one for all the sugar blessed components like input, panel, etc...
- *
- * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
- * - title (null) {String}: The popup title
- * - description (null) {String}: A description to display in the popup
- * - id (popup) {String}: An id to identify the popup. This id will be appended to the "activeSpace" when the popup is opened
- *
- * @example       js
- * import SBlessedPopup from '@coffeekraken/sugar/node/blessed/popup/SBlessedPopup';
- * const myPopup = new SBlessedPopup();
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SBlessedPopup extends SBlessedComponent_1.default {
+module.exports = class SBlessedPopup extends SBlessedComponent_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -101,18 +83,10 @@ class SBlessedPopup extends SBlessedComponent_1.default {
             }
         }, settings));
         if (this._settings.title) {
-            this.$title = blessed_1.default.box({
-                style: this._settings.style,
-                ...this._settings.$title,
-                content: parseHtml_1.default(this._settings.title)
-            });
+            this.$title = blessed_1.default.box(Object.assign(Object.assign({ style: this._settings.style }, this._settings.$title), { content: parseHtml_1.default(this._settings.title) }));
         }
         if (this._settings.description) {
-            this.$description = blessed_1.default.box({
-                ...this._settings.$description,
-                top: this.$title ? this.$title.height : 0,
-                content: parseHtml_1.default(this._settings.description)
-            });
+            this.$description = blessed_1.default.box(Object.assign(Object.assign({}, this._settings.$description), { top: this.$title ? this.$title.height : 0, content: parseHtml_1.default(this._settings.description) }));
         }
         if (this.$title)
             super.append(this.$title);
@@ -123,15 +97,11 @@ class SBlessedPopup extends SBlessedComponent_1.default {
             contentTop += this.$title.height;
         if (this.$description)
             contentTop += this.$description.height;
-        this.$content = blessed_1.default.box({
-            top: contentTop,
-            style: {
+        this.$content = blessed_1.default.box(Object.assign({ top: contentTop, style: {
                 scrollbar: {
                     bg: this._settings.style.bg || color_1.default('terminal.primary').toString()
                 }
-            },
-            ...(this._settings.$content || {})
-        });
+            } }, (this._settings.$content || {})));
         this.promise = new SPromise_1.default({
             id: this._settings.id
         });
@@ -175,5 +145,4 @@ class SBlessedPopup extends SBlessedComponent_1.default {
         this.left = `50%-${Math.round(this.width / 2)}`;
         super.update();
     }
-}
-exports.default = SBlessedPopup;
+};

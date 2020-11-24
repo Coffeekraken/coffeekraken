@@ -1,14 +1,19 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name              getMethods
  * @namespace           sugar.js.class
  * @type              Function
+ * @stable
  *
  * This function take an instance as parameter and return all the methods in array format
  *
  * @param         {Object}        instance        The instance of the object to get the methods names of
  * @return        {Array}                         A simple array of all the methods names
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import getMethods from '@coffeekraken/sugar/js/class/getMethods';
@@ -20,11 +25,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * const myInstance = new myClass();
  * getMethods(myInstance); // => ['hello','world']
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function getMethods(toCheck) {
-    var props = [];
-    var obj = toCheck;
+    let props = [];
+    let obj = toCheck;
     do {
         const _props = Object.getOwnPropertyNames(obj);
         if (_props.indexOf('__defineGetter__') !== -1)
@@ -36,4 +42,4 @@ function getMethods(toCheck) {
             return true;
     });
 }
-exports.default = getMethods;
+module.exports = getMethods;

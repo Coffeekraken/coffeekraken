@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const uniq_1 = __importDefault(require("lodash/uniq"));
 /**
  * @name        keysFirst
@@ -29,10 +29,11 @@ function keysFirst(array, keys) {
         return array.indexOf(key) !== -1;
     });
     // add the keys at start
-    let res = [].concat(keys).concat(array);
+    const empty = [];
+    let res = empty.concat(keys).concat(array);
     // remove double items
     res = uniq_1.default(res);
     // return the result
     return res;
 }
-exports.default = keysFirst;
+module.exports = keysFirst;

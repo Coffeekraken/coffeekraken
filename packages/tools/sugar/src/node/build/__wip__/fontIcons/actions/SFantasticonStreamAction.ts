@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __SActionsStreamAction = require('../../../stream/SActionsStreamAction');
 const __deepMerge = require('../../../object/deepMerge');
 const __BBuildFontIconsInterface = require('../interface/SBuildFontIconsInterface');

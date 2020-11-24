@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMege from '../object/deepMerge';
 import __map from '../object/map';
 import __handlebars from 'handlebars';
@@ -40,7 +42,7 @@ import __SDocblock from './SDocblock';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-export default class SDocblockBlock {
+export = class SDocblockBlock {
   /**
    * @name            tagsMap
    * @type            Object

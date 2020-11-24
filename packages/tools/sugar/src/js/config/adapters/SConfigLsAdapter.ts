@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __set from '../../object/set';
 import __get from '../../object/get';
 import __toString from '../../string/toString';

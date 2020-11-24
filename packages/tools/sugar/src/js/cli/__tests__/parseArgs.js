@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__parseArgs) => {
     describe('sugar.js.cli.parseArgs', () => {
         it('Should process the passed string correctly', (done) => {

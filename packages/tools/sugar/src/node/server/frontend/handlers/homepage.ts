@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __path from 'path';
 import __fs from 'fs';
 import __packageRoot from '../../../path/packageRoot';
@@ -11,6 +13,7 @@ import STemplate from '../../../template/STemplate';
  * @name                homepage
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
+ * @wip
  *
  * This function is responsible of responding to express requests made on the home page
  *
@@ -18,10 +21,14 @@ import STemplate from '../../../template/STemplate';
  * @param         {Object}          res             The express response object
  * @param         {Object}         [settings={}]    The handler settings
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function homepage(req, res, settings = {}) {
+function homepage(req, res, settings = {}) {
   // search for the view to render
   const packageRoot = __packageRoot();
   const packageJson = __packageJson();
@@ -72,3 +79,4 @@ export default function homepage(req, res, settings = {}) {
     }
   );
 }
+export = homepage;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __getRegisteredProcessed from './getRegisteredProcesses';
 import __clear from 'clear';
@@ -30,7 +32,7 @@ import __SChildProcessManager from '../process/SChildProcess';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 process.env.EXIT_CLEANUP = false;
-export default function exitCleanup() {
+function exitCleanup() {
   if (process.env.EXIT_CLEANUP === true) return;
   process.env.EXIT_CLEANUP = true;
   __hotkey('ctrl+c', {
@@ -122,3 +124,4 @@ export default function exitCleanup() {
       });
   });
 }
+export = exitCleanup;

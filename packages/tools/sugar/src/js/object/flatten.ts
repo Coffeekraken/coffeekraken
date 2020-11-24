@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                              flatten
  * @namespace           sugar.js.object
@@ -26,7 +28,7 @@
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function flatten(
+function flatten(
   object,
   separation = '.',
   flattenArrays = false
@@ -52,3 +54,4 @@ export default function flatten(
   }
   return toReturn;
 }
+export = flatten;

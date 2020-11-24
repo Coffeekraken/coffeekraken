@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      realHeight
  * @namespace           sugar.js.dom
@@ -20,7 +22,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function realHeight(elm) {
+function realHeight(elm) {
   // apply an overflow-y to the element
   elm.style.transition = 'none';
   elm.style.overflowY = 'scroll';
@@ -32,3 +34,4 @@ export default function realHeight(elm) {
   // return the height
   return height;
 }
+export = realHeight;

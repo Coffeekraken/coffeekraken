@@ -1,26 +1,37 @@
-import _SInterface from '../../class/SInterface'
+// @ts-nocheck
+
+/**
+ * @wip
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ */
+
+import _SInterface from '../../class/SInterface';
 
 export = class SNpmBinInterface extends _SInterface {
-
   static definitionObj = {
     action: {
       type: 'String',
       required: true,
       alias: 'a',
-      values: ['install','i','uninstall','u','un'],
-      description: 'Specify which action you want to execute in the "bin" module'
+      values: ['install', 'i', 'uninstall', 'u', 'un'],
+      description:
+        'Specify which action you want to execute in the "bin" module'
     },
     global: {
       type: 'Boolean',
       required: true,
       alias: 'g',
-      description: 'Specify if you want to symlink the passed bin in the global scope or in local one',
+      description:
+        'Specify if you want to symlink the passed bin in the global scope or in local one',
       default: false
     },
     package: {
       type: 'String',
       alias: 'p',
-      description: 'Specify the package you want to install the bin from. If not specified, will take the current package where you\'re in using ```process.cwd``` function',
+      description:
+        "Specify the package you want to install the bin from. If not specified, will take the current package where you're in using ```process.cwd``` function",
       default: null
     },
     bin: {
@@ -30,5 +41,4 @@ export = class SNpmBinInterface extends _SInterface {
       default: null
     }
   };
-
-}
+};

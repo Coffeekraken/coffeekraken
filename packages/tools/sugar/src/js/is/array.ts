@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isArray
  * @namespace           sugar.js.is
@@ -22,6 +24,7 @@
  * @since      1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isArray(value) {
+function isArray(value) {
   return value && typeof value === 'object' && value.constructor === Array;
 }
+export = isArray;

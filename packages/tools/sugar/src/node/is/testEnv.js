@@ -1,17 +1,22 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const env_1 = __importDefault(require("../core/env"));
 /**
  * @name          testEnv
  * @namespace     sugar.js.is
  * @type          Function
+ * @stable
  *
  * Check if the current environment is in a test process or not
  *
  * @return      {Boolean}         true if in environment environment, false if not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import isTest from '@coffeekraken/sugar/js/is/testEnv';
@@ -25,4 +30,4 @@ function isTestEnv() {
         env_1.default('JEST_WORKER_ID') !== undefined ||
         typeof global.it === 'function');
 }
-exports.default = isTestEnv;
+module.exports = isTestEnv;

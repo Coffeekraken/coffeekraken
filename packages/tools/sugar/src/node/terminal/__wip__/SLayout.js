@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 const __terminalKit = require('terminal-kit').terminal;
 const __blessed = require('blessed');
 const __events = require('events');

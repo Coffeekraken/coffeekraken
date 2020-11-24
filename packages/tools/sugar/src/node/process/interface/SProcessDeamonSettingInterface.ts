@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SInterface from '../../class/SInterface';
 
 /**
@@ -12,7 +14,7 @@ import __SInterface from '../../class/SInterface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SProcessDeamonSettingInterface extends __SInterface {
+export = class SProcessDeamonSettingInterface extends __SInterface {
   static definitionObj = {
     class: {
       type: 'Class',

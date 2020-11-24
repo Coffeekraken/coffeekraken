@@ -1,13 +1,14 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 /**
  * @name        on
  * @namespace           sugar.node.event
  * @type          Function
+ * @beta
  *
  * This function allows you to subscribe to global events triggered by the "sugar.node.event.dispatch" function
  * It use under the hood an SPromise instance
@@ -15,6 +16,10 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * @param         {String}        name          The event name you want to subscribe to
  * @param         {Function}      callback      The callback function you want to call
  * @return        {Function}                    Return an "unsubscribe" function callable when you want to stop executing the callback
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import on from '@coffeekraken/sugar/node/event/on';
@@ -38,4 +43,4 @@ function on(name, callback) {
         global._sugarEventSPromise.off(name, callback);
     };
 }
-exports.default = on;
+module.exports = on;

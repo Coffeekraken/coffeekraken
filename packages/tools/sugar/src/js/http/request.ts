@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SRequest from './SRequest';
 
 /**
@@ -36,7 +38,8 @@ import __SRequest from './SRequest';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function request(settings = {}) {
+function request(settings = {}) {
   const request = new __SRequest(settings);
   return request.send();
 }
+export = request;

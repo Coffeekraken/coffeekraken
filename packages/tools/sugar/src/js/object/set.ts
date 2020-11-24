@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __get from './get';
 
 /**
@@ -24,7 +26,7 @@ import __get from './get';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default (obj, path, value) => {
+export = (obj, path, value) => {
   if (!path || path === '' || path === '.') {
     obj = value;
     return;

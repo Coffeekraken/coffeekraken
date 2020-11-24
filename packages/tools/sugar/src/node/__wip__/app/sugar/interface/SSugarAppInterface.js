@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 const __SInterface = require('../../../class/SInterface');
 const __sugarConfig = require('../../../config/sugar');
 /**
@@ -6,9 +7,14 @@ const __sugarConfig = require('../../../config/sugar');
  * @namespace           sugar.node.ui.sugar.interface
  * @type                Class
  * @extends             SInterface
+ * @wip
  *
  * This class represent the interface that describe de arguments supported
  * when using the SSugarCli class
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

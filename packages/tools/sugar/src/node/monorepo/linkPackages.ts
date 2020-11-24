@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import _ensureDirSync from '../fs/ensureDirSync';
 import _path from 'path';
 import _SPromise from '../promise/SPromise';
@@ -10,6 +12,7 @@ import _fs from 'fs';
  * @namespace       sugar.node.monorepo
  * @type            Function
  * @async
+ * @beta
  *
  * This function simply check all the packages available in the monorepo
  * and link then together using symbolic links in each node_modules folders
@@ -19,8 +22,9 @@ import _fs from 'fs';
  *
  * @setting     {String}      [rootDir=process.cwd()]       Specify the root directory from where to start the process
  *
- *
- * @todo        document settings
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import linkPackages from '@coffeekraken/sugar/node/monorepo/linkPackages';
@@ -29,6 +33,15 @@ import _fs from 'fs';
  * @since       2.0.0
  * @author      Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+interface ILinkPackagesResolveRejectFn {
+  (value: any): void;
+}
+interface ILinkPackagesTriggerFn {
+  (stack: string, value: any): any;
+}
+interface ILinkPackagesCancelFn {
+  (value: any): any;
+}
 export = async function linkPackages(settings = {}): Promise<null> {
   settings = {
     rootDir: process.cwd(),
@@ -36,10 +49,10 @@ export = async function linkPackages(settings = {}): Promise<null> {
   };
   return new _SPromise(
     async (
-      resolve: Function,
-      reject: Function,
-      trigger: Function,
-      cancel: Function
+      resolve: ILinkPackagesResolveRejectFn,
+      reject: ILinkPackagesResolveRejectFn,
+      trigger: ILinkPackagesTriggerFn,
+      cancel: ILinkPackagesCancelFn
     ) => {
       // make sure we are in a package
       if (!_fs.existsSync(`${settings.rootDir}/package.json`)) {

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import ISPromise from '../../promise/interface/ISPromise';
 export interface ISProcessOutputSettings {
   something?: string;

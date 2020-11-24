@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 var _a;
 const __SCli = require('../../cli/SCli');
 const __deepMerge = require('../../object/deepMerge');

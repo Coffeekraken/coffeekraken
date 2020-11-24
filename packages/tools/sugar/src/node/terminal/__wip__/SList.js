@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 const __terminalKit = require('terminal-kit').terminal;
 const __cursorPos = require('./cursorPos');
 const __SInputContainer = require('./SInputContainer');

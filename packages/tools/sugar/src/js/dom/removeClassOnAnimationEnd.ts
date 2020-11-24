@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __addEventListenerOnce from './addEventListenerOnce';
 import __SPromise from '../promise/SPromise';
 
@@ -24,7 +26,7 @@ import __SPromise from '../promise/SPromise';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function removeClassOnAnimationEnd($elm, cls) {
+function removeClassOnAnimationEnd($elm, cls) {
   return new __SPromise(
     (resolve, reject, trigger, cancel) => {
       // listen for animation end on the element just once
@@ -43,3 +45,4 @@ export default function removeClassOnAnimationEnd($elm, cls) {
     }
   );
 }
+export = removeClassOnAnimationEnd;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __fs = require('fs');
 const __parse = require('../url/parse');
 const __isClass = require('../is/class');

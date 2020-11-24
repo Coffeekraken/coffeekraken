@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __easing from '../easing/easeInOutQuint';
 import querySelectorLive from './querySelectorLive';
 import urlParse from 'url-parse';
@@ -27,7 +29,7 @@ import scrollTo from './scrollTo';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function autoScrollAnchorLinks(
+function autoScrollAnchorLinks(
   duration = 500,
   offset = 0,
   easing = __easing,
@@ -64,3 +66,4 @@ export default function autoScrollAnchorLinks(
     });
   });
 }
+export = autoScrollAnchorLinks;

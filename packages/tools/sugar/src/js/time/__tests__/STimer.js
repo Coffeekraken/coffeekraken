@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__STimer) => {
     let doneComplete;
     let tickCount = 0;

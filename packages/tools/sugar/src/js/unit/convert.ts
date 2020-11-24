@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __em2px from './em2px';
 import __rem2px from './em2px';
 import __px2em from './px2em';
@@ -7,6 +9,7 @@ import __px2rem from './px2rem';
  * @name                  convert
  * @namespace           sugar.js.unit
  * @type                  Function
+ * @stable
  *
  * Convert a passed unit to the wanted one. If the passed unit is a number and not a string like "10rem", the unit is take as pixels
  *
@@ -14,13 +17,18 @@ import __px2rem from './px2rem';
  * @param         {String}                  [to='px']       The value unit you want back
  * @return        {Number}                                  The converted value
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import convert from '@coffeekraken/sugar/js/unit/convert';
  * convert('2rem', 'px');
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function convert(from, to = 'px', $elm) {
+function convert(from, to = 'px', $elm) {
   let fromUnit = 'px';
   if (typeof from === 'string' && parseFloat(from).toString() !== from) {
     fromUnit = from.replace(/[0-9.,]+/g, '');
@@ -56,3 +64,4 @@ export default function convert(from, to = 'px', $elm) {
       break;
   }
 }
+export = convert;

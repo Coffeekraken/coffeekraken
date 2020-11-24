@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __SInput from '../form/SInput';
 import __SBlessedPopup from './SBlessedPopup';
@@ -8,6 +10,7 @@ import __activeSpace from '../../core/activeSpace';
  * @namespace           sugar.node.blessed.popup
  * @type                  Class
  * @extends               SBlessedPopup
+ * @wip
  *
  * This class represent a simple input in a popup
  *
@@ -15,13 +18,18 @@ import __activeSpace from '../../core/activeSpace';
  * - closeDelay (500) {Number}: The delay before closing the popup when the input has been validated
  * - $input ({}) {Object}: An object of settings passed to the SInput instance constructor
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import SBlessedInputPopup from '@coffeekraken/sugar/node/blessed/popup/SBlessedInputPopup';
  * new SBlessedInputPopup({});
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBlessedInputPopup extends __SBlessedPopup {
+export = class SBlessedInputPopup extends __SBlessedPopup {
   /**
    * @name                  constructor
    * @type                  Function

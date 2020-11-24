@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__toString) => {
     describe('sugar.js.string.toString', () => {
         it('Should process the passed string correctly', done => {

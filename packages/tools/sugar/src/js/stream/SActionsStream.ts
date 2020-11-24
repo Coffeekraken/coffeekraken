@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __clone from '../object/clone';
 import __parseHtml from '../console/parseHtml';
 import __SError from '../error/SError';
@@ -20,6 +22,7 @@ import __isChildProcess from '../is/childProcess';
  * @namespace           sugar.js.stream
  * @type          Class
  * @extends       SPromise
+ * @beta
  *
  * This class represent the base of a actions stream.
  * An action stream if simply some functions that are called one after the other
@@ -40,10 +43,14 @@ import __isChildProcess from '../is/childProcess';
  * - order (null) {Array}: An array of action names that specify the order you want to execute them. If not specified, take the actions object properties order.
  * - actions ({}) {Object}: An object formated like ```{ actionName: settings }``` that contain specific settings for each actions and that will be passed as a second parameter to each actions.
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SActionStream extends __SPromise {
+export = class SActionStream extends __SPromise {
   /**
    * @name            _actionsObj
    * @type            Object
@@ -193,11 +200,11 @@ export default class SActionStream extends __SPromise {
       }
     };
 
-    let processFnArray = !Array.isArray(processFn) ? [processFn] : processFn;
+    const processFnArray = !Array.isArray(processFn) ? [processFn] : processFn;
     const isArray = Array.isArray(streamObjOrArray);
     let streamObjArray = streamObjOrArray;
     if (!isArray) streamObjArray = [streamObjArray];
-    for (let streamObjArrayIdx in streamObjArray) {
+    for (const streamObjArrayIdx in streamObjArray) {
       let streamObj = streamObjArray[streamObjArrayIdx];
       // if (streamObj.$fromCache) return;
 
@@ -232,7 +239,7 @@ export default class SActionStream extends __SPromise {
 
       const processFnArgs = [streamObj, ...settings.processFnArgs];
 
-      for (let processFnArrayIdx in processFnArray) {
+      for (const processFnArrayIdx in processFnArray) {
         const processFn = processFnArray[processFnArrayIdx];
         try {
           let processFnResult = processFn(...processFnArgs);
@@ -547,7 +554,7 @@ export default class SActionStream extends __SPromise {
             ) === -1 &&
             this._settings.logs.start
           ) {
-            let startString = `#start Starting the stream "<cyan>${
+            const startString = `#start Starting the stream "<cyan>${
               settings.name || 'unnamed'
             }</cyan>"`;
             this.log({

@@ -1,7 +1,10 @@
+// @ts-nocheck
+
 /**
  * @name                                  convert
  * @namespace           sugar.js.time
  * @type                                  Function
+ * @stable
  *
  * This function allows you to convert time like seconds, ms, hours, minutes, etc... from one format to another
  *
@@ -9,10 +12,15 @@
  * @param           {String}                    [to='ms']             The format you want to get back
  * @return          {Number}                                          The converted value
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example           js
  * import convert from '@coffeekraken/sugar/js/time/convert';
  * convert('10s', 'ms'); // => 10000
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function convert(from, to = 'ms') {
@@ -128,4 +136,4 @@ convert.DAY = 'd';
 convert.WEEK = 'w';
 convert.MONTH = 'month';
 convert.YEAR = 'y';
-export default convert;
+export = convert;

@@ -1,12 +1,19 @@
+// @ts-nocheck
+
 /**
  * @name            buildInNodeModules
  * @namespace       sugar.node.module
  * @type            Object
+ * @stable
  *
  * This object store the list of built-in node module
  * with a polyfill property for each that point to some
  * polyfill depending on the context wanted. It can be "browser"
  * or some others to come depending on the needs...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example             js
  * import builtInNodeModules from '@coffeekraken/sugar/node/module/builtInNodeModules';
@@ -22,7 +29,7 @@
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default {
+export = {
   assert: {
     polyfill: {
       browser: 'assert'

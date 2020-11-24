@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__replaceTokens) => {
     describe('sugar.js.string.replaceTokens', () => {
         it('Should replace tokens correctly', (done) => {

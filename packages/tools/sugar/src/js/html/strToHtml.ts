@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        strToHtml
  * @namespace           sugar.js.html
@@ -21,7 +23,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function strToHtml(string) {
+function strToHtml(string) {
   if (document !== undefined && document.createElement !== undefined) {
     const cont = document.createElement('div');
     cont.innerHTML = string;
@@ -33,3 +35,4 @@ export default function strToHtml(string) {
   }
   return string;
 }
+export = strToHtml;

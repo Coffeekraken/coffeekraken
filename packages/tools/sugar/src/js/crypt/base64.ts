@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isJson from '../is/json';
 import toString from '../string/toString';
 import parse from '../string/parse';
@@ -16,7 +18,7 @@ import parse from '../string/parse';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default {
+export = {
   /**
    * @name        encrypt
    * @type        Function

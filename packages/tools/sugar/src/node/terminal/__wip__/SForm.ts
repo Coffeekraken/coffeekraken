@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __blessed = require('blessed');
 
 const __cursorPos = require('./cursorPos');

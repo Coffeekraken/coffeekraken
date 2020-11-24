@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const blessed_1 = __importDefault(require("blessed"));
 const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
@@ -10,27 +10,7 @@ const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 const color_1 = __importDefault(require("../../color/color"));
 const escapeStack_1 = __importDefault(require("../../terminal/escapeStack"));
 const activeSpace_1 = __importDefault(require("../../core/activeSpace"));
-/**
- * @name                  SBlessedInput
- * @namespace           sugar.node.blessed.input
- * @type                  Class
- *
- * This class represent a simple input
- *
- * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
- * - escapeKey (false) {Boolean}: Specify if you want to reject the input promise on escape key press
- * - placeholder (null) {String}: Specify a placeholder
- * - width (null) {String|Number}: This is the normal blessed component width parameter but you can specify "auto" if you want the input to adapt his width depending on his content
- *
- * // TODO: document the "promise" and "$input" properties
- *
- * @example       js
- * import SBlessedInput from '@coffeekraken/sugar/node/blessed/form/SBlessedInput';
- * new SBlessedInput({});
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SBlessedInput extends SBlessedComponent_1.default {
+module.exports = class SBlessedInput extends SBlessedComponent_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -156,5 +136,4 @@ class SBlessedInput extends SBlessedComponent_1.default {
         });
         this.append(this.$input);
     }
-}
-exports.default = SBlessedInput;
+};

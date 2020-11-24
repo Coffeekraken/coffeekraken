@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SActionsStreamAction from '../SActionsStreamAction';
 import __glob from 'glob';
 import __clone from '../../object/clone';
@@ -20,6 +22,7 @@ class SGlobResolverStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
+ * @wip
  *
  * This class is a stream action that allows you resolve glob pattern by specifying the streamObj property that
  * is one. It will then return an array of streamObj handled normally by the SActionsStream instance
@@ -27,9 +30,14 @@ class SGlobResolverStreamActionInterface extends __SInterface {
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SGlobResolverStreamAction extends __SActionsStreamAction {
+export = class SGlobResolverStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object

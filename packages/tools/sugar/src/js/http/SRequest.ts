@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __axios from 'axios';
 import __strToHtml from '../html/strToHtml';
 import __htmlToString from '../html/toString';
@@ -40,7 +42,7 @@ import __deepMerge from '../object/deepMerge';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SRequest {
+export = class SRequest {
   /**
    * @name                      _defaultRequestSettings
    * @type                      {SRequestConfig}

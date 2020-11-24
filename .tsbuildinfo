@@ -1,0 +1,2207 @@
+{
+  "program": {
+    "fileInfos": {
+      "../../usr/local/lib/node_modules/typescript/lib/lib.d.ts": {
+        "version": "2dc8c927c9c162a773c6bb3cdc4f3286c23f10eedc67414028f9cb5951610f60",
+        "signature": "2dc8c927c9c162a773c6bb3cdc4f3286c23f10eedc67414028f9cb5951610f60",
+        "affectsGlobalScope": false
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es5.d.ts": {
+        "version": "69f0c334b0ee4235f6219b22f42e4fa04b414535c782b4dda793ed1918cc835c",
+        "signature": "69f0c334b0ee4235f6219b22f42e4fa04b414535c782b4dda793ed1918cc835c",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.d.ts": {
+        "version": "dc47c4fa66b9b9890cf076304de2a9c5201e94b740cffdf09f87296d877d71f6",
+        "signature": "dc47c4fa66b9b9890cf076304de2a9c5201e94b740cffdf09f87296d877d71f6",
+        "affectsGlobalScope": false
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2016.d.ts": {
+        "version": "7a387c58583dfca701b6c85e0adaf43fb17d590fb16d5b2dc0a2fbd89f35c467",
+        "signature": "7a387c58583dfca701b6c85e0adaf43fb17d590fb16d5b2dc0a2fbd89f35c467",
+        "affectsGlobalScope": false
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2017.d.ts": {
+        "version": "8a12173c586e95f4433e0c6dc446bc88346be73ffe9ca6eec7aa63c8f3dca7f9",
+        "signature": "8a12173c586e95f4433e0c6dc446bc88346be73ffe9ca6eec7aa63c8f3dca7f9",
+        "affectsGlobalScope": false
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2018.d.ts": {
+        "version": "5f4e733ced4e129482ae2186aae29fde948ab7182844c3a5a51dd346182c7b06",
+        "signature": "5f4e733ced4e129482ae2186aae29fde948ab7182844c3a5a51dd346182c7b06",
+        "affectsGlobalScope": false
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.dom.d.ts": {
+        "version": "abadddbf660adeec27e9a56584907d52fa1d6e1e1dc49f639a921baa951b7a84",
+        "signature": "abadddbf660adeec27e9a56584907d52fa1d6e1e1dc49f639a921baa951b7a84",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.webworker.importscripts.d.ts": {
+        "version": "7fac8cb5fc820bc2a59ae11ef1c5b38d3832c6d0dfaec5acdb5569137d09a481",
+        "signature": "7fac8cb5fc820bc2a59ae11ef1c5b38d3832c6d0dfaec5acdb5569137d09a481",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.scripthost.d.ts": {
+        "version": "097a57355ded99c68e6df1b738990448e0bf170e606707df5a7c0481ff2427cd",
+        "signature": "097a57355ded99c68e6df1b738990448e0bf170e606707df5a7c0481ff2427cd",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.core.d.ts": {
+        "version": "46ee15e9fefa913333b61eaf6b18885900b139867d89832a515059b62cf16a17",
+        "signature": "46ee15e9fefa913333b61eaf6b18885900b139867d89832a515059b62cf16a17",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts": {
+        "version": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c",
+        "signature": "43fb1d932e4966a39a41b464a12a81899d9ae5f2c829063f5571b6b87e6d2f9c",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.generator.d.ts": {
+        "version": "cdccba9a388c2ee3fd6ad4018c640a471a6c060e96f1232062223063b0a5ac6a",
+        "signature": "cdccba9a388c2ee3fd6ad4018c640a471a6c060e96f1232062223063b0a5ac6a",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.iterable.d.ts": {
+        "version": "8b2a5df1ce95f78f6b74f1a555ccdb6baab0486b42d8345e0871dd82811f9b9a",
+        "signature": "8b2a5df1ce95f78f6b74f1a555ccdb6baab0486b42d8345e0871dd82811f9b9a",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.promise.d.ts": {
+        "version": "2bb4b3927299434052b37851a47bf5c39764f2ba88a888a107b32262e9292b7c",
+        "signature": "2bb4b3927299434052b37851a47bf5c39764f2ba88a888a107b32262e9292b7c",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.proxy.d.ts": {
+        "version": "7207e317a2cb07a177e7d963ab7b8c0e85dde7f9ddb50351f830239bf597569e",
+        "signature": "7207e317a2cb07a177e7d963ab7b8c0e85dde7f9ddb50351f830239bf597569e",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.reflect.d.ts": {
+        "version": "cb609802a8698aa28b9c56331d4b53f590ca3c1c3a255350304ae3d06017779d",
+        "signature": "cb609802a8698aa28b9c56331d4b53f590ca3c1c3a255350304ae3d06017779d",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.symbol.d.ts": {
+        "version": "3013574108c36fd3aaca79764002b3717da09725a36a6fc02eac386593110f93",
+        "signature": "3013574108c36fd3aaca79764002b3717da09725a36a6fc02eac386593110f93",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts": {
+        "version": "9d122b7e8c1a5c72506eea50c0973cba55b92b5532d5cafa8a6ce2c547d57551",
+        "signature": "9d122b7e8c1a5c72506eea50c0973cba55b92b5532d5cafa8a6ce2c547d57551",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2016.array.include.d.ts": {
+        "version": "3be5a1453daa63e031d266bf342f3943603873d890ab8b9ada95e22389389006",
+        "signature": "3be5a1453daa63e031d266bf342f3943603873d890ab8b9ada95e22389389006",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2017.object.d.ts": {
+        "version": "17bb1fc99591b00515502d264fa55dc8370c45c5298f4a5c2083557dccba5a2a",
+        "signature": "17bb1fc99591b00515502d264fa55dc8370c45c5298f4a5c2083557dccba5a2a",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts": {
+        "version": "7ce9f0bde3307ca1f944119f6365f2d776d281a393b576a18a2f2893a2d75c98",
+        "signature": "7ce9f0bde3307ca1f944119f6365f2d776d281a393b576a18a2f2893a2d75c98",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2017.string.d.ts": {
+        "version": "6a6b173e739a6a99629a8594bfb294cc7329bfb7b227f12e1f7c11bc163b8577",
+        "signature": "6a6b173e739a6a99629a8594bfb294cc7329bfb7b227f12e1f7c11bc163b8577",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2017.intl.d.ts": {
+        "version": "12a310447c5d23c7d0d5ca2af606e3bd08afda69100166730ab92c62999ebb9d",
+        "signature": "12a310447c5d23c7d0d5ca2af606e3bd08afda69100166730ab92c62999ebb9d",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2017.typedarrays.d.ts": {
+        "version": "b0124885ef82641903d232172577f2ceb5d3e60aed4da1153bab4221e1f6dd4e",
+        "signature": "b0124885ef82641903d232172577f2ceb5d3e60aed4da1153bab4221e1f6dd4e",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts": {
+        "version": "0eb85d6c590b0d577919a79e0084fa1744c1beba6fd0d4e951432fa1ede5510a",
+        "signature": "0eb85d6c590b0d577919a79e0084fa1744c1beba6fd0d4e951432fa1ede5510a",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2018.asynciterable.d.ts": {
+        "version": "a40c4d82bf13fcded295ac29f354eb7d40249613c15e07b53f2fc75e45e16359",
+        "signature": "a40c4d82bf13fcded295ac29f354eb7d40249613c15e07b53f2fc75e45e16359",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2018.intl.d.ts": {
+        "version": "df9c8a72ca8b0ed62f5470b41208a0587f0f73f0a7db28e5a1272cf92537518e",
+        "signature": "df9c8a72ca8b0ed62f5470b41208a0587f0f73f0a7db28e5a1272cf92537518e",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2018.promise.d.ts": {
+        "version": "bb2d3fb05a1d2ffbca947cc7cbc95d23e1d053d6595391bd325deb265a18d36c",
+        "signature": "bb2d3fb05a1d2ffbca947cc7cbc95d23e1d053d6595391bd325deb265a18d36c",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2018.regexp.d.ts": {
+        "version": "c80df75850fea5caa2afe43b9949338ce4e2de086f91713e9af1a06f973872b8",
+        "signature": "c80df75850fea5caa2afe43b9949338ce4e2de086f91713e9af1a06f973872b8",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2020.bigint.d.ts": {
+        "version": "7b5a10e3c897fabece5a51aa85b4111727d7adb53c2734b5d37230ff96802a09",
+        "signature": "7b5a10e3c897fabece5a51aa85b4111727d7adb53c2734b5d37230ff96802a09",
+        "affectsGlobalScope": true
+      },
+      "../../usr/local/lib/node_modules/typescript/lib/lib.esnext.intl.d.ts": {
+        "version": "89bf2b7a601b73ea4311eda9c41f86a58994fec1bee3b87c4a14d68d9adcdcbd",
+        "signature": "89bf2b7a601b73ea4311eda9c41f86a58994fec1bee3b87c4a14d68d9adcdcbd",
+        "affectsGlobalScope": true
+      },
+      "./packages/tools/sugar/src/node/object/get.ts": {
+        "version": "8d65ad4ec44642f601b978388ccd95d5abeca9afad1609e39554165a52290772",
+        "signature": "020674dfc31fdb3a354ce888efca5a594bb376a7a4392b783a0a271920ad7a2e",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/object/set.ts": {
+        "version": "5ccfd2406bbb3678d840a72622c0db13fc82d21d15b6d3841eea6dc99e6d0f74",
+        "signature": "3cd0c1930a747c1d86c69790919ffc63139b8df0ec5a2ebff0aa0990f0985746",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/object/deepize.ts": {
+        "version": "41ccd5435d5aabe0d06bad835900a76091e68465eb5e69c71599b23bbc1482f0",
+        "signature": "9154197e18c886eba6c44b5b3c053d57bd2d99d0971000cc362a568ef8f72ef4",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/node_modules/is-plain-object/is-plain-object.d.ts": {
+        "version": "9a4c49a0b2bf8536b1f4a72f162f807d7a23aa27a816e9cd24cc965540ba4b35",
+        "signature": "9a4c49a0b2bf8536b1f4a72f162f807d7a23aa27a816e9cd24cc965540ba4b35",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/plainObject.ts": {
+        "version": "72edd35be4ff17bcca77d45c4954bf419871b27e924ca6b01ddc08d82f715dbe",
+        "signature": "32a81ccd613035e5e65d8f03cdcb6f9af35c12bfcb8b1bf30f5eabcb71a1416a",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/array/unique.ts": {
+        "version": "d97c160cd6bf6e8813fc1d0bd62c50dccf5efe8c796bc743ae24d8b3a31ed5f1",
+        "signature": "ebd37e37a03850a5ca49e7dde89bd12eeebf8a6f287174f4613b1823a4a5335b",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/object/deepMerge.ts": {
+        "version": "73d4df5ffca0b9cecae1cbd499fc834a031c3b48271cb6e9c601f257ff845401",
+        "signature": "2b8d6bbd2c595a110c2d378146c08c6ec35c5223693cbafdb2fd79d2b4f55eaf",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/array.ts": {
+        "version": "695e999876f36792266f843c93bb744b4715992395090f57a787e702ceb63ce2",
+        "signature": "bccc5591cdd15ccd71934178ba8767e10ec465b164f7d001bf19c7d4d7fc1ca5",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/boolean.ts": {
+        "version": "98b4474199768b57a18fbfa11df25819bdb27055aeea5a7d3c962c0454c3d559",
+        "signature": "47d0050fb69a6b1a63d8fe0a9bcd37cbc258cbbf5056608e6b0ba3e0b453b31e",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/function.ts": {
+        "version": "d2ca6c6f7a3c39b69387c9bac1084b535538666d7bffb24c99a9753edc60c4ae",
+        "signature": "14c7ce0b86e37377d02812d85df6d188a50eeb0c3926b7bbf6eb92f0ab5784b6",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/json.ts": {
+        "version": "b8f0f401aabe13eaf5639527ccdf397a282c0c33d0d957c696569ce98953cd46",
+        "signature": "342fbce2801ea14fad2295ced6c6539bb4e04cf88b77d3881fee2932c162fa76",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/number.ts": {
+        "version": "19a85f129a578545d07daac8966e82f3f62831ea8aea82045592c221b6d98875",
+        "signature": "560af2c7e0685a9b58fff0bbdf142adab24958e4c8449ef80052c2d4abe79108",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/object.ts": {
+        "version": "ff290c4a38874646a74ffc5714fefd931e4ec4fd43e2f180a6c16efe2b0bf683",
+        "signature": "cfaf8e577c220553031569d11099d6901d007a01ba6bf20fa1a841d180b7443c",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/regexp.ts": {
+        "version": "2f9097b2c2ed1863bc45032f9d316716dbd0f49c3dc9b65e37deabd2d8962213",
+        "signature": "60158365d6931e31a153446fc8db05ded904bfd5d9e80a6c3d527e0cc0492743",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/string.ts": {
+        "version": "c78019df8f5533d5e2599a49552fa4af93e53412f13b1647c593bf7cbf0ec362",
+        "signature": "7dc8a0c86664ac9148b61f374459f44f16978a233dd3431191283ca0cad6ef40",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/string/trimLines.ts": {
+        "version": "23300dc14b372e4516bd6892037b889f608ae1013c7cac79e20b8d981de28979",
+        "signature": "fc0f26758159599a05c576ebfbe4eae91c82c7f06ef5ac2fbfae34009798a7f8",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/path/packageRoot.ts": {
+        "version": "79310736e81cb229c5d206ccab28ccc74459f0431c795b8121f47ecf28744cec",
+        "signature": "048c32b49b7b041cb98c1adbccff659156b4cef70d538038bfedb4f2d7d494e5",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/error/SError.ts": {
+        "version": "b74ef5d10d2ff1f7ac665c543800f62195bccbfb8b636644444eb2903bdd70a4",
+        "signature": "94d00b431eb82a3b8bc7b0f398350a3062c141021e0a6059ac9a68828c1fcc2b",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/json/stringify.ts": {
+        "version": "f88b8c6b2ed23bcd94d14945d320c73b0c10a5f294a0ae048c17ccd8528de281",
+        "signature": "e1033faecec997ecd003b87f5b679ae49d6664545c9e4a24fffc998e202722ce",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/string/toString.ts": {
+        "version": "2a5d541eee777a971f1be5eb51eebd04751aa17b4a65292e55ed87c1de930a7e",
+        "signature": "65c8b0838d9970cfc9a04abf0c2db94e44620a2fd4ad72010789793adf1f5e28",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/node_modules/is-class/index.d.ts": {
+        "version": "d83967be87f57d881c46f4d2b3cdcb7f476b03f68e0cb1d1dfc43da3e7c0c1e7",
+        "signature": "d83967be87f57d881c46f4d2b3cdcb7f476b03f68e0cb1d1dfc43da3e7c0c1e7",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/class.ts": {
+        "version": "6a7e50dbbbc41bf455e1bf91a46b76f057b685d202e256ebc16bc4b3ebcd74fc",
+        "signature": "088fc40901e2e63f405763f2d7bb5dfee6e7ae9f9960ef6eb01b77c8eae093f1",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/object/filter.ts": {
+        "version": "9a7ef4853f8e044dde21a6c81fd97a40adc75aa6890ecac553977cf226078b74",
+        "signature": "cb8816732cdee142ec4466fd17fff561ada95ba27ab16ce250571e18bb853ccc",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/integer.ts": {
+        "version": "0641a93e72b1965ba5e2f89a70b0f642242f95c0dddf47f5b4fe24bedca8ea0a",
+        "signature": "171be4cc3a4b69e8a1e848cdf43cca5521e493f168ffaad9bff1a614c55e3c0c",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/string/upperFirst.ts": {
+        "version": "3a1e2328353371beb0fbe450f720365984ae5f3fc0aee97253b35f5d5d6fd197",
+        "signature": "b51064c8613534acda18afa101830220185abfbd390543414d8bdde23f896438",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/value/typeof.ts": {
+        "version": "efe40838ec1db4bbd4bde07fc84a961c240276f110a9736a3c47f9b852308866",
+        "signature": "2cca463e2c2d39e25168e77c99d7797bffe5ca513f7bea918e775bdb12c44947",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/validation/utils/parseTypeDefinitionString.ts": {
+        "version": "dba6777c93872d191d51caf5b5d30dfdc765778c3dc4f3bfd8782779f1ecaa12",
+        "signature": "d19dbaf439a6396384495a2176b948e14bcc93355ecddaa4c3f9bfa6c2a4232b",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/value/typeDefinitionArrayObjectToString.ts": {
+        "version": "d1eb02e46c08dc9921bbd30ff0d57cd1d1c0b4d6340c168c7d831e6cd2030acc",
+        "signature": "fda6a969e491da391cc1852d8d8c9ae4b1d6973acf1faa1c7929ee9f789eab82",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/class/getExtendsStack.ts": {
+        "version": "771ffa30d162395ad2ce448270757340988caeb8b4d4af6fc41788d9c21b2d30",
+        "signature": "6cc291fdcce0b6b66686027aa25b2ad9d8e7caf7e5000cbfdbf3cde3f6a5e939",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/ofType.ts": {
+        "version": "0184446a6b38c60b9da7824678b3763e120777ee901d01c225c752a08dbd8828",
+        "signature": "3e6259450c00aadc4d98e9a0f32a6197bf688e35554754413110ec3b00edcd25",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/node.ts": {
+        "version": "56db09d432adfb33eeb8a02c25c9de3871a4ade42e3050c8f164196f4475a218",
+        "signature": "b6c65c4adac24be1a305e6b0a74d71b8758c542ab69a5aacb018c420839aca86",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/fs/isPath.ts": {
+        "version": "4fd083588151806b850bc880a97eb35c4fbe0eb54f0fecba6256c68ce56a62f2",
+        "signature": "3c19110595a9c4794aa21ca4b1857c2696847de551b927b16e72b1213a0a4bd5",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/path.ts": {
+        "version": "ac16e15c150d0a26123214f12f5dbe56506376a78e9da193e048fb669514322f",
+        "signature": "d040745b877ab57b5403798c44dee708e346de317a7947db21034bfa3a3c146d",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/validation/value/validation/SRequiredValidation.ts": {
+        "version": "6bd99717c6342062371951d7bf683c922738fd2655d7a44c10c74ff93e4c1484",
+        "signature": "20109991033a1ed78e74b81306436c0f62de04e2f1d912321ed87d39bc3006e6",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/validation/value/validation/SPathValidation.ts": {
+        "version": "9b544c3bd101acb854e0c4aa4040e956fc623629d85d37199241c64d25e3d6e0",
+        "signature": "191189e0f4701af47af6005d72d9422df376cc1f26e58e7f99d498cd6334467b",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/validation/value/validation/STypeValidation.ts": {
+        "version": "97fe497e4367e95e1761455aa9f3cd2d639d5730aa0fe880c08a9f323e156661",
+        "signature": "49232c7d44a9d6b59008e506b34ee53d4ac001571a140f7f0a33b633cea8efac",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/validation/value/validation/SValuesValidation.ts": {
+        "version": "8d41815a60aae4394637dfee5e5e03c8ecc720125a120c3b1f4bdff5e3c4826d",
+        "signature": "e02db06695a849b4fb43cd9808df1e68db70b72b4a185c2f7a5c715a99f4066f",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/validation/value/validateValue.ts": {
+        "version": "472d319f21d4e8be4319fa087352d7123b3132669246e466a48499306e7cbbdf",
+        "signature": "a29cecc4d4bfa30197be5fe15572f43b55128b277b9cabe19cae213fea36f7ed",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/validation/object/validation/SStaticValidation.ts": {
+        "version": "f2a9fd472f82eddca7fd02cbf6df2e19200c8e1f94b63df989940d8971972652",
+        "signature": "4fe091e35db7c40f943f8cadb72df3016dfe53228d0f08cc4c02967bf9e722aa",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/validation/object/validateObject.ts": {
+        "version": "39a638dbe7df0cdc9884cdcf27d601b526750ef72581382365969234a316c4ae",
+        "signature": "eda0b0a2106222f594e41c86be1b6c08b35bad642d250ca43f75fc959eded1b2",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/cli/completeArgsObject.ts": {
+        "version": "eed280ce5821d92de162044a7fe54838c134df10bb762fd8f9d0ff4e55b725a9",
+        "signature": "362cb6baa9cc627b0f550feb05020e408c00f0bda202724f6714e173c372a7be",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/time/convert.ts": {
+        "version": "6d6e582206a66d426381a239a56379b8157dc9413ea2de2e03ad5f04b8c4d5b8",
+        "signature": "d0e07dea2c078e4aecfcdd37bdf1f6f4b8c58357ffebeaa130a89acb732a8704",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/time/wait.ts": {
+        "version": "ae9665c27e238033cc9712cb77dcc6b1276a2c83e307d2a9b5c5db9b56813d0f",
+        "signature": "ba909523a29038d177694e443d79ad5ab6d48f1ed1bc68d7ff7fdd51c3e6a2a8",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/process/onProcessExit.ts": {
+        "version": "a7591b01ad7fb34b06e8377c05e3e42575d4bcb9b70ff49fcca4c5bd48fffd7c",
+        "signature": "21fa3d04e25a155656d0b855f86a521acb9c103e0b82a65f8552f72e93474bf8",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/node_modules/@types/minimatch/index.d.ts": {
+        "version": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633",
+        "signature": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/string/uniqid.ts": {
+        "version": "768f1b3a359a3e052d4a39cf9e266c73caf16c7467fb8a135e02e6bd48417d2a",
+        "signature": "94cd256c2fef3496366c71515255738123aa6981d8f21e82810cd39626911ca1",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/object/delete.ts": {
+        "version": "7a5a6f528b0c4a277bdd2a436c17c454ec401d89cef3d275e38c2b2713f08acb",
+        "signature": "0e8254fb1bb166ac7e2ad6df816ed22cc4a12cf14c71ee407a9a47e1f99e69b9",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/string/parse.ts": {
+        "version": "f3d19ae33773ea451e87535684e4b406c2bba0a58368d8a442d4ec28b55d5b06",
+        "signature": "ab25dfbd08d9dc1236ad3ce055ac432a92e40aa36ab43854194e8b9c85a9c153",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/core/env.ts": {
+        "version": "20b037faf49d62f860180431e765bbc29e8da30db445fa7bb4c642e8893671cb",
+        "signature": "4c72cefbb8f646290b83d9df95320e2b054c4a7e96e4299f056468a8657bfd74",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/promise/SPromise.ts": {
+        "version": "4046fdc38de279bebf55ab5631478c27960c590e49ccc4540c5c8f191afd7a2f",
+        "signature": "dbd74e3593a999a691cc1b322da897fa05fad79e3504eb3f00cbb508aec5b20f",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/object/deepMap.ts": {
+        "version": "1662f3b56841b0ccdf34b0c6f9bcf9d79d78eca642a7cefa0d6b11fc3fc6637c",
+        "signature": "32589cb3395558d30a41cf634ecd01f14e92c4f16e4342c40dfcc1db03007b82",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/string/unquote.ts": {
+        "version": "e76ed8dd405b67f8a2efe900500ca1b66de72ecff4eb44763805ef6277835104",
+        "signature": "9974f5543295c5c7b1b66c261a1c3e6c30f50400912e58deda9f5bbc8c311526",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/cli/parseArgs.ts": {
+        "version": "257231e16fa4a6f95c949d3d15168c95a33dbc469b99204eb9ce04cde9815dbc",
+        "signature": "f35989879593920b349ab0a589ac5da5b7ab3aa6eb9c6dd56e2082c4f62fc7ea",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/cli/argsToObject.ts": {
+        "version": "9ca244736915280171f53a5a56598652dad063ac94d5a0011807ff08f7d1171b",
+        "signature": "a3b0733441a4bf25b62c7acc8778865722984b48cb8a348dddd455b18aced982",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/validation/value/validateValueOutputString.ts": {
+        "version": "98f633b69a912ddd599136f5614084b776322797ec156008fd1f9ec479bb39b6",
+        "signature": "920f000b7b06d9a4e6bf320f0331a39d50ac1ae66d905fa5b20584e20861a896",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/validation/object/validateObjectOutputString.ts": {
+        "version": "e4ec2814429748427a9884575f12aaebe581190ad3ba32a28a01e113b1862021",
+        "signature": "a43c8571367daf2f3ca20a4e1d04958b155f06122e570543a8525e8d45ab7736",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/class/SInterface.ts": {
+        "version": "1955e69c76e140a44f9de7cc1e1bc2e2cde7dc0e67af1708f3a4da3cbb7c95b2",
+        "signature": "010a2feea4074a6243b79ec0c97906332e884180cedb2e1fc37cb98bbe023ccf",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/process/interface/SProcessInterface.ts": {
+        "version": "e430f98da697bb5c305582db7601556faa13ff37851c620409167aabbef6200d",
+        "signature": "ff319074ffb9ed506fa08cf28b5f0681e0e62e5782b25eb5d3ee5b35084d1d52",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/is/childProcess.ts": {
+        "version": "a03fe3122c5ab629a1160e5860b426d77e390aa24a20dd6945aad3685aa464c5",
+        "signature": "cf6fc72b4fe3229b1fb6370175abe9b608a7b045a45e2658797a46e01d209457",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/network/isPortFree.ts": {
+        "version": "f4ea7b004e2574bece0afb73eca5e0361039887853b82c58f8d3b72e1ccc5b22",
+        "signature": "7de9c1e864fb4eed78eff0ff29bc97a8cf59d8a0b5a670fe2e79a077fc1350bc",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/network/getFreePort.ts": {
+        "version": "a38c0f6b120ddfe8ed60dede3e34c1352b90fd57966fed123e541ddc213b7df0",
+        "signature": "0291c6ea28d50afddad1281ba5e6faa5ec14b388ddd8efa96173cc22bb3c5df2",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/ipc/SIpc.ts": {
+        "version": "0cfe85f562cacc0a8dfaebdb94be4ad001a3188213c5fda051ac78fe30c68d57",
+        "signature": "095f0dc7a58c2b11ea7e6d9851257d7b3b1d9c02548a02bf078b7d1499d354e4",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/cli/argsToString.ts": {
+        "version": "eaabfb98b342efa1b4d6d69ddf9603af59f0b94b7198140d14c8aab7f8f439e8",
+        "signature": "95db0f1dc6c757e233599b79b16b7faf1753eb2296520246136beefff70a6385",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/cli/buildCommandLine.ts": {
+        "version": "3550df6a9c1c2c853f87dc5d42529015c72b37d1a013254dc9195f4241ddd282",
+        "signature": "931fe6e54dbce71f1a2cc8a8555c12d2be2e1b66ef7584710d365e304d5af694",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/parseRgba.ts": {
+        "version": "94d7f12e497d41869cf4aad6ca4f3f3130a3e97aa626059baa39a1c5008ab332",
+        "signature": "e2886b8353d5eea5de48a2a1553e374fc0b15f29b5f5a86c582c96152fd1d72a",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/parseHsl.ts": {
+        "version": "b62112cb8b07395cb1600579bdb09abe514b801da09a838b91190f8bbd987297",
+        "signature": "588d72120adeb800ba3c754f16737434057b455d93012ee3fb6e87f65e505313",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/parseHsv.ts": {
+        "version": "f296eaf6286d1b13b684a37dd1a4368f253cf8bb4c55eb8b01e427b8f9180208",
+        "signature": "24d4e6134b1f9e222a2fb17e314a07bbb7964b822e59c9b8006c3c4ab823ba9f",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/rgba2hex.ts": {
+        "version": "b1abf075c49448c2d9fa185acc380e3b349f8fb6dbc7026c1014b9c95f7f71ac",
+        "signature": "35ef28009fc5d502b985c3e34549a0bceeeac0fd00466727e5b80609cfac2500",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/hex2rgba.ts": {
+        "version": "6e3e6f341ab713a8cb776d84a666bc95e67943da75a5089caf441c8b4197dc14",
+        "signature": "7dd1d651a856d9a046f0284803b05936f6dd0eeec9b53ba9f8ea8d65bd898a30",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/hsv2rgba.ts": {
+        "version": "c9e793cfb8e4f17509ba862475c4dbdf3404632dbcb6cee1d7bf3768382e8e42",
+        "signature": "6feaaeb4eb7e1c3d189002c8ec5e100eccf2727f9719b0b3ae5e251d1aabbf6c",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/hsl2rgba.ts": {
+        "version": "adbaddc69163c91407a61936456dcdd811bb353b0900aba1d589c11d3dae66df",
+        "signature": "56325d6e391f2f0fd9dec144e40342c862df72b9fff6830bc87a9f9f02c79e98",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/rgba2hsv.ts": {
+        "version": "59bcaae5920a8074f6e80dba219184dc717703b058405f052f7d7d8f13534d43",
+        "signature": "2ce04c2366f8a0af4e816f1187ff9679713d89c7e83ee856173e71c0ebc50268",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/rgba2hsl.ts": {
+        "version": "7d3a2397c15fda389208c541456d0fdba26530882fb6a8810c26fa809af2e2b4",
+        "signature": "65ac65b8578e2eae3948e76d74d148dacf13ca5aa1defec6973dbbdc2d8669a4",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/parse.ts": {
+        "version": "dd33b757f084a4a958129614acfdbfabaa12879f9ab693cf07d9ae773103d9e7",
+        "signature": "d2edb361945db5cf0c5e2fb1b8d01cf12ca288f82aead28d75a01246c1e41f13",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/convert.ts": {
+        "version": "02169cb93f370f3f9f59f48c71e8f30c50615ae9d956d9c50f2f6cb0772b6f1c",
+        "signature": "bfdebf63f2d369ae04ef948ee1e344e6726b864bcb90704c51e3ef7df584697b",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/SColor.ts": {
+        "version": "9799ef6f5e7e3458a36b330d9876c0433b631f3e324b4b3ce80303b0f034c1d3",
+        "signature": "674f3d74d325800d93812fdc295669cf761c2f9580af9706e017c4b1c9dadbcb",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/color/color.ts": {
+        "version": "c47ee564e25f5bc3e05852f381c1e7dc77a9de4a07d88a4628227fdc789d439f",
+        "signature": "1d5517d134f42ada8840a1745096856ff262042c373350f1a8f95e1b2fe80707",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/keyboard/hotkey.ts": {
+        "version": "654df948fe905c7fa43d7e48d59b1f09ec83eeee32f6400ec90d76d24ead7ed8",
+        "signature": "5af70a0c93ec1aa7ee4fc24124b69cf4f1bed4602e32e835ea18e9c33474b8be",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/node_modules/tree-kill/index.d.ts": {
+        "version": "8323e3f5b91261ed250bd7c6b7aba2aa10f8e1c2ef348297c1f7752a403abebd",
+        "signature": "8323e3f5b91261ed250bd7c6b7aba2aa10f8e1c2ef348297c1f7752a403abebd",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/blessed/SBlessedComponent.ts": {
+        "version": "9db405e6e43855c4665a3cf78243ab059785f8608e7e6e59922cfb3bf7c181d6",
+        "signature": "19f6c807096a73f51736196f970aaa34b33f4f4960c188b781a925c7e2ab3823",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/html/replaceTags.ts": {
+        "version": "82524766bcabebe267920d9d6b6b23d2e1496e1343ff9e72e89e8772719dd520",
+        "signature": "b63793190a35e142a9fddf1b1d1764f772b3ae2056955923233986f7ba30548f",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/object/clone.ts": {
+        "version": "1b605aa0d2722b3238850d8e4cf71e5c360ba9e9e10455db3c468349d4c6ff95",
+        "signature": "298651f662eb422a518592d21a5d9122a786215ad7c30bfc4ae9966aef3301b7",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/object/deepProxy.ts": {
+        "version": "a33c96d7f64e2648d33a0931f82b0da3ac3d2b7bcd8287b1283fe462139d519a",
+        "signature": "3e8c7d247ac428a2300b862ce6ef22e6672e55bc37fb87a97acde210aaa4b859",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/object/resolveTokens.ts": {
+        "version": "eca3478bec04967ef5176ea308fe5d8f48571e6bfe9321163b046242e5cde1a9",
+        "signature": "92b437bf94c392f0f0a26dedba5495b623ffcd942c6112caa3cb7da40fa0f11c",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/config/adapters/SConfigAdapter.ts": {
+        "version": "0d58126b2321f6c7e85f5371635a0dfca2b8fc172caca6fa05c543dec1b55b2e",
+        "signature": "440adbd89c1eca22ad9cdb2fb1552884592707d58638c927cb7d3d1a87dbcd63",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/config/SConfig.ts": {
+        "version": "bc8d140511ef6fd3434c12d7ac8cb07d9e9c4540f5112dd54011c0cd88146834",
+        "signature": "8fba715a1514b23c310ef7c79899eaa1d2f8b72f1a7e2c716b263308536bf569",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/globals.d.ts": {
+        "version": "1332704d6761c94b85753fc3cadc36109f53e5d92fad137ac3de18083febedf3",
+        "signature": "1332704d6761c94b85753fc3cadc36109f53e5d92fad137ac3de18083febedf3",
+        "affectsGlobalScope": true
+      },
+      "./node_modules/@types/node/async_hooks.d.ts": {
+        "version": "c438b413e94ff76dfa20ae005f33a1c84f2480d1d66e0fd687501020d0de9b50",
+        "signature": "c438b413e94ff76dfa20ae005f33a1c84f2480d1d66e0fd687501020d0de9b50",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/buffer.d.ts": {
+        "version": "bc6a78961535181265845bf9b9e8a147ffd0ca275097ceb670a9b92afa825152",
+        "signature": "bc6a78961535181265845bf9b9e8a147ffd0ca275097ceb670a9b92afa825152",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/child_process.d.ts": {
+        "version": "987249e7b75023387c5fd9dc2f959ee777cb8989b7900f5a9eb4a67d290f2cba",
+        "signature": "987249e7b75023387c5fd9dc2f959ee777cb8989b7900f5a9eb4a67d290f2cba",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/cluster.d.ts": {
+        "version": "123ec69e4b3a686eb49afd94ebe3292a5c84a867ecbcb6bb84bdd720a12af803",
+        "signature": "123ec69e4b3a686eb49afd94ebe3292a5c84a867ecbcb6bb84bdd720a12af803",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/console.d.ts": {
+        "version": "eb5197aade83cb0e360ac407289c53a8009e8fdae7939892a0240d30444496b6",
+        "signature": "eb5197aade83cb0e360ac407289c53a8009e8fdae7939892a0240d30444496b6",
+        "affectsGlobalScope": true
+      },
+      "./node_modules/@types/node/constants.d.ts": {
+        "version": "90c85ddbb8de82cd19198bda062065fc51b7407c0f206f2e399e65a52e979720",
+        "signature": "90c85ddbb8de82cd19198bda062065fc51b7407c0f206f2e399e65a52e979720",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/crypto.d.ts": {
+        "version": "c5ecc351d5eaa36dc682b4c398b57a9d37c108857b71a09464a06e0185831ac2",
+        "signature": "c5ecc351d5eaa36dc682b4c398b57a9d37c108857b71a09464a06e0185831ac2",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/dgram.d.ts": {
+        "version": "7e050b767ed10c7ffbc01f314defbf420bf0b5d54ce666e1c87507c035dfc191",
+        "signature": "7e050b767ed10c7ffbc01f314defbf420bf0b5d54ce666e1c87507c035dfc191",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/dns.d.ts": {
+        "version": "7db7569fbb3e2b01ba8751c761cdd3f0debd104170d5665b7dc20a11630df3a9",
+        "signature": "7db7569fbb3e2b01ba8751c761cdd3f0debd104170d5665b7dc20a11630df3a9",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/domain.d.ts": {
+        "version": "cde4d7f6274468180fa39847b183aec22626e8212ff885d535c53f4cd7c225fd",
+        "signature": "cde4d7f6274468180fa39847b183aec22626e8212ff885d535c53f4cd7c225fd",
+        "affectsGlobalScope": true
+      },
+      "./node_modules/@types/node/events.d.ts": {
+        "version": "365e8358843a23944be84b810b1f774ea0223adfccc085f30fd7f4c13dc8a09f",
+        "signature": "365e8358843a23944be84b810b1f774ea0223adfccc085f30fd7f4c13dc8a09f",
+        "affectsGlobalScope": true
+      },
+      "./node_modules/@types/node/fs.d.ts": {
+        "version": "f87f95c015900102a5c0edcdebb17596de1382510e6cc17ab79f375d3505bb12",
+        "signature": "f87f95c015900102a5c0edcdebb17596de1382510e6cc17ab79f375d3505bb12",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/fs/promises.d.ts": {
+        "version": "05b5679a897598ebe556ee93415b3af1f456e674ea82e4d7afcd716bfe43aa98",
+        "signature": "05b5679a897598ebe556ee93415b3af1f456e674ea82e4d7afcd716bfe43aa98",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/http.d.ts": {
+        "version": "35fe02b2c10616cc7ac3db9c15778df7ed9c99276889efdd9be31f342841cfcd",
+        "signature": "35fe02b2c10616cc7ac3db9c15778df7ed9c99276889efdd9be31f342841cfcd",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/http2.d.ts": {
+        "version": "1c3fe66943f587685aa4a42f664f794655da1767401d2f85910177dac78aa45d",
+        "signature": "1c3fe66943f587685aa4a42f664f794655da1767401d2f85910177dac78aa45d",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/https.d.ts": {
+        "version": "c969bf4c7cdfe4d5dd28aa09432f99d09ad1d8d8b839959646579521d0467d1a",
+        "signature": "c969bf4c7cdfe4d5dd28aa09432f99d09ad1d8d8b839959646579521d0467d1a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/inspector.d.ts": {
+        "version": "6c3857edaeeaaf43812f527830ebeece9266b6e8eb5271ab6d2f0008306c9947",
+        "signature": "6c3857edaeeaaf43812f527830ebeece9266b6e8eb5271ab6d2f0008306c9947",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/module.d.ts": {
+        "version": "bc6a77e750f4d34584e46b1405b771fb69a224197dd6bafe5b0392a29a70b665",
+        "signature": "bc6a77e750f4d34584e46b1405b771fb69a224197dd6bafe5b0392a29a70b665",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/net.d.ts": {
+        "version": "8de97668870cfb20fc9d355d2ef379e897bdd8a98c889c7d8a6de40ee408ad52",
+        "signature": "8de97668870cfb20fc9d355d2ef379e897bdd8a98c889c7d8a6de40ee408ad52",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/os.d.ts": {
+        "version": "ed4ae81196cccc10f297d228bca8d02e31058e6d723a3c5bc4be5fb3c61c6a34",
+        "signature": "ed4ae81196cccc10f297d228bca8d02e31058e6d723a3c5bc4be5fb3c61c6a34",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/path.d.ts": {
+        "version": "84044697c8b3e08ef24e4b32cfe6440143d07e469a5e34bda0635276d32d9f35",
+        "signature": "84044697c8b3e08ef24e4b32cfe6440143d07e469a5e34bda0635276d32d9f35",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/perf_hooks.d.ts": {
+        "version": "4982d94cb6427263c8839d8d6324a8bbe129e931deb61a7380f8fad17ba2cfc0",
+        "signature": "4982d94cb6427263c8839d8d6324a8bbe129e931deb61a7380f8fad17ba2cfc0",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/process.d.ts": {
+        "version": "ae4bc1dd4d9de7bbea6ce419db45af82a81358e6014c9e1235b5d252e06f8ab8",
+        "signature": "ae4bc1dd4d9de7bbea6ce419db45af82a81358e6014c9e1235b5d252e06f8ab8",
+        "affectsGlobalScope": true
+      },
+      "./node_modules/@types/node/punycode.d.ts": {
+        "version": "3f6a1fd73c9dc3bd7f4b79bc075297ca6527904df69b0f2c2c94e4c4c7d9a32c",
+        "signature": "3f6a1fd73c9dc3bd7f4b79bc075297ca6527904df69b0f2c2c94e4c4c7d9a32c",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/querystring.d.ts": {
+        "version": "884560fda6c3868f925f022adc3a1289fe6507bbb45adb10fa1bbcc73a941bb0",
+        "signature": "884560fda6c3868f925f022adc3a1289fe6507bbb45adb10fa1bbcc73a941bb0",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/readline.d.ts": {
+        "version": "6b2bb67b0942bcfce93e1d6fad5f70afd54940a2b13df7f311201fba54b2cbe9",
+        "signature": "6b2bb67b0942bcfce93e1d6fad5f70afd54940a2b13df7f311201fba54b2cbe9",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/repl.d.ts": {
+        "version": "acbed967a379b3e9f73237ba9473f8b337eeea14b7dc64d445430b5d695751da",
+        "signature": "acbed967a379b3e9f73237ba9473f8b337eeea14b7dc64d445430b5d695751da",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/stream.d.ts": {
+        "version": "272a46cc8f494677af587d17939e61e7db2b1925633e4da0c186ba17f6732521",
+        "signature": "272a46cc8f494677af587d17939e61e7db2b1925633e4da0c186ba17f6732521",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/string_decoder.d.ts": {
+        "version": "d67e08745494b000da9410c1ae2fdc9965fc6d593fe0f381a47491f75417d457",
+        "signature": "d67e08745494b000da9410c1ae2fdc9965fc6d593fe0f381a47491f75417d457",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/timers.d.ts": {
+        "version": "b40652bf8ce4a18133b31349086523b219724dca8df3448c1a0742528e7ad5b9",
+        "signature": "b40652bf8ce4a18133b31349086523b219724dca8df3448c1a0742528e7ad5b9",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/tls.d.ts": {
+        "version": "a0545ca910ec6b318b8e1d63813c980c3be44824cf217b6477a56fbe9c7927d5",
+        "signature": "a0545ca910ec6b318b8e1d63813c980c3be44824cf217b6477a56fbe9c7927d5",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/trace_events.d.ts": {
+        "version": "a77fdb357c78b70142b2fdbbfb72958d69e8f765fd2a3c69946c1018e89d4638",
+        "signature": "a77fdb357c78b70142b2fdbbfb72958d69e8f765fd2a3c69946c1018e89d4638",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/tty.d.ts": {
+        "version": "3c2ac350c3baa61fd2b1925844109e098f4376d0768a4643abc82754fd752748",
+        "signature": "3c2ac350c3baa61fd2b1925844109e098f4376d0768a4643abc82754fd752748",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/url.d.ts": {
+        "version": "80ffc1786a5dab91b4aa59a72720f02f25df8b7c76b593e04d5e381aec284ccb",
+        "signature": "80ffc1786a5dab91b4aa59a72720f02f25df8b7c76b593e04d5e381aec284ccb",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/util.d.ts": {
+        "version": "5ef157fbb39494a581bd24f21b60488fe248d452c479738b5e41b48720ea69b8",
+        "signature": "5ef157fbb39494a581bd24f21b60488fe248d452c479738b5e41b48720ea69b8",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/v8.d.ts": {
+        "version": "289be113bad7ee27ee7fa5b1e373c964c9789a5e9ed7db5ddcb631371120b953",
+        "signature": "289be113bad7ee27ee7fa5b1e373c964c9789a5e9ed7db5ddcb631371120b953",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/vm.d.ts": {
+        "version": "baf0b82ffc5d2616f44a6fb1f81e8d798545bebf0c30f5d8b003a1dba1acfb3f",
+        "signature": "baf0b82ffc5d2616f44a6fb1f81e8d798545bebf0c30f5d8b003a1dba1acfb3f",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/worker_threads.d.ts": {
+        "version": "c6a5b34f1e725019445754f1e733585f113e0dced75f137bd3c4af5853d3f6ab",
+        "signature": "c6a5b34f1e725019445754f1e733585f113e0dced75f137bd3c4af5853d3f6ab",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/zlib.d.ts": {
+        "version": "15fbe50526244954eb2f933546bca6cdcf0db16c9428d099b3b386c1db5799ab",
+        "signature": "15fbe50526244954eb2f933546bca6cdcf0db16c9428d099b3b386c1db5799ab",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/ts3.4/base.d.ts": {
+        "version": "d44028ae0127eb3e9fcfa5f55a8b81d64775ce15aca1020fe25c511bbb055834",
+        "signature": "d44028ae0127eb3e9fcfa5f55a8b81d64775ce15aca1020fe25c511bbb055834",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/globals.global.d.ts": {
+        "version": "2708349d5a11a5c2e5f3a0765259ebe7ee00cdcc8161cb9990cb4910328442a1",
+        "signature": "2708349d5a11a5c2e5f3a0765259ebe7ee00cdcc8161cb9990cb4910328442a1",
+        "affectsGlobalScope": true
+      },
+      "./node_modules/@types/node/wasi.d.ts": {
+        "version": "4e0a4d84b15692ea8669fe4f3d05a4f204567906b1347da7a58b75f45bae48d3",
+        "signature": "4e0a4d84b15692ea8669fe4f3d05a4f204567906b1347da7a58b75f45bae48d3",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/ts3.6/base.d.ts": {
+        "version": "ad1ae5ae98eceb9af99061e83e867b9897d267aebc8f3b938c9424deabadf4bb",
+        "signature": "ad1ae5ae98eceb9af99061e83e867b9897d267aebc8f3b938c9424deabadf4bb",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/assert.d.ts": {
+        "version": "00a0faaea871db3288a11ce92bbed248ea2473a5bfd174d222011cde800ce397",
+        "signature": "00a0faaea871db3288a11ce92bbed248ea2473a5bfd174d222011cde800ce397",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/base.d.ts": {
+        "version": "e61a21e9418f279bc480394a94d1581b2dee73747adcbdef999b6737e34d721b",
+        "signature": "e61a21e9418f279bc480394a94d1581b2dee73747adcbdef999b6737e34d721b",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node/index.d.ts": {
+        "version": "5825520e2099309182c6e2a2b3061b060d42a098c58f67d1754880a7e2cce99a",
+        "signature": "5825520e2099309182c6e2a2b3061b060d42a098c58f67d1754880a7e2cce99a",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/node_modules/@types/fs-extra/index.d.ts": {
+        "version": "5171627120eeb3a7e8afb8ed04ea9be7f0b53ba09bb1fc95172483e0fbb0740c",
+        "signature": "5171627120eeb3a7e8afb8ed04ea9be7f0b53ba09bb1fc95172483e0fbb0740c",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/fs/writeFileSync.ts": {
+        "version": "0cee112a839a7fde6606e45d028dd2de445aadfd5c075b12aaf0f7e50d560fc6",
+        "signature": "3d788b57dbdbd3eb5ca76b0a046d7780a7bae353f1e760cc225db37025b6ca6b",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/object/diff.ts": {
+        "version": "ab35f65d42e4d35d1d401c03ac8d500ae1f0cfad32ca5f444624ccf062ce6df2",
+        "signature": "0267df4654a4e52114d88833cbf32a6519e7e66c97c303cdeefaba6fa80e7a65",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/config/adapters/SConfigFolderAdapter.ts": {
+        "version": "9aae50bf3d741f7c0bcdb1d1ea52819fc2d2ee20824b5e1153cb0fc55b111f79",
+        "signature": "0f416de0dcdb947bb2d1eb20fc34b6c9ecb4f88a7814b40eb8724caac8107950",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/config/sugar.ts": {
+        "version": "74004521fed333381305d54cd4962ad0297ac64e999755e0bc4cb21b3c995d67",
+        "signature": "9fdca9d89797ee7225b26237b52fcf96d1ac4b0397e8eb2cfe6347c2f5cbf2c7",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/node_modules/chalk/index.d.ts": {
+        "version": "0d14fa22c41fdc7277e6f71473b20ebc07f40f00e38875142335d5b63cdfc9d2",
+        "signature": "0d14fa22c41fdc7277e6f71473b20ebc07f40f00e38875142335d5b63cdfc9d2",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/terminal/parseHtml.ts": {
+        "version": "7d2c32d7538c521366f117a507af964179516149932b1bd517d8a493e42f9f85",
+        "signature": "b74d06ea83c127222a6a4a76b30a17d634626969cfe490670c01efc9a7fc7832",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/terminal/parseMarkdown.ts": {
+        "version": "3336e9b1ac3a1078d1a0432dae39193e731608168122d89fb58242fe0be3b434",
+        "signature": "a2e0ed795d36dfe2df06ea0723a5d540c62a95bc8c562d85473dad224b972f07",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/node_modules/strip-ansi/index.d.ts": {
+        "version": "4b0f7f88fc46a672cb59eeb2782af271c203600d602f57a717ef07f96092caf8",
+        "signature": "4b0f7f88fc46a672cb59eeb2782af271c203600d602f57a717ef07f96092caf8",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/object/extractValues.ts": {
+        "version": "43b59700c0e2c25820d7ef1bf7c2a2208d4d48c257f7129bda031afda68ca0a8",
+        "signature": "a1ea1b161b90858261c3611d7d68571b7d0ae552c7c8d750422da1586674b6c7",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/blessed/interface/SOutputLogInterface.ts": {
+        "version": "9c9f3f5cd5cc2a782ec20aaeb612fb6a6f5fdaf8a52b702f0eb51cdc3153e9eb",
+        "signature": "15b3609a1733aac7fac116af2e5cbb8a55fcd9fadbb9def7e84a20c1ba9a9429",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/blessed/interface/SOutputSourceInterface.ts": {
+        "version": "77428794330183b737bfd4307d175b5987b95c1e482e1e6775471c9ec87a5179",
+        "signature": "449f107ad871902347b35e817149653ed77295f3b8d1cff1030db77c56dcae6f",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/blessed/SBlessedOutput.ts": {
+        "version": "4c759e24528f20ca41d568586213310dce13361c4c8fe5545ccb040d17501ab7",
+        "signature": "5741a628d449ecf8124a97618d4960a1299eca2cacd09aade43d1a756e777557",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/process/output.ts": {
+        "version": "b81f305d582f0a520304514cd9dc17d2bad7f1669ced4af3f92a611dabde2a03",
+        "signature": "94d9eb816ae3ade9197b143fed0c822f1a1130d0bf39b6aa2c9f41a48d36ca35",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/node_modules/clipboardy/index.d.ts": {
+        "version": "45335b5a58b3252030108af7ff3654402c3fd8317417d11c6993207d6dbebd6f",
+        "signature": "45335b5a58b3252030108af7ff3654402c3fd8317417d11c6993207d6dbebd6f",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/clipboard/copy.ts": {
+        "version": "f1afcd848f9d71d667b47232f5294ff596442b946d10d1c5cc4f5c8296bbe2d0",
+        "signature": "48acbc99ae91a60a075ee6c544695feb7d62d2883b0b4b33272a98375d972198",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/process/SProcess.ts": {
+        "version": "a1cc07bd17aa2e720166534d49ffa7fbc61d17cda9da8b02d0ba4300ea9a46cd",
+        "signature": "9ff2c758ec39dd67d4c3d8a384e95c96bd6cac1047521b0b6f44e0f05c888249",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/log/interface/ISLog.ts": {
+        "version": "07c9e16aef74b8941af8cfb735d9b997032210aa10d10a2b81227dacf55c9952",
+        "signature": "fd3d29e2496d89e149f24aab6aa651c74bbd962c72c0a11b273277cd62d3cc23",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/promise/interface/ISPromise.ts": {
+        "version": "4ae05cffdf57ef194ea2b30bb384974736730dd4d81303cbf94d32cf2f342568",
+        "signature": "e88660d1b6079e30831e34150238a5d9e28c7641cb7889a99c44696ec2892544",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/process/interface/ISProcessOutput.ts": {
+        "version": "7c53a053e248cd6d243065bf2d2978176d65797df49e6cc5a2b3260114437888",
+        "signature": "9275e3c0daccd9ab1f9b0e95b6748ce8f06aa48d4067252960e065fdc2ca6416",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/process/interface/ISProcess.ts": {
+        "version": "e7aa88d865b1b817adf54dfc0dc935d9fcbf04b07735523d2f6c26e86578a6a9",
+        "signature": "6c0be4b46587f19b91611d8bfb5a31c9e2c10408dd5c949853ef7b12e763c3b8",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/typescript/interface/ISCompileTsProcess.ts": {
+        "version": "e48c4c126e83e2963cfea13c28c870d729b501e486f26c557d7a3feff09462e9",
+        "signature": "6ce60a80dcfc35fe37a8896b9ac7506e58ac80284bfdaf1f95651b48f30f6e58",
+        "affectsGlobalScope": false
+      },
+      "./packages/tools/sugar/src/node/typescript/SCompileTsProcess.ts": {
+        "version": "d72fd8573ef1a9762b4ea9a0582d50fbe2decf923534733b5dbf2a3a70718da2",
+        "signature": "a35c72c3793a9b4eb3f2e7f24c42894a6ee67a3318749a3a5087ecfddd0227b4",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@babel/types/lib/index-ts3.7.d.ts": {
+        "version": "e77c996592700733c33bd5e342896226ab32898c085b86dc8512128a9cd114e8",
+        "signature": "e77c996592700733c33bd5e342896226ab32898c085b86dc8512128a9cd114e8",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/babel__generator/index.d.ts": {
+        "version": "b25c5f2970d06c729f464c0aeaa64b1a5b5f1355aa93554bb5f9c199b8624b1e",
+        "signature": "b25c5f2970d06c729f464c0aeaa64b1a5b5f1355aa93554bb5f9c199b8624b1e",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/babel__traverse/index.d.ts": {
+        "version": "ef91066d2057cca50511e3af2d4aa54e07913a15f9cee1748f256139318eb413",
+        "signature": "ef91066d2057cca50511e3af2d4aa54e07913a15f9cee1748f256139318eb413",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@babel/parser/typings/babel-parser.d.ts": {
+        "version": "b1401d1d9117a5e4d981c965e3408dcb6e2b63022b716816e6d83599ab369a53",
+        "signature": "b1401d1d9117a5e4d981c965e3408dcb6e2b63022b716816e6d83599ab369a53",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/babel__template/index.d.ts": {
+        "version": "3051751533eee92572241b3cef28333212401408c4e7aa21718714b793c0f4ed",
+        "signature": "3051751533eee92572241b3cef28333212401408c4e7aa21718714b793c0f4ed",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/babel__core/index.d.ts": {
+        "version": "a66e700ed470a0cb52d14f3376c1605c70fec8e9659e45f7e22ad07fcd06ae04",
+        "signature": "a66e700ed470a0cb52d14f3376c1605c70fec8e9659e45f7e22ad07fcd06ae04",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/fetch-mock/index.d.ts": {
+        "version": "b65292a7c79606039264a325efb13a0278b6b95f33bb41a4cbc4f37b0368b26b",
+        "signature": "b65292a7c79606039264a325efb13a0278b6b95f33bb41a4cbc4f37b0368b26b",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/minimatch/index.d.ts": {
+        "version": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633",
+        "signature": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/glob/index.d.ts": {
+        "version": "393137c76bd922ba70a2f8bf1ade4f59a16171a02fb25918c168d48875b0cfb0",
+        "signature": "393137c76bd922ba70a2f8bf1ade4f59a16171a02fb25918c168d48875b0cfb0",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/graceful-fs/index.d.ts": {
+        "version": "cb6cf0480ee1aa9f706db1f6f5add596a1aa10e8c4beb1817f2318384ba684dc",
+        "signature": "cb6cf0480ee1aa9f706db1f6f5add596a1aa10e8c4beb1817f2318384ba684dc",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/istanbul-lib-coverage/index.d.ts": {
+        "version": "de18acda71730bac52f4b256ce7511bb56cc21f6f114c59c46782eff2f632857",
+        "signature": "de18acda71730bac52f4b256ce7511bb56cc21f6f114c59c46782eff2f632857",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/istanbul-lib-report/index.d.ts": {
+        "version": "7eb06594824ada538b1d8b48c3925a83e7db792f47a081a62cf3e5c4e23cf0ee",
+        "signature": "7eb06594824ada538b1d8b48c3925a83e7db792f47a081a62cf3e5c4e23cf0ee",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/istanbul-reports/index.d.ts": {
+        "version": "905c3e8f7ddaa6c391b60c05b2f4c3931d7127ad717a080359db3df510b7bdab",
+        "signature": "905c3e8f7ddaa6c391b60c05b2f4c3931d7127ad717a080359db3df510b7bdab",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/jest-diff/build/cleanupSemantic.d.ts": {
+        "version": "d8aab31ba8e618cc3eea10b0945de81cb93b7e8150a013a482332263b9305322",
+        "signature": "d8aab31ba8e618cc3eea10b0945de81cb93b7e8150a013a482332263b9305322",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/jest-diff/build/types.d.ts": {
+        "version": "69da61a7b5093dac77fa3bec8be95dcf9a74c95a0e9161edb98bb24e30e439d2",
+        "signature": "69da61a7b5093dac77fa3bec8be95dcf9a74c95a0e9161edb98bb24e30e439d2",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/jest-diff/build/diffLines.d.ts": {
+        "version": "561eca7a381b96d6ccac6e4061e6d2ae53f5bc44203f3fd9f5b26864c32ae6e9",
+        "signature": "561eca7a381b96d6ccac6e4061e6d2ae53f5bc44203f3fd9f5b26864c32ae6e9",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/jest-diff/build/printDiffs.d.ts": {
+        "version": "62ea38627e3ebab429f7616812a9394d327c2bc271003dfba985de9b4137369f",
+        "signature": "62ea38627e3ebab429f7616812a9394d327c2bc271003dfba985de9b4137369f",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/jest-diff/build/index.d.ts": {
+        "version": "b4439890c168d646357928431100daac5cbdee1d345a34e6bf6eca9f3abe22bc",
+        "signature": "b4439890c168d646357928431100daac5cbdee1d345a34e6bf6eca9f3abe22bc",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/pretty-format/build/types.d.ts": {
+        "version": "5d72971a459517c44c1379dab9ed248e87a61ba0a1e0f25c9d67e1e640cd9a09",
+        "signature": "5d72971a459517c44c1379dab9ed248e87a61ba0a1e0f25c9d67e1e640cd9a09",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/pretty-format/build/index.d.ts": {
+        "version": "02d734976af36f4273d930bea88b3e62adf6b078cf120c1c63d49aa8d8427c5c",
+        "signature": "02d734976af36f4273d930bea88b3e62adf6b078cf120c1c63d49aa8d8427c5c",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/jest/index.d.ts": {
+        "version": "480dcf599750efc664ba6edba1ed91fb5761ef5ae0e45e475b69a994e312db73",
+        "signature": "480dcf599750efc664ba6edba1ed91fb5761ef5ae0e45e475b69a994e312db73",
+        "affectsGlobalScope": true
+      },
+      "./node_modules/@types/json-schema/index.d.ts": {
+        "version": "b2be568d8ce95fcb26eebd04c035d94825655fdf689bf67d799f5ff8cbbb1024",
+        "signature": "b2be568d8ce95fcb26eebd04c035d94825655fdf689bf67d799f5ff8cbbb1024",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/json5/index.d.ts": {
+        "version": "96d14f21b7652903852eef49379d04dbda28c16ed36468f8c9fa08f7c14c9538",
+        "signature": "96d14f21b7652903852eef49379d04dbda28c16ed36468f8c9fa08f7c14c9538",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/lolex/index.d.ts": {
+        "version": "c98467bd1996079c022df4bfbbc8817b8d1f43d4d4dc010934966ec670bda582",
+        "signature": "c98467bd1996079c022df4bfbbc8817b8d1f43d4d4dc010934966ec670bda582",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/mime-types/index.d.ts": {
+        "version": "f17dd220e27f33e3f1c5bb6f00999420520a6dd1e7f71ee66c11cfc1c2990f20",
+        "signature": "f17dd220e27f33e3f1c5bb6f00999420520a6dd1e7f71ee66c11cfc1c2990f20",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/normalize-package-data/index.d.ts": {
+        "version": "c9ad058b2cc9ce6dc2ed92960d6d009e8c04bef46d3f5312283debca6869f613",
+        "signature": "c9ad058b2cc9ce6dc2ed92960d6d009e8c04bef46d3f5312283debca6869f613",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/prettier/index.d.ts": {
+        "version": "29651525db5579157e617c77e869af8bfdc1130f5d811c1f759ad35b7bafc8ef",
+        "signature": "29651525db5579157e617c77e869af8bfdc1130f5d811c1f759ad35b7bafc8ef",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/stack-utils/index.d.ts": {
+        "version": "41422586881bcd739b4e62d9b91cd29909f8572aa3e3cdf316b7c50f14708d49",
+        "signature": "41422586881bcd739b4e62d9b91cd29909f8572aa3e3cdf316b7c50f14708d49",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/testing-library__jest-dom/index.d.ts": {
+        "version": "d196da9c61a0bec85db6f6ee9b1f46781d25e0627b1d2bedcaeea8ebb1749559",
+        "signature": "d196da9c61a0bec85db6f6ee9b1f46781d25e0627b1d2bedcaeea8ebb1749559",
+        "affectsGlobalScope": true
+      },
+      "./node_modules/@types/yargs-parser/index.d.ts": {
+        "version": "fdfbe321c556c39a2ecf791d537b999591d0849e971dd938d88f460fea0186f6",
+        "signature": "fdfbe321c556c39a2ecf791d537b999591d0849e971dd938d88f460fea0186f6",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/yargs/index.d.ts": {
+        "version": "05f62e0850c9912b5bb8004ce7e238497a095a7c016693842195302a92a8c51f",
+        "signature": "05f62e0850c9912b5bb8004ce7e238497a095a7c016693842195302a92a8c51f",
+        "affectsGlobalScope": false
+      }
+    },
+    "options": {
+      "incremental": true,
+      "tsBuildInfoFile": "./.tsbuildinfo"
+    },
+    "referencedMap": {
+      "./node_modules/@babel/parser/typings/babel-parser.d.ts": [
+        "./node_modules/@babel/types/lib/index-ts3.7.d.ts"
+      ],
+      "./node_modules/@types/babel__core/index.d.ts": [
+        "./node_modules/@babel/parser/typings/babel-parser.d.ts",
+        "./node_modules/@babel/types/lib/index-ts3.7.d.ts",
+        "./node_modules/@types/babel__generator/index.d.ts",
+        "./node_modules/@types/babel__template/index.d.ts",
+        "./node_modules/@types/babel__traverse/index.d.ts"
+      ],
+      "./node_modules/@types/babel__generator/index.d.ts": [
+        "./node_modules/@babel/types/lib/index-ts3.7.d.ts"
+      ],
+      "./node_modules/@types/babel__template/index.d.ts": [
+        "./node_modules/@babel/parser/typings/babel-parser.d.ts",
+        "./node_modules/@babel/types/lib/index-ts3.7.d.ts"
+      ],
+      "./node_modules/@types/babel__traverse/index.d.ts": [
+        "./node_modules/@babel/types/lib/index-ts3.7.d.ts"
+      ],
+      "./node_modules/@types/glob/index.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/index.d.ts",
+        "./packages/tools/sugar/node_modules/@types/minimatch/index.d.ts"
+      ],
+      "./node_modules/@types/graceful-fs/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/index.d.ts"
+      ],
+      "./node_modules/@types/istanbul-lib-report/index.d.ts": [
+        "./node_modules/@types/istanbul-lib-coverage/index.d.ts"
+      ],
+      "./node_modules/@types/istanbul-reports/index.d.ts": [
+        "./node_modules/@types/istanbul-lib-report/index.d.ts"
+      ],
+      "./node_modules/@types/jest/index.d.ts": [
+        "./node_modules/jest-diff/build/index.d.ts",
+        "./node_modules/pretty-format/build/index.d.ts"
+      ],
+      "./node_modules/@types/node/base.d.ts": [
+        "./node_modules/@types/node/assert.d.ts",
+        "./node_modules/@types/node/ts3.6/base.d.ts"
+      ],
+      "./node_modules/@types/node/child_process.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/node/cluster.d.ts": [
+        "./node_modules/@types/node/child_process.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/net.d.ts"
+      ],
+      "./node_modules/@types/node/console.d.ts": [
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/node/constants.d.ts": [
+        "./node_modules/@types/node/crypto.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/os.d.ts"
+      ],
+      "./node_modules/@types/node/crypto.d.ts": [
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/node/dgram.d.ts": [
+        "./node_modules/@types/node/dns.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/net.d.ts"
+      ],
+      "./node_modules/@types/node/domain.d.ts": [
+        "./node_modules/@types/node/events.d.ts"
+      ],
+      "./node_modules/@types/node/fs.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs/promises.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/url.d.ts"
+      ],
+      "./node_modules/@types/node/fs/promises.d.ts": [
+        "./node_modules/@types/node/fs.d.ts"
+      ],
+      "./node_modules/@types/node/http.d.ts": [
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/url.d.ts"
+      ],
+      "./node_modules/@types/node/http2.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/tls.d.ts",
+        "./node_modules/@types/node/url.d.ts"
+      ],
+      "./node_modules/@types/node/https.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/tls.d.ts",
+        "./node_modules/@types/node/url.d.ts"
+      ],
+      "./node_modules/@types/node/index.d.ts": [
+        "./node_modules/@types/node/base.d.ts"
+      ],
+      "./node_modules/@types/node/inspector.d.ts": [
+        "./node_modules/@types/node/events.d.ts"
+      ],
+      "./node_modules/@types/node/module.d.ts": [
+        "./node_modules/@types/node/url.d.ts"
+      ],
+      "./node_modules/@types/node/net.d.ts": [
+        "./node_modules/@types/node/dns.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/node/perf_hooks.d.ts": [
+        "./node_modules/@types/node/async_hooks.d.ts"
+      ],
+      "./node_modules/@types/node/process.d.ts": [
+        "./node_modules/@types/node/tty.d.ts"
+      ],
+      "./node_modules/@types/node/readline.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/node/repl.d.ts": [
+        "./node_modules/@types/node/readline.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/vm.d.ts"
+      ],
+      "./node_modules/@types/node/stream.d.ts": [
+        "./node_modules/@types/node/events.d.ts"
+      ],
+      "./node_modules/@types/node/tls.d.ts": [
+        "./node_modules/@types/node/crypto.d.ts",
+        "./node_modules/@types/node/dns.d.ts",
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/node/ts3.4/base.d.ts": [
+        "./node_modules/@types/node/async_hooks.d.ts",
+        "./node_modules/@types/node/buffer.d.ts",
+        "./node_modules/@types/node/child_process.d.ts",
+        "./node_modules/@types/node/cluster.d.ts",
+        "./node_modules/@types/node/console.d.ts",
+        "./node_modules/@types/node/constants.d.ts",
+        "./node_modules/@types/node/crypto.d.ts",
+        "./node_modules/@types/node/dgram.d.ts",
+        "./node_modules/@types/node/dns.d.ts",
+        "./node_modules/@types/node/domain.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/fs/promises.d.ts",
+        "./node_modules/@types/node/globals.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/http2.d.ts",
+        "./node_modules/@types/node/https.d.ts",
+        "./node_modules/@types/node/inspector.d.ts",
+        "./node_modules/@types/node/module.d.ts",
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/os.d.ts",
+        "./node_modules/@types/node/path.d.ts",
+        "./node_modules/@types/node/perf_hooks.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/punycode.d.ts",
+        "./node_modules/@types/node/querystring.d.ts",
+        "./node_modules/@types/node/readline.d.ts",
+        "./node_modules/@types/node/repl.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/string_decoder.d.ts",
+        "./node_modules/@types/node/timers.d.ts",
+        "./node_modules/@types/node/tls.d.ts",
+        "./node_modules/@types/node/trace_events.d.ts",
+        "./node_modules/@types/node/tty.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/v8.d.ts",
+        "./node_modules/@types/node/vm.d.ts",
+        "./node_modules/@types/node/worker_threads.d.ts",
+        "./node_modules/@types/node/zlib.d.ts"
+      ],
+      "./node_modules/@types/node/ts3.6/base.d.ts": [
+        "./node_modules/@types/node/globals.global.d.ts",
+        "./node_modules/@types/node/ts3.4/base.d.ts",
+        "./node_modules/@types/node/wasi.d.ts"
+      ],
+      "./node_modules/@types/node/tty.d.ts": [
+        "./node_modules/@types/node/net.d.ts"
+      ],
+      "./node_modules/@types/node/url.d.ts": [
+        "./node_modules/@types/node/querystring.d.ts"
+      ],
+      "./node_modules/@types/node/v8.d.ts": [
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/node/worker_threads.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs/promises.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/node/vm.d.ts"
+      ],
+      "./node_modules/@types/node/zlib.d.ts": [
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/testing-library__jest-dom/index.d.ts": [
+        "./node_modules/@types/jest/index.d.ts"
+      ],
+      "./node_modules/@types/yargs/index.d.ts": [
+        "./node_modules/@types/yargs-parser/index.d.ts"
+      ],
+      "./node_modules/jest-diff/build/diffLines.d.ts": [
+        "./node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "./node_modules/jest-diff/build/types.d.ts"
+      ],
+      "./node_modules/jest-diff/build/index.d.ts": [
+        "./node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "./node_modules/jest-diff/build/diffLines.d.ts",
+        "./node_modules/jest-diff/build/printDiffs.d.ts",
+        "./node_modules/jest-diff/build/types.d.ts"
+      ],
+      "./node_modules/jest-diff/build/printDiffs.d.ts": [
+        "./node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "./node_modules/jest-diff/build/types.d.ts"
+      ],
+      "./node_modules/pretty-format/build/index.d.ts": [
+        "./node_modules/pretty-format/build/types.d.ts"
+      ],
+      "./packages/tools/sugar/node_modules/@types/fs-extra/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/index.d.ts"
+      ],
+      "./packages/tools/sugar/src/node/blessed/SBlessedComponent.ts": [
+        "./packages/tools/sugar/node_modules/tree-kill/index.d.ts",
+        "./packages/tools/sugar/src/node/color/color.ts",
+        "./packages/tools/sugar/src/node/is/childProcess.ts",
+        "./packages/tools/sugar/src/node/keyboard/hotkey.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/process/onProcessExit.ts",
+        "./packages/tools/sugar/src/node/string/parse.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts"
+      ],
+      "./packages/tools/sugar/src/node/blessed/SBlessedOutput.ts": [
+        "./packages/tools/sugar/node_modules/strip-ansi/index.d.ts",
+        "./packages/tools/sugar/src/node/blessed/SBlessedComponent.ts",
+        "./packages/tools/sugar/src/node/blessed/interface/SOutputLogInterface.ts",
+        "./packages/tools/sugar/src/node/blessed/interface/SOutputSourceInterface.ts",
+        "./packages/tools/sugar/src/node/color/color.ts",
+        "./packages/tools/sugar/src/node/is/childProcess.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/object/extractValues.ts",
+        "./packages/tools/sugar/src/node/path/packageRoot.ts",
+        "./packages/tools/sugar/src/node/string/parse.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts",
+        "./packages/tools/sugar/src/node/string/trimLines.ts",
+        "./packages/tools/sugar/src/node/terminal/parseMarkdown.ts",
+        "./packages/tools/sugar/src/node/time/wait.ts"
+      ],
+      "./packages/tools/sugar/src/node/blessed/interface/SOutputLogInterface.ts": [
+        "./packages/tools/sugar/src/node/class/SInterface.ts"
+      ],
+      "./packages/tools/sugar/src/node/blessed/interface/SOutputSourceInterface.ts": [
+        "./packages/tools/sugar/src/node/class/SInterface.ts"
+      ],
+      "./packages/tools/sugar/src/node/class/SInterface.ts": [
+        "./packages/tools/sugar/src/node/class/getExtendsStack.ts",
+        "./packages/tools/sugar/src/node/cli/argsToObject.ts",
+        "./packages/tools/sugar/src/node/error/SError.ts",
+        "./packages/tools/sugar/src/node/is/class.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/object/deepize.ts",
+        "./packages/tools/sugar/src/node/object/set.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts",
+        "./packages/tools/sugar/src/node/string/trimLines.ts",
+        "./packages/tools/sugar/src/node/validation/object/validateObject.ts",
+        "./packages/tools/sugar/src/node/validation/object/validateObjectOutputString.ts",
+        "./packages/tools/sugar/src/node/value/typeof.ts"
+      ],
+      "./packages/tools/sugar/src/node/class/getExtendsStack.ts": [
+        "./packages/tools/sugar/src/node/is/class.ts"
+      ],
+      "./packages/tools/sugar/src/node/cli/argsToObject.ts": [
+        "./packages/tools/sugar/src/node/cli/completeArgsObject.ts",
+        "./packages/tools/sugar/src/node/cli/parseArgs.ts"
+      ],
+      "./packages/tools/sugar/src/node/cli/argsToString.ts": [
+        "./packages/tools/sugar/src/node/cli/parseArgs.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts"
+      ],
+      "./packages/tools/sugar/src/node/cli/buildCommandLine.ts": [
+        "./packages/tools/sugar/src/node/cli/argsToString.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts"
+      ],
+      "./packages/tools/sugar/src/node/cli/completeArgsObject.ts": [
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/object/deepize.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts",
+        "./packages/tools/sugar/src/node/validation/object/validateObject.ts"
+      ],
+      "./packages/tools/sugar/src/node/cli/parseArgs.ts": [
+        "./packages/tools/sugar/src/node/cli/completeArgsObject.ts",
+        "./packages/tools/sugar/src/node/is/ofType.ts",
+        "./packages/tools/sugar/src/node/is/plainObject.ts",
+        "./packages/tools/sugar/src/node/object/deepMap.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/object/delete.ts",
+        "./packages/tools/sugar/src/node/object/get.ts",
+        "./packages/tools/sugar/src/node/object/set.ts",
+        "./packages/tools/sugar/src/node/string/parse.ts",
+        "./packages/tools/sugar/src/node/string/unquote.ts",
+        "./packages/tools/sugar/src/node/validation/utils/parseTypeDefinitionString.ts"
+      ],
+      "./packages/tools/sugar/src/node/clipboard/copy.ts": [
+        "./packages/tools/sugar/node_modules/clipboardy/index.d.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts"
+      ],
+      "./packages/tools/sugar/src/node/color/SColor.ts": [
+        "./packages/tools/sugar/src/node/color/convert.ts",
+        "./packages/tools/sugar/src/node/color/hex2rgba.ts",
+        "./packages/tools/sugar/src/node/color/hsl2rgba.ts",
+        "./packages/tools/sugar/src/node/color/hsv2rgba.ts",
+        "./packages/tools/sugar/src/node/color/parse.ts",
+        "./packages/tools/sugar/src/node/color/parseHsl.ts",
+        "./packages/tools/sugar/src/node/color/parseHsv.ts",
+        "./packages/tools/sugar/src/node/color/parseRgba.ts",
+        "./packages/tools/sugar/src/node/color/rgba2hex.ts",
+        "./packages/tools/sugar/src/node/color/rgba2hsl.ts",
+        "./packages/tools/sugar/src/node/color/rgba2hsv.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts"
+      ],
+      "./packages/tools/sugar/src/node/color/color.ts": [
+        "./packages/tools/sugar/src/node/color/SColor.ts"
+      ],
+      "./packages/tools/sugar/src/node/color/convert.ts": [
+        "./packages/tools/sugar/src/node/color/hsl2rgba.ts",
+        "./packages/tools/sugar/src/node/color/hsv2rgba.ts",
+        "./packages/tools/sugar/src/node/color/parse.ts",
+        "./packages/tools/sugar/src/node/color/rgba2hex.ts",
+        "./packages/tools/sugar/src/node/color/rgba2hsl.ts",
+        "./packages/tools/sugar/src/node/color/rgba2hsv.ts"
+      ],
+      "./packages/tools/sugar/src/node/color/parse.ts": [
+        "./packages/tools/sugar/src/node/color/hex2rgba.ts",
+        "./packages/tools/sugar/src/node/color/hsl2rgba.ts",
+        "./packages/tools/sugar/src/node/color/hsv2rgba.ts",
+        "./packages/tools/sugar/src/node/color/parseHsl.ts",
+        "./packages/tools/sugar/src/node/color/parseHsv.ts",
+        "./packages/tools/sugar/src/node/color/parseRgba.ts",
+        "./packages/tools/sugar/src/node/color/rgba2hsl.ts",
+        "./packages/tools/sugar/src/node/color/rgba2hsv.ts"
+      ],
+      "./packages/tools/sugar/src/node/config/SConfig.ts": [
+        "./packages/tools/sugar/src/node/config/adapters/SConfigAdapter.ts",
+        "./packages/tools/sugar/src/node/is/plainObject.ts",
+        "./packages/tools/sugar/src/node/object/deepMap.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/object/get.ts",
+        "./packages/tools/sugar/src/node/object/resolveTokens.ts",
+        "./packages/tools/sugar/src/node/object/set.ts"
+      ],
+      "./packages/tools/sugar/src/node/config/adapters/SConfigAdapter.ts": [
+        "./packages/tools/sugar/src/node/object/deepMerge.ts"
+      ],
+      "./packages/tools/sugar/src/node/config/adapters/SConfigFolderAdapter.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./packages/tools/sugar/src/node/config/adapters/SConfigAdapter.ts",
+        "./packages/tools/sugar/src/node/fs/writeFileSync.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/object/diff.ts"
+      ],
+      "./packages/tools/sugar/src/node/config/sugar.ts": [
+        "./node_modules/@types/node/path.d.ts",
+        "./packages/tools/sugar/src/node/config/SConfig.ts",
+        "./packages/tools/sugar/src/node/config/adapters/SConfigFolderAdapter.ts",
+        "./packages/tools/sugar/src/node/object/resolveTokens.ts",
+        "./packages/tools/sugar/src/node/path/packageRoot.ts"
+      ],
+      "./packages/tools/sugar/src/node/core/env.ts": [
+        "./packages/tools/sugar/src/node/is/node.ts",
+        "./packages/tools/sugar/src/node/object/delete.ts",
+        "./packages/tools/sugar/src/node/object/get.ts",
+        "./packages/tools/sugar/src/node/object/set.ts",
+        "./packages/tools/sugar/src/node/string/parse.ts"
+      ],
+      "./packages/tools/sugar/src/node/error/SError.ts": [
+        "./packages/tools/sugar/src/node/path/packageRoot.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts",
+        "./packages/tools/sugar/src/node/string/trimLines.ts"
+      ],
+      "./packages/tools/sugar/src/node/fs/isPath.ts": [
+        "./node_modules/@types/node/fs.d.ts"
+      ],
+      "./packages/tools/sugar/src/node/fs/writeFileSync.ts": [
+        "./packages/tools/sugar/node_modules/@types/fs-extra/index.d.ts"
+      ],
+      "./packages/tools/sugar/src/node/html/replaceTags.ts": [
+        "./packages/tools/sugar/src/node/string/toString.ts"
+      ],
+      "./packages/tools/sugar/src/node/ipc/SIpc.ts": [
+        "./packages/tools/sugar/src/node/is/childProcess.ts",
+        "./packages/tools/sugar/src/node/network/getFreePort.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/process/onProcessExit.ts",
+        "./packages/tools/sugar/src/node/promise/SPromise.ts",
+        "./packages/tools/sugar/src/node/string/uniqid.ts"
+      ],
+      "./packages/tools/sugar/src/node/is/class.ts": [
+        "./packages/tools/sugar/node_modules/is-class/index.d.ts"
+      ],
+      "./packages/tools/sugar/src/node/is/ofType.ts": [
+        "./packages/tools/sugar/src/node/class/getExtendsStack.ts",
+        "./packages/tools/sugar/src/node/is/class.ts",
+        "./packages/tools/sugar/src/node/is/integer.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts",
+        "./packages/tools/sugar/src/node/string/upperFirst.ts",
+        "./packages/tools/sugar/src/node/validation/utils/parseTypeDefinitionString.ts",
+        "./packages/tools/sugar/src/node/value/typeDefinitionArrayObjectToString.ts",
+        "./packages/tools/sugar/src/node/value/typeof.ts"
+      ],
+      "./packages/tools/sugar/src/node/is/path.ts": [
+        "./packages/tools/sugar/src/node/fs/isPath.ts"
+      ],
+      "./packages/tools/sugar/src/node/is/plainObject.ts": [
+        "./packages/tools/sugar/node_modules/is-plain-object/is-plain-object.d.ts"
+      ],
+      "./packages/tools/sugar/src/node/json/stringify.ts": [
+        "./packages/tools/sugar/src/node/object/deepMerge.ts"
+      ],
+      "./packages/tools/sugar/src/node/keyboard/hotkey.ts": [
+        "./packages/tools/sugar/src/node/ipc/SIpc.ts",
+        "./packages/tools/sugar/src/node/is/childProcess.ts",
+        "./packages/tools/sugar/src/node/promise/SPromise.ts",
+        "./packages/tools/sugar/src/node/string/uniqid.ts"
+      ],
+      "./packages/tools/sugar/src/node/network/getFreePort.ts": [
+        "./packages/tools/sugar/src/node/network/isPortFree.ts"
+      ],
+      "./packages/tools/sugar/src/node/network/isPortFree.ts": [
+        "./node_modules/@types/node/http.d.ts"
+      ],
+      "./packages/tools/sugar/src/node/object/deepMap.ts": [
+        "./packages/tools/sugar/src/node/is/plainObject.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts"
+      ],
+      "./packages/tools/sugar/src/node/object/deepMerge.ts": [
+        "./packages/tools/sugar/src/node/array/unique.ts",
+        "./packages/tools/sugar/src/node/is/plainObject.ts"
+      ],
+      "./packages/tools/sugar/src/node/object/deepProxy.ts": [
+        "./packages/tools/sugar/src/node/object/clone.ts",
+        "./packages/tools/sugar/src/node/object/deepMap.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/object/delete.ts"
+      ],
+      "./packages/tools/sugar/src/node/object/deepize.ts": [
+        "./packages/tools/sugar/src/node/object/set.ts"
+      ],
+      "./packages/tools/sugar/src/node/object/delete.ts": [
+        "./packages/tools/sugar/src/node/object/set.ts"
+      ],
+      "./packages/tools/sugar/src/node/object/diff.ts": [
+        "./packages/tools/sugar/src/node/is/plainObject.ts"
+      ],
+      "./packages/tools/sugar/src/node/object/resolveTokens.ts": [
+        "./packages/tools/sugar/src/node/object/deepProxy.ts",
+        "./packages/tools/sugar/src/node/object/get.ts"
+      ],
+      "./packages/tools/sugar/src/node/object/set.ts": [
+        "./packages/tools/sugar/src/node/object/get.ts"
+      ],
+      "./packages/tools/sugar/src/node/process/SProcess.ts": [
+        "./node_modules/@types/node/child_process.d.ts",
+        "./node_modules/@types/node/path.d.ts",
+        "./packages/tools/sugar/src/node/cli/argsToString.ts",
+        "./packages/tools/sugar/src/node/cli/buildCommandLine.ts",
+        "./packages/tools/sugar/src/node/cli/completeArgsObject.ts",
+        "./packages/tools/sugar/src/node/cli/parseArgs.ts",
+        "./packages/tools/sugar/src/node/clipboard/copy.ts",
+        "./packages/tools/sugar/src/node/error/SError.ts",
+        "./packages/tools/sugar/src/node/ipc/SIpc.ts",
+        "./packages/tools/sugar/src/node/is/childProcess.ts",
+        "./packages/tools/sugar/src/node/is/class.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/path/packageRoot.ts",
+        "./packages/tools/sugar/src/node/process/interface/SProcessInterface.ts",
+        "./packages/tools/sugar/src/node/process/onProcessExit.ts",
+        "./packages/tools/sugar/src/node/process/output.ts",
+        "./packages/tools/sugar/src/node/promise/SPromise.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts",
+        "./packages/tools/sugar/src/node/time/convert.ts",
+        "./packages/tools/sugar/src/node/time/wait.ts"
+      ],
+      "./packages/tools/sugar/src/node/process/interface/ISProcess.ts": [
+        "./packages/tools/sugar/src/node/log/interface/ISLog.ts",
+        "./packages/tools/sugar/src/node/process/interface/ISProcessOutput.ts",
+        "./packages/tools/sugar/src/node/promise/interface/ISPromise.ts"
+      ],
+      "./packages/tools/sugar/src/node/process/interface/ISProcessOutput.ts": [
+        "./packages/tools/sugar/src/node/promise/interface/ISPromise.ts"
+      ],
+      "./packages/tools/sugar/src/node/process/interface/SProcessInterface.ts": [
+        "./packages/tools/sugar/src/node/class/SInterface.ts"
+      ],
+      "./packages/tools/sugar/src/node/process/output.ts": [
+        "./packages/tools/sugar/src/node/blessed/SBlessedOutput.ts"
+      ],
+      "./packages/tools/sugar/src/node/promise/SPromise.ts": [
+        "./packages/tools/sugar/node_modules/@types/minimatch/index.d.ts",
+        "./packages/tools/sugar/src/node/core/env.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts",
+        "./packages/tools/sugar/src/node/string/uniqid.ts",
+        "./packages/tools/sugar/src/node/time/wait.ts"
+      ],
+      "./packages/tools/sugar/src/node/string/toString.ts": [
+        "./packages/tools/sugar/src/node/error/SError.ts",
+        "./packages/tools/sugar/src/node/is/array.ts",
+        "./packages/tools/sugar/src/node/is/boolean.ts",
+        "./packages/tools/sugar/src/node/is/function.ts",
+        "./packages/tools/sugar/src/node/is/json.ts",
+        "./packages/tools/sugar/src/node/is/number.ts",
+        "./packages/tools/sugar/src/node/is/object.ts",
+        "./packages/tools/sugar/src/node/is/regexp.ts",
+        "./packages/tools/sugar/src/node/is/string.ts",
+        "./packages/tools/sugar/src/node/json/stringify.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts"
+      ],
+      "./packages/tools/sugar/src/node/string/trimLines.ts": [
+        "./packages/tools/sugar/src/node/object/deepMerge.ts"
+      ],
+      "./packages/tools/sugar/src/node/terminal/parseHtml.ts": [
+        "./packages/tools/sugar/node_modules/chalk/index.d.ts",
+        "./packages/tools/sugar/src/node/config/sugar.ts",
+        "./packages/tools/sugar/src/node/html/replaceTags.ts",
+        "./packages/tools/sugar/src/node/string/upperFirst.ts"
+      ],
+      "./packages/tools/sugar/src/node/terminal/parseMarkdown.ts": [
+        "./packages/tools/sugar/src/node/terminal/parseHtml.ts"
+      ],
+      "./packages/tools/sugar/src/node/typescript/SCompileTsProcess.ts": [
+        "./packages/tools/sugar/src/node/process/SProcess.ts",
+        "./packages/tools/sugar/src/node/typescript/interface/ISCompileTsProcess.ts"
+      ],
+      "./packages/tools/sugar/src/node/typescript/interface/ISCompileTsProcess.ts": [
+        "./packages/tools/sugar/src/node/process/interface/ISProcess.ts"
+      ],
+      "./packages/tools/sugar/src/node/validation/object/validateObject.ts": [
+        "./packages/tools/sugar/src/node/is/class.ts",
+        "./packages/tools/sugar/src/node/is/plainObject.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/object/filter.ts",
+        "./packages/tools/sugar/src/node/object/get.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts",
+        "./packages/tools/sugar/src/node/validation/object/validation/SStaticValidation.ts",
+        "./packages/tools/sugar/src/node/validation/value/validateValue.ts",
+        "./packages/tools/sugar/src/node/value/typeof.ts"
+      ],
+      "./packages/tools/sugar/src/node/validation/object/validateObjectOutputString.ts": [
+        "./packages/tools/sugar/src/node/string/toString.ts",
+        "./packages/tools/sugar/src/node/string/trimLines.ts",
+        "./packages/tools/sugar/src/node/validation/value/validateValueOutputString.ts"
+      ],
+      "./packages/tools/sugar/src/node/validation/object/validation/SStaticValidation.ts": [
+        "./packages/tools/sugar/src/node/is/class.ts"
+      ],
+      "./packages/tools/sugar/src/node/validation/utils/parseTypeDefinitionString.ts": [
+        "./packages/tools/sugar/src/node/string/upperFirst.ts"
+      ],
+      "./packages/tools/sugar/src/node/validation/value/validateValue.ts": [
+        "./packages/tools/sugar/src/node/is/node.ts",
+        "./packages/tools/sugar/src/node/is/ofType.ts",
+        "./packages/tools/sugar/src/node/is/path.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/object/get.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts",
+        "./packages/tools/sugar/src/node/validation/value/validation/SPathValidation.ts",
+        "./packages/tools/sugar/src/node/validation/value/validation/SRequiredValidation.ts",
+        "./packages/tools/sugar/src/node/validation/value/validation/STypeValidation.ts",
+        "./packages/tools/sugar/src/node/validation/value/validation/SValuesValidation.ts",
+        "./packages/tools/sugar/src/node/value/typeof.ts"
+      ],
+      "./packages/tools/sugar/src/node/validation/value/validateValueOutputString.ts": [
+        "./packages/tools/sugar/src/node/is/node.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/string/toString.ts"
+      ],
+      "./packages/tools/sugar/src/node/validation/value/validation/SPathValidation.ts": [
+        "./packages/tools/sugar/src/node/is/node.ts",
+        "./packages/tools/sugar/src/node/is/path.ts"
+      ],
+      "./packages/tools/sugar/src/node/validation/value/validation/STypeValidation.ts": [
+        "./packages/tools/sugar/src/node/is/ofType.ts"
+      ],
+      "./packages/tools/sugar/src/node/validation/value/validation/SValuesValidation.ts": [
+        "./packages/tools/sugar/src/node/is/ofType.ts"
+      ],
+      "./packages/tools/sugar/src/node/value/typeof.ts": [
+        "./packages/tools/sugar/src/node/is/class.ts",
+        "./packages/tools/sugar/src/node/is/integer.ts",
+        "./packages/tools/sugar/src/node/object/deepMerge.ts",
+        "./packages/tools/sugar/src/node/string/upperFirst.ts"
+      ]
+    },
+    "exportedModulesMap": {
+      "./node_modules/@babel/parser/typings/babel-parser.d.ts": [
+        "./node_modules/@babel/types/lib/index-ts3.7.d.ts"
+      ],
+      "./node_modules/@types/babel__core/index.d.ts": [
+        "./node_modules/@babel/parser/typings/babel-parser.d.ts",
+        "./node_modules/@babel/types/lib/index-ts3.7.d.ts",
+        "./node_modules/@types/babel__generator/index.d.ts",
+        "./node_modules/@types/babel__template/index.d.ts",
+        "./node_modules/@types/babel__traverse/index.d.ts"
+      ],
+      "./node_modules/@types/babel__generator/index.d.ts": [
+        "./node_modules/@babel/types/lib/index-ts3.7.d.ts"
+      ],
+      "./node_modules/@types/babel__template/index.d.ts": [
+        "./node_modules/@babel/parser/typings/babel-parser.d.ts",
+        "./node_modules/@babel/types/lib/index-ts3.7.d.ts"
+      ],
+      "./node_modules/@types/babel__traverse/index.d.ts": [
+        "./node_modules/@babel/types/lib/index-ts3.7.d.ts"
+      ],
+      "./node_modules/@types/glob/index.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/index.d.ts",
+        "./packages/tools/sugar/node_modules/@types/minimatch/index.d.ts"
+      ],
+      "./node_modules/@types/graceful-fs/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/index.d.ts"
+      ],
+      "./node_modules/@types/istanbul-lib-report/index.d.ts": [
+        "./node_modules/@types/istanbul-lib-coverage/index.d.ts"
+      ],
+      "./node_modules/@types/istanbul-reports/index.d.ts": [
+        "./node_modules/@types/istanbul-lib-report/index.d.ts"
+      ],
+      "./node_modules/@types/jest/index.d.ts": [
+        "./node_modules/jest-diff/build/index.d.ts",
+        "./node_modules/pretty-format/build/index.d.ts"
+      ],
+      "./node_modules/@types/node/base.d.ts": [
+        "./node_modules/@types/node/assert.d.ts",
+        "./node_modules/@types/node/ts3.6/base.d.ts"
+      ],
+      "./node_modules/@types/node/child_process.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/node/cluster.d.ts": [
+        "./node_modules/@types/node/child_process.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/net.d.ts"
+      ],
+      "./node_modules/@types/node/console.d.ts": [
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/node/constants.d.ts": [
+        "./node_modules/@types/node/crypto.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/os.d.ts"
+      ],
+      "./node_modules/@types/node/crypto.d.ts": [
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/node/dgram.d.ts": [
+        "./node_modules/@types/node/dns.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/net.d.ts"
+      ],
+      "./node_modules/@types/node/domain.d.ts": [
+        "./node_modules/@types/node/events.d.ts"
+      ],
+      "./node_modules/@types/node/fs.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs/promises.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/url.d.ts"
+      ],
+      "./node_modules/@types/node/fs/promises.d.ts": [
+        "./node_modules/@types/node/fs.d.ts"
+      ],
+      "./node_modules/@types/node/http.d.ts": [
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/url.d.ts"
+      ],
+      "./node_modules/@types/node/http2.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/tls.d.ts",
+        "./node_modules/@types/node/url.d.ts"
+      ],
+      "./node_modules/@types/node/https.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/tls.d.ts",
+        "./node_modules/@types/node/url.d.ts"
+      ],
+      "./node_modules/@types/node/index.d.ts": [
+        "./node_modules/@types/node/base.d.ts"
+      ],
+      "./node_modules/@types/node/inspector.d.ts": [
+        "./node_modules/@types/node/events.d.ts"
+      ],
+      "./node_modules/@types/node/module.d.ts": [
+        "./node_modules/@types/node/url.d.ts"
+      ],
+      "./node_modules/@types/node/net.d.ts": [
+        "./node_modules/@types/node/dns.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/node/perf_hooks.d.ts": [
+        "./node_modules/@types/node/async_hooks.d.ts"
+      ],
+      "./node_modules/@types/node/process.d.ts": [
+        "./node_modules/@types/node/tty.d.ts"
+      ],
+      "./node_modules/@types/node/readline.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/node/repl.d.ts": [
+        "./node_modules/@types/node/readline.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/vm.d.ts"
+      ],
+      "./node_modules/@types/node/stream.d.ts": [
+        "./node_modules/@types/node/events.d.ts"
+      ],
+      "./node_modules/@types/node/tls.d.ts": [
+        "./node_modules/@types/node/crypto.d.ts",
+        "./node_modules/@types/node/dns.d.ts",
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/node/ts3.4/base.d.ts": [
+        "./node_modules/@types/node/async_hooks.d.ts",
+        "./node_modules/@types/node/buffer.d.ts",
+        "./node_modules/@types/node/child_process.d.ts",
+        "./node_modules/@types/node/cluster.d.ts",
+        "./node_modules/@types/node/console.d.ts",
+        "./node_modules/@types/node/constants.d.ts",
+        "./node_modules/@types/node/crypto.d.ts",
+        "./node_modules/@types/node/dgram.d.ts",
+        "./node_modules/@types/node/dns.d.ts",
+        "./node_modules/@types/node/domain.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/fs/promises.d.ts",
+        "./node_modules/@types/node/globals.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/http2.d.ts",
+        "./node_modules/@types/node/https.d.ts",
+        "./node_modules/@types/node/inspector.d.ts",
+        "./node_modules/@types/node/module.d.ts",
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/os.d.ts",
+        "./node_modules/@types/node/path.d.ts",
+        "./node_modules/@types/node/perf_hooks.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/punycode.d.ts",
+        "./node_modules/@types/node/querystring.d.ts",
+        "./node_modules/@types/node/readline.d.ts",
+        "./node_modules/@types/node/repl.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/string_decoder.d.ts",
+        "./node_modules/@types/node/timers.d.ts",
+        "./node_modules/@types/node/tls.d.ts",
+        "./node_modules/@types/node/trace_events.d.ts",
+        "./node_modules/@types/node/tty.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/v8.d.ts",
+        "./node_modules/@types/node/vm.d.ts",
+        "./node_modules/@types/node/worker_threads.d.ts",
+        "./node_modules/@types/node/zlib.d.ts"
+      ],
+      "./node_modules/@types/node/ts3.6/base.d.ts": [
+        "./node_modules/@types/node/globals.global.d.ts",
+        "./node_modules/@types/node/ts3.4/base.d.ts",
+        "./node_modules/@types/node/wasi.d.ts"
+      ],
+      "./node_modules/@types/node/tty.d.ts": [
+        "./node_modules/@types/node/net.d.ts"
+      ],
+      "./node_modules/@types/node/url.d.ts": [
+        "./node_modules/@types/node/querystring.d.ts"
+      ],
+      "./node_modules/@types/node/v8.d.ts": [
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/node/worker_threads.d.ts": [
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs/promises.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/node/vm.d.ts"
+      ],
+      "./node_modules/@types/node/zlib.d.ts": [
+        "./node_modules/@types/node/stream.d.ts"
+      ],
+      "./node_modules/@types/testing-library__jest-dom/index.d.ts": [
+        "./node_modules/@types/jest/index.d.ts"
+      ],
+      "./node_modules/@types/yargs/index.d.ts": [
+        "./node_modules/@types/yargs-parser/index.d.ts"
+      ],
+      "./node_modules/jest-diff/build/diffLines.d.ts": [
+        "./node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "./node_modules/jest-diff/build/types.d.ts"
+      ],
+      "./node_modules/jest-diff/build/index.d.ts": [
+        "./node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "./node_modules/jest-diff/build/diffLines.d.ts",
+        "./node_modules/jest-diff/build/printDiffs.d.ts",
+        "./node_modules/jest-diff/build/types.d.ts"
+      ],
+      "./node_modules/jest-diff/build/printDiffs.d.ts": [
+        "./node_modules/jest-diff/build/cleanupSemantic.d.ts",
+        "./node_modules/jest-diff/build/types.d.ts"
+      ],
+      "./node_modules/pretty-format/build/index.d.ts": [
+        "./node_modules/pretty-format/build/types.d.ts"
+      ],
+      "./packages/tools/sugar/node_modules/@types/fs-extra/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/index.d.ts"
+      ],
+      "./packages/tools/sugar/src/node/blessed/SBlessedOutput.ts": [
+        "./packages/tools/sugar/src/node/blessed/SBlessedComponent.ts"
+      ],
+      "./packages/tools/sugar/src/node/blessed/interface/SOutputLogInterface.ts": [
+        "./packages/tools/sugar/src/node/class/SInterface.ts"
+      ],
+      "./packages/tools/sugar/src/node/blessed/interface/SOutputSourceInterface.ts": [
+        "./packages/tools/sugar/src/node/class/SInterface.ts"
+      ],
+      "./packages/tools/sugar/src/node/color/color.ts": [
+        "./packages/tools/sugar/src/node/color/SColor.ts"
+      ],
+      "./packages/tools/sugar/src/node/config/adapters/SConfigFolderAdapter.ts": [
+        "./packages/tools/sugar/src/node/config/adapters/SConfigAdapter.ts"
+      ],
+      "./packages/tools/sugar/src/node/ipc/SIpc.ts": [
+        "./packages/tools/sugar/src/node/promise/SPromise.ts"
+      ],
+      "./packages/tools/sugar/src/node/keyboard/hotkey.ts": [
+        "./packages/tools/sugar/src/node/promise/SPromise.ts"
+      ],
+      "./packages/tools/sugar/src/node/process/SProcess.ts": [
+        "./packages/tools/sugar/src/node/promise/SPromise.ts"
+      ],
+      "./packages/tools/sugar/src/node/process/interface/ISProcess.ts": [
+        "./packages/tools/sugar/src/node/log/interface/ISLog.ts",
+        "./packages/tools/sugar/src/node/process/interface/ISProcessOutput.ts",
+        "./packages/tools/sugar/src/node/promise/interface/ISPromise.ts"
+      ],
+      "./packages/tools/sugar/src/node/process/interface/ISProcessOutput.ts": [
+        "./packages/tools/sugar/src/node/promise/interface/ISPromise.ts"
+      ],
+      "./packages/tools/sugar/src/node/process/interface/SProcessInterface.ts": [
+        "./packages/tools/sugar/src/node/class/SInterface.ts"
+      ],
+      "./packages/tools/sugar/src/node/process/output.ts": [
+        "./packages/tools/sugar/src/node/blessed/SBlessedOutput.ts"
+      ],
+      "./packages/tools/sugar/src/node/typescript/SCompileTsProcess.ts": [
+        "./packages/tools/sugar/src/node/typescript/interface/ISCompileTsProcess.ts"
+      ],
+      "./packages/tools/sugar/src/node/typescript/interface/ISCompileTsProcess.ts": [
+        "./packages/tools/sugar/src/node/process/interface/ISProcess.ts"
+      ]
+    },
+    "semanticDiagnosticsPerFile": [
+      "../../usr/local/lib/node_modules/typescript/lib/lib.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.dom.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.core.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.generator.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.iterable.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.promise.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.proxy.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2016.array.include.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2016.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2017.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2017.intl.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2017.object.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2017.string.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2017.typedarrays.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2018.asynciterable.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2018.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2018.intl.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2018.promise.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2018.regexp.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es2020.bigint.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.es5.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.esnext.intl.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.scripthost.d.ts",
+      "../../usr/local/lib/node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
+      "./node_modules/@babel/parser/typings/babel-parser.d.ts",
+      "./node_modules/@babel/types/lib/index-ts3.7.d.ts",
+      "./node_modules/@types/babel__core/index.d.ts",
+      "./node_modules/@types/babel__generator/index.d.ts",
+      "./node_modules/@types/babel__template/index.d.ts",
+      "./node_modules/@types/babel__traverse/index.d.ts",
+      "./node_modules/@types/fetch-mock/index.d.ts",
+      "./node_modules/@types/glob/index.d.ts",
+      "./node_modules/@types/graceful-fs/index.d.ts",
+      "./node_modules/@types/istanbul-lib-coverage/index.d.ts",
+      "./node_modules/@types/istanbul-lib-report/index.d.ts",
+      "./node_modules/@types/istanbul-reports/index.d.ts",
+      "./node_modules/@types/jest/index.d.ts",
+      "./node_modules/@types/json-schema/index.d.ts",
+      "./node_modules/@types/json5/index.d.ts",
+      "./node_modules/@types/lolex/index.d.ts",
+      "./node_modules/@types/mime-types/index.d.ts",
+      "./node_modules/@types/minimatch/index.d.ts",
+      "./node_modules/@types/node/assert.d.ts",
+      "./node_modules/@types/node/async_hooks.d.ts",
+      "./node_modules/@types/node/base.d.ts",
+      "./node_modules/@types/node/buffer.d.ts",
+      "./node_modules/@types/node/child_process.d.ts",
+      "./node_modules/@types/node/cluster.d.ts",
+      "./node_modules/@types/node/console.d.ts",
+      "./node_modules/@types/node/constants.d.ts",
+      "./node_modules/@types/node/crypto.d.ts",
+      "./node_modules/@types/node/dgram.d.ts",
+      "./node_modules/@types/node/dns.d.ts",
+      "./node_modules/@types/node/domain.d.ts",
+      "./node_modules/@types/node/events.d.ts",
+      "./node_modules/@types/node/fs.d.ts",
+      "./node_modules/@types/node/fs/promises.d.ts",
+      "./node_modules/@types/node/globals.d.ts",
+      "./node_modules/@types/node/globals.global.d.ts",
+      "./node_modules/@types/node/http.d.ts",
+      "./node_modules/@types/node/http2.d.ts",
+      "./node_modules/@types/node/https.d.ts",
+      "./node_modules/@types/node/index.d.ts",
+      "./node_modules/@types/node/inspector.d.ts",
+      "./node_modules/@types/node/module.d.ts",
+      "./node_modules/@types/node/net.d.ts",
+      "./node_modules/@types/node/os.d.ts",
+      "./node_modules/@types/node/path.d.ts",
+      "./node_modules/@types/node/perf_hooks.d.ts",
+      "./node_modules/@types/node/process.d.ts",
+      "./node_modules/@types/node/punycode.d.ts",
+      "./node_modules/@types/node/querystring.d.ts",
+      "./node_modules/@types/node/readline.d.ts",
+      "./node_modules/@types/node/repl.d.ts",
+      "./node_modules/@types/node/stream.d.ts",
+      "./node_modules/@types/node/string_decoder.d.ts",
+      "./node_modules/@types/node/timers.d.ts",
+      "./node_modules/@types/node/tls.d.ts",
+      "./node_modules/@types/node/trace_events.d.ts",
+      "./node_modules/@types/node/ts3.4/base.d.ts",
+      "./node_modules/@types/node/ts3.6/base.d.ts",
+      "./node_modules/@types/node/tty.d.ts",
+      "./node_modules/@types/node/url.d.ts",
+      "./node_modules/@types/node/util.d.ts",
+      "./node_modules/@types/node/v8.d.ts",
+      "./node_modules/@types/node/vm.d.ts",
+      "./node_modules/@types/node/wasi.d.ts",
+      "./node_modules/@types/node/worker_threads.d.ts",
+      "./node_modules/@types/node/zlib.d.ts",
+      "./node_modules/@types/normalize-package-data/index.d.ts",
+      "./node_modules/@types/prettier/index.d.ts",
+      "./node_modules/@types/stack-utils/index.d.ts",
+      "./node_modules/@types/testing-library__jest-dom/index.d.ts",
+      "./node_modules/@types/yargs-parser/index.d.ts",
+      "./node_modules/@types/yargs/index.d.ts",
+      "./node_modules/jest-diff/build/cleanupSemantic.d.ts",
+      "./node_modules/jest-diff/build/diffLines.d.ts",
+      "./node_modules/jest-diff/build/index.d.ts",
+      "./node_modules/jest-diff/build/printDiffs.d.ts",
+      "./node_modules/jest-diff/build/types.d.ts",
+      "./node_modules/pretty-format/build/index.d.ts",
+      "./node_modules/pretty-format/build/types.d.ts",
+      "./packages/tools/sugar/node_modules/@types/fs-extra/index.d.ts",
+      "./packages/tools/sugar/node_modules/@types/minimatch/index.d.ts",
+      "./packages/tools/sugar/node_modules/chalk/index.d.ts",
+      "./packages/tools/sugar/node_modules/clipboardy/index.d.ts",
+      "./packages/tools/sugar/node_modules/is-class/index.d.ts",
+      "./packages/tools/sugar/node_modules/is-plain-object/is-plain-object.d.ts",
+      "./packages/tools/sugar/node_modules/strip-ansi/index.d.ts",
+      "./packages/tools/sugar/node_modules/tree-kill/index.d.ts",
+      "./packages/tools/sugar/src/node/array/unique.ts",
+      "./packages/tools/sugar/src/node/blessed/SBlessedComponent.ts",
+      "./packages/tools/sugar/src/node/blessed/SBlessedOutput.ts",
+      "./packages/tools/sugar/src/node/blessed/interface/SOutputLogInterface.ts",
+      "./packages/tools/sugar/src/node/blessed/interface/SOutputSourceInterface.ts",
+      "./packages/tools/sugar/src/node/class/SInterface.ts",
+      "./packages/tools/sugar/src/node/class/getExtendsStack.ts",
+      "./packages/tools/sugar/src/node/cli/argsToObject.ts",
+      "./packages/tools/sugar/src/node/cli/argsToString.ts",
+      "./packages/tools/sugar/src/node/cli/buildCommandLine.ts",
+      "./packages/tools/sugar/src/node/cli/completeArgsObject.ts",
+      "./packages/tools/sugar/src/node/cli/parseArgs.ts",
+      "./packages/tools/sugar/src/node/clipboard/copy.ts",
+      "./packages/tools/sugar/src/node/color/SColor.ts",
+      "./packages/tools/sugar/src/node/color/color.ts",
+      "./packages/tools/sugar/src/node/color/convert.ts",
+      "./packages/tools/sugar/src/node/color/hex2rgba.ts",
+      "./packages/tools/sugar/src/node/color/hsl2rgba.ts",
+      "./packages/tools/sugar/src/node/color/hsv2rgba.ts",
+      "./packages/tools/sugar/src/node/color/parse.ts",
+      "./packages/tools/sugar/src/node/color/parseHsl.ts",
+      "./packages/tools/sugar/src/node/color/parseHsv.ts",
+      "./packages/tools/sugar/src/node/color/parseRgba.ts",
+      "./packages/tools/sugar/src/node/color/rgba2hex.ts",
+      "./packages/tools/sugar/src/node/color/rgba2hsl.ts",
+      "./packages/tools/sugar/src/node/color/rgba2hsv.ts",
+      "./packages/tools/sugar/src/node/config/SConfig.ts",
+      "./packages/tools/sugar/src/node/config/adapters/SConfigAdapter.ts",
+      "./packages/tools/sugar/src/node/config/adapters/SConfigFolderAdapter.ts",
+      "./packages/tools/sugar/src/node/config/sugar.ts",
+      "./packages/tools/sugar/src/node/core/env.ts",
+      "./packages/tools/sugar/src/node/error/SError.ts",
+      "./packages/tools/sugar/src/node/fs/isPath.ts",
+      "./packages/tools/sugar/src/node/fs/writeFileSync.ts",
+      "./packages/tools/sugar/src/node/html/replaceTags.ts",
+      "./packages/tools/sugar/src/node/ipc/SIpc.ts",
+      "./packages/tools/sugar/src/node/is/array.ts",
+      "./packages/tools/sugar/src/node/is/boolean.ts",
+      "./packages/tools/sugar/src/node/is/childProcess.ts",
+      "./packages/tools/sugar/src/node/is/class.ts",
+      "./packages/tools/sugar/src/node/is/function.ts",
+      "./packages/tools/sugar/src/node/is/integer.ts",
+      "./packages/tools/sugar/src/node/is/json.ts",
+      "./packages/tools/sugar/src/node/is/node.ts",
+      "./packages/tools/sugar/src/node/is/number.ts",
+      "./packages/tools/sugar/src/node/is/object.ts",
+      "./packages/tools/sugar/src/node/is/ofType.ts",
+      "./packages/tools/sugar/src/node/is/path.ts",
+      "./packages/tools/sugar/src/node/is/plainObject.ts",
+      "./packages/tools/sugar/src/node/is/regexp.ts",
+      "./packages/tools/sugar/src/node/is/string.ts",
+      "./packages/tools/sugar/src/node/json/stringify.ts",
+      "./packages/tools/sugar/src/node/keyboard/hotkey.ts",
+      "./packages/tools/sugar/src/node/log/interface/ISLog.ts",
+      "./packages/tools/sugar/src/node/network/getFreePort.ts",
+      "./packages/tools/sugar/src/node/network/isPortFree.ts",
+      "./packages/tools/sugar/src/node/object/clone.ts",
+      "./packages/tools/sugar/src/node/object/deepMap.ts",
+      "./packages/tools/sugar/src/node/object/deepMerge.ts",
+      "./packages/tools/sugar/src/node/object/deepProxy.ts",
+      "./packages/tools/sugar/src/node/object/deepize.ts",
+      "./packages/tools/sugar/src/node/object/delete.ts",
+      "./packages/tools/sugar/src/node/object/diff.ts",
+      "./packages/tools/sugar/src/node/object/extractValues.ts",
+      "./packages/tools/sugar/src/node/object/filter.ts",
+      "./packages/tools/sugar/src/node/object/get.ts",
+      "./packages/tools/sugar/src/node/object/resolveTokens.ts",
+      "./packages/tools/sugar/src/node/object/set.ts",
+      "./packages/tools/sugar/src/node/path/packageRoot.ts",
+      "./packages/tools/sugar/src/node/process/SProcess.ts",
+      "./packages/tools/sugar/src/node/process/interface/ISProcess.ts",
+      "./packages/tools/sugar/src/node/process/interface/ISProcessOutput.ts",
+      "./packages/tools/sugar/src/node/process/interface/SProcessInterface.ts",
+      "./packages/tools/sugar/src/node/process/onProcessExit.ts",
+      "./packages/tools/sugar/src/node/process/output.ts",
+      "./packages/tools/sugar/src/node/promise/SPromise.ts",
+      "./packages/tools/sugar/src/node/promise/interface/ISPromise.ts",
+      "./packages/tools/sugar/src/node/string/parse.ts",
+      "./packages/tools/sugar/src/node/string/toString.ts",
+      "./packages/tools/sugar/src/node/string/trimLines.ts",
+      "./packages/tools/sugar/src/node/string/uniqid.ts",
+      "./packages/tools/sugar/src/node/string/unquote.ts",
+      "./packages/tools/sugar/src/node/string/upperFirst.ts",
+      "./packages/tools/sugar/src/node/terminal/parseHtml.ts",
+      "./packages/tools/sugar/src/node/terminal/parseMarkdown.ts",
+      "./packages/tools/sugar/src/node/time/convert.ts",
+      "./packages/tools/sugar/src/node/time/wait.ts",
+      "./packages/tools/sugar/src/node/typescript/SCompileTsProcess.ts",
+      "./packages/tools/sugar/src/node/typescript/interface/ISCompileTsProcess.ts",
+      "./packages/tools/sugar/src/node/validation/object/validateObject.ts",
+      "./packages/tools/sugar/src/node/validation/object/validateObjectOutputString.ts",
+      "./packages/tools/sugar/src/node/validation/object/validation/SStaticValidation.ts",
+      "./packages/tools/sugar/src/node/validation/utils/parseTypeDefinitionString.ts",
+      "./packages/tools/sugar/src/node/validation/value/validateValue.ts",
+      "./packages/tools/sugar/src/node/validation/value/validateValueOutputString.ts",
+      "./packages/tools/sugar/src/node/validation/value/validation/SPathValidation.ts",
+      "./packages/tools/sugar/src/node/validation/value/validation/SRequiredValidation.ts",
+      "./packages/tools/sugar/src/node/validation/value/validation/STypeValidation.ts",
+      "./packages/tools/sugar/src/node/validation/value/validation/SValuesValidation.ts",
+      "./packages/tools/sugar/src/node/value/typeDefinitionArrayObjectToString.ts",
+      "./packages/tools/sugar/src/node/value/typeof.ts"
+    ]
+  },
+  "version": "4.1.2"
+}

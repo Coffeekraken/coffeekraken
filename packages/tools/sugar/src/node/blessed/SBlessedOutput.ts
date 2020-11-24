@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __packageRoot from '../path/packageRoot';
 import __deepMerge from '../object/deepMerge';
 import __blessed from 'blessed';
@@ -18,6 +20,7 @@ import __wait from '../time/wait';
  * @name                  SOutput
  * @namespace           sugar.node.blessed
  * @type                  Class
+ * @wip
  *
  * This class is a simple SPanel extended one that accesp an SOutput instance
  * to log the data's from and display an simple UI depending on the SOutput configured keys
@@ -28,6 +31,9 @@ import __wait from '../time/wait';
  * - maxItemsByGroup (1) {Number}: Specify the number of logs to display by group
  * - clearOnStart (true) {Boolean}: Specify if you want your output to be cleared when received any events matching this pattern: "*.start"
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  * @todo        Support the "maxItems" setting
  * @todo        Listen for errors and display them correctly
  *
@@ -37,9 +43,10 @@ import __wait from '../time/wait';
  *    screen: true
  * });
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SOutput extends __SBlessedComponent {
+export = class SOutput extends __SBlessedComponent {
   /**
    * @name          _process
    * @type          SOutput

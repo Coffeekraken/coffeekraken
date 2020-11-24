@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __SPromise from '../../promise/SPromise';
 import __sugarConfig from '../../config/sugar';
@@ -11,6 +13,7 @@ import __SSugarAppModule from './SSugarAppModule';
  * @namespace       sugar.node.ui.sugar
  * @type            Class
  * @extends         SPromise
+ * @wip
  *
  * This class represent the main sugar ui one. His work it to:
  * - Aggregate all the wanted modules registered through the ```sugar-app.config.js``` file
@@ -18,7 +21,9 @@ import __SSugarAppModule from './SSugarAppModule';
  * - Configure the frontend server to serve all the needed files like js or css ones, etc...
  * - Open a socket connection to allow the front modules parts to talk with the back parts easily
  *
- * @todo        Complete the documentation
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @param       {Object}              [settings={}]           An object of settings to configure your sugar ui:
  * -

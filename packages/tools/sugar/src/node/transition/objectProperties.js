@@ -1,18 +1,46 @@
 "use strict";
+// @ts-nocheck
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const convert_1 = __importDefault(require("../time/convert"));
 const STimer_1 = __importDefault(require("../time/STimer"));
 const availableEasingsArray_1 = __importDefault(require("../easing/availableEasingsArray"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
-// TODO: tests
 /**
  * @name              objectProperties
  * @namespace           sugar.node.transition
  * @type              Function
+ * @beta
  *
  * This function take a start object and a target object and proceed to the transition of all properties
  * depending on the passed settings object that is documented bellow.
@@ -26,11 +54,15 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * - stepsInterval (null) {Number}: Specify the interval that you want between each steps in miliseconds
  * - round (true) {Boolean}: Specify if you want the returned transition object values to be rounded or not
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function objectProperties(startObj, targetObj, settings = {}) {
-    return new SPromise_1.default((resolve, reject, trigger, cancel) => {
+    return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
         settings = deepMerge_1.default({
             duration: '1s',
             stepsCount: null,
@@ -41,13 +73,13 @@ function objectProperties(startObj, targetObj, settings = {}) {
         const availableEasingsArray = availableEasingsArray_1.default();
         const duration = convert_1.default(settings.duration, 'ms');
         let stepsCount = settings.stepsCount;
-        let stepsInterval = settings.stepsInterval;
+        const stepsInterval = settings.stepsInterval;
         // check the easing wanted
         if (availableEasingsArray.indexOf(settings.easing) === -1) {
             throw new Error(`You have specified "${settings.easing}" as easing for your transition object properties call but the available easings are "${availableEasingsArray.join(',')}"...`);
         }
         // require the easing function
-        const easingFn = require(`../easing/${settings.easing}`);
+        const easingFn = yield Promise.resolve().then(() => __importStar(require(`../easing/${settings.easing}`)));
         // check if we have a steps passed, or calculate automatically
         if (!stepsCount && !stepsInterval) {
             stepsCount = Math.round(duration / 10); // step every 10ms
@@ -107,9 +139,8 @@ function objectProperties(startObj, targetObj, settings = {}) {
             // destroy the timer
             timer.destroy();
         });
-    }, {
+    }), {
         id: 'objectProperties'
     });
 }
-exports.default = objectProperties;
-;
+module.exports = objectProperties;

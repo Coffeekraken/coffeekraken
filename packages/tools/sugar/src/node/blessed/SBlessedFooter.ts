@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __blessed from 'blessed';
 import __SBlessedComponent from './SBlessedComponent';
 import __deepMerge from '../object/deepMerge';
@@ -10,18 +12,24 @@ import __countLine from '../string/countLine';
  * @name                  SBlessedFooter
  * @namespace           sugar.node.blessed
  * @type                  Class
+ * @wip
  *
  * This class represent a footer that you can add to your blessed based UI
  *
  * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import SBlessedFooter from '@coffeekraken/sugar/node/blessed/SBlessedFooter';
  * new SBlessedFooter({});
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBlessedFooter extends __SBlessedComponent {
+export = class SBlessedFooter extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function

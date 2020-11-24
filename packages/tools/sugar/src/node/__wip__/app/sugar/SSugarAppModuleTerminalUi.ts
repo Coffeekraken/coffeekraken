@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __blessed from 'blessed';
 import __SBlessedComponent from '../../blessed/SBlessedComponent';
 import __deepMerge from '../../object/deepMerge';
@@ -9,11 +11,16 @@ import __parseHtml from '../../terminal/parseHtml';
  * @namespace       sugar.node.app.sugar
  * @type            Class
  * @extends         SBlessedComponent
+ * @wip
  *
  * This class represent the main one to create some UI that fit in the SSugarAppTerminalUi
  * based terminal interface
  *
  * @param           {Object}        [settings={}]           An object of settings to configure your terminal interface
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import SSugarAppModuleTerminalUi from '@coffeekraken/sugar/node/app/sugar/SSugarAppModuleTerminalUi';

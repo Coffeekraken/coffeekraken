@@ -1,9 +1,12 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 
 /**
  * @name              SCodeSplitter
  * @namespace         sugar.js.code
  * @type              Class
+ * @wip
  *
  * This class allows you to specify some "splitters" that will be used to split the code accordingly.
  * A "splitter" is an object of these properties:
@@ -16,7 +19,9 @@ import __deepMerge from '../object/deepMerge';
  *
  * @param       {Object}      [settings={}]         An object of settings to configure your code splitter instance:
  *
- * @todo        enhance documentation
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import SCodeSplitter from '@coffeekraken/sugar/js/code/SCodeSplitter';
@@ -33,7 +38,7 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SCodeSplitter {
+export = class SCodeSplitter {
   /**
    * @name        _settings
    * @type        Object

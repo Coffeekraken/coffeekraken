@@ -1,3 +1,4 @@
+"use strict";
 const __addAnimationClass = require('../addAnimationClass');
 const __dispatchEvent = require('../dispatchEvent');
 describe('sugar.js.dom.addAnimationClass', () => {

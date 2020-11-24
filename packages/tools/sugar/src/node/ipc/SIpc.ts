@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __uniqid from '../string/uniqid';
 import __SPromise from '../promise/SPromise';
 import { IPC as __IPC } from 'node-ipc';
@@ -9,11 +11,14 @@ import __getFreePort from '../network/getFreePort';
  * @name            SIpc
  * @namespace       sugar.node.ipc
  * @type            Class
+ * @wip
  *
  * This script check if a global ipc server exists aulready and if it is not the case,
  * it will start one that you can use to communicate between your child process, etc...
  *
- * @param
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @see             https://www.npmjs.com/package/node-ipc
  * @since           2.0.0
@@ -290,7 +295,7 @@ class SIpc {
     return new __SPromise(
       async (resolve, reject) => {
         // make sure the passed port is free
-        let port = await __getFreePort(
+        const port = await __getFreePort(
           params && typeof params === 'object'
             ? params.port || this._ipcInstance.config.port
             : this._ipcInstance.config.port
@@ -471,4 +476,4 @@ class SIpc {
   }
 }
 
-export default SIpc;
+export = SIpc;

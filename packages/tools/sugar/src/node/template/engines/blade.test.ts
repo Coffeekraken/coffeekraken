@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __path from 'path';
 import __tmp from 'tmp';
 import __SBladeTemplateEngine from './SBladeTemplateEngine';

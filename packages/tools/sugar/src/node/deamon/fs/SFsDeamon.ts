@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __SDeamon from '../SDeamon';
 import __SFsDeamonProcess from './SFsDeamonProcess';
@@ -7,15 +9,18 @@ import __SFsDeamonProcess from './SFsDeamonProcess';
  * @namespace       sugar.node.deamon.fs
  * @type            Class
  * @extends         SDeamon
+ * @wip
  *
  * This class is a wrapper of the SFsDeamonCli and the SFsDeamonProcess to allows you to
  * start quickly some watch processes and kill them with ease
  *
- * @todo        update doc
- *
  * @param       {Object}        [settings={}]             Specify some settings to configure your filesystem deamon instance
  * - id (deamon.fs.unnamed) {String}: A unique id for your watch instance
  * - name (Unnamed SFsDeamon) {String}: A name for your watch instance
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import SFsDeamon from '@coffeekraken/sugar/node/deamon/fs/SFsDeamon';
@@ -31,7 +36,7 @@ import __SFsDeamonProcess from './SFsDeamonProcess';
  * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SFsDeamon extends __SDeamon {
+export = class SFsDeamon extends __SDeamon {
   /**
    * @name          _watchPromisesStack
    * @type          Array<SPromise>

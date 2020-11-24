@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __blessed from 'blessed';
 import __SBlessedComponent from '../SBlessedComponent';
 import __deepMerge from '../../object/deepMerge';
@@ -11,6 +13,7 @@ import __SPromise from '../../promise/SPromise';
  * @name                  SBlessedPopup
  * @namespace           sugar.node.blessed.popup
  * @type                  Class
+ * @wip
  *
  * This class is the base one for all the sugar blessed components like input, panel, etc...
  *
@@ -19,13 +22,18 @@ import __SPromise from '../../promise/SPromise';
  * - description (null) {String}: A description to display in the popup
  * - id (popup) {String}: An id to identify the popup. This id will be appended to the "activeSpace" when the popup is opened
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import SBlessedPopup from '@coffeekraken/sugar/node/blessed/popup/SBlessedPopup';
  * const myPopup = new SBlessedPopup();
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBlessedPopup extends __SBlessedComponent {
+export = class SBlessedPopup extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function

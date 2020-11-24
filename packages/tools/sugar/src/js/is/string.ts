@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isString
  * @namespace           sugar.js.is
@@ -22,6 +24,7 @@
  * @since         1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isString(value) {
+function isString(value) {
   return typeof value === 'string' || value instanceof String;
 }
+export = isString;

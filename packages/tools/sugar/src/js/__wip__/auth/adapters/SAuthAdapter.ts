@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                            SAuthAdapter
  * @namespace           node.auth.adapters

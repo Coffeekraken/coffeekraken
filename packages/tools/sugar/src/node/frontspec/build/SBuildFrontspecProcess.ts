@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SBuildFrontspecActionsStream from './SBuildFrontspecActionsStream';
 import __deepMerge from '../../object/deepMerge';
 import __SProcess from '../../process/SProcess';
@@ -8,13 +10,18 @@ import __SBuildFrontspecInterface from './interface/SBuildFrontspecInterface';
  * @namespace           sugar.node.build.frontspec
  * @type            Class
  * @extends         SProcess
+ * @wip
  *
  * This class represent the process that build the frontspec.json file
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBuildFrontspecProcess extends __SProcess {
+export = class SBuildFrontspecProcess extends __SProcess {
   static interface = __SBuildFrontspecInterface;
 
   /**

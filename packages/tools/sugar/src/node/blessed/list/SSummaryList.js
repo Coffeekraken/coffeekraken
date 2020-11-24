@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const blessed_1 = __importDefault(require("blessed"));
 const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
@@ -14,27 +14,7 @@ const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 const SInput_1 = __importDefault(require("../form/SInput"));
 const activeSpace_1 = __importDefault(require("../../core/activeSpace"));
 const escapeStack_1 = __importDefault(require("../../terminal/escapeStack"));
-/**
- * @name                  SBlessedSummaryList
- * @namespace           sugar.node.blessed.list
- * @type                  Class
- *
- * This class gives you the ability to display an editable list of informations.
- * This is very useful to display for example a summary of a command to launch, or whatever...
- *
- * @param         {Array}           items                 An array of items object constitued of these properties:
- * - id (null) {String}: The item id
- * - text (null) {String}: The item text to display before the value
- * - default (null) {String}: The item default value
- * @param        {Object}         [settings = {}]         A settings object to configure your this. Here's the available settings:
- *
- * @example       js
- * import SBlessedSummaryList from '@coffeekraken/sugar/node/blessed/list/SBlessedSummaryList';
- * const list = new SBlessedSummaryList({});
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SBlessedSummaryList extends SBlessedComponent_1.default {
+module.exports = class SBlessedSummaryList extends SBlessedComponent_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -110,12 +90,7 @@ class SBlessedSummaryList extends SBlessedComponent_1.default {
          */
         this._items = [];
         // init the actual list component
-        this.$list = blessed_1.default.list({
-            keys: false,
-            mouse: false,
-            interactive: true,
-            ...this._settings
-        });
+        this.$list = blessed_1.default.list(Object.assign({ keys: false, mouse: false, interactive: true }, this._settings));
         this.append(this.$list);
         // save the items
         this._items = items;
@@ -133,7 +108,7 @@ class SBlessedSummaryList extends SBlessedComponent_1.default {
         this.on('detach', () => {
             activeSpace_1.default.remove('.summaryList');
         });
-        this.promise = new SPromise_1.default((resolve, reject, trigger, cancel) => { }, {
+        this.promise = new SPromise_1.default({
             id: 'SBlessedSummaryList'
         });
         this.on = this.promise.on.bind(this.promise);
@@ -210,7 +185,7 @@ class SBlessedSummaryList extends SBlessedComponent_1.default {
                     return;
                 }
                 // init an new empty escape stack
-                escapeStackPromise = escapeStack_1.default(() => { });
+                escapeStackPromise = escapeStack_1.default();
                 this._isEditing = true;
                 this._editingItemIdx = this.$list.selected;
                 this.$editInput = new SInput_1.default({
@@ -231,7 +206,6 @@ class SBlessedSummaryList extends SBlessedComponent_1.default {
                     .on('resolve', (value) => {
                     this._items[this.$list.selected].value = value;
                 })
-                    .on('cancel', () => { })
                     .on('cancel,finally', () => {
                     setTimeout(() => {
                         this._isEditing = false;
@@ -298,7 +272,7 @@ class SBlessedSummaryList extends SBlessedComponent_1.default {
      */
     _buildBlessedListItemsArray() {
         const longestItemText = this.getLongestListItemName();
-        let listItems = this._items.map((item, i) => {
+        const listItems = this._items.map((item, i) => {
             let value = this._items[i].value !== undefined
                 ? this._items[i].value
                 : item.default;
@@ -327,7 +301,7 @@ class SBlessedSummaryList extends SBlessedComponent_1.default {
      *
      */
     _rebuildList() {
-        let listItems = this._buildBlessedListItemsArray();
+        const listItems = this._buildBlessedListItemsArray();
         this.$list.clearItems();
         this.$list.setItems(listItems);
         this.$list.select(this._selectedItemIdx);
@@ -352,5 +326,4 @@ class SBlessedSummaryList extends SBlessedComponent_1.default {
             super.update();
         });
     }
-}
-exports.default = SBlessedSummaryList;
+};

@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const childProcess_1 = __importDefault(require("../is/childProcess"));
 const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
 const toString_1 = __importDefault(require("../string/toString"));
@@ -13,10 +13,15 @@ const color_1 = __importDefault(require("../color/color"));
  * @name                    handleError
  * @namespace               sugar.node.error
  * @type                    Function
+ * @wip
  *
  * This function take a thrown error and try to display it the best way possible.
  * Simply add the "uncaughtException" and the "unhandledRejection" listeners on the process object,
  * pass this function as the handler one and that's it...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example           js
  * import handleError from '@coffeekraken/sugar/node/error/handleError';
@@ -45,7 +50,6 @@ function handleError() {
         });
     }
 }
-exports.default = handleError;
 function createErrorPanel(error) {
     if (!global.screen)
         return;
@@ -102,7 +106,7 @@ function __handleChildProcessErrors(error) {
     // // error = error.toString();
     if (!error)
         return;
-    let errorStringArray = [error.stack];
+    const errorStringArray = [error.stack];
     // __SIpc.trigger('error', errorStringArray.join('\n'));
     console.log(errorStringArray.join('\n'));
     // console.log(__toString(error));
@@ -148,3 +152,4 @@ function __handleMainProcessErrors(error) {
         return;
     }
 }
+module.exports = handleError;

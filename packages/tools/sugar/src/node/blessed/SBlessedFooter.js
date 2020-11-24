@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const blessed_1 = __importDefault(require("blessed"));
 const SBlessedComponent_1 = __importDefault(require("./SBlessedComponent"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
@@ -10,22 +10,7 @@ const parseHtml_1 = __importDefault(require("../terminal/parseHtml"));
 const color_1 = __importDefault(require("../color/color"));
 const ora_1 = __importDefault(require("ora"));
 const countLine_1 = __importDefault(require("../string/countLine"));
-/**
- * @name                  SBlessedFooter
- * @namespace           sugar.node.blessed
- * @type                  Class
- *
- * This class represent a footer that you can add to your blessed based UI
- *
- * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
- *
- * @example       js
- * import SBlessedFooter from '@coffeekraken/sugar/node/blessed/SBlessedFooter';
- * new SBlessedFooter({});
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SBlessedFooter extends SBlessedComponent_1.default {
+module.exports = class SBlessedFooter extends SBlessedComponent_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -161,5 +146,4 @@ class SBlessedFooter extends SBlessedComponent_1.default {
         // this._updateStatusBar();
         super.update();
     }
-}
-exports.default = SBlessedFooter;
+};

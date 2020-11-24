@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const sugar_1 = __importDefault(require("../config/sugar"));
 const isInPackage_1 = __importDefault(require("../path/isInPackage"));
 const packageRoot_1 = __importDefault(require("../path/packageRoot"));
@@ -12,13 +12,19 @@ const jsObjectToScssMap_1 = __importDefault(require("./jsObjectToScssMap"));
  * @name            getScssSharedResourcesString
  * @namespace       sugar.node.scss
  * @type            Function
+ * @wip
  *
  * This function simply check the @config.build.scss.imports config and return the correct imports array
  *
  * @param       {Array}        [array=null]        Specify the imports array you want to use, otherwise will take the default config in build.scss.imports
  * @return      {Object}                           An object containing two strings. The first is "prepend" and the second "append" depending on where we have to add the imports string in the code
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function getScssSharedResourcesString(array = null) {
     if (!array)
@@ -47,5 +53,4 @@ function getScssSharedResourcesString(array = null) {
     });
     return importsStrings;
 }
-exports.default = getScssSharedResourcesString;
-;
+module.exports = getScssSharedResourcesString;

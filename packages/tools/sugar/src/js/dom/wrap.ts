@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      wrap
  * @namespace           sugar.js.dom
@@ -31,7 +33,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function wrap($elm, $wrapper) {
+function wrap($elm, $wrapper) {
   if (typeof $wrapper === 'string') {
     $wrapper = document.createElement($wrapper);
   }
@@ -44,3 +46,4 @@ export default function wrap($elm, $wrapper) {
   }
   return $wrapper.appendChild($elm);
 }
+export = wrap;

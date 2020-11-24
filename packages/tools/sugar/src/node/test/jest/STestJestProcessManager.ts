@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __extension from '../../fs/extension';
 import __fs from 'fs';
 import __SProcessManager from '../../process/SProcessManager';
@@ -15,13 +17,18 @@ import __copy from '../../clipboard/copy';
  * @namespace           sugar.node.test.jest
  * @type            Class
  * @extends         SProcess
+ * @wip
  *
  * This class represent the process that launch the tests on javascript files
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class STestJestProcess extends __SChildProcessManager {
+export = class STestJestProcess extends __SChildProcessManager {
   static interface = __STestJestInterface;
 
   /**

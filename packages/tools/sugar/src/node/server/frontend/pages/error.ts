@@ -1,9 +1,12 @@
+// @ts-nocheck
+
 import __deepMerge from '../../../object/deepMerge';
 
 /**
  * @name                error
  * @namespace           sugar.node.server.frontend.pages
  * @type                Function
+ * @wip
  *
  * This function simply return the 404 page content to send to the user
  * with the passed data object described here:
@@ -17,6 +20,10 @@ import __deepMerge from '../../../object/deepMerge';
  * - ctas.href (null) {String}: The url where to send the user
  * - ctas.target (_self) {String}: The target of the cta.
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example             js
  * import 404 from '@coffeekraken/sugar/node/server/frontend/pages/404';
  * const content = await 404('Error', 'Something wrong happened', null, [{
@@ -27,7 +34,7 @@ import __deepMerge from '../../../object/deepMerge';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function error(data = {}) {
+function error(data = {}) {
   data = __deepMerge(
     {
       title: 'Error',
@@ -59,3 +66,4 @@ export default function error(data = {}) {
     packageJson: __standardizeJson(require(__packageRoot() + '/package.json'))
   };
 }
+export = error;

@@ -1,5 +1,7 @@
+// @ts-nocheck
+
 import monorepo from './monorepo.cli';
 
-export default (stringArgs = '') => {
+export = (stringArgs = '') => {
   monorepo(stringArgs);
 };

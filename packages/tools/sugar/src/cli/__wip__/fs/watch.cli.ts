@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __argsToObject from '../../node/cli/argsToObject';
 import __chokidar from 'chokidar';
 import __packageRoot from '../../node/path/packageRoot';

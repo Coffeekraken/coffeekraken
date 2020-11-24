@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __SCommand = require('../../terminal/SCommand');
 const __deepMerge = require('../../object/deepMerge');
 const __SBuildViewsCli = require('./SBuildViewsCli');

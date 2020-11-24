@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __packageRoot from '../../node/path/packageRoot';
 import __parseArgs from '../../node/cli/parseArgs';
 
@@ -5,7 +7,7 @@ interface IPathRootOptions {
   highest?: boolean;
 }
 
-export default async (stringArgs = '') => {
+export = async (stringArgs = '') => {
   const args: IPathRootOptions = __parseArgs(stringArgs, {
     definitionObj: {
       highest: {

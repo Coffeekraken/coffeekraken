@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __minimatch from 'minimatch';
 import __isGlob from 'is-glob';
@@ -266,4 +268,4 @@ const activeSpaceApi = {
   }
 };
 
-export default activeSpaceApi;
+export = activeSpaceApi;

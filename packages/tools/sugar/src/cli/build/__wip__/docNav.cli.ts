@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __parseArgs = require('../../../node/cli/parseArgs');
 const __SBuildDocNavCli = require('../../node/build/docNav/SBuildDocNavCli');
 const __SBuildDocNavActionsStream = require('../../node/build/docNav/SBuildDocNavActionsStream');

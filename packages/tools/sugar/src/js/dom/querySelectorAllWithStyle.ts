@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import getStyleProperty from './getStyleProperty';
 
 /**
@@ -34,7 +36,7 @@ import getStyleProperty from './getStyleProperty';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function querySelectorAllWithStyle(
+function querySelectorAllWithStyle(
   selector,
   style,
   settings = {}
@@ -94,3 +96,4 @@ export default function querySelectorAllWithStyle(
  * @type 		{HTMLElement}
  * @default 	document
  */
+export = querySelectorAllWithStyle;

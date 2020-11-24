@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const sugar_1 = __importDefault(require("../config/sugar"));
 const jsObjectToScssMap_1 = __importDefault(require("./jsObjectToScssMap"));
 const putUseStatementsOnTop_1 = __importDefault(require("./putUseStatementsOnTop"));
@@ -13,12 +13,17 @@ const path_1 = __importDefault(require("path"));
  * @name            injectSugarScss
  * @namespace       sugar.node.scss
  * @type            Function
+ * @wip
  *
  * This function simply inject the sugar scss init code in a string.
  * It check if it has already been injected and does nothing if it's the case.
  *
  * @param       {String}          scss          The scss string in which to inject the init code
  * @return      {String}                        The new string with the sugar scss init code injected
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import injectSugarScss from '@coffeekraken/sugar/node/scss/injectSugarScss';
@@ -50,4 +55,4 @@ function injectSugarScss(scss) {
   `);
     return res;
 }
-exports.default = injectSugarScss;
+module.exports = injectSugarScss;

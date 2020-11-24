@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __offset from './offset';
 /**
  * @name      offsetParent
@@ -22,7 +24,7 @@ import __offset from './offset';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function offsetParent(elm) {
+function offsetParent(elm) {
   const parentOffset = __offset(elm.parentNode);
   const offset = __offset(elm);
   return {
@@ -30,3 +32,4 @@ export default function offsetParent(elm) {
     left: offset.left - parentOffset.left
   };
 }
+export = offsetParent;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import requestFullscreen from './requestFullscreen';
 import exitFullscreen from './exitFullscreen';
 
@@ -23,7 +25,7 @@ import exitFullscreen from './exitFullscreen';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function toggleFullscreen(elm) {
+function toggleFullscreen(elm) {
   const fullscreenElm =
     document.fullscreenElement ||
     document.mozFullScreenElement ||
@@ -34,3 +36,4 @@ export default function toggleFullscreen(elm) {
     return exitFullscreen();
   }
 }
+export = toggleFullscreen;

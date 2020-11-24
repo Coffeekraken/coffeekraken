@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __uniqid from '../../string/uniqid';
 import __parseArgs from '../../string/parseArgs';
 import __querySelectorLive from '../../dom/querySelectorLive';
@@ -6,7 +8,7 @@ import __querySelectorLive from '../../dom/querySelectorLive';
  * @todo        documentation
  */
 
-export default (() => {
+export = (() => {
   __querySelectorLive('[slide-in]', ($item) => {
     // generate a unique id for this node
     const uniqClass = `slide-in-${__uniqid()}`;

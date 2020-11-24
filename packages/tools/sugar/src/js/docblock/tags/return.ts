@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __upperFirst from '../../string/upperFirst';
 
 /**
@@ -17,7 +19,7 @@ import __upperFirst from '../../string/upperFirst';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-export default function returnTag(data) {
+function returnTag(data) {
   const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
   return {
     type: stringArray[0]
@@ -26,3 +28,4 @@ export default function returnTag(data) {
     description: stringArray[1] ? stringArray[1].trim() : ''
   };
 }
+export = returnTag;

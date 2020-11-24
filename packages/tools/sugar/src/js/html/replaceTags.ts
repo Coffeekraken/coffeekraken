@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __toString from '../string/toString';
 
 /**
@@ -25,7 +27,7 @@ import __toString from '../string/toString';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function replaceTags(text, tags) {
+function replaceTags(text, tags) {
   if (!text) text = '';
   text = __toString(text);
   let oneLineText = text.replace(/\r\n/g, '|rn|');
@@ -86,3 +88,4 @@ export default function replaceTags(text, tags) {
 
   return oneLineText;
 }
+export = replaceTags;

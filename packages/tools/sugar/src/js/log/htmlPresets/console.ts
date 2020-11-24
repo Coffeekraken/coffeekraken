@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __replaceTags from '../../html/replaceTags';
 import __chalk from 'chalk';
 __chalk.level = 3;
@@ -20,7 +22,7 @@ __chalk.level = 3;
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function console(text) {
+function consoleFn(text) {
   return __replaceTags(text, {
     black: (tag, content) => __chalk.black(content),
     red: (tag, content) => __chalk.red(content),
@@ -49,3 +51,4 @@ export default function console(text) {
     br: (tag, content) => '\n'
   });
 }
+export = consoleFn;

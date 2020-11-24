@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__extension) => {
     describe('sugar.js.file.extension', () => {
         it('Should fine the url extension correctly', done => {

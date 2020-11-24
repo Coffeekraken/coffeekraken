@@ -1,13 +1,20 @@
+// @ts-nocheck
+
 /**
  * @name            isPortFree
  * @namespace       sugar.node.http
  * @type            Function
  * @async
+ * @beta
  *
  * This function simply check if the passed port is free or not
  *
  * @param           {Number}            port            The port to check
  * @return          {Promise}                           A promise resolved with the result when the check has been done
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import isPortFree from '@coffeekraken/sugar/node/http/isPortFree';
@@ -17,9 +24,10 @@
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default function isPortFree(port) {
-  return new Promise((resolve) => {
-    const server = require('http')
+function isPortFree(port) {
+  return new Promise(async (resolve) => {
+    const server = await import('http');
+    server
       .createServer()
       .listen(port, () => {
         server.close();
@@ -30,3 +38,4 @@ export default function isPortFree(port) {
       });
   });
 }
+export = isPortFree;

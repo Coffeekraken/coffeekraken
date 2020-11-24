@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 const __winston = require('winston');
 const SlackHook = require('winston-slack-webhook-transport');
 const __getAppMeta = require('../app/getAppMetas');
@@ -71,12 +72,7 @@ module.exports = function setupSlackTransport(webhookUrl = process.env.LOG_SLACK
         });
     }
     // init the slack transport
-    const slackTransport = new SlackHook({
-        webhookUrl: webhookUrl,
-        channel: process.env.LOG_SLACK_CHANNEL,
-        username: process.env.LOG_SLACK_USERNAME || appMeta.name || 'Coffeekraken logger',
-        iconUrl: process.env.LOG_SLACK_STATUS_ICON,
-        formatter: (info) => {
+    const slackTransport = new SlackHook(Object.assign({ webhookUrl: webhookUrl, channel: process.env.LOG_SLACK_CHANNEL, username: process.env.LOG_SLACK_USERNAME || appMeta.name || 'Coffeekraken logger', iconUrl: process.env.LOG_SLACK_STATUS_ICON, formatter: (info) => {
             return {
                 // text: `${info.level}: ${info.message}`,
                 attachments: [
@@ -94,12 +90,6 @@ module.exports = function setupSlackTransport(webhookUrl = process.env.LOG_SLACK
                     }
                 ]
             };
-        },
-        level: level,
-        unfurlLinks: false,
-        unfurlMedia: false,
-        mrkdwn: true,
-        ...winstonSlackSettings
-    });
+        }, level: level, unfurlLinks: false, unfurlMedia: false, mrkdwn: true }, winstonSlackSettings));
     global._sLogger.add(slackTransport);
 };

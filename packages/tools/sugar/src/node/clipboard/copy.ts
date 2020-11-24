@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __clipboardy from 'clipboardy';
 import __toString from '../string/toString';
 
@@ -5,11 +7,16 @@ import __toString from '../string/toString';
  * @name            copy
  * @namespace       sugar.node.clipboard
  * @type            Function
+ * @stable
  *
  * Simple function to copy things into the system clipboard.
  * This is using https://www.npmjs.com/package/clipboardy under the hood.
  *
  * @param       {String}      text        The text to copy
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import copy from '@coffeekraken/sugar/node/clipboard/copy';
@@ -19,7 +26,8 @@ import __toString from '../string/toString';
  * @see         https://www.npmjs.com/package/clipboardy
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function copy(text) {
+function copy(text) {
   text = __toString(text);
   __clipboardy.writeSync(text);
 }
+export = copy;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __fs from 'fs';
 import __find from 'find-in-files';
 import __path from 'path';
@@ -8,7 +10,7 @@ import __parseArgs from '../../node/cli/parseArgs';
 import __parse from '../../node/docblock/parse';
 import __includes from '../../node/string/includes';
 
-export default async (stringArgs = '') => {
+export = async (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
     definitionObj: {
       source: {

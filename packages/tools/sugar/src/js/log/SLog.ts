@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __SLogConsoleAdapter from './adapters/SLogConsoleAdapter';
 import __env from '../core/env';
@@ -29,7 +31,7 @@ import __isPlainObject from '../is/plainObject';
  * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SLog {
+export = class SLog {
   /**
    * @name          _settings
    * @type          Object

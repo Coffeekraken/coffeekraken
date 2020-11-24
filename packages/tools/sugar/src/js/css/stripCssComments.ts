@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __stripCssComments from 'strip-css-comments';
 
@@ -34,7 +36,7 @@ import __stripCssComments from 'strip-css-comments';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function stripCssComments(css, settings = {}) {
+function stripCssComments(css, settings = {}) {
   settings = __deepMerge(
     {
       block: true,
@@ -53,3 +55,4 @@ export default function stripCssComments(css, settings = {}) {
   }
   return css;
 }
+export = stripCssComments;

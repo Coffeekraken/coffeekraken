@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import whenInViewport from '../dom/whenInViewport';
 import querySelectorLive from '../dom/querySelectorLive';
 import deepMerge from '../object/deepMerge';
@@ -29,7 +31,7 @@ import deepMerge from '../object/deepMerge';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function imagesLazySrcAttribute(settings = {}) {
+function imagesLazySrcAttribute(settings = {}) {
   settings = deepMerge(
     {
       offset: 50
@@ -42,3 +44,4 @@ export default function imagesLazySrcAttribute(settings = {}) {
     });
   });
 }
+export = imagesLazySrcAttribute;

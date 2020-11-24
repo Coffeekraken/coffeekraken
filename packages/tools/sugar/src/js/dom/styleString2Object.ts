@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __camelize from '../string/camelize';
 import __autoCast from '../string/autoCast';
 
@@ -27,7 +29,7 @@ import __autoCast from '../string/autoCast';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function styleString2Object(style) {
+function styleString2Object(style) {
   if (!style || style === '') return {};
   const obj = {};
   const split = style.replace(/\s/g, '').split(';');
@@ -42,3 +44,4 @@ export default function styleString2Object(style) {
   // return the style object
   return obj;
 }
+export = styleString2Object;

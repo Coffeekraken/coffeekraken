@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__color, __SColor) => {
     // TODO Create more tests for the SColor class
     const color = __color('#ff00ff');

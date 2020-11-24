@@ -1,31 +1,20 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const fmt_obj_1 = __importDefault(require("fmt-obj"));
-/**
- * @name                    SLogConsoleAdapter
- * @namespace           sugar.js.log
- * @type                    Class
- *
- * This class allows you to log your messages, errors, etc... easily through some adapters that cover some targets like "console" of course,
- * "mail", "slack", etc...
- *
- * @example               js
- * import SLog from '@coffeekraken/sugar/js/log/SLog';
- * import SLogConsoleAdapter from '@coffeekraken/sugar/js/log/adapters/SLogConsoleAdapter';
- * const logger = new SLog({
- *    adapters: [
- *      new SLogConsoleAdapter()
- *    ]
- * });
- * logger.log('Something cool happend...');
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SLogConsoleAdapter {
+module.exports = class SLogConsoleAdapter {
     /**
      * @name          constructor
      * @type          Function
@@ -78,41 +67,42 @@ class SLogConsoleAdapter {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async log(message, level) {
-        return new Promise((resolve, reject) => {
-            // init the console method to use
-            let consoleMethod = 'log';
-            // adapting the console method to use depending on the type
-            switch (level) {
-                case 'trace':
-                    consoleMethod = 'trace';
-                    break;
-                case 'error':
-                    consoleMethod = 'error';
-                    break;
-                case 'warn':
-                    consoleMethod = 'warn';
-                    break;
-                case 'info':
-                    consoleMethod = 'info';
-                    break;
-                case 'debug':
-                    consoleMethod = 'debug';
-                    break;
-            }
-            // log the message
-            if (typeof message === 'string') {
-                ((global || window).nativeConsole || console)[consoleMethod](message + '⠀');
-            }
-            else if (typeof message === 'object') {
-                ((global || window).nativeConsole || console)[consoleMethod](fmt_obj_1.default(message) + '⠀');
-            }
-            else {
-                ((global || window).nativeConsole || console)[consoleMethod](message + '⠀');
-            }
-            // resolve the promise
-            resolve();
+    log(message, level) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                // init the console method to use
+                let consoleMethod = 'log';
+                // adapting the console method to use depending on the type
+                switch (level) {
+                    case 'trace':
+                        consoleMethod = 'trace';
+                        break;
+                    case 'error':
+                        consoleMethod = 'error';
+                        break;
+                    case 'warn':
+                        consoleMethod = 'warn';
+                        break;
+                    case 'info':
+                        consoleMethod = 'info';
+                        break;
+                    case 'debug':
+                        consoleMethod = 'debug';
+                        break;
+                }
+                // log the message
+                if (typeof message === 'string') {
+                    ((global || window).nativeConsole || console)[consoleMethod](message + '⠀');
+                }
+                else if (typeof message === 'object') {
+                    ((global || window).nativeConsole || console)[consoleMethod](fmt_obj_1.default(message) + '⠀');
+                }
+                else {
+                    ((global || window).nativeConsole || console)[consoleMethod](message + '⠀');
+                }
+                // resolve the promise
+                resolve();
+            });
         });
     }
-}
-exports.default = SLogConsoleAdapter;
+};

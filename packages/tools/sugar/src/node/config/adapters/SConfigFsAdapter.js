@@ -1,33 +1,15 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const tmpDir_1 = __importDefault(require("../../fs/tmpDir"));
 const writeFileSync_1 = __importDefault(require("../../fs/writeFileSync"));
 const diff_1 = __importDefault(require("../../object/diff"));
 const SConfigAdapter_1 = __importDefault(require("./SConfigAdapter"));
-/**
- * @name                  SConfigFsAdapter
- * @namespace           sugar.node.config.adapters
- * @type                  Class
- *
- * The JSON data adapter for the SConfig class that let you define a filename where you want to save your configs, how you want to encrypt/decrypt it
- * and then you just have to use the SConfig class and that's it...
- *
- * @param                   {Object}                    [settings={}]         The adapter settings that let you work with the good data storage solution...
- * - name (null) {String}: This specify the config name that you want to use.
- * - filename ('[name].config.js') {String}: Specify the filename to use for the file that will store the configs
- * - defaultConfigPath (null) {String}: This specify the path to the "default" config file.
- * - appConfigPath (${process.cwd()}/[filename]) {String}: This specify the path to the "app" config file
- * - userConfigPath (${__tmpDir()}/[filename]) {String}: This specify the path to the "user" config file
- * @return                  {Promise}                                         A promise that will be resolved once the data has been getted/saved...
- *
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SConfigFsAdapter extends SConfigAdapter_1.default {
+module.exports = class SConfigFsAdapter extends SConfigAdapter_1.default {
     constructor(settings = {}) {
         settings = deepMerge_1.default({
             name: null,
@@ -73,13 +55,11 @@ class SConfigFsAdapter extends SConfigAdapter_1.default {
         }
         const baseConfig = deepMerge_1.default(this._defaultConfig, this._appConfig);
         newConfig = diff_1.default(baseConfig, newConfig);
-        let newConfigString = `
+        const newConfigString = `
       module.exports = ${JSON.stringify(newConfig)};
     `;
         // write the new config file
         writeFileSync_1.default(this.settings.userConfigPath, newConfigString);
         return true;
     }
-}
-exports.default = SConfigFsAdapter;
-;
+};

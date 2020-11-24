@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import fastdom from 'fastdom';
 import __dispatchEvent from '../dom/dispatchEvent';
 
@@ -28,7 +30,7 @@ import __dispatchEvent from '../dom/dispatchEvent';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function inputAdditionalEvents(settings = {}) {
+function inputAdditionalEvents(settings = {}) {
   settings = {
     enter: true,
     escape: true,
@@ -66,3 +68,4 @@ export default function inputAdditionalEvents(settings = {}) {
   document.addEventListener('change', handleInputAttributes);
   document.addEventListener('keyup', handleInputAttributes);
 }
+export = inputAdditionalEvents;

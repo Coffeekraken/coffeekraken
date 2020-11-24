@@ -1,14 +1,21 @@
+// @ts-nocheck
+
 import { paramCase } from 'param-case';
 
 /**
  * @name          paramCase
  * @namespace           sugar.js.string
  * @type          Function
+ * @stable
  *
  * This function transform a string into a param case one like so "something-cool"
  *
  * @param       {String}        string          The string to convert
  * @return      {String}                        The converted string
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import paramCase from '@coffeekraken/sugar/js/string/paramCase';
@@ -18,6 +25,7 @@ import { paramCase } from 'param-case';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function (string) {
+function paramCaseFn (string) {
   return paramCase(string);
 }
+export = paramCaseFn;

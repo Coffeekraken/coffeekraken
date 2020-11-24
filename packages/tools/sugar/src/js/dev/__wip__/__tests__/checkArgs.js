@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 module.exports = (__checkArgs) => {
     function checkArgs(param1, param2, param3 = 'hello', param4) {
         // console.log(__getArgsNames(checkArgs));
@@ -20,4 +22,3 @@ module.exports = (__checkArgs) => {
         });
     });
 };
-export {};

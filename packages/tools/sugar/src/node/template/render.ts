@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __sugarConfig from '../config/sugar';
 import __getFilename from '../fs/filename';
 import __fs from 'fs';
@@ -15,6 +17,7 @@ import __unique from '../array/unique';
  * @namespace         sugar.node.template
  * @type              Function
  * @async
+ * @wip
  *
  * This function take a view path, a data object and optionaly a settings object to compile
  * the view and return a simple Promise that will be resolved or rejected depending on the
@@ -25,6 +28,10 @@ import __unique from '../array/unique';
  * @param       {Object}        [settings={}]   An object of settings to configure your rendering process. Here's the list of available settings:
  * - rootDir (__sugarConfig('views.rootDir')) {String|Array<String>}: Specify the root directory where to search for views. Can be an array of directories in which the engine will search through if needed
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import render from '@coffeekraken/sugar/node/template/render';
  * const result = await render('my.cool.template, {
@@ -34,7 +41,7 @@ import __unique from '../array/unique';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function render(viewPath, data = null, settings = {}) {
+function render(viewPath, data = null, settings = {}) {
   return new __SPromise(
     async (resolve, reject, trigger, cancel) => {
       const templateInstance = new __STemplate(viewPath, {
@@ -67,3 +74,4 @@ export default function render(viewPath, data = null, settings = {}) {
     }
   );
 }
+export = render;

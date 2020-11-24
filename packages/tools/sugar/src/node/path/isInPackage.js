@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const packageRoot_1 = __importDefault(require("./packageRoot"));
 const fs_1 = __importDefault(require("fs"));
 /**
@@ -50,4 +50,4 @@ function isInPackage(name, from = process.cwd(), highest = false) {
     }
     return false;
 }
-exports.default = isInPackage;
+module.exports = isInPackage;

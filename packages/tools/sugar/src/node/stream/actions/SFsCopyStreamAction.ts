@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SActionsStreamAction from '../SActionsStreamAction';
 import __deepMerge from '../../object/deepMerge';
 import __SInterface from '../../class/SInterface';
@@ -21,15 +23,21 @@ class SFsCopyStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
+ * @wip
  *
  * This class is a stream action that allows you to copy some files or folders from one location to another
  *
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SFsCopyStreamAction extends __SActionsStreamAction {
+export = class SFsCopyStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object

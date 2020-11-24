@@ -1,20 +1,28 @@
+// @ts-nocheck
+
 /**
  * @name                  hex2rgba
  * @namespace           sugar.js.color
  * @type                  Function
+ * @stable
  *
  * Hex to RGBA
  *
  * @param	              {string}       	hex         		The hex string to convert
  * @return            	{object} 			                  	The rgba object representation
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import hex2rgba from '@coffeekraken/sugar/js/color/hex2rgba';
  * hex2rgba('#ff00ff');
  *
+ * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function hex2rgba(hex) {
+function hex2rgba(hex) {
   hex = hex.replace('#', '');
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
@@ -30,3 +38,4 @@ export default function hex2rgba(hex) {
     a: a
   };
 }
+export = hex2rgba;

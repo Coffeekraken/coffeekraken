@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __fs from 'fs';
 import __deepMerge from '../../object/deepMerge';
 import __writeFileSync from '../../fs/writeFileSync';
@@ -8,6 +10,7 @@ import __SConfigAdapter from './SConfigAdapter';
  * @name                  SConfigFolderAdapter
  * @namespace           sugar.node.config.adapters
  * @type                  Class
+ * @beta
  *
  * This adapter let you specify a folder in which to put all the config files and access it normaly as you would with the SConfig system.
  * Each file in the folder will be the first level of the final config object like for example the file "colors.config.js" will be stored
@@ -21,9 +24,14 @@ import __SConfigAdapter from './SConfigAdapter';
  * - userConfigPath (${__tmpDir()}/[filename]) {String}: This specify the path to the "user" config file
  * @return                  {Promise}                                         A promise that will be resolved once the data has been getted/saved...
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SConfigFolderAdapter extends __SConfigAdapter {
+export = class SConfigFolderAdapter extends __SConfigAdapter {
   constructor(settings = {}) {
     super(settings);
     this.settings.foldername = this.settings.foldername.replace(
@@ -173,7 +181,7 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
     Object.keys(baseConfig).forEach((name) => {
       const configToSave = __diff(baseConfig[name], newConfig[name] || {});
 
-      let newConfigString = `
+      const newConfigString = `
       module.exports = ${JSON.stringify(configToSave)};
     `;
 
@@ -188,4 +196,4 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
 
     return true;
   }
-};
+}

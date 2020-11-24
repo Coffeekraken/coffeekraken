@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __globParent from 'glob-parent';
 
 /**
@@ -23,7 +25,8 @@ import __globParent from 'glob-parent';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function extractNoneGlob(string) {
+function extractNoneGlob(string) {
   const parent = __globParent(string);
   return parent;
 }
+export = extractNoneGlob;

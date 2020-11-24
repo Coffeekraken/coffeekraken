@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import ISProcess, {
   ISProcessObject,
   ISProcessSettings
@@ -11,7 +13,7 @@ export interface ISCompileTsProcessCtor {
   new (settings?: ISCompileTsProcessSettings): ISCompileTsProcess;
 }
 
-export interface ISCompileTsProcessSettings extends ISProcessSettings {}
+export type ISCompileTsProcessSettings = ISProcessSettings;
 
 export default interface ISCompileTsProcess {
   process(params?: object, settings?: ISCompileTsProcessSettings): Promise<any>;

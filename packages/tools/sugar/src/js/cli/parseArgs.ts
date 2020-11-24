@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __parse from '../string/parse';
 import __set from '../object/set';
@@ -23,7 +25,9 @@ import __ofType from '../is/ofType';
  * @param             {Object}                    [settings={}]               A settings object that configure how the string will be parsed. Here's the settings options:
  * @return            {Object}                                                The object of funded arguments and their values
  *
- * @todo            update example
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import parseArgs from '@coffeekraken/sugar/js/string/parseArgs';
@@ -51,9 +55,10 @@ import __ofType from '../is/ofType';
  *    id: '#blop'
  * }
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function parseArgsString(string, settings = {}) {
+function parseArgsString(string, settings = {}) {
   settings = __deepMerge(
     {
       definitionObj: null,
@@ -203,3 +208,4 @@ function getArgNameByAlias(alias, definitionObj) {
   }
   return null;
 }
+export = parseArgsString;

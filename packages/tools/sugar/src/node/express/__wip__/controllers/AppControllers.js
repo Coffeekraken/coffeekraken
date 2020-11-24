@@ -1,4 +1,14 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 module.exports = {
     /**
      * @name                          config
@@ -12,16 +22,16 @@ module.exports = {
      *
      * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
      */
-    config: async (req, res) => {
+    config: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         let value;
         if (req.params[0]) {
-            value = await Squid.config(req.params[0]);
+            value = yield Squid.config(req.params[0]);
         }
         else {
-            value = await Squid.config();
+            value = yield Squid.config();
         }
         res.send(value);
-    },
+    }),
     /**
      * @name                          meta
      * @namespace           sugar.node.express.controllers.AppControllers
@@ -56,11 +66,11 @@ module.exports = {
      *
      * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
      */
-    js: async (req, res) => {
+    js: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         // read the common squid framework file
-        const squidCommon = __fs.readFileSync(`${__dirname}/../../../../${await Squid.config('dist.js.outputFolder')}/common.bundle.js`);
+        const squidCommon = __fs.readFileSync(`${__dirname}/../../../../${yield Squid.config('dist.js.outputFolder')}/common.bundle.js`);
         // read the common project file
-        const projectCommon = __fs.readFileSync(`${process.cwd()}/${await Squid.config('dist.js.outputFolder')}/common.bundle.js`);
+        const projectCommon = __fs.readFileSync(`${process.cwd()}/${yield Squid.config('dist.js.outputFolder')}/common.bundle.js`);
         let resultingScript = `${squidCommon}${projectCommon}`;
         // resultingScript += `
         //   window.__squid = {
@@ -69,5 +79,5 @@ module.exports = {
         //   };`;
         // send gziped javascript files Content
         res.send(resultingScript);
-    }
+    })
 };

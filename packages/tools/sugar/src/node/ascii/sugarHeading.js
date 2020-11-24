@@ -1,28 +1,10 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const parseHtml_1 = __importDefault(require("../console/parseHtml"));
-/**
- * @name          sugarHeading
- * @namespace     sugar.js.ascii
- * @type          Function
- *
- * This function returns an ascii version of the sugar logo
- *
- * @param     {Object}      [settings={}]       A settings object:
- * - version (2.0.0) {String}: The version you want to display
- * - borders (true) {Boolean}: If you want to display the border left or not
- *
- * @example     js
- * import sugarHeading from '@coffeekraken/sugar/js/ascii/sugarHeading';
- * sugarHeading();
- *
- * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
 function sugarHeading(settings = {}) {
     settings = deepMerge_1.default({
         version: '2.0.0',
@@ -47,4 +29,4 @@ function sugarHeading(settings = {}) {
         .join('\n');
     return value;
 }
-exports.default = sugarHeading;
+module.exports = sugarHeading;

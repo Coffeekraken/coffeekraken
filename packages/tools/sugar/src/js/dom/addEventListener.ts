@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 
 /**
@@ -36,7 +38,7 @@ import __SPromise from '../promise/SPromise';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function addEventListener(
+function addEventListener(
   $elm,
   eventNames,
   callback = null,
@@ -75,3 +77,4 @@ export default function addEventListener(
 
   return promise;
 }
+export = addEventListener;

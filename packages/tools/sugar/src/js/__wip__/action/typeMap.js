@@ -1,4 +1,6 @@
-const __SUrlAction = require('./browser/SUrlAction');
+"use strict";
+// @ts-nocheck
+var __SUrlAction = require('./browser/SUrlAction');
 /**
  * @name            typeMap
  * @namespace       sugar.js.action

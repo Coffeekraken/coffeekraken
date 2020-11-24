@@ -1,8 +1,17 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const packageRoot_1 = __importDefault(require("../path/packageRoot"));
@@ -11,38 +20,7 @@ const glob_1 = __importDefault(require("glob"));
 const path_1 = __importDefault(require("path"));
 const unique_1 = __importDefault(require("../array/unique"));
 const sugar_1 = __importDefault(require("../config/sugar"));
-/**
- * @name                SFrontspec
- * @namespace           sugar.node.doc
- * @type                Class
- * @extends             SPromise
- *
- * This class represent the ```frontspec.json``` file and allows you to generate it from some sources (glob pattern(s))
- * and save it inside a directory you choose.
- *
- * @param           {Object}        [settings={}]           An object of settings to configure your docMap instance:
- *
- * @setting       {String}      [filename='frontspec.json']       Specify the filename you want
- * @setting       {String}      [outputDir=packageRoot()]         Specify the directory where you want to save your docMap.json file when using the ```save``` method
- * @setting       {Integer}     [dirDepth=3]                      Specify the maximum directories the scan will go down
- * @setting       {Boolean}     [cache=false]                     Specify if you want to take advantage of some cache or not
- * @setting       {Object}      [sources={}                       Specify some sources folders where the scan process will go search for frontspec.json files
- * @setting       {String}      [sources.[name].rootDir=__packageRoot()]     Specify the directory where to go search from
- * @setting       {Integer}     [sources.[name].dirDepth=3]                  Specify the maximum directories the scan will go down
- *
- * @todo        update doc
- *
- * @example             js
- * import SFrontspec from '@coffeekraken/sugar/node/doc/SFrontspec';
- * const frontspec = new SFrontspec({
- *  outputDir: '/my/cool/directory'
- * });
- * const result = await frontspec.read();
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SFrontspec extends SPromise_1.default {
+module.exports = class SFrontspec extends SPromise_1.default {
     /**
      * @name            constructor
      * @type            Function
@@ -149,7 +127,7 @@ class SFrontspec extends SPromise_1.default {
      */
     json(settings = {}) {
         settings = deepMerge_1.default(this._settings, {}, settings);
-        return new SPromise_1.default(async (resolve, reject, trigger, cancel) => {
+        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
             try {
                 // initiating the frontspecJson object
                 const packageJson = json_1.default();
@@ -161,7 +139,7 @@ class SFrontspec extends SPromise_1.default {
                     children: {}
                 };
                 // search for files
-                const files = await this.search(settings);
+                const files = yield this.search(settings);
                 if (!files)
                     resolve(frontspecJson);
                 const rootFilePath = `${packageRoot_1.default()}/${settings.filename}`;
@@ -194,9 +172,8 @@ class SFrontspec extends SPromise_1.default {
             catch (e) {
                 reject(e.toString());
             }
-        }, {
+        }), {
             id: settings.id + '.json'
         });
     }
-}
-exports.default = SFrontspec;
+};

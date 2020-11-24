@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isInViewport from './isInViewport';
 import __throttle from '../function/throttle';
 import __closest from './closest';
@@ -29,7 +31,7 @@ import __closest from './closest';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function whenOutOfViewport(elm, offset = 50) {
+function whenOutOfViewport(elm, offset = 50) {
   return new Promise((resolve, reject) => {
     if (window.IntersectionObserver) {
       let isInViewport = false;
@@ -97,3 +99,4 @@ export default function whenOutOfViewport(elm, offset = 50) {
     }
   });
 }
+export = whenOutOfViewport;

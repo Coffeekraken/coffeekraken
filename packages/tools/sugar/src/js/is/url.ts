@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isUrl
  * @namespace           sugar.js.is
@@ -22,7 +24,7 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isUrl(data) {
+function isUrl(data) {
   const strRegex =
     '^((https|http|ftp|rtsp|mms)?://)' +
     "?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?" + //ftp的user@
@@ -37,3 +39,4 @@ export default function isUrl(data) {
   const re = new RegExp(strRegex);
   return re.test(data);
 }
+export = isUrl;

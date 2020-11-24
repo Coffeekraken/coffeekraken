@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name          typeDefinitionArrayObjectToString
  * @namespace     sugar.js.value
@@ -36,7 +38,7 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function typeDefinitionArrayObjectToString(
+function typeDefinitionArrayObjectToString(
   typeDefinitionArrayObj
 ) {
   const parts = [];
@@ -55,3 +57,4 @@ export default function typeDefinitionArrayObjectToString(
 
   return parts.join('|');
 }
+export = typeDefinitionArrayObjectToString;

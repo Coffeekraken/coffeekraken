@@ -1,4 +1,6 @@
+// @ts-nocheck
+
 import _monorepoAll from '../monorepo/all';
-export default (stringArgs = '') => {
+export = (stringArgs = '') => {
   _monorepoAll(stringArgs);
 };

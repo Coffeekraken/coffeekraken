@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SActionsStreamAction from '../SActionsStreamAction';
 import __fs from 'fs';
 import __isDirectory from '../../is/directory';
@@ -23,15 +25,21 @@ class SFsReadFileStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
+ * @beta
  *
  * This class is a stream action that allows you to read file(s) to the filesystem
  *
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SFsReadFileStreamAction extends __SActionsStreamAction {
+export = class SFsReadFileStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object

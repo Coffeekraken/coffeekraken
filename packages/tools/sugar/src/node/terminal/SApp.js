@@ -1,34 +1,24 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const child_process_1 = __importDefault(require("child_process"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const blessed_1 = __importDefault(require("blessed"));
 const parseSchema_1 = __importDefault(require("../url/parseSchema"));
 const SPanel_1 = __importDefault(require("../terminal/SPanel"));
 const packageRoot_1 = __importDefault(require("../path/packageRoot"));
-/**
- * @name                    SApp
- * @namespace           sugar.node.terminal
- * @type                    Class
- *
- * This class define an application in the terminal that you can easily configure to have the look and feel that you want
- * through simple settings described bellow.
- *
- * @param           {String}          name            Specify a name for this application
- * @param           {Object}          [settings={}]   An object of settings described bellow:
- *
- * @example         js
- * import SApp from '@coffeekraken/sugar/node/terminal/SApp';
- * const app = new SApp('My Cool Application', {
- * });
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SApp extends blessed_1.default.screen {
+module.exports = class SApp extends blessed_1.default.screen {
     /**
      * @name              constructor
      * @type              Function
@@ -115,11 +105,7 @@ class SApp extends blessed_1.default.screen {
             // copmpare the url to the route
             const parsedSchema = parseSchema_1.default(url, Object.keys(this._settings.routes)[i]);
             if (parsedSchema.match) {
-                return {
-                    ...this._settings.routes[Object.keys(this._settings.routes)[i]],
-                    url,
-                    params: parsedSchema.params
-                };
+                return Object.assign(Object.assign({}, this._settings.routes[Object.keys(this._settings.routes)[i]]), { url, params: parsedSchema.params });
             }
         }
         // by default, return false
@@ -209,57 +195,55 @@ class SApp extends blessed_1.default.screen {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async _renderLayout(routeObj) {
-        let contentPanel, contentProcess;
-        if (!this._currentPanes[routeObj.url]) {
-            this._currentPanes[routeObj.url] = {};
-            // creating the panel to host the logs
-            contentPanel = new SPanel_1.default({
-                beforeLog: () => {
-                    return '<blue><time/></blue> ';
+    _renderLayout(routeObj) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let contentPanel, contentProcess;
+            if (!this._currentPanes[routeObj.url]) {
+                this._currentPanes[routeObj.url] = {};
+                // creating the panel to host the logs
+                contentPanel = new SPanel_1.default({
+                    beforeLog: () => {
+                        return '<blue><time/></blue> ';
+                    }
+                });
+                // switch between the content types that can be:
+                // - string: Launch a new child process with the specified command
+                const content = yield routeObj.content(routeObj.params);
+                if (typeof content === 'string') {
+                    contentProcess = child_process_1.default.spawn(content, [], {
+                        env: Object.assign(Object.assign({}, process.env), { IS_CHILD_PROCESS: true }),
+                        detached: true,
+                        cwd: packageRoot_1.default(process.cwd()),
+                        shell: true
+                    });
+                    contentProcess.stdout.on('data', (data) => {
+                        contentPanel.log(data
+                            .toString()
+                            .split('~')
+                            .filter((m) => m !== ''));
+                    });
+                    contentProcess.stderr.on('data', (data) => {
+                        contentPanel.log(data
+                            .toString()
+                            .split('~')
+                            .filter((m) => m !== ''));
+                    });
                 }
-            });
-            // switch between the content types that can be:
-            // - string: Launch a new child process with the specified command
-            const content = await routeObj.content(routeObj.params);
-            if (typeof content === 'string') {
-                contentProcess = child_process_1.default.spawn(content, [], {
-                    env: {
-                        ...process.env,
-                        IS_CHILD_PROCESS: true
-                    },
-                    detached: true,
-                    cwd: packageRoot_1.default(process.cwd()),
-                    shell: true
-                });
-                contentProcess.stdout.on('data', (data) => {
-                    contentPanel.log(data
-                        .toString()
-                        .split('~')
-                        .filter((m) => m !== ''));
-                });
-                contentProcess.stderr.on('data', (data) => {
-                    contentPanel.log(data
-                        .toString()
-                        .split('~')
-                        .filter((m) => m !== ''));
-                });
+                // store the content panel and process for later
+                this._currentPanes[routeObj.url].process = contentProcess;
+                this._currentPanes[routeObj.url].panel = contentPanel;
             }
-            // store the content panel and process for later
-            this._currentPanes[routeObj.url].process = contentProcess;
-            this._currentPanes[routeObj.url].panel = contentPanel;
-        }
-        else {
-            // restore the content panel and process
-            contentPanel = this._currentPanes[routeObj.url].panel;
-            contentProcess = this._currentPanes[routeObj.url].process;
-        }
-        // getting the overall layout
-        const layout = await this._settings.layout(contentPanel);
-        // rendering the layout to the terminal
-        this.append(layout);
-        // render the screen
-        this.render();
+            else {
+                // restore the content panel and process
+                contentPanel = this._currentPanes[routeObj.url].panel;
+                contentProcess = this._currentPanes[routeObj.url].process;
+            }
+            // getting the overall layout
+            const layout = yield this._settings.layout(contentPanel);
+            // rendering the layout to the terminal
+            this.append(layout);
+            // render the screen
+            this.render();
+        });
     }
-}
-exports.default = SApp;
+};

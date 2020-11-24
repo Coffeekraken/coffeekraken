@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __toString from '../string/toString';
 import __isNode from '../is/node';
 
@@ -5,9 +7,14 @@ import __isNode from '../is/node';
  * @name          SValidation
  * @namespace     sugar.js.validation.value.validation
  * @type          Class
+ * @wip
  *
  * This class represent the base validation class
  * that can be extended to create some validations like the "required" one, etc...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -62,4 +69,4 @@ class SValidation {
    */
 }
 
-export default SValidation;
+export = SValidation;

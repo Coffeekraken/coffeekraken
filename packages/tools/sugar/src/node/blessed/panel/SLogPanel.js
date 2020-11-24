@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const parseHtml_1 = __importDefault(require("../../terminal/parseHtml"));
 const splitEvery_1 = __importDefault(require("../../string/splitEvery"));
@@ -11,30 +11,7 @@ const uniqid_1 = __importDefault(require("../../string/uniqid"));
 const color_1 = __importDefault(require("../../color/color"));
 const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
 const q_i_1 = require("q-i");
-/**
- * @name                    SLogPanel
- * @namespace           sugar.node.blessed
- * @type                    Class
- *
- * This class define a "panel" in the terminal that you can easily configure to have the look and feel that you want
- * through simple settings described bellow.
- *
- * @param           {String}          name            Specify a name for this panel. The name has to stick to this characters only ```[a-zA-Z0-9_-]```
- * @param           {Object}          [settings={}]   An object of settings described bellow:
- * - screen (true) {Boolean}: Specify if you want your panel wrapped inside an "blessed"(https://www.npmjs.com/package/blessed) screen object. Useful when you just want to render your panel in the terminal. If you have your own screen object
- *
- * @example         js
- * import SLogPanel from '@coffeekraken/sugar/node/terminal/SLogPanel';
- * const panel = new SLogPanel('my-cool-pannel', {
- * });
- * panel.log('Hello world');
- *
- * @see       https://www.npmjs.com/package/q-i
- * @see       https://www.npmjs.com/package/blessed
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SLogPanel extends SBlessedComponent_1.default {
+module.exports = class SLogPanel extends SBlessedComponent_1.default {
     /**
      * @name              constructor
      * @type              Function
@@ -294,8 +271,8 @@ class SLogPanel extends SBlessedComponent_1.default {
             else {
                 beforeEachLine = '';
             }
-            let formatedBeforeEachLine = parseHtml_1.default(beforeEachLine);
-            let formatedBeforeLog = parseHtml_1.default(beforeLog);
+            const formatedBeforeEachLine = parseHtml_1.default(beforeEachLine);
+            const formatedBeforeLog = parseHtml_1.default(beforeLog);
             let formatedMessage = m;
             // split lines
             formatedMessage = formatedMessage.split('\n');
@@ -325,5 +302,4 @@ class SLogPanel extends SBlessedComponent_1.default {
         // return the lines
         return lines;
     }
-}
-exports.default = SLogPanel;
+};

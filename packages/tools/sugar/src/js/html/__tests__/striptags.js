@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__striptags) => {
     describe('sugar.js.html.striptags', () => {
         const html = `<div><bold>Hello world</bold><h1>How are you?</h1></div>`;

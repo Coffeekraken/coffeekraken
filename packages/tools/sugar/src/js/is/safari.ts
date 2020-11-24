@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isSafari
  * @namespace           sugar.js.is
@@ -22,6 +24,7 @@
  * @since         1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isSafari(ua = navigator.userAgent) {
+function isSafari(ua = navigator.userAgent) {
   return ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1;
 }
+export = isSafari;

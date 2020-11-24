@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import easeInOutQuad from '../easing/easeInOutQuad';
 import requestAnimationFrame from './requestAnimationFrame';
 /**
@@ -114,4 +116,4 @@ scrollTo.step = function () {
   }
 };
 
-export default scrollTo;
+export = scrollTo;

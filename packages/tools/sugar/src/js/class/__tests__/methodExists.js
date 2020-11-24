@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__methodExists) => {
     class MyClass {
         constructor(name) {
@@ -9,8 +10,7 @@ module.exports = (__methodExists) => {
         testing(value) {
             this._plop = value;
         }
-        plop(user) {
-        }
+        plop(user) { }
     }
     const myInstance = new MyClass('coffeekraken');
     myInstance.testing('hello');
@@ -19,7 +19,9 @@ module.exports = (__methodExists) => {
             expect(__methodExists(myInstance, 'testing', 'plop')).toBe(true);
         });
         it('Should return an array of missing methods if some passed methods does not exists', () => {
-            expect(__methodExists(myInstance, 'testing', 'plop', 'coco')).toEqual(['coco']);
+            expect(__methodExists(myInstance, 'testing', 'plop', 'coco')).toEqual([
+                'coco'
+            ]);
         });
     });
 };

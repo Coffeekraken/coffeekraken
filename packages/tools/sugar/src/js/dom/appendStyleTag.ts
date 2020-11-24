@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        appendStyleTag
  * @namespace           sugar.js.dom
@@ -20,7 +22,7 @@
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function appendStyleTag(
+function appendStyleTag(
   css,
   $parent = document.head || document.getElementsByTagName('head')[0]
 ) {
@@ -33,3 +35,4 @@ export default function appendStyleTag(
   }
   $parent.appendChild($style);
 }
+export = appendStyleTag;

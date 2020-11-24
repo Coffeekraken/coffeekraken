@@ -1,3 +1,4 @@
+"use strict";
 const __insertAfter = require('../insertAfter');
 describe('sugar.js.dom.insertAfter', () => {
     document.body.innerHTML = `

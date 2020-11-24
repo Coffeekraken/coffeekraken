@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__propertyProxy) => {
     describe('sugar.js.object.propertyProxy', () => {
         it('Should apply the property proxy correctly and detect the updated', done => {

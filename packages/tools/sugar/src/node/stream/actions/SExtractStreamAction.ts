@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SActionsStreamAction from '../SActionsStreamAction';
 import __packageRoot from '../../path/packageRoot';
 import __fs from 'fs';
@@ -16,6 +18,7 @@ class SExtractStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
+ * @wip
  *
  * This actions allows you to extract some data from the specified streamObj property using custom comments syntax like "/* extract:propName *\/ ... /* extract *\/".
  * This "propName" specify in which streamObj property you want to save the extracted content.
@@ -24,9 +27,14 @@ class SExtractStreamActionInterface extends __SInterface {
  * - sourceProp ('data') {String}: Specify the source property you want to extract data from
  * @return      {Promise}                         A simple promise that will be resolved when the process is finished
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SExtractStreamAction extends __SActionsStreamAction {
+export = class SExtractStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object

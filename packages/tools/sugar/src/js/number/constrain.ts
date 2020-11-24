@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        constrain
  * @namespace           sugar.js.number
@@ -22,8 +24,9 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function constrain(value, min = null, max = null) {
+function constrain(value, min = null, max = null) {
   if (min !== null && value < min) value = min;
   if (max !== null && value > max) value = max;
   return value;
 }
+export = constrain;

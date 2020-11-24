@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__gravatarUrl) => {
     describe('sugar.js.url.gravatarUrl', () => {
         it('Should correctly generate the gravatar url', () => {

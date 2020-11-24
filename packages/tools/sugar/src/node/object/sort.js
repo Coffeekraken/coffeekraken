@@ -1,15 +1,20 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name                                sort
  * @namespace           sugar.js.object
  * @type                                Function
+ * @stable
  *
  * Sort an object properties the same way as the Array.sort do it
  *
  * @param                 {Object}                  object                The object to sort
  * @param                 {Function}                sort                  The sort function to use
  * @return                {Object}                                        The sorted object
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example               js
  * import sortObject from '@coffeekraken/sugar/js/object/sort';
@@ -26,6 +31,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * //   coco: { weight: 10 }
  * // }
  *
+ * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function sort(object, sort) {
@@ -46,4 +52,4 @@ function sort(object, sort) {
     // return the result sorted object
     return resultObj;
 }
-exports.default = sort;
+module.exports = sort;

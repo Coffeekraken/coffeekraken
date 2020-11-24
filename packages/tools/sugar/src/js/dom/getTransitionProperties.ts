@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __getStyleProperty from './getStyleProperty';
 import __convert from '../time/convert';
 
@@ -39,7 +41,7 @@ function splitIfNeeded(what, separator) {
   return [what];
 }
 
-export default function getTransitionProperties(elm) {
+function getTransitionProperties(elm) {
   // get the transition properties
   const property = __getStyleProperty(elm, 'transition-property');
   const duration = __getStyleProperty(elm, 'transition-duration') || 0;
@@ -67,3 +69,4 @@ export default function getTransitionProperties(elm) {
   props.totalDuration = totalDuration;
   return props;
 }
+export = getTransitionProperties;

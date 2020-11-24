@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __STemplateEngineInterface from './interface/STemplateEngineInterface';
 import __deepMerge from '../../object/deepMerge';
 import __sugarConfig from '../../config/sugar';
@@ -6,6 +8,7 @@ import __sugarConfig from '../../config/sugar';
  * @name          STemplateEngine
  * @namespace     sugar.node.template.engines
  * @type          Class
+ * @wip
  *
  * This class represent the base for a compatible ```STemplate``` engine
  * A template engine class MUST have some basic methods like:
@@ -16,11 +19,13 @@ import __sugarConfig from '../../config/sugar';
  *
  * @param       {Object}      [settings={}]       A settings object to configure your template engine. Each template engines can have different settings but here's the default one:
  *
- * @Todo      documentation
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example     js
  * import STemplateEngine from '@coffeekraken/sugar/node/template/engines/STemplateEngine';
- * export default class MyTemplateEngine extends STemplateEngine {
+ * export = class MyTemplateEngine extends STemplateEngine {
  *    static input = 'path';
  *    static canRender(templateString) {
  *      // ...
@@ -40,7 +45,7 @@ import __sugarConfig from '../../config/sugar';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class STemplateEngine {
+export = class STemplateEngine {
   /**
    * @name      _settings
    * @type      Object

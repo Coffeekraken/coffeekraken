@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                        filter
  * @namespace           sugar.js.object
@@ -27,7 +29,7 @@
  * @since         2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function filter(object, filter) {
+function filter(object, filter) {
   // init the new object to return
   const result = {};
 
@@ -43,3 +45,4 @@ export default function filter(object, filter) {
   // return the filtered object
   return result;
 }
+export = filter;

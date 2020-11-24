@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __get from '../object/get';
 import __set from '../object/set';
@@ -7,12 +9,11 @@ import __isPlainObject from '../is/plainObject';
 import __deepMap from '../object/deepMap';
 import __SConfigAdapter from './adapters/SConfigAdapter';
 
-// TODO: Add a "catch" method that allows to get the saving errors, etc...
-
 /**
  * @name                                            config
  * @namespace           sugar.js.config
  * @type                                            Class
+ * @beta
  *
  * This class allows you to quickly access/update some configuration depending on the data adapters specified.
  * The base available data adapters are:
@@ -20,6 +21,11 @@ import __SConfigAdapter from './adapters/SConfigAdapter';
  *  - File system adapter: @coffeekraken/sugar/node/config/adapters/SConfigFsAdapter
  * - For js:
  *  - Localstorage adapter: @coffeekraken/sugar/js/config/adapters/SConfigLsAdapter
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ * @todo      Add a "catch" method that allows to get the saving errors, etc...
  *
  * @example             js
  * import SConfig from '@coffeekraken/sugar/js/config/SConfig';
@@ -32,10 +38,11 @@ import __SConfigAdapter from './adapters/SConfigAdapter';
  * await config.get('log.frontend.mail.host'); // => gmail.google.com
  * await config.set('log.frontend.mail.host', 'mailchimp.com');
  *
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 const _SConfigLoadingByAdapter = {};
-export default class SConfig {
+export = class SConfig {
   /**
    * @name              _name
    * @type              {String}

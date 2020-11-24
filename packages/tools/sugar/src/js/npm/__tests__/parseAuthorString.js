@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__parseAuthorString) => {
     describe('sugar.js.npm.parseAuthorString', () => {
         it('Should parse the passed author string correctly', (done) => {

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __upperFirst from '../string/upperFirst';
 import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
 
@@ -24,7 +26,7 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function getHtmlhtmlClassFromHtmlClass(htmlClass) {
+function getHtmlhtmlClassFromHtmlClass(htmlClass) {
   if (!htmlClass) return false;
 
   for (const key in __htmlTagToHtmlClassMap) {
@@ -33,3 +35,4 @@ export default function getHtmlhtmlClassFromHtmlClass(htmlClass) {
 
   return false;
 }
+export = getHtmlhtmlClassFromHtmlClass;

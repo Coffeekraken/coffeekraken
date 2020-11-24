@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isChrome
  * @namespace           sugar.js.is
@@ -22,6 +24,7 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isChrome(ua = navigator.userAgent) {
+function isChrome(ua = navigator.userAgent) {
   return ua.indexOf('Chrome') > -1;
 }
+export = isChrome;

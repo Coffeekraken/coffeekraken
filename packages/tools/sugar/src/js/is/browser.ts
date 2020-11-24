@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isBrowser
  * @namespace           sugar.js.is
@@ -21,6 +23,7 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isBrowser(value) {
+function isBrowser(value) {
   return typeof window !== 'undefined';
 }
+export = isBrowser;

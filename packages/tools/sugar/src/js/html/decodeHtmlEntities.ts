@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        decodeHtmlEntities
  * @namespace           sugar.js.string
@@ -21,8 +23,9 @@
  * @since           1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function decodeHtmlEntities(string) {
+function decodeHtmlEntities(string) {
   const txt = document.createElement('textarea');
   txt.innerHTML = string;
   return txt.value;
 }
+export = decodeHtmlEntities;

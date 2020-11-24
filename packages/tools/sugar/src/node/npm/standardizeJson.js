@@ -1,13 +1,14 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const parseAuthorString_1 = __importDefault(require("./parseAuthorString"));
 /**
  * @name            standardizeJson
  * @namespace       sugar.js.npm
  * @type            Function
+ * @beta
  *
  * This function simply take a package.json JSON formatted object and standardize
  * some fields like the "author" one to be sure it is an object at the end,
@@ -18,6 +19,10 @@ const parseAuthorString_1 = __importDefault(require("./parseAuthorString"));
  *
  * @param       {Object}        json        The json to process
  * @return      {Object}                    The standardized json
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import standardizeJson from '@coffeekraken/sugar/js/npm/standardizeJson';
@@ -49,7 +54,7 @@ function standardizeJson(json) {
     }
     // contributors
     if (json.contributors && typeof json.contributors === 'string') {
-        json.contributors = __parsecontributorsString(json.contributors);
+        json.contributors = parseAuthorString_1.default(json.contributors);
     }
     else if (json.contributors && Array.isArray(json.contributors)) {
         json.contributors = json.contributors.map((string) => {
@@ -61,4 +66,4 @@ function standardizeJson(json) {
     }
     return json;
 }
-exports.default = standardizeJson;
+module.exports = standardizeJson;

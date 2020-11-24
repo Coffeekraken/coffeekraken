@@ -1,7 +1,10 @@
+// @ts-nocheck
+
 /**
  * @name            onProcessExit
  * @namespace       sugar.node.process
  * @type            Function
+ * @beta
  *
  * This function allows you to register a callback to execute when the process
  * is exiting by one of these events:
@@ -11,6 +14,10 @@
  * - uncaughtException: catches uncaught exceptions
  *
  * @param       {Function}          callback            The callback function you want to call
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
@@ -23,7 +30,7 @@
  */
 const __onProcessExitCallbacks = [];
 
-export default function onProcessExit(callback) {
+function onProcessExit(callback) {
   if (!__onProcessExitCallbacks.length) {
     process.env.HAS_ON_PROCESS_EXIT_HANDLERS = true;
     async function exitHandler() {
@@ -44,3 +51,4 @@ export default function onProcessExit(callback) {
   if (__onProcessExitCallbacks.indexOf(callback) !== -1) return;
   __onProcessExitCallbacks.push(callback);
 }
+export = onProcessExit;

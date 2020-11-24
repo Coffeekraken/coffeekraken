@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name            parseAuthorString
  * @namespace       sugar.js.npm
@@ -26,7 +28,7 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function parseAuthorString(string) {
+function parseAuthorString(string) {
   const reg = /(.*)\s?<(.*)>\s?\((.*)\)/gm;
   const matches = reg.exec(string.trim());
   const authorObj = {};
@@ -43,3 +45,4 @@ export default function parseAuthorString(string) {
   }
   return authorObj;
 }
+export = parseAuthorString;

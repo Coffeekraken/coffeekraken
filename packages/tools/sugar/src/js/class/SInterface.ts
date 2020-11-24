@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __getExtendsStack from '../class/getExtendsStack';
 import __argsToObject from '../cli/argsToObject';
 import __SError from '../error/SError';
@@ -15,10 +17,14 @@ import __set from '../object/set';
  * @name              SInterface
  * @namespace           sugar.js.class
  * @type              Function
+ * @wip
  *
  * This class allows you to define an interface that you can later apply to an object instance
  * to make sure this particular instance has all the features, methods and properties you want.
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  * @todo      Enhance the interface validation for things like missing "type" property, etc...
  *
  * @example         js
@@ -47,7 +53,7 @@ import __set from '../object/set';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
  */
-export default class SInterface {
+export = class SInterface {
   /**
    * @name              settings
    * @type              Object

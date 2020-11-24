@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import uniqid from '../util/uniqid';
 import matches from './matches';
 
@@ -34,7 +36,7 @@ import matches from './matches';
 let _observer;
 const _selectors = {};
 
-export default function querySelectorLive(selector, cb, settings = {}) {
+function querySelectorLive(selector, cb, settings = {}) {
   const id = `${selector} - ${uniqid()}`;
 
   // extend settings
@@ -137,3 +139,5 @@ export default function querySelectorLive(selector, cb, settings = {}) {
  * @type 		{Boolean}
  * @default 	true
  */
+
+export = querySelectorLive;

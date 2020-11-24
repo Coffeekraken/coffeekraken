@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import isArray from '../is/array';
 import isBoolean from '../is/boolean';
 import isFunction from '../is/function';
@@ -14,6 +16,7 @@ import __stringify from '../json/stringify';
  * @name        toString
  * @namespace           sugar.js.string
  * @type      Function
+ * @stable
  *
  * Convert passed value to a string
  *
@@ -22,15 +25,20 @@ import __stringify from '../json/stringify';
  * - beautify (false) {Boolean}: Specify if you want to beautify the output like objects, arrays, etc...
  * @return    {String}    The resulting string
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example    js
  * import toString from '@coffeekraken/sugar/js/string/toString'
  * toString({
  * 	id:'hello'
  * }) // '{"id":"hello"}'
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function toString(value, settings = {}) {
+function toString(value, settings = {}) {
   settings = __deepMerge(
     {
       beautify: false
@@ -88,3 +96,4 @@ export default function toString(value, settings = {}) {
     return returnVal;
   }
 }
+export = toString;

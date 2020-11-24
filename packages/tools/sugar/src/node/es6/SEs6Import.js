@@ -1,31 +1,10 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const parse_es6_imports_1 = __importDefault(require("parse-es6-imports"));
-/**
- * @name            SEs6Import
- * @namespace       sugar.js.es6
- * @type            Class
- *
- * This class represent an es6 import statement with properties like:
- * - path {String}: The import path
- * - default {String}: The default import name
- * - star {String}: The start import name "import * as something from ..."
- * - named {Array<Object>}: THe named imports
- * - raw {String}: The raw import statement
- *
- * @param           {String}        statement           The import statement
- *
- * @example             js
- * import SEs6Import from '@coffeekraken/sugar/js/es6/SEs6Import';
- * const import = new SEs6Import('import coco from "something";');
- *
- * @since           2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com>
- */
-class SEs6Import {
+module.exports = class SEs6Import {
     /**
      * @name            constructor
      * @type            Function
@@ -171,5 +150,4 @@ class SEs6Import {
         string += `from "${this.path}";`;
         return string;
     }
-}
-exports.default = SEs6Import;
+};

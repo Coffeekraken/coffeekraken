@@ -1,9 +1,10 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name        uncamelize
  * @namespace           sugar.js.string
  * @type      Function
+ * @stable
  *
  * Uncamelize a string
  *
@@ -11,10 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param    {String}    [separator='-']    The separator to use
  * @return    {String}    The uncamelized string
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example    js
  * import uncamelize from '@coffeekraken/sugar/js/string/uncamelize'
  * uncamelize('helloWorldAndUniverse') // hello-world-and-universe
  *
+ * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function uncamelize(text, separator = '-') {
@@ -28,4 +34,4 @@ function uncamelize(text, separator = '-') {
         res = res.slice(1);
     return res;
 }
-exports.default = uncamelize;
+module.exports = uncamelize;

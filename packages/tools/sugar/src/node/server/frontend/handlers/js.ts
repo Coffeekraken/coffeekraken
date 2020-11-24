@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SDuration from '../../../time/SDuration';
 import __SJsCompiler from '../../../js/SJsCompiler';
 
@@ -5,6 +7,7 @@ import __SJsCompiler from '../../../js/SJsCompiler';
  * @name                js
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
+ * @wip
  *
  * This function is responsible of responding to express requests made on the home page
  *
@@ -12,10 +15,14 @@ import __SJsCompiler from '../../../js/SJsCompiler';
  * @param         {Object}          res             The express response object
  * @param         {Object}         [settings={}]    The handler settings
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default async function js(req, res, settings = {}) {
+export = async function js(req, res, settings = {}) {
   let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
   const duration = new __SDuration();
 

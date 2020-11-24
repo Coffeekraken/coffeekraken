@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __frontendServer from './frontend';
 import __SProcess from '../../process/SProcess';
 import __SFrontendServerInterface from './interface/SFrontendServerInterface';
@@ -7,13 +9,18 @@ import __SFrontendServerInterface from './interface/SFrontendServerInterface';
  * @namespace           sugar.node.server.frontend
  * @type            Class
  * @extends         SProcess
+ * @wip
  *
  * This class represent the frontend server Cli based on the express server one
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SFrontendServerProcess extends __SProcess {
+export = class SFrontendServerProcess extends __SProcess {
   static interface = __SFrontendServerInterface;
 
   /**

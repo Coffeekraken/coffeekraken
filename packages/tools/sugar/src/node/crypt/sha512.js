@@ -1,22 +1,13 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const sha512_1 = __importDefault(require("crypto-js/sha512"));
 const toString_1 = __importDefault(require("../string/toString"));
 const parse_1 = __importDefault(require("../string/parse"));
 const __encryptedMessages = {};
-/**
- * @name            sha512
- * @namespace           sugar.js.crypt
- * @type            Object
- *
- * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the sha512 algorithm
- *
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-exports.default = {
+module.exports = {
     /**
      * @name        encrypt
      * @type          Function

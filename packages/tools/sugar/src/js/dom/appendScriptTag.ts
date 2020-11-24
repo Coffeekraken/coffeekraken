@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import scriptLoaded from './scriptLoaded';
 
 /**
@@ -22,9 +24,10 @@ import scriptLoaded from './scriptLoaded';
  * @since     1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function appendScriptTag(src, $parent = document.body) {
+function appendScriptTag(src, $parent = document.body) {
   const $script = document.createElement('script');
   $script.src = src;
   $parent.appendChild($script);
   return scriptLoaded($script);
 }
+export = appendScriptTag;

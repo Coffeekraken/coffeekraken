@@ -1,110 +1,106 @@
-import __deepMerge from '../object/deepMerge';
-import __convert from './convert';
-/**
- * @name                SDuration
- * @namespace           sugar.js.time
- * @type                Class
- *
- * This class represent a duration tracking process. Simply instanciate it,
- * then call the ```instance.get()``` method and you will get back
- * the duration between the instanciation and the ```get``` method call
- *
- * @param       {Object}            [settings={}]           An object of settings to use
- *
- * @setting      {String}           [format='s']            Specify the format you want for your instance. Can be 'ms|millisecond(s)', 's|second(s)', 'm|minute(s)', 'h|hour(s)', 'd|day', 'w|week(s)', 'month(s)', 'y|year(s)'
- * @setting      {Boolean}          [suffix=true]             Specify if you want the duration returned with the corresponding suffix like 'ms', 's', etc...
- *
- * @example             js
- * import SDuration from '@coffeekraken/sugar/js/time/SDuration';
- * const duration = new SDuration();
- * await ...
- * console.log(duration.end());
- *
- * @since           2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
-export default class SDuration {
-    /**
-     * @name            constructor
-     * @type            Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @since       2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    constructor(settings = {}) {
+// @ts-nocheck
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "../object/deepMerge", "./convert"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var convert_1 = __importDefault(require("./convert"));
+    return /** @class */ (function () {
         /**
-         * @name            _settings
-         * @type            Object
-         * @private
+         * @name            constructor
+         * @type            Function
+         * @constructor
          *
-         * Store the settings
+         * Constructor
          *
          * @since       2.0.0
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
-        this._settings = {};
+        function SDuration(settings) {
+            if (settings === void 0) { settings = {}; }
+            /**
+             * @name            _settings
+             * @type            Object
+             * @private
+             *
+             * Store the settings
+             *
+             * @since       2.0.0
+             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+             */
+            this._settings = {};
+            /**
+             * @name            startTime
+             * @type            Number
+             * @private
+             *
+             * Store the start timestamp
+             *
+             * @since       2.0.0
+             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+             */
+            this.startTime = null;
+            /**
+             * @name            endTime
+             * @type            Number
+             * @private
+             *
+             * Store the end timestamp
+             *
+             * @since       2.0.0
+             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+             */
+            this.endTime = null;
+            this._settings = deepMerge_2.default({
+                format: 's',
+                suffix: true
+            }, settings);
+            this.start();
+        }
         /**
-         * @name            startTime
-         * @type            Number
-         * @private
+         * @name      start
+         * @type      Function
          *
-         * Store the start timestamp
+         * Start the duration process either with the current timestamp, or with a passed timestamp you prefer
          *
-         * @since       2.0.0
+         * @param         {Number}            [startTime=null]            Specify the timestamp you want
+         *
+         * @since         2.0.0
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
-        this.startTime = null;
+        SDuration.prototype.start = function (startTime) {
+            if (startTime === void 0) { startTime = null; }
+            this.startTime = startTime || Date.now();
+        };
         /**
-         * @name            endTime
-         * @type            Number
-         * @private
+         * @name      end
+         * @type      Function
          *
-         * Store the end timestamp
+         * Stop the duration counter and return the result in the passed format or in the format setted in the settings
          *
-         * @since       2.0.0
+         * @param       {Object}            [settings={}]           An object of settings to use
+         * @return        {Mixed}                         Return the duration depending on your settings
+         *
+         * @since         2.0.0
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
-        this.endTime = null;
-        this._settings = __deepMerge({
-            format: 's',
-            suffix: true
-        }, settings);
-        this.start();
-    }
-    /**
-     * @name      start
-     * @type      Function
-     *
-     * Start the duration process either with the current timestamp, or with a passed timestamp you prefer
-     *
-     * @param         {Number}            [startTime=null]            Specify the timestamp you want
-     *
-     * @since         2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    start(startTime = null) {
-        this.startTime = startTime || Date.now();
-    }
-    /**
-     * @name      end
-     * @type      Function
-     *
-     * Stop the duration counter and return the result in the passed format or in the format setted in the settings
-     *
-     * @param       {Object}            [settings={}]           An object of settings to use
-     * @return        {Mixed}                         Return the duration depending on your settings
-     *
-     * @since         2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    end(settings = {}) {
-        settings = __deepMerge(this._settings, settings);
-        this.endTime = Date.now();
-        let durationMs = this.endTime - this.startTime;
-        let durationConverted = __convert(durationMs, settings.format);
-        return settings.suffix ? durationConverted : parseFloat(durationConverted);
-    }
-}
+        SDuration.prototype.end = function (settings) {
+            if (settings === void 0) { settings = {}; }
+            settings = deepMerge_2.default(this._settings, settings);
+            this.endTime = Date.now();
+            var durationMs = this.endTime - this.startTime;
+            var durationConverted = convert_1.default(durationMs, settings.format);
+            return settings.suffix ? durationConverted : parseFloat(durationConverted);
+        };
+        return SDuration;
+    }());
+});

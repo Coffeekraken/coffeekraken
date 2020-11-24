@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      isHover
  * @namespace           sugar.js.dom
@@ -22,6 +24,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isHover($elm) {
+function isHover($elm) {
   return $elm.parentElement.querySelector(':hover') === $elm;
 }
+export = isHover;

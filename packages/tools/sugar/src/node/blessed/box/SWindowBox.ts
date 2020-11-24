@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __blessed from 'blessed';
 import __SBlessedComponent from '../SBlessedComponent';
 import __deepMerge from '../../object/deepMerge';
@@ -14,6 +16,7 @@ import __escapeStack from '../../terminal/escapeStack';
  * @name                  SBlessedWindowBox
  * @namespace           sugar.node.blessed.box
  * @type                  Class
+ * @wip
  *
  * This class gives you the ability to display windowed style boxes with a header, a body and a footer
  *
@@ -27,13 +30,19 @@ import __escapeStack from '../../terminal/escapeStack';
  *    - fg (black) {Color}: The foreground color to use
  *    - bg (__color('terminal.primary').toString()) {Color}: The background color to use
  * - ...blessed.box settings
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import SBlessedWindowBox from '@coffeekraken/sugar/node/blessed/box/SBlessedWindowBox';
  * const box = new SBlessedWindowBox(myCoolContent, {});
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBlessedWindowBox extends __SBlessedComponent {
+export = class SBlessedWindowBox extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function
@@ -85,4 +94,4 @@ export default class SBlessedWindowBox extends __SBlessedComponent {
       super.update();
     });
   }
-};
+}

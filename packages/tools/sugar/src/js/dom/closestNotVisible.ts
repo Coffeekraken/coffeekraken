@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isVisible from './isVisible';
 
 /**
@@ -26,7 +28,7 @@ import __isVisible from './isVisible';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function closestNotVisible(elm) {
+function closestNotVisible(elm) {
   const originalElm = elm;
   elm = elm.parentNode;
   while (elm && elm != originalElm.ownerDocument) {
@@ -37,3 +39,4 @@ export default function closestNotVisible(elm) {
   }
   return null;
 }
+export = closestNotVisible;

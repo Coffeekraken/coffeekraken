@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isBase64 from '../is/base64';
 import __base64 from '../crypt/base64';
 import __deepMerge from '../object/deepMerge';

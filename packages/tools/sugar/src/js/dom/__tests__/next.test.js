@@ -1,4 +1,9 @@
-import __next from '../next';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const next_1 = __importDefault(require("../next"));
 describe('sugar.js.dom.next', () => {
     document.body.innerHTML = `
       <div id="testing"></div>
@@ -7,7 +12,7 @@ describe('sugar.js.dom.next', () => {
   `;
     const $elm = document.querySelector('#testing');
     const $next2 = document.querySelector('#next2');
-    const $finded = __next($elm, '#next2');
+    const $finded = next_1.default($elm, '#next2');
     it('Should find the $next2 element from the $testing one', () => {
         expect($finded).toEqual($next2);
     });

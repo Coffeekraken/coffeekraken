@@ -1,8 +1,36 @@
 "use strict";
+// @ts-nocheck
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const blessed_1 = __importDefault(require("blessed"));
 const color_1 = __importDefault(require("../../color/color"));
@@ -16,26 +44,7 @@ const objectProperties_1 = __importDefault(require("../../transition/objectPrope
 const hotkey_1 = __importDefault(require("../../keyboard/hotkey"));
 const activeSpace_1 = __importDefault(require("../../core/activeSpace"));
 const SOutput_1 = __importDefault(require("../SOutput"));
-/**
- * @name                  SCommandPanel
- * @namespace           sugar.node.blessed
- * @type                  Class
- *
- * This class is a simple SPanel extended one that accesp an SCommandPanel instance
- * to log the data's from and display an simple UI depending on the SCommandPanel configured keys
- *
- * @param         {SCommandPanel}            process           The SCommandPanel instance you want to attach
- * @param         {Object}              [settings={}]     The settings object to configure your SCommandPanel
- *
- * @example         js
- * import SCommandPanel from '@coffeekraken/sugar/node/terminal/SCommandPanel';
- * const myPanel = new SCommandPanel(myProcess, {
- *    screen: true
- * });
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SCommandPanel extends SBlessedComponent_1.default {
+module.exports = class SCommandPanel extends SBlessedComponent_1.default {
     /**
      * @name          constructor
      * @type          Function
@@ -118,12 +127,12 @@ class SCommandPanel extends SBlessedComponent_1.default {
         activeSpace_1.default.set(`SCommandPanel.${this._commands[0].key}`);
         // pipe all commands "events" to the _sPromise internal promise
         this._sPromise = new SPromise_1.default();
-        this._commands.forEach((commandObj, i) => {
+        this._commands.forEach((commandObj, i) => __awaiter(this, void 0, void 0, function* () {
             // instanciate the command instance
-            const commandClass = require(commandObj.path);
+            const commandClass = yield Promise.resolve().then(() => __importStar(require(commandObj.path)));
             commandObj.instance = new commandClass(commandObj.settings);
-        });
-        this.promise = new SPromise_1.default(() => { });
+        }));
+        this.promise = new SPromise_1.default();
         // generate the UI
         this._generateUI();
         // init command boxes
@@ -396,7 +405,7 @@ class SCommandPanel extends SBlessedComponent_1.default {
                     color: 'black'
                 })
             };
-            let name = commandObj.name;
+            const name = commandObj.name;
             itemsArray.push(name);
         });
         let media;
@@ -601,7 +610,7 @@ class SCommandPanel extends SBlessedComponent_1.default {
                 right: 0
             };
             item.top = i * 2;
-            let key = `${commandObj.key}`;
+            const key = `${commandObj.key}`;
             item.$key.setContent(key);
             let name = commandObj.name;
             if (commandObj.instance.state === 'running' ||
@@ -871,7 +880,7 @@ class SCommandPanel extends SBlessedComponent_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _updateCommandBoxesLayout() {
-        let currentTop = 0;
+        const currentTop = 0;
         // this._commands.forEach((commandObj) => {
         //   let boxObj = this._boxesObjectsMap.get(commandObj);
         //   if (this._displayedCommands.indexOf(commandObj) === -1) {
@@ -1030,5 +1039,4 @@ class SCommandPanel extends SBlessedComponent_1.default {
             super.update();
         });
     }
-}
-exports.default = SCommandPanel;
+};

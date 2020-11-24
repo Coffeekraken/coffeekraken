@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __STemplateEngine from './STemplateEngine';
 import __deepMerge from '../../object/deepMerge';
 import __SPromise from '../../promise/SPromise';
@@ -15,6 +17,7 @@ import __unique from '../../array/unique';
  * @name          SBladeTemplateEngine
  * @namespace     sugar.node.template.engines
  * @type          Class
+ * @wip
  *
  * This class represent the blade php template engine that you can use by itself through this class, or through the ```STemplate``` class
  * that take care of a lot of works for you...
@@ -22,7 +25,9 @@ import __unique from '../../array/unique';
  * @param       {Object}      [settings={}]       A settings object to configure your template engine. Each template engines can have different settings but here's the default one:
  * - cacheDir (@config.views.cacheDir) {String}: Specify the directory where you want to store the cache render files
  *
- * @Todo      documentation
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example     js
  * import SBladeTemplateEngine from '@coffeekraken/sugar/node/template/engines/SBladeTemplateEngine';
@@ -34,7 +39,7 @@ import __unique from '../../array/unique';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBladeTemplateEngine extends __STemplateEngine {
+export = class SBladeTemplateEngine extends __STemplateEngine {
   /**
    * @name      input
    * @type      String

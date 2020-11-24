@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 
 /**
@@ -5,12 +7,17 @@ import __SPromise from '../promise/SPromise';
  * @namespace           sugar.js.responsive
  * @type                Class
  * @extends             SPromise
+ * @wip
  *
  * This class expose some nice and easy methods to get the active media query defined in the config.media.queries configuration
  * stack, as well as register to some events list "match" or "unmatch".
  *
  * @param           {String}            mediaName           The media name you want to track. Can be an array of names or simple "*" to track every media queries
  * @param           {Object}            [settings={}]       An object of settings to configure your media query instance
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example             js
  * import SMediaQuery from '@coffeekraken/sugar/js/responsive/SMediaQuery';
@@ -147,4 +154,4 @@ class SMediaQuery extends __SPromise {
 // start listener
 SMediaQuery.startListener();
 
-export default SMediaQuery;
+export = SMediaQuery;

@@ -1,7 +1,10 @@
+// @ts-nocheck
+
 /**
  * @name                  rgba2hsl
  * @namespace           sugar.js.color
  * @type                  Function
+ * @stable
  *
  * RGBA to HSL
  *
@@ -11,13 +14,18 @@
  * @param       	{Number}        	a 	        	The alpha value between 0-100|0-1
  * @return 	      {object} 		                    	The hsl object representation
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import rgba2hsl from '@coffeekraken/sugar/js/color/rgba2hsl';
  * rgba2hsl(10,20,50,10);
  *
+ * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function rgba2hsl(r, g, b, a = 1) {
+function rgba2hsl(r, g, b, a = 1) {
   if (typeof r === 'object') {
     g = r.g;
     b = r.b;
@@ -55,3 +63,4 @@ export default function rgba2hsl(r, g, b, a = 1) {
     l: Math.floor(l * 100)
   };
 }
+export = rgba2hsl;

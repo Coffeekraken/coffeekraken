@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                    extension
  * @namespace           sugar.js.file
@@ -20,8 +22,9 @@
  * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function extension(path) {
+function extension(path) {
   const lastPart = path.split('/').pop();
   if (!lastPart.includes('.')) return '';
   return path.split('.').pop();
 }
+export = extension;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import uniq from 'lodash/uniq';
 
 /**
@@ -18,7 +20,7 @@ import uniq from 'lodash/uniq';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function keysFirst(array: any[], keys: any[]): any[] {
+function keysFirst(array: any[], keys: any[]): any[] {
   // all the keys has to exist in the array stack
   // otherwise we filter it out
   keys = keys.filter((key) => {
@@ -32,3 +34,5 @@ export default function keysFirst(array: any[], keys: any[]): any[] {
   // return the result
   return res;
 }
+
+export = keysFirst;

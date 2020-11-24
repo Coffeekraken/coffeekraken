@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name 		SBind
  * @namespace           sugar.js.class

@@ -1,13 +1,14 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name          simply
  * @namespace     sugar.js.string
  * @type          Function
+ * @stable
  *
  * This function take a string with accents, etc and convert it to a more simply
  * version like "éàddö" to "eaddo"
@@ -18,6 +19,10 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  * - lowerCase (true) {Boolean}: Specify if you want your returned string to be lowercased
  * - dashSpace (true) {Boolean}: Specify if you want to replace the "_|-" by a space
  * - trim (true} {Boolean}: Specify if you want your string to be trimed or not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import simplify from '@coffeekraken/sugar/js/string/simplify';
@@ -35,7 +40,7 @@ function simplify(string, settings = {}) {
     }, settings);
     if (string == null)
         return '';
-    var map = {
+    const map = {
         A: 'À|Á|Ã|Â|Ä',
         a: 'á|à|ã|â|ä',
         E: 'É|È|Ê|Ë',
@@ -58,7 +63,7 @@ function simplify(string, settings = {}) {
         string = string.toLowerCase();
     }
     if (settings.specialChars) {
-        for (var pattern in map) {
+        for (const pattern in map) {
             string = string.replace(new RegExp(map[pattern], 'g'), pattern);
         }
     }
@@ -66,4 +71,4 @@ function simplify(string, settings = {}) {
         string = string.trim();
     return string;
 }
-exports.default = simplify;
+module.exports = simplify;

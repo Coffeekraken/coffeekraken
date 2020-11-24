@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import ISDescriptor, { ISDescriptorCtor } from '../../interface/ISDescriptor';
 
 export interface ISObjectDescriptorCtor extends ISDescriptorCtor {}

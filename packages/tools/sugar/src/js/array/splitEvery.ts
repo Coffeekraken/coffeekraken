@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name                                splitEvery
  * @namespace           sugar.js.array
@@ -16,7 +18,7 @@
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function splitEvery(array: any[], every: number): any[] {
+function splitEvery(array: any[], every: number): any[] {
   let i: number, j: number;
   const finalArray: any[] = [];
   for (i = 0, j = array.length; i < j; i += every) {
@@ -24,3 +26,4 @@ export default function splitEvery(array: any[], every: number): any[] {
   }
   return finalArray;
 }
+export = splitEvery;

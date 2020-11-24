@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        toQueryString
  * @namespace           sugar.js.object
@@ -24,7 +26,7 @@
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function toQueryString(obj) {
+function toQueryString(obj) {
   return (
     '?' +
     Object.keys(obj)
@@ -35,3 +37,4 @@ export default function toQueryString(obj) {
       .join('&')
   );
 }
+export = toQueryString;

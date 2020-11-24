@@ -1,14 +1,19 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name        constructorName
  * @namespace           sugar.js.object
  * @type      Function
+ * @stable
  *
  * Return the constructor name of the passed object
  *
  * @param 		{Object} 			obj 		The object to get the constructor name from
  * @return 		{String}						The constructor name
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * import constructorName from '@coffeekraken/sugar/js/object/constructorName';
@@ -18,9 +23,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * const myObj = new MyCoolClass();
  * console.log(constructorName(myObj)); => MyCoolClass
  *
+ * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function constructorName(obj) {
     return obj.constructor && obj.constructor.name ? obj.constructor.name : null;
 }
-exports.default = constructorName;
+module.exports = constructorName;

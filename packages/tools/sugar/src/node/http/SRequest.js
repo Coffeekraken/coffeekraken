@@ -1,42 +1,14 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 const strToHtml_1 = __importDefault(require("../html/strToHtml"));
 const toString_1 = __importDefault(require("../html/toString"));
 const SRequestConfig_1 = __importDefault(require("./SRequestConfig"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-/**
- * @name 		                    SRequest
- * @namespace           sugar.js.http
- * @type                        Class
- *
- * Class that allows to simply handle ajax requests with ease.
- * This class give some useful features like :
- * - Promise support
- * - Recursive requests
- *
- * @example 	js
- * const request = new SRequest({
- * 		url : 'api/...',
- * 		method : 'GET',
- * 		data : {
- * 			myVar : 'myVal'
- * 		}
- * });
- *
- * // send and listen for data
- * request.send().then((response) => {
- * 		// do something with response here...
- * }).catch((error) => {
- * 		// something went wrong...
- * });
- *
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SRequest {
+module.exports = class SRequest {
     /**
      * @name                              constructor
      * @type                              Function
@@ -246,5 +218,4 @@ class SRequest {
             this._send(requestSettings);
         });
     }
-}
-exports.default = SRequest;
+};

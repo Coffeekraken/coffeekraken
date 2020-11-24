@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      nodeIndex
  * @namespace           sugar.js.dom
@@ -24,10 +26,11 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function nodeIndex(node) {
+function nodeIndex(node) {
   let index = 0;
   while ((node = node.previousElementSibling)) {
     index++;
   }
   return index;
 }
+export = nodeIndex;

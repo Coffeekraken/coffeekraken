@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __isPlainObject from 'is-plain-object';
 
 /**
@@ -22,7 +24,7 @@ import __isPlainObject from 'is-plain-object';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function plainObject(object) {
+function plainObject(object) {
   if (!object) return false;
   if (typeof object !== 'object') return false;
   if (object.constructor && object.constructor.name !== 'Object') return false;
@@ -32,3 +34,4 @@ export default function plainObject(object) {
   if (object.constructor !== Object) return false;
   return true;
 }
+export = plainObject;

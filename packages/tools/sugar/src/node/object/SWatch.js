@@ -1,39 +1,12 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepProxy_1 = __importDefault(require("./deepProxy"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
-/**
- * @name 		            SWatch
- * @namespace           sugar.js.object
- * @type                Class
- *
- * This class allows you to easily monitor some object properties and get the new and old value of it
- *
- * @param       {Object}      object        The object to watch
- * @param       {Object}      [settings={}]       An object of settings to configure your watch process
- * - deep (true) {Boolean}: Specify if you want to watch the object deeply or just the first level
- *
- * @example 	js
- * // create the watcher instance
- * const watchedObj = new SWatch({
- * 		title : 'Hello World'
- * });
- *
- * // watch the object
- * watchedObj.on('title:set', watchResult => {
- *  	// do something when the title changes
- * });
- *
- * // update the title
- * watchedObj.title = 'Hello Universe';
- *
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SWatch {
+module.exports = class SWatch {
     /**
      * @name                      constructor
      * @type                      Function
@@ -75,8 +48,8 @@ class SWatch {
         });
         this._proxiedObject = deepProxy_1.default(object, (obj) => {
             let path = obj.path;
-            let value = obj.value;
-            let oldValue = obj.oldValue;
+            const value = obj.value;
+            const oldValue = obj.oldValue;
             if (path.slice(0, 1) === '.')
                 path = path.slice(1);
             // build the object to pass to the handler
@@ -146,5 +119,4 @@ class SWatch {
         // revoke proxy on the proxied object
         return this._proxiedObject.revoke();
     }
-}
-exports.default = SWatch;
+};

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __blessed from 'blessed';
 import __SBlessedComponent from '../SBlessedComponent';
 import __deepMerge from '../../object/deepMerge';
@@ -10,6 +12,7 @@ import __activeSpace from '../../core/activeSpace';
  * @name                  SBlessedInput
  * @namespace           sugar.node.blessed.input
  * @type                  Class
+ * @wip
  *
  * This class represent a simple input
  *
@@ -18,15 +21,18 @@ import __activeSpace from '../../core/activeSpace';
  * - placeholder (null) {String}: Specify a placeholder
  * - width (null) {String|Number}: This is the normal blessed component width parameter but you can specify "auto" if you want the input to adapt his width depending on his content
  *
- * // TODO: document the "promise" and "$input" properties
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import SBlessedInput from '@coffeekraken/sugar/node/blessed/form/SBlessedInput';
  * new SBlessedInput({});
  *
+ * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBlessedInput extends __SBlessedComponent {
+export = class SBlessedInput extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function

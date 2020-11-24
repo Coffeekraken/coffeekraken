@@ -1,5 +1,10 @@
-import __addEventListener from '../addEventListener';
-import __dispatchEvent from '../dispatchEvent';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const addEventListener_1 = __importDefault(require("../addEventListener"));
+const dispatchEvent_1 = __importDefault(require("../dispatchEvent"));
 describe('sugar.js.dom.addEventListener', () => {
     let isCallbackCalled = false, isThenCalled = false, hasBeenReleased = false, hasBeenCanceled = false;
     let clickCount = 0;
@@ -7,7 +12,7 @@ describe('sugar.js.dom.addEventListener', () => {
     <div id="testing"></div>
   `;
     const $elm = document.querySelector('#testing');
-    const listener = __addEventListener($elm, 'click', (event) => {
+    const listener = addEventListener_1.default($elm, 'click', (event) => {
         isCallbackCalled = true;
     })
         .on('click', (event) => {
@@ -20,11 +25,11 @@ describe('sugar.js.dom.addEventListener', () => {
         .on('cancel', (event) => {
         hasBeenCanceled = true;
     });
-    __dispatchEvent($elm, 'click');
+    dispatchEvent_1.default($elm, 'click');
     // release the listener
     listener.cancel();
     setTimeout(() => {
-        __dispatchEvent($elm, 'click');
+        dispatchEvent_1.default($elm, 'click');
     });
     it('Should have register the listener correctly and called as expected', (done) => {
         expect(isCallbackCalled).toBe(true);

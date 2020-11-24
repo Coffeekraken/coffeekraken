@@ -1,8 +1,17 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const unique_1 = __importDefault(require("../array/unique"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const sugar_1 = __importDefault(require("../config/sugar"));
@@ -16,6 +25,7 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * @name          STemplate
  * @namespace     sugar.node.template
  * @type          Class
+ * @wip
  *
  * This class represent a template that can be rendered using all the supported render engines listed in the features bellow.
  *
@@ -28,6 +38,10 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * - engine (null) {String|STemplateEngine}: Specify the engine to use in order to render your template. By default it will try to automatically detect the engine but you can specify it yourself. Can be a string like "blade.php" that identify a registered template engine, or directly an STemplateEngine based template engine instance
  * - engineSettings ({}) {Object}: Specify some settings that will be passed to the corresponding engine
  * - defaultData ({}) {Object}: A data object to use by default when calling the ```render``` method. Can be overrided obviously in the ```render``` method
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import STemplate from '@coffeekraken/sugar/node/template/STemplate';
@@ -284,7 +298,7 @@ class STemplate {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     render(data = {}, settings = {}) {
-        return new SPromise_1.default(async (resolve, reject, trigger, cancel) => {
+        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
             settings = deepMerge_1.default(this._settings, settings);
             data = deepMerge_1.default(settings.defaultData, data);
             if (this._templateString) {
@@ -327,25 +341,23 @@ class STemplate {
                 });
                 // check if we have a data file
                 if (dataFilePath && dataHandlerFn) {
-                    const dataObj = await dataHandlerFn(dataFilePath);
+                    const dataObj = yield dataHandlerFn(dataFilePath);
                     data = deepMerge_1.default(dataObj, data);
                 }
             }
             if (!this._engineInstance) {
                 // get the engine class
                 const EngineClass = require(STemplate.engines[settings.engine]);
-                this._engineInstance = new EngineClass({
-                    ...settings.engineSettings
-                });
+                this._engineInstance = new EngineClass(Object.assign({}, settings.engineSettings));
             }
-            const result = await this._engineInstance.render(this._viewPath || this._templateString, data, settings);
+            const result = yield this._engineInstance.render(this._viewPath || this._templateString, data, settings);
             // resolve the render process
             resolve({
                 view: this._viewPath,
                 engine: settings.engine,
                 content: result
             });
-        }, {
+        }), {
             id: settings.id + '.render'
         });
     }
@@ -395,4 +407,4 @@ const defaultDataHandlers = sugar_1.default('views.dataHandlers') || {};
 Object.keys(defaultDataHandlers).forEach((extension) => {
     STemplate.registerDataHandler(extension, defaultDataHandlers[extension]);
 });
-exports.default = STemplate;
+module.exports = STemplate;

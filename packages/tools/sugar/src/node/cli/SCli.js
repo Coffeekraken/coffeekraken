@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const class_1 = __importDefault(require("../is/class"));
 const buildCommandLine_1 = __importDefault(require("./buildCommandLine"));
 const SChildProcessManager_1 = __importDefault(require("../process/SChildProcessManager"));
@@ -18,6 +18,7 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * @namespace           sugar.node.cli
  * @implements          SCliInterface
  * @type                Class
+ * @wip
  *
  * This class represent a basic CLI command with his definition object, his command string, etc...
  *
@@ -29,7 +30,9 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * - defaultParams ({}) {Object}: Specify some defaults for your accepted and described params of the definition object
  * - childProcess: ({}) {Object}: Specify some settings to pass to the SChildProcess instance like "pipe", etc...
  *
- * @TODO            check the documentation
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import SCli from '@coffeekraken/sugar/js/cli/SCli';
@@ -108,12 +111,7 @@ class SCli extends SPromise_1.default {
             }
         }
         else {
-            const childProcessManager = new SChildProcessManager_1.default(this.command, {
-                id: settings.id,
-                definitionObj: this.interface.definitionObj,
-                defaultParams: settings.defaultParams,
-                ...settings.childProcessSettings
-            });
+            const childProcessManager = new SChildProcessManager_1.default(this.command, Object.assign({ id: settings.id, definitionObj: this.interface.definitionObj, defaultParams: settings.defaultParams }, settings.childProcessSettings));
             // childProcessManager.on('state', (state) => {
             //   this.state = state;
             // });
@@ -307,4 +305,4 @@ class SCli extends SPromise_1.default {
         catch (e) { }
     }
 }
-exports.default = SCliInterface_1.default.implements(SCli);
+module.exports = SCliInterface_1.default.implements(SCli);

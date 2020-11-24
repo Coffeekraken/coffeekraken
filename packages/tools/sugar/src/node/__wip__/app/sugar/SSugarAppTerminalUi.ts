@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __path from 'path';
 import __upperFirst from '../../string/upperFirst';
 import __SBlessedComponent from '../../blessed/SBlessedComponent';
@@ -19,11 +21,16 @@ import __SIpc from '../../ipc/SIpc';
  * @namespace           sugar.node.ui.sugar
  * @type                Class
  * @extends             SBlessedComponent
+ * @wip
  *
  * This class represent the Sugar UI interface in the terminal.
  *
  * @param           {SPromise}          source        The source from where to get data
  * @param           {Object}          [initialParams={}]        An object of initial params
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

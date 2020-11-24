@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import SProcessOutput from '../SProcessOutput';
 import ISBlessedProcessOutput, {
   ISBlessedProcessOutputSettings,
@@ -11,12 +13,17 @@ import SBlessedOutput from '../../blessed/SBlessedOutput';
  * @namespace     sugar.node.process.output
  * @type          Class
  * @extends       SProcessOutput
+ * @wip
  *
  * This class represent the blessed based process output
  * to display nicely all the logs, errors, etc...
  *
  * @param       {Array<SProcess>|SProcess}      source      The sources (usually SProcess instances) that you want to display the output for
  * @param       {IBlessedProcessOutputSettings}     [settings={}]       Some settings to configure your output instance
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import SBlessedProcessOutput from '@coffeekraken/sugar/node/process/output/SBlessedProcessOutput';
@@ -48,4 +55,4 @@ const Cls: ISBlessedProcessOutputCtor = class SBlessedProcessOutput
   }
 };
 
-export default Cls;
+export = Cls;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __strToHtml from '../string/strToHtml';
 
 function processString(string) {
@@ -46,7 +48,7 @@ function processNodeElm(elm) {
  * @since         1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function toDomNodes(source) {
+function toDomNodes(source) {
   // if the source is an HTMLElement
   if (source.tagName) {
     return processNodeElm(source);
@@ -74,3 +76,4 @@ export default function toDomNodes(source) {
     return processNodeElm(tpl);
   }
 }
+export = toDomNodes;

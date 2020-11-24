@@ -1,18 +1,18 @@
-/**
- * @name                mediaQuerySplitter
- * @namespace           sugar.js.code.splitters.scss
- * @type                Object
- *
- * This represent the SCSS media queries splitter.
- * It will match all the media queries blocks like "@media (...) { ... }", etc...
- * and split the code accordingly
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export default {
-    type: 'mediaQuery',
-    prefix: /@media\s?\([^{]*\)\s?/,
-    open: '{',
-    close: '}'
-};
+// @ts-nocheck
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    return {
+        type: 'mediaQuery',
+        prefix: /@media\s?\([^{]*\)\s?/,
+        open: '{',
+        close: '}'
+    };
+});

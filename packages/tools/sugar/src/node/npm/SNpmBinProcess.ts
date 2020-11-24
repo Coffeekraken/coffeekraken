@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import _SProcess from '../process/SProcess';
 import _SNpmBinInterface from './interface/SNpmBinInterface';
 import _deepMerge from '../object/deepMerge';
@@ -7,10 +9,15 @@ import _deepMerge from '../object/deepMerge';
  * @namespace         sugar.node.npm
  * @type              Class
  * @extends           SProcess
+ * @wip
  *
  * This class represent the npm bin capabilities like install a bin globally or locally, uninstall it, etc...
  *
  * @param         {Object}       [settings={}]         An object of settings to configure your instance
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import SNpmBinProcess from '@coffeekraken/sugar/node/npm/SNpmBinProcess';

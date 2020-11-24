@@ -1,4 +1,14 @@
 "use strict";
+// @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -6,7 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const parseHtml_1 = __importDefault(require("../../node/terminal/parseHtml"));
 const fkill_1 = __importDefault(require("fkill"));
 const ps_list_1 = __importDefault(require("ps-list"));
-exports.default = async (stringArgs = '') => {
+exports.default = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function* () {
     if (!stringArgs) {
         throw new Error(`You must specify a sugar process(s) to kill using the following format:
       - sugar util.kill server // this will kill all the sugar processes that starts with "server"
@@ -21,7 +31,7 @@ exports.default = async (stringArgs = '') => {
     console.log(parseHtml_1.default(`Listing all the processes that need to be killed...`));
     let processesObj;
     try {
-        processesObj = await ps_list_1.default();
+        processesObj = yield ps_list_1.default();
     }
     catch (e) {
     }
@@ -53,11 +63,11 @@ exports.default = async (stringArgs = '') => {
     for (let obj in processesArray) {
         const processObj = processesArray[obj];
         console.log(parseHtml_1.default(`Killing the process <primary>${processObj.cmd}</primary> with the PID <cyan>${processObj.pid}</cyan>`));
-        await fkill_1.default(parseInt(processObj.pid), {
+        yield fkill_1.default(parseInt(processObj.pid), {
             force: true
             // silent: true
         });
     }
     console.log(parseHtml_1.default(`<primary>${processesArray.length}</primary> process(es) have been killed <green>successfully</green>`));
     process.exit();
-};
+});

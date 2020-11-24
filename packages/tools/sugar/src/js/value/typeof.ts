@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import _deepMerge from '../object/deepMerge';
 import _isInt from '../is/integer';
 import _isClass from '../is/class';
@@ -55,7 +57,7 @@ interface ITypeofSettings {
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = function typeOf(value: any, settings: ITypeofSettings = {}): string {
+function typeOf(value: any, settings: ITypeofSettings = {}): string {
   settings = _deepMerge(
     {
       of: false,
@@ -123,3 +125,4 @@ export = function typeOf(value: any, settings: ITypeofSettings = {}): string {
 
   return type;
 };
+export = typeOf;

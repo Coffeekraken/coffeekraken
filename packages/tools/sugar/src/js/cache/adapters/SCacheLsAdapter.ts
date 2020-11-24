@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __SCacheAdapter from './SCacheAdapter';
 
@@ -21,7 +23,7 @@ import __SCacheAdapter from './SCacheAdapter';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SCacheLsAdapter extends __SCacheAdapter {
+export = class SCacheLsAdapter extends __SCacheAdapter {
   /**
    * @name                              constructor
    * @type                              Function

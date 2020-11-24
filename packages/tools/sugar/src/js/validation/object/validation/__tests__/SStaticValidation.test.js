@@ -1,2 +1,2 @@
-const __SStaticValidation = require('../SStaticValidation');
+var __SStaticValidation = require('../SStaticValidation');
 require('./SStaticValidation')(__SStaticValidation);

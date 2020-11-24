@@ -1,7 +1,10 @@
+// @ts-nocheck
+
 /**
  * @name              hsv2rgba
  * @namespace           sugar.js.color
  * @type              Function
+ * @stable
  *
  * HSV to RGBA
  *
@@ -11,13 +14,18 @@
  * @param	        {Number}      	a       		The alpha value between 0-100|0-1
  * @return      	{object} 		              	The rgba object representation
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example         js
  * import hsv2rgba from '@coffeekraken/sugar/js/color/hsv2rgba';
  * hsv2rgba(10,20,30);
  *
+ * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function hsv2rgba(h, s, v, a = 1) {
+function hsv2rgba(h, s, v, a = 1) {
   if (typeof h === 'object') {
     s = h.s;
     v = h.v;
@@ -68,3 +76,4 @@ export default function hsv2rgba(h, s, v, a = 1) {
     a: a
   };
 }
+export = hsv2rgba;

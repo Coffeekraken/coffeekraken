@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __get from '../../object/get';
 import __SValueValidationError from '../../error/SValueValidationError';
 import __isOfType from '../../is/ofType';
@@ -35,6 +37,7 @@ const _validationsObj = {
  * @name          validateValue
  * @namespace     sugar.js.validation.value
  * @type          Function
+ * @wip
  *
  * This function take a value and check if it correspond to the passed definition object.
  * If the value pass the test, the function will return true, otherwise it will return
@@ -48,7 +51,9 @@ const _validationsObj = {
  * - extendFn (null) {Function}: Specify a function that will be called after the default validations checks and before the return or throw statements. It will have as arguments the "value" to check, the "definitionObj" and the "settings" object. You then can make your checks and return an array of "issues" like ["path","other"], etc...
  * @return         {Boolean|Object}           true if the check is passed, an Array of String describing the issue if not
  *
- * @todo        tests
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import validateValue from '@coffeekraken/sugar/js/validation/value/validateValue';
@@ -62,7 +67,7 @@ const _validationsObj = {
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function validateValue(value, definitionObj, settings = {}) {
+function validateValue(value, definitionObj, settings = {}) {
   settings = __deepMerge(
     {
       name: 'unnamed',
@@ -84,7 +89,7 @@ export default function validateValue(value, definitionObj, settings = {}) {
     return true;
   }
 
-  let issueObj = {
+  const issueObj = {
     $expected: definitionObj,
     $received: {
       type: __typeof(value),
@@ -145,3 +150,4 @@ export default function validateValue(value, definitionObj, settings = {}) {
   }
   return issueObj;
 }
+export = validateValue;

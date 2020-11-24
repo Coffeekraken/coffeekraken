@@ -1,27 +1,10 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-/**
- * @name              SSearchResultItem
- * @namespace           sugar.node.search
- * @type              Class
- *
- * This class represent a search result with all his fields, etc...
- *
- * @param      {String}       source      The source to generate the docMap item. Can be a simple string or a file path
- * @param      {Object}       [settings={}]     A settings object with these properties availble:
- *
- * @example       js
- * import SSearchResultItem from '@coffeekraken/sugar/node/doc/SSearchResultItem';
- * const myDocMapItem = new SSearchResultItem('something/cool.js');
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SSearchResultItem {
+module.exports = class SSearchResultItem {
     /**
      * @name      constructor
      * @type      Function
@@ -129,5 +112,4 @@ class SSearchResultItem {
             action: this.action.toJson()
         };
     }
-}
-exports.default = SSearchResultItem;
+};

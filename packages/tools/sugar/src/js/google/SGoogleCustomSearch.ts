@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SRequest from '../http/SRequest';
 
 /**
@@ -33,7 +35,7 @@ import __SRequest from '../http/SRequest';
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default class SGoogleCustomSearch {
+export = class SGoogleCustomSearch {
   /**
    * @name              _apiKey
    * @type              String

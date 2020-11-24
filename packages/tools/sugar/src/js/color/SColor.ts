@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __parseRgba from './parseRgba';
 import __parseHsl from './parseHsl';
@@ -15,6 +17,7 @@ import __convert from './convert';
  * @name 		SColor
  * @namespace           sugar.js.color
  * @type    Class
+ * @beta
  *
  * Class that provide complete and simple to use color manupilation capabilities like:
  * - Modifiers
@@ -38,6 +41,10 @@ import __convert from './convert';
  * 	- toHsvString
  * 	- toHexString
  * 	- toString(format = null)
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example 	js
  * import SColor from '@coffeekraken/sugar/js/classes/SColor'
@@ -1045,4 +1052,4 @@ class SColor {
 // });
 
 // export class
-export default SColor;
+export = SColor;

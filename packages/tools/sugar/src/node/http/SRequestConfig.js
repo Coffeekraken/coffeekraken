@@ -1,30 +1,10 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const convert_1 = __importDefault(require("../time/convert"));
-/**
- * @name 	              	SRequestConfig
- * @namespace           sugar.js.http
- * @type                  Class
- *
- * Class that represent an ajax request that will be passed to an SRequest instance.
- * All the axios settings are supported by this class
- *
- * @example 	js
- * const request = new SRequestConfig({
- *  	url : '/api/...',
- *  	method : 'GET',
- *  	data : {
- *  		myVar : 'myVal'
- *  	}
- * });
- *
- * @see       https://github.com/axios/axios
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
-class SRequestConfig {
+module.exports = class SRequestConfig {
     /**
      * @name                        constructor
      * @type                        Function
@@ -179,5 +159,4 @@ class SRequestConfig {
         // set the parameters
         Object.assign(this, params);
     }
-}
-exports.default = SRequestConfig;
+};

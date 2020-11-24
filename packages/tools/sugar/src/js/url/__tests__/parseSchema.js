@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__parseSchema) => {
     describe('sugar.js.url.parseSchema', () => {
         it('Should correctly parse the passed url using the passed schema', () => {

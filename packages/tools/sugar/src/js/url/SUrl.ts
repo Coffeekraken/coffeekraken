@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __urlParse from 'url-parse';
 import __deepMerge from '../object/deepMerge';
 import __parseString from '../string/parse';
@@ -7,6 +9,7 @@ import __parseSchema from './parseSchema';
  * @name            SUrl
  * @namespace           sugar.js.url
  * @type            Class
+ * @wip
  *
  * Simple class that is useful to parse a URL (or the current browser URL) and gives you back
  * an instance that has all these values availables as well as functions to modify the instancied URL:
@@ -31,6 +34,10 @@ import __parseSchema from './parseSchema';
  *
  * This class use internally the `url-parse` npm module that you can find here: https://www.npmjs.com/package/url-parse
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example     js
  * import SUrl from '@coffeekraken/js/url/SUrl';
  * const url = new SUrl('https://github.com/foo/bar');
@@ -48,9 +55,10 @@ import __parseSchema from './parseSchema';
  *
  *
  * @see        https://www.npmjs.com/package/url-parse
+ * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default class SUrl {
+export = class SUrl {
   /**
    * @name                _settings
    * @type                Object

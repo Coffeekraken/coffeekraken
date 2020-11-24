@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { prefix } from 'inline-style-prefixer';
 import css from 'css';
 import __set from '../object/set';

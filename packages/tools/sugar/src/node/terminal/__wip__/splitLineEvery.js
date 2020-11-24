@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 /**
  * @name                                splitLineEvery
  * @namespace           sugar.node.terminal

@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 var _a;
 const __SBuildDocMapActionsStream = require('./SBuildDocMapActionsStream');
 const __SProcess = require('../../process/SProcess');
@@ -25,11 +26,7 @@ module.exports = (_a = class SBuildDocMapProcess extends __SProcess {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         constructor(settings = {}) {
-            super(__filename, {
-                id: 'SBuildDocMapProcess',
-                name: 'Build docMap.json Process',
-                ...settings
-            });
+            super(__filename, Object.assign({ id: 'SBuildDocMapProcess', name: 'Build docMap.json Process' }, settings));
         }
         /**
          * @name              process
@@ -45,13 +42,10 @@ module.exports = (_a = class SBuildDocMapProcess extends __SProcess {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         process(params, settings = {}) {
-            const docMapStream = new __SBuildDocMapActionsStream({
-                ...settings,
-                logs: {
+            const docMapStream = new __SBuildDocMapActionsStream(Object.assign(Object.assign({}, settings), { logs: {
                     start: false,
                     success: false
-                }
-            });
+                } }));
             const docMapStreamProcess = docMapStream.start(params);
             this.bindSPromise(docMapStreamProcess);
         }

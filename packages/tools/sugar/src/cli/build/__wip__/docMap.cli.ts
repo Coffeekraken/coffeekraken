@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SBuildDocMapProcess from '../../node/build/docMap/SBuildDocMapProcess';
 
 export default (stringArgs = '') => {

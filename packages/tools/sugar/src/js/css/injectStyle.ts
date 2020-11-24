@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name            injectStyle
  * @namespace           sugar.js.css
@@ -20,10 +22,11 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function injectStyle(style, node = document.head) {
+function injectStyle(style, node = document.head) {
   const $tag = document.createElement('style');
   $tag.type = 'text/css';
   $tag.innerHTML = style;
   node.appendChild($tag);
   return $tag;
 }
+export = injectStyle;

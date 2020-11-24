@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const json_1 = __importDefault(require("./json"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const filename_1 = __importDefault(require("../fs/filename"));
@@ -11,6 +11,7 @@ const sugar_1 = __importDefault(require("../config/sugar"));
  * @name          namespace
  * @namespace     sugar.node.package
  * @type          Function
+ * @wip
  *
  * This function take a string as parameter like a path, or a doted string like "something.cool" and return you
  * a proper namespace build using the package name, your passed string sanitized, etc...
@@ -18,6 +19,10 @@ const sugar_1 = __importDefault(require("../config/sugar"));
  * @param       {String}        path        The string path to convert into a proper namespace
  * @param       {Object}        [settings={}]     An object of settings to configure your namespace generation
  * @return      {String}                    The generated namespace
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example     js
  * import namespace from '@coffeekraken/sugar/node/package/namespace';
@@ -56,4 +61,4 @@ function namespace(path, settings = {}) {
         .join('.');
     return resultNamespace;
 }
-exports.default = namespace;
+module.exports = namespace;

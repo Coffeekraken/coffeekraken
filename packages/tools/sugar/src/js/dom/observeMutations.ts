@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 
 /**
@@ -31,7 +33,7 @@ import __SPromise from '../promise/SPromise';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function observeMutations($target, settings = {}) {
+function observeMutations($target, settings = {}) {
   settings = {
     attributes: true,
     childList: false,
@@ -60,3 +62,4 @@ export default function observeMutations($target, settings = {}) {
     mutationObserver && mutationObserver.disconnect();
   });
 }
+export = observeMutations;

@@ -1,4 +1,9 @@
-import __em2px from '../em2px';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const em2px_1 = __importDefault(require("../em2px"));
 describe('sugar.js.unit.em2px', () => {
     document.body.innerHTML = `
     <style>
@@ -10,6 +15,6 @@ describe('sugar.js.unit.em2px', () => {
   `;
     const $elm = document.querySelector('#testing');
     it('Should convert the passed em value to px correctly', () => {
-        expect(__em2px(2, $elm)).toBe(20);
+        expect(em2px_1.default(2, $elm)).toBe(20);
     });
 });

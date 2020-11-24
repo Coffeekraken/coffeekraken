@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __validateValueOutputString from '../value/validateValueOutputString';
 import __parseHtml from '../../console/parseHtml';
 import __trimLines from '../../string/trimLines';
@@ -7,6 +9,7 @@ import __toString from '../../string/toString';
  * @name                validateObjectOutputString
  * @namespace           sugar.js.validation.object
  * @type                Function
+ * @wip
  *
  * This function take the resulting object of the ```validateObject``` one and transform it into
  * a nice human readable string.
@@ -14,7 +17,9 @@ import __toString from '../../string/toString';
  * @param         {Object}          validateObjectResultObj           The validateObject resulting object
  * @return        {String}                                        A human readable string of the resulting object
  *
- * @todo          tests
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import validateObjectOutputString from '@coffeekraken/sugar/js/validation/object/validateObjectOutputString';
@@ -37,7 +42,7 @@ import __toString from '../../string/toString';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function validateObjectOutputString(
+function validateObjectOutputString(
   validateObjectResultObj,
   settings = {}
 ) {
@@ -76,3 +81,4 @@ export default function validateObjectOutputString(
 
   return __parseHtml(stringsArray.join('\n\n'));
 }
+export = validateObjectOutputString;

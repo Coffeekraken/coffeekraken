@@ -1,33 +1,14 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SApp_1 = __importDefault(require("./SApp"));
 const SHeader_1 = __importDefault(require("./SHeader"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const blessed_1 = __importDefault(require("blessed"));
 const sugar_1 = __importDefault(require("../config/sugar"));
-/**
- * @name                    SSimpleApp
- * @namespace           sugar.node.terminal
- * @type                    Class
- *
- * This class define an application in the terminal that you can easily configure to have the look and feel that you want
- * through simple settings described bellow.
- *
- * @param           {String}          name            Specify a name for this application
- * @param           {Object}          [settings={}]   An object of settings described bellow:
- *
- * @example         js
- * import SSimpleApp from '@coffeekraken/sugar/node/terminal/SSimpleApp';
- * const app = new SSimpleApp('My Cool Application', {
- * });
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SSimpleApp extends SApp_1.default {
+module.exports = class SSimpleApp extends SApp_1.default {
     /**
      * @name              constructor
      * @type              Function
@@ -80,5 +61,4 @@ class SSimpleApp extends SApp_1.default {
         // return the container
         return container;
     }
-}
-exports.default = SSimpleApp;
+};

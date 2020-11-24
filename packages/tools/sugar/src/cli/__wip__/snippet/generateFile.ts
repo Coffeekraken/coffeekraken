@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __fs from 'fs';
 import __find from 'find-in-files';
 import __path from 'path';

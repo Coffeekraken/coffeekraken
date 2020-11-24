@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 // TODO tests
 
 /**
@@ -21,9 +23,10 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function linux() {
+function linux() {
   if (process && process.platform) {
     return process.platform === 'linux';
   }
   return navigator.platform.toUpperCase().indexOf('LINUX') >= 0;
 }
+export = linux;

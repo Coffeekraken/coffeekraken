@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name      wrapInner
  * @namespace           sugar.js.dom
@@ -31,7 +33,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel@gmail.com)
  */
-export default function wrapInner($parent, $wrapper) {
+function wrapInner($parent, $wrapper) {
   if (typeof $wrapper === 'string') {
     $wrapper = document.createElement($wrapper);
   }
@@ -40,3 +42,4 @@ export default function wrapInner($parent, $wrapper) {
     $wrapper.appendChild($parent.firstChild);
   }
 }
+export = wrapInner;

@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__convert) => {
     describe('sugar.js.time.convert', () => {
         it('Should convert the string "1s" to 1000ms', () => {

@@ -1,9 +1,12 @@
+// @ts-nocheck
+
 import __isInPackage from '../path/isInPackage';
 
 /**
  * @name            inPackage
  * @namespace           sugar.node.is
  * @type            Function
+ * @stable
  *
  * This function check if the we are in (one of) the package(s) passed as parameter
  *
@@ -12,6 +15,10 @@ import __isInPackage from '../path/isInPackage';
  * @param           {Boolean}             [highest=false]         Specify if you want the highest package root or the first finded
  * @return      {Boolean}                           true if is in the passed package, false if not
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example       js
  * import isInPackage from '@coffeekraken/sugar/node/is/inPackage';
  * isInPackage('@coffeekraken/sugar'); // => true
@@ -19,6 +26,7 @@ import __isInPackage from '../path/isInPackage';
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default function inPackage(name, from = process.cwd(), highest = false) {
+function inPackage(name, from = process.cwd(), highest = false) {
   return __isInPackage(name, from, highest);
 }
+export = inPackage;

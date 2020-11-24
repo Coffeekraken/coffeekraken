@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import { decycle } from 'json-cyclic';
 
@@ -30,7 +32,7 @@ import { decycle } from 'json-cyclic';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function stringify(
+function stringify(
   obj,
   replacerOrSettings = null,
   settings = {}
@@ -51,3 +53,4 @@ export default function stringify(
   if (settings.decircular) newObj = decycle(newObj);
   return JSON.stringify(newObj, replacer, settings.space);
 }
+export = stringify;

@@ -1,3 +1,5 @@
+"use strict";
+// @ts-nocheck
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,12 +9,39 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const __machineIdSync = require('node-machine-id').machineIdSync;
-const __deepMerge = require('../object/deepMerge');
-const __fs = require('fs');
-const __SAuthTerminalAdapter = require('./adapters/SAuthTerminalAdapter');
-const __SCache = require('../cache/SCache');
-const __cryptObject = require('../crypt/object');
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __machineIdSync = require('node-machine-id').machineIdSync;
+var __deepMerge = require('../object/deepMerge');
+var __fs = require('fs');
+var __SAuthTerminalAdapter = require('./adapters/SAuthTerminalAdapter');
+var __SCache = require('../cache/SCache');
+var __cryptObject = require('../crypt/object');
 /**
  * @name                            SAuth
  * @namespace           node.auth
@@ -26,7 +55,7 @@ const __cryptObject = require('../crypt/object');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SAuth {
+module.exports = /** @class */ (function () {
     /**
      * @name                          constructor
      * @type                          Function
@@ -45,7 +74,8 @@ module.exports = class SAuth {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(name, settings = {}) {
+    function SAuth(name, settings) {
+        if (settings === void 0) { settings = {}; }
         /**
          * @name                          _name
          * @type                          String
@@ -78,7 +108,7 @@ module.exports = class SAuth {
         this._settings = null;
         // store the name
         if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
-            throw new Error(`The name of an SAuth instance can contain only letters like [a-zA-Z0-9_-]...`);
+            throw new Error("The name of an SAuth instance can contain only letters like [a-zA-Z0-9_-]...");
         }
         this._name = name;
         // handle settings
@@ -87,7 +117,7 @@ module.exports = class SAuth {
             title: null,
             info: null,
             adapter: new __SAuthTerminalAdapter(),
-            cache: new __SCache(`SAuth-${name}`, {}),
+            cache: new __SCache("SAuth-" + name, {}),
             validator: null
         }, settings);
         // save the adapter
@@ -95,22 +125,26 @@ module.exports = class SAuth {
         // process validator
         if (this._settings.validator &&
             typeof this._settings.validator === 'string') {
-            if (__fs.existsSync(`${__dirname}/validators/${this._settings.validator}Validator.js`)) {
-                this._settings.validator = require(`${__dirname}/validators/${this._settings.validator}Validator.js`);
+            if (__fs.existsSync(__dirname + "/validators/" + this._settings.validator + "Validator.js")) {
+                this._settings.validator = require(__dirname + "/validators/" + this._settings.validator + "Validator.js");
             }
         }
     }
-    /**
-     * @name                          type
-     * @type                          String
-     *
-     * Access the auth type like "basic", "bearer", "oauth2", etc...
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    get type() {
-        return this._settings.type;
-    }
+    Object.defineProperty(SAuth.prototype, "type", {
+        /**
+         * @name                          type
+         * @type                          String
+         *
+         * Access the auth type like "basic", "bearer", "oauth2", etc...
+         *
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        get: function () {
+            return this._settings.type;
+        },
+        enumerable: false,
+        configurable: true
+    });
     /**
      * @name                          authInfo
      * @type                          Object
@@ -129,29 +163,38 @@ module.exports = class SAuth {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    authInfo(settings = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-            settings = __deepMerge({
-                type: this.type,
-                title: this._settings.title,
-                info: this._settings.info,
-                error: null
-            }, settings);
-            // return the cached info in memory
-            if (this._authInfo)
-                return this._authInfo;
-            // check if we have already the infos in cache
-            const cachedInfos = yield this._settings.cache.get(settings.type);
-            if (cachedInfos) {
-                const decryptedValue = __cryptObject.decrypt(cachedInfos, __machineIdSync());
-                return decryptedValue;
-            }
-            // ask the user for his credentials
-            const authInfo = yield this.ask(settings);
-            // return the getted infos
-            return authInfo;
+    SAuth.prototype.authInfo = function (settings) {
+        if (settings === void 0) { settings = {}; }
+        return __awaiter(this, void 0, void 0, function () {
+            var cachedInfos, decryptedValue, authInfo;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        settings = __deepMerge({
+                            type: this.type,
+                            title: this._settings.title,
+                            info: this._settings.info,
+                            error: null
+                        }, settings);
+                        // return the cached info in memory
+                        if (this._authInfo)
+                            return [2 /*return*/, this._authInfo];
+                        return [4 /*yield*/, this._settings.cache.get(settings.type)];
+                    case 1:
+                        cachedInfos = _a.sent();
+                        if (cachedInfos) {
+                            decryptedValue = __cryptObject.decrypt(cachedInfos, __machineIdSync());
+                            return [2 /*return*/, decryptedValue];
+                        }
+                        return [4 /*yield*/, this.ask(settings)];
+                    case 2:
+                        authInfo = _a.sent();
+                        // return the getted infos
+                        return [2 /*return*/, authInfo];
+                }
+            });
         });
-    }
+    };
     /**
      * @name                          inject
      * @type                          Function
@@ -170,18 +213,19 @@ module.exports = class SAuth {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    inject(injector, requestConfig, authInfo = this._authInfo) {
+    SAuth.prototype.inject = function (injector, requestConfig, authInfo) {
+        if (authInfo === void 0) { authInfo = this._authInfo; }
         // if we don't have any auth info, return the request object untouched
         if (!authInfo)
             return requestConfig;
         // init the final request config variable that will be hooked
-        let finalRequestConfig = {};
+        var finalRequestConfig = {};
         // check if the injector is a string
         if (typeof injector === 'string') {
-            if (!__fs.existsSync(`${__dirname}/injectors/${injector}Injector.js`)) {
-                throw new Error(`You try to inject the auth info using the injector "${injector}" but it does not exists...`);
+            if (!__fs.existsSync(__dirname + "/injectors/" + injector + "Injector.js")) {
+                throw new Error("You try to inject the auth info using the injector \"" + injector + "\" but it does not exists...");
             }
-            finalRequestConfig = require(`${__dirname}/injectors/${injector}Injector.js`)(Object.assign(requestConfig), authInfo);
+            finalRequestConfig = require(__dirname + "/injectors/" + injector + "Injector.js")(Object.assign(requestConfig), authInfo);
         }
         else if (typeof injector === 'function') {
             finalRequestConfig = injector(Object.assign(requestConfig), authInfo);
@@ -192,7 +236,7 @@ module.exports = class SAuth {
         delete finalRequestConfig.type;
         // return the requestConfig untouched as fallback
         return finalRequestConfig;
-    }
+    };
     /**
      * @name                          ask
      * @type                          Function
@@ -220,58 +264,72 @@ module.exports = class SAuth {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    ask(settings = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-            settings = __deepMerge({
-                type: this.type,
-                title: this._settings.title,
-                info: this._settings.info,
-                error: null
-            }, settings);
-            // check that the requested auth type is handled by the adapter
-            if (this._adapter.supportedAuthTypes.indexOf(settings.type) === -1) {
-                throw new Error(`You try to ask the auth informations of type "${settings.type}" through the "${this._name}" SAuth instance but the setted adapter does not handle this auth type...`);
-            }
-            // ask the adapter for the auth infos
-            const rawInfos = yield this._adapter.ask(settings);
-            // format the auth infos using the corresponsing formater
-            let formatedInfos = rawInfos;
-            if (__fs.existsSync(`${__dirname}/formaters/${settings.type}Formater.js`)) {
-                formatedInfos = require(`${__dirname}/formaters/${settings.type}Formater.js`)(rawInfos);
-            }
-            // add the common formated auth object info
-            formatedInfos = __deepMerge({
-                type: settings.type,
-                name: `${this._name}.${settings.type}`
-            }, formatedInfos);
-            // validate the getted infos if possible
-            if (this._settings.validator) {
-                // display validation message
-                if (this._adapter._validation) {
-                    this._adapter._validation();
+    SAuth.prototype.ask = function (settings) {
+        if (settings === void 0) { settings = {}; }
+        return __awaiter(this, void 0, void 0, function () {
+            var rawInfos, formatedInfos, validationResult, askSettings, cryptedInfos;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        settings = __deepMerge({
+                            type: this.type,
+                            title: this._settings.title,
+                            info: this._settings.info,
+                            error: null
+                        }, settings);
+                        // check that the requested auth type is handled by the adapter
+                        if (this._adapter.supportedAuthTypes.indexOf(settings.type) === -1) {
+                            throw new Error("You try to ask the auth informations of type \"" + settings.type + "\" through the \"" + this._name + "\" SAuth instance but the setted adapter does not handle this auth type...");
+                        }
+                        return [4 /*yield*/, this._adapter.ask(settings)];
+                    case 1:
+                        rawInfos = _a.sent();
+                        formatedInfos = rawInfos;
+                        if (__fs.existsSync(__dirname + "/formaters/" + settings.type + "Formater.js")) {
+                            formatedInfos = require(__dirname + "/formaters/" + settings.type + "Formater.js")(rawInfos);
+                        }
+                        // add the common formated auth object info
+                        formatedInfos = __deepMerge({
+                            type: settings.type,
+                            name: this._name + "." + settings.type
+                        }, formatedInfos);
+                        if (!this._settings.validator) return [3 /*break*/, 3];
+                        // display validation message
+                        if (this._adapter._validation) {
+                            this._adapter._validation();
+                        }
+                        return [4 /*yield*/, this._settings.validator(formatedInfos)];
+                    case 2:
+                        validationResult = _a.sent();
+                        if (validationResult !== true) {
+                            askSettings = Object.assign(settings);
+                            askSettings.error =
+                                typeof validationResult === 'string'
+                                    ? validationResult
+                                    : 'Your credentials have been declined. Please try again...';
+                            return [2 /*return*/, this.ask(askSettings)];
+                        }
+                        _a.label = 3;
+                    case 3:
+                        if (!this._adapter._success) return [3 /*break*/, 5];
+                        return [4 /*yield*/, this._adapter._success()];
+                    case 4:
+                        _a.sent();
+                        _a.label = 5;
+                    case 5:
+                        cryptedInfos = __cryptObject.encrypt(formatedInfos, __machineIdSync());
+                        // the infos are ok so we save them in cache
+                        return [4 /*yield*/, this._settings.cache.set(settings.type, cryptedInfos, {})];
+                    case 6:
+                        // the infos are ok so we save them in cache
+                        _a.sent();
+                        // save the auth info into memory
+                        this._authInfo = formatedInfos;
+                        // return the getted infos
+                        return [2 /*return*/, formatedInfos];
                 }
-                const validationResult = yield this._settings.validator(formatedInfos);
-                if (validationResult !== true) {
-                    const askSettings = Object.assign(settings);
-                    askSettings.error =
-                        typeof validationResult === 'string'
-                            ? validationResult
-                            : 'Your credentials have been declined. Please try again...';
-                    return this.ask(askSettings);
-                }
-            }
-            // display validation message
-            if (this._adapter._success) {
-                yield this._adapter._success();
-            }
-            // crypt the infos before saving them into cache
-            const cryptedInfos = __cryptObject.encrypt(formatedInfos, __machineIdSync());
-            // the infos are ok so we save them in cache
-            yield this._settings.cache.set(settings.type, cryptedInfos, {});
-            // save the auth info into memory
-            this._authInfo = formatedInfos;
-            // return the getted infos
-            return formatedInfos;
+            });
         });
-    }
-};
+    };
+    return SAuth;
+}());

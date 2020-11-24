@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __extension from '../fs/extension';
 import __SCache from '../cache/SCache';
 import __unquote from '../string/unquote';
@@ -28,6 +30,7 @@ import { start } from 'repl';
  * @name                SScssCompiler
  * @namespace           sugar.node.scss
  * @type                Class
+ * @wip
  *
  * This class wrap the "sass" compiler with some additional features which are:
  *
@@ -41,7 +44,9 @@ import { start } from 'repl';
  * @setting         {Onject}       [optimizers={}]     Pass an object of optimizing settings
  * @setting         {Boolean}       [optimizers.split=true]     Specify if you want to make use of the splitting code technique to compile only what's really changed
  *
- * @todo            tests
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  * @todo            check for map output when no file path
  *
  * @example         js
@@ -56,7 +61,7 @@ import { start } from 'repl';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SScssCompiler {
+export = class SScssCompiler {
   /**
    * @name            _settings
    * @type            Object

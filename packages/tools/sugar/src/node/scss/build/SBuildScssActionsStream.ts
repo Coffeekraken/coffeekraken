@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SActionsStream from '../../stream/SActionsStream';
 import __deepMerge from '../../object/deepMerge';
 import __getFilename from '../../fs/filename';
@@ -11,12 +13,15 @@ import __SBuildScssInterface from './interface/SBuildScssInterface';
  * @namespace           sugar.node.build.scss
  * @type            Class
  * @extends         SActionsStream
+ * @wip
  *
  * This class represent a pre-configured action stream to build easily some javascript files
  *
  * @param           {Object}          [settings={}]         The settings object to configure your instance
  *
- * @todo        Document the streamObj required properties
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import SBuildScssActionsStream from '@coffeekraken/sugar/node/build/SBuildScssActionsStream';
@@ -31,7 +36,7 @@ import __SBuildScssInterface from './interface/SBuildScssInterface';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SBuildScssActionsStream extends __SActionsStream {
+export = class SBuildScssActionsStream extends __SActionsStream {
   static interface = __SBuildScssInterface;
 
   /**

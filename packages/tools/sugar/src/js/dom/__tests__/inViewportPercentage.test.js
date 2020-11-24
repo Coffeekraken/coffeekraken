@@ -1,3 +1,4 @@
+"use strict";
 const __inViewportPercentage = require('../inViewportPercentage');
 describe('sugar.js.dom.inViewportPercentage', () => {
     document.body.innerHTML = `

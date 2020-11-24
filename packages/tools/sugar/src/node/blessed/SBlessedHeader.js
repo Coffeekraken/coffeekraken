@@ -1,33 +1,14 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const blessed_1 = __importDefault(require("blessed"));
 const SBlessedComponent_1 = __importDefault(require("./SBlessedComponent"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const parseHtml_1 = __importDefault(require("../terminal/parseHtml"));
 const color_1 = __importDefault(require("../color/color"));
-/**
- * @name                  SBlessedComponent
- * @namespace           sugar.node.blessed
- * @type                  Class
- *
- * This class is the base one for all the sugar blessed components like input, panel, etc...
- *
- * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
- *
- * @example       js
- * import SBlessedComponent from '@coffeekraken/sugar/node/blessed/SBlessedComponent';
- * class MyCoolComponent extends SBlessedComponent {
- *    constructor(settings = {}) {
- *      super(settings);
- *    }
- * }
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SHeader extends SBlessedComponent_1.default {
+module.exports = class SHeader extends SBlessedComponent_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -74,5 +55,4 @@ class SHeader extends SBlessedComponent_1.default {
     update() {
         super.update();
     }
-}
-exports.default = SHeader;
+};

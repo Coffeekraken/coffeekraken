@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __isPath from '../is/path';
 import __fs from 'fs';
@@ -12,11 +14,16 @@ import __namespace from '../package/namespace';
  * @name              SSearchResultItem
  * @namespace           sugar.node.search
  * @type              Class
+ * @wip
  *
  * This class represent a search result with all his fields, etc...
  *
  * @param      {String}       source      The source to generate the docMap item. Can be a simple string or a file path
  * @param      {Object}       [settings={}]     A settings object with these properties availble:
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import SSearchResultItem from '@coffeekraken/sugar/node/doc/SSearchResultItem';
@@ -25,7 +32,7 @@ import __namespace from '../package/namespace';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SSearchResultItem {
+export = class SSearchResultItem {
   /**
    * @name        _settings
    * @type        Object

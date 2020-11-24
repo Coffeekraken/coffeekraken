@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name 		distanceBetween
  * @namespace           sugar.js.geom.2d
@@ -25,7 +27,7 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function distanceBetween(point1, point2) {
+function distanceBetween(point1, point2) {
   let xs = 0;
   let ys = 0;
 
@@ -37,3 +39,4 @@ export default function distanceBetween(point1, point2) {
 
   return Math.sqrt(xs + ys);
 }
+export = distanceBetween;

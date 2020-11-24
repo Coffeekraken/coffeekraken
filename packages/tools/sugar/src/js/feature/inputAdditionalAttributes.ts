@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import fastdom from 'fastdom';
 import __querySelectorLive from '../dom/querySelectorLive';
 
@@ -31,7 +33,7 @@ import __querySelectorLive from '../dom/querySelectorLive';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function inputAdditionalAttributes(settings = {}) {
+function inputAdditionalAttributes(settings = {}) {
   settings = {
     empty: true,
     hasValue: true,
@@ -107,3 +109,4 @@ export default function inputAdditionalAttributes(settings = {}) {
   document.addEventListener('reset', handleFormSubmitOrReset);
   document.addEventListener('submit', handleFormSubmitOrReset);
 }
+export = inputAdditionalAttributes;

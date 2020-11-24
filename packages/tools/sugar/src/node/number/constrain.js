@@ -1,9 +1,10 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+// @ts-nocheck
 /**
  * @name        constrain
  * @namespace           sugar.js.number
  * @type      Function
+ * @stable
  *
  * Constrain a value between a min and a max value
  *
@@ -12,10 +13,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param    {Number}    [max=null]    The max value possible
  * @return    {Number}    The constrained value
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example    js
  * import constrain from '@coffeekraken/sugar/js/numbers/constrain'
  * constrain(100, 0, 50) // 50
  *
+ * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function constrain(value, min = null, max = null) {
@@ -25,4 +31,4 @@ function constrain(value, min = null, max = null) {
         value = max;
     return value;
 }
-exports.default = constrain;
+module.exports = constrain;

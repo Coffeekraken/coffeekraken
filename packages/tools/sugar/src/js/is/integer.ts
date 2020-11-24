@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isInteger
  * @namespace           sugar.js.is
@@ -21,7 +23,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isInteger(data) {
+function isInteger(data) {
   return (
     !isNaN(data) &&
     (function (x) {
@@ -29,3 +31,4 @@ export default function isInteger(data) {
     })(parseFloat(data))
   );
 }
+export = isInteger;

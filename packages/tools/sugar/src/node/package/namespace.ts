@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __json from './json';
 import __deepMerge from '../object/deepMerge';
 import __getFilename from '../fs/filename';
@@ -7,6 +9,7 @@ import __sugarConfig from '../config/sugar';
  * @name          namespace
  * @namespace     sugar.node.package
  * @type          Function
+ * @wip
  *
  * This function take a string as parameter like a path, or a doted string like "something.cool" and return you
  * a proper namespace build using the package name, your passed string sanitized, etc...
@@ -15,6 +18,10 @@ import __sugarConfig from '../config/sugar';
  * @param       {Object}        [settings={}]     An object of settings to configure your namespace generation
  * @return      {String}                    The generated namespace
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @example     js
  * import namespace from '@coffeekraken/sugar/node/package/namespace';
  * namespace('something.cool'); => // coffeekraken.sugar.something.cool
@@ -22,7 +29,7 @@ import __sugarConfig from '../config/sugar';
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default function namespace(path, settings = {}) {
+function namespace(path, settings = {}) {
   settings = __deepMerge(__sugarConfig('core.namespace') || {}, settings);
   // get the package json content
   const json = __json(settings.context || process.cwd());
@@ -54,3 +61,4 @@ export default function namespace(path, settings = {}) {
     .join('.');
   return resultNamespace;
 }
+export = namespace;

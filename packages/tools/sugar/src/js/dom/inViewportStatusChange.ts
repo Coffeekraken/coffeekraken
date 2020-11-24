@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 import __isInViewport from './isInViewport';
 import __whenInViewport from './whenInViewport';
@@ -29,7 +31,7 @@ import __whenOutOfViewport from './whenOutOfViewport';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function inViewportStatusChange($elm) {
+function inViewportStatusChange($elm) {
   let isFinished = false;
 
   return new __SPromise(
@@ -63,3 +65,4 @@ export default function inViewportStatusChange($elm) {
     isFinished = true;
   });
 }
+export = inViewportStatusChange;

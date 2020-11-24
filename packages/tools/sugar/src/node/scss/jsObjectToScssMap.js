@@ -1,11 +1,17 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const plainObject_1 = __importDefault(require("../is/plainObject"));
 let { isArray } = Array;
+/**
+ * @wip
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ */
 function jsToScssString(value, settings = {}) {
     settings = deepMerge_1.default({
         quoteKeys: ['src', 'import', 'font-family', 'defaultAction']
@@ -76,4 +82,4 @@ function isNull(value) {
 function isNotUndefined(value) {
     return typeof value !== 'undefined';
 }
-exports.default = jsToScssString;
+module.exports = jsToScssString;

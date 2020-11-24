@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SError from '../../error/SError';
 import __deepMerge from '../../object/deepMerge';
 import __marked from 'marked';
@@ -30,8 +32,9 @@ import __marked from 'marked';
  * @see       https://marked.js.org/#/README.md
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function htmlFromMarkdown(inputString, settings = {}) {
+function htmlFromMarkdown(inputString, settings = {}) {
   settings = __deepMerge({}, settings);
   __marked.setOptions(settings);
   return __marked(inputString);
 }
+export = htmlFromMarkdown;

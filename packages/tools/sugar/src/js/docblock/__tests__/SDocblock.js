@@ -1,3 +1,4 @@
+"use strict";
 // TODO: More tests
 module.exports = (__SDocblock) => {
     describe('sugar.js.docblock.SDocblockParser', () => {

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SPromise from '../promise/SPromise';
 
 /**
@@ -24,7 +26,7 @@ import __SPromise from '../promise/SPromise';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function loadScript($script) {
+function loadScript($script) {
   return new __SPromise(
     (resolve, reject, trigger, cancel) => {
       let done = false;
@@ -65,3 +67,4 @@ export default function loadScript($script) {
     $script.onerror = null;
   });
 }
+export = loadScript;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __validateObject from '../object/validateObject';
 
 /**
@@ -5,6 +7,7 @@ import __validateObject from '../object/validateObject';
  * @namespace           sugar.js.validation.object.interface
  * @type                Class
  * @extends             SInterface
+ * @stable
  *
  * This class represent the interface that describe the requirements for
  * an item of the definitionObject
@@ -12,7 +15,7 @@ import __validateObject from '../object/validateObject';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SDefinitionObjectInterface {
+export = class SDefinitionObjectInterface {
   static definitionObj = {
     type: {
       type: 'String',

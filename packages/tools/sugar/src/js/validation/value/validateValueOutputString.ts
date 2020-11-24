@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseHtml from '../../console/parseHtml';
 import __toString from '../../string/toString';
 import __deepMerge from '../../object/deepMerge';
@@ -7,6 +9,7 @@ import __isNode from '../../is/node';
  * @name                validateValueOutputString
  * @namespace           sugar.js.validation.value
  * @type                Function
+ * @wip
  *
  * This function take the resulting object of the ```validateValue``` one and transform it into
  * a nice human readable string.
@@ -14,7 +17,9 @@ import __isNode from '../../is/node';
  * @param         {Object}          validateValueResultObj           The validateValue resulting object
  * @return        {String}                                        A human readable string of the resulting object
  *
- * @todo          tests
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import validateValueOutputString from '@coffeekraken/sugar/js/validation/object/validateValueOutputString';
@@ -28,11 +33,11 @@ import __isNode from '../../is/node';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function validateValueOutputString(
+function validateValueOutputString(
   validateValueResultObj,
   settings = {}
 ) {
-  let issuesArray = [];
+  const issuesArray = [];
 
   settings = __deepMerge({
     name: settings.name || validateValueResultObj.$name,
@@ -44,7 +49,7 @@ export default function validateValueOutputString(
   }
 
   if (validateValueResultObj.$received) {
-    let string = `<yellow>│</yellow> - Received value: <yellow>${__toString(
+    const string = `<yellow>│</yellow> - Received value: <yellow>${__toString(
       validateValueResultObj.$received.value,
       { beautify: true }
     )}</yellow>`;
@@ -62,3 +67,4 @@ export default function validateValueOutputString(
 
   return __parseHtml(issuesArray.join('\n')) + '\n';
 }
+export = validateValueOutputString;

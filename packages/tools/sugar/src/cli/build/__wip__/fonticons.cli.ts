@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __moduleAliases from '../../node/build/js/moduleAliases';
 import __SBuildFontIconsProcess from '../../node/build/fontIcons/SBuildFontIconsProcess';
 import __SProcessManager from '../../node/process/SProcessManager';

@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__buildCommandLine) => {
     describe('sugar.js.cli.buildCommandLine', () => {
         it('Should build the command line correctly', (done) => {

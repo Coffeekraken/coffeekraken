@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SScssCompiler from '../../../scss/SScssCompiler';
 import __SDuration from '../../../time/SDuration';
 import __SBuildScssInterface from '../../../scss/build/interface/SBuildScssInterface';
@@ -6,6 +8,7 @@ import __SBuildScssInterface from '../../../scss/build/interface/SBuildScssInter
  * @name                scss
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
+ * @wip
  *
  * This function is responsible of responding to express requests made on the home page
  *
@@ -13,10 +16,14 @@ import __SBuildScssInterface from '../../../scss/build/interface/SBuildScssInter
  * @param         {Object}          res             The express response object
  * @param         {Object}         [settings={}]    The handler settings
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default async function scss(req, res, settings = {}) {
+export = async function scss(req, res, settings = {}) {
   const defaultValuesObj = __SBuildScssInterface.getDefaultValues();
   const compiler = new __SScssCompiler(defaultValuesObj);
   const duration = new __SDuration();

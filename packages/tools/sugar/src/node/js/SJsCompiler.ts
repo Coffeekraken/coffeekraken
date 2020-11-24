@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';
 import __esbuild from 'esbuild';
@@ -11,6 +13,7 @@ import __esbuildScssLoaderPlugin from './build/plugins/esbuild/esbuildScssLoader
  * @name                SJsCompiler
  * @namespace           sugar.node.js
  * @type                Class
+ * @wip
  *
  * This class wrap the "esbuild" compiler with some additional features to compile your js files
  * quicky and efficiently
@@ -20,7 +23,9 @@ import __esbuildScssLoaderPlugin from './build/plugins/esbuild/esbuildScssLoader
  *
  * @param           {Object}            [settings={}]       An object of settings to configure your instance
  * *
- * @todo            tests
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example         js
  * import SJsCompiler from '@coffeekraken/sugar/node/scss/SJsCompiler';
@@ -36,7 +41,7 @@ import __esbuildScssLoaderPlugin from './build/plugins/esbuild/esbuildScssLoader
  */
 let _rootDir;
 
-export default class SJsCompiler {
+export = class SJsCompiler {
   /**
    * @name            _settings
    * @type            Object

@@ -1,34 +1,11 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const convert_1 = __importDefault(require("./convert"));
-/**
- * @name                SDuration
- * @namespace           sugar.js.time
- * @type                Class
- *
- * This class represent a duration tracking process. Simply instanciate it,
- * then call the ```instance.get()``` method and you will get back
- * the duration between the instanciation and the ```get``` method call
- *
- * @param       {Object}            [settings={}]           An object of settings to use
- *
- * @setting      {String}           [format='s']            Specify the format you want for your instance. Can be 'ms|millisecond(s)', 's|second(s)', 'm|minute(s)', 'h|hour(s)', 'd|day', 'w|week(s)', 'month(s)', 'y|year(s)'
- * @setting      {Boolean}          [suffix=true]             Specify if you want the duration returned with the corresponding suffix like 'ms', 's', etc...
- *
- * @example             js
- * import SDuration from '@coffeekraken/sugar/js/time/SDuration';
- * const duration = new SDuration();
- * await ...
- * console.log(duration.end());
- *
- * @since           2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
-class SDuration {
+module.exports = class SDuration {
     /**
      * @name            constructor
      * @type            Function
@@ -108,9 +85,8 @@ class SDuration {
     end(settings = {}) {
         settings = deepMerge_1.default(this._settings, settings);
         this.endTime = Date.now();
-        let durationMs = this.endTime - this.startTime;
-        let durationConverted = convert_1.default(durationMs, settings.format);
+        const durationMs = this.endTime - this.startTime;
+        const durationConverted = convert_1.default(durationMs, settings.format);
         return settings.suffix ? durationConverted : parseFloat(durationConverted);
     }
-}
-exports.default = SDuration;
+};

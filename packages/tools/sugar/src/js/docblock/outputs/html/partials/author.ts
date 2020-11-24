@@ -1,9 +1,11 @@
+// @ts-nocheck
+
 /**
  * @wip
  * @todo      interface
  * @todo      doc
  */
-export default `
+export = `
 {{#if author}}{{#author}}
 <div class="s-db-author">
   <h3 class="s-h3 s-m-t s-m-b-small">

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SDocMap from '../../node/doc/SDocMap';
 
 export default async function docMapGenerate(stringArgs = '') {

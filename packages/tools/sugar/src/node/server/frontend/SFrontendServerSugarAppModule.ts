@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SSugarAppModule from '../../app/sugar/SSugarAppModule';
 import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 import __frontend from '../../server/frontend/frontend';
@@ -9,6 +11,7 @@ import __SFrontendServerProcess from '../../server/frontend/SFrontendServerProce
  * @namespace           sugar.node.server.frontend
  * @type                Class
  * @extends             SSugarAppModule
+ * @wip
  *
  * This class represent the frontend server module for the Sugar UI.
  *
@@ -17,7 +20,7 @@ import __SFrontendServerProcess from '../../server/frontend/SFrontendServerProce
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default class SFrontendServerSugarAppModule extends __SSugarAppModule {
+export = class SFrontendServerSugarAppModule extends __SSugarAppModule {
   static interface = __SFrontendServerInterface;
 
   /**

@@ -1,19 +1,19 @@
-/**
- * @name                selectorBlockSplitter
- * @namespace           sugar.js.code.splitters.scss
- * @type                Object
- *
- * This represent the SCSS selectors splitter.
- * It will match all the selectors blocks like ".hello #world, p:before { ... }", etc...
- * and split the code accordingly
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export default {
-    type: 'selector.block',
-    prefix: /(^(?!.*@media)[\t ]*([a-zA-Z#.:*[][^{\/]*\s*)\s?){/m,
-    prefixMatchIdx: 1,
-    open: '{',
-    close: '}'
-};
+// @ts-nocheck
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    return {
+        type: 'selector.block',
+        prefix: /(^(?!.*@media)[\t ]*([a-zA-Z#.:*[][^{\/]*\s*)\s?){/m,
+        prefixMatchIdx: 1,
+        open: '{',
+        close: '}'
+    };
+});

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isUcBrowser
  * @namespace           sugar.js.is
@@ -21,6 +23,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isUcBrowser(ua = navigator.userAgent) {
+function isUcBrowser(ua = navigator.userAgent) {
   return ua.match(/UCBrowser/i) !== null;
 }
+export = isUcBrowser;

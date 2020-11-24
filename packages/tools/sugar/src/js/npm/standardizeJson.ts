@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseAuthorString from './parseAuthorString';
 
 /**
@@ -35,7 +37,7 @@ import __parseAuthorString from './parseAuthorString';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function standardizeJson(json) {
+function standardizeJson(json) {
   // author
   if (json.author && typeof json.author === 'string') {
     json.author = __parseAuthorString(json.author);
@@ -62,3 +64,4 @@ export default function standardizeJson(json) {
 
   return json;
 }
+export = standardizeJson;

@@ -1,8 +1,8 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const onProcessExit_1 = __importDefault(require("../process/onProcessExit"));
@@ -12,10 +12,13 @@ const onProcessExit_1 = __importDefault(require("../process/onProcessExit"));
  * @type                Class
  * @extends             SPromise
  * @implments           SDeamonInterface
+ * @wip
  *
  * This class is the base one for all the "Deamons" classes like SFsDeamon, etc...
  *
- * @todo        update doc
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @event       state       Triggered when the state change
  *
@@ -171,4 +174,4 @@ class SDeamon extends SPromise_1.default {
         return watchPromise;
     }
 }
-exports.default = SDeamon;
+module.exports = SDeamon;

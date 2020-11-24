@@ -1,17 +1,22 @@
-import __fs from 'fs-extra';
+// @ts-nocheck
 
-// TODO tests
+import __fs from 'fs-extra';
 
 /**
  * @name        move
  * @namespace           sugar.node.fs
  * @type          Function
+ * @stable
  *
  * Moves a file or directory, even across devices (async)
  *
  * @param       {String}              src           The source path to move
  * @param       {String}              dest          The destination path
  * @return      {Promise}                           A promise that will be resolved once the file/directory has been moved...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example       js
  * import move from '@coffeekraken/node/fs/move';
@@ -20,8 +25,10 @@ import __fs from 'fs-extra';
  * });
  *
  * @see             https://github.com/jprichardson/node-fs-extra
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function move(src, dest) {
+function move(src, dest) {
   return __fs.move(src, dest);
 }
+export = move;

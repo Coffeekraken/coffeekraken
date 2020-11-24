@@ -1,13 +1,14 @@
 "use strict";
+// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
 /**
  * @name                error
  * @namespace           sugar.node.server.frontend.pages
  * @type                Function
+ * @wip
  *
  * This function simply return the 404 page content to send to the user
  * with the passed data object described here:
@@ -20,6 +21,10 @@ const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
  * - ctas.text (null) {String}: The text of the call to action
  * - ctas.href (null) {String}: The url where to send the user
  * - ctas.target (_self) {String}: The target of the cta.
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
  *
  * @example             js
  * import 404 from '@coffeekraken/sugar/node/server/frontend/pages/404';
@@ -57,4 +62,4 @@ function error(data = {}) {
         packageJson: __standardizeJson(require(__packageRoot() + '/package.json'))
     };
 }
-exports.default = error;
+module.exports = error;

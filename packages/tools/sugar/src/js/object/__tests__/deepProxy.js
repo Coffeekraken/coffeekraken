@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__deepProxy) => {
     describe('sugar.js.object.deepProxy', () => {
         it('Should detect the updates in the object correctly', (done) => {

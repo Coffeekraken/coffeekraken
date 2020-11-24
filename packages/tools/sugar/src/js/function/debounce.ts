@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        debounce
  * @namespace           sugar.js.function
@@ -28,7 +30,7 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /*eslint-disable */
-export default function debounce(fn, delay) {
+function debounce(fn, delay) {
   let timer = null;
   return function () {
     const context = this,
@@ -40,3 +42,4 @@ export default function debounce(fn, delay) {
   };
 }
 /*eslint-enable */
+export = debounce;

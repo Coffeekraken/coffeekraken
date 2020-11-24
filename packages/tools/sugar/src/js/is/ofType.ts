@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseTypeDefinitionString from '../validation/utils/parseTypeDefinitionString';
 import __toString from '../string/toString';
 import __isClass from './class';
@@ -34,7 +36,7 @@ import __getExtendsStack from '../class/getExtendsStack';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ofType(value, argTypeDefinition) {
+function ofType(value, argTypeDefinition) {
   let definitionArray = argTypeDefinition;
   // parsing the argument definition string
   if (typeof argTypeDefinition === 'string') {
@@ -155,3 +157,4 @@ function getBaseClass(targetClass) {
     return stack;
   }
 }
+export = ofType;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __uncamelize from '../string/uncamelize';
 import __styleString2Object from './styleString2Object';
 import __styleObject2String from './styleObject2String';
@@ -28,7 +30,7 @@ import __styleObject2String from './styleObject2String';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function style(elm, styleObj) {
+function style(elm, styleObj) {
   // convert style string to object
   const styleAttr = elm.getAttribute('style');
 
@@ -46,3 +48,4 @@ export default function style(elm, styleObj) {
   // return the style
   return elm.style;
 }
+export = style;

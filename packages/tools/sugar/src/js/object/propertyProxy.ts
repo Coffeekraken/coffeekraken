@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import _get from 'lodash/get';
 /**
  * @name        propertyProxy
@@ -39,7 +41,7 @@ import _get from 'lodash/get';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function propertyProxy(
+function propertyProxy(
   obj,
   property,
   descriptor,
@@ -119,3 +121,4 @@ export default function propertyProxy(
   // return the value
   return val;
 }
+export = propertyProxy;

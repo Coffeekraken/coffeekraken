@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SAction from '../SAction';
 import __isBrowser from '../../is/browser';
 import __toQueryString from '../../object/toQueryString';

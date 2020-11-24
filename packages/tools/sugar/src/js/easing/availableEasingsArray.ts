@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name            availableEasingsArray
  * @namespace           sugar.js.easing
@@ -15,7 +17,7 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function availableEasingsArray() {
+function availableEasingsArray() {
   return [
     'easeInOutCubic',
     'easeInOutQuad',
@@ -31,3 +33,4 @@ export default function availableEasingsArray() {
     'easeOutQuint'
   ];
 }
+export = availableEasingsArray;

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __matches from './matches';
 
 /**
@@ -26,7 +28,7 @@ import __matches from './matches';
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function next(elm, selector) {
+function next(elm, selector) {
   elm = elm.nextSibling;
   while (elm) {
     if (__matches(elm, selector)) {
@@ -36,3 +38,4 @@ export default function next(elm, selector) {
   }
   return false;
 }
+export = next;

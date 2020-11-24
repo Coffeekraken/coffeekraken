@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 const __blessed = require('blessed');
 const __cursorPos = require('./cursorPos');
 const __splitEvery = require('../array/splitEvery');

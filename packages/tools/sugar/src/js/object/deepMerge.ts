@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __copyTo from 'copy-to';
 import __isPlainObject from '../is/plainObject';
 import __unique from '../array/unique';
@@ -30,7 +32,7 @@ import __unique from '../array/unique';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function deepMerge(...args) {
+function deepMerge(...args) {
   const settings = {
     array: false,
     object: true
@@ -90,3 +92,4 @@ export default function deepMerge(...args) {
 
   return currentObj;
 }
+export = deepMerge;

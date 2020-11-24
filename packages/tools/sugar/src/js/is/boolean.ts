@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isBoolean
  * @namespace           sugar.js.is
@@ -22,6 +24,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isBoolean(value) {
+function isBoolean(value) {
   return typeof value === 'boolean';
 }
+export = isBoolean;

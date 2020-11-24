@@ -1,3 +1,4 @@
+"use strict";
 module.exports = (__activeSpace) => {
     describe('sugar.js.core.activeSpace', () => {
         it('Should set the active space correctly', () => {

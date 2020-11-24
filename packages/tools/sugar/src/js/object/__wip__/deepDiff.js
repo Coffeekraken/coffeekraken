@@ -1,6 +1,8 @@
-const __diff = require('deep-diff').diff;
-const __set = require('../../../node/object/set');
-const __get = require('../../../node/object/get');
+"use strict";
+// @ts-nocheck
+var __diff = require('deep-diff').diff;
+var __set = require('../../../node/object/set');
+var __get = require('../../../node/object/get');
 /**
  * @name                            deepDiff
  * @namespace           node.object
@@ -22,16 +24,16 @@ const __get = require('../../../node/object/get');
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function deepDiff(origin, compare) {
-    const finalObject = {};
+    var finalObject = {};
     // const diffs = __diff(origin, compare, (path, key) => {
     //   const p = path.length ? path.join('.') + '.' + key : key;
     //   const value = __get(origin, p);
     //   console.log(p, value);
     //   return value !== undefined || !Array.isArray(value);
     // });
-    const diffs = __diff(origin, compare);
+    var diffs = __diff(origin, compare);
     console.log(diffs);
-    diffs.forEach((diff) => {
+    diffs.forEach(function (diff) {
         switch (diff.kind) {
             case 'D':
                 break;

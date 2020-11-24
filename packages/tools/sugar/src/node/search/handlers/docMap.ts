@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __deepMerge from '../../object/deepMerge';
 import __packageRoot from '../../path/packageRoot';
 import __fs from 'fs';
@@ -10,6 +12,7 @@ import __SUrlAction from '../../action/browser/SUrlAction';
  * @name                search
  * @namespace           sugar.node.search.handlers
  * @type                Function
+ * @wip
  *
  * This function is responsible of handling the docMap search
  * by filtering the docMap and send back the serch result json.
@@ -18,10 +21,14 @@ import __SUrlAction from '../../action/browser/SUrlAction';
  * @param         {Object}        [settings={}]       A settings object to configure your search process. Here's the available settings:
  * @return        {Promise}                         A promise that will be resolved with an array of SSearchResultItem object either as full instances, or in JSON format depending on the settings.format property
  *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function search(searchString, settings = {}) {
+function search(searchString, settings = {}) {
   settings = __deepMerge(
     {
       filePath: __packageRoot() + '/docMap.json',
@@ -42,14 +49,14 @@ export default function search(searchString, settings = {}) {
     queryObj.namespace = searchString;
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     // load the docmap
     if (!__fs.existsSync(settings.filePath)) {
       throw new Error(
         `You try to make a research using the <primary>docMap</primary> search handler but it seems that your configuration point to a file that does not exists "<cyan>${settings.filePath}</cyan>"...`
       );
     }
-    const docMap = require(settings.filePath);
+    const docMap = await import(settings.filePath);
 
     const fuse = new __Fuse(docMap, {
       includeScore: true,
@@ -100,3 +107,4 @@ export default function search(searchString, settings = {}) {
     resolve(results);
   });
 }
+export = search;

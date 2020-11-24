@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const __SAuthAdapter = require('./SAuthAdapter');
 const __blessed = require('blessed');
 const __terminalKit = require('terminal-kit');

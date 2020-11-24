@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * @name        isColor
  * @namespace           sugar.js.is
@@ -23,8 +25,9 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function isColor(value) {
+function isColor(value) {
   const ele = document.createElement('div');
   ele.style.color = value;
   return ele.style.color.split(/\s+/).join('').toLowerCase() !== '';
 }
+export = isColor;

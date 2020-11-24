@@ -1,4 +1,5 @@
 "use strict";
+// @ts-nocheck
 var _a;
 const __SBuildFontIconsActionsStream = require('./SBuildFontIconsActionsStream');
 const __deepMerge = require('../../object/deepMerge');
@@ -45,13 +46,10 @@ module.exports = (_a = class SBuildFontIconsProcess extends __SProcess {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         process(params, settings = {}) {
-            const actionStream = new __SBuildFontIconsActionsStream({
-                ...settings,
-                logs: {
+            const actionStream = new __SBuildFontIconsActionsStream(Object.assign(Object.assign({}, settings), { logs: {
                     success: false,
                     start: false
-                }
-            });
+                } }));
             this._buildFontIconsActionsStream = actionStream.start(params);
             this.bindSPromise(this._buildFontIconsActionsStream);
         }

@@ -6,7 +6,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 const SError_1 = __importDefault(require("../../error/SError"));
-const SSugarAppModuleSettingsInterface_1 = __importDefault(require("./interface/SSugarAppModuleSettingsInterface"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const hotkey_1 = __importDefault(require("../../keyboard/hotkey"));
 const SIpc_1 = __importDefault(require("../../ipc/SIpc"));
@@ -97,7 +96,8 @@ class SSugarAppModule extends SPromise_1.default {
         SIpc_1.default.on('sugar.ui.displayedModule', (moduleId) => {
             this._active = this.id === moduleId;
         });
-        SSugarAppModuleSettingsInterface_1.default.apply(this._settings);
+        // @todo    replace this with new interface class
+        // __SSugarAppModuleSettingsInterface.apply(this._settings);
         // register the module in the list
         SSugarAppModule._registeredModulesArray.push(this);
         this.on('cancel', () => {

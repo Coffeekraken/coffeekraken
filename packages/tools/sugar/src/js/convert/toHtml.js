@@ -12,8 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var SError_2 = __importDefault(require("../error/SError"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var SError_1 = __importDefault(require("../error/SError"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var htmlFromMarkdown_1 = __importDefault(require("./html/htmlFromMarkdown"));
     var htmlFromDocblocks_1 = __importDefault(require("./html/htmlFromDocblocks"));
     /**
@@ -54,7 +54,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     };
     function toHtml(inputString, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             from: null
         }, settings);
         // check if we don't have the "from" setting
@@ -65,13 +65,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             else if (inputString.match(/(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g))
                 settings.from = 'docblocks';
             else {
-                throw new SError_2.default("Sorry but the passed inputString does not match any supported type which are: " + supportedFromTypes.join(','));
+                throw new SError_1.default("Sorry but the passed inputString does not match any supported type which are: " + supportedFromTypes.join(','));
             }
         }
         // convert the string from the correct type
         var converterFn = convertersByType[settings.from];
         if (!converterFn) {
-            throw new SError_2.default("It seems that no converter exists for your inputString which is of type \"<yellow>" + settings.from + "</yellow>\"...");
+            throw new SError_1.default("It seems that no converter exists for your inputString which is of type \"<yellow>" + settings.from + "</yellow>\"...");
         }
         return converterFn(inputString, settings);
     }

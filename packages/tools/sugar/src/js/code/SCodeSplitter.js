@@ -23,7 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     return /** @class */ (function () {
         /**
          * @name        constructor
@@ -48,7 +48,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             this._settings = {};
-            this._settings = deepMerge_2.default({}, settings);
+            this._settings = deepMerge_1.default({}, settings);
         }
         /**
          * @name            split
@@ -74,7 +74,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         SCodeSplitter.prototype.split = function (code, splitters, settings) {
             if (splitters === void 0) { splitters = []; }
             if (settings === void 0) { settings = {}; }
-            settings = deepMerge_2.default(this._settings, settings);
+            settings = deepMerge_1.default(this._settings, settings);
             var blocks = [];
             var thingsToExtract = true;
             var _loop_1 = function () {

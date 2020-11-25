@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var set_2 = __importDefault(require("./set"));
+    var set_1 = __importDefault(require("./set"));
     /**
      * @name          deepize
      * @namespace     sugar.js.object
@@ -47,7 +47,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function deepize(object) {
         var finalObject = {};
         for (var key in object) {
-            set_2.default(finalObject, key, object[key]);
+            set_1.default(finalObject, key, object[key]);
         }
         return finalObject;
     }

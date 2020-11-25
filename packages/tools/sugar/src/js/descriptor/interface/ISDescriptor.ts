@@ -3,6 +3,7 @@
 export interface ISDescriptorSettings {
   arrayAsValue?: boolean;
   throwOnMissingRule?: boolean;
+  throwOnError?: boolean;
   complete?: boolean;
   name?: string;
   id?: string;
@@ -41,8 +42,6 @@ export interface ISDescroptorGenerateSettings {
   settings?: ISDescriptorSettings;
 }
 
-export interface ISDescriptorResultObj {}
-
 export interface ISDescriptionValidationResult {}
 export interface ISDescriptorCtor {
   rules: ISDescriptorRulesMap;
@@ -50,6 +49,7 @@ export interface ISDescriptorCtor {
   new (settings?: ISDescriptorSettings): ISDescriptor;
   registerRule(rule: ISDescriptorRule): void;
   apply(value: any, settings?: ISDescriptorSettings): ISDescriptorResultObj;
+  generate(settings: ISDescroptorGenerateSettings): ISDescriptorCtor;
 }
 
 export default interface ISDescriptor {

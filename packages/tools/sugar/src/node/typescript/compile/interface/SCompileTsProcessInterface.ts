@@ -1,0 +1,1 @@
+import __SInterface from '../../';

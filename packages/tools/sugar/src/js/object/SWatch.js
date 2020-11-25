@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var deepProxy_1 = __importDefault(require("./deepProxy"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SPromise_1 = __importDefault(require("../promise/SPromise"));
     return /** @class */ (function () {
         /**
@@ -51,7 +51,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             // check if the passed object is already an SWatch instance
             if (object.__$SWatch)
                 return object;
-            this._settings = deepMerge_2.default({
+            this._settings = deepMerge_1.default({
                 deep: true
             }, settings);
             this._promise = new SPromise_1.default({

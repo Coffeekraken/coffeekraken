@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var strToHtml_1 = __importDefault(require("../html/strToHtml"));
     var toString_1 = __importDefault(require("../html/toString"));
     var SRequestConfig_1 = __importDefault(require("./SRequestConfig"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     return /** @class */ (function () {
         /**
          * @name                              constructor
@@ -161,7 +161,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             // update request count
             this._requestsCount++;
             // process request settings
-            requestSettings = deepMerge_2.default(this._defaultRequestSettings, requestSettings);
+            requestSettings = deepMerge_1.default(this._defaultRequestSettings, requestSettings);
             if (requestSettings.beforeSend) {
                 requestSettings = requestSettings.beforeSend(requestSettings, this._requestsCount);
             }

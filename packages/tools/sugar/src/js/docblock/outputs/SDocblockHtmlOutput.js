@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var _a;
-    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
     var SDocblockOutput_1 = __importDefault(require("../SDocblockOutput"));
     return (_a = /** @class */ (function (_super) {
             __extends(SDocblockHtmlOutput, _super);
@@ -42,7 +42,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              */
             function SDocblockHtmlOutput(docblockInstance, settings) {
                 if (settings === void 0) { settings = {}; }
-                return _super.call(this, docblockInstance, deepMerge_2.default({
+                return _super.call(this, docblockInstance, deepMerge_1.default({
                     templates: {
                         default: '@coffeekraken/sugar/js/docblock/outputs/html/templates/default.js',
                         class: '@coffeekraken/sugar/js/docblock/outputs/html/templates/class.js',

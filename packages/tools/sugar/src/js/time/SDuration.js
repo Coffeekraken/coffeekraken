@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var convert_1 = __importDefault(require("./convert"));
     return /** @class */ (function () {
         /**
@@ -60,7 +60,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @author 		Olivier Bossel<olivier.bossel@gmail.com>
              */
             this.endTime = null;
-            this._settings = deepMerge_2.default({
+            this._settings = deepMerge_1.default({
                 format: 's',
                 suffix: true
             }, settings);
@@ -95,7 +95,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          */
         SDuration.prototype.end = function (settings) {
             if (settings === void 0) { settings = {}; }
-            settings = deepMerge_2.default(this._settings, settings);
+            settings = deepMerge_1.default(this._settings, settings);
             this.endTime = Date.now();
             var durationMs = this.endTime - this.startTime;
             var durationConverted = convert_1.default(durationMs, settings.format);

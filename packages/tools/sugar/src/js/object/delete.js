@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var set_2 = __importDefault(require("./set"));
+    var set_1 = __importDefault(require("./set"));
     /**
      * @name                      delete
      * @namespace           sugar.js.object
@@ -59,7 +59,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 else {
                     delete o[n];
                 }
-                set_2.default(object, parentDotPath, o);
+                set_1.default(object, parentDotPath, o);
             }
             else {
                 o = o[n];

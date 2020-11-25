@@ -12,9 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
     var SDefinitionObjectInterface_1 = __importDefault(require("../interface/SDefinitionObjectInterface"));
-    var validateObject_2 = __importDefault(require("./validateObject"));
+    var validateObject_1 = __importDefault(require("./validateObject"));
     /**
      * @name            validateDefinitionObject
      * @namespace       sugar.js.validation.object
@@ -48,7 +48,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function validateDefinitionObject(definitionObject, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             name: 'Unnamed'
         }, settings);
         var issuesObj = {
@@ -60,7 +60,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         Object.keys(definitionObject).forEach(function (argName) {
             var argDefinitionObj = definitionObject[argName];
             // validate this
-            var res = validateObject_2.default(argDefinitionObj, SDefinitionObjectInterface_1.default.definitionObj, {
+            var res = validateObject_1.default(argDefinitionObj, SDefinitionObjectInterface_1.default.definitionObj, {
                 throw: true,
                 name: settings.name + "." + argName
             });

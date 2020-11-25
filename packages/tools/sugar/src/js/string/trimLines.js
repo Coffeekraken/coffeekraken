@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     /**
      * @name          trimLines
      * @namespace     sugar.js.string
@@ -45,7 +45,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function trimLines(string, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             leftPadding: 0,
             rightPadding: 0,
             keepEmptyLines: true

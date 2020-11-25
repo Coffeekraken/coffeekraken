@@ -33,7 +33,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var proxy_1 = __importDefault(require("../array/proxy"));
     var deepMap_1 = __importDefault(require("../object/deepMap"));
     var clone_1 = __importDefault(require("../object/clone"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     /**
      * @name                            deepProxy
      * @namespace           sugar.js.object
@@ -80,7 +80,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (settings === void 0) { settings = {}; }
         var preproxy = new WeakMap();
         var isRevoked = false;
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             deep: true,
             handleSet: true,
             handleGet: false,

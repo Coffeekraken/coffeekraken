@@ -28,7 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     Object.defineProperty(exports, "__esModule", { value: true });
     var toString_1 = __importDefault(require("../../string/toString"));
     var parse_1 = __importDefault(require("../../string/parse"));
-    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
     var SConfigAdapter_1 = __importDefault(require("./SConfigAdapter"));
     var diff_1 = __importDefault(require("../../object/diff"));
     /**
@@ -58,11 +58,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             // try to get the config from the localstorage
             var config = parse_1.default(localStorage.getItem(this._settings.name)) || {};
             // mix the configs and save them in the instance
-            return deepMerge_2.default(config.default || {}, config.app || {}, config.user || {});
+            return deepMerge_1.default(config.default || {}, config.app || {}, config.user || {});
         };
         SConfigLsAdapter.prototype.save = function (newConfig) {
             if (newConfig === void 0) { newConfig = {}; }
-            var baseConfig = deepMerge_2.default(this._settings.defaultConfig, this._settings.appConfig);
+            var baseConfig = deepMerge_1.default(this._settings.defaultConfig, this._settings.appConfig);
             localStorage.setItem(this._settings.name, toString_1.default({
                 default: this._settings.defaultConfig,
                 app: this._settings.appConfig,

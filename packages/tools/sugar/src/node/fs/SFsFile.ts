@@ -161,7 +161,8 @@ class SFsFile extends __SPromise {
       settings
     );
 
-    __SFsFileSettingsInterface.applyAndThrow(settings);
+    // @todo    replace with the new SInterface class
+    // __SFsFileSettingsInterface.applyAndThrow(settings);
 
     super(settings);
 

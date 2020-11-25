@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var countLine_1 = __importDefault(require("./countLine"));
     /**
      * @name                                        crop
@@ -42,7 +42,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function crop(text, length, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             chars: '...',
             splitWords: false
         }, settings);

@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var _a;
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var map_1 = __importDefault(require("../object/map"));
     var node_1 = __importDefault(require("../is/node"));
     var author_1 = __importDefault(require("./tags/author"));
@@ -69,7 +69,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  */
                 this._blockObj = {};
                 this._source = source.trim();
-                this._settings = deepMerge_2.default({
+                this._settings = deepMerge_1.default({
                     filepath: null,
                     parse: {
                         tags: SDocblockBlock.tagsMap
@@ -208,7 +208,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     var srcBlocks = srcDocblockInstance.parse();
                     if (srcBlocks.length) {
                         var tags = srcBlocks[0].parse();
-                        docblockObj = deepMerge_2.default(docblockObj, tags);
+                        docblockObj = deepMerge_1.default(docblockObj, tags);
                     }
                 }
                 // save the raw string

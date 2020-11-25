@@ -61,7 +61,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
     var SCacheAdapter_1 = __importDefault(require("./SCacheAdapter"));
     return /** @class */ (function (_super) {
         __extends(SCacheLsAdapter, _super);
@@ -77,7 +77,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          */
         function SCacheLsAdapter(settings) {
             if (settings === void 0) { settings = {}; }
-            return _super.call(this, deepMerge_2.default({}, settings)) || this;
+            return _super.call(this, deepMerge_1.default({}, settings)) || this;
         }
         /**
          * @name                          set

@@ -20,11 +20,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var parseTypeDefinitionString_1 = __importDefault(require("../validation/utils/parseTypeDefinitionString"));
-    var class_2 = __importDefault(require("./class"));
+    var class_1 = __importDefault(require("./class"));
     var integer_1 = __importDefault(require("./integer"));
-    var typeof_2 = __importDefault(require("../value/typeof"));
+    var typeof_1 = __importDefault(require("../value/typeof"));
     var typeDefinitionArrayObjectToString_1 = __importDefault(require("../value/typeDefinitionArrayObjectToString"));
-    var getExtendsStack_2 = __importDefault(require("../class/getExtendsStack"));
+    var getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
     /**
      * @name              ofType
      * @namespace           sugar.js.is
@@ -58,10 +58,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (typeof argTypeDefinition === 'string') {
             definitionArray = parseTypeDefinitionString_1.default(argTypeDefinition);
         }
-        var typeOfValue = typeof_2.default(value);
+        var typeOfValue = typeof_1.default(value);
         var issueObj = {
             $received: {
-                type: typeof_2.default(value, { of: true }),
+                type: typeof_1.default(value, { of: true }),
                 value: value
             },
             $expected: {
@@ -98,7 +98,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         if (ofType(valueToCheck, definitionObj.of) !== true) {
                             checkValuesResult_1 = false;
                         }
-                        var typeString = typeof_2.default(valueToCheck);
+                        var typeString = typeof_1.default(valueToCheck);
                         if (receivedTypes_1.indexOf(typeString) === -1) {
                             receivedTypes_1.push(typeString);
                         }
@@ -112,7 +112,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             }
             // Class
             else if (definitionObj.type === 'Class') {
-                if (class_2.default(value))
+                if (class_1.default(value))
                     return { value: true };
             }
             // Integer
@@ -133,10 +133,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 }
             }
             // check for "custom" types
-            else if (class_2.default(value) && value.name) {
-                if (typeof_2.default(value) === definitionObj.type)
+            else if (class_1.default(value) && value.name) {
+                if (typeof_1.default(value) === definitionObj.type)
                     return { value: true };
-                var classesStack = getExtendsStack_2.default(value);
+                var classesStack = getExtendsStack_1.default(value);
                 if (classesStack.indexOf(definitionObj.type) !== -1)
                     return { value: true };
             }

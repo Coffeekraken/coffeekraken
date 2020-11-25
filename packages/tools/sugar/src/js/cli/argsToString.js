@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     "use strict";
     var toString_1 = __importDefault(require("../string/toString"));
     var parseArgs_1 = __importDefault(require("./parseArgs"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     /**
      * @name                  argsToString
      * @namespace           sugar.js.cli
@@ -65,7 +65,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     // TODO: support required args
     function argsToString(args, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             definitionObj: null,
             includeAllArgs: true,
             alias: true

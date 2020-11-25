@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     "use strict";
     var parseHtml_1 = __importDefault(require("../../console/parseHtml"));
     var toString_1 = __importDefault(require("../../string/toString"));
-    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
     /**
      * @name                validateValueOutputString
      * @namespace           sugar.js.validation.value
@@ -46,7 +46,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function validateValueOutputString(validateValueResultObj, settings) {
         if (settings === void 0) { settings = {}; }
         var issuesArray = [];
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             name: settings.name || validateValueResultObj.$name,
             interface: settings.interface || validateValueResultObj.$interface
         });

@@ -25,7 +25,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SPromise_1 = __importDefault(require("../promise/SPromise"));
     var validateDefinitionObject_1 = __importDefault(require("../validation/object/validateDefinitionObject"));
     return /** @class */ (function (_super) {
@@ -43,7 +43,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (settings === void 0) { settings = {}; }
             var _this = 
             // init SPromise
-            _super.call(this, deepMerge_2.default({
+            _super.call(this, deepMerge_1.default({
                 name: null,
                 id: "SActionsStreamAction",
                 cache: true

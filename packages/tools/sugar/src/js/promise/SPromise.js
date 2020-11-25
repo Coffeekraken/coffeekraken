@@ -80,7 +80,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var minimatch_1 = __importDefault(require("minimatch"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var uniqid_1 = __importDefault(require("../string/uniqid"));
     return /** @class */ (function (_super) {
         __extends(SPromise, _super);
@@ -216,7 +216,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 }
             });
             // extend settings
-            _this._settings = deepMerge_2.default({
+            _this._settings = deepMerge_1.default({
                 destroyTimeout: 5000,
                 id: uniqid_1.default()
             }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings);
@@ -249,7 +249,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         SPromise.map = function (sourceSPromise, destSPromise, settings) {
             if (settings === void 0) { settings = {}; }
             // settings
-            settings = deepMerge_2.default({
+            settings = deepMerge_1.default({
                 // stacks: 'then,catch,resolve,reject,finally,cancel',
                 stacks: 'catch,resolve,reject,finally,cancel',
                 processor: null,
@@ -303,7 +303,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         SPromise.pipe = function (sourceSPromise, destSPromise, settings) {
             if (settings === void 0) { settings = {}; }
             // settings
-            settings = deepMerge_2.default({
+            settings = deepMerge_1.default({
                 stacks: '*',
                 prefixStack: true,
                 processor: null,
@@ -806,7 +806,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                     return true;
                                 return false;
                             });
-                            metasObj = deepMerge_2.default({
+                            metasObj = deepMerge_1.default({
                                 stack: stack,
                                 originalStack: stack,
                                 id: this._settings.id,

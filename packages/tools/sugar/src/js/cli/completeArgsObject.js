@@ -13,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var deepize_1 = __importDefault(require("../object/deepize"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var toString_1 = __importDefault(require("../string/toString"));
-    var validateObject_2 = __importDefault(require("../validation/object/validateObject"));
+    var validateObject_1 = __importDefault(require("../validation/object/validateObject"));
     /**
      * @name                completeArgsObject
      * @namespace          sugar.js.cli
@@ -44,7 +44,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function completeArgsObject(argsObj, settings) {
         if (settings === void 0) { settings = {}; }
         argsObj = Object.assign({}, argsObj);
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             definitionObj: {},
             throw: true
         }, settings);
@@ -58,7 +58,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             }
         });
         // make sure all is ok
-        var argsValidationResult = validateObject_2.default(argsObj, settings.definitionObj, settings);
+        var argsValidationResult = validateObject_1.default(argsObj, settings.definitionObj, settings);
         if (argsValidationResult !== true && settings.throw)
             throw new Error(toString_1.default(argsValidationResult));
         else if (argsValidationResult !== true)

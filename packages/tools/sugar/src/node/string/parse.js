@@ -1,23 +1,16 @@
+"use strict";
 // @ts-nocheck
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+module.exports = (value) => {
+    if (typeof value !== 'string')
+        return value;
+    value = value.split('⠀').join('').trim();
+    try {
+        return Function(`
+      "use strict";
+      return (${value});
+    `)();
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
+    catch (e) {
+        return value;
     }
-})(function (require, exports) {
-    "use strict";
-    return function (value) {
-        if (typeof value !== 'string')
-            return value;
-        value = value.split('⠀').join('').trim();
-        try {
-            return Function("\n      \"use strict\";\n      return (" + value + ");\n    ")();
-        }
-        catch (e) {
-            return value;
-        }
-    };
-});
+};

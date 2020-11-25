@@ -81,12 +81,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     "use strict";
     var clone_1 = __importDefault(require("../object/clone"));
     var parseHtml_1 = __importDefault(require("../console/parseHtml"));
-    var SError_2 = __importDefault(require("../error/SError"));
-    var class_2 = __importDefault(require("../is/class"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var SError_1 = __importDefault(require("../error/SError"));
+    var class_1 = __importDefault(require("../is/class"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SPromise_1 = __importDefault(require("../promise/SPromise"));
     var toString_1 = __importDefault(require("../string/toString"));
-    var trimLines_2 = __importDefault(require("../string/trimLines"));
+    var trimLines_1 = __importDefault(require("../string/trimLines"));
     var convert_1 = __importDefault(require("../time/convert"));
     var wait_1 = __importDefault(require("../time/wait"));
     var SActionsStreamAction_1 = __importDefault(require("./SActionsStreamAction"));
@@ -107,7 +107,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (settings === void 0) { settings = {}; }
             var _this = 
             // init SPromise
-            _super.call(this, deepMerge_2.default({
+            _super.call(this, deepMerge_1.default({
                 id: "SActionsStream",
                 cache: false,
                 name: null,
@@ -156,12 +156,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             Object.keys(actions).forEach(function (actionName) {
                 var actionInstance = actions[actionName];
                 if (typeof actionInstance === 'function' ||
-                    (class_2.default(actionInstance) &&
+                    (class_1.default(actionInstance) &&
                         actionInstance.constructor.name === 'SActionsStreamAction') ||
                     actionInstance instanceof SActionsStreamAction_1.default) {
                 }
                 else {
-                    throw new SError_2.default(parseHtml_1.default("The value passed for the \"<yellow>" + actionName + "</yellow>\" action has to be either a simple function or an \"<green>SActionsStreamAction</green>\" instance. You have passed a \"<red>" + typeof actionInstance + "</red>\"..."));
+                    throw new SError_1.default(parseHtml_1.default("The value passed for the \"<yellow>" + actionName + "</yellow>\" action has to be either a simple function or an \"<green>SActionsStreamAction</green>\" instance. You have passed a \"<red>" + typeof actionInstance + "</red>\"..."));
                 }
             });
             // init a SCache instance if needed
@@ -194,7 +194,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 return __generator(this, function (_f) {
                     switch (_f.label) {
                         case 0:
-                            settings = deepMerge_2.default({
+                            settings = deepMerge_1.default({
                                 processFnArgs: [],
                                 type: 'main',
                                 resultProcessor: null
@@ -503,7 +503,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             var _this = this;
             if (streamObj === void 0) { streamObj = {}; }
             if (settings === void 0) { settings = {}; }
-            settings = deepMerge_2.default(Object.assign({}, this._settings), settings);
+            settings = deepMerge_1.default(Object.assign({}, this._settings), settings);
             var currentStreamObj = streamObj;
             this._currentStream = {
                 promise: null,
@@ -617,7 +617,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                     return [3 /*break*/, 7];
                             }
                             // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
-                            if (class_2.default(this._actionsObject[actionName]) &&
+                            if (class_1.default(this._actionsObject[actionName]) &&
                                 this._actionsObject[actionName].prototype instanceof
                                     SActionsStreamAction_1.default) {
                                 actionInstance = new this._actionsObject[actionName](actionSettings);
@@ -646,7 +646,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                     });
                                     cancel(value);
                                 });
-                                actionSettings = deepMerge_2.default(this._currentStream.currentActionObj.instance._settings, actionSettings);
+                                actionSettings = deepMerge_1.default(this._currentStream.currentActionObj.instance._settings, actionSettings);
                             }
                             // trigger some "start" events
                             trigger(this._currentStream.currentActionObj.name + ".start", Object.assign({}, this._currentStream.currentActionObj));
@@ -721,7 +721,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                     });
                                     this.log({
                                         error: true,
-                                        value: trimLines_2.default(this._currentStream.stats.stderr.join('\n'))
+                                        value: trimLines_1.default(this._currentStream.stats.stderr.join('\n'))
                                     });
                                 }
                                 trigger('reject', this._currentStream.stats);

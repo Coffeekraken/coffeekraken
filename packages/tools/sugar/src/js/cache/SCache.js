@@ -68,7 +68,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var __syncRequire = typeof module === "object" && typeof module.exports === "object";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SCacheAdapter_1 = __importDefault(require("./adapters/SCacheAdapter"));
     var convert_1 = __importDefault(require("../time/convert"));
     var node_1 = __importDefault(require("../is/node"));
@@ -147,7 +147,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 throw new Error("The name of an SCache instance can contain only letters like <green>[a-zA-Z0-9_-.]</green> but you've passed \"<red>" + name + "</red>\"...");
             }
             this._name = name;
-            this._settings = deepMerge_2.default({
+            this._settings = deepMerge_1.default({
                 name: name,
                 ttl: -1,
                 deleteOnExpire: true,
@@ -297,7 +297,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             return [4 /*yield*/, this.get(name, false)];
                         case 2:
                             existingValue = _a.sent();
-                            finalSettings = deepMerge_2.default({
+                            finalSettings = deepMerge_1.default({
                                 ttl: this._settings.ttl,
                                 deleteOnExpire: this._settings.deleteOnExpire
                             }, settings);

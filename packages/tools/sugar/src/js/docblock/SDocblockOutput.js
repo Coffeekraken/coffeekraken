@@ -68,8 +68,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var __syncRequire = typeof module === "object" && typeof module.exports === "object";
-    var SError_2 = __importDefault(require("../error/SError"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var SError_1 = __importDefault(require("../error/SError"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SPromise_1 = __importDefault(require("../promise/SPromise"));
     var handlebars_1 = __importDefault(require("handlebars"));
     var SCache_1 = __importDefault(require("../cache/SCache"));
@@ -114,7 +114,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              */
             this._docblockInstance = null;
             // save the settings
-            this._settings = deepMerge_2.default({
+            this._settings = deepMerge_1.default({
                 templates: {},
                 blocks: {},
                 partials: {}
@@ -294,7 +294,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                 templatePath = packageRoot_1.default() + "/node_modules/" + template;
                             }
                             else {
-                                throw new SError_2.default("Sorry but the passed template url \"<yellow>" + template + "</yellow>\" does not exists...");
+                                throw new SError_1.default("Sorry but the passed template url \"<yellow>" + template + "</yellow>\" does not exists...");
                             }
                             stats = fs_1.default.statSync(templatePath);
                             delete require.cache[require.resolve(templatePath)];

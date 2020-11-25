@@ -12,7 +12,6 @@ import ISDescriptor, {
   ISDescriptorRule,
   ISDescriptorSettings,
   ISDescriptorRules,
-  ISDescriptorResultObj,
   ISDescroptorGenerateSettings
 } from './interface/ISDescriptor';
 import ISDescriptorResult from './interface/ISDescriptorResult';
@@ -97,10 +96,8 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
    *
    * Specify the type of the values that this descriptor is made for.
    * Can be:
-   * - String|Array<String>
-   * - Object
-   * - Number
-   * - Integer
+   *
+   * @todo      check utility of this property
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com>
@@ -221,7 +218,8 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
     this._settings = __deepMerge(
       {
         arrayAsValue: false,
-        throwOnMissingRule: true,
+        throwOnMissingRule: false,
+        throwOnError: false,
         complete: true
       },
       this.constructor.settings,
@@ -281,7 +279,7 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
   apply(
     value: any,
     settings?: ISDescriptorSettings
-  ): ISDescriptorResultObj | true {
+  ): ISDescriptorResult | true {
     // handle settings
     settings = __deepMerge(this._settings, settings);
 
@@ -322,6 +320,10 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
     } else {
       // validate the object property
       const validationResult = this._validate(value, undefined, settings);
+    }
+
+    if (this._descriptorResult.hasIssues() && settings.throwOnError) {
+      throw this._descriptorResult.toString();
     }
 
     if (this._descriptorResult.hasIssues()) return this._descriptorResult;

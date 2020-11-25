@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var strip_css_comments_1 = __importDefault(require("strip-css-comments"));
     /**
      * @name          stripCssComments
@@ -49,7 +49,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function stripCssComments(css, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             block: true,
             line: true
         }, settings);

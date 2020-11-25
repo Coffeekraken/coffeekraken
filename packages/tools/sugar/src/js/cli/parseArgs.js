@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var parse_1 = __importDefault(require("../string/parse"));
     var completeArgsObject_1 = __importDefault(require("./completeArgsObject"));
     var unquote_1 = __importDefault(require("../string/unquote"));
@@ -65,7 +65,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function parseArgsString(string, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             definitionObj: null,
             defaultObj: {}
         }, settings);

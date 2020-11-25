@@ -168,7 +168,8 @@ export default class SSugarAppModule extends __SPromise {
       this._active = this.id === moduleId;
     });
 
-    __SSugarAppModuleSettingsInterface.apply(this._settings);
+    // @todo    replace this with new interface class
+    // __SSugarAppModuleSettingsInterface.apply(this._settings);
 
     // register the module in the list
     SSugarAppModule._registeredModulesArray.push(this);

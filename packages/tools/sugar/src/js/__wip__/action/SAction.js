@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SPromise_1 = __importDefault(require("../promise/SPromise"));
     var flatten_1 = __importDefault(require("../object/flatten"));
     var typeMap_1 = __importDefault(require("./typeMap"));
@@ -89,7 +89,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             _this._descriptorObj = {};
-            _this._settings = deepMerge_2.default({}, settings);
+            _this._settings = deepMerge_1.default({}, settings);
             _this._descriptorObj = descriptorObj;
             return _this;
         }

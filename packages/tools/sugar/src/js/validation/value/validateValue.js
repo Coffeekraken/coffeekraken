@@ -20,8 +20,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var SValueValidationError_1 = __importDefault(require("../../error/SValueValidationError"));
-    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
-    var typeof_2 = __importDefault(require("../../value/typeof"));
+    var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+    var typeof_1 = __importDefault(require("../../value/typeof"));
     var SRequiredValidation_1 = __importDefault(require("./validation/SRequiredValidation"));
     var SPathValidation_1 = __importDefault(require("./validation/SPathValidation"));
     var STypeValidation_1 = __importDefault(require("./validation/STypeValidation"));
@@ -80,7 +80,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function validateValue(value, definitionObj, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             name: 'unnamed',
             throw: true,
             extendFn: null,
@@ -96,7 +96,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         var issueObj = {
             $expected: definitionObj,
             $received: {
-                type: typeof_2.default(value),
+                type: typeof_1.default(value),
                 value: value
             },
             $name: settings.name,

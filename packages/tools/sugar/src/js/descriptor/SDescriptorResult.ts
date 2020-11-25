@@ -7,6 +7,7 @@ import ISDescriptorResult, {
 import __toString from '../string/toString';
 import __parseHtml from '../console/parseHtml';
 import __clone from '../object/clone';
+import __isNode from '../is/node';
 
 /**
  * @name                SDescriptorResult
@@ -17,6 +18,10 @@ import __clone from '../object/clone';
  * when creating any descriptor like object, string, etc...
  *
  * @param       {ISDescriptorResultSettings}      settings        An object of setting to configure your descriptor instance
+ *
+ * @todo         doc
+ * @todo        tests
+ * @todo        add possibility to set a "details" on each rules for better returns
  *
  * @example       js
  * import SDescriptorResult from '@coffeekraken/sugar/js/descriptor/SDescriptorResult';
@@ -146,6 +151,25 @@ const Cls: ISDescriptorResultCtor = class SDescriptorResult
   add(ruleResult: ISDescriptorResultRule): void {
     if (!ruleResult.__ruleObj.id) return;
     this._issues[ruleResult.__ruleObj.id] = ruleResult;
+  }
+
+  /**
+   * @name             toString
+   * @type              Functio n
+   *
+   * This method return a string terminal compatible of this result object
+   *
+   * @return        {String}                The result object in string format
+   *
+   * @since          2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  toString(): string {
+    if (__isNode()) {
+      return this.toConsole();
+    } else {
+      return `The method "toHtml" has not being integrated for now...`;
+    }
   }
 
   /**

@@ -12,8 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var SError_2 = __importDefault(require("../error/SError"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var SError_1 = __importDefault(require("../error/SError"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SDocblockBlock_1 = __importDefault(require("./SDocblockBlock"));
     // import __markdown from './markdown/index';
     var node_1 = __importDefault(require("../is/node"));
@@ -70,7 +70,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @author 	Olivier Bossel <olivier.bossel@gmail.com>
              */
             this._to = null;
-            this._settings = deepMerge_2.default({
+            this._settings = deepMerge_1.default({
                 sortFunction: function (a, b) {
                     var res = 0;
                     if (!b || !a)
@@ -99,9 +99,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             // check if the source is path
             if (path_1.default(source)) {
                 if (!node_1.default())
-                    throw new SError_2.default("Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like \"<yellow>" + source + "</yellow>\"...");
+                    throw new SError_1.default("Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like \"<yellow>" + source + "</yellow>\"...");
                 if (!fs_1.default.existsSync(source))
-                    throw new SError_2.default("Sorry but the passed source path \"<yellow>" + source + "</yellow>\" does not exists on the filesystem...");
+                    throw new SError_1.default("Sorry but the passed source path \"<yellow>" + source + "</yellow>\" does not exists on the filesystem...");
                 this._source = fs_1.default.readFileSync(source, 'utf8');
             }
             else {

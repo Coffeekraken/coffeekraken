@@ -7,13 +7,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../string/toString", "../console/parseHtml", "../object/clone"], factory);
+        define(["require", "exports", "../string/toString", "../console/parseHtml", "../object/clone", "../is/node"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var toString_1 = __importDefault(require("../string/toString"));
     var parseHtml_1 = __importDefault(require("../console/parseHtml"));
     var clone_1 = __importDefault(require("../object/clone"));
+    var node_1 = __importDefault(require("../is/node"));
     /**
      * @name                SDescriptorResult
      * @namespace           sugar.js.descriptor
@@ -23,6 +24,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * when creating any descriptor like object, string, etc...
      *
      * @param       {ISDescriptorResultSettings}      settings        An object of setting to configure your descriptor instance
+     *
+     * @todo         doc
+     * @todo        tests
+     * @todo        add possibility to set a "details" on each rules for better returns
      *
      * @example       js
      * import SDescriptorResult from '@coffeekraken/sugar/js/descriptor/SDescriptorResult';
@@ -98,6 +103,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (!ruleResult.__ruleObj.id)
                 return;
             this._issues[ruleResult.__ruleObj.id] = ruleResult;
+        };
+        /**
+         * @name             toString
+         * @type              Functio n
+         *
+         * This method return a string terminal compatible of this result object
+         *
+         * @return        {String}                The result object in string format
+         *
+         * @since          2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        SDescriptorResult.prototype.toString = function () {
+            if (node_1.default()) {
+                return this.toConsole();
+            }
+            else {
+                return "The method \"toHtml\" has not being integrated for now...";
+            }
         };
         /**
          * @name             toConsole

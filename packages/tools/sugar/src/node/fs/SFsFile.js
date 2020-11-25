@@ -10,7 +10,6 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const extension_1 = __importDefault(require("./extension"));
 const filename_1 = __importDefault(require("./filename"));
-const SFsFileSettingsInterface_1 = __importDefault(require("./interface/SFsFileSettingsInterface"));
 const SError_1 = __importDefault(require("../error/SError"));
 const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 /**
@@ -68,7 +67,8 @@ class SFsFile extends SPromise_1.default {
             checkExistence: true,
             rootDir: packageRoot_1.default()
         }, settings);
-        SFsFileSettingsInterface_1.default.applyAndThrow(settings);
+        // @todo    replace with the new SInterface class
+        // __SFsFileSettingsInterface.applyAndThrow(settings);
         super(settings);
         /**
          * @name        name

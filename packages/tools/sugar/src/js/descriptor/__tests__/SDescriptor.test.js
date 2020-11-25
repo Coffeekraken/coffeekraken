@@ -14,14 +14,15 @@ describe('sugar.js.convert.toHtml', () => {
           required: true,
           default: 12,
           min: 20,
-          max: 2
+          max: 2,
+          description: 'Something cool',
+          alias: 't'
         },
         another: {
           type: 'Boolean'
         }
       };
       static settings = {
-        throwOnMissingRule: true,
         complete: true
       };
       static type = 'Object';

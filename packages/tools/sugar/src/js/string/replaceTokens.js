@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../../node/object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../../node/object/deepMerge"));
     /**
      * @name            replaceTokens
      * @namespace           sugar.js.string
@@ -42,7 +42,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function replaceTokens(string, argsObj, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             regexp: '\\[([a-zA-Z0-9-_]+)\\]',
             stripUndefined: true
         }, settings);

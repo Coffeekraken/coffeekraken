@@ -19,9 +19,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var integer_1 = __importDefault(require("../is/integer"));
-    var class_2 = __importDefault(require("../is/class"));
+    var class_1 = __importDefault(require("../is/class"));
     var upperFirst_1 = __importDefault(require("../string/upperFirst"));
     /**
      * @name          typeof
@@ -72,7 +72,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function typeOf(value, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             of: false,
             customClass: true
         }, settings);
@@ -95,7 +95,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         else if (value instanceof RegExp)
             type = 'RegExp';
         else if (settings.customClass === true &&
-            class_2.default(value) &&
+            class_1.default(value) &&
             value.name !== undefined) {
             type = upperFirst_1.default(value.name);
         }
@@ -104,7 +104,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             value.constructor.name !== undefined) {
             type = upperFirst_1.default(value.constructor.name);
         }
-        else if (settings.customClass === false && class_2.default(value)) {
+        else if (settings.customClass === false && class_1.default(value)) {
             type = 'Class';
         }
         else if (typeof value === 'function')

@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var url_parse_1 = __importDefault(require("url-parse"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var parseSchema_1 = __importDefault(require("./parseSchema"));
     return /** @class */ (function () {
         /**
@@ -72,7 +72,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             // save the url
             this._originUrl = url;
             // save the settings
-            this._settings = deepMerge_2.default({
+            this._settings = deepMerge_1.default({
                 schema: null
             }, settings);
             // parse the passed url using the url-parse npm module

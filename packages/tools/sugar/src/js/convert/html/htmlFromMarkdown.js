@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
     var marked_1 = __importDefault(require("marked"));
     /**
      * @name            htmlFromMarkdown
@@ -44,7 +44,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function htmlFromMarkdown(inputString, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({}, settings);
+        settings = deepMerge_1.default({}, settings);
         marked_1.default.setOptions(settings);
         return marked_1.default(inputString);
     }

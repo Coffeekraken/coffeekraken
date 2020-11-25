@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var SValidation_1 = __importDefault(require("../../SValidation"));
-    var class_2 = __importDefault(require("../../../is/class"));
+    var class_1 = __importDefault(require("../../../is/class"));
     /**
      * @name          SStaticValidation
      * @namespace     sugar.js.validation.value.validation
@@ -48,7 +48,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             return _super !== null && _super.apply(this, arguments) || this;
         }
         SStaticValidation.exec = function (value, object, property) {
-            if (class_2.default(object)) {
+            if (class_1.default(object)) {
                 if (!object[property])
                     return false;
                 return true;

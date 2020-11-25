@@ -26,13 +26,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var _a;
-    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
     var SDocblockOutput_1 = __importDefault(require("../SDocblockOutput"));
     var default_1 = __importDefault(require("./markdown/templates/default"));
-    var class_2 = __importDefault(require("./markdown/templates/class"));
+    var class_1 = __importDefault(require("./markdown/templates/class"));
     var function_1 = __importDefault(require("./markdown/templates/function"));
     var default_2 = __importDefault(require("./markdown/blocks/default"));
-    var class_3 = __importDefault(require("./markdown/blocks/class"));
+    var class_2 = __importDefault(require("./markdown/blocks/class"));
     var function_2 = __importDefault(require("./markdown/blocks/function"));
     return (_a = /** @class */ (function (_super) {
             __extends(SDocblockMarkdownOutput, _super);
@@ -48,15 +48,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              */
             function SDocblockMarkdownOutput(docblockInstance, settings) {
                 if (settings === void 0) { settings = {}; }
-                return _super.call(this, docblockInstance, deepMerge_2.default({
+                return _super.call(this, docblockInstance, deepMerge_1.default({
                     templates: {
                         default: default_1.default,
-                        class: class_2.default,
+                        class: class_1.default,
                         function: function_1.default
                     },
                     blocks: {
                         default: default_2.default,
-                        class: class_3.default,
+                        class: class_2.default,
                         function: function_2.default
                     }
                 }, settings)) || this;

@@ -75,7 +75,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var __syncRequire = typeof module === "object" && typeof module.exports === "object";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SLogConsoleAdapter_1 = __importDefault(require("./adapters/SLogConsoleAdapter"));
     var env_1 = __importDefault(require("../core/env"));
     return /** @class */ (function () {
@@ -111,7 +111,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 overrideNativeConsole: false
             };
             // extend settings
-            this._settings = deepMerge_2.default({
+            this._settings = deepMerge_1.default({
                 adapters: {
                     console: new SLogConsoleAdapter_1.default()
                 },

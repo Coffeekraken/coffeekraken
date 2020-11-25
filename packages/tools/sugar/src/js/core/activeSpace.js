@@ -19,7 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var minimatch_1 = __importDefault(require("minimatch"));
     var is_glob_1 = __importDefault(require("is-glob"));
     /**
@@ -213,7 +213,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          */
         on: function (activeSpaceToCheck, callback, settings) {
             if (settings === void 0) { settings = {}; }
-            settings = deepMerge_2.default({
+            settings = deepMerge_1.default({
                 once: false,
                 count: -1
             }, settings);

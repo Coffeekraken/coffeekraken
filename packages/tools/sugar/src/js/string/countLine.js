@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var strip_ansi_1 = __importDefault(require("strip-ansi"));
     /**
      * @name                                  countLine
@@ -43,7 +43,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function countLine(line, count) {
         if (count === void 0) { count = {}; }
-        count = deepMerge_2.default({
+        count = deepMerge_1.default({
             htmlTags: false,
             terminalSpecialChars: false,
             newLineChars: false

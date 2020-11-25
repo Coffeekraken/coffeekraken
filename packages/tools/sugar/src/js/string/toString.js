@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var function_1 = __importDefault(require("../is/function"));
     var json_1 = __importDefault(require("../is/json"));
     var object_1 = __importDefault(require("../is/object"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     /**
      * @name        toString
      * @namespace           sugar.js.string
@@ -46,7 +46,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function fn(value, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             beautify: false
         }, settings);
         // string

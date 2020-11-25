@@ -28,11 +28,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var _a;
     var uniqid_1 = __importDefault(require("../string/uniqid"));
     var ofType_1 = __importDefault(require("../is/ofType"));
-    var typeof_2 = __importDefault(require("../value/typeof"));
+    var typeof_1 = __importDefault(require("../value/typeof"));
     var SDescriptorResult_1 = __importDefault(require("./SDescriptorResult"));
     var get_1 = __importDefault(require("../object/get"));
-    var set_2 = __importDefault(require("../object/set"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var set_1 = __importDefault(require("../object/set"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     /**
      * @name                SDescriptor
      * @namespace           sugar.js.descriptor
@@ -81,9 +81,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         settings.id = descriptorObj.id;
                 }
                 // save the settings
-                this._settings = deepMerge_2.default({
+                this._settings = deepMerge_1.default({
                     arrayAsValue: false,
-                    throwOnMissingRule: true,
+                    throwOnMissingRule: false,
+                    throwOnError: false,
                     complete: true
                 }, this.constructor.settings, settings);
             }
@@ -222,12 +223,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             SDescriptor.prototype.apply = function (value, settings) {
                 var _this = this;
                 // handle settings
-                settings = deepMerge_2.default(this._settings, settings);
+                settings = deepMerge_1.default(this._settings, settings);
                 // initialize the descriptor result instance
                 this._descriptorResult = new SDescriptorResult_1.default(this, value, Object.assign({}, settings));
                 // check the passed value type correspond to the descriptor type
                 if (!ofType_1.default(value, this.constructor.type)) {
-                    throw "Sorry but this descriptor \"<yellow>" + this.constructor.name + "</yellow>\" does not accept values of type \"<cyan>" + typeof_2.default(value) + "</cyan>\" but only \"<green>" + this.constructor.type + "</green>\"...";
+                    throw "Sorry but this descriptor \"<yellow>" + this.constructor.name + "</yellow>\" does not accept values of type \"<cyan>" + typeof_1.default(value) + "</cyan>\" but only \"<green>" + this.constructor.type + "</green>\"...";
                 }
                 // check the type to validate correctly the value
                 if (Array.isArray(value) && !settings.arrayAsValue) {
@@ -243,13 +244,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         // validate the object property
                         var validationResult = _this._validate(propValue, propName, settings);
                         if (validationResult !== undefined && validationResult !== null) {
-                            set_2.default(value, propName, validationResult);
+                            set_1.default(value, propName, validationResult);
                         }
                     });
                 }
                 else {
                     // validate the object property
                     var validationResult = this._validate(value, undefined, settings);
+                }
+                if (this._descriptorResult.hasIssues() && settings.throwOnError) {
+                    throw this._descriptorResult.toString();
                 }
                 if (this._descriptorResult.hasIssues())
                     return this._descriptorResult;
@@ -349,10 +353,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * Specify the type of the values that this descriptor is made for.
          * Can be:
-         * - String|Array<String>
-         * - Object
-         * - Number
-         * - Integer
+         *
+         * @todo      check utility of this property
          *
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com>

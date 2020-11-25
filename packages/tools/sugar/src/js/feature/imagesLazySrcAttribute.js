@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     "use strict";
     var whenInViewport_1 = __importDefault(require("../dom/whenInViewport"));
     var querySelectorLive_1 = __importDefault(require("../dom/querySelectorLive"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     /**
      * @name 		imagesLazySrcAttribute
      * @namespace           sugar.js.feature
@@ -44,7 +44,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function imagesLazySrcAttribute(settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             offset: 50
         }, settings);
         querySelectorLive_1.default('img[lazy-src]:not([is])', function ($imgElm) {

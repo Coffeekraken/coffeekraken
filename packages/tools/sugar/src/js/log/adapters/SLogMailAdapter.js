@@ -59,7 +59,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
     var node_1 = __importDefault(require("../../is/node"));
     var smtp_js_1 = __importDefault(require("./vendors/smtp.js"));
     var mail_1 = __importDefault(require("../htmlPresets/mail"));
@@ -96,7 +96,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              */
             this._settings = {};
             // extend settings
-            this._settings = deepMerge_2.default({
+            this._settings = deepMerge_1.default({
                 subject: '[level] sugar.js.log',
                 body: '[content]',
                 metas: {}

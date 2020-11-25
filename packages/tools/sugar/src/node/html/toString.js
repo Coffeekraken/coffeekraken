@@ -24,7 +24,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function toString(html, deep = true) {
+function toStringFn(html, deep = true) {
     if (document !== undefined && document.createElement !== undefined) {
         const cont = document.createElement('div');
         cont.appendChild(html.cloneNode(deep));
@@ -32,4 +32,4 @@ function toString(html, deep = true) {
     }
     return html;
 }
-module.exports = toString;
+module.exports = toStringFn;

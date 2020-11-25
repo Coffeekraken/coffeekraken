@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     "use strict";
     var node_1 = __importDefault(require("../is/node"));
     var get_1 = __importDefault(require("../object/get"));
-    var set_2 = __importDefault(require("../object/set"));
+    var set_1 = __importDefault(require("../object/set"));
     var delete_1 = __importDefault(require("../object/delete"));
     var parse_1 = __importDefault(require("../string/parse"));
     /**
@@ -53,7 +53,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             delete_1.default(targetObj, dotPath.toUpperCase());
         }
         else if (value !== undefined) {
-            set_2.default(targetObj, dotPath.toUpperCase(), parse_1.default(value));
+            set_1.default(targetObj, dotPath.toUpperCase(), parse_1.default(value));
         }
         // return the variable value
         return parse_1.default(get_1.default(targetObj, dotPath.toUpperCase()));

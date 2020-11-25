@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var rgba2hex_1 = __importDefault(require("./rgba2hex"));
     var hsv2rgba_1 = __importDefault(require("./hsv2rgba"));
     var hsl2rgba_1 = __importDefault(require("./hsl2rgba"));
@@ -143,7 +143,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              */
             this._settings = {};
             // save the instance settings
-            this._settings = deepMerge_2.default({
+            this._settings = deepMerge_1.default({
                 returnNewInstance: false,
                 defaultFormat: 'hex'
             }, settings);

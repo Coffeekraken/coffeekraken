@@ -27,7 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     "use strict";
     var convert_1 = __importDefault(require("./convert"));
     var SPromise_1 = __importDefault(require("../promise/SPromise"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     return /** @class */ (function (_super) {
         __extends(STimer, _super);
         /**
@@ -61,7 +61,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 else {
                     _this._tickInterval = convert_1.default(_this._settings.tickInterval, 'ms');
                 }
-            }, deepMerge_2.default({
+            }, deepMerge_1.default({
                 id: 'STimer',
                 tickInterval: 1000,
                 tickCount: null,

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var class_2 = __importDefault(require("../is/class"));
+    var class_1 = __importDefault(require("../is/class"));
     /**
      * @name            getExtendsStack
      * @namespace       sugar.js.class
@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function getExtendsStack(cls) {
         var stack = [];
-        if (!class_2.default(cls)) {
+        if (!class_1.default(cls)) {
             cls = cls.constructor;
         }
         // if (cls instanceof Function) {

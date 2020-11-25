@@ -15,9 +15,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     Object.defineProperty(exports, "__esModule", { value: true });
     var base64_1 = __importDefault(require("../is/base64"));
     var base64_2 = __importDefault(require("../crypt/base64"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var get_1 = __importDefault(require("../object/get"));
-    var set_2 = __importDefault(require("../object/set"));
+    var set_1 = __importDefault(require("../object/set"));
     var json_1 = __importDefault(require("../is/json"));
     /**
      * @name                          config
@@ -52,13 +52,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             value = JSON.parse(value);
         }
         if (typeof value === 'object' && (path === '.' || path === '' || !path)) {
-            __sugarConfig = deepMerge_2.default(__sugarConfig, value);
+            __sugarConfig = deepMerge_1.default(__sugarConfig, value);
             return __sugarConfig;
         }
         var newValue;
         // check if is a set or get process
         if (value) {
-            newValue = set_2.default(__sugarConfig, path, value);
+            newValue = set_1.default(__sugarConfig, path, value);
         }
         else {
             // get the wanted path

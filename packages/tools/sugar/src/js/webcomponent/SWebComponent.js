@@ -79,8 +79,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var SError_2 = __importDefault(require("../error/SError"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var SError_1 = __importDefault(require("../error/SError"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SPromise_1 = __importDefault(require("../promise/SPromise"));
     var parse_1 = __importDefault(require("../string/parse"));
     var toString_1 = __importDefault(require("../string/toString"));
@@ -147,7 +147,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function SWebComponentGenerator(extendsSettings) {
         var _a;
         if (extendsSettings === void 0) { extendsSettings = {}; }
-        extendsSettings = deepMerge_2.default({
+        extendsSettings = deepMerge_1.default({
             extends: HTMLElement,
             name: null
         }, extendsSettings);
@@ -236,7 +236,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     // get component metas
                     _this._metas = _this.constructor.getComponentMetas(_this.constructor.componentName);
                     // save the settings
-                    _this._settings = deepMerge_2.default({
+                    _this._settings = deepMerge_1.default({
                         id: _this.getAttribute('id') || uniqid_1.default(),
                         props: {}
                     }, _this._metas.settings || {}, settings);
@@ -514,7 +514,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     if (!media)
                         return (this.props[prop] = value);
                     if (!this._props[prop].responsive) {
-                        throw new SError_2.default("You try to set the responsive property \"" + prop + "\" for the media \"" + media + "\" but this property is not defined as \"responsive\"...");
+                        throw new SError_1.default("You try to set the responsive property \"" + prop + "\" for the media \"" + media + "\" but this property is not defined as \"responsive\"...");
                     }
                     this._props[prop].responsiveValues[media] = value;
                     // trigger a "prop" event
@@ -538,7 +538,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     if (!media)
                         return this._props[prop].value;
                     if (!this._props[prop].responsive) {
-                        throw new SError_2.default("You try to get the responsive property \"" + prop + "\" for the media \"" + media + "\" but this property is not defined as \"responsive\"...");
+                        throw new SError_1.default("You try to get the responsive property \"" + prop + "\" for the media \"" + media + "\" but this property is not defined as \"responsive\"...");
                     }
                     return this._props[prop].responsiveValues[media];
                 };
@@ -559,7 +559,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     if (settings === void 0) { settings = {}; }
                     if (reactive === void 0) { reactive = true; }
                     // set the new settings
-                    this._settings = deepMerge_2.default(this._settings, settings);
+                    this._settings = deepMerge_1.default(this._settings, settings);
                     // check if is reactive
                     if (reactive)
                         this.update();

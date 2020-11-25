@@ -13,12 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var _a;
-    var validateObject_2 = __importDefault(require("../object/validateObject"));
+    var validateObject_1 = __importDefault(require("../object/validateObject"));
     return (_a = /** @class */ (function () {
             function SDefinitionObjectInterface() {
             }
             SDefinitionObjectInterface.apply = function (instance) {
-                return validateObject_2.default(instance, this.definitionObj);
+                return validateObject_1.default(instance, this.definitionObj);
             };
             return SDefinitionObjectInterface;
         }()),

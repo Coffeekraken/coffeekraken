@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var json_cyclic_1 = require("json-cyclic");
     /**
      * @name            stringify
@@ -46,7 +46,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function stringify(obj, replacerOrSettings, settings) {
         if (replacerOrSettings === void 0) { replacerOrSettings = null; }
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             space: null,
             decircular: true
         }, replacerOrSettings !== null && typeof replacerOrSettings === 'object'

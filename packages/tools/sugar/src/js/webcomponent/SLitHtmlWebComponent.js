@@ -33,7 +33,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var lit_html_1 = require("lit-html");
     var throttle_1 = __importDefault(require("../function/throttle"));
     var insertAfter_1 = __importDefault(require("../dom/insertAfter"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var async_replace_js_1 = require("lit-html/directives/async-replace.js");
     var async_append_js_1 = require("lit-html/directives/async-append.js");
     var cache_js_1 = require("lit-html/directives/cache.js");
@@ -97,7 +97,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  */
                 function SLitHtmlWebComponent(settings) {
                     if (settings === void 0) { settings = {}; }
-                    var _this = _super.call(this, deepMerge_2.default({}, settings)) || this;
+                    var _this = _super.call(this, deepMerge_1.default({}, settings)) || this;
                     /**
                      * @name        lit
                      * @type        Object

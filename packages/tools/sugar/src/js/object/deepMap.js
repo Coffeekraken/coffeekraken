@@ -20,7 +20,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var plainObject_1 = __importDefault(require("../is/plainObject"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     /**
      * @name            deepMap
      * @namespace           sugar.js.object
@@ -54,7 +54,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function deepMap(object, processor, settings, _path) {
         if (settings === void 0) { settings = {}; }
         if (_path === void 0) { _path = []; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             deepFirst: false,
             processObjects: false,
             handleArray: true

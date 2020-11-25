@@ -48,7 +48,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
     var fmt_obj_1 = __importDefault(require("fmt-obj"));
     return /** @class */ (function () {
         /**
@@ -76,7 +76,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              */
             this._settings = {};
             // extend settings
-            this._settings = deepMerge_2.default({
+            this._settings = deepMerge_1.default({
                 enableChildProcessLogs: true,
                 logMethods: {
                     log: console.log,

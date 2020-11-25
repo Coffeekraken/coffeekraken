@@ -32,10 +32,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     "use strict";
     var SObjectValidationError_1 = __importDefault(require("../../error/SObjectValidationError"));
     var plainObject_1 = __importDefault(require("../../is/plainObject"));
-    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
     var filter_1 = __importDefault(require("../../object/filter"));
     var get_1 = __importDefault(require("../../object/get"));
-    var typeof_2 = __importDefault(require("../../value/typeof"));
+    var typeof_1 = __importDefault(require("../../value/typeof"));
     var validateValue_1 = __importDefault(require("../value/validateValue"));
     var SStaticValidation_1 = __importDefault(require("./validation/SStaticValidation"));
     var _validationsObj = {
@@ -88,7 +88,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function validateObject(objectToCheck, definitionObj, settings, _argPath) {
         if (settings === void 0) { settings = {}; }
         if (_argPath === void 0) { _argPath = []; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             throw: true,
             name: null,
             interface: null,
@@ -120,7 +120,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             issuesObj[argName] = {
                 $name: argName,
                 $received: {
-                    type: typeof_2.default(value),
+                    type: typeof_1.default(value),
                     value: value
                 },
                 $expected: argDefinition,
@@ -132,7 +132,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 throw: settings.throw
             });
             if (validationRes !== true) {
-                issuesObj[argName] = deepMerge_2.default(issuesObj[argName], validationRes || {}, {
+                issuesObj[argName] = deepMerge_1.default(issuesObj[argName], validationRes || {}, {
                     array: true
                 });
             }

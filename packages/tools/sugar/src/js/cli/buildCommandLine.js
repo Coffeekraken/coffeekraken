@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     "use strict";
     var toString_1 = __importDefault(require("../string/toString"));
     var argsToString_1 = __importDefault(require("./argsToString"));
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     /**
      * @name            buildCommandLine
      * @namespace           sugar.js.cli
@@ -74,7 +74,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function buildCommandLine(command, args, settings) {
         if (args === void 0) { args = {}; }
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({
+        settings = deepMerge_1.default({
             definitionObj: null,
             includeAllArgs: true,
             alias: true

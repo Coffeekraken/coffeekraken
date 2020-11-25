@@ -13,12 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     var get_1 = __importDefault(require("./get"));
-    var set_2 = __importDefault(require("./set"));
+    var set_1 = __importDefault(require("./set"));
     return function (obj, path, value) {
         if (value === void 0) { value = {}; }
         var v = get_1.default(obj, path);
         if (v === undefined) {
-            set_2.default(obj, path, value);
+            set_1.default(obj, path, value);
         }
     };
 });

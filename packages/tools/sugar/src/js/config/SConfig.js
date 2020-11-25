@@ -23,9 +23,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var get_1 = __importDefault(require("../object/get"));
-    var set_2 = __importDefault(require("../object/set"));
+    var set_1 = __importDefault(require("../object/set"));
     var plainObject_1 = __importDefault(require("../is/plainObject"));
     var deepMap_1 = __importDefault(require("../object/deepMap"));
     var SConfigAdapter_1 = __importDefault(require("./adapters/SConfigAdapter"));
@@ -249,7 +249,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             var _this = this;
             if (adapter === void 0) { adapter = this._settings.defaultAdapter; }
             if (settings === void 0) { settings = {}; }
-            settings = deepMerge_2.default(this._settings, settings);
+            settings = deepMerge_1.default(this._settings, settings);
             if (adapter && !this._adapters[adapter]) {
                 throw new Error("You try to get the config value \"" + path + "\" using the adapter \"" + adapter + "\" but this adapter does not exists...");
             }
@@ -341,7 +341,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 if (adapter && !_this._adapters[adapter]) {
                     throw new Error("You try to set the config value \"" + path + "\" using the adapter \"" + adapter + "\" but this adapter does not exists...");
                 }
-                set_2.default(_this._adapters[adapter].config, path, value);
+                set_1.default(_this._adapters[adapter].config, path, value);
             });
             // check if need to autoSave or not
             if (this._settings.autoSave) {

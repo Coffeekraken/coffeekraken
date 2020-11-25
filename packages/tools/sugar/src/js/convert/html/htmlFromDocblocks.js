@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var deepMerge_2 = __importDefault(require("../../object/deepMerge"));
+    var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
     var SDocblock_1 = __importDefault(require("../../docblock/SDocblock"));
     /**
      * @name            htmlFromDocblocks
@@ -43,7 +43,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function htmlFromDocblocks(inputString, settings) {
         if (settings === void 0) { settings = {}; }
-        settings = deepMerge_2.default({}, settings);
+        settings = deepMerge_1.default({}, settings);
         var sDocblock = new SDocblock_1.default(inputString, settings);
         return sDocblock.toHtml(settings);
     }

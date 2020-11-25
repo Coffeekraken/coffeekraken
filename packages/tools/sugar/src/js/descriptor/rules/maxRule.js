@@ -15,20 +15,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     Object.defineProperty(exports, "__esModule", { value: true });
     var _SDescriptor_1 = __importDefault(require("../_SDescriptor"));
     var ruleObj = {
-        name: 'Required',
-        id: 'required',
-        settings: {
-            when: [undefined, null]
+        name: 'Max',
+        id: 'max',
+        settings: {},
+        accept: 'Number',
+        message: function (resultObj) {
+            return "This value has to be maximum \"<yellow>" + resultObj.max + "</yellow>\". Received \"<red>" + resultObj.received + "</red>\"";
         },
-        message: 'This value is required',
         processParams: function (params) {
             return { value: params };
         },
         apply: function (value, params, ruleSettings, settings) {
-            if (params.value === true) {
-                if (ruleSettings.when.indexOf(value) !== -1) {
-                    return false;
-                }
+            if (value > params.value) {
+                return {
+                    max: params.value,
+                    received: value
+                };
             }
             return true;
         }

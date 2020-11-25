@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __ofType from '../../is/ofType';
 import {
   ISDescriptorRule,
   ISDescriptorResultObj,
@@ -8,12 +9,15 @@ import {
 import SDescriptor from '../_SDescriptor';
 
 /**
- * @name          requiredRule
+ * @name          typeRule
  * @namespace     sugar.js.descriptor.rules
  * @type          ISDescriptorRule
  *
- * This rule allows you to make sure that your value is not ```undefined```
- * or a nullish value like ```null``` or ```''```.
+ * This rule allows you to make sure a value does match the passed type like:
+ * - String | Array<String>
+ * - Boolean
+ * - Number
+ * - etc...
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
@@ -21,17 +25,15 @@ import SDescriptor from '../_SDescriptor';
 export interface IParams {
   value: boolean;
 }
-export interface IRuleSettings {
-  when: any[];
-}
+export interface IRuleSettings {}
 
 const ruleObj: ISDescriptorRule = {
-  name: 'Required',
-  id: 'required',
-  settings: {
-    when: [undefined, null]
+  name: 'Type',
+  id: 'type',
+  settings: {},
+  message: (resultObj: any): string => {
+    return `This value has to be of type "<yellow>${resultObj.$expected.type}</yellow>". Received "<red>${resultObj.$received.type}</red>"`;
   },
-  message: 'This value is required',
   processParams: (params: boolean) => {
     return { value: params };
   },
@@ -41,11 +43,8 @@ const ruleObj: ISDescriptorRule = {
     ruleSettings: IRuleSettings,
     settings: ISDescriptorSettings
   ): ISDescriptorResultObj | true => {
-    if (params.value === true) {
-      if (ruleSettings.when.indexOf(value) !== -1) {
-        return false;
-      }
-    }
+    const res = __ofType(value, params.value);
+    if (res !== true) return res;
     return true;
   }
 };

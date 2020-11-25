@@ -33,7 +33,7 @@
      * @since       1.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function toString(html, deep) {
+    function toStringFn(html, deep) {
         if (deep === void 0) { deep = true; }
         if (document !== undefined && document.createElement !== undefined) {
             var cont = document.createElement('div');
@@ -42,5 +42,5 @@
         }
         return html;
     }
-    return toString;
+    return toStringFn;
 });

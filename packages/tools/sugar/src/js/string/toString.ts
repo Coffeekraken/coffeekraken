@@ -1,15 +1,11 @@
 // @ts-nocheck
 
-import isArray from '../is/array';
-import isBoolean from '../is/boolean';
-import isFunction from '../is/function';
-import isJson from '../is/json';
-import isNumber from '../is/number';
-import isObject from '../is/object';
-import isRegexp from '../is/regexp';
-import isString from '../is/string';
+import __isArray from '../is/array';
+import __isBoolean from '../is/boolean';
+import __isFunction from '../is/function';
+import __isJson from '../is/json';
+import __isObject from '../is/object';
 import __deepMerge from '../object/deepMerge';
-import __SError from '../error/SError';
 import __stringify from '../json/stringify';
 
 /**
@@ -38,7 +34,7 @@ import __stringify from '../json/stringify';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function toString(value, settings = {}) {
+function fn(value, settings = {}) {
   settings = __deepMerge(
     {
       beautify: false
@@ -46,15 +42,14 @@ function toString(value, settings = {}) {
     settings
   );
 
-  if (isString(value)) {
-    return value;
-  } else if (isNumber(value)) {
-    return value.toString();
-  } else if (value === null) {
-    return 'null';
-  } else if (value instanceof __SError) {
-    return value.toString();
-  } else if (value instanceof Error) {
+  // string
+  if (typeof value === 'string') return value;
+  // null
+  if (value === null) return 'null';
+  // undefined
+  if (value === undefined) return 'undefined';
+  // error
+  if (value instanceof Error) {
     if (typeof value.toString === 'function') {
       return value.toString();
     }
@@ -64,36 +59,31 @@ function toString(value, settings = {}) {
 
       ${value.stack}
     `;
-  } else if (
-    typeof value === 'symbol' ||
-    typeof value === 'typedArray' ||
-    value instanceof Date ||
-    typeof value === 'color'
-  ) {
-    return value.toString();
-  } else if (isObject(value) || isArray(value) || isJson(value)) {
+  }
+  // JSON
+  if (__isObject(value) || __isArray(value) || __isJson(value)) {
     return JSON.stringify(value, null, settings.beautify ? 4 : 0);
-  } else if (isBoolean(value)) {
+  }
+  // boolean
+  if (__isBoolean(value)) {
     if (value) return 'true';
     else return 'false';
-  } else if (isFunction(value)) {
-    return '' + value;
-  } else if (isRegexp(value)) {
-    return value.toString();
-  } else if (value === undefined) {
-    return 'undefined';
-  } else {
-    let returnVal;
-    try {
-      returnVal = JSON.stringify(value, null, settings.beautify ? 4 : 0);
-    } catch (e) {
-      try {
-        returnVal = value.toString();
-      } catch (e) {
-        return value;
-      }
-    }
-    return returnVal;
   }
+  // function
+  if (__isFunction(value)) {
+    return '' + value;
+  }
+  // stringify
+  let returnString = '';
+  try {
+    returnString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
+  } catch (e) {
+    try {
+      returnString = value.toString();
+    } catch (e) {
+      returnString = value;
+    }
+  }
+  return returnString;
 }
-export = toString;
+export = fn;

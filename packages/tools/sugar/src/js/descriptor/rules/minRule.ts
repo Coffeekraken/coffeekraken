@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __ofType from '../../is/ofType';
 import {
   ISDescriptorRule,
   ISDescriptorResultObj,
@@ -8,12 +9,11 @@ import {
 import SDescriptor from '../_SDescriptor';
 
 /**
- * @name          requiredRule
+ * @name          minRule
  * @namespace     sugar.js.descriptor.rules
  * @type          ISDescriptorRule
  *
- * This rule allows you to make sure that your value is not ```undefined```
- * or a nullish value like ```null``` or ```''```.
+ * This rule allows you to make sure a value is not under a certain value
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
@@ -21,18 +21,17 @@ import SDescriptor from '../_SDescriptor';
 export interface IParams {
   value: boolean;
 }
-export interface IRuleSettings {
-  when: any[];
-}
+export interface IRuleSettings {}
 
 const ruleObj: ISDescriptorRule = {
-  name: 'Required',
-  id: 'required',
-  settings: {
-    when: [undefined, null]
+  name: 'Min',
+  id: 'min',
+  settings: {},
+  accept: 'Number',
+  message: (resultObj: any): string => {
+    return `This value has to be minimum "<yellow>${resultObj.min}</yellow>". Received "<red>${resultObj.received}</red>"`;
   },
-  message: 'This value is required',
-  processParams: (params: boolean) => {
+  processParams: (params: number) => {
     return { value: params };
   },
   apply: (
@@ -41,10 +40,11 @@ const ruleObj: ISDescriptorRule = {
     ruleSettings: IRuleSettings,
     settings: ISDescriptorSettings
   ): ISDescriptorResultObj | true => {
-    if (params.value === true) {
-      if (ruleSettings.when.indexOf(value) !== -1) {
-        return false;
-      }
+    if (value < params.value) {
+      return {
+        min: params.value,
+        received: value
+      };
     }
     return true;
   }

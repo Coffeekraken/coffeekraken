@@ -8,28 +8,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../_SDescriptor"], factory);
+        define(["require", "exports", "../../is/ofType", "../_SDescriptor"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    var ofType_1 = __importDefault(require("../../is/ofType"));
     var _SDescriptor_1 = __importDefault(require("../_SDescriptor"));
     var ruleObj = {
-        name: 'Required',
-        id: 'required',
-        settings: {
-            when: [undefined, null]
+        name: 'Type',
+        id: 'type',
+        settings: {},
+        message: function (resultObj) {
+            return "This value has to be of type \"<yellow>" + resultObj.$expected.type + "</yellow>\". Received \"<red>" + resultObj.$received.type + "</red>\"";
         },
-        message: 'This value is required',
         processParams: function (params) {
             return { value: params };
         },
         apply: function (value, params, ruleSettings, settings) {
-            if (params.value === true) {
-                if (ruleSettings.when.indexOf(value) !== -1) {
-                    return false;
-                }
-            }
+            var res = ofType_1.default(value, params.value);
+            if (res !== true)
+                return res;
             return true;
         }
     };

@@ -8,7 +8,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../is/array", "../is/boolean", "../is/function", "../is/json", "../is/number", "../is/object", "../is/regexp", "../is/string", "../object/deepMerge", "../error/SError"], factory);
+        define(["require", "exports", "../is/array", "../is/boolean", "../is/function", "../is/json", "../is/object", "../object/deepMerge"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -16,12 +16,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var boolean_1 = __importDefault(require("../is/boolean"));
     var function_1 = __importDefault(require("../is/function"));
     var json_1 = __importDefault(require("../is/json"));
-    var number_1 = __importDefault(require("../is/number"));
     var object_1 = __importDefault(require("../is/object"));
-    var regexp_1 = __importDefault(require("../is/regexp"));
-    var string_1 = __importDefault(require("../is/string"));
     var deepMerge_2 = __importDefault(require("../object/deepMerge"));
-    var SError_2 = __importDefault(require("../error/SError"));
     /**
      * @name        toString
      * @namespace           sugar.js.string
@@ -48,68 +44,56 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function toString(value, settings) {
+    function fn(value, settings) {
         if (settings === void 0) { settings = {}; }
         settings = deepMerge_2.default({
             beautify: false
         }, settings);
-        if (string_1.default(value)) {
+        // string
+        if (typeof value === 'string')
             return value;
-        }
-        else if (number_1.default(value)) {
-            return value.toString();
-        }
-        else if (value === null) {
+        // null
+        if (value === null)
             return 'null';
-        }
-        else if (value instanceof SError_2.default) {
-            return value.toString();
-        }
-        else if (value instanceof Error) {
+        // undefined
+        if (value === undefined)
+            return 'undefined';
+        // error
+        if (value instanceof Error) {
             if (typeof value.toString === 'function') {
                 return value.toString();
             }
             return value.name + ":\n\n      " + value.message + "\n\n      " + value.stack + "\n    ";
         }
-        else if (typeof value === 'symbol' ||
-            typeof value === 'typedArray' ||
-            value instanceof Date ||
-            typeof value === 'color') {
-            return value.toString();
-        }
-        else if (object_1.default(value) || array_1.default(value) || json_1.default(value)) {
+        // JSON
+        if (object_1.default(value) || array_1.default(value) || json_1.default(value)) {
             return JSON.stringify(value, null, settings.beautify ? 4 : 0);
         }
-        else if (boolean_1.default(value)) {
+        // boolean
+        if (boolean_1.default(value)) {
             if (value)
                 return 'true';
             else
                 return 'false';
         }
-        else if (function_1.default(value)) {
+        // function
+        if (function_1.default(value)) {
             return '' + value;
         }
-        else if (regexp_1.default(value)) {
-            return value.toString();
+        // stringify
+        var returnString = '';
+        try {
+            returnString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
         }
-        else if (value === undefined) {
-            return 'undefined';
-        }
-        else {
-            var returnVal = void 0;
+        catch (e) {
             try {
-                returnVal = JSON.stringify(value, null, settings.beautify ? 4 : 0);
+                returnString = value.toString();
             }
             catch (e) {
-                try {
-                    returnVal = value.toString();
-                }
-                catch (e) {
-                    return value;
-                }
+                returnString = value;
             }
-            return returnVal;
         }
+        return returnString;
     }
-    return toString;
+    return fn;
 });

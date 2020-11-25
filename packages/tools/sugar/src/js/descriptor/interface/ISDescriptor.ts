@@ -1,8 +1,11 @@
 // @ts-nocheck
 
 export interface ISDescriptorSettings {
-  arrayAsValue: boolean;
-  throwOnMissingRule: boolean;
+  arrayAsValue?: boolean;
+  throwOnMissingRule?: boolean;
+  complete?: boolean;
+  name?: string;
+  id?: string;
 }
 
 export interface ISDescriptorDescription {
@@ -30,6 +33,14 @@ export interface ISDescriptorRule {
   apply: ISDescriptorRuleApplyFn;
 }
 
+export interface ISDescroptorGenerateSettings {
+  name?: string;
+  id?: string;
+  rules: ISDescriptorRules;
+  type?: string;
+  settings?: ISDescriptorSettings;
+}
+
 export interface ISDescriptorResultObj {}
 
 export interface ISDescriptionValidationResult {}
@@ -43,4 +54,6 @@ export interface ISDescriptorCtor {
 
 export default interface ISDescriptor {
   _settings: ISDescriptorSettings;
+  name: string;
+  id: string;
 }

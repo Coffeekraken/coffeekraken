@@ -21,7 +21,7 @@ const parse_1 = __importDefault(require("../../node/docblock/parse"));
 const includes_1 = __importDefault(require("../../node/string/includes"));
 module.exports = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function* () {
     const args = parseArgs_1.default(stringArgs, {
-        definitionObj: {
+        definition: {
             source: {
                 type: 'String',
                 alias: 's',

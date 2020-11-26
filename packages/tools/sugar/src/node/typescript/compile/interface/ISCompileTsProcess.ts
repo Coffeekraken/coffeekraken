@@ -15,6 +15,6 @@ export interface ISCompileTsProcessCtor {
 
 export type ISCompileTsProcessSettings = ISProcessSettings;
 
-export default interface ISCompileTsProcess {
+export default interface ISCompileTsProcess extends ISProcess {
   process(params?: object, settings?: ISCompileTsProcessSettings): Promise<any>;
 }

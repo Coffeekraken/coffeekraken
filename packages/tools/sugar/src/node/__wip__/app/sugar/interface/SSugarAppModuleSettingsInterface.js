@@ -20,7 +20,7 @@ const __SInterface = require('../../../class/SInterface');
  */
 module.exports = (_a = class SSugarAppModuleSettingsInterface extends __SInterface {
     },
-    _a.definitionObj = {
+    _a.definition = {
         id: {
             type: 'String',
             description: 'A simple one word id that will be used to identify this module',

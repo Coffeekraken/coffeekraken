@@ -22,7 +22,7 @@ const findPackages_1 = __importDefault(require("../../node/monorepo/findPackages
 module.exports = function bin(stringArgs = '') {
     return __awaiter(this, void 0, void 0, function* () {
         const argsObj = parseArgs_1.default(stringArgs, {
-            definitionObj: SNpmBinCliInterface_1.default.definitionObj
+            definition: SNpmBinCliInterface_1.default.definition
         });
         const binCommand = `npm bin ${argsObj.global ? '-g' : ''}`;
         const binFolderPath = child_process_1.default.execSync(binCommand).toString();
@@ -30,7 +30,7 @@ module.exports = function bin(stringArgs = '') {
         if (!argsObj.package) {
             packagePath = packageRoot_1.default();
             if (!fs_1.default.existsSync(`${packagePath}/package.json`)) {
-                throw 'Sorry but you\'re not in any package folder to take the bin from...';
+                throw "Sorry but you're not in any package folder to take the bin from...";
             }
         }
         else {
@@ -50,7 +50,7 @@ module.exports = function bin(stringArgs = '') {
             // check for bins
             if (!packageJson.bin)
                 throw `Sorry but the package named "<yellow>${packageJson.name}</yellow>" does not have any bin's to install...`;
-            Object.keys(packageJson.bin).forEach(binName => {
+            Object.keys(packageJson.bin).forEach((binName) => {
                 const binPath = packageJson.bin[binName];
                 const binAbsolutePath = path_1.default.resolve(packageJson.absolutePath, binPath);
                 switch (argsObj.action) {

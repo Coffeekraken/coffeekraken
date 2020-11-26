@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name        throttle
  * @namespace           sugar.js.function

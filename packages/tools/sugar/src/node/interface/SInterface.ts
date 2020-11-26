@@ -1,0 +1,1 @@
+../../js/interface/SInterface.ts

@@ -66,7 +66,7 @@ export default function checkArgs(func, args, descriptor, throwError = true) {
   argumentsNames.forEach((argName, i) => {
     // get the argument description object
     const descriptionObj = __parseArgs(descriptor[argName], {
-      definitionObj: {
+      definition: {
         types: '["String","Array"] -t --types',
         values: 'Array -v --values',
         of:

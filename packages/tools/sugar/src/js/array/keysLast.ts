@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import uniq from 'lodash/uniq';
 
@@ -6,6 +7,7 @@ import uniq from 'lodash/uniq';
  * @name        keysLast
  * @namespace           sugar.js.array
  * @type      Function
+ * @stable
  *
  * Make sure the passed array ends with the passed keys
  * @param    {Array}    array    The array to process

@@ -19,7 +19,7 @@ const SInterface_1 = __importDefault(require("../../class/SInterface"));
 const ncp_1 = require("ncp");
 class SFsCopyStreamActionInterface extends SInterface_1.default {
 }
-SFsCopyStreamActionInterface.definitionObj = {
+SFsCopyStreamActionInterface.definition = {
     input: {
         type: 'String',
         required: true

@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name          getKeyByValue
  * @namespace           sugar.js.object

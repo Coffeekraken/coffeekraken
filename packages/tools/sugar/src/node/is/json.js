@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name        isJson
  * @namespace           sugar.js.is

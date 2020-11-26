@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -8,14 +9,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../object/deepize", "../object/deepMerge", "../string/toString", "../validation/object/validateObject"], factory);
+        define(["require", "exports", "../object/deepize", "../object/deepMerge", "../descriptor/SDescriptor"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var deepize_1 = __importDefault(require("../object/deepize"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
-    var toString_1 = __importDefault(require("../string/toString"));
-    var validateObject_1 = __importDefault(require("../validation/object/validateObject"));
+    var SDescriptor_1 = __importDefault(require("../descriptor/SDescriptor"));
     /**
      * @name                completeArgsObject
      * @namespace          sugar.js.cli
@@ -27,8 +27,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      *
      * @param             {Object}            argsObj         The arguments object to complete
      * @param             {Object}            [settings={}]       An object of settings to configure your process:
-     * - definitionObj ({}) {Object}: Specify a definitionObj to use
+     * - definition ({}) {Object}: Specify a definition to use
      * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
+     * - descriptorSettings   ({})  {Object}: Specify some settings to pass to the SDescriptor instance used to validate the object
      * @return            {Object}                            The completed arguments object
      *
      * @todo      interface
@@ -45,22 +46,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (settings === void 0) { settings = {}; }
         argsObj = Object.assign({}, argsObj);
         settings = deepMerge_1.default({
-            definitionObj: {},
-            throw: true
+            definition: {},
+            throw: true,
+            descriptorSettings: {}
         }, settings);
         // loop on all the arguments
-        Object.keys(settings.definitionObj).forEach(function (argString) {
-            var argDefinitionObj = settings.definitionObj[argString];
+        Object.keys(settings.definition).forEach(function (argString) {
+            var argDefinition = settings.definition[argString];
             // check if we have an argument passed in the properties
             if (argsObj[argString] === undefined &&
-                argDefinitionObj.default !== undefined) {
-                argsObj[argString] = argDefinitionObj.default;
+                argDefinition.default !== undefined) {
+                argsObj[argString] = argDefinition.default;
             }
         });
         // make sure all is ok
-        var argsValidationResult = validateObject_1.default(argsObj, settings.definitionObj, settings);
+        var argsValidationResult = SDescriptor_1.default
+            .generate({
+            name: 'completeArgsObject',
+            rules: settings.definition,
+            type: 'Object',
+            settings: settings.descriptorSettings
+        })
+            .apply(argsObj);
         if (argsValidationResult !== true && settings.throw)
-            throw new Error(toString_1.default(argsValidationResult));
+            throw new Error(argsValidationResult.toString());
         else if (argsValidationResult !== true)
             return argsValidationResult;
         // return the argsObj

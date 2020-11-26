@@ -4,7 +4,7 @@ module.exports = (__SInterface) => {
   describe('sugar.js.class.SInterface', () => {
     it('Should pass the interface test correctly', () => {
       class MyInterface extends __SInterface {
-        static definitionObj = {
+        static definition = {
           title: {
             type: 'String',
             required: true
@@ -48,7 +48,7 @@ module.exports = (__SInterface) => {
 
     it('Should pass the interface test correctly', () => {
       class MyInterface extends __SInterface {
-        static definitionObj = {
+        static definition = {
           title: {
             type: 'String',
             required: true
@@ -75,7 +75,7 @@ module.exports = (__SInterface) => {
 
     it('Should pass the interface test correctly when checking for an undefined static function', () => {
       class MyInterface extends __SInterface {
-        static definitionObj = {
+        static definition = {
           title: {
             type: 'String',
             required: true
@@ -115,7 +115,7 @@ module.exports = (__SInterface) => {
 
     it('Should pass the interface test correctly when checking for an existing static function', () => {
       class MyInterface extends __SInterface {
-        static definitionObj = {
+        static definition = {
           title: {
             type: 'String',
             required: true
@@ -143,7 +143,7 @@ module.exports = (__SInterface) => {
 
     it('Should pass the interface test correctly passing a value that is not in the allowed once', () => {
       class MyInterface extends __SInterface {
-        static definitionObj = {
+        static definition = {
           title: {
             type: 'String',
             values: ['Hello', 'World'],
@@ -182,7 +182,7 @@ module.exports = (__SInterface) => {
 
     it('Should pass the interface test correctly passing a value that is in the allowed once', () => {
       class MyInterface extends __SInterface {
-        static definitionObj = {
+        static definition = {
           title: {
             type: 'String',
             values: ['Hello', 'World'],
@@ -205,7 +205,7 @@ module.exports = (__SInterface) => {
 
     it('Should pass the interface test correctly passing a complexe one that need to return a correct error string', () => {
       class MyInterface extends __SInterface {
-        static definitionObj = {
+        static definition = {
           title: {
             type: 'String',
             values: ['Hello', 'World'],

@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import { paramCase } from 'param-case';
 
@@ -25,7 +26,7 @@ import { paramCase } from 'param-case';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function paramCaseFn (string) {
+function paramCaseFn(string) {
   return paramCase(string);
 }
 export = paramCaseFn;

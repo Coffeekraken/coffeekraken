@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __constructorName from './constructorName';
 import __get from './get';
@@ -173,4 +174,4 @@ export = class SWatch {
     // revoke proxy on the proxied object
     return this._proxiedObject.revoke();
   }
-}
+};

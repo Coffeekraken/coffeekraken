@@ -19,7 +19,7 @@ const SInterface_1 = __importDefault(require("../../class/SInterface"));
 const STestJestProcessManager_1 = __importDefault(require("../../test/jest/STestJestProcessManager"));
 class SJestStreamActionInterface extends SInterface_1.default {
 }
-SJestStreamActionInterface.definitionObj = {};
+SJestStreamActionInterface.definition = {};
 module.exports = (_a = class SJestStreamAction extends SActionsStreamAction_1.default {
         /**
          * @name            constructor

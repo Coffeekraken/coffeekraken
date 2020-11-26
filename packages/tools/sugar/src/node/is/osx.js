@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 // TODO tests
 /**
  * @name                            osx

@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __uniqid from '../string/uniqid';
 
@@ -6,6 +7,7 @@ import __uniqid from '../string/uniqid';
  * @name                  proxy
  * @namespace           sugar.js.array
  * @type                  Function
+ * @wip
  *
  * This function override the passed array prototype to intercept changes made through
  *

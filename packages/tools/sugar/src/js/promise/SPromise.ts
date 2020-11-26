@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __minimatch from 'minimatch';
 import __deepMerge from '../object/deepMerge';
@@ -54,7 +55,7 @@ import __env from '../core/env';
  * @todo      interface
  * @todo      doc
  * @todo      tests
- * 
+ *
  * @example         js
  * import SPromise from '@coffeekraken/sugar/js/promise/SPromise';
  * function myCoolFunction() {
@@ -1086,4 +1087,4 @@ export = class SPromise extends Promise {
     delete this._settings;
     this._isDestroyed = true;
   }
-}
+};

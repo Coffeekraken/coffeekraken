@@ -9,7 +9,7 @@ const SDeamonInterface_1 = __importDefault(require("../../interface/SDeamonInter
 module.exports = (_a = class SFsDeamonInterface extends SInterface_1.default {
     },
     _a.implementsArray = [SDeamonInterface_1.default],
-    _a.definitionObj = {
+    _a.definition = {
         watch: {
             type: 'String',
             alias: 'i',

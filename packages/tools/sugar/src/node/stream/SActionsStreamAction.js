@@ -1,11 +1,11 @@
 "use strict";
 // @ts-nocheck
+// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
-const validateDefinitionObject_1 = __importDefault(require("../validation/object/validateDefinitionObject"));
 module.exports = class SActionStreamAction extends SPromise_1.default {
     /**
      * @name            constructor
@@ -58,14 +58,6 @@ module.exports = class SActionStreamAction extends SPromise_1.default {
         this._registeredCallbacks = [];
         if (!this._settings.id)
             this._settings.id = this.constructor.name.toLowerCase();
-        // check the definition object
-        if (this.constructor.interface) {
-            setTimeout(() => {
-                validateDefinitionObject_1.default(this.constructor.interface.definitionObj, {
-                    name: `${this.constructor.name}.definitionObj`
-                });
-            });
-        }
     }
     get settings() {
         return this._settings;
@@ -81,8 +73,8 @@ module.exports = class SActionStreamAction extends SPromise_1.default {
      * @type          Function
      * @async
      *
-     * This method take the streamObj object passed to the "run" method and check it depending on the definitionObj
-     * specified in the static definitionObj property.
+     * This method take the streamObj object passed to the "run" method and check it depending on the definition
+     * specified in the static definition property.
      *
      * @param       {Object}        streamObj         The streamObj to check
      *
@@ -91,7 +83,7 @@ module.exports = class SActionStreamAction extends SPromise_1.default {
     checkStreamObject(streamObj) {
         if (!this.constructor.interface)
             return true;
-        // validate the streamObj depending on the static definitionObj property
+        // validate the streamObj depending on the static definition property
         if (this.constructor.interface) {
             streamObj = this.constructor.interface.applyAndComplete(streamObj);
         }

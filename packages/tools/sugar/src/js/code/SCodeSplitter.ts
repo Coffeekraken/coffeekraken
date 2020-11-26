@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __deepMerge from '../object/deepMerge';
 
@@ -212,4 +213,4 @@ export = class SCodeSplitter {
 
     return blocks;
   }
-}
+};

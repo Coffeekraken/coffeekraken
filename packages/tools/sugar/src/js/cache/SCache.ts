@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __deepMerge from '../object/deepMerge';
 import __SCacheAdapter from './adapters/SCacheAdapter';
@@ -375,4 +376,4 @@ export = class SCache {
   _stringify(object) {
     return this._settings.stringify(object);
   }
-}
+};

@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __deepMerge from '../object/deepMerge';
 import { decycle } from 'json-cyclic';
@@ -32,11 +33,7 @@ import { decycle } from 'json-cyclic';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function stringify(
-  obj,
-  replacerOrSettings = null,
-  settings = {}
-) {
+function stringify(obj, replacerOrSettings = null, settings = {}) {
   settings = __deepMerge(
     {
       space: null,

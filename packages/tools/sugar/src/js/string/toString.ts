@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __isArray from '../is/array';
 import __isBoolean from '../is/boolean';

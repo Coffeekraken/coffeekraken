@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __SRequest from '../http/SRequest';
 
@@ -247,4 +248,4 @@ export = class SGoogleCustomSearch {
       page: this._page - (this._page <= 1 ? 0 : 1)
     });
   }
-}
+};

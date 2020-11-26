@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import SProcess from '../process/SProcess';
+import SProcess from '../../process/SProcess';
 import ISCompileTsProcess, {
   ISCompileTsProcessParams,
   ISCompileTsProcessSettings,

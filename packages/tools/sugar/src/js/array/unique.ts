@@ -1,9 +1,11 @@
 // @ts-nocheck
+// @shared
 
 /**
  * @name              unique
  * @namespace           sugar.js.array
  * @type                  Function
+ * @beta
  *
  * This function simply take an array as parameter and return a new one
  * with all the duplicates values removed.

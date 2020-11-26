@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __deepMerge from '../object/deepMerge';
 import __minimatch from 'minimatch';

@@ -1,23 +1,4 @@
 // @ts-nocheck
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -74,7 +55,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var __syncRequire = typeof module === "object" && typeof module.exports === "object";
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SLogConsoleAdapter_1 = __importDefault(require("./adapters/SLogConsoleAdapter"));
     var env_1 = __importDefault(require("../core/env"));
@@ -134,17 +114,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             Object.keys(this._settings.adapters).forEach(function (adapterName) { return __awaiter(_this_1, void 0, void 0, function () {
                 var cls;
                 return __generator(this, function (_a) {
-                    var _b;
-                    switch (_a.label) {
-                        case 0:
-                            if (!(typeof this._settings.adapters[adapterName] === 'string')) return [3 /*break*/, 2];
-                            return [4 /*yield*/, (_b = this._settings.adapters[adapterName], __syncRequire ? Promise.resolve().then(function () { return __importStar(require(_b)); }) : new Promise(function (resolve_1, reject_1) { require([_b], resolve_1, reject_1); }).then(__importStar))];
-                        case 1:
-                            cls = _a.sent();
-                            this._settings.adapters[adapterName] = new cls();
-                            _a.label = 2;
-                        case 2: return [2 /*return*/];
+                    if (typeof this._settings.adapters[adapterName] === 'string') {
+                        cls = require(this._settings.adapters[adapterName]);
+                        this._settings.adapters[adapterName] = new cls();
                     }
+                    return [2 /*return*/];
                 });
             }); });
             // if needed, override the native console

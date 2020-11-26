@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 const param_case_1 = require("param-case");
 /**
  * @name          paramCase

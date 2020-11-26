@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name                    parseHsl
  * @namespace           sugar.js.color

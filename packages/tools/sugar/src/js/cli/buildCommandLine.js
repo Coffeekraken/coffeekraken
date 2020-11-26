@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -28,7 +29,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * A special token called "[arguments]" is needed if you want the passed arguments to be integrated to the builded command line.
      *
      * @param       {String}      command         The tokenized command line to use as base
-     * @param       {Object}      definitionObj   The definition object of the command to launch
+     * @param       {Object}      definition   The definition object of the command to launch
      * @param       {Object}      [args={}]       An optional arguments/values object to override definition default value
      * @param       {Object}      [settings={}]     An object of settings to configure your command line buildine process:
      * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
@@ -75,11 +76,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (args === void 0) { args = {}; }
         if (settings === void 0) { settings = {}; }
         settings = deepMerge_1.default({
-            definitionObj: null,
+            definition: null,
             includeAllArgs: true,
             alias: true
         }, settings);
-        var definitionObj = Object.assign({}, settings.definitionObj);
+        var definition = Object.assign({}, settings.definition);
         // get all the tokens
         var tokens = command.match(/\%[a-zA-Z0-9-_]+/gm) || [];
         tokens.forEach(function (token) {
@@ -88,10 +89,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 return;
             var tokenValue = args && args[tokenName] !== undefined
                 ? args[tokenName]
-                : definitionObj[tokenName]
-                    ? definitionObj[tokenName].default
+                : definition[tokenName]
+                    ? definition[tokenName].default
                     : undefined;
-            delete definitionObj[tokenName];
+            delete definition[tokenName];
             if (tokenValue === undefined) {
                 command = command.replace(token, '');
                 return;

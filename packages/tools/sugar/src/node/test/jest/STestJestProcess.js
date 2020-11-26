@@ -54,7 +54,7 @@ module.exports = (_a = class STestJestProcess extends SProcess_1.default {
                 input = inTestsFolderTestFilePath;
             }
             const commandToRun = buildCommandLine_1.default(`npx jest ${input}`, argsObj, {
-                definitionObj: STestJestInterface_1.default.definitionObj
+                definition: STestJestInterface_1.default.definition
             }) + ` --forceExit --detectOpenHandles`;
             const childProcess = child_process_1.default.spawn(commandToRun, [], {
                 shell: true

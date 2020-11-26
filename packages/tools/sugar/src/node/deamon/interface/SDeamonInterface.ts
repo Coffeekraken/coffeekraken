@@ -22,7 +22,7 @@ import __SInterface from '../../class/SInterface';
  */
 export = class SDeamonInterface extends __SInterface {
   static extendsArray = ['SPromise'];
-  static definitionObj = {
+  static definition = {
     logs: {
       type: 'Object',
       required: true
@@ -37,4 +37,4 @@ export = class SDeamonInterface extends __SInterface {
       values: ['idle', 'watching', 'error']
     }
   };
-}
+};

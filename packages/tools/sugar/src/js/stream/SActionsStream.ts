@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __clone from '../object/clone';
 import __parseHtml from '../console/parseHtml';
@@ -894,4 +895,4 @@ export = class SActionStream extends __SPromise {
       }
     });
   }
-}
+};

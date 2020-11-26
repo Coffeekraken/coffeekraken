@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name                                  convert
  * @namespace           sugar.js.time

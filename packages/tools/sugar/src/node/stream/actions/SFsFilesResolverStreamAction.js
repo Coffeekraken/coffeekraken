@@ -15,7 +15,7 @@ const extractGlob_1 = __importDefault(require("../../glob/extractGlob"));
 const extractNoneGlob_1 = __importDefault(require("../../glob/extractNoneGlob"));
 class SFsFilesResolverStreamActionInterface extends SInterface_1.default {
 }
-SFsFilesResolverStreamActionInterface.definitionObj = {
+SFsFilesResolverStreamActionInterface.definition = {
     input: {
         type: 'String|Array<String>',
         required: true

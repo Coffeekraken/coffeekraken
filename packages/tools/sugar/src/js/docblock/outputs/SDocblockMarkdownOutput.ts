@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __deepMerge from '../../object/deepMerge';
 import __SDocblockOutput from '../SDocblockOutput';
@@ -105,4 +106,4 @@ export = class SDocblockMarkdownOutput extends __SDocblockOutput {
       )
     );
   }
-}
+};

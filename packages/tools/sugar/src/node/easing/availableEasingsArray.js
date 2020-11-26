@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name            availableEasingsArray
  * @namespace           sugar.js.easing

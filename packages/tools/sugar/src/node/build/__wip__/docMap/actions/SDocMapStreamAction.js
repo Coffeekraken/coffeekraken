@@ -62,7 +62,7 @@ module.exports = (_a = class SDocMapStreamActions extends __SActionsStreamAction
         }
     },
     /**
-     * @name            definitionObj
+     * @name            definition
      * @type             Object
      * @static
      *
@@ -70,7 +70,7 @@ module.exports = (_a = class SDocMapStreamActions extends __SActionsStreamAction
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.definitionObj = {
+    _a.definition = {
         files: {
             type: 'Array<String>',
             required: true

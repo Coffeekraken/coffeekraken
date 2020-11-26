@@ -108,10 +108,7 @@ class SCli extends __SPromise {
 
     if (!this._settings.id) this._settings.id = this.constructor.name;
 
-    this._paramsObj = __argsToObject(
-      initialParams,
-      this.interface.definitionObj
-    );
+    this._paramsObj = __argsToObject(initialParams, this.interface.definition);
 
     this._paramsObj = __deepMerge(
       this._settings.defaultParams,
@@ -140,7 +137,7 @@ class SCli extends __SPromise {
     } else {
       const childProcessManager = new __SChildProcessManager(this.command, {
         id: settings.id,
-        definitionObj: this.interface.definitionObj,
+        definition: this.interface.definition,
         defaultParams: settings.defaultParams,
         ...settings.childProcessSettings
       });
@@ -186,7 +183,7 @@ class SCli extends __SPromise {
    */
   static parseArgs(cliString) {
     return __parseArgs(cliString, {
-      definitionObj: this.interface.definitionObj
+      definition: this.interface.definition
     });
   }
 
@@ -214,7 +211,7 @@ class SCli extends __SPromise {
    */
   get interface() {
     const int = this.constructor.interface;
-    int.definitionObj.forceChildProcess = {
+    int.definition.forceChildProcess = {
       type: 'Boolean',
       required: true,
       default: true,
@@ -274,7 +271,7 @@ class SCli extends __SPromise {
     settings = __deepMerge(this._settings, settings);
 
     if (typeof paramsObj === 'string') {
-      paramsObj = __argsToObject(paramsObj, this.interface.definitionObj);
+      paramsObj = __argsToObject(paramsObj, this.interface.definition);
     } else if (!paramsObj) {
       paramsObj = Object.assign({}, this._paramsObj);
     }
@@ -341,7 +338,7 @@ class SCli extends __SPromise {
   toString(paramsObj = {}, includeAllParams = this._settings.includeAllParams) {
     return __buildCommandLine(
       this.command,
-      this.interface.definitionObj,
+      this.interface.definition,
       paramsObj,
       includeAllParams
     );

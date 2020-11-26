@@ -20,7 +20,7 @@ const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const SInterface_1 = __importDefault(require("../../class/SInterface"));
 class SFsReadFileStreamActionInterface extends SInterface_1.default {
 }
-SFsReadFileStreamActionInterface.definitionObj = {
+SFsReadFileStreamActionInterface.definition = {
     input: {
         type: 'String',
         required: true
@@ -62,7 +62,7 @@ module.exports = (_a = class SFsReadFileStreamAction extends SActionsStreamActio
                 if (directory_1.default(streamObj.input))
                     return resolve(streamObj);
                 streamObj[streamObj.dataProperty ||
-                    SFsReadFileStreamAction.definitionObj.dataProperty.default] = fs_1.default.readFileSync(streamObj.input, 'utf8');
+                    SFsReadFileStreamAction.definition.dataProperty.default] = fs_1.default.readFileSync(streamObj.input, 'utf8');
                 resolve(streamObj);
             }));
         }

@@ -47,7 +47,7 @@ module.exports = (__SDocblock) => {
        */
 
       /**
-       * @name          definitionObj
+       * @name          definition
        * @type          Object
        * @get
        * @static

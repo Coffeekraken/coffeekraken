@@ -21,7 +21,7 @@ import __sugarConfig from '../../../config/sugar';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SFrontendServerInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     hostname: {
       type: 'String',
       alias: 'o',
@@ -51,4 +51,4 @@ export = class SFrontendServerInterface extends __SInterface {
         __packageRoot(process.cwd()) + '/views'
     }
   };
-}
+};

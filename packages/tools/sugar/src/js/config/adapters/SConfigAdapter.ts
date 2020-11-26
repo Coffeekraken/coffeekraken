@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __deepMerge from '../../object/deepMerge';
 
@@ -100,4 +101,4 @@ export = class SConfigAdapter {
   get settings() {
     return this._settings;
   }
-}
+};

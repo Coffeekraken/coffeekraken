@@ -74,7 +74,7 @@ export = class STestJestProcess extends __SProcess {
     }
     const commandToRun =
       __buildCommandLine(`npx jest ${input}`, argsObj, {
-        definitionObj: __STestJestInterface.definitionObj
+        definition: __STestJestInterface.definition
       }) + ` --forceExit --detectOpenHandles`;
 
     const childProcess = __childProces.spawn(commandToRun, [], {
@@ -102,4 +102,4 @@ export = class STestJestProcess extends __SProcess {
       }
     });
   }
-}
+};

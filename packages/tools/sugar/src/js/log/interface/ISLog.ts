@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 export interface ISLogObj {
   value: any;

@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import { sprintf as _sprintf } from 'sprintf-js';
 

@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 const __diff = require('deep-diff').diff;
 const __set = require('../../../node/object/set');

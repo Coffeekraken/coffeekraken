@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 /**
  * @name              hsl2rgba

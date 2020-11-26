@@ -22,7 +22,7 @@ const __sugarConfig = require('../../../config/sugar');
  */
 module.exports = (_a = class SSugarAppModuleConfigInterface extends __SInterface {
     },
-    _a.definitionObj = {
+    _a.definition = {
         id: {
             type: 'String',
             description: 'A simple one word id that will be used to identify this module',

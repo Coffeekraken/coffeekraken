@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __set from './set';
 /**

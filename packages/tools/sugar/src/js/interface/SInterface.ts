@@ -1,3 +1,5 @@
+// @shared
+
 import __SDescriptor from '../descriptor/SDescriptor';
 import ISInterface, {
   ISInterfaceSettings,

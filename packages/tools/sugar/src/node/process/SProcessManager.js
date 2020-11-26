@@ -86,7 +86,7 @@ class SProcessManager extends SPromise_1.default {
         }
         this._ProcessClass = ProcessClass;
         this._settings.initialParams = argsToObject_1.default(this._settings.initialParams, {
-            definitionObj: ProcessClass.interface.definitionObj
+            definition: ProcessClass.interface.definition
         });
         if (!childProcess_1.default()) {
             if (this._settings.output) {

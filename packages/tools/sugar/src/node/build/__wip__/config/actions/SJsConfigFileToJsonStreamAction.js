@@ -59,7 +59,7 @@ module.exports = (_a = class SJsConfigFileToJsonStreamAction extends __SActionsS
         }
     },
     /**
-     * @name            definitionObj
+     * @name            definition
      * @type             Object
      * @static
      *
@@ -67,7 +67,7 @@ module.exports = (_a = class SJsConfigFileToJsonStreamAction extends __SActionsS
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.definitionObj = {
+    _a.definition = {
         input: {
             type: 'String',
             required: true

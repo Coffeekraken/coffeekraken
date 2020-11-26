@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name              extractSame
  * @namespace           sugar.js.string

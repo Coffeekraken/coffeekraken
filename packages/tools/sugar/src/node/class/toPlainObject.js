@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name                          toPlainObject
  * @namespace          sugar.js.class

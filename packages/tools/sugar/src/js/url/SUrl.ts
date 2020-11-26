@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __urlParse from 'url-parse';
 import __deepMerge from '../object/deepMerge';
@@ -411,4 +412,4 @@ export = class SUrl {
   toString() {
     return this._parsedUrl.toString();
   }
-}
+};

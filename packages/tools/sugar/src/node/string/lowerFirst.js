@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name        lowerFirst
  * @namespace           sugar.js.string

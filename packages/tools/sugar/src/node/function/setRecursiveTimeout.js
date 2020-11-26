@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name        setRecursiveTimeout
  * @namespace           sugar.js.function

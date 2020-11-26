@@ -6,7 +6,7 @@ import __SInterface from '../../class/SInterface';
 import { ncp as __ncp } from 'ncp';
 
 class SFsCopyStreamActionInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     input: {
       type: 'String',
       required: true
@@ -86,4 +86,4 @@ export = class SFsCopyStreamAction extends __SActionsStreamAction {
       });
     });
   }
-}
+};

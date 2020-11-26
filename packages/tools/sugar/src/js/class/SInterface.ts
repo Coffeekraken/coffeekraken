@@ -1,18 +1,5 @@
 // @ts-nocheck
 
-import __getExtendsStack from '../class/getExtendsStack';
-import __argsToObject from '../cli/argsToObject';
-import __SError from '../error/SError';
-import __isClass from '../is/class';
-import __deepize from '../object/deepize';
-import __deepMerge from '../object/deepMerge';
-import __trimLines from '../string/trimLines';
-import __validateObject from '../validation/object/validateObject';
-import __validateObjectOutputString from '../validation/object/validateObjectOutputString';
-import __typeof from '../value/typeof';
-import __toString from '../string/toString';
-import __set from '../object/set';
-
 /**
  * @name              SInterface
  * @namespace           sugar.js.class
@@ -30,7 +17,7 @@ import __set from '../object/set';
  * @example         js
  * import SInterface from '@coffeekraken/sugar/js/class/SInterface';
  * class MyCoolInterface extends SInterface {
- *    static definitionObj = {
+ *    static definition = {
  *      title: {
  *        type: 'String',
  *        required: true
@@ -147,10 +134,10 @@ export = class SInterface {
   //   }
 
   //   // definition object
-  //   if (this.definitionObj) {
+  //   if (this.definition) {
   //     implementationValidationResult = __validateObject(
   //       instance,
-  //       this.definitionObj,
+  //       this.definition,
   //       {
   //         throw: false,
   //         name: settings.name,
@@ -355,15 +342,15 @@ export = class SInterface {
   //   }
 
   //   // loop on all the arguments
-  //   Object.keys(this.definitionObj).forEach((argString) => {
-  //     const argDefinitionObj = this.definitionObj[argString];
+  //   Object.keys(this.definition).forEach((argString) => {
+  //     const argdefinition = this.definition[argString];
 
   //     // check if we have an argument passed in the properties
   //     if (
   //       argsObj[argString] === undefined &&
-  //       argDefinitionObj.default !== undefined
+  //       argdefinition.default !== undefined
   //     ) {
-  //       __set(argsObj, argString, argDefinitionObj.default);
+  //       __set(argsObj, argString, argdefinition.default);
   //     }
   //   });
 
@@ -450,7 +437,7 @@ export = class SInterface {
   //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   //  */
   // static parse(string) {
-  //   const args = __argsToObject(string, this.definitionObj);
+  //   const args = __argsToObject(string, this.definition);
   //   return args;
   // }
 
@@ -470,7 +457,7 @@ export = class SInterface {
   //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   //  */
   // static parseAndComplete(string) {
-  //   let args = __argsToObject(string, this.definitionObj);
+  //   let args = __argsToObject(string, this.definition);
   //   args = this.complete(args);
   //   return args;
   // }
@@ -482,7 +469,7 @@ export = class SInterface {
   //  *
   //  * This static method allows you to start from this particular interface and to extends it
   //  * by passing an object containing these properties:
-  //  * - definitionObj ({}) {Object}: An object to extends the static definitionObj one
+  //  * - definition ({}) {Object}: An object to extends the static definition one
   //  * - settings ({}) {Object}: An object of settings to extends the static settings one
   //  * @param     {Object}      extendsObj      An object to extends the static ones of the duplicated interface
   //  * @return    {SInterface}                  A new SInterface class based on the extended one
@@ -492,9 +479,9 @@ export = class SInterface {
   //  */
   // static extends(extendsObj) {
   //   class ExtendedInterface extends this {}
-  //   ExtendedInterface.definitionObj = __deepMerge(
-  //     ExtendedInterface.definitionObj,
-  //     extendsObj.definitionObj || {}
+  //   ExtendedInterface.definition = __deepMerge(
+  //     ExtendedInterface.definition,
+  //     extendsObj.definition || {}
   //   );
   //   ExtendedInterface.settings = __deepMerge(
   //     ExtendedInterface.settings,

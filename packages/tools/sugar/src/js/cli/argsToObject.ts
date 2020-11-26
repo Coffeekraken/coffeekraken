@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __parseArgs from './parseArgs';
 import __completeArgsObject from './completeArgsObject';
@@ -9,12 +10,12 @@ import __completeArgsObject from './completeArgsObject';
  * @type                  Function
  * @beta
  *
- * This function take a simple object, a definitionObj object and return you the string version that you can pass
+ * This function take a simple object, a definition object and return you the string version that you can pass
  * directly to the command line interface
  *
  * @param       {Object|String}        argsObj        The arguments object or string
  * @param       {Object}            [settings]        The settings object to configure your conversion process:
- * - definitionObj (null) {Object}: Specify a definitionObj to use
+ * - definition (null) {Object}: Specify a definition to use
  * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
  * @return      {Object}                              The final values object
  *
@@ -25,7 +26,7 @@ import __completeArgsObject from './completeArgsObject';
  * @example       js
  * import argsToObject from '@coffeekraken/sugar/js/cli/argsToObject';
  * argsToObject('-a Yop, {
- *    definitionObj: {
+ *    definition: {
  *      arg1: {
  *       type: 'String',
  *       alias: 'a',
@@ -49,7 +50,7 @@ import __completeArgsObject from './completeArgsObject';
 function argsToObject(argsObj, settings = {}) {
   if (typeof argsObj === 'string') {
     return __parseArgs(argsObj, {
-      definitionObj: settings.definitionObj
+      definition: settings.definition
     });
   }
 

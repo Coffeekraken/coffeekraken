@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __uniquid from '../string/uniqid';
 import __isOfType from '../is/ofType';

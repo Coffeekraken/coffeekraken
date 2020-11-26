@@ -19,7 +19,7 @@ const __path = require('path');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildFontIconsInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     inputDir: {
       type: 'String',
       required: true,

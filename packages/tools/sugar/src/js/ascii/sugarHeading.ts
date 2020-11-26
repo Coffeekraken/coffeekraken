@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __deepMerge from '../object/deepMerge';
 import __parseHtml from '../console/parseHtml';
@@ -30,9 +31,7 @@ interface ISugarHeadingSettings {
   version?: string;
   borders?: boolean;
 }
-function sugarHeading(
-  settings: ISugarHeadingSettings = {}
-): string {
+function sugarHeading(settings: ISugarHeadingSettings = {}): string {
   settings = __deepMerge(
     {
       version: '2.0.0',

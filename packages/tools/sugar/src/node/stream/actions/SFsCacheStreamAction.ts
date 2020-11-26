@@ -10,7 +10,7 @@ import __writeJsonSync from '../../fs/writeJsonSync';
 import __SInterface from '../../class/SInterface';
 
 class SFsCacheStreamActionInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     input: {
       type: 'String',
       required: true
@@ -154,4 +154,4 @@ export = class SFsCacheStreamAction extends __SActionsStreamAction {
       });
     });
   }
-}
+};

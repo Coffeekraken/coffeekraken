@@ -19,7 +19,7 @@ const __deepMerge = require('../../../object/deepMerge');
  */
 module.exports = (_a = class SBuildDocMapInterface extends __SInterface {
     },
-    _a.definitionObj = {
+    _a.definition = {
         input: {
             type: 'String|Array<String>',
             alias: 'i',

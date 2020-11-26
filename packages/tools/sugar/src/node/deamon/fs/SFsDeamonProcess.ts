@@ -4,7 +4,7 @@ import __SProcess from '../../process/SProcess';
 import __chokidar from 'chokidar';
 import __SPromise from '../../promise/SPromise';
 import __deepMerge from '../../object/deepMerge';
-import __SFsFile from '../../fs/SFsFile';
+import __SFile from '../../fs/SFile';
 import __packageRoot from '../../path/packageRoot';
 import __SFsDeamonInterface from './interface/SFsDeamonInterface';
 
@@ -170,9 +170,9 @@ export = class SFsDeamonProcess extends __SProcess {
       file = this._filesCache[filepath];
       file.update();
     } else {
-      file = new __SFsFile(filepath);
+      file = new __SFile(filepath);
       this._filesCache[filepath] = file;
     }
     return file;
   }
-}
+};

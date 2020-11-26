@@ -20,7 +20,7 @@ const __path = require('path');
  */
 module.exports = (_a = class SBuildFontIconsInterface extends __SInterface {
     },
-    _a.definitionObj = {
+    _a.definition = {
         inputDir: {
             type: 'String',
             required: true,

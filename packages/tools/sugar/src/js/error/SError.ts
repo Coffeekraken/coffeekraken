@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __parseHtml from '../console/parseHtml';
 import __trimLines from '../string/trimLines.js';
@@ -79,4 +80,4 @@ export = class SError extends Error {
     });
     this.stack = __trimLines(__parseHtml(stack.join('')));
   }
-}
+};

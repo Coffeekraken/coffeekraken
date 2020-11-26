@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import { parse } from 'micromatch';
 import __parseEs6Imports from 'parse-es6-imports';

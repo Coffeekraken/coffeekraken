@@ -16,7 +16,7 @@ import __SInterface from '../../class/SInterface';
  */
 export = class SProcessInterface extends __SInterface {
   // static extendsArray = ['SProcess', 'SPromise'];
-  static definitionObj = {
+  static definition = {
     id: {
       type: 'String',
       required: true
@@ -65,4 +65,4 @@ export = class SProcessInterface extends __SInterface {
   static title = 'SProcess elements Interface';
   static description =
     'This interface represent the minimum requirements that MUST have the instance that run some commands etc across the entire toolkit';
-}
+};

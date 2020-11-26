@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __em2px from './em2px';
 import __rem2px from './em2px';

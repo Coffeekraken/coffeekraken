@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -126,5 +127,4 @@ function typeOf(value, settings = {}) {
     }
     return type;
 }
-;
 module.exports = typeOf;

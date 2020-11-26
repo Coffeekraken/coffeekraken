@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __env from '../core/env';
 

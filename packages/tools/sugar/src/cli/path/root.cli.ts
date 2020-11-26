@@ -9,7 +9,7 @@ interface IPathRootOptions {
 
 export = async (stringArgs = '') => {
   const args: IPathRootOptions = __parseArgs(stringArgs, {
-    definitionObj: {
+    definition: {
       highest: {
         type: 'Boolean',
         alias: 'h',

@@ -20,7 +20,7 @@ const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const SInterface_1 = __importDefault(require("../../class/SInterface"));
 class SExtractDocblocksIntoFilesInterface extends SInterface_1.default {
 }
-SExtractDocblocksIntoFilesInterface.definitionObj = {
+SExtractDocblocksIntoFilesInterface.definition = {
     outputStack: {
         type: 'Object<String>',
         required: true
@@ -45,7 +45,7 @@ module.exports = (_a = class SExtractDocblocksIntoFiles extends SActionsStreamAc
                 id: 'actionStream.action.extractDocblocksIntoFiles',
                 sourceProp: 'data'
             }, settings));
-            this.constructor.definitionObj = Object.assign(Object.assign({}, this.constructor.definitionObj), { [this._settings.sourceProp]: {
+            this.constructor.definition = Object.assign(Object.assign({}, this.constructor.definition), { [this._settings.sourceProp]: {
                     type: 'String',
                     required: true
                 } });
@@ -93,7 +93,7 @@ module.exports = (_a = class SExtractDocblocksIntoFiles extends SActionsStreamAc
         }
     },
     /**
-     * @name            definitionObj
+     * @name            definition
      * @type             Object
      * @static
      *

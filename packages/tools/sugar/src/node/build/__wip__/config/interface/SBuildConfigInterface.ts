@@ -18,7 +18,7 @@ const __deepMerge = require('../../../object/deepMerge');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildConfigInterface extends __SInterface {
-  static definitionObj = __deepMerge(__SBuildInterface.definitionObj, {
+  static definition = __deepMerge(__SBuildInterface.definition, {
     input: {
       type: 'String',
       alias: 'i',

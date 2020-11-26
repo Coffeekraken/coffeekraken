@@ -19,7 +19,7 @@ const SInterface_1 = __importDefault(require("../../class/SInterface"));
 const SFrontspec_1 = __importDefault(require("../../doc/SFrontspec"));
 class SFrontspecJsStreamActionInterface extends SInterface_1.default {
 }
-SFrontspecJsStreamActionInterface.definitionObj = {
+SFrontspecJsStreamActionInterface.definition = {
     frontspec: {
         type: 'Boolean|Object'
     }
@@ -39,7 +39,7 @@ module.exports = (_a = class SFrontspecJsStreamAction extends SActionsStreamActi
                 sourceProp: 'data',
                 id: 'SFrontspecJsStreamAction'
             }, settings));
-            this.constructor.definitionObj = {
+            this.constructor.definition = {
                 [this._settings.sourceProp]: {
                     type: 'String',
                     required: true

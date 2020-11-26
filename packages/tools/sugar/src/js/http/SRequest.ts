@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __axios from 'axios';
 import __strToHtml from '../html/strToHtml';
@@ -285,4 +286,4 @@ export = class SRequest {
       this._send(requestSettings);
     });
   }
-}
+};

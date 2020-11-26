@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -7,7 +8,7 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const parse_1 = __importDefault(require("../string/parse"));
 const completeArgsObject_1 = __importDefault(require("./completeArgsObject"));
 const unquote_1 = __importDefault(require("../string/unquote"));
-const parseTypeDefinitionString_1 = __importDefault(require("../validation/utils/parseTypeDefinitionString"));
+const parseTypeDefinitionString_1 = __importDefault(require("../parse/parseTypeDefinitionString"));
 const ofType_1 = __importDefault(require("../is/ofType"));
 /**
  * @name                        parseArgs
@@ -17,7 +18,7 @@ const ofType_1 = __importDefault(require("../is/ofType"));
  * Parse a string to find the provided arguments into the list and return a corresponding object.
  *
  * @param             {String}                    string                      The string to parse
- * @param             {Object}                    definitionObj                   The arguments object description
+ * @param             {Object}                    definition                   The arguments object description
  * @param             {Object}                    [settings={}]               A settings object that configure how the string will be parsed. Here's the settings options:
  * @return            {Object}                                                The object of funded arguments and their values
  *
@@ -56,17 +57,17 @@ const ofType_1 = __importDefault(require("../is/ofType"));
  */
 function parseArgsString(string, settings = {}) {
     settings = deepMerge_1.default({
-        definitionObj: null,
+        definition: null,
         defaultObj: {}
     }, settings);
     const argsObj = {};
-    const definitionObj = settings.definitionObj;
+    const definition = settings.definition;
     // process the passed string
     let stringArray = string.match(/(?:[^\s"]+|"[^"]*")+/gm) || [];
     stringArray = stringArray.map((item) => {
         return unquote_1.default(item);
     });
-    if (!definitionObj) {
+    if (!definition) {
         const argsObj = {};
         let currentArgName = -1;
         let currentValue;
@@ -96,12 +97,12 @@ function parseArgsString(string, settings = {}) {
     stringArray = stringArray.filter((part) => {
         const currentArg = part.replace(/^[-]{1,2}/, '');
         if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
-            const realArgName = getArgNameByAlias(currentArg, definitionObj) || currentArg;
+            const realArgName = getArgNameByAlias(currentArg, definition) || currentArg;
             currentArgName = realArgName;
-            if (!definitionObj[realArgName]) {
-                throw new Error(`You try to pass an argument "<yellow>${realArgName}</yellow>" that is not supported. Here's the supported arguments:\n${Object.keys(definitionObj)
+            if (!definition[realArgName]) {
+                throw new Error(`You try to pass an argument "<yellow>${realArgName}</yellow>" that is not supported. Here's the supported arguments:\n${Object.keys(definition)
                     .map((argName) => {
-                    const argDefinition = definitionObj[argName];
+                    const argDefinition = definition[argName];
                     let string = `<cyan>>${argName}</cyan>: --${argName}`;
                     if (argDefinition.alias)
                         string += ` (-${argDefinition.alias})`;
@@ -111,15 +112,15 @@ function parseArgsString(string, settings = {}) {
                 })
                     .join('\n')}`);
             }
-            currentArgDefinition = definitionObj[realArgName];
+            currentArgDefinition = definition[realArgName];
             currentArgType = parseTypeDefinitionString_1.default(currentArgDefinition.type);
             argsObj[realArgName] = true;
             return false;
         }
         const lastArgObjKey = Object.keys(argsObj)[Object.keys(argsObj).length - 1];
         if (!lastArgObjKey) {
-            for (const key in definitionObj) {
-                const obj = definitionObj[key];
+            for (const key in definition) {
+                const obj = definition[key];
                 const value = parse_1.default(part);
                 if (ofType_1.default(value, obj.type)) {
                     if (obj.validator && !obj.validator(value)) {
@@ -161,7 +162,7 @@ function parseArgsString(string, settings = {}) {
         return true;
     });
     const finalObj = {};
-    for (const key in definitionObj) {
+    for (const key in definition) {
         const value = argsObj[key];
         if (value === undefined && settings.defaultObj[key] !== undefined) {
             finalObj[key] = settings.defaultObj[key];
@@ -173,10 +174,10 @@ function parseArgsString(string, settings = {}) {
     }
     return completeArgsObject_1.default(finalObj, settings);
 }
-function getArgNameByAlias(alias, definitionObj) {
-    const argNames = Object.keys(definitionObj);
+function getArgNameByAlias(alias, definition) {
+    const argNames = Object.keys(definition);
     for (let i = 0; i < argNames.length; i++) {
-        const argDefinition = definitionObj[argNames[i]];
+        const argDefinition = definition[argNames[i]];
         if (argDefinition.alias && argDefinition.alias === alias)
             return argNames[i];
     }

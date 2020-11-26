@@ -131,7 +131,7 @@ class SProcessManager extends __SPromise {
     this._settings.initialParams = __argsToObject(
       this._settings.initialParams,
       {
-        definitionObj: ProcessClass.interface.definitionObj
+        definition: ProcessClass.interface.definition
       }
     );
 

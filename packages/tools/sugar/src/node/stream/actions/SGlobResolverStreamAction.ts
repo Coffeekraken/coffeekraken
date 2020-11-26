@@ -9,7 +9,7 @@ import __deepMerge from '../../object/deepMerge';
 import __SInterface from '../../class/SInterface';
 
 class SGlobResolverStreamActionInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     globProperty: {
       type: 'String',
       required: true
@@ -122,4 +122,4 @@ export = class SGlobResolverStreamAction extends __SActionsStreamAction {
       resolve(streamObjArray);
     });
   }
-}
+};

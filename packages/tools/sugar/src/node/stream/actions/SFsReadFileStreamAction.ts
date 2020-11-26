@@ -7,7 +7,7 @@ import __deepMerge from '../../object/deepMerge';
 import __SInterface from '../../class/SInterface';
 
 class SFsReadFileStreamActionInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     input: {
       type: 'String',
       required: true
@@ -91,10 +91,10 @@ export = class SFsReadFileStreamAction extends __SActionsStreamAction {
 
       streamObj[
         streamObj.dataProperty ||
-          SFsReadFileStreamAction.definitionObj.dataProperty.default
+          SFsReadFileStreamAction.definition.dataProperty.default
       ] = __fs.readFileSync(streamObj.input, 'utf8');
 
       resolve(streamObj);
     });
   }
-}
+};

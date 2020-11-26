@@ -16,7 +16,7 @@ import __extension from '../../fs/extension';
 import __resolveGlob from '../../glob/resolveGlob';
 
 class SFsFilesResolverStreamActionInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     input: {
       type: 'String|Array<String>',
       required: true
@@ -216,4 +216,4 @@ export = class SFindInFileStreamAction extends __SActionsStreamAction {
       }
     });
   }
-}
+};

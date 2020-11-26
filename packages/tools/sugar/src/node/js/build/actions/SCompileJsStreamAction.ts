@@ -35,7 +35,7 @@ export = class SCompileJsStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static interface = __SBuildJsInterface.extends({
-    definitionObj: {}
+    definition: {}
   });
 
   /**
@@ -82,4 +82,4 @@ export = class SCompileJsStreamAction extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-}
+};

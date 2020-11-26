@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import _deepMerge from '../object/deepMerge';
 import _isInt from '../is/integer';
@@ -124,5 +125,5 @@ function typeOf(value: any, settings: ITypeofSettings = {}): string {
   }
 
   return type;
-};
+}
 export = typeOf;

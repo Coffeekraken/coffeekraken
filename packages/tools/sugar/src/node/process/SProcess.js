@@ -18,7 +18,6 @@ const convert_1 = __importDefault(require("../time/convert"));
 const wait_1 = __importDefault(require("../time/wait"));
 const onProcessExit_1 = __importDefault(require("./onProcessExit"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
-const SProcessInterface_1 = __importDefault(require("./interface/SProcessInterface"));
 const node_notifier_1 = __importDefault(require("node-notifier"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const packageRoot_1 = __importDefault(require("../path/packageRoot"));
@@ -45,7 +44,7 @@ module.exports = class SProcess extends SPromise_1.default {
         super(deepMerge_1.default({
             output: {},
             runAsChild: false,
-            definitionObj: {},
+            definition: {},
             processPath: null,
             notifications: {
                 enable: true,
@@ -167,7 +166,6 @@ module.exports = class SProcess extends SPromise_1.default {
         if (!this._settings.notifications.error.title) {
             this._settings.notifications.error.title = `${this._settings.name} (${this._settings.id})`;
         }
-        SProcessInterface_1.default.apply(this);
         // add the listeners
         this.on('resolve,reject,cancel', (data, metas) => {
             this.value = data;
@@ -355,15 +353,15 @@ module.exports = class SProcess extends SPromise_1.default {
             let paramsObj = paramsOrStringArgs;
             if (typeof paramsObj === 'string') {
                 paramsObj = parseArgs_1.default(paramsObj, {
-                    definitionObj: this.constructor.interface
-                        ? Object.assign(Object.assign({}, this.constructor.interface.definitionObj), { processPath: {
+                    definition: this.constructor.interface
+                        ? Object.assign(Object.assign({}, this.constructor.interface.definition), { processPath: {
                                 type: 'String'
                             } }) : null
                 });
             }
             else if (typeof paramsObj === 'object') {
                 paramsObj = completeArgsObject_1.default(paramsObj, {
-                    definitionObj: this.constructor.interface.definitionObj
+                    definition: this.constructor.interface.definition
                 });
             }
             // save current process params
@@ -383,7 +381,7 @@ module.exports = class SProcess extends SPromise_1.default {
                 // throw 'cco';
                 // build the command to run depending on the passed command in the constructor and the params
                 const commandToRun = buildCommandLine_1.default(`node ${path_1.default.resolve(__dirname, '../../cli/sugar.cli.js')} process.runChild [arguments]`, Object.assign(Object.assign({}, paramsObj), { processPath: this._processPath }), {
-                    definitionObj: Object.assign(Object.assign({}, this.constructor.interface.definitionObj), { processPath: {
+                    definition: Object.assign(Object.assign({}, this.constructor.interface.definition), { processPath: {
                             type: 'String',
                             required: true
                         } }),
@@ -459,7 +457,7 @@ module.exports = class SProcess extends SPromise_1.default {
      * @param         {Object|String}     [params={}]     The parameters to pass to the command
      * @param         {Object}          [settings={}]     A settings object to configure your spawn process
      *
-     * @setting       {Object}          [definitionObj={}]        A definition object for the command params
+     * @setting       {Object}          [definition={}]        A definition object for the command params
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -468,7 +466,7 @@ module.exports = class SProcess extends SPromise_1.default {
     //   settings = __deepMerge(
     //     {
     //       env: this._settings.env,
-    //       definitionObj: null
+    //       definition: null
     //     },
     //     settings
     //   );
@@ -477,7 +475,7 @@ module.exports = class SProcess extends SPromise_1.default {
     //     stringParams = params;
     //   } else if (typeof params === 'object') {
     //     stringParams = __argsToString(params, {
-    //       definitionObj: settings.definitionObj
+    //       definition: settings.definition
     //     });
     //   } else {
     //     throw new __SError(

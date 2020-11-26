@@ -1,10 +1,10 @@
 // @ts-nocheck
+// @shared
 
 import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';
 import __uniqid from '../string/uniqid';
-import __validateObject from '../validation/object/validateObject';
-import __validateDefinitionObject from '../validation/object/validateDefinitionObject';
+import __validatedefinitionect from '../validation/object/validatedefinitionect';
 
 /**
  * @name          SActionStreamAction
@@ -92,15 +92,6 @@ export = class SActionStreamAction extends __SPromise {
     );
     if (!this._settings.id)
       this._settings.id = this.constructor.name.toLowerCase();
-
-    // check the definition object
-    if (this.constructor.interface) {
-      setTimeout(() => {
-        __validateDefinitionObject(this.constructor.interface.definitionObj, {
-          name: `${this.constructor.name}.definitionObj`
-        });
-      });
-    }
   }
 
   get settings() {
@@ -119,8 +110,8 @@ export = class SActionStreamAction extends __SPromise {
    * @type          Function
    * @async
    *
-   * This method take the streamObj object passed to the "run" method and check it depending on the definitionObj
-   * specified in the static definitionObj property.
+   * This method take the streamObj object passed to the "run" method and check it depending on the definition
+   * specified in the static definition property.
    *
    * @param       {Object}        streamObj         The streamObj to check
    *
@@ -129,7 +120,7 @@ export = class SActionStreamAction extends __SPromise {
   checkStreamObject(streamObj) {
     if (!this.constructor.interface) return true;
 
-    // validate the streamObj depending on the static definitionObj property
+    // validate the streamObj depending on the static definition property
     if (this.constructor.interface) {
       streamObj = this.constructor.interface.applyAndComplete(streamObj);
     }
@@ -276,4 +267,4 @@ export = class SActionStreamAction extends __SPromise {
       }
     });
   }
-}
+};

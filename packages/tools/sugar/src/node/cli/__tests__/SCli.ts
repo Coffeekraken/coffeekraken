@@ -2,7 +2,7 @@ export default (__SCli, __SInterface) => {
   describe('sugar.node.cli.SCli', () => {
     it('Check that the SCli class work correctly', () => {
       class MyInterface extends __SInterface {
-        static definitionObj = {
+        static definition = {
           hostname: {
             type: 'String',
             description: 'Server hostname',

@@ -22,7 +22,7 @@ const get_1 = __importDefault(require("../../object/get"));
 const SInterface_1 = __importDefault(require("../../class/SInterface"));
 class SFsOutputStreamActionInterface extends SInterface_1.default {
 }
-SFsOutputStreamActionInterface.definitionObj = {
+SFsOutputStreamActionInterface.definition = {
     outputStack: {
         type: 'Object',
         required: false

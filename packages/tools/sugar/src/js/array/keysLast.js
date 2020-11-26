@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -17,6 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name        keysLast
      * @namespace           sugar.js.array
      * @type      Function
+     * @stable
      *
      * Make sure the passed array ends with the passed keys
      * @param    {Array}    array    The array to process

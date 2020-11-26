@@ -8,7 +8,7 @@ const SInterface_1 = __importDefault(require("../../class/SInterface"));
 module.exports = (_a = class SAppCommandInterface extends SInterface_1.default {
     },
     // static implementsArray = [__SCliInterface];
-    // static definitionObj = {};
+    // static definition = {};
     _a.title = 'SApp Command Interface',
     _a.description = 'This interface represent the minimum requirements that MUST have the instances passed in an SApp based application',
     _a);

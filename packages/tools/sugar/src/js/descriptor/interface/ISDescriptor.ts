@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 export interface ISDescriptorSettings {
   arrayAsValue?: boolean;

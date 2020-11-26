@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);
@@ -13,6 +14,7 @@
      * @name                                splitEvery
      * @namespace           sugar.js.array
      * @type                                Function
+     * @beta
      *
      * Split an array every N items
      *

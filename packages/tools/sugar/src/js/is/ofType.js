@@ -15,11 +15,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../validation/utils/parseTypeDefinitionString", "./class", "./integer", "../value/typeof", "../value/typeDefinitionArrayObjectToString", "../class/getExtendsStack"], factory);
+        define(["require", "exports", "../parse/parseTypeDefinitionString", "./class", "./integer", "../value/typeof", "../value/typeDefinitionArrayObjectToString", "../class/getExtendsStack"], factory);
     }
 })(function (require, exports) {
     "use strict";
-    var parseTypeDefinitionString_1 = __importDefault(require("../validation/utils/parseTypeDefinitionString"));
+    var parseTypeDefinitionString_1 = __importDefault(require("../parse/parseTypeDefinitionString"));
     var class_1 = __importDefault(require("./class"));
     var integer_1 = __importDefault(require("./integer"));
     var typeof_1 = __importDefault(require("../value/typeof"));
@@ -70,24 +70,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             $issues: ['type']
         };
         var _loop_1 = function (i) {
-            var definitionObj = definitionArray[i];
-            // if ((value === null || value === undefined) && definitionObj.type) {
+            var definition = definitionArray[i];
+            // if ((value === null || value === undefined) && definition.type) {
             //   issueObj.received.type = __typeof(value);
             // }
             // Array | Object
-            if (definitionObj.type === 'Array' || definitionObj.type === 'Object') {
+            if (definition.type === 'Array' || definition.type === 'Object') {
                 // Array
-                if (definitionObj.type === 'Array') {
+                if (definition.type === 'Array') {
                     // make sure the value is an array
-                    if (typeOfValue === 'Array' && !definitionObj.of)
+                    if (typeOfValue === 'Array' && !definition.of)
                         return { value: true };
                     // Object
                 }
-                else if (definitionObj.type === 'Object') {
-                    if (typeOfValue === 'Object' && !definitionObj.of)
+                else if (definition.type === 'Object') {
+                    if (typeOfValue === 'Object' && !definition.of)
                         return { value: true };
                 }
-                if (definitionObj.of &&
+                if (definition.of &&
                     (Array.isArray(value) || typeof value === 'object')) {
                     var loopOn = Array.isArray(value)
                         ? __spreadArrays(value.keys()) : Object.keys(value);
@@ -95,7 +95,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     var receivedTypes_1 = [];
                     loopOn.forEach(function (valueIndex) {
                         var valueToCheck = value[valueIndex];
-                        if (ofType(valueToCheck, definitionObj.of) !== true) {
+                        if (ofType(valueToCheck, definition.of) !== true) {
                             checkValuesResult_1 = false;
                         }
                         var typeString = typeof_1.default(valueToCheck);
@@ -111,37 +111,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 }
             }
             // Class
-            else if (definitionObj.type === 'Class') {
+            else if (definition.type === 'Class') {
                 if (class_1.default(value))
                     return { value: true };
             }
             // Integer
-            else if (definitionObj.type === 'Int' || definitionObj.type === 'Integer') {
+            else if (definition.type === 'Int' || definition.type === 'Integer') {
                 if (integer_1.default(value))
                     return { value: true };
             }
             // check default types
-            else if (['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(definitionObj.type) !== -1) {
-                if (definitionObj.type === 'Number') {
+            else if (['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(definition.type) !== -1) {
+                if (definition.type === 'Number') {
                     var type = typeOfValue;
                     if (type === 'Number' || type === 'Integer')
                         return { value: true };
                 }
                 else {
-                    if (typeOfValue === definitionObj.type)
+                    if (typeOfValue === definition.type)
                         return { value: true };
                 }
             }
             // check for "custom" types
             else if (class_1.default(value) && value.name) {
-                if (typeof_1.default(value) === definitionObj.type)
+                if (typeof_1.default(value) === definition.type)
                     return { value: true };
                 var classesStack = getExtendsStack_1.default(value);
-                if (classesStack.indexOf(definitionObj.type) !== -1)
+                if (classesStack.indexOf(definition.type) !== -1)
                     return { value: true };
             }
             else if (value && value.constructor && value.constructor.name) {
-                if (definitionObj.type === value.constructor.name)
+                if (definition.type === value.constructor.name)
                     return { value: true };
             }
         };

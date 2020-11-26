@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import sha256 from 'crypto-js/sha256';
 import toString from '../string/toString';

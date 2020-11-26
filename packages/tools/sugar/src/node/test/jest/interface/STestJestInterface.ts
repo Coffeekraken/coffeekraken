@@ -23,7 +23,7 @@ import __deepMerge from '../../../object/deepMerge';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class STestJestCliInterface extends __SInterface {
-  static definitionObj = __deepMerge(__STestInterface.definitionObj, {
+  static definition = __deepMerge(__STestInterface.definition, {
     input: {
       default: __sugarConfig('jest.cli.input')
     },
@@ -31,4 +31,4 @@ export = class STestJestCliInterface extends __SInterface {
       default: __sugarConfig('jest.cli.watch')
     }
   });
-}
+};

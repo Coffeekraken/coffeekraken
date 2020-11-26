@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -21,14 +22,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @type                  Function
      * @beta
      *
-     * This function take a simple object, a definitionObj object and return you the string version that you can pass
+     * This function take a simple object, a definition object and return you the string version that you can pass
      * directly to the command line interface
      *
      * @param       {Object}        args        The arguments object
      * @param       {Object}      [settings={}]               A settings object to configure your command build process:
-     * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definitionObj object in your command line string, or if you just want the one passed in your argsObj argument
+     * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
      * - alias (true) {Boolean}: Specify if you want to use the aliases or not in the generated command
-     * - definitionObj (null) {Object}: Specify a definition object to use
+     * - definition (null) {Object}: Specify a definition object to use
      *
      * @todo      interface
      * @todo      doc
@@ -40,7 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      *    arg1: 'Hello',
      *    myOtherArg: 'World'
      * }, {
-     *    definitionObj: {
+     *    definition: {
      *      arg1: {
      *        type: 'String',
      *       alias: 'a',
@@ -66,16 +67,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function argsToString(args, settings) {
         if (settings === void 0) { settings = {}; }
         settings = deepMerge_1.default({
-            definitionObj: null,
+            definition: null,
             includeAllArgs: true,
             alias: true
         }, settings);
         if (typeof args === 'string') {
             args = parseArgs_1.default(args, {
-                definitionObj: settings.definitionObj
+                definition: settings.definition
             });
         }
-        if (!settings.definitionObj) {
+        if (!settings.definition) {
             var string_1 = '';
             Object.keys(args).forEach(function (key) {
                 string_1 += " --" + key + " " + toString_1.default(args[key]);
@@ -84,8 +85,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         }
         var cliArray = [];
         // loop on passed args
-        Object.keys(settings.definitionObj).forEach(function (argName) {
-            var defObj = settings.definitionObj[argName];
+        Object.keys(settings.definition).forEach(function (argName) {
+            var defObj = settings.definition[argName];
             if (!defObj)
                 return;
             if (!settings.includeAllArgs && args[argName] === undefined)
@@ -94,9 +95,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             var value;
             if (args && args[argName] !== undefined)
                 value = args[argName];
-            else if (settings.definitionObj[argName] &&
-                settings.definitionObj[argName].default)
-                value = settings.definitionObj[argName].default;
+            else if (settings.definition[argName] &&
+                settings.definition[argName].default)
+                value = settings.definition[argName].default;
             if (value === undefined ||
                 value === null
             // || (defObj.type.toLowerCase() === 'boolean' && value === false)

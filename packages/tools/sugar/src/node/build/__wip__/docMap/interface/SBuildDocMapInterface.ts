@@ -18,7 +18,7 @@ const __deepMerge = require('../../../object/deepMerge');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildDocMapInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     input: {
       type: 'String|Array<String>',
       alias: 'i',

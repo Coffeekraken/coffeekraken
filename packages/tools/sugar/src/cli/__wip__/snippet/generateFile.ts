@@ -27,7 +27,7 @@ export default async (stringArgs = '') => {
   }
 
   const args = __parseArgs(stringArgs, {
-    definitionObj: {
+    definition: {
       language: {
         type: 'String',
         alias: 'l',

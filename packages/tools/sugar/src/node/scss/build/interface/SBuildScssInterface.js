@@ -8,7 +8,7 @@ const SInterface_1 = __importDefault(require("../../../class/SInterface"));
 const sugar_1 = __importDefault(require("../../../config/sugar"));
 module.exports = (_a = class SBuildScssInterface extends SInterface_1.default {
     },
-    _a.definitionObj = {
+    _a.definition = {
         input: {
             type: 'String',
             default: sugar_1.default('build.scss.input')

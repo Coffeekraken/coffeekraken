@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name 		distanceBetween
  * @namespace           sugar.js.geom.2d

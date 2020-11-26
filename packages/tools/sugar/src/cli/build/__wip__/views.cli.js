@@ -10,7 +10,7 @@ const SBuildViewsActionsStream_1 = __importDefault(require("../../node/build/vie
 const output_1 = __importDefault(require("../../node/process/output"));
 exports.default = (stringArgs = '') => {
     const args = parseArgs_1.default(stringArgs, {
-        definitionObj: SBuildViewsCli_1.default.interface.definitionObj
+        definition: SBuildViewsCli_1.default.interface.definition
     });
     const stream = new SBuildViewsActionsStream_1.default({});
     const proc = stream.start(args);

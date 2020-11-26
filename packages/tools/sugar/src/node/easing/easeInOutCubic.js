@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name      easeInOutCubic
  * @namespace           sugar.js.easing

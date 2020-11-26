@@ -10,7 +10,7 @@ const SBuildDocActionsStream_1 = __importDefault(require("../../node/build/doc/S
 const output_1 = __importDefault(require("../../node/process/output"));
 exports.default = (stringArgs = '') => {
     const args = parseArgs_1.default(stringArgs, {
-        definitionObj: SBuildDocCli_1.default.interface.definitionObj
+        definition: SBuildDocCli_1.default.interface.definition
     });
     const stream = new SBuildDocActionsStream_1.default({});
     const proc = stream.start(args);

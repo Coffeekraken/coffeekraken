@@ -8,7 +8,7 @@ const SInterface_1 = __importDefault(require("../../class/SInterface"));
 module.exports = (_a = class SDeamonInterface extends SInterface_1.default {
     },
     _a.extendsArray = ['SPromise'],
-    _a.definitionObj = {
+    _a.definition = {
         logs: {
             type: 'Object',
             required: true

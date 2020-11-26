@@ -19,7 +19,7 @@ const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const SInterface_1 = __importDefault(require("../../class/SInterface"));
 class SFsUnlinkStreamActionInterface extends SInterface_1.default {
 }
-SFsUnlinkStreamActionInterface.definitionObj = {
+SFsUnlinkStreamActionInterface.definition = {
     unlink: {
         type: 'String',
         required: true

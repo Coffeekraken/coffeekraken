@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __convert from './convert';
 import __SPromise from '../promise/SPromise';
@@ -460,4 +461,4 @@ export = class STimer extends __SPromise {
   isStarted() {
     return this._startTime && !this._pauseTime;
   }
-}
+};

@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 module.exports = class SConfigAdapter {
     /**
      * @name                              constructor

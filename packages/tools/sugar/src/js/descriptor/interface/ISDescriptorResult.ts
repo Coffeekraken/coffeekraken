@@ -1,3 +1,5 @@
+// @shared
+
 import ISDescriptor, {
   ISDescriptorRule,
   ISDescriptorSettings

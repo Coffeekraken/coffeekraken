@@ -21,7 +21,7 @@ import __SProcessManagerInterface from '../../process/SProcessManager';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SCliInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     interface: {
       type: 'SInterface',
       required: true,
@@ -38,4 +38,4 @@ export = class SCliInterface extends __SInterface {
       static: true
     }
   };
-}
+};

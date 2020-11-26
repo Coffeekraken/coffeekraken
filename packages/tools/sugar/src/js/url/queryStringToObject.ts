@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import ltrim from '../string/ltrim';
 

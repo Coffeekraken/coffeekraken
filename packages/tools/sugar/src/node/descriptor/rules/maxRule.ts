@@ -1,0 +1,1 @@
+../../../js/descriptor/rules/maxRule.ts

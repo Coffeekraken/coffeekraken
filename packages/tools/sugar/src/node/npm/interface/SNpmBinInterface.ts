@@ -10,7 +10,7 @@
 import _SInterface from '../../class/SInterface';
 
 export = class SNpmBinInterface extends _SInterface {
-  static definitionObj = {
+  static definition = {
     action: {
       type: 'String',
       required: true,

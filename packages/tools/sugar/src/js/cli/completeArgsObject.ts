@@ -1,9 +1,10 @@
 // @ts-nocheck
+// @shared
 
 import __deepize from '../object/deepize';
 import __deepMerge from '../object/deepMerge';
 import __toString from '../string/toString';
-import __validateObject from '../validation/object/validateObject';
+import __SDescriptor from '../descriptor/SDescriptor';
 
 /**
  * @name                completeArgsObject
@@ -16,8 +17,9 @@ import __validateObject from '../validation/object/validateObject';
  *
  * @param             {Object}            argsObj         The arguments object to complete
  * @param             {Object}            [settings={}]       An object of settings to configure your process:
- * - definitionObj ({}) {Object}: Specify a definitionObj to use
+ * - definition ({}) {Object}: Specify a definition to use
  * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
+ * - descriptorSettings   ({})  {Object}: Specify some settings to pass to the SDescriptor instance used to validate the object
  * @return            {Object}                            The completed arguments object
  *
  * @todo      interface
@@ -35,34 +37,38 @@ function completeArgsObject(argsObj, settings = {}) {
 
   settings = __deepMerge(
     {
-      definitionObj: {},
-      throw: true
+      definition: {},
+      throw: true,
+      descriptorSettings: {}
     },
     settings
   );
 
   // loop on all the arguments
-  Object.keys(settings.definitionObj).forEach((argString) => {
-    const argDefinitionObj = settings.definitionObj[argString];
+  Object.keys(settings.definition).forEach((argString) => {
+    const argDefinition = settings.definition[argString];
 
     // check if we have an argument passed in the properties
     if (
       argsObj[argString] === undefined &&
-      argDefinitionObj.default !== undefined
+      argDefinition.default !== undefined
     ) {
-      argsObj[argString] = argDefinitionObj.default;
+      argsObj[argString] = argDefinition.default;
     }
   });
 
   // make sure all is ok
-  const argsValidationResult = __validateObject(
-    argsObj,
-    settings.definitionObj,
-    settings
-  );
+  const argsValidationResult = __SDescriptor
+    .generate({
+      name: 'completeArgsObject',
+      rules: settings.definition,
+      type: 'Object',
+      settings: settings.descriptorSettings
+    })
+    .apply(argsObj);
 
   if (argsValidationResult !== true && settings.throw)
-    throw new Error(__toString(argsValidationResult));
+    throw new Error(argsValidationResult.toString());
   else if (argsValidationResult !== true) return argsValidationResult;
 
   // return the argsObj

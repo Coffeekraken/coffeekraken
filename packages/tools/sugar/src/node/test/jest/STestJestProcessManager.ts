@@ -83,7 +83,7 @@ export = class STestJestProcess extends __SChildProcessManager {
   //     const commandToRun =
   //       __buildCommandLine(
   //         `npx jest ${input}`,
-  //         __STestJestInterface.definitionObj,
+  //         __STestJestInterface.definition,
   //         argsObj
   //       ) + ' --forceExit --detectOpenHandles';
 
@@ -115,4 +115,4 @@ export = class STestJestProcess extends __SChildProcessManager {
   kill() {
     super.kill();
   }
-}
+};

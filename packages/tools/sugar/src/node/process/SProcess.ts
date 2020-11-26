@@ -7,7 +7,6 @@ import __wait from '../time/wait';
 import __isClass from '../is/class';
 import __onProcessExit from './onProcessExit';
 import __SPromise from '../promise/SPromise';
-import __SProcessInterface from './interface/SProcessInterface';
 import __notifier from 'node-notifier';
 import __deepMerge from '../object/deepMerge';
 import __packageRoot from '../path/packageRoot';
@@ -226,7 +225,7 @@ export = class SProcess extends __SPromise {
         {
           output: {},
           runAsChild: false,
-          definitionObj: {},
+          definition: {},
           processPath: null,
           notifications: {
             enable: true,
@@ -292,7 +291,6 @@ export = class SProcess extends __SPromise {
     if (!this._settings.notifications.error.title) {
       this._settings.notifications.error.title = `${this._settings.name} (${this._settings.id})`;
     }
-    __SProcessInterface.apply(this);
 
     // add the listeners
     this.on('resolve,reject,cancel', (data, metas) => {
@@ -429,9 +427,9 @@ export = class SProcess extends __SPromise {
     let paramsObj = paramsOrStringArgs;
     if (typeof paramsObj === 'string') {
       paramsObj = __parseArgs(paramsObj, {
-        definitionObj: this.constructor.interface
+        definition: this.constructor.interface
           ? {
-              ...this.constructor.interface.definitionObj,
+              ...this.constructor.interface.definition,
               processPath: {
                 type: 'String'
               }
@@ -440,7 +438,7 @@ export = class SProcess extends __SPromise {
       });
     } else if (typeof paramsObj === 'object') {
       paramsObj = __completeArgsObject(paramsObj, {
-        definitionObj: this.constructor.interface.definitionObj
+        definition: this.constructor.interface.definition
       });
     }
 
@@ -478,8 +476,8 @@ export = class SProcess extends __SPromise {
           processPath: this._processPath
         },
         {
-          definitionObj: {
-            ...this.constructor.interface.definitionObj,
+          definition: {
+            ...this.constructor.interface.definition,
             processPath: {
               type: 'String',
               required: true
@@ -568,7 +566,7 @@ export = class SProcess extends __SPromise {
    * @param         {Object|String}     [params={}]     The parameters to pass to the command
    * @param         {Object}          [settings={}]     A settings object to configure your spawn process
    *
-   * @setting       {Object}          [definitionObj={}]        A definition object for the command params
+   * @setting       {Object}          [definition={}]        A definition object for the command params
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -577,7 +575,7 @@ export = class SProcess extends __SPromise {
   //   settings = __deepMerge(
   //     {
   //       env: this._settings.env,
-  //       definitionObj: null
+  //       definition: null
   //     },
   //     settings
   //   );
@@ -586,7 +584,7 @@ export = class SProcess extends __SPromise {
   //     stringParams = params;
   //   } else if (typeof params === 'object') {
   //     stringParams = __argsToString(params, {
-  //       definitionObj: settings.definitionObj
+  //       definition: settings.definition
   //     });
   //   } else {
   //     throw new __SError(
@@ -701,4 +699,4 @@ export = class SProcess extends __SPromise {
       this.trigger('error', error);
     });
   }
-}
+};

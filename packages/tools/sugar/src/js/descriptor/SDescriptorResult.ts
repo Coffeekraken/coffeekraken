@@ -1,3 +1,5 @@
+// @shared
+
 import __deepMerge from '../object/deepMerge';
 import ISDescriptor, { ISDescriptorSettings } from './interface/ISDescriptor';
 import ISDescriptorResult, {

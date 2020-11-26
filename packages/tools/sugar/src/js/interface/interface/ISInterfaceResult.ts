@@ -1,3 +1,5 @@
+// @shared
+
 import ISDescriptorResult from '../../descriptor/interface/ISDescriptorResult';
 
 export interface ISInterfaceResultData {

@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 module.exports = (obj, path) => {
     if (obj[path] !== undefined)
         return obj[path];

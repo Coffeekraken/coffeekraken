@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -8,6 +9,7 @@ const uniq_1 = __importDefault(require("lodash/uniq"));
  * @name        keysFirst
  * @namespace           sugar.js.array
  * @type      Function
+ * @stable
  *
  * Make sure the passed array start with the passed keys
  *

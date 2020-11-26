@@ -7,7 +7,7 @@ import __output from '../../node/process/output';
 
 export default (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
-    definitionObj: __SBuildDocCli.interface.definitionObj
+    definition: __SBuildDocCli.interface.definition
   });
   const stream = new __SBuildDocActionsStream({});
   const proc = stream.start(args);

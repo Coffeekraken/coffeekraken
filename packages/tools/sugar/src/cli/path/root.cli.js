@@ -16,7 +16,7 @@ const packageRoot_1 = __importDefault(require("../../node/path/packageRoot"));
 const parseArgs_1 = __importDefault(require("../../node/cli/parseArgs"));
 module.exports = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function* () {
     const args = parseArgs_1.default(stringArgs, {
-        definitionObj: {
+        definition: {
             highest: {
                 type: 'Boolean',
                 alias: 'h',

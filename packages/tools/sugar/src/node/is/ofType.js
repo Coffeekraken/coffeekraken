@@ -1,9 +1,10 @@
 "use strict";
 // @ts-nocheck
+// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-const parseTypeDefinitionString_1 = __importDefault(require("../validation/utils/parseTypeDefinitionString"));
+const parseTypeDefinitionString_1 = __importDefault(require("../parse/parseTypeDefinitionString"));
 const class_1 = __importDefault(require("./class"));
 const integer_1 = __importDefault(require("./integer"));
 const typeof_1 = __importDefault(require("../value/typeof"));
@@ -54,24 +55,24 @@ function ofType(value, argTypeDefinition) {
         $issues: ['type']
     };
     for (let i = 0; i < definitionArray.length; i++) {
-        const definitionObj = definitionArray[i];
-        // if ((value === null || value === undefined) && definitionObj.type) {
+        const definition = definitionArray[i];
+        // if ((value === null || value === undefined) && definition.type) {
         //   issueObj.received.type = __typeof(value);
         // }
         // Array | Object
-        if (definitionObj.type === 'Array' || definitionObj.type === 'Object') {
+        if (definition.type === 'Array' || definition.type === 'Object') {
             // Array
-            if (definitionObj.type === 'Array') {
+            if (definition.type === 'Array') {
                 // make sure the value is an array
-                if (typeOfValue === 'Array' && !definitionObj.of)
+                if (typeOfValue === 'Array' && !definition.of)
                     return true;
                 // Object
             }
-            else if (definitionObj.type === 'Object') {
-                if (typeOfValue === 'Object' && !definitionObj.of)
+            else if (definition.type === 'Object') {
+                if (typeOfValue === 'Object' && !definition.of)
                     return true;
             }
-            if (definitionObj.of &&
+            if (definition.of &&
                 (Array.isArray(value) || typeof value === 'object')) {
                 const loopOn = Array.isArray(value)
                     ? [...value.keys()]
@@ -80,7 +81,7 @@ function ofType(value, argTypeDefinition) {
                 const receivedTypes = [];
                 loopOn.forEach((valueIndex) => {
                     const valueToCheck = value[valueIndex];
-                    if (ofType(valueToCheck, definitionObj.of) !== true) {
+                    if (ofType(valueToCheck, definition.of) !== true) {
                         checkValuesResult = false;
                     }
                     const typeString = typeof_1.default(valueToCheck);
@@ -96,37 +97,37 @@ function ofType(value, argTypeDefinition) {
             }
         }
         // Class
-        else if (definitionObj.type === 'Class') {
+        else if (definition.type === 'Class') {
             if (class_1.default(value))
                 return true;
         }
         // Integer
-        else if (definitionObj.type === 'Int' || definitionObj.type === 'Integer') {
+        else if (definition.type === 'Int' || definition.type === 'Integer') {
             if (integer_1.default(value))
                 return true;
         }
         // check default types
-        else if (['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(definitionObj.type) !== -1) {
-            if (definitionObj.type === 'Number') {
+        else if (['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(definition.type) !== -1) {
+            if (definition.type === 'Number') {
                 const type = typeOfValue;
                 if (type === 'Number' || type === 'Integer')
                     return true;
             }
             else {
-                if (typeOfValue === definitionObj.type)
+                if (typeOfValue === definition.type)
                     return true;
             }
         }
         // check for "custom" types
         else if (class_1.default(value) && value.name) {
-            if (typeof_1.default(value) === definitionObj.type)
+            if (typeof_1.default(value) === definition.type)
                 return true;
             const classesStack = getExtendsStack_1.default(value);
-            if (classesStack.indexOf(definitionObj.type) !== -1)
+            if (classesStack.indexOf(definition.type) !== -1)
                 return true;
         }
         else if (value && value.constructor && value.constructor.name) {
-            if (definitionObj.type === value.constructor.name)
+            if (definition.type === value.constructor.name)
                 return true;
         }
     }

@@ -18,7 +18,7 @@ const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const SInterface_1 = __importDefault(require("../../class/SInterface"));
 class SExtractStreamActionInterface extends SInterface_1.default {
 }
-SExtractStreamActionInterface.definitionObj = {};
+SExtractStreamActionInterface.definition = {};
 module.exports = (_a = class SExtractStreamAction extends SActionsStreamAction_1.default {
         /**
          * @name            constructor
@@ -34,7 +34,7 @@ module.exports = (_a = class SExtractStreamAction extends SActionsStreamAction_1
                 id: 'actionStream.action.extract',
                 sourceProp: 'data'
             }, settings));
-            this.constructor.definitionObj = {
+            this.constructor.definition = {
                 [this._settings.sourceProp]: {
                     type: 'String',
                     required: true

@@ -1,6 +1,7 @@
 // @ts-nocheck
+// @shared
 
-import __parseTypeDefinitionString from '../validation/utils/parseTypeDefinitionString';
+import __parseTypeDefinitionString from '../parse/parseTypeDefinitionString';
 import __toString from '../string/toString';
 import __isClass from './class';
 import __isInt from './integer';
@@ -55,26 +56,26 @@ function ofType(value, argTypeDefinition) {
     $issues: ['type']
   };
   for (let i = 0; i < definitionArray.length; i++) {
-    const definitionObj = definitionArray[i];
+    const definition = definitionArray[i];
 
-    // if ((value === null || value === undefined) && definitionObj.type) {
+    // if ((value === null || value === undefined) && definition.type) {
     //   issueObj.received.type = __typeof(value);
     // }
 
     // Array | Object
-    if (definitionObj.type === 'Array' || definitionObj.type === 'Object') {
+    if (definition.type === 'Array' || definition.type === 'Object') {
       // Array
-      if (definitionObj.type === 'Array') {
+      if (definition.type === 'Array') {
         // make sure the value is an array
-        if (typeOfValue === 'Array' && !definitionObj.of) return true;
+        if (typeOfValue === 'Array' && !definition.of) return true;
 
         // Object
-      } else if (definitionObj.type === 'Object') {
-        if (typeOfValue === 'Object' && !definitionObj.of) return true;
+      } else if (definition.type === 'Object') {
+        if (typeOfValue === 'Object' && !definition.of) return true;
       }
 
       if (
-        definitionObj.of &&
+        definition.of &&
         (Array.isArray(value) || typeof value === 'object')
       ) {
         const loopOn = Array.isArray(value)
@@ -85,7 +86,7 @@ function ofType(value, argTypeDefinition) {
         const receivedTypes = [];
         loopOn.forEach((valueIndex) => {
           const valueToCheck = value[valueIndex];
-          if (ofType(valueToCheck, definitionObj.of) !== true) {
+          if (ofType(valueToCheck, definition.of) !== true) {
             checkValuesResult = false;
           }
           const typeString = __typeof(valueToCheck);
@@ -101,36 +102,36 @@ function ofType(value, argTypeDefinition) {
     }
 
     // Class
-    else if (definitionObj.type === 'Class') {
+    else if (definition.type === 'Class') {
       if (__isClass(value)) return true;
     }
 
     // Integer
-    else if (definitionObj.type === 'Int' || definitionObj.type === 'Integer') {
+    else if (definition.type === 'Int' || definition.type === 'Integer') {
       if (__isInt(value)) return true;
     }
 
     // check default types
     else if (
       ['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(
-        definitionObj.type
+        definition.type
       ) !== -1
     ) {
-      if (definitionObj.type === 'Number') {
+      if (definition.type === 'Number') {
         const type = typeOfValue;
         if (type === 'Number' || type === 'Integer') return true;
       } else {
-        if (typeOfValue === definitionObj.type) return true;
+        if (typeOfValue === definition.type) return true;
       }
     }
 
     // check for "custom" types
     else if (__isClass(value) && value.name) {
-      if (__typeof(value) === definitionObj.type) return true;
+      if (__typeof(value) === definition.type) return true;
       const classesStack = __getExtendsStack(value);
-      if (classesStack.indexOf(definitionObj.type) !== -1) return true;
+      if (classesStack.indexOf(definition.type) !== -1) return true;
     } else if (value && value.constructor && value.constructor.name) {
-      if (definitionObj.type === value.constructor.name) return true;
+      if (definition.type === value.constructor.name) return true;
     }
   }
 

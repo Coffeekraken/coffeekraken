@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __deepMerge from '../../object/deepMerge';
 import __consoleHtmlPreset from '../htmlPresets/console';
@@ -134,4 +135,4 @@ export = class SLogConsoleAdapter {
       resolve();
     });
   }
-}
+};

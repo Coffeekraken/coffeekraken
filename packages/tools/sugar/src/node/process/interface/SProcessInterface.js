@@ -8,7 +8,7 @@ const SInterface_1 = __importDefault(require("../../class/SInterface"));
 module.exports = (_a = class SProcessInterface extends SInterface_1.default {
     },
     // static extendsArray = ['SProcess', 'SPromise'];
-    _a.definitionObj = {
+    _a.definition = {
         id: {
             type: 'String',
             required: true

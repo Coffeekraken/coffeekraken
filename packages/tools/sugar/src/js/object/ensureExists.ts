@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __get from './get';
 import __set from './set';

@@ -1,12 +1,12 @@
 "use strict";
 // @ts-nocheck
+// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const deepize_1 = __importDefault(require("../object/deepize"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-const toString_1 = __importDefault(require("../string/toString"));
-const validateObject_1 = __importDefault(require("../validation/object/validateObject"));
+const SDescriptor_1 = __importDefault(require("../descriptor/SDescriptor"));
 /**
  * @name                completeArgsObject
  * @namespace          sugar.js.cli
@@ -18,8 +18,9 @@ const validateObject_1 = __importDefault(require("../validation/object/validateO
  *
  * @param             {Object}            argsObj         The arguments object to complete
  * @param             {Object}            [settings={}]       An object of settings to configure your process:
- * - definitionObj ({}) {Object}: Specify a definitionObj to use
+ * - definition ({}) {Object}: Specify a definition to use
  * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
+ * - descriptorSettings   ({})  {Object}: Specify some settings to pass to the SDescriptor instance used to validate the object
  * @return            {Object}                            The completed arguments object
  *
  * @todo      interface
@@ -35,22 +36,30 @@ const validateObject_1 = __importDefault(require("../validation/object/validateO
 function completeArgsObject(argsObj, settings = {}) {
     argsObj = Object.assign({}, argsObj);
     settings = deepMerge_1.default({
-        definitionObj: {},
-        throw: true
+        definition: {},
+        throw: true,
+        descriptorSettings: {}
     }, settings);
     // loop on all the arguments
-    Object.keys(settings.definitionObj).forEach((argString) => {
-        const argDefinitionObj = settings.definitionObj[argString];
+    Object.keys(settings.definition).forEach((argString) => {
+        const argDefinition = settings.definition[argString];
         // check if we have an argument passed in the properties
         if (argsObj[argString] === undefined &&
-            argDefinitionObj.default !== undefined) {
-            argsObj[argString] = argDefinitionObj.default;
+            argDefinition.default !== undefined) {
+            argsObj[argString] = argDefinition.default;
         }
     });
     // make sure all is ok
-    const argsValidationResult = validateObject_1.default(argsObj, settings.definitionObj, settings);
+    const argsValidationResult = SDescriptor_1.default
+        .generate({
+        name: 'completeArgsObject',
+        rules: settings.definition,
+        type: 'Object',
+        settings: settings.descriptorSettings
+    })
+        .apply(argsObj);
     if (argsValidationResult !== true && settings.throw)
-        throw new Error(toString_1.default(argsValidationResult));
+        throw new Error(argsValidationResult.toString());
     else if (argsValidationResult !== true)
         return argsValidationResult;
     // return the argsObj

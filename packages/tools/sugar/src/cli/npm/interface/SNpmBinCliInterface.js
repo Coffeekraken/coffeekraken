@@ -7,7 +7,7 @@ var _a;
 const SInterface_1 = __importDefault(require("../../../node/class/SInterface"));
 module.exports = (_a = class SNpmBinInterface extends SInterface_1.default {
     },
-    _a.definitionObj = {
+    _a.definition = {
         action: {
             type: 'String',
             required: true,

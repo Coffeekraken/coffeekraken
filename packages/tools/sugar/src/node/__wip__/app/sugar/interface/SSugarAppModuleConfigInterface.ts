@@ -21,7 +21,7 @@ const __sugarConfig = require('../../../config/sugar');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SSugarAppModuleConfigInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     id: {
       type: 'String',
       description:

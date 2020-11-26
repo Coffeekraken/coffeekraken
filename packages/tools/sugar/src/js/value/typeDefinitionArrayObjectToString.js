@@ -51,10 +51,10 @@
         var parts = [];
         if (!Array.isArray(typeDefinitionArrayObj))
             typeDefinitionArrayObj = [typeDefinitionArrayObj];
-        typeDefinitionArrayObj.forEach(function (definitionObj) {
-            var part = definitionObj.type;
-            if (definitionObj.of) {
-                var ofString = typeDefinitionArrayObjectToString(definitionObj.of);
+        typeDefinitionArrayObj.forEach(function (definition) {
+            var part = definition.type;
+            if (definition.of) {
+                var ofString = typeDefinitionArrayObjectToString(definition.of);
                 part += "<" + ofString + ">";
             }
             parts.push(part);

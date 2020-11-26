@@ -26,11 +26,13 @@
  */
 function isPortFree(port) {
   return new Promise(async (resolve) => {
-    const server = await import('http');
+    const server = require('http');
     server
       .createServer()
       .listen(port, () => {
-        server.close();
+        try {
+          server.close();
+        } catch (e) {}
         resolve(true);
       })
       .on('error', () => {

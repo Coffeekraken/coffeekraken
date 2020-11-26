@@ -12,7 +12,7 @@ import __includes from '../../node/string/includes';
 
 export = async (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
-    definitionObj: {
+    definition: {
       source: {
         type: 'String',
         alias: 's',

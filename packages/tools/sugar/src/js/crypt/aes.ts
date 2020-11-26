@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import AES from 'crypto-js/aes';
 import utf8 from 'crypto-js/enc-utf8';

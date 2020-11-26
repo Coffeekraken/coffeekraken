@@ -36,7 +36,7 @@ exports.default = (stringArgs = '') => __awaiter(void 0, void 0, void 0, functio
         rootPath = finalFile.filename.split('/').slice(0, -1).join('/');
     }
     const args = parseArgs_1.default(stringArgs, {
-        definitionObj: {
+        definition: {
             language: {
                 type: 'String',
                 alias: 'l',

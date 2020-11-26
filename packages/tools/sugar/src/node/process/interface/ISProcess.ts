@@ -31,7 +31,7 @@ export interface ISProcessSettings {
   name?: string;
   output?: ISProcessOutput;
   runAsChild?: boolean;
-  definitionObj?: Record<string, unknown>;
+  definition?: Record<string, unknown>;
   processPath?: string | null;
   notifications?: ISProcessNotificationSettings;
   env?: Record<string, unknown>;

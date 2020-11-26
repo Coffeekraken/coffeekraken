@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name              getMethods
  * @namespace           sugar.js.class

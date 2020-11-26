@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __deepMerge from '../../object/deepMerge';
 import __isNode from '../../is/node';
@@ -161,4 +162,4 @@ export = class SLogMailAdapter {
       }
     });
   }
-}
+};

@@ -23,7 +23,7 @@ const writeJsonSync_1 = __importDefault(require("../../fs/writeJsonSync"));
 const SInterface_1 = __importDefault(require("../../class/SInterface"));
 class SFsCacheStreamActionInterface extends SInterface_1.default {
 }
-SFsCacheStreamActionInterface.definitionObj = {
+SFsCacheStreamActionInterface.definition = {
     input: {
         type: 'String',
         required: true

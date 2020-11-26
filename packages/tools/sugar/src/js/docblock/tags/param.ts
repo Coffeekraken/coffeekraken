@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __parse from '../../string/parse';
 import __upperFirst from '../../string/upperFirst';

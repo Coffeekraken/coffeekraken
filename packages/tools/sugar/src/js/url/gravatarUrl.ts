@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __md5 from '../crypt/md5';
 

@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 /**
  * @name                              flatten
@@ -28,11 +29,7 @@
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function flatten(
-  object,
-  separation = '.',
-  flattenArrays = false
-) {
+function flatten(object, separation = '.', flattenArrays = false) {
   const toReturn = {};
 
   for (const i in object) {

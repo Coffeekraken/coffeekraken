@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __isPlainObject from '../is/plainObject';
 import __isEqual from 'is-equal';

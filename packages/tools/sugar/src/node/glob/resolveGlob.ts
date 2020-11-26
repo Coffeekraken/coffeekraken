@@ -3,7 +3,7 @@
 import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';
 import __glob from 'glob';
-import __SFsFile from '../fs/SFsFile';
+import __SFile from '../fs/SFile';
 import __extractGlob from './extractGlob';
 import __isGlob from '../is/glob';
 import __isPath from '../is/path';
@@ -19,7 +19,7 @@ import __isDirectory from '../is/directory';
  * @beta
  *
  * This function simply resolve the passed glob pattern(s) and resolve his promise
- * with an Array of SFsFile instances to work with
+ * with an Array of SFile instances to work with
  *
  * @param       {String|Array<String>}          globs        The glob pattern(s) to search files for
  * @param       {Object}            [settings={}]           An object of settings to configure your glob process
@@ -27,6 +27,7 @@ import __isDirectory from '../is/directory';
  *
  * @setting     {String}        rootDir                     The root directory where to start the glob search process
  * @setting     {Object}        ...glob                     All the glob (https://www.npmjs.com/package/glob) options are supported
+ * @setting     {RegExp}        [contentRegex=null]         Specify a regex that will be used to filter the results by searching in the content
  *
  * @todo      interface
  * @todo      doc
@@ -48,7 +49,8 @@ function resolveGlob(globs, settings = {}) {
         {
           rootDir: settings.cwd || process.cwd(),
           symlinks: true,
-          nodir: true
+          nodir: true,
+          contentRegex: null
         },
         settings
       );
@@ -62,7 +64,7 @@ function resolveGlob(globs, settings = {}) {
 
         let rootDir = settings.rootDir,
           globPattern,
-          searchReg;
+          searchReg = settings.contentRegex;
 
         const splits = glob.split(':').map((split) => {
           return split.replace(`${rootDir}/`, '').replace(rootDir, '');
@@ -96,16 +98,19 @@ function resolveGlob(globs, settings = {}) {
           pathes = pathes.filter((path) => {
             if (__isDirectory(path)) return false;
             const content = __fs.readFileSync(path, 'utf8');
-            if (searchReg.test(content)) return true;
+            const matches = content.match(searchReg);
+            if (matches) {
+              return true;
+            }
             return false;
           });
         }
 
         pathes.forEach((path) => {
-          const sFsFile = new __SFsFile(path, {
+          const sFile = new __SFile(path, {
             rootDir
           });
-          filesArray.push(sFsFile);
+          filesArray.push(sFile);
         });
       }
 

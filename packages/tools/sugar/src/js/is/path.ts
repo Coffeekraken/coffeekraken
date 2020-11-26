@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __isValidPath from 'is-valid-path';
 

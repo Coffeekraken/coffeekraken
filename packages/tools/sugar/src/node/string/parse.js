@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 module.exports = (value) => {
     if (typeof value !== 'string')
         return value;

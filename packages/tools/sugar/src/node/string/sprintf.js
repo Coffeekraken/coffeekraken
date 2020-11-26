@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 const sprintf_js_1 = require("sprintf-js");
 /**
  * @name        sprintf

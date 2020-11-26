@@ -12,7 +12,7 @@ import __writeJsonSync from '../../fs/writeJsonSync';
 import __SInterface from '../../class/SInterface';
 
 class SExtractDocblocksIntoFilesInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     outputStack: {
       type: 'Object<String>',
       required: true
@@ -46,7 +46,7 @@ class SExtractDocblocksIntoFilesInterface extends __SInterface {
  */
 export = class SExtractDocblocksIntoFiles extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            definition
    * @type             Object
    * @static
    *
@@ -75,8 +75,8 @@ export = class SExtractDocblocksIntoFiles extends __SActionsStreamAction {
         settings
       )
     );
-    this.constructor.definitionObj = {
-      ...this.constructor.definitionObj,
+    this.constructor.definition = {
+      ...this.constructor.definition,
       [this._settings.sourceProp]: {
         type: 'String',
         required: true
@@ -133,4 +133,4 @@ export = class SExtractDocblocksIntoFiles extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-}
+};

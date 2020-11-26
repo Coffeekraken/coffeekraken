@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __convert from '../time/convert';
 
@@ -195,4 +196,4 @@ export = class SRequestConfig {
     // set the parameters
     Object.assign(this, params);
   }
-}
+};

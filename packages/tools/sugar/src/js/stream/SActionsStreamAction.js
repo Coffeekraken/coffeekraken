@@ -21,13 +21,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../object/deepMerge", "../promise/SPromise", "../validation/object/validateDefinitionObject"], factory);
+        define(["require", "exports", "../object/deepMerge", "../promise/SPromise"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SPromise_1 = __importDefault(require("../promise/SPromise"));
-    var validateDefinitionObject_1 = __importDefault(require("../validation/object/validateDefinitionObject"));
     return /** @class */ (function (_super) {
         __extends(SActionStreamAction, _super);
         /**
@@ -83,14 +82,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             _this._registeredCallbacks = [];
             if (!_this._settings.id)
                 _this._settings.id = _this.constructor.name.toLowerCase();
-            // check the definition object
-            if (_this.constructor.interface) {
-                setTimeout(function () {
-                    validateDefinitionObject_1.default(_this.constructor.interface.definitionObj, {
-                        name: _this.constructor.name + ".definitionObj"
-                    });
-                });
-            }
             return _this;
         }
         Object.defineProperty(SActionStreamAction.prototype, "settings", {
@@ -119,8 +110,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @type          Function
          * @async
          *
-         * This method take the streamObj object passed to the "run" method and check it depending on the definitionObj
-         * specified in the static definitionObj property.
+         * This method take the streamObj object passed to the "run" method and check it depending on the definition
+         * specified in the static definition property.
          *
          * @param       {Object}        streamObj         The streamObj to check
          *
@@ -129,7 +120,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         SActionStreamAction.prototype.checkStreamObject = function (streamObj) {
             if (!this.constructor.interface)
                 return true;
-            // validate the streamObj depending on the static definitionObj property
+            // validate the streamObj depending on the static definition property
             if (this.constructor.interface) {
                 streamObj = this.constructor.interface.applyAndComplete(streamObj);
             }

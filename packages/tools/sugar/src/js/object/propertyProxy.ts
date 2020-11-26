@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import _get from 'lodash/get';
 /**
@@ -41,12 +42,7 @@ import _get from 'lodash/get';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function propertyProxy(
-  obj,
-  property,
-  descriptor,
-  applySetterAtStart = false
-) {
+function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
   // handle property like "something.cool"
   const objPath = property.split('.').slice(0, -1).join('.');
   if (objPath) {

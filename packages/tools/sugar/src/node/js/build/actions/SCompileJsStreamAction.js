@@ -65,6 +65,6 @@ module.exports = (_a = class SCompileJsStreamAction extends SActionsStreamAction
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _a.interface = SBuildJsInterface_1.default.extends({
-        definitionObj: {}
+        definition: {}
     }),
     _a);

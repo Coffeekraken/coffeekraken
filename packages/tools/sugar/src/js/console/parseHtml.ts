@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __replaceTags from '../html/replaceTags';
 import __chalk from 'chalk';

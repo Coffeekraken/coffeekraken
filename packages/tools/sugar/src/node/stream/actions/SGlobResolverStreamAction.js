@@ -21,7 +21,7 @@ const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const SInterface_1 = __importDefault(require("../../class/SInterface"));
 class SGlobResolverStreamActionInterface extends SInterface_1.default {
 }
-SGlobResolverStreamActionInterface.definitionObj = {
+SGlobResolverStreamActionInterface.definition = {
     globProperty: {
         type: 'String',
         required: true

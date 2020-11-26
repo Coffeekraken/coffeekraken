@@ -7,7 +7,7 @@ import __output from '../../node/process/output';
 
 export default (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
-    definitionObj: __SBuildConfigCli.interface.definitionObj
+    definition: __SBuildConfigCli.interface.definition
   });
   const stream = new __SBuildConfigActionsStream({});
   const proc = stream.start(args);

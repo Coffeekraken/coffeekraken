@@ -7,7 +7,7 @@ var _a;
 const SProcess_1 = __importDefault(require("../../process/SProcess"));
 const chokidar_1 = __importDefault(require("chokidar"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
-const SFsFile_1 = __importDefault(require("../../fs/SFsFile"));
+const SFile_1 = __importDefault(require("../../fs/SFile"));
 const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
 const SFsDeamonInterface_1 = __importDefault(require("./interface/SFsDeamonInterface"));
 module.exports = (_a = class SFsDeamonProcess extends SProcess_1.default {
@@ -116,7 +116,7 @@ module.exports = (_a = class SFsDeamonProcess extends SProcess_1.default {
                 file.update();
             }
             else {
-                file = new SFsFile_1.default(filepath);
+                file = new SFile_1.default(filepath);
                 this._filesCache[filepath] = file;
             }
             return file;

@@ -23,7 +23,7 @@ import __deepMerge from '../../object/deepMerge';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class STestInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     input: {
       type: 'String',
       alias: 'i',
@@ -38,4 +38,4 @@ export = class STestInterface extends __SInterface {
       level: 1
     }
   };
-}
+};

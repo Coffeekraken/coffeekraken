@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __deepMege from '../object/deepMerge';
 import __map from '../object/map';

@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import md5 from 'crypto-js/md5';
 import toString from '../string/toString';

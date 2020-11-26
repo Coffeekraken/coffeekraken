@@ -72,7 +72,7 @@
         argumentsNames.forEach(function (argName, i) {
             // get the argument description object
             var descriptionObj = __parseArgs(descriptor[argName], {
-                definitionObj: {
+                definition: {
                     types: '["String","Array"] -t --types',
                     values: 'Array -v --values',
                     of: 'Array -o --of /[a-zA-Z]+,?/ "Number,BigInt,String,Boolean,Null,Undefined,Object,Symbol,Function,Array"',

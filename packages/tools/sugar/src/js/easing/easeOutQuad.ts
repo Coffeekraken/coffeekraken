@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 /**
  * @name      easeOutQuad
@@ -18,7 +19,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function ease (t) {
+function ease(t) {
   return t * (2 - t);
 }
 export = ease;

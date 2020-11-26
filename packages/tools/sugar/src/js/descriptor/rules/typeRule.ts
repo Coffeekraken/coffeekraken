@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __ofType from '../../is/ofType';
 import {

@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __deepMerge from '../object/deepMerge';
 import __SLogConsoleAdapter from './adapters/SLogConsoleAdapter';
@@ -89,7 +90,7 @@ export = class SLog {
     // ensure every adapters are a class instance
     Object.keys(this._settings.adapters).forEach(async (adapterName) => {
       if (typeof this._settings.adapters[adapterName] === 'string') {
-        const cls = await import(this._settings.adapters[adapterName]);
+        const cls = require(this._settings.adapters[adapterName]);
         this._settings.adapters[adapterName] = new cls();
       }
     });
@@ -339,4 +340,4 @@ export = class SLog {
     // call the internal _log method and return his result
     return this._log(...args, 'trace');
   }
-}
+};

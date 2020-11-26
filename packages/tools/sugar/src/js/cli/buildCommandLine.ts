@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __toString from '../string/toString';
 import __argsToString from './argsToString';
@@ -17,7 +18,7 @@ import __deepMerge from '../object/deepMerge';
  * A special token called "[arguments]" is needed if you want the passed arguments to be integrated to the builded command line.
  *
  * @param       {String}      command         The tokenized command line to use as base
- * @param       {Object}      definitionObj   The definition object of the command to launch
+ * @param       {Object}      definition   The definition object of the command to launch
  * @param       {Object}      [args={}]       An optional arguments/values object to override definition default value
  * @param       {Object}      [settings={}]     An object of settings to configure your command line buildine process:
  * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
@@ -63,14 +64,14 @@ import __deepMerge from '../object/deepMerge';
 function buildCommandLine(command, args = {}, settings = {}) {
   settings = __deepMerge(
     {
-      definitionObj: null,
+      definition: null,
       includeAllArgs: true,
       alias: true
     },
     settings
   );
 
-  const definitionObj = Object.assign({}, settings.definitionObj);
+  const definition = Object.assign({}, settings.definition);
   // get all the tokens
   const tokens = command.match(/\%[a-zA-Z0-9-_]+/gm) || [];
   tokens.forEach((token) => {
@@ -79,10 +80,10 @@ function buildCommandLine(command, args = {}, settings = {}) {
     const tokenValue =
       args && args[tokenName] !== undefined
         ? args[tokenName]
-        : definitionObj[tokenName]
-        ? definitionObj[tokenName].default
+        : definition[tokenName]
+        ? definition[tokenName].default
         : undefined;
-    delete definitionObj[tokenName];
+    delete definition[tokenName];
     if (tokenValue === undefined) {
       command = command.replace(token, '');
       return;

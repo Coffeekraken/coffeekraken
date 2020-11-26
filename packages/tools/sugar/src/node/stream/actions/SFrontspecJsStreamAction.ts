@@ -6,7 +6,7 @@ import __SInterface from '../../class/SInterface';
 import __SFrontspec from '../../doc/SFrontspec';
 
 class SFrontspecJsStreamActionInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     frontspec: {
       type: 'Boolean|Object'
     }
@@ -64,7 +64,7 @@ export = class SFrontspecJsStreamAction extends __SActionsStreamAction {
         settings
       )
     );
-    this.constructor.definitionObj = {
+    this.constructor.definition = {
       [this._settings.sourceProp]: {
         type: 'String',
         required: true
@@ -149,4 +149,4 @@ export = class SFrontspecJsStreamAction extends __SActionsStreamAction {
 
     return frontspecCodeString;
   }
-}
+};

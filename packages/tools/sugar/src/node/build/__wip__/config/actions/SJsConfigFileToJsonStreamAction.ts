@@ -25,7 +25,7 @@ const { stream } = require('globby');
  */
 module.exports = class SJsConfigFileToJsonStreamAction extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            definition
    * @type             Object
    * @static
    *
@@ -33,7 +33,7 @@ module.exports = class SJsConfigFileToJsonStreamAction extends __SActionsStreamA
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
+  static definition = {
     input: {
       type: 'String',
       required: true

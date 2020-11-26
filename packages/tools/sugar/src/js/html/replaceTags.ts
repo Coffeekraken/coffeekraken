@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __toString from '../string/toString';
 

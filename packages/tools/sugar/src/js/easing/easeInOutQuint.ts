@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 /**
  * @name      easeInOutQuint
@@ -18,7 +19,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function ease (t) {
+function ease(t) {
   return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;
 }
 export = ease;

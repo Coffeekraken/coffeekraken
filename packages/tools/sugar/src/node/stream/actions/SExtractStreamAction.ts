@@ -10,7 +10,7 @@ import __writeJsonSync from '../../fs/writeJsonSync';
 import __SInterface from '../../class/SInterface';
 
 class SExtractStreamActionInterface extends __SInterface {
-  static definitionObj = {};
+  static definition = {};
 }
 
 /**
@@ -65,7 +65,7 @@ export = class SExtractStreamAction extends __SActionsStreamAction {
         settings
       )
     );
-    this.constructor.definitionObj = {
+    this.constructor.definition = {
       [this._settings.sourceProp]: {
         type: 'String',
         required: true
@@ -95,4 +95,4 @@ export = class SExtractStreamAction extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-}
+};

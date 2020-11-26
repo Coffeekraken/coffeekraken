@@ -24,7 +24,7 @@ import __SDeamonInterface from '../../interface/SDeamonInterface';
 export = class SFsDeamonInterface extends __SInterface {
   static implementsArray = [__SDeamonInterface];
 
-  static definitionObj = {
+  static definition = {
     watch: {
       type: 'String',
       alias: 'i',
@@ -33,4 +33,4 @@ export = class SFsDeamonInterface extends __SInterface {
       level: 1
     }
   };
-}
+};

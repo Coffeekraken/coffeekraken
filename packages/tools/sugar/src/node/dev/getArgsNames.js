@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name                            getArgsNames
  * @namespace           sugar.js.dev

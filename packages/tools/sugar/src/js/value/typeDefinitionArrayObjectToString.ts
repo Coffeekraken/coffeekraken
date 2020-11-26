@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 /**
  * @name          typeDefinitionArrayObjectToString
@@ -38,18 +39,16 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function typeDefinitionArrayObjectToString(
-  typeDefinitionArrayObj
-) {
+function typeDefinitionArrayObjectToString(typeDefinitionArrayObj) {
   const parts = [];
 
   if (!Array.isArray(typeDefinitionArrayObj))
     typeDefinitionArrayObj = [typeDefinitionArrayObj];
 
-  typeDefinitionArrayObj.forEach((definitionObj) => {
-    let part = definitionObj.type;
-    if (definitionObj.of) {
-      const ofString = typeDefinitionArrayObjectToString(definitionObj.of);
+  typeDefinitionArrayObj.forEach((definition) => {
+    let part = definition.type;
+    if (definition.of) {
+      const ofString = typeDefinitionArrayObjectToString(definition.of);
       part += `<${ofString}>`;
     }
     parts.push(part);

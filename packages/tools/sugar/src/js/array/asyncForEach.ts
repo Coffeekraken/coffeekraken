@@ -1,9 +1,11 @@
 // @ts-nocheck
+// @shared
 
 /**
  * @name                              asyncForEach
  * @namespace           sugar.js.array
  * @type                              Function
+ * @beta
  *
  * Allow to make some async foreach on your arrays
  *
@@ -37,4 +39,4 @@ export = async function asyncForEach(
     }
     resolve();
   });
-}
+};

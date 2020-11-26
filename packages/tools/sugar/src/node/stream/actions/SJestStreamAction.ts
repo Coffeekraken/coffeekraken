@@ -11,7 +11,7 @@ import __STestJestCli from '../../test/jest/STestJestCli';
 import __STestJestProcess from '../../test/jest/STestJestProcessManager';
 
 class SJestStreamActionInterface extends __SInterface {
-  static definitionObj = {};
+  static definition = {};
 }
 
 /**
@@ -100,4 +100,4 @@ export = class SJestStreamAction extends __SActionsStreamAction {
       // })
     });
   }
-}
+};

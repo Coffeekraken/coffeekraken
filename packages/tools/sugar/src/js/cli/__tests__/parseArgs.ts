@@ -4,7 +4,7 @@ module.exports = (__parseArgs) => {
       const args = __parseArgs(
         '-n "node" -i "/Users/olivierbossel/Home/web/coffeekraken/coffeekraken/toolkits/sugar/src/node/**/!(__tests__)/!(*.test).js" -c "jest %testfile %arguments"',
         {
-          definitionObj: {
+          definition: {
             name: {
               type: 'String',
               description:
@@ -44,7 +44,7 @@ module.exports = (__parseArgs) => {
       const args = __parseArgs(
         'hello -i #blop -w 10 yop "hello world" -b --hello.world Nelson --help "coco yep"',
         {
-          definitionObj: {
+          definition: {
             action: {
               type: 'String',
               description: 'Something',

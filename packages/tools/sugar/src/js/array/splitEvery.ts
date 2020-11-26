@@ -1,9 +1,11 @@
 // @ts-nocheck
+// @shared
 
 /**
  * @name                                splitEvery
  * @namespace           sugar.js.array
  * @type                                Function
+ * @beta
  *
  * Split an array every N items
  *

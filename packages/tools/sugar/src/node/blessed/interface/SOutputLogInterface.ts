@@ -20,7 +20,7 @@ import __SInterface from '../../class/SInterface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SOutputLogInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     value: {
       // type: 'Function',
       required: true,
@@ -55,4 +55,4 @@ export = class SOutputLogInterface extends __SInterface {
       default: 1
     }
   };
-}
+};

@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 /**
  * @name            parseAuthorString
  * @namespace       sugar.js.npm

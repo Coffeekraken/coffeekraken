@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __deepMerge from '../object/deepMerge';
 import __convert from './convert';
@@ -125,4 +126,4 @@ export = class SDuration {
 
     return settings.suffix ? durationConverted : parseFloat(durationConverted);
   }
-}
+};

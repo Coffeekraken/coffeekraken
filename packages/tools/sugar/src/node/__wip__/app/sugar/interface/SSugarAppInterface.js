@@ -21,15 +21,15 @@ const __sugarConfig = require('../../../config/sugar');
  */
 class SSugarAppInterface extends __SInterface {
 }
-SSugarAppInterface.definitionObj = {};
+SSugarAppInterface.definition = {};
 const modules = __sugarConfig('sugar-app.modules');
 Object.keys(modules).forEach((moduleId) => {
     const moduleObj = modules[moduleId];
     const interfacePath = moduleObj.interface;
     if (interfacePath) {
         const ModuleInterface = require(interfacePath);
-        Object.keys(ModuleInterface.definitionObj).forEach((argName) => {
-            SSugarAppInterface.definitionObj[`modules.${moduleId}.${argName}`] = Object.assign({}, ModuleInterface.definitionObj[argName]);
+        Object.keys(ModuleInterface.definition).forEach((argName) => {
+            SSugarAppInterface.definition[`modules.${moduleId}.${argName}`] = Object.assign({}, ModuleInterface.definition[argName]);
         });
     }
 });

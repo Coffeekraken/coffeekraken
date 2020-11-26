@@ -26,9 +26,9 @@ import __SCliInterface from '../../cli/interface/SCliInterface';
 export = class SAppCommandInterface extends __SInterface {
   // static implementsArray = [__SCliInterface];
 
-  // static definitionObj = {};
+  // static definition = {};
 
   static title = 'SApp Command Interface';
   static description =
     'This interface represent the minimum requirements that MUST have the instances passed in an SApp based application';
-}
+};

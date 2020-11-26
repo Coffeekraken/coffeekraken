@@ -21,7 +21,7 @@ import __sugarConfig from '../../../config/sugar';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SBuildJsCliInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     input: {
       type: 'String',
       default: __sugarConfig('build.js.input')
@@ -109,4 +109,4 @@ export = class SBuildJsCliInterface extends __SInterface {
       default: __sugarConfig('build.js.mainFields')
     }
   };
-}
+};

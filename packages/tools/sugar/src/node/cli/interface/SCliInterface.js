@@ -7,7 +7,7 @@ var _a;
 const SInterface_1 = __importDefault(require("../../class/SInterface"));
 module.exports = (_a = class SCliInterface extends SInterface_1.default {
     },
-    _a.definitionObj = {
+    _a.definition = {
         interface: {
             type: 'SInterface',
             required: true,

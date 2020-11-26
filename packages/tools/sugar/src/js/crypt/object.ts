@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __encodeObject from 'object-encode';
 

@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';
@@ -319,4 +320,4 @@ export = class SDocblockOutput {
       }
     );
   }
-}
+};

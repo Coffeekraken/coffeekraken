@@ -9,7 +9,7 @@ import __get from '../../object/get';
 import __SInterface from '../../class/SInterface';
 
 class SFsOutputStreamActionInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     outputStack: {
       type: 'Object',
       required: false
@@ -107,4 +107,4 @@ export = class SFsOutputStreamAction extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-}
+};

@@ -10,7 +10,7 @@ const sugar_1 = __importDefault(require("../../../config/sugar"));
 const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
 module.exports = (_a = class STestJestCliInterface extends SInterface_1.default {
     },
-    _a.definitionObj = deepMerge_1.default(STestInterface_1.default.definitionObj, {
+    _a.definition = deepMerge_1.default(STestInterface_1.default.definition, {
         input: {
             default: sugar_1.default('jest.cli.input')
         },

@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -8,7 +9,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../object/deepMerge", "../string/parse", "./completeArgsObject", "../string/unquote", "../validation/utils/parseTypeDefinitionString", "../is/ofType"], factory);
+        define(["require", "exports", "../object/deepMerge", "../string/parse", "./completeArgsObject", "../string/unquote", "../parse/parseTypeDefinitionString", "../is/ofType"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -16,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var parse_1 = __importDefault(require("../string/parse"));
     var completeArgsObject_1 = __importDefault(require("./completeArgsObject"));
     var unquote_1 = __importDefault(require("../string/unquote"));
-    var parseTypeDefinitionString_1 = __importDefault(require("../validation/utils/parseTypeDefinitionString"));
+    var parseTypeDefinitionString_1 = __importDefault(require("../parse/parseTypeDefinitionString"));
     var ofType_1 = __importDefault(require("../is/ofType"));
     /**
      * @name                        parseArgs
@@ -26,7 +27,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * Parse a string to find the provided arguments into the list and return a corresponding object.
      *
      * @param             {String}                    string                      The string to parse
-     * @param             {Object}                    definitionObj                   The arguments object description
+     * @param             {Object}                    definition                   The arguments object description
      * @param             {Object}                    [settings={}]               A settings object that configure how the string will be parsed. Here's the settings options:
      * @return            {Object}                                                The object of funded arguments and their values
      *
@@ -66,17 +67,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function parseArgsString(string, settings) {
         if (settings === void 0) { settings = {}; }
         settings = deepMerge_1.default({
-            definitionObj: null,
+            definition: null,
             defaultObj: {}
         }, settings);
         var argsObj = {};
-        var definitionObj = settings.definitionObj;
+        var definition = settings.definition;
         // process the passed string
         var stringArray = string.match(/(?:[^\s"]+|"[^"]*")+/gm) || [];
         stringArray = stringArray.map(function (item) {
             return unquote_1.default(item);
         });
-        if (!definitionObj) {
+        if (!definition) {
             var argsObj_1 = {};
             var currentArgName_1 = -1;
             var currentValue_1;
@@ -106,12 +107,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         stringArray = stringArray.filter(function (part) {
             var currentArg = part.replace(/^[-]{1,2}/, '');
             if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
-                var realArgName = getArgNameByAlias(currentArg, definitionObj) || currentArg;
+                var realArgName = getArgNameByAlias(currentArg, definition) || currentArg;
                 currentArgName = realArgName;
-                if (!definitionObj[realArgName]) {
-                    throw new Error("You try to pass an argument \"<yellow>" + realArgName + "</yellow>\" that is not supported. Here's the supported arguments:\n" + Object.keys(definitionObj)
+                if (!definition[realArgName]) {
+                    throw new Error("You try to pass an argument \"<yellow>" + realArgName + "</yellow>\" that is not supported. Here's the supported arguments:\n" + Object.keys(definition)
                         .map(function (argName) {
-                        var argDefinition = definitionObj[argName];
+                        var argDefinition = definition[argName];
                         var string = "<cyan>>" + argName + "</cyan>: --" + argName;
                         if (argDefinition.alias)
                             string += " (-" + argDefinition.alias + ")";
@@ -121,15 +122,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     })
                         .join('\n'));
                 }
-                currentArgDefinition = definitionObj[realArgName];
+                currentArgDefinition = definition[realArgName];
                 currentArgType = parseTypeDefinitionString_1.default(currentArgDefinition.type);
                 argsObj[realArgName] = true;
                 return false;
             }
             var lastArgObjKey = Object.keys(argsObj)[Object.keys(argsObj).length - 1];
             if (!lastArgObjKey) {
-                for (var key in definitionObj) {
-                    var obj = definitionObj[key];
+                for (var key in definition) {
+                    var obj = definition[key];
                     var value = parse_1.default(part);
                     if (ofType_1.default(value, obj.type)) {
                         if (obj.validator && !obj.validator(value)) {
@@ -171,7 +172,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             return true;
         });
         var finalObj = {};
-        for (var key in definitionObj) {
+        for (var key in definition) {
             var value = argsObj[key];
             if (value === undefined && settings.defaultObj[key] !== undefined) {
                 finalObj[key] = settings.defaultObj[key];
@@ -183,10 +184,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         }
         return completeArgsObject_1.default(finalObj, settings);
     }
-    function getArgNameByAlias(alias, definitionObj) {
-        var argNames = Object.keys(definitionObj);
+    function getArgNameByAlias(alias, definition) {
+        var argNames = Object.keys(definition);
         for (var i = 0; i < argNames.length; i++) {
-            var argDefinition = definitionObj[argNames[i]];
+            var argDefinition = definition[argNames[i]];
             if (argDefinition.alias && argDefinition.alias === alias)
                 return argNames[i];
         }

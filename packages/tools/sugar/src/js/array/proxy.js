@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -35,6 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name                  proxy
      * @namespace           sugar.js.array
      * @type                  Function
+     * @wip
      *
      * This function override the passed array prototype to intercept changes made through
      *

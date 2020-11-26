@@ -21,7 +21,7 @@ const __sugarConfig = require('../../../config/sugar');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SSugarAppInterface extends __SInterface {
-  static definitionObj = {};
+  static definition = {};
 }
 
 const modules = __sugarConfig('sugar-app.modules');
@@ -30,10 +30,10 @@ Object.keys(modules).forEach((moduleId) => {
   const interfacePath = moduleObj.interface;
   if (interfacePath) {
     const ModuleInterface = require(interfacePath);
-    Object.keys(ModuleInterface.definitionObj).forEach((argName) => {
-      SSugarAppInterface.definitionObj[
+    Object.keys(ModuleInterface.definition).forEach((argName) => {
+      SSugarAppInterface.definition[
         `modules.${moduleId}.${argName}`
-      ] = Object.assign({}, ModuleInterface.definitionObj[argName]);
+      ] = Object.assign({}, ModuleInterface.definition[argName]);
     });
   }
 });

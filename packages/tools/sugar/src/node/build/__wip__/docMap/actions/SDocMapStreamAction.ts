@@ -19,7 +19,7 @@ const __deepMerge = require('../../../object/deepMerge');
  */
 module.exports = class SDocMapStreamActions extends __SActionsStreamAction {
   /**
-   * @name            definitionObj
+   * @name            definition
    * @type             Object
    * @static
    *
@@ -27,7 +27,7 @@ module.exports = class SDocMapStreamActions extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definitionObj = {
+  static definition = {
     files: {
       type: 'Array<String>',
       required: true

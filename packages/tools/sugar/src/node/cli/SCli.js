@@ -95,7 +95,7 @@ class SCli extends SPromise_1.default {
         this._runningParamsObj = {};
         if (!this._settings.id)
             this._settings.id = this.constructor.name;
-        this._paramsObj = argsToObject_1.default(initialParams, this.interface.definitionObj);
+        this._paramsObj = argsToObject_1.default(initialParams, this.interface.definition);
         this._paramsObj = deepMerge_1.default(this._settings.defaultParams, this._paramsObj);
         if (!this._paramsObj.forceChildProcess || !this.command) {
             // run the process
@@ -111,7 +111,7 @@ class SCli extends SPromise_1.default {
             }
         }
         else {
-            const childProcessManager = new SChildProcessManager_1.default(this.command, Object.assign({ id: settings.id, definitionObj: this.interface.definitionObj, defaultParams: settings.defaultParams }, settings.childProcessSettings));
+            const childProcessManager = new SChildProcessManager_1.default(this.command, Object.assign({ id: settings.id, definition: this.interface.definition, defaultParams: settings.defaultParams }, settings.childProcessSettings));
             // childProcessManager.on('state', (state) => {
             //   this.state = state;
             // });
@@ -147,7 +147,7 @@ class SCli extends SPromise_1.default {
      */
     static parseArgs(cliString) {
         return parseArgs_1.default(cliString, {
-            definitionObj: this.interface.definitionObj
+            definition: this.interface.definition
         });
     }
     /**
@@ -173,7 +173,7 @@ class SCli extends SPromise_1.default {
      */
     get interface() {
         const int = this.constructor.interface;
-        int.definitionObj.forceChildProcess = {
+        int.definition.forceChildProcess = {
             type: 'Boolean',
             required: true,
             default: true,
@@ -226,7 +226,7 @@ class SCli extends SPromise_1.default {
         }
         settings = deepMerge_1.default(this._settings, settings);
         if (typeof paramsObj === 'string') {
-            paramsObj = argsToObject_1.default(paramsObj, this.interface.definitionObj);
+            paramsObj = argsToObject_1.default(paramsObj, this.interface.definition);
         }
         else if (!paramsObj) {
             paramsObj = Object.assign({}, this._paramsObj);
@@ -274,7 +274,7 @@ class SCli extends SPromise_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     toString(paramsObj = {}, includeAllParams = this._settings.includeAllParams) {
-        return buildCommandLine_1.default(this.command, this.interface.definitionObj, paramsObj, includeAllParams);
+        return buildCommandLine_1.default(this.command, this.interface.definition, paramsObj, includeAllParams);
     }
     /**
      * @name        isRunning

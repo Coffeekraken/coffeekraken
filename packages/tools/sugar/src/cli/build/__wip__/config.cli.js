@@ -10,7 +10,7 @@ const SBuildConfigActionsStream_1 = __importDefault(require("../../node/build/SB
 const output_1 = __importDefault(require("../../node/process/output"));
 exports.default = (stringArgs = '') => {
     const args = parseArgs_1.default(stringArgs, {
-        definitionObj: SBuildConfigCli_1.default.interface.definitionObj
+        definition: SBuildConfigCli_1.default.interface.definition
     });
     const stream = new SBuildConfigActionsStream_1.default({});
     const proc = stream.start(args);

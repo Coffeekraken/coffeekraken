@@ -6,7 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const glob_1 = __importDefault(require("glob"));
-const SFsFile_1 = __importDefault(require("../fs/SFsFile"));
+const SFile_1 = __importDefault(require("../fs/SFile"));
 const glob_2 = __importDefault(require("../is/glob"));
 const path_1 = __importDefault(require("../is/path"));
 const fs_1 = __importDefault(require("fs"));
@@ -20,7 +20,7 @@ const directory_1 = __importDefault(require("../is/directory"));
  * @beta
  *
  * This function simply resolve the passed glob pattern(s) and resolve his promise
- * with an Array of SFsFile instances to work with
+ * with an Array of SFile instances to work with
  *
  * @param       {String|Array<String>}          globs        The glob pattern(s) to search files for
  * @param       {Object}            [settings={}]           An object of settings to configure your glob process
@@ -28,6 +28,7 @@ const directory_1 = __importDefault(require("../is/directory"));
  *
  * @setting     {String}        rootDir                     The root directory where to start the glob search process
  * @setting     {Object}        ...glob                     All the glob (https://www.npmjs.com/package/glob) options are supported
+ * @setting     {RegExp}        [contentRegex=null]         Specify a regex that will be used to filter the results by searching in the content
  *
  * @todo      interface
  * @todo      doc
@@ -47,14 +48,15 @@ function resolveGlob(globs, settings = {}) {
         settings = deepMerge_1.default({
             rootDir: settings.cwd || process.cwd(),
             symlinks: true,
-            nodir: true
+            nodir: true,
+            contentRegex: null
         }, settings);
         let filesArray = [];
         if (!Array.isArray(globs))
             globs = [globs];
         for (let i = 0; i < globs.length; i++) {
             const glob = globs[i];
-            let rootDir = settings.rootDir, globPattern, searchReg;
+            let rootDir = settings.rootDir, globPattern, searchReg = settings.contentRegex;
             const splits = glob.split(':').map((split) => {
                 return split.replace(`${rootDir}/`, '').replace(rootDir, '');
             });
@@ -82,16 +84,18 @@ function resolveGlob(globs, settings = {}) {
                     if (directory_1.default(path))
                         return false;
                     const content = fs_1.default.readFileSync(path, 'utf8');
-                    if (searchReg.test(content))
+                    const matches = content.match(searchReg);
+                    if (matches) {
                         return true;
+                    }
                     return false;
                 });
             }
             pathes.forEach((path) => {
-                const sFsFile = new SFsFile_1.default(path, {
+                const sFile = new SFile_1.default(path, {
                     rootDir
                 });
-                filesArray.push(sFsFile);
+                filesArray.push(sFile);
             });
         }
         // resolve the promise

@@ -50,7 +50,7 @@ module.exports = (_a = class STestJestProcess extends SChildProcessManager_1.def
         //     const commandToRun =
         //       __buildCommandLine(
         //         `npx jest ${input}`,
-        //         __STestJestInterface.definitionObj,
+        //         __STestJestInterface.definition,
         //         argsObj
         //       ) + ' --forceExit --detectOpenHandles';
         //     const childProcess = new __SChildProcessManager(commandToRun, {});

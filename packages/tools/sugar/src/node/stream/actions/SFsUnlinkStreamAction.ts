@@ -6,7 +6,7 @@ import __deepMerge from '../../object/deepMerge';
 import __SInterface from '../../class/SInterface';
 
 class SFsUnlinkStreamActionInterface extends __SInterface {
-  static definitionObj = {
+  static definition = {
     unlink: {
       type: 'String',
       required: true
@@ -83,4 +83,4 @@ export = class SFsUnlinkStreamAction extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-}
+};

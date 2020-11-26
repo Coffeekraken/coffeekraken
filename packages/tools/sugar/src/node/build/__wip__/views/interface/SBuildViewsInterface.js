@@ -19,7 +19,7 @@ const __deepMerge = require('../../../object/deepMerge');
  */
 module.exports = (_a = class SBuildViewsInterface extends __SInterface {
     },
-    _a.definitionObj = __deepMerge(__SBuildInterface.definitionObj, {
+    _a.definition = __deepMerge(__SBuildInterface.definition, {
         input: {
             type: 'String',
             alias: 'i',

@@ -1,4 +1,5 @@
 // @ts-nocheck
+// @shared
 
 /**
  * @name                    rem2px

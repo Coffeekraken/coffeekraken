@@ -15,6 +15,7 @@ import __extractValues from '../object/extractValues';
 import __SOutputLogInterface from './interface/SOutputLogInterface';
 import __SOutputSourceInterface from './interface/SOutputSourceInterface';
 import __wait from '../time/wait';
+import __parseArgs from '../cli/parseArgs';
 
 /**
  * @name                  SOutput
@@ -241,16 +242,20 @@ export = class SOutput extends __SBlessedComponent {
             parsedLog.value &&
             typeof parsedLog.value === 'string'
           ) {
-            parsedLog = __SOutputLogInterface.applyAndComplete(parsedLog);
+            parsedLog = __SOutputLogInterface.apply(parsedLog);
             logsArray.push(parsedLog);
           } else if (typeof parsedLog === 'string') {
             if (parsedLog.includes(' -v ') || parsedLog.includes(' --value ')) {
-              const args = __SOutputLogInterface.parseAndComplete(parsedLog);
+              const args = __parseArgs(parsedLog, {
+                definition: __SOutputLogInterface.definition
+              });
+              __SOutputLogInterface.apply(args);
               logsArray.push(args);
             } else {
-              const args = __SOutputLogInterface.complete({
+              const args = {
                 value: parsedLog
-              });
+              };
+              __SOutputLogInterface.apply(args);
               logsArray.push(args);
             }
           } else {
@@ -267,7 +272,7 @@ export = class SOutput extends __SBlessedComponent {
         typeof data.value === 'string'
       ) {
         // apply the interface
-        data = __SOutputLogInterface.applyAndComplete(data);
+        __SOutputLogInterface.apply(data);
 
         const splitedLogs = data.value.split(/⠀/);
 
@@ -287,7 +292,10 @@ export = class SOutput extends __SBlessedComponent {
             });
           } else if (typeof parsedLog === 'string') {
             if (parsedLog.includes(' -v ') || parsedLog.includes(' --value ')) {
-              const args = __SOutputLogInterface.parseAndComplete(parsedLog);
+              const args = __parseArgs(parsedLog, {
+                definition: __SOutputLogInterface.definition
+              });
+              __SOutputLogInterface.apply(parsedLog);
               logsArray.push({
                 ...data,
                 ...args
@@ -950,4 +958,4 @@ export = class SOutput extends __SBlessedComponent {
 
     this.append(this.$logBox);
   }
-}
+};

@@ -42,6 +42,7 @@
   "homepage": "https://github.com/Coffeekraken/coffeekraken#readme",
   "dependencies": {
     "chokidar": "^3.4.3",
+    "find-up": "^5.0.0",
     "get-symlinks": "^3.0.1",
     "tsc-transpile-only": "0.0.3"
   },

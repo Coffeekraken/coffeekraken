@@ -14,6 +14,10 @@ export interface ISProcessObject {
   value: any;
 }
 
+export interface ISProcessLogObj {
+  value: any;
+}
+
 export interface ISProcessNotification {
   title: string;
   message: string;

@@ -9,13 +9,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../object/deepize", "../object/deepMerge", "../descriptor/SDescriptor"], factory);
+        define(["require", "exports", "../object/deepize", "../object/deepMerge"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var deepize_1 = __importDefault(require("../object/deepize"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
-    var SDescriptor_1 = __importDefault(require("../descriptor/SDescriptor"));
     /**
      * @name                completeArgsObject
      * @namespace          sugar.js.cli
@@ -59,19 +58,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 argsObj[argString] = argDefinition.default;
             }
         });
-        // make sure all is ok
-        var argsValidationResult = SDescriptor_1.default
-            .generate({
-            name: 'completeArgsObject',
-            rules: settings.definition,
-            type: 'Object',
-            settings: settings.descriptorSettings
-        })
-            .apply(argsObj);
-        if (argsValidationResult !== true && settings.throw)
-            throw new Error(argsValidationResult.toString());
-        else if (argsValidationResult !== true)
-            return argsValidationResult;
+        // // make sure all is ok
+        // const argsValidationResult = __SDescriptor
+        //   .generate({
+        //     name: 'completeArgsObject',
+        //     rules: settings.definition,
+        //     type: 'Object',
+        //     settings: settings.descriptorSettings
+        //   })
+        //   .apply(argsObj);
+        // if (argsValidationResult.hasIssues() && settings.throw)
+        //   throw new Error(argsValidationResult.toString());
+        // else if (argsValidationResult !== true) return argsValidationResult;
         // return the argsObj
         return deepize_1.default(argsObj);
     }

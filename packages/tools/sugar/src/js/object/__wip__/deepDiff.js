@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+// @shared
 var __diff = require('deep-diff').diff;
 var __set = require('../../../node/object/set');
 var __get = require('../../../node/object/get');

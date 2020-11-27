@@ -1,2 +1,2 @@
 const __get = require('../get');
-require('../_js/object/__tests__/get')(__get);
+require('../object/__tests__/get')(__get);

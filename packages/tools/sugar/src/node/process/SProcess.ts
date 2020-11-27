@@ -22,6 +22,8 @@ import __argsToString from '../cli/argsToString';
 import __toString from '../string/toString';
 import __copy from '../clipboard/copy';
 
+import { ISProcessLogObj } from './interface/ISProcess';
+
 /**
  * @name                SProcess
  * @namespace           sugar.node.process
@@ -223,7 +225,7 @@ export = class SProcess extends __SPromise {
     super(
       __deepMerge(
         {
-          output: {},
+          output: false,
           runAsChild: false,
           definition: {},
           processPath: null,
@@ -350,6 +352,21 @@ export = class SProcess extends __SPromise {
         });
       });
       return;
+    } else {
+      if (this._settings.output) {
+        if (__isClass(this._settings.output)) {
+          const outputInstance = new this._settings.output(
+            this,
+            this._settings.initialParams
+          );
+        } else {
+          const outputSettings =
+            typeof this._settings.output === 'object'
+              ? this._settings.output
+              : {};
+          __output(this, outputSettings);
+        }
+      }
     }
   }
 
@@ -444,6 +461,16 @@ export = class SProcess extends __SPromise {
 
     // save current process params
     this._params = Object.assign({}, paramsObj);
+
+    // apply the interface on the params
+    const interfaceRes = this.constructor.interface.apply(this._params, {
+      throwOnError: true
+    });
+    if (interfaceRes.hasIssues()) {
+      this.log({
+        value: interfaceRes.toString()
+      });
+    }
 
     // log a start message
     if (!__isChildProcess()) {
@@ -676,7 +703,7 @@ export = class SProcess extends __SPromise {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  log(...logs) {
+  log(...logs: ISProcessLogObj) {
     logs.forEach((log) => {
       this.stdout.push(log.value || log.toString());
       this.trigger('log', log);
@@ -693,7 +720,7 @@ export = class SProcess extends __SPromise {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  error(...errors) {
+  error(...errors: ISProcessLogObj) {
     errors.forEach((error) => {
       this.stderr.push(error.value || error.toString());
       this.trigger('error', error);

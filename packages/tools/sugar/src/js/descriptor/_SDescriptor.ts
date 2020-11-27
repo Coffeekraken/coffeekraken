@@ -277,10 +277,7 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  apply(
-    value: any,
-    settings?: ISDescriptorSettings
-  ): ISDescriptorResult | true {
+  apply(value: any, settings?: ISDescriptorSettings): ISDescriptorResult {
     // handle settings
     settings = __deepMerge(this._settings, settings);
 
@@ -327,8 +324,7 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
       throw this._descriptorResult.toString();
     }
 
-    if (this._descriptorResult.hasIssues()) return this._descriptorResult;
-    return true;
+    return this._descriptorResult;
   }
 
   /**
@@ -364,6 +360,10 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
       ) {
         value = rules.default;
       }
+    }
+
+    if (rules.required === undefined || rules.required === false) {
+      if (value === undefined || value === null) return value;
     }
 
     // loop on the rules object

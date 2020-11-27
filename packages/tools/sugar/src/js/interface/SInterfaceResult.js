@@ -1,3 +1,4 @@
+// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -65,9 +66,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         SInterfaceResult.prototype.hasIssues = function () {
-            if (this._data.descriptorResult) {
+            if (this._data.descriptorResult)
                 return this._data.descriptorResult.hasIssues();
-            }
             return false;
         };
         /**

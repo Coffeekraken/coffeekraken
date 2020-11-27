@@ -94,6 +94,7 @@ export default interface ISPromise {
   _promiseState: 'pending' | 'resolved' | 'rejected' | 'canceled' | 'destroyed';
   readonly id: string;
   readonly promiseState: string;
+  then(...args): any;
   is(
     status: 'pending' | 'resolved' | 'rejected' | 'canceled' | 'destroyed'
   ): boolean;

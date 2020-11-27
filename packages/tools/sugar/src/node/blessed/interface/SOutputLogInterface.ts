@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import __SInterface from '../../class/SInterface';
+import __SInterface from '../../interface/SInterface';
+import __LogInterface from '../../log/interface/LogInterface';
 
 /**
  * @name                SOutputLogInterface
@@ -21,12 +22,7 @@ import __SInterface from '../../class/SInterface';
  */
 export = class SOutputLogInterface extends __SInterface {
   static definition = {
-    value: {
-      // type: 'Function',
-      required: true,
-      description: 'The value to log',
-      alias: 'v'
-    },
+    ...__LogInterface.definition,
     clear: {
       type: 'Boolean|Integer',
       description:

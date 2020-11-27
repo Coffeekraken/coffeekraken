@@ -1,0 +1,1 @@
+../../../js/log/interface/ILog.ts

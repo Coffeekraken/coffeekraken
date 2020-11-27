@@ -16,6 +16,7 @@ const trimLines_1 = __importDefault(require("../string/trimLines"));
 const extractValues_1 = __importDefault(require("../object/extractValues"));
 const SOutputLogInterface_1 = __importDefault(require("./interface/SOutputLogInterface"));
 const SOutputSourceInterface_1 = __importDefault(require("./interface/SOutputSourceInterface"));
+const parseArgs_1 = __importDefault(require("../cli/parseArgs"));
 module.exports = class SOutput extends SBlessedComponent_1.default {
     /**
      * @name          constructor
@@ -216,18 +217,22 @@ module.exports = class SOutput extends SBlessedComponent_1.default {
                     if (typeof parsedLog === 'object' &&
                         parsedLog.value &&
                         typeof parsedLog.value === 'string') {
-                        parsedLog = SOutputLogInterface_1.default.applyAndComplete(parsedLog);
+                        parsedLog = SOutputLogInterface_1.default.apply(parsedLog);
                         logsArray.push(parsedLog);
                     }
                     else if (typeof parsedLog === 'string') {
                         if (parsedLog.includes(' -v ') || parsedLog.includes(' --value ')) {
-                            const args = SOutputLogInterface_1.default.parseAndComplete(parsedLog);
+                            const args = parseArgs_1.default(parsedLog, {
+                                definition: SOutputLogInterface_1.default.definition
+                            });
+                            SOutputLogInterface_1.default.apply(args);
                             logsArray.push(args);
                         }
                         else {
-                            const args = SOutputLogInterface_1.default.complete({
+                            const args = {
                                 value: parsedLog
-                            });
+                            };
+                            SOutputLogInterface_1.default.apply(args);
                             logsArray.push(args);
                         }
                     }
@@ -244,7 +249,7 @@ module.exports = class SOutput extends SBlessedComponent_1.default {
                 data.value &&
                 typeof data.value === 'string') {
                 // apply the interface
-                data = SOutputLogInterface_1.default.applyAndComplete(data);
+                SOutputLogInterface_1.default.apply(data);
                 const splitedLogs = data.value.split(/⠀/);
                 splitedLogs.forEach((log) => {
                     if (log.trim() === '')
@@ -259,7 +264,10 @@ module.exports = class SOutput extends SBlessedComponent_1.default {
                     }
                     else if (typeof parsedLog === 'string') {
                         if (parsedLog.includes(' -v ') || parsedLog.includes(' --value ')) {
-                            const args = SOutputLogInterface_1.default.parseAndComplete(parsedLog);
+                            const args = parseArgs_1.default(parsedLog, {
+                                definition: SOutputLogInterface_1.default.definition
+                            });
+                            SOutputLogInterface_1.default.apply(parsedLog);
                             logsArray.push(Object.assign(Object.assign({}, data), args));
                         }
                         else {

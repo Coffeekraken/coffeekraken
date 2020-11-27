@@ -1,2 +1,2 @@
 const __SGoogleCustomSearch = require('../SGoogleCustomSearch');
-require('../_js/google/__tests__/SGoogleCustomSearch')(__SGoogleCustomSearch);
+require('../google/__tests__/SGoogleCustomSearch')(__SGoogleCustomSearch);

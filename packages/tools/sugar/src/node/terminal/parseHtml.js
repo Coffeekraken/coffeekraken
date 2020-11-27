@@ -7,7 +7,7 @@ const replaceTags_1 = __importDefault(require("../html/replaceTags"));
 const sugar_1 = __importDefault(require("../config/sugar"));
 const upperFirst_1 = __importDefault(require("../string/upperFirst"));
 const chalk_1 = __importDefault(require("chalk"));
-const parseHtml_1 = require("../_js/console/parseHtml");
+const parseHtml_1 = require("../console/parseHtml");
 chalk_1.default.level = 3;
 // TODO tests
 /**

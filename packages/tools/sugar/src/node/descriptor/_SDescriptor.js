@@ -220,9 +220,7 @@ const Cls = (_a = class SDescriptor {
             if (this._descriptorResult.hasIssues() && settings.throwOnError) {
                 throw this._descriptorResult.toString();
             }
-            if (this._descriptorResult.hasIssues())
-                return this._descriptorResult;
-            return true;
+            return this._descriptorResult;
         }
         /**
          * @name          _validate
@@ -251,6 +249,10 @@ const Cls = (_a = class SDescriptor {
                     rules.default !== undefined) {
                     value = rules.default;
                 }
+            }
+            if (rules.required === undefined || rules.required === false) {
+                if (value === undefined || value === null)
+                    return value;
             }
             // loop on the rules object
             Object.keys(rules).forEach((ruleName) => {

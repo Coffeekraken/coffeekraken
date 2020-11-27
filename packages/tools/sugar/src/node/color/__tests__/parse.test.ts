@@ -1,2 +1,2 @@
 const __parse = require('../parse');
-require('../_js/color/__tests__/parse')(__parse);
+require('../color/__tests__/parse')(__parse);

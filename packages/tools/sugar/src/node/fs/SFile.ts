@@ -11,6 +11,8 @@ import __SFileSettingsInterface from './interface/SFileSettingsInterface';
 import __SError from '../error/SError';
 import __packageRoot from '../path/packageRoot';
 
+import ISFile, { ISFileSettings, ISFileCtor } from './interface/ISFile';
+
 /**
  * @name            SFile
  * @namespace       sugar.node.fs
@@ -49,7 +51,7 @@ import __packageRoot from '../path/packageRoot';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SFile extends __SPromise {
+const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
   /**
    * @name        name
    * @type        String
@@ -59,7 +61,7 @@ class SFile extends __SPromise {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  name = null;
+  name;
 
   /**
    * @name        path
@@ -70,7 +72,7 @@ class SFile extends __SPromise {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  path = null;
+  path;
 
   /**
    * @name        rootDir
@@ -83,7 +85,7 @@ class SFile extends __SPromise {
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  rootDir = null;
+  rootDir;
 
   /**
    * @name        relPath
@@ -95,7 +97,7 @@ class SFile extends __SPromise {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  relPath = null;
+  relPath;
 
   /**
    * @name        dirPath
@@ -106,7 +108,7 @@ class SFile extends __SPromise {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  dirPath = null;
+  dirPath;
 
   /**
    * @name        extension
@@ -117,7 +119,7 @@ class SFile extends __SPromise {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  extension = null;
+  extension;
 
   /**
    * @name        size
@@ -151,20 +153,16 @@ class SFile extends __SPromise {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(filepath, settings = {}) {
-    settings = __deepMerge(
+  constructor(filepath: string, settings: ISFileSettings = {}) {
+    super(settings);
+    this._settings = __deepMerge(
       {
         id: 'SFile',
         checkExistence: true,
         rootDir: __packageRoot()
       },
-      settings
+      this._settings
     );
-
-    // @todo    replace with the new SInterface class
-    // __SFileSettingsInterface.applyAndThrow(settings);
-
-    super(settings);
 
     if (settings.rootDir && !filepath.includes(settings.rootDir)) {
       filepath = __path.resolve(settings.rootDir, filepath);
@@ -236,6 +234,6 @@ class SFile extends __SPromise {
     this.sizeInBytes = stats.size;
     this.size = stats.size / 1000000;
   }
-}
+};
 
-export = SFile;
+export = Cls;

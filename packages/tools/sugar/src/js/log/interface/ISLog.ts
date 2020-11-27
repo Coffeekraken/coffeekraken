@@ -1,9 +1,9 @@
 // @ts-nocheck
 // @shared
 
-export interface ISLogObj {
-  value: any;
-}
+import ILog from './ILog';
+
+export interface ISLogObj extends ILog {}
 
 export interface ISLogAdapter {
   _settings: Record<string, unknown>;

@@ -61,9 +61,8 @@ const Cls: ISInterfaceResultCtor = class SInterfaceResult
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   hasIssues() {
-    if (this._data.descriptorResult) {
+    if (this._data.descriptorResult)
       return this._data.descriptorResult.hasIssues();
-    }
     return false;
   }
 

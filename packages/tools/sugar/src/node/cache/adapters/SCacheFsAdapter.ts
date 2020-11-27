@@ -7,7 +7,7 @@ import __ensureDirSync from '../../fs/ensureDirSync';
 import __removeSync from '../../fs/removeSync';
 import __sugarConfig from '../../config/sugar';
 import __toString from '../../string/toString';
-import __SCacheAdapter from '../../_js/cache/adapters/SCacheAdapter';
+import __SCacheAdapter from '../../cache/adapters/SCacheAdapter';
 
 /**
  * @name                                SCacheFsAdapter
@@ -148,4 +148,4 @@ export = class SCacheFsAdapter extends __SCacheAdapter {
     // read the json file
     return __removeSync(`${this._settings.rootDir}/${cacheName}`);
   }
-}
+};

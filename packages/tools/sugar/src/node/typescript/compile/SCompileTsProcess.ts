@@ -6,6 +6,9 @@ import ISCompileTsProcess, {
   ISCompileTsProcessSettings,
   ISCompileTsProcessCtor
 } from './interface/ISCompileTsProcess';
+import __SCompileTsProcessInterface from './interface/SCompileTsProcessInterface';
+
+import compileTs from './compileTs';
 
 /**
  * @name            STypescriptToJsProcess
@@ -26,6 +29,8 @@ import ISCompileTsProcess, {
 const Cls: ISCompileTsProcessCtor = class SCompileTsProcess
   extends SProcess
   implements ISCompileTsProcess {
+  static interface = __SCompileTsProcessInterface;
+
   /**
    * @name          constructor
    * @type          Function
@@ -60,7 +65,9 @@ const Cls: ISCompileTsProcessCtor = class SCompileTsProcess
     params?: ISCompileTsProcessParams,
     settings?: ISCompileTsProcessSettings
   ): Promise<any> {
-    return 'coco';
+    const f = compileTs(params);
+    this.bindSPromise(f);
+    return f;
   }
 };
 

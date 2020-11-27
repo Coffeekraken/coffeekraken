@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SInterface from '../../class/SInterface';
+import __SInterface from '../../interface/SInterface';
 import __SOutputProcessInterface from './SOutputProcessInterface';
 import __SProcessManagerInterface from '../../process/interface/SProcessManagerInterface';
 import __SOutputLogInterface from './SOutputLogInterface';

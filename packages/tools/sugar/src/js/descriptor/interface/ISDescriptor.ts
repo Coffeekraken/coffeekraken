@@ -23,16 +23,16 @@ export interface ISDescriptorRuleApplyFn {
   ): ISDescriptorResultObj;
 }
 
-export interface ISDescriptorRules {
-  [key: string]: ISDescriptorRule;
-}
-
 export interface ISDescriptorRule {
   id: string;
   name: string;
   settings: object;
   processParams?: Function;
   apply: ISDescriptorRuleApplyFn;
+}
+
+export interface ISDescriptorRules {
+  [key: string]: ISDescriptorRule;
 }
 
 export interface ISDescroptorGenerateSettings {
@@ -45,7 +45,7 @@ export interface ISDescroptorGenerateSettings {
 
 export interface ISDescriptionValidationResult {}
 export interface ISDescriptorCtor {
-  rules: ISDescriptorRulesMap;
+  rules: ISDescriptorRules;
   type: string;
   new (settings?: ISDescriptorSettings): ISDescriptor;
   registerRule(rule: ISDescriptorRule): void;

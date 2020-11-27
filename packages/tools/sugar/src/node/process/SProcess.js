@@ -16,6 +16,7 @@ const completeArgsObject_1 = __importDefault(require("../cli/completeArgsObject"
 const path_1 = __importDefault(require("path"));
 const convert_1 = __importDefault(require("../time/convert"));
 const wait_1 = __importDefault(require("../time/wait"));
+const class_1 = __importDefault(require("../is/class"));
 const onProcessExit_1 = __importDefault(require("./onProcessExit"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const node_notifier_1 = __importDefault(require("node-notifier"));
@@ -27,6 +28,7 @@ const SError_1 = __importDefault(require("../error/SError"));
 const buildCommandLine_1 = __importDefault(require("../cli/buildCommandLine"));
 const parseArgs_1 = __importDefault(require("../cli/parseArgs"));
 const child_process_1 = __importDefault(require("child_process"));
+const output_1 = __importDefault(require("./output"));
 const stack_trace_1 = __importDefault(require("stack-trace"));
 const toString_1 = __importDefault(require("../string/toString"));
 module.exports = class SProcess extends SPromise_1.default {
@@ -42,7 +44,7 @@ module.exports = class SProcess extends SPromise_1.default {
      */
     constructor(settings = {}) {
         super(deepMerge_1.default({
-            output: {},
+            output: false,
             runAsChild: false,
             definition: {},
             processPath: null,
@@ -212,6 +214,19 @@ module.exports = class SProcess extends SPromise_1.default {
             });
             return;
         }
+        else {
+            if (this._settings.output) {
+                if (class_1.default(this._settings.output)) {
+                    const outputInstance = new this._settings.output(this, this._settings.initialParams);
+                }
+                else {
+                    const outputSettings = typeof this._settings.output === 'object'
+                        ? this._settings.output
+                        : {};
+                    output_1.default(this, outputSettings);
+                }
+            }
+        }
     }
     /**
      * @name      id
@@ -366,6 +381,15 @@ module.exports = class SProcess extends SPromise_1.default {
             }
             // save current process params
             this._params = Object.assign({}, paramsObj);
+            // apply the interface on the params
+            const interfaceRes = this.constructor.interface.apply(this._params, {
+                throwOnError: true
+            });
+            if (interfaceRes.hasIssues()) {
+                this.log({
+                    value: interfaceRes.toString()
+                });
+            }
             // log a start message
             if (!childProcess_1.default()) {
                 this.log({

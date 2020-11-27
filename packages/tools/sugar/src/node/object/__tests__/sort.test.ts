@@ -1,2 +1,2 @@
 const __sort = require('../sort');
-require('../_js/object/__tests__/sort')(__sort);
+require('../object/__tests__/sort')(__sort);

@@ -1,2 +1,2 @@
 const __toString = require('../toString');
-require('../_js/string/__tests__/toString')(__toString);
+require('../string/__tests__/toString')(__toString);

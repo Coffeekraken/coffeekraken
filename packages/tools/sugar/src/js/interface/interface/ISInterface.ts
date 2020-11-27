@@ -1,9 +1,6 @@
 // @shared
 
-import {
-  ISDescriptorRules,
-  ISDescriptorSettings
-} from '../../descriptor/interface/ISDescriptor';
+import { ISDescriptorSettings } from '../../descriptor/interface/ISDescriptor';
 import ISDescriptorResult from '../../descriptor/interface/ISDescriptorResult';
 
 export interface ISInterfaceSettings {
@@ -20,12 +17,19 @@ export interface ISInterfaceResultData {
   instance: any;
 }
 
+export interface ISInterfaceDefinition {
+  [key: string]: any;
+}
+export interface ISInterfaceDefinitionMap {
+  [key: string]: ISInterfaceDefinition;
+}
+
 export interface ISInterfaceCtor {
   new (settings?: ISInterfaceSettings): ISInterface;
-  definition: ISDescriptorRules;
+  definition: ISInterfaceDefinitionMap | ISInterfaceDefinition;
   settings: ISInterfaceSettings;
 }
 export default interface ISInterface {
-  _definition: ISDescriptorRules;
+  _definition: ISInterfaceDefinitionMap | ISInterfaceDefinition;
   _settings: ISInterfaceSettings;
 }

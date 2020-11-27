@@ -3,8 +3,8 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-const SProcessOutput_1 = __importDefault(require("../SProcessOutput"));
-const SBlessedOutput_1 = __importDefault(require("../../blessed/SBlessedOutput"));
+const SProcessOutput_1 = __importDefault(require("../../SProcessOutput"));
+const SBlessedOutput_1 = __importDefault(require("../../../blessed/SBlessedOutput"));
 /**
  * @name          SBlessedProcessOutput
  * @namespace     sugar.node.process.output
@@ -43,7 +43,19 @@ const Cls = class SBlessedProcessOutput extends SProcessOutput_1.default {
      */
     constructor(source, settings) {
         super(source, settings);
-        new SBlessedOutput_1.default(this._sources, this._settings);
+        this._output = new SBlessedOutput_1.default(this._sources, this._settings);
+    }
+    /**
+     * @name            log
+     * @type            Function
+     *
+     * This method allows you to log something
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    log(...logs) {
+        this._output.log(...logs);
     }
 };
 module.exports = Cls;

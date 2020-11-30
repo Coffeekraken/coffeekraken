@@ -5,11 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const parseTypeDefinitionString_1 = __importDefault(require("../parse/parseTypeDefinitionString"));
-const class_1 = __importDefault(require("./class"));
-const integer_1 = __importDefault(require("./integer"));
 const typeof_1 = __importDefault(require("../value/typeof"));
 const typeDefinitionArrayObjectToString_1 = __importDefault(require("../value/typeDefinitionArrayObjectToString"));
-const getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
+const _SType_1 = __importDefault(require("../type/_SType"));
 /**
  * @name              ofType
  * @namespace           sugar.js.is
@@ -96,40 +94,38 @@ function ofType(value, argTypeDefinition) {
                 // }
             }
         }
-        // Class
-        else if (definition.type === 'Class') {
-            if (class_1.default(value))
-                return true;
-        }
-        // Integer
-        else if (definition.type === 'Int' || definition.type === 'Integer') {
-            if (integer_1.default(value))
-                return true;
-        }
-        // check default types
-        else if (['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(definition.type) !== -1) {
-            if (definition.type === 'Number') {
-                const type = typeOfValue;
-                if (type === 'Number' || type === 'Integer')
-                    return true;
-            }
-            else {
-                if (typeOfValue === definition.type)
-                    return true;
-            }
-        }
+        // generate a new type to check
+        const TypeCls = new _SType_1.default(definition.type);
+        console.log(TypeCls);
+        // // Class
+        // else if (definition.type === 'Class') {
+        //   if (__isClass(value)) return true;
+        // }
+        // // Integer
+        // else if (definition.type === 'Int' || definition.type === 'Integer') {
+        //   if (__isInt(value)) return true;
+        // }
+        // // check default types
+        // else if (
+        //   ['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(
+        //     definition.type
+        //   ) !== -1
+        // ) {
+        //   if (definition.type === 'Number') {
+        //     const type = typeOfValue;
+        //     if (type === 'Number' || type === 'Integer') return true;
+        //   } else {
+        //     if (typeOfValue === definition.type) return true;
+        //   }
+        // }
         // check for "custom" types
-        else if (class_1.default(value) && value.name) {
-            if (typeof_1.default(value) === definition.type)
-                return true;
-            const classesStack = getExtendsStack_1.default(value);
-            if (classesStack.indexOf(definition.type) !== -1)
-                return true;
-        }
-        else if (value && value.constructor && value.constructor.name) {
-            if (definition.type === value.constructor.name)
-                return true;
-        }
+        // else if (__isClass(value) && value.name) {
+        //   if (__typeof(value) === definition.type) return true;
+        //   const classesStack = __getExtendsStack(value);
+        //   if (classesStack.indexOf(definition.type) !== -1) return true;
+        // } else if (value && value.constructor && value.constructor.name) {
+        //   if (definition.type === value.constructor.name) return true;
+        // }
     }
     return issueObj;
 }

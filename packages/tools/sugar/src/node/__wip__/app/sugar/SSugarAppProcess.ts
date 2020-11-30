@@ -57,9 +57,7 @@ export default class SSugarAppProcess extends __SProcess {
    */
   process(params: any, settings = {}) {
     // new sugar ui instance
-    // @ts-expect-error ts-migrate(2339) FIXME: Property '_sugarUiInstance' does not exist on type... Remove this comment to see the full error message
     this._sugarUiInstance = new __SSugarApp({});
-    // @ts-expect-error ts-migrate(2339) FIXME: Property 'bindSPromise' does not exist on type 'SS... Remove this comment to see the full error message
     this.bindSPromise(this._sugarUiInstance);
   }
 }

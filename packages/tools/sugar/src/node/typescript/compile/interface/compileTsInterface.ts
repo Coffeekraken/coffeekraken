@@ -10,10 +10,12 @@ import __fs from 'fs';
 class compileTsInterface extends __SInterface {
   static definition = {
     config: {
-      type: 'String'
+      type: 'Path[]',
+      alias: 'c'
     },
     input: {
-      type: 'String'
+      type: 'String',
+      alias: 'i'
     }
   };
 }

@@ -6,7 +6,7 @@ function compileTs(stringArgs = '') {
   const pro = new SCompileTsProcess({
     output: false
   });
-  pro.run();
+  pro.run(stringArgs);
 }
 
 export = compileTs;

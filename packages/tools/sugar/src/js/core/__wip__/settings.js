@@ -8,7 +8,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../dom/domReady"], factory);
+        define(["require", "exports", "../dom/domready"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -27,12 +27,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     // imports
-    var domReady_1 = __importDefault(require("../dom/domReady"));
+    var domready_1 = __importDefault(require("../dom/domready"));
     // prepare a settings object to store
     // the getted settings from the css
     var settings = {};
     // wait the css to be loaded
-    domReady_1.default(function () {
+    domready_1.default(function () {
         var settingsElm = document.createElement('div');
         settingsElm.classList.add('s-settings');
         document.body.appendChild(settingsElm);

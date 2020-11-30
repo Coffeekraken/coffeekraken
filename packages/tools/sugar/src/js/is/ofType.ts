@@ -9,6 +9,7 @@ import __upperFirst from '../string/upperFirst';
 import __typeof from '../value/typeof';
 import __typeDefinitionArrayObjectToString from '../value/typeDefinitionArrayObjectToString';
 import __getExtendsStack from '../class/getExtendsStack';
+import __SType from '../type/_SType';
 
 /**
  * @name              ofType
@@ -101,38 +102,42 @@ function ofType(value, argTypeDefinition) {
       }
     }
 
-    // Class
-    else if (definition.type === 'Class') {
-      if (__isClass(value)) return true;
-    }
+    // generate a new type to check
+    const TypeCls = new __SType(definition.type);
+    console.log(TypeCls);
 
-    // Integer
-    else if (definition.type === 'Int' || definition.type === 'Integer') {
-      if (__isInt(value)) return true;
-    }
+    // // Class
+    // else if (definition.type === 'Class') {
+    //   if (__isClass(value)) return true;
+    // }
 
-    // check default types
-    else if (
-      ['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(
-        definition.type
-      ) !== -1
-    ) {
-      if (definition.type === 'Number') {
-        const type = typeOfValue;
-        if (type === 'Number' || type === 'Integer') return true;
-      } else {
-        if (typeOfValue === definition.type) return true;
-      }
-    }
+    // // Integer
+    // else if (definition.type === 'Int' || definition.type === 'Integer') {
+    //   if (__isInt(value)) return true;
+    // }
+
+    // // check default types
+    // else if (
+    //   ['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(
+    //     definition.type
+    //   ) !== -1
+    // ) {
+    //   if (definition.type === 'Number') {
+    //     const type = typeOfValue;
+    //     if (type === 'Number' || type === 'Integer') return true;
+    //   } else {
+    //     if (typeOfValue === definition.type) return true;
+    //   }
+    // }
 
     // check for "custom" types
-    else if (__isClass(value) && value.name) {
-      if (__typeof(value) === definition.type) return true;
-      const classesStack = __getExtendsStack(value);
-      if (classesStack.indexOf(definition.type) !== -1) return true;
-    } else if (value && value.constructor && value.constructor.name) {
-      if (definition.type === value.constructor.name) return true;
-    }
+    // else if (__isClass(value) && value.name) {
+    //   if (__typeof(value) === definition.type) return true;
+    //   const classesStack = __getExtendsStack(value);
+    //   if (classesStack.indexOf(definition.type) !== -1) return true;
+    // } else if (value && value.constructor && value.constructor.name) {
+    //   if (definition.type === value.constructor.name) return true;
+    // }
   }
 
   return issueObj;

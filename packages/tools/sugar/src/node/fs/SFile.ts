@@ -11,7 +11,12 @@ import __SFileSettingsInterface from './interface/SFileSettingsInterface';
 import __SError from '../error/SError';
 import __packageRoot from '../path/packageRoot';
 
-import ISFile, { ISFileSettings, ISFileCtor } from './interface/ISFile';
+import ISFile, {
+  ISFileSettings,
+  ISFileCtor,
+  ISFileReadSettings,
+  ISFileWriteSettings
+} from './interface/ISFile';
 
 /**
  * @name            SFile
@@ -130,7 +135,7 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  size = 0;
+  size = -1;
 
   /**
    * @name        sizeInBytes
@@ -141,7 +146,7 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  sizeInBytes = 0;
+  sizeInBytes = -1;
 
   /**
    * @name        constructor
@@ -233,6 +238,96 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
     const stats = __fs.statSync(this.path);
     this.sizeInBytes = stats.size;
     this.size = stats.size / 1000000;
+  }
+
+  /**
+   * @name        read
+   * @type        Function
+   * @async
+   *
+   * This method allows you to read the file asycronously
+   *
+   * @param     {ISFileReadSettings}        [settings={}]           An object of settings to configure your read process
+   * @return    {Promise}                                          A promise that will be resolved with the file content when readed
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  read(settings: ISFileReadSettings = {}): Promise<string> {
+    if (this.exists === false) {
+      throw `You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`;
+    }
+    settings = {
+      encoding: 'utf8',
+      ...settings
+    };
+    return __fs.readFile(this.path, settings);
+  }
+
+  /**
+   * @name        readSync
+   * @type        Function
+   *
+   * This method allows you to read the file syncronously
+   *
+   * @param     {ISFileReadSettings}        [settings={}]           An object of settings to configure your read process
+   * @return    {String}                                          The file content readed
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  readSync(settings: ISFileReadSettings = {}): string {
+    if (this.exists === false) {
+      throw `You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`;
+    }
+    settings = {
+      encoding: 'utf8',
+      ...settings
+    };
+    return __fs.readFileSync(this.path, settings);
+  }
+
+  /**
+   * @name        write
+   * @type        Function
+   * @async
+   *
+   * This method allows you to write the file asycronously
+   *
+   * @param     {String}                data                    The data to write in the file
+   * @param     {ISFileWriteSettings}        [settings={}]           An object of settings to configure your read process
+   * @return    {Promise}                                          A promise that will be resolved with the file content when readed
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  write(data: string, settings: ISFileWriteSettings = {}): Promise<any> {
+    settings = {
+      encoding: 'utf8',
+      ...settings
+    };
+    return __fs.writeFile(this.path, data, settings);
+  }
+
+  /**
+   * @name        writeSync
+   * @type        Function
+   *
+   * This method allows you to write the file sycronously
+   *
+   * @param     {String}                data                    The data to write in the file
+   * @param     {ISFileWriteSettings}        [settings={}]           An object of settings to configure your read process
+   * @return    {Promise}                                          A promise that will be resolved with the file content when readed
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  write(data: string, settings: ISFileWriteSettings = {}): any {
+    settings = {
+      encoding: 'utf8',
+      ...settings
+    };
+    return __fs.writeFileSync(this.path, data, settings);
   }
 };
 

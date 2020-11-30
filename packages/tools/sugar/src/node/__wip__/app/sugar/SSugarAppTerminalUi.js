@@ -53,49 +53,32 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         super({
             screen: true
         });
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_sources' does not exist on type 'SSugar... Remove this comment to see the full error message
         this._sources = source;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_initialParams' does not exist on type '... Remove this comment to see the full error message
         this._initialParams = Object.assign({}, initialParams);
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_settings' does not exist on type 'SSuga... Remove this comment to see the full error message
         this._settings = sugar_1.default('sugar-app');
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_serverSettings' does not exist on type ... Remove this comment to see the full error message
-        this._serverSettings = this._initialParams.modules[
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_settings' does not exist on type 'SSuga... Remove this comment to see the full error message
-        this._settings.welcome.serverModule];
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_modules' does not exist on type 'SSugar... Remove this comment to see the full error message
+        this._serverSettings = this._initialParams.modules[this._settings.welcome.serverModule];
         this._modules = this._settings.modules;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '$welcome' does not exist on type 'SSugar... Remove this comment to see the full error message
         this.$welcome = this._initWelcome(initialParams);
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '$modules' does not exist on type 'SSugar... Remove this comment to see the full error message
         this.$modules = this._initConsoles();
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '$bottomBar' does not exist on type 'SSug... Remove this comment to see the full error message
         this.$bottomBar = this._initBottomBar();
         hotkey_1.default('escape').on('press', () => {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property '$modules' does not exist on type 'SSugar... Remove this comment to see the full error message
             if (this.$modules.parent) {
-                // @ts-expect-error ts-migrate(2339) FIXME: Property '$modules' does not exist on type 'SSugar... Remove this comment to see the full error message
                 this.$modules.detach();
             }
         });
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_modules' does not exist on type 'SSugar... Remove this comment to see the full error message
         Object.keys(this._modules).forEach((moduleName, i) => {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property '_modules' does not exist on type 'SSugar... Remove this comment to see the full error message
             const moduleObj = this._modules[moduleName];
             hotkey_1.default(`${i + 1}`).on('press', () => {
-                // @ts-expect-error ts-migrate(2339) FIXME: Property '_modulesReady' does not exist on type 'S... Remove this comment to see the full error message
                 if (!this._modulesReady)
                     return;
                 this._showModule(moduleObj.id);
                 SIpc_1.default.trigger('sugar.ui.displayedModule', moduleObj.id);
             });
         });
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_modulesReady' does not exist on type 'S... Remove this comment to see the full error message
         this._modulesReady = false;
         source.on('*.state', (state, metas) => {
             console.log('SA', state, metas);
             if (state === 'ready') {
-                // @ts-expect-error ts-migrate(2339) FIXME: Property '_modulesReady' does not exist on type 'S... Remove this comment to see the full error message
                 this._modulesReady = true;
             }
         });
@@ -118,9 +101,7 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                     break;
             }
         });
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'append' does not exist on type 'SSugarAp... Remove this comment to see the full error message
         this.append(this.$bottomBar);
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'append' does not exist on type 'SSugarAp... Remove this comment to see the full error message
         this.append(this.$welcome);
         // update bottom bar
         setInterval(() => {
@@ -128,38 +109,28 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         }, 100);
     }
     _getDisplayedModuleObj() {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_displayedModuleId' does not exist on ty... Remove this comment to see the full error message
         if (!this._displayedModuleId)
             return {};
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '$modules' does not exist on type 'SSugar... Remove this comment to see the full error message
         if (!this.$modules.parent)
             return {};
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_displayedModuleId' does not exist on ty... Remove this comment to see the full error message
         return this._findModuleObjById(this._displayedModuleId);
     }
     _showModule(moduleId) {
         const moduleObj = this._findModuleObjById(moduleId);
         if (!moduleObj || !moduleObj.$container)
             return;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_displayedModuleId' does not exist on ty... Remove this comment to see the full error message
         this._displayedModuleId = moduleObj.id;
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '$modules' does not exist on type 'SSugar... Remove this comment to see the full error message
         this.$modules.children.forEach(($child) => {
             $child.detach();
         });
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '$modules' does not exist on type 'SSugar... Remove this comment to see the full error message
         if (!this.$modules.parent) {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'append' does not exist on type 'SSugarAp... Remove this comment to see the full error message
             this.append(this.$modules);
         }
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '$modules' does not exist on type 'SSugar... Remove this comment to see the full error message
         this.$modules.append(moduleObj.$container);
     }
     _updateBottomBar() {
         let content = '';
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_initialParams' does not exist on type '... Remove this comment to see the full error message
         Object.keys(this._initialParams.modules).forEach((moduleName, i) => {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property '_modules' does not exist on type 'SSugar... Remove this comment to see the full error message
             const moduleObj = this._modules[moduleName];
             let bg, fg;
             switch (moduleObj.state) {
@@ -218,13 +189,10 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                 .join('');
             content += moduleString;
         });
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '$bottomBar' does not exist on type 'SSug... Remove this comment to see the full error message
         this.$bottomBar.setContent(parseHtml_1.default(content));
     }
     _findModuleObjById(id) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_modules' does not exist on type 'SSugar... Remove this comment to see the full error message
         for (let i = 0; i < Object.keys(this._modules).length; i++) {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property '_modules' does not exist on type 'SSugar... Remove this comment to see the full error message
             const moduleObj = this._modules[Object.keys(this._modules)[i]];
             if (moduleObj.id === id)
                 return moduleObj;
@@ -247,14 +215,12 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         // moduleObj.$console.log(data);
     }
     _moduleError(data, metas) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '$modules' does not exist on type 'SSugar... Remove this comment to see the full error message
         if (this.$modules.parent)
             return;
         const moduleObj = this._findModuleObjById(data.module.id);
         if (moduleObj && moduleObj.$status) {
             clearTimeout(moduleObj.statusTimeout);
             moduleObj.$status.style.bg = 'red';
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'update' does not exist on type 'SSugarAp... Remove this comment to see the full error message
             this.update();
         }
         if (this._getDisplayedModuleObj().id === moduleObj.id)
@@ -268,7 +234,6 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                 this._showModule(moduleObj.id);
             }
         });
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'append' does not exist on type 'SSugarAp... Remove this comment to see the full error message
         this.append($errorNotification);
     }
     // _moduleStart(value, metas) {
@@ -282,11 +247,9 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         if (moduleObj && moduleObj.$status) {
             clearTimeout(moduleObj.statusTimeout);
             moduleObj.$status.style.bg = 'green';
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'update' does not exist on type 'SSugarAp... Remove this comment to see the full error message
             this.update();
             moduleObj.statusTimeout = setTimeout(() => {
                 moduleObj.$status.style.bg = 'blue';
-                // @ts-expect-error ts-migrate(2339) FIXME: Property 'update' does not exist on type 'SSugarAp... Remove this comment to see the full error message
                 this.update();
             }, 2000);
         }
@@ -301,11 +264,9 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                 this._showModule(moduleObj.id);
             }
         });
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'append' does not exist on type 'SSugarAp... Remove this comment to see the full error message
         this.append($successNotification);
     }
     _moduleState(data, metas) {
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_modules' does not exist on type 'SSugar... Remove this comment to see the full error message
         const moduleObj = this._modules[data.module.idx];
         if (!moduleObj.spinner)
             moduleObj.spinner = ora_1.default();
@@ -318,7 +279,6 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         if (moduleObj && moduleObj.$status) {
             clearTimeout(moduleObj.statusTimeout);
             moduleObj.$status.style.bg = 'cyan';
-            // @ts-expect-error ts-migrate(2339) FIXME: Property 'update' does not exist on type 'SSugarAp... Remove this comment to see the full error message
             this.update();
         }
         if (this._getDisplayedModuleObj().id === moduleObj.id)
@@ -332,7 +292,6 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                 this._showModule(moduleObj.id);
             }
         });
-        // @ts-expect-error ts-migrate(2339) FIXME: Property 'append' does not exist on type 'SSugarAp... Remove this comment to see the full error message
         this.append($startNotification);
     }
     /**
@@ -407,15 +366,12 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         ];
         const updateContent = () => {
             let text = [...projectLines, '', spinner.frame()];
-            // @ts-expect-error ts-migrate(2339) FIXME: Property '_modulesReady' does not exist on type 'S... Remove this comment to see the full error message
             if (this._modulesReady) {
                 text = [
                     ...projectLines,
                     ``,
                     `WebUI <green>started</green> at`,
-                    `<bgYellow><black> http://${
-                    // @ts-expect-error ts-migrate(2339) FIXME: Property '_serverSettings' does not exist on type ... Remove this comment to see the full error message
-                    this._serverSettings.hostname}:${this._serverSettings.port} </black></bgYellow>`,
+                    `<bgYellow><black> http://${this._serverSettings.hostname}:${this._serverSettings.port} </black></bgYellow>`,
                     '',
                     `<cyan>${Object.keys(initialParams.modules).length}</cyan> module${Object.keys(initialParams.modules).length > 1 ? 's' : ''} loaded`
                 ];
@@ -484,9 +440,7 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                 bottom: 2
             }
         });
-        // @ts-expect-error ts-migrate(2339) FIXME: Property '_modules' does not exist on type 'SSugar... Remove this comment to see the full error message
         Object.keys(this._modules).forEach((moduleName) => {
-            // @ts-expect-error ts-migrate(2339) FIXME: Property '_modules' does not exist on type 'SSugar... Remove this comment to see the full error message
             const moduleObj = this._modules[moduleName];
             const $container = blessed_1.default.box({
                 top: 0,
@@ -513,15 +467,12 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
             });
             let OutputClass;
             if (moduleObj.ui) {
-                // @ts-expect-error ts-migrate(2304) FIXME: Cannot find name '__dirname'.
                 const requirePath = path_1.default.relative(__dirname, moduleObj.ui);
-                // @ts-expect-error ts-migrate(2580) FIXME: Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
                 OutputClass = require(requirePath);
             }
             else {
                 OutputClass = SBlessedOutput_1.default;
             }
-            // @ts-expect-error ts-migrate(2339) FIXME: Property '_sources' does not exist on type 'SSugar... Remove this comment to see the full error message
             const $console = new OutputClass(this._sources, Object.assign({ filter: (logObj) => {
                     return logObj.module && logObj.module.id === moduleObj.id;
                 }, width: '100%', height: '100%-3', top: 3, left: 0, right: 0, mouse: true, keys: true, clickable: false, scrollable: true, scrollbar: {

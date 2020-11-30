@@ -1,6 +1,8 @@
 export interface IFindUpSettings {
   symlinks?: boolean;
   cwd?: string;
+  stopWhenFound?: boolean;
+  SFile?: boolean;
 }
 
 export default interface IFindUp {

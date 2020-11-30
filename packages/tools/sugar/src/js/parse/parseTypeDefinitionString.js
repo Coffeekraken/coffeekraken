@@ -38,9 +38,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     function parseTypeDefinitionString(argTypeString) {
-        // split the string by |
         var inDepth = 0;
         var currentPart = '', typesArray = [];
+        argTypeString = argTypeString
+            .split('|')
+            .map(function (part) {
+            part = part.trim().replace(/^([a-zA-Z0-9-_]+)\[\]$/, 'Array<$1>');
+            return part;
+        })
+            .join('|');
         argTypeString.split('').forEach(function (character) {
             if (character === '>') {
                 if (inDepth <= 0) {

@@ -11,10 +11,12 @@ class compileTsInterface extends SInterface_1.default {
 }
 compileTsInterface.definition = {
     config: {
-        type: 'String'
+        type: 'Path[]',
+        alias: 'c'
     },
     input: {
-        type: 'String'
+        type: 'String',
+        alias: 'i'
     }
 };
 module.exports = compileTsInterface;

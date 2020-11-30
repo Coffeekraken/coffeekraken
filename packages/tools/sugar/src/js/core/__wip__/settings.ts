@@ -15,7 +15,7 @@
  */
 
 // imports
-import domReady from '../dom/domReady';
+import domReady from '../dom/domready';
 
 // prepare a settings object to store
 // the getted settings from the css

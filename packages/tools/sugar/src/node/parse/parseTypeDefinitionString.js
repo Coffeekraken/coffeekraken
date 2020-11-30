@@ -29,9 +29,15 @@ const upperFirst_1 = __importDefault(require("../string/upperFirst"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function parseTypeDefinitionString(argTypeString) {
-    // split the string by |
     let inDepth = 0;
     let currentPart = '', typesArray = [];
+    argTypeString = argTypeString
+        .split('|')
+        .map((part) => {
+        part = part.trim().replace(/^([a-zA-Z0-9-_]+)\[\]$/, 'Array<$1>');
+        return part;
+    })
+        .join('|');
     argTypeString.split('').forEach((character) => {
         if (character === '>') {
             if (inDepth <= 0) {

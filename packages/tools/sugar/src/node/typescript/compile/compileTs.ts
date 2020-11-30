@@ -28,14 +28,16 @@ const fn: ICompileTs = function compileTs(
   params: ICompileTsParams
 ): Promise<any> {
   return new __SPromise(async (resolve, reject, trigger, cancel) => {
-    trigger('log', {
-      value: 'Hello world'
-    });
+    // check if we have a config passed
+    console.log(params);
+    if (params.config !== undefined) {
+      // wrap the passed config in an SFile
+    }
 
-    const files = await __findUp('tsconfig.*', {
-      stopWhenFound: false
+    const files = await __findUp('tsconfig.json', {
+      stopWhenFound: true
     });
-    console.log('CC', files);
+    console.log('CC', files[0].readSync());
   });
 };
 

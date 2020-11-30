@@ -36,13 +36,15 @@ const SPromise_1 = __importDefault(require("../../promise/SPromise"));
  */
 const fn = function compileTs(params) {
     return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
-        trigger('log', {
-            value: 'Hello world'
+        // check if we have a config passed
+        console.log(params);
+        if (params.config !== undefined) {
+            // wrap the passed config in an SFile
+        }
+        const files = yield findUp_1.default('tsconfig.json', {
+            stopWhenFound: true
         });
-        const files = yield findUp_1.default('tsconfig.*', {
-            stopWhenFound: false
-        });
-        console.log('CC', files);
+        console.log('CC', files[0].readSync());
     }));
 };
 module.exports = fn;

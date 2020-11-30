@@ -15,6 +15,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const glob_1 = __importDefault(require("glob"));
 const glob_2 = __importDefault(require("../is/glob"));
 const fs_1 = __importDefault(require("fs"));
+const SFile_1 = __importDefault(require("./SFile"));
 /**
  * @name            findUp
  * @namespace       sugar.node.fs
@@ -37,7 +38,7 @@ const fs_1 = __importDefault(require("fs"));
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 const fn = function findUp(search, settings) {
-    settings = Object.assign({ symlinks: true, cwd: process.cwd(), stopWhenFound: true }, settings);
+    settings = Object.assign({ symlinks: true, cwd: process.cwd(), stopWhenFound: true, SFile: true }, settings);
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         const cwd = settings.cwd;
         let currentPath = cwd.split('/').filter((p) => p.trim() !== '');
@@ -60,10 +61,17 @@ const fn = function findUp(search, settings) {
                 foundedFiles.push(`${path}/${search}`);
             }
             // check if we need to stop when found
-            if (settings.stopWhenFound && foundedFiles.length)
-                return resolve(foundedFiles);
+            if (settings.stopWhenFound && foundedFiles.length) {
+                break;
+            }
             // update the currentPath
             currentPath = currentPath.slice(0, -1);
+        }
+        if (settings.SFile === true) {
+            // wrap into an SFile
+            foundedFiles = foundedFiles.map((path) => {
+                return new SFile_1.default(path);
+            });
         }
         // resolve at the end
         return resolve(foundedFiles);

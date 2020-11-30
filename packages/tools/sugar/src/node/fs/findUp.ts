@@ -5,6 +5,7 @@ import __findUp from 'find-up';
 import __glob from 'glob';
 import __isGlob from '../is/glob';
 import __fs from 'fs';
+import __SFile from './SFile';
 
 /**
  * @name            findUp
@@ -35,6 +36,7 @@ const fn: IFindUp = function findUp(
     symlinks: true,
     cwd: process.cwd(),
     stopWhenFound: true,
+    SFile: true,
     ...settings
   };
 
@@ -60,10 +62,18 @@ const fn: IFindUp = function findUp(
         foundedFiles.push(`${path}/${search}`);
       }
       // check if we need to stop when found
-      if (settings.stopWhenFound && foundedFiles.length)
-        return resolve(foundedFiles);
+      if (settings.stopWhenFound && foundedFiles.length) {
+        break;
+      }
       // update the currentPath
       currentPath = currentPath.slice(0, -1);
+    }
+
+    if (settings.SFile === true) {
+      // wrap into an SFile
+      foundedFiles = foundedFiles.map((path) => {
+        return new __SFile(path);
+      });
     }
 
     // resolve at the end

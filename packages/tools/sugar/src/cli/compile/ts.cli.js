@@ -8,6 +8,6 @@ function compileTs(stringArgs = '') {
     const pro = new SCompileTsProcess_1.default({
         output: false
     });
-    pro.run();
+    pro.run(stringArgs);
 }
 module.exports = compileTs;

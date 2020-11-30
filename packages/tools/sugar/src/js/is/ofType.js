@@ -16,16 +16,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../parse/parseTypeDefinitionString", "./class", "./integer", "../value/typeof", "../value/typeDefinitionArrayObjectToString", "../class/getExtendsStack"], factory);
+        define(["require", "exports", "../parse/parseTypeDefinitionString", "../value/typeof", "../value/typeDefinitionArrayObjectToString", "../type/_SType"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var parseTypeDefinitionString_1 = __importDefault(require("../parse/parseTypeDefinitionString"));
-    var class_1 = __importDefault(require("./class"));
-    var integer_1 = __importDefault(require("./integer"));
     var typeof_1 = __importDefault(require("../value/typeof"));
     var typeDefinitionArrayObjectToString_1 = __importDefault(require("../value/typeDefinitionArrayObjectToString"));
-    var getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
+    var _SType_1 = __importDefault(require("../type/_SType"));
     /**
      * @name              ofType
      * @namespace           sugar.js.is
@@ -111,40 +109,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     // }
                 }
             }
-            // Class
-            else if (definition.type === 'Class') {
-                if (class_1.default(value))
-                    return { value: true };
-            }
-            // Integer
-            else if (definition.type === 'Int' || definition.type === 'Integer') {
-                if (integer_1.default(value))
-                    return { value: true };
-            }
-            // check default types
-            else if (['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(definition.type) !== -1) {
-                if (definition.type === 'Number') {
-                    var type = typeOfValue;
-                    if (type === 'Number' || type === 'Integer')
-                        return { value: true };
-                }
-                else {
-                    if (typeOfValue === definition.type)
-                        return { value: true };
-                }
-            }
-            // check for "custom" types
-            else if (class_1.default(value) && value.name) {
-                if (typeof_1.default(value) === definition.type)
-                    return { value: true };
-                var classesStack = getExtendsStack_1.default(value);
-                if (classesStack.indexOf(definition.type) !== -1)
-                    return { value: true };
-            }
-            else if (value && value.constructor && value.constructor.name) {
-                if (definition.type === value.constructor.name)
-                    return { value: true };
-            }
+            // generate a new type to check
+            var TypeCls = new _SType_1.default(definition.type);
+            console.log(TypeCls);
         };
         for (var i = 0; i < definitionArray.length; i++) {
             var state_1 = _loop_1(i);

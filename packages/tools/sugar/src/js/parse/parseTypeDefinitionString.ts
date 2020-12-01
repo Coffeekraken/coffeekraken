@@ -38,6 +38,9 @@ function parseTypeDefinitionString(argTypeString) {
       return part;
     })
     .join('|');
+
+  console.log(argTypeString);
+
   argTypeString.split('').forEach((character) => {
     if (character === '>') {
       if (inDepth <= 0) {

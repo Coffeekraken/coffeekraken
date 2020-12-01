@@ -1,12 +1,5 @@
 // @ts-nocheck
 // @shared
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -16,14 +9,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../parse/parseTypeDefinitionString", "../value/typeof", "../value/typeDefinitionArrayObjectToString", "../type/_SType"], factory);
+        define(["require", "exports", "../type/SType"], factory);
     }
 })(function (require, exports) {
     "use strict";
-    var parseTypeDefinitionString_1 = __importDefault(require("../parse/parseTypeDefinitionString"));
-    var typeof_1 = __importDefault(require("../value/typeof"));
-    var typeDefinitionArrayObjectToString_1 = __importDefault(require("../value/typeDefinitionArrayObjectToString"));
-    var _SType_1 = __importDefault(require("../type/_SType"));
+    var SType_1 = __importDefault(require("../type/SType"));
     /**
      * @name              ofType
      * @namespace           sugar.js.is
@@ -52,73 +42,46 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     function ofType(value, argTypeDefinition) {
-        var definitionArray = argTypeDefinition;
-        // parsing the argument definition string
-        if (typeof argTypeDefinition === 'string') {
-            definitionArray = parseTypeDefinitionString_1.default(argTypeDefinition);
-        }
-        var typeOfValue = typeof_1.default(value);
-        var issueObj = {
-            $received: {
-                type: typeof_1.default(value, { of: true }),
-                value: value
-            },
-            $expected: {
-                type: typeDefinitionArrayObjectToString_1.default(definitionArray)
-            },
-            $issues: ['type']
-        };
-        var _loop_1 = function (i) {
-            var definition = definitionArray[i];
-            // if ((value === null || value === undefined) && definition.type) {
-            //   issueObj.received.type = __typeof(value);
-            // }
-            // Array | Object
-            if (definition.type === 'Array' || definition.type === 'Object') {
-                // Array
-                if (definition.type === 'Array') {
-                    // make sure the value is an array
-                    if (typeOfValue === 'Array' && !definition.of)
-                        return { value: true };
-                    // Object
-                }
-                else if (definition.type === 'Object') {
-                    if (typeOfValue === 'Object' && !definition.of)
-                        return { value: true };
-                }
-                if (definition.of &&
-                    (Array.isArray(value) || typeof value === 'object')) {
-                    var loopOn = Array.isArray(value)
-                        ? __spreadArrays(value.keys()) : Object.keys(value);
-                    var checkValuesResult_1 = true;
-                    var receivedTypes_1 = [];
-                    loopOn.forEach(function (valueIndex) {
-                        var valueToCheck = value[valueIndex];
-                        if (ofType(valueToCheck, definition.of) !== true) {
-                            checkValuesResult_1 = false;
-                        }
-                        var typeString = typeof_1.default(valueToCheck);
-                        if (receivedTypes_1.indexOf(typeString) === -1) {
-                            receivedTypes_1.push(typeString);
-                        }
-                    });
-                    if (checkValuesResult_1)
-                        return { value: true };
-                    // if (!checkValuesResult) {
-                    //   issueObj.received.type = `${typeOfValue}<${receivedTypes.join('|')}>`;
-                    // }
-                }
-            }
-            // generate a new type to check
-            var TypeCls = new _SType_1.default(definition.type);
-            console.log(TypeCls);
-        };
-        for (var i = 0; i < definitionArray.length; i++) {
-            var state_1 = _loop_1(i);
-            if (typeof state_1 === "object")
-                return state_1.value;
-        }
-        return issueObj;
+        // generate a new type to check
+        argTypeDefinition = 'Map<String>';
+        var typeCls = new SType_1.default(argTypeDefinition);
+        var v = new Map();
+        v.set('hello', 'world');
+        v.set('plop', 12);
+        var res = typeCls.is(v);
+        console.log(res);
+        return res;
+        // // Class
+        // else if (definition.type === 'Class') {
+        //   if (__isClass(value)) return true;
+        // }
+        // // Integer
+        // else if (definition.type === 'Int' || definition.type === 'Integer') {
+        //   if (__isInt(value)) return true;
+        // }
+        // // check default types
+        // else if (
+        //   ['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(
+        //     definition.type
+        //   ) !== -1
+        // ) {
+        //   if (definition.type === 'Number') {
+        //     const type = typeOfValue;
+        //     if (type === 'Number' || type === 'Integer') return true;
+        //   } else {
+        //     if (typeOfValue === definition.type) return true;
+        //   }
+        // }
+        // check for "custom" types
+        // else if (__isClass(value) && value.name) {
+        //   if (__typeof(value) === definition.type) return true;
+        //   const classesStack = __getExtendsStack(value);
+        //   if (classesStack.indexOf(definition.type) !== -1) return true;
+        // } else if (value && value.constructor && value.constructor.name) {
+        //   if (definition.type === value.constructor.name) return true;
+        // }
+        // }
+        // return issueObj;
     }
     function getBaseClass(targetClass) {
         var stack = [];

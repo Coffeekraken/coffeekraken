@@ -34,10 +34,10 @@ const fn: ICompileTs = function compileTs(
       // wrap the passed config in an SFile
     }
 
-    const files = await __findUp('tsconfig.json', {
-      stopWhenFound: true
-    });
-    console.log('CC', files[0].readSync());
+    // const files = await __findUp('tsconfig.json', {
+    //   stopWhenFound: true
+    // });
+    // console.log('CC', files[0].readSync());
   });
 };
 

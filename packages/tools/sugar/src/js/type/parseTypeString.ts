@@ -1,8 +1,9 @@
-// @ts-nocheck
 // @shared
 
-import ITypeStringObject from './interface/ITypeStringObject';
-import ISType from './interface/ISType';
+import IParseTypeString, {
+  IParseTypeStringResultObj,
+  IParseTypeStringSingleResultObj
+} from './interface/IParseTypeString';
 import __SType from './_SType';
 
 /**
@@ -27,20 +28,86 @@ import __SType from './_SType';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
  */
-const fn = function parseTypeString(typeString: string): ITypeStringObject {
-  // split the passed string
-  const parts: string[] = typeString.split('|').map((t) => t.trim());
-  // init each SType instances
-  const types: ISType[] = [];
-  parts.forEach((part) => {
-    const typeInstance = new __SType(part);
-    types.push(typeInstance);
+function parseSingleTypeString(
+  typeString: string
+): IParseTypeStringSingleResultObj {
+  let ofStr: string = '',
+    typeStr: string = typeString;
+
+  const ofPartsString = typeString.match(/<(.+)>$/gm);
+  if (ofPartsString && ofPartsString.length) {
+    ofStr = ofPartsString[0].replace('<', '').replace('>', '');
+  }
+  if (ofStr !== '') {
+    typeStr = typeStr.replace(`<${ofStr}>`, '');
+  }
+  // handle the "of" part
+  let ofTypes = ofStr !== '' ? [ofStr.toLowerCase()] : undefined;
+  if (ofStr !== undefined && ofStr.includes('|')) {
+    ofTypes = ofStr.split('|').map((t) => t.trim().toLowerCase());
+  }
+
+  return {
+    type: typeStr,
+    of: ofTypes
+  };
+}
+const fn: IParseTypeString = function parseTypeString(
+  typeString: string
+): IParseTypeStringResultObj {
+  // typeString = 'Array<Path>|String|Array<Object|Map>|Youhou[]';
+
+  typeString = typeString.toLowerCase().trim();
+
+  typeString = typeString
+    .split('|')
+    .map((part) => {
+      part = part.trim().replace(/^([a-zA-Z0-9-_]+)\[\]$/, 'array<$1>');
+      return part;
+    })
+    .join('|');
+
+  typeString = typeString
+    .split('|')
+    .map((part) => {
+      part = part.trim().replace(/^([a-zA-Z0-9-_]+)\{\}$/, 'object<$1>');
+      return part;
+    })
+    .join('|');
+
+  let types: string[] = [],
+    inGroup = false,
+    currentStr = '';
+  for (let i = 0; i < typeString.length; i++) {
+    const char = typeString[i];
+    if (char === '<') {
+      inGroup = true;
+      currentStr += char;
+    } else if (char === '>') {
+      inGroup = false;
+      currentStr += char;
+    } else if (char === '|') {
+      if (inGroup === false) {
+        types.push(currentStr);
+        currentStr = '';
+      } else {
+        currentStr += char;
+      }
+    } else {
+      currentStr += char;
+    }
+  }
+  types.push(currentStr);
+
+  const finalTypes: IParseTypeStringSingleResultObj[] = [];
+  types.forEach((type) => {
+    finalTypes.push(parseSingleTypeString(type));
   });
 
-  const returnObj: ITypeStringObject = {
+  const res: IParseTypeStringResultObj = {
     raw: typeString,
-    types: types
+    types: finalTypes
   };
-  return returnObj;
+  return res;
 };
 export = fn;

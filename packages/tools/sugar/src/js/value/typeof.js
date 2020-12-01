@@ -46,7 +46,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @param       {Mixed}    value    The value to get the type of
      * @param       {Object}    [settings={}]         An object of settings to configure your type get process:
      * - of (false) {Boolean}: Specify if you want to get the "child" properties types for Objects, Arrays and custom classes
-     * - format ('String') {String}: Specify if you want back a String of an Object
+     * - format ('String') {String}: Specify if you want back a String or an Object
      * - customClass (true) {Boolean}: Specify if you want the custom classes to return theirs real names or simply Object
      * @return      {String|Object}               The type in string format, of an object if the setting "object" is set to true
      *
@@ -81,6 +81,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         var type;
         if (Array.isArray(value))
             type = 'Array';
+        else if (value instanceof Map)
+            type = 'Map';
         else if (value === null)
             type = 'Null';
         else if (value === undefined)

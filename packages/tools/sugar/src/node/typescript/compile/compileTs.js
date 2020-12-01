@@ -11,8 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-// @ts-nocheck
-const findUp_1 = __importDefault(require("../../fs/findUp"));
 const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 /**
  * @name                compileTs
@@ -41,10 +39,10 @@ const fn = function compileTs(params) {
         if (params.config !== undefined) {
             // wrap the passed config in an SFile
         }
-        const files = yield findUp_1.default('tsconfig.json', {
-            stopWhenFound: true
-        });
-        console.log('CC', files[0].readSync());
+        // const files = await __findUp('tsconfig.json', {
+        //   stopWhenFound: true
+        // });
+        // console.log('CC', files[0].readSync());
     }));
 };
 module.exports = fn;

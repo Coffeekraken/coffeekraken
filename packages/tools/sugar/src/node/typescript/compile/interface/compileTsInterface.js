@@ -11,7 +11,7 @@ class compileTsInterface extends SInterface_1.default {
 }
 compileTsInterface.definition = {
     config: {
-        type: 'Path[]',
+        type: 'Array<Path>',
         alias: 'c'
     },
     input: {

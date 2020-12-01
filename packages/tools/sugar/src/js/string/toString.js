@@ -9,16 +9,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../is/array", "../is/boolean", "../is/function", "../is/json", "../is/object", "../object/deepMerge"], factory);
+        define(["require", "exports", "chalk", "../object/deepMap", "../is/map", "../is/array", "../is/boolean", "../is/function", "../is/json", "../is/object", "../object/deepMerge", "../map/mapToObject", "stringify-object", "cli-highlight"], factory);
     }
 })(function (require, exports) {
     "use strict";
+    var chalk_1 = __importDefault(require("chalk"));
+    var deepMap_1 = __importDefault(require("../object/deepMap"));
+    var map_1 = __importDefault(require("../is/map"));
     var array_1 = __importDefault(require("../is/array"));
     var boolean_1 = __importDefault(require("../is/boolean"));
     var function_1 = __importDefault(require("../is/function"));
     var json_1 = __importDefault(require("../is/json"));
     var object_1 = __importDefault(require("../is/object"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
+    var mapToObject_1 = __importDefault(require("../map/mapToObject"));
+    var stringify_object_1 = __importDefault(require("stringify-object"));
+    var cli_highlight_1 = require("cli-highlight");
+    // import __prettyFormat from 'pretty-format';
+    // import __reactTestPlugin from 'pretty-format/build/plugins/ReactTestComponent';
+    // import __reactElementPlugin from 'pretty-format/build/plugins/ReactElement';
     /**
      * @name        toString
      * @namespace           sugar.js.string
@@ -50,6 +59,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         settings = deepMerge_1.default({
             beautify: false
         }, settings);
+        // const DEFAULT_THEME = {
+        //   comment: 'gray',
+        //   content: 'reset',
+        //   prop: 'yellow',
+        //   tag: 'cyan',
+        //   value: 'green'
+        // };
+        // return __prettyFormat(value, {
+        //   highlight: true,
+        //   indent: 4,
+        //   plugins: [__reactTestPlugin, __reactElementPlugin],
+        //   theme: DEFAULT_THEME
+        // });
         // string
         if (typeof value === 'string')
             return value;
@@ -66,9 +88,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             }
             return value.name + ":\n\n      " + value.message + "\n\n      " + value.stack + "\n    ";
         }
+        // Map
+        if (map_1.default(value)) {
+            return stringify_object_1.default(mapToObject_1.default(value));
+        }
         // JSON
         if (object_1.default(value) || array_1.default(value) || json_1.default(value)) {
-            return JSON.stringify(value, null, settings.beautify ? 4 : 0);
+            value = deepMap_1.default(value, function (value, prop, fullPath) {
+                if (value instanceof Map)
+                    return mapToObject_1.default(value);
+                return value;
+            });
+            var theme = {
+                number: chalk_1.default.yellow,
+                default: chalk_1.default.white,
+                keyword: chalk_1.default.blue,
+                regexp: chalk_1.default.red,
+                string: chalk_1.default.whiteBright,
+                class: chalk_1.default.yellow,
+                function: chalk_1.default.yellow,
+                comment: chalk_1.default.gray,
+                variable: chalk_1.default.red,
+                attr: chalk_1.default.green
+            };
+            var prettyString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
+            prettyString = prettyString
+                .replace(/"([^"]+)":/g, '$1:')
+                .replace(/\uFFFF/g, '\\"');
+            prettyString = cli_highlight_1.highlight(prettyString, { language: 'js', theme: theme });
+            return prettyString;
         }
         // boolean
         if (boolean_1.default(value)) {

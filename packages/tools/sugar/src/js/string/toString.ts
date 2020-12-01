@@ -1,6 +1,9 @@
 // @ts-nocheck
 // @shared
 
+import __chalk from 'chalk';
+import __deepMap from '../object/deepMap';
+import __isMap from '../is/map';
 import __isArray from '../is/array';
 import __isBoolean from '../is/boolean';
 import __isFunction from '../is/function';
@@ -8,6 +11,14 @@ import __isJson from '../is/json';
 import __isObject from '../is/object';
 import __deepMerge from '../object/deepMerge';
 import __stringify from '../json/stringify';
+import __mapToObj from '../map/mapToObject';
+import __highlightJs from 'highlight.js';
+import __stringifyObject from 'stringify-object';
+import { highlight as __cliHighlight } from 'cli-highlight';
+
+// import __prettyFormat from 'pretty-format';
+// import __reactTestPlugin from 'pretty-format/build/plugins/ReactTestComponent';
+// import __reactElementPlugin from 'pretty-format/build/plugins/ReactElement';
 
 /**
  * @name        toString
@@ -42,6 +53,19 @@ function fn(value, settings = {}) {
     },
     settings
   );
+  // const DEFAULT_THEME = {
+  //   comment: 'gray',
+  //   content: 'reset',
+  //   prop: 'yellow',
+  //   tag: 'cyan',
+  //   value: 'green'
+  // };
+  // return __prettyFormat(value, {
+  //   highlight: true,
+  //   indent: 4,
+  //   plugins: [__reactTestPlugin, __reactElementPlugin],
+  //   theme: DEFAULT_THEME
+  // });
 
   // string
   if (typeof value === 'string') return value;
@@ -61,9 +85,37 @@ function fn(value, settings = {}) {
       ${value.stack}
     `;
   }
+
+  // Map
+  if (__isMap(value)) {
+    return __stringifyObject(__mapToObj(value));
+  }
+
   // JSON
   if (__isObject(value) || __isArray(value) || __isJson(value)) {
-    return JSON.stringify(value, null, settings.beautify ? 4 : 0);
+    value = __deepMap(value, (value, prop, fullPath) => {
+      if (value instanceof Map) return __mapToObj(value);
+      return value;
+    });
+
+    const theme = {
+      number: __chalk.yellow,
+      default: __chalk.white,
+      keyword: __chalk.blue,
+      regexp: __chalk.red,
+      string: __chalk.whiteBright,
+      class: __chalk.yellow,
+      function: __chalk.yellow,
+      comment: __chalk.gray,
+      variable: __chalk.red,
+      attr: __chalk.green
+    };
+    let prettyString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
+    prettyString = prettyString
+      .replace(/"([^"]+)":/g, '$1:')
+      .replace(/\uFFFF/g, '\\"');
+    prettyString = __cliHighlight(prettyString, { language: 'js', theme });
+    return prettyString;
   }
   // boolean
   if (__isBoolean(value)) {

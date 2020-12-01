@@ -119,15 +119,21 @@ export = class SLogConsoleAdapter {
       // log the message
       if (typeof message === 'string') {
         ((global || window).nativeConsole || console)[consoleMethod](
-          message + '⠀'
+          __toString(message, {
+            beautify: true
+          }) + '⠀'
         );
       } else if (typeof message === 'object') {
         ((global || window).nativeConsole || console)[consoleMethod](
-          __formatObject(message) + '⠀'
+          __toString(message, {
+            beautify: true
+          }) + '⠀'
         );
       } else {
         ((global || window).nativeConsole || console)[consoleMethod](
-          message + '⠀'
+          __toString(message, {
+            beautify: true
+          }) + '⠀'
         );
       }
 

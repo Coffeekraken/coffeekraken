@@ -5,4 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const _SType_1 = __importDefault(require("./_SType"));
 require("./descriptors/stringTypeDescriptor");
+require("./descriptors/mapTypeDescriptor");
+require("./descriptors/objectTypeDescriptor");
 module.exports = _SType_1.default;

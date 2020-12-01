@@ -47,6 +47,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             return part;
         })
             .join('|');
+        console.log(argTypeString);
         argTypeString.split('').forEach(function (character) {
             if (character === '>') {
                 if (inDepth <= 0) {

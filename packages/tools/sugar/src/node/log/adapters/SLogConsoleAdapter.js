@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
-const fmt_obj_1 = __importDefault(require("fmt-obj"));
+const toString_1 = __importDefault(require("../../string/toString"));
 module.exports = class SLogConsoleAdapter {
     /**
      * @name          constructor
@@ -93,13 +93,19 @@ module.exports = class SLogConsoleAdapter {
                 }
                 // log the message
                 if (typeof message === 'string') {
-                    ((global || window).nativeConsole || console)[consoleMethod](message + '⠀');
+                    ((global || window).nativeConsole || console)[consoleMethod](toString_1.default(message, {
+                        beautify: true
+                    }) + '⠀');
                 }
                 else if (typeof message === 'object') {
-                    ((global || window).nativeConsole || console)[consoleMethod](fmt_obj_1.default(message) + '⠀');
+                    ((global || window).nativeConsole || console)[consoleMethod](toString_1.default(message, {
+                        beautify: true
+                    }) + '⠀');
                 }
                 else {
-                    ((global || window).nativeConsole || console)[consoleMethod](message + '⠀');
+                    ((global || window).nativeConsole || console)[consoleMethod](toString_1.default(message, {
+                        beautify: true
+                    }) + '⠀');
                 }
                 // resolve the promise
                 resolve();

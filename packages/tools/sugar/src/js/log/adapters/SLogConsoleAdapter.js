@@ -45,12 +45,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../object/deepMerge", "fmt-obj"], factory);
+        define(["require", "exports", "../../object/deepMerge", "../../string/toString"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var deepMerge_1 = __importDefault(require("../../object/deepMerge"));
-    var fmt_obj_1 = __importDefault(require("fmt-obj"));
+    var toString_1 = __importDefault(require("../../string/toString"));
     return /** @class */ (function () {
         /**
          * @name          constructor
@@ -131,13 +131,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             }
                             // log the message
                             if (typeof message === 'string') {
-                                ((global || window).nativeConsole || console)[consoleMethod](message + '⠀');
+                                ((global || window).nativeConsole || console)[consoleMethod](toString_1.default(message, {
+                                    beautify: true
+                                }) + '⠀');
                             }
                             else if (typeof message === 'object') {
-                                ((global || window).nativeConsole || console)[consoleMethod](fmt_obj_1.default(message) + '⠀');
+                                ((global || window).nativeConsole || console)[consoleMethod](toString_1.default(message, {
+                                    beautify: true
+                                }) + '⠀');
                             }
                             else {
-                                ((global || window).nativeConsole || console)[consoleMethod](message + '⠀');
+                                ((global || window).nativeConsole || console)[consoleMethod](toString_1.default(message, {
+                                    beautify: true
+                                }) + '⠀');
                             }
                             // resolve the promise
                             resolve();

@@ -9,7 +9,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../object/deepMerge", "../string/parse", "./completeArgsObject", "../string/unquote", "../parse/parseTypeDefinitionString", "../is/ofType"], factory);
+        define(["require", "exports", "../object/deepMerge", "../string/parse", "./completeArgsObject", "../string/unquote", "../is/ofType", "../type/SType"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -17,8 +17,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var parse_1 = __importDefault(require("../string/parse"));
     var completeArgsObject_1 = __importDefault(require("./completeArgsObject"));
     var unquote_1 = __importDefault(require("../string/unquote"));
-    var parseTypeDefinitionString_1 = __importDefault(require("../parse/parseTypeDefinitionString"));
     var ofType_1 = __importDefault(require("../is/ofType"));
+    var SType_1 = __importDefault(require("../type/SType"));
     /**
      * @name                        parseArgs
      * @namespace           sugar.js.cli
@@ -67,6 +67,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function parseArgsString(string, settings) {
         if (settings === void 0) { settings = {}; }
         settings = deepMerge_1.default({
+            throw: true,
             definition: null,
             defaultObj: {}
         }, settings);
@@ -102,14 +103,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             return argsObj_1;
         }
         var currentArgName = null;
-        var currentArgType = null;
-        var currentArgDefinition = null;
-        stringArray = stringArray.filter(function (part) {
+        var rawArgsMap = {
+            __orphan: []
+        };
+        stringArray = stringArray.forEach(function (part) {
             var currentArg = part.replace(/^[-]{1,2}/, '');
             if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
                 var realArgName = getArgNameByAlias(currentArg, definition) || currentArg;
                 currentArgName = realArgName;
-                if (!definition[realArgName]) {
+                if (rawArgsMap[currentArgName] === undefined) {
+                    rawArgsMap[currentArgName] = true;
+                }
+                if (settings.throw && !definition[realArgName]) {
                     throw new Error("You try to pass an argument \"<yellow>" + realArgName + "</yellow>\" that is not supported. Here's the supported arguments:\n" + Object.keys(definition)
                         .map(function (argName) {
                         var argDefinition = definition[argName];
@@ -122,55 +127,67 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     })
                         .join('\n'));
                 }
-                currentArgDefinition = definition[realArgName];
-                currentArgType = parseTypeDefinitionString_1.default(currentArgDefinition.type);
-                argsObj[realArgName] = true;
-                return false;
+                // go to the next argument/value
+                return;
             }
-            var lastArgObjKey = Object.keys(argsObj)[Object.keys(argsObj).length - 1];
-            if (!lastArgObjKey) {
-                for (var key in definition) {
-                    var obj = definition[key];
-                    var value = parse_1.default(part);
-                    if (ofType_1.default(value, obj.type)) {
-                        if (obj.validator && !obj.validator(value)) {
-                            continue;
-                        }
-                        argsObj[key] = value;
+            // check if we have a current argument name
+            if (currentArgName === null)
+                currentArgName = '__orphan';
+            // cast the value
+            var value = parse_1.default(part);
+            // validate and cast value
+            if (settings.definition && settings.definition[currentArgName]) {
+                var definitionObj = settings.definition[currentArgName];
+                var sTypeInstance = new SType_1.default(definitionObj.type);
+                var res = sTypeInstance.is(value, {
+                    verbose: true
+                });
+                console.log('REERE', value, res);
+                // if (__ofType(value, definitionObj.type) !== true) {
+                //   if (settings.throw) {
+                //     throw `Sorry but the passed argument "<yellow>${currentArgName}</yellow>" has to be of type "<green>${
+                //       definitionObj.type
+                //     }</green>" but you have passed a "<red>${__typeOf(value)}</red>"`;
+                //   }
+                // }
+            }
+            // save the value into the raw args stack
+            if (currentArgName === '__orphan') {
+                rawArgsMap.__orphan.push(value);
+            }
+            else {
+                if (rawArgsMap[currentArgName] !== undefined &&
+                    rawArgsMap[currentArgName] !== true) {
+                    if (!Array.isArray(rawArgsMap[currentArgName]))
+                        rawArgsMap[currentArgName] = [rawArgsMap[currentArgName]];
+                    console.log('add', value);
+                    rawArgsMap[currentArgName].push(value);
+                }
+                else {
+                    rawArgsMap[currentArgName] = value;
+                }
+            }
+        });
+        var finalArgsMap = Object.assign({}, rawArgsMap);
+        delete finalArgsMap.__orphan;
+        // take care of orphan values
+        if (settings.definition) {
+            rawArgsMap.__orphan.forEach(function (value) {
+                for (var i = 0; i < Object.keys(settings.definition).length; i++) {
+                    var argName = Object.keys(settings.definition)[i];
+                    var definitionObj = settings.definition[argName];
+                    if (finalArgsMap[argName] !== undefined)
+                        continue;
+                    if (ofType_1.default(value, definitionObj.type) === true) {
+                        finalArgsMap[argName] = value;
                         break;
                     }
                 }
-            }
-            else if (lastArgObjKey) {
-                var value = parse_1.default(part);
-                if (currentArgType[0].type.toLowerCase() === 'array') {
-                    if (Array.isArray(value))
-                        argsObj[lastArgObjKey] = value;
-                    else if (!Array.isArray(argsObj[lastArgObjKey]))
-                        argsObj[lastArgObjKey] = [];
-                    if (currentArgType[0].of) {
-                        if (ofType_1.default(value, currentArgType[0].of)) {
-                            if (currentArgDefinition.validator &&
-                                !currentArgDefinition.validator(value)) {
-                                return true;
-                            }
-                            if (argsObj[lastArgObjKey] === value) {
-                            }
-                            else
-                                argsObj[lastArgObjKey].push(value);
-                        }
-                    }
-                    else {
-                        // argsObj[lastArgObjKey].push(value);
-                    }
-                }
-                else {
-                    argsObj[lastArgObjKey] = value;
-                    // __set(argsObj, lastArgObjKey, value);
-                }
-            }
-            return true;
-        });
+            });
+        }
+        console.log(rawArgsMap, finalArgsMap);
+        // console.log(stringArray);
+        return false;
         var finalObj = {};
         for (var key in definition) {
             var value = argsObj[key];

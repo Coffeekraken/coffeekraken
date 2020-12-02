@@ -129,7 +129,8 @@ const Cls = class SFile extends SPromise_1.default {
             relPath: this.relPath,
             name: this.name,
             extension: this.extension,
-            dirPath: this.dirPath
+            dirPath: this.dirPath,
+            content: this.readSync()
         };
     }
     /**
@@ -205,7 +206,9 @@ const Cls = class SFile extends SPromise_1.default {
      */
     write(data, settings = {}) {
         settings = Object.assign({ encoding: 'utf8' }, settings);
-        return fs_1.default.writeFile(this.path, data, settings);
+        const result = fs_1.default.writeFile(this.path, data, settings);
+        this.update();
+        return result;
     }
     /**
      * @name        writeSync
@@ -222,7 +225,9 @@ const Cls = class SFile extends SPromise_1.default {
      */
     write(data, settings = {}) {
         settings = Object.assign({ encoding: 'utf8' }, settings);
-        return fs_1.default.writeFileSync(this.path, data, settings);
+        const result = fs_1.default.writeFileSync(this.path, data, settings);
+        this.update();
+        return result;
     }
 };
 module.exports = Cls;

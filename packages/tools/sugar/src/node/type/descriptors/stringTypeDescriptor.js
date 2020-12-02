@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const string_1 = __importDefault(require("../../is/string"));
 const toString_1 = __importDefault(require("../../string/toString"));
-const _SType_1 = __importDefault(require("../_SType"));
 /**
  * @name              stringTypeDescriptor
  * @namespace         sugar.js.type.descriptor
@@ -33,5 +32,4 @@ const descriptor = {
         beautify: true
     })
 };
-_SType_1.default.registerType(descriptor);
 module.exports = descriptor;

@@ -1,0 +1,1 @@
+../../../js/type/descriptors/integerTypeDescriptor.ts

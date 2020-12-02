@@ -14,9 +14,6 @@ export interface ISFileWriteSettings {
   mode?: number;
   flag: string;
 }
-export interface ISFileCtor {
-  new (filepath: string, settings: ISFileSettings): ISFile;
-}
 
 export interface ISFileToObjectFn {
   (): Object;
@@ -38,6 +35,9 @@ export interface ISFileWriteFn {
 }
 export interface ISFileWriteSyncFn {
   (data: string, settings?: ISFileWriteSettings): any;
+}
+export interface ISFileCtor {
+  new (filepath: string, settings?: ISFileSettings): ISFile;
 }
 
 export default interface ISFile {

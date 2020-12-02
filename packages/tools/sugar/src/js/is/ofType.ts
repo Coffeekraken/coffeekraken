@@ -1,14 +1,6 @@
 // @ts-nocheck
 // @shared
 
-import __parseTypeDefinitionString from '../parse/parseTypeDefinitionString';
-import __toString from '../string/toString';
-import __isClass from './class';
-import __isInt from './integer';
-import __upperFirst from '../string/upperFirst';
-import __typeof from '../value/typeof';
-import __typeDefinitionArrayObjectToString from '../value/typeDefinitionArrayObjectToString';
-import __getExtendsStack from '../class/getExtendsStack';
 import __SType from '../type/SType';
 
 /**
@@ -21,8 +13,11 @@ import __SType from '../type/SType';
  * if the value pass the test or not...
  *
  * @param       {Mixed}        value          The value to check
- * @param       {String}       argTypeDefinition      The argument type definition string to use for the test
+ * @param       {String}       typeString      The argument type definition string to use for the test
+ * @param       {Object}        [settings={}]         Some settings to configure your type checking
  * @return      {Boolean|Object}                    true if the value pass the test, an object with two sub-objects describing the issue. 1 names "$expected" and the othet names "$received"
+ *
+ * @param     {Boolean}       [verbose=false]       Specify if you want to get back just "false", or an object describing the issue
  *
  * @todo      interface
  * @todo      doc
@@ -38,77 +33,14 @@ import __SType from '../type/SType';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function ofType(value, argTypeDefinition) {
-  // generate a new type to check
-
-  argTypeDefinition = 'Map<String>';
-
-  const typeCls = new __SType(argTypeDefinition);
-
-  const v = new Map();
-  v.set('hello', 'world');
-  v.set('plop', 12);
-
-  const res: boolean = typeCls.is(v);
-  console.log(res);
-
+function ofType(value, typeString, settings = {}) {
+  settings = {
+    verbose: false,
+    ...settings
+  };
+  console.log('of type', value, typeString);
+  const typeCls = new __SType(typeString, settings);
+  const res: boolean | object = typeCls.is(value);
   return res;
-
-  // // Class
-  // else if (definition.type === 'Class') {
-  //   if (__isClass(value)) return true;
-  // }
-
-  // // Integer
-  // else if (definition.type === 'Int' || definition.type === 'Integer') {
-  //   if (__isInt(value)) return true;
-  // }
-
-  // // check default types
-  // else if (
-  //   ['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(
-  //     definition.type
-  //   ) !== -1
-  // ) {
-  //   if (definition.type === 'Number') {
-  //     const type = typeOfValue;
-  //     if (type === 'Number' || type === 'Integer') return true;
-  //   } else {
-  //     if (typeOfValue === definition.type) return true;
-  //   }
-  // }
-
-  // check for "custom" types
-  // else if (__isClass(value) && value.name) {
-  //   if (__typeof(value) === definition.type) return true;
-  //   const classesStack = __getExtendsStack(value);
-  //   if (classesStack.indexOf(definition.type) !== -1) return true;
-  // } else if (value && value.constructor && value.constructor.name) {
-  //   if (definition.type === value.constructor.name) return true;
-  // }
-  // }
-
-  // return issueObj;
-}
-
-function getBaseClass(targetClass) {
-  const stack = [];
-
-  if (targetClass instanceof Function) {
-    let baseClass = targetClass;
-
-    while (baseClass) {
-      const newBaseClass = Object.getPrototypeOf(baseClass);
-
-      if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {
-        stack.push(newBaseClass.name);
-        baseClass = newBaseClass;
-      } else {
-        break;
-      }
-    }
-
-    return stack;
-  }
 }
 export = ofType;

@@ -131,19 +131,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             }
                             // log the message
                             if (typeof message === 'string') {
-                                ((global || window).nativeConsole || console)[consoleMethod](toString_1.default(message, {
-                                    beautify: true
-                                }) + '⠀');
+                                ((global || window).nativeConsole || console)[consoleMethod](toString_1.default(message, {}) + '⠀');
                             }
                             else if (typeof message === 'object') {
-                                ((global || window).nativeConsole || console)[consoleMethod](toString_1.default(message, {
-                                    beautify: true
-                                }) + '⠀');
+                                ((global || window).nativeConsole || console)[consoleMethod](toString_1.default(message, {}) + '⠀');
                             }
                             else {
-                                ((global || window).nativeConsole || console)[consoleMethod](toString_1.default(message, {
-                                    beautify: true
-                                }) + '⠀');
+                                ((global || window).nativeConsole || console)[consoleMethod](toString_1.default(message, {}) + '⠀');
                             }
                             // resolve the promise
                             resolve();

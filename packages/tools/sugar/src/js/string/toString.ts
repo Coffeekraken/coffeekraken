@@ -30,7 +30,9 @@ import { highlight as __cliHighlight } from 'cli-highlight';
  *
  * @param    {Mixed}    value    The value to convert to string
  * @param     {Object}      [settings={}]             An object of settings to configure your toString process:
- * - beautify (false) {Boolean}: Specify if you want to beautify the output like objects, arrays, etc...
+ * - beautify (true) {Boolean}: Specify if you want to beautify the output like objects, arrays, etc...
+ * - highlight (true) {Boolean}: Specify if you want to color highlight the output like objects, arrays, etc...
+ * - theme ({}) {Object}: The theme to use to colorize the output. See https://highlightjs.readthedocs.io/en/latest/css-classes-reference.html
  * @return    {String}    The resulting string
  *
  * @todo      interface
@@ -49,23 +51,23 @@ import { highlight as __cliHighlight } from 'cli-highlight';
 function fn(value, settings = {}) {
   settings = __deepMerge(
     {
-      beautify: false
+      beautify: true,
+      highlight: true,
+      theme: {
+        number: __chalk.yellow,
+        default: __chalk.white,
+        keyword: __chalk.blue,
+        regexp: __chalk.red,
+        string: __chalk.whiteBright,
+        class: __chalk.yellow,
+        function: __chalk.yellow,
+        comment: __chalk.gray,
+        variable: __chalk.red,
+        attr: __chalk.green
+      }
     },
     settings
   );
-  // const DEFAULT_THEME = {
-  //   comment: 'gray',
-  //   content: 'reset',
-  //   prop: 'yellow',
-  //   tag: 'cyan',
-  //   value: 'green'
-  // };
-  // return __prettyFormat(value, {
-  //   highlight: true,
-  //   indent: 4,
-  //   plugins: [__reactTestPlugin, __reactElementPlugin],
-  //   theme: DEFAULT_THEME
-  // });
 
   // string
   if (typeof value === 'string') return value;
@@ -88,7 +90,7 @@ function fn(value, settings = {}) {
 
   // Map
   if (__isMap(value)) {
-    return __stringifyObject(__mapToObj(value));
+    value = __mapToObj(value);
   }
 
   // JSON
@@ -98,23 +100,16 @@ function fn(value, settings = {}) {
       return value;
     });
 
-    const theme = {
-      number: __chalk.yellow,
-      default: __chalk.white,
-      keyword: __chalk.blue,
-      regexp: __chalk.red,
-      string: __chalk.whiteBright,
-      class: __chalk.yellow,
-      function: __chalk.yellow,
-      comment: __chalk.gray,
-      variable: __chalk.red,
-      attr: __chalk.green
-    };
     let prettyString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
     prettyString = prettyString
       .replace(/"([^"]+)":/g, '$1:')
       .replace(/\uFFFF/g, '\\"');
-    prettyString = __cliHighlight(prettyString, { language: 'js', theme });
+    if (settings.highlight) {
+      prettyString = __cliHighlight(prettyString, {
+        language: 'js',
+        theme: settings.theme
+      });
+    }
     return prettyString;
   }
   // boolean

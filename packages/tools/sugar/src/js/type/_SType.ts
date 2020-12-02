@@ -1,12 +1,15 @@
 // @ts-nocheck
 // @shared
 
+import __SPromise from '../promise/SPromise';
+import __getExtendsStack from '../class/getExtendsStack';
 import __typeOf from '../value/typeof';
 import __uniquid from '../string/uniqid';
 import __upperFirst from '../string/upperFirst';
 import __toString from '../string/toString';
 import __isOfType from '../is/ofType';
 import __deepMerge from '../object/deepMerge';
+import __parseHtml from '../console/parseHtml';
 import __parseTypeString from './parseTypeString';
 import ISType, {
   ISTypeCtor,
@@ -17,6 +20,7 @@ import ISType, {
   ISTypeInstanciatedTypes
 } from './interface/ISType';
 import { IParseTypeStringResultObj } from './interface/IParseTypeString';
+import descriptor from './descriptors/stringTypeDescriptor';
 
 /**
  * @name                SType
@@ -27,6 +31,15 @@ import { IParseTypeStringResultObj } from './interface/IParseTypeString';
  * when creating any type like object, string, etc...
  *
  * @param       {ISTypeSettings}      settings        An object of setting to configure your descriptor instance
+ *
+ * @setting     {String}        [id=this.constructor.name]        An id for your instance
+ * @setting     {String}        [name=this.constructor.name]      A name for your instance
+ * @setting     {Boolean}       [throw=true]            Specify if you want your instance to throw errors or not
+ * @setting     {Boolean}       [verbose=true]          Specify if you want back an object describing the issue, or just a false
+ * @setting     {Boolean}       [customTypes=true]      Specify if you want the instance to take care of custom types like "SType", "SPromise", etc. or not
+ *
+ * @todo      tests
+ * @todo      doc
  *
  * @example       js
  * import SType from '@coffeekraken/sugar/js/descriptor/SType';
@@ -40,7 +53,7 @@ import { IParseTypeStringResultObj } from './interface/IParseTypeString';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls: ISTypeCtor = class SType implements ISType {
+const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
   /**
    * @name        _settings
    * @type        ISTypeSettings
@@ -130,6 +143,7 @@ const Cls: ISTypeCtor = class SType implements ISType {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(typeString: string, settings: ISTypeSettings = {}) {
+    super();
     // save the typeString
     this.typeString = typeString;
     // standardise the typeString
@@ -145,7 +159,8 @@ const Cls: ISTypeCtor = class SType implements ISType {
         id: this.constructor.name,
         name: this.constructor.name,
         throw: true,
-        verbose: true
+        verbose: true,
+        customTypes: true
       },
       settings
     );
@@ -169,95 +184,82 @@ const Cls: ISTypeCtor = class SType implements ISType {
    */
   is(value: any, settings: ISTypeSettings = {}): boolean {
     settings = __deepMerge(this._settings, settings);
+
+    let issues = {};
+
     // loop on each types
     for (let i = 0; i < this.types.length; i++) {
       const typeObj = this.types[i],
         typeId = typeObj.type;
       // check the value
-      const res: boolean = this._isType(value, typeId);
+      const res: boolean = this._isType(value, typeId, settings);
       // if the result is falsy
-      if (res !== true) {
-        if (settings.verbose === true) {
-          const typeOf = __typeOf(value);
-          const verboseObj: ISTypeVerboseObj = {
-            typeString: this.typeString,
-            value,
-            expected: {
-              type: __upperFirst(typeId)
-            },
-            received: {
-              type: __upperFirst(typeOf)
-            }
-          };
-          return verboseObj;
-        }
-        return false;
-      }
-      // check if the element has to be an array or an object containing some types
-      if (typeObj.of !== undefined) {
+      if (res === true) {
+        // if this matching type does not have any "of" to check
+        // simply return true cause we have a type that match
+        if (typeObj.of === undefined) return true;
+
         // make sure the type of the passed value
         // is one of that can contain some values
         // like "object", "array" or "map"
         const typeOf = __typeOf(value);
-        if (
-          settings.throw &&
-          typeOf !== 'Array' &&
-          typeOf !== 'Object' &&
-          typeOf !== 'Map'
-        ) {
-          throw `Sorry but you have specified a type string "<yellow>${this.typeString}</yellow>" with some "<...>" definition on a type "<cyan>${typeOf}</cyan>" that does not support "child" value(s)...`;
-        }
-        const loopOn =
-          typeOf === 'Array'
-            ? value.keys()
-            : typeOf === 'Object'
-            ? Object.keys(value)
-            : Array.from(value.keys());
-
-        for (let k = 0; k < loopOn.length; k++) {
-          let isValid = false,
-            invalidType: string,
-            invalidValue: any,
-            invalidIdx: string | number;
-          for (let j = 0; j < typeObj.of.length; j++) {
-            if (isValid === false) {
-              const type = typeObj.of[j];
-              const idx = loopOn[k];
-              const v: any = typeOf === 'Map' ? value.get(idx) : value[idx];
-              // validate the value if needed
-              const ofRes: boolean = this._isType(v, type);
-              if (ofRes !== true) {
-                invalidIdx = idx;
-                invalidType = __typeOf(v);
-                invalidValue = v;
-              }
-              isValid = ofRes;
-            }
+        if (typeOf !== 'Array' && typeOf !== 'Object' && typeOf !== 'Map') {
+          if (settings.throw) {
+            throw `Sorry but you have specified a type string "<yellow>${this.typeString}</yellow>" with some "<...>" definition on a type "<cyan>${typeOf}</cyan>" that does not support "child" value(s)...`;
+          } else {
+            continue;
           }
-          // check if the checked value does not correspond to any of the passed
-          // types
-          if (isValid === false) {
-            if (settings.verbose === true) {
-              const verboseObj: ISTypeVerboseObj = {
-                typeString: this.typeString,
-                from: value,
-                index: invalidIdx,
-                value: invalidValue,
+        }
+
+        // get the keys on which to loop
+        const loopOn =
+          typeOf === 'Object' ? Object.keys(value) : Array.from(value.keys());
+
+        // loop on all the keys found
+        for (let k = 0; k < loopOn.length; k++) {
+          for (let j = 0; j < typeObj.of.length; j++) {
+            const type = typeObj.of[j];
+            const idx = loopOn[k];
+            const v: any = typeOf === 'Map' ? value.get(idx) : value[idx];
+            // validate the value if needed
+            const ofRes: boolean = this._isType(v, type, settings);
+            if (ofRes !== true) {
+              if (issues[typeObj.type] === undefined) issues[typeObj.type] = [];
+
+              issues[typeObj.type].push({
                 expected: {
-                  type: typeObj.of.map((t) => __upperFirst(t)).join(',')
+                  type: typeObj.type
                 },
                 received: {
-                  type: __upperFirst(invalidType)
+                  type: __typeOf(v),
+                  value: v
                 }
-              };
-              return verboseObj;
+              });
+            } else {
+              // return true cause we found a match
+              return true;
             }
-            return false;
           }
         }
       }
     }
-    return true;
+
+    if (settings.verbose === true) {
+      const verboseObj: ISTypeVerboseObj = {
+        typeString: this.typeString,
+        value,
+        expected: {
+          type: this.typeString
+        },
+        received: {
+          type: __typeOf(value)
+        },
+        issues
+      };
+      return verboseObj;
+    } else {
+      return false;
+    }
   }
 
   /**
@@ -278,14 +280,99 @@ const Cls: ISTypeCtor = class SType implements ISType {
   _isType(value: any, type: string, settings: ISTypeSettings = {}): boolean {
     settings = __deepMerge(this._settings, settings);
     // check that the passed type is registered
-    if (
-      settings.throw &&
-      this.constructor._registeredTypes[type.toLowerCase()] === undefined
-    ) {
-      throw `Sorry but you try to validate a value with the type "<yellow>${type}</yellow>" but this type is not registered...`;
+    if (this.constructor._registeredTypes[type.toLowerCase()] === undefined) {
+      // handle custom types
+      if (settings.customTypes === true) {
+        const typeOf = __typeOf(value).toLowerCase();
+        const extendsStack = __getExtendsStack(value).map((s) =>
+          s.toLowerCase()
+        );
+        if (type === typeOf || extendsStack.indexOf(type) !== -1) return true;
+      }
+      if (settings.throw) {
+        throw `Sorry but you try to validate a value with the type "<yellow>${type}</yellow>" but this type is not registered...`;
+      } else {
+        return false;
+      }
     }
     // validate the value using the "is" type method
     return this.constructor._registeredTypes[type.toLowerCase()].is(value);
+  }
+
+  /**
+   * @name          cast
+   * @type          Function
+   *
+   * This method allows you to cast the passed value to the wanted type.
+   * !!! If multiple types are passed in the typeString, the first one that
+   * is "castable" to will be used.
+   *
+   * @param     {Any}         value         The value you want to cast
+   * @param     {ISTypeSettings}      [settings={}]       Some settings you want to override
+   * @return    {Any}                         The casted value, or undefined if cannot be casted
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com>
+   */
+  cast(value: any, settings: ISTypeSettings): any {
+    settings = __deepMerge(this._settings, settings);
+
+    // store exceptions coming from descriptors
+    let verboseObj = {
+      value,
+      issues: {},
+      settings
+    };
+
+    // loop on each types
+    for (let i = 0; i < this.types.length; i++) {
+      const typeObj = this.types[i],
+        typeId = typeObj.type;
+
+      // get the descriptor object
+      const descriptorObj = this.constructor._registeredTypes[
+        typeId.toLowerCase()
+      ];
+
+      // check that we have a descriptor for this type
+      if (descriptorObj === undefined) {
+        // pass to the next descriptor
+        continue;
+      }
+      // check that this descriptor is eligeble for casting
+      if (descriptorObj.cast === undefined) continue;
+      // try to cast the value
+      let castedValue: any;
+      try {
+        castedValue = descriptorObj.cast(value);
+        if (castedValue !== undefined) return castedValue;
+      } catch (e) {
+        // add the issue in the verboseObj
+        verboseObj.issues[typeId] = e.toString();
+        // this descriptor can not cast our value
+        continue;
+      }
+    }
+    // our value has not bein casted
+    if (settings.throw) {
+      let stack = [
+        `Sorry but the value of type "<cyan>${__typeOf(
+          value
+        )}</cyan>" passed to be casted in type "<yellow>${
+          this.typeString
+        }</yellow>" can not be casted correctly. Here's why:\n`
+      ];
+      Object.keys(verboseObj.issues).forEach((descriptorId) => {
+        stack.push(
+          `- <red>${descriptorId}</red>: ${verboseObj.issues[descriptorId]}`
+        );
+      });
+      throw __parseHtml(stack.join('\n'));
+    }
+    if (settings.verbose === true) {
+      return verboseObj;
+    }
+    return undefined;
   }
 
   /**

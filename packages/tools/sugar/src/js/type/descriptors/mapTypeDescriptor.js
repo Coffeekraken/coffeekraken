@@ -8,12 +8,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../is/map", "../_SType"], factory);
+        define(["require", "exports", "../../is/map"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var map_1 = __importDefault(require("../../is/map"));
-    var _SType_1 = __importDefault(require("../_SType"));
     /**
      * @name              mapTypeDescriptor
      * @namespace         sugar.js.type.descriptor
@@ -45,6 +44,5 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             return map;
         }
     };
-    _SType_1.default.registerType(descriptor);
     return descriptor;
 });

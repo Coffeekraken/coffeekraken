@@ -34,6 +34,4 @@ const descriptor: ISTypeDescriptor = {
     })
 };
 
-__SType.registerType(descriptor);
-
 export = descriptor;

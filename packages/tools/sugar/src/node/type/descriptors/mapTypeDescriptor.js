@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const map_1 = __importDefault(require("../../is/map"));
-const _SType_1 = __importDefault(require("../_SType"));
 /**
  * @name              mapTypeDescriptor
  * @namespace         sugar.js.type.descriptor
@@ -36,5 +35,4 @@ const descriptor = {
         return map;
     }
 };
-_SType_1.default.registerType(descriptor);
 module.exports = descriptor;

@@ -29,7 +29,7 @@ const fn: ICompileTs = function compileTs(
 ): Promise<any> {
   return new __SPromise(async (resolve, reject, trigger, cancel) => {
     // check if we have a config passed
-    console.log(params);
+    console.log('params', params);
     if (params.config !== undefined) {
       // wrap the passed config in an SFile
     }

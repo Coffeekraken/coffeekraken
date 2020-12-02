@@ -1,6 +1,7 @@
 // @ts-nocheck
 // @shared
 
+import __typeOf from '../value/typeof';
 import __deepMerge from '../object/deepMerge';
 import __parse from '../string/parse';
 import __set from '../object/set';
@@ -11,8 +12,9 @@ import __isPlainObject from '../is/plainObject';
 import __deepMap from '../object/deepMap';
 import __completeArgsObject from './completeArgsObject';
 import __unquote from '../string/unquote';
-import __parseTypeDefinitionString from '../parse/parseTypeDefinitionString';
+import __parseTypeString from '../type/parseTypeString';
 import __ofType from '../is/ofType';
+import __SType from '../type/SType';
 
 /**
  * @name                        parseArgs
@@ -62,6 +64,7 @@ import __ofType from '../is/ofType';
 function parseArgsString(string, settings = {}) {
   settings = __deepMerge(
     {
+      throw: true,
       definition: null,
       defaultObj: {}
     },
@@ -105,17 +108,23 @@ function parseArgsString(string, settings = {}) {
   }
 
   let currentArgName = null;
-  let currentArgType = null;
-  let currentArgDefinition = null;
+  let rawArgsMap = {
+    __orphan: []
+  };
 
-  stringArray = stringArray.filter((part) => {
+  stringArray = stringArray.forEach((part) => {
     const currentArg = part.replace(/^[-]{1,2}/, '');
+
     if (part.slice(0, 2) === '--' || part.slice(0, 1) === '-') {
       const realArgName =
         getArgNameByAlias(currentArg, definition) || currentArg;
       currentArgName = realArgName;
 
-      if (!definition[realArgName]) {
+      if (rawArgsMap[currentArgName] === undefined) {
+        rawArgsMap[currentArgName] = true;
+      }
+
+      if (settings.throw && !definition[realArgName]) {
         throw new Error(
           `You try to pass an argument "<yellow>${realArgName}</yellow>" that is not supported. Here's the supported arguments:\n${Object.keys(
             definition
@@ -131,60 +140,73 @@ function parseArgsString(string, settings = {}) {
             .join('\n')}`
         );
       }
-
-      currentArgDefinition = definition[realArgName];
-
-      currentArgType = __parseTypeDefinitionString(currentArgDefinition.type);
-
-      argsObj[realArgName] = true;
-
-      return false;
+      // go to the next argument/value
+      return;
     }
 
-    const lastArgObjKey = Object.keys(argsObj)[Object.keys(argsObj).length - 1];
+    // check if we have a current argument name
+    if (currentArgName === null) currentArgName = '__orphan';
 
-    if (!lastArgObjKey) {
-      for (const key in definition) {
-        const obj = definition[key];
+    // cast the value
+    const value = __parse(part);
 
-        const value = __parse(part);
+    // validate and cast value
+    if (settings.definition && settings.definition[currentArgName]) {
+      const definitionObj = settings.definition[currentArgName];
+      const sTypeInstance = new __SType(definitionObj.type);
+      const res = sTypeInstance.is(value, {
+        verbose: true
+      });
+      console.log('REERE', value, res);
+      // if (__ofType(value, definitionObj.type) !== true) {
+      //   if (settings.throw) {
+      //     throw `Sorry but the passed argument "<yellow>${currentArgName}</yellow>" has to be of type "<green>${
+      //       definitionObj.type
+      //     }</green>" but you have passed a "<red>${__typeOf(value)}</red>"`;
+      //   }
+      // }
+    }
 
-        if (__ofType(value, obj.type)) {
-          if (obj.validator && !obj.validator(value)) {
-            continue;
-          }
-          argsObj[key] = value;
+    // save the value into the raw args stack
+    if (currentArgName === '__orphan') {
+      rawArgsMap.__orphan.push(value);
+    } else {
+      if (
+        rawArgsMap[currentArgName] !== undefined &&
+        rawArgsMap[currentArgName] !== true
+      ) {
+        if (!Array.isArray(rawArgsMap[currentArgName]))
+          rawArgsMap[currentArgName] = [rawArgsMap[currentArgName]];
+        console.log('add', value);
+        rawArgsMap[currentArgName].push(value);
+      } else {
+        rawArgsMap[currentArgName] = value;
+      }
+    }
+  });
+
+  const finalArgsMap = Object.assign({}, rawArgsMap);
+  delete finalArgsMap.__orphan;
+
+  // take care of orphan values
+  if (settings.definition) {
+    rawArgsMap.__orphan.forEach((value) => {
+      for (let i = 0; i < Object.keys(settings.definition).length; i++) {
+        const argName = Object.keys(settings.definition)[i];
+        const definitionObj = settings.definition[argName];
+        if (finalArgsMap[argName] !== undefined) continue;
+        if (__ofType(value, definitionObj.type) === true) {
+          finalArgsMap[argName] = value;
           break;
         }
       }
-    } else if (lastArgObjKey) {
-      const value = __parse(part);
+    });
+  }
 
-      if (currentArgType[0].type.toLowerCase() === 'array') {
-        if (Array.isArray(value)) argsObj[lastArgObjKey] = value;
-        else if (!Array.isArray(argsObj[lastArgObjKey]))
-          argsObj[lastArgObjKey] = [];
-        if (currentArgType[0].of) {
-          if (__ofType(value, currentArgType[0].of)) {
-            if (
-              currentArgDefinition.validator &&
-              !currentArgDefinition.validator(value)
-            ) {
-              return true;
-            }
-            if (argsObj[lastArgObjKey] === value) {
-            } else argsObj[lastArgObjKey].push(value);
-          }
-        } else {
-          // argsObj[lastArgObjKey].push(value);
-        }
-      } else {
-        argsObj[lastArgObjKey] = value;
-        // __set(argsObj, lastArgObjKey, value);
-      }
-    }
-    return true;
-  });
+  console.log(rawArgsMap, finalArgsMap);
+
+  // console.log(stringArray);
+  return false;
 
   const finalObj = {};
   for (const key in definition) {

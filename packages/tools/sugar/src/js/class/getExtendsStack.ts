@@ -39,7 +39,6 @@ function getExtendsStack(cls) {
 
   while (baseClass) {
     const newBaseClass = Object.getPrototypeOf(baseClass);
-
     if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {
       stack.push(newBaseClass.name);
       baseClass = newBaseClass;

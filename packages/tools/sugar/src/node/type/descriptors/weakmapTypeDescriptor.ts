@@ -1,0 +1,1 @@
+../../../js/type/descriptors/weakmapTypeDescriptor.ts

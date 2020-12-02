@@ -8,13 +8,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../is/string", "../../string/toString", "../_SType"], factory);
+        define(["require", "exports", "../../is/string", "../../string/toString"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var string_1 = __importDefault(require("../../is/string"));
     var toString_1 = __importDefault(require("../../string/toString"));
-    var _SType_1 = __importDefault(require("../_SType"));
     /**
      * @name              stringTypeDescriptor
      * @namespace         sugar.js.type.descriptor
@@ -44,6 +43,5 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             });
         }
     };
-    _SType_1.default.registerType(descriptor);
     return descriptor;
 });

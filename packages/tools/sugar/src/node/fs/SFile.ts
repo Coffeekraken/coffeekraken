@@ -158,7 +158,7 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(filepath: string, settings: ISFileSettings = {}) {
+  constructor(filepath: string, settings?: ISFileSettings = {}) {
     super(settings);
     this._settings = __deepMerge(
       {
@@ -218,7 +218,8 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
       relPath: this.relPath,
       name: this.name,
       extension: this.extension,
-      dirPath: this.dirPath
+      dirPath: this.dirPath,
+      content: this.readSync()
     };
   }
 
@@ -306,7 +307,9 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
       encoding: 'utf8',
       ...settings
     };
-    return __fs.writeFile(this.path, data, settings);
+    const result: any = __fs.writeFile(this.path, data, settings);
+    this.update();
+    return result;
   }
 
   /**
@@ -327,7 +330,9 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
       encoding: 'utf8',
       ...settings
     };
-    return __fs.writeFileSync(this.path, data, settings);
+    const result: any = __fs.writeFileSync(this.path, data, settings);
+    this.update();
+    return result;
   }
 };
 

@@ -16,6 +16,7 @@ export interface ISTypeVerboseReceivedObj {
 }
 export interface ISTypeVerboseObj {
   typeString: string;
+  source?: any;
   idx?: string | number;
   value: any;
   expected: ISTypeVerboseExpectedObj;

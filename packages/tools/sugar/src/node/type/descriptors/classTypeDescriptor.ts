@@ -1,0 +1,1 @@
+../../../js/type/descriptors/classTypeDescriptor.ts

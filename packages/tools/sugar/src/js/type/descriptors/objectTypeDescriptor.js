@@ -8,12 +8,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../../is/object", "../_SType"], factory);
+        define(["require", "exports", "../../is/object"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var object_1 = __importDefault(require("../../is/object"));
-    var _SType_1 = __importDefault(require("../_SType"));
     /**
      * @name              objectTypeDescriptor
      * @namespace         sugar.js.type.descriptor
@@ -45,6 +44,5 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             };
         }
     };
-    _SType_1.default.registerType(descriptor);
     return descriptor;
 });

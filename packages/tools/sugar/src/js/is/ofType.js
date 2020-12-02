@@ -1,5 +1,16 @@
 // @ts-nocheck
 // @shared
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -24,8 +35,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * if the value pass the test or not...
      *
      * @param       {Mixed}        value          The value to check
-     * @param       {String}       argTypeDefinition      The argument type definition string to use for the test
+     * @param       {String}       typeString      The argument type definition string to use for the test
+     * @param       {Object}        [settings={}]         Some settings to configure your type checking
      * @return      {Boolean|Object}                    true if the value pass the test, an object with two sub-objects describing the issue. 1 names "$expected" and the othet names "$received"
+     *
+     * @param     {Boolean}       [verbose=false]       Specify if you want to get back just "false", or an object describing the issue
      *
      * @todo      interface
      * @todo      doc
@@ -41,64 +55,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function ofType(value, argTypeDefinition) {
-        // generate a new type to check
-        argTypeDefinition = 'Map<String>';
-        var typeCls = new SType_1.default(argTypeDefinition);
-        var v = new Map();
-        v.set('hello', 'world');
-        v.set('plop', 12);
-        var res = typeCls.is(v);
-        console.log(res);
+    function ofType(value, typeString, settings) {
+        if (settings === void 0) { settings = {}; }
+        settings = __assign({ verbose: false }, settings);
+        console.log('of type', value, typeString);
+        var typeCls = new SType_1.default(typeString, settings);
+        var res = typeCls.is(value);
         return res;
-        // // Class
-        // else if (definition.type === 'Class') {
-        //   if (__isClass(value)) return true;
-        // }
-        // // Integer
-        // else if (definition.type === 'Int' || definition.type === 'Integer') {
-        //   if (__isInt(value)) return true;
-        // }
-        // // check default types
-        // else if (
-        //   ['Boolean', 'Number', 'String', 'Bigint', 'Symbol', 'Function'].indexOf(
-        //     definition.type
-        //   ) !== -1
-        // ) {
-        //   if (definition.type === 'Number') {
-        //     const type = typeOfValue;
-        //     if (type === 'Number' || type === 'Integer') return true;
-        //   } else {
-        //     if (typeOfValue === definition.type) return true;
-        //   }
-        // }
-        // check for "custom" types
-        // else if (__isClass(value) && value.name) {
-        //   if (__typeof(value) === definition.type) return true;
-        //   const classesStack = __getExtendsStack(value);
-        //   if (classesStack.indexOf(definition.type) !== -1) return true;
-        // } else if (value && value.constructor && value.constructor.name) {
-        //   if (definition.type === value.constructor.name) return true;
-        // }
-        // }
-        // return issueObj;
-    }
-    function getBaseClass(targetClass) {
-        var stack = [];
-        if (targetClass instanceof Function) {
-            var baseClass = targetClass;
-            while (baseClass) {
-                var newBaseClass = Object.getPrototypeOf(baseClass);
-                if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {
-                    stack.push(newBaseClass.name);
-                    baseClass = newBaseClass;
-                }
-                else {
-                    break;
-                }
-            }
-            return stack;
-        }
     }
     return ofType;
 });

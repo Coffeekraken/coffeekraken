@@ -1,7 +1,3 @@
-// @shared
-
-import SType from './_SType';
-import './descriptors/stringTypeDescriptor';
-import './descriptors/mapTypeDescriptor';
-import './descriptors/objectTypeDescriptor';
-export = SType;
+import __SType from './_SType';
+import './sTypeRegisterDefaultDescriptors';
+export = __SType;

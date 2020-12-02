@@ -35,7 +35,7 @@ const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 const fn = function compileTs(params) {
     return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
         // check if we have a config passed
-        console.log(params);
+        console.log('params', params);
         if (params.config !== undefined) {
             // wrap the passed config in an SFile
         }

@@ -36,9 +36,16 @@
             if (typeof value === 'bigint')
                 return value;
             if (typeof value !== 'string' && typeof value !== 'number') {
-                throw "Sorry but only <yellow>String</yellow> and <yellow>Number</yellow> can be casted to <green>Bigint</green>";
+                return new Error("Sorry but only <yellow>String</yellow> and <yellow>Number</yellow> can be casted to <green>Bigint</green>");
             }
-            return BigInt(value);
+            var res;
+            try {
+                res = BigInt(value);
+            }
+            catch (e) {
+                res = new Error("It seem's that the passed value \"<yellow>" + value + "</yellow>\" can not be casted to a <green>BigInt</green>");
+            }
+            return res;
         }
     };
     return descriptor;

@@ -27,7 +27,7 @@ const descriptor: ISTypeDescriptor = {
   id: 'class',
   is: (value: any) => __isClass(value),
   cast: (value: any) => {
-    throw `Sorry but nothing is castable to a Class`;
+    return new Error(`Sorry but nothing is castable to a Class`);
   }
 };
 

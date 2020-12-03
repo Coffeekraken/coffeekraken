@@ -22,7 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../promise/SPromise", "../class/getExtendsStack", "../value/typeof", "../object/deepMerge", "../console/parseHtml", "./parseTypeString"], factory);
+        define(["require", "exports", "../promise/SPromise", "../class/getExtendsStack", "../value/typeof", "../string/toString", "../object/deepMerge", "../console/parseHtml", "./parseTypeString"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -30,6 +30,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var SPromise_1 = __importDefault(require("../promise/SPromise"));
     var getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
     var typeof_1 = __importDefault(require("../value/typeof"));
+    var toString_1 = __importDefault(require("../string/toString"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var parseHtml_1 = __importDefault(require("../console/parseHtml"));
     var parseTypeString_1 = __importDefault(require("./parseTypeString"));
@@ -191,6 +192,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         }
                     }
                 }
+                if (settings.throw === true) {
+                    throw parseHtml_1.default([
+                        "Sorry but the value passed:",
+                        '',
+                        toString_1.default(value),
+                        '',
+                        "which is of type \"<red>" + typeof_1.default(value) + "</red>\" does not correspond to the requested type(s) \"<green>" + this.typeString + "</green>\""
+                    ].join('\n'));
+                }
                 if (settings.verbose === true) {
                     var verboseObj = {
                         typeString: this.typeString,
@@ -201,7 +211,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         received: {
                             type: typeof_1.default(value)
                         },
-                        issues: issues
+                        issues: issues,
+                        settings: settings
                     };
                     return verboseObj;
                 }
@@ -286,18 +297,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         continue;
                     // try to cast the value
                     var castedValue = void 0;
-                    try {
-                        castedValue = descriptorObj.cast(value);
-                        if (castedValue !== undefined)
-                            return castedValue;
-                    }
-                    catch (e) {
+                    // try {
+                    castedValue = descriptorObj.cast(value);
+                    if (castedValue instanceof Error) {
                         // add the issue in the verboseObj
-                        verboseObj.issues[typeId] = e.toString();
-                        // this descriptor can not cast our value
+                        verboseObj.issues[typeId] = castedValue.toString();
+                        // next
                         continue;
                     }
+                    // handle the "of" parameter
+                    // make sure the passed type can have child(s)
+                    if (typeObj.of !== undefined &&
+                        this.canHaveChilds(castedValue) === false) {
+                        var issueStr = "Sorry but the passed type \"<yellow>" + typeId + "</yellow>\" has some child(s) dependencies \"<green>" + typeObj.of.join('|') + "</green>\" but this type can not have child(s)";
+                        if (settings.throw === true) {
+                            throw parseHtml_1.default(issueStr);
+                        }
+                        // add the issue in the verboseObj
+                        verboseObj.issues[typeId] = issueStr;
+                    }
+                    else if (typeObj.of !== undefined) {
+                        var sTypeInstance = new SType(typeObj.of.join('|'));
+                    }
+                    console.log('CASDTED', castedValue, descriptorObj.id);
+                    if (castedValue === null && descriptorObj.id === 'null')
+                        return null;
+                    if (castedValue === undefined && descriptorObj.id === 'undefined')
+                        return undefined;
+                    if (castedValue !== null && castedValue !== undefined)
+                        return castedValue;
+                    // something goes wrong
+                    verboseObj.issues[typeId] = "Something goes wrong but no details are available... Sorry";
                 }
+                console.log('CIJHIEUHIPUF HOEIUP EFHUIHE F');
+                console.log('NOT', value);
                 // our value has not bein casted
                 if (settings.throw) {
                     var stack_1 = [
@@ -312,6 +345,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     return verboseObj;
                 }
                 return undefined;
+            };
+            /**
+             * @name          canHaveChilds
+             * @type          Function
+             *
+             * This method simply take a value and return true if can have child(s), false if not
+             *
+             * @param       {Any}       value       The value to check
+             * @return      {Boolean}         true if can have child(s) (Object, Array and Map), false if not
+             *
+             * @since     2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com>
+             */
+            SType.prototype.canHaveChilds = function (value) {
+                var type = typeof_1.default(value);
+                return type === 'Array' || type === 'Object' || type === 'Map';
             };
             Object.defineProperty(SType.prototype, "name", {
                 /**

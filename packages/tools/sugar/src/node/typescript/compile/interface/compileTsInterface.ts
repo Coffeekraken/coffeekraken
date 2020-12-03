@@ -10,7 +10,7 @@ import __fs from 'fs';
 class compileTsInterface extends __SInterface {
   static definition = {
     config: {
-      type: 'File|Array<File>',
+      type: 'Number|Array<File>',
       alias: 'c'
     },
     input: {

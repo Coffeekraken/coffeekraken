@@ -26,7 +26,7 @@ const descriptor: ISTypeDescriptor = {
   id: 'weakset',
   is: (value: any) => value instanceof WeakSet,
   cast: (value: any) => {
-    throw `Sorry but nothing can be casted to a WeakSet for now`;
+    return new Error(`Sorry but nothing can be casted to a WeakSet for now`);
   }
 };
 

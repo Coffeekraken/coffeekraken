@@ -26,7 +26,7 @@ const descriptor: ISTypeDescriptor = {
   id: 'weakmap',
   is: (value: any) => value instanceof WeakMap,
   cast: (value: any) => {
-    throw `Sorry but nothing can be casted to a WeakMap for now`;
+    return new Error(`Sorry but nothing can be casted to a WeakMap for now`);
   }
 };
 

@@ -38,9 +38,11 @@ const descriptor: ISTypeDescriptor = {
   cast: (value: any) => {
     if (value instanceof __SFile) return value;
     if (typeof value !== 'string' || __isPath(value) !== true) {
-      throw `Sorry but the passed value "${__toString(
-        value
-      )}" is not a valid path to a hypotetical file`;
+      return new Error(
+        `Sorry but the passed value "${__toString(
+          value
+        )}" is not a valid path to a hypotetical file`
+      );
     }
     return new __SFile(value);
   }

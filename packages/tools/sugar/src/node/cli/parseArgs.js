@@ -129,10 +129,11 @@ function parseArgsString(string, settings = {}) {
         if (settings.definition && settings.definition[currentArgName]) {
             const definitionObj = settings.definition[currentArgName];
             const sTypeInstance = new SType_1.default(definitionObj.type);
-            const res = sTypeInstance.is(value, {
-                verbose: true
+            const res = sTypeInstance.cast(value, {
+                verbose: true,
+                throw: true
             });
-            console.log('REERE', value, res);
+            // console.log('REERE', value, definitionObj.type, res);
             // if (__ofType(value, definitionObj.type) !== true) {
             //   if (settings.throw) {
             //     throw `Sorry but the passed argument "<yellow>${currentArgName}</yellow>" has to be of type "<green>${

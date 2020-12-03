@@ -37,7 +37,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         id: 'class',
         is: function (value) { return class_1.default(value); },
         cast: function (value) {
-            throw "Sorry but nothing is castable to a Class";
+            return new Error("Sorry but nothing is castable to a Class");
         }
     };
     return descriptor;

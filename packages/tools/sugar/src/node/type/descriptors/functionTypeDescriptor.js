@@ -24,7 +24,7 @@ const descriptor = {
     id: 'function',
     is: (value) => typeof value === 'function',
     cast: (value) => {
-        throw `Sorry but nothing is castable to a Function`;
+        return new Error(`Sorry but nothing is castable to a Function`);
     }
 };
 module.exports = descriptor;

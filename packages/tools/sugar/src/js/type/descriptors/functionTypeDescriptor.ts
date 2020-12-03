@@ -26,7 +26,7 @@ const descriptor: ISTypeDescriptor = {
   id: 'function',
   is: (value: any) => typeof value === 'function',
   cast: (value: any) => {
-    throw `Sorry but nothing is castable to a Function`;
+    return new Error(`Sorry but nothing is castable to a Function`);
   }
 };
 

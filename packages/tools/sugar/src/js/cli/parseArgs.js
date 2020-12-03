@@ -139,10 +139,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (settings.definition && settings.definition[currentArgName]) {
                 var definitionObj = settings.definition[currentArgName];
                 var sTypeInstance = new SType_1.default(definitionObj.type);
-                var res = sTypeInstance.is(value, {
-                    verbose: true
+                var res = sTypeInstance.cast(value, {
+                    verbose: true,
+                    throw: true
                 });
-                console.log('REERE', value, res);
+                // console.log('REERE', value, definitionObj.type, res);
                 // if (__ofType(value, definitionObj.type) !== true) {
                 //   if (settings.throw) {
                 //     throw `Sorry but the passed argument "<yellow>${currentArgName}</yellow>" has to be of type "<green>${

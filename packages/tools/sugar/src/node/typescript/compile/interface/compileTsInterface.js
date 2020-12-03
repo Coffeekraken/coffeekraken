@@ -11,7 +11,7 @@ class compileTsInterface extends SInterface_1.default {
 }
 compileTsInterface.definition = {
     config: {
-        type: 'File|Array<File>',
+        type: 'Number|Array<File>',
         alias: 'c'
     },
     input: {

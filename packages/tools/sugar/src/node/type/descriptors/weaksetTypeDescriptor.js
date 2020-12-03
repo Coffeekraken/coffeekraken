@@ -24,7 +24,7 @@ const descriptor = {
     id: 'weakset',
     is: (value) => value instanceof WeakSet,
     cast: (value) => {
-        throw `Sorry but nothing can be casted to a WeakSet for now`;
+        return new Error(`Sorry but nothing can be casted to a WeakSet for now`);
     }
 };
 module.exports = descriptor;

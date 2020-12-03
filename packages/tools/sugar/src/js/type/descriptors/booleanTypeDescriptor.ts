@@ -41,15 +41,17 @@ const descriptor: ISTypeDescriptor = {
     if (typeof value === 'object') {
       return Object.keys(value).length > 0 ? true : false;
     }
-    throw [
-      `Sorry but for now only these types can be casted to boolean:`,
-      '- <yellow>null</yellow>: Will be casted as <red>false</red>',
-      '- <yellow>undefined</yellow>: Will be casted as <red>false</red>',
-      '- <yellow>Number</yellow>: Will be casted as <green>true</green> when greater than 0, <red>false</red> otherwise',
-      '- <yellow>String</yellow>: Will be casted as <green>true</green> when longer than 0 characters, <red>false</red> otherwise',
-      '- <yellow>Array</yellow>: Will be casted as <green>true</green> when having more than 0 items, <red>false</red> otherwise',
-      '- <yellow>Object</yellow>: Will be casted as <green>true</green> when have more than 0 properties, <red>false</red> otherwise'
-    ].join('\n');
+    return new Error(
+      [
+        `Sorry but for now only these types can be casted to boolean:`,
+        '- <yellow>null</yellow>: Will be casted as <red>false</red>',
+        '- <yellow>undefined</yellow>: Will be casted as <red>false</red>',
+        '- <yellow>Number</yellow>: Will be casted as <green>true</green> when greater than 0, <red>false</red> otherwise',
+        '- <yellow>String</yellow>: Will be casted as <green>true</green> when longer than 0 characters, <red>false</red> otherwise',
+        '- <yellow>Array</yellow>: Will be casted as <green>true</green> when having more than 0 items, <red>false</red> otherwise',
+        '- <yellow>Object</yellow>: Will be casted as <green>true</green> when have more than 0 properties, <red>false</red> otherwise'
+      ].join('\n')
+    );
   }
 };
 

@@ -28,7 +28,7 @@ const descriptor = {
     id: 'class',
     is: (value) => class_1.default(value),
     cast: (value) => {
-        throw `Sorry but nothing is castable to a Class`;
+        return new Error(`Sorry but nothing is castable to a Class`);
     }
 };
 module.exports = descriptor;

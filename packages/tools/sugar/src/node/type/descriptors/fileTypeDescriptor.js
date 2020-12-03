@@ -41,7 +41,7 @@ const descriptor = {
         if (value instanceof SFile_1.default)
             return value;
         if (typeof value !== 'string' || path_1.default(value) !== true) {
-            throw `Sorry but the passed value "${toString_1.default(value)}" is not a valid path to a hypotetical file`;
+            return new Error(`Sorry but the passed value "${toString_1.default(value)}" is not a valid path to a hypotetical file`);
         }
         return new SFile_1.default(value);
     }

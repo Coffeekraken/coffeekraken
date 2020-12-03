@@ -60,7 +60,7 @@ const descriptor = {
             }
             return new Date(year, month, day, hours, minutes, seconds, milliseconds);
         }
-        throw `Sorry but for now only <yellow>String</yellow>, <yellow>Number</yellow> and <yellow>Object</yellow> (with properties: year, month, day?, hours?, minutes?, seconds? and milliseconds?) are castable to Date`;
+        return new Error(`Sorry but for now only <yellow>String</yellow>, <yellow>Number</yellow> and <yellow>Object</yellow> (with properties: year, month, day?, hours?, minutes?, seconds? and milliseconds?) are castable to Date`);
     }
 };
 module.exports = descriptor;

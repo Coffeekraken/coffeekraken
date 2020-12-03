@@ -244,6 +244,22 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
       }
     }
 
+    if (settings.throw === true) {
+      throw __parseHtml(
+        [
+          `Sorry but the value passed:`,
+          '',
+          __toString(value),
+          '',
+          `which is of type "<red>${__typeOf(
+            value
+          )}</red>" does not correspond to the requested type(s) "<green>${
+            this.typeString
+          }</green>"`
+        ].join('\n')
+      );
+    }
+
     if (settings.verbose === true) {
       const verboseObj: ISTypeVerboseObj = {
         typeString: this.typeString,
@@ -254,7 +270,8 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
         received: {
           type: __typeOf(value)
         },
-        issues
+        issues,
+        settings
       };
       return verboseObj;
     } else {
@@ -343,16 +360,47 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
       if (descriptorObj.cast === undefined) continue;
       // try to cast the value
       let castedValue: any;
-      try {
-        castedValue = descriptorObj.cast(value);
-        if (castedValue !== undefined) return castedValue;
-      } catch (e) {
+      // try {
+      castedValue = descriptorObj.cast(value);
+      if (castedValue instanceof Error) {
         // add the issue in the verboseObj
-        verboseObj.issues[typeId] = e.toString();
-        // this descriptor can not cast our value
+        verboseObj.issues[typeId] = castedValue.toString();
+        // next
         continue;
       }
+
+      // handle the "of" parameter
+      // make sure the passed type can have child(s)
+      if (
+        typeObj.of !== undefined &&
+        this.canHaveChilds(castedValue) === false
+      ) {
+        const issueStr = `Sorry but the passed type "<yellow>${typeId}</yellow>" has some child(s) dependencies "<green>${typeObj.of.join(
+          '|'
+        )}</green>" but this type can not have child(s)`;
+        if (settings.throw === true) {
+          throw __parseHtml(issueStr);
+        }
+        // add the issue in the verboseObj
+        verboseObj.issues[typeId] = issueStr;
+      } else if (typeObj.of !== undefined) {
+        const sTypeInstance = new SType(typeObj.of.join('|'));
+      }
+
+      console.log('CASDTED', castedValue, descriptorObj.id);
+      if (castedValue === null && descriptorObj.id === 'null') return null;
+      if (castedValue === undefined && descriptorObj.id === 'undefined')
+        return undefined;
+      if (castedValue !== null && castedValue !== undefined) return castedValue;
+      // something goes wrong
+      verboseObj.issues[
+        typeId
+      ] = `Something goes wrong but no details are available... Sorry`;
     }
+
+    console.log('CIJHIEUHIPUF HOEIUP EFHUIHE F');
+    console.log('NOT', value);
+
     // our value has not bein casted
     if (settings.throw) {
       let stack = [
@@ -373,6 +421,23 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
       return verboseObj;
     }
     return undefined;
+  }
+
+  /**
+   * @name          canHaveChilds
+   * @type          Function
+   *
+   * This method simply take a value and return true if can have child(s), false if not
+   *
+   * @param       {Any}       value       The value to check
+   * @return      {Boolean}         true if can have child(s) (Object, Array and Map), false if not
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com>
+   */
+  canHaveChilds(value: any): boolean {
+    const type = __typeOf(value);
+    return type === 'Array' || type === 'Object' || type === 'Map';
   }
 
   /**

@@ -33,7 +33,7 @@
         id: 'function',
         is: function (value) { return typeof value === 'function'; },
         cast: function (value) {
-            throw "Sorry but nothing is castable to a Function";
+            return new Error("Sorry but nothing is castable to a Function");
         }
     };
     return descriptor;

@@ -33,7 +33,7 @@
         id: 'weakset',
         is: function (value) { return value instanceof WeakSet; },
         cast: function (value) {
-            throw "Sorry but nothing can be casted to a WeakSet for now";
+            return new Error("Sorry but nothing can be casted to a WeakSet for now");
         }
     };
     return descriptor;

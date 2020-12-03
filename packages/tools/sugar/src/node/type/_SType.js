@@ -8,6 +8,7 @@ var _a;
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
 const typeof_1 = __importDefault(require("../value/typeof"));
+const toString_1 = __importDefault(require("../string/toString"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const parseHtml_1 = __importDefault(require("../console/parseHtml"));
 const parseTypeString_1 = __importDefault(require("./parseTypeString"));
@@ -165,6 +166,15 @@ const Cls = (_a = class SType extends SPromise_1.default {
                     }
                 }
             }
+            if (settings.throw === true) {
+                throw parseHtml_1.default([
+                    `Sorry but the value passed:`,
+                    '',
+                    toString_1.default(value),
+                    '',
+                    `which is of type "<red>${typeof_1.default(value)}</red>" does not correspond to the requested type(s) "<green>${this.typeString}</green>"`
+                ].join('\n'));
+            }
             if (settings.verbose === true) {
                 const verboseObj = {
                     typeString: this.typeString,
@@ -175,7 +185,8 @@ const Cls = (_a = class SType extends SPromise_1.default {
                     received: {
                         type: typeof_1.default(value)
                     },
-                    issues
+                    issues,
+                    settings
                 };
                 return verboseObj;
             }
@@ -257,18 +268,40 @@ const Cls = (_a = class SType extends SPromise_1.default {
                     continue;
                 // try to cast the value
                 let castedValue;
-                try {
-                    castedValue = descriptorObj.cast(value);
-                    if (castedValue !== undefined)
-                        return castedValue;
-                }
-                catch (e) {
+                // try {
+                castedValue = descriptorObj.cast(value);
+                if (castedValue instanceof Error) {
                     // add the issue in the verboseObj
-                    verboseObj.issues[typeId] = e.toString();
-                    // this descriptor can not cast our value
+                    verboseObj.issues[typeId] = castedValue.toString();
+                    // next
                     continue;
                 }
+                // handle the "of" parameter
+                // make sure the passed type can have child(s)
+                if (typeObj.of !== undefined &&
+                    this.canHaveChilds(castedValue) === false) {
+                    const issueStr = `Sorry but the passed type "<yellow>${typeId}</yellow>" has some child(s) dependencies "<green>${typeObj.of.join('|')}</green>" but this type can not have child(s)`;
+                    if (settings.throw === true) {
+                        throw parseHtml_1.default(issueStr);
+                    }
+                    // add the issue in the verboseObj
+                    verboseObj.issues[typeId] = issueStr;
+                }
+                else if (typeObj.of !== undefined) {
+                    const sTypeInstance = new SType(typeObj.of.join('|'));
+                }
+                console.log('CASDTED', castedValue, descriptorObj.id);
+                if (castedValue === null && descriptorObj.id === 'null')
+                    return null;
+                if (castedValue === undefined && descriptorObj.id === 'undefined')
+                    return undefined;
+                if (castedValue !== null && castedValue !== undefined)
+                    return castedValue;
+                // something goes wrong
+                verboseObj.issues[typeId] = `Something goes wrong but no details are available... Sorry`;
             }
+            console.log('CIJHIEUHIPUF HOEIUP EFHUIHE F');
+            console.log('NOT', value);
             // our value has not bein casted
             if (settings.throw) {
                 let stack = [
@@ -283,6 +316,22 @@ const Cls = (_a = class SType extends SPromise_1.default {
                 return verboseObj;
             }
             return undefined;
+        }
+        /**
+         * @name          canHaveChilds
+         * @type          Function
+         *
+         * This method simply take a value and return true if can have child(s), false if not
+         *
+         * @param       {Any}       value       The value to check
+         * @return      {Boolean}         true if can have child(s) (Object, Array and Map), false if not
+         *
+         * @since     2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com>
+         */
+        canHaveChilds(value) {
+            const type = typeof_1.default(value);
+            return type === 'Array' || type === 'Object' || type === 'Map';
         }
         /**
          * @name          name

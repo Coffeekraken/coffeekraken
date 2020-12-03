@@ -25,9 +25,12 @@ const descriptor = {
     is: (value) => Number.isInteger(value),
     cast: (value) => {
         if (typeof value !== 'string') {
-            throw `Sorry but only strings can be casted to integers...`;
+            return new Error(`Sorry but only strings can be casted to integers...`);
         }
-        return parseInt(value);
+        const res = parseInt(value);
+        if (isNaN(res))
+            return new Error(`Sorry but the conversion of "<yellow>${value}</yellow>" to a <green>Integer</green> does not work...`);
+        return res;
     }
 };
 module.exports = descriptor;

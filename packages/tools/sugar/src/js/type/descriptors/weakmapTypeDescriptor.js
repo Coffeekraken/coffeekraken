@@ -33,7 +33,7 @@
         id: 'weakmap',
         is: function (value) { return value instanceof WeakMap; },
         cast: function (value) {
-            throw "Sorry but nothing can be casted to a WeakMap for now";
+            return new Error("Sorry but nothing can be casted to a WeakMap for now");
         }
     };
     return descriptor;

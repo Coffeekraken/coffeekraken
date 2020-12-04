@@ -33,6 +33,8 @@
         id: 'boolean',
         is: function (value) { return typeof value === 'boolean'; },
         cast: function (value) {
+            if (typeof value === 'boolean')
+                return value;
             if (value === null || value === undefined)
                 return false;
             if (typeof value === 'number') {

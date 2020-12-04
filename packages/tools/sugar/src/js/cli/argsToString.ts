@@ -4,6 +4,7 @@
 import __toString from '../string/toString';
 import __parseArgs from './parseArgs';
 import __deepMerge from '../object/deepMerge';
+import __parse from '../string/parse';
 
 /**
  * @name                  argsToString
@@ -23,6 +24,7 @@ import __deepMerge from '../object/deepMerge';
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ * @todo      {Test}      Testing when no definition is passed
  *
  * @example       js
  * import argsToString from '@coffeekraken/sugar/js/cli/argsToString';
@@ -74,9 +76,40 @@ function argsToString(args, settings = {}) {
   if (!settings.definition) {
     let string = '';
     Object.keys(args).forEach((key) => {
-      string += ` --${key} ${__toString(args[key])}`;
+      const argValue = args[key];
+      let str = '';
+
+      if (Array.isArray(argValue)) {
+        argValue.forEach((value) => {
+          let valueStr;
+          if (value === true) {
+            valueStr = '';
+          } else {
+            valueStr =
+              value.toString !== undefined &&
+              typeof value.toString === 'function'
+                ? value.toString()
+                : __toString(value);
+            if (typeof __parse(valueStr) === 'string')
+              valueStr = `"${valueStr}"`;
+          }
+          string += ` --${key} ${valueStr}`;
+        });
+      } else {
+        if (argValue === true) {
+          str = '';
+        } else {
+          str =
+            argValue.toString !== undefined &&
+            typeof argValue.toString === 'function'
+              ? argValue.toString()
+              : __toString(argValue);
+          if (typeof __parse(str) === 'string') str = `"${str}"`;
+        }
+        string += ` --${key} ${str}`;
+      }
     });
-    return string;
+    return string.replace(/(\s){2,999999}/gm, ' ');
   }
 
   const cliArray = [];
@@ -102,20 +135,51 @@ function argsToString(args, settings = {}) {
     ) {
       return;
     }
-    value = __toString(value);
 
-    if (defObj.type.toLowerCase() === 'string') value = `"${value}"`;
-    // if (defObj.type.toLowerCase() === 'boolean') value = '';
-    if (
-      defObj.type.toLowerCase().includes('object') ||
-      defObj.type.toLowerCase().includes('array')
-    ) {
-      value = `"${value.split('"').join("'")}"`;
+    let valueStr;
+
+    if (Array.isArray(value)) {
+      value.forEach((val) => {
+        if (val === true) {
+          valueStr = '';
+        } else {
+          valueStr =
+            val.toString !== undefined && typeof val.toString === 'function'
+              ? val.toString()
+              : __toString(val);
+          if (defObj.type.toLowerCase() === 'string')
+            valueStr = `"${valueStr}"`;
+          // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
+          if (
+            defObj.type.toLowerCase().includes('object') ||
+            defObj.type.toLowerCase().includes('array')
+          ) {
+            valueStr = `"${valueStr.split('"').join("'")}"`;
+          }
+        }
+        cliArray.push(`${prefix} ${valueStr}`);
+      });
+    } else {
+      if (value === true) {
+        valueStr = '';
+      } else {
+        valueStr =
+          value.toString !== undefined && typeof value.toString === 'function'
+            ? value.toString()
+            : __toString(value);
+        if (defObj.type.toLowerCase() === 'string') valueStr = `"${valueStr}"`;
+        // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
+        if (
+          defObj.type.toLowerCase().includes('object') ||
+          defObj.type.toLowerCase().includes('array')
+        ) {
+          valueStr = `"${valueStr.split('"').join("'")}"`;
+        }
+      }
+      cliArray.push(`${prefix} ${valueStr}`);
     }
-
-    cliArray.push(`${prefix} ${value}`);
   });
 
-  return cliArray.join(' ');
+  return cliArray.join(' ').replace(/(\s){2,999999}/gm, ' ');
 }
 export = argsToString;

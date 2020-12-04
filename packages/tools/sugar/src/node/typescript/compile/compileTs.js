@@ -11,6 +11,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+const SFile_1 = __importDefault(require("../../fs/SFile"));
+const tmpDir_1 = __importDefault(require("../../fs/tmpDir"));
+const md5_1 = __importDefault(require("../../crypt/md5"));
+const SCliProcess_1 = __importDefault(require("../../process/SCliProcess"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const compileTsInterface_1 = __importDefault(require("./interface/compileTsInterface"));
 const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 /**
  * @name                compileTs
@@ -32,12 +38,37 @@ const SPromise_1 = __importDefault(require("../../promise/SPromise"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const fn = function compileTs(params) {
+const fn = function compileTs(params, settings) {
     return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+        const tmpDir = tmpDir_1.default();
         // check if we have a config passed
-        console.log('params', params);
         if (params.config !== undefined) {
-            // wrap the passed config in an SFile
+            // loop on each configs to generate the final ones
+            params.config.forEach((configFile) => {
+                // generate temp files pathes
+                const tmpConfigFile = new SFile_1.default(`${tmpDir}/tsconfig.${md5_1.default.encrypt(configFile.path)}.json`);
+                // read the file
+                const configJson = configFile.readSync();
+                // // check if the config has an "extends" prop
+                // if (configJson.extends !== undefined) {
+                //   // read this file
+                //   const baseFilePath = __path.resolve(
+                //     configFile.dirPath,
+                //     configJson.extends
+                //   );
+                //   const baseConfigFile: __SFile = new __SFile(baseFilePath);
+                //   const baseConfigJson = baseConfigFile.readSync();
+                // }
+                // extend using the passed "settings"
+                const finalConfigJson = deepMerge_1.default(configJson, settings);
+                // write the temp config file
+                tmpConfigFile.writeSync(finalConfigJson);
+                // instanciate a new process
+                const pro = new SCliProcess_1.default('tsc [arguments]', {
+                    definition: compileTsInterface_1.default.definition
+                });
+                pro.run(params);
+            });
         }
         // const files = await __findUp('tsconfig.json', {
         //   stopWhenFound: true

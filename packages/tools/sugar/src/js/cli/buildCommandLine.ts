@@ -4,6 +4,7 @@
 import __toString from '../string/toString';
 import __argsToString from './argsToString';
 import __deepMerge from '../object/deepMerge';
+import __parse from '../string/parse';
 
 /**
  * @name            buildCommandLine
@@ -73,9 +74,9 @@ function buildCommandLine(command, args = {}, settings = {}) {
 
   const definition = Object.assign({}, settings.definition);
   // get all the tokens
-  const tokens = command.match(/\%[a-zA-Z0-9-_]+/gm) || [];
+  const tokens = command.match(/\[[a-zA-Z0-9-_]+\]/gm) || [];
   tokens.forEach((token) => {
-    const tokenName = token.replace('[', '').replace(']', '').replace('%', '');
+    const tokenName = token.replace('[', '').replace(']', '');
     if (tokenName === 'arguments') return;
     const tokenValue =
       args && args[tokenName] !== undefined
@@ -84,11 +85,34 @@ function buildCommandLine(command, args = {}, settings = {}) {
         ? definition[tokenName].default
         : undefined;
     delete definition[tokenName];
+    delete args[tokenName];
     if (tokenValue === undefined) {
       command = command.replace(token, '');
       return;
     }
-    const tokenValueString = __toString(tokenValue);
+    let tokenValueString = '';
+    if (Array.isArray(tokenValue)) {
+      tokenValue.forEach((tValue) => {
+        const str =
+          tValue.toString !== undefined && typeof tValue.toString === 'function'
+            ? tValue.toString()
+            : __toString(tValue);
+        // handle quotes or not
+        if (typeof __parse(str) === 'string') str = `"${str}"`;
+        // append to the string
+        tokenValueString += `${str} `;
+      });
+      tokenValueString = tokenValueString.trim();
+    } else {
+      tokenValueString =
+        tokenValue.toString !== undefined &&
+        typeof tokenValue.toString === 'function'
+          ? tokenValue.toString()
+          : __toString(tokenValue);
+      // handle quotes or not
+      if (typeof __parse(tokenValueString) === 'string')
+        tokenValueString = `"${tokenValueString}"`;
+    }
     command = command.replace(token, tokenValueString);
   });
 

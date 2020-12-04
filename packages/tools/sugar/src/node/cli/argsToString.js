@@ -7,6 +7,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const toString_1 = __importDefault(require("../string/toString"));
 const parseArgs_1 = __importDefault(require("./parseArgs"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const parse_1 = __importDefault(require("../string/parse"));
 /**
  * @name                  argsToString
  * @namespace           sugar.js.cli
@@ -25,6 +26,7 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ * @todo      {Test}      Testing when no definition is passed
  *
  * @example       js
  * import argsToString from '@coffeekraken/sugar/js/cli/argsToString';
@@ -69,9 +71,43 @@ function argsToString(args, settings = {}) {
     if (!settings.definition) {
         let string = '';
         Object.keys(args).forEach((key) => {
-            string += ` --${key} ${toString_1.default(args[key])}`;
+            const argValue = args[key];
+            let str = '';
+            if (Array.isArray(argValue)) {
+                argValue.forEach((value) => {
+                    let valueStr;
+                    if (value === true) {
+                        valueStr = '';
+                    }
+                    else {
+                        valueStr =
+                            value.toString !== undefined &&
+                                typeof value.toString === 'function'
+                                ? value.toString()
+                                : toString_1.default(value);
+                        if (typeof parse_1.default(valueStr) === 'string')
+                            valueStr = `"${valueStr}"`;
+                    }
+                    string += ` --${key} ${valueStr}`;
+                });
+            }
+            else {
+                if (argValue === true) {
+                    str = '';
+                }
+                else {
+                    str =
+                        argValue.toString !== undefined &&
+                            typeof argValue.toString === 'function'
+                            ? argValue.toString()
+                            : toString_1.default(argValue);
+                    if (typeof parse_1.default(str) === 'string')
+                        str = `"${str}"`;
+                }
+                string += ` --${key} ${str}`;
+            }
         });
-        return string;
+        return string.replace(/(\s){2,999999}/gm, ' ');
     }
     const cliArray = [];
     // loop on passed args
@@ -94,16 +130,48 @@ function argsToString(args, settings = {}) {
         ) {
             return;
         }
-        value = toString_1.default(value);
-        if (defObj.type.toLowerCase() === 'string')
-            value = `"${value}"`;
-        // if (defObj.type.toLowerCase() === 'boolean') value = '';
-        if (defObj.type.toLowerCase().includes('object') ||
-            defObj.type.toLowerCase().includes('array')) {
-            value = `"${value.split('"').join("'")}"`;
+        let valueStr;
+        if (Array.isArray(value)) {
+            value.forEach((val) => {
+                if (val === true) {
+                    valueStr = '';
+                }
+                else {
+                    valueStr =
+                        val.toString !== undefined && typeof val.toString === 'function'
+                            ? val.toString()
+                            : toString_1.default(val);
+                    if (defObj.type.toLowerCase() === 'string')
+                        valueStr = `"${valueStr}"`;
+                    // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
+                    if (defObj.type.toLowerCase().includes('object') ||
+                        defObj.type.toLowerCase().includes('array')) {
+                        valueStr = `"${valueStr.split('"').join("'")}"`;
+                    }
+                }
+                cliArray.push(`${prefix} ${valueStr}`);
+            });
         }
-        cliArray.push(`${prefix} ${value}`);
+        else {
+            if (value === true) {
+                valueStr = '';
+            }
+            else {
+                valueStr =
+                    value.toString !== undefined && typeof value.toString === 'function'
+                        ? value.toString()
+                        : toString_1.default(value);
+                if (defObj.type.toLowerCase() === 'string')
+                    valueStr = `"${valueStr}"`;
+                // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
+                if (defObj.type.toLowerCase().includes('object') ||
+                    defObj.type.toLowerCase().includes('array')) {
+                    valueStr = `"${valueStr.split('"').join("'")}"`;
+                }
+            }
+            cliArray.push(`${prefix} ${valueStr}`);
+        }
     });
-    return cliArray.join(' ');
+    return cliArray.join(' ').replace(/(\s){2,999999}/gm, ' ');
 }
 module.exports = argsToString;

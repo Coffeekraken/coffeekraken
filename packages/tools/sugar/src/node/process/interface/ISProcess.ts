@@ -34,11 +34,13 @@ export interface ISProcessSettings {
   id?: string;
   name?: string;
   output?: ISProcessOutput;
+  throw?: boolean;
   runAsChild?: boolean;
   definition?: Record<string, unknown>;
   processPath?: string | null;
   notifications?: ISProcessNotificationSettings;
   env?: Record<string, unknown>;
+  spawn?: Record<string, unknown>;
 }
 
 export interface ISProcessCtor {
@@ -52,6 +54,6 @@ export default interface ISProcess {
     settings: ISProcessSettings
   ): Promise<any>;
   kill(): void;
-  log(...logs: ISLogObj[]): void;
-  error(...errors: ISLogObj[]): void;
+  log(...logs: ISProcessLogObj[]): void;
+  error(...errors: ISProcessLogObj[]): void;
 }

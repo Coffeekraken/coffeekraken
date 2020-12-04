@@ -37,6 +37,7 @@ RUN wget https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb
 RUN dpkg -i mysql-apt-config*
 RUN apt -y update
 RUN apt -y install mysql-server
+RUN apt install xsel
 
 # installing git
 RUN echo "\n\e[33mInstalling GIT\e[0m"

@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __toString from '../string/toString';
 import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';
 // import __SFileInterface from './interface/SFileInterface';
@@ -46,6 +47,7 @@ import ISFile, {
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ * @todo      {Feature}       Add support for autocasting like yml, etc...
  *
  * @example           js
  * import SFile from '@coffeekraken/sugar/node/fs/SFile';
@@ -191,7 +193,7 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
     // save the file path
     this.path = filepath;
     this.name = __getFilename(filepath);
-    this.extension = __extension(filepath);
+    this.extension = __extension(filepath).toLowerCase();
     this.dirPath = __path.dirname(filepath);
 
     if (this.exists) {
@@ -242,6 +244,21 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
   }
 
   /**
+   * @name        toString
+   * @type        Function
+   *
+   * Return the string version of the file. Here, the path...
+   *
+   * @return      {String}          The file path
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  toString() {
+    return this.path;
+  }
+
+  /**
    * @name        read
    * @type        Function
    * @async
@@ -260,9 +277,14 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
     }
     settings = {
       encoding: 'utf8',
+      cast: true,
       ...settings
     };
-    return __fs.readFile(this.path, settings);
+    const content: string = __fs.readFile(this.path, settings);
+    if (this.extension === 'json' && settings.cast) {
+      return JSON.parse(content);
+    }
+    return content;
   }
 
   /**
@@ -283,9 +305,14 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
     }
     settings = {
       encoding: 'utf8',
+      cast: true,
       ...settings
     };
-    return __fs.readFileSync(this.path, settings);
+    const content: string = __fs.readFileSync(this.path, settings);
+    if (this.extension === 'json' && settings.cast) {
+      return JSON.parse(content);
+    }
+    return content;
   }
 
   /**
@@ -307,6 +334,10 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
       encoding: 'utf8',
       ...settings
     };
+    data = __toString(data, {
+      beautify: true,
+      highlight: false
+    });
     const result: any = __fs.writeFile(this.path, data, settings);
     this.update();
     return result;
@@ -325,11 +356,15 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  write(data: string, settings: ISFileWriteSettings = {}): any {
+  writeSync(data: string, settings: ISFileWriteSettings = {}): any {
     settings = {
       encoding: 'utf8',
       ...settings
     };
+    data = __toString(data, {
+      beautify: true,
+      highlight: false
+    });
     const result: any = __fs.writeFileSync(this.path, data, settings);
     this.update();
     return result;

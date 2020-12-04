@@ -38,7 +38,6 @@ function ofType(value, typeString, settings = {}) {
     verbose: false,
     ...settings
   };
-  console.log('of type', value, typeString);
   const typeCls = new __SType(typeString, settings);
   const res: boolean | object = typeCls.is(value);
   return res;

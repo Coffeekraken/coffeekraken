@@ -1,6 +1,7 @@
 // @ts-nocheck
 // @shared
 
+import __map from '../iterable/map';
 import __typeOf from '../value/typeof';
 import __deepMerge from '../object/deepMerge';
 import __parse from '../string/parse';
@@ -150,24 +151,6 @@ function parseArgsString(string, settings = {}) {
     // cast the value
     const value = __parse(part);
 
-    // validate and cast value
-    if (settings.definition && settings.definition[currentArgName]) {
-      const definitionObj = settings.definition[currentArgName];
-      const sTypeInstance = new __SType(definitionObj.type);
-      const res = sTypeInstance.cast(value, {
-        verbose: true,
-        throw: true
-      });
-      // console.log('REERE', value, definitionObj.type, res);
-      // if (__ofType(value, definitionObj.type) !== true) {
-      //   if (settings.throw) {
-      //     throw `Sorry but the passed argument "<yellow>${currentArgName}</yellow>" has to be of type "<green>${
-      //       definitionObj.type
-      //     }</green>" but you have passed a "<red>${__typeOf(value)}</red>"`;
-      //   }
-      // }
-    }
-
     // save the value into the raw args stack
     if (currentArgName === '__orphan') {
       rawArgsMap.__orphan.push(value);
@@ -178,7 +161,6 @@ function parseArgsString(string, settings = {}) {
       ) {
         if (!Array.isArray(rawArgsMap[currentArgName]))
           rawArgsMap[currentArgName] = [rawArgsMap[currentArgName]];
-        console.log('add', value);
         rawArgsMap[currentArgName].push(value);
       } else {
         rawArgsMap[currentArgName] = value;
@@ -186,7 +168,7 @@ function parseArgsString(string, settings = {}) {
     }
   });
 
-  const finalArgsMap = Object.assign({}, rawArgsMap);
+  let finalArgsMap = Object.assign({}, rawArgsMap);
   delete finalArgsMap.__orphan;
 
   // take care of orphan values
@@ -204,10 +186,26 @@ function parseArgsString(string, settings = {}) {
     });
   }
 
-  console.log(rawArgsMap, finalArgsMap);
+  console.log('final', finalArgsMap);
 
-  // console.log(stringArray);
-  return false;
+  // cast params
+  finalArgsMap = __map(finalArgsMap, (key, value, idx) => {
+    // validate and cast value
+    if (settings.definition && settings.definition[key]) {
+      const definitionObj = settings.definition[key];
+      const sTypeInstance = new __SType(definitionObj.type);
+      const res = sTypeInstance.cast(value, {
+        throw: settings.throw
+      });
+      if (res instanceof Error) {
+        return value;
+      }
+      return res;
+    }
+  });
+
+  const completedArgs = __completeArgsObject(finalArgsMap, settings);
+  return completedArgs;
 
   const finalObj = {};
   for (const key in definition) {

@@ -34,6 +34,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         __extends(SError, _super);
         function SError(message) {
             var _this = this;
+            _this.data = message;
             if (typeof message !== 'string') {
                 if (Array.isArray(message)) {
                     message = message.join('\n');

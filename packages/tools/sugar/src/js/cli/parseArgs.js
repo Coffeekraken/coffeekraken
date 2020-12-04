@@ -9,10 +9,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../object/deepMerge", "../string/parse", "./completeArgsObject", "../string/unquote", "../is/ofType", "../type/SType"], factory);
+        define(["require", "exports", "../iterable/map", "../object/deepMerge", "../string/parse", "./completeArgsObject", "../string/unquote", "../is/ofType", "../type/SType"], factory);
     }
 })(function (require, exports) {
     "use strict";
+    var map_1 = __importDefault(require("../iterable/map"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var parse_1 = __importDefault(require("../string/parse"));
     var completeArgsObject_1 = __importDefault(require("./completeArgsObject"));
@@ -135,23 +136,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 currentArgName = '__orphan';
             // cast the value
             var value = parse_1.default(part);
-            // validate and cast value
-            if (settings.definition && settings.definition[currentArgName]) {
-                var definitionObj = settings.definition[currentArgName];
-                var sTypeInstance = new SType_1.default(definitionObj.type);
-                var res = sTypeInstance.cast(value, {
-                    verbose: true,
-                    throw: true
-                });
-                // console.log('REERE', value, definitionObj.type, res);
-                // if (__ofType(value, definitionObj.type) !== true) {
-                //   if (settings.throw) {
-                //     throw `Sorry but the passed argument "<yellow>${currentArgName}</yellow>" has to be of type "<green>${
-                //       definitionObj.type
-                //     }</green>" but you have passed a "<red>${__typeOf(value)}</red>"`;
-                //   }
-                // }
-            }
             // save the value into the raw args stack
             if (currentArgName === '__orphan') {
                 rawArgsMap.__orphan.push(value);
@@ -161,7 +145,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     rawArgsMap[currentArgName] !== true) {
                     if (!Array.isArray(rawArgsMap[currentArgName]))
                         rawArgsMap[currentArgName] = [rawArgsMap[currentArgName]];
-                    console.log('add', value);
                     rawArgsMap[currentArgName].push(value);
                 }
                 else {
@@ -186,9 +169,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 }
             });
         }
-        console.log(rawArgsMap, finalArgsMap);
-        // console.log(stringArray);
-        return false;
+        console.log('final', finalArgsMap);
+        // cast params
+        finalArgsMap = map_1.default(finalArgsMap, function (key, value, idx) {
+            // validate and cast value
+            if (settings.definition && settings.definition[key]) {
+                var definitionObj = settings.definition[key];
+                var sTypeInstance = new SType_1.default(definitionObj.type);
+                var res = sTypeInstance.cast(value, {
+                    throw: settings.throw
+                });
+                if (res instanceof Error) {
+                    return value;
+                }
+                return res;
+            }
+        });
+        var completedArgs = completeArgsObject_1.default(finalArgsMap, settings);
+        return completedArgs;
         var finalObj = {};
         for (var key in definition) {
             var value = argsObj[key];

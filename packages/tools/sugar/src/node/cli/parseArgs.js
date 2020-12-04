@@ -4,6 +4,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+const map_1 = __importDefault(require("../iterable/map"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const parse_1 = __importDefault(require("../string/parse"));
 const completeArgsObject_1 = __importDefault(require("./completeArgsObject"));
@@ -125,23 +126,6 @@ function parseArgsString(string, settings = {}) {
             currentArgName = '__orphan';
         // cast the value
         const value = parse_1.default(part);
-        // validate and cast value
-        if (settings.definition && settings.definition[currentArgName]) {
-            const definitionObj = settings.definition[currentArgName];
-            const sTypeInstance = new SType_1.default(definitionObj.type);
-            const res = sTypeInstance.cast(value, {
-                verbose: true,
-                throw: true
-            });
-            // console.log('REERE', value, definitionObj.type, res);
-            // if (__ofType(value, definitionObj.type) !== true) {
-            //   if (settings.throw) {
-            //     throw `Sorry but the passed argument "<yellow>${currentArgName}</yellow>" has to be of type "<green>${
-            //       definitionObj.type
-            //     }</green>" but you have passed a "<red>${__typeOf(value)}</red>"`;
-            //   }
-            // }
-        }
         // save the value into the raw args stack
         if (currentArgName === '__orphan') {
             rawArgsMap.__orphan.push(value);
@@ -151,7 +135,6 @@ function parseArgsString(string, settings = {}) {
                 rawArgsMap[currentArgName] !== true) {
                 if (!Array.isArray(rawArgsMap[currentArgName]))
                     rawArgsMap[currentArgName] = [rawArgsMap[currentArgName]];
-                console.log('add', value);
                 rawArgsMap[currentArgName].push(value);
             }
             else {
@@ -159,7 +142,7 @@ function parseArgsString(string, settings = {}) {
             }
         }
     });
-    const finalArgsMap = Object.assign({}, rawArgsMap);
+    let finalArgsMap = Object.assign({}, rawArgsMap);
     delete finalArgsMap.__orphan;
     // take care of orphan values
     if (settings.definition) {
@@ -176,9 +159,24 @@ function parseArgsString(string, settings = {}) {
             }
         });
     }
-    console.log(rawArgsMap, finalArgsMap);
-    // console.log(stringArray);
-    return false;
+    console.log('final', finalArgsMap);
+    // cast params
+    finalArgsMap = map_1.default(finalArgsMap, (key, value, idx) => {
+        // validate and cast value
+        if (settings.definition && settings.definition[key]) {
+            const definitionObj = settings.definition[key];
+            const sTypeInstance = new SType_1.default(definitionObj.type);
+            const res = sTypeInstance.cast(value, {
+                throw: settings.throw
+            });
+            if (res instanceof Error) {
+                return value;
+            }
+            return res;
+        }
+    });
+    const completedArgs = completeArgsObject_1.default(finalArgsMap, settings);
+    return completedArgs;
     const finalObj = {};
     for (const key in definition) {
         const value = argsObj[key];

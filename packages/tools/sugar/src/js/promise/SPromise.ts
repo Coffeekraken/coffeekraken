@@ -55,6 +55,7 @@ import __env from '../core/env';
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ * @todo      {feature}     Add a "pipe" capabilities on events to allow for "throttle", "debounce", etc...
  *
  * @example         js
  * import SPromise from '@coffeekraken/sugar/js/promise/SPromise';

@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const clipboardy_1 = __importDefault(require("clipboardy"));
 const toString_1 = __importDefault(require("../string/toString"));
+const copy_paste_1 = __importDefault(require("copy-paste"));
 /**
  * @name            copy
  * @namespace       sugar.node.clipboard
@@ -30,6 +31,11 @@ const toString_1 = __importDefault(require("../string/toString"));
  */
 function copy(text) {
     text = toString_1.default(text);
-    clipboardy_1.default.writeSync(text);
+    try {
+        clipboardy_1.default.writeSync(text);
+    }
+    catch (e) {
+        copy_paste_1.default.copy(text);
+    }
 }
 module.exports = copy;

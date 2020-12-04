@@ -14,6 +14,9 @@ import __toString from '../string/toString';
 
 export = class SError extends Error {
   constructor(message) {
+
+    this.data = message;
+
     if (typeof message !== 'string') {
       if (Array.isArray(message)) {
         message = message.join('\n');

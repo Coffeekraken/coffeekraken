@@ -48,18 +48,6 @@ function completeArgsObject(argsObj, settings = {}) {
             argsObj[argString] = argDefinition.default;
         }
     });
-    // // make sure all is ok
-    // const argsValidationResult = __SDescriptor
-    //   .generate({
-    //     name: 'completeArgsObject',
-    //     rules: settings.definition,
-    //     type: 'Object',
-    //     settings: settings.descriptorSettings
-    //   })
-    //   .apply(argsObj);
-    // if (argsValidationResult.hasIssues() && settings.throw)
-    //   throw new Error(argsValidationResult.toString());
-    // else if (argsValidationResult !== true) return argsValidationResult;
     // return the argsObj
     return deepize_1.default(argsObj);
 }

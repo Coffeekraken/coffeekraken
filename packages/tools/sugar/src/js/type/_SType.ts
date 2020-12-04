@@ -1,6 +1,8 @@
 // @ts-nocheck
 // @shared
 
+import __SError from '../error/SError';
+import __map from '../iterable/map';
 import __SPromise from '../promise/SPromise';
 import __getExtendsStack from '../class/getExtendsStack';
 import __typeOf from '../value/typeof';
@@ -326,7 +328,7 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
    *
    * @param     {Any}         value         The value you want to cast
    * @param     {ISTypeSettings}      [settings={}]       Some settings you want to override
-   * @return    {Any}                         The casted value, or undefined if cannot be casted
+   * @return    {Any|Error}                         The casted value, or undefined if cannot be casted
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com>
@@ -385,9 +387,11 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
         verboseObj.issues[typeId] = issueStr;
       } else if (typeObj.of !== undefined) {
         const sTypeInstance = new SType(typeObj.of.join('|'));
+        castedValue = __map(castedValue, (key, value, idx) => {
+          return sTypeInstance.cast(value, settings);
+        });
       }
 
-      console.log('CASDTED', castedValue, descriptorObj.id);
       if (castedValue === null && descriptorObj.id === 'null') return null;
       if (castedValue === undefined && descriptorObj.id === 'undefined')
         return undefined;
@@ -397,9 +401,6 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
         typeId
       ] = `Something goes wrong but no details are available... Sorry`;
     }
-
-    console.log('CIJHIEUHIPUF HOEIUP EFHUIHE F');
-    console.log('NOT', value);
 
     // our value has not bein casted
     if (settings.throw) {
@@ -418,9 +419,11 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
       throw __parseHtml(stack.join('\n'));
     }
     if (settings.verbose === true) {
-      return verboseObj;
+      return new __SError(verboseObj);
     }
-    return undefined;
+    return new __SError(
+      `Something goes wrong with the casting process but not details available sorry...`
+    );
   }
 
   /**

@@ -9,13 +9,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../string/toString", "./parseArgs", "../object/deepMerge"], factory);
+        define(["require", "exports", "../string/toString", "./parseArgs", "../object/deepMerge", "../string/parse"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var toString_1 = __importDefault(require("../string/toString"));
     var parseArgs_1 = __importDefault(require("./parseArgs"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
+    var parse_1 = __importDefault(require("../string/parse"));
     /**
      * @name                  argsToString
      * @namespace           sugar.js.cli
@@ -34,6 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @todo      interface
      * @todo      doc
      * @todo      tests
+     * @todo      {Test}      Testing when no definition is passed
      *
      * @example       js
      * import argsToString from '@coffeekraken/sugar/js/cli/argsToString';
@@ -79,9 +81,43 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (!settings.definition) {
             var string_1 = '';
             Object.keys(args).forEach(function (key) {
-                string_1 += " --" + key + " " + toString_1.default(args[key]);
+                var argValue = args[key];
+                var str = '';
+                if (Array.isArray(argValue)) {
+                    argValue.forEach(function (value) {
+                        var valueStr;
+                        if (value === true) {
+                            valueStr = '';
+                        }
+                        else {
+                            valueStr =
+                                value.toString !== undefined &&
+                                    typeof value.toString === 'function'
+                                    ? value.toString()
+                                    : toString_1.default(value);
+                            if (typeof parse_1.default(valueStr) === 'string')
+                                valueStr = "\"" + valueStr + "\"";
+                        }
+                        string_1 += " --" + key + " " + valueStr;
+                    });
+                }
+                else {
+                    if (argValue === true) {
+                        str = '';
+                    }
+                    else {
+                        str =
+                            argValue.toString !== undefined &&
+                                typeof argValue.toString === 'function'
+                                ? argValue.toString()
+                                : toString_1.default(argValue);
+                        if (typeof parse_1.default(str) === 'string')
+                            str = "\"" + str + "\"";
+                    }
+                    string_1 += " --" + key + " " + str;
+                }
             });
-            return string_1;
+            return string_1.replace(/(\s){2,999999}/gm, ' ');
         }
         var cliArray = [];
         // loop on passed args
@@ -104,17 +140,49 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             ) {
                 return;
             }
-            value = toString_1.default(value);
-            if (defObj.type.toLowerCase() === 'string')
-                value = "\"" + value + "\"";
-            // if (defObj.type.toLowerCase() === 'boolean') value = '';
-            if (defObj.type.toLowerCase().includes('object') ||
-                defObj.type.toLowerCase().includes('array')) {
-                value = "\"" + value.split('"').join("'") + "\"";
+            var valueStr;
+            if (Array.isArray(value)) {
+                value.forEach(function (val) {
+                    if (val === true) {
+                        valueStr = '';
+                    }
+                    else {
+                        valueStr =
+                            val.toString !== undefined && typeof val.toString === 'function'
+                                ? val.toString()
+                                : toString_1.default(val);
+                        if (defObj.type.toLowerCase() === 'string')
+                            valueStr = "\"" + valueStr + "\"";
+                        // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
+                        if (defObj.type.toLowerCase().includes('object') ||
+                            defObj.type.toLowerCase().includes('array')) {
+                            valueStr = "\"" + valueStr.split('"').join("'") + "\"";
+                        }
+                    }
+                    cliArray.push(prefix + " " + valueStr);
+                });
             }
-            cliArray.push(prefix + " " + value);
+            else {
+                if (value === true) {
+                    valueStr = '';
+                }
+                else {
+                    valueStr =
+                        value.toString !== undefined && typeof value.toString === 'function'
+                            ? value.toString()
+                            : toString_1.default(value);
+                    if (defObj.type.toLowerCase() === 'string')
+                        valueStr = "\"" + valueStr + "\"";
+                    // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
+                    if (defObj.type.toLowerCase().includes('object') ||
+                        defObj.type.toLowerCase().includes('array')) {
+                        valueStr = "\"" + valueStr.split('"').join("'") + "\"";
+                    }
+                }
+                cliArray.push(prefix + " " + valueStr);
+            }
         });
-        return cliArray.join(' ');
+        return cliArray.join(' ').replace(/(\s){2,999999}/gm, ' ');
     }
     return argsToString;
 });

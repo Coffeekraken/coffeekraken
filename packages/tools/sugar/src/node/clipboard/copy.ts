@@ -2,6 +2,7 @@
 
 import __clipboardy from 'clipboardy';
 import __toString from '../string/toString';
+import __ncp from 'copy-paste';
 
 /**
  * @name            copy
@@ -28,6 +29,10 @@ import __toString from '../string/toString';
  */
 function copy(text) {
   text = __toString(text);
-  __clipboardy.writeSync(text);
+  try {
+    __clipboardy.writeSync(text);
+  } catch (e) {
+    __ncp.copy(text);
+  }
 }
 export = copy;

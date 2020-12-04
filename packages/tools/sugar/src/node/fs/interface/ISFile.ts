@@ -13,6 +13,7 @@ export interface ISFileWriteSettings {
   encoding?: string;
   mode?: number;
   flag: string;
+  cast?: boolean;
 }
 
 export interface ISFileToObjectFn {

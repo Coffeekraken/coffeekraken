@@ -10,6 +10,7 @@ const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 const toString_1 = __importDefault(require("../string/toString"));
 module.exports = class SError extends Error {
     constructor(message) {
+        this.data = message;
         if (typeof message !== 'string') {
             if (Array.isArray(message)) {
                 message = message.join('\n');

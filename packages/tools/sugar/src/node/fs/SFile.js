@@ -3,6 +3,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+const toString_1 = __importDefault(require("../string/toString"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 // import __SFileInterface from './interface/SFileInterface';
@@ -40,6 +41,7 @@ const packageRoot_1 = __importDefault(require("../path/packageRoot"));
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ * @todo      {Feature}       Add support for autocasting like yml, etc...
  *
  * @example           js
  * import SFile from '@coffeekraken/sugar/node/fs/SFile';
@@ -104,7 +106,7 @@ const Cls = class SFile extends SPromise_1.default {
         // save the file path
         this.path = filepath;
         this.name = filename_1.default(filepath);
-        this.extension = extension_1.default(filepath);
+        this.extension = extension_1.default(filepath).toLowerCase();
         this.dirPath = path_1.default.dirname(filepath);
         if (this.exists) {
             this.update();
@@ -152,6 +154,20 @@ const Cls = class SFile extends SPromise_1.default {
         this.size = stats.size / 1000000;
     }
     /**
+     * @name        toString
+     * @type        Function
+     *
+     * Return the string version of the file. Here, the path...
+     *
+     * @return      {String}          The file path
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    toString() {
+        return this.path;
+    }
+    /**
      * @name        read
      * @type        Function
      * @async
@@ -168,8 +184,12 @@ const Cls = class SFile extends SPromise_1.default {
         if (this.exists === false) {
             throw `You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`;
         }
-        settings = Object.assign({ encoding: 'utf8' }, settings);
-        return fs_1.default.readFile(this.path, settings);
+        settings = Object.assign({ encoding: 'utf8', cast: true }, settings);
+        const content = fs_1.default.readFile(this.path, settings);
+        if (this.extension === 'json' && settings.cast) {
+            return JSON.parse(content);
+        }
+        return content;
     }
     /**
      * @name        readSync
@@ -187,8 +207,12 @@ const Cls = class SFile extends SPromise_1.default {
         if (this.exists === false) {
             throw `You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`;
         }
-        settings = Object.assign({ encoding: 'utf8' }, settings);
-        return fs_1.default.readFileSync(this.path, settings);
+        settings = Object.assign({ encoding: 'utf8', cast: true }, settings);
+        const content = fs_1.default.readFileSync(this.path, settings);
+        if (this.extension === 'json' && settings.cast) {
+            return JSON.parse(content);
+        }
+        return content;
     }
     /**
      * @name        write
@@ -206,6 +230,10 @@ const Cls = class SFile extends SPromise_1.default {
      */
     write(data, settings = {}) {
         settings = Object.assign({ encoding: 'utf8' }, settings);
+        data = toString_1.default(data, {
+            beautify: true,
+            highlight: false
+        });
         const result = fs_1.default.writeFile(this.path, data, settings);
         this.update();
         return result;
@@ -223,8 +251,12 @@ const Cls = class SFile extends SPromise_1.default {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    write(data, settings = {}) {
+    writeSync(data, settings = {}) {
         settings = Object.assign({ encoding: 'utf8' }, settings);
+        data = toString_1.default(data, {
+            beautify: true,
+            highlight: false
+        });
         const result = fs_1.default.writeFileSync(this.path, data, settings);
         this.update();
         return result;

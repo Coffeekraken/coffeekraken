@@ -8,6 +8,7 @@ function compileTs(stringArgs = '') {
     const pro = new SCompileTsProcess_1.default({
         output: false
     });
+    console.log('STRIN', stringArgs);
     pro.run(stringArgs);
 }
 module.exports = compileTs;

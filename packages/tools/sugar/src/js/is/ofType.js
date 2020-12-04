@@ -58,7 +58,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function ofType(value, typeString, settings) {
         if (settings === void 0) { settings = {}; }
         settings = __assign({ verbose: false }, settings);
-        console.log('of type', value, typeString);
         var typeCls = new SType_1.default(typeString, settings);
         var res = typeCls.is(value);
         return res;

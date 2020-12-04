@@ -45,8 +45,9 @@ module.exports = class SProcess extends SPromise_1.default {
     constructor(settings = {}) {
         super(deepMerge_1.default({
             output: false,
+            throw: true,
             runAsChild: false,
-            definition: {},
+            definition: undefined,
             processPath: null,
             notifications: {
                 enable: true,
@@ -71,6 +72,17 @@ module.exports = class SProcess extends SPromise_1.default {
                     : 1, IS_CHILD_PROCESS: true })
         }, settings));
         this._state = 'idle';
+        /**
+         * @name      definition
+         * @type      Object
+         *
+         * Store the definition comming from the static "interface" property,
+         * or by the "settings.definition" property
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this.definition = undefined;
         /**
          * @name      duration
          * @type      Number
@@ -146,6 +158,24 @@ module.exports = class SProcess extends SPromise_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this.isKilling = false;
+        // get the definition from interface or settings
+        this.definition =
+            settings.definition !== undefined
+                ? settings.definition
+                : this.constructor.interface.definition;
+        // if (this.definition === undefined) {
+        //   const errorStr = `Sorry but your process "<yellow>${this.constructor.name}</yellow>" does not have any "<cyan>definition</cyan>". You can either specify it by setting an <green>SInterface instance as a static interface property</green> or by setting the "<green>settings.definition</green>" property`;
+        //   if (settings.throw === true) {
+        //     throw errorStr;
+        //   } else {
+        //     return new __SError(errorStr);
+        //   }
+        // }
+        // handle process exit
+        onProcessExit_1.default(() => {
+            this._currentSpawnedProcess !== undefined &&
+                this._currentSpawnedProcess.kill();
+        });
         this._processPath = this._settings.processPath;
         for (var callSite of stack_trace_1.default.get()) {
             if (callSite.getFunctionName() === this.constructor.name) {
@@ -155,9 +185,6 @@ module.exports = class SProcess extends SPromise_1.default {
         }
         if (!this._processPath) {
             throw new SError_1.default(`An SProcess instance MUST have a "<yellow>processPath</yellow>" property either populated automatically if possible, or specified in the "<cyan>settings.processPath</cyan>" property...`);
-        }
-        if (!this.constructor.interface) {
-            throw new SError_1.default(`An SProcess instance MUST have a static "<yellow>interface</yellow>" property and it seems that your "<cyan>${this.constructor.name}</cyan>" instance does not...`);
         }
         if (!this._settings.notifications.start.title) {
             this._settings.notifications.start.title = `${this._settings.name} (${this._settings.id})`;
@@ -354,7 +381,9 @@ module.exports = class SProcess extends SPromise_1.default {
      * @type      Function
      * @async
      *
-     * Access the process run when this one is finished
+     * Run the process by calling the ```process``` method implemented on your
+     * SProcess class (if exists).
+     * Take care of starting timers for duration tracking, etc...
      *
      * @todo      Doc
      *
@@ -364,31 +393,33 @@ module.exports = class SProcess extends SPromise_1.default {
     run(paramsOrStringArgs = {}, settings = {}) {
         return __awaiter(this, void 0, void 0, function* () {
             settings = deepMerge_1.default(this._settings, settings);
-            yield wait_1.default(100);
+            let processPromise;
+            yield wait_1.default(50);
             let paramsObj = paramsOrStringArgs;
             if (typeof paramsObj === 'string') {
                 paramsObj = parseArgs_1.default(paramsObj, {
-                    definition: this.constructor.interface
-                        ? Object.assign(Object.assign({}, this.constructor.interface.definition), { processPath: {
-                                type: 'String'
-                            } }) : null
+                    definition: Object.assign(Object.assign({}, (this.definition || {})), { processPath: {
+                            type: 'String'
+                        } })
                 });
             }
             else if (typeof paramsObj === 'object') {
                 paramsObj = completeArgsObject_1.default(paramsObj, {
-                    definition: this.constructor.interface.definition
+                    definition: this.definition || {}
                 });
             }
             // save current process params
             this._params = Object.assign({}, paramsObj);
             // apply the interface on the params
-            const interfaceRes = this.constructor.interface.apply(this._params, {
-                throwOnError: true
-            });
-            if (interfaceRes.hasIssues()) {
-                this.log({
-                    value: interfaceRes.toString()
+            if (this.constructor.interface !== undefined) {
+                const interfaceRes = this.constructor.interface.apply(this._params, {
+                    throwOnError: true
                 });
+                if (interfaceRes.hasIssues()) {
+                    this.log({
+                        value: interfaceRes.toString()
+                    });
+                }
             }
             // log a start message
             if (!childProcess_1.default()) {
@@ -396,76 +427,31 @@ module.exports = class SProcess extends SPromise_1.default {
                     value: `<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>\nStarting the <yellow>${this.name}</yellow> (<cyan>${this.id}</cyan>) process...\n<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>`
                 });
             }
+            if (settings.notifications.enable) {
+                node_notifier_1.default.notify(settings.notifications.start);
+            }
+            this.trigger(`start`, this.toObject());
             if (settings.runAsChild && !childProcess_1.default()) {
-                // __copy(
-                //   __toString(paramsObj, {
-                //     beautify: true
-                //   })
-                // );
-                // throw 'cco';
                 // build the command to run depending on the passed command in the constructor and the params
                 const commandToRun = buildCommandLine_1.default(`node ${path_1.default.resolve(__dirname, '../../cli/sugar.cli.js')} process.runChild [arguments]`, Object.assign(Object.assign({}, paramsObj), { processPath: this._processPath }), {
-                    definition: Object.assign(Object.assign({}, this.constructor.interface.definition), { processPath: {
+                    definition: Object.assign(Object.assign({}, (this.definition || {})), { processPath: {
                             type: 'String',
                             required: true
                         } }),
                     alias: false
                 }, {});
-                this._currentChildProcess = child_process_1.default.spawn(commandToRun, [], {
-                    env: settings.env,
-                    shell: true
-                });
-                onProcessExit_1.default(() => {
-                    this._currentChildProcess.kill();
-                });
-                this._currentChildProcess.on('close', (code, signal) => {
-                    if (this.stderr.length) {
-                        this.reject(this.stderr.join('\n'));
-                        const error = new SError_1.default(this.stderr.join('\n'));
-                        this.error(`<yellow>Child Process</yellow>\n${error.message}`);
-                    }
-                    else if (this._isKilling || (!code && signal)) {
-                        this.kill();
-                    }
-                    else if (code === 0 && !signal) {
-                        this.resolve();
-                    }
-                    else {
-                        this.reject();
-                    }
-                    // reset isKilling boolean
-                    this._isKilling = false;
-                });
                 if (yield SIpc_1.default.isServer()) {
                     SIpc_1.default.on(`${settings.env.GLOBAL_SIPC_TRIGGER_ID}.trigger`, (data, socket) => {
                         this.trigger(data.stack, data.value, data.metas);
                     });
                 }
-                // stdout data
-                if (this._currentChildProcess.stdout) {
-                    this._currentChildProcess.stdout.on('data', (data) => {
-                        this.log({
-                            value: data.toString()
-                        });
-                    });
-                }
-                // stderr data
-                if (this._currentChildProcess.stderr) {
-                    this._currentChildProcess.stderr.on('data', (error) => {
-                        this.error({
-                            error: true,
-                            value: error.toString()
-                        });
-                    });
-                }
-                if (settings.notifications.enable) {
-                    node_notifier_1.default.notify(settings.notifications.start);
-                }
-                this.trigger(`start`, this.toObject());
-                return;
+                // run child process
+                processPromise = this.spawn(commandToRun, settings);
             }
             // run the actual process using the "process" method
-            return this.process(paramsObj, settings);
+            processPromise = this.process(this._params, settings);
+            // return the process promise
+            return processPromise;
         });
     }
     /**
@@ -473,89 +459,55 @@ module.exports = class SProcess extends SPromise_1.default {
      * @type      Function
      * @async
      *
-     * This method allows you to spawn a command that will be automatically binded to the
-     * current SProcess instance. This mean that all the stdout and stderr will be proxied
-     * as well as all the "close" events, etc...
+     * This method take a command to run and some settings
+     * and spawn a new process
      *
-     * @param         {String}          command         The command to launch. Can contain the token [arguments] that will be replaced by the passed params object or string
-     * @param         {Object|String}     [params={}]     The parameters to pass to the command
-     * @param         {Object}          [settings={}]     A settings object to configure your spawn process
-     *
-     * @setting       {Object}          [definition={}]        A definition object for the command params
+     * @param       {String}        command         The command to run
+     * @param       {ISProcessSettings}       [settings={}]       Some settings to configure your process
+     * @return      {SPromise}                      An SPromise instance that will be resolved when the command is finished on in error
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     *
      */
-    // async spawn(command, params = {}, settings = {}) {
-    //   settings = __deepMerge(
-    //     {
-    //       env: this._settings.env,
-    //       definition: null
-    //     },
-    //     settings
-    //   );
-    //   let stringParams;
-    //   if (typeof params === 'string') {
-    //     stringParams = params;
-    //   } else if (typeof params === 'object') {
-    //     stringParams = __argsToString(params, {
-    //       definition: settings.definition
-    //     });
-    //   } else {
-    //     throw new __SError(
-    //       `Sorry but the "<yellow>params</yellow>" arguments of the "<cyan>SProcess.spawn</cyan>" method has to be either an <green>Object</green>, either a simple <green>String</green> and you've passed a <red>${typeof params}</red>...`
-    //     );
-    //   }
-    //   // build command to run
-    //   const commandToRun = command.replace('[arguments]', stringParams);
-    //   const childProcess = __childProcess.spawn(commandToRun, [], {
-    //     env: settings.env,
-    //     shell: true
-    //   });
-    //   __onProcessExit(() => {
-    //     childProcess.kill();
-    //   });
-    //   childProcess.on('close', (code, signal) => {
-    //     if (this.stderr.length) {
-    //       this.reject(this.stderr.join('\n'));
-    //       const error = new __SError(this.stderr.join('\n'));
-    //       this.error(`<yellow>Child Process</yellow>\n${error.message}`);
-    //     } else if (this._isKilling || (!code && signal)) {
-    //       this.kill();
-    //     } else if (code === 0 && !signal) {
-    //       this.resolve();
-    //     } else {
-    //       this.reject();
-    //     }
-    //     // reset isKilling boolean
-    //     this._isKilling = false;
-    //   });
-    //   if (await __SIpc.isServer()) {
-    //     __SIpc.on(
-    //       `${settings.env.GLOBAL_SIPC_TRIGGER_ID}.trigger`,
-    //       (data, socket) => {
-    //         this.trigger(data.stack, data.value, data.metas);
-    //       }
-    //     );
-    //   }
-    //   // stdout data
-    //   if (childProcess.stdout) {
-    //     childProcess.stdout.on('data', (data) => {
-    //       this.log({
-    //         value: data.toString()
-    //       });
-    //     });
-    //   }
-    //   // stderr data
-    //   if (childProcess.stderr) {
-    //     childProcess.stderr.on('data', (error) => {
-    //       this.error({
-    //         error: true,
-    //         value: error.toString()
-    //       });
-    //     });
-    //   }
-    // }
+    spawn(command, settings = {}) {
+        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+            const childProcess = child_process_1.default.spawn(command, [], Object.assign({ env: settings.env, shell: true }, (settings.spawn || {})));
+            childProcess.on('close', (code, signal) => {
+                if (this.stderr.length) {
+                    reject(this.stderr.join('\n'));
+                    const error = new SError_1.default(this.stderr.join('\n'));
+                    this.error(`<yellow>Child Process</yellow>\n${error.message}`);
+                }
+                else if (this._isKilling || (!code && signal)) {
+                    trigger('killed');
+                }
+                else if (code === 0 && !signal) {
+                    resolve();
+                }
+                else {
+                    reject();
+                }
+                // reset isKilling boolean
+                this._isKilling = false;
+            });
+            // stdout data
+            if (childProcess.stdout) {
+                childProcess.stdout.on('data', (data) => {
+                    this.log({
+                        value: data.toString()
+                    });
+                });
+            }
+            // stderr data
+            if (childProcess.stderr) {
+                childProcess.stderr.on('data', (error) => {
+                    this.error({
+                        value: error.toString()
+                    });
+                });
+            }
+        }));
+    }
     /**
      * @name      kill
      * @type      Function

@@ -37,7 +37,6 @@ const SType_1 = __importDefault(require("../type/SType"));
  */
 function ofType(value, typeString, settings = {}) {
     settings = Object.assign({ verbose: false }, settings);
-    console.log('of type', value, typeString);
     const typeCls = new SType_1.default(typeString, settings);
     const res = typeCls.is(value);
     return res;

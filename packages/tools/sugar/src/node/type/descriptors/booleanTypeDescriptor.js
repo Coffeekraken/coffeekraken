@@ -24,6 +24,8 @@ const descriptor = {
     id: 'boolean',
     is: (value) => typeof value === 'boolean',
     cast: (value) => {
+        if (typeof value === 'boolean')
+            return value;
         if (value === null || value === undefined)
             return false;
         if (typeof value === 'number') {

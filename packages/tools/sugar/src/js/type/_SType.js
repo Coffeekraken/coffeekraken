@@ -22,11 +22,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../promise/SPromise", "../class/getExtendsStack", "../value/typeof", "../string/toString", "../object/deepMerge", "../console/parseHtml", "./parseTypeString"], factory);
+        define(["require", "exports", "../error/SError", "../iterable/map", "../promise/SPromise", "../class/getExtendsStack", "../value/typeof", "../string/toString", "../object/deepMerge", "../console/parseHtml", "./parseTypeString"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var _a;
+    var SError_1 = __importDefault(require("../error/SError"));
+    var map_1 = __importDefault(require("../iterable/map"));
     var SPromise_1 = __importDefault(require("../promise/SPromise"));
     var getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
     var typeof_1 = __importDefault(require("../value/typeof"));
@@ -269,7 +271,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              *
              * @param     {Any}         value         The value you want to cast
              * @param     {ISTypeSettings}      [settings={}]       Some settings you want to override
-             * @return    {Any}                         The casted value, or undefined if cannot be casted
+             * @return    {Any|Error}                         The casted value, or undefined if cannot be casted
              *
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com>
@@ -282,19 +284,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     issues: {},
                     settings: settings
                 };
-                // loop on each types
-                for (var i = 0; i < this.types.length; i++) {
-                    var typeObj = this.types[i], typeId = typeObj.type;
+                var _loop_1 = function (i) {
+                    var typeObj = this_1.types[i], typeId = typeObj.type;
                     // get the descriptor object
-                    var descriptorObj = this.constructor._registeredTypes[typeId.toLowerCase()];
+                    var descriptorObj = this_1.constructor._registeredTypes[typeId.toLowerCase()];
                     // check that we have a descriptor for this type
                     if (descriptorObj === undefined) {
-                        // pass to the next descriptor
-                        continue;
+                        return "continue";
                     }
                     // check that this descriptor is eligeble for casting
                     if (descriptorObj.cast === undefined)
-                        continue;
+                        return "continue";
                     // try to cast the value
                     var castedValue = void 0;
                     // try {
@@ -302,13 +302,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     if (castedValue instanceof Error) {
                         // add the issue in the verboseObj
                         verboseObj.issues[typeId] = castedValue.toString();
-                        // next
-                        continue;
+                        return "continue";
                     }
                     // handle the "of" parameter
                     // make sure the passed type can have child(s)
                     if (typeObj.of !== undefined &&
-                        this.canHaveChilds(castedValue) === false) {
+                        this_1.canHaveChilds(castedValue) === false) {
                         var issueStr = "Sorry but the passed type \"<yellow>" + typeId + "</yellow>\" has some child(s) dependencies \"<green>" + typeObj.of.join('|') + "</green>\" but this type can not have child(s)";
                         if (settings.throw === true) {
                             throw parseHtml_1.default(issueStr);
@@ -317,20 +316,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         verboseObj.issues[typeId] = issueStr;
                     }
                     else if (typeObj.of !== undefined) {
-                        var sTypeInstance = new SType(typeObj.of.join('|'));
+                        var sTypeInstance_1 = new SType(typeObj.of.join('|'));
+                        castedValue = map_1.default(castedValue, function (key, value, idx) {
+                            return sTypeInstance_1.cast(value, settings);
+                        });
                     }
-                    console.log('CASDTED', castedValue, descriptorObj.id);
                     if (castedValue === null && descriptorObj.id === 'null')
-                        return null;
+                        return { value: null };
                     if (castedValue === undefined && descriptorObj.id === 'undefined')
-                        return undefined;
+                        return { value: undefined };
                     if (castedValue !== null && castedValue !== undefined)
-                        return castedValue;
+                        return { value: castedValue };
                     // something goes wrong
                     verboseObj.issues[typeId] = "Something goes wrong but no details are available... Sorry";
+                };
+                var this_1 = this;
+                // loop on each types
+                for (var i = 0; i < this.types.length; i++) {
+                    var state_1 = _loop_1(i);
+                    if (typeof state_1 === "object")
+                        return state_1.value;
                 }
-                console.log('CIJHIEUHIPUF HOEIUP EFHUIHE F');
-                console.log('NOT', value);
                 // our value has not bein casted
                 if (settings.throw) {
                     var stack_1 = [
@@ -342,9 +348,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     throw parseHtml_1.default(stack_1.join('\n'));
                 }
                 if (settings.verbose === true) {
-                    return verboseObj;
+                    return new SError_1.default(verboseObj);
                 }
-                return undefined;
+                return new SError_1.default("Something goes wrong with the casting process but not details available sorry...");
             };
             /**
              * @name          canHaveChilds

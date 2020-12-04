@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 var _a;
+const SError_1 = __importDefault(require("../error/SError"));
+const map_1 = __importDefault(require("../iterable/map"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
 const typeof_1 = __importDefault(require("../value/typeof"));
@@ -240,7 +242,7 @@ const Cls = (_a = class SType extends SPromise_1.default {
          *
          * @param     {Any}         value         The value you want to cast
          * @param     {ISTypeSettings}      [settings={}]       Some settings you want to override
-         * @return    {Any}                         The casted value, or undefined if cannot be casted
+         * @return    {Any|Error}                         The casted value, or undefined if cannot be casted
          *
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com>
@@ -289,8 +291,10 @@ const Cls = (_a = class SType extends SPromise_1.default {
                 }
                 else if (typeObj.of !== undefined) {
                     const sTypeInstance = new SType(typeObj.of.join('|'));
+                    castedValue = map_1.default(castedValue, (key, value, idx) => {
+                        return sTypeInstance.cast(value, settings);
+                    });
                 }
-                console.log('CASDTED', castedValue, descriptorObj.id);
                 if (castedValue === null && descriptorObj.id === 'null')
                     return null;
                 if (castedValue === undefined && descriptorObj.id === 'undefined')
@@ -300,8 +304,6 @@ const Cls = (_a = class SType extends SPromise_1.default {
                 // something goes wrong
                 verboseObj.issues[typeId] = `Something goes wrong but no details are available... Sorry`;
             }
-            console.log('CIJHIEUHIPUF HOEIUP EFHUIHE F');
-            console.log('NOT', value);
             // our value has not bein casted
             if (settings.throw) {
                 let stack = [
@@ -313,9 +315,9 @@ const Cls = (_a = class SType extends SPromise_1.default {
                 throw parseHtml_1.default(stack.join('\n'));
             }
             if (settings.verbose === true) {
-                return verboseObj;
+                return new SError_1.default(verboseObj);
             }
-            return undefined;
+            return new SError_1.default(`Something goes wrong with the casting process but not details available sorry...`);
         }
         /**
          * @name          canHaveChilds

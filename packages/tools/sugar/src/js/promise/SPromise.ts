@@ -964,6 +964,10 @@ export = class SPromise extends Promise {
     return this.on('catch', ...args);
   }
 
+  then(...args) {
+    return super.then(...args);
+  }
+
   /**
    * @name                finally
    * @type                Function

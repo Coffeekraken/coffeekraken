@@ -1008,6 +1008,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             }
             return this.on.apply(this, __spreadArrays(['catch'], args));
         };
+        SPromise.prototype.then = function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            return _super.prototype.then.apply(this, args);
+        };
         /**
          * @name                finally
          * @type                Function

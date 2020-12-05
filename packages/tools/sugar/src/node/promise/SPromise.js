@@ -829,6 +829,9 @@ module.exports = class SPromise extends Promise {
     catch(...args) {
         return this.on('catch', ...args);
     }
+    then(...args) {
+        return super.then(...args);
+    }
     /**
      * @name                finally
      * @type                Function

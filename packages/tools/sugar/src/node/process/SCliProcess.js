@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const SProcess_1 = __importDefault(require("./SProcess"));
 const buildCommandLine_1 = __importDefault(require("../cli/buildCommandLine"));
-const onProcessExit_1 = __importDefault(require("./onProcessExit"));
 /**
  * @name          SCliProcess
  * @namespace     sugar.node.process
@@ -76,31 +75,28 @@ const Cls = class SCliProcess extends SProcess_1.default {
                 definition: this.definition,
                 alias: false
             });
-            const childProcess = __childProcess.spawn(command, [], {
-                env: settings.env,
-                shell: true
-            });
-            onProcessExit_1.default(() => {
-                childProcess.kill();
-            });
-            childProcess.on('close', (code, signal) => {
-                if (this.stderr.length) {
-                    this.reject(this.stderr.join('\n'));
-                    const error = new __SError(this.stderr.join('\n'));
-                    this.error(`<yellow>Child Process</yellow>\n${error.message}`);
-                }
-                else if (this._isKilling || (!code && signal)) {
-                    this.kill();
-                }
-                else if (code === 0 && !signal) {
-                    this.resolve();
-                }
-                else {
-                    this.reject();
-                }
-                // reset isKilling boolean
-                this._isKilling = false;
-            });
+            // const childProcess = __childProcess.spawn(command, [], {
+            //   env: settings.env,
+            //   shell: true
+            // });
+            // __onProcessExit(() => {
+            //   childProcess.kill();
+            // });
+            // childProcess.on('close', (code, signal) => {
+            //   if (this.stderr.length) {
+            //     this.reject(this.stderr.join('\n'));
+            //     const error = new __SError(this.stderr.join('\n'));
+            //     this.error(`<yellow>Child Process</yellow>\n${error.message}`);
+            //   } else if (this._isKilling || (!code && signal)) {
+            //     this.kill();
+            //   } else if (code === 0 && !signal) {
+            //     this.resolve();
+            //   } else {
+            //     this.reject();
+            //   }
+            //   // reset isKilling boolean
+            //   this._isKilling = false;
+            // });
         });
     }
 };

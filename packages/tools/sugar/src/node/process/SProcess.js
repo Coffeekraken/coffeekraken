@@ -27,7 +27,6 @@ const SIpc_1 = __importDefault(require("../ipc/SIpc"));
 const SError_1 = __importDefault(require("../error/SError"));
 const buildCommandLine_1 = __importDefault(require("../cli/buildCommandLine"));
 const parseArgs_1 = __importDefault(require("../cli/parseArgs"));
-const child_process_1 = __importDefault(require("child_process"));
 const output_1 = __importDefault(require("./output"));
 const stack_trace_1 = __importDefault(require("stack-trace"));
 const toString_1 = __importDefault(require("../string/toString"));
@@ -148,16 +147,6 @@ module.exports = class SProcess extends SPromise_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this.value = null;
-        /**
-         * @name        isKilling
-         * @type        Boolean
-         *
-         * Tell is the process is in kill state or not
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.isKilling = false;
         // get the definition from interface or settings
         this.definition =
             settings.definition !== undefined
@@ -453,60 +442,6 @@ module.exports = class SProcess extends SPromise_1.default {
             // return the process promise
             return processPromise;
         });
-    }
-    /**
-     * @name      spawn
-     * @type      Function
-     * @async
-     *
-     * This method take a command to run and some settings
-     * and spawn a new process
-     *
-     * @param       {String}        command         The command to run
-     * @param       {ISProcessSettings}       [settings={}]       Some settings to configure your process
-     * @return      {SPromise}                      An SPromise instance that will be resolved when the command is finished on in error
-     *
-     * @since       2.0.0
-     *
-     */
-    spawn(command, settings = {}) {
-        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
-            const childProcess = child_process_1.default.spawn(command, [], Object.assign({ env: settings.env, shell: true }, (settings.spawn || {})));
-            childProcess.on('close', (code, signal) => {
-                if (this.stderr.length) {
-                    reject(this.stderr.join('\n'));
-                    const error = new SError_1.default(this.stderr.join('\n'));
-                    this.error(`<yellow>Child Process</yellow>\n${error.message}`);
-                }
-                else if (this._isKilling || (!code && signal)) {
-                    trigger('killed');
-                }
-                else if (code === 0 && !signal) {
-                    resolve();
-                }
-                else {
-                    reject();
-                }
-                // reset isKilling boolean
-                this._isKilling = false;
-            });
-            // stdout data
-            if (childProcess.stdout) {
-                childProcess.stdout.on('data', (data) => {
-                    this.log({
-                        value: data.toString()
-                    });
-                });
-            }
-            // stderr data
-            if (childProcess.stderr) {
-                childProcess.stderr.on('data', (error) => {
-                    this.error({
-                        value: error.toString()
-                    });
-                });
-            }
-        }));
     }
     /**
      * @name      kill

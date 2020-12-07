@@ -30,3 +30,4 @@ function color(color) {
     return new SColor_1.default(color);
 }
 module.exports = color;
+//# sourceMappingURL=color.js.map

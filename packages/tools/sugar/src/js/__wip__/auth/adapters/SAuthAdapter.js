@@ -132,3 +132,4 @@ module.exports = /** @class */ (function () {
     };
     return SAuthAdapter;
 }());
+//# sourceMappingURL=SAuthAdapter.js.map

@@ -15,7 +15,6 @@ const strip_ansi_1 = __importDefault(require("strip-ansi"));
 const trimLines_1 = __importDefault(require("../string/trimLines"));
 const extractValues_1 = __importDefault(require("../object/extractValues"));
 const SOutputLogInterface_1 = __importDefault(require("./interface/SOutputLogInterface"));
-const SOutputSourceInterface_1 = __importDefault(require("./interface/SOutputSourceInterface"));
 const parseArgs_1 = __importDefault(require("../cli/parseArgs"));
 module.exports = class SOutput extends SBlessedComponent_1.default {
     /**
@@ -129,10 +128,12 @@ module.exports = class SOutput extends SBlessedComponent_1.default {
         if (!Array.isArray(source))
             source = [source];
         source.forEach((s) => {
-            SOutputSourceInterface_1.default.apply(s, {
-                title: 'SOutput source issue',
-                description: 'One of the passed "source" for the SOutput class does not answer the minimal requirements of the "SOutputSourceInterface"...'
-            });
+            // __SOutputSourceInterface.apply(s, {
+            //   title: 'SOutput source issue',
+            //   description:
+            //     'One of the passed "source" for the SOutput class does not answer the minimal requirements of the "SOutputSourceInterface"...'
+            // });
+            // todo     check why it's not working...
             // subscribe to the process
             this._subscribeToSource(s);
         });
@@ -862,3 +863,4 @@ module.exports = class SOutput extends SBlessedComponent_1.default {
         this.append(this.$logBox);
     }
 };
+//# sourceMappingURL=SBlessedOutput.js.map

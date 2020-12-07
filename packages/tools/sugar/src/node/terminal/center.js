@@ -47,3 +47,4 @@ function center(text, settings = {}) {
     return Array.isArray(text) ? lines : lines.join('\n');
 }
 module.exports = center;
+//# sourceMappingURL=center.js.map

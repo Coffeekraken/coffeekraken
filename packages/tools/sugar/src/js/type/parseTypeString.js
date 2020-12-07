@@ -104,3 +104,4 @@
     };
     return fn;
 });
+//# sourceMappingURL=parseTypeString.js.map

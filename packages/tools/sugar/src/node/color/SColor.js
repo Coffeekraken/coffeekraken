@@ -980,3 +980,4 @@ SColor.colors = {
     yellowgreen: '#9acd32'
 };
 module.exports = SColor;
+//# sourceMappingURL=SColor.js.map

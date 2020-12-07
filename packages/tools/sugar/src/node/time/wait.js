@@ -32,3 +32,4 @@ function wait(timeout) {
     });
 }
 module.exports = wait;
+//# sourceMappingURL=wait.js.map

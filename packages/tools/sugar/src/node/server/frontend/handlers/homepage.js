@@ -75,3 +75,4 @@ function homepage(req, res, settings = {}) {
     });
 }
 module.exports = homepage;
+//# sourceMappingURL=homepage.js.map

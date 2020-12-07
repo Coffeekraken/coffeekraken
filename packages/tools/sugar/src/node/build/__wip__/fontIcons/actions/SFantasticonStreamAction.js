@@ -96,3 +96,4 @@ module.exports = (_a = class SFantasticonStreamAction extends __SActionsStreamAc
      */
     _a.interface = __BBuildFontIconsInterface,
     _a);
+//# sourceMappingURL=SFantasticonStreamAction.js.map

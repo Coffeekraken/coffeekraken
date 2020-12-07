@@ -21,3 +21,4 @@ compileTsInterface.definition = Object.assign(Object.assign({}, TscInterface_1.d
         alias: 'w'
     } });
 module.exports = compileTsInterface;
+//# sourceMappingURL=compileTsInterface.js.map

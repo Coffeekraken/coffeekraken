@@ -11,3 +11,4 @@ function heading(stringArgs = '') {
     }));
 }
 module.exports = heading;
+//# sourceMappingURL=heading.cli.js.map

@@ -22,3 +22,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return es5_1.default.apply(void 0, classes);
     };
 });
+//# sourceMappingURL=multipleExtends.js.map

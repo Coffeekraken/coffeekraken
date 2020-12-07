@@ -1,0 +1,1 @@
+{"version":3,"file":"hasExitCleanup.js","sourceRoot":"","sources":["hasExitCleanup.ts"],"names":[],"mappings":";AAAA,cAAc;AAEd;;;;;;;;;;;;;;;;;;;;;;;GAuBG;AACH,SAAS,cAAc;IACrB,OAAO,OAAO,CAAC,GAAG,CAAC,YAAY,KAAK,SAAS;QAC3C,CAAC,CAAC,OAAO,CAAC,GAAG,CAAC,YAAY;QAC1B,CAAC,CAAC,KAAK,CAAC;AACZ,CAAC;AACD,iBAAS,cAAc,CAAC"}

@@ -124,3 +124,4 @@ module.exports = (_a = class SFsDeamonProcess extends SProcess_1.default {
     },
     _a.interface = SFsDeamonInterface_1.default,
     _a);
+//# sourceMappingURL=SFsDeamonProcess.js.map

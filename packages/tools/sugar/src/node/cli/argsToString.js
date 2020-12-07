@@ -175,3 +175,4 @@ function argsToString(args, settings = {}) {
     return cliArray.join(' ').replace(/(\s){2,999999}/gm, ' ');
 }
 module.exports = argsToString;
+//# sourceMappingURL=argsToString.js.map

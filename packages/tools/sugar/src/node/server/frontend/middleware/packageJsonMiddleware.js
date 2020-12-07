@@ -47,3 +47,4 @@ function packageJsonMiddleware(settings = {}) {
     };
 }
 module.exports = packageJsonMiddleware;
+//# sourceMappingURL=packageJsonMiddleware.js.map

@@ -30,3 +30,4 @@ function isEmail(data) {
     return re.test(data);
 }
 module.exports = isEmail;
+//# sourceMappingURL=email.js.map

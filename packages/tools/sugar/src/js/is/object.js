@@ -39,3 +39,4 @@
     }
     return isObject;
 });
+//# sourceMappingURL=object.js.map

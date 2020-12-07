@@ -59,3 +59,4 @@ const Cls = class SBlessedProcessOutput extends SProcessOutput_1.default {
     }
 };
 module.exports = Cls;
+//# sourceMappingURL=SBlessedProcessOutput.js.map

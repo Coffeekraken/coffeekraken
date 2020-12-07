@@ -19,3 +19,4 @@ module.exports = (_a = class STestJestCliInterface extends SInterface_1.default 
         }
     }),
     _a);
+//# sourceMappingURL=STestJestInterface.js.map

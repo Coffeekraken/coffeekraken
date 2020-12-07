@@ -47,3 +47,4 @@ module.exports = function deepDiff(origin, compare) {
     });
     return finalObject;
 };
+//# sourceMappingURL=deepDiff.js.map

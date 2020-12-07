@@ -56,3 +56,4 @@ module.exports = (_a = class STestJestCli extends SCli_1.default {
      */
     _a.processClass = STestJestProcess_1.default,
     _a);
+//# sourceMappingURL=STestJestCli.js.map

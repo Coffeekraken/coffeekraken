@@ -39,3 +39,4 @@
     }
     return isNumber;
 });
+//# sourceMappingURL=number.js.map

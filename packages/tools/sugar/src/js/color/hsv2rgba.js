@@ -87,3 +87,4 @@
     }
     return hsv2rgba;
 });
+//# sourceMappingURL=hsv2rgba.js.map

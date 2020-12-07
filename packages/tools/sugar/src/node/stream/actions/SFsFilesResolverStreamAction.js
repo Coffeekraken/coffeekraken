@@ -158,3 +158,4 @@ module.exports = (_a = class SFindInFileStreamAction extends SActionsStreamActio
      */
     _a.interface = SFsFilesResolverStreamActionInterface,
     _a);
+//# sourceMappingURL=SFsFilesResolverStreamAction.js.map

@@ -13,6 +13,7 @@ import __isPlainObject from '../is/plainObject';
  * @name            SIpc
  * @namespace       sugar.node.ipc
  * @type            Class
+ * @extends         SPromise
  * @wip
  *
  * This script check if a global ipc server exists aulready and if it is not the case,
@@ -21,6 +22,7 @@ import __isPlainObject from '../is/plainObject';
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ * @todo      {Feature}       Integrate the "trigger" feature that let the server send messages to the clients
  *
  * @see             https://www.npmjs.com/package/node-ipc
  * @since           2.0.0
@@ -112,7 +114,7 @@ class SIpcServer extends __SPromise {
     // listen for events
     this._ipcInstance.server.on('event', (data, socket) => {
       // trigger the event using the SPromise method
-      this.trigger(`ipc.${data.stack}`, data.data);
+      this.trigger(`${data.stack}`, data.data);
     });
     // return the server data
     return serverData;

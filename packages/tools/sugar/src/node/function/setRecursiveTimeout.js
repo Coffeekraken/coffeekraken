@@ -51,3 +51,4 @@ function setRecursiveTimeout(fn, timeout, duration, spread = 0) {
     };
 }
 module.exports = setRecursiveTimeout;
+//# sourceMappingURL=setRecursiveTimeout.js.map

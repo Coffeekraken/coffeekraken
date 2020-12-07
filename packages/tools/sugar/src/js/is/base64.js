@@ -44,3 +44,4 @@
     }
     return isBase64;
 });
+//# sourceMappingURL=base64.js.map

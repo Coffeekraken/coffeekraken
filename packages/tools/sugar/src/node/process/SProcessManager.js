@@ -293,3 +293,4 @@ class SProcessManager extends SPromise_1.default {
 module.exports = SProcessManagerInterface_1.default.implements(SProcessManager, [
     SProcessManagerInterface_1.default
 ]);
+//# sourceMappingURL=SProcessManager.js.map

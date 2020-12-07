@@ -19,3 +19,4 @@ module.exports = (_a = class SFsDeamonInterface extends SInterface_1.default {
         }
     },
     _a);
+//# sourceMappingURL=SFsDeamonInterface.js.map

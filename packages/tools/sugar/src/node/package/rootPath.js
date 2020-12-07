@@ -31,3 +31,4 @@ function rootPath(from = process.cwd(), highest = false) {
     return packageRoot_1.default(from, highest);
 }
 module.exports = rootPath;
+//# sourceMappingURL=rootPath.js.map

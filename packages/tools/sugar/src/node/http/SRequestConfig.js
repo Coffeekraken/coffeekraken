@@ -161,3 +161,4 @@ module.exports = class SRequestConfig {
         Object.assign(this, params);
     }
 };
+//# sourceMappingURL=SRequestConfig.js.map

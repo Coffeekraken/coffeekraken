@@ -40,3 +40,4 @@
     }
     return extension;
 });
+//# sourceMappingURL=extension.js.map

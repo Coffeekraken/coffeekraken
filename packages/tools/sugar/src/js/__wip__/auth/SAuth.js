@@ -333,3 +333,4 @@ module.exports = /** @class */ (function () {
     };
     return SAuth;
 }());
+//# sourceMappingURL=SAuth.js.map

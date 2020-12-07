@@ -26,3 +26,4 @@ module.exports = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function
     });
     console.log(packageRoot_1.default(args.highest));
 });
+//# sourceMappingURL=root.cli.js.map

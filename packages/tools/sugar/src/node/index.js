@@ -10,7 +10,6 @@ const handleError_1 = __importDefault(require("./error/handleError"));
 const initEnv_1 = __importDefault(require("./init/initEnv"));
 const onProcessExit_1 = __importDefault(require("./process/onProcessExit"));
 const exitCleanup_1 = __importDefault(require("./process/exitCleanup"));
-const SIpc_1 = __importDefault(require("./ipc/SIpc"));
 /**
  * @name                    index
  * @namespace           node
@@ -22,8 +21,6 @@ const SIpc_1 = __importDefault(require("./ipc/SIpc"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-// global IPC server
-SIpc_1.default.initGlobalInstance();
 // init env
 initEnv_1.default();
 // handle the errors
@@ -34,3 +31,4 @@ onProcessExit_1.default(() => {
 });
 // Logging
 new SLog_1.default(sugar_1.default('log'));
+//# sourceMappingURL=index.js.map

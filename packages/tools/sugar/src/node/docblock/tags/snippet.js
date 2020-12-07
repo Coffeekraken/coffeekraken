@@ -28,3 +28,4 @@ function snippet(data) {
     };
 }
 module.exports = snippet;
+//# sourceMappingURL=snippet.js.map

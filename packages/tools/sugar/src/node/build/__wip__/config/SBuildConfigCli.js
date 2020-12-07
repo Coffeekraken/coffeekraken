@@ -53,3 +53,4 @@ module.exports = (_a = class SBuildConfigCli extends __SCli {
      */
     _a.interface = __SBuildConfigInterface,
     _a);
+//# sourceMappingURL=SBuildConfigCli.js.map

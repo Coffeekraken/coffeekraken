@@ -353,3 +353,4 @@ exports.default = SSugarAppModule;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 SSugarAppModule._registeredModulesArray = [];
+//# sourceMappingURL=SSugarAppModule.js.map

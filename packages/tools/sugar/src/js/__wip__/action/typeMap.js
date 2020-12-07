@@ -16,3 +16,4 @@ module.exports = {
         url: __SUrlAction
     }
 };
+//# sourceMappingURL=typeMap.js.map

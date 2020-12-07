@@ -59,3 +59,4 @@ class SSugarAppProcess extends SProcess_1.default {
 }
 exports.default = SSugarAppProcess;
 SSugarAppProcess.interface = SSugarAppInterface_1.default;
+//# sourceMappingURL=SSugarAppProcess.js.map

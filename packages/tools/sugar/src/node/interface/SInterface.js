@@ -178,3 +178,4 @@ const Cls = (_a = class SInterface {
     _a.settings = {},
     _a);
 module.exports = Cls;
+//# sourceMappingURL=SInterface.js.map

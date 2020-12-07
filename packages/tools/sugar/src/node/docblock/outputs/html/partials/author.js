@@ -21,3 +21,4 @@ module.exports = `
 </div>
 {{/author}}{{/if}}
 `;
+//# sourceMappingURL=author.js.map

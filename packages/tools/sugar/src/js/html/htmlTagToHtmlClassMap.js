@@ -80,3 +80,4 @@
         area: HTMLAreaElement
     };
 });
+//# sourceMappingURL=htmlTagToHtmlClassMap.js.map

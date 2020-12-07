@@ -6,7 +6,6 @@ import __handleError from './error/handleError';
 import __initEnv from './init/initEnv';
 import __onProcessExit from './process/onProcessExit';
 import __exitCleanup from './process/exitCleanup';
-import __SIpc from './ipc/SIpc';
 
 /**
  * @name                    index
@@ -19,9 +18,6 @@ import __SIpc from './ipc/SIpc';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
-// global IPC server
-__SIpc.initGlobalInstance();
 
 // init env
 __initEnv();

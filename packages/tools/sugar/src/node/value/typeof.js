@@ -130,3 +130,4 @@ function typeOf(value, settings = {}) {
     return type;
 }
 module.exports = typeOf;
+//# sourceMappingURL=typeof.js.map

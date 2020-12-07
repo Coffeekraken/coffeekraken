@@ -35,3 +35,4 @@ function copy(src, dest) {
     return fs_extra_1.default.copy(src, dest);
 }
 module.exports = copy;
+//# sourceMappingURL=copy.js.map

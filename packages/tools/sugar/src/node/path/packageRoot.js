@@ -44,3 +44,4 @@ function packageRoot(from = process.cwd(), highest = false) {
     return false;
 }
 module.exports = packageRoot;
+//# sourceMappingURL=packageRoot.js.map

@@ -51,3 +51,4 @@ function rgba2hex(r, g, b, a = 1) {
         alpha);
 }
 module.exports = rgba2hex;
+//# sourceMappingURL=rgba2hex.js.map

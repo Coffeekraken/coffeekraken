@@ -101,3 +101,4 @@ const Cls = class SCliProcess extends SProcess_1.default {
     }
 };
 module.exports = Cls;
+//# sourceMappingURL=SCliProcess.js.map

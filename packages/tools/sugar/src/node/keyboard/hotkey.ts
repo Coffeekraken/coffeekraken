@@ -4,7 +4,7 @@ import __SPromise from '../promise/SPromise';
 import __uniqid from '../string/uniqid';
 import __keypress from 'keypress';
 import __activeSpace from '../core/activeSpace';
-import __SIpc from '../ipc/SIpc';
+// import __SIpc from '../ipc/SIpc';
 import __isChildProcess from '../is/childProcess';
 
 /**
@@ -26,6 +26,7 @@ import __isChildProcess from '../is/childProcess';
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ * @todo      {Feature}       Add IPC support to allow listen for key press in child processes
  *
  * @example         js
  * import hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
@@ -44,7 +45,7 @@ let isSystemWideAlreadyAdded = false;
 function _handleKeypress(ch, keyObj) {
   if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
     // process.stdin.pause();
-    process.emit('custom_exit');
+    process.emit('custom_exit', 'kill');
   }
 
   // loop on each promises registered
@@ -172,31 +173,33 @@ function hotkey(key, settings = {}) {
 
     // return the promise
     return promise;
-  } else if (settings.ipc) {
-    const promise = new __SPromise({
-      id: 'hotkey'
-    });
-    // child process
-    __SIpc.on(`keypress.${key}`, (keyObj) => {
-      promise.trigger('key', keyObj);
-      promise.trigger('press', keyObj);
-    });
-    setTimeout(() => {
-      __SIpc.trigger(`keypress`, {
-        key,
-        settings
-      });
-    }, 2000);
-    return promise;
   }
+
+  // else if (settings.ipc) {
+  //   const promise = new __SPromise({
+  //     id: 'hotkey'
+  //   });
+  //   // child process
+  //   __SIpc.on(`keypress.${key}`, (keyObj) => {
+  //     promise.trigger('key', keyObj);
+  //     promise.trigger('press', keyObj);
+  //   });
+  //   setTimeout(() => {
+  //     __SIpc.trigger(`keypress`, {
+  //       key,
+  //       settings
+  //     });
+  //   }, 2000);
+  //   return promise;
+  // }
 }
 
-if (!__isChildProcess()) {
-  __SIpc.on('keypress', (keyObj) => {
-    hotkey(keyObj.key).on('press', (pressedKeyObj) => {
-      __SIpc.trigger(`keypress.${keyObj.key}`, pressedKeyObj);
-    });
-  });
-}
+// if (!__isChildProcess()) {
+//   __SIpc.on('keypress', (keyObj) => {
+//     hotkey(keyObj.key).on('press', (pressedKeyObj) => {
+//       __SIpc.trigger(`keypress.${keyObj.key}`, pressedKeyObj);
+//     });
+//   });
+// }
 
 export = hotkey;

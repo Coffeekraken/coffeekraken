@@ -44,3 +44,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return forceRedraw;
 });
+//# sourceMappingURL=forceRedraw.js.map

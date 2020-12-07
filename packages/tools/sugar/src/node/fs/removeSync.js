@@ -32,3 +32,4 @@ function removeSync(path) {
     return fs_extra_1.default.removeSync(path);
 }
 module.exports = removeSync;
+//# sourceMappingURL=removeSync.js.map

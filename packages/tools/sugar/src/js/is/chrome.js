@@ -39,3 +39,4 @@
     }
     return isChrome;
 });
+//# sourceMappingURL=chrome.js.map

@@ -23,3 +23,4 @@ function ease(t) {
     return 1 + --t * t * t * t * t;
 }
 module.exports = ease;
+//# sourceMappingURL=easeOutQuint.js.map

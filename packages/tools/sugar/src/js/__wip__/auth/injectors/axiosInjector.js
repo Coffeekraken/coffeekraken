@@ -23,3 +23,4 @@ module.exports = function axiosInjector(authInfo, requestConfig) {
     }
     return requestConfig;
 };
+//# sourceMappingURL=axiosInjector.js.map

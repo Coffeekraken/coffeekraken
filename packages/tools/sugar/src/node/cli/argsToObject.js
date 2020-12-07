@@ -58,3 +58,4 @@ function argsToObject(argsObj, settings = {}) {
     return completeArgsObject_1.default(argsObj || {}, settings);
 }
 module.exports = argsToObject;
+//# sourceMappingURL=argsToObject.js.map

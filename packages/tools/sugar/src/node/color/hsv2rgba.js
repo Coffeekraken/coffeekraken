@@ -76,3 +76,4 @@ function hsv2rgba(h, s, v, a = 1) {
     };
 }
 module.exports = hsv2rgba;
+//# sourceMappingURL=hsv2rgba.js.map

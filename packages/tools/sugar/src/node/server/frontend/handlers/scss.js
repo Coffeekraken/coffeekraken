@@ -29,3 +29,4 @@ module.exports = function scss(req, res, settings = {}) {
         res.send(compileRes.css);
     });
 };
+//# sourceMappingURL=scss.js.map

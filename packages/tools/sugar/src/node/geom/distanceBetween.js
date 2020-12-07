@@ -38,3 +38,4 @@ function distanceBetween(point1, point2) {
     return Math.sqrt(xs + ys);
 }
 module.exports = distanceBetween;
+//# sourceMappingURL=distanceBetween.js.map

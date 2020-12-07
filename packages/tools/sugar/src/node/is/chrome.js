@@ -28,3 +28,4 @@ function isChrome(ua = navigator.userAgent) {
     return ua.indexOf('Chrome') > -1;
 }
 module.exports = isChrome;
+//# sourceMappingURL=chrome.js.map

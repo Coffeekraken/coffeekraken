@@ -29,3 +29,4 @@ module.exports = function findPackages(rootDir = process.cwd()) {
         return packagesObj;
     });
 };
+//# sourceMappingURL=findPackages.js.map

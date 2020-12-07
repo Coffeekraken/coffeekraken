@@ -30,3 +30,4 @@ module.exports = (_a = class SOutputLogInterface extends SInterface_1.default {
             default: 1
         } }),
     _a);
+//# sourceMappingURL=SOutputLogInterface.js.map

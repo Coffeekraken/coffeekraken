@@ -83,3 +83,4 @@ function isNotUndefined(value) {
     return typeof value !== 'undefined';
 }
 module.exports = jsToScssString;
+//# sourceMappingURL=jsObjectToScssMap.js.map

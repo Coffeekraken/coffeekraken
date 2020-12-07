@@ -42,3 +42,4 @@ function ofType(value, typeString, settings = {}) {
     return res;
 }
 module.exports = ofType;
+//# sourceMappingURL=ofType.js.map

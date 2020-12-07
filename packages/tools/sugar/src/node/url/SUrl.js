@@ -337,3 +337,4 @@ module.exports = class SUrl {
         return this._parsedUrl.toString();
     }
 };
+//# sourceMappingURL=SUrl.js.map

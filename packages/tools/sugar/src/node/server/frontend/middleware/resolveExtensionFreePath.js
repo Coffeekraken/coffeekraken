@@ -60,3 +60,4 @@ function resolveExtensionFreePath(settings = {}) {
     };
 }
 module.exports = resolveExtensionFreePath;
+//# sourceMappingURL=resolveExtensionFreePath.js.map

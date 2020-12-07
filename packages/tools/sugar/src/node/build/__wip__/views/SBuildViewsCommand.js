@@ -47,3 +47,4 @@ module.exports = class SBuildViewsCommand extends __SCommand {
         }, commandSettings));
     }
 };
+//# sourceMappingURL=SBuildViewsCommand.js.map

@@ -102,3 +102,4 @@ ${stringArray.join('\n')}
     }
 };
 module.exports = Cls;
+//# sourceMappingURL=SInterfaceResult.js.map

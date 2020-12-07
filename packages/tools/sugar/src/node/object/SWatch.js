@@ -121,3 +121,4 @@ module.exports = class SWatch {
         return this._proxiedObject.revoke();
     }
 };
+//# sourceMappingURL=SWatch.js.map

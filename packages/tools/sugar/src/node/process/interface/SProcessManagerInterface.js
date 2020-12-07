@@ -21,3 +21,4 @@ module.exports = (_a = class SProcessManagerInterface extends SInterface_1.defau
     _a.title = 'SProcess elements Interface',
     _a.description = 'This interface represent the minimum requirements that MUST have the instance that run some commands etc across the entire toolkit',
     _a);
+//# sourceMappingURL=SProcessManagerInterface.js.map

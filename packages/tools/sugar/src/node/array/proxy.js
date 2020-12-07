@@ -144,3 +144,4 @@ function proxy(array) {
     return array;
 }
 module.exports = proxy;
+//# sourceMappingURL=proxy.js.map

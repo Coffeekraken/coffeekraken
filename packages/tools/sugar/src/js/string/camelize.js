@@ -43,3 +43,4 @@
     }
     return camelize;
 });
+//# sourceMappingURL=camelize.js.map

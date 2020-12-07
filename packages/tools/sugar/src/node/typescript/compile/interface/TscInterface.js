@@ -21,3 +21,4 @@ class TscInterface extends SInterface_1.default {
 }
 exports.default = TscInterface;
 TscInterface.definition = _definition;
+//# sourceMappingURL=TscInterface.js.map

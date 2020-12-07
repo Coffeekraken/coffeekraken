@@ -75,3 +75,4 @@ module.exports = class SLogFilesAdapter {
         });
     }
 };
+//# sourceMappingURL=SLogFilesAdapter.js.map

@@ -52,3 +52,4 @@ function consoleFn(text) {
     });
 }
 module.exports = consoleFn;
+//# sourceMappingURL=console.js.map

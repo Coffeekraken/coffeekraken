@@ -112,3 +112,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }());
     return Cls;
 });
+//# sourceMappingURL=SInterfaceResult.js.map

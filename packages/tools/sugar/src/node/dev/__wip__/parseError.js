@@ -82,3 +82,4 @@ module.exports = function parseError(error) {
         stack: stackTrace
     };
 };
+//# sourceMappingURL=parseError.js.map

@@ -50,3 +50,4 @@
     };
     return descriptor;
 });
+//# sourceMappingURL=bigintTypeDescriptor.js.map

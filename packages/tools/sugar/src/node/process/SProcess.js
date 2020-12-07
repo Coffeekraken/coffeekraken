@@ -23,13 +23,14 @@ const node_notifier_1 = __importDefault(require("node-notifier"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 const childProcess_1 = __importDefault(require("../is/childProcess"));
-const SIpc_1 = __importDefault(require("../ipc/SIpc"));
+const SIpcClient_1 = __importDefault(require("../ipc/SIpcClient"));
 const SError_1 = __importDefault(require("../error/SError"));
 const buildCommandLine_1 = __importDefault(require("../cli/buildCommandLine"));
 const parseArgs_1 = __importDefault(require("../cli/parseArgs"));
 const output_1 = __importDefault(require("./output"));
 const stack_trace_1 = __importDefault(require("stack-trace"));
 const toString_1 = __importDefault(require("../string/toString"));
+const spawn_1 = __importDefault(require("./spawn"));
 module.exports = class SProcess extends SPromise_1.default {
     /**
      * @name            constructor
@@ -47,6 +48,7 @@ module.exports = class SProcess extends SPromise_1.default {
             throw: true,
             runAsChild: false,
             definition: undefined,
+            killOnError: true,
             processPath: null,
             notifications: {
                 enable: true,
@@ -64,6 +66,11 @@ module.exports = class SProcess extends SPromise_1.default {
                     title: null,
                     message: `Something went wrong...`,
                     icon: `${packageRoot_1.default(__dirname)}/src/data/notifications/ck_error.png`
+                },
+                kill: {
+                    title: null,
+                    message: `Process killed...`,
+                    icon: `${packageRoot_1.default(__dirname)}/src/data/notifications/ck_error.png`
                 }
             },
             env: Object.assign(Object.assign({}, process.env), { CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
@@ -71,6 +78,27 @@ module.exports = class SProcess extends SPromise_1.default {
                     : 1, IS_CHILD_PROCESS: true })
         }, settings));
         this._state = 'idle';
+        /**
+         * @name      executionsStack
+         * @type      Array<Object>
+         *
+         * This array store each executions informations in separated objects
+         * that store the duration, startTime, endTime, state, etc...
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this.executionsStack = [];
+        /**
+         * @name     currentExecutionObj
+         * @type      Object
+         *
+         * Store the current execution object info like startTime, endTime, duration, state, etc...
+         *
+         * @since     2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this.currentExecutionObj = undefined;
         /**
          * @name      definition
          * @type      Object
@@ -82,89 +110,17 @@ module.exports = class SProcess extends SPromise_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this.definition = undefined;
-        /**
-         * @name      duration
-         * @type      Number
-         * @get
-         *
-         * Access the process duration when this one is finished
-         *
-         * @since     2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.duration = -1;
-        /**
-         * @name      startTime
-         * @type      Number
-         * @get
-         *
-         * Access the process startTime when this one has started
-         *
-         * @since     2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.startTime = Date.now();
-        /**
-         * @name      endTime
-         * @type      Number
-         * @get
-         *
-         * Access the process endTime when this one is finished
-         *
-         * @since     2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.endTime = -1;
-        /**
-         * @name      stdout
-         * @type      Array<String>
-         * @get
-         *
-         * Access the process stdout stack
-         *
-         * @since     2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.stdout = [];
-        /**
-         * @name      stderr
-         * @type
-         * @get
-         *
-         * Access the process stderr stack
-         *
-         * @since     2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.stderr = [];
-        /**
-         * @name        value
-         * @type        Mixed
-         *
-         * Access the process result value
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.value = null;
         // get the definition from interface or settings
         this.definition =
             settings.definition !== undefined
                 ? settings.definition
-                : this.constructor.interface.definition;
-        // if (this.definition === undefined) {
-        //   const errorStr = `Sorry but your process "<yellow>${this.constructor.name}</yellow>" does not have any "<cyan>definition</cyan>". You can either specify it by setting an <green>SInterface instance as a static interface property</green> or by setting the "<green>settings.definition</green>" property`;
-        //   if (settings.throw === true) {
-        //     throw errorStr;
-        //   } else {
-        //     return new __SError(errorStr);
-        //   }
-        // }
+                : this.constructor.interface !== undefined
+                    ? this.constructor.interface.definition
+                    : null;
         // handle process exit
-        onProcessExit_1.default(() => {
-            this._currentSpawnedProcess !== undefined &&
-                this._currentSpawnedProcess.kill();
-        });
+        onProcessExit_1.default((state) => __awaiter(this, void 0, void 0, function* () {
+            this.state = state;
+        }));
         this._processPath = this._settings.processPath;
         for (var callSite of stack_trace_1.default.get()) {
             if (callSite.getFunctionName() === this.constructor.name) {
@@ -184,53 +140,10 @@ module.exports = class SProcess extends SPromise_1.default {
         if (!this._settings.notifications.error.title) {
             this._settings.notifications.error.title = `${this._settings.name} (${this._settings.id})`;
         }
-        // add the listeners
-        this.on('resolve,reject,cancel', (data, metas) => {
-            this.value = data;
-            this.endTime = Date.now();
-            this.duration = Date.now() - this.startTime;
-            if (metas.stack === 'resolve')
-                this.state = 'success';
-            else if (metas.stack === 'reject')
-                this.state = 'error';
-            else if (metas.stack === 'cancel')
-                this.state = 'killed';
-            else
-                this.state = 'idle';
-            if (this.state === 'success') {
-                if (!childProcess_1.default()) {
-                    // log a success message
-                    this.log({
-                        value: `<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>\nThe <yellow>${this.name}</yellow> (<cyan>${this.id}</cyan>) process has finished <green>successfully</green> in <yellow>${convert_1.default(this.duration, convert_1.default.SECOND)}s</yellow>\n<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>`
-                    });
-                    if (this._settings.notifications.enable) {
-                        node_notifier_1.default.notify(this._settings.notifications.success);
-                    }
-                }
-            }
-            else if (this.state === 'error') {
-                if (!childProcess_1.default()) {
-                    this.log({
-                        value: `<red>${'-'.repeat(process.stdout.columns - 4)}</red>\n<red>Something went wrong</red> during the <yellow>${this.name}</yellow> (<cyan>${this.id}</cyan>) process execution`
-                    });
-                    if (this._settings.notifications.enable) {
-                        node_notifier_1.default.notify(this._settings.notifications.error);
-                    }
-                }
-            }
-            return this.toObject();
-        });
-        if (childProcess_1.default()) {
-            this.on('*', (data, metas) => {
-                SIpc_1.default.trigger(`${process.env.GLOBAL_SIPC_TRIGGER_ID}.trigger`, {
-                    stack: metas.stack,
-                    value: data,
-                    metas: Object.assign({ pid: process.pid }, metas)
-                });
-            });
-            return;
+        if (!this._settings.notifications.kill.title) {
+            this._settings.notifications.kill.title = `${this._settings.name} (${this._settings.id})`;
         }
-        else {
+        if (!childProcess_1.default()) {
             if (this._settings.output) {
                 if (class_1.default(this._settings.output)) {
                     const outputInstance = new this._settings.output(this, this._settings.initialParams);
@@ -243,6 +156,10 @@ module.exports = class SProcess extends SPromise_1.default {
                 }
             }
         }
+        // listen for state changes
+        this.on('state', (state) => {
+            this._onStateChange(state);
+        });
     }
     /**
      * @name      id
@@ -287,7 +204,7 @@ module.exports = class SProcess extends SPromise_1.default {
      * @name      state
      * @type      String
      *
-     * Access the process state like 'idle', 'running', 'killed', 'error', 'success'
+     * Access the process state like 'idle', 'running', 'kill', 'error', 'success'
      *
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -340,32 +257,6 @@ module.exports = class SProcess extends SPromise_1.default {
         };
     }
     /**
-     * @name      bindSPromise
-     * @type      Function
-     *
-     * This method allows you to bind a SPromise instance to
-     * this proces. That allows the SProcess instance to listen
-     * for errors, end of process, etc automatically
-     *
-     * @param     {SPromise}      promise       An SPromise instance that you want to bind to this process
-     * @return    {SProcess}                    Maintain the chainability
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    bindSPromise(promise) {
-        if (!(promise instanceof SPromise_1.default)) {
-            throw new SError_1.default(`Sorry but the passed promise parameter to the "bindSPromise" method has to be an SPromise instance and you've passed a "${typeof promise}"`);
-        }
-        this._promise = promise;
-        SPromise_1.default.pipe(this._promise, this, {
-        // exclude: ['resolve']
-        });
-        this._promise.on('resolve', (data, metas) => {
-            this.resolve(data);
-        });
-    }
-    /**
      * @name      run
      * @type      Function
      * @async
@@ -382,7 +273,35 @@ module.exports = class SProcess extends SPromise_1.default {
     run(paramsOrStringArgs = {}, settings = {}) {
         return __awaiter(this, void 0, void 0, function* () {
             settings = deepMerge_1.default(this._settings, settings);
-            let processPromise;
+            if (this.currentExecutionObj !== undefined) {
+                if (settings.throw === true) {
+                    throw `Sorry but you can not execute multiple process of the "<yellow>${settings.name || settings.id || this.constructor.name}</yellow>" SProcess instance...`;
+                }
+                return;
+            }
+            // init the currentExecution object
+            this.currentExecutionObj = {
+                startTime: Date.now(),
+                endTime: -1,
+                duration: -1,
+                state: 'idle',
+                stdout: [],
+                stderr: []
+            };
+            this.currentExecutionObj.stdout.toString = () => {
+                return this.currentExecutionObj.stdout
+                    .map((item) => {
+                    return toString_1.default(item);
+                })
+                    .join('\n');
+            };
+            this.currentExecutionObj.stderr.toString = () => {
+                return this.currentExecutionObj.stderr
+                    .map((item) => {
+                    return toString_1.default(item);
+                })
+                    .join('\n');
+            };
             yield wait_1.default(50);
             let paramsObj = paramsOrStringArgs;
             if (typeof paramsObj === 'string') {
@@ -410,37 +329,80 @@ module.exports = class SProcess extends SPromise_1.default {
                     });
                 }
             }
-            // log a start message
-            if (!childProcess_1.default()) {
-                this.log({
-                    value: `<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>\nStarting the <yellow>${this.name}</yellow> (<cyan>${this.id}</cyan>) process...\n<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>`
-                });
-            }
-            if (settings.notifications.enable) {
-                node_notifier_1.default.notify(settings.notifications.start);
-            }
-            this.trigger(`start`, this.toObject());
+            // update state
+            this.state = 'running';
             if (settings.runAsChild && !childProcess_1.default()) {
                 // build the command to run depending on the passed command in the constructor and the params
-                const commandToRun = buildCommandLine_1.default(`node ${path_1.default.resolve(__dirname, '../../cli/sugar.cli.js')} process.runChild [arguments]`, Object.assign(Object.assign({}, paramsObj), { processPath: this._processPath }), {
+                const commandToRun = buildCommandLine_1.default(`node --enable-source-maps ${path_1.default.resolve(__dirname, '../../cli/sugar.cli.js')} process.runChild [arguments]`, Object.assign(Object.assign({}, paramsObj), { processPath: this._processPath }), {
                     definition: Object.assign(Object.assign({}, (this.definition || {})), { processPath: {
                             type: 'String',
                             required: true
                         } }),
                     alias: false
                 }, {});
-                if (yield SIpc_1.default.isServer()) {
-                    SIpc_1.default.on(`${settings.env.GLOBAL_SIPC_TRIGGER_ID}.trigger`, (data, socket) => {
-                        this.trigger(data.stack, data.value, data.metas);
-                    });
-                }
                 // run child process
-                processPromise = this.spawn(commandToRun, settings);
+                this._processPromise = spawn_1.default(commandToRun, [], Object.assign(Object.assign({}, settings), { ipc: true }));
             }
-            // run the actual process using the "process" method
-            processPromise = this.process(this._params, settings);
+            else {
+                // handle ipc connection
+                let ipcClient;
+                if (childProcess_1.default() && SIpcClient_1.default.hasParentServer()) {
+                    // console.log('CCCOCOC');
+                    ipcClient = yield SIpcClient_1.default.connectToParent();
+                }
+                // run the actual process using the "process" method
+                this._processPromise = this.process(this._params, settings);
+                if (childProcess_1.default() && ipcClient) {
+                    this._processPromise.on('*', (data, metas) => {
+                        ipcClient.trigger(`child.${metas.stack}`, data);
+                    });
+                    // __SPromise.pipe(this._processPromise, ipcClient, {
+                    //   prefixStack: 'child'
+                    // });
+                }
+            }
+            SPromise_1.default.pipe(this._processPromise, this, {
+                prefixStack: false
+            });
+            // listen for "data" and "log" events
+            this._processPromise.on('log,child.log', (data, metas) => {
+                // console.log('DADAD', data, metas.stack);
+                if (this.currentExecutionObj) {
+                    this.currentExecutionObj.stdout.push(data);
+                }
+            });
+            // listen for errors
+            this._processPromise.on('error,child.error', (data, metas) => {
+                if (this.currentExecutionObj) {
+                    this.currentExecutionObj.stderr.push(data);
+                }
+                this.state = 'error';
+                if (settings.killOnError) {
+                    this.kill(data);
+                }
+            });
+            // updating state when needed
+            this._processPromise.on([
+                'resolve:1',
+                'child.resolve:1',
+                'reject:1',
+                'child.reject:1',
+                'cancel:1',
+                'child.cancel:1',
+                'close.error:1',
+                'close.killed:1'
+            ].join(','), (data, metas) => {
+                if (metas.stack === 'resolve' || metas.stack === 'close.success')
+                    this.state = 'success';
+                else if (metas.stack === 'reject' || metas.stack === 'close.error')
+                    this.state = 'error';
+                else if (metas.stack === 'cancel' || metas.stack === 'close.killed')
+                    this.state = 'killed';
+                else
+                    this.state = 'idle';
+            });
             // return the process promise
-            return processPromise;
+            return this._processPromise;
         });
     }
     /**
@@ -453,13 +415,119 @@ module.exports = class SProcess extends SPromise_1.default {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    kill() {
-        this.isKilling = true;
+    kill(data) {
         // call the cancel method on the parent SPromise instance
-        this.cancel();
+        this.cancel(data);
+    }
+    /**
+     * @name        cancel
+     * @type        Function
+     *
+     *
+     * This method allows you to cancel the process
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    cancel(data) {
+        if (this.state === 'running')
+            this.state = 'killed';
         // cancel the passed promise
-        if (this._promise && this.promise.cancel)
-            this._promise.cancel();
+        if (this._processPromise && this._processPromise.cancel)
+            this._processPromise.cancel(data);
+    }
+    /**
+     * @name        _onStateChange
+     * @type        Function
+     * @private
+     *
+     * This method is called each tie the state change to reflect
+     * this in the console feed
+     *
+     * @param     {String}        state       The new state
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _onStateChange(state) {
+        // update the current execution state
+        if (!this.currentExecutionObj)
+            return;
+        this.currentExecutionObj.state = state;
+        // check if is the end of the process
+        if (state === 'killed' ||
+            (state === 'error' && this._settings.killOnError)) {
+            this.currentExecutionObj.endTime = Date.now();
+            this.currentExecutionObj.duration =
+                this.currentExecutionObj.endTime - this.currentExecutionObj.startTime;
+        }
+        let data;
+        const strArray = [];
+        if (!childProcess_1.default()) {
+            switch (state) {
+                case 'success':
+                    this.log({
+                        value: `\n<green>${'-'.repeat(process.stdout.columns - 4)}</green>\nThe <yellow>${this.name || 'process'}</yellow> <cyan>${this.id}</cyan> execution has finished <green>successfully</green> in <yellow>${convert_1.default(this.currentExecutionObj.duration, convert_1.default.SECOND)}s</yellow>\n<green>${'-'.repeat(process.stdout.columns - 4)}</green>\n`
+                    });
+                    if (this._settings.notifications.enable) {
+                        node_notifier_1.default.notify(this._settings.notifications.success);
+                    }
+                    break;
+                case 'running':
+                    // log a start message
+                    this.log({
+                        value: `\n<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>\nStarting the <yellow>${this.name || 'process'}</yellow> <cyan>${this.id}</cyan> execution...\n<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>\n`
+                    });
+                    if (this._settings.notifications.enable) {
+                        node_notifier_1.default.notify(this._settings.notifications.start);
+                    }
+                    break;
+                case 'error':
+                    data = this.currentExecutionObj.stderr.toString();
+                    strArray.push(' ');
+                    strArray.push(`<red>${'-'.repeat(process.stdout.columns - 4)}</red>`);
+                    strArray.push(`<red>Something went wrong</red> during the <yellow>${this.name || 'process'}</yellow> <cyan>${this.id}</cyan> execution.`);
+                    if (this.currentExecutionObj.stderr.length) {
+                        strArray.push(`Here's some details:`);
+                        strArray.push(data);
+                    }
+                    strArray.push(`<red>${'-'.repeat(process.stdout.columns - 4)}</red>`);
+                    strArray.push(' ');
+                    this.log({
+                        value: strArray.join('\n')
+                    });
+                    if (this._settings.notifications.enable) {
+                        node_notifier_1.default.notify(this._settings.notifications.cancel);
+                    }
+                    break;
+                case 'killed':
+                    data = this.currentExecutionObj.stderr.toString();
+                    strArray.push(' ');
+                    strArray.push(`<red>${'-'.repeat(process.stdout.columns - 4)}</red>`);
+                    strArray.push(`The <yellow>${this.name || 'process'}</yellow> <cyan>${this.id}</cyan> execution has been <red>killed</red>.`);
+                    if (this.currentExecutionObj.stderr.length) {
+                        strArray.push(`Here's some details:`);
+                        strArray.push(data);
+                    }
+                    strArray.push(`<red>${'-'.repeat(process.stdout.columns - 4)}</red>`);
+                    strArray.push(' ');
+                    this.log({
+                        value: strArray.join('\n')
+                    });
+                    if (this._settings.notifications.enable) {
+                        node_notifier_1.default.notify(this._settings.notifications.cancel);
+                    }
+                    break;
+            }
+        }
+        if (state === 'success' ||
+            state === 'killed' ||
+            (state === 'error' && this._settings.killOnError)) {
+            // push the currentExecutionObj into the execution stack
+            this.executionsStack.push(Object.assign({}, this.currentExecutionObj));
+            // reset the currentExecutionObj
+            this.currentExecutionObj = undefined;
+        }
     }
     /**
      * @name          log
@@ -473,7 +541,9 @@ module.exports = class SProcess extends SPromise_1.default {
      */
     log(...logs) {
         logs.forEach((log) => {
-            this.stdout.push(log.value || log.toString());
+            if (this.currentExecutionObj) {
+                this.currentExecutionObj.stdout.push(log.value || log.toString());
+            }
             this.trigger('log', log);
         });
     }
@@ -489,8 +559,11 @@ module.exports = class SProcess extends SPromise_1.default {
      */
     error(...errors) {
         errors.forEach((error) => {
-            this.stderr.push(error.value || error.toString());
+            if (this.currentExecutionObj) {
+                this.currentExecutionObj.stderr.push(error.value || error.toString());
+            }
             this.trigger('error', error);
         });
     }
 };
+//# sourceMappingURL=SProcess.js.map

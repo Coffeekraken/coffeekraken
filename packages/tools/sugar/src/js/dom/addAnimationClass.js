@@ -51,3 +51,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return addAnimationClass;
 });
+//# sourceMappingURL=addAnimationClass.js.map

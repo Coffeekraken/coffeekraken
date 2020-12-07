@@ -37,3 +37,4 @@
     }
     return lowerFirst;
 });
+//# sourceMappingURL=lowerFirst.js.map

@@ -41,3 +41,4 @@
     }
     return constructorName;
 });
+//# sourceMappingURL=constructorName.js.map

@@ -31,3 +31,4 @@ function constructorName(obj) {
     return obj.constructor && obj.constructor.name ? obj.constructor.name : null;
 }
 module.exports = constructorName;
+//# sourceMappingURL=constructorName.js.map

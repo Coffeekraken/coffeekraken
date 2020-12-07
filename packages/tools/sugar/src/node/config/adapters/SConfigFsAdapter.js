@@ -63,3 +63,4 @@ module.exports = class SConfigFsAdapter extends SConfigAdapter_1.default {
         return true;
     }
 };
+//# sourceMappingURL=SConfigFsAdapter.js.map

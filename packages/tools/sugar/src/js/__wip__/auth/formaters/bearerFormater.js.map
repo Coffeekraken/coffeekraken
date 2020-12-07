@@ -1,0 +1,1 @@
+{"version":3,"file":"bearerFormater.js","sourceRoot":"","sources":["bearerFormater.ts"],"names":[],"mappings":";AAAA,cAAc;AAEd,IAAM,QAAQ,GAAG,OAAO,CAAC,oBAAoB,CAAC,CAAC;AAE/C;;;;;;;;;;;GAWG;AACH,MAAM,CAAC,OAAO,GAAG,SAAS,cAAc,CAAC,QAAQ;IAC/C,iCAAiC;IACjC,OAAO;QACL,KAAK,EAAE,QAAQ,CAAC,KAAK;QACrB,OAAO,EAAE;YACP,aAAa,EAAE,YAAU,QAAQ,CAAC,KAAO;SAC1C;KACF,CAAC;AACJ,CAAC,CAAC"}

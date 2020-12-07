@@ -113,3 +113,4 @@ module.exports = class SSearchResultItem {
         };
     }
 };
+//# sourceMappingURL=SSearchResultItem.js.map

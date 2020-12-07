@@ -50,3 +50,4 @@ function circleConstrain(center, radius, point) {
     }
 }
 module.exports = circleConstrain;
+//# sourceMappingURL=circleConstrain.js.map

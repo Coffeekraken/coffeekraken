@@ -45,3 +45,4 @@ function filter(object, filter) {
     return result;
 }
 module.exports = filter;
+//# sourceMappingURL=filter.js.map

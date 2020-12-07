@@ -38,3 +38,4 @@
     }
     return stripTags;
 });
+//# sourceMappingURL=stripTags.js.map

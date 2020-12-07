@@ -53,3 +53,4 @@ function sugar(dotPath) {
     });
 }
 module.exports = sugar;
+//# sourceMappingURL=sugar.js.map

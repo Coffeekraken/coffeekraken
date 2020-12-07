@@ -54,3 +54,4 @@ function sort(object, sort) {
     return resultObj;
 }
 module.exports = sort;
+//# sourceMappingURL=sort.js.map

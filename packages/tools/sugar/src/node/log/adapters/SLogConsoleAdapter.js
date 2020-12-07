@@ -107,3 +107,4 @@ module.exports = class SLogConsoleAdapter {
         });
     }
 };
+//# sourceMappingURL=SLogConsoleAdapter.js.map

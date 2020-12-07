@@ -14,4 +14,6 @@ const __toString = require('./src/node/string/toString');
   console.log('hello');
 
   await __wait(2000);
+
+  process.exit();
 })();

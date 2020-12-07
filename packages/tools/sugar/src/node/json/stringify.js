@@ -49,3 +49,4 @@ function stringify(obj, replacerOrSettings = null, settings = {}) {
     return JSON.stringify(newObj, replacer, settings.space);
 }
 module.exports = stringify;
+//# sourceMappingURL=stringify.js.map

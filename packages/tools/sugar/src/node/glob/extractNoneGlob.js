@@ -33,3 +33,4 @@ function extractNoneGlob(string) {
     return parent;
 }
 module.exports = extractNoneGlob;
+//# sourceMappingURL=extractNoneGlob.js.map

@@ -37,3 +37,4 @@ function dispatch(name, value) {
     global._sugarEventSPromise.trigger(name, value);
 }
 module.exports = dispatch;
+//# sourceMappingURL=dispatch.js.map

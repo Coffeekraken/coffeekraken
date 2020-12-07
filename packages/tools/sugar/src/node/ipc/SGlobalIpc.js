@@ -443,3 +443,4 @@ class SIpc {
     }
 }
 module.exports = SIpc;
+//# sourceMappingURL=SGlobalIpc.js.map

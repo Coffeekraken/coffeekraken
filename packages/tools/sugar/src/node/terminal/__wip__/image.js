@@ -65,3 +65,4 @@ module.exports = function image(url, settings = {}) {
         });
     });
 };
+//# sourceMappingURL=image.js.map

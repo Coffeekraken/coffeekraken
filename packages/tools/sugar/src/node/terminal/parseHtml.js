@@ -60,3 +60,4 @@ function parseHtml(message) {
     return message[0];
 }
 module.exports = parseHtml;
+//# sourceMappingURL=parseHtml.js.map

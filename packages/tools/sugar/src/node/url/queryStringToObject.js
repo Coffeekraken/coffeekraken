@@ -46,3 +46,4 @@ function queryStringToObject(str) {
     return obj;
 }
 module.exports = queryStringToObject;
+//# sourceMappingURL=queryStringToObject.js.map

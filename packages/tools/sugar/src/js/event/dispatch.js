@@ -47,3 +47,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return trigger;
 });
+//# sourceMappingURL=dispatch.js.map

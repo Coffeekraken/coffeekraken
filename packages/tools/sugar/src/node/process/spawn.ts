@@ -23,6 +23,17 @@ import ISpawn, { ISpawnSettings } from './interface/ISpawn';
  * @param       {ISpawnSettings}    [settings={}]     An object of settings to configure your spawn process
  * @return      {SPromise}                        An SPromise instance that will be resolved or rejected with the command result, and listen for some "events" triggered like "close", etc...
  *
+ * @setting     {Boolean}       [ipc=false]         Specify if you want to initialise an SIpcServer instance for this spawn process
+ * @setting     {Any}           ...SpawnOptions     All the supported ```spawn``` options. see: https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
+ *
+ * @event       data        Triggered when some data have been pushed in the child process like console.log, etc...
+ * @event       error       Triggered when an error has occured in the child process
+ * @event       close       Triggered when the child process has been closed for whatever reason
+ * @event       close.error     Triggered when the child process has been closed due to an error
+ * @event       close.cancel      Triggered when the child process has been closed due to the call of the ```cancel``` method
+ * @event       close.kill      Triggered when the child process has been closed due to a kill call
+ * @event       close.success   Triggered when the child process has been closed after a successfull execution
+ *
  * @example       js
  * import spawn from '@coffeekraken/sugar/node/process/spawn';
  * const pro = spawn('echo "hello world");
@@ -39,7 +50,12 @@ const fn: ISpawn = function spawn(
   args: string[] = [],
   settings: ISpawnSettings = {}
 ): ISPromise {
-  return new __SPromise(async (resolve, reject, trigger, cancel) => {
+  let childProcess;
+  let ipcServer,
+    serverData,
+    isCancel = false;
+
+  const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
     settings = __deepMerge(
       {
         ipc: true
@@ -47,7 +63,6 @@ const fn: ISpawn = function spawn(
       settings
     );
 
-    let ipcServer, serverData;
     if (settings.ipc === true) {
       ipcServer = new __SIpcServer();
       serverData = await ipcServer.start();
@@ -59,7 +74,7 @@ const fn: ISpawn = function spawn(
     const stderr = [],
       stdout = [];
 
-    const childProcess = __spawn(command, [], {
+    childProcess = __spawn(command, [], {
       shell: true,
       ...settings,
       env: {
@@ -68,11 +83,13 @@ const fn: ISpawn = function spawn(
       }
     });
 
+    trigger('start');
+
     // listen for errors etc...
     if (childProcess.stdout) {
       childProcess.stdout.on('data', (data) => {
         stdout.push(data.toString());
-        trigger('data', data.toString());
+        trigger('log', data.toString());
       });
     }
     if (childProcess.stderr) {
@@ -83,21 +100,37 @@ const fn: ISpawn = function spawn(
     }
 
     childProcess.on('close', (code, signal) => {
+      trigger('close', {
+        code,
+        signal
+      });
+
       if (stderr.length) {
+        trigger('close.error');
         reject(stderr.join('\n'));
       } else if (!code && signal) {
-        trigger('kill');
+        trigger('close.killed');
+        reject();
       } else if (code === 0 && !signal) {
+        trigger('close.success');
         resolve();
       } else {
+        trigger('close.error');
         reject();
       }
     });
-
-    // handle cancel
-    // this.on('cancel', () => {
-    //   childProcess.kill();
-    // });
   });
+
+  // handle cancel
+  promise.on('cancel', async () => {
+    if (ipcServer !== undefined) {
+      ipcServer.stop();
+    }
+    if (childProcess !== undefined) {
+      childProcess.kill();
+    }
+  });
+
+  return promise;
 };
 export = fn;

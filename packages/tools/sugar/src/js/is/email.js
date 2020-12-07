@@ -40,3 +40,4 @@
     }
     return isEmail;
 });
+//# sourceMappingURL=email.js.map

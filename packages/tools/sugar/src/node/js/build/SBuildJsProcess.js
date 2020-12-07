@@ -50,3 +50,4 @@ module.exports = (_a = class SBuildJsProcess extends SProcess_1.default {
     },
     _a.interface = SBuildJsInterface_1.default,
     _a);
+//# sourceMappingURL=SBuildJsProcess.js.map

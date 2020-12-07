@@ -49,3 +49,4 @@
     }
     return plainObject;
 });
+//# sourceMappingURL=plainObject.js.map

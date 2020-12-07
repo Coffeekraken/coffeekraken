@@ -35,3 +35,4 @@ function availableEasingsArray() {
     ];
 }
 module.exports = availableEasingsArray;
+//# sourceMappingURL=availableEasingsArray.js.map

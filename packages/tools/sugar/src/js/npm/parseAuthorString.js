@@ -57,3 +57,4 @@
     }
     return parseAuthorString;
 });
+//# sourceMappingURL=parseAuthorString.js.map

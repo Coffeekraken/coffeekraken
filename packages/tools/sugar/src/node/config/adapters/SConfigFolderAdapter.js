@@ -110,3 +110,4 @@ module.exports = class SConfigFolderAdapter extends SConfigAdapter_1.default {
         return true;
     }
 };
+//# sourceMappingURL=SConfigFolderAdapter.js.map

@@ -82,3 +82,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return textWidth;
 });
+//# sourceMappingURL=textWidth.js.map

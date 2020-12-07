@@ -28,3 +28,4 @@ function isBrowser(value) {
     return typeof window !== 'undefined';
 }
 module.exports = isBrowser;
+//# sourceMappingURL=browser.js.map

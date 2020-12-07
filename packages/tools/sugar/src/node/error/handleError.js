@@ -153,3 +153,4 @@ function __handleMainProcessErrors(error) {
     }
 }
 module.exports = handleError;
+//# sourceMappingURL=handleError.js.map

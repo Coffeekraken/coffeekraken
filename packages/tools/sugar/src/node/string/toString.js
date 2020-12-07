@@ -134,3 +134,4 @@ function fn(value, settings = {}) {
     return returnString;
 }
 module.exports = fn;
+//# sourceMappingURL=toString.js.map

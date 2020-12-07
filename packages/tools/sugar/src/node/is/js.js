@@ -4,3 +4,4 @@
 module.exports = () => {
     return typeof window !== 'undefined';
 };
+//# sourceMappingURL=js.js.map

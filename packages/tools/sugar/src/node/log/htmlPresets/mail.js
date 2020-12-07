@@ -50,3 +50,4 @@ function mail(text) {
     });
 }
 module.exports = mail;
+//# sourceMappingURL=mail.js.map

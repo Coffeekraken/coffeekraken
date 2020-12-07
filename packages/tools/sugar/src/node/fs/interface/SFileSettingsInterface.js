@@ -20,3 +20,4 @@ module.exports = (_a = class SFsFileSettingsInterface extends SInterface_1.defau
         }
     },
     _a);
+//# sourceMappingURL=SFileSettingsInterface.js.map

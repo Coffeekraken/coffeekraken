@@ -37,3 +37,4 @@ function toPlainObject(theClass) {
     }, {});
 }
 module.exports = toPlainObject;
+//# sourceMappingURL=toPlainObject.js.map

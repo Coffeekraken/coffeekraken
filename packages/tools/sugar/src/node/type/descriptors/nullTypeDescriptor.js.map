@@ -1,0 +1,1 @@
+{"version":3,"file":"nullTypeDescriptor.js","sourceRoot":"","sources":["nullTypeDescriptor.ts"],"names":[],"mappings":";AAAA,SAAS;AAIT;;;;;;;;;;;;;;;;;;GAkBG;AACH,MAAM,UAAU,GAAqB;IACnC,IAAI,EAAE,MAAM;IACZ,EAAE,EAAE,MAAM;IACV,EAAE,EAAE,CAAC,KAAU,EAAE,EAAE,CAAC,KAAK,KAAK,IAAI;IAClC,IAAI,EAAE,CAAC,KAAU,EAAE,EAAE;QACnB,OAAO,IAAI,CAAC;IACd,CAAC;CACF,CAAC;AAEF,iBAAS,UAAU,CAAC"}

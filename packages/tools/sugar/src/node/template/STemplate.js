@@ -408,3 +408,4 @@ Object.keys(defaultDataHandlers).forEach((extension) => {
     STemplate.registerDataHandler(extension, defaultDataHandlers[extension]);
 });
 module.exports = STemplate;
+//# sourceMappingURL=STemplate.js.map

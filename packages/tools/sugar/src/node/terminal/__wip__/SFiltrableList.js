@@ -386,3 +386,4 @@ module.exports = class SFiltrableList extends __blessed.box {
         return lines.join('\n');
     }
 };
+//# sourceMappingURL=SFiltrableList.js.map

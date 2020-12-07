@@ -82,3 +82,4 @@
     }
     return onSwipe;
 });
+//# sourceMappingURL=onSwipe.js.map

@@ -32,3 +32,4 @@ function returnTag(data) {
     };
 }
 module.exports = returnTag;
+//# sourceMappingURL=return.js.map

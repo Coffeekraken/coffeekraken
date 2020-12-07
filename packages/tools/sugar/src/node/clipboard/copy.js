@@ -39,3 +39,4 @@ function copy(text) {
     }
 }
 module.exports = copy;
+//# sourceMappingURL=copy.js.map

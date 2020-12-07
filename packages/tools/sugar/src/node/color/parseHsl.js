@@ -37,3 +37,4 @@ function parseHsl(hslString) {
     };
 }
 module.exports = parseHsl;
+//# sourceMappingURL=parseHsl.js.map

@@ -29,3 +29,4 @@ function paramCaseFn(string) {
     return param_case_1.paramCase(string);
 }
 module.exports = paramCaseFn;
+//# sourceMappingURL=paramCase.js.map

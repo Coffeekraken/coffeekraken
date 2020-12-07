@@ -8,3 +8,4 @@ class SCompileTsProcessInterface extends SInterface_1.default {
 }
 SCompileTsProcessInterface.definition = Object.assign({}, compileTsInterface_1.default.definition);
 module.exports = SCompileTsProcessInterface;
+//# sourceMappingURL=SCompileTsProcessInterface.js.map

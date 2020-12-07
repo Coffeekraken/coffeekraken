@@ -47,3 +47,4 @@ const descriptor = {
     }
 };
 module.exports = descriptor;
+//# sourceMappingURL=fileTypeDescriptor.js.map

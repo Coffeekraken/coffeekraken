@@ -1,0 +1,1 @@
+{"version":3,"file":"writeFileSync.js","sourceRoot":"","sources":["writeFileSync.ts"],"names":[],"mappings":";AAAA,cAAc;;;;AAEd,wDAA4B;AAE5B;;;;;;;;;;;;;;;;;;;;;;;;;GAyBG;AACH,SAAS,aAAa,CAAC,IAAI,EAAE,IAAI,EAAE,OAAO,GAAG,EAAE;IAC7C,OAAO,kBAAI,CAAC,cAAc,CAAC,IAAI,EAAE,IAAI,EAAE,OAAO,CAAC,CAAC;AAClD,CAAC;AACD,iBAAS,aAAa,CAAC"}

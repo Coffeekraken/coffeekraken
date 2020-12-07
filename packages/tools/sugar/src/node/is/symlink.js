@@ -32,3 +32,4 @@ function isSymlink(path) {
     return fs_1.default.existsSync(path) && fs_1.default.lstatSync(path).isSymbolicLink();
 }
 module.exports = isSymlink;
+//# sourceMappingURL=symlink.js.map

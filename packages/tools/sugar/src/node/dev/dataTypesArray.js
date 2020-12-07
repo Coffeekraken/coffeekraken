@@ -50,3 +50,4 @@ else {
         'Function'
     ];
 }
+//# sourceMappingURL=dataTypesArray.js.map

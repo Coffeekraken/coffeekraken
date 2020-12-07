@@ -28,3 +28,4 @@ module.exports = function js(req, res, settings = {}) {
         res.send(resultObj.js);
     });
 };
+//# sourceMappingURL=js.js.map

@@ -11,3 +11,4 @@ module.exports = () => {
     js_cli_1.default();
     frontspec_cli_1.default();
 };
+//# sourceMappingURL=all.cli.js.map

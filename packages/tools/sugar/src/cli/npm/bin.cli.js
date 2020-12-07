@@ -79,3 +79,4 @@ module.exports = function bin(stringArgs = '') {
         }
     });
 };
+//# sourceMappingURL=bin.cli.js.map

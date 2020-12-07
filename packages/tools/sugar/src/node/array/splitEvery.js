@@ -29,3 +29,4 @@ function splitEvery(array, every) {
     return finalArray;
 }
 module.exports = splitEvery;
+//# sourceMappingURL=splitEvery.js.map

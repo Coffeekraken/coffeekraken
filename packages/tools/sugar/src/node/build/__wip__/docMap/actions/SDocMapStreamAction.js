@@ -82,3 +82,4 @@ module.exports = (_a = class SDocMapStreamActions extends __SActionsStreamAction
     },
     _a.once = true,
     _a);
+//# sourceMappingURL=SDocMapStreamAction.js.map

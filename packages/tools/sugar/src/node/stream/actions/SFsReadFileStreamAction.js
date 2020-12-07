@@ -78,3 +78,4 @@ module.exports = (_a = class SFsReadFileStreamAction extends SActionsStreamActio
      */
     _a.interface = SFsReadFileStreamActionInterface,
     _a);
+//# sourceMappingURL=SFsReadFileStreamAction.js.map

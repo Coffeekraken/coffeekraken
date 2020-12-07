@@ -56,3 +56,4 @@ module.exports = class SHeader extends SBlessedComponent_1.default {
         super.update();
     }
 };
+//# sourceMappingURL=SBlessedHeader.js.map

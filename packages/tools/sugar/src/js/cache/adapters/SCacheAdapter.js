@@ -39,3 +39,4 @@
         return SCacheAdapter;
     }());
 });
+//# sourceMappingURL=SCacheAdapter.js.map

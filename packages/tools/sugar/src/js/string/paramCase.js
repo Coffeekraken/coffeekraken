@@ -39,3 +39,4 @@
     }
     return paramCaseFn;
 });
+//# sourceMappingURL=paramCase.js.map

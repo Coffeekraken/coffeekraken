@@ -40,3 +40,4 @@ const descriptor = {
     }
 };
 module.exports = descriptor;
+//# sourceMappingURL=bigintTypeDescriptor.js.map

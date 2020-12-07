@@ -92,3 +92,4 @@ module.exports = function bitbucketApiValidator(authInfo) {
         });
     });
 };
+//# sourceMappingURL=bitbucketApiValidator.js.map

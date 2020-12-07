@@ -58,3 +58,4 @@ const STemplate_1 = __importDefault(require("../STemplate"));
     // );
     // console.log('res', res, other);
 }))();
+//# sourceMappingURL=blade.test.js.map

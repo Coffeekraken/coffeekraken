@@ -47,3 +47,4 @@
     }
     return toPlainObject;
 });
+//# sourceMappingURL=toPlainObject.js.map

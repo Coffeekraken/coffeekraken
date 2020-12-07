@@ -70,3 +70,4 @@ module.exports = function downloadFolder(repo, path, destinationPath = __downloa
         });
     });
 };
+//# sourceMappingURL=downloadFolder.js.map

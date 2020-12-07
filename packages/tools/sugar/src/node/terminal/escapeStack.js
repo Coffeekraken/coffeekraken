@@ -87,3 +87,4 @@ function escapeStack(callback = null) {
     return;
 }
 module.exports = escapeStack;
+//# sourceMappingURL=escapeStack.js.map

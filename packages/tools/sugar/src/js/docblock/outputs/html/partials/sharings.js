@@ -12,3 +12,4 @@
     "use strict";
     return "\n<div class=\"s-db-sharings s-m-b\">\n  <a href=\"https://olivierbossel.com\" class=\"s-btn s-btn--small\">\n    Share this page\n  </a>\n</div>\n";
 });
+//# sourceMappingURL=sharings.js.map

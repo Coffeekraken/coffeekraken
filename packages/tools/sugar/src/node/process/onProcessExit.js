@@ -41,25 +41,28 @@ const __onProcessExitCallbacks = [];
 function onProcessExit(callback) {
     if (!__onProcessExitCallbacks.length) {
         process.env.HAS_ON_PROCESS_EXIT_HANDLERS = true;
-        function exitHandler() {
+        function exitHandler(state) {
             return __awaiter(this, void 0, void 0, function* () {
                 for (let i = 0; i < __onProcessExitCallbacks.length; i++) {
                     const cbFn = __onProcessExitCallbacks[i];
-                    yield cbFn();
+                    yield cbFn(state);
                 }
                 process.kill(process.pid, 'SIGTERM');
             });
         }
-        process.on('close', exitHandler);
-        process.on('exit', exitHandler);
-        process.on('custom_exit', exitHandler);
-        process.on('SIGINT', exitHandler);
-        process.on('SIGUSR1', exitHandler);
-        process.on('SIGUSR2', exitHandler);
-        process.on('uncaughtException', exitHandler);
+        process.on('close', (code) => code === 0 ? exitHandler('success') : exitHandler('error'));
+        process.on('exit', (code) => code === 0 ? exitHandler('success') : exitHandler('error'));
+        process.on('custom_exit', (state) => {
+            exitHandler(state);
+        });
+        process.on('SIGINT', () => exitHandler('killed'));
+        process.on('SIGUSR1', () => exitHandler('killed'));
+        process.on('SIGUSR2', () => exitHandler('killed'));
+        process.on('uncaughtException', () => exitHandler('error'));
     }
     if (__onProcessExitCallbacks.indexOf(callback) !== -1)
         return;
     __onProcessExitCallbacks.push(callback);
 }
 module.exports = onProcessExit;
+//# sourceMappingURL=onProcessExit.js.map

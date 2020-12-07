@@ -84,3 +84,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return simplify;
 });
+//# sourceMappingURL=simplify.js.map

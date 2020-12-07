@@ -77,3 +77,4 @@ const fn = function compileTs(params, settings) {
     }));
 };
 module.exports = fn;
+//# sourceMappingURL=compileTs.js.map

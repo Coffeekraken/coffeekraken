@@ -170,3 +170,4 @@ ${settingsArray.join('\n')}
     }
 };
 module.exports = Cls;
+//# sourceMappingURL=SDescriptorResult.js.map

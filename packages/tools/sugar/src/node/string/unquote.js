@@ -42,3 +42,4 @@ function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
     return string;
 }
 module.exports = unquote;
+//# sourceMappingURL=unquote.js.map

@@ -16,3 +16,4 @@
             process.release.name === 'node');
     };
 });
+//# sourceMappingURL=node.js.map

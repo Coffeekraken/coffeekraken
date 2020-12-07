@@ -40,3 +40,4 @@ module.exports = (_a = class SFrontendServerProcess extends SProcess_1.default {
     },
     _a.interface = SFrontendServerInterface_1.default,
     _a);
+//# sourceMappingURL=SFrontendServerProcess.js.map

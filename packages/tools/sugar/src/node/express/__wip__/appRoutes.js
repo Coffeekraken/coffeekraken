@@ -16,3 +16,4 @@ module.exports = function (expressInstance) {
     expressInstance.get('/app/meta', require('./controllers/AppControllers').meta);
     expressInstance.get('/app/meta/*', require('./controllers/AppControllers').meta);
 };
+//# sourceMappingURL=appRoutes.js.map

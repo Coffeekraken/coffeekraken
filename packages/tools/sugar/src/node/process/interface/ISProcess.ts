@@ -48,12 +48,12 @@ export interface ISProcessCtor {
 }
 export default interface ISProcess {
   toObject(): ISProcessObject;
-  bindSPromise(promise: ISPromise): void;
+  // bindSPromise(promise: ISPromise): void;
   run(
     paramsOrStringArgs: Record<string, unknown> | string,
     settings: ISProcessSettings
   ): Promise<any>;
-  kill(): void;
+  kill(data: any): void;
   log(...logs: ISProcessLogObj[]): void;
   error(...errors: ISProcessLogObj[]): void;
 }

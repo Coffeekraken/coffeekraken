@@ -68,3 +68,4 @@
     }
     return autoCast;
 });
+//# sourceMappingURL=autoCast.js.map

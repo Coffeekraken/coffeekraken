@@ -30,3 +30,4 @@ function ipAddress() {
     return ip_1.default.address();
 }
 module.exports = ipAddress;
+//# sourceMappingURL=ipAddress.js.map

@@ -68,3 +68,4 @@ module.exports = (_a = class SCompileJsStreamAction extends SActionsStreamAction
         definition: {}
     }),
     _a);
+//# sourceMappingURL=SCompileJsStreamAction.js.map

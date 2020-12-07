@@ -299,3 +299,4 @@ module.exports = (_a = class SDocblockBlock {
         example: example_1.default
     },
     _a);
+//# sourceMappingURL=SDocblockBlock.js.map

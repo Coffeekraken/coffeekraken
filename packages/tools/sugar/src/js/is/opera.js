@@ -39,3 +39,4 @@
     }
     return isOpera;
 });
+//# sourceMappingURL=opera.js.map

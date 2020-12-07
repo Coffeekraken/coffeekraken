@@ -47,3 +47,4 @@
     }
     return parseHsv;
 });
+//# sourceMappingURL=parseHsv.js.map

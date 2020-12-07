@@ -64,3 +64,4 @@ module.exports = class SHeader extends blessed_1.default.box {
             this.screen.render();
     }
 };
+//# sourceMappingURL=SHeader.js.map

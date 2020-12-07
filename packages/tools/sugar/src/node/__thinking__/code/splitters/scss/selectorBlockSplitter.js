@@ -8,3 +8,4 @@ module.exports = {
     open: '{',
     close: '}'
 };
+//# sourceMappingURL=selectorBlockSplitter.js.map

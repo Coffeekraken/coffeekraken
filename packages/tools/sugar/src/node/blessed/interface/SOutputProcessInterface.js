@@ -14,3 +14,4 @@ module.exports = (_a = class SOutputProcessInterface extends SInterface_1.defaul
         }
     },
     _a);
+//# sourceMappingURL=SOutputProcessInterface.js.map

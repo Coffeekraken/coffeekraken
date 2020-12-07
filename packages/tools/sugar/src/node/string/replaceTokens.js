@@ -47,3 +47,4 @@ function replaceTokens(string, argsObj, settings = {}) {
     return string;
 }
 module.exports = replaceTokens;
+//# sourceMappingURL=replaceTokens.js.map

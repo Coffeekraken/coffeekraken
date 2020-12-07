@@ -95,7 +95,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @param         {Object}            [settings={}]     An object of settings for this particular SPromise instance. Here's the available settings:
          *
          * @example       js
-         * const promise = new SPromise((resolve, reject, trigger, cancel) => {
+         * const promise = new SPromise((resolve, reject, trigger, cancel, promise) => {
          *    // do something...
          * }).then(value => {
          *    // do something...
@@ -337,7 +337,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 // append the source promise id to the stack
                 var triggerStack = metas.stack;
                 if (settings.prefixStack) {
-                    triggerStack = sourceSPromise.id + "." + metas.stack;
+                    if (typeof settings.prefixStack === 'string') {
+                        triggerStack = settings.prefixStack + "." + metas.stack;
+                    }
+                    else {
+                        triggerStack = sourceSPromise.id + "." + metas.stack;
+                    }
                     metas.stack = triggerStack;
                 }
                 // trigger on the destination promise
@@ -1008,13 +1013,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             }
             return this.on.apply(this, __spreadArrays(['catch'], args));
         };
-        SPromise.prototype.then = function () {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i] = arguments[_i];
-            }
-            return _super.prototype.then.apply(this, args);
-        };
         /**
          * @name                finally
          * @type                Function
@@ -1153,3 +1151,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SPromise;
     }(Promise));
 });
+//# sourceMappingURL=SPromise.js.map

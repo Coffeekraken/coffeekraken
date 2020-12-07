@@ -44,3 +44,4 @@
     }
     return nodeIndex;
 });
+//# sourceMappingURL=nodeIndex.js.map

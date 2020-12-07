@@ -7,7 +7,7 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const uniqid_1 = __importDefault(require("../string/uniqid"));
 const keypress_1 = __importDefault(require("keypress"));
 const activeSpace_1 = __importDefault(require("../core/activeSpace"));
-const SIpc_1 = __importDefault(require("../ipc/SIpc"));
+// import __SIpc from '../ipc/SIpc';
 const childProcess_1 = __importDefault(require("../is/childProcess"));
 /**
  * @name                hotkey
@@ -28,6 +28,7 @@ const childProcess_1 = __importDefault(require("../is/childProcess"));
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ * @todo      {Feature}       Add IPC support to allow listen for key press in child processes
  *
  * @example         js
  * import hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
@@ -45,7 +46,7 @@ let isSystemWideAlreadyAdded = false;
 function _handleKeypress(ch, keyObj) {
     if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
         // process.stdin.pause();
-        process.emit('custom_exit');
+        process.emit('custom_exit', 'kill');
     }
     // loop on each promises registered
     Object.keys(hotkeyStack).forEach((id) => {
@@ -161,29 +162,23 @@ function hotkey(key, settings = {}) {
         // return the promise
         return promise;
     }
-    else if (settings.ipc) {
-        const promise = new SPromise_1.default({
-            id: 'hotkey'
-        });
-        // child process
-        SIpc_1.default.on(`keypress.${key}`, (keyObj) => {
-            promise.trigger('key', keyObj);
-            promise.trigger('press', keyObj);
-        });
-        setTimeout(() => {
-            SIpc_1.default.trigger(`keypress`, {
-                key,
-                settings
-            });
-        }, 2000);
-        return promise;
-    }
-}
-if (!childProcess_1.default()) {
-    SIpc_1.default.on('keypress', (keyObj) => {
-        hotkey(keyObj.key).on('press', (pressedKeyObj) => {
-            SIpc_1.default.trigger(`keypress.${keyObj.key}`, pressedKeyObj);
-        });
-    });
+    // else if (settings.ipc) {
+    //   const promise = new __SPromise({
+    //     id: 'hotkey'
+    //   });
+    //   // child process
+    //   __SIpc.on(`keypress.${key}`, (keyObj) => {
+    //     promise.trigger('key', keyObj);
+    //     promise.trigger('press', keyObj);
+    //   });
+    //   setTimeout(() => {
+    //     __SIpc.trigger(`keypress`, {
+    //       key,
+    //       settings
+    //     });
+    //   }, 2000);
+    //   return promise;
+    // }
 }
 module.exports = hotkey;
+//# sourceMappingURL=hotkey.js.map

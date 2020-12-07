@@ -39,3 +39,4 @@
     }
     return isEdge;
 });
+//# sourceMappingURL=edge.js.map

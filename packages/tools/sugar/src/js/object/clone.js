@@ -49,3 +49,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return clone;
 });
+//# sourceMappingURL=clone.js.map

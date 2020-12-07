@@ -175,3 +175,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     SMediaQuery.startListener();
     return SMediaQuery;
 });
+//# sourceMappingURL=SMediaQuery.js.map

@@ -378,3 +378,4 @@ module.exports = class STimer extends SPromise_1.default {
         return this._startTime && !this._pauseTime;
     }
 };
+//# sourceMappingURL=STimer.js.map

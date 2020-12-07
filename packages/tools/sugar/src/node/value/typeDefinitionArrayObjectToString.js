@@ -54,3 +54,4 @@ function typeDefinitionArrayObjectToString(typeDefinitionArrayObj) {
     return parts.join('|');
 }
 module.exports = typeDefinitionArrayObjectToString;
+//# sourceMappingURL=typeDefinitionArrayObjectToString.js.map

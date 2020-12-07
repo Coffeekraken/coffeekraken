@@ -130,11 +130,12 @@ export = class SOutput extends __SBlessedComponent {
 
     if (!Array.isArray(source)) source = [source];
     source.forEach((s) => {
-      __SOutputSourceInterface.apply(s, {
-        title: 'SOutput source issue',
-        description:
-          'One of the passed "source" for the SOutput class does not answer the minimal requirements of the "SOutputSourceInterface"...'
-      });
+      // __SOutputSourceInterface.apply(s, {
+      //   title: 'SOutput source issue',
+      //   description:
+      //     'One of the passed "source" for the SOutput class does not answer the minimal requirements of the "SOutputSourceInterface"...'
+      // });
+      // todo     check why it's not working...
 
       // subscribe to the process
       this._subscribeToSource(s);

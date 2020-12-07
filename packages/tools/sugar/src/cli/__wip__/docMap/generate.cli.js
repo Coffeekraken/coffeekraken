@@ -23,3 +23,4 @@ function docMapGenerate(stringArgs = '') {
 }
 exports.default = docMapGenerate;
 ;
+//# sourceMappingURL=generate.cli.js.map

@@ -31,3 +31,4 @@ function pad(number, width, character = '0') {
         : new Array(width - number.length + 1).join(character) + number;
 }
 module.exports = pad;
+//# sourceMappingURL=pad.js.map

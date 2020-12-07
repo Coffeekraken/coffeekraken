@@ -22,3 +22,4 @@ module.exports = function bearerFormater(authInfo) {
         }
     };
 };
+//# sourceMappingURL=bearerFormater.js.map

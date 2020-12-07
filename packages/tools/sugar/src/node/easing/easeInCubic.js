@@ -23,3 +23,4 @@ function ease(t) {
     return t * t * t;
 }
 module.exports = ease;
+//# sourceMappingURL=easeInCubic.js.map

@@ -47,3 +47,4 @@
     }
     return requestFullscreen;
 });
+//# sourceMappingURL=requestFullscreen.js.map

@@ -247,3 +247,4 @@ module.exports = class SApp extends blessed_1.default.screen {
         });
     }
 };
+//# sourceMappingURL=SApp.js.map

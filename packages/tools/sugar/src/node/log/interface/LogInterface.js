@@ -12,3 +12,4 @@ LogInterface.definition = {
     }
 };
 module.exports = LogInterface;
+//# sourceMappingURL=LogInterface.js.map

@@ -151,3 +151,4 @@ module.exports = class SGlob {
         });
     }
 };
+//# sourceMappingURL=SGlob.js.map

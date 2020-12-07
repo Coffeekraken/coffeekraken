@@ -339,3 +339,4 @@ const Cls = (_a = class SDescriptor {
     _a.settings = {},
     _a);
 module.exports = Cls;
+//# sourceMappingURL=_SDescriptor.js.map

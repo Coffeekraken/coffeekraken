@@ -147,3 +147,4 @@ module.exports = class SBlessedFooter extends SBlessedComponent_1.default {
         super.update();
     }
 };
+//# sourceMappingURL=SBlessedFooter.js.map

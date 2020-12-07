@@ -116,3 +116,4 @@ function splitEvery(text, every, splitWords = false) {
     }
 }
 module.exports = splitEvery;
+//# sourceMappingURL=splitEvery.js.map

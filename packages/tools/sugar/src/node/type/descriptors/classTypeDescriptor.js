@@ -32,3 +32,4 @@ const descriptor = {
     }
 };
 module.exports = descriptor;
+//# sourceMappingURL=classTypeDescriptor.js.map

@@ -38,3 +38,4 @@
     }
     return isBrowser;
 });
+//# sourceMappingURL=browser.js.map

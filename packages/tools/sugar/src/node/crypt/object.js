@@ -37,3 +37,4 @@ module.exports = {
         return object_encode_1.default.decode_object(encodedObject, 'base64', salt);
     }
 };
+//# sourceMappingURL=object.js.map

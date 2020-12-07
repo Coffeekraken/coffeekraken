@@ -24,3 +24,4 @@ module.exports = function basicFormater(authInfo) {
         }
     };
 };
+//# sourceMappingURL=basicFormater.js.map

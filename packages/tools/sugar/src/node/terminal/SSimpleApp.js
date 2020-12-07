@@ -62,3 +62,4 @@ module.exports = class SSimpleApp extends SApp_1.default {
         return container;
     }
 };
+//# sourceMappingURL=SSimpleApp.js.map

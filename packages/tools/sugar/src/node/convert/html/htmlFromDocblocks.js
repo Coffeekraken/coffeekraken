@@ -39,3 +39,4 @@ function htmlFromDocblocks(inputString, settings = {}) {
     return sDocblock.toHtml(settings);
 }
 module.exports = htmlFromDocblocks;
+//# sourceMappingURL=htmlFromDocblocks.js.map

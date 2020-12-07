@@ -39,3 +39,4 @@
     }
     return isFunction;
 });
+//# sourceMappingURL=function.js.map

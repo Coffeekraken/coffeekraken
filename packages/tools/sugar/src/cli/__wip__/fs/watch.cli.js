@@ -79,3 +79,4 @@ exports.default = (stringArgs = '') => {
         console.log(`delete:${path_1.default.resolve(path)}`);
     });
 };
+//# sourceMappingURL=watch.cli.js.map

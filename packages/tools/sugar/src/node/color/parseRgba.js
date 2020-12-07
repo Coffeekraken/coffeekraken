@@ -38,3 +38,4 @@ function parseRgba(rgbaString) {
     };
 }
 module.exports = parseRgba;
+//# sourceMappingURL=parseRgba.js.map

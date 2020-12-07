@@ -9,3 +9,4 @@ exports.default = (stringArgs = '') => {
     const pro = new SBuildDocMapProcess_1.default({});
     pro.run(stringArgs);
 };
+//# sourceMappingURL=docMap.cli.js.map

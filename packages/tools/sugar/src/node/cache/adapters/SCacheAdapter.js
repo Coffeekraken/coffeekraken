@@ -27,3 +27,4 @@ module.exports = class SCacheAdapter {
         this._settings = settings;
     }
 };
+//# sourceMappingURL=SCacheAdapter.js.map

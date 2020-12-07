@@ -224,7 +224,11 @@ export = class SPromise extends Promise {
       // append the source promise id to the stack
       let triggerStack = metas.stack;
       if (settings.prefixStack) {
-        triggerStack = `${sourceSPromise.id}.${metas.stack}`;
+        if (typeof settings.prefixStack === 'string') {
+          triggerStack = `${settings.prefixStack}.${metas.stack}`;
+        } else {
+          triggerStack = `${sourceSPromise.id}.${metas.stack}`;
+        }
         metas.stack = triggerStack;
       }
 
@@ -246,7 +250,7 @@ export = class SPromise extends Promise {
    * @param         {Object}            [settings={}]     An object of settings for this particular SPromise instance. Here's the available settings:
    *
    * @example       js
-   * const promise = new SPromise((resolve, reject, trigger, cancel) => {
+   * const promise = new SPromise((resolve, reject, trigger, cancel, promise) => {
    *    // do something...
    * }).then(value => {
    *    // do something...
@@ -962,10 +966,6 @@ export = class SPromise extends Promise {
    */
   catch(...args) {
     return this.on('catch', ...args);
-  }
-
-  then(...args) {
-    return super.then(...args);
   }
 
   /**

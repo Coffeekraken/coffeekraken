@@ -28,3 +28,4 @@ const descriptor = {
     }
 };
 module.exports = descriptor;
+//# sourceMappingURL=undefinedTypeDescriptor.js.map

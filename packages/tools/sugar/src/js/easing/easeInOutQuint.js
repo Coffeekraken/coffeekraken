@@ -33,3 +33,4 @@
     }
     return ease;
 });
+//# sourceMappingURL=easeInOutQuint.js.map

@@ -28,3 +28,4 @@ function isAtTopLevel(path) {
     return path.scope.path.type === 'Program';
 }
 module.exports = isAtTopLevel;
+//# sourceMappingURL=isAtTopLevel.js.map

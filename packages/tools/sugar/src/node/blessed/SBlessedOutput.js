@@ -37,9 +37,9 @@ module.exports = class SOutput extends SBlessedComponent_1.default {
                 'warning',
                 '*.warning',
                 'warn',
-                '*.warn',
-                'error',
-                '*.error'
+                '*.warn'
+                // 'error',
+                // '*.error'
             ]
         }, settings);
         // extends SPanel

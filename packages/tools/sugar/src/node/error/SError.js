@@ -10,7 +10,7 @@ const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 const toString_1 = __importDefault(require("../string/toString"));
 module.exports = class SError extends Error {
     constructor(message) {
-        this.data = message;
+        const originalMessage = message;
         if (typeof message !== 'string') {
             if (Array.isArray(message)) {
                 message = message.join('\n');
@@ -34,6 +34,7 @@ module.exports = class SError extends Error {
         if (Error && Error.captureStackTrace) {
             Error.captureStackTrace(this, this.constructor);
         }
+        this.data = originalMessage;
         const stack = [];
         const packageRoot = packageRoot_1.default();
         let stackArray = [];

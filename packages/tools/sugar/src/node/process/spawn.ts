@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __uniquid from '../string/uniqid';
 import __deepMerge from '../object/deepMerge';
 import { spawn as __spawn } from 'child_process';
 import __SPromise from '../promise/SPromise';
@@ -50,6 +51,7 @@ const fn: ISpawn = function spawn(
   args: string[] = [],
   settings: ISpawnSettings = {}
 ): ISPromise {
+  let uniquid = `SIpc.spawn.${__uniquid()}`;
   let childProcess;
   let ipcServer,
     serverData,
@@ -64,10 +66,12 @@ const fn: ISpawn = function spawn(
     );
 
     if (settings.ipc === true) {
-      ipcServer = new __SIpcServer();
-      serverData = await ipcServer.start();
-      ipcServer.on('*', (data, metas) => {
-        trigger(metas.stack, data);
+      console.log('COCOCOCO');
+      ipcServer = await __SIpcServer.getGlobalServer();
+      console.log('SER', ipcServer);
+      ipcServer.on(`${uniquid}.*`, (data, metas) => {
+        console.log(data, metas);
+        // trigger(metas.stack.replace(uniquid, ''), data);
       });
     }
 
@@ -79,7 +83,8 @@ const fn: ISpawn = function spawn(
       ...settings,
       env: {
         ...(settings.env || {}),
-        S_IPC_SERVER: JSON.stringify(serverData)
+        S_IPC_SERVER: JSON.stringify(ipcServer.connexionParams),
+        S_IPC_SPAWN_ID: uniquid
       }
     });
 
@@ -90,6 +95,7 @@ const fn: ISpawn = function spawn(
       childProcess.stdout.on('data', (data) => {
         stdout.push(data.toString());
         trigger('log', data.toString());
+        console.log(data.toString());
       });
     }
     if (childProcess.stderr) {

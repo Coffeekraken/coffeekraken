@@ -40,7 +40,7 @@ class SIpcServer extends __SPromise {
    * @since           2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _ipcInstance = null;
+  private _ipcInstance = null;
 
   /**
    * @name        _socketsByProcesses
@@ -52,7 +52,104 @@ class SIpcServer extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _socketsByProcesses = {};
+  private _socketsByProcesses = {};
+
+  /**
+   * @name           connexionParams
+   * @type            Object
+   *
+   * Store the server connexion params like "port", "hostname", "id", etc...
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  connexionParams = undefined;
+
+  /**
+   * @name            _globalServerInstance
+   * @type            SIpcServer
+   * @static
+   *
+   * Store the global server instance
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _globalServerInstance = undefined;
+
+  /**
+   * @name            hasGlobalServer
+   * @type            Function
+   * @static
+   *
+   * This static method check if a global server exists or not
+   *
+   * @return      {Boolean}         true if a global server exists, false if not
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static hasGlobalServer() {
+    return SIpcServer._globalServerInstance !== undefined;
+  }
+
+  on(...args) {
+    console.log('ON', ...args);
+    return super.on(...args);
+  }
+
+  /**
+   * @name            getGlobalServer
+   * @type            Function
+   * @static
+   * @async
+   *
+   * This method simply create a global server instance and returns it
+   * if needed, otherwise simply returns it
+   *
+   * @return      {SIpcServer}            An SIpcServer instance
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static async getGlobalServer() {
+    if (SIpcServer.hasGlobalServer() === true) {
+      return SIpcServer._globalServerInstance;
+    }
+    SIpcServer._globalServerInstance = new SIpcServer();
+    await SIpcServer._globalServerInstance.start();
+
+    return new Proxy(SIpcServer._globalServerInstance, {
+      // get: async function (target, name) {
+      //   // console.log('GET', SIpcServer._globalServerInstance, name);
+      //   // if (name === 'then') {
+      //   //   return await target[name];
+      //   // } else {
+      //   //   return target[name];
+      //   // }
+      //   console.log('GET', name);
+      //   let ret = await target[name];
+      //   coonsole.log(typeof ret);
+      //   console.log('re', ret);
+      //   if (ret === undefined) return target[name];
+      //   return ret;
+
+      //   // console.log(target, Object.keys(target), target.prototype);
+      //   return await target[name];
+      // }
+      get(target, prop, receiver) {
+        if (prop === 'then') return target;
+        return Reflect.get(...arguments);
+      }
+      // apply: function (target, thisArg, ...args) {
+      //   console.log('apply', target);
+      //   const fn = target.bind(thisArg);
+      //   return fn(...args);
+      // }
+    });
+
+    return [SIpcServer._globalServerInstance];
+  }
 
   /**
    * @name            constructor
@@ -79,6 +176,11 @@ class SIpcServer extends __SPromise {
     this._ipcInstance = new __IPC();
     Object.assign(this._ipcInstance.config, this._settings);
   }
+
+  // async then() {
+  //   console.log('AAA', this.connexionParams);
+  //   return this;
+  // }
 
   /**
    * @name              id
@@ -113,67 +215,67 @@ class SIpcServer extends __SPromise {
     const serverData = await this._start(params);
     // listen for events
     this._ipcInstance.server.on('event', (data, socket) => {
+      console.log('event', data);
       // trigger the event using the SPromise method
       this.trigger(`${data.stack}`, data.data);
     });
+    // save the connexion params
+    this.connexionParams = serverData;
     // return the server data
     return serverData;
   }
   _start(params = null) {
-    return new __SPromise(
-      async (resolve, reject) => {
-        // check if params have only 1 id
-        if (
-          __isPlainObject(params) === true &&
-          Object.keys(params).length === 1 &&
-          params.id
-        ) {
-          params = params.id;
-        }
-
-        // make sure the passed port is free
-        const port = await __getFreePort(
-          params && typeof params === 'object'
-            ? params.port || this._ipcInstance.config.port
-            : this._ipcInstance.config.port
-        );
-
-        if (!params || typeof params === 'string') {
-          this._ipcInstance.serve(() => {
-            this._ipcInstance.server.on('_handshake', (processId, socket) => {
-              if (this._socketsByProcesses[processId]) return;
-              this._socketsByProcesses[processId] = socket;
-            });
-
-            resolve({
-              id: this.id
-            });
-          });
-        } else if (typeof params === 'object') {
-          this._ipcInstance.serveNet(
-            params.host || 'localhost',
-            port,
-            params.UDPType || 'upd4',
-            () => {
-              // this.trigger('server.ready', {});
-              resolve({
-                id: this.id,
-                host: params.host || 'localhost',
-                port,
-                UDPType: params.UPDType || 'udp4'
-              });
-            }
-          );
-        }
-        this._ipcInstance.server.start();
-        __onProcessExit(() => {
-          return this.stop();
-        });
-      },
-      {
-        id: `${this.id}.start`
+    return new Promise(async (resolve, reject) => {
+      // check if params have only 1 id
+      if (
+        __isPlainObject(params) === true &&
+        Object.keys(params).length === 1 &&
+        params.id
+      ) {
+        params = params.id;
       }
-    );
+
+      // make sure the passed port is free
+      const port = await __getFreePort(
+        params && typeof params === 'object'
+          ? params.port || this._ipcInstance.config.port
+          : this._ipcInstance.config.port
+      );
+
+      if (!params || typeof params === 'string') {
+        this._ipcInstance.serve(() => {
+          this._ipcInstance.server.on('_handshake', (processId, socket) => {
+            if (this._socketsByProcesses[processId]) return;
+            this._socketsByProcesses[processId] = socket;
+          });
+
+          return resolve({
+            id: this.id
+          });
+        });
+      } else if (typeof params === 'object') {
+        this._ipcInstance.serveNet(
+          params.host || 'localhost',
+          port,
+          params.UDPType || 'upd4',
+          () => {
+            // this.trigger('server.ready', {});
+            return resolve({
+              id: this.id,
+              host: params.host || 'localhost',
+              port,
+              UDPType: params.UPDType || 'udp4'
+            });
+          }
+        );
+      }
+      this._ipcInstance.server.start();
+      __onProcessExit(() => {
+        return this.stop();
+      });
+
+      return true;
+    });
   }
 
   /**

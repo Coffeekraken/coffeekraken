@@ -38,12 +38,12 @@ let __activeScreen: any = null;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-// __hotkey('ctrl+c', {
-//   once: true
-// }).on('press', () => {
-//   if (!global.screen) return;
-//   global.screen.destroy();
-// });
+__hotkey('ctrl+c', {
+  once: true
+}).on('press', () => {
+  if (!global.screen) return;
+  global.screen.destroy();
+});
 export = class SBlessedComponent extends __blessed.box {
   /**
    * @name                  _settings
@@ -297,4 +297,4 @@ export = class SBlessedComponent extends __blessed.box {
   allowRender() {
     return this._allowRender;
   }
-}
+};

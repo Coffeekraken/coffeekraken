@@ -16,8 +16,41 @@ var _a;
 const blessed_1 = __importDefault(require("blessed"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const color_1 = __importDefault(require("../color/color"));
+const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
 const onProcessExit_1 = __importDefault(require("../process/onProcessExit"));
 let __activeScreen = null;
+/**
+ * @name                  SBlessedComponent
+ * @namespace           sugar.node.blessed
+ * @type                  Class
+ * @wip
+ *
+ * This class is the base one for all the sugar blessed components like input, panel, etc...
+ *
+ * @param        {Object}         [settings = {}]         A settings object to configure your list. Here's the available settings:
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example       js
+ * import SBlessedComponent from '@coffeekraken/sugar/node/blessed/SBlessedComponent';
+ * class MyCoolComponent extends SBlessedComponent {
+ *    constructor(settings = {}) {
+ *      super(settings);
+ *    }
+ * }
+ *
+ * @since     2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+hotkey_1.default('ctrl+c', {
+    once: true
+}).on('press', () => {
+    if (!global.screen)
+        return;
+    global.screen.destroy();
+});
 module.exports = (_a = class SBlessedComponent extends blessed_1.default.box {
         /**
          * @name                  constructor

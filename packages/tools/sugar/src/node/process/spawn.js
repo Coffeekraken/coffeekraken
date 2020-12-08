@@ -12,6 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+const uniqid_1 = __importDefault(require("../string/uniqid"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const child_process_1 = require("child_process");
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
@@ -54,6 +55,7 @@ const SIpcServer_1 = __importDefault(require("../ipc/SIpcServer"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 const fn = function spawn(command, args = [], settings = {}) {
+    let uniquid = `SIpc.spawn.${uniqid_1.default()}`;
     let childProcess;
     let ipcServer, serverData, isCancel = false;
     const promise = new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
@@ -61,20 +63,23 @@ const fn = function spawn(command, args = [], settings = {}) {
             ipc: true
         }, settings);
         if (settings.ipc === true) {
-            ipcServer = new SIpcServer_1.default();
-            serverData = yield ipcServer.start();
-            ipcServer.on('*', (data, metas) => {
-                trigger(metas.stack, data);
+            console.log('COCOCOCO');
+            ipcServer = yield SIpcServer_1.default.getGlobalServer();
+            console.log('SER', ipcServer);
+            ipcServer.on(`${uniquid}.*`, (data, metas) => {
+                console.log(data, metas);
+                // trigger(metas.stack.replace(uniquid, ''), data);
             });
         }
         const stderr = [], stdout = [];
-        childProcess = child_process_1.spawn(command, [], Object.assign(Object.assign({ shell: true }, settings), { env: Object.assign(Object.assign({}, (settings.env || {})), { S_IPC_SERVER: JSON.stringify(serverData) }) }));
+        childProcess = child_process_1.spawn(command, [], Object.assign(Object.assign({ shell: true }, settings), { env: Object.assign(Object.assign({}, (settings.env || {})), { S_IPC_SERVER: JSON.stringify(ipcServer.connexionParams), S_IPC_SPAWN_ID: uniquid }) }));
         trigger('start');
         // listen for errors etc...
         if (childProcess.stdout) {
             childProcess.stdout.on('data', (data) => {
                 stdout.push(data.toString());
                 trigger('log', data.toString());
+                console.log(data.toString());
             });
         }
         if (childProcess.stderr) {

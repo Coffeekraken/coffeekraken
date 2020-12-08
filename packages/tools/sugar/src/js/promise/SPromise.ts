@@ -240,6 +240,10 @@ export = class SPromise extends Promise {
     });
   }
 
+  static get [Symbol.species]() {
+    return Promise;
+  }
+
   /**
    * @name                  constructor
    * @type                  Function
@@ -261,8 +265,6 @@ export = class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   constructor(executorFnOrSettings = {}, settings = {}) {
-    let _masterPromiseRejectFn, _masterPromiseResolveFn;
-
     const _resolve = (...args) => {
       setTimeout(() => {
         this.resolve(...args);
@@ -284,11 +286,12 @@ export = class SPromise extends Promise {
       });
     };
 
-    super((resolve) => {
-      _masterPromiseResolveFn = resolve;
+    const resolvers = {};
+    super((resolve, reject) => {
+      resolvers.resolve = resolve;
 
       new Promise((rejectPromiseResolve, rejectPromiseReject) => {
-        _masterPromiseRejectFn = rejectPromiseReject;
+        resolvers.reject = rejectPromiseReject;
       }).catch((e) => {
         this.trigger('catch', e);
       });
@@ -302,17 +305,11 @@ export = class SPromise extends Promise {
       }
     });
 
-    Object.defineProperty(this, '_masterPromiseResolveFn', {
+    Object.defineProperty(this, '_resolvers', {
       writable: true,
       configurable: true,
       enumerable: false,
-      value: _masterPromiseResolveFn
-    });
-    Object.defineProperty(this, '_masterPromiseRejectFn', {
-      writable: true,
-      configurable: true,
-      enumerable: false,
-      value: _masterPromiseRejectFn
+      value: resolvers
     });
     Object.defineProperty(this, '_promiseState', {
       writable: true,
@@ -333,15 +330,19 @@ export = class SPromise extends Promise {
       }
     });
 
-    // extend settings
-    this._settings = __deepMerge(
-      {
-        destroyTimeout: 5000,
-        id: __uniqid()
-      },
-      typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {},
-      settings
-    );
+    Object.defineProperty(this, '_settings', {
+      writable: true,
+      configurable: true,
+      enumerable: false,
+      value: __deepMerge(
+        {
+          destroyTimeout: 5000,
+          id: __uniqid()
+        },
+        typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {},
+        settings
+      )
+    });
 
     if (this._settings.destroyTimeout !== -1) {
       this.on('finally', () => {
@@ -532,7 +533,7 @@ export = class SPromise extends Promise {
       // exec the wanted stacks
       const stacksResult = await this._triggerStacks(stacksOrder, arg);
       // resolve the master promise
-      this._masterPromiseResolveFn(stacksResult);
+      this._resolvers.resolve(stacksResult);
       // return the stack result
       resolve(stacksResult);
     });
@@ -577,7 +578,7 @@ export = class SPromise extends Promise {
       // exec the wanted stacks
       const stacksResult = await this._triggerStacks(stacksOrder, arg);
       // resolve the master promise
-      this._masterPromiseRejectFn(arg);
+      this._resolvers.reject(stacksResult);
       // return the stack result
       resolve(stacksResult);
     });
@@ -622,7 +623,7 @@ export = class SPromise extends Promise {
       // exec the wanted stacks
       const stacksResult = await this._triggerStacks(stacksOrder, arg);
       // resolve the master promise
-      this._masterPromiseResolveFn(stacksResult);
+      this._resolvers.resolve(stacksResult);
       // return the stack result
       resolve(stacksResult);
     });
@@ -1087,8 +1088,7 @@ export = class SPromise extends Promise {
 
     // destroying all the callbacks stacks registered
     delete this._stacks;
-    delete this._masterPromiseResolveFn;
-    delete this._masterPromiseRejectFn;
+    delete this._resolvers;
     delete this._settings;
     this._isDestroyed = true;
   }

@@ -115,9 +115,9 @@ export = class SOutput extends __SBlessedComponent {
           'warning',
           '*.warning',
           'warn',
-          '*.warn',
-          'error',
-          '*.error'
+          '*.warn'
+          // 'error',
+          // '*.error'
         ]
       },
       settings

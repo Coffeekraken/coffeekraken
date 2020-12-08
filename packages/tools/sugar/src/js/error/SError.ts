@@ -14,8 +14,7 @@ import __toString from '../string/toString';
 
 export = class SError extends Error {
   constructor(message) {
-
-    this.data = message;
+    const originalMessage = message;
 
     if (typeof message !== 'string') {
       if (Array.isArray(message)) {
@@ -39,6 +38,8 @@ export = class SError extends Error {
     if (Error && Error.captureStackTrace) {
       Error.captureStackTrace(this, this.constructor);
     }
+
+    this.data = originalMessage;
 
     const stack = [];
     const packageRoot = __packageRoot();

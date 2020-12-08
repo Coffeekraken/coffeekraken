@@ -434,16 +434,19 @@ export = class SProcess extends __SPromise {
       // handle ipc connection
       let ipcClient;
       if (__isChildProcess() && __SIpcClient.hasParentServer()) {
-        // console.log('CCCOCOC');
+        console.log('CCCOCOC');
         ipcClient = await __SIpcClient.connectToParent();
+        console.log('connected');
       }
 
       // run the actual process using the "process" method
       this._processPromise = this.process(this._params, settings);
 
       if (__isChildProcess() && ipcClient) {
+        console.log('UPC');
         this._processPromise.on('*', (data, metas) => {
-          ipcClient.trigger(`child.${metas.stack}`, data);
+          console.log('something', metas);
+          // ipcClient.trigger(`child.${metas.stack}`, data);
         });
         // __SPromise.pipe(this._processPromise, ipcClient, {
         //   prefixStack: 'child'

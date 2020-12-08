@@ -77,10 +77,95 @@ class SIpcServer extends SPromise_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this._socketsByProcesses = {};
+        /**
+         * @name           connexionParams
+         * @type            Object
+         *
+         * Store the server connexion params like "port", "hostname", "id", etc...
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this.connexionParams = undefined;
         // create the new ipc instance
         this._ipcInstance = new node_ipc_1.IPC();
         Object.assign(this._ipcInstance.config, this._settings);
     }
+    /**
+     * @name            hasGlobalServer
+     * @type            Function
+     * @static
+     *
+     * This static method check if a global server exists or not
+     *
+     * @return      {Boolean}         true if a global server exists, false if not
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static hasGlobalServer() {
+        return SIpcServer._globalServerInstance !== undefined;
+    }
+    on(...args) {
+        console.log('ON', ...args);
+        return super.on(...args);
+    }
+    /**
+     * @name            getGlobalServer
+     * @type            Function
+     * @static
+     * @async
+     *
+     * This method simply create a global server instance and returns it
+     * if needed, otherwise simply returns it
+     *
+     * @return      {SIpcServer}            An SIpcServer instance
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static getGlobalServer() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (SIpcServer.hasGlobalServer() === true) {
+                return SIpcServer._globalServerInstance;
+            }
+            SIpcServer._globalServerInstance = new SIpcServer();
+            yield SIpcServer._globalServerInstance.start();
+            return new Proxy(SIpcServer._globalServerInstance, {
+                // get: async function (target, name) {
+                //   // console.log('GET', SIpcServer._globalServerInstance, name);
+                //   // if (name === 'then') {
+                //   //   return await target[name];
+                //   // } else {
+                //   //   return target[name];
+                //   // }
+                //   console.log('GET', name);
+                //   let ret = await target[name];
+                //   coonsole.log(typeof ret);
+                //   console.log('re', ret);
+                //   if (ret === undefined) return target[name];
+                //   return ret;
+                //   // console.log(target, Object.keys(target), target.prototype);
+                //   return await target[name];
+                // }
+                get(target, prop, receiver) {
+                    if (prop === 'then')
+                        return target;
+                    return Reflect.get(...arguments);
+                }
+                // apply: function (target, thisArg, ...args) {
+                //   console.log('apply', target);
+                //   const fn = target.bind(thisArg);
+                //   return fn(...args);
+                // }
+            });
+            return [SIpcServer._globalServerInstance];
+        });
+    }
+    // async then() {
+    //   console.log('AAA', this.connexionParams);
+    //   return this;
+    // }
     /**
      * @name              id
      * @type              String
@@ -114,15 +199,18 @@ class SIpcServer extends SPromise_1.default {
             const serverData = yield this._start(params);
             // listen for events
             this._ipcInstance.server.on('event', (data, socket) => {
+                console.log('event', data);
                 // trigger the event using the SPromise method
                 this.trigger(`${data.stack}`, data.data);
             });
+            // save the connexion params
+            this.connexionParams = serverData;
             // return the server data
             return serverData;
         });
     }
     _start(params = null) {
-        return new SPromise_1.default((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             // check if params have only 1 id
             if (plainObject_1.default(params) === true &&
                 Object.keys(params).length === 1 &&
@@ -140,7 +228,7 @@ class SIpcServer extends SPromise_1.default {
                             return;
                         this._socketsByProcesses[processId] = socket;
                     });
-                    resolve({
+                    return resolve({
                         id: this.id
                     });
                 });
@@ -148,7 +236,7 @@ class SIpcServer extends SPromise_1.default {
             else if (typeof params === 'object') {
                 this._ipcInstance.serveNet(params.host || 'localhost', port, params.UDPType || 'upd4', () => {
                     // this.trigger('server.ready', {});
-                    resolve({
+                    return resolve({
                         id: this.id,
                         host: params.host || 'localhost',
                         port,
@@ -160,9 +248,8 @@ class SIpcServer extends SPromise_1.default {
             onProcessExit_1.default(() => {
                 return this.stop();
             });
-        }), {
-            id: `${this.id}.start`
-        });
+            return true;
+        }));
     }
     /**
      * @name              stop
@@ -184,5 +271,16 @@ class SIpcServer extends SPromise_1.default {
         });
     }
 }
+/**
+ * @name            _globalServerInstance
+ * @type            SIpcServer
+ * @static
+ *
+ * Store the global server instance
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+SIpcServer._globalServerInstance = undefined;
 module.exports = SIpcServer;
 //# sourceMappingURL=SIpcServer.js.map

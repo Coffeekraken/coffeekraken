@@ -38,7 +38,6 @@ module.exports = class SPromise extends Promise {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     constructor(executorFnOrSettings = {}, settings = {}) {
-        let _masterPromiseRejectFn, _masterPromiseResolveFn;
         const _resolve = (...args) => {
             setTimeout(() => {
                 this.resolve(...args);
@@ -59,10 +58,11 @@ module.exports = class SPromise extends Promise {
                 this.cancel(...args);
             });
         };
-        super((resolve) => {
-            _masterPromiseResolveFn = resolve;
+        const resolvers = {};
+        super((resolve, reject) => {
+            resolvers.resolve = resolve;
             new Promise((rejectPromiseResolve, rejectPromiseReject) => {
-                _masterPromiseRejectFn = rejectPromiseReject;
+                resolvers.reject = rejectPromiseReject;
             }).catch((e) => {
                 this.trigger('catch', e);
             });
@@ -99,17 +99,11 @@ module.exports = class SPromise extends Promise {
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
         this._promiseState = 'pending';
-        Object.defineProperty(this, '_masterPromiseResolveFn', {
+        Object.defineProperty(this, '_resolvers', {
             writable: true,
             configurable: true,
             enumerable: false,
-            value: _masterPromiseResolveFn
-        });
-        Object.defineProperty(this, '_masterPromiseRejectFn', {
-            writable: true,
-            configurable: true,
-            enumerable: false,
-            value: _masterPromiseRejectFn
+            value: resolvers
         });
         Object.defineProperty(this, '_promiseState', {
             writable: true,
@@ -129,11 +123,15 @@ module.exports = class SPromise extends Promise {
                 cancel: []
             }
         });
-        // extend settings
-        this._settings = deepMerge_1.default({
-            destroyTimeout: 5000,
-            id: uniqid_1.default()
-        }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings);
+        Object.defineProperty(this, '_settings', {
+            writable: true,
+            configurable: true,
+            enumerable: false,
+            value: deepMerge_1.default({
+                destroyTimeout: 5000,
+                id: uniqid_1.default()
+            }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings)
+        });
         if (this._settings.destroyTimeout !== -1) {
             this.on('finally', () => {
                 setTimeout(() => {
@@ -258,6 +256,9 @@ module.exports = class SPromise extends Promise {
             // trigger on the destination promise
             destSPromise.trigger(metas.stack, value, Object.assign(Object.assign({}, metas), { level: metas.level + 1 }));
         });
+    }
+    static get [Symbol.species]() {
+        return Promise;
     }
     /**
      * @name                    id
@@ -431,7 +432,7 @@ module.exports = class SPromise extends Promise {
             // exec the wanted stacks
             const stacksResult = yield this._triggerStacks(stacksOrder, arg);
             // resolve the master promise
-            this._masterPromiseResolveFn(stacksResult);
+            this._resolvers.resolve(stacksResult);
             // return the stack result
             resolve(stacksResult);
         }));
@@ -475,7 +476,7 @@ module.exports = class SPromise extends Promise {
             // exec the wanted stacks
             const stacksResult = yield this._triggerStacks(stacksOrder, arg);
             // resolve the master promise
-            this._masterPromiseRejectFn(arg);
+            this._resolvers.reject(stacksResult);
             // return the stack result
             resolve(stacksResult);
         }));
@@ -519,7 +520,7 @@ module.exports = class SPromise extends Promise {
             // exec the wanted stacks
             const stacksResult = yield this._triggerStacks(stacksOrder, arg);
             // resolve the master promise
-            this._masterPromiseResolveFn(stacksResult);
+            this._resolvers.resolve(stacksResult);
             // return the stack result
             resolve(stacksResult);
         }));
@@ -948,8 +949,7 @@ module.exports = class SPromise extends Promise {
         this._promiseState = 'destroyed';
         // destroying all the callbacks stacks registered
         delete this._stacks;
-        delete this._masterPromiseResolveFn;
-        delete this._masterPromiseRejectFn;
+        delete this._resolvers;
         delete this._settings;
         this._isDestroyed = true;
     }

@@ -31,23 +31,6 @@ import __SBlessedOutput from '../blessed/SBlessedOutput';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = (source, settings = {}) => {
-  // source.on(
-  //   [
-  //     'log',
-  //     '*.log',
-  //     'warning',
-  //     '*.warning',
-  //     'warn',
-  //     '*.warn',
-  //     'error',
-  //     '*.error'
-  //   ].join(','),
-  //   (data, metas) => {
-  //     console.log(data, metas.stack);
-  //   }
-  // );
-  // return;
-
   const output = new __SBlessedOutput(source, settings);
   return output;
 };

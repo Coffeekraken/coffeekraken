@@ -34,7 +34,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         __extends(SError, _super);
         function SError(message) {
             var _this = this;
-            _this.data = message;
+            var originalMessage = message;
             if (typeof message !== 'string') {
                 if (Array.isArray(message)) {
                     message = message.join('\n');
@@ -58,6 +58,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (Error && Error.captureStackTrace) {
                 Error.captureStackTrace(_this, _this.constructor);
             }
+            _this.data = originalMessage;
             var stack = [];
             var packageRoot = packageRoot_1.default();
             var stackArray = [];

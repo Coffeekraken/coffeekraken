@@ -109,7 +109,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (executorFnOrSettings === void 0) { executorFnOrSettings = {}; }
             if (settings === void 0) { settings = {}; }
             var _this = this;
-            var _masterPromiseRejectFn, _masterPromiseResolveFn;
             var _resolve = function () {
                 var args = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
@@ -146,10 +145,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     _this.cancel.apply(_this, args);
                 });
             };
-            _this = _super.call(this, function (resolve) {
-                _masterPromiseResolveFn = resolve;
+            var resolvers = {};
+            _this = _super.call(this, function (resolve, reject) {
+                resolvers.resolve = resolve;
                 new Promise(function (rejectPromiseResolve, rejectPromiseReject) {
-                    _masterPromiseRejectFn = rejectPromiseReject;
+                    resolvers.reject = rejectPromiseReject;
                 }).catch(function (e) {
                     _this.trigger('catch', e);
                 });
@@ -186,17 +186,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @author 		Olivier Bossel<olivier.bossel@gmail.com>
              */
             _this._promiseState = 'pending';
-            Object.defineProperty(_this, '_masterPromiseResolveFn', {
+            Object.defineProperty(_this, '_resolvers', {
                 writable: true,
                 configurable: true,
                 enumerable: false,
-                value: _masterPromiseResolveFn
-            });
-            Object.defineProperty(_this, '_masterPromiseRejectFn', {
-                writable: true,
-                configurable: true,
-                enumerable: false,
-                value: _masterPromiseRejectFn
+                value: resolvers
             });
             Object.defineProperty(_this, '_promiseState', {
                 writable: true,
@@ -216,11 +210,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     cancel: []
                 }
             });
-            // extend settings
-            _this._settings = deepMerge_1.default({
-                destroyTimeout: 5000,
-                id: uniqid_1.default()
-            }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings);
+            Object.defineProperty(_this, '_settings', {
+                writable: true,
+                configurable: true,
+                enumerable: false,
+                value: deepMerge_1.default({
+                    destroyTimeout: 5000,
+                    id: uniqid_1.default()
+                }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings)
+            });
             if (_this._settings.destroyTimeout !== -1) {
                 _this.on('finally', function () {
                     setTimeout(function () {
@@ -349,6 +347,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 destSPromise.trigger(metas.stack, value, __assign(__assign({}, metas), { level: metas.level + 1 }));
             });
         };
+        Object.defineProperty(SPromise, Symbol.species, {
+            get: function () {
+                return Promise;
+            },
+            enumerable: false,
+            configurable: true
+        });
         Object.defineProperty(SPromise.prototype, "id", {
             /**
              * @name                    id
@@ -538,7 +543,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         case 1:
                             stacksResult = _a.sent();
                             // resolve the master promise
-                            this._masterPromiseResolveFn(stacksResult);
+                            this._resolvers.resolve(stacksResult);
                             // return the stack result
                             resolve(stacksResult);
                             return [2 /*return*/];
@@ -593,7 +598,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         case 1:
                             stacksResult = _a.sent();
                             // resolve the master promise
-                            this._masterPromiseRejectFn(arg);
+                            this._resolvers.reject(stacksResult);
                             // return the stack result
                             resolve(stacksResult);
                             return [2 /*return*/];
@@ -648,7 +653,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         case 1:
                             stacksResult = _a.sent();
                             // resolve the master promise
-                            this._masterPromiseResolveFn(stacksResult);
+                            this._resolvers.resolve(stacksResult);
                             // return the stack result
                             resolve(stacksResult);
                             return [2 /*return*/];
@@ -1143,8 +1148,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             this._promiseState = 'destroyed';
             // destroying all the callbacks stacks registered
             delete this._stacks;
-            delete this._masterPromiseResolveFn;
-            delete this._masterPromiseRejectFn;
+            delete this._resolvers;
             delete this._settings;
             this._isDestroyed = true;
         };

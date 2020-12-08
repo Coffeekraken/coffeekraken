@@ -22,8 +22,8 @@ class MyProcess extends __SProcess {
 }
 
 const pro = new MyProcess({
-  // runAsChild: true
-  output: !__isChildProcess()
+  runAsChild: true
+  // output: !__isChildProcess()
 });
 // if (!__isChildProcess()) {
 //   pro.on('log,*.log', (v, metas) => {

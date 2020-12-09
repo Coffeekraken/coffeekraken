@@ -22,6 +22,7 @@ import __argsToString from '../cli/argsToString';
 import __toString from '../string/toString';
 import __copy from '../clipboard/copy';
 import __spawn from './spawn';
+import __parseHtml from '../terminal/parseHtml';
 
 import { ISProcessLogObj } from './interface/ISProcess';
 import { ISProcessSettings } from '../../../node/process/interface/ISProcess';
@@ -180,7 +181,8 @@ export = class SProcess extends __SPromise {
     super(
       __deepMerge(
         {
-          output: false,
+          stdio: 'inherit',
+          metas: true,
           throw: true,
           runAsChild: false,
           definition: undefined,
@@ -217,13 +219,7 @@ export = class SProcess extends __SPromise {
               )}/src/data/notifications/ck_error.png`
             }
           },
-          env: {
-            ...process.env,
-            CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
-              ? process.env.CHILD_PROCESS_LEVEL + 1
-              : 1,
-            IS_CHILD_PROCESS: true
-          }
+          env: {}
         },
         settings
       )
@@ -269,16 +265,20 @@ export = class SProcess extends __SPromise {
     }
 
     if (!__isChildProcess()) {
-      if (this._settings.output) {
-        if (__isClass(this._settings.output)) {
-          const outputInstance = new this._settings.output(
+      if (this._settings.stdio) {
+        if (__isClass(this._settings.stdio)) {
+          const outputInstance = new this._settings.stdio(
             this,
             this._settings.initialParams
           );
+        } else if (this._settings.stdio === 'inherit') {
+          this.on('log,*.log', (data, metas) => {
+            console.log(__parseHtml(__toString(data.value || data)));
+          });
         } else {
           const outputSettings =
-            typeof this._settings.output === 'object'
-              ? this._settings.output
+            typeof this._settings.stdio === 'object'
+              ? this._settings.stdio
               : {};
           __output(this, outputSettings);
         }
@@ -434,19 +434,15 @@ export = class SProcess extends __SPromise {
       // handle ipc connection
       let ipcClient;
       if (__isChildProcess() && __SIpcClient.hasParentServer()) {
-        console.log('CCCOCOC');
         ipcClient = await __SIpcClient.connectToParent();
-        console.log('connected');
       }
 
       // run the actual process using the "process" method
       this._processPromise = this.process(this._params, settings);
 
       if (__isChildProcess() && ipcClient) {
-        console.log('UPC');
         this._processPromise.on('*', (data, metas) => {
-          console.log('something', metas);
-          // ipcClient.trigger(`child.${metas.stack}`, data);
+          ipcClient.trigger(metas.stack, data);
         });
         // __SPromise.pipe(this._processPromise, ipcClient, {
         //   prefixStack: 'child'
@@ -567,7 +563,7 @@ export = class SProcess extends __SPromise {
     let data;
     const strArray = [];
 
-    if (!__isChildProcess()) {
+    if (!__isChildProcess() && this._settings.metas === true) {
       switch (state) {
         case 'success':
           this.log({

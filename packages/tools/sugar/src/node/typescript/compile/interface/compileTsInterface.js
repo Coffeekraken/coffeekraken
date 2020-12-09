@@ -10,9 +10,9 @@ const TscInterface_1 = __importDefault(require("./TscInterface"));
 // } else if (__fs.exi)
 class compileTsInterface extends SInterface_1.default {
 }
-compileTsInterface.definition = Object.assign(Object.assign({}, TscInterface_1.default.definition), { config: {
+compileTsInterface.definition = Object.assign(Object.assign({}, TscInterface_1.default.definition), { project: {
         type: 'Array<File>',
-        alias: 'c'
+        alias: 'p'
     }, input: {
         type: 'String',
         alias: 'i'

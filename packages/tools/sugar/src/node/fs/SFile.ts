@@ -31,17 +31,17 @@ import ISFile, {
  * and get access to all the nice meta data like:
  * - name: The file name
  * - path: The full path to the file
- * - rootDir: The root directory specified through the settings.rootDir property
- * - relPath: The relative file path from the rootDir
+ * - cwd: The root directory specified through the settings.cwd property
+ * - relPath: The relative file path from the cwd
  * - dirPath: The path to the folder where is the file
  * - extension: The file extension
  * - size: The file size in megabytes
  * - sizeInBytes: The file siz in bytes
- * - exists: true if the file exists on the disk, false otherwise
+ * - exists:Bytestrue if the file exists on the disk, false otherwise
  *
  * @param         {String}          filepath        The file path you want to init
  * @param         {Object}          [settings={}]    An object of settings to configure your file instance:
- * - rootDir (__packageRoot()) {String}: Specify a root directory for the file. This is usefull to have then access to properties like ```relPath```, etc...
+ * - cwd (__packageRoot()) {String}: Specify a root directory for the file. This is usefull to have then access to properties like ```relPath```, etc...
  * - checkExistence (true) {Boolean}: Specify if you want this inited file to really exists on the disk or not
  *
  * @todo      interface
@@ -82,24 +82,24 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
   path;
 
   /**
-   * @name        rootDir
+   * @name        cwd
    * @type        String
    *
    * Store the root directory where the file actually lives.
    * The root directory can be for example ```src/js``` for a file that lives under ```/my/cool/path/src/js/array/sort.js```.
-   * To set this property, you need to pass the ```rootDir``` setting through the constructor...
+   * To set this property, you need to pass the ```cwd``` setting through the constructor...
    *
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  rootDir;
+  cwd;
 
   /**
    * @name        relPath
    * @type        String
    *
-   * Store the path relative to the ```rootDir``` property. To have access to this property, you MUST
-   * specify the settings.rootDir through the constructor
+   * Store the path relative to the ```cwd``` property. To have access to this property, you MUST
+   * specify the settings.cwd through the constructor
    *
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -140,8 +140,41 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
   size = -1;
 
   /**
-   * @name        sizeInBytes
+   * @name        sizeInGBytes
    * @type        Number
+   *
+   * Store the file size in gigabytes
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  sizeInGBytes = -1;
+
+  /**
+   * @name        sizeInMBytes
+   * @type        Number
+   *
+   * Store the file size in megabytes
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  sizeInMBytes = -1;
+
+  /**
+   * @name        sizeInKBytes
+   * @type        NuBytesber
+   *
+   * Store the file size in kilobytes
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  sizeInKBytes = -1;
+
+  /**
+   * @name        sizeInBytes
+   * @type        NuBytesber
    *
    * Store the file size in bytes
    *
@@ -149,6 +182,8 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   sizeInBytes = -1;
+
+  treatAsValue = true;
 
   /**
    * @name        constructor
@@ -166,28 +201,30 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
       {
         id: 'SFile',
         checkExistence: true,
-        rootDir: __packageRoot()
+        cwd: process.cwd(),
+        sizeIn: 'MBytes',
+        shrinkSizesTo: 3
       },
       this._settings
     );
 
-    if (settings.rootDir && !filepath.includes(settings.rootDir)) {
-      filepath = __path.resolve(settings.rootDir, filepath);
+    if (this._settings.cwd && !filepath.includes(this._settings.cwd)) {
+      filepath = __path.resolve(this._settings.cwd, filepath);
     }
 
     // check if the file exists
     this.exists = __fs.existsSync(filepath);
 
     // check if need to check for the file existence or not...
-    if (settings.checkExistence && !this.exists) {
+    if (this._settings.checkExistence && !this.exists) {
       throw new __SError(
         `The passed filepath "<cyan>${filepath}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`
       );
     }
 
-    if (this._settings.rootDir) {
-      this.rootDir = this._settings.rootDir;
-      this.relPath = __path.relative(this.rootDir, filepath);
+    if (this._settings.cwd) {
+      this.cwd = this._settings.cwd;
+      this.relPath = __path.relative(this.cwd, filepath);
     }
 
     // save the file path
@@ -215,12 +252,17 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
   toObject() {
     return {
       exists: this.exists,
-      rootDir: this.rootDir,
+      cwd: this.cwd,
       path: this.path,
       relPath: this.relPath,
       name: this.name,
       extension: this.extension,
       dirPath: this.dirPath,
+      size: this.size,
+      sizeInBytes: this.sizeInBytes,
+      sizeInKBytes: this.sizeInKBytes,
+      sizeInMBytes: this.sizeInMBytes,
+      sizeInGBytes: this.sizeInGBytes,
       content: this.readSync()
     };
   }
@@ -240,7 +282,27 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
     // get the file stats
     const stats = __fs.statSync(this.path);
     this.sizeInBytes = stats.size;
-    this.size = stats.size / 1000000;
+    this.sizeInGBytes = stats.sizes * 0.00000001;
+    this.sizeInMBytes = stats.size * 0.000001;
+    this.sizeInKBytes = stats.size * 0.001;
+
+    if (this._settings.shrinkSizesTo) {
+      this.sizeInBytes = Number(
+        this.sizeInBytes.toFixed(this._settings.shrinkSizesTo)
+      );
+      this.sizeInKBytes = Number(
+        this.sizeInKBytes.toFixed(this._settings.shrinkSizesTo)
+      );
+      this.sizeInMBytes = Number(
+        this.sizeInMBytes.toFixed(this._settings.shrinkSizesTo)
+      );
+      this.sizeInGBytes = Number(
+        this.sizeInGBytes.toFixed(this._settings.shrinkSizesTo)
+      );
+    }
+
+    // save the default size
+    this.size = this[`sizeIn${this._settings.sizeIn}`];
   }
 
   /**

@@ -31,6 +31,7 @@ const output_1 = __importDefault(require("./output"));
 const stack_trace_1 = __importDefault(require("stack-trace"));
 const toString_1 = __importDefault(require("../string/toString"));
 const spawn_1 = __importDefault(require("./spawn"));
+const parseHtml_1 = __importDefault(require("../terminal/parseHtml"));
 module.exports = class SProcess extends SPromise_1.default {
     /**
      * @name            constructor
@@ -44,7 +45,8 @@ module.exports = class SProcess extends SPromise_1.default {
      */
     constructor(settings = {}) {
         super(deepMerge_1.default({
-            output: false,
+            stdio: 'inherit',
+            metas: true,
             throw: true,
             runAsChild: false,
             definition: undefined,
@@ -73,9 +75,7 @@ module.exports = class SProcess extends SPromise_1.default {
                     icon: `${packageRoot_1.default(__dirname)}/src/data/notifications/ck_error.png`
                 }
             },
-            env: Object.assign(Object.assign({}, process.env), { CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
-                    ? process.env.CHILD_PROCESS_LEVEL + 1
-                    : 1, IS_CHILD_PROCESS: true })
+            env: {}
         }, settings));
         this._state = 'idle';
         /**
@@ -144,13 +144,18 @@ module.exports = class SProcess extends SPromise_1.default {
             this._settings.notifications.kill.title = `${this._settings.name} (${this._settings.id})`;
         }
         if (!childProcess_1.default()) {
-            if (this._settings.output) {
-                if (class_1.default(this._settings.output)) {
-                    const outputInstance = new this._settings.output(this, this._settings.initialParams);
+            if (this._settings.stdio) {
+                if (class_1.default(this._settings.stdio)) {
+                    const outputInstance = new this._settings.stdio(this, this._settings.initialParams);
+                }
+                else if (this._settings.stdio === 'inherit') {
+                    this.on('log,*.log', (data, metas) => {
+                        console.log(parseHtml_1.default(toString_1.default(data.value || data)));
+                    });
                 }
                 else {
-                    const outputSettings = typeof this._settings.output === 'object'
-                        ? this._settings.output
+                    const outputSettings = typeof this._settings.stdio === 'object'
+                        ? this._settings.stdio
                         : {};
                     output_1.default(this, outputSettings);
                 }
@@ -347,17 +352,13 @@ module.exports = class SProcess extends SPromise_1.default {
                 // handle ipc connection
                 let ipcClient;
                 if (childProcess_1.default() && SIpcClient_1.default.hasParentServer()) {
-                    console.log('CCCOCOC');
                     ipcClient = yield SIpcClient_1.default.connectToParent();
-                    console.log('connected');
                 }
                 // run the actual process using the "process" method
                 this._processPromise = this.process(this._params, settings);
                 if (childProcess_1.default() && ipcClient) {
-                    console.log('UPC');
                     this._processPromise.on('*', (data, metas) => {
-                        console.log('something', metas);
-                        // ipcClient.trigger(`child.${metas.stack}`, data);
+                        ipcClient.trigger(metas.stack, data);
                     });
                     // __SPromise.pipe(this._processPromise, ipcClient, {
                     //   prefixStack: 'child'
@@ -466,7 +467,7 @@ module.exports = class SProcess extends SPromise_1.default {
         }
         let data;
         const strArray = [];
-        if (!childProcess_1.default()) {
+        if (!childProcess_1.default() && this._settings.metas === true) {
             switch (state) {
                 case 'success':
                     this.log({

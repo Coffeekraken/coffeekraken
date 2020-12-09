@@ -51,5 +51,9 @@ RUN npm i -g eslint
 # installing packages dependencies
 # 
 
+# linking local binaries to global
+RUN cd /usr/bin && ln -s /usr/local/bin/node node
+RUN cd /usr/bin && ln -s /usr/local/bin/nodejs nodejs
+
 # installing internal packages globally
 # RUN cd /workspaces/coffeekraken && node packages/tools/sugar/src/cli/sugar.cli.js npm.bin i -p @coffeekraken/sugar -g

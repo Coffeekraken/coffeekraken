@@ -11,9 +11,9 @@ import __TscInterface from './TscInterface';
 class compileTsInterface extends __SInterface {
   static definition = {
     ...__TscInterface.definition,
-    config: {
+    project: {
       type: 'Array<File>',
-      alias: 'c'
+      alias: 'p'
     },
     input: {
       type: 'String',

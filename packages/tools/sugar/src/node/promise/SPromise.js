@@ -16,7 +16,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const minimatch_1 = __importDefault(require("minimatch"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const uniqid_1 = __importDefault(require("../string/uniqid"));
+const treatAsValue_1 = __importDefault(require("./treatAsValue"));
 module.exports = class SPromise extends Promise {
+    // static get [Symbol.species]() {
+    //   return Promise;
+    // }
     /**
      * @name                  constructor
      * @type                  Function
@@ -257,9 +261,6 @@ module.exports = class SPromise extends Promise {
             destSPromise.trigger(metas.stack, value, Object.assign(Object.assign({}, metas), { level: metas.level + 1 }));
         });
     }
-    static get [Symbol.species]() {
-        return Promise;
-    }
     /**
      * @name                    id
      * @type                    String
@@ -272,6 +273,9 @@ module.exports = class SPromise extends Promise {
     get id() {
         return this._settings.id;
     }
+    // then(...args) {
+    //   super.then(...args);
+    // }
     /**
      * @name                    promiseState
      * @type                    String
@@ -551,9 +555,16 @@ module.exports = class SPromise extends Promise {
         return __awaiter(this, void 0, void 0, function* () {
             if (this._isDestroyed)
                 return;
-            // if (what === 'error') console.log('SSS', arg);
+            let treatAsValue = arg !== undefined && arg.treatAsValue;
+            if (treatAsValue) {
+                arg = treatAsValue_1.default(arg);
+            }
             // triger the passed stacks
-            return this._triggerStacks(what, arg, metas);
+            let res = this._triggerStacks(what, arg, metas);
+            if (res && res.revokeProxy) {
+                res = res.revokeProxy();
+            }
+            return res;
         });
     }
     /**
@@ -643,15 +654,6 @@ module.exports = class SPromise extends Promise {
                 Object.keys(this._stacks).forEach((stackName) => {
                     if (stackName === stack)
                         return;
-                    // const toAvoid = [
-                    //   'catch',
-                    //   'resolve',
-                    //   'reject',
-                    //   'finally',
-                    //   'cancel'
-                    // ];
-                    // if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1)
-                    //   return;
                     if (minimatch_1.default(stack, stackName)) {
                         // the glob pattern match the triggered stack so add it to the stack array
                         stackArray = [...stackArray, ...this._stacks[stackName]];
@@ -684,13 +686,14 @@ module.exports = class SPromise extends Promise {
                 // call the callback function
                 let callbackResult = item.callback(currentCallbackReturnedValue, metasObj);
                 // check if the callback result is a promise
-                callbackResult = yield callbackResult;
-                // if the settings tells that we have to pass each returned value to the next callback
+                if (callbackResult && !callbackResult.revokeProxy) {
+                    callbackResult = yield callbackResult;
+                }
                 if (callbackResult !== undefined) {
+                    // if the settings tells that we have to pass each returned value to the next callback
                     currentCallbackReturnedValue = callbackResult;
                 }
             }
-            // return the result
             return currentCallbackReturnedValue;
         });
     }
@@ -719,7 +722,7 @@ module.exports = class SPromise extends Promise {
                 stacks = stacks.split(',').map((s) => s.trim());
             let currentStackResult = initialValue;
             for (let i = 0; i < stacks.length; i++) {
-                const stackResult = yield this._triggerStack(stacks[i], currentStackResult, metas);
+                let stackResult = yield this._triggerStack(stacks[i], currentStackResult, metas);
                 if (stackResult !== undefined) {
                     currentStackResult = stackResult;
                 }

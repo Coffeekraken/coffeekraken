@@ -1,18 +1,10 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const SProcess_1 = __importDefault(require("./SProcess"));
 const buildCommandLine_1 = __importDefault(require("../cli/buildCommandLine"));
+const spawn_1 = __importDefault(require("./spawn"));
 /**
  * @name          SCliProcess
  * @namespace     sugar.node.process
@@ -69,35 +61,39 @@ const Cls = class SCliProcess extends SProcess_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     process(params, settings = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-            // build the command line
-            const command = buildCommandLine_1.default(this.command, params, {
-                definition: this.definition,
-                alias: false
-            });
-            // const childProcess = __childProcess.spawn(command, [], {
-            //   env: settings.env,
-            //   shell: true
-            // });
-            // __onProcessExit(() => {
-            //   childProcess.kill();
-            // });
-            // childProcess.on('close', (code, signal) => {
-            //   if (this.stderr.length) {
-            //     this.reject(this.stderr.join('\n'));
-            //     const error = new __SError(this.stderr.join('\n'));
-            //     this.error(`<yellow>Child Process</yellow>\n${error.message}`);
-            //   } else if (this._isKilling || (!code && signal)) {
-            //     this.kill();
-            //   } else if (code === 0 && !signal) {
-            //     this.resolve();
-            //   } else {
-            //     this.reject();
-            //   }
-            //   // reset isKilling boolean
-            //   this._isKilling = false;
-            // });
+        // build the command line
+        const command = buildCommandLine_1.default(this.command, params, {
+            definition: this.definition,
+            alias: false
         });
+        const pro = spawn_1.default(command, [], {
+            shell: true,
+            ipc: false
+        });
+        // @ts-ignore
+        return pro;
+        // const childProcess = __childProcess.spawn(command, [], {
+        //   env: settings.env,
+        //   shell: true
+        // });
+        // __onProcessExit(() => {
+        //   childProcess.kill();
+        // });
+        // childProcess.on('close', (code, signal) => {
+        //   if (this.stderr.length) {
+        //     this.reject(this.stderr.join('\n'));
+        //     const error = new __SError(this.stderr.join('\n'));
+        //     this.error(`<yellow>Child Process</yellow>\n${error.message}`);
+        //   } else if (this._isKilling || (!code && signal)) {
+        //     this.kill();
+        //   } else if (code === 0 && !signal) {
+        //     this.resolve();
+        //   } else {
+        //     this.reject();
+        //   }
+        //   // reset isKilling boolean
+        //   this._isKilling = false;
+        // });
     }
 };
 module.exports = Cls;

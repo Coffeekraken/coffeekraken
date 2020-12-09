@@ -1,6 +1,7 @@
 const __SProcess = require('./src/node/process/SProcess');
 const __SPromise = require('./src/node/promise/SPromise');
 const __isChildProcess = require('./src/node/is/childProcess');
+const __parseHtml = require('./src/node/terminal/parseHtml');
 
 class MyProcess extends __SProcess {
   constructor(settings = {}) {

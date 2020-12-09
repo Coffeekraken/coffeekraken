@@ -6,7 +6,6 @@ function compileTs(stringArgs = '') {
   const pro = new SCompileTsProcess({
     output: false
   });
-  console.log('STRIN', stringArgs);
   pro.run(stringArgs);
 }
 

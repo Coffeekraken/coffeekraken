@@ -107,7 +107,7 @@ export default interface ISPromise {
   resolve(arg: any, stacksOrder: string): Promise<any>;
   reject(arg: any, stacksOrder: string): Promise<any>;
   cancel(arg: any, stacksOrder: string): Promise<any>;
-  trigger(what: string, arg: any, metas: ISPromiseMetas): Promise<any>;
+  trigger(what: string, arg: any, metas?: ISPromiseMetas): Promise<any>;
   on(stacks: string | string[], callback: ISPromiseOnCallbackFn): ISPromise;
   off(stack: string, callback?: ISPromiseOnCallbackFn): ISPromise;
   catch(...args: any): ISPromise;

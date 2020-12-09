@@ -6,6 +6,7 @@ import { spawn as __spawn } from 'child_process';
 import __SPromise from '../promise/SPromise';
 import ISPromise from '../promise/interface/ISPromise';
 import __SIpcServer from '../ipc/SIpcServer';
+import __onProcessExit from './onProcessExit';
 
 import ISpawn, { ISpawnSettings } from './interface/ISpawn';
 
@@ -66,26 +67,39 @@ const fn: ISpawn = function spawn(
     );
 
     if (settings.ipc === true) {
-      console.log('COCOCOCO');
       ipcServer = await __SIpcServer.getGlobalServer();
-      console.log('SER', ipcServer);
       ipcServer.on(`${uniquid}.*`, (data, metas) => {
-        console.log(data, metas);
-        // trigger(metas.stack.replace(uniquid, ''), data);
+        trigger(metas.stack.replace(uniquid + '.', ''), data);
       });
     }
 
     const stderr = [],
       stdout = [];
 
+    let envIpc = {};
+    if (ipcServer !== undefined) {
+      envIpc = {
+        S_IPC_SERVER: JSON.stringify(ipcServer.connexionParams),
+        S_IPC_SPAWN_ID: uniquid
+      };
+    }
+
     childProcess = __spawn(command, [], {
       shell: true,
       ...settings,
       env: {
+        ...process.env,
+        CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
+          ? process.env.CHILD_PROCESS_LEVEL + 1
+          : 1,
+        IS_CHILD_PROCESS: true,
         ...(settings.env || {}),
-        S_IPC_SERVER: JSON.stringify(ipcServer.connexionParams),
-        S_IPC_SPAWN_ID: uniquid
+        ...envIpc
       }
+    });
+
+    __onProcessExit(() => {
+      childProcess.kill();
     });
 
     trigger('start');
@@ -93,15 +107,16 @@ const fn: ISpawn = function spawn(
     // listen for errors etc...
     if (childProcess.stdout) {
       childProcess.stdout.on('data', (data) => {
+        console.log('da', data.toString());
         stdout.push(data.toString());
         trigger('log', data.toString());
-        console.log(data.toString());
       });
     }
     if (childProcess.stderr) {
       childProcess.stderr.on('data', (data) => {
-        stderr.push(data);
-        trigger('error', data);
+        console.log('DDDDDDD', data.toString());
+        stderr.push(data.toString());
+        trigger('error', data.toString());
       });
     }
 

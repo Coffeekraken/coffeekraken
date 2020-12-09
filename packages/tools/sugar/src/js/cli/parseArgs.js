@@ -70,6 +70,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         settings = deepMerge_1.default({
             throw: true,
             definition: null,
+            cast: true,
+            complete: true,
             defaultObj: {}
         }, settings);
         var argsObj = {};
@@ -169,36 +171,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 }
             });
         }
-        console.log('final', finalArgsMap);
         // cast params
-        finalArgsMap = map_1.default(finalArgsMap, function (key, value, idx) {
-            // validate and cast value
-            if (settings.definition && settings.definition[key]) {
-                var definitionObj = settings.definition[key];
-                var sTypeInstance = new SType_1.default(definitionObj.type);
-                var res = sTypeInstance.cast(value, {
-                    throw: settings.throw
-                });
-                if (res instanceof Error) {
-                    return value;
+        if (settings.cast === true) {
+            finalArgsMap = map_1.default(finalArgsMap, function (key, value, idx) {
+                // validate and cast value
+                if (settings.definition && settings.definition[key]) {
+                    var definitionObj = settings.definition[key];
+                    var sTypeInstance = new SType_1.default(definitionObj.type);
+                    var res = sTypeInstance.cast(value, {
+                        throw: settings.throw
+                    });
+                    if (res instanceof Error) {
+                        return value;
+                    }
+                    return res;
                 }
-                return res;
-            }
-        });
-        var completedArgs = completeArgsObject_1.default(finalArgsMap, settings);
-        return completedArgs;
-        var finalObj = {};
-        for (var key in definition) {
-            var value = argsObj[key];
-            if (value === undefined && settings.defaultObj[key] !== undefined) {
-                finalObj[key] = settings.defaultObj[key];
-                continue;
-            }
-            else if (argsObj[key] !== undefined) {
-                finalObj[key] = argsObj[key];
-            }
+            });
         }
-        return completeArgsObject_1.default(finalObj, settings);
+        if (settings.complete === true) {
+            finalArgsMap = completeArgsObject_1.default(finalArgsMap, settings);
+        }
+        return finalArgsMap;
     }
     function getArgNameByAlias(alias, definition) {
         var argNames = Object.keys(definition);

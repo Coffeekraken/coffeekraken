@@ -8,6 +8,7 @@ import __isChildProcess from '../is/childProcess';
 import __onProcessExit from '../process/onProcessExit';
 import __getFreePort from '../network/getFreePort';
 import __isPlainObject from '../is/plainObject';
+import __treatAsValue from '../promise/treatAsValue';
 
 /**
  * @name            SIpc
@@ -93,11 +94,6 @@ class SIpcServer extends __SPromise {
     return SIpcServer._globalServerInstance !== undefined;
   }
 
-  on(...args) {
-    console.log('ON', ...args);
-    return super.on(...args);
-  }
-
   /**
    * @name            getGlobalServer
    * @type            Function
@@ -118,37 +114,7 @@ class SIpcServer extends __SPromise {
     }
     SIpcServer._globalServerInstance = new SIpcServer();
     await SIpcServer._globalServerInstance.start();
-
-    return new Proxy(SIpcServer._globalServerInstance, {
-      // get: async function (target, name) {
-      //   // console.log('GET', SIpcServer._globalServerInstance, name);
-      //   // if (name === 'then') {
-      //   //   return await target[name];
-      //   // } else {
-      //   //   return target[name];
-      //   // }
-      //   console.log('GET', name);
-      //   let ret = await target[name];
-      //   coonsole.log(typeof ret);
-      //   console.log('re', ret);
-      //   if (ret === undefined) return target[name];
-      //   return ret;
-
-      //   // console.log(target, Object.keys(target), target.prototype);
-      //   return await target[name];
-      // }
-      get(target, prop, receiver) {
-        if (prop === 'then') return target;
-        return Reflect.get(...arguments);
-      }
-      // apply: function (target, thisArg, ...args) {
-      //   console.log('apply', target);
-      //   const fn = target.bind(thisArg);
-      //   return fn(...args);
-      // }
-    });
-
-    return [SIpcServer._globalServerInstance];
+    return __treatAsValue(SIpcServer._globalServerInstance);
   }
 
   /**
@@ -176,11 +142,6 @@ class SIpcServer extends __SPromise {
     this._ipcInstance = new __IPC();
     Object.assign(this._ipcInstance.config, this._settings);
   }
-
-  // async then() {
-  //   console.log('AAA', this.connexionParams);
-  //   return this;
-  // }
 
   /**
    * @name              id
@@ -215,7 +176,6 @@ class SIpcServer extends __SPromise {
     const serverData = await this._start(params);
     // listen for events
     this._ipcInstance.server.on('event', (data, socket) => {
-      console.log('event', data);
       // trigger the event using the SPromise method
       this.trigger(`${data.stack}`, data.data);
     });

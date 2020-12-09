@@ -7,6 +7,7 @@ import __uniqid from '../string/uniqid';
 import __wait from '../time/wait';
 import __toString from '../string/toString';
 import __env from '../core/env';
+import __treatAsValue from './treatAsValue';
 
 /**
  * @name                  SPromise
@@ -240,9 +241,9 @@ export = class SPromise extends Promise {
     });
   }
 
-  static get [Symbol.species]() {
-    return Promise;
-  }
+  // static get [Symbol.species]() {
+  //   return Promise;
+  // }
 
   /**
    * @name                  constructor
@@ -365,6 +366,10 @@ export = class SPromise extends Promise {
   get id() {
     return this._settings.id;
   }
+
+  // then(...args) {
+  //   super.then(...args);
+  // }
 
   /**
    * @name                    promiseState
@@ -654,10 +659,18 @@ export = class SPromise extends Promise {
   async trigger(what, arg, metas = {}) {
     if (this._isDestroyed) return;
 
-    // if (what === 'error') console.log('SSS', arg);
+    let treatAsValue = arg !== undefined && arg.treatAsValue;
+
+    if (treatAsValue) {
+      arg = __treatAsValue(arg);
+    }
 
     // triger the passed stacks
-    return this._triggerStacks(what, arg, metas);
+    let res = this._triggerStacks(what, arg, metas);
+    if (res && res.revokeProxy) {
+      res = res.revokeProxy();
+    }
+    return res;
   }
 
   /**
@@ -753,16 +766,6 @@ export = class SPromise extends Promise {
       // check if the stack is a glob pattern
       Object.keys(this._stacks).forEach((stackName) => {
         if (stackName === stack) return;
-        // const toAvoid = [
-        //   'catch',
-        //   'resolve',
-        //   'reject',
-        //   'finally',
-        //   'cancel'
-        // ];
-        // if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1)
-        //   return;
-
         if (__minimatch(stack, stackName)) {
           // the glob pattern match the triggered stack so add it to the stack array
           stackArray = [...stackArray, ...this._stacks[stackName]];
@@ -801,14 +804,16 @@ export = class SPromise extends Promise {
         metasObj
       );
       // check if the callback result is a promise
-      callbackResult = await callbackResult;
-      // if the settings tells that we have to pass each returned value to the next callback
+      if (callbackResult && !callbackResult.revokeProxy) {
+        callbackResult = await callbackResult;
+      }
+
       if (callbackResult !== undefined) {
+        // if the settings tells that we have to pass each returned value to the next callback
         currentCallbackReturnedValue = callbackResult;
       }
     }
 
-    // return the result
     return currentCallbackReturnedValue;
   }
 
@@ -840,7 +845,7 @@ export = class SPromise extends Promise {
       let currentStackResult = initialValue;
 
       for (let i = 0; i < stacks.length; i++) {
-        const stackResult = await this._triggerStack(
+        let stackResult = await this._triggerStack(
           stacks[i],
           currentStackResult,
           metas
@@ -1088,6 +1093,7 @@ export = class SPromise extends Promise {
 
     // destroying all the callbacks stacks registered
     delete this._stacks;
+
     delete this._resolvers;
     delete this._settings;
     this._isDestroyed = true;

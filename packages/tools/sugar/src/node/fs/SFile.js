@@ -12,7 +12,6 @@ const path_1 = __importDefault(require("path"));
 const extension_1 = __importDefault(require("./extension"));
 const filename_1 = __importDefault(require("./filename"));
 const SError_1 = __importDefault(require("../error/SError"));
-const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 /**
  * @name            SFile
  * @namespace       sugar.node.fs
@@ -25,17 +24,17 @@ const packageRoot_1 = __importDefault(require("../path/packageRoot"));
  * and get access to all the nice meta data like:
  * - name: The file name
  * - path: The full path to the file
- * - rootDir: The root directory specified through the settings.rootDir property
- * - relPath: The relative file path from the rootDir
+ * - cwd: The root directory specified through the settings.cwd property
+ * - relPath: The relative file path from the cwd
  * - dirPath: The path to the folder where is the file
  * - extension: The file extension
  * - size: The file size in megabytes
  * - sizeInBytes: The file siz in bytes
- * - exists: true if the file exists on the disk, false otherwise
+ * - exists:Bytestrue if the file exists on the disk, false otherwise
  *
  * @param         {String}          filepath        The file path you want to init
  * @param         {Object}          [settings={}]    An object of settings to configure your file instance:
- * - rootDir (__packageRoot()) {String}: Specify a root directory for the file. This is usefull to have then access to properties like ```relPath```, etc...
+ * - cwd (__packageRoot()) {String}: Specify a root directory for the file. This is usefull to have then access to properties like ```relPath```, etc...
  * - checkExistence (true) {Boolean}: Specify if you want this inited file to really exists on the disk or not
  *
  * @todo      interface
@@ -76,8 +75,38 @@ const Cls = class SFile extends SPromise_1.default {
          */
         this.size = -1;
         /**
-         * @name        sizeInBytes
+         * @name        sizeInGBytes
          * @type        Number
+         *
+         * Store the file size in gigabytes
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this.sizeInGBytes = -1;
+        /**
+         * @name        sizeInMBytes
+         * @type        Number
+         *
+         * Store the file size in megabytes
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this.sizeInMBytes = -1;
+        /**
+         * @name        sizeInKBytes
+         * @type        NuBytesber
+         *
+         * Store the file size in kilobytes
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this.sizeInKBytes = -1;
+        /**
+         * @name        sizeInBytes
+         * @type        NuBytesber
          *
          * Store the file size in bytes
          *
@@ -85,23 +114,26 @@ const Cls = class SFile extends SPromise_1.default {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this.sizeInBytes = -1;
+        this.treatAsValue = true;
         this._settings = deepMerge_1.default({
             id: 'SFile',
             checkExistence: true,
-            rootDir: packageRoot_1.default()
+            cwd: process.cwd(),
+            sizeIn: 'MBytes',
+            shrinkSizesTo: 3
         }, this._settings);
-        if (settings.rootDir && !filepath.includes(settings.rootDir)) {
-            filepath = path_1.default.resolve(settings.rootDir, filepath);
+        if (this._settings.cwd && !filepath.includes(this._settings.cwd)) {
+            filepath = path_1.default.resolve(this._settings.cwd, filepath);
         }
         // check if the file exists
         this.exists = fs_1.default.existsSync(filepath);
         // check if need to check for the file existence or not...
-        if (settings.checkExistence && !this.exists) {
+        if (this._settings.checkExistence && !this.exists) {
             throw new SError_1.default(`The passed filepath "<cyan>${filepath}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`);
         }
-        if (this._settings.rootDir) {
-            this.rootDir = this._settings.rootDir;
-            this.relPath = path_1.default.relative(this.rootDir, filepath);
+        if (this._settings.cwd) {
+            this.cwd = this._settings.cwd;
+            this.relPath = path_1.default.relative(this.cwd, filepath);
         }
         // save the file path
         this.path = filepath;
@@ -126,12 +158,17 @@ const Cls = class SFile extends SPromise_1.default {
     toObject() {
         return {
             exists: this.exists,
-            rootDir: this.rootDir,
+            cwd: this.cwd,
             path: this.path,
             relPath: this.relPath,
             name: this.name,
             extension: this.extension,
             dirPath: this.dirPath,
+            size: this.size,
+            sizeInBytes: this.sizeInBytes,
+            sizeInKBytes: this.sizeInKBytes,
+            sizeInMBytes: this.sizeInMBytes,
+            sizeInGBytes: this.sizeInGBytes,
             content: this.readSync()
         };
     }
@@ -151,7 +188,17 @@ const Cls = class SFile extends SPromise_1.default {
         // get the file stats
         const stats = fs_1.default.statSync(this.path);
         this.sizeInBytes = stats.size;
-        this.size = stats.size / 1000000;
+        this.sizeInGBytes = stats.sizes * 0.00000001;
+        this.sizeInMBytes = stats.size * 0.000001;
+        this.sizeInKBytes = stats.size * 0.001;
+        if (this._settings.shrinkSizesTo) {
+            this.sizeInBytes = Number(this.sizeInBytes.toFixed(this._settings.shrinkSizesTo));
+            this.sizeInKBytes = Number(this.sizeInKBytes.toFixed(this._settings.shrinkSizesTo));
+            this.sizeInMBytes = Number(this.sizeInMBytes.toFixed(this._settings.shrinkSizesTo));
+            this.sizeInGBytes = Number(this.sizeInGBytes.toFixed(this._settings.shrinkSizesTo));
+        }
+        // save the default size
+        this.size = this[`sizeIn${this._settings.sizeIn}`];
     }
     /**
      * @name        toString

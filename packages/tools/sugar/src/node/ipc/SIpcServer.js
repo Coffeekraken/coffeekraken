@@ -19,6 +19,7 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const onProcessExit_1 = __importDefault(require("../process/onProcessExit"));
 const getFreePort_1 = __importDefault(require("../network/getFreePort"));
 const plainObject_1 = __importDefault(require("../is/plainObject"));
+const treatAsValue_1 = __importDefault(require("../promise/treatAsValue"));
 /**
  * @name            SIpc
  * @namespace       sugar.node.ipc
@@ -106,10 +107,6 @@ class SIpcServer extends SPromise_1.default {
     static hasGlobalServer() {
         return SIpcServer._globalServerInstance !== undefined;
     }
-    on(...args) {
-        console.log('ON', ...args);
-        return super.on(...args);
-    }
     /**
      * @name            getGlobalServer
      * @type            Function
@@ -131,41 +128,9 @@ class SIpcServer extends SPromise_1.default {
             }
             SIpcServer._globalServerInstance = new SIpcServer();
             yield SIpcServer._globalServerInstance.start();
-            return new Proxy(SIpcServer._globalServerInstance, {
-                // get: async function (target, name) {
-                //   // console.log('GET', SIpcServer._globalServerInstance, name);
-                //   // if (name === 'then') {
-                //   //   return await target[name];
-                //   // } else {
-                //   //   return target[name];
-                //   // }
-                //   console.log('GET', name);
-                //   let ret = await target[name];
-                //   coonsole.log(typeof ret);
-                //   console.log('re', ret);
-                //   if (ret === undefined) return target[name];
-                //   return ret;
-                //   // console.log(target, Object.keys(target), target.prototype);
-                //   return await target[name];
-                // }
-                get(target, prop, receiver) {
-                    if (prop === 'then')
-                        return target;
-                    return Reflect.get(...arguments);
-                }
-                // apply: function (target, thisArg, ...args) {
-                //   console.log('apply', target);
-                //   const fn = target.bind(thisArg);
-                //   return fn(...args);
-                // }
-            });
-            return [SIpcServer._globalServerInstance];
+            return treatAsValue_1.default(SIpcServer._globalServerInstance);
         });
     }
-    // async then() {
-    //   console.log('AAA', this.connexionParams);
-    //   return this;
-    // }
     /**
      * @name              id
      * @type              String
@@ -199,7 +164,6 @@ class SIpcServer extends SPromise_1.default {
             const serverData = yield this._start(params);
             // listen for events
             this._ipcInstance.server.on('event', (data, socket) => {
-                console.log('event', data);
                 // trigger the event using the SPromise method
                 this.trigger(`${data.stack}`, data.data);
             });

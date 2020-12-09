@@ -153,7 +153,9 @@ function hotkey(key, settings = {}) {
 
     const promise = new __SPromise({
       id: 'hotkey'
-    })
+    });
+
+    promise
       .on('press', (key) => {
         if (settings.once) {
           promise.cancel();

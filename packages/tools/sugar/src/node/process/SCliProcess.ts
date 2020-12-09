@@ -5,6 +5,7 @@ import ISCliProcess, {
   ISCliProcessSettings
 } from './interface/ISCliProcess';
 import __onProcessExit from './onProcessExit';
+import __spawn from './spawn';
 
 /**
  * @name          SCliProcess
@@ -75,15 +76,20 @@ const Cls: ISCliProcessCtor = class SCliProcess
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async process(
-    params: object,
-    settings: ISCliProcessSettings = {}
-  ): Promise<any> {
+  process(params: object, settings: ISCliProcessSettings = {}): Promise<any> {
     // build the command line
     const command = __buildCommandLine(this.command, params, {
       definition: this.definition,
       alias: false
     });
+
+    const pro = __spawn(command, [], {
+      shell: true,
+      ipc: false
+    });
+
+    // @ts-ignore
+    return pro;
 
     // const childProcess = __childProcess.spawn(command, [], {
     //   env: settings.env,

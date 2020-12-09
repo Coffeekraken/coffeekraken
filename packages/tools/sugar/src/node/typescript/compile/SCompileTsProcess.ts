@@ -9,6 +9,7 @@ import ISCompileTsProcess, {
 import __SCompileTsProcessInterface from './interface/SCompileTsProcessInterface';
 
 import compileTs from './compileTs';
+import __treatAsValue from '../../promise/treatAsValue';
 
 /**
  * @name            STypescriptToJsProcess
@@ -61,13 +62,11 @@ const Cls: ISCompileTsProcessCtor = class SCompileTsProcess
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async process(
+  process(
     params?: ISCompileTsProcessParams,
     settings?: ISCompileTsProcessSettings
   ): Promise<any> {
-    const f = compileTs(params);
-    this.bindSPromise(f);
-    return f;
+    return compileTs(params, settings.tsc || {});
   }
 };
 

@@ -76,15 +76,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "minimatch", "../object/deepMerge", "../string/uniqid"], factory);
+        define(["require", "exports", "minimatch", "../object/deepMerge", "../string/uniqid", "./treatAsValue"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var minimatch_1 = __importDefault(require("minimatch"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var uniqid_1 = __importDefault(require("../string/uniqid"));
+    var treatAsValue_1 = __importDefault(require("./treatAsValue"));
     return /** @class */ (function (_super) {
         __extends(SPromise, _super);
+        // static get [Symbol.species]() {
+        //   return Promise;
+        // }
         /**
          * @name                  constructor
          * @type                  Function
@@ -347,13 +351,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 destSPromise.trigger(metas.stack, value, __assign(__assign({}, metas), { level: metas.level + 1 }));
             });
         };
-        Object.defineProperty(SPromise, Symbol.species, {
-            get: function () {
-                return Promise;
-            },
-            enumerable: false,
-            configurable: true
-        });
         Object.defineProperty(SPromise.prototype, "id", {
             /**
              * @name                    id
@@ -371,6 +368,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             configurable: true
         });
         Object.defineProperty(SPromise.prototype, "promiseState", {
+            // then(...args) {
+            //   super.then(...args);
+            // }
             /**
              * @name                    promiseState
              * @type                    String
@@ -686,12 +686,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         SPromise.prototype.trigger = function (what, arg, metas) {
             if (metas === void 0) { metas = {}; }
             return __awaiter(this, void 0, void 0, function () {
+                var treatAsValue, res;
                 return __generator(this, function (_a) {
                     if (this._isDestroyed)
                         return [2 /*return*/];
-                    // if (what === 'error') console.log('SSS', arg);
-                    // triger the passed stacks
-                    return [2 /*return*/, this._triggerStacks(what, arg, metas)];
+                    treatAsValue = arg !== undefined && arg.treatAsValue;
+                    if (treatAsValue) {
+                        arg = treatAsValue_1.default(arg);
+                    }
+                    res = this._triggerStacks(what, arg, metas);
+                    if (res && res.revokeProxy) {
+                        res = res.revokeProxy();
+                    }
+                    return [2 /*return*/, res];
                 });
             });
         };
@@ -793,15 +800,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                 Object.keys(this._stacks).forEach(function (stackName) {
                                     if (stackName === stack)
                                         return;
-                                    // const toAvoid = [
-                                    //   'catch',
-                                    //   'resolve',
-                                    //   'reject',
-                                    //   'finally',
-                                    //   'cancel'
-                                    // ];
-                                    // if (toAvoid.indexOf(stack) !== -1 || toAvoid.indexOf(stackName) !== -1)
-                                    //   return;
                                     if (minimatch_1.default(stack, stackName)) {
                                         // the glob pattern match the triggered stack so add it to the stack array
                                         stackArray = __spreadArrays(stackArray, _this._stacks[stackName]);
@@ -828,27 +826,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             i = 0;
                             _a.label = 1;
                         case 1:
-                            if (!(i < stackArray.length)) return [3 /*break*/, 4];
+                            if (!(i < stackArray.length)) return [3 /*break*/, 5];
                             item = stackArray[i];
                             // make sure the stack exist
                             if (!item.callback)
                                 return [2 /*return*/, currentCallbackReturnedValue];
                             callbackResult = item.callback(currentCallbackReturnedValue, metasObj);
+                            if (!(callbackResult && !callbackResult.revokeProxy)) return [3 /*break*/, 3];
                             return [4 /*yield*/, callbackResult];
                         case 2:
-                            // check if the callback result is a promise
                             callbackResult = _a.sent();
-                            // if the settings tells that we have to pass each returned value to the next callback
-                            if (callbackResult !== undefined) {
-                                currentCallbackReturnedValue = callbackResult;
-                            }
                             _a.label = 3;
                         case 3:
+                            if (callbackResult !== undefined) {
+                                // if the settings tells that we have to pass each returned value to the next callback
+                                currentCallbackReturnedValue = callbackResult;
+                            }
+                            _a.label = 4;
+                        case 4:
                             i++;
                             return [3 /*break*/, 1];
-                        case 4: 
-                        // return the result
-                        return [2 /*return*/, currentCallbackReturnedValue];
+                        case 5: return [2 /*return*/, currentCallbackReturnedValue];
                     }
                 });
             });

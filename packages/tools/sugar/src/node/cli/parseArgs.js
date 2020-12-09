@@ -60,6 +60,8 @@ function parseArgsString(string, settings = {}) {
     settings = deepMerge_1.default({
         throw: true,
         definition: null,
+        cast: true,
+        complete: true,
         defaultObj: {}
     }, settings);
     const argsObj = {};
@@ -159,36 +161,27 @@ function parseArgsString(string, settings = {}) {
             }
         });
     }
-    console.log('final', finalArgsMap);
     // cast params
-    finalArgsMap = map_1.default(finalArgsMap, (key, value, idx) => {
-        // validate and cast value
-        if (settings.definition && settings.definition[key]) {
-            const definitionObj = settings.definition[key];
-            const sTypeInstance = new SType_1.default(definitionObj.type);
-            const res = sTypeInstance.cast(value, {
-                throw: settings.throw
-            });
-            if (res instanceof Error) {
-                return value;
+    if (settings.cast === true) {
+        finalArgsMap = map_1.default(finalArgsMap, (key, value, idx) => {
+            // validate and cast value
+            if (settings.definition && settings.definition[key]) {
+                const definitionObj = settings.definition[key];
+                const sTypeInstance = new SType_1.default(definitionObj.type);
+                const res = sTypeInstance.cast(value, {
+                    throw: settings.throw
+                });
+                if (res instanceof Error) {
+                    return value;
+                }
+                return res;
             }
-            return res;
-        }
-    });
-    const completedArgs = completeArgsObject_1.default(finalArgsMap, settings);
-    return completedArgs;
-    const finalObj = {};
-    for (const key in definition) {
-        const value = argsObj[key];
-        if (value === undefined && settings.defaultObj[key] !== undefined) {
-            finalObj[key] = settings.defaultObj[key];
-            continue;
-        }
-        else if (argsObj[key] !== undefined) {
-            finalObj[key] = argsObj[key];
-        }
+        });
     }
-    return completeArgsObject_1.default(finalObj, settings);
+    if (settings.complete === true) {
+        finalArgsMap = completeArgsObject_1.default(finalArgsMap, settings);
+    }
+    return finalArgsMap;
 }
 function getArgNameByAlias(alias, definition) {
     const argNames = Object.keys(definition);

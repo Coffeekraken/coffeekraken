@@ -17,6 +17,7 @@ const blessed_1 = __importDefault(require("blessed"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const color_1 = __importDefault(require("../color/color"));
 const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
+const childProcess_1 = __importDefault(require("../is/childProcess"));
 const onProcessExit_1 = __importDefault(require("../process/onProcessExit"));
 let __activeScreen = null;
 /**
@@ -44,13 +45,15 @@ let __activeScreen = null;
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-hotkey_1.default('ctrl+c', {
-    once: true
-}).on('press', () => {
-    if (!global.screen)
-        return;
-    global.screen.destroy();
-});
+if (!childProcess_1.default()) {
+    hotkey_1.default('ctrl+c', {
+        once: true
+    }).on('press', () => {
+        if (!global.screen)
+            return;
+        global.screen.destroy();
+    });
+}
 module.exports = (_a = class SBlessedComponent extends blessed_1.default.box {
         /**
          * @name                  constructor

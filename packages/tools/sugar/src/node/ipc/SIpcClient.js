@@ -215,7 +215,9 @@ class SIpcClient {
     trigger(stack, data) {
         // preparing the object to send
         const eventObj = {
-            stack: (process.env.S_IPC_SPAWN_ID || '') + stack,
+            stack: process.env.S_IPC_SPAWN_ID
+                ? `${process.env.S_IPC_SPAWN_ID}.${stack}`
+                : stack,
             data
         };
         this._ipcInstance.of[this.serverId].emit('event', eventObj);

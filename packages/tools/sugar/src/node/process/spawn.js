@@ -17,6 +17,7 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const child_process_1 = require("child_process");
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const SIpcServer_1 = __importDefault(require("../ipc/SIpcServer"));
+const onProcessExit_1 = __importDefault(require("./onProcessExit"));
 /**
  * @name            spawn
  * @namespace       sugar.node.process
@@ -63,29 +64,39 @@ const fn = function spawn(command, args = [], settings = {}) {
             ipc: true
         }, settings);
         if (settings.ipc === true) {
-            console.log('COCOCOCO');
             ipcServer = yield SIpcServer_1.default.getGlobalServer();
-            console.log('SER', ipcServer);
             ipcServer.on(`${uniquid}.*`, (data, metas) => {
-                console.log(data, metas);
-                // trigger(metas.stack.replace(uniquid, ''), data);
+                trigger(metas.stack.replace(uniquid + '.', ''), data);
             });
         }
         const stderr = [], stdout = [];
-        childProcess = child_process_1.spawn(command, [], Object.assign(Object.assign({ shell: true }, settings), { env: Object.assign(Object.assign({}, (settings.env || {})), { S_IPC_SERVER: JSON.stringify(ipcServer.connexionParams), S_IPC_SPAWN_ID: uniquid }) }));
+        let envIpc = {};
+        if (ipcServer !== undefined) {
+            envIpc = {
+                S_IPC_SERVER: JSON.stringify(ipcServer.connexionParams),
+                S_IPC_SPAWN_ID: uniquid
+            };
+        }
+        childProcess = child_process_1.spawn(command, [], Object.assign(Object.assign({ shell: true }, settings), { env: Object.assign(Object.assign(Object.assign(Object.assign({}, process.env), { CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
+                    ? process.env.CHILD_PROCESS_LEVEL + 1
+                    : 1, IS_CHILD_PROCESS: true }), (settings.env || {})), envIpc) }));
+        onProcessExit_1.default(() => {
+            childProcess.kill();
+        });
         trigger('start');
         // listen for errors etc...
         if (childProcess.stdout) {
             childProcess.stdout.on('data', (data) => {
+                console.log('da', data.toString());
                 stdout.push(data.toString());
                 trigger('log', data.toString());
-                console.log(data.toString());
             });
         }
         if (childProcess.stderr) {
             childProcess.stderr.on('data', (data) => {
-                stderr.push(data);
-                trigger('error', data);
+                console.log('DDDDDDD', data.toString());
+                stderr.push(data.toString());
+                trigger('error', data.toString());
             });
         }
         childProcess.on('close', (code, signal) => {

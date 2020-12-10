@@ -52,4 +52,4 @@ function countLine(line, count = {}) {
     return newLine.length;
 }
 module.exports = countLine;
-//# sourceMappingURL=countLine.js.map
+//# sourceMappingURL=module.js.map

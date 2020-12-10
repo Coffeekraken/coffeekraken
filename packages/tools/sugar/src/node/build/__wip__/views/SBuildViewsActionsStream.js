@@ -79,4 +79,4 @@ module.exports = class SBuildViewsActionsStream extends __SActionsStream {
         }, settings));
     }
 };
-//# sourceMappingURL=SBuildViewsActionsStream.js.map
+//# sourceMappingURL=module.js.map

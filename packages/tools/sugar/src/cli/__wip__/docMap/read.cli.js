@@ -23,4 +23,4 @@ function docMapRead(stringArgs = '') {
 }
 exports.default = docMapRead;
 ;
-//# sourceMappingURL=read.cli.js.map
+//# sourceMappingURL=module.js.map

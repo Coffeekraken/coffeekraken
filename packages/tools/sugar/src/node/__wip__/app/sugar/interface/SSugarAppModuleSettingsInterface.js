@@ -33,4 +33,4 @@ module.exports = (_a = class SSugarAppModuleSettingsInterface extends __SInterfa
         }
     },
     _a);
-//# sourceMappingURL=SSugarAppModuleSettingsInterface.js.map
+//# sourceMappingURL=module.js.map

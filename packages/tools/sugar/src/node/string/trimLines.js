@@ -60,4 +60,4 @@ function trimLines(string, settings = {}) {
     return string;
 }
 module.exports = trimLines;
-//# sourceMappingURL=trimLines.js.map
+//# sourceMappingURL=module.js.map

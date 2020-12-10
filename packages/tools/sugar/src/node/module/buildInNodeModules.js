@@ -142,4 +142,4 @@ module.exports = {
         }
     }
 };
-//# sourceMappingURL=buildInNodeModules.js.map
+//# sourceMappingURL=module.js.map

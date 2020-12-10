@@ -7,3 +7,4 @@ module.exports = (__center) => {
         });
     });
 };
+//# sourceMappingURL=module.js.map

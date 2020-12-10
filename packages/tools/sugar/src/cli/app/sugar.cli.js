@@ -13,4 +13,4 @@ function sugar(stringArgs = '') {
     sugarAppProcess.run(stringArgs);
 }
 module.exports = sugar;
-//# sourceMappingURL=sugar.cli.js.map
+//# sourceMappingURL=module.js.map

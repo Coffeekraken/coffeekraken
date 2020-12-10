@@ -39,4 +39,4 @@ _SType_1.default.registerType(weaksetTypeDescriptor_1.default);
 _SType_1.default.registerType(setTypeDescriptor_1.default);
 _SType_1.default.registerType(classTypeDescriptor_1.default);
 module.exports = _SType_1.default;
-//# sourceMappingURL=sTypeRegisterDefaultDescriptors.js.map
+//# sourceMappingURL=module.js.map

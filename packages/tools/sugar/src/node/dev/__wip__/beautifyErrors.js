@@ -80,4 +80,4 @@ module.exports = function beautifyErrors() {
         }));
     });
 };
-//# sourceMappingURL=beautifyErrors.js.map
+//# sourceMappingURL=module.js.map

@@ -91,4 +91,4 @@ module.exports = class SDuration {
         return settings.suffix ? durationConverted : parseFloat(durationConverted);
     }
 };
-//# sourceMappingURL=SDuration.js.map
+//# sourceMappingURL=module.js.map

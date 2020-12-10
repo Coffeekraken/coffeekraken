@@ -247,4 +247,4 @@ const activeSpaceApi = {
     }
 };
 module.exports = activeSpaceApi;
-//# sourceMappingURL=activeSpace.js.map
+//# sourceMappingURL=module.js.map

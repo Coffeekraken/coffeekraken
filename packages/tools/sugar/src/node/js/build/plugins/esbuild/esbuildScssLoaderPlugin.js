@@ -53,4 +53,4 @@ module.exports = {
         }));
     }
 };
-//# sourceMappingURL=esbuildScssLoaderPlugin.js.map
+//# sourceMappingURL=module.js.map

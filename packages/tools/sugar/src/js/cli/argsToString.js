@@ -135,9 +135,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 settings.definition[argName].default)
                 value = settings.definition[argName].default;
             if (value === undefined ||
-                value === null
-            // || (defObj.type.toLowerCase() === 'boolean' && value === false)
-            ) {
+                value === null ||
+                (defObj.type &&
+                    defObj.type.toLowerCase() === 'boolean' &&
+                    value === false)) {
                 return;
             }
             var valueStr;
@@ -151,11 +152,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             val.toString !== undefined && typeof val.toString === 'function'
                                 ? val.toString()
                                 : toString_1.default(val);
-                        if (defObj.type.toLowerCase() === 'string')
+                        if (defObj.type && defObj.type.toLowerCase() === 'string')
                             valueStr = "\"" + valueStr + "\"";
                         // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
-                        if (defObj.type.toLowerCase().includes('object') ||
-                            defObj.type.toLowerCase().includes('array')) {
+                        if ((defObj.type && defObj.type.toLowerCase().includes('object')) ||
+                            (defObj.type && defObj.type.toLowerCase().includes('array'))) {
                             valueStr = "\"" + valueStr.split('"').join("'") + "\"";
                         }
                     }
@@ -171,11 +172,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         value.toString !== undefined && typeof value.toString === 'function'
                             ? value.toString()
                             : toString_1.default(value);
-                    if (defObj.type.toLowerCase() === 'string')
+                    if (defObj.type && defObj.type.toLowerCase() === 'string')
                         valueStr = "\"" + valueStr + "\"";
                     // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
-                    if (defObj.type.toLowerCase().includes('object') ||
-                        defObj.type.toLowerCase().includes('array')) {
+                    if ((defObj.type && defObj.type.toLowerCase().includes('object')) ||
+                        (defObj.type && defObj.type.toLowerCase().includes('array'))) {
                         valueStr = "\"" + valueStr.split('"').join("'") + "\"";
                     }
                 }

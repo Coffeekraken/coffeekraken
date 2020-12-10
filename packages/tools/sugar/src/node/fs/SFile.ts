@@ -11,6 +11,7 @@ import __getFilename from './filename';
 import __SFileSettingsInterface from './interface/SFileSettingsInterface';
 import __SError from '../error/SError';
 import __packageRoot from '../path/packageRoot';
+import __ensureDirSync from './ensureDirSync';
 
 import ISFile, {
   ISFileSettings,
@@ -203,7 +204,7 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
         checkExistence: true,
         cwd: process.cwd(),
         sizeIn: 'MBytes',
-        shrinkSizesTo: 3
+        shrinkSizesTo: 2
       },
       this._settings
     );
@@ -235,6 +236,10 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
 
     if (this.exists) {
       this.update();
+      const watcher = __fs.watch(this.path, (event) => {
+        if (event !== 'change' && watcher) watcher.close();
+        this.update();
+      });
     }
   }
 
@@ -400,6 +405,7 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
       beautify: true,
       highlight: false
     });
+    __ensureDirSync(this.dirPath);
     const result: any = __fs.writeFile(this.path, data, settings);
     this.update();
     return result;
@@ -427,6 +433,7 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
       beautify: true,
       highlight: false
     });
+    __ensureDirSync(this.dirPath);
     const result: any = __fs.writeFileSync(this.path, data, settings);
     this.update();
     return result;

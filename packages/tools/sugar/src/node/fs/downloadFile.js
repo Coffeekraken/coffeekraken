@@ -66,4 +66,4 @@ function downloadFileFn(downloadUrl, destinationPath = downloads_folder_1.defaul
     });
 }
 module.exports = downloadFileFn;
-//# sourceMappingURL=downloadFile.js.map
+//# sourceMappingURL=module.js.map

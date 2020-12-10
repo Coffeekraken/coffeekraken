@@ -125,9 +125,10 @@ function argsToString(args, settings = {}) {
             settings.definition[argName].default)
             value = settings.definition[argName].default;
         if (value === undefined ||
-            value === null
-        // || (defObj.type.toLowerCase() === 'boolean' && value === false)
-        ) {
+            value === null ||
+            (defObj.type &&
+                defObj.type.toLowerCase() === 'boolean' &&
+                value === false)) {
             return;
         }
         let valueStr;
@@ -141,11 +142,11 @@ function argsToString(args, settings = {}) {
                         val.toString !== undefined && typeof val.toString === 'function'
                             ? val.toString()
                             : toString_1.default(val);
-                    if (defObj.type.toLowerCase() === 'string')
+                    if (defObj.type && defObj.type.toLowerCase() === 'string')
                         valueStr = `"${valueStr}"`;
                     // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
-                    if (defObj.type.toLowerCase().includes('object') ||
-                        defObj.type.toLowerCase().includes('array')) {
+                    if ((defObj.type && defObj.type.toLowerCase().includes('object')) ||
+                        (defObj.type && defObj.type.toLowerCase().includes('array'))) {
                         valueStr = `"${valueStr.split('"').join("'")}"`;
                     }
                 }
@@ -161,11 +162,11 @@ function argsToString(args, settings = {}) {
                     value.toString !== undefined && typeof value.toString === 'function'
                         ? value.toString()
                         : toString_1.default(value);
-                if (defObj.type.toLowerCase() === 'string')
+                if (defObj.type && defObj.type.toLowerCase() === 'string')
                     valueStr = `"${valueStr}"`;
                 // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
-                if (defObj.type.toLowerCase().includes('object') ||
-                    defObj.type.toLowerCase().includes('array')) {
+                if ((defObj.type && defObj.type.toLowerCase().includes('object')) ||
+                    (defObj.type && defObj.type.toLowerCase().includes('array'))) {
                     valueStr = `"${valueStr.split('"').join("'")}"`;
                 }
             }
@@ -175,4 +176,4 @@ function argsToString(args, settings = {}) {
     return cliArray.join(' ').replace(/(\s){2,999999}/gm, ' ');
 }
 module.exports = argsToString;
-//# sourceMappingURL=argsToString.js.map
+//# sourceMappingURL=module.js.map

@@ -21,4 +21,4 @@ module.exports = (obj, path, value) => {
     o[a[0]] = value;
     return get_1.default(obj, path);
 };
-//# sourceMappingURL=set.js.map
+//# sourceMappingURL=module.js.map

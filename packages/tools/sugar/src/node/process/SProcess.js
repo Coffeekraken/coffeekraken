@@ -570,4 +570,4 @@ module.exports = class SProcess extends SPromise_1.default {
         });
     }
 };
-//# sourceMappingURL=SProcess.js.map
+//# sourceMappingURL=module.js.map

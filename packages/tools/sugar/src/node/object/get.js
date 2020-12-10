@@ -20,4 +20,4 @@ module.exports = (obj, path) => {
     }
     return o;
 };
-//# sourceMappingURL=get.js.map
+//# sourceMappingURL=module.js.map

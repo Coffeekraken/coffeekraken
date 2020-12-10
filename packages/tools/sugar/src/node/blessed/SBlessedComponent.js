@@ -287,4 +287,4 @@ module.exports = (_a = class SBlessedComponent extends blessed_1.default.box {
      */
     _a._framerateInterval = null,
     _a);
-//# sourceMappingURL=SBlessedComponent.js.map
+//# sourceMappingURL=module.js.map

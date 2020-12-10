@@ -8,6 +8,10 @@ import __wait from '../time/wait';
 import __toString from '../string/toString';
 import __env from '../core/env';
 import __treatAsValue from './treatAsValue';
+import {
+  ITreatAsValueSettings,
+  ITreatAsValueProxy
+} from './interface/ITreatAsValue';
 
 /**
  * @name                  SPromise
@@ -241,6 +245,28 @@ export = class SPromise extends Promise {
     });
   }
 
+  /**
+   * @name        treatAsValue
+   * @type        Function
+   * @static
+   *
+   * This function allows you to wrap a promise in a ```resolve``` call to prevent
+   * this promise to be treated as a "chaining" promise but to be treated as
+   * normal value passed in the resolve call.
+   *
+   * @param           {Promise}          promise          The promise to treat as a simple value
+   * @return          {ITreatAsValueProxy}                             A proxy of this promise that will act just like a normal promise once getted by the "await" statement
+   *
+   * @since      2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  static treatAsValue(
+    promise: Promise,
+    settings: ITreatAsValueSettings = {}
+  ): ITreatAsValueProxy {
+    return __treatAsValue(promise, settings);
+  }
+
   // static get [Symbol.species]() {
   //   return Promise;
   // }
@@ -387,6 +413,27 @@ export = class SPromise extends Promise {
    */
   get promiseState() {
     return this._promiseState;
+  }
+
+  /**
+   * @name                  treatAsValue
+   * @type                  Function
+   *
+   * This method wrap the promise into a revocable proxy to allow
+   * passing this Promise to methods like ```then```, etc... and make
+   * this promise treated as a value and not as a chained promise.
+   * Once you have done with this behavior, you just have to call
+   * the ```restorePromiseBehavior``` on the returned proxy and
+   * the default promise behavior will be restored
+   *
+   * @param         {ITreatAsValueSettings}       [settings={}]     Some settings to configure your custom behavior
+   * @return        {ITreatAsValueProxy}                            A custom proxy that you can revoke using the ```restorePromiseBehavior```
+   *
+   * @since         2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  treatAsValue(settings: ITreatAsValueSettings = {}): ITreatAsValueProxy {
+    return __treatAsValue(this, settings);
   }
 
   /**
@@ -667,8 +714,8 @@ export = class SPromise extends Promise {
 
     // triger the passed stacks
     let res = this._triggerStacks(what, arg, metas);
-    if (res && res.revokeProxy) {
-      res = res.revokeProxy();
+    if (res && res.revoke) {
+      res = res.restorePromiseBehavior();
     }
     return res;
   }
@@ -804,7 +851,7 @@ export = class SPromise extends Promise {
         metasObj
       );
       // check if the callback result is a promise
-      if (callbackResult && !callbackResult.revokeProxy) {
+      if (callbackResult && !callbackResult.restorePromiseBehavior) {
         callbackResult = await callbackResult;
       }
 

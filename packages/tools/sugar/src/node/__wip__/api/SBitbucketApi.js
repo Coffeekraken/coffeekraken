@@ -48,4 +48,4 @@ class SBitbucketApi extends SApi_1.default {
     }
 }
 exports.default = SBitbucketApi;
-//# sourceMappingURL=SBitbucketApi.js.map
+//# sourceMappingURL=module.js.map

@@ -3,4 +3,4 @@
 module.exports = () => {
     require('./node.cli')();
 };
-//# sourceMappingURL=all.cli.js.map
+//# sourceMappingURL=module.js.map

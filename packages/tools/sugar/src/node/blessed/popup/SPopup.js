@@ -146,4 +146,4 @@ module.exports = class SBlessedPopup extends SBlessedComponent_1.default {
         super.update();
     }
 };
-//# sourceMappingURL=SPopup.js.map
+//# sourceMappingURL=module.js.map

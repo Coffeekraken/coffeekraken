@@ -40,4 +40,4 @@ function hex2rgba(hex) {
     };
 }
 module.exports = hex2rgba;
-//# sourceMappingURL=hex2rgba.js.map
+//# sourceMappingURL=module.js.map

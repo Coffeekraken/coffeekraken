@@ -27,4 +27,4 @@ function isUcBrowser(ua = navigator.userAgent) {
     return ua.match(/UCBrowser/i) !== null;
 }
 module.exports = isUcBrowser;
-//# sourceMappingURL=ucBrowser.js.map
+//# sourceMappingURL=module.js.map

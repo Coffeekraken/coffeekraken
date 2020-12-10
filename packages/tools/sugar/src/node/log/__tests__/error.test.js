@@ -1,3 +1,4 @@
 "use strict";
 const __error = require('../error');
-require('../_js/log/__tests__/error')(__error);
+require('../log/__tests__/error')(__error);
+//# sourceMappingURL=module.js.map

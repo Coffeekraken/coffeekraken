@@ -12,6 +12,7 @@ const path_1 = __importDefault(require("path"));
 const extension_1 = __importDefault(require("./extension"));
 const filename_1 = __importDefault(require("./filename"));
 const SError_1 = __importDefault(require("../error/SError"));
+const ensureDirSync_1 = __importDefault(require("./ensureDirSync"));
 /**
  * @name            SFile
  * @namespace       sugar.node.fs
@@ -120,7 +121,7 @@ const Cls = class SFile extends SPromise_1.default {
             checkExistence: true,
             cwd: process.cwd(),
             sizeIn: 'MBytes',
-            shrinkSizesTo: 3
+            shrinkSizesTo: 2
         }, this._settings);
         if (this._settings.cwd && !filepath.includes(this._settings.cwd)) {
             filepath = path_1.default.resolve(this._settings.cwd, filepath);
@@ -142,6 +143,11 @@ const Cls = class SFile extends SPromise_1.default {
         this.dirPath = path_1.default.dirname(filepath);
         if (this.exists) {
             this.update();
+            const watcher = fs_1.default.watch(this.path, (event) => {
+                if (event !== 'change' && watcher)
+                    watcher.close();
+                this.update();
+            });
         }
     }
     /**
@@ -281,6 +287,7 @@ const Cls = class SFile extends SPromise_1.default {
             beautify: true,
             highlight: false
         });
+        ensureDirSync_1.default(this.dirPath);
         const result = fs_1.default.writeFile(this.path, data, settings);
         this.update();
         return result;
@@ -304,10 +311,11 @@ const Cls = class SFile extends SPromise_1.default {
             beautify: true,
             highlight: false
         });
+        ensureDirSync_1.default(this.dirPath);
         const result = fs_1.default.writeFileSync(this.path, data, settings);
         this.update();
         return result;
     }
 };
 module.exports = Cls;
-//# sourceMappingURL=SFile.js.map
+//# sourceMappingURL=module.js.map

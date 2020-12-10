@@ -4,4 +4,5 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const argsToObject_1 = __importDefault(require("../argsToObject"));
-require('../_js/cli/__tests__/argsToObject')(argsToObject_1.default);
+require('../cli/__tests__/argsToObject')(argsToObject_1.default);
+//# sourceMappingURL=module.js.map

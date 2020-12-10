@@ -87,6 +87,12 @@ const fn: ISpawn = function spawn(
     childProcess = __spawn(command, [], {
       shell: true,
       ...settings,
+      stdio:
+        settings.stdio === false
+          ? 'ignore'
+          : settings.stdio !== undefined
+          ? settings.stdio
+          : null,
       env: {
         ...process.env,
         CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
@@ -107,14 +113,12 @@ const fn: ISpawn = function spawn(
     // listen for errors etc...
     if (childProcess.stdout) {
       childProcess.stdout.on('data', (data) => {
-        console.log('da', data.toString());
         stdout.push(data.toString());
         trigger('log', data.toString());
       });
     }
     if (childProcess.stderr) {
       childProcess.stderr.on('data', (data) => {
-        console.log('DDDDDDD', data.toString());
         stderr.push(data.toString());
         trigger('error', data.toString());
       });
@@ -144,6 +148,8 @@ const fn: ISpawn = function spawn(
 
   // handle cancel
   promise.on('cancel', async () => {
+    console.log('CANCELED');
+
     if (ipcServer !== undefined) {
       ipcServer.stop();
     }

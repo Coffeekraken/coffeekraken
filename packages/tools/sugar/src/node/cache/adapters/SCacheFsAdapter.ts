@@ -40,7 +40,7 @@ export = class SCacheFsAdapter extends __SCacheAdapter {
    * Construct the SCacheFsAdapter instance with the settings passed in object format. See description bellow.
    *
    * @param         {Object}          [settings={}]             An object to configure the SCacheFsAdapter instance. This is specific to each adapters.settings.settings...
-   * - rootDir (config.cache.fs.rootDir) {String}: Specify the root directory where to put all the files to cache
+   * - rootDir (config.storage.cacheFolderPath) {String}: Specify the root directory where to put all the files to cache
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -48,7 +48,8 @@ export = class SCacheFsAdapter extends __SCacheAdapter {
     super(
       __deepMerge(
         {
-          rootDir: __sugarConfig('cache.fs.rootDir') || `${__tmpDir()}/SCache`
+          rootDir:
+            __sugarConfig('storage.cacheFolderPath') || `${__tmpDir()}/SCache`
         },
         settings
       )

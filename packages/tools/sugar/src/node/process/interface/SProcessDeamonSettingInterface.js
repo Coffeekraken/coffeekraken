@@ -24,4 +24,4 @@ module.exports = (_a = class SProcessDeamonSettingInterface extends SInterface_1
         }
     },
     _a);
-//# sourceMappingURL=SProcessDeamonSettingInterface.js.map
+//# sourceMappingURL=module.js.map

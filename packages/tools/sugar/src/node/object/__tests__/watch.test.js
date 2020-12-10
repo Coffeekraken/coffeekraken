@@ -1,3 +1,4 @@
 "use strict";
 const __watch = require('../watch');
-require('../_js/object/__tests__/watch')(__watch);
+require('../object/__tests__/watch')(__watch);
+//# sourceMappingURL=module.js.map

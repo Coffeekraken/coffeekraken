@@ -51,4 +51,4 @@ function isInPackage(name, from = process.cwd(), highest = false) {
     return false;
 }
 module.exports = isInPackage;
-//# sourceMappingURL=isInPackage.js.map
+//# sourceMappingURL=module.js.map

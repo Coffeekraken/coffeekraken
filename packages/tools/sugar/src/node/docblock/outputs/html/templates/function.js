@@ -8,4 +8,4 @@ module.exports = `
     {{include "..."}}
 </div>
 `;
-//# sourceMappingURL=function.js.map
+//# sourceMappingURL=module.js.map

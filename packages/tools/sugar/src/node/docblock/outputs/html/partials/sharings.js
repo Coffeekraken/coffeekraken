@@ -8,4 +8,4 @@ module.exports = `
   </a>
 </div>
 `;
-//# sourceMappingURL=sharings.js.map
+//# sourceMappingURL=module.js.map

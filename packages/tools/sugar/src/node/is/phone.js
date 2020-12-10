@@ -34,4 +34,4 @@ function isPhone(ua = navigator.userAgent) {
     return md.phone() !== null;
 }
 module.exports = isPhone;
-//# sourceMappingURL=phone.js.map
+//# sourceMappingURL=module.js.map

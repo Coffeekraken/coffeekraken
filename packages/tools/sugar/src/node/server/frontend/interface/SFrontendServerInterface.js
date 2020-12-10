@@ -37,4 +37,4 @@ module.exports = (_a = class SFrontendServerInterface extends SInterface_1.defau
         }
     },
     _a);
-//# sourceMappingURL=SFrontendServerInterface.js.map
+//# sourceMappingURL=module.js.map

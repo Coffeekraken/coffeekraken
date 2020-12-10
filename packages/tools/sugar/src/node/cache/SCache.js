@@ -362,4 +362,4 @@ module.exports = class SCache {
         return this._settings.stringify(object);
     }
 };
-//# sourceMappingURL=SCache.js.map
+//# sourceMappingURL=module.js.map

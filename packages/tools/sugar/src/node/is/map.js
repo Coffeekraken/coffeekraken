@@ -30,4 +30,4 @@ function isMap(value) {
     return value instanceof Map;
 }
 module.exports = isMap;
-//# sourceMappingURL=map.js.map
+//# sourceMappingURL=module.js.map

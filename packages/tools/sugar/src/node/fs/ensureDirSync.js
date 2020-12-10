@@ -33,4 +33,4 @@ function ensureDirSync(dir) {
     fs_extra_1.default.ensureDirSync(dir);
 }
 module.exports = ensureDirSync;
-//# sourceMappingURL=ensureDirSync.js.map
+//# sourceMappingURL=module.js.map

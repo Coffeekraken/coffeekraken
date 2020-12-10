@@ -71,4 +71,4 @@ class STestJestOutputReporter {
     }
 }
 module.exports = STestJestOutputReporter;
-//# sourceMappingURL=STestJestOutputReporter.js.map
+//# sourceMappingURL=module.js.map

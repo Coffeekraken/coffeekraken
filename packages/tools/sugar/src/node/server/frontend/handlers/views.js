@@ -57,4 +57,4 @@ module.exports = function views(req, res, settings = {}) {
         res.send(notFoundObj.content);
     });
 };
-//# sourceMappingURL=views.js.map
+//# sourceMappingURL=module.js.map

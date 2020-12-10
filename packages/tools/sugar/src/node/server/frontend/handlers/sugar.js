@@ -75,4 +75,4 @@ function sugar(req, res, settings = {}) {
     });
 }
 module.exports = sugar;
-//# sourceMappingURL=sugar.js.map
+//# sourceMappingURL=module.js.map

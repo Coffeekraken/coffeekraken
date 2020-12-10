@@ -1,3 +1,4 @@
 "use strict";
 const __filter = require('../filter');
-require('../_js/object/__tests__/filter')(__filter);
+require('../object/__tests__/filter')(__filter);
+//# sourceMappingURL=module.js.map

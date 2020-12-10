@@ -65,4 +65,4 @@ function onProcessExit(callback) {
     __onProcessExitCallbacks.push(callback);
 }
 module.exports = onProcessExit;
-//# sourceMappingURL=onProcessExit.js.map
+//# sourceMappingURL=module.js.map

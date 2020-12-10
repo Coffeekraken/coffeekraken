@@ -66,4 +66,4 @@ function parse(color, format = 'rgba') {
     }
 }
 module.exports = parse;
-//# sourceMappingURL=parse.js.map
+//# sourceMappingURL=module.js.map

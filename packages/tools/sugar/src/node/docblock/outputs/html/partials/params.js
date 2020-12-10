@@ -35,4 +35,4 @@ module.exports = `
     </div>
   {{/if}}
 `;
-//# sourceMappingURL=params.js.map
+//# sourceMappingURL=module.js.map

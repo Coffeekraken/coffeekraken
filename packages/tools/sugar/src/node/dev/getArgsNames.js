@@ -52,4 +52,4 @@ function getArgsNames(func) {
     return params;
 }
 module.exports = getArgsNames;
-//# sourceMappingURL=getArgsNames.js.map
+//# sourceMappingURL=module.js.map

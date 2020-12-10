@@ -1,3 +1,4 @@
 "use strict";
 const __convert = require('../convert');
-require('../_js/color/__tests__/convert')(__convert);
+require('../color/__tests__/convert')(__convert);
+//# sourceMappingURL=module.js.map

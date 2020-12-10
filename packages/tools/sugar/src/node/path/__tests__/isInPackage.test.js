@@ -5,3 +5,4 @@ describe('sugar.node.path.isInPackage', () => {
         expect(__isInPackage('@coffeekraken/sugar', __dirname)).toBe(true);
     });
 });
+//# sourceMappingURL=module.js.map

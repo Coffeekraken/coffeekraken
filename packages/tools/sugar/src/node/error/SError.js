@@ -77,4 +77,4 @@ module.exports = class SError extends Error {
         this.stack = trimLines_js_1.default(parseHtml_1.default(stack.join('')));
     }
 };
-//# sourceMappingURL=SError.js.map
+//# sourceMappingURL=module.js.map

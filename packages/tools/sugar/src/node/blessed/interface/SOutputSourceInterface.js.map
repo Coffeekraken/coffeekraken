@@ -1,1 +1,1 @@
-{"version":3,"file":"SOutputSourceInterface.js","sourceRoot":"","sources":["SOutputSourceInterface.ts"],"names":[],"mappings":";AAAA,cAAc;;;;;AAEd,4EAAsD;AAmBtD,uBAAS,MAAM,sBAAuB,SAAQ,oBAAY;KAOzD;IANQ,aAAU,GAAG;QAClB,EAAE,EAAE;YACF,IAAI,EAAE,UAAU;YAChB,QAAQ,EAAE,IAAI;SACf;KACD;QACF"}
+{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":";AAAA,cAAc;;;;;AAEd,4EAAsD;AAmBtD,uBAAS,MAAM,sBAAuB,SAAQ,oBAAY;KAOzD;IANQ,aAAU,GAAG;QAClB,EAAE,EAAE;YACF,IAAI,EAAE,UAAU;YAChB,QAAQ,EAAE,IAAI;SACf;KACD;QACF"}

@@ -5,10 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const fs_1 = __importDefault(require("fs"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
-const tmpDir_1 = __importDefault(require("../../fs/tmpDir"));
 const writeFileSync_1 = __importDefault(require("../../fs/writeFileSync"));
 const diff_1 = __importDefault(require("../../object/diff"));
 const SConfigAdapter_1 = __importDefault(require("./SConfigAdapter"));
+const localDir_1 = __importDefault(require("../../fs/localDir"));
 module.exports = class SConfigFsAdapter extends SConfigAdapter_1.default {
     constructor(settings = {}) {
         settings = deepMerge_1.default({
@@ -16,7 +16,7 @@ module.exports = class SConfigFsAdapter extends SConfigAdapter_1.default {
             filename: '[name].config.js',
             defaultConfigPath: null,
             appConfigPath: `${process.cwd()}/[filename]`,
-            userConfigPath: `${tmpDir_1.default()}/[filename]`
+            userConfigPath: `${localDir_1.default()}/[filename]`
         }, settings);
         super(settings);
         this.settings.filename = this.settings.filename.replace('[name]', this.name);
@@ -63,4 +63,4 @@ module.exports = class SConfigFsAdapter extends SConfigAdapter_1.default {
         return true;
     }
 };
-//# sourceMappingURL=SConfigFsAdapter.js.map
+//# sourceMappingURL=module.js.map

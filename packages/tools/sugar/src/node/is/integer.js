@@ -31,4 +31,4 @@ function isInteger(data) {
         })(parseFloat(data)));
 }
 module.exports = isInteger;
-//# sourceMappingURL=integer.js.map
+//# sourceMappingURL=module.js.map

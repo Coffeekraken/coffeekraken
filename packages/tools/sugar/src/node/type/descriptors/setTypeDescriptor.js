@@ -32,4 +32,4 @@ const descriptor = {
     }
 };
 module.exports = descriptor;
-//# sourceMappingURL=setTypeDescriptor.js.map
+//# sourceMappingURL=module.js.map

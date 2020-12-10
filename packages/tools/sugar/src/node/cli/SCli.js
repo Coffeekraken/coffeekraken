@@ -306,4 +306,4 @@ class SCli extends SPromise_1.default {
     }
 }
 module.exports = SCliInterface_1.default.implements(SCli);
-//# sourceMappingURL=SCli.js.map
+//# sourceMappingURL=module.js.map

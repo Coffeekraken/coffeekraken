@@ -33,4 +33,4 @@ const descriptor = {
     })
 };
 module.exports = descriptor;
-//# sourceMappingURL=stringTypeDescriptor.js.map
+//# sourceMappingURL=module.js.map

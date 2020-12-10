@@ -89,4 +89,4 @@ module.exports = (_a = class SBuildJsCliInterface extends SInterface_1.default {
         }
     },
     _a);
-//# sourceMappingURL=SBuildJsInterface.js.map
+//# sourceMappingURL=module.js.map

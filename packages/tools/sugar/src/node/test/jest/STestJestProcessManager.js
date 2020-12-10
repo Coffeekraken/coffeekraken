@@ -78,4 +78,4 @@ module.exports = (_a = class STestJestProcess extends SChildProcessManager_1.def
     },
     _a.interface = STestJestInterface_1.default,
     _a);
-//# sourceMappingURL=STestJestProcessManager.js.map
+//# sourceMappingURL=module.js.map

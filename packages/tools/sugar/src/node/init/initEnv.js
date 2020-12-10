@@ -26,4 +26,4 @@ function initEnv() {
     process.env.PACKAGE_ROOT = packageRoot_1.default();
 }
 module.exports = initEnv;
-//# sourceMappingURL=initEnv.js.map
+//# sourceMappingURL=module.js.map

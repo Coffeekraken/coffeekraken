@@ -51,4 +51,4 @@ module.exports = class SBlessedWindowBox extends SBlessedComponent_1.default {
         });
     }
 };
-//# sourceMappingURL=SWindowBox.js.map
+//# sourceMappingURL=module.js.map

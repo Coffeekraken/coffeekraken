@@ -322,4 +322,4 @@ module.exports = class SConfig {
         return true;
     }
 };
-//# sourceMappingURL=SConfig.js.map
+//# sourceMappingURL=module.js.map

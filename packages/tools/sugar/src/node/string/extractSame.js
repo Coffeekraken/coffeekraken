@@ -50,4 +50,4 @@ function extractSame(string1, string2, multiple = false) {
     return multiple ? extractedArray : extractedArray[0];
 }
 module.exports = extractSame;
-//# sourceMappingURL=extractSame.js.map
+//# sourceMappingURL=module.js.map

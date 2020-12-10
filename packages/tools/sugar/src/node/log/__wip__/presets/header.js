@@ -44,4 +44,4 @@ module.exports = function header(title, description = null, infos = {}) {
     // return the message
     return message;
 };
-//# sourceMappingURL=header.js.map
+//# sourceMappingURL=module.js.map

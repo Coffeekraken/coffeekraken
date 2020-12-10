@@ -30,4 +30,4 @@ const descriptor = {
     }
 };
 module.exports = descriptor;
-//# sourceMappingURL=arrayTypeDescriptor.js.map
+//# sourceMappingURL=module.js.map

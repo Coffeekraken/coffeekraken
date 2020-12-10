@@ -185,4 +185,4 @@ function parseSchema(url, schema) {
     };
 }
 module.exports = parseSchema;
-//# sourceMappingURL=parseSchema.js.map
+//# sourceMappingURL=module.js.map

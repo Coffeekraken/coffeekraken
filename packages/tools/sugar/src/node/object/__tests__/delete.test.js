@@ -1,3 +1,4 @@
 "use strict";
 const __delete = require('../delete');
-require('../_js/object/__tests__/delete')(__delete);
+require('../object/__tests__/delete')(__delete);
+//# sourceMappingURL=module.js.map

@@ -37,4 +37,4 @@ function toQueryString(obj) {
             .join('&'));
 }
 module.exports = toQueryString;
-//# sourceMappingURL=toQueryString.js.map
+//# sourceMappingURL=module.js.map

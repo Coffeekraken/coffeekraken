@@ -68,4 +68,4 @@ function exitCleanup(settings = {}) {
     });
 }
 module.exports = exitCleanup;
-//# sourceMappingURL=exitCleanup.js.map
+//# sourceMappingURL=module.js.map

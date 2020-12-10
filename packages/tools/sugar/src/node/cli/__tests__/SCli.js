@@ -5,7 +5,7 @@ exports.default = (__SCli, __SInterface) => {
         it('Check that the SCli class work correctly', () => {
             class MyInterface extends __SInterface {
             }
-            MyInterface.definitionObj = {
+            MyInterface.definition = {
                 hostname: {
                     type: 'String',
                     description: 'Server hostname',
@@ -45,3 +45,4 @@ exports.default = (__SCli, __SInterface) => {
         });
     });
 };
+//# sourceMappingURL=module.js.map

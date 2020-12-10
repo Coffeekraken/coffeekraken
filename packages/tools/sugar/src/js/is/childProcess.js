@@ -34,7 +34,9 @@
     function childProcess() {
         if (!global || !global.process)
             return false;
-        return (global.process.send !== undefined || global.process.env.IS_CHILD_PROCESS);
+        return (global.process.send !== undefined ||
+            global.process.env.IS_CHILD_PROCESS ||
+            global.process.ppid);
     }
     return childProcess;
 });

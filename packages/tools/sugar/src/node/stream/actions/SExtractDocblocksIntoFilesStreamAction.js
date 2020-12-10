@@ -103,4 +103,4 @@ module.exports = (_a = class SExtractDocblocksIntoFiles extends SActionsStreamAc
      */
     _a.interface = SExtractDocblocksIntoFilesInterface,
     _a);
-//# sourceMappingURL=SExtractDocblocksIntoFilesStreamAction.js.map
+//# sourceMappingURL=module.js.map

@@ -16,4 +16,4 @@ const link_cli_1 = __importDefault(require("./link.cli"));
 module.exports = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function* () {
     yield link_cli_1.default(stringArgs);
 });
-//# sourceMappingURL=all.cli.js.map
+//# sourceMappingURL=module.js.map

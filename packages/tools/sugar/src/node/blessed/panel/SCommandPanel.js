@@ -1040,4 +1040,4 @@ module.exports = class SCommandPanel extends SBlessedComponent_1.default {
         });
     }
 };
-//# sourceMappingURL=SCommandPanel.js.map
+//# sourceMappingURL=module.js.map

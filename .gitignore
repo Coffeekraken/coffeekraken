@@ -1,6 +1,7 @@
 node_modules
 .cache
 .dev
+.local
 views/tmp
 *.tmp
 .DS_Store

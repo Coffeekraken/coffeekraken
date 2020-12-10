@@ -203,4 +203,4 @@ module.exports = class SGoogleCustomSearch {
         });
     }
 };
-//# sourceMappingURL=SGoogleCustomSearch.js.map
+//# sourceMappingURL=module.js.map

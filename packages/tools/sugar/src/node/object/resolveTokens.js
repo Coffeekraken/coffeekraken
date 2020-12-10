@@ -60,4 +60,4 @@ function resolveTokens(object) {
     return proxiedObject;
 }
 module.exports = resolveTokens;
-//# sourceMappingURL=resolveTokens.js.map
+//# sourceMappingURL=module.js.map

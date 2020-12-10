@@ -30,4 +30,4 @@ function hasExitCleanup() {
         : false;
 }
 module.exports = hasExitCleanup;
-//# sourceMappingURL=hasExitCleanup.js.map
+//# sourceMappingURL=module.js.map

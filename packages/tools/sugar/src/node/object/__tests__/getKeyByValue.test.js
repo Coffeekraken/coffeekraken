@@ -1,3 +1,4 @@
 "use strict";
 const __getKeyByValue = require('../getKeyByValue');
-require('../_js/object/__tests__/getKeyByValue')(__getKeyByValue);
+require('../object/__tests__/getKeyByValue')(__getKeyByValue);
+//# sourceMappingURL=module.js.map

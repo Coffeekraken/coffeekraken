@@ -27,13 +27,13 @@ module.exports = class SCacheFsAdapter extends SCacheAdapter_1.default {
      * Construct the SCacheFsAdapter instance with the settings passed in object format. See description bellow.
      *
      * @param         {Object}          [settings={}]             An object to configure the SCacheFsAdapter instance. This is specific to each adapters.settings.settings...
-     * - rootDir (config.cache.fs.rootDir) {String}: Specify the root directory where to put all the files to cache
+     * - rootDir (config.storage.cacheFolderPath) {String}: Specify the root directory where to put all the files to cache
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
         super(deepMerge_1.default({
-            rootDir: sugar_1.default('cache.fs.rootDir') || `${tmpDir_1.default()}/SCache`
+            rootDir: sugar_1.default('storage.cacheFolderPath') || `${tmpDir_1.default()}/SCache`
         }, settings));
     }
     /**
@@ -134,4 +134,4 @@ module.exports = class SCacheFsAdapter extends SCacheAdapter_1.default {
         });
     }
 };
-//# sourceMappingURL=SCacheFsAdapter.js.map
+//# sourceMappingURL=module.js.map

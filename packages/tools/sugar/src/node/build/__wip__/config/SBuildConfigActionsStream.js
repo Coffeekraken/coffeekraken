@@ -76,4 +76,4 @@ module.exports = class SBuildConfigActionsStream extends __SActionsStream {
         }, settings));
     }
 };
-//# sourceMappingURL=SBuildConfigActionsStream.js.map
+//# sourceMappingURL=module.js.map

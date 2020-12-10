@@ -1,3 +1,4 @@
 "use strict";
 const __toQueryString = require('../toQueryString');
-require('../_js/object/__tests__/toQueryString')(__toQueryString);
+require('../object/__tests__/toQueryString')(__toQueryString);
+//# sourceMappingURL=module.js.map

@@ -16,4 +16,4 @@ exports.default = (stringArgs = '') => {
     const proc = stream.start(args);
     output_1.default(proc);
 };
-//# sourceMappingURL=views.cli.js.map
+//# sourceMappingURL=module.js.map

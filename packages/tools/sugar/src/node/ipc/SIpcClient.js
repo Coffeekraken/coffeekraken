@@ -225,4 +225,4 @@ class SIpcClient {
     }
 }
 module.exports = SIpcClient;
-//# sourceMappingURL=SIpcClient.js.map
+//# sourceMappingURL=module.js.map

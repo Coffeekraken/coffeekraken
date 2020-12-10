@@ -39,4 +39,4 @@ function plainObject(object) {
     return true;
 }
 module.exports = plainObject;
-//# sourceMappingURL=plainObject.js.map
+//# sourceMappingURL=module.js.map

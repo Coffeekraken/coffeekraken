@@ -34,4 +34,4 @@ function isBase64(value) {
     return reg.test(value);
 }
 module.exports = isBase64;
-//# sourceMappingURL=base64.js.map
+//# sourceMappingURL=module.js.map

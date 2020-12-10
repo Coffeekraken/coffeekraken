@@ -46,4 +46,4 @@ function request(settings = {}) {
     return request.send();
 }
 module.exports = request;
-//# sourceMappingURL=request.js.map
+//# sourceMappingURL=module.js.map

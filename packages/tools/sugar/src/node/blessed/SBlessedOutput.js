@@ -863,4 +863,4 @@ module.exports = class SOutput extends SBlessedComponent_1.default {
         this.append(this.$logBox);
     }
 };
-//# sourceMappingURL=SBlessedOutput.js.map
+//# sourceMappingURL=module.js.map

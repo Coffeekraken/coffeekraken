@@ -28,3 +28,4 @@ module.exports = (__SLog, __SLogFilesAdapter) => {
         });
     });
 };
+//# sourceMappingURL=module.js.map

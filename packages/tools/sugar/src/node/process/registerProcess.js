@@ -38,4 +38,4 @@ function registerProcess(pro, name = uniqid_1.default()) {
     }
 }
 module.exports = registerProcess;
-//# sourceMappingURL=registerProcess.js.map
+//# sourceMappingURL=module.js.map

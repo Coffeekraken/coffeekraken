@@ -8,4 +8,4 @@ module.exports = (source, settings = {}) => {
     const output = new SBlessedOutput_1.default(source, settings);
     return output;
 };
-//# sourceMappingURL=output.js.map
+//# sourceMappingURL=module.js.map

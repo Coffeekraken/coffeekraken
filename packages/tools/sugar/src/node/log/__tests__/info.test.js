@@ -1,3 +1,4 @@
 "use strict";
 const __info = require('../info');
-require('../_js/log/__tests__/info')(__info);
+require('../log/__tests__/info')(__info);
+//# sourceMappingURL=module.js.map

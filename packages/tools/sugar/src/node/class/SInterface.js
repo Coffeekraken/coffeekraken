@@ -18,4 +18,4 @@ module.exports = (_a = class SInterface {
         return: 'String'
     },
     _a);
-//# sourceMappingURL=SInterface.js.map
+//# sourceMappingURL=module.js.map

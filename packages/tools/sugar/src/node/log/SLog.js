@@ -315,4 +315,4 @@ module.exports = class SLog {
         });
     }
 };
-//# sourceMappingURL=SLog.js.map
+//# sourceMappingURL=module.js.map

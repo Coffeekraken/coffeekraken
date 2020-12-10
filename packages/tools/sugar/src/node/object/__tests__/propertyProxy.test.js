@@ -1,3 +1,4 @@
 "use strict";
 const __propertyProxy = require('../propertyProxy');
-require('../_js/object/__tests__/propertyProxy')(__propertyProxy);
+require('../object/__tests__/propertyProxy')(__propertyProxy);
+//# sourceMappingURL=module.js.map

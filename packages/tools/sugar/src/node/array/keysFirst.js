@@ -39,4 +39,4 @@ function keysFirst(array, keys) {
     return res;
 }
 module.exports = keysFirst;
-//# sourceMappingURL=keysFirst.js.map
+//# sourceMappingURL=module.js.map

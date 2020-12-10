@@ -75,4 +75,4 @@ module.exports = (_a = class SExtractStreamAction extends SActionsStreamAction_1
      */
     _a.interface = SExtractStreamActionInterface,
     _a);
-//# sourceMappingURL=SExtractStreamAction.js.map
+//# sourceMappingURL=module.js.map

@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (__SConfig, __SConfigFsAdapter) => {
     const config = new __SConfig('myCoolConfig', {
@@ -13,7 +22,7 @@ exports.default = (__SConfig, __SConfigFsAdapter) => {
         allowNew: true
     });
     describe('sugar.node.config.adapters.SConfigFsAdapter', () => {
-        it('Should load, set, save and get correctly the config from the filesystem', async (done) => {
+        it('Should load, set, save and get correctly the config from the filesystem', (done) => __awaiter(void 0, void 0, void 0, function* () {
             expect(config.get('')).toEqual({
                 hello: 'world',
                 other: {
@@ -23,10 +32,11 @@ exports.default = (__SConfig, __SConfigFsAdapter) => {
                     cool: 'Hello world'
                 }
             });
-            await config.set('something.cool', 'Hello world');
-            await config.set('other.cool', 'Yop yop Nelson');
+            yield config.set('something.cool', 'Hello world');
+            yield config.set('other.cool', 'Yop yop Nelson');
             expect(config.get('something')).toEqual({ cool: 'Hello world' });
             done();
-        });
+        }));
     });
 };
+//# sourceMappingURL=module.js.map

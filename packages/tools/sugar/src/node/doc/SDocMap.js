@@ -263,4 +263,4 @@ module.exports = class SDocMap extends SPromise_1.default {
         });
     }
 };
-//# sourceMappingURL=SDocMap.js.map
+//# sourceMappingURL=module.js.map

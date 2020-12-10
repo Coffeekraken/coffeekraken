@@ -1,3 +1,4 @@
 "use strict";
 const __SPromise = require('../SPromise');
-require('../_js/promise/__tests__/SPromise')(__SPromise);
+require('../promise/__tests__/SPromise')(__SPromise);
+//# sourceMappingURL=module.js.map

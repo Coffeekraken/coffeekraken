@@ -1,3 +1,4 @@
 "use strict";
 const __SDocblockBlock = require('../SDocblockBlock');
-require('../_js/docblock/__tests__/SDocblockBlock')(__SDocblockBlock);
+require('../docblock/__tests__/SDocblockBlock')(__SDocblockBlock);
+//# sourceMappingURL=module.js.map

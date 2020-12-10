@@ -68,4 +68,4 @@ module.exports = class SBuildDocMapActionsStream extends __SActionsStream {
         }, settings));
     }
 };
-//# sourceMappingURL=SBuildDocMapActionsStream.js.map
+//# sourceMappingURL=module.js.map

@@ -28,4 +28,4 @@ const descriptor = {
     }
 };
 module.exports = descriptor;
-//# sourceMappingURL=weakmapTypeDescriptor.js.map
+//# sourceMappingURL=module.js.map

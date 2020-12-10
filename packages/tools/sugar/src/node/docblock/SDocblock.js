@@ -186,4 +186,4 @@ module.exports = class SDocblock {
         });
     }
 };
-//# sourceMappingURL=SDocblock.js.map
+//# sourceMappingURL=module.js.map

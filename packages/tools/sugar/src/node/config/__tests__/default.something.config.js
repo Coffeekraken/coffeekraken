@@ -3,3 +3,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     hello: 'world'
 };
+//# sourceMappingURL=module.js.map

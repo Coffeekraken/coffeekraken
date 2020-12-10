@@ -33,4 +33,4 @@ function sleep(time) {
     });
 }
 module.exports = sleep;
-//# sourceMappingURL=sleep.js.map
+//# sourceMappingURL=module.js.map

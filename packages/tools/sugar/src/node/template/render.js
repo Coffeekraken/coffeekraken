@@ -63,4 +63,4 @@ function render(viewPath, data = null, settings = {}) {
     });
 }
 module.exports = render;
-//# sourceMappingURL=render.js.map
+//# sourceMappingURL=module.js.map

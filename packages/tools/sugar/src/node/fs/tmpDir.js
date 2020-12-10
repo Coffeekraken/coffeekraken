@@ -4,6 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const temp_dir_1 = __importDefault(require("temp-dir"));
+const sugar_1 = __importDefault(require("../config/sugar"));
+const ensureDirSync_1 = __importDefault(require("./ensureDirSync"));
 /**
  * @name                            tmpDir
  * @namespace           sugar.node.fs
@@ -12,7 +14,10 @@ const temp_dir_1 = __importDefault(require("temp-dir"));
  *
  * Return the os temp directory path
  *
+ * @param       {ITmpDirSettings}       [settings={}]   Some settings to configure your temp directory process
  * @return                {String}                      The real os temp directory path
+ *
+ * @setting     {String}        [scope='local']         Specify the scope in which you want your tmpDir to be returned. Can be "local" or "global"
  *
  * @todo      interface
  * @todo      doc
@@ -26,8 +31,17 @@ const temp_dir_1 = __importDefault(require("temp-dir"));
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function tmp() {
+const fn = function (settings = {}) {
+    settings = Object.assign({ scope: 'local' }, settings);
+    if (settings.scope === 'local') {
+        const tmpDir = sugar_1.default('storage.tempFolderPath');
+        if (tmpDir !== undefined) {
+            ensureDirSync_1.default(tmpDir);
+            return tmpDir;
+        }
+    }
+    ensureDirSync_1.default(temp_dir_1.default);
     return temp_dir_1.default;
-}
-module.exports = tmp;
-//# sourceMappingURL=tmpDir.js.map
+};
+module.exports = fn;
+//# sourceMappingURL=module.js.map

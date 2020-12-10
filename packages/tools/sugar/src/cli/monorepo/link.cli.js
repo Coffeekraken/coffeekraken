@@ -9,4 +9,4 @@ module.exports = (stringArgs = '') => {
     const process = linkPackages_1.default();
     output_1.default(process);
 };
-//# sourceMappingURL=link.cli.js.map
+//# sourceMappingURL=module.js.map

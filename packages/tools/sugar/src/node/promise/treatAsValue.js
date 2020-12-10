@@ -11,7 +11,7 @@
  * normal value passed in the resolve call.
  *
  * @param           {Promise}          promise          The promise to treat as a simple value
- * @return          {Proxy}                             A proxy of this promise that will act just like a normal promise once getted by the "await" statement
+ * @return          {ITreatAsValueProxy}                             A proxy of this promise that will act just like a normal promise once getted by the "await" statement
  *
  * @example         js
  * import treatAsValue from '@coffeekraken/sugar/js/promise/treatAsValue';
@@ -23,20 +23,28 @@
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-const fn = function treatAsValue(promise) {
-    const proxy = new Proxy(promise, {
+const fn = function treatAsValue(promise, settings = {}) {
+    settings = Object.assign({ during: -1 }, settings);
+    let during = settings.during || -1;
+    const proxy = Proxy.revocable(promise, {
         get(target, prop, receiver) {
             if (prop === 'then') {
                 return target;
+            }
+            if (during > 0)
+                during--;
+            else if (during === 0) {
+                proxy.revoke();
             }
             // @ts-ignore
             return Reflect.get(...arguments);
         }
     });
-    proxy.revokeProxy = () => {
+    proxy.proxy.restorePromiseBehavior = () => {
+        proxy.revoke();
         return promise;
     };
-    return proxy;
+    return proxy.proxy;
 };
 module.exports = fn;
-//# sourceMappingURL=treatAsValue.js.map
+//# sourceMappingURL=module.js.map

@@ -74,4 +74,4 @@ module.exports = (_a = class SJsConfigFileToJsonStreamAction extends __SActionsS
         }
     },
     _a);
-//# sourceMappingURL=SJsConfigFileToJsonStreamAction.js.map
+//# sourceMappingURL=module.js.map

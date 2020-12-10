@@ -1,1 +1,1 @@
-{"version":3,"file":"docMap.cli.js","sourceRoot":"","sources":["docMap.cli.ts"],"names":[],"mappings":";AAAA,cAAc;;;;;AAEd,sGAAgF;AAEhF,kBAAe,CAAC,UAAU,GAAG,EAAE,EAAE,EAAE;IACjC,MAAM,GAAG,GAAG,IAAI,6BAAqB,CAAC,EAAE,CAAC,CAAC;IAC1C,GAAG,CAAC,GAAG,CAAC,UAAU,CAAC,CAAC;AACtB,CAAC,CAAC"}
+{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":";AAAA,cAAc;;;;;AAEd,sGAAgF;AAEhF,kBAAe,CAAC,UAAU,GAAG,EAAE,EAAE,EAAE;IACjC,MAAM,GAAG,GAAG,IAAI,6BAAqB,CAAC,EAAE,CAAC,CAAC;IAC1C,GAAG,CAAC,GAAG,CAAC,UAAU,CAAC,CAAC;AACtB,CAAC,CAAC"}

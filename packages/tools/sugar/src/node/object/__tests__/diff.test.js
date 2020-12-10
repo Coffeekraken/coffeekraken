@@ -1,3 +1,4 @@
 "use strict";
 const __diff = require('../diff');
-require('../_js/object/__tests__/diff')(__diff);
+require('../object/__tests__/diff')(__diff);
+//# sourceMappingURL=module.js.map

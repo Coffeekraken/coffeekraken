@@ -193,4 +193,4 @@ function getArgNameByAlias(alias, definition) {
     return null;
 }
 module.exports = parseArgsString;
-//# sourceMappingURL=parseArgs.js.map
+//# sourceMappingURL=module.js.map

@@ -59,4 +59,4 @@ const Cls = class SProcessOutput {
     }
 };
 module.exports = Cls;
-//# sourceMappingURL=SProcessOutput.js.map
+//# sourceMappingURL=module.js.map

@@ -28,4 +28,4 @@ function simpleValue(data) {
     return data.value;
 }
 module.exports = simpleValue;
-//# sourceMappingURL=simpleValue.js.map
+//# sourceMappingURL=module.js.map

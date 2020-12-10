@@ -33,4 +33,4 @@ function copySync(src, dest) {
     fs_extra_1.default.copySync(src, dest);
 }
 module.exports = copySync;
-//# sourceMappingURL=copySync.js.map
+//# sourceMappingURL=module.js.map

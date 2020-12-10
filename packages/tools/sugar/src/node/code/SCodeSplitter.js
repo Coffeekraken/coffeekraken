@@ -156,4 +156,4 @@ module.exports = class SCodeSplitter {
         return blocks;
     }
 };
-//# sourceMappingURL=SCodeSplitter.js.map
+//# sourceMappingURL=module.js.map

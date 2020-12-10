@@ -10,4 +10,4 @@ module.exports = `
 
   {{> author}}
 `;
-//# sourceMappingURL=class.js.map
+//# sourceMappingURL=module.js.map

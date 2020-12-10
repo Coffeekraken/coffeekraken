@@ -35,4 +35,4 @@ function filename(path, withExtension = true) {
     return filename;
 }
 module.exports = filename;
-//# sourceMappingURL=filename.js.map
+//# sourceMappingURL=module.js.map

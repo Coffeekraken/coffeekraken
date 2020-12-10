@@ -30,4 +30,4 @@ exports.default = (stringArgs = '') => __awaiter(void 0, void 0, void 0, functio
     }
     console.log(sugar_1.default(args.path));
 });
-//# sourceMappingURL=get.cli.js.map
+//# sourceMappingURL=module.js.map

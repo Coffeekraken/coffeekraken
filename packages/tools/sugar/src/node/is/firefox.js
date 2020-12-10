@@ -28,4 +28,4 @@ function isFirefox(ua = navigator.userAgent) {
     return ua.indexOf('Firefox') > -1;
 }
 module.exports = isFirefox;
-//# sourceMappingURL=firefox.js.map
+//# sourceMappingURL=module.js.map

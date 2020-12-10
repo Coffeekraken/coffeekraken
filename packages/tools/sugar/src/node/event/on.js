@@ -44,4 +44,4 @@ function on(name, callback) {
     };
 }
 module.exports = on;
-//# sourceMappingURL=on.js.map
+//# sourceMappingURL=module.js.map

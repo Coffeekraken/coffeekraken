@@ -65,4 +65,4 @@ module.exports = (_a = class SBuildScssActionsStream extends SActionsStream_1.de
     },
     _a.interface = SBuildScssInterface_1.default,
     _a);
-//# sourceMappingURL=SBuildScssActionsStream.js.map
+//# sourceMappingURL=module.js.map

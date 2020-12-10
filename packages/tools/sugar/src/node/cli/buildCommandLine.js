@@ -120,4 +120,4 @@ function buildCommandLine(command, args = {}, settings = {}) {
     return command.trim();
 }
 module.exports = buildCommandLine;
-//# sourceMappingURL=buildCommandLine.js.map
+//# sourceMappingURL=module.js.map

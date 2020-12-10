@@ -54,4 +54,4 @@ function getScssSharedResourcesString(array = null) {
     return importsStrings;
 }
 module.exports = getScssSharedResourcesString;
-//# sourceMappingURL=getSharedResourcesString.js.map
+//# sourceMappingURL=module.js.map

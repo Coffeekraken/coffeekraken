@@ -1,3 +1,4 @@
 "use strict";
 const __constrain = require('../constrain');
-require('../_js/number/__tests__/constrain')(__constrain);
+require('../number/__tests__/constrain')(__constrain);
+//# sourceMappingURL=module.js.map

@@ -1,9 +1,19 @@
 "use strict";
-module.exports = (__docNav) => {
-    describe('sugar.node.doc.docNav', () => {
-        it('Should generate correctly an SNav instance using the generated docMap.json file', async (done) => {
-            const docNav = __docNav(`${__dirname}/doc/docMap.json`);
-            done();
-        });
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+module.exports = (__docNav) => {
+    describe('sugar.node.doc.docNav', () => {
+        it('Should generate correctly an SNav instance using the generated docMap.json file', (done) => __awaiter(void 0, void 0, void 0, function* () {
+            const docNav = __docNav(`${__dirname}/doc/docMap.json`);
+            done();
+        }));
+    });
+};
+//# sourceMappingURL=module.js.map

@@ -47,4 +47,4 @@ function packageJsonMiddleware(settings = {}) {
     };
 }
 module.exports = packageJsonMiddleware;
-//# sourceMappingURL=packageJsonMiddleware.js.map
+//# sourceMappingURL=module.js.map

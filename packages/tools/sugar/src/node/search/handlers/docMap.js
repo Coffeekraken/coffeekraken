@@ -126,4 +126,4 @@ function search(searchString, settings = {}) {
     }));
 }
 module.exports = search;
-//# sourceMappingURL=docMap.js.map
+//# sourceMappingURL=module.js.map

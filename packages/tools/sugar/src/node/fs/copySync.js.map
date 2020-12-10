@@ -1,1 +1,1 @@
-{"version":3,"file":"copySync.js","sourceRoot":"","sources":["copySync.ts"],"names":[],"mappings":";AAAA,cAAc;;;;AAEd,wDAA4B;AAE5B;;;;;;;;;;;;;;;;;;;;;;;;GAwBG;AACH,SAAS,QAAQ,CAAC,GAAG,EAAE,IAAI;IACzB,kBAAI,CAAC,QAAQ,CAAC,GAAG,EAAE,IAAI,CAAC,CAAC;AAC3B,CAAC;AACD,iBAAS,QAAQ,CAAC"}
+{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":";AAAA,cAAc;;;;AAEd,wDAA4B;AAE5B;;;;;;;;;;;;;;;;;;;;;;;;GAwBG;AACH,SAAS,QAAQ,CAAC,GAAG,EAAE,IAAI;IACzB,kBAAI,CAAC,QAAQ,CAAC,GAAG,EAAE,IAAI,CAAC,CAAC;AAC3B,CAAC;AACD,iBAAS,QAAQ,CAAC"}

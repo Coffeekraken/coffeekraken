@@ -22,6 +22,7 @@ import __resolveTokens from '../object/resolveTokens';
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ * @todo      {Enhancement}       Find a way to specify the "userConfigPath" dynamically without having circular dependencies
  *
  * @example             js
  * import sugar from '@coffeekraken/sugar/node/config/sugar';
@@ -45,7 +46,7 @@ function sugar(dotPath) {
             '../../../.sugar-default'
           ),
           appConfigPath: `${__packageRoot(process.cwd())}/[foldername]`,
-          userConfigPath: null
+          userConfigPath: `${__packageRoot(process.cwd())}/.local/[foldername]`
         })
       ]
     });

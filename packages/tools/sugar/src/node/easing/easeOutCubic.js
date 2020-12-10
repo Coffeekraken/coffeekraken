@@ -23,4 +23,4 @@ function ease(t) {
     return --t * t * t + 1;
 }
 module.exports = ease;
-//# sourceMappingURL=easeOutCubic.js.map
+//# sourceMappingURL=module.js.map

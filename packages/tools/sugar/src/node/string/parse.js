@@ -15,4 +15,4 @@ module.exports = (value) => {
         return value;
     }
 };
-//# sourceMappingURL=parse.js.map
+//# sourceMappingURL=module.js.map

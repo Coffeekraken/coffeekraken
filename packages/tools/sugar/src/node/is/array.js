@@ -29,4 +29,4 @@ function isArray(value) {
     return value && typeof value === 'object' && value.constructor === Array;
 }
 module.exports = isArray;
-//# sourceMappingURL=array.js.map
+//# sourceMappingURL=module.js.map

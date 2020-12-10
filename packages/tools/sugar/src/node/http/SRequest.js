@@ -220,4 +220,4 @@ module.exports = class SRequest {
         });
     }
 };
-//# sourceMappingURL=SRequest.js.map
+//# sourceMappingURL=module.js.map

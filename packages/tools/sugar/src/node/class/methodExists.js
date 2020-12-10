@@ -39,4 +39,4 @@ function methodExists(instance, ...methods) {
     return !missingMethodsArray.length ? true : missingMethodsArray;
 }
 module.exports = methodExists;
-//# sourceMappingURL=methodExists.js.map
+//# sourceMappingURL=module.js.map

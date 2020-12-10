@@ -56,4 +56,4 @@ const descriptor = {
     }
 };
 module.exports = descriptor;
-//# sourceMappingURL=booleanTypeDescriptor.js.map
+//# sourceMappingURL=module.js.map

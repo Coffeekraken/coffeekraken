@@ -47,4 +47,4 @@ function parseAuthorString(string) {
     return authorObj;
 }
 module.exports = parseAuthorString;
-//# sourceMappingURL=parseAuthorString.js.map
+//# sourceMappingURL=module.js.map

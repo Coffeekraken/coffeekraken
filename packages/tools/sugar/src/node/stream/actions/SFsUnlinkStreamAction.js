@@ -68,4 +68,4 @@ module.exports = (_a = class SFsUnlinkStreamAction extends SActionsStreamAction_
      */
     _a.interface = SFsUnlinkStreamActionInterface,
     _a);
-//# sourceMappingURL=SFsUnlinkStreamAction.js.map
+//# sourceMappingURL=module.js.map

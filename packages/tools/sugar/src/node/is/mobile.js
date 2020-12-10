@@ -34,4 +34,4 @@ function isMobile(ua = navigator.userAgent) {
     return md.mobile() !== null;
 }
 module.exports = isMobile;
-//# sourceMappingURL=mobile.js.map
+//# sourceMappingURL=module.js.map

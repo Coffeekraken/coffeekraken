@@ -50,4 +50,4 @@ function files(text) {
     });
 }
 module.exports = files;
-//# sourceMappingURL=files.js.map
+//# sourceMappingURL=module.js.map

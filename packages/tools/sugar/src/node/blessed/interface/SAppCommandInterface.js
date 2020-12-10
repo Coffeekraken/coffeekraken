@@ -12,4 +12,4 @@ module.exports = (_a = class SAppCommandInterface extends SInterface_1.default {
     _a.title = 'SApp Command Interface',
     _a.description = 'This interface represent the minimum requirements that MUST have the instances passed in an SApp based application',
     _a);
-//# sourceMappingURL=SAppCommandInterface.js.map
+//# sourceMappingURL=module.js.map

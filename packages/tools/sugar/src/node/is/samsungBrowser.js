@@ -28,4 +28,4 @@ function isSamsumgBrowser(ua = navigator.userAgent) {
     return ua.match(/SamsungBrowser/i) !== null;
 }
 module.exports = isSamsumgBrowser;
-//# sourceMappingURL=samsungBrowser.js.map
+//# sourceMappingURL=module.js.map

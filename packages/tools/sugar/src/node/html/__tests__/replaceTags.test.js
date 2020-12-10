@@ -1,3 +1,4 @@
 "use strict";
 const __replaceTags = require('../replaceTags');
-require('../_js/html/__tests__/replaceTags')(__replaceTags);
+require('../html/__tests__/replaceTags')(__replaceTags);
+//# sourceMappingURL=module.js.map

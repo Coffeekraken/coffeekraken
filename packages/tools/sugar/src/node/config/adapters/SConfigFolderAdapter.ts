@@ -5,6 +5,7 @@ import __deepMerge from '../../object/deepMerge';
 import __writeFileSync from '../../fs/writeFileSync';
 import __diff from '../../object/diff';
 import __SConfigAdapter from './SConfigAdapter';
+import __localDir from '../../fs/localDir';
 
 /**
  * @name                  SConfigFolderAdapter
@@ -21,7 +22,7 @@ import __SConfigAdapter from './SConfigAdapter';
  * - filename ('[name].config.js') {String}: Specify the filename to use for the file that will store the configs
  * - defaultConfigPath (null) {String}: This specify the path to the "default" config file.
  * - appConfigPath (${process.cwd()}/[filename]) {String}: This specify the path to the "app" config file
- * - userConfigPath (${__tmpDir()}/[filename]) {String}: This specify the path to the "user" config file
+ * - userConfigPath (${__localDir()}/[filename]) {String}: This specify the path to the "user" config file
  * @return                  {Promise}                                         A promise that will be resolved once the data has been getted/saved...
  *
  * @todo      interface
@@ -196,4 +197,4 @@ export = class SConfigFolderAdapter extends __SConfigAdapter {
 
     return true;
   }
-}
+};

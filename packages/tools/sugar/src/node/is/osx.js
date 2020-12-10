@@ -30,4 +30,4 @@ function osx() {
     return navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 }
 module.exports = osx;
-//# sourceMappingURL=osx.js.map
+//# sourceMappingURL=module.js.map

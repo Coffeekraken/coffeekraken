@@ -76,4 +76,4 @@ function replaceTags(text, tags) {
     return oneLineText;
 }
 module.exports = replaceTags;
-//# sourceMappingURL=replaceTags.js.map
+//# sourceMappingURL=module.js.map

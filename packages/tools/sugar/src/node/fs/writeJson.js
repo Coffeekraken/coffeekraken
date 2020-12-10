@@ -36,4 +36,4 @@ function writeJson(path, data, options = {}) {
     return fs_extra_1.default.outputJson(path, data, options);
 }
 module.exports = writeJson;
-//# sourceMappingURL=writeJson.js.map
+//# sourceMappingURL=module.js.map

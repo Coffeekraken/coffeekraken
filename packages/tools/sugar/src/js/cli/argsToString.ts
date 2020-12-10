@@ -130,8 +130,10 @@ function argsToString(args, settings = {}) {
       value = settings.definition[argName].default;
     if (
       value === undefined ||
-      value === null
-      // || (defObj.type.toLowerCase() === 'boolean' && value === false)
+      value === null ||
+      (defObj.type &&
+        defObj.type.toLowerCase() === 'boolean' &&
+        value === false)
     ) {
       return;
     }
@@ -147,12 +149,12 @@ function argsToString(args, settings = {}) {
             val.toString !== undefined && typeof val.toString === 'function'
               ? val.toString()
               : __toString(val);
-          if (defObj.type.toLowerCase() === 'string')
+          if (defObj.type && defObj.type.toLowerCase() === 'string')
             valueStr = `"${valueStr}"`;
           // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
           if (
-            defObj.type.toLowerCase().includes('object') ||
-            defObj.type.toLowerCase().includes('array')
+            (defObj.type && defObj.type.toLowerCase().includes('object')) ||
+            (defObj.type && defObj.type.toLowerCase().includes('array'))
           ) {
             valueStr = `"${valueStr.split('"').join("'")}"`;
           }
@@ -167,11 +169,12 @@ function argsToString(args, settings = {}) {
           value.toString !== undefined && typeof value.toString === 'function'
             ? value.toString()
             : __toString(value);
-        if (defObj.type.toLowerCase() === 'string') valueStr = `"${valueStr}"`;
+        if (defObj.type && defObj.type.toLowerCase() === 'string')
+          valueStr = `"${valueStr}"`;
         // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
         if (
-          defObj.type.toLowerCase().includes('object') ||
-          defObj.type.toLowerCase().includes('array')
+          (defObj.type && defObj.type.toLowerCase().includes('object')) ||
+          (defObj.type && defObj.type.toLowerCase().includes('array'))
         ) {
           valueStr = `"${valueStr.split('"').join("'")}"`;
         }

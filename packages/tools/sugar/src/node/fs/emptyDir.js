@@ -34,4 +34,4 @@ function emptyDir(dir) {
     return fs_extra_1.default.emptyDir(dir);
 }
 module.exports = emptyDir;
-//# sourceMappingURL=emptyDir.js.map
+//# sourceMappingURL=module.js.map

@@ -6,3 +6,4 @@ describe('sugar.node.is.childProcess', () => {
         done();
     });
 });
+//# sourceMappingURL=module.js.map

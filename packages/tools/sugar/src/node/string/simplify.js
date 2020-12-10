@@ -73,4 +73,4 @@ function simplify(string, settings = {}) {
     return string;
 }
 module.exports = simplify;
-//# sourceMappingURL=simplify.js.map
+//# sourceMappingURL=module.js.map

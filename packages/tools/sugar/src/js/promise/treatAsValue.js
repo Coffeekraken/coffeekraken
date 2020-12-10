@@ -1,4 +1,15 @@
 // @shared
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);
@@ -20,7 +31,7 @@
      * normal value passed in the resolve call.
      *
      * @param           {Promise}          promise          The promise to treat as a simple value
-     * @return          {Proxy}                             A proxy of this promise that will act just like a normal promise once getted by the "await" statement
+     * @return          {ITreatAsValueProxy}                             A proxy of this promise that will act just like a normal promise once getted by the "await" statement
      *
      * @example         js
      * import treatAsValue from '@coffeekraken/sugar/js/promise/treatAsValue';
@@ -32,20 +43,29 @@
      * @since           2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    var fn = function treatAsValue(promise) {
-        var proxy = new Proxy(promise, {
+    var fn = function treatAsValue(promise, settings) {
+        if (settings === void 0) { settings = {}; }
+        settings = __assign({ during: -1 }, settings);
+        var during = settings.during || -1;
+        var proxy = Proxy.revocable(promise, {
             get: function (target, prop, receiver) {
                 if (prop === 'then') {
                     return target;
+                }
+                if (during > 0)
+                    during--;
+                else if (during === 0) {
+                    proxy.revoke();
                 }
                 // @ts-ignore
                 return Reflect.get.apply(Reflect, arguments);
             }
         });
-        proxy.revokeProxy = function () {
+        proxy.proxy.restorePromiseBehavior = function () {
+            proxy.revoke();
             return promise;
         };
-        return proxy;
+        return proxy.proxy;
     };
     return fn;
 });

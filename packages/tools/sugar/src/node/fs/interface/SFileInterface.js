@@ -53,4 +53,4 @@ module.exports = (_a = class SFsFileInterface extends SInterface_1.default {
         }
     },
     _a);
-//# sourceMappingURL=SFileInterface.js.map
+//# sourceMappingURL=module.js.map

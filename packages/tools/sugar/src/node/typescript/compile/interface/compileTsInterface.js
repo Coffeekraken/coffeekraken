@@ -13,12 +13,17 @@ class compileTsInterface extends SInterface_1.default {
 compileTsInterface.definition = Object.assign(Object.assign({}, TscInterface_1.default.definition), { project: {
         type: 'Array<File>',
         alias: 'p'
+    }, stacks: {
+        type: 'Array<String>',
+        alias: 's'
     }, input: {
         type: 'String',
         alias: 'i'
     }, watch: {
         type: 'Boolean',
         alias: 'w'
+    }, transpileOnly: {
+        type: 'Boolean'
     } });
 module.exports = compileTsInterface;
-//# sourceMappingURL=compileTsInterface.js.map
+//# sourceMappingURL=module.js.map

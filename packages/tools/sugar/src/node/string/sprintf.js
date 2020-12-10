@@ -33,4 +33,4 @@ function sprintf() {
     return sprintf_js_1.sprintf.apply(this, arguments);
 }
 module.exports = sprintf;
-//# sourceMappingURL=sprintf.js.map
+//# sourceMappingURL=module.js.map

@@ -23,4 +23,4 @@ function docMapGenerate(stringArgs = '') {
 }
 exports.default = docMapGenerate;
 ;
-//# sourceMappingURL=generate.cli.js.map
+//# sourceMappingURL=module.js.map

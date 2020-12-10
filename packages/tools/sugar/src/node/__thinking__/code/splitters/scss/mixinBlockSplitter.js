@@ -7,4 +7,4 @@ module.exports = {
     open: '{',
     close: '}'
 };
-//# sourceMappingURL=mixinBlockSplitter.js.map
+//# sourceMappingURL=module.js.map

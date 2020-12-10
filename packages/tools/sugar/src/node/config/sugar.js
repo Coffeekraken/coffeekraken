@@ -23,6 +23,7 @@ const packageRoot_1 = __importDefault(require("../path/packageRoot"));
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ * @todo      {Enhancement}       Find a way to specify the "userConfigPath" dynamically without having circular dependencies
  *
  * @example             js
  * import sugar from '@coffeekraken/sugar/node/config/sugar';
@@ -42,7 +43,7 @@ function sugar(dotPath) {
                     filename: '[name].config.js',
                     defaultConfigPath: path_1.default.resolve(__dirname, '../../../.sugar-default'),
                     appConfigPath: `${packageRoot_1.default(process.cwd())}/[foldername]`,
-                    userConfigPath: null
+                    userConfigPath: `${packageRoot_1.default(process.cwd())}/.local/[foldername]`
                 })
             ]
         });
@@ -53,4 +54,4 @@ function sugar(dotPath) {
     });
 }
 module.exports = sugar;
-//# sourceMappingURL=sugar.js.map
+//# sourceMappingURL=module.js.map

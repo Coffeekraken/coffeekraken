@@ -8,4 +8,4 @@ require("./sTypeRegisterDefaultDescriptors");
 const fileTypeDescriptor_1 = __importDefault(require("./descriptors/fileTypeDescriptor"));
 _SType_1.default.registerType(fileTypeDescriptor_1.default);
 module.exports = _SType_1.default;
-//# sourceMappingURL=SType.js.map
+//# sourceMappingURL=module.js.map

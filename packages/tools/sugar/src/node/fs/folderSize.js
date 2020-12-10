@@ -41,4 +41,4 @@ function folderSize(folderPath, rawFormat = false) {
     });
 }
 module.exports = folderSize;
-//# sourceMappingURL=folderSize.js.map
+//# sourceMappingURL=module.js.map

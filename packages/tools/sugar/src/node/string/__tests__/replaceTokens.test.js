@@ -1,3 +1,4 @@
 "use strict";
 const __replaceTokens = require('../replaceTokens');
-require('../_js/string/__tests__/replaceTokens')(__replaceTokens);
+require('../string/__tests__/replaceTokens')(__replaceTokens);
+//# sourceMappingURL=module.js.map

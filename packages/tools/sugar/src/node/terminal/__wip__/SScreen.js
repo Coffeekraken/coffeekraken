@@ -106,4 +106,4 @@ module.exports = class STerminalScreen extends __blessed.screen {
         this._box.prepend(node);
     }
 };
-//# sourceMappingURL=SScreen.js.map
+//# sourceMappingURL=module.js.map

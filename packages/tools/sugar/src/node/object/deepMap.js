@@ -85,4 +85,4 @@ function deepMap(object, processor, settings = {}, _path = []) {
     return object;
 }
 module.exports = deepMap;
-//# sourceMappingURL=deepMap.js.map
+//# sourceMappingURL=module.js.map

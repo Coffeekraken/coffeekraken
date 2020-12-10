@@ -28,4 +28,4 @@ function getKeyByValue(object, value) {
     return Object.keys(object).find((key) => object[key] === value);
 }
 module.exports = getKeyByValue;
-//# sourceMappingURL=getKeyByValue.js.map
+//# sourceMappingURL=module.js.map

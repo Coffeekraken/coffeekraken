@@ -619,4 +619,4 @@ module.exports = class SActionStream extends SPromise_1.default {
         });
     }
 };
-//# sourceMappingURL=SActionsStream.js.map
+//# sourceMappingURL=module.js.map

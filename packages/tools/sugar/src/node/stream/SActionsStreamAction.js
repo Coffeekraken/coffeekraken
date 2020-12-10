@@ -222,4 +222,4 @@ module.exports = class SActionStreamAction extends SPromise_1.default {
         });
     }
 };
-//# sourceMappingURL=SActionsStreamAction.js.map
+//# sourceMappingURL=module.js.map

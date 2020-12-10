@@ -28,4 +28,4 @@ function rem2px(rem) {
         parseFloat(getComputedStyle(document.documentElement).fontSize || '16px'));
 }
 module.exports = rem2px;
-//# sourceMappingURL=rem2px.js.map
+//# sourceMappingURL=module.js.map

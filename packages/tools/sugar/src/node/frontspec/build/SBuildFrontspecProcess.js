@@ -45,4 +45,4 @@ module.exports = (_a = class SBuildFrontspecProcess extends SProcess_1.default {
     },
     _a.interface = SBuildFrontspecInterface_1.default,
     _a);
-//# sourceMappingURL=SBuildFrontspecProcess.js.map
+//# sourceMappingURL=module.js.map

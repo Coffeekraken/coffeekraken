@@ -52,4 +52,4 @@ module.exports = (_a = class SBuildDocMapProcess extends __SProcess {
     },
     _a.interface = __SBuildDocMapInterface,
     _a);
-//# sourceMappingURL=SBuildDocMapProcess.js.map
+//# sourceMappingURL=module.js.map

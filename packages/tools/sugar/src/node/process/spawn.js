@@ -77,7 +77,11 @@ const fn = function spawn(command, args = [], settings = {}) {
                 S_IPC_SPAWN_ID: uniquid
             };
         }
-        childProcess = child_process_1.spawn(command, [], Object.assign(Object.assign({ shell: true }, settings), { env: Object.assign(Object.assign(Object.assign(Object.assign({}, process.env), { CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
+        childProcess = child_process_1.spawn(command, [], Object.assign(Object.assign({ shell: true }, settings), { stdio: settings.stdio === false
+                ? 'ignore'
+                : settings.stdio !== undefined
+                    ? settings.stdio
+                    : null, env: Object.assign(Object.assign(Object.assign(Object.assign({}, process.env), { CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
                     ? process.env.CHILD_PROCESS_LEVEL + 1
                     : 1, IS_CHILD_PROCESS: true }), (settings.env || {})), envIpc) }));
         onProcessExit_1.default(() => {
@@ -87,14 +91,12 @@ const fn = function spawn(command, args = [], settings = {}) {
         // listen for errors etc...
         if (childProcess.stdout) {
             childProcess.stdout.on('data', (data) => {
-                console.log('da', data.toString());
                 stdout.push(data.toString());
                 trigger('log', data.toString());
             });
         }
         if (childProcess.stderr) {
             childProcess.stderr.on('data', (data) => {
-                console.log('DDDDDDD', data.toString());
                 stderr.push(data.toString());
                 trigger('error', data.toString());
             });
@@ -124,6 +126,7 @@ const fn = function spawn(command, args = [], settings = {}) {
     }));
     // handle cancel
     promise.on('cancel', () => __awaiter(this, void 0, void 0, function* () {
+        console.log('CANCELED');
         if (ipcServer !== undefined) {
             ipcServer.stop();
         }
@@ -134,4 +137,4 @@ const fn = function spawn(command, args = [], settings = {}) {
     return promise;
 };
 module.exports = fn;
-//# sourceMappingURL=spawn.js.map
+//# sourceMappingURL=module.js.map

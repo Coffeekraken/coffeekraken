@@ -78,4 +78,4 @@ const fn = function findUp(search, settings) {
     }));
 };
 module.exports = fn;
-//# sourceMappingURL=findUp.js.map
+//# sourceMappingURL=module.js.map

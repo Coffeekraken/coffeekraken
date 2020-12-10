@@ -78,4 +78,4 @@ module.exports = class SForm extends __blessed.form {
         super.append(node);
     }
 };
-//# sourceMappingURL=SForm.js.map
+//# sourceMappingURL=module.js.map

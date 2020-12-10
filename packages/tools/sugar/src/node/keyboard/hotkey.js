@@ -182,4 +182,4 @@ function hotkey(key, settings = {}) {
     // }
 }
 module.exports = hotkey;
-//# sourceMappingURL=hotkey.js.map
+//# sourceMappingURL=module.js.map

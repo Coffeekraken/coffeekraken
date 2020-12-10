@@ -83,6 +83,7 @@ const Cls: ISCliProcessCtor = class SCliProcess
       alias: false
     });
 
+    // @ts-ignore
     const pro = __spawn(command, [], {
       shell: true,
       ipc: false
@@ -90,31 +91,6 @@ const Cls: ISCliProcessCtor = class SCliProcess
 
     // @ts-ignore
     return pro;
-
-    // const childProcess = __childProcess.spawn(command, [], {
-    //   env: settings.env,
-    //   shell: true
-    // });
-
-    // __onProcessExit(() => {
-    //   childProcess.kill();
-    // });
-
-    // childProcess.on('close', (code, signal) => {
-    //   if (this.stderr.length) {
-    //     this.reject(this.stderr.join('\n'));
-    //     const error = new __SError(this.stderr.join('\n'));
-    //     this.error(`<yellow>Child Process</yellow>\n${error.message}`);
-    //   } else if (this._isKilling || (!code && signal)) {
-    //     this.kill();
-    //   } else if (code === 0 && !signal) {
-    //     this.resolve();
-    //   } else {
-    //     this.reject();
-    //   }
-    //   // reset isKilling boolean
-    //   this._isKilling = false;
-    // });
   }
 };
 export = Cls;

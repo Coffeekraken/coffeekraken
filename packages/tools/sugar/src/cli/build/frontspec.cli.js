@@ -20,4 +20,4 @@ module.exports = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function
         initialParams: stringArgs
     });
 });
-//# sourceMappingURL=frontspec.cli.js.map
+//# sourceMappingURL=module.js.map

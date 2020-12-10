@@ -241,4 +241,4 @@ class SSugarApp extends SPromise_1.default {
     }
 }
 exports.default = SSugarApp;
-//# sourceMappingURL=SSugarApp.js.map
+//# sourceMappingURL=module.js.map

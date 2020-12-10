@@ -5,3 +5,4 @@ exports.default = {
         cool: 'app.something.config'
     }
 };
+//# sourceMappingURL=module.js.map

@@ -28,4 +28,4 @@ function isIe(ua = navigator.userAgent) {
     return ua.indexOf('MSIE') > -1;
 }
 module.exports = isIe;
-//# sourceMappingURL=ie.js.map
+//# sourceMappingURL=module.js.map

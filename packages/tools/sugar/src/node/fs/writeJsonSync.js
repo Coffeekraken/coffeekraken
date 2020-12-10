@@ -34,4 +34,4 @@ function writeJsonSync(path, data, options = {}) {
     fs_extra_1.default.outputJsonSync(path, data, options);
 }
 module.exports = writeJsonSync;
-//# sourceMappingURL=writeJsonSync.js.map
+//# sourceMappingURL=module.js.map

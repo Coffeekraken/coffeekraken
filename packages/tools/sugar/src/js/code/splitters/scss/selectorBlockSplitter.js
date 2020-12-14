@@ -18,4 +18,4 @@
         close: '}'
     };
 });
-//# sourceMappingURL=selectorBlockSplitter.js.map
+//# sourceMappingURL=module.js.map

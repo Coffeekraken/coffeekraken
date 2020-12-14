@@ -1193,4 +1193,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SPromise;
     }(Promise));
 });
-//# sourceMappingURL=SPromise.js.map
+//# sourceMappingURL=module.js.map

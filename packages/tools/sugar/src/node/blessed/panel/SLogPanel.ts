@@ -72,47 +72,28 @@ export = class SLogPanel extends __SBlessedComponent {
           beforeLog: '',
           beforeEachLine: '',
           padBeforeLog: true,
-          // input: {
-          //   width: 3,
-          //   height: 1,
-          //   placeholder: null,
-          //   bottom: 0,
-          //   left: 0,
-          //   focus: true,
-          //   keys: true,
-          //   mouse: true,
-          //   inputOnFocus: true,
-          //   style: {
-          //     fg: __color('terminal.black').toString(),
-          //     bg: __color('terminal.yellow').toString()
-          //   },
-          //   padding: {
-          //     top: 0,
-          //     left: 1,
-          //     right: 1,
-          //     bottom: 0
-          //   }
-          // },
-          mouse: true,
-          keys: true,
-          // vi: true,
-          scrollable: true,
-          // alwaysScroll: true,
-          scrollbar: {
-            ch: ' ',
-            inverse: true
-          },
-          style: {
-            bg: __color('terminal.black').toString(),
+          blessed: {
+            mouse: true,
+            keys: true,
+            // vi: true,
+            scrollable: true,
+            // alwaysScroll: true,
             scrollbar: {
-              bg: __color('terminal.primary').toString()
+              ch: ' ',
+              inverse: true
+            },
+            style: {
+              bg: __color('terminal.black').toString(),
+              scrollbar: {
+                bg: __color('terminal.primary').toString()
+              }
+            },
+            padding: {
+              top: 1,
+              bottom: 0,
+              left: 1,
+              right: 1
             }
-          },
-          padding: {
-            top: 1,
-            bottom: 0,
-            left: 1,
-            right: 1
           }
         },
         settings
@@ -371,4 +352,4 @@ export = class SLogPanel extends __SBlessedComponent {
     // return the lines
     return lines;
   }
-}
+};

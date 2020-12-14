@@ -33,4 +33,4 @@
     }
     return ease;
 });
-//# sourceMappingURL=easeInCubic.js.map
+//# sourceMappingURL=module.js.map

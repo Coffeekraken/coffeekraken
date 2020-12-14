@@ -266,4 +266,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SActionStreamAction;
     }(SPromise_1.default));
 });
-//# sourceMappingURL=SActionsStreamAction.js.map
+//# sourceMappingURL=module.js.map

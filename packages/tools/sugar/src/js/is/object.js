@@ -39,4 +39,4 @@
     }
     return isObject;
 });
-//# sourceMappingURL=object.js.map
+//# sourceMappingURL=module.js.map

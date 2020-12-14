@@ -42,4 +42,4 @@
     }
     return isInIframe;
 });
-//# sourceMappingURL=isInIframe.js.map
+//# sourceMappingURL=module.js.map

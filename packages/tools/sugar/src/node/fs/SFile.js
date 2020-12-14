@@ -121,7 +121,8 @@ const Cls = class SFile extends SPromise_1.default {
             checkExistence: true,
             cwd: process.cwd(),
             sizeIn: 'MBytes',
-            shrinkSizesTo: 2
+            shrinkSizesTo: 2,
+            watch: true
         }, this._settings);
         if (this._settings.cwd && !filepath.includes(this._settings.cwd)) {
             filepath = path_1.default.resolve(this._settings.cwd, filepath);
@@ -143,11 +144,13 @@ const Cls = class SFile extends SPromise_1.default {
         this.dirPath = path_1.default.dirname(filepath);
         if (this.exists) {
             this.update();
-            const watcher = fs_1.default.watch(this.path, (event) => {
-                if (event !== 'change' && watcher)
-                    watcher.close();
-                this.update();
-            });
+            if (this._settings.watch === true) {
+                const watcher = fs_1.default.watch(this.path, (event) => {
+                    if (event !== 'change' && watcher)
+                        watcher.close();
+                    this.update();
+                });
+            }
         }
     }
     /**
@@ -189,8 +192,14 @@ const Cls = class SFile extends SPromise_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     update() {
-        if (!this.exists)
+        this.exists = fs_1.default.existsSync(this.path);
+        if (!this.exists) {
+            this.sizeInBytes = -1;
+            this.sizeInKBytes = -1;
+            this.sizeInMBytes = -1;
+            this.sizeInGBytes = -1;
             return;
+        }
         // get the file stats
         const stats = fs_1.default.statSync(this.path);
         this.sizeInBytes = stats.size;

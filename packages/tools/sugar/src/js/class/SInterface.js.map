@@ -1,1 +1,1 @@
-{"version":3,"file":"SInterface.js","sourceRoot":"","sources":["SInterface.ts"],"names":[],"mappings":"AAAA,cAAc;;;;;;;;;;;;IA0Cd;YAAS;YAicT,CAAC;YAAD,iBAAC;QAAD,CAAC,AAjcQ;QACP;;;;;;;;;WASG;QACI,WAAQ,GAAG;YAChB,KAAK,EAAE,IAAI;YACX,MAAM,EAAE,QAAQ;SAChB;YAmbF"}
+{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":"AAAA,cAAc;;;;;;;;;;;;IA0Cd;YAAS;YAicT,CAAC;YAAD,iBAAC;QAAD,CAAC,AAjcQ;QACP;;;;;;;;;WASG;QACI,WAAQ,GAAG;YAChB,KAAK,EAAE,IAAI;YACX,MAAM,EAAE,QAAQ;SAChB;YAmbF"}

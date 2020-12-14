@@ -54,4 +54,4 @@
     }
     return getMethods;
 });
-//# sourceMappingURL=getMethods.js.map
+//# sourceMappingURL=module.js.map

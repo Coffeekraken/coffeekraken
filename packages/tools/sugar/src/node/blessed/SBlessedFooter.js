@@ -24,21 +24,23 @@ module.exports = class SBlessedFooter extends SBlessedComponent_1.default {
         super(deepMerge_1.default({
             authors: [],
             website: null,
-            width: '100%',
-            height: 10,
-            position: {
-                top: '100%-1',
-                left: 0
-            },
-            style: {
-                bg: color_1.default('terminal.primary').toString(),
-                fg: color_1.default('terminal.black').toString()
-            },
-            padding: {
-                top: 0,
-                bottom: 0,
-                left: 1,
-                right: 0
+            blessed: {
+                width: '100%',
+                height: 10,
+                position: {
+                    top: '100%-1',
+                    left: 0
+                },
+                style: {
+                    bg: color_1.default('terminal.primary').toString(),
+                    fg: color_1.default('terminal.black').toString()
+                },
+                padding: {
+                    top: 0,
+                    bottom: 0,
+                    left: 1,
+                    right: 0
+                }
             }
         }, settings));
         if (this._settings.authors.length) {

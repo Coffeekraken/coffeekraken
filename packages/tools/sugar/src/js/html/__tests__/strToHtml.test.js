@@ -1,3 +1,14 @@
-"use strict";
-const __strToHtml = require('../strToHtml');
-require('./strToHtml')(__strToHtml);
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var __strToHtml = require('../strToHtml');
+    require('./strToHtml')(__strToHtml);
+});
+//# sourceMappingURL=module.js.map

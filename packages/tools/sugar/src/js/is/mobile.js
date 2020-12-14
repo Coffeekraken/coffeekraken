@@ -45,4 +45,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return isMobile;
 });
-//# sourceMappingURL=mobile.js.map
+//# sourceMappingURL=module.js.map

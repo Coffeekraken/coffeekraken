@@ -50,4 +50,4 @@
     }
     return canHaveChildren;
 });
-//# sourceMappingURL=canHaveChildren.js.map
+//# sourceMappingURL=module.js.map

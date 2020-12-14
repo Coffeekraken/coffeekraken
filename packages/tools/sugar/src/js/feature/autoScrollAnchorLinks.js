@@ -74,4 +74,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return autoScrollAnchorLinks;
 });
-//# sourceMappingURL=autoScrollAnchorLinks.js.map
+//# sourceMappingURL=module.js.map

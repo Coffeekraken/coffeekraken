@@ -41,4 +41,4 @@
     }
     return mapToObject;
 });
-//# sourceMappingURL=mapToObject.js.map
+//# sourceMappingURL=module.js.map

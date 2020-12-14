@@ -1,3 +1,14 @@
-"use strict";
-const __integer = require('../integer');
-require('./integer')(__integer);
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var __integer = require('../integer');
+    require('./integer')(__integer);
+});
+//# sourceMappingURL=module.js.map

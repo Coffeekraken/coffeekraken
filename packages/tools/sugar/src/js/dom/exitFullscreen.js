@@ -43,4 +43,4 @@
     }
     return exitFullscreen;
 });
-//# sourceMappingURL=exitFullscreen.js.map
+//# sourceMappingURL=module.js.map

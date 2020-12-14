@@ -76,4 +76,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return getAnimationProperties;
 });
-//# sourceMappingURL=getAnimationProperties.js.map
+//# sourceMappingURL=module.js.map

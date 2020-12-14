@@ -167,4 +167,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         $elm.addEventListener('keyup', handleDispatchEventAttributes);
     });
 });
-//# sourceMappingURL=dispatchEventAttribute.js.map
+//# sourceMappingURL=module.js.map

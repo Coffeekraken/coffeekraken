@@ -53,4 +53,4 @@
     }
     return throttle;
 });
-//# sourceMappingURL=throttle.js.map
+//# sourceMappingURL=module.js.map

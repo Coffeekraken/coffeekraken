@@ -50,10 +50,12 @@ class SSugarAppModuleTerminalUi extends SBlessedComponent_1.default {
     constructor(sources, settings = {}) {
         super(deepMerge_1.default({
             filter: null,
-            width: '100%',
-            height: '100%',
-            style: {
-                bg: 'yellow'
+            blessed: {
+                width: '100%',
+                height: '100%',
+                style: {
+                    bg: 'yellow'
+                }
             }
         }, settings));
         // init the log component

@@ -25,20 +25,22 @@ module.exports = class SBlessedInput extends SBlessedComponent_1.default {
             id: 'SInput',
             focus: true,
             placeholder: null,
-            width: '100%',
-            height: 3,
-            keys: true,
-            mouse: true,
-            inputOnFocus: true,
-            style: {
-                bg: color_1.default('terminal.cyan').toString(),
-                fg: color_1.default('terminal.black').toString()
-            },
-            padding: {
-                top: 1,
-                bottom: 1,
-                left: 2,
-                right: 2
+            blessed: {
+                width: '100%',
+                height: 3,
+                keys: true,
+                mouse: true,
+                inputOnFocus: true,
+                style: {
+                    bg: color_1.default('terminal.cyan').toString(),
+                    fg: color_1.default('terminal.black').toString()
+                },
+                padding: {
+                    top: 1,
+                    bottom: 1,
+                    left: 2,
+                    right: 2
+                }
             }
         }, settings);
         super({

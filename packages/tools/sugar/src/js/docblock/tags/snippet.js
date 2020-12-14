@@ -38,4 +38,4 @@
     }
     return snippet;
 });
-//# sourceMappingURL=snippet.js.map
+//# sourceMappingURL=module.js.map

@@ -47,4 +47,4 @@
     }
     return uncamelize;
 });
-//# sourceMappingURL=uncamelize.js.map
+//# sourceMappingURL=module.js.map

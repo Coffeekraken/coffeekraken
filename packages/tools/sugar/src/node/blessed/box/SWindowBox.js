@@ -19,15 +19,17 @@ module.exports = class SBlessedWindowBox extends SBlessedComponent_1.default {
      */
     constructor($content, settings = {}) {
         super(deepMerge_1.default({
-            style: {
-                fg: 'black',
-                bg: color_1.default('terminal.primary').toString()
-            },
-            padding: {
-                top: 1,
-                left: 2,
-                right: 2,
-                bottom: 1
+            blessed: {
+                style: {
+                    fg: 'black',
+                    bg: color_1.default('terminal.primary').toString()
+                },
+                padding: {
+                    top: 1,
+                    left: 2,
+                    right: 2,
+                    bottom: 1
+                }
             }
         }, settings));
         this._$body = blessed_1.default.box({

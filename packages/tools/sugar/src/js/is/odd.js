@@ -38,4 +38,4 @@
     }
     return isOdd;
 });
-//# sourceMappingURL=odd.js.map
+//# sourceMappingURL=module.js.map

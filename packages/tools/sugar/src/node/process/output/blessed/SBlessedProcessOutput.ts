@@ -1,13 +1,13 @@
 // @ts-nocheck
 
-import SProcessOutput from '../../SProcessOutput';
+import SProcessOutput from '../SProcessOutput';
 import ISBlessedProcessOutput, {
   ISBlessedProcessOutputSettings,
   ISBlessedProcessOutputCtor,
   ISBlessedProcessOutputLog
 } from './interface/ISBlessedProcessOutput';
 import ISPromise from '../../../promise/interface/ISPromise';
-import SBlessedOutput from '../../../blessed/SBlessedOutput';
+import SBlessedOutput from '../../../blessed/output/SBlessedOutput';
 
 /**
  * @name          SBlessedProcessOutput
@@ -52,7 +52,11 @@ const Cls: ISBlessedProcessOutputCtor = class SBlessedProcessOutput
     settings: ISBlessedProcessOutputSettings
   ) {
     super(source, settings);
-    this._output = new SBlessedOutput(this._sources, this._settings);
+    console.log(settings);
+    this._output = new SBlessedOutput({
+      ...this._settings,
+      sources: source
+    });
   }
 
   /**

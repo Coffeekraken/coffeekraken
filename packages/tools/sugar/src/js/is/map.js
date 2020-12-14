@@ -40,4 +40,4 @@
     }
     return isMap;
 });
-//# sourceMappingURL=map.js.map
+//# sourceMappingURL=module.js.map

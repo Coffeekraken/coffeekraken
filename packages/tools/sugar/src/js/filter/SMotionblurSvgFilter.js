@@ -233,4 +233,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SMotionblurSvgFilter;
     }(SSvgFilter_1.default));
 });
-//# sourceMappingURL=SMotionblurSvgFilter.js.map
+//# sourceMappingURL=module.js.map

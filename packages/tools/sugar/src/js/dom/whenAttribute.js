@@ -78,4 +78,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return whenAttribute;
 });
-//# sourceMappingURL=whenAttribute.js.map
+//# sourceMappingURL=module.js.map

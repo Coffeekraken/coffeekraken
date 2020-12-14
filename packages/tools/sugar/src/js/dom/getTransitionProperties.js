@@ -79,4 +79,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return getTransitionProperties;
 });
-//# sourceMappingURL=getTransitionProperties.js.map
+//# sourceMappingURL=module.js.map

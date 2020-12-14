@@ -1,1 +1,1 @@
-{"version":3,"file":"mixinBlockSplitter.js","sourceRoot":"","sources":["mixinBlockSplitter.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;IAmBV,OAAS;QACP,IAAI,EAAE,aAAa;QACnB,MAAM,EAAE,mCAAmC;QAC3C,IAAI,EAAE,GAAG;QACT,KAAK,EAAE,GAAG;KACX,CAAC"}
+{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;IAmBV,OAAS;QACP,IAAI,EAAE,aAAa;QACnB,MAAM,EAAE,mCAAmC;QAC3C,IAAI,EAAE,GAAG;QACT,KAAK,EAAE,GAAG;KACX,CAAC"}

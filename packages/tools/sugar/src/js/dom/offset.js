@@ -41,4 +41,4 @@
     }
     return offset;
 });
-//# sourceMappingURL=offset.js.map
+//# sourceMappingURL=module.js.map

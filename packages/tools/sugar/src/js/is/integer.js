@@ -41,4 +41,4 @@
     }
     return isInteger;
 });
-//# sourceMappingURL=integer.js.map
+//# sourceMappingURL=module.js.map

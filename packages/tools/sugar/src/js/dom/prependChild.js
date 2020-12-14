@@ -41,4 +41,4 @@
     }
     return prependChild;
 });
-//# sourceMappingURL=prependChild.js.map
+//# sourceMappingURL=module.js.map

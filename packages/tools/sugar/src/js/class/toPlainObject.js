@@ -47,4 +47,4 @@
     }
     return toPlainObject;
 });
-//# sourceMappingURL=toPlainObject.js.map
+//# sourceMappingURL=module.js.map

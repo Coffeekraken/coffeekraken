@@ -56,15 +56,17 @@ export = class SBlessedWindowBox extends __SBlessedComponent {
     super(
       __deepMerge(
         {
-          style: {
-            fg: 'black',
-            bg: __color('terminal.primary').toString()
-          },
-          padding: {
-            top: 1,
-            left: 2,
-            right: 2,
-            bottom: 1
+          blessed: {
+            style: {
+              fg: 'black',
+              bg: __color('terminal.primary').toString()
+            },
+            padding: {
+              top: 1,
+              left: 2,
+              right: 2,
+              bottom: 1
+            }
           }
         },
         settings
@@ -94,4 +96,4 @@ export = class SBlessedWindowBox extends __SBlessedComponent {
       super.update();
     });
   }
-}
+};

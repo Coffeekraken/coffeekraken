@@ -354,4 +354,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SConfig;
     }());
 });
-//# sourceMappingURL=SConfig.js.map
+//# sourceMappingURL=module.js.map

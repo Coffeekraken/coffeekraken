@@ -1,1 +1,1 @@
-{"version":3,"file":"typeMap.js","sourceRoot":"","sources":["typeMap.ts"],"names":[],"mappings":";AAAA,cAAc;AAEd,IAAM,YAAY,GAAG,OAAO,CAAC,sBAAsB,CAAC,CAAC;AAErD;;;;;;;;;GASG;AACH,MAAM,CAAC,OAAO,GAAG;IACf,OAAO,EAAE;QACP,GAAG,EAAE,YAAY;KAClB;CACF,CAAC"}
+{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":"AAAA,cAAc;;;;;;;;;;;IAEd,IAAM,YAAY,GAAG,OAAO,CAAC,sBAAsB,CAAC,CAAC;IAErD;;;;;;;;;OASG;IACH,MAAM,CAAC,OAAO,GAAG;QACf,OAAO,EAAE;YACP,GAAG,EAAE,YAAY;SAClB;KACF,CAAC"}

@@ -44,4 +44,4 @@
     };
     return descriptor;
 });
-//# sourceMappingURL=numberTypeDescriptor.js.map
+//# sourceMappingURL=module.js.map

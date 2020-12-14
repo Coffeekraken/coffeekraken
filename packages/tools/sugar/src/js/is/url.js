@@ -50,4 +50,4 @@
     }
     return isUrl;
 });
-//# sourceMappingURL=url.js.map
+//# sourceMappingURL=module.js.map

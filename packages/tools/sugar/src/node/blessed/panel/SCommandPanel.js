@@ -56,7 +56,8 @@ module.exports = class SCommandPanel extends SBlessedComponent_1.default {
      */
     constructor(commands, settings = {}) {
         const _settings = deepMerge_1.default({
-            framerate: 10
+            framerate: 10,
+            blessed: {}
         }, settings);
         // extends SPanel
         super(_settings);

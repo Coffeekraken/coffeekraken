@@ -37,4 +37,4 @@
     }
     return lowerFirst;
 });
-//# sourceMappingURL=lowerFirst.js.map
+//# sourceMappingURL=module.js.map

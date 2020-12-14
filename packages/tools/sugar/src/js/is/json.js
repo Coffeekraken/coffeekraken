@@ -45,4 +45,4 @@
     }
     return isJson;
 });
-//# sourceMappingURL=json.js.map
+//# sourceMappingURL=module.js.map

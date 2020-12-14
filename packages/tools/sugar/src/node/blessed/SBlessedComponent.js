@@ -54,7 +54,7 @@ if (!childProcess_1.default()) {
         global.screen.destroy();
     });
 }
-module.exports = (_a = class SBlessedComponent extends blessed_1.default.box {
+const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
         /**
          * @name                  constructor
          * @type                  Function
@@ -69,8 +69,9 @@ module.exports = (_a = class SBlessedComponent extends blessed_1.default.box {
             settings = deepMerge_1.default({
                 screen: true,
                 container: true,
-                maxRenderInterval: 100,
-                framerate: null
+                framerate: null,
+                attach: false,
+                blessed: {}
             }, settings);
             // check if need to create a screen
             if (!__activeScreen && settings.screen !== false) {
@@ -89,36 +90,13 @@ module.exports = (_a = class SBlessedComponent extends blessed_1.default.box {
                 __activeScreen.on('destroy', () => {
                     __activeScreen = null;
                 });
-                if (settings.attach === undefined) {
-                    settings.attach = true;
-                }
-                if (settings.container === true) {
-                    settings.container = {
-                        // width: '100%',
-                        height: '100%',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        padding: {
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: 0
-                        },
-                        style: {}
-                    };
-                }
-            }
-            else {
-                settings.container = false;
             }
             // extends parent
             delete settings.screen;
-            super(settings);
+            super(settings.blessed || {});
             /**
              * @name                  _settings
-             * @type                  Object
+             * @type                  ISBlessedComponentSettings
              * @private
              *
              * Store the component settings
@@ -135,7 +113,8 @@ module.exports = (_a = class SBlessedComponent extends blessed_1.default.box {
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             this._renderAfterNotAllowedTimeout = null;
-            this._screen = __activeScreen;
+            // save screen reference
+            this.screen = __activeScreen;
             global.screen = __activeScreen;
             // keep track of the component status
             this._isDisplayed = false;
@@ -150,35 +129,21 @@ module.exports = (_a = class SBlessedComponent extends blessed_1.default.box {
             });
             // save the settings
             this._settings = settings;
-            this._allowRender = true;
-            // this._renderBuffer = setInterval(() => {
-            //   this._allowRender = true;
-            // }, settings.maxRenderInterval);
             // set render interval if not set already
             if (settings.framerate && !SBlessedComponent._framerateInterval) {
                 this.setFramerate(settings.framerate);
             }
-            let container;
-            if (settings.container) {
-                container = blessed_1.default.box(settings.container);
-                __activeScreen.container = container;
-                __activeScreen.append(container);
-                __activeScreen.append = (...args) => {
-                    __activeScreen.container.append(...args);
-                };
-            }
             onProcessExit_1.default(() => __awaiter(this, void 0, void 0, function* () {
                 try {
-                    global._screen && global._screen.destroy();
+                    global.screen && global.screen.destroy();
                 }
                 catch (e) { }
                 this._destroyed = true;
-                this._allowRender = false;
                 this.detach();
                 return true;
             }));
             if (this._settings.attach) {
-                (__activeScreen.container || __activeScreen).append(this);
+                __activeScreen.append(this);
             }
             if (!this._settings.attach) {
                 if (this.parent) {
@@ -192,6 +157,18 @@ module.exports = (_a = class SBlessedComponent extends blessed_1.default.box {
                     });
                 }
             }
+        }
+        get realHeight() {
+            let height = this.height;
+            if (typeof this.getScrollHeight === 'function') {
+                const originalHeight = this.height;
+                //this.height = 0;
+                // this.render();
+                height = this.getScrollHeight();
+                //this.height = originalHeight;
+                // this.render();
+            }
+            return height;
         }
         /**
          * @name                  setFramerate
@@ -216,23 +193,8 @@ module.exports = (_a = class SBlessedComponent extends blessed_1.default.box {
         update() {
             if (this.isDestroyed())
                 return;
-            // if (!this._allowRender) {
-            //   if (!this._settings.framerate && !this._renderAfterNotAllowedTimeout) {
-            //     this._renderAfterNotAllowedTimeout = setTimeout(() => {
-            //       clearTimeout(this._renderAfterNotAllowedTimeout);
-            //       this.update();
-            //     }, 200);
-            //   }
-            //   return;
-            // }
-            // this._allowRender = false;
-            // clearTimeout(this._updateTimeout);
-            // this._updateTimeout = setTimeout(() => {
-            //   this._allowRender = true;
-            //   if (!this._settings.framerate) this.update();
-            // }, this._settings.maxRenderInterval);
-            if (this._screen) {
-                this._screen.render();
+            if (this.screen) {
+                this.screen.render();
             }
         }
         /**
@@ -261,18 +223,6 @@ module.exports = (_a = class SBlessedComponent extends blessed_1.default.box {
         isDestroyed() {
             return this._destroyed === true;
         }
-        /**
-         * @name                  allowRender
-         * @type                  Function
-         *
-         * Check if the component allow a render at this particular time
-         *
-         * @since         2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        allowRender() {
-            return this._allowRender;
-        }
     },
     /**
      * @name                  _framerateInterval
@@ -287,4 +237,5 @@ module.exports = (_a = class SBlessedComponent extends blessed_1.default.box {
      */
     _a._framerateInterval = null,
     _a);
+module.exports = cls;
 //# sourceMappingURL=module.js.map

@@ -148,4 +148,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return getTranslateProperties;
 });
-//# sourceMappingURL=getTranslateProperties.js.map
+//# sourceMappingURL=module.js.map

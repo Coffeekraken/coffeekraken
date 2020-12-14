@@ -51,4 +51,4 @@
     }
     return example;
 });
-//# sourceMappingURL=example.js.map
+//# sourceMappingURL=module.js.map

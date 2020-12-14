@@ -1,1 +1,1 @@
-{"version":3,"file":"easeOutQuad.js","sourceRoot":"","sources":["easeOutQuad.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;IAEV;;;;;;;;;;;;;;;;;OAiBG;IACH,SAAS,IAAI,CAAC,CAAC;QACb,OAAO,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC;IACrB,CAAC;IACD,OAAS,IAAI,CAAC"}
+{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;IAEV;;;;;;;;;;;;;;;;;OAiBG;IACH,SAAS,IAAI,CAAC,CAAC;QACb,OAAO,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC,CAAC,CAAC;IACrB,CAAC;IACD,OAAS,IAAI,CAAC"}

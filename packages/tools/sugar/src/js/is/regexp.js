@@ -39,4 +39,4 @@
     }
     return isRegexp;
 });
-//# sourceMappingURL=regexp.js.map
+//# sourceMappingURL=module.js.map

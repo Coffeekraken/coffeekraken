@@ -40,4 +40,4 @@
     }
     return osx;
 });
-//# sourceMappingURL=osx.js.map
+//# sourceMappingURL=module.js.map

@@ -26,15 +26,17 @@ module.exports = class SBlessedSummaryList extends SBlessedComponent_1.default {
      */
     constructor(items, settings = {}) {
         super(deepMerge_1.default({
-            style: {
-                bg: color_1.default('terminal.black').toString(),
-                item: {
+            blessed: {
+                style: {
                     bg: color_1.default('terminal.black').toString(),
-                    fg: color_1.default('terminal.white').toString()
-                },
-                selected: {
-                    bg: color_1.default('terminal.cyan').toString(),
-                    fg: color_1.default('terminal.white').toString()
+                    item: {
+                        bg: color_1.default('terminal.black').toString(),
+                        fg: color_1.default('terminal.white').toString()
+                    },
+                    selected: {
+                        bg: color_1.default('terminal.cyan').toString(),
+                        fg: color_1.default('terminal.white').toString()
+                    }
                 }
             }
         }, settings));

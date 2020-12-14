@@ -26,59 +26,61 @@ module.exports = class SBlessedPopup extends SBlessedComponent_1.default {
             title: null,
             description: null,
             id: 'SBlessedPopup',
-            width: '80%',
-            height: 200,
-            top: '50%',
-            left: '50%',
-            style: {
-                bg: color_1.default('terminal.primary').toString(),
-                fg: color_1.default('terminal.black').toString()
-            },
-            padding: {
-                top: 0,
-                bottom: 1,
-                left: 2,
-                right: 2
-            },
-            $title: {
-                top: 0,
-                height: 3,
-                padding: {
-                    top: 1,
-                    bottom: 1,
-                    left: 0,
-                    right: 0
-                }
-            },
-            $description: {
-                height: 2,
+            blessed: {
+                width: '80%',
+                height: 200,
+                top: '50%',
+                left: '50%',
                 style: {
-                    bg: color_1.default('terminal.black').toString(),
-                    fg: color_1.default('terminal.white').toString()
+                    bg: color_1.default('terminal.primary').toString(),
+                    fg: color_1.default('terminal.black').toString()
                 },
                 padding: {
-                    top: 1,
-                    bottom: 0,
-                    left: 2,
-                    right: 2
-                }
-            },
-            $content: {
-                left: 0,
-                right: 0,
-                scrollable: true,
-                scrollbar: {
-                    ch: ' ',
-                    inverse: true
-                },
-                scrollable: true,
-                mouse: true,
-                keys: true,
-                padding: {
-                    top: 1,
-                    left: 2,
+                    top: 0,
                     bottom: 1,
+                    left: 2,
                     right: 2
+                },
+                $title: {
+                    top: 0,
+                    height: 3,
+                    padding: {
+                        top: 1,
+                        bottom: 1,
+                        left: 0,
+                        right: 0
+                    }
+                },
+                $description: {
+                    height: 2,
+                    style: {
+                        bg: color_1.default('terminal.black').toString(),
+                        fg: color_1.default('terminal.white').toString()
+                    },
+                    padding: {
+                        top: 1,
+                        bottom: 0,
+                        left: 2,
+                        right: 2
+                    }
+                },
+                $content: {
+                    left: 0,
+                    right: 0,
+                    scrollable: true,
+                    scrollbar: {
+                        ch: ' ',
+                        inverse: true
+                    },
+                    scrollable: true,
+                    mouse: true,
+                    keys: true,
+                    padding: {
+                        top: 1,
+                        left: 2,
+                        bottom: 1,
+                        right: 2
+                    }
                 }
             }
         }, settings));

@@ -86,4 +86,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SSvgFilter_1.default));
     return SOutlineSvgFilter;
 });
-//# sourceMappingURL=SOutlineSvgFilter.js.map
+//# sourceMappingURL=module.js.map

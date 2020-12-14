@@ -1,1 +1,1 @@
-{"version":3,"file":"even.js","sourceRoot":"","sources":["even.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;IAEV;;;;;;;;;;;;;;;;;;;;;;OAsBG;IACH,SAAS,MAAM,CAAC,KAAK;QACnB,OAAO,KAAK,GAAG,CAAC,KAAK,CAAC,CAAC;IACzB,CAAC;IACD,OAAS,MAAM,CAAC"}
+{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;IAEV;;;;;;;;;;;;;;;;;;;;;;OAsBG;IACH,SAAS,MAAM,CAAC,KAAK;QACnB,OAAO,KAAK,GAAG,CAAC,KAAK,CAAC,CAAC;IACzB,CAAC;IACD,OAAS,MAAM,CAAC"}

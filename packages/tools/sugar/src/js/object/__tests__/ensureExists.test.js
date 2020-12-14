@@ -1,3 +1,14 @@
-"use strict";
-const __ensureExists = require('../ensureExists');
-require('./ensureExists')(__ensureExists);
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var __ensureExists = require('../ensureExists');
+    require('./ensureExists')(__ensureExists);
+});
+//# sourceMappingURL=module.js.map

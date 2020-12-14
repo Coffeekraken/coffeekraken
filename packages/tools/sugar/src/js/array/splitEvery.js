@@ -39,4 +39,4 @@
     }
     return splitEvery;
 });
-//# sourceMappingURL=splitEvery.js.map
+//# sourceMappingURL=module.js.map

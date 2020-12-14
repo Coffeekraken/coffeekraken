@@ -43,4 +43,4 @@
     }
     return sprintf;
 });
-//# sourceMappingURL=sprintf.js.map
+//# sourceMappingURL=module.js.map

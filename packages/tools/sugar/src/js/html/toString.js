@@ -44,4 +44,4 @@
     }
     return toStringFn;
 });
-//# sourceMappingURL=toString.js.map
+//# sourceMappingURL=module.js.map

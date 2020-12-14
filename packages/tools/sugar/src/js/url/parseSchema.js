@@ -114,24 +114,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 var isOptional = part.slice(0, 2) === '{?' || part.slice(-2) === '?}';
                 var isType = part.indexOf(':') !== -1;
                 var type = null;
-                var name_1 = null;
+                var name = null;
                 if (isType) {
-                    name_1 = part.split(':')[0].slice(1);
+                    name = part.split(':')[0].slice(1);
                     type = part.split(':')[1].slice(0, -1);
-                    if (name_1.slice(0, 1) === '?')
-                        name_1 = name_1.slice(1);
+                    if (name.slice(0, 1) === '?')
+                        name = name.slice(1);
                     if (type.slice(-1) === '?')
                         type = type.slice(0, -1);
                 }
                 else {
-                    name_1 = part.slice(1, -1);
-                    if (name_1.slice(-1) === '?')
-                        name_1 = name_1.slice(0, -1);
-                    if (name_1.slice(0, 1) === '?')
-                        name_1 = name_1.slice(1);
+                    name = part.slice(1, -1);
+                    if (name.slice(-1) === '?')
+                        name = name.slice(0, -1);
+                    if (name.slice(0, 1) === '?')
+                        name = name.slice(1);
                 }
                 return {
-                    name: name_1,
+                    name: name,
                     type: type,
                     raw: part,
                     optional: isOptional
@@ -206,4 +206,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return parseSchema;
 });
-//# sourceMappingURL=parseSchema.js.map
+//# sourceMappingURL=module.js.map

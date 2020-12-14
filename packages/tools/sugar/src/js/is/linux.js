@@ -40,4 +40,4 @@
     }
     return linux;
 });
-//# sourceMappingURL=linux.js.map
+//# sourceMappingURL=module.js.map

@@ -39,4 +39,4 @@
     }
     return px2em;
 });
-//# sourceMappingURL=px2em.js.map
+//# sourceMappingURL=module.js.map

@@ -53,4 +53,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return domReady;
 });
-//# sourceMappingURL=domready.js.map
+//# sourceMappingURL=module.js.map

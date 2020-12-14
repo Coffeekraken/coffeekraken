@@ -39,4 +39,4 @@
     }
     return isSamsumgBrowser;
 });
-//# sourceMappingURL=samsungBrowser.js.map
+//# sourceMappingURL=module.js.map

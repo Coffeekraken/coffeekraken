@@ -42,4 +42,4 @@
     }
     return isColor;
 });
-//# sourceMappingURL=color.js.map
+//# sourceMappingURL=module.js.map

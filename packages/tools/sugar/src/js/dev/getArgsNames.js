@@ -62,4 +62,4 @@
     }
     return getArgsNames;
 });
-//# sourceMappingURL=getArgsNames.js.map
+//# sourceMappingURL=module.js.map

@@ -47,4 +47,4 @@
     }
     return requestFullscreen;
 });
-//# sourceMappingURL=requestFullscreen.js.map
+//# sourceMappingURL=module.js.map

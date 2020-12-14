@@ -134,4 +134,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SWatch;
     }());
 });
-//# sourceMappingURL=SWatch.js.map
+//# sourceMappingURL=module.js.map

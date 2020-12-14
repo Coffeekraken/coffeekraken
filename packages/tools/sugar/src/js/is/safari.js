@@ -39,4 +39,4 @@
     }
     return isSafari;
 });
-//# sourceMappingURL=safari.js.map
+//# sourceMappingURL=module.js.map

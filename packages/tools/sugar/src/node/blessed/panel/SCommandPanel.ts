@@ -115,7 +115,8 @@ export = class SCommandPanel extends __SBlessedComponent {
   constructor(commands, settings = {}) {
     const _settings = __deepMerge(
       {
-        framerate: 10
+        framerate: 10,
+        blessed: {}
       },
       settings
     );
@@ -1108,4 +1109,4 @@ export = class SCommandPanel extends __SBlessedComponent {
       super.update();
     });
   }
-}
+};

@@ -40,4 +40,4 @@
     };
     return descriptor;
 });
-//# sourceMappingURL=symbolTypeDescriptor.js.map
+//# sourceMappingURL=module.js.map

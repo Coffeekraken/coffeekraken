@@ -1,3 +1,14 @@
-"use strict";
-const __parseSchema = require('../parseSchema');
-require('./parseSchema')(__parseSchema);
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var __parseSchema = require('../parseSchema');
+    require('./parseSchema')(__parseSchema);
+});
+//# sourceMappingURL=module.js.map

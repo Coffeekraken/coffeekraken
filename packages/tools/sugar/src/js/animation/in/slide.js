@@ -52,4 +52,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         });
     })();
 });
-//# sourceMappingURL=slide.js.map
+//# sourceMappingURL=module.js.map

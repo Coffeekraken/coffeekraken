@@ -47,4 +47,4 @@
     }
     return strToHtml;
 });
-//# sourceMappingURL=strToHtml.js.map
+//# sourceMappingURL=module.js.map

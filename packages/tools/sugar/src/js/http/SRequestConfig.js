@@ -172,4 +172,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SRequestConfig;
     }());
 });
-//# sourceMappingURL=SRequestConfig.js.map
+//# sourceMappingURL=module.js.map

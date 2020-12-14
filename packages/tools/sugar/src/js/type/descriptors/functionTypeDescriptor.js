@@ -38,4 +38,4 @@
     };
     return descriptor;
 });
-//# sourceMappingURL=functionTypeDescriptor.js.map
+//# sourceMappingURL=module.js.map

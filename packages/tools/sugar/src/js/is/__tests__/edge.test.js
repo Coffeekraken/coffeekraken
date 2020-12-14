@@ -1,3 +1,14 @@
-"use strict";
-const __edge = require('../edge');
-require('./edge')(__edge);
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var __edge = require('../edge');
+    require('./edge')(__edge);
+});
+//# sourceMappingURL=module.js.map

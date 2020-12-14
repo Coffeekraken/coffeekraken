@@ -49,10 +49,12 @@ export default class SSugarAppModuleTerminalUi extends __SBlessedComponent {
       __deepMerge(
         {
           filter: null,
-          width: '100%',
-          height: '100%',
-          style: {
-            bg: 'yellow'
+          blessed: {
+            width: '100%',
+            height: '100%',
+            style: {
+              bg: 'yellow'
+            }
           }
         },
         settings

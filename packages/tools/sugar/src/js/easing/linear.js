@@ -33,4 +33,4 @@
     }
     return ease;
 });
-//# sourceMappingURL=linear.js.map
+//# sourceMappingURL=module.js.map

@@ -45,4 +45,4 @@
     }
     return availableEasingsArray;
 });
-//# sourceMappingURL=availableEasingsArray.js.map
+//# sourceMappingURL=module.js.map

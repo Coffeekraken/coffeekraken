@@ -1,26 +1,37 @@
-"use strict";
-module.exports = (__map) => {
-    describe('sugar.js.object.map', () => {
-        it('Should be processed correctly using the map function', done => {
-            const obj1 = {
-                hello: {
-                    world: 'hello world',
-                    plop: 'youhou'
-                },
-                plop: {
-                    array: [0, 1, 2]
-                }
-            };
-            expect(__map(obj1, (value, prop) => {
-                return prop === 'plop' ? 'yeah' : value;
-            })).toEqual({
-                hello: {
-                    world: 'hello world',
-                    plop: 'youhou'
-                },
-                plop: 'yeah'
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    module.exports = function (__map) {
+        describe('sugar.js.object.map', function () {
+            it('Should be processed correctly using the map function', function (done) {
+                var obj1 = {
+                    hello: {
+                        world: 'hello world',
+                        plop: 'youhou'
+                    },
+                    plop: {
+                        array: [0, 1, 2]
+                    }
+                };
+                expect(__map(obj1, function (value, prop) {
+                    return prop === 'plop' ? 'yeah' : value;
+                })).toEqual({
+                    hello: {
+                        world: 'hello world',
+                        plop: 'youhou'
+                    },
+                    plop: 'yeah'
+                });
+                done();
             });
-            done();
         });
-    });
-};
+    };
+});
+//# sourceMappingURL=module.js.map

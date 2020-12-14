@@ -1,4 +1,3 @@
-"use strict";
 // @ts-nocheck
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -36,60 +35,71 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __axios = require('axios');
-/**
- * @name                            bitbucketApiValidator
- * @namespace           node.auth
- * @type                            Function
- * @async
- *
- * Make sure the bitbucket api authentification has been made correctly
- *
- * @param           {Object}              authInfo            The authentification info
- * @return          {Promise}                                 true if ok, false (or error message) if it's not...
- *
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-module.exports = function bitbucketApiValidator(authInfo) {
-    return __awaiter(this, void 0, void 0, function () {
-        var _this = this;
-        return __generator(this, function (_a) {
-            return [2 /*return*/, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                    var url;
-                    return __generator(this, function (_a) {
-                        url = 'https://api.bitbucket.org/2.0/repositories';
-                        switch (authInfo.type) {
-                            case 'basic':
-                                __axios
-                                    .get(url, {
-                                    headers: authInfo.headers
-                                })
-                                    .then(function (response) {
-                                    resolve(true);
-                                })
-                                    .catch(function (e) {
-                                    resolve("Your credentials have been declined. Please try again...");
-                                });
-                                break;
-                            case 'bearer':
-                                __axios
-                                    .get(url, {
-                                    headers: authInfo.headers
-                                })
-                                    .then(function (response) {
-                                    console.log('resp', response);
-                                    process.exit();
-                                    resolve(true);
-                                })
-                                    .catch(function (e) {
-                                    resolve("Your token has been declined. Please try again...");
-                                });
-                                break;
-                        }
-                        return [2 /*return*/];
-                    });
-                }); })];
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var __axios = require('axios');
+    /**
+     * @name                            bitbucketApiValidator
+     * @namespace           node.auth
+     * @type                            Function
+     * @async
+     *
+     * Make sure the bitbucket api authentification has been made correctly
+     *
+     * @param           {Object}              authInfo            The authentification info
+     * @return          {Promise}                                 true if ok, false (or error message) if it's not...
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    module.exports = function bitbucketApiValidator(authInfo) {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            return __generator(this, function (_a) {
+                return [2 /*return*/, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+                        var url;
+                        return __generator(this, function (_a) {
+                            url = 'https://api.bitbucket.org/2.0/repositories';
+                            switch (authInfo.type) {
+                                case 'basic':
+                                    __axios
+                                        .get(url, {
+                                        headers: authInfo.headers
+                                    })
+                                        .then(function (response) {
+                                        resolve(true);
+                                    })
+                                        .catch(function (e) {
+                                        resolve("Your credentials have been declined. Please try again...");
+                                    });
+                                    break;
+                                case 'bearer':
+                                    __axios
+                                        .get(url, {
+                                        headers: authInfo.headers
+                                    })
+                                        .then(function (response) {
+                                        console.log('resp', response);
+                                        process.exit();
+                                        resolve(true);
+                                    })
+                                        .catch(function (e) {
+                                        resolve("Your token has been declined. Please try again...");
+                                    });
+                                    break;
+                            }
+                            return [2 /*return*/];
+                        });
+                    }); })];
+            });
         });
-    });
-};
-//# sourceMappingURL=bitbucketApiValidator.js.map
+    };
+});
+//# sourceMappingURL=module.js.map

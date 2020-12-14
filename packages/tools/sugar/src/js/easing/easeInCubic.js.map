@@ -1,1 +1,1 @@
-{"version":3,"file":"easeInCubic.js","sourceRoot":"","sources":["easeInCubic.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;IAEV;;;;;;;;;;;;;;;;;OAiBG;IACH,SAAS,IAAI,CAAC,CAAC;QACb,OAAO,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC;IACnB,CAAC;IACD,OAAS,IAAI,CAAC"}
+{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;IAEV;;;;;;;;;;;;;;;;;OAiBG;IACH,SAAS,IAAI,CAAC,CAAC;QACb,OAAO,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC;IACnB,CAAC;IACD,OAAS,IAAI,CAAC"}

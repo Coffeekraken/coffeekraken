@@ -1,3 +1,14 @@
-"use strict";
-const __testEnv = require('../testEnv');
-require('./testEnv')(__testEnv);
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var __testEnv = require('../testEnv');
+    require('./testEnv')(__testEnv);
+});
+//# sourceMappingURL=module.js.map

@@ -23,11 +23,13 @@ module.exports = (_a = class SBlessedNotification extends SBlessedComponent_1.de
                 onClick: null,
                 position: 'tr',
                 timeout: 5000,
-                bg: 'yellow',
-                fg: 'black',
-                hover: {
+                blessed: {
                     bg: 'yellow',
-                    fg: 'black'
+                    fg: 'black',
+                    hover: {
+                        bg: 'yellow',
+                        fg: 'black'
+                    }
                 }
             }, settings);
             const position = settings.position;

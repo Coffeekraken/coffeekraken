@@ -48,4 +48,4 @@
     }
     return parseRgba;
 });
-//# sourceMappingURL=parseRgba.js.map
+//# sourceMappingURL=module.js.map

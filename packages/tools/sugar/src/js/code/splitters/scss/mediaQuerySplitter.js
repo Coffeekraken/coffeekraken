@@ -17,4 +17,4 @@
         close: '}'
     };
 });
-//# sourceMappingURL=mediaQuerySplitter.js.map
+//# sourceMappingURL=module.js.map

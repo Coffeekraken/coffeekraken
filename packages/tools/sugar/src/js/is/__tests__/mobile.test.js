@@ -1,3 +1,14 @@
-"use strict";
-const __mobile = require('../mobile');
-require('./mobile')(__mobile);
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var __mobile = require('../mobile');
+    require('./mobile')(__mobile);
+});
+//# sourceMappingURL=module.js.map

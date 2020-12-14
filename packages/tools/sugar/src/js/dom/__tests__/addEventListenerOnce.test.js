@@ -1,26 +1,35 @@
-"use strict";
-const __addEventListenerOnce = require('../addEventListenerOnce');
-const __dispatchEvent = require('../dispatchEvent');
-describe('sugar.js.dom.addEventListenerOnce', () => {
-    document.body.innerHTML = `
-      <div id="testing">Hello World</div>
-  `;
-    const $elm = document.querySelector('#testing');
-    let isTriggeredTwice = false;
-    it('Should add the event listener on the element correctly', (done) => {
-        __addEventListenerOnce($elm, 'click').on('click', (e) => {
-            if (e.detail.twice)
-                isTriggeredTwice = true;
-            done();
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    var __addEventListenerOnce = require('../addEventListenerOnce');
+    var __dispatchEvent = require('../dispatchEvent');
+    describe('sugar.js.dom.addEventListenerOnce', function () {
+        document.body.innerHTML = "\n      <div id=\"testing\">Hello World</div>\n  ";
+        var $elm = document.querySelector('#testing');
+        var isTriggeredTwice = false;
+        it('Should add the event listener on the element correctly', function (done) {
+            __addEventListenerOnce($elm, 'click').on('click', function (e) {
+                if (e.detail.twice)
+                    isTriggeredTwice = true;
+                done();
+            });
+            __dispatchEvent($elm, 'click', {
+                first: true
+            });
         });
-        __dispatchEvent($elm, 'click', {
-            first: true
+        it('Should not trigger anymore the same event', function () {
+            __dispatchEvent($elm, 'click', {
+                twice: true
+            });
+            expect(isTriggeredTwice).toBe(false);
         });
-    });
-    it('Should not trigger anymore the same event', () => {
-        __dispatchEvent($elm, 'click', {
-            twice: true
-        });
-        expect(isTriggeredTwice).toBe(false);
     });
 });
+//# sourceMappingURL=module.js.map

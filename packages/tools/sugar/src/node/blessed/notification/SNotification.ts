@@ -97,11 +97,13 @@ export = class SBlessedNotification extends __SBlessedComponent {
         onClick: null,
         position: 'tr',
         timeout: 5000,
-        bg: 'yellow',
-        fg: 'black',
-        hover: {
+        blessed: {
           bg: 'yellow',
-          fg: 'black'
+          fg: 'black',
+          hover: {
+            bg: 'yellow',
+            fg: 'black'
+          }
         }
       },
       settings
@@ -166,4 +168,4 @@ export = class SBlessedNotification extends __SBlessedComponent {
     SBlessedNotification.update();
     super.update();
   }
-}
+};

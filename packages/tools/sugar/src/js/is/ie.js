@@ -39,4 +39,4 @@
     }
     return isIe;
 });
-//# sourceMappingURL=ie.js.map
+//# sourceMappingURL=module.js.map

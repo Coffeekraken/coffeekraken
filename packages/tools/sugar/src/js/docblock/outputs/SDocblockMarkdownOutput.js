@@ -89,4 +89,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         ],
         _a);
 });
-//# sourceMappingURL=SDocblockMarkdownOutput.js.map
+//# sourceMappingURL=module.js.map

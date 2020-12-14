@@ -40,4 +40,4 @@
     }
     return description;
 });
-//# sourceMappingURL=description.js.map
+//# sourceMappingURL=module.js.map

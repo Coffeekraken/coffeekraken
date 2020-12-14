@@ -14,4 +14,4 @@
         return typeof window !== 'undefined';
     };
 });
-//# sourceMappingURL=js.js.map
+//# sourceMappingURL=module.js.map

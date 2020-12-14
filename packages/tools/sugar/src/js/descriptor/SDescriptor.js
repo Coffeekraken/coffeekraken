@@ -19,4 +19,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     require("./rules/maxRule");
     return _SDescriptor_1.default;
 });
-//# sourceMappingURL=SDescriptor.js.map
+//# sourceMappingURL=module.js.map

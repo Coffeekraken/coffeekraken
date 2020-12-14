@@ -38,4 +38,4 @@
     }
     return isEven;
 });
-//# sourceMappingURL=even.js.map
+//# sourceMappingURL=module.js.map

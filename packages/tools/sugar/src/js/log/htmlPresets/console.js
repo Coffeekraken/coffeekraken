@@ -62,4 +62,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return consoleFn;
 });
-//# sourceMappingURL=console.js.map
+//# sourceMappingURL=module.js.map

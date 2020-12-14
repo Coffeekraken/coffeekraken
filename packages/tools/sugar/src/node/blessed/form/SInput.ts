@@ -48,20 +48,22 @@ export = class SBlessedInput extends __SBlessedComponent {
         id: 'SInput',
         focus: true,
         placeholder: null,
-        width: '100%',
-        height: 3,
-        keys: true,
-        mouse: true,
-        inputOnFocus: true,
-        style: {
-          bg: __color('terminal.cyan').toString(),
-          fg: __color('terminal.black').toString()
-        },
-        padding: {
-          top: 1,
-          bottom: 1,
-          left: 2,
-          right: 2
+        blessed: {
+          width: '100%',
+          height: 3,
+          keys: true,
+          mouse: true,
+          inputOnFocus: true,
+          style: {
+            bg: __color('terminal.cyan').toString(),
+            fg: __color('terminal.black').toString()
+          },
+          padding: {
+            top: 1,
+            bottom: 1,
+            left: 2,
+            right: 2
+          }
         }
       },
       settings
@@ -166,4 +168,4 @@ export = class SBlessedInput extends __SBlessedComponent {
 
     this.append(this.$input);
   }
-}
+};

@@ -1,1 +1,1 @@
-{"version":3,"file":"uniqid.js","sourceRoot":"","sources":["uniqid.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;;;;IAEV,kDAA8B;IAC9B;;;;;;;;;;;;;;;;;;;;;OAqBG;IACH,SAAS,MAAM;QACb,OAAO,gBAAQ,EAAE,CAAC;IACpB,CAAC;IACD,OAAS,MAAM,CAAC"}
+{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;;;;IAEV,kDAA8B;IAC9B;;;;;;;;;;;;;;;;;;;;;OAqBG;IACH,SAAS,MAAM;QACb,OAAO,gBAAQ,EAAE,CAAC;IACpB,CAAC;IACD,OAAS,MAAM,CAAC"}

@@ -109,15 +109,17 @@ export = class SBlessedSummaryList extends __SBlessedComponent {
     super(
       __deepMerge(
         {
-          style: {
-            bg: __color('terminal.black').toString(),
-            item: {
+          blessed: {
+            style: {
               bg: __color('terminal.black').toString(),
-              fg: __color('terminal.white').toString()
-            },
-            selected: {
-              bg: __color('terminal.cyan').toString(),
-              fg: __color('terminal.white').toString()
+              item: {
+                bg: __color('terminal.black').toString(),
+                fg: __color('terminal.white').toString()
+              },
+              selected: {
+                bg: __color('terminal.cyan').toString(),
+                fg: __color('terminal.white').toString()
+              }
             }
           }
         },
@@ -394,4 +396,4 @@ export = class SBlessedSummaryList extends __SBlessedComponent {
       super.update();
     });
   }
-}
+};

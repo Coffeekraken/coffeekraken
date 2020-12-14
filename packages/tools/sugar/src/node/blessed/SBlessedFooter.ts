@@ -45,21 +45,23 @@ export = class SBlessedFooter extends __SBlessedComponent {
         {
           authors: [],
           website: null,
-          width: '100%',
-          height: 10,
-          position: {
-            top: '100%-1',
-            left: 0
-          },
-          style: {
-            bg: __color('terminal.primary').toString(),
-            fg: __color('terminal.black').toString()
-          },
-          padding: {
-            top: 0,
-            bottom: 0,
-            left: 1,
-            right: 0
+          blessed: {
+            width: '100%',
+            height: 10,
+            position: {
+              top: '100%-1',
+              left: 0
+            },
+            style: {
+              bg: __color('terminal.primary').toString(),
+              fg: __color('terminal.black').toString()
+            },
+            padding: {
+              top: 0,
+              bottom: 0,
+              left: 1,
+              right: 0
+            }
           }
         },
         settings
@@ -203,4 +205,4 @@ export = class SBlessedFooter extends __SBlessedComponent {
 
     super.update();
   }
-}
+};

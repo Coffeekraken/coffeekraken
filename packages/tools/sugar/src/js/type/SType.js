@@ -15,4 +15,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     require("./sTypeRegisterDefaultDescriptors");
     return _SType_1.default;
 });
-//# sourceMappingURL=SType.js.map
+//# sourceMappingURL=module.js.map

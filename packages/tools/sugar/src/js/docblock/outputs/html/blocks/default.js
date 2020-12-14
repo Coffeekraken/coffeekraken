@@ -12,4 +12,4 @@
     "use strict";
     return "\n  {{> heading}}\n\n  {{> params}}\n\n  {{> example}}\n\n  {{> author}}\n";
 });
-//# sourceMappingURL=default.js.map
+//# sourceMappingURL=module.js.map

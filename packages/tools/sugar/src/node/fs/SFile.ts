@@ -204,7 +204,8 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
         checkExistence: true,
         cwd: process.cwd(),
         sizeIn: 'MBytes',
-        shrinkSizesTo: 2
+        shrinkSizesTo: 2,
+        watch: true
       },
       this._settings
     );
@@ -236,10 +237,12 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
 
     if (this.exists) {
       this.update();
-      const watcher = __fs.watch(this.path, (event) => {
-        if (event !== 'change' && watcher) watcher.close();
-        this.update();
-      });
+      if (this._settings.watch === true) {
+        const watcher = __fs.watch(this.path, (event) => {
+          if (event !== 'change' && watcher) watcher.close();
+          this.update();
+        });
+      }
     }
   }
 
@@ -283,7 +286,14 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   update() {
-    if (!this.exists) return;
+    this.exists = __fs.existsSync(this.path);
+    if (!this.exists) {
+      this.sizeInBytes = -1;
+      this.sizeInKBytes = -1;
+      this.sizeInMBytes = -1;
+      this.sizeInGBytes = -1;
+      return;
+    }
     // get the file stats
     const stats = __fs.statSync(this.path);
     this.sizeInBytes = stats.size;

@@ -1,20 +1,23 @@
-"use strict";
-module.exports = (__trimLines) => {
-    describe('sugar.js.string.trimLines', () => {
-        it('Should trim the lines correctly', (done) => {
-            const string = `Something
-      So cool
-So cool
-                  a
-Yes`;
-            expect(__trimLines(string, {
-                leftPadding: 2
-            })).toBe(`  Something
-  So cool
-  So cool
-  a
-  Yes`);
-            done();
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    module.exports = function (__trimLines) {
+        describe('sugar.js.string.trimLines', function () {
+            it('Should trim the lines correctly', function (done) {
+                var string = "Something\n      So cool\nSo cool\n                  a\nYes";
+                expect(__trimLines(string, {
+                    leftPadding: 2
+                })).toBe("  Something\n  So cool\n  So cool\n  a\n  Yes");
+                done();
+            });
         });
-    });
-};
+    };
+});
+//# sourceMappingURL=module.js.map

@@ -270,4 +270,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     };
     return activeSpaceApi;
 });
-//# sourceMappingURL=activeSpace.js.map
+//# sourceMappingURL=module.js.map

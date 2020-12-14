@@ -46,4 +46,4 @@
     }
     return ltrim;
 });
-//# sourceMappingURL=ltrim.js.map
+//# sourceMappingURL=module.js.map

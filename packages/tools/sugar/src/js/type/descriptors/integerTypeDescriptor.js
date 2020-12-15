@@ -44,4 +44,4 @@
     };
     return descriptor;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=integerTypeDescriptor.js.map

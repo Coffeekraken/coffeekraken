@@ -47,7 +47,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 })(function (require, exports) {
     "use strict";
     return function asyncForEach(array, asyncFn) {
-        return __awaiter(this, void 0, Promise, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
                 return [2 /*return*/, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
@@ -76,4 +76,4 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         });
     };
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=asyncForEach.js.map

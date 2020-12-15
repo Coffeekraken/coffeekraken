@@ -126,4 +126,4 @@ convert.WEEK = 'w';
 convert.MONTH = 'month';
 convert.YEAR = 'y';
 module.exports = convert;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=convert.js.map

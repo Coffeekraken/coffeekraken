@@ -152,4 +152,4 @@ module.exports = class SEs6Import {
         return string;
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SEs6Import.js.map

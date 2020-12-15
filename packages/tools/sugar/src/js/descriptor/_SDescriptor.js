@@ -1,18 +1,5 @@
 // @ts-nocheck
 // @shared
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -22,12 +9,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../string/uniqid", "../is/ofType", "../value/typeof", "./SDescriptorResult", "../object/get", "../object/set", "../object/deepMerge"], factory);
+        define(["require", "exports", "../is/ofType", "../value/typeof", "./SDescriptorResult", "../object/get", "../object/set", "../object/deepMerge"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var _a;
-    var uniqid_1 = __importDefault(require("../string/uniqid"));
     var ofType_1 = __importDefault(require("../is/ofType"));
     var typeof_1 = __importDefault(require("../value/typeof"));
     var SDescriptorResult_1 = __importDefault(require("./SDescriptorResult"));
@@ -44,6 +30,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      *
      * @param       {ISDescriptorSettings}      settings        An object of setting to configure your descriptor instance
      *
+     * @todo      handle array values
+     *
      * @example       js
      * import SDescriptor from '@coffeekraken/sugar/js/descriptor/SDescriptor';
      * class MyDescriptor extends SDescriptor {
@@ -56,7 +44,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    var __descriptorsStack = {};
     var Cls = (_a = /** @class */ (function () {
             /**
              * @name      constructor
@@ -69,59 +56,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             function SDescriptor(settings) {
-                if (typeof settings === 'string') {
-                    // restore from a generated descriptor
-                    var descriptorObj = __descriptorsStack[settings];
-                    this.constructor.rules = descriptorObj.rules;
-                    this.constructor.type = descriptorObj.type || 'Object';
-                    this.constructor.settings = descriptorObj.settings || {};
-                    settings = {};
-                    if (descriptorObj.name)
-                        settings.name = descriptorObj.name;
-                    if (descriptorObj.id)
-                        settings.id = descriptorObj.id;
-                }
                 // save the settings
                 this._settings = deepMerge_1.default({
+                    id: this.constructor.id || this.constructor.name,
+                    name: this.constructor.name,
+                    rules: this.constructor.rules || {},
                     arrayAsValue: false,
                     throwOnMissingRule: false,
                     throwOnError: false,
                     complete: true
                 }, this.constructor.settings, settings);
             }
-            /**
-             * @name       generate
-             * @type       Function
-             * @static
-             *
-             * This static method allows you to generate quickly a new descriptor
-             * bysimply passing some properties as settings.
-             *
-             * @param         {ISDescriptorGenerateSettings}      descriptorObj          An object describing your descriptor
-             * @return        {Class}                                    A new class that represent your descriptor
-             *
-             * @setting       {String}        [name=null]             A name for your descriptor
-             * @setting       {String}        [id=null]               An id for your descriptor
-             * @setting       {ISDescriptorRules}         rules           An object of rules that your descriptor has to apply
-             * @setting       {String}        [type='Object']         Specify some type(s) that your descriptor accept to validate
-             * @setting       {ISDecriptorSettings}       [settings={}]       An object of settings to configure your descriptor
-             *
-             * @since         2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com>
-             */
-            SDescriptor.generate = function (descriptorObj) {
-                var id = uniqid_1.default();
-                __descriptorsStack[id] = descriptorObj;
-                var SGeneratedDescriptor = /** @class */ (function (_super) {
-                    __extends(SGeneratedDescriptor, _super);
-                    function SGeneratedDescriptor() {
-                        return _super !== null && _super.apply(this, arguments) || this;
-                    }
-                    return SGeneratedDescriptor;
-                }(SDescriptor));
-                SGeneratedDescriptor._descriptorId = id;
-                return SGeneratedDescriptor;
-            };
             /**
              * @name      registerRule
              * @type      Function
@@ -140,31 +85,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     throw "Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...";
                 }
                 this._registeredRules[rule.id] = rule;
-            };
-            /**
-             * @name        apply
-             * @type        Function
-             * @static
-             *
-             * This static method allows you to apply the descriptor on a value
-             * withour having to instanciate a new descriptor.
-             *
-             * @param       {Any}         value         The value on which you want to apply the descriptor
-             * @param       {ISDescriptorSettings}      [settings={}]       An object of settings to configure your apply process
-             * @return      {ISDescriptorResultObj|true}            true if the descriptor does not have found any issue(s), an ISDescriptorResultObj object if not
-             *
-             * @since       2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com>
-             */
-            SDescriptor.apply = function (value, settings) {
-                var instance;
-                if (this._descriptorId) {
-                    instance = new SDescriptor(this._descriptorId);
-                }
-                else {
-                    instance = new this(settings);
-                }
-                return instance.apply(value, settings);
             };
             Object.defineProperty(SDescriptor.prototype, "name", {
                 /**
@@ -228,8 +148,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 // initialize the descriptor result instance
                 this._descriptorResult = new SDescriptorResult_1.default(this, value, Object.assign({}, settings));
                 // check the passed value type correspond to the descriptor type
-                if (!ofType_1.default(value, this.constructor.type)) {
-                    throw "Sorry but this descriptor \"<yellow>" + this.constructor.name + "</yellow>\" does not accept values of type \"<cyan>" + typeof_1.default(value) + "</cyan>\" but only \"<green>" + this.constructor.type + "</green>\"...";
+                if (!ofType_1.default(value, settings.type)) {
+                    throw "Sorry but this descriptor \"<yellow>" + settings.name + "</yellow>\" does not accept values of type \"<cyan>" + typeof_1.default(value) + "</cyan>\" but only \"<green>" + settings.type + "</green>\"...";
                 }
                 // check the type to validate correctly the value
                 if (Array.isArray(value) && !settings.arrayAsValue) {
@@ -240,7 +160,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     value !== null &&
                     value !== undefined) {
                     // loop on each object properties
-                    Object.keys(this.constructor.rules).forEach(function (propName) {
+                    Object.keys(settings.rules).forEach(function (propName) {
                         var propValue = get_1.default(value, propName);
                         // validate the object property
                         var validationResult = _this._validate(propValue, propName, settings);
@@ -274,11 +194,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             SDescriptor.prototype._validate = function (value, propName, settings) {
                 var _this = this;
                 // check if we have a propName, meaning that we are validating an object
-                var rules = this.constructor.rules;
+                var rules = settings.rules;
                 if (propName !== undefined) {
-                    if (this.constructor.rules[propName] === undefined)
+                    if (settings.rules[propName] === undefined)
                         return true;
-                    rules = this.constructor.rules[propName];
+                    rules = settings.rules[propName];
                 }
                 // check the "complete" setting
                 if (settings.complete) {
@@ -377,4 +297,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         _a);
     return Cls;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=_SDescriptor.js.map

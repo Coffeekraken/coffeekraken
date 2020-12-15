@@ -30,4 +30,4 @@ function description(data) {
         .trim();
 }
 module.exports = description;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=description.js.map

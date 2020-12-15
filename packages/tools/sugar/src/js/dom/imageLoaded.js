@@ -74,4 +74,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return imageLoaded;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=imageLoaded.js.map

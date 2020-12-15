@@ -706,7 +706,7 @@ export = class SPromise extends Promise {
   async trigger(what, arg, metas = {}) {
     if (this._isDestroyed) return;
 
-    let treatAsValue = arg !== undefined && arg.treatAsValue;
+    let treatAsValue = arg !== undefined;
 
     if (treatAsValue) {
       arg = __treatAsValue(arg);
@@ -714,7 +714,7 @@ export = class SPromise extends Promise {
 
     // triger the passed stacks
     let res = this._triggerStacks(what, arg, metas);
-    if (res && res.revoke) {
+    if (res && res.restorePromiseBehavior) {
       res = res.restorePromiseBehavior();
     }
     return res;

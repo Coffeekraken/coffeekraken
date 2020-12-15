@@ -1,1 +1,1 @@
-{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":";AAAA,cAAc;;;;;AAEd,4EAAsD;AAuBtD,uBAAS,MAAM,oBAAqB,SAAQ,oBAAY;KAQvD;IAPC,8CAA8C;IAE9C,0BAA0B;IAEnB,QAAK,GAAG,wBAAyB;IACjC,cAAW,GAChB,oHAAqH;QACvH"}
+{"version":3,"file":"SAppCommandInterface.js","sourceRoot":"","sources":["SAppCommandInterface.ts"],"names":[],"mappings":";AAAA,cAAc;;;;;AAEd,4EAAsD;AAuBtD,uBAAS,MAAM,oBAAqB,SAAQ,oBAAY;KAQvD;IAPC,8CAA8C;IAE9C,0BAA0B;IAEnB,QAAK,GAAG,wBAAyB;IACjC,cAAW,GAChB,oHAAqH;QACvH"}

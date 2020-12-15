@@ -95,4 +95,4 @@ export = class SSimpleApp extends __SApp {
     // return the container
     return container;
   }
-}
+};

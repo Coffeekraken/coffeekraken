@@ -40,4 +40,4 @@ const Email = {
     }
 };
 module.exports = Email;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=smtp.js.map

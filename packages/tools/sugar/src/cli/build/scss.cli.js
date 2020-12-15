@@ -14,4 +14,4 @@ module.exports = (stringArgs = '') => {
         }
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=scss.cli.js.map

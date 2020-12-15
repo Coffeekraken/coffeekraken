@@ -13,4 +13,4 @@ module.exports = (stringArgs = '') => {
         }
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=frontend.cli.js.map

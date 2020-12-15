@@ -40,4 +40,4 @@ function isUrl(data) {
     return re.test(data);
 }
 module.exports = isUrl;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=url.js.map

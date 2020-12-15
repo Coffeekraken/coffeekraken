@@ -43,4 +43,4 @@
     }
     return camelize;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=camelize.js.map

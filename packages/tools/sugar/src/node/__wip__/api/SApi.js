@@ -429,4 +429,4 @@ class SApi {
     }
 }
 exports.default = SApi;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SApi.js.map

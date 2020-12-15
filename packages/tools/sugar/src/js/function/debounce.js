@@ -52,4 +52,4 @@
     }
     return debounce;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=debounce.js.map

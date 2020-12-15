@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 var _a;
-const SInterface_1 = __importDefault(require("../../../class/SInterface"));
+const SInterface_1 = __importDefault(require("../../../interface/SInterface"));
 const sugar_1 = __importDefault(require("../../../config/sugar"));
 module.exports = (_a = class SFrontendServerInterface extends SInterface_1.default {
     },
@@ -37,4 +37,4 @@ module.exports = (_a = class SFrontendServerInterface extends SInterface_1.defau
         }
     },
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SFrontendServerInterface.js.map

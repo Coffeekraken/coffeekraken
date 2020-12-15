@@ -61,4 +61,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return stringify;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=stringify.js.map

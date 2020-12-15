@@ -58,4 +58,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return imagesLoadedAttribute;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=imagesLoadedAttribute.js.map

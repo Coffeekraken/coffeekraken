@@ -39,4 +39,4 @@
     }
     return author;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=author.js.map

@@ -31,4 +31,4 @@ onProcessExit_1.default(() => {
 });
 // Logging
 new SLog_1.default(sugar_1.default('log'));
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=index.js.map

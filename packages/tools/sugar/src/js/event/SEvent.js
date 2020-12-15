@@ -81,4 +81,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
  *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SEvent.js.map

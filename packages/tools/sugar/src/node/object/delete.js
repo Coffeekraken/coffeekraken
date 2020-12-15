@@ -60,4 +60,4 @@ function del(object, dotPath) {
     return object;
 }
 module.exports = del;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=delete.js.map

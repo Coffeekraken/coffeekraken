@@ -154,4 +154,4 @@ module.exports = class SInput extends __blessed.box {
         return lines.join('\n');
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SInputContainer.js.map

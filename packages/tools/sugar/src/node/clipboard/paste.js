@@ -33,4 +33,4 @@ function paste(text) {
     return clipboardy_1.default.readSync();
 }
 module.exports = paste;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=paste.js.map

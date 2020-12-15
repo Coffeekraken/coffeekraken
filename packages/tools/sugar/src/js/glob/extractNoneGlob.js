@@ -43,4 +43,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return extractNoneGlob;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=extractNoneGlob.js.map

@@ -47,26 +47,31 @@ var __assign = (this && this.__assign) || function () {
         if (settings === void 0) { settings = {}; }
         settings = __assign({ during: -1 }, settings);
         var during = settings.during || -1;
-        var proxy = Proxy.revocable(promise, {
-            get: function (target, prop, receiver) {
-                if (prop === 'then') {
-                    return target;
+        try {
+            var proxy_1 = Proxy.revocable(promise, {
+                get: function (target, prop, receiver) {
+                    if (prop === 'then') {
+                        return target;
+                    }
+                    if (during > 0)
+                        during--;
+                    else if (during === 0) {
+                        proxy_1.revoke();
+                    }
+                    // @ts-ignore
+                    return Reflect.get.apply(Reflect, arguments);
                 }
-                if (during > 0)
-                    during--;
-                else if (during === 0) {
-                    proxy.revoke();
-                }
-                // @ts-ignore
-                return Reflect.get.apply(Reflect, arguments);
-            }
-        });
-        proxy.proxy.restorePromiseBehavior = function () {
-            proxy.revoke();
+            });
+            proxy_1.proxy.restorePromiseBehavior = function () {
+                proxy_1.revoke();
+                return promise;
+            };
+            return proxy_1.proxy;
+        }
+        catch (e) {
             return promise;
-        };
-        return proxy.proxy;
+        }
     };
     return fn;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=treatAsValue.js.map

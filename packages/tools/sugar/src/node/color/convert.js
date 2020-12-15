@@ -80,4 +80,4 @@ function convert(input, format = 'rgba') {
     return undefined;
 }
 module.exports = convert;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=convert.js.map

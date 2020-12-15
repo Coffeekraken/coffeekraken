@@ -18,4 +18,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return is_glob_1.default(string);
     };
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=glob.js.map

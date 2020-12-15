@@ -52,4 +52,4 @@ function completeArgsObject(argsObj, settings = {}) {
     return deepize_1.default(argsObj);
 }
 module.exports = completeArgsObject;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=completeArgsObject.js.map

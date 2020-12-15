@@ -25,4 +25,4 @@ module.exports = (_a = class SCliInterface extends SInterface_1.default {
         }
     },
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SCliInterface.js.map

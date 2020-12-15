@@ -45,4 +45,4 @@ if (!action) {
 }
 const pkg = require(`./${stack}/${action}.cli.js`);
 require(`./${stack}/${action}.cli.js`)(args);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=sugar.cli.js.map

@@ -93,4 +93,4 @@ module.exports = function setupSlackTransport(webhookUrl = process.env.LOG_SLACK
         }, level: level, unfurlLinks: false, unfurlMedia: false, mrkdwn: true }, winstonSlackSettings));
     global._sLogger.add(slackTransport);
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=setupSlackTransport.js.map

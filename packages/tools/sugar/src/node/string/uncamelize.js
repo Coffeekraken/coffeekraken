@@ -36,4 +36,4 @@ function uncamelize(text, separator = '-') {
     return res;
 }
 module.exports = uncamelize;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=uncamelize.js.map

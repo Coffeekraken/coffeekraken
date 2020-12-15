@@ -50,4 +50,4 @@ function ensureNoDuplicateImportStatements(string, settings = {}) {
     return string;
 }
 module.exports = ensureNoDuplicateImportStatements;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=ensureNoDuplicateImportStatements.js.map

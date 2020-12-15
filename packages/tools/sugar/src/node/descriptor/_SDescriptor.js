@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 var _a;
-const uniqid_1 = __importDefault(require("../string/uniqid"));
 const ofType_1 = __importDefault(require("../is/ofType"));
 const typeof_1 = __importDefault(require("../value/typeof"));
 const SDescriptorResult_1 = __importDefault(require("./SDescriptorResult"));
@@ -22,6 +21,8 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  *
  * @param       {ISDescriptorSettings}      settings        An object of setting to configure your descriptor instance
  *
+ * @todo      handle array values
+ *
  * @example       js
  * import SDescriptor from '@coffeekraken/sugar/js/descriptor/SDescriptor';
  * class MyDescriptor extends SDescriptor {
@@ -34,7 +35,6 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const __descriptorsStack = {};
 const Cls = (_a = class SDescriptor {
         /**
          * @name      constructor
@@ -47,53 +47,16 @@ const Cls = (_a = class SDescriptor {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         constructor(settings) {
-            if (typeof settings === 'string') {
-                // restore from a generated descriptor
-                const descriptorObj = __descriptorsStack[settings];
-                this.constructor.rules = descriptorObj.rules;
-                this.constructor.type = descriptorObj.type || 'Object';
-                this.constructor.settings = descriptorObj.settings || {};
-                settings = {};
-                if (descriptorObj.name)
-                    settings.name = descriptorObj.name;
-                if (descriptorObj.id)
-                    settings.id = descriptorObj.id;
-            }
             // save the settings
             this._settings = deepMerge_1.default({
+                id: this.constructor.id || this.constructor.name,
+                name: this.constructor.name,
+                rules: this.constructor.rules || {},
                 arrayAsValue: false,
                 throwOnMissingRule: false,
                 throwOnError: false,
                 complete: true
             }, this.constructor.settings, settings);
-        }
-        /**
-         * @name       generate
-         * @type       Function
-         * @static
-         *
-         * This static method allows you to generate quickly a new descriptor
-         * bysimply passing some properties as settings.
-         *
-         * @param         {ISDescriptorGenerateSettings}      descriptorObj          An object describing your descriptor
-         * @return        {Class}                                    A new class that represent your descriptor
-         *
-         * @setting       {String}        [name=null]             A name for your descriptor
-         * @setting       {String}        [id=null]               An id for your descriptor
-         * @setting       {ISDescriptorRules}         rules           An object of rules that your descriptor has to apply
-         * @setting       {String}        [type='Object']         Specify some type(s) that your descriptor accept to validate
-         * @setting       {ISDecriptorSettings}       [settings={}]       An object of settings to configure your descriptor
-         *
-         * @since         2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com>
-         */
-        static generate(descriptorObj) {
-            const id = uniqid_1.default();
-            __descriptorsStack[id] = descriptorObj;
-            class SGeneratedDescriptor extends SDescriptor {
-            }
-            SGeneratedDescriptor._descriptorId = id;
-            return SGeneratedDescriptor;
         }
         /**
          * @name      registerRule
@@ -113,31 +76,6 @@ const Cls = (_a = class SDescriptor {
                 throw `Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...`;
             }
             this._registeredRules[rule.id] = rule;
-        }
-        /**
-         * @name        apply
-         * @type        Function
-         * @static
-         *
-         * This static method allows you to apply the descriptor on a value
-         * withour having to instanciate a new descriptor.
-         *
-         * @param       {Any}         value         The value on which you want to apply the descriptor
-         * @param       {ISDescriptorSettings}      [settings={}]       An object of settings to configure your apply process
-         * @return      {ISDescriptorResultObj|true}            true if the descriptor does not have found any issue(s), an ISDescriptorResultObj object if not
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com>
-         */
-        static apply(value, settings) {
-            let instance;
-            if (this._descriptorId) {
-                instance = new SDescriptor(this._descriptorId);
-            }
-            else {
-                instance = new this(settings);
-            }
-            return instance.apply(value, settings);
         }
         /**
          * @name          name
@@ -192,8 +130,8 @@ const Cls = (_a = class SDescriptor {
             // initialize the descriptor result instance
             this._descriptorResult = new SDescriptorResult_1.default(this, value, Object.assign({}, settings));
             // check the passed value type correspond to the descriptor type
-            if (!ofType_1.default(value, this.constructor.type)) {
-                throw `Sorry but this descriptor "<yellow>${this.constructor.name}</yellow>" does not accept values of type "<cyan>${typeof_1.default(value)}</cyan>" but only "<green>${this.constructor.type}</green>"...`;
+            if (!ofType_1.default(value, settings.type)) {
+                throw `Sorry but this descriptor "<yellow>${settings.name}</yellow>" does not accept values of type "<cyan>${typeof_1.default(value)}</cyan>" but only "<green>${settings.type}</green>"...`;
             }
             // check the type to validate correctly the value
             if (Array.isArray(value) && !settings.arrayAsValue) {
@@ -204,7 +142,7 @@ const Cls = (_a = class SDescriptor {
                 value !== null &&
                 value !== undefined) {
                 // loop on each object properties
-                Object.keys(this.constructor.rules).forEach((propName) => {
+                Object.keys(settings.rules).forEach((propName) => {
                     const propValue = get_1.default(value, propName);
                     // validate the object property
                     const validationResult = this._validate(propValue, propName, settings);
@@ -237,11 +175,11 @@ const Cls = (_a = class SDescriptor {
          */
         _validate(value, propName, settings) {
             // check if we have a propName, meaning that we are validating an object
-            let rules = this.constructor.rules;
+            let rules = settings.rules;
             if (propName !== undefined) {
-                if (this.constructor.rules[propName] === undefined)
+                if (settings.rules[propName] === undefined)
                     return true;
-                rules = this.constructor.rules[propName];
+                rules = settings.rules[propName];
             }
             // check the "complete" setting
             if (settings.complete) {
@@ -339,4 +277,4 @@ const Cls = (_a = class SDescriptor {
     _a.settings = {},
     _a);
 module.exports = Cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=_SDescriptor.js.map

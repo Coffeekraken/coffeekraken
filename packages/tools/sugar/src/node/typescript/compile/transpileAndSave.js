@@ -59,4 +59,4 @@ const fn = function (filepath, compilerOptions) {
     })).catch((e) => { });
 };
 module.exports = fn;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=transpileAndSave.js.map

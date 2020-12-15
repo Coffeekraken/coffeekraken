@@ -6,4 +6,4 @@ module.exports = `
     {{include "..."}}
 </div>
 `;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=default.js.map

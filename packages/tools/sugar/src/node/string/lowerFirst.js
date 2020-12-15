@@ -27,4 +27,4 @@ function lowerFirst(string) {
     return string.charAt(0).toLowerCase() + string.slice(1);
 }
 module.exports = lowerFirst;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=lowerFirst.js.map

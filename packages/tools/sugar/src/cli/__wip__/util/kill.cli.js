@@ -71,4 +71,4 @@ exports.default = (stringArgs = '') => __awaiter(void 0, void 0, void 0, functio
     console.log(parseHtml_1.default(`<primary>${processesArray.length}</primary> process(es) have been killed <green>successfully</green>`));
     process.exit();
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=kill.cli.js.map

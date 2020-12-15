@@ -32,4 +32,4 @@ function emptyDirSync(dir) {
     fs_extra_1.default.emptyDirSync(dir);
 }
 module.exports = emptyDirSync;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=emptyDirSync.js.map

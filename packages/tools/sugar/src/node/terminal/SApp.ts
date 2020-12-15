@@ -298,4 +298,4 @@ export = class SApp extends __blessed.screen {
     // render the screen
     this.render();
   }
-}
+};

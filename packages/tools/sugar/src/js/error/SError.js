@@ -98,4 +98,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SError;
     }(Error));
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SError.js.map

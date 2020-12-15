@@ -54,6 +54,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             this._data = {};
             this._data = deepMerge_1.default({}, data);
         }
+        Object.defineProperty(SInterfaceResult.prototype, "value", {
+            /**
+             * @name        value
+             * @type        Object
+             * @get
+             *
+             * Access to the resulting value
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            get: function () {
+                var _a, _b;
+                if (this.hasIssues())
+                    return undefined;
+                return (_b = (_a = this._data) === null || _a === void 0 ? void 0 : _a.descriptorResult) === null || _b === void 0 ? void 0 : _b.value;
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * @name          hasIssues
          * @type          Function
@@ -112,4 +132,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }());
     return Cls;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SInterfaceResult.js.map

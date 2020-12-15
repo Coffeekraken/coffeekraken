@@ -36,4 +36,4 @@ module.exports = (_a = class SBuildConfigInterface extends __SInterface {
         }
     }),
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBuildConfigInterface.js.map

@@ -58,4 +58,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return replaceTokens;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=replaceTokens.js.map

@@ -8,9 +8,9 @@ const SSugarAppProcess_1 = __importDefault(require("../../node/app/sugar/SSugarA
 function sugar(stringArgs = '') {
     const sugarAppProcess = new SSugarAppProcess_1.default({
         runAsChild: false,
-        output: SSugarAppTerminalUi_1.default
+        stdio: SSugarAppTerminalUi_1.default
     });
     sugarAppProcess.run(stringArgs);
 }
 module.exports = sugar;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=sugar.cli.js.map

@@ -39,4 +39,4 @@
     }
     return isString;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=string.js.map

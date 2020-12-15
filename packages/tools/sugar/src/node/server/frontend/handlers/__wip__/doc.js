@@ -60,4 +60,4 @@ module.exports = function doc(req, res, settings = {}) {
         res.send(resultObj.content);
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=doc.js.map

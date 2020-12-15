@@ -18,11 +18,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../cli/parseArgs"], factory);
+        define(["require", "exports", "../cli/parseArgs", "../console/parseHtml"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var parseArgs_1 = __importDefault(require("../cli/parseArgs"));
+    var parseHtml_1 = __importDefault(require("../console/parseHtml"));
     /**
      * @name                parseAndFormatLog
      * @namespace           sugar.node
@@ -66,18 +67,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     log = log.replace(matches[0], '').trim();
                     var cli = matches[0].slice(1, -1);
                     var argsObj = parseArgs_1.default(cli);
-                    logObjArray.push(__assign({ value: log, type: 'default' }, argsObj));
+                    logObjArray.push(__assign({ value: parseHtml_1.default(log), type: 'default' }, argsObj));
                 }
                 else {
                     logObjArray.push({
                         type: 'default',
-                        value: log
+                        value: parseHtml_1.default(log)
                     });
                 }
             }
             else {
                 if (!log.type)
                     log.type = 'default';
+                if (log.value !== undefined)
+                    log.value = parseHtml_1.default(log.value.toString());
                 logObjArray.push(log);
             }
         });
@@ -87,4 +90,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return parseAndFormatLog;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=parseAndFormatLog.js.map

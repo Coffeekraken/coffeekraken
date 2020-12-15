@@ -284,4 +284,4 @@ module.exports = class SLogPanel extends SBlessedComponent_1.default {
         return lines;
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SLogPanel.js.map

@@ -40,4 +40,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     _SDescriptor_1.default.registerRule(ruleObj);
     exports.default = ruleObj;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=maxRule.js.map

@@ -36,6 +36,21 @@ const Cls: ISInterfaceResultCtor = class SInterfaceResult
   _data: ISInterfaceResultData = {};
 
   /**
+   * @name        value
+   * @type        Object
+   * @get
+   *
+   * Access to the resulting value
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get value() {
+    if (this.hasIssues()) return undefined;
+    return this._data?.descriptorResult?.value;
+  }
+
+  /**
    * @name        constructor
    * @type        Function
    * @constructor

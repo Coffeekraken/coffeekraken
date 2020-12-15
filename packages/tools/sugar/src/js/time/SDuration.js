@@ -105,4 +105,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SDuration;
     }());
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SDuration.js.map

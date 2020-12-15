@@ -31,4 +31,4 @@
         },
         _a);
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SInterface.js.map

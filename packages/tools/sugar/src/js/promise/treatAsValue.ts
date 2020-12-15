@@ -37,23 +37,27 @@ const fn: ITreatAsValue = function treatAsValue(
     ...settings
   };
   let during: number = settings.during || -1;
-  const proxy = Proxy.revocable(promise, {
-    get(target, prop, receiver) {
-      if (prop === 'then') {
-        return target;
+  try {
+    const proxy = Proxy.revocable(promise, {
+      get(target, prop, receiver) {
+        if (prop === 'then') {
+          return target;
+        }
+        if (during > 0) during--;
+        else if (during === 0) {
+          proxy.revoke();
+        }
+        // @ts-ignore
+        return Reflect.get(...arguments);
       }
-      if (during > 0) during--;
-      else if (during === 0) {
-        proxy.revoke();
-      }
-      // @ts-ignore
-      return Reflect.get(...arguments);
-    }
-  });
-  proxy.proxy.restorePromiseBehavior = () => {
-    proxy.revoke();
+    });
+    proxy.proxy.restorePromiseBehavior = () => {
+      proxy.revoke();
+      return promise;
+    };
+    return proxy.proxy;
+  } catch (e) {
     return promise;
-  };
-  return proxy.proxy;
+  }
 };
 export = fn;

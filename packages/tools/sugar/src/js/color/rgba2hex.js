@@ -62,4 +62,4 @@
     }
     return rgba2hex;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=rgba2hex.js.map

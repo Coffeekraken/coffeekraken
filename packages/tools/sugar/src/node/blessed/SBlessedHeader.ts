@@ -86,4 +86,4 @@ export = class SHeader extends __SBlessedComponent {
   update() {
     super.update();
   }
-}
+};

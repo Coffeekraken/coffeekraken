@@ -93,4 +93,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return splitLines;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=splitLines.js.map

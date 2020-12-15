@@ -28,4 +28,4 @@ const descriptor = {
     }
 };
 module.exports = descriptor;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=functionTypeDescriptor.js.map

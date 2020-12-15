@@ -44,4 +44,4 @@ function getMethods(toCheck) {
     });
 }
 module.exports = getMethods;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=getMethods.js.map

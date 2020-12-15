@@ -61,4 +61,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return scrollToLocationHash;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=scrollToLocationHash.js.map

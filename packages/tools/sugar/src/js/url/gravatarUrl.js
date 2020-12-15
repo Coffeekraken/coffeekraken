@@ -44,4 +44,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return gravatarUrl;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=gravatarUrl.js.map

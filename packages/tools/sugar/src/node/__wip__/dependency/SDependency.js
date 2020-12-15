@@ -195,4 +195,4 @@ module.exports = class SDependency {
         });
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SDependency.js.map

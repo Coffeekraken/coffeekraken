@@ -35,4 +35,4 @@ function _printf(...args) {
     return sprintf_js_1.default.sprintf.apply(null, args);
 }
 module.exports = _printf;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=printf.js.map

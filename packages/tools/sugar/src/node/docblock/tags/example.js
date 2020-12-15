@@ -41,4 +41,4 @@ function example(data) {
     return data;
 }
 module.exports = example;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=example.js.map

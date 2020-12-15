@@ -37,4 +37,4 @@ function envMiddleware(settings = {}) {
     };
 }
 module.exports = envMiddleware;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=envMiddleware.js.map

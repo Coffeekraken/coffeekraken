@@ -4,8 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 const SBlessedOutputComponent_1 = __importDefault(require("../SBlessedOutputComponent"));
+const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
+const parseHtml_1 = __importDefault(require("../../../console/parseHtml"));
 /**
- * @name                defaultBlessedOutputComponent
+ * @name                SDefaultBlessedOutputComponent
  * @namespace           sugar.node.blessed.output.components
  * @type                Class
  * @extends             SBlessedOutputComponent
@@ -37,9 +39,11 @@ const cls = (_a = class SDefaultBlessedOutputComponent extends SBlessedOutputCom
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         constructor(logObj, settings = {}) {
-            super(logObj, Object.assign(Object.assign({}, settings), { blessed: {
-                    content: logObj.value
-                } }));
+            super(logObj, deepMerge_1.default({
+                blessed: {
+                    content: parseHtml_1.default(logObj.value)
+                }
+            }, settings));
         }
     },
     /**
@@ -55,4 +59,4 @@ const cls = (_a = class SDefaultBlessedOutputComponent extends SBlessedOutputCom
     _a.id = 'default',
     _a);
 module.exports = cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SDefaultBlessedOutputComponent.js.map

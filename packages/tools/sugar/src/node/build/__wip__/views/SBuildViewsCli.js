@@ -53,4 +53,4 @@ module.exports = (_a = class SBuildViewsCli extends __SCli {
      */
     _a.interface = __SBuildViewsInterface,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBuildViewsCli.js.map

@@ -7,4 +7,4 @@ const monorepo_cli_1 = __importDefault(require("./monorepo.cli"));
 module.exports = (stringArgs = '') => {
     monorepo_cli_1.default(stringArgs);
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=all.cli.js.map

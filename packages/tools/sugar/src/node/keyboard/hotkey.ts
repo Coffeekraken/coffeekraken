@@ -45,7 +45,7 @@ let isSystemWideAlreadyAdded = false;
 function _handleKeypress(ch, keyObj) {
   if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
     // process.stdin.pause();
-    process.emit('custom_exit', 'kill');
+    process.emit('custom_exit', 'killed');
   }
 
   // loop on each promises registered

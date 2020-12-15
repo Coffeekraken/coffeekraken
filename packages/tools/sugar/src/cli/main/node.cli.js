@@ -93,4 +93,4 @@ Object.defineProperty(api.${docObj.namespace.split('.').slice(1).join('.')}, '${
     itemsArray.push(`module.exports = api;`);
     writeFileSync_1.default(args.destination, itemsArray.join('\n'));
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=node.cli.js.map

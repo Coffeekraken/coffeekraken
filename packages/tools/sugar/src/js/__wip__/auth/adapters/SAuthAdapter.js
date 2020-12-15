@@ -1,3 +1,4 @@
+"use strict";
 // @ts-nocheck
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -35,111 +36,100 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
+/**
+ * @name                            SAuthAdapter
+ * @namespace           node.auth.adapters
+ * @type                            Class
+ *
+ * Base SAuth adapter class that has to be the base of each SAuthAdapters
+ *
+ * @example         js
+ * const SAuthAdapter = require('@coffeekraken/sugar/node/auth/adapters/SAuthAdapter');
+ * class MyCoolAdapter extends SAuthAdapter {
+ *    construct() {
+ *      super();
+ *    }
+ * }
+ *
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+module.exports = /** @class */ (function () {
     /**
-     * @name                            SAuthAdapter
-     * @namespace           node.auth.adapters
-     * @type                            Class
+     * @name                          constructor
+     * @type                          Function
      *
-     * Base SAuth adapter class that has to be the base of each SAuthAdapters
-     *
-     * @example         js
-     * const SAuthAdapter = require('@coffeekraken/sugar/node/auth/adapters/SAuthAdapter');
-     * class MyCoolAdapter extends SAuthAdapter {
-     *    construct() {
-     *      super();
-     *    }
-     * }
+     * Construct the SAuthAdapter instance
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    module.exports = /** @class */ (function () {
+    function SAuthAdapter(authTypes) {
         /**
-         * @name                          constructor
-         * @type                          Function
+         * @name                          _supportedAuthTypes
+         * @type                          Array
+         * @private
          *
-         * Construct the SAuthAdapter instance
+         * Store the supported auth types by the current auth adapter
          *
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        function SAuthAdapter(authTypes) {
-            /**
-             * @name                          _supportedAuthTypes
-             * @type                          Array
-             * @private
-             *
-             * Store the supported auth types by the current auth adapter
-             *
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            this._supportedAuthTypes = [];
-            // store the supported auth types
-            this._supportedAuthTypes = authTypes;
-        }
-        Object.defineProperty(SAuthAdapter.prototype, "supportedAuthTypes", {
-            /**
-             * @name                          supportedAuthTypes
-             * @type                          Array
-             *
-             * Access the supported auth types for this adapter
-             *
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            get: function () {
-                return this._supportedAuthTypes;
-            },
-            enumerable: false,
-            configurable: true
-        });
+        this._supportedAuthTypes = [];
+        // store the supported auth types
+        this._supportedAuthTypes = authTypes;
+    }
+    Object.defineProperty(SAuthAdapter.prototype, "supportedAuthTypes", {
         /**
-         * @name                            ask
-         * @type                            Function
-         * @async
+         * @name                          supportedAuthTypes
+         * @type                          Array
          *
-         * Ask form some auth informations depending on the auth type you want and the supported auth types of the selected adapter
-         *
-         * @param         {Object}              [settings={}]
-         * - type (settings.type) {String}: Specify the auth type you want to ask like "basic", "bearer", "oauth2", etc...
-         * - title (null) {String}: Specify the title to display on top of the form
-         * - error (null) {String}: An error message to display to the user. Can be something like "Your credentials have been declined. Please try again..."
-         * - info (null) {String}: An info message to display to the user
-         *
-         * @example           js
-         * const authInfos = await myAuth.ask({
-         *    type: 'basic'
-         * });
+         * Access the supported auth types for this adapter
          *
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        SAuthAdapter.prototype.ask = function (settings) {
-            if (settings === void 0) { settings = {}; }
-            return __awaiter(this, void 0, void 0, function () {
-                var infos;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            // make sure the adapter support the auth type requested
-                            if (!this["_" + settings.type]) {
-                                throw new Error("You try to ask the user for \"" + settings.type + "\" auth informations but this auth type is not supported by the current adapter...");
-                            }
-                            return [4 /*yield*/, this["_" + settings.type](settings)];
-                        case 1:
-                            infos = _a.sent();
-                            return [2 /*return*/, infos];
-                    }
-                });
+        get: function () {
+            return this._supportedAuthTypes;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    /**
+     * @name                            ask
+     * @type                            Function
+     * @async
+     *
+     * Ask form some auth informations depending on the auth type you want and the supported auth types of the selected adapter
+     *
+     * @param         {Object}              [settings={}]
+     * - type (settings.type) {String}: Specify the auth type you want to ask like "basic", "bearer", "oauth2", etc...
+     * - title (null) {String}: Specify the title to display on top of the form
+     * - error (null) {String}: An error message to display to the user. Can be something like "Your credentials have been declined. Please try again..."
+     * - info (null) {String}: An info message to display to the user
+     *
+     * @example           js
+     * const authInfos = await myAuth.ask({
+     *    type: 'basic'
+     * });
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    SAuthAdapter.prototype.ask = function (settings) {
+        if (settings === void 0) { settings = {}; }
+        return __awaiter(this, void 0, void 0, function () {
+            var infos;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        // make sure the adapter support the auth type requested
+                        if (!this["_" + settings.type]) {
+                            throw new Error("You try to ask the user for \"" + settings.type + "\" auth informations but this auth type is not supported by the current adapter...");
+                        }
+                        return [4 /*yield*/, this["_" + settings.type](settings)];
+                    case 1:
+                        infos = _a.sent();
+                        return [2 /*return*/, infos];
+                }
             });
-        };
-        return SAuthAdapter;
-    }());
-});
-//# sourceMappingURL=module.js.map
+        });
+    };
+    return SAuthAdapter;
+}());
+//# sourceMappingURL=SAuthAdapter.js.map

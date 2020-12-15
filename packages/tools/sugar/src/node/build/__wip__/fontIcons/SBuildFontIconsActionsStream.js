@@ -54,4 +54,4 @@ module.exports = class SBuildIconsActionsStream extends __SActionsStream {
         }, settings));
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBuildFontIconsActionsStream.js.map

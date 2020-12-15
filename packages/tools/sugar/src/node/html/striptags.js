@@ -35,4 +35,4 @@ function striptags(html, allowedTags, tagReplacement) {
     return striptags_1.default(html, allowedTags, tagReplacement);
 }
 module.exports = striptags;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=striptags.js.map

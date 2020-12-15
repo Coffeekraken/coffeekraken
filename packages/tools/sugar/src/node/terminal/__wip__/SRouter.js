@@ -148,4 +148,4 @@ module.exports = class SRouter {
         });
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SRouter.js.map

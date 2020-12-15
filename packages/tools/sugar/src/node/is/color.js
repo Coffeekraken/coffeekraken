@@ -32,4 +32,4 @@ function isColor(value) {
     return ele.style.color.split(/\s+/).join('').toLowerCase() !== '';
 }
 module.exports = isColor;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=color.js.map

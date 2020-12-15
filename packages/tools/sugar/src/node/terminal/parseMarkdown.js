@@ -64,4 +64,4 @@ function parseMarkdown(message) {
     return message[0];
 }
 module.exports = parseMarkdown;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=parseMarkdown.js.map

@@ -30,4 +30,4 @@
         return o;
     };
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=get.js.map

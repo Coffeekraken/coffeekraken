@@ -29,4 +29,4 @@ function windows() {
     return navigator.platform.toUpperCase().indexOf('WIN') > -1;
 }
 module.exports = windows;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=windows.js.map

@@ -29,4 +29,4 @@ function isRegexp(value) {
     return value && typeof value === 'object' && value.constructor === RegExp;
 }
 module.exports = isRegexp;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=regexp.js.map

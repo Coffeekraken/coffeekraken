@@ -52,4 +52,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     // export the settings
     module.exports = settings;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=settings.js.map

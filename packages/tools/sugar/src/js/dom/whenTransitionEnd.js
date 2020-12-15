@@ -50,4 +50,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return whenTransitionEnd;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=whenTransitionEnd.js.map

@@ -67,4 +67,4 @@ function toHtml(inputString, settings = {}) {
     return converterFn(inputString, settings);
 }
 module.exports = toHtml;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=toHtml.js.map

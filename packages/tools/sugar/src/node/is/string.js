@@ -29,4 +29,4 @@ function isString(value) {
     return typeof value === 'string' || value instanceof String;
 }
 module.exports = isString;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=string.js.map

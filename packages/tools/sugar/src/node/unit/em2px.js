@@ -28,4 +28,4 @@ function em2px(em, $elm = document.documentElement) {
     return em * parseFloat(getComputedStyle($elm).fontSize || '16px');
 }
 module.exports = em2px;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=em2px.js.map

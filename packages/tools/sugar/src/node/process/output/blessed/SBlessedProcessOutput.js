@@ -43,7 +43,6 @@ const Cls = class SBlessedProcessOutput extends SProcessOutput_1.default {
      */
     constructor(source, settings) {
         super(source, settings);
-        console.log(settings);
         this._output = new SBlessedOutput_1.default(Object.assign(Object.assign({}, this._settings), { sources: source }));
     }
     /**
@@ -60,4 +59,4 @@ const Cls = class SBlessedProcessOutput extends SProcessOutput_1.default {
     }
 };
 module.exports = Cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBlessedProcessOutput.js.map

@@ -49,4 +49,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     _SType_1.default.registerType(classTypeDescriptor_1.default);
     return _SType_1.default;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=sTypeRegisterDefaultDescriptors.js.map

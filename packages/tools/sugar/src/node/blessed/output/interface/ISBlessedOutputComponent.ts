@@ -10,9 +10,9 @@ export interface ISBlessedOutputComponentSettings
 
 export interface ISBlessedOutputComponentCtor {
   new (logObj: ILog, settings?: ISBlessedOutputComponentSettings);
-  id: string;
+  id?: string;
 }
 
 export default interface ISBlessedOutputComponent {
-  logObj: ILog;
+  logObj?: ILog;
 }

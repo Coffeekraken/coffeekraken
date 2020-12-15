@@ -1,1 +1,1 @@
-{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;IAEV,yCAAiD;IAEjD;;;;;;;;;;;;;;;;;;;;;;;;;;OA0BG;IACH,SAAS,OAAO;QACd,OAAO,oBAAQ,CAAC,KAAK,CAAC,IAAI,EAAE,SAAS,CAAC,CAAC;IACzC,CAAC;IACD,OAAS,OAAO,CAAC"}
+{"version":3,"file":"sprintf.js","sourceRoot":"","sources":["sprintf.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;IAEV,yCAAiD;IAEjD;;;;;;;;;;;;;;;;;;;;;;;;;;OA0BG;IACH,SAAS,OAAO;QACd,OAAO,oBAAQ,CAAC,KAAK,CAAC,IAAI,EAAE,SAAS,CAAC,CAAC;IACzC,CAAC;IACD,OAAS,OAAO,CAAC"}

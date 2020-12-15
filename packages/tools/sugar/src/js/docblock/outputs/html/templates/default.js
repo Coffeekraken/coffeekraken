@@ -12,4 +12,4 @@
     "use strict";
     return "\n<div class=\"s-db-output s-db-output--html\">\n    {{include \"...\"}}\n</div>\n";
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=default.js.map

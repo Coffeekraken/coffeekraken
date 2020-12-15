@@ -121,4 +121,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SAction_1.default));
     exports.default = SUrlAction;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SUrlAction.js.map

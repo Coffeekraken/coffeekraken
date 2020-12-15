@@ -68,4 +68,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return splitWords;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=splitWords.js.map

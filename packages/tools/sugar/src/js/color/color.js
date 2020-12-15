@@ -35,4 +35,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return color;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=color.js.map

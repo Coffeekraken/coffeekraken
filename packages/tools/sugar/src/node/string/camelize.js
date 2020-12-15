@@ -33,4 +33,4 @@ function camelize(text) {
     return res.trim();
 }
 module.exports = camelize;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=camelize.js.map

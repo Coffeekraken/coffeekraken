@@ -62,4 +62,4 @@ function namespace(path, settings = {}) {
     return resultNamespace;
 }
 module.exports = namespace;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=namespace.js.map

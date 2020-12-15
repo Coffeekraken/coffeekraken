@@ -89,4 +89,4 @@
     }
     return hsl2rgba;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=hsl2rgba.js.map

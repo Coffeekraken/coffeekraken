@@ -186,4 +186,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SCodeSplitter;
     }());
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SCodeSplitter.js.map

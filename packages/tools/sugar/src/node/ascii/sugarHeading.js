@@ -31,4 +31,4 @@ function sugarHeading(settings = {}) {
     return value;
 }
 module.exports = sugarHeading;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=sugarHeading.js.map

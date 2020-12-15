@@ -13,13 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const blessed_1 = __importDefault(require("blessed"));
 const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
-const parseMarkdown_1 = __importDefault(require("../../terminal/parseMarkdown"));
 const childProcess_1 = __importDefault(require("../../is/childProcess"));
-const wait_1 = __importDefault(require("../../time/wait"));
 const parseAndFormatLog_1 = __importDefault(require("../../log/parseAndFormatLog"));
+const parseHtml_1 = __importDefault(require("../../console/parseHtml"));
+const countLine_1 = __importDefault(require("../../string/countLine"));
 const SDefaultBlessedOutputComponent_1 = __importDefault(require("./components/SDefaultBlessedOutputComponent"));
 const SErrorBlessedOutputComponent_1 = __importDefault(require("./components/SErrorBlessedOutputComponent"));
+const SWarningBlessedOutputComponent_1 = __importDefault(require("./components/SWarningBlessedOutputComponent"));
+const SHeadingBlessedOutputComponent_1 = __importDefault(require("./components/SHeadingBlessedOutputComponent"));
 /**
  * @name                  SOutput
  * @namespace           sugar.node.blessed
@@ -68,70 +71,45 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
                 filter: null,
                 maxItems: -1,
                 maxItemsByGroup: 1,
-                spaceBetween: 1,
+                spaceBetween: 0,
+                spaceAround: 1,
                 stacks: ['log', '*.log', 'warning', '*.warning', 'warn', '*.warn'],
+                metas: {
+                    spaceRight: 1,
+                    width: 9,
+                    time: false
+                },
                 blessed: {
-                    width: '100%',
-                    height: '100%',
                     top: 0,
                     left: 0,
                     bottom: 0,
                     right: 0,
+                    mouse: true,
+                    keys: true,
                     scrollable: true,
-                    scrollbar: true,
-                    // alwaysScroll: true,
+                    alwaysScroll: true,
+                    scrollbar: {
+                        ch: ' ',
+                        inverse: true
+                    },
                     style: {
-                        bg: 'yellow',
+                        // bg: 'yellow',
                         scrollbar: {
-                            fg: 'red',
-                            bg: 'cyan'
+                            bg: 'yellow'
                         }
                     }
                 }
             }, settings));
+            /**
+             * @name      stack
+             * @type      Object[]
+             *
+             * Store all the "containers" that handle components etc...
+             *
+             * @since     2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             this.stack = [];
-            /**
-             * @name          _process
-             * @type          SOutput
-             * @private
-             *
-             * Store the SOutput instance
-             *
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            this._process = null;
-            /**
-             * @name          _content
-             * @type          Array
-             * @private
-             *
-             * Store the content depending on his formatting style like groups, etc...
-             *
-             * @since         2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            this._content = [];
-            /**
-             * @name          $logBox
-             * @type          blessed.Box
-             * @private
-             *
-             * Store the actual box where the logs will be pushed
-             *
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            this.$logBox = null;
-            /**
-             * @name           $headerBox
-             * @type          blessed.box
-             * @private
-             *
-             * Store the header content if a log object has the property "type" to "header"
-             *
-             * @since       2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            this.$headerBox = null;
             /**
              * @name          log
              * @type          Function
@@ -143,20 +121,6 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             this._currentModuleId = null;
-            /**
-             * @name            update
-             * @type            Function
-             *
-             * This method take the content of the this._content property and display it correctly on the screen
-             *
-             * @since       2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            this._lastY = 1;
-            this._lastContentCount = 0;
-            this.$logBoxChilds = [];
-            this._updateTimeout = null;
-            this._updateCountdown = 0;
             // listen for resizing
             this.on('resize', () => {
                 clearTimeout(this._resizeTimeout);
@@ -189,13 +153,13 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        static registerComponent(component, settings = {}, as = null) {
+        static registerComponent(component, settings = {}, as) {
             // make sure this component has an "id" specified
             if (component.id === undefined && as === null) {
                 throw `Sorry but you try to register a component that does not have a built-in static "id" property and you don't have passed the "as" argument to override it...`;
             }
             // save the component inside the stack
-            SBlessedOutput.registeredComponents[as || component.id] = {
+            SBlessedOutput.registeredComponents[as || component.id || 'default'] = {
                 component,
                 settings,
                 as
@@ -216,7 +180,7 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
         registerSource(source, settings = {}) {
             settings = deepMerge_1.default(this._settings, settings);
             // subscribe to data
-            source.on(settings.stacks.join(','), (data, metas) => {
+            source.on((settings.stacks || []).join(','), (data, metas) => {
                 this.log(data);
             });
         }
@@ -234,6 +198,7 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
             return __awaiter(this, void 0, void 0, function* () {
                 // remove all items from the display list
                 this.stack.forEach(($component) => {
+                    // @ts-ignore
                     $component.detach();
                 });
                 // reset the stack
@@ -241,16 +206,11 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
                 return true;
             });
         }
-        _processMarkdown(content) {
-            content = content.trim();
-            content = parseMarkdown_1.default(content);
-            return content;
-        }
         log(...args) {
             const logs = parseAndFormatLog_1.default(args);
             // @ts-ignore
             logs.forEach((logObj) => __awaiter(this, void 0, void 0, function* () {
-                const $lastComponent = this.stack.length ? this.stack.pop() : null;
+                const $lastContainer = this.stack.length ? this.stack.pop() : undefined;
                 // clear
                 if (logObj.clear === true) {
                     yield this.clear();
@@ -262,23 +222,88 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
                     : 'default';
                 // instanciate a new component
                 const $component = new SBlessedOutput.registeredComponents[type].component(logObj, SBlessedOutput.registeredComponents[type].settings);
+                // container
+                const $container = blessed_1.default.box({
+                    width: `100%-${this._settings.spaceAround * 2}`,
+                    height: 0,
+                    top: 0,
+                    left: this._settings.spaceAround,
+                    scrollable: true,
+                    style: {
+                    // bg: 'cyan'
+                    }
+                });
+                let $metas, metasHeight = 0;
+                // build metas
+                const metasObj = deepMerge_1.default(this._settings.metas, logObj.metas);
+                if (metasObj !== undefined) {
+                    let content = [metasObj.content || ''];
+                    if (metasObj.time === true) {
+                        const now = new Date();
+                        let hours = now.getHours(), minutes = now.getMinutes(), seconds = now.getSeconds();
+                        if (hours < 10)
+                            hours = `0${hours}`;
+                        if (minutes < 10)
+                            minutes = `0${minutes}`;
+                        if (seconds < 10)
+                            seconds = `0${seconds}`;
+                        content = [
+                            `<cyan>${hours + ':' + minutes + ':' + seconds}</cyan>`,
+                            metasObj.content || ''
+                        ];
+                    }
+                    content = content.map((c) => {
+                        c = parseHtml_1.default(c);
+                        c = ' '.repeat(metasObj.width - 1 - countLine_1.default(c.trim())) + c;
+                        return c;
+                    });
+                    content = content.filter((c) => c.trim() !== '');
+                    metasHeight = content.length;
+                    if (content.length > 0) {
+                        $metas = blessed_1.default.box({
+                            content: content.join('\n'),
+                            width: metasObj.width,
+                            height: 'shrink',
+                            top: 0,
+                            left: 0,
+                            style: {
+                            // bg: 'red'
+                            }
+                        });
+                    }
+                }
+                if (metasObj !== undefined && $metas !== undefined) {
+                    $component.left = metasObj.width + metasObj.spaceRight;
+                }
+                $container.append($component);
+                if ($metas !== undefined) {
+                    $container.append($metas);
+                    $container.$metas = $metas;
+                }
+                $container.$component = $component;
+                // append the log into the stack
+                this.append($container);
+                this.stack.push($container);
+                // calculate the height to apply
+                const contentHeight = $component.getScrollHeight();
+                let containerHeight = contentHeight > metasHeight ? contentHeight : metasHeight;
                 // append the component to the feed
-                if ($lastComponent !== null) {
-                    // $component.top = $lastComponent.top + $lastComponent.height;
-                    $component.top =
-                        $lastComponent.top +
-                            $lastComponent.getScrollHeight() +
+                if ($lastContainer !== undefined) {
+                    $container.top =
+                        // @ts-ignore
+                        $lastContainer.top +
+                            // @ts-ignore
+                            $lastContainer.getScrollHeight() +
                             this._settings.spaceBetween;
                 }
-                $component.left = 4;
-                this.append($component);
-                // append the log into the stack
-                this.stack.push($component);
+                $container.height = containerHeight;
             }));
             // scroll to bottom
-            this.setScrollPerc(100);
-            // update display
-            this.update();
+            setTimeout(() => {
+                this.setScrollPerc(100);
+                // update display
+                this.update();
+            });
         }
         /**
          * @name            _applyTops
@@ -292,64 +317,34 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
          */
         _applyTops() {
             return __awaiter(this, void 0, void 0, function* () {
-                let currentTop = 0;
-                // loop on each of the components
-                for (let i = 0; i < this.stack.length; i++) {
-                    const $component = this.stack[i];
-                    $component.top = currentTop;
-                    // $component.height: 0;
-                    // $component.screen.render();
-                    // await __wait(10);
-                    currentTop += $component.realHeight + this._settings.spaceBetween;
-                }
-                yield wait_1.default(10);
-                this.screen.render();
+                // let currentTop = 0;
+                // // loop on each of the components
+                // for (let i = 0; i < this.stack.length; i++) {
+                //   const $component = this.stack[i];
+                //   $component.top = currentTop;
+                //   // $component.height: 0;
+                //   // $component.screen.render();
+                //   // await __wait(10);
+                //   currentTop += $component.realHeight + this._settings.spaceBetween;
+                // }
+                // await __wait(10);
+                // this.screen.render();
             });
         }
+        /**
+         * @name            update
+         * @type            Function
+         *
+         * This method take the content of the this._content property and display it correctly on the screen
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
         update() {
             if (childProcess_1.default())
                 return;
             if (!this.isDisplayed())
                 return;
-        }
-        /**
-         * @name          _createLogBox
-         * @type          Function
-         * @private
-         *
-         * This method take the registered keys in the process and generate a nice and clean UI for it
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        _createLogBox() {
-            // this.$logBox = __blessed.box({
-            //   // width: '100%-4',
-            //   top: 0,
-            //   left: 0,
-            //   right: 0,
-            //   bottom: 0,
-            //   style: {},
-            //   mouse: true,
-            //   keys: true,
-            //   scrollable: true,
-            //   scrollbar: {
-            //     ch: ' ',
-            //     inverse: true
-            //   },
-            //   style: {
-            //     bg: 'red',
-            //     scrollbar: {
-            //       bg: __color('terminal.primary').toString()
-            //     }
-            //   },
-            //   padding: {
-            //     top: 0,
-            //     left: 2,
-            //     right: 2,
-            //     bottom: 0
-            //   }
-            // });
-            // this.append(this.$logBox);
         }
     },
     /**
@@ -367,5 +362,7 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
 // register default components
 cls.registerComponent(SDefaultBlessedOutputComponent_1.default);
 cls.registerComponent(SErrorBlessedOutputComponent_1.default);
+cls.registerComponent(SWarningBlessedOutputComponent_1.default);
+cls.registerComponent(SHeadingBlessedOutputComponent_1.default);
 module.exports = cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBlessedOutput.js.map

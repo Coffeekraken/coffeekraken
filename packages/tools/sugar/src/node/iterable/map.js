@@ -123,4 +123,4 @@ const fn = function (stack, callback, settings = {}) {
     return settings.newStack ? newStack : stack;
 };
 module.exports = fn;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=map.js.map

@@ -45,4 +45,4 @@
     }
     return appendStyleTag;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=appendStyleTag.js.map

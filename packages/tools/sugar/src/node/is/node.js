@@ -6,4 +6,4 @@ module.exports = () => {
         process.release &&
         process.release.name === 'node');
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=node.js.map

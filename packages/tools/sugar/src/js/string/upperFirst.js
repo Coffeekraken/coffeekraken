@@ -37,4 +37,4 @@
     }
     return upperFirst;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=upperFirst.js.map

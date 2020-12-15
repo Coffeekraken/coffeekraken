@@ -104,4 +104,4 @@ function diff(object1, object2, settings = {}) {
     return finalObj;
 }
 module.exports = diff;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=diff.js.map

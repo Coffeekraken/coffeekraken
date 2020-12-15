@@ -58,4 +58,4 @@ function autoCast(string) {
     }
 }
 module.exports = autoCast;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=autoCast.js.map

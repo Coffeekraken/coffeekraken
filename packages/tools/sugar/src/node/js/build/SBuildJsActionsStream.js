@@ -67,4 +67,4 @@ module.exports = class SBuildJsActionsStream extends SActionsStream_1.default {
         return streamObj;
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBuildJsActionsStream.js.map

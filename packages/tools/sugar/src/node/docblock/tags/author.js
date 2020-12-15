@@ -29,4 +29,4 @@ function author(data) {
     };
 }
 module.exports = author;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=author.js.map

@@ -53,4 +53,4 @@
     }
     return methodExists;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=methodExists.js.map

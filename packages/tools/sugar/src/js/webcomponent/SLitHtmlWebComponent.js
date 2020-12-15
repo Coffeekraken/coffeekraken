@@ -219,4 +219,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var templateObject_1;
     return SLitHtmlWebComponentGenerator;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SLitHtmlWebComponent.js.map

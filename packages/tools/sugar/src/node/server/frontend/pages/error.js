@@ -63,4 +63,4 @@ function error(data = {}) {
     };
 }
 module.exports = error;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=error.js.map

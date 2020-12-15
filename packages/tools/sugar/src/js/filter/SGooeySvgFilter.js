@@ -150,4 +150,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SSvgFilter_1.default));
     return SGooeySvgFilter;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SGooeySvgFilter.js.map

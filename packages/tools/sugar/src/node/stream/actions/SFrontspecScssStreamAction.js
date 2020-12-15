@@ -127,4 +127,4 @@ module.exports = (_a = class SFrontspecScssStreamAction extends SActionsStreamAc
      */
     _a.interface = SFrontspecScssStreamActionInterface,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SFrontspecScssStreamAction.js.map

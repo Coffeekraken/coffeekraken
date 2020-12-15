@@ -59,4 +59,4 @@ function json(filePath) {
     });
 }
 module.exports = json;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=json.js.map

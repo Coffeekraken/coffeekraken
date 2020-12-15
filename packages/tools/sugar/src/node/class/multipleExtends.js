@@ -8,4 +8,4 @@ const es5_1 = __importDefault(require("aggregation/es5"));
 module.exports = (...classes) => {
     return es5_1.default(...classes);
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=multipleExtends.js.map

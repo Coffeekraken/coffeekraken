@@ -31,4 +31,4 @@ function path(path, checkExistence = false) {
     return isPath_1.default(path, checkExistence);
 }
 module.exports = path;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=path.js.map

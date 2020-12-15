@@ -77,4 +77,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return observeAttributes;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=observeAttributes.js.map

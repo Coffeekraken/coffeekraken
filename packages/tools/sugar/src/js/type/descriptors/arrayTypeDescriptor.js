@@ -40,4 +40,4 @@
     };
     return descriptor;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=arrayTypeDescriptor.js.map

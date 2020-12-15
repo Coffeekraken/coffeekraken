@@ -45,6 +45,22 @@ const Cls = class SInterfaceResult {
         this._data = deepMerge_1.default({}, data);
     }
     /**
+     * @name        value
+     * @type        Object
+     * @get
+     *
+     * Access to the resulting value
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get value() {
+        var _a, _b;
+        if (this.hasIssues())
+            return undefined;
+        return (_b = (_a = this._data) === null || _a === void 0 ? void 0 : _a.descriptorResult) === null || _b === void 0 ? void 0 : _b.value;
+    }
+    /**
      * @name          hasIssues
      * @type          Function
      *
@@ -102,4 +118,4 @@ ${stringArray.join('\n')}
     }
 };
 module.exports = Cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SInterfaceResult.js.map

@@ -49,4 +49,4 @@ module.exports = (_a = class SNpmBinProcess extends SProcess_1.default {
     },
     _a.interface = SNpmBinInterface_1.default,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SNpmBinProcess.js.map

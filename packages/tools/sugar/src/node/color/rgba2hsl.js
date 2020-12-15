@@ -63,4 +63,4 @@ function rgba2hsl(r, g, b, a = 1) {
     };
 }
 module.exports = rgba2hsl;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=rgba2hsl.js.map

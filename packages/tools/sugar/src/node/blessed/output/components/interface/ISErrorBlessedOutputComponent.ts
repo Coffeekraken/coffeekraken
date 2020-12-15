@@ -1,8 +1,12 @@
-import { ISBlessedOutputComponentSettings } from '../../interface/ISBlessedOutputComponent';
+import {
+  ISBlessedOutputComponentSettings,
+  ISBlessedOutputComponentCtor
+} from '../../interface/ISBlessedOutputComponent';
 
 export interface ISErrorBlessedOutputComponentSettings
   extends ISBlessedOutputComponentSettings {}
 
-export interface ISErrorBlessedOutputComponentCtor {}
+export interface ISErrorBlessedOutputComponentCtor
+  extends ISBlessedOutputComponentCtor {}
 
 export default interface ISErrorBlessedOutputComponent {}

@@ -34,4 +34,4 @@ function isTablet(ua = navigator.userAgent) {
     return md.tablet() !== null;
 }
 module.exports = isTablet;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=tablet.js.map

@@ -149,4 +149,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return crop;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=crop.js.map

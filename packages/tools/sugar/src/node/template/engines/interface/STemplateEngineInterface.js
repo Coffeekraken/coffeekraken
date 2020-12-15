@@ -30,4 +30,4 @@ module.exports = (_a = class STemplateEngineInterface extends SInterface_1.defau
         }
     },
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=STemplateEngineInterface.js.map

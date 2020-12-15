@@ -147,4 +147,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return typeOf;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=typeof.js.map

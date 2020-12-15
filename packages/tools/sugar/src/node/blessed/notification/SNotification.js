@@ -114,4 +114,4 @@ module.exports = (_a = class SBlessedNotification extends SBlessedComponent_1.de
         br: []
     },
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SNotification.js.map

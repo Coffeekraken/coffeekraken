@@ -62,4 +62,4 @@ module.exports = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function
     // completed
     console.log('Completed successfully!');
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=shared.cli.js.map

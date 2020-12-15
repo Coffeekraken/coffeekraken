@@ -45,4 +45,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return striptags;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=striptags.js.map

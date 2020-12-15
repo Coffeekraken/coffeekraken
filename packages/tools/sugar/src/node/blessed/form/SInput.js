@@ -139,4 +139,4 @@ module.exports = class SBlessedInput extends SBlessedComponent_1.default {
         this.append(this.$input);
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SInput.js.map

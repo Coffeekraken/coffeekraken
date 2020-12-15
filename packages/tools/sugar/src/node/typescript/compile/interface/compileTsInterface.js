@@ -26,4 +26,4 @@ compileTsInterface.definition = Object.assign(Object.assign({}, TscInterface_1.d
         type: 'Boolean'
     } });
 module.exports = compileTsInterface;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=compileTsInterface.js.map

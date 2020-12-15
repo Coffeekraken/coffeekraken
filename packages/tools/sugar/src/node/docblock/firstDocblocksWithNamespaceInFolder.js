@@ -47,4 +47,4 @@ module.exports = function firstDocblockWithNamespaceInFolder(directory, settings
         return namespaceObj;
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=firstDocblocksWithNamespaceInFolder.js.map

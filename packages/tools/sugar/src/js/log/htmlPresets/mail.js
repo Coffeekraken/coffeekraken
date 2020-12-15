@@ -84,4 +84,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return mail;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=mail.js.map

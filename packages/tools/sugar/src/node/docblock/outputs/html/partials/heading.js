@@ -33,4 +33,4 @@ module.exports = `
 <p class="s-p">{{description}}</p>
 {{/if}}
 `;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=heading.js.map

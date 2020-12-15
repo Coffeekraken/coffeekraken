@@ -49,4 +49,4 @@
     }
     return rtrim;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=rtrim.js.map

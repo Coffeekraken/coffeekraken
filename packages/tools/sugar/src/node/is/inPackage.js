@@ -32,4 +32,4 @@ function inPackage(name, from = process.cwd(), highest = false) {
     return isInPackage_1.default(name, from, highest);
 }
 module.exports = inPackage;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=inPackage.js.map

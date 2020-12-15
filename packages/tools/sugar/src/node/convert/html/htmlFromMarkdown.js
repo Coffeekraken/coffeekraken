@@ -40,4 +40,4 @@ function htmlFromMarkdown(inputString, settings = {}) {
     return marked_1.default(inputString);
 }
 module.exports = htmlFromMarkdown;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=htmlFromMarkdown.js.map

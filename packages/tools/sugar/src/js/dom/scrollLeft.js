@@ -33,4 +33,4 @@
     }
     return scrollLeft;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=scrollLeft.js.map

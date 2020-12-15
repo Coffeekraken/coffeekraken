@@ -62,7 +62,9 @@ const cls: ISBlessedOutputComponentCtor = class ISBlessedOutputComponent
       __deepMerge(
         {
           blessed: {
-            scrollable: true
+            scrollable: true,
+            mouse: false,
+            keys: false
           }
         },
         settings
@@ -70,6 +72,13 @@ const cls: ISBlessedOutputComponentCtor = class ISBlessedOutputComponent
     );
     // save the logObj
     this.logObj = logObj;
+  }
+
+  update() {
+    this.height = 0;
+    this.screen.render();
+    this.height = this.getScrollHeight();
+    super.update();
   }
 };
 export = cls;

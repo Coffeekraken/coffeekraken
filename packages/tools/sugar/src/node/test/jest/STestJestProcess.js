@@ -86,4 +86,4 @@ module.exports = (_a = class STestJestProcess extends SProcess_1.default {
     },
     _a.interface = STestJestInterface_1.default,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=STestJestProcess.js.map

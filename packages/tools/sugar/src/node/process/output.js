@@ -3,9 +3,9 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-const SBlessedOutput_1 = __importDefault(require("../blessed/SBlessedOutput"));
+const SBlessedProcessOutput_1 = __importDefault(require("./output/blessed/SBlessedProcessOutput"));
 module.exports = (source, settings = {}) => {
-    const output = new SBlessedOutput_1.default(source, settings);
+    const output = new SBlessedProcessOutput_1.default(source, settings);
     return output;
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=output.js.map

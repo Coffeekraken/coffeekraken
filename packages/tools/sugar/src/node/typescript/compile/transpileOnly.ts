@@ -38,7 +38,6 @@ const fn: ITranspileOnly = function (source, compilerOptions) {
     let result = __ts.transpileModule(content, {
       compilerOptions
     });
-    console.log('res', result);
     resolve({
       code: result.outputText,
       map: result.sourceMapText

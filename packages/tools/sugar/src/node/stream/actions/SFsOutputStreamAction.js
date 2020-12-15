@@ -85,4 +85,4 @@ module.exports = (_a = class SFsOutputStreamAction extends SActionsStreamAction_
      */
     _a.interface = SFsOutputStreamActionInterface,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SFsOutputStreamAction.js.map

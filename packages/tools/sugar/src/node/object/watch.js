@@ -38,4 +38,4 @@ function watch(target, settings = {}) {
     return watchedObj;
 }
 module.exports = watch;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=watch.js.map

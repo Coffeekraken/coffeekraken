@@ -52,6 +52,7 @@ module.exports = class SProcess extends SPromise_1.default {
             definition: undefined,
             killOnError: true,
             processPath: null,
+            initialParams: {},
             notifications: {
                 enable: true,
                 start: {
@@ -117,6 +118,12 @@ module.exports = class SProcess extends SPromise_1.default {
                 : this.constructor.interface !== undefined
                     ? this.constructor.interface.definition
                     : null;
+        let interfaceParams = {};
+        if (this.constructor.interface !== undefined) {
+            interfaceParams = this.constructor.interface.apply({}).value;
+        }
+        const initialParams = deepMerge_1.default(interfaceParams, this._settings.initialParams);
+        this._settings.initialParams = initialParams;
         // handle process exit
         onProcessExit_1.default((state) => __awaiter(this, void 0, void 0, function* () {
             this.state = state;
@@ -209,7 +216,7 @@ module.exports = class SProcess extends SPromise_1.default {
      * @name      state
      * @type      String
      *
-     * Access the process state like 'idle', 'running', 'kill', 'error', 'success'
+     * Access the process state like 'idle', 'running', 'killed', 'error', 'success'
      *
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -480,7 +487,8 @@ module.exports = class SProcess extends SPromise_1.default {
                 case 'running':
                     // log a start message
                     this.log({
-                        value: `\n<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>\nStarting the <yellow>${this.name || 'process'}</yellow> <cyan>${this.id}</cyan> execution...\n<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>\n`
+                        type: 'heading',
+                        value: `Starting the <yellow>${this.name || 'process'}</yellow> <cyan>${this.id}</cyan> execution...`
                     });
                     if (this._settings.notifications.enable) {
                         node_notifier_1.default.notify(this._settings.notifications.start);
@@ -570,4 +578,4 @@ module.exports = class SProcess extends SPromise_1.default {
         });
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SProcess.js.map

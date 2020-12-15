@@ -44,4 +44,4 @@ function deepize(object) {
     return finalObject;
 }
 module.exports = deepize;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=deepize.js.map

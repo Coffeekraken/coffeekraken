@@ -50,4 +50,4 @@ function flatten(object, separation = '.', flattenArrays = false) {
     return toReturn;
 }
 module.exports = flatten;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=flatten.js.map

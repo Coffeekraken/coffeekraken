@@ -144,4 +144,4 @@ function proxy(array) {
     return array;
 }
 module.exports = proxy;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=proxy.js.map

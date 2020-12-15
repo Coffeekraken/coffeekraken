@@ -38,4 +38,4 @@ function rtrim(string, needle, trimResult = true) {
     return string;
 }
 module.exports = rtrim;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=rtrim.js.map

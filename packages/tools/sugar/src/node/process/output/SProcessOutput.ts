@@ -25,8 +25,8 @@ import _deepMerge from '../../object/deepMerge';
  * @example       js
  * import SProcessOutput from '@coffeekraken/sugar/node/process/SProcessOutput';
  * class MyCoolProcessOutput extends SProcessOutput {
- *    constructor(settings = {}) {
- *      super(settings);
+ *    constructor(mySource, settings = {}) {
+ *      super(source, settings);
  *      // do something...
  *    }
  * }

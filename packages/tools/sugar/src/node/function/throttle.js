@@ -43,4 +43,4 @@ function throttle(fn, threshhold) {
     };
 }
 module.exports = throttle;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=throttle.js.map

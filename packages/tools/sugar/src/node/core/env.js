@@ -51,4 +51,4 @@ function env(dotPath, value) {
     return parse_1.default(get_1.default(targetObj, dotPath.toUpperCase()));
 }
 module.exports = env;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=env.js.map

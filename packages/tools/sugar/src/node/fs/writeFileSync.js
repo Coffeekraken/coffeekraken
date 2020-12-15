@@ -34,4 +34,4 @@ function writeFileSync(path, data, options = {}) {
     return fs_extra_1.default.outputFileSync(path, data, options);
 }
 module.exports = writeFileSync;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=writeFileSync.js.map

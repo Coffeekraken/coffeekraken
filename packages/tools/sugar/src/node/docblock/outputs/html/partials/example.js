@@ -16,4 +16,4 @@ module.exports = `
 </div>
 {{/example}}{{/if}}
 `;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=example.js.map

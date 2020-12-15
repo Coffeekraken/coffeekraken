@@ -7,4 +7,4 @@ const all_1 = __importDefault(require("../monorepo/all"));
 module.exports = (stringArgs = '') => {
     all_1.default(stringArgs);
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=monorepo.cli.js.map

@@ -56,4 +56,4 @@ module.exports = (_a = class SBuildFontIconsProcess extends __SProcess {
     },
     _a.interface = __SBuildFontIconsInterface,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBuildFontIconsProcess.js.map

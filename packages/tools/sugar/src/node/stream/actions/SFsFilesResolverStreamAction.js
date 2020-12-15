@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 var _a;
-const path_1 = __importDefault(require("path"));
 const SActionsStreamAction_1 = __importDefault(require("../SActionsStreamAction"));
 const glob_1 = __importDefault(require("glob"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
@@ -14,8 +13,6 @@ const SError_1 = __importDefault(require("../../error/SError"));
 const SInterface_1 = __importDefault(require("../../class/SInterface"));
 const extractGlob_1 = __importDefault(require("../../glob/extractGlob"));
 const extractNoneGlob_1 = __importDefault(require("../../glob/extractNoneGlob"));
-const filename_1 = __importDefault(require("../../fs/filename"));
-const extension_1 = __importDefault(require("../../fs/extension"));
 class SFsFilesResolverStreamActionInterface extends SInterface_1.default {
 }
 SFsFilesResolverStreamActionInterface.definition = {
@@ -161,4 +158,4 @@ module.exports = (_a = class SFindInFileStreamAction extends SActionsStreamActio
      */
     _a.interface = SFsFilesResolverStreamActionInterface,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SFsFilesResolverStreamAction.js.map

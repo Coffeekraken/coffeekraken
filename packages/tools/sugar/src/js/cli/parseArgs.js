@@ -204,4 +204,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return parseArgsString;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=parseArgs.js.map

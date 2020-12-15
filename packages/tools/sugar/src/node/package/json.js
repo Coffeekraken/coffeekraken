@@ -34,4 +34,4 @@ function json(from = process.cwd(), highest = false) {
     return require(path);
 }
 module.exports = json;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=json.js.map

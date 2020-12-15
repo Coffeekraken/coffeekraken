@@ -32,4 +32,4 @@ function ensureFileSync(file) {
     fs_extra_1.default.ensureFileSync(file);
 }
 module.exports = ensureFileSync;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=ensureFileSync.js.map

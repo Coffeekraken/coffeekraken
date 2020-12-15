@@ -56,4 +56,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return removeClassOnAnimationEnd;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=removeClassOnAnimationEnd.js.map

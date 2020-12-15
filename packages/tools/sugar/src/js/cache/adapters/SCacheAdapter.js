@@ -39,4 +39,4 @@
         return SCacheAdapter;
     }());
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SCacheAdapter.js.map

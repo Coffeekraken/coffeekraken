@@ -56,4 +56,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return queryStringToObject;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=queryStringToObject.js.map

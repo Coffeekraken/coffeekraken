@@ -64,4 +64,4 @@ module.exports = (_a = class SDocblockHtmlOutput extends SDocblockOutput_1.defau
         '@author'
     ],
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SDocblockHtmlOutput.js.map

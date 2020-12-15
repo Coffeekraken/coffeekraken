@@ -45,4 +45,4 @@
     }
     return constrain;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=constrain.js.map

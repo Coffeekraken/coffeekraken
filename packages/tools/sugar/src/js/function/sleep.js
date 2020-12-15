@@ -43,4 +43,4 @@
     }
     return sleep;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=sleep.js.map

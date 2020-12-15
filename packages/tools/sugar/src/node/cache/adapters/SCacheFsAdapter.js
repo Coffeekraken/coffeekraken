@@ -134,4 +134,4 @@ module.exports = class SCacheFsAdapter extends SCacheAdapter_1.default {
         });
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SCacheFsAdapter.js.map

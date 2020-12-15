@@ -9,4 +9,4 @@ module.exports = {
     close: ')',
     exclude: [/@include Sugar\.setup\(.*\);/]
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=includeInlineSplitter.js.map

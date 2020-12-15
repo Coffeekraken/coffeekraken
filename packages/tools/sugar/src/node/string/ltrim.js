@@ -35,4 +35,4 @@ function ltrim(string, needle, trimResult = true) {
     return string;
 }
 module.exports = ltrim;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=ltrim.js.map

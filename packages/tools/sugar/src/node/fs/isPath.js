@@ -42,4 +42,4 @@ function isPath(path, checkExistence = false) {
     return true;
 }
 module.exports = isPath;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=isPath.js.map

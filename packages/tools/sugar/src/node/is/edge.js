@@ -28,4 +28,4 @@ function isEdge(ua = navigator.userAgent) {
     return ua.indexOf('Edg/') > -1;
 }
 module.exports = isEdge;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=edge.js.map

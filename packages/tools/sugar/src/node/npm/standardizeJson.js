@@ -68,4 +68,4 @@ function standardizeJson(json) {
     return json;
 }
 module.exports = standardizeJson;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=standardizeJson.js.map

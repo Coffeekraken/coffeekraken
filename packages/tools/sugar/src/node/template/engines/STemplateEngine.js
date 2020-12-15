@@ -30,4 +30,4 @@ module.exports = class STemplateEngine {
         this._settings = deepMerge_1.default({}, settings);
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=STemplateEngine.js.map

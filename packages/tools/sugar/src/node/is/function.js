@@ -29,4 +29,4 @@ function isFunction(value) {
     return value && {}.toString.call(value) === '[object Function]';
 }
 module.exports = isFunction;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=function.js.map

@@ -104,4 +104,4 @@
     };
     return fn;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=parseTypeString.js.map

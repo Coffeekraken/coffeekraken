@@ -50,4 +50,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return whenInViewport;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=whenInViewport.js.map

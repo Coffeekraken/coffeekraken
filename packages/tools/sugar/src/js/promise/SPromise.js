@@ -730,12 +730,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 return __generator(this, function (_a) {
                     if (this._isDestroyed)
                         return [2 /*return*/];
-                    treatAsValue = arg !== undefined && arg.treatAsValue;
+                    treatAsValue = arg !== undefined;
                     if (treatAsValue) {
                         arg = treatAsValue_1.default(arg);
                     }
                     res = this._triggerStacks(what, arg, metas);
-                    if (res && res.revoke) {
+                    if (res && res.restorePromiseBehavior) {
                         res = res.restorePromiseBehavior();
                     }
                     return [2 /*return*/, res];
@@ -1193,4 +1193,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SPromise;
     }(Promise));
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SPromise.js.map

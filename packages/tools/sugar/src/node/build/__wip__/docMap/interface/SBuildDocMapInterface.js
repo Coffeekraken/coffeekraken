@@ -51,4 +51,4 @@ module.exports = (_a = class SBuildDocMapInterface extends __SInterface {
         }
     },
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBuildDocMapInterface.js.map

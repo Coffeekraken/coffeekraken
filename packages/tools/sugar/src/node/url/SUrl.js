@@ -337,4 +337,4 @@ module.exports = class SUrl {
         return this._parsedUrl.toString();
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SUrl.js.map

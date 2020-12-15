@@ -71,4 +71,4 @@
     }
     return rgba2hsv;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=rgba2hsv.js.map

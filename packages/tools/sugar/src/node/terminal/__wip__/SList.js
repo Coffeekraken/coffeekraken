@@ -265,4 +265,4 @@ module.exports = class TerminalList {
         return lines.join('\n');
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SList.js.map

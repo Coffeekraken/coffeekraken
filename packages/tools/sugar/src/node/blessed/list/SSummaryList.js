@@ -329,4 +329,4 @@ module.exports = class SBlessedSummaryList extends SBlessedComponent_1.default {
         });
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SSummaryList.js.map

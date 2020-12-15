@@ -82,4 +82,4 @@
         return SConfigAdapter;
     }());
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SConfigAdapter.js.map

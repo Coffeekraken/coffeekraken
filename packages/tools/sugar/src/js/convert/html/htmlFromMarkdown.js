@@ -51,4 +51,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return htmlFromMarkdown;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=htmlFromMarkdown.js.map

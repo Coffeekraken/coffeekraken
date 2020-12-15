@@ -14,4 +14,4 @@ module.exports = (stringArgs = '') => {
     const proc = stream.start(args);
     __output(proc);
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=docNav.cli.js.map

@@ -386,4 +386,4 @@ const Cls = (_a = class SType extends SPromise_1.default {
     _a._registeredTypes = {},
     _a);
 module.exports = Cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=_SType.js.map

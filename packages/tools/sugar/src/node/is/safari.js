@@ -28,4 +28,4 @@ function isSafari(ua = navigator.userAgent) {
     return ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1;
 }
 module.exports = isSafari;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=safari.js.map

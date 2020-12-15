@@ -34,4 +34,4 @@ function move(src, dest) {
     return fs_extra_1.default.move(src, dest);
 }
 module.exports = move;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=move.js.map

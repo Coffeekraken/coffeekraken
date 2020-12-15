@@ -98,4 +98,4 @@ function parseHtml(message) {
     return message[0];
 }
 module.exports = parseHtml;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=parseHtml.js.map

@@ -1,1 +1,1 @@
-{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":";AAAA,cAAc;AAEd;;;;;;;;;;;;;;;;;;;;;;;GAuBG;AACH,SAAS,gBAAgB,CAAC,EAAE,GAAG,SAAS,CAAC,SAAS;IAChD,OAAO,EAAE,CAAC,KAAK,CAAC,iBAAiB,CAAC,KAAK,IAAI,CAAC;AAC9C,CAAC;AACD,iBAAS,gBAAgB,CAAC"}
+{"version":3,"file":"samsungBrowser.js","sourceRoot":"","sources":["samsungBrowser.ts"],"names":[],"mappings":";AAAA,cAAc;AAEd;;;;;;;;;;;;;;;;;;;;;;;GAuBG;AACH,SAAS,gBAAgB,CAAC,EAAE,GAAG,SAAS,CAAC,SAAS;IAChD,OAAO,EAAE,CAAC,KAAK,CAAC,iBAAiB,CAAC,KAAK,IAAI,CAAC;AAC9C,CAAC;AACD,iBAAS,gBAAgB,CAAC"}

@@ -56,4 +56,4 @@ const Cls = (_a = class SCompileTsProcess extends SProcess_1.default {
     _a.interface = SCompileTsProcessInterface_1.default,
     _a);
 module.exports = Cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SCompileTsProcess.js.map

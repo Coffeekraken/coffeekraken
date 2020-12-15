@@ -9,4 +9,4 @@ exports.default = (stringArgs = '') => {
     const pro = new SFsDeamonProcess_1.default();
     pro.run(stringArgs);
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=fs.cli.js.map

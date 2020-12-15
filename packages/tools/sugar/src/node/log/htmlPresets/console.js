@@ -52,4 +52,4 @@ function consoleFn(text) {
     });
 }
 module.exports = consoleFn;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=console.js.map

@@ -32,4 +32,4 @@ function isTestEnv() {
         typeof global.it === 'function');
 }
 module.exports = isTestEnv;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=testEnv.js.map

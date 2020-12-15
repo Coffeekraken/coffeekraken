@@ -161,7 +161,7 @@ const fn: ICompileTs = function compileTs(
       // check if watch or not
       if (params.watch === true) {
         trigger('log', {
-          value: `[<magenta>${stack}</magenta>] Watch mode <green>enabled</green>`
+          value: `<magenta>[${stack}]</magenta> Watch mode <green>enabled</green>`
         });
       }
 
@@ -179,7 +179,7 @@ const fn: ICompileTs = function compileTs(
             if (stacksStates[stack].ready) return;
             stacksStates[stack].ready = true;
             trigger('log', {
-              value: `[<magenta>${stack}</magenta>] Watching files process <green>ready</green>`
+              value: `<magenta>[${stack}]</magenta> Watching files process <green>ready</green>`
             });
             resolveWatch();
           })
@@ -192,7 +192,7 @@ const fn: ICompileTs = function compileTs(
               }, 60000);
 
               trigger('log', {
-                value: `[<magenta>${stack}</magenta>] <yellow>updated </yellow> <green>${file.path.replace(
+                value: `<magenta>[${stack}]</magenta> <yellow>updated</yellow> <green>${file.path.replace(
                   `${__packageRoot()}/`,
                   ''
                 )}</green> <yellow>${file.sizeInKBytes}kb</yellow>`
@@ -217,7 +217,7 @@ const fn: ICompileTs = function compileTs(
                 )}s`;
               }
               trigger('log', {
-                value: `[<magenta>${stack}</magenta>] <cyan>compiled</cyan> <green>${file.path.replace(
+                value: `<magenta>[${stack}]</magenta> <cyan>compiled</cyan> <green>${file.path.replace(
                   `${__packageRoot()}/`,
                   ''
                 )}</green> <yellow>${file.sizeInKBytes}kb</yellow>${duration}`
@@ -237,7 +237,7 @@ const fn: ICompileTs = function compileTs(
         params.transpileOnly === false
       ) {
         trigger('log', {
-          value: `Starting a full <yellow>tsc</yellow> process`
+          value: `<magenta>[${stack}]</magenta> Starting a full <yellow>tsc</yellow> process`
         });
         // instanciate a new process
         const pro = new __SCliProcess('tsc [arguments]', {
@@ -252,10 +252,10 @@ const fn: ICompileTs = function compileTs(
       } else if (params.transpileOnly === true) {
         if (params.watch === undefined || params.watch === false) {
           trigger('log', {
-            value: `Starting the compilation in <yellow>transpileOnly</yellow> mode`
+            value: `<magenta>[${stack}]</magenta> Starting the compilation in <yellow>transpileOnly</yellow> mode`
           });
           trigger('log', {
-            value: `[<magenta>${stack}</magenta>] Listing all the files to transpile depending on:\n- ${stackObj.include
+            value: `<magenta>[${stack}]</magenta> Listing all the files to transpile depending on:\n- ${stackObj.include
               .map(
                 (t) => `<green>${t.replace(`${__packageRoot()}/`, '')}</green>`
               )
@@ -269,7 +269,7 @@ const fn: ICompileTs = function compileTs(
             files = [...files, ...filesFounded];
           }
           trigger('log', {
-            value: `[<magenta>${stack}</magenta>] Found <yellow>${files.length}</yellow> file(s) to compile`
+            value: `<magenta>[${stack}]</magenta> Found <yellow>${files.length}</yellow> file(s) to compile`
           });
 
           await __wait(10);

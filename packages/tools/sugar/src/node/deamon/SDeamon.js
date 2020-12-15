@@ -175,4 +175,4 @@ class SDeamon extends SPromise_1.default {
     }
 }
 module.exports = SDeamon;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SDeamon.js.map

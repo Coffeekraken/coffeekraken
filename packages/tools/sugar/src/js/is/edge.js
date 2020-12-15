@@ -39,4 +39,4 @@
     }
     return isEdge;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=edge.js.map

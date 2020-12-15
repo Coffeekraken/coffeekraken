@@ -29,4 +29,4 @@ function moveSync(src, dest) {
     _fs.moveSync(src, dest);
 }
 module.exports = moveSync;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=moveSync.js.map

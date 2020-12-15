@@ -74,4 +74,4 @@ module.exports = function linkPackages(settings = {}) {
         }));
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=linkPackages.js.map

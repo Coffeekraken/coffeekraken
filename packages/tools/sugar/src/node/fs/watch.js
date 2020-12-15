@@ -95,4 +95,4 @@ const fn = function watch(paths, settings = {}) {
     return promise;
 };
 module.exports = fn;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=watch.js.map

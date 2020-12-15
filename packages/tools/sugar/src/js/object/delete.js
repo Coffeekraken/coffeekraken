@@ -73,4 +73,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return del;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=delete.js.map

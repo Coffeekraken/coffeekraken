@@ -49,4 +49,4 @@ function getExtendsStack(cls) {
     return stack;
 }
 module.exports = getExtendsStack;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=getExtendsStack.js.map

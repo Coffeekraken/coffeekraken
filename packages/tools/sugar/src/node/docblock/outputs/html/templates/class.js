@@ -18,4 +18,4 @@ module.exports = `
   {{include "..."}}
 </div>
 `;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=class.js.map

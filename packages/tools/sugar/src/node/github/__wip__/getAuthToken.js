@@ -24,4 +24,4 @@
 module.exports = function getAuthToken() {
     return global.githubAuthToken || false;
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=getAuthToken.js.map

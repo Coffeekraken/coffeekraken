@@ -44,4 +44,4 @@ const fn = function (settings = {}) {
     return temp_dir_1.default;
 };
 module.exports = fn;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=tmpDir.js.map

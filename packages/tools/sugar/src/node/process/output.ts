@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SBlessedOutput from '../blessed/SBlessedOutput';
+import __SBlessedProcessOutput from './output/blessed/SBlessedProcessOutput';
 
 /**
  * @name            output
@@ -31,6 +31,6 @@ import __SBlessedOutput from '../blessed/SBlessedOutput';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = (source, settings = {}) => {
-  const output = new __SBlessedOutput(source, settings);
+  const output = new __SBlessedProcessOutput(source, settings);
   return output;
 };

@@ -87,4 +87,4 @@ function findImportStatements(string, settings = {}) {
     return statements;
 }
 module.exports = findImportStatements;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=findImportStatements.js.map

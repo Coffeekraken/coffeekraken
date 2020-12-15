@@ -220,4 +220,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return deepProxy;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=deepProxy.js.map

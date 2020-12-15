@@ -38,4 +38,4 @@
     }
     return simpleValue;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=simpleValue.js.map

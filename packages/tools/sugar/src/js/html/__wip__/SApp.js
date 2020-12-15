@@ -225,4 +225,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }());
     exports.default = SApp;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SApp.js.map

@@ -56,4 +56,4 @@ function stripCssComments(css, settings = {}) {
     return css;
 }
 module.exports = stripCssComments;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=stripCssComments.js.map

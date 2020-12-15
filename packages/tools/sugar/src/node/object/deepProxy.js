@@ -187,4 +187,4 @@ function deepProxy(object, handlerFn, settings = {}) {
     return proxify(object, []);
 }
 module.exports = deepProxy;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=deepProxy.js.map

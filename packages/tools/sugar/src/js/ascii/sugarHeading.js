@@ -42,4 +42,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return sugarHeading;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=sugarHeading.js.map

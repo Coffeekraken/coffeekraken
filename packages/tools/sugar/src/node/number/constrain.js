@@ -33,4 +33,4 @@ function constrain(value, min = null, max = null) {
     return value;
 }
 module.exports = constrain;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=constrain.js.map

@@ -65,4 +65,4 @@ module.exports = function splitLineEvery(line, every) {
     });
     return lines;
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=splitLineEvery.js.map

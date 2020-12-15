@@ -103,4 +103,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }());
     exports.default = SBind;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBind.js.map

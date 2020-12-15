@@ -41,4 +41,4 @@ function keysLast(array, keys) {
     return res;
 }
 module.exports = keysLast;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=keysLast.js.map

@@ -28,4 +28,4 @@ function isOpera(ua = navigator.userAgent) {
     return ua.toLowerCase().indexOf('op') > -1;
 }
 module.exports = isOpera;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=opera.js.map

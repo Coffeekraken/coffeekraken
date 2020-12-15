@@ -82,4 +82,4 @@
     }
     return onSwipe;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=onSwipe.js.map

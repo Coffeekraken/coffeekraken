@@ -71,4 +71,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return trimLines;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=trimLines.js.map

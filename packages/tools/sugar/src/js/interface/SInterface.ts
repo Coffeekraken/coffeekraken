@@ -1,5 +1,6 @@
 // @shared
 
+import __toString from '../string/toString';
 import __SDescriptor from '../descriptor/SDescriptor';
 import ISInterface, {
   ISInterfaceSettings,
@@ -138,7 +139,12 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
    */
   constructor(settings: ISInterfaceSettings = {}) {
     // @ts-ignore
-    this._settings = __deepMerge(this.constructor.settings, {}, settings);
+    this._settings = __deepMerge(
+      // @ts-ignore
+      this.constructor.settings,
+      this._settings,
+      settings
+    );
     // @ts-ignore
     this._definition = this.constructor.definition;
   }
@@ -172,21 +178,19 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
 
     settings = __deepMerge(this._settings, settings);
 
-    const descriptorResult: ISDescriptorResult = __SDescriptor
-      .generate({
-        name,
-        type: 'Object',
-        rules: this._definition,
-        settings: __deepMerge(
-          {
-            arrayAsValue: settings.arrayAsValue,
-            complete: settings.complete,
-            throwOnError: false
-          },
-          settings.descriptorSettings || {}
-        )
-      })
-      .apply(instance);
+    console.log('S', settings);
+
+    const descriptor = new __SDescriptor({
+      name,
+      type: 'Object',
+      rules: this._definition,
+      arrayAsValue: settings.arrayAsValue,
+      complete: settings.complete,
+      throwOnError: false,
+      ...(settings.descriptorSettings || {})
+    });
+
+    const descriptorResult: ISDescriptorResult = descriptor.apply(instance);
 
     // instanciate a new interface result object
     const interfaceResult: ISInterfaceResult = new __SInterfaceResult({

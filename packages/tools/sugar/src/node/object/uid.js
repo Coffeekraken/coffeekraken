@@ -57,4 +57,4 @@ function uid(obj, settings = {}) {
     }
 }
 module.exports = uid;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=uid.js.map

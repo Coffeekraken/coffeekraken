@@ -57,4 +57,4 @@ function frontspecMiddleware(settings = {}) {
     };
 }
 module.exports = frontspecMiddleware;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=frontspecMiddleware.js.map

@@ -12,4 +12,4 @@ module.exports = (obj, path, value = {}) => {
         set_1.default(obj, path, value);
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=ensureExists.js.map

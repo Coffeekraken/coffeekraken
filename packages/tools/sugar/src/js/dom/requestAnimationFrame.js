@@ -15,4 +15,4 @@
         window.oRequestAnimationFrame ||
         window.msRequestAnimationFrame;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=requestAnimationFrame.js.map

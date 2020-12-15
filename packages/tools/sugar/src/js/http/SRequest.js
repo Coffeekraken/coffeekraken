@@ -234,4 +234,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SRequest;
     }());
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SRequest.js.map

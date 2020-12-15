@@ -30,4 +30,4 @@ const ruleObj = {
 // register the new rule
 _SDescriptor_1.default.registerRule(ruleObj);
 exports.default = ruleObj;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=maxRule.js.map

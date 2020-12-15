@@ -24,4 +24,4 @@ module.exports = (_a = class SDeamonInterface extends SInterface_1.default {
         }
     },
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SDeamonInterface.js.map

@@ -425,4 +425,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return STimer;
     }(SPromise_1.default));
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=STimer.js.map

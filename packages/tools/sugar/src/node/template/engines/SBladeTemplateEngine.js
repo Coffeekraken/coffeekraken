@@ -129,4 +129,4 @@ module.exports = (_a = class SBladeTemplateEngine extends STemplateEngine_1.defa
      */
     _a.input = 'string',
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBladeTemplateEngine.js.map

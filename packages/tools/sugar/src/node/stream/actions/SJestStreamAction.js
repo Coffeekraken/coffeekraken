@@ -74,4 +74,4 @@ module.exports = (_a = class SJestStreamAction extends SActionsStreamAction_1.de
      */
     _a.interface = SJestStreamActionInterface,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SJestStreamAction.js.map

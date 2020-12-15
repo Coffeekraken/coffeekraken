@@ -46,4 +46,4 @@ module.exports = (_a = class SBuildFontIconsInterface extends __SInterface {
         }
     },
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBuildFontIconsInterface.js.map

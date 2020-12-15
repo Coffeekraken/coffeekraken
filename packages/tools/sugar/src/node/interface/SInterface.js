@@ -77,7 +77,9 @@ const Cls = (_a = class SInterface {
                 complete: true
             };
             // @ts-ignore
-            this._settings = deepMerge_1.default(this.constructor.settings, {}, settings);
+            this._settings = deepMerge_1.default(
+            // @ts-ignore
+            this.constructor.settings, this._settings, settings);
             // @ts-ignore
             this._definition = this.constructor.definition;
         }
@@ -129,18 +131,9 @@ const Cls = (_a = class SInterface {
                         ? instance.constructor.name
                         : instance.name;
             settings = deepMerge_1.default(this._settings, settings);
-            const descriptorResult = SDescriptor_1.default
-                .generate({
-                name,
-                type: 'Object',
-                rules: this._definition,
-                settings: deepMerge_1.default({
-                    arrayAsValue: settings.arrayAsValue,
-                    complete: settings.complete,
-                    throwOnError: false
-                }, settings.descriptorSettings || {})
-            })
-                .apply(instance);
+            console.log('S', settings);
+            const descriptor = new SDescriptor_1.default(Object.assign({ name, type: 'Object', rules: this._definition, arrayAsValue: settings.arrayAsValue, complete: settings.complete, throwOnError: false }, (settings.descriptorSettings || {})));
+            const descriptorResult = descriptor.apply(instance);
             // instanciate a new interface result object
             const interfaceResult = new SInterfaceResult_1.default({
                 descriptorResult
@@ -178,4 +171,4 @@ const Cls = (_a = class SInterface {
     _a.settings = {},
     _a);
 module.exports = Cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SInterface.js.map

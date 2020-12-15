@@ -327,4 +327,4 @@ const Cls = class SFile extends SPromise_1.default {
     }
 };
 module.exports = Cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SFile.js.map

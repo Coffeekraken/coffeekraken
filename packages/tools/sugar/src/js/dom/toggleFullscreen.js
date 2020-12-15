@@ -49,4 +49,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return toggleFullscreen;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=toggleFullscreen.js.map

@@ -161,4 +161,4 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
     return when;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=when.js.map

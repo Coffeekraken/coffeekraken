@@ -16,4 +16,4 @@ module.exports = (stringArgs = '') => {
         processInstance.run(stringArgs);
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=runChild.cli.js.map

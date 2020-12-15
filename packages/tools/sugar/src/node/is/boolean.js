@@ -29,4 +29,4 @@ function isBoolean(value) {
     return typeof value === 'boolean';
 }
 module.exports = isBoolean;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=boolean.js.map

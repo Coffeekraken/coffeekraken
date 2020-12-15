@@ -29,4 +29,4 @@ module.exports = function setAuthToken(username, token) {
         token
     };
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=setAuthToken.js.map

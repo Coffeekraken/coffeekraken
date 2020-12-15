@@ -65,4 +65,4 @@ const fn = function (source, compilerOptions) {
     });
 };
 module.exports = fn;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=transpileOnly.js.map

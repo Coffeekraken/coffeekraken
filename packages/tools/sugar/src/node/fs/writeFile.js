@@ -36,4 +36,4 @@ function writeFile(path, data, options = {}) {
     return fs_extra_1.default.outputFile(path, data, options);
 }
 module.exports = writeFile;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=writeFile.js.map

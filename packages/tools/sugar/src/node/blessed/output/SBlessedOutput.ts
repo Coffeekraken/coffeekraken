@@ -15,9 +15,13 @@ import __SOutputSourceInterface from '../interface/SOutputSourceInterface';
 import __wait from '../../time/wait';
 import __parseArgs from '../../cli/parseArgs';
 import __parseAndFormatLog from '../../log/parseAndFormatLog';
+import __parseHtml from '../../console/parseHtml';
+import __countLine from '../../string/countLine';
+import __chalk from 'chalk';
 
 import ISBlessedOutput, {
   ISBlessedOutputCtor,
+  ISBlessedOutputMetas,
   ISBlessedOutputSettings
 } from './interface/ISBlessedOutput';
 import ISBlessedOutputComponent, {
@@ -26,6 +30,8 @@ import ISBlessedOutputComponent, {
 } from './interface/ISBlessedOutputComponent';
 import __SDefaultBlessedOutputComponent from './components/SDefaultBlessedOutputComponent';
 import __SErrorBlessedOutputComponent from './components/SErrorBlessedOutputComponent';
+import __SWarningBlessedOutputComponent from './components/SWarningBlessedOutputComponent';
+import __SHeadingBlessedOutputComponent from './components/SHeadingBlessedOutputComponent';
 
 /**
  * @name                  SOutput
@@ -91,67 +97,30 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
   static registerComponent(
     component: ISBlessedOutputComponentCtor,
     settings: ISBlessedOutputComponentSettings = {},
-    as: string = null
+    as: string
   ) {
     // make sure this component has an "id" specified
     if (component.id === undefined && as === null) {
       throw `Sorry but you try to register a component that does not have a built-in static "id" property and you don't have passed the "as" argument to override it...`;
     }
     // save the component inside the stack
-    SBlessedOutput.registeredComponents[as || component.id] = {
+    SBlessedOutput.registeredComponents[as || component.id || 'default'] = {
       component,
       settings,
       as
     };
   }
 
-  stack = [];
-
   /**
-   * @name          _process
-   * @type          SOutput
-   * @private
+   * @name      stack
+   * @type      Object[]
    *
-   * Store the SOutput instance
+   * Store all the "containers" that handle components etc...
    *
+   * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _process = null;
-
-  /**
-   * @name          _content
-   * @type          Array
-   * @private
-   *
-   * Store the content depending on his formatting style like groups, etc...
-   *
-   * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _content = [];
-
-  /**
-   * @name          $logBox
-   * @type          blessed.Box
-   * @private
-   *
-   * Store the actual box where the logs will be pushed
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  $logBox = null;
-
-  /**
-   * @name           $headerBox
-   * @type          blessed.box
-   * @private
-   *
-   * Store the header content if a log object has the property "type" to "header"
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  $headerBox = null;
+  stack: Object[] = [];
 
   /**
    * @name          constructor
@@ -171,23 +140,31 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
           filter: null,
           maxItems: -1,
           maxItemsByGroup: 1,
-          spaceBetween: 1,
+          spaceBetween: 0,
+          spaceAround: 1,
           stacks: ['log', '*.log', 'warning', '*.warning', 'warn', '*.warn'],
+          metas: {
+            spaceRight: 1,
+            width: 9,
+            time: false
+          },
           blessed: {
-            width: '100%',
-            height: '100%',
             top: 0,
             left: 0,
             bottom: 0,
             right: 0,
+            mouse: true,
+            keys: true,
             scrollable: true,
-            scrollbar: true,
-            // alwaysScroll: true,
+            alwaysScroll: true,
+            scrollbar: {
+              ch: ' ',
+              inverse: true
+            },
             style: {
-              bg: 'yellow',
+              // bg: 'yellow',
               scrollbar: {
-                fg: 'red',
-                bg: 'cyan'
+                bg: 'yellow'
               }
             }
           }
@@ -229,9 +206,9 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   registerSource(source, settings: ISBlessedOutputSettings = {}) {
-    settings = __deepMerge(this._settings, settings);
+    settings = __deepMerge(this._settings, settings) as ISBlessedOutputSettings;
     // subscribe to data
-    source.on(settings.stacks.join(','), (data, metas) => {
+    source.on((settings.stacks || []).join(','), (data, metas) => {
       this.log(data);
     });
   }
@@ -249,17 +226,12 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
   async clear() {
     // remove all items from the display list
     this.stack.forEach(($component) => {
+      // @ts-ignore
       $component.detach();
     });
     // reset the stack
     this.stack = [];
     return true;
-  }
-
-  _processMarkdown(content) {
-    content = content.trim();
-    content = __parseMarkdown(content);
-    return content;
   }
 
   /**
@@ -278,11 +250,12 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
 
     // @ts-ignore
     logs.forEach(async (logObj) => {
-      const $lastComponent = this.stack.length ? this.stack.pop() : null;
+      const $lastContainer = this.stack.length ? this.stack.pop() : undefined;
       // clear
       if (logObj.clear === true) {
         await this.clear();
       }
+
       // make sure the wanted component declared in "type" is registered
       // otherwise, fallback to "default"
       const type =
@@ -293,28 +266,103 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
       const $component = new SBlessedOutput.registeredComponents[
         type
       ].component(logObj, SBlessedOutput.registeredComponents[type].settings);
-      // append the component to the feed
-      if ($lastComponent !== null) {
-        // $component.top = $lastComponent.top + $lastComponent.height;
-        $component.top =
-          $lastComponent.top +
-          $lastComponent.getScrollHeight() +
-          this._settings.spaceBetween;
+
+      // container
+      const $container = __blessed.box({
+        width: `100%-${this._settings.spaceAround * 2}`,
+        height: 0,
+        top: 0,
+        left: this._settings.spaceAround,
+        scrollable: true,
+        style: {
+          // bg: 'cyan'
+        }
+      });
+      let $metas,
+        metasHeight = 0;
+
+      // build metas
+      const metasObj: ISBlessedOutputMetas = __deepMerge(
+        this._settings.metas,
+        logObj.metas
+      ) as ISBlessedOutputMetas;
+      if (metasObj !== undefined) {
+        let content = [metasObj.content || ''];
+        if (metasObj.time === true) {
+          const now = new Date();
+          let hours: any = now.getHours(),
+            minutes: any = now.getMinutes(),
+            seconds: any = now.getSeconds();
+          if (hours < 10) hours = `0${hours}`;
+          if (minutes < 10) minutes = `0${minutes}`;
+          if (seconds < 10) seconds = `0${seconds}`;
+          content = [
+            `<cyan>${hours + ':' + minutes + ':' + seconds}</cyan>`,
+            metasObj.content || ''
+          ];
+        }
+        content = content.map((c) => {
+          c = __parseHtml(c);
+          c = ' '.repeat(metasObj.width - 1 - __countLine(c.trim())) + c;
+          return c;
+        });
+
+        content = content.filter((c) => c.trim() !== '');
+
+        metasHeight = content.length;
+
+        if (content.length > 0) {
+          $metas = __blessed.box({
+            content: content.join('\n'),
+            width: metasObj.width,
+            height: 'shrink',
+            top: 0,
+            left: 0,
+            style: {
+              // bg: 'red'
+            }
+          });
+        }
       }
 
-      $component.left = 4;
+      if (metasObj !== undefined && $metas !== undefined) {
+        $component.left = metasObj.width + metasObj.spaceRight;
+      }
 
-      this.append($component);
+      $container.append($component);
+      if ($metas !== undefined) {
+        $container.append($metas);
+        $container.$metas = $metas;
+      }
+      $container.$component = $component;
 
       // append the log into the stack
-      this.stack.push($component);
+      this.append($container);
+      this.stack.push($container);
+
+      // calculate the height to apply
+      const contentHeight = $component.getScrollHeight();
+      let containerHeight =
+        contentHeight > metasHeight ? contentHeight : metasHeight;
+
+      // append the component to the feed
+      if ($lastContainer !== undefined) {
+        $container.top =
+          // @ts-ignore
+          $lastContainer.top +
+          // @ts-ignore
+          $lastContainer.getScrollHeight() +
+          this._settings.spaceBetween;
+      }
+      $container.height = containerHeight;
     });
 
     // scroll to bottom
-    this.setScrollPerc(100);
-
-    // update display
-    this.update();
+    setTimeout(() => {
+      this.setScrollPerc(100);
+      // update display
+      this.update();
+    });
   }
 
   /**
@@ -328,18 +376,18 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async _applyTops() {
-    let currentTop = 0;
-    // loop on each of the components
-    for (let i = 0; i < this.stack.length; i++) {
-      const $component = this.stack[i];
-      $component.top = currentTop;
-      // $component.height: 0;
-      // $component.screen.render();
-      // await __wait(10);
-      currentTop += $component.realHeight + this._settings.spaceBetween;
-    }
-    await __wait(10);
-    this.screen.render();
+    // let currentTop = 0;
+    // // loop on each of the components
+    // for (let i = 0; i < this.stack.length; i++) {
+    //   const $component = this.stack[i];
+    //   $component.top = currentTop;
+    //   // $component.height: 0;
+    //   // $component.screen.render();
+    //   // await __wait(10);
+    //   currentTop += $component.realHeight + this._settings.spaceBetween;
+    // }
+    // await __wait(10);
+    // this.screen.render();
   }
 
   /**
@@ -351,59 +399,16 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _lastY = 1;
-  _lastContentCount = 0;
-  $logBoxChilds = [];
-  _updateTimeout = null;
-  _updateCountdown = 0;
   update() {
     if (__isChildProcess()) return;
     if (!this.isDisplayed()) return;
-  }
-
-  /**
-   * @name          _createLogBox
-   * @type          Function
-   * @private
-   *
-   * This method take the registered keys in the process and generate a nice and clean UI for it
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _createLogBox() {
-    // this.$logBox = __blessed.box({
-    //   // width: '100%-4',
-    //   top: 0,
-    //   left: 0,
-    //   right: 0,
-    //   bottom: 0,
-    //   style: {},
-    //   mouse: true,
-    //   keys: true,
-    //   scrollable: true,
-    //   scrollbar: {
-    //     ch: ' ',
-    //     inverse: true
-    //   },
-    //   style: {
-    //     bg: 'red',
-    //     scrollbar: {
-    //       bg: __color('terminal.primary').toString()
-    //     }
-    //   },
-    //   padding: {
-    //     top: 0,
-    //     left: 2,
-    //     right: 2,
-    //     bottom: 0
-    //   }
-    // });
-    // this.append(this.$logBox);
   }
 };
 
 // register default components
 cls.registerComponent(__SDefaultBlessedOutputComponent);
 cls.registerComponent(__SErrorBlessedOutputComponent);
+cls.registerComponent(__SWarningBlessedOutputComponent);
+cls.registerComponent(__SHeadingBlessedOutputComponent);
 
 export = cls;

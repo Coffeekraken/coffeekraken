@@ -47,4 +47,4 @@ function map(object, processor) {
     return object;
 }
 module.exports = map;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=map.js.map

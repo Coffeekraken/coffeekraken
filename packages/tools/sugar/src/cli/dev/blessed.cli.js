@@ -20,15 +20,36 @@ module.exports = async (stringArgs = '') => {
   await __wait(1000);
 
   promise.trigger('log', {
+    metas: {
+      time: true,
+      content: '<yellow>node</yellow>'
+    },
     value:
       'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
   });
   promise.trigger('log', {
-    type: 'error',
+    metas: {
+      time: true,
+      content: '<yellow>node</yellow>'
+    },
+    type: 'warning',
     value:
       'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
   });
+
   promise.trigger('log', {
+    metas: {
+      time: true,
+      content: '<yellow>node</yellow>'
+    },
+    value: 'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf'
+  });
+
+  promise.trigger('log', {
+    metas: {
+      time: true,
+      content: '<yellow>node</yellow>'
+    },
     value:
       'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
   });
@@ -37,6 +58,43 @@ module.exports = async (stringArgs = '') => {
 
   promise.trigger('log', {
     // clear: true,
+    metas: {
+      time: true,
+      content: '<cyan>ts</cyan>'
+    },
+    value:
+      'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
+  });
+  promise.trigger('log', {
+    metas: {
+      time: true,
+      content: '<yellow>node</yellow>'
+    },
+    type: 'error',
+    value:
+      'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
+  });
+  promise.trigger('log', {
+    metas: {
+      time: true,
+      content: '<yellow>node</yellow>'
+    },
+    value:
+      'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
+  });
+  promise.trigger('log', {
+    metas: {
+      time: true,
+      content: '<cyan>ts</cyan>'
+    },
+    value:
+      'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
+  });
+  promise.trigger('log', {
+    metas: {
+      time: true,
+      content: '<cyan>ts</cyan>'
+    },
     value:
       'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
   });
@@ -45,34 +103,34 @@ module.exports = async (stringArgs = '') => {
       'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
   });
   promise.trigger('log', {
+    metas: {
+      time: true,
+      content: '<magenta>ts</magenta>'
+    },
     value:
       'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
   });
   promise.trigger('log', {
+    metas: {
+      time: true,
+      content: '<magenta>ts</magenta>'
+    },
     value:
       'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
   });
   promise.trigger('log', {
+    metas: {
+      time: true,
+      content: '<magenta>ts</magenta>'
+    },
     value:
       'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
   });
   promise.trigger('log', {
-    value:
-      'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
-  });
-  promise.trigger('log', {
-    value:
-      'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
-  });
-  promise.trigger('log', {
-    value:
-      'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
-  });
-  promise.trigger('log', {
-    value:
-      'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
-  });
-  promise.trigger('log', {
+    metas: {
+      time: true,
+      content: '<magenta>ts</magenta>'
+    },
     value:
       'FOIj wofij pwje fjw iofjwe ojf wijf owje pj wqjpf piwjpfeiowj epjf qw98ejf 0q9wiej fop qweifj oqpwjef poqjwie foijpw eofijq weofj qwopejfpwejhf iuqwje ifjh wqioejf iowje foijw efopj qweojf qopwjef oiwj'
   });

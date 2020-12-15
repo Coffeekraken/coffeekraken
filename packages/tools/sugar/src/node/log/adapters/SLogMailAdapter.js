@@ -124,4 +124,4 @@ module.exports = class SLogMailAdapter {
         });
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SLogMailAdapter.js.map

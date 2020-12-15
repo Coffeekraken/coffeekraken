@@ -33,4 +33,4 @@ function toStringFn(html, deep = true) {
     return html;
 }
 module.exports = toStringFn;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=toString.js.map

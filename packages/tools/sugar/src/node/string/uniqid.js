@@ -31,4 +31,4 @@ function uniqid() {
     return uniqid_1.default();
 }
 module.exports = uniqid;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=uniqid.js.map

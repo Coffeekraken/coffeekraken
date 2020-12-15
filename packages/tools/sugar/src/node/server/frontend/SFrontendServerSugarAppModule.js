@@ -41,4 +41,4 @@ module.exports = (_a = class SFrontendServerSugarAppModule extends SSugarAppModu
     },
     _a.interface = SFrontendServerInterface_1.default,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SFrontendServerSugarAppModule.js.map

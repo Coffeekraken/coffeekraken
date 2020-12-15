@@ -15,8 +15,6 @@ import __toString from '../string/toString';
 import __parse from '../string/parse';
 import __onProcessExit from '../process/onProcessExit';
 
-let __activeScreen: any = null;
-
 /**
  * @name                  SBlessedComponent
  * @namespace           sugar.node.blessed
@@ -47,8 +45,8 @@ if (!__isChildProcess()) {
   __hotkey('ctrl+c', {
     once: true
   }).on('press', () => {
-    if (!global.screen) return;
-    global.screen.destroy();
+    if (!global.sBlessedComponentScreen) return;
+    global.sBlessedComponentScreen.destroy();
   });
 }
 const cls: ISBlessedComponentCtor = class SBlessedComponent
@@ -79,6 +77,18 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
   static _framerateInterval = null;
 
   /**
+   * @name                  screen
+   * @type                  __blessed.screen
+   * @static
+   *
+   * Store the global screen initiated by the first component
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static screen;
+
+  /**
    * @name                  constructor
    * @type                  Function
    * @constructor
@@ -94,16 +104,19 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
         screen: true,
         container: true,
         framerate: null,
-        attach: false,
+        attach: undefined,
         blessed: {}
       },
       settings
     );
 
     // check if need to create a screen
-    if (!__activeScreen && settings.screen !== false) {
-      __activeScreen = __blessed.screen({
+    let isNewScreen = false;
+    if (!SBlessedComponent.screen && settings.screen !== false) {
+      isNewScreen = true;
+      SBlessedComponent.screen = __blessed.screen({
         smartCSR: true,
+        title: '[CK] Coffeekraken Sugar',
         cursor: {
           artificial: true,
           shape: {
@@ -114,18 +127,21 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
           blink: true
         }
       });
-      __activeScreen.on('destroy', () => {
-        __activeScreen = null;
+      SBlessedComponent.screen.on('destroy', () => {
+        SBlessedComponent.screen = null;
       });
     }
 
     // extends parent
-    delete settings.screen;
     super(settings.blessed || {});
 
+    if (this._settings.attach !== false && isNewScreen) {
+      SBlessedComponent.screen.append(this);
+    }
+
     // save screen reference
-    this.screen = __activeScreen;
-    global.screen = __activeScreen;
+    this._screen = SBlessedComponent.screen;
+    global.sBlessedComponentScreen = SBlessedComponent.screen;
 
     // keep track of the component status
     this._isDisplayed = false;
@@ -149,39 +165,36 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
 
     __onProcessExit(async () => {
       try {
-        global.screen && global.screen.destroy();
+        global.sBlessedComponentScreen &&
+          global.sBlessedComponentScreen.destroy();
       } catch (e) {}
       this._destroyed = true;
       this.detach();
       return true;
     });
 
-    if (this._settings.attach) {
-      __activeScreen.append(this);
-    }
-
-    if (!this._settings.attach) {
-      if (this.parent) {
-        this.update();
-      } else {
-        this.on('attach', () => {
-          setTimeout(() => {
-            this.update();
-          });
+    if (this.parent) {
+      this.update();
+    } else {
+      this.on('attach', () => {
+        setTimeout(() => {
+          this.update();
         });
-      }
+      });
     }
   }
 
   public get realHeight() {
     let height = this.height;
     if (typeof this.getScrollHeight === 'function') {
-      const originalHeight = this.height;
-      //this.height = 0;
-      // this.render();
-      height = this.getScrollHeight();
-      //this.height = originalHeight;
-      // this.render();
+      try {
+        const originalHeight = this.height;
+        this.height = 0;
+        // this.render();
+        height = this.getScrollHeight();
+        this.height = originalHeight;
+        // this.render();
+      } catch (e) {}
     }
     return height;
   }
@@ -217,8 +230,8 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
   _renderAfterNotAllowedTimeout = null;
   update() {
     if (this.isDestroyed()) return;
-    if (this.screen) {
-      this.screen.render();
+    if (this._screen) {
+      this._screen.render();
     }
   }
 

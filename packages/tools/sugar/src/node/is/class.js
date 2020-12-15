@@ -40,4 +40,4 @@ function cls(cls) {
     return true;
 }
 module.exports = cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=class.js.map

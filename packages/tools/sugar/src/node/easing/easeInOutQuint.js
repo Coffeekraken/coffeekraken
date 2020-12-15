@@ -23,4 +23,4 @@ function ease(t) {
     return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;
 }
 module.exports = ease;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=easeInOutQuint.js.map

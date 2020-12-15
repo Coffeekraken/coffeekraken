@@ -33,4 +33,4 @@ function remove(path) {
     return fs_extra_1.default.remove(path);
 }
 module.exports = remove;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=remove.js.map

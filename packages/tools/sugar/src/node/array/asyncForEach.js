@@ -20,4 +20,4 @@ module.exports = function asyncForEach(array, asyncFn) {
         }));
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=asyncForEach.js.map

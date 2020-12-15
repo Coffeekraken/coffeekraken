@@ -205,4 +205,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SDocblock;
     }());
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SDocblock.js.map

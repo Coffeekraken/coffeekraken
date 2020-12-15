@@ -79,4 +79,4 @@ module.exports = class SFsDeamon extends SDeamon_1.default {
         return super.watch(watchProcess);
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SFsDeamon.js.map

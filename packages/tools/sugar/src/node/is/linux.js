@@ -30,4 +30,4 @@ function linux() {
     return navigator.platform.toUpperCase().indexOf('LINUX') >= 0;
 }
 module.exports = linux;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=linux.js.map

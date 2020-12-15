@@ -29,4 +29,4 @@ function isNumber(source) {
     return !isNaN(parseFloat(source)) && isFinite(source);
 }
 module.exports = isNumber;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=number.js.map

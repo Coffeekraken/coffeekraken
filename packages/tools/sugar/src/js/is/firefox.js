@@ -39,4 +39,4 @@
     }
     return isFirefox;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=firefox.js.map

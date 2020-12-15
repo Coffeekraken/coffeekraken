@@ -2,12 +2,14 @@
 // @shared
 
 export interface ISDescriptorSettings {
+  type?: string;
   arrayAsValue?: boolean;
   throwOnMissingRule?: boolean;
   throwOnError?: boolean;
   complete?: boolean;
   name?: string;
   id?: string;
+  rules?: ISDescriptorRules;
 }
 
 export interface ISDescriptorDescription {
@@ -49,12 +51,11 @@ export interface ISDescriptorCtor {
   type: string;
   new (settings?: ISDescriptorSettings): ISDescriptor;
   registerRule(rule: ISDescriptorRule): void;
-  apply(value: any, settings?: ISDescriptorSettings): ISDescriptorResultObj;
-  generate(settings: ISDescroptorGenerateSettings): ISDescriptorCtor;
 }
 
 export default interface ISDescriptor {
   _settings: ISDescriptorSettings;
   name: string;
   id: string;
+  apply(instance: any, settings?: ISDescriptorSettings);
 }

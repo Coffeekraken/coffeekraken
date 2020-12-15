@@ -96,4 +96,4 @@ module.exports = (_a = class SGlobResolverStreamAction extends SActionsStreamAct
      */
     _a.interface = SGlobResolverStreamActionInterface,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SGlobResolverStreamAction.js.map

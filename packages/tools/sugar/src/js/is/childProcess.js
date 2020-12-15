@@ -40,4 +40,4 @@
     }
     return childProcess;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=childProcess.js.map

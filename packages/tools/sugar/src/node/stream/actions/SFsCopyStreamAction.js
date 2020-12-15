@@ -74,4 +74,4 @@ module.exports = (_a = class SFsCopyStreamAction extends SActionsStreamAction_1.
      */
     _a.interface = SFsCopyStreamActionInterface,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SFsCopyStreamAction.js.map

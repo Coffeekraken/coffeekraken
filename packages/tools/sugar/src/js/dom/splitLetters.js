@@ -119,4 +119,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return splitLetters;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=splitLetters.js.map

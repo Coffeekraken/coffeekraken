@@ -30,4 +30,4 @@ function extension(path) {
     return path.split('.').pop();
 }
 module.exports = extension;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=extension.js.map

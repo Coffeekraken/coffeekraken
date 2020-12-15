@@ -184,4 +184,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SLogMailAdapter;
     }());
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SLogMailAdapter.js.map

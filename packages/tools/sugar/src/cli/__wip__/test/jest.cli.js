@@ -10,4 +10,4 @@ exports.default = (stringArgs = '') => {
     const pro = new STestJestProcess_1.default();
     pro.run(stringArgs);
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=jest.cli.js.map

@@ -66,4 +66,4 @@ function search(req, server) {
     }));
 }
 module.exports = search;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=search.js.map

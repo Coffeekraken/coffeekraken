@@ -47,4 +47,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return packageRoot;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=packageRoot.js.map

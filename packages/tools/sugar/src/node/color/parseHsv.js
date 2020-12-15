@@ -37,4 +37,4 @@ function parseHsv(hsvString) {
     };
 }
 module.exports = parseHsv;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=parseHsv.js.map

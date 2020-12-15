@@ -22,4 +22,4 @@ module.exports = function docMap(req, res, settings = {}) {
         res.send(docMapJson);
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=docMap.js.map

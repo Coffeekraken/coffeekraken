@@ -57,4 +57,4 @@
     }
     return map;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=map.js.map

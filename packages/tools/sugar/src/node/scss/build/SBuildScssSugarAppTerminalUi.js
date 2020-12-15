@@ -19,4 +19,4 @@ module.exports = class SBuildScssSugarAppTerminalUi extends SSugarAppModuleTermi
         super(sources, settings);
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBuildScssSugarAppTerminalUi.js.map

@@ -57,4 +57,4 @@
     }
     return parseAuthorString;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=parseAuthorString.js.map

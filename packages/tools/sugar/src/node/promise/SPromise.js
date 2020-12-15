@@ -593,13 +593,13 @@ module.exports = class SPromise extends Promise {
         return __awaiter(this, void 0, void 0, function* () {
             if (this._isDestroyed)
                 return;
-            let treatAsValue = arg !== undefined && arg.treatAsValue;
+            let treatAsValue = arg !== undefined;
             if (treatAsValue) {
                 arg = treatAsValue_1.default(arg);
             }
             // triger the passed stacks
             let res = this._triggerStacks(what, arg, metas);
-            if (res && res.revoke) {
+            if (res && res.restorePromiseBehavior) {
                 res = res.restorePromiseBehavior();
             }
             return res;
@@ -995,4 +995,4 @@ module.exports = class SPromise extends Promise {
         this._isDestroyed = true;
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SPromise.js.map

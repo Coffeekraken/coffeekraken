@@ -28,4 +28,4 @@ function isEven(value) {
     return value % 2 === 0;
 }
 module.exports = isEven;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=even.js.map

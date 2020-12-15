@@ -28,4 +28,4 @@ function isOdd(value) {
     return value % 2 === 1;
 }
 module.exports = isOdd;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=odd.js.map

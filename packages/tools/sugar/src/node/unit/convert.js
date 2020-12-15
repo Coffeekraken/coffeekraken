@@ -68,4 +68,4 @@ function convert(from, to = 'px', $elm) {
     }
 }
 module.exports = convert;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=convert.js.map

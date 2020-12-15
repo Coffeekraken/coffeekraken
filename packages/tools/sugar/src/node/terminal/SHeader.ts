@@ -96,4 +96,4 @@ export = class SHeader extends __blessed.box {
     // render the screen
     if (this.screen) this.screen.render();
   }
-}
+};

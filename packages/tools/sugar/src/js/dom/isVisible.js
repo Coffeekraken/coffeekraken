@@ -45,4 +45,4 @@
     window.__isVisible = isVisible;
     return isVisible;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=isVisible.js.map

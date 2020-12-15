@@ -11,4 +11,4 @@ function heading(stringArgs = '') {
     }));
 }
 module.exports = heading;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=heading.cli.js.map

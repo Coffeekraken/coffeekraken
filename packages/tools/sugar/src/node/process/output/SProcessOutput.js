@@ -22,8 +22,8 @@ const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
  * @example       js
  * import SProcessOutput from '@coffeekraken/sugar/node/process/SProcessOutput';
  * class MyCoolProcessOutput extends SProcessOutput {
- *    constructor(settings = {}) {
- *      super(settings);
+ *    constructor(mySource, settings = {}) {
+ *      super(source, settings);
  *      // do something...
  *    }
  * }
@@ -59,4 +59,4 @@ const Cls = class SProcessOutput {
     }
 };
 module.exports = Cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SProcessOutput.js.map

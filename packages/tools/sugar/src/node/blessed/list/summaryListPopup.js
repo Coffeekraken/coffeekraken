@@ -70,4 +70,4 @@ function blessedSummaryListPopup(settings = {}) {
     };
 }
 module.exports = blessedSummaryListPopup;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=summaryListPopup.js.map

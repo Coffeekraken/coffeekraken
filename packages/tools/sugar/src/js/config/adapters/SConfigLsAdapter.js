@@ -73,4 +73,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SConfigLsAdapter;
     }((SConfigAdapter_1.default)));
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SConfigLsAdapter.js.map

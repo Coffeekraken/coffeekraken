@@ -33,4 +33,4 @@ function gravatarUrl(email, size = 200) {
     return `https://www.gravatar.com/avatar/${md5_1.default.encrypt(email)}?s=${size}`;
 }
 module.exports = gravatarUrl;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=gravatarUrl.js.map

@@ -8,4 +8,4 @@ const generateFile_1 = __importDefault(require("./generateFile"));
 exports.default = (stringArgs = '') => {
     generateFile_1.default('js ' + stringArgs);
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=js.cli.js.map

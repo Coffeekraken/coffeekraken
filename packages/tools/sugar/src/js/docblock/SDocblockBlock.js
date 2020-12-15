@@ -312,4 +312,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         },
         _a);
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SDocblockBlock.js.map

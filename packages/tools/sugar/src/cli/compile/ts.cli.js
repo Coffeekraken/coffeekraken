@@ -6,9 +6,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const SCompileTsProcess_1 = __importDefault(require("../../node/typescript/compile/SCompileTsProcess"));
 function compileTs(stringArgs = '') {
     const pro = new SCompileTsProcess_1.default({
-        output: false
+        stdio: true
     });
     pro.run(stringArgs);
 }
 module.exports = compileTs;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=ts.cli.js.map

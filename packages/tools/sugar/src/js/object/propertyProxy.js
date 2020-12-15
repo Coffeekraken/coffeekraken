@@ -124,4 +124,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return propertyProxy;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=propertyProxy.js.map

@@ -1,13 +1,15 @@
-import IDefaultBlessedOutputComponent, {
-  IDefaultBlessedOutputComponentCtor,
-  IDefaultBlessedOutputComponentSettings
-} from './interface/IDefaultBlessedOutputComponent';
+import ISDefaultBlessedOutputComponent, {
+  ISDefaultBlessedOutputComponentCtor,
+  ISDefaultBlessedOutputComponentSettings
+} from './interface/ISDefaultBlessedOutputComponent';
 import __SBlessedOutputComponent from '../SBlessedOutputComponent';
 import ILog from '../../../log/interface/ILog';
 import __blessed from 'blessed';
+import __deepMerge from '../../../object/deepMerge';
+import __parseHtml from '../../../console/parseHtml';
 
 /**
- * @name                defaultBlessedOutputComponent
+ * @name                SDefaultBlessedOutputComponent
  * @namespace           sugar.node.blessed.output.components
  * @type                Class
  * @extends             SBlessedOutputComponent
@@ -27,9 +29,9 @@ import __blessed from 'blessed';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const cls: IDefaultBlessedOutputComponentCtor = class SDefaultBlessedOutputComponent
+const cls: ISDefaultBlessedOutputComponentCtor = class SDefaultBlessedOutputComponent
   extends __SBlessedOutputComponent
-  implements IDefaultBlessedOutputComponent {
+  implements ISDefaultBlessedOutputComponent {
   /**
    * @name        id
    * @type        String
@@ -54,14 +56,19 @@ const cls: IDefaultBlessedOutputComponentCtor = class SDefaultBlessedOutputCompo
    */
   constructor(
     logObj: ILog,
-    settings: IDefaultBlessedOutputComponentSettings = {}
+    settings: ISDefaultBlessedOutputComponentSettings = {}
   ) {
-    super(logObj, {
-      ...settings,
-      blessed: {
-        content: logObj.value
-      }
-    });
+    super(
+      logObj,
+      __deepMerge(
+        {
+          blessed: {
+            content: __parseHtml(logObj.value)
+          }
+        },
+        settings
+      )
+    );
   }
 };
 export = cls;

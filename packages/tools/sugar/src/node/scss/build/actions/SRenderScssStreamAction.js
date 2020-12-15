@@ -68,4 +68,4 @@ module.exports = (_a = class SRenderSassStreamAction extends SActionsStreamActio
      */
     _a.interface = SBuildScssInterface_1.default,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SRenderScssStreamAction.js.map

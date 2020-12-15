@@ -39,4 +39,4 @@
     }
     return isBoolean;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=boolean.js.map

@@ -94,4 +94,4 @@ const fn = function parseTypeString(typeString) {
     return res;
 };
 module.exports = fn;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=parseTypeString.js.map

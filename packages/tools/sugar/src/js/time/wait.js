@@ -42,4 +42,4 @@
     }
     return wait;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=wait.js.map

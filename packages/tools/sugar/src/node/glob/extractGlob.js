@@ -36,4 +36,4 @@ function extractGlob(string) {
     return final;
 }
 module.exports = extractGlob;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=extractGlob.js.map

@@ -393,4 +393,4 @@ module.exports = class SScssCompiler {
         return null;
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SScssCompiler.js.map

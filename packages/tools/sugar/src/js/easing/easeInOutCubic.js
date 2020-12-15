@@ -29,4 +29,4 @@
     }
     return ease;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=easeInOutCubic.js.map

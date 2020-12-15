@@ -62,4 +62,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return videoLazySrcAttribute;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=videosLazySrcAttribute.js.map

@@ -52,7 +52,6 @@ const Cls: ISBlessedProcessOutputCtor = class SBlessedProcessOutput
     settings: ISBlessedProcessOutputSettings
   ) {
     super(source, settings);
-    console.log(settings);
     this._output = new SBlessedOutput({
       ...this._settings,
       sources: source

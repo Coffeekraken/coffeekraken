@@ -33,4 +33,4 @@ function formatFileSize(size, settings = {}) {
     return filesize_1.default(size, settings);
 }
 module.exports = formatFileSize;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=formatFileSize.js.map

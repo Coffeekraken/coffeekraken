@@ -66,4 +66,4 @@ const fn = function (tsconfigPath) {
     return cli;
 };
 module.exports = fn;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=tsconfigToCommandLine.js.map

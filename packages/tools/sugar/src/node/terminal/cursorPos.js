@@ -46,4 +46,4 @@ function cursorPos() {
     }));
 }
 module.exports = cursorPos;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=cursorPos.js.map

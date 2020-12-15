@@ -108,4 +108,4 @@ function columns(content, settings = {}) {
     return lines.join('\n');
 }
 module.exports = columns;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=columns.js.map

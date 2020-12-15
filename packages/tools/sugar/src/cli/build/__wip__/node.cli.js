@@ -10,4 +10,4 @@ exports.default = (stringArgs = '') => {
     const cli = new SBuildNodeCli_1.default();
     output_1.default(cli.run(stringArgs));
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=node.cli.js.map

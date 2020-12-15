@@ -41,4 +41,4 @@ function folderPath(path, checkExistence = false) {
     return parts.slice(0, -1).join('/');
 }
 module.exports = folderPath;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=folderPath.js.map

@@ -49,4 +49,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return getHtmlClassFromTagName;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=getHtmlClassFromTagName.js.map

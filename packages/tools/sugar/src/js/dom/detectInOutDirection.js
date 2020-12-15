@@ -121,4 +121,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return detectInOutDirection;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=detectInOutDirection.js.map

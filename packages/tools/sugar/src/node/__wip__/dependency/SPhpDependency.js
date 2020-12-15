@@ -35,4 +35,4 @@ module.exports = class SPhpDependency extends __SDependency {
         super('php', __dirname + '/php.dependency.json', settings);
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SPhpDependency.js.map

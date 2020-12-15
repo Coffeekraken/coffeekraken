@@ -44,4 +44,4 @@ function isDirectory(path, settings = {}) {
     return isMatching;
 }
 module.exports = isDirectory;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=directory.js.map

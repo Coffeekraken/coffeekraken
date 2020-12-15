@@ -7,4 +7,4 @@ module.exports = {
     open: '{',
     close: '}'
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=mediaQuerySplitter.js.map

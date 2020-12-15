@@ -44,12 +44,20 @@ const cls = class ISBlessedOutputComponent extends SBlessedComponent_1.default {
     constructor(logObj, settings = {}) {
         super(deepMerge_1.default({
             blessed: {
-                scrollable: true
+                scrollable: true,
+                mouse: false,
+                keys: false
             }
         }, settings));
         // save the logObj
         this.logObj = logObj;
     }
+    update() {
+        this.height = 0;
+        this.screen.render();
+        this.height = this.getScrollHeight();
+        super.update();
+    }
 };
 module.exports = cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBlessedOutputComponent.js.map

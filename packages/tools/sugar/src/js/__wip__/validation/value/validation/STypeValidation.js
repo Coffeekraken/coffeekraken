@@ -58,4 +58,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SValidation_1.default));
     return STypeValidation;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=STypeValidation.js.map

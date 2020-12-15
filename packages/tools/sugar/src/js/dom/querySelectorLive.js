@@ -128,4 +128,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return querySelectorLive;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=querySelectorLive.js.map

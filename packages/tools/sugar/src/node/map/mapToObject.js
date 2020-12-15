@@ -29,4 +29,4 @@ function mapToObject(map) {
     return obj;
 }
 module.exports = mapToObject;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=mapToObject.js.map

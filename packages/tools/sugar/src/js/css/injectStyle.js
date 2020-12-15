@@ -41,4 +41,4 @@
     }
     return injectStyle;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=injectStyle.js.map

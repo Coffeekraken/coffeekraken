@@ -141,7 +141,7 @@ const fn = function compileTs(params, settings) {
             // check if watch or not
             if (params.watch === true) {
                 trigger('log', {
-                    value: `[<magenta>${stack}</magenta>] Watch mode <green>enabled</green>`
+                    value: `<magenta>[${stack}]</magenta> Watch mode <green>enabled</green>`
                 });
             }
             // init the stack to watch
@@ -158,7 +158,7 @@ const fn = function compileTs(params, settings) {
                         return;
                     stacksStates[stack].ready = true;
                     trigger('log', {
-                        value: `[<magenta>${stack}</magenta>] Watching files process <green>ready</green>`
+                        value: `<magenta>[${stack}]</magenta> Watching files process <green>ready</green>`
                     });
                     resolveWatch();
                 })
@@ -170,7 +170,7 @@ const fn = function compileTs(params, settings) {
                             delete durationStack[file.path];
                         }, 60000);
                         trigger('log', {
-                            value: `[<magenta>${stack}</magenta>] <yellow>updated </yellow> <green>${file.path.replace(`${packageRoot_1.default()}/`, '')}</green> <yellow>${file.sizeInKBytes}kb</yellow>`
+                            value: `<magenta>[${stack}]</magenta> <yellow>updated</yellow> <green>${file.path.replace(`${packageRoot_1.default()}/`, '')}</green> <yellow>${file.sizeInKBytes}kb</yellow>`
                         });
                         if (params.transpileOnly === true) {
                             const typescriptResult = yield transpileAndSave_1.default(file.path, stackObj.tsconfigJson.compilerOptions);
@@ -182,7 +182,7 @@ const fn = function compileTs(params, settings) {
                             duration = ` in ${convert_1.default(Date.now() - durationStack[file.path.replace(/\.js$/, '.ts')], 's')}s`;
                         }
                         trigger('log', {
-                            value: `[<magenta>${stack}</magenta>] <cyan>compiled</cyan> <green>${file.path.replace(`${packageRoot_1.default()}/`, '')}</green> <yellow>${file.sizeInKBytes}kb</yellow>${duration}`
+                            value: `<magenta>[${stack}]</magenta> <cyan>compiled</cyan> <green>${file.path.replace(`${packageRoot_1.default()}/`, '')}</green> <yellow>${file.sizeInKBytes}kb</yellow>${duration}`
                         });
                     }
                 }));
@@ -194,7 +194,7 @@ const fn = function compileTs(params, settings) {
             if (params.transpileOnly === undefined ||
                 params.transpileOnly === false) {
                 trigger('log', {
-                    value: `Starting a full <yellow>tsc</yellow> process`
+                    value: `<magenta>[${stack}]</magenta> Starting a full <yellow>tsc</yellow> process`
                 });
                 // instanciate a new process
                 const pro = new SCliProcess_1.default('tsc [arguments]', {
@@ -210,10 +210,10 @@ const fn = function compileTs(params, settings) {
             else if (params.transpileOnly === true) {
                 if (params.watch === undefined || params.watch === false) {
                     trigger('log', {
-                        value: `Starting the compilation in <yellow>transpileOnly</yellow> mode`
+                        value: `<magenta>[${stack}]</magenta> Starting the compilation in <yellow>transpileOnly</yellow> mode`
                     });
                     trigger('log', {
-                        value: `[<magenta>${stack}</magenta>] Listing all the files to transpile depending on:\n- ${stackObj.include
+                        value: `<magenta>[${stack}]</magenta> Listing all the files to transpile depending on:\n- ${stackObj.include
                             .map((t) => `<green>${t.replace(`${packageRoot_1.default()}/`, '')}</green>`)
                             .join('\n- ')}`
                     });
@@ -225,7 +225,7 @@ const fn = function compileTs(params, settings) {
                         files = [...files, ...filesFounded];
                     }
                     trigger('log', {
-                        value: `[<magenta>${stack}</magenta>] Found <yellow>${files.length}</yellow> file(s) to compile`
+                        value: `<magenta>[${stack}]</magenta> Found <yellow>${files.length}</yellow> file(s) to compile`
                     });
                     yield wait_1.default(10);
                     for (let i = 0; i < files.length; i++) {
@@ -239,4 +239,4 @@ const fn = function compileTs(params, settings) {
     }));
 };
 module.exports = fn;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=compileTs.js.map

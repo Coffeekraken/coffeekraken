@@ -1129,4 +1129,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return SWebComponentGenerator;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SWebComponent.js.map

@@ -138,4 +138,4 @@ function crop(text, length, settings = {}) {
     return result;
 }
 module.exports = crop;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=crop.js.map

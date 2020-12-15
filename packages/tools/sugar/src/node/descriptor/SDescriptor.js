@@ -9,4 +9,4 @@ require("./rules/typeRule");
 require("./rules/minRule");
 require("./rules/maxRule");
 module.exports = _SDescriptor_1.default;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SDescriptor.js.map

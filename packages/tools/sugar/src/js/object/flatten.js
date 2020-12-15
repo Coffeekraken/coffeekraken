@@ -62,4 +62,4 @@
     }
     return flatten;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=flatten.js.map

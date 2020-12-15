@@ -25,4 +25,4 @@ function isChildProcess() {
     return (process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined);
 }
 module.exports = isChildProcess;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=childProcess.js.map

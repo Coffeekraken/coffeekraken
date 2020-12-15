@@ -1,5 +1,6 @@
 import ILog from './interface/ILog';
 import __parseArgs from '../cli/parseArgs';
+import __parseHtml from '../console/parseHtml';
 
 /**
  * @name                parseAndFormatLog
@@ -35,7 +36,7 @@ function parseAndFormatLog(
 ): ILog | ILog[] {
   const isArray = Array.isArray(logs);
   logs = Array.isArray(logs) === false ? [logs] : logs;
-  const logObjArray = [];
+  const logObjArray: any[] = [];
 
   // loop on each log
   // @ts-ignore
@@ -48,18 +49,20 @@ function parseAndFormatLog(
         const cli = matches[0].slice(1, -1);
         const argsObj = __parseArgs(cli);
         logObjArray.push({
-          value: log,
+          value: __parseHtml(log),
           type: 'default',
           ...argsObj
         });
       } else {
         logObjArray.push({
           type: 'default',
-          value: log
+          value: __parseHtml(log)
         });
       }
     } else {
       if (!log.type) log.type = 'default';
+      if (log.value !== undefined)
+        log.value = __parseHtml(log.value.toString());
       logObjArray.push(log);
     }
   });

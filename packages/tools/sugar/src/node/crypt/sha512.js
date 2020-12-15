@@ -48,4 +48,4 @@ module.exports = {
         return parse_1.default(string);
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=sha512.js.map

@@ -91,7 +91,7 @@ export = class SProcess extends __SPromise {
    * @name      state
    * @type      String
    *
-   * Access the process state like 'idle', 'running', 'kill', 'error', 'success'
+   * Access the process state like 'idle', 'running', 'killed', 'error', 'success'
    *
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -188,6 +188,7 @@ export = class SProcess extends __SPromise {
           definition: undefined,
           killOnError: true,
           processPath: null,
+          initialParams: {},
           notifications: {
             enable: true,
             start: {
@@ -232,6 +233,16 @@ export = class SProcess extends __SPromise {
         : this.constructor.interface !== undefined
         ? this.constructor.interface.definition
         : null;
+
+    let interfaceParams = {};
+    if (this.constructor.interface !== undefined) {
+      interfaceParams = this.constructor.interface.apply({}).value;
+    }
+    const initialParams = __deepMerge(
+      interfaceParams,
+      this._settings.initialParams
+    );
+    this._settings.initialParams = initialParams;
 
     // handle process exit
     __onProcessExit(async (state) => {
@@ -585,15 +596,10 @@ export = class SProcess extends __SPromise {
         case 'running':
           // log a start message
           this.log({
-            value: `\n<yellow>${'-'.repeat(
-              process.stdout.columns - 4
-            )}</yellow>\nStarting the <yellow>${
+            type: 'heading',
+            value: `Starting the <yellow>${
               this.name || 'process'
-            }</yellow> <cyan>${
-              this.id
-            }</cyan> execution...\n<yellow>${'-'.repeat(
-              process.stdout.columns - 4
-            )}</yellow>\n`
+            }</yellow> <cyan>${this.id}</cyan> execution...`
           });
           if (this._settings.notifications.enable) {
             __notifier.notify(this._settings.notifications.start);

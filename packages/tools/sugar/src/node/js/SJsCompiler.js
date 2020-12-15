@@ -219,4 +219,4 @@ module.exports = (_a = class SJsCompiler {
         'tsconfigRaw'
     ],
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SJsCompiler.js.map

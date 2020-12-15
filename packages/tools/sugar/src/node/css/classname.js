@@ -33,4 +33,4 @@ function classname(classname) {
     return classname;
 }
 module.exports = classname;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=classname.js.map

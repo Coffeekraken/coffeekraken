@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const parseArgs_1 = __importDefault(require("../cli/parseArgs"));
+const parseHtml_1 = __importDefault(require("../console/parseHtml"));
 /**
  * @name                parseAndFormatLog
  * @namespace           sugar.node
@@ -46,18 +47,20 @@ function parseAndFormatLog(logs) {
                 log = log.replace(matches[0], '').trim();
                 const cli = matches[0].slice(1, -1);
                 const argsObj = parseArgs_1.default(cli);
-                logObjArray.push(Object.assign({ value: log, type: 'default' }, argsObj));
+                logObjArray.push(Object.assign({ value: parseHtml_1.default(log), type: 'default' }, argsObj));
             }
             else {
                 logObjArray.push({
                     type: 'default',
-                    value: log
+                    value: parseHtml_1.default(log)
                 });
             }
         }
         else {
             if (!log.type)
                 log.type = 'default';
+            if (log.value !== undefined)
+                log.value = parseHtml_1.default(log.value.toString());
             logObjArray.push(log);
         }
     });
@@ -66,4 +69,4 @@ function parseAndFormatLog(logs) {
     return logObjArray[0];
 }
 module.exports = parseAndFormatLog;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=parseAndFormatLog.js.map

@@ -202,4 +202,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SSvgFilter_1.default));
     return SGradientSvgFilter;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SGradientSvgFilter.js.map

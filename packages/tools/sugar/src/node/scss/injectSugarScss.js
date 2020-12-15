@@ -56,4 +56,4 @@ function injectSugarScss(scss) {
     return res;
 }
 module.exports = injectSugarScss;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=injectSugarScss.js.map

@@ -42,4 +42,4 @@ function debounce(fn, delay) {
     };
 }
 module.exports = debounce;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=debounce.js.map

@@ -56,4 +56,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return styleString2Object;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=styleString2Object.js.map

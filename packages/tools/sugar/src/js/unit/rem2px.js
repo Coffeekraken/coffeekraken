@@ -38,4 +38,4 @@
     }
     return rem2px;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=rem2px.js.map

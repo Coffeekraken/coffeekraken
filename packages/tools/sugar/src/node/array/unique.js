@@ -31,4 +31,4 @@ function unique(array) {
     return a;
 }
 module.exports = unique;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=unique.js.map

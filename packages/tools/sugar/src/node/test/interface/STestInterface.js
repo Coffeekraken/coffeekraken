@@ -23,4 +23,4 @@ module.exports = (_a = class STestInterface extends SInterface_1.default {
         }
     },
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=STestInterface.js.map

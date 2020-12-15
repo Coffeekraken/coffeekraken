@@ -65,4 +65,4 @@ const api = {
 md5_1.default.encrypt = api.encrypt;
 md5_1.default.decrypt = api.decrypt;
 module.exports = md5_1.default;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=md5.js.map

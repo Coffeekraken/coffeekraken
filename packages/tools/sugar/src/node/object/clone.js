@@ -38,4 +38,4 @@ function clone(object, deep = false) {
     return lodash_clone_1.default(object);
 }
 module.exports = clone;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=clone.js.map

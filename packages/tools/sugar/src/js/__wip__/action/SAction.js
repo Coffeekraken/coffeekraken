@@ -187,4 +187,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SPromise_1.default));
     exports.default = SAction;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SAction.js.map

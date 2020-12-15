@@ -20,4 +20,4 @@ exports.default = (stringArgs = '') => {
         }
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=fonticons.cli.js.map

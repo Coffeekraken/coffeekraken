@@ -34,4 +34,4 @@ function ensureDir(dir) {
     return fs_extra_1.default.ensureDir(dir);
 }
 module.exports = ensureDir;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=ensureDir.js.map

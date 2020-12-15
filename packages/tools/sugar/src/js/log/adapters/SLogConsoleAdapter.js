@@ -148,4 +148,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SLogConsoleAdapter;
     }());
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SLogConsoleAdapter.js.map

@@ -59,4 +59,4 @@ function js(filePath) {
     });
 }
 module.exports = js;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=js.js.map

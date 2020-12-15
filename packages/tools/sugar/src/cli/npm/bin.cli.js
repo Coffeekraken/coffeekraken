@@ -79,4 +79,4 @@ module.exports = function bin(stringArgs = '') {
         }
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=bin.cli.js.map

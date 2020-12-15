@@ -105,4 +105,4 @@ function resolveGlob(globs, settings = {}) {
     });
 }
 module.exports = resolveGlob;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=resolveGlob.js.map

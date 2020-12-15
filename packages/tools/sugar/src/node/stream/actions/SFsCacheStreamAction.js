@@ -129,4 +129,4 @@ module.exports = (_a = class SFsCacheStreamAction extends SActionsStreamAction_1
      */
     _a.interface = SFsCacheStreamActionInterface,
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SFsCacheStreamAction.js.map

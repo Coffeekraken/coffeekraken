@@ -62,4 +62,4 @@ module.exports = class SConfigAdapter {
         return this._settings;
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SConfigAdapter.js.map

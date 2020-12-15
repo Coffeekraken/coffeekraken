@@ -34,4 +34,4 @@ const descriptor = {
     }
 };
 module.exports = descriptor;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=numberTypeDescriptor.js.map

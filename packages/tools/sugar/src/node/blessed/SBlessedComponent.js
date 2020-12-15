@@ -19,7 +19,6 @@ const color_1 = __importDefault(require("../color/color"));
 const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
 const childProcess_1 = __importDefault(require("../is/childProcess"));
 const onProcessExit_1 = __importDefault(require("../process/onProcessExit"));
-let __activeScreen = null;
 /**
  * @name                  SBlessedComponent
  * @namespace           sugar.node.blessed
@@ -49,9 +48,9 @@ if (!childProcess_1.default()) {
     hotkey_1.default('ctrl+c', {
         once: true
     }).on('press', () => {
-        if (!global.screen)
+        if (!global.sBlessedComponentScreen)
             return;
-        global.screen.destroy();
+        global.sBlessedComponentScreen.destroy();
     });
 }
 const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
@@ -70,13 +69,16 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
                 screen: true,
                 container: true,
                 framerate: null,
-                attach: false,
+                attach: undefined,
                 blessed: {}
             }, settings);
             // check if need to create a screen
-            if (!__activeScreen && settings.screen !== false) {
-                __activeScreen = blessed_1.default.screen({
+            let isNewScreen = false;
+            if (!SBlessedComponent.screen && settings.screen !== false) {
+                isNewScreen = true;
+                SBlessedComponent.screen = blessed_1.default.screen({
                     smartCSR: true,
+                    title: '[CK] Coffeekraken Sugar',
                     cursor: {
                         artificial: true,
                         shape: {
@@ -87,12 +89,11 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
                         blink: true
                     }
                 });
-                __activeScreen.on('destroy', () => {
-                    __activeScreen = null;
+                SBlessedComponent.screen.on('destroy', () => {
+                    SBlessedComponent.screen = null;
                 });
             }
             // extends parent
-            delete settings.screen;
             super(settings.blessed || {});
             /**
              * @name                  _settings
@@ -113,9 +114,12 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             this._renderAfterNotAllowedTimeout = null;
+            if (this._settings.attach !== false && isNewScreen) {
+                SBlessedComponent.screen.append(this);
+            }
             // save screen reference
-            this.screen = __activeScreen;
-            global.screen = __activeScreen;
+            this._screen = SBlessedComponent.screen;
+            global.sBlessedComponentScreen = SBlessedComponent.screen;
             // keep track of the component status
             this._isDisplayed = false;
             this.on('attach', () => {
@@ -135,38 +139,37 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
             }
             onProcessExit_1.default(() => __awaiter(this, void 0, void 0, function* () {
                 try {
-                    global.screen && global.screen.destroy();
+                    global.sBlessedComponentScreen &&
+                        global.sBlessedComponentScreen.destroy();
                 }
                 catch (e) { }
                 this._destroyed = true;
                 this.detach();
                 return true;
             }));
-            if (this._settings.attach) {
-                __activeScreen.append(this);
+            if (this.parent) {
+                this.update();
             }
-            if (!this._settings.attach) {
-                if (this.parent) {
-                    this.update();
-                }
-                else {
-                    this.on('attach', () => {
-                        setTimeout(() => {
-                            this.update();
-                        });
+            else {
+                this.on('attach', () => {
+                    setTimeout(() => {
+                        this.update();
                     });
-                }
+                });
             }
         }
         get realHeight() {
             let height = this.height;
             if (typeof this.getScrollHeight === 'function') {
-                const originalHeight = this.height;
-                //this.height = 0;
-                // this.render();
-                height = this.getScrollHeight();
-                //this.height = originalHeight;
-                // this.render();
+                try {
+                    const originalHeight = this.height;
+                    this.height = 0;
+                    // this.render();
+                    height = this.getScrollHeight();
+                    this.height = originalHeight;
+                    // this.render();
+                }
+                catch (e) { }
             }
             return height;
         }
@@ -193,8 +196,8 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
         update() {
             if (this.isDestroyed())
                 return;
-            if (this.screen) {
-                this.screen.render();
+            if (this._screen) {
+                this._screen.render();
             }
         }
         /**
@@ -238,4 +241,4 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
     _a._framerateInterval = null,
     _a);
 module.exports = cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBlessedComponent.js.map

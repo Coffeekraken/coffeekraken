@@ -5,4 +5,4 @@ exports.default = () => {
     require('./js.cli')();
     require('./node.cli')();
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=all.cli.js.map

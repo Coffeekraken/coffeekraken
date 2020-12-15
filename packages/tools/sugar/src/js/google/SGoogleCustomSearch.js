@@ -257,4 +257,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         return SGoogleCustomSearch;
     }());
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SGoogleCustomSearch.js.map

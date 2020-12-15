@@ -177,4 +177,4 @@ module.exports = class SFrontspec extends SPromise_1.default {
         });
     }
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SFrontspec.js.map

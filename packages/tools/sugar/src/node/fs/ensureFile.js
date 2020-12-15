@@ -34,4 +34,4 @@ function ensureFile(file) {
     return fs_extra_1.default.ensureFile(file);
 }
 module.exports = ensureFile;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=ensureFile.js.map

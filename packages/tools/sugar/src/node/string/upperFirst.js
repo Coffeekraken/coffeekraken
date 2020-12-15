@@ -27,4 +27,4 @@ function upperFirst(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 module.exports = upperFirst;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=upperFirst.js.map

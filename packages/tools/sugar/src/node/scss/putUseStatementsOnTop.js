@@ -44,4 +44,4 @@ function putUseStatementsOnTop(content) {
     return content;
 }
 module.exports = putUseStatementsOnTop;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=putUseStatementsOnTop.js.map

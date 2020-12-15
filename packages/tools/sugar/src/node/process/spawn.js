@@ -137,4 +137,4 @@ const fn = function spawn(command, args = [], settings = {}) {
     return promise;
 };
 module.exports = fn;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=spawn.js.map

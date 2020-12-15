@@ -50,4 +50,4 @@
     }
     return hex2rgba;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=hex2rgba.js.map

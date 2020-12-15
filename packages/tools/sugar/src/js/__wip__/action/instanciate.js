@@ -59,4 +59,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = instanciate;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=instanciate.js.map

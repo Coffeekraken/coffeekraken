@@ -1,1 +1,1 @@
-{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;IAEV;;;;;;;;;;;;;;;;;;;;;;OAsBG;IACH,SAAS,KAAK,CAAC,KAAK;QAClB,OAAO,KAAK,GAAG,CAAC,KAAK,CAAC,CAAC;IACzB,CAAC;IACD,OAAS,KAAK,CAAC"}
+{"version":3,"file":"odd.js","sourceRoot":"","sources":["odd.ts"],"names":[],"mappings":"AAAA,cAAc;AACd,UAAU;;;;;;;;;;;IAEV;;;;;;;;;;;;;;;;;;;;;;OAsBG;IACH,SAAS,KAAK,CAAC,KAAK;QAClB,OAAO,KAAK,GAAG,CAAC,KAAK,CAAC,CAAC;IACzB,CAAC;IACD,OAAS,KAAK,CAAC"}

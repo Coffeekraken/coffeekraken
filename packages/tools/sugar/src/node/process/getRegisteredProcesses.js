@@ -27,4 +27,4 @@ function getRegisteredProcesses() {
     return global._registeredProcesses;
 }
 module.exports = getRegisteredProcesses;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=getRegisteredProcesses.js.map

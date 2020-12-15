@@ -36,4 +36,4 @@ module.exports = (_a = class SNpmBinInterface extends SInterface_1.default {
         }
     },
     _a);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SNpmBinCliInterface.js.map

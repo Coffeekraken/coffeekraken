@@ -144,4 +144,4 @@ function objectProperties(startObj, targetObj, settings = {}) {
     });
 }
 module.exports = objectProperties;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=objectProperties.js.map

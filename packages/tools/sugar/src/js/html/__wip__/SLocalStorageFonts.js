@@ -172,4 +172,4 @@ var __assign = (this && this.__assign) || function () {
     // export modules
     exports.default = SLocalStorageFonts;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SLocalStorageFonts.js.map

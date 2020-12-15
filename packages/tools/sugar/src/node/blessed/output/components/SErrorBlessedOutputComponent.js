@@ -6,6 +6,7 @@ var _a;
 const SBlessedOutputComponent_1 = __importDefault(require("../SBlessedOutputComponent"));
 const blessed_1 = __importDefault(require("blessed"));
 const parseHtml_1 = __importDefault(require("../../../console/parseHtml"));
+const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
 /**
  * @name                SErrorBlessedOutputComponent
  * @namespace           sugar.node.blessed.output.components
@@ -39,25 +40,31 @@ const cls = (_a = class SErrorBlessedOutputComponent extends SBlessedOutputCompo
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         constructor(logObj, settings = {}) {
-            super(logObj, Object.assign(Object.assign({}, settings), { blessed: {
-                    content: parseHtml_1.default(['<red><bold>Error:</bold></red>', '', logObj.value].join('\n')),
-                    padding: {
-                        left: 3
-                    }
-                } }));
+            super(logObj, deepMerge_1.default({
+                blessed: {}
+            }));
+            this._$content = blessed_1.default.box({
+                content: parseHtml_1.default(['<red><bold>Warning:</bold></red>', '', logObj.value].join('\n')),
+                top: 0,
+                left: 3,
+                height: 'shrink',
+                style: {}
+            });
             this._$line = blessed_1.default.box({
-                top: -2,
-                left: -3,
+                top: 0,
+                left: 0,
                 width: 1,
                 height: 'shrink',
                 style: {
                     bg: 'red'
                 }
             });
+            this.append(this._$content);
             this.append(this._$line);
         }
         update() {
-            this._$line.height = this.getScrollHeight() + 2;
+            this._$content.height = this.getScrollHeight();
+            this._$line.height = this.getScrollHeight();
             super.update();
         }
     },
@@ -74,4 +81,4 @@ const cls = (_a = class SErrorBlessedOutputComponent extends SBlessedOutputCompo
     _a.id = 'error',
     _a);
 module.exports = cls;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SErrorBlessedOutputComponent.js.map

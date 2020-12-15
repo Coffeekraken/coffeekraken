@@ -35,4 +35,4 @@ function isJson(value) {
     return true;
 }
 module.exports = isJson;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=json.js.map

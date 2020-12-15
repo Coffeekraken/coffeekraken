@@ -113,4 +113,4 @@ function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
     return val;
 }
 module.exports = propertyProxy;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=propertyProxy.js.map

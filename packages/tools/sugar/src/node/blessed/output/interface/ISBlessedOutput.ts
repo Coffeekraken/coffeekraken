@@ -1,14 +1,23 @@
 import ISBlessedOutputComponent, {
+  ISBlessedOutputComponentCtor,
   ISBlessedOutputComponentSettings
 } from './ISBlessedOutputComponent';
 
-export interface ISBlessedOutputSettings {}
+export interface ISBlessedOutputSettings {
+  stacks?: string[];
+}
 
+export interface ISBlessedOutputMetas {
+  width: number;
+  spaceRight: number;
+  time?: boolean;
+  content?: string;
+}
 export interface ISBlessedOutputCtor {
   new (settings?: ISBlessedOutputSettings);
   registeredComponents: Object;
   registerComponent(
-    component: ISBlessedOutputComponent,
+    component: ISBlessedOutputComponentCtor,
     settings?: ISBlessedOutputComponentSettings,
     as?: string
   ): void;

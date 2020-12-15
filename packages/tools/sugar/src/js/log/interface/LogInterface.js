@@ -40,4 +40,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SInterface_1.default));
     return LogInterface;
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=LogInterface.js.map

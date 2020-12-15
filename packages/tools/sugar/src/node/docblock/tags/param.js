@@ -65,4 +65,4 @@ function param(data) {
     return res;
 }
 module.exports = param;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=param.js.map

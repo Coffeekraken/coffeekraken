@@ -247,4 +247,4 @@ class SIpcServer extends SPromise_1.default {
  */
 SIpcServer._globalServerInstance = undefined;
 module.exports = SIpcServer;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SIpcServer.js.map

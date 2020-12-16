@@ -181,12 +181,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 enumerable: true,
                 value: function () {
                     // make a shallow copy of the proxy object
-                    var __copy = clone_1.default(p.proxy, true);
+                    var __copy = clone_1.default(p.proxy, { deep: true });
                     // mark the proxy as revoked
                     isRevoked = true;
                     // sanitize the copy
                     __copy = deepMap_1.default(__copy, function (val, key, path) {
-                        // console.log(path);
                         if (key === 'revoke' && typeof val === 'function') {
                             return -1;
                         }

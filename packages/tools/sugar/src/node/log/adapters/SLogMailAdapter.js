@@ -109,11 +109,9 @@ module.exports = class SLogMailAdapter {
                     delete _set.metas;
                     smtp_js_1.default.send(_set)
                         .then((message) => {
-                        console.log('ME', message);
                         resolve(message);
                     })
                         .catch((error) => {
-                        console.log('ERROR', error);
                         reject(error);
                     });
                 }

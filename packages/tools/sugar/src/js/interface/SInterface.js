@@ -154,7 +154,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             ? instance.constructor.name
                             : instance.name;
                 settings = deepMerge_1.default(this._settings, settings);
-                console.log('S', settings);
                 var descriptor = new SDescriptor_1.default(__assign({ name: name, type: 'Object', rules: this._definition, arrayAsValue: settings.arrayAsValue, complete: settings.complete, throwOnError: false }, (settings.descriptorSettings || {})));
                 var descriptorResult = descriptor.apply(instance);
                 // instanciate a new interface result object

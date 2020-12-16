@@ -150,11 +150,9 @@ export = class SLogMailAdapter {
 
         Email.send(_set)
           .then((message) => {
-            console.log('ME', message);
             resolve(message);
           })
           .catch((error) => {
-            console.log('ERROR', error);
             reject(error);
           });
       } catch (e) {

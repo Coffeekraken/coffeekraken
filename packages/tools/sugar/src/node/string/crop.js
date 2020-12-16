@@ -130,7 +130,6 @@ function crop(text, length, settings = {}) {
             }
         }
     }
-    // console.log(currentLength, result, __countLine(result));
     // if we take care of html, make sure the opened tags are closed
     openedHtmlTagsArray.forEach((tag) => {
         result += `</${tag}>`;

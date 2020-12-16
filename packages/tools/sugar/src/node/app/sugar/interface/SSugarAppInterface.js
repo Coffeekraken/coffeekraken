@@ -5,6 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const SInterface_1 = __importDefault(require("../../../interface/SInterface"));
 const sugar_1 = __importDefault(require("../../../config/sugar"));
+const folderPath_1 = __importDefault(require("../../../fs/folderPath"));
+const filename_1 = __importDefault(require("../../../fs/filename"));
+const fs_1 = __importDefault(require("fs"));
 /**
  * @name                SSugarAppInterface
  * @namespace           sugar.node.ui.sugar.interface
@@ -29,12 +32,32 @@ const modules = sugar_1.default('sugar-app.modules');
 Object.keys(modules).forEach((moduleId) => {
     const moduleObj = modules[moduleId];
     const interfacePath = moduleObj.interface;
+    let ModuleInterface;
     if (interfacePath) {
-        const ModuleInterface = require(interfacePath);
-        Object.keys(ModuleInterface.definition).forEach((argName) => {
-            SSugarAppInterface.definition[`modules.${moduleId}.${argName}`] = Object.assign({}, ModuleInterface.definition[argName]);
-        });
+        ModuleInterface = require(interfacePath);
     }
+    else {
+        const folderPath = folderPath_1.default(moduleObj.process || moduleObj.module);
+        const filename = filename_1.default(moduleObj.process || moduleObj.module);
+        const toTry = [
+            `${folderPath}/interface/${filename.replace(/Process(\.js)?$/, 'Interface.js')}`,
+            `${folderPath}/interface/${filename.replace(/Module(\.js)?$/, 'Interface.js')}`,
+            `${folderPath}/${filename.replace(/Process(\.js)?$/, 'Interface.js')}`,
+            `${folderPath}/${filename.replace(/Module(\.js)?$/, 'Interface.js')}`
+        ].filter((path) => {
+            if (!path.match(/\.js$/))
+                return false;
+            if (!fs_1.default.existsSync(path))
+                return false;
+            return true;
+        });
+        if (!toTry.length)
+            return;
+        ModuleInterface = require(toTry[0]);
+    }
+    Object.keys(ModuleInterface.definition).forEach((argName) => {
+        SSugarAppInterface.definition[`modules.${moduleId}.${argName}`] = Object.assign({}, ModuleInterface.definition[argName]);
+    });
 });
 module.exports = SSugarAppInterface;
 //# sourceMappingURL=SSugarAppInterface.js.map

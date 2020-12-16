@@ -1,11 +1,7 @@
 import __getArgsNames from '../getArgsNames';
 
 module.exports = (__checkArgs) => {
-
   function checkArgs(param1, param2, param3 = 'hello', param4) {
-
-    // console.log(__getArgsNames(checkArgs));
-
     __checkArgs(checkArgs, arguments, {
       param1: 'String -v hello,world',
       param2: 'Array,Number',
@@ -15,8 +11,7 @@ module.exports = (__checkArgs) => {
   }
 
   describe('sugar.js.dev.checkArgs', () => {
-
-    it('Sould pass the check correctly', done => {
+    it('Sould pass the check correctly', (done) => {
       try {
         checkArgs('yop', 10, 'world');
       } catch (e) {
@@ -24,7 +19,5 @@ module.exports = (__checkArgs) => {
         done();
       }
     });
-
   });
-
-}
+};

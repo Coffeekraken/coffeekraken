@@ -53,7 +53,7 @@ class SSugarAppProcess extends SProcess_1.default {
      */
     process(params, settings = {}) {
         // new sugar ui instance
-        return new SSugarApp_1.default({});
+        return new SSugarApp_1.default(params, settings);
     }
 }
 exports.default = SSugarAppProcess;

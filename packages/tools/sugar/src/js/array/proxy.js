@@ -95,7 +95,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             });
             return returnValue;
         }
-        // console.log(Object.getOwnPropertyNames(Array.prototype));
         Object.getOwnPropertyNames(Array.prototype).forEach(function (methodName) {
             var unProxyMethods = ['length', 'constructor'];
             if (unProxyMethods.indexOf(methodName) !== -1)

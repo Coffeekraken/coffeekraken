@@ -37,7 +37,6 @@ export default function autoPrefix(style) {
   // deepMap(styleObj, (value, name, path) => {
 
   //   if (name === 'value') {
-  //     console.log(`.sel { ${value} }`);
 
   //     // __set(styleObj, path, 'hello');
 
@@ -47,19 +46,11 @@ export default function autoPrefix(style) {
   //     // .sel { ${value} } `));
   //   }
 
-  //   // console.log(path, name, value);
+  //
   // });
-
-  // console.log(JSON.stringify(styleObj, null, 4));
-
-  // console.log(__get(styleObj, 'stylesheet.rules.0.selectors.0'));
-
-  // console.log(styleObj.stylesheet.rules[0].declarations);
 
   // // prefixing the object
   // prefixedStyleObj = prefix(styleObj);
-
-  // console.log(prefixedStyleObj);
 
   return '';
 }

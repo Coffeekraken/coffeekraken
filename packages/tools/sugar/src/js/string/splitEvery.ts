@@ -58,7 +58,7 @@ function splitEvery(text, every, splitWords = false) {
 
     finalChunks.forEach((item) => {
       if (!item) return;
-      // console.log(item, reg.test(item));
+
       if (reg.test(item)) {
         if (item.substr(0, 2) !== '</' || item.substr(0, 4) !== '\x1B') {
           lastOpenedTag = item;
@@ -71,7 +71,6 @@ function splitEvery(text, every, splitWords = false) {
         return;
       }
       if (lineCount + item.length > every) {
-        // console.log('CHECK', item);
         const toAdd = item.substr(0, every - lineCount - 1);
         finalLines[finalLines.length - 1] += toAdd;
         const rest = lastOpenedTag + item.replace(toAdd, '');
@@ -94,7 +93,6 @@ function splitEvery(text, every, splitWords = false) {
     //     arr.push(a);
     //   }
     // });
-    // console.log(arr);
 
     const words = text.split(' ');
     let lines = [];

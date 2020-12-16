@@ -58,8 +58,6 @@ export = async function firstDocblockWithNamespaceInFolder(
 
     const content = __fs.readFileSync(path, 'utf8');
 
-    // console.log(content);
-
     const docblocks = new __SDocblock(content);
     const docblock = docblocks.blocks[0] ? docblocks.blocks[0] : null;
 
@@ -77,4 +75,4 @@ export = async function firstDocblockWithNamespaceInFolder(
   });
 
   return namespaceObj;
-}
+};

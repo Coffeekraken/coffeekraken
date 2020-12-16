@@ -32,7 +32,6 @@ class STestJestOutputReporter {
   }
 
   onTestResult(obj, result) {
-    // console.log('test result', result);
     if (result.numFailingTests === 0) {
       console.log(
         `<yellow>│</yellow> <bgGreen><black> ${__getFilename(

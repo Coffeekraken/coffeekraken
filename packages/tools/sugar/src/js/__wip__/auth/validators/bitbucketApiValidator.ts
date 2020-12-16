@@ -38,7 +38,6 @@ module.exports = async function bitbucketApiValidator(authInfo) {
             headers: authInfo.headers
           })
           .then((response) => {
-            console.log('resp', response);
             process.exit();
             resolve(true);
           })

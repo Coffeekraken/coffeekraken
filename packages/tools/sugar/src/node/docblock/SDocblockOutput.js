@@ -160,7 +160,6 @@ module.exports = class SDocblockOutput {
                 };
                 // check the cache
                 const cachedValue = yield this._cache.get(cacheObj);
-                // console.log('SE', Object.keys(cachedValue));
                 if (!cachedValue) {
                     compiledTemplateFn = this._handlebars.compile(templateObj.content, {
                         noEscape: true

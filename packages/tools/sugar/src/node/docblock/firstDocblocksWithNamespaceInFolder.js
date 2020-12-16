@@ -34,7 +34,6 @@ module.exports = function firstDocblockWithNamespaceInFolder(directory, settings
             if (minimatch_1.default(relativePath, settings.exclude))
                 return;
             const content = fs_1.default.readFileSync(path, 'utf8');
-            // console.log(content);
             const docblocks = new SDocblock_1.default(content);
             const docblock = docblocks.blocks[0] ? docblocks.blocks[0] : null;
             if (!docblock)

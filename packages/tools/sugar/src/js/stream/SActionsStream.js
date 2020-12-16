@@ -275,8 +275,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         case 6:
                             // processFnResult.catch((e) => {
                             //   throw 'PLCPLC';
-                            //   console.log('XXX');
-                            //   console.log('XCSCXCXC');
                             // });
                             streamObj = _f.sent();
                             return [3 /*break*/, 8];
@@ -286,7 +284,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         case 8: return [3 /*break*/, 10];
                         case 9:
                             e_1 = _f.sent();
-                            console.log('SSS');
                             return [3 /*break*/, 10];
                         case 10:
                             _e++;
@@ -755,7 +752,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 id: this._settings.id
             });
             // this._currentStream.promise.catch((e) => {
-            //   console.log('CCC');
             // });
             // } catch (e) {
             // if (typeof e === 'object') {

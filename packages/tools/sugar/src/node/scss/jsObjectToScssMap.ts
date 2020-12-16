@@ -71,7 +71,6 @@ function jsToScssString(value, settings = {}) {
           return '(' + sassVals.join(', ') + ')';
         } else if (isNull(value)) return 'null';
         else {
-          console.log('sOM', typeof value);
           return value.toString();
         }
       default:

@@ -92,7 +92,7 @@ module.exports = class SLogPanel extends SBlessedComponent_1.default {
     //       focus: true,
     //       placeholder: null
     //     },
-    //     __clone(this._settings.input, true),
+    //     __clone(this._settings.input, { deep: true }),
     //     settings
     //   );
     //   const input = __blessed.textbox(settings);

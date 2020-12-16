@@ -47,7 +47,6 @@ const fn = function (filepath, compilerOptions) {
             if (newFilePath === filepath)
                 return reject(`The file "<yellow>${filepath}</yellow>" cannot be written cause it would override the source one...`);
             fs_1.default.writeFileSync(newFilePath, typescriptResult.code);
-            // console.log(filepath.replace(/\.tsx?$/, '.js'));
         }
         if (typescriptResult && typescriptResult.map !== undefined) {
             const newFilePath = filepath.replace(/\.tsx?$/, '.js.map');

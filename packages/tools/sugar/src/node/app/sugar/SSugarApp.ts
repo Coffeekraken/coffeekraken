@@ -112,7 +112,7 @@ export default class SSugarApp extends __SPromise {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(params, settings = {}) {
     settings = __deepMerge(
       {
         id: 'SSugarApp',
@@ -167,11 +167,12 @@ export default class SSugarApp extends __SPromise {
    */
   _modulesReady() {
     setTimeout(() => {
-      for (const [key, moduleObj] of Object.entries(this._modulesObjs)) {
-        if (moduleObj.instance.autoRun) {
-          moduleObj.instance.run();
-        }
-      }
+      // for (const [key, moduleObj] of Object.entries(this._modulesObjs)) {
+      //
+      //   if (moduleObj.instance.autoRun) {
+      //     moduleObj.instance.run();
+      //   }
+      // }
       this.state = 'ready';
     }, 20);
   }
@@ -213,8 +214,19 @@ export default class SSugarApp extends __SPromise {
       // stop here if a module has error...
       if (this._modulesInError.length) return;
 
+      if (moduleObj.params === undefined) moduleObj.params = {};
+
+      if (moduleObj.process && moduleObj.process.slice(-3) !== '.js') {
+        moduleObj.process += '.js';
+      }
       if (moduleObj.module && moduleObj.module.slice(-3) !== '.js') {
         moduleObj.module += '.js';
+      }
+
+      // if we provide only a process
+      if (!moduleObj.module && moduleObj.process) {
+        moduleObj.module = `${__dirname}/SSugarAppProcessModule.js`;
+        moduleObj.params.processPath = moduleObj.process;
       }
 
       // validate module interface
@@ -230,9 +242,7 @@ export default class SSugarApp extends __SPromise {
         );
       }
       const settings = {
-        id: moduleObj.id,
-        name: moduleObj.name,
-        shortcuts: moduleObj.shortcuts
+        ...moduleObj
       };
 
       const moduleInstance = new moduleClass(moduleObj.params, settings);

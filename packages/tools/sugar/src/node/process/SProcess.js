@@ -367,9 +367,6 @@ module.exports = class SProcess extends SPromise_1.default {
                     this._processPromise.on('*', (data, metas) => {
                         ipcClient.trigger(metas.stack, data);
                     });
-                    // __SPromise.pipe(this._processPromise, ipcClient, {
-                    //   prefixStack: 'child'
-                    // });
                 }
             }
             SPromise_1.default.pipe(this._processPromise, this, {
@@ -377,13 +374,12 @@ module.exports = class SProcess extends SPromise_1.default {
             });
             // listen for "data" and "log" events
             this._processPromise.on('log,child.log', (data, metas) => {
-                // console.log('DADAD', data, metas.stack);
                 if (this.currentExecutionObj) {
                     this.currentExecutionObj.stdout.push(data);
                 }
             });
             // listen for errors
-            this._processPromise.on('error,child.error', (data, metas) => {
+            this._processPromise.on('error,child.error,reject', (data, metas) => {
                 if (this.currentExecutionObj) {
                     this.currentExecutionObj.stderr.push(data);
                 }
@@ -413,7 +409,7 @@ module.exports = class SProcess extends SPromise_1.default {
                     this.state = 'idle';
             });
             // return the process promise
-            return this._processPromise;
+            return SPromise_1.default.treatAsValue(this._processPromise);
         });
     }
     /**

@@ -164,12 +164,11 @@ function deepProxy(object, handlerFn, settings = {}) {
       enumerable: true,
       value: () => {
         // make a shallow copy of the proxy object
-        let __copy = __clone(p.proxy, true);
+        let __copy = __clone(p.proxy, { deep: true });
         // mark the proxy as revoked
         isRevoked = true;
         // sanitize the copy
         __copy = __deepMap(__copy, (val, key, path) => {
-          // console.log(path);
           if (key === 'revoke' && typeof val === 'function') {
             return -1;
           }

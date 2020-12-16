@@ -64,10 +64,9 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
          *
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        constructor(settings = {}) {
+        constructor(sources, settings = {}) {
             // extends SPanel
             super(deepMerge_1.default({
-                sources: null,
                 filter: null,
                 maxItems: -1,
                 maxItemsByGroup: 1,
@@ -121,6 +120,7 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             this._currentModuleId = null;
+            this._sources = Array.isArray(sources) ? sources : [sources];
             // listen for resizing
             this.on('resize', () => {
                 clearTimeout(this._resizeTimeout);
@@ -128,15 +128,17 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
                     // this._applyTops();
                 }, 1000);
             });
-            if (this._settings.sources !== null) {
-                const sources = !Array.isArray(this._settings.sources)
-                    ? [this._settings.sources]
-                    : this._settings.sources;
-                sources.forEach((s) => {
-                    // subscribe to the process
-                    this.registerSource(s);
+            this._sources.forEach((s) => {
+                // subscribe to the process
+                this.registerSource(s);
+            });
+            this._logsBuffer = [];
+            this.on('attach', () => {
+                this._logsBuffer = this._logsBuffer.filter((log) => {
+                    this.log(log);
+                    return false;
                 });
-            }
+            });
         }
         /**
          * @name          registerComponent
@@ -207,6 +209,10 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
             });
         }
         log(...args) {
+            if (!this.isDisplayed()) {
+                this._logsBuffer = [...this._logsBuffer, ...args];
+                return;
+            }
             const logs = parseAndFormatLog_1.default(args);
             // @ts-ignore
             logs.forEach((logObj) => __awaiter(this, void 0, void 0, function* () {
@@ -285,7 +291,11 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
                 this.append($container);
                 this.stack.push($container);
                 // calculate the height to apply
-                const contentHeight = $component.getScrollHeight();
+                let contentHeight = 0;
+                try {
+                    contentHeight = $component.getScrollHeight();
+                }
+                catch (e) { }
                 let containerHeight = contentHeight > metasHeight ? contentHeight : metasHeight;
                 // append the component to the feed
                 if ($lastContainer !== undefined) {
@@ -300,7 +310,10 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
             }));
             // scroll to bottom
             setTimeout(() => {
-                this.setScrollPerc(100);
+                try {
+                    this.setScrollPerc(100);
+                }
+                catch (e) { }
                 // update display
                 this.update();
             });

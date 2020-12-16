@@ -50,13 +50,11 @@ export = async function bin(stringArgs = '') {
       switch (argsObj.action) {
         case 'i':
         case 'install':
-          // console.log('ln -s ../../../workspaces/coffeekraken/packages/tools/sugar/src/cli/sugar.cli.js sugar')
-          // console.log(`ln -s ${_path.relative(binFolderPath, binAbsolutePath)} ${binName}`)
           const symlinkCommand = `cd ${binFolderPath} && rm -rf ${binFolderPath}/${binName} && ln -s ${_path.relative(
             binFolderPath,
             binAbsolutePath
           )} ${binName}`;
-          // console.log(symlinkCommand)
+
           console.log(
             `The "<yellow>${binName}</yellow>" bin from the package "<cyan>${
               packageJson.name

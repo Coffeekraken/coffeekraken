@@ -34,17 +34,17 @@ import __standardizeJson from '../../../npm/standardizeJson';
 function packageJsonMiddleware(settings = {}) {
   return function (req, res, next) {
     const packageJsonPath = `${__packageRoot()}/package.json`;
-    let package;
+    let pkg;
     if (!__fs.existsSync(packageJsonPath)) {
     } else {
-      package = require(packageJsonPath);
+      pkg = require(packageJsonPath);
       res.templateData = {
         ...(res.templateData || {}),
-        packageJson: __standardizeJson(package)
+        packageJson: __standardizeJson(pkg)
       };
     }
 
     next();
   };
 }
-export = packageJsonMiddleware
+export = packageJsonMiddleware;

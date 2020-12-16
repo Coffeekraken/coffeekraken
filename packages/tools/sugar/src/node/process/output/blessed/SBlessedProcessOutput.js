@@ -43,7 +43,7 @@ const Cls = class SBlessedProcessOutput extends SProcessOutput_1.default {
      */
     constructor(source, settings) {
         super(source, settings);
-        this._output = new SBlessedOutput_1.default(Object.assign(Object.assign({}, this._settings), { sources: source }));
+        this._output = new SBlessedOutput_1.default(source, Object.assign({}, this._settings));
     }
     /**
      * @name            log

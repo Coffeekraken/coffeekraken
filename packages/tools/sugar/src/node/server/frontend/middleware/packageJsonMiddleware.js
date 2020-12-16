@@ -36,12 +36,12 @@ const standardizeJson_1 = __importDefault(require("../../../npm/standardizeJson"
 function packageJsonMiddleware(settings = {}) {
     return function (req, res, next) {
         const packageJsonPath = `${packageRoot_1.default()}/package.json`;
-        let package;
+        let pkg;
         if (!fs_1.default.existsSync(packageJsonPath)) {
         }
         else {
-            package = require(packageJsonPath);
-            res.templateData = Object.assign(Object.assign({}, (res.templateData || {})), { packageJson: standardizeJson_1.default(package) });
+            pkg = require(packageJsonPath);
+            res.templateData = Object.assign(Object.assign({}, (res.templateData || {})), { packageJson: standardizeJson_1.default(pkg) });
         }
         next();
     };

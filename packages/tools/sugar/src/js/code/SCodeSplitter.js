@@ -83,7 +83,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 splitters.forEach(function (extractorObj) {
                     if (extractorObj.regex) {
                         var matches = code.matchAll(extractorObj.regex);
-                        console.log(matches);
                         process.exit();
                         matches.forEach(function (match) {
                             blocks.push({

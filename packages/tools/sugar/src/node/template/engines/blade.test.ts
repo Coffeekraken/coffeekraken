@@ -52,6 +52,4 @@ import __STemplate from '../STemplate';
   //   },
   //   {}
   // );
-
-  // console.log('res', res, other);
 })();

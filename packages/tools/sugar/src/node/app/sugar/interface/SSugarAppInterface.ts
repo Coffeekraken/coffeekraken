@@ -2,6 +2,9 @@
 
 import __SInterface from '../../../interface/SInterface';
 import __sugarConfig from '../../../config/sugar';
+import __folderPath from '../../../fs/folderPath';
+import __getFilename from '../../../fs/filename';
+import __fs from 'fs';
 
 /**
  * @name                SSugarAppInterface
@@ -28,14 +31,37 @@ const modules = __sugarConfig('sugar-app.modules');
 Object.keys(modules).forEach((moduleId) => {
   const moduleObj = modules[moduleId];
   const interfacePath = moduleObj.interface;
+  let ModuleInterface;
   if (interfacePath) {
-    const ModuleInterface = require(interfacePath);
-    Object.keys(ModuleInterface.definition).forEach((argName) => {
-      SSugarAppInterface.definition[
-        `modules.${moduleId}.${argName}`
-      ] = Object.assign({}, ModuleInterface.definition[argName]);
+    ModuleInterface = require(interfacePath);
+  } else {
+    const folderPath = __folderPath(moduleObj.process || moduleObj.module);
+    const filename = __getFilename(moduleObj.process || moduleObj.module);
+    const toTry = [
+      `${folderPath}/interface/${filename.replace(
+        /Process(\.js)?$/,
+        'Interface.js'
+      )}`,
+      `${folderPath}/interface/${filename.replace(
+        /Module(\.js)?$/,
+        'Interface.js'
+      )}`,
+      `${folderPath}/${filename.replace(/Process(\.js)?$/, 'Interface.js')}`,
+      `${folderPath}/${filename.replace(/Module(\.js)?$/, 'Interface.js')}`
+    ].filter((path) => {
+      if (!path.match(/\.js$/)) return false;
+      if (!__fs.existsSync(path)) return false;
+      return true;
     });
+    if (!toTry.length) return;
+    ModuleInterface = require(toTry[0]);
   }
+
+  Object.keys(ModuleInterface.definition).forEach((argName) => {
+    SSugarAppInterface.definition[
+      `modules.${moduleId}.${argName}`
+    ] = Object.assign({}, ModuleInterface.definition[argName]);
+  });
 });
 
 export = SSugarAppInterface;

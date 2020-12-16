@@ -1,5 +1,16 @@
 // @ts-nocheck
 // @shared
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -24,7 +35,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * This function allows you to clone an object either at 1 level, or deeply.
      *
      * @param       {Object}        object        The object to copy
-     * @param       {Boolean}       [deep=false]  Specify if you want to clone the object deeply
+     * @param       {Object}       [settings={}]   Specify some settings to configure your clone process
+     * @return      {Object}                      The cloned object
+     *
+     * @setting     {Boolean}       [deep=false]      Specify if you want to clone the object deeply
      *
      * @todo      interface
      * @todo      doc
@@ -40,9 +54,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since         1.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function clone(object, deep) {
-        if (deep === void 0) { deep = false; }
-        if (deep) {
+    function clone(object, settings) {
+        if (settings === void 0) { settings = {}; }
+        settings = __assign({ deep: false }, settings);
+        if (settings.deep) {
             return lodash_clonedeep_1.default(object);
         }
         return lodash_clone_1.default(object);

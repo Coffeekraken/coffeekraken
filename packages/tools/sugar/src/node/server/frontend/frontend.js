@@ -40,82 +40,109 @@ const express_1 = __importDefault(require("express"));
 const trimLines_1 = __importDefault(require("../../string/trimLines"));
 const extension_1 = __importDefault(require("../../fs/extension"));
 const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
-module.exports = (args = {}) => __awaiter(void 0, void 0, void 0, function* () {
+/**
+ * @name                express
+ * @namespace           sugar.node.server.frontend
+ * @type                Function
+ * @wip
+ *
+ * This function take care of starting a frontend express based server
+ *
+ * @param         {Object}          [args={}]         The args object to configure the build process. Check the PhpSCli class definition object for available arguments
+ * @return        {express}                       The server instance started
+ *
+ * @event         log       Some informations that you can or not display to your users
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example       js
+ * import frontendServer from '@coffeekraken/sugar/node/server/frontend/frontend';
+ * frontendServer({});
+ *
+ * @since           2.0.0
+ * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+ */
+const fn = function (args = {}) {
     const settings = deepMerge_1.default(sugar_1.default('frontend'), args);
     const server = express_1.default();
     const promise = new SPromise_1.default({
         id: 'frontendServer'
     });
-    // static directories
-    Object.keys(settings.staticDirs).forEach((path) => {
-        const fsPath = settings.staticDirs[path];
-        server.use(path, express_1.default.static(fsPath));
-    });
-    // load the middlewares
-    const middlewaresObj = settings.middlewares || {};
-    for (const [key, middleware] of Object.entries(middlewaresObj)) {
-        if (middleware.path.slice(-3) !== '.js')
-            middleware.path += '.js';
-        middleware.path = path_1.default.resolve(middleware.path);
-        if (!fs_1.default.existsSync(middleware.path)) {
-            return promise.reject(`The express middleware "<yellow>${key}</yellow>" targeted at "<cyan>${middleware.path}</cyan>" does not exists...`);
-        }
-        // register the middleware
-        server.use(yield Promise.resolve().then(() => __importStar(require(middleware.path)))(middleware.settings || {}));
-    }
-    // loop on handlers
-    Object.keys(settings.handlers).forEach((pageName) => __awaiter(void 0, void 0, void 0, function* () {
-        const handlerSettings = deepMerge_1.default({
-            log: true
-        }, settings.handlers[pageName]);
-        let handlerPath = handlerSettings.handler;
-        if (handlerPath.slice(-3) !== '.js')
-            handlerPath += '.js';
-        if (!fs_1.default.existsSync(handlerPath)) {
-            console.warn(`Frontend handler "<cyan>${path_1.default.relative(packageRoot_1.default(), handlerPath)}</cyan>" does not exists...`);
-        }
-        else {
-            const handlerFn = yield Promise.resolve().then(() => __importStar(require(handlerPath)));
-            const method = handlerSettings.method || 'get';
-            let slug = handlerSettings.slug || '*';
-            const extension = handlerSettings.extension
-                ? Array.isArray(handlerSettings.extension)
-                    ? Array.isArray(handlerSettings.extension)
-                    : [handlerSettings.extension]
-                : null;
-            if (slug !== '*') {
-                slug = [`${slug}/*`, `${slug}`];
+    (() => __awaiter(this, void 0, void 0, function* () {
+        // static directories
+        Object.keys(settings.staticDirs).forEach((path) => {
+            const fsPath = settings.staticDirs[path];
+            server.use(path, express_1.default.static(fsPath));
+        });
+        // load the middlewares
+        const middlewaresObj = settings.middlewares || {};
+        for (const [key, middleware] of Object.entries(middlewaresObj)) {
+            if (middleware.path.slice(-3) !== '.js')
+                middleware.path += '.js';
+            middleware.path = path_1.default.resolve(middleware.path);
+            if (!fs_1.default.existsSync(middleware.path)) {
+                return promise.reject(`The express middleware "<yellow>${key}</yellow>" targeted at "<cyan>${middleware.path}</cyan>" does not exists...`);
             }
-            server[method](slug, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-                const reqPathExtension = extension_1.default(req.path);
-                if (extension) {
-                    if (extension.indexOf(reqPathExtension) === -1 &&
-                        extension.indexOf('.' + reqPathExtension) === -1) {
-                        return next();
-                    }
-                }
-                handlerFn(req, res, handlerSettings);
-            }));
+            // register the middleware
+            server.use(require(middleware.path)(middleware.settings || {}));
         }
-    }));
-    server
-        .listen(settings.port, settings.hostname, () => {
-        setTimeout(() => {
-            promise.trigger('log', {
-                type: 'header',
-                value: trimLines_1.default(`Your <primary>Frontend Express</primary> server is <green>up and running</green>:
+        // loop on handlers
+        Object.keys(settings.handlers).forEach((pageName) => __awaiter(this, void 0, void 0, function* () {
+            const handlerSettings = deepMerge_1.default({
+                log: true
+            }, settings.handlers[pageName]);
+            let handlerPath = handlerSettings.handler;
+            if (handlerPath.slice(-3) !== '.js')
+                handlerPath += '.js';
+            if (!fs_1.default.existsSync(handlerPath)) {
+                console.warn(`Frontend handler "<cyan>${path_1.default.relative(packageRoot_1.default(), handlerPath)}</cyan>" does not exists...`);
+            }
+            else {
+                const handlerFn = yield Promise.resolve().then(() => __importStar(require(handlerPath)));
+                const method = handlerSettings.method || 'get';
+                let slug = handlerSettings.slug || '*';
+                const extension = handlerSettings.extension
+                    ? Array.isArray(handlerSettings.extension)
+                        ? Array.isArray(handlerSettings.extension)
+                        : [handlerSettings.extension]
+                    : null;
+                if (slug !== '*') {
+                    slug = [`${slug}/*`, `${slug}`];
+                }
+                server[method](slug, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+                    const reqPathExtension = extension_1.default(req.path);
+                    if (extension) {
+                        if (extension.indexOf(reqPathExtension) === -1 &&
+                            extension.indexOf('.' + reqPathExtension) === -1) {
+                            return next();
+                        }
+                    }
+                    handlerFn(req, res, handlerSettings);
+                }));
+            }
+        }));
+        server
+            .listen(settings.port, settings.hostname, () => {
+            setTimeout(() => {
+                promise.trigger('log', {
+                    type: 'header',
+                    value: trimLines_1.default(`Your <primary>Frontend Express</primary> server is <green>up and running</green>:
 
-              - Hostname        : <yellow>${settings.hostname}</yellow>
-              - Port            : <yellow>${settings.port}</yellow>
-              - Root directory  : <yellow>${settings.rootDir}</yellow>
-              - URL             : <cyan>http://${settings.hostname}:${settings.port}</cyan>`)
-            });
-        }, 200);
-    })
-        .on('error', (e) => {
-        const string = e.toString();
-        promise.reject(string);
-    });
+                - Hostname        : <yellow>${settings.hostname}</yellow>
+                - Port            : <yellow>${settings.port}</yellow>
+                - Root directory  : <yellow>${settings.rootDir}</yellow>
+                - URL             : <cyan>http://${settings.hostname}:${settings.port}</cyan>`)
+                });
+            }, 200);
+        })
+            .on('error', (e) => {
+            const string = e.toString();
+            promise.reject(string);
+        });
+    }))();
     return promise;
-});
+};
+module.exports = fn;
 //# sourceMappingURL=frontend.js.map

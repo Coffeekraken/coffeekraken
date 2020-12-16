@@ -133,13 +133,13 @@ function hotkey(key, settings = {}) {
         isSystemWideAlreadyAdded = true;
         // @TODO      implement system wide hotkeys
         throw `System wide hotkeys are not implemented yet...`;
-        // console.log('CCC');
+
         // // __ioHook.on('keydown', function (event) {
-        // //   console.log(event);
+        //
         // //   __ioHook.start();
         // // });
         // __ioHook.registerShortcut([30], (keys) => {
-        //   console.log('SOM', keys);
+
         // });
         __ioHook.start();
       } else if (!isListenerAlreadyAdded) {

@@ -8,14 +8,18 @@ module.exports = {
     frontendServer: {
       id: 'frontendServer',
       name: 'Sugar App Frontend Server',
+      autoRun: true,
       description:
         'Expose an HTTP server using ExpressJs and serve requested files, views, etc...',
-      module: `${__packageRoot(
+      process: `${__packageRoot(
         __dirname
-      )}/src/node/server/frontend/SFrontendServerSugarAppModule`,
-      interface: `${__packageRoot(
-        __dirname
-      )}/src/node/server/frontend/interface/SFrontendServerInterface`,
+      )}/src/node/server/frontend/SFrontendServerProcess`,
+      // module: `${__packageRoot(
+      //   __dirname
+      // )}/src/node/server/frontend/SFrontendServerSugarAppModule`,
+      // interface: `${__packageRoot(
+      //   __dirname
+      // )}/src/node/server/frontend/interface/SFrontendServerInterface`,
       params: '[config.frontend]'
     }
     // buildScss: {

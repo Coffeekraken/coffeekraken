@@ -14,6 +14,8 @@ import __hotkey from '../../keyboard/hotkey';
 import __packageJson from '../../package/json';
 import __SNotification from '../../blessed/notification/SNotification';
 import __ora from 'ora';
+import __clone from '../../object/clone';
+import __SPromise from '../../promise/SPromise';
 // import __SIpc from '../../ipc/SIpc';
 
 /**
@@ -26,7 +28,7 @@ import __ora from 'ora';
  * This class represent the Sugar UI interface in the terminal.
  *
  * @param           {SPromise}          source        The source from where to get data
- * @param           {Object}          [initialParams={}]        An object of initial params
+ * @param           {Object}          [params={}]        An object of initial params
  *
  * @todo      interface
  * @todo      doc
@@ -46,29 +48,24 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(source: any, initialParams = {}) {
+  constructor(source: any, params = {}) {
     super({
       screen: true
     });
 
-    this._sources = source;
+    this._sources = Array.isArray(source) ? source : [source];
 
-    console.log(initialParams);
-
-    this._initialParams = Object.assign({}, initialParams);
-
+    this._params = Object.assign({}, params);
     this._settings = __sugarConfig('sugar-app');
 
-    this._serverSettings = this._initialParams.modules[
+    this._serverSettings = this._params.modules[
       this._settings.welcome.serverModule
     ];
 
-    this._modules = this._settings.modules;
+    this._modules = __clone(this._settings.modules, { deep: true });
 
-    this.$welcome = this._initWelcome(initialParams);
-
+    this.$welcome = this._initWelcome(params);
     this.$modules = this._initConsoles();
-
     this.$bottomBar = this._initBottomBar();
 
     __hotkey('escape').on('press', () => {
@@ -87,8 +84,7 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
     });
 
     this._modulesReady = false;
-    source.on('*.state', (state: any, metas: any) => {
-      console.log('SA', state, metas);
+    source.on('state,*.state', (state: any, metas: any) => {
       if (state === 'ready') {
         this._modulesReady = true;
       }
@@ -115,7 +111,6 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
     });
 
     this.append(this.$bottomBar);
-
     this.append(this.$welcome);
 
     // update bottom bar
@@ -126,9 +121,7 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
 
   _getDisplayedModuleObj() {
     if (!this._displayedModuleId) return {};
-
     if (!this.$modules.parent) return {};
-
     return this._findModuleObjById(this._displayedModuleId);
   }
 
@@ -152,7 +145,7 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
   _updateBottomBar() {
     let content = '';
 
-    Object.keys(this._initialParams.modules).forEach((moduleName, i) => {
+    Object.keys(this._params.modules).forEach((moduleName, i) => {
       const moduleObj = this._modules[moduleName];
       let bg: any, fg: any;
       switch (moduleObj.state) {
@@ -377,16 +370,17 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
    *
    * This method init the welcome screen
    *
-   * @param         {Object}        initialParams       An object of initial params used to launch the sugar ui
+   * @param         {Object}        params       An object of initial params used to launch the sugar ui
    *
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _initWelcome(initialParams: any) {
+  _initWelcome(params: any) {
     const $centeredBox = __blessed.box({
-      top: 'center',
+      top: '50%-9',
       left: 'center',
       width: '100%',
+      height: 'shrink',
       style: {}
     });
 
@@ -422,9 +416,9 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
     const projectLines = [
       `<yellow>${'-'.repeat(__countLine(projectLine) + 6)}</yellow>`,
       `<yellow>|</yellow>  ${projectLine}  <yellow>|</yellow>`,
-      `<yellow>|</yellow>  ${' '.repeat(byLineSpaces)} ${byLine} ${' '.repeat(
+      ` <yellow>|</yellow>  ${' '.repeat(byLineSpaces)} ${byLine} ${' '.repeat(
         byLineSpaces
-      )}  <yellow>|</yellow>`,
+      )} <yellow>|</yellow>`,
       `<yellow>${'-'.repeat(__countLine(projectLine) + 6)}</yellow>`
     ];
 
@@ -438,8 +432,8 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
           `WebUI <green>started</green> at`,
           `<bgYellow><black> http://${this._serverSettings.hostname}:${this._serverSettings.port} </black></bgYellow>`,
           '',
-          `<cyan>${Object.keys(initialParams.modules).length}</cyan> module${
-            Object.keys(initialParams.modules).length > 1 ? 's' : ''
+          `<cyan>${Object.keys(params.modules).length}</cyan> module${
+            Object.keys(params.modules).length > 1 ? 's' : ''
           } loaded`
         ];
       }
@@ -529,7 +523,8 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
         right: 0,
         height: 3,
         style: {
-          bg: 'black'
+          bg: 'yellow',
+          fg: 'black'
         },
         padding: {
           top: 1,
@@ -537,44 +532,32 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
           right: 2
         },
         content: __parseHtml(
-          `<yellow>${moduleObj.name}</yellow> | <white>${moduleObj.id}</white>`
+          `<black>${moduleObj.name}</black> | <white>${moduleObj.id}</white>`
         )
       });
 
       let OutputClass;
       if (moduleObj.ui) {
         const requirePath = __path.relative(__dirname, moduleObj.ui);
-
         OutputClass = require(requirePath);
       } else {
         OutputClass = __SBlessedOutput;
       }
 
-      const $console = new OutputClass(this._sources, {
-        filter: (logObj: any) => {
+      const pipedSources = new __SPromise({
+        filter: (logObj, metas) => {
           return logObj.module && logObj.module.id === moduleObj.id;
-        },
-        width: '100%',
-        height: '100%-3',
-        top: 3,
-        left: 0,
-        right: 0,
-        mouse: true,
-        keys: true,
-        clickable: false,
-        scrollable: true,
-        scrollbar: {
-          ch: ' ',
-          inverse: true
-        },
-        style: {
-          fg: 'white',
-          scrollbar: {
-            bg: __color('terminal.primary').toString()
-          }
-        },
-        padding: {
-          top: 0,
+        }
+      });
+      this._sources.forEach((source) => {
+        __SPromise.pipe(source, pipedSources);
+      });
+
+      const $console = new OutputClass(pipedSources, {
+        blessed: {
+          width: '100%',
+          height: '100%-3',
+          top: 3,
           left: 0,
           right: 0,
           bottom: 2

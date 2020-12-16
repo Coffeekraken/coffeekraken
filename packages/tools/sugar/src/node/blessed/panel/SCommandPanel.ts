@@ -598,7 +598,6 @@ export = class SCommandPanel extends __SBlessedComponent {
   }
 
   _updateList() {
-    // console.log('DU', Date.now());
     this._commands.forEach((commandObj, i) => {
       const item = this.$list.getItem(i);
 

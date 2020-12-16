@@ -87,7 +87,6 @@ class SDeamon extends SPromise_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     on(stacks, callback) {
-        // console.log(stacks.join(','));
         if (typeof stacks === 'string')
             stacks = stacks.split(',').map((l) => l.trim());
         if (stacks.indexOf('update') !== -1) {

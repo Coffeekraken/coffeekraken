@@ -79,7 +79,6 @@ module.exports = (__SDocblock) => {
 
       const parser = new __SDocblock(docblock);
       const renderedBlocks = parser.toMarkdown();
-      // console.log(renderedBlocks);
 
       done();
     });

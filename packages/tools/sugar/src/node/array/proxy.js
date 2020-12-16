@@ -63,7 +63,6 @@ function proxy(array) {
         });
         return returnValue;
     }
-    // console.log(Object.getOwnPropertyNames(Array.prototype));
     Object.getOwnPropertyNames(Array.prototype).forEach((methodName) => {
         const unProxyMethods = ['length', 'constructor'];
         if (unProxyMethods.indexOf(methodName) !== -1)

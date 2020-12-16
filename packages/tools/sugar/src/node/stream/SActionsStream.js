@@ -179,8 +179,6 @@ module.exports = class SActionStream extends SPromise_1.default {
                         if (processFnResult instanceof Promise) {
                             // processFnResult.catch((e) => {
                             //   throw 'PLCPLC';
-                            //   console.log('XXX');
-                            //   console.log('XCSCXCXC');
                             // });
                             streamObj = yield processFnResult;
                         }
@@ -188,9 +186,7 @@ module.exports = class SActionStream extends SPromise_1.default {
                             streamObj = processFnResult;
                         }
                     }
-                    catch (e) {
-                        console.log('SSS');
-                    }
+                    catch (e) { }
                 }
                 streamObjArray[streamObjArrayIdx] = streamObj;
                 if (settings.type.match(/.*\.main$/)) {
@@ -586,7 +582,6 @@ module.exports = class SActionStream extends SPromise_1.default {
             id: this._settings.id
         });
         // this._currentStream.promise.catch((e) => {
-        //   console.log('CCC');
         // });
         // } catch (e) {
         // if (typeof e === 'object') {

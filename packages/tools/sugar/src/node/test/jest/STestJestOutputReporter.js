@@ -24,7 +24,6 @@ class STestJestOutputReporter {
         console.log(`#temp #mb:0 <yellow>│</yellow> <bgCyan> ${filename_1.default(obj.path)} </bgCyan> ${obj.path.replace(`${packageRoot_1.default()}/`, '')}`);
     }
     onTestResult(obj, result) {
-        // console.log('test result', result);
         if (result.numFailingTests === 0) {
             console.log(`<yellow>│</yellow> <bgGreen><black> ${filename_1.default(obj.path)} </black></bgGreen> ${obj.path.replace(`${packageRoot_1.default()}/`, '')}`);
         }

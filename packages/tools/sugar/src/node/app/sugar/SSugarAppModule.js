@@ -6,6 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 const SError_1 = __importDefault(require("../../error/SError"));
+const SSugarAppModuleSettingsInterface_1 = __importDefault(require("./interface/SSugarAppModuleSettingsInterface"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const hotkey_1 = __importDefault(require("../../keyboard/hotkey"));
 const blessed_1 = __importDefault(require("blessed"));
@@ -96,7 +97,7 @@ class SSugarAppModule extends SPromise_1.default {
         //   this._active = this.id === moduleId;
         // });
         // @todo    replace this with new interface class
-        // __SSugarAppModuleSettingsInterface.apply(this._settings);
+        SSugarAppModuleSettingsInterface_1.default.apply(this._settings);
         // register the module in the list
         SSugarAppModule._registeredModulesArray.push(this);
         this.on('cancel', () => {
@@ -105,18 +106,16 @@ class SSugarAppModule extends SPromise_1.default {
                 return;
             SSugarAppModule._registeredModulesArray.splice(idx, 1);
         });
-        return;
         if (this.constructor.interface) {
             this.constructor.interface.apply(params);
         }
         this.params = params;
         // start if needed
         if (this._settings.autoStart) {
-            // this.start(this.params, this._settings);
+            this.start(this.params, this._settings);
         }
         // init shortcuts
         this._initShortcuts();
-        console.log('READ');
         // mark as ready
         this.ready();
     }

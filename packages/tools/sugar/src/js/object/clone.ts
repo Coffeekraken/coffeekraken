@@ -13,7 +13,10 @@ import __deepClone from 'lodash.clonedeep';
  * This function allows you to clone an object either at 1 level, or deeply.
  *
  * @param       {Object}        object        The object to copy
- * @param       {Boolean}       [deep=false]  Specify if you want to clone the object deeply
+ * @param       {Object}       [settings={}]   Specify some settings to configure your clone process
+ * @return      {Object}                      The cloned object
+ *
+ * @setting     {Boolean}       [deep=false]      Specify if you want to clone the object deeply
  *
  * @todo      interface
  * @todo      doc
@@ -29,8 +32,12 @@ import __deepClone from 'lodash.clonedeep';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function clone(object, deep = false) {
-  if (deep) {
+function clone(object, settings = {}) {
+  settings = {
+    deep: false,
+    ...settings
+  };
+  if (settings.deep) {
     return __deepClone(object);
   }
   return __clone(object);

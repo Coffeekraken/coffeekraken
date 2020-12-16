@@ -68,7 +68,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             this._descriptor = descriptor;
             this._descriptorSettings = descriptorSettings;
             try {
-                this._originalValue = clone_1.default(value, true);
+                this._originalValue = clone_1.default(value, { deep: true });
             }
             catch (e) {
                 this._originalValue = value;

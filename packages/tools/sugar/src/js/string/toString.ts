@@ -15,6 +15,7 @@ import __mapToObj from '../map/mapToObject';
 import __highlightJs from 'highlight.js';
 import __stringifyObject from 'stringify-object';
 import { highlight as __cliHighlight } from 'cli-highlight';
+import { decycle } from 'json-cyclic';
 
 // import __prettyFormat from 'pretty-format';
 // import __reactTestPlugin from 'pretty-format/build/plugins/ReactTestComponent';
@@ -124,6 +125,7 @@ function fn(value, settings = {}) {
   // stringify
   let returnString = '';
   try {
+    value = decycle(value);
     returnString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
   } catch (e) {
     try {

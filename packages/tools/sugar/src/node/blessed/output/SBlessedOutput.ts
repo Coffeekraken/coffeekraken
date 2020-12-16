@@ -131,12 +131,11 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(sources, settings = {}) {
     // extends SPanel
     super(
       __deepMerge(
         {
-          sources: null,
           filter: null,
           maxItems: -1,
           maxItemsByGroup: 1,
@@ -173,6 +172,8 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
       )
     );
 
+    this._sources = Array.isArray(sources) ? sources : [sources];
+
     // listen for resizing
     this.on('resize', () => {
       clearTimeout(this._resizeTimeout);
@@ -181,16 +182,18 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
       }, 1000);
     });
 
-    if (this._settings.sources !== null) {
-      const sources = !Array.isArray(this._settings.sources)
-        ? [this._settings.sources]
-        : this._settings.sources;
+    this._sources.forEach((s) => {
+      // subscribe to the process
+      this.registerSource(s);
+    });
 
-      sources.forEach((s) => {
-        // subscribe to the process
-        this.registerSource(s);
+    this._logsBuffer = [];
+    this.on('attach', () => {
+      this._logsBuffer = this._logsBuffer.filter((log) => {
+        this.log(log);
+        return false;
       });
-    }
+    });
   }
 
   /**
@@ -245,7 +248,13 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _currentModuleId = null;
+
   log(...args) {
+    if (!this.isDisplayed()) {
+      this._logsBuffer = [...this._logsBuffer, ...args];
+      return;
+    }
+
     const logs = __parseAndFormatLog(args);
 
     // @ts-ignore
@@ -341,7 +350,10 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
       this.stack.push($container);
 
       // calculate the height to apply
-      const contentHeight = $component.getScrollHeight();
+      let contentHeight = 0;
+      try {
+        contentHeight = $component.getScrollHeight();
+      } catch (e) {}
       let containerHeight =
         contentHeight > metasHeight ? contentHeight : metasHeight;
 
@@ -359,7 +371,9 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
 
     // scroll to bottom
     setTimeout(() => {
-      this.setScrollPerc(100);
+      try {
+        this.setScrollPerc(100);
+      } catch (e) {}
       // update display
       this.update();
     });

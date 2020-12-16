@@ -29,11 +29,9 @@ module.exports = function deepDiff(origin, compare) {
     // const diffs = __diff(origin, compare, (path, key) => {
     //   const p = path.length ? path.join('.') + '.' + key : key;
     //   const value = __get(origin, p);
-    //   console.log(p, value);
     //   return value !== undefined || !Array.isArray(value);
     // });
     var diffs = __diff(origin, compare);
-    console.log(diffs);
     diffs.forEach(function (diff) {
         switch (diff.kind) {
             case 'D':

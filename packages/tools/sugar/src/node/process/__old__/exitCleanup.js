@@ -50,7 +50,7 @@ function exitCleanup() {
         // check if all processes are closed
         const processes = getRegisteredProcesses_1.default();
         const remainingProcessesCount = Object.keys(processes).length;
-        console.log(processes);
+        //console.log(processes);
         hotkey_1.default('ctrl+c', {
             once: true
         }).on('press', () => {

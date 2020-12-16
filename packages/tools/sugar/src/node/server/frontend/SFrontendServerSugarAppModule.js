@@ -35,7 +35,7 @@ module.exports = (_a = class SFrontendServerSugarAppModule extends SSugarAppModu
          * @since       2.0.0
          */
         start() {
-            const pro = new SFrontendServerProcess_1.default(Object.assign({ runAsChild: true }, this._settings.processSettings));
+            const pro = new SFrontendServerProcess_1.default(Object.assign({ runAsChild: false }, this._settings.processSettings));
             return super.start(pro);
         }
     },

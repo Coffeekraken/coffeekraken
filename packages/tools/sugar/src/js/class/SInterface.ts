@@ -393,7 +393,7 @@ export = class SInterface {
   //  */
   // static output(resultObj, settings = {}) {
   //   const string = this.outputString(resultObj, settings);
-  //   console.log(string);
+
   // }
 
   // /**

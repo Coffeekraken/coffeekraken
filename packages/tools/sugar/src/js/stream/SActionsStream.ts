@@ -251,17 +251,14 @@ export = class SActionStream extends __SPromise {
           if (processFnResult instanceof Promise) {
             // processFnResult.catch((e) => {
             //   throw 'PLCPLC';
-            //   console.log('XXX');
-            //   console.log('XCSCXCXC');
+
             // });
 
             streamObj = await processFnResult;
           } else {
             streamObj = processFnResult;
           }
-        } catch (e) {
-          console.log('SSS');
-        }
+        } catch (e) {}
       }
 
       streamObjArray[streamObjArrayIdx] = streamObj;
@@ -859,7 +856,7 @@ export = class SActionStream extends __SPromise {
     );
 
     // this._currentStream.promise.catch((e) => {
-    //   console.log('CCC');
+
     // });
 
     // } catch (e) {

@@ -18,6 +18,8 @@ const hotkey_1 = __importDefault(require("../../keyboard/hotkey"));
 const json_1 = __importDefault(require("../../package/json"));
 const SNotification_1 = __importDefault(require("../../blessed/notification/SNotification"));
 const ora_1 = __importDefault(require("ora"));
+const clone_1 = __importDefault(require("../../object/clone"));
+const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 // import __SIpc from '../../ipc/SIpc';
 /**
  * @name                SSugarAppTerminalUi
@@ -29,7 +31,7 @@ const ora_1 = __importDefault(require("ora"));
  * This class represent the Sugar UI interface in the terminal.
  *
  * @param           {SPromise}          source        The source from where to get data
- * @param           {Object}          [initialParams={}]        An object of initial params
+ * @param           {Object}          [params={}]        An object of initial params
  *
  * @todo      interface
  * @todo      doc
@@ -49,17 +51,16 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(source, initialParams = {}) {
+    constructor(source, params = {}) {
         super({
             screen: true
         });
-        this._sources = source;
-        console.log(initialParams);
-        this._initialParams = Object.assign({}, initialParams);
+        this._sources = Array.isArray(source) ? source : [source];
+        this._params = Object.assign({}, params);
         this._settings = sugar_1.default('sugar-app');
-        this._serverSettings = this._initialParams.modules[this._settings.welcome.serverModule];
-        this._modules = this._settings.modules;
-        this.$welcome = this._initWelcome(initialParams);
+        this._serverSettings = this._params.modules[this._settings.welcome.serverModule];
+        this._modules = clone_1.default(this._settings.modules, { deep: true });
+        this.$welcome = this._initWelcome(params);
         this.$modules = this._initConsoles();
         this.$bottomBar = this._initBottomBar();
         hotkey_1.default('escape').on('press', () => {
@@ -77,8 +78,7 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
             });
         });
         this._modulesReady = false;
-        source.on('*.state', (state, metas) => {
-            console.log('SA', state, metas);
+        source.on('state,*.state', (state, metas) => {
             if (state === 'ready') {
                 this._modulesReady = true;
             }
@@ -131,7 +131,7 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
     }
     _updateBottomBar() {
         let content = '';
-        Object.keys(this._initialParams.modules).forEach((moduleName, i) => {
+        Object.keys(this._params.modules).forEach((moduleName, i) => {
             const moduleObj = this._modules[moduleName];
             let bg, fg;
             switch (moduleObj.state) {
@@ -324,16 +324,17 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
      *
      * This method init the welcome screen
      *
-     * @param         {Object}        initialParams       An object of initial params used to launch the sugar ui
+     * @param         {Object}        params       An object of initial params used to launch the sugar ui
      *
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _initWelcome(initialParams) {
+    _initWelcome(params) {
         const $centeredBox = blessed_1.default.box({
-            top: 'center',
+            top: '50%-9',
             left: 'center',
             width: '100%',
+            height: 'shrink',
             style: {}
         });
         const logoString = sugarHeading_1.default({
@@ -362,7 +363,7 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         const projectLines = [
             `<yellow>${'-'.repeat(countLine_1.default(projectLine) + 6)}</yellow>`,
             `<yellow>|</yellow>  ${projectLine}  <yellow>|</yellow>`,
-            `<yellow>|</yellow>  ${' '.repeat(byLineSpaces)} ${byLine} ${' '.repeat(byLineSpaces)}  <yellow>|</yellow>`,
+            ` <yellow>|</yellow>  ${' '.repeat(byLineSpaces)} ${byLine} ${' '.repeat(byLineSpaces)} <yellow>|</yellow>`,
             `<yellow>${'-'.repeat(countLine_1.default(projectLine) + 6)}</yellow>`
         ];
         const updateContent = () => {
@@ -374,7 +375,7 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                     `WebUI <green>started</green> at`,
                     `<bgYellow><black> http://${this._serverSettings.hostname}:${this._serverSettings.port} </black></bgYellow>`,
                     '',
-                    `<cyan>${Object.keys(initialParams.modules).length}</cyan> module${Object.keys(initialParams.modules).length > 1 ? 's' : ''} loaded`
+                    `<cyan>${Object.keys(params.modules).length}</cyan> module${Object.keys(params.modules).length > 1 ? 's' : ''} loaded`
                 ];
             }
             let larger = 0;
@@ -457,14 +458,15 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                 right: 0,
                 height: 3,
                 style: {
-                    bg: 'black'
+                    bg: 'yellow',
+                    fg: 'black'
                 },
                 padding: {
                     top: 1,
                     left: 2,
                     right: 2
                 },
-                content: parseHtml_1.default(`<yellow>${moduleObj.name}</yellow> | <white>${moduleObj.id}</white>`)
+                content: parseHtml_1.default(`<black>${moduleObj.name}</black> | <white>${moduleObj.id}</white>`)
             });
             let OutputClass;
             if (moduleObj.ui) {
@@ -474,18 +476,18 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
             else {
                 OutputClass = SBlessedOutput_1.default;
             }
-            const $console = new OutputClass(this._sources, Object.assign({ filter: (logObj) => {
+            const pipedSources = new SPromise_1.default({
+                filter: (logObj, metas) => {
                     return logObj.module && logObj.module.id === moduleObj.id;
-                }, width: '100%', height: '100%-3', top: 3, left: 0, right: 0, mouse: true, keys: true, clickable: false, scrollable: true, scrollbar: {
-                    ch: ' ',
-                    inverse: true
-                }, style: {
-                    fg: 'white',
-                    scrollbar: {
-                        bg: color_1.default('terminal.primary').toString()
-                    }
-                }, padding: {
-                    top: 0,
+                }
+            });
+            this._sources.forEach((source) => {
+                SPromise_1.default.pipe(source, pipedSources);
+            });
+            const $console = new OutputClass(pipedSources, Object.assign({ blessed: {
+                    width: '100%',
+                    height: '100%-3',
+                    top: 3,
                     left: 0,
                     right: 0,
                     bottom: 2

@@ -57,7 +57,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             var finalValue = rawValue;
             if (!tokens)
                 return rawValue;
-            // console.log(tokens);
             tokens.forEach(function (token) {
                 finalValue = finalValue.replace(token, get_1.default(object, token.replace('{', '').replace('}', '').replace('this.', '')));
             });

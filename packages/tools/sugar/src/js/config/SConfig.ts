@@ -281,7 +281,7 @@ export = class SConfig {
     let value = __get(this._adapters[adapter].config, path);
 
     // if (typeof value === 'function') {
-    //   console.log('COCOC');
+
     //   const _get = this.get.bind(this);
     //   value = value(_get);
     // }

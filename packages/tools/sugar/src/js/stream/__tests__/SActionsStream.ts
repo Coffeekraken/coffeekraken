@@ -8,7 +8,6 @@ module.exports = (__SActionsStream) => {
     const stream = new __SActionsStream({
       action1: (settings = {}) => {
         return new Promise((resolve, reject) => {
-          // console.log('action1');
           setTimeout(() => {
             settings.action1 = 'hello';
             resolve(settings);
@@ -17,7 +16,6 @@ module.exports = (__SActionsStream) => {
       },
       action2: (settings = {}) => {
         return new Promise((resolve, reject) => {
-          // console.log('action2', settings);
           settings.action2 = 'world';
           setTimeout(() => {
             resolve(settings);
@@ -27,18 +25,14 @@ module.exports = (__SActionsStream) => {
     });
     stream.on('step', (streamObj) => {
       stepsCalled++;
-      // console.log('streamObj', streamObj);
     });
     stream.on('action1.step', (res) => {
       action1StepCalled++;
-      // console.log('action1 res', res);
     });
     stream.on('start', (r) => {
       startCalled++;
-      // console.log('STA', r);
     });
     stream.on('error', (r) => {
-      // console.log('ERROR', r);
       errorCalled++;
     });
 

@@ -34,8 +34,7 @@ module.exports = (_a = class SFrontendServerProcess extends SProcess_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         process(params, settings = {}) {
-            this._frontendServerProcess = frontend_1.default(params);
-            this.bindSPromise(this._frontendServerProcess);
+            return frontend_1.default(params);
         }
     },
     _a.interface = SFrontendServerInterface_1.default,

@@ -54,12 +54,11 @@ function linkLoaded(link, callback = null) {
       const img = document.createElement('img');
 
       // wait until loaded
-      // console.log('CHECK LOADING', link.href);
+
       // we load the css into an image
       // when the image is in error more
       // that mean that the css is loaded
       img.addEventListener('error', (e) => {
-        // console.log('LOADED', e);
         // resolve the promise
         resolve(link);
         // callback if exist

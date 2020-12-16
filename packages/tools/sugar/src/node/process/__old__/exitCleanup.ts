@@ -42,7 +42,7 @@ function exitCleanup() {
     const processes = __getRegisteredProcessed();
     const remainingProcessesCount = Object.keys(processes).length;
 
-    console.log(processes);
+    //console.log(processes);
 
     __hotkey('ctrl+c', {
       once: true

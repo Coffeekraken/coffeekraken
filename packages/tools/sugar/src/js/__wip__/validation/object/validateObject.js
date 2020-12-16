@@ -229,7 +229,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 (argDefinition.required ||
                     (objectToCheck !== null && objectToCheck !== undefined))) {
                 var childrenValidation_1 = validateObject(objectToCheck || {}, argDefinition.definition, __assign(__assign({}, settings), { throw: false }), __spreadArrays(_argPath, [argName]));
-                // console.log('CC', childrenValidation);
                 if (childrenValidation_1 !== true && childrenValidation_1.$issues) {
                     childrenValidation_1.$issues.forEach(function (issue) {
                         var issueObj = childrenValidation_1[issue];

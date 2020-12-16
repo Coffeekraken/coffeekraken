@@ -169,7 +169,7 @@ export default class SSugarAppModule extends __SPromise {
     // });
 
     // @todo    replace this with new interface class
-    // __SSugarAppModuleSettingsInterface.apply(this._settings);
+    __SSugarAppModuleSettingsInterface.apply(this._settings);
 
     // register the module in the list
     SSugarAppModule._registeredModulesArray.push(this);
@@ -179,8 +179,6 @@ export default class SSugarAppModule extends __SPromise {
       SSugarAppModule._registeredModulesArray.splice(idx, 1);
     });
 
-    return;
-
     if (this.constructor.interface) {
       this.constructor.interface.apply(params);
     }
@@ -189,13 +187,12 @@ export default class SSugarAppModule extends __SPromise {
 
     // start if needed
     if (this._settings.autoStart) {
-      // this.start(this.params, this._settings);
+      this.start(this.params, this._settings);
     }
 
     // init shortcuts
     this._initShortcuts();
 
-    console.log('READ');
     // mark as ready
     this.ready();
   }

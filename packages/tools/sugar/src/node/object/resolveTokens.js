@@ -48,7 +48,6 @@ function resolveTokens(object) {
         let finalValue = rawValue;
         if (!tokens)
             return rawValue;
-        // console.log(tokens);
         tokens.forEach((token) => {
             finalValue = finalValue.replace(token, get_1.default(object, token.replace('{', '').replace('}', '').replace('this.', '')));
         });

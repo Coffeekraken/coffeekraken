@@ -259,7 +259,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             }
             var value = get_1.default(this._adapters[adapter].config, path);
             // if (typeof value === 'function') {
-            //   console.log('COCOC');
             //   const _get = this.get.bind(this);
             //   value = value(_get);
             // }

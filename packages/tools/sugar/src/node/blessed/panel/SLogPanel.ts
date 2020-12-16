@@ -134,7 +134,7 @@ export = class SLogPanel extends __SBlessedComponent {
   //       focus: true,
   //       placeholder: null
   //     },
-  //     __clone(this._settings.input, true),
+  //     __clone(this._settings.input, { deep: true }),
   //     settings
   //   );
 

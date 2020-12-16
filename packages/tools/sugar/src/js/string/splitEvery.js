@@ -73,7 +73,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             finalChunks_1.forEach(function (item) {
                 if (!item)
                     return;
-                // console.log(item, reg.test(item));
                 if (reg_1.test(item)) {
                     if (item.substr(0, 2) !== '</' || item.substr(0, 4) !== '\x1B') {
                         lastOpenedTag_1 = item;
@@ -85,7 +84,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     return;
                 }
                 if (lineCount_1 + item.length > every) {
-                    // console.log('CHECK', item);
                     var toAdd = item.substr(0, every - lineCount_1 - 1);
                     finalLines_1[finalLines_1.length - 1] += toAdd;
                     var rest = lastOpenedTag_1 + item.replace(toAdd, '');
@@ -107,7 +105,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             //     arr.push(a);
             //   }
             // });
-            // console.log(arr);
             var words_1 = text.split(' ');
             var lines_1 = [];
             var currentLine_1 = '';

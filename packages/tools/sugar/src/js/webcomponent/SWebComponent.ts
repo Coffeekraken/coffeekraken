@@ -255,7 +255,6 @@ function SWebComponentGenerator(extendsSettings = {}) {
           window.customElements.define(uncamelizedName, this, defineSettings);
         } catch (e) {
           // @TODO      find why the component is registeres twice...
-          // console.log(e);
         }
       } else if (document.registerElement) {
         try {
@@ -263,7 +262,6 @@ function SWebComponentGenerator(extendsSettings = {}) {
           document.registerElement(uncamelizedName, defineSettings);
         } catch (e) {
           // @TODO      find why the component is registeres twice...
-          // console.log(e);
         }
       } else {
         throw `Your browser does not support either document.registerElement or window.customElements.define webcomponents specification...`;
@@ -699,7 +697,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
           }
         });
         this.promise.on(`props.${prop}.*`, (update) => {
-          console.log('up', prop, update);
+          // console.log('up', prop, update);
           this.update();
         });
       }

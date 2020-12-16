@@ -117,7 +117,7 @@ const Cls: ISDescriptorResultCtor = class SDescriptorResult
     this._descriptor = descriptor;
     this._descriptorSettings = descriptorSettings;
     try {
-      this._originalValue = __clone(value, true);
+      this._originalValue = __clone(value, { deep: true });
     } catch (e) {
       this._originalValue = value;
     }

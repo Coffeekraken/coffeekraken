@@ -40,7 +40,6 @@ const fn: ItranspileAndSave = function (filepath, compilerOptions) {
           `The file "<yellow>${filepath}</yellow>" cannot be written cause it would override the source one...`
         );
       __fs.writeFileSync(newFilePath, typescriptResult.code);
-      // console.log(filepath.replace(/\.tsx?$/, '.js'));
     }
     if (typescriptResult && typescriptResult.map !== undefined) {
       const newFilePath = filepath.replace(/\.tsx?$/, '.js.map');

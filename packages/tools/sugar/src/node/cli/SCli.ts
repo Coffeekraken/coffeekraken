@@ -294,7 +294,7 @@ class SCli extends __SPromise {
     });
 
     // this._runningProcess.on('*', (d, v) => {
-    //   console.log(v.stack);
+
     // });
 
     // ${__sugarHeading({

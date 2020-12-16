@@ -9,7 +9,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "chalk", "../object/deepMap", "../is/map", "../is/array", "../is/boolean", "../is/function", "../is/json", "../is/object", "../object/deepMerge", "../map/mapToObject", "cli-highlight"], factory);
+        define(["require", "exports", "chalk", "../object/deepMap", "../is/map", "../is/array", "../is/boolean", "../is/function", "../is/json", "../is/object", "../object/deepMerge", "../map/mapToObject", "cli-highlight", "json-cyclic"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -24,6 +24,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var mapToObject_1 = __importDefault(require("../map/mapToObject"));
     var cli_highlight_1 = require("cli-highlight");
+    var json_cyclic_1 = require("json-cyclic");
     // import __prettyFormat from 'pretty-format';
     // import __reactTestPlugin from 'pretty-format/build/plugins/ReactTestComponent';
     // import __reactElementPlugin from 'pretty-format/build/plugins/ReactElement';
@@ -126,6 +127,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         // stringify
         var returnString = '';
         try {
+            value = json_cyclic_1.decycle(value);
             returnString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
         }
         catch (e) {

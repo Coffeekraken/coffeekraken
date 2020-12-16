@@ -369,7 +369,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         }
                         catch (e) {
                             // @TODO      find why the component is registeres twice...
-                            // console.log(e);
                         }
                     }
                     else if (document.registerElement) {
@@ -379,7 +378,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         }
                         catch (e) {
                             // @TODO      find why the component is registeres twice...
-                            // console.log(e);
                         }
                     }
                     else {
@@ -707,7 +705,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             }
                         });
                         this_1.promise.on("props." + prop + ".*", function (update) {
-                            console.log('up', prop, update);
+                            // console.log('up', prop, update);
                             _this.update();
                         });
                     };

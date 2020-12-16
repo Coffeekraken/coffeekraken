@@ -15,6 +15,7 @@ const object_1 = __importDefault(require("../is/object"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const mapToObject_1 = __importDefault(require("../map/mapToObject"));
 const cli_highlight_1 = require("cli-highlight");
+const json_cyclic_1 = require("json-cyclic");
 // import __prettyFormat from 'pretty-format';
 // import __reactTestPlugin from 'pretty-format/build/plugins/ReactTestComponent';
 // import __reactElementPlugin from 'pretty-format/build/plugins/ReactElement';
@@ -121,6 +122,7 @@ function fn(value, settings = {}) {
     // stringify
     let returnString = '';
     try {
+        value = json_cyclic_1.decycle(value);
         returnString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
     }
     catch (e) {

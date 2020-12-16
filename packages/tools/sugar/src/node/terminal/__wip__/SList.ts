@@ -140,7 +140,6 @@ module.exports = class TerminalList {
           if (this._selectedItemObj.col > 0) this._selectedItemObj.col -= 1;
           break;
         case 'ENTER':
-          // console.log(this._selectedItemObj.col + 1, this._selectedItemObj.row + 1);
           let selectedItemIdx =
             this._selectedItemObj.col * this._lines.length +
             this._selectedItemObj.row;

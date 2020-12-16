@@ -264,7 +264,7 @@ function validateObject(
         },
         [..._argPath, argName]
       );
-      // console.log('CC', childrenValidation);
+
       if (childrenValidation !== true && childrenValidation.$issues) {
         childrenValidation.$issues.forEach((issue) => {
           const issueObj = childrenValidation[issue];

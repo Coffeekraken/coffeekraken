@@ -178,8 +178,6 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
 
     settings = __deepMerge(this._settings, settings);
 
-    console.log('S', settings);
-
     const descriptor = new __SDescriptor({
       name,
       type: 'Object',

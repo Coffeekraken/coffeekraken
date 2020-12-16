@@ -163,11 +163,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                             delete _set.metas;
                                             smtp_js_1.default.send(_set)
                                                 .then(function (message) {
-                                                console.log('ME', message);
                                                 resolve(message);
                                             })
                                                 .catch(function (error) {
-                                                console.log('ERROR', error);
                                                 reject(error);
                                             });
                                         }

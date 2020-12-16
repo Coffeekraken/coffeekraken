@@ -555,7 +555,6 @@ module.exports = class SCommandPanel extends SBlessedComponent_1.default {
         this.$list.focus();
     }
     _updateList() {
-        // console.log('DU', Date.now());
         this._commands.forEach((commandObj, i) => {
             const item = this.$list.getItem(i);
             if (!item.$key) {

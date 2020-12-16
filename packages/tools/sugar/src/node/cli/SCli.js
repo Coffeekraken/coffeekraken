@@ -240,7 +240,6 @@ class SCli extends SPromise_1.default {
             this._runningProcess = null;
         });
         // this._runningProcess.on('*', (d, v) => {
-        //   console.log(v.stack);
         // });
         // ${__sugarHeading({
         //   version: __packageJson(__dirname).version

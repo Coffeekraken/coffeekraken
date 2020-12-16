@@ -54,7 +54,6 @@ export = class SFrontendServerProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   process(params, settings = {}) {
-    this._frontendServerProcess = __frontendServer(params);
-    this.bindSPromise(this._frontendServerProcess);
+    return __frontendServer(params);
   }
-}
+};

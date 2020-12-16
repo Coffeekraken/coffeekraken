@@ -140,7 +140,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 }
             }
         }
-        // console.log(currentLength, result, __countLine(result));
         // if we take care of html, make sure the opened tags are closed
         openedHtmlTagsArray.forEach(function (tag) {
             result += "</" + tag + ">";

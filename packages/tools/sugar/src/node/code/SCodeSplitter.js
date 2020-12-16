@@ -60,7 +60,6 @@ module.exports = class SCodeSplitter {
             splitters.forEach((extractorObj) => {
                 if (extractorObj.regex) {
                     const matches = code.matchAll(extractorObj.regex);
-                    console.log(matches);
                     process.exit();
                     matches.forEach((match) => {
                         blocks.push({

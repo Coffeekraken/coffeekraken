@@ -131,7 +131,6 @@ const Cls = (_a = class SInterface {
                         ? instance.constructor.name
                         : instance.name;
             settings = deepMerge_1.default(this._settings, settings);
-            console.log('S', settings);
             const descriptor = new SDescriptor_1.default(Object.assign({ name, type: 'Object', rules: this._definition, arrayAsValue: settings.arrayAsValue, complete: settings.complete, throwOnError: false }, (settings.descriptorSettings || {})));
             const descriptorResult = descriptor.apply(instance);
             // instanciate a new interface result object

@@ -18,6 +18,7 @@ import __parseAndFormatLog from '../../log/parseAndFormatLog';
 import __parseHtml from '../../console/parseHtml';
 import __countLine from '../../string/countLine';
 import __chalk from 'chalk';
+import __minimatch from 'minimatch';
 
 import ISBlessedOutput, {
   ISBlessedOutputCtor,
@@ -139,9 +140,22 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
           filter: null,
           maxItems: -1,
           maxItemsByGroup: 1,
-          spaceBetween: 0,
+          spaceBetween: 1,
           spaceAround: 1,
-          stacks: ['log', '*.log', 'warning', '*.warning', 'warn', '*.warn'],
+          stacks: [
+            'log',
+            '*.log',
+            'warn',
+            '*.warn',
+            'error',
+            '*.error',
+            'reject',
+            '*.reject'
+          ],
+          mapTypesToStacks: {
+            error: ['error', '*.error', 'reject', '*.reject'],
+            warning: ['warn', '*.warn']
+          },
           metas: {
             spaceRight: 1,
             width: 9,
@@ -161,7 +175,6 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
               inverse: true
             },
             style: {
-              // bg: 'yellow',
               scrollbar: {
                 bg: 'yellow'
               }
@@ -212,6 +225,28 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
     settings = __deepMerge(this._settings, settings) as ISBlessedOutputSettings;
     // subscribe to data
     source.on((settings.stacks || []).join(','), (data, metas) => {
+      // protection
+      if (data === undefined || data === null) return;
+      // handle the type depending on the passed stack
+      const types = Object.keys(settings.mapTypesToStacks);
+      for (let i = 0; i < types.length; i++) {
+        const stacks = settings.mapTypesToStacks[types[i]];
+        const stacksGlob = Array.isArray(stacks)
+          ? `*(${stacks.join('|')})`
+          : stacks;
+        if (__minimatch(metas.stack, stacksGlob)) {
+          if (typeof data !== 'object') {
+            data = {
+              type: types[i],
+              value: data
+            };
+          } else if (!data.type) {
+            data.type = types[i];
+          }
+          break;
+        }
+      }
+
       this.log(data);
     });
   }

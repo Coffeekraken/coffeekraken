@@ -79,12 +79,12 @@ const fn = function (args = {}) {
       if (handlerPath.slice(-3) !== '.js') handlerPath += '.js';
 
       if (!__fs.existsSync(handlerPath)) {
-        console.warn(
-          `Frontend handler "<cyan>${__path.relative(
+        promise.trigger('warn', {
+          value: `Frontend handler "<cyan>${__path.relative(
             __packageRoot(),
             handlerPath
           )}</cyan>" does not exists...`
-        );
+        });
       } else {
         const handlerFn = await import(handlerPath);
 
@@ -120,8 +120,8 @@ const fn = function (args = {}) {
       .listen(settings.port, settings.hostname, () => {
         setTimeout(() => {
           promise.trigger('log', {
-            type: 'header',
-            value: __trimLines(`Your <primary>Frontend Express</primary> server is <green>up and running</green>:
+            type: 'heading',
+            value: __trimLines(`Your <yellow>Frontend Express</yellow> server is <green>up and running</green>:
 
                 - Hostname        : <yellow>${settings.hostname}</yellow>
                 - Port            : <yellow>${settings.port}</yellow>

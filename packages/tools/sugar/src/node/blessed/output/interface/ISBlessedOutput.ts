@@ -5,6 +5,7 @@ import ISBlessedOutputComponent, {
 
 export interface ISBlessedOutputSettings {
   stacks?: string[];
+  mapTypesToStacks?: any;
 }
 
 export interface ISBlessedOutputMetas {

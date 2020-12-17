@@ -114,9 +114,7 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             this._renderAfterNotAllowedTimeout = null;
-            if (this._settings.attach !== false && isNewScreen) {
-                SBlessedComponent.screen.append(this);
-            }
+            this._settings = settings;
             // save screen reference
             this._screen = SBlessedComponent.screen;
             global.sBlessedComponentScreen = SBlessedComponent.screen;
@@ -131,11 +129,12 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
             this.on('detach', () => {
                 this._isDisplayed = false;
             });
-            // save the settings
-            this._settings = settings;
             // set render interval if not set already
             if (settings.framerate && !SBlessedComponent._framerateInterval) {
                 this.setFramerate(settings.framerate);
+            }
+            if (this._settings.attach !== false && isNewScreen) {
+                SBlessedComponent.screen.append(this);
             }
             onProcessExit_1.default(() => __awaiter(this, void 0, void 0, function* () {
                 try {

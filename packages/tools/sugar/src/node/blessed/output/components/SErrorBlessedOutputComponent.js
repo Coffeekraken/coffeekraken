@@ -44,7 +44,7 @@ const cls = (_a = class SErrorBlessedOutputComponent extends SBlessedOutputCompo
                 blessed: {}
             }));
             this._$content = blessed_1.default.box({
-                content: parseHtml_1.default(['<red><bold>Warning:</bold></red>', '', logObj.value].join('\n')),
+                content: parseHtml_1.default(['<red><bold>Error:</bold></red>', logObj.value].join('\n')),
                 top: 0,
                 left: 3,
                 height: 'shrink',

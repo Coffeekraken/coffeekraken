@@ -4,11 +4,6 @@ import __fs from 'fs';
 import __TscInterface from './TscInterface';
 import __sugarConfig from '../../../config/sugar';
 
-// let defaultConfig;
-// if (__fs.existsSync(`${__packageRoot()}/tsconfig.json`)) {
-//   defaultConfig = `${__packageRoot()}/tsconfig.json`;
-// } else if (__fs.exi)
-
 class compileTsInterface extends __SInterface {
   static definition = {
     ...__TscInterface.definition,

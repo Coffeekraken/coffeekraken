@@ -6,6 +6,7 @@ var _a;
 const SBlessedOutputComponent_1 = __importDefault(require("../SBlessedOutputComponent"));
 const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
 const parseHtml_1 = __importDefault(require("../../../console/parseHtml"));
+const replaceTokens_1 = __importDefault(require("../../../string/replaceTokens"));
 /**
  * @name                SHeadingBlessedOutputComponent
  * @namespace           sugar.node.blessed.output.components
@@ -39,8 +40,8 @@ const cls = (_a = class SHeadingBlessedOutputComponent extends SBlessedOutputCom
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         constructor(logObj, settings = {}) {
-            const contentArray = ['---', parseHtml_1.default(logObj.value), '---'];
-            super(logObj, deepMerge_1.default({
+            const contentArray = ['-', parseHtml_1.default(logObj.value), '-'];
+            super(Object.assign({ color: 'yellow' }, logObj), deepMerge_1.default({
                 blessed: {
                     content: contentArray.join('\n')
                 }
@@ -48,11 +49,11 @@ const cls = (_a = class SHeadingBlessedOutputComponent extends SBlessedOutputCom
         }
         update() {
             const contentArray = [
-                `${'-'.repeat(this.parent.width)}`,
-                parseHtml_1.default(this.logObj.value),
-                `${'-'.repeat(this.parent.width)}`
+                `<[color]>${'-'.repeat(this.parent.width)}</[color]>`,
+                this.logObj.value,
+                `<[color]>${'-'.repeat(this.parent.width)}</[color]>`
             ];
-            this.setContent(contentArray.join('\n'));
+            this.setContent(parseHtml_1.default(replaceTokens_1.default(contentArray.join('\n'), this.logObj)));
             super.update();
         }
     },

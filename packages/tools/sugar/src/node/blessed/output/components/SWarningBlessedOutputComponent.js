@@ -44,7 +44,7 @@ const cls = (_a = class SWarningBlessedOutputComponent extends SBlessedOutputCom
                 blessed: {}
             }));
             this._$content = blessed_1.default.box({
-                content: parseHtml_1.default(['<yellow><bold>Warning:</bold></yellow>', '', logObj.value].join('\n')),
+                content: parseHtml_1.default(['<yellow><bold>Warning:</bold></yellow>', logObj.value].join('\n')),
                 top: 0,
                 left: 3,
                 height: 'shrink',

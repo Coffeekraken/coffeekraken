@@ -48,7 +48,9 @@ const fn: ICompileTs = function compileTs(
   params: ICompileTsParams,
   settings: ICompileTsSettings
 ): Promise<any> {
-  return new __SPromise(async (resolve, reject, trigger, cancel) => {
+  const promise = new __SPromise();
+
+  (async (resolve, reject, trigger, cancel) => {
     const tmpDir: string = __tmpDir();
 
     const stacks = {};
@@ -113,7 +115,7 @@ const fn: ICompileTs = function compileTs(
     }
 
     if (Object.keys(stacks).length === 0) {
-      trigger(
+      promise.trigger(
         'error',
         [
           `Sorry but their's nothing to compile.`,
@@ -160,7 +162,7 @@ const fn: ICompileTs = function compileTs(
 
       // check if watch or not
       if (params.watch === true) {
-        trigger('log', {
+        promise.trigger('log', {
           value: `<magenta>[${stack}]</magenta> Watch mode <green>enabled</green>`
         });
       }
@@ -178,7 +180,7 @@ const fn: ICompileTs = function compileTs(
           .on('ready', () => {
             if (stacksStates[stack].ready) return;
             stacksStates[stack].ready = true;
-            trigger('log', {
+            promise.trigger('log', {
               value: `<magenta>[${stack}]</magenta> Watching files process <green>ready</green>`
             });
             resolveWatch();
@@ -191,7 +193,7 @@ const fn: ICompileTs = function compileTs(
                 delete durationStack[file.path];
               }, 60000);
 
-              trigger('log', {
+              promise.trigger('log', {
                 value: `<magenta>[${stack}]</magenta> <yellow>updated</yellow> <green>${file.path.replace(
                   `${__packageRoot()}/`,
                   ''
@@ -216,7 +218,7 @@ const fn: ICompileTs = function compileTs(
                   's'
                 )}s`;
               }
-              trigger('log', {
+              promise.trigger('log', {
                 value: `<magenta>[${stack}]</magenta> <cyan>compiled</cyan> <green>${file.path.replace(
                   `${__packageRoot()}/`,
                   ''
@@ -236,25 +238,27 @@ const fn: ICompileTs = function compileTs(
         params.transpileOnly === undefined ||
         params.transpileOnly === false
       ) {
-        trigger('log', {
+        promise.trigger('log', {
           value: `<magenta>[${stack}]</magenta> Starting a full <yellow>tsc</yellow> process`
         });
         // instanciate a new process
         const pro = new __SCliProcess('tsc [arguments]', {
           definition: __compileTsInterface.definition,
-          stdio: false,
-          metas: false
+          metas: false,
+          stdio: false
         });
-        pro.on('error', (d, m) => {
-          trigger('error', d);
-        });
+        __SPromise.pipe(pro, promise);
         pro.run(params);
       } else if (params.transpileOnly === true) {
+        promise.trigger('log', {
+          value: `<magenta>[${stack}]</magenta> Transpile only mode <green>enabled</green>`
+        });
+
         if (params.watch === undefined || params.watch === false) {
-          trigger('log', {
+          promise.trigger('log', {
             value: `<magenta>[${stack}]</magenta> Starting the compilation in <yellow>transpileOnly</yellow> mode`
           });
-          trigger('log', {
+          promise.trigger('log', {
             value: `<magenta>[${stack}]</magenta> Listing all the files to transpile depending on:\n- ${stackObj.include
               .map(
                 (t) => `<green>${t.replace(`${__packageRoot()}/`, '')}</green>`
@@ -268,7 +272,7 @@ const fn: ICompileTs = function compileTs(
             });
             files = [...files, ...filesFounded];
           }
-          trigger('log', {
+          promise.trigger('log', {
             value: `<magenta>[${stack}]</magenta> Found <yellow>${files.length}</yellow> file(s) to compile`
           });
 
@@ -285,7 +289,9 @@ const fn: ICompileTs = function compileTs(
         }
       }
     }
-  });
+  })();
+
+  return promise;
 };
 
 export = fn;

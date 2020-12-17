@@ -15,7 +15,8 @@ import __deepMerge from '../../node/object/deepMerge';
  * @todo      interface
  * @todo      doc
  * @todo      tests
- * @todo      add setting to define tokens delimiter
+ * @todo      {Feature}     Add setting to define tokens delimiter
+ * @todo      {Feature}     Support multi level tokens like [something.cool]
  *
  * @param       {String}          string          The string to process
  * @param       {Object}          argsObj         The arguments/value object

@@ -9,7 +9,6 @@ import ISCompileTsProcess, {
 import __SCompileTsProcessInterface from './interface/SCompileTsProcessInterface';
 
 import compileTs from './compileTs';
-import __treatAsValue from '../../promise/treatAsValue';
 
 /**
  * @name            STypescriptToJsProcess

@@ -147,8 +147,6 @@ export default class SSugarApp extends __SPromise {
               value
             };
           }
-          // metas.stack = `module.${metas.stack}`;
-
           return [value, metas];
         }
       });
@@ -167,12 +165,6 @@ export default class SSugarApp extends __SPromise {
    */
   _modulesReady() {
     setTimeout(() => {
-      // for (const [key, moduleObj] of Object.entries(this._modulesObjs)) {
-      //
-      //   if (moduleObj.instance.autoRun) {
-      //     moduleObj.instance.run();
-      //   }
-      // }
       this.state = 'ready';
     }, 20);
   }
@@ -244,7 +236,6 @@ export default class SSugarApp extends __SPromise {
       const settings = {
         ...moduleObj
       };
-
       const moduleInstance = new moduleClass(moduleObj.params, settings);
       if (!(moduleInstance instanceof __SSugarAppModule)) {
         throw new __SError(

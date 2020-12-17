@@ -47,7 +47,9 @@ export = class SSugarAppProcessModule extends __SSugarAppModule {
   start() {
     const ProcessClass = require(this.params.processPath);
     const pro = new ProcessClass({
-      ...this._settings.processSettings
+      ...this._settings.processSettings,
+      metas: false,
+      stdio: false
     });
     return super.start(pro);
   }

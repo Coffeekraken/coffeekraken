@@ -7,6 +7,7 @@ import ILog from '../../../log/interface/ILog';
 import __blessed from 'blessed';
 import __deepMerge from '../../../object/deepMerge';
 import __parseHtml from '../../../console/parseHtml';
+import __replaceTokens from '../../../string/replaceTokens';
 
 /**
  * @name                SHeadingBlessedOutputComponent
@@ -58,10 +59,13 @@ const cls: ISHeadingBlessedOutputComponentCtor = class SHeadingBlessedOutputComp
     logObj: ILog,
     settings: ISHeadingBlessedOutputComponentSettings = {}
   ) {
-    const contentArray = ['---', __parseHtml(logObj.value), '---'];
+    const contentArray = ['-', __parseHtml(logObj.value), '-'];
 
     super(
-      logObj,
+      {
+        color: 'yellow',
+        ...logObj
+      },
       __deepMerge(
         {
           blessed: {
@@ -75,11 +79,13 @@ const cls: ISHeadingBlessedOutputComponentCtor = class SHeadingBlessedOutputComp
 
   update() {
     const contentArray = [
-      `${'-'.repeat(this.parent.width)}`,
-      __parseHtml(this.logObj.value),
-      `${'-'.repeat(this.parent.width)}`
+      `<[color]>${'-'.repeat(this.parent.width)}</[color]>`,
+      this.logObj.value,
+      `<[color]>${'-'.repeat(this.parent.width)}</[color]>`
     ];
-    this.setContent(contentArray.join('\n'));
+    this.setContent(
+      __parseHtml(__replaceTokens(contentArray.join('\n'), this.logObj))
+    );
     super.update();
   }
 };

@@ -32,7 +32,7 @@ module.exports = class SSugarAppProcessModule extends SSugarAppModule_1.default 
      */
     start() {
         const ProcessClass = require(this.params.processPath);
-        const pro = new ProcessClass(Object.assign({}, this._settings.processSettings));
+        const pro = new ProcessClass(Object.assign(Object.assign({}, this._settings.processSettings), { metas: false, stdio: false }));
         return super.start(pro);
     }
 };

@@ -1,6 +1,9 @@
 import ISProcess, { ISProcessCtor, ISProcessSettings } from './ISProcess';
+import { ISpawnSettings } from './ISpawn';
 
-export interface ISCliProcessSettings extends ISProcessSettings {}
+export interface ISCliProcessSettings extends ISProcessSettings {
+  spawnSettings?: ISpawnSettings;
+}
 
 export interface ISCliProcessCtor {
   new (command: string, settings?: ISCliProcessSettings): ISCliProcess;

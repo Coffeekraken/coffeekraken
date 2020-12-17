@@ -62,6 +62,7 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         this._modules = clone_1.default(this._settings.modules, { deep: true });
         this.$welcome = this._initWelcome(params);
         this.$modules = this._initConsoles();
+        this.$topBar = this._initTopBar();
         this.$bottomBar = this._initBottomBar();
         hotkey_1.default('escape').on('press', () => {
             if (this.$modules.parent) {
@@ -77,31 +78,30 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                 // __SIpc.trigger('sugar.ui.displayedModule', moduleObj.id);
             });
         });
+        // listen app
         this._modulesReady = false;
-        source.on('state,*.state', (state, metas) => {
+        source.on('state', (state) => {
             if (state === 'ready') {
                 this._modulesReady = true;
             }
         });
-        source.on('*.SSugarAppModule.*', (data, metas) => {
-            switch (metas.originalStack) {
-                case 'state':
-                    this._moduleState(data, metas);
-                    break;
-                case 'log':
-                    this._moduleLog(data, metas);
-                    break;
-                case 'start':
-                    this._moduleStart(data, metas);
-                    break;
-                case 'success':
-                    this._moduleSuccess(data, metas);
-                    break;
-                case 'error':
-                    this._moduleError(data, metas);
-                    break;
-            }
+        // listen modules
+        source.on('*.state', (state, metas) => {
+            this._moduleState(state, metas);
         });
+        source.on('*.log', (data, metas) => {
+            this._moduleLog(data, metas);
+        });
+        source.on('*.start', (data, metas) => {
+            this._moduleStart(data, metas);
+        });
+        source.on('*.success', (data, metas) => {
+            this._moduleSuccess(data, metas);
+        });
+        source.on('*.error', (data, metas) => {
+            this._moduleError(data, metas);
+        });
+        this.append(this.$topBar);
         this.append(this.$bottomBar);
         this.append(this.$welcome);
         // update bottom bar
@@ -295,6 +295,25 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         });
         this.append($startNotification);
     }
+    _initTopBar() {
+        const $topBar = blessed_1.default.box({
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 3,
+            style: {
+                bg: 'yellow',
+                fg: 'black'
+            },
+            padding: {
+                top: 1,
+                left: 2,
+                right: 2
+            },
+            content: parseHtml_1.default(`<bgBlack><white> MIT </white></bgBlack><bgWhite><black> Sugar </black></bgWhite> 2.0.0`)
+        });
+        return $topBar;
+    }
     /**
      * @name              _initBottomBar
      * @type              Function
@@ -476,18 +495,19 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
             else {
                 OutputClass = SBlessedOutput_1.default;
             }
-            const pipedSources = new SPromise_1.default({
-                filter: (logObj, metas) => {
-                    return logObj.module && logObj.module.id === moduleObj.id;
-                }
-            });
+            const pipedSources = new SPromise_1.default({});
             this._sources.forEach((source) => {
-                SPromise_1.default.pipe(source, pipedSources);
+                SPromise_1.default.pipe(source, pipedSources, {
+                    filter: (logObj, metas) => {
+                        // console.log(logObj, moduleObj);
+                        return logObj.module && logObj.module.id === moduleObj.id;
+                    }
+                });
             });
             const $console = new OutputClass(pipedSources, Object.assign({ blessed: {
                     width: '100%',
                     height: '100%-3',
-                    top: 3,
+                    top: 4,
                     left: 0,
                     right: 0,
                     bottom: 2

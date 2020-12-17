@@ -19,6 +19,7 @@ const childProcess_1 = __importDefault(require("../../is/childProcess"));
 const parseAndFormatLog_1 = __importDefault(require("../../log/parseAndFormatLog"));
 const parseHtml_1 = __importDefault(require("../../console/parseHtml"));
 const countLine_1 = __importDefault(require("../../string/countLine"));
+const minimatch_1 = __importDefault(require("minimatch"));
 const SDefaultBlessedOutputComponent_1 = __importDefault(require("./components/SDefaultBlessedOutputComponent"));
 const SErrorBlessedOutputComponent_1 = __importDefault(require("./components/SErrorBlessedOutputComponent"));
 const SWarningBlessedOutputComponent_1 = __importDefault(require("./components/SWarningBlessedOutputComponent"));
@@ -70,9 +71,22 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
                 filter: null,
                 maxItems: -1,
                 maxItemsByGroup: 1,
-                spaceBetween: 0,
+                spaceBetween: 1,
                 spaceAround: 1,
-                stacks: ['log', '*.log', 'warning', '*.warning', 'warn', '*.warn'],
+                stacks: [
+                    'log',
+                    '*.log',
+                    'warn',
+                    '*.warn',
+                    'error',
+                    '*.error',
+                    'reject',
+                    '*.reject'
+                ],
+                mapTypesToStacks: {
+                    error: ['error', '*.error', 'reject', '*.reject'],
+                    warning: ['warn', '*.warn']
+                },
                 metas: {
                     spaceRight: 1,
                     width: 9,
@@ -92,7 +106,6 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
                         inverse: true
                     },
                     style: {
-                        // bg: 'yellow',
                         scrollbar: {
                             bg: 'yellow'
                         }
@@ -183,6 +196,29 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
             settings = deepMerge_1.default(this._settings, settings);
             // subscribe to data
             source.on((settings.stacks || []).join(','), (data, metas) => {
+                // protection
+                if (data === undefined || data === null)
+                    return;
+                // handle the type depending on the passed stack
+                const types = Object.keys(settings.mapTypesToStacks);
+                for (let i = 0; i < types.length; i++) {
+                    const stacks = settings.mapTypesToStacks[types[i]];
+                    const stacksGlob = Array.isArray(stacks)
+                        ? `*(${stacks.join('|')})`
+                        : stacks;
+                    if (minimatch_1.default(metas.stack, stacksGlob)) {
+                        if (typeof data !== 'object') {
+                            data = {
+                                type: types[i],
+                                value: data
+                            };
+                        }
+                        else if (!data.type) {
+                            data.type = types[i];
+                        }
+                        break;
+                    }
+                }
                 this.log(data);
             });
         }

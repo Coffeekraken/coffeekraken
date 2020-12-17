@@ -66,6 +66,7 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
 
     this.$welcome = this._initWelcome(params);
     this.$modules = this._initConsoles();
+    this.$topBar = this._initTopBar();
     this.$bottomBar = this._initBottomBar();
 
     __hotkey('escape').on('press', () => {
@@ -83,33 +84,32 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
       });
     });
 
+    // listen app
     this._modulesReady = false;
-    source.on('state,*.state', (state: any, metas: any) => {
+    source.on('state', (state: any) => {
       if (state === 'ready') {
         this._modulesReady = true;
       }
     });
 
-    source.on('*.SSugarAppModule.*', (data: any, metas: any) => {
-      switch (metas.originalStack) {
-        case 'state':
-          this._moduleState(data, metas);
-          break;
-        case 'log':
-          this._moduleLog(data, metas);
-          break;
-        case 'start':
-          this._moduleStart(data, metas);
-          break;
-        case 'success':
-          this._moduleSuccess(data, metas);
-          break;
-        case 'error':
-          this._moduleError(data, metas);
-          break;
-      }
+    // listen modules
+    source.on('*.state', (state: any, metas: any) => {
+      this._moduleState(state, metas);
+    });
+    source.on('*.log', (data: any, metas: any) => {
+      this._moduleLog(data, metas);
+    });
+    source.on('*.start', (data: any, metas: any) => {
+      this._moduleStart(data, metas);
+    });
+    source.on('*.success', (data: any, metas: any) => {
+      this._moduleSuccess(data, metas);
+    });
+    source.on('*.error', (data: any, metas: any) => {
+      this._moduleError(data, metas);
     });
 
+    this.append(this.$topBar);
     this.append(this.$bottomBar);
     this.append(this.$welcome);
 
@@ -339,6 +339,28 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
     this.append($startNotification);
   }
 
+  _initTopBar() {
+    const $topBar = __blessed.box({
+      top: 0,
+      left: 0,
+      right: 0,
+      height: 3,
+      style: {
+        bg: 'yellow',
+        fg: 'black'
+      },
+      padding: {
+        top: 1,
+        left: 2,
+        right: 2
+      },
+      content: __parseHtml(
+        `<bgBlack><white> MIT </white></bgBlack><bgWhite><black> Sugar </black></bgWhite> 2.0.0`
+      )
+    });
+    return $topBar;
+  }
+
   /**
    * @name              _initBottomBar
    * @type              Function
@@ -544,20 +566,21 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
         OutputClass = __SBlessedOutput;
       }
 
-      const pipedSources = new __SPromise({
-        filter: (logObj, metas) => {
-          return logObj.module && logObj.module.id === moduleObj.id;
-        }
-      });
+      const pipedSources = new __SPromise({});
       this._sources.forEach((source) => {
-        __SPromise.pipe(source, pipedSources);
+        __SPromise.pipe(source, pipedSources, {
+          filter: (logObj, metas) => {
+            // console.log(logObj, moduleObj);
+            return logObj.module && logObj.module.id === moduleObj.id;
+          }
+        });
       });
 
       const $console = new OutputClass(pipedSources, {
         blessed: {
           width: '100%',
           height: '100%-3',
-          top: 3,
+          top: 4,
           left: 0,
           right: 0,
           bottom: 2

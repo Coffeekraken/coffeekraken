@@ -67,7 +67,7 @@ const cls: ISErrorBlessedOutputComponentCtor = class SErrorBlessedOutputComponen
 
     this._$content = __blessed.box({
       content: __parseHtml(
-        ['<red><bold>Warning:</bold></red>', '', logObj.value].join('\n')
+        ['<red><bold>Error:</bold></red>', logObj.value].join('\n')
       ),
       top: 0,
       left: 3,

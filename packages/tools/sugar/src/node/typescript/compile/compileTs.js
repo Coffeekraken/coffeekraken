@@ -48,7 +48,8 @@ const transpileAndSave_1 = __importDefault(require("./transpileAndSave"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 const fn = function compileTs(params, settings) {
-    return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+    const promise = new SPromise_1.default();
+    ((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
         const tmpDir = tmpDir_1.default();
         const stacks = {};
         // load the typescript config
@@ -102,7 +103,7 @@ const fn = function compileTs(params, settings) {
             }
         }
         if (Object.keys(stacks).length === 0) {
-            trigger('error', [
+            promise.trigger('error', [
                 `Sorry but their's nothing to compile.`,
                 `In order to specify files/folders to compile, you have these choices:`,
                 `1. Specify some "stacks" to compile in your "<yellow>.sugar/ts.config.js</yellow>" file and launch the compilation using the "<cyan>-s {stack}</cyan>" argument.`,
@@ -140,7 +141,7 @@ const fn = function compileTs(params, settings) {
             const durationStack = {};
             // check if watch or not
             if (params.watch === true) {
-                trigger('log', {
+                promise.trigger('log', {
                     value: `<magenta>[${stack}]</magenta> Watch mode <green>enabled</green>`
                 });
             }
@@ -157,7 +158,7 @@ const fn = function compileTs(params, settings) {
                     if (stacksStates[stack].ready)
                         return;
                     stacksStates[stack].ready = true;
-                    trigger('log', {
+                    promise.trigger('log', {
                         value: `<magenta>[${stack}]</magenta> Watching files process <green>ready</green>`
                     });
                     resolveWatch();
@@ -169,7 +170,7 @@ const fn = function compileTs(params, settings) {
                         setTimeout(() => {
                             delete durationStack[file.path];
                         }, 60000);
-                        trigger('log', {
+                        promise.trigger('log', {
                             value: `<magenta>[${stack}]</magenta> <yellow>updated</yellow> <green>${file.path.replace(`${packageRoot_1.default()}/`, '')}</green> <yellow>${file.sizeInKBytes}kb</yellow>`
                         });
                         if (params.transpileOnly === true) {
@@ -181,7 +182,7 @@ const fn = function compileTs(params, settings) {
                         if (durationStack[file.path.replace(/\.js$/, '.ts')] !== undefined) {
                             duration = ` in ${convert_1.default(Date.now() - durationStack[file.path.replace(/\.js$/, '.ts')], 's')}s`;
                         }
-                        trigger('log', {
+                        promise.trigger('log', {
                             value: `<magenta>[${stack}]</magenta> <cyan>compiled</cyan> <green>${file.path.replace(`${packageRoot_1.default()}/`, '')}</green> <yellow>${file.sizeInKBytes}kb</yellow>${duration}`
                         });
                     }
@@ -193,26 +194,27 @@ const fn = function compileTs(params, settings) {
             params.project = stackObj.tsconfigPath;
             if (params.transpileOnly === undefined ||
                 params.transpileOnly === false) {
-                trigger('log', {
+                promise.trigger('log', {
                     value: `<magenta>[${stack}]</magenta> Starting a full <yellow>tsc</yellow> process`
                 });
                 // instanciate a new process
                 const pro = new SCliProcess_1.default('tsc [arguments]', {
                     definition: compileTsInterface_1.default.definition,
-                    stdio: false,
-                    metas: false
+                    metas: false,
+                    stdio: false
                 });
-                pro.on('error', (d, m) => {
-                    trigger('error', d);
-                });
+                SPromise_1.default.pipe(pro, promise);
                 pro.run(params);
             }
             else if (params.transpileOnly === true) {
+                promise.trigger('log', {
+                    value: `<magenta>[${stack}]</magenta> Transpile only mode <green>enabled</green>`
+                });
                 if (params.watch === undefined || params.watch === false) {
-                    trigger('log', {
+                    promise.trigger('log', {
                         value: `<magenta>[${stack}]</magenta> Starting the compilation in <yellow>transpileOnly</yellow> mode`
                     });
-                    trigger('log', {
+                    promise.trigger('log', {
                         value: `<magenta>[${stack}]</magenta> Listing all the files to transpile depending on:\n- ${stackObj.include
                             .map((t) => `<green>${t.replace(`${packageRoot_1.default()}/`, '')}</green>`)
                             .join('\n- ')}`
@@ -224,7 +226,7 @@ const fn = function compileTs(params, settings) {
                         });
                         files = [...files, ...filesFounded];
                     }
-                    trigger('log', {
+                    promise.trigger('log', {
                         value: `<magenta>[${stack}]</magenta> Found <yellow>${files.length}</yellow> file(s) to compile`
                     });
                     yield wait_1.default(10);
@@ -236,7 +238,8 @@ const fn = function compileTs(params, settings) {
                 }
             }
         }
-    }));
+    }))();
+    return promise;
 };
 module.exports = fn;
-//# sourceMappingURL=compileTs.js.map
+//# sourceMappingURL=module.js.map

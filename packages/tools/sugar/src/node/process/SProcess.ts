@@ -283,9 +283,13 @@ export = class SProcess extends __SPromise {
             this._settings.initialParams
           );
         } else if (this._settings.stdio === 'inherit') {
-          this.on('log,*.log', (data, metas) => {
-            console.log(__parseHtml(__toString(data.value || data)));
-          });
+          this.on(
+            'log,*.log,warn,*.warn,error,*.error,reject,*.reject',
+            (data, metas) => {
+              if (!data) return;
+              console.log(__parseHtml(__toString(data.value || data)));
+            }
+          );
         } else {
           const outputSettings =
             typeof this._settings.stdio === 'object'
@@ -459,7 +463,13 @@ export = class SProcess extends __SPromise {
     }
 
     __SPromise.pipe(this._processPromise, this, {
-      prefixStack: false
+      prefixStack: false,
+      filter: (value, metas) => {
+        if (settings.killOnError === true && metas.stack.match(/error$/)) {
+          return false;
+        }
+        return true;
+      }
     });
 
     // listen for "data" and "log" events

@@ -97,7 +97,9 @@ const fn = function (args = {}) {
             if (handlerPath.slice(-3) !== '.js')
                 handlerPath += '.js';
             if (!fs_1.default.existsSync(handlerPath)) {
-                console.warn(`Frontend handler "<cyan>${path_1.default.relative(packageRoot_1.default(), handlerPath)}</cyan>" does not exists...`);
+                promise.trigger('warn', {
+                    value: `Frontend handler "<cyan>${path_1.default.relative(packageRoot_1.default(), handlerPath)}</cyan>" does not exists...`
+                });
             }
             else {
                 const handlerFn = yield Promise.resolve().then(() => __importStar(require(handlerPath)));
@@ -127,8 +129,8 @@ const fn = function (args = {}) {
             .listen(settings.port, settings.hostname, () => {
             setTimeout(() => {
                 promise.trigger('log', {
-                    type: 'header',
-                    value: trimLines_1.default(`Your <primary>Frontend Express</primary> server is <green>up and running</green>:
+                    type: 'heading',
+                    value: trimLines_1.default(`Your <yellow>Frontend Express</yellow> server is <green>up and running</green>:
 
                 - Hostname        : <yellow>${settings.hostname}</yellow>
                 - Port            : <yellow>${settings.port}</yellow>

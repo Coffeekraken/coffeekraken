@@ -61,7 +61,8 @@ const fn: ISpawn = function spawn(
   const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
     settings = __deepMerge(
       {
-        ipc: true
+        ipc: true,
+        stdio: 'pipe'
       },
       settings
     );
@@ -147,9 +148,7 @@ const fn: ISpawn = function spawn(
   });
 
   // handle cancel
-  promise.on('cancel', async () => {
-    console.log('CANCELED');
-
+  promise.on('finally', () => {
     if (ipcServer !== undefined) {
       ipcServer.stop();
     }

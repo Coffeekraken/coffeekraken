@@ -113,7 +113,6 @@ class SSugarApp extends SPromise_1.default {
                             value
                         };
                     }
-                    // metas.stack = `module.${metas.stack}`;
                     return [value, metas];
                 }
             });
@@ -153,12 +152,6 @@ class SSugarApp extends SPromise_1.default {
      */
     _modulesReady() {
         setTimeout(() => {
-            // for (const [key, moduleObj] of Object.entries(this._modulesObjs)) {
-            //
-            //   if (moduleObj.instance.autoRun) {
-            //     moduleObj.instance.run();
-            //   }
-            // }
             this.state = 'ready';
         }, 20);
     }

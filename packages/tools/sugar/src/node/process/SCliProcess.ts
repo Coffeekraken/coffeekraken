@@ -85,8 +85,9 @@ const Cls: ISCliProcessCtor = class SCliProcess
 
     // @ts-ignore
     const pro = __spawn(command, [], {
-      shell: true,
-      ipc: false
+      ipc: false,
+      stdio: settings.stdio,
+      ...(settings.spawnSettings || {})
     });
 
     // @ts-ignore

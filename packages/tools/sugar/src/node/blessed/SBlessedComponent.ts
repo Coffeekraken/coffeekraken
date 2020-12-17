@@ -135,9 +135,7 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
     // extends parent
     super(settings.blessed || {});
 
-    if (this._settings.attach !== false && isNewScreen) {
-      SBlessedComponent.screen.append(this);
-    }
+    this._settings = settings;
 
     // save screen reference
     this._screen = SBlessedComponent.screen;
@@ -155,12 +153,13 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
       this._isDisplayed = false;
     });
 
-    // save the settings
-    this._settings = settings;
-
     // set render interval if not set already
     if (settings.framerate && !SBlessedComponent._framerateInterval) {
       this.setFramerate(settings.framerate);
+    }
+
+    if (this._settings.attach !== false && isNewScreen) {
+      SBlessedComponent.screen.append(this);
     }
 
     __onProcessExit(async () => {

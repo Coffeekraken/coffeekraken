@@ -67,7 +67,7 @@ const cls: ISWarningBlessedOutputComponentCtor = class SWarningBlessedOutputComp
 
     this._$content = __blessed.box({
       content: __parseHtml(
-        ['<yellow><bold>Warning:</bold></yellow>', '', logObj.value].join('\n')
+        ['<yellow><bold>Warning:</bold></yellow>', logObj.value].join('\n')
       ),
       top: 0,
       left: 3,

@@ -67,10 +67,7 @@ const Cls = class SCliProcess extends SProcess_1.default {
             alias: false
         });
         // @ts-ignore
-        const pro = spawn_1.default(command, [], {
-            shell: true,
-            ipc: false
-        });
+        const pro = spawn_1.default(command, [], Object.assign({ ipc: false, stdio: settings.stdio }, (settings.spawnSettings || {})));
         // @ts-ignore
         return pro;
     }

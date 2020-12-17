@@ -86,9 +86,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var treatAsValue_1 = __importDefault(require("./treatAsValue"));
     return /** @class */ (function (_super) {
         __extends(SPromise, _super);
-        // static get [Symbol.species]() {
-        //   return Promise;
-        // }
         /**
          * @name                  constructor
          * @type                  Function
@@ -190,6 +187,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @author 		Olivier Bossel<olivier.bossel@gmail.com>
              */
             _this._promiseState = 'pending';
+            /**
+             * @name          _buffer
+             * @type          Array
+             * @private
+             *
+             * Store all the triggered data that does not have any registered listener
+             * and that match with the ```settings.bufferedStacks``` stack
+             *
+             * @since       2.0.0
+             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+             */
+            _this._buffer = [];
+            /**
+             * @name          _stacks
+             * @type          Array
+             * @private
+             *
+             * Store all the registered stacks with their callStack, callback, etc...
+             *
+             * @since       2.0.0
+             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+             */
+            _this._stacks = {};
             Object.defineProperty(_this, '_resolvers', {
                 writable: true,
                 configurable: true,
@@ -207,11 +227,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 configurable: true,
                 enumerable: false,
                 value: {
-                    catch: [],
-                    resolve: [],
-                    reject: [],
-                    finally: [],
-                    cancel: []
+                    catch: {
+                        buffer: [],
+                        callStack: []
+                    },
+                    resolve: {
+                        buffer: [],
+                        callStack: []
+                    },
+                    reject: {
+                        buffer: [],
+                        callStack: []
+                    },
+                    finally: {
+                        buffer: [],
+                        callStack: []
+                    },
+                    cancel: {
+                        buffer: [],
+                        callStack: []
+                    }
                 }
             });
             Object.defineProperty(_this, '_settings', {
@@ -219,6 +254,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 configurable: true,
                 enumerable: false,
                 value: deepMerge_1.default({
+                    bufferTimeout: 100,
+                    bufferedStacks: [
+                        'log',
+                        '*.log',
+                        'warn',
+                        '*.warn',
+                        'error',
+                        '*.error'
+                    ],
+                    defaultCallTime: {
+                        finally: 1,
+                        reject: 1,
+                        resolve: 1,
+                        catch: 1,
+                        cancel: 1
+                    },
                     destroyTimeout: 5000,
                     id: uniqid_1.default()
                 }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings)
@@ -232,60 +283,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             }
             return _this;
         }
-        /**
-         * @name                  map
-         * @type                  Function
-         * @static
-         *
-         * This static function allows you to redirect some SPromise "events" to another SPromise instance
-         * with the ability to process the linked value before triggering it on the destination SPromise.
-         *
-         * @param         {SPromise}      sourceSPromise        The source SPromise instance on which to listen for "events"
-         * @param         {SPromise}      destSPromise          The destination SPromise instance on which to trigger the listened "events"
-         * @param         {Object}        [settings={}]         An object of settings to configure your pipe process
-         * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
-         * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
-         * - filter (null) {Function}: Specify a function to filter the "events". It will take as parameter the triggered value and the metas object. You must return true or false depending if you want to pipe the particular event or not
-         *
-         * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-         */
-        SPromise.map = function (sourceSPromise, destSPromise, settings) {
-            if (settings === void 0) { settings = {}; }
-            // settings
-            settings = deepMerge_1.default({
-                // stacks: 'then,catch,resolve,reject,finally,cancel',
-                stacks: 'catch,resolve,reject,finally,cancel',
-                processor: null,
-                filter: null
-            }, settings);
-            if (!(sourceSPromise instanceof SPromise) ||
-                !(destSPromise instanceof SPromise))
-                return;
-            // listen for all on the source promise
-            sourceSPromise.on(settings.stacks, function (value, metas) {
-                // check if we have a filter setted
-                if (settings.filter && !settings.filter(value, metas))
-                    return;
-                // check if need to process the value
-                if (settings.processor) {
-                    var res = settings.processor(value, metas);
-                    if (Array.isArray(res) && res.length === 2) {
-                        value = res[0];
-                        metas = res[1];
-                    }
-                    else {
-                        value = res;
-                    }
-                }
-                if (destSPromise[metas.stack] &&
-                    typeof destSPromise[metas.stack] === 'function') {
-                    destSPromise[metas.stack](value);
-                }
-                else {
-                    destSPromise.trigger(metas.stack, value);
-                }
-            });
-        };
         /**
          * @name                  pipe
          * @type                  Function
@@ -310,7 +307,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 stacks: '*',
                 prefixStack: true,
                 processor: null,
-                // exclude: ['then', 'catch', 'resolve', 'reject', 'finally', 'cancel'],
                 exclude: [],
                 filter: null
             }, settings);
@@ -617,7 +613,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * This is the method that will be called by the promise executor passed reject function
          *
          * @param         {Mixed}         arg       The value that you want to return back from the promise
-         * @param       {Array|String}         [stacksOrder='catch,reject,finally']      This specify in which order have to be called the stacks
+         * @param       {Array|String}         [stacksOrder='catch,error,reject,finally']      This specify in which order have to be called the stacks
          * @return        {Promise}                       A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value
          *
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -763,7 +759,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 stacks = stacks.split(',').map(function (s) { return s.trim(); });
             stacks.forEach(function (stack) {
                 if (!_this._stacks[stack]) {
-                    _this._stacks[stack] = [];
+                    _this._stacks[stack] = {
+                        buffer: [],
+                        callStack: []
+                    };
                 }
             });
         };
@@ -775,11 +774,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
-        SPromise.prototype._registerCallbackInStack = function (stack) {
-            var args = [];
-            for (var _i = 1; _i < arguments.length; _i++) {
-                args[_i - 1] = arguments[_i];
-            }
+        SPromise.prototype._registerCallbackInStack = function (stack, callback, settings) {
+            var _this = this;
+            if (settings === void 0) { settings = {}; }
+            settings = __assign({ callNumber: undefined }, settings);
             if (this._isDestroyed) {
                 throw new Error("Sorry but you can't call the \"" + stack + "\" method on this SPromise cause it has been destroyed...");
             }
@@ -787,22 +785,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (!this._stacks[stack]) {
                 this._registerNewStacks(stack);
             }
-            if (typeof stack === 'string')
-                stack = this._stacks[stack];
+            var stackObj = this._stacks[stack];
+            var callNumber = settings.callNumber;
             // process the args
-            var callback = args[0];
-            var callNumber = -1;
-            if (args.length === 2 && typeof args[0] === 'number') {
-                callback = args[1];
-                callNumber = args[0];
+            if (callNumber === undefined &&
+                this._settings.defaultCallTime[stack] !== undefined) {
+                callNumber = this._settings.defaultCallTime[stack];
+            }
+            else if (callNumber === undefined) {
+                callNumber = -1;
             }
             // make sure this is a function and register it to the _catchStack
-            if (typeof callback === 'function' && stack.indexOf(callback) === -1)
-                stack.push({
+            if (typeof callback === 'function')
+                stackObj.callStack.push({
                     callback: callback,
                     callNumber: callNumber,
                     called: 0
                 });
+            // check if a buffer exists for this particular stack
+            if (this._buffer.length > 0) {
+                setTimeout(function () {
+                    _this._buffer = _this._buffer.filter(function (item) {
+                        if (minimatch_1.default(item.stack, stack)) {
+                            _this.trigger(item.stack, item.value);
+                            return false;
+                        }
+                        return true;
+                    });
+                }, this._settings.bufferTimeout);
+            }
             // maintain chainability
             return this;
         };
@@ -814,7 +825,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * This function take an Array Stack as parameter and execute it to return the result
          *
-         * @param         {Array|String}             stack             The stack to execute. Can be the stack array directly, or just the stack name like "catch", etc.stack.stack.
+         * @param         {String}             stack             The stack to execute
          * @param         {Mixed}             initialValue      The initial value to pass to the first stack callback
          * @return        {Promise}                             A promise resolved with the stack result
          *
@@ -823,7 +834,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         SPromise.prototype._triggerStack = function (stack, initialValue, metas) {
             if (metas === void 0) { metas = {}; }
             return __awaiter(this, void 0, void 0, function () {
-                var currentCallbackReturnedValue, stackArray, metasObj, i, item, callbackResult;
+                var currentCallbackReturnedValue, stackArray, stackObj, i, bufferedStack, metasObj, i, item, callbackResult;
                 var _this = this;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -831,20 +842,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             currentCallbackReturnedValue = initialValue;
                             if (!this._stacks || Object.keys(this._stacks).length === 0)
                                 return [2 /*return*/, currentCallbackReturnedValue];
+                            // make sure the stack exist
+                            if (!this._stacks[stack]) {
+                                this._registerNewStacks(stack);
+                            }
                             stackArray = [];
-                            if (typeof stack === 'string') {
-                                if (this._stacks[stack]) {
-                                    stackArray = __spreadArrays(stackArray, this._stacks[stack]);
+                            stackObj = this._stacks[stack];
+                            if (stackObj && stackObj.callStack) {
+                                stackArray = __spreadArrays(stackArray, stackObj.callStack);
+                            }
+                            // check if the stack is a glob pattern
+                            Object.keys(this._stacks).forEach(function (stackName) {
+                                if (stackName === stack)
+                                    return;
+                                if (minimatch_1.default(stack, stackName) &&
+                                    _this._stacks[stackName] !== undefined) {
+                                    // the glob pattern match the triggered stack so add it to the stack array
+                                    stackArray = __spreadArrays(stackArray, _this._stacks[stackName].callStack);
                                 }
-                                // check if the stack is a glob pattern
-                                Object.keys(this._stacks).forEach(function (stackName) {
-                                    if (stackName === stack)
-                                        return;
-                                    if (minimatch_1.default(stack, stackName)) {
-                                        // the glob pattern match the triggered stack so add it to the stack array
-                                        stackArray = __spreadArrays(stackArray, _this._stacks[stackName]);
+                            });
+                            // handle buffers
+                            if (stackArray.length === 0) {
+                                for (i = 0; i < this._settings.bufferedStacks.length; i++) {
+                                    bufferedStack = this._settings.bufferedStacks[i];
+                                    if (minimatch_1.default(stack, bufferedStack)) {
+                                        this._buffer.push({
+                                            stack: stack,
+                                            value: initialValue
+                                        });
                                     }
-                                });
+                                }
+                                return [2 /*return*/, initialValue];
                             }
                             // filter the catchStack
                             stackArray.map(function (item) { return item.called++; });
@@ -978,13 +1006,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             stacks.forEach(function (name) {
                 // check if it has a callNumber specified using name:1
                 var splitedName = name.split(':');
-                var callNumber = -1;
+                var callNumber = undefined;
                 if (splitedName.length === 2) {
                     name = splitedName[0];
                     callNumber = parseInt(splitedName[1]);
                 }
                 // calling the registration method
-                _this._registerCallbackInStack(name, callNumber, callback);
+                _this._registerCallbackInStack(name, callback, {
+                    callNumber: callNumber
+                });
             });
             // maintain chainability
             return this;
@@ -1010,17 +1040,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 return this;
             }
             // get the stack
-            var stack = this._stacks[name];
-            if (!stack)
+            var stackObj = this._stacks[name];
+            if (!stackObj)
                 return this;
             // loop on the stack registered callback to finc the one to delete
-            stack = stack.filter(function (item) {
+            stackObj.callStack = stackObj.callStack.filter(function (item) {
                 if (item.callback === callback)
                     return false;
                 return true;
             });
             // make sure we have saved the new stack
-            this._stacks[name] = stack;
+            this._stacks[name] = stackObj;
             // maintain chainability
             return this;
         };

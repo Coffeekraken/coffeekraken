@@ -53,7 +53,8 @@ const Cls: ISBlessedProcessOutputCtor = class SBlessedProcessOutput
   ) {
     super(source, settings);
     this._output = new SBlessedOutput(source, {
-      ...this._settings
+      ...this._settings,
+      attach: true
     });
   }
 

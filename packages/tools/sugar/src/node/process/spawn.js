@@ -61,7 +61,8 @@ const fn = function spawn(command, args = [], settings = {}) {
     let ipcServer, serverData, isCancel = false;
     const promise = new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
         settings = deepMerge_1.default({
-            ipc: true
+            ipc: true,
+            stdio: 'pipe'
         }, settings);
         if (settings.ipc === true) {
             ipcServer = yield SIpcServer_1.default.getGlobalServer();
@@ -125,15 +126,14 @@ const fn = function spawn(command, args = [], settings = {}) {
         });
     }));
     // handle cancel
-    promise.on('cancel', () => __awaiter(this, void 0, void 0, function* () {
-        console.log('CANCELED');
+    promise.on('finally', () => {
         if (ipcServer !== undefined) {
             ipcServer.stop();
         }
         if (childProcess !== undefined) {
             childProcess.kill();
         }
-    }));
+    });
     return promise;
 };
 module.exports = fn;

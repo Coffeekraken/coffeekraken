@@ -7,7 +7,7 @@ module.exports = {
   modules: {
     frontendServer: {
       id: 'frontendServer',
-      name: 'Sugar Frontend Server',
+      name: 'Frontend Server',
       autoRun: true,
       description:
         'Expose an HTTP server using ExpressJs and serve requested files, views, etc...',
@@ -24,7 +24,7 @@ module.exports = {
     },
     compileTs: {
       id: 'compileTs',
-      name: 'Sugar Compile Typescript',
+      name: 'Compile Typescript',
       description:
         'Expose an HTTP server using ExpressJs and serve requested files, views, etc...',
       process: `${__packageRoot(

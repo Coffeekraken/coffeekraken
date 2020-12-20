@@ -242,4 +242,4 @@ const fn = function compileTs(params, settings) {
     return promise;
 };
 module.exports = fn;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=compileTs.js.map

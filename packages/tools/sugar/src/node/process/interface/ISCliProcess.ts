@@ -3,6 +3,7 @@ import { ISpawnSettings } from './ISpawn';
 
 export interface ISCliProcessSettings extends ISProcessSettings {
   spawnSettings?: ISpawnSettings;
+  stdio?: ISpawnSettings['stdio'];
 }
 
 export interface ISCliProcessCtor {

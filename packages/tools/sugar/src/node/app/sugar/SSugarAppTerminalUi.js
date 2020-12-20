@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
-const upperFirst_1 = __importDefault(require("../../string/upperFirst"));
 const SBlessedComponent_1 = __importDefault(require("../../blessed/SBlessedComponent"));
 const sugarHeading_1 = __importDefault(require("../../ascii/sugarHeading"));
 const sugar_1 = __importDefault(require("../../config/sugar"));
@@ -13,7 +12,6 @@ const blessed_1 = __importDefault(require("blessed"));
 const parseHtml_1 = __importDefault(require("../../terminal/parseHtml"));
 const countLine_1 = __importDefault(require("../../string/countLine"));
 const SBlessedOutput_1 = __importDefault(require("../../blessed/output/SBlessedOutput"));
-const color_1 = __importDefault(require("../../color/color"));
 const hotkey_1 = __importDefault(require("../../keyboard/hotkey"));
 const json_1 = __importDefault(require("../../package/json"));
 const SNotification_1 = __importDefault(require("../../blessed/notification/SNotification"));
@@ -59,15 +57,35 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         this._params = Object.assign({}, params);
         this._settings = sugar_1.default('sugar-app');
         this._serverSettings = this._params.modules[this._settings.welcome.serverModule];
-        this._modules = clone_1.default(this._settings.modules, { deep: true });
-        this.$welcome = this._initWelcome(params);
-        this.$modules = this._initConsoles();
+        this.$container = this._initContainer();
+        this.$content = this._initContent();
         this.$topBar = this._initTopBar();
-        this.$bottomBar = this._initBottomBar();
-        hotkey_1.default('escape').on('press', () => {
-            if (this.$modules.parent) {
-                this.$modules.detach();
+        this.$separator = this._initSeparator();
+        // init the "welcome" module
+        const $welcome = this._initWelcome(params);
+        this.$content.append($welcome);
+        this._modules = {
+            welcome: {
+                id: 'welcome',
+                name: 'Welcome',
+                state: 'ready',
+                $content: $welcome
             }
+        };
+        Object.keys(this._settings.modules).forEach((moduleId) => {
+            const moduleObj = clone_1.default(this._settings.modules[moduleId], {
+                deep: true
+            });
+            this._modules[moduleId] = moduleObj;
+        });
+        this.$bottomBar = this._initBottomBar();
+        this.$list = this._initModulesList();
+        this._initModulesContent(this.$content);
+        // set focus to list
+        this.$list.focus();
+        hotkey_1.default('escape').on('press', () => {
+            this._showModule('welcome');
+            this.$list.select(0);
         });
         Object.keys(this._modules).forEach((moduleName, i) => {
             const moduleObj = this._modules[moduleName];
@@ -75,6 +93,8 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                 if (!this._modulesReady)
                     return;
                 this._showModule(moduleObj.id);
+                this.$list.select(i);
+                this.$list.focus();
                 // __SIpc.trigger('sugar.ui.displayedModule', moduleObj.id);
             });
         });
@@ -103,99 +123,42 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         });
         this.append(this.$topBar);
         this.append(this.$bottomBar);
-        this.append(this.$welcome);
-        // update bottom bar
-        setInterval(() => {
-            this._updateBottomBar();
-        }, 100);
+        this.append(this.$container);
+        this.$container.append(this.$list);
+        this.$container.append(this.$content);
+        this.$container.append(this.$separator);
     }
     _getDisplayedModuleObj() {
         if (!this._displayedModuleId)
             return {};
-        if (!this.$modules.parent)
+        if (!this.$consoles.parent)
             return {};
         return this._findModuleObjById(this._displayedModuleId);
     }
-    _showModule(moduleId) {
-        const moduleObj = this._findModuleObjById(moduleId);
-        if (!moduleObj || !moduleObj.$container)
+    _showModule(moduleIdOrName) {
+        let moduleObj = this._findModuleObjById(moduleIdOrName);
+        if (!moduleObj)
+            moduleObj = this._findModuleObjByName(moduleIdOrName);
+        if (!moduleObj || !moduleObj.$content)
             return;
         this._displayedModuleId = moduleObj.id;
-        this.$modules.children.forEach(($child) => {
-            $child.detach();
+        this.$content.children.forEach(($child) => {
+            $child.hide();
         });
-        if (!this.$modules.parent) {
-            this.append(this.$modules);
-        }
-        this.$modules.append(moduleObj.$container);
-    }
-    _updateBottomBar() {
-        let content = '';
-        Object.keys(this._params.modules).forEach((moduleName, i) => {
-            const moduleObj = this._modules[moduleName];
-            let bg, fg;
-            switch (moduleObj.state) {
-                case 'success':
-                case 'complete':
-                    bg = 'green';
-                    fg = 'black';
-                    break;
-                case 'running':
-                case 'start':
-                    bg = 'blue';
-                    fg = 'white';
-                    break;
-                case 'watching':
-                    bg = 'black';
-                    fg = 'white';
-                    break;
-                case 'error':
-                    bg = 'red';
-                    fg = 'black';
-                    break;
-                case 'ready':
-                    bg = 'black';
-                    fg = 'white';
-                    break;
-                default:
-                    bg = 'yellow';
-                    fg = 'black';
-                    break;
-            }
-            let spinner = '';
-            switch (moduleObj.state) {
-                case 'watching':
-                case 'running':
-                case 'start':
-                    spinner = `${moduleObj.spinner.frame()}`;
-                    break;
-                case 'success':
-                case 'complete':
-                    spinner = `✓ `;
-                    break;
-                case 'error':
-                    spinner = '✖ ';
-                    break;
-                default:
-                    spinner = `› `;
-                    break;
-            }
-            const moduleString = ` ${spinner}${moduleObj.id} `
-                .replace('[36m', '')
-                .replace('[39m', '')
-                .split('')
-                .map((char) => {
-                return `<bg${upperFirst_1.default(bg)}><${fg}>${char}</${fg}></bg${upperFirst_1.default(bg)}>`;
-            })
-                .join('');
-            content += moduleString;
-        });
-        this.$bottomBar.setContent(parseHtml_1.default(content));
+        moduleObj.$content.show();
     }
     _findModuleObjById(id) {
         for (let i = 0; i < Object.keys(this._modules).length; i++) {
             const moduleObj = this._modules[Object.keys(this._modules)[i]];
             if (moduleObj.id === id)
+                return moduleObj;
+        }
+        return false;
+    }
+    _findModuleObjByName(name) {
+        for (let i = 0; i < Object.keys(this._modules).length; i++) {
+            const moduleObj = this._modules[Object.keys(this._modules)[i]];
+            if (moduleObj.name === name)
                 return moduleObj;
         }
         return false;
@@ -216,7 +179,7 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         // moduleObj.$console.log(data);
     }
     _moduleError(data, metas) {
-        if (this.$modules.parent)
+        if (this.$consoles.parent)
             return;
         const moduleObj = this._findModuleObjById(data.module.id);
         if (moduleObj && moduleObj.$status) {
@@ -269,10 +232,12 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
     }
     _moduleState(data, metas) {
         const moduleObj = this._modules[data.module.idx];
-        if (!moduleObj.spinner)
-            moduleObj.spinner = ora_1.default();
         if (!moduleObj)
             return;
+        clearTimeout(moduleObj._stateTimeout);
+        moduleObj._stateTimeout = setTimeout(() => {
+            delete moduleObj._stateTimeout;
+        }, 2000);
         moduleObj.state = data.value;
     }
     _moduleStart(data, metas) {
@@ -294,6 +259,129 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
             }
         });
         this.append($startNotification);
+    }
+    _initModulesList() {
+        const listItems = ['1.Welcome'];
+        Object.keys(this._modules).forEach((moduleName, i) => {
+            const moduleObj = this._modules[moduleName];
+            listItems.push(`${i + 2}.${moduleObj.name}`);
+        });
+        for (let i = 3; i < 13; i++) {
+            listItems.push(`${i}.Item`);
+        }
+        const $list = blessed_1.default.list({
+            top: 0,
+            left: 0,
+            bottom: 0,
+            width: '20%',
+            mouse: true,
+            keys: true,
+            items: listItems,
+            padding: {
+                top: 1,
+                left: 2,
+                right: 2,
+                bottom: 1
+            },
+            style: {
+                selected: {
+                    fg: 'yellow'
+                }
+            }
+        });
+        $list.on('select', (item) => {
+            const name = item.content.split('.').pop();
+            const moduleObj = this._findModuleObjByName(name);
+            this._showModule(moduleObj.id);
+        });
+        setInterval(() => {
+            this._updateModulesList();
+        }, 100);
+        return $list;
+    }
+    _updateModulesList() {
+        Object.keys(this._modules).forEach((moduleName, i) => {
+            let prefix = '', bg, fg;
+            const moduleObj = this._modules[moduleName];
+            if (!moduleObj.spinner)
+                moduleObj.spinner = ora_1.default();
+            switch (moduleObj.state) {
+                case 'success':
+                case 'complete':
+                    if (moduleObj._stateTimeout)
+                        prefix = '✓';
+                    bg = 'green';
+                    fg = 'black';
+                    break;
+                case 'running':
+                case 'start':
+                    prefix = moduleObj.spinner.frame().trim();
+                    bg = 'blue';
+                    fg = 'cyan';
+                    break;
+                case 'watching':
+                    prefix = moduleObj.spinner.frame().trim();
+                    bg = 'black';
+                    fg = 'magenta';
+                    break;
+                case 'error':
+                    if (moduleObj._stateTimeout)
+                        prefix = '✖';
+                    bg = 'red';
+                    fg = 'red';
+                    break;
+                case 'ready':
+                    if (moduleObj._stateTimeout)
+                        prefix = '✓';
+                    bg = 'black';
+                    fg = 'green';
+                    break;
+                default:
+                    prefix = '';
+                    bg = 'yellow';
+                    fg = 'black';
+                    break;
+            }
+            const moduleString = `${i + 1}.<${fg}>${prefix}</${fg}>${prefix !== '' ? '.' : ''}${moduleObj.name}`;
+            this.$list.children[i].setContent(parseHtml_1.default(moduleString));
+        });
+    }
+    _initContainer() {
+        const $container = blessed_1.default.box({
+            top: 3,
+            left: 0,
+            right: 0,
+            bottom: 1,
+            width: '100%',
+            style: {}
+        });
+        return $container;
+    }
+    _initSeparator() {
+        const $separator = blessed_1.default.box({
+            top: 0,
+            left: '20%',
+            bottom: 0,
+            width: 1,
+            style: {
+                bg: 'yellow'
+            }
+        });
+        return $separator;
+    }
+    _initContent() {
+        const $content = blessed_1.default.box({
+            left: '20%',
+            width: '80%-2',
+            height: '100%-2',
+            padding: {
+                top: 1,
+                left: 2,
+                bottom: 1,
+                right: 2
+            }
+        });
+        return $content;
     }
     _initTopBar() {
         const $topBar = blessed_1.default.box({
@@ -356,6 +444,7 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
             height: 'shrink',
             style: {}
         });
+        console.log(params);
         const logoString = sugarHeading_1.default({
             borders: false
         });
@@ -422,7 +511,7 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         return $centeredBox;
     }
     /**
-     * @name             _initConsoles
+     * @name             _initModulesContent
      * @type              Function
      * @private
      *
@@ -433,60 +522,9 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
      * @since             2.0.0
      *
      */
-    _initConsoles() {
-        const $consolesContainer = blessed_1.default.box({
-            width: '100%',
-            height: '100%-1',
-            top: 0,
-            left: 0,
-            right: 0,
-            mouse: true,
-            keys: true,
-            clickable: false,
-            scrollable: true,
-            scrollbar: {
-                ch: ' ',
-                inverse: true
-            },
-            style: {
-                fg: 'white',
-                scrollbar: {
-                    bg: color_1.default('terminal.primary').toString()
-                }
-            },
-            padding: {
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 2
-            }
-        });
-        Object.keys(this._modules).forEach((moduleName) => {
+    _initModulesContent($in) {
+        Object.keys(this._modules).forEach((moduleName, i) => {
             const moduleObj = this._modules[moduleName];
-            const $container = blessed_1.default.box({
-                top: 0,
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: '100%',
-                style: {}
-            });
-            const $topBar = blessed_1.default.box({
-                top: 0,
-                left: 0,
-                right: 0,
-                height: 3,
-                style: {
-                    bg: 'yellow',
-                    fg: 'black'
-                },
-                padding: {
-                    top: 1,
-                    left: 2,
-                    right: 2
-                },
-                content: parseHtml_1.default(`<black>${moduleObj.name}</black> | <white>${moduleObj.id}</white>`)
-            });
             let OutputClass;
             if (moduleObj.ui) {
                 const requirePath = path_1.default.relative(__dirname, moduleObj.ui);
@@ -504,21 +542,20 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                     }
                 });
             });
-            const $console = new OutputClass(pipedSources, Object.assign({ blessed: {
+            const $content = new OutputClass(pipedSources, Object.assign({ blessed: {
                     width: '100%',
-                    height: '100%-3',
-                    top: 4,
+                    height: '100%',
+                    top: 0,
                     left: 0,
                     right: 0,
-                    bottom: 2
+                    bottom: 0,
+                    style: {}
                 } }, moduleObj));
-            $container.append($console);
-            $container.append($topBar);
-            moduleObj.$container = $container;
-            moduleObj.$topBar = $topBar;
-            moduleObj.$console = $console;
+            moduleObj.$content = $content;
+            console.log(moduleObj.id);
+            $in.append($content);
+            $content.hide();
         });
-        return $consolesContainer;
     }
 }
 exports.default = SSugarAppTerminalUi;

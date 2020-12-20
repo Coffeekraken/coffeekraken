@@ -11,4 +11,4 @@ function compileTs(stringArgs = '') {
     pro.run(stringArgs);
 }
 module.exports = compileTs;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=ts.cli.js.map

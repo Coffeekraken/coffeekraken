@@ -62,17 +62,39 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
       this._settings.welcome.serverModule
     ];
 
-    this._modules = __clone(this._settings.modules, { deep: true });
-
-    this.$welcome = this._initWelcome(params);
-    this.$modules = this._initConsoles();
+    this.$container = this._initContainer();
+    this.$content = this._initContent();
     this.$topBar = this._initTopBar();
+    this.$separator = this._initSeparator();
+
+    // init the "welcome" module
+    const $welcome = this._initWelcome(params);
+    this.$content.append($welcome);
+    this._modules = {
+      welcome: {
+        id: 'welcome',
+        name: 'Welcome',
+        state: 'ready',
+        $content: $welcome
+      }
+    };
+    Object.keys(this._settings.modules).forEach((moduleId) => {
+      const moduleObj = __clone(this._settings.modules[moduleId], {
+        deep: true
+      });
+      this._modules[moduleId] = moduleObj;
+    });
+
     this.$bottomBar = this._initBottomBar();
+    this.$list = this._initModulesList();
+    this._initModulesContent(this.$content);
+
+    // set focus to list
+    this.$list.focus();
 
     __hotkey('escape').on('press', () => {
-      if (this.$modules.parent) {
-        this.$modules.detach();
-      }
+      this._showModule('welcome');
+      this.$list.select(0);
     });
 
     Object.keys(this._modules).forEach((moduleName, i) => {
@@ -80,6 +102,8 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
       __hotkey(`${i + 1}`).on('press', () => {
         if (!this._modulesReady) return;
         this._showModule(moduleObj.id);
+        this.$list.select(i);
+        this.$list.focus();
         // __SIpc.trigger('sugar.ui.displayedModule', moduleObj.id);
       });
     });
@@ -111,111 +135,43 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
 
     this.append(this.$topBar);
     this.append(this.$bottomBar);
-    this.append(this.$welcome);
-
-    // update bottom bar
-    setInterval(() => {
-      this._updateBottomBar();
-    }, 100);
+    this.append(this.$container);
+    this.$container.append(this.$list);
+    this.$container.append(this.$content);
+    this.$container.append(this.$separator);
   }
 
   _getDisplayedModuleObj() {
     if (!this._displayedModuleId) return {};
-    if (!this.$modules.parent) return {};
+    if (!this.$consoles.parent) return {};
     return this._findModuleObjById(this._displayedModuleId);
   }
 
-  _showModule(moduleId: any) {
-    const moduleObj = this._findModuleObjById(moduleId);
-    if (!moduleObj || !moduleObj.$container) return;
+  _showModule(moduleIdOrName: any) {
+    let moduleObj = this._findModuleObjById(moduleIdOrName);
+    if (!moduleObj) moduleObj = this._findModuleObjByName(moduleIdOrName);
+    if (!moduleObj || !moduleObj.$content) return;
 
     this._displayedModuleId = moduleObj.id;
 
-    this.$modules.children.forEach(($child: any) => {
-      $child.detach();
+    this.$content.children.forEach(($child: any) => {
+      $child.hide();
     });
-
-    if (!this.$modules.parent) {
-      this.append(this.$modules);
-    }
-
-    this.$modules.append(moduleObj.$container);
-  }
-
-  _updateBottomBar() {
-    let content = '';
-
-    Object.keys(this._params.modules).forEach((moduleName, i) => {
-      const moduleObj = this._modules[moduleName];
-      let bg: any, fg: any;
-      switch (moduleObj.state) {
-        case 'success':
-        case 'complete':
-          bg = 'green';
-          fg = 'black';
-          break;
-        case 'running':
-        case 'start':
-          bg = 'blue';
-          fg = 'white';
-          break;
-        case 'watching':
-          bg = 'black';
-          fg = 'white';
-          break;
-        case 'error':
-          bg = 'red';
-          fg = 'black';
-          break;
-        case 'ready':
-          bg = 'black';
-          fg = 'white';
-          break;
-        default:
-          bg = 'yellow';
-          fg = 'black';
-          break;
-      }
-
-      let spinner = '';
-      switch (moduleObj.state) {
-        case 'watching':
-        case 'running':
-        case 'start':
-          spinner = `${moduleObj.spinner.frame()}`;
-          break;
-        case 'success':
-        case 'complete':
-          spinner = `✓ `;
-          break;
-        case 'error':
-          spinner = '✖ ';
-          break;
-        default:
-          spinner = `› `;
-          break;
-      }
-
-      const moduleString = ` ${spinner}${moduleObj.id} `
-        .replace('[36m', '')
-        .replace('[39m', '')
-        .split('')
-        .map((char) => {
-          return `<bg${__upperFirst(
-            bg
-          )}><${fg}>${char}</${fg}></bg${__upperFirst(bg)}>`;
-        })
-        .join('');
-      content += moduleString;
-    });
-
-    this.$bottomBar.setContent(__parseHtml(content));
+    moduleObj.$content.show();
   }
 
   _findModuleObjById(id: any) {
     for (let i = 0; i < Object.keys(this._modules).length; i++) {
       const moduleObj = this._modules[Object.keys(this._modules)[i]];
       if (moduleObj.id === id) return moduleObj;
+    }
+    return false;
+  }
+
+  _findModuleObjByName(name: any) {
+    for (let i = 0; i < Object.keys(this._modules).length; i++) {
+      const moduleObj = this._modules[Object.keys(this._modules)[i]];
+      if (moduleObj.name === name) return moduleObj;
     }
     return false;
   }
@@ -236,7 +192,7 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
   }
 
   _moduleError(data: any, metas: any) {
-    if (this.$modules.parent) return;
+    if (this.$consoles.parent) return;
 
     const moduleObj = this._findModuleObjById(data.module.id);
     if (moduleObj && moduleObj.$status) {
@@ -306,9 +262,11 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
 
   _moduleState(data: any, metas: any) {
     const moduleObj = this._modules[data.module.idx];
-    if (!moduleObj.spinner) moduleObj.spinner = __ora();
     if (!moduleObj) return;
-
+    clearTimeout(moduleObj._stateTimeout);
+    moduleObj._stateTimeout = setTimeout(() => {
+      delete moduleObj._stateTimeout;
+    }, 2000);
     moduleObj.state = data.value;
   }
 
@@ -337,6 +295,143 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
     );
 
     this.append($startNotification);
+  }
+
+  _initModulesList() {
+    const listItems = ['1.Welcome'];
+    Object.keys(this._modules).forEach((moduleName, i) => {
+      const moduleObj = this._modules[moduleName];
+      listItems.push(`${i + 2}.${moduleObj.name}`);
+    });
+
+    for (let i = 3; i < 13; i++) {
+      listItems.push(`${i}.Item`);
+    }
+
+    const $list = __blessed.list({
+      top: 0,
+      left: 0,
+      bottom: 0,
+      width: '20%',
+      mouse: true,
+      keys: true,
+      items: listItems,
+      padding: {
+        top: 1,
+        left: 2,
+        right: 2,
+        bottom: 1
+      },
+      style: {
+        selected: {
+          fg: 'yellow'
+        }
+      }
+    });
+
+    $list.on('select', (item) => {
+      const name = item.content.split('.').pop();
+      const moduleObj = this._findModuleObjByName(name);
+      this._showModule(moduleObj.id);
+    });
+
+    setInterval(() => {
+      this._updateModulesList();
+    }, 100);
+
+    return $list;
+  }
+
+  _updateModulesList() {
+    Object.keys(this._modules).forEach((moduleName, i) => {
+      let prefix = '',
+        bg,
+        fg;
+
+      const moduleObj = this._modules[moduleName];
+      if (!moduleObj.spinner) moduleObj.spinner = __ora();
+
+      switch (moduleObj.state) {
+        case 'success':
+        case 'complete':
+          if (moduleObj._stateTimeout) prefix = '✓';
+          bg = 'green';
+          fg = 'black';
+          break;
+        case 'running':
+        case 'start':
+          prefix = moduleObj.spinner.frame().trim();
+          bg = 'blue';
+          fg = 'cyan';
+          break;
+        case 'watching':
+          prefix = moduleObj.spinner.frame().trim();
+          bg = 'black';
+          fg = 'magenta';
+          break;
+        case 'error':
+          if (moduleObj._stateTimeout) prefix = '✖';
+          bg = 'red';
+          fg = 'red';
+          break;
+        case 'ready':
+          if (moduleObj._stateTimeout) prefix = '✓';
+          bg = 'black';
+          fg = 'green';
+          break;
+        default:
+          prefix = '';
+          bg = 'yellow';
+          fg = 'black';
+          break;
+      }
+
+      const moduleString = `${i + 1}.<${fg}>${prefix}</${fg}>${
+        prefix !== '' ? '.' : ''
+      }${moduleObj.name}`;
+
+      this.$list.children[i].setContent(__parseHtml(moduleString));
+    });
+  }
+
+  _initContainer() {
+    const $container = __blessed.box({
+      top: 3,
+      left: 0,
+      right: 0,
+      bottom: 1,
+      width: '100%',
+      style: {}
+    });
+    return $container;
+  }
+
+  _initSeparator() {
+    const $separator = __blessed.box({
+      top: 0,
+      left: '20%',
+      bottom: 0,
+      width: 1,
+      style: {
+        bg: 'yellow'
+      }
+    });
+    return $separator;
+  }
+
+  _initContent() {
+    const $content = __blessed.box({
+      left: '20%',
+      width: '80%-2',
+      height: '100%-2',
+      padding: {
+        top: 1,
+        left: 2,
+        bottom: 1,
+        right: 2
+      }
+    });
+    return $content;
   }
 
   _initTopBar() {
@@ -405,6 +500,7 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
       height: 'shrink',
       style: {}
     });
+    console.log(params);
 
     const logoString = __sugarHeading({
       borders: false
@@ -487,7 +583,7 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
   }
 
   /**
-   * @name             _initConsoles
+   * @name             _initModulesContent
    * @type              Function
    * @private
    *
@@ -498,65 +594,9 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
    * @since             2.0.0
    *
    */
-  _initConsoles() {
-    const $consolesContainer = __blessed.box({
-      width: '100%',
-      height: '100%-1',
-      top: 0,
-      left: 0,
-      right: 0,
-      mouse: true,
-      keys: true,
-      clickable: false,
-      scrollable: true,
-      scrollbar: {
-        ch: ' ',
-        inverse: true
-      },
-      style: {
-        fg: 'white',
-        scrollbar: {
-          bg: __color('terminal.primary').toString()
-        }
-      },
-      padding: {
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 2
-      }
-    });
-
-    Object.keys(this._modules).forEach((moduleName) => {
+  _initModulesContent($in) {
+    Object.keys(this._modules).forEach((moduleName, i) => {
       const moduleObj = this._modules[moduleName];
-
-      const $container = __blessed.box({
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: '100%',
-        style: {}
-      });
-
-      const $topBar = __blessed.box({
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 3,
-        style: {
-          bg: 'yellow',
-          fg: 'black'
-        },
-        padding: {
-          top: 1,
-          left: 2,
-          right: 2
-        },
-        content: __parseHtml(
-          `<black>${moduleObj.name}</black> | <white>${moduleObj.id}</white>`
-        )
-      });
 
       let OutputClass;
       if (moduleObj.ui) {
@@ -576,26 +616,25 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
         });
       });
 
-      const $console = new OutputClass(pipedSources, {
+      const $content = new OutputClass(pipedSources, {
         blessed: {
           width: '100%',
-          height: '100%-3',
-          top: 4,
+          height: '100%',
+          top: 0,
           left: 0,
           right: 0,
-          bottom: 2
+          bottom: 0,
+          style: {}
         },
         ...moduleObj
       });
 
-      $container.append($console);
-      $container.append($topBar);
+      moduleObj.$content = $content;
 
-      moduleObj.$container = $container;
-      moduleObj.$topBar = $topBar;
-      moduleObj.$console = $console;
+      console.log(moduleObj.id);
+
+      $in.append($content);
+      $content.hide();
     });
-
-    return $consolesContainer;
   }
 }

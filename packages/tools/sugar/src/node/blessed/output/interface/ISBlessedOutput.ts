@@ -15,7 +15,11 @@ export interface ISBlessedOutputMetas {
   content?: string;
 }
 export interface ISBlessedOutputCtor {
-  new (settings?: ISBlessedOutputSettings);
+  new (
+    sources: any[],
+    handlerInstance: any,
+    settings?: ISBlessedOutputSettings
+  );
   registeredComponents: Object;
   registerComponent(
     component: ISBlessedOutputComponentCtor,
@@ -24,4 +28,6 @@ export interface ISBlessedOutputCtor {
   ): void;
 }
 
-export default interface ISBlessedOutput {}
+export default interface ISBlessedOutput {
+  _handlerInstance: any;
+}

@@ -35,15 +35,15 @@ import __SWarningBlessedOutputComponent from './components/SWarningBlessedOutput
 import __SHeadingBlessedOutputComponent from './components/SHeadingBlessedOutputComponent';
 
 /**
- * @name                  SOutput
- * @namespace           sugar.node.blessed
+ * @name                  SBlessedOutput
+ * @namespace           sugar.node.blessed.output
  * @type                  Class
  * @wip
  *
  * This class is a simple SPanel extended one that accesp an SOutput instance
  * to log the data's from and display an simple UI depending on the SOutput configured keys
  *
- * @param         {SOutput}            process           The SOutput instance you want to attach
+ * @param         {SPromise[]}            sources           An array of sources to display with this output instance
  * @param         {Object}              [settings={}]     The settings object to configure your SOutput
  * - filter (null) {Function}: Specify a function that will filter the logs to display. This function will receive two parameters. The data object to log and the metas object of the SPromise instance. If you return true, the log will pass the filter. If you return false, the log will not being displayed. And if you return an updated data object, the log will be the one you returned...
  * - maxItemsByGroup (1) {Number}: Specify the number of logs to display by group
@@ -113,6 +113,18 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
   }
 
   /**
+   * @name      _handlerInstance
+   * @type      Any
+   * @private
+   *
+   * Store the handler instance passed in the constructor
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _handlerInstance;
+
+  /**
    * @name      stack
    * @type      Object[]
    *
@@ -132,7 +144,7 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(sources, settings = {}) {
+  constructor(sources, handlerInstance, settings = {}) {
     // extends SPanel
     super(
       __deepMerge(
@@ -187,6 +199,7 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
       )
     );
 
+    this._handlerInstance = handlerInstance;
     this._sources = Array.isArray(sources) ? sources : [sources];
 
     // listen for resizing

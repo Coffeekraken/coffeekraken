@@ -11,15 +11,9 @@ module.exports = {
       autoRun: true,
       description:
         'Expose an HTTP server using ExpressJs and serve requested files, views, etc...',
-      process: `${__packageRoot(
+      processPath: `${__packageRoot(
         __dirname
       )}/src/node/server/frontend/SFrontendServerProcess`,
-      // module: `${__packageRoot(
-      //   __dirname
-      // )}/src/node/server/frontend/SFrontendServerSugarAppModule`,
-      // interface: `${__packageRoot(
-      //   __dirname
-      // )}/src/node/server/frontend/interface/SFrontendServerInterface`,
       params: '[config.frontend]'
     },
     compileTs: {
@@ -27,7 +21,7 @@ module.exports = {
       name: 'Compile Typescript',
       description:
         'Expose an HTTP server using ExpressJs and serve requested files, views, etc...',
-      process: `${__packageRoot(
+      processPath: `${__packageRoot(
         __dirname
       )}/src/node/typescript/compile/SCompileTsProcess`,
       params: '[config.ts]'

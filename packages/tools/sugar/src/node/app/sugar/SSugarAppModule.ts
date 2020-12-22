@@ -49,6 +49,7 @@ export default class SSugarAppModule extends __SPromise {
   }
   _setState(value) {
     // trigger an event
+    this.trigger(`state.${value}`, true);
     this.trigger('state', value);
     this._state = value;
   }
@@ -148,21 +149,22 @@ export default class SSugarAppModule extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(params = {}, settings = {}) {
+  constructor(moduleObj, settings = {}) {
     super(
       __deepMerge(
         {
           id: 'SSugarApp',
           name: 'Sugar App Module',
-          autoStart: true,
           autoRun: false,
-          shortcuts: {},
+          mainProcessId: 'main',
+          processUsedForState: undefined,
           processSettings: {}
         },
         settings
       )
     );
     this._settings.id = `SSugarAppModule.${this._settings.id}`;
+    this._moduleObj = moduleObj;
 
     // __SIpc.on('sugar.ui.displayedModule', (moduleId) => {
     //   this._active = this.id === moduleId;
@@ -173,32 +175,59 @@ export default class SSugarAppModule extends __SPromise {
 
     // register the module in the list
     SSugarAppModule._registeredModulesArray.push(this);
-    this.on('cancel', () => {
+    this.on('finally', () => {
       const idx = SSugarAppModule._registeredModulesArray.indexOf(this);
       if (idx === -1) return;
       SSugarAppModule._registeredModulesArray.splice(idx, 1);
     });
 
     if (this.constructor.interface) {
-      this.constructor.interface.apply(params);
-    }
-
-    this.params = params;
-
-    // start if needed
-    if (this._settings.autoStart) {
-      this.start(this.params, this._settings);
+      this.constructor.interface.apply(this._moduleObj);
     }
 
     // init shortcuts
     this._initShortcuts();
 
-    // mark as ready
-    this.ready();
+    // listen when ready
+    this.on('state.ready:1', () => {
+      if (this._settings.autoRun === true) {
+        this.process.run();
+      }
+    });
   }
 
   /**
-   * @name          $ui
+   * @name          process
+   * @type          SProcess
+   * @get
+   *
+   * Access the "main" registered process
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get process() {
+    return this._moduleProcesses[this._settings.mainProcessId];
+  }
+
+  /**
+   * @name          processUsedForState
+   * @type          String
+   * @get
+   *
+   * Get the process id that is used for setting the module state
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get processUsedForState() {
+    if (this._settings.processUsedForState === undefined)
+      return this._settings.mainProcessId;
+    return this._settings.processUsedForState;
+  }
+
+  /**
+   * @name          $output
    * @type          Function
    * @get
    *
@@ -207,14 +236,46 @@ export default class SSugarAppModule extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get $ui() {
-    if (!this._$ui) {
-      this._$ui = __blessed.box({
+  get $output() {
+    if (!this._$output) {
+      this._$output = __blessed.box({
         content:
           'No ui has been provided for this module. To create one, use the "<yellow>SSugarAppModule.createUi</yellow>" method...'
       });
     }
-    return this._$ui;
+    return this._$output;
+  }
+
+  /**
+   * @name          activate
+   * @type          Function
+   *
+   * This method allows you to activate the module.
+   * This mean that the shortcuts, etc will be usable
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  activate() {
+    if (this._active === true) return;
+    this._active = true;
+    this.trigger('activate', true);
+  }
+
+  /**
+   * @name          unactivate
+   * @type          Function
+   *
+   * This method allows you to unactivate the module.
+   * This mean that the shortcuts, etc will be unusable
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  unactivate() {
+    if (this._active === false) return;
+    this._active = false;
+    this.trigger('unactivate', true);
   }
 
   /**
@@ -290,86 +351,53 @@ export default class SSugarAppModule extends __SPromise {
   }
 
   /**
-   * @name        run
+   * @name        registerProcess
    * @type        Function
    *
-   * This method simply take an SPromise process or whatever and listen for
-   * important events to keep the module updated
+   * This method allows you to register a new process "SProcess" based instance
+   * that you will be able to use later on by calling the "run" or "stop" module method.
    *
-   * @param     {Object}      params        An object of parameter to pass to the initiated process
-   * @param     {Object}      [settings={}]     An object of settings to pass to the initiated process
-   * @return    {SPromise}                  The initiated process
-   *
-   * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  run(params = {}, settings = {}, processId = 'main') {
-    if (!this._moduleProcesses || !this._moduleProcesses[processId]) {
-      throw new __SError(
-        `Sorry but you cannot run a module process that does not have been registered during the "start" phase. Here's the available module processes: ${Object.keys(
-          this._moduleProcesses
-        ).join(',')}`
-      );
-    }
-    settings = __deepMerge(this._settings, settings);
-    this._moduleProcesses[processId].run(params, settings);
-  }
-
-  /**
-   * @name        start
-   * @type        Function
-   *
-   * This method simply take an SPromise instance of a running process
-   * and add some listeners on like the "error" one, etc...
-   * It also pipe the process events on this module instance
-   * so you don't have to take care of that manualy...
-   *
-   * @param       {SPromise}      moduleProcess        The process you want to observe automatically
-   * @return      {SPromise}                            The same process passed as parameter just in case
+   * @param       {SProcess}        pro       The process instance you want to register
+   * @param       {String}      [id='main']      An id for your instance to use later
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  start(moduleProcess) {
-    if (moduleProcess instanceof __SPromise) {
-      this._moduleProcesses = {
-        main: moduleProcess
-      };
-      // Pipe the process
-      __SPromise.pipe(moduleProcess, this);
-    } else {
-      this._moduleProcesses = moduleProcess;
-      Object.keys(moduleProcess).forEach((moduleId) => {
-        const pro = moduleProcess[moduleId];
-        // Pipe the process
-        __SPromise.pipe(pro, this);
+  registerProcess(pro, id = this._settings.mainProcessId) {
+    if (this._moduleProcesses[id] !== undefined) {
+      throw `Sorry but a process with the id "<yellow>${id}</yellow>" in the module "<cyan>${this.this.constructor.name}</cyan>" seem's to already exists...`;
+    }
+    if (id === this.processUsedForState) {
+      pro.on('state', (d) => {
+        this.state = d.value;
       });
     }
+    // Pipe the process
+    __SPromise.pipe(pro, this);
+    // save the process in the stack
+    this._moduleProcesses[id] = pro;
+  }
 
-    // update state
-    moduleProcess.on('state', (d) => {
-      this.state = d.value;
-    });
-
-    // log
-    setTimeout(() => {
-      if (this.state === 'error') return;
-      this.trigger('log', {
-        value: `Starting up the module <yellow>${
-          this._settings.name || this._settings.id
-        }</yellow>...`
-      });
-    });
-
-    // autoRun
-    if (this._settings.autoRun) {
-      setTimeout(() => {
-        this.run(this.params, this._settings);
-      });
+  /**
+   * @name        getProcess
+   * @type        Function
+   *
+   * This method allows you to get a process instance using his id.
+   * If no id is passed, the "main" one will be retreived
+   *
+   * @param     {String}      [id='main']      The process if you want back
+   * @return    {SProcess}            The process that correspond to the passed id
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  getProcess(id = this._settings.mainProcessId) {
+    if (this._moduleProcesses[processId] === undefined) {
+      throw `Sorry but you try to get a process named "<yellow>${processId}</yellow>" that does not have been registered yet... Here's the processes that you have access to:\n- ${Object.keys(
+        this._moduleProcesses
+      ).join('\n- ')}`;
     }
-
-    // return the running process just in case
-    return moduleProcess;
+    return this._moduleProcesses[id];
   }
 
   /**
@@ -383,25 +411,30 @@ export default class SSugarAppModule extends __SPromise {
    * @since     2.0.0
    */
   _initShortcuts() {
-    Object.keys(this._settings.shortcuts || {}).forEach((shortcut) => {
-      const shortcutObj = this._settings.shortcuts[shortcut];
+    if (
+      this._moduleObj.shortcuts !== undefined &&
+      this.handleShortcuts === undefined
+    ) {
+      throw `You have some shortcuts defined in the module "<yellow>${this.constructor.name}</yellow>" but you don't have the required "<cyan>handleShortcuts(shortcutObj, params, settings)</cyan>" method defined...`;
+    }
+
+    Object.keys(this._moduleObj.shortcuts || {}).forEach((shortcut) => {
+      const shortcutObj = this._moduleObj.shortcuts[shortcut];
+      shortcutObj.keys = shortcut;
+      if (shortcutObj.id === undefined) shortcutObj.id = shortcut;
       __hotkey(shortcut).on('press', () => {
         if (!this.isActive()) return;
         const params = __deepMerge(
-          Object.assign(
-            {},
-            this.params,
-            Object.assign({}, shortcutObj.params || {})
-          )
+          Object.assign({}, this._moduleObj.params || {}),
+          Object.assign({}, shortcutObj.params || {})
         );
         const settings = __deepMerge(
-          Object.assign(
-            {},
-            this._settings,
-            Object.assign({}, shortcutObj.settings || {})
-          )
+          Object.assign({}, this._moduleObj.settings || {}),
+          Object.assign({}, shortcutObj.settings || {})
         );
-        this.run(params, settings);
+        delete shortcutObj.params;
+        delete shortcutObj.settings;
+        this.handleShortcuts(shortcutObj, params, settings);
       });
     });
   }

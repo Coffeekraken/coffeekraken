@@ -4,7 +4,7 @@ const __SInterface = require('../../../interface/SInterface');
 const __sugarConfig = require('../../../config/sugar');
 
 /**
- * @name                SSugarAppModuleConfigInterface
+ * @name                SSugarAppModuleObjInterface
  * @namespace           sugar.node.ui.sugar.interface
  * @type                Class
  * @extends             SInterface
@@ -20,7 +20,7 @@ const __sugarConfig = require('../../../config/sugar');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SSugarAppModuleConfigInterface extends __SInterface {
+export = class SSugarAppModuleObjInterface extends __SInterface {
   static definition = {
     id: {
       type: 'String',
@@ -33,7 +33,19 @@ export = class SSugarAppModuleConfigInterface extends __SInterface {
       description: 'The module name like "Frontend Server", etc...',
       required: true
     },
-    module: {
+    description: {
+      type: 'String',
+      description: 'The module description',
+      required: false
+    },
+    autoRun: {
+      type: 'Boolean',
+      description:
+        'Specify if you want your module to run automatically after loading',
+      required: false,
+      default: false
+    },
+    modulePath: {
       type: 'String',
       description: 'The SSugarUiModule based class file path.',
       required: true,
@@ -41,10 +53,25 @@ export = class SSugarAppModuleConfigInterface extends __SInterface {
         exists: true
       }
     },
+    processPath: {
+      type: 'String',
+      description: 'The SProcess based class file path',
+      required: false,
+      path: {
+        exists: true
+      }
+    },
     params: {
       type: 'Object',
       description:
-        'An object of parameters that will be passed to your module constructor',
+        'An object of parameters that will be used in your module class instance',
+      required: true,
+      default: {}
+    },
+    settings: {
+      type: 'Object',
+      description:
+        'An object of settings that will be used in your modules class instance',
       required: true,
       default: {}
     }

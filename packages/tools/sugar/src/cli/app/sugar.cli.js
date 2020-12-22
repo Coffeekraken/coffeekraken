@@ -3,14 +3,14 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-const SSugarAppTerminalUi_1 = __importDefault(require("../../node/app/sugar/SSugarAppTerminalUi"));
-const SSugarAppProcess_1 = __importDefault(require("../../node/app/sugar/SSugarAppProcess"));
+const SSugarApp_1 = __importDefault(require("../../node/app/sugar/SSugarApp"));
 function sugar(stringArgs = '') {
-    const sugarAppProcess = new SSugarAppProcess_1.default({
-        runAsChild: false,
-        stdio: SSugarAppTerminalUi_1.default
-    });
-    sugarAppProcess.run(stringArgs);
+    // const sugarAppProcess = new __SSugarAppProcess({
+    //   runAsChild: false,
+    //   stdio: __SSugarAppTerminalUi
+    // });
+    // sugarAppProcess.run(stringArgs);
+    new SSugarApp_1.default(stringArgs);
 }
 module.exports = sugar;
 //# sourceMappingURL=sugar.cli.js.map

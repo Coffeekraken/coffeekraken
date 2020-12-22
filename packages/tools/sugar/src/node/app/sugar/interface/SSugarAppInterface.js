@@ -37,8 +37,8 @@ Object.keys(modules).forEach((moduleId) => {
         ModuleInterface = require(interfacePath);
     }
     else {
-        const folderPath = folderPath_1.default(moduleObj.process || moduleObj.module);
-        const filename = filename_1.default(moduleObj.process || moduleObj.module);
+        const folderPath = folderPath_1.default(moduleObj.processPath || moduleObj.modulePath);
+        const filename = filename_1.default(moduleObj.processPath || moduleObj.modulePath);
         const toTry = [
             `${folderPath}/interface/${filename.replace(/Process(\.js)?$/, 'Interface.js')}`,
             `${folderPath}/interface/${filename.replace(/Module(\.js)?$/, 'Interface.js')}`,

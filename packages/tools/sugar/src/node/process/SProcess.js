@@ -150,26 +150,28 @@ module.exports = class SProcess extends SPromise_1.default {
         if (!this._settings.notifications.kill.title) {
             this._settings.notifications.kill.title = `${this._settings.name} (${this._settings.id})`;
         }
-        if (!childProcess_1.default()) {
-            if (this._settings.stdio) {
-                if (class_1.default(this._settings.stdio)) {
-                    const outputInstance = new this._settings.stdio(this, this._settings.initialParams);
-                }
-                else if (this._settings.stdio === 'inherit') {
-                    this.on('log,*.log,warn,*.warn,error,*.error,reject,*.reject', (data, metas) => {
-                        if (!data)
-                            return;
-                        console.log(parseHtml_1.default(toString_1.default(data.value || data)));
-                    });
-                }
-                else {
-                    const outputSettings = typeof this._settings.stdio === 'object'
-                        ? this._settings.stdio
-                        : {};
-                    output_1.default(this, outputSettings);
+        this.on('state.ready:1', () => {
+            if (!childProcess_1.default()) {
+                if (this._settings.stdio) {
+                    if (class_1.default(this._settings.stdio)) {
+                        const outputInstance = new this._settings.stdio([this], this);
+                    }
+                    else if (this._settings.stdio === 'inherit') {
+                        this.on('log,*.log,warn,*.warn,error,*.error,reject,*.reject', (data, metas) => {
+                            if (!data)
+                                return;
+                            console.log(parseHtml_1.default(toString_1.default(data.value || data)));
+                        });
+                    }
+                    else {
+                        const outputSettings = typeof this._settings.stdio === 'object'
+                            ? this._settings.stdio
+                            : {};
+                        output_1.default([this], outputSettings);
+                    }
                 }
             }
-        }
+        });
         // listen for state changes
         this.on('state', (state) => {
             this._onStateChange(state);
@@ -230,7 +232,7 @@ module.exports = class SProcess extends SPromise_1.default {
         this._setState(value);
     }
     _setState(value) {
-        if (['idle', 'running', 'killed', 'error', 'success'].indexOf(value) === -1) {
+        if (['idle', 'ready', 'running', 'killed', 'error', 'success'].indexOf(value) === -1) {
             throw new SError_1.default(`Sorry but the "<yellow>state</yellow>" property setted to "<magenta>${toString_1.default(value)}</magenta>" of your "<cyan>${this.constructor.name}</cyan>" class can contain only one of these values: ${[
                 'idle',
                 'running',
@@ -244,6 +246,7 @@ module.exports = class SProcess extends SPromise_1.default {
                 .join(', ')}`);
         }
         // trigger an event
+        this.trigger(`state.${value}`, true);
         this.trigger('state', value);
         this._state = value;
     }

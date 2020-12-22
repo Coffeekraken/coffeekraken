@@ -31,6 +31,6 @@ import __SBlessedProcessOutput from './output/blessed/SBlessedProcessOutput';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = (source, settings = {}) => {
-  const output = new __SBlessedProcessOutput(source, settings);
+  const output = new __SBlessedProcessOutput([source], source, settings);
   return output;
 };

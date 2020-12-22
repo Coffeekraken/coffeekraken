@@ -17,23 +17,40 @@ module.exports = class SSugarAppProcessModule extends SSugarAppModule_1.default 
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    constructor(params = {}, settings = {}) {
+    constructor(moduleObj, settings = {}) {
         // check the settings interface
-        super(params, deepMerge_1.default(settings));
-    }
-    /**
-     * @name          start
-     * @type          Function
-     *
-     * This method is the one called by the SugarUi main class when all is ready
-     * to start the modules. Take this as your kind of "launcher" function.
-     *
-     * @since       2.0.0
-     */
-    start() {
-        const ProcessClass = require(this.params.processPath);
+        super(deepMerge_1.default(moduleObj, {
+            shortcuts: {
+                'ctrl+r': {
+                    id: 'run',
+                    name: 'Run',
+                    params: {},
+                    settings: {}
+                },
+                'ctrl+s': {
+                    id: 'stop',
+                    name: 'Stop',
+                    params: {},
+                    settings: {}
+                }
+            }
+        }), deepMerge_1.default(settings));
+        const ProcessClass = require(moduleObj.processPath);
         const pro = new ProcessClass(Object.assign(Object.assign({}, this._settings.processSettings), { metas: false, stdio: false }));
-        return super.start(pro);
+        // register process
+        this.registerProcess(pro);
+        // set the module as ready
+        this.ready();
+    }
+    handleShortcuts(shortcutObj, params, settings) {
+        switch (shortcutObj.id) {
+            case 'stop':
+                this.process.kill();
+                break;
+            case 'run':
+                this.process.run(params);
+                break;
+        }
     }
 };
 //# sourceMappingURL=SSugarAppProcessModule.js.map

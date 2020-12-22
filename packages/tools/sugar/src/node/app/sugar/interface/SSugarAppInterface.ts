@@ -35,8 +35,12 @@ Object.keys(modules).forEach((moduleId) => {
   if (interfacePath) {
     ModuleInterface = require(interfacePath);
   } else {
-    const folderPath = __folderPath(moduleObj.process || moduleObj.module);
-    const filename = __getFilename(moduleObj.process || moduleObj.module);
+    const folderPath = __folderPath(
+      moduleObj.processPath || moduleObj.modulePath
+    );
+    const filename = __getFilename(
+      moduleObj.processPath || moduleObj.modulePath
+    );
     const toTry = [
       `${folderPath}/interface/${filename.replace(
         /Process(\.js)?$/,

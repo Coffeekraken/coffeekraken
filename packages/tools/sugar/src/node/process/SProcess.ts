@@ -105,7 +105,9 @@ export = class SProcess extends __SPromise {
   _state = 'idle';
   _setState(value) {
     if (
-      ['idle', 'running', 'killed', 'error', 'success'].indexOf(value) === -1
+      ['idle', 'ready', 'running', 'killed', 'error', 'success'].indexOf(
+        value
+      ) === -1
     ) {
       throw new __SError(
         `Sorry but the "<yellow>state</yellow>" property setted to "<magenta>${__toString(
@@ -127,6 +129,7 @@ export = class SProcess extends __SPromise {
     }
 
     // trigger an event
+    this.trigger(`state.${value}`, true);
     this.trigger('state', value);
 
     this._state = value;
@@ -275,30 +278,29 @@ export = class SProcess extends __SPromise {
       this._settings.notifications.kill.title = `${this._settings.name} (${this._settings.id})`;
     }
 
-    if (!__isChildProcess()) {
-      if (this._settings.stdio) {
-        if (__isClass(this._settings.stdio)) {
-          const outputInstance = new this._settings.stdio(
-            this,
-            this._settings.initialParams
-          );
-        } else if (this._settings.stdio === 'inherit') {
-          this.on(
-            'log,*.log,warn,*.warn,error,*.error,reject,*.reject',
-            (data, metas) => {
-              if (!data) return;
-              console.log(__parseHtml(__toString(data.value || data)));
-            }
-          );
-        } else {
-          const outputSettings =
-            typeof this._settings.stdio === 'object'
-              ? this._settings.stdio
-              : {};
-          __output(this, outputSettings);
+    this.on('state.ready:1', () => {
+      if (!__isChildProcess()) {
+        if (this._settings.stdio) {
+          if (__isClass(this._settings.stdio)) {
+            const outputInstance = new this._settings.stdio([this], this);
+          } else if (this._settings.stdio === 'inherit') {
+            this.on(
+              'log,*.log,warn,*.warn,error,*.error,reject,*.reject',
+              (data, metas) => {
+                if (!data) return;
+                console.log(__parseHtml(__toString(data.value || data)));
+              }
+            );
+          } else {
+            const outputSettings =
+              typeof this._settings.stdio === 'object'
+                ? this._settings.stdio
+                : {};
+            __output([this], outputSettings);
+          }
         }
       }
-    }
+    });
 
     // listen for state changes
     this.on('state', (state) => {

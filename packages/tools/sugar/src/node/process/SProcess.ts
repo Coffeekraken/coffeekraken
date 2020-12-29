@@ -237,14 +237,14 @@ export = class SProcess extends __SPromise {
         ? this.constructor.interface.definition
         : null;
 
-    let interfaceParams = {};
+    let initialParams = __deepMerge({}, this._settings.initialParams);
     if (this.constructor.interface !== undefined) {
-      interfaceParams = this.constructor.interface.apply({}).value;
+      // console.log(this.constructor.interface.definition);
+      initialParams = this.constructor.interface.apply(initialParams, {
+        complete: true,
+        throwOnMissingRequiredProp: true
+      }).value;
     }
-    const initialParams = __deepMerge(
-      interfaceParams,
-      this._settings.initialParams
-    );
     this._settings.initialParams = initialParams;
 
     // handle process exit
@@ -306,6 +306,21 @@ export = class SProcess extends __SPromise {
     this.on('state', (state) => {
       this._onStateChange(state);
     });
+  }
+
+  /**
+   * @name      ready
+   * @type      Function
+   *
+   * This method allows you to set the process in the "ready" state.
+   * This will make the stdio initialize, etc...
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  ready() {
+    if (this.state === 'ready') return;
+    this.state = 'ready';
   }
 
   /**
@@ -546,8 +561,9 @@ export = class SProcess extends __SPromise {
   cancel(data) {
     if (this.state === 'running') this.state = 'killed';
     // cancel the passed promise
-    if (this._processPromise && this._processPromise.cancel)
+    if (this._processPromise && this._processPromise.cancel) {
       this._processPromise.cancel(data);
+    }
   }
 
   /**
@@ -581,21 +597,18 @@ export = class SProcess extends __SPromise {
 
     let data;
     const strArray = [];
-
     if (!__isChildProcess() && this._settings.metas === true) {
       switch (state) {
         case 'success':
           this.log({
-            value: `\n<green>${'-'.repeat(
-              process.stdout.columns - 4
-            )}</green>\nThe <yellow>${this.name || 'process'}</yellow> <cyan>${
+            color: 'green',
+            type: 'heading',
+            value: `The <yellow>${this.name || 'process'}</yellow> <cyan>${
               this.id
             }</cyan> execution has finished <green>successfully</green> in <yellow>${__convert(
               this.currentExecutionObj.duration,
               __convert.SECOND
-            )}s</yellow>\n<green>${'-'.repeat(
-              process.stdout.columns - 4
-            )}</green>\n`
+            )}s</yellow>`
           });
           if (this._settings.notifications.enable) {
             __notifier.notify(this._settings.notifications.success);

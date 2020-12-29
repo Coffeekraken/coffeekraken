@@ -66,7 +66,8 @@ const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
  */
 const fn = function (args = {}) {
     const settings = deepMerge_1.default(sugar_1.default('frontend'), args);
-    const server = express_1.default();
+    const app = express_1.default();
+    let server;
     const promise = new SPromise_1.default({
         id: 'frontendServer'
     });
@@ -74,7 +75,7 @@ const fn = function (args = {}) {
         // static directories
         Object.keys(settings.staticDirs).forEach((path) => {
             const fsPath = settings.staticDirs[path];
-            server.use(path, express_1.default.static(fsPath));
+            app.use(path, express_1.default.static(fsPath));
         });
         // load the middlewares
         const middlewaresObj = settings.middlewares || {};
@@ -86,7 +87,7 @@ const fn = function (args = {}) {
                 return promise.reject(`The express middleware "<yellow>${key}</yellow>" targeted at "<cyan>${middleware.path}</cyan>" does not exists...`);
             }
             // register the middleware
-            server.use(require(middleware.path)(middleware.settings || {}));
+            app.use(require(middleware.path)(middleware.settings || {}));
         }
         // loop on handlers
         Object.keys(settings.handlers).forEach((pageName) => __awaiter(this, void 0, void 0, function* () {
@@ -113,7 +114,7 @@ const fn = function (args = {}) {
                 if (slug !== '*') {
                     slug = [`${slug}/*`, `${slug}`];
                 }
-                server[method](slug, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
+                app[method](slug, (req, res, next) => __awaiter(this, void 0, void 0, function* () {
                     const reqPathExtension = extension_1.default(req.path);
                     if (extension) {
                         if (extension.indexOf(reqPathExtension) === -1 &&
@@ -125,11 +126,12 @@ const fn = function (args = {}) {
                 }));
             }
         }));
-        server
+        server = app
             .listen(settings.port, settings.hostname, () => {
             setTimeout(() => {
                 promise.trigger('log', {
                     type: 'heading',
+                    clear: true,
                     value: trimLines_1.default(`Your <yellow>Frontend Express</yellow> server is <green>up and running</green>:
 
                 - Hostname        : <yellow>${settings.hostname}</yellow>
@@ -144,6 +146,9 @@ const fn = function (args = {}) {
             promise.reject(string);
         });
     }))();
+    promise.on('finally', () => {
+        server.close();
+    });
     return promise;
 };
 module.exports = fn;

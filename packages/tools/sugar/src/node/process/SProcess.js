@@ -118,11 +118,14 @@ module.exports = class SProcess extends SPromise_1.default {
                 : this.constructor.interface !== undefined
                     ? this.constructor.interface.definition
                     : null;
-        let interfaceParams = {};
+        let initialParams = deepMerge_1.default({}, this._settings.initialParams);
         if (this.constructor.interface !== undefined) {
-            interfaceParams = this.constructor.interface.apply({}).value;
+            // console.log(this.constructor.interface.definition);
+            initialParams = this.constructor.interface.apply(initialParams, {
+                complete: true,
+                throwOnMissingRequiredProp: true
+            }).value;
         }
-        const initialParams = deepMerge_1.default(interfaceParams, this._settings.initialParams);
         this._settings.initialParams = initialParams;
         // handle process exit
         onProcessExit_1.default((state) => __awaiter(this, void 0, void 0, function* () {
@@ -249,6 +252,21 @@ module.exports = class SProcess extends SPromise_1.default {
         this.trigger(`state.${value}`, true);
         this.trigger('state', value);
         this._state = value;
+    }
+    /**
+     * @name      ready
+     * @type      Function
+     *
+     * This method allows you to set the process in the "ready" state.
+     * This will make the stdio initialize, etc...
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    ready() {
+        if (this.state === 'ready')
+            return;
+        this.state = 'ready';
     }
     /**
      * @name      toObject
@@ -451,8 +469,9 @@ module.exports = class SProcess extends SPromise_1.default {
         if (this.state === 'running')
             this.state = 'killed';
         // cancel the passed promise
-        if (this._processPromise && this._processPromise.cancel)
+        if (this._processPromise && this._processPromise.cancel) {
             this._processPromise.cancel(data);
+        }
     }
     /**
      * @name        _onStateChange
@@ -485,7 +504,9 @@ module.exports = class SProcess extends SPromise_1.default {
             switch (state) {
                 case 'success':
                     this.log({
-                        value: `\n<green>${'-'.repeat(process.stdout.columns - 4)}</green>\nThe <yellow>${this.name || 'process'}</yellow> <cyan>${this.id}</cyan> execution has finished <green>successfully</green> in <yellow>${convert_1.default(this.currentExecutionObj.duration, convert_1.default.SECOND)}s</yellow>\n<green>${'-'.repeat(process.stdout.columns - 4)}</green>\n`
+                        color: 'green',
+                        type: 'heading',
+                        value: `The <yellow>${this.name || 'process'}</yellow> <cyan>${this.id}</cyan> execution has finished <green>successfully</green> in <yellow>${convert_1.default(this.currentExecutionObj.duration, convert_1.default.SECOND)}s</yellow>`
                     });
                     if (this._settings.notifications.enable) {
                         node_notifier_1.default.notify(this._settings.notifications.success);

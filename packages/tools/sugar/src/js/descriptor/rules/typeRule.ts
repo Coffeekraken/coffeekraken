@@ -44,7 +44,9 @@ const ruleObj: ISDescriptorRule = {
     ruleSettings: IRuleSettings,
     settings: ISDescriptorSettings
   ): ISDescriptorResultObj | true => {
-    const res = __ofType(value, params.value);
+    const res = __ofType(value, params.value, {
+      name: settings.name
+    });
     if (res !== true) return res;
     return true;
   }

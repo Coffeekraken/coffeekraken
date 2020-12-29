@@ -1,5 +1,7 @@
 // @ts-nocheck
 
+import __SSugarAppModuleObjInterface from './interface/SSugarAppModuleObjInterface';
+import __SInterface from '../../interface/SInterface';
 import __SSugarAppModule from './SSugarAppModule';
 import __deepMerge from '../../object/deepMerge';
 
@@ -41,9 +43,9 @@ export = class SSugarAppProcessModule extends __SSugarAppModule {
             params: {},
             settings: {}
           },
-          'ctrl+s': {
-            id: 'stop',
-            name: 'Stop',
+          'ctrl+e': {
+            id: 'exit',
+            name: 'Exit',
             params: {},
             settings: {}
           }
@@ -54,10 +56,26 @@ export = class SSugarAppProcessModule extends __SSugarAppModule {
 
     const ProcessClass = require(moduleObj.processPath);
     const pro = new ProcessClass({
-      ...this._settings.processSettings,
+      ...(this._settings.processSettings || {}),
       metas: false,
-      stdio: false
+      stdio: false,
+      initialParams: Object.assign({}, moduleObj.params || {})
     });
+
+    // class ModuleInterface extends __SInterface {
+    //   static definition = {
+    //     ...__SSugarAppModuleObjInterface.definition,
+    //     params: ProcessInterface.definition || {},
+    //     presets: {
+    //       '*': ProcessInterface.definition || {}
+    //     }
+    //   };
+    // }
+
+    // console.log(ModuleInterface.definition);
+
+    // // apply the interface on the moduleObj
+    // ModuleInterface.apply(moduleObj);
 
     // register process
     this.registerProcess(pro);
@@ -68,8 +86,10 @@ export = class SSugarAppProcessModule extends __SSugarAppModule {
 
   handleShortcuts(shortcutObj, params, settings) {
     switch (shortcutObj.id) {
-      case 'stop':
-        this.process.kill();
+      case 'exit':
+        this.process.kill(
+          `The process has been killed using the "<yellow>ctrl+e</yellow>" shortcut`
+        );
         break;
       case 'run':
         this.process.run(params);

@@ -26,7 +26,8 @@ export = class SFrontendServerInterface extends __SInterface {
       type: 'String',
       alias: 'o',
       description: 'Server hostname',
-      default: __sugarConfig('frontend.hostname') || '127.0.0.1',
+      required: true,
+      // default: __sugarConfig('frontend.hostname') || '127.0.0.1',
       level: 1
     },
     port: {

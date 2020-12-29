@@ -1,5 +1,16 @@
 // @ts-nocheck
 // @shared
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -9,7 +20,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../is/ofType", "../value/typeof", "./SDescriptorResult", "../object/get", "../object/set", "../object/deepMerge"], factory);
+        define(["require", "exports", "../is/ofType", "../value/typeof", "./SDescriptorResult", "../object/get", "../is/glob", "../object/getGlob", "../object/flatten", "../object/set", "../object/deepMerge"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -18,12 +29,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var typeof_1 = __importDefault(require("../value/typeof"));
     var SDescriptorResult_1 = __importDefault(require("./SDescriptorResult"));
     var get_1 = __importDefault(require("../object/get"));
+    var glob_1 = __importDefault(require("../is/glob"));
+    var getGlob_1 = __importDefault(require("../object/getGlob"));
+    var flatten_1 = __importDefault(require("../object/flatten"));
     var set_1 = __importDefault(require("../object/set"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     /**
      * @name                SDescriptor
      * @namespace           sugar.js.descriptor
      * @type                Class
+     * @status              beta
      *
      * This class is the main one that MUST be used as parent one
      * when creating any descriptor like object, string, etc...
@@ -31,6 +46,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @param       {ISDescriptorSettings}      settings        An object of setting to configure your descriptor instance
      *
      * @todo      handle array values
+     * @todo      handle not object values
      *
      * @example       js
      * import SDescriptor from '@coffeekraken/sugar/js/descriptor/SDescriptor';
@@ -61,9 +77,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     id: this.constructor.id || this.constructor.name,
                     name: this.constructor.name,
                     rules: this.constructor.rules || {},
+                    type: 'Object',
                     arrayAsValue: false,
                     throwOnMissingRule: false,
-                    throwOnError: false,
+                    throwOnMissingRequiredProp: true,
+                    throw: false,
                     complete: true
                 }, this.constructor.settings, settings);
             }
@@ -154,26 +172,51 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 // check the type to validate correctly the value
                 if (Array.isArray(value) && !settings.arrayAsValue) {
                     // loop on each items
+                    throw "Sorry but the support for arrays like values has not been integrated for not...";
                     value.forEach(function (item) { });
                 }
                 else if (typeof value === 'object' &&
                     value !== null &&
                     value !== undefined) {
                     // loop on each object properties
-                    Object.keys(settings.rules).forEach(function (propName) {
-                        var propValue = get_1.default(value, propName);
-                        // validate the object property
-                        var validationResult = _this._validate(propValue, propName, settings);
-                        if (validationResult !== undefined && validationResult !== null) {
-                            set_1.default(value, propName, validationResult);
+                    Object.keys(flatten_1.default(settings.rules, {
+                        keepLastIntact: true
+                    })).forEach(function (propName) {
+                        var ruleObj = get_1.default(settings.rules, propName);
+                        // complete
+                        if (!glob_1.default(propName) &&
+                            get_1.default(value, propName) === undefined &&
+                            settings.complete &&
+                            ruleObj.default !== undefined) {
+                            set_1.default(value, propName, ruleObj.default);
+                        }
+                        var globPropValue = getGlob_1.default(value, propName, {
+                            deepize: false
+                        });
+                        if (settings.throwOnMissingRequiredProp &&
+                            ruleObj.required !== undefined &&
+                            ruleObj.required !== false &&
+                            Object.keys(globPropValue).length === 0) {
+                            globPropValue[propName] = undefined;
+                        }
+                        if (Object.keys(globPropValue).length) {
+                            // check the finded properties
+                            Object.keys(globPropValue).forEach(function (path) {
+                                // validate the property
+                                var validationResult = _this._validate(globPropValue[path], path, ruleObj, settings);
+                                if (validationResult !== undefined && validationResult !== null) {
+                                    set_1.default(value, path, validationResult);
+                                }
+                            });
                         }
                     });
                 }
                 else {
+                    throw "Sorry but the support for values other than objects has not been integrated for not...";
                     // validate the object property
-                    var validationResult = this._validate(value, undefined, settings);
+                    var validationResult = this._validate(value, undefined, undefined, settings);
                 }
-                if (this._descriptorResult.hasIssues() && settings.throwOnError) {
+                if (this._descriptorResult.hasIssues() && settings.throw) {
                     throw this._descriptorResult.toString();
                 }
                 return this._descriptorResult;
@@ -191,32 +234,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            SDescriptor.prototype._validate = function (value, propName, settings) {
+            SDescriptor.prototype._validate = function (value, propName, rulesObj, settings) {
                 var _this = this;
-                // check if we have a propName, meaning that we are validating an object
-                var rules = settings.rules;
-                if (propName !== undefined) {
-                    if (settings.rules[propName] === undefined)
-                        return true;
-                    rules = settings.rules[propName];
-                }
-                // check the "complete" setting
-                if (settings.complete) {
-                    if ((value === null || value === undefined) &&
-                        rules.default !== undefined) {
-                        value = rules.default;
-                    }
-                }
-                if (rules.required === undefined || rules.required === false) {
+                if (rulesObj === undefined)
+                    return value;
+                if (rulesObj.required === undefined || rulesObj.required === false) {
                     if (value === undefined || value === null)
                         return value;
                 }
                 // loop on the rules object
-                Object.keys(rules).forEach(function (ruleName) {
+                Object.keys(rulesObj).forEach(function (ruleName) {
                     // do not take care of "default" rule name
                     if (ruleName === 'default')
                         return;
-                    var ruleValue = rules[ruleName];
+                    var ruleValue = rulesObj[ruleName];
                     // make sure we have this rule registered
                     if (_this.constructor._registeredRules[ruleName] === undefined) {
                         if (settings.throwOnMissingRule) {
@@ -232,7 +263,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         // check if the rule accept this type of value
                         if (ruleObj.accept && ofType_1.default(value, ruleObj.accept) !== true)
                             return;
-                        var ruleResult = ruleObj.apply(value, params, ruleSettings, settings);
+                        var ruleResult = ruleObj.apply(value, params, ruleSettings, __assign(__assign({}, settings), { name: settings.name + "." + propName }));
                         if (ruleResult === true)
                             return value;
                         var obj = ruleResult === false ? {} : ruleResult;

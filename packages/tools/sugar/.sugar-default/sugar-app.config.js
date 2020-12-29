@@ -14,18 +14,30 @@ module.exports = {
       processPath: `${__packageRoot(
         __dirname
       )}/src/node/server/frontend/SFrontendServerProcess`,
-      params: '[config.frontend]'
-    },
-    compileTs: {
-      id: 'compileTs',
-      name: 'Compile Typescript',
-      description:
-        'Expose an HTTP server using ExpressJs and serve requested files, views, etc...',
-      processPath: `${__packageRoot(
-        __dirname
-      )}/src/node/typescript/compile/SCompileTsProcess`,
-      params: '[config.ts]'
+      params: '[config.frontend]',
+      presets: {
+        prod: {
+          key: 'p',
+          params: {
+            hostname: 'localhost'
+          }
+        }
+      }
     }
+    // compileTs: {
+    //   id: 'compileTs',
+    //   name: 'Compile Typescript',
+    //   description:
+    //     'Expose an HTTP server using ExpressJs and serve requested files, views, etc...',
+    //   processPath: `${__packageRoot(
+    //     __dirname
+    //   )}/src/node/typescript/compile/SCompileTsProcess`
+    //   // presets: {
+    //   //   default: {
+    //   //     params: '[config.ts]'
+    //   //   }
+    //   // }
+    // }
     // buildScss: {
     //   id: 'buildScss',
     //   name: 'Sugar App Build SCSS',

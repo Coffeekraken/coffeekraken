@@ -40,4 +40,14 @@ function deepize(object) {
   }
   return finalObject;
 }
+
+// console.log(
+//   deepize({
+//     'someting.cool': 'hello',
+//     'you.coco[0]': 'hello',
+//     'coco[1]': 'world',
+//     'world."coco.plop".yep': 'dsojiofj'
+//   })
+// );
+
 export = deepize;

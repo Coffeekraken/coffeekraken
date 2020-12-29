@@ -13,6 +13,8 @@ import __isOfType from '../is/ofType';
 import __deepMerge from '../object/deepMerge';
 import __parseHtml from '../console/parseHtml';
 import __parseTypeString from './parseTypeString';
+import __STypeResult from './STypeResult';
+import __getAvailableInterfaceTypes from '../interface/getAvailableInterfaceTypes';
 import ISType, {
   ISTypeCtor,
   ISTypeDescriptor,
@@ -55,7 +57,7 @@ import descriptor from './descriptors/stringTypeDescriptor';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
+const Cls: ISTypeCtor = class SType implements ISType {
   /**
    * @name        _settings
    * @type        ISTypeSettings
@@ -145,7 +147,6 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(typeString: string, settings: ISTypeSettings = {}) {
-    super();
     // save the typeString
     this.typeString = typeString;
     // standardise the typeString
@@ -161,8 +162,8 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
         id: this.constructor.name,
         name: this.constructor.name,
         throw: true,
-        verbose: true,
-        customTypes: true
+        customTypes: true,
+        interfaces: true
       },
       settings
     );
@@ -194,7 +195,8 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
       const typeObj = this.types[i],
         typeId = typeObj.type;
       // check the value
-      const res: boolean = this._isType(value, typeId, settings);
+      const res = this._isType(value, typeId, settings);
+
       // if the result is falsy
       if (res === true) {
         // if this matching type does not have any "of" to check
@@ -224,11 +226,9 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
             const idx = loopOn[k];
             const v: any = typeOf === 'Map' ? value.get(idx) : value[idx];
             // validate the value if needed
-            const ofRes: boolean = this._isType(v, type, settings);
+            const ofRes = this._isType(v, type, settings);
             if (ofRes !== true) {
-              if (issues[typeObj.type] === undefined) issues[typeObj.type] = [];
-
-              issues[typeObj.type].push({
+              issues[typeObj.type] = {
                 expected: {
                   type: typeObj.type
                 },
@@ -236,49 +236,65 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
                   type: __typeOf(v),
                   value: v
                 }
-              });
+              };
             } else {
               // return true cause we found a match
               return true;
             }
           }
         }
+      } else {
+        const issueObj = {
+          expected: {
+            type: typeObj.type
+          },
+          received: {
+            type: __typeOf(value),
+            value
+          }
+        };
+        if (
+          res !== false &&
+          res.toString &&
+          typeof res.toString === 'function'
+        ) {
+          issueObj.message = res.toString();
+        }
+        issues[typeObj.type] = issueObj;
       }
     }
 
-    if (settings.throw === true) {
-      throw __parseHtml(
-        [
-          `Sorry but the value passed:`,
-          '',
-          __toString(value),
-          '',
-          `which is of type "<red>${__typeOf(
-            value
-          )}</red>" does not correspond to the requested type(s) "<green>${
-            this.typeString
-          }</green>"`
-        ].join('\n')
-      );
-    }
+    // if (settings.throw === true) {
+    //   throw __parseHtml(
+    //     [
+    //       `Sorry but the value passed:`,
+    //       '',
+    //       __toString(value),
+    //       '',
+    //       `which is of type "<red>${__typeOf(
+    //         value
+    //       )}</red>" does not correspond to the requested type(s) "<green>${
+    //         this.typeString
+    //       }</green>"`
+    //     ].join('\n')
+    //   );
+    // }
 
-    if (settings.verbose === true) {
-      const verboseObj: ISTypeVerboseObj = {
-        typeString: this.typeString,
-        value,
-        expected: {
-          type: this.typeString
-        },
-        received: {
-          type: __typeOf(value)
-        },
-        issues,
-        settings
-      };
-      return verboseObj;
-    } else {
-      return false;
-    }
+    const res = new __STypeResult({
+      typeString: this.typeString,
+      value,
+      expected: {
+        type: this.typeString
+      },
+      received: {
+        type: __typeOf(value)
+      },
+      issues,
+      settings
+    });
+
+    if (settings.throw === true) throw res.toString();
+    return res;
   }
 
   /**
@@ -298,8 +314,18 @@ const Cls: ISTypeCtor = class SType extends __SPromise implements ISType {
    */
   _isType(value: any, type: string, settings: ISTypeSettings = {}): boolean {
     settings = __deepMerge(this._settings, settings);
+
+    // console.log('type', type, settings);
+
     // check that the passed type is registered
     if (this.constructor._registeredTypes[type.toLowerCase()] === undefined) {
+      if (settings.interfaces === true) {
+        const availableInterfaceTypes = __getAvailableInterfaceTypes();
+        if (availableInterfaceTypes[type] !== undefined) {
+          const res = availableInterfaceTypes[type].apply(value, {});
+          return res;
+        }
+      }
       // handle custom types
       if (settings.customTypes === true) {
         const typeOf = __typeOf(value).toLowerCase();

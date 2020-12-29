@@ -153,7 +153,7 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
           maxItems: -1,
           maxItemsByGroup: 1,
           spaceBetween: 1,
-          spaceAround: 1,
+          spaceAround: 0,
           stacks: [
             'log',
             '*.log',
@@ -162,10 +162,24 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
             'error',
             '*.error',
             'reject',
-            '*.reject'
+            '*.reject',
+            'resolve',
+            '*.resolve',
+            'cancel',
+            '*.cancel',
+            'success',
+            '*.success'
           ],
           mapTypesToStacks: {
-            error: ['error', '*.error', 'reject', '*.reject'],
+            heading: ['resolve', '*.resolve', 'success', '*.success'],
+            error: [
+              'error',
+              '*.error',
+              'reject',
+              '*.reject',
+              'cancel',
+              '*.cancel'
+            ],
             warning: ['warn', '*.warn']
           },
           metas: {
@@ -217,10 +231,24 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
 
     this._logsBuffer = [];
     this.on('attach', () => {
-      this._logsBuffer = this._logsBuffer.filter((log) => {
-        this.log(log);
-        return false;
-      });
+      this._logBuffer();
+    });
+  }
+
+  /**
+   * @name          _logBuffer
+   * @type          Function
+   * @private
+   *
+   * This method simply take the buffered logs and log them in the feed
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _logBuffer() {
+    this._logsBuffer = this._logsBuffer.filter((log) => {
+      this.log(log);
+      return false;
     });
   }
 
@@ -276,15 +304,16 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async clear() {
+  clear() {
+    this._isClearing = true;
     // remove all items from the display list
-    this.stack.forEach(($component) => {
-      // @ts-ignore
+    this.children.forEach(($component) => {
       $component.detach();
     });
     // reset the stack
+    this.setContent('');
     this.stack = [];
-    return true;
+    this._isClearing = false;
   }
 
   /**
@@ -299,7 +328,7 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
    */
   _currentModuleId = null;
 
-  log(...args) {
+  async log(...args) {
     if (!this.isDisplayed()) {
       this._logsBuffer = [...this._logsBuffer, ...args];
       return;
@@ -308,11 +337,14 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
     const logs = __parseAndFormatLog(args);
 
     // @ts-ignore
-    logs.forEach(async (logObj) => {
-      const $lastContainer = this.stack.length ? this.stack.pop() : undefined;
+    for (let i = 0; i < logs.length; i++) {
+      const logObj = logs[i];
+      let $lastContainer;
       // clear
       if (logObj.clear === true) {
-        await this.clear();
+        this.clear();
+      } else {
+        $lastContainer = this.stack.length ? this.stack.pop() : undefined;
       }
 
       // make sure the wanted component declared in "type" is registered
@@ -417,16 +449,17 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
           this._settings.spaceBetween;
       }
       $container.height = containerHeight;
-    });
+    }
 
     // scroll to bottom
-    setTimeout(() => {
+    clearTimeout(this._updateTimeout);
+    this._updateTimeout = setTimeout(() => {
       try {
         this.setScrollPerc(100);
       } catch (e) {}
       // update display
       this.update();
-    });
+    }, 200);
   }
 
   /**
@@ -440,18 +473,20 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async _applyTops() {
-    // let currentTop = 0;
-    // // loop on each of the components
-    // for (let i = 0; i < this.stack.length; i++) {
-    //   const $component = this.stack[i];
-    //   $component.top = currentTop;
-    //   // $component.height: 0;
-    //   // $component.screen.render();
-    //   // await __wait(10);
-    //   currentTop += $component.realHeight + this._settings.spaceBetween;
-    // }
-    // await __wait(10);
-    // this.screen.render();
+    let currentTop = 0;
+    // loop on each of the components
+    for (let i = 0; i < this.children.length; i++) {
+      const $component = this.children[i];
+      // @ts-ignore
+      $component.top = currentTop;
+      // $component.height: 0;
+      // $component.screen.render();
+      // await __wait(10);
+      // @ts-ignore
+      currentTop += $component.getScrollHeight() + this._settings.spaceBetween;
+    }
+    await __wait(10);
+    this.render();
   }
 
   /**
@@ -466,6 +501,7 @@ const cls: ISBlessedOutputCtor = class SBlessedOutput
   update() {
     if (__isChildProcess()) return;
     if (!this.isDisplayed()) return;
+    // this._applyTops();
   }
 };
 

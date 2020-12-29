@@ -2,6 +2,7 @@
 // @shared
 
 import __get from './get';
+import __unquote from '../string/unquote';
 
 /**
  * @name                                        set
@@ -27,18 +28,36 @@ import __get from './get';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = (obj, path, value) => {
+export = (obj, path, value, settings = {}) => {
+  settings = {
+    ...settings
+  };
+
   if (!path || path === '' || path === '.') {
     obj = value;
     return;
   }
-  const a = path.split('.');
+
+  path = path.replace(/\[(\w+)\]/g, '.[$1]');
+  // path = path.replace(/^\./, '');
+  const a = __unquote(path)
+    .split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm)
+    .map((p) => __unquote(p));
   let o = obj;
   while (a.length - 1) {
     const n = a.shift();
-    if (!(n in o)) o[n] = {};
+    if (!(n in o)) {
+      if (a[0].match(/^\[[0-9]+\]$/)) o[n] = [];
+      else o[n] = {};
+    }
     o = o[n];
   }
-  o[a[0]] = value;
+
+  if (a[0].match(/^\[[0-9]+\]$/)) {
+    if (!Array.isArray(o)) o = [];
+    o.push(value);
+  } else {
+    o[a[0]] = value;
+  }
   return __get(obj, path);
 };

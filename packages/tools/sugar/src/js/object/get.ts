@@ -1,6 +1,8 @@
 // @ts-nocheck
 // @shared
 
+import __unquote from '../string/unquote';
+
 /**
  * @name                          get
  * @namespace           sugar.js.object
@@ -24,12 +26,15 @@
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = (obj, path) => {
+function get(obj, path, settings = {}) {
+  settings = {
+    ...settings
+  };
   if (obj[path] !== undefined) return obj[path];
   if (!path || path === '' || path === '.') return obj;
   path = path.replace(/\[(\w+)\]/g, '.$1');
   path = path.replace(/^\./, '');
-  const a = path.split('.');
+  const a = path.split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm).map((p) => __unquote(p));
   let o = obj;
   while (a.length) {
     const n = a.shift();
@@ -38,4 +43,23 @@ export = (obj, path) => {
     o = o[n];
   }
   return o;
-};
+}
+
+// console.log(
+//   get(
+//     {
+//       someting: {
+//         cool: 'hello'
+//       },
+//       coco: ['hello', 'world'],
+//       world: {
+//         'coco.plop': {
+//           yep: 'dsojiofj'
+//         }
+//       }
+//     },
+//     'world."coco.plop".yep'
+//   )
+// );
+
+export = get;

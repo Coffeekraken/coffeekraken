@@ -8,6 +8,7 @@ const sugar_1 = __importDefault(require("../../../config/sugar"));
 const folderPath_1 = __importDefault(require("../../../fs/folderPath"));
 const filename_1 = __importDefault(require("../../../fs/filename"));
 const fs_1 = __importDefault(require("fs"));
+const get_1 = __importDefault(require("../../../object/get"));
 /**
  * @name                SSugarAppInterface
  * @namespace           sugar.node.ui.sugar.interface
@@ -56,7 +57,18 @@ Object.keys(modules).forEach((moduleId) => {
         ModuleInterface = require(toTry[0]);
     }
     Object.keys(ModuleInterface.definition).forEach((argName) => {
-        SSugarAppInterface.definition[`modules.${moduleId}.${argName}`] = Object.assign({}, ModuleInterface.definition[argName]);
+        // params
+        SSugarAppInterface.definition[`modules.${moduleId}.params.${argName}`] = Object.assign({}, ModuleInterface.definition[argName]);
+        if (SSugarAppInterface.definition[`modules.${moduleId}.params.${argName}`]
+            .default === undefined) {
+            const defaultValue = get_1.default(moduleObj, `params.${argName}`);
+            if (defaultValue !== undefined) {
+                SSugarAppInterface.definition[`modules.${moduleId}.params.${argName}`].default = defaultValue;
+            }
+        }
+        // presets
+        SSugarAppInterface.definition[`modules.${moduleId}.presets.*.params.${argName}`] = Object.assign({}, ModuleInterface.definition[argName]);
+        delete SSugarAppInterface.definition[`modules.${moduleId}.presets.*.params.${argName}`].required;
     });
 });
 module.exports = SSugarAppInterface;

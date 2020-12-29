@@ -13,7 +13,8 @@ module.exports = (_a = class SFrontendServerInterface extends SInterface_1.defau
             type: 'String',
             alias: 'o',
             description: 'Server hostname',
-            default: sugar_1.default('frontend.hostname') || '127.0.0.1',
+            required: true,
+            // default: __sugarConfig('frontend.hostname') || '127.0.0.1',
             level: 1
         },
         port: {

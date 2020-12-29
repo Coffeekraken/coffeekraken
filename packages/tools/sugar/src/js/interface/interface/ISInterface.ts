@@ -7,7 +7,8 @@ export interface ISInterfaceSettings {
   name?: string;
   id?: string;
   arrayAsValue?: boolean;
-  throwOnError?: boolean;
+  throw?: boolean;
+  throwOnMissingRequiredProp?: boolean;
   complete?: boolean;
   descriptorSettings?: ISDescriptorSettings;
 }

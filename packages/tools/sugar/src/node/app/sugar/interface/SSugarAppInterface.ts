@@ -5,6 +5,8 @@ import __sugarConfig from '../../../config/sugar';
 import __folderPath from '../../../fs/folderPath';
 import __getFilename from '../../../fs/filename';
 import __fs from 'fs';
+import __get from '../../../object/get';
+import __set from '../../../object/set';
 
 /**
  * @name                SSugarAppInterface
@@ -62,9 +64,28 @@ Object.keys(modules).forEach((moduleId) => {
   }
 
   Object.keys(ModuleInterface.definition).forEach((argName) => {
+    // params
     SSugarAppInterface.definition[
-      `modules.${moduleId}.${argName}`
+      `modules.${moduleId}.params.${argName}`
     ] = Object.assign({}, ModuleInterface.definition[argName]);
+    if (
+      SSugarAppInterface.definition[`modules.${moduleId}.params.${argName}`]
+        .default === undefined
+    ) {
+      const defaultValue = __get(moduleObj, `params.${argName}`);
+      if (defaultValue !== undefined) {
+        SSugarAppInterface.definition[
+          `modules.${moduleId}.params.${argName}`
+        ].default = defaultValue;
+      }
+    }
+    // presets
+    SSugarAppInterface.definition[
+      `modules.${moduleId}.presets.*.params.${argName}`
+    ] = Object.assign({}, ModuleInterface.definition[argName]);
+    delete SSugarAppInterface.definition[
+      `modules.${moduleId}.presets.*.params.${argName}`
+    ].required;
   });
 });
 

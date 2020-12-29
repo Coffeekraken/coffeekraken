@@ -16,6 +16,7 @@ const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const blessed_1 = __importDefault(require("blessed"));
 const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
 const childProcess_1 = __importDefault(require("../../is/childProcess"));
+const wait_1 = __importDefault(require("../../time/wait"));
 const parseAndFormatLog_1 = __importDefault(require("../../log/parseAndFormatLog"));
 const parseHtml_1 = __importDefault(require("../../console/parseHtml"));
 const countLine_1 = __importDefault(require("../../string/countLine"));
@@ -72,7 +73,7 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
                 maxItems: -1,
                 maxItemsByGroup: 1,
                 spaceBetween: 1,
-                spaceAround: 1,
+                spaceAround: 0,
                 stacks: [
                     'log',
                     '*.log',
@@ -81,10 +82,24 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
                     'error',
                     '*.error',
                     'reject',
-                    '*.reject'
+                    '*.reject',
+                    'resolve',
+                    '*.resolve',
+                    'cancel',
+                    '*.cancel',
+                    'success',
+                    '*.success'
                 ],
                 mapTypesToStacks: {
-                    error: ['error', '*.error', 'reject', '*.reject'],
+                    heading: ['resolve', '*.resolve', 'success', '*.success'],
+                    error: [
+                        'error',
+                        '*.error',
+                        'reject',
+                        '*.reject',
+                        'cancel',
+                        '*.cancel'
+                    ],
                     warning: ['warn', '*.warn']
                 },
                 metas: {
@@ -150,10 +165,7 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
             });
             this._logsBuffer = [];
             this.on('attach', () => {
-                this._logsBuffer = this._logsBuffer.filter((log) => {
-                    this.log(log);
-                    return false;
-                });
+                this._logBuffer();
             });
         }
         /**
@@ -182,6 +194,22 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
                 settings,
                 as
             };
+        }
+        /**
+         * @name          _logBuffer
+         * @type          Function
+         * @private
+         *
+         * This method simply take the buffered logs and log them in the feed
+         *
+         * @since         2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        _logBuffer() {
+            this._logsBuffer = this._logsBuffer.filter((log) => {
+                this.log(log);
+                return false;
+            });
         }
         /**
          * @name          registerSource
@@ -236,125 +264,131 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         clear() {
-            return __awaiter(this, void 0, void 0, function* () {
-                // remove all items from the display list
-                this.stack.forEach(($component) => {
-                    // @ts-ignore
-                    $component.detach();
-                });
-                // reset the stack
-                this.stack = [];
-                return true;
+            this._isClearing = true;
+            // remove all items from the display list
+            this.children.forEach(($component) => {
+                $component.detach();
             });
+            // reset the stack
+            this.setContent('');
+            this.stack = [];
+            this._isClearing = false;
         }
         log(...args) {
-            if (!this.isDisplayed()) {
-                this._logsBuffer = [...this._logsBuffer, ...args];
-                return;
-            }
-            const logs = parseAndFormatLog_1.default(args);
-            // @ts-ignore
-            logs.forEach((logObj) => __awaiter(this, void 0, void 0, function* () {
-                const $lastContainer = this.stack.length ? this.stack.pop() : undefined;
-                // clear
-                if (logObj.clear === true) {
-                    yield this.clear();
+            return __awaiter(this, void 0, void 0, function* () {
+                if (!this.isDisplayed()) {
+                    this._logsBuffer = [...this._logsBuffer, ...args];
+                    return;
                 }
-                // make sure the wanted component declared in "type" is registered
-                // otherwise, fallback to "default"
-                const type = SBlessedOutput.registeredComponents[logObj.type] !== undefined
-                    ? logObj.type
-                    : 'default';
-                // instanciate a new component
-                const $component = new SBlessedOutput.registeredComponents[type].component(logObj, SBlessedOutput.registeredComponents[type].settings);
-                // container
-                const $container = blessed_1.default.box({
-                    width: `100%-${this._settings.spaceAround * 2}`,
-                    height: 0,
-                    top: 0,
-                    left: this._settings.spaceAround,
-                    scrollable: true,
-                    style: {
-                    // bg: 'cyan'
+                const logs = parseAndFormatLog_1.default(args);
+                // @ts-ignore
+                for (let i = 0; i < logs.length; i++) {
+                    const logObj = logs[i];
+                    let $lastContainer;
+                    // clear
+                    if (logObj.clear === true) {
+                        this.clear();
                     }
-                });
-                let $metas, metasHeight = 0;
-                // build metas
-                const metasObj = deepMerge_1.default(this._settings.metas, logObj.metas);
-                if (metasObj !== undefined) {
-                    let content = [metasObj.content || ''];
-                    if (metasObj.time === true) {
-                        const now = new Date();
-                        let hours = now.getHours(), minutes = now.getMinutes(), seconds = now.getSeconds();
-                        if (hours < 10)
-                            hours = `0${hours}`;
-                        if (minutes < 10)
-                            minutes = `0${minutes}`;
-                        if (seconds < 10)
-                            seconds = `0${seconds}`;
-                        content = [
-                            `<cyan>${hours + ':' + minutes + ':' + seconds}</cyan>`,
-                            metasObj.content || ''
-                        ];
+                    else {
+                        $lastContainer = this.stack.length ? this.stack.pop() : undefined;
                     }
-                    content = content.map((c) => {
-                        c = parseHtml_1.default(c);
-                        c = ' '.repeat(metasObj.width - 1 - countLine_1.default(c.trim())) + c;
-                        return c;
+                    // make sure the wanted component declared in "type" is registered
+                    // otherwise, fallback to "default"
+                    const type = SBlessedOutput.registeredComponents[logObj.type] !== undefined
+                        ? logObj.type
+                        : 'default';
+                    // instanciate a new component
+                    const $component = new SBlessedOutput.registeredComponents[type].component(logObj, SBlessedOutput.registeredComponents[type].settings);
+                    // container
+                    const $container = blessed_1.default.box({
+                        width: `100%-${this._settings.spaceAround * 2}`,
+                        height: 0,
+                        top: 0,
+                        left: this._settings.spaceAround,
+                        scrollable: true,
+                        style: {
+                        // bg: 'cyan'
+                        }
                     });
-                    content = content.filter((c) => c.trim() !== '');
-                    metasHeight = content.length;
-                    if (content.length > 0) {
-                        $metas = blessed_1.default.box({
-                            content: content.join('\n'),
-                            width: metasObj.width,
-                            height: 'shrink',
-                            top: 0,
-                            left: 0,
-                            style: {
-                            // bg: 'red'
-                            }
+                    let $metas, metasHeight = 0;
+                    // build metas
+                    const metasObj = deepMerge_1.default(this._settings.metas, logObj.metas);
+                    if (metasObj !== undefined) {
+                        let content = [metasObj.content || ''];
+                        if (metasObj.time === true) {
+                            const now = new Date();
+                            let hours = now.getHours(), minutes = now.getMinutes(), seconds = now.getSeconds();
+                            if (hours < 10)
+                                hours = `0${hours}`;
+                            if (minutes < 10)
+                                minutes = `0${minutes}`;
+                            if (seconds < 10)
+                                seconds = `0${seconds}`;
+                            content = [
+                                `<cyan>${hours + ':' + minutes + ':' + seconds}</cyan>`,
+                                metasObj.content || ''
+                            ];
+                        }
+                        content = content.map((c) => {
+                            c = parseHtml_1.default(c);
+                            c = ' '.repeat(metasObj.width - 1 - countLine_1.default(c.trim())) + c;
+                            return c;
                         });
+                        content = content.filter((c) => c.trim() !== '');
+                        metasHeight = content.length;
+                        if (content.length > 0) {
+                            $metas = blessed_1.default.box({
+                                content: content.join('\n'),
+                                width: metasObj.width,
+                                height: 'shrink',
+                                top: 0,
+                                left: 0,
+                                style: {
+                                // bg: 'red'
+                                }
+                            });
+                        }
                     }
-                }
-                if (metasObj !== undefined && $metas !== undefined) {
-                    $component.left = metasObj.width + metasObj.spaceRight;
-                }
-                $container.append($component);
-                if ($metas !== undefined) {
-                    $container.append($metas);
-                    $container.$metas = $metas;
-                }
-                $container.$component = $component;
-                // append the log into the stack
-                this.append($container);
-                this.stack.push($container);
-                // calculate the height to apply
-                let contentHeight = 0;
-                try {
-                    contentHeight = $component.getScrollHeight();
-                }
-                catch (e) { }
-                let containerHeight = contentHeight > metasHeight ? contentHeight : metasHeight;
-                // append the component to the feed
-                if ($lastContainer !== undefined) {
-                    $container.top =
-                        // @ts-ignore
-                        $lastContainer.top +
+                    if (metasObj !== undefined && $metas !== undefined) {
+                        $component.left = metasObj.width + metasObj.spaceRight;
+                    }
+                    $container.append($component);
+                    if ($metas !== undefined) {
+                        $container.append($metas);
+                        $container.$metas = $metas;
+                    }
+                    $container.$component = $component;
+                    // append the log into the stack
+                    this.append($container);
+                    this.stack.push($container);
+                    // calculate the height to apply
+                    let contentHeight = 0;
+                    try {
+                        contentHeight = $component.getScrollHeight();
+                    }
+                    catch (e) { }
+                    let containerHeight = contentHeight > metasHeight ? contentHeight : metasHeight;
+                    // append the component to the feed
+                    if ($lastContainer !== undefined) {
+                        $container.top =
                             // @ts-ignore
-                            $lastContainer.getScrollHeight() +
-                            this._settings.spaceBetween;
+                            $lastContainer.top +
+                                // @ts-ignore
+                                $lastContainer.getScrollHeight() +
+                                this._settings.spaceBetween;
+                    }
+                    $container.height = containerHeight;
                 }
-                $container.height = containerHeight;
-            }));
-            // scroll to bottom
-            setTimeout(() => {
-                try {
-                    this.setScrollPerc(100);
-                }
-                catch (e) { }
-                // update display
-                this.update();
+                // scroll to bottom
+                clearTimeout(this._updateTimeout);
+                this._updateTimeout = setTimeout(() => {
+                    try {
+                        this.setScrollPerc(100);
+                    }
+                    catch (e) { }
+                    // update display
+                    this.update();
+                }, 200);
             });
         }
         /**
@@ -369,18 +403,20 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
          */
         _applyTops() {
             return __awaiter(this, void 0, void 0, function* () {
-                // let currentTop = 0;
-                // // loop on each of the components
-                // for (let i = 0; i < this.stack.length; i++) {
-                //   const $component = this.stack[i];
-                //   $component.top = currentTop;
-                //   // $component.height: 0;
-                //   // $component.screen.render();
-                //   // await __wait(10);
-                //   currentTop += $component.realHeight + this._settings.spaceBetween;
-                // }
-                // await __wait(10);
-                // this.screen.render();
+                let currentTop = 0;
+                // loop on each of the components
+                for (let i = 0; i < this.children.length; i++) {
+                    const $component = this.children[i];
+                    // @ts-ignore
+                    $component.top = currentTop;
+                    // $component.height: 0;
+                    // $component.screen.render();
+                    // await __wait(10);
+                    // @ts-ignore
+                    currentTop += $component.getScrollHeight() + this._settings.spaceBetween;
+                }
+                yield wait_1.default(10);
+                this.render();
             });
         }
         /**
@@ -397,6 +433,7 @@ const cls = (_a = class SBlessedOutput extends SBlessedComponent_1.default {
                 return;
             if (!this.isDisplayed())
                 return;
+            // this._applyTops();
         }
     },
     /**

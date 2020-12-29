@@ -19,12 +19,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../descriptor/SDescriptor", "../object/deepMerge", "./SInterfaceResult"], factory);
+        define(["require", "exports", "../descriptor/SDescriptor", "./getAvailableInterfaceTypes", "../object/deepMerge", "./SInterfaceResult"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var _a;
     var SDescriptor_1 = __importDefault(require("../descriptor/SDescriptor"));
+    var getAvailableInterfaceTypes_1 = __importDefault(require("./getAvailableInterfaceTypes"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SInterfaceResult_1 = __importDefault(require("./SInterfaceResult"));
     /**
@@ -57,6 +58,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
+    // @ts-ignore
+    (global || window)._registeredInterfacesTypes = {};
     var Cls = (_a = /** @class */ (function () {
             /**
              * @name              constructor
@@ -94,16 +97,63 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  */
                 this._settings = {
                     arrayAsValue: false,
-                    throwOnError: false,
+                    throw: false,
                     complete: true
                 };
                 // @ts-ignore
                 this._settings = deepMerge_1.default(
                 // @ts-ignore
                 this.constructor.settings, this._settings, settings);
+                if (this._settings.name === undefined)
+                    this._settings.name = this.constructor.name;
                 // @ts-ignore
                 this._definition = this.constructor.definition;
             }
+            /**
+             * @name            getAvailableTypes
+             * @type            Function
+             * @static
+             *
+             * This static method allows you to get the types that have been make widely available
+             * using the ```makeAvailableAsType``` method.
+             *
+             * @return      {Object<SInterface>}          An object listing all the interface types maked available widely
+             *
+             * @since     2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            SInterface.getAvailableTypes = function () {
+                return getAvailableInterfaceTypes_1.default();
+            };
+            /**
+             * @name            makeAvailableAsType
+             * @type            Function
+             * @static
+             *
+             * This static method allows you to promote your interface at the level where it can be
+             * used in the "type" interface definition property like so "Object<MyCoolType>"
+             *
+             * @param       {String}      [name=null]       A custom name to register your interface. Otherwise take the class name and register two types: MyClassInterface => MyClassInterface && MyClass
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            SInterface.makeAvailableAsType = function (name) {
+                if (name === void 0) { name = null; }
+                var n = (name || this.name).toLowerCase();
+                if (global !== undefined) {
+                    // @ts-ignore
+                    global._registeredInterfacesTypes[n] = this;
+                    // @ts-ignore
+                    global._registeredInterfacesTypes[n.replace('interface', '')] = this;
+                }
+                else if (window !== undefined) {
+                    // @ts-ignore
+                    window._registeredInterfacesTypes[n] = this;
+                    // @ts-ignore
+                    window._registeredInterfacesTypes[n.replace('interface', '')] = this;
+                }
+            };
             /**
              * @name              apply
              * @type              Function
@@ -127,7 +177,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 if (settings === void 0) { settings = {}; }
                 // instanciate a new SInterface
                 var int = new this(settings);
-                return int.apply(instance);
+                return int.apply(instance, settings);
             };
             /**
              * @name              apply
@@ -147,20 +197,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              */
             SInterface.prototype.apply = function (instance, settings) {
                 if (settings === void 0) { settings = {}; }
-                var name = settings.name;
-                if (name === undefined)
-                    name =
-                        instance.constructor !== undefined
-                            ? instance.constructor.name
-                            : instance.name;
                 settings = deepMerge_1.default(this._settings, settings);
-                var descriptor = new SDescriptor_1.default(__assign({ name: name, type: 'Object', rules: this._definition, arrayAsValue: settings.arrayAsValue, complete: settings.complete, throwOnError: false }, (settings.descriptorSettings || {})));
+                var descriptor = new SDescriptor_1.default(__assign({ name: settings.name, type: 'Object', rules: this._definition, arrayAsValue: settings.arrayAsValue, complete: settings.complete === undefined ? true : settings.complete, throw: false, throwOnMissingRequiredProp: settings.throwOnMissingRequiredProp }, (settings.descriptorSettings || {})));
                 var descriptorResult = descriptor.apply(instance);
                 // instanciate a new interface result object
                 var interfaceResult = new SInterfaceResult_1.default({
                     descriptorResult: descriptorResult
                 });
-                if (interfaceResult.hasIssues() && settings.throwOnError) {
+                if (interfaceResult.hasIssues() && settings.throw) {
                     throw interfaceResult.toString();
                 }
                 // return new result object

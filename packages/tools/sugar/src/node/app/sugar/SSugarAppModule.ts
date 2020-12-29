@@ -153,9 +153,6 @@ export default class SSugarAppModule extends __SPromise {
     super(
       __deepMerge(
         {
-          id: 'SSugarApp',
-          name: 'Sugar App Module',
-          autoRun: false,
           mainProcessId: 'main',
           processUsedForState: undefined,
           processSettings: {}
@@ -163,7 +160,7 @@ export default class SSugarAppModule extends __SPromise {
         settings
       )
     );
-    this._settings.id = `SSugarAppModule.${this._settings.id}`;
+    this._settings.id = `SSugarAppModule.${moduleObj.id}`;
     this._moduleObj = moduleObj;
 
     // __SIpc.on('sugar.ui.displayedModule', (moduleId) => {
@@ -190,7 +187,7 @@ export default class SSugarAppModule extends __SPromise {
 
     // listen when ready
     this.on('state.ready:1', () => {
-      if (this._settings.autoRun === true) {
+      if (this._moduleObj.autoRun === true) {
         this.process.run();
       }
     });
@@ -227,7 +224,7 @@ export default class SSugarAppModule extends __SPromise {
   }
 
   /**
-   * @name          $output
+   * @name          $stdio
    * @type          Function
    * @get
    *
@@ -236,14 +233,14 @@ export default class SSugarAppModule extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get $output() {
-    if (!this._$output) {
-      this._$output = __blessed.box({
+  get $stdio() {
+    if (!this._$stdio) {
+      this._$stdio = __blessed.box({
         content:
           'No ui has been provided for this module. To create one, use the "<yellow>SSugarAppModule.createUi</yellow>" method...'
       });
     }
-    return this._$output;
+    return this._$stdio;
   }
 
   /**

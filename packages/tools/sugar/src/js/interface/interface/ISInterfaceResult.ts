@@ -10,6 +10,7 @@ export interface ISInterfaceResultCtor {
   new (data: ISInterfaceResultData): ISInterfaceResult;
 }
 export default interface ISInterfaceResult {
+  value: any;
   hasIssues(): boolean;
   toString(): string;
   toConsole(): string;

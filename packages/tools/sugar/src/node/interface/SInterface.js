@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 const SDescriptor_1 = __importDefault(require("../descriptor/SDescriptor"));
+const getAvailableInterfaceTypes_1 = __importDefault(require("./getAvailableInterfaceTypes"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SInterfaceResult_1 = __importDefault(require("./SInterfaceResult"));
 /**
@@ -37,6 +38,8 @@ const SInterfaceResult_1 = __importDefault(require("./SInterfaceResult"));
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+// @ts-ignore
+(global || window)._registeredInterfacesTypes = {};
 const Cls = (_a = class SInterface {
         /**
          * @name              constructor
@@ -73,15 +76,61 @@ const Cls = (_a = class SInterface {
              */
             this._settings = {
                 arrayAsValue: false,
-                throwOnError: false,
+                throw: false,
                 complete: true
             };
             // @ts-ignore
             this._settings = deepMerge_1.default(
             // @ts-ignore
             this.constructor.settings, this._settings, settings);
+            if (this._settings.name === undefined)
+                this._settings.name = this.constructor.name;
             // @ts-ignore
             this._definition = this.constructor.definition;
+        }
+        /**
+         * @name            getAvailableTypes
+         * @type            Function
+         * @static
+         *
+         * This static method allows you to get the types that have been make widely available
+         * using the ```makeAvailableAsType``` method.
+         *
+         * @return      {Object<SInterface>}          An object listing all the interface types maked available widely
+         *
+         * @since     2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        static getAvailableTypes() {
+            return getAvailableInterfaceTypes_1.default();
+        }
+        /**
+         * @name            makeAvailableAsType
+         * @type            Function
+         * @static
+         *
+         * This static method allows you to promote your interface at the level where it can be
+         * used in the "type" interface definition property like so "Object<MyCoolType>"
+         *
+         * @param       {String}      [name=null]       A custom name to register your interface. Otherwise take the class name and register two types: MyClassInterface => MyClassInterface && MyClass
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        static makeAvailableAsType(name = null) {
+            const n = (name || this.name).toLowerCase();
+            if (global !== undefined) {
+                // @ts-ignore
+                global._registeredInterfacesTypes[n] = this;
+                // @ts-ignore
+                global._registeredInterfacesTypes[n.replace('interface', '')] = this;
+            }
+            else if (window !== undefined) {
+                // @ts-ignore
+                window._registeredInterfacesTypes[n] = this;
+                // @ts-ignore
+                window._registeredInterfacesTypes[n.replace('interface', '')] = this;
+            }
         }
         /**
          * @name              apply
@@ -105,7 +154,7 @@ const Cls = (_a = class SInterface {
         static apply(instance, settings = {}) {
             // instanciate a new SInterface
             const int = new this(settings);
-            return int.apply(instance);
+            return int.apply(instance, settings);
         }
         /**
          * @name              apply
@@ -124,20 +173,14 @@ const Cls = (_a = class SInterface {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         apply(instance, settings = {}) {
-            let name = settings.name;
-            if (name === undefined)
-                name =
-                    instance.constructor !== undefined
-                        ? instance.constructor.name
-                        : instance.name;
             settings = deepMerge_1.default(this._settings, settings);
-            const descriptor = new SDescriptor_1.default(Object.assign({ name, type: 'Object', rules: this._definition, arrayAsValue: settings.arrayAsValue, complete: settings.complete, throwOnError: false }, (settings.descriptorSettings || {})));
+            const descriptor = new SDescriptor_1.default(Object.assign({ name: settings.name, type: 'Object', rules: this._definition, arrayAsValue: settings.arrayAsValue, complete: settings.complete === undefined ? true : settings.complete, throw: false, throwOnMissingRequiredProp: settings.throwOnMissingRequiredProp }, (settings.descriptorSettings || {})));
             const descriptorResult = descriptor.apply(instance);
             // instanciate a new interface result object
             const interfaceResult = new SInterfaceResult_1.default({
                 descriptorResult
             });
-            if (interfaceResult.hasIssues() && settings.throwOnError) {
+            if (interfaceResult.hasIssues() && settings.throw) {
                 throw interfaceResult.toString();
             }
             // return new result object

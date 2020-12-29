@@ -18,7 +18,9 @@ const ruleObj = {
         return { value: params };
     },
     apply: (value, params, ruleSettings, settings) => {
-        const res = ofType_1.default(value, params.value);
+        const res = ofType_1.default(value, params.value, {
+            name: settings.name
+        });
         if (res !== true)
             return res;
         return true;

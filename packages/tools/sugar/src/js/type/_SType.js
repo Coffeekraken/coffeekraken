@@ -1,18 +1,5 @@
 // @ts-nocheck
 // @shared
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -22,20 +9,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../error/SError", "../iterable/map", "../promise/SPromise", "../class/getExtendsStack", "../value/typeof", "../string/toString", "../object/deepMerge", "../console/parseHtml", "./parseTypeString"], factory);
+        define(["require", "exports", "../error/SError", "../iterable/map", "../class/getExtendsStack", "../value/typeof", "../object/deepMerge", "../console/parseHtml", "./parseTypeString", "./STypeResult", "../interface/getAvailableInterfaceTypes"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var _a;
     var SError_1 = __importDefault(require("../error/SError"));
     var map_1 = __importDefault(require("../iterable/map"));
-    var SPromise_1 = __importDefault(require("../promise/SPromise"));
     var getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
     var typeof_1 = __importDefault(require("../value/typeof"));
-    var toString_1 = __importDefault(require("../string/toString"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var parseHtml_1 = __importDefault(require("../console/parseHtml"));
     var parseTypeString_1 = __importDefault(require("./parseTypeString"));
+    var STypeResult_1 = __importDefault(require("./STypeResult"));
+    var getAvailableInterfaceTypes_1 = __importDefault(require("../interface/getAvailableInterfaceTypes"));
     /**
      * @name                SType
      * @namespace           sugar.js.type
@@ -67,8 +54,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    var Cls = (_a = /** @class */ (function (_super) {
-            __extends(SType, _super);
+    var Cls = (_a = /** @class */ (function () {
             /**
              * @name      constructor
              * @type      Function
@@ -81,27 +67,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              */
             function SType(typeString, settings) {
                 if (settings === void 0) { settings = {}; }
-                var _this = _super.call(this) || this;
                 // save the typeString
-                _this.typeString = typeString;
+                this.typeString = typeString;
                 // standardise the typeString
                 typeString = typeString.toLowerCase().trim();
                 // check if already bein instanciated
-                if (_this.constructor._instanciatedTypes[typeString] !== undefined)
-                    return _this.constructor._instanciatedTypes[typeString];
+                if (this.constructor._instanciatedTypes[typeString] !== undefined)
+                    return this.constructor._instanciatedTypes[typeString];
                 // parse the typeString
-                _this.types = parseTypeString_1.default(typeString).types;
+                this.types = parseTypeString_1.default(typeString).types;
                 // save the settings
-                _this._settings = deepMerge_1.default({
-                    id: _this.constructor.name,
-                    name: _this.constructor.name,
+                this._settings = deepMerge_1.default({
+                    id: this.constructor.name,
+                    name: this.constructor.name,
                     throw: true,
-                    verbose: true,
-                    customTypes: true
+                    customTypes: true,
+                    interfaces: true
                 }, settings);
                 // save the instance into the instanciated stack
-                _this.constructor._instanciatedTypes[typeString] = _this;
-                return _this;
+                this.constructor._instanciatedTypes[typeString] = this;
             }
             /**
              * @name      registerType
@@ -144,9 +128,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 for (var i = 0; i < this.types.length; i++) {
                     var typeObj = this.types[i], typeId = typeObj.type;
                     // check the value
-                    var res = this._isType(value, typeId, settings);
+                    var res_1 = this._isType(value, typeId, settings);
                     // if the result is falsy
-                    if (res === true) {
+                    if (res_1 === true) {
                         // if this matching type does not have any "of" to check
                         // simply return true cause we have a type that match
                         if (typeObj.of === undefined)
@@ -174,9 +158,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                 // validate the value if needed
                                 var ofRes = this._isType(v, type, settings);
                                 if (ofRes !== true) {
-                                    if (issues[typeObj.type] === undefined)
-                                        issues[typeObj.type] = [];
-                                    issues[typeObj.type].push({
+                                    issues[typeObj.type] = {
                                         expected: {
                                             type: typeObj.type
                                         },
@@ -184,7 +166,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                             type: typeof_1.default(v),
                                             value: v
                                         }
-                                    });
+                                    };
                                 }
                                 else {
                                     // return true cause we found a match
@@ -193,34 +175,54 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             }
                         }
                     }
+                    else {
+                        var issueObj = {
+                            expected: {
+                                type: typeObj.type
+                            },
+                            received: {
+                                type: typeof_1.default(value),
+                                value: value
+                            }
+                        };
+                        if (res_1 !== false &&
+                            res_1.toString &&
+                            typeof res_1.toString === 'function') {
+                            issueObj.message = res_1.toString();
+                        }
+                        issues[typeObj.type] = issueObj;
+                    }
                 }
-                if (settings.throw === true) {
-                    throw parseHtml_1.default([
-                        "Sorry but the value passed:",
-                        '',
-                        toString_1.default(value),
-                        '',
-                        "which is of type \"<red>" + typeof_1.default(value) + "</red>\" does not correspond to the requested type(s) \"<green>" + this.typeString + "</green>\""
-                    ].join('\n'));
-                }
-                if (settings.verbose === true) {
-                    var verboseObj = {
-                        typeString: this.typeString,
-                        value: value,
-                        expected: {
-                            type: this.typeString
-                        },
-                        received: {
-                            type: typeof_1.default(value)
-                        },
-                        issues: issues,
-                        settings: settings
-                    };
-                    return verboseObj;
-                }
-                else {
-                    return false;
-                }
+                // if (settings.throw === true) {
+                //   throw __parseHtml(
+                //     [
+                //       `Sorry but the value passed:`,
+                //       '',
+                //       __toString(value),
+                //       '',
+                //       `which is of type "<red>${__typeOf(
+                //         value
+                //       )}</red>" does not correspond to the requested type(s) "<green>${
+                //         this.typeString
+                //       }</green>"`
+                //     ].join('\n')
+                //   );
+                // }
+                var res = new STypeResult_1.default({
+                    typeString: this.typeString,
+                    value: value,
+                    expected: {
+                        type: this.typeString
+                    },
+                    received: {
+                        type: typeof_1.default(value)
+                    },
+                    issues: issues,
+                    settings: settings
+                });
+                if (settings.throw === true)
+                    throw res.toString();
+                return res;
             };
             /**
              * @name          _isType
@@ -240,8 +242,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             SType.prototype._isType = function (value, type, settings) {
                 if (settings === void 0) { settings = {}; }
                 settings = deepMerge_1.default(this._settings, settings);
+                // console.log('type', type, settings);
                 // check that the passed type is registered
                 if (this.constructor._registeredTypes[type.toLowerCase()] === undefined) {
+                    if (settings.interfaces === true) {
+                        var availableInterfaceTypes = getAvailableInterfaceTypes_1.default();
+                        if (availableInterfaceTypes[type] !== undefined) {
+                            var res = availableInterfaceTypes[type].apply(value, {});
+                            return res;
+                        }
+                    }
                     // handle custom types
                     if (settings.customTypes === true) {
                         var typeOf = typeof_1.default(value).toLowerCase();
@@ -403,7 +413,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 configurable: true
             });
             return SType;
-        }(SPromise_1.default)),
+        }()),
         /**
          * @name      _instanciatedTypes
          * @type      ISTypeInstanciatedTypes

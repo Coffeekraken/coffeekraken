@@ -18,17 +18,5 @@ const __SInterface = require('../../../interface/SInterface');
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SSugarAppModuleSettingsInterface extends __SInterface {
-  static definition = {
-    id: {
-      type: 'String',
-      description:
-        'A simple one word id that will be used to identify this module',
-      required: true
-    },
-    name: {
-      type: 'String',
-      description: 'The module name like "Build SCSS", etc...',
-      required: true
-    }
-  };
+  static definition = {};
 };

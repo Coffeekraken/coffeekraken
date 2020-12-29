@@ -73,7 +73,7 @@ export default class SSugarAppProcess extends __SProcess {
     });
 
     // load and check each modules
-    this._loadModules(this._settings.app.modules);
+    this.modulesObjs = this._loadModules(this._settings.app.modules);
 
     // Pipe all the modules "events"
     Object.keys(this.modulesObjs).forEach((moduleIdx) => {
@@ -101,7 +101,7 @@ export default class SSugarAppProcess extends __SProcess {
       });
     });
 
-    this.state = 'ready';
+    this.ready();
   }
 
   /**
@@ -168,14 +168,16 @@ export default class SSugarAppProcess extends __SProcess {
   _loadModules(modulesObj) {
     // track how many modules are ready
     let readyModulesCount = 0;
+    const returnedModulesObj = {};
     // loop on all registered modules
     Object.keys(modulesObj).forEach((moduleIdx) => {
       const moduleObj = modulesObj[moduleIdx];
 
+      if (moduleObj.params === undefined) moduleObj.params = {};
+      if (moduleObj.settings === undefined) moduleObj.settings = {};
+
       // stop here if a module has error...
       if (this.modulesInError.length) return;
-
-      if (moduleObj.params === undefined) moduleObj.params = {};
 
       if (moduleObj.processPath && moduleObj.processPath.slice(-3) !== '.js') {
         moduleObj.processPath += '.js';
@@ -191,9 +193,10 @@ export default class SSugarAppProcess extends __SProcess {
       }
 
       // validate module interface
-      __SSugarAppModuleObjInterface.apply(moduleObj, {
-        name: `${this.constructor.name}.SSugarAppModule.${moduleIdx}`
-      });
+      // __SSugarAppModuleObjInterface.apply(moduleObj, {
+      //   name: `${this.constructor.name}.SSugarAppModule.${moduleIdx}`,
+      //   throw: true
+      // });
 
       // require and instanciate the module class
       const moduleClass = require(moduleObj.modulePath);
@@ -228,7 +231,9 @@ export default class SSugarAppProcess extends __SProcess {
       });
 
       // add the validated module in the _modulesObjArray property
-      this.modulesObjs[moduleIdx] = moduleObj;
+      returnedModulesObj[moduleIdx] = moduleObj;
     });
+
+    return returnedModulesObj;
   }
 }

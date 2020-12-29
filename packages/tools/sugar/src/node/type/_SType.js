@@ -7,13 +7,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 var _a;
 const SError_1 = __importDefault(require("../error/SError"));
 const map_1 = __importDefault(require("../iterable/map"));
-const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
 const typeof_1 = __importDefault(require("../value/typeof"));
-const toString_1 = __importDefault(require("../string/toString"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const parseHtml_1 = __importDefault(require("../console/parseHtml"));
 const parseTypeString_1 = __importDefault(require("./parseTypeString"));
+const STypeResult_1 = __importDefault(require("./STypeResult"));
+const getAvailableInterfaceTypes_1 = __importDefault(require("../interface/getAvailableInterfaceTypes"));
 /**
  * @name                SType
  * @namespace           sugar.js.type
@@ -45,7 +45,7 @@ const parseTypeString_1 = __importDefault(require("./parseTypeString"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls = (_a = class SType extends SPromise_1.default {
+const Cls = (_a = class SType {
         /**
          * @name      constructor
          * @type      Function
@@ -57,7 +57,6 @@ const Cls = (_a = class SType extends SPromise_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         constructor(typeString, settings = {}) {
-            super();
             // save the typeString
             this.typeString = typeString;
             // standardise the typeString
@@ -72,8 +71,8 @@ const Cls = (_a = class SType extends SPromise_1.default {
                 id: this.constructor.name,
                 name: this.constructor.name,
                 throw: true,
-                verbose: true,
-                customTypes: true
+                customTypes: true,
+                interfaces: true
             }, settings);
             // save the instance into the instanciated stack
             this.constructor._instanciatedTypes[typeString] = this;
@@ -148,9 +147,7 @@ const Cls = (_a = class SType extends SPromise_1.default {
                             // validate the value if needed
                             const ofRes = this._isType(v, type, settings);
                             if (ofRes !== true) {
-                                if (issues[typeObj.type] === undefined)
-                                    issues[typeObj.type] = [];
-                                issues[typeObj.type].push({
+                                issues[typeObj.type] = {
                                     expected: {
                                         type: typeObj.type
                                     },
@@ -158,7 +155,7 @@ const Cls = (_a = class SType extends SPromise_1.default {
                                         type: typeof_1.default(v),
                                         value: v
                                     }
-                                });
+                                };
                             }
                             else {
                                 // return true cause we found a match
@@ -167,34 +164,54 @@ const Cls = (_a = class SType extends SPromise_1.default {
                         }
                     }
                 }
+                else {
+                    const issueObj = {
+                        expected: {
+                            type: typeObj.type
+                        },
+                        received: {
+                            type: typeof_1.default(value),
+                            value
+                        }
+                    };
+                    if (res !== false &&
+                        res.toString &&
+                        typeof res.toString === 'function') {
+                        issueObj.message = res.toString();
+                    }
+                    issues[typeObj.type] = issueObj;
+                }
             }
-            if (settings.throw === true) {
-                throw parseHtml_1.default([
-                    `Sorry but the value passed:`,
-                    '',
-                    toString_1.default(value),
-                    '',
-                    `which is of type "<red>${typeof_1.default(value)}</red>" does not correspond to the requested type(s) "<green>${this.typeString}</green>"`
-                ].join('\n'));
-            }
-            if (settings.verbose === true) {
-                const verboseObj = {
-                    typeString: this.typeString,
-                    value,
-                    expected: {
-                        type: this.typeString
-                    },
-                    received: {
-                        type: typeof_1.default(value)
-                    },
-                    issues,
-                    settings
-                };
-                return verboseObj;
-            }
-            else {
-                return false;
-            }
+            // if (settings.throw === true) {
+            //   throw __parseHtml(
+            //     [
+            //       `Sorry but the value passed:`,
+            //       '',
+            //       __toString(value),
+            //       '',
+            //       `which is of type "<red>${__typeOf(
+            //         value
+            //       )}</red>" does not correspond to the requested type(s) "<green>${
+            //         this.typeString
+            //       }</green>"`
+            //     ].join('\n')
+            //   );
+            // }
+            const res = new STypeResult_1.default({
+                typeString: this.typeString,
+                value,
+                expected: {
+                    type: this.typeString
+                },
+                received: {
+                    type: typeof_1.default(value)
+                },
+                issues,
+                settings
+            });
+            if (settings.throw === true)
+                throw res.toString();
+            return res;
         }
         /**
          * @name          _isType
@@ -213,8 +230,16 @@ const Cls = (_a = class SType extends SPromise_1.default {
          */
         _isType(value, type, settings = {}) {
             settings = deepMerge_1.default(this._settings, settings);
+            // console.log('type', type, settings);
             // check that the passed type is registered
             if (this.constructor._registeredTypes[type.toLowerCase()] === undefined) {
+                if (settings.interfaces === true) {
+                    const availableInterfaceTypes = getAvailableInterfaceTypes_1.default();
+                    if (availableInterfaceTypes[type] !== undefined) {
+                        const res = availableInterfaceTypes[type].apply(value, {});
+                        return res;
+                    }
+                }
                 // handle custom types
                 if (settings.customTypes === true) {
                     const typeOf = typeof_1.default(value).toLowerCase();

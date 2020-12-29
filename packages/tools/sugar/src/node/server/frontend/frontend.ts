@@ -40,7 +40,9 @@ import __packageRoot from '../../path/packageRoot';
  */
 const fn = function (args = {}) {
   const settings = __deepMerge(__sugarConfig('frontend'), args);
-  const server = __express();
+  const app = __express();
+
+  let server;
 
   const promise = new __SPromise({
     id: 'frontendServer'
@@ -50,7 +52,7 @@ const fn = function (args = {}) {
     // static directories
     Object.keys(settings.staticDirs).forEach((path) => {
       const fsPath = settings.staticDirs[path];
-      server.use(path, __express.static(fsPath));
+      app.use(path, __express.static(fsPath));
     });
 
     // load the middlewares
@@ -64,7 +66,7 @@ const fn = function (args = {}) {
         );
       }
       // register the middleware
-      server.use(require(middleware.path)(middleware.settings || {}));
+      app.use(require(middleware.path)(middleware.settings || {}));
     }
 
     // loop on handlers
@@ -100,7 +102,7 @@ const fn = function (args = {}) {
           slug = [`${slug}/*`, `${slug}`];
         }
 
-        server[method](slug, async (req, res, next) => {
+        app[method](slug, async (req, res, next) => {
           const reqPathExtension = __extension(req.path);
           if (extension) {
             if (
@@ -116,11 +118,12 @@ const fn = function (args = {}) {
       }
     });
 
-    server
+    server = app
       .listen(settings.port, settings.hostname, () => {
         setTimeout(() => {
           promise.trigger('log', {
             type: 'heading',
+            clear: true,
             value: __trimLines(`Your <yellow>Frontend Express</yellow> server is <green>up and running</green>:
 
                 - Hostname        : <yellow>${settings.hostname}</yellow>
@@ -135,6 +138,10 @@ const fn = function (args = {}) {
         promise.reject(string);
       });
   })();
+
+  promise.on('finally', () => {
+    server.close();
+  });
 
   return promise;
 };

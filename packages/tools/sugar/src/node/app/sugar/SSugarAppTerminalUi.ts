@@ -96,20 +96,12 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
     this.$content = this._initContent();
     this.$topBar = this._initTopBar();
     this.$separator = this._initSeparator();
-
-    // init the "welcome" module
-    this.$content.append($welcome);
-    Object.keys(this._modulesObjs).forEach((moduleId) => {
-      const moduleObj = __clone(this._modulesObjs[moduleId], {
-        deep: true
-      });
-
-      this._modulesObjs[moduleId] = moduleObj;
-    });
-
     this.$bottomBar = this._initBottomBar();
     this.$list = this._initModulesList();
     this._initModules(this.$content);
+
+    // show the welcome screen
+    this._showModule('welcome');
 
     // set focus to list
     this.$list.focus();
@@ -137,22 +129,22 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
       }
     });
 
-    // // listen modules
-    // // this._sources[0].on('*.state', (state: any, metas: any) => {
-    // //   this._moduleState(state, metas);
-    // // });
-    // // this._sources[0].on('*.log', (data: any, metas: any) => {
-    // //   this._moduleLog(data, metas);
-    // // });
-    // // this._sources[0].on('*.start', (data: any, metas: any) => {
-    // //   this._moduleStart(data, metas);
-    // // });
-    // // this._sources[0].on('*.success', (data: any, metas: any) => {
-    // //   this._moduleSuccess(data, metas);
-    // // });
-    // // this._sources[0].on('*.error', (data: any, metas: any) => {
-    // //   this._moduleError(data, metas);
-    // // });
+    // listen modules
+    this._sources[0].on('*.state', (state: any, metas: any) => {
+      this._moduleState(state, metas);
+    });
+    this._sources[0].on('*.log', (data: any, metas: any) => {
+      this._moduleLog(data, metas);
+    });
+    this._sources[0].on('*.start', (data: any, metas: any) => {
+      this._moduleStart(data, metas);
+    });
+    this._sources[0].on('*.success', (data: any, metas: any) => {
+      this._moduleSuccess(data, metas);
+    });
+    this._sources[0].on('*.error', (data: any, metas: any) => {
+      this._moduleError(data, metas);
+    });
 
     this.append(this.$topBar);
     this.append(this.$bottomBar);
@@ -165,14 +157,14 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
   _getDisplayedModuleObj() {
     if (!this._displayedModuleId) return undefined;
     const moduleObj = this._findModuleObjById(this._displayedModuleId);
-    if (!moduleObj.$content.parent) return undefined;
+    if (!moduleObj.$contentContainer.parent) return undefined;
     return moduleObj;
   }
 
   _showModule(moduleIdOrName: any) {
     let moduleObj = this._findModuleObjById(moduleIdOrName);
     if (!moduleObj) moduleObj = this._findModuleObjByName(moduleIdOrName);
-    if (!moduleObj || !moduleObj.$content) return;
+    if (!moduleObj || !moduleObj.$contentContainer) return;
 
     this._displayedModuleId = moduleObj.id;
 
@@ -189,7 +181,7 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
     this.$content.children.forEach(($child: any) => {
       $child.hide();
     });
-    moduleObj.$content.show();
+    moduleObj.$contentContainer.show();
   }
 
   _findModuleObjById(id: any) {
@@ -450,13 +442,13 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
   _initContent() {
     const $content = __blessed.box({
       left: '20%',
-      width: '80%-2',
-      height: '100%-2',
+      width: '80%',
+      height: '100%',
       padding: {
-        top: 1,
-        left: 2,
-        bottom: 1,
-        right: 2
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0
       }
     });
     return $content;
@@ -567,6 +559,8 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
       `<yellow>${'-'.repeat(__countLine(projectLine) + 6)}</yellow>`
     ];
 
+    // console.log(this._serverSettings);
+
     const updateContent = () => {
       let text = [...projectLines, '', spinner.frame()];
 
@@ -609,36 +603,6 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
     return $centeredBox;
   }
 
-  // /**
-  //  * @name            _onShortcutPressed
-  //  * @type            Function
-  //  * @private
-  //  *
-  //  * Method called when a shortcut has been called
-  //  *
-  //  * @param       {Object}      moduleObj       The module object linked to the pressed shortcut
-  //  * @param       {Object}      shortcutObj       The shortcut object containing the params and settings attached
-  //  *
-  //  * @since       2.0.0
-  //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-  //  */
-  // _onShortcutPressed(moduleObj, shortcutObj) {
-  //   // check that this module has the pressed shortcut
-  //   if (
-  //     this._shortcutsCallbackByModule[shortcutObj.keys][moduleObj.id] ===
-  //     undefined
-  //   )
-  //     return;
-  //   if (!moduleObj.instance) return;
-  //   // check if we have a "shortcut" method to call
-  //   if (
-  //     moduleObj.instance.shortcut &&
-  //     typeof moduleObj.instance.shortcut === 'function'
-  //   ) {
-  //     moduleObj.instance.shortcut(shortcutObj);
-  //   }
-  // }
-
   /**
    * @name             _initModules
    * @type              Function
@@ -655,34 +619,17 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
     Object.keys(this._modulesObjs).forEach((moduleName, i) => {
       const moduleObj = this._modulesObjs[moduleName];
 
-      // avoid erasing module that have already a content
-      if (moduleObj.$content !== undefined) return;
-
-      // shortcuts
-      // if (moduleObj.shortcuts !== undefined) {
-      //   // loop on shortcuts
-      //   Object.keys(moduleObj.shortcuts).forEach((keysMap) => {
-      //     const shortcutObj = moduleObj.shortcuts[keysMap];
-      //     shortcutObj.keys = keysMap;
-      //     // check if we have already registered the shortcut ot not.
-      //     // if needed, register it
-      //     if (this._shortcutsCallbackByModule[keysMap] === undefined) {
-      //       this._shortcutsCallbackByModule[keysMap] = {};
-      //       __hotkey(keysMap).on('press', (e) => {
-      //         this._onShortcutPressed(
-      //           this._getDisplayedModuleObj(),
-      //           shortcutObj
-      //         );
-      //       });
-      //     }
-      //     // save the shortcut params and settings in the stack
-      //     this._shortcutsCallbackByModule[keysMap][moduleObj.id] = shortcutObj;
-      //   });
-      // }
+      if (moduleObj.presets) {
+        if (!moduleObj.presets.default)
+          moduleObj.presets.default = {
+            key: 'd',
+            ...(moduleObj.params || {})
+          };
+      }
 
       let OutputClass;
-      if (moduleObj.ui) {
-        const requirePath = __path.relative(__dirname, moduleObj.ui);
+      if (moduleObj.stdioPath) {
+        const requirePath = __path.relative(__dirname, moduleObj.stdioPath);
         OutputClass = require(requirePath);
       } else {
         OutputClass = __SBlessedOutput;
@@ -692,14 +639,13 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
       this._sources.forEach((source) => {
         __SPromise.pipe(source, pipedSources, {
           filter: (logObj, metas) => {
-            // console.log(logObj, moduleObj);
             return logObj.module && logObj.module.id === moduleObj.id;
           }
         });
       });
 
-      const $content = new OutputClass(pipedSources, {
-        blessed: {
+      if (moduleObj.$contentContainer === undefined) {
+        const $contentContainer = __blessed.box({
           width: '100%',
           height: '100%',
           top: 0,
@@ -707,15 +653,72 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
           right: 0,
           bottom: 0,
           style: {}
-        },
-        ...moduleObj
-      });
+        });
+        moduleObj.$contentContainer = $contentContainer;
+      }
 
-      moduleObj.$content = $content;
-      $in.append($content);
-      $content.hide();
+      if (moduleObj.$bottomBar === undefined) {
+        const $bottomBar = __blessed.box({
+          width: '100%',
+          height: 1,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          style: {
+            bg: 'yellow'
+          }
+        });
+        moduleObj.$bottomBar = $bottomBar;
+      }
+
+      if (moduleObj.$content === undefined) {
+        const $content = new OutputClass(pipedSources, {
+          blessed: {
+            width: '100%-2',
+            height: '100%-1',
+            top: 0,
+            left: 1,
+            right: 1,
+            bottom: 1,
+            style: {}
+          },
+          ...moduleObj
+        });
+        moduleObj.$content = $content;
+      }
+
+      if (moduleObj.presets && Object.keys(moduleObj.presets).length) {
+        Object.keys(moduleObj.presets).forEach((presetId, i) => {
+          const presetObj = moduleObj.presets[presetId];
+
+          let left = 0;
+          moduleObj.$bottomBar.children.forEach(($child) => {
+            left += __countLine($child.content);
+          });
+
+          const $preset = __blessed.box({
+            content: ` (${presetObj.key || i}) ${presetId} `,
+            height: 1,
+            left,
+            width: 'shrink',
+            style: {
+              fg: 'black',
+              bg: 'blue'
+            }
+          });
+
+          __hotkey(`ctrl+${presetObj.key}`).on('press', () => {
+            if (this._displayedModuleId !== moduleObj.id) return;
+          });
+
+          moduleObj.$bottomBar.append($preset);
+        });
+      }
+
+      moduleObj.$contentContainer.append(moduleObj.$content);
+      moduleObj.$contentContainer.append(moduleObj.$bottomBar);
+      $in.append(moduleObj.$contentContainer);
+      moduleObj.$contentContainer.hide();
     });
-
-    console.log(this._shortcutsCallbackByModule);
   }
 }

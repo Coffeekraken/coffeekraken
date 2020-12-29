@@ -5,7 +5,8 @@ export interface ISDescriptorSettings {
   type?: string;
   arrayAsValue?: boolean;
   throwOnMissingRule?: boolean;
-  throwOnError?: boolean;
+  throw?: boolean;
+  throwOnMissingRequiredProp?: boolean;
   complete?: boolean;
   name?: string;
   id?: string;

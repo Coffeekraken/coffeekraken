@@ -8,6 +8,7 @@ import ISInterface, {
 } from './interface/ISInterface';
 import ISInterfaceResult from './interface/ISInterfaceResult';
 
+import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
 import __deepMerge from '../object/deepMerge';
 import { ISDescriptorRules } from '../descriptor/interface/ISDescriptor';
 import ISDescriptorResult from '../descriptor/interface/ISDescriptorResult';
@@ -43,6 +44,8 @@ import __SInterfaceResult from './SInterfaceResult';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+// @ts-ignore
+(global || window)._registeredInterfacesTypes = {};
 const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
   /**
    * @name              definition
@@ -56,6 +59,51 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static definition: ISDescriptorRules = {};
+
+  /**
+   * @name            getAvailableTypes
+   * @type            Function
+   * @static
+   *
+   * This static method allows you to get the types that have been make widely available
+   * using the ```makeAvailableAsType``` method.
+   *
+   * @return      {Object<SInterface>}          An object listing all the interface types maked available widely
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static getAvailableTypes() {
+    return __getAvailableInterfaceTypes();
+  }
+
+  /**
+   * @name            makeAvailableAsType
+   * @type            Function
+   * @static
+   *
+   * This static method allows you to promote your interface at the level where it can be
+   * used in the "type" interface definition property like so "Object<MyCoolType>"
+   *
+   * @param       {String}      [name=null]       A custom name to register your interface. Otherwise take the class name and register two types: MyClassInterface => MyClassInterface && MyClass
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static makeAvailableAsType(name = null) {
+    const n = (name || this.name).toLowerCase();
+    if (global !== undefined) {
+      // @ts-ignore
+      global._registeredInterfacesTypes[n] = this;
+      // @ts-ignore
+      global._registeredInterfacesTypes[n.replace('interface', '')] = this;
+    } else if (window !== undefined) {
+      // @ts-ignore
+      window._registeredInterfacesTypes[n] = this;
+      // @ts-ignore
+      window._registeredInterfacesTypes[n.replace('interface', '')] = this;
+    }
+  }
 
   /**
    * @name              _definition
@@ -95,7 +143,7 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
    */
   _settings: ISInterfaceSettings = {
     arrayAsValue: false,
-    throwOnError: false,
+    throw: false,
     complete: true
   };
 
@@ -124,7 +172,7 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
   ): ISInterfaceResult | true {
     // instanciate a new SInterface
     const int = new this(settings);
-    return int.apply(instance);
+    return int.apply(instance, settings);
   }
 
   /**
@@ -145,6 +193,8 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
       this._settings,
       settings
     );
+    if (this._settings.name === undefined)
+      this._settings.name = this.constructor.name;
     // @ts-ignore
     this._definition = this.constructor.definition;
   }
@@ -169,22 +219,16 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
     instance: any,
     settings: ISInterfaceSettings = {}
   ): ISInterfaceResult | true {
-    let name = settings.name;
-    if (name === undefined)
-      name =
-        instance.constructor !== undefined
-          ? instance.constructor.name
-          : instance.name;
-
     settings = __deepMerge(this._settings, settings);
 
     const descriptor = new __SDescriptor({
-      name,
+      name: settings.name,
       type: 'Object',
       rules: this._definition,
       arrayAsValue: settings.arrayAsValue,
-      complete: settings.complete,
-      throwOnError: false,
+      complete: settings.complete === undefined ? true : settings.complete,
+      throw: false,
+      throwOnMissingRequiredProp: settings.throwOnMissingRequiredProp,
       ...(settings.descriptorSettings || {})
     });
 
@@ -195,7 +239,7 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
       descriptorResult
     });
 
-    if (interfaceResult.hasIssues() && settings.throwOnError) {
+    if (interfaceResult.hasIssues() && settings.throw) {
       throw interfaceResult.toString();
     }
 

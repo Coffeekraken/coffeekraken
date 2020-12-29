@@ -3,6 +3,7 @@
 var _a;
 const __SInterface = require('../../../interface/SInterface');
 const __sugarConfig = require('../../../config/sugar');
+const __SSugarAppModulePresetInterface = require('./SSugarAppModulePresetInterface');
 module.exports = (_a = class SSugarAppModuleObjInterface extends __SInterface {
     },
     _a.definition = {
@@ -42,6 +43,11 @@ module.exports = (_a = class SSugarAppModuleObjInterface extends __SInterface {
             path: {
                 exists: true
             }
+        },
+        presets: {
+            type: 'Object<SSugarAppModulePreset>',
+            description: 'An object of presets objects to use with the registered process',
+            required: true
         },
         params: {
             type: 'Object',

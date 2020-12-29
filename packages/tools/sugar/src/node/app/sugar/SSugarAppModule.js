@@ -39,9 +39,6 @@ class SSugarAppModule extends SPromise_1.default {
      */
     constructor(moduleObj, settings = {}) {
         super(deepMerge_1.default({
-            id: 'SSugarApp',
-            name: 'Sugar App Module',
-            autoRun: false,
             mainProcessId: 'main',
             processUsedForState: undefined,
             processSettings: {}
@@ -91,7 +88,7 @@ class SSugarAppModule extends SPromise_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this._moduleProcesses = {};
-        this._settings.id = `SSugarAppModule.${this._settings.id}`;
+        this._settings.id = `SSugarAppModule.${moduleObj.id}`;
         this._moduleObj = moduleObj;
         // __SIpc.on('sugar.ui.displayedModule', (moduleId) => {
         //   this._active = this.id === moduleId;
@@ -113,7 +110,7 @@ class SSugarAppModule extends SPromise_1.default {
         this._initShortcuts();
         // listen when ready
         this.on('state.ready:1', () => {
-            if (this._settings.autoRun === true) {
+            if (this._moduleObj.autoRun === true) {
                 this.process.run();
             }
         });
@@ -193,7 +190,7 @@ class SSugarAppModule extends SPromise_1.default {
         return this._settings.processUsedForState;
     }
     /**
-     * @name          $output
+     * @name          $stdio
      * @type          Function
      * @get
      *
@@ -202,13 +199,13 @@ class SSugarAppModule extends SPromise_1.default {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    get $output() {
-        if (!this._$output) {
-            this._$output = blessed_1.default.box({
+    get $stdio() {
+        if (!this._$stdio) {
+            this._$stdio = blessed_1.default.box({
                 content: 'No ui has been provided for this module. To create one, use the "<yellow>SSugarAppModule.createUi</yellow>" method...'
             });
         }
-        return this._$output;
+        return this._$stdio;
     }
     /**
      * @name          activate

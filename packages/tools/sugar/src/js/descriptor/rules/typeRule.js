@@ -27,7 +27,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             return { value: params };
         },
         apply: function (value, params, ruleSettings, settings) {
-            var res = ofType_1.default(value, params.value);
+            var res = ofType_1.default(value, params.value, {
+                name: settings.name
+            });
             if (res !== true)
                 return res;
             return true;

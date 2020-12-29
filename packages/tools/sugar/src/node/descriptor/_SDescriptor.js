@@ -9,12 +9,16 @@ const ofType_1 = __importDefault(require("../is/ofType"));
 const typeof_1 = __importDefault(require("../value/typeof"));
 const SDescriptorResult_1 = __importDefault(require("./SDescriptorResult"));
 const get_1 = __importDefault(require("../object/get"));
+const glob_1 = __importDefault(require("../is/glob"));
+const getGlob_1 = __importDefault(require("../object/getGlob"));
+const flatten_1 = __importDefault(require("../object/flatten"));
 const set_1 = __importDefault(require("../object/set"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name                SDescriptor
  * @namespace           sugar.js.descriptor
  * @type                Class
+ * @status              beta
  *
  * This class is the main one that MUST be used as parent one
  * when creating any descriptor like object, string, etc...
@@ -22,6 +26,7 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  * @param       {ISDescriptorSettings}      settings        An object of setting to configure your descriptor instance
  *
  * @todo      handle array values
+ * @todo      handle not object values
  *
  * @example       js
  * import SDescriptor from '@coffeekraken/sugar/js/descriptor/SDescriptor';
@@ -52,9 +57,11 @@ const Cls = (_a = class SDescriptor {
                 id: this.constructor.id || this.constructor.name,
                 name: this.constructor.name,
                 rules: this.constructor.rules || {},
+                type: 'Object',
                 arrayAsValue: false,
                 throwOnMissingRule: false,
-                throwOnError: false,
+                throwOnMissingRequiredProp: true,
+                throw: false,
                 complete: true
             }, this.constructor.settings, settings);
         }
@@ -136,26 +143,51 @@ const Cls = (_a = class SDescriptor {
             // check the type to validate correctly the value
             if (Array.isArray(value) && !settings.arrayAsValue) {
                 // loop on each items
+                throw `Sorry but the support for arrays like values has not been integrated for not...`;
                 value.forEach((item) => { });
             }
             else if (typeof value === 'object' &&
                 value !== null &&
                 value !== undefined) {
                 // loop on each object properties
-                Object.keys(settings.rules).forEach((propName) => {
-                    const propValue = get_1.default(value, propName);
-                    // validate the object property
-                    const validationResult = this._validate(propValue, propName, settings);
-                    if (validationResult !== undefined && validationResult !== null) {
-                        set_1.default(value, propName, validationResult);
+                Object.keys(flatten_1.default(settings.rules, {
+                    keepLastIntact: true
+                })).forEach((propName) => {
+                    const ruleObj = get_1.default(settings.rules, propName);
+                    // complete
+                    if (!glob_1.default(propName) &&
+                        get_1.default(value, propName) === undefined &&
+                        settings.complete &&
+                        ruleObj.default !== undefined) {
+                        set_1.default(value, propName, ruleObj.default);
+                    }
+                    const globPropValue = getGlob_1.default(value, propName, {
+                        deepize: false
+                    });
+                    if (settings.throwOnMissingRequiredProp &&
+                        ruleObj.required !== undefined &&
+                        ruleObj.required !== false &&
+                        Object.keys(globPropValue).length === 0) {
+                        globPropValue[propName] = undefined;
+                    }
+                    if (Object.keys(globPropValue).length) {
+                        // check the finded properties
+                        Object.keys(globPropValue).forEach((path) => {
+                            // validate the property
+                            const validationResult = this._validate(globPropValue[path], path, ruleObj, settings);
+                            if (validationResult !== undefined && validationResult !== null) {
+                                set_1.default(value, path, validationResult);
+                            }
+                        });
                     }
                 });
             }
             else {
+                throw `Sorry but the support for values other than objects has not been integrated for not...`;
                 // validate the object property
-                const validationResult = this._validate(value, undefined, settings);
+                const validationResult = this._validate(value, undefined, undefined, settings);
             }
-            if (this._descriptorResult.hasIssues() && settings.throwOnError) {
+            if (this._descriptorResult.hasIssues() && settings.throw) {
                 throw this._descriptorResult.toString();
             }
             return this._descriptorResult;
@@ -173,31 +205,19 @@ const Cls = (_a = class SDescriptor {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        _validate(value, propName, settings) {
-            // check if we have a propName, meaning that we are validating an object
-            let rules = settings.rules;
-            if (propName !== undefined) {
-                if (settings.rules[propName] === undefined)
-                    return true;
-                rules = settings.rules[propName];
-            }
-            // check the "complete" setting
-            if (settings.complete) {
-                if ((value === null || value === undefined) &&
-                    rules.default !== undefined) {
-                    value = rules.default;
-                }
-            }
-            if (rules.required === undefined || rules.required === false) {
+        _validate(value, propName, rulesObj, settings) {
+            if (rulesObj === undefined)
+                return value;
+            if (rulesObj.required === undefined || rulesObj.required === false) {
                 if (value === undefined || value === null)
                     return value;
             }
             // loop on the rules object
-            Object.keys(rules).forEach((ruleName) => {
+            Object.keys(rulesObj).forEach((ruleName) => {
                 // do not take care of "default" rule name
                 if (ruleName === 'default')
                     return;
-                const ruleValue = rules[ruleName];
+                const ruleValue = rulesObj[ruleName];
                 // make sure we have this rule registered
                 if (this.constructor._registeredRules[ruleName] === undefined) {
                     if (settings.throwOnMissingRule) {
@@ -214,7 +234,7 @@ const Cls = (_a = class SDescriptor {
                     // check if the rule accept this type of value
                     if (ruleObj.accept && ofType_1.default(value, ruleObj.accept) !== true)
                         return;
-                    const ruleResult = ruleObj.apply(value, params, ruleSettings, settings);
+                    const ruleResult = ruleObj.apply(value, params, ruleSettings, Object.assign(Object.assign({}, settings), { name: `${settings.name}.${propName}` }));
                     if (ruleResult === true)
                         return value;
                     const obj = ruleResult === false ? {} : ruleResult;

@@ -10,7 +10,6 @@ const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 const SProcess_1 = __importDefault(require("../../process/SProcess"));
 const SSugarAppInterface_1 = __importDefault(require("./interface/SSugarAppInterface"));
 const sugar_1 = __importDefault(require("../../config/sugar"));
-const SSugarAppModuleObjInterface_1 = __importDefault(require("./interface/SSugarAppModuleObjInterface"));
 const SSugarAppModule_1 = __importDefault(require("./SSugarAppModule"));
 /**
  * @name            SSugarAppProcess
@@ -65,7 +64,7 @@ class SSugarAppProcess extends SProcess_1.default {
          */
         this.modulesInError = [];
         // load and check each modules
-        this._loadModules(this._settings.app.modules);
+        this.modulesObjs = this._loadModules(this._settings.app.modules);
         // Pipe all the modules "events"
         Object.keys(this.modulesObjs).forEach((moduleIdx) => {
             const moduleObj = this.modulesObjs[moduleIdx];
@@ -92,7 +91,7 @@ class SSugarAppProcess extends SProcess_1.default {
                 }
             });
         });
-        this.state = 'ready';
+        this.ready();
     }
     /**
      * @name              process
@@ -155,14 +154,17 @@ class SSugarAppProcess extends SProcess_1.default {
     _loadModules(modulesObj) {
         // track how many modules are ready
         let readyModulesCount = 0;
+        const returnedModulesObj = {};
         // loop on all registered modules
         Object.keys(modulesObj).forEach((moduleIdx) => {
             const moduleObj = modulesObj[moduleIdx];
+            if (moduleObj.params === undefined)
+                moduleObj.params = {};
+            if (moduleObj.settings === undefined)
+                moduleObj.settings = {};
             // stop here if a module has error...
             if (this.modulesInError.length)
                 return;
-            if (moduleObj.params === undefined)
-                moduleObj.params = {};
             if (moduleObj.processPath && moduleObj.processPath.slice(-3) !== '.js') {
                 moduleObj.processPath += '.js';
             }
@@ -175,9 +177,10 @@ class SSugarAppProcess extends SProcess_1.default {
                 moduleObj.params.processPath = moduleObj.processPath;
             }
             // validate module interface
-            SSugarAppModuleObjInterface_1.default.apply(moduleObj, {
-                name: `${this.constructor.name}.SSugarAppModule.${moduleIdx}`
-            });
+            // __SSugarAppModuleObjInterface.apply(moduleObj, {
+            //   name: `${this.constructor.name}.SSugarAppModule.${moduleIdx}`,
+            //   throw: true
+            // });
             // require and instanciate the module class
             const moduleClass = require(moduleObj.modulePath);
             if (!class_1.default(moduleClass)) {
@@ -206,8 +209,9 @@ class SSugarAppProcess extends SProcess_1.default {
                 }
             });
             // add the validated module in the _modulesObjArray property
-            this.modulesObjs[moduleIdx] = moduleObj;
+            returnedModulesObj[moduleIdx] = moduleObj;
         });
+        return returnedModulesObj;
     }
 }
 exports.default = SSugarAppProcess;

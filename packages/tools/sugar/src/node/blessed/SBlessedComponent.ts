@@ -5,6 +5,7 @@ import ISBlessedComponent, {
   ISBlessedComponentSettings
 } from './interface/ISBlessedComponent';
 
+import __SPromise from '../promise/SPromise';
 import __blessed from 'blessed';
 import __deepMerge from '../object/deepMerge';
 import __color from '../color/color';
@@ -136,6 +137,7 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
     super(settings.blessed || {});
 
     this._settings = settings;
+    this._promise = new __SPromise();
 
     // save screen reference
     this._screen = SBlessedComponent.screen;
@@ -260,6 +262,24 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
    */
   isDestroyed() {
     return this._destroyed === true;
+  }
+
+  /**
+   * @name          trigger
+   * @type          Function
+   *
+   * Trigger some "events" through the SPromise instance
+   *
+   * @param       {String}      stack         The stack (name) of the event
+   * @param       {Any}         data          The data to pass along the event
+   * @return      {SPromise}                  The SPromise instance to maintain chainability
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  trigger(stack, data) {
+    this.emit(stack, data);
+    return this;
   }
 };
 

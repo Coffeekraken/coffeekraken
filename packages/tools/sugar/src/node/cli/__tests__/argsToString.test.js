@@ -5,4 +5,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const argsToString_1 = __importDefault(require("../argsToString"));
 require('../cli/__tests__/argsToString')(argsToString_1.default);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=argsToString.test.js.map

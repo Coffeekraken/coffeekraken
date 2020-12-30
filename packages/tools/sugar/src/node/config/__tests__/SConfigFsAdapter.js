@@ -39,4 +39,4 @@ exports.default = (__SConfig, __SConfigFsAdapter) => {
         }));
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SConfigFsAdapter.js.map

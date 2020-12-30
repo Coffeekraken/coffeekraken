@@ -1,14 +1,4 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    var __validateValue = require('../validateValue');
-    require('./validateValue')(__validateValue);
-});
-//# sourceMappingURL=module.js.map
+"use strict";
+var __validateValue = require('../validateValue');
+require('./validateValue')(__validateValue);
+//# sourceMappingURL=validateValue.test.js.map

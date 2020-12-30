@@ -45,4 +45,4 @@ exports.default = (__SCli, __SInterface) => {
         });
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SCli.js.map

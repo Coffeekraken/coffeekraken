@@ -50,7 +50,7 @@ const fn: ICompileTs = function compileTs(
 ): Promise<any> {
   const promise = new __SPromise();
 
-  (async (resolve, reject, trigger, cancel) => {
+  (async () => {
     const tmpDir: string = __tmpDir();
 
     const stacks = {};
@@ -193,6 +193,11 @@ const fn: ICompileTs = function compileTs(
                 delete durationStack[file.path];
               }, 60000);
 
+              promise.trigger('notification', {
+                type: 'warn',
+                title: `${stack} | Updated`,
+                value: `${file.path.replace(`${__packageRoot()}/`, '')}`
+              });
               promise.trigger('log', {
                 value: `<magenta>[${stack}]</magenta> <yellow>updated</yellow> <green>${file.path.replace(
                   `${__packageRoot()}/`,
@@ -218,6 +223,11 @@ const fn: ICompileTs = function compileTs(
                   's'
                 )}s`;
               }
+              promise.trigger('notification', {
+                type: 'success',
+                title: `${stack} | Success`,
+                value: `${file.path.replace(`${__packageRoot()}/`, '')}`
+              });
               promise.trigger('log', {
                 value: `<magenta>[${stack}]</magenta> <cyan>compiled</cyan> <green>${file.path.replace(
                   `${__packageRoot()}/`,

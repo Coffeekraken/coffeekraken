@@ -91,7 +91,6 @@ class SSugarAppProcess extends SProcess_1.default {
                 }
             });
         });
-        this.ready();
     }
     /**
      * @name              process
@@ -122,7 +121,7 @@ class SSugarAppProcess extends SProcess_1.default {
      */
     _modulesReady() {
         setTimeout(() => {
-            this.state = 'ready';
+            this.state('ready');
         }, 20);
     }
     /**
@@ -136,7 +135,7 @@ class SSugarAppProcess extends SProcess_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _modulesError() {
-        this.state = 'error';
+        this.state('error');
     }
     /**
      * @name            _loadModules
@@ -191,7 +190,7 @@ class SSugarAppProcess extends SProcess_1.default {
                 throw new SError_1.default(`It seems that the passed class for your module "<yellow>${moduleObj.name}</yellow>" does not extends the sugar "<green>SSugarAppModule</green>" one...`);
             }
             moduleObj.instance = moduleInstance;
-            moduleInstance.on('state,*.state', (state, metas) => {
+            moduleInstance.on('state', (state, metas) => {
                 if (state === 'ready') {
                     if (this.modulesInError.indexOf(moduleObj) !== -1)
                         return;

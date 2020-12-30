@@ -37,46 +37,6 @@ const SSugarAppTerminalUi_1 = __importDefault(require("./SSugarAppTerminalUi"));
  */
 class SSugarApp extends SPromise_1.default {
     /**
-     * @name          state
-     * @type          String
-     * @values        loading,ready,running,error
-     * @default       loading
-     *
-     * Store the module state
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    // _state = 'loading';
-    // get state() {
-    //   return this._state;
-    // }
-    // set state(value) {
-    //   this._setState(value);
-    // }
-    // _setState(value) {
-    //   if (['loading', 'ready', 'error'].indexOf(value) === -1) {
-    //     throw new __SError(
-    //       `Sorry but the "<yellow>state</yellow>" property setted to "<magenta>${__toString(
-    //         value
-    //       )}</magenta>" of your "<cyan>${
-    //         this.constructor.name
-    //       }</cyan>" class can contain only one of these values: ${[
-    //         'loading',
-    //         'ready',
-    //         'error'
-    //       ]
-    //         .map((i) => {
-    //           return `"<green>${i}</green>"`;
-    //         })
-    //         .join(', ')}`
-    //     );
-    //   }
-    //   // trigger an event
-    //   this.trigger('state', value);
-    //   this._state = value;
-    // }
-    /**
      * @name              constructor
      * @type              Function
      * @constructor

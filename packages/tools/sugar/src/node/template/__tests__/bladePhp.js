@@ -22,4 +22,4 @@ module.exports = (__bladePhp) => {
         }));
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=bladePhp.js.map

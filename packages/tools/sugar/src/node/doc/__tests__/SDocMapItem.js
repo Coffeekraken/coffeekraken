@@ -17,4 +17,4 @@ module.exports = (__SDocMapItem) => {
         }));
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SDocMapItem.js.map

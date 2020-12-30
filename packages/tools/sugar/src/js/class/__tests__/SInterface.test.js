@@ -11,4 +11,4 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     throw 'WIP';
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SInterface.test.js.map

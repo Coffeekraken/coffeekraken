@@ -11,7 +11,6 @@
     Object.defineProperty(exports, "__esModule", { value: true });
     module.exports = function (__checkArgs) {
         function checkArgs(param1, param2, param3, param4) {
-            // console.log(__getArgsNames(checkArgs));
             if (param3 === void 0) { param3 = 'hello'; }
             __checkArgs(checkArgs, arguments, {
                 param1: 'String -v hello,world',
@@ -33,4 +32,4 @@
         });
     };
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=checkArgs.js.map

@@ -39,4 +39,4 @@ test('sugar.node.cache.SCache: Delete an item in the cache', (done) => {
         done();
     }))();
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SCache.test.js.map

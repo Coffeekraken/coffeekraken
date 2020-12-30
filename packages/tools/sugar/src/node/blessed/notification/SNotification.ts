@@ -4,7 +4,7 @@ import __deepMerge from '../../object/deepMerge';
 import __blessed from 'blessed';
 import __color from '../../color/color';
 import __hotkey from '../../keyboard/hotkey';
-import __parseHtml from '../../terminal/parseHtml';
+import __parseHtml from '../../console/parseHtml';
 import __SBlessedComponent from '../SBlessedComponent';
 
 /**
@@ -114,26 +114,29 @@ export = class SBlessedNotification extends __SBlessedComponent {
 
     super({
       ...settings,
-      width: 40,
-      height: 4,
-      style: {
-        bg: settings.bg,
-        fg: settings.fg,
-        hover: {
-          bg: settings.hover.bg,
-          fg: settings.hover.fg
-        }
-      },
-      padding: {
-        top: 1,
-        left: 2,
-        right: 2,
-        bottom: 0
-      },
-      clickable: settings.onClick !== null,
-      content: __parseHtml([`<bold>${title}</bold>`, `${body}`, ''].join('\n'))
+      blessed: {
+        width: 40,
+        height: 4,
+        style: {
+          bg: settings.blessed.bg,
+          fg: settings.blessed.fg,
+          hover: {
+            bg: settings.blessed.hover.bg,
+            fg: settings.blessed.hover.fg
+          }
+        },
+        padding: {
+          top: 1,
+          left: 2,
+          right: 2,
+          bottom: 0
+        },
+        clickable: settings.onClick !== null,
+        content: __parseHtml(
+          [`<bold>${title}</bold>`, `${body}`, ''].join('\n')
+        )
+      }
     });
-
     this.on('attach', () => {
       const stack = SBlessedNotification.displayStacks[position];
       if (stack.indexOf(this) === -1) {

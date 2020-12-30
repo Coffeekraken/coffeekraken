@@ -49,7 +49,7 @@ const transpileAndSave_1 = __importDefault(require("./transpileAndSave"));
  */
 const fn = function compileTs(params, settings) {
     const promise = new SPromise_1.default();
-    ((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+    (() => __awaiter(this, void 0, void 0, function* () {
         const tmpDir = tmpDir_1.default();
         const stacks = {};
         // load the typescript config
@@ -170,6 +170,11 @@ const fn = function compileTs(params, settings) {
                         setTimeout(() => {
                             delete durationStack[file.path];
                         }, 60000);
+                        promise.trigger('notification', {
+                            type: 'warn',
+                            title: `${stack} | Updated`,
+                            value: `${file.path.replace(`${packageRoot_1.default()}/`, '')}`
+                        });
                         promise.trigger('log', {
                             value: `<magenta>[${stack}]</magenta> <yellow>updated</yellow> <green>${file.path.replace(`${packageRoot_1.default()}/`, '')}</green> <yellow>${file.sizeInKBytes}kb</yellow>`
                         });
@@ -182,6 +187,11 @@ const fn = function compileTs(params, settings) {
                         if (durationStack[file.path.replace(/\.js$/, '.ts')] !== undefined) {
                             duration = ` in ${convert_1.default(Date.now() - durationStack[file.path.replace(/\.js$/, '.ts')], 's')}s`;
                         }
+                        promise.trigger('notification', {
+                            type: 'success',
+                            title: `${stack} | Success`,
+                            value: `${file.path.replace(`${packageRoot_1.default()}/`, '')}`
+                        });
                         promise.trigger('log', {
                             value: `<magenta>[${stack}]</magenta> <cyan>compiled</cyan> <green>${file.path.replace(`${packageRoot_1.default()}/`, '')}</green> <yellow>${file.sizeInKBytes}kb</yellow>${duration}`
                         });

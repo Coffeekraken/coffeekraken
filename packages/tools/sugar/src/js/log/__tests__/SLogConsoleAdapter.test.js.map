@@ -1,1 +1,1 @@
-{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":";;;;;;;;;;IAAA,IAAM,MAAM,GAAG,OAAO,CAAC,SAAS,CAAC,CAAC;IAClC,IAAM,oBAAoB,GAAG,OAAO,CAAC,gCAAgC,CAAC,CAAC;IACvE,OAAO,CAAC,sBAAsB,CAAC,CAAC,MAAM,EAAE,oBAAoB,CAAC,CAAC"}
+{"version":3,"file":"SLogConsoleAdapter.test.js","sourceRoot":"","sources":["SLogConsoleAdapter.test.ts"],"names":[],"mappings":";AAAA,IAAM,MAAM,GAAG,OAAO,CAAC,SAAS,CAAC,CAAC;AAClC,IAAM,oBAAoB,GAAG,OAAO,CAAC,gCAAgC,CAAC,CAAC;AACvE,OAAO,CAAC,sBAAsB,CAAC,CAAC,MAAM,EAAE,oBAAoB,CAAC,CAAC"}

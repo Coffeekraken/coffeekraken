@@ -1,14 +1,4 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    var __rtrim = require('../rtrim');
-    require('./rtrim')(__rtrim);
-});
-//# sourceMappingURL=module.js.map
+"use strict";
+var __rtrim = require('../rtrim');
+require('./rtrim')(__rtrim);
+//# sourceMappingURL=rtrim.test.js.map

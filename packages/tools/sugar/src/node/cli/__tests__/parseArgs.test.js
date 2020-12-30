@@ -5,4 +5,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const parseArgs_1 = __importDefault(require("../parseArgs"));
 require('../cli/__tests__/parseArgs')(parseArgs_1.default);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=parseArgs.test.js.map

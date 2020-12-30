@@ -62,21 +62,6 @@ export = class SSugarAppProcessModule extends __SSugarAppModule {
       initialParams: Object.assign({}, moduleObj.params || {})
     });
 
-    // class ModuleInterface extends __SInterface {
-    //   static definition = {
-    //     ...__SSugarAppModuleObjInterface.definition,
-    //     params: ProcessInterface.definition || {},
-    //     presets: {
-    //       '*': ProcessInterface.definition || {}
-    //     }
-    //   };
-    // }
-
-    // console.log(ModuleInterface.definition);
-
-    // // apply the interface on the moduleObj
-    // ModuleInterface.apply(moduleObj);
-
     // register process
     this.registerProcess(pro);
 
@@ -87,11 +72,13 @@ export = class SSugarAppProcessModule extends __SSugarAppModule {
   handleShortcuts(shortcutObj, params, settings) {
     switch (shortcutObj.id) {
       case 'exit':
+        if (!this.process.isRunning()) return;
         this.process.kill(
           `The process has been killed using the "<yellow>ctrl+e</yellow>" shortcut`
         );
         break;
       case 'run':
+        if (this.process.isRunning()) return;
         this.process.run(params);
         break;
     }

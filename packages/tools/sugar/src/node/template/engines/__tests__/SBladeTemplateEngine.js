@@ -17,4 +17,4 @@ module.exports = (__SBladeTemplateEngine) => {
         });
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SBladeTemplateEngine.js.map

@@ -67,4 +67,4 @@ describe('sugar.node.docblock.firstDocblocksWithNamespaceInFolder', () => {
         done();
     }));
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=firstDocblocksWithNamespaceInFolder.test.js.map

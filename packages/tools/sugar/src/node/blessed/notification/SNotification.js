@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
-const parseHtml_1 = __importDefault(require("../../terminal/parseHtml"));
+const parseHtml_1 = __importDefault(require("../../console/parseHtml"));
 const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
 module.exports = (_a = class SBlessedNotification extends SBlessedComponent_1.default {
         /**
@@ -34,19 +34,26 @@ module.exports = (_a = class SBlessedNotification extends SBlessedComponent_1.de
             }, settings);
             const position = settings.position;
             delete settings.position;
-            super(Object.assign(Object.assign({}, settings), { width: 40, height: 4, style: {
-                    bg: settings.bg,
-                    fg: settings.fg,
-                    hover: {
-                        bg: settings.hover.bg,
-                        fg: settings.hover.fg
-                    }
-                }, padding: {
-                    top: 1,
-                    left: 2,
-                    right: 2,
-                    bottom: 0
-                }, clickable: settings.onClick !== null, content: parseHtml_1.default([`<bold>${title}</bold>`, `${body}`, ''].join('\n')) }));
+            super(Object.assign(Object.assign({}, settings), { blessed: {
+                    width: 40,
+                    height: 4,
+                    style: {
+                        bg: settings.blessed.bg,
+                        fg: settings.blessed.fg,
+                        hover: {
+                            bg: settings.blessed.hover.bg,
+                            fg: settings.blessed.hover.fg
+                        }
+                    },
+                    padding: {
+                        top: 1,
+                        left: 2,
+                        right: 2,
+                        bottom: 0
+                    },
+                    clickable: settings.onClick !== null,
+                    content: parseHtml_1.default([`<bold>${title}</bold>`, `${body}`, ''].join('\n'))
+                } }));
             this.on('attach', () => {
                 const stack = SBlessedNotification.displayStacks[position];
                 if (stack.indexOf(this) === -1) {
@@ -114,4 +121,4 @@ module.exports = (_a = class SBlessedNotification extends SBlessedComponent_1.de
         br: []
     },
     _a);
-//# sourceMappingURL=SNotification.js.map
+//# sourceMappingURL=module.js.map

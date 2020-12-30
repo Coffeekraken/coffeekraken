@@ -1,14 +1,4 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    var __safari = require('../safari');
-    require('./safari')(__safari);
-});
-//# sourceMappingURL=module.js.map
+"use strict";
+var __safari = require('../safari');
+require('./safari')(__safari);
+//# sourceMappingURL=safari.test.js.map

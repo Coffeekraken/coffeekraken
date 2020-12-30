@@ -1,1 +1,1 @@
-{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":";AAAA,MAAM,MAAM,GAAG,OAAO,CAAC,SAAS,CAAC,CAAC;AAClC,MAAM,kBAAkB,GAAG,OAAO,CAAC,8BAA8B,CAAC,CAAC;AACnE,OAAO,CAAC,oBAAoB,CAAC,CAAC,MAAM,EAAE,kBAAkB,CAAC,CAAC"}
+{"version":3,"file":"SLogFilesAdapter.test.js","sourceRoot":"","sources":["SLogFilesAdapter.test.ts"],"names":[],"mappings":";AAAA,MAAM,MAAM,GAAG,OAAO,CAAC,SAAS,CAAC,CAAC;AAClC,MAAM,kBAAkB,GAAG,OAAO,CAAC,8BAA8B,CAAC,CAAC;AACnE,OAAO,CAAC,oBAAoB,CAAC,CAAC,MAAM,EAAE,kBAAkB,CAAC,CAAC"}

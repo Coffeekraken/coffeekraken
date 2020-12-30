@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,39 +35,28 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    module.exports = function (__sleep) {
-        describe('sugar.js.function.sleep', function () {
-            var start, end;
-            (function () { return __awaiter(void 0, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            start = Date.now();
-                            return [4 /*yield*/, __sleep(200)];
-                        case 1:
-                            _a.sent();
-                            end = Date.now();
-                            return [2 /*return*/];
-                    }
-                });
-            }); })();
-            it('Sould a difference between the start and the end time greater that 200', function (done) {
-                setTimeout(function () {
-                    expect(end - start).toBeGreaterThan(195);
-                    done();
-                }, 250);
+module.exports = function (__sleep) {
+    describe('sugar.js.function.sleep', function () {
+        var start, end;
+        (function () { return __awaiter(void 0, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        start = Date.now();
+                        return [4 /*yield*/, __sleep(200)];
+                    case 1:
+                        _a.sent();
+                        end = Date.now();
+                        return [2 /*return*/];
+                }
             });
+        }); })();
+        it('Sould a difference between the start and the end time greater that 200', function (done) {
+            setTimeout(function () {
+                expect(end - start).toBeGreaterThan(195);
+                done();
+            }, 250);
         });
-    };
-});
-//# sourceMappingURL=module.js.map
+    });
+};
+//# sourceMappingURL=sleep.js.map

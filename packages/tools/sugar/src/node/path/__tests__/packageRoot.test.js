@@ -6,4 +6,4 @@ describe('sugar.node.path.packageRoot', () => {
         expect(__packageRoot(__dirname, true).split('/').pop()).toBe('coffeekraken');
     });
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=packageRoot.test.js.map

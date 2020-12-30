@@ -2,4 +2,4 @@
 module.exports = {
     title: 'Data from gile'
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=index.data.js.map

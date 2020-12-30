@@ -6,4 +6,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const SCli_1 = __importDefault(require("../SCli"));
 const SInterface_1 = __importDefault(require("../../class/SInterface"));
 require('./SCli')(SCli_1.default, SInterface_1.default);
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SCli.test.js.map

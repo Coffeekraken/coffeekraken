@@ -7,4 +7,4 @@ module.exports = (__center) => {
         });
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=center.js.map

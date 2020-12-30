@@ -1,5 +1,8 @@
 // @ts-nocheck
 
+import __isPath from '../../is/path';
+import __getFilename from '../../fs/filename';
+import __SBlessedStdio from '../../blessed/stdio/SBlessedStdio';
 import __SPromise from '../../promise/SPromise';
 import __SError from '../../error/SError';
 import __toString from '../../string/toString';
@@ -41,17 +44,35 @@ export default class SSugarAppModule extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _state = 'loading';
-  get state() {
-    return this._state;
-  }
-  set state(value) {
-    this._setState(value);
-  }
-  _setState(value) {
+  state(value = null) {
+    if (value === null) return this._state;
     // trigger an event
     this.trigger(`state.${value}`, true);
     this.trigger('state', value);
     this._state = value;
+  }
+
+  /**
+   * @name          stdio
+   * @type          Function
+   * @get
+   *
+   * Access the blessed based UI of this module
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _stdio = {};
+  stdio(id = 'terminal', value = undefined) {
+    if (value !== undefined) {
+      this._stdio[id] = value;
+      this.trigger('stdio', {
+        id,
+        instance: value
+      });
+      this.trigger(`stdio.${id}`, value);
+    }
+    return this._stdio[id];
   }
 
   /**
@@ -170,6 +191,10 @@ export default class SSugarAppModule extends __SPromise {
     // @todo    replace this with new interface class
     __SSugarAppModuleSettingsInterface.apply(this._settings);
 
+    if (this.constructor.interface) {
+      this.constructor.interface.apply(this._moduleObj);
+    }
+
     // register the module in the list
     SSugarAppModule._registeredModulesArray.push(this);
     this.on('finally', () => {
@@ -178,17 +203,50 @@ export default class SSugarAppModule extends __SPromise {
       SSugarAppModule._registeredModulesArray.splice(idx, 1);
     });
 
-    if (this.constructor.interface) {
-      this.constructor.interface.apply(this._moduleObj);
-    }
-
     // init shortcuts
     this._initShortcuts();
 
     // listen when ready
     this.on('state.ready:1', () => {
+      // listen for presets
+      this.on('preset', (presetObj) => {
+        // kill the current process if already one
+        const processId = presetObj.process || this._settings.mainProcessId;
+        const pro = this.getProcess(processId);
+        if (pro.isRunning()) {
+          pro.kill(
+            `Killing the current "<yellow>${processId}</yellow>" process`
+          );
+        }
+        // merging the params with the preset params
+        const presetParams = __deepMerge(
+          this._moduleObj.params || {},
+          presetObj.params || {}
+        );
+        // running the process with the new params
+        pro.run(presetParams);
+      });
+
+      // init the Stdios
+      const stdios = Array.isArray(this._moduleObj.stdio)
+        ? this._moduleObj.stdio
+        : [this._moduleObj.stdio].map((i) => i !== undefined);
+      stdios.forEach((stdio) => {
+        if (stdio === 'terminal') {
+          this.stdio('terminal', new __SBlessedStdio(this, {}));
+        } else if (stdio === 'socket') {
+          // @todo      integrate socket stdio
+          // this.stdio('socket', undefined);
+        } else if (__isPath(stdio, true)) {
+          const Cls = require(stdio);
+          this.stdio(
+            __getFilename(stdio).split('.').slice(0, -1).join('.'),
+            new Cls(this, {})
+          );
+        }
+      });
       if (this._moduleObj.autoRun === true) {
-        this.process.run();
+        this.process.run(moduleObj.params || {});
       }
     });
   }
@@ -221,26 +279,6 @@ export default class SSugarAppModule extends __SPromise {
     if (this._settings.processUsedForState === undefined)
       return this._settings.mainProcessId;
     return this._settings.processUsedForState;
-  }
-
-  /**
-   * @name          $stdio
-   * @type          Function
-   * @get
-   *
-   * Access the blessed based UI of this module
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get $stdio() {
-    if (!this._$stdio) {
-      this._$stdio = __blessed.box({
-        content:
-          'No ui has been provided for this module. To create one, use the "<yellow>SSugarAppModule.createUi</yellow>" method...'
-      });
-    }
-    return this._$stdio;
   }
 
   /**
@@ -302,10 +340,10 @@ export default class SSugarAppModule extends __SPromise {
    */
   ready() {
     setTimeout(() => {
-      this.state = 'ready';
+      this.state('ready');
 
       setTimeout(() => {
-        if (this.state === 'error') {
+        if (this.state() === 'error') {
           this.trigger('warning', {
             value: `The module <red>${
               this._settings.name || this._settings.id
@@ -335,7 +373,7 @@ export default class SSugarAppModule extends __SPromise {
    */
   error() {
     setTimeout(() => {
-      this.state = 'error';
+      this.state('error');
 
       setTimeout(() => {
         this.trigger('log', {
@@ -366,7 +404,9 @@ export default class SSugarAppModule extends __SPromise {
     }
     if (id === this.processUsedForState) {
       pro.on('state', (d) => {
-        this.state = d.value;
+        setTimeout(() => {
+          this.state(d.value);
+        });
       });
     }
     // Pipe the process
@@ -389,8 +429,8 @@ export default class SSugarAppModule extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   getProcess(id = this._settings.mainProcessId) {
-    if (this._moduleProcesses[processId] === undefined) {
-      throw `Sorry but you try to get a process named "<yellow>${processId}</yellow>" that does not have been registered yet... Here's the processes that you have access to:\n- ${Object.keys(
+    if (this._moduleProcesses[id] === undefined) {
+      throw `Sorry but you try to get a process named "<yellow>${id}</yellow>" that does not have been registered yet... Here's the processes that you have access to:\n- ${Object.keys(
         this._moduleProcesses
       ).join('\n- ')}`;
     }

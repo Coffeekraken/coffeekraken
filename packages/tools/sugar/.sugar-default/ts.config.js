@@ -13,6 +13,7 @@ module.exports = {
     tsBuildInfoFile: '[config.storage.tempFolderPath]/ts/.tsbuildinfo',
     types: ['node']
   },
+  watch: true,
   stacks: {
     js: {
       include: ['src/js/**/*.ts'],

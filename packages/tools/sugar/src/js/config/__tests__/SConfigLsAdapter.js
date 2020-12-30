@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,42 +35,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    module.exports = function (__SConfig, __SConfigLsAdapter) {
-        var config = new __SConfig('myCoolConfig', {
-            adapters: [
-                new __SConfigLsAdapter({
-                    name: 'something',
-                    defaultConfig: {
-                        adapter: 'ls',
-                        joy: {
-                            hello: 'world'
-                        }
+module.exports = function (__SConfig, __SConfigLsAdapter) {
+    var config = new __SConfig('myCoolConfig', {
+        adapters: [
+            new __SConfigLsAdapter({
+                name: 'something',
+                defaultConfig: {
+                    adapter: 'ls',
+                    joy: {
+                        hello: 'world'
                     }
-                })
-            ],
-            allowNew: true
-        });
-        describe('sugar.js.config.adapters.SConfigLsAdapter', function () {
-            it('Should load, set, save and get correctly the config from the localStorage', function (done) { return __awaiter(void 0, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    config.set('something.cool', 'Hello world');
-                    config.load();
-                    expect(config.get('something')).toEqual({ cool: 'Hello world' });
-                    done();
-                    return [2 /*return*/];
-                });
-            }); });
-        });
-    };
-});
-//# sourceMappingURL=module.js.map
+                }
+            })
+        ],
+        allowNew: true
+    });
+    describe('sugar.js.config.adapters.SConfigLsAdapter', function () {
+        it('Should load, set, save and get correctly the config from the localStorage', function (done) { return __awaiter(void 0, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                config.set('something.cool', 'Hello world');
+                config.load();
+                expect(config.get('something')).toEqual({ cool: 'Hello world' });
+                done();
+                return [2 /*return*/];
+            });
+        }); });
+    });
+};
+//# sourceMappingURL=SConfigLsAdapter.js.map

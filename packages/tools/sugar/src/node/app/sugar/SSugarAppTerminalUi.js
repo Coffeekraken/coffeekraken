@@ -4,18 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(require("path"));
 const SBlessedComponent_1 = __importDefault(require("../../blessed/SBlessedComponent"));
 const sugarHeading_1 = __importDefault(require("../../ascii/sugarHeading"));
 const blessed_1 = __importDefault(require("blessed"));
 const parseHtml_1 = __importDefault(require("../../terminal/parseHtml"));
 const countLine_1 = __importDefault(require("../../string/countLine"));
-const SBlessedOutput_1 = __importDefault(require("../../blessed/output/SBlessedOutput"));
+const SBlessedStdio_1 = __importDefault(require("../../blessed/stdio/SBlessedStdio"));
 const hotkey_1 = __importDefault(require("../../keyboard/hotkey"));
 const json_1 = __importDefault(require("../../package/json"));
 const SNotification_1 = __importDefault(require("../../blessed/notification/SNotification"));
 const ora_1 = __importDefault(require("ora"));
-const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 // import __SIpc from '../../ipc/SIpc';
 /**
  * @name                SSugarAppTerminalUi
@@ -74,12 +72,24 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         this._sources = Array.isArray(sources) ? sources : [sources];
         this._params = Object.assign({}, this._processSettings.initialParams || {});
         const $welcome = this._initWelcome(this._params);
+        const $summary = this._initSummary(this._params);
         this._modulesObjs = Object.assign({ welcome: {
                 id: 'welcome',
                 name: 'Welcome',
                 state: 'ready',
                 $content: $welcome
+            }, summary: {
+                id: 'summary',
+                name: 'Summary',
+                state: 'ready',
+                $content: $summary
             } }, this._handlerInstance.modulesObjs);
+        Object.keys(this._modulesObjs).forEach((moduleName, i) => {
+            const moduleObj = this._modulesObjs[moduleName];
+            if (moduleObj.instance === undefined)
+                return;
+            $summary.registerSource(moduleObj.instance);
+        });
         this._serverSettings = this._modulesObjs[this._appSettings.welcome.serverModule];
         this.$container = this._initContainer();
         this.$content = this._initContent();
@@ -94,7 +104,6 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         this.$list.focus();
         hotkey_1.default('escape').on('press', () => {
             this._showModule('welcome');
-            this.$list.select(0);
         });
         Object.keys(this._modulesObjs).forEach((moduleName, i) => {
             const moduleObj = this._modulesObjs[moduleName];
@@ -102,7 +111,6 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                 if (!this._modulesReady)
                     return;
                 this._showModule(moduleObj.id);
-                this.$list.select(i);
                 this.$list.focus();
             });
         });
@@ -117,8 +125,8 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         this._sources[0].on('*.state', (state, metas) => {
             this._moduleState(state, metas);
         });
-        this._sources[0].on('*.log', (data, metas) => {
-            this._moduleLog(data, metas);
+        this._sources[0].on('*.notification', (notificationObj, metas) => {
+            this._moduleNotification(notificationObj);
         });
         this._sources[0].on('*.start', (data, metas) => {
             this._moduleStart(data, metas);
@@ -127,6 +135,8 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
             this._moduleSuccess(data, metas);
         });
         this._sources[0].on('*.error', (data, metas) => {
+            if (metas.stack === 'state.error')
+                return;
             this._moduleError(data, metas);
         });
         this.append(this.$topBar);
@@ -151,15 +161,16 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         if (!moduleObj || !moduleObj.$contentContainer)
             return;
         this._displayedModuleId = moduleObj.id;
-        Object.keys(this._modulesObjs).forEach((moduleId) => {
+        Object.keys(this._modulesObjs).forEach((moduleId, i) => {
             const moduleObjToShowOrHide = this._modulesObjs[moduleId];
-            if (moduleObjToShowOrHide.instance === undefined)
-                return;
             if (moduleObjToShowOrHide.id === moduleObj.id) {
-                moduleObjToShowOrHide.instance.activate();
+                if (moduleObjToShowOrHide.instance !== undefined)
+                    moduleObjToShowOrHide.instance.activate();
+                this.$list.select(i);
             }
             else {
-                moduleObjToShowOrHide.instance.unactivate();
+                if (moduleObjToShowOrHide.instance !== undefined)
+                    moduleObjToShowOrHide.instance.unactivate();
             }
         });
         this.$content.children.forEach(($child) => {
@@ -183,42 +194,49 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         }
         return false;
     }
-    /**
-     * @name          _log
-     * @type          Function
-     * @private
-     *
-     * This function log the passed SPromise arguments in the correct module
-     *
-     * @since       2.0.0
-     */
-    _moduleLog(data, metas) {
-        const moduleObj = this._findModuleObjById(data.module.id);
-        if (!moduleObj || !moduleObj.$console)
-            return;
-        // moduleObj.$console.log(data);
-    }
     _moduleError(data, metas) {
-        if (this.$consoles.parent)
-            return;
         const moduleObj = this._findModuleObjById(data.module.id);
-        if (moduleObj && moduleObj.$status) {
-            clearTimeout(moduleObj.statusTimeout);
-            moduleObj.$status.style.bg = 'red';
-            this.update();
-        }
-        if (this._getDisplayedModuleObj().id === moduleObj.id)
+        if (!moduleObj)
             return;
         let msg = data.value;
         if (msg.length > 36)
             msg = msg.slice(0, 33) + '...';
         const $errorNotification = new SNotification_1.default(data.module.name || data.module.id, msg, {
-            bg: 'red',
             onClick: () => {
                 this._showModule(moduleObj.id);
+            },
+            blessed: {
+                bg: 'red',
+                hover: {
+                    bg: 'blue'
+                }
             }
         });
         this.append($errorNotification);
+    }
+    _moduleNotification(data, metas) {
+        const moduleObj = this._findModuleObjById(data.module.id);
+        if (!moduleObj)
+            return;
+        let msg = data.value;
+        if (msg.length > 36)
+            msg = msg.slice(0, 33) + '...';
+        const $notification = new SNotification_1.default(data.module.name || data.module.id, msg, {
+            onClick: () => {
+                this._showModule(moduleObj.id);
+            },
+            blessed: {
+                bg: data.type === 'success'
+                    ? 'green'
+                    : data.type === 'warn'
+                        ? 'yellow'
+                        : 'red',
+                hover: {
+                    bg: 'blue'
+                }
+            }
+        });
+        this.append($notification);
     }
     // _moduleStart(value, metas) {
     //   const moduleObj = this._modules[value.module.idx];
@@ -442,6 +460,26 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         return $bar;
     }
     /**
+     * @name            _initSummary
+     * @type            Function
+     * @private
+     *
+     * This method init the sumarry stream
+     *
+     * @param         {Object}        params       An object of initial params used to launch the sugar ui
+     *
+     * @since         2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _initSummary(params) {
+        const $stdio = new SBlessedStdio_1.default([], {});
+        $stdio.top = 0;
+        $stdio.left = 0;
+        $stdio.width = '100%';
+        $stdio.height = '100%';
+        return $stdio;
+    }
+    /**
      * @name              _initWelcome
      * @type              Function
      * @private
@@ -454,8 +492,15 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _initWelcome(params) {
+        const $container = blessed_1.default.box({
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            style: {}
+        });
         const $centeredBox = blessed_1.default.box({
-            top: '50%-9',
+            top: '50%-11',
             left: 'center',
             width: '100%',
             height: 'shrink',
@@ -525,14 +570,15 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         }, 100);
         $centeredBox.append($logo);
         $centeredBox.append($metasBox);
-        return $centeredBox;
+        $container.append($centeredBox);
+        return $container;
     }
     /**
      * @name             _initModules
      * @type              Function
      * @private
      *
-     * This method init the console output and save it as reference in the "$console" property
+     * This method init the console Stdio and save it as reference in the "$console" property
      *
      * @param         {SPromise}          source          The source to log
      *
@@ -546,22 +592,23 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                 if (!moduleObj.presets.default)
                     moduleObj.presets.default = Object.assign({ key: 'd' }, (moduleObj.params || {}));
             }
-            let OutputClass;
-            if (moduleObj.stdioPath) {
-                const requirePath = path_1.default.relative(__dirname, moduleObj.stdioPath);
-                OutputClass = require(requirePath);
-            }
-            else {
-                OutputClass = SBlessedOutput_1.default;
-            }
-            const pipedSources = new SPromise_1.default({});
-            this._sources.forEach((source) => {
-                SPromise_1.default.pipe(source, pipedSources, {
-                    filter: (logObj, metas) => {
-                        return logObj.module && logObj.module.id === moduleObj.id;
-                    }
+            if (!moduleObj.$content && moduleObj.instance) {
+                moduleObj.instance.on('stdio.terminal:1', (stdio, metas) => {
+                    moduleObj.$content = stdio;
+                    moduleObj.$content.top = 0;
+                    moduleObj.$content.left = 1;
+                    moduleObj.$content.width = '100%-2';
+                    moduleObj.$content.height =
+                        moduleObj.presets !== undefined ? '100%-1' : '100%';
+                    moduleObj.$content.padding = {
+                        top: 1,
+                        left: 2,
+                        right: 2,
+                        bottom: 0
+                    };
+                    moduleObj.$contentContainer.append(moduleObj.$content);
                 });
-            });
+            }
             if (moduleObj.$contentContainer === undefined) {
                 const $contentContainer = blessed_1.default.box({
                     width: '100%',
@@ -579,25 +626,13 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                     width: '100%',
                     height: 1,
                     bottom: 0,
-                    left: 0,
+                    left: 1,
                     right: 0,
                     style: {
                         bg: 'yellow'
                     }
                 });
                 moduleObj.$bottomBar = $bottomBar;
-            }
-            if (moduleObj.$content === undefined) {
-                const $content = new OutputClass(pipedSources, Object.assign({ blessed: {
-                        width: '100%-2',
-                        height: '100%-1',
-                        top: 0,
-                        left: 1,
-                        right: 1,
-                        bottom: 1,
-                        style: {}
-                    } }, moduleObj));
-                moduleObj.$content = $content;
             }
             if (moduleObj.presets && Object.keys(moduleObj.presets).length) {
                 Object.keys(moduleObj.presets).forEach((presetId, i) => {
@@ -619,16 +654,33 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                     hotkey_1.default(`ctrl+${presetObj.key}`).on('press', () => {
                         if (this._displayedModuleId !== moduleObj.id)
                             return;
+                        // trigger a new event
+                        moduleObj.instance.trigger('preset', Object.assign({}, presetObj));
                     });
                     moduleObj.$bottomBar.append($preset);
                 });
             }
-            moduleObj.$contentContainer.append(moduleObj.$content);
-            moduleObj.$contentContainer.append(moduleObj.$bottomBar);
+            if (moduleObj.$content) {
+                moduleObj.$contentContainer.append(moduleObj.$content);
+                moduleObj.$content.top = 0;
+                moduleObj.$content.left = 1;
+                moduleObj.$content.width = '100%';
+                moduleObj.$content.height =
+                    moduleObj.presets !== undefined ? '100%-1' : '100%';
+                moduleObj.$content.padding = {
+                    top: 1,
+                    left: 2,
+                    right: 2,
+                    bottom: 0
+                };
+            }
+            if (moduleObj.presets !== undefined) {
+                moduleObj.$contentContainer.append(moduleObj.$bottomBar);
+            }
             $in.append(moduleObj.$contentContainer);
             moduleObj.$contentContainer.hide();
         });
     }
 }
 exports.default = SSugarAppTerminalUi;
-//# sourceMappingURL=SSugarAppTerminalUi.js.map
+//# sourceMappingURL=module.js.map

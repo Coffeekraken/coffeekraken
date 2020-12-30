@@ -27,11 +27,12 @@ const SIpcClient_1 = __importDefault(require("../ipc/SIpcClient"));
 const SError_1 = __importDefault(require("../error/SError"));
 const buildCommandLine_1 = __importDefault(require("../cli/buildCommandLine"));
 const parseArgs_1 = __importDefault(require("../cli/parseArgs"));
-const output_1 = __importDefault(require("./output"));
+const stdio_1 = __importDefault(require("./stdio"));
 const stack_trace_1 = __importDefault(require("stack-trace"));
 const toString_1 = __importDefault(require("../string/toString"));
 const spawn_1 = __importDefault(require("./spawn"));
 const parseHtml_1 = __importDefault(require("../terminal/parseHtml"));
+const uniqid_1 = __importDefault(require("../string/uniqid"));
 module.exports = class SProcess extends SPromise_1.default {
     /**
      * @name            constructor
@@ -45,16 +46,21 @@ module.exports = class SProcess extends SPromise_1.default {
      */
     constructor(settings = {}) {
         super(deepMerge_1.default({
+            asyncStart: false,
             stdio: 'inherit',
             metas: true,
             throw: true,
             runAsChild: false,
             definition: undefined,
-            killOnError: true,
             processPath: null,
             initialParams: {},
             notifications: {
                 enable: true,
+                process: {
+                    title: null,
+                    message: `Notification from process...`,
+                    icon: `${packageRoot_1.default(__dirname)}/src/data/notifications/ck_start.png`
+                },
                 start: {
                     title: null,
                     message: `Process is running...`,
@@ -78,6 +84,25 @@ module.exports = class SProcess extends SPromise_1.default {
             },
             env: {}
         }, settings));
+        /**
+         * @name      stdio
+         * @type      SProcessOutput
+         *
+         * Access the stdio class initiated if exists
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this.stdio = undefined;
+        /**
+         * @name      state
+         * @type      String
+         *
+         * Access the process state like 'idle', 'ready', 'running', 'killed', 'error', 'success'
+         *
+         * @since     2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
         this._state = 'idle';
         /**
          * @name      executionsStack
@@ -129,7 +154,7 @@ module.exports = class SProcess extends SPromise_1.default {
         this._settings.initialParams = initialParams;
         // handle process exit
         onProcessExit_1.default((state) => __awaiter(this, void 0, void 0, function* () {
-            this.state = state;
+            this.state(state);
         }));
         this._processPath = this._settings.processPath;
         for (var callSite of stack_trace_1.default.get()) {
@@ -157,7 +182,7 @@ module.exports = class SProcess extends SPromise_1.default {
             if (!childProcess_1.default()) {
                 if (this._settings.stdio) {
                     if (class_1.default(this._settings.stdio)) {
-                        const outputInstance = new this._settings.stdio([this], this);
+                        this.stdio = new this._settings.stdio([this], this);
                     }
                     else if (this._settings.stdio === 'inherit') {
                         this.on('log,*.log,warn,*.warn,error,*.error,reject,*.reject', (data, metas) => {
@@ -170,15 +195,17 @@ module.exports = class SProcess extends SPromise_1.default {
                         const outputSettings = typeof this._settings.stdio === 'object'
                             ? this._settings.stdio
                             : {};
-                        output_1.default([this], outputSettings);
+                        this.stdio = stdio_1.default([this], outputSettings);
                     }
                 }
             }
         });
-        // listen for state changes
-        this.on('state', (state) => {
-            this._onStateChange(state);
-        });
+        // ready if not an asyncStart process
+        if (this._settings.asyncStart === false) {
+            setTimeout(() => {
+                this.ready();
+            });
+        }
     }
     /**
      * @name      id
@@ -220,40 +247,6 @@ module.exports = class SProcess extends SPromise_1.default {
         return this._params;
     }
     /**
-     * @name      state
-     * @type      String
-     *
-     * Access the process state like 'idle', 'running', 'killed', 'error', 'success'
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    get state() {
-        return this._state;
-    }
-    set state(value) {
-        this._setState(value);
-    }
-    _setState(value) {
-        if (['idle', 'ready', 'running', 'killed', 'error', 'success'].indexOf(value) === -1) {
-            throw new SError_1.default(`Sorry but the "<yellow>state</yellow>" property setted to "<magenta>${toString_1.default(value)}</magenta>" of your "<cyan>${this.constructor.name}</cyan>" class can contain only one of these values: ${[
-                'idle',
-                'running',
-                'killed',
-                'error',
-                'success'
-            ]
-                .map((i) => {
-                return `"<green>${i}</green>"`;
-            })
-                .join(', ')}`);
-        }
-        // trigger an event
-        this.trigger(`state.${value}`, true);
-        this.trigger('state', value);
-        this._state = value;
-    }
-    /**
      * @name      ready
      * @type      Function
      *
@@ -264,9 +257,9 @@ module.exports = class SProcess extends SPromise_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     ready() {
-        if (this.state === 'ready')
+        if (this.state() === 'ready')
             return;
-        this.state = 'ready';
+        this.state('ready');
     }
     /**
      * @name      toObject
@@ -282,7 +275,7 @@ module.exports = class SProcess extends SPromise_1.default {
      */
     toObject() {
         return {
-            state: this.state,
+            state: this.state(),
             startTime: this.startTime,
             endTime: this.endTime,
             duration: this.duration,
@@ -365,7 +358,7 @@ module.exports = class SProcess extends SPromise_1.default {
                 }
             }
             // update state
-            this.state = 'running';
+            this.state('running');
             if (settings.runAsChild && !childProcess_1.default()) {
                 // build the command to run depending on the passed command in the constructor and the params
                 const commandToRun = buildCommandLine_1.default(`node --enable-source-maps ${path_1.default.resolve(__dirname, '../../cli/sugar.cli.js')} process.runChild [arguments]`, Object.assign(Object.assign({}, paramsObj), { processPath: this._processPath }), {
@@ -395,27 +388,41 @@ module.exports = class SProcess extends SPromise_1.default {
             SPromise_1.default.pipe(this._processPromise, this, {
                 prefixStack: false,
                 filter: (value, metas) => {
-                    if (settings.killOnError === true && metas.stack.match(/error$/)) {
+                    if (metas.stack.match(/error$/)) {
                         return false;
                     }
                     return true;
                 }
             });
+            // listen for notification
+            if (this._settings.notifications.enable === true &&
+                this._settings.notifications.process !== false) {
+                this._processPromise.on('notification', (notificationObj, metas) => {
+                    let icon = `${packageRoot_1.default(__dirname)}/src/data/notifications/ck_start.png`;
+                    let id = notificationObj.id || uniqid_1.default();
+                    if (notificationObj.type === 'success')
+                        icon = `${packageRoot_1.default(__dirname)}/src/data/notifications/ck_success.png`;
+                    else if (notificationObj.type === 'error')
+                        icon = `${packageRoot_1.default(__dirname)}/src/data/notifications/ck_error.png`;
+                    else if (notificationObj.type === 'warn')
+                        icon = `${packageRoot_1.default(__dirname)}/src/data/notifications/ck_start.png`;
+                    node_notifier_1.default.notify(Object.assign(Object.assign(Object.assign(Object.assign({}, this._settings.notifications.process), { icon }), notificationObj), { id, message: notificationObj.value ||
+                            notificationObj.message ||
+                            this._settings.notifications.process.message }));
+                });
+            }
             // listen for "data" and "log" events
-            this._processPromise.on('log,child.log', (data, metas) => {
+            this._processPromise.on('log,log', (data, metas) => {
                 if (this.currentExecutionObj) {
                     this.currentExecutionObj.stdout.push(data);
                 }
             });
             // listen for errors
-            this._processPromise.on('error,child.error,reject', (data, metas) => {
+            this._processPromise.on('error,reject', (data, metas) => {
                 if (this.currentExecutionObj) {
                     this.currentExecutionObj.stderr.push(data);
                 }
-                this.state = 'error';
-                if (settings.killOnError) {
-                    this.kill(data);
-                }
+                this.kill(data);
             });
             // updating state when needed
             this._processPromise.on([
@@ -429,17 +436,40 @@ module.exports = class SProcess extends SPromise_1.default {
                 'close.killed:1'
             ].join(','), (data, metas) => {
                 if (metas.stack === 'resolve' || metas.stack === 'close.success')
-                    this.state = 'success';
+                    this.state('success');
                 else if (metas.stack === 'reject' || metas.stack === 'close.error')
-                    this.state = 'error';
+                    this.state('error');
                 else if (metas.stack === 'cancel' || metas.stack === 'close.killed')
-                    this.state = 'killed';
+                    this.state('killed');
                 else
-                    this.state = 'idle';
+                    this.state('idle');
             });
             // return the process promise
             return SPromise_1.default.treatAsValue(this._processPromise);
         });
+    }
+    state(value = null) {
+        if (value === null)
+            return this._state;
+        if (['idle', 'ready', 'running', 'killed', 'error', 'success'].indexOf(value) === -1) {
+            throw new SError_1.default(`Sorry but the "<yellow>state</yellow>" property setted to "<magenta>${toString_1.default(value)}</magenta>" of your "<cyan>${this.constructor.name}</cyan>" class can contain only one of these values: ${[
+                'idle',
+                'running',
+                'killed',
+                'error',
+                'success'
+            ]
+                .map((i) => {
+                return `"<green>${i}</green>"`;
+            })
+                .join(', ')}`);
+        }
+        // trigger an event
+        this.trigger(`state.${value}`, true);
+        this.trigger('state', value);
+        this._state = value;
+        this._onStateChange(value);
+        return this._state;
     }
     /**
      * @name      kill
@@ -466,11 +496,14 @@ module.exports = class SProcess extends SPromise_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     cancel(data) {
-        if (this.state === 'running')
-            this.state = 'killed';
+        if (this.state() === 'running')
+            this.state('killed');
         // cancel the passed promise
         if (this._processPromise && this._processPromise.cancel) {
             this._processPromise.cancel(data);
+            setTimeout(() => {
+                this.trigger('error', data);
+            }, 50);
         }
     }
     /**
@@ -492,15 +525,16 @@ module.exports = class SProcess extends SPromise_1.default {
             return;
         this.currentExecutionObj.state = state;
         // check if is the end of the process
-        if (state === 'killed' ||
-            (state === 'error' && this._settings.killOnError)) {
+        if (state === 'killed' || state === 'error') {
             this.currentExecutionObj.endTime = Date.now();
             this.currentExecutionObj.duration =
                 this.currentExecutionObj.endTime - this.currentExecutionObj.startTime;
         }
         let data;
         const strArray = [];
-        if (!childProcess_1.default() && this._settings.metas === true) {
+        if (!childProcess_1.default() &&
+            this._settings && // @todo      check why this is causing context problem after 2 or 3 kill run...
+            this._settings.metas === true) {
             switch (state) {
                 case 'success':
                     this.log({
@@ -560,14 +594,96 @@ module.exports = class SProcess extends SPromise_1.default {
                     break;
             }
         }
-        if (state === 'success' ||
-            state === 'killed' ||
-            (state === 'error' && this._settings.killOnError)) {
+        if (state === 'success' || state === 'killed' || state === 'error') {
             // push the currentExecutionObj into the execution stack
             this.executionsStack.push(Object.assign({}, this.currentExecutionObj));
             // reset the currentExecutionObj
             this.currentExecutionObj = undefined;
         }
+    }
+    /**
+     * @name          isRunning
+     * @type          Function
+     *
+     * This method allows you to check if the process is currently running or not
+     *
+     * @return      {Boolean}         true if is running, false if not
+     *
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    isRunning() {
+        return this.state() === 'running';
+    }
+    /**
+     * @name          isIdle
+     * @type          Function
+     *
+     * This method allows you to check if the process is currently idle or not
+     *
+     * @return      {Boolean}         true if is idle, false if not
+     *
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    isIdle() {
+        return this.state() === 'idle';
+    }
+    /**
+     * @name          isReady
+     * @type          Function
+     *
+     * This method allows you to check if the process is currently ready or not
+     *
+     * @return      {Boolean}         true if is ready, false if not
+     *
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    isReady() {
+        return this.state() !== 'idle';
+    }
+    /**
+     * @name          isKilled
+     * @type          Function
+     *
+     * This method allows you to check if the process has been killed or not
+     *
+     * @return      {Boolean}         true if is killed, false if not
+     *
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    isKilled() {
+        return this.state() === 'killed';
+    }
+    /**
+     * @name          isError
+     * @type          Function
+     *
+     * This method allows you to check if the process is in error state or not
+     *
+     * @return      {Boolean}         true if is in error state, false if not
+     *
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    isError() {
+        return this.state() === 'error';
+    }
+    /**
+     * @name          isSuccess
+     * @type          Function
+     *
+     * This method allows you to check if the process is in success state or not
+     *
+     * @return      {Boolean}         true if is in success state, false if not
+     *
+     * @since       2.0.0
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    isSuccess() {
+        return this.state() === 'success';
     }
     /**
      * @name          log

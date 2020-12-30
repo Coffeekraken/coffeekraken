@@ -20,4 +20,4 @@
         });
     };
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=safari.js.map

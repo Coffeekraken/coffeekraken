@@ -4,11 +4,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const path_1 = __importDefault(require("../../is/path"));
+const filename_1 = __importDefault(require("../../fs/filename"));
+const SBlessedStdio_1 = __importDefault(require("../../blessed/stdio/SBlessedStdio"));
 const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 const SSugarAppModuleSettingsInterface_1 = __importDefault(require("./interface/SSugarAppModuleSettingsInterface"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const hotkey_1 = __importDefault(require("../../keyboard/hotkey"));
-const blessed_1 = __importDefault(require("blessed"));
 /**
  * @name            SSugarAppModule
  * @namespace           sugar.node.ui.sugar
@@ -56,6 +58,17 @@ class SSugarAppModule extends SPromise_1.default {
          */
         this._state = 'loading';
         /**
+         * @name          stdio
+         * @type          Function
+         * @get
+         *
+         * Access the blessed based UI of this module
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this._stdio = {};
+        /**
          * @name          params
          * @type          Object
          *
@@ -95,6 +108,9 @@ class SSugarAppModule extends SPromise_1.default {
         // });
         // @todo    replace this with new interface class
         SSugarAppModuleSettingsInterface_1.default.apply(this._settings);
+        if (this.constructor.interface) {
+            this.constructor.interface.apply(this._moduleObj);
+        }
         // register the module in the list
         SSugarAppModule._registeredModulesArray.push(this);
         this.on('finally', () => {
@@ -103,29 +119,63 @@ class SSugarAppModule extends SPromise_1.default {
                 return;
             SSugarAppModule._registeredModulesArray.splice(idx, 1);
         });
-        if (this.constructor.interface) {
-            this.constructor.interface.apply(this._moduleObj);
-        }
         // init shortcuts
         this._initShortcuts();
         // listen when ready
         this.on('state.ready:1', () => {
+            // listen for presets
+            this.on('preset', (presetObj) => {
+                // kill the current process if already one
+                const processId = presetObj.process || this._settings.mainProcessId;
+                const pro = this.getProcess(processId);
+                if (pro.isRunning()) {
+                    pro.kill(`Killing the current "<yellow>${processId}</yellow>" process`);
+                }
+                // merging the params with the preset params
+                const presetParams = deepMerge_1.default(this._moduleObj.params || {}, presetObj.params || {});
+                // running the process with the new params
+                pro.run(presetParams);
+            });
+            // init the Stdios
+            const stdios = Array.isArray(this._moduleObj.stdio)
+                ? this._moduleObj.stdio
+                : [this._moduleObj.stdio].map((i) => i !== undefined);
+            stdios.forEach((stdio) => {
+                if (stdio === 'terminal') {
+                    this.stdio('terminal', new SBlessedStdio_1.default(this, {}));
+                }
+                else if (stdio === 'socket') {
+                    // @todo      integrate socket stdio
+                    // this.stdio('socket', undefined);
+                }
+                else if (path_1.default(stdio, true)) {
+                    const Cls = require(stdio);
+                    this.stdio(filename_1.default(stdio).split('.').slice(0, -1).join('.'), new Cls(this, {}));
+                }
+            });
             if (this._moduleObj.autoRun === true) {
-                this.process.run();
+                this.process.run(moduleObj.params || {});
             }
         });
     }
-    get state() {
-        return this._state;
-    }
-    set state(value) {
-        this._setState(value);
-    }
-    _setState(value) {
+    state(value = null) {
+        if (value === null)
+            return this._state;
         // trigger an event
         this.trigger(`state.${value}`, true);
         this.trigger('state', value);
         this._state = value;
+    }
+    stdio(id = 'terminal', value = undefined) {
+        if (value !== undefined) {
+            this._stdio[id] = value;
+            this.trigger('stdio', {
+                id,
+                instance: value
+            });
+            this.trigger(`stdio.${id}`, value);
+        }
+        return this._stdio[id];
     }
     /**
      * @name          id
@@ -190,24 +240,6 @@ class SSugarAppModule extends SPromise_1.default {
         return this._settings.processUsedForState;
     }
     /**
-     * @name          $stdio
-     * @type          Function
-     * @get
-     *
-     * Access the blessed based UI of this module
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    get $stdio() {
-        if (!this._$stdio) {
-            this._$stdio = blessed_1.default.box({
-                content: 'No ui has been provided for this module. To create one, use the "<yellow>SSugarAppModule.createUi</yellow>" method...'
-            });
-        }
-        return this._$stdio;
-    }
-    /**
      * @name          activate
      * @type          Function
      *
@@ -265,9 +297,9 @@ class SSugarAppModule extends SPromise_1.default {
      */
     ready() {
         setTimeout(() => {
-            this.state = 'ready';
+            this.state('ready');
             setTimeout(() => {
-                if (this.state === 'error') {
+                if (this.state() === 'error') {
                     this.trigger('warning', {
                         value: `The module <red>${this._settings.name || this._settings.id}</red> cannot start correctly because of an error...`
                     });
@@ -291,7 +323,7 @@ class SSugarAppModule extends SPromise_1.default {
      */
     error() {
         setTimeout(() => {
-            this.state = 'error';
+            this.state('error');
             setTimeout(() => {
                 this.trigger('log', {
                     value: `<yellow>${this._settings.name || this._settings.id}</yellow> module is in <red>error</red> state`
@@ -318,7 +350,9 @@ class SSugarAppModule extends SPromise_1.default {
         }
         if (id === this.processUsedForState) {
             pro.on('state', (d) => {
-                this.state = d.value;
+                setTimeout(() => {
+                    this.state(d.value);
+                });
             });
         }
         // Pipe the process
@@ -340,8 +374,8 @@ class SSugarAppModule extends SPromise_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     getProcess(id = this._settings.mainProcessId) {
-        if (this._moduleProcesses[processId] === undefined) {
-            throw `Sorry but you try to get a process named "<yellow>${processId}</yellow>" that does not have been registered yet... Here's the processes that you have access to:\n- ${Object.keys(this._moduleProcesses).join('\n- ')}`;
+        if (this._moduleProcesses[id] === undefined) {
+            throw `Sorry but you try to get a process named "<yellow>${id}</yellow>" that does not have been registered yet... Here's the processes that you have access to:\n- ${Object.keys(this._moduleProcesses).join('\n- ')}`;
         }
         return this._moduleProcesses[id];
     }

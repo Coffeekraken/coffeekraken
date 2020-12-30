@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,42 +35,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    var __asyncForEach = require('../asyncForEach');
-    var waitFor = function (ms) { return new Promise(function (r) { return setTimeout(r, ms); }); };
-    test('sugar.js.array.asyncForEach: Simple async foreach execution', function (done) { return __awaiter(void 0, void 0, void 0, function () {
-        var i;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    i = 0;
-                    return [4 /*yield*/, __asyncForEach([1, 2, 3, 4], function (idx) { return __awaiter(void 0, void 0, void 0, function () {
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0: return [4 /*yield*/, waitFor(200)];
-                                    case 1:
-                                        _a.sent();
-                                        i += idx;
-                                        return [2 /*return*/];
-                                }
-                            });
-                        }); })];
-                case 1:
-                    _a.sent();
-                    expect(i).toBe(10);
-                    done();
-                    return [2 /*return*/];
-            }
-        });
-    }); });
-});
-//# sourceMappingURL=module.js.map
+var __asyncForEach = require('../asyncForEach');
+var waitFor = function (ms) { return new Promise(function (r) { return setTimeout(r, ms); }); };
+test('sugar.js.array.asyncForEach: Simple async foreach execution', function (done) { return __awaiter(void 0, void 0, void 0, function () {
+    var i;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                i = 0;
+                return [4 /*yield*/, __asyncForEach([1, 2, 3, 4], function (idx) { return __awaiter(void 0, void 0, void 0, function () {
+                        return __generator(this, function (_a) {
+                            switch (_a.label) {
+                                case 0: return [4 /*yield*/, waitFor(200)];
+                                case 1:
+                                    _a.sent();
+                                    i += idx;
+                                    return [2 /*return*/];
+                            }
+                        });
+                    }); })];
+            case 1:
+                _a.sent();
+                expect(i).toBe(10);
+                done();
+                return [2 /*return*/];
+        }
+    });
+}); });
+//# sourceMappingURL=asyncForEach.test.js.map

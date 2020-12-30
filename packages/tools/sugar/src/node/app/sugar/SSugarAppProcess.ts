@@ -100,8 +100,6 @@ export default class SSugarAppProcess extends __SProcess {
         }
       });
     });
-
-    this.ready();
   }
 
   /**
@@ -134,7 +132,7 @@ export default class SSugarAppProcess extends __SProcess {
    */
   _modulesReady() {
     setTimeout(() => {
-      this.state = 'ready';
+      this.state('ready');
     }, 20);
   }
 
@@ -149,7 +147,7 @@ export default class SSugarAppProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _modulesError() {
-    this.state = 'error';
+    this.state('error');
   }
 
   /**
@@ -214,7 +212,7 @@ export default class SSugarAppProcess extends __SProcess {
       }
       moduleObj.instance = moduleInstance;
 
-      moduleInstance.on('state,*.state', (state, metas) => {
+      moduleInstance.on('state', (state, metas) => {
         if (state === 'ready') {
           if (this.modulesInError.indexOf(moduleObj) !== -1) return;
           // update module ready count

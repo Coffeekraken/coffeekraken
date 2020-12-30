@@ -14,4 +14,4 @@ describe('sugar.node.event.subscribe', () => {
         done();
     });
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=subscribe.test.js.map

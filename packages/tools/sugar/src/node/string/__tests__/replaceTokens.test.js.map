@@ -1,1 +1,1 @@
-{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":";AAAA,MAAM,eAAe,GAAG,OAAO,CAAC,kBAAkB,CAAC,CAAC;AACpD,OAAO,CAAC,mCAAmC,CAAC,CAAC,eAAe,CAAC,CAAC"}
+{"version":3,"file":"replaceTokens.test.js","sourceRoot":"","sources":["replaceTokens.test.ts"],"names":[],"mappings":";AAAA,MAAM,eAAe,GAAG,OAAO,CAAC,kBAAkB,CAAC,CAAC;AACpD,OAAO,CAAC,mCAAmC,CAAC,CAAC,eAAe,CAAC,CAAC"}

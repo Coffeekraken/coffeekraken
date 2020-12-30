@@ -16,4 +16,4 @@ module.exports = (__docNav) => {
         }));
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=docNav.js.map

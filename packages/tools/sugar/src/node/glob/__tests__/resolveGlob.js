@@ -22,4 +22,4 @@ module.exports = (__resolveGlob) => {
         }));
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=resolveGlob.js.map

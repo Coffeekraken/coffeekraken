@@ -1,1 +1,1 @@
-{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":";;AAAA,kBAAe;IACb,SAAS,EAAE;QACT,IAAI,EAAE,sBAAsB;KAC7B;CACF,CAAC"}
+{"version":3,"file":"app.something.config.js","sourceRoot":"","sources":["app.something.config.ts"],"names":[],"mappings":";;AAAA,kBAAe;IACb,SAAS,EAAE;QACT,IAAI,EAAE,sBAAsB;KAC7B;CACF,CAAC"}

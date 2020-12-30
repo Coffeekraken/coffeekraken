@@ -4,7 +4,7 @@ import SCompileTsProcess from '../../node/typescript/compile/SCompileTsProcess';
 
 function compileTs(stringArgs = '') {
   const pro = new SCompileTsProcess({
-    stdio: true
+    stdio: 'inherit'
   });
   pro.run(stringArgs);
 }

@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 var _a;
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const blessed_1 = __importDefault(require("blessed"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const color_1 = __importDefault(require("../color/color"));
@@ -115,6 +116,7 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
              */
             this._renderAfterNotAllowedTimeout = null;
             this._settings = settings;
+            this._promise = new SPromise_1.default();
             // save screen reference
             this._screen = SBlessedComponent.screen;
             global.sBlessedComponentScreen = SBlessedComponent.screen;
@@ -224,6 +226,23 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
          */
         isDestroyed() {
             return this._destroyed === true;
+        }
+        /**
+         * @name          trigger
+         * @type          Function
+         *
+         * Trigger some "events" through the SPromise instance
+         *
+         * @param       {String}      stack         The stack (name) of the event
+         * @param       {Any}         data          The data to pass along the event
+         * @return      {SPromise}                  The SPromise instance to maintain chainability
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        trigger(stack, data) {
+            this.emit(stack, data);
+            return this;
         }
     },
     /**

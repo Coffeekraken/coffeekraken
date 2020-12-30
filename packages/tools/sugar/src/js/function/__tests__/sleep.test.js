@@ -1,14 +1,4 @@
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    var __sleep = require('../sleep');
-    require('./sleep')(__sleep);
-});
-//# sourceMappingURL=module.js.map
+"use strict";
+var __sleep = require('../sleep');
+require('./sleep')(__sleep);
+//# sourceMappingURL=sleep.test.js.map

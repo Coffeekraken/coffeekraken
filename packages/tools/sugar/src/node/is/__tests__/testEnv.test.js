@@ -6,4 +6,4 @@ describe('sugar.node.is.testEnv', () => {
         done();
     });
 });
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=testEnv.test.js.map

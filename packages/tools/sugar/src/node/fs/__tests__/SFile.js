@@ -15,4 +15,4 @@ module.exports = (__SFile) => {
         });
     });
 };
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SFile.js.map

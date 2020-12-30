@@ -1,1 +1,1 @@
-{"version":3,"file":"module.js","sourceRoot":"","sources":["module.ts"],"names":[],"mappings":";AAAA,MAAM,MAAM,GAAG,OAAO,CAAC,SAAS,CAAC,CAAC;AAClC,MAAM,iBAAiB,GAAG,OAAO,CAAC,6BAA6B,CAAC,CAAC;AACjE,OAAO,CAAC,mBAAmB,CAAC,CAAC,MAAM,EAAE,iBAAiB,CAAC,CAAC"}
+{"version":3,"file":"SLogMailAdapter.wip.js","sourceRoot":"","sources":["SLogMailAdapter.wip.ts"],"names":[],"mappings":";AAAA,MAAM,MAAM,GAAG,OAAO,CAAC,SAAS,CAAC,CAAC;AAClC,MAAM,iBAAiB,GAAG,OAAO,CAAC,6BAA6B,CAAC,CAAC;AACjE,OAAO,CAAC,mBAAmB,CAAC,CAAC,MAAM,EAAE,iBAAiB,CAAC,CAAC"}

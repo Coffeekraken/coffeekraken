@@ -1,80 +1,144 @@
 module.exports = {
   /**
-   * @name              smaller
+   * @name              0
    * @namespace         config.sizes
    * @type              Number
-   * @default           0.3
+   * @default           0px
    *
-   * Specify the <primary>smaller</primary> size ratio
+   * Specify the <primary>0</primary> size
    *
-   * @since             1.0.0
+   * @since             2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  smaller: 0.3,
+  0: '0px',
 
   /**
-   * @name              small
+   * @name              10
    * @namespace         config.sizes
    * @type              Number
-   * @default           0.6
+   * @default           4px
    *
-   * Specify the <primary>small</primary> size ratio
+   * Specify the <primary>10</primary> size
    *
-   * @since             1.0.0
+   * @since             2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  small: 0.6,
+  10: '4px',
 
   /**
-   * @name              default
+   * @name              20
    * @namespace         config.sizes
    * @type              Number
-   * @default           1
+   * @default           8px
    *
-   * Specify the <primary>default</primary> size ratio
-   * This value has to stay a ```1``` so the others sizes can be calculated correctly
+   * Specify the <primary>20</primary> size
    *
-   * @since             1.0.0
+   * @since             2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  default: 1,
+  20: '8px',
 
   /**
-   * @name              medium
+   * @name              30
    * @namespace         config.sizes
    * @type              Number
-   * @default           2
+   * @default           12px
    *
-   * Specify the <primary>medium</primary> size ratio
+   * Specify the <primary>30</primary> size
    *
-   * @since             1.0.0
+   * @since             2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  medium: 1.5,
+  30: '12px',
 
   /**
-   * @name              big
+   * @name              40
    * @namespace         config.sizes
    * @type              Number
-   * @default           3
+   * @default           16px
    *
-   * Specify the <primary>big</primary> size ratio
+   * Specify the <primary>40</primary> size
    *
-   * @since             1.0.0
+   * @since             2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  big: 2,
+  40: '16px',
 
   /**
-   * @name              bigger
+   * @name              50
    * @namespace         config.sizes
    * @type              Number
-   * @default           4
+   * @default           20px
    *
-   * Specify the <primary>bigger</primary> size ratio
+   * Specify the <primary>50</primary> size
    *
-   * @since             1.0.0
+   * @since             2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  bigger: 3
+  50: '20px',
+
+  /**
+   * @name              60
+   * @namespace         config.sizes
+   * @type              Number
+   * @default           24px
+   *
+   * Specify the <primary>60</primary> size
+   *
+   * @since             2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  60: '24px',
+
+  /**
+   * @name              70
+   * @namespace         config.sizes
+   * @type              Number
+   * @default           28px
+   *
+   * Specify the <primary>70</primary> size
+   *
+   * @since             2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  70: '28px',
+
+  /**
+   * @name              80
+   * @namespace         config.sizes
+   * @type              Number
+   * @default           32px
+   *
+   * Specify the <primary>80</primary> size
+   *
+   * @since             2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  80: '32px',
+
+  /**
+   * @name              90
+   * @namespace         config.sizes
+   * @type              Number
+   * @default           36px
+   *
+   * Specify the <primary>90</primary> size
+   *
+   * @since             2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  90: '36px',
+
+  /**
+   * @name              100
+   * @namespace         config.sizes
+   * @type              Number
+   * @default           40px
+   *
+   * Specify the <primary>100</primary> size
+   *
+   * @since             2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  100: '40px'
 };

@@ -618,8 +618,8 @@
   }
 
   @if class-match-namespace('sugar.helper.flex.order') {
-    $orderCount: setting('helpers.flex.order-count');
-    @for $i from 1 through $orderCount {
+    $ordersCount: setting('helpers.flex.ordersCount');
+    @for $i from 1 through $ordersCount {
       /**
       * @name 		#{sel(flex-order-#{i})}
       * @namespace           sugar.scss.helper.class
@@ -627,7 +627,7 @@
       * @type        class
       *
       * Set the order on a specific flex item.
-      * You will have <primary>#{$orderCount}</primary> available. This can be
+      * You will have <primary>#{$ordersCount}</primary> available. This can be
       * changed by updating the **config.scss.helpers.flex.order-count** configuration.
       *
       * @classname     #{sel('flex-order-#{i}')}       Set the order on a specific flex item.

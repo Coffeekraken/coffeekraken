@@ -7,16 +7,18 @@ module.exports = {
   fonts: '[config.fonts]',
   filters: '[config.filters]',
   'look-and-feel': '[config.look-and-feel]',
+  margins: '[config.margins]',
   media: '[config.media]',
+  paddings: '[config.paddings]',
   sizes: '[config.sizes]',
-  spaces: '[config.spaces]',
+  // spaces: '[config.spaces]',
   transitions: '[config.transitions]',
   typography: '[config.typography]',
 
   helpers: {
     flex: {
       /**
-       * @name        order-count
+       * @name        ordersCount
        * @namespace   config.scss.helpers.flex
        * @type        Number
        * @default     20
@@ -26,7 +28,7 @@ module.exports = {
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
-      'order-count': 20
+      ordersCount: 20
     }
   },
 

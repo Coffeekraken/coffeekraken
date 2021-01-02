@@ -1,161 +1,294 @@
 module.exports = {
+  defaultSize: 20,
+  defaultRadius: 20,
+
   sizes: {
     /**
-     * @name              smaller
+     * @name              0
+     * @namespace         config.borders.sizes
+     * @type              Number
+     * @default           0
+     *
+     * Specify the <primary>0</primary> border size
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    0: '0px',
+
+    /**
+     * @name              10
      * @namespace         config.borders.sizes
      * @type              Number
      * @default           1px
      *
-     * Specify the <primary>smaller</primary> border width
+     * Specify the <primary>10</primary> border size
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    smaller: '1px',
+    10: '1px',
 
     /**
-     * @name              small
+     * @name              20
      * @namespace         config.borders.sizes
      * @type              Number
      * @default           2px
      *
-     * Specify the <primary>small</primary> border width
+     * Specify the <primary>20</primary> border size
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    small: '2px',
+    20: '2px',
 
     /**
-     * @name              default
+     * @name              30
      * @namespace         config.borders.sizes
      * @type              Number
-     * @default           5px
+     * @default           4px
      *
-     * Specify the <primary>default</primary> border width
+     * Specify the <primary>30</primary> border size
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    default: '5px',
+    30: '4px',
 
     /**
-     * @name              medium
+     * @name              40
      * @namespace         config.borders.sizes
      * @type              Number
-     * @default           10px
+     * @default           6px
      *
-     * Specify the <primary>medium</primary> border width
+     * Specify the <primary>40</primary> border size
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    medium: '10px',
+    40: '6px',
 
     /**
-     * @name              big
+     * @name              50
      * @namespace         config.borders.sizes
      * @type              Number
-     * @default           15px
+     * @default           8px
      *
-     * Specify the <primary>big</primary> border width
+     * Specify the <primary>50</primary> border size
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    big: '15px',
+    50: '8px',
 
     /**
-     * @name              bigger
+     * @name              60
+     * @namespace         config.borders.sizes
+     * @type              Number
+     * @default           12px
+     *
+     * Specify the <primary>60</primary> border size
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    60: '12px',
+
+    /**
+     * @name              70
+     * @namespace         config.borders.sizes
+     * @type              Number
+     * @default           16px
+     *
+     * Specify the <primary>70</primary> border size
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    70: '16px',
+
+    /**
+     * @name              80
      * @namespace         config.borders.sizes
      * @type              Number
      * @default           20px
      *
-     * Specify the <primary>bigger</primary> border width
+     * Specify the <primary>80</primary> border size
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    bigger: '20px'
+    80: '20px',
+
+    /**
+     * @name              90
+     * @namespace         config.borders.sizes
+     * @type              Number
+     * @default           24px
+     *
+     * Specify the <primary>90</primary> border size
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    90: '24px',
+
+    /**
+     * @name              100
+     * @namespace         config.borders.sizes
+     * @type              Number
+     * @default           28px
+     *
+     * Specify the <primary>100</primary> border size
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    100: '28px'
   },
 
   radius: {
     /**
-     * @name              smaller
+     * @name              0
+     * @namespace         config.borders.radius
+     * @type              Number
+     * @default           0px
+     *
+     * Specify the <primary>0</primary> border radius
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    0: '0px',
+
+    /**
+     * @name              10
      * @namespace         config.borders.radius
      * @type              Number
      * @default           2px
      *
-     * Specify the <primary>smaller</primary> border radius
+     * Specify the <primary>10</primary> border radius
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    smaller: '2px',
+    10: '2px',
 
     /**
-     * @name              small
+     * @name              20
      * @namespace         config.borders.radius
      * @type              Number
-     * @default           5px
+     * @default           4px
      *
-     * Specify the <primary>small</primary> border radius
+     * Specify the <primary>20</primary> border radius
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    small: '5px',
+    20: '4px',
 
     /**
-     * @name              default
+     * @name              30
+     * @namespace         config.borders.radius
+     * @type              Number
+     * @default           6px
+     *
+     * Specify the <primary>30</primary> border radius
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    30: '6px',
+
+    /**
+     * @name              40
+     * @namespace         config.borders.radius
+     * @type              Number
+     * @default           8px
+     *
+     * Specify the <primary>40</primary> border radius
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    40: '8px',
+
+    /**
+     * @name              50
      * @namespace         config.borders.radius
      * @type              Number
      * @default           10px
      *
-     * Specify the <primary>default</primary> border radius
+     * Specify the <primary>40</primary> border radius
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    default: '10px',
+    50: '10px',
 
     /**
-     * @name              medium
+     * @name              60
+     * @namespace         config.borders.radius
+     * @type              Number
+     * @default           12px
+     *
+     * Specify the <primary>60</primary> border radius
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    60: '12px',
+
+    /**
+     * @name              70
+     * @namespace         config.borders.radius
+     * @type              Number
+     * @default           14px
+     *
+     * Specify the <primary>70</primary> border radius
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    70: '14px',
+
+    /**
+     * @name              80
+     * @namespace         config.borders.radius
+     * @type              Number
+     * @default           16px
+     *
+     * Specify the <primary>80</primary> border radius
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    80: '16px',
+
+    /**
+     * @name              90
+     * @namespace         config.borders.radius
+     * @type              Number
+     * @default           18px
+     *
+     * Specify the <primary>90</primary> border radius
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    90: '18px',
+
+    /**
+     * @name              100
      * @namespace         config.borders.radius
      * @type              Number
      * @default           20px
      *
-     * Specify the <primary>medium</primary> border radius
+     * Specify the <primary>0</primary> border radius
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    medium: '20px',
-
-    /**
-     * @name              big
-     * @namespace         config.borders.radius
-     * @type              Number
-     * @default           30px
-     *
-     * Specify the <primary>big</primary> border radius
-     *
-     * @since             2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    big: '30px',
-
-    /**
-     * @name              bigger
-     * @namespace         config.borders.radius
-     * @type              Number
-     * @default           40px
-     *
-     * Specify the <primary>bigger</primary> border radius
-     *
-     * @since             2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    bigger: '40px'
+    100: '20px'
   }
 };

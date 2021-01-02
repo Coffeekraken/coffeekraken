@@ -5,13 +5,12 @@
  *
  * This mixin generate all the "border" related helper classes.
  *
- * @classname       #{sel(border)}                 Apply the default border from the @config.borders configuration
  * @classname       #{sel(border-[size])}          Apply a special size to the borders
  * @classname       #{sel(border-top-[size])}          Apply a special size to the top border
  * @classname       #{sel(border-right-[size])}          Apply a special size to the right border
  * @classname       #{sel(border-bottom-[size])}          Apply a special size to the bottom border
  * @classname       #{sel(border-left-[size])}          Apply a special size to the left border
- * @classname       #{sel(border-side-[size])}          Apply a special size to the side borders
+ * @classname       #{sel(border-x-[size])}          Apply a special size to the x borders
  * @classname       #{sel(border-y-[size])}          Apply a special size to the y (top and bottom) borders
  * @classname       #{sel(radius-[size])}          Apply a special border radius size to all the corners
  * @classname       #{sel(radius-top-[size])}      Apply a special border radius size to the top corners
@@ -38,14 +37,14 @@
  * @classname       #{sel(border-right-[color])}               Apply a special border color to the right borders
  * @classname       #{sel(border-left-[color])}               Apply a special border color to the left borders
  * @classname       #{sel(border-bottom-[color])}               Apply a special border color to the bottom borders
- * @classname       #{sel(border-side-[color])}               Apply a special border color to the side borders
+ * @classname       #{sel(border-x-[color])}               Apply a special border color to the x borders
  * @classname       #{sel(border-y-[color])}               Apply a special border color to the y borders
  * @classname       #{sel(no-border)}                      Remove all the borders
  * @classname       #{sel(no-border-top)}                      Remove all the top borders
  * @classname       #{sel(no-border-right)}                      Remove all the right borders
  * @classname       #{sel(no-border-left)}                      Remove all the left borders
  * @classname       #{sel(no-border-bottom)}                      Remove all the bottom borders
- * @classname       #{sel(no-border-side)}                      Remove all the side borders
+ * @classname       #{sel(no-border-x)}                      Remove all the x borders
  * @classname       #{sel(no-border-y)}                      Remove all the y borders
  *
  * @example         scss
@@ -55,28 +54,6 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
  */
 @mixin helper-border-classes() {
-  @if class-match-namespace("sugar.helper.border") {
-    /**
-    * @name 		#{sel(border)}
-    * @namespace           sugar.scss.helper.class
-    * @class-namespace     sugar.helper.border
-    * @type        class
-    *
-    * Apply the default borders
-    *
-    * @example 	html
-    * <div class="#{sel(border)} #{sel(ratio-1-1)}">
-    * 	<div>Sem iaculis mattis nibh pulvinar molestie lectus</div>
-    * </div>
-    *
-    * @since       2.0.0
-    * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
-    */
-    [class*='#{sel(border)}'] {
-      border: setting('borders.default') solid color(default);
-    }
-  }
-
   $bordersSizes: setting('borders.sizes');
   @each $size, $value in $bordersSizes {
     @if class-match-namespace('sugar.helper.border.#{$size}') {
@@ -194,15 +171,15 @@
       }
     }
 
-    @if class-match-namespace('sugar.helper.border.#{$size}.side') {
-      $cls: selector('border-side-#{$size}');
+    @if class-match-namespace('sugar.helper.border.#{$size}.x') {
+      $cls: selector('border-x-#{$size}');
       /**
       * @name 		#{$cls}
       * @namespace           sugar.scss.helper.class
-      * @class-namespace     sugar.helper.border.#{$size}.side
+      * @class-namespace     sugar.helper.border.#{$size}.x
       * @type        class
       *
-      * Apply the **#{$size}** border side (left and right) size
+      * Apply the **#{$size}** border x (left and right) size
       *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -885,17 +862,17 @@
       }
     }
 
-    @if class-match-namespace('sugar.helper.border.#{$color}.side') {
-      $cls: selector('border-side-#{$color}');
+    @if class-match-namespace('sugar.helper.border.#{$color}.x') {
+      $cls: selector('border-x-#{$color}');
       /**
       * @name 		#{$cls}
       * @namespace           sugar.scss.helper.class
-      * @class-namespace     sugar.helper.border.#{$color}.side
+      * @class-namespace     sugar.helper.border.#{$color}.x
       * @type        class
       *
-      * Apply the **<#{$color}>#{$color}</#{$color}>** border side (left and right) color
+      * Apply the **<#{$color}>#{$color}</#{$color}>** border x (left and right) color
       *
-      * @classname       border-side-[color]               Apply a special border color to the side borders
+      * @classname       border-x-[color]               Apply a special border color to the x borders
       *
       * @example 	html
       * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">
@@ -1063,17 +1040,17 @@
     }
   }
 
-  @if class-match-namespace('sugar.helper.border.no.side') {
-    $cls: selector('no-border-side');
+  @if class-match-namespace('sugar.helper.border.no.x') {
+    $cls: selector('no-border-x');
     /**
     * @name 		#{$cls}
     * @namespace           sugar.scss.helper.class
-    * @class-namespace     sugar.helper.border.no.side
+    * @class-namespace     sugar.helper.border.no.x
     * @type        class
     *
-    * Remove the side (left and right borders
+    * Remove the x (left and right borders
     *
-    * @classname       no-border-side                      Remove all the side borders
+    * @classname       no-border-x                      Remove all the x borders
     *
     * @example 	html
     * <div class="#{sel(border)} #{$cls} #{sel(ratio-1-1)}">

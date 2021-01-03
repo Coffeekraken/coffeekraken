@@ -5,7 +5,7 @@
  *
  * This mixin generate all the "screen-reader" related helper classes.
  *
- * @classname     #{sel(sr-only)}      Display the element only on screen readers
+ * @classname     #{sel(screen-reader-only)}      Display the element only on screen readers
  *
  * @example         scss
  * @include Sugar.helper-screen-reader-classes();
@@ -16,7 +16,7 @@
 @mixin helper-screen-reader-classes() {
   @if class-match-namespace('sugar.helper.screen-reader.only') {
     /**
-    * @name 		#{sel(sr-only)}
+    * @name 		#{sel(screen-reader-only)}
     * @namespace         sugar.scss.helper.class
     * @class-namespace     sugar.helper.screen-reader.only
     * @type        Classname
@@ -31,8 +31,8 @@
     * @since       1.0.0
     * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
     */
-    .#{sel(sr-only)} {
-      @include sr-only();
+    .#{sel(screen-reader-only)} {
+      @include screen-reader-only();
     }
   }
 }

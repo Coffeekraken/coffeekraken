@@ -2,8 +2,7 @@
 @use 'sass:math';
 
 @mixin init-font() {
-
-  $fonts: setting("fonts");
+  $fonts: setting('fonts.families');
 
   @each $font-name, $font in $fonts {
     @if meta.type-of($font) == string {
@@ -40,19 +39,4 @@
        */
     }
   }
-
-  html {
-    $base-font-size: setting("typography.font-size");
-    $base-font-sizes: setting("typography.font-sizes");
-    font-size: $base-font-size;
-    color: color(text);
-    @if meta.type-of($base-font-sizes) == map {
-      @each $size, $media in $base-font-sizes {
-        @include media($media...) {
-          font-size: $size;
-        }
-      }
-    }
-  }
-
 }

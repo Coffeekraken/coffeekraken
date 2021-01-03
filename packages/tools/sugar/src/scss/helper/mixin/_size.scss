@@ -8,6 +8,8 @@
  * @param 		{String|Number} 		$size-width				The size like "cover" or "contain", or the width in number
  * @param 		{Number} 				[$height=null] 			The height wanted
  * @param 		{String} 				[$position=absolute] 	The position wanted if the size is "cover" or "contain"
+ * @param     {String}        [align=center]   The horizontal alignement you want. Can be "left, right, center"
+ * @param     {String}        [valign=middle]     The vertical alignement you want. Can be "top, middle, bottom"
  *
  * @example 	scss
  * .my-cool-image {
@@ -35,14 +37,37 @@
     (relative, absolute),
     $position
   );
+  $align: test-argument('Sugar.size', 'align', (left, center, right), $align);
+  $valign: test-argument(
+    'Sugar.size',
+    'valign',
+    (top, middle, bottom),
+    $valign
+  );
 
   // apply values
   @if type-of($size-width) == string {
     position: $position;
     @if $size-width == cover or $size-width == contain {
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-50%);
+      --translateX: 0;
+      --translateY: 0;
+      @if $align == left {
+        left: 0;
+      } @else if $align == center {
+        left: 50%;
+        --translateX: -50%;
+      } @else if $align == right {
+        right: 0;
+      }
+      @if $valign == top {
+        top: 0;
+      } @else if $valign == middle {
+        top: 50%;
+        --translateY: -50%;
+      } @else if $valign == bottom {
+        bottom: 0;
+      }
+      transform: translateX(var(--translateX)) translateY(var(--translateY));
     }
     @if $size-width == cover {
       min-width: 100%;
@@ -63,7 +88,7 @@
     $size-width <
     1
   {
-    @include s-ratio($size-width);
+    @include ratio($size-width);
   } @else {
     @if $size-width {
       width: $size-width;

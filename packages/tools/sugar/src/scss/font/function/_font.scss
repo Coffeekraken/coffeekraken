@@ -137,12 +137,8 @@
     $wrap
   );
 
-  @if meta.type-of($size) == string {
-    $size: interpolate(1rem, $size);
-  }
-
   // get the font object
-  $fonts: setting('fonts');
+  $fonts: setting('fonts.families');
   $f: map.get($fonts, setting('typography.font-family'));
   @if meta.type-of($f) == string {
     $f: map.get($fonts, $f);
@@ -184,9 +180,7 @@
 
   // font-size
   @if $size {
-    @if math.is-unitless($size) or math.unit($size) == px {
-      $size: to-rem($size);
-    }
+    $size: font-size($size);
     $return: map-set($return, font-size, $size);
   }
 

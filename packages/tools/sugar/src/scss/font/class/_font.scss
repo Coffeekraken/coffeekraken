@@ -15,26 +15,51 @@
  */
 @mixin font-classes() {
   @if class-match-namespace('sugar.font.family') {
-    @each $name, $font in setting('fonts') {
+    @each $name, $font in setting('fonts.families') {
       @if class-match-namespace('sugar.font.family.#{$name}') {
         /**
-          * @name       	  #{sel(f-#{$name})}
+          * @name       	  #{sel(font-#{$name})}
           * @namespace       sugar.scss.font.class
           * @class-namespace           sugar.font.family.#{$name}
           * @type        Classname
           *
-          * Apply the font **#{$name}**
+          * Apply the font family **#{$name}**
           *
           * @example 	html
-          * <div class="#{sel(f-#{$name})}">
-          * 	I have the font "#{$name}" applied
+          * <div class="#{sel(font-#{$name})}">
+          * 	I have the font family "#{$name}" applied
           * </div>
           *
           * @since       1.0.0
           * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        #{sel("f-#{$name}")} {
+        #{sel("font-#{$name}")} {
           @include font($name);
+        }
+      }
+    }
+  }
+  @if class-match-namespace('sugar.font.size') {
+    @each $name, $size in setting('fonts.sizes') {
+      @if class-match-namespace('sugar.font.size.#{$name}') {
+        /**
+          * @name       	  #{sel(font-#{$name})}
+          * @namespace       sugar.scss.font.class
+          * @class-namespace           sugar.font.size.#{$name}
+          * @type        Classname
+          *
+          * Apply the font size **#{$name}** (**#{$size}**)
+          *
+          * @example 	html
+          * <div class="#{sel(font-#{$name})}">
+          * 	I have the font size "#{$name}" applied
+          * </div>
+          *
+          * @since       1.0.0
+          * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        #{sel("font-#{$name}")} {
+          font-size: font-size($name);
         }
       }
     }

@@ -11,7 +11,7 @@
  * @classname     #{sel(fixed-top)}       Set an element position as ```fixed``` top
  * @classname     #{sel(fixed-bottom)}       Set an element position as ```fixed``` bottom
  * @classname     #{sel(sticky)}       Set an element position as ```sticky```
- * @classname     #{sel(sticky)}       Set an element position as ```sticky``` top
+ * @classname     #{sel(sticky-top)}       Set an element position as ```sticky``` top
  *
  * @example         scss
  * @include Sugar.helper-position-classes();

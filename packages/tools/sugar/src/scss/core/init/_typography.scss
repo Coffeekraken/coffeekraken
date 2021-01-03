@@ -2,44 +2,16 @@
 @use 'sass:meta';
 
 @mixin init-typography() {
-
-  $typographySettingsMap: setting('typography');
-
-  $font-size: map-get($typographySettingsMap, font-size, 14px);
-  $font-family: map-get($typographySettingsMap, font-family, Roboto);
-
   html {
-    @include font(
-      $family: $font-family,
-      $size: $font-size
-    );
-  }
-
-  .#{tf-class()} {
-
-    @each $key, $config in map-get($typographySettingsMap, format, ()) {
-
-      $key: str-replace(inspect($key), ' ', ',');
-
-      #{$key} {
-        @include font(
-          $family: map-get($config, font-family, null),
-          $color: map-get($config, color, null),
-          $size: map-get($config, font-size, null),
-          $style: map-get($config, font-style, null),
-          $variant: map-get($config, font-variant, null),
-          $weight: map-get($config, font-weight, null),
-          $decoration: map-get($config, text-decoration, null),
-          $align: map-get($config, text-align, null),
-          $transform: map-get($config, text-transform, null),
-          $stretch: map-get($config, font-stretch, null),
-          $white-space: map-get($config, white-space, null),
-          $height: map-get($config, line-height, null),
-          $spacing: map-get($config, letter-spacing, null),
-          $indent: map-get($config, text-indent, null),
-          $break: map-get($config, line-break, null),
-          $wrap: map-get($config, text-wrap, null)
-        );
+    $base-font-size: setting('typography.font-size');
+    $base-font-sizes: setting('typography.font-sizes');
+    font-size: font-size($base-font-size);
+    color: color(default);
+    @if meta.type-of($base-font-sizes) == map {
+      @each $size, $media in $base-font-sizes {
+        @include media($media...) {
+          font-size: $size;
+        }
       }
     }
   }

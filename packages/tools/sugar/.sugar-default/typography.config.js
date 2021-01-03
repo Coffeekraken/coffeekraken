@@ -3,27 +3,27 @@ module.exports = {
    * @name            font-family
    * @namespace       config.typography
    * @type            String
-   * @default         default
+   * @default         [config.fonts.defaultFontFamily]
    *
    * Set the font to use by default. Has to be a font that exists in the config ```fonts```
    *
    * @since           1.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'font-family': 'default',
+  'font-family': '[config.fonts.defaultFontFamily]',
 
   /**
    * @name            font-size
    * @namespace       config.typography
    * @type            String
-   * @default         16px
+   * @default         [config.fonts.defaultFontSize]
    *
    * Set the font size to use by default
    *
    * @since           1.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'font-size': '16px',
+  'font-size': '[config.fonts.defaultFontSize]',
 
   /**
    * @name            font-sizes
@@ -72,7 +72,7 @@ module.exports = {
    * @see               https://www.npmjs.com/package/modularscale-sass
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'text-format-class': 'tf',
+  'text-format-class': 'text-format',
 
   /**
    * @name              vertical-rhythm-class
@@ -85,15 +85,5 @@ module.exports = {
    * @since             1.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  'vertical-rhythm-class': 'vr'
-
-  // blockquote: {
-  //   'font-family': 'code',
-  //   'font-size': 'default'
-  // },
-  // code: {
-  //   'font-family': 'code',
-  //   'font-size': 'default'
-  // }
-  // }
+  'vertical-rhythm-class': 'vertical-rhythm'
 };

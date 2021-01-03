@@ -10,6 +10,7 @@ module.exports = {
   margins: '[config.margins]',
   media: '[config.media]',
   paddings: '[config.paddings]',
+  ratios: '[config.ratios]',
   sizes: '[config.sizes]',
   // spaces: '[config.spaces]',
   transitions: '[config.transitions]',

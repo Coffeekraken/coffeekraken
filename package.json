@@ -8,7 +8,7 @@
     "dev.js": "tsc -p tsconfig.js.json --watch",
     "dev.node": "tsc -p tsconfig.node.json --watch",
     "lint": "eslint 'packages/**/*.{js,ts,tsx}' --quiet --fix",
-    "container": "docker exec -it coffeekraken /bin/bash",
+    "container": "docker exec --workdir /workspaces/coffeekraken -it coffeekraken /bin/bash",
     "init-sugar": "(cd toolkits/sugar && npm link && npm i)"
   },
   "pre-commit": [],

@@ -2,6 +2,7 @@
 
 import __SDuration from '../../../time/SDuration';
 import __SJsCompiler from '../../../js/SJsCompiler';
+import __SPromise from '../../../promise/SPromise';
 
 /**
  * @name                js
@@ -22,22 +23,33 @@ import __SJsCompiler from '../../../js/SJsCompiler';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = async function js(req, res, settings = {}) {
-  let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
-  const duration = new __SDuration();
+export = function js(req, res, settings = {}) {
+  const promise = new __SPromise();
 
-  const compiler = new __SJsCompiler({});
-  const resultObj = await compiler.compile(filePath);
+  (async () => {
+    let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
+    const duration = new __SDuration();
 
-  if (settings.log) {
-    console.log(
-      `<bgGreen><black> js </black></bgGreen> Js file "<yellow>${
+    const compiler = new __SJsCompiler({});
+    const compilePromise = compiler.compile(filePath);
+    __SPromise.pipe(compilePromise, promise);
+    compilePromise.on('reject', (e) => {
+      res.type('text/html');
+      res.status(500);
+      res.send(e);
+      promise.reject(e);
+    });
+    const resultObj = await compilePromise;
+
+    res.type('text/javascript');
+    res.status(200);
+    res.send(resultObj.js);
+    promise.resolve(
+      `<bgGreen><black> js </black></bgGreen> file "<yellow>${
         req.path
       }</yellow> served in <cyan>${duration.end()}s</cyan>"`
     );
-  }
+  })();
 
-  res.type('text/javascript');
-  res.status(200);
-  res.send(resultObj.js);
-}
+  return promise;
+};

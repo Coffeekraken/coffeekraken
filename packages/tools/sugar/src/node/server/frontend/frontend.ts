@@ -88,7 +88,7 @@ const fn = function (args = {}) {
           )}</cyan>" does not exists...`
         });
       } else {
-        const handlerFn = await import(handlerPath);
+        const handlerFn = require(handlerPath);
 
         const method = handlerSettings.method || 'get';
         let slug = handlerSettings.slug || '*';
@@ -102,6 +102,12 @@ const fn = function (args = {}) {
           slug = [`${slug}/*`, `${slug}`];
         }
 
+        setTimeout(() => {
+          promise.trigger('log', {
+            value: `Handler <cyan>${pageName}</cyan> "<yellow>${method}:${slug}</yellow>" registered <green>successfully</green>`
+          });
+        }, 1000);
+
         app[method](slug, async (req, res, next) => {
           const reqPathExtension = __extension(req.path);
           if (extension) {
@@ -113,7 +119,8 @@ const fn = function (args = {}) {
             }
           }
 
-          handlerFn(req, res, handlerSettings);
+          const handlerPromise = handlerFn(req, res, handlerSettings);
+          __SPromise.pipe(handlerPromise, promise);
         });
       }
     });

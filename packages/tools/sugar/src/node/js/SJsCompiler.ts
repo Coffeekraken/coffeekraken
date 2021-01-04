@@ -2,12 +2,14 @@
 
 import __deepMerge from '../object/deepMerge';
 import __SPromise from '../promise/SPromise';
-import __esbuild from 'esbuild';
+// import __esbuild from 'esbuild';
 import __builtInNodeModules from '../module/buildInNodeModules';
 import __resolve from 'resolve';
 import __filter from '../object/filter';
 import __SBuildJsInterface from './build/interface/SBuildJsInterface';
 import __esbuildScssLoaderPlugin from './build/plugins/esbuild/esbuildScssLoaderPlugin';
+
+const __esbuild = require('esbuild');
 
 /**
  * @name                SJsCompiler
@@ -231,4 +233,4 @@ export = class SJsCompiler {
       }
     );
   }
-}
+};

@@ -180,4 +180,4 @@ export = class SBladeTemplateEngine extends __STemplateEngine {
       }
     );
   }
-}
+};

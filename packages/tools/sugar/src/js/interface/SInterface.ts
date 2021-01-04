@@ -148,6 +148,29 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
   };
 
   /**
+   * @name              getDefaultValues
+   * @type              Function
+   * @static
+   *
+   * This function simply returns you the default interface values in object format
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static getDefaultValues() {
+    const result: ISInterfaceResult = this.apply(
+      {},
+      {
+        complete: true,
+        throw: false,
+        throwOnMissingRequiredProp: false
+      }
+    );
+    if (!result.hasIssues()) return result.value;
+    return {};
+  }
+
+  /**
    * @name              apply
    * @type              Function
    * @static
@@ -169,7 +192,7 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
   static apply(
     instance: any,
     settings: ISInterfaceSettings = {}
-  ): ISInterfaceResult | true {
+  ): ISInterfaceResult {
     // instanciate a new SInterface
     const int = new this(settings);
     return int.apply(instance, settings);
@@ -215,10 +238,7 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  apply(
-    instance: any,
-    settings: ISInterfaceSettings = {}
-  ): ISInterfaceResult | true {
+  apply(instance: any, settings: ISInterfaceSettings = {}): ISInterfaceResult {
     settings = __deepMerge(this._settings, settings);
 
     const descriptor = new __SDescriptor({

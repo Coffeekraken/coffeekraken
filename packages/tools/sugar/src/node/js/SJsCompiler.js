@@ -15,12 +15,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 var _a;
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
-const esbuild_1 = __importDefault(require("esbuild"));
+// import __esbuild from 'esbuild';
 const buildInNodeModules_1 = __importDefault(require("../module/buildInNodeModules"));
 const resolve_1 = __importDefault(require("resolve"));
 const filter_1 = __importDefault(require("../object/filter"));
 const SBuildJsInterface_1 = __importDefault(require("./build/interface/SBuildJsInterface"));
 const esbuildScssLoaderPlugin_1 = __importDefault(require("./build/plugins/esbuild/esbuildScssLoaderPlugin"));
+const __esbuild = require('esbuild');
 /**
  * @name                SJsCompiler
  * @namespace           sugar.node.js
@@ -110,7 +111,7 @@ module.exports = (_a = class SJsCompiler {
                     return this.constructor._esbuildAcceptedSettings.indexOf(key) !== -1;
                 });
                 const startTime = Date.now();
-                const buildService = yield esbuild_1.default.startService();
+                const buildService = yield __esbuild.startService();
                 buildService
                     .build(Object.assign(Object.assign({}, settings), { entryPoints: [filePath], logLevel: 'silent', write: false, sourcemap: settings.map, charset: 'utf8' }))
                     .then((resultObj) => {

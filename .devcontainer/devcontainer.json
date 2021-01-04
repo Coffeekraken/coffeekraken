@@ -2,6 +2,7 @@
   "name": "Coffeekraken",
   "dockerFile": "Dockerfile",
   "forwardPorts": [666],
+  "workspaceFolder": "/workspaces/coffeekraken",
   "runArgs": ["--name=coffeekraken", "--memory=16G", "--memory-swap=16G"],
   "extensions": [
     "editorconfig.editorconfig",

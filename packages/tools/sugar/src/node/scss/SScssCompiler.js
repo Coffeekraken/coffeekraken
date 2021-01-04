@@ -60,7 +60,7 @@ module.exports = class SScssCompiler {
          */
         this._settings = {};
         this._includePaths = [];
-        this._settings = deepMerge_1.default(Object.assign(Object.assign({ id: this.constructor.name }, SBuildScssInterface_1.default.getDefaultValues()), { includePaths: [], putUseOnTop: true }), settings);
+        this._settings = deepMerge_1.default(Object.assign(Object.assign({ id: this.constructor.name }, SBuildScssInterface_1.default.getDefaultValues()), { includePaths: [], putUseOnTop: true, cache: true, prod: false, minify: false, style: 'expanded', clearCache: true, stripComments: false }), settings);
         // prod
         if (this._settings.prod) {
             this._settings.cache = false;
@@ -90,6 +90,7 @@ module.exports = class SScssCompiler {
                 _isChild: false
             }, settings);
             const startTime = Date.now();
+            let sharedResourcesHash = '';
             let dataObj = {
                 children: {},
                 importStatements: [],
@@ -110,7 +111,7 @@ module.exports = class SScssCompiler {
                         ? [settings.rootDir]
                         : settings.rootDir
                     : []),
-                ...(settings.sass.includePaths
+                ...(settings.sass && settings.sass.includePaths
                     ? !Array.isArray(settings.sass.includePaths)
                         ? [settings.sass.includePaths]
                         : settings.sass.includePaths
@@ -125,11 +126,13 @@ module.exports = class SScssCompiler {
             const resourceContent = getSharedResourcesString_1.default(sharedResources);
             if (resourceContent) {
                 dataObj.sharedResources = resourceContent;
+                sharedResourcesHash = md5_1.default.encrypt(resourceContent);
             }
             let sassPassedSettings = Object.assign({}, settings.sass || {});
             delete sassPassedSettings.includePaths;
             delete sassPassedSettings.sharedResources;
             const sassSettings = deepMerge_1.default({
+                outputStyle: settings.style,
                 importer: [
                     (url, prev, done) => {
                         if (resourceContent) {
@@ -151,6 +154,9 @@ module.exports = class SScssCompiler {
                                 return {
                                     contents: `
                         ${resourceContent}
+                        body {
+                          content: 'pl';
+                        }
                         ${content}
                       `
                                 };
@@ -181,7 +187,7 @@ module.exports = class SScssCompiler {
                     const stats = fs_1.default.statSync(sourcePath);
                     const mTimeMs = stats.mtimeMs;
                     // try to get from cache
-                    cacheId = md5_1.default.encrypt(`${sourcePath}-${mTimeMs}`);
+                    cacheId = md5_1.default.encrypt(`${sharedResourcesHash}-${sourcePath}-${mTimeMs}`);
                     // add the folder path in the includePaths setting
                     const filePath = folderPath_1.default(sourcePath);
                     sassSettings.includePaths.unshift(filePath);
@@ -194,14 +200,17 @@ module.exports = class SScssCompiler {
                 // set the scss property with the source
                 dataObj.scss = source;
                 // create the cache id using the source code
-                cacheId = md5_1.default.encrypt(source);
+                cacheId = `${sharedResourcesHash}-${md5_1.default.encrypt(source)}`;
             }
             // try to get from cache
-            const cachedObj = yield cache.get(cacheId);
-            if (this._settings.cache && cachedObj) {
-                // build the css code to return
-                dataObj = cachedObj;
-                dataObj.fromCache = true;
+            let cachedObj = {};
+            if (settings.cache) {
+                cachedObj = yield cache.get(cacheId);
+                if (cachedObj) {
+                    // build the css code to return
+                    dataObj = cachedObj;
+                    dataObj.fromCache = true;
+                }
             }
             // extract the things that can be used
             // by others like mixins and variables declarations$
@@ -223,12 +232,6 @@ module.exports = class SScssCompiler {
                 });
                 // save the mixin and variables resources
                 dataObj.mixinsAndVariables = mixinsVariablesString;
-                // strip comments of not
-                dataObj.scss = settings.stripComments
-                    ? stripCssComments_1.default(dataObj.scss)
-                    : dataObj.scss;
-            }
-            if (!dataObj.fromCache) {
                 const findedImports = dataObj.scss.match(/^((?!\/\/)[\s]{0,999999999999}?)@import\s['"].*['"];/gm);
                 if (findedImports && findedImports.length) {
                     // save imports
@@ -236,7 +239,11 @@ module.exports = class SScssCompiler {
                 }
             }
             // go down children
-            const { children, scss } = yield this._compileImports(dataObj.importStatements, dataObj.scss, settings);
+            const compileImportPromise = this._compileImports(dataObj.importStatements, dataObj.scss, settings);
+            compileImportPromise.on('reject', (e) => {
+                reject(e);
+            });
+            const { children, scss } = yield compileImportPromise;
             dataObj.children = children;
             dataObj.scss = scss;
             let toCompile = `
@@ -254,10 +261,18 @@ module.exports = class SScssCompiler {
                 if (settings.putUseOnTop) {
                     toCompile = putUseStatementsOnTop_1.default(toCompile);
                 }
-                const renderObj = sass_1.default.renderSync(Object.assign(Object.assign({}, sassSettings), { data: toCompile }));
-                let compiledResultString = settings.stripComments
-                    ? stripCssComments_1.default(renderObj.css.toString())
-                    : renderObj.css.toString();
+                let renderObj;
+                let compiledResultString = '';
+                try {
+                    renderObj = sass_1.default.renderSync(Object.assign(Object.assign({}, sassSettings), { data: toCompile }));
+                }
+                catch (e) {
+                    return reject(e.toString());
+                }
+                // compiledResultString = settings.stripComments
+                //   ? __stripCssComments(renderObj.css.toString())
+                //   : renderObj.css.toString();
+                compiledResultString = renderObj.css.toString();
                 dataObj.css = compiledResultString.trim();
                 if (renderObj.map) {
                     dataObj.map = renderObj.map.toString();
@@ -267,6 +282,7 @@ module.exports = class SScssCompiler {
                     cache.set(cacheId, dataObj);
                 }
             }
+            // minify
             if (settings.minify && !settings._isChild) {
                 dataObj.css = csso_1.default.minify(dataObj.css).css;
             }
@@ -277,6 +293,10 @@ module.exports = class SScssCompiler {
                 }
                 catch (e) { }
             }
+            // strip comments of not
+            dataObj.scss = settings.stripComments
+                ? stripCssComments_1.default(dataObj.scss)
+                : dataObj.scss;
             // banner
             if (!settings._isChild && settings.banner) {
                 dataObj.css = `
@@ -318,7 +338,7 @@ module.exports = class SScssCompiler {
         return resultString;
     }
     _compileImports(importStatements, scss, settings) {
-        return __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
             // loop on each imports
             const childrenObj = {};
             let finalImports = {};
@@ -363,17 +383,21 @@ module.exports = class SScssCompiler {
                     const importPath = this._getRealFilePath(pathObj.absolutePath);
                     if (importPath) {
                         // compile the finded path
-                        const compileRes = yield this.compile(importPath, Object.assign(Object.assign({}, settings), { _isChild: true, rootDir: folderPath_1.default(importPath) }));
+                        const compilePromise = this.compile(importPath, Object.assign(Object.assign({}, settings), { _isChild: true, rootDir: folderPath_1.default(importPath) }));
+                        compilePromise.on('reject', (e) => {
+                            reject(e);
+                        });
+                        const compileRes = yield compilePromise;
                         childrenObj[pathObj.absolutePath] = compileRes;
                     }
                 }
                 scss = scss.replace(importObj.rawStatement, '');
             }
-            return {
+            resolve({
                 children: childrenObj,
                 scss
-            };
-        });
+            });
+        }));
     }
     _getRealFilePath(path) {
         const extension = extension_1.default(path);

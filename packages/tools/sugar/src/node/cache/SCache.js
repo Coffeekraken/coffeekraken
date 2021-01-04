@@ -1,25 +1,6 @@
 "use strict";
 // @ts-nocheck
 // @shared
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -88,8 +69,8 @@ module.exports = class SCache {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this._defaultAdaptersPaths = {
-            ls: '@coffeekraken/sugar/js/cache/adapters/SCacheLsAdapter',
-            fs: `../../cache/adapters/SCacheFsAdapter`
+            ls: `${__dirname}/adapters/SCacheLsAdapter`,
+            fs: `${__dirname}/adapters/SCacheFsAdapter`
         };
         /**
          * @name                              _adapter
@@ -136,8 +117,7 @@ module.exports = class SCache {
             const adapter = this._settings.adapter;
             // check the type
             if (typeof adapter === 'string' && this._defaultAdaptersPaths[adapter]) {
-                let adptr = yield Promise.resolve().then(() => __importStar(require(
-                /* webpackChunkName: "SCacheAdapter" */ this._defaultAdaptersPaths[adapter])));
+                let adptr = require(this._defaultAdaptersPaths[adapter]);
                 if (adptr.default)
                     adptr = adptr.default;
                 this._adapter = new adptr(this._settings);

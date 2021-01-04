@@ -92,7 +92,13 @@ export = class SScssCompiler {
         id: this.constructor.name,
         ...__SBuildScssInterface.getDefaultValues(),
         includePaths: [],
-        putUseOnTop: true
+        putUseOnTop: true,
+        cache: true,
+        prod: false,
+        minify: false,
+        style: 'expanded',
+        clearCache: true,
+        stripComments: false
       },
       settings
     );
@@ -133,6 +139,7 @@ export = class SScssCompiler {
         );
 
         const startTime = Date.now();
+        let sharedResourcesHash = '';
         let dataObj = {
           children: {},
           importStatements: [],
@@ -154,7 +161,7 @@ export = class SScssCompiler {
               ? [settings.rootDir]
               : settings.rootDir
             : []),
-          ...(settings.sass.includePaths
+          ...(settings.sass && settings.sass.includePaths
             ? !Array.isArray(settings.sass.includePaths)
               ? [settings.sass.includePaths]
               : settings.sass.includePaths
@@ -171,6 +178,7 @@ export = class SScssCompiler {
         const resourceContent = __getSharedResourcesString(sharedResources);
         if (resourceContent) {
           dataObj.sharedResources = resourceContent;
+          sharedResourcesHash = __md5.encrypt(resourceContent);
         }
 
         let sassPassedSettings = Object.assign({}, settings.sass || {});
@@ -178,10 +186,12 @@ export = class SScssCompiler {
         delete sassPassedSettings.sharedResources;
         const sassSettings = __deepMerge(
           {
+            outputStyle: settings.style,
             importer: [
               (url, prev, done) => {
                 if (resourceContent) {
                   const realPath = this._findDependency(url);
+
                   if (realPath) {
                     let content = __fs.readFileSync(realPath, 'utf8');
                     const importMatches = content.match(
@@ -209,6 +219,9 @@ export = class SScssCompiler {
                     return {
                       contents: `
                         ${resourceContent}
+                        body {
+                          content: 'pl';
+                        }
                         ${content}
                       `
                     };
@@ -243,7 +256,9 @@ export = class SScssCompiler {
             const stats = __fs.statSync(sourcePath);
             const mTimeMs = stats.mtimeMs;
             // try to get from cache
-            cacheId = __md5.encrypt(`${sourcePath}-${mTimeMs}`);
+            cacheId = __md5.encrypt(
+              `${sharedResourcesHash}-${sourcePath}-${mTimeMs}`
+            );
             // add the folder path in the includePaths setting
             const filePath = __folderPath(sourcePath);
             sassSettings.includePaths.unshift(filePath);
@@ -255,15 +270,18 @@ export = class SScssCompiler {
           // set the scss property with the source
           dataObj.scss = source;
           // create the cache id using the source code
-          cacheId = __md5.encrypt(source);
+          cacheId = `${sharedResourcesHash}-${__md5.encrypt(source)}`;
         }
 
         // try to get from cache
-        const cachedObj = await cache.get(cacheId);
-        if (this._settings.cache && cachedObj) {
-          // build the css code to return
-          dataObj = cachedObj;
-          dataObj.fromCache = true;
+        let cachedObj = {};
+        if (settings.cache) {
+          cachedObj = await cache.get(cacheId);
+          if (cachedObj) {
+            // build the css code to return
+            dataObj = cachedObj;
+            dataObj.fromCache = true;
+          }
         }
 
         // extract the things that can be used
@@ -289,13 +307,6 @@ export = class SScssCompiler {
           // save the mixin and variables resources
           dataObj.mixinsAndVariables = mixinsVariablesString;
 
-          // strip comments of not
-          dataObj.scss = settings.stripComments
-            ? __stripCssComments(dataObj.scss)
-            : dataObj.scss;
-        }
-
-        if (!dataObj.fromCache) {
           const findedImports = dataObj.scss.match(
             /^((?!\/\/)[\s]{0,999999999999}?)@import\s['"].*['"];/gm
           );
@@ -306,11 +317,15 @@ export = class SScssCompiler {
         }
 
         // go down children
-        const { children, scss } = await this._compileImports(
+        const compileImportPromise = this._compileImports(
           dataObj.importStatements,
           dataObj.scss,
           settings
         );
+        compileImportPromise.on('reject', (e) => {
+          reject(e);
+        });
+        const { children, scss } = await compileImportPromise;
         dataObj.children = children;
         dataObj.scss = scss;
 
@@ -331,24 +346,32 @@ export = class SScssCompiler {
             toCompile = __putUseStatementsOnTop(toCompile);
           }
 
-          const renderObj = __sass.renderSync({
-            ...sassSettings,
-            data: toCompile
-          });
-          let compiledResultString = settings.stripComments
-            ? __stripCssComments(renderObj.css.toString())
-            : renderObj.css.toString();
+          let renderObj;
+          let compiledResultString = '';
+
+          try {
+            renderObj = __sass.renderSync({
+              ...sassSettings,
+              data: toCompile
+            });
+          } catch (e) {
+            return reject(e.toString());
+          }
+          // compiledResultString = settings.stripComments
+          //   ? __stripCssComments(renderObj.css.toString())
+          //   : renderObj.css.toString();
+          compiledResultString = renderObj.css.toString();
           dataObj.css = compiledResultString.trim();
           if (renderObj.map) {
             dataObj.map = renderObj.map.toString();
           }
-
           // set in cache if needed
           if (settings.cache) {
             cache.set(cacheId, dataObj);
           }
         }
 
+        // minify
         if (settings.minify && !settings._isChild) {
           dataObj.css = __csso.minify(dataObj.css).css;
         }
@@ -360,6 +383,11 @@ export = class SScssCompiler {
           } catch (e) {}
         }
 
+        // strip comments of not
+        dataObj.scss = settings.stripComments
+          ? __stripCssComments(dataObj.scss)
+          : dataObj.scss;
+
         // banner
         if (!settings._isChild && settings.banner) {
           dataObj.css = `
@@ -367,7 +395,6 @@ export = class SScssCompiler {
             ${dataObj.css}
           `.trim();
         }
-
         // resolve with the compilation result
         resolve({
           ...dataObj,
@@ -409,77 +436,86 @@ export = class SScssCompiler {
     return resultString;
   }
 
-  async _compileImports(importStatements, scss, settings) {
-    // loop on each imports
-    const childrenObj = {};
+  _compileImports(importStatements, scss, settings) {
+    return new __SPromise(async (resolve, reject, trigger, cancel) => {
+      // loop on each imports
+      const childrenObj = {};
 
-    let finalImports = {};
+      let finalImports = {};
 
-    for (let i = 0; i < importStatements.length; i++) {
-      const importStatement = importStatements[i].trim();
-      const importStatementPath = __unquote(
-        importStatement.replace('@import ', '').replace(';', '').trim()
-      );
-      let importAbsolutePath = __path.resolve(
-        settings.rootDir,
-        importStatementPath
-      );
+      for (let i = 0; i < importStatements.length; i++) {
+        const importStatement = importStatements[i].trim();
+        const importStatementPath = __unquote(
+          importStatement.replace('@import ', '').replace(';', '').trim()
+        );
+        let importAbsolutePath = __path.resolve(
+          settings.rootDir,
+          importStatementPath
+        );
 
-      if (__isGlob(importAbsolutePath)) {
-        if (!finalImports[importStatement]) {
-          finalImports[importStatement] = {
-            rawStatement: importStatement,
-            rawPath: importStatementPath,
-            paths: []
-          };
-        }
-        const globPaths = __glob.sync(importAbsolutePath, {});
-        if (globPaths && globPaths.length) {
-          globPaths.forEach((path) => {
-            finalImports[importStatement].paths.push({
-              absolutePath: path,
-              relativePath: __path.relative(settings.rootDir, path)
-            });
-          });
-        }
-        continue;
-      }
-
-      finalImports[importStatement] = {
-        rawStatement: importStatement,
-        rawPath: importStatementPath,
-        paths: [
-          {
-            absolutePath: importAbsolutePath,
-            relativePath: __path.relative(settings.rootDir, importAbsolutePath)
+        if (__isGlob(importAbsolutePath)) {
+          if (!finalImports[importStatement]) {
+            finalImports[importStatement] = {
+              rawStatement: importStatement,
+              rawPath: importStatementPath,
+              paths: []
+            };
           }
-        ]
-      };
-    }
-
-    for (let i = 0; i < Object.keys(finalImports).length; i++) {
-      const importObj = finalImports[Object.keys(finalImports)[i]];
-
-      for (let j = 0; j < importObj.paths.length; j++) {
-        const pathObj = importObj.paths[j];
-        const importPath = this._getRealFilePath(pathObj.absolutePath);
-        if (importPath) {
-          // compile the finded path
-          const compileRes = await this.compile(importPath, {
-            ...settings,
-            _isChild: true,
-            rootDir: __folderPath(importPath)
-          });
-          childrenObj[pathObj.absolutePath] = compileRes;
+          const globPaths = __glob.sync(importAbsolutePath, {});
+          if (globPaths && globPaths.length) {
+            globPaths.forEach((path) => {
+              finalImports[importStatement].paths.push({
+                absolutePath: path,
+                relativePath: __path.relative(settings.rootDir, path)
+              });
+            });
+          }
+          continue;
         }
+
+        finalImports[importStatement] = {
+          rawStatement: importStatement,
+          rawPath: importStatementPath,
+          paths: [
+            {
+              absolutePath: importAbsolutePath,
+              relativePath: __path.relative(
+                settings.rootDir,
+                importAbsolutePath
+              )
+            }
+          ]
+        };
       }
 
-      scss = scss.replace(importObj.rawStatement, '');
-    }
-    return {
-      children: childrenObj,
-      scss
-    };
+      for (let i = 0; i < Object.keys(finalImports).length; i++) {
+        const importObj = finalImports[Object.keys(finalImports)[i]];
+
+        for (let j = 0; j < importObj.paths.length; j++) {
+          const pathObj = importObj.paths[j];
+          const importPath = this._getRealFilePath(pathObj.absolutePath);
+          if (importPath) {
+            // compile the finded path
+            const compilePromise = this.compile(importPath, {
+              ...settings,
+              _isChild: true,
+              rootDir: __folderPath(importPath)
+            });
+            compilePromise.on('reject', (e) => {
+              reject(e);
+            });
+            const compileRes = await compilePromise;
+            childrenObj[pathObj.absolutePath] = compileRes;
+          }
+        }
+
+        scss = scss.replace(importObj.rawStatement, '');
+      }
+      resolve({
+        children: childrenObj,
+        scss
+      });
+    });
   }
 
   _getRealFilePath(path) {
@@ -498,4 +534,4 @@ export = class SScssCompiler {
     }
     return null;
   }
-}
+};

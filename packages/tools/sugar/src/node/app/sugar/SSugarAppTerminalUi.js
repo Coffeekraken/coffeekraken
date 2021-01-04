@@ -683,4 +683,4 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
     }
 }
 exports.default = SSugarAppTerminalUi;
-//# sourceMappingURL=module.js.map
+//# sourceMappingURL=SSugarAppTerminalUi.js.map

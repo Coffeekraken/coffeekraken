@@ -7,7 +7,7 @@ import __ensureDirSync from '../../fs/ensureDirSync';
 import __removeSync from '../../fs/removeSync';
 import __sugarConfig from '../../config/sugar';
 import __toString from '../../string/toString';
-import __SCacheAdapter from '../../cache/adapters/SCacheAdapter';
+import __SCacheAdapter from './SCacheAdapter';
 
 /**
  * @name                                SCacheFsAdapter

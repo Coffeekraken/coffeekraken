@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const linkPackages_1 = __importDefault(require("../../node/monorepo/linkPackages"));
-const output_1 = __importDefault(require("../../node/process/output"));
+const stdio_1 = __importDefault(require("../../node/process/stdio"));
 module.exports = (stringArgs = '') => {
-    const process = linkPackages_1.default();
-    output_1.default(process);
+    const pro = linkPackages_1.default();
+    stdio_1.default(pro);
 };
 //# sourceMappingURL=link.cli.js.map

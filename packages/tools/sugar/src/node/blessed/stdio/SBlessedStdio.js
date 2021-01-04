@@ -66,7 +66,7 @@ const cls = (_a = class SBlessedStdio extends SBlessedComponent_1.default {
          *
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        constructor(sources, handlerInstance, settings = {}) {
+        constructor(sources, settings = {}) {
             // extends SPanel
             super(deepMerge_1.default({
                 filter: null,
@@ -84,12 +84,10 @@ const cls = (_a = class SBlessedStdio extends SBlessedComponent_1.default {
                     'reject',
                     '*.reject',
                     'resolve',
-                    '*.resolve',
-                    'success',
-                    '*.success'
+                    '*.resolve'
                 ],
                 mapTypesToStacks: {
-                    heading: ['resolve', '*.resolve', 'success', '*.success'],
+                    heading: [],
                     error: [
                         'error',
                         '*.error',
@@ -148,7 +146,6 @@ const cls = (_a = class SBlessedStdio extends SBlessedComponent_1.default {
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             this._currentModuleId = null;
-            this._handlerInstance = handlerInstance;
             this._sources = Array.isArray(sources) ? sources : [sources];
             // listen for resizing
             this.on('resize', () => {
@@ -165,6 +162,7 @@ const cls = (_a = class SBlessedStdio extends SBlessedComponent_1.default {
             this.on('attach', () => {
                 this._logBuffer();
             });
+            this._logsEncryptedStack = [];
         }
         /**
          * @name          registerComponent
@@ -290,6 +288,15 @@ const cls = (_a = class SBlessedStdio extends SBlessedComponent_1.default {
                     else {
                         $lastContainer = this.stack.length ? this.stack.pop() : undefined;
                     }
+                    // if (logObj && logObj.value && typeof logObj.value === 'string') {
+                    //   const encryptedLog = __md5.encrypt(logObj.value.trim());
+                    //   if (this._logsEncryptedStack.indexOf(encryptedLog) !== -1) {
+                    //     continue;
+                    //   }
+                    //   this._logsEncryptedStack.push(encryptedLog);
+                    //   // this._logsEncryptedStack = this._logsEncryptedStack.slice(-50);
+                    //   console.log(this._logsEncryptedStack);
+                    // }
                     // make sure the wanted component declared in "type" is registered
                     // otherwise, fallback to "default"
                     const type = SBlessedStdio.registeredComponents[logObj.type] !== undefined

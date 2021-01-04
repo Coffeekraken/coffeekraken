@@ -23,9 +23,24 @@ import __SDocMap from '../../../doc/SDocMap';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = async function docMap(req, res, settings = {}) {
-  const docMap = new __SDocMap();
-  const docMapJson = await docMap.read();
-  res.status(200);
-  res.type('application/json');
-  res.send(docMapJson);
-}
+  const promise = new __SPromise();
+
+  (async () => {
+    const docMap = new __SDocMap();
+    const docMapPromise = docMap.read();
+    __SPromise.pipe(docMapPromise, promise);
+    docMapPromise.on('reject', (e) => {
+      res.status(500);
+      res.type('text/html');
+      res.send(e);
+      promise.reject(e);
+    });
+    const docMapJson = await docMapPromise;
+    res.status(200);
+    res.type('application/json');
+    res.send(docMapJson);
+    promise.resolve(docMapJson);
+  })();
+
+  return promise;
+};

@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __SPromise from '../../../promise/SPromise';
 import __SScssCompiler from '../../../scss/SScssCompiler';
 import __SDuration from '../../../time/SDuration';
 import __SBuildScssInterface from '../../../scss/build/interface/SBuildScssInterface';
@@ -23,21 +24,33 @@ import __SBuildScssInterface from '../../../scss/build/interface/SBuildScssInter
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = async function scss(req, res, settings = {}) {
-  const defaultValuesObj = __SBuildScssInterface.getDefaultValues();
-  const compiler = new __SScssCompiler(defaultValuesObj);
-  const duration = new __SDuration();
-  const compileRes = await compiler.compile(req.path, {
-    ...(req.query || {})
-  });
-  if (settings.log) {
-    console.log(
-      `<bgGreen><black> scss </black></bgGreen> Scss file "<yellow>${
+export = function scss(req, res, settings = {}) {
+  const promise = new __SPromise();
+
+  (async () => {
+    const defaultValuesObj = __SBuildScssInterface.getDefaultValues();
+    const compiler = new __SScssCompiler(defaultValuesObj);
+    const duration = new __SDuration();
+    const compilerPromise = compiler.compile(req.path, {
+      ...(req.query || {})
+    });
+    __SPromise.pipe(compilerPromise, promise);
+    compilerPromise.on('reject', (e) => {
+      res.type('text/html');
+      res.status(500);
+      res.send(e);
+      promise.reject(e);
+    });
+    const compileRes = await compilerPromise;
+    res.type('text/css');
+    res.status(200);
+    res.send(compileRes.css);
+    promise.resolve(
+      `<bgGreen><black> scss </black></bgGreen> file "<yellow>${
         req.path
       }</yellow> served in <cyan>${duration.end()}s</cyan>"`
     );
-  }
-  res.type('text/css');
-  res.status(200);
-  res.send(compileRes.css);
-}
+  })();
+
+  return promise;
+};

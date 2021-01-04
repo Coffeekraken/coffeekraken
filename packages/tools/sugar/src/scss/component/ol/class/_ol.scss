@@ -38,7 +38,7 @@
     @if scope('bare') {
       @each $size in $sizes {
         /**
-      * @name              .#{sel(#{$name}--#{$size})}, .#{sel(#{tf-class()})} ol.#{sel($size)}
+      * @name              .#{sel(#{$name}--#{$size})}
       * @namespace         sugar.scss.component
       * @type              Classname
       *
@@ -57,13 +57,8 @@
       * @since       2.0.0
       * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-        .#{sel(#{tf-class()})} #{$name}.#{$size},
         .#{sel($name)}.#{sel('#{$name}--#{$size}')} {
-          @include ol(
-            $size: $size,
-            $separator: $separator,
-            $scope: 'bare'
-          );
+          @include ol($size: $size, $separator: $separator, $scope: 'bare');
         }
       }
     }
@@ -71,7 +66,7 @@
     @if scope('style') {
       @each $color in $colors {
         /**
-      * @name              .#{sel(#{$name}--#{$color})}, .#{sel(#{tf-class()})} ol.#{sel($color)}
+      * @name              .#{sel(#{$name}--#{$color})}
       * @namespace         sugar.scss.component
       * @type              Classname
       *
@@ -90,13 +85,8 @@
       * @since       2.0.0
       * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-        .#{sel(#{tf-class()})} #{$name}.#{$color},
         .#{sel($name)}.#{sel('#{$name}--#{$color}')} {
-          @include ol(
-            $color: $color,
-            $scope: 'style',
-            $separator: $separator
-          );
+          @include ol($color: $color, $scope: 'style', $separator: $separator);
         }
       }
     }

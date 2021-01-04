@@ -52,11 +52,11 @@ function jsToScssString(value, settings = {}) {
                 }
                 else if (isArray(value)) {
                     let sassVals = [];
-                    for (v of value) {
+                    value.forEach((v) => {
                         if (isNotUndefined(v)) {
                             sassVals.push(_jsToScssString(v, indentLevel));
                         }
-                    }
+                    });
                     return '(' + sassVals.join(', ') + ')';
                 }
                 else if (isNull(value))

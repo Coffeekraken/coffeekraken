@@ -18,7 +18,7 @@ const fs_1 = __importDefault(require("fs"));
 const ensureDirSync_1 = __importDefault(require("../../fs/ensureDirSync"));
 const removeSync_1 = __importDefault(require("../../fs/removeSync"));
 const sugar_1 = __importDefault(require("../../config/sugar"));
-const SCacheAdapter_1 = __importDefault(require("../../cache/adapters/SCacheAdapter"));
+const SCacheAdapter_1 = __importDefault(require("./SCacheAdapter"));
 module.exports = class SCacheFsAdapter extends SCacheAdapter_1.default {
     /**
      * @name                              constructor

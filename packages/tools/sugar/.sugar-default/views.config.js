@@ -26,7 +26,7 @@ module.exports = {
    * @since       2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  cacheDir: `[config.cache.fs.rootDir]`,
+  cacheDir: `[config.storage.cacheFolderPath]/views`,
 
   /**
    * @name      engines

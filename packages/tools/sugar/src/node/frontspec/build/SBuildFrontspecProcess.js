@@ -40,7 +40,7 @@ module.exports = (_a = class SBuildFrontspecProcess extends SProcess_1.default {
         process(params, settings = {}) {
             const actionStream = new SBuildFrontspecActionsStream_1.default(settings);
             const actionStreamProcess = actionStream.start(params);
-            this.bindSPromise(actionStreamProcess);
+            return actionStreamProcess;
         }
     },
     _a.interface = SBuildFrontspecInterface_1.default,

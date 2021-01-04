@@ -1,3 +1,4 @@
+import __md5 from '../../crypt/md5';
 import __packageRoot from '../../path/packageRoot';
 import __deepMerge from '../../object/deepMerge';
 import __blessed from 'blessed';
@@ -113,18 +114,6 @@ const cls: ISBlessedStdioCtor = class SBlessedStdio
   }
 
   /**
-   * @name      _handlerInstance
-   * @type      Any
-   * @private
-   *
-   * Store the handler instance passed in the constructor
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _handlerInstance;
-
-  /**
    * @name      stack
    * @type      Object[]
    *
@@ -144,7 +133,7 @@ const cls: ISBlessedStdioCtor = class SBlessedStdio
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(sources, handlerInstance, settings = {}) {
+  constructor(sources, settings = {}) {
     // extends SPanel
     super(
       __deepMerge(
@@ -164,12 +153,10 @@ const cls: ISBlessedStdioCtor = class SBlessedStdio
             'reject',
             '*.reject',
             'resolve',
-            '*.resolve',
-            'success',
-            '*.success'
+            '*.resolve'
           ],
           mapTypesToStacks: {
-            heading: ['resolve', '*.resolve', 'success', '*.success'],
+            heading: [],
             error: [
               'error',
               '*.error',
@@ -211,7 +198,6 @@ const cls: ISBlessedStdioCtor = class SBlessedStdio
       )
     );
 
-    this._handlerInstance = handlerInstance;
     this._sources = Array.isArray(sources) ? sources : [sources];
 
     // listen for resizing
@@ -231,6 +217,8 @@ const cls: ISBlessedStdioCtor = class SBlessedStdio
     this.on('attach', () => {
       this._logBuffer();
     });
+
+    this._logsEncryptedStack = [];
   }
 
   /**
@@ -344,6 +332,16 @@ const cls: ISBlessedStdioCtor = class SBlessedStdio
       } else {
         $lastContainer = this.stack.length ? this.stack.pop() : undefined;
       }
+
+      // if (logObj && logObj.value && typeof logObj.value === 'string') {
+      //   const encryptedLog = __md5.encrypt(logObj.value.trim());
+      //   if (this._logsEncryptedStack.indexOf(encryptedLog) !== -1) {
+      //     continue;
+      //   }
+      //   this._logsEncryptedStack.push(encryptedLog);
+      //   // this._logsEncryptedStack = this._logsEncryptedStack.slice(-50);
+      //   console.log(this._logsEncryptedStack);
+      // }
 
       // make sure the wanted component declared in "type" is registered
       // otherwise, fallback to "default"

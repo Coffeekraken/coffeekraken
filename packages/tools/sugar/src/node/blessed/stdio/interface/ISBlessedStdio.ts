@@ -24,6 +24,4 @@ export interface ISBlessedStdioCtor {
   ): void;
 }
 
-export default interface ISBlessedStdio {
-  _handlerInstance: any;
-}
+export default interface ISBlessedStdio {}

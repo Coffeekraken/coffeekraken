@@ -66,8 +66,8 @@ export = class SCache {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _defaultAdaptersPaths = {
-    ls: '@coffeekraken/sugar/js/cache/adapters/SCacheLsAdapter',
-    fs: `../../cache/adapters/SCacheFsAdapter`
+    ls: `${__dirname}/adapters/SCacheLsAdapter`,
+    fs: `${__dirname}/adapters/SCacheFsAdapter`
   };
 
   /**
@@ -142,11 +142,7 @@ export = class SCache {
     const adapter = this._settings.adapter;
     // check the type
     if (typeof adapter === 'string' && this._defaultAdaptersPaths[adapter]) {
-      let adptr = await import(
-        /* webpackChunkName: "SCacheAdapter" */ this._defaultAdaptersPaths[
-          adapter
-        ]
-      );
+      let adptr = require(this._defaultAdaptersPaths[adapter]);
       if (adptr.default) adptr = adptr.default;
       this._adapter = new adptr(this._settings);
     } else if (adapter instanceof __SCacheAdapter) {

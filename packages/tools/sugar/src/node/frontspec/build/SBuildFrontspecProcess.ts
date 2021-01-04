@@ -61,6 +61,6 @@ export = class SBuildFrontspecProcess extends __SProcess {
   process(params, settings = {}) {
     const actionStream = new __SBuildFrontspecActionsStream(settings);
     const actionStreamProcess = actionStream.start(params);
-    this.bindSPromise(actionStreamProcess);
+    return actionStreamProcess;
   }
-}
+};

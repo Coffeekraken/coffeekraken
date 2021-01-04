@@ -42,7 +42,7 @@ interface ILinkPackagesTriggerFn {
 interface ILinkPackagesCancelFn {
   (value: any): any;
 }
-export = async function linkPackages(settings = {}): Promise<null> {
+export = function linkPackages(settings = {}): Promise<null> {
   settings = {
     rootDir: process.cwd(),
     ...settings
@@ -76,17 +76,12 @@ export = async function linkPackages(settings = {}): Promise<null> {
           if (packagePath === path) return; // avoid linking itself
           const json = packagesObj[path];
           if (
-            packageJson.dependencies &&
-            !Object.keys(packageJson.dependencies).includes(json.name)
+            (packageJson.dependencies &&
+              Object.keys(packageJson.dependencies).includes(json.name)) ||
+            (packageJson.devDependencies &&
+              Object.keys(packageJson.devDependencies).includes(json.name))
           ) {
-            return;
-          }
-          if (
-            packageJson.devDependencies &&
-            !Object.keys(packageJson.devDependencies).includes(json.name)
-          ) {
-            return;
-          }
+          } else return;
           const currentModulePath = `${settings.rootDir}/${packagePath}`;
           const destinationModulePath = `${settings.rootDir}/${path}`;
           const nodeModulesPath = `${currentModulePath}/node_modules`;

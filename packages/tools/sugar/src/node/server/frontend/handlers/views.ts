@@ -6,6 +6,7 @@ import __render from '../../../template/render';
 import __STemplate from '../../../template/STemplate';
 import __fs from 'fs';
 import __SDuration from '../../../time/SDuration';
+import __SPromise, { reject } from '../../../promise/SPromise';
 
 /**
  * @name                views
@@ -26,66 +27,72 @@ import __SDuration from '../../../time/SDuration';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = async function views(req, res, settings = {}) {
-  let params = req.params[0].split('/');
+export = function views(req, res, settings = {}) {
+  const promise = new __SPromise();
 
-  const duration = new __SDuration();
+  (async () => {
+    let params = req.params[0].split('/');
 
-  let rootDirs = __STemplate.getRootDirs(settings.rootDir || []);
+    const duration = new __SDuration();
 
-  for (let i = 0; i < rootDirs.length; i++) {
-    const rootDir = rootDirs[i];
+    let rootDirs = __STemplate.getRootDirs(settings.rootDir || []);
 
-    for (let j = 0; j < Object.keys(__STemplate.engines).length; j++) {
-      const engineExt = Object.keys(__STemplate.engines)[j];
+    for (let i = 0; i < rootDirs.length; i++) {
+      const rootDir = rootDirs[i];
 
-      const viewPath =
-        __path.resolve(rootDir, params.join('/')) + `.${engineExt}`;
+      for (let j = 0; j < Object.keys(__STemplate.engines).length; j++) {
+        const engineExt = Object.keys(__STemplate.engines)[j];
 
-      if (__fs.existsSync(viewPath)) {
-        const relativeViewPath = __path.relative(rootDir, viewPath);
-        const templateInstance = new __STemplate(relativeViewPath, {
-          rootDirs
-        });
-        const resultObj = await templateInstance.render({
-          ...(res.templateData || {})
-        });
+        const viewPath =
+          __path.resolve(rootDir, params.join('/')) + `.${engineExt}`;
 
-        if (settings.log) {
-          console.log(
-            `<bgGreen><black> views </black></bgGreen> View "<yellow>${
+        if (__fs.existsSync(viewPath)) {
+          const relativeViewPath = __path.relative(rootDir, viewPath);
+          const templateInstance = new __STemplate(relativeViewPath, {
+            rootDirs
+          });
+          const resultPromise = templateInstance.render({
+            ...(res.templateData || {})
+          });
+          __SPromise.pipe(resultPromise, promise);
+          const resultObj = await resultPromise;
+
+          promise.resolve(
+            `<bgGreen><black> views </black></bgGreen> file "<yellow>${
               req.path
             }</yellow> served in <cyan>${duration.end()}s</cyan>"`
           );
+          res.status(200);
+          res.type('text/html');
+          return res.send(resultObj.content);
         }
-
-        res.status(200);
-        res.type('text/html');
-        return res.send(resultObj.content);
       }
     }
-  }
 
-  // view not found
-  const notFoundTemplateInstance = new __STemplate('pages.404', {
-    rootDir: rootDirs
-  });
+    // view not found
+    const notFoundTemplateInstance = new __STemplate('pages.404', {
+      rootDir: rootDirs
+    });
 
-  const notFoundObj = await notFoundTemplateInstance.render({
-    ...(res.templateData || {}),
-    title: `View not found...`,
-    error: `The requested view "${
-      req.path
-    }" does not exists in any of these directories:
-    <ol>  
-    ${notFoundTemplateInstance._settings.rootDir.map((dir) => {
-      return `<li>${dir}</li>`;
-    })}
-    </ol>
-    `
-  });
+    const notFoundObj = await notFoundTemplateInstance.render({
+      ...(res.templateData || {}),
+      title: `View not found...`,
+      error: `The requested view "${
+        req.path
+      }" does not exists in any of these directories:
+      <ol>  
+      ${notFoundTemplateInstance._settings.rootDir.map((dir) => {
+        return `<li>${dir}</li>`;
+      })}
+      </ol>
+      `
+    });
 
-  res.status(404);
-  res.type('text/html');
-  res.send(notFoundObj.content);
-}
+    res.status(404);
+    res.type('text/html');
+    res.send(notFoundObj.content);
+    promise.reject(notFoundObj.content);
+  })();
+
+  return promise;
+};

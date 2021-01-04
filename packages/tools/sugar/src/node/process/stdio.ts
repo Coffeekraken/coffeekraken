@@ -31,6 +31,6 @@ import __SBlessedProcessStdio from './stdio/blessed/SBlessedProcessStdio';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = (source, settings = {}) => {
-  const stdio = new __SBlessedProcessStdio([source], source, settings);
+  const stdio = new __SBlessedProcessStdio(source, settings);
   return stdio;
 };

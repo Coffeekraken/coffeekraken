@@ -17,11 +17,9 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
  */
 @mixin color-classes() {
-
   @if class-match-namespace('sugar.color') {
-
     // colors
-    $colors: setting("colors");
+    $colors: setting('colors');
     @each $name, $color in $colors {
       @if $name != classes {
         $modifiers: ();
@@ -30,9 +28,8 @@
           $color: map-get($color, color);
         }
 
-
-        @if class-match-namespace("sugar.color.#{$name}.color") {
-          $cls: unquote(selector("c-#{$name}"));
+        @if class-match-namespace('sugar.color.#{$name}.color') {
+          $cls: unquote(selector('c-#{$name}'));
           /**
             * @name       	#{$cls}
             * @namespace       sugar.scss.colo.class
@@ -54,9 +51,8 @@
           }
         }
 
-
-        @if class-match-namespace("sugar.color.#{$name}.bg") {
-          $cls: unquote(selector("bg-#{$name}"));
+        @if class-match-namespace('sugar.color.#{$name}.bg') {
+          $cls: unquote(selector('bg-#{$name}'));
           /**
             * @name       	#{$cls}
             * @namespace       sugar.scss.color.class
@@ -81,9 +77,8 @@
         // modifiers
         @if $modifiers {
           @each $mod-name, $mod in $modifiers {
-
-            @if class-match-namespace("sugar.color.#{$name}.#{$mod-name}") {
-              $cls: unquote(selector("c-#{$name}--#{$mod-name}"));
+            @if class-match-namespace('sugar.color.#{$name}.#{$mod-name}') {
+              $cls: unquote(selector('c-#{$name}--#{$mod-name}'));
               /**
                 * @name       	#{$cls}
                 * @namespace       sugar.scss.color.class
@@ -100,14 +95,13 @@
                 * @since       1.0.0
                 * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                 */
-             .#{$cls} {
+              .#{$cls} {
                 color: color($name, $mod-name);
               }
             }
 
-
-            @if class-match-namespace("sugar.color.#{$name}.#{$mod-name}.bg") {
-              $cls: unquote(selector("bg-#{$name}--#{$mod-name}"));
+            @if class-match-namespace('sugar.color.#{$name}.#{$mod-name}.bg') {
+              $cls: unquote(selector('bg-#{$name}--#{$mod-name}'));
               /**
                 * @name       	#{$cls}
                 * @namespace       sugar.scss.color.class
@@ -133,5 +127,4 @@
       }
     }
   }
-
 }

@@ -1,24 +1,5 @@
 // @ts-nocheck
 // @shared
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -68,7 +49,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var __syncRequire = typeof module === "object" && typeof module.exports === "object";
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SCacheAdapter_1 = __importDefault(require("./adapters/SCacheAdapter"));
     var convert_1 = __importDefault(require("../time/convert"));
@@ -126,8 +106,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             this._defaultAdaptersPaths = {
-                ls: '@coffeekraken/sugar/js/cache/adapters/SCacheLsAdapter',
-                fs: "../../cache/adapters/SCacheFsAdapter"
+                ls: __dirname + "/adapters/SCacheLsAdapter",
+                fs: __dirname + "/adapters/SCacheFsAdapter"
             };
             /**
              * @name                              _adapter
@@ -169,31 +149,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             return __awaiter(this, void 0, void 0, function () {
                 var adapter, adptr;
                 return __generator(this, function (_a) {
-                    var _b;
-                    switch (_a.label) {
-                        case 0:
-                            // check if we have already an adapter setted for this instance
-                            if (this._adapter)
-                                return [2 /*return*/, this._adapter];
-                            adapter = this._settings.adapter;
-                            if (!(typeof adapter === 'string' && this._defaultAdaptersPaths[adapter])) return [3 /*break*/, 2];
-                            return [4 /*yield*/, (_b = 
-                                /* webpackChunkName: "SCacheAdapter" */ this._defaultAdaptersPaths[adapter], __syncRequire ? Promise.resolve().then(function () { return __importStar(require(_b)); }) : new Promise(function (resolve_1, reject_1) { require([_b], resolve_1, reject_1); }).then(__importStar))];
-                        case 1:
-                            adptr = _a.sent();
-                            if (adptr.default)
-                                adptr = adptr.default;
-                            this._adapter = new adptr(this._settings);
-                            return [3 /*break*/, 3];
-                        case 2:
-                            if (adapter instanceof SCacheAdapter_1.default) {
-                                this._adapter = adapter;
-                            }
-                            _a.label = 3;
-                        case 3: 
-                        // return the adapter
+                    // check if we have already an adapter setted for this instance
+                    if (this._adapter)
                         return [2 /*return*/, this._adapter];
+                    adapter = this._settings.adapter;
+                    // check the type
+                    if (typeof adapter === 'string' && this._defaultAdaptersPaths[adapter]) {
+                        adptr = require(this._defaultAdaptersPaths[adapter]);
+                        if (adptr.default)
+                            adptr = adptr.default;
+                        this._adapter = new adptr(this._settings);
                     }
+                    else if (adapter instanceof SCacheAdapter_1.default) {
+                        this._adapter = adapter;
+                    }
+                    // return the adapter
+                    return [2 /*return*/, this._adapter];
                 });
             });
         };

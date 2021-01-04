@@ -40,7 +40,7 @@
     @if scope('bare') {
       @each $size in $sizes {
         /**
-      * @name              .#{sel(#{$name}--#{$size})}, .#{sel(#{tf-class()})} ul.#{sel($size)}
+      * @name              .#{sel(#{$name}--#{$size})}
       * @namespace         sugar.scss.component.ul.size.#{$size}
       * @type              Classname
       *
@@ -59,7 +59,6 @@
       * @since       2.0.0
       * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-        .#{sel(#{tf-class()})} #{$name}.#{$size},
         .#{sel($name)}.#{sel('#{$name}--#{$size}')} {
           @include ul(
             $size: $size,
@@ -74,7 +73,7 @@
     @if scope('style') {
       @each $color in $colors {
         /**
-      * @name              .#{sel(#{$name}--#{$color})}, .#{sel(#{tf-class()})} ul.#{sel($color)}
+      * @name              .#{sel(#{$name}--#{$color})}
       * @namespace         sugar.scss.component.ul.color.#{$color}
       * @type              Classname
       *
@@ -93,7 +92,6 @@
       * @since       2.0.0
       * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-        .#{sel(#{tf-class()})} #{$name}.#{$color},
         .#{sel($name)}.#{sel('#{$name}--#{$color}')} {
           @include ul(
             $color: $color,

@@ -3,16 +3,13 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-const argsToObject_1 = __importDefault(require("../cli/argsToObject"));
 const class_1 = __importDefault(require("../is/class"));
 const childProcess_1 = __importDefault(require("../is/childProcess"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
-const SProcessManagerInterface_1 = __importDefault(require("./interface/SProcessManagerInterface"));
 const SError_1 = __importDefault(require("../error/SError"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-const SIpc_1 = __importDefault(require("../ipc/SIpc"));
 const getExtendsStack_1 = __importDefault(require("../class/getExtendsStack"));
-const output_1 = __importDefault(require("./output"));
+const stdio_1 = __importDefault(require("./stdio"));
 /**
  * @name            SProcessManager
  * @namespace       sugar.node.process
@@ -37,6 +34,26 @@ const output_1 = __importDefault(require("./output"));
  */
 class SProcessManager extends SPromise_1.default {
     /**
+     * @name            triggerParent
+     * @type            Function
+     * @static
+     *
+     * This method allows you to "pipe" some promise from a child process to a his parent process promise
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    // static triggerParent(stack, value, metas = {}) {
+    //   const trigger = process.env.GLOBAL_SIPC_TRIGGER_ID
+    //     ? `${process.env.GLOBAL_SIPC_TRIGGER_ID}.trigger`
+    //     : 'trigger';
+    //   __SIpc.trigger(trigger, {
+    //     stack,
+    //     value,
+    //     metas
+    //   });
+    // }
+    /**
      * @name          constructor
      * @type          Function
      * @constructor
@@ -51,7 +68,7 @@ class SProcessManager extends SPromise_1.default {
             name: 'Unnamed Process Manager',
             deamon: null,
             initialParams: {},
-            output: {},
+            stdio: 'inherit',
             watchProperties: ['watch'],
             autoStart: true,
             autoRun: false,
@@ -85,24 +102,28 @@ class SProcessManager extends SPromise_1.default {
             throw new SError_1.default(`Sorry but the <yellow>SProcessManager</yellow> class can handle only <cyan>SProcess</cyan> based process classes...`);
         }
         this._ProcessClass = ProcessClass;
-        this._settings.initialParams = argsToObject_1.default(this._settings.initialParams, {
-            definition: ProcessClass.interface.definition
-        });
         if (!childProcess_1.default()) {
-            if (this._settings.output) {
-                if (class_1.default(this._settings.output)) {
-                    const outputInstance = new this._settings.output(this, this._settings.initialParams);
+            if (this._settings.stdio) {
+                if (class_1.default(this._settings.stdio)) {
+                    this.stdio = new this._settings.stdio([this], this);
+                }
+                else if (this._settings.stdio === 'inherit') {
+                    this.on('log,*.log,warn,*.warn,error,*.error,reject,*.reject', (data, metas) => {
+                        if (!data)
+                            return;
+                        console.log(__parseHtml(__toString(data.value || data)));
+                    });
                 }
                 else {
-                    const outputSettings = typeof this._settings.output === 'object'
-                        ? this._settings.output
+                    const outputSettings = typeof this._settings.stdio === 'object'
+                        ? this._settings.stdio
                         : {};
-                    output_1.default(this, outputSettings);
+                    this.stdio = stdio_1.default([this], outputSettings);
                 }
             }
         }
         // start if autoStart
-        if (settings.autoStart)
+        if (this._settings.autoStart)
             this.start(this._settings);
     }
     /**
@@ -115,27 +136,7 @@ class SProcessManager extends SPromise_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get initialParams() {
-        return this._settings.initialParams;
-    }
-    /**
-     * @name            triggerParent
-     * @type            Function
-     * @static
-     *
-     * This method allows you to "pipe" some promise from a child process to a his parent process promise
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    static triggerParent(stack, value, metas = {}) {
-        const trigger = process.env.GLOBAL_SIPC_TRIGGER_ID
-            ? `${process.env.GLOBAL_SIPC_TRIGGER_ID}.trigger`
-            : 'trigger';
-        SIpc_1.default.trigger(trigger, {
-            stack,
-            value,
-            metas
-        });
+        return Object.assign({}, this._settings.initialParams);
     }
     /**
      * @name            deamon
@@ -199,7 +200,7 @@ class SProcessManager extends SPromise_1.default {
             if (this.currentProcess)
                 return;
             // check if we have a "deamonUpdate" method
-            let params = Object.assign({}, this.initialParams);
+            let params = this.initialParams;
             params = this.deamon.processParams(params, data);
             const updateLog = this.deamon.updateLog(data);
             if (updateLog) {
@@ -253,15 +254,14 @@ class SProcessManager extends SPromise_1.default {
      */
     run(params = {}, settings = {}) {
         settings = deepMerge_1.default(this._settings, {}, settings);
-        params = deepMerge_1.default(Object.assign(settings.initialParams), params);
+        params = deepMerge_1.default(this.initialParams, params);
         // check that their's not another processing process
         if (this.currentProcess) {
             if (settings.throw) {
                 throw new SError_1.default(`Sorry but you cannot launch multiple processes in the same <yellow>${this.constructor.name}</yellow> instance...`);
             }
             else {
-                this.trigger('log', {
-                    error: true,
+                this.trigger('warn', {
                     value: `Sorry but you cannot launch multiple processes in the same <yellow>${this.constructor.name}</yellow> instance...`
                 });
             }
@@ -290,7 +290,5 @@ class SProcessManager extends SPromise_1.default {
         return this.currentProcess;
     }
 }
-module.exports = SProcessManagerInterface_1.default.implements(SProcessManager, [
-    SProcessManagerInterface_1.default
-]);
+module.exports = SProcessManager;
 //# sourceMappingURL=SProcessManager.js.map

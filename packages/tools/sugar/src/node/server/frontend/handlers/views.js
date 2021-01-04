@@ -16,8 +16,10 @@ const path_1 = __importDefault(require("path"));
 const STemplate_1 = __importDefault(require("../../../template/STemplate"));
 const fs_1 = __importDefault(require("fs"));
 const SDuration_1 = __importDefault(require("../../../time/SDuration"));
+const SPromise_1 = __importDefault(require("../../../promise/SPromise"));
 module.exports = function views(req, res, settings = {}) {
-    return __awaiter(this, void 0, void 0, function* () {
+    const promise = new SPromise_1.default();
+    (() => __awaiter(this, void 0, void 0, function* () {
         let params = req.params[0].split('/');
         const duration = new SDuration_1.default();
         let rootDirs = STemplate_1.default.getRootDirs(settings.rootDir || []);
@@ -31,10 +33,10 @@ module.exports = function views(req, res, settings = {}) {
                     const templateInstance = new STemplate_1.default(relativeViewPath, {
                         rootDirs
                     });
-                    const resultObj = yield templateInstance.render(Object.assign({}, (res.templateData || {})));
-                    if (settings.log) {
-                        console.log(`<bgGreen><black> views </black></bgGreen> View "<yellow>${req.path}</yellow> served in <cyan>${duration.end()}s</cyan>"`);
-                    }
+                    const resultPromise = templateInstance.render(Object.assign({}, (res.templateData || {})));
+                    SPromise_1.default.pipe(resultPromise, promise);
+                    const resultObj = yield resultPromise;
+                    promise.resolve(`<bgGreen><black> views </black></bgGreen> file "<yellow>${req.path}</yellow> served in <cyan>${duration.end()}s</cyan>"`);
                     res.status(200);
                     res.type('text/html');
                     return res.send(resultObj.content);
@@ -46,15 +48,17 @@ module.exports = function views(req, res, settings = {}) {
             rootDir: rootDirs
         });
         const notFoundObj = yield notFoundTemplateInstance.render(Object.assign(Object.assign({}, (res.templateData || {})), { title: `View not found...`, error: `The requested view "${req.path}" does not exists in any of these directories:
-    <ol>  
-    ${notFoundTemplateInstance._settings.rootDir.map((dir) => {
+      <ol>  
+      ${notFoundTemplateInstance._settings.rootDir.map((dir) => {
                 return `<li>${dir}</li>`;
             })}
-    </ol>
-    ` }));
+      </ol>
+      ` }));
         res.status(404);
         res.type('text/html');
         res.send(notFoundObj.content);
-    });
+        promise.reject(notFoundObj.content);
+    }))();
+    return promise;
 };
 //# sourceMappingURL=views.js.map

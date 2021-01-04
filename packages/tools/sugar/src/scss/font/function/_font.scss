@@ -61,7 +61,7 @@
   $family: test-argument(
     'Sugar.font',
     'family',
-    map.keys(setting('fonts')),
+    map.keys(setting('fonts.families')),
     $family
   );
   $color: test-argument('Sugar.font', 'color', color, $color);

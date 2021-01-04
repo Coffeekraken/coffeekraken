@@ -63,11 +63,11 @@ function jsToScssString(value, settings = {}) {
           return result;
         } else if (isArray(value)) {
           let sassVals = [];
-          for (v of value) {
+          value.forEach((v) => {
             if (isNotUndefined(v)) {
               sassVals.push(_jsToScssString(v, indentLevel));
             }
-          }
+          });
           return '(' + sassVals.join(', ') + ')';
         } else if (isNull(value)) return 'null';
         else {
@@ -80,6 +80,7 @@ function jsToScssString(value, settings = {}) {
 
   let res = _jsToScssString(value);
   res = res.replace(/\s["'](#[a-zA-Z0-9]{3,6})["']/gm, ' $1');
+
   return res;
 }
 

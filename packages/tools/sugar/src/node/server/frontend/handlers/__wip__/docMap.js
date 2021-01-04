@@ -12,14 +12,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+const SPromise_1 = __importDefault(require("../../../promise/SPromise"));
 const SDocMap_1 = __importDefault(require("../../../doc/SDocMap"));
 module.exports = function docMap(req, res, settings = {}) {
     return __awaiter(this, void 0, void 0, function* () {
-        const docMap = new SDocMap_1.default();
-        const docMapJson = yield docMap.read();
-        res.status(200);
-        res.type('application/json');
-        res.send(docMapJson);
+        const promise = new SPromise_1.default();
+        (() => __awaiter(this, void 0, void 0, function* () {
+            const docMap = new SDocMap_1.default();
+            const docMapPromise = docMap.read();
+            SPromise_1.default.pipe(docMapPromise, promise);
+            docMapPromise.on('reject', (e) => {
+                res.status(500);
+                res.type('text/html');
+                res.send(e);
+                promise.reject(e);
+            });
+            const docMapJson = yield docMapPromise;
+            res.status(200);
+            res.type('application/json');
+            res.send(docMapJson);
+            promise.resolve(docMapJson);
+        }))();
+        return promise;
     });
 };
 //# sourceMappingURL=docMap.js.map

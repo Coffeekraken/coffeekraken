@@ -37,7 +37,7 @@ function getScssSharedResourcesString(array = null) {
         const path = __isInPackage('coffeekraken', process.cwd(), true)
           ? __path.resolve(
               __packageRoot(__dirname, true),
-              'toolkits/sugar/index'
+              'packages/tools/sugar/index'
             )
           : '@coffeekraken/sugar/index';
         importsStrings += `

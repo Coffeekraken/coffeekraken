@@ -14,18 +14,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const SDuration_1 = __importDefault(require("../../../time/SDuration"));
 const SJsCompiler_1 = __importDefault(require("../../../js/SJsCompiler"));
+const SPromise_1 = __importDefault(require("../../../promise/SPromise"));
 module.exports = function js(req, res, settings = {}) {
-    return __awaiter(this, void 0, void 0, function* () {
+    const promise = new SPromise_1.default();
+    (() => __awaiter(this, void 0, void 0, function* () {
         let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
         const duration = new SDuration_1.default();
         const compiler = new SJsCompiler_1.default({});
-        const resultObj = yield compiler.compile(filePath);
-        if (settings.log) {
-            console.log(`<bgGreen><black> js </black></bgGreen> Js file "<yellow>${req.path}</yellow> served in <cyan>${duration.end()}s</cyan>"`);
-        }
+        const compilePromise = compiler.compile(filePath);
+        SPromise_1.default.pipe(compilePromise, promise);
+        compilePromise.on('reject', (e) => {
+            res.type('text/html');
+            res.status(500);
+            res.send(e);
+            promise.reject(e);
+        });
+        const resultObj = yield compilePromise;
         res.type('text/javascript');
         res.status(200);
         res.send(resultObj.js);
-    });
+        promise.resolve(`<bgGreen><black> js </black></bgGreen> file "<yellow>${req.path}</yellow> served in <cyan>${duration.end()}s</cyan>"`);
+    }))();
+    return promise;
 };
 //# sourceMappingURL=js.js.map

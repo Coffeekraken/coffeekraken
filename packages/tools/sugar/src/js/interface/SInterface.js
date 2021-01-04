@@ -155,6 +155,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 }
             };
             /**
+             * @name              getDefaultValues
+             * @type              Function
+             * @static
+             *
+             * This function simply returns you the default interface values in object format
+             *
+             * @since         2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            SInterface.getDefaultValues = function () {
+                var result = this.apply({}, {
+                    complete: true,
+                    throw: false,
+                    throwOnMissingRequiredProp: false
+                });
+                if (!result.hasIssues())
+                    return result.value;
+                return {};
+            };
+            /**
              * @name              apply
              * @type              Function
              * @static

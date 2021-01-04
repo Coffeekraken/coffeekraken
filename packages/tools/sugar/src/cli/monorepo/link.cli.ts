@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import _linkPackages from '../../node/monorepo/linkPackages';
-import _output from '../../node/process/output';
+import __linkPackages from '../../node/monorepo/linkPackages';
+import __stdio from '../../node/process/stdio';
 
 export = (stringArgs = '') => {
-  const process = _linkPackages();
-  _output(process);
+  const pro = __linkPackages();
+  __stdio(pro);
 };

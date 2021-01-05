@@ -17,7 +17,7 @@ import {
  * @name                  SPromise
  * @namespace           sugar.js.promise
  * @type                  Class
- * @stable
+ * @status                beta
  *
  * This class works the same as the default Promise one. The difference is that you have more control on this one like
  * the possibility to resolve it multiple times. Here's a list of the "differences" and the "features" that this class provide:

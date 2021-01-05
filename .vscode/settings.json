@@ -20,10 +20,10 @@
     "@fixme",
     "@fix",
     "@feature",
-    "@stable",
-    "@beta",
-    "@alpha",
-    "@wip"
+    "stable",
+    "beta",
+    "alpha",
+    "wip"
   ],
   "todo-tree.filtering.includeGlobs": [
     "**/src/**/*.ts"
@@ -33,7 +33,7 @@
     "**/.vscode",
     "**/.github"
   ],
-  "todo-tree.regex.regex": "((\\*|//|#|<!--|;|/\\*)\\s*($TAGS))",
+  "todo-tree.regex.regex": "((\\*|//|#|<!--|;|/\\*)\\s*($TAGS)|@status\\s*($TAGS))",
   "todo-tree.filtering.useBuiltInExcludes": true,
   "todo-tree.highlights.defaultHighlight": {
     "foreground": "white",
@@ -43,24 +43,55 @@
     "rulerLane": "full",
   },
   "todo-tree.highlights.customHighlight": {
-    "@stable": {
+    "stable": {
       "hideFromTree": true,
-      "background": "#92B75E",
-      "iconColour": "#92B75E"
+      "gutterIcon": true,
+      "icon": "check-circle-fill",
+      "background": "#C3DC2A",
+      "iconColour": "#C3DC2A"
+    },
+    "beta": {
+      "hideFromTree": true,
+      "gutterIcon": true,
+      "icon": "rocket",
+      "background": "#FCE163",
+      "iconColour": "#FCE163"
+    },
+    "alpha": {
+      "hideFromTree": true,
+      "gutterIcon": true,
+      "icon": "stopwatch",
+      "background": "#F6963E",
+      "iconColour": "#F6963E"
+    },
+    "wip": {
+      "hideFromTree": true,
+      "gutterIcon": true,
+      "icon": "tools",
+      "background": "#F2515B",
+      "iconColour": "#F2515B"
     },
     "@todo": {
+      "gutterIcon": true,
+      "icon": "list-unordered",
       "background": "#FDBC3E",
       "iconColour": "#FDBC3E"
     },
     "@fixme": {
+      "gutterIcon": true,
+      "icon": "alert",
       "background": "#EE6492",
       "iconColour": "#EE6492"
     },
     "@fix": {
+      "gutterIcon": true,
+      "icon": "alert",
       "background": "#EE6492",
       "iconColour": "#EE6492"
     },
     "@feature": {
+      "gutterIcon": true,
+      "icon": "flame",
       "background": "#64D5EE",
       "iconColour": "#64D5EE"
     }

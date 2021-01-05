@@ -23,6 +23,9 @@
 		"rvest.vs-code-prettier-eslint",
 		"fabiospampinato.vscode-todo-plus",
 		"mblode.twig-language-2",
-		"robbowen.synthwave-vscode"
+		"robbowen.synthwave-vscode",
+		"adpyke.codesnap",
+		"formulahendry.code-runner",
+		"eg2.vscode-npm-script"
 	]
 }

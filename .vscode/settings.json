@@ -14,87 +14,138 @@
   "editor.formatOnPaste": true,
   // Default (format when you save)
   "editor.formatOnSave": true,
-  // Todo
-  "todo.file.include": [],
-  "todo.file.exclude": [
-    "**/*"
+  "todo-tree.general.enableFileWatcher": true,
+  "todo-tree.general.tags": [
+    "@todo",
+    "@fixme",
+    "@fix",
+    "@feature",
+    "@stable",
+    "@beta",
+    "@alpha",
+    "@wip"
   ],
-  "todo.embedded.include": [
+  "todo-tree.filtering.includeGlobs": [
     "**/src/**/*.ts"
   ],
-  "todo.embedded.exclude": [
-    "**/*.js",
-    "**/node_modules"
+  "todo-tree.filtering.excludeGlobs": [
+    "**/node_modules",
+    "**/.vscode",
+    "**/.github"
   ],
-  // Todo highlight
-  "todohighlight.isEnable": true,
-  "todohighlight.isCaseSensitive": false,
-  "todohighlight.keywords": [
-    {
-      "text": " * @todo ",
-      "backgroundColor": "#FDBC3E",
-      "color": "white"
-    },
-    {
-      "text": "* @todo ",
-      "backgroundColor": "#FDBC3E",
-      "color": "white"
-    },
-    {
-      "text": " @todo ",
-      "backgroundColor": "#FDBC3E",
-      "color": "white"
-    },
-    {
-      "text": " * @fixme ",
-      "backgroundColor": "#EE6492",
-      "color": "white"
-    },
-    {
-      "text": "* @fixme ",
-      "backgroundColor": "#EE6492",
-      "color": "white"
-    },
-    {
-      "text": " @fixme ",
-      "backgroundColor": "#EE6492",
-      "color": "white"
-    },
-    {
-      "text": " {feature} ",
-      "backgroundColor": "#64D5EE",
-      "color": "white"
-    }
-  ],
-  // "todohighlight.keywordsPattern": "@todo|@fixme|\\(([^)]+)\\)",
-  "todohighlight.defaultStyle": {
-    "border": "none",
-    "fontWeight": "bold",
-    "borderRadius": "10px",
-    "isWholeLine": false,
+  "todo-tree.regex.regex": "((\\*|//|#|<!--|;|/\\*)\\s*($TAGS))",
+  "todo-tree.filtering.useBuiltInExcludes": true,
+  "todo-tree.highlights.defaultHighlight": {
+    "foreground": "white",
+    "icon": "check",
+    "type": "tag",
+    "borderRadius": "0",
+    "rulerLane": "full",
   },
-  "todohighlight.include": [
-    "**/*.js",
-    "**/*.jsx",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.html",
-    "**/*.php",
-    "**/*.css",
-    "**/*.scss"
-  ],
-  "todohighlight.exclude": [
-    "**/node_modules/**",
-    "**/bower_components/**",
-    "**/dist/**",
-    "**/build/**",
-    "**/.vscode/**",
-    "**/.github/**",
-    "**/_output/**",
-    "**/*.min.*",
-    "**/*.map",
-    "**/.next/**"
-  ],
-  "todohighlight.maxFilesForSearch": 5120,
-  "todohighlight.toggleURI": false
+  "todo-tree.highlights.customHighlight": {
+    "@stable": {
+      "hideFromTree": true,
+      "background": "#92B75E",
+      "iconColour": "#92B75E"
+    },
+    "@todo": {
+      "background": "#FDBC3E",
+      "iconColour": "#FDBC3E"
+    },
+    "@fixme": {
+      "background": "#EE6492",
+      "iconColour": "#EE6492"
+    },
+    "@fix": {
+      "background": "#EE6492",
+      "iconColour": "#EE6492"
+    },
+    "@feature": {
+      "background": "#64D5EE",
+      "iconColour": "#64D5EE"
+    }
+  }
+  // // Todo
+  // "todo.file.include": [],
+  // "todo.file.exclude": [
+  //   "**/*"
+  // ],
+  // "todo.embedded.include": [
+  //   "**/src/**/*.ts"
+  // ],
+  // "todo.embedded.exclude": [
+  //   "**/*.js",
+  //   "**/node_modules"
+  // ],
+  // // Todo highlight
+  // "todohighlight.isEnable": true,
+  // "todohighlight.isCaseSensitive": false,
+  // "todohighlight.keywords": [
+  //   {
+  //     "text": " * @todo ",
+  //     "backgroundColor": "#FDBC3E",
+  //     "color": "white"
+  //   },
+  //   {
+  //     "text": "* @todo ",
+  //     "backgroundColor": "#FDBC3E",
+  //     "color": "white"
+  //   },
+  //   {
+  //     "text": " @todo ",
+  //     "backgroundColor": "#FDBC3E",
+  //     "color": "white"
+  //   },
+  //   {
+  //     "text": " * @fixme ",
+  //     "backgroundColor": "#EE6492",
+  //     "color": "white"
+  //   },
+  //   {
+  //     "text": "* @fixme ",
+  //     "backgroundColor": "#EE6492",
+  //     "color": "white"
+  //   },
+  //   {
+  //     "text": " @fixme ",
+  //     "backgroundColor": "#EE6492",
+  //     "color": "white"
+  //   },
+  //   {
+  //     "text": " {feature} ",
+  //     "backgroundColor": "#64D5EE",
+  //     "color": "white"
+  //   }
+  // ],
+  // // "todohighlight.keywordsPattern": "@todo|@fixme|\\(([^)]+)\\)",
+  // "todohighlight.defaultStyle": {
+  //   "border": "none",
+  //   "fontWeight": "bold",
+  //   "borderRadius": "10px",
+  //   "isWholeLine": false,
+  // },
+  // "todohighlight.include": [
+  //   "**/*.js",
+  //   "**/*.jsx",
+  //   "**/*.ts",
+  //   "**/*.tsx",
+  //   "**/*.html",
+  //   "**/*.php",
+  //   "**/*.css",
+  //   "**/*.scss"
+  // ],
+  // "todohighlight.exclude": [
+  //   "**/node_modules/**",
+  //   "**/bower_components/**",
+  //   "**/dist/**",
+  //   "**/build/**",
+  //   "**/.vscode/**",
+  //   "**/.github/**",
+  //   "**/_output/**",
+  //   "**/*.min.*",
+  //   "**/*.map",
+  //   "**/.next/**"
+  // ],
+  // "todohighlight.maxFilesForSearch": 5120,
+  // "todohighlight.toggleURI": false
 }

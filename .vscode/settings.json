@@ -13,5 +13,88 @@
   // Default (format when you paste)
   "editor.formatOnPaste": true,
   // Default (format when you save)
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  // Todo
+  "todo.file.include": [],
+  "todo.file.exclude": [
+    "**/*"
+  ],
+  "todo.embedded.include": [
+    "**/src/**/*.ts"
+  ],
+  "todo.embedded.exclude": [
+    "**/*.js",
+    "**/node_modules"
+  ],
+  // Todo highlight
+  "todohighlight.isEnable": true,
+  "todohighlight.isCaseSensitive": false,
+  "todohighlight.keywords": [
+    {
+      "text": " * @todo ",
+      "backgroundColor": "#FDBC3E",
+      "color": "white"
+    },
+    {
+      "text": "* @todo ",
+      "backgroundColor": "#FDBC3E",
+      "color": "white"
+    },
+    {
+      "text": " @todo ",
+      "backgroundColor": "#FDBC3E",
+      "color": "white"
+    },
+    {
+      "text": " * @fixme ",
+      "backgroundColor": "#EE6492",
+      "color": "white"
+    },
+    {
+      "text": "* @fixme ",
+      "backgroundColor": "#EE6492",
+      "color": "white"
+    },
+    {
+      "text": " @fixme ",
+      "backgroundColor": "#EE6492",
+      "color": "white"
+    },
+    {
+      "text": " {feature} ",
+      "backgroundColor": "#64D5EE",
+      "color": "white"
+    }
+  ],
+  // "todohighlight.keywordsPattern": "@todo|@fixme|\\(([^)]+)\\)",
+  "todohighlight.defaultStyle": {
+    "border": "none",
+    "fontWeight": "bold",
+    "borderRadius": "10px",
+    "isWholeLine": false,
+  },
+  "todohighlight.include": [
+    "**/*.js",
+    "**/*.jsx",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.html",
+    "**/*.php",
+    "**/*.css",
+    "**/*.scss"
+  ],
+  "todohighlight.exclude": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.vscode/**",
+    "**/.github/**",
+    "**/_output/**",
+    "**/*.min.*",
+    "**/*.map",
+    "**/.next/**"
+  ],
+  "todohighlight.maxFilesForSearch": 5120,
+  "todohighlight.toggleURI": false
 }

@@ -1,20 +1,28 @@
 {
-  "name": "Coffeekraken",
-  "dockerFile": "Dockerfile",
-  "forwardPorts": [666],
-  "runArgs": ["--name=coffeekraken", "--memory=16G", "--memory-swap=16G"],
-  "extensions": [
-    "editorconfig.editorconfig",
-    "eamodio.gitlens",
-    "cjhowe7.laravel-blade",
-    "bierner.lit-html",
-    "pkief.material-icon-theme",
-    "shinnn.stylelint",
-    "robbowen.synthwave-vscode",
-    "msjsdiag.debugger-for-chrome",
-    "firefox-devtools.vscode-firefox-debug",
-    "bruce.rona",
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint"
-  ]
+	"name": "Coffeekraken",
+	"dockerFile": "Dockerfile",
+	"forwardPorts": [
+		666
+	],
+	"runArgs": [
+		"--name=coffeekraken",
+		"--memory=16G",
+		"--memory-swap=16G"
+	],
+	"extensions": [
+		"editorconfig.editorconfig",
+		"cjhowe7.laravel-blade",
+		"bierner.lit-html",
+		"pkief.material-icon-theme",
+		"shinnn.stylelint",
+		"msjsdiag.debugger-for-chrome",
+		"firefox-devtools.vscode-firefox-debug",
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint",
+		"wayou.vscode-todo-highlight",
+		"rvest.vs-code-prettier-eslint",
+		"fabiospampinato.vscode-todo-plus",
+		"mblode.twig-language-2",
+		"robbowen.synthwave-vscode"
+	]
 }

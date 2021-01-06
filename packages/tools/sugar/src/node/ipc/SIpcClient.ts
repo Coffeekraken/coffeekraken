@@ -21,7 +21,7 @@ import __isPlainObject from '../is/plainObject';
  * @todo      interface
  * @todo      doc
  * @todo      tests
- * @todo      {Feature}         Integrate the "on" feature
+ * @feature         Integrate the "on" feature
  *
  * @see             https://www.npmjs.com/package/node-ipc
  * @since           2.0.0

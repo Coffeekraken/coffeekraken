@@ -25,9 +25,7 @@
     "alpha",
     "wip"
   ],
-  "todo-tree.filtering.includeGlobs": [
-    "**/src/**/*.ts"
-  ],
+  "todo-tree.filtering.includeGlobs": ["**/src/**/*.ts"],
   "todo-tree.filtering.excludeGlobs": [
     "**/node_modules",
     "**/.vscode",
@@ -40,7 +38,7 @@
     "icon": "check",
     "type": "tag",
     "borderRadius": "0",
-    "rulerLane": "full",
+    "rulerLane": "full"
   },
   "todo-tree.highlights.customHighlight": {
     "stable": {

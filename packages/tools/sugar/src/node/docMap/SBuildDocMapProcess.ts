@@ -1,8 +1,9 @@
 // @ts-nocheck
 
-const __SBuildDocMapActionsStream = require('./SBuildDocMapActionsStream');
-const __SProcess = require('../../process/SProcess');
-const __SBuildDocMapInterface = require('./interface/SBuildDocMapInterface');
+import __SBuildDocMapActionsStream from './SBuildDocMapActionsStream';
+import __SProcess from '../process/SProcess';
+import __SBuildDocMapInterface from './interface/SBuildDocMapInterface';
+import __SDocMap from './SDocMap';
 
 /**
  * @name            SBuildDocMapProcess
@@ -49,14 +50,11 @@ module.exports = class SBuildDocMapProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   process(params, settings = {}) {
-    const docMapStream = new __SBuildDocMapActionsStream({
-      ...settings,
-      logs: {
-        start: false,
-        success: false
-      }
+    console.log(params);
+    const docMap = new __SDocMap({
+      ...params
     });
-    const docMapStreamProcess = docMapStream.start(params);
-    this.bindSPromise(docMapStreamProcess);
+    const promise = docMap.generate();
+    return promise;
   }
 };

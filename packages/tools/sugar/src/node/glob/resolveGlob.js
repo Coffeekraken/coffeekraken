@@ -8,7 +8,6 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const glob_1 = __importDefault(require("glob"));
 const SFile_1 = __importDefault(require("../fs/SFile"));
 const glob_2 = __importDefault(require("../is/glob"));
-const path_1 = __importDefault(require("../is/path"));
 const fs_1 = __importDefault(require("fs"));
 const to_regex_1 = __importDefault(require("to-regex"));
 const directory_1 = __importDefault(require("../is/directory"));
@@ -60,6 +59,7 @@ function resolveGlob(globs, settings = {}) {
             const splits = glob.split(':').map((split) => {
                 return split.replace(`${rootDir}/`, '').replace(rootDir, '');
             });
+            globPattern = splits[0];
             splits.forEach((split) => {
                 if (split.substr(0, 1) === '/' &&
                     split.match(/.*\/[igmsuy]{0,6}]?/)) {
@@ -73,17 +73,17 @@ function resolveGlob(globs, settings = {}) {
                 else if (glob_2.default(split)) {
                     globPattern = split;
                 }
-                else if (path_1.default(split, true)) {
-                    rootDir = split;
-                }
             });
-            let pathes = glob_1.default.sync(globPattern, Object.assign({ cwd: rootDir }, settings));
+            const finalRootDir = rootDir.split('/').slice(0, -1).join('/');
+            const directoryName = rootDir.split('/').slice(-1).join('');
+            globPattern = `+(${directoryName})/${globPattern}`;
+            let pathes = glob_1.default.sync(globPattern, Object.assign({ cwd: finalRootDir }, settings));
             // check if need to search for inline content
             if (searchReg) {
                 pathes = pathes.filter((path) => {
                     if (directory_1.default(path))
                         return false;
-                    const content = fs_1.default.readFileSync(path, 'utf8');
+                    const content = fs_1.default.readFileSync(`${finalRootDir}/${path}`, 'utf8');
                     const matches = content.match(searchReg);
                     if (matches) {
                         return true;
@@ -91,7 +91,15 @@ function resolveGlob(globs, settings = {}) {
                     return false;
                 });
             }
-            pathes.forEach((path) => {
+            pathes
+                .map((path) => {
+                return path
+                    .replace(`${directoryName}/`, '')
+                    .replace(directoryName, '')
+                    .replace('//', '/');
+            })
+                .forEach((path) => {
+                console.log(`${rootDir}/${path}`);
                 const sFile = new SFile_1.default(path, {
                     rootDir
                 });

@@ -1,9 +1,13 @@
 "use strict";
 // @ts-nocheck
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var _a;
-const __SBuildDocMapActionsStream = require('./SBuildDocMapActionsStream');
-const __SProcess = require('../../process/SProcess');
-const __SBuildDocMapInterface = require('./interface/SBuildDocMapInterface');
+Object.defineProperty(exports, "__esModule", { value: true });
+const SProcess_1 = __importDefault(require("../process/SProcess"));
+const SBuildDocMapInterface_1 = __importDefault(require("./interface/SBuildDocMapInterface"));
+const SDocMap_1 = __importDefault(require("./SDocMap"));
 /**
  * @name            SBuildDocMapProcess
  * @namespace           sugar.node.build.docMap
@@ -15,7 +19,7 @@ const __SBuildDocMapInterface = require('./interface/SBuildDocMapInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SBuildDocMapProcess extends __SProcess {
+module.exports = (_a = class SBuildDocMapProcess extends SProcess_1.default {
         /**
          * @name          constructor
          * @type          Function
@@ -42,14 +46,12 @@ module.exports = (_a = class SBuildDocMapProcess extends __SProcess {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         process(params, settings = {}) {
-            const docMapStream = new __SBuildDocMapActionsStream(Object.assign(Object.assign({}, settings), { logs: {
-                    start: false,
-                    success: false
-                } }));
-            const docMapStreamProcess = docMapStream.start(params);
-            this.bindSPromise(docMapStreamProcess);
+            console.log(params);
+            const docMap = new SDocMap_1.default(Object.assign({}, params));
+            const promise = docMap.generate();
+            return promise;
         }
     },
-    _a.interface = __SBuildDocMapInterface,
+    _a.interface = SBuildDocMapInterface_1.default,
     _a);
 //# sourceMappingURL=SBuildDocMapProcess.js.map

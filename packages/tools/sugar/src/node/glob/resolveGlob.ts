@@ -70,6 +70,8 @@ function resolveGlob(globs, settings = {}) {
           return split.replace(`${rootDir}/`, '').replace(rootDir, '');
         });
 
+        globPattern = splits[0];
+
         splits.forEach((split) => {
           if (
             split.substr(0, 1) === '/' &&
@@ -83,13 +85,16 @@ function resolveGlob(globs, settings = {}) {
             });
           } else if (__isGlob(split)) {
             globPattern = split;
-          } else if (__isPath(split, true)) {
-            rootDir = split;
           }
         });
 
+        const finalRootDir = rootDir.split('/').slice(0, -1).join('/');
+        const directoryName = rootDir.split('/').slice(-1).join('');
+
+        globPattern = `+(${directoryName})/${globPattern}`;
+
         let pathes = __glob.sync(globPattern, {
-          cwd: rootDir,
+          cwd: finalRootDir,
           ...settings
         });
 
@@ -97,7 +102,10 @@ function resolveGlob(globs, settings = {}) {
         if (searchReg) {
           pathes = pathes.filter((path) => {
             if (__isDirectory(path)) return false;
-            const content = __fs.readFileSync(path, 'utf8');
+            const content = __fs.readFileSync(
+              `${finalRootDir}/${path}`,
+              'utf8'
+            );
             const matches = content.match(searchReg);
             if (matches) {
               return true;
@@ -106,12 +114,20 @@ function resolveGlob(globs, settings = {}) {
           });
         }
 
-        pathes.forEach((path) => {
-          const sFile = new __SFile(path, {
-            rootDir
+        pathes
+          .map((path) => {
+            return path
+              .replace(`${directoryName}/`, '')
+              .replace(directoryName, '')
+              .replace('//', '/');
+          })
+          .forEach((path) => {
+            console.log(`${rootDir}/${path}`);
+            const sFile = new __SFile(path, {
+              rootDir
+            });
+            filesArray.push(sFile);
           });
-          filesArray.push(sFile);
-        });
       }
 
       // resolve the promise

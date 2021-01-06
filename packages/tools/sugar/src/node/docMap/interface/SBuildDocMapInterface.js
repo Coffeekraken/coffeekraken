@@ -1,10 +1,9 @@
 "use strict";
 // @ts-nocheck
 var _a;
-const __SInterface = require('../../../class/SInterface');
-const __SBuildInterface = require('../../interface/SBuildInterface');
-const __sugarConfig = require('../../../config/sugar');
-const __deepMerge = require('../../../object/deepMerge');
+const __SInterface = require('../../interface/SInterface');
+const __sugarConfig = require('../../config/sugar');
+const __deepMerge = require('../../object/deepMerge');
 /**
  * @name                SBuildDocMapInterface
  * @namespace           sugar.node.build.docMap.interface
@@ -20,33 +19,25 @@ const __deepMerge = require('../../../object/deepMerge');
 module.exports = (_a = class SBuildDocMapInterface extends __SInterface {
     },
     _a.definition = {
-        input: {
+        inputGlobs: {
             type: 'String|Array<String>',
             alias: 'i',
             description: 'Input files glob pattern',
-            default: __sugarConfig('build.docMap.input') || 'src/**/*',
+            default: __sugarConfig('docMap.inputGlobs'),
             level: 1
         },
-        externalDocMaps: {
+        findGlobs: {
             type: 'String|Array<String>',
-            alias: 'e',
-            description: 'Specify where to search for external docMap.json files',
-            default: __sugarConfig('build.docMap.externalDocMaps'),
+            alias: 'i',
+            description: 'docMap.json files glob pattern',
+            default: __sugarConfig('docMap.findGlobs'),
             level: 1
         },
         output: {
             type: 'String',
             alias: 'o',
             description: 'Output file path',
-            default: __sugarConfig('build.docMap.output') ||
-                `${__packageRoot()}/docMap.json`,
-            level: 1
-        },
-        watch: {
-            type: 'String',
-            alias: 'w',
-            description: 'Specify a glob pattern of the files you want to watch to rebuild automatically the docMap.json',
-            default: __sugarConfig('build.docMap.watch'),
+            default: __sugarConfig('docMap.output') || `${__packageRoot()}/docMap.json`,
             level: 1
         }
     },

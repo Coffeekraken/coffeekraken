@@ -34,15 +34,16 @@ if (!stack) {
     stack = 'app';
 }
 // if no action, try to get the default one
-if (!action) {
-    const config = require(`./${stack}/config.json`);
-    if (!config.default) {
-        throw new Error(`Sorry but you have to specify an action to make on the module "${stack}}"...`);
-    }
-    else {
-        action = config.default;
-    }
-}
-const pkg = require(`./${stack}/${action}.cli.js`);
+// if (!action) {
+//   const config = require(`./${stack}/config.json`);
+//   if (!config.default) {
+//     throw new Error(
+//       `Sorry but you have to specify an action to make on the module "${stack}}"...`
+//     );
+//   } else {
+//     action = config.default;
+//   }
+// }
+// const pkg = require(`./${stack}/${action}.cli.js`);
 require(`./${stack}/${action}.cli.js`)(args);
 //# sourceMappingURL=sugar.cli.js.map

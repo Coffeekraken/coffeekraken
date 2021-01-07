@@ -19,25 +19,37 @@ const __deepMerge = require('../../object/deepMerge');
 module.exports = (_a = class SBuildDocMapInterface extends __SInterface {
     },
     _a.definition = {
-        inputGlobs: {
+        'generate.globs': {
             type: 'String|Array<String>',
             alias: 'i',
             description: 'Input files glob pattern',
-            default: __sugarConfig('docMap.inputGlobs'),
+            default: __sugarConfig('docMap.generate.globs'),
             level: 1
         },
-        findGlobs: {
-            type: 'String|Array<String>',
-            alias: 'i',
-            description: 'docMap.json files glob pattern',
-            default: __sugarConfig('docMap.findGlobs'),
-            level: 1
-        },
-        output: {
+        'generate.output': {
             type: 'String',
             alias: 'o',
             description: 'Output file path',
-            default: __sugarConfig('docMap.output') || `${__packageRoot()}/docMap.json`,
+            default: __sugarConfig('docMap.generate.output'),
+            level: 1
+        },
+        'generate.exclude': {
+            type: 'Object',
+            description: 'Specify some regexp used to exclude files from resulting docMap',
+            default: __sugarConfig('docMap.generate.exclude'),
+            level: 1
+        },
+        'find.globs': {
+            type: 'String|Array<String>',
+            alias: 'i',
+            description: 'docMap.json files glob pattern',
+            default: __sugarConfig('docMap.find.globs'),
+            level: 1
+        },
+        'find.exclude': {
+            type: 'Object',
+            description: 'Specify some regexp used to exclude files from searching docMaps',
+            default: __sugarConfig('docMap.find.exclude'),
             level: 1
         }
     },

@@ -16,7 +16,6 @@ const completeArgsObject_1 = __importDefault(require("../cli/completeArgsObject"
 const path_1 = __importDefault(require("path"));
 const convert_1 = __importDefault(require("../time/convert"));
 const wait_1 = __importDefault(require("../time/wait"));
-const class_1 = __importDefault(require("../is/class"));
 const onProcessExit_1 = __importDefault(require("./onProcessExit"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const node_notifier_1 = __importDefault(require("node-notifier"));
@@ -31,7 +30,6 @@ const stdio_1 = __importDefault(require("./stdio"));
 const stack_trace_1 = __importDefault(require("stack-trace"));
 const toString_1 = __importDefault(require("../string/toString"));
 const spawn_1 = __importDefault(require("./spawn"));
-const parseHtml_1 = __importDefault(require("../terminal/parseHtml"));
 const uniqid_1 = __importDefault(require("../string/uniqid"));
 module.exports = class SProcess extends SPromise_1.default {
     /**
@@ -178,28 +176,6 @@ module.exports = class SProcess extends SPromise_1.default {
         if (!this._settings.notifications.kill.title) {
             this._settings.notifications.kill.title = `${this._settings.name} (${this._settings.id})`;
         }
-        this.on('state.ready:1', () => {
-            if (!childProcess_1.default()) {
-                if (this._settings.stdio) {
-                    if (class_1.default(this._settings.stdio)) {
-                        this.stdio = new this._settings.stdio([this], this);
-                    }
-                    else if (this._settings.stdio === 'inherit') {
-                        this.on('log,*.log,warn,*.warn,error,*.error,reject,*.reject', (data, metas) => {
-                            if (!data)
-                                return;
-                            console.log(parseHtml_1.default(toString_1.default(data.value || data)));
-                        });
-                    }
-                    else {
-                        const outputSettings = typeof this._settings.stdio === 'object'
-                            ? this._settings.stdio
-                            : {};
-                        this.stdio = stdio_1.default([this], outputSettings);
-                    }
-                }
-            }
-        });
         // ready if not an asyncStart process
         if (this._settings.asyncStart === false) {
             setTimeout(() => {
@@ -232,6 +208,23 @@ module.exports = class SProcess extends SPromise_1.default {
      */
     get name() {
         return this._settings.name;
+    }
+    /**
+     * @name      cleanName
+     * @type      String
+     * @get
+     *
+     * Access the process name and (not the same as a node process name)
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get cleanName() {
+        let name = `<yellow>${this.name || ''}</yellow>`;
+        if (this.id) {
+            name += ` <cyan>${this.id}</cyan>`;
+        }
+        return name;
     }
     /**
      * @name      params
@@ -306,6 +299,11 @@ module.exports = class SProcess extends SPromise_1.default {
                     throw `Sorry but you can not execute multiple process of the "<yellow>${settings.name || settings.id || this.constructor.name}</yellow>" SProcess instance...`;
                 }
                 return;
+            }
+            if (!childProcess_1.default() && settings.stdio && !this.stdio) {
+                this.stdio = stdio_1.default(this, {
+                    stdio: settings.stdio
+                });
             }
             // init the currentExecution object
             this.currentExecutionObj = {
@@ -445,7 +443,7 @@ module.exports = class SProcess extends SPromise_1.default {
                     this.state('idle');
             });
             // return the process promise
-            return SPromise_1.default.treatAsValue(this._processPromise);
+            return this._processPromise;
         });
     }
     state(value = null) {

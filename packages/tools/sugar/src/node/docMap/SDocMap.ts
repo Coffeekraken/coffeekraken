@@ -44,19 +44,7 @@ import __sugarConfig from '../config/sugar';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SDocMap {
-  /**
-   * @name          _settings
-   * @type          Object
-   * @private
-   *
-   * Store the settings
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _settings = {};
-
+export = class SDocMap extends __SPromise {
   /**
    * @name          _entries
    * @type           Array<Object>
@@ -80,19 +68,23 @@ export = class SDocMap {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    this._settings = __deepMerge(
-      {
-        id: 'SDocMap',
-        output: __sugarConfig('docMap.output'),
-        findGlobs: __sugarConfig('docMap.findGlobs'),
-        inputGlobs: __sugarConfig('docMap.inputGlobs'),
-        save: true,
-        cache: true,
-        exclude: {
-          namespace: /#\{.*\}/gm
-        }
-      },
-      settings
+    super(
+      __deepMerge(
+        {
+          id: 'SDocMap',
+          generate: {
+            globs: __sugarConfig('docMap.generate.globs'),
+            output: __sugarConfig('docMap.generate.output'),
+            exclude: __sugarConfig('docMap.generate.exclude')
+          },
+          find: {
+            globs: __sugarConfig('docMap.find.globs'),
+            exclude: __sugarConfig('docMap.find.exclude')
+          },
+          cache: true
+        },
+        settings
+      )
     );
   }
 
@@ -116,14 +108,28 @@ export = class SDocMap {
     return new __SPromise(
       async (resolve, reject, trigger, cancel) => {
         // generate the glob pattern to use
-        const patterns = settings.findGlobs;
+        const patterns = settings.find.globs;
 
         let files = [];
+
+        trigger('log', {
+          value: `Searching docMaps using globs:\n- <yellow>${patterns.join(
+            '</yellow>\n- '
+          )}</yellow>`
+        });
 
         for (let i = 0; i < patterns.length; i++) {
           const foundedFiles = await __SGlob.resolve(patterns[i]);
           files = [...files, ...foundedFiles];
         }
+
+        trigger('log', {
+          value: `Found <yellow>${
+            files.length
+          }</yellow> docMap file(s):\n- <cyan>${files.join(
+            '</cyan>\n- '
+          )}</cyan>`
+        });
 
         resolve(files);
       },
@@ -153,8 +159,10 @@ export = class SDocMap {
   read(settings = {}) {
     settings = __deepMerge(this._settings, {}, settings);
     return new __SPromise(
-      async (resolve, reject, trigger, cancel) => {
-        const files = await this.find(settings);
+      async (resolve, reject, trigger, cancel, pipe) => {
+        const filesPromise = this.find(settings);
+        pipe(filesPromise);
+        const files = await filesPromise;
 
         let docMapJson = {};
 
@@ -201,18 +209,32 @@ export = class SDocMap {
     settings = __deepMerge(this._settings, {}, settings);
     return new __SPromise(
       async (resolve, reject, trigger, cancel) => {
-        let globs = settings.inputGlobs;
+        let globs = settings.generate.globs;
         if (!Array.isArray(globs)) globs = [globs];
+
+        trigger('log', {
+          value: `Searching files to use as docMap sources using globs:\n- <yellow>${globs.join(
+            '</yellow>\n- '
+          )}</yellow>`
+        });
 
         for (let i = 0; i < globs.length; i++) {
           const glob = globs[i];
 
           // scan for files
-          const files = await __SGlob.resolve(glob);
+          let files = await __SGlob.resolve(glob, {});
+          files = files.filter((file) => {
+            if (
+              !settings.generate.exclude ||
+              settings.generate.exclude === undefined
+            )
+              return true;
+            return !file.path.match(settings.generate.exclude.path);
+          });
 
-          // console.log(files);
-
-          continue;
+          trigger('log', {
+            value: `<yellow>${files.length}</yellow> file(s) found using the glob "<cyan>${glob}</cyan>"`
+          });
 
           // loop on each files to check for docblocks
           for (let j = 0; j < files.length; j++) {
@@ -223,26 +245,23 @@ export = class SDocMap {
 
             const docblocks = new __SDocblock(content).toObject();
 
-            console.log(docblocks);
-
             if (!docblocks || !docblocks.length) continue;
 
             docblocks.forEach((docblock) => {
               if (!docblock.namespace) return;
 
-              for (let i = 0; i < Object.keys(settings.exclude); i++) {
-                console.log(i);
-
+              for (let i = 0; i < Object.keys(settings.generate.exclude); i++) {
                 const excludeReg =
-                  settings.exclude[Object.keys(settings.exclude)[i]];
-                const value = docblock[Object.keys(settings.exclude)[i]];
-                console.log(excludeReg);
-                console.log(value);
+                  settings.generate.exclude[
+                    Object.keys(settings.generate.exclude)[i]
+                  ];
+                const value =
+                  docblock[Object.keys(settings.generate.exclude)[i]];
                 if (value === undefined) continue;
                 if (value.match(excludeReg)) return;
               }
 
-              const outputDir = __folderPath(settings.output);
+              const outputDir = __folderPath(settings.generate.output);
               const path = __path.relative(outputDir, filepath);
               const filename = __getFilename(filepath);
               const docblockObj = {
@@ -265,13 +284,11 @@ export = class SDocMap {
           }
         }
 
-        // save the file if needed
-        if (settings.save === true) {
-          __fs.writeFileSync(
-            settings.output,
-            JSON.stringify(this._entries, null, 4)
-          );
-        }
+        trigger('log', {
+          value: `<green>${
+            Object.keys(this._entries).length
+          }</green> entries generated for this docMap`
+        });
 
         resolve(this._entries);
       },
@@ -298,28 +315,29 @@ export = class SDocMap {
     let output;
     if (typeof outputOrSettings === 'object') {
       settings = __deepMerge(this._settings, {}, outputOrSettings);
+      output = settings.generate.output;
     } else if (typeof outputOrSettings === 'string') {
       output = outputOrSettings;
     }
     settings = __deepMerge(this._settings, {}, settings);
 
     return new __SPromise(
-      async (resolve, reject, trigger, cancel) => {
+      async (resolve, reject, trigger, cancel, pipe) => {
+        let entries = this._entries;
+
         if (!this._entries.length) {
-          await this.generate(settings);
+          const generatePromise = this.generate(settings);
+          pipe(generatePromise);
+          entries = await generatePromise;
         }
 
-        if (!output) {
-          output = `${settings.outputDir}/${settings.filename}`;
-        }
+        trigger('log', {
+          value: `Saving the docMap file to "<cyan>${output}</cyan>"`
+        });
+
         __removeSync(output);
-        __fs.writeFileSync(
-          output,
-          __toString(this._entries, {
-            beautify: true
-          })
-        );
-        resolve();
+        __fs.writeFileSync(output, JSON.stringify(entries, null, 4));
+        resolve(entries);
       },
       {
         id: settings.id + '.save'

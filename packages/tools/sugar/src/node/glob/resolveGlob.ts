@@ -49,8 +49,7 @@ function resolveGlob(globs, settings = {}) {
         {
           rootDir: settings.cwd || process.cwd(),
           symlinks: true,
-          nodir: true,
-          contentRegex: null
+          nodir: true
         },
         settings
       );
@@ -116,13 +115,9 @@ function resolveGlob(globs, settings = {}) {
 
         pathes
           .map((path) => {
-            return path
-              .replace(`${directoryName}/`, '')
-              .replace(directoryName, '')
-              .replace('//', '/');
+            return path.split('/').slice(1).join('/');
           })
           .forEach((path) => {
-            console.log(`${rootDir}/${path}`);
             const sFile = new __SFile(path, {
               rootDir
             });

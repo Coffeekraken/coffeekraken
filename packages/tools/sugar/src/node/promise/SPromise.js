@@ -42,7 +42,7 @@ module.exports = class SPromise extends Promise {
         const _resolve = (...args) => {
             setTimeout(() => {
                 this.resolve(...args);
-            });
+            }, 100);
         };
         const _reject = (...args) => {
             setTimeout(() => {
@@ -59,7 +59,13 @@ module.exports = class SPromise extends Promise {
                 this.cancel(...args);
             });
         };
+        const _pipe = (...args) => {
+            setTimeout(() => {
+                this.pipe(...args);
+            });
+        };
         const resolvers = {};
+        let executorFn;
         super((resolve, reject) => {
             resolvers.resolve = resolve;
             new Promise((rejectPromiseResolve, rejectPromiseReject) => {
@@ -67,11 +73,12 @@ module.exports = class SPromise extends Promise {
             }).catch((e) => {
                 this.trigger('catch', e);
             });
-            const executor = typeof executorFnOrSettings === 'function'
-                ? executorFnOrSettings
-                : null;
-            if (executor) {
-                return executor(_resolve, _reject, _trigger, _cancel);
+            executorFn =
+                typeof executorFnOrSettings === 'function'
+                    ? executorFnOrSettings
+                    : null;
+            if (executorFn) {
+                return executorFn(_resolve, _reject, _trigger, _cancel, _pipe);
             }
         });
         /**
@@ -419,7 +426,7 @@ module.exports = class SPromise extends Promise {
      * It is exactly the same as the static ```pipe``` method but for this
      * particular instance.
      *
-     * @param       {SPromise}      dest      The destination promise on which to pipe the events of this one
+     * @param       {SPromise}      input      The input promise on which to pipe the events in this one
      * @param       {Object}      [settings={}]    An object ob settings to configure the pipe process:
      * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
      * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
@@ -428,8 +435,8 @@ module.exports = class SPromise extends Promise {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    pipe(dest, settings = {}) {
-        SPromise.pipe(this, dest, settings);
+    pipe(input, settings = {}) {
+        SPromise.pipe(input, this, settings);
         return this;
     }
     /**

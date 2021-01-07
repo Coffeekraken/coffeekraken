@@ -75,6 +75,24 @@ export = class SProcess extends __SPromise {
   }
 
   /**
+   * @name      cleanName
+   * @type      String
+   * @get
+   *
+   * Access the process name and (not the same as a node process name)
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get cleanName() {
+    let name = `<yellow>${this.name || ''}</yellow>`;
+    if (this.id) {
+      name += ` <cyan>${this.id}</cyan>`;
+    }
+    return name;
+  }
+
+  /**
    * @name      params
    * @type      String
    * @get
@@ -260,30 +278,6 @@ export = class SProcess extends __SPromise {
       this._settings.notifications.kill.title = `${this._settings.name} (${this._settings.id})`;
     }
 
-    this.on('state.ready:1', () => {
-      if (!__isChildProcess()) {
-        if (this._settings.stdio) {
-          if (__isClass(this._settings.stdio)) {
-            this.stdio = new this._settings.stdio([this], this);
-          } else if (this._settings.stdio === 'inherit') {
-            this.on(
-              'log,*.log,warn,*.warn,error,*.error,reject,*.reject',
-              (data, metas) => {
-                if (!data) return;
-                console.log(__parseHtml(__toString(data.value || data)));
-              }
-            );
-          } else {
-            const outputSettings =
-              typeof this._settings.stdio === 'object'
-                ? this._settings.stdio
-                : {};
-            this.stdio = __stdio([this], outputSettings);
-          }
-        }
-      }
-    });
-
     // ready if not an asyncStart process
     if (this._settings.asyncStart === false) {
       setTimeout(() => {
@@ -355,6 +349,12 @@ export = class SProcess extends __SPromise {
         }</yellow>" SProcess instance...`;
       }
       return;
+    }
+
+    if (!__isChildProcess() && settings.stdio && !this.stdio) {
+      this.stdio = __stdio(this, {
+        stdio: settings.stdio
+      });
     }
 
     // init the currentExecution object
@@ -548,7 +548,7 @@ export = class SProcess extends __SPromise {
     );
 
     // return the process promise
-    return __SPromise.treatAsValue(this._processPromise);
+    return this._processPromise;
   }
 
   state(value = null) {

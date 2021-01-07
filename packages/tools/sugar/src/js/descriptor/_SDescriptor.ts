@@ -258,7 +258,6 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
         })
       ).forEach((propName) => {
         const ruleObj = __get(settings.rules, propName);
-
         // complete
         if (
           !__isGlob(propName) &&

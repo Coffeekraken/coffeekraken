@@ -117,7 +117,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 }
                 setTimeout(function () {
                     _this.resolve.apply(_this, args);
-                });
+                }, 100);
             };
             var _reject = function () {
                 var args = [];
@@ -146,7 +146,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     _this.cancel.apply(_this, args);
                 });
             };
+            var _pipe = function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                setTimeout(function () {
+                    _this.pipe.apply(_this, args);
+                });
+            };
             var resolvers = {};
+            var executorFn;
             _this = _super.call(this, function (resolve, reject) {
                 resolvers.resolve = resolve;
                 new Promise(function (rejectPromiseResolve, rejectPromiseReject) {
@@ -154,11 +164,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 }).catch(function (e) {
                     _this.trigger('catch', e);
                 });
-                var executor = typeof executorFnOrSettings === 'function'
-                    ? executorFnOrSettings
-                    : null;
-                if (executor) {
-                    return executor(_resolve, _reject, _trigger, _cancel);
+                executorFn =
+                    typeof executorFnOrSettings === 'function'
+                        ? executorFnOrSettings
+                        : null;
+                if (executorFn) {
+                    return executorFn(_resolve, _reject, _trigger, _cancel, _pipe);
                 }
             }) || this;
             /**
@@ -518,7 +529,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * It is exactly the same as the static ```pipe``` method but for this
          * particular instance.
          *
-         * @param       {SPromise}      dest      The destination promise on which to pipe the events of this one
+         * @param       {SPromise}      input      The input promise on which to pipe the events in this one
          * @param       {Object}      [settings={}]    An object ob settings to configure the pipe process:
          * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
          * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
@@ -527,9 +538,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @since       2.0.0
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
-        SPromise.prototype.pipe = function (dest, settings) {
+        SPromise.prototype.pipe = function (input, settings) {
             if (settings === void 0) { settings = {}; }
-            SPromise.pipe(this, dest, settings);
+            SPromise.pipe(input, this, settings);
             return this;
         };
         /**

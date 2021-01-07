@@ -1,6 +1,10 @@
 // @ts-nocheck
 
 import __SBlessedProcessStdio from './stdio/blessed/SBlessedProcessStdio';
+import __isClass from '../is/class';
+import __parseHtml from '../console/parseHtml';
+import __toString from '../string/toString';
+import __countLine from '../string/countLine';
 
 /**
  * @name            stdio
@@ -31,6 +35,58 @@ import __SBlessedProcessStdio from './stdio/blessed/SBlessedProcessStdio';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = (source, settings = {}) => {
-  const stdio = new __SBlessedProcessStdio(source, settings);
-  return stdio;
+  if (!Array.isArray(source)) source = [source];
+
+  const stdio = settings.stdio;
+  delete settings.stdio;
+
+  if (stdio === 'inherit') {
+    source.forEach((s) => {
+      s.on(
+        'log,*.log,warn,*.warn,error,*.error,reject,*.reject',
+        (data, metas) => {
+          if (!data) return;
+          let value = data.value !== undefined ? data.value : data;
+          if (typeof value === 'string') {
+            value = __parseHtml(value);
+          } else {
+            value = __toString(value);
+          }
+
+          if (data.type) {
+            switch (data.type) {
+              case 'separator':
+                const separator = data.separator
+                  ? data.separator.slice(0, 1)
+                  : '-';
+                if (value) {
+                  console.log(
+                    '\n' +
+                      __parseHtml(
+                        `${value} ${separator.repeat(
+                          process.stdout.columns - __countLine(value) - 1
+                        )}`
+                      )
+                  );
+                } else {
+                  console.log(
+                    '\n' + __parseHtml(separator.repeat(process.stdout.columns))
+                  );
+                }
+                break;
+            }
+          } else {
+            console.log(value);
+          }
+        }
+      );
+    });
+    return undefined;
+  } else if (__isClass(stdio)) {
+    // @ts-ignore
+    return new stdio(source, settings);
+  } else {
+    const stdio = new __SBlessedProcessStdio(source, settings);
+    return stdio;
+  }
 };

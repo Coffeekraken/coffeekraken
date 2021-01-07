@@ -29,7 +29,7 @@ module.exports = class SBuildDocMapProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    super(__filename, {
+    super({
       id: 'SBuildDocMapProcess',
       name: 'Build docMap.json Process',
       ...settings
@@ -50,11 +50,10 @@ module.exports = class SBuildDocMapProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   process(params, settings = {}) {
-    console.log(params);
     const docMap = new __SDocMap({
       ...params
     });
-    const promise = docMap.generate();
+    const promise = docMap.save();
     return promise;
   }
 };

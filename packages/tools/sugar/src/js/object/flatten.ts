@@ -16,8 +16,8 @@ import __unquote from '../string/unquote';
  * @return              {Object}                                                    The flatten object
  *
  * @setting               {String}            [separation="."]          The separation character to use for preperty names
- * @setting 							{Boolean}			    	[flattenArrays=false] 		Specify if you want to flatten arrays or not
- * @setting               {Boolean}          [flattenArraysWithDots=false]     Specify if you want to flatten array using the "something.0" syntax instead of the default one "something[0]"
+ * @setting 							{Boolean}			    	[array=false] 		Specify if you want to flatten array or not
+ * @setting               {Boolean}          [arrayWithDots=false]     Specify if you want to flatten array using the "something.0" syntax instead of the default one "something[0]"
  * @setting               {Boolean}          [quoteSeparatedProperties=true]      Specify if you want to quote dotted properties to be able to restore them correctly later
  * @setting               {String}        [quoteCharacter='"']        Specify the quote character to use when need to quote separated properties
  * @setting               {Boolean}       [keepLastIntact=false]       Specify if you want to keep the last level (object, array) intact and not to flatten each properties
@@ -42,8 +42,8 @@ function flatten(object, settings = {}) {
 
   settings = {
     separator: '.',
-    flattenArrays: true,
-    flattenArraysWithDots: false,
+    array: false,
+    arrayWithDots: false,
     quoteSeparatedProperties: true,
     quoteCharacter: '"',
     keepLastIntact: false,
@@ -56,7 +56,7 @@ function flatten(object, settings = {}) {
     if (object[i] === null) {
       toReturn[i] = null;
     } else if (
-      (Array.isArray(object[i]) && settings.flattenArrays) ||
+      (Array.isArray(object[i]) && settings.array) ||
       (!Array.isArray(object[i]) && typeof object[i]) == 'object'
     ) {
       const isArray = Array.isArray(object[i]);
@@ -68,7 +68,7 @@ function flatten(object, settings = {}) {
         if (flatObject[x] === undefined) continue;
 
         if (isArray) {
-          if (settings.flattenArraysWithDots) {
+          if (settings.arrayWithDots) {
             toReturn[`${i}.${x}`] = flatObject[x];
           } else {
             toReturn[`${i}[${x}]`] = flatObject[x];

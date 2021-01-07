@@ -47,8 +47,7 @@ function resolveGlob(globs, settings = {}) {
         settings = deepMerge_1.default({
             rootDir: settings.cwd || process.cwd(),
             symlinks: true,
-            nodir: true,
-            contentRegex: null
+            nodir: true
         }, settings);
         let filesArray = [];
         if (!Array.isArray(globs))
@@ -93,13 +92,9 @@ function resolveGlob(globs, settings = {}) {
             }
             pathes
                 .map((path) => {
-                return path
-                    .replace(`${directoryName}/`, '')
-                    .replace(directoryName, '')
-                    .replace('//', '/');
+                return path.split('/').slice(1).join('/');
             })
                 .forEach((path) => {
-                console.log(`${rootDir}/${path}`);
                 const sFile = new SFile_1.default(path, {
                     rootDir
                 });

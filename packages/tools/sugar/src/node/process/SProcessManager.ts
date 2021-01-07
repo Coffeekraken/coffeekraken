@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __typeof from '../value/typeof';
 import __argsToObject from '../cli/argsToObject';
 import __isClass from '../is/class';
 import __isChildProcess from '../is/childProcess';
@@ -10,6 +11,10 @@ import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';
 import __getExtendsStack from '../class/getExtendsStack';
 import __stdio from './stdio';
+import __SProcess from './SProcess';
+import __SProcessPipe from './SProcessPipe';
+import __parseHtml from '../console/parseHtml';
+import __toString from '../string/toString';
 
 /**
  * @name            SProcessManager
@@ -72,27 +77,6 @@ class SProcessManager extends __SPromise {
   currentProcess = null;
 
   /**
-   * @name            triggerParent
-   * @type            Function
-   * @static
-   *
-   * This method allows you to "pipe" some promise from a child process to a his parent process promise
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  // static triggerParent(stack, value, metas = {}) {
-  //   const trigger = process.env.GLOBAL_SIPC_TRIGGER_ID
-  //     ? `${process.env.GLOBAL_SIPC_TRIGGER_ID}.trigger`
-  //     : 'trigger';
-  //   __SIpc.trigger(trigger, {
-  //     stack,
-  //     value,
-  //     metas
-  //   });
-  // }
-
-  /**
    * @name          constructor
    * @type          Function
    * @constructor
@@ -119,34 +103,16 @@ class SProcessManager extends __SPromise {
     );
     super(settings);
 
-    if (__getExtendsStack(ProcessClass).indexOf('SProcess') === -1) {
+    if (
+      __getExtendsStack(ProcessClass).indexOf('SProcess') === -1 &&
+      ProcessClass.constructor &&
+      ProcessClass.constructor.name !== 'SProcessPipe'
+    ) {
       throw new __SError(
         `Sorry but the <yellow>SProcessManager</yellow> class can handle only <cyan>SProcess</cyan> based process classes...`
       );
     }
-    this._ProcessClass = ProcessClass;
-
-    if (!__isChildProcess()) {
-      if (this._settings.stdio) {
-        if (__isClass(this._settings.stdio)) {
-          this.stdio = new this._settings.stdio([this], this);
-        } else if (this._settings.stdio === 'inherit') {
-          this.on(
-            'log,*.log,warn,*.warn,error,*.error,reject,*.reject',
-            (data, metas) => {
-              if (!data) return;
-              console.log(__parseHtml(__toString(data.value || data)));
-            }
-          );
-        } else {
-          const outputSettings =
-            typeof this._settings.stdio === 'object'
-              ? this._settings.stdio
-              : {};
-          this.stdio = __stdio([this], outputSettings);
-        }
-      }
-    }
+    this._ProcessInstanceOrClass = ProcessClass;
 
     // start if autoStart
     if (this._settings.autoStart) this.start(this._settings);
@@ -164,6 +130,27 @@ class SProcessManager extends __SPromise {
    */
   get deamon() {
     return this._settings.deamon || undefined;
+  }
+
+  /**
+   * @name        _isSProcessPipeInstance
+   * @type        Function
+   * @private
+   *
+   * Return if the passed argument if an instance of the SProcessPipe class
+   *
+   * @param     {Any}       toCheck       The parameter to check
+   * @return    {Boolean}                 true if is an instance of the SProcessPipe class, false if not
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _isSProcessPipeInstance(toCheck) {
+    if (toCheck.constructor && toCheck.constructor.name === 'SProcessPipe')
+      return true;
+    if (__getExtendsStack(toCheck.constructor).indexOf('SProcessPipe') !== -1)
+      return true;
+    return false;
   }
 
   /**
@@ -280,6 +267,12 @@ class SProcessManager extends __SPromise {
     settings = __deepMerge(this._settings, {}, settings);
     params = __deepMerge(this.initialParams, params);
 
+    if (!__isChildProcess() && settings.stdio && !this.stdio) {
+      this.stdio = __stdio(this, {
+        stdio: settings.stdio
+      });
+    }
+
     // check that their's not another processing process
     if (this.currentProcess) {
       if (settings.throw) {
@@ -294,12 +287,22 @@ class SProcessManager extends __SPromise {
       return;
     }
 
-    this.currentProcess = new this._ProcessClass({
-      ...settings.processSettings
+    if (this._isSProcessPipeInstance(this._ProcessInstanceOrClass)) {
+      if (!this.currentProcess) {
+        this.currentProcess = this._ProcessInstanceOrClass;
+        __SPromise.pipe(this.currentProcess, this);
+      }
+    } else {
+      this.currentProcess = new this._ProcessInstanceOrClass({
+        ...settings.processSettings
+      });
+      __SPromise.pipe(this.currentProcess, this);
+    }
+
+    const processPromise = this.currentProcess.run(params, {
+      stdio: false
     });
-    __SPromise.pipe(this.currentProcess, this);
-    this._processesStack.push(this.currentProcess);
-    this.currentProcess.run(params);
+    this._processesStack.push(processPromise);
 
     if (this.deamon && this.deamon.state === 'watching') {
       this.currentProcess.log({

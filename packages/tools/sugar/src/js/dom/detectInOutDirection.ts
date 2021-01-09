@@ -41,7 +41,7 @@ function detectInOutDirection($elm) {
   let mouseEnterHandler, mouseLeaveHandler;
 
   const promise = new __SPromise(
-    (resolve, reject, trigger, cancel) => {
+    (resolve, reject, trigger) => {
       mouseEnterHandler = (e) => {
         trigger('in', direction);
         trigger('then', {

@@ -281,7 +281,7 @@ export = class SPromise extends Promise {
     };
 
     const resolvers = {};
-    let executorFn;
+    let executorFn, _this;
     super((resolve, reject) => {
       resolvers.resolve = resolve;
 
@@ -291,14 +291,32 @@ export = class SPromise extends Promise {
         this.trigger('catch', e);
       });
 
+      const _api = new Proxy(
+        {},
+        {
+          get(target, prop) {
+            if (_this !== undefined) {
+              return _this[prop];
+            } else {
+              return async (...args) => {
+                await __wait(0);
+                return _this[prop](...args);
+              };
+            }
+          }
+        }
+      );
+
       executorFn =
         typeof executorFnOrSettings === 'function'
           ? executorFnOrSettings
           : null;
       if (executorFn) {
-        return executorFn(_resolve, _reject, _trigger, _cancel, _pipe);
+        return executorFn(_resolve, _reject, _trigger, _api);
       }
     });
+
+    _this = this;
 
     Object.defineProperty(this, '_resolvers', {
       writable: true,
@@ -346,6 +364,7 @@ export = class SPromise extends Promise {
       enumerable: false,
       value: __deepMerge(
         {
+          treatCancelAs: 'resolve',
           bufferTimeout: 100,
           bufferedStacks: [
             'log',
@@ -583,6 +602,10 @@ export = class SPromise extends Promise {
       this._promiseState = 'resolved';
       // exec the wanted stacks
       const stacksResult = await this._triggerStacks(stacksOrder, arg);
+      // set the promise in the stack result proto
+      if (stacksResult !== undefined) {
+        stacksResult.__proto__.promise = this;
+      }
       // resolve the master promise
       this._resolvers.resolve(stacksResult);
       // return the stack result
@@ -628,6 +651,10 @@ export = class SPromise extends Promise {
       this._promiseState = 'rejected';
       // exec the wanted stacks
       const stacksResult = await this._triggerStacks(stacksOrder, arg);
+      // set the promise in the stack result proto
+      if (stacksResult !== undefined) {
+        stacksResult.__proto__.promise = this;
+      }
       // resolve the master promise
       this._resolvers.reject(stacksResult);
       // return the stack result
@@ -673,8 +700,16 @@ export = class SPromise extends Promise {
       this._promiseState = 'canceled';
       // exec the wanted stacks
       const stacksResult = await this._triggerStacks(stacksOrder, arg);
+      // set the promise in the stack result proto
+      if (stacksResult !== undefined) {
+        stacksResult.__proto__.promise = this;
+      }
       // resolve the master promise
-      this._resolvers.resolve(stacksResult);
+      if (this._settings.treatCancelAs === 'reject') {
+        this._resolvers.reject(stacksResult);
+      } else {
+        this._resolvers.resolve(stacksResult);
+      }
       // return the stack result
       resolve(stacksResult);
     });
@@ -825,6 +860,11 @@ export = class SPromise extends Promise {
    */
   async _triggerStack(stack, initialValue, metas = {}) {
     let currentCallbackReturnedValue = initialValue;
+
+    // set the promise in the stack result proto
+    if (currentCallbackReturnedValue !== undefined) {
+      currentCallbackReturnedValue.__proto__.promise = this;
+    }
 
     if (!this._stacks || Object.keys(this._stacks).length === 0)
       return currentCallbackReturnedValue;
@@ -1162,9 +1202,9 @@ export = class SPromise extends Promise {
    * @return          {Promise}                  A simple promise that will be resolved with the cancel stack result
    *
    * @example         js
-   * new SPromise((resolve, reject, trigger, cancel) => {
+   * new SPromise((resolve, reject, trigger, api) => {
    *    // do something...
-   *    cancel('hello world');
+   *    api.cancel('hello world');
    * }).canceled(value => {
    *    // do something with the value that is "hello world"
    * });

@@ -69,7 +69,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function hotkey(hotkey, settings) {
         if (settings === void 0) { settings = {}; }
-        return new SPromise_1.default(function (resolve, reject, trigger, cancel) {
+        return new SPromise_1.default(function (resolve, reject, trigger, promiseApi) {
             // merge default settings with passed ones:
             settings = __assign({ element: null, keyup: false, keydown: true, once: false, splitKey: '+' }, settings);
             // init the hotkey
@@ -78,7 +78,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 trigger('press', e);
                 // unsubscribe if once is truc
                 if (settings.once)
-                    cancel();
+                    promiseApi.cancel();
             });
         }, {
             id: 'hotkey'

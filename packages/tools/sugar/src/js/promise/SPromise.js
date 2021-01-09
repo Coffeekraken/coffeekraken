@@ -76,13 +76,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "minimatch", "../object/deepMerge", "../string/uniqid", "./treatAsValue"], factory);
+        define(["require", "exports", "minimatch", "../object/deepMerge", "../string/uniqid", "../time/wait", "./treatAsValue"], factory);
     }
 })(function (require, exports) {
     "use strict";
     var minimatch_1 = __importDefault(require("minimatch"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var uniqid_1 = __importDefault(require("../string/uniqid"));
+    var wait_1 = __importDefault(require("../time/wait"));
     var treatAsValue_1 = __importDefault(require("./treatAsValue"));
     return /** @class */ (function (_super) {
         __extends(SPromise, _super);
@@ -109,14 +110,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         function SPromise(executorFnOrSettings, settings) {
             if (executorFnOrSettings === void 0) { executorFnOrSettings = {}; }
             if (settings === void 0) { settings = {}; }
-            var _this = this;
+            var _this_1 = this;
             var _resolve = function () {
                 var args = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i] = arguments[_i];
                 }
                 setTimeout(function () {
-                    _this.resolve.apply(_this, args);
+                    _this_1.resolve.apply(_this_1, args);
                 }, 100);
             };
             var _reject = function () {
@@ -125,7 +126,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     args[_i] = arguments[_i];
                 }
                 setTimeout(function () {
-                    _this.reject.apply(_this, args);
+                    _this_1.reject.apply(_this_1, args);
                 });
             };
             var _trigger = function () {
@@ -134,7 +135,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     args[_i] = arguments[_i];
                 }
                 setTimeout(function () {
-                    _this.trigger.apply(_this, args);
+                    _this_1.trigger.apply(_this_1, args);
                 });
             };
             var _cancel = function () {
@@ -143,7 +144,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     args[_i] = arguments[_i];
                 }
                 setTimeout(function () {
-                    _this.cancel.apply(_this, args);
+                    _this_1.cancel.apply(_this_1, args);
                 });
             };
             var _pipe = function () {
@@ -152,24 +153,50 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     args[_i] = arguments[_i];
                 }
                 setTimeout(function () {
-                    _this.pipe.apply(_this, args);
+                    _this_1.pipe.apply(_this_1, args);
                 });
             };
             var resolvers = {};
-            var executorFn;
-            _this = _super.call(this, function (resolve, reject) {
+            var executorFn, _this;
+            _this_1 = _super.call(this, function (resolve, reject) {
                 resolvers.resolve = resolve;
                 new Promise(function (rejectPromiseResolve, rejectPromiseReject) {
                     resolvers.reject = rejectPromiseReject;
                 }).catch(function (e) {
-                    _this.trigger('catch', e);
+                    _this_1.trigger('catch', e);
+                });
+                var _api = new Proxy({}, {
+                    get: function (target, prop) {
+                        var _this_1 = this;
+                        if (_this !== undefined) {
+                            return _this[prop];
+                        }
+                        else {
+                            return function () {
+                                var args = [];
+                                for (var _i = 0; _i < arguments.length; _i++) {
+                                    args[_i] = arguments[_i];
+                                }
+                                return __awaiter(_this_1, void 0, void 0, function () {
+                                    return __generator(this, function (_a) {
+                                        switch (_a.label) {
+                                            case 0: return [4 /*yield*/, wait_1.default(0)];
+                                            case 1:
+                                                _a.sent();
+                                                return [2 /*return*/, _this[prop].apply(_this, args)];
+                                        }
+                                    });
+                                });
+                            };
+                        }
+                    }
                 });
                 executorFn =
                     typeof executorFnOrSettings === 'function'
                         ? executorFnOrSettings
                         : null;
                 if (executorFn) {
-                    return executorFn(_resolve, _reject, _trigger, _cancel, _pipe);
+                    return executorFn(_resolve, _reject, _trigger, _api);
                 }
             }) || this;
             /**
@@ -182,7 +209,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              *
              * @author 		Olivier Bossel<olivier.bossel@gmail.com>
              */
-            _this._settings = {};
+            _this_1._settings = {};
             /**
              * @name                  _promiseState
              * @type                  String
@@ -197,7 +224,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              *
              * @author 		Olivier Bossel<olivier.bossel@gmail.com>
              */
-            _this._promiseState = 'pending';
+            _this_1._promiseState = 'pending';
             /**
              * @name          _buffer
              * @type          Array
@@ -209,7 +236,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @since       2.0.0
              * @author 		Olivier Bossel<olivier.bossel@gmail.com>
              */
-            _this._buffer = [];
+            _this_1._buffer = [];
             /**
              * @name          _stacks
              * @type          Array
@@ -220,20 +247,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @since       2.0.0
              * @author 		Olivier Bossel<olivier.bossel@gmail.com>
              */
-            _this._stacks = {};
-            Object.defineProperty(_this, '_resolvers', {
+            _this_1._stacks = {};
+            _this = _this_1;
+            Object.defineProperty(_this_1, '_resolvers', {
                 writable: true,
                 configurable: true,
                 enumerable: false,
                 value: resolvers
             });
-            Object.defineProperty(_this, '_promiseState', {
+            Object.defineProperty(_this_1, '_promiseState', {
                 writable: true,
                 configurable: true,
                 enumerable: false,
                 value: 'pending'
             });
-            Object.defineProperty(_this, '_stacks', {
+            Object.defineProperty(_this_1, '_stacks', {
                 writable: true,
                 configurable: true,
                 enumerable: false,
@@ -260,11 +288,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     }
                 }
             });
-            Object.defineProperty(_this, '_settings', {
+            Object.defineProperty(_this_1, '_settings', {
                 writable: true,
                 configurable: true,
                 enumerable: false,
                 value: deepMerge_1.default({
+                    treatCancelAs: 'resolve',
                     bufferTimeout: 100,
                     bufferedStacks: [
                         'log',
@@ -285,14 +314,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     id: uniqid_1.default()
                 }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings)
             });
-            if (_this._settings.destroyTimeout !== -1) {
-                _this.on('finally', function () {
+            if (_this_1._settings.destroyTimeout !== -1) {
+                _this_1.on('finally', function () {
                     setTimeout(function () {
-                        _this._destroy();
-                    }, _this._settings.destroyTimeout);
+                        _this_1._destroy();
+                    }, _this_1._settings.destroyTimeout);
                 });
             }
-            return _this;
+            return _this_1;
         }
         /**
          * @name                  pipe
@@ -575,11 +604,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
         SPromise.prototype._resolve = function (arg, stacksOrder) {
-            var _this = this;
+            var _this_1 = this;
             if (stacksOrder === void 0) { stacksOrder = 'resolve,finally'; }
             if (this._isDestroyed)
                 return;
-            return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            return new Promise(function (resolve, reject) { return __awaiter(_this_1, void 0, void 0, function () {
                 var stacksResult;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -589,6 +618,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             return [4 /*yield*/, this._triggerStacks(stacksOrder, arg)];
                         case 1:
                             stacksResult = _a.sent();
+                            // set the promise in the stack result proto
+                            if (stacksResult !== undefined) {
+                                stacksResult.__proto__.promise = this;
+                            }
                             // resolve the master promise
                             this._resolvers.resolve(stacksResult);
                             // return the stack result
@@ -630,11 +663,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
         SPromise.prototype._reject = function (arg, stacksOrder) {
-            var _this = this;
+            var _this_1 = this;
             if (stacksOrder === void 0) { stacksOrder = "catch,reject,finally"; }
             if (this._isDestroyed)
                 return;
-            return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            return new Promise(function (resolve, reject) { return __awaiter(_this_1, void 0, void 0, function () {
                 var stacksResult;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -644,6 +677,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             return [4 /*yield*/, this._triggerStacks(stacksOrder, arg)];
                         case 1:
                             stacksResult = _a.sent();
+                            // set the promise in the stack result proto
+                            if (stacksResult !== undefined) {
+                                stacksResult.__proto__.promise = this;
+                            }
                             // resolve the master promise
                             this._resolvers.reject(stacksResult);
                             // return the stack result
@@ -685,11 +722,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
         SPromise.prototype._cancel = function (arg, stacksOrder) {
-            var _this = this;
+            var _this_1 = this;
             if (stacksOrder === void 0) { stacksOrder = 'cancel,finally'; }
             if (this._isDestroyed)
                 return;
-            return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            return new Promise(function (resolve, reject) { return __awaiter(_this_1, void 0, void 0, function () {
                 var stacksResult;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -699,8 +736,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             return [4 /*yield*/, this._triggerStacks(stacksOrder, arg)];
                         case 1:
                             stacksResult = _a.sent();
+                            // set the promise in the stack result proto
+                            if (stacksResult !== undefined) {
+                                stacksResult.__proto__.promise = this;
+                            }
                             // resolve the master promise
-                            this._resolvers.resolve(stacksResult);
+                            if (this._settings.treatCancelAs === 'reject') {
+                                this._resolvers.reject(stacksResult);
+                            }
+                            else {
+                                this._resolvers.resolve(stacksResult);
+                            }
                             // return the stack result
                             resolve(stacksResult);
                             return [2 /*return*/];
@@ -764,13 +810,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
         SPromise.prototype._registerNewStacks = function (stacks) {
-            var _this = this;
+            var _this_1 = this;
             // split the stacks order
             if (typeof stacks === 'string')
                 stacks = stacks.split(',').map(function (s) { return s.trim(); });
             stacks.forEach(function (stack) {
-                if (!_this._stacks[stack]) {
-                    _this._stacks[stack] = {
+                if (!_this_1._stacks[stack]) {
+                    _this_1._stacks[stack] = {
                         buffer: [],
                         callStack: []
                     };
@@ -786,7 +832,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
         SPromise.prototype._registerCallbackInStack = function (stack, callback, settings) {
-            var _this = this;
+            var _this_1 = this;
             if (settings === void 0) { settings = {}; }
             settings = __assign({ callNumber: undefined }, settings);
             if (this._isDestroyed) {
@@ -816,9 +862,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             // check if a buffer exists for this particular stack
             if (this._buffer.length > 0) {
                 setTimeout(function () {
-                    _this._buffer = _this._buffer.filter(function (item) {
+                    _this_1._buffer = _this_1._buffer.filter(function (item) {
                         if (minimatch_1.default(item.stack, stack)) {
-                            _this.trigger(item.stack, item.value);
+                            _this_1.trigger(item.stack, item.value);
                             return false;
                         }
                         return true;
@@ -846,11 +892,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (metas === void 0) { metas = {}; }
             return __awaiter(this, void 0, void 0, function () {
                 var currentCallbackReturnedValue, stackArray, stackObj, i, bufferedStack, metasObj, i, item, callbackResult;
-                var _this = this;
+                var _this_1 = this;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
                             currentCallbackReturnedValue = initialValue;
+                            // set the promise in the stack result proto
+                            if (currentCallbackReturnedValue !== undefined) {
+                                currentCallbackReturnedValue.__proto__.promise = this;
+                            }
                             if (!this._stacks || Object.keys(this._stacks).length === 0)
                                 return [2 /*return*/, currentCallbackReturnedValue];
                             // make sure the stack exist
@@ -867,9 +917,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                 if (stackName === stack)
                                     return;
                                 if (minimatch_1.default(stack, stackName) &&
-                                    _this._stacks[stackName] !== undefined) {
+                                    _this_1._stacks[stackName] !== undefined) {
                                     // the glob pattern match the triggered stack so add it to the stack array
-                                    stackArray = __spreadArrays(stackArray, _this._stacks[stackName].callStack);
+                                    stackArray = __spreadArrays(stackArray, _this_1._stacks[stackName].callStack);
                                 }
                             });
                             // handle buffers
@@ -946,9 +996,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
         SPromise.prototype._triggerStacks = function (stacks, initialValue, metas) {
-            var _this = this;
+            var _this_1 = this;
             if (metas === void 0) { metas = {}; }
-            return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
+            return new Promise(function (resolve, reject) { return __awaiter(_this_1, void 0, void 0, function () {
                 var currentStackResult, i, stackResult;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
@@ -1007,7 +1057,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
         SPromise.prototype.on = function (stacks, callback) {
-            var _this = this;
+            var _this_1 = this;
             if (this._isDestroyed) {
                 throw new Error("Sorry but you can't call the \"on\" method on this SPromise cause it has been destroyed...");
             }
@@ -1023,7 +1073,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     callNumber = parseInt(splitedName[1]);
                 }
                 // calling the registration method
-                _this._registerCallbackInStack(name, callback, {
+                _this_1._registerCallbackInStack(name, callback, {
                     callNumber: callNumber
                 });
             });
@@ -1198,9 +1248,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @return          {Promise}                  A simple promise that will be resolved with the cancel stack result
          *
          * @example         js
-         * new SPromise((resolve, reject, trigger, cancel) => {
+         * new SPromise((resolve, reject, trigger, api) => {
          *    // do something...
-         *    cancel('hello world');
+         *    api.cancel('hello world');
          * }).canceled(value => {
          *    // do something with the value that is "hello world"
          * });

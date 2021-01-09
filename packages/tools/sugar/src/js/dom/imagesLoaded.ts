@@ -34,7 +34,7 @@ import __SPromise from '../promise/SPromise';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function imagesLoaded($imgs) {
-  return new __SPromise((resolve, reject, trigger, cancel) => {
+  return new __SPromise((resolve, reject, trigger, promiseApi) => {
     const promises = [],
       loadedImages = [];
     Array.from($imgs).forEach(($img) => {

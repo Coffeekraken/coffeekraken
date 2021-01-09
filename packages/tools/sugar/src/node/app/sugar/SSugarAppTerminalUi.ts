@@ -65,16 +65,18 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(sources: any, handlerInstance) {
+  constructor(sources: any, settings = {}) {
     super({
       screen: true
     });
 
     this._displayedModuleId = 'welcome';
 
-    this._appSettings = handlerInstance._settings.app;
-    this._handlerInstance = handlerInstance;
-    this._processSettings = handlerInstance._settings;
+    if (!Array.isArray(sources)) sources = [sources];
+    this._handlerInstance = sources[0];
+
+    this._appSettings = this._handlerInstance._settings.app;
+    this._processSettings = this._handlerInstance._settings;
     this._sources = Array.isArray(sources) ? sources : [sources];
     this._params = Object.assign({}, this._processSettings.initialParams || {});
     const $welcome = this._initWelcome(this._params);

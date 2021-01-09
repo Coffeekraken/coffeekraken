@@ -536,7 +536,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 settings.before = [settings.before];
             if (settings.after && !Array.isArray(settings.after))
                 settings.after = [settings.after];
-            this._currentStream.promise = new SPromise_1.default(function (resolve, reject, trigger, cancel) { return __awaiter(_this, void 0, void 0, function () {
+            this._currentStream.promise = new SPromise_1.default(function (resolve, reject, trigger, promiseApi) { return __awaiter(_this, void 0, void 0, function () {
                 var startString, actionsOrderedNames, i, actionName, actionInstance, actionSettings, skipMessage, skipAction, startString, issuesString, errorString, successString, issuesString, errorString, completeString, e_2;
                 var _this = this;
                 return __generator(this, function (_a) {
@@ -642,7 +642,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                     trigger(_this._currentStream.currentActionObj.name + ".error", {
                                         value: value
                                     });
-                                    cancel(value);
+                                    promiseApi.cancel(value);
                                 });
                                 actionSettings = deepMerge_1.default(this._currentStream.currentActionObj.instance._settings, actionSettings);
                             }

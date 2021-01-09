@@ -4,7 +4,9 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+const plainObject_1 = __importDefault(require("../is/plainObject"));
 const unquote_1 = __importDefault(require("../string/unquote"));
+const decycle_1 = __importDefault(require("./decycle"));
 /**
  * @name                              flatten
  * @namespace           sugar.js.object
@@ -41,20 +43,33 @@ const unquote_1 = __importDefault(require("../string/unquote"));
  */
 function flatten(object, settings = {}) {
     const toReturn = {};
+    // make sure the passed object is not null, undefined
+    if (!Array.isArray(object) && !plainObject_1.default(object))
+        return object;
+    // decycle object
+    object = decycle_1.default(object);
     settings = Object.assign({ separator: '.', array: false, arrayWithDots: false, quoteSeparatedProperties: true, quoteCharacter: '"', keepLastIntact: false }, settings);
     for (const i in object) {
         if (object[i] === undefined)
             continue;
         if (object[i] === null) {
             toReturn[i] = null;
+            continue;
         }
-        else if ((Array.isArray(object[i]) && settings.array) ||
+        if ((Array.isArray(object[i]) && settings.array) ||
             (!Array.isArray(object[i]) && typeof object[i]) == 'object') {
+            // if (object[i].__isFlattened === true) {
+            //   toReturn[i] = object[i];
+            //   continue;
+            // }
             const isArray = Array.isArray(object[i]);
             const flatObject = flatten(object[i], Object.assign(Object.assign({}, settings), { keepLastIntact: false }));
+            // delete object[i].__isFlattened;
             for (const x in flatObject) {
                 if (flatObject[x] === undefined)
                     continue;
+                // if (flatObject[x] && flatObject[x].__proto__)
+                //   flatObject[x].__proto__.__isFlattened = true;
                 if (isArray) {
                     if (settings.arrayWithDots) {
                         toReturn[`${i}.${x}`] = flatObject[x];
@@ -76,11 +91,11 @@ function flatten(object, settings = {}) {
                     }
                 }
             }
+            continue;
         }
-        else {
-            toReturn[i] = object[i];
-        }
+        toReturn[i] = object[i];
     }
+    // console.log('BE', toReturn);
     if (settings.keepLastIntact) {
         const returnWithLastIntact = {};
         Object.keys(toReturn).forEach((path) => {
@@ -88,6 +103,7 @@ function flatten(object, settings = {}) {
             const a = path
                 .split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm)
                 .map((p) => unquote_1.default(p));
+            // single part path
             if (a.length <= 1)
                 return (returnWithLastIntact[a.join(settings.separator)] =
                     toReturn[path]);
@@ -101,6 +117,7 @@ function flatten(object, settings = {}) {
             })
                 .join(settings.separator);
             p = unquote_1.default(p);
+            // if (propName === '__isFlattened') return;
             if (propName.match(/\[[0-9]+\]$/gm)) {
                 p = p += `${settings.separator}${propName.split('[')[0]}`;
                 if (returnWithLastIntact[p] === undefined)
@@ -113,8 +130,10 @@ function flatten(object, settings = {}) {
                 returnWithLastIntact[p][propName] = toReturn[path];
             }
         });
+        // console.log('LA', returnWithLastIntact);
         return returnWithLastIntact;
     }
+    // console.log(toReturn);
     return toReturn;
 }
 module.exports = flatten;

@@ -39,7 +39,7 @@ const errorPanels = [];
 
 function handleError() {
   if (process.env.NODE_ENV === 'test') return;
-
+  return;
   if (__isChildProcess()) {
     process.on('uncaughtException', __handleChildProcessErrors);
     process.on('unhandledRejection', __handleChildProcessErrors);

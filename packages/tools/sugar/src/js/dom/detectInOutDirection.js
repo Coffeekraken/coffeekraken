@@ -50,7 +50,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function detectInOutDirection($elm) {
         var mouseEnterHandler, mouseLeaveHandler;
-        var promise = new SPromise_1.default(function (resolve, reject, trigger, cancel) {
+        var promise = new SPromise_1.default(function (resolve, reject, trigger) {
             mouseEnterHandler = function (e) {
                 trigger('in', direction);
                 trigger('then', {

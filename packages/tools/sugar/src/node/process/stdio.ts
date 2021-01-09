@@ -84,7 +84,7 @@ export = (source, settings = {}) => {
     return undefined;
   } else if (__isClass(stdio)) {
     // @ts-ignore
-    return new stdio(source, settings);
+    // return new stdio(source, settings);
   } else {
     const stdio = new __SBlessedProcessStdio(source, settings);
     return stdio;

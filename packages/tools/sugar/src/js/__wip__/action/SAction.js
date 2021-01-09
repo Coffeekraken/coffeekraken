@@ -127,7 +127,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          */
         SAction.prototype.run = function () {
             var _this = this;
-            var promise = new SPromise_1.default(function (resolve, reject, trigger, cancel) {
+            var promise = new SPromise_1.default(function (resolve, reject, trigger) {
                 SAction._promise.trigger(_this.constructor.name + ".run", _this);
                 trigger("run", _this);
                 _this.trigger("run", _this);

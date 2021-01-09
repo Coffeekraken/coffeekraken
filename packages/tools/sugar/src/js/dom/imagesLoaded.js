@@ -45,7 +45,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     function imagesLoaded($imgs) {
-        return new SPromise_1.default(function (resolve, reject, trigger, cancel) {
+        return new SPromise_1.default(function (resolve, reject, trigger, promiseApi) {
             var promises = [], loadedImages = [];
             Array.from($imgs).forEach(function ($img) {
                 promises.push(imageLoaded_1.default($img)

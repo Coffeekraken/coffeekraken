@@ -122,7 +122,7 @@ export default class SAction extends __SPromise {
    */
   run() {
     const promise = new __SPromise(
-      (resolve, reject, trigger, cancel) => {
+      (resolve, reject, trigger) => {
         SAction._promise.trigger(`${this.constructor.name}.run`, this);
         trigger(`run`, this);
         this.trigger(`run`, this);

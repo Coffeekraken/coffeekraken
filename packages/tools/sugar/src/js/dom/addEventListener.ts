@@ -54,7 +54,7 @@ function addEventListener(
 
   const promise = new __SPromise({
     id: 'addEventListener'
-  }).on('cancel,finally', () => {
+  }).on('finally', () => {
     eventNames.forEach((eventName) => {
       const stack = eventsStack[eventName];
       $elm.removeEventListener(eventName, stack.callback, stack.useCapture);

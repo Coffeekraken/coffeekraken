@@ -1,7 +1,9 @@
 // @ts-nocheck
 // @shared
 
+import __isPlain from '../is/plainObject';
 import __unquote from '../string/unquote';
+import __decycle from './decycle';
 
 /**
  * @name                              flatten
@@ -40,6 +42,12 @@ import __unquote from '../string/unquote';
 function flatten(object, settings = {}) {
   const toReturn = {};
 
+  // make sure the passed object is not null, undefined
+  if (!Array.isArray(object) && !__isPlain(object)) return object;
+
+  // decycle object
+  object = __decycle(object);
+
   settings = {
     separator: '.',
     array: false,
@@ -55,17 +63,30 @@ function flatten(object, settings = {}) {
 
     if (object[i] === null) {
       toReturn[i] = null;
-    } else if (
+      continue;
+    }
+
+    if (
       (Array.isArray(object[i]) && settings.array) ||
       (!Array.isArray(object[i]) && typeof object[i]) == 'object'
     ) {
+      // if (object[i].__isFlattened === true) {
+      //   toReturn[i] = object[i];
+      //   continue;
+      // }
+
       const isArray = Array.isArray(object[i]);
       const flatObject = flatten(object[i], {
         ...settings,
         keepLastIntact: false
       });
+      // delete object[i].__isFlattened;
+
       for (const x in flatObject) {
         if (flatObject[x] === undefined) continue;
+
+        // if (flatObject[x] && flatObject[x].__proto__)
+        //   flatObject[x].__proto__.__isFlattened = true;
 
         if (isArray) {
           if (settings.arrayWithDots) {
@@ -89,10 +110,13 @@ function flatten(object, settings = {}) {
           }
         }
       }
-    } else {
-      toReturn[i] = object[i];
+      continue;
     }
+
+    toReturn[i] = object[i];
   }
+
+  // console.log('BE', toReturn);
 
   if (settings.keepLastIntact) {
     const returnWithLastIntact = {};
@@ -101,9 +125,12 @@ function flatten(object, settings = {}) {
       const a = path
         .split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm)
         .map((p) => __unquote(p));
+
+      // single part path
       if (a.length <= 1)
         return (returnWithLastIntact[a.join(settings.separator)] =
           toReturn[path]);
+
       let propName = a.slice(-1)[0];
       let p = a
         .slice(0, -1)
@@ -114,6 +141,9 @@ function flatten(object, settings = {}) {
         })
         .join(settings.separator);
       p = __unquote(p);
+
+      // if (propName === '__isFlattened') return;
+
       if (propName.match(/\[[0-9]+\]$/gm)) {
         p = p += `${settings.separator}${propName.split('[')[0]}`;
         if (returnWithLastIntact[p] === undefined) returnWithLastIntact[p] = [];
@@ -123,15 +153,29 @@ function flatten(object, settings = {}) {
         returnWithLastIntact[p][propName] = toReturn[path];
       }
     });
+    // console.log('LA', returnWithLastIntact);
+
     return returnWithLastIntact;
   }
+
+  // console.log(toReturn);
 
   return toReturn;
 }
 
+// const obj1 = {},
+//   obj2 = {};
+
+// obj1.hello = 'hello world';
+// obj1.obj2 = obj2;
+// obj2.world = 'wodls';
+// obj2.obj1 = obj1;
+
 // console.log(
 //   flatten(
 //     {
+//       object1: obj1,
+//       object2: obj2,
 //       someting: {
 //         cool: 'hello'
 //       },

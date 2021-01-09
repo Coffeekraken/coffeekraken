@@ -54,7 +54,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             id: 'addEventListenerOnce'
         });
         var eventsStack = {};
-        globalPromise.on('cancel,finally', function () {
+        globalPromise.on('finally', function () {
             eventNames.forEach(function (eventName) {
                 eventsStack[eventName].promise.cancel();
             });

@@ -45,9 +45,9 @@ hotkeys.filter = function (event) {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function hotkey (hotkey, settings = {}) {
+function hotkey(hotkey, settings = {}) {
   return new __SPromise(
-    (resolve, reject, trigger, cancel) => {
+    (resolve, reject, trigger, promiseApi) => {
       // merge default settings with passed ones:
       settings = {
         element: null,
@@ -62,7 +62,7 @@ function hotkey (hotkey, settings = {}) {
         // call the handler function
         trigger('press', e);
         // unsubscribe if once is truc
-        if (settings.once) cancel();
+        if (settings.once) promiseApi.cancel();
       });
     },
     {

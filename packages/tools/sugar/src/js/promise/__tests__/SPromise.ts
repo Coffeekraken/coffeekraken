@@ -42,13 +42,11 @@ module.exports = (__SPromise) => {
         resolvedWithFunctionCallResult = value;
       });
 
-      const cancelPromise = new __SPromise(
-        (resolve, reject, trigger, cancel) => {
-          setTimeout(() => {
-            cancel('world');
-          }, 10);
-        }
-      ).on('cancel', (value) => {
+      const cancelPromise = new __SPromise((resolve, reject, trigger, api) => {
+        setTimeout(() => {
+          api.cancel('world');
+        }, 10);
+      }).on('cancel', (value) => {
         canceledWithFunctionCallResult = value;
       });
 
@@ -68,11 +66,11 @@ module.exports = (__SPromise) => {
       myPromise.trigger('sss', true);
 
       myPromiseCancelResult = await new __SPromise(
-        (resolve, reject, trigger, cancel) => {
+        (resolve, reject, trigger, api) => {
           trigger('then', 'hello');
           trigger('coco', 'hey!');
           setTimeout(() => {
-            cancel(null);
+            api.cancel(null);
           });
         }
       );

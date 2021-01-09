@@ -62,7 +62,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         var eventsStack = {};
         var promise = new SPromise_1.default({
             id: 'addEventListener'
-        }).on('cancel,finally', function () {
+        }).on('finally', function () {
             eventNames.forEach(function (eventName) {
                 var stack = eventsStack[eventName];
                 $elm.removeEventListener(eventName, stack.callback, stack.useCapture);

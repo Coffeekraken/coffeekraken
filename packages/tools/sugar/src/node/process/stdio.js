@@ -50,7 +50,7 @@ module.exports = (source, settings = {}) => {
     }
     else if (class_1.default(stdio)) {
         // @ts-ignore
-        return new stdio(source, settings);
+        // return new stdio(source, settings);
     }
     else {
         const stdio = new SBlessedProcessStdio_1.default(source, settings);

@@ -388,7 +388,7 @@ module.exports = class SActionStream extends SPromise_1.default {
             settings.before = [settings.before];
         if (settings.after && !Array.isArray(settings.after))
             settings.after = [settings.after];
-        this._currentStream.promise = new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+        this._currentStream.promise = new SPromise_1.default((resolve, reject, trigger, promiseApi) => __awaiter(this, void 0, void 0, function* () {
             yield wait_1.default(100); // ugly hack to check when have time...
             try {
                 // starting log
@@ -482,7 +482,7 @@ module.exports = class SActionStream extends SPromise_1.default {
                                 trigger(`${this._currentStream.currentActionObj.name}.error`, {
                                     value
                                 });
-                                cancel(value);
+                                promiseApi.cancel(value);
                             });
                             actionSettings = deepMerge_1.default(this._currentStream.currentActionObj.instance._settings, actionSettings);
                         }

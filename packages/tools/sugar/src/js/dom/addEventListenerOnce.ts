@@ -47,7 +47,7 @@ function addEventListenerOnce(
 
   const eventsStack = {};
 
-  globalPromise.on('cancel,finally', () => {
+  globalPromise.on('finally', () => {
     eventNames.forEach((eventName) => {
       eventsStack[eventName].promise.cancel();
     });

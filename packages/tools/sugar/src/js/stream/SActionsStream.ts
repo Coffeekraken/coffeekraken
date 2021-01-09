@@ -541,7 +541,7 @@ export = class SActionStream extends __SPromise {
       settings.after = [settings.after];
 
     this._currentStream.promise = new __SPromise(
-      async (resolve, reject, trigger, cancel) => {
+      async (resolve, reject, trigger, promiseApi) => {
         await __wait(100); // ugly hack to check when have time...
 
         try {
@@ -679,7 +679,7 @@ export = class SActionStream extends __SPromise {
                         value
                       }
                     );
-                    cancel(value);
+                    promiseApi.cancel(value);
                   }
                 );
                 actionSettings = __deepMerge(

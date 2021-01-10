@@ -106,7 +106,7 @@ export = class SDocMap extends __SPromise {
   find(settings = {}) {
     settings = __deepMerge(this._settings, {}, settings);
     return new __SPromise(
-      async (resolve, reject, trigger, cancel) => {
+      async (resolve, reject, trigger) => {
         // generate the glob pattern to use
         const patterns = settings.find.globs;
 
@@ -159,9 +159,9 @@ export = class SDocMap extends __SPromise {
   read(settings = {}) {
     settings = __deepMerge(this._settings, {}, settings);
     return new __SPromise(
-      async (resolve, reject, trigger, cancel, pipe) => {
+      async (resolve, reject, trigger, promise) => {
         const filesPromise = this.find(settings);
-        pipe(filesPromise);
+        promise.pipe(filesPromise);
         const files = await filesPromise;
 
         let docMapJson = {};
@@ -208,7 +208,7 @@ export = class SDocMap extends __SPromise {
   generate(settings = {}) {
     settings = __deepMerge(this._settings, {}, settings);
     return new __SPromise(
-      async (resolve, reject, trigger, cancel) => {
+      async (resolve, reject, trigger) => {
         let globs = settings.generate.globs;
         if (!Array.isArray(globs)) globs = [globs];
 
@@ -322,12 +322,12 @@ export = class SDocMap extends __SPromise {
     settings = __deepMerge(this._settings, {}, settings);
 
     return new __SPromise(
-      async (resolve, reject, trigger, cancel, pipe) => {
+      async (resolve, reject, trigger, promise) => {
         let entries = this._entries;
 
         if (!this._entries.length) {
           const generatePromise = this.generate(settings);
-          pipe(generatePromise);
+          promise.pipe(generatePromise);
           entries = await generatePromise;
         }
 

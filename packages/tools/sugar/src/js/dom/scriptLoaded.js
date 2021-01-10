@@ -38,7 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     function loadScript($script) {
-        return new SPromise_1.default(function (resolve, reject, trigger, cancel) {
+        return new SPromise_1.default(function (resolve, reject, trigger) {
             var done = false;
             $script.onload = handleLoad;
             $script.onreadystatechange = handleReadyStateChange;

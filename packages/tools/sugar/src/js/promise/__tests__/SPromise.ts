@@ -33,7 +33,7 @@ module.exports = (__SPromise) => {
 
     (async () => {
       const resolvePromise = new __SPromise(
-        (resolve, reject, trigger, cancel) => {
+        (resolve, reject, trigger) => {
           setTimeout(() => {
             resolve('hello');
           }, 10);
@@ -75,7 +75,7 @@ module.exports = (__SPromise) => {
         }
       );
 
-      let errorPromise = new __SPromise((resolve, reject, trigger, cancel) => {
+      let errorPromise = new __SPromise((resolve, reject, trigger) => {
         trigger('coco', true);
         trigger('then', 'hello');
         setTimeout(() => {
@@ -104,7 +104,7 @@ module.exports = (__SPromise) => {
         unsubscribePromise.trigger('unsubscribeCallbackTest', true);
       }, 10);
 
-      const res = await new __SPromise((resolve, reject, trigger, cancel) => {
+      const res = await new __SPromise((resolve, reject, trigger) => {
         trigger('then', 'world');
         trigger('then', 'hello');
         trigger('catch', 'error');
@@ -144,8 +144,8 @@ module.exports = (__SPromise) => {
       isPassedAwait = true;
 
       myPromiseWithPromisesResult = await new __SPromise(
-        (resolve, reject, trigger, cancel) => {
-          resolve('coco1');
+        (resolve, reject, trigger) => {
+          // resolve('coco1');
         }
       )
         .then((value) => {
@@ -160,7 +160,7 @@ module.exports = (__SPromise) => {
           return value + 'finally';
         })
         .then((value) => {
-          return new __SPromise((resolve, reject, trigger, cancel) => {
+          return new __SPromise((resolve, reject, trigger) => {
             promiseWithPromisesIdx++;
             setTimeout(() => {
               resolve(value + 'coco3');

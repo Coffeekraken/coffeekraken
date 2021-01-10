@@ -38,7 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     function removeClassOnAnimationEnd($elm, cls) {
-        return new SPromise_1.default(function (resolve, reject, trigger, cancel) {
+        return new SPromise_1.default(function (resolve, reject, trigger) {
             // listen for animation end on the element just once
             addEventListenerOnce_1.default($elm, 'animationend', function (e) {
                 if (!Array.isArray(cls))

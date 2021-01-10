@@ -102,7 +102,7 @@ export default class SAction extends __SPromise {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(descriptorObj, settings = {}) {
-    super((resolve, reject, trigger, cancel) => {});
+    super((resolve, reject, trigger) => {});
     this._settings = __deepMerge({}, settings);
     this._descriptorObj = descriptorObj;
   }

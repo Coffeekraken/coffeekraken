@@ -44,7 +44,7 @@ import __isDirectory from '../is/directory';
  */
 function resolveGlob(globs, settings = {}) {
   return new __SPromise(
-    (resolve, reject, trigger, cancel) => {
+    (resolve, reject, trigger) => {
       settings = __deepMerge(
         {
           rootDir: settings.cwd || process.cwd(),

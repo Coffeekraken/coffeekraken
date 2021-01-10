@@ -284,7 +284,7 @@ export = class SDocblockOutput {
     this._partialsTemplateObj = this.getPartialsTemplateObj();
 
     return new __SPromise(
-      async (resolve, reject, trigger, cancel) => {
+      async (resolve, reject, trigger, promise) => {
         // get the block in object format
         const blocksArray = this._docblockInstance.toObject();
         // reset all blocks rendered state

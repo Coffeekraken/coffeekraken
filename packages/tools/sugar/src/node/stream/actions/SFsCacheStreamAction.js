@@ -60,7 +60,7 @@ module.exports = (_a = class SFsCacheStreamAction extends SActionsStreamAction_1
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings = this._settings) {
-            return super.run(streamObj, (resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+            return super.run(streamObj, (resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
                 // make sure we have the cache directory
                 ensureDirSync_1.default(streamObj.cacheDir);
                 // generate the id

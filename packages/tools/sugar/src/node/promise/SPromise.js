@@ -493,10 +493,10 @@ module.exports = class SPromise extends Promise {
             this._promiseState = 'resolved';
             // exec the wanted stacks
             const stacksResult = yield this._triggerStacks(stacksOrder, arg);
-            // set the promise in the stack result proto
-            if (stacksResult !== undefined) {
-                stacksResult.__proto__.promise = this;
-            }
+            // // set the promise in the stack result proto
+            // if (stacksResult !== undefined) {
+            //   stacksResult.__proto__.promise = this;
+            // }
             // resolve the master promise
             this._resolvers.resolve(stacksResult);
             // return the stack result
@@ -541,10 +541,10 @@ module.exports = class SPromise extends Promise {
             this._promiseState = 'rejected';
             // exec the wanted stacks
             const stacksResult = yield this._triggerStacks(stacksOrder, arg);
-            // set the promise in the stack result proto
-            if (stacksResult !== undefined) {
-                stacksResult.__proto__.promise = this;
-            }
+            // // set the promise in the stack result proto
+            // if (stacksResult !== undefined) {
+            //   stacksResult.__proto__.promise = this;
+            // }
             // resolve the master promise
             this._resolvers.reject(stacksResult);
             // return the stack result
@@ -590,9 +590,9 @@ module.exports = class SPromise extends Promise {
             // exec the wanted stacks
             const stacksResult = yield this._triggerStacks(stacksOrder, arg);
             // set the promise in the stack result proto
-            if (stacksResult !== undefined) {
-                stacksResult.__proto__.promise = this;
-            }
+            // if (stacksResult !== undefined) {
+            //   stacksResult.__proto__.promise = this;
+            // }
             // resolve the master promise
             if (this._settings.treatCancelAs === 'reject') {
                 this._resolvers.reject(stacksResult);
@@ -616,7 +616,7 @@ module.exports = class SPromise extends Promise {
      * @return        {Promise}                       A default Promise that will be resolved with the result of the stack execution
      *
      * @example         js
-     * new SPromise((resolve, reject, trigger, cancel) => {
+     * new SPromise((resolve, reject, trigger) => {
      *    setTimeout(() => {
      *      resolve('something');
      *    }, 2000);
@@ -735,10 +735,10 @@ module.exports = class SPromise extends Promise {
     _triggerStack(stack, initialValue, metas = {}) {
         return __awaiter(this, void 0, void 0, function* () {
             let currentCallbackReturnedValue = initialValue;
-            // set the promise in the stack result proto
-            if (currentCallbackReturnedValue !== undefined) {
-                currentCallbackReturnedValue.__proto__.promise = this;
-            }
+            // // set the promise in the stack result proto
+            // if (currentCallbackReturnedValue !== undefined) {
+            //   currentCallbackReturnedValue.__proto__.promise = this;
+            // }
             if (!this._stacks || Object.keys(this._stacks).length === 0)
                 return currentCallbackReturnedValue;
             // make sure the stack exist
@@ -857,7 +857,7 @@ module.exports = class SPromise extends Promise {
      * @return          {SPromise}                  The SPromise instance to maintain chainability
      *
      * @example         js
-     * new SPromise((resolve, reject, trigger, cancel) => {
+     * new SPromise((resolve, reject, trigger) => {
      *    // do something...
      *    resolve('hello world');
      * }).on('resolve', value => {
@@ -939,7 +939,7 @@ module.exports = class SPromise extends Promise {
      * @return          {SPromise}                  The SPromise instance to maintain chainability
      *
      * @example         js
-     * new SPromise((resolve, reject, trigger, cancel) => {
+     * new SPromise((resolve, reject, trigge) => {
      *    // do something...
      *    reject('hello world');
      * }).catch(value => {
@@ -966,7 +966,7 @@ module.exports = class SPromise extends Promise {
      * @return          {SPromise}                  The SPromise instance to maintain chainability
      *
      * @example         js
-     * new SPromise((resolve, reject, trigger, cancel) => {
+     * new SPromise((resolve, reject, trigger) => {
      *    // do something...
      *    resolve('hello world');
      * }).finally(value => {
@@ -992,7 +992,7 @@ module.exports = class SPromise extends Promise {
      * @return          {SPromise}                  The SPromise instance to maintain chainability
      *
      * @example         js
-     * new SPromise((resolve, reject, trigger, cancel) => {
+     * new SPromise((resolve, reject, trigger) => {
      *    // do something...
      *    resolve('hello world');
      * }).resolved(value => {
@@ -1017,7 +1017,7 @@ module.exports = class SPromise extends Promise {
      * @return          {SPromise}                  The SPromise instance to maintain chainability
      *
      * @example         js
-     * new SPromise((resolve, reject, trigger, cancel) => {
+     * new SPromise((resolve, reject, trigger) => {
      *    // do something...
      *    resolve('hello world');
      * }).rejected(value => {

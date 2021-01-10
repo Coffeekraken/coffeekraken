@@ -33,7 +33,7 @@ function backgroundImageLoaded($elm) {
   let isCancelled = false,
     $img;
   const promise = new __SPromise(
-    (resolve, reject, trigger, cancel) => {
+    (resolve, reject, trigger) => {
       // get the background-image property from computed style
       const backgroundImage = __getStyleProperty($elm, 'background-image');
       const matches = backgroundImage.match(/.*url\((.*)\).*/);

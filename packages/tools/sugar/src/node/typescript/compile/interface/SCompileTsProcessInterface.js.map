@@ -1,1 +1,1 @@
-{"version":3,"file":"SCompileTsProcessInterface.js","sourceRoot":"","sources":["SCompileTsProcessInterface.ts"],"names":[],"mappings":";;;;AAAA,+EAAyD;AACzD,8EAAwD;AAExD,MAAM,0BAA2B,SAAQ,oBAAY;;AAC5C,qCAAU,qBACZ,4BAAoB,CAAC,UAAU,EAClC;AAEJ,iBAAS,0BAA0B,CAAC"}
+{"version":3,"file":"SCompileTsProcessInterface.js","sourceRoot":"","sources":["SCompileTsProcessInterface.ts"],"names":[],"mappings":";;;;AAAA,+EAAyD;AACzD,gFAA0D;AAE1D,MAAM,0BAA2B,SAAQ,oBAAY;;AAC5C,qCAAU,qBACZ,6BAAqB,CAAC,UAAU,EACnC;AAEJ,iBAAS,0BAA0B,CAAC"}

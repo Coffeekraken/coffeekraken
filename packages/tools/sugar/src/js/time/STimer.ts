@@ -160,7 +160,7 @@ export = class STimer extends __SPromise {
    */
   constructor(duration, settings = {}) {
     super(
-      (resolve, reject, trigger, cancel) => {
+      (resolve, reject, trigger) => {
         this.duration = duration;
 
         // calculate the tickInterval

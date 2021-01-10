@@ -35,7 +35,7 @@ import __sugarConfig from '../../config/sugar';
  *      super(settings);
  *    }
  *    render(path, data = {}, settings = {}) {
- *      return new SPromise((resolve, reject, trigger, cancel) => {
+ *      return new SPromise((resolve, reject, trigger) => {
  *        // ...
  *        resolve(compiledTemplateString);
  *      });

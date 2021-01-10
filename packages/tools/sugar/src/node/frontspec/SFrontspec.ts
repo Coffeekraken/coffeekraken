@@ -104,7 +104,7 @@ export = class SFrontspec extends __SPromise {
    */
   search(settings = {}) {
     return new __SPromise(
-      (resolve, reject, trigger, cancel) => {
+      (resolve, reject, trigger) => {
         settings = __deepMerge(this._settings, {}, settings);
 
         // let filenamesArray = settings.filename;
@@ -174,7 +174,7 @@ export = class SFrontspec extends __SPromise {
   json(settings = {}) {
     settings = __deepMerge(this._settings, {}, settings);
     return new __SPromise(
-      async (resolve, reject, trigger, cancel) => {
+      async (resolve, reject, trigger) => {
         try {
           // initiating the frontspecJson object
           const packageJson = __packageJson();

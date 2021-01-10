@@ -35,7 +35,7 @@ const escapeStackStack = [];
 let hotkeyInitiated = false;
 
 function escapeStack(callback = null) {
-  const promise = new __SPromise((resolve, reject, trigger, cancel) => {}, {
+  const promise = new __SPromise((resolve, reject, trigger) => {}, {
     id: 'escapeStack'
   });
 
@@ -59,7 +59,7 @@ function escapeStack(callback = null) {
   escapeStackStack.push(promise);
 
   // handle cancel
-  promise.on('cancel,finally', () => {
+  promise.on('finally', () => {
     escapeStackStack.splice(escapeStackStack.indexOf(promise), 1);
   });
 

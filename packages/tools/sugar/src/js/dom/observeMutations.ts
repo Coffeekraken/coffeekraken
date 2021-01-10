@@ -44,7 +44,7 @@ function observeMutations($target, settings = {}) {
   let mutationObserver;
 
   return new __SPromise(
-    (resolve, reject, trigger, cancel) => {
+    (resolve, reject, trigger) => {
       // create a new observer
       mutationObserver = new MutationObserver((mutations) => {
         // loop on mutations

@@ -31,7 +31,7 @@ function imageLoaded($img, callback = null) {
   let imgLoadedHandler, imgErrorHandler;
 
   return new __SPromise(
-    (resolve, reject, trigger, cancel) => {
+    (resolve, reject, trigger) => {
       // check if image is already loaded
       if ($img.hasAttribute('src') && $img.complete) {
         // resolve promise

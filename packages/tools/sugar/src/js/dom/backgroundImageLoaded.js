@@ -42,7 +42,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function backgroundImageLoaded($elm) {
         var isCancelled = false, $img;
-        var promise = new SPromise_1.default(function (resolve, reject, trigger, cancel) {
+        var promise = new SPromise_1.default(function (resolve, reject, trigger) {
             // get the background-image property from computed style
             var backgroundImage = getStyleProperty_1.default($elm, 'background-image');
             var matches = backgroundImage.match(/.*url\((.*)\).*/);

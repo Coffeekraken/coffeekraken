@@ -96,7 +96,7 @@ module.exports = class SLogPanel extends SBlessedComponent_1.default {
     //     settings
     //   );
     //   const input = __blessed.textbox(settings);
-    //   input.promise = new __SPromise((resolve, reject, trigger, cancel) => {});
+    //   input.promise = new __SPromise((resolve, reject, trigger) => {});
     //   input.on('attach', () => {
     //     setTimeout(() => {
     //       if (settings.focus) input.focus();

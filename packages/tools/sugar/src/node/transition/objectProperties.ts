@@ -33,7 +33,7 @@ import __SPromise from '../promise/SPromise';
  */
 function objectProperties(startObj, targetObj, settings = {}) {
   return new __SPromise(
-    async (resolve, reject, trigger, cancel) => {
+    async (resolve, reject, trigger) => {
       settings = __deepMerge(
         {
           duration: '1s',
@@ -123,7 +123,7 @@ function objectProperties(startObj, targetObj, settings = {}) {
           // resolve the transition
           resolve();
         })
-        .on('cancel,finally', () => {
+        .on('finally', () => {
           // stop the timer
           timer.stop();
           // destroy the timer

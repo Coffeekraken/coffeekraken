@@ -43,7 +43,7 @@ const directory_1 = __importDefault(require("../is/directory"));
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function resolveGlob(globs, settings = {}) {
-    return new SPromise_1.default((resolve, reject, trigger, cancel) => {
+    return new SPromise_1.default((resolve, reject, trigger) => {
         settings = deepMerge_1.default({
             rootDir: settings.cwd || process.cwd(),
             symlinks: true,

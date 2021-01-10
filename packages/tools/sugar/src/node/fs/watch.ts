@@ -49,7 +49,7 @@ const fn: IWatch = function watch(
   let watcher;
 
   const promise = new __SPromise(
-    (resolve, reject, trigger, cancel) => {
+    (resolve, reject, trigger) => {
       watcher = __chokidar
         // @ts-ignore
         .watch(paths, {

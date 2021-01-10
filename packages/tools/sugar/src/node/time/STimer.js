@@ -28,7 +28,7 @@ module.exports = class STimer extends SPromise_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(duration, settings = {}) {
-        super((resolve, reject, trigger, cancel) => {
+        super((resolve, reject, trigger) => {
             this.duration = duration;
             // calculate the tickInterval
             if (this._settings.tickCount) {

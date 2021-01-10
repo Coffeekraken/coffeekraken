@@ -19,9 +19,7 @@
 @function selector($selector, $prefix: null) {
 
   @if $prefix == null {
-    @warn('CCC');
     $prefix: setting('classes.generate.prefix');
-    @warn($prefix);
   }
   @if $prefix != '' and $prefix != false and $prefix != null {
     $selector: '#{$prefix}-#{$selector}';

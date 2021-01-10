@@ -83,6 +83,8 @@ const Cls: ISCliProcessCtor = class SCliProcess
       alias: false
     });
 
+    throw command;
+
     // @ts-ignore
     const pro = __spawn(command, [], {
       ipc: false,

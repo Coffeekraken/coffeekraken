@@ -15,7 +15,7 @@ import __getFilename from '../fs/filename';
 import __isPath from '../is/path';
 import __fs from 'fs';
 import __getSharedResourcesString from './getSharedResourcesString';
-import __putUseStatementsOnTop from './putUseStatementsOnTop';
+import __putUseStatementsOnTop from './utils/putUseStatementsOnTop';
 import __glob from 'glob';
 import { parse as __parseScss } from 'scss-parser';
 import { stringify as __stringifyScss } from 'scss-parser';
@@ -129,7 +129,7 @@ export = class SScssCompiler {
    */
   compile(source, settings = {}) {
     return new __SPromise(
-      async (resolve, reject, trigger, cancel) => {
+      async (resolve, reject, trigger) => {
         settings = __deepMerge(
           this._settings,
           {
@@ -437,7 +437,7 @@ export = class SScssCompiler {
   }
 
   _compileImports(importStatements, scss, settings) {
-    return new __SPromise(async (resolve, reject, trigger, cancel) => {
+    return new __SPromise(async (resolve, reject, trigger) => {
       // loop on each imports
       const childrenObj = {};
 

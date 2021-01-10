@@ -59,7 +59,7 @@ const fn = function spawn(command, args = [], settings = {}) {
     let uniquid = `SIpc.spawn.${uniqid_1.default()}`;
     let childProcess;
     let ipcServer, serverData, isCancel = false;
-    const promise = new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+    const promise = new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
         settings = deepMerge_1.default({
             ipc: true,
             stdio: 'pipe'

@@ -58,7 +58,7 @@ const fn: ISpawn = function spawn(
     serverData,
     isCancel = false;
 
-  const promise = new __SPromise(async (resolve, reject, trigger, cancel) => {
+  const promise = new __SPromise(async (resolve, reject, trigger) => {
     settings = __deepMerge(
       {
         ipc: true,

@@ -19,7 +19,6 @@ const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 const sugar_1 = __importDefault(require("../../config/sugar"));
 const fs_1 = __importDefault(require("fs"));
 const exec_php_1 = __importDefault(require("exec-php"));
-const SError_1 = __importDefault(require("../../error/SError"));
 const folderPath_1 = __importDefault(require("../../fs/folderPath"));
 const filename_1 = __importDefault(require("../../fs/filename"));
 const child_process_1 = __importDefault(require("child_process"));
@@ -77,7 +76,7 @@ module.exports = (_a = class SBladeTemplateEngine extends STemplateEngine_1.defa
             settings = deepMerge_1.default({
                 rootDirs: []
             }, this._settings, settings);
-            return new SPromise_1.default((resolve, reject, trigger, cancel) => {
+            return new SPromise_1.default((resolve, reject, trigger, promiseApi) => {
                 if (!fs_1.default.existsSync(settings.cacheDir))
                     fs_1.default.mkdirSync(settings.cacheDir, {
                         recursive: true
@@ -86,9 +85,11 @@ module.exports = (_a = class SBladeTemplateEngine extends STemplateEngine_1.defa
                     return reject(`It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`);
                 }
                 // preparing the php execution
-                exec_php_1.default(__dirname + '/bladePhp/compile.php', __dirname + '/../../../bin/php', (error, php, outprint) => {
+                exec_php_1.default(__dirname + '/bladePhp/compile.php', 
+                // __path.resolve(__dirname, '../../../bin/php'),
+                (error, php, outprint) => {
                     if (error) {
-                        throw new SError_1.default(error);
+                        return reject(error + ' ---- ' + outprint);
                     }
                     const viewDirPath = folderPath_1.default(viewPath);
                     const viewFilename = filename_1.default(viewPath);

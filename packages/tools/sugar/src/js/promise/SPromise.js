@@ -618,10 +618,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             return [4 /*yield*/, this._triggerStacks(stacksOrder, arg)];
                         case 1:
                             stacksResult = _a.sent();
-                            // set the promise in the stack result proto
-                            if (stacksResult !== undefined) {
-                                stacksResult.__proto__.promise = this;
-                            }
+                            // // set the promise in the stack result proto
+                            // if (stacksResult !== undefined) {
+                            //   stacksResult.__proto__.promise = this;
+                            // }
                             // resolve the master promise
                             this._resolvers.resolve(stacksResult);
                             // return the stack result
@@ -677,10 +677,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             return [4 /*yield*/, this._triggerStacks(stacksOrder, arg)];
                         case 1:
                             stacksResult = _a.sent();
-                            // set the promise in the stack result proto
-                            if (stacksResult !== undefined) {
-                                stacksResult.__proto__.promise = this;
-                            }
+                            // // set the promise in the stack result proto
+                            // if (stacksResult !== undefined) {
+                            //   stacksResult.__proto__.promise = this;
+                            // }
                             // resolve the master promise
                             this._resolvers.reject(stacksResult);
                             // return the stack result
@@ -737,9 +737,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         case 1:
                             stacksResult = _a.sent();
                             // set the promise in the stack result proto
-                            if (stacksResult !== undefined) {
-                                stacksResult.__proto__.promise = this;
-                            }
+                            // if (stacksResult !== undefined) {
+                            //   stacksResult.__proto__.promise = this;
+                            // }
                             // resolve the master promise
                             if (this._settings.treatCancelAs === 'reject') {
                                 this._resolvers.reject(stacksResult);
@@ -766,7 +766,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @return        {Promise}                       A default Promise that will be resolved with the result of the stack execution
          *
          * @example         js
-         * new SPromise((resolve, reject, trigger, cancel) => {
+         * new SPromise((resolve, reject, trigger) => {
          *    setTimeout(() => {
          *      resolve('something');
          *    }, 2000);
@@ -897,10 +897,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     switch (_a.label) {
                         case 0:
                             currentCallbackReturnedValue = initialValue;
-                            // set the promise in the stack result proto
-                            if (currentCallbackReturnedValue !== undefined) {
-                                currentCallbackReturnedValue.__proto__.promise = this;
-                            }
+                            // // set the promise in the stack result proto
+                            // if (currentCallbackReturnedValue !== undefined) {
+                            //   currentCallbackReturnedValue.__proto__.promise = this;
+                            // }
                             if (!this._stacks || Object.keys(this._stacks).length === 0)
                                 return [2 /*return*/, currentCallbackReturnedValue];
                             // make sure the stack exist
@@ -1045,7 +1045,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @return          {SPromise}                  The SPromise instance to maintain chainability
          *
          * @example         js
-         * new SPromise((resolve, reject, trigger, cancel) => {
+         * new SPromise((resolve, reject, trigger) => {
          *    // do something...
          *    resolve('hello world');
          * }).on('resolve', value => {
@@ -1129,7 +1129,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @return          {SPromise}                  The SPromise instance to maintain chainability
          *
          * @example         js
-         * new SPromise((resolve, reject, trigger, cancel) => {
+         * new SPromise((resolve, reject, trigge) => {
          *    // do something...
          *    reject('hello world');
          * }).catch(value => {
@@ -1160,7 +1160,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @return          {SPromise}                  The SPromise instance to maintain chainability
          *
          * @example         js
-         * new SPromise((resolve, reject, trigger, cancel) => {
+         * new SPromise((resolve, reject, trigger) => {
          *    // do something...
          *    resolve('hello world');
          * }).finally(value => {
@@ -1190,7 +1190,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @return          {SPromise}                  The SPromise instance to maintain chainability
          *
          * @example         js
-         * new SPromise((resolve, reject, trigger, cancel) => {
+         * new SPromise((resolve, reject, trigger) => {
          *    // do something...
          *    resolve('hello world');
          * }).resolved(value => {
@@ -1219,7 +1219,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @return          {SPromise}                  The SPromise instance to maintain chainability
          *
          * @example         js
-         * new SPromise((resolve, reject, trigger, cancel) => {
+         * new SPromise((resolve, reject, trigger) => {
          *    // do something...
          *    resolve('hello world');
          * }).rejected(value => {

@@ -298,7 +298,7 @@ class STemplate {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     render(data = {}, settings = {}) {
-        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default((resolve, reject, trigger, promiseApi) => __awaiter(this, void 0, void 0, function* () {
             settings = deepMerge_1.default(this._settings, settings);
             data = deepMerge_1.default(settings.defaultData, data);
             if (this._templateString) {
@@ -316,11 +316,11 @@ class STemplate {
                 }
                 else if (this._settings.engine instanceof STemplateEngine_1.default) {
                     if (!settings.engine.constructor.canRender(this._templateString)) {
-                        throw new SError_1.default(`It seems that you've passed directly an __STemplateEngine engine as the settings.engine option but this engine cannot render your passed template string...`);
+                        return reject(`It seems that you've passed directly an __STemplateEngine engine as the settings.engine option but this engine cannot render your passed template string...`);
                     }
                 }
                 if (!settings.engine) {
-                    throw new SError_1.default(`Sorry but it seems that the passed template string cannot be rendered using any of the available engines:\n- ${Object.keys(STemplate.engines)
+                    return reject(`Sorry but it seems that the passed template string cannot be rendered using any of the available engines:\n- ${Object.keys(STemplate.engines)
                         .map((l) => {
                         return `<yellow>${l}</yellow>`;
                     })
@@ -350,7 +350,15 @@ class STemplate {
                 const EngineClass = require(STemplate.engines[settings.engine]);
                 this._engineInstance = new EngineClass(Object.assign({}, settings.engineSettings));
             }
-            const result = yield this._engineInstance.render(this._viewPath || this._templateString, data, settings);
+            const renderPromise = this._engineInstance.render(this._viewPath || this._templateString, data, settings);
+            const result = yield renderPromise;
+            if (renderPromise.isRejected()) {
+                return reject({
+                    view: this._viewPath,
+                    engine: settings.engine,
+                    content: '0cc'
+                });
+            }
             // resolve the render process
             resolve({
                 view: this._viewPath,

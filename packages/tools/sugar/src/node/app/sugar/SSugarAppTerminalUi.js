@@ -118,25 +118,25 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         });
         // listen app
         this._modulesReady = false;
-        this._sources[0].on('state', (state) => {
+        this._handlerInstance.on('state', (state) => {
             if (state === 'ready') {
                 this._modulesReady = true;
             }
         });
         // listen modules
-        this._sources[0].on('*.state', (state, metas) => {
+        this._handlerInstance.on('*.state', (state, metas) => {
             this._moduleState(state, metas);
         });
-        this._sources[0].on('*.notification', (notificationObj, metas) => {
+        this._handlerInstance.on('*.notification', (notificationObj, metas) => {
             this._moduleNotification(notificationObj);
         });
-        this._sources[0].on('*.start', (data, metas) => {
+        this._handlerInstance.on('*.start', (data, metas) => {
             this._moduleStart(data, metas);
         });
-        this._sources[0].on('*.success', (data, metas) => {
+        this._handlerInstance.on('*.success', (data, metas) => {
             this._moduleSuccess(data, metas);
         });
-        this._sources[0].on('*.error', (data, metas) => {
+        this._handlerInstance.on('*.error', (data, metas) => {
             if (metas.stack === 'state.error')
                 return;
             this._moduleError(data, metas);
@@ -197,29 +197,35 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         return false;
     }
     _moduleError(data, metas) {
+        return;
         const moduleObj = this._findModuleObjById(data.module.id);
         if (!moduleObj)
             return;
         let msg = data.value;
         if (msg.length > 36)
             msg = msg.slice(0, 33) + '...';
-        const $errorNotification = new SNotification_1.default(data.module.name || data.module.id, msg, {
-            onClick: () => {
-                this._showModule(moduleObj.id);
-            },
-            blessed: {
-                bg: 'red',
-                hover: {
-                    bg: 'blue'
-                }
-            }
-        });
-        this.append($errorNotification);
+        // const $errorNotification = new __SNotification(
+        //   data.module.name || data.module.id,
+        //   msg,
+        //   {
+        //     onClick: () => {
+        //       this._showModule(moduleObj.id);
+        //     },
+        //     blessed: {
+        //       bg: 'red',
+        //       hover: {
+        //         bg: 'blue'
+        //       }
+        //     }
+        //   }
+        // );
+        // this.append($errorNotification);
     }
     _moduleNotification(data, metas) {
         const moduleObj = this._findModuleObjById(data.module.id);
         if (!moduleObj)
             return;
+        return;
         let msg = data.value;
         if (msg.length > 36)
             msg = msg.slice(0, 33) + '...';
@@ -247,6 +253,7 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
     //   moduleObj.state = value.value;
     // }
     _moduleSuccess(data, metas) {
+        return;
         const moduleObj = this._findModuleObjById(data.module.id);
         if (moduleObj && moduleObj.$status) {
             clearTimeout(moduleObj.statusTimeout);
@@ -262,15 +269,20 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         let msg = data.value || 'Process finished successfully';
         if (msg.length > 36)
             msg = msg.slice(0, 33) + '...';
-        const $successNotification = new SNotification_1.default(data.module.name || data.module.id, msg, {
-            bg: 'green',
-            onClick: () => {
-                this._showModule(moduleObj.id);
-            }
-        });
-        this.append($successNotification);
+        // const $successNotification = new __SNotification(
+        //   data.module.name || data.module.id,
+        //   msg,
+        //   {
+        //     bg: 'green',
+        //     onClick: () => {
+        //       this._showModule(moduleObj.id);
+        //     }
+        //   }
+        // );
+        // this.append($successNotification);
     }
     _moduleState(data, metas) {
+        return;
         const moduleObj = this._modulesObjs[data.module.idx];
         if (!moduleObj)
             return;
@@ -281,6 +293,7 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         moduleObj.state = data.value;
     }
     _moduleStart(data, metas) {
+        return;
         const moduleObj = this._findModuleObjById(data.module.id);
         if (moduleObj && moduleObj.$status) {
             clearTimeout(moduleObj.statusTimeout);
@@ -292,13 +305,17 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
         let msg = data.value || 'Process starting...';
         if (msg.length > 36)
             msg = msg.slice(0, 33) + '...';
-        const $startNotification = new SNotification_1.default(data.module.name || data.module.id, msg, {
-            bg: 'yellow',
-            onClick: () => {
-                this._showModule(moduleObj.id);
-            }
-        });
-        this.append($startNotification);
+        // const $startNotification = new __SNotification(
+        //   data.module.name || data.module.id,
+        //   msg,
+        //   {
+        //     bg: 'yellow',
+        //     onClick: () => {
+        //       this._showModule(moduleObj.id);
+        //     }
+        //   }
+        // );
+        // this.append($startNotification);
     }
     _initModulesList() {
         const listItems = [];

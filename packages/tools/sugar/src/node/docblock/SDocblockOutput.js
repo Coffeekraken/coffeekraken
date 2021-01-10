@@ -260,7 +260,7 @@ module.exports = class SDocblockOutput {
      */
     render(settings = {}) {
         this._partialsTemplateObj = this.getPartialsTemplateObj();
-        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default((resolve, reject, trigger, promise) => __awaiter(this, void 0, void 0, function* () {
             // get the block in object format
             const blocksArray = this._docblockInstance.toObject();
             // reset all blocks rendered state

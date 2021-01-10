@@ -356,7 +356,7 @@ class STemplate {
    */
   render(data = {}, settings = {}) {
     return new __SPromise(
-      async (resolve, reject, trigger, cancel) => {
+      async (resolve, reject, trigger, promiseApi) => {
         settings = __deepMerge(this._settings, settings);
         data = __deepMerge(settings.defaultData, data);
         if (this._templateString) {
@@ -376,13 +376,13 @@ class STemplate {
             }
           } else if (this._settings.engine instanceof __STemplateEngine) {
             if (!settings.engine.constructor.canRender(this._templateString)) {
-              throw new __SError(
+              return reject(
                 `It seems that you've passed directly an __STemplateEngine engine as the settings.engine option but this engine cannot render your passed template string...`
               );
             }
           }
           if (!settings.engine) {
-            throw new __SError(
+            return reject(
               `Sorry but it seems that the passed template string cannot be rendered using any of the available engines:\n- ${Object.keys(
                 STemplate.engines
               )
@@ -423,11 +423,21 @@ class STemplate {
           });
         }
 
-        const result = await this._engineInstance.render(
+        const renderPromise = this._engineInstance.render(
           this._viewPath || this._templateString,
           data,
           settings
         );
+        const result = await renderPromise;
+
+        if (renderPromise.isRejected()) {
+          
+          return reject({
+            view: this._viewPath,
+            engine: settings.engine,
+            content: '0cc'
+          });
+        }
 
         // resolve the render process
         resolve({

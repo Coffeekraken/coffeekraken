@@ -88,7 +88,7 @@ export = class SFsCacheStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    return super.run(streamObj, async (resolve, reject, trigger, cancel) => {
+    return super.run(streamObj, async (resolve, reject, trigger) => {
       // make sure we have the cache directory
       __ensureDirSync(streamObj.cacheDir);
 

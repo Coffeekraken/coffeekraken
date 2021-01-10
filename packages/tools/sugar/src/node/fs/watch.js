@@ -38,7 +38,7 @@ const onProcessExit_1 = __importDefault(require("../process/onProcessExit"));
 const fn = function watch(paths, settings = {}) {
     settings = Object.assign({ SFile: true, ignoreInitial: true, ignored: ['**/node_modules/**/*', '**/.git/**/*'] }, settings);
     let watcher;
-    const promise = new SPromise_1.default((resolve, reject, trigger, cancel) => {
+    const promise = new SPromise_1.default((resolve, reject, trigger) => {
         watcher = chokidar_1.default
             // @ts-ignore
             .watch(paths, Object.assign({}, settings))

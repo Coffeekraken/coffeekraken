@@ -101,7 +101,7 @@ module.exports = (_a = class SJsCompiler {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         compile(filePath, settings = {}) {
-            return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+            return new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
                 settings = deepMerge_1.default(this._settings, settings);
                 _rootDir = settings.rootDir;
                 const banner = settings.banner || '';

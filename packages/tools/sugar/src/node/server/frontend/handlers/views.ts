@@ -56,7 +56,6 @@ export = function views(req, res, settings = {}) {
           });
           __SPromise.pipe(resultPromise, promise);
           const resultObj = await resultPromise;
-
           promise.resolve(
             `<bgGreen><black> views </black></bgGreen> file "<yellow>${
               req.path

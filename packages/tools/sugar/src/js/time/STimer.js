@@ -52,7 +52,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          */
         function STimer(duration, settings) {
             if (settings === void 0) { settings = {}; }
-            var _this = _super.call(this, function (resolve, reject, trigger, cancel) {
+            var _this = _super.call(this, function (resolve, reject, trigger) {
                 _this.duration = duration;
                 // calculate the tickInterval
                 if (_this._settings.tickCount) {

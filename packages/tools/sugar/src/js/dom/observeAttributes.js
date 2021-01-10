@@ -45,8 +45,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * const observer = observeAttributes(myCoolHTMLElement).then(mutation => {
      * 		// do something with the mutation
      * });
-     * // cancel the observer
-     * observer.cancel();
+     * / the observer
+     * observe();
      *
      * @see 		https://developer.mozilla.org/en/docs/Web/API/MutationObserver
      * @since       1.0.0
@@ -54,7 +54,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function observeAttributes(target, settings) {
         if (settings === void 0) { settings = {}; }
-        return new SPromise_1.default(function (resolve, reject, trigger, cancel) {
+        return new SPromise_1.default(function (resolve, reject, trigger) {
             // create a new observer
             var mutationObserver = new MutationObserver(function (mutations) {
                 var mutedAttrs = {};

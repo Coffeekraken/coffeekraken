@@ -28,7 +28,7 @@ import __SPromise from '../promise/SPromise';
  */
 function removeClassOnAnimationEnd($elm, cls) {
   return new __SPromise(
-    (resolve, reject, trigger, cancel) => {
+    (resolve, reject, trigger) => {
       // listen for animation end on the element just once
       __addEventListenerOnce($elm, 'animationend', (e) => {
         if (!Array.isArray(cls)) cls = [cls];

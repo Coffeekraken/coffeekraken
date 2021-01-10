@@ -5,6 +5,7 @@ import __deepMerge from '../../object/deepMerge';
 import __SPromise from '../../promise/SPromise';
 import __sugarConfig from '../../config/sugar';
 import __fs from 'fs';
+import __path from 'path';
 import __execPhp from 'exec-php';
 import __SError from '../../error/SError';
 import __folderPath from '../../fs/folderPath';
@@ -125,7 +126,7 @@ export = class SBladeTemplateEngine extends __STemplateEngine {
       settings
     );
     return new __SPromise(
-      (resolve, reject, trigger, cancel) => {
+      (resolve, reject, trigger, promiseApi) => {
         if (!__fs.existsSync(settings.cacheDir))
           __fs.mkdirSync(settings.cacheDir, {
             recursive: true
@@ -140,11 +141,13 @@ export = class SBladeTemplateEngine extends __STemplateEngine {
         // preparing the php execution
         __execPhp(
           __dirname + '/bladePhp/compile.php',
-          __dirname + '/../../../bin/php',
+          // __path.resolve(__dirname, '../../../bin/php'),
           (error, php, outprint) => {
+
             if (error) {
-              throw new __SError(error);
+              return reject(error + ' ---- ' + outprint);
             }
+
             const viewDirPath = __folderPath(viewPath);
             const viewFilename = __getFilename(viewPath);
             settings.rootDirs.push(viewDirPath);

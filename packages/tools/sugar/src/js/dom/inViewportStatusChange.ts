@@ -35,7 +35,7 @@ function inViewportStatusChange($elm) {
   let isFinished = false;
 
   return new __SPromise(
-    (resolve, reject, trigger, cancel) => {
+    (resolve, reject, trigger) => {
       function _whenIn() {
         __whenInViewport($elm).then(() => {
           if (isFinished) return;

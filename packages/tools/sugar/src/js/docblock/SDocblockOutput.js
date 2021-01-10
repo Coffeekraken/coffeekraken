@@ -331,7 +331,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             var _this = this;
             if (settings === void 0) { settings = {}; }
             this._partialsTemplateObj = this.getPartialsTemplateObj();
-            return new SPromise_1.default(function (resolve, reject, trigger, cancel) { return __awaiter(_this, void 0, void 0, function () {
+            return new SPromise_1.default(function (resolve, reject, trigger, promise) { return __awaiter(_this, void 0, void 0, function () {
                 var blocksArray, firstBlock, type, template, templateObj, compiledTemplateFn, compiledTemplateFn, renderedTemplate;
                 return __generator(this, function (_a) {
                     switch (_a.label) {

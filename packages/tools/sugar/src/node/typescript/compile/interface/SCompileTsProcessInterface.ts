@@ -1,9 +1,9 @@
 import __SInterface from '../../../interface/SInterface';
-import __compileTsInterface from './compileTsInterface';
+import __STsCompileInterface from './STsCompileInterface';
 
 class SCompileTsProcessInterface extends __SInterface {
   static definition = {
-    ...__compileTsInterface.definition
+    ...__STsCompileInterface.definition
   };
 }
 export = SCompileTsProcessInterface;

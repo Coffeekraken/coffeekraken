@@ -36,7 +36,7 @@ const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
 const escapeStackStack = [];
 let hotkeyInitiated = false;
 function escapeStack(callback = null) {
-    const promise = new SPromise_1.default((resolve, reject, trigger, cancel) => { }, {
+    const promise = new SPromise_1.default((resolve, reject, trigger) => { }, {
         id: 'escapeStack'
     });
     if (!hotkeyInitiated) {
@@ -57,7 +57,7 @@ function escapeStack(callback = null) {
     // append the promise in the stack
     escapeStackStack.push(promise);
     // handle cancel
-    promise.on('cancel,finally', () => {
+    promise.on('finally', () => {
         escapeStackStack.splice(escapeStackStack.indexOf(promise), 1);
     });
     // return the promise

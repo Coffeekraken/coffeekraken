@@ -66,7 +66,7 @@ module.exports = class SFantasticonStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    return super.run(streamObj, async (resolve, reject, trigger, cancel) => {
+    return super.run(streamObj, async (resolve, reject, trigger) => {
       __removeSync(streamObj.outputDir);
       __ensureDirSync(streamObj.outputDir);
 

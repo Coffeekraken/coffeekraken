@@ -135,7 +135,7 @@ module.exports = class SDependency {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     install(version = null) {
-        return new __SPromise((resolve, reject, trigger, cancel) => {
+        return new __SPromise((resolve, reject, trigger) => {
             // get the available versions to install
             const versionsArray = Object.keys(this._depJson);
             // set the version to install
@@ -173,7 +173,7 @@ module.exports = class SDependency {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _execCommands(commands) {
-        return new __SPromise((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+        return new __SPromise((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
             commands = [...commands];
             for (let i = 0; i < commands.length; i++) {
                 const child = __awaitSpawn(commands[i], {

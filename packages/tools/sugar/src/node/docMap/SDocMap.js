@@ -76,7 +76,7 @@ module.exports = class SDocMap extends SPromise_1.default {
      */
     find(settings = {}) {
         settings = deepMerge_1.default(this._settings, {}, settings);
-        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
             // generate the glob pattern to use
             const patterns = settings.find.globs;
             let files = [];
@@ -114,9 +114,9 @@ module.exports = class SDocMap extends SPromise_1.default {
      */
     read(settings = {}) {
         settings = deepMerge_1.default(this._settings, {}, settings);
-        return new SPromise_1.default((resolve, reject, trigger, cancel, pipe) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default((resolve, reject, trigger, promise) => __awaiter(this, void 0, void 0, function* () {
             const filesPromise = this.find(settings);
-            pipe(filesPromise);
+            promise.pipe(filesPromise);
             const files = yield filesPromise;
             let docMapJson = {};
             // loop on all files
@@ -148,7 +148,7 @@ module.exports = class SDocMap extends SPromise_1.default {
      */
     generate(settings = {}) {
         settings = deepMerge_1.default(this._settings, {}, settings);
-        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
             let globs = settings.generate.globs;
             if (!Array.isArray(globs))
                 globs = [globs];
@@ -242,11 +242,11 @@ module.exports = class SDocMap extends SPromise_1.default {
             output = outputOrSettings;
         }
         settings = deepMerge_1.default(this._settings, {}, settings);
-        return new SPromise_1.default((resolve, reject, trigger, cancel, pipe) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default((resolve, reject, trigger, promise) => __awaiter(this, void 0, void 0, function* () {
             let entries = this._entries;
             if (!this._entries.length) {
                 const generatePromise = this.generate(settings);
-                pipe(generatePromise);
+                promise.pipe(generatePromise);
                 entries = yield generatePromise;
             }
             trigger('log', {

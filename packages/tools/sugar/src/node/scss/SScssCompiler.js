@@ -27,7 +27,7 @@ const filename_1 = __importDefault(require("../fs/filename"));
 const path_2 = __importDefault(require("../is/path"));
 const fs_1 = __importDefault(require("fs"));
 const getSharedResourcesString_1 = __importDefault(require("./getSharedResourcesString"));
-const putUseStatementsOnTop_1 = __importDefault(require("./putUseStatementsOnTop"));
+const putUseStatementsOnTop_1 = __importDefault(require("./utils/putUseStatementsOnTop"));
 const glob_1 = __importDefault(require("glob"));
 const scss_parser_1 = require("scss-parser");
 const scss_parser_2 = require("scss-parser");
@@ -85,7 +85,7 @@ module.exports = class SScssCompiler {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     compile(source, settings = {}) {
-        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
             settings = deepMerge_1.default(this._settings, {
                 _isChild: false
             }, settings);
@@ -338,7 +338,7 @@ module.exports = class SScssCompiler {
         return resultString;
     }
     _compileImports(importStatements, scss, settings) {
-        return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
             // loop on each imports
             const childrenObj = {};
             let finalImports = {};

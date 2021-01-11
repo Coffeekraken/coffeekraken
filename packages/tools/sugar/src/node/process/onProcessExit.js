@@ -9,6 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+const terminal_kit_1 = __importDefault(require("terminal-kit"));
 /**
  * @name            onProcessExit
  * @namespace       sugar.node.process
@@ -41,13 +45,19 @@ const __onProcessExitCallbacks = [];
 function onProcessExit(callback) {
     if (!__onProcessExitCallbacks.length) {
         process.env.HAS_ON_PROCESS_EXIT_HANDLERS = true;
+        let isExiting = false;
         function exitHandler(state) {
             return __awaiter(this, void 0, void 0, function* () {
+                if (isExiting)
+                    return;
+                isExiting = true;
                 for (let i = 0; i < __onProcessExitCallbacks.length; i++) {
                     const cbFn = __onProcessExitCallbacks[i];
                     yield cbFn(state);
                 }
-                process.kill(process.pid, 'SIGTERM');
+                setTimeout(() => {
+                    terminal_kit_1.default.terminal.processExit('SIGTERM');
+                }, 100);
             });
         }
         process.on('close', (code) => code === 0 ? exitHandler('success') : exitHandler('error'));
@@ -59,6 +69,7 @@ function onProcessExit(callback) {
         process.on('SIGUSR1', () => exitHandler('killed'));
         process.on('SIGUSR2', () => exitHandler('killed'));
         process.on('uncaughtException', () => exitHandler('error'));
+        process.on('unhandledRejection', () => exitHandler('error'));
     }
     if (__onProcessExitCallbacks.indexOf(callback) !== -1)
         return;

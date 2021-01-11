@@ -86,7 +86,7 @@ export interface ISPromiseCtor {
 }
 
 export interface ISPromiseOnCallbackFn {
-  (value: any, metas: ISPromiseMetas): ISPromise;
+  (value: any, metas: ISPromiseMetas): ISPromise | void;
 }
 
 export default interface ISPromise {

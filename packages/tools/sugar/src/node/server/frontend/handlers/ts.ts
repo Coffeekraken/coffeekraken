@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __SPromise from '../../../promise/SPromise';
-import __StsCompiler from '../../../ts/StsCompiler';
+import __STsCompiler from '../../../typescript/compile/STsCompiler';
 import __SDuration from '../../../time/SDuration';
-import __SBuildtsInterface from '../../../ts/build/interface/SBuildtsInterface';
+import __STsCompileInterface from '../../../typescript/compile/interface/STsCompileInterface';
 
 /**
  * @name                ts
@@ -28,11 +28,15 @@ export = function ts(req, res, settings = {}) {
   const promise = new __SPromise();
 
   (async () => {
-    const defaultValuesObj = __SBuildtsInterface.getDefaultValues();
-    const compiler = new __StsCompiler(defaultValuesObj);
+    const defaultValuesObj = __STsCompileInterface.getDefaultValues();
+    const compiler = new __STsCompiler({
+      ...defaultValuesObj
+    });
     const duration = new __SDuration();
-    const compilerPromise = compiler.compile(req.path, {
-      ...(req.query || {})
+    const compilerPromise = compiler.compile({
+      ...(req.query || {}),
+      input: req.path.slice(1),
+      transpileOnly: true
     });
     __SPromise.pipe(compilerPromise, promise);
     compilerPromise.on('reject', (e) => {
@@ -42,14 +46,25 @@ export = function ts(req, res, settings = {}) {
       promise.reject(e);
     });
     const compileRes = await compilerPromise;
-    res.type('text/css');
-    res.status(200);
-    res.send(compileRes.css);
-    promise.resolve(
-      `<bgGreen><black> ts </black></bgGreen> file "<yellow>${
-        req.path
-      }</yellow> served in <cyan>${duration.end()}s</cyan>"`
-    );
+    if (compileRes.files) {
+      let string = '';
+      compileRes.files.forEach((file) => {
+        string += `\n${file.readSync()}`;
+      });
+
+      res.type('text/javascript');
+      res.status(200);
+      res.send(string);
+      return promise.resolve(
+        `<bgGreen><black> ts </black></bgGreen> file "<yellow>${
+          req.path
+        }</yellow> served in <cyan>${duration.end()}s</cyan>"`
+      );
+    }
+    res.type('text/html');
+    res.status(500);
+    res.send(`requested file does not exist...`);
+    promise.reject('requested file does not exist...');
   })();
 
   return promise;

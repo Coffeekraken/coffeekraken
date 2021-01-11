@@ -8,6 +8,8 @@
 
   <p>{!! $content !!}</p>
 
+  <script src="/src/js/index.ts"></script>
+
   <s-sugar-ui></s-sugar-ui>
 
   <style>

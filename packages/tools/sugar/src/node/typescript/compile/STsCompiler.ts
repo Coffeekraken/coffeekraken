@@ -15,13 +15,12 @@ import __fs from 'fs';
 import __getSharedResourcesString from './getSharedResourcesString';
 import __putUseStatementsOnTop from './utils/putUseStatementsOnTop';
 import __glob from 'glob';
-import { parse as __parseScss } from 'scss-parser';
-import { stringify as __stringifyScss } from 'scss-parser';
 import __createQueryWrapper from 'query-ast';
 import __csso from 'csso';
 import __isGlob from 'is-glob';
 import __unique from '../../array/unique';
 import __STsCompileInterface from './interface/STsCompileInterface';
+import __transpileAndSave from './transpileAndSave';
 
 import __TscInterface from './interface/TscInterface';
 import __SFile from '../../fs/SFile';
@@ -129,41 +128,77 @@ export = class STsCompiler {
           await cache.clear();
         }
         let cacheId;
-
         const tmpDir: string = __tmpDir();
-
-        const dataObj = {};
-
         const stacks = {};
 
         if (params.stacks !== undefined && params.project !== undefined) {
-          throw `Sorry but you cannot specify the "<yellow>project</yellow>" and the "<yellow>stacks</yellow>" parameters at the same time...`;
+          return reject(
+            `Sorry but you cannot specify the "<yellow>project</yellow>" and the "<yellow>stacks</yellow>" parameters at the same time...`
+          );
         }
 
-        if (params.stacks !== undefined) {
+        const filesToCompile = [
+          ...(params.tsconfig.include || []),
+          ...(params.tsconfig.files || [])
+        ];
+
+        if (params.input != undefined) {
+          if (!Array.isArray(params.input)) params.input = [params.input];
+
+          trigger('log', {
+            value: `<yellow>Input</yellow> file(s) to compile:\n- <cyan>${params.input.join(
+              '</cyan>\n- <cyan>'
+            )}</cyan>`
+          });
+
+          const tsconfigJson = __deepMerge(params.tsconfig, {
+            files: [...filesToCompile, ...params.input]
+          });
+
+          const filesHash = __md5.encrypt(params.input.join(','));
+
+          stacks[params.input] = {
+            tsconfigJson,
+            tsconfigPath: `${tmpDir}/ts/tsconfig.${settings.id}.input.${filesHash}.json`
+          };
+        } else if (params.stacks !== undefined) {
+          trigger('log', {
+            value: `<yellow>Stack(s)</yellow> to compile: <magenta>${params.stacks.join(
+              '</magenta>, <magenta>'
+            )}</magenta>`
+          });
+
           params.stacks.forEach(async (stack) => {
             if (params.tsconfig.stacks[stack] === undefined) {
-              throw `You try to compile the stack "<yellow>${stack}</yellow>" but it is not defined in your "<cyan>ts.config.js</cyan>" file. Here's the available stacks:
-          - ${Object.keys(params.tsconfig.stacks).join('\n- ')}`;
+              return reject(`You try to compile the stack "<yellow>${stack}</yellow>" but it is not defined in your "<cyan>ts.config.js</cyan>" file. Here's the available stacks:
+          - ${Object.keys(params.tsconfig.stacks).join('\n- ')}`);
             }
 
             // generate the final config
             const tsconfigJson = __deepMerge(
               params.tsconfig,
-              params.tsconfig.stacks[stack]
+              params.tsconfig.stacks[stack],
+              {
+                files: [
+                  ...filesToCompile,
+                  ...(tsconfig.stacks[stack].include || []),
+                  ...(tsconfig.stacks[stack].files || [])
+                ]
+              }
             );
-            delete tsconfigJson.stacks;
 
             stacks[stack] = {
               tsconfigJson,
-              tsconfigPath: `${tmpDir}/ts/tsconfig.${stack}.json`,
-              include:
-                params.input !== undefined
-                  ? [params.input]
-                  : tsconfigJson.include
+              tsconfigPath: `${tmpDir}/ts/tsconfig.${settings.id}.stack.${stack}.json`
             };
           });
         } else if (params.project !== undefined) {
+          trigger('log', {
+            value: `<yellow>Project(s)</yellow> to compile:\n- <magenta>${params.stacks.join(
+              '</magenta>\n- <magenta>'
+            )}</magenta>`
+          });
+
           // loop on each configs to generate the final ones
           params.project.forEach(async (configFile) => {
             // read the file
@@ -178,34 +213,39 @@ export = class STsCompiler {
               finalConfigJson.compilerOptions = {};
             finalConfigJson.compilerOptions.noEmit = true;
 
+            finalConfigJson.files = [
+              ...filesToCompile,
+              ...(finalConfigJson.include || []),
+              ...(finalConfigJson.files || [])
+            ];
+
             stacks[configFile.path] = {
               tsconfigJson: finalConfigJson,
               tsconfigPath: `${tmpDir}/ts/tsconfig.${__md5.encrypt(
                 configFile.path
-              )}.json`,
-              include:
-                params.input !== undefined ? [params.input] : configJson.include
+              )}.json`
             };
           });
         } else {
+          trigger('log', {
+            value: `Compiling default project: <cyan>${__packageRoot()}/tsconfig.json</cyan>`
+          });
+
           // try to load the default file at the project root
-          const tsconfigPath = `${__packageRoot()}/tsconfig.json`;
+          const tsconfigPath = `${__packageRoot()}/tsconfig.${
+            settings.id
+          }.json`;
           if (__fs.existsSync(tsconfigPath) === true) {
             const tsconfigJson = require(tsconfigPath);
             stacks['tsconfig.json'] = {
               tsconfigJson,
-              tsconfigPath,
-              include:
-                params.input !== undefined
-                  ? [params.input]
-                  : tsconfigJson.include
+              tsconfigPath
             };
           }
         }
 
         if (Object.keys(stacks).length === 0) {
-          trigger(
-            'error',
+          return reject(
             [
               `Sorry but their's nothing to compile.`,
               `In order to specify files/folders to compile, you have these choices:`,
@@ -215,6 +255,9 @@ export = class STsCompiler {
             ].join('\n')
           );
         }
+
+        // generated files
+        const generatedFiles = [];
 
         // loop on each "stacks" to compile
         let stacksStates = {};
@@ -227,8 +270,13 @@ export = class STsCompiler {
             ready: false
           };
 
-          if (!Array.isArray(stackObj.include)) {
-            throw `Sorry but you have to specify some files to compile using either the "<yellow>input</yellow>" argument, either by specifying the "<yellow>include</yellow>" property in your "<cyan>ts.config.js</cyan>" or in your "<cyan>tsconfig.json</cyan>" default file...`;
+          if (
+            !stackObj.tsconfigJson.files ||
+            !stackObj.tsconfigJson.files.length
+          ) {
+            return reject(
+              `Sorry but you have to specify some files to compile using either the "<yellow>input</yellow>" argument, by specifying the "<yellow>stack</yellow>" argument either by specifying the "<yellow>include</yellow>" property in your "<cyan>ts.config.js</cyan>" or in your "<cyan>tsconfig.json</cyan>" default file...`
+            );
           }
 
           // generate temp files pathes
@@ -237,11 +285,36 @@ export = class STsCompiler {
           });
 
           // process the include pathes to make them absolute
-          stackObj.include = stackObj.include.map((path) => {
-            if (__path.isAbsolute(path)) return path;
-            return __path.resolve(__packageRoot(), path);
-          });
-          stackObj.tsconfigJson.include = stackObj.include;
+          if (stackObj.tsconfigJson.files) {
+            let filesPaths = [];
+            stackObj.tsconfigJson.files.forEach((path) => {
+              if (__path.isAbsolute(path)) {
+                if (__isGlob(path)) {
+                  filesPaths = [...filesPaths, ...__glob.sync(path)];
+                  return;
+                }
+                if (!__fs.existsSync(path)) {
+                  filesPaths.push(`${__packageRoot()}${path}`);
+                  return;
+                }
+              }
+              if (__isGlob(path)) {
+                filesPaths = [
+                  ...filesPaths,
+                  ...__glob
+                    .sync(path, {
+                      cwd: __packageRoot()
+                    })
+                    .map((p) => {
+                      return `${__packageRoot()}/${p}`;
+                    })
+                ];
+                return;
+              }
+              filesPaths.push(__path.resolve(__packageRoot(), path));
+            });
+            stackObj.tsconfigJson.files = filesPaths;
+          }
 
           // write the temp config file
           tmpConfigFile.writeSync(
@@ -250,88 +323,6 @@ export = class STsCompiler {
 
           // duration stacks
           const durationStack = {};
-
-          // // check if watch or not
-          // if (params.watch === true) {
-          //   trigger('log', {
-          //     value: `<magenta>[${stack}]</magenta> Watch mode <green>enabled</green>`
-          //   });
-          // }
-
-          // // init the stack to watch
-          // let toWatch = stackObj.include;
-          // toWatch = toWatch.map((t) => {
-          //   return t.replace(/\.tsx?$/, '.{js,ts}');
-          // });
-
-          // await new Promise(async (resolveWatch) => {
-          //   __watch(toWatch, {
-          //     // cwd: __folderPath(stackObj.tsconfigPath)
-          //   })
-          //     .on('ready', () => {
-          //       if (stacksStates[stack].ready) return;
-          //       stacksStates[stack].ready = true;
-          //       promise.trigger('log', {
-          //         value: `<magenta>[${stack}]</magenta> Watching files process <green>ready</green>`
-          //       });
-          //       resolveWatch();
-          //     })
-          //     .on('change', async (file) => {
-          //       if (file.extension === 'ts' && params.watch) {
-          //         file.update();
-          //         durationStack[file.path] = Date.now();
-          //         setTimeout(() => {
-          //           delete durationStack[file.path];
-          //         }, 60000);
-
-          //         promise.trigger('notification', {
-          //           type: 'warn',
-          //           title: `${stack} | Updated`,
-          //           value: `${file.path.replace(`${__packageRoot()}/`, '')}`
-          //         });
-          //         promise.trigger('log', {
-          //           value: `<magenta>[${stack}]</magenta> <yellow>updated</yellow> <green>${file.path.replace(
-          //             `${__packageRoot()}/`,
-          //             ''
-          //           )}</green> <yellow>${file.sizeInKBytes}kb</yellow>`
-          //         });
-
-          //         if (params.transpileOnly === true) {
-          //           const typescriptResult = await __transpileAndSave(
-          //             file.path,
-          //             stackObj.tsconfigJson.compilerOptions
-          //           );
-          //         }
-          //       }
-
-          //       if (file.extension === 'js') {
-          //         let duration = ' ';
-          //         if (
-          //           durationStack[file.path.replace(/\.js$/, '.ts')] !==
-          //           undefined
-          //         ) {
-          //           duration = ` in ${__convert(
-          //             Date.now() -
-          //               durationStack[file.path.replace(/\.js$/, '.ts')],
-          //             's'
-          //           )}s`;
-          //         }
-          //         promise.trigger('notification', {
-          //           type: 'success',
-          //           title: `${stack} | Success`,
-          //           value: `${file.path.replace(`${__packageRoot()}/`, '')}`
-          //         });
-          //         promise.trigger('log', {
-          //           value: `<magenta>[${stack}]</magenta> <cyan>compiled</cyan> <green>${file.path.replace(
-          //             `${__packageRoot()}/`,
-          //             ''
-          //           )}</green> <yellow>${
-          //             file.sizeInKBytes
-          //           }kb</yellow>${duration}`
-          //         });
-          //       }
-          //     });
-          // });
 
           // clean params
           delete params.stacks;
@@ -359,52 +350,35 @@ export = class STsCompiler {
               stdio: false
             });
             promise.pipe(pro);
-            pro.run(params);
+            await pro.run(params);
           } else if (params.transpileOnly === true) {
             trigger('log', {
               value: `<magenta>[${stack}]</magenta> Transpile only mode <green>enabled</green>`
             });
 
-            // if (params.watch === undefined || params.watch === false) {
-            //   promise.trigger('log', {
-            //     value: `<magenta>[${stack}]</magenta> Starting the compilation in <yellow>transpileOnly</yellow> mode`
-            //   });
-            //   promise.trigger('log', {
-            //     value: `<magenta>[${stack}]</magenta> Listing all the files to transpile depending on:\n- ${stackObj.include
-            //       .map(
-            //         (t) =>
-            //           `<green>${t.replace(`${__packageRoot()}/`, '')}</green>`
-            //       )
-            //       .join('\n- ')}`
-            //   });
-            //   let files = [];
-            //   for (let i = 0; i < stackObj.include.length; i++) {
-            //     const filesFounded = __glob.sync(stackObj.include[i], {
-            //       absolute: true
-            //     });
-            //     files = [...files, ...filesFounded];
-            //   }
-            //   promise.trigger('log', {
-            //     value: `<magenta>[${stack}]</magenta> Found <yellow>${files.length}</yellow> file(s) to compile`
-            //   });
+            for (let i = 0; i < stackObj.tsconfigJson.files.length; i++) {
+              const filePath = stackObj.tsconfigJson.files[i];
+              // transpiling the file
+              await __transpileAndSave(
+                filePath,
+                stackObj.tsconfigJson.compilerOptions
+              );
+            }
+          }
 
-            //   await __wait(10);
-
-            //   for (let i = 0; i < files.length; i++) {
-            //     const filePath = files[i];
-            //     // transpiling the file
-            //     await __transpileAndSave(
-            //       filePath,
-            //       stackObj.tsconfigJson.compilerOptions
-            //     );
-            //   }
-            // }
+          for (let j = 0; j < stackObj.tsconfigJson.files.length; j++) {
+            const path = stackObj.tsconfigJson.files[j];
+            stackObj.tsconfigJson.files.forEach((filePath) => {
+              generatedFiles.push(
+                new __SFile(filePath.replace(/\.ts$/, '.js'))
+              );
+            });
           }
         }
 
         // resolve with the compilation result
         resolve({
-          ...dataObj,
+          files: generatedFiles,
           startTime: startTime,
           endTime: Date.now(),
           duration: Date.now() - startTime

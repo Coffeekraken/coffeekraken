@@ -1,14 +1,5 @@
 "use strict";
 // @ts-nocheck
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -45,15 +36,6 @@ const onProcessExit_1 = __importDefault(require("../process/onProcessExit"));
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-if (!childProcess_1.default()) {
-    hotkey_1.default('ctrl+c', {
-        once: true
-    }).on('press', () => {
-        if (!global.sBlessedComponentScreen)
-            return;
-        global.sBlessedComponentScreen.destroy();
-    });
-}
 const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
         /**
          * @name                  constructor
@@ -93,6 +75,9 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
                 SBlessedComponent.screen.on('destroy', () => {
                     SBlessedComponent.screen = null;
                 });
+                onProcessExit_1.default(() => {
+                    SBlessedComponent.destroyScreen();
+                });
             }
             // extends parent
             super(settings.blessed || {});
@@ -119,13 +104,12 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
             this._promise = new SPromise_1.default();
             // save screen reference
             this._screen = SBlessedComponent.screen;
-            global.sBlessedComponentScreen = SBlessedComponent.screen;
             // keep track of the component status
-            this._isDisplayed = false;
             this.on('attach', () => {
                 this._isDisplayed = true;
                 setTimeout(() => {
-                    this.update();
+                    if (this.isDisplayed())
+                        this.update();
                 }, 200);
             });
             this.on('detach', () => {
@@ -138,26 +122,51 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
             if (this._settings.attach !== false && isNewScreen) {
                 SBlessedComponent.screen.append(this);
             }
-            onProcessExit_1.default(() => __awaiter(this, void 0, void 0, function* () {
-                try {
-                    global.sBlessedComponentScreen &&
-                        global.sBlessedComponentScreen.destroy();
-                }
-                catch (e) { }
-                this._destroyed = true;
-                this.detach();
-                return true;
-            }));
             if (this.parent) {
-                this.update();
+                if (this.isDisplayed())
+                    this.update();
             }
             else {
                 this.on('attach', () => {
                     setTimeout(() => {
-                        this.update();
+                        if (this.isDisplayed())
+                            this.update();
                     });
                 });
             }
+        }
+        /**
+         * @name              getScreen
+         * @type              Function
+         * @static
+         *
+         * Get the screen initiated when using some SBlessedComponent instances
+         *
+         * @return      {Screen}          The blessed screen instance
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        static getScreen() {
+            return SBlessedComponent.screen;
+        }
+        /**
+         * @name              destroyScreen
+         * @type              Function
+         * @static
+         *
+         * Get the screen initiated when using some SBlessedComponent instances
+         *
+         * @return      {Screen}          The blessed screen instance
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        static destroyScreen() {
+            if (!SBlessedComponent.getScreen())
+                return;
+            SBlessedComponent.getScreen().destroy();
+            SBlessedComponent.screen = undefined;
         }
         get realHeight() {
             let height = this.height;
@@ -165,10 +174,8 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
                 try {
                     const originalHeight = this.height;
                     this.height = 0;
-                    // this.render();
                     height = this.getScrollHeight();
                     this.height = originalHeight;
-                    // this.render();
                 }
                 catch (e) { }
             }
@@ -195,7 +202,7 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
             }, 1000 / framerate);
         }
         update() {
-            if (this.isDestroyed())
+            if (this.isDestroyed() || !this.isDisplayed())
                 return;
             if (this._screen) {
                 this._screen.render();
@@ -213,7 +220,7 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         isDisplayed() {
-            return this._isDisplayed;
+            return this._isDisplayed && SBlessedComponent.getScreen();
         }
         /**
          * @name                  isDestroyed
@@ -258,5 +265,14 @@ const cls = (_a = class SBlessedComponent extends blessed_1.default.box {
      */
     _a._framerateInterval = null,
     _a);
+if (!childProcess_1.default()) {
+    hotkey_1.default('ctrl+c', {
+        once: true
+    }).on('press', () => {
+        if (!SBlessedComponent.screen)
+            return;
+        SBlessedComponent.screen.destroy();
+    });
+}
 module.exports = cls;
 //# sourceMappingURL=SBlessedComponent.js.map

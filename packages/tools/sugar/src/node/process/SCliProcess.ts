@@ -6,6 +6,7 @@ import ISCliProcess, {
 } from './interface/ISCliProcess';
 import __onProcessExit from './onProcessExit';
 import __spawn from './spawn';
+import __deepMerge from '../object/deepMerge';
 
 /**
  * @name          SCliProcess
@@ -56,7 +57,7 @@ const Cls: ISCliProcessCtor = class SCliProcess
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(command: string, settings: ISCliProcessSettings = {}) {
-    super(settings);
+    super(__deepMerge({}, settings));
     // save the command
     this.command = command;
   }
@@ -82,8 +83,6 @@ const Cls: ISCliProcessCtor = class SCliProcess
       definition: this.definition,
       alias: false
     });
-
-    throw command;
 
     // @ts-ignore
     const pro = __spawn(command, [], {

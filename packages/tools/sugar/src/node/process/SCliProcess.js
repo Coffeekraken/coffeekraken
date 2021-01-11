@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const SProcess_1 = __importDefault(require("./SProcess"));
 const buildCommandLine_1 = __importDefault(require("../cli/buildCommandLine"));
 const spawn_1 = __importDefault(require("./spawn"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name          SCliProcess
  * @namespace     sugar.node.process
@@ -41,7 +42,7 @@ const Cls = class SCliProcess extends SProcess_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(command, settings = {}) {
-        super(settings);
+        super(deepMerge_1.default({}, settings));
         // save the command
         this.command = command;
     }
@@ -66,7 +67,6 @@ const Cls = class SCliProcess extends SProcess_1.default {
             definition: this.definition,
             alias: false
         });
-        throw command;
         // @ts-ignore
         const pro = spawn_1.default(command, [], Object.assign({ ipc: false, stdio: settings.stdio }, (settings.spawnSettings || {})));
         // @ts-ignore

@@ -5,11 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const SSugarApp_1 = __importDefault(require("../../node/app/sugar/SSugarApp"));
 function sugar(stringArgs = '') {
-    // const sugarAppProcess = new __SSugarAppProcess({
-    //   runAsChild: false,
-    //   stdio: __SSugarAppTerminalUi
-    // });
-    // sugarAppProcess.run(stringArgs);
     new SSugarApp_1.default(stringArgs);
 }
 module.exports = sugar;

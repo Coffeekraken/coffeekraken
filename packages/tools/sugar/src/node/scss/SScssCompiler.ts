@@ -14,7 +14,7 @@ import __packageRoot from '../path/packageRoot';
 import __getFilename from '../fs/filename';
 import __isPath from '../is/path';
 import __fs from 'fs';
-import __getSharedResourcesString from './getSharedResourcesString';
+import __getSharedResourcesString from './utils/getSharedResourcesString';
 import __putUseStatementsOnTop from './utils/putUseStatementsOnTop';
 import __glob from 'glob';
 import { parse as __parseScss } from 'scss-parser';

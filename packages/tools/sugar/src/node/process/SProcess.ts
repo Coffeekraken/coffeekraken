@@ -181,6 +181,7 @@ export = class SProcess extends __SPromise {
           stdio: 'inherit',
           metas: true,
           throw: true,
+          exitAtEnd: false,
           runAsChild: false,
           definition: undefined,
           processPath: null,
@@ -546,6 +547,13 @@ export = class SProcess extends __SPromise {
         else this.state('idle');
       }
     );
+
+    this._processPromise.on('finally', () => {
+      // @ts-ignore
+      if (this._settings.exitAtEnd === true) {
+        process.exit();
+      }
+    });
 
     // return the process promise
     return this._processPromise;

@@ -9,11 +9,14 @@ module.exports = {
     noImplicitAny: false,
     noStrictGenericChecks: false,
     allowSyntheticDefaultImports: true,
-    incremental: true,
-    tsBuildInfoFile: '[config.storage.tempFolderPath]/ts/.tsbuildinfo',
+    incremental: false,
+    // tsBuildInfoFile: '[config.storage.tempFolderPath]/ts/.tsbuildinfo',
     types: ['node']
   },
   watch: true,
+  include: [],
+  exclude: [],
+  files: [],
   stacks: {
     js: {
       include: ['src/js/**/*.ts'],

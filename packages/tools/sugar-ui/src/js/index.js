@@ -2,4 +2,6 @@
 // import __SSugarUiWebComponent from './webcomponents/SSugarUiWebComponent';
 // __SSugarUiWebComponent.define();
 console.log('plop');
-//# sourceMappingURL=index.js.map
+console.log;
+'d';
+//# sourceMappingURL=module.js.map

@@ -6,6 +6,7 @@ import __handleError from './error/handleError';
 import __initEnv from './init/initEnv';
 import __onProcessExit from './process/onProcessExit';
 import __exitCleanup from './process/exitCleanup';
+import __SBlessedComponent from './blessed/SBlessedComponent';
 
 /**
  * @name                    index

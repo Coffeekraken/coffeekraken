@@ -41,15 +41,6 @@ import __onProcessExit from '../process/onProcessExit';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
-if (!__isChildProcess()) {
-  __hotkey('ctrl+c', {
-    once: true
-  }).on('press', () => {
-    if (!global.sBlessedComponentScreen) return;
-    global.sBlessedComponentScreen.destroy();
-  });
-}
 const cls: ISBlessedComponentCtor = class SBlessedComponent
   extends __blessed.box
   implements ISBlessedComponent {
@@ -63,6 +54,40 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _settings: ISBlessedComponentSettings = {};
+
+  /**
+   * @name              getScreen
+   * @type              Function
+   * @static
+   *
+   * Get the screen initiated when using some SBlessedComponent instances
+   *
+   * @return      {Screen}          The blessed screen instance
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static getScreen() {
+    return SBlessedComponent.screen;
+  }
+
+  /**
+   * @name              destroyScreen
+   * @type              Function
+   * @static
+   *
+   * Get the screen initiated when using some SBlessedComponent instances
+   *
+   * @return      {Screen}          The blessed screen instance
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static destroyScreen() {
+    if (!SBlessedComponent.getScreen()) return;
+    SBlessedComponent.getScreen().destroy();
+    SBlessedComponent.screen = undefined;
+  }
 
   /**
    * @name                  _framerateInterval
@@ -131,6 +156,9 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
       SBlessedComponent.screen.on('destroy', () => {
         SBlessedComponent.screen = null;
       });
+      __onProcessExit(() => {
+        SBlessedComponent.destroyScreen();
+      });
     }
 
     // extends parent
@@ -141,14 +169,12 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
 
     // save screen reference
     this._screen = SBlessedComponent.screen;
-    global.sBlessedComponentScreen = SBlessedComponent.screen;
 
     // keep track of the component status
-    this._isDisplayed = false;
     this.on('attach', () => {
       this._isDisplayed = true;
       setTimeout(() => {
-        this.update();
+        if (this.isDisplayed()) this.update();
       }, 200);
     });
     this.on('detach', () => {
@@ -164,22 +190,12 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
       SBlessedComponent.screen.append(this);
     }
 
-    __onProcessExit(async () => {
-      try {
-        global.sBlessedComponentScreen &&
-          global.sBlessedComponentScreen.destroy();
-      } catch (e) {}
-      this._destroyed = true;
-      this.detach();
-      return true;
-    });
-
     if (this.parent) {
-      this.update();
+      if (this.isDisplayed()) this.update();
     } else {
       this.on('attach', () => {
         setTimeout(() => {
-          this.update();
+          if (this.isDisplayed()) this.update();
         });
       });
     }
@@ -191,10 +207,8 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
       try {
         const originalHeight = this.height;
         this.height = 0;
-        // this.render();
         height = this.getScrollHeight();
         this.height = originalHeight;
-        // this.render();
       } catch (e) {}
     }
     return height;
@@ -230,7 +244,7 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
    */
   _renderAfterNotAllowedTimeout = null;
   update() {
-    if (this.isDestroyed()) return;
+    if (this.isDestroyed() || !this.isDisplayed()) return;
     if (this._screen) {
       this._screen.render();
     }
@@ -248,7 +262,7 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   isDisplayed() {
-    return this._isDisplayed;
+    return this._isDisplayed && SBlessedComponent.getScreen();
   }
 
   /**
@@ -282,5 +296,14 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
     return this;
   }
 };
+
+if (!__isChildProcess()) {
+  __hotkey('ctrl+c', {
+    once: true
+  }).on('press', () => {
+    if (!SBlessedComponent.screen) return;
+    SBlessedComponent.screen.destroy();
+  });
+}
 
 export = cls;

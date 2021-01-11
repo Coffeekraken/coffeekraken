@@ -6,7 +6,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const STsCompileProcess_1 = __importDefault(require("../../node/typescript/compile/STsCompileProcess"));
 function compileTs(stringArgs = '') {
     const pro = new STsCompileProcess_1.default({
-        stdio: 'inherit'
+        stdio: 'inherit',
+        exitAtEnd: true
     });
     pro.run(stringArgs);
 }

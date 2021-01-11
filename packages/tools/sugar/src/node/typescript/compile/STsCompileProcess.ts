@@ -48,7 +48,6 @@ const Cls: ISCompileTsProcessCtor = class SCompileTsProcess
     });
 
     this._tsCompiler = new __STsCompiler({});
-
   }
 
   /**

@@ -24,23 +24,23 @@ module.exports = {
           }
         }
       }
-    },
-    compileTs: {
-      id: 'compileTs',
-      name: 'Compile Typescript',
-      autoRun: true,
-      description:
-        'Expose an HTTP server using ExpressJs and serve requested files, views, etc...',
-      processPath: `${__packageRoot(
-        __dirname
-      )}/src/node/typescript/compile/SCompileTsProcess`,
-      stdio: ['terminal', 'socket'],
-      params: {
-        stacks: ['js', 'node'],
-        transpileOnly: true,
-        watch: true
-      }
     }
+    // compileTs: {
+    //   id: 'compileTs',
+    //   name: 'Compile Typescript',
+    //   autoRun: true,
+    //   description:
+    //     'Expose an HTTP server using ExpressJs and serve requested files, views, etc...',
+    //   processPath: `${__packageRoot(
+    //     __dirname
+    //   )}/src/node/typescript/compile/SCompileTsProcess`,
+    //   stdio: ['terminal', 'socket'],
+    //   params: {
+    //     stacks: ['js', 'node'],
+    //     transpileOnly: true,
+    //     watch: true
+    //   }
+    // }
     // buildScss: {
     //   id: 'buildScss',
     //   name: 'Sugar App Build SCSS',

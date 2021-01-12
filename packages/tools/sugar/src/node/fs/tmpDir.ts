@@ -37,7 +37,7 @@ const fn: ITmpDir = function (settings: ITmpDirSettings = {}) {
     ...settings
   };
   if (settings.scope === 'local') {
-    const tmpDir = __sugarConfig('storage.tempFolderPath');
+    const tmpDir = __sugarConfig('storage.tempDir');
     if (tmpDir !== undefined) {
       __ensureDirSync(tmpDir);
       return tmpDir;

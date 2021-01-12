@@ -33,6 +33,7 @@ function getScssSharedResourcesString(array = null) {
     if (typeof importItem === 'string') {
       if (importItem === 'sugar') {
         const settings = __sugarConfig('scss');
+        delete settings.compile;
         const settingsString = __jsObjectToScssMap(settings);
         const path = __isInPackage('coffeekraken', process.cwd(), true)
           ? __path.resolve(

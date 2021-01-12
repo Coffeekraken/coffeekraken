@@ -75,9 +75,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        function SCacheLsAdapter(settings) {
+        function SCacheLsAdapter(cache, settings) {
             if (settings === void 0) { settings = {}; }
-            return _super.call(this, deepMerge_1.default({}, settings)) || this;
+            return _super.call(this, cache, deepMerge_1.default({}, settings)) || this;
         }
         /**
          * @name                          set
@@ -101,7 +101,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     // store data into localStorage
-                    window.localStorage.setItem(this._settings.name + "." + name, value);
+                    window.localStorage.setItem(this.cache.name + "." + name, value);
                     // write has been done correctly
                     return [2 /*return*/, true];
                 });
@@ -124,7 +124,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         SCacheLsAdapter.prototype.get = function (name) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, window.localStorage.getItem(this._settings.name + "." + name)];
+                    return [2 /*return*/, window.localStorage.getItem(this.cache.name + "." + name)];
                 });
             });
         };
@@ -146,7 +146,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
                     // delete the item from the localStorage
-                    window.localStorage.removeItem(this._settings.name + "." + name);
+                    window.localStorage.removeItem(this.cache.name + "." + name);
                     // return true cause all went well
                     return [2 /*return*/, true];
                 });
@@ -158,7 +158,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * Clear all the items in the current cache
          *
-         * @param             {String}              cacheName              The current cache name to delete
          * @return            {Boolean}                               true if all of, false if not...
          *
          * @example           js
@@ -166,13 +165,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        SCacheLsAdapter.prototype.clear = function (cacheName) {
+        SCacheLsAdapter.prototype.clear = function () {
             return __awaiter(this, void 0, void 0, function () {
                 var keys, keysToDelete;
+                var _this = this;
                 return __generator(this, function (_a) {
                     keys = Object.keys(window.localStorage);
                     keysToDelete = keys.filter(function (key) {
-                        return key.startsWith(cacheName + ".");
+                        return key.startsWith(_this.cache.name + ".");
                     });
                     // loop on each keys to delete
                     keysToDelete.forEach(function (k) {
@@ -190,7 +190,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * Return an array of all the items keys saved in this cache instance
          *
-         * @param             {String}              cacheName              The current cache name to get keys from
          * @return        {Promise}                     A promise resolved with the array of keys
          *
          * @example         js
@@ -198,13 +197,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        SCacheLsAdapter.prototype.keys = function (cacheName) {
+        SCacheLsAdapter.prototype.keys = function () {
             return __awaiter(this, void 0, void 0, function () {
                 var keys, cacheKeys;
+                var _this = this;
                 return __generator(this, function (_a) {
                     keys = Object.keys(window.localStorage);
                     cacheKeys = keys.filter(function (key) {
-                        return key.startsWith(cacheName + ".");
+                        return key.startsWith(_this.cache.name + ".");
                     });
                     // return the cache keys
                     return [2 /*return*/, cacheKeys];

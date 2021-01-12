@@ -288,11 +288,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     }
                 }
             });
-            Object.defineProperty(_this_1, '_settings', {
-                writable: true,
-                configurable: true,
-                enumerable: false,
-                value: deepMerge_1.default({
+            var promiseSettings = deepMerge_1.default({
+                promise: {
                     treatCancelAs: 'resolve',
                     bufferTimeout: 100,
                     bufferedStacks: [
@@ -312,13 +309,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     },
                     destroyTimeout: 5000,
                     id: uniqid_1.default()
-                }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings)
-            });
-            if (_this_1._settings.destroyTimeout !== -1) {
+                }
+            }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings);
+            if (_this_1._settings === undefined) {
+                Object.defineProperty(_this_1, '_settings', {
+                    writable: true,
+                    configurable: true,
+                    enumerable: false,
+                    value: promiseSettings
+                });
+            }
+            else {
+                _this_1._settings = deepMerge_1.default(_this_1._settings, promiseSettings);
+            }
+            if (_this_1._settings.promise.destroyTimeout !== -1) {
                 _this_1.on('finally', function () {
                     setTimeout(function () {
                         _this_1._destroy();
-                    }, _this_1._settings.destroyTimeout);
+                    }, _this_1._settings.promise.destroyTimeout);
                 });
             }
             return _this_1;
@@ -417,7 +425,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @author 		Olivier Bossel<olivier.bossel@gmail.com>
              */
             get: function () {
-                return this._settings.id;
+                return this._settings.promise.id;
             },
             enumerable: false,
             configurable: true
@@ -741,7 +749,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             //   stacksResult.__proto__.promise = this;
                             // }
                             // resolve the master promise
-                            if (this._settings.treatCancelAs === 'reject') {
+                            if (this._settings.promise.treatCancelAs === 'reject') {
                                 this._resolvers.reject(stacksResult);
                             }
                             else {
@@ -846,8 +854,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             var callNumber = settings.callNumber;
             // process the args
             if (callNumber === undefined &&
-                this._settings.defaultCallTime[stack] !== undefined) {
-                callNumber = this._settings.defaultCallTime[stack];
+                this._settings.promise.defaultCallTime[stack] !== undefined) {
+                callNumber = this._settings.promise.defaultCallTime[stack];
             }
             else if (callNumber === undefined) {
                 callNumber = -1;
@@ -869,7 +877,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         }
                         return true;
                     });
-                }, this._settings.bufferTimeout);
+                }, this._settings.promise.bufferTimeout);
             }
             // maintain chainability
             return this;
@@ -924,8 +932,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             });
                             // handle buffers
                             if (stackArray.length === 0) {
-                                for (i = 0; i < this._settings.bufferedStacks.length; i++) {
-                                    bufferedStack = this._settings.bufferedStacks[i];
+                                for (i = 0; i < this._settings.promise.bufferedStacks.length; i++) {
+                                    bufferedStack = this._settings.promise.bufferedStacks[i];
                                     if (minimatch_1.default(stack, bufferedStack)) {
                                         this._buffer.push({
                                             stack: stack,
@@ -947,7 +955,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             metasObj = deepMerge_1.default({
                                 stack: stack,
                                 originalStack: stack,
-                                id: this._settings.id,
+                                id: this._settings.promise.id,
                                 state: this._promiseState,
                                 time: Date.now(),
                                 level: 1
@@ -1278,7 +1286,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             // destroying all the callbacks stacks registered
             delete this._stacks;
             delete this._resolvers;
-            delete this._settings;
+            delete this._settings.promise;
             this._isDestroyed = true;
         };
         return SPromise;

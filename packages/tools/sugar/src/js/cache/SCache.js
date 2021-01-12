@@ -1,5 +1,16 @@
 // @ts-nocheck
 // @shared
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -137,6 +148,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 stringify: JSON.stringify
             }, settings);
         }
+        Object.defineProperty(SCache.prototype, "name", {
+            get: function () {
+                return this._name;
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * @name                            adapter
          * @type                            SCacheAdapter
@@ -158,7 +176,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         adptr = require(this._defaultAdaptersPaths[adapter]);
                         if (adptr.default)
                             adptr = adptr.default;
-                        this._adapter = new adptr(this._settings);
+                        this._adapter = new adptr(this, this._settings);
                     }
                     else if (adapter instanceof SCacheAdapter_1.default) {
                         this._adapter = adapter;
@@ -176,7 +194,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * Get a value back from the cache using the specified adapter in the settings
          *
          * @param               {String|Array|Object}              name              The name of the item to get back from the cache. If not a string, will be hased using md5 encryption
-         * @param               {Boolean}             [valueOnly=true]  Specify if you want the value only or the all cache object
+         * @param               {Boolean}                   [settings={}]       Some settings to configure your process
          * @return              {Promise}                               A promise that will be resolved once the item has been getted
          *
          * @example             js
@@ -184,13 +202,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        SCache.prototype.get = function (name, valueOnly) {
-            if (valueOnly === void 0) { valueOnly = true; }
+        SCache.prototype.get = function (name, settings) {
+            if (settings === void 0) { settings = {}; }
             return __awaiter(this, void 0, void 0, function () {
-                var adapter, rawValue, value;
+                var adapter, rawValue, value, contextHash;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
+                            settings = __assign({ valueOnly: true }, settings);
                             // check the name
                             if (typeof name !== 'string') {
                                 name = md5_1.default(toString_1.default(name)).toString();
@@ -198,7 +217,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             return [4 /*yield*/, this.getAdapter()];
                         case 1:
                             adapter = _a.sent();
-                            return [4 /*yield*/, adapter.get(this._name + "." + name)];
+                            return [4 /*yield*/, adapter.get(name)];
                         case 2:
                             rawValue = _a.sent();
                             // check that we have a value back
@@ -207,6 +226,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             value = adapter.parse
                                 ? adapter.parse(rawValue)
                                 : this._parse(rawValue);
+                            // check the hash
+                            if (settings.hash && value.hash && settings.hash !== value.hash) {
+                                return [2 /*return*/, null];
+                            }
+                            // check context hash
+                            if (settings.context && value.contextHash) {
+                                contextHash = md5_1.default.encrypt(toString_1.default(settings.context));
+                                if (contextHash !== value.contextHash)
+                                    return [2 /*return*/, null];
+                            }
                             if (!(value.deleteAt !== -1 && value.deleteAt < new Date().getTime())) return [3 /*break*/, 5];
                             if (!value.deleteOnExpire) return [3 /*break*/, 4];
                             return [4 /*yield*/, adapter.delete(name)];
@@ -219,7 +248,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         case 5:
                             // otherwise, this is good so return the item
                             // either the value only, or the full cache object
-                            if (valueOnly)
+                            if (settings.valueOnly)
                                 return [2 /*return*/, value.value];
                             return [2 /*return*/, value];
                     }
@@ -251,7 +280,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         SCache.prototype.set = function (name, value, settings) {
             if (settings === void 0) { settings = {}; }
             return __awaiter(this, void 0, void 0, function () {
-                var adapter, existingValue, finalSettings, deleteAt, valueToSave, stringifiedValueToSave;
+                var hash, settingsHash, contextHash, adapter, existingValue, finalSettings, deleteAt, valueToSave, stringifiedValueToSave;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
@@ -259,9 +288,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             if (typeof name !== 'string') {
                                 name = md5_1.default(toString_1.default(name)).toString();
                             }
-                            // test name
-                            if (!/^[a-zA-Z0-9_\-\+\.]+$/.test(name)) {
-                                throw new Error("You try to set an item named \"<yellow>" + name + "</yellow>\" in the \"" + this._name + "\" SCache instance but an item name can contain only these characters <green>[a-zA-Z0-9_-.]</green> but you've passed \"<red>" + name + "</red>\"...");
+                            hash = null;
+                            settingsHash = settings.hash
+                                ? !Array.isArray(settings.hash)
+                                    ? [settings.hash]
+                                    : settings.hash
+                                : [];
+                            hash = md5_1.default.encrypt(name + ("" + settingsHash.join('.')));
+                            contextHash = null;
+                            if (settings.context !== undefined) {
+                                contextHash = md5_1.default.encrypt(toString_1.default(settings.context));
                             }
                             return [4 /*yield*/, this.getAdapter()];
                         case 1:
@@ -282,6 +318,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                             valueToSave = {
                                 name: name,
                                 value: value,
+                                hash: hash,
+                                contextHash: contextHash,
                                 created: existingValue ? existingValue.created : new Date().getTime(),
                                 updated: new Date().getTime(),
                                 deleteAt: deleteAt,
@@ -291,7 +329,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                 ? adapter.stringify(valueToSave)
                                 : this._stringify(valueToSave);
                             // use the adapter to save the value
-                            return [2 /*return*/, adapter.set(this._name + "." + name, stringifiedValueToSave)];
+                            return [2 /*return*/, adapter.set(name, stringifiedValueToSave)];
                     }
                 });
             });
@@ -350,7 +388,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         case 1:
                             adapter = _a.sent();
                             // delete the item
-                            return [2 /*return*/, adapter.delete(this._name + "." + name)];
+                            return [2 /*return*/, adapter.delete(name)];
                     }
                 });
             });
@@ -377,7 +415,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         case 1:
                             adapter = _a.sent();
                             // clear the cache
-                            return [2 /*return*/, adapter.clear(this._name)];
+                            return [2 /*return*/, adapter.clear()];
                     }
                 });
             });

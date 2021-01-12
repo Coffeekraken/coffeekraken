@@ -34,8 +34,8 @@ export = class SCacheLsAdapter extends __SCacheAdapter {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
-    super(__deepMerge({}, settings));
+  constructor(cache, settings = {}) {
+    super(cache, __deepMerge({}, settings));
   }
 
   /**
@@ -58,7 +58,7 @@ export = class SCacheLsAdapter extends __SCacheAdapter {
    */
   async set(name, value) {
     // store data into localStorage
-    window.localStorage.setItem(`${this._settings.name}.${name}`, value);
+    window.localStorage.setItem(`${this.cache.name}.${name}`, value);
     // write has been done correctly
     return true;
   }
@@ -78,7 +78,7 @@ export = class SCacheLsAdapter extends __SCacheAdapter {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async get(name) {
-    return window.localStorage.getItem(`${this._settings.name}.${name}`);
+    return window.localStorage.getItem(`${this.cache.name}.${name}`);
   }
 
   /**
@@ -97,7 +97,7 @@ export = class SCacheLsAdapter extends __SCacheAdapter {
    */
   async delete(name) {
     // delete the item from the localStorage
-    window.localStorage.removeItem(`${this._settings.name}.${name}`);
+    window.localStorage.removeItem(`${this.cache.name}.${name}`);
 
     // return true cause all went well
     return true;
@@ -109,7 +109,6 @@ export = class SCacheLsAdapter extends __SCacheAdapter {
    *
    * Clear all the items in the current cache
    *
-   * @param             {String}              cacheName              The current cache name to delete
    * @return            {Boolean}                               true if all of, false if not...
    *
    * @example           js
@@ -117,13 +116,13 @@ export = class SCacheLsAdapter extends __SCacheAdapter {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async clear(cacheName) {
+  async clear() {
     // get all the localStorage keys to filter them
     const keys = Object.keys(window.localStorage);
 
     // filter the keys to delete
     const keysToDelete = keys.filter((key) => {
-      return key.startsWith(`${cacheName}.`);
+      return key.startsWith(`${this.cache.name}.`);
     });
 
     // loop on each keys to delete
@@ -142,7 +141,6 @@ export = class SCacheLsAdapter extends __SCacheAdapter {
    *
    * Return an array of all the items keys saved in this cache instance
    *
-   * @param             {String}              cacheName              The current cache name to get keys from
    * @return        {Promise}                     A promise resolved with the array of keys
    *
    * @example         js
@@ -150,16 +148,16 @@ export = class SCacheLsAdapter extends __SCacheAdapter {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async keys(cacheName) {
+  async keys() {
     // get all the localStorage keys to filter them
     const keys = Object.keys(window.localStorage);
 
     // filter the keys to get only the ones that bellongs to this cache instance
     const cacheKeys = keys.filter((key) => {
-      return key.startsWith(`${cacheName}.`);
+      return key.startsWith(`${this.cache.name}.`);
     });
 
     // return the cache keys
     return cacheKeys;
   }
-}
+};

@@ -6,27 +6,27 @@ module.exports = {
    * @name            rootDir
    * @namespace       config.views
    * @type            String
-   * @default          ${__packageRoot()}/src/views
+   * @default          [config.storage.srcDir]/views
    *
    * Specify the root views directory
    *
    * @since       2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  rootDir: `${__packageRoot()}/src/views`,
+  rootDir: `[config.storage.srcDir]/views`,
 
   /**
    * @name            cacheDir
    * @namespace       config.views
    * @type            String
-   * @default          [config.cache.fs.rootDir]
+   * @default          [config.storage.cacheDir]
    *
    * Specify the views template rendering cache directory
    *
    * @since       2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  cacheDir: `[config.storage.cacheFolderPath]/views`,
+  cacheDir: `[config.storage.cacheDir]/views`,
 
   /**
    * @name      engines

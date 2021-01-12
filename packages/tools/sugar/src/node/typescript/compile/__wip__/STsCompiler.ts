@@ -21,7 +21,10 @@ import __isGlob from 'is-glob';
 import __unique from '../../array/unique';
 import __STsCompileInterface from './interface/STsCompileInterface';
 import __transpileAndSave from './transpileAndSave';
+import __relative from '../../path/relative';
+import __absolute from '../../path/absolute';
 
+import __SCompiler from '../../compiler/SCompiler';
 import __TscInterface from './interface/TscInterface';
 import __SFile from '../../fs/SFile';
 import __tmpDir from '../../fs/tmpDir';
@@ -31,6 +34,7 @@ import __SCliProcess from '../../process/SCliProcess';
  * @name                STsCompiler
  * @namespace           sugar.node.typescript
  * @type                Class
+ * @extends             SCompiler
  * @wip
  *
  * This class wrap the "ts" compiler with some additional features which are:
@@ -59,18 +63,8 @@ import __SCliProcess from '../../process/SCliProcess';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class STsCompiler {
-  /**
-   * @name            _settings
-   * @type            Object
-   * @private
-   *
-   * Store the instance settings
-   *
-   * @since           2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _settings = {};
+export = class STsCompiler extends __SCompiler {
+  static interface = __STsCompileInterface;
 
   /**
    * @name            constructor
@@ -83,16 +77,11 @@ export = class STsCompiler {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings = {}) {
-    this._settings = __deepMerge(
-      {
-        id: this.constructor.name
-      },
-      settings
-    );
+    super(__deepMerge({}, settings));
   }
 
   /**
-   * @name              compile
+   * @name              _compile
    * @type              Function
    * @async
    *
@@ -106,14 +95,7 @@ export = class STsCompiler {
    * @since             2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  compile(params, settings = {}) {
-    params = __deepMerge(
-      {
-        ...__STsCompileInterface.getDefaultValues()
-      },
-      params
-    );
-
+  _compile(input, settings = {}) {
     settings = __deepMerge(this._settings, settings);
 
     return new __SPromise(
@@ -124,125 +106,143 @@ export = class STsCompiler {
         const cache = new __SCache(settings.id, {
           ttl: '10d'
         });
-        if (params.clearCache) {
+        if (settings.clearCache) {
           await cache.clear();
         }
         let cacheId;
         const tmpDir: string = __tmpDir();
-        const stacks = {};
 
-        if (params.stacks !== undefined && params.project !== undefined) {
-          return reject(
-            `Sorry but you cannot specify the "<yellow>project</yellow>" and the "<yellow>stacks</yellow>" parameters at the same time...`
-          );
-        }
+        const stacksPromises = [];
 
-        const filesToCompile = [
-          ...(params.tsconfig.include || []),
-          ...(params.tsconfig.files || [])
-        ];
+        const tsconfig = {
+          ...settings.tsconfig
+        };
+        if (!tsconfig.files) tsconfig.files = [];
+        if (!tsconfig.include) tsconfig.include = [];
 
-        if (params.input != undefined) {
-          if (!Array.isArray(params.input)) params.input = [params.input];
-
-          trigger('log', {
-            value: `<yellow>Input</yellow> file(s) to compile:\n- <cyan>${params.input.join(
-              '</cyan>\n- <cyan>'
-            )}</cyan>`
-          });
-
-          const tsconfigJson = __deepMerge(params.tsconfig, {
-            files: [...filesToCompile, ...params.input]
-          });
-
-          const filesHash = __md5.encrypt(params.input.join(','));
-
-          stacks[params.input] = {
-            tsconfigJson,
-            tsconfigPath: `${tmpDir}/ts/tsconfig.${settings.id}.input.${filesHash}.json`
-          };
-        } else if (params.stacks !== undefined) {
-          trigger('log', {
-            value: `<yellow>Stack(s)</yellow> to compile: <magenta>${params.stacks.join(
-              '</magenta>, <magenta>'
-            )}</magenta>`
-          });
-
-          params.stacks.forEach(async (stack) => {
-            if (params.tsconfig.stacks[stack] === undefined) {
-              return reject(`You try to compile the stack "<yellow>${stack}</yellow>" but it is not defined in your "<cyan>ts.config.js</cyan>" file. Here's the available stacks:
-          - ${Object.keys(params.tsconfig.stacks).join('\n- ')}`);
+        // process inputs
+        const absoluteInput = __absolute(input);
+        absoluteInput.forEach((inputStr) => {
+          if (__isGlob(inputStr)) {
+            if (settings.watch === true) {
+              tsconfig.include.push(inputStr);
+            } else {
+              const globFiles = __glob.sync(inputStr);
+              tsconfig.files = [...tsconfig.files, ...globFiles];
             }
+          } else if (this.isStack(inputStr, tsconfig)) {
+            const stackPromise = this.compile();
 
-            // generate the final config
-            const tsconfigJson = __deepMerge(
-              params.tsconfig,
-              params.tsconfig.stacks[stack],
-              {
-                files: [
-                  ...filesToCompile,
-                  ...(tsconfig.stacks[stack].include || []),
-                  ...(tsconfig.stacks[stack].files || [])
-                ]
-              }
-            );
-
-            stacks[stack] = {
-              tsconfigJson,
-              tsconfigPath: `${tmpDir}/ts/tsconfig.${settings.id}.stack.${stack}.json`
-            };
-          });
-        } else if (params.project !== undefined) {
-          trigger('log', {
-            value: `<yellow>Project(s)</yellow> to compile:\n- <magenta>${params.stacks.join(
-              '</magenta>\n- <magenta>'
-            )}</magenta>`
-          });
-
-          // loop on each configs to generate the final ones
-          params.project.forEach(async (configFile) => {
-            // read the file
-            const configJson = configFile.readSync();
-            // extend using the passed "settings"
-            const finalConfigJson = __deepMerge(
-              params.tsconfig,
-              configJson,
-              settings
-            );
-            if (!finalConfigJson.compilerOptions)
-              finalConfigJson.compilerOptions = {};
-            finalConfigJson.compilerOptions.noEmit = true;
-
-            finalConfigJson.files = [
-              ...filesToCompile,
-              ...(finalConfigJson.include || []),
-              ...(finalConfigJson.files || [])
-            ];
-
-            stacks[configFile.path] = {
-              tsconfigJson: finalConfigJson,
-              tsconfigPath: `${tmpDir}/ts/tsconfig.${__md5.encrypt(
-                configFile.path
-              )}.json`
-            };
-          });
-        } else {
-          trigger('log', {
-            value: `Compiling default project: <cyan>${__packageRoot()}/tsconfig.json</cyan>`
-          });
-
-          // try to load the default file at the project root
-          const tsconfigPath = `${__packageRoot()}/tsconfig.${
-            settings.id
-          }.json`;
-          if (__fs.existsSync(tsconfigPath) === true) {
-            const tsconfigJson = require(tsconfigPath);
-            stacks['tsconfig.json'] = {
-              tsconfigJson,
-              tsconfigPath
-            };
+            tsconfig = __deepMerge(tsconfig, tsconfig.stacks[inputStr]);
+          } else if (__fs.existsSync(inputStr)) {
+            tsconfig.files.push(inputStr);
           }
-        }
+        });
+
+        tsconfig.files = __absolute(tsconfig.files);
+        tsconfig.include = __absolute(tsconfig.include);
+
+        // if (params.input != undefined) {
+        //   if (!Array.isArray(params.input)) params.input = [params.input];
+
+        //   trigger('log', {
+        //     value: `<yellow>Input</yellow> file(s) to compile:\n- <cyan>${params.input.join(
+        //       '</cyan>\n- <cyan>'
+        //     )}</cyan>`
+        //   });
+
+        //   const tsconfigJson = __deepMerge(params.tsconfig, {
+        //     files: [...filesToCompile, ...params.input]
+        //   });
+
+        //   const filesHash = __md5.encrypt(params.input.join(','));
+
+        //   stacks[params.input] = {
+        //     tsconfigJson,
+        //     tsconfigPath: `${tmpDir}/ts/tsconfig.${settings.id}.input.${filesHash}.json`
+        //   };
+        // } else if (params.stacks !== undefined) {
+        //   trigger('log', {
+        //     value: `<yellow>Stack(s)</yellow> to compile: <magenta>${params.stacks.join(
+        //       '</magenta>, <magenta>'
+        //     )}</magenta>`
+        //   });
+
+        //   params.stacks.forEach(async (stack) => {
+        //     if (params.tsconfig.stacks[stack] === undefined) {
+        //       return reject(`You try to compile the stack "<yellow>${stack}</yellow>" but it is not defined in your "<cyan>ts.config.js</cyan>" file. Here's the available stacks:
+        //   - ${Object.keys(params.tsconfig.stacks).join('\n- ')}`);
+        //     }
+
+        //     // generate the final config
+        //     const tsconfigJson = __deepMerge(
+        //       params.tsconfig,
+        //       params.tsconfig.stacks[stack],
+        //       {
+        //         files: [
+        //           ...filesToCompile,
+        //           ...(tsconfig.stacks[stack].include || []),
+        //           ...(tsconfig.stacks[stack].files || [])
+        //         ]
+        //       }
+        //     );
+
+        //     stacks[stack] = {
+        //       tsconfigJson,
+        //       tsconfigPath: `${tmpDir}/ts/tsconfig.${settings.id}.stack.${stack}.json`
+        //     };
+        //   });
+        // } else if (params.project !== undefined) {
+        //   trigger('log', {
+        //     value: `<yellow>Project(s)</yellow> to compile:\n- <magenta>${params.stacks.join(
+        //       '</magenta>\n- <magenta>'
+        //     )}</magenta>`
+        //   });
+
+        //   // loop on each configs to generate the final ones
+        //   params.project.forEach(async (configFile) => {
+        //     // read the file
+        //     const configJson = configFile.readSync();
+        //     // extend using the passed "settings"
+        //     const finalConfigJson = __deepMerge(
+        //       params.tsconfig,
+        //       configJson,
+        //       settings
+        //     );
+        //     if (!finalConfigJson.compilerOptions)
+        //       finalConfigJson.compilerOptions = {};
+        //     finalConfigJson.compilerOptions.noEmit = true;
+
+        //     finalConfigJson.files = [
+        //       ...filesToCompile,
+        //       ...(finalConfigJson.include || []),
+        //       ...(finalConfigJson.files || [])
+        //     ];
+
+        //     stacks[configFile.path] = {
+        //       tsconfigJson: finalConfigJson,
+        //       tsconfigPath: `${tmpDir}/ts/tsconfig.${__md5.encrypt(
+        //         configFile.path
+        //       )}.json`
+        //     };
+        //   });
+        // } else {
+        //   trigger('log', {
+        //     value: `Compiling default project: <cyan>${__packageRoot()}/tsconfig.json</cyan>`
+        //   });
+
+        //   // try to load the default file at the project root
+        //   const tsconfigPath = `${__packageRoot()}/tsconfig.${
+        //     settings.id
+        //   }.json`;
+        //   if (__fs.existsSync(tsconfigPath) === true) {
+        //     const tsconfigJson = require(tsconfigPath);
+        //     stacks['tsconfig.json'] = {
+        //       tsconfigJson,
+        //       tsconfigPath
+        //     };
+        //   }
+        // }
 
         if (Object.keys(stacks).length === 0) {
           return reject(
@@ -388,5 +388,24 @@ export = class STsCompiler {
         id: this._settings.id
       }
     );
+  }
+
+  /**
+   * @name        isStack
+   * @type        Function
+   *
+   * Check if the passed string is the name of a defined stack or not
+   *
+   * @param     {String}      stack       The stack to check
+   * @return    {Boolean}                 true if is a defined stack, false if not
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  isStack(stack, tsconfig = {}) {
+    console.log(stack, tsconfig);
+
+    if (!tsconfig.stacks) return false;
+    return tsconfig.stacks[stack] !== undefined;
   }
 };

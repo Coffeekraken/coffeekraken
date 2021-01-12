@@ -100,6 +100,9 @@ module.exports = class SCache {
             stringify: JSON.stringify
         }, settings);
     }
+    get name() {
+        return this._name;
+    }
     /**
      * @name                            adapter
      * @type                            SCacheAdapter
@@ -120,7 +123,7 @@ module.exports = class SCache {
                 let adptr = require(this._defaultAdaptersPaths[adapter]);
                 if (adptr.default)
                     adptr = adptr.default;
-                this._adapter = new adptr(this._settings);
+                this._adapter = new adptr(this, this._settings);
             }
             else if (adapter instanceof SCacheAdapter_1.default) {
                 this._adapter = adapter;
@@ -137,7 +140,7 @@ module.exports = class SCache {
      * Get a value back from the cache using the specified adapter in the settings
      *
      * @param               {String|Array|Object}              name              The name of the item to get back from the cache. If not a string, will be hased using md5 encryption
-     * @param               {Boolean}             [valueOnly=true]  Specify if you want the value only or the all cache object
+     * @param               {Boolean}                   [settings={}]       Some settings to configure your process
      * @return              {Promise}                               A promise that will be resolved once the item has been getted
      *
      * @example             js
@@ -145,8 +148,9 @@ module.exports = class SCache {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    get(name, valueOnly = true) {
+    get(name, settings = {}) {
         return __awaiter(this, void 0, void 0, function* () {
+            settings = Object.assign({ valueOnly: true }, settings);
             // check the name
             if (typeof name !== 'string') {
                 name = md5_1.default(toString_1.default(name)).toString();
@@ -154,7 +158,7 @@ module.exports = class SCache {
             // get the adapter
             const adapter = yield this.getAdapter();
             // using the specified adapter to get the value back
-            const rawValue = yield adapter.get(`${this._name}.${name}`);
+            const rawValue = yield adapter.get(name);
             // check that we have a value back
             if (!rawValue || typeof rawValue !== 'string')
                 return null;
@@ -162,6 +166,16 @@ module.exports = class SCache {
             const value = adapter.parse
                 ? adapter.parse(rawValue)
                 : this._parse(rawValue);
+            // check the hash
+            if (settings.hash && value.hash && settings.hash !== value.hash) {
+                return null;
+            }
+            // check context hash
+            if (settings.context && value.contextHash) {
+                const contextHash = md5_1.default.encrypt(toString_1.default(settings.context));
+                if (contextHash !== value.contextHash)
+                    return null;
+            }
             // check if the item is too old...
             if (value.deleteAt !== -1 && value.deleteAt < new Date().getTime()) {
                 // this item has to be deleted
@@ -172,7 +186,7 @@ module.exports = class SCache {
             }
             // otherwise, this is good so return the item
             // either the value only, or the full cache object
-            if (valueOnly)
+            if (settings.valueOnly)
                 return value.value;
             return value;
         });
@@ -206,8 +220,22 @@ module.exports = class SCache {
                 name = md5_1.default(toString_1.default(name)).toString();
             }
             // test name
-            if (!/^[a-zA-Z0-9_\-\+\.]+$/.test(name)) {
-                throw new Error(`You try to set an item named "<yellow>${name}</yellow>" in the "${this._name}" SCache instance but an item name can contain only these characters <green>[a-zA-Z0-9_-.]</green> but you've passed "<red>${name}</red>"...`);
+            // if (!/^[a-zA-Z0-9_\-\+\.]+$/.test(name)) {
+            //   throw new Error(
+            //     `You try to set an item named "<yellow>${name}</yellow>" in the "${this._name}" SCache instance but an item name can contain only these characters <green>[a-zA-Z0-9_-.]</green> but you've passed "<red>${name}</red>"...`
+            //   );
+            // }
+            // generate a hash
+            let hash = null;
+            let settingsHash = settings.hash
+                ? !Array.isArray(settings.hash)
+                    ? [settings.hash]
+                    : settings.hash
+                : [];
+            hash = md5_1.default.encrypt(name + `${settingsHash.join('.')}`);
+            let contextHash = null;
+            if (settings.context !== undefined) {
+                contextHash = md5_1.default.encrypt(toString_1.default(settings.context));
             }
             // get the adapter
             const adapter = yield this.getAdapter();
@@ -228,6 +256,8 @@ module.exports = class SCache {
             const valueToSave = {
                 name,
                 value,
+                hash,
+                contextHash,
                 created: existingValue ? existingValue.created : new Date().getTime(),
                 updated: new Date().getTime(),
                 deleteAt,
@@ -238,7 +268,7 @@ module.exports = class SCache {
                 ? adapter.stringify(valueToSave)
                 : this._stringify(valueToSave);
             // use the adapter to save the value
-            return adapter.set(`${this._name}.${name}`, stringifiedValueToSave);
+            return adapter.set(name, stringifiedValueToSave);
         });
     }
     /**
@@ -285,7 +315,7 @@ module.exports = class SCache {
             // get the adapter
             const adapter = yield this.getAdapter();
             // delete the item
-            return adapter.delete(`${this._name}.${name}`);
+            return adapter.delete(name);
         });
     }
     /**
@@ -306,7 +336,7 @@ module.exports = class SCache {
             // get the adapter
             const adapter = yield this.getAdapter();
             // clear the cache
-            return adapter.clear(this._name);
+            return adapter.clear();
         });
     }
     /**

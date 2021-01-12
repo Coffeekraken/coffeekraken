@@ -3,6 +3,7 @@
 import __SInterface from '../../../interface/SInterface';
 import __sugarConfig from '../../../config/sugar';
 import __TscInterface from './TscInterface';
+import __packageRoot from '../../../path/packageRoot';
 
 /**
  * @name                STsCompileInterface
@@ -23,18 +24,10 @@ import __TscInterface from './TscInterface';
  */
 export = class STsCompileInterface extends __SInterface {
   static definition = {
-    // ...__TscInterface.definition,
-    project: {
-      type: 'Array<File>',
-      alias: 'p'
-    },
-    stacks: {
-      type: 'Array<String>',
-      alias: 's'
-    },
     input: {
-      type: 'String',
-      alias: 'i'
+      type: 'String|Array<String>',
+      alias: 'i',
+      default: `${__packageRoot()}/tsconfig.json`
     },
     cache: {
       type: 'Boolean',
@@ -57,7 +50,12 @@ export = class STsCompileInterface extends __SInterface {
       default: __sugarConfig('ts')
     },
     transpileOnly: {
-      type: 'Boolean'
+      type: 'Boolean',
+      default: false
+    },
+    watch: {
+      type: 'Boolean',
+      default: false
     }
   };
 };

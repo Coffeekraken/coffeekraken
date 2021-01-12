@@ -1,7 +1,4 @@
-@mixin style(
-  $name: s-filtrable-input
-) {
-
+@mixin SFiltrableInputStyle($name: s-filtrable-input) {
   .#{$name}__node {
     background-color: Sugar.color(primary);
   }
@@ -16,44 +13,40 @@
   }
 
   .#{$name}__list {
-    transition: all .1s ease-in-out;
+    transition: all 0.1s ease-in-out;
     transform: translateY(20px);
 
     .#{$name}__node:focus + &,
     &:focus {
       opacity: 1;
-      transform: translateY(0);  
+      transform: translateY(0);
     }
     .#{$name}--ontop & {
       transform: translateY(-50px);
       bottom: 100%;
       top: initial;
     }
-
   }
 
   .#{$name}__list-loading {
     padding: Sugar.lnf(padding);
     min-width: 100%;
   }
-    .#{$name}__list-loading-icon {
-      @include Sugar.loader-spinner(
-        $color: Sugar.color(primary),
-        $size: 1em
-      );
-      display: inline-block;
-    }
-    .#{$name}__list-loading-text {
-      white-space: nowrap;
-    }
+  .#{$name}__list-loading-icon {
+    @include Sugar.loader-spinner($color: Sugar.color(primary), $size: 1em);
+    display: inline-block;
+  }
+  .#{$name}__list-loading-text {
+    white-space: nowrap;
+  }
 
   .#{$name}__list-no-item {
     padding: Sugar.lnf(padding);
     min-width: 100%;
   }
-    .#{$name}__list-no-item-text {
-      white-space: nowrap;
-    }
+  .#{$name}__list-no-item-text {
+    white-space: nowrap;
+  }
   .#{$name}__list-item {
     padding: Sugar.lnf(padding);
 
@@ -83,5 +76,4 @@
     background-color: Sugar.color(primary, dark);
     color: white;
   }
-
 }

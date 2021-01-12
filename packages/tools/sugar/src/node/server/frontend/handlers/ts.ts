@@ -28,14 +28,10 @@ export = function ts(req, res, settings = {}) {
   const promise = new __SPromise();
 
   (async () => {
-    const defaultValuesObj = __STsCompileInterface.getDefaultValues();
-    const compiler = new __STsCompiler({
-      ...defaultValuesObj
-    });
+    const compiler = new __STsCompiler();
     const duration = new __SDuration();
-    const compilerPromise = compiler.compile({
+    const compilerPromise = compiler.compile(req.path.slice(1), {
       ...(req.query || {}),
-      input: req.path.slice(1),
       transpileOnly: true
     });
     __SPromise.pipe(compilerPromise, promise);
@@ -46,6 +42,7 @@ export = function ts(req, res, settings = {}) {
       promise.reject(e);
     });
     const compileRes = await compilerPromise;
+    return;
     if (compileRes.files) {
       let string = '';
       compileRes.files.forEach((file) => {

@@ -67,7 +67,13 @@ const Cls: ISCompileTsProcessCtor = class SCompileTsProcess
     params?: ISCompileTsProcessParams,
     settings?: ISCompileTsProcessSettings
   ): Promise<any> {
-    return this._tsCompiler.compile(params, settings);
+    const input = params.input;
+    delete params.input;
+
+    return this._tsCompiler.compile(input, {
+      ...settings,
+      ...params
+    });
   }
 };
 

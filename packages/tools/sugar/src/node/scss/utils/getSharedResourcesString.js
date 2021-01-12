@@ -34,6 +34,7 @@ function getScssSharedResourcesString(array = null) {
         if (typeof importItem === 'string') {
             if (importItem === 'sugar') {
                 const settings = sugar_1.default('scss');
+                delete settings.compile;
                 const settingsString = jsObjectToScssMap_1.default(settings);
                 const path = isInPackage_1.default('coffeekraken', process.cwd(), true)
                     ? path_1.default.resolve(packageRoot_1.default(__dirname, true), 'packages/tools/sugar/index')

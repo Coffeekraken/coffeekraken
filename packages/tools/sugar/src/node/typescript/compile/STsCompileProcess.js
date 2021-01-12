@@ -51,7 +51,9 @@ const Cls = (_a = class SCompileTsProcess extends SProcess_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         process(params, settings) {
-            return this._tsCompiler.compile(params, settings);
+            const input = params.input;
+            delete params.input;
+            return this._tsCompiler.compile(input, Object.assign(Object.assign({}, settings), params));
         }
     },
     _a.interface = SCompileTsProcessInterface_1.default,

@@ -50,6 +50,17 @@ export = class SCacheAdapter {
   _settings = {};
 
   /**
+   * @name            cache
+   * @type            SCache
+   *
+   * Store the cache instance which if used
+   *
+   * @since         2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  cache = null;
+
+  /**
    * @name                              constructor
    * @type                              Function
    *
@@ -59,8 +70,9 @@ export = class SCacheAdapter {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(cache, settings = {}) {
     // store the settings
     this._settings = settings;
+    this.cache = cache;
   }
 };

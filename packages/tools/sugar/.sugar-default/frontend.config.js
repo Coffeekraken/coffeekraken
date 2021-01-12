@@ -34,20 +34,20 @@ module.exports = {
    * @name              rootDir
    * @namespace         config.sugar-ui.modules.frontendServer.settings
    * @type              String
-   * @default           ${__packageRoot()}
+   * @default           [config.storage.rootDir]
    *
    * Specify the root directory to use for the frontend server
    *
    * @since             2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  rootDir: `${__packageRoot()}`,
+  rootDir: `[config.storage.rootDir]`,
 
   /**
    * @name              staticDirs
    * @namespace         config.sugar-ui.modules.frontendServer.settings
    * @type              Object<String>
-   * @default           '/dist': '${__packageRoot()}/dist'
+   * @default           [config.storage.rootDir]/dist
    *
    * Specify a directory that will be served as static files
    *
@@ -55,21 +55,21 @@ module.exports = {
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   staticDirs: {
-    '/dist': `${__packageRoot()}/dist`
+    '/dist': `[config.storage.rootDir]/dist`
   },
 
   /**
    * @name            viewsDir
    * @namespace       config.sugar-ui.modules.frontendServer.settings
    * @type            String
-   * @default         ${__packageRoot()}/views
+   * @default         [config.storage.rootDir]/views
    *
    * Specify the views directory path
    *
    * @since         2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  viewsDir: `${__packageRoot()}/src/views`,
+  viewsDir: `[config.storage.rootDir]/src/views`,
 
   middlewares: {
     resolveExtensionFreePath: {
@@ -163,42 +163,42 @@ module.exports = {
     //   handler: `${__dirname}/../src/node/server/frontend/handlers/homepage`
     // },
 
-    /**
-     * @name            ts
-     * @namespace       config.frontend.handlers
-     * @type            Object
-     *
-     * Handler for .ts files
-     *
-     * @since         2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    ts: {
-      /**
-       * @name          extension
-       * @namespace     config.frontend.handlers.sugar
-       * @type          String
-       * @default       .ts
-       *
-       * Specify the url slug to use for this "section"
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      extension: '.ts',
+    // /**
+    //  * @name            ts
+    //  * @namespace       config.frontend.handlers
+    //  * @type            Object
+    //  *
+    //  * Handler for .ts files
+    //  *
+    //  * @since         2.0.0
+    //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //  */
+    // ts: {
+    //   /**
+    //    * @name          extension
+    //    * @namespace     config.frontend.handlers.sugar
+    //    * @type          String
+    //    * @default       .ts
+    //    *
+    //    * Specify the url slug to use for this "section"
+    //    *
+    //    * @since         2.0.0
+    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    */
+    //   extension: '.ts',
 
-      /**
-       * @name            handler
-       * @namespace       config.frontend.handlers.sugar
-       * @type            Function
-       *
-       * Specify the handler function that will take care of responding to this "section"
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      handler: `${__dirname}/../src/node/server/frontend/handlers/ts`
-    },
+    //   /**
+    //    * @name            handler
+    //    * @namespace       config.frontend.handlers.sugar
+    //    * @type            Function
+    //    *
+    //    * Specify the handler function that will take care of responding to this "section"
+    //    *
+    //    * @since         2.0.0
+    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    */
+    //   handler: `${__dirname}/../src/node/server/frontend/handlers/ts`
+    // },
 
     // /**
     //  * @name            js
@@ -237,42 +237,42 @@ module.exports = {
     //   handler: `${__dirname}/../src/node/server/frontend/handlers/js`
     // },
 
-    // /**
-    //  * @name            scss
-    //  * @namespace       config.frontend.handlers
-    //  * @type            Object
-    //  *
-    //  * Handler for .scss files
-    //  *
-    //  * @since         2.0.0
-    //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //  */
-    // scss: {
-    //   /**
-    //    * @name          extension
-    //    * @namespace     config.frontend.handlers.sugar
-    //    * @type          String
-    //    * @default       .scss
-    //    *
-    //    * Specify the url slug to use for this "section"
-    //    *
-    //    * @since         2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   extension: '.scss',
+    /**
+     * @name            scss
+     * @namespace       config.frontend.handlers
+     * @type            Object
+     *
+     * Handler for .scss files
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    scss: {
+      /**
+       * @name          extension
+       * @namespace     config.frontend.handlers.sugar
+       * @type          String
+       * @default       .scss
+       *
+       * Specify the url slug to use for this "section"
+       *
+       * @since         2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      extension: '.scss',
 
-    //   /**
-    //    * @name            handler
-    //    * @namespace       config.frontend.handlers.sugar
-    //    * @type            Function
-    //    *
-    //    * Specify the handler function that will take care of responding to this "section"
-    //    *
-    //    * @since         2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   handler: `${__dirname}/../src/node/server/frontend/handlers/scss`
-    // },
+      /**
+       * @name            handler
+       * @namespace       config.frontend.handlers.sugar
+       * @type            Function
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: `${__dirname}/../src/node/server/frontend/handlers/scss`
+    },
 
     // /**
     //  * @name            sugar

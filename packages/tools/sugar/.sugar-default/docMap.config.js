@@ -21,14 +21,14 @@ module.exports = {
      * @name        output
      * @namespace   config.docMap.generate
      * @type         String
-     * @default       ${__packageRoot()}/docMap.json
+     * @default       [config.storage.rootDir]/docMap.json
      *
      * Specify where you want to output the file
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    output: `${__packageRoot()}/docMap.json`,
+    output: `[config.storage.rootDir]/docMap.json`,
 
     /**
      * @name        exclude

@@ -6,21 +6,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 var _a;
 const SInterface_1 = __importDefault(require("../../../interface/SInterface"));
 const sugar_1 = __importDefault(require("../../../config/sugar"));
+const packageRoot_1 = __importDefault(require("../../../path/packageRoot"));
 module.exports = (_a = class STsCompileInterface extends SInterface_1.default {
     },
     _a.definition = {
-        // ...__TscInterface.definition,
-        project: {
-            type: 'Array<File>',
-            alias: 'p'
-        },
-        stacks: {
-            type: 'Array<String>',
-            alias: 's'
-        },
         input: {
-            type: 'String',
-            alias: 'i'
+            type: 'String|Array<String>',
+            alias: 'i',
+            default: `${packageRoot_1.default()}/tsconfig.json`
         },
         cache: {
             type: 'Boolean',
@@ -43,7 +36,12 @@ module.exports = (_a = class STsCompileInterface extends SInterface_1.default {
             default: sugar_1.default('ts')
         },
         transpileOnly: {
-            type: 'Boolean'
+            type: 'Boolean',
+            default: false
+        },
+        watch: {
+            type: 'Boolean',
+            default: false
         }
     },
     _a);

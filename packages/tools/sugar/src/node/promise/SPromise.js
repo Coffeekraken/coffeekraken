@@ -184,11 +184,8 @@ module.exports = class SPromise extends Promise {
                 }
             }
         });
-        Object.defineProperty(this, '_settings', {
-            writable: true,
-            configurable: true,
-            enumerable: false,
-            value: deepMerge_1.default({
+        let promiseSettings = deepMerge_1.default({
+            promise: {
                 treatCancelAs: 'resolve',
                 bufferTimeout: 100,
                 bufferedStacks: [
@@ -208,13 +205,24 @@ module.exports = class SPromise extends Promise {
                 },
                 destroyTimeout: 5000,
                 id: uniqid_1.default()
-            }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings)
-        });
-        if (this._settings.destroyTimeout !== -1) {
+            }
+        }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings);
+        if (this._settings === undefined) {
+            Object.defineProperty(this, '_settings', {
+                writable: true,
+                configurable: true,
+                enumerable: false,
+                value: promiseSettings
+            });
+        }
+        else {
+            this._settings = deepMerge_1.default(this._settings, promiseSettings);
+        }
+        if (this._settings.promise.destroyTimeout !== -1) {
             this.on('finally', () => {
                 setTimeout(() => {
                     this._destroy();
-                }, this._settings.destroyTimeout);
+                }, this._settings.promise.destroyTimeout);
             });
         }
     }
@@ -309,7 +317,7 @@ module.exports = class SPromise extends Promise {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     get id() {
-        return this._settings.id;
+        return this._settings.promise.id;
     }
     // then(...args) {
     //   super.then(...args);
@@ -594,7 +602,7 @@ module.exports = class SPromise extends Promise {
             //   stacksResult.__proto__.promise = this;
             // }
             // resolve the master promise
-            if (this._settings.treatCancelAs === 'reject') {
+            if (this._settings.promise.treatCancelAs === 'reject') {
                 this._resolvers.reject(stacksResult);
             }
             else {
@@ -690,8 +698,8 @@ module.exports = class SPromise extends Promise {
         let callNumber = settings.callNumber;
         // process the args
         if (callNumber === undefined &&
-            this._settings.defaultCallTime[stack] !== undefined) {
-            callNumber = this._settings.defaultCallTime[stack];
+            this._settings.promise.defaultCallTime[stack] !== undefined) {
+            callNumber = this._settings.promise.defaultCallTime[stack];
         }
         else if (callNumber === undefined) {
             callNumber = -1;
@@ -713,7 +721,7 @@ module.exports = class SPromise extends Promise {
                     }
                     return true;
                 });
-            }, this._settings.bufferTimeout);
+            }, this._settings.promise.bufferTimeout);
         }
         // maintain chainability
         return this;
@@ -762,8 +770,8 @@ module.exports = class SPromise extends Promise {
             });
             // handle buffers
             if (stackArray.length === 0) {
-                for (let i = 0; i < this._settings.bufferedStacks.length; i++) {
-                    const bufferedStack = this._settings.bufferedStacks[i];
+                for (let i = 0; i < this._settings.promise.bufferedStacks.length; i++) {
+                    const bufferedStack = this._settings.promise.bufferedStacks[i];
                     if (minimatch_1.default(stack, bufferedStack)) {
                         this._buffer.push({
                             stack,
@@ -785,7 +793,7 @@ module.exports = class SPromise extends Promise {
             const metasObj = deepMerge_1.default({
                 stack,
                 originalStack: stack,
-                id: this._settings.id,
+                id: this._settings.promise.id,
                 state: this._promiseState,
                 time: Date.now(),
                 level: 1
@@ -1068,7 +1076,7 @@ module.exports = class SPromise extends Promise {
         // destroying all the callbacks stacks registered
         delete this._stacks;
         delete this._resolvers;
-        delete this._settings;
+        delete this._settings.promise;
         this._isDestroyed = true;
     }
 };

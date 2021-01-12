@@ -28,6 +28,9 @@ import __fs from 'fs';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isPath(path, checkExistence = false) {
+  // check if we have some /
+  if (!path.includes('/')) return false;
+
   // check if the path is valid or not
   if (!__isValidPath(path)) return false;
 

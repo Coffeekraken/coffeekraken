@@ -34,7 +34,7 @@ const ensureDirSync_1 = __importDefault(require("./ensureDirSync"));
 const fn = function (settings = {}) {
     settings = Object.assign({ scope: 'local' }, settings);
     if (settings.scope === 'local') {
-        const tmpDir = sugar_1.default('storage.tempFolderPath');
+        const tmpDir = sugar_1.default('storage.tempDir');
         if (tmpDir !== undefined) {
             ensureDirSync_1.default(tmpDir);
             return tmpDir;

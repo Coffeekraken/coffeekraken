@@ -2,41 +2,80 @@ const __packageRoot = require('../src/node/path/packageRoot');
 
 module.exports = {
   /**
-   * @name            localFolderPath
+   * @name            rootDir
    * @namespace       config.storage
    * @type            String
-   * @default         ${__packageRoot()}/.local
+   * @default         ${__packageRoot()}
    *
    * Configure where is located the ".local" folder in which are stored usually some things like cache, etc...
    *
    * @since         2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  localFolderPath: `${__packageRoot()}/.local`,
+  rootDir: `${__packageRoot()}`,
 
   /**
-   * @name            cacheFolderPath
+   * @name            localDir
    * @namespace       config.storage
    * @type            String
-   * @default         [config.storage.localFolderPath]/cache
+   * @default         [config.storage.rootDir]/.local
+   *
+   * Configure where is located the ".local" folder in which are stored usually some things like cache, etc...
+   *
+   * @since         2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  localDir: `[config.storage.rootDir]/.local`,
+
+  /**
+   * @name            srcDir
+   * @namespace       config.storage
+   * @type            String
+   * @default         [config.storage.rootDir]/src
+   *
+   * Configure where is located the ".local" folder in which are stored usually some things like cache, etc...
+   *
+   * @since         2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  srcDir: `[config.storage.rootDir]/src`,
+
+  /**
+   * @name            distDir
+   * @namespace       config.storage
+   * @type            String
+   * @default         [config.storage.rootDir]/src
+   *
+   * Configure where is located the ".local" folder in which are stored usually some things like cache, etc...
+   *
+   * @since         2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  distDir: `[config.storage.rootDir]/dist`,
+
+  /**
+   * @name            cacheDir
+   * @namespace       config.storage
+   * @type            String
+   * @default         [config.storage.localDir]/cache
    *
    * Configure where is located the "cache" folder
    *
    * @since         2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  cacheFolderPath: `[config.storage.localFolderPath]/cache`,
+  cacheDir: `[config.storage.localDir]/cache`,
 
   /**
-   * @name            tempFolderPath
+   * @name            tempDir
    * @namespace       config.storage
    * @type            String
-   * @default         [config.storage.localFolderPath]/cache
+   * @default         [config.storage.localDir]/cache
    *
    * Configure where is located the "temp" folder
    *
    * @since         2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  tempFolderPath: `[config.storage.localFolderPath]/temp`
+  tempDir: `[config.storage.localDir]/temp`
 };

@@ -358,12 +358,9 @@ export = class SPromise extends Promise {
       }
     });
 
-    Object.defineProperty(this, '_settings', {
-      writable: true,
-      configurable: true,
-      enumerable: false,
-      value: __deepMerge(
-        {
+    let promiseSettings = __deepMerge(
+      {
+        promise: {
           treatCancelAs: 'resolve',
           bufferTimeout: 100,
           bufferedStacks: [
@@ -383,17 +380,27 @@ export = class SPromise extends Promise {
           },
           destroyTimeout: 5000,
           id: __uniqid()
-        },
-        typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {},
-        settings
-      )
-    });
+        }
+      },
+      typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {},
+      settings
+    );
+    if (this._settings === undefined) {
+      Object.defineProperty(this, '_settings', {
+        writable: true,
+        configurable: true,
+        enumerable: false,
+        value: promiseSettings
+      });
+    } else {
+      this._settings = __deepMerge(this._settings, promiseSettings);
+    }
 
-    if (this._settings.destroyTimeout !== -1) {
+    if (this._settings.promise.destroyTimeout !== -1) {
       this.on('finally', () => {
         setTimeout(() => {
           this._destroy();
-        }, this._settings.destroyTimeout);
+        }, this._settings.promise.destroyTimeout);
       });
     }
   }
@@ -408,7 +415,7 @@ export = class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   get id() {
-    return this._settings.id;
+    return this._settings.promise.id;
   }
 
   // then(...args) {
@@ -705,7 +712,7 @@ export = class SPromise extends Promise {
       //   stacksResult.__proto__.promise = this;
       // }
       // resolve the master promise
-      if (this._settings.treatCancelAs === 'reject') {
+      if (this._settings.promise.treatCancelAs === 'reject') {
         this._resolvers.reject(stacksResult);
       } else {
         this._resolvers.resolve(stacksResult);
@@ -812,9 +819,9 @@ export = class SPromise extends Promise {
     // process the args
     if (
       callNumber === undefined &&
-      this._settings.defaultCallTime[stack] !== undefined
+      this._settings.promise.defaultCallTime[stack] !== undefined
     ) {
-      callNumber = this._settings.defaultCallTime[stack];
+      callNumber = this._settings.promise.defaultCallTime[stack];
     } else if (callNumber === undefined) {
       callNumber = -1;
     }
@@ -837,7 +844,7 @@ export = class SPromise extends Promise {
           }
           return true;
         });
-      }, this._settings.bufferTimeout);
+      }, this._settings.promise.bufferTimeout);
     }
 
     // maintain chainability
@@ -895,8 +902,8 @@ export = class SPromise extends Promise {
 
     // handle buffers
     if (stackArray.length === 0) {
-      for (let i = 0; i < this._settings.bufferedStacks.length; i++) {
-        const bufferedStack = this._settings.bufferedStacks[i];
+      for (let i = 0; i < this._settings.promise.bufferedStacks.length; i++) {
+        const bufferedStack = this._settings.promise.bufferedStacks[i];
         if (__minimatch(stack, bufferedStack)) {
           this._buffer.push({
             stack,
@@ -919,7 +926,7 @@ export = class SPromise extends Promise {
       {
         stack,
         originalStack: stack,
-        id: this._settings.id,
+        id: this._settings.promise.id,
         state: this._promiseState,
         time: Date.now(),
         level: 1
@@ -1231,7 +1238,7 @@ export = class SPromise extends Promise {
     delete this._stacks;
 
     delete this._resolvers;
-    delete this._settings;
+    delete this._settings.promise;
     this._isDestroyed = true;
   }
 };

@@ -40,16 +40,16 @@ export = class SCacheFsAdapter extends __SCacheAdapter {
    * Construct the SCacheFsAdapter instance with the settings passed in object format. See description bellow.
    *
    * @param         {Object}          [settings={}]             An object to configure the SCacheFsAdapter instance. This is specific to each adapters.settings.settings...
-   * - rootDir (config.storage.cacheFolderPath) {String}: Specify the root directory where to put all the files to cache
+   * - rootDir (config.storage.cacheDir) {String}: Specify the root directory where to put all the files to cache
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(cache, settings = {}) {
     super(
+      cache,
       __deepMerge(
         {
-          rootDir:
-            __sugarConfig('storage.cacheFolderPath') || `${__tmpDir()}/SCache`
+          rootDir: __sugarConfig('storage.cacheDir') || `${__tmpDir()}/SCache`
         },
         settings
       )
@@ -76,7 +76,8 @@ export = class SCacheFsAdapter extends __SCacheAdapter {
    */
   async set(name, value) {
     // generate the item fs name
-    const fsName = `${this._settings.name}/${name}.json`;
+    const fsName = `${this.cache.name}/${name}.json`;
+
     // ensure we have the folder
     __ensureDirSync(
       `${this._settings.rootDir}/${fsName.split('/').slice(0, -1).join('/')}`
@@ -103,7 +104,8 @@ export = class SCacheFsAdapter extends __SCacheAdapter {
    */
   async get(name) {
     // generate the item fs name
-    const fsName = `${this._settings.name}/${name}.json`;
+    if (name.slice(0, 1) === '/') name = name.slice(1);
+    const fsName = `${this.cache.name}/${name}.json`;
     // check that the file exists
     if (!__fs.existsSync(`${this._settings.rootDir}/${fsName}`)) return null;
     // read the json file
@@ -126,7 +128,7 @@ export = class SCacheFsAdapter extends __SCacheAdapter {
    */
   async delete(name) {
     // generate the item fs name
-    const fsName = `${this._settings.name}/${name}.json`;
+    const fsName = `${this.cache.name}/${name}.json`;
     // read the json file
     return __fs.unlinkSync(`${this._settings.rootDir}/${fsName}`);
   }
@@ -137,7 +139,6 @@ export = class SCacheFsAdapter extends __SCacheAdapter {
    *
    * Clear all the items in the current cache
    *
-   * @param             {String}              cacheName              The current cache name to delete
    * @return            {Boolean}                               true if all of, false if not...
    *
    * @example           js
@@ -145,8 +146,8 @@ export = class SCacheFsAdapter extends __SCacheAdapter {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async clear(cacheName) {
+  async clear() {
     // read the json file
-    return __removeSync(`${this._settings.rootDir}/${cacheName}`);
+    return __removeSync(`${this._settings.rootDir}/${this.cache.name}`);
   }
 };

@@ -12,7 +12,7 @@ module.exports = class SCacheAdapter {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(settings = {}) {
+    constructor(cache, settings = {}) {
         /**
          * @name                              _settings
          * @type                              Object
@@ -23,8 +23,19 @@ module.exports = class SCacheAdapter {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this._settings = {};
+        /**
+         * @name            cache
+         * @type            SCache
+         *
+         * Store the cache instance which if used
+         *
+         * @since         2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this.cache = null;
         // store the settings
         this._settings = settings;
+        this.cache = cache;
     }
 };
 //# sourceMappingURL=SCacheAdapter.js.map

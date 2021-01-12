@@ -30,6 +30,9 @@ const fs_1 = __importDefault(require("fs"));
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isPath(path, checkExistence = false) {
+    // check if we have some /
+    if (!path.includes('/'))
+        return false;
     // check if the path is valid or not
     if (!is_valid_path_1.default(path))
         return false;

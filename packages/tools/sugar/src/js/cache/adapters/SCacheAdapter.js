@@ -21,7 +21,7 @@
          *
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        function SCacheAdapter(settings) {
+        function SCacheAdapter(cache, settings) {
             if (settings === void 0) { settings = {}; }
             /**
              * @name                              _settings
@@ -33,8 +33,19 @@
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             this._settings = {};
+            /**
+             * @name            cache
+             * @type            SCache
+             *
+             * Store the cache instance which if used
+             *
+             * @since         2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            this.cache = null;
             // store the settings
             this._settings = settings;
+            this.cache = cache;
         }
         return SCacheAdapter;
     }());

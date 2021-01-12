@@ -2,4 +2,4 @@
 // __SSugarUiWebComponent.define();
 console.log('plop');
 
-console.log 'd';
+// console.log 'd';

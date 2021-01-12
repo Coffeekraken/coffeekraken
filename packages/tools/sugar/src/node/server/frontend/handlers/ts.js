@@ -15,14 +15,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const SPromise_1 = __importDefault(require("../../../promise/SPromise"));
 const STsCompiler_1 = __importDefault(require("../../../typescript/compile/STsCompiler"));
 const SDuration_1 = __importDefault(require("../../../time/SDuration"));
-const STsCompileInterface_1 = __importDefault(require("../../../typescript/compile/interface/STsCompileInterface"));
 module.exports = function ts(req, res, settings = {}) {
     const promise = new SPromise_1.default();
     (() => __awaiter(this, void 0, void 0, function* () {
-        const defaultValuesObj = STsCompileInterface_1.default.getDefaultValues();
-        const compiler = new STsCompiler_1.default(Object.assign({}, defaultValuesObj));
+        const compiler = new STsCompiler_1.default();
         const duration = new SDuration_1.default();
-        const compilerPromise = compiler.compile(Object.assign(Object.assign({}, (req.query || {})), { input: req.path.slice(1), transpileOnly: true }));
+        const compilerPromise = compiler.compile(req.path.slice(1), Object.assign(Object.assign({}, (req.query || {})), { transpileOnly: true }));
         SPromise_1.default.pipe(compilerPromise, promise);
         compilerPromise.on('reject', (e) => {
             res.type('text/html');
@@ -31,6 +29,7 @@ module.exports = function ts(req, res, settings = {}) {
             promise.reject(e);
         });
         const compileRes = yield compilerPromise;
+        return;
         if (compileRes.files) {
             let string = '';
             compileRes.files.forEach((file) => {

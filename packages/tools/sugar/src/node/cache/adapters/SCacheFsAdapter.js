@@ -27,13 +27,13 @@ module.exports = class SCacheFsAdapter extends SCacheAdapter_1.default {
      * Construct the SCacheFsAdapter instance with the settings passed in object format. See description bellow.
      *
      * @param         {Object}          [settings={}]             An object to configure the SCacheFsAdapter instance. This is specific to each adapters.settings.settings...
-     * - rootDir (config.storage.cacheFolderPath) {String}: Specify the root directory where to put all the files to cache
+     * - rootDir (config.storage.cacheDir) {String}: Specify the root directory where to put all the files to cache
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(settings = {}) {
-        super(deepMerge_1.default({
-            rootDir: sugar_1.default('storage.cacheFolderPath') || `${tmpDir_1.default()}/SCache`
+    constructor(cache, settings = {}) {
+        super(cache, deepMerge_1.default({
+            rootDir: sugar_1.default('storage.cacheDir') || `${tmpDir_1.default()}/SCache`
         }, settings));
     }
     /**
@@ -57,7 +57,7 @@ module.exports = class SCacheFsAdapter extends SCacheAdapter_1.default {
     set(name, value) {
         return __awaiter(this, void 0, void 0, function* () {
             // generate the item fs name
-            const fsName = `${this._settings.name}/${name}.json`;
+            const fsName = `${this.cache.name}/${name}.json`;
             // ensure we have the folder
             ensureDirSync_1.default(`${this._settings.rootDir}/${fsName.split('/').slice(0, -1).join('/')}`);
             // write the json file
@@ -83,7 +83,9 @@ module.exports = class SCacheFsAdapter extends SCacheAdapter_1.default {
     get(name) {
         return __awaiter(this, void 0, void 0, function* () {
             // generate the item fs name
-            const fsName = `${this._settings.name}/${name}.json`;
+            if (name.slice(0, 1) === '/')
+                name = name.slice(1);
+            const fsName = `${this.cache.name}/${name}.json`;
             // check that the file exists
             if (!fs_1.default.existsSync(`${this._settings.rootDir}/${fsName}`))
                 return null;
@@ -108,7 +110,7 @@ module.exports = class SCacheFsAdapter extends SCacheAdapter_1.default {
     delete(name) {
         return __awaiter(this, void 0, void 0, function* () {
             // generate the item fs name
-            const fsName = `${this._settings.name}/${name}.json`;
+            const fsName = `${this.cache.name}/${name}.json`;
             // read the json file
             return fs_1.default.unlinkSync(`${this._settings.rootDir}/${fsName}`);
         });
@@ -119,7 +121,6 @@ module.exports = class SCacheFsAdapter extends SCacheAdapter_1.default {
      *
      * Clear all the items in the current cache
      *
-     * @param             {String}              cacheName              The current cache name to delete
      * @return            {Boolean}                               true if all of, false if not...
      *
      * @example           js
@@ -127,10 +128,10 @@ module.exports = class SCacheFsAdapter extends SCacheAdapter_1.default {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    clear(cacheName) {
+    clear() {
         return __awaiter(this, void 0, void 0, function* () {
             // read the json file
-            return removeSync_1.default(`${this._settings.rootDir}/${cacheName}`);
+            return removeSync_1.default(`${this._settings.rootDir}/${this.cache.name}`);
         });
     }
 };

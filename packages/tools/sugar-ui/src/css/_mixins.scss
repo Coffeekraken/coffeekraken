@@ -1,5 +1,7 @@
+@import './something';
+
 @mixin Coco() {
   body {
-    content: 'hello';
+    content: 'hello!!';
   }
 }

@@ -16,25 +16,20 @@ var _a;
 const extension_1 = __importDefault(require("../../fs/extension"));
 const unquote_1 = __importDefault(require("../../string/unquote"));
 const path_1 = __importDefault(require("path"));
-const stripCssComments_1 = __importDefault(require("../../css/stripCssComments"));
 const folderPath_1 = __importDefault(require("../../fs/folderPath"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 const md5_1 = __importDefault(require("../../crypt/md5"));
-const sass_1 = __importDefault(require("sass"));
 const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
 const filename_1 = __importDefault(require("../../fs/filename"));
 const fs_1 = __importDefault(require("fs"));
 const getSharedResourcesString_1 = __importDefault(require("../utils/getSharedResourcesString"));
-const putUseStatementsOnTop_1 = __importDefault(require("../utils/putUseStatementsOnTop"));
 const glob_1 = __importDefault(require("glob"));
-const csso_1 = __importDefault(require("csso"));
 const is_glob_1 = __importDefault(require("is-glob"));
 const unique_1 = __importDefault(require("../../array/unique"));
 const SCompiler_1 = __importDefault(require("../../compiler/SCompiler"));
 const SScssInterface_1 = __importDefault(require("./interface/SScssInterface"));
 const absolute_1 = __importDefault(require("../../path/absolute"));
-const ensureDirSync_1 = __importDefault(require("../../fs/ensureDirSync"));
 const SScssFile_1 = __importDefault(require("../SScssFile"));
 module.exports = (_a = class SScssCompiler extends SCompiler_1.default {
         /**
@@ -95,21 +90,6 @@ module.exports = (_a = class SScssCompiler extends SCompiler_1.default {
                 for (let i = 0; i < filesPaths.length; i++) {
                     let filePath = filesPaths[i];
                     let file = new SScssFile_1.default(filePath);
-                    let compileObj = {
-                        file,
-                        children: {},
-                        importStatements: [],
-                        includePaths: [],
-                        sharedResources: null,
-                        sharedResourcesStr: null,
-                        sharedResourcesHash: null,
-                        mixinsAndVariables: null,
-                        mixinsAndVariablesFromChilds: null,
-                        settings: Object.assign({}, settings),
-                        outputPath: null,
-                        scss: null,
-                        css: null
-                    };
                     const includePaths = unique_1.default([
                         ...(settings.includePaths
                             ? !Array.isArray(settings.includePaths)
@@ -128,139 +108,24 @@ module.exports = (_a = class SScssCompiler extends SCompiler_1.default {
                             : []),
                         `${packageRoot_1.default()}/node_modules`
                     ]);
-                    compileObj.includePaths = includePaths;
                     // shared resources
                     let sharedResources = settings.sharedResources || [];
                     if (!Array.isArray(sharedResources))
                         sharedResources = [sharedResources];
                     const sharedResourcesStr = getSharedResourcesString_1.default(sharedResources);
-                    if (sharedResourcesStr) {
-                        compileObj.sharedResources = sharedResources;
-                        compileObj.sharedResourcesStr = sharedResourcesStr;
-                        compileObj.sharedResourcesHash = md5_1.default.encrypt(sharedResourcesStr);
-                    }
                     // sass settings
                     let sassPassedSettings = Object.assign({}, settings.sass || {});
                     delete sassPassedSettings.includePaths;
                     delete sassPassedSettings.sharedResources;
                     const sassSettings = deepMerge_1.default({
                         outputStyle: settings.style,
-                        importer: [this._importer(compileObj)],
                         sourceMap: settings.map,
-                        includePaths: compileObj.includePaths
+                        includePaths: includePaths
                     }, sassPassedSettings);
-                    // // engage the cache
-                    // const fileCache = new __SFileCache(settings.id, {
-                    //   ttl: '10d'
-                    // });
-                    // if (settings.clearCache && !settings._isChild) {
-                    //   await fileCache.clear();
-                    // }
                     const res = yield file.compile({
                         sharedResources: getSharedResourcesString_1.default(settings.sharedResources || [])
                     });
-                    console.log(res);
-                    return reject();
-                    // go down children
-                    const compileImportPromise = this._compileImports(compileObj, settings);
-                    compileImportPromise.on('reject', (e) => {
-                        reject(e);
-                    });
-                    const { files, scss } = yield compileImportPromise;
-                    compileObj.children = files;
-                    compileObj.scss = scss;
-                    // generate the mixins and variables string from the children
-                    compileObj.file.mixinsAndVariablesFromChilds = this._generateMixinsAndVariablesStringFromChilds(compileObj);
-                    let css = '';
-                    if (!settings._isChild) {
-                        css = this._generateCssStringFromChilds(compileObj);
-                    }
-                    // init the string to compile
-                    let toCompile = putUseStatementsOnTop_1.default(`
-              ${compileObj.sharedResourcesStr || ''}
-              ${compileObj.file.mixinsAndVariablesFromChilds || ''}
-              ${css}
-              ${compileObj.scss}
-            `);
-                    const cacheContext = {
-                        toCompile,
-                        sassSettings
-                    };
-                    // try to get from cache
-                    let cachedObj = {};
-                    if (settings.cache) {
-                        cachedObj = yield fileCache.get(filePath, {
-                            context: cacheContext
-                        });
-                        if (cachedObj) {
-                            console.log('from cache', filePath);
-                            // build the css code to return
-                            compileObj = cachedObj;
-                            compileObj.fromCache = true;
-                        }
-                    }
-                    // if (!settings._isChild) {
-                    //   toCompile += this._bundleChildren(compileObj);
-                    //   toCompile += compileObj.scss;
-                    // } else {
-                    //   toCompile += compileObj.scss;
-                    // }
-                    // compile
-                    if (!compileObj.fromCache) {
-                        let renderObj;
-                        let compiledResultString = '';
-                        try {
-                            renderObj = sass_1.default.renderSync(Object.assign(Object.assign({}, sassSettings), { data: toCompile }));
-                        }
-                        catch (e) {
-                            return reject(e.toString());
-                        }
-                        compiledResultString = settings.stripComments
-                            ? stripCssComments_1.default(renderObj.css.toString())
-                            : renderObj.css.toString();
-                        compileObj.css = compiledResultString.trim();
-                        if (renderObj.map) {
-                            compileObj.map = renderObj.map.toString();
-                        }
-                        // set in cache if needed
-                        if (settings.cache) {
-                            console.log('SAVE cache', filePath);
-                            yield fileCache.set(filePath, compileObj, {
-                                context: cacheContext
-                            });
-                        }
-                    }
-                    // minify
-                    if (settings.minify) {
-                        compileObj.css = csso_1.default.minify(compileObj.css).css;
-                    }
-                    // remove empty lines
-                    if (compileObj.css) {
-                        try {
-                            compileObj.css = compileObj.css.replace(/^(?:[\t ]*(?:\r?\n|\r))+/gm, '');
-                        }
-                        catch (e) { }
-                    }
-                    // banner
-                    if (!settings._isChild && settings.banner) {
-                        compileObj.css = `
-              ${settings.banner}
-              ${compileObj.css}
-            `.trim();
-                    }
-                    // check if need to save
-                    if (settings.save === true) {
-                        const outputPath = `${settings.outputDir}/${filePath.replace(`${settings.rootDir}/`, '')}`.replace(/\.s[c|a]ss$/, '.css');
-                        trigger('log', {
-                            value: `Saving the css file "<cyan>${outputPath.replace(`${packageRoot_1.default()}/`, '')}</cyan>"`
-                        });
-                        // saving the path
-                        compileObj.outputPath = outputPath;
-                        ensureDirSync_1.default(folderPath_1.default(outputPath));
-                        fs_1.default.writeFileSync(outputPath, compileObj.css, 'utf8');
-                    }
-                    // save into results object
-                    resultsObj[filePath] = compileObj;
+                    resultsObj[file.path] = res;
                 }
                 // resolve with the compilation result
                 resolve({

@@ -136,22 +136,6 @@ export = class SScssCompiler extends __SCompiler {
           let filePath = filesPaths[i];
           let file = new __SScssFile(filePath);
 
-          let compileObj = {
-            file,
-            children: {},
-            importStatements: [],
-            includePaths: [],
-            sharedResources: null,
-            sharedResourcesStr: null,
-            sharedResourcesHash: null,
-            mixinsAndVariables: null,
-            mixinsAndVariablesFromChilds: null,
-            settings: Object.assign({}, settings),
-            outputPath: null,
-            scss: null,
-            css: null
-          };
-
           const includePaths = __unique([
             ...(settings.includePaths
               ? !Array.isArray(settings.includePaths)
@@ -170,7 +154,6 @@ export = class SScssCompiler extends __SCompiler {
               : []),
             `${__packageRoot()}/node_modules`
           ]);
-          compileObj.includePaths = includePaths;
 
           // shared resources
           let sharedResources = settings.sharedResources || [];
@@ -179,11 +162,6 @@ export = class SScssCompiler extends __SCompiler {
           const sharedResourcesStr = __getSharedResourcesString(
             sharedResources
           );
-          if (sharedResourcesStr) {
-            compileObj.sharedResources = sharedResources;
-            compileObj.sharedResourcesStr = sharedResourcesStr;
-            compileObj.sharedResourcesHash = __md5.encrypt(sharedResourcesStr);
-          }
 
           // sass settings
           let sassPassedSettings = Object.assign({}, settings.sass || {});
@@ -192,163 +170,18 @@ export = class SScssCompiler extends __SCompiler {
           const sassSettings = __deepMerge(
             {
               outputStyle: settings.style,
-              importer: [this._importer(compileObj)],
               sourceMap: settings.map,
-              includePaths: compileObj.includePaths
+              includePaths: includePaths
             },
             sassPassedSettings
           );
-
-          // // engage the cache
-          // const fileCache = new __SFileCache(settings.id, {
-          //   ttl: '10d'
-          // });
-          // if (settings.clearCache && !settings._isChild) {
-          //   await fileCache.clear();
-          // }
 
           const res = await file.compile({
             sharedResources: __getSharedResourcesString(
               settings.sharedResources || []
             )
           });
-
-          console.log(res);
-
-          return reject();
-
-          // go down children
-          const compileImportPromise = this._compileImports(
-            compileObj,
-            settings
-          );
-          compileImportPromise.on('reject', (e) => {
-            reject(e);
-          });
-          const { files, scss } = await compileImportPromise;
-          compileObj.children = files;
-          compileObj.scss = scss;
-
-          // generate the mixins and variables string from the children
-          compileObj.file.mixinsAndVariablesFromChilds = this._generateMixinsAndVariablesStringFromChilds(
-            compileObj
-          );
-
-          let css = '';
-          if (!settings._isChild) {
-            css = this._generateCssStringFromChilds(compileObj);
-          }
-
-          // init the string to compile
-          let toCompile = __putUseStatementsOnTop(`
-              ${compileObj.sharedResourcesStr || ''}
-              ${compileObj.file.mixinsAndVariablesFromChilds || ''}
-              ${css}
-              ${compileObj.scss}
-            `);
-
-          const cacheContext = {
-            toCompile,
-            sassSettings
-          };
-
-          // try to get from cache
-          let cachedObj = {};
-          if (settings.cache) {
-            cachedObj = await fileCache.get(filePath, {
-              context: cacheContext
-            });
-            if (cachedObj) {
-              console.log('from cache', filePath);
-
-              // build the css code to return
-              compileObj = cachedObj;
-              compileObj.fromCache = true;
-            }
-          }
-
-          // if (!settings._isChild) {
-          //   toCompile += this._bundleChildren(compileObj);
-          //   toCompile += compileObj.scss;
-          // } else {
-          //   toCompile += compileObj.scss;
-          // }
-
-          // compile
-          if (!compileObj.fromCache) {
-            let renderObj;
-            let compiledResultString = '';
-
-            try {
-              renderObj = __sass.renderSync({
-                ...sassSettings,
-                data: toCompile
-              });
-            } catch (e) {
-              return reject(e.toString());
-            }
-            compiledResultString = settings.stripComments
-              ? __stripCssComments(renderObj.css.toString())
-              : renderObj.css.toString();
-            compileObj.css = compiledResultString.trim();
-            if (renderObj.map) {
-              compileObj.map = renderObj.map.toString();
-            }
-            // set in cache if needed
-            if (settings.cache) {
-              console.log('SAVE cache', filePath);
-              await fileCache.set(filePath, compileObj, {
-                context: cacheContext
-              });
-            }
-          }
-
-          // minify
-          if (settings.minify) {
-            compileObj.css = __csso.minify(compileObj.css).css;
-          }
-
-          // remove empty lines
-          if (compileObj.css) {
-            try {
-              compileObj.css = compileObj.css.replace(
-                /^(?:[\t ]*(?:\r?\n|\r))+/gm,
-                ''
-              );
-            } catch (e) {}
-          }
-
-          // banner
-          if (!settings._isChild && settings.banner) {
-            compileObj.css = `
-              ${settings.banner}
-              ${compileObj.css}
-            `.trim();
-          }
-
-          // check if need to save
-          if (settings.save === true) {
-            const outputPath = `${settings.outputDir}/${filePath.replace(
-              `${settings.rootDir}/`,
-              ''
-            )}`.replace(/\.s[c|a]ss$/, '.css');
-
-            trigger('log', {
-              value: `Saving the css file "<cyan>${outputPath.replace(
-                `${__packageRoot()}/`,
-                ''
-              )}</cyan>"`
-            });
-
-            // saving the path
-            compileObj.outputPath = outputPath;
-
-            __ensureDirSync(__folderPath(outputPath));
-            __fs.writeFileSync(outputPath, compileObj.css, 'utf8');
-          }
-
-          // save into results object
-          resultsObj[filePath] = compileObj;
+          resultsObj[file.path] = res;
         }
 
         // resolve with the compilation result

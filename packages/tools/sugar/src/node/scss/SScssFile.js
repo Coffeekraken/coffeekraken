@@ -19,6 +19,7 @@ const scss_parser_1 = require("scss-parser");
 const scss_parser_2 = require("scss-parser");
 const query_ast_1 = __importDefault(require("query-ast"));
 const sass_1 = __importDefault(require("sass"));
+const md5_1 = __importDefault(require("../crypt/md5"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const sugar_1 = __importDefault(require("../config/sugar"));
@@ -93,7 +94,32 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
             if (Object.keys(deps).length) {
                 this._dependencies = deps;
             }
-            return this._dependencies;
+            return this._dependencies || [];
+        }
+        get hash() {
+            return md5_1.default.encrypt(this.content);
+        }
+        get dependenciesHash() {
+            const hashesStrArray = [];
+            // @ts-ignore
+            const content = [this._sharedResources || '', this.content].join('\n');
+            const imports = findImportStatements_1.default(content)
+                // .filter(
+                //   // @ts-ignore
+                //   (importObj) => importObj.type === 'use'
+                // )
+                .forEach((useObj) => {
+                // @ts-ignore
+                const realPath = resolveDependency_1.default(useObj.path, {
+                    from: this.path
+                });
+                const useFile = new SScssFile(realPath);
+                [useFile, ...useFile.dependencies].forEach((depFile) => {
+                    // @ts-ignore
+                    hashesStrArray.push(depFile.hash);
+                });
+            });
+            return md5_1.default.encrypt(hashesStrArray.join('-'));
         }
         get mixinsAndVariables() {
             // cache
@@ -140,17 +166,19 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                 cache: true,
                 minify: true,
                 stripComments: true,
-                sharedResources: null
+                sharedResources: null,
+                sass: {}
             }, settings);
             return new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
                 if (settings.clearCache)
                     yield this._fileCache.clear();
                 let toCompile = this.content;
-                let sourcesArray = [];
+                // @ts-ignore
+                this._sharedResources = settings.sharedResources || '';
                 if (this._import.type === 'main') {
                     SScssFile.COMPILED_CSS = [];
                 }
-                const depsArray = this.dependencies || [];
+                const depsArray = this.dependencies;
                 for (let i = 0; i < depsArray.length; i++) {
                     const depFile = depsArray[i];
                     // avoid compiling @use statements
@@ -166,20 +194,22 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                 if (this._import.type === 'use') {
                     return resolve(`@use "${this.path}" as ${this._import.as}`);
                 }
+                const dependenciesHash = this.dependenciesHash;
                 // check cache
                 const cachedValue = yield this._fileCache.get(this.path);
-                if (cachedValue && this._import.type !== 'main' && settings.cache) {
+                if (cachedValue &&
+                    cachedValue.dependenciesHash === dependenciesHash &&
+                    settings.cache) {
                     console.log('from cache');
-                    SScssFile.COMPILED_CSS[this.path] = cachedValue;
-                    return resolve(cachedValue);
+                    const result = this._processResultCss(cachedValue.css, settings);
+                    SScssFile.COMPILED_CSS[this.path] = result;
+                    return resolve(result);
                 }
                 if (settings.sharedResources) {
                     toCompile = [settings.sharedResources, toCompile].join('\n');
                 }
                 toCompile = putUseStatementsOnTop_1.default(toCompile);
-                let sassPassedSettings = Object.assign({}, settings);
-                //   delete sassPassedSettings.includePaths;
-                //   delete sassPassedSettings.sharedResources;
+                let sassPassedSettings = Object.assign({}, settings.sass);
                 const sassSettings = deepMerge_1.default({
                     outputStyle: 'expanded',
                     sourceMap: false,
@@ -202,26 +232,22 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                     // save in cache
                     if (settings.cache) {
                         console.log('save in cache');
-                        yield this._fileCache.set(this.path, renderObj.css);
+                        // @ts-ignore
+                        yield this._fileCache.set(this.path, {
+                            dependenciesHash,
+                            css: renderObj.css.toString()
+                        });
                     }
                     if (this._import.type === 'main') {
-                        let result = renderObj.css;
+                        let result = renderObj.css.toString();
                         // prepend all the compiled css
                         result = [...Object.values(SScssFile.COMPILED_CSS), result].join('\n');
-                        // try {
-                        // result = result.replace(/^\s*[\r\n]/gm, '').trim();
-                        // } catch (e) {}
-                        if (settings.stripComments) {
-                            result = stripCssComments_1.default(result);
-                        }
-                        if (settings.minify) {
-                            result = csso_1.default.minify(result).css;
-                        }
+                        result = this._processResultCss(result, settings);
                         return resolve(result);
                     }
                     else {
                         SScssFile.COMPILED_CSS[this.path] = renderObj.css;
-                        return resolve(renderObj.css);
+                        return resolve(this._processResultCss(renderObj.css.toString(), settings));
                     }
                 }
                 catch (e) {
@@ -229,37 +255,18 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                     return reject(e.toString());
                 }
             }));
-            // return new __SPromise(async (resolve, reject, trigger) => {
-            //   let toCompile = this.getCompileString();
-            //   if (settings.sharedResources) {
-            //     toCompile = [settings.sharedResources, toCompile].join('\n');
-            //   }
-            //   let sassPassedSettings = Object.assign({}, settings);
-            //   //   delete sassPassedSettings.includePaths;
-            //   //   delete sassPassedSettings.sharedResources;
-            //   const sassSettings = __deepMerge(
-            //     {
-            //       outputStyle: 'expanded',
-            //       // importer: [this._importer(compileObj)],
-            //       sourceMap: true,
-            //       includePaths: [
-            //         this.dirPath,
-            //         ...__sugarConfig('scss.compile.includePaths')
-            //       ]
-            //     },
-            //     sassPassedSettings
-            //   );
-            //   let renderObj;
-            //   try {
-            //     renderObj = __sass.renderSync({
-            //       ...sassSettings,
-            //       data: toCompile
-            //     });
-            //     return resolve(renderObj.css);
-            //   } catch (e) {
-            //     return reject(e.toString());
-            //   }
-            // });
+        }
+        _processResultCss(css, settings = {}) {
+            // try {
+            // css = css.replace(/^\s*[\r\n]/gm, '').trim();
+            // } catch (e) {}
+            if (settings.stripComments) {
+                css = stripCssComments_1.default(css);
+            }
+            if (settings.minify) {
+                css = csso_1.default.minify(css).css;
+            }
+            return css;
         }
         update() {
             this._mixinsAndVariables = undefined;

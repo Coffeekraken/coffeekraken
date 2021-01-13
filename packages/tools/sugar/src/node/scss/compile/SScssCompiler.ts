@@ -18,9 +18,6 @@ import __fs from 'fs';
 import __getSharedResourcesString from '../utils/getSharedResourcesString';
 import __putUseStatementsOnTop from '../utils/putUseStatementsOnTop';
 import __glob from 'glob';
-import { parse as __parseScss } from 'scss-parser';
-import { stringify as __stringifyScss } from 'scss-parser';
-import __createQueryWrapper from 'query-ast';
 import __csso from 'csso';
 import __isGlob from 'is-glob';
 import __unique from '../../array/unique';
@@ -28,6 +25,7 @@ import __SCompiler from '../../compiler/SCompiler';
 import __SScssInterface from './interface/SScssInterface';
 import __absolute from '../../path/absolute';
 import __ensureDirSync from '../../fs/ensureDirSync';
+import __SScssFile from '../SScssFile';
 
 /**
  * @name                SScssCompiler
@@ -136,8 +134,10 @@ export = class SScssCompiler extends __SCompiler {
 
         for (let i = 0; i < filesPaths.length; i++) {
           let filePath = filesPaths[i];
+          let file = new __SScssFile(filePath);
 
           let compileObj = {
+            file,
             children: {},
             importStatements: [],
             includePaths: [],
@@ -199,63 +199,23 @@ export = class SScssCompiler extends __SCompiler {
             sassPassedSettings
           );
 
-          // engage the cache
-          const fileCache = new __SFileCache(settings.id, {
-            ttl: '10d'
+          // // engage the cache
+          // const fileCache = new __SFileCache(settings.id, {
+          //   ttl: '10d'
+          // });
+          // if (settings.clearCache && !settings._isChild) {
+          //   await fileCache.clear();
+          // }
+
+          const res = await file.compile({
+            sharedResources: __getSharedResourcesString(
+              settings.sharedResources || []
+            )
           });
-          if (settings.clearCache && !settings._isChild) {
-            await fileCache.clear();
-          }
 
-          if (__isPath(filePath)) {
-            if (!__fs.existsSync(filePath) && filePath.slice(0, 1) === '/') {
-              filePath = filePath.slice(1);
-            }
-            filePath = __path.resolve(settings.rootDir, filePath);
-            const sourcePath = this._getRealFilePath(filePath);
-            if (sourcePath) {
-              // add the folder path in the includePaths setting
-              const folderPath = __folderPath(sourcePath);
-              sassSettings.includePaths.unshift(folderPath);
-              settings.rootDir = folderPath;
-              // read the file to get his content
-              compileObj.scss = __fs.readFileSync(filePath, 'utf8');
-            }
-          } else {
-            // set the scss property with the source
-            compileObj.scss = filePath;
-          }
+          console.log(res);
 
-          // extract the things that can be used
-          // by others like mixins and variables declarations$
-          const ast = __parseScss(compileObj.scss);
-          const $ = __createQueryWrapper(ast);
-          let mixinsVariablesString = '';
-          const nodes = $('stylesheet')
-            .children()
-            .filter((node) => {
-              return (
-                (node.node.type === 'atrule' &&
-                  node.node.value[0].value === 'mixin') ||
-                node.node.type === 'declaration'
-              );
-            });
-          nodes.nodes.forEach((node) => {
-            mixinsVariablesString += `
-                ${__stringifyScss(node.node)}
-              `;
-          });
-          // save the mixin and variables resources
-          compileObj.mixinsAndVariables = mixinsVariablesString;
-
-          // search for imports statements
-          const findedImports = compileObj.scss.match(
-            /^((?!\/\/)[\s]{0,999999999999}?)@import\s['"].*['"];/gm
-          );
-          if (findedImports && findedImports.length) {
-            // save imports
-            compileObj.importStatements = findedImports.map((s) => s.trim());
-          }
+          return reject();
 
           // go down children
           const compileImportPromise = this._compileImports(
@@ -270,14 +230,20 @@ export = class SScssCompiler extends __SCompiler {
           compileObj.scss = scss;
 
           // generate the mixins and variables string from the children
-          compileObj.mixinsAndVariablesFromChilds = this._generateMixinsAndVariablesStringFromChilds(
+          compileObj.file.mixinsAndVariablesFromChilds = this._generateMixinsAndVariablesStringFromChilds(
             compileObj
           );
+
+          let css = '';
+          if (!settings._isChild) {
+            css = this._generateCssStringFromChilds(compileObj);
+          }
 
           // init the string to compile
           let toCompile = __putUseStatementsOnTop(`
               ${compileObj.sharedResourcesStr || ''}
-              ${compileObj.mixinsAndVariablesFromChilds || ''}
+              ${compileObj.file.mixinsAndVariablesFromChilds || ''}
+              ${css}
               ${compileObj.scss}
             `);
 
@@ -449,11 +415,32 @@ export = class SScssCompiler extends __SCompiler {
         );
       }
       const hash = __md5.encrypt(
-        childCompileObj.mixinsAndVariables.replace(/\s/g, '')
+        childcompileObj.file.mixinsAndVariables.replace(/\s/g, '')
       );
       if (hashes.indexOf(hash) !== -1) return;
       hashes.push(hash);
-      string += childCompileObj.mixinsAndVariables;
+      string += childcompileObj.file.mixinsAndVariables;
+    });
+
+    return string;
+  }
+
+  _generateCssStringFromChilds(compileObj) {
+    let string = '';
+    let hashes = [];
+
+    Object.keys(compileObj.children).forEach((path) => {
+      const childCompileObj = compileObj.children[path];
+
+      if (childCompileObj.children) {
+        string += this._generateMixinsAndVariablesStringFromChilds(
+          childCompileObj
+        );
+      }
+      const hash = __md5.encrypt(childCompileObj.css.replace(/\s/g, ''));
+      if (hashes.indexOf(hash) !== -1) return;
+      hashes.push(hash);
+      string += childCompileObj.css;
     });
 
     return string;

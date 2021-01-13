@@ -202,7 +202,7 @@ const fn: ICompileTs = function compileTs(
                 value: `<magenta>[${stack}]</magenta> <yellow>updated</yellow> <green>${file.path.replace(
                   `${__packageRoot()}/`,
                   ''
-                )}</green> <yellow>${file.sizeInKBytes}kb</yellow>`
+                )}</green> <yellow>${file.stats.kbytes}kb</yellow>`
               });
 
               if (params.transpileOnly === true) {
@@ -232,7 +232,7 @@ const fn: ICompileTs = function compileTs(
                 value: `<magenta>[${stack}]</magenta> <cyan>compiled</cyan> <green>${file.path.replace(
                   `${__packageRoot()}/`,
                   ''
-                )}</green> <yellow>${file.sizeInKBytes}kb</yellow>${duration}`
+                )}</green> <yellow>${file.stats.kbytes}kb</yellow>${duration}`
               });
             }
           });

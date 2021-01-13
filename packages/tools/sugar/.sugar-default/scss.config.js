@@ -16,8 +16,6 @@ module.exports = {
   transitions: '[config.transitions]',
   typography: '[config.typography]',
 
-  plop: 'coco',
-
   compile: {
     /**
      * @name              input
@@ -58,6 +56,22 @@ module.exports = {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     rootDir: '[config.storage.rootDir]',
+
+    /**
+     * @name              includePaths
+     * @namespace         config.scss.compile
+     * @type              Array<String>
+     * @default         [`[config.storage.rootDir]`, `[config.storage.rootDir]/node_modules`]
+     *
+     * Specify the folders you want to use as resolve imports and uses sources
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    includePaths: [
+      '[config.storage.rootDir]',
+      '[config.storage.rootDir]/node_modules'
+    ],
 
     /**
      * @name              style

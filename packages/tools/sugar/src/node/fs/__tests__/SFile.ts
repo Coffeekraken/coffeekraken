@@ -17,8 +17,7 @@ module.exports = (__SFile) => {
         file.dirPath.includes('toolkits/sugar/src/node/fs/__tests__/data')
       ).toBe(true);
       expect(file.extension).toBe('gif');
-      expect(file.size).toBe(0.78925);
-      expect(file.sizeInBytes).toBe(789250);
+      expect(file.stats.bytes).toBe(789250);
       expect(file.exists).toBe(true);
 
       done();

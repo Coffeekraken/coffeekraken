@@ -258,50 +258,64 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 this.load();
             }
             var value = get_1.default(this._adapters[adapter].config, path);
-            // if (typeof value === 'function') {
-            //   const _get = this.get.bind(this);
-            //   value = value(_get);
-            // }
             if (plainObject_1.default(value)) {
                 value = deepMap_1.default(value, function (val, prop, fullPath) {
                     // check if we get some things to use as variable
-                    if (typeof val === 'string') {
-                        // if (val.substr(0, 7) === '@config') {
-                        //   val = this.get(val.replace('@config.', ''), adapter);
-                        //   return val;
-                        // }
-                        var reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
-                        var matches = val.match(reg);
-                        if (matches && matches.length) {
-                            if (matches.length === 1 && val === matches[0]) {
-                                val = _this.get(matches[0].replace('[config.', '').replace(']', ''), adapter);
-                                return val;
+                    var isArray = Array.isArray(val);
+                    if (!isArray)
+                        val = [val];
+                    val = val.map(function (v) {
+                        if (typeof v === 'string') {
+                            var reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
+                            var matches = v.match(reg);
+                            if (matches && matches.length) {
+                                if (matches.length === 1 && v === matches[0]) {
+                                    v = _this.get(matches[0].replace('[config.', '').replace(']', ''), adapter);
+                                    return v;
+                                }
+                                else {
+                                    matches.forEach(function (match) {
+                                        v = v.replace(match, _this.get(match.replace('[config.', '').replace(']', ''), adapter));
+                                    });
+                                    return v;
+                                }
                             }
-                            else {
-                                matches.forEach(function (match) {
-                                    val = val.replace(match, _this.get(match.replace('[config.', '').replace(']', ''), adapter));
-                                });
-                            }
-                            return val;
                         }
-                    }
+                        return v;
+                    });
+                    if (!isArray)
+                        return val[0];
                     return val;
                 });
             }
-            else if (typeof value === 'string') {
-                var reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
-                var matches = value.match(reg);
-                if (matches) {
-                    if (matches.length === 1 && value === matches[0]) {
-                        value = this.get(matches[0].replace('[config.', '').replace(']', ''), adapter);
-                        return value;
+            else if (typeof value === 'string' || Array.isArray(value)) {
+                var isArray = Array.isArray(value);
+                var val = isArray ? value : [value];
+                val = val.map(function (v) {
+                    if (typeof v !== 'string')
+                        return v;
+                    var reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
+                    var matches = v.match(reg);
+                    if (matches) {
+                        if (matches.length === 1 && v === matches[0]) {
+                            v = _this.get(matches[0].replace('[config.', '').replace(']', ''), adapter);
+                            return v;
+                        }
+                        else {
+                            matches.forEach(function (match) {
+                                v = v.replace(match, _this.get(match.replace('[config.', '').replace(']', ''), adapter));
+                            });
+                            return v;
+                        }
                     }
                     else {
-                        matches.forEach(function (match) {
-                            value = value.replace(match, _this.get(match.replace('[config.', '').replace(']', ''), adapter));
-                        });
+                        return v;
                     }
-                }
+                });
+                if (!isArray)
+                    value = val[0];
+                else
+                    value = val;
             }
             if (settings.throwErrorOnUndefinedConfig && value === undefined) {
                 throw new Error("You try to get the config \"" + path + "\" on the \"" + this._name + "\" SConfig instance but this config does not exists...");

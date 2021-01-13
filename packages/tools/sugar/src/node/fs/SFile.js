@@ -30,7 +30,7 @@ const ensureDirSync_1 = __importDefault(require("./ensureDirSync"));
  * - dirPath: The path to the folder where is the file
  * - extension: The file extension
  * - size: The file size in megabytes
- * - sizeInBytes: The file siz in bytes
+ * - bytes: The file siz in bytes
  * - exists:Bytestrue if the file exists on the disk, false otherwise
  *
  * @param         {String}          filepath        The file path you want to init
@@ -65,65 +65,20 @@ const Cls = class SFile extends SPromise_1.default {
      */
     constructor(filepath, settings = {}) {
         super(settings);
-        /**
-         * @name        size
-         * @type        Number
-         *
-         * Store the file size in megabytes
-         *
-         * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.size = -1;
-        /**
-         * @name        sizeInGBytes
-         * @type        Number
-         *
-         * Store the file size in gigabytes
-         *
-         * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.sizeInGBytes = -1;
-        /**
-         * @name        sizeInMBytes
-         * @type        Number
-         *
-         * Store the file size in megabytes
-         *
-         * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.sizeInMBytes = -1;
-        /**
-         * @name        sizeInKBytes
-         * @type        NuBytesber
-         *
-         * Store the file size in kilobytes
-         *
-         * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.sizeInKBytes = -1;
-        /**
-         * @name        sizeInBytes
-         * @type        NuBytesber
-         *
-         * Store the file size in bytes
-         *
-         * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.sizeInBytes = -1;
         this.treatAsValue = true;
         this._settings = deepMerge_1.default({
             id: 'SFile',
             checkExistence: true,
             cwd: process.cwd(),
-            sizeIn: 'MBytes',
-            shrinkSizesTo: 2,
+            shrinkSizesTo: 4,
             watch: true
         }, this._settings);
+        Object.defineProperty(this, '_stats', {
+            enumerable: false,
+            configurable: true,
+            writable: true,
+            value: null
+        });
         if (this._settings.cwd && !filepath.includes(this._settings.cwd)) {
             filepath = path_1.default.resolve(this._settings.cwd, filepath);
         }
@@ -142,16 +97,34 @@ const Cls = class SFile extends SPromise_1.default {
         this.name = filename_1.default(filepath);
         this.extension = extension_1.default(filepath).toLowerCase();
         this.dirPath = path_1.default.dirname(filepath);
-        if (this.exists) {
-            this.update();
-            if (this._settings.watch === true) {
-                const watcher = fs_1.default.watch(this.path, (event) => {
-                    if (event !== 'change' && watcher)
-                        watcher.close();
-                    this.update();
-                });
-            }
+        if (this._settings.watch === true) {
+            const watcher = fs_1.default.watch(this.path, (event) => {
+                if (event !== 'change' && watcher)
+                    watcher.close();
+                this.update();
+            });
         }
+    }
+    /**
+     * @name            stats
+     * @type            Object
+     * @get
+     *
+     * Access the file stats like the updated timestamp, sizes, etc...
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get stats() {
+        if (!this._stats)
+            this.update();
+        return this._stats;
+    }
+    get content() {
+        if (this._content)
+            return this._content;
+        this._content = this.readSync();
+        return this._content;
     }
     /**
      * @name            toObject
@@ -173,11 +146,7 @@ const Cls = class SFile extends SPromise_1.default {
             name: this.name,
             extension: this.extension,
             dirPath: this.dirPath,
-            size: this.size,
-            sizeInBytes: this.sizeInBytes,
-            sizeInKBytes: this.sizeInKBytes,
-            sizeInMBytes: this.sizeInMBytes,
-            sizeInGBytes: this.sizeInGBytes,
+            stats: this.stats,
             content: this.readSync()
         };
     }
@@ -192,28 +161,26 @@ const Cls = class SFile extends SPromise_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     update() {
+        // reset some variables
+        this._content = undefined;
         this.exists = fs_1.default.existsSync(this.path);
         if (!this.exists) {
-            this.sizeInBytes = -1;
-            this.sizeInKBytes = -1;
-            this.sizeInMBytes = -1;
-            this.sizeInGBytes = -1;
+            this._stats = null;
             return;
         }
         // get the file stats
         const stats = fs_1.default.statSync(this.path);
-        this.sizeInBytes = stats.size;
-        this.sizeInGBytes = stats.sizes * 0.00000001;
-        this.sizeInMBytes = stats.size * 0.000001;
-        this.sizeInKBytes = stats.size * 0.001;
+        this._stats = stats;
+        this._stats.bytes = stats.size;
+        this._stats.gbytes = stats.size * 0.00000001;
+        this._stats.mbytes = stats.size * 0.000001;
+        this._stats.kbytes = stats.size * 0.001;
         if (this._settings.shrinkSizesTo) {
-            this.sizeInBytes = Number(this.sizeInBytes.toFixed(this._settings.shrinkSizesTo));
-            this.sizeInKBytes = Number(this.sizeInKBytes.toFixed(this._settings.shrinkSizesTo));
-            this.sizeInMBytes = Number(this.sizeInMBytes.toFixed(this._settings.shrinkSizesTo));
-            this.sizeInGBytes = Number(this.sizeInGBytes.toFixed(this._settings.shrinkSizesTo));
+            this._stats.bytes = Number(this._stats.bytes.toFixed(this._settings.shrinkSizesTo));
+            this._stats.kbytes = Number(this._stats.kbytes.toFixed(this._settings.shrinkSizesTo));
+            this._stats.mbytes = Number(this._stats.mbytes.toFixed(this._settings.shrinkSizesTo));
+            this._stats.gbytes = Number(this._stats.gbytes.toFixed(this._settings.shrinkSizesTo));
         }
-        // save the default size
-        this.size = this[`sizeIn${this._settings.sizeIn}`];
     }
     /**
      * @name        toString

@@ -176,7 +176,7 @@ const fn = function compileTs(params, settings) {
                             value: `${file.path.replace(`${packageRoot_1.default()}/`, '')}`
                         });
                         promise.trigger('log', {
-                            value: `<magenta>[${stack}]</magenta> <yellow>updated</yellow> <green>${file.path.replace(`${packageRoot_1.default()}/`, '')}</green> <yellow>${file.sizeInKBytes}kb</yellow>`
+                            value: `<magenta>[${stack}]</magenta> <yellow>updated</yellow> <green>${file.path.replace(`${packageRoot_1.default()}/`, '')}</green> <yellow>${file.stats.kbytes}kb</yellow>`
                         });
                         if (params.transpileOnly === true) {
                             const typescriptResult = yield transpileAndSave_1.default(file.path, stackObj.tsconfigJson.compilerOptions);
@@ -193,7 +193,7 @@ const fn = function compileTs(params, settings) {
                             value: `${file.path.replace(`${packageRoot_1.default()}/`, '')}`
                         });
                         promise.trigger('log', {
-                            value: `<magenta>[${stack}]</magenta> <cyan>compiled</cyan> <green>${file.path.replace(`${packageRoot_1.default()}/`, '')}</green> <yellow>${file.sizeInKBytes}kb</yellow>${duration}`
+                            value: `<magenta>[${stack}]</magenta> <cyan>compiled</cyan> <green>${file.path.replace(`${packageRoot_1.default()}/`, '')}</green> <yellow>${file.stats.kbytes}kb</yellow>${duration}`
                         });
                     }
                 }));

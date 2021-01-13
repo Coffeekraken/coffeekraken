@@ -192,6 +192,7 @@ export = class SConfig {
     }
 
     const config = this._adapters[adapter].instance.load();
+
     if (config instanceof Promise) {
       return new Promise((resolve) => {
         config.then((c) => {
@@ -280,65 +281,80 @@ export = class SConfig {
 
     let value = __get(this._adapters[adapter].config, path);
 
-    // if (typeof value === 'function') {
-
-    //   const _get = this.get.bind(this);
-    //   value = value(_get);
-    // }
-
     if (__isPlainObject(value)) {
       value = __deepMap(value, (val, prop, fullPath) => {
         // check if we get some things to use as variable
-        if (typeof val === 'string') {
-          // if (val.substr(0, 7) === '@config') {
-          //   val = this.get(val.replace('@config.', ''), adapter);
-          //   return val;
-          // }
-          const reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
-          const matches = val.match(reg);
-          if (matches && matches.length) {
-            if (matches.length === 1 && val === matches[0]) {
-              val = this.get(
-                matches[0].replace('[config.', '').replace(']', ''),
-                adapter
-              );
-              return val;
-            } else {
-              matches.forEach((match) => {
-                val = val.replace(
-                  match,
-                  this.get(
-                    match.replace('[config.', '').replace(']', ''),
-                    adapter
-                  )
-                );
-              });
-            }
-            return val;
-          }
-        }
 
+        const isArray = Array.isArray(val);
+        if (!isArray) val = [val];
+
+        val = val.map((v) => {
+          if (typeof v === 'string') {
+            const reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
+
+            const matches = v.match(reg);
+
+            if (matches && matches.length) {
+              if (matches.length === 1 && v === matches[0]) {
+                v = this.get(
+                  matches[0].replace('[config.', '').replace(']', ''),
+                  adapter
+                );
+                return v;
+              } else {
+                matches.forEach((match) => {
+                  v = v.replace(
+                    match,
+                    this.get(
+                      match.replace('[config.', '').replace(']', ''),
+                      adapter
+                    )
+                  );
+                });
+                return v;
+              }
+            }
+          }
+          return v;
+        });
+
+        if (!isArray) return val[0];
         return val;
       });
-    } else if (typeof value === 'string') {
-      const reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
-      const matches = value.match(reg);
-      if (matches) {
-        if (matches.length === 1 && value === matches[0]) {
-          value = this.get(
-            matches[0].replace('[config.', '').replace(']', ''),
-            adapter
-          );
-          return value;
-        } else {
-          matches.forEach((match) => {
-            value = value.replace(
-              match,
-              this.get(match.replace('[config.', '').replace(']', ''), adapter)
+    } else if (typeof value === 'string' || Array.isArray(value)) {
+      const isArray = Array.isArray(value);
+      let val = isArray ? value : [value];
+
+      val = val.map((v) => {
+        if (typeof v !== 'string') return v;
+        const reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
+        const matches = v.match(reg);
+        if (matches) {
+          if (matches.length === 1 && v === matches[0]) {
+            v = this.get(
+              matches[0].replace('[config.', '').replace(']', ''),
+              adapter
             );
-          });
+            return v;
+          } else {
+            matches.forEach((match) => {
+              v = v.replace(
+                match,
+                this.get(
+                  match.replace('[config.', '').replace(']', ''),
+                  adapter
+                )
+              );
+            });
+            return v;
+          }
+        } else {
+          return v;
         }
-      }
+      });
+
+      if (!isArray) value = val[0];
+      else value = val;
     }
 
     if (settings.throwErrorOnUndefinedConfig && value === undefined) {

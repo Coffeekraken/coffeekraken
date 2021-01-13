@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 const extension_1 = __importDefault(require("../../fs/extension"));
-const SFileCache_1 = __importDefault(require("../../cache/SFileCache"));
 const unquote_1 = __importDefault(require("../../string/unquote"));
 const path_1 = __importDefault(require("path"));
 const stripCssComments_1 = __importDefault(require("../../css/stripCssComments"));
@@ -25,14 +24,10 @@ const md5_1 = __importDefault(require("../../crypt/md5"));
 const sass_1 = __importDefault(require("sass"));
 const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
 const filename_1 = __importDefault(require("../../fs/filename"));
-const path_2 = __importDefault(require("../../is/path"));
 const fs_1 = __importDefault(require("fs"));
 const getSharedResourcesString_1 = __importDefault(require("../utils/getSharedResourcesString"));
 const putUseStatementsOnTop_1 = __importDefault(require("../utils/putUseStatementsOnTop"));
 const glob_1 = __importDefault(require("glob"));
-const scss_parser_1 = require("scss-parser");
-const scss_parser_2 = require("scss-parser");
-const query_ast_1 = __importDefault(require("query-ast"));
 const csso_1 = __importDefault(require("csso"));
 const is_glob_1 = __importDefault(require("is-glob"));
 const unique_1 = __importDefault(require("../../array/unique"));
@@ -40,6 +35,7 @@ const SCompiler_1 = __importDefault(require("../../compiler/SCompiler"));
 const SScssInterface_1 = __importDefault(require("./interface/SScssInterface"));
 const absolute_1 = __importDefault(require("../../path/absolute"));
 const ensureDirSync_1 = __importDefault(require("../../fs/ensureDirSync"));
+const SScssFile_1 = __importDefault(require("../SScssFile"));
 module.exports = (_a = class SScssCompiler extends SCompiler_1.default {
         /**
          * @name            constructor
@@ -98,7 +94,9 @@ module.exports = (_a = class SScssCompiler extends SCompiler_1.default {
                 const startTime = Date.now();
                 for (let i = 0; i < filesPaths.length; i++) {
                     let filePath = filesPaths[i];
+                    let file = new SScssFile_1.default(filePath);
                     let compileObj = {
+                        file,
                         children: {},
                         importStatements: [],
                         includePaths: [],
@@ -151,57 +149,18 @@ module.exports = (_a = class SScssCompiler extends SCompiler_1.default {
                         sourceMap: settings.map,
                         includePaths: compileObj.includePaths
                     }, sassPassedSettings);
-                    // engage the cache
-                    const fileCache = new SFileCache_1.default(settings.id, {
-                        ttl: '10d'
+                    // // engage the cache
+                    // const fileCache = new __SFileCache(settings.id, {
+                    //   ttl: '10d'
+                    // });
+                    // if (settings.clearCache && !settings._isChild) {
+                    //   await fileCache.clear();
+                    // }
+                    const res = yield file.compile({
+                        sharedResources: getSharedResourcesString_1.default(settings.sharedResources || [])
                     });
-                    if (settings.clearCache && !settings._isChild) {
-                        yield fileCache.clear();
-                    }
-                    if (path_2.default(filePath)) {
-                        if (!fs_1.default.existsSync(filePath) && filePath.slice(0, 1) === '/') {
-                            filePath = filePath.slice(1);
-                        }
-                        filePath = path_1.default.resolve(settings.rootDir, filePath);
-                        const sourcePath = this._getRealFilePath(filePath);
-                        if (sourcePath) {
-                            // add the folder path in the includePaths setting
-                            const folderPath = folderPath_1.default(sourcePath);
-                            sassSettings.includePaths.unshift(folderPath);
-                            settings.rootDir = folderPath;
-                            // read the file to get his content
-                            compileObj.scss = fs_1.default.readFileSync(filePath, 'utf8');
-                        }
-                    }
-                    else {
-                        // set the scss property with the source
-                        compileObj.scss = filePath;
-                    }
-                    // extract the things that can be used
-                    // by others like mixins and variables declarations$
-                    const ast = scss_parser_1.parse(compileObj.scss);
-                    const $ = query_ast_1.default(ast);
-                    let mixinsVariablesString = '';
-                    const nodes = $('stylesheet')
-                        .children()
-                        .filter((node) => {
-                        return ((node.node.type === 'atrule' &&
-                            node.node.value[0].value === 'mixin') ||
-                            node.node.type === 'declaration');
-                    });
-                    nodes.nodes.forEach((node) => {
-                        mixinsVariablesString += `
-                ${scss_parser_2.stringify(node.node)}
-              `;
-                    });
-                    // save the mixin and variables resources
-                    compileObj.mixinsAndVariables = mixinsVariablesString;
-                    // search for imports statements
-                    const findedImports = compileObj.scss.match(/^((?!\/\/)[\s]{0,999999999999}?)@import\s['"].*['"];/gm);
-                    if (findedImports && findedImports.length) {
-                        // save imports
-                        compileObj.importStatements = findedImports.map((s) => s.trim());
-                    }
+                    console.log(res);
+                    return reject();
                     // go down children
                     const compileImportPromise = this._compileImports(compileObj, settings);
                     compileImportPromise.on('reject', (e) => {
@@ -211,11 +170,16 @@ module.exports = (_a = class SScssCompiler extends SCompiler_1.default {
                     compileObj.children = files;
                     compileObj.scss = scss;
                     // generate the mixins and variables string from the children
-                    compileObj.mixinsAndVariablesFromChilds = this._generateMixinsAndVariablesStringFromChilds(compileObj);
+                    compileObj.file.mixinsAndVariablesFromChilds = this._generateMixinsAndVariablesStringFromChilds(compileObj);
+                    let css = '';
+                    if (!settings._isChild) {
+                        css = this._generateCssStringFromChilds(compileObj);
+                    }
                     // init the string to compile
                     let toCompile = putUseStatementsOnTop_1.default(`
               ${compileObj.sharedResourcesStr || ''}
-              ${compileObj.mixinsAndVariablesFromChilds || ''}
+              ${compileObj.file.mixinsAndVariablesFromChilds || ''}
+              ${css}
               ${compileObj.scss}
             `);
                     const cacheContext = {
@@ -346,11 +310,27 @@ module.exports = (_a = class SScssCompiler extends SCompiler_1.default {
                 if (childCompileObj.children) {
                     string += this._generateMixinsAndVariablesStringFromChilds(childCompileObj);
                 }
-                const hash = md5_1.default.encrypt(childCompileObj.mixinsAndVariables.replace(/\s/g, ''));
+                const hash = md5_1.default.encrypt(childcompileObj.file.mixinsAndVariables.replace(/\s/g, ''));
                 if (hashes.indexOf(hash) !== -1)
                     return;
                 hashes.push(hash);
-                string += childCompileObj.mixinsAndVariables;
+                string += childcompileObj.file.mixinsAndVariables;
+            });
+            return string;
+        }
+        _generateCssStringFromChilds(compileObj) {
+            let string = '';
+            let hashes = [];
+            Object.keys(compileObj.children).forEach((path) => {
+                const childCompileObj = compileObj.children[path];
+                if (childCompileObj.children) {
+                    string += this._generateMixinsAndVariablesStringFromChilds(childCompileObj);
+                }
+                const hash = md5_1.default.encrypt(childCompileObj.css.replace(/\s/g, ''));
+                if (hashes.indexOf(hash) !== -1)
+                    return;
+                hashes.push(hash);
+                string += childCompileObj.css;
             });
             return string;
         }

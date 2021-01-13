@@ -51,8 +51,9 @@ export default interface ISFile {
   size: number;
   sizeInBytes: number;
   exists: boolean;
+  content: string;
   toObject: ISFileToObjectFn;
-  update: ISFileUpdateFn;
+  update(): void;
   read: ISFileReadFn;
   readSync: ISFileReadSyncFn;
   write: ISFileWriteFn;

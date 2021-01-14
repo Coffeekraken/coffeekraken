@@ -55,7 +55,7 @@ module.exports = {
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: '[config.storage.rootDir]',
+    rootDir: '[config.storage.rootDir]/src/css',
 
     /**
      * @name              includePaths

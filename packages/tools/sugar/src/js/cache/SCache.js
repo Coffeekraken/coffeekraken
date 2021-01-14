@@ -165,7 +165,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          */
         SCache.prototype.getAdapter = function () {
             return __awaiter(this, void 0, void 0, function () {
-                var adapter, adptr;
+                var adapter, adptr, adptrSettings;
                 return __generator(this, function (_a) {
                     // check if we have already an adapter setted for this instance
                     if (this._adapter)
@@ -176,7 +176,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         adptr = require(this._defaultAdaptersPaths[adapter]);
                         if (adptr.default)
                             adptr = adptr.default;
-                        this._adapter = new adptr(this, this._settings);
+                        adptrSettings = {};
+                        if (this._settings.adapters && this._settings.adapters[adapter]) {
+                            adptrSettings = this._settings.adapters[adapter];
+                        }
+                        this._adapter = new adptr(this, adptrSettings);
                     }
                     else if (adapter instanceof SCacheAdapter_1.default) {
                         this._adapter = adapter;

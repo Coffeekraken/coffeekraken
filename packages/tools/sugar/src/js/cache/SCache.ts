@@ -148,7 +148,11 @@ export = class SCache {
     if (typeof adapter === 'string' && this._defaultAdaptersPaths[adapter]) {
       let adptr = require(this._defaultAdaptersPaths[adapter]);
       if (adptr.default) adptr = adptr.default;
-      this._adapter = new adptr(this, this._settings);
+      let adptrSettings = {};
+      if (this._settings.adapters && this._settings.adapters[adapter]) {
+        adptrSettings = this._settings.adapters[adapter];
+      }
+      this._adapter = new adptr(this, adptrSettings);
     } else if (adapter instanceof __SCacheAdapter) {
       this._adapter = adapter;
     }

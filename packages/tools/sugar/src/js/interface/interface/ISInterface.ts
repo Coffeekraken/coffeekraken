@@ -29,6 +29,7 @@ export interface ISInterfaceCtor {
   new (settings?: ISInterfaceSettings): ISInterface;
   definition: ISInterfaceDefinitionMap | ISInterfaceDefinition;
   settings: ISInterfaceSettings;
+  defaults(): any;
 }
 export default interface ISInterface {
   _definition: ISInterfaceDefinitionMap | ISInterfaceDefinition;

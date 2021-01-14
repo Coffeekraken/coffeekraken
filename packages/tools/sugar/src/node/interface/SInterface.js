@@ -133,7 +133,7 @@ const Cls = (_a = class SInterface {
             }
         }
         /**
-         * @name              getDefaultValues
+         * @name              defaults
          * @type              Function
          * @static
          *
@@ -142,7 +142,7 @@ const Cls = (_a = class SInterface {
          * @since         2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        static getDefaultValues() {
+        static defaults() {
             const result = this.apply({}, {
                 complete: true,
                 throw: false,

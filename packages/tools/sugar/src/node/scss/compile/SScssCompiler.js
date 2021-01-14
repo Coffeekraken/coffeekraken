@@ -13,24 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 var _a;
-const extension_1 = __importDefault(require("../../fs/extension"));
-const unquote_1 = __importDefault(require("../../string/unquote"));
-const path_1 = __importDefault(require("path"));
-const folderPath_1 = __importDefault(require("../../fs/folderPath"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const SPromise_1 = __importDefault(require("../../promise/SPromise"));
-const md5_1 = __importDefault(require("../../crypt/md5"));
-const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
-const filename_1 = __importDefault(require("../../fs/filename"));
-const fs_1 = __importDefault(require("fs"));
-const getSharedResourcesString_1 = __importDefault(require("../utils/getSharedResourcesString"));
 const glob_1 = __importDefault(require("glob"));
 const is_glob_1 = __importDefault(require("is-glob"));
-const unique_1 = __importDefault(require("../../array/unique"));
 const SCompiler_1 = __importDefault(require("../../compiler/SCompiler"));
-const SScssInterface_1 = __importDefault(require("./interface/SScssInterface"));
 const absolute_1 = __importDefault(require("../../path/absolute"));
 const SScssFile_1 = __importDefault(require("../SScssFile"));
+const SScssCompileParamsInterface_1 = __importDefault(require("./interface/SScssCompileParamsInterface"));
 module.exports = (_a = class SScssCompiler extends SCompiler_1.default {
         /**
          * @name            constructor
@@ -69,258 +59,56 @@ module.exports = (_a = class SScssCompiler extends SCompiler_1.default {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         _compile(input, settings = {}) {
-            return new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
-                settings = deepMerge_1.default(this._settings, {
-                    _isChild: false
-                }, settings);
-                const resultsObj = {};
-                let filesPaths = [];
-                // make input absolute
-                input = absolute_1.default(input);
-                // process inputs
-                input.forEach((inputStr) => {
-                    if (is_glob_1.default(inputStr)) {
-                        filesPaths = [...filesPaths, ...glob_1.default.sync(inputStr)];
-                    }
-                    else {
-                        filesPaths.push(inputStr);
-                    }
-                });
-                const startTime = Date.now();
+            const promise = new SPromise_1.default({
+                id: 'COMPILER'
+            });
+            settings = deepMerge_1.default(this._settings, {}, settings);
+            const resultsObj = {};
+            let filesPaths = [];
+            // make input absolute
+            input = absolute_1.default(input);
+            // process inputs
+            input.forEach((inputStr) => {
+                if (is_glob_1.default(inputStr)) {
+                    filesPaths = [...filesPaths, ...glob_1.default.sync(inputStr)];
+                }
+                else {
+                    filesPaths.push(inputStr);
+                }
+            });
+            const startTime = Date.now();
+            (() => __awaiter(this, void 0, void 0, function* () {
                 for (let i = 0; i < filesPaths.length; i++) {
                     let filePath = filesPaths[i];
-                    let file = new SScssFile_1.default(filePath);
-                    const includePaths = unique_1.default([
-                        ...(settings.includePaths
-                            ? !Array.isArray(settings.includePaths)
-                                ? [settings.includePaths]
-                                : settings.includePaths
-                            : []),
-                        ...(settings.rootDir
-                            ? !Array.isArray(settings.rootDir)
-                                ? [settings.rootDir]
-                                : settings.rootDir
-                            : []),
-                        ...(settings.sass && settings.sass.includePaths
-                            ? !Array.isArray(settings.sass.includePaths)
-                                ? [settings.sass.includePaths]
-                                : settings.sass.includePaths
-                            : []),
-                        `${packageRoot_1.default()}/node_modules`
-                    ]);
-                    // shared resources
-                    let sharedResources = settings.sharedResources || [];
-                    if (!Array.isArray(sharedResources))
-                        sharedResources = [sharedResources];
-                    const sharedResourcesStr = getSharedResourcesString_1.default(sharedResources);
-                    // sass settings
-                    let sassPassedSettings = Object.assign({}, settings.sass || {});
-                    delete sassPassedSettings.includePaths;
-                    delete sassPassedSettings.sharedResources;
-                    const sassSettings = deepMerge_1.default({
-                        outputStyle: settings.style,
-                        sourceMap: settings.map,
-                        includePaths: includePaths
-                    }, sassPassedSettings);
-                    const res = yield file.compile({
-                        sharedResources: getSharedResourcesString_1.default(settings.sharedResources || [])
+                    let file = new SScssFile_1.default(filePath, {
+                        compile: settings
                     });
+                    promise.pipe(file);
+                    const resPromise = file.compile(Object.assign({}, settings));
+                    const res = yield resPromise;
                     resultsObj[file.path] = res;
                 }
                 // resolve with the compilation result
-                resolve({
-                    files: resultsObj,
-                    startTime: startTime,
-                    endTime: Date.now(),
-                    duration: Date.now() - startTime
-                });
-            }), {
-                id: this._settings.id
-            });
-        }
-        _importer(compileObj) {
-            return (url, prev, done) => {
-                if (compileObj.sharedResourcesStr) {
-                    const realPath = this._findDependency(url);
-                    if (realPath) {
-                        let content = fs_1.default.readFileSync(realPath, 'utf8');
-                        const importMatches = content.match(/@import\s['"].*['"];/gm);
-                        if (importMatches) {
-                            importMatches.forEach((importStatement) => {
-                                let replaceImportStatement = importStatement;
-                                const importPathMatches = importStatement.match(/['"].*['"]/g);
-                                if (importPathMatches) {
-                                    const importPath = unquote_1.default(importPathMatches[0]);
-                                    const absoluteImportPath = path_1.default.resolve(folderPath_1.default(realPath), importPath);
-                                    content = content.replace(importStatement, `@import "${absoluteImportPath}";`);
-                                }
-                            });
-                        }
-                        return {
-                            contents: `
-              ${compileObj.sharedResourcesStr}
-              ${content}
-            `
-                        };
-                    }
+                if (!settings.watch) {
+                    promise.resolve({
+                        files: resultsObj,
+                        startTime: startTime,
+                        endTime: Date.now(),
+                        duration: Date.now() - startTime
+                    });
                 }
-                return null;
-            };
-        }
-        _generateMixinsAndVariablesStringFromChilds(compileObj) {
-            let string = '';
-            let hashes = [];
-            Object.keys(compileObj.children).forEach((path) => {
-                const childCompileObj = compileObj.children[path];
-                if (childCompileObj.children) {
-                    string += this._generateMixinsAndVariablesStringFromChilds(childCompileObj);
+                else {
+                    promise.trigger('files', {
+                        files: resultsObj,
+                        startTime: startTime,
+                        endTime: Date.now(),
+                        duration: Date.now() - startTime
+                    });
                 }
-                const hash = md5_1.default.encrypt(childcompileObj.file.mixinsAndVariables.replace(/\s/g, ''));
-                if (hashes.indexOf(hash) !== -1)
-                    return;
-                hashes.push(hash);
-                string += childcompileObj.file.mixinsAndVariables;
-            });
-            return string;
-        }
-        _generateCssStringFromChilds(compileObj) {
-            let string = '';
-            let hashes = [];
-            Object.keys(compileObj.children).forEach((path) => {
-                const childCompileObj = compileObj.children[path];
-                if (childCompileObj.children) {
-                    string += this._generateMixinsAndVariablesStringFromChilds(childCompileObj);
-                }
-                const hash = md5_1.default.encrypt(childCompileObj.css.replace(/\s/g, ''));
-                if (hashes.indexOf(hash) !== -1)
-                    return;
-                hashes.push(hash);
-                string += childCompileObj.css;
-            });
-            return string;
-        }
-        _findDependency(path) {
-            for (let i = 0; i < this._includePaths.length; i++) {
-                const includePath = this._includePaths[i];
-                const realPath = this._getRealFilePath(`${includePath}/${path}`);
-                if (realPath)
-                    return realPath;
-            }
-            return null;
-        }
-        _bundleChildren(object) {
-            if (!object.children) {
-                return '';
-            }
-            let resultString = '';
-            Object.keys(object.children).forEach((importPath) => {
-                const childObj = object.children[importPath];
-                if (childObj.children) {
-                    const ch = this._bundleChildren(childObj);
-                    if (ch)
-                        resultString += ch;
-                }
-                resultString += `
-        ${childObj.css || ''}
-      `;
-            });
-            return resultString;
-        }
-        _compileImports(compileObj, settings) {
-            return new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
-                // loop on each imports
-                const childrenObj = {};
-                let scss = compileObj.scss;
-                let finalImports = {};
-                const includePaths = unique_1.default(compileObj.includePaths);
-                for (let i = 0; i < compileObj.importStatements.length; i++) {
-                    const importStatement = compileObj.importStatements[i].trim();
-                    const importStatementPath = unquote_1.default(importStatement.replace('@import ', '').replace(';', '').trim());
-                    let importAbsolutePath;
-                    // search in include paths
-                    for (let j = 0; j < includePaths.length; j++) {
-                        const includePath = includePaths[j];
-                        const potentialPath = this._getRealFilePath(path_1.default.resolve(includePath, importStatementPath));
-                        if (fs_1.default.existsSync(potentialPath)) {
-                            importAbsolutePath = potentialPath;
-                            break;
-                        }
-                    }
-                    if (!importAbsolutePath) {
-                        continue;
-                    }
-                    if (is_glob_1.default(importAbsolutePath)) {
-                        if (!finalImports[importStatement]) {
-                            finalImports[importStatement] = {
-                                rawStatement: importStatement,
-                                rawPath: importStatementPath,
-                                paths: []
-                            };
-                        }
-                        const globPaths = glob_1.default.sync(importAbsolutePath, {});
-                        if (globPaths && globPaths.length) {
-                            globPaths.forEach((path) => {
-                                finalImports[importStatement].paths.push({
-                                    absolutePath: path,
-                                    relativePath: path_1.default.relative(settings.rootDir, path)
-                                });
-                            });
-                        }
-                        continue;
-                    }
-                    finalImports[importStatement] = {
-                        rawStatement: importStatement,
-                        rawPath: importStatementPath,
-                        paths: [
-                            {
-                                absolutePath: importAbsolutePath,
-                                relativePath: path_1.default.relative(settings.rootDir, importAbsolutePath)
-                            }
-                        ]
-                    };
-                }
-                for (let i = 0; i < Object.keys(finalImports).length; i++) {
-                    const importObj = finalImports[Object.keys(finalImports)[i]];
-                    for (let j = 0; j < importObj.paths.length; j++) {
-                        const pathObj = importObj.paths[j];
-                        const importPath = this._getRealFilePath(pathObj.absolutePath);
-                        if (importPath) {
-                            // compile the finded path
-                            const compilePromise = this.compile(importPath, Object.assign(Object.assign({}, settings), { _isChild: true, rootDir: folderPath_1.default(importPath), save: false }));
-                            compilePromise.on('reject', (e) => {
-                                reject(e);
-                            });
-                            const compileRes = yield compilePromise;
-                            childrenObj[pathObj.absolutePath] =
-                                compileRes.files[Object.keys(compileRes.files)[0]];
-                        }
-                    }
-                    scss = scss.replace(importObj.rawStatement, '');
-                }
-                resolve({
-                    files: childrenObj,
-                    scss
-                });
-            }));
-        }
-        _getRealFilePath(path) {
-            const extension = extension_1.default(path);
-            const filename = filename_1.default(path);
-            const folderPath = folderPath_1.default(path);
-            let pattern;
-            if (!extension) {
-                pattern = `${folderPath}/?(_)${filename}.*`;
-            }
-            else {
-                pattern = `${folderPath}/?(_)${filename}`;
-            }
-            const potentialPaths = glob_1.default.sync(pattern);
-            if (potentialPaths && potentialPaths.length) {
-                return potentialPaths[0];
-            }
-            return null;
+            }))();
+            return promise;
         }
     },
-    _a.interface = SScssInterface_1.default,
+    _a.interface = SScssCompileParamsInterface_1.default,
     _a);
 //# sourceMappingURL=SScssCompiler.js.map

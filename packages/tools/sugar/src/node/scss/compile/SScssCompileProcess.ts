@@ -1,14 +1,10 @@
 // @ts-nocheck
 
 import SProcess from '../../process/SProcess';
-import ISCompileTsProcess, {
-  ISCompileTsProcessParams,
-  ISCompileTsProcessSettings,
-  ISCompileTsProcessCtor
-} from './interface/ISCompileTsProcess';
-import __SScssInterface from './interface/SScssInterface';
-
 import __SScssCompiler from './SScssCompiler';
+
+import __SScssCompileParamsInterface from './interface/SScssCompileParamsInterface';
+import __ISScssCompileParams from './interface/ISScssCompileParams';
 
 /**
  * @name            SScssCompileProcess
@@ -27,7 +23,7 @@ import __SScssCompiler from './SScssCompiler';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SScssCompileProcess extends SProcess {
-  static interface = __SScssInterface;
+  static interface = __SScssCompileParamsInterface;
 
   /**
    * @name          constructor
@@ -61,12 +57,11 @@ class SScssCompileProcess extends SProcess {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  process(params, settings = {}) {
+  process(params: __ISScssCompileParams, settings = {}) {
     const input = params.input;
     delete params.input;
-
+    this._settings.exitAtEnd = !params.watch;
     return this._scssCompiler.compile(input, {
-      ...settings,
       ...params
     });
   }

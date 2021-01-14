@@ -20,7 +20,7 @@ import __sugarConfig from '../../../config/sugar';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SBuildScssInterface extends __SInterface {
+export = class SScssCompileParamsInterface extends __SInterface {
   static definition = {
     input: {
       type: 'String|Array<String>',
@@ -39,6 +39,14 @@ export = class SBuildScssInterface extends __SInterface {
     save: {
       type: 'Boolean',
       default: false
+    },
+    watch: {
+      type: 'Boolean',
+      default: false
+    },
+    compileOnChange: {
+      type: 'Boolean',
+      default: true
     },
     style: {
       type: 'String',

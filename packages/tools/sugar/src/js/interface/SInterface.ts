@@ -148,7 +148,7 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
   };
 
   /**
-   * @name              getDefaultValues
+   * @name              defaults
    * @type              Function
    * @static
    *
@@ -157,7 +157,7 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static getDefaultValues() {
+  static defaults() {
     const result: ISInterfaceResult = this.apply(
       {},
       {

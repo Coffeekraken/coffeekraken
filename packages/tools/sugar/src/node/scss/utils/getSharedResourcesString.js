@@ -26,8 +26,8 @@ const jsObjectToScssMap_1 = __importDefault(require("./jsObjectToScssMap"));
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function getScssSharedResourcesString(array = null) {
-    if (!array)
+function getScssSharedResourcesString(array = []) {
+    if (!array || !array.length)
         array = sugar_1.default('scss.sharedResources');
     let importsStrings = '';
     array.forEach((importItem) => {

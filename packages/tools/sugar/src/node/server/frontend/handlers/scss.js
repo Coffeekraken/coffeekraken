@@ -19,7 +19,7 @@ const SBuildScssInterface_1 = __importDefault(require("../../../scss/build/inter
 module.exports = function scss(req, res, settings = {}) {
     const promise = new SPromise_1.default();
     (() => __awaiter(this, void 0, void 0, function* () {
-        const defaultValuesObj = SBuildScssInterface_1.default.getDefaultValues();
+        const defaul9tValuesObj = SBuildScssInterface_1.default.defaults();
         const compiler = new SScssCompiler_1.default(defaultValuesObj);
         const duration = new SDuration_1.default();
         const compilerPromise = compiler.compile(req.path, Object.assign({}, (req.query || {})));

@@ -22,10 +22,12 @@ import __csso from 'csso';
 import __isGlob from 'is-glob';
 import __unique from '../../array/unique';
 import __SCompiler from '../../compiler/SCompiler';
-import __SScssInterface from './interface/SScssInterface';
 import __absolute from '../../path/absolute';
 import __ensureDirSync from '../../fs/ensureDirSync';
 import __SScssFile from '../SScssFile';
+
+import __ISScssCompileParams from './interface/ISScssCompileParams';
+import __SScssCompileParamsInterface from './interface/SScssCompileParamsInterface';
 
 /**
  * @name                SScssCompiler
@@ -63,7 +65,7 @@ import __SScssFile from '../SScssFile';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SScssCompiler extends __SCompiler {
-  static interface = __SScssInterface;
+  static interface = __SScssCompileParamsInterface;
 
   _includePaths = [];
 
@@ -77,7 +79,7 @@ export = class SScssCompiler extends __SCompiler {
    * @since           2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(settings: __ISScssCompileParams = {}) {
     super(__deepMerge({}, settings));
 
     // prod
@@ -104,324 +106,62 @@ export = class SScssCompiler extends __SCompiler {
    * @since             2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _compile(input, settings = {}) {
-    return new __SPromise(
-      async (resolve, reject, trigger) => {
-        settings = __deepMerge(
-          this._settings,
-          {
-            _isChild: false
-          },
-          settings
-        );
+  _compile(input, settings: __ISScssCompileParams = {}) {
+    const promise = new __SPromise({
+      id: 'COMPILER'
+    });
+    settings = __deepMerge(this._settings, {}, settings);
 
-        const resultsObj = {};
+    const resultsObj = {};
 
-        let filesPaths = [];
+    let filesPaths = [];
 
-        // make input absolute
-        input = __absolute(input);
-        // process inputs
-        input.forEach((inputStr) => {
-          if (__isGlob(inputStr)) {
-            filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
-          } else {
-            filesPaths.push(inputStr);
-          }
+    // make input absolute
+    input = __absolute(input);
+    // process inputs
+    input.forEach((inputStr) => {
+      if (__isGlob(inputStr)) {
+        filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
+      } else {
+        filesPaths.push(inputStr);
+      }
+    });
+
+    const startTime = Date.now();
+
+    (async () => {
+      for (let i = 0; i < filesPaths.length; i++) {
+        let filePath = filesPaths[i];
+        let file = new __SScssFile(filePath, {
+          compile: settings
         });
+        promise.pipe(file);
 
-        const startTime = Date.now();
+        const resPromise = file.compile({
+          ...settings
+        });
+        const res = await resPromise;
+        resultsObj[file.path] = res;
+      }
 
-        for (let i = 0; i < filesPaths.length; i++) {
-          let filePath = filesPaths[i];
-          let file = new __SScssFile(filePath);
-
-          const includePaths = __unique([
-            ...(settings.includePaths
-              ? !Array.isArray(settings.includePaths)
-                ? [settings.includePaths]
-                : settings.includePaths
-              : []),
-            ...(settings.rootDir
-              ? !Array.isArray(settings.rootDir)
-                ? [settings.rootDir]
-                : settings.rootDir
-              : []),
-            ...(settings.sass && settings.sass.includePaths
-              ? !Array.isArray(settings.sass.includePaths)
-                ? [settings.sass.includePaths]
-                : settings.sass.includePaths
-              : []),
-            `${__packageRoot()}/node_modules`
-          ]);
-
-          // shared resources
-          let sharedResources = settings.sharedResources || [];
-          if (!Array.isArray(sharedResources))
-            sharedResources = [sharedResources];
-          const sharedResourcesStr = __getSharedResourcesString(
-            sharedResources
-          );
-
-          // sass settings
-          let sassPassedSettings = Object.assign({}, settings.sass || {});
-          delete sassPassedSettings.includePaths;
-          delete sassPassedSettings.sharedResources;
-          const sassSettings = __deepMerge(
-            {
-              outputStyle: settings.style,
-              sourceMap: settings.map,
-              includePaths: includePaths
-            },
-            sassPassedSettings
-          );
-
-          const res = await file.compile({
-            sharedResources: __getSharedResourcesString(
-              settings.sharedResources || []
-            )
-          });
-          resultsObj[file.path] = res;
-        }
-
-        // resolve with the compilation result
-        resolve({
+      // resolve with the compilation result
+      if (!settings.watch) {
+        promise.resolve({
           files: resultsObj,
           startTime: startTime,
           endTime: Date.now(),
           duration: Date.now() - startTime
         });
-      },
-      {
-        id: this._settings.id
+      } else {
+        promise.trigger('files', {
+          files: resultsObj,
+          startTime: startTime,
+          endTime: Date.now(),
+          duration: Date.now() - startTime
+        });
       }
-    );
-  }
+    })();
 
-  _importer(compileObj) {
-    return (url, prev, done) => {
-      if (compileObj.sharedResourcesStr) {
-        const realPath = this._findDependency(url);
-
-        if (realPath) {
-          let content = __fs.readFileSync(realPath, 'utf8');
-          const importMatches = content.match(/@import\s['"].*['"];/gm);
-          if (importMatches) {
-            importMatches.forEach((importStatement) => {
-              let replaceImportStatement = importStatement;
-              const importPathMatches = importStatement.match(/['"].*['"]/g);
-              if (importPathMatches) {
-                const importPath = __unquote(importPathMatches[0]);
-                const absoluteImportPath = __path.resolve(
-                  __folderPath(realPath),
-                  importPath
-                );
-                content = content.replace(
-                  importStatement,
-                  `@import "${absoluteImportPath}";`
-                );
-              }
-            });
-          }
-          return {
-            contents: `
-              ${compileObj.sharedResourcesStr}
-              ${content}
-            `
-          };
-        }
-      }
-      return null;
-    };
-  }
-
-  _generateMixinsAndVariablesStringFromChilds(compileObj) {
-    let string = '';
-    let hashes = [];
-
-    Object.keys(compileObj.children).forEach((path) => {
-      const childCompileObj = compileObj.children[path];
-
-      if (childCompileObj.children) {
-        string += this._generateMixinsAndVariablesStringFromChilds(
-          childCompileObj
-        );
-      }
-      const hash = __md5.encrypt(
-        childcompileObj.file.mixinsAndVariables.replace(/\s/g, '')
-      );
-      if (hashes.indexOf(hash) !== -1) return;
-      hashes.push(hash);
-      string += childcompileObj.file.mixinsAndVariables;
-    });
-
-    return string;
-  }
-
-  _generateCssStringFromChilds(compileObj) {
-    let string = '';
-    let hashes = [];
-
-    Object.keys(compileObj.children).forEach((path) => {
-      const childCompileObj = compileObj.children[path];
-
-      if (childCompileObj.children) {
-        string += this._generateMixinsAndVariablesStringFromChilds(
-          childCompileObj
-        );
-      }
-      const hash = __md5.encrypt(childCompileObj.css.replace(/\s/g, ''));
-      if (hashes.indexOf(hash) !== -1) return;
-      hashes.push(hash);
-      string += childCompileObj.css;
-    });
-
-    return string;
-  }
-
-  _findDependency(path) {
-    for (let i = 0; i < this._includePaths.length; i++) {
-      const includePath = this._includePaths[i];
-      const realPath = this._getRealFilePath(`${includePath}/${path}`);
-      if (realPath) return realPath;
-    }
-    return null;
-  }
-
-  _bundleChildren(object) {
-    if (!object.children) {
-      return '';
-    }
-    let resultString = '';
-    Object.keys(object.children).forEach((importPath) => {
-      const childObj = object.children[importPath];
-      if (childObj.children) {
-        const ch = this._bundleChildren(childObj);
-        if (ch) resultString += ch;
-      }
-      resultString += `
-        ${childObj.css || ''}
-      `;
-    });
-    return resultString;
-  }
-
-  _compileImports(compileObj, settings) {
-    return new __SPromise(async (resolve, reject, trigger) => {
-      // loop on each imports
-      const childrenObj = {};
-
-      let scss = compileObj.scss;
-      let finalImports = {};
-
-      const includePaths = __unique(compileObj.includePaths);
-
-      for (let i = 0; i < compileObj.importStatements.length; i++) {
-        const importStatement = compileObj.importStatements[i].trim();
-        const importStatementPath = __unquote(
-          importStatement.replace('@import ', '').replace(';', '').trim()
-        );
-
-        let importAbsolutePath;
-
-        // search in include paths
-        for (let j = 0; j < includePaths.length; j++) {
-          const includePath = includePaths[j];
-          const potentialPath = this._getRealFilePath(
-            __path.resolve(includePath, importStatementPath)
-          );
-          if (__fs.existsSync(potentialPath)) {
-            importAbsolutePath = potentialPath;
-            break;
-          }
-        }
-
-        if (!importAbsolutePath) {
-          continue;
-        }
-
-        if (__isGlob(importAbsolutePath)) {
-          if (!finalImports[importStatement]) {
-            finalImports[importStatement] = {
-              rawStatement: importStatement,
-              rawPath: importStatementPath,
-              paths: []
-            };
-          }
-          const globPaths = __glob.sync(importAbsolutePath, {});
-          if (globPaths && globPaths.length) {
-            globPaths.forEach((path) => {
-              finalImports[importStatement].paths.push({
-                absolutePath: path,
-                relativePath: __path.relative(settings.rootDir, path)
-              });
-            });
-          }
-          continue;
-        }
-
-        finalImports[importStatement] = {
-          rawStatement: importStatement,
-          rawPath: importStatementPath,
-          paths: [
-            {
-              absolutePath: importAbsolutePath,
-              relativePath: __path.relative(
-                settings.rootDir,
-                importAbsolutePath
-              )
-            }
-          ]
-        };
-      }
-
-      for (let i = 0; i < Object.keys(finalImports).length; i++) {
-        const importObj = finalImports[Object.keys(finalImports)[i]];
-
-        for (let j = 0; j < importObj.paths.length; j++) {
-          const pathObj = importObj.paths[j];
-          const importPath = this._getRealFilePath(pathObj.absolutePath);
-
-          if (importPath) {
-            // compile the finded path
-            const compilePromise = this.compile(importPath, {
-              ...settings,
-              _isChild: true,
-              rootDir: __folderPath(importPath),
-              save: false
-            });
-            compilePromise.on('reject', (e) => {
-              reject(e);
-            });
-            const compileRes = await compilePromise;
-            childrenObj[pathObj.absolutePath] =
-              compileRes.files[Object.keys(compileRes.files)[0]];
-          }
-        }
-
-        scss = scss.replace(importObj.rawStatement, '');
-      }
-      resolve({
-        files: childrenObj,
-        scss
-      });
-    });
-  }
-
-  _getRealFilePath(path) {
-    const extension = __extension(path);
-    const filename = __getFilename(path);
-    const folderPath = __folderPath(path);
-    let pattern;
-    if (!extension) {
-      pattern = `${folderPath}/?(_)${filename}.*`;
-    } else {
-      pattern = `${folderPath}/?(_)${filename}`;
-    }
-    const potentialPaths = __glob.sync(pattern);
-    if (potentialPaths && potentialPaths.length) {
-      return potentialPaths[0];
-    }
-    return null;
+    return promise;
   }
 };

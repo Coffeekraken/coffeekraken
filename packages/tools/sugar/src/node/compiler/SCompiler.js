@@ -50,7 +50,7 @@ class SCompiler extends SPromise_1.default {
         // @ts-ignore
         if (this.constructor.interface) {
             // @ts-ignore
-            defaultInterfaceValues = this.constructor.interface.getDefaultValues();
+            defaultInterfaceValues = this.constructor.interface.defaults();
             // @ts-ignore
             delete defaultInterfaceValues.input;
             this._settings = deepMerge_1.default(this._settings, defaultInterfaceValues);
@@ -71,6 +71,12 @@ class SCompiler extends SPromise_1.default {
      */
     compile(input, settings = {}) {
         settings = deepMerge_1.default(this._settings, settings);
+        // @ts-ignore
+        if (this.constructor.interface)
+            // @ts-ignore
+            this.constructor.interface.apply(settings, {
+                throw: true
+            });
         if (!Array.isArray(input))
             input = [input];
         // @ts-ignore

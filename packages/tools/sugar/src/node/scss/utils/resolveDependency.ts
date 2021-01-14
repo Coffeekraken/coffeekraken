@@ -6,6 +6,7 @@ import __getFilename from '../../fs/filename';
 import __folderPath from '../../fs/folderPath';
 import __SScssFile from '../SScssFile';
 import __deepMerge from '../../object/deepMerge';
+import __fs from 'fs';
 
 /**
  * @name                resolveDependency
@@ -41,6 +42,10 @@ function resolveDependency(path, settings: IResolveDependencySettings = {}) {
     },
     settings
   );
+
+  if (__fs.existsSync(path)) {
+    return path;
+  }
 
   // add the "from" folder path in the includePaths if exist
   // @ts-ignore

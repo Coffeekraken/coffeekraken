@@ -155,7 +155,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 }
             };
             /**
-             * @name              getDefaultValues
+             * @name              defaults
              * @type              Function
              * @static
              *
@@ -164,7 +164,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @since         2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            SInterface.getDefaultValues = function () {
+            SInterface.defaults = function () {
                 var result = this.apply({}, {
                     complete: true,
                     throw: false,

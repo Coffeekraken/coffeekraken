@@ -57,7 +57,7 @@ module.exports = class SCacheFsAdapter extends SCacheAdapter_1.default {
     set(name, value) {
         return __awaiter(this, void 0, void 0, function* () {
             // generate the item fs name
-            const fsName = `${this.cache.name}/${name}.json`;
+            const fsName = `${this.cache.name}/${name}.json`.replace(/\/\//gm, '/');
             // ensure we have the folder
             ensureDirSync_1.default(`${this._settings.rootDir}/${fsName.split('/').slice(0, -1).join('/')}`);
             // write the json file

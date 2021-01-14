@@ -6,7 +6,9 @@ import __SPromise from '../promise/SPromise';
 // import __SFileInterface from './interface/SFileInterface';
 import __fs from 'fs';
 import __path from 'path';
+import __md5 from '../crypt/md5';
 import __extension from './extension';
+import __folderPath from './folderPath';
 import __getFilename from './filename';
 import __SFileSettingsInterface from './interface/SFileSettingsInterface';
 import __SError from '../error/SError';
@@ -187,11 +189,22 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
     this.dirPath = __path.dirname(filepath);
 
     if (this._settings.watch === true) {
-      const watcher = __fs.watch(this.path, (event) => {
-        if (event !== 'change' && watcher) watcher.close();
-        this.update();
-      });
+      this.startWatch();
     }
+  }
+
+  /**
+   * @name            hash
+   * @type            String
+   * @get
+   *
+   * Get the file `md5` hash
+   *
+   * @since         2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get hash() {
+    return __md5.encrypt(this.content);
   }
 
   /**
@@ -295,6 +308,39 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
   }
 
   /**
+   * @name        startWatch
+   * @type        Function
+   *
+   * This method allows you to start watching the file for events like "update", etc...
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _watcher: any;
+  startWatch() {
+    if (this._watcher) return;
+    this._watcher = __fs.watchFile(this.path, (event) => {
+      this.update();
+      this.trigger('update', this);
+    });
+  }
+
+  /**
+   * @name        stopWatch
+   * @type        Function
+   *
+   * This method allows you to stop the watching process of the file
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  stopWatch() {
+    if (!this._watcher) return;
+    this._watcher.close();
+    this._watcher = undefined;
+  }
+
+  /**
    * @name        toString
    * @type        Function
    *
@@ -382,6 +428,7 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
    */
   write(data: string, settings: ISFileWriteSettings = {}): Promise<any> {
     settings = {
+      path: this.path,
       encoding: 'utf8',
       ...settings
     };
@@ -389,8 +436,8 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
       beautify: true,
       highlight: false
     });
-    __ensureDirSync(this.dirPath);
-    const result: any = __fs.writeFile(this.path, data, settings);
+    __ensureDirSync(settings.path);
+    const result: any = __fs.writeFile(settings.path, data, settings);
     this.update();
     return result;
   }
@@ -410,6 +457,7 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
    */
   writeSync(data: string, settings: ISFileWriteSettings = {}): any {
     settings = {
+      path: this.path,
       encoding: 'utf8',
       ...settings
     };
@@ -417,8 +465,8 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
       beautify: true,
       highlight: false
     });
-    __ensureDirSync(this.dirPath);
-    const result: any = __fs.writeFileSync(this.path, data, settings);
+    __ensureDirSync(__folderPath(settings.path));
+    const result: any = __fs.writeFileSync(settings.path, data, settings);
     this.update();
     return result;
   }

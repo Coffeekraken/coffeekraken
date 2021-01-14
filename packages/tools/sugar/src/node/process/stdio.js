@@ -18,14 +18,14 @@ module.exports = (source, settings = {}) => {
             s.on('log,*.log,warn,*.warn,error,*.error,reject,*.reject', (data, metas) => {
                 if (!data)
                     return;
-                let value = data.value !== undefined ? data.value : data;
-                if (typeof value === 'string') {
-                    value = parseHtml_1.default(value);
-                }
-                else {
-                    value = toString_1.default(value);
-                }
                 if (data.type) {
+                    let value = data.value;
+                    if (typeof value === 'string') {
+                        value = parseHtml_1.default(value);
+                    }
+                    else if (value) {
+                        value = toString_1.default(value);
+                    }
                     switch (data.type) {
                         case 'separator':
                             const separator = data.separator
@@ -42,6 +42,13 @@ module.exports = (source, settings = {}) => {
                     }
                 }
                 else {
+                    let value = data.value !== undefined ? data.value : data;
+                    if (typeof value === 'string') {
+                        value = parseHtml_1.default(value);
+                    }
+                    else {
+                        value = toString_1.default(value);
+                    }
                     console.log(value);
                 }
             });

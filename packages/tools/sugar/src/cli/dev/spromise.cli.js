@@ -1,14 +1,18 @@
 const __SPromise = require('../../node/promise/SPromise');
 
 module.exports = async (stringargs = '') => {
-  const prom = await new __SPromise((resolve, reject, trigger, api) => {
-    console.log('COCO');
-    api.cancel('plop');
+  const promise1 = new __SPromise();
+  const promise2 = new __SPromise();
+  const promise3 = new __SPromise();
+
+  promise1.on('*', (value, metas) => {
+    console.log(value, metas);
   });
 
-  if (prom.promise) {
-    console.log('promise', prom.promise.isCanceled());
-  }
+  __SPromise.pipe(promise3, promise2);
+  __SPromise.pipe(promise2, promise1);
 
-  console.log(prom);
+  setTimeout(() => {
+    promise2.trigger('change', 'coco');
+  }, 100);
 };

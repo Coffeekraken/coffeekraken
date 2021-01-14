@@ -323,7 +323,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 _this_1._settings = deepMerge_1.default(_this_1._settings, promiseSettings);
             }
             if (_this_1._settings.promise.destroyTimeout !== -1) {
-                _this_1.on('finally', function () {
+                _this_1.on('finally', function (v, m) {
                     setTimeout(function () {
                         _this_1._destroy();
                     }, _this_1._settings.promise.destroyTimeout);
@@ -353,9 +353,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             // settings
             settings = deepMerge_1.default({
                 stacks: '*',
-                prefixStack: true,
+                prefixStack: false,
                 processor: null,
-                exclude: [],
+                exclude: ['finally', 'resolve', 'reject', 'cancel'],
                 filter: null
             }, settings);
             if (!(sourceSPromise instanceof SPromise) ||

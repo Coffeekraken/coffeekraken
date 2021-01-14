@@ -48,7 +48,7 @@ function findImportStatements(string, settings = {}) {
     }, settings);
     // split lines
     const lines = string.split('\n');
-    const reg = /\@(use|import)\s*['"](.*?)['"](\sas\s([a-zA-Z0-9-_]+))?/g;
+    const reg = /^(\s+)?@(use|import)\s*['"](.*?)['"](\sas\s([a-zA-Z0-9-_]+))?/g;
     const statements = [];
     // loop on each lines
     lines.forEach((line, index) => {
@@ -56,6 +56,7 @@ function findImportStatements(string, settings = {}) {
         if (!matches)
             return;
         matches.forEach((match) => {
+            match = match.trim();
             const statementObj = {
                 raw: match + ';'
             };

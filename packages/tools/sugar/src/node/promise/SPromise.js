@@ -219,7 +219,7 @@ module.exports = class SPromise extends Promise {
             this._settings = deepMerge_1.default(this._settings, promiseSettings);
         }
         if (this._settings.promise.destroyTimeout !== -1) {
-            this.on('finally', () => {
+            this.on('finally', (v, m) => {
                 setTimeout(() => {
                     this._destroy();
                 }, this._settings.promise.destroyTimeout);
@@ -247,9 +247,9 @@ module.exports = class SPromise extends Promise {
         // settings
         settings = deepMerge_1.default({
             stacks: '*',
-            prefixStack: true,
+            prefixStack: false,
             processor: null,
-            exclude: [],
+            exclude: ['finally', 'resolve', 'reject', 'cancel'],
             filter: null
         }, settings);
         if (!(sourceSPromise instanceof SPromise) ||

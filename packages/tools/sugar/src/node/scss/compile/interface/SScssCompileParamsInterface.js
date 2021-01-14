@@ -6,7 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 var _a;
 const SInterface_1 = __importDefault(require("../../../interface/SInterface"));
 const sugar_1 = __importDefault(require("../../../config/sugar"));
-module.exports = (_a = class SBuildScssInterface extends SInterface_1.default {
+module.exports = (_a = class SScssCompileParamsInterface extends SInterface_1.default {
     },
     _a.definition = {
         input: {
@@ -26,6 +26,14 @@ module.exports = (_a = class SBuildScssInterface extends SInterface_1.default {
         save: {
             type: 'Boolean',
             default: false
+        },
+        watch: {
+            type: 'Boolean',
+            default: false
+        },
+        compileOnChange: {
+            type: 'Boolean',
+            default: true
         },
         style: {
             type: 'String',
@@ -81,4 +89,4 @@ module.exports = (_a = class SBuildScssInterface extends SInterface_1.default {
         }
     },
     _a);
-//# sourceMappingURL=SScssInterface.js.map
+//# sourceMappingURL=SScssCompileParamsInterface.js.map

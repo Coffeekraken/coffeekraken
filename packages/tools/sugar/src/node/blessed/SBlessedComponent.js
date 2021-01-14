@@ -269,9 +269,9 @@ if (!childProcess_1.default()) {
     hotkey_1.default('ctrl+c', {
         once: true
     }).on('press', () => {
-        if (!SBlessedComponent.screen)
+        if (!cls.screen)
             return;
-        SBlessedComponent.screen.destroy();
+        cls.screen.destroy();
     });
 }
 module.exports = cls;

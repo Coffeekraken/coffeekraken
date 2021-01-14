@@ -9,7 +9,9 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
 // import __SFileInterface from './interface/SFileInterface';
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+const md5_1 = __importDefault(require("../crypt/md5"));
 const extension_1 = __importDefault(require("./extension"));
+const folderPath_1 = __importDefault(require("./folderPath"));
 const filename_1 = __importDefault(require("./filename"));
 const SError_1 = __importDefault(require("../error/SError"));
 const ensureDirSync_1 = __importDefault(require("./ensureDirSync"));
@@ -98,12 +100,21 @@ const Cls = class SFile extends SPromise_1.default {
         this.extension = extension_1.default(filepath).toLowerCase();
         this.dirPath = path_1.default.dirname(filepath);
         if (this._settings.watch === true) {
-            const watcher = fs_1.default.watch(this.path, (event) => {
-                if (event !== 'change' && watcher)
-                    watcher.close();
-                this.update();
-            });
+            this.startWatch();
         }
+    }
+    /**
+     * @name            hash
+     * @type            String
+     * @get
+     *
+     * Get the file `md5` hash
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get hash() {
+        return md5_1.default.encrypt(this.content);
     }
     /**
      * @name            stats
@@ -182,6 +193,29 @@ const Cls = class SFile extends SPromise_1.default {
             this._stats.gbytes = Number(this._stats.gbytes.toFixed(this._settings.shrinkSizesTo));
         }
     }
+    startWatch() {
+        if (this._watcher)
+            return;
+        this._watcher = fs_1.default.watchFile(this.path, (event) => {
+            this.update();
+            this.trigger('update', this);
+        });
+    }
+    /**
+     * @name        stopWatch
+     * @type        Function
+     *
+     * This method allows you to stop the watching process of the file
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    stopWatch() {
+        if (!this._watcher)
+            return;
+        this._watcher.close();
+        this._watcher = undefined;
+    }
     /**
      * @name        toString
      * @type        Function
@@ -258,13 +292,13 @@ const Cls = class SFile extends SPromise_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     write(data, settings = {}) {
-        settings = Object.assign({ encoding: 'utf8' }, settings);
+        settings = Object.assign({ path: this.path, encoding: 'utf8' }, settings);
         data = toString_1.default(data, {
             beautify: true,
             highlight: false
         });
-        ensureDirSync_1.default(this.dirPath);
-        const result = fs_1.default.writeFile(this.path, data, settings);
+        ensureDirSync_1.default(settings.path);
+        const result = fs_1.default.writeFile(settings.path, data, settings);
         this.update();
         return result;
     }
@@ -282,13 +316,13 @@ const Cls = class SFile extends SPromise_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     writeSync(data, settings = {}) {
-        settings = Object.assign({ encoding: 'utf8' }, settings);
+        settings = Object.assign({ path: this.path, encoding: 'utf8' }, settings);
         data = toString_1.default(data, {
             beautify: true,
             highlight: false
         });
-        ensureDirSync_1.default(this.dirPath);
-        const result = fs_1.default.writeFileSync(this.path, data, settings);
+        ensureDirSync_1.default(folderPath_1.default(settings.path));
+        const result = fs_1.default.writeFileSync(settings.path, data, settings);
         this.update();
         return result;
     }

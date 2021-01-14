@@ -9,12 +9,16 @@ const extension_1 = __importDefault(require("../../fs/extension"));
 const filename_1 = __importDefault(require("../../fs/filename"));
 const folderPath_1 = __importDefault(require("../../fs/folderPath"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const fs_1 = __importDefault(require("fs"));
 function resolveDependency(path, settings = {}) {
     var _a;
     settings = deepMerge_1.default({
         includePaths: sugar_1.default('scss.compile.includePaths'),
         from: undefined
     }, settings);
+    if (fs_1.default.existsSync(path)) {
+        return path;
+    }
     // add the "from" folder path in the includePaths if exist
     // @ts-ignore
     if (settings.from !== undefined) {

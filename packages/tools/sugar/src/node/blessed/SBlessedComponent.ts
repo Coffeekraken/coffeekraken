@@ -301,8 +301,8 @@ if (!__isChildProcess()) {
   __hotkey('ctrl+c', {
     once: true
   }).on('press', () => {
-    if (!SBlessedComponent.screen) return;
-    SBlessedComponent.screen.destroy();
+    if (!cls.screen) return;
+    cls.screen.destroy();
   });
 }
 

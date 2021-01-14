@@ -4,6 +4,7 @@
 export interface ISPromiseSettings {
   id: string;
   destroyTimeout: number;
+  [key: string]: any;
 }
 
 export interface ISPromiseMetas {
@@ -53,7 +54,7 @@ export interface ISPromiseStaticPipeFn {
   ): void;
 }
 export interface ISPromisePipeFn {
-  (destPromise: ISPromise, settings: ISPromiseMapSettings): void;
+  (destPromise: ISPromise, settings?: ISPromiseMapSettings): void;
 }
 
 export interface ISPromiseResolveRejectFn {

@@ -138,9 +138,9 @@ export = class SPromise extends Promise {
     settings = __deepMerge(
       {
         stacks: '*',
-        prefixStack: true,
+        prefixStack: false,
         processor: null,
-        exclude: [],
+        exclude: ['finally', 'resolve', 'reject', 'cancel'],
         filter: null
       },
       settings
@@ -397,7 +397,7 @@ export = class SPromise extends Promise {
     }
 
     if (this._settings.promise.destroyTimeout !== -1) {
-      this.on('finally', () => {
+      this.on('finally', (v, m) => {
         setTimeout(() => {
           this._destroy();
         }, this._settings.promise.destroyTimeout);
@@ -921,7 +921,6 @@ export = class SPromise extends Promise {
       if (item.called <= item.callNumber) return true;
       return false;
     });
-
     const metasObj = __deepMerge(
       {
         stack,
@@ -1236,7 +1235,6 @@ export = class SPromise extends Promise {
 
     // destroying all the callbacks stacks registered
     delete this._stacks;
-
     delete this._resolvers;
     delete this._settings.promise;
     this._isDestroyed = true;

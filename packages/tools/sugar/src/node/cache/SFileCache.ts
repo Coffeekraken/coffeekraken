@@ -1,5 +1,7 @@
 import __SCache from './SCache';
 import __fs from 'fs';
+import __deepMerge from '../object/deepMerge';
+import __sugarConfig from '../config/sugar';
 
 /**
  * @name            SFileCache
@@ -24,6 +26,11 @@ import __fs from 'fs';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+interface ISFileCacheSettings {
+  rootDir?: string;
+  [key: string]: any;
+}
+
 class SFileCache extends __SCache {
   /**
    * @name            constructor
@@ -35,8 +42,8 @@ class SFileCache extends __SCache {
    * @since           2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(name, settings = {}) {
-    super(name, settings);
+  constructor(name, settings: ISFileCacheSettings = {}) {
+    super(name, __deepMerge({}, settings));
   }
 
   /**
@@ -55,11 +62,12 @@ class SFileCache extends __SCache {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async get(path, settings: any = {}) {
+  async get(path, settings: ISFileCacheSettings = {}) {
     settings = {
       valueOnly: true,
       ...settings
     };
+
     // check if the file actually exists
     const metas = await super.get(path, {
       ...settings,
@@ -97,7 +105,7 @@ class SFileCache extends __SCache {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async set(path, value = null, settings = {}) {
+  async set(path, value = null, settings: ISFileCacheSettings = {}) {
     // check that the file actually exists
     if (!__fs.existsSync(path)) return false;
 

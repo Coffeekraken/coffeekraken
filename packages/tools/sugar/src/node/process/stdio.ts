@@ -46,14 +46,15 @@ export = (source, settings = {}) => {
         'log,*.log,warn,*.warn,error,*.error,reject,*.reject',
         (data, metas) => {
           if (!data) return;
-          let value = data.value !== undefined ? data.value : data;
-          if (typeof value === 'string') {
-            value = __parseHtml(value);
-          } else {
-            value = __toString(value);
-          }
 
           if (data.type) {
+            let value = data.value;
+            if (typeof value === 'string') {
+              value = __parseHtml(value);
+            } else if (value) {
+              value = __toString(value);
+            }
+
             switch (data.type) {
               case 'separator':
                 const separator = data.separator
@@ -76,6 +77,12 @@ export = (source, settings = {}) => {
                 break;
             }
           } else {
+            let value = data.value !== undefined ? data.value : data;
+            if (typeof value === 'string') {
+              value = __parseHtml(value);
+            } else {
+              value = __toString(value);
+            }
             console.log(value);
           }
         }

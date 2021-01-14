@@ -158,7 +158,7 @@ export = class SJsCompiler {
     this._settings = __deepMerge(
       {
         id: this.constructor.name,
-        ...__SBuildJsInterface.getDefaultValues(),
+        ...__SBuildJsInterface.defaults(),
         plugins: []
       },
       settings

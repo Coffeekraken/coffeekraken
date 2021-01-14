@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const SProcess_1 = __importDefault(require("../../process/SProcess"));
-const SScssInterface_1 = __importDefault(require("./interface/SScssInterface"));
 const SScssCompiler_1 = __importDefault(require("./SScssCompiler"));
+const SScssCompileParamsInterface_1 = __importDefault(require("./interface/SScssCompileParamsInterface"));
 /**
  * @name            SScssCompileProcess
  * @namespace           sugar.node.scss.compile
@@ -52,9 +52,10 @@ class SScssCompileProcess extends SProcess_1.default {
     process(params, settings = {}) {
         const input = params.input;
         delete params.input;
-        return this._scssCompiler.compile(input, Object.assign(Object.assign({}, settings), params));
+        this._settings.exitAtEnd = !params.watch;
+        return this._scssCompiler.compile(input, Object.assign({}, params));
     }
 }
-SScssCompileProcess.interface = SScssInterface_1.default;
+SScssCompileProcess.interface = SScssCompileParamsInterface_1.default;
 module.exports = SScssCompileProcess;
 //# sourceMappingURL=SScssCompileProcess.js.map

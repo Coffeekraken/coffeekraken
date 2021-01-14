@@ -76,12 +76,13 @@ export = class SCacheFsAdapter extends __SCacheAdapter {
    */
   async set(name, value) {
     // generate the item fs name
-    const fsName = `${this.cache.name}/${name}.json`;
+    const fsName = `${this.cache.name}/${name}.json`.replace(/\/\//gm, '/');
 
     // ensure we have the folder
     __ensureDirSync(
       `${this._settings.rootDir}/${fsName.split('/').slice(0, -1).join('/')}`
     );
+
     // write the json file
     __fs.writeFileSync(`${this._settings.rootDir}/${fsName}`, value);
     // write has been done correctly

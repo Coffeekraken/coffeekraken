@@ -28,7 +28,7 @@ export = function scss(req, res, settings = {}) {
   const promise = new __SPromise();
 
   (async () => {
-    const defaultValuesObj = __SBuildScssInterface.getDefaultValues();
+    const defaul9tValuesObj = __SBuildScssInterface.defaults();
     const compiler = new __SScssCompiler(defaultValuesObj);
     const duration = new __SDuration();
     const compilerPromise = compiler.compile(req.path, {

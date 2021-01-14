@@ -76,7 +76,7 @@ module.exports = (_a = class SJsCompiler {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             this._settings = {};
-            this._settings = deepMerge_1.default(Object.assign(Object.assign({ id: this.constructor.name }, SBuildJsInterface_1.default.getDefaultValues()), { plugins: [] }), settings);
+            this._settings = deepMerge_1.default(Object.assign(Object.assign({ id: this.constructor.name }, SBuildJsInterface_1.default.defaults()), { plugins: [] }), settings);
             this._settings.plugins.unshift(this.constructor._resolverPlugin);
             this._settings.plugins.unshift(esbuildScssLoaderPlugin_1.default);
             // prod

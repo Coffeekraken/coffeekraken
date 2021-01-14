@@ -13,29 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const SCache_1 = __importDefault(require("./SCache"));
 const fs_1 = __importDefault(require("fs"));
-/**
- * @name            SFileCache
- * @namespace       sugar.node.cache
- * @type            Class
- * @extends         SCache
- * @beta
- *
- * This class can be used to cache some files.
- * It featured all the capabilities of the SCache class
- * but take as ```get``` and ```set``` name parameter, the actual absolute
- * file path to cache.
- *
- * @param         {String}        name                  A name for your cache instance. Can have only these characters: [a-zA-Z0-9_-]
- * @param         {Object}          [settings={}]         The settings for the SCache instance
- *
- * @example       js
- * import SFileCache from '@coffeekraken/sugar/node/cache/SFileCache';
- * const cache = new SFileCache('myCoolCache');
- * cache.set('/my/cool/file.ts');
- *
- * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 class SFileCache extends SCache_1.default {
     /**
      * @name            constructor
@@ -48,7 +26,7 @@ class SFileCache extends SCache_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(name, settings = {}) {
-        super(name, settings);
+        super(name, deepMerge_1.default({}, settings));
     }
     /**
      * @name                            get

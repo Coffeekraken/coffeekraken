@@ -1,3 +1,5 @@
+import __ISPromise from '../../promise/interface/ISPromise';
+
 export interface ISFileSettings {
   id?: string;
   checkExistence?: boolean;
@@ -12,8 +14,9 @@ export interface ISFileReadSettings {
 export interface ISFileWriteSettings {
   encoding?: string;
   mode?: number;
-  flag: string;
+  flag?: string;
   cast?: boolean;
+  path?: string;
 }
 
 export interface ISFileToObjectFn {
@@ -41,7 +44,7 @@ export interface ISFileCtor {
   new (filepath: string, settings?: ISFileSettings): ISFile;
 }
 
-export default interface ISFile {
+export default interface ISFile extends __ISPromise {
   name: string;
   path: string;
   rootDir: string;
@@ -54,6 +57,8 @@ export default interface ISFile {
   content: string;
   toObject: ISFileToObjectFn;
   update(): void;
+  startWatch(): void;
+  stopWatch(): void;
   read: ISFileReadFn;
   readSync: ISFileReadSyncFn;
   write: ISFileWriteFn;

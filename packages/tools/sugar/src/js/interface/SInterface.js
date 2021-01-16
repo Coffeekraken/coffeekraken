@@ -101,12 +101,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     complete: true
                 };
                 // @ts-ignore
-                this._settings = deepMerge_1.default(
-                // @ts-ignore
-                this.constructor.settings, this._settings, settings);
+                this._settings = deepMerge_1.default(this.constructor.settings, this._settings, settings);
                 if (this._settings.name === undefined)
                     this._settings.name = this.constructor.name;
-                // @ts-ignore
                 this._definition = this.constructor.definition;
             }
             /**

@@ -211,15 +211,13 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
   constructor(settings: ISInterfaceSettings = {}) {
     // @ts-ignore
     this._settings = __deepMerge(
-      // @ts-ignore
-      this.constructor.settings,
+      (<any>this).constructor.settings,
       this._settings,
       settings
     );
     if (this._settings.name === undefined)
       this._settings.name = this.constructor.name;
-    // @ts-ignore
-    this._definition = this.constructor.definition;
+    this._definition = (<any>this).constructor.definition;
   }
 
   /**

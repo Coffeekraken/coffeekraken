@@ -155,7 +155,7 @@ export interface ISPromise {
   canceled(...args: any): ISPromise;
 }
 
-class SPromise extends __SClass.mixin([__SEventEmitter], Promise) {
+class SPromise extends __SClass.extends(Promise) {
   /**
    * @name        treatAsValue
    * @type        Function
@@ -218,6 +218,16 @@ class SPromise extends __SClass.mixin([__SEventEmitter], Promise) {
       _this,
       resolvers: any = {};
     super(
+      __deepMerge(
+        {
+          promise: {
+            treatCancelAs: 'resolve',
+            destroyTimeout: 5000
+          }
+        },
+        typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {},
+        settings
+      ),
       (resolve, reject) => {
         resolvers.resolve = resolve;
 
@@ -250,20 +260,15 @@ class SPromise extends __SClass.mixin([__SEventEmitter], Promise) {
         if (executorFn) {
           return executorFn(_resolve, _reject, _api);
         }
-      },
-      __deepMerge(
-        {
-          promise: {
-            treatCancelAs: 'resolve',
-            destroyTimeout: 5000
-          }
-        },
-        typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {},
-        settings
-      )
+      }
     );
 
     _this = this;
+
+    this.expose(new __SEventEmitter(this._settings), {
+      as: 'eventEmitter',
+      props: ['on', 'off', 'emit']
+    });
 
     this._resolvers = <ISPromiseResolvers>resolvers;
 
@@ -442,7 +447,10 @@ class SPromise extends __SClass.mixin([__SEventEmitter], Promise) {
       // update the status
       this._promiseState = 'resolved';
       // exec the wanted stacks
-      const stacksResult = await this._emitEvents(stacksOrder, arg);
+      const stacksResult = await this.eventEmitter._emitEvents(
+        stacksOrder,
+        arg
+      );
       // resolve the master promise
       this._resolvers.resolve(stacksResult);
       // return the stack result
@@ -487,7 +495,10 @@ class SPromise extends __SClass.mixin([__SEventEmitter], Promise) {
       // update the status
       this._promiseState = 'rejected';
       // exec the wanted stacks
-      const stacksResult = await this._emitEvents(stacksOrder, arg);
+      const stacksResult = await this.eventEmitter._emitEvents(
+        stacksOrder,
+        arg
+      );
       // resolve the master promise
       this._resolvers.reject(stacksResult);
       // return the stack result
@@ -532,7 +543,10 @@ class SPromise extends __SClass.mixin([__SEventEmitter], Promise) {
       // update the status
       this._promiseState = 'canceled';
       // exec the wanted stacks
-      const stacksResult = await this._emitEvents(stacksOrder, arg);
+      const stacksResult = await this.eventEmitter._emitEvents(
+        stacksOrder,
+        arg
+      );
       // resolve the master promise
       if (this._settings.promise.treatCancelAs === 'reject') {
         this._resolvers.reject(stacksResult);

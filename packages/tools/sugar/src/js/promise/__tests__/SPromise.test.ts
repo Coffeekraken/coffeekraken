@@ -1,10 +1,10 @@
 // @shared
+// @ts-nocheck
 
 import __SPromise from '../SPromise';
 
 describe('sugar.js.promise', () => {
   it('Should', async (done) => {
-    console.log('NEW PROMISE');
     const promise = new __SPromise({
       coco: 'yyy'
     });
@@ -14,8 +14,6 @@ describe('sugar.js.promise', () => {
     }, 2000);
 
     const promiseRes = await promise;
-
-    console.log(promise._settings);
 
     expect(promiseRes).toBe('Hello');
 

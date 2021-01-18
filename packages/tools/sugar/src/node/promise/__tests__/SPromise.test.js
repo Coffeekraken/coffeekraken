@@ -1,5 +1,6 @@
 "use strict";
 // @shared
+// @ts-nocheck
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -16,7 +17,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const SPromise_1 = __importDefault(require("../SPromise"));
 describe('sugar.js.promise', () => {
     it('Should', (done) => __awaiter(void 0, void 0, void 0, function* () {
-        console.log('NEW PROMISE');
         const promise = new SPromise_1.default({
             coco: 'yyy'
         });
@@ -24,7 +24,6 @@ describe('sugar.js.promise', () => {
             promise.resolve('Hello');
         }, 2000);
         const promiseRes = yield promise;
-        console.log(promise._settings);
         expect(promiseRes).toBe('Hello');
         done();
     }));

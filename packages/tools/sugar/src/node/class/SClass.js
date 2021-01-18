@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-const plainObject_1 = __importDefault(require("../is/plainObject"));
 class SClass {
     /**
      * @name            constructor
@@ -18,7 +17,6 @@ class SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings = {}) {
-        // static usableAsMixin = true;
         /**
          * @name            _settings
          * @type            ISClassSettings
@@ -30,7 +28,10 @@ class SClass {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this._settings = {};
-        this.$init(settings);
+        // saving the settings
+        setSettings(this, settings);
+        // interface
+        applyInterface(this);
     }
     /**
      * @name            id
@@ -46,117 +47,56 @@ class SClass {
     get id() {
         return this._settings.id || this.constructor.name;
     }
-    static mixin(mixins, Cls) {
-        // const mixinProps = {};
-        const mixinInitStack = [];
-        if (!mixins)
-            mixins = [];
-        // function bindProps(ctx: any) {
-        //   // console.log(mixinProps);
-        //   Object.keys(mixinProps).forEach((mixinName) => {
-        //     ctx[mixinName] = {};
-        //     Object.getOwnPropertyNames(mixinProps[mixinName]).forEach(
-        //       (propName) => {
-        //         if (mixinName === 'default') {
-        //           ctx[propName] = mixinProps[mixinName][propName].bind(ctx);
-        //         } else {
-        //           ctx[mixinName][propName] = mixinProps[mixinName][propName].bind(
-        //             ctx
-        //           );
-        //         }
-        //       }
-        //     );
-        //   });
-        // }
-        function callInitStack(ctx, settings) {
-            mixinInitStack.forEach((initFn) => {
-                const bindedInitFn = initFn.bind(ctx);
-                bindedInitFn(settings);
-            });
-        }
-        let BaseClass;
-        if (!Cls) {
-            class SClassBase {
-                constructor(...args) {
-                    const superArgs = args;
-                    const settings = args[args.length - 1];
-                    if (plainObject_1.default(settings)) {
-                        superArgs.pop();
-                    }
-                    callInitStack(this, settings);
-                }
+    static extends(Cls) {
+        class SClass extends Cls {
+            constructor(settings, ...args) {
+                super(...args);
+                this._settings = {};
+                // saving the settings
+                setSettings(this, settings);
+                // interface
+                applyInterface(this);
             }
-            BaseClass = SClassBase;
-        }
-        else {
-            // mixins.push(SClass);
-            class SClassBase extends Cls {
-                constructor(...args) {
-                    const superArgs = args;
-                    const settings = args[args.length - 1];
-                    if (plainObject_1.default(settings)) {
-                        superArgs.pop();
-                    }
-                    super(...superArgs);
-                    callInitStack(this, settings);
-                }
+            get id() {
+                return this._settings.id || this.constructor.name;
             }
-            BaseClass = SClassBase;
-        }
-        const defaultMixinSettings = {
-            initFnName: '$init'
-            // as: undefined
-        };
-        for (let i = mixins.length - 1; i >= 0; i--) {
-            const mixin = mixins[i];
-            const mixinSettings = deepMerge_1.default(defaultMixinSettings, mixin.mixinSettings || {});
-            if (mixin.usableAsMixin === undefined || mixin.usableAsMixin !== true) {
-                throw `The class "<yellow>${mixin.name}</yellow>" cannot be used as a mixin...`;
-            }
-            // mixinProps[mixinName] = {};
-            let hasInit = false;
-            console.log(mixin.prototype);
-            Object.getOwnPropertyNames(mixin.prototype).forEach((name) => {
-                // console.log(mixin.name, name);
-                if (name === mixinSettings.initFnName) {
-                    hasInit = true;
-                    mixinInitStack.push(mixin.prototype[name]);
-                }
-                else if (name !== 'constructor') {
-                    const desc = (Object.getOwnPropertyDescriptor(mixin.prototype, name));
-                    // desc.enumerable = true;
-                    Object.defineProperty(BaseClass.prototype, name, Object.assign({}, desc));
-                }
-            });
-            if (!hasInit) {
-                mixinInitStack.push(function (settings = {}) {
-                    // @ts-ignore
-                    this._settings = deepMerge_1.default(this._settings, settings || {});
-                });
+            expose(instance, settings) {
+                expose(this, instance, settings);
             }
         }
-        return BaseClass;
+        return SClass;
     }
-    $init(settings = {}) {
-        // saving the settings
-        this.$setSettings(settings);
-        // interface
-        this.$applyInterface();
+    expose(instance, settings) {
+        expose(this, instance, settings);
     }
-    $applyInterface() {
-        // apply the interface if exists
-        if (this.constructor.interface) {
-            this.constructor.interface.apply(this);
-        }
+}
+function expose(ctx, instance, settings) {
+    settings = deepMerge_1.default({
+        as: undefined,
+        props: []
+    }, settings);
+    if (settings.as && typeof settings.as === 'string') {
+        ctx[settings.as] = instance;
     }
-    $setSettings(settings = {}) {
-        // saving the settings
-        if (this.constructor.settingsInterface) {
-            this._settings = deepMerge_1.default(this.constructor.settingsInterface.defaults(), settings);
-        }
-        else {
-            this._settings = settings;
-        }
+    if (settings.props) {
+        settings.props.forEach((prop) => {
+            ctx[prop] = instance[prop].bind(instance);
+        });
+    }
+}
+function applyInterface(ctx) {
+    // apply the interface if exists
+    if (ctx.constructor.interface) {
+        ctx.constructor.interface.apply(ctx);
+    }
+}
+function setSettings(ctx, settings = {}) {
+    // saving the settings
+    if (ctx.constructor.settingsInterface) {
+        ctx._settings = deepMerge_1.default(ctx.constructor.settingsInterface.defaults(), settings);
+    }
+    else {
+        ctx._settings = settings;
     }
 }
 // const cls: ISClass = SClass;

@@ -473,7 +473,6 @@ class SEventEmitter extends SClass_1.default {
         this._eventsStacks = {};
     }
 }
-SEventEmitter.usableAsMixin = true;
 const cls = SEventEmitter;
 module.exports = SEventEmitter;
 //# sourceMappingURL=SEventEmitter.js.map

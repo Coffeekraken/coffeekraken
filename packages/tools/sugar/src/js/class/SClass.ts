@@ -39,9 +39,14 @@ export interface ISClassCtor {
   _sClassAsName?: string;
 }
 
-export interface ISClassMixinSettings {
+export interface ISClassStaticMixinSettings {
   initFnName?: string;
   as?: string;
+}
+
+export interface ISClassExposeSettings {
+  as?: string;
+  props?: string[];
 }
 
 export interface ISClass {
@@ -50,8 +55,6 @@ export interface ISClass {
 }
 
 class SClass implements ISClass {
-  // static usableAsMixin = true;
-
   /**
    * @name            _settings
    * @type            ISClassSettings
@@ -79,110 +82,24 @@ class SClass implements ISClass {
     return this._settings.id || this.constructor.name;
   }
 
-  static mixin(mixins: any[], Cls?: any) {
-    // const mixinProps = {};
-    const mixinInitStack: Function[] = [];
-
-    if (!mixins) mixins = [];
-
-    // function bindProps(ctx: any) {
-    //   // console.log(mixinProps);
-    //   Object.keys(mixinProps).forEach((mixinName) => {
-    //     ctx[mixinName] = {};
-    //     Object.getOwnPropertyNames(mixinProps[mixinName]).forEach(
-    //       (propName) => {
-    //         if (mixinName === 'default') {
-    //           ctx[propName] = mixinProps[mixinName][propName].bind(ctx);
-    //         } else {
-    //           ctx[mixinName][propName] = mixinProps[mixinName][propName].bind(
-    //             ctx
-    //           );
-    //         }
-    //       }
-    //     );
-    //   });
-    // }
-
-    function callInitStack(ctx: any, settings?: any) {
-      mixinInitStack.forEach((initFn: Function) => {
-        const bindedInitFn = initFn.bind(ctx);
-        bindedInitFn(settings);
-      });
-    }
-
-    let BaseClass: any;
-    if (!Cls) {
-      class SClassBase {
-        constructor(...args) {
-          const superArgs: any = args;
-          const settings: any = args[args.length - 1];
-          if (__isPlain(settings)) {
-            superArgs.pop();
-          }
-          callInitStack(this, settings);
-        }
+  static extends(Cls: any) {
+    class SClass extends Cls implements ISClass {
+      public get id() {
+        return this._settings.id || this.constructor.name;
       }
-      BaseClass = SClassBase;
-    } else {
-      // mixins.push(SClass);
-      class SClassBase extends Cls {
-        constructor(...args) {
-          const superArgs: any = args;
-          const settings: any = args[args.length - 1];
-          if (__isPlain(settings)) {
-            superArgs.pop();
-          }
-          super(...superArgs);
-          callInitStack(this, settings);
-        }
+      _settings: ISClassSettings = {};
+      constructor(settings: any, ...args) {
+        super(...args);
+        // saving the settings
+        setSettings(this, settings);
+        // interface
+        applyInterface(this);
       }
-      BaseClass = SClassBase;
-    }
-
-    const defaultMixinSettings: ISClassMixinSettings = {
-      initFnName: '$init'
-      // as: undefined
-    };
-
-    for (let i = mixins.length - 1; i >= 0; i--) {
-      const mixin = mixins[i];
-
-      const mixinSettings: ISClassMixinSettings = __deepMerge(
-        defaultMixinSettings,
-        mixin.mixinSettings || {}
-      );
-
-      if (mixin.usableAsMixin === undefined || mixin.usableAsMixin !== true) {
-        throw `The class "<yellow>${mixin.name}</yellow>" cannot be used as a mixin...`;
-      }
-
-      // mixinProps[mixinName] = {};
-      let hasInit = false;
-      console.log(mixin.prototype);
-      Object.getOwnPropertyNames(mixin.prototype).forEach((name) => {
-        // console.log(mixin.name, name);
-        if (name === mixinSettings.initFnName) {
-          hasInit = true;
-          mixinInitStack.push(mixin.prototype[name]);
-        } else if (name !== 'constructor') {
-          const desc: PropertyDescriptor = <PropertyDescriptor>(
-            Object.getOwnPropertyDescriptor(mixin.prototype, name)
-          );
-          // desc.enumerable = true;
-          Object.defineProperty(BaseClass.prototype, name, {
-            ...desc
-          });
-        }
-      });
-      if (!hasInit) {
-        mixinInitStack.push(function (settings: any = {}) {
-          // @ts-ignore
-          this._settings = __deepMerge((<any>this)._settings, settings || {});
-        });
+      expose(instance: any, settings: ISClassExposeSettings) {
+        expose(this, instance, settings);
       }
     }
-
-    return BaseClass;
+    return SClass;
   }
 
   /**
@@ -196,34 +113,54 @@ class SClass implements ISClass {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings: ISClassSettings = {}) {
-    this.$init(settings);
-  }
-
-  $init(settings: ISClassSettings = {}) {
     // saving the settings
-    this.$setSettings(settings);
+    setSettings(this, settings);
     // interface
-    this.$applyInterface();
+    applyInterface(this);
   }
-
-  $applyInterface() {
-    // apply the interface if exists
-    if ((<any>this).constructor.interface) {
-      (<any>this).constructor.interface.apply(this);
-    }
-  }
-
-  $setSettings(settings: any = {}) {
-    // saving the settings
-    if ((<any>this).constructor.settingsInterface) {
-      this._settings = __deepMerge(
-        (<any>this).constructor.settingsInterface.defaults(),
-        settings
-      );
-    } else {
-      this._settings = settings;
-    }
+  expose(instance: any, settings: ISClassExposeSettings) {
+    expose(this, instance, settings);
   }
 }
+
+function expose(ctx: any, instance: any, settings: ISClassExposeSettings) {
+  settings = __deepMerge(
+    {
+      as: undefined,
+      props: []
+    },
+    settings
+  );
+
+  if (settings.as && typeof settings.as === 'string') {
+    ctx[settings.as] = instance;
+  }
+
+  if (settings.props) {
+    settings.props.forEach((prop) => {
+      ctx[prop] = instance[prop].bind(instance);
+    });
+  }
+}
+
+function applyInterface(ctx: any) {
+  // apply the interface if exists
+  if (ctx.constructor.interface) {
+    ctx.constructor.interface.apply(ctx);
+  }
+}
+
+function setSettings(ctx: any, settings: any = {}) {
+  // saving the settings
+  if (ctx.constructor.settingsInterface) {
+    ctx._settings = __deepMerge(
+      ctx.constructor.settingsInterface.defaults(),
+      settings
+    );
+  } else {
+    ctx._settings = settings;
+  }
+}
+
 // const cls: ISClass = SClass;
 export default SClass;

@@ -1,4 +1,5 @@
 // @shared
+// @ts-nocheck
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -56,7 +57,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log('NEW PROMISE');
                         promise = new SPromise_1.default({
                             coco: 'yyy'
                         });
@@ -66,7 +66,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         return [4 /*yield*/, promise];
                     case 1:
                         promiseRes = _a.sent();
-                        console.log(promise._settings);
                         expect(promiseRes).toBe('Hello');
                         done();
                         return [2 /*return*/];

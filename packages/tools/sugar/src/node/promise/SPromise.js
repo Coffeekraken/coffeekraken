@@ -19,7 +19,7 @@ const wait_1 = __importDefault(require("../time/wait"));
 const treatAsValue_1 = __importDefault(require("./treatAsValue"));
 const SEventEmitter_1 = __importDefault(require("../event/SEventEmitter"));
 const SClass_1 = __importDefault(require("../class/SClass"));
-class SPromise extends SClass_1.default.mixin([SEventEmitter_1.default], Promise) {
+class SPromise extends SClass_1.default.extends(Promise) {
     /**
      * @name                  constructor
      * @type                  Function
@@ -54,7 +54,12 @@ class SPromise extends SClass_1.default.mixin([SEventEmitter_1.default], Promise
         };
         // @ts-ignore
         let executorFn, _this, resolvers = {};
-        super((resolve, reject) => {
+        super(deepMerge_1.default({
+            promise: {
+                treatCancelAs: 'resolve',
+                destroyTimeout: 5000
+            }
+        }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings), (resolve, reject) => {
             resolvers.resolve = resolve;
             new Promise((rejectPromiseResolve, rejectPromiseReject) => {
                 resolvers.reject = rejectPromiseReject;
@@ -81,14 +86,13 @@ class SPromise extends SClass_1.default.mixin([SEventEmitter_1.default], Promise
             if (executorFn) {
                 return executorFn(_resolve, _reject, _api);
             }
-        }, deepMerge_1.default({
-            promise: {
-                treatCancelAs: 'resolve',
-                destroyTimeout: 5000
-            }
-        }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings));
+        });
         this._promiseState = 'pending';
         _this = this;
+        this.expose(new SEventEmitter_1.default(this._settings), {
+            as: 'eventEmitter',
+            props: ['on', 'off', 'emit']
+        });
         this._resolvers = resolvers;
         if (this._settings.promise.destroyTimeout !==
             -1) {
@@ -273,7 +277,7 @@ class SPromise extends SClass_1.default.mixin([SEventEmitter_1.default], Promise
             // update the status
             this._promiseState = 'resolved';
             // exec the wanted stacks
-            const stacksResult = yield this._emitEvents(stacksOrder, arg);
+            const stacksResult = yield this.eventEmitter._emitEvents(stacksOrder, arg);
             // resolve the master promise
             this._resolvers.resolve(stacksResult);
             // return the stack result
@@ -317,7 +321,7 @@ class SPromise extends SClass_1.default.mixin([SEventEmitter_1.default], Promise
             // update the status
             this._promiseState = 'rejected';
             // exec the wanted stacks
-            const stacksResult = yield this._emitEvents(stacksOrder, arg);
+            const stacksResult = yield this.eventEmitter._emitEvents(stacksOrder, arg);
             // resolve the master promise
             this._resolvers.reject(stacksResult);
             // return the stack result
@@ -361,7 +365,7 @@ class SPromise extends SClass_1.default.mixin([SEventEmitter_1.default], Promise
             // update the status
             this._promiseState = 'canceled';
             // exec the wanted stacks
-            const stacksResult = yield this._emitEvents(stacksOrder, arg);
+            const stacksResult = yield this.eventEmitter._emitEvents(stacksOrder, arg);
             // resolve the master promise
             if (this._settings.promise.treatCancelAs === 'reject') {
                 this._resolvers.reject(stacksResult);

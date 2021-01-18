@@ -89,8 +89,6 @@ interface ISEventEmitter {
   emit(stack: string, value: any, metas?: ISEventEmitterMetas): ISEventEmitter;
 }
 class SEventEmitter extends SClass implements ISEventEmitter {
-  static usableAsMixin = true;
-
   /**
    * @name                  pipe
    * @type                  Function

@@ -114,7 +114,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             };
             // @ts-ignore
             var executorFn, _this, resolvers = {};
-            _this_1 = _super.call(this, function (resolve, reject) {
+            _this_1 = _super.call(this, deepMerge_1.default({
+                promise: {
+                    treatCancelAs: 'resolve',
+                    destroyTimeout: 5000
+                }
+            }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings), function (resolve, reject) {
                 resolvers.resolve = resolve;
                 new Promise(function (rejectPromiseResolve, rejectPromiseReject) {
                     resolvers.reject = rejectPromiseReject;
@@ -154,14 +159,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 if (executorFn) {
                     return executorFn(_resolve, _reject, _api);
                 }
-            }, deepMerge_1.default({
-                promise: {
-                    treatCancelAs: 'resolve',
-                    destroyTimeout: 5000
-                }
-            }, typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {}, settings)) || this;
+            }) || this;
             _this_1._promiseState = 'pending';
             _this = _this_1;
+            _this_1.expose(new SEventEmitter_1.default(_this_1._settings), {
+                as: 'eventEmitter',
+                props: ['on', 'off', 'emit']
+            });
             _this_1._resolvers = resolvers;
             if (_this_1._settings.promise.destroyTimeout !==
                 -1) {
@@ -359,7 +363,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         case 0:
                             // update the status
                             this._promiseState = 'resolved';
-                            return [4 /*yield*/, this._emitEvents(stacksOrder, arg)];
+                            return [4 /*yield*/, this.eventEmitter._emitEvents(stacksOrder, arg)];
                         case 1:
                             stacksResult = _a.sent();
                             // resolve the master promise
@@ -414,7 +418,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         case 0:
                             // update the status
                             this._promiseState = 'rejected';
-                            return [4 /*yield*/, this._emitEvents(stacksOrder, arg)];
+                            return [4 /*yield*/, this.eventEmitter._emitEvents(stacksOrder, arg)];
                         case 1:
                             stacksResult = _a.sent();
                             // resolve the master promise
@@ -469,7 +473,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         case 0:
                             // update the status
                             this._promiseState = 'canceled';
-                            return [4 /*yield*/, this._emitEvents(stacksOrder, arg)];
+                            return [4 /*yield*/, this.eventEmitter._emitEvents(stacksOrder, arg)];
                         case 1:
                             stacksResult = _a.sent();
                             // resolve the master promise
@@ -649,7 +653,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             this._settings.promise = undefined;
         };
         return SPromise;
-    }(SClass_1.default.mixin([SEventEmitter_1.default], Promise)));
+    }(SClass_1.default.extends(Promise)));
     exports.default = SPromise;
 });
 //# sourceMappingURL=SPromise.js.map

@@ -561,7 +561,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             // destroying all the callbacks stacks registered
             this._eventsStacks = {};
         };
-        SEventEmitter.usableAsMixin = true;
         return SEventEmitter;
     }(SClass_1.default));
     var cls = SEventEmitter;

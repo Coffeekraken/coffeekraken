@@ -20,29 +20,7 @@ var __assign = (this && this.__assign) || function () {
     }
 })(function (require, exports) {
     "use strict";
-    /**
-     * @name           treatAsValue
-     * @namespace       sugar.js.promise
-     * @type            Function
-     * @beta
-     *
-     * This function allows you to wrap a promise in a ```resolve``` call to prevent
-     * this promise to be treated as a "chaining" promise but to be treated as
-     * normal value passed in the resolve call.
-     *
-     * @param           {Promise}          promise          The promise to treat as a simple value
-     * @return          {ITreatAsValueProxy}                             A proxy of this promise that will act just like a normal promise once getted by the "await" statement
-     *
-     * @example         js
-     * import treatAsValue from '@coffeekraken/sugar/js/promise/treatAsValue';
-     * await new Promise(resolve => {
-     *      const myPromise = new Promise(resolve => {});
-     *      resolve(treatAsValue(myPromise));
-     * }); // => myPromise
-     *
-     * @since           2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
+    Object.defineProperty(exports, "__esModule", { value: true });
     var fn = function treatAsValue(promise, settings) {
         if (settings === void 0) { settings = {}; }
         settings = __assign({ during: -1 }, settings);
@@ -72,6 +50,6 @@ var __assign = (this && this.__assign) || function () {
             return promise;
         }
     };
-    return fn;
+    exports.default = fn;
 });
 //# sourceMappingURL=treatAsValue.js.map

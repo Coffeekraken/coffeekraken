@@ -1,4 +1,4 @@
-import __ISPromise from '../../promise/interface/ISPromise';
+import { ISPromise } from '../../promise/SPromise';
 
 export interface ISFileSettings {
   id?: string;
@@ -44,7 +44,7 @@ export interface ISFileCtor {
   new (filepath: string, settings?: ISFileSettings): ISFile;
 }
 
-export default interface ISFile extends __ISPromise {
+export default interface ISFile extends ISPromise {
   name: string;
   path: string;
   rootDir: string;

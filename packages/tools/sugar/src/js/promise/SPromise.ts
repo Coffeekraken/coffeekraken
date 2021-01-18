@@ -1,5 +1,5 @@
-// @ts-nocheck
 // @shared
+// @ts-nocheck
 
 import __minimatch from 'minimatch';
 import __deepMerge from '../object/deepMerge';
@@ -7,11 +7,13 @@ import __uniqid from '../string/uniqid';
 import __wait from '../time/wait';
 import __toString from '../string/toString';
 import __env from '../core/env';
-import __treatAsValue from './treatAsValue';
-import {
-  ITreatAsValueSettings,
-  ITreatAsValueProxy
-} from './interface/ITreatAsValue';
+import __treatAsValue, {
+  ITreatAsValue,
+  ITreatAsValueProxy,
+  ITreatAsValueSettings
+} from './treatAsValue';
+import __SEventEmitter from '../event/SEventEmitter';
+import __SClass from '../class/SClass';
 
 /**
  * @name                  SPromise
@@ -87,105 +89,73 @@ import {
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export = class SPromise extends Promise {
-  /**
-   * @name                  _settings
-   * @type                  Object
-   * @private
-   *
-   * Store the settings of this SPromise instance. Here's the available settings:
-   * - stacks (null) {Array|String}: An array or comma separated string of additional stacks you want for this instance
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  _settings = {};
 
-  /**
-   * @name                  _promiseState
-   * @type                  String
-   * @private
-   *
-   * Store the promise status. Can be:
-   * - pending: When the promise is waiting for resolution or rejection
-   * - resolved: When the promise has been resolved
-   * - rejected: When the promise has been rejected
-   * - canceled: When the promise has been canceled
-   * - destroyed: When the promise has been destroyed
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  _promiseState = 'pending';
+type ISPromiseStateType =
+  | 'pending'
+  | 'resolved'
+  | 'rejected'
+  | 'canceled'
+  | 'destroyed';
 
-  /**
-   * @name                  pipe
-   * @type                  Function
-   * @static
-   *
-   * This static function allows you to redirect some SPromise "events" to another SPromise instance
-   * with the ability to process the linked value before triggering it on the destination SPromise.
-   *
-   * @param         {SPromise}      sourceSPromise        The source SPromise instance on which to listen for "events"
-   * @param         {SPromise}      destSPromise          The destination SPromise instance on which to trigger the listened "events"
-   * @param         {Object}        [settings={}]         An object of settings to configure your pipe process
-   * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
-   * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
-   * - filter (null) {Function}: Specify a function to filter the "events". It will take as parameter the triggered value and the metas object. You must return true or false depending if you want to pipe the particular event or not
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  static pipe(sourceSPromise, destSPromise, settings = {}) {
-    // settings
-    settings = __deepMerge(
-      {
-        stacks: '*',
-        prefixStack: false,
-        processor: null,
-        exclude: ['finally', 'resolve', 'reject', 'cancel'],
-        filter: null
-      },
-      settings
-    );
-    if (
-      !(sourceSPromise instanceof SPromise) ||
-      !(destSPromise instanceof SPromise)
-    )
-      return;
-    // listen for all on the source promise
-    sourceSPromise.on(settings.stacks, (value, metas) => {
-      // check excluded stacks
-      if (settings.exclude.indexOf(metas.stack) !== -1) return;
-      // check if we have a filter setted
-      if (settings.filter && !settings.filter(value, metas)) return;
-      // check if need to process the value
-      if (settings.processor) {
-        const res = settings.processor(value, metas);
-        if (Array.isArray(res) && res.length === 2) {
-          value = res[0];
-          metas = res[1];
-        } else {
-          value = res;
-        }
-      }
+export interface ISPromiseSettings {
+  destroyTimeout: number;
+  [key: string]: any;
+}
 
-      // append the source promise id to the stack
-      let triggerStack = metas.stack;
-      if (settings.prefixStack) {
-        if (typeof settings.prefixStack === 'string') {
-          triggerStack = `${settings.prefixStack}.${metas.stack}`;
-        } else {
-          triggerStack = `${sourceSPromise.id}.${metas.stack}`;
-        }
-        metas.stack = triggerStack;
-      }
+export interface ISPromiseConstructorSettings {
+  [key: string]: any;
+  promise: ISPromiseSettings;
+}
 
-      // trigger on the destination promise
-      destSPromise.trigger(metas.stack, value, {
-        ...metas,
-        level: metas.level + 1
-      });
-    });
-  }
+export interface ISPromiseResolveFn {
+  (arg: any, stacksOrder: string): Promise<any>;
+}
+export interface ISPromiseRejectFn {
+  (arg: any, stacksOrder: string): Promise<any>;
+}
+export interface ISPromiseCancelFn {
+  (arg: any): void;
+}
 
+export interface ISPromiseExecutorFn {
+  (
+    resolve: ISPromiseResolveFn,
+    reject: ISPromiseRejectFn,
+    api: ISPromise
+  ): void;
+}
+
+export interface ISPromiseResolvers {
+  reject: Function;
+  resolve: Function;
+}
+
+export interface ISPromiseCtor extends Promise {
+  new (settings?: ISPromiseConstructorSettings): ISPromise;
+}
+
+export interface ISPromise {
+  _promiseState: ISPromiseStateType;
+  _resolvers?: ISPromiseResolvers;
+  readonly promiseState: string;
+  then(...args): any;
+  is(status: ISPromiseStateType): boolean;
+  isPending(): boolean;
+  isResolved(): boolean;
+  isRejected(): boolean;
+  isCanceled(): boolean;
+  isDestroyed(): boolean;
+  resolve: ISPromiseResolveFn;
+  reject: ISPromiseRejectFn;
+  cancel: ISPromiseCancelFn;
+  catch(...args: any): ISPromise;
+  finally(...args: any): ISPromise;
+  resolved(...args: any): ISPromise;
+  rejected(...args: any): ISPromise;
+  canceled(...args: any): ISPromise;
+}
+
+class SPromise extends __SClass.mixin([__SEventEmitter], Promise) {
   /**
    * @name        treatAsValue
    * @type        Function
@@ -202,36 +172,14 @@ export = class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   static treatAsValue(
-    promise: Promise,
+    promise: Promise<any>,
     settings: ITreatAsValueSettings = {}
   ): ITreatAsValueProxy {
     return __treatAsValue(promise, settings);
   }
 
-  /**
-   * @name          _buffer
-   * @type          Array
-   * @private
-   *
-   * Store all the triggered data that does not have any registered listener
-   * and that match with the ```settings.bufferedStacks``` stack
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  _buffer = [];
-
-  /**
-   * @name          _stacks
-   * @type          Array
-   * @private
-   *
-   * Store all the registered stacks with their callStack, callback, etc...
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  _stacks = {};
+  private _promiseState: ISPromiseStateType = 'pending';
+  private _resolvers: ISPromiseResolvers;
 
   /**
    * @name                  constructor
@@ -254,173 +202,82 @@ export = class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   constructor(executorFnOrSettings = {}, settings = {}) {
-    const _resolve = (...args) => {
+    const _resolve = (arg: any, stacksOrder?: string) => {
       setTimeout(() => {
-        this.resolve(...args);
+        this.resolve(arg, stacksOrder);
       }, 100);
     };
-    const _reject = (...args) => {
+    // @ts-ignore
+    const _reject = (arg: any, stacksOrder?: string) => {
       setTimeout(() => {
-        this.reject(...args);
+        this.reject(arg, stacksOrder);
       });
     };
-    const _trigger = (...args) => {
-      setTimeout(() => {
-        this.trigger(...args);
-      });
-    };
-    const _cancel = (...args) => {
-      setTimeout(() => {
-        this.cancel(...args);
-      });
-    };
-    const _pipe = (...args) => {
-      setTimeout(() => {
-        this.pipe(...args);
-      });
-    };
+    // @ts-ignore
+    let executorFn,
+      _this,
+      resolvers: any = {};
+    super(
+      (resolve, reject) => {
+        resolvers.resolve = resolve;
 
-    const resolvers = {};
-    let executorFn, _this;
-    super((resolve, reject) => {
-      resolvers.resolve = resolve;
+        new Promise((rejectPromiseResolve, rejectPromiseReject) => {
+          resolvers.reject = rejectPromiseReject;
+        }).catch((e) => {
+          this.emit('catch', e);
+        });
 
-      new Promise((rejectPromiseResolve, rejectPromiseReject) => {
-        resolvers.reject = rejectPromiseReject;
-      }).catch((e) => {
-        this.trigger('catch', e);
-      });
-
-      const _api = new Proxy(
-        {},
-        {
-          get(target, prop) {
-            if (_this !== undefined) {
-              return _this[prop];
-            } else {
-              return async (...args) => {
-                await __wait(0);
-                return _this[prop](...args);
-              };
+        const _api = new Proxy(
+          {},
+          {
+            get(target, prop) {
+              if (_this !== undefined) {
+                return _this[prop];
+              } else {
+                return async (...args) => {
+                  await __wait(0);
+                  return _this[prop](...args);
+                };
+              }
             }
           }
-        }
-      );
+        );
 
-      executorFn =
-        typeof executorFnOrSettings === 'function'
-          ? executorFnOrSettings
-          : null;
-      if (executorFn) {
-        return executorFn(_resolve, _reject, _trigger, _api);
-      }
-    });
+        executorFn =
+          typeof executorFnOrSettings === 'function'
+            ? executorFnOrSettings
+            : null;
+        if (executorFn) {
+          return executorFn(_resolve, _reject, _api);
+        }
+      },
+      __deepMerge(
+        {
+          promise: {
+            treatCancelAs: 'resolve',
+            destroyTimeout: 5000
+          }
+        },
+        typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {},
+        settings
+      )
+    );
 
     _this = this;
 
-    Object.defineProperty(this, '_resolvers', {
-      writable: true,
-      configurable: true,
-      enumerable: false,
-      value: resolvers
-    });
-    Object.defineProperty(this, '_promiseState', {
-      writable: true,
-      configurable: true,
-      enumerable: false,
-      value: 'pending'
-    });
-    Object.defineProperty(this, '_stacks', {
-      writable: true,
-      configurable: true,
-      enumerable: false,
-      value: {
-        catch: {
-          buffer: [],
-          callStack: []
-        },
-        resolve: {
-          buffer: [],
-          callStack: []
-        },
-        reject: {
-          buffer: [],
-          callStack: []
-        },
-        finally: {
-          buffer: [],
-          callStack: []
-        },
-        cancel: {
-          buffer: [],
-          callStack: []
-        }
-      }
-    });
+    this._resolvers = <ISPromiseResolvers>resolvers;
 
-    let promiseSettings = __deepMerge(
-      {
-        promise: {
-          treatCancelAs: 'resolve',
-          bufferTimeout: 100,
-          bufferedStacks: [
-            'log',
-            '*.log',
-            'warn',
-            '*.warn',
-            'error',
-            '*.error'
-          ],
-          defaultCallTime: {
-            finally: 1,
-            reject: 1,
-            resolve: 1,
-            catch: 1,
-            cancel: 1
-          },
-          destroyTimeout: 5000,
-          id: __uniqid()
-        }
-      },
-      typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {},
-      settings
-    );
-    if (this._settings === undefined) {
-      Object.defineProperty(this, '_settings', {
-        writable: true,
-        configurable: true,
-        enumerable: false,
-        value: promiseSettings
-      });
-    } else {
-      this._settings = __deepMerge(this._settings, promiseSettings);
-    }
-
-    if (this._settings.promise.destroyTimeout !== -1) {
+    if (
+      (<ISPromiseConstructorSettings>this._settings).promise.destroyTimeout !==
+      -1
+    ) {
       this.on('finally', (v, m) => {
         setTimeout(() => {
           this._destroy();
-        }, this._settings.promise.destroyTimeout);
+        }, (<ISPromiseConstructorSettings>this._settings).promise.destroyTimeout);
       });
     }
   }
-
-  /**
-   * @name                    id
-   * @type                    String
-   * @get
-   *
-   * Access the promise id
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  get id() {
-    return this._settings.promise.id;
-  }
-
-  // then(...args) {
-  //   super.then(...args);
-  // }
 
   /**
    * @name                    promiseState
@@ -549,29 +406,6 @@ export = class SPromise extends Promise {
   }
 
   /**
-   * @name          pipe
-   * @type          Function
-   *
-   * This method take an SPromise instance as parameter on which to pipe the
-   * specified stacks using the settings.stacks property.
-   * It is exactly the same as the static ```pipe``` method but for this
-   * particular instance.
-   *
-   * @param       {SPromise}      input      The input promise on which to pipe the events in this one
-   * @param       {Object}      [settings={}]    An object ob settings to configure the pipe process:
-   * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
-   * - processor (null) {Function}: Specify a function to apply on the triggered value before triggering it on the dest SPromise. Take as arguments the value itself and the stack name. Need to return a new value
-   * - filter (null) {Function}: Specify a function to filter the "events". It will take as parameter the triggered value and the metas object. You must return true or false depending if you want to pipe the particular event or not
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  pipe(input, settings = {}) {
-    SPromise.pipe(input, this, settings);
-    return this;
-  }
-
-  /**
    * @name          resolve
    * @type          Function
    * @async
@@ -603,16 +437,12 @@ export = class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   _resolve(arg, stacksOrder = 'resolve,finally') {
-    if (this._isDestroyed) return;
+    if (this._promiseState === 'destroyed') return;
     return new Promise(async (resolve, reject) => {
       // update the status
       this._promiseState = 'resolved';
       // exec the wanted stacks
-      const stacksResult = await this._triggerStacks(stacksOrder, arg);
-      // // set the promise in the stack result proto
-      // if (stacksResult !== undefined) {
-      //   stacksResult.__proto__.promise = this;
-      // }
+      const stacksResult = await this._emitEvents(stacksOrder, arg);
       // resolve the master promise
       this._resolvers.resolve(stacksResult);
       // return the stack result
@@ -652,16 +482,12 @@ export = class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   _reject(arg, stacksOrder = `catch,reject,finally`) {
-    if (this._isDestroyed) return;
+    if (this._promiseState === 'destroyed') return;
     return new Promise(async (resolve, reject) => {
       // update the status
       this._promiseState = 'rejected';
       // exec the wanted stacks
-      const stacksResult = await this._triggerStacks(stacksOrder, arg);
-      // // set the promise in the stack result proto
-      // if (stacksResult !== undefined) {
-      //   stacksResult.__proto__.promise = this;
-      // }
+      const stacksResult = await this._emitEvents(stacksOrder, arg);
       // resolve the master promise
       this._resolvers.reject(stacksResult);
       // return the stack result
@@ -701,16 +527,12 @@ export = class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   _cancel(arg, stacksOrder = 'cancel,finally') {
-    if (this._isDestroyed) return;
+    if (this._promiseState === 'destroyed') return;
     return new Promise(async (resolve, reject) => {
       // update the status
       this._promiseState = 'canceled';
       // exec the wanted stacks
-      const stacksResult = await this._triggerStacks(stacksOrder, arg);
-      // set the promise in the stack result proto
-      // if (stacksResult !== undefined) {
-      //   stacksResult.__proto__.promise = this;
-      // }
+      const stacksResult = await this._emitEvents(stacksOrder, arg);
       // resolve the master promise
       if (this._settings.promise.treatCancelAs === 'reject') {
         this._resolvers.reject(stacksResult);
@@ -720,371 +542,6 @@ export = class SPromise extends Promise {
       // return the stack result
       resolve(stacksResult);
     });
-  }
-
-  /**
-   * @name          trigger
-   * @type          Function
-   * @async
-   *
-   * This is the method that allows you to trigger the callbacks like "catch", "finally", etc... without actually resolving the Promise itself
-   *
-   * @param         {String|Array}        what            The callbacks that you want to trigger. Can be catch", "finally" or "cancel". You can trigger multiple stacks by passing an Array like ['catch','finally'], or a string like "catch,finally"
-   * @param         {Mixed}         arg         The argument you want to pass to the callback
-   * @return        {Promise}                       A default Promise that will be resolved with the result of the stack execution
-   *
-   * @example         js
-   * new SPromise((resolve, reject, trigger) => {
-   *    setTimeout(() => {
-   *      resolve('something');
-   *    }, 2000);
-   * }).then(value => {
-   *    // do something with one time "something"
-   * });
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  async trigger(what, arg, metas = {}) {
-    if (this._isDestroyed) return;
-
-    let treatAsValue = arg !== undefined;
-
-    if (treatAsValue) {
-      arg = __treatAsValue(arg);
-    }
-
-    // triger the passed stacks
-    let res = this._triggerStacks(what, arg, metas);
-    if (res && res.restorePromiseBehavior) {
-      res = res.restorePromiseBehavior();
-    }
-    return res;
-  }
-
-  /**
-   * @name            _registerNewStacks
-   * @type            Function
-   * @private
-   *
-   * This methods allows you to register new stacks.
-   * A new stack can be called then using the "on('stackName', ...)" method,
-   * or directly on the SPromise instance like so "myPromise.stackName(...)".
-   *
-   * @param       {String|Array}      stacks        The stack(s) name(s) you want to register. Can be an Array or a comma separated string
-   * @return      {SPromise}                        The SPromise instance
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  _registerNewStacks(stacks) {
-    // split the stacks order
-    if (typeof stacks === 'string')
-      stacks = stacks.split(',').map((s) => s.trim());
-    stacks.forEach((stack) => {
-      if (!this._stacks[stack]) {
-        this._stacks[stack] = {
-          buffer: [],
-          callStack: []
-        };
-      }
-    });
-  }
-
-  /**
-   * @name            _registerCallbackInStack
-   * @type            Function
-   *
-   * This function take as argument a stack array and register into it the passed callback function
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  _registerCallbackInStack(stack, callback, settings = {}) {
-    settings = {
-      callNumber: undefined,
-      ...settings
-    };
-
-    if (this._isDestroyed) {
-      throw new Error(
-        `Sorry but you can't call the "${stack}" method on this SPromise cause it has been destroyed...`
-      );
-    }
-    // make sure the stack exist
-    if (!this._stacks[stack]) {
-      this._registerNewStacks(stack);
-    }
-
-    let stackObj = this._stacks[stack];
-    let callNumber = settings.callNumber;
-
-    // process the args
-    if (
-      callNumber === undefined &&
-      this._settings.promise.defaultCallTime[stack] !== undefined
-    ) {
-      callNumber = this._settings.promise.defaultCallTime[stack];
-    } else if (callNumber === undefined) {
-      callNumber = -1;
-    }
-
-    // make sure this is a function and register it to the _catchStack
-    if (typeof callback === 'function')
-      stackObj.callStack.push({
-        callback,
-        callNumber,
-        called: 0
-      });
-
-    // check if a buffer exists for this particular stack
-    if (this._buffer.length > 0) {
-      setTimeout(() => {
-        this._buffer = this._buffer.filter((item) => {
-          if (__minimatch(item.stack, stack)) {
-            this.trigger(item.stack, item.value);
-            return false;
-          }
-          return true;
-        });
-      }, this._settings.promise.bufferTimeout);
-    }
-
-    // maintain chainability
-    return this;
-  }
-
-  /**
-   * @name            _triggerStack
-   * @type            Function
-   * @private
-   * @async
-   *
-   * This function take an Array Stack as parameter and execute it to return the result
-   *
-   * @param         {String}             stack             The stack to execute
-   * @param         {Mixed}             initialValue      The initial value to pass to the first stack callback
-   * @return        {Promise}                             A promise resolved with the stack result
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  async _triggerStack(stack, initialValue, metas = {}) {
-    let currentCallbackReturnedValue = initialValue;
-
-    // // set the promise in the stack result proto
-    // if (currentCallbackReturnedValue !== undefined) {
-    //   currentCallbackReturnedValue.__proto__.promise = this;
-    // }
-
-    if (!this._stacks || Object.keys(this._stacks).length === 0)
-      return currentCallbackReturnedValue;
-
-    // make sure the stack exist
-    if (!this._stacks[stack]) {
-      this._registerNewStacks(stack);
-    }
-
-    let stackArray = [];
-    let stackObj = this._stacks[stack];
-
-    if (stackObj && stackObj.callStack) {
-      stackArray = [...stackArray, ...stackObj.callStack];
-    }
-
-    // check if the stack is a glob pattern
-    Object.keys(this._stacks).forEach((stackName) => {
-      if (stackName === stack) return;
-      if (
-        __minimatch(stack, stackName) &&
-        this._stacks[stackName] !== undefined
-      ) {
-        // the glob pattern match the triggered stack so add it to the stack array
-        stackArray = [...stackArray, ...this._stacks[stackName].callStack];
-      }
-    });
-
-    // handle buffers
-    if (stackArray.length === 0) {
-      for (let i = 0; i < this._settings.promise.bufferedStacks.length; i++) {
-        const bufferedStack = this._settings.promise.bufferedStacks[i];
-        if (__minimatch(stack, bufferedStack)) {
-          this._buffer.push({
-            stack,
-            value: initialValue
-          });
-        }
-      }
-      return initialValue;
-    }
-
-    // filter the catchStack
-    stackArray.map((item) => item.called++);
-    stackArray = stackArray.filter((item) => {
-      if (item.callNumber === -1) return true;
-      if (item.called <= item.callNumber) return true;
-      return false;
-    });
-    const metasObj = __deepMerge(
-      {
-        stack,
-        originalStack: stack,
-        id: this._settings.promise.id,
-        state: this._promiseState,
-        time: Date.now(),
-        level: 1
-      },
-      metas
-    );
-
-    for (let i = 0; i < stackArray.length; i++) {
-      // get the actual item in the array
-      const item = stackArray[i];
-      // make sure the stack exist
-      if (!item.callback) return currentCallbackReturnedValue;
-      // call the callback function
-      let callbackResult = item.callback(
-        currentCallbackReturnedValue,
-        metasObj
-      );
-      // check if the callback result is a promise
-      if (callbackResult && !callbackResult.restorePromiseBehavior) {
-        callbackResult = await callbackResult;
-      }
-
-      if (callbackResult !== undefined) {
-        // if the settings tells that we have to pass each returned value to the next callback
-        currentCallbackReturnedValue = callbackResult;
-      }
-    }
-
-    return currentCallbackReturnedValue;
-  }
-
-  /**
-   * @name          _triggerStacks
-   * @type          Function
-   * @private
-   * @async
-   *
-   * This function take as parameters a list of stacks to trigger like an Array ['catch','finnaly'], or a string like so "catch,finally", and as second parameter,
-   * the initial value to pass to the first callback of the joined stacks...
-   *
-   * @param         {Array|String}            stacks          The stacks to trigger
-   * @param         {Mixed}                   initialValue    The initial value to pass to the first stack callback
-   * @return        {Promise}                                 A promise that will be resolved with the stacks resulting value
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  _triggerStacks(stacks, initialValue, metas = {}) {
-    return new Promise(async (resolve, reject) => {
-      // await __wait(0);
-
-      if (!stacks) return this;
-
-      // check if the stacks is "*"
-      if (typeof stacks === 'string')
-        stacks = stacks.split(',').map((s) => s.trim());
-
-      let currentStackResult = initialValue;
-
-      for (let i = 0; i < stacks.length; i++) {
-        let stackResult = await this._triggerStack(
-          stacks[i],
-          currentStackResult,
-          metas
-        );
-        if (stackResult !== undefined) {
-          currentStackResult = stackResult;
-        }
-      }
-
-      resolve(currentStackResult);
-    });
-  }
-
-  /**
-   * @name                on
-   * @type                Function
-   *
-   * This method allows the SPromise user to register a function that will be called every time the "resolve" one is called in the executor
-   * The context of the callback will be the SPromise instance itself so you can call all the methods available like "resolve", "release", "on", etc using
-   * the "this.resolve('something')" statusment. In an arrow function like "(value) => { ... }", the "this" keyword will be bound to the current context where you define
-   * your function. You can access to the SPromise instance through the last parameter like so "(value, sPromiseInstance) => { ... }".
-   *
-   * @param           {String|Array}      stacks        The stacks in which you want register your callback. Either an Array like ['catch','finally'], or a String like "catch,finally"
-   * @param           {Function}        callback        The callback function to register
-   * @return          {SPromise}                  The SPromise instance to maintain chainability
-   *
-   * @example         js
-   * new SPromise((resolve, reject, trigger) => {
-   *    // do something...
-   *    resolve('hello world');
-   * }).on('resolve', value => {
-   *    // do something with the value that is "hello world"
-   * }).on('catch:1', error => {
-   *    // do something that will be called only once
-   * });
-   *
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  on(stacks, callback) {
-    if (this._isDestroyed) {
-      throw new Error(
-        `Sorry but you can't call the "on" method on this SPromise cause it has been destroyed...`
-      );
-    }
-
-    if (typeof stacks === 'string')
-      stacks = stacks.split(',').map((s) => s.trim());
-
-    // loop on each stacks
-    stacks.forEach((name) => {
-      // check if it has a callNumber specified using name:1
-      const splitedName = name.split(':');
-      let callNumber = undefined;
-      if (splitedName.length === 2) {
-        name = splitedName[0];
-        callNumber = parseInt(splitedName[1]);
-      }
-      // calling the registration method
-      this._registerCallbackInStack(name, callback, {
-        callNumber
-      });
-    });
-
-    // maintain chainability
-    return this;
-  }
-
-  /**
-   * @name            off
-   * @type            Function
-   *
-   * This method allows you to unsubscribe to an event by passing the event name an optionally the callback function.
-   * If you don't pass the callback function, all the subscribed events the same as the passed one will be unsubscribed.
-   *
-   * @param       {String}        name        The event name to unsubscribe to
-   * @param       {Function}    [callback=null]     The callback function you want to unsubscribe
-   * @return      {SPromise}                The SPromise instance to maintain chainability
-   *
-   * @since     2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  off(name, callback = null) {
-    if (!callback) {
-      delete this._stacks[name];
-      return this;
-    }
-
-    // get the stack
-    let stackObj = this._stacks[name];
-    if (!stackObj) return this;
-    // loop on the stack registered callback to finc the one to delete
-    stackObj.callStack = stackObj.callStack.filter((item) => {
-      if (item.callback === callback) return false;
-      return true;
-    });
-    // make sure we have saved the new stack
-    this._stacks[name] = stackObj;
-    // maintain chainability
-    return this;
   }
 
   /**
@@ -1139,7 +596,6 @@ export = class SPromise extends Promise {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   finally(...args) {
-    // super.finally(...args);
     return this.on('finally', ...args);
   }
 
@@ -1234,9 +690,8 @@ export = class SPromise extends Promise {
     this._promiseState = 'destroyed';
 
     // destroying all the callbacks stacks registered
-    delete this._stacks;
-    delete this._resolvers;
-    delete this._settings.promise;
-    this._isDestroyed = true;
+    this._settings.promise = undefined;
   }
-};
+}
+
+export default SPromise;

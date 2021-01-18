@@ -3,9 +3,9 @@
     "node_modules",
     "**/node_modules",
     "**/node_modules/**",
-    "__tests__",
-    "**/__tests__",
-    "**/__tests__/**"
+    "__tests__.wip",
+    "**/__tests__.wip",
+    "**/__tests__.wip/**"
   ],
   "compilerOptions": {
     "allowJs": true,

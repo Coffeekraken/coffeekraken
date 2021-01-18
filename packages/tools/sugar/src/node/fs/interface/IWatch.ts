@@ -1,4 +1,4 @@
-import SPromise from '../../promise/SPromise';
+import { ISPromise } from '../../promise/SPromise';
 
 export interface IWatchSettings {
   SFile?: boolean;
@@ -6,5 +6,5 @@ export interface IWatchSettings {
 }
 
 export default interface IWatch {
-  (paths: string | string[], settings?: IWatchSettings): SPromise;
+  (paths: string | string[], settings?: IWatchSettings): ISPromise;
 }

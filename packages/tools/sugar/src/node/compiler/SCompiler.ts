@@ -1,3 +1,6 @@
+// @ts-nocheck
+// @to-work
+
 import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
 

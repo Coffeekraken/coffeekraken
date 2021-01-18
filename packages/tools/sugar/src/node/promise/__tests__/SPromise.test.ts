@@ -1,2 +1,1 @@
-const __SPromise = require('../SPromise');
-require('../promise/__tests__/SPromise')(__SPromise);
+../../../js/promise/__tests__/SPromise.test.ts

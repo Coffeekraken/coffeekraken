@@ -82,7 +82,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var SClass_1 = __importDefault(require("../class/SClass"));
     var minimatch_1 = __importDefault(require("minimatch"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
-    var cls = /** @class */ (function (_super) {
+    var SEventEmitter = /** @class */ (function (_super) {
         __extends(SEventEmitter, _super);
         /**
          * @name                  constructor
@@ -112,7 +112,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     bufferTimeout: 1000,
                     bufferedEvents: []
                 }
-            }, settings)) || this;
+            }, settings || {})) || this;
             /**
              * @name          _buffer
              * @type          Array
@@ -136,12 +136,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              * @author 		Olivier Bossel<olivier.bossel@gmail.com>
              */
             _this._eventsStacks = {};
-            Object.defineProperty(_this, '_eventsStacks', {
-                writable: true,
-                configurable: true,
-                enumerable: false,
-                value: {}
-            });
             return _this;
         }
         /**
@@ -305,7 +299,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             var callNumber = settings.callNumber;
             // process the args
             if (callNumber === undefined &&
+                // @ts-ignore
                 this._settings.eventEmitter.defaultCallTime[event] !== undefined) {
+                // @ts-ignore
                 callNumber = this._settings.eventEmitter.defaultCallTime[event];
             }
             else if (callNumber === undefined) {
@@ -328,6 +324,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         }
                         return true;
                     });
+                    // @ts-ignore
                 }, this._settings.eventEmitter.bufferTimeout);
             }
             // maintain chainability
@@ -376,9 +373,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     });
                     // handle buffers
                     if (eventStackArray.length === 0) {
-                        for (i = 0; i < this._settings.eventEmitter.bufferedEvents.length; i++) {
+                        for (i = 0; 
+                        // @ts-ignore
+                        i < this._settings.eventEmitter.bufferedEvents.length; i++) {
                             bufferedStack = this._settings.eventEmitter.bufferedEvents[i];
-                            if (minimatch_1.default(event, bufferedStack)) {
+                            if (bufferedStack && minimatch_1.default(event, bufferedStack)) {
                                 this._buffer.push({
                                     event: event,
                                     value: initialValue
@@ -561,11 +560,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         SEventEmitter.prototype._destroy = function () {
             // destroying all the callbacks stacks registered
             this._eventsStacks = {};
-            this._settings.eventEmitter = {};
-            this._isDestroyed = true;
         };
+        SEventEmitter.usableAsMixin = true;
         return SEventEmitter;
     }(SClass_1.default));
-    return cls;
+    var cls = SEventEmitter;
+    return SEventEmitter;
 });
 //# sourceMappingURL=SEventEmitter.js.map

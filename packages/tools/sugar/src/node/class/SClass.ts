@@ -1,0 +1,1 @@
+../../js/class/SClass.ts

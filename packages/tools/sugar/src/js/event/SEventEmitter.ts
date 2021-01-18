@@ -67,23 +67,30 @@ interface ISEventEmitterBufferItem {
   value: any;
 }
 
+interface ISEventEmitterConstructorSettings {
+  eventEmitter?: ISEventEmitterSettings;
+}
+interface ISEventEmitterInstanceSettings {
+  eventEmitter: ISEventEmitterSettings;
+}
+
 interface ISEventEmitterSettings {
-  defaultCallTime?: ISEventEmitterSettingsCallTime;
-  bufferTimeout?: number;
-  bufferedEvents?: string[];
+  defaultCallTime: ISEventEmitterSettingsCallTime;
+  bufferTimeout: number;
+  bufferedEvents: string[];
 }
 
 interface ISEventEmitterCtor {}
 interface ISEventEmitter {
+  _settings: ISEventEmitterInstanceSettings;
   _buffer: ISEventEmitterBufferItem[];
   _eventsStacks: ISEventEmitterEventsStacks;
   on(stack: string, callback: ISEventEmitterCallbackFn): ISEventEmitter;
   emit(stack: string, value: any, metas?: ISEventEmitterMetas): ISEventEmitter;
 }
+class SEventEmitter extends SClass implements ISEventEmitter {
+  static usableAsMixin = true;
 
-const cls: ISEventEmitterCtor = class SEventEmitter
-  extends SClass
-  implements ISEventEmitter {
   /**
    * @name                  pipe
    * @type                  Function
@@ -186,7 +193,10 @@ const cls: ISEventEmitterCtor = class SEventEmitter
    * @since       2.0.0
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  _eventsStacks = {};
+  _eventsStacks: any = {};
+
+  // @ts-ignore
+  _settings: ISEventEmitterConstructorSettings;
 
   /**
    * @name                  constructor
@@ -208,7 +218,7 @@ const cls: ISEventEmitterCtor = class SEventEmitter
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  constructor(settings = {}) {
+  constructor(settings: ISEventEmitterConstructorSettings = {}) {
     super(
       __deepMerge(
         {
@@ -218,16 +228,9 @@ const cls: ISEventEmitterCtor = class SEventEmitter
             bufferedEvents: []
           }
         },
-        settings
+        settings || {}
       )
     );
-
-    Object.defineProperty(this, '_eventsStacks', {
-      writable: true,
-      configurable: true,
-      enumerable: false,
-      value: {}
-    });
   }
 
   /**
@@ -336,8 +339,10 @@ const cls: ISEventEmitterCtor = class SEventEmitter
     // process the args
     if (
       callNumber === undefined &&
+      // @ts-ignore
       this._settings.eventEmitter.defaultCallTime[event] !== undefined
     ) {
+      // @ts-ignore
       callNumber = this._settings.eventEmitter.defaultCallTime[event];
     } else if (callNumber === undefined) {
       callNumber = -1;
@@ -361,6 +366,7 @@ const cls: ISEventEmitterCtor = class SEventEmitter
           }
           return true;
         });
+        // @ts-ignore
       }, this._settings.eventEmitter.bufferTimeout);
     }
 
@@ -423,11 +429,13 @@ const cls: ISEventEmitterCtor = class SEventEmitter
     if (eventStackArray.length === 0) {
       for (
         let i = 0;
+        // @ts-ignore
         i < this._settings.eventEmitter.bufferedEvents.length;
         i++
       ) {
+        // @ts-ignore
         const bufferedStack = this._settings.eventEmitter.bufferedEvents[i];
-        if (__minimatch(event, bufferedStack)) {
+        if (bufferedStack && __minimatch(event, bufferedStack)) {
           this._buffer.push({
             event,
             value: initialValue
@@ -622,9 +630,7 @@ const cls: ISEventEmitterCtor = class SEventEmitter
   _destroy() {
     // destroying all the callbacks stacks registered
     this._eventsStacks = {};
-    this._settings.eventEmitter = {};
-    this._isDestroyed = true;
   }
-};
-
-export = cls;
+}
+const cls: ISEventEmitterCtor = SEventEmitter;
+export = SEventEmitter;

@@ -1,3 +1,6 @@
+// @ts-nocheck
+// @to-work
+
 import IWatch, { IWatchSettings } from './interface/IWatch';
 
 import __chokidar from 'chokidar';

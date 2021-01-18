@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SFile from '../fs/SFile';
 import __findImportStatements from './utils/findImportStatements';
 import __resolveDependency from './utils/resolveDependency';

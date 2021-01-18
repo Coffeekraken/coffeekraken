@@ -1,4 +1,4 @@
-import ISPromise from '../../promise/interface/ISPromise';
+import { ISPromise } from '../../promise/SPromise';
 import { SpawnOptions } from 'child_process';
 
 export interface ISpawnSettings extends SpawnOptions {

@@ -1,10 +1,5 @@
 // @shared
 
-import ITreatAsValue, {
-  ITreatAsValueProxy,
-  ITreatAsValueSettings
-} from './interface/ITreatAsValue';
-
 /**
  * @name           treatAsValue
  * @namespace       sugar.js.promise
@@ -28,6 +23,19 @@ import ITreatAsValue, {
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
+
+export interface ITreatAsValueSettings {
+  during?: number;
+}
+
+export interface ITreatAsValueProxy extends ProxyConstructor {
+  restorePromiseBehavior: Function;
+}
+
+export interface ITreatAsValue {
+  (promise: any, settings?: ITreatAsValueSettings): ITreatAsValueProxy;
+}
+
 const fn: ITreatAsValue = function treatAsValue(
   promise: any,
   settings: ITreatAsValueSettings = {}
@@ -60,4 +68,4 @@ const fn: ITreatAsValue = function treatAsValue(
     return promise;
   }
 };
-export = fn;
+export default fn;

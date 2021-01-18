@@ -1,3 +1,6 @@
+// @ts-nocheck
+// @to-work
+
 import { ISProcessObject, ISProcessSettings } from './interface/ISProcess';
 import ISProcessPipe, {
   ISProcessPipeCtor,

@@ -3,7 +3,7 @@ import ISHeadingBlessedStdioComponent, {
   ISHeadingBlessedStdioComponentSettings
 } from './interface/ISHeadingBlessedStdioComponent';
 import __SBlessedStdioComponent from '../SBlessedStdioComponent';
-import ILog from '../../../log/interface/ILog';
+import { ILog } from '../../../log/log';
 import __blessed from 'blessed';
 import __deepMerge from '../../../object/deepMerge';
 import __parseHtml from '../../../console/parseHtml';

@@ -62,7 +62,7 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function objectProperties(startObj, targetObj, settings = {}) {
-    return new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
+    return new SPromise_1.default(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
         settings = deepMerge_1.default({
             duration: '1s',
             stepsCount: null,
@@ -126,8 +126,8 @@ function objectProperties(startObj, targetObj, settings = {}) {
                 // set the property in the returned transition object
                 returnedTransitionObj[prop] = newValue;
             });
-            // trigger the "step" stack
-            trigger('step', returnedTransitionObj);
+            // emit the "step" stack
+            emit('step', returnedTransitionObj);
         })
             .on('complete', () => {
             // resolve the transition

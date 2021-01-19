@@ -23,19 +23,27 @@ import __deepMerge from '../object/deepMerge';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 
-interface ISEventEmitterPipeSettings {
-  events: string;
-  prefixEvent?: boolean;
-  processor?: Function;
-  exclude?: string[];
-  filter?: Function;
+export interface ISEventEmitterPipeSettingsProcessorFn {
+  (value: any, metas: ISEventEmitterMetas): any;
 }
 
-interface ISEventEmitterCallbackSettings {
+export interface ISEventEmitterPipeSettingsFilterFn {
+  (value: any, metas: ISEventEmitterMetas): boolean;
+}
+
+export interface ISEventEmitterPipeSettings {
+  events?: string;
+  prefixEvent?: boolean;
+  processor?: ISEventEmitterPipeSettingsProcessorFn;
+  exclude?: string[];
+  filter?: ISEventEmitterPipeSettingsFilterFn;
+}
+
+export interface ISEventEmitterCallbackSettings {
   callNumber?: number;
 }
 
-interface ISEventEmitterMetas {
+export interface ISEventEmitterMetas {
   event: string;
   name?: string;
   source?: string;
@@ -44,44 +52,44 @@ interface ISEventEmitterMetas {
   level?: number;
 }
 
-interface ISEventEmitterCallbackFn {
+export interface ISEventEmitterCallbackFn {
   (value: any, metas: ISEventEmitterMetas): any;
 }
 
-interface ISEventEmitterSettingsCallTime {
+export interface ISEventEmitterSettingsCallTime {
   [key: string]: number;
 }
 
-interface ISEventEmitterEventStackItem {
+export interface ISEventEmitterEventStackItem {
   callback: ISEventEmitterCallbackFn;
   callNumber: number;
   called: number;
 }
 
-interface ISEventEmitterEventsStacks {
+export interface ISEventEmitterEventsStacks {
   [key: string]: ISEventEmitterEventStackItem;
 }
 
-interface ISEventEmitterBufferItem {
+export interface ISEventEmitterBufferItem {
   event: string;
   value: any;
 }
 
-interface ISEventEmitterConstructorSettings {
+export interface ISEventEmitterConstructorSettings {
   eventEmitter?: ISEventEmitterSettings;
 }
-interface ISEventEmitterInstanceSettings {
+export interface ISEventEmitterInstanceSettings {
   eventEmitter: ISEventEmitterSettings;
 }
 
-interface ISEventEmitterSettings {
+export interface ISEventEmitterSettings {
   defaultCallTime: ISEventEmitterSettingsCallTime;
   bufferTimeout: number;
   bufferedEvents: string[];
 }
 
-interface ISEventEmitterCtor {}
-interface ISEventEmitter {
+export interface ISEventEmitterCtor {}
+export interface ISEventEmitter {
   _settings: ISEventEmitterInstanceSettings;
   _buffer: ISEventEmitterBufferItem[];
   _eventsStacks: ISEventEmitterEventsStacks;
@@ -89,6 +97,8 @@ interface ISEventEmitter {
   emit(stack: string, value: any, metas?: ISEventEmitterMetas): ISEventEmitter;
 }
 class SEventEmitter extends SClass implements ISEventEmitter {
+  static usableAsMixin = true;
+
   /**
    * @name                  pipe
    * @type                  Function
@@ -121,7 +131,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       ...(settings || {})
     };
     // listen for all on the source promise
-    sourceSEventEmitter.on(set.events, (value, metas) => {
+    sourceSEventEmitter.on(set.events || '*', (value, metas) => {
       // check excluded stacks
       if (set.exclude && set.exclude.indexOf(metas.event) !== -1) return;
       // check if we have a filter setted
@@ -206,7 +216,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    * @param         {Object}            [settings={}]     An object of settings for this particular SEventEmitter instance. Here's the available settings:
    *
    * @example       js
-   * const promise = new SEventEmitter((resolve, reject, emit, cancel, promise) => {
+   * const promise = new SEventEmitter(({ resolve, reject, emit }) => {
    *    // do something...
    * }).then(value => {
    *    // do something...
@@ -631,4 +641,4 @@ class SEventEmitter extends SClass implements ISEventEmitter {
   }
 }
 const cls: ISEventEmitterCtor = SEventEmitter;
-export = SEventEmitter;
+export default SEventEmitter;

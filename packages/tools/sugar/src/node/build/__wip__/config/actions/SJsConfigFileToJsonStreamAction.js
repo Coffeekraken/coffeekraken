@@ -23,7 +23,7 @@ const { stream } = require('globby');
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = (_a = class SJsConfigFileToJsonStreamAction extends __SActionsStreamAction {
+module.exports = (_a = class SJsConfigFileToJsonStreamAction extends (__SActionsStreamAction) {
         /**
          * @name            constructor
          * @type            Function
@@ -48,7 +48,7 @@ module.exports = (_a = class SJsConfigFileToJsonStreamAction extends __SActionsS
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings) {
-            return super.run(streamObj, (resolve, reject) => {
+            return super.run(streamObj, ({ resolve, reject }) => {
                 // get the config object from input file
                 const config = require(streamObj.input);
                 // transform the config to JSON

@@ -1,22 +1,23 @@
-// @ts-nocheck
 // @to-work
-
-import { ISProcessObject, ISProcessSettings } from './interface/ISProcess';
-import ISProcessPipe, {
-  ISProcessPipeCtor,
-  ISProcessPipeSettings,
-  ISProcessPipeObject
-} from './interface/ISProcessPipe';
-
 import __isClass from '../is/class';
 import __SProcess from './SProcess';
 import __SPromise from '../promise/SPromise';
+import __SEventEmitter from '../event/SEventEmitter';
 import __deepMerge from '../object/deepMerge';
 import __typeof from '../value/typeof';
 import __stdio from './stdio';
 import __toString from '../string/toString';
 import __parseHtml from '../console/parseHtml';
 import __isChildProcess from '../is/childProcess';
+
+import {
+  ISProcess,
+  ISProcessCtor,
+  ISProcessObject,
+  ISProcessSettings,
+  ISProcessOptionalSettings
+} from './SProcess';
+import { ISEventEmitter } from '../../js/event/SEventEmitter';
 
 /**
  * @name            SProcessPipe
@@ -53,9 +54,42 @@ import __isChildProcess from '../is/childProcess';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const cls: ISProcessPipeCtor = class SProcessPipe
-  extends __SPromise
-  implements ISProcessPipe {
+
+export interface ISProcessPipeOptionalSettings {
+  processesSettings?: ISProcessSettings;
+  stdio?: any;
+  [key: string]: any;
+}
+export interface ISProcessPipeSettings {
+  processesSettings: ISProcessSettings;
+  stdio: any;
+  [key: string]: any;
+}
+
+export interface ISProcessPipeCtorSettings {
+  processPipe?: ISProcessPipeOptionalSettings;
+}
+
+export interface ISProcessPipeObject {
+  settings?: ISProcessOptionalSettings;
+  params?: any;
+  process: ISProcessCtor;
+}
+
+export interface ISProcessPipeCtor {
+  new (
+    processes: ISProcessCtor | ISProcessCtor[],
+    settings: ISProcessPipeOptionalSettings
+  );
+}
+
+export interface ISProcessPipe {
+  _processes?: ISProcessCtor | ISProcessCtor[];
+  stdio?: any;
+  processPipeSettings: ISProcessPipeSettings;
+}
+
+class SProcessPipe extends __SEventEmitter implements ISProcessPipe {
   /**
    * @name            _processes
    * @type            Array<ISProcessPipeObject|ISProcess|Function>
@@ -66,9 +100,23 @@ const cls: ISProcessPipeCtor = class SProcessPipe
    * @since           2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _processes;
+  _processes: ISProcessCtor | ISProcessCtor[];
 
   stdio;
+
+  /**
+   * @name            processPipeSettings
+   * @type            ISProcessPipeSettings
+   * @get
+   *
+   * Access the process pipe settings
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  public get processPipeSettings() {
+    return (<any>this._settings).processPipe;
+  }
 
   /**
    * @name            constructor
@@ -80,11 +128,16 @@ const cls: ISProcessPipeCtor = class SProcessPipe
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(processes, settings: ISProcessPipeSettings = {}) {
+  constructor(
+    processes: ISProcessCtor | ISProcessCtor[],
+    settings: ISProcessPipeCtorSettings = {}
+  ) {
     super(
       __deepMerge(
         {
-          stdio: 'inherit'
+          processPipe: {
+            stdio: 'inherit'
+          }
         },
         settings
       )
@@ -106,88 +159,92 @@ const cls: ISProcessPipeCtor = class SProcessPipe
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(params = {}, settings: ISProcessPipeSettings = {}) {
-    const promise = new __SPromise(
-      async (resolve, reject, trigger, cancel, pipe) => {
-        // extends settings
-        settings = __deepMerge(this._settings, settings);
+  run(params = {}, settings: ISProcessPipeOptionalSettings = {}) {
+    const promise = new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+      // extends settings
+      const processPipeSettings = <ISProcessPipeSettings>(
+        __deepMerge(this.processPipeSettings, settings)
+      );
 
-        if (!Array.isArray(this._processes)) {
-          throw `Sorry but you've passed an "<yellow>${__typeof(
-            this._processes
-          )}</yellow>" as "<cyan>SProcessManager.pipe</cyan>" argument but it needs to be an <green>Array</green>`;
-        }
+      if (!Array.isArray(this._processes)) {
+        throw `Sorry but you've passed an "<yellow>${__typeof(
+          this._processes
+        )}</yellow>" as "<cyan>SProcessManager.pipe</cyan>" argument but it needs to be an <green>Array</green>`;
+      }
 
-        // @ts-ignore
-        if (!__isChildProcess() && settings.stdio && !this.stdio) {
-          this.stdio = __stdio(this, {
-            stdio: settings.stdio
+      // @ts-ignore
+      if (!__isChildProcess() && processPipeSettings.stdio && !this.stdio) {
+        this.stdio = __stdio(this, {
+          stdio: processPipeSettings.stdio
+        });
+      }
+
+      // loop on each processes passed
+      for (let i = 0; i < this._processes.length; i++) {
+        const pro: any = this._processes[i];
+
+        let processInstance: ISProcess,
+          processParams: any = {},
+          processSettings: ISProcessSettings =
+            processPipeSettings.processesSettings;
+
+        // check the type of the process
+        if (__isClass(pro)) {
+          processInstance = new pro({
+            ...(processPipeSettings.processesSettings || {}),
+            stdio: false
           });
-        }
-
-        // loop on each processes passed
-        for (let i = 0; i < this._processes.length; i++) {
-          const pro = this._processes[i];
-
-          let processInstance,
-            processParams = {},
-            processSettings = settings.processes || {};
-
-          // check the type of the process
-          if (__isClass(pro)) {
-            processInstance = new pro({
-              ...(settings.processes || {}),
+        } else if (typeof pro === 'function') {
+          // emit('log', {
+          //   type: 'separator',
+          //   separator: '#',
+          //   value: 'Processing params'
+          // });
+          params = pro(params);
+          // emit('log', {
+          //   type: 'separator',
+          //   value: ''
+          // });
+        } else if (typeof pro === 'object') {
+          processSettings = pro.settings || {};
+          processParams = pro.params || {};
+          if (!pro.process) {
+            emit('warn', {
+              value: `You have passed an "<yellow>Object</yellow>" as process parameter in the "<cyan>SProcessManager.pipe</cyan>" static method but you don't have specified the "<magenta>process</magenta>" property with either an SProcess instance, or directly the SProcess class you want`
+            });
+            continue;
+          }
+          if (__isClass(pro.process)) {
+            processInstance = new pro.process({
+              ...processSettings,
               stdio: false
             });
-          } else if (typeof pro === 'function') {
-            // trigger('log', {
-            //   type: 'separator',
-            //   separator: '#',
-            //   value: 'Processing params'
-            // });
-            params = pro(params);
-            // trigger('log', {
-            //   type: 'separator',
-            //   value: ''
-            // });
-          } else if (typeof pro === 'object') {
-            processSettings = pro.settings || {};
-            processParams = pro.params || {};
-            if (!pro.process) {
-              trigger('warn', {
-                value: `You have passed an "<yellow>Object</yellow>" as process parameter in the "<cyan>SProcessManager.pipe</cyan>" static method but you don't have specified the "<magenta>process</magenta>" property with either an SProcess instance, or directly the SProcess class you want`
-              });
-              continue;
-            }
-            if (__isClass(pro.process)) {
-              processInstance = new pro.process({
-                ...processSettings,
-                stdio: false
-              });
-            }
-          }
-
-          // execute the process
-          if (processInstance) {
-            trigger('log', {
-              type: 'separator',
-              value: processInstance.cleanName
-            });
-            pipe(processInstance);
-            const res = await processInstance.run(params, processSettings);
-            trigger('log', {
-              type: 'separator',
-              value: ''
-            });
           }
         }
-      }
-    );
 
-    this.pipe(promise);
+        // execute the process
+        // @ts-ignore
+        if (processInstance) {
+          emit('log', {
+            type: 'separator',
+            value: processInstance.formattedName
+          });
+          pipe(processInstance);
+          const res = await processInstance.run(params, processSettings);
+          emit('log', {
+            type: 'separator',
+            value: ''
+          });
+        }
+      }
+    });
+
+    this.pipe(<ISEventEmitter>(<unknown>promise));
 
     return promise;
   }
-};
+}
 
-export = cls;
+// const cls: ISProcessPipeCtor = SProcessPipe;
+
+export default SProcessPipe;

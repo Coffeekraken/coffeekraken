@@ -29,14 +29,14 @@ import __isChildProcess from '../is/childProcess';
  * An action stream if simply some functions that are called one after the other
  * and that pass to each other some value(s) on which to work.
  * Here's all the "events" that you can subscribe on the SActionStream instance, or on the returned SPromise when calling the "start" method:
- * - start: Triggered when the overall actions stream starts
- * - {actionName}.start: Triggered when the specified action starts
- * - {actionName}.reject: Triggered when the specified action has been rejected
- * - {actionName}.complete: Triggered when the specified action has been completed
- * - complete: Triggered when the overall actions stream has been completed
+ * - start: emited when the overall actions stream starts
+ * - {actionName}.start: emited when the specified action starts
+ * - {actionName}.reject: emited when the specified action has been rejected
+ * - {actionName}.complete: emited when the specified action has been completed
+ * - complete: emited when the overall actions stream has been completed
  * - resolve: Trigerred when the overall actions stream has been completed
- * - log: Triggered when a log message has been set
- * - cancel: Triggered when the stream has been canceled using the "cancel" method of the returned SPromise when calling the "start" method
+ * - log: emited when a log message has been set
+ * - cancel: emited when the stream has been canceled using the "cancel" method of the returned SPromise when calling the "start" method
  *
  * @param       {Object}        actions         An object of actions to execute one after the other. The object has to be formatted like ```{ actionName: actionFunction }```
  * @param       {Object}        [settings={}]   A settings object to configure your instance:
@@ -541,7 +541,7 @@ export = class SActionStream extends __SPromise {
       settings.after = [settings.after];
 
     this._currentStream.promise = new __SPromise(
-      async (resolve, reject, trigger, promiseApi) => {
+      async ({ resolve, reject, emit, cancel }) => {
         await __wait(100); // ugly hack to check when have time...
 
         try {
@@ -559,7 +559,7 @@ export = class SActionStream extends __SPromise {
               value: startString
             });
           }
-          trigger('start', {});
+          emit('start', {});
 
           currentStreamObj = await this._applyFnOnStreamObj(
             currentStreamObj,
@@ -673,13 +673,10 @@ export = class SActionStream extends __SPromise {
                 this._currentStream.currentActionObj.instance.on(
                   'reject',
                   (value) => {
-                    trigger(
-                      `${this._currentStream.currentActionObj.name}.error`,
-                      {
-                        value
-                      }
-                    );
-                    promiseApi.cancel(value);
+                    emit(`${this._currentStream.currentActionObj.name}.error`, {
+                      value
+                    });
+                    cancel(value);
                   }
                 );
                 actionSettings = __deepMerge(
@@ -688,8 +685,8 @@ export = class SActionStream extends __SPromise {
                 );
               }
 
-              // trigger some "start" events
-              trigger(
+              // emit some "start" events
+              emit(
                 `${this._currentStream.currentActionObj.name}.start`,
                 Object.assign({}, this._currentStream.currentActionObj)
               );
@@ -738,8 +735,8 @@ export = class SActionStream extends __SPromise {
                 this._currentStream.currentActionObj.name
               ] = Object.assign({}, this._currentStream.currentActionObj);
 
-              // trigger an "event"
-              trigger(
+              // emit an "event"
+              emit(
                 `${this._currentStream.currentActionObj.name}.complete`,
                 Object.assign({}, this._currentStream.currentActionObj)
               );
@@ -822,7 +819,7 @@ export = class SActionStream extends __SPromise {
               });
             }
 
-            trigger('reject', this._currentStream.stats);
+            emit('reject', this._currentStream.stats);
           } else {
             if (this._settings.logs.success) {
               const completeString = `#success The stream "<cyan>${
@@ -839,7 +836,7 @@ export = class SActionStream extends __SPromise {
             }
 
             // resolve this stream process
-            trigger('success', {});
+            emit('success', {});
             resolve(this._currentStream.stats);
           }
         } catch (e) {
@@ -888,7 +885,7 @@ export = class SActionStream extends __SPromise {
   log(...args) {
     args.forEach((arg) => {
       if (this._currentStream && this._currentStream.promise) {
-        this._currentStream.promise.trigger('log', arg);
+        this._currentStream.promise.emit('log', arg);
       }
     });
   }

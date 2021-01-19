@@ -81,7 +81,7 @@ export = class SLogFilesAdapter {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async log(message, level) {
-    return new Promise((resolve, reject) => {
+    return new Promise(({ resolve, reject }) => {
       // ensure the log directory exist
       __makeDir.sync(this._settings.path);
 
@@ -95,4 +95,4 @@ export = class SLogFilesAdapter {
       resolve();
     });
   }
-}
+};

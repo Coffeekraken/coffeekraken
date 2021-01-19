@@ -60,7 +60,7 @@ module.exports = (_a = class SFsCacheStreamAction extends SActionsStreamAction_1
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings = this._settings) {
-            return super.run(streamObj, (resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
+            return super.run(streamObj, ({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
                 // make sure we have the cache directory
                 ensureDirSync_1.default(streamObj.cacheDir);
                 // generate the id
@@ -79,7 +79,7 @@ module.exports = (_a = class SFsCacheStreamAction extends SActionsStreamAction_1
                 const cacheFilePath = `${streamObj.cacheDir}/${id}.json`;
                 // generate cache function
                 function generateCache(streamObj) {
-                    return new Promise((resolve, reject) => {
+                    return new Promise(({ resolve, reject }) => {
                         writeJsonSync_1.default(cacheFilePath, {
                             streamObj,
                             _sugarVersion: require(`${packageRoot_1.default(__dirname)}/package.json`)
@@ -107,7 +107,7 @@ module.exports = (_a = class SFsCacheStreamAction extends SActionsStreamAction_1
                     // restore the streamObject
                     streamObj = cacheJson.streamObj;
                     // specify to the ActionStream that we need to skip all the next actions
-                    trigger('log', {
+                    emit('log', {
                         value: `#warning Skipping the next actions cause the data have been <primary>laoded from the cache</primary>...`
                     });
                     this.skipNextActions();

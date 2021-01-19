@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import __completeArgsObject from '../cli/completeArgsObject';
 import __path from 'path';
 import __convert from '../time/convert';
@@ -24,15 +22,20 @@ import __copy from '../clipboard/copy';
 import __spawn from './spawn';
 import __parseHtml from '../terminal/parseHtml';
 import __uniqid from '../string/uniqid';
+import __SEventEmitter from '../event/SEventEmitter';
 
-import { ISProcessLogObj } from './interface/ISProcess';
-import { ISProcessSettings } from '../../../node/process/interface/ISProcess';
+import { ILog } from '../log/log';
+import { ISpawnSettings } from './spawn';
+import { ISClass as __ISClass } from '../class/SClass';
+import { ISProcessStdio } from './stdio/SProcessStdio';
+import { ISPromise } from '../promise/SPromise';
+import { ISEventEmitter } from '../event/SEventEmitter';
 
 /**
  * @name                SProcess
  * @namespace           sugar.node.process
  * @type                Class
- * @extends             SPromise
+ * @extends             SEventEmitter
  * @wip
  *
  * This class represent an SProcess run iteration that store things like
@@ -45,53 +48,90 @@ import { ISProcessSettings } from '../../../node/process/interface/ISProcess';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SProcess extends __SPromise {
-  /**
-   * @name      id
-   * @type      String
-   * @get
-   *
-   * Access the process id (not the same as a node process id)
-   *
-   * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get id() {
-    return this._settings.id;
-  }
 
-  /**
-   * @name      name
-   * @type      String
-   * @get
-   *
-   * Access the process name (not the same as a node process name)
-   *
-   * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get name() {
-    return this._settings.name;
-  }
+export interface ISProcessObject {
+  state: string;
+  startTime: number;
+  endTime: number;
+  duration: number;
+  stdout: string[];
+  stderr: string[];
+  value: any;
+}
 
-  /**
-   * @name      cleanName
-   * @type      String
-   * @get
-   *
-   * Access the process name and (not the same as a node process name)
-   *
-   * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get cleanName() {
-    let name = `<yellow>${this.name || ''}</yellow>`;
-    if (this.id) {
-      name += ` <cyan>${this.id}</cyan>`;
-    }
-    return name;
-  }
+export interface ISProcessNotification {
+  title: string;
+  message: string;
+  icon: string;
+}
+export interface ISProcessNotificationSettings {
+  enable: boolean;
+  start: ISProcessNotification;
+  success: ISProcessNotification;
+  error: ISProcessNotification;
+  cancel: ISProcessNotification;
+  process: ISProcessNotification;
+  kill: ISProcessNotification;
+}
 
+export interface ISProcessCtorSettings {
+  process?: ISProcessOptionalSettings;
+}
+
+export interface ISProcessProcessObj {
+  startTime: number;
+  endTime: number;
+  duration: number;
+  state: string;
+  stdout: any[];
+  stderr: any[];
+}
+
+export interface ISProcessOptionalSettings {
+  asyncStart?: boolean;
+  stdio?: ISProcessStdio;
+  throw?: boolean;
+  runAsChild?: boolean;
+  definition?: Record<string, unknown>;
+  processPath?: string;
+  notifications?: ISProcessNotificationSettings;
+  env?: Record<string, unknown>;
+  spawn?: Record<string, unknown>;
+  decorators?: boolean;
+  spawnSettings?: ISpawnSettings;
+}
+export interface ISProcessSettings {
+  asyncStart: boolean;
+  stdio: ISProcessStdio;
+  throw: boolean;
+  runAsChild: boolean;
+  definition: Record<string, unknown>;
+  processPath: string;
+  initialParams: Record<string, unknown>;
+  notifications: ISProcessNotificationSettings;
+  env: Record<string, unknown>;
+  spawn: Record<string, unknown>;
+  decorators: boolean;
+  spawnSettings: ISpawnSettings;
+}
+
+export interface ISProcessCtor {
+  new (settings: ISProcessSettings): ISProcess;
+}
+export interface ISProcessInternal extends __ISClass {
+  run(
+    paramsOrStringArgs: Record<string, unknown> | string,
+    settings: ISProcessSettings
+  ): Promise<any>;
+  kill(data: any): void;
+  log(...logs: ILog[]): void;
+  error(...errors: ILog[]): void;
+}
+export interface ISProcess extends ISProcessInternal {
+  process(params: Record<string, unknown>, settings?: any);
+}
+
+class SProcess extends __SEventEmitter implements ISProcessInternal {
   /**
    * @name      params
    * @type      String
@@ -102,6 +142,7 @@ export = class SProcess extends __SPromise {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _params?: Record<string, unknown>;
   get params() {
     return this._params;
   }
@@ -130,7 +171,7 @@ export = class SProcess extends __SPromise {
 
   /**
    * @name      executionsStack
-   * @type      Array<Object>
+   * @type      ISProcessProcessObj[]
    *
    * This array store each executions informations in separated objects
    * that store the duration, startTime, endTime, state, etc...
@@ -138,18 +179,18 @@ export = class SProcess extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  executionsStack = [];
+  executionsStack: ISProcessProcessObj[] = [];
 
   /**
    * @name     currentExecutionObj
-   * @type      Object
+   * @type      ISProcessProcessObj
    *
    * Store the current execution object info like startTime, endTime, duration, state, etc...
    *
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  currentExecutionObj = undefined;
+  currentExecutionObj?: ISProcessProcessObj;
 
   /**
    * @name      definition
@@ -164,6 +205,34 @@ export = class SProcess extends __SPromise {
   definition = undefined;
 
   /**
+   * @name      _processPromise
+   * @type      ISPromise
+   * @private
+   *
+   * Store the current process promise returned by the ```spawn``` function
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _processPromise?: __SPromise;
+
+  /**
+   * @name      _processPath
+   * @type      String
+   * @private
+   *
+   * Store the process class path
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  private _processPath?: string;
+
+  get processSettings(): ISProcessSettings {
+    return this.processSettings;
+  }
+
+  /**
    * @name            constructor
    * @type            Function
    * @constructor
@@ -173,58 +242,60 @@ export = class SProcess extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(settings: ISProcessCtorSettings = {}) {
     super(
       __deepMerge(
         {
-          asyncStart: false,
-          stdio: 'inherit',
-          metas: true,
-          throw: true,
-          exitAtEnd: false,
-          runAsChild: false,
-          definition: undefined,
-          processPath: null,
-          initialParams: {},
-          notifications: {
-            enable: true,
-            process: {
-              title: null,
-              message: `Notification from process...`,
-              icon: `${__packageRoot(
-                __dirname
-              )}/src/data/notifications/ck_start.png`
+          process: {
+            asyncStart: false,
+            stdio: 'inherit',
+            decorators: true,
+            throw: true,
+            exitAtEnd: false,
+            runAsChild: false,
+            definition: undefined,
+            processPath: null,
+            initialParams: {},
+            notifications: {
+              enable: true,
+              process: {
+                title: null,
+                message: `Notification from process...`,
+                icon: `${__packageRoot(
+                  __dirname
+                )}/src/data/notifications/ck_start.png`
+              },
+              start: {
+                title: null,
+                message: `Process is running...`,
+                icon: `${__packageRoot(
+                  __dirname
+                )}/src/data/notifications/ck_start.png`
+              },
+              success: {
+                title: null,
+                message: `Process has finish successfully`,
+                icon: `${__packageRoot(
+                  __dirname
+                )}/src/data/notifications/ck_success.png`
+              },
+              error: {
+                title: null,
+                message: `Something went wrong...`,
+                icon: `${__packageRoot(
+                  __dirname
+                )}/src/data/notifications/ck_error.png`
+              },
+              kill: {
+                title: null,
+                message: `Process killed...`,
+                icon: `${__packageRoot(
+                  __dirname
+                )}/src/data/notifications/ck_error.png`
+              }
             },
-            start: {
-              title: null,
-              message: `Process is running...`,
-              icon: `${__packageRoot(
-                __dirname
-              )}/src/data/notifications/ck_start.png`
-            },
-            success: {
-              title: null,
-              message: `Process has finish successfully`,
-              icon: `${__packageRoot(
-                __dirname
-              )}/src/data/notifications/ck_success.png`
-            },
-            error: {
-              title: null,
-              message: `Something went wrong...`,
-              icon: `${__packageRoot(
-                __dirname
-              )}/src/data/notifications/ck_error.png`
-            },
-            kill: {
-              title: null,
-              message: `Process killed...`,
-              icon: `${__packageRoot(
-                __dirname
-              )}/src/data/notifications/ck_error.png`
-            }
-          },
-          env: {}
+            env: {}
+          }
         },
         settings
       )
@@ -232,28 +303,28 @@ export = class SProcess extends __SPromise {
 
     // get the definition from interface or settings
     this.definition =
-      settings.definition !== undefined
-        ? settings.definition
-        : this.constructor.interface !== undefined
-        ? this.constructor.interface.definition
+      this.processSettings.definition !== undefined
+        ? this.processSettings.definition
+        : (<any>this.constructor).interface !== undefined
+        ? (<any>this.constructor).interface.definition
         : null;
 
-    let initialParams = __deepMerge({}, this._settings.initialParams);
-    if (this.constructor.interface !== undefined) {
-      // console.log(this.constructor.interface.definition);
-      initialParams = this.constructor.interface.apply(initialParams, {
+    let initialParams = __deepMerge({}, this.processSettings.initialParams);
+    if ((<any>this.constructor).interface !== undefined) {
+      // console.log((<any>this.constructor).interface.definition);
+      initialParams = (<any>this.constructor).interface.apply(initialParams, {
         complete: true,
         throwOnMissingRequiredProp: true
       }).value;
     }
-    this._settings.initialParams = initialParams;
+    this.processSettings.initialParams = initialParams;
 
     // handle process exit
     __onProcessExit(async (state) => {
       this.state(state);
     });
 
-    this._processPath = this._settings.processPath;
+    this._processPath = this.processSettings.processPath;
     for (var callSite of __stackTrace.get()) {
       if (callSite.getFunctionName() === this.constructor.name) {
         this._processPath = callSite.getFileName();
@@ -266,26 +337,40 @@ export = class SProcess extends __SPromise {
       );
     }
 
-    if (!this._settings.notifications.start.title) {
-      this._settings.notifications.start.title = `${this._settings.name} (${this._settings.id})`;
+    if (!this.processSettings.notifications.start.title) {
+      this.processSettings.notifications.start.title = `${this.name} (${this.id})`;
     }
-    if (!this._settings.notifications.success.title) {
-      this._settings.notifications.success.title = `${this._settings.name} (${this._settings.id})`;
+    if (!this.processSettings.notifications.success.title) {
+      this.processSettings.notifications.success.title = `${this.name} (${this.id})`;
     }
-    if (!this._settings.notifications.error.title) {
-      this._settings.notifications.error.title = `${this._settings.name} (${this._settings.id})`;
+    if (!this.processSettings.notifications.error.title) {
+      this.processSettings.notifications.error.title = `${this.name} (${this.id})`;
     }
-    if (!this._settings.notifications.kill.title) {
-      this._settings.notifications.kill.title = `${this._settings.name} (${this._settings.id})`;
+    if (!this.processSettings.notifications.kill.title) {
+      this.processSettings.notifications.kill.title = `${this.name} (${this.id})`;
     }
 
     // ready if not an asyncStart process
-    if (this._settings.asyncStart === false) {
+    if (this.processSettings.asyncStart === false) {
       setTimeout(() => {
         this.ready();
       });
     }
   }
+
+  /**
+   * @name        process
+   * @type        Function
+   * @abstract
+   *
+   * This is the method you have to implement in you SProcess class. It will be called
+   * when you call the ```run``` method with the params, etc...
+   * You have to return an SPromise instance in order that the SProcess class is able to keep
+   * track of your process state, logs, etc...
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
 
   /**
    * @name      ready
@@ -303,30 +388,6 @@ export = class SProcess extends __SPromise {
   }
 
   /**
-   * @name      toObject
-   * @type      Function
-   *
-   * This method allows you to transform this instance into
-   * a plain object that you can use whenever you want
-   *
-   * @return    {Object}      The object version of this instance
-   *
-   * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  toObject() {
-    return {
-      state: this.state(),
-      startTime: this.startTime,
-      endTime: this.endTime,
-      duration: this.duration,
-      stdout: this.stdout,
-      stderr: this.stderr,
-      value: this.value
-    };
-  }
-
-  /**
    * @name      run
    * @type      Function
    * @async
@@ -340,21 +401,23 @@ export = class SProcess extends __SPromise {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async run(paramsOrStringArgs = {}, settings = {}) {
-    settings = __deepMerge(this._settings, settings);
+  async run(paramsOrStringArgs = {}, settings: ISProcessOptionalSettings = {}) {
+    const processSettings = <ISProcessSettings>(
+      __deepMerge(this.processSettings, settings)
+    );
 
     if (this.currentExecutionObj !== undefined) {
-      if (settings.throw === true) {
+      if (processSettings.throw === true) {
         throw `Sorry but you can not execute multiple process of the "<yellow>${
-          settings.name || settings.id || this.constructor.name
+          this.name || this.id || this.constructor.name
         }</yellow>" SProcess instance...`;
       }
       return;
     }
 
-    if (!__isChildProcess() && settings.stdio && !this.stdio) {
+    if (!__isChildProcess() && processSettings.stdio && !this.stdio) {
       this.stdio = __stdio(this, {
-        stdio: settings.stdio
+        stdio: processSettings.stdio
       });
     }
 
@@ -368,6 +431,7 @@ export = class SProcess extends __SPromise {
       stderr: []
     };
     this.currentExecutionObj.stdout.toString = () => {
+      if (!this.currentExecutionObj) return '';
       return this.currentExecutionObj.stdout
         .map((item) => {
           return __toString(item);
@@ -375,6 +439,7 @@ export = class SProcess extends __SPromise {
         .join('\n');
     };
     this.currentExecutionObj.stderr.toString = () => {
+      if (!this.currentExecutionObj) return '';
       return this.currentExecutionObj.stderr
         .map((item) => {
           return __toString(item);
@@ -404,10 +469,13 @@ export = class SProcess extends __SPromise {
     this._params = Object.assign({}, paramsObj);
 
     // apply the interface on the params
-    if (this.constructor.interface !== undefined) {
-      const interfaceRes = this.constructor.interface.apply(this._params, {
-        throwOnError: true
-      });
+    if ((<any>this.constructor).interface !== undefined) {
+      const interfaceRes = (<any>this.constructor).interface.apply(
+        this._params,
+        {
+          throwOnError: true
+        }
+      );
       if (interfaceRes.hasIssues()) {
         this.log({
           value: interfaceRes.toString()
@@ -418,7 +486,7 @@ export = class SProcess extends __SPromise {
     // update state
     this.state('running');
 
-    if (settings.runAsChild && !__isChildProcess()) {
+    if (processSettings.runAsChild && !__isChildProcess()) {
       // build the command to run depending on the passed command in the constructor and the params
       const commandToRun = __buildCommandLine(
         `node --enable-source-maps ${__path.resolve(
@@ -438,14 +506,13 @@ export = class SProcess extends __SPromise {
             }
           },
           alias: false
-        },
-        {}
+        }
       );
 
       // run child process
       this._processPromise = __spawn(commandToRun, [], {
-        ...settings,
-        ipc: true
+        ...(processSettings.spawnSettings || {})
+        // ipc: true
       });
     } else {
       // handle ipc connection
@@ -455,19 +522,19 @@ export = class SProcess extends __SPromise {
       }
 
       // run the actual process using the "process" method
-      this._processPromise = this.process(this._params, settings);
+      this._processPromise = (<any>this).process(this._params, settings);
 
       if (__isChildProcess() && ipcClient) {
-        this._processPromise.on('*', (data, metas) => {
-          ipcClient.trigger(metas.stack, data);
-        });
+        this._processPromise &&
+          this._processPromise.on('*', (data, metas) => {
+            ipcClient.emit(metas.event, data);
+          });
       }
     }
 
-    __SPromise.pipe(this._processPromise, this, {
-      prefixStack: false,
+    this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {
       filter: (value, metas) => {
-        if (metas.stack.match(/error$/)) {
+        if (metas.event.match(/error$/)) {
           return false;
         }
         return true;
@@ -476,91 +543,96 @@ export = class SProcess extends __SPromise {
 
     // listen for notification
     if (
-      this._settings.notifications.enable === true &&
-      this._settings.notifications.process !== false
+      this.processSettings.notifications.enable === true &&
+      this.processSettings.notifications.process !== undefined
     ) {
-      this._processPromise.on('notification', (notificationObj, metas) => {
-        let icon = `${__packageRoot(
-          __dirname
-        )}/src/data/notifications/ck_start.png`;
-
-        let id = notificationObj.id || __uniqid();
-
-        if (notificationObj.type === 'success')
-          icon = `${__packageRoot(
-            __dirname
-          )}/src/data/notifications/ck_success.png`;
-        else if (notificationObj.type === 'error')
-          icon = `${__packageRoot(
-            __dirname
-          )}/src/data/notifications/ck_error.png`;
-        else if (notificationObj.type === 'warn')
-          icon = `${__packageRoot(
+      this._processPromise &&
+        this._processPromise.on('notification', (notificationObj, metas) => {
+          let icon = `${__packageRoot(
             __dirname
           )}/src/data/notifications/ck_start.png`;
-        __notifier.notify({
-          ...this._settings.notifications.process,
-          icon,
-          ...notificationObj,
-          id,
-          message:
-            notificationObj.value ||
-            notificationObj.message ||
-            this._settings.notifications.process.message
+
+          let id = notificationObj.id || __uniqid();
+
+          if (notificationObj.type === 'success')
+            icon = `${__packageRoot(
+              __dirname
+            )}/src/data/notifications/ck_success.png`;
+          else if (notificationObj.type === 'error')
+            icon = `${__packageRoot(
+              __dirname
+            )}/src/data/notifications/ck_error.png`;
+          else if (notificationObj.type === 'warn')
+            icon = `${__packageRoot(
+              __dirname
+            )}/src/data/notifications/ck_start.png`;
+          __notifier.notify({
+            ...this.processSettings.notifications.process,
+            icon,
+            ...notificationObj,
+            id,
+            message:
+              notificationObj.value ||
+              notificationObj.message ||
+              this.processSettings.notifications.process.message
+          });
         });
-      });
     }
 
     // listen for "data" and "log" events
-    this._processPromise.on('log,log', (data, metas) => {
-      if (this.currentExecutionObj) {
-        this.currentExecutionObj.stdout.push(data);
-      }
-    });
+    this._processPromise &&
+      this._processPromise.on('log,log', (data, metas) => {
+        if (this.currentExecutionObj) {
+          this.currentExecutionObj.stdout.push(data);
+        }
+      });
     // listen for errors
-    this._processPromise.on('error,reject', (data, metas) => {
-      if (this.currentExecutionObj) {
-        this.currentExecutionObj.stderr.push(data);
-      }
-      this.kill(data);
-    });
+    this._processPromise &&
+      this._processPromise.on('error,reject', (data, metas) => {
+        if (this.currentExecutionObj) {
+          this.currentExecutionObj.stderr.push(data);
+        }
+        this.kill(data);
+      });
 
     // updating state when needed
-    this._processPromise.on(
-      [
-        'resolve:1',
-        'child.resolve:1',
-        'reject:1',
-        'child.reject:1',
-        'cancel:1',
-        'child.cancel:1',
-        'close.error:1',
-        'close.killed:1'
-      ].join(','),
-      (data, metas) => {
-        if (metas.stack === 'resolve' || metas.stack === 'close.success')
-          this.state('success');
-        else if (metas.stack === 'reject' || metas.stack === 'close.error')
-          this.state('error');
-        else if (metas.stack === 'cancel' || metas.stack === 'close.killed')
-          this.state('killed');
-        else this.state('idle');
-      }
-    );
+    this._processPromise &&
+      this._processPromise.on(
+        [
+          'resolve:1',
+          'child.resolve:1',
+          'reject:1',
+          'child.reject:1',
+          'cancel:1',
+          'child.cancel:1',
+          'close.error:1',
+          'close.killed:1'
+        ].join(','),
+        (data, metas) => {
+          if (metas.event === 'resolve' || metas.event === 'close.success')
+            this.state('success');
+          else if (metas.event === 'reject' || metas.event === 'close.error')
+            this.state('error');
+          else if (metas.event === 'cancel' || metas.event === 'close.killed')
+            this.state('killed');
+          else this.state('idle');
+        }
+      );
 
-    this._processPromise.on('finally', () => {
-      // @ts-ignore
-      if (this._settings.exitAtEnd === true) {
-        process.exit();
-      }
-    });
+    this._processPromise &&
+      this._processPromise.on('finally', () => {
+        // @ts-ignore
+        if (this.processSettings.exitAtEnd === true) {
+          process.exit();
+        }
+      });
 
     // return the process promise
     return this._processPromise;
   }
 
-  state(value = null) {
-    if (value === null) return this._state;
+  state(value?: string) {
+    if (!value) return this._state;
     if (
       ['idle', 'ready', 'running', 'killed', 'error', 'success'].indexOf(
         value
@@ -585,9 +657,9 @@ export = class SProcess extends __SPromise {
       );
     }
 
-    // trigger an event
-    this.trigger(`state.${value}`, true);
-    this.trigger('state', value);
+    // emit an event
+    this.emit(`state.${value}`, true);
+    this.emit('state', value);
 
     this._state = value;
 
@@ -627,7 +699,7 @@ export = class SProcess extends __SPromise {
     if (this._processPromise && this._processPromise.cancel) {
       this._processPromise.cancel(data);
       setTimeout(() => {
-        this.trigger('error', data);
+        this.emit('error', data);
       }, 50);
     }
   }
@@ -659,11 +731,11 @@ export = class SProcess extends __SPromise {
     }
 
     let data;
-    const strArray = [];
+    const strArray: string[] = [];
     if (
       !__isChildProcess() &&
       this._settings && // @todo      check why this is causing context problem after 2 or 3 kill run...
-      this._settings.metas === true
+      this.processSettings.decorators === true
     ) {
       switch (state) {
         case 'success':
@@ -677,8 +749,8 @@ export = class SProcess extends __SPromise {
               __convert.SECOND
             )}s</yellow>`
           });
-          if (this._settings.notifications.enable) {
-            __notifier.notify(this._settings.notifications.success);
+          if (this.processSettings.notifications.enable) {
+            __notifier.notify(this.processSettings.notifications.success);
           }
           break;
         case 'running':
@@ -689,8 +761,8 @@ export = class SProcess extends __SPromise {
               this.name || 'process'
             }</yellow> <cyan>${this.id}</cyan> execution...`
           });
-          if (this._settings.notifications.enable) {
-            __notifier.notify(this._settings.notifications.start);
+          if (this.processSettings.notifications.enable) {
+            __notifier.notify(this.processSettings.notifications.start);
           }
           break;
         case 'error':
@@ -711,8 +783,11 @@ export = class SProcess extends __SPromise {
           this.log({
             value: strArray.join('\n')
           });
-          if (this._settings.notifications.enable) {
-            __notifier.notify(this._settings.notifications.cancel);
+          if (
+            this.processSettings.notifications.enable &&
+            this.processSettings.notifications.cancel
+          ) {
+            __notifier.notify(this.processSettings.notifications.cancel);
           }
           break;
         case 'killed':
@@ -733,8 +808,11 @@ export = class SProcess extends __SPromise {
           this.log({
             value: strArray.join('\n')
           });
-          if (this._settings.notifications.enable) {
-            __notifier.notify(this._settings.notifications.cancel);
+          if (
+            this.processSettings.notifications.enable &&
+            this.processSettings.notifications.cancel !== undefined
+          ) {
+            __notifier.notify(this.processSettings.notifications.cancel);
           }
           break;
       }
@@ -848,12 +926,12 @@ export = class SProcess extends __SPromise {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  log(...logs: ISProcessLogObj[]) {
+  log(...logs: ILog[]) {
     logs.forEach((log) => {
       if (this.currentExecutionObj) {
         this.currentExecutionObj.stdout.push(log.value || log.toString());
       }
-      this.trigger('log', log);
+      this.emit('log', log);
     });
   }
 
@@ -867,12 +945,14 @@ export = class SProcess extends __SPromise {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  error(...errors: ISProcessLogObj[]) {
+  error(...errors: ILog[]) {
     errors.forEach((error) => {
       if (this.currentExecutionObj) {
         this.currentExecutionObj.stderr.push(error.value || error.toString());
       }
-      this.trigger('error', error);
+      this.emit('error', error);
     });
   }
-};
+}
+
+export default SProcess;

@@ -69,16 +69,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function hotkey(hotkey, settings) {
         if (settings === void 0) { settings = {}; }
-        return new SPromise_1.default(function (resolve, reject, trigger, promiseApi) {
+        return new SPromise_1.default(function (_a) {
+            var resolve = _a.resolve, reject = _a.reject, emit = _a.emit, cancel = _a.cancel;
             // merge default settings with passed ones:
             settings = __assign({ element: null, keyup: false, keydown: true, once: false, splitKey: '+' }, settings);
             // init the hotkey
             hotkeys_common_1.default(hotkey, settings, function (e, h) {
                 // call the handler function
-                trigger('press', e);
+                emit('press', e);
                 // unsubscribe if once is truc
                 if (settings.once)
-                    promiseApi.cancel();
+                    cancel();
             });
         }, {
             id: 'hotkey'

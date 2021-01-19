@@ -60,7 +60,7 @@ function homepage(req, res, settings = {}) {
       `;
         }
     }
-    return new SPromise_1.default((resolve, reject, trigger) => {
+    return new SPromise_1.default(({ resolve, reject, emit }) => {
         return resolve({
             content,
             view,

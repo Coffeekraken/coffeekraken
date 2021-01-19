@@ -85,7 +85,7 @@ function proxy(array) {
      *
      * @param         {Array|String}          methods               The methods you want to watch
      * @param         {Function}              handler               The function that will be called on each updates. This function will be called with an object as parameters. Here's the list of properties available:
-     * - method (null) {String}: The method name that causes the watch trigger
+     * - method (null) {String}: The method name that causes the watch emit
      * - args ([]) {Array}: An array of all the arguments passed to the method call
      * - oldValue (null) {Array}: The array just before the method call
      * - value (null) {Array}: The array after the method call

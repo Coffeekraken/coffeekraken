@@ -32,7 +32,7 @@ module.exports = async function image(url, settings = {}) {
     settings
   );
 
-  return new Promise((resolve, reject) => {
+  return new Promise(({ resolve, reject }) => {
     __imaging.draw(url, settings, function (resp, status) {
       if (status === 'fail') return reject(resp);
       if (!settings.char || settings.char === '▇') {

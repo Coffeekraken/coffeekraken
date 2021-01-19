@@ -45,7 +45,7 @@ module.exports = (_a = class SJestStreamAction extends SActionsStreamAction_1.de
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings = this._settings) {
-            return super.run(streamObj, (resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            return super.run(streamObj, ({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
                 // if (!streamObj.pack) return resolve(streamObj);
                 const input = streamObj.updatedFilePath || streamObj.input;
                 const jestProcess = new STestJestProcessManager_1.default({}, {

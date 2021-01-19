@@ -32,12 +32,12 @@ import __download from 'download-file';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function downloadFileFn (
+function downloadFileFn(
   downloadUrl,
   destinationPath = __downloadsFolder(),
   callback = null
 ) {
-  return new Promise((resolve, reject) => {
+  return new Promise(({ resolve, reject }) => {
     let fileStreamDest;
     let parsedDestinationPath = __path.parse(destinationPath);
     let parsedDownloadUrl = __path.parse(downloadUrl);

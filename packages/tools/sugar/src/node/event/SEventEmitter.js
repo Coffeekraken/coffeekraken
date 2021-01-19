@@ -12,6 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const SClass_1 = __importDefault(require("../class/SClass"));
 const minimatch_1 = __importDefault(require("minimatch"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
@@ -26,7 +27,7 @@ class SEventEmitter extends SClass_1.default {
      * @param         {Object}            [settings={}]     An object of settings for this particular SEventEmitter instance. Here's the available settings:
      *
      * @example       js
-     * const promise = new SEventEmitter((resolve, reject, emit, cancel, promise) => {
+     * const promise = new SEventEmitter(({ resolve, reject, emit }) => {
      *    // do something...
      * }).then(value => {
      *    // do something...
@@ -89,7 +90,7 @@ class SEventEmitter extends SClass_1.default {
         // settings
         const set = Object.assign({ events: '*', prefixEvent: false, processor: undefined, exclude: ['finally', 'resolve', 'reject', 'cancel'], filter: undefined }, (settings || {}));
         // listen for all on the source promise
-        sourceSEventEmitter.on(set.events, (value, metas) => {
+        sourceSEventEmitter.on(set.events || '*', (value, metas) => {
             // check excluded stacks
             if (set.exclude && set.exclude.indexOf(metas.event) !== -1)
                 return;
@@ -473,6 +474,7 @@ class SEventEmitter extends SClass_1.default {
         this._eventsStacks = {};
     }
 }
+SEventEmitter.usableAsMixin = true;
 const cls = SEventEmitter;
-module.exports = SEventEmitter;
+exports.default = SEventEmitter;
 //# sourceMappingURL=SEventEmitter.js.map

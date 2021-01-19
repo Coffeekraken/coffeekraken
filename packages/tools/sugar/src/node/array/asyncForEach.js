@@ -12,7 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 module.exports = function asyncForEach(array, asyncFn) {
     return __awaiter(this, void 0, void 0, function* () {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        return new Promise(({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
             for (let index = 0; index < array.length; index++) {
                 yield asyncFn(array[index], index, array);
             }

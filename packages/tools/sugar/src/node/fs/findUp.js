@@ -39,7 +39,7 @@ const SFile_1 = __importDefault(require("./SFile"));
  */
 const fn = function findUp(search, settings) {
     settings = Object.assign({ symlinks: true, cwd: process.cwd(), stopWhenFound: true, SFile: true }, settings);
-    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+    return new Promise(({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
         const cwd = settings.cwd;
         let currentPath = cwd.split('/').filter((p) => p.trim() !== '');
         let foundedFiles = [];

@@ -73,7 +73,7 @@ module.exports = class SLogMailAdapter {
      */
     log(message, level) {
         return __awaiter(this, void 0, void 0, function* () {
-            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            return new Promise(({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
                 let imageData = null;
                 if (!node_1.default) {
                     const canvas = yield html2canvas(document.body);

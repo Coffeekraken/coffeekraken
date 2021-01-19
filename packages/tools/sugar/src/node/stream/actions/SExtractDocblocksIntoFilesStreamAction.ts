@@ -94,7 +94,7 @@ export = class SExtractDocblocksIntoFiles extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    return super.run(streamObj, async (resolve, reject) => {
+    return super.run(streamObj, async ({ resolve, reject }) => {
       const reg = /(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g;
       const blocks = streamObj[settings.sourceProp].match(reg);
       streamObj.extractDocblocksIntoFiles = {};

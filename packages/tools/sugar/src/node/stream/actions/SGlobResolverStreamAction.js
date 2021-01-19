@@ -52,7 +52,7 @@ module.exports = (_a = class SGlobResolverStreamAction extends SActionsStreamAct
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings = this._settings) {
-            return super.run(streamObj, (resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            return super.run(streamObj, ({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
                 // resolve glob pattern
                 const rootDir = streamObj[streamObj.globProperty];
                 const files = glob_1.default.sync(streamObj[streamObj.globProperty]);

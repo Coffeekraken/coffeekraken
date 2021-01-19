@@ -23,7 +23,7 @@ import __treatAsValue from '../promise/treatAsValue';
  * @todo      interface
  * @todo      doc
  * @todo      tests
- * @todo      {Feature}       Integrate the "trigger" feature that let the server send messages to the clients
+ * @todo      {Feature}       Integrate the "emit" feature that let the server send messages to the clients
  *
  * @see             https://www.npmjs.com/package/node-ipc
  * @since           2.0.0
@@ -176,8 +176,8 @@ class SIpcServer extends __SPromise {
     const serverData = await this._start(params);
     // listen for events
     this._ipcInstance.server.on('event', (data, socket) => {
-      // trigger the event using the SPromise method
-      this.trigger(`${data.stack}`, data.data);
+      // emit the event using the SPromise method
+      this.emit(`${data.stack}`, data.data);
     });
     // save the connexion params
     this.connexionParams = serverData;
@@ -185,7 +185,7 @@ class SIpcServer extends __SPromise {
     return serverData;
   }
   _start(params = null) {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async ({ resolve, reject }) => {
       // check if params have only 1 id
       if (
         __isPlainObject(params) === true &&
@@ -219,7 +219,7 @@ class SIpcServer extends __SPromise {
           port,
           params.UDPType || 'upd4',
           () => {
-            // this.trigger('server.ready', {});
+            // this.emit('server.ready', {});
             return resolve({
               id: this.id,
               host: params.host || 'localhost',
@@ -251,7 +251,7 @@ class SIpcServer extends __SPromise {
    */
   stop() {
     return new __SPromise(
-      (resolve, reject) => {
+      ({ resolve, reject }) => {
         this._ipcInstance.server.stop();
         resolve();
       },
@@ -262,20 +262,20 @@ class SIpcServer extends __SPromise {
   }
 
   // /**
-  //  * @name          trigger
+  //  * @name          emit
   //  * @type          Function
   //  * @override
   //  *
   //  * This method override the SPromise one to add the ipc "emit" functionality to it.
   //  *
-  //  * @param         {String|Array}        what            The callbacks that you want to trigger. Can be "then", "catch", "finally" or "cancel". You can trigger multiple stacks by passing an Array like ['then','finally'], or a string like "then,finally"
+  //  * @param         {String|Array}        what            The callbacks that you want to emit. Can be "then", "catch", "finally" or "cancel". You can emit multiple stacks by passing an Array like ['then','finally'], or a string like "then,finally"
   //  * @param         {Mixed}         arg         The argument you want to pass to the callback
   //  * @return        {Promise}                       A default Promise that will be resolved with the result of the stack execution
   //  *
   //  * @since         2.0.0
   //  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
   //  */
-  // trigger(what, arg, metas = {}) {
+  // emit(what, arg, metas = {}) {
   //   if (this._callbacksStack[what]) {
   //     this._callbacksStack[what].forEach((callbackFn) => {
   //       callbackFn(arg, false);

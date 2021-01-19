@@ -46,7 +46,7 @@ module.exports = (_a = class SBuildFrontspecStreamAction extends SActionsStreamA
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings) {
-            return super.run(streamObj, (resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
+            return super.run(streamObj, ({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
                 // compile using the SScssCompiler class
                 if (!streamObj.outputStack)
                     streamObj.outputStack = {};

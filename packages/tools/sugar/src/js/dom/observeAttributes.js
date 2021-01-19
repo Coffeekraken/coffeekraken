@@ -54,7 +54,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function observeAttributes(target, settings) {
         if (settings === void 0) { settings = {}; }
-        return new SPromise_1.default(function (resolve, reject, trigger) {
+        return new SPromise_1.default(function (_a) {
+            var emit = _a.emit;
             // create a new observer
             var mutationObserver = new MutationObserver(function (mutations) {
                 var mutedAttrs = {};
@@ -62,7 +63,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 mutations.forEach(function (mutation) {
                     // push mutation
                     if (!mutedAttrs[mutation.attributeName]) {
-                        trigger('then', mutation);
+                        emit('then', mutation);
                         mutedAttrs[mutation.attributeName] = true;
                     }
                 });

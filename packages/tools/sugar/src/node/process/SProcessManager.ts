@@ -208,7 +208,7 @@ class SProcessManager extends __SPromise {
 
       const updateLog = this.deamon.updateLog(data);
       if (updateLog) {
-        this.trigger('log', {
+        this.emit('log', {
           clear: true,
           value: updateLog
         });
@@ -216,7 +216,7 @@ class SProcessManager extends __SPromise {
 
       // run the process again
       this.run(params, settings);
-      this.trigger('log', {
+      this.emit('log', {
         clear: !updateLog,
         temp: true,
         value: `Restarting the process "<cyan>${
@@ -232,7 +232,7 @@ class SProcessManager extends __SPromise {
       }
     }
     if (!watchParam) {
-      this.trigger('warn', {
+      this.emit('warn', {
         value: `You try to use a "<yellow>${
           this.deamon.constructor.name
         }</yellow>" deamon which require at least one of these properties "<cyan>${settings.watchProperties.join(
@@ -280,7 +280,7 @@ class SProcessManager extends __SPromise {
           `Sorry but you cannot launch multiple processes in the same <yellow>${this.constructor.name}</yellow> instance...`
         );
       } else {
-        this.trigger('warn', {
+        this.emit('warn', {
           value: `Sorry but you cannot launch multiple processes in the same <yellow>${this.constructor.name}</yellow> instance...`
         });
       }

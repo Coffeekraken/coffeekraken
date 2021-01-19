@@ -1,4 +1,4 @@
-import ILog from './interface/ILog';
+import { ILog } from './log';
 import __parseArgs from '../cli/parseArgs';
 import __parseHtml from '../console/parseHtml';
 

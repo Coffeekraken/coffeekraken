@@ -63,7 +63,7 @@ module.exports = class SLogFilesAdapter {
      */
     log(message, level) {
         return __awaiter(this, void 0, void 0, function* () {
-            return new Promise((resolve, reject) => {
+            return new Promise(({ resolve, reject }) => {
                 // ensure the log directory exist
                 make_dir_1.default.sync(this._settings.path);
                 // prepend the new log

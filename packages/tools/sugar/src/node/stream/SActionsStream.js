@@ -388,7 +388,7 @@ module.exports = class SActionStream extends SPromise_1.default {
             settings.before = [settings.before];
         if (settings.after && !Array.isArray(settings.after))
             settings.after = [settings.after];
-        this._currentStream.promise = new SPromise_1.default((resolve, reject, trigger, promiseApi) => __awaiter(this, void 0, void 0, function* () {
+        this._currentStream.promise = new SPromise_1.default(({ resolve, reject, emit, cancel }) => __awaiter(this, void 0, void 0, function* () {
             yield wait_1.default(100); // ugly hack to check when have time...
             try {
                 // starting log
@@ -399,7 +399,7 @@ module.exports = class SActionStream extends SPromise_1.default {
                         value: startString
                     });
                 }
-                trigger('start', {});
+                emit('start', {});
                 currentStreamObj = yield this._applyFnOnStreamObj(currentStreamObj, this._settings.before, {
                     type: 'before'
                 });
@@ -479,15 +479,15 @@ module.exports = class SActionStream extends SPromise_1.default {
                         };
                         if (this._currentStream.currentActionObj.instance) {
                             this._currentStream.currentActionObj.instance.on('reject', (value) => {
-                                trigger(`${this._currentStream.currentActionObj.name}.error`, {
+                                emit(`${this._currentStream.currentActionObj.name}.error`, {
                                     value
                                 });
-                                promiseApi.cancel(value);
+                                cancel(value);
                             });
                             actionSettings = deepMerge_1.default(this._currentStream.currentActionObj.instance._settings, actionSettings);
                         }
-                        // trigger some "start" events
-                        trigger(`${this._currentStream.currentActionObj.name}.start`, Object.assign({}, this._currentStream.currentActionObj));
+                        // emit some "start" events
+                        emit(`${this._currentStream.currentActionObj.name}.start`, Object.assign({}, this._currentStream.currentActionObj));
                         if (this._settings.logs.exclude.indexOf(this._currentStream.currentActionObj.id) === -1) {
                             const startString = `#start Starting the action "<yellow>${this._currentStream.currentActionObj.name}</yellow>" on <magenta>${this._currentStream.currentActionObj.sourcesCount}</magenta> sources`;
                             this.log({
@@ -511,8 +511,8 @@ module.exports = class SActionStream extends SPromise_1.default {
                                 this._currentStream.currentActionObj.stats.startTime });
                         // save the result into the overall actions stats object
                         this._currentStream.stats.actions[this._currentStream.currentActionObj.name] = Object.assign({}, this._currentStream.currentActionObj);
-                        // trigger an "event"
-                        trigger(`${this._currentStream.currentActionObj.name}.complete`, Object.assign({}, this._currentStream.currentActionObj));
+                        // emit an "event"
+                        emit(`${this._currentStream.currentActionObj.name}.complete`, Object.assign({}, this._currentStream.currentActionObj));
                         if (this._currentStream.currentActionObj.stats.stderr.length) {
                             const errorString = `#error <red>Something went wrong during the </red>"<yellow>${this._currentStream.currentActionObj.name}</yellow>"<red> action...</red>`;
                             this._currentStream.currentActionObj.stats.stderr.push(errorString);
@@ -556,7 +556,7 @@ module.exports = class SActionStream extends SPromise_1.default {
                             value: trimLines_1.default(this._currentStream.stats.stderr.join('\n'))
                         });
                     }
-                    trigger('reject', this._currentStream.stats);
+                    emit('reject', this._currentStream.stats);
                 }
                 else {
                     if (this._settings.logs.success) {
@@ -567,7 +567,7 @@ module.exports = class SActionStream extends SPromise_1.default {
                         });
                     }
                     // resolve this stream process
-                    trigger('success', {});
+                    emit('success', {});
                     resolve(this._currentStream.stats);
                 }
             }
@@ -609,7 +609,7 @@ module.exports = class SActionStream extends SPromise_1.default {
     log(...args) {
         args.forEach((arg) => {
             if (this._currentStream && this._currentStream.promise) {
-                this._currentStream.promise.trigger('log', arg);
+                this._currentStream.promise.emit('log', arg);
             }
         });
     }

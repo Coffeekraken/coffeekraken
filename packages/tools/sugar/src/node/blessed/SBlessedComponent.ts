@@ -279,10 +279,10 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
   }
 
   /**
-   * @name          trigger
+   * @name          emit
    * @type          Function
    *
-   * Trigger some "events" through the SPromise instance
+   * emit some "events" through the SPromise instance
    *
    * @param       {String}      stack         The stack (name) of the event
    * @param       {Any}         data          The data to pass along the event
@@ -291,7 +291,8 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  trigger(stack, data) {
+  emit(stack, data) {
+    super.emit(stack, data);
     this.emit(stack, data);
     return this;
   }

@@ -63,7 +63,7 @@ function sugar(req, res, settings = {}) {
     }
   }
   return new __SPromise(
-    (resolve, reject, trigger) => {
+    ({ resolve, reject, emit }) => {
       return resolve({
         content,
         view,

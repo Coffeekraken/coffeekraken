@@ -191,7 +191,7 @@ export = class SJsCompiler {
    */
   compile(filePath, settings = {}) {
     return new __SPromise(
-      async (resolve, reject, trigger) => {
+      async ({ resolve, reject, emit }) => {
         settings = __deepMerge(this._settings, settings);
 
         _rootDir = settings.rootDir;

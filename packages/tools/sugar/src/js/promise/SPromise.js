@@ -13,6 +13,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -87,7 +98,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @param         {Object}            [settings={}]     An object of settings for this particular SPromise instance. Here's the available settings:
          *
          * @example       js
-         * const promise = new SPromise((resolve, reject, trigger, cancel, promise) => {
+         * const promise = new SPromise(({ resolve, reject, emit }) => {
          *    // do something...
          * }).then(value => {
          *    // do something...
@@ -101,17 +112,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (executorFnOrSettings === void 0) { executorFnOrSettings = {}; }
             if (settings === void 0) { settings = {}; }
             var _this_1 = this;
-            var _resolve = function (arg, stacksOrder) {
-                setTimeout(function () {
-                    _this_1.resolve(arg, stacksOrder);
-                }, 100);
-            };
-            // @ts-ignore
-            var _reject = function (arg, stacksOrder) {
-                setTimeout(function () {
-                    _this_1.reject(arg, stacksOrder);
-                });
-            };
             // @ts-ignore
             var executorFn, _this, resolvers = {};
             _this_1 = _super.call(this, deepMerge_1.default({
@@ -157,12 +157,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         ? executorFnOrSettings
                         : null;
                 if (executorFn) {
-                    return executorFn(_resolve, _reject, _api);
+                    return executorFn(_api);
                 }
             }) || this;
             _this_1._promiseState = 'pending';
             _this = _this_1;
-            _this_1.expose(new SEventEmitter_1.default(_this_1._settings), {
+            _this_1.expose(new SEventEmitter_1.default(__assign({ id: _this_1.id }, _this_1._settings)), {
                 as: 'eventEmitter',
                 props: ['on', 'off', 'emit']
             });
@@ -196,6 +196,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (settings === void 0) { settings = {}; }
             return treatAsValue_1.default(promise, settings);
         };
+        Object.defineProperty(SPromise, Symbol.species, {
+            // you can also use Symbol.species in order to
+            // return a Promise for then/catch/finally
+            get: function () {
+                return Promise;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(SPromise.prototype, Symbol.toStringTag, {
+            // Promise overrides his Symbol.toStringTag
+            get: function () {
+                return 'SPromise';
+            },
+            enumerable: false,
+            configurable: true
+        });
         Object.defineProperty(SPromise.prototype, "promiseState", {
             /**
              * @name                    promiseState
@@ -504,7 +521,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @return          {SPromise}                  The SPromise instance to maintain chainability
          *
          * @example         js
-         * new SPromise((resolve, reject, trigge) => {
+         * new SPromise(({ resolve, reject }) => {
          *    // do something...
          *    reject('hello world');
          * }).catch(value => {
@@ -535,7 +552,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @return          {SPromise}                  The SPromise instance to maintain chainability
          *
          * @example         js
-         * new SPromise((resolve, reject, trigger) => {
+         * new SPromise(({ resolve, reject, emit }) => {
          *    // do something...
          *    resolve('hello world');
          * }).finally(value => {
@@ -564,7 +581,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @return          {SPromise}                  The SPromise instance to maintain chainability
          *
          * @example         js
-         * new SPromise((resolve, reject, trigger) => {
+         * new SPromise(({ resolve, reject, emit }) => {
          *    // do something...
          *    resolve('hello world');
          * }).resolved(value => {
@@ -593,7 +610,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @return          {SPromise}                  The SPromise instance to maintain chainability
          *
          * @example         js
-         * new SPromise((resolve, reject, trigger) => {
+         * new SPromise(({ resolve, reject, emit }) => {
          *    // do something...
          *    resolve('hello world');
          * }).rejected(value => {
@@ -622,9 +639,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @return          {Promise}                  A simple promise that will be resolved with the cancel stack result
          *
          * @example         js
-         * new SPromise((resolve, reject, trigger, api) => {
+         * new SPromise(({ resolve, reject, emit, cancel }) => {
          *    // do something...
-         *    api.cancel('hello world');
+         *    cancel('hello world');
          * }).canceled(value => {
          *    // do something with the value that is "hello world"
          * });

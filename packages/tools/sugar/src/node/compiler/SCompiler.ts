@@ -24,7 +24,7 @@ import __deepMerge from '../object/deepMerge';
  *          super(settings);
  *      }
  *      _compile(input, settings) {
- *          return new SPromise((resolve, reject, trigger) => {
+ *          return new SPromise(({resolve, reject, emit}) => {
  *              // compilation logic
  *          });
  *      }

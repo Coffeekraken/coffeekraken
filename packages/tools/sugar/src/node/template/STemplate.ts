@@ -356,7 +356,7 @@ class STemplate {
    */
   render(data = {}, settings = {}) {
     return new __SPromise(
-      async (resolve, reject, trigger, promiseApi) => {
+      async ({ resolve, reject, emit }) => {
         settings = __deepMerge(this._settings, settings);
         data = __deepMerge(settings.defaultData, data);
         if (this._templateString) {
@@ -431,7 +431,6 @@ class STemplate {
         const result = await renderPromise;
 
         if (renderPromise.isRejected()) {
-          
           return reject({
             view: this._viewPath,
             engine: settings.engine,

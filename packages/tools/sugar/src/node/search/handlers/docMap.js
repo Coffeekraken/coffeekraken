@@ -74,7 +74,7 @@ function search(searchString, settings = {}) {
         queryObj = {};
         queryObj.namespace = searchString;
     }
-    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+    return new Promise(({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
         // load the docmap
         if (!fs_1.default.existsSync(settings.filePath)) {
             throw new Error(`You try to make a research using the <primary>docMap</primary> search handler but it seems that your configuration point to a file that does not exists "<cyan>${settings.filePath}</cyan>"...`);

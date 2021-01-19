@@ -35,18 +35,18 @@ function inViewportStatusChange($elm) {
   let isFinished = false;
 
   return new __SPromise(
-    (resolve, reject, trigger) => {
+    ({ emit }) => {
       function _whenIn() {
         __whenInViewport($elm).then(() => {
           if (isFinished) return;
-          trigger('enter', $elm);
+          emit('enter', $elm);
           _whenOut();
         });
       }
       function _whenOut() {
         __whenOutOfViewport($elm).then(() => {
           if (isFinished) return;
-          trigger('exit', $elm);
+          emit('exit', $elm);
           _whenIn();
         });
       }

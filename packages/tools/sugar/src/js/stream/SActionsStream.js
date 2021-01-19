@@ -536,219 +536,222 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 settings.before = [settings.before];
             if (settings.after && !Array.isArray(settings.after))
                 settings.after = [settings.after];
-            this._currentStream.promise = new SPromise_1.default(function (resolve, reject, trigger, promiseApi) { return __awaiter(_this, void 0, void 0, function () {
-                var startString, actionsOrderedNames, i, actionName, actionInstance, actionSettings, skipMessage, skipAction, startString, issuesString, errorString, successString, issuesString, errorString, completeString, e_2;
-                var _this = this;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0: return [4 /*yield*/, wait_1.default(100)];
-                        case 1:
-                            _a.sent(); // ugly hack to check when have time...
-                            _a.label = 2;
-                        case 2:
-                            _a.trys.push([2, 9, , 10]);
-                            // starting log
-                            if (this._settings.logs.exclude.indexOf(this._currentStream.currentActionObj.id) === -1 &&
-                                this._settings.logs.start) {
-                                startString = "#start Starting the stream \"<cyan>" + (settings.name || 'unnamed') + "</cyan>\"";
-                                this.log({
-                                    value: startString
-                                });
-                            }
-                            trigger('start', {});
-                            return [4 /*yield*/, this._applyFnOnStreamObj(currentStreamObj, this._settings.before, {
-                                    type: 'before'
-                                })];
-                        case 3:
-                            currentStreamObj = _a.sent();
-                            if (!!this.hasCurrentStreamErrors()) return [3 /*break*/, 7];
-                            actionsOrderedNames = Array.isArray(settings.order)
-                                ? settings.order
-                                : Object.keys(this._actionsObject);
-                            // check the order
-                            actionsOrderedNames.forEach(function (actionName) {
-                                if (!_this._actionsObject[actionName]) {
-                                    _this._currentStream.stats.stderr.push(parseHtml_1.default("You have specified the action \"<yellow>" + actionName + "</yellow>\" in your SActionsStream instance but it is not available. Here's the available actions: <green>" + Object.keys(_this._actionsObject).join(',') + "</green>"));
-                                }
-                            });
-                            i = 0;
-                            _a.label = 4;
-                        case 4:
-                            if (!(i < actionsOrderedNames.length)) return [3 /*break*/, 7];
-                            if (this._currentStream.canceled ||
-                                this.hasCurrentStreamErrors()) {
-                                // this.log('stop');
-                                return [3 /*break*/, 7];
-                            }
-                            actionName = actionsOrderedNames[i];
-                            actionInstance = void 0;
-                            actionSettings = settings.actions
-                                ? settings.actions[actionName] || {}
-                                : {};
-                            // make sure we have a "name" property in the actionSettings object
-                            if (!actionSettings.name) {
-                                actionSettings.name = actionName;
-                            }
-                            skipMessage = null, skipAction = 'break';
-                            if (this._currentStream.stats.skipNextActions === true) {
-                                skipMessage = "#warning Skipping all the next actions after the \"<cyan>" + actionsOrderedNames[i - 1] + "</cyan>\" one...";
-                                skipAction = 'break';
-                            }
-                            else if (Array.isArray(this._currentStream.stats.skipNextActions) &&
-                                this._currentStream.stats.skipNextActions.indexOf(actionName) !== -1) {
-                                skipMessage = "#warning Skipping the \"<yellow>" + actionName + "</yellow>\" action...";
-                                skipAction = 'continue';
-                            }
-                            else if (typeof this._currentStream.stats.skipNextActions === 'number' &&
-                                this._currentStream.stats.skipNextActions > 0) {
-                                this._currentStream.stats.skipNextActions--;
-                                skipMessage = "#warning Skipping the \"<yellow>" + actionName + "</yellow>\" action. Reamaining action(s) to skip: <cyan>" + this._currentStream.stats.skipNextActions + "</cyan>...";
-                                skipAction = 'continue';
-                            }
-                            if (skipMessage) {
-                                this.log({
-                                    value: skipMessage
-                                });
-                                if (skipAction === 'continue')
-                                    return [3 /*break*/, 6];
-                                else
-                                    return [3 /*break*/, 7];
-                            }
-                            // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
-                            if (class_1.default(this._actionsObject[actionName]) &&
-                                this._actionsObject[actionName].prototype instanceof
-                                    SActionsStreamAction_1.default) {
-                                actionInstance = new this._actionsObject[actionName](actionSettings);
-                            }
-                            else {
-                                this._currentStream.stats.stderr.push("Your action \"<yellow>" + actionName + "</yellow>\" has to be a class extending the <cyan>SActionsStreamAction</cyan> one...");
-                                return [3 /*break*/, 7];
-                            }
-                            this._currentStream.currentActionObj = {
-                                name: actionName,
-                                sourcesCount: this._currentStream.streamObjArray.length,
-                                processed: 0,
-                                fromCache: 0,
-                                instance: actionInstance,
-                                stats: {
-                                    action: actionName,
-                                    startTime: Date.now(),
-                                    stderr: [],
-                                    stdout: []
-                                }
-                            };
-                            if (this._currentStream.currentActionObj.instance) {
-                                this._currentStream.currentActionObj.instance.on('reject', function (value) {
-                                    trigger(_this._currentStream.currentActionObj.name + ".error", {
-                                        value: value
+            this._currentStream.promise = new SPromise_1.default(function (_a) {
+                var resolve = _a.resolve, reject = _a.reject, emit = _a.emit, cancel = _a.cancel;
+                return __awaiter(_this, void 0, void 0, function () {
+                    var startString, actionsOrderedNames, i, actionName, actionInstance, actionSettings, skipMessage, skipAction, startString, issuesString, errorString, successString, issuesString, errorString, completeString, e_2;
+                    var _this = this;
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0: return [4 /*yield*/, wait_1.default(100)];
+                            case 1:
+                                _b.sent(); // ugly hack to check when have time...
+                                _b.label = 2;
+                            case 2:
+                                _b.trys.push([2, 9, , 10]);
+                                // starting log
+                                if (this._settings.logs.exclude.indexOf(this._currentStream.currentActionObj.id) === -1 &&
+                                    this._settings.logs.start) {
+                                    startString = "#start Starting the stream \"<cyan>" + (settings.name || 'unnamed') + "</cyan>\"";
+                                    this.log({
+                                        value: startString
                                     });
-                                    promiseApi.cancel(value);
-                                });
-                                actionSettings = deepMerge_1.default(this._currentStream.currentActionObj.instance._settings, actionSettings);
-                            }
-                            // trigger some "start" events
-                            trigger(this._currentStream.currentActionObj.name + ".start", Object.assign({}, this._currentStream.currentActionObj));
-                            if (this._settings.logs.exclude.indexOf(this._currentStream.currentActionObj.id) === -1) {
-                                startString = "#start Starting the action \"<yellow>" + this._currentStream.currentActionObj.name + "</yellow>\" on <magenta>" + this._currentStream.currentActionObj.sourcesCount + "</magenta> sources";
-                                this.log({
-                                    group: this._currentStream.currentActionObj.name,
-                                    value: startString
-                                });
-                            }
-                            return [4 /*yield*/, this._handleStreamObjArray()];
-                        case 5:
-                            _a.sent();
-                            if (this.hasCurrentStreamErrors()) {
-                                return [3 /*break*/, 7];
-                            }
-                            if (this.constructor.interface) {
-                                issuesString = this.constructor.interface.apply(this._currentStream.streamObjArray[0], { return: 'string', throw: false });
-                                if (issuesString !== true) {
-                                    this._currentStream.stats.stderr.push(issuesString);
-                                    this._currentStream.currentActionObj.stats.stderr.push(issuesString);
                                 }
-                            }
-                            // complete the actionObj
-                            this._currentStream.currentActionObj.stats = __assign(__assign({}, this._currentStream.currentActionObj.stats), { endTime: Date.now(), duration: Date.now() -
-                                    this._currentStream.currentActionObj.stats.startTime });
-                            // save the result into the overall actions stats object
-                            this._currentStream.stats.actions[this._currentStream.currentActionObj.name] = Object.assign({}, this._currentStream.currentActionObj);
-                            // trigger an "event"
-                            trigger(this._currentStream.currentActionObj.name + ".complete", Object.assign({}, this._currentStream.currentActionObj));
-                            if (this._currentStream.currentActionObj.stats.stderr.length) {
-                                errorString = "#error <red>Something went wrong during the </red>\"<yellow>" + this._currentStream.currentActionObj.name + "</yellow>\"<red> action...</red>";
-                                this._currentStream.currentActionObj.stats.stderr.push(errorString);
-                                this._currentStream.stats.stderr.push(errorString);
-                                return [3 /*break*/, 7];
-                            }
-                            else {
-                                successString = "#success The action \"<yellow>" + this._currentStream.currentActionObj.name + "</yellow>\" has finished <green>successfully</green> on <magenta>" + this._currentStream.currentActionObj.sourcesCount + "</magenta> sources in <yellow>" + convert_1.default(this._currentStream.currentActionObj.stats.duration, 's') + "s</yellow>";
-                                this._currentStream.currentActionObj.stats.stdout.push(successString);
+                                emit('start', {});
+                                return [4 /*yield*/, this._applyFnOnStreamObj(currentStreamObj, this._settings.before, {
+                                        type: 'before'
+                                    })];
+                            case 3:
+                                currentStreamObj = _b.sent();
+                                if (!!this.hasCurrentStreamErrors()) return [3 /*break*/, 7];
+                                actionsOrderedNames = Array.isArray(settings.order)
+                                    ? settings.order
+                                    : Object.keys(this._actionsObject);
+                                // check the order
+                                actionsOrderedNames.forEach(function (actionName) {
+                                    if (!_this._actionsObject[actionName]) {
+                                        _this._currentStream.stats.stderr.push(parseHtml_1.default("You have specified the action \"<yellow>" + actionName + "</yellow>\" in your SActionsStream instance but it is not available. Here's the available actions: <green>" + Object.keys(_this._actionsObject).join(',') + "</green>"));
+                                    }
+                                });
+                                i = 0;
+                                _b.label = 4;
+                            case 4:
+                                if (!(i < actionsOrderedNames.length)) return [3 /*break*/, 7];
+                                if (this._currentStream.canceled ||
+                                    this.hasCurrentStreamErrors()) {
+                                    // this.log('stop');
+                                    return [3 /*break*/, 7];
+                                }
+                                actionName = actionsOrderedNames[i];
+                                actionInstance = void 0;
+                                actionSettings = settings.actions
+                                    ? settings.actions[actionName] || {}
+                                    : {};
+                                // make sure we have a "name" property in the actionSettings object
+                                if (!actionSettings.name) {
+                                    actionSettings.name = actionName;
+                                }
+                                skipMessage = null, skipAction = 'break';
+                                if (this._currentStream.stats.skipNextActions === true) {
+                                    skipMessage = "#warning Skipping all the next actions after the \"<cyan>" + actionsOrderedNames[i - 1] + "</cyan>\" one...";
+                                    skipAction = 'break';
+                                }
+                                else if (Array.isArray(this._currentStream.stats.skipNextActions) &&
+                                    this._currentStream.stats.skipNextActions.indexOf(actionName) !== -1) {
+                                    skipMessage = "#warning Skipping the \"<yellow>" + actionName + "</yellow>\" action...";
+                                    skipAction = 'continue';
+                                }
+                                else if (typeof this._currentStream.stats.skipNextActions === 'number' &&
+                                    this._currentStream.stats.skipNextActions > 0) {
+                                    this._currentStream.stats.skipNextActions--;
+                                    skipMessage = "#warning Skipping the \"<yellow>" + actionName + "</yellow>\" action. Reamaining action(s) to skip: <cyan>" + this._currentStream.stats.skipNextActions + "</cyan>...";
+                                    skipAction = 'continue';
+                                }
+                                if (skipMessage) {
+                                    this.log({
+                                        value: skipMessage
+                                    });
+                                    if (skipAction === 'continue')
+                                        return [3 /*break*/, 6];
+                                    else
+                                        return [3 /*break*/, 7];
+                                }
+                                // handle passed action that can be either a simple function, a extended SActionsStreamAction class or an instance of the SActionsStreamAction class
+                                if (class_1.default(this._actionsObject[actionName]) &&
+                                    this._actionsObject[actionName].prototype instanceof
+                                        SActionsStreamAction_1.default) {
+                                    actionInstance = new this._actionsObject[actionName](actionSettings);
+                                }
+                                else {
+                                    this._currentStream.stats.stderr.push("Your action \"<yellow>" + actionName + "</yellow>\" has to be a class extending the <cyan>SActionsStreamAction</cyan> one...");
+                                    return [3 /*break*/, 7];
+                                }
+                                this._currentStream.currentActionObj = {
+                                    name: actionName,
+                                    sourcesCount: this._currentStream.streamObjArray.length,
+                                    processed: 0,
+                                    fromCache: 0,
+                                    instance: actionInstance,
+                                    stats: {
+                                        action: actionName,
+                                        startTime: Date.now(),
+                                        stderr: [],
+                                        stdout: []
+                                    }
+                                };
+                                if (this._currentStream.currentActionObj.instance) {
+                                    this._currentStream.currentActionObj.instance.on('reject', function (value) {
+                                        emit(_this._currentStream.currentActionObj.name + ".error", {
+                                            value: value
+                                        });
+                                        cancel(value);
+                                    });
+                                    actionSettings = deepMerge_1.default(this._currentStream.currentActionObj.instance._settings, actionSettings);
+                                }
+                                // emit some "start" events
+                                emit(this._currentStream.currentActionObj.name + ".start", Object.assign({}, this._currentStream.currentActionObj));
                                 if (this._settings.logs.exclude.indexOf(this._currentStream.currentActionObj.id) === -1) {
+                                    startString = "#start Starting the action \"<yellow>" + this._currentStream.currentActionObj.name + "</yellow>\" on <magenta>" + this._currentStream.currentActionObj.sourcesCount + "</magenta> sources";
                                     this.log({
                                         group: this._currentStream.currentActionObj.name,
-                                        value: successString
+                                        value: startString
                                     });
                                 }
-                            }
-                            _a.label = 6;
-                        case 6:
-                            i++;
-                            return [3 /*break*/, 4];
-                        case 7: return [4 /*yield*/, this._applyFnOnStreamObj(currentStreamObj, this._settings.after, {
-                                type: 'after'
-                            })];
-                        case 8:
-                            currentStreamObj = _a.sent();
-                            if (this.constructor.interface) {
-                                issuesString = this.constructor.interface.apply(this._currentStream.streamObjArray[0], { return: 'string', throw: false });
-                                if (issuesString !== true) {
-                                    this._currentStream.stats.stderr.push(issuesString);
+                                return [4 /*yield*/, this._handleStreamObjArray()];
+                            case 5:
+                                _b.sent();
+                                if (this.hasCurrentStreamErrors()) {
+                                    return [3 /*break*/, 7];
                                 }
-                            }
-                            // complete the overall stats
-                            this._currentStream.stats = __assign(__assign({}, this._currentStream.stats), { streamObj: this._currentStream.streamObjArray, endTime: Date.now(), duration: Date.now() - this._currentStream.stats.startTime });
-                            if (this.hasCurrentStreamErrors() ||
-                                this._currentStream.stats.canceled) {
+                                if (this.constructor.interface) {
+                                    issuesString = this.constructor.interface.apply(this._currentStream.streamObjArray[0], { return: 'string', throw: false });
+                                    if (issuesString !== true) {
+                                        this._currentStream.stats.stderr.push(issuesString);
+                                        this._currentStream.currentActionObj.stats.stderr.push(issuesString);
+                                    }
+                                }
+                                // complete the actionObj
+                                this._currentStream.currentActionObj.stats = __assign(__assign({}, this._currentStream.currentActionObj.stats), { endTime: Date.now(), duration: Date.now() -
+                                        this._currentStream.currentActionObj.stats.startTime });
+                                // save the result into the overall actions stats object
+                                this._currentStream.stats.actions[this._currentStream.currentActionObj.name] = Object.assign({}, this._currentStream.currentActionObj);
+                                // emit an "event"
+                                emit(this._currentStream.currentActionObj.name + ".complete", Object.assign({}, this._currentStream.currentActionObj));
+                                if (this._currentStream.currentActionObj.stats.stderr.length) {
+                                    errorString = "#error <red>Something went wrong during the </red>\"<yellow>" + this._currentStream.currentActionObj.name + "</yellow>\"<red> action...</red>";
+                                    this._currentStream.currentActionObj.stats.stderr.push(errorString);
+                                    this._currentStream.stats.stderr.push(errorString);
+                                    return [3 /*break*/, 7];
+                                }
+                                else {
+                                    successString = "#success The action \"<yellow>" + this._currentStream.currentActionObj.name + "</yellow>\" has finished <green>successfully</green> on <magenta>" + this._currentStream.currentActionObj.sourcesCount + "</magenta> sources in <yellow>" + convert_1.default(this._currentStream.currentActionObj.stats.duration, 's') + "s</yellow>";
+                                    this._currentStream.currentActionObj.stats.stdout.push(successString);
+                                    if (this._settings.logs.exclude.indexOf(this._currentStream.currentActionObj.id) === -1) {
+                                        this.log({
+                                            group: this._currentStream.currentActionObj.name,
+                                            value: successString
+                                        });
+                                    }
+                                }
+                                _b.label = 6;
+                            case 6:
+                                i++;
+                                return [3 /*break*/, 4];
+                            case 7: return [4 /*yield*/, this._applyFnOnStreamObj(currentStreamObj, this._settings.after, {
+                                    type: 'after'
+                                })];
+                            case 8:
+                                currentStreamObj = _b.sent();
+                                if (this.constructor.interface) {
+                                    issuesString = this.constructor.interface.apply(this._currentStream.streamObjArray[0], { return: 'string', throw: false });
+                                    if (issuesString !== true) {
+                                        this._currentStream.stats.stderr.push(issuesString);
+                                    }
+                                }
+                                // complete the overall stats
+                                this._currentStream.stats = __assign(__assign({}, this._currentStream.stats), { streamObj: this._currentStream.streamObjArray, endTime: Date.now(), duration: Date.now() - this._currentStream.stats.startTime });
+                                if (this.hasCurrentStreamErrors() ||
+                                    this._currentStream.stats.canceled) {
+                                    if (this._settings.logs.error) {
+                                        errorString = "The stream \"<cyan>" + (settings.name || 'unnamed') + "</cyan>\" has had some issues...";
+                                        this._currentStream.stats.stdout.push(errorString);
+                                        this.log({
+                                            error: true,
+                                            value: errorString
+                                        });
+                                        this.log({
+                                            error: true,
+                                            value: trimLines_1.default(this._currentStream.stats.stderr.join('\n'))
+                                        });
+                                    }
+                                    emit('reject', this._currentStream.stats);
+                                }
+                                else {
+                                    if (this._settings.logs.success) {
+                                        completeString = "#success The stream \"<cyan>" + (this._currentStream.settings.name || 'unnamed') + "</cyan>\" has finished <green>successfully</green> in <yellow>" + convert_1.default(this._currentStream.stats.duration, 's') + "s</yellow>";
+                                        this._currentStream.stats.stdout.push(completeString);
+                                        this.log({
+                                            value: completeString
+                                        });
+                                    }
+                                    // resolve this stream process
+                                    emit('success', {});
+                                    resolve(this._currentStream.stats);
+                                }
+                                return [3 /*break*/, 10];
+                            case 9:
+                                e_2 = _b.sent();
                                 if (this._settings.logs.error) {
-                                    errorString = "The stream \"<cyan>" + (settings.name || 'unnamed') + "</cyan>\" has had some issues...";
-                                    this._currentStream.stats.stdout.push(errorString);
                                     this.log({
-                                        error: true,
-                                        value: errorString
-                                    });
-                                    this.log({
-                                        error: true,
-                                        value: trimLines_1.default(this._currentStream.stats.stderr.join('\n'))
+                                        value: e_2.toString()
                                     });
                                 }
-                                trigger('reject', this._currentStream.stats);
-                            }
-                            else {
-                                if (this._settings.logs.success) {
-                                    completeString = "#success The stream \"<cyan>" + (this._currentStream.settings.name || 'unnamed') + "</cyan>\" has finished <green>successfully</green> in <yellow>" + convert_1.default(this._currentStream.stats.duration, 's') + "s</yellow>";
-                                    this._currentStream.stats.stdout.push(completeString);
-                                    this.log({
-                                        value: completeString
-                                    });
-                                }
-                                // resolve this stream process
-                                trigger('success', {});
-                                resolve(this._currentStream.stats);
-                            }
-                            return [3 /*break*/, 10];
-                        case 9:
-                            e_2 = _a.sent();
-                            if (this._settings.logs.error) {
-                                this.log({
-                                    value: e_2.toString()
-                                });
-                            }
-                            return [3 /*break*/, 10];
-                        case 10: return [2 /*return*/];
-                    }
+                                return [3 /*break*/, 10];
+                            case 10: return [2 /*return*/];
+                        }
+                    });
                 });
-            }); }, {
+            }, {
                 id: this._settings.id
             });
             // this._currentStream.promise.catch((e) => {
@@ -784,7 +787,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             }
             args.forEach(function (arg) {
                 if (_this._currentStream && _this._currentStream.promise) {
-                    _this._currentStream.promise.trigger('log', arg);
+                    _this._currentStream.promise.emit('log', arg);
                 }
             });
         };

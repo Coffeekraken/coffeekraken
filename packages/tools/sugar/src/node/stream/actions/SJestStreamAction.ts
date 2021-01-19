@@ -75,7 +75,7 @@ export = class SJestStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    return super.run(streamObj, async (resolve, reject) => {
+    return super.run(streamObj, async ({ resolve, reject }) => {
       // if (!streamObj.pack) return resolve(streamObj);
 
       const input = streamObj.updatedFilePath || streamObj.input;

@@ -35,7 +35,7 @@ const __mkdirp = require('mkdirp');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function downloadFolder(repo, path, destinationPath = __downloadsFolder()) {
-    return new Promise((resolve, reject) => {
+    return new Promise(({ resolve, reject }) => {
         const parsedDestinationPath = __path.parse(destinationPath);
         const parsedPath = __path.parse(path);
         if (destinationPath.slice(-1) !== '/') {

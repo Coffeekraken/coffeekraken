@@ -30,7 +30,7 @@ class SPromise extends SClass_1.default.extends(Promise) {
      * @param         {Object}            [settings={}]     An object of settings for this particular SPromise instance. Here's the available settings:
      *
      * @example       js
-     * const promise = new SPromise((resolve, reject, trigger, cancel, promise) => {
+     * const promise = new SPromise(({ resolve, reject, emit }) => {
      *    // do something...
      * }).then(value => {
      *    // do something...
@@ -41,17 +41,6 @@ class SPromise extends SClass_1.default.extends(Promise) {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     constructor(executorFnOrSettings = {}, settings = {}) {
-        const _resolve = (arg, stacksOrder) => {
-            setTimeout(() => {
-                this.resolve(arg, stacksOrder);
-            }, 100);
-        };
-        // @ts-ignore
-        const _reject = (arg, stacksOrder) => {
-            setTimeout(() => {
-                this.reject(arg, stacksOrder);
-            });
-        };
         // @ts-ignore
         let executorFn, _this, resolvers = {};
         super(deepMerge_1.default({
@@ -84,12 +73,12 @@ class SPromise extends SClass_1.default.extends(Promise) {
                     ? executorFnOrSettings
                     : null;
             if (executorFn) {
-                return executorFn(_resolve, _reject, _api);
+                return executorFn(_api);
             }
         });
         this._promiseState = 'pending';
         _this = this;
-        this.expose(new SEventEmitter_1.default(this._settings), {
+        this.expose(new SEventEmitter_1.default(Object.assign({ id: this.id }, this._settings)), {
             as: 'eventEmitter',
             props: ['on', 'off', 'emit']
         });
@@ -120,6 +109,15 @@ class SPromise extends SClass_1.default.extends(Promise) {
      */
     static treatAsValue(promise, settings = {}) {
         return treatAsValue_1.default(promise, settings);
+    }
+    // you can also use Symbol.species in order to
+    // return a Promise for then/catch/finally
+    static get [Symbol.species]() {
+        return Promise;
+    }
+    // Promise overrides his Symbol.toStringTag
+    get [Symbol.toStringTag]() {
+        return 'SPromise';
     }
     /**
      * @name                    promiseState
@@ -391,7 +389,7 @@ class SPromise extends SClass_1.default.extends(Promise) {
      * @return          {SPromise}                  The SPromise instance to maintain chainability
      *
      * @example         js
-     * new SPromise((resolve, reject, trigge) => {
+     * new SPromise(({ resolve, reject }) => {
      *    // do something...
      *    reject('hello world');
      * }).catch(value => {
@@ -418,7 +416,7 @@ class SPromise extends SClass_1.default.extends(Promise) {
      * @return          {SPromise}                  The SPromise instance to maintain chainability
      *
      * @example         js
-     * new SPromise((resolve, reject, trigger) => {
+     * new SPromise(({ resolve, reject, emit }) => {
      *    // do something...
      *    resolve('hello world');
      * }).finally(value => {
@@ -443,7 +441,7 @@ class SPromise extends SClass_1.default.extends(Promise) {
      * @return          {SPromise}                  The SPromise instance to maintain chainability
      *
      * @example         js
-     * new SPromise((resolve, reject, trigger) => {
+     * new SPromise(({ resolve, reject, emit }) => {
      *    // do something...
      *    resolve('hello world');
      * }).resolved(value => {
@@ -468,7 +466,7 @@ class SPromise extends SClass_1.default.extends(Promise) {
      * @return          {SPromise}                  The SPromise instance to maintain chainability
      *
      * @example         js
-     * new SPromise((resolve, reject, trigger) => {
+     * new SPromise(({ resolve, reject, emit }) => {
      *    // do something...
      *    resolve('hello world');
      * }).rejected(value => {
@@ -493,9 +491,9 @@ class SPromise extends SClass_1.default.extends(Promise) {
      * @return          {Promise}                  A simple promise that will be resolved with the cancel stack result
      *
      * @example         js
-     * new SPromise((resolve, reject, trigger, api) => {
+     * new SPromise(({ resolve, reject, emit, cancel }) => {
      *    // do something...
-     *    api.cancel('hello world');
+     *    cancel('hello world');
      * }).canceled(value => {
      *    // do something with the value that is "hello world"
      * });

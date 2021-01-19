@@ -36,7 +36,7 @@ const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
 const escapeStackStack = [];
 let hotkeyInitiated = false;
 function escapeStack(callback = null) {
-    const promise = new SPromise_1.default((resolve, reject, trigger) => { }, {
+    const promise = new SPromise_1.default(({ resolve, reject, emit }) => { }, {
         id: 'escapeStack'
     });
     if (!hotkeyInitiated) {

@@ -64,7 +64,7 @@ function addEventListener(
   eventNames.forEach((eventName) => {
     const internalCallback = (event) => {
       if (callback) callback.apply(this, [event]);
-      promise.trigger(eventName, event);
+      promise.emit(eventName, event);
     };
 
     eventsStack[eventName] = {

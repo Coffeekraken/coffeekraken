@@ -149,7 +149,7 @@ module.exports = class SActionStreamAction extends SPromise_1.default {
             id: this._settings.id + 'Run'
         });
         SPromise_1.default.map(this._currentPromise, this);
-        promiseFn(this._currentPromise.resolve.bind(this._currentPromise), this._currentPromise.reject.bind(this._currentPromise), this._currentPromise.trigger.bind(this._currentPromise), this._currentPromise.cancel.bind(this._currentPromise));
+        promiseFn(this._currentPromise.resolve.bind(this._currentPromise), this._currentPromise.reject.bind(this._currentPromise), this._currentPromise.emit.bind(this._currentPromise), this._currentPromise.cancel.bind(this._currentPromise));
         return this._currentPromise;
     }
     /**
@@ -163,11 +163,11 @@ module.exports = class SActionStreamAction extends SPromise_1.default {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     error(message) {
-        // this.trigger('error', {
+        // this.emit('error', {
         //   value: `<red>✚</red> ${message}`
         // });
         // if (!this._currentPromise) return;
-        // this._currentPromise.trigger('log', {
+        // this._currentPromise.emit('log', {
         //   value: `<red>✚</red> ${message}`
         // });
     }
@@ -182,12 +182,12 @@ module.exports = class SActionStreamAction extends SPromise_1.default {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     warn(message) {
-        this.trigger('log', {
+        this.emit('log', {
             value: `<yellow>⚠</yellow> ${message}`
         });
         if (!this._currentPromise)
             return;
-        this._currentPromise.trigger('log', {
+        this._currentPromise.emit('log', {
             value: `<yellow>⚠</yellow> ${message}`
         });
     }
@@ -204,20 +204,20 @@ module.exports = class SActionStreamAction extends SPromise_1.default {
     log(obj) {
         setTimeout(() => {
             if (typeof obj === 'string') {
-                this.trigger('log', {
+                this.emit('log', {
                     value: obj
                 });
                 if (!this._currentPromise)
                     return;
-                this._currentPromise.trigger('log', {
+                this._currentPromise.emit('log', {
                     value: obj
                 });
             }
             else {
-                this.trigger('log', obj);
+                this.emit('log', obj);
                 if (!this._currentPromise)
                     return;
-                this._currentPromise.trigger('log', obj);
+                this._currentPromise.emit('log', obj);
             }
         });
     }

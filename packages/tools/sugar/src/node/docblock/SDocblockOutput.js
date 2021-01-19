@@ -103,7 +103,7 @@ module.exports = class SDocblockOutput {
             promise: Promise
         });
         this._handlebars.registerHelper('include', (type) => {
-            return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            return new Promise(({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
                 if (!this._docblockInstance.blocks ||
                     !this._docblockInstance.blocks.length)
                     return '';
@@ -260,7 +260,7 @@ module.exports = class SDocblockOutput {
      */
     render(settings = {}) {
         this._partialsTemplateObj = this.getPartialsTemplateObj();
-        return new SPromise_1.default((resolve, reject, trigger, promise) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default(({ resolve }) => __awaiter(this, void 0, void 0, function* () {
             // get the block in object format
             const blocksArray = this._docblockInstance.toObject();
             // reset all blocks rendered state

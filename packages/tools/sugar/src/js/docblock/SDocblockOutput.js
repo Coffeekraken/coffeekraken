@@ -142,41 +142,44 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 promise: Promise
             });
             this._handlebars.registerHelper('include', function (type) {
-                return new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                    var blocks, renderedBlocks, i, block, result;
-                    return __generator(this, function (_a) {
-                        switch (_a.label) {
-                            case 0:
-                                if (!this._docblockInstance.blocks ||
-                                    !this._docblockInstance.blocks.length)
-                                    return [2 /*return*/, ''];
-                                blocks = this._docblockInstance.blocks.filter(function (block) {
-                                    if (!block.toObject().type)
-                                        return false;
-                                    var rendered = block._rendered;
-                                    block._rendered = true;
-                                    return rendered !== true;
-                                });
-                                renderedBlocks = [];
-                                i = 0;
-                                _a.label = 1;
-                            case 1:
-                                if (!(i < blocks.length)) return [3 /*break*/, 4];
-                                block = blocks[i];
-                                return [4 /*yield*/, this.renderBlock(block.toObject())];
-                            case 2:
-                                result = _a.sent();
-                                renderedBlocks.push(result);
-                                _a.label = 3;
-                            case 3:
-                                i++;
-                                return [3 /*break*/, 1];
-                            case 4:
-                                resolve(renderedBlocks.join('\n\n'));
-                                return [2 /*return*/];
-                        }
+                return new Promise(function (_a) {
+                    var resolve = _a.resolve, reject = _a.reject;
+                    return __awaiter(_this, void 0, void 0, function () {
+                        var blocks, renderedBlocks, i, block, result;
+                        return __generator(this, function (_b) {
+                            switch (_b.label) {
+                                case 0:
+                                    if (!this._docblockInstance.blocks ||
+                                        !this._docblockInstance.blocks.length)
+                                        return [2 /*return*/, ''];
+                                    blocks = this._docblockInstance.blocks.filter(function (block) {
+                                        if (!block.toObject().type)
+                                            return false;
+                                        var rendered = block._rendered;
+                                        block._rendered = true;
+                                        return rendered !== true;
+                                    });
+                                    renderedBlocks = [];
+                                    i = 0;
+                                    _b.label = 1;
+                                case 1:
+                                    if (!(i < blocks.length)) return [3 /*break*/, 4];
+                                    block = blocks[i];
+                                    return [4 /*yield*/, this.renderBlock(block.toObject())];
+                                case 2:
+                                    result = _b.sent();
+                                    renderedBlocks.push(result);
+                                    _b.label = 3;
+                                case 3:
+                                    i++;
+                                    return [3 /*break*/, 1];
+                                case 4:
+                                    resolve(renderedBlocks.join('\n\n'));
+                                    return [2 /*return*/];
+                            }
+                        });
                     });
-                }); });
+                });
             });
         };
         /**
@@ -331,34 +334,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             var _this = this;
             if (settings === void 0) { settings = {}; }
             this._partialsTemplateObj = this.getPartialsTemplateObj();
-            return new SPromise_1.default(function (resolve, reject, trigger, promise) { return __awaiter(_this, void 0, void 0, function () {
-                var blocksArray, firstBlock, type, template, templateObj, compiledTemplateFn, compiledTemplateFn, renderedTemplate;
-                return __generator(this, function (_a) {
-                    switch (_a.label) {
-                        case 0:
-                            blocksArray = this._docblockInstance.toObject();
-                            // reset all blocks rendered state
-                            blocksArray.forEach(function (block) {
-                                block._rendered = false;
-                            });
-                            firstBlock = blocksArray[0];
-                            type = typeof firstBlock.type === 'string'
-                                ? firstBlock.type.toLowerCase()
-                                : 'default';
-                            template = this._settings.templates[type] || this._settings.templates.default;
-                            templateObj = this.getTemplateObj(template);
-                            compiledTemplateFn = this._handlebars.compile(templateObj.content, {
-                                noEscape: true
-                            });
-                            return [4 /*yield*/, compiledTemplateFn()];
-                        case 1:
-                            renderedTemplate = _a.sent();
-                            // resolve the rendering process with the rendered stack
-                            resolve(renderedTemplate);
-                            return [2 /*return*/];
-                    }
+            return new SPromise_1.default(function (_a) {
+                var resolve = _a.resolve;
+                return __awaiter(_this, void 0, void 0, function () {
+                    var blocksArray, firstBlock, type, template, templateObj, compiledTemplateFn, compiledTemplateFn, renderedTemplate;
+                    return __generator(this, function (_b) {
+                        switch (_b.label) {
+                            case 0:
+                                blocksArray = this._docblockInstance.toObject();
+                                // reset all blocks rendered state
+                                blocksArray.forEach(function (block) {
+                                    block._rendered = false;
+                                });
+                                firstBlock = blocksArray[0];
+                                type = typeof firstBlock.type === 'string'
+                                    ? firstBlock.type.toLowerCase()
+                                    : 'default';
+                                template = this._settings.templates[type] || this._settings.templates.default;
+                                templateObj = this.getTemplateObj(template);
+                                compiledTemplateFn = this._handlebars.compile(templateObj.content, {
+                                    noEscape: true
+                                });
+                                return [4 /*yield*/, compiledTemplateFn()];
+                            case 1:
+                                renderedTemplate = _b.sent();
+                                // resolve the rendering process with the rendered stack
+                                resolve(renderedTemplate);
+                                return [2 /*return*/];
+                        }
+                    });
                 });
-            }); }, {
+            }, {
                 id: 'SDocblockOutputRender'
             });
         };

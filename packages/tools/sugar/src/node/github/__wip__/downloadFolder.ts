@@ -40,7 +40,7 @@ module.exports = function downloadFolder(
   path,
   destinationPath = __downloadsFolder()
 ) {
-  return new Promise((resolve, reject) => {
+  return new Promise(({ resolve, reject }) => {
     const parsedDestinationPath = __path.parse(destinationPath);
     const parsedPath = __path.parse(path);
     if (destinationPath.slice(-1) !== '/') {

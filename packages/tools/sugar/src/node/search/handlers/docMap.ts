@@ -49,7 +49,7 @@ function search(searchString, settings = {}) {
     queryObj.namespace = searchString;
   }
 
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async ({ resolve, reject }) => {
     // load the docmap
     if (!__fs.existsSync(settings.filePath)) {
       throw new Error(

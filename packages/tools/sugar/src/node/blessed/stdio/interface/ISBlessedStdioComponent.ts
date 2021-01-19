@@ -3,7 +3,7 @@ import ISBlessedComponent, {
   ISBlessedComponentCtor
 } from '../../interface/ISBlessedComponent';
 
-import ILog from '../../../log/interface/ILog';
+import { ILog } from '../../../log/log';
 
 export interface ISBlessedStdioComponentSettings
   extends ISBlessedComponentSettings {}

@@ -125,7 +125,7 @@ export = class SBladeTemplateEngine extends __STemplateEngine {
       settings
     );
     return new __SPromise(
-      (resolve, reject, trigger, promiseApi) => {
+      ({ resolve, reject, emit }) => {
         if (!__fs.existsSync(settings.cacheDir))
           __fs.mkdirSync(settings.cacheDir, {
             recursive: true

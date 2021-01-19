@@ -116,7 +116,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         if (nameArray.indexOf(previousActiveMedia) !== -1) {
                             var promises = _this._promisesStack[name];
                             promises.forEach(function (promise) {
-                                promise.trigger('unmatch', {
+                                promise.emit('unmatch', {
                                     name: previousActiveMedia
                                 });
                             });
@@ -126,7 +126,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         var promise = _this._promisesStack[name];
                         var promises = _this._promisesStack[name];
                         promises.forEach(function (promise) {
-                            promise.trigger('match', {
+                            promise.emit('match', {
                                 name: mediaName
                             });
                         });
@@ -136,11 +136,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     var allPromises = _this._promisesStack['*'];
                     allPromises.forEach(function (allPromise) {
                         if (previousActiveMedia) {
-                            allPromise.trigger('unmatch', {
+                            allPromise.emit('unmatch', {
                                 name: previousActiveMedia
                             });
                         }
-                        allPromise.trigger('match', {
+                        allPromise.emit('match', {
                             name: mediaName
                         });
                     });

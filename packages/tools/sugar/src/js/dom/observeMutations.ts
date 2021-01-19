@@ -44,13 +44,13 @@ function observeMutations($target, settings = {}) {
   let mutationObserver;
 
   return new __SPromise(
-    (resolve, reject, trigger) => {
+    ({ emit }) => {
       // create a new observer
       mutationObserver = new MutationObserver((mutations) => {
         // loop on mutations
         mutations.forEach((mutation) => {
-          // trigger the then stack
-          trigger('then', mutation);
+          // emit the then stack
+          emit('then', mutation);
         });
       });
       mutationObserver.observe($target, settings);

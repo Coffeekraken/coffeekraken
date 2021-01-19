@@ -81,7 +81,7 @@ export = class SFsReadFileStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    return super.run(streamObj, async (resolve, reject) => {
+    return super.run(streamObj, async ({ resolve, reject }) => {
       if (!__fs.existsSync(streamObj.input))
         throw new Error(
           `The given "<yellow>input</yellow>" streamObj file path property "<red>${streamObj}</red>" does not exists...`

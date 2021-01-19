@@ -1,4 +1,3 @@
-// @ts-nocheck
 // @shared
 
 import __toString from '../string/toString';
@@ -62,16 +61,32 @@ import __parse from '../string/parse';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function buildCommandLine(command, args = {}, settings = {}) {
-  settings = __deepMerge(
-    {
-      definition: null,
-      includeAllArgs: true,
-      alias: true
-    },
-    settings
-  );
 
+export interface IBuildCommandLineSettings {
+  definition?: Record<string, unknown>;
+  includeAllArgs?: boolean;
+  alias?: boolean;
+}
+
+export interface IBuildCommandLineFn {
+  (
+    command: string,
+    args?: Record<string, unknown>,
+    settings?: IBuildCommandLineSettings
+  ): string;
+}
+
+const fn: IBuildCommandLineFn = function buildCommandLine(
+  command: string,
+  args: Record<string, unknown> = {},
+  settings: IBuildCommandLineSettings = {}
+) {
+  settings = {
+    definition: undefined,
+    includeAllArgs: true,
+    alias: true,
+    ...settings
+  };
   const definition = Object.assign({}, settings.definition);
   // get all the tokens
   const tokens = command.match(/\[[a-zA-Z0-9-_]+\]/gm) || [];
@@ -82,7 +97,7 @@ function buildCommandLine(command, args = {}, settings = {}) {
       args && args[tokenName] !== undefined
         ? args[tokenName]
         : definition[tokenName]
-        ? definition[tokenName].default
+        ? (<any>definition[tokenName]).default
         : undefined;
     delete definition[tokenName];
     delete args[tokenName];
@@ -93,7 +108,7 @@ function buildCommandLine(command, args = {}, settings = {}) {
     let tokenValueString = '';
     if (Array.isArray(tokenValue)) {
       tokenValue.forEach((tValue) => {
-        const str =
+        let str =
           tValue.toString !== undefined && typeof tValue.toString === 'function'
             ? tValue.toString()
             : __toString(tValue);
@@ -121,5 +136,5 @@ function buildCommandLine(command, args = {}, settings = {}) {
   command = command.replace('[arguments]', argsString);
 
   return command.trim();
-}
-export = buildCommandLine;
+};
+export default fn;

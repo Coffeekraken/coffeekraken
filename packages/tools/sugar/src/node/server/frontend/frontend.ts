@@ -81,7 +81,7 @@ const fn = function (args = {}) {
       if (handlerPath.slice(-3) !== '.js') handlerPath += '.js';
 
       if (!__fs.existsSync(handlerPath)) {
-        promise.trigger('warn', {
+        promise.emit('warn', {
           value: `Frontend handler "<cyan>${__path.relative(
             __packageRoot(),
             handlerPath
@@ -103,7 +103,7 @@ const fn = function (args = {}) {
         }
 
         setTimeout(() => {
-          promise.trigger('log', {
+          promise.emit('log', {
             value: `Handler <cyan>${pageName}</cyan> "<yellow>${method}:${slug}</yellow>" registered <green>successfully</green>`
           });
         }, 1000);
@@ -128,7 +128,7 @@ const fn = function (args = {}) {
     server = app
       .listen(settings.port, settings.hostname, () => {
         setTimeout(() => {
-          promise.trigger('log', {
+          promise.emit('log', {
             type: 'heading',
             clear: true,
             value: __trimLines(`Your <yellow>Frontend Express</yellow> server is <green>up and running</green>:

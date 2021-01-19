@@ -114,7 +114,7 @@ export = class SScssFile extends __SFile {
       if (this._settings.compile.compileOnChange) {
         const promise = this.compile(this._settings.compile);
         // @ts-ignore
-        promise.trigger('log', {
+        promise.emit('log', {
           value: `<blue>[updated]</blue> ""`
         });
       }
@@ -204,7 +204,7 @@ export = class SScssFile extends __SFile {
         });
         if (!realPath) {
           // @ts-ignore
-          this.trigger('warn', {
+          this.emit('warn', {
             value: [
               `It seems that you're trying to load a file that does not exists:`,
               `- From: <cyan>${this.path}</cyan>`,
@@ -315,7 +315,7 @@ export = class SScssFile extends __SFile {
     this.pipe(promise);
 
     if (this._isCompiling) {
-      promise.trigger('warn', {
+      promise.emit('warn', {
         value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
       });
       return;
@@ -341,12 +341,12 @@ export = class SScssFile extends __SFile {
       this.startWatch();
     }
 
-    promise.trigger('log', {
+    promise.emit('log', {
       type: 'separator'
     });
 
     // notify start
-    promise.trigger('log', {
+    promise.emit('log', {
       value: `Starting "<cyan>${this.relPath}</cyan>" compilation`
     });
 
@@ -376,7 +376,7 @@ export = class SScssFile extends __SFile {
           continue;
         }
 
-        // promise.trigger('log', {
+        // promise.emit('log', {
         //   value: `<yellow>[dependency]</yellow> "<cyan>${depFile.relPath}</cyan>"`
         // });
 
@@ -408,7 +408,7 @@ export = class SScssFile extends __SFile {
         let result = cachedValue.css;
         SScssFile.COMPILED_CSS[this.path] = result;
 
-        promise.trigger('log', {
+        promise.emit('log', {
           value: `<green>[from cache]</green> "<cyan>${this.relPath}</cyan>"`
         });
 
@@ -436,7 +436,7 @@ export = class SScssFile extends __SFile {
               .replace(`${settings.rootDir}/`, '')
               .replace(/\.s[ac]ss$/, '.css')
           );
-          promise.trigger('log', {
+          promise.emit('log', {
             value: `Saving the file "<cyan>${
               this.relPath
             }</cyan>" to "<magenta>${savePath.replace(
@@ -450,7 +450,7 @@ export = class SScssFile extends __SFile {
 
           // notify end
           const time = duration.end();
-          promise.trigger('log', {
+          promise.emit('log', {
             value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
           });
         }
@@ -466,7 +466,7 @@ export = class SScssFile extends __SFile {
 
       let renderObj;
       try {
-        promise.trigger('log', {
+        promise.emit('log', {
           value: `<yellow>[compiling]</yellow> "<cyan>${this.relPath}</cyan>"`
         });
 
@@ -506,7 +506,7 @@ export = class SScssFile extends __SFile {
                 .replace(`${settings.rootDir}/`, '')
                 .replace(/\.s[ac]ss$/, '.css')
             );
-            promise.trigger('log', {
+            promise.emit('log', {
               value: `Saving the file "<cyan>${
                 this.relPath
               }</cyan>" to "<magenta>${savePath.replace(
@@ -521,7 +521,7 @@ export = class SScssFile extends __SFile {
 
           // notify end
           const time = duration.end();
-          promise.trigger('log', {
+          promise.emit('log', {
             value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
           });
 

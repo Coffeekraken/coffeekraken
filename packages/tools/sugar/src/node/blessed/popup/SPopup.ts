@@ -148,14 +148,14 @@ export = class SBlessedPopup extends __SBlessedComponent {
     });
 
     super.append(this.$content);
-    this.promise.trigger('open');
+    this.promise.emit('open');
 
     __activeSpace.append(this._settings.id);
 
     const escape = __escapeStack(() => {
       __activeSpace.previous();
       escape.cancel();
-      this.promise.trigger('close');
+      this.promise.emit('close');
       this.detach();
     });
   }

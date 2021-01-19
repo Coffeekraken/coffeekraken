@@ -1,5 +1,5 @@
 import __SBlessedComponent from '../SBlessedComponent';
-import ILog from '../../log/interface/ILog';
+import { ILog } from '../../log/log';
 import __deepMerge from '../../object/deepMerge';
 
 import ISBlessedStdioComponent, {

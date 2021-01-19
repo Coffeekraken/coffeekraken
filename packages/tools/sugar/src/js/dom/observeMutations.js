@@ -59,13 +59,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (settings === void 0) { settings = {}; }
         settings = __assign({ attributes: true, childList: false, subtree: false }, settings);
         var mutationObserver;
-        return new SPromise_1.default(function (resolve, reject, trigger) {
+        return new SPromise_1.default(function (_a) {
+            var emit = _a.emit;
             // create a new observer
             mutationObserver = new MutationObserver(function (mutations) {
                 // loop on mutations
                 mutations.forEach(function (mutation) {
-                    // trigger the then stack
-                    trigger('then', mutation);
+                    // emit the then stack
+                    emit('then', mutation);
                 });
             });
             mutationObserver.observe($target, settings);

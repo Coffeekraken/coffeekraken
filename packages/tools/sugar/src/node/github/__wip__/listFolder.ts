@@ -30,7 +30,7 @@ const __getAuthToken = require('./getAuthToken');
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = function (repo, path = '') {
-  return new Promise((resolve, reject) => {
+  return new Promise(({ resolve, reject }) => {
     const authToken = __getAuthToken();
 
     const options = {

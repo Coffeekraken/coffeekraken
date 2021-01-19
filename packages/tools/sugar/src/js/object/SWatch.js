@@ -75,10 +75,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 if (watchResult.action === 'get' &&
                     (path === 'on' || path === 'unwatch'))
                     return;
-                // trigger event through promise
+                // emit event through promise
                 setTimeout(function () {
-                    // this._promise.trigger(`${path}`, watchResult);
-                    _this._promise.trigger(path + ":" + watchResult.action, watchResult);
+                    // this._promise.emit(`${path}`, watchResult);
+                    _this._promise.emit(path + ":" + watchResult.action, watchResult);
                 });
             }, {
                 deep: this._settings.deep

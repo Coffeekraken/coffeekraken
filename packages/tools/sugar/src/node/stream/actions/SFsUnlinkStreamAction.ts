@@ -77,7 +77,7 @@ export = class SFsUnlinkStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    return super.run(streamObj, async (resolve, reject) => {
+    return super.run(streamObj, async ({ resolve, reject }) => {
       __rimraf.sync(streamObj.unlink);
       delete streamObj.unlink;
       resolve(streamObj);

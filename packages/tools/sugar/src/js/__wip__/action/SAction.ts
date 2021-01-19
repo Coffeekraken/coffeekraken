@@ -102,7 +102,7 @@ export default class SAction extends __SPromise {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(descriptorObj, settings = {}) {
-    super((resolve, reject, trigger) => {});
+    super((resolve, reject, emit) => {});
     this._settings = __deepMerge({}, settings);
     this._descriptorObj = descriptorObj;
   }
@@ -122,19 +122,19 @@ export default class SAction extends __SPromise {
    */
   run() {
     const promise = new __SPromise(
-      (resolve, reject, trigger) => {
-        SAction._promise.trigger(`${this.constructor.name}.run`, this);
-        trigger(`run`, this);
-        this.trigger(`run`, this);
+      ({ resolve, reject, emit }) => {
+        SAction._promise.emit(`${this.constructor.name}.run`, this);
+        emit(`run`, this);
+        this.emit(`run`, this);
       },
       {
         id: SAction._promise.id + 'Run'
       }
     );
     promise.complete = () => {
-      SAction._promise.trigger(`${this.constructor.name}.complete`, this);
-      promise.trigger('complete', this);
-      this.trigger(`complete`, this);
+      SAction._promise.emit(`${this.constructor.name}.complete`, this);
+      promise.emit('complete', this);
+      this.emit(`complete`, this);
     };
     return promise;
   }

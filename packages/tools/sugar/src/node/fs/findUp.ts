@@ -40,7 +40,7 @@ const fn: IFindUp = function findUp(
     ...settings
   };
 
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async ({ resolve, reject }) => {
     const cwd = settings.cwd;
     let currentPath = cwd.split('/').filter((p) => p.trim() !== '');
     let foundedFiles = [];

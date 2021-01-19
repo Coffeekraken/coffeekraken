@@ -70,7 +70,7 @@ module.exports = class SFrontspec extends SPromise_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     search(settings = {}) {
-        return new SPromise_1.default((resolve, reject, trigger) => {
+        return new SPromise_1.default(({ resolve, reject, emit }) => {
             settings = deepMerge_1.default(this._settings, {}, settings);
             // let filenamesArray = settings.filename;
             // if (!Array.isArray(filenamesArray)) filenamesArray = [filenamesArray];
@@ -127,7 +127,7 @@ module.exports = class SFrontspec extends SPromise_1.default {
      */
     json(settings = {}) {
         settings = deepMerge_1.default(this._settings, {}, settings);
-        return new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
             try {
                 // initiating the frontspecJson object
                 const packageJson = json_1.default();

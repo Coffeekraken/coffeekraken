@@ -54,7 +54,7 @@ module.exports = (_a = class SFsCopyStreamAction extends SActionsStreamAction_1.
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings = this._settings) {
-            return super.run(streamObj, (resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            return super.run(streamObj, ({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
                 ncp_1.ncp(streamObj.input, streamObj.outputDir, (e) => {
                     if (e)
                         return reject(e);

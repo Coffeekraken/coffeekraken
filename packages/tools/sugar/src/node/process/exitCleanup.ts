@@ -27,7 +27,7 @@ import __minimatch from 'minimatch';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function exitCleanup(settings = {}) {
-  return new Promise((resolve, reject) => {
+  return new Promise(({ resolve, reject }) => {
     settings = __deepMerge(
       {
         pid: [],

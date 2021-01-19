@@ -50,28 +50,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         return __awaiter(this, void 0, void 0, function () {
             var _this = this;
             return __generator(this, function (_a) {
-                return [2 /*return*/, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                        var index;
-                        return __generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    index = 0;
-                                    _a.label = 1;
-                                case 1:
-                                    if (!(index < array.length)) return [3 /*break*/, 4];
-                                    return [4 /*yield*/, asyncFn(array[index], index, array)];
-                                case 2:
-                                    _a.sent();
-                                    _a.label = 3;
-                                case 3:
-                                    index++;
-                                    return [3 /*break*/, 1];
-                                case 4:
-                                    resolve();
-                                    return [2 /*return*/];
-                            }
+                return [2 /*return*/, new Promise(function (_a) {
+                        var resolve = _a.resolve, reject = _a.reject;
+                        return __awaiter(_this, void 0, void 0, function () {
+                            var index;
+                            return __generator(this, function (_b) {
+                                switch (_b.label) {
+                                    case 0:
+                                        index = 0;
+                                        _b.label = 1;
+                                    case 1:
+                                        if (!(index < array.length)) return [3 /*break*/, 4];
+                                        return [4 /*yield*/, asyncFn(array[index], index, array)];
+                                    case 2:
+                                        _b.sent();
+                                        _b.label = 3;
+                                    case 3:
+                                        index++;
+                                        return [3 /*break*/, 1];
+                                    case 4:
+                                        resolve();
+                                        return [2 /*return*/];
+                                }
+                            });
                         });
-                    }); })];
+                    })];
             });
         });
     };

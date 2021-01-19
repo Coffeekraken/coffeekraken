@@ -33,7 +33,7 @@ export = async function asyncForEach(
   array: any[],
   asyncFn: IAsyncForEach
 ): Promise<any> {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async ({ resolve, reject }) => {
     for (let index = 0; index < array.length; index++) {
       await asyncFn(array[index], index, array);
     }

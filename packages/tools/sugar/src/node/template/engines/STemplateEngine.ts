@@ -35,7 +35,7 @@ import __sugarConfig from '../../config/sugar';
  *      super(settings);
  *    }
  *    render(path, data = {}, settings = {}) {
- *      return new SPromise((resolve, reject, trigger) => {
+ *      return new SPromise(({ resolve, reject, emit }) => {
  *        // ...
  *        resolve(compiledTemplateString);
  *      });
@@ -71,4 +71,4 @@ export = class STemplateEngine {
   constructor(settings = {}) {
     this._settings = __deepMerge({}, settings);
   }
-}
+};

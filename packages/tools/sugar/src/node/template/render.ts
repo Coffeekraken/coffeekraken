@@ -43,7 +43,7 @@ import __unique from '../array/unique';
  */
 function render(viewPath, data = null, settings = {}) {
   return new __SPromise(
-    async (resolve, reject, trigger) => {
+    async ({ resolve, reject, emit }) => {
       const templateInstance = new __STemplate(viewPath, {
         ...settings
       });

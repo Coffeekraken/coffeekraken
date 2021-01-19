@@ -82,9 +82,9 @@ export = class SFsDeamonProcess extends __SProcess {
    *
    * This method start the watching process and returns you an SPromise instance on which you can subscribe
    * for these events:
-   * - update: Triggered when a file has been updated
-   * - delete: Triggered when a file has been deleted
-   * - add: Triggered when a file has been added
+   * - update: emited when a file has been updated
+   * - delete: emited when a file has been deleted
+   * - add: emited when a file has been added
    * The parameter passed along these events are an ```SFileInterface``` compatible object
    *
    * @param         {String|Array<String>}          input           The input glob pattern(s) to specify what to watch
@@ -126,7 +126,7 @@ export = class SFsDeamonProcess extends __SProcess {
             ''
           )}</yellow>" <cyan>${file.size}</cyan>mb`
         });
-        this.trigger('update', file.toObject());
+        this.emit('update', file.toObject());
       })
       .on('add', (filepath) => {
         const file = this._getFileInstanceFromPath(filepath);
@@ -140,7 +140,7 @@ export = class SFsDeamonProcess extends __SProcess {
           )}</green>" <cyan>${file.size}</cyan>mb`
         });
 
-        this.trigger('add', file.toObject());
+        this.emit('add', file.toObject());
       })
       .on('unlink', (filepath) => {
         delete this._filesCache[filepath];
@@ -153,7 +153,7 @@ export = class SFsDeamonProcess extends __SProcess {
           )}</red>"`
         });
 
-        this.trigger('unlink', {
+        this.emit('unlink', {
           path: filepath
         });
       });

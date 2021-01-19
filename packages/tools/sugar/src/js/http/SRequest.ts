@@ -262,7 +262,7 @@ export = class SRequest {
    */
   send(requestSettings = {}) {
     // return a promise
-    return new Promise((resolve, reject) => {
+    return new Promise(({ resolve, reject }) => {
       // // check if a cache exist and if we have the content
       // if (this._settings.cache) {
       //   const response = this._settings.cache.get(this._defaultRequestSettings.url);

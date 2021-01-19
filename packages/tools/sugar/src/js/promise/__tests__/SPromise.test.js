@@ -45,14 +45,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../SPromise"], factory);
+        define(["require", "exports", "../../time/wait", "../SPromise"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    var wait_1 = __importDefault(require("../../time/wait"));
     var SPromise_1 = __importDefault(require("../SPromise"));
     describe('sugar.js.promise', function () {
-        it('Should', function (done) { return __awaiter(void 0, void 0, void 0, function () {
+        it('Should create and resolve a promise using API', function (done) { return __awaiter(void 0, void 0, void 0, function () {
             var promise, promiseRes;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -62,10 +63,77 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         });
                         setTimeout(function () {
                             promise.resolve('Hello');
-                        }, 2000);
+                        }, 100);
                         return [4 /*yield*/, promise];
                     case 1:
                         promiseRes = _a.sent();
+                        expect(promiseRes).toBe('Hello');
+                        done();
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it('Should create and resolve a promise using executor function API', function (done) { return __awaiter(void 0, void 0, void 0, function () {
+            var promise, promiseRes;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        promise = new SPromise_1.default(function (_a) {
+                            var resolve = _a.resolve;
+                            return __awaiter(void 0, void 0, void 0, function () {
+                                return __generator(this, function (_b) {
+                                    switch (_b.label) {
+                                        case 0: return [4 /*yield*/, wait_1.default(100)];
+                                        case 1:
+                                            _b.sent();
+                                            resolve('Hello');
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            });
+                        });
+                        return [4 /*yield*/, promise];
+                    case 1:
+                        promiseRes = _a.sent();
+                        expect(promiseRes).toBe('Hello');
+                        done();
+                        return [2 /*return*/];
+                }
+            });
+        }); });
+        it('Should create and emit an event that will be catched correctly', function (done) { return __awaiter(void 0, void 0, void 0, function () {
+            var promise, eventCatched, promiseRes;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        promise = new SPromise_1.default(function (_a) {
+                            var resolve = _a.resolve, emit = _a.emit;
+                            return __awaiter(void 0, void 0, void 0, function () {
+                                return __generator(this, function (_b) {
+                                    switch (_b.label) {
+                                        case 0: return [4 /*yield*/, wait_1.default(100)];
+                                        case 1:
+                                            _b.sent();
+                                            emit('update', 'World');
+                                            return [4 /*yield*/, wait_1.default(200)];
+                                        case 2:
+                                            _b.sent();
+                                            resolve('Hello');
+                                            return [2 /*return*/];
+                                    }
+                                });
+                            });
+                        });
+                        eventCatched = false;
+                        promise.on('update', function (value, metas) {
+                            console.log('UPDA', value, metas);
+                            if (value === 'World')
+                                eventCatched = true;
+                        });
+                        return [4 /*yield*/, promise];
+                    case 1:
+                        promiseRes = _a.sent();
+                        expect(eventCatched).toBe(true);
                         expect(promiseRes).toBe('Hello');
                         done();
                         return [2 /*return*/];

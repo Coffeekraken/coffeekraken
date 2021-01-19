@@ -493,7 +493,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
       }
       this._props[prop].responsiveValues[media] = value;
       // trigger a "prop" event
-      this._triggerPropsEvents(prop);
+      this._emitPropsEvents(prop);
     }
 
     /**
@@ -693,7 +693,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
               );
             }
             // trigger a "prop" event
-            this._triggerPropsEvents(prop);
+            this._emitPropsEvents(prop);
           }
         });
         this.promise.on(`props.${prop}.*`, (update) => {
@@ -825,7 +825,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
       });
       this.dispatchEvent(event);
       // // dispatch event through the SPromise internal instance
-      // this.promise.trigger(name, value || this);
+      // this.promise.emit(name, value || this);
       // // dispatch a general event
       // __dispatch(`${this.metas.dashName}.${name}`, {
       //   target: this,
@@ -837,11 +837,11 @@ function SWebComponentGenerator(extendsSettings = {}) {
       // });
       // setTimeout(() => {
       //   // dispatch an SWebComponent level event
-      //   _sWebComponentPromise.trigger(`${this.metas.dashName}.${name}`, {
+      //   _sWebComponentPromise.emit(`${this.metas.dashName}.${name}`, {
       //     target: this,
       //     value
       //   });
-      //   _sWebComponentPromise.trigger(
+      //   _sWebComponentPromise.emit(
       //     `${this.metas.dashName}#${this._settings.id}.${name}`,
       //     {
       //       target: this,
@@ -1003,7 +1003,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
     }
 
     /**
-     * @name        _triggerPropsEvents
+     * @name        _emitPropsEvents
      * @type        Function
      * @private
      *
@@ -1013,7 +1013,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _triggerPropsEvents(prop) {
+    _emitPropsEvents(prop) {
       // trigger a "prop" event
       const eventObj = {
         prop,
@@ -1028,7 +1028,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
         media: __SMediaQuery.getActiveMedia()
       };
 
-      this.promise.trigger(`props.${prop}.${eventObj.action}`, eventObj);
+      this.promise.emit(`props.${prop}.${eventObj.action}`, eventObj);
     }
 
     /**

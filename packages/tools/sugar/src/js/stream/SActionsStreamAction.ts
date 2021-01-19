@@ -15,7 +15,7 @@ import __validatedefinitionect from '../validation/object/validatedefinitionect'
  *
  * This class represent the base of a actions stream action.
  * An action stream action represent an action that you can register in the SActionsStream instance and
- * prodive you some usefull features like "trigger" some events, set/get data from the streamObj, defining some required streamObj properties
+ * prodive you some usefull features like "emit" some events, set/get data from the streamObj, defining some required streamObj properties
  * to work with, etc...
  *
  * @param       {Object}        actions         An object of actions to execute one after the other. The object has to be formatted like ```{ actionName: actionFunction }```
@@ -193,7 +193,7 @@ export = class SActionStreamAction extends __SPromise {
     promiseFn(
       this._currentPromise.resolve.bind(this._currentPromise),
       this._currentPromise.reject.bind(this._currentPromise),
-      this._currentPromise.trigger.bind(this._currentPromise),
+      this._currentPromise.emit.bind(this._currentPromise),
       this._currentPromise.cancel.bind(this._currentPromise)
     );
 
@@ -211,11 +211,11 @@ export = class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   error(message) {
-    // this.trigger('error', {
+    // this.emit('error', {
     //   value: `<red>✚</red> ${message}`
     // });
     // if (!this._currentPromise) return;
-    // this._currentPromise.trigger('log', {
+    // this._currentPromise.emit('log', {
     //   value: `<red>✚</red> ${message}`
     // });
   }
@@ -231,11 +231,11 @@ export = class SActionStreamAction extends __SPromise {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   warn(message) {
-    this.trigger('log', {
+    this.emit('log', {
       value: `<yellow>⚠</yellow> ${message}`
     });
     if (!this._currentPromise) return;
-    this._currentPromise.trigger('log', {
+    this._currentPromise.emit('log', {
       value: `<yellow>⚠</yellow> ${message}`
     });
   }
@@ -253,17 +253,17 @@ export = class SActionStreamAction extends __SPromise {
   log(obj) {
     setTimeout(() => {
       if (typeof obj === 'string') {
-        this.trigger('log', {
+        this.emit('log', {
           value: obj
         });
         if (!this._currentPromise) return;
-        this._currentPromise.trigger('log', {
+        this._currentPromise.emit('log', {
           value: obj
         });
       } else {
-        this.trigger('log', obj);
+        this.emit('log', obj);
         if (!this._currentPromise) return;
-        this._currentPromise.trigger('log', obj);
+        this._currentPromise.emit('log', obj);
       }
     });
   }

@@ -14,12 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     "use strict";
     var SPromise_1 = __importDefault(require("../promise/SPromise"));
     /**
-     * @name        trigger
+     * @name        emit
      * @namespace           sugar.js.event
      * @type          Function
      * @stable
      *
-     * This function can ben used to trigger an event globally.
+     * This function can ben used to emit an event globally.
      * You can subscribe to these events using the "sugar.js.event.subscribe" function
      *
      * @param         {String}        name          The event name you want to trigger to
@@ -30,21 +30,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @todo      tests
      *
      * @example       js
-     * const trigger = require('@coffeekraken/sugar/js/event/trigger');
-     * trigger('something', 'Hello world');
+     * const emit = require('@coffeekraken/sugar/js/event/emit');
+     * emit('something', 'Hello world');
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function trigger(name, value) {
+    function emit(name, value) {
         // check that the global SPromise exists
         if (!window._sugarEventSPromise)
             window._sugarEventSPromise = new SPromise_1.default({
                 id: 'sugarEventSPromise'
             });
-        // trigger to the event
-        window._sugarEventSPromise.trigger(name, value);
+        // emit to the event
+        window._sugarEventSPromise.emit(name, value);
     }
-    return trigger;
+    return emit;
 });
-//# sourceMappingURL=dispatch.js.map
+//# sourceMappingURL=emit.js.map

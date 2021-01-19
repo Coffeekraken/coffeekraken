@@ -20,7 +20,7 @@ const onProcessExit_1 = __importDefault(require("../process/onProcessExit"));
  * @todo      doc
  * @todo      tests
  *
- * @event       state       Triggered when the state change
+ * @event       state       emited when the state change
  *
  * @ince          2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -156,16 +156,16 @@ class SDeamon extends SPromise_1.default {
         SPromise_1.default.pipe(watchPromise, this);
         // update state
         this.state = 'watching';
-        this.trigger('state', this.state);
+        this.emit('state', this.state);
         // listen for the end of the watching process
         watchPromise
             .on('finally', () => {
             this.state = 'idle';
-            this.trigger('state', this.state);
+            this.emit('state', this.state);
         })
             .on('error', () => {
             this.state = 'error';
-            this.trigger('state', this.state);
+            this.emit('state', this.state);
         });
         onProcessExit_1.default(() => {
             watchPromise.cancel();

@@ -52,6 +52,8 @@ export interface ISClassExposeSettings {
 export interface ISClass {
   _settings: ISClassSettings;
   id: string;
+  name: string;
+  formattedName: string;
 }
 
 class SClass implements ISClass {
@@ -82,10 +84,53 @@ class SClass implements ISClass {
     return this._settings.id || this.constructor.name;
   }
 
+  /**
+   * @name            name
+   * @type            String
+   * @get
+   *
+   * Access the name setted in the ```_settings.name```
+   * By default, the name will be the ```constructor.name```
+   *
+   * @since           2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  public get name() {
+    return this._settings.name || this.constructor.name;
+  }
+
+  /**
+   * @name      formattedName
+   * @type      String
+   * @get
+   *
+   * Access the process name and (not the same as a node process name)
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get formattedName() {
+    let name = `<yellow>${this.name || ''}</yellow>`;
+    if (this.id) {
+      name += ` <cyan>${this.id}</cyan>`;
+    }
+    return name;
+  }
+
   static extends(Cls: any) {
-    class SClass extends Cls implements ISClass {
+    class SClass extends Cls {
       public get id() {
         return this._settings.id || this.constructor.name;
+      }
+      public get name() {
+        return this._settings.name || this.constructor.name;
+      }
+      get formattedName() {
+        let name = `<yellow>${this.name || ''}</yellow>`;
+        if (this.id) {
+          name += ` <cyan>${this.id}</cyan>`;
+        }
+        return name;
       }
       _settings: ISClassSettings = {};
       constructor(settings: any, ...args) {

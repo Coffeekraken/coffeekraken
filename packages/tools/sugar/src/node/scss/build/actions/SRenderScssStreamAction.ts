@@ -67,7 +67,7 @@ export = class SRenderSassStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    return super.run(streamObj, async (resolve, reject, trigger) => {
+    return super.run(streamObj, async ({ resolve, reject, emit }) => {
       // compile using the SScssCompiler class
       if (!streamObj.outputStack) streamObj.outputStack = {};
 
@@ -81,4 +81,4 @@ export = class SRenderSassStreamAction extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-}
+};

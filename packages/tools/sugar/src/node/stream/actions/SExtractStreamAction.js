@@ -51,7 +51,7 @@ module.exports = (_a = class SExtractStreamAction extends SActionsStreamAction_1
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings) {
-            return super.run(streamObj, (resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            return super.run(streamObj, ({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
                 const reg = /\/\*\s?extract:([a-zA-Z0-9-_]+)\s?\*\/(((?!\/\*\s?extract\s?\*\/)(.|\n))*)\/\*\s?extract\s?\*\//g;
                 const source = streamObj[settings.sourceProp];
                 let myArray;

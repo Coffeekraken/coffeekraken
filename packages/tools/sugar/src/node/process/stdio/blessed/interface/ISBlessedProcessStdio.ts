@@ -11,7 +11,7 @@ import ISPromise from '../../../../promise/interface/ISPromise';
 import ISProcessStdio, {
   ISProcessStdioSettings
 } from '../../../interface/ISProcessStdio';
-import ILog from '../../../../log/interface/ILog';
+import { ILog } from '../../../../log/log';
 
 export interface ISBlessedProcessStdioSettings extends ISProcessStdioSettings {
   filter?: Function;

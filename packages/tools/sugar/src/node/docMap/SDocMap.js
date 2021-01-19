@@ -76,18 +76,18 @@ module.exports = class SDocMap extends SPromise_1.default {
      */
     find(settings = {}) {
         settings = deepMerge_1.default(this._settings, {}, settings);
-        return new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
             // generate the glob pattern to use
             const patterns = settings.find.globs;
             let files = [];
-            trigger('log', {
+            emit('log', {
                 value: `Searching docMaps using globs:\n- <yellow>${patterns.join('</yellow>\n- ')}</yellow>`
             });
             for (let i = 0; i < patterns.length; i++) {
                 const foundedFiles = yield SGlob_1.default.resolve(patterns[i]);
                 files = [...files, ...foundedFiles];
             }
-            trigger('log', {
+            emit('log', {
                 value: `Found <yellow>${files.length}</yellow> docMap file(s):\n- <cyan>${files.join('</cyan>\n- ')}</cyan>`
             });
             resolve(files);
@@ -114,9 +114,9 @@ module.exports = class SDocMap extends SPromise_1.default {
      */
     read(settings = {}) {
         settings = deepMerge_1.default(this._settings, {}, settings);
-        return new SPromise_1.default((resolve, reject, trigger, promise) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default(({ resolve, pipe }) => __awaiter(this, void 0, void 0, function* () {
             const filesPromise = this.find(settings);
-            promise.pipe(filesPromise);
+            pipe(filesPromise);
             const files = yield filesPromise;
             let docMapJson = {};
             // loop on all files
@@ -148,11 +148,11 @@ module.exports = class SDocMap extends SPromise_1.default {
      */
     generate(settings = {}) {
         settings = deepMerge_1.default(this._settings, {}, settings);
-        return new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
             let globs = settings.generate.globs;
             if (!Array.isArray(globs))
                 globs = [globs];
-            trigger('log', {
+            emit('log', {
                 value: `Searching files to use as docMap sources using globs:\n- <yellow>${globs.join('</yellow>\n- ')}</yellow>`
             });
             for (let i = 0; i < globs.length; i++) {
@@ -165,7 +165,7 @@ module.exports = class SDocMap extends SPromise_1.default {
                         return true;
                     return !file.path.match(settings.generate.exclude.path);
                 });
-                trigger('log', {
+                emit('log', {
                     value: `<yellow>${files.length}</yellow> file(s) found using the glob "<cyan>${glob}</cyan>"`
                 });
                 // loop on each files to check for docblocks
@@ -211,7 +211,7 @@ module.exports = class SDocMap extends SPromise_1.default {
                     });
                 }
             }
-            trigger('log', {
+            emit('log', {
                 value: `<green>${Object.keys(this._entries).length}</green> entries generated for this docMap`
             });
             resolve(this._entries);
@@ -242,14 +242,14 @@ module.exports = class SDocMap extends SPromise_1.default {
             output = outputOrSettings;
         }
         settings = deepMerge_1.default(this._settings, {}, settings);
-        return new SPromise_1.default((resolve, reject, trigger, promise) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default(({ resolve, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
             let entries = this._entries;
             if (!this._entries.length) {
                 const generatePromise = this.generate(settings);
-                promise.pipe(generatePromise);
+                pipe(generatePromise);
                 entries = yield generatePromise;
             }
-            trigger('log', {
+            emit('log', {
                 value: `Saving the docMap file to "<cyan>${output}</cyan>"`
             });
             removeSync_1.default(output);

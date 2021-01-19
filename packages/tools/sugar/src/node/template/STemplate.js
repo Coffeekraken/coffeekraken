@@ -298,7 +298,7 @@ class STemplate {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     render(data = {}, settings = {}) {
-        return new SPromise_1.default((resolve, reject, trigger, promiseApi) => __awaiter(this, void 0, void 0, function* () {
+        return new SPromise_1.default(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
             settings = deepMerge_1.default(this._settings, settings);
             data = deepMerge_1.default(settings.defaultData, data);
             if (this._templateString) {

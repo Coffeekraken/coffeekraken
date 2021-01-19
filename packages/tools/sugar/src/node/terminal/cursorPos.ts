@@ -28,7 +28,7 @@ import { terminal as __terminalKit } from 'terminal-kit';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function cursorPos() {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async ({ resolve, reject }) => {
     __terminalKit.once('terminal', (name, data) => {
       resolve(data);
     });

@@ -77,7 +77,7 @@ export = class SFsOutputStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    return super.run(streamObj, async (resolve, reject, trigger) => {
+    return super.run(streamObj, async ({ resolve, reject, emit }) => {
       if (!streamObj.outputStack || typeof streamObj.outputStack !== 'object') {
         this.warn(
           `The streamObj does not contain any "<cyan>outputStack</cyan>" property so no file will be saved at all...`

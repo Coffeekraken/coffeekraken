@@ -20,7 +20,7 @@ const child_process_1 = __importDefault(require("child_process"));
 const fs_1 = __importDefault(require("fs"));
 module.exports = function linkPackages(settings = {}) {
     settings = Object.assign({ rootDir: process.cwd() }, settings);
-    return new SPromise_1.default((resolve, reject, trigger, cancel) => __awaiter(this, void 0, void 0, function* () {
+    return new SPromise_1.default((resolve, reject, emit) => __awaiter(this, void 0, void 0, function* () {
         // make sure we are in a package
         if (!fs_1.default.existsSync(`${settings.rootDir}/package.json`)) {
             return reject(`Sorry but the rootDir passed "<yellow>${settings.rootDir}</yellow>" does not contain any "<cyan>package.json</cyan>" file...`);
@@ -32,7 +32,7 @@ module.exports = function linkPackages(settings = {}) {
             // get json
             const packageJson = packagesObj[packagePath];
             // logs
-            trigger('log', {
+            emit('log', {
                 value: `<yellow>${packageJson.name}</yellow> (<cyan>${packageJson.version}</cyan>)`
             });
             // loop again in the packagesObj to create symlink in every
@@ -62,7 +62,7 @@ module.exports = function linkPackages(settings = {}) {
                 const relPathToDestinationModule = path_1.default.relative(symlinkFolderPath, destinationModulePath);
                 child_process_1.default.execSync(`cd ${symlinkFolderPath} && rm -rf ${nameFolder} && ln -s ${relPathToDestinationModule} ${nameFolder}`);
                 // logs
-                trigger('log', {
+                emit('log', {
                     value: `- Symlinked package <green>${json.name}</green>`
                 });
             });

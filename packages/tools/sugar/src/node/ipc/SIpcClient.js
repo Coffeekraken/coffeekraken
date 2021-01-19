@@ -153,7 +153,7 @@ class SIpcClient {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     connect(params) {
-        return new SPromise_1.default((resolve, reject) => {
+        return new SPromise_1.default(({ resolve, reject }) => {
             // check if params have only 1 id
             if (plainObject_1.default(params) === true &&
                 Object.keys(params).length === 1 &&
@@ -164,7 +164,7 @@ class SIpcClient {
                 this._ipcInstance.connectTo(params, () => {
                     this.serverId = params;
                     this._ipcInstance.of[this.serverId].on('connect', () => {
-                        // this.trigger('connected');
+                        // this.emit('connected');
                         resolve({
                             server: {
                                 id: this.serverId
@@ -172,7 +172,7 @@ class SIpcClient {
                         });
                     });
                     // this._ipcInstance.of[this.serverId].on('disconnect', () => {
-                    //   // this.trigger('disconnected');
+                    //   // this.emit('disconnected');
                     // });
                 });
             }
@@ -180,7 +180,7 @@ class SIpcClient {
                 this._ipcInstance.connectToNet(params.id, params.host || 'localhost', params.port || 3435, () => {
                     this.serverId = params.id;
                     this._ipcInstance.of[this.serverId].on('connect', () => {
-                        // this.trigger('connected');
+                        // this.emit('connected');
                         resolve({
                             server: {
                                 id: this.serverId,
@@ -190,7 +190,7 @@ class SIpcClient {
                         });
                     });
                     // this._ipcInstance.of[this.serverId].on('disconnect', () => {
-                    //   // this.trigger('disconnected');
+                    //   // this.emit('disconnected');
                     // });
                 });
             }
@@ -199,20 +199,20 @@ class SIpcClient {
         });
     }
     /**
-     * @name          trigger
+     * @name          emit
      * @type          Function
      * @override
      *
      * This method override the SPromise one to add the ipc "emit" functionality to it.
      *
-     * @param         {String|Array}        stack            The callbacks that you want to trigger. Can be "then", "catch", "finally" or "cancel". You can trigger multiple stacks by passing an Array like ['then','finally'], or a string like "then,finally"
+     * @param         {String|Array}        stack            The callbacks that you want to emit. Can be "then", "catch", "finally" or "cancel". You can emit multiple stacks by passing an Array like ['then','finally'], or a string like "then,finally"
      * @param         {Mixed}         data         The argument you want to pass to the callback
      * @return        {Promise}                       A default Promise that will be resolved with the result of the stack execution
      *
      * @since         2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    trigger(stack, data) {
+    emit(stack, data) {
         // preparing the object to send
         const eventObj = {
             stack: process.env.S_IPC_SPAWN_ID

@@ -68,7 +68,7 @@ export = class SCompileJsStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    return super.run(streamObj, async (resolve, reject) => {
+    return super.run(streamObj, async ({ resolve, reject }) => {
       const compiler = new __SJsCompiler(streamObj);
       const compileRes = await compiler.compile(streamObj.input);
 

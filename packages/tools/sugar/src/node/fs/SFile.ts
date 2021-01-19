@@ -321,7 +321,7 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
     if (this._watcher) return;
     this._watcher = __fs.watchFile(this.path, (event) => {
       this.update();
-      this.trigger('update', this);
+      this.emit('update', this);
     });
   }
 

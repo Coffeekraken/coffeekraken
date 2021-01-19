@@ -40,7 +40,7 @@ const onProcessExit_1 = __importDefault(require("../process/onProcessExit"));
 const fn = function watch(paths, settings = {}) {
     settings = Object.assign({ SFile: true, ignoreInitial: true, ignored: ['**/node_modules/**/*', '**/.git/**/*'] }, settings);
     let watcher;
-    const promise = new SPromise_1.default((resolve, reject, trigger) => {
+    const promise = new SPromise_1.default(({ resolve, reject, emit }) => {
         watcher = chokidar_1.default
             // @ts-ignore
             .watch(paths, Object.assign({}, settings))
@@ -48,35 +48,35 @@ const fn = function watch(paths, settings = {}) {
             const file = new SFile_1.default(path.toString(), {
                 cwd: settings.cwd || null
             });
-            trigger('add', file);
+            emit('add', file);
         })
             .on('change', (path) => {
             const file = new SFile_1.default(path.toString(), {
                 cwd: settings.cwd || null
             });
-            trigger('change', file);
+            emit('change', file);
         })
             .on('unlink', (path) => {
             const file = new SFile_1.default(path.toString(), {
                 cwd: settings.cwd || null,
                 checkExistence: false
             });
-            trigger('unlink', file);
+            emit('unlink', file);
         })
             .on('addDir', (path) => {
-            trigger('addDir', path);
+            emit('addDir', path);
         })
             .on('unlinkDir', (path) => {
-            trigger('unlinkDir', path);
+            emit('unlinkDir', path);
         })
             .on('error', (error) => {
-            trigger('error', error);
+            emit('error', error);
         })
             .on('ready', () => {
-            trigger('ready');
+            emit('ready');
         })
             .on('raw', (event, path, details) => {
-            trigger('raw', {
+            emit('raw', {
                 event,
                 path,
                 details

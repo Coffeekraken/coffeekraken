@@ -220,7 +220,6 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
   }
 
   _moduleError(data: any, metas: any) {
-
     return;
 
     const moduleObj = this._findModuleObjById(data.module.id);
@@ -290,7 +289,6 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
   // }
 
   _moduleSuccess(data: any, metas: any) {
-
     return;
 
     const moduleObj = this._findModuleObjById(data.module.id);
@@ -325,7 +323,6 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
   }
 
   _moduleState(data: any, metas: any) {
-
     return;
 
     const moduleObj = this._modulesObjs[data.module.idx];
@@ -338,7 +335,6 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
   }
 
   _moduleStart(data: any, metas: any) {
-
     return;
 
     const moduleObj = this._findModuleObjById(data.module.id);
@@ -770,8 +766,8 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
 
           __hotkey(`ctrl+${presetObj.key}`).on('press', () => {
             if (this._displayedModuleId !== moduleObj.id) return;
-            // trigger a new event
-            moduleObj.instance.trigger('preset', {
+            // emit a new event
+            moduleObj.instance.emit('preset', {
               ...presetObj
             });
           });

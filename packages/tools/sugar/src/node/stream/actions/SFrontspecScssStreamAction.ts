@@ -82,7 +82,7 @@ export = class SFrontspecScssStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    return super.run(streamObj, async (resolve, reject) => {
+    return super.run(streamObj, async ({ resolve, reject }) => {
       if (!streamObj.frontspec) return resolve(streamObj);
 
       const frontspec = new __SFrontspec();

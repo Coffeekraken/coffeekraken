@@ -51,7 +51,7 @@ module.exports = (_a = class SDocMapStreamActions extends __SActionsStreamAction
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings) {
-            return super.run(streamObj, (resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            return super.run(streamObj, ({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
                 const docMap = new __SDocMap(settings);
                 const res = yield docMap.generate();
                 if (res) {

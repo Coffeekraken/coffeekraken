@@ -35,7 +35,7 @@ const download_file_1 = __importDefault(require("download-file"));
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function downloadFileFn(downloadUrl, destinationPath = downloads_folder_1.default(), callback = null) {
-    return new Promise((resolve, reject) => {
+    return new Promise(({ resolve, reject }) => {
         let fileStreamDest;
         let parsedDestinationPath = path_1.default.parse(destinationPath);
         let parsedDownloadUrl = path_1.default.parse(downloadUrl);

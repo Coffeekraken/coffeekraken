@@ -1,12 +1,36 @@
 // @ts-nocheck
 
-import ISProcessStdio, {
-  ISProcessStdioCtor,
-  ISProcessStdioSettings
-} from './interface/ISProcessStdio';
-import ISPromise from '../../promise/interface/ISPromise';
 import _deepMerge from '../../object/deepMerge';
-import __SPromise from '../../promise/SPromise';
+import __SPromise, { ISPromise } from '../../promise/SPromise';
+import __SClass, { ISClass } from '../../class/SClass';
+import __SEventEmitter, { ISEventEmitter } from '../../event/SEventEmitter';
+
+import { ILog } from '../../log/log';
+
+export interface ISProcessStdioCtorSettings {
+  processStdio?: ISProcessStdioSettings;
+}
+
+export interface ISProcessStdioOptionalSettings {}
+export interface ISProcessStdioSettings {}
+
+export interface ISProcessStdioCtor {
+  new (
+    source: ISPromise | ISPromise[],
+    settings: ISProcessStdioSettings
+  ): ISProcessStdio;
+}
+
+export interface ISProcessStdioLog extends ILog {}
+
+export interface ISProcessStdioLogFn {
+  (...logs: ISProcessStdioLog): void;
+}
+
+export interface ISProcessStdio extends ISClass {
+  _sources: ISEventEmitter[];
+  log: ISProcessStdioLogFn;
+}
 
 /**
  * @name          SProcessStdio
@@ -17,7 +41,7 @@ import __SPromise from '../../promise/SPromise';
  * This class represent the base one for all the process "Stdio"
  * compatible setting.
  *
- * @param     {ISProcessStdioSettings}     [settings={}]       Some settings to configure your Stdio
+ * @param     {ISProcessStdioCtorSettings}     [settings={}]       Some settings to configure your Stdio
  *
  * @todo      interface
  * @todo      doc
@@ -35,19 +59,7 @@ import __SPromise from '../../promise/SPromise';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls: ISProcessStdioCtor = class SProcessStdio implements ISProcessStdio {
-  /**
-   * @name      _settings
-   * @type      ISProcessStdioSettings
-   * @private
-   *
-   * Store the process Stdio settings
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _settings: ISProcessStdioSettings = {};
-
+class SProcessStdio extends __SClass implements ISProcessStdio {
   /**
    * @name      _sources
    * @type      Array<SPromise>
@@ -58,19 +70,7 @@ const Cls: ISProcessStdioCtor = class SProcessStdio implements ISProcessStdio {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _sources: ISPromise[];
-
-  /**
-   * @name      _promise
-   * @type      SPromise
-   * @private
-   *
-   * Store an SPromise instance to allow trigger and subscribing to events
-   *
-   * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _promise: undefined;
+  _sources: ISEventEmitter[];
 
   /**
    * @name      constructor
@@ -83,49 +83,28 @@ const Cls: ISProcessStdioCtor = class SProcessStdio implements ISProcessStdio {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(
-    source: ISPromise | ISPromise[],
-    settings: ISProcessStdioSettings = {}
+    source: ISEventEmitter | ISEventEmitter[],
+    settings: ISProcessStdioCtorSettings = {}
   ) {
+    super(
+      _deepMerge(
+        {
+          processStdio: {}
+        },
+        settings
+      )
+    );
     this._sources = Array.isArray(source) ? source : [source];
-    this._settings = _deepMerge({}, settings);
-    this._promise = new __SPromise();
+    this.expose(
+      new __SEventEmitter({
+        id: this.id
+      }),
+      {
+        as: 'eventEmitter',
+        props: ['on', 'off', 'emit']
+      }
+    );
   }
+}
 
-  /**
-   * @name          trigger
-   * @type          Function
-   *
-   * Trigger some "events" through the SPromise instance
-   *
-   * @param       {String}      stack         The stack (name) of the event
-   * @param       {Any}         data          The data to pass along the event
-   * @return      {SPromise}                  The SPromise instance to maintain chainability
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  trigger(stack, data) {
-    this._promise.trigger(stack, data);
-    return this._promise;
-  }
-
-  /**
-   * @name          on
-   * @type          Function
-   *
-   * Subscribe to some events emitted by the Stdio
-   *
-   * @param       {String}      stack         The stack (name) of the event
-   * @param       {Function}     callback       The callback to call when the event is fired
-   * @return      {SPromise}                  The SPromise instance to maintain chainability
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  on(stack, callback) {
-    this._promise.on(stack, callback);
-    return this._promise;
-  }
-};
-
-export = Cls;
+export default SProcessStdio;

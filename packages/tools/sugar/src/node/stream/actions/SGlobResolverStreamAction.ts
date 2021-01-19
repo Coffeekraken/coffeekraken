@@ -79,7 +79,7 @@ export = class SGlobResolverStreamAction extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings = this._settings) {
-    return super.run(streamObj, async (resolve, reject) => {
+    return super.run(streamObj, async ({ resolve, reject }) => {
       // resolve glob pattern
       const rootDir = streamObj[streamObj.globProperty];
       const files = __glob.sync(streamObj[streamObj.globProperty]);

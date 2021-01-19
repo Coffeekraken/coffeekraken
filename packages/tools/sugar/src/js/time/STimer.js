@@ -52,7 +52,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          */
         function STimer(duration, settings) {
             if (settings === void 0) { settings = {}; }
-            var _this = _super.call(this, function (resolve, reject, trigger) {
+            var _this = _super.call(this, function (_a) {
+                var resolve = _a.resolve, reject = _a.reject, emit = _a.emit;
                 _this.duration = duration;
                 // calculate the tickInterval
                 if (_this._settings.tickCount) {
@@ -174,7 +175,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     this.start();
                 }
                 // loop on each completes functions
-                this.trigger('complete', this);
+                this.emit('complete', this);
             }
             else {
                 // launch another tick
@@ -185,7 +186,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             }
             // loop on each ticks functions
             if (this.isStarted())
-                this.trigger('tick', this);
+                this.emit('tick', this);
         };
         Object.defineProperty(STimer.prototype, "remaining", {
             /**
@@ -226,7 +227,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time
                 }
                 // loop on each change duration functions
-                this.trigger('duration', this);
+                this.emit('duration', this);
             },
             enumerable: false,
             configurable: true
@@ -249,7 +250,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 this._tickCount = tickCount;
                 this._tickInterval = this._duration / this._tickCount;
                 // loop on each change tick count functions
-                this.trigger('tickCount', this);
+                this.emit('tickCount', this);
             },
             enumerable: false,
             configurable: true
@@ -295,7 +296,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (start)
                 this.start();
             // loop on each resets functions
-            this.trigger('reset', this);
+            this.emit('reset', this);
             // maintain chainability
             return this;
         };
@@ -348,7 +349,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 }, this._tickInterval);
             }
             // loop on each start functions
-            this.trigger('start', this);
+            this.emit('start', this);
             // maintain chainability
             return this;
         };
@@ -368,7 +369,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             // clean the interval
             clearTimeout(this._tickSetTimeout);
             // loop on each pause functions
-            this.trigger('pause', this);
+            this.emit('pause', this);
             // maintain chainability
             return this;
         };
@@ -386,7 +387,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             // reset
             this.reset();
             // loop on each stop functions
-            this.trigger('stop', this);
+            this.emit('stop', this);
             // maintain chainability
             return this;
         };
@@ -405,7 +406,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             this._completesCallbacks = [];
             this._ticksCallbacks = [];
             // loop on each destroy functions
-            this.trigger('destroy', this);
+            this.emit('destroy', this);
             // maintain chainability
             return this;
         };

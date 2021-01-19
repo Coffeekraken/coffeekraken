@@ -1,7 +1,7 @@
 // @ts-nocheck
 // @shared
 
-import ILog from './ILog';
+import { ILog } from '../log';
 
 export interface ISLogObj extends ILog {}
 

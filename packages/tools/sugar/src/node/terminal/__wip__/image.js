@@ -37,7 +37,7 @@ module.exports = function image(url, settings = {}) {
             char: '▇',
             color: null
         }, settings);
-        return new Promise((resolve, reject) => {
+        return new Promise(({ resolve, reject }) => {
             __imaging.draw(url, settings, function (resp, status) {
                 if (status === 'fail')
                     return reject(resp);

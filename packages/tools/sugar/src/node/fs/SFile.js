@@ -198,7 +198,7 @@ const Cls = class SFile extends SPromise_1.default {
             return;
         this._watcher = fs_1.default.watchFile(this.path, (event) => {
             this.update();
-            this.trigger('update', this);
+            this.emit('update', this);
         });
     }
     /**

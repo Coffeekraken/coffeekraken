@@ -42,7 +42,7 @@ module.exports = (_a = class SCompileJsStreamAction extends SActionsStreamAction
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings) {
-            return super.run(streamObj, (resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            return super.run(streamObj, ({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
                 const compiler = new SJsCompiler_1.default(streamObj);
                 const compileRes = yield compiler.compile(streamObj.input);
                 // otherwise, save the new data in the streamObj

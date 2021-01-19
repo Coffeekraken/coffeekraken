@@ -52,7 +52,7 @@ const SPromise_1 = __importDefault(require("../../promise/SPromise"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function js(filePath) {
-    return new SPromise_1.default((resolve) => __awaiter(this, void 0, void 0, function* () {
+    return new SPromise_1.default(({ resolve }) => __awaiter(this, void 0, void 0, function* () {
         resolve(yield Promise.resolve().then(() => __importStar(require(filePath))));
     }), {
         id: 'templateJsDataHandler'

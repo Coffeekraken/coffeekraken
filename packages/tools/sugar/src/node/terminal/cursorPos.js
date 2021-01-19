@@ -35,7 +35,7 @@ const terminal_kit_1 = require("terminal-kit");
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function cursorPos() {
-    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+    return new Promise(({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
         terminal_kit_1.terminal.once('terminal', (name, data) => {
             resolve(data);
         });

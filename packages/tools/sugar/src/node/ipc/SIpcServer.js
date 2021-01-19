@@ -33,7 +33,7 @@ const treatAsValue_1 = __importDefault(require("../promise/treatAsValue"));
  * @todo      interface
  * @todo      doc
  * @todo      tests
- * @todo      {Feature}       Integrate the "trigger" feature that let the server send messages to the clients
+ * @todo      {Feature}       Integrate the "emit" feature that let the server send messages to the clients
  *
  * @see             https://www.npmjs.com/package/node-ipc
  * @since           2.0.0
@@ -164,8 +164,8 @@ class SIpcServer extends SPromise_1.default {
             const serverData = yield this._start(params);
             // listen for events
             this._ipcInstance.server.on('event', (data, socket) => {
-                // trigger the event using the SPromise method
-                this.trigger(`${data.stack}`, data.data);
+                // emit the event using the SPromise method
+                this.emit(`${data.stack}`, data.data);
             });
             // save the connexion params
             this.connexionParams = serverData;
@@ -174,7 +174,7 @@ class SIpcServer extends SPromise_1.default {
         });
     }
     _start(params = null) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+        return new Promise(({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
             // check if params have only 1 id
             if (plainObject_1.default(params) === true &&
                 Object.keys(params).length === 1 &&
@@ -199,7 +199,7 @@ class SIpcServer extends SPromise_1.default {
             }
             else if (typeof params === 'object') {
                 this._ipcInstance.serveNet(params.host || 'localhost', port, params.UDPType || 'upd4', () => {
-                    // this.trigger('server.ready', {});
+                    // this.emit('server.ready', {});
                     return resolve({
                         id: this.id,
                         host: params.host || 'localhost',
@@ -227,7 +227,7 @@ class SIpcServer extends SPromise_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     stop() {
-        return new SPromise_1.default((resolve, reject) => {
+        return new SPromise_1.default(({ resolve, reject }) => {
             this._ipcInstance.server.stop();
             resolve();
         }, {

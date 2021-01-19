@@ -106,13 +106,13 @@ export = class SDocMap extends __SPromise {
   find(settings = {}) {
     settings = __deepMerge(this._settings, {}, settings);
     return new __SPromise(
-      async (resolve, reject, trigger) => {
+      async ({ resolve, reject, emit }) => {
         // generate the glob pattern to use
         const patterns = settings.find.globs;
 
         let files = [];
 
-        trigger('log', {
+        emit('log', {
           value: `Searching docMaps using globs:\n- <yellow>${patterns.join(
             '</yellow>\n- '
           )}</yellow>`
@@ -123,7 +123,7 @@ export = class SDocMap extends __SPromise {
           files = [...files, ...foundedFiles];
         }
 
-        trigger('log', {
+        emit('log', {
           value: `Found <yellow>${
             files.length
           }</yellow> docMap file(s):\n- <cyan>${files.join(
@@ -159,9 +159,9 @@ export = class SDocMap extends __SPromise {
   read(settings = {}) {
     settings = __deepMerge(this._settings, {}, settings);
     return new __SPromise(
-      async (resolve, reject, trigger, promise) => {
+      async ({ resolve, pipe }) => {
         const filesPromise = this.find(settings);
-        promise.pipe(filesPromise);
+        pipe(filesPromise);
         const files = await filesPromise;
 
         let docMapJson = {};
@@ -208,11 +208,11 @@ export = class SDocMap extends __SPromise {
   generate(settings = {}) {
     settings = __deepMerge(this._settings, {}, settings);
     return new __SPromise(
-      async (resolve, reject, trigger) => {
+      async ({ resolve, reject, emit }) => {
         let globs = settings.generate.globs;
         if (!Array.isArray(globs)) globs = [globs];
 
-        trigger('log', {
+        emit('log', {
           value: `Searching files to use as docMap sources using globs:\n- <yellow>${globs.join(
             '</yellow>\n- '
           )}</yellow>`
@@ -232,7 +232,7 @@ export = class SDocMap extends __SPromise {
             return !file.path.match(settings.generate.exclude.path);
           });
 
-          trigger('log', {
+          emit('log', {
             value: `<yellow>${files.length}</yellow> file(s) found using the glob "<cyan>${glob}</cyan>"`
           });
 
@@ -284,7 +284,7 @@ export = class SDocMap extends __SPromise {
           }
         }
 
-        trigger('log', {
+        emit('log', {
           value: `<green>${
             Object.keys(this._entries).length
           }</green> entries generated for this docMap`
@@ -322,16 +322,16 @@ export = class SDocMap extends __SPromise {
     settings = __deepMerge(this._settings, {}, settings);
 
     return new __SPromise(
-      async (resolve, reject, trigger, promise) => {
+      async ({ resolve, emit, pipe }) => {
         let entries = this._entries;
 
         if (!this._entries.length) {
           const generatePromise = this.generate(settings);
-          promise.pipe(generatePromise);
+          pipe(generatePromise);
           entries = await generatePromise;
         }
 
-        trigger('log', {
+        emit('log', {
           value: `Saving the docMap file to "<cyan>${output}</cyan>"`
         });
 

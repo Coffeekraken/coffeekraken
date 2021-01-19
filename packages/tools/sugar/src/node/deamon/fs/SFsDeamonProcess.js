@@ -45,9 +45,9 @@ module.exports = (_a = class SFsDeamonProcess extends SProcess_1.default {
          *
          * This method start the watching process and returns you an SPromise instance on which you can subscribe
          * for these events:
-         * - update: Triggered when a file has been updated
-         * - delete: Triggered when a file has been deleted
-         * - add: Triggered when a file has been added
+         * - update: emited when a file has been updated
+         * - delete: emited when a file has been deleted
+         * - add: emited when a file has been added
          * The parameter passed along these events are an ```SFileInterface``` compatible object
          *
          * @param         {String|Array<String>}          input           The input glob pattern(s) to specify what to watch
@@ -80,7 +80,7 @@ module.exports = (_a = class SFsDeamonProcess extends SProcess_1.default {
                     group: 'Updated files',
                     value: `File updated: "<yellow>${file.path.replace(packageRoot_1.default(file.path) + '/', '')}</yellow>" <cyan>${file.size}</cyan>mb`
                 });
-                this.trigger('update', file.toObject());
+                this.emit('update', file.toObject());
             })
                 .on('add', (filepath) => {
                 const file = this._getFileInstanceFromPath(filepath);
@@ -91,7 +91,7 @@ module.exports = (_a = class SFsDeamonProcess extends SProcess_1.default {
                     group: 'Added files',
                     value: `File added: "<green>${file.path.replace(packageRoot_1.default(file.path) + '/', '')}</green>" <cyan>${file.size}</cyan>mb`
                 });
-                this.trigger('add', file.toObject());
+                this.emit('add', file.toObject());
             })
                 .on('unlink', (filepath) => {
                 delete this._filesCache[filepath];
@@ -99,7 +99,7 @@ module.exports = (_a = class SFsDeamonProcess extends SProcess_1.default {
                     group: 'Deleted files',
                     value: `File deleted: "<red>${filepath.replace(packageRoot_1.default(filepath) + '/', '')}</red>"`
                 });
-                this.trigger('unlink', {
+                this.emit('unlink', {
                     path: filepath
                 });
             });

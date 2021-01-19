@@ -28,7 +28,7 @@ import __SPromise from '../promise/SPromise';
  */
 function loadScript($script) {
   return new __SPromise(
-    (resolve, reject, trigger) => {
+    ({ resolve, reject, emit }) => {
       let done = false;
 
       $script.onload = handleLoad;

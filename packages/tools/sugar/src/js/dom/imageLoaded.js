@@ -41,7 +41,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function imageLoaded($img, callback) {
         if (callback === void 0) { callback = null; }
         var imgLoadedHandler, imgErrorHandler;
-        return new SPromise_1.default(function (resolve, reject, trigger) {
+        return new SPromise_1.default(function (_a) {
+            var resolve = _a.resolve, reject = _a.reject;
             // check if image is already loaded
             if ($img.hasAttribute('src') && $img.complete) {
                 // resolve promise

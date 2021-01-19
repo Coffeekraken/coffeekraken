@@ -30,9 +30,9 @@ import __SPromise from '../promise/SPromise';
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function observeAttributes (target, settings = {}) {
+function observeAttributes(target, settings = {}) {
   return new __SPromise(
-    (resolve, reject, trigger) => {
+    ({ emit }) => {
       // create a new observer
       const mutationObserver = new MutationObserver((mutations) => {
         let mutedAttrs = {};
@@ -40,7 +40,7 @@ function observeAttributes (target, settings = {}) {
         mutations.forEach((mutation) => {
           // push mutation
           if (!mutedAttrs[mutation.attributeName]) {
-            trigger('then', mutation);
+            emit('then', mutation);
             mutedAttrs[mutation.attributeName] = true;
           }
         });

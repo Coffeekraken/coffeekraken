@@ -108,12 +108,12 @@ module.exports = class SBlessedPopup extends SBlessedComponent_1.default {
             id: this._settings.id
         });
         super.append(this.$content);
-        this.promise.trigger('open');
+        this.promise.emit('open');
         activeSpace_1.default.append(this._settings.id);
         const escape = escapeStack_1.default(() => {
             activeSpace_1.default.previous();
             escape.cancel();
-            this.promise.trigger('close');
+            this.promise.emit('close');
             this.detach();
         });
     }

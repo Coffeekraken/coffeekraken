@@ -35,7 +35,7 @@ const escapeStackStack = [];
 let hotkeyInitiated = false;
 
 function escapeStack(callback = null) {
-  const promise = new __SPromise((resolve, reject, trigger) => {}, {
+  const promise = new __SPromise(({ resolve, reject, emit }) => {}, {
     id: 'escapeStack'
   });
 

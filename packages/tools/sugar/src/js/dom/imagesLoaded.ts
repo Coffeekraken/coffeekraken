@@ -34,7 +34,7 @@ import __SPromise from '../promise/SPromise';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function imagesLoaded($imgs) {
-  return new __SPromise((resolve, reject, trigger, promiseApi) => {
+  return new __SPromise(({ resolve, reject, emit }) => {
     const promises = [],
       loadedImages = [];
     Array.from($imgs).forEach(($img) => {
@@ -42,9 +42,9 @@ function imagesLoaded($imgs) {
         __imageLoaded($img)
           .then((_$img) => {
             loadedImages.push(_$img);
-            trigger('img.loaded', _$img);
+            emit('img.loaded', _$img);
             if (loadedImages.length === $imgs.length) {
-              trigger('loaded', loadedImages);
+              emit('loaded', loadedImages);
               resolve(loadedImages);
             }
           })

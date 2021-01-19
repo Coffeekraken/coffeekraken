@@ -26,7 +26,7 @@ import { JSDOM as __jsDom } from 'jsdom';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function search(req, server) {
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async ({ resolve, reject }) => {
     let title = `Search results | 18 results`;
 
     let keyword = req.params[0] ? req.params[0].split(' ')[0] : 'doc';

@@ -23,7 +23,7 @@ import __SPromise from '../../promise/SPromise';
  */
 function js(filePath) {
   return new __SPromise(
-    async (resolve) => {
+    async ({ resolve }) => {
       resolve(await import(filePath));
     },
     {

@@ -673,8 +673,8 @@ class SSugarAppTerminalUi extends SBlessedComponent_1.default {
                     hotkey_1.default(`ctrl+${presetObj.key}`).on('press', () => {
                         if (this._displayedModuleId !== moduleObj.id)
                             return;
-                        // trigger a new event
-                        moduleObj.instance.trigger('preset', Object.assign({}, presetObj));
+                        // emit a new event
+                        moduleObj.instance.emit('preset', Object.assign({}, presetObj));
                     });
                     moduleObj.$bottomBar.append($preset);
                 });

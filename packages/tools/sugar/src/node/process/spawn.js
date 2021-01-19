@@ -12,62 +12,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const uniqid_1 = __importDefault(require("../string/uniqid"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const child_process_1 = require("child_process");
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
 const SIpcServer_1 = __importDefault(require("../ipc/SIpcServer"));
 const onProcessExit_1 = __importDefault(require("./onProcessExit"));
-/**
- * @name            spawn
- * @namespace       sugar.node.process
- * @type            Function
- * @async
- * @wip
- *
- * This function allows you to spawn a new child process just like the native ```spawn``` node function
- * but add the support for SPromise and SIpc communication layers
- *
- * @param       {String}          command         The command to spawn
- * @param       {String[]}        [args=[]]       Some string arguments to use in the command
- * @param       {ISpawnSettings}    [settings={}]     An object of settings to configure your spawn process
- * @return      {SPromise}                        An SPromise instance that will be resolved or rejected with the command result, and listen for some "events" triggered like "close", etc...
- *
- * @setting     {Boolean}       [ipc=false]         Specify if you want to initialise an SIpcServer instance for this spawn process
- * @setting     {Any}           ...SpawnOptions     All the supported ```spawn``` options. see: https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
- *
- * @event       data        Triggered when some data have been pushed in the child process like console.log, etc...
- * @event       error       Triggered when an error has occured in the child process
- * @event       close       Triggered when the child process has been closed for whatever reason
- * @event       close.error     Triggered when the child process has been closed due to an error
- * @event       close.cancel      Triggered when the child process has been closed due to the call of the ```cancel``` method
- * @event       close.kill      Triggered when the child process has been closed due to a kill call
- * @event       close.success   Triggered when the child process has been closed after a successfull execution
- *
- * @example       js
- * import spawn from '@coffeekraken/sugar/node/process/spawn';
- * const pro = spawn('echo "hello world");
- * pro.on('close', () => {
- *   console.log('closed');
- * });
- * console.log(await pro);
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-const fn = function spawn(command, args = [], settings = {}) {
+function spawn(command, args = [], settings = {}) {
     let uniquid = `SIpc.spawn.${uniqid_1.default()}`;
     let childProcess;
     let ipcServer, serverData, isCancel = false;
-    const promise = new SPromise_1.default((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
+    const promise = new SPromise_1.default(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
         settings = deepMerge_1.default({
-            ipc: true,
-            stdio: 'pipe'
+            ipc: true
         }, settings);
         if (settings.ipc === true) {
             ipcServer = yield SIpcServer_1.default.getGlobalServer();
             ipcServer.on(`${uniquid}.*`, (data, metas) => {
-                trigger(metas.stack.replace(uniquid + '.', ''), data);
+                emit(metas.stack.replace(uniquid + '.', ''), data);
             });
         }
         const stderr = [], stdout = [];
@@ -88,39 +51,39 @@ const fn = function spawn(command, args = [], settings = {}) {
         onProcessExit_1.default(() => {
             childProcess.kill();
         });
-        trigger('start');
+        emit('start');
         // listen for errors etc...
         if (childProcess.stdout) {
             childProcess.stdout.on('data', (data) => {
                 stdout.push(data.toString());
-                trigger('log', data.toString());
+                emit('log', data.toString());
             });
         }
         if (childProcess.stderr) {
             childProcess.stderr.on('data', (data) => {
                 stderr.push(data.toString());
-                trigger('error', data.toString());
+                emit('error', data.toString());
             });
         }
         childProcess.on('close', (code, signal) => {
-            trigger('close', {
+            emit('close', {
                 code,
                 signal
             });
             if (stderr.length) {
-                trigger('close.error');
+                emit('close.error');
                 reject(stderr.join('\n'));
             }
             else if (!code && signal) {
-                trigger('close.killed');
+                emit('close.killed');
                 reject();
             }
             else if (code === 0 && !signal) {
-                trigger('close.success');
+                emit('close.success');
                 resolve();
             }
             else {
-                trigger('close.error');
+                emit('close.error');
                 reject();
             }
         });
@@ -135,6 +98,6 @@ const fn = function spawn(command, args = [], settings = {}) {
         }
     });
     return promise;
-};
-module.exports = fn;
+}
+exports.default = spawn;
 //# sourceMappingURL=spawn.js.map

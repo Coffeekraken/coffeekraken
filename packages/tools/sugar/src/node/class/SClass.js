@@ -47,6 +47,37 @@ class SClass {
     get id() {
         return this._settings.id || this.constructor.name;
     }
+    /**
+     * @name            name
+     * @type            String
+     * @get
+     *
+     * Access the name setted in the ```_settings.name```
+     * By default, the name will be the ```constructor.name```
+     *
+     * @since           2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get name() {
+        return this._settings.name || this.constructor.name;
+    }
+    /**
+     * @name      formattedName
+     * @type      String
+     * @get
+     *
+     * Access the process name and (not the same as a node process name)
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get formattedName() {
+        let name = `<yellow>${this.name || ''}</yellow>`;
+        if (this.id) {
+            name += ` <cyan>${this.id}</cyan>`;
+        }
+        return name;
+    }
     static extends(Cls) {
         class SClass extends Cls {
             constructor(settings, ...args) {
@@ -59,6 +90,16 @@ class SClass {
             }
             get id() {
                 return this._settings.id || this.constructor.name;
+            }
+            get name() {
+                return this._settings.name || this.constructor.name;
+            }
+            get formattedName() {
+                let name = `<yellow>${this.name || ''}</yellow>`;
+                if (this.id) {
+                    name += ` <cyan>${this.id}</cyan>`;
+                }
+                return name;
             }
             expose(instance, settings) {
                 expose(this, instance, settings);

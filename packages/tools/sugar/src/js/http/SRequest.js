@@ -211,7 +211,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             var _this = this;
             if (requestSettings === void 0) { requestSettings = {}; }
             // return a promise
-            return new Promise(function (resolve, reject) {
+            return new Promise(function (_a) {
                 // // check if a cache exist and if we have the content
                 // if (this._settings.cache) {
                 //   const response = this._settings.cache.get(this._defaultRequestSettings.url);
@@ -220,6 +220,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 //     return;
                 //   }
                 // }
+                var resolve = _a.resolve, reject = _a.reject;
                 // reset the variables
                 _this._requestsCount = 0;
                 // init the data array holder

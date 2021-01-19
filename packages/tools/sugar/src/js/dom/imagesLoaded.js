@@ -45,15 +45,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     function imagesLoaded($imgs) {
-        return new SPromise_1.default(function (resolve, reject, trigger, promiseApi) {
+        return new SPromise_1.default(function (_a) {
+            var resolve = _a.resolve, reject = _a.reject, emit = _a.emit;
             var promises = [], loadedImages = [];
             Array.from($imgs).forEach(function ($img) {
                 promises.push(imageLoaded_1.default($img)
                     .then(function (_$img) {
                     loadedImages.push(_$img);
-                    trigger('img.loaded', _$img);
+                    emit('img.loaded', _$img);
                     if (loadedImages.length === $imgs.length) {
-                        trigger('loaded', loadedImages);
+                        emit('loaded', loadedImages);
                         resolve(loadedImages);
                     }
                 })

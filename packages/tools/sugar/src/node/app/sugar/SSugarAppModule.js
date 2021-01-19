@@ -161,19 +161,19 @@ class SSugarAppModule extends SPromise_1.default {
     state(value = null) {
         if (value === null)
             return this._state;
-        // trigger an event
-        this.trigger(`state.${value}`, true);
-        this.trigger('state', value);
+        // emit an event
+        this.emit(`state.${value}`, true);
+        this.emit('state', value);
         this._state = value;
     }
     stdio(id = 'terminal', value = undefined) {
         if (value !== undefined) {
             this._stdio[id] = value;
-            this.trigger('stdio', {
+            this.emit('stdio', {
                 id,
                 instance: value
             });
-            this.trigger(`stdio.${id}`, value);
+            this.emit(`stdio.${id}`, value);
         }
         return this._stdio[id];
     }
@@ -253,7 +253,7 @@ class SSugarAppModule extends SPromise_1.default {
         if (this._active === true)
             return;
         this._active = true;
-        this.trigger('activate', true);
+        this.emit('activate', true);
     }
     /**
      * @name          unactivate
@@ -269,7 +269,7 @@ class SSugarAppModule extends SPromise_1.default {
         if (this._active === false)
             return;
         this._active = false;
-        this.trigger('unactivate', true);
+        this.emit('unactivate', true);
     }
     /**
      * @name          isActive
@@ -300,12 +300,12 @@ class SSugarAppModule extends SPromise_1.default {
             this.state('ready');
             setTimeout(() => {
                 if (this.state() === 'error') {
-                    this.trigger('warning', {
+                    this.emit('warning', {
                         value: `The module <red>${this._settings.name || this._settings.id}</red> cannot start correctly because of an error...`
                     });
                     return;
                 }
-                this.trigger('log', {
+                this.emit('log', {
                     value: `<yellow>${this._settings.name || this._settings.id}</yellow> module is <green>ready</green>`
                 });
             });
@@ -325,7 +325,7 @@ class SSugarAppModule extends SPromise_1.default {
         setTimeout(() => {
             this.state('error');
             setTimeout(() => {
-                this.trigger('log', {
+                this.emit('log', {
                     value: `<yellow>${this._settings.name || this._settings.id}</yellow> module is in <red>error</red> state`
                 });
             });

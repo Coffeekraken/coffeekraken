@@ -60,7 +60,7 @@ module.exports = (_a = class STsCompiler extends SCompiler_1.default {
          */
         _compile(input, settings = {}) {
             settings = deepMerge_1.default(this._settings, settings);
-            return new SPromise_1.default((resolve, reject, trigger, promise) => __awaiter(this, void 0, void 0, function* () {
+            return new SPromise_1.default(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
                 const startTime = Date.now();
                 // engage the cache
                 const cache = new SCache_1.default(settings.id, {
@@ -101,7 +101,7 @@ module.exports = (_a = class STsCompiler extends SCompiler_1.default {
                 tsconfig.include = absolute_1.default(tsconfig.include);
                 // if (params.input != undefined) {
                 //   if (!Array.isArray(params.input)) params.input = [params.input];
-                //   trigger('log', {
+                //   emit('log', {
                 //     value: `<yellow>Input</yellow> file(s) to compile:\n- <cyan>${params.input.join(
                 //       '</cyan>\n- <cyan>'
                 //     )}</cyan>`
@@ -115,7 +115,7 @@ module.exports = (_a = class STsCompiler extends SCompiler_1.default {
                 //     tsconfigPath: `${tmpDir}/ts/tsconfig.${settings.id}.input.${filesHash}.json`
                 //   };
                 // } else if (params.stacks !== undefined) {
-                //   trigger('log', {
+                //   emit('log', {
                 //     value: `<yellow>Stack(s)</yellow> to compile: <magenta>${params.stacks.join(
                 //       '</magenta>, <magenta>'
                 //     )}</magenta>`
@@ -143,7 +143,7 @@ module.exports = (_a = class STsCompiler extends SCompiler_1.default {
                 //     };
                 //   });
                 // } else if (params.project !== undefined) {
-                //   trigger('log', {
+                //   emit('log', {
                 //     value: `<yellow>Project(s)</yellow> to compile:\n- <magenta>${params.stacks.join(
                 //       '</magenta>\n- <magenta>'
                 //     )}</magenta>`
@@ -174,7 +174,7 @@ module.exports = (_a = class STsCompiler extends SCompiler_1.default {
                 //     };
                 //   });
                 // } else {
-                //   trigger('log', {
+                //   emit('log', {
                 //     value: `Compiling default project: <cyan>${__packageRoot()}/tsconfig.json</cyan>`
                 //   });
                 //   // try to load the default file at the project root
@@ -259,7 +259,7 @@ module.exports = (_a = class STsCompiler extends SCompiler_1.default {
                     params.project = stackObj.tsconfigPath;
                     if (params.transpileOnly === undefined ||
                         params.transpileOnly === false) {
-                        trigger('log', {
+                        emit('log', {
                             value: `<magenta>[${stack}]</magenta> Starting a full <yellow>tsc</yellow> process`
                         });
                         // instanciate a new process
@@ -273,11 +273,11 @@ module.exports = (_a = class STsCompiler extends SCompiler_1.default {
                             metas: false,
                             stdio: false
                         });
-                        promise.pipe(pro);
+                        pipe(pro);
                         yield pro.run(params);
                     }
                     else if (params.transpileOnly === true) {
-                        trigger('log', {
+                        emit('log', {
                             value: `<magenta>[${stack}]</magenta> Transpile only mode <green>enabled</green>`
                         });
                         for (let i = 0; i < stackObj.tsconfigJson.files.length; i++) {

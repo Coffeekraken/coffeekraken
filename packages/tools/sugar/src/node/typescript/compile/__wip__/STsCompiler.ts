@@ -99,7 +99,7 @@ export = class STsCompiler extends __SCompiler {
     settings = __deepMerge(this._settings, settings);
 
     return new __SPromise(
-      async (resolve, reject, trigger, promise) => {
+      async ({ resolve, reject, emit, pipe }) => {
         const startTime = Date.now();
 
         // engage the cache
@@ -145,7 +145,7 @@ export = class STsCompiler extends __SCompiler {
         // if (params.input != undefined) {
         //   if (!Array.isArray(params.input)) params.input = [params.input];
 
-        //   trigger('log', {
+        //   emit('log', {
         //     value: `<yellow>Input</yellow> file(s) to compile:\n- <cyan>${params.input.join(
         //       '</cyan>\n- <cyan>'
         //     )}</cyan>`
@@ -162,7 +162,7 @@ export = class STsCompiler extends __SCompiler {
         //     tsconfigPath: `${tmpDir}/ts/tsconfig.${settings.id}.input.${filesHash}.json`
         //   };
         // } else if (params.stacks !== undefined) {
-        //   trigger('log', {
+        //   emit('log', {
         //     value: `<yellow>Stack(s)</yellow> to compile: <magenta>${params.stacks.join(
         //       '</magenta>, <magenta>'
         //     )}</magenta>`
@@ -193,7 +193,7 @@ export = class STsCompiler extends __SCompiler {
         //     };
         //   });
         // } else if (params.project !== undefined) {
-        //   trigger('log', {
+        //   emit('log', {
         //     value: `<yellow>Project(s)</yellow> to compile:\n- <magenta>${params.stacks.join(
         //       '</magenta>\n- <magenta>'
         //     )}</magenta>`
@@ -227,7 +227,7 @@ export = class STsCompiler extends __SCompiler {
         //     };
         //   });
         // } else {
-        //   trigger('log', {
+        //   emit('log', {
         //     value: `Compiling default project: <cyan>${__packageRoot()}/tsconfig.json</cyan>`
         //   });
 
@@ -334,7 +334,7 @@ export = class STsCompiler extends __SCompiler {
             params.transpileOnly === undefined ||
             params.transpileOnly === false
           ) {
-            trigger('log', {
+            emit('log', {
               value: `<magenta>[${stack}]</magenta> Starting a full <yellow>tsc</yellow> process`
             });
             // instanciate a new process
@@ -349,10 +349,10 @@ export = class STsCompiler extends __SCompiler {
               metas: false,
               stdio: false
             });
-            promise.pipe(pro);
+            pipe(pro);
             await pro.run(params);
           } else if (params.transpileOnly === true) {
-            trigger('log', {
+            emit('log', {
               value: `<magenta>[${stack}]</magenta> Transpile only mode <green>enabled</green>`
             });
 

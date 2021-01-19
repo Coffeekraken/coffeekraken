@@ -1,12 +1,15 @@
 import __SProcess from './SProcess';
 import __buildCommandLine from '../cli/buildCommandLine';
-import ISCliProcess, {
-  ISCliProcessCtor,
-  ISCliProcessSettings
-} from './interface/ISCliProcess';
 import __onProcessExit from './onProcessExit';
 import __spawn from './spawn';
 import __deepMerge from '../object/deepMerge';
+
+import {
+  ISProcess,
+  ISProcessSettings,
+  ISProcessOptionalSettings
+} from './SProcess';
+import { ISpawnSettings } from './spawn';
 
 /**
  * @name          SCliProcess
@@ -32,9 +35,24 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls: ISCliProcessCtor = class SCliProcess
-  extends __SProcess
-  implements ISCliProcess {
+
+export interface ISCliProcessCtorSettings {
+  cliProcess?: ISCliProcessSettings;
+}
+
+export interface ISCliProcessOptionalSettings
+  extends ISProcessOptionalSettings {}
+export interface ISCliProcessSettings extends ISProcessSettings {}
+
+export interface ISCliProcessCtor {
+  new (command: string, settings?: ISCliProcessSettings): ISCliProcess;
+}
+
+export interface ISCliProcess extends ISProcess {
+  command?: string;
+}
+
+class SCliProcess extends __SProcess implements ISCliProcess {
   /**
    * @name      command
    * @type      String
@@ -47,6 +65,20 @@ const Cls: ISCliProcessCtor = class SCliProcess
   command: string;
 
   /**
+   * @name      cliProcessSettings
+   * @type      ISCliProcessSettings
+   * @get
+   *
+   * Get the cliProcessSettings
+   *
+   * @since     2.0.0
+   *
+   */
+  get cliProcessSettings() {
+    return (<any>this._settings).cliProcess;
+  }
+
+  /**
    * @name      constructor
    * @type      Function
    * @constructor
@@ -56,8 +88,15 @@ const Cls: ISCliProcessCtor = class SCliProcess
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(command: string, settings: ISCliProcessSettings = {}) {
-    super(__deepMerge({}, settings));
+  constructor(command: string, settings: ISCliProcessCtorSettings = {}) {
+    super(
+      __deepMerge(
+        {
+          cliProcess: {}
+        },
+        settings
+      )
+    );
     // save the command
     this.command = command;
   }
@@ -77,7 +116,14 @@ const Cls: ISCliProcessCtor = class SCliProcess
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  process(params: object, settings: ISCliProcessSettings = {}): Promise<any> {
+  process(
+    params: Record<string, unknown>,
+    settings: ISCliProcessOptionalSettings = {}
+  ): Promise<any> {
+    const cliProcessSettings = <ISCliProcessSettings>(
+      __deepMerge(this.cliProcessSettings, settings)
+    );
+
     // build the command line
     const command = __buildCommandLine(this.command, params, {
       definition: this.definition,
@@ -87,12 +133,11 @@ const Cls: ISCliProcessCtor = class SCliProcess
     // @ts-ignore
     const pro = __spawn(command, [], {
       ipc: false,
-      stdio: settings.stdio,
-      ...(settings.spawnSettings || {})
+      ...(this.processSettings.spawnSettings || {})
     });
 
     // @ts-ignore
     return pro;
   }
-};
-export = Cls;
+}
+export default SCliProcess;

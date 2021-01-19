@@ -64,7 +64,7 @@ function addEventListenerOnce(
       if (callback && typeof callback === 'function') {
         callback.apply(this, [event]);
       }
-      globalPromise.trigger(eventName, event);
+      globalPromise.emit(eventName, event);
       promise.cancel();
     });
   });

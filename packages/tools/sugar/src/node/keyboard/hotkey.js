@@ -73,13 +73,13 @@ function _handleKeypress(ch, keyObj) {
             .map((m) => m.trim())
             .forEach((key) => {
             if (ch && ch.toString() === key) {
-                obj.promise.trigger('key', {
+                obj.promise.emit('key', {
                     key,
                     ctrl: keyObj ? keyObj.ctrl : false,
                     meta: keyObj ? keyObj.meta : false,
                     shift: keyObj ? keyObj.shift : false
                 });
-                obj.promise.trigger('press', {
+                obj.promise.emit('press', {
                     key,
                     ctrl: keyObj ? keyObj.ctrl : false,
                     meta: keyObj ? keyObj.meta : false,
@@ -97,13 +97,13 @@ function _handleKeypress(ch, keyObj) {
             if (keyObj.meta)
                 pressedKey = `alt${obj.settings.splitKey}${pressedKey}`;
             if (pressedKey === key) {
-                obj.promise.trigger('key', {
+                obj.promise.emit('key', {
                     key,
                     ctrl: keyObj ? keyObj.ctrl : false,
                     meta: keyObj ? keyObj.meta : false,
                     shift: keyObj ? keyObj.shift : false
                 });
-                obj.promise.trigger('press', {
+                obj.promise.emit('press', {
                     key,
                     ctrl: keyObj ? keyObj.ctrl : false,
                     meta: keyObj ? keyObj.meta : false,
@@ -152,7 +152,7 @@ function hotkey(key, settings = {}) {
             // delete the callback from the stack
             delete hotkeyStack[uniqid];
         });
-        // save the trigger function in the stack
+        // save the emit function in the stack
         hotkeyStack[uniqid] = {
             key,
             promise,
@@ -167,11 +167,11 @@ function hotkey(key, settings = {}) {
     //   });
     //   // child process
     //   __SIpc.on(`keypress.${key}`, (keyObj) => {
-    //     promise.trigger('key', keyObj);
-    //     promise.trigger('press', keyObj);
+    //     promise.emit('key', keyObj);
+    //     promise.emit('press', keyObj);
     //   });
     //   setTimeout(() => {
-    //     __SIpc.trigger(`keypress`, {
+    //     __SIpc.emit(`keypress`, {
     //       key,
     //       settings
     //     });

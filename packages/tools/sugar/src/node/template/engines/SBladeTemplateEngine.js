@@ -76,7 +76,7 @@ module.exports = (_a = class SBladeTemplateEngine extends STemplateEngine_1.defa
             settings = deepMerge_1.default({
                 rootDirs: []
             }, this._settings, settings);
-            return new SPromise_1.default((resolve, reject, trigger, promiseApi) => {
+            return new SPromise_1.default(({ resolve, reject, emit }) => {
                 if (!fs_1.default.existsSync(settings.cacheDir))
                     fs_1.default.mkdirSync(settings.cacheDir, {
                         recursive: true

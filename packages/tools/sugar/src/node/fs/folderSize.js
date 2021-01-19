@@ -32,7 +32,7 @@ const filesize_1 = __importDefault(require("filesize"));
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function folderSize(folderPath, rawFormat = false) {
-    return new Promise((resolve, reject) => {
+    return new Promise(({ resolve, reject }) => {
         get_folder_size_1.default(folderPath, (error, size) => {
             if (error)
                 throw error;

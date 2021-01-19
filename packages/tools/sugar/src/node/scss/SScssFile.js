@@ -105,7 +105,7 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                 if (this._settings.compile.compileOnChange) {
                     const promise = this.compile(this._settings.compile);
                     // @ts-ignore
-                    promise.trigger('log', {
+                    promise.emit('log', {
                         value: `<blue>[updated]</blue> ""`
                     });
                 }
@@ -173,7 +173,7 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                 });
                 if (!realPath) {
                     // @ts-ignore
-                    this.trigger('warn', {
+                    this.emit('warn', {
                         value: [
                             `It seems that you're trying to load a file that does not exists:`,
                             `- From: <cyan>${this.path}</cyan>`,
@@ -231,7 +231,7 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
             // @ts-ignore
             this.pipe(promise);
             if (this._isCompiling) {
-                promise.trigger('warn', {
+                promise.emit('warn', {
                     value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
                 });
                 return;
@@ -248,11 +248,11 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
             if (settings.watch) {
                 this.startWatch();
             }
-            promise.trigger('log', {
+            promise.emit('log', {
                 type: 'separator'
             });
             // notify start
-            promise.trigger('log', {
+            promise.emit('log', {
                 value: `Starting "<cyan>${this.relPath}</cyan>" compilation`
             });
             const duration = new SDuration_1.default();
@@ -275,7 +275,7 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                     if (depFile._import && depFile._import.type === 'use') {
                         continue;
                     }
-                    // promise.trigger('log', {
+                    // promise.emit('log', {
                     //   value: `<yellow>[dependency]</yellow> "<cyan>${depFile.relPath}</cyan>"`
                     // });
                     // compile the dependency
@@ -296,7 +296,7 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                     // console.log('from cache');
                     let result = cachedValue.css;
                     SScssFile.COMPILED_CSS[this.path] = result;
-                    promise.trigger('log', {
+                    promise.emit('log', {
                         value: `<green>[from cache]</green> "<cyan>${this.relPath}</cyan>"`
                     });
                     if (this._import.type === 'main') {
@@ -314,7 +314,7 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                         const savePath = path_1.default.resolve(settings.outputDir, this.path
                             .replace(`${settings.rootDir}/`, '')
                             .replace(/\.s[ac]ss$/, '.css'));
-                        promise.trigger('log', {
+                        promise.emit('log', {
                             value: `Saving the file "<cyan>${this.relPath}</cyan>" to "<magenta>${savePath.replace(`${sugar_1.default('storage.rootDir')}/`, '')}</magenta>" `
                         });
                         this.writeSync(result, {
@@ -322,7 +322,7 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                         });
                         // notify end
                         const time = duration.end();
-                        promise.trigger('log', {
+                        promise.emit('log', {
                             value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
                         });
                     }
@@ -334,7 +334,7 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                 toCompile = putUseStatementsOnTop_1.default(toCompile);
                 let renderObj;
                 try {
-                    promise.trigger('log', {
+                    promise.emit('log', {
                         value: `<yellow>[compiling]</yellow> "<cyan>${this.relPath}</cyan>"`
                     });
                     // console.log('comepile', toCompile);
@@ -361,7 +361,7 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                             settings.outputDir, this.path
                                 .replace(`${settings.rootDir}/`, '')
                                 .replace(/\.s[ac]ss$/, '.css'));
-                            promise.trigger('log', {
+                            promise.emit('log', {
                                 value: `Saving the file "<cyan>${this.relPath}</cyan>" to "<magenta>${savePath.replace(`${sugar_1.default('storage.rootDir')}/`, '')}</magenta>" `
                             });
                             this.writeSync(result, {
@@ -370,7 +370,7 @@ module.exports = (_a = class SScssFile extends SFile_1.default {
                         }
                         // notify end
                         const time = duration.end();
-                        promise.trigger('log', {
+                        promise.emit('log', {
                             value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
                         });
                         return promise.resolve(result);

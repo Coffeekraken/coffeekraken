@@ -47,7 +47,7 @@ hotkeys.filter = function (event) {
  */
 function hotkey(hotkey, settings = {}) {
   return new __SPromise(
-    (resolve, reject, trigger, promiseApi) => {
+    ({ resolve, reject, emit, cancel }) => {
       // merge default settings with passed ones:
       settings = {
         element: null,
@@ -60,9 +60,9 @@ function hotkey(hotkey, settings = {}) {
       // init the hotkey
       hotkeys(hotkey, settings, (e, h) => {
         // call the handler function
-        trigger('press', e);
+        emit('press', e);
         // unsubscribe if once is truc
-        if (settings.once) promiseApi.cancel();
+        if (settings.once) cancel();
       });
     },
     {

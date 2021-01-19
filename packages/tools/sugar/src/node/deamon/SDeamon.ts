@@ -19,7 +19,7 @@ import __onProcessExit from '../process/onProcessExit';
  * @todo      doc
  * @todo      tests
  *
- * @event       state       Triggered when the state change
+ * @event       state       emited when the state change
  *
  * @ince          2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -172,17 +172,17 @@ class SDeamon extends __SPromise {
 
     // update state
     this.state = 'watching';
-    this.trigger('state', this.state);
+    this.emit('state', this.state);
 
     // listen for the end of the watching process
     watchPromise
       .on('finally', () => {
         this.state = 'idle';
-        this.trigger('state', this.state);
+        this.emit('state', this.state);
       })
       .on('error', () => {
         this.state = 'error';
-        this.trigger('state', this.state);
+        this.emit('state', this.state);
       });
 
     __onProcessExit(() => {

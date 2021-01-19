@@ -93,7 +93,7 @@ class SMediaQuery extends __SPromise {
           if (nameArray.indexOf(previousActiveMedia) !== -1) {
             const promises = this._promisesStack[name];
             promises.forEach((promise) => {
-              promise.trigger('unmatch', {
+              promise.emit('unmatch', {
                 name: previousActiveMedia
               });
             });
@@ -103,7 +103,7 @@ class SMediaQuery extends __SPromise {
           const promise = this._promisesStack[name];
           const promises = this._promisesStack[name];
           promises.forEach((promise) => {
-            promise.trigger('match', {
+            promise.emit('match', {
               name: mediaName
             });
           });
@@ -114,11 +114,11 @@ class SMediaQuery extends __SPromise {
         const allPromises = this._promisesStack['*'];
         allPromises.forEach((allPromise) => {
           if (previousActiveMedia) {
-            allPromise.trigger('unmatch', {
+            allPromise.emit('unmatch', {
               name: previousActiveMedia
             });
           }
-          allPromise.trigger('match', {
+          allPromise.emit('match', {
             name: mediaName
           });
         });

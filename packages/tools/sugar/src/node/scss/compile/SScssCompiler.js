@@ -98,7 +98,7 @@ module.exports = (_a = class SScssCompiler extends SCompiler_1.default {
                     });
                 }
                 else {
-                    promise.trigger('files', {
+                    promise.emit('files', {
                         files: resultsObj,
                         startTime: startTime,
                         endTime: Date.now(),

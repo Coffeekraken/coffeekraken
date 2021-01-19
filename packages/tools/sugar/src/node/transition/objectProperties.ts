@@ -33,7 +33,7 @@ import __SPromise from '../promise/SPromise';
  */
 function objectProperties(startObj, targetObj, settings = {}) {
   return new __SPromise(
-    async (resolve, reject, trigger) => {
+    async ({ resolve, reject, emit }) => {
       settings = __deepMerge(
         {
           duration: '1s',
@@ -116,8 +116,8 @@ function objectProperties(startObj, targetObj, settings = {}) {
             // set the property in the returned transition object
             returnedTransitionObj[prop] = newValue;
           });
-          // trigger the "step" stack
-          trigger('step', returnedTransitionObj);
+          // emit the "step" stack
+          emit('step', returnedTransitionObj);
         })
         .on('complete', () => {
           // resolve the transition

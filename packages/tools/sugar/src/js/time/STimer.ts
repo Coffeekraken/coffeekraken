@@ -16,16 +16,16 @@ import __deepMerge from '../object/deepMerge';
  * With this class you can set some callback function that will be
  * called each x ms or tell that you want your callbacks to be called
  * a certain number of time during the timer time.
- * This class extends the SPromise one, meaning that you can subscribe to differents "events" triggered by the timer instance. Here's the list:
- * - complete: Triggered when the timer is completed
- * - tick: Triggered at each ticks depending on your settings
- * - duration: Triggered when the duration has been changed
- * - tickCount: Triggered when the tickCount has been changed
- * - reset: Triggered when the timer has been reseted
- * - start: Triggered when the timer starts
- * - pause: Triggered when the timer has been paused
- * - stop: Triggered when the timer has been stoped
- * - destroy: Triggered when the timer has been destroyed
+ * This class extends the SPromise one, meaning that you can subscribe to differents "events" emited by the timer instance. Here's the list:
+ * - complete: emited when the timer is completed
+ * - tick: emited at each ticks depending on your settings
+ * - duration: emited when the duration has been changed
+ * - tickCount: emited when the tickCount has been changed
+ * - reset: emited when the timer has been reseted
+ * - start: emited when the timer starts
+ * - pause: emited when the timer has been paused
+ * - stop: emited when the timer has been stoped
+ * - destroy: emited when the timer has been destroyed
  *
  * @param     {Number|String}     duration      The duration of the timer. Can be a Number that will be treated as miliseconds, or a string like "1s", "2m", etc...
  * @param     {Object}            [settings={}]     A settings object to configure your timer more deeply:
@@ -160,7 +160,7 @@ export = class STimer extends __SPromise {
    */
   constructor(duration, settings = {}) {
     super(
-      (resolve, reject, trigger) => {
+      ({ resolve, reject, emit }) => {
         this.duration = duration;
 
         // calculate the tickInterval
@@ -208,7 +208,7 @@ export = class STimer extends __SPromise {
         this.start();
       }
       // loop on each completes functions
-      this.trigger('complete', this);
+      this.emit('complete', this);
     } else {
       // launch another tick
       clearTimeout(this._tickSetTimeout);
@@ -218,7 +218,7 @@ export = class STimer extends __SPromise {
     }
 
     // loop on each ticks functions
-    if (this.isStarted()) this.trigger('tick', this);
+    if (this.isStarted()) this.emit('tick', this);
   }
 
   /**
@@ -252,7 +252,7 @@ export = class STimer extends __SPromise {
       this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time
     }
     // loop on each change duration functions
-    this.trigger('duration', this);
+    this.emit('duration', this);
   }
   get duration() {
     return this._duration;
@@ -273,7 +273,7 @@ export = class STimer extends __SPromise {
     this._tickInterval = this._duration / this._tickCount;
 
     // loop on each change tick count functions
-    this.trigger('tickCount', this);
+    this.emit('tickCount', this);
   }
   get tickCount() {
     return this._tickCount;
@@ -317,7 +317,7 @@ export = class STimer extends __SPromise {
     if (start) this.start();
 
     // loop on each resets functions
-    this.trigger('reset', this);
+    this.emit('reset', this);
 
     // maintain chainability
     return this;
@@ -375,7 +375,7 @@ export = class STimer extends __SPromise {
     }
 
     // loop on each start functions
-    this.trigger('start', this);
+    this.emit('start', this);
 
     // maintain chainability
     return this;
@@ -399,7 +399,7 @@ export = class STimer extends __SPromise {
     clearTimeout(this._tickSetTimeout);
 
     // loop on each pause functions
-    this.trigger('pause', this);
+    this.emit('pause', this);
 
     // maintain chainability
     return this;
@@ -420,7 +420,7 @@ export = class STimer extends __SPromise {
     this.reset();
 
     // loop on each stop functions
-    this.trigger('stop', this);
+    this.emit('stop', this);
 
     // maintain chainability
     return this;
@@ -442,7 +442,7 @@ export = class STimer extends __SPromise {
     this._ticksCallbacks = [];
 
     // loop on each destroy functions
-    this.trigger('destroy', this);
+    this.emit('destroy', this);
 
     // maintain chainability
     return this;

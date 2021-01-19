@@ -516,7 +516,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     }
                     this._props[prop].responsiveValues[media] = value;
                     // trigger a "prop" event
-                    this._triggerPropsEvents(prop);
+                    this._emitPropsEvents(prop);
                 };
                 /**
                  * @name          getProp
@@ -701,7 +701,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                                     Object.getOwnPropertyDescriptor(_this.prototype, prop).set.call(_this, value);
                                 }
                                 // trigger a "prop" event
-                                _this._triggerPropsEvents(prop);
+                                _this._emitPropsEvents(prop);
                             }
                         });
                         this_1.promise.on("props." + prop + ".*", function (update) {
@@ -836,7 +836,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     var event = new CustomEvent(name, __assign(__assign({}, settings), { detail: value }));
                     this.dispatchEvent(event);
                     // // dispatch event through the SPromise internal instance
-                    // this.promise.trigger(name, value || this);
+                    // this.promise.emit(name, value || this);
                     // // dispatch a general event
                     // __dispatch(`${this.metas.dashName}.${name}`, {
                     //   target: this,
@@ -848,11 +848,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     // });
                     // setTimeout(() => {
                     //   // dispatch an SWebComponent level event
-                    //   _sWebComponentPromise.trigger(`${this.metas.dashName}.${name}`, {
+                    //   _sWebComponentPromise.emit(`${this.metas.dashName}.${name}`, {
                     //     target: this,
                     //     value
                     //   });
-                    //   _sWebComponentPromise.trigger(
+                    //   _sWebComponentPromise.emit(
                     //     `${this.metas.dashName}#${this._settings.id}.${name}`,
                     //     {
                     //       target: this,
@@ -1010,7 +1010,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     return finalSelectorArray.join(' ');
                 };
                 /**
-                 * @name        _triggerPropsEvents
+                 * @name        _emitPropsEvents
                  * @type        Function
                  * @private
                  *
@@ -1020,7 +1020,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                  *
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                SWebComponent.prototype._triggerPropsEvents = function (prop) {
+                SWebComponent.prototype._emitPropsEvents = function (prop) {
                     // trigger a "prop" event
                     var eventObj = {
                         prop: prop,
@@ -1033,7 +1033,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                         previousValue: this._props[prop].previousValue,
                         media: SMediaQuery_1.default.getActiveMedia()
                     };
-                    this.promise.trigger("props." + prop + "." + eventObj.action, eventObj);
+                    this.promise.emit("props." + prop + "." + eventObj.action, eventObj);
                 };
                 /**
                  * @name        _handlePhysicalProps

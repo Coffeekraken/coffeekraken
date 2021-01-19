@@ -37,7 +37,7 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function exitCleanup(settings = {}) {
-    return new Promise((resolve, reject) => {
+    return new Promise(({ resolve, reject }) => {
         settings = deepMerge_1.default({
             pid: [],
             cmd: [/.*\/bin\/sugar\s.*/]

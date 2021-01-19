@@ -135,7 +135,7 @@ module.exports = class SDependency {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     install(version = null) {
-        return new __SPromise((resolve, reject, trigger) => {
+        return new __SPromise(({ resolve, reject, emit }) => {
             // get the available versions to install
             const versionsArray = Object.keys(this._depJson);
             // set the version to install
@@ -162,10 +162,10 @@ module.exports = class SDependency {
      * @private
      *
      * This method take care of executing one or more commands and send back an SPromise on which you can subscribe for:
-     * - data: Triggered when a log happens in the child process
-     * - then: Triggered when one command is finished and another starts
-     * - finally: Triggered when all the commands have finished successfully
-     * - error: Triggered when something goes wrong inside a command
+     * - data: emited when a log happens in the child process
+     * - then: emited when one command is finished and another starts
+     * - finally: emited when all the commands have finished successfully
+     * - error: emited when something goes wrong inside a command
      *
      * @param       {Array|String}          commands            The commands you want to execute
      * @return      {SPromise}                                  An SPromise instance that will be resolved when all the commands have finished successfully
@@ -173,20 +173,20 @@ module.exports = class SDependency {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _execCommands(commands) {
-        return new __SPromise((resolve, reject, trigger) => __awaiter(this, void 0, void 0, function* () {
+        return new __SPromise(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
             commands = [...commands];
             for (let i = 0; i < commands.length; i++) {
                 const child = __awaitSpawn(commands[i], {
                     shell: true
                 });
                 child.catch((e) => {
-                    trigger('error', e);
+                    emit('error', e);
                 });
                 child.child.stdout.on('data', (value) => {
-                    trigger('data', value);
+                    emit('data', value);
                 });
                 child.child.stderr.on('data', (error) => {
-                    trigger('error', error);
+                    emit('error', error);
                 });
                 yield child;
             }

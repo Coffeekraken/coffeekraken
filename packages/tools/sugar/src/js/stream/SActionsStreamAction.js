@@ -190,7 +190,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 id: this._settings.id + 'Run'
             });
             SPromise_1.default.map(this._currentPromise, this);
-            promiseFn(this._currentPromise.resolve.bind(this._currentPromise), this._currentPromise.reject.bind(this._currentPromise), this._currentPromise.trigger.bind(this._currentPromise), this._currentPromise.cancel.bind(this._currentPromise));
+            promiseFn(this._currentPromise.resolve.bind(this._currentPromise), this._currentPromise.reject.bind(this._currentPromise), this._currentPromise.emit.bind(this._currentPromise), this._currentPromise.cancel.bind(this._currentPromise));
             return this._currentPromise;
         };
         /**
@@ -204,11 +204,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         SActionStreamAction.prototype.error = function (message) {
-            // this.trigger('error', {
+            // this.emit('error', {
             //   value: `<red>✚</red> ${message}`
             // });
             // if (!this._currentPromise) return;
-            // this._currentPromise.trigger('log', {
+            // this._currentPromise.emit('log', {
             //   value: `<red>✚</red> ${message}`
             // });
         };
@@ -223,12 +223,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         SActionStreamAction.prototype.warn = function (message) {
-            this.trigger('log', {
+            this.emit('log', {
                 value: "<yellow>\u26A0</yellow> " + message
             });
             if (!this._currentPromise)
                 return;
-            this._currentPromise.trigger('log', {
+            this._currentPromise.emit('log', {
                 value: "<yellow>\u26A0</yellow> " + message
             });
         };
@@ -246,20 +246,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             var _this = this;
             setTimeout(function () {
                 if (typeof obj === 'string') {
-                    _this.trigger('log', {
+                    _this.emit('log', {
                         value: obj
                     });
                     if (!_this._currentPromise)
                         return;
-                    _this._currentPromise.trigger('log', {
+                    _this._currentPromise.emit('log', {
                         value: obj
                     });
                 }
                 else {
-                    _this.trigger('log', obj);
+                    _this.emit('log', obj);
                     if (!_this._currentPromise)
                         return;
-                    _this._currentPromise.trigger('log', obj);
+                    _this._currentPromise.emit('log', obj);
                 }
             });
         };

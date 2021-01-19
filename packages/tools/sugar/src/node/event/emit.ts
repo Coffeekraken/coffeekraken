@@ -3,15 +3,15 @@
 import __SPromise from '../promise/SPromise';
 
 /**
- * @name        dispatch
+ * @name        emit
  * @namespace           sugar.node.event
  * @type          Function
  * @beta
  *
- * This function can ben used to dispatch an event globally.
+ * This function can ben used to emit an event globally.
  * You can subscribe to these events using the "sugar.node.event.subscribe" function
  *
- * @param         {String}        name          The event name you want to dispatch to
+ * @param         {String}        name          The event name you want to emit to
  * @param         {Mixed}        value          The value you want to send alongside the event
  *
  * @todo      interface
@@ -19,19 +19,19 @@ import __SPromise from '../promise/SPromise';
  * @todo      tests
  *
  * @example       js
- * import dispatch from '@coffeekraken/sugar/node/event/dispatch';
- * dispatch('something', 'Hello world');
+ * import emit from '@coffeekraken/sugar/node/event/emit';
+ * emit('something', 'Hello world');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function dispatch(name, value) {
+function emit(name, value) {
   // check that the global SPromise exists
   if (!global._sugarEventSPromise)
     global._sugarEventSPromise = new __SPromise({
       id: 'sugarEventSPromise'
     });
-  // dispatch to the event
-  global._sugarEventSPromise.trigger(name, value);
+  // emit to the event
+  global._sugarEventSPromise.emit(name, value);
 }
-export = dispatch;
+export = emit;

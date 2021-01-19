@@ -66,7 +66,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          */
         function SAction(descriptorObj, settings) {
             if (settings === void 0) { settings = {}; }
-            var _this = _super.call(this, function (resolve, reject, trigger) { }) || this;
+            var _this = _super.call(this, function (resolve, reject, emit) { }) || this;
             /**
              * @name            _settings
              * @type            Object
@@ -127,17 +127,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          */
         SAction.prototype.run = function () {
             var _this = this;
-            var promise = new SPromise_1.default(function (resolve, reject, trigger) {
-                SAction._promise.trigger(_this.constructor.name + ".run", _this);
-                trigger("run", _this);
-                _this.trigger("run", _this);
+            var promise = new SPromise_1.default(function (_a) {
+                var resolve = _a.resolve, reject = _a.reject, emit = _a.emit;
+                SAction._promise.emit(_this.constructor.name + ".run", _this);
+                emit("run", _this);
+                _this.emit("run", _this);
             }, {
                 id: SAction._promise.id + 'Run'
             });
             promise.complete = function () {
-                SAction._promise.trigger(_this.constructor.name + ".complete", _this);
-                promise.trigger('complete', _this);
-                _this.trigger("complete", _this);
+                SAction._promise.emit(_this.constructor.name + ".complete", _this);
+                promise.emit('complete', _this);
+                _this.emit("complete", _this);
             };
             return promise;
         };

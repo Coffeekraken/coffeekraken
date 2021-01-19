@@ -60,7 +60,7 @@ module.exports = (_a = class SExtractDocblocksIntoFiles extends SActionsStreamAc
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings) {
-            return super.run(streamObj, (resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            return super.run(streamObj, ({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
                 const reg = /(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g;
                 const blocks = streamObj[settings.sourceProp].match(reg);
                 streamObj.extractDocblocksIntoFiles = {};

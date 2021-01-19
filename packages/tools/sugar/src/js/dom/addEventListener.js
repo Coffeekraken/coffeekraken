@@ -72,7 +72,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             var internalCallback = function (event) {
                 if (callback)
                     callback.apply(_this, [event]);
-                promise.trigger(eventName, event);
+                promise.emit(eventName, event);
             };
             eventsStack[eventName] = {
                 callback: internalCallback,

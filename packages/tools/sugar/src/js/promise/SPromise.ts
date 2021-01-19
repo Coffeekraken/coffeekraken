@@ -12,7 +12,7 @@ import __treatAsValue, {
   ITreatAsValueProxy,
   ITreatAsValueSettings
 } from './treatAsValue';
-import __SEventEmitter from '../event/SEventEmitter';
+import __SEventEmitter, { ISEventEmitter } from '../event/SEventEmitter';
 import __SClass from '../class/SClass';
 
 /**
@@ -24,41 +24,6 @@ import __SClass from '../class/SClass';
  * This class works the same as the default Promise one. The difference is that you have more control on this one like
  * the possibility to resolve it multiple times. Here's a list of the "differences" and the "features" that this class provide:
  *
- * - Pass the normal "resolve" and "reject" function to the passed executor
- * - Pass a new function to the passed executor called "trigger" that let you launch your registered callbacks like "resolve", "catch", etc... but without resolving the master promise. Here's some examples:
- *    - new SPromise((resolve, reject, trigger) => { trigger('resolve', 'myCoolValue'); }).then(value => { ... });
- *    - new SPromise((resolve, reject, trigger) => { trigger('reject', 'myCoolValue') }).catch(value => { ... });
- * - Pass a new function to the passed executor called "cancel" that let you stop/cancel the promise execution without triggering your registered callbacks unless the "cancel" once...
- * - Expose the normal "then" and "catch" methods to register your callbacks
- * - Expose some new callbacks registration functions described here:
- *    - Expose a method called "resolved" that let you register callbacks called only when the "resolve" function has been called
- *    - Expose a method called "rejected" that let you register callbacks called only when the "reject" function has been called
- *    - Expose a method called "finally" that let you register callbacks called when the "resolve" or "reject" function has been called
- *    - Expose a method called "canceled" that let you register callbacks called only when the "cancel" function has been called
- * - Every callbacks registration methods accept as first argument the number of time that your callback will be called at max. Here's some examples:
- *    - new SPromise((...)).then(value => { // do something... }).catch(error => { // do something... });
- *    - new SPromise((...)).then(1, value => { // do something... }).catch(3, error => { // do something... });
- * - Expose a method called "on" that can be used to register callbacks the same as the "then", "catch", etc... methods but you can register a same callback function to multiple callbacks type at once:
- *    - new SPromise((...)).on('then', value => { ... }).on('then,catch', value => { ... });
- *    - Specify the max number of time to call your callback function like so: new SPromise((...)).on('then:2', value => { ... }).on('then:1,catch', value => { ... });
- * - A new method called "start" is exposed. This method is useful when you absolutely need that your executor function is launched right after the callbacks registrations.
- *    - If you don't call the "start" method, the executor function passed to the SPromise constructor will be called on the next javascript execution loop
- * - Support the Promises chaining through the callbacks like to:
- *    ```js
- *      const result = await new SPromise((resolve, reject, trigger) => {
- *        resolve('hello');
- *      }).then(value => {
- *        return new Promise((resolve) => {
- *          setTimeout(() => {
- *            resolve(value + 'World');
- *          }, 1000);
- *        });
- *      }).then(value => {
- *        return value + 'Promise';
- *      });
- *      console.log(result); // => helloWorldPromise
- *    ```
- *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -68,7 +33,7 @@ import __SClass from '../class/SClass';
  * @example         js
  * import SPromise from '@coffeekraken/sugar/js/promise/SPromise';
  * function myCoolFunction() {
- *    return new SPromise((resolve, reject, trigger) => {
+ *    return new SPromise(({ resolve, reject, emit }) => {
  *        // do something...
  *        setInterval(() => {
  *            // resolve the promise
@@ -134,7 +99,7 @@ export interface ISPromiseCtor extends Promise {
   new (settings?: ISPromiseConstructorSettings): ISPromise;
 }
 
-export interface ISPromise {
+export interface ISPromise extends Promise, ISEventEmitter {
   _promiseState: ISPromiseStateType;
   _resolvers?: ISPromiseResolvers;
   readonly promiseState: string;
@@ -191,7 +156,7 @@ class SPromise extends __SClass.extends(Promise) {
    * @param         {Object}            [settings={}]     An object of settings for this particular SPromise instance. Here's the available settings:
    *
    * @example       js
-   * const promise = new SPromise((resolve, reject, trigger, cancel, promise) => {
+   * const promise = new SPromise(({ resolve, reject, emit }) => {
    *    // do something...
    * }).then(value => {
    *    // do something...
@@ -202,21 +167,11 @@ class SPromise extends __SClass.extends(Promise) {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   constructor(executorFnOrSettings = {}, settings = {}) {
-    const _resolve = (arg: any, stacksOrder?: string) => {
-      setTimeout(() => {
-        this.resolve(arg, stacksOrder);
-      }, 100);
-    };
-    // @ts-ignore
-    const _reject = (arg: any, stacksOrder?: string) => {
-      setTimeout(() => {
-        this.reject(arg, stacksOrder);
-      });
-    };
     // @ts-ignore
     let executorFn,
       _this,
       resolvers: any = {};
+
     super(
       __deepMerge(
         {
@@ -230,7 +185,6 @@ class SPromise extends __SClass.extends(Promise) {
       ),
       (resolve, reject) => {
         resolvers.resolve = resolve;
-
         new Promise((rejectPromiseResolve, rejectPromiseReject) => {
           resolvers.reject = rejectPromiseReject;
         }).catch((e) => {
@@ -258,17 +212,23 @@ class SPromise extends __SClass.extends(Promise) {
             ? executorFnOrSettings
             : null;
         if (executorFn) {
-          return executorFn(_resolve, _reject, _api);
+          return executorFn(_api);
         }
       }
     );
 
     _this = this;
 
-    this.expose(new __SEventEmitter(this._settings), {
-      as: 'eventEmitter',
-      props: ['on', 'off', 'emit']
-    });
+    this.expose(
+      new __SEventEmitter({
+        id: this.id,
+        ...this._settings
+      }),
+      {
+        as: 'eventEmitter',
+        props: ['on', 'off', 'emit']
+      }
+    );
 
     this._resolvers = <ISPromiseResolvers>resolvers;
 
@@ -282,6 +242,17 @@ class SPromise extends __SClass.extends(Promise) {
         }, (<ISPromiseConstructorSettings>this._settings).promise.destroyTimeout);
       });
     }
+  }
+
+  // you can also use Symbol.species in order to
+  // return a Promise for then/catch/finally
+  static get [Symbol.species]() {
+    return Promise;
+  }
+
+  // Promise overrides his Symbol.toStringTag
+  get [Symbol.toStringTag]() {
+    return 'SPromise';
   }
 
   /**
@@ -572,7 +543,7 @@ class SPromise extends __SClass.extends(Promise) {
    * @return          {SPromise}                  The SPromise instance to maintain chainability
    *
    * @example         js
-   * new SPromise((resolve, reject, trigge) => {
+   * new SPromise(({ resolve, reject }) => {
    *    // do something...
    *    reject('hello world');
    * }).catch(value => {
@@ -600,7 +571,7 @@ class SPromise extends __SClass.extends(Promise) {
    * @return          {SPromise}                  The SPromise instance to maintain chainability
    *
    * @example         js
-   * new SPromise((resolve, reject, trigger) => {
+   * new SPromise(({ resolve, reject, emit }) => {
    *    // do something...
    *    resolve('hello world');
    * }).finally(value => {
@@ -626,7 +597,7 @@ class SPromise extends __SClass.extends(Promise) {
    * @return          {SPromise}                  The SPromise instance to maintain chainability
    *
    * @example         js
-   * new SPromise((resolve, reject, trigger) => {
+   * new SPromise(({ resolve, reject, emit }) => {
    *    // do something...
    *    resolve('hello world');
    * }).resolved(value => {
@@ -652,7 +623,7 @@ class SPromise extends __SClass.extends(Promise) {
    * @return          {SPromise}                  The SPromise instance to maintain chainability
    *
    * @example         js
-   * new SPromise((resolve, reject, trigger) => {
+   * new SPromise(({ resolve, reject, emit }) => {
    *    // do something...
    *    resolve('hello world');
    * }).rejected(value => {
@@ -678,9 +649,9 @@ class SPromise extends __SClass.extends(Promise) {
    * @return          {Promise}                  A simple promise that will be resolved with the cancel stack result
    *
    * @example         js
-   * new SPromise((resolve, reject, trigger, api) => {
+   * new SPromise(({ resolve, reject, emit, cancel }) => {
    *    // do something...
-   *    api.cancel('hello world');
+   *    cancel('hello world');
    * }).canceled(value => {
    *    // do something with the value that is "hello world"
    * });

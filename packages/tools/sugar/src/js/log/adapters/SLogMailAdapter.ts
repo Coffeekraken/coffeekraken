@@ -92,7 +92,7 @@ export = class SLogMailAdapter {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async log(message, level) {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async ({ resolve, reject }) => {
       let imageData = null;
       if (!__isNode) {
         const canvas = await html2canvas(document.body);

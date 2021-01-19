@@ -152,7 +152,7 @@ class SIpcClient {
    */
   connect(params) {
     return new __SPromise(
-      (resolve, reject) => {
+      ({ resolve, reject }) => {
         // check if params have only 1 id
         if (
           __isPlainObject(params) === true &&
@@ -166,7 +166,7 @@ class SIpcClient {
           this._ipcInstance.connectTo(params, () => {
             this.serverId = params;
             this._ipcInstance.of[this.serverId].on('connect', () => {
-              // this.trigger('connected');
+              // this.emit('connected');
               resolve({
                 server: {
                   id: this.serverId
@@ -174,7 +174,7 @@ class SIpcClient {
               });
             });
             // this._ipcInstance.of[this.serverId].on('disconnect', () => {
-            //   // this.trigger('disconnected');
+            //   // this.emit('disconnected');
             // });
           });
         } else if (typeof params === 'object' && params.id) {
@@ -185,7 +185,7 @@ class SIpcClient {
             () => {
               this.serverId = params.id;
               this._ipcInstance.of[this.serverId].on('connect', () => {
-                // this.trigger('connected');
+                // this.emit('connected');
                 resolve({
                   server: {
                     id: this.serverId,
@@ -195,7 +195,7 @@ class SIpcClient {
                 });
               });
               // this._ipcInstance.of[this.serverId].on('disconnect', () => {
-              //   // this.trigger('disconnected');
+              //   // this.emit('disconnected');
               // });
             }
           );
@@ -208,20 +208,20 @@ class SIpcClient {
   }
 
   /**
-   * @name          trigger
+   * @name          emit
    * @type          Function
    * @override
    *
    * This method override the SPromise one to add the ipc "emit" functionality to it.
    *
-   * @param         {String|Array}        stack            The callbacks that you want to trigger. Can be "then", "catch", "finally" or "cancel". You can trigger multiple stacks by passing an Array like ['then','finally'], or a string like "then,finally"
+   * @param         {String|Array}        stack            The callbacks that you want to emit. Can be "then", "catch", "finally" or "cancel". You can emit multiple stacks by passing an Array like ['then','finally'], or a string like "then,finally"
    * @param         {Mixed}         data         The argument you want to pass to the callback
    * @return        {Promise}                       A default Promise that will be resolved with the result of the stack execution
    *
    * @since         2.0.0
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  trigger(stack, data) {
+  emit(stack, data) {
     // preparing the object to send
     const eventObj = {
       stack: process.env.S_IPC_SPAWN_ID
@@ -252,7 +252,7 @@ class SIpcClient {
   // on(stacks, callback) {
   //   if (typeof stacks === 'string')
   //     stacks = stacks.split(',').map((l) => l.trim());
-  //   this.trigger('_handshake', process.pid);
+  //   this.emit('_handshake', process.pid);
   //   stacks.forEach((stack) => {
   //     this._ipcInstance.of[this.serverId].on(stack, callback);
   //   });

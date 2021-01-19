@@ -70,7 +70,7 @@ module.exports = class SDocMapStreamActions extends __SActionsStreamAction {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(streamObj, settings) {
-    return super.run(streamObj, async (resolve, reject) => {
+    return super.run(streamObj, async ({ resolve, reject }) => {
       const docMap = new __SDocMap(settings);
       const res = await docMap.generate();
       if (res) {

@@ -115,7 +115,7 @@ const fn: ICompileTs = function compileTs(
     }
 
     if (Object.keys(stacks).length === 0) {
-      promise.trigger(
+      promise.emit(
         'error',
         [
           `Sorry but their's nothing to compile.`,
@@ -162,7 +162,7 @@ const fn: ICompileTs = function compileTs(
 
       // check if watch or not
       if (params.watch === true) {
-        promise.trigger('log', {
+        promise.emit('log', {
           value: `<magenta>[${stack}]</magenta> Watch mode <green>enabled</green>`
         });
       }
@@ -180,7 +180,7 @@ const fn: ICompileTs = function compileTs(
           .on('ready', () => {
             if (stacksStates[stack].ready) return;
             stacksStates[stack].ready = true;
-            promise.trigger('log', {
+            promise.emit('log', {
               value: `<magenta>[${stack}]</magenta> Watching files process <green>ready</green>`
             });
             resolveWatch();
@@ -193,12 +193,12 @@ const fn: ICompileTs = function compileTs(
                 delete durationStack[file.path];
               }, 60000);
 
-              promise.trigger('notification', {
+              promise.emit('notification', {
                 type: 'warn',
                 title: `${stack} | Updated`,
                 value: `${file.path.replace(`${__packageRoot()}/`, '')}`
               });
-              promise.trigger('log', {
+              promise.emit('log', {
                 value: `<magenta>[${stack}]</magenta> <yellow>updated</yellow> <green>${file.path.replace(
                   `${__packageRoot()}/`,
                   ''
@@ -223,12 +223,12 @@ const fn: ICompileTs = function compileTs(
                   's'
                 )}s`;
               }
-              promise.trigger('notification', {
+              promise.emit('notification', {
                 type: 'success',
                 title: `${stack} | Success`,
                 value: `${file.path.replace(`${__packageRoot()}/`, '')}`
               });
-              promise.trigger('log', {
+              promise.emit('log', {
                 value: `<magenta>[${stack}]</magenta> <cyan>compiled</cyan> <green>${file.path.replace(
                   `${__packageRoot()}/`,
                   ''
@@ -248,7 +248,7 @@ const fn: ICompileTs = function compileTs(
         params.transpileOnly === undefined ||
         params.transpileOnly === false
       ) {
-        promise.trigger('log', {
+        promise.emit('log', {
           value: `<magenta>[${stack}]</magenta> Starting a full <yellow>tsc</yellow> process`
         });
         // instanciate a new process
@@ -260,15 +260,15 @@ const fn: ICompileTs = function compileTs(
         __SPromise.pipe(pro, promise);
         pro.run(params);
       } else if (params.transpileOnly === true) {
-        promise.trigger('log', {
+        promise.emit('log', {
           value: `<magenta>[${stack}]</magenta> Transpile only mode <green>enabled</green>`
         });
 
         if (params.watch === undefined || params.watch === false) {
-          promise.trigger('log', {
+          promise.emit('log', {
             value: `<magenta>[${stack}]</magenta> Starting the compilation in <yellow>transpileOnly</yellow> mode`
           });
-          promise.trigger('log', {
+          promise.emit('log', {
             value: `<magenta>[${stack}]</magenta> Listing all the files to transpile depending on:\n- ${stackObj.include
               .map(
                 (t) => `<green>${t.replace(`${__packageRoot()}/`, '')}</green>`
@@ -282,7 +282,7 @@ const fn: ICompileTs = function compileTs(
             });
             files = [...files, ...filesFounded];
           }
-          promise.trigger('log', {
+          promise.emit('log', {
             value: `<magenta>[${stack}]</magenta> Found <yellow>${files.length}</yellow> file(s) to compile`
           });
 

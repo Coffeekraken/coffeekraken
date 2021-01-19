@@ -23,7 +23,7 @@ import __SPromise from '../../promise/SPromise';
  */
 function json(filePath) {
   return new __SPromise(
-    async (resolve) => {
+    async ({ resolve }) => {
       resolve(await import(filePath));
     },
     {

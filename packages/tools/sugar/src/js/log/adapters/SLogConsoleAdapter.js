@@ -108,7 +108,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         SLogConsoleAdapter.prototype.log = function (message, level) {
             return __awaiter(this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, new Promise(function (resolve, reject) {
+                    return [2 /*return*/, new Promise(function (_a) {
+                            var resolve = _a.resolve, reject = _a.reject;
                             // init the console method to use
                             var consoleMethod = 'log';
                             // adapting the console method to use depending on the type

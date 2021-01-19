@@ -2,35 +2,12 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const SProcess_1 = __importDefault(require("./SProcess"));
 const buildCommandLine_1 = __importDefault(require("../cli/buildCommandLine"));
 const spawn_1 = __importDefault(require("./spawn"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-/**
- * @name          SCliProcess
- * @namespace     sugar.node.process
- * @Type          Class
- *
- * This class represent a subset of the SProcess class to make the use of command lines based process easy
- * and clean.
- *
- * @param       {String}        command         The command that will be used to run the process
- * @param       {ISCliProcessSettings}        [settings={}]       Some settings to configure your process
- *
- * @todo        Doc
- * @todo        Tests
- *
- * @example       js
- * import SCliProcess from '@coffeekraken/sugar/node/process/SCliProcess';
- * const pro = new SCliProcess('tsc {arguments} --watch');
- * await pro.run({
- *    some: 'arguments'
- * });
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-const Cls = class SCliProcess extends SProcess_1.default {
+class SCliProcess extends SProcess_1.default {
     /**
      * @name      constructor
      * @type      Function
@@ -42,9 +19,24 @@ const Cls = class SCliProcess extends SProcess_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(command, settings = {}) {
-        super(deepMerge_1.default({}, settings));
+        super(deepMerge_1.default({
+            cliProcess: {}
+        }, settings));
         // save the command
         this.command = command;
+    }
+    /**
+     * @name      cliProcessSettings
+     * @type      ISCliProcessSettings
+     * @get
+     *
+     * Get the cliProcessSettings
+     *
+     * @since     2.0.0
+     *
+     */
+    get cliProcessSettings() {
+        return this._settings.cliProcess;
     }
     /**
      * @name        process
@@ -62,16 +54,17 @@ const Cls = class SCliProcess extends SProcess_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     process(params, settings = {}) {
+        const cliProcessSettings = (deepMerge_1.default(this.cliProcessSettings, settings));
         // build the command line
         const command = buildCommandLine_1.default(this.command, params, {
             definition: this.definition,
             alias: false
         });
         // @ts-ignore
-        const pro = spawn_1.default(command, [], Object.assign({ ipc: false, stdio: settings.stdio }, (settings.spawnSettings || {})));
+        const pro = spawn_1.default(command, [], Object.assign({ ipc: false }, (this.processSettings.spawnSettings || {})));
         // @ts-ignore
         return pro;
     }
-};
-module.exports = Cls;
+}
+exports.default = SCliProcess;
 //# sourceMappingURL=SCliProcess.js.map

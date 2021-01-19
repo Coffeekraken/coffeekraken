@@ -26,7 +26,7 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * - id (constructor.name) {String}: A uniqid for your instance.
  * - name (null) {String}: A name for your SCli instance like "Build SCSS", etc...
  * - includeAllArgs (true) {Boolean}: Specify if you want to include all arguments when for example you generate the command string, etc...
- * - output (false) {Boolean|Object}: Specify if you want your SCli instance to display automatically a nice output using the SOutput class, or you can specify this to false and handle all of this yourself using the SPromise events triggered
+ * - output (false) {Boolean|Object}: Specify if you want your SCli instance to display automatically a nice output using the SOutput class, or you can specify this to false and handle all of this yourself using the SPromise events emited
  * - defaultParams ({}) {Object}: Specify some defaults for your accepted and described params of the definition object
  * - childProcess: ({}) {Object}: Specify some settings to pass to the SChildProcess instance like "pipe", etc...
  *
@@ -69,7 +69,7 @@ class SCli extends SPromise_1.default {
             defaultParams: {},
             processSettings: {},
             childProcessSettings: {
-                triggerParent: true
+                emitParent: true
             }
         }, settings);
         super(settings);
@@ -101,12 +101,12 @@ class SCli extends SPromise_1.default {
             // run the process
             const SProcessManagerInstance = this.constructor.processClass;
             this._processManagerInstance = new SProcessManagerInstance(this._paramsObj, this._settings.processSettings);
-            if (settings.childProcessSettings.triggerParent) {
-                const stacks = Array.isArray(settings.childProcessSettings.triggerParent)
-                    ? settings.childProcessSettings.triggerParent.join(',')
+            if (settings.childProcessSettings.emitParent) {
+                const stacks = Array.isArray(settings.childProcessSettings.emitParent)
+                    ? settings.childProcessSettings.emitParent.join(',')
                     : '*';
                 this._processManagerInstance.on(stacks, (value, metas) => {
-                    SChildProcessManager_1.default.triggerParent(metas.stack, value, metas);
+                    SChildProcessManager_1.default.emitParent(metas.stack, value, metas);
                 });
             }
         }
@@ -200,12 +200,12 @@ class SCli extends SPromise_1.default {
      *
      * This method run a new child process with the provided arguments and the definition object.
      * The returned object MUST be an SPromise instance that emit these "events":
-     * - start: Triggered when the command start a process
-     * - close: Triggered when the process is closed
-     * - kill: Triggered when the process has been killed
-     * - success: Triggered when the process has finished without any error
-     * - error: Triggered when the process has had an error
-     * - log: Triggered when some data are pushed in the stdout channel
+     * - start: emited when the command start a process
+     * - close: emited when the process is closed
+     * - kill: emited when the process has been killed
+     * - success: emited when the process has finished without any error
+     * - error: emited when the process has had an error
+     * - log: emited when some data are pushed in the stdout channel
      *
      * @param       {Object}        [paramsObj={}]      An argument object to override the default values of the definition object
      * @param       {Object}        [settings={}]       Same settings object as in the constructor but for this process only
@@ -249,7 +249,7 @@ class SCli extends SPromise_1.default {
                 temp: true,
                 value: `Launching the SCli "<primary>${this._settings.name || this._settings.id}</primary>" process...`
             };
-            this._processManagerInstance.trigger('log', launchingLogObj);
+            this._processManagerInstance.emit('log', launchingLogObj);
         }
         // save running process params
         this._runningParamsObj = paramsObj;

@@ -123,59 +123,62 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             return __awaiter(this, void 0, void 0, function () {
                 var _this = this;
                 return __generator(this, function (_a) {
-                    return [2 /*return*/, new Promise(function (resolve, reject) { return __awaiter(_this, void 0, void 0, function () {
-                            var imageData, canvas, list, body, subject, keys, newobj, _set;
-                            var _this = this;
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        imageData = null;
-                                        if (!!node_1.default) return [3 /*break*/, 2];
-                                        return [4 /*yield*/, html2canvas(document.body)];
-                                    case 1:
-                                        canvas = _a.sent();
-                                        imageData = canvas.toDataURL('image/jpeg');
-                                        _a.label = 2;
-                                    case 2:
-                                        list = [];
-                                        Object.keys(this._settings.metas).forEach(function (metaName) {
-                                            list.push("<li><strong>" + metaName + "</strong>: " + _this._settings.metas[metaName] + "</li>");
-                                        });
-                                        body = mail_1.default(this._settings.body.replace('[content]', "\n        " + message + "\n        <br /><br />\n        " + list.join('<br />') + "\n      "));
-                                        subject = this._settings.subject.replace('[level]', level);
-                                        keys = Object.keys(this._settings);
-                                        newobj = {};
-                                        keys.forEach(function (key) {
-                                            if (['host', 'username', 'password', 'to', 'from', 'securetoken'].indexOf(key.toLowerCase()) === -1)
-                                                return;
-                                            newobj[key.charAt(0).toUpperCase() + key.slice(1)] = _this._settings[key];
-                                        });
-                                        try {
-                                            _set = __assign({ Body: body, Subject: subject }, newobj);
-                                            if (imageData) {
-                                                _set['Attachments'] = [
-                                                    {
-                                                        name: "screenshot.jpg",
-                                                        data: imageData
-                                                    }
-                                                ];
-                                            }
-                                            delete _set.metas;
-                                            smtp_js_1.default.send(_set)
-                                                .then(function (message) {
-                                                resolve(message);
-                                            })
-                                                .catch(function (error) {
-                                                reject(error);
+                    return [2 /*return*/, new Promise(function (_a) {
+                            var resolve = _a.resolve, reject = _a.reject;
+                            return __awaiter(_this, void 0, void 0, function () {
+                                var imageData, canvas, list, body, subject, keys, newobj, _set;
+                                var _this = this;
+                                return __generator(this, function (_b) {
+                                    switch (_b.label) {
+                                        case 0:
+                                            imageData = null;
+                                            if (!!node_1.default) return [3 /*break*/, 2];
+                                            return [4 /*yield*/, html2canvas(document.body)];
+                                        case 1:
+                                            canvas = _b.sent();
+                                            imageData = canvas.toDataURL('image/jpeg');
+                                            _b.label = 2;
+                                        case 2:
+                                            list = [];
+                                            Object.keys(this._settings.metas).forEach(function (metaName) {
+                                                list.push("<li><strong>" + metaName + "</strong>: " + _this._settings.metas[metaName] + "</li>");
                                             });
-                                        }
-                                        catch (e) {
-                                            console.error(e);
-                                        }
-                                        return [2 /*return*/];
-                                }
+                                            body = mail_1.default(this._settings.body.replace('[content]', "\n        " + message + "\n        <br /><br />\n        " + list.join('<br />') + "\n      "));
+                                            subject = this._settings.subject.replace('[level]', level);
+                                            keys = Object.keys(this._settings);
+                                            newobj = {};
+                                            keys.forEach(function (key) {
+                                                if (['host', 'username', 'password', 'to', 'from', 'securetoken'].indexOf(key.toLowerCase()) === -1)
+                                                    return;
+                                                newobj[key.charAt(0).toUpperCase() + key.slice(1)] = _this._settings[key];
+                                            });
+                                            try {
+                                                _set = __assign({ Body: body, Subject: subject }, newobj);
+                                                if (imageData) {
+                                                    _set['Attachments'] = [
+                                                        {
+                                                            name: "screenshot.jpg",
+                                                            data: imageData
+                                                        }
+                                                    ];
+                                                }
+                                                delete _set.metas;
+                                                smtp_js_1.default.send(_set)
+                                                    .then(function (message) {
+                                                    resolve(message);
+                                                })
+                                                    .catch(function (error) {
+                                                    reject(error);
+                                                });
+                                            }
+                                            catch (e) {
+                                                console.error(e);
+                                            }
+                                            return [2 /*return*/];
+                                    }
+                                });
                             });
-                        }); })];
+                        })];
                 });
             });
         };

@@ -30,7 +30,7 @@ import __filesize from 'filesize';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function folderSize(folderPath, rawFormat = false) {
-  return new Promise((resolve, reject) => {
+  return new Promise(({ resolve, reject }) => {
     __getSize(folderPath, (error, size) => {
       if (error) throw error;
       resolve(rawFormat ? size : __filesize(size));

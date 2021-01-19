@@ -3,8 +3,10 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
-const SPromise_1 = __importDefault(require("../../promise/SPromise"));
+const SClass_1 = __importDefault(require("../../class/SClass"));
+const SEventEmitter_1 = __importDefault(require("../../event/SEventEmitter"));
 /**
  * @name          SProcessStdio
  * @namespace     sugar.node.process
@@ -14,7 +16,7 @@ const SPromise_1 = __importDefault(require("../../promise/SPromise"));
  * This class represent the base one for all the process "Stdio"
  * compatible setting.
  *
- * @param     {ISProcessStdioSettings}     [settings={}]       Some settings to configure your Stdio
+ * @param     {ISProcessStdioCtorSettings}     [settings={}]       Some settings to configure your Stdio
  *
  * @todo      interface
  * @todo      doc
@@ -32,7 +34,7 @@ const SPromise_1 = __importDefault(require("../../promise/SPromise"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls = class SProcessStdio {
+class SProcessStdio extends SClass_1.default {
     /**
      * @name      constructor
      * @type      Function
@@ -44,55 +46,17 @@ const Cls = class SProcessStdio {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(source, settings = {}) {
-        /**
-         * @name      _settings
-         * @type      ISProcessStdioSettings
-         * @private
-         *
-         * Store the process Stdio settings
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this._settings = {};
+        super(deepMerge_1.default({
+            processStdio: {}
+        }, settings));
         this._sources = Array.isArray(source) ? source : [source];
-        this._settings = deepMerge_1.default({}, settings);
-        this._promise = new SPromise_1.default();
+        this.expose(new SEventEmitter_1.default({
+            id: this.id
+        }), {
+            as: 'eventEmitter',
+            props: ['on', 'off', 'emit']
+        });
     }
-    /**
-     * @name          trigger
-     * @type          Function
-     *
-     * Trigger some "events" through the SPromise instance
-     *
-     * @param       {String}      stack         The stack (name) of the event
-     * @param       {Any}         data          The data to pass along the event
-     * @return      {SPromise}                  The SPromise instance to maintain chainability
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    trigger(stack, data) {
-        this._promise.trigger(stack, data);
-        return this._promise;
-    }
-    /**
-     * @name          on
-     * @type          Function
-     *
-     * Subscribe to some events emitted by the Stdio
-     *
-     * @param       {String}      stack         The stack (name) of the event
-     * @param       {Function}     callback       The callback to call when the event is fired
-     * @return      {SPromise}                  The SPromise instance to maintain chainability
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    on(stack, callback) {
-        this._promise.on(stack, callback);
-        return this._promise;
-    }
-};
-module.exports = Cls;
+}
+exports.default = SProcessStdio;
 //# sourceMappingURL=SProcessStdio.js.map

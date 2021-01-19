@@ -28,7 +28,7 @@ module.exports = class STimer extends SPromise_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(duration, settings = {}) {
-        super((resolve, reject, trigger) => {
+        super(({ resolve, reject, emit }) => {
             this.duration = duration;
             // calculate the tickInterval
             if (this._settings.tickCount) {
@@ -148,7 +148,7 @@ module.exports = class STimer extends SPromise_1.default {
                 this.start();
             }
             // loop on each completes functions
-            this.trigger('complete', this);
+            this.emit('complete', this);
         }
         else {
             // launch another tick
@@ -159,7 +159,7 @@ module.exports = class STimer extends SPromise_1.default {
         }
         // loop on each ticks functions
         if (this.isStarted())
-            this.trigger('tick', this);
+            this.emit('tick', this);
     }
     /**
      * @name            remaing
@@ -192,7 +192,7 @@ module.exports = class STimer extends SPromise_1.default {
             this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time
         }
         // loop on each change duration functions
-        this.trigger('duration', this);
+        this.emit('duration', this);
     }
     get duration() {
         return this._duration;
@@ -211,7 +211,7 @@ module.exports = class STimer extends SPromise_1.default {
         this._tickCount = tickCount;
         this._tickInterval = this._duration / this._tickCount;
         // loop on each change tick count functions
-        this.trigger('tickCount', this);
+        this.emit('tickCount', this);
     }
     get tickCount() {
         return this._tickCount;
@@ -252,7 +252,7 @@ module.exports = class STimer extends SPromise_1.default {
         if (start)
             this.start();
         // loop on each resets functions
-        this.trigger('reset', this);
+        this.emit('reset', this);
         // maintain chainability
         return this;
     }
@@ -303,7 +303,7 @@ module.exports = class STimer extends SPromise_1.default {
             }, this._tickInterval);
         }
         // loop on each start functions
-        this.trigger('start', this);
+        this.emit('start', this);
         // maintain chainability
         return this;
     }
@@ -323,7 +323,7 @@ module.exports = class STimer extends SPromise_1.default {
         // clean the interval
         clearTimeout(this._tickSetTimeout);
         // loop on each pause functions
-        this.trigger('pause', this);
+        this.emit('pause', this);
         // maintain chainability
         return this;
     }
@@ -341,7 +341,7 @@ module.exports = class STimer extends SPromise_1.default {
         // reset
         this.reset();
         // loop on each stop functions
-        this.trigger('stop', this);
+        this.emit('stop', this);
         // maintain chainability
         return this;
     }
@@ -360,7 +360,7 @@ module.exports = class STimer extends SPromise_1.default {
         this._completesCallbacks = [];
         this._ticksCallbacks = [];
         // loop on each destroy functions
-        this.trigger('destroy', this);
+        this.emit('destroy', this);
         // maintain chainability
         return this;
     }

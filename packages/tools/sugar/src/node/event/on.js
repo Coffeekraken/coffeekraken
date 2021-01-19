@@ -10,7 +10,7 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * @type          Function
  * @beta
  *
- * This function allows you to subscribe to global events triggered by the "sugar.node.event.dispatch" function
+ * This function allows you to subscribe to global events emited by the "sugar.node.event.dispatch" function
  * It use under the hood an SPromise instance
  *
  * @param         {String}        name          The event name you want to subscribe to

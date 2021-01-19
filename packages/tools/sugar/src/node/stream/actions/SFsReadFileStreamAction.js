@@ -56,7 +56,7 @@ module.exports = (_a = class SFsReadFileStreamAction extends SActionsStreamActio
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         run(streamObj, settings = this._settings) {
-            return super.run(streamObj, (resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            return super.run(streamObj, ({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
                 if (!fs_1.default.existsSync(streamObj.input))
                     throw new Error(`The given "<yellow>input</yellow>" streamObj file path property "<red>${streamObj}</red>" does not exists...`);
                 if (directory_1.default(streamObj.input))

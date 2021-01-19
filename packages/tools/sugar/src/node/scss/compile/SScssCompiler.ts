@@ -153,7 +153,7 @@ export = class SScssCompiler extends __SCompiler {
           duration: Date.now() - startTime
         });
       } else {
-        promise.trigger('files', {
+        promise.emit('files', {
           files: resultsObj,
           startTime: startTime,
           endTime: Date.now(),

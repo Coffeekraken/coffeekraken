@@ -44,12 +44,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function inViewportStatusChange($elm) {
         var isFinished = false;
-        return new SPromise_1.default(function (resolve, reject, trigger) {
+        return new SPromise_1.default(function (_a) {
+            var emit = _a.emit;
             function _whenIn() {
                 whenInViewport_1.default($elm).then(function () {
                     if (isFinished)
                         return;
-                    trigger('enter', $elm);
+                    emit('enter', $elm);
                     _whenOut();
                 });
             }
@@ -57,7 +58,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 whenOutOfViewport_1.default($elm).then(function () {
                     if (isFinished)
                         return;
-                    trigger('exit', $elm);
+                    emit('exit', $elm);
                     _whenIn();
                 });
             }

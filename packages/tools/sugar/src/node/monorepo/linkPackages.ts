@@ -36,7 +36,7 @@ import _fs from 'fs';
 interface ILinkPackagesResolveRejectFn {
   (value: any): void;
 }
-interface ILinkPackagesTriggerFn {
+interface ILinkPackagesEmitFn {
   (stack: string, value: any): any;
 }
 interface ILinkPackagesCancelFn {
@@ -51,8 +51,7 @@ export = function linkPackages(settings = {}): Promise<null> {
     async (
       resolve: ILinkPackagesResolveRejectFn,
       reject: ILinkPackagesResolveRejectFn,
-      trigger: ILinkPackagesTriggerFn,
-      cancel: ILinkPackagesCancelFn
+      emit: ILinkPackagesEmitFn
     ) => {
       // make sure we are in a package
       if (!_fs.existsSync(`${settings.rootDir}/package.json`)) {
@@ -67,7 +66,7 @@ export = function linkPackages(settings = {}): Promise<null> {
         // get json
         const packageJson = packagesObj[packagePath];
         // logs
-        trigger('log', {
+        emit('log', {
           value: `<yellow>${packageJson.name}</yellow> (<cyan>${packageJson.version}</cyan>)`
         });
         // loop again in the packagesObj to create symlink in every
@@ -102,7 +101,7 @@ export = function linkPackages(settings = {}): Promise<null> {
             `cd ${symlinkFolderPath} && rm -rf ${nameFolder} && ln -s ${relPathToDestinationModule} ${nameFolder}`
           );
           // logs
-          trigger('log', {
+          emit('log', {
             value: `- Symlinked package <green>${json.name}</green>`
           });
         });

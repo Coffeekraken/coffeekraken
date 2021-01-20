@@ -37,7 +37,9 @@ import __SBuildScssInterface from './interface/SBuildScssInterface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SBuildScssActionsStream extends __SActionsStream {
-  static interface = __SBuildScssInterface;
+  static interfaces = {
+    this: __SBuildScssInterface
+  };
 
   /**
    * @name        constructor
@@ -100,4 +102,4 @@ export = class SBuildScssActionsStream extends __SActionsStream {
     }
     return streamObj;
   }
-}
+};

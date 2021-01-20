@@ -89,20 +89,20 @@ function validateValue(value, definition, settings = {}) {
   }
 
   const issueObj = {
-    $expected: definition,
-    $received: {
+    expected: definition,
+    received: {
       type: __typeof(value),
       value
     },
-    $name: settings.name,
-    $issues: [],
-    $messages: {}
+    name: settings.name,
+    issues: [],
+    messages: {}
   };
 
   Object.keys(settings.validationsObj).forEach((validationName, i) => {
     if (!_validationsObj[validationName]) {
-      issueObj.$issues.push(`definition.${validationName}.unknown`);
-      issueObj.$messages[
+      issueObj.issues.push(`definition.${validationName}.unknown`);
+      issueObj.messages[
         `definition.${validationName}.unknown`
       ] = `The specified "<yellow>${validationName}</yellow>" validation is <red>not supported</red>`;
     }
@@ -125,25 +125,22 @@ function validateValue(value, definition, settings = {}) {
       ...validationObj.args
     );
     if (validationResult !== true) {
-      issueObj.$issues.push(validationName);
-      issueObj.$messages[validationName] = validationResult;
+      issueObj.issues.push(validationName);
+      issueObj.messages[validationName] = validationResult;
     }
   });
 
   if (settings.extendFn && typeof settings.extendFn === 'function') {
     const additionalIssues =
       settings.extendFn(value, definition, settings) || [];
-    issueObj.$issues = [
-      ...issueObj.$issues,
-      ...(additionalIssues.$issues || [])
-    ];
-    issueObj.$messages = [
-      ...issueObj.$messages,
-      ...(additionalIssues.$messages || [])
+    issueObj.issues = [...issueObj.issues, ...(additionalIssues.issues || [])];
+    issueObj.messages = [
+      ...issueObj.messages,
+      ...(additionalIssues.messages || [])
     ];
   }
 
-  if (!issueObj.$issues.length) return true;
+  if (!issueObj.issues.length) return true;
   if (settings.throw) {
     throw __toString(issueObj, {
       beautify: true

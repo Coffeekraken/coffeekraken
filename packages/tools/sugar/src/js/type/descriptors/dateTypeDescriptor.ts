@@ -1,7 +1,7 @@
 // shared
 
 import __isPlainObject from '../../is/plainObject';
-import { ISTypeDescriptor } from '../interface/ISType';
+import { ISTypeDescriptor } from '../SType';
 
 /**
  * @name              dateTypeDescriptor

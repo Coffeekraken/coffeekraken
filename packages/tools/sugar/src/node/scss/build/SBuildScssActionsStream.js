@@ -63,6 +63,8 @@ module.exports = (_a = class SBuildScssActionsStream extends SActionsStream_1.de
             return streamObj;
         }
     },
-    _a.interface = SBuildScssInterface_1.default,
+    _a.interfaces = {
+        this: SBuildScssInterface_1.default
+    },
     _a);
 //# sourceMappingURL=SBuildScssActionsStream.js.map

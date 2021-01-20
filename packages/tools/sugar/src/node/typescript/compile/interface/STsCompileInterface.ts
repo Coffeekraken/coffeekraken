@@ -22,7 +22,7 @@ import __packageRoot from '../../../path/packageRoot';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class STsCompileInterface extends __SInterface {
+class STsCompileInterface extends __SInterface {
   static definition = {
     input: {
       type: 'String|Array<String>',
@@ -58,4 +58,5 @@ export = class STsCompileInterface extends __SInterface {
       default: false
     }
   };
-};
+}
+export default STsCompileInterface;

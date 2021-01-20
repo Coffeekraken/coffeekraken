@@ -76,6 +76,8 @@ module.exports = (_a = class STestJestProcess extends SChildProcessManager_1.def
             super.kill();
         }
     },
-    _a.interface = STestJestInterface_1.default,
+    _a.interfaces = {
+        this: STestJestInterface_1.default
+    },
     _a);
 //# sourceMappingURL=STestJestProcessManager.js.map

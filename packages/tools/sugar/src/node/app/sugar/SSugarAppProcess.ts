@@ -29,7 +29,9 @@ import __SSugarAppModule from './SSugarAppModule';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SSugarAppProcess extends __SProcess {
-  static interface = __SSugarAppInterface;
+  static interfaces = {
+    this: __SSugarAppInterface
+  };
 
   /**
    * @name              modulesObjs

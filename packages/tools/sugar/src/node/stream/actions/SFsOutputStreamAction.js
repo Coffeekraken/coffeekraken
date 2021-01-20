@@ -83,6 +83,8 @@ module.exports = (_a = class SFsOutputStreamAction extends SActionsStreamAction_
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SFsOutputStreamActionInterface,
+    _a.interfaces = {
+        this: SFsOutputStreamActionInterface
+    },
     _a);
 //# sourceMappingURL=SFsOutputStreamAction.js.map

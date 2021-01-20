@@ -1,7 +1,7 @@
 // shared
 
 import __isMap from '../../is/map';
-import { ISTypeDescriptor } from '../interface/ISType';
+import { ISTypeDescriptor } from '../SType';
 import __SType from '../_SType';
 
 /**

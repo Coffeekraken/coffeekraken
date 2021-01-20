@@ -75,14 +75,14 @@ function validateObject(
   );
 
   let issuesObj = {
-    $name:
+    name:
       settings.name ||
       objectToCheck.constructor.name ||
       objectToCheck.name ||
       'Unnamed',
-    $interface: settings.interface,
-    $issues: [],
-    $messages: {}
+    interface: settings.interface,
+    issues: [],
+    messages: {}
   };
 
   // loop on the definition object properties
@@ -107,14 +107,14 @@ function validateObject(
     }
 
     issuesObj[argName] = {
-      $name: argName,
-      $received: {
+      name: argName,
+      received: {
         type: __typeof(value),
         value
       },
-      $expected: argDefinition,
-      $issues: [],
-      $messages: {}
+      expected: argDefinition,
+      issues: [],
+      messages: {}
     };
 
     const validationRes = __validateValue(value, argDefinition, {
@@ -134,8 +134,8 @@ function validateObject(
 
     Object.keys(settings.validationsObj).forEach((validationName) => {
       if (!_validationsObj[validationName]) {
-        issuesObj.$issues.push(`definition.${validationName}.unknown`);
-        issuesObj.$messages[
+        issuesObj.issues.push(`definition.${validationName}.unknown`);
+        issuesObj.messages[
           `definition.${validationName}.unknown`
         ] = `The specified "<yellow>${validationName}</yellow>" validation is <red>not supported</red>`;
       }
@@ -172,8 +172,8 @@ function validateObject(
         ...validationObj.args
       );
       if (validationResult !== true) {
-        issuesObj[argName].$issues.push(validationName);
-        issuesObj[argName].$messages[validationName] = validationResult;
+        issuesObj[argName].issues.push(validationName);
+        issuesObj[argName].messages[validationName] = validationResult;
       }
     });
 
@@ -227,7 +227,7 @@ function validateObject(
     if (settings.extendsFn) {
       if (!issuesObj[argName]) {
         issuesObj[argName] = {
-          $issues: []
+          issues: []
         };
       }
       issuesObj[argName] = settings.extendsFn(
@@ -241,9 +241,9 @@ function validateObject(
     // filter args that have no issues
     issuesObj = __filter(issuesObj, (item, key) => {
       if (Array.isArray(item)) return true;
-      if (__isPlainObject(item) && item.$issues) {
-        if (!item.$issues.length) return false;
-        if (issuesObj.$issues.indexOf(key) === -1) issuesObj.$issues.push(key);
+      if (__isPlainObject(item) && item.issues) {
+        if (!item.issues.length) return false;
+        if (issuesObj.issues.indexOf(key) === -1) issuesObj.issues.push(key);
       }
       return true;
     });
@@ -265,18 +265,18 @@ function validateObject(
         [..._argPath, argName]
       );
 
-      if (childrenValidation !== true && childrenValidation.$issues) {
-        childrenValidation.$issues.forEach((issue) => {
+      if (childrenValidation !== true && childrenValidation.issues) {
+        childrenValidation.issues.forEach((issue) => {
           const issueObj = childrenValidation[issue];
-          issueObj.$name = `${argName}.${issueObj.name}`;
-          issuesObj.$issues.push(`${argName}.${issue}`);
+          issueObj.name = `${argName}.${issueObj.name}`;
+          issuesObj.issues.push(`${argName}.${issue}`);
           issuesObj[`${argName}.${issue}`] = issueObj;
         });
       }
     }
   }
 
-  if (!issuesObj.$issues.length) return true;
+  if (!issuesObj.issues.length) return true;
 
   if (settings.throw) {
     throw __toString(issuesObj, {

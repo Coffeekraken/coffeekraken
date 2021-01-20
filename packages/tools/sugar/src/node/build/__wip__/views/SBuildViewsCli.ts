@@ -36,7 +36,9 @@ module.exports = class SBuildViewsCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = __SBuildViewsInterface;
+  static interfaces = {
+    this: __SBuildViewsInterface
+  };
 
   /**
    * @name          constructor

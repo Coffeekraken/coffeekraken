@@ -4,7 +4,7 @@ import __SInterface from '../../../interface/SInterface';
 import __sugarConfig from '../../../config/sugar';
 
 /**
- * @name                SBuildScssInterface
+ * @name                SScssCompilerParamsInterface
  * @namespace           sugar.node.scss.compile.interface
  * @type                Class
  * @extends             SInterface
@@ -20,7 +20,7 @@ import __sugarConfig from '../../../config/sugar';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SScssCompileParamsInterface extends __SInterface {
+class SScssCompilerParamsInterface extends __SInterface {
   static definition = {
     input: {
       type: 'String|Array<String>',
@@ -103,4 +103,6 @@ export = class SScssCompileParamsInterface extends __SInterface {
       level: 2
     }
   };
-};
+}
+
+export default SScssCompilerParamsInterface;

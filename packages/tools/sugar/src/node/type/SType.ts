@@ -6,4 +6,5 @@ import __fileTypeDescriptor from './descriptors/fileTypeDescriptor';
 
 __SType.registerType(__fileTypeDescriptor);
 
-export = __SType;
+export * from './_SType';
+export default __SType;

@@ -122,6 +122,8 @@ module.exports = (_a = class SFsDeamonProcess extends SProcess_1.default {
             return file;
         }
     },
-    _a.interface = SFsDeamonInterface_1.default,
+    _a.interfaces = {
+        this: SFsDeamonInterface_1.default
+    },
     _a);
 //# sourceMappingURL=SFsDeamonProcess.js.map

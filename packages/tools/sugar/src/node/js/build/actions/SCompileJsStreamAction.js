@@ -64,8 +64,10 @@ module.exports = (_a = class SCompileJsStreamAction extends SActionsStreamAction
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SBuildJsInterface_1.default.extends({
-        definition: {}
-    }),
+    _a.interfaces = {
+        this: SBuildJsInterface_1.default.extends({
+            definition: {}
+        })
+    },
     _a);
 //# sourceMappingURL=SCompileJsStreamAction.js.map

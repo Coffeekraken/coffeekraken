@@ -43,7 +43,9 @@ export = class SJestStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SJestStreamActionInterface;
+  static interfaces = {
+    this: SJestStreamActionInterface
+  };
 
   /**
    * @name            constructor

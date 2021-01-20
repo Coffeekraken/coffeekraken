@@ -1,6 +1,6 @@
 // shared
 
-import { ISTypeDescriptor } from '../interface/ISType';
+import { ISTypeDescriptor } from '../SType';
 
 /**
  * @name              undefinedTypeDescriptor

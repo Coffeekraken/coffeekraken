@@ -36,7 +36,9 @@ import __SBuildFrontspecStreamAction from './actions/SBuildFrontspecStreamAction
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SBuildFrontspecActionsStream extends __SActionsStream {
-  static interface = __SBuildFrontspecInterface;
+  static interfaces = {
+    this: __SBuildFrontspecInterface
+  };
 
   /**
    * @name        constructor
@@ -65,4 +67,4 @@ export = class SBuildFrontspecActionsStream extends __SActionsStream {
       )
     );
   }
-}
+};

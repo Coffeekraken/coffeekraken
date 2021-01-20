@@ -1,3 +1,5 @@
 import __SType from './_SType';
 import './sTypeRegisterDefaultDescriptors';
-export = __SType;
+
+export * from './_SType';
+export default __SType;

@@ -51,7 +51,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             var result = ofType_1.default(value, type);
             if (result === true)
                 return true;
-            return [value, type, result.$received.type];
+            return [value, type, result.received.type];
         };
         STypeValidation.message = 'This value has to be of type "<yellow>%1</yellow>" and you\'ve passed "<red>%0</red>" which is of type "<red>%2</red>"';
         return STypeValidation;

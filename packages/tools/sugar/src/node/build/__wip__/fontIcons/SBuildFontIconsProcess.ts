@@ -17,7 +17,9 @@ const __SBuildFontIconsInterface = require('./interface/SBuildFontIconsInterface
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildFontIconsProcess extends __SProcess {
-  static interface = __SBuildFontIconsInterface;
+  static interfaces = {
+    this: __SBuildFontIconsInterface
+  };
 
   /**
    * @name          constructor

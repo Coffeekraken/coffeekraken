@@ -29,7 +29,9 @@ import __STsCompiler from './STsCompiler';
 const Cls: ISCompileTsProcessCtor = class SCompileTsProcess
   extends SProcess
   implements ISCompileTsProcess {
-  static interface = __SCompileTsProcessInterface;
+  static interfaces = {
+    this: __SCompileTsProcessInterface
+  };
 
   /**
    * @name          constructor

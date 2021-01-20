@@ -156,6 +156,8 @@ module.exports = (_a = class SFindInFileStreamAction extends SActionsStreamActio
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SFsFilesResolverStreamActionInterface,
+    _a.interfaces = {
+        this: SFsFilesResolverStreamActionInterface
+    },
     _a);
 //# sourceMappingURL=SFsFilesResolverStreamAction.js.map

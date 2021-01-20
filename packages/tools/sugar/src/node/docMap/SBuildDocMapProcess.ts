@@ -17,7 +17,9 @@ import __SDocMap from './SDocMap';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 module.exports = class SBuildDocMapProcess extends __SProcess {
-  static interface = __SBuildDocMapInterface;
+  static interfaces = {
+    this: __SBuildDocMapInterface
+  };
 
   /**
    * @name          constructor

@@ -33,7 +33,9 @@ module.exports = class SFantasticonStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = __BBuildFontIconsInterface;
+  static interfaces = {
+    this: __BBuildFontIconsInterface
+  };
 
   /**
    * @name            constructor

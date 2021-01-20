@@ -66,6 +66,8 @@ module.exports = (_a = class SFsUnlinkStreamAction extends SActionsStreamAction_
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SFsUnlinkStreamActionInterface,
+    _a.interfaces = {
+        this: SFsUnlinkStreamActionInterface
+    },
     _a);
 //# sourceMappingURL=SFsUnlinkStreamAction.js.map

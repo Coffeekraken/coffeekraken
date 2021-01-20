@@ -64,7 +64,9 @@ import __SCliProcess from '../../process/SCliProcess';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class STsCompiler extends __SCompiler {
-  static interface = __STsCompileInterface;
+  static interfaces = {
+    this: __STsCompileInterface
+  };
 
   /**
    * @name            constructor

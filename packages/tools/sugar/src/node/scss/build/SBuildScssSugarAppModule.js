@@ -36,6 +36,8 @@ module.exports = (_a = class SBuildScssSugarAppModule extends SSugarAppModule_1.
             return super.start(pro);
         }
     },
-    _a.interface = SBuildScssInterface_1.default,
+    _a.interfaces = {
+        this: SBuildScssInterface_1.default
+    },
     _a);
 //# sourceMappingURL=SBuildScssSugarAppModule.js.map

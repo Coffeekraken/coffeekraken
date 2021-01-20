@@ -323,6 +323,8 @@ module.exports = (_a = class STsCompiler extends SCompiler_1.default {
             return tsconfig.stacks[stack] !== undefined;
         }
     },
-    _a.interface = STsCompileInterface_1.default,
+    _a.interfaces = {
+        this: STsCompileInterface_1.default
+    },
     _a);
 //# sourceMappingURL=STsCompiler.js.map

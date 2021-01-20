@@ -21,7 +21,9 @@ import __SFrontendServerInterface from './interface/SFrontendServerInterface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SFrontendServerProcess extends __SProcess {
-  static interface = __SFrontendServerInterface;
+  static interfaces = {
+    this: __SFrontendServerInterface
+  };
 
   /**
    * @name          constructor

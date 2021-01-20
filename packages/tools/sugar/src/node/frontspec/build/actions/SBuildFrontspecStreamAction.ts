@@ -37,7 +37,9 @@ export = class SBuildFrontspecStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = __SBuildFrontspecInterface;
+  static interfaces = {
+    this: __SBuildFrontspecInterface
+  };
 
   /**
    * @name            constructor

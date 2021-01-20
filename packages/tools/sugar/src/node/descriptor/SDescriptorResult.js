@@ -3,37 +3,12 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const toString_1 = __importDefault(require("../string/toString"));
 const parseHtml_1 = __importDefault(require("../console/parseHtml"));
 const clone_1 = __importDefault(require("../object/clone"));
 const node_1 = __importDefault(require("../is/node"));
-/**
- * @name                SDescriptorResult
- * @namespace           sugar.js.descriptor
- * @type                Class
- *
- * This class is the main one that MUST be used as parent one
- * when creating any descriptor like object, string, etc...
- *
- * @param       {ISDescriptorResultSettings}      settings        An object of setting to configure your descriptor instance
- *
- * @todo         doc
- * @todo        tests
- * @todo        add possibility to set a "details" on each rules for better returns
- *
- * @example       js
- * import SDescriptorResult from '@coffeekraken/sugar/js/descriptor/SDescriptorResult';
- * class MyDescriptor extends SDescriptorResult {
- *    constructor(settings) {
- *      super(settings);
- *      // do something...
- *    }
- * }
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-const Cls = class SDescriptorResult {
+class SDescriptorResult {
     /**
      * @name      constructor
      * @type      Function
@@ -165,9 +140,10 @@ const Cls = class SDescriptorResult {
         return parseHtml_1.default(`
 ${headerArray.join('\n')}
 ${issuesArray.join('\n')}
-${settingsArray.join('\n')}
+${this._descriptorSettings.verbose ? settingsArray.join('\n') : ''}
     `).trim();
     }
-};
-module.exports = Cls;
+}
+const Cls = SDescriptorResult;
+exports.default = SDescriptorResult;
 //# sourceMappingURL=SDescriptorResult.js.map

@@ -55,7 +55,9 @@ export = class SFsCacheStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SFsCacheStreamActionInterface;
+  static interfaces = {
+    this: SFsCacheStreamActionInterface
+  };
 
   /**
    * @name            constructor

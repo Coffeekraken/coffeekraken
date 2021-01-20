@@ -37,6 +37,8 @@ module.exports = (_a = class SFrontendServerProcess extends SProcess_1.default {
             return frontend_1.default(params);
         }
     },
-    _a.interface = SFrontendServerInterface_1.default,
+    _a.interfaces = {
+        this: SFrontendServerInterface_1.default
+    },
     _a);
 //# sourceMappingURL=SFrontendServerProcess.js.map

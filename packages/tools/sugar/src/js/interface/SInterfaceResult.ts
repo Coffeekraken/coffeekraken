@@ -1,11 +1,9 @@
 // @shared
 
-import ISInterfaceResult, {
-  ISInterfaceResultCtor,
-  ISInterfaceResultData
-} from './interface/ISInterfaceResult';
 import __deepMerge from '../object/deepMerge';
 import __isNode from '../is/node';
+
+import { ISDescriptorResult } from '../descriptor/SDescriptorResult';
 
 /**
  * @name            SInterfaceResult
@@ -21,8 +19,22 @@ import __isNode from '../is/node';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls: ISInterfaceResultCtor = class SInterfaceResult
-  implements ISInterfaceResult {
+
+export interface ISInterfaceResultData {
+  descriptorResult?: ISDescriptorResult;
+}
+
+export interface ISInterfaceResultCtor {
+  new (data: ISInterfaceResultData): ISInterfaceResult;
+}
+export interface ISInterfaceResult {
+  value: any;
+  hasIssues(): boolean;
+  toString(): string;
+  toConsole(): string;
+}
+
+class SInterfaceResult implements ISInterfaceResult {
   /**
    * @name        _data
    * @type        ISInterfaceResultData
@@ -121,5 +133,6 @@ const Cls: ISInterfaceResultCtor = class SInterfaceResult
 ${stringArray.join('\n')}
     `.trim();
   }
-};
-export = Cls;
+}
+const Cls: ISInterfaceResultCtor = SInterfaceResult;
+export default SInterfaceResult;

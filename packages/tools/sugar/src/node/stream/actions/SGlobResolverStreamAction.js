@@ -94,6 +94,8 @@ module.exports = (_a = class SGlobResolverStreamAction extends SActionsStreamAct
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SGlobResolverStreamActionInterface,
+    _a.interfaces = {
+        this: SGlobResolverStreamActionInterface
+    },
     _a);
 //# sourceMappingURL=SGlobResolverStreamAction.js.map

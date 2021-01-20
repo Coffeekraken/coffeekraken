@@ -1,10 +1,6 @@
 // @shared
 
-import IParseTypeString, {
-  IParseTypeStringResultObj,
-  IParseTypeStringSingleResultObj
-} from './interface/IParseTypeString';
-import __SType from './_SType';
+import __SType, { ISType } from './_SType';
 
 /**
  * @name            parseTypeString
@@ -28,6 +24,26 @@ import __SType from './_SType';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
  */
+
+export interface ITypeStringObject {
+  raw: string;
+  types: ISType[];
+}
+
+export interface IParseTypeStringSingleResultObj {
+  type: string;
+  of: string[] | undefined;
+}
+
+export interface IParseTypeStringResultObj {
+  raw: string;
+  types: IParseTypeStringSingleResultObj[];
+}
+
+export interface IParseTypeString {
+  (typeString: string): IParseTypeStringResultObj;
+}
+
 function parseSingleTypeString(
   typeString: string
 ): IParseTypeStringSingleResultObj {
@@ -110,4 +126,4 @@ const fn: IParseTypeString = function parseTypeString(
   };
   return res;
 };
-export = fn;
+export default fn;

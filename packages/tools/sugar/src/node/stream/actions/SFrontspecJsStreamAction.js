@@ -123,6 +123,8 @@ module.exports = (_a = class SFrontspecJsStreamAction extends SActionsStreamActi
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SFrontspecJsStreamActionInterface,
+    _a.interfaces = {
+        this: SFrontspecJsStreamActionInterface
+    },
     _a);
 //# sourceMappingURL=SFrontspecJsStreamAction.js.map

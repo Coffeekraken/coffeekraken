@@ -33,7 +33,7 @@ const ruleObj: ISDescriptorRule = {
   id: 'type',
   settings: {},
   message: (resultObj: any): string => {
-    return `This value has to be of type "<yellow>${resultObj.$expected.type}</yellow>". Received "<red>${resultObj.$received.type}</red>"`;
+    return `This value has to be of type "<yellow>${resultObj.expected.type}</yellow>". Received "<red>${resultObj.received.type}</red>"`;
   },
   processParams: (params: boolean) => {
     return { value: params };

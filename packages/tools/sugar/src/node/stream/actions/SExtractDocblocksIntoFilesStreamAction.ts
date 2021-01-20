@@ -54,7 +54,9 @@ export = class SExtractDocblocksIntoFiles extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SExtractDocblocksIntoFilesInterface;
+  static interfaces = {
+    this: SExtractDocblocksIntoFilesInterface
+  };
 
   /**
    * @name            constructor

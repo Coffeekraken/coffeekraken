@@ -21,7 +21,9 @@ import __SFrontendServerProcess from '../../server/frontend/SFrontendServerProce
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export = class SFrontendServerSugarAppModule extends __SSugarAppModule {
-  static interface = __SFrontendServerInterface;
+  static interfaces = {
+    this: __SFrontendServerInterface
+  };
 
   /**
    * @name            constructor

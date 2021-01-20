@@ -3,23 +3,10 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const node_1 = __importDefault(require("../is/node"));
-/**
- * @name            SInterfaceResult
- * @namespace       sugar.js.interface
- * @type            Class
- *
- * This class represent what you will get back from the ```SInterface.apply``` method.
- * You will be able to generate some string terminal version of the return as well as some html
- * version if needed
- *
- * @todo        integrate ```toHtml``` method
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-const Cls = class SInterfaceResult {
+class SInterfaceResult {
     /**
      * @name        constructor
      * @type        Function
@@ -116,6 +103,7 @@ const Cls = class SInterfaceResult {
 ${stringArray.join('\n')}
     `.trim();
     }
-};
-module.exports = Cls;
+}
+const Cls = SInterfaceResult;
+exports.default = SInterfaceResult;
 //# sourceMappingURL=SInterfaceResult.js.map

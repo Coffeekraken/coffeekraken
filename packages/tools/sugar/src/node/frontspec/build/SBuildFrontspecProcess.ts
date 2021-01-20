@@ -22,7 +22,9 @@ import __SBuildFrontspecInterface from './interface/SBuildFrontspecInterface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SBuildFrontspecProcess extends __SProcess {
-  static interface = __SBuildFrontspecInterface;
+  static interfaces = {
+    this: __SBuildFrontspecInterface
+  };
 
   /**
    * @name          constructor

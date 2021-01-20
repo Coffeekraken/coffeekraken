@@ -101,6 +101,8 @@ module.exports = (_a = class SExtractDocblocksIntoFiles extends SActionsStreamAc
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SExtractDocblocksIntoFilesInterface,
+    _a.interfaces = {
+        this: SExtractDocblocksIntoFilesInterface
+    },
     _a);
 //# sourceMappingURL=SExtractDocblocksIntoFilesStreamAction.js.map

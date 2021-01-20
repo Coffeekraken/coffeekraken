@@ -47,7 +47,9 @@ export = class SFsCopyStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SFsCopyStreamActionInterface;
+  static interfaces = {
+    this: SFsCopyStreamActionInterface
+  };
 
   /**
    * @name            constructor

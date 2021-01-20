@@ -2,17 +2,15 @@
 
 import __toString from '../string/toString';
 import __SDescriptor from '../descriptor/SDescriptor';
-import ISInterface, {
-  ISInterfaceSettings,
-  ISInterfaceCtor
-} from './interface/ISInterface';
-import ISInterfaceResult from './interface/ISInterfaceResult';
-
 import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
 import __deepMerge from '../object/deepMerge';
-import { ISDescriptorRules } from '../descriptor/interface/ISDescriptor';
-import ISDescriptorResult from '../descriptor/interface/ISDescriptorResult';
-import __SInterfaceResult from './SInterfaceResult';
+
+import {
+  ISDescriptorRules,
+  ISDescriptorSettings
+} from '../descriptor/SDescriptor';
+import { ISDescriptorResult } from '../descriptor/SDescriptorResult';
+import __SInterfaceResult, { ISInterfaceResult } from './SInterfaceResult';
 
 /**
  * @name            SInterface
@@ -44,9 +42,44 @@ import __SInterfaceResult from './SInterfaceResult';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+// @shared
+
+export interface ISInterfaceSettings {
+  name?: string;
+  id?: string;
+  arrayAsValue?: boolean;
+  throw?: boolean;
+  complete?: boolean;
+  descriptorSettings?: ISDescriptorSettings;
+}
+
+export interface ISInterfaceResultData {
+  descriptorResult: ISDescriptorResult;
+  instance: any;
+}
+
+export interface ISInterfaceDefinition {
+  [key: string]: any;
+}
+export interface ISInterfaceDefinitionMap {
+  [key: string]: ISInterfaceDefinition;
+}
+
+export interface ISInterfaceCtor {
+  new (settings?: ISInterfaceSettings): ISInterface;
+  definition: ISInterfaceDefinitionMap | ISInterfaceDefinition;
+  settings: ISInterfaceSettings;
+  defaults(): any;
+}
+export interface ISInterface {
+  _definition: ISInterfaceDefinitionMap | ISInterfaceDefinition;
+  _settings: ISInterfaceSettings;
+}
+
 // @ts-ignore
 (global || window)._registeredInterfacesTypes = {};
-const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
+class SInterface implements ISInterface {
   /**
    * @name              definition
    * @type              ISDescriptorRules
@@ -162,8 +195,7 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
       {},
       {
         complete: true,
-        throw: false,
-        throwOnMissingRequiredProp: false
+        throw: false
       }
     );
     if (!result.hasIssues()) return result.value;
@@ -240,13 +272,13 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
     settings = __deepMerge(this._settings, settings);
 
     const descriptor = new __SDescriptor({
+      id: settings.id,
       name: settings.name,
       type: 'Object',
       rules: this._definition,
       arrayAsValue: settings.arrayAsValue,
       complete: settings.complete === undefined ? true : settings.complete,
       throw: false,
-      throwOnMissingRequiredProp: settings.throwOnMissingRequiredProp,
       ...(settings.descriptorSettings || {})
     });
 
@@ -264,5 +296,6 @@ const Cls: ISInterfaceCtor = class SInterface implements ISInterface {
     // return new result object
     return interfaceResult;
   }
-};
-export = Cls;
+}
+const Cls: ISInterfaceCtor = SInterface;
+export default SInterface;

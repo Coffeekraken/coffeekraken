@@ -44,7 +44,9 @@ module.exports = (_a = class STestJestCli extends SCli_1.default {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = STestJestInterface_1.default,
+    _a.interfaces = {
+        this: STestJestInterface_1.default
+    },
     /**
      * @name          processClass
      * @type          SProcess

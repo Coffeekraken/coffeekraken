@@ -42,7 +42,9 @@ export = class STestJestCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = __STestJestCliInterface;
+  static interfaces = {
+    this: __STestJestCliInterface
+  };
 
   /**
    * @name          processClass
@@ -76,4 +78,4 @@ export = class STestJestCli extends __SCli {
       )
     );
   }
-}
+};

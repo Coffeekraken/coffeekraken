@@ -63,7 +63,8 @@ class SPromise extends SClass_1.default.extends(Promise) {
                     else {
                         return (...args) => __awaiter(this, void 0, void 0, function* () {
                             yield wait_1.default(0);
-                            return _this[prop](...args);
+                            const fn = _this[prop].bind(_this);
+                            return fn(...args);
                         });
                     }
                 }
@@ -73,14 +74,14 @@ class SPromise extends SClass_1.default.extends(Promise) {
                     ? executorFnOrSettings
                     : null;
             if (executorFn) {
-                return executorFn(_api);
+                resolve(executorFn(_api));
             }
         });
         this._promiseState = 'pending';
         _this = this;
         this.expose(new SEventEmitter_1.default(Object.assign({ id: this.id }, this._settings)), {
             as: 'eventEmitter',
-            props: ['on', 'off', 'emit']
+            props: ['on', 'off', 'emit', 'pipe', 'pipeFrom', 'pipeTo']
         });
         this._resolvers = resolvers;
         if (this._settings.promise.destroyTimeout !==

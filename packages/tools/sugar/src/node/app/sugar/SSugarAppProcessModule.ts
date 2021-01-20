@@ -20,7 +20,7 @@ import __deepMerge from '../../object/deepMerge';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export = class SSugarAppProcessModule extends __SSugarAppModule {
-  // static interface = __SFrontendServerInterface;
+  // static interfaces = { this: __SFrontendServerInterface };
 
   /**
    * @name            constructor

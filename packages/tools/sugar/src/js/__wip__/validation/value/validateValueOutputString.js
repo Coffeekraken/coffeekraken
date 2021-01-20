@@ -47,19 +47,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (settings === void 0) { settings = {}; }
         var issuesArray = [];
         settings = deepMerge_1.default({
-            name: settings.name || validateValueResultObj.$name,
-            interface: settings.interface || validateValueResultObj.$interface
+            name: settings.name || validateValueResultObj.name,
+            interface: settings.interface || validateValueResultObj.interface
         });
         if (settings.name) {
             issuesArray.push("<yellow>\u2502</yellow> " + settings.name + "\n<yellow>\u2502</yellow>");
         }
-        if (validateValueResultObj.$received) {
-            var string = "<yellow>\u2502</yellow> - Received value: <yellow>" + toString_1.default(validateValueResultObj.$received.value, { beautify: true }) + "</yellow>";
+        if (validateValueResultObj.received) {
+            var string = "<yellow>\u2502</yellow> - Received value: <yellow>" + toString_1.default(validateValueResultObj.received.value, { beautify: true }) + "</yellow>";
             issuesArray.push(string);
         }
-        validateValueResultObj.$issues.forEach(function (issue) {
-            if (validateValueResultObj.$messages[issue]) {
-                issuesArray.push("<yellow>\u2502</yellow> - " + validateValueResultObj.$messages[issue]);
+        validateValueResultObj.issues.forEach(function (issue) {
+            if (validateValueResultObj.messages[issue]) {
+                issuesArray.push("<yellow>\u2502</yellow> - " + validateValueResultObj.messages[issue]);
             }
         });
         return parseHtml_1.default(issuesArray.join('\n')) + '\n';

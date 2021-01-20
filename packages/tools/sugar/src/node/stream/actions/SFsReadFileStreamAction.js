@@ -76,6 +76,8 @@ module.exports = (_a = class SFsReadFileStreamAction extends SActionsStreamActio
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SFsReadFileStreamActionInterface,
+    _a.interfaces = {
+        this: SFsReadFileStreamActionInterface
+    },
     _a);
 //# sourceMappingURL=SFsReadFileStreamAction.js.map

@@ -1,14 +1,14 @@
-// @ts-nocheck
-// @to-work
-
 import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
+import __SEventEmitter from '../event/SEventEmitter';
+
+import { ISInterfaceResult } from '../interface/SInterfaceResult';
 
 /**
  * @name                SCompiler
  * @namespace           sugar.node.compiler
  * @type                Class
- * @extends             SPromise
+ * @extends             SEventEmitter
  * @wip
  *
  * This represent the main compiler class that has to be extended for compilers like typescript, scss, etc...
@@ -33,7 +33,31 @@ import __deepMerge from '../object/deepMerge';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SCompiler extends __SPromise {
+
+export interface ISCompilerOptionalSettings {}
+export interface ISCompilerSettings {}
+
+export interface ISCompilerCtorSettings {
+  compiler?: ISCompilerOptionalSettings;
+}
+
+export interface ISCompiler {
+  initialParams: any;
+  compile(params: any, settings?: any);
+}
+
+class SCompiler extends __SEventEmitter implements ISCompiler {
+  /**
+   * @name        initialParams
+   * @type        Object
+   *
+   * Store the initial params object
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  initialParams: any;
+
   /**
    * @name        constructor
    * @type        Function
@@ -44,17 +68,16 @@ class SCompiler extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
-    let defaultInterfaceValues = {};
-    super();
-    // @ts-ignore
-    if (this.constructor.interface) {
-      // @ts-ignore
-      defaultInterfaceValues = this.constructor.interface.defaults();
-      // @ts-ignore
-      delete defaultInterfaceValues.input;
-      this._settings = __deepMerge(this._settings, defaultInterfaceValues);
-    }
+  constructor(initialParams: any, settings: ISCompilerCtorSettings) {
+    super(
+      __deepMerge(
+        {
+          compiler: {}
+        },
+        settings || {}
+      )
+    );
+    this.initialParams = Object.assign({}, initialParams);
   }
 
   /**
@@ -70,21 +93,28 @@ class SCompiler extends __SPromise {
    * @since           2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  compile(input, settings = {}) {
+  compile(params: any, settings: any = {}) {
     settings = __deepMerge(this._settings, settings);
-    // @ts-ignore
-    if (this.constructor.interface)
-      // @ts-ignore
-      this.constructor.interface.apply(settings, {
-        throw: true
-      });
+    // // @ts-ignore
+    // if (this.constructor.interface)
+    //   // @ts-ignore
+    //   this.constructor.interface.apply(settings, {
+    //     throw: true
+    //   });
+    // @todo    apply the params interface on the params
 
-    if (!Array.isArray(input)) input = [input];
+    const interfaceRes: ISInterfaceResult = this.applyInterface('params', {
+      somefofm: 'tgrg'
+    });
+    if (interfaceRes.hasIssues()) {
+      console.log(interfaceRes.toString());
+    }
+
     // @ts-ignore
-    const promise = this._compile(input, settings);
+    const promise = this._compile(params, settings);
     this.pipe(promise);
     return promise;
   }
 }
 
-export = SCompiler;
+export default SCompiler;

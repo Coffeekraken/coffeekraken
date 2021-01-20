@@ -5,6 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const plainObject_1 = __importDefault(require("../is/plainObject"));
+const get_1 = __importDefault(require("../object/get"));
 class SClass {
     /**
      * @name            constructor
@@ -58,6 +60,9 @@ class SClass {
      * @since           2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
+    set name(value) {
+        this._settings.name = value;
+    }
     get name() {
         return this._settings.name || this.constructor.name;
     }
@@ -102,13 +107,25 @@ class SClass {
                 return name;
             }
             expose(instance, settings) {
-                expose(this, instance, settings);
+                return expose(this, instance, settings);
+            }
+            applyInterface(name, on) {
+                return applyInterface(this, name, on);
+            }
+            getInterface(name) {
+                return getInterface(this, name);
             }
         }
         return SClass;
     }
     expose(instance, settings) {
-        expose(this, instance, settings);
+        return expose(this, instance, settings);
+    }
+    applyInterface(name, on) {
+        return applyInterface(this, name, on);
+    }
+    getInterface(name) {
+        return getInterface(this, name);
     }
 }
 function expose(ctx, instance, settings) {
@@ -125,10 +142,65 @@ function expose(ctx, instance, settings) {
         });
     }
 }
-function applyInterface(ctx) {
+function getInterface(ctx, name) {
+    if (!ctx.constructor.interfaces || !ctx.constructor.interfaces[name])
+        return undefined;
+    if (plainObject_1.default(ctx.constructor.interfaces[name]))
+        return ctx.constructor.interfaces[name].class;
+    return ctx.constructor.interfaces[name];
+}
+function applyInterface(ctx, name, on) {
+    if (!ctx.constructor.interfaces)
+        return undefined;
+    let interfacesObj = ctx.constructor.interfaces;
+    if (name !== undefined && ctx.constructor.interfaces[name] !== undefined) {
+        interfacesObj = {
+            [name]: ctx.constructor.interfaces[name]
+        };
+    }
+    let res;
     // apply the interface if exists
-    if (ctx.constructor.interface) {
-        ctx.constructor.interface.apply(ctx);
+    if (!plainObject_1.default(interfacesObj) && interfacesObj.apply !== undefined) {
+        res = interfacesObj.apply(on || ctx);
+    }
+    else if (plainObject_1.default(interfacesObj)) {
+        Object.keys(interfacesObj).forEach((prop) => {
+            const interfaceObj = interfacesObj[prop];
+            const autoApply = plainObject_1.default(interfaceObj)
+                ? interfaceObj.autoApply
+                : true;
+            const interfaceClass = plainObject_1.default(interfaceObj)
+                ? interfaceObj.class
+                : interfaceObj;
+            if (!name && autoApply === false)
+                return;
+            let applyId = ctx.constructor.name;
+            if (ctx.id)
+                applyId += `(${ctx.id})`;
+            if (name)
+                applyId += `.${name}`;
+            if (on && on.constructor)
+                applyId += `.${on.constructor.name}`;
+            if (on && on.id)
+                applyId += `(${on.id})`;
+            if (prop === 'this') {
+                res = interfaceClass.apply(on || ctx, {
+                    id: applyId,
+                    complete: true,
+                    throw: true
+                });
+            }
+            else {
+                res = interfaceClass.apply(on || get_1.default(ctx, prop), {
+                    id: applyId,
+                    complete: true,
+                    throw: true
+                });
+            }
+        });
+    }
+    if (name !== undefined) {
+        return res;
     }
 }
 function setSettings(ctx, settings = {}) {

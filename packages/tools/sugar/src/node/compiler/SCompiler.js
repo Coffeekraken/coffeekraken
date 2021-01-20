@@ -1,41 +1,11 @@
 "use strict";
-// @ts-nocheck
-// @to-work
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-const SPromise_1 = __importDefault(require("../promise/SPromise"));
+Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-/**
- * @name                SCompiler
- * @namespace           sugar.node.compiler
- * @type                Class
- * @extends             SPromise
- * @wip
- *
- * This represent the main compiler class that has to be extended for compilers like typescript, scss, etc...
- * His main goal is to provide basic features like storing the inputs, settings, etc...
- *
- * @param           {Object}                        [settings={}]       Specify an object of settings to configure your compilation process
- *
- * @example         js
- * import SCompiler from '@coffeekraken/sugar/node/compiler/SCompiler';
- * import SPromise from '@coffeekraken/sugar/node/promise/SPromise';
- * class MyCompiler extends SCompiler {
- *      constructor(settings = {}) {
- *          super(settings);
- *      }
- *      _compile(input, settings) {
- *          return new SPromise(({resolve, reject, emit}) => {
- *              // compilation logic
- *          });
- *      }
- * }
- *
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SCompiler extends SPromise_1.default {
+const SEventEmitter_1 = __importDefault(require("../event/SEventEmitter"));
+class SCompiler extends SEventEmitter_1.default {
     /**
      * @name        constructor
      * @type        Function
@@ -46,17 +16,11 @@ class SCompiler extends SPromise_1.default {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(settings = {}) {
-        let defaultInterfaceValues = {};
-        super();
-        // @ts-ignore
-        if (this.constructor.interface) {
-            // @ts-ignore
-            defaultInterfaceValues = this.constructor.interface.defaults();
-            // @ts-ignore
-            delete defaultInterfaceValues.input;
-            this._settings = deepMerge_1.default(this._settings, defaultInterfaceValues);
-        }
+    constructor(initialParams, settings) {
+        super(deepMerge_1.default({
+            compiler: {}
+        }, settings || {}));
+        this.initialParams = Object.assign({}, initialParams);
     }
     /**
      * @name            compile
@@ -71,21 +35,26 @@ class SCompiler extends SPromise_1.default {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    compile(input, settings = {}) {
+    compile(params, settings = {}) {
         settings = deepMerge_1.default(this._settings, settings);
+        // // @ts-ignore
+        // if (this.constructor.interface)
+        //   // @ts-ignore
+        //   this.constructor.interface.apply(settings, {
+        //     throw: true
+        //   });
+        // @todo    apply the params interface on the params
+        const interfaceRes = this.applyInterface('params', {
+            somefofm: 'tgrg'
+        });
+        if (interfaceRes.hasIssues()) {
+            console.log(interfaceRes.toString());
+        }
         // @ts-ignore
-        if (this.constructor.interface)
-            // @ts-ignore
-            this.constructor.interface.apply(settings, {
-                throw: true
-            });
-        if (!Array.isArray(input))
-            input = [input];
-        // @ts-ignore
-        const promise = this._compile(input, settings);
+        const promise = this._compile(params, settings);
         this.pipe(promise);
         return promise;
     }
 }
-module.exports = SCompiler;
+exports.default = SCompiler;
 //# sourceMappingURL=SCompiler.js.map

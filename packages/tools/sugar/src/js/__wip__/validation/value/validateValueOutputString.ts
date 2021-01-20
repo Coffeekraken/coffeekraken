@@ -37,27 +37,27 @@ function validateValueOutputString(validateValueResultObj, settings = {}) {
   const issuesArray = [];
 
   settings = __deepMerge({
-    name: settings.name || validateValueResultObj.$name,
-    interface: settings.interface || validateValueResultObj.$interface
+    name: settings.name || validateValueResultObj.name,
+    interface: settings.interface || validateValueResultObj.interface
   });
 
   if (settings.name) {
     issuesArray.push(`<yellow>│</yellow> ${settings.name}\n<yellow>│</yellow>`);
   }
 
-  if (validateValueResultObj.$received) {
+  if (validateValueResultObj.received) {
     const string = `<yellow>│</yellow> - Received value: <yellow>${__toString(
-      validateValueResultObj.$received.value,
+      validateValueResultObj.received.value,
       { beautify: true }
     )}</yellow>`;
 
     issuesArray.push(string);
   }
 
-  validateValueResultObj.$issues.forEach((issue) => {
-    if (validateValueResultObj.$messages[issue]) {
+  validateValueResultObj.issues.forEach((issue) => {
+    if (validateValueResultObj.messages[issue]) {
       issuesArray.push(
-        `<yellow>│</yellow> - ${validateValueResultObj.$messages[issue]}`
+        `<yellow>│</yellow> - ${validateValueResultObj.messages[issue]}`
       );
     }
   });

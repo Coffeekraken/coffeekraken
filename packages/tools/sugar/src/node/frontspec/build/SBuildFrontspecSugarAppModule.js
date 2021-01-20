@@ -36,6 +36,8 @@ module.exports = (_a = class SBuildFrontspecSugarAppModule extends SSugarAppModu
             return super.start(pro);
         }
     },
-    _a.interface = SBuildFrontspecInterface_1.default,
+    _a.interfaces = {
+        this: SBuildFrontspecInterface_1.default
+    },
     _a);
 //# sourceMappingURL=SBuildFrontspecSugarAppModule.js.map

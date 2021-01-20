@@ -1,1 +1,0 @@
-../../../js/type/interface/ISTypeResult.ts

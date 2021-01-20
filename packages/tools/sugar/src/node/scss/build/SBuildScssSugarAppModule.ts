@@ -25,7 +25,9 @@ import __SBuildScssProcess from './SBuildScssProcess';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export = class SBuildScssSugarAppModule extends __SSugarAppModule {
-  static interface = __SBuildScssInterface;
+  static interfaces = {
+    this: __SBuildScssInterface
+  };
 
   /**
    * @name            constructor
@@ -57,4 +59,4 @@ export = class SBuildScssSugarAppModule extends __SSugarAppModule {
     );
     return super.start(pro);
   }
-}
+};

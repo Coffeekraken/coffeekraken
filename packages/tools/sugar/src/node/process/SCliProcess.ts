@@ -126,7 +126,7 @@ class SCliProcess extends __SProcess implements ISCliProcess {
 
     // build the command line
     const command = __buildCommandLine(this.command, params, {
-      definition: this.definition,
+      definition: this.paramsInterface?.definition,
       alias: false
     });
 

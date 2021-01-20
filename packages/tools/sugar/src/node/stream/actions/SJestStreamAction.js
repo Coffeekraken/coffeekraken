@@ -72,6 +72,8 @@ module.exports = (_a = class SJestStreamAction extends SActionsStreamAction_1.de
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SJestStreamActionInterface,
+    _a.interfaces = {
+        this: SJestStreamActionInterface
+    },
     _a);
 //# sourceMappingURL=SJestStreamAction.js.map

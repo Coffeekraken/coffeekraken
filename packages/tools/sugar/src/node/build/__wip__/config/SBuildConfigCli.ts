@@ -36,7 +36,9 @@ module.exports = class SBuildConfigCli extends __SCli {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = __SBuildConfigInterface;
+  static interfaces = {
+    this: __SBuildConfigInterface
+  };
 
   /**
    * @name          constructor

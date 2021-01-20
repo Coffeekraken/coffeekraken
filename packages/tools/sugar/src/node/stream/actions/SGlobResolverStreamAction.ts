@@ -47,7 +47,9 @@ export = class SGlobResolverStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SGlobResolverStreamActionInterface;
+  static interfaces = {
+    this: SGlobResolverStreamActionInterface
+  };
 
   /**
    * @name            constructor

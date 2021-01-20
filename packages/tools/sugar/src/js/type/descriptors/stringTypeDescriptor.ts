@@ -2,7 +2,7 @@
 
 import __isString from '../../is/string';
 import __toString from '../../string/toString';
-import { ISTypeDescriptor } from '../interface/ISType';
+import { ISTypeDescriptor } from '../SType';
 import __SType from '../_SType';
 
 /**

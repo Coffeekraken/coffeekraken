@@ -95,13 +95,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             validationsObj: _validationsObj
         }, settings);
         var issuesObj = {
-            $name: settings.name ||
+            name: settings.name ||
                 objectToCheck.constructor.name ||
                 objectToCheck.name ||
                 'Unnamed',
-            $interface: settings.interface,
-            $issues: [],
-            $messages: {}
+            interface: settings.interface,
+            issues: [],
+            messages: {}
         };
         var _loop_1 = function (i) {
             var argName = Object.keys(definition)[i];
@@ -117,14 +117,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 return "break";
             }
             issuesObj[argName] = {
-                $name: argName,
-                $received: {
+                name: argName,
+                received: {
                     type: typeof_1.default(value),
                     value: value
                 },
-                $expected: argDefinition,
-                $issues: [],
-                $messages: {}
+                expected: argDefinition,
+                issues: [],
+                messages: {}
             };
             var validationRes = validateValue_1.default(value, argDefinition, {
                 name: argName,
@@ -140,8 +140,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             Object.keys(settings.validationsObj).forEach(function (validationName) {
                 var _a;
                 if (!_validationsObj[validationName]) {
-                    issuesObj.$issues.push("definition." + validationName + ".unknown");
-                    issuesObj.$messages["definition." + validationName + ".unknown"] = "The specified \"<yellow>" + validationName + "</yellow>\" validation is <red>not supported</red>";
+                    issuesObj.issues.push("definition." + validationName + ".unknown");
+                    issuesObj.messages["definition." + validationName + ".unknown"] = "The specified \"<yellow>" + validationName + "</yellow>\" validation is <red>not supported</red>";
                 }
                 if (validationName === 'static' &&
                     definition.static &&
@@ -166,8 +166,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 });
                 var validationResult = (_a = validationObj.class).apply.apply(_a, __spreadArrays([value], validationObj.args));
                 if (validationResult !== true) {
-                    issuesObj[argName].$issues.push(validationName);
-                    issuesObj[argName].$messages[validationName] = validationResult;
+                    issuesObj[argName].issues.push(validationName);
+                    issuesObj[argName].messages[validationName] = validationResult;
                 }
             });
             // handle "lazy" properties
@@ -206,7 +206,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (settings.extendsFn) {
                 if (!issuesObj[argName]) {
                     issuesObj[argName] = {
-                        $issues: []
+                        issues: []
                     };
                 }
                 issuesObj[argName] = settings.extendsFn(argName, argDefinition, value, issuesObj[argName]);
@@ -215,11 +215,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             issuesObj = filter_1.default(issuesObj, function (item, key) {
                 if (Array.isArray(item))
                     return true;
-                if (plainObject_1.default(item) && item.$issues) {
-                    if (!item.$issues.length)
+                if (plainObject_1.default(item) && item.issues) {
+                    if (!item.issues.length)
                         return false;
-                    if (issuesObj.$issues.indexOf(key) === -1)
-                        issuesObj.$issues.push(key);
+                    if (issuesObj.issues.indexOf(key) === -1)
+                        issuesObj.issues.push(key);
                 }
                 return true;
             });
@@ -229,11 +229,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 (argDefinition.required ||
                     (objectToCheck !== null && objectToCheck !== undefined))) {
                 var childrenValidation_1 = validateObject(objectToCheck || {}, argDefinition.definition, __assign(__assign({}, settings), { throw: false }), __spreadArrays(_argPath, [argName]));
-                if (childrenValidation_1 !== true && childrenValidation_1.$issues) {
-                    childrenValidation_1.$issues.forEach(function (issue) {
+                if (childrenValidation_1 !== true && childrenValidation_1.issues) {
+                    childrenValidation_1.issues.forEach(function (issue) {
                         var issueObj = childrenValidation_1[issue];
-                        issueObj.$name = argName + "." + issueObj.name;
-                        issuesObj.$issues.push(argName + "." + issue);
+                        issueObj.name = argName + "." + issueObj.name;
+                        issuesObj.issues.push(argName + "." + issue);
                         issuesObj[argName + "." + issue] = issueObj;
                     });
                 }
@@ -245,7 +245,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             if (state_1 === "break")
                 break;
         }
-        if (!issuesObj.$issues.length)
+        if (!issuesObj.issues.length)
             return true;
         if (settings.throw) {
             throw toString_1.default(issuesObj, {

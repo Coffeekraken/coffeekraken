@@ -43,6 +43,8 @@ module.exports = (_a = class SBuildFrontspecProcess extends SProcess_1.default {
             return actionStreamProcess;
         }
     },
-    _a.interface = SBuildFrontspecInterface_1.default,
+    _a.interfaces = {
+        this: SBuildFrontspecInterface_1.default
+    },
     _a);
 //# sourceMappingURL=SBuildFrontspecProcess.js.map

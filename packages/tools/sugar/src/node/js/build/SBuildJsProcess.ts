@@ -22,7 +22,9 @@ import __SBuildJsInterface from './interface/SBuildJsInterface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SBuildJsProcess extends __SProcess {
-  static interface = __SBuildJsInterface;
+  static interfaces = {
+    this: __SBuildJsInterface
+  };
 
   /**
    * @name          constructor
@@ -71,4 +73,4 @@ export = class SBuildJsProcess extends __SProcess {
       this.bindSPromise(this._buildJsActionStream);
     }, 1000);
   }
-}
+};

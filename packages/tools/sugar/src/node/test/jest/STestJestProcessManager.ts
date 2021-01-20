@@ -29,7 +29,9 @@ import __copy from '../../clipboard/copy';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class STestJestProcess extends __SChildProcessManager {
-  static interface = __STestJestInterface;
+  static interfaces = {
+    this: __STestJestInterface
+  };
 
   /**
    * @name          constructor

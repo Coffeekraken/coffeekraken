@@ -6,7 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const SSugarAppModule_1 = __importDefault(require("./SSugarAppModule"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 module.exports = class SSugarAppProcessModule extends SSugarAppModule_1.default {
-    // static interface = __SFrontendServerInterface;
+    // static interfaces = { this: __SFrontendServerInterface };
     /**
      * @name            constructor
      * @type             Function

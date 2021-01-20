@@ -93,7 +93,7 @@ export = class SLogConsoleAdapter {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async log(message, level) {
-    return new Promise(({ resolve, reject }) => {
+    return new Promise((resolve, reject) => {
       // init the console method to use
       let consoleMethod = 'log';
 

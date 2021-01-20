@@ -42,7 +42,7 @@ class SProcess extends SEventEmitter_1.default {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(settings = {}) {
+    constructor(initialParams, settings = {}) {
         super(deepMerge_1.default({
             process: {
                 asyncStart: false,
@@ -53,7 +53,6 @@ class SProcess extends SEventEmitter_1.default {
                 runAsChild: false,
                 definition: undefined,
                 processPath: null,
-                initialParams: {},
                 notifications: {
                     enable: true,
                     process: {
@@ -116,33 +115,22 @@ class SProcess extends SEventEmitter_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this.executionsStack = [];
-        /**
-         * @name      definition
-         * @type      Object
-         *
-         * Store the definition comming from the static "interface" property,
-         * or by the "settings.definition" property
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.definition = undefined;
+        // save initial params
+        this._initialParams = initialParams;
         // get the definition from interface or settings
-        this.definition =
-            this.processSettings.definition !== undefined
-                ? this.processSettings.definition
-                : this.constructor.interface !== undefined
-                    ? this.constructor.interface.definition
-                    : null;
-        let initialParams = deepMerge_1.default({}, this.processSettings.initialParams);
-        if (this.constructor.interface !== undefined) {
-            // console.log((<any>this.constructor).interface.definition);
-            initialParams = this.constructor.interface.apply(initialParams, {
-                complete: true,
-                throwOnMissingRequiredProp: true
-            }).value;
-        }
-        this.processSettings.initialParams = initialParams;
+        this.paramsInterface = this.getInterface('params');
+        if (this.processSettings.paramsInterface !== undefined)
+            this.paramsInterface = this.processSettings.paramsInterface;
+        // if ((<any>this.constructor).interface !== undefined) {
+        //   // console.log((<any>this.constructor).interface.definition);
+        //   this._initialParams = (<any>this.constructor).interface.apply(
+        //     this._initialParams,
+        //     {
+        //       complete: true,
+        //       throwOnMissingRequiredProp: true
+        //     }
+        //   ).value;
+        // }
         // handle process exit
         onProcessExit_1.default((state) => __awaiter(this, void 0, void 0, function* () {
             this.state(state);
@@ -180,7 +168,7 @@ class SProcess extends SEventEmitter_1.default {
         return this._params;
     }
     get processSettings() {
-        return this.processSettings;
+        return this._settings.process;
     }
     /**
      * @name        process
@@ -269,35 +257,44 @@ class SProcess extends SEventEmitter_1.default {
             let paramsObj = paramsOrStringArgs;
             if (typeof paramsObj === 'string') {
                 paramsObj = parseArgs_1.default(paramsObj, {
-                    definition: Object.assign(Object.assign({}, (this.definition || {})), { processPath: {
+                    definition: Object.assign(Object.assign({}, (this.paramsInterface !== undefined
+                        ? this.paramsInterface.definition
+                        : {})), { processPath: {
                             type: 'String'
                         } })
                 });
             }
             else if (typeof paramsObj === 'object') {
                 paramsObj = completeArgsObject_1.default(paramsObj, {
-                    definition: this.definition || {}
+                    definition: this.paramsInterface !== undefined
+                        ? this.paramsInterface.definition
+                        : {}
                 });
             }
             // save current process params
             this._params = Object.assign({}, paramsObj);
             // apply the interface on the params
-            if (this.constructor.interface !== undefined) {
-                const interfaceRes = this.constructor.interface.apply(this._params, {
-                    throwOnError: true
-                });
-                if (interfaceRes.hasIssues()) {
-                    this.log({
-                        value: interfaceRes.toString()
-                    });
-                }
-            }
+            // if ((<any>this.constructor).interface !== undefined) {
+            //   const interfaceRes = (<any>this.constructor).interface.apply(
+            //     this._params,
+            //     {
+            //       throwOnError: true
+            //     }
+            //   );
+            //   if (interfaceRes.hasIssues()) {
+            //     this.log({
+            //       value: interfaceRes.toString()
+            //     });
+            //   }
+            // }
             // update state
             this.state('running');
             if (processSettings.runAsChild && !childProcess_1.default()) {
                 // build the command to run depending on the passed command in the constructor and the params
                 const commandToRun = buildCommandLine_1.default(`node --enable-source-maps ${path_1.default.resolve(__dirname, '../../cli/sugar.cli.js')} process.runChild [arguments]`, Object.assign(Object.assign({}, paramsObj), { processPath: this._processPath }), {
-                    definition: Object.assign(Object.assign({}, (this.definition || {})), { processPath: {
+                    definition: Object.assign(Object.assign({}, (this.paramsInterface !== undefined
+                        ? this.paramsInterface.definition
+                        : {})), { processPath: {
                             type: 'String',
                             required: true
                         } }),

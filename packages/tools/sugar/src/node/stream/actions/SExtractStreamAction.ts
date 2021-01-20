@@ -44,7 +44,9 @@ export = class SExtractStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SExtractStreamActionInterface;
+  static interfaces = {
+    this: SExtractStreamActionInterface
+  };
 
   /**
    * @name            constructor

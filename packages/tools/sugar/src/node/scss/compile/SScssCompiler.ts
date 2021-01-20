@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import __extension from '../../fs/extension';
 import __SCache from '../../cache/SCache';
 import __SFileCache from '../../cache/SFileCache';
@@ -26,8 +24,8 @@ import __absolute from '../../path/absolute';
 import __ensureDirSync from '../../fs/ensureDirSync';
 import __SScssFile from '../SScssFile';
 
-import __ISScssCompileParams from './interface/ISScssCompileParams';
-import __SScssCompileParamsInterface from './interface/SScssCompileParamsInterface';
+import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';
+import { ISCompiler } from '../../compiler/SCompiler';
 
 /**
  * @name                SScssCompiler
@@ -64,10 +62,80 @@ import __SScssCompileParamsInterface from './interface/SScssCompileParamsInterfa
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SScssCompiler extends __SCompiler {
-  static interface = __SScssCompileParamsInterface;
 
-  _includePaths = [];
+export interface ISScssCompilerParams {
+  input: string | string[];
+  outputDir: string;
+  rootDir: string;
+  save: boolean;
+  style: string;
+  map: boolean;
+  cache: boolean;
+  clearCache: boolean;
+  stripComments: boolean;
+  minify: boolean;
+  prod: boolean;
+  sharedResources: string;
+  banner: string;
+  sass: any;
+  watch: boolean;
+  compileOnChange: boolean;
+}
+export interface ISScssCompilerOptionalParams {
+  input?: string | string[];
+  outputDir?: string;
+  rootDir?: string;
+  save?: boolean;
+  style?: string;
+  map?: boolean;
+  cache?: boolean;
+  clearCache?: boolean;
+  stripComments?: boolean;
+  minify?: boolean;
+  prod?: boolean;
+  sharedResources?: string;
+  banner?: string;
+  sass?: any;
+  watch?: boolean;
+  compileOnChange?: boolean;
+}
+
+export interface ISScssCompilerCtorSettings {
+  scssCompiler?: ISScssCompilerOptionalSettings;
+}
+export interface ISScssCompilerOptionalSettings {}
+export interface ISScssCompilerSettings {}
+
+export interface ISScssCompilerCtor {
+  new (
+    initialParams: any,
+    settings?: ISScssCompilerCtorSettings
+  ): ISScssCompiler;
+}
+
+export interface ISScssCompiler extends ISCompiler {}
+
+class SScssCompiler extends __SCompiler implements ISCompiler {
+  static interfaces = {
+    params: {
+      autoApply: false,
+      class: __SScssCompilerParamsInterface
+    }
+  };
+
+  /**
+   * @name          scssCompilerSettings
+   * @type          ISScssCompilerSettings
+   * @get
+   *
+   * Access the scss compiler settings
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get scssCompilerSettings() {
+    return (<any>this._settings).scssCompiler;
+  }
 
   /**
    * @name            constructor
@@ -79,15 +147,26 @@ export = class SScssCompiler extends __SCompiler {
    * @since           2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings: __ISScssCompileParams = {}) {
-    super(__deepMerge({}, settings));
+  constructor(
+    initialParams: ISScssCompilerOptionalParams,
+    settings: ISScssCompilerCtorSettings
+  ) {
+    super(
+      initialParams,
+      __deepMerge(
+        {
+          scssCompiler: {}
+        },
+        settings || {}
+      )
+    );
 
     // prod
-    if (this._settings.prod) {
-      this._settings.cache = false;
-      this._settings.style = 'compressed';
-      this._settings.minify = true;
-      this._settings.stripComments = true;
+    if (this.scssCompilerSettings.prod) {
+      this.scssCompilerSettings.cache = false;
+      this.scssCompilerSettings.style = 'compressed';
+      this.scssCompilerSettings.minify = true;
+      this.scssCompilerSettings.stripComments = true;
     }
   }
 
@@ -106,38 +185,42 @@ export = class SScssCompiler extends __SCompiler {
    * @since             2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _compile(input, settings: __ISScssCompileParams = {}) {
-    const promise = new __SPromise({
-      id: 'COMPILER'
-    });
-    settings = __deepMerge(this._settings, {}, settings);
+  _compile(
+    params: ISScssCompilerParams,
+    settings: ISScssCompilerOptionalSettings = {}
+  ) {
+    return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
+      settings = __deepMerge(this.scssCompilerSettings, {}, settings);
 
-    const resultsObj = {};
+      let input = Array.isArray(params.input) ? params.input : [params.input];
 
-    let filesPaths = [];
+      const resultsObj = {};
 
-    // make input absolute
-    input = __absolute(input);
-    // process inputs
-    input.forEach((inputStr) => {
-      if (__isGlob(inputStr)) {
-        filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
-      } else {
-        filesPaths.push(inputStr);
-      }
-    });
+      let filesPaths: string[] = [];
 
-    const startTime = Date.now();
+      // make input absolute
+      input = __absolute(input);
+      // process inputs
+      input.forEach((inputStr) => {
+        if (__isGlob(inputStr)) {
+          filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
+        } else {
+          filesPaths.push(inputStr);
+        }
+      });
 
-    (async () => {
+      const startTime = Date.now();
+
       for (let i = 0; i < filesPaths.length; i++) {
         let filePath = filesPaths[i];
         let file = new __SScssFile(filePath, {
-          compile: settings
+          scssFile: {
+            compile: settings
+          }
         });
-        promise.pipe(file);
+        pipe(file);
 
-        const resPromise = file.compile({
+        const resPromise = file.compile(params, {
           ...settings
         });
         const res = await resPromise;
@@ -145,23 +228,23 @@ export = class SScssCompiler extends __SCompiler {
       }
 
       // resolve with the compilation result
-      if (!settings.watch) {
-        promise.resolve({
+      if (!params.compileOnChange) {
+        resolve({
           files: resultsObj,
           startTime: startTime,
           endTime: Date.now(),
           duration: Date.now() - startTime
         });
       } else {
-        promise.emit('files', {
+        emit('files', {
           files: resultsObj,
           startTime: startTime,
           endTime: Date.now(),
           duration: Date.now() - startTime
         });
       }
-    })();
-
-    return promise;
+    });
   }
-};
+}
+
+export default SScssCompiler;

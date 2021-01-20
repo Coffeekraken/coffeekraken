@@ -70,7 +70,7 @@ module.exports = class SLogConsoleAdapter {
      */
     log(message, level) {
         return __awaiter(this, void 0, void 0, function* () {
-            return new Promise(({ resolve, reject }) => {
+            return new Promise((resolve, reject) => {
                 // init the console method to use
                 let consoleMethod = 'log';
                 // adapting the console method to use depending on the type

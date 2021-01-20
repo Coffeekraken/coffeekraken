@@ -12,7 +12,7 @@ const ruleObj = {
     id: 'type',
     settings: {},
     message: (resultObj) => {
-        return `This value has to be of type "<yellow>${resultObj.$expected.type}</yellow>". Received "<red>${resultObj.$received.type}</red>"`;
+        return `This value has to be of type "<yellow>${resultObj.expected.type}</yellow>". Received "<red>${resultObj.received.type}</red>"`;
     },
     processParams: (params) => {
         return { value: params };

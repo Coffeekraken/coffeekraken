@@ -43,7 +43,9 @@ export = class SFrontspecJsStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SFrontspecJsStreamActionInterface;
+  static interfaces = {
+    this: SFrontspecJsStreamActionInterface
+  };
 
   /**
    * @name            constructor

@@ -94,6 +94,8 @@ module.exports = (_a = class SFantasticonStreamAction extends __SActionsStreamAc
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = __BBuildFontIconsInterface,
+    _a.interfaces = {
+        this: __BBuildFontIconsInterface
+    },
     _a);
 //# sourceMappingURL=SFantasticonStreamAction.js.map

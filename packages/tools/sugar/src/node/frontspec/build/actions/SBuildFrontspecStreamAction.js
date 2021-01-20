@@ -84,6 +84,8 @@ module.exports = (_a = class SBuildFrontspecStreamAction extends SActionsStreamA
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SBuildFrontspecInterface_1.default,
+    _a.interfaces = {
+        this: SBuildFrontspecInterface_1.default
+    },
     _a);
 //# sourceMappingURL=SBuildFrontspecStreamAction.js.map

@@ -38,7 +38,9 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * import SCli from '@coffeekraken/sugar/js/cli/SCli';
  * class MyCli extends SCli {
  *    static command = 'php %hostname:%port %rootDir %arguments';
- *    static interface = MyCoolSInterface;
+ *    static interfaces = {
+ *      this: MyCoolSInterface
+ *    };
  *    constructor(settings = {}) {
  *      super(settings);
  *    }

@@ -54,10 +54,11 @@ class SCliProcess extends SProcess_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     process(params, settings = {}) {
+        var _a;
         const cliProcessSettings = (deepMerge_1.default(this.cliProcessSettings, settings));
         // build the command line
         const command = buildCommandLine_1.default(this.command, params, {
-            definition: this.definition,
+            definition: (_a = this.paramsInterface) === null || _a === void 0 ? void 0 : _a.definition,
             alias: false
         });
         // @ts-ignore

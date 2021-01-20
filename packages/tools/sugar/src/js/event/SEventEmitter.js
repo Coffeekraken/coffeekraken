@@ -146,16 +146,42 @@ class SEventEmitter extends SClass_1.default {
      * particular instance.
      *
      * @param       {SEventEmitter}      input      The input promise on which to pipe the events in this one
-     * @param       {Object}      [settings={}]    An object ob settings to configure the pipe process:
-     * - stacks (*) {String}: Specify which stacks you want to pipe. By default it's all using the "*" character
-     * - processor (null) {Function}: Specify a function to apply on the emited value before emiting it on the dest SEventEmitter. Take as arguments the value itself and the stack name. Need to return a new value
-     * - filter (null) {Function}: Specify a function to filter the "events". It will take as parameter the emited value and the metas object. You must return true or false depending if you want to pipe the particular event or not
+     * @param       {ISEventEmitterPipeSettings}      [settings={}]    An object ob settings to configure the pipe process:
      *
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     pipe(input, settings) {
         SEventEmitter.pipe(input, this, settings);
+        return this;
+    }
+    /**
+     * @name      pipeFrom
+     * @type      Function
+     *
+     * This is the exacte same as the original ```pipe``` method. It's just an aliasw.
+     *
+     * @since     2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    pipeFrom(input, settings) {
+        return this.pipe(input, settings);
+    }
+    /**
+     * @name          pipe
+     * @type          Function
+     *
+     * This method is the same as the ```pipe```and ```pipeFrom``` one but it's just act as the inverse.
+     * Here you specify whenre you want to pipe this instance events and not from which you want to pipe them here...
+     *
+     * @param       {SEventEmitter}      dest      The destination event emitter on which to pipe the events from this one
+     * @param       {ISEventEmitterPipeSettings}      [settings={}]    An object ob settings to configure the pipe process:
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    pipeTo(dest, settings) {
+        SEventEmitter.pipe(this, dest, settings);
         return this;
     }
     /**

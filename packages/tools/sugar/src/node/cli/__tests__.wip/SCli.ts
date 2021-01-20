@@ -29,7 +29,9 @@ export default (__SCli, __SInterface) => {
 
       class MyCli extends __SCli {
         static command = 'php %hostname:%port %rootDir %arguments';
-        static interface = MyInterface;
+        static interfaces = {
+          this: MyInterface
+        };
         _run() {}
       }
 

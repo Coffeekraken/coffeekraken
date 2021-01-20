@@ -51,6 +51,8 @@ module.exports = (_a = class SBuildDocMapProcess extends SProcess_1.default {
             return promise;
         }
     },
-    _a.interface = SBuildDocMapInterface_1.default,
+    _a.interfaces = {
+        this: SBuildDocMapInterface_1.default
+    },
     _a);
 //# sourceMappingURL=SBuildDocMapProcess.js.map

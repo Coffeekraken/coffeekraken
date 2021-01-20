@@ -1,6 +1,6 @@
 // shared
 
-import { ISTypeDescriptor } from '../interface/ISType';
+import { ISTypeDescriptor } from '../SType';
 import __SFile from '../../fs/SFile';
 import __fs from 'fs';
 import __isPath from '../../is/path';

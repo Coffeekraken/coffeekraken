@@ -2,7 +2,7 @@
 
 import __toString from '../string/toString';
 import __deepMerge from '../object/deepMerge';
-import __SPromise from '../promise/SPromise';
+import __SEventEmitter from '../event/SEventEmitter';
 // import __SFileInterface from './interface/SFileInterface';
 import __fs from 'fs';
 import __path from 'path';
@@ -15,12 +15,7 @@ import __SError from '../error/SError';
 import __packageRoot from '../path/packageRoot';
 import __ensureDirSync from './ensureDirSync';
 
-import ISFile, {
-  ISFileSettings,
-  ISFileCtor,
-  ISFileReadSettings,
-  ISFileWriteSettings
-} from './interface/ISFile';
+import { ISPromise } from '../promise/SPromise';
 
 /**
  * @name            SFile
@@ -61,7 +56,72 @@ import ISFile, {
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
+export interface ISFileSettings {
+  id?: string;
+  checkExistence?: boolean;
+  cwd?: string;
+}
+
+export interface ISFileReadSettings {
+  encoding?: string;
+  flag?: string;
+}
+
+export interface ISFileWriteSettings {
+  encoding?: string;
+  mode?: number;
+  flag?: string;
+  cast?: boolean;
+  path?: string;
+}
+
+export interface ISFileToObjectFn {
+  (): Object;
+}
+export interface ISFileUpdateFn {
+  (): void;
+}
+
+export interface ISFileReadFn {
+  (settings?: ISFileReadSettings): Promise<string>;
+}
+
+export interface ISFileReadSyncFn {
+  (settings?: ISFileReadSettings): string;
+}
+
+export interface ISFileWriteFn {
+  (data: string, settings?: ISFileWriteSettings): Promise<any>;
+}
+export interface ISFileWriteSyncFn {
+  (data: string, settings?: ISFileWriteSettings): any;
+}
+export interface ISFileCtor {
+  new (filepath: string, settings?: ISFileSettings): ISFile;
+}
+
+export interface ISFile extends ISPromise {
+  name: string;
+  path: string;
+  rootDir: string;
+  relPath: string;
+  dirPath: string;
+  extension: string;
+  size: number;
+  sizeInBytes: number;
+  exists: boolean;
+  content: string;
+  toObject: ISFileToObjectFn;
+  update(): void;
+  startWatch(): void;
+  stopWatch(): void;
+  read: ISFileReadFn;
+  readSync: ISFileReadSyncFn;
+  write: ISFileWriteFn;
+  writeSync: ISFileWriteSyncFn;
+}
+
+class SFile extends __SEventEmitter implements ISFile {
   /**
    * @name        name
    * @type        String
@@ -470,6 +530,7 @@ const Cls: ISFileCtor = class SFile extends __SPromise implements ISFile {
     this.update();
     return result;
   }
-};
+}
 
-export = Cls;
+const Cls: ISFileCtor = SFile;
+export default SFile;

@@ -51,6 +51,8 @@ module.exports = (_a = class SBuildViewsCli extends __SCli {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = __SBuildViewsInterface,
+    _a.interfaces = {
+        this: __SBuildViewsInterface
+    },
     _a);
 //# sourceMappingURL=SBuildViewsCli.js.map

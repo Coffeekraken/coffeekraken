@@ -3,9 +3,10 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const toString_1 = __importDefault(require("../string/toString"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-const SPromise_1 = __importDefault(require("../promise/SPromise"));
+const SEventEmitter_1 = __importDefault(require("../event/SEventEmitter"));
 // import __SFileInterface from './interface/SFileInterface';
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
@@ -15,46 +16,7 @@ const folderPath_1 = __importDefault(require("./folderPath"));
 const filename_1 = __importDefault(require("./filename"));
 const SError_1 = __importDefault(require("../error/SError"));
 const ensureDirSync_1 = __importDefault(require("./ensureDirSync"));
-/**
- * @name            SFile
- * @namespace       sugar.node.fs
- * @type            Class
- * @implements      SFileInterface
- * @extends         SPromise
- * @beta
- *
- * This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,
- * and get access to all the nice meta data like:
- * - name: The file name
- * - path: The full path to the file
- * - cwd: The root directory specified through the settings.cwd property
- * - relPath: The relative file path from the cwd
- * - dirPath: The path to the folder where is the file
- * - extension: The file extension
- * - size: The file size in megabytes
- * - bytes: The file siz in bytes
- * - exists:Bytestrue if the file exists on the disk, false otherwise
- *
- * @param         {String}          filepath        The file path you want to init
- * @param         {Object}          [settings={}]    An object of settings to configure your file instance:
- * - cwd (__packageRoot()) {String}: Specify a root directory for the file. This is usefull to have then access to properties like ```relPath```, etc...
- * - checkExistence (true) {Boolean}: Specify if you want this inited file to really exists on the disk or not
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- * @todo      {Feature}       Add support for autocasting like yml, etc...
- *
- * @example           js
- * import SFile from '@coffeekraken/sugar/node/fs/SFile';
- * const file = new SFile('something/cool/sugar.json');
- * file.extension; // => json
- * file.exists; // => true
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-const Cls = class SFile extends SPromise_1.default {
+class SFile extends SEventEmitter_1.default {
     /**
      * @name        constructor
      * @type        Function
@@ -326,6 +288,7 @@ const Cls = class SFile extends SPromise_1.default {
         this.update();
         return result;
     }
-};
-module.exports = Cls;
+}
+const Cls = SFile;
+exports.default = SFile;
 //# sourceMappingURL=SFile.js.map

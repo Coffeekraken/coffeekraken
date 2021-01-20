@@ -94,20 +94,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             return true;
         }
         var issueObj = {
-            $expected: definition,
-            $received: {
+            expected: definition,
+            received: {
                 type: typeof_1.default(value),
                 value: value
             },
-            $name: settings.name,
-            $issues: [],
-            $messages: {}
+            name: settings.name,
+            issues: [],
+            messages: {}
         };
         Object.keys(settings.validationsObj).forEach(function (validationName, i) {
             var _a;
             if (!_validationsObj[validationName]) {
-                issueObj.$issues.push("definition." + validationName + ".unknown");
-                issueObj.$messages["definition." + validationName + ".unknown"] = "The specified \"<yellow>" + validationName + "</yellow>\" validation is <red>not supported</red>";
+                issueObj.issues.push("definition." + validationName + ".unknown");
+                issueObj.messages["definition." + validationName + ".unknown"] = "The specified \"<yellow>" + validationName + "</yellow>\" validation is <red>not supported</red>";
             }
             if (!definition[validationName])
                 return;
@@ -120,16 +120,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             });
             var validationResult = (_a = validationObj.class).apply.apply(_a, __spreadArrays([value], validationObj.args));
             if (validationResult !== true) {
-                issueObj.$issues.push(validationName);
-                issueObj.$messages[validationName] = validationResult;
+                issueObj.issues.push(validationName);
+                issueObj.messages[validationName] = validationResult;
             }
         });
         if (settings.extendFn && typeof settings.extendFn === 'function') {
             var additionalIssues = settings.extendFn(value, definition, settings) || [];
-            issueObj.$issues = __spreadArrays(issueObj.$issues, (additionalIssues.$issues || []));
-            issueObj.$messages = __spreadArrays(issueObj.$messages, (additionalIssues.$messages || []));
+            issueObj.issues = __spreadArrays(issueObj.issues, (additionalIssues.issues || []));
+            issueObj.messages = __spreadArrays(issueObj.messages, (additionalIssues.messages || []));
         }
-        if (!issueObj.$issues.length)
+        if (!issueObj.issues.length)
             return true;
         if (settings.throw) {
             throw toString_1.default(issueObj, {

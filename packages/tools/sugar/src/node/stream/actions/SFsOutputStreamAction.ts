@@ -45,7 +45,9 @@ export = class SFsOutputStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SFsOutputStreamActionInterface;
+  static interfaces = {
+    this: SFsOutputStreamActionInterface
+  };
 
   /**
    * @name            constructor

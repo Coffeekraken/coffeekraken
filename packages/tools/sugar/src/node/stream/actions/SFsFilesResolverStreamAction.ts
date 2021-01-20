@@ -54,7 +54,9 @@ export = class SFindInFileStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SFsFilesResolverStreamActionInterface;
+  static interfaces = {
+    this: SFsFilesResolverStreamActionInterface
+  };
 
   /**
    * @name            constructor

@@ -45,7 +45,9 @@ export = class SFsUnlinkStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SFsUnlinkStreamActionInterface;
+  static interfaces = {
+    this: SFsUnlinkStreamActionInterface
+  };
 
   /**
    * @name            constructor

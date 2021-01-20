@@ -49,7 +49,9 @@ export = class SFsReadFileStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = SFsReadFileStreamActionInterface;
+  static interfaces = {
+    this: SFsReadFileStreamActionInterface
+  };
 
   /**
    * @name            constructor

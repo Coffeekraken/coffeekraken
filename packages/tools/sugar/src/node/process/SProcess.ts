@@ -30,6 +30,7 @@ import { ISClass as __ISClass } from '../class/SClass';
 import { ISProcessStdio } from './stdio/SProcessStdio';
 import { ISPromise } from '../promise/SPromise';
 import { ISEventEmitter } from '../event/SEventEmitter';
+import { ISInterface, ISInterfaceCtor } from '../interface/SInterface';
 
 /**
  * @name                SProcess
@@ -92,31 +93,32 @@ export interface ISProcessOptionalSettings {
   stdio?: ISProcessStdio;
   throw?: boolean;
   runAsChild?: boolean;
-  definition?: Record<string, unknown>;
+  paramsInterface?: ISInterface | ISInterfaceCtor;
   processPath?: string;
   notifications?: ISProcessNotificationSettings;
   env?: Record<string, unknown>;
   spawn?: Record<string, unknown>;
   decorators?: boolean;
   spawnSettings?: ISpawnSettings;
+  exitAtEnd?: boolean;
 }
 export interface ISProcessSettings {
   asyncStart: boolean;
   stdio: ISProcessStdio;
   throw: boolean;
   runAsChild: boolean;
-  definition: Record<string, unknown>;
+  paramsInterface: ISInterface | ISInterfaceCtor;
   processPath: string;
-  initialParams: Record<string, unknown>;
   notifications: ISProcessNotificationSettings;
   env: Record<string, unknown>;
   spawn: Record<string, unknown>;
   decorators: boolean;
   spawnSettings: ISpawnSettings;
+  exitAtEnd: boolean;
 }
 
 export interface ISProcessCtor {
-  new (settings: ISProcessSettings): ISProcess;
+  new (params: Record<string, unknown>, settings: ISProcessSettings): ISProcess;
 }
 export interface ISProcessInternal extends __ISClass {
   run(
@@ -193,16 +195,28 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
   currentExecutionObj?: ISProcessProcessObj;
 
   /**
-   * @name      definition
+   * @name      paramsInterface
    * @type      Object
    *
-   * Store the definition comming from the static "interface" property,
-   * or by the "settings.definition" property
+   * Store the parameters interface to apply on the params object and on the initialParams object.
+   * Can come from the static ```interfaces.params``` property or the ```settings.paramsInterface``` one.
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  definition = undefined;
+  paramsInterface: any;
+
+  /**
+   * @name      _initialParams
+   * @type      Object
+   * @private
+   *
+   * Store the initial params passed in the constructor
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _initialParams: Record<string, unknown>;
 
   /**
    * @name      _processPromise
@@ -229,7 +243,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
   private _processPath?: string;
 
   get processSettings(): ISProcessSettings {
-    return this.processSettings;
+    return (<any>this._settings).process;
   }
 
   /**
@@ -242,7 +256,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings: ISProcessCtorSettings = {}) {
+  constructor(
+    initialParams: Record<string, unknown>,
+    settings: ISProcessCtorSettings = {}
+  ) {
     super(
       __deepMerge(
         {
@@ -255,7 +272,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             runAsChild: false,
             definition: undefined,
             processPath: null,
-            initialParams: {},
             notifications: {
               enable: true,
               process: {
@@ -301,23 +317,25 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       )
     );
 
-    // get the definition from interface or settings
-    this.definition =
-      this.processSettings.definition !== undefined
-        ? this.processSettings.definition
-        : (<any>this.constructor).interface !== undefined
-        ? (<any>this.constructor).interface.definition
-        : null;
+    // save initial params
+    this._initialParams = initialParams;
 
-    let initialParams = __deepMerge({}, this.processSettings.initialParams);
-    if ((<any>this.constructor).interface !== undefined) {
-      // console.log((<any>this.constructor).interface.definition);
-      initialParams = (<any>this.constructor).interface.apply(initialParams, {
-        complete: true,
-        throwOnMissingRequiredProp: true
-      }).value;
-    }
-    this.processSettings.initialParams = initialParams;
+    // get the definition from interface or settings
+
+    this.paramsInterface = this.getInterface('params');
+    if (this.processSettings.paramsInterface !== undefined)
+      this.paramsInterface = this.processSettings.paramsInterface;
+
+    // if ((<any>this.constructor).interface !== undefined) {
+    //   // console.log((<any>this.constructor).interface.definition);
+    //   this._initialParams = (<any>this.constructor).interface.apply(
+    //     this._initialParams,
+    //     {
+    //       complete: true,
+    //       throwOnMissingRequiredProp: true
+    //     }
+    //   ).value;
+    // }
 
     // handle process exit
     __onProcessExit(async (state) => {
@@ -453,7 +471,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     if (typeof paramsObj === 'string') {
       paramsObj = __parseArgs(paramsObj, {
         definition: {
-          ...(this.definition || {}),
+          ...(this.paramsInterface !== undefined
+            ? this.paramsInterface.definition
+            : {}),
           processPath: {
             type: 'String'
           }
@@ -461,27 +481,29 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       });
     } else if (typeof paramsObj === 'object') {
       paramsObj = __completeArgsObject(paramsObj, {
-        definition: this.definition || {}
+        definition:
+          this.paramsInterface !== undefined
+            ? this.paramsInterface.definition
+            : {}
       });
     }
 
     // save current process params
     this._params = Object.assign({}, paramsObj);
-
     // apply the interface on the params
-    if ((<any>this.constructor).interface !== undefined) {
-      const interfaceRes = (<any>this.constructor).interface.apply(
-        this._params,
-        {
-          throwOnError: true
-        }
-      );
-      if (interfaceRes.hasIssues()) {
-        this.log({
-          value: interfaceRes.toString()
-        });
-      }
-    }
+    // if ((<any>this.constructor).interface !== undefined) {
+    //   const interfaceRes = (<any>this.constructor).interface.apply(
+    //     this._params,
+    //     {
+    //       throwOnError: true
+    //     }
+    //   );
+    //   if (interfaceRes.hasIssues()) {
+    //     this.log({
+    //       value: interfaceRes.toString()
+    //     });
+    //   }
+    // }
 
     // update state
     this.state('running');
@@ -499,7 +521,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         },
         {
           definition: {
-            ...(this.definition || {}),
+            ...(this.paramsInterface !== undefined
+              ? this.paramsInterface.definition
+              : {}),
             processPath: {
               type: 'String',
               required: true

@@ -1,10 +1,13 @@
-// @ts-nocheck
-
 import SProcess from '../../process/SProcess';
 import __SScssCompiler from './SScssCompiler';
+import __deepMerge from '../../object/deepMerge';
 
-import __SScssCompileParamsInterface from './interface/SScssCompileParamsInterface';
-import __ISScssCompileParams from './interface/ISScssCompileParams';
+import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';
+import { ISScssCompiler, ISScssCompilerParams } from './SScssCompiler';
+import {
+  ISProcessSettings,
+  ISProcessOptionalSettings
+} from '../../process/SProcess';
 
 /**
  * @name            SScssCompileProcess
@@ -22,8 +25,48 @@ import __ISScssCompileParams from './interface/ISScssCompileParams';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+interface ISScssCompileProcessOptionalSettings
+  extends ISProcessOptionalSettings {}
+interface ISScssCompileProcessSettings extends ISProcessSettings {}
+
 class SScssCompileProcess extends SProcess {
-  static interface = __SScssCompileParamsInterface;
+  static interfaces = {
+    initialParams: {
+      autoApply: false,
+      class: __SScssCompilerParamsInterface
+    },
+    params: {
+      autoApply: false,
+      class: __SScssCompilerParamsInterface
+    }
+  };
+
+  /**
+   * @name      scssCompileProcessSettings
+   * @type      ISScssCompileProcessSettings
+   * @get
+   *
+   * Access the ```scssCompileProcess``` settings
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get scssCompileProcessSettings() {
+    return (<any>this._settings).scssCompileProcessSettings;
+  }
+
+  /**
+   * @name      _scssCompiler
+   * @type      ISScssCompiler
+   * @private
+   *
+   * Store the compiler instance
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  private _scssCompiler: ISScssCompiler;
 
   /**
    * @name          constructor
@@ -34,14 +77,25 @@ class SScssCompileProcess extends SProcess {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
-    super({
-      id: 'SScssCompileProcess',
-      name: 'Compile Scss Process',
-      ...(settings || {})
-    });
+  constructor(
+    initialParams: any,
+    settings: ISScssCompileProcessOptionalSettings = {}
+  ) {
+    super(
+      initialParams,
+      __deepMerge(
+        {
+          scssCompileProcess: {}
+        },
+        {
+          id: 'SScssCompileProcess',
+          name: 'Compile Scss Process'
+        },
+        settings
+      )
+    );
 
-    this._scssCompiler = new __SScssCompiler({});
+    this._scssCompiler = new __SScssCompiler(initialParams, {});
   }
 
   /**
@@ -57,13 +111,12 @@ class SScssCompileProcess extends SProcess {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  process(params: __ISScssCompileParams, settings = {}) {
-    const input = params.input;
-    delete params.input;
-    this._settings.exitAtEnd = !params.watch;
-    return this._scssCompiler.compile(input, {
-      ...params
-    });
+  process(
+    params: ISScssCompilerParams,
+    settings: ISScssCompileProcessOptionalSettings = {}
+  ) {
+    this.processSettings.exitAtEnd = !params.compileOnChange;
+    return this._scssCompiler.compile(params, settings);
   }
 }
 

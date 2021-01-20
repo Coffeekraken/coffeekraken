@@ -1,9 +1,4 @@
 // @shared
-
-import ISTypeResult, {
-  ISTypeResultCtor,
-  ISTypeResultData
-} from './interface/ISTypeResult';
 import __deepMerge from '../object/deepMerge';
 import __isNode from '../is/node';
 import __toString from '../string/toString';
@@ -23,7 +18,59 @@ import __parseHtml from '../console/parseHtml';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls: ISTypeResultCtor = class STypeResult implements ISTypeResult {
+
+export interface ISTypeResultTypeObj {
+  type: string;
+  value?: any;
+}
+
+export interface ISTypeResultIssueObj {
+  expected: ISTypeResultTypeObj;
+  received: ISTypeResultTypeObj;
+  message?: string;
+}
+
+export interface ISTypeResultSettings {
+  id?: string;
+  name?: string;
+  throw?: boolean;
+  verbose?: boolean;
+  customTypes?: boolean;
+  interfaces?: boolean;
+}
+
+export interface ISTypeResultExpected {
+  type: string;
+}
+export interface ISTypeResultReceived {
+  type: string;
+}
+
+export interface ISTypeResultData {
+  typeString: string;
+  value: any;
+  expected: ISTypeResultExpected;
+  received: ISTypeResultReceived;
+  issues: ISTypeResultIssueObj[];
+  settings: ISTypeResultSettings;
+}
+
+export interface ISTypeResultCtor {
+  new (data: ISTypeResultData): ISTypeResult;
+}
+export interface ISTypeResult {
+  typeString?: string;
+  value?: any;
+  expected: ISTypeResultExpected;
+  received: ISTypeResultReceived;
+  issues: ISTypeResultIssueObj[];
+  settings: ISTypeResultSettings;
+  hasIssues(): boolean;
+  toString(): string;
+  toConsole(): string;
+}
+
+class STypeResult implements ISTypeResult {
   /**
    * @name        _data
    * @type        ISTypeResultData
@@ -35,6 +82,90 @@ const Cls: ISTypeResultCtor = class STypeResult implements ISTypeResult {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _data: ISTypeResultData;
+
+  /**
+   * @name       typeString
+   * @type       string
+   * @get
+   *
+   * Access the type in string format
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get typeString(): string {
+    return this._data.typeString;
+  }
+
+  /**
+   * @name       value
+   * @type       string
+   * @get
+   *
+   * Access the value passed to be type validated
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get value(): any {
+    return this._data.value;
+  }
+
+  /**
+   * @name       received
+   * @type       ISTypeResultReceived
+   * @get
+   *
+   * Access the received descriptor object
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get received(): ISTypeResultReceived {
+    return this._data.received;
+  }
+
+  /**
+   * @name       expected
+   * @type       ISTypeResultExpected
+   * @get
+   *
+   * Access the expected descriptor object
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get expected(): ISTypeResultExpected {
+    return this._data.expected;
+  }
+
+  /**
+   * @name       issues
+   * @type       ISTypeResultIssueObj[]
+   * @get
+   *
+   * Access the issues array
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get issues(): ISTypeResultIssueObj[] {
+    return this._data.issues;
+  }
+
+  /**
+   * @name       settings
+   * @type       ISTypeResultSettings
+   * @get
+   *
+   * Access the settings object
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get settings(): ISTypeResultSettings {
+    return this._data.settings;
+  }
 
   /**
    * @name        constructor
@@ -143,8 +274,11 @@ const Cls: ISTypeResultCtor = class STypeResult implements ISTypeResult {
     return __parseHtml(`
 ${headerArray.join('\n')}
 ${issuesArray.join('\n')}
-${settingsArray.join('\n')}
+${this.settings.verbose ? settingsArray.join('\n') : ''}
     `).trim();
   }
-};
-export = Cls;
+}
+
+const Cls: ISTypeResultCtor = STypeResult;
+
+export default STypeResult;

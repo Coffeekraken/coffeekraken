@@ -24,7 +24,9 @@ import __SBuildFrontspecProcess from './SBuildFrontspecProcess';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export = class SBuildFrontspecSugarAppModule extends __SSugarAppModule {
-  static interface = __SBuildFrontspecInterface;
+  static interfaces = {
+    this: __SBuildFrontspecInterface
+  };
 
   /**
    * @name            constructor
@@ -56,4 +58,4 @@ export = class SBuildFrontspecSugarAppModule extends __SSugarAppModule {
     );
     return super.start(pro);
   }
-}
+};

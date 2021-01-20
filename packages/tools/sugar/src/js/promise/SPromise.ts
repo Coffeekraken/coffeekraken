@@ -200,7 +200,8 @@ class SPromise extends __SClass.extends(Promise) {
               } else {
                 return async (...args) => {
                   await __wait(0);
-                  return _this[prop](...args);
+                  const fn = _this[prop].bind(_this);
+                  return fn(...args);
                 };
               }
             }
@@ -212,7 +213,7 @@ class SPromise extends __SClass.extends(Promise) {
             ? executorFnOrSettings
             : null;
         if (executorFn) {
-          return executorFn(_api);
+          resolve(executorFn(_api));
         }
       }
     );
@@ -226,7 +227,7 @@ class SPromise extends __SClass.extends(Promise) {
       }),
       {
         as: 'eventEmitter',
-        props: ['on', 'off', 'emit']
+        props: ['on', 'off', 'emit', 'pipe', 'pipeFrom', 'pipeTo']
       }
     );
 

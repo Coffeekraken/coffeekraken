@@ -1,27 +1,6 @@
 "use strict";
 // @shared
-/**
- * @name            parseTypeString
- * @namespace       sugar.js.type
- * @type            Function
- *
- * This method simply parse the passed typeString like "string | number", or "string & path", etc... and return
- * an object defining this type string
- *
- * @param     {String}        typeString      The type string to parse
- * @return    {ITypeStringObject}             An object describing the type string passed
- *
- * @example       js
- * import parseTypeString from '@coffeekraken/sugar/js/type/parseTypeString';
- * parseTypeString('string | path');
- * // {
- * //   raw: 'string | path',
- * //   types: [SType('string'), SType('path')],
- * // }
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com>
- */
+Object.defineProperty(exports, "__esModule", { value: true });
 function parseSingleTypeString(typeString) {
     let ofStr = '', typeStr = typeString;
     const ofPartsString = typeString.match(/<(.+)>$/gm);
@@ -93,5 +72,5 @@ const fn = function parseTypeString(typeString) {
     };
     return res;
 };
-module.exports = fn;
+exports.default = fn;
 //# sourceMappingURL=parseTypeString.js.map

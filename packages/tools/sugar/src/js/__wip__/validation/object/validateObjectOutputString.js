@@ -55,18 +55,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function validateObjectOutputString(validateObjectResultObj, settings) {
         if (settings === void 0) { settings = {}; }
         var stringsArray = [];
-        stringsArray.push(trimLines_1.default("\n  <underline><green>Object validation</green></underline>\n\n  " + (validateObjectResultObj.$interface
-            ? "- Interface:  <cyan>" + validateObjectResultObj.$interface + "</cyan>"
-            : '') + "\n  - Name:       <yellow>" + (validateObjectResultObj.$name || 'unnamed') + "</yellow>\n  - Error" + (validateObjectResultObj.$issues.length > 1 ? 's' : '') + ":" + (validateObjectResultObj.$issues.length > 1 ? '' : ' ') + "     <red>" + validateObjectResultObj.$issues.length + "</red>\n  - Propert" + (validateObjectResultObj.$issues.length > 1 ? 'ies' : 'y') + ":" + (validateObjectResultObj.$issues.length > 1 ? '' : '  ') + " " + validateObjectResultObj.$issues
+        stringsArray.push(trimLines_1.default("\n  <underline><green>Object validation</green></underline>\n\n  " + (validateObjectResultObj.interface
+            ? "- Interface:  <cyan>" + validateObjectResultObj.interface + "</cyan>"
+            : '') + "\n  - Name:       <yellow>" + (validateObjectResultObj.name || 'unnamed') + "</yellow>\n  - Error" + (validateObjectResultObj.issues.length > 1 ? 's' : '') + ":" + (validateObjectResultObj.issues.length > 1 ? '' : ' ') + "     <red>" + validateObjectResultObj.issues.length + "</red>\n  - Propert" + (validateObjectResultObj.issues.length > 1 ? 'ies' : 'y') + ":" + (validateObjectResultObj.issues.length > 1 ? '' : '  ') + " " + validateObjectResultObj.issues
             .map(function (v) {
             return "<magenta>" + v + "</magenta>";
         })
             .join(', ')));
-        validateObjectResultObj.$issues.forEach(function (attrName) {
+        validateObjectResultObj.issues.forEach(function (attrName) {
             var attrIssueObj = validateObjectResultObj[attrName];
             var string = validateValueOutputString_1.default(attrIssueObj, {
-                interface: validateObjectResultObj.$interface,
-                name: "<yellow>" + validateObjectResultObj.$name + "</yellow>.<magenta>" + attrName + "</magenta>"
+                interface: validateObjectResultObj.interface,
+                name: "<yellow>" + validateObjectResultObj.name + "</yellow>.<magenta>" + attrName + "</magenta>"
             });
             stringsArray.push(string);
         });

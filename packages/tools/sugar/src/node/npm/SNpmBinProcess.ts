@@ -32,7 +32,9 @@ import _deepMerge from '../object/deepMerge';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = class SNpmBinProcess extends _SProcess {
-  static interface = _SNpmBinInterface;
+  static interfaces = {
+    this: _SNpmBinInterface
+  };
 
   /**
    * @name          constructor

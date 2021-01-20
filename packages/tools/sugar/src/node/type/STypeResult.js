@@ -1,26 +1,12 @@
 "use strict";
-// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const node_1 = __importDefault(require("../is/node"));
 const toString_1 = __importDefault(require("../string/toString"));
 const parseHtml_1 = __importDefault(require("../console/parseHtml"));
-/**
- * @name            STypeResult
- * @namespace       sugar.js.type
- * @type            Class
- *
- * This class represent what you will get back from the ```SType.apply``` method.
- * You will be able to generate some string terminal version of the return as well as some html
- * version if needed
- *
- * @todo        integrate ```toHtml``` method
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-const Cls = class STypeResult {
+class STypeResult {
     /**
      * @name        constructor
      * @type        Function
@@ -33,6 +19,84 @@ const Cls = class STypeResult {
      */
     constructor(data) {
         this._data = data;
+    }
+    /**
+     * @name       typeString
+     * @type       string
+     * @get
+     *
+     * Access the type in string format
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get typeString() {
+        return this._data.typeString;
+    }
+    /**
+     * @name       value
+     * @type       string
+     * @get
+     *
+     * Access the value passed to be type validated
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get value() {
+        return this._data.value;
+    }
+    /**
+     * @name       received
+     * @type       ISTypeResultReceived
+     * @get
+     *
+     * Access the received descriptor object
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get received() {
+        return this._data.received;
+    }
+    /**
+     * @name       expected
+     * @type       ISTypeResultExpected
+     * @get
+     *
+     * Access the expected descriptor object
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get expected() {
+        return this._data.expected;
+    }
+    /**
+     * @name       issues
+     * @type       ISTypeResultIssueObj[]
+     * @get
+     *
+     * Access the issues array
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get issues() {
+        return this._data.issues;
+    }
+    /**
+     * @name       settings
+     * @type       ISTypeResultSettings
+     * @get
+     *
+     * Access the settings object
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get settings() {
+        return this._data.settings;
     }
     /**
      * @name          hasIssues
@@ -122,9 +186,10 @@ const Cls = class STypeResult {
         return parseHtml_1.default(`
 ${headerArray.join('\n')}
 ${issuesArray.join('\n')}
-${settingsArray.join('\n')}
+${this.settings.verbose ? settingsArray.join('\n') : ''}
     `).trim();
     }
-};
-module.exports = Cls;
+}
+const Cls = STypeResult;
+exports.default = STypeResult;
 //# sourceMappingURL=STypeResult.js.map

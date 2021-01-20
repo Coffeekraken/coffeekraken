@@ -127,6 +127,8 @@ module.exports = (_a = class SFsCacheStreamAction extends SActionsStreamAction_1
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SFsCacheStreamActionInterface,
+    _a.interfaces = {
+        this: SFsCacheStreamActionInterface
+    },
     _a);
 //# sourceMappingURL=SFsCacheStreamAction.js.map

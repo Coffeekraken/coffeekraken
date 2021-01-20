@@ -11,14 +11,7 @@ import __getGlob from '../object/getGlob';
 import __flatten from '../object/flatten';
 import __set from '../object/set';
 import __deepMerge from '../object/deepMerge';
-import ISDescriptor, {
-  ISDescriptorCtor,
-  ISDescriptorRule,
-  ISDescriptorSettings,
-  ISDescriptorRules,
-  ISDescroptorGenerateSettings
-} from './interface/ISDescriptor';
-import ISDescriptorResult from './interface/ISDescriptorResult';
+import { ISDescriptorResult } from './SDescriptorResult';
 
 /**
  * @name                SDescriptor
@@ -46,7 +39,67 @@ import ISDescriptorResult from './interface/ISDescriptorResult';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
+
+export interface ISDescriptorSettings {
+  type?: string;
+  arrayAsValue?: boolean;
+  throwOnMissingRule?: boolean;
+  throw?: boolean;
+  complete?: boolean;
+  name?: string;
+  id?: string;
+  rules?: ISDescriptorRules;
+  verbose?: boolean;
+}
+
+export interface ISDescriptorDescription {
+  [key: string]: ISDescriptorDescription;
+}
+
+export interface ISDescriptorRuleApplyFn {
+  (
+    value: any,
+    params: any,
+    ruleSettings: any,
+    settings: ISDescriptorSettings
+  ): ISDescriptorResultObj;
+}
+
+export interface ISDescriptorRule {
+  id: string;
+  name: string;
+  settings: object;
+  processParams?: Function;
+  apply: ISDescriptorRuleApplyFn;
+}
+
+export interface ISDescriptorRules {
+  [key: string]: ISDescriptorRule;
+}
+
+export interface ISDescroptorGenerateSettings {
+  name?: string;
+  id?: string;
+  rules: ISDescriptorRules;
+  type?: string;
+  settings?: ISDescriptorSettings;
+}
+
+export interface ISDescriptionValidationResult {}
+export interface ISDescriptorCtor {
+  rules: ISDescriptorRules;
+  type: string;
+  new (settings?: ISDescriptorSettings): ISDescriptor;
+  registerRule(rule: ISDescriptorRule): void;
+}
+
+export interface ISDescriptor {
+  _settings: ISDescriptorSettings;
+  name: string;
+  id: string;
+  apply(instance: any, settings?: ISDescriptorSettings);
+}
+class SDescriptor implements ISDescriptor {
   /**
    * @name        _settings
    * @type        ISDescriptorSettings
@@ -163,9 +216,9 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
         type: 'Object',
         arrayAsValue: false,
         throwOnMissingRule: false,
-        throwOnMissingRequiredProp: true,
         throw: false,
-        complete: true
+        complete: true,
+        verbose: false
       },
       this.constructor.settings,
       settings
@@ -273,7 +326,6 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
         });
 
         if (
-          settings.throwOnMissingRequiredProp &&
           ruleObj.required !== undefined &&
           ruleObj.required !== false &&
           Object.keys(globPropValue).length === 0
@@ -308,9 +360,9 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
       );
     }
 
-    if (this._descriptorResult.hasIssues() && settings.throw) {
-      throw this._descriptorResult.toString();
-    }
+    // if (this._descriptorResult.hasIssues() && settings.throw) {
+    //   throw this._descriptorResult.toString();
+    // }
 
     return this._descriptorResult;
   }
@@ -377,6 +429,8 @@ const Cls: ISDescriptorCtor = class SDescriptor implements ISDescriptor {
     // return the value that can have been processed
     return value;
   }
-};
+}
 
-export = Cls;
+const Cls: ISDescriptorCtor = SDescriptor;
+
+export default SDescriptor;

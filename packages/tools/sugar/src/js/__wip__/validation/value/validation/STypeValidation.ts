@@ -24,7 +24,7 @@ class STypeValidation extends __SValidation {
   static exec(value, type) {
     const result = __isOfType(value, type);
     if (result === true) return true;
-    return [value, type, result.$received.type];
+    return [value, type, result.received.type];
   }
 }
 

@@ -73,6 +73,8 @@ module.exports = (_a = class SExtractStreamAction extends SActionsStreamAction_1
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interface = SExtractStreamActionInterface,
+    _a.interfaces = {
+        this: SExtractStreamActionInterface
+    },
     _a);
 //# sourceMappingURL=SExtractStreamAction.js.map

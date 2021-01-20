@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import __SFile from '../fs/SFile';
 import __findImportStatements from './utils/findImportStatements';
 import __resolveDependency from './utils/resolveDependency';
@@ -22,10 +20,13 @@ import __repl from 'repl';
 import __getSharedResourcesString from './utils/getSharedResourcesString';
 import __wait from '../time/wait';
 
-import __ISFile from '../fs/interface/ISFile';
-import { ISFileSettings } from '../fs/interface/ISFile';
-import __ISScssCompileParams from './compile/interface/ISScssCompileParams';
-import __SScssCompileParamsInterface from './compile/interface/SScssCompileParamsInterface';
+import { ISFile, ISFileSettings } from '../fs/SFile';
+import {
+  ISScssCompilerParams,
+  ISScssCompilerOptionalParams
+} from './compile/SScssCompiler';
+import __SScssCompilerParamsInterface from './compile/interface/SScssCompilerParamsInterface';
+import __SScssFileSettingsInterface from './interface/SScssFileSettingsInterface';
 
 /**
  * @name            SScssFile
@@ -37,7 +38,7 @@ import __SScssCompileParamsInterface from './compile/interface/SScssCompileParam
  * This represent an scss file with some additional properties like "dependencies", etc...
  *
  * @param       {String}            path            The path to the scss file
- * @param       {IScssFileSettings}     [settings={}]       Some settings to configure your file
+ * @param       {ISScssFileSettings}     [settings={}]       Some settings to configure your file
  *
  * @example         js
  * import SScssFile from '@coffeekraken/sugar/node/scss/SScssFile';
@@ -46,18 +47,54 @@ import __SScssCompileParamsInterface from './compile/interface/SScssCompileParam
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-interface ISScssFileSettings extends ISFileSettings {
-  compile?: __ISScssCompileParams;
+
+interface ISScssFileCompileOptionalSettings {}
+interface ISScssFileCompileSettings {}
+
+interface ISScssFileOptionalSettings {
+  compile?: ISScssFileCompileOptionalSettings;
+}
+interface ISScssFileSettings {
+  compile: ISScssFileCompileOptionalSettings;
+}
+interface ISScssFileCtorSettings {
+  scssFile?: ISScssFileOptionalSettings;
 }
 
-interface ISScssFile extends __ISFile {
+interface ISScssFile {
   _fileCache: __SFileCache;
   _sharedResources: string;
   mixinsAndVariables: string;
   dependencies: Array<ISScssFile>;
+  compile(params: ISScssCompilerParams, settings?: ISScssFileOptionalSettings);
 }
 
-export = class SScssFile extends __SFile {
+class SScssFile extends __SFile implements ISScssFile {
+  static interfaces = {
+    compilerParams: {
+      autoApply: false,
+      class: __SScssCompilerParamsInterface
+    },
+    '_settings.scssFile': {
+      autoApply: true,
+      class: __SScssFileSettingsInterface
+    }
+  };
+
+  /**
+   * @name      scssFileSettings
+   * @type      ISScssFileSettings
+   * @get
+   *
+   * Access the scssFile settings
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get scssFileSettings(): ISScssFileSettings {
+    return (<any>this._settings).scssFile;
+  }
+
   /**
    * @name        dependencyType
    * @type        String
@@ -90,35 +127,26 @@ export = class SScssFile extends __SFile {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(path: string, settings: ISScssFileSettings = {}) {
-    super(path, settings);
-    this._settings.compile = __deepMerge(
-      __SScssCompileParamsInterface.defaults(),
-      this._settings.compile || {}
+  constructor(path: string, settings: ISScssFileCtorSettings = {}) {
+    super(
+      path,
+      __deepMerge(
+        {
+          scssFile: {
+            coco: false
+          }
+        },
+        settings
+      )
     );
+    // this._settings.compile = __deepMerge(
+    //   __SScssCompilerParamsInterface.defaults(),
+    //   this._settings.compile || {}
+    // );
 
     SScssFile.FILES[this.path] = this;
 
     this._fileCache = new __SFileCache(this.constructor.name);
-
-    // start watching the file if needed
-    // @ts-ignore
-    if (settings.compile.watch) {
-      this.startWatch();
-    }
-
-    // listen for change event
-    // @ts-ignore
-    this.on('update', () => {
-      console.log('UP');
-      if (this._settings.compile.compileOnChange) {
-        const promise = this.compile(this._settings.compile);
-        // @ts-ignore
-        promise.emit('log', {
-          value: `<blue>[updated]</blue> ""`
-        });
-      }
-    });
   }
 
   /**
@@ -157,15 +185,14 @@ export = class SScssFile extends __SFile {
         let file;
         if (SScssFile.FILES[obj.path]) file = SScssFile.FILES[obj.path];
         else
-          file = file = new SScssFile(
-            obj.path,
-            __deepMerge(this._settings, {
-              compile: {
-                ...(this._settings.compile || {}),
-                ...(this._currentCompilationSettings || {})
-              }
-            })
-          );
+          file = file = new SScssFile(obj.path, {
+            scssFile: <ISScssFileSettings>(
+              __deepMerge(
+                this.scssFileSettings,
+                this._currentCompilationSettings
+              )
+            )
+          });
         file._import = obj.import;
         return file;
       });
@@ -218,15 +245,14 @@ export = class SScssFile extends __SFile {
         let useFile;
         if (SScssFile.FILES[realPath]) useFile = SScssFile.FILES[realPath];
         else
-          useFile = useFile = new SScssFile(
-            realPath,
-            __deepMerge(this._settings, {
-              compile: {
-                ...(this._settings.compile || {}),
-                ...(this._currentCompilationSettings || {})
-              }
-            })
-          );
+          useFile = useFile = new SScssFile(realPath, {
+            scssFile: <ISScssFileSettings>(
+              __deepMerge(
+                this.scssFileSettings,
+                this._currentCompilationSettings
+              )
+            )
+          });
         [useFile, ...useFile.dependencies].forEach((depFile) => {
           // @ts-ignore
           hashesStrArray.push(depFile.hash);
@@ -291,77 +317,85 @@ export = class SScssFile extends __SFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _isCompiling = false;
-  _currentCompilationSettings;
-  compile(settings: __ISScssCompileParams = {}) {
-    settings = __deepMerge(
-      {
-        ...__SScssCompileParamsInterface.defaults()
-      },
-      this._settings.compile || {},
-      settings
-    );
+  _currentCompilationSettings: ISScssFileOptionalSettings = {};
+  compile(params: ISScssCompilerParams, settings?: ISScssFileOptionalSettings) {
+    settings = __deepMerge(this.scssFileSettings, settings);
     this._currentCompilationSettings = Object.assign({}, settings);
 
-    // init the promise
-    const promise = new __SPromise({});
-
-    // listen for the end
-    promise.on('finally', () => {
-      this._isCompiling = false;
-    });
-
-    // // pipe this promise
-    // @ts-ignore
-    this.pipe(promise);
-
-    if (this._isCompiling) {
-      promise.emit('warn', {
-        value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
-      });
-      return;
-    }
-    this._isCompiling = true;
-
-    // sass settings
-    const sassSettings = {
-      outputStyle: settings.style || __sugarConfig('scss.compile.style'),
-      sourceMap:
-        settings.map !== undefined
-          ? settings.map
-          : __sugarConfig('scss.compile.map'),
-      includePaths: [
-        this.dirPath,
-        ...__sugarConfig('scss.compile.includePaths')
-      ],
-      ...(settings.sass || {})
-    };
+    this.applyInterface('compilerParams', params);
 
     // start watching the file if needed
-    if (settings.watch) {
+    if (params.watch) {
       this.startWatch();
     }
 
-    promise.emit('log', {
-      type: 'separator'
+    // listen for change event
+    this.on('update', () => {
+      console.log('UP');
+      if (params.compileOnChange) {
+        const promise = this.compile(params);
+        this.emit('log', {
+          value: `<blue>[updated]</blue> ""`
+        });
+      }
     });
 
-    // notify start
-    promise.emit('log', {
-      value: `Starting "<cyan>${this.relPath}</cyan>" compilation`
-    });
+    // init the promise
+    return new __SPromise(async ({ resolve, reject, emit, pipeTo, on }) => {
+      // listen for the end
+      on('finally', () => {
+        this._isCompiling = false;
+      });
 
-    const duration = new __SDuration();
+      pipeTo(this);
 
-    (async () => {
+      if (this._isCompiling) {
+        emit('warn', {
+          value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
+        });
+        return;
+      }
+      this._isCompiling = true;
+
+      // sass settings
+      const sassSettings = {
+        outputStyle: params.style || __sugarConfig('scss.compile.style'),
+        sourceMap:
+          params.map !== undefined
+            ? params.map
+            : __sugarConfig('scss.compile.map'),
+        includePaths: [
+          this.dirPath,
+          ...__sugarConfig('scss.compile.includePaths')
+        ],
+        ...(params.sass || {})
+      };
+
+      // start watching the file if needed
+      if (params.watch) {
+        this.startWatch();
+      }
+
+      emit('log', {
+        type: 'separator'
+      });
+
+      // notify start
+      emit('log', {
+        value: `Starting "<cyan>${this.relPath}</cyan>" compilation`
+      });
+
+      const duration = new __SDuration();
+
       await __wait(0);
 
-      if (settings.clearCache) await this._fileCache.clear();
+      if (params.clearCache) await this._fileCache.clear();
       let toCompile = this.content;
 
       // @ts-ignore
       this._sharedResources = __getSharedResourcesString(
         // @ts-ignore
-        settings.sharedResources
+        params.sharedResources
       );
 
       if (this._import.type === 'main') {
@@ -376,15 +410,18 @@ export = class SScssFile extends __SFile {
           continue;
         }
 
-        // promise.emit('log', {
+        // emit('log', {
         //   value: `<yellow>[dependency]</yellow> "<cyan>${depFile.relPath}</cyan>"`
         // });
 
         // compile the dependency
-        const res = await depFile.compile({
-          ...settings,
-          clearCache: false
-        });
+        const res = await depFile.compile(
+          {
+            ...params,
+            clearCache: false
+          },
+          settings
+        );
 
         // replace the import in the content
         toCompile = toCompile.replace(depFile._import.raw, ``);
@@ -392,7 +429,7 @@ export = class SScssFile extends __SFile {
 
       // check if we are loaded through a "use"
       if (this._import.type === 'use') {
-        return promise.resolve(`@use "${this.path}" as ${this._import.as}`);
+        return resolve(`@use "${this.path}" as ${this._import.as}`);
       }
 
       const dependenciesHash = this.dependenciesHash;
@@ -402,13 +439,13 @@ export = class SScssFile extends __SFile {
       if (
         cachedValue &&
         cachedValue.dependenciesHash === dependenciesHash &&
-        settings.cache
+        params.cache
       ) {
         // console.log('from cache');
         let result = cachedValue.css;
         SScssFile.COMPILED_CSS[this.path] = result;
 
-        promise.emit('log', {
+        emit('log', {
           value: `<green>[from cache]</green> "<cyan>${this.relPath}</cyan>"`
         });
 
@@ -421,22 +458,18 @@ export = class SScssFile extends __SFile {
         }
 
         // process the result
-        result = this._processResultCss(result, settings);
+        result = this._processResultCss(result, params);
 
         // check if need to save
-        if (
-          this._import.type === 'main' &&
-          settings.save &&
-          settings.outputDir
-        ) {
+        if (this._import.type === 'main' && params.save && params.outputDir) {
           // build the save path
           const savePath = __path.resolve(
-            settings.outputDir,
+            params.outputDir,
             this.path
-              .replace(`${settings.rootDir}/`, '')
+              .replace(`${params.rootDir}/`, '')
               .replace(/\.s[ac]ss$/, '.css')
           );
-          promise.emit('log', {
+          emit('log', {
             value: `Saving the file "<cyan>${
               this.relPath
             }</cyan>" to "<magenta>${savePath.replace(
@@ -450,12 +483,12 @@ export = class SScssFile extends __SFile {
 
           // notify end
           const time = duration.end();
-          promise.emit('log', {
+          emit('log', {
             value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
           });
         }
 
-        return promise.resolve(result);
+        return resolve(result);
       }
 
       if (this._sharedResources) {
@@ -466,7 +499,7 @@ export = class SScssFile extends __SFile {
 
       let renderObj;
       try {
-        promise.emit('log', {
+        emit('log', {
           value: `<yellow>[compiling]</yellow> "<cyan>${this.relPath}</cyan>"`
         });
 
@@ -477,7 +510,7 @@ export = class SScssFile extends __SFile {
         });
 
         // save in cache
-        if (settings.cache) {
+        if (params.cache) {
           // console.log('save in cache', this.path);
           // @ts-ignore
           await this._fileCache.set(this.path, {
@@ -494,19 +527,18 @@ export = class SScssFile extends __SFile {
             '\n'
           );
 
-          result = this._processResultCss(result, settings);
+          result = this._processResultCss(result, params);
 
           // check if need to save
-          if (settings.save && settings.outputDir) {
+          if (params.save && params.outputDir) {
             // build the save path
             const savePath = __path.resolve(
-              // @ts-ignore
-              settings.outputDir,
+              params.outputDir,
               this.path
-                .replace(`${settings.rootDir}/`, '')
+                .replace(`${params.rootDir}/`, '')
                 .replace(/\.s[ac]ss$/, '.css')
             );
-            promise.emit('log', {
+            emit('log', {
               value: `Saving the file "<cyan>${
                 this.relPath
               }</cyan>" to "<magenta>${savePath.replace(
@@ -521,37 +553,35 @@ export = class SScssFile extends __SFile {
 
           // notify end
           const time = duration.end();
-          promise.emit('log', {
+          emit('log', {
             value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
           });
 
-          return promise.resolve(result);
+          return resolve(result);
         } else {
           SScssFile.COMPILED_CSS[this.path] = renderObj.css;
-          return promise.resolve(
-            this._processResultCss(renderObj.css.toString(), settings)
+          return resolve(
+            this._processResultCss(renderObj.css.toString(), params)
           );
         }
       } catch (e) {
         // .log(e);
-        return promise.reject(e.toString());
+        return reject(e.toString());
       }
 
       return true;
-    })();
-
-    return promise;
+    });
   }
 
-  _processResultCss(css, settings: __ISScssCompileParams = {}) {
+  _processResultCss(css, params: ISScssCompilerParams) {
     // remove @charset "UTF-8";
     css = css.replace(/@charset "UTF-8";/gm, '');
 
-    if (settings.stripComments) {
+    if (params.stripComments) {
       css = __stripCssComments(css);
     }
 
-    if (settings.minify) {
+    if (params.minify) {
       css = __csso.minify(css, {
         comments: false
       }).css;
@@ -568,4 +598,6 @@ export = class SScssFile extends __SFile {
     this._dependencies = undefined;
     super.update();
   }
-};
+}
+
+export default SScssFile;

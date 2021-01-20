@@ -1,11 +1,11 @@
 // @shared
 
 import __deepMerge from '../object/deepMerge';
-import ISDescriptor, { ISDescriptorSettings } from './interface/ISDescriptor';
-import ISDescriptorResult, {
-  ISDescriptorResultCtor,
-  ISDescriptorResultRule
-} from './interface/ISDescriptorResult';
+import ISDescriptor, {
+  ISDescriptorSettings,
+  ISDescriptorRule
+} from './SDescriptor';
+
 import __toString from '../string/toString';
 import __parseHtml from '../console/parseHtml';
 import __clone from '../object/clone';
@@ -37,8 +37,32 @@ import __isNode from '../is/node';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls: ISDescriptorResultCtor = class SDescriptorResult
-  implements ISDescriptorResult {
+
+export interface ISDescriptorResultRule {
+  __ruleObj: ISDescriptorRule;
+  [key: string]: any;
+}
+
+export interface ISDescriptorResultCtor {
+  new (
+    descriptor: ISDescriptor,
+    value: any,
+    descriptorSettings: ISDescriptorSettings
+  ): ISDescriptorResult;
+}
+
+export interface ISDescriptorResult {
+  _issues: any;
+  _descriptor: ISDescriptor;
+  _descriptorSettings: ISDescriptorSettings;
+  _originalValue: any;
+  value: any;
+  hasIssues(): boolean;
+  add(ruleResult: ISDescriptorResultRule): void;
+  toConsole(): string;
+}
+
+class SDescriptorResult implements ISDescriptorResult {
   /**
    * @name      _issues
    * @type      Object
@@ -234,9 +258,11 @@ const Cls: ISDescriptorResultCtor = class SDescriptorResult
     return __parseHtml(`
 ${headerArray.join('\n')}
 ${issuesArray.join('\n')}
-${settingsArray.join('\n')}
+${this._descriptorSettings.verbose ? settingsArray.join('\n') : ''}
     `).trim();
   }
-};
+}
 
-export = Cls;
+const Cls: ISDescriptorResultCtor = SDescriptorResult;
+
+export default SDescriptorResult;

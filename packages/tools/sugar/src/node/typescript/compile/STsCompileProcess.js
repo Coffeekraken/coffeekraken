@@ -56,7 +56,9 @@ const Cls = (_a = class SCompileTsProcess extends SProcess_1.default {
             return this._tsCompiler.compile(input, Object.assign(Object.assign({}, settings), params));
         }
     },
-    _a.interface = SCompileTsProcessInterface_1.default,
+    _a.interfaces = {
+        this: SCompileTsProcessInterface_1.default
+    },
     _a);
 module.exports = Cls;
 //# sourceMappingURL=STsCompileProcess.js.map

@@ -34,7 +34,9 @@ export = class SRenderSassStreamAction extends __SActionsStreamAction {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static interface = __SBuildScssInterface;
+  static interfaces = {
+    this: __SBuildScssInterface
+  };
 
   /**
    * @name            constructor

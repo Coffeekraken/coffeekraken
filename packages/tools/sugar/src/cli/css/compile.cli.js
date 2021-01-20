@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 const SScssCompileProcess_1 = __importDefault(require("../../node/scss/compile/SScssCompileProcess"));
 function compileScss(stringArgs = '') {
-    const pro = new SScssCompileProcess_1.default({
+    const pro = new SScssCompileProcess_1.default({}, {
         stdio: 'inherit'
     });
     pro.run(stringArgs);

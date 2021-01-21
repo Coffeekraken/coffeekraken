@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SScssFileCtorSettingsInterface = exports.SScssFileSettingsInterface = void 0;
 const SFile_1 = __importDefault(require("../fs/SFile"));
 const findImportStatements_1 = __importDefault(require("./utils/findImportStatements"));
 const resolveDependency_1 = __importDefault(require("./utils/resolveDependency"));
@@ -31,8 +32,45 @@ const csso_1 = __importDefault(require("csso"));
 const stripCssComments_1 = __importDefault(require("../css/stripCssComments"));
 const getSharedResourcesString_1 = __importDefault(require("./utils/getSharedResourcesString"));
 const wait_1 = __importDefault(require("../time/wait"));
+const filename_1 = __importDefault(require("../fs/filename"));
+const SInterface_1 = __importDefault(require("../interface/SInterface"));
 const SScssCompilerParamsInterface_1 = __importDefault(require("./compile/interface/SScssCompilerParamsInterface"));
-const SScssFileSettingsInterface_1 = __importDefault(require("./interface/SScssFileSettingsInterface"));
+/**
+ * @name      SScssFileSettingsInterface
+ * @type      Class
+ * @extends     SInterface
+ * @beta
+ *
+ * Scss file settings interface
+ *
+ * @since     2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class SScssFileSettingsInterface extends SInterface_1.default {
+}
+exports.SScssFileSettingsInterface = SScssFileSettingsInterface;
+SScssFileSettingsInterface.definition = {};
+/**
+ * @name      SScssFileCtorSettingsInterface
+ * @type      Class
+ * @extends     SInterface
+ * @beta
+ *
+ * Scss file constructor settings interface
+ *
+ * @since     2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class SScssFileCtorSettingsInterface extends SInterface_1.default {
+}
+exports.SScssFileCtorSettingsInterface = SScssFileCtorSettingsInterface;
+SScssFileCtorSettingsInterface.definition = {
+    scssFile: {
+        interface: SScssFileSettingsInterface,
+        type: 'Object',
+        required: true
+    }
+};
 class SScssFile extends SFile_1.default {
     /**
      * @name        constructor
@@ -46,9 +84,8 @@ class SScssFile extends SFile_1.default {
      */
     constructor(path, settings = {}) {
         super(path, deepMerge_1.default({
-            scssFile: {
-                coco: false
-            }
+            id: filename_1.default(path),
+            scssFile: {}
         }, settings));
         /**
          * @name        dependencyType
@@ -76,6 +113,18 @@ class SScssFile extends SFile_1.default {
          */
         this._mixinsAndVariables = undefined;
         /**
+         * @name        _watch
+         * @type        Function
+         * @private
+         *
+         * Start to watch the file. Does this only once
+         * to avoid multiple compilation and logs
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this._alreadyWatch = false;
+        /**
          * @name              compile
          * @type              Function
          *
@@ -95,10 +144,9 @@ class SScssFile extends SFile_1.default {
          */
         this._isCompiling = false;
         this._currentCompilationSettings = {};
-        // this._settings.compile = __deepMerge(
-        //   __SScssCompilerParamsInterface.defaults(),
-        //   this._settings.compile || {}
-        // );
+        this._currentCompilationParams = {};
+        console.log(this._settings);
+        // store this instance in a stack to avoid creating multiple instances of the same file
         SScssFile.FILES[this.path] = this;
         this._fileCache = new SFileCache_1.default(this.constructor.name);
     }
@@ -138,10 +186,14 @@ class SScssFile extends SFile_1.default {
             let file;
             if (SScssFile.FILES[obj.path])
                 file = SScssFile.FILES[obj.path];
-            else
-                file = file = new SScssFile(obj.path, {
+            else {
+                file = new SScssFile(obj.path, {
                     scssFile: (deepMerge_1.default(this.scssFileSettings, this._currentCompilationSettings))
                 });
+                file.pipeTo(this, {
+                    events: 'update'
+                });
+            }
             file._import = obj.import;
             return file;
         });
@@ -222,24 +274,34 @@ class SScssFile extends SFile_1.default {
         });
         return this._mixinsAndVariables;
     }
-    compile(params, settings) {
-        settings = deepMerge_1.default(this.scssFileSettings, settings);
-        this._currentCompilationSettings = Object.assign({}, settings);
-        this.applyInterface('compilerParams', params);
+    _watch() {
+        if (this._alreadyWatch)
+            return;
+        this._alreadyWatch = true;
+        if (!this._currentCompilationParams)
+            return;
         // start watching the file if needed
-        if (params.watch) {
+        if (this._currentCompilationParams.watch) {
             this.startWatch();
         }
         // listen for change event
-        this.on('update', () => {
-            console.log('UP');
-            if (params.compileOnChange) {
-                const promise = this.compile(params);
+        this.on('update', (file, metas) => {
+            if (this._currentCompilationParams.compileOnChange) {
+                const promise = this.compile(this._currentCompilationParams);
                 this.emit('log', {
-                    value: `<blue>[updated]</blue> ""`
+                    value: `<blue>[updated]</blue> "<cyan>${file.relPath}</cyan>"`
                 });
             }
         });
+    }
+    compile(params, settings) {
+        settings = deepMerge_1.default(this.scssFileSettings, settings);
+        this._currentCompilationParams = Object.assign({}, params);
+        this._currentCompilationSettings = Object.assign({}, settings);
+        this.applyInterface('compilerParams', params);
+        if (params.watch) {
+            this._watch();
+        }
         // init the promise
         return new SPromise_1.default(({ resolve, reject, emit, pipeTo, on }) => __awaiter(this, void 0, void 0, function* () {
             // listen for the end
@@ -291,9 +353,6 @@ class SScssFile extends SFile_1.default {
                 if (depFile._import && depFile._import.type === 'use') {
                     continue;
                 }
-                // emit('log', {
-                //   value: `<yellow>[dependency]</yellow> "<cyan>${depFile.relPath}</cyan>"`
-                // });
                 // compile the dependency
                 const res = yield depFile.compile(Object.assign(Object.assign({}, params), { clearCache: false }), settings);
                 // replace the import in the content
@@ -339,6 +398,11 @@ class SScssFile extends SFile_1.default {
                     emit('log', {
                         value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
                     });
+                    if (params.watch) {
+                        emit('log', {
+                            value: `<blue>Watching for changes...</blue>`
+                        });
+                    }
                 }
                 return resolve(result);
             }
@@ -385,9 +449,19 @@ class SScssFile extends SFile_1.default {
                     emit('log', {
                         value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
                     });
+                    if (params.watch) {
+                        emit('log', {
+                            value: `<blue>Watching for changes...</blue>`
+                        });
+                    }
                     return resolve(result);
                 }
                 else {
+                    if (params.watch) {
+                        emit('log', {
+                            value: `<blue>Watching for changes...</blue>`
+                        });
+                    }
                     SScssFile.COMPILED_CSS[this.path] = renderObj.css;
                     return resolve(this._processResultCss(renderObj.css.toString(), params));
                 }
@@ -422,12 +496,12 @@ class SScssFile extends SFile_1.default {
 }
 SScssFile.interfaces = {
     compilerParams: {
-        autoApply: false,
+        apply: false,
         class: SScssCompilerParamsInterface_1.default
     },
-    '_settings.scssFile': {
-        autoApply: true,
-        class: SScssFileSettingsInterface_1.default
+    _settings: {
+        apply: true,
+        class: SScssFileCtorSettingsInterface
     }
 };
 SScssFile.COMPILED_CSS = {};

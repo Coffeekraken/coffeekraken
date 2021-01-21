@@ -66,6 +66,10 @@ export interface ISDescriptorRuleApplyFn {
 }
 
 export interface ISDescriptorRule {
+  [key: string]: any;
+}
+
+export interface ISDescriptorRegisteredRule {
   id: string;
   name: string;
   settings: object;
@@ -134,7 +138,7 @@ class SDescriptor implements ISDescriptor {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com>
    */
-  static _registeredRules: ISDescriptorRules = {};
+  static _registeredRules: ISDescriptorRegisteredRules = {};
 
   /**
    * @name      rules
@@ -278,10 +282,15 @@ class SDescriptor implements ISDescriptor {
     // handle settings
     settings = __deepMerge(this._settings, settings);
 
+    // need to be before the instanciation of the
+    // descriptorResult for references reasons... to check when have time
+    const valuesObjToProcess = {},
+      finalValuesObj = {};
+
     // initialize the descriptor result instance
     this._descriptorResult = new __SDescriptorResult(
       this,
-      value,
+      finalValuesObj,
       Object.assign({}, settings)
     );
 
@@ -305,59 +314,71 @@ class SDescriptor implements ISDescriptor {
       value !== undefined
     ) {
       // loop on each object properties
-      Object.keys(
-        __flatten(settings.rules, {
-          keepLastIntact: true
-        })
-      ).forEach((propName) => {
+      Object.keys(settings.rules).forEach((propName) => {
         const ruleObj = __get(settings.rules, propName);
+
+        if (__isGlob(propName)) {
+          const globPropValue = __getGlob(value, `${propName}.*`, {
+            deepize: false
+          });
+          if (Object.keys(globPropValue).length) {
+            Object.keys(globPropValue).forEach((propName) => {
+              valuesObjToProcess[propName] = globPropValue[propName];
+              settings.rules[propName] = ruleObj;
+            });
+          }
+        } else {
+          valuesObjToProcess[propName] = __get(value, propName);
+        }
+      });
+
+      Object.keys(valuesObjToProcess).forEach((propName) => {
+        const ruleObj = __get(settings.rules, propName);
+
         // complete
         if (
-          !__isGlob(propName) &&
-          __get(value, propName) === undefined &&
+          __get(valuesObjToProcess, propName) === undefined &&
           settings.complete &&
           ruleObj.default !== undefined
         ) {
-          __set(value, propName, ruleObj.default);
+          __set(valuesObjToProcess, propName, ruleObj.default);
         }
 
-        const globPropValue = __getGlob(value, propName, {
-          deepize: false
-        });
-
-        if (
-          ruleObj.required !== undefined &&
-          ruleObj.required !== false &&
-          Object.keys(globPropValue).length === 0
-        ) {
-          globPropValue[propName] = undefined;
-        }
-
-        if (Object.keys(globPropValue).length) {
-          // check the finded properties
-          Object.keys(globPropValue).forEach((path) => {
-            // validate the property
-            const validationResult = this._validate(
-              globPropValue[path],
-              path,
-              ruleObj,
-              settings
-            );
-            if (validationResult !== undefined && validationResult !== null) {
-              __set(value, path, validationResult);
-            }
+        // interface
+        if (ruleObj.interface !== undefined) {
+          const interfaceValue = __get(valuesObjToProcess, propName);
+          const interfaceRes = ruleObj.interface.apply(interfaceValue || {}, {
+            complete: true,
+            throw: false
           });
+          if (interfaceRes.hasIssues()) {
+            console.log(interfaceRes.toString());
+          } else {
+            __set(valuesObjToProcess, propName, interfaceRes.value);
+          }
+        }
+
+        // validate the property
+        const validationResult = this._validate(
+          valuesObjToProcess[propName],
+          propName,
+          ruleObj,
+          settings
+        );
+
+        if (validationResult !== undefined && validationResult !== null) {
+          __set(finalValuesObj, propName, validationResult);
         }
       });
     } else {
       throw `Sorry but the support for values other than objects has not been integrated for not...`;
       // validate the object property
-      const validationResult = this._validate(
-        value,
-        undefined,
-        undefined,
-        settings
-      );
+      // const validationResult = this._validate(
+      //   value,
+      //   undefined,
+      //   undefined,
+      //   settings
+      // );
     }
 
     // if (this._descriptorResult.hasIssues() && settings.throw) {

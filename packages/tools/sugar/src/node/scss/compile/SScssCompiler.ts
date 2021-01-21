@@ -118,7 +118,7 @@ export interface ISScssCompiler extends ISCompiler {}
 class SScssCompiler extends __SCompiler implements ISCompiler {
   static interfaces = {
     params: {
-      autoApply: false,
+      apply: false,
       class: __SScssCompilerParamsInterface
     }
   };

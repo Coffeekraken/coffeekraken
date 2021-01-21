@@ -1,9 +1,9 @@
 "use strict";
-// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SFileCtorSettingsInterface = exports.SFileSettingsInterface = exports.SFileWatchSettingsInterface = exports.SFileWriteSettingsInterface = exports.SFileReadSettingsInterface = void 0;
 const toString_1 = __importDefault(require("../string/toString"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const SEventEmitter_1 = __importDefault(require("../event/SEventEmitter"));
@@ -16,6 +16,181 @@ const folderPath_1 = __importDefault(require("./folderPath"));
 const filename_1 = __importDefault(require("./filename"));
 const SError_1 = __importDefault(require("../error/SError"));
 const ensureDirSync_1 = __importDefault(require("./ensureDirSync"));
+const SInterface_1 = __importDefault(require("../interface/SInterface"));
+/**
+ * @name          SFileReadSettingsInterface
+ * @type          Class
+ * @extends       SInterface
+ * @beta
+ *
+ * Watch settings interface
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class SFileReadSettingsInterface extends SInterface_1.default {
+}
+exports.SFileReadSettingsInterface = SFileReadSettingsInterface;
+SFileReadSettingsInterface.definition = {
+    encoding: {
+        type: 'String',
+        values: [
+            'utf8',
+            'ascii',
+            'utf-8',
+            'utf16le',
+            'ucs2',
+            'ucs-2',
+            'base64',
+            'latin1',
+            'binary',
+            'hex'
+        ],
+        required: true,
+        default: 'utf8'
+    },
+    flag: {
+        type: 'String',
+        required: false
+    },
+    cast: {
+        type: 'Boolean',
+        required: true,
+        default: true
+    }
+};
+/**
+ * @name          SFileWriteSettingsInterface
+ * @type          Class
+ * @extends       SInterface
+ * @beta
+ *
+ * Watch settings interface
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class SFileWriteSettingsInterface extends SInterface_1.default {
+}
+exports.SFileWriteSettingsInterface = SFileWriteSettingsInterface;
+SFileWriteSettingsInterface.definition = {
+    encoding: {
+        type: 'String',
+        values: [
+            'utf8',
+            'ascii',
+            'utf-8',
+            'utf16le',
+            'ucs2',
+            'ucs-2',
+            'base64',
+            'latin1',
+            'binary',
+            'hex'
+        ],
+        required: true,
+        default: 'utf8'
+    },
+    flag: {
+        type: 'String',
+        required: false
+    },
+    mode: {
+        type: 'Number',
+        required: true,
+        default: 0o666
+    },
+    cast: {
+        type: 'Boolean',
+        required: true,
+        default: true
+    },
+    path: {
+        type: 'String',
+        required: true
+    }
+};
+/**
+ * @name          SFileWatchSettingsInterface
+ * @type          Class
+ * @extends       SInterface
+ * @beta
+ *
+ * Watch settings interface
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class SFileWatchSettingsInterface extends SInterface_1.default {
+}
+exports.SFileWatchSettingsInterface = SFileWatchSettingsInterface;
+SFileWatchSettingsInterface.definition = {
+    pollingInterval: {
+        type: 'Number',
+        required: true,
+        default: 500
+    }
+};
+/**
+ * @name          SFileSettingsInterface
+ * @type          Class
+ * @extends       SInterface
+ * @beta
+ *
+ * Settings infertage
+ *
+ * @since     2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class SFileSettingsInterface extends SInterface_1.default {
+}
+exports.SFileSettingsInterface = SFileSettingsInterface;
+SFileSettingsInterface.definition = {
+    checkExistence: {
+        type: 'Boolean',
+        required: true,
+        default: true
+    },
+    cwd: {
+        type: 'String',
+        required: true,
+        default: process.cwd()
+    },
+    shrinkSizesTo: {
+        type: 'Integer',
+        required: true,
+        default: 4
+    },
+    watch: {
+        interface: SFileWatchSettingsInterface,
+        type: 'Boolean|Object',
+        required: true
+    },
+    writeSettings: {
+        interface: SFileWriteSettingsInterface.override({
+            path: {
+                required: false
+            }
+        }),
+        type: 'Object',
+        required: true
+    },
+    readSettings: {
+        interface: SFileReadSettingsInterface,
+        type: 'Object',
+        required: true
+    }
+};
+class SFileCtorSettingsInterface extends SInterface_1.default {
+}
+exports.SFileCtorSettingsInterface = SFileCtorSettingsInterface;
+SFileCtorSettingsInterface.definition = {
+    file: {
+        interface: SFileSettingsInterface,
+        type: 'Object',
+        required: true
+    }
+};
 class SFile extends SEventEmitter_1.default {
     /**
      * @name        constructor
@@ -27,43 +202,63 @@ class SFile extends SEventEmitter_1.default {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(filepath, settings = {}) {
-        super(settings);
-        this.treatAsValue = true;
-        this._settings = deepMerge_1.default({
-            id: 'SFile',
-            checkExistence: true,
-            cwd: process.cwd(),
-            shrinkSizesTo: 4,
-            watch: true
-        }, this._settings);
+    constructor(filepath, settings) {
+        super(deepMerge_1.default({
+            file: {}
+        }, settings || {}));
+        /**
+         * @name            stats
+         * @type            Object
+         * @get
+         *
+         * Access the file stats like the updated timestamp, sizes, etc...
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this._stats = {};
         Object.defineProperty(this, '_stats', {
             enumerable: false,
             configurable: true,
             writable: true,
             value: null
         });
-        if (this._settings.cwd && !filepath.includes(this._settings.cwd)) {
-            filepath = path_1.default.resolve(this._settings.cwd, filepath);
+        if (this.fileSettings.cwd && !filepath.includes(this.fileSettings.cwd)) {
+            filepath = path_1.default.resolve(this.fileSettings.cwd, filepath);
         }
         // check if the file exists
         this.exists = fs_1.default.existsSync(filepath);
         // check if need to check for the file existence or not...
-        if (this._settings.checkExistence && !this.exists) {
+        if (this.fileSettings.checkExistence && !this.exists) {
             throw new SError_1.default(`The passed filepath "<cyan>${filepath}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`);
         }
-        if (this._settings.cwd) {
-            this.cwd = this._settings.cwd;
-            this.relPath = path_1.default.relative(this.cwd, filepath);
-        }
+        console.log(this.fileSettings);
+        this.cwd = this.fileSettings.cwd;
+        this.relPath = path_1.default.relative(this.cwd, filepath);
         // save the file path
         this.path = filepath;
-        this.name = filename_1.default(filepath);
+        this._name = filename_1.default(filepath);
         this.extension = extension_1.default(filepath).toLowerCase();
         this.dirPath = path_1.default.dirname(filepath);
-        if (this._settings.watch === true) {
+        if (this.fileSettings.watch === true) {
             this.startWatch();
         }
+    }
+    get name() {
+        return this._name;
+    }
+    /**
+     * @name        fileSettings
+     * @type        ISFileSettings
+     * @get
+     *
+     * Access the file settings setted in the ```settings.file``` property
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get fileSettings() {
+        return this._settings.file;
     }
     /**
      * @name            hash
@@ -78,16 +273,6 @@ class SFile extends SEventEmitter_1.default {
     get hash() {
         return md5_1.default.encrypt(this.content);
     }
-    /**
-     * @name            stats
-     * @type            Object
-     * @get
-     *
-     * Access the file stats like the updated timestamp, sizes, etc...
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
     get stats() {
         if (!this._stats)
             this.update();
@@ -148,17 +333,19 @@ class SFile extends SEventEmitter_1.default {
         this._stats.gbytes = stats.size * 0.00000001;
         this._stats.mbytes = stats.size * 0.000001;
         this._stats.kbytes = stats.size * 0.001;
-        if (this._settings.shrinkSizesTo) {
-            this._stats.bytes = Number(this._stats.bytes.toFixed(this._settings.shrinkSizesTo));
-            this._stats.kbytes = Number(this._stats.kbytes.toFixed(this._settings.shrinkSizesTo));
-            this._stats.mbytes = Number(this._stats.mbytes.toFixed(this._settings.shrinkSizesTo));
-            this._stats.gbytes = Number(this._stats.gbytes.toFixed(this._settings.shrinkSizesTo));
+        if (this.fileSettings.shrinkSizesTo) {
+            this._stats.bytes = Number(this._stats.bytes.toFixed(this.fileSettings.shrinkSizesTo));
+            this._stats.kbytes = Number(this._stats.kbytes.toFixed(this.fileSettings.shrinkSizesTo));
+            this._stats.mbytes = Number(this._stats.mbytes.toFixed(this.fileSettings.shrinkSizesTo));
+            this._stats.gbytes = Number(this._stats.gbytes.toFixed(this.fileSettings.shrinkSizesTo));
         }
     }
     startWatch() {
         if (this._watcher)
             return;
-        this._watcher = fs_1.default.watchFile(this.path, (event) => {
+        this._watcher = fs_1.default.watchFile(this.path, {
+            interval: 1000
+        }, (event) => {
             this.update();
             this.emit('update', this);
         });
@@ -206,15 +393,24 @@ class SFile extends SEventEmitter_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     read(settings = {}) {
-        if (this.exists === false) {
-            throw `You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`;
-        }
-        settings = Object.assign({ encoding: 'utf8', cast: true }, settings);
-        const content = fs_1.default.readFile(this.path, settings);
-        if (this.extension === 'json' && settings.cast) {
-            return JSON.parse(content);
-        }
-        return content;
+        return new Promise((resolve, reject) => {
+            if (this.exists === false) {
+                return reject(`You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`);
+            }
+            const set = Object.assign(Object.assign({}, this.fileSettings.readSettings), settings);
+            fs_1.default.readFile(this.path, {
+                // @ts-ignore
+                encoding: set.encoding,
+                flag: set.flag
+            }, (error, data) => {
+                if (error)
+                    return reject(error);
+                if (this.extension === 'json' && set.cast) {
+                    return resolve(JSON.parse(data.toString()));
+                }
+                resolve(data.toString());
+            });
+        });
     }
     /**
      * @name        readSync
@@ -232,12 +428,15 @@ class SFile extends SEventEmitter_1.default {
         if (this.exists === false) {
             throw `You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`;
         }
-        settings = Object.assign({ encoding: 'utf8', cast: true }, settings);
-        const content = fs_1.default.readFileSync(this.path, settings);
-        if (this.extension === 'json' && settings.cast) {
-            return JSON.parse(content);
+        const set = Object.assign(Object.assign({}, this.fileSettings.readSettings), settings);
+        const content = fs_1.default.readFileSync(this.path, {
+            encoding: set.encoding,
+            flag: set.flag
+        });
+        if (this.extension === 'json' && set.cast) {
+            return JSON.parse(content.toString());
         }
-        return content;
+        return content.toString();
     }
     /**
      * @name        write
@@ -254,15 +453,22 @@ class SFile extends SEventEmitter_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     write(data, settings = {}) {
-        settings = Object.assign({ path: this.path, encoding: 'utf8' }, settings);
-        data = toString_1.default(data, {
-            beautify: true,
-            highlight: false
+        return new Promise((resolve, reject) => {
+            const set = Object.assign(Object.assign(Object.assign({}, this.fileSettings.writeSettings), { path: this.path }), settings);
+            data = toString_1.default(data, {
+                beautify: true,
+                highlight: false
+            });
+            ensureDirSync_1.default(set.path);
+            fs_1.default.writeFile(set.path, data, {
+                encoding: set.encoding
+            }, (error) => {
+                if (error)
+                    return reject(error);
+                this.update();
+                resolve(true);
+            });
         });
-        ensureDirSync_1.default(settings.path);
-        const result = fs_1.default.writeFile(settings.path, data, settings);
-        this.update();
-        return result;
     }
     /**
      * @name        writeSync
@@ -278,17 +484,25 @@ class SFile extends SEventEmitter_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     writeSync(data, settings = {}) {
-        settings = Object.assign({ path: this.path, encoding: 'utf8' }, settings);
+        const set = Object.assign(Object.assign(Object.assign({}, this.fileSettings.writeSettings), { path: this.path }), settings);
         data = toString_1.default(data, {
             beautify: true,
             highlight: false
         });
-        ensureDirSync_1.default(folderPath_1.default(settings.path));
-        const result = fs_1.default.writeFileSync(settings.path, data, settings);
+        ensureDirSync_1.default(folderPath_1.default(set.path));
+        const result = fs_1.default.writeFileSync(set.path, data, {
+            encoding: set.encoding
+        });
         this.update();
         return result;
     }
 }
-const Cls = SFile;
+SFile.interfaces = {
+    _settings: {
+        apply: true,
+        class: SFileCtorSettingsInterface
+    }
+};
+// const Cls: ISFileCtor = SFile;
 exports.default = SFile;
 //# sourceMappingURL=SFile.js.map

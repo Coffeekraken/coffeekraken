@@ -58,11 +58,11 @@ class SScssCompileProcess extends SProcess_1.default {
 }
 SScssCompileProcess.interfaces = {
     initialParams: {
-        autoApply: false,
+        apply: false,
         class: SScssCompilerParamsInterface_1.default
     },
     params: {
-        autoApply: false,
+        apply: false,
         class: SScssCompilerParamsInterface_1.default
     }
 };

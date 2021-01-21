@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import __toString from '../string/toString';
 import __deepMerge from '../object/deepMerge';
 import __SEventEmitter from '../event/SEventEmitter';
@@ -10,12 +8,184 @@ import __md5 from '../crypt/md5';
 import __extension from './extension';
 import __folderPath from './folderPath';
 import __getFilename from './filename';
-import __SFileSettingsInterface from './interface/SFileSettingsInterface';
 import __SError from '../error/SError';
 import __packageRoot from '../path/packageRoot';
 import __ensureDirSync from './ensureDirSync';
+import __SInterface from '../interface/SInterface';
 
-import { ISPromise } from '../promise/SPromise';
+/**
+ * @name          SFileReadSettingsInterface
+ * @type          Class
+ * @extends       SInterface
+ * @beta
+ *
+ * Watch settings interface
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+export class SFileReadSettingsInterface extends __SInterface {
+  static definition = {
+    encoding: {
+      type: 'String',
+      values: [
+        'utf8',
+        'ascii',
+        'utf-8',
+        'utf16le',
+        'ucs2',
+        'ucs-2',
+        'base64',
+        'latin1',
+        'binary',
+        'hex'
+      ],
+      required: true,
+      default: 'utf8'
+    },
+    flag: {
+      type: 'String',
+      required: false
+    },
+    cast: {
+      type: 'Boolean',
+      required: true,
+      default: true
+    }
+  };
+}
+
+/**
+ * @name          SFileWriteSettingsInterface
+ * @type          Class
+ * @extends       SInterface
+ * @beta
+ *
+ * Watch settings interface
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+export class SFileWriteSettingsInterface extends __SInterface {
+  static definition = {
+    encoding: {
+      type: 'String',
+      values: [
+        'utf8',
+        'ascii',
+        'utf-8',
+        'utf16le',
+        'ucs2',
+        'ucs-2',
+        'base64',
+        'latin1',
+        'binary',
+        'hex'
+      ],
+      required: true,
+      default: 'utf8'
+    },
+    flag: {
+      type: 'String',
+      required: false
+    },
+    mode: {
+      type: 'Number',
+      required: true,
+      default: 0o666
+    },
+    cast: {
+      type: 'Boolean',
+      required: true,
+      default: true
+    },
+    path: {
+      type: 'String',
+      required: true
+    }
+  };
+}
+
+/**
+ * @name          SFileWatchSettingsInterface
+ * @type          Class
+ * @extends       SInterface
+ * @beta
+ *
+ * Watch settings interface
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+export class SFileWatchSettingsInterface extends __SInterface {
+  static definition = {
+    pollingInterval: {
+      type: 'Number',
+      required: true,
+      default: 500
+    }
+  };
+}
+
+/**
+ * @name          SFileSettingsInterface
+ * @type          Class
+ * @extends       SInterface
+ * @beta
+ *
+ * Settings infertage
+ *
+ * @since     2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+export class SFileSettingsInterface extends __SInterface {
+  static definition = {
+    checkExistence: {
+      type: 'Boolean',
+      required: true,
+      default: true
+    },
+    cwd: {
+      type: 'String',
+      required: true,
+      default: process.cwd()
+    },
+    shrinkSizesTo: {
+      type: 'Integer',
+      required: true,
+      default: 4
+    },
+    watch: {
+      interface: SFileWatchSettingsInterface,
+      type: 'Boolean|Object',
+      required: true
+    },
+    writeSettings: {
+      interface: SFileWriteSettingsInterface.override({
+        path: {
+          required: false
+        }
+      }),
+      type: 'Object',
+      required: true
+    },
+    readSettings: {
+      interface: SFileReadSettingsInterface,
+      type: 'Object',
+      required: true
+    }
+  };
+}
+
+export class SFileCtorSettingsInterface extends __SInterface {
+  static definition = {
+    file: {
+      interface: SFileSettingsInterface,
+      type: 'Object',
+      required: true
+    }
+  };
+}
 
 /**
  * @name            SFile
@@ -56,23 +226,105 @@ import { ISPromise } from '../promise/SPromise';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export interface ISFileSettings {
-  id?: string;
+
+export interface ISFileOptionalWatchSettings {
+  pollingInterval?: number;
+}
+export interface ISFileWatchSettings {
+  pollingInterval: number;
+}
+
+export interface ISFileCtorSettings {
+  file?: ISFileOptionalSettings;
+}
+
+export interface ISFileOptionalSettings {
   checkExistence?: boolean;
   cwd?: string;
+  shrinkSizesTo?: number;
+  watch?: boolean | ISFileOptionalWatchSettings;
+  writeSettings?: ISFileWriteOptionalSettings;
+  readSettings?: ISFileReadOptionalSettings;
+}
+export interface ISFileSettings {
+  checkExistence: boolean;
+  cwd: string;
+  shrinkSizesTo: number;
+  watch: boolean | ISFileOptionalWatchSettings;
+  writeSettings: ISFileWriteSettings;
+  readSettings: ISFileReadSettings;
 }
 
-export interface ISFileReadSettings {
-  encoding?: string;
+export interface ISFileReadOptionalSettings {
+  encoding?:
+    | 'utf8'
+    | 'ascii'
+    | 'utf-8'
+    | 'utf16le'
+    | 'ucs2'
+    | 'ucs-2'
+    | 'base64'
+    | 'latin1'
+    | 'binary'
+    | 'hex'
+    | null;
   flag?: string;
+  cast?: boolean;
+}
+export interface ISFileReadSettings {
+  encoding:
+    | 'utf8'
+    | 'ascii'
+    | 'utf-8'
+    | 'utf16le'
+    | 'ucs2'
+    | 'ucs-2'
+    | 'base64'
+    | 'latin1'
+    | 'binary'
+    | 'hex'
+    | null;
+  flag: string;
+  cast: boolean;
 }
 
-export interface ISFileWriteSettings {
-  encoding?: string;
+export interface ISFileWriteOptionalSettings {
+  encoding?:
+    | 'utf8'
+    | 'ascii'
+    | 'utf-8'
+    | 'utf16le'
+    | 'ucs2'
+    | 'ucs-2'
+    | 'base64'
+    | 'latin1'
+    | 'binary'
+    | 'hex'
+    | null
+    | undefined;
   mode?: number;
   flag?: string;
   cast?: boolean;
   path?: string;
+}
+export interface ISFileWriteSettings {
+  encoding:
+    | 'utf8'
+    | 'ascii'
+    | 'utf-8'
+    | 'utf16le'
+    | 'ucs2'
+    | 'ucs-2'
+    | 'base64'
+    | 'latin1'
+    | 'binary'
+    | 'hex'
+    | null
+    | undefined;
+  mode: number;
+  flag: string;
+  cast: boolean;
+  path: string;
 }
 
 export interface ISFileToObjectFn {
@@ -100,16 +352,14 @@ export interface ISFileCtor {
   new (filepath: string, settings?: ISFileSettings): ISFile;
 }
 
-export interface ISFile extends ISPromise {
+export interface ISFile {
   name: string;
   path: string;
-  rootDir: string;
   relPath: string;
   dirPath: string;
   extension: string;
-  size: number;
-  sizeInBytes: number;
   exists: boolean;
+  _content?: string;
   content: string;
   toObject: ISFileToObjectFn;
   update(): void;
@@ -122,6 +372,13 @@ export interface ISFile extends ISPromise {
 }
 
 class SFile extends __SEventEmitter implements ISFile {
+  static interfaces = {
+    _settings: {
+      apply: true,
+      class: SFileCtorSettingsInterface
+    }
+  };
+
   /**
    * @name        name
    * @type        String
@@ -131,7 +388,10 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  name;
+  _name: string;
+  public get name(): string {
+    return this._name;
+  }
 
   /**
    * @name        path
@@ -156,6 +416,17 @@ class SFile extends __SEventEmitter implements ISFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   cwd;
+
+  /**
+   * @name      exists
+   * @type      Boolean
+   *
+   * Specify if the file exists on the filesystem or not
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  exists;
 
   /**
    * @name        relPath
@@ -191,7 +462,19 @@ class SFile extends __SEventEmitter implements ISFile {
    */
   extension;
 
-  treatAsValue = true;
+  /**
+   * @name        fileSettings
+   * @type        ISFileSettings
+   * @get
+   *
+   * Access the file settings setted in the ```settings.file``` property
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get fileSettings(): ISFileSettings {
+    return (<any>this._settings).file;
+  }
 
   /**
    * @name        constructor
@@ -203,17 +486,14 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(filepath: string, settings?: ISFileSettings = {}) {
-    super(settings);
-    this._settings = __deepMerge(
-      {
-        id: 'SFile',
-        checkExistence: true,
-        cwd: process.cwd(),
-        shrinkSizesTo: 4,
-        watch: true
-      },
-      this._settings
+  constructor(filepath: string, settings?: ISFileCtorSettings) {
+    super(
+      __deepMerge(
+        {
+          file: {}
+        },
+        settings || {}
+      )
     );
 
     Object.defineProperty(this, '_stats', {
@@ -223,32 +503,32 @@ class SFile extends __SEventEmitter implements ISFile {
       value: null
     });
 
-    if (this._settings.cwd && !filepath.includes(this._settings.cwd)) {
-      filepath = __path.resolve(this._settings.cwd, filepath);
+    if (this.fileSettings.cwd && !filepath.includes(this.fileSettings.cwd)) {
+      filepath = __path.resolve(this.fileSettings.cwd, filepath);
     }
 
     // check if the file exists
     this.exists = __fs.existsSync(filepath);
 
     // check if need to check for the file existence or not...
-    if (this._settings.checkExistence && !this.exists) {
+    if (this.fileSettings.checkExistence && !this.exists) {
       throw new __SError(
         `The passed filepath "<cyan>${filepath}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`
       );
     }
 
-    if (this._settings.cwd) {
-      this.cwd = this._settings.cwd;
-      this.relPath = __path.relative(this.cwd, filepath);
-    }
+    console.log(this.fileSettings);
+
+    this.cwd = this.fileSettings.cwd;
+    this.relPath = __path.relative(this.cwd, filepath);
 
     // save the file path
     this.path = filepath;
-    this.name = __getFilename(filepath);
+    this._name = __getFilename(filepath);
     this.extension = __extension(filepath).toLowerCase();
     this.dirPath = __path.dirname(filepath);
 
-    if (this._settings.watch === true) {
+    if (this.fileSettings.watch === true) {
       this.startWatch();
     }
   }
@@ -277,6 +557,7 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _stats: any = {};
   get stats() {
     if (!this._stats) this.update();
     return this._stats;
@@ -292,7 +573,7 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _content: string;
+  _content?: string;
   get content() {
     if (this._content) return this._content;
     this._content = this.readSync();
@@ -351,18 +632,18 @@ class SFile extends __SEventEmitter implements ISFile {
     this._stats.mbytes = stats.size * 0.000001;
     this._stats.kbytes = stats.size * 0.001;
 
-    if (this._settings.shrinkSizesTo) {
+    if (this.fileSettings.shrinkSizesTo) {
       this._stats.bytes = Number(
-        this._stats.bytes.toFixed(this._settings.shrinkSizesTo)
+        this._stats.bytes.toFixed(this.fileSettings.shrinkSizesTo)
       );
       this._stats.kbytes = Number(
-        this._stats.kbytes.toFixed(this._settings.shrinkSizesTo)
+        this._stats.kbytes.toFixed(this.fileSettings.shrinkSizesTo)
       );
       this._stats.mbytes = Number(
-        this._stats.mbytes.toFixed(this._settings.shrinkSizesTo)
+        this._stats.mbytes.toFixed(this.fileSettings.shrinkSizesTo)
       );
       this._stats.gbytes = Number(
-        this._stats.gbytes.toFixed(this._settings.shrinkSizesTo)
+        this._stats.gbytes.toFixed(this.fileSettings.shrinkSizesTo)
       );
     }
   }
@@ -379,10 +660,16 @@ class SFile extends __SEventEmitter implements ISFile {
   _watcher: any;
   startWatch() {
     if (this._watcher) return;
-    this._watcher = __fs.watchFile(this.path, (event) => {
-      this.update();
-      this.emit('update', this);
-    });
+    this._watcher = __fs.watchFile(
+      this.path,
+      {
+        interval: 1000
+      },
+      (event) => {
+        this.update();
+        this.emit('update', this);
+      }
+    );
   }
 
   /**
@@ -428,20 +715,33 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  read(settings: ISFileReadSettings = {}): Promise<string> {
-    if (this.exists === false) {
-      throw `You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`;
-    }
-    settings = {
-      encoding: 'utf8',
-      cast: true,
-      ...settings
-    };
-    const content: string = __fs.readFile(this.path, settings);
-    if (this.extension === 'json' && settings.cast) {
-      return JSON.parse(content);
-    }
-    return content;
+  read(settings: ISFileReadOptionalSettings = {}): Promise<string> {
+    return new Promise((resolve, reject) => {
+      if (this.exists === false) {
+        return reject(
+          `You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`
+        );
+      }
+      const set: ISFileReadSettings = {
+        ...this.fileSettings.readSettings,
+        ...settings
+      };
+      __fs.readFile(
+        this.path,
+        {
+          // @ts-ignore
+          encoding: set.encoding,
+          flag: set.flag
+        },
+        (error, data) => {
+          if (error) return reject(error);
+          if (this.extension === 'json' && set.cast) {
+            return resolve(JSON.parse(data.toString()));
+          }
+          resolve(data.toString());
+        }
+      );
+    });
   }
 
   /**
@@ -456,20 +756,22 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  readSync(settings: ISFileReadSettings = {}): string {
+  readSync(settings: ISFileReadOptionalSettings = {}): string {
     if (this.exists === false) {
       throw `You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`;
     }
-    settings = {
-      encoding: 'utf8',
-      cast: true,
+    const set: ISFileReadSettings = {
+      ...this.fileSettings.readSettings,
       ...settings
     };
-    const content: string = __fs.readFileSync(this.path, settings);
-    if (this.extension === 'json' && settings.cast) {
-      return JSON.parse(content);
+    const content: any = __fs.readFileSync(this.path, {
+      encoding: set.encoding,
+      flag: set.flag
+    });
+    if (this.extension === 'json' && set.cast) {
+      return JSON.parse(content.toString());
     }
-    return content;
+    return content.toString();
   }
 
   /**
@@ -486,20 +788,34 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  write(data: string, settings: ISFileWriteSettings = {}): Promise<any> {
-    settings = {
-      path: this.path,
-      encoding: 'utf8',
-      ...settings
-    };
-    data = __toString(data, {
-      beautify: true,
-      highlight: false
+  write(
+    data: string,
+    settings: ISFileWriteOptionalSettings = {}
+  ): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const set: ISFileWriteSettings = {
+        ...this.fileSettings.writeSettings,
+        path: this.path,
+        ...settings
+      };
+      data = __toString(data, {
+        beautify: true,
+        highlight: false
+      });
+      __ensureDirSync(set.path);
+      __fs.writeFile(
+        set.path,
+        data,
+        {
+          encoding: set.encoding
+        },
+        (error) => {
+          if (error) return reject(error);
+          this.update();
+          resolve(true);
+        }
+      );
     });
-    __ensureDirSync(settings.path);
-    const result: any = __fs.writeFile(settings.path, data, settings);
-    this.update();
-    return result;
   }
 
   /**
@@ -515,22 +831,24 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  writeSync(data: string, settings: ISFileWriteSettings = {}): any {
-    settings = {
+  writeSync(data: string, settings: ISFileWriteOptionalSettings = {}): any {
+    const set: ISFileWriteSettings = {
+      ...this.fileSettings.writeSettings,
       path: this.path,
-      encoding: 'utf8',
       ...settings
     };
     data = __toString(data, {
       beautify: true,
       highlight: false
     });
-    __ensureDirSync(__folderPath(settings.path));
-    const result: any = __fs.writeFileSync(settings.path, data, settings);
+    __ensureDirSync(__folderPath(set.path));
+    const result: any = __fs.writeFileSync(set.path, data, {
+      encoding: set.encoding
+    });
     this.update();
     return result;
   }
 }
 
-const Cls: ISFileCtor = SFile;
+// const Cls: ISFileCtor = SFile;
 export default SFile;

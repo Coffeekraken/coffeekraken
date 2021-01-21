@@ -104,7 +104,7 @@ class SProcessManager extends __SPromise {
     super(settings);
 
     if (
-      __getExtendsStack(ProcessClass).indexOf('SProcess') === -1 &&
+      Object.keys(__getExtendsStack(ProcessClass)).indexOf('SProcess') === -1 &&
       ProcessClass.constructor &&
       ProcessClass.constructor.name !== 'SProcessPipe'
     ) {
@@ -148,7 +148,11 @@ class SProcessManager extends __SPromise {
   _isSProcessPipeInstance(toCheck) {
     if (toCheck.constructor && toCheck.constructor.name === 'SProcessPipe')
       return true;
-    if (__getExtendsStack(toCheck.constructor).indexOf('SProcessPipe') !== -1)
+    if (
+      Object.keys(__getExtendsStack(toCheck.constructor)).indexOf(
+        'SProcessPipe'
+      ) !== -1
+    )
       return true;
     return false;
   }

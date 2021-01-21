@@ -4,6 +4,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const SType_1 = __importDefault(require("../type/SType"));
 /**
  * @name              ofType
@@ -37,9 +38,10 @@ const SType_1 = __importDefault(require("../type/SType"));
  */
 function ofType(value, typeString, settings = {}) {
     settings = Object.assign({ verbose: false }, settings);
+    // console.log(typeString, value);
     const typeInstance = new SType_1.default(typeString, settings);
     const res = typeInstance.is(value);
     return res;
 }
-module.exports = ofType;
+exports.default = ofType;
 //# sourceMappingURL=ofType.js.map

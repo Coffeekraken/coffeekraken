@@ -44,9 +44,7 @@ class SCompiler extends SEventEmitter_1.default {
         //     throw: true
         //   });
         // @todo    apply the params interface on the params
-        const interfaceRes = this.applyInterface('params', {
-            somefofm: 'tgrg'
-        });
+        const interfaceRes = this.applyInterface('params', params);
         if (interfaceRes.hasIssues()) {
             console.log(interfaceRes.toString());
         }

@@ -103,9 +103,10 @@ class SCompiler extends __SEventEmitter implements ISCompiler {
     //   });
     // @todo    apply the params interface on the params
 
-    const interfaceRes: ISInterfaceResult = this.applyInterface('params', {
-      somefofm: 'tgrg'
-    });
+    const interfaceRes: ISInterfaceResult = this.applyInterface(
+      'params',
+      params
+    );
     if (interfaceRes.hasIssues()) {
       console.log(interfaceRes.toString());
     }

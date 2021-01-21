@@ -2012,14 +2012,14 @@ html {
   border-right: 0.3em solid rgba(242, 188, 43, 0.2);
   border-bottom: 0.3em solid rgba(242, 188, 43, 0.2);
   border-left: 0.3em solid #f2bc2b;
-  animation: spinner-uji5ngc 1s linear 0s infinite;
+  animation: spinner-ua4pws4 1s linear 0s infinite;
 }
 .s-sugar-ui-input-navigation__list-loading-icon, .s-sugar-ui-input-navigation__list-loading-icon:after {
   border-radius: 50%;
   width: 1em;
   height: 1em;
 }
-@keyframes spinner-uji5ngc {
+@keyframes spinner-ua4pws4 {
   0% {
     transform: rotate(0deg);
   }

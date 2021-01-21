@@ -315,6 +315,8 @@ class SType implements ISType {
           }
         };
         if (
+          res !== undefined &&
+          res !== null &&
           res !== false &&
           res.toString &&
           typeof res.toString === 'function'
@@ -389,7 +391,7 @@ class SType implements ISType {
       // handle custom types
       if (settings.customTypes === true) {
         const typeOf = __typeOf(value).toLowerCase();
-        const extendsStack = __getExtendsStack(value).map((s) =>
+        const extendsStack = Object.keys(__getExtendsStack(value)).map((s) =>
           s.toLowerCase()
         );
         if (type === typeOf || extendsStack.indexOf(type) !== -1) return true;

@@ -19,14 +19,51 @@ import __stripCssComments from '../css/stripCssComments';
 import __repl from 'repl';
 import __getSharedResourcesString from './utils/getSharedResourcesString';
 import __wait from '../time/wait';
+import __getFilename from '../fs/filename';
 
+import __SInterface from '../interface/SInterface';
 import { ISFile, ISFileSettings } from '../fs/SFile';
 import {
   ISScssCompilerParams,
   ISScssCompilerOptionalParams
 } from './compile/SScssCompiler';
 import __SScssCompilerParamsInterface from './compile/interface/SScssCompilerParamsInterface';
-import __SScssFileSettingsInterface from './interface/SScssFileSettingsInterface';
+
+/**
+ * @name      SScssFileSettingsInterface
+ * @type      Class
+ * @extends     SInterface
+ * @beta
+ *
+ * Scss file settings interface
+ *
+ * @since     2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+export class SScssFileSettingsInterface extends __SInterface {
+  static definition = {};
+}
+
+/**
+ * @name      SScssFileCtorSettingsInterface
+ * @type      Class
+ * @extends     SInterface
+ * @beta
+ *
+ * Scss file constructor settings interface
+ *
+ * @since     2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+export class SScssFileCtorSettingsInterface extends __SInterface {
+  static definition = {
+    scssFile: {
+      interface: SScssFileSettingsInterface,
+      type: 'Object',
+      required: true
+    }
+  };
+}
 
 /**
  * @name            SScssFile
@@ -72,12 +109,12 @@ interface ISScssFile {
 class SScssFile extends __SFile implements ISScssFile {
   static interfaces = {
     compilerParams: {
-      autoApply: false,
+      apply: false,
       class: __SScssCompilerParamsInterface
     },
-    '_settings.scssFile': {
-      autoApply: true,
-      class: __SScssFileSettingsInterface
+    _settings: {
+      apply: true,
+      class: SScssFileCtorSettingsInterface
     }
   };
 
@@ -114,7 +151,6 @@ class SScssFile extends __SFile implements ISScssFile {
   _sharedResources;
 
   static COMPILED_CSS: any = {};
-
   static FILES: any = {};
 
   /**
@@ -132,18 +168,16 @@ class SScssFile extends __SFile implements ISScssFile {
       path,
       __deepMerge(
         {
-          scssFile: {
-            coco: false
-          }
+          id: __getFilename(path),
+          scssFile: {}
         },
         settings
       )
     );
-    // this._settings.compile = __deepMerge(
-    //   __SScssCompilerParamsInterface.defaults(),
-    //   this._settings.compile || {}
-    // );
 
+    console.log(this._settings);
+
+    // store this instance in a stack to avoid creating multiple instances of the same file
     SScssFile.FILES[this.path] = this;
 
     this._fileCache = new __SFileCache(this.constructor.name);
@@ -184,8 +218,8 @@ class SScssFile extends __SFile implements ISScssFile {
       .map((obj) => {
         let file;
         if (SScssFile.FILES[obj.path]) file = SScssFile.FILES[obj.path];
-        else
-          file = file = new SScssFile(obj.path, {
+        else {
+          file = new SScssFile(obj.path, {
             scssFile: <ISScssFileSettings>(
               __deepMerge(
                 this.scssFileSettings,
@@ -193,6 +227,10 @@ class SScssFile extends __SFile implements ISScssFile {
               )
             )
           });
+          file.pipeTo(this, {
+            events: 'update'
+          });
+        }
         file._import = obj.import;
         return file;
       });
@@ -299,6 +337,42 @@ class SScssFile extends __SFile implements ISScssFile {
   }
 
   /**
+   * @name        _watch
+   * @type        Function
+   * @private
+   *
+   * Start to watch the file. Does this only once
+   * to avoid multiple compilation and logs
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _alreadyWatch = false;
+  private _watch() {
+    if (this._alreadyWatch) return;
+    this._alreadyWatch = true;
+
+    if (!this._currentCompilationParams) return;
+
+    // start watching the file if needed
+    if (this._currentCompilationParams.watch) {
+      this.startWatch();
+    }
+
+    // listen for change event
+    this.on('update', (file, metas) => {
+      if (this._currentCompilationParams.compileOnChange) {
+        const promise = this.compile(
+          <ISScssCompilerParams>this._currentCompilationParams
+        );
+        this.emit('log', {
+          value: `<blue>[updated]</blue> "<cyan>${file.relPath}</cyan>"`
+        });
+      }
+    });
+  }
+
+  /**
    * @name              compile
    * @type              Function
    *
@@ -318,27 +392,17 @@ class SScssFile extends __SFile implements ISScssFile {
    */
   _isCompiling = false;
   _currentCompilationSettings: ISScssFileOptionalSettings = {};
+  _currentCompilationParams: ISScssCompilerOptionalParams = {};
   compile(params: ISScssCompilerParams, settings?: ISScssFileOptionalSettings) {
     settings = __deepMerge(this.scssFileSettings, settings);
+    this._currentCompilationParams = Object.assign({}, params);
     this._currentCompilationSettings = Object.assign({}, settings);
 
     this.applyInterface('compilerParams', params);
 
-    // start watching the file if needed
     if (params.watch) {
-      this.startWatch();
+      this._watch();
     }
-
-    // listen for change event
-    this.on('update', () => {
-      console.log('UP');
-      if (params.compileOnChange) {
-        const promise = this.compile(params);
-        this.emit('log', {
-          value: `<blue>[updated]</blue> ""`
-        });
-      }
-    });
 
     // init the promise
     return new __SPromise(async ({ resolve, reject, emit, pipeTo, on }) => {
@@ -409,10 +473,6 @@ class SScssFile extends __SFile implements ISScssFile {
         if (depFile._import && depFile._import.type === 'use') {
           continue;
         }
-
-        // emit('log', {
-        //   value: `<yellow>[dependency]</yellow> "<cyan>${depFile.relPath}</cyan>"`
-        // });
 
         // compile the dependency
         const res = await depFile.compile(
@@ -486,6 +546,12 @@ class SScssFile extends __SFile implements ISScssFile {
           emit('log', {
             value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
           });
+
+          if (params.watch) {
+            emit('log', {
+              value: `<blue>Watching for changes...</blue>`
+            });
+          }
         }
 
         return resolve(result);
@@ -557,8 +623,20 @@ class SScssFile extends __SFile implements ISScssFile {
             value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
           });
 
+          if (params.watch) {
+            emit('log', {
+              value: `<blue>Watching for changes...</blue>`
+            });
+          }
+
           return resolve(result);
         } else {
+          if (params.watch) {
+            emit('log', {
+              value: `<blue>Watching for changes...</blue>`
+            });
+          }
+
           SScssFile.COMPILED_CSS[this.path] = renderObj.css;
           return resolve(
             this._processResultCss(renderObj.css.toString(), params)

@@ -33,11 +33,11 @@ interface ISScssCompileProcessSettings extends ISProcessSettings {}
 class SScssCompileProcess extends SProcess {
   static interfaces = {
     initialParams: {
-      autoApply: false,
+      apply: false,
       class: __SScssCompilerParamsInterface
     },
     params: {
-      autoApply: false,
+      apply: false,
       class: __SScssCompilerParamsInterface
     }
   };

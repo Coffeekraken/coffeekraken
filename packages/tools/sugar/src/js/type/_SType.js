@@ -144,7 +144,9 @@ class SType {
                         value
                     }
                 };
-                if (res !== false &&
+                if (res !== undefined &&
+                    res !== null &&
+                    res !== false &&
                     res.toString &&
                     typeof res.toString === 'function') {
                     issueObj.message = res.toString();
@@ -213,7 +215,7 @@ class SType {
             // handle custom types
             if (settings.customTypes === true) {
                 const typeOf = typeof_1.default(value).toLowerCase();
-                const extendsStack = getExtendsStack_1.default(value).map((s) => s.toLowerCase());
+                const extendsStack = Object.keys(getExtendsStack_1.default(value)).map((s) => s.toLowerCase());
                 if (type === typeOf || extendsStack.indexOf(type) !== -1)
                     return true;
             }

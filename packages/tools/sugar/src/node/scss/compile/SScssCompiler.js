@@ -123,7 +123,7 @@ class SScssCompiler extends SCompiler_1.default {
 }
 SScssCompiler.interfaces = {
     params: {
-        autoApply: false,
+        apply: false,
         class: SScssCompilerParamsInterface_1.default
     }
 };

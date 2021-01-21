@@ -3,6 +3,7 @@
 import __deepMerge from '../object/deepMerge';
 import __isPlain from '../is/plainObject';
 import __get from '../object/get';
+import __getExtendsStack from '../class/getExtendsStack';
 
 import { ISInterface } from '../interface/SInterface';
 
@@ -40,6 +41,17 @@ export interface ISClassCtor {
   _sClassAsName?: string;
 }
 
+export interface ISClassOptionalInterfaceObj {
+  class?: ISInterface;
+  apply?: boolean;
+  on?: string;
+}
+export interface ISClassInterfaceObj {
+  class: ISInterface;
+  apply: boolean;
+  on: string;
+}
+
 export interface ISClassStaticMixinSettings {
   initFnName?: string;
   as?: string;
@@ -69,6 +81,18 @@ class SClass implements ISClass {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _settings: ISClassSettings = {};
+
+  /**
+   * @name            _interfacesStack
+   * @type            Object
+   * @private
+   *
+   * Store the interfaces objects by class
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  public _interfacesStack: any = {};
 
   /**
    * @name            id
@@ -129,6 +153,8 @@ class SClass implements ISClass {
       public get name() {
         return this._settings.name || this.constructor.name;
       }
+      protected _settings: ISClassSettings = {};
+      protected _interfacesStack: any = {};
       get formattedName() {
         let name = `<yellow>${this.name || ''}</yellow>`;
         if (this.id) {
@@ -136,18 +162,18 @@ class SClass implements ISClass {
         }
         return name;
       }
-      _settings: ISClassSettings = {};
       constructor(settings: any, ...args) {
         super(...args);
-        // saving the settings
+        generateInterfacesStack(this);
+        // set settings
         setSettings(this, settings);
         // interface
-        applyInterface(this);
+        applyInterfaces(this);
       }
       expose(instance: any, settings: ISClassExposeSettings) {
         return expose(this, instance, settings);
       }
-      applyInterface(name?: string, on?: any) {
+      applyInterface(name: string, on?: any) {
         return applyInterface(this, name, on);
       }
       getInterface(name: string): any {
@@ -168,20 +194,34 @@ class SClass implements ISClass {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(settings: ISClassSettings = {}) {
-    // saving the settings
+    generateInterfacesStack(this);
+    // set settings
     setSettings(this, settings);
     // interface
-    applyInterface(this);
+    applyInterfaces(this);
   }
   expose(instance: any, settings: ISClassExposeSettings) {
     return expose(this, instance, settings);
   }
-  applyInterface(name?: string, on?: any) {
+  applyInterface(name: string, on?: any) {
     return applyInterface(this, name, on);
   }
   getInterface(name: string): any {
     return getInterface(this, name);
   }
+}
+
+function generateInterfacesStack(ctx: any) {
+  // get all the interfaces to apply
+  const extendsStack = __getExtendsStack(ctx, {
+    includeBaseClass: true
+  });
+  Object.keys(extendsStack).forEach((className) => {
+    const cls = extendsStack[className];
+    if (cls.interfaces) {
+      ctx._interfacesStack[className] = cls.interfaces;
+    }
+  });
 }
 
 function expose(ctx: any, instance: any, settings: ISClassExposeSettings) {
@@ -204,78 +244,111 @@ function expose(ctx: any, instance: any, settings: ISClassExposeSettings) {
   }
 }
 
-function getInterface(ctx: any, name: string): any {
-  if (!ctx.constructor.interfaces || !ctx.constructor.interfaces[name])
-    return undefined;
-  if (__isPlain(ctx.constructor.interfaces[name]))
-    return ctx.constructor.interfaces[name].class;
-  return ctx.constructor.interfaces[name];
+function getInterfaceObj(ctx: any, name: string): any {
+  let interfaceObj = __get(ctx._interfacesStack, name);
+
+  if (!interfaceObj) {
+    const keys: string[] = Object.keys(ctx._interfacesStack);
+    for (let i = 0; i < keys.length; i++) {
+      const interfacesObj = ctx._interfacesStack[keys[i]];
+      if (interfacesObj[name] !== undefined) {
+        interfaceObj = interfacesObj[name];
+        break;
+      }
+    }
+  }
+
+  return interfaceObj;
 }
 
-function applyInterface(ctx: any, name?: string, on?: any) {
-  if (!ctx.constructor.interfaces) return undefined;
+function getInterface(ctx: any, name: string): any {
+  let interfaceObj = getInterfaceObj(ctx, name);
 
-  let interfacesObj: any = ctx.constructor.interfaces;
-  if (name !== undefined && ctx.constructor.interfaces[name] !== undefined) {
-    interfacesObj = {
-      [name]: ctx.constructor.interfaces[name]
-    };
+  if (__isPlain(interfaceObj)) return interfaceObj.class;
+  return interfaceObj;
+}
+
+function applyInterfaces(ctx: any) {
+  const keys = Object.keys(ctx._interfacesStack);
+  for (let i = keys.length - 1; i >= 0; i--) {
+    const interfacesObj = ctx._interfacesStack[keys[i]];
+    const className = keys[i];
+
+    Object.keys(interfacesObj).forEach((name) => {
+      const interfaceObj = interfacesObj[name];
+      const settings: ISClassOptionalInterfaceObj = Object.assign(
+        {},
+        {
+          apply: true,
+          on: undefined,
+          ...interfaceObj
+        }
+      );
+      if (settings.apply !== true) return;
+      let on;
+      if (settings.on) {
+        if (__get(ctx, settings.on) !== undefined) {
+          on = __get(ctx, settings.on);
+        }
+      }
+
+      applyInterface(ctx, `${className}.${name}`, on);
+    });
+  }
+}
+
+function applyInterface(ctx: any, name: string, on: any = null) {
+  // console.log('NAME', name);
+  let interfaceObj = getInterfaceObj(ctx, `${name}`);
+
+  if (!interfaceObj) {
+    throw `Sorry the the asked interface "<yellow>${name}</yellow>" does not exists on the class "<cyan>${ctx.constructor.name}</cyan>"`;
   }
 
   let res: any;
 
   // apply the interface if exists
-  if (!__isPlain(interfacesObj) && interfacesObj.apply !== undefined) {
-    res = interfacesObj.apply(on || ctx);
-  } else if (__isPlain(interfacesObj)) {
-    Object.keys(interfacesObj).forEach((prop) => {
-      const interfaceObj = interfacesObj[prop];
-      const autoApply: boolean = __isPlain(interfaceObj)
-        ? interfaceObj.autoApply
-        : true;
-      const interfaceClass: any = __isPlain(interfaceObj)
-        ? interfaceObj.class
-        : interfaceObj;
+  if (!__isPlain(interfaceObj) && interfaceObj.apply !== undefined) {
+    res = interfaceObj.apply(on || ctx);
+  } else if (__isPlain(interfaceObj)) {
+    const interfaceClass: any = __isPlain(interfaceObj)
+      ? interfaceObj.class
+      : interfaceObj;
 
-      if (!name && autoApply === false) return;
+    let applyId = ctx.constructor.name;
+    if (ctx.id) applyId += `(${ctx.id})`;
+    if (name) applyId += `.${name}`;
+    if (on && on.constructor) applyId += `.${on.constructor.name}`;
+    if (on && on.id) applyId += `(${on.id})`;
 
-      let applyId = ctx.constructor.name;
-      if (ctx.id) applyId += `(${ctx.id})`;
-      if (name) applyId += `.${name}`;
-      if (on && on.constructor) applyId += `.${on.constructor.name}`;
-      if (on && on.id) applyId += `(${on.id})`;
+    if (name === 'this') {
+      res = interfaceClass.apply(on || ctx, {
+        id: applyId,
+        complete: true,
+        throw: true
+      });
+      __deepMerge(ctx, res.value);
+    } else {
+      res = interfaceClass.apply(on || __get(ctx, name), {
+        id: applyId,
+        complete: true,
+        throw: true
+      });
 
-      if (prop === 'this') {
-        res = interfaceClass.apply(on || ctx, {
-          id: applyId,
-          complete: true,
-          throw: true
-        });
+      if (on) {
+        on = __deepMerge(on, res.value);
       } else {
-        res = interfaceClass.apply(on || __get(ctx, prop), {
-          id: applyId,
-          complete: true,
-          throw: true
-        });
+        ctx[name] = __deepMerge(ctx[name], res.value);
+        console.log(ctx[name]);
       }
-    });
+    }
   }
-
-  if (name !== undefined) {
-    return res;
-  }
+  return res;
 }
 
 function setSettings(ctx: any, settings: any = {}) {
   // saving the settings
-  if (ctx.constructor.settingsInterface) {
-    ctx._settings = __deepMerge(
-      ctx.constructor.settingsInterface.defaults(),
-      settings
-    );
-  } else {
-    ctx._settings = settings;
-  }
+  ctx._settings = settings;
 }
 
 // const cls: ISClass = SClass;

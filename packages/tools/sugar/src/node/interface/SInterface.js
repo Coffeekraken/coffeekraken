@@ -52,8 +52,31 @@ class SInterface {
         // @ts-ignore
         this._settings = deepMerge_1.default(this.constructor.settings, this._settings, settings);
         if (this._settings.name === undefined)
-            this._settings.name = this.constructor.name;
+            this._settings.name =
+                this.constructor.overridedName || this.constructor.name;
         this._definition = this.constructor.definition;
+    }
+    /**
+     * @name      overrie
+     * @type      Function
+     * @static
+     *
+     * This static method is usefull to make a duplicate of the base interface with some updates
+     * in the definition object.
+     *
+     * @param     {Object}      definition      A definition object to override or extends the base one
+     * @return    {SInterface}                  A new interface overrided with your new values
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static override(definition) {
+        const _this = this;
+        class SInterfaceOverrided extends this {
+        }
+        SInterfaceOverrided.overridedName = `${_this.name} (overrided)`;
+        SInterfaceOverrided.definition = deepMerge_1.default(_this.definition, definition);
+        return SInterfaceOverrided;
     }
     /**
      * @name            getAvailableTypes

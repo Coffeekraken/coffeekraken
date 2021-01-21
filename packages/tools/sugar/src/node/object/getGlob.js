@@ -16,6 +16,9 @@ module.exports = function getGlob(obj, glob, settings = {}) {
             resultObj[path] = flat[path];
         }
     });
+    // if (glob === 'watch') {
+    //   console.log('GLOB', resultObj);
+    // }
     if (settings.deepize === true)
         return deepize_1.default(resultObj);
     return resultObj;

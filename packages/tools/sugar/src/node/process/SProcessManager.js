@@ -77,7 +77,7 @@ class SProcessManager extends SPromise_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this.currentProcess = null;
-        if (getExtendsStack_1.default(ProcessClass).indexOf('SProcess') === -1 &&
+        if (Object.keys(getExtendsStack_1.default(ProcessClass)).indexOf('SProcess') === -1 &&
             ProcessClass.constructor &&
             ProcessClass.constructor.name !== 'SProcessPipe') {
             throw new SError_1.default(`Sorry but the <yellow>SProcessManager</yellow> class can handle only <cyan>SProcess</cyan> based process classes...`);
@@ -128,7 +128,7 @@ class SProcessManager extends SPromise_1.default {
     _isSProcessPipeInstance(toCheck) {
         if (toCheck.constructor && toCheck.constructor.name === 'SProcessPipe')
             return true;
-        if (getExtendsStack_1.default(toCheck.constructor).indexOf('SProcessPipe') !== -1)
+        if (Object.keys(getExtendsStack_1.default(toCheck.constructor)).indexOf('SProcessPipe') !== -1)
             return true;
         return false;
     }

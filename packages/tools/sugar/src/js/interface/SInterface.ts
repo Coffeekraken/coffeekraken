@@ -94,6 +94,29 @@ class SInterface implements ISInterface {
   static definition: ISDescriptorRules = {};
 
   /**
+   * @name      overrie
+   * @type      Function
+   * @static
+   *
+   * This static method is usefull to make a duplicate of the base interface with some updates
+   * in the definition object.
+   *
+   * @param     {Object}      definition      A definition object to override or extends the base one
+   * @return    {SInterface}                  A new interface overrided with your new values
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static override(definition) {
+    const _this = this;
+    class SInterfaceOverrided extends this {
+      static overridedName = `${_this.name} (overrided)`;
+      static definition = __deepMerge(_this.definition, definition);
+    }
+    return SInterfaceOverrided;
+  }
+
+  /**
    * @name            getAvailableTypes
    * @type            Function
    * @static
@@ -248,7 +271,8 @@ class SInterface implements ISInterface {
       settings
     );
     if (this._settings.name === undefined)
-      this._settings.name = this.constructor.name;
+      this._settings.name =
+        (<any>this.constructor).overridedName || this.constructor.name;
     this._definition = (<any>this).constructor.definition;
   }
 

@@ -51,6 +51,10 @@ export = function getGlob(obj, glob, settings = {}) {
     }
   });
 
+  // if (glob === 'watch') {
+  //   console.log('GLOB', resultObj);
+  // }
+
   if (settings.deepize === true) return __deepize(resultObj);
   return resultObj;
 };

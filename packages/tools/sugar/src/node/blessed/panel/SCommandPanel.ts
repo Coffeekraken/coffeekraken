@@ -20,7 +20,6 @@ import __SWindowBox from '../box/SWindowBox';
 import __convert from '../../time/convert';
 import __SOutput from '../SOutput';
 import __SAppCommandInterface from '../interface/SAppCommandInterface';
-import __getExtendsStack from '../../class/getExtendsStack';
 
 /**
  * @name                  SCommandPanel

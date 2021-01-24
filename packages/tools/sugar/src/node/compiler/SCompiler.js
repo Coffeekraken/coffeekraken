@@ -37,12 +37,6 @@ class SCompiler extends SEventEmitter_1.default {
      */
     compile(params, settings = {}) {
         settings = deepMerge_1.default(this._settings, settings);
-        // // @ts-ignore
-        // if (this.constructor.interface)
-        //   // @ts-ignore
-        //   this.constructor.interface.apply(settings, {
-        //     throw: true
-        //   });
         // @todo    apply the params interface on the params
         const interfaceRes = this.applyInterface('params', params);
         if (interfaceRes.hasIssues()) {

@@ -210,10 +210,14 @@ function applyInterfaces(ctx) {
     }
 }
 function applyInterface(ctx, name, on = null) {
-    // console.log('NAME', name);
     let interfaceObj = getInterfaceObj(ctx, `${name}`);
+    if (on !== undefined)
+        interfaceObj.on = on;
     if (!interfaceObj) {
         throw `Sorry the the asked interface "<yellow>${name}</yellow>" does not exists on the class "<cyan>${ctx.constructor.name}</cyan>"`;
+    }
+    if (name.includes('.')) {
+        name = name.split('.').slice(1).join('.');
     }
     let res;
     // apply the interface if exists
@@ -224,17 +228,27 @@ function applyInterface(ctx, name, on = null) {
         const interfaceClass = plainObject_1.default(interfaceObj)
             ? interfaceObj.class
             : interfaceObj;
+        let onValue;
+        if (interfaceObj.on && typeof interfaceObj.on === 'string') {
+            onValue = get_1.default(ctx, interfaceObj.on);
+        }
+        else if (interfaceObj.on && typeof interfaceObj.on === 'object') {
+            onValue = interfaceObj.on;
+        }
+        else {
+            onValue = get_1.default(ctx, name);
+        }
         let applyId = ctx.constructor.name;
         if (ctx.id)
             applyId += `(${ctx.id})`;
         if (name)
             applyId += `.${name}`;
-        if (on && on.constructor)
-            applyId += `.${on.constructor.name}`;
-        if (on && on.id)
-            applyId += `(${on.id})`;
+        if (interfaceObj.on && interfaceObj.on.constructor)
+            applyId += `.${interfaceObj.on.constructor.name}`;
+        if (interfaceObj.on && interfaceObj.on.id)
+            applyId += `(${interfaceObj.on.id})`;
         if (name === 'this') {
-            res = interfaceClass.apply(on || ctx, {
+            res = interfaceClass.apply(onValue, {
                 id: applyId,
                 complete: true,
                 throw: true
@@ -242,17 +256,16 @@ function applyInterface(ctx, name, on = null) {
             deepMerge_1.default(ctx, res.value);
         }
         else {
-            res = interfaceClass.apply(on || get_1.default(ctx, name), {
+            res = interfaceClass.apply(onValue, {
                 id: applyId,
                 complete: true,
                 throw: true
             });
-            if (on) {
-                on = deepMerge_1.default(on, res.value);
+            if (interfaceObj.on && typeof interfaceObj.on === 'object') {
+                interfaceObj.on = deepMerge_1.default(interfaceObj.on, res.value);
             }
             else {
                 ctx[name] = deepMerge_1.default(ctx[name], res.value);
-                console.log(ctx[name]);
             }
         }
     }

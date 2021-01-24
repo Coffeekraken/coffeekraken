@@ -232,7 +232,6 @@ class SFile extends SEventEmitter_1.default {
         if (this.fileSettings.checkExistence && !this.exists) {
             throw new SError_1.default(`The passed filepath "<cyan>${filepath}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`);
         }
-        console.log(this.fileSettings);
         this.cwd = this.fileSettings.cwd;
         this.relPath = path_1.default.relative(this.cwd, filepath);
         // save the file path

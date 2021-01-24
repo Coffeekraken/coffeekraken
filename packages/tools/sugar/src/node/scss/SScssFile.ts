@@ -106,14 +106,16 @@ interface ISScssFile {
   compile(params: ISScssCompilerParams, settings?: ISScssFileOptionalSettings);
 }
 
+// @ts-ignore
 class SScssFile extends __SFile implements ISScssFile {
   static interfaces = {
     compilerParams: {
       apply: false,
       class: __SScssCompilerParamsInterface
     },
-    _settings: {
+    settings: {
       apply: true,
+      on: '_settings',
       class: SScssFileCtorSettingsInterface
     }
   };
@@ -174,8 +176,6 @@ class SScssFile extends __SFile implements ISScssFile {
         settings
       )
     );
-
-    console.log(this._settings);
 
     // store this instance in a stack to avoid creating multiple instances of the same file
     SScssFile.FILES[this.path] = this;
@@ -501,7 +501,6 @@ class SScssFile extends __SFile implements ISScssFile {
         cachedValue.dependenciesHash === dependenciesHash &&
         params.cache
       ) {
-        // console.log('from cache');
         let result = cachedValue.css;
         SScssFile.COMPILED_CSS[this.path] = result;
 
@@ -569,7 +568,6 @@ class SScssFile extends __SFile implements ISScssFile {
           value: `<yellow>[compiling]</yellow> "<cyan>${this.relPath}</cyan>"`
         });
 
-        // console.log('comepile', toCompile);
         renderObj = __sass.renderSync({
           ...sassSettings,
           data: toCompile
@@ -577,7 +575,6 @@ class SScssFile extends __SFile implements ISScssFile {
 
         // save in cache
         if (params.cache) {
-          // console.log('save in cache', this.path);
           // @ts-ignore
           await this._fileCache.set(this.path, {
             dependenciesHash,

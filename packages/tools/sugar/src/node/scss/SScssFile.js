@@ -71,6 +71,7 @@ SScssFileCtorSettingsInterface.definition = {
         required: true
     }
 };
+// @ts-ignore
 class SScssFile extends SFile_1.default {
     /**
      * @name        constructor
@@ -145,7 +146,6 @@ class SScssFile extends SFile_1.default {
         this._isCompiling = false;
         this._currentCompilationSettings = {};
         this._currentCompilationParams = {};
-        console.log(this._settings);
         // store this instance in a stack to avoid creating multiple instances of the same file
         SScssFile.FILES[this.path] = this;
         this._fileCache = new SFileCache_1.default(this.constructor.name);
@@ -368,7 +368,6 @@ class SScssFile extends SFile_1.default {
             if (cachedValue &&
                 cachedValue.dependenciesHash === dependenciesHash &&
                 params.cache) {
-                // console.log('from cache');
                 let result = cachedValue.css;
                 SScssFile.COMPILED_CSS[this.path] = result;
                 emit('log', {
@@ -415,11 +414,9 @@ class SScssFile extends SFile_1.default {
                 emit('log', {
                     value: `<yellow>[compiling]</yellow> "<cyan>${this.relPath}</cyan>"`
                 });
-                // console.log('comepile', toCompile);
                 renderObj = sass_1.default.renderSync(Object.assign(Object.assign({}, sassSettings), { data: toCompile }));
                 // save in cache
                 if (params.cache) {
-                    // console.log('save in cache', this.path);
                     // @ts-ignore
                     yield this._fileCache.set(this.path, {
                         dependenciesHash,
@@ -499,8 +496,9 @@ SScssFile.interfaces = {
         apply: false,
         class: SScssCompilerParamsInterface_1.default
     },
-    _settings: {
+    settings: {
         apply: true,
+        on: '_settings',
         class: SScssFileCtorSettingsInterface
     }
 };

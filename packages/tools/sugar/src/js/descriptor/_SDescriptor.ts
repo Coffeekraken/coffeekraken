@@ -371,6 +371,7 @@ class SDescriptor implements ISDescriptor {
         }
       });
     } else {
+      nativeConsole.warn(value);
       throw `Sorry but the support for values other than objects has not been integrated for not...`;
       // validate the object property
       // const validationResult = this._validate(

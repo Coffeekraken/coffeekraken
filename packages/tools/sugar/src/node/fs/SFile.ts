@@ -517,8 +517,6 @@ class SFile extends __SEventEmitter implements ISFile {
       );
     }
 
-    console.log(this.fileSettings);
-
     this.cwd = this.fileSettings.cwd;
     this.relPath = __path.relative(this.cwd, filepath);
 

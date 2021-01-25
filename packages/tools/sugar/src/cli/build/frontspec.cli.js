@@ -20,4 +20,4 @@ module.exports = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function
         initialParams: stringArgs
     });
 });
-//# sourceMappingURL=frontspec.cli.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRzcGVjLmNsaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImZyb250c3BlYy5jbGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7QUFFZCwrR0FBeUY7QUFDekYseUZBQW1FO0FBRW5FLGlCQUFTLENBQU8sVUFBVSxHQUFHLEVBQUUsRUFBRSxFQUFFO0lBQ2pDLElBQUkseUJBQWlCLENBQUMsZ0NBQXdCLEVBQUU7UUFDOUMsT0FBTyxFQUFFLElBQUk7UUFDYixhQUFhLEVBQUUsVUFBVTtLQUMxQixDQUFDLENBQUM7QUFDTCxDQUFDLENBQUEsQ0FBQyJ9

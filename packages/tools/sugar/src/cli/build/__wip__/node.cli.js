@@ -10,4 +10,4 @@ exports.default = (stringArgs = '') => {
     const cli = new SBuildNodeCli_1.default();
     output_1.default(cli.run(stringArgs));
 };
-//# sourceMappingURL=node.cli.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibm9kZS5jbGkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJub2RlLmNsaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCx3RkFBa0U7QUFFbEUsdUVBQWlEO0FBR2pELGtCQUFlLENBQUMsVUFBVSxHQUFHLEVBQUUsRUFBRSxFQUFFO0lBQ2pDLE1BQU0sR0FBRyxHQUFHLElBQUksdUJBQWUsRUFBRSxDQUFDO0lBQ2xDLGdCQUFRLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxVQUFVLENBQUMsQ0FBQyxDQUFDO0FBQ2hDLENBQUMsQ0FBQyJ9

@@ -8,4 +8,4 @@ const generateFile_1 = __importDefault(require("./generateFile"));
 exports.default = (stringArgs = '') => {
     generateFile_1.default('js ' + stringArgs);
 };
-//# sourceMappingURL=js.cli.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianMuY2xpLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsianMuY2xpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGtFQUE0QztBQUU1QyxrQkFBZSxDQUFDLFVBQVUsR0FBRyxFQUFFLEVBQUUsRUFBRTtJQUNqQyxzQkFBYyxDQUFDLEtBQUssR0FBRyxVQUFVLENBQUMsQ0FBQztBQUNyQyxDQUFDLENBQUMifQ==

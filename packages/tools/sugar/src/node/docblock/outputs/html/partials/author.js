@@ -21,4 +21,4 @@ module.exports = `
 </div>
 {{/author}}{{/if}}
 `;
-//# sourceMappingURL=author.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXV0aG9yLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXV0aG9yLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTtBQU9WLGlCQUFTOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0NBbUJSLENBQUMifQ==

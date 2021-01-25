@@ -14,7 +14,7 @@ import __SError from '../error/SError';
 import __buildCommandLine from '../cli/buildCommandLine';
 import __parseArgs from '../cli/parseArgs';
 import __childProcess from 'child_process';
-import __stdio from './stdio';
+import __stdio from '../stdio/stdio';
 import __stackTrace from 'stack-trace';
 import __argsToString from '../cli/argsToString';
 import __toString from '../string/toString';
@@ -27,7 +27,7 @@ import __SEventEmitter from '../event/SEventEmitter';
 import { ILog } from '../log/log';
 import { ISpawnSettings } from './spawn';
 import { ISClass as __ISClass } from '../class/SClass';
-import { ISProcessStdio } from './stdio/SProcessStdio';
+import { ISStdio } from '../stdio/SStdio';
 import { ISPromise } from '../promise/SPromise';
 import { ISEventEmitter } from '../event/SEventEmitter';
 import { ISInterface, ISInterfaceCtor } from '../interface/SInterface';
@@ -90,7 +90,7 @@ export interface ISProcessProcessObj {
 
 export interface ISProcessOptionalSettings {
   asyncStart?: boolean;
-  stdio?: ISProcessStdio;
+  stdio?: ISStdio;
   throw?: boolean;
   runAsChild?: boolean;
   paramsInterface?: ISInterface | ISInterfaceCtor;
@@ -104,7 +104,7 @@ export interface ISProcessOptionalSettings {
 }
 export interface ISProcessSettings {
   asyncStart: boolean;
-  stdio: ISProcessStdio;
+  stdio: ISStdio;
   throw: boolean;
   runAsChild: boolean;
   paramsInterface: ISInterface | ISInterfaceCtor;
@@ -435,7 +435,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     if (!__isChildProcess() && processSettings.stdio && !this.stdio) {
       this.stdio = __stdio(this, {
-        stdio: processSettings.stdio
+        type: processSettings.stdio
       });
     }
 

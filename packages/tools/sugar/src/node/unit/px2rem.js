@@ -28,4 +28,4 @@ function px2rem(px) {
         parseFloat(getComputedStyle(document.documentElement).fontSize || '16px'));
 }
 module.exports = px2rem;
-//# sourceMappingURL=px2rem.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHgycmVtLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicHgycmVtLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTtBQUVWOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFDSCxTQUFTLE1BQU0sQ0FBQyxFQUFFO0lBQ2hCLE9BQU8sQ0FDTCxFQUFFO1FBQ0YsVUFBVSxDQUFDLGdCQUFnQixDQUFDLFFBQVEsQ0FBQyxlQUFlLENBQUMsQ0FBQyxRQUFRLElBQUksTUFBTSxDQUFDLENBQzFFLENBQUM7QUFDSixDQUFDO0FBQ0QsaUJBQVMsTUFBTSxDQUFDIn0=

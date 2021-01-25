@@ -27,4 +27,4 @@ function isUcBrowser(ua = navigator.userAgent) {
     return ua.match(/UCBrowser/i) !== null;
 }
 module.exports = isUcBrowser;
-//# sourceMappingURL=ucBrowser.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidWNCcm93c2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidWNCcm93c2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxTQUFTLFdBQVcsQ0FBQyxFQUFFLEdBQUcsU0FBUyxDQUFDLFNBQVM7SUFDM0MsT0FBTyxFQUFFLENBQUMsS0FBSyxDQUFDLFlBQVksQ0FBQyxLQUFLLElBQUksQ0FBQztBQUN6QyxDQUFDO0FBQ0QsaUJBQVMsV0FBVyxDQUFDIn0=

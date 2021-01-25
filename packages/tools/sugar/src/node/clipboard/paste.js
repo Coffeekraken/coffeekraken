@@ -33,4 +33,4 @@ function paste(text) {
     return clipboardy_1.default.readSync();
 }
 module.exports = paste;
-//# sourceMappingURL=paste.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFzdGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwYXN0ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7OztBQUVkLDREQUFzQztBQUV0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxLQUFLLENBQUMsSUFBSTtJQUNqQixPQUFPLG9CQUFZLENBQUMsUUFBUSxFQUFFLENBQUM7QUFDakMsQ0FBQztBQUNELGlCQUFTLEtBQUssQ0FBQyJ9

@@ -285,14 +285,18 @@ function applyInterfaces(ctx: any) {
         }
       );
       if (settings.apply !== true) return;
-      let on;
       if (settings.on) {
-        if (__get(ctx, settings.on) !== undefined) {
-          on = __get(ctx, settings.on);
+        if (
+          typeof settings.on === 'string' &&
+          __get(ctx, settings.on) !== undefined
+        ) {
+          applyInterface(ctx, `${className}.${name}`, settings.on);
+        } else if (typeof settings.on === 'object') {
+          applyInterface(ctx, `${className}.${name}`, settings.on);
+        } else if (ctx[name] !== undefined) {
+          applyInterface(ctx, `${className}.${name}`);
         }
       }
-
-      applyInterface(ctx, `${className}.${name}`, on);
     });
   }
 }
@@ -309,23 +313,15 @@ function applyInterface(ctx: any, name: string, on: any = null) {
     name = name.split('.').slice(1).join('.');
   }
 
-  let res: any;
-
   // apply the interface if exists
-  if (!__isPlain(interfaceObj) && interfaceObj.apply !== undefined) {
-    res = interfaceObj.apply(on || ctx);
-  } else if (__isPlain(interfaceObj)) {
-    const interfaceClass: any = __isPlain(interfaceObj)
-      ? interfaceObj.class
-      : interfaceObj;
-
+  if (__isPlain(interfaceObj)) {
     let onValue;
     if (interfaceObj.on && typeof interfaceObj.on === 'string') {
-      onValue = __get(ctx, interfaceObj.on);
+      onValue = ctx[interfaceObj.on];
     } else if (interfaceObj.on && typeof interfaceObj.on === 'object') {
       onValue = interfaceObj.on;
     } else {
-      onValue = __get(ctx, name);
+      onValue = ctx[name];
     }
 
     let applyId = ctx.constructor.name;
@@ -336,28 +332,36 @@ function applyInterface(ctx: any, name: string, on: any = null) {
     if (interfaceObj.on && interfaceObj.on.id)
       applyId += `(${interfaceObj.on.id})`;
 
+    let res;
     if (name === 'this') {
-      res = interfaceClass.apply(onValue, {
+      res = interfaceObj.class.apply(onValue, {
         id: applyId,
         complete: true,
         throw: true
       });
       __deepMerge(ctx, res.value);
+      return ctx;
     } else {
-      res = interfaceClass.apply(onValue, {
+      res = interfaceObj.class.apply(onValue, {
         id: applyId,
         complete: true,
         throw: true
       });
 
       if (interfaceObj.on && typeof interfaceObj.on === 'object') {
-        interfaceObj.on = __deepMerge(interfaceObj.on, res.value);
-      } else {
+        const returnValue = __deepMerge(interfaceObj.on, res.value);
+        return returnValue;
+      } else if (interfaceObj.on && typeof interfaceObj.on === 'string') {
+        ctx[interfaceObj.on] = __deepMerge(ctx[interfaceObj.on], res.value);
+        return ctx[interfaceObj.on];
+      } else if (ctx[name] !== undefined) {
         ctx[name] = __deepMerge(ctx[name], res.value);
+        return ctx[name];
+      } else {
+        throw `You try to apply the interface "<yellow>${interfaceObj.class.name}</yellow>" on a data "<cyan>${interfaceObj.on}</cyan>" that seems to be inexistant`;
       }
     }
   }
-  return res;
 }
 
 function setSettings(ctx: any, settings: any = {}) {

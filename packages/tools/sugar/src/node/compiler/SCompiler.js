@@ -38,10 +38,7 @@ class SCompiler extends SEventEmitter_1.default {
     compile(params, settings = {}) {
         settings = deepMerge_1.default(this._settings, settings);
         // @todo    apply the params interface on the params
-        const interfaceRes = this.applyInterface('params', params);
-        if (interfaceRes.hasIssues()) {
-            console.log(interfaceRes.toString());
-        }
+        params = this.applyInterface('params', params);
         // @ts-ignore
         const promise = this._compile(params, settings);
         this.pipe(promise);
@@ -49,4 +46,4 @@ class SCompiler extends SEventEmitter_1.default {
     }
 }
 exports.default = SCompiler;
-//# sourceMappingURL=SCompiler.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbXBpbGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0NvbXBpbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQ0Esb0VBQThDO0FBQzlDLDJFQUFxRDtBQThDckQsTUFBTSxTQUFVLFNBQVEsdUJBQWU7SUFZckM7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxhQUFrQixFQUFFLFFBQWdDO1FBQzlELEtBQUssQ0FDSCxtQkFBVyxDQUNUO1lBQ0UsUUFBUSxFQUFFLEVBQUU7U0FDYixFQUNELFFBQVEsSUFBSSxFQUFFLENBQ2YsQ0FDRixDQUFDO1FBQ0YsSUFBSSxDQUFDLGFBQWEsR0FBRyxNQUFNLENBQUMsTUFBTSxDQUFDLEVBQUUsRUFBRSxhQUFhLENBQUMsQ0FBQztJQUN4RCxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsT0FBTyxDQUFDLE1BQVcsRUFBRSxXQUFnQixFQUFFO1FBQ3JDLFFBQVEsR0FBRyxtQkFBVyxDQUFDLElBQUksQ0FBQyxTQUFTLEVBQUUsUUFBUSxDQUFDLENBQUM7UUFFakQsb0RBQW9EO1FBRXBELE1BQU0sR0FBRyxJQUFJLENBQUMsY0FBYyxDQUFDLFFBQVEsRUFBRSxNQUFNLENBQUMsQ0FBQztRQUUvQyxhQUFhO1FBQ2IsTUFBTSxPQUFPLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxNQUFNLEVBQUUsUUFBUSxDQUFDLENBQUM7UUFDaEQsSUFBSSxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUNuQixPQUFPLE9BQU8sQ0FBQztJQUNqQixDQUFDO0NBQ0Y7QUFFRCxrQkFBZSxTQUFTLENBQUMifQ==

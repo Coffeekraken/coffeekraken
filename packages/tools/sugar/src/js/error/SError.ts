@@ -13,8 +13,16 @@ import __toString from '../string/toString';
  */
 
 export = class SError extends Error {
-  constructor(message) {
-    const originalMessage = message;
+  constructor(messageOrError) {
+    let stack, message, originalMessage;
+
+    if (messageOrError instanceof Error) {
+      stack = messageOrError.stack;
+      message = messageOrError.message;
+    } else if (typeof messageOrError === 'string') {
+      message = messageOrError;
+    }
+    originalMessage = message;
 
     if (typeof message !== 'string') {
       if (Array.isArray(message)) {
@@ -35,17 +43,15 @@ export = class SError extends Error {
       .join('\n');
 
     super(message);
-    if (Error && Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor);
-    }
+    // if (Error && Error.captureStackTrace) {
+    //   Error.captureStackTrace(this, this.constructor);
+    // }
 
-    this.data = originalMessage;
-
-    const stack = [];
+    let stackArray = [],
+      finalStackArray = [];
     const packageRoot = __packageRoot();
-    let stackArray = [];
-    if (this.stack) {
-      stackArray = this.stack.split(' at ').slice(1);
+    if (stack) {
+      stackArray = stack.split(' at ').slice(1);
       stackArray
         .filter((l) => {
           if (l.trim() === 'Error') return false;
@@ -54,34 +60,36 @@ export = class SError extends Error {
         })
         .forEach((l) => {
           if (l.trim() === '') return;
-          stack.push(
+          finalStackArray.push(
             `<cyan>│</cyan> at <cyan>${l.replace(packageRoot, '')}</cyan>`
           );
         });
     }
 
-    this.name = this.constructor.name;
+    this.name = '';
     this.message = __trimLines(
       __parseHtml(`
       <red><underline>${this.name || this.constructor.name}</underline></red>
 
       ${message}
 
-      ${stack.join('')}
+      ${finalStackArray.join('')}
     `)
     );
+    this.stack = null;
+    this.code = null;
 
-    let displayed = false;
-    Object.defineProperty(this, 'stack', {
-      get: function () {
-        if (displayed) return '';
-        displayed = true;
-        return this.message;
-      },
-      set: function (value) {
-        this._stack = value;
-      }
-    });
-    this.stack = __trimLines(__parseHtml(stack.join('')));
+    // let displayed = false;
+    // Object.defineProperty(this, 'stack', {
+    //   get: function () {
+    //     if (displayed) return '';
+    //     displayed = true;
+    //     return this.message;
+    //   },
+    //   set: function (value) {
+    //     this._stack = value;
+    //   }
+    // });
+    // this.stack = __trimLines(__parseHtml(stack.join('')));
   }
 };

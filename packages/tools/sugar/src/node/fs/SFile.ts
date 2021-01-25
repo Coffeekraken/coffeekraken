@@ -373,8 +373,9 @@ export interface ISFile {
 
 class SFile extends __SEventEmitter implements ISFile {
   static interfaces = {
-    _settings: {
+    settings: {
       apply: true,
+      on: '_settings',
       class: SFileCtorSettingsInterface
     }
   };

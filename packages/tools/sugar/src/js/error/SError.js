@@ -9,8 +9,16 @@ const trimLines_js_1 = __importDefault(require("../string/trimLines.js"));
 const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 const toString_1 = __importDefault(require("../string/toString"));
 module.exports = class SError extends Error {
-    constructor(message) {
-        const originalMessage = message;
+    constructor(messageOrError) {
+        let stack, message, originalMessage;
+        if (messageOrError instanceof Error) {
+            stack = messageOrError.stack;
+            message = messageOrError.message;
+        }
+        else if (typeof messageOrError === 'string') {
+            message = messageOrError;
+        }
+        originalMessage = message;
         if (typeof message !== 'string') {
             if (Array.isArray(message)) {
                 message = message.join('\n');
@@ -31,15 +39,13 @@ module.exports = class SError extends Error {
         })
             .join('\n');
         super(message);
-        if (Error && Error.captureStackTrace) {
-            Error.captureStackTrace(this, this.constructor);
-        }
-        this.data = originalMessage;
-        const stack = [];
+        // if (Error && Error.captureStackTrace) {
+        //   Error.captureStackTrace(this, this.constructor);
+        // }
+        let stackArray = [], finalStackArray = [];
         const packageRoot = packageRoot_1.default();
-        let stackArray = [];
-        if (this.stack) {
-            stackArray = this.stack.split(' at ').slice(1);
+        if (stack) {
+            stackArray = stack.split(' at ').slice(1);
             stackArray
                 .filter((l) => {
                 if (l.trim() === 'Error')
@@ -51,30 +57,31 @@ module.exports = class SError extends Error {
                 .forEach((l) => {
                 if (l.trim() === '')
                     return;
-                stack.push(`<cyan>│</cyan> at <cyan>${l.replace(packageRoot, '')}</cyan>`);
+                finalStackArray.push(`<cyan>│</cyan> at <cyan>${l.replace(packageRoot, '')}</cyan>`);
             });
         }
-        this.name = this.constructor.name;
+        this.name = '';
         this.message = trimLines_js_1.default(parseHtml_1.default(`
       <red><underline>${this.name || this.constructor.name}</underline></red>
 
       ${message}
 
-      ${stack.join('')}
+      ${finalStackArray.join('')}
     `));
-        let displayed = false;
-        Object.defineProperty(this, 'stack', {
-            get: function () {
-                if (displayed)
-                    return '';
-                displayed = true;
-                return this.message;
-            },
-            set: function (value) {
-                this._stack = value;
-            }
-        });
-        this.stack = trimLines_js_1.default(parseHtml_1.default(stack.join('')));
+        this.stack = null;
+        this.code = null;
+        // let displayed = false;
+        // Object.defineProperty(this, 'stack', {
+        //   get: function () {
+        //     if (displayed) return '';
+        //     displayed = true;
+        //     return this.message;
+        //   },
+        //   set: function (value) {
+        //     this._stack = value;
+        //   }
+        // });
+        // this.stack = __trimLines(__parseHtml(stack.join('')));
     }
 };
 //# sourceMappingURL=SError.js.map

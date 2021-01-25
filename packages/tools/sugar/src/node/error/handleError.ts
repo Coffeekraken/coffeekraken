@@ -62,6 +62,10 @@ function __handleMainProcessErrors(error) {
     error = error.toString();
   }
 
+  if (!(error instanceof __SError)) {
+    error = new __SError(error);
+  }
+
   setTimeout(() => {
     if (typeof error === 'string') {
       const stringErrorReg = /\s?message:\s?((.|\n)*)\s?name:\s/gm;

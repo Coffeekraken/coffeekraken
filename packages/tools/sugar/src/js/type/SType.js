@@ -17,4 +17,4 @@ const _SType_1 = __importDefault(require("./_SType"));
 require("./sTypeRegisterDefaultDescriptors");
 __exportStar(require("./_SType"), exports);
 exports.default = _SType_1.default;
-//# sourceMappingURL=SType.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1R5cGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTVHlwZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7QUFBQSxzREFBK0I7QUFDL0IsNkNBQTJDO0FBRTNDLDJDQUF5QjtBQUN6QixrQkFBZSxnQkFBTyxDQUFDIn0=

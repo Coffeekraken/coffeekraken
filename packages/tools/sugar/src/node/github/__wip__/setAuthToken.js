@@ -29,4 +29,4 @@ module.exports = function setAuthToken(username, token) {
         token
     };
 };
-//# sourceMappingURL=setAuthToken.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2V0QXV0aFRva2VuLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2V0QXV0aFRva2VuLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILE1BQU0sQ0FBQyxPQUFPLEdBQUcsU0FBUyxZQUFZLENBQUMsUUFBUSxFQUFFLEtBQUs7SUFDcEQscUNBQXFDO0lBQ3JDLE1BQU0sQ0FBQyxlQUFlLEdBQUc7UUFDdkIsUUFBUTtRQUNSLEtBQUs7S0FDTixDQUFDO0FBQ0osQ0FBQyxDQUFDIn0=

@@ -5,7 +5,7 @@ import __SPromise from '../promise/SPromise';
 import __SEventEmitter from '../event/SEventEmitter';
 import __deepMerge from '../object/deepMerge';
 import __typeof from '../value/typeof';
-import __stdio from './stdio';
+import __stdio from '../stdio/stdio';
 import __toString from '../string/toString';
 import __parseHtml from '../console/parseHtml';
 import __isChildProcess from '../is/childProcess';

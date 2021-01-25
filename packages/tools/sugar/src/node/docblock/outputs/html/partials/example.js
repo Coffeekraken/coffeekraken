@@ -16,4 +16,4 @@ module.exports = `
 </div>
 {{/example}}{{/if}}
 `;
-//# sourceMappingURL=example.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhhbXBsZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4YW1wbGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFDZCxVQUFVO0FBT1YsaUJBQVM7Ozs7Ozs7Ozs7Ozs7O0NBY1IsQ0FBQyJ9

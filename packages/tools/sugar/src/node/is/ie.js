@@ -28,4 +28,4 @@ function isIe(ua = navigator.userAgent) {
     return ua.indexOf('MSIE') > -1;
 }
 module.exports = isIe;
-//# sourceMappingURL=ie.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsSUFBSSxDQUFDLEVBQUUsR0FBRyxTQUFTLENBQUMsU0FBUztJQUNwQyxPQUFPLEVBQUUsQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUM7QUFDakMsQ0FBQztBQUNELGlCQUFTLElBQUksQ0FBQyJ9

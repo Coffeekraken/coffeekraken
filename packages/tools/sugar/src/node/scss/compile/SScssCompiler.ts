@@ -79,7 +79,6 @@ export interface ISScssCompilerParams {
   banner: string;
   sass: any;
   watch: boolean;
-  compileOnChange: boolean;
 }
 export interface ISScssCompilerOptionalParams {
   input?: string | string[];
@@ -97,7 +96,6 @@ export interface ISScssCompilerOptionalParams {
   banner?: string;
   sass?: any;
   watch?: boolean;
-  compileOnChange?: boolean;
 }
 
 export interface ISScssCompilerCtorSettings {
@@ -228,7 +226,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
       }
 
       // resolve with the compilation result
-      if (!params.compileOnChange) {
+      if (!params.watch) {
         resolve({
           files: resultsObj,
           startTime: startTime,

@@ -98,13 +98,7 @@ class SCompiler extends __SEventEmitter implements ISCompiler {
 
     // @todo    apply the params interface on the params
 
-    const interfaceRes: ISInterfaceResult = this.applyInterface(
-      'params',
-      params
-    );
-    if (interfaceRes.hasIssues()) {
-      console.log(interfaceRes.toString());
-    }
+    params = this.applyInterface('params', params);
 
     // @ts-ignore
     const promise = this._compile(params, settings);

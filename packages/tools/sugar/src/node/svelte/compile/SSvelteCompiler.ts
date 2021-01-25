@@ -2,6 +2,8 @@
 
 import __SInterface from '../../interface/SInterface';
 import __sugarConfig from '../../config/sugar';
+import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
+import __SSvelteFile from '../SSvelteFile';
 
 /**
  * @name                SSvelteCompilerParamsInterface
@@ -42,10 +44,6 @@ export class SSvelteCompilerParamsInterface extends __SInterface {
     watch: {
       type: 'Boolean',
       default: false
-    },
-    compileOnChange: {
-      type: 'Boolean',
-      default: true
     },
     style: {
       type: 'String',
@@ -104,25 +102,135 @@ export class SSvelteCompilerParamsInterface extends __SInterface {
   };
 }
 
+export interface ISSvelteCompilerCtorSettings {}
+
 export interface ISSvelteCompilerParams {
   watch: boolean;
   outputDir: string;
   rootDir: string;
   save: boolean;
-  cache: boolean;
-  clearCache: boolean;
-  svelte: any;
   map: boolean;
-  compileOnChange: boolean;
+  svelte: any;
 }
-export interface ISScssCompilerOptionalParams {
+export interface ISSvelteCompilerOptionalParams {
   watch?: boolean;
   outputDir?: string;
   rootDir?: string;
   save?: boolean;
-  cache?: boolean;
-  clearCache?: boolean;
-  svelte?: any;
   map?: boolean;
-  compileOnChange?: boolean;
+  svelte?: any;
 }
+
+export interface ISSvelteCompiler extends ISCompiler {}
+
+class SSvelteCompiler extends __SCompiler {
+  /**
+   * @name      constructor
+   * @type      Function
+   * @constructor
+   *
+   * Constructor
+   *
+   * @since     2.0.0
+   *
+   */
+  constructor(
+    initialParams: ISSvelteCompilerOptionalParams,
+    settings: ISSvelteCompilerCtorSettings
+  ) {
+    super(
+      initialParams,
+      __deepMerge(
+        {
+          scssCompiler: {}
+        },
+        settings || {}
+      )
+    );
+
+    // prod
+    if (this.svelteCompilerSettings.prod) {
+      this.svelteCompilerSettings.style = 'compressed';
+      this.svelteCompilerSettings.minify = true;
+      this.svelteCompilerSettings.stripComments = true;
+    }
+  }
+
+  /**
+   * @name              _compile
+   * @type              Function
+   * @async
+   *
+   * This method is the main one that allows you to actually compile the
+   * code you pass either inline, either a file path.
+   *
+   * @param         {String}            source          The source you want to compile. Can be a file path or some inline codes
+   * @param         {Object}            [settings={}]       An object of settings to override the instance ones
+   * @return        {SPromise}                          An SPromise instance that will be resolved (or rejected) when the compilation is finished
+   *
+   * @since             2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _compile(
+    params: ISScssCompilerParams,
+    settings: ISScssCompilerOptionalSettings = {}
+  ) {
+    return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
+      settings = __deepMerge(this.svelteCompilerSettings, {}, settings);
+
+      let input = Array.isArray(params.input) ? params.input : [params.input];
+
+      const resultsObj = {};
+
+      let filesPaths: string[] = [];
+
+      // make input absolute
+      input = __absolute(input);
+      // process inputs
+      input.forEach((inputStr) => {
+        if (__isGlob(inputStr)) {
+          filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
+        } else {
+          filesPaths.push(inputStr);
+        }
+      });
+
+      const startTime = Date.now();
+
+      for (let i = 0; i < filesPaths.length; i++) {
+        let filePath = filesPaths[i];
+        let file = new __SSvelteFile(filePath, {
+          svelteFile: {
+            compile: settings
+          }
+        });
+        pipe(file);
+
+        const resPromise = file.compile(params, {
+          ...settings
+        });
+        const res = await resPromise;
+        resultsObj[file.path] = res;
+      }
+
+      // resolve with the compilation result
+      if (!params.watch) {
+        resolve({
+          files: resultsObj,
+          startTime: startTime,
+          endTime: Date.now(),
+          duration: Date.now() - startTime
+        });
+      } else {
+        emit('files', {
+          files: resultsObj,
+          startTime: startTime,
+          endTime: Date.now(),
+          duration: Date.now() - startTime
+        });
+      }
+    });
+  }
+}
+
+export default SSvelteCompiler;

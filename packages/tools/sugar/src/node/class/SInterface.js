@@ -18,4 +18,4 @@ module.exports = (_a = class SInterface {
         return: 'String'
     },
     _a);
-//# sourceMappingURL=SInterface.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7O0FBMENkLHVCQUFTLE1BQU0sVUFBVTtLQWljeEI7SUFoY0M7Ozs7Ozs7OztPQVNHO0lBQ0ksV0FBUSxHQUFHO1FBQ2hCLEtBQUssRUFBRSxJQUFJO1FBQ1gsTUFBTSxFQUFFLFFBQVE7S0FDaEI7UUFtYkYifQ==

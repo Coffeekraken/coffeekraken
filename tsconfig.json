@@ -10,7 +10,8 @@
   "compilerOptions": {
     "allowJs": true,
     "strict": true,
-    "sourceMap": true,
+    // "sourceMap": true,
+    "inlineSourceMap": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": false,

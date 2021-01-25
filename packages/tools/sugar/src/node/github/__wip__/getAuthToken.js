@@ -24,4 +24,4 @@
 module.exports = function getAuthToken() {
     return global.githubAuthToken || false;
 };
-//# sourceMappingURL=getAuthToken.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0QXV0aFRva2VuLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZ2V0QXV0aFRva2VuLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sR0FBRyxTQUFTLFlBQVk7SUFDcEMsT0FBTyxNQUFNLENBQUMsZUFBZSxJQUFJLEtBQUssQ0FBQztBQUN6QyxDQUFDLENBQUMifQ==

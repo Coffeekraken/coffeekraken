@@ -7,4 +7,4 @@ const all_1 = __importDefault(require("../monorepo/all"));
 module.exports = (stringArgs = '') => {
     all_1.default(stringArgs);
 };
-//# sourceMappingURL=monorepo.cli.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9ub3JlcG8uY2xpLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9ub3JlcG8uY2xpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7O0FBRWQsMERBQTJDO0FBQzNDLGlCQUFTLENBQUMsVUFBVSxHQUFHLEVBQUUsRUFBRSxFQUFFO0lBQzNCLGFBQVksQ0FBQyxVQUFVLENBQUMsQ0FBQztBQUMzQixDQUFDLENBQUMifQ==

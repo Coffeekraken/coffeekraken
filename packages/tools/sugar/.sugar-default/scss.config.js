@@ -48,14 +48,14 @@ module.exports = {
      * @name            rootDir
      * @namespace       config.scss.compile
      * @type            String
-     * @default         [config.storage.rootDir]
+     * @default         [config.storage.srcDir]/css
      *
      * Specify the root directory from where the compiler will try to resolve modules
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: '[config.storage.rootDir]/src/css',
+    rootDir: '[config.storage.srcDir]/css',
 
     /**
      * @name              includePaths

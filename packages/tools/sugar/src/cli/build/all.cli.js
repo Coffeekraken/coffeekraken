@@ -11,4 +11,4 @@ module.exports = () => {
     js_cli_1.default();
     frontspec_cli_1.default();
 };
-//# sourceMappingURL=all.cli.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWxsLmNsaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFsbC5jbGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7QUFFZCwwREFBK0I7QUFDL0Isc0RBQTJCO0FBQzNCLG9FQUF5QztBQUV6QyxpQkFBUyxHQUFHLEVBQUU7SUFDWixrQkFBSyxFQUFFLENBQUM7SUFDUixnQkFBRyxFQUFFLENBQUM7SUFDTix1QkFBVSxFQUFFLENBQUM7QUFDZixDQUFDLENBQUMifQ==

@@ -10,7 +10,7 @@ import __SProcessManagerInterface from './interface/SProcessManagerInterface';
 import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';
 import __getExtendsStack from '../class/getExtendsStack';
-import __stdio from './stdio';
+import __stdio from '../stdio/stdio';
 import __SProcess from './SProcess';
 import __SProcessPipe from './SProcessPipe';
 import __parseHtml from '../console/parseHtml';

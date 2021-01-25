@@ -47,6 +47,7 @@
     "@rollup/plugin-url": "^5.0.1",
     "@rollup/plugin-virtual": "^2.0.3",
     "@std/esm": "^0.26.0",
+    "@types/blessed": "^0.1.17",
     "@types/node": "^14.14.14",
     "@ungap/custom-elements-builtin": "^0.6.3",
     "aggregation": "^1.2.6",

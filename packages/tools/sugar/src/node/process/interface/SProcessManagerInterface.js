@@ -21,4 +21,4 @@ module.exports = (_a = class SProcessManagerInterface extends SInterface_1.defau
     _a.title = 'SProcess elements Interface',
     _a.description = 'This interface represent the minimum requirements that MUST have the instance that run some commands etc across the entire toolkit',
     _a);
-//# sourceMappingURL=SProcessManagerInterface.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Byb2Nlc3NNYW5hZ2VySW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1Byb2Nlc3NNYW5hZ2VySW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdFQUFrRDtBQWNsRCx1QkFBUyxNQUFNLHdCQUF5QixTQUFRLG9CQUFZO0tBZ0IzRDtJQWZDLGtEQUFrRDtJQUMzQyxhQUFVLEdBQUc7UUFDbEIsR0FBRyxFQUFFO1lBQ0gsSUFBSSxFQUFFLFVBQVU7WUFDaEIsUUFBUSxFQUFFLElBQUk7U0FDZjtRQUNELElBQUksRUFBRTtZQUNKLElBQUksRUFBRSxVQUFVO1lBQ2hCLFFBQVEsRUFBRSxJQUFJO1NBQ2Y7S0FDRDtJQUVLLFFBQUssR0FBRyw2QkFBOEI7SUFDdEMsY0FBVyxHQUNoQixvSUFBcUk7UUFDdkkifQ==

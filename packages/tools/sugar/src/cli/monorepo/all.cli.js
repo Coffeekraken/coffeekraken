@@ -16,4 +16,4 @@ const link_cli_1 = __importDefault(require("./link.cli"));
 module.exports = (stringArgs = '') => __awaiter(void 0, void 0, void 0, function* () {
     yield link_cli_1.default(stringArgs);
 });
-//# sourceMappingURL=all.cli.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWxsLmNsaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImFsbC5jbGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7QUFFZCwwREFBK0I7QUFFL0IsaUJBQVMsQ0FBTyxVQUFVLEdBQUcsRUFBRSxFQUFFLEVBQUU7SUFDakMsTUFBTSxrQkFBSyxDQUFDLFVBQVUsQ0FBQyxDQUFDO0FBQzFCLENBQUMsQ0FBQSxDQUFDIn0=

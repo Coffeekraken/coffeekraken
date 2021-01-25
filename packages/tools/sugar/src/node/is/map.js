@@ -30,4 +30,4 @@ function isMap(value) {
     return value instanceof Map;
 }
 module.exports = isMap;
-//# sourceMappingURL=map.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibWFwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTtBQUVWOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLEtBQUssQ0FBQyxLQUFLO0lBQ2xCLE9BQU8sS0FBSyxZQUFZLEdBQUcsQ0FBQztBQUM5QixDQUFDO0FBQ0QsaUJBQVMsS0FBSyxDQUFDIn0=

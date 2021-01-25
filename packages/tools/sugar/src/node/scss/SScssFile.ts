@@ -361,7 +361,7 @@ class SScssFile extends __SFile implements ISScssFile {
 
     // listen for change event
     this.on('update', (file, metas) => {
-      if (this._currentCompilationParams.compileOnChange) {
+      if (this._currentCompilationParams.watch) {
         const promise = this.compile(
           <ISScssCompilerParams>this._currentCompilationParams
         );
@@ -398,7 +398,7 @@ class SScssFile extends __SFile implements ISScssFile {
     this._currentCompilationParams = Object.assign({}, params);
     this._currentCompilationSettings = Object.assign({}, settings);
 
-    this.applyInterface('compilerParams', params);
+    params = this.applyInterface('compilerParams', params);
 
     if (params.watch) {
       this._watch();

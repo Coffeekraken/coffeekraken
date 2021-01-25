@@ -44,10 +44,6 @@ class SScssCompilerParamsInterface extends __SInterface {
       type: 'Boolean',
       default: false
     },
-    compileOnChange: {
-      type: 'Boolean',
-      default: true
-    },
     style: {
       type: 'String',
       alias: 's',

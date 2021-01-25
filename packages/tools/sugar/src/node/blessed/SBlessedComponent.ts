@@ -1,10 +1,5 @@
 // @ts-nocheck
 
-import ISBlessedComponent, {
-  ISBlessedComponentCtor,
-  ISBlessedComponentSettings
-} from './interface/ISBlessedComponent';
-
 import __SPromise from '../promise/SPromise';
 import __blessed from 'blessed';
 import __deepMerge from '../object/deepMerge';
@@ -15,6 +10,7 @@ import __isChildProcess from '../is/childProcess';
 import __toString from '../string/toString';
 import __parse from '../string/parse';
 import __onProcessExit from '../process/onProcessExit';
+import __blessedTypes from '@types/blessed';
 
 /**
  * @name                  SBlessedComponent
@@ -41,9 +37,23 @@ import __onProcessExit from '../process/onProcessExit';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const cls: ISBlessedComponentCtor = class SBlessedComponent
-  extends __blessed.box
-  implements ISBlessedComponent {
+
+export interface ISBlessedComponentSettings {}
+
+export interface ISBlessedComponentCtor {
+  new (settings?: ISBlessedComponentSettings);
+}
+
+export interface ISBlessedComponent
+  extends __blessedTypes.Widgets.BlessedElement {
+  readonly realHeight: number;
+  setFramerate(framerate: number): void;
+  update(): void;
+  isDisplayed(): boolean;
+  isDestroyed(): boolean;
+}
+
+class SBlessedComponent extends __blessed.box implements ISBlessedComponent {
   /**
    * @name                  _settings
    * @type                  ISBlessedComponentSettings
@@ -138,7 +148,11 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
 
     // check if need to create a screen
     let isNewScreen = false;
-    if (!SBlessedComponent.screen && settings.screen !== false) {
+    if (
+      !SBlessedComponent.screen &&
+      settings.screen !== false &&
+      !isNewScreen
+    ) {
       isNewScreen = true;
       SBlessedComponent.screen = __blessed.screen({
         smartCSR: true,
@@ -186,12 +200,14 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
       this.setFramerate(settings.framerate);
     }
 
-    if (this._settings.attach !== false && isNewScreen) {
+    if (this._settings.attach !== false && SBlessedComponent.screen) {
       SBlessedComponent.screen.append(this);
     }
 
     if (this.parent) {
-      if (this.isDisplayed()) this.update();
+      setTimeout(() => {
+        if (this.isDisplayed()) this.update();
+      });
     } else {
       this.on('attach', () => {
         setTimeout(() => {
@@ -201,7 +217,7 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
     }
   }
 
-  public get realHeight() {
+  get realHeight() {
     let height = this.height;
     if (typeof this.getScrollHeight === 'function') {
       try {
@@ -262,7 +278,7 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   isDisplayed() {
-    return this._isDisplayed && SBlessedComponent.getScreen();
+    return this._isDisplayed && SBlessedComponent.getScreen() !== undefined;
   }
 
   /**
@@ -291,12 +307,12 @@ const cls: ISBlessedComponentCtor = class SBlessedComponent
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  emit(stack, data) {
-    super.emit(stack, data);
-    this.emit(stack, data);
-    return this;
-  }
-};
+  // emit(stack, data) {
+  //   // super.emit(stack, data);
+  //   // this.emit(stack, data);
+  //   return this;
+  // }
+}
 
 if (!__isChildProcess()) {
   __hotkey('ctrl+c', {
@@ -307,4 +323,5 @@ if (!__isChildProcess()) {
   });
 }
 
-export = cls;
+const cls: ISBlessedComponentCtor = SBlessedComponent;
+export default SBlessedComponent;

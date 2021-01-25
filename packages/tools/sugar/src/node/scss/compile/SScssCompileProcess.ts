@@ -115,7 +115,7 @@ class SScssCompileProcess extends SProcess {
     params: ISScssCompilerParams,
     settings: ISScssCompileProcessOptionalSettings = {}
   ) {
-    this.processSettings.exitAtEnd = !params.compileOnChange;
+    this.processSettings.exitAtEnd = !params.watch;
     return this._scssCompiler.compile(params, settings);
   }
 }

@@ -20,7 +20,7 @@ import __argsToString from '../cli/argsToString';
 import __toString from '../string/toString';
 import __copy from '../clipboard/copy';
 import __spawn from './spawn';
-import __parseHtml from '../terminal/parseHtml';
+import __parseHtml from '../console/parseHtml';
 import __uniqid from '../string/uniqid';
 import __SEventEmitter from '../event/SEventEmitter';
 

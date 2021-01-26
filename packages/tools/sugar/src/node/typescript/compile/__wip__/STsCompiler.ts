@@ -405,7 +405,7 @@ export = class STsCompiler extends __SCompiler {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   isStack(stack, tsconfig = {}) {
-    console.log(stack, tsconfig);
+    // console.log(stack, tsconfig);
 
     if (!tsconfig.stacks) return false;
     return tsconfig.stacks[stack] !== undefined;

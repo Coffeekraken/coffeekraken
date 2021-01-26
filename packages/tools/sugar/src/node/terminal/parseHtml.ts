@@ -4,7 +4,7 @@ import __replaceTags from '../html/replaceTags';
 import __sugarConfig from '../config/sugar';
 import __upperFirst from '../string/upperFirst';
 import __chalk from 'chalk';
-import { tagsMap as __tagsMap } from '../console/parseHtml';
+import __tagsMap from '../console/html/tagsMap';
 __chalk.level = 3;
 
 // TODO tests

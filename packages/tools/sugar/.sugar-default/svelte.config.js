@@ -41,20 +41,6 @@ module.exports = {
     rootDir: '[config.storage.srcDir]/js',
 
     /**
-     * @name              style
-     * @namespace         config.svelte.compile
-     * @type              String
-     * @default           expanded
-     * @values            nested,expanded,compact,compressed
-     *
-     * Specify the output style that you want
-     *
-     * @since             2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    style: 'expanded',
-
-    /**
      * @name              map
      * @namespace         config.svelte.compile
      * @type              Boolean
@@ -120,6 +106,32 @@ module.exports = {
      */
     banner:
       '/* Compiled using Coffeekraken Sugar SSvelteCompiler class which stand over the AMAZING svelte module */',
+
+    /**
+     * @name          save
+     * @namespace      config.svelte.compile
+     * @type        Boolean
+     * @default     false
+     *
+     * Specify if you want your compiled file(s) to be saved by default
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    save: false,
+
+    /**
+     * @name          watch
+     * @namespace      config.svelte.compile
+     * @type        Boolean
+     * @default     false
+     *
+     * Specify if you want your compiled file(s) to be watchd by default
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    watch: false,
 
     /**
      * @name                svelte

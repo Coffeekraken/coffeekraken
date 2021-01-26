@@ -1,129 +1,71 @@
 // @ts-nocheck
 
+import __deepMerge from '../../object/deepMerge';
 import __SInterface from '../../interface/SInterface';
 import __sugarConfig from '../../config/sugar';
 import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
 import __SSvelteFile from '../SSvelteFile';
+import __SPromise from '../../promise/SPromise';
+import __absolute from '../../path/absolute';
+import __isGlob from '../../is/glob';
 
-/**
- * @name                SSvelteCompilerParamsInterface
- * @namespace           sugar.node.svelte.compile.interface
- * @type                Class
- * @extends             SInterface
- * @wip
- *
- * This class represent the interface that describe parameters of the SSvelteCompiler
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export class SSvelteCompilerParamsInterface extends __SInterface {
-  static definition = {
-    input: {
-      type: 'String|Array<String>',
-      default: __sugarConfig('scss.compile.input'),
-      alias: 'i'
-    },
-    outputDir: {
-      type: 'String',
-      default: __sugarConfig('scss.compile.outputDir'),
-      alias: 'o'
-    },
-    rootDir: {
-      type: 'String',
-      default: __sugarConfig('scss.compile.rootDir')
-    },
-    save: {
-      type: 'Boolean',
-      default: false
-    },
-    watch: {
-      type: 'Boolean',
-      default: false
-    },
-    style: {
-      type: 'String',
-      alias: 's',
-      description: 'Output style (nested,expanded,compact,compressed)',
-      default: __sugarConfig('scss.compile.style') || 'expanded',
-      level: 1
-    },
-    map: {
-      type: 'Boolean',
-      alias: 'm',
-      description: 'Generate a sourcemap file',
-      default: __sugarConfig('scss.compile.map') || true,
-      level: 1
-    },
-    cache: {
-      type: 'Boolean',
-      default: __sugarConfig('scss.compile.cache')
-    },
-    clearCache: {
-      type: 'Boolean',
-      default: __sugarConfig('scss.compile.clearCache')
-    },
-    stripComments: {
-      type: 'Boolean',
-      default: __sugarConfig('scss.compile.stripComments')
-    },
-    minify: {
-      type: 'Boolean',
-      default: __sugarConfig('scss.compile.minify')
-    },
-    prod: {
-      type: 'Boolean',
-      default: __sugarConfig('scss.compile.prod')
-    },
-    sharedResources: {
-      type: 'String|Array<String>',
-      alias: 'r',
-      description:
-        'Specify some files to load in every imported files using @use or @import',
-      default: __sugarConfig('scss.compile.sharedResources'),
-      level: 1
-    },
-    banner: {
-      type: 'String',
-      description:
-        'Specify a banner (usually a comment) that you want to put on top of your generated code',
-      default: __sugarConfig('scss.compile.banner')
-    },
-    sass: {
-      type: 'Object',
-      description: 'Object passed to the sass compiler',
-      default: __sugarConfig('scss.compile.sass') || {},
-      level: 2
-    }
-  };
-}
+import __SSvelteCompilerParamsInterface from './interface/SSvelteCompilerParamsInterface';
 
 export interface ISSvelteCompilerCtorSettings {}
+export interface ISSvelteCompilerOptionalSettings {}
+export interface ISSvelteCompilerSettings {}
 
 export interface ISSvelteCompilerParams {
-  watch: boolean;
+  input: string | string[];
   outputDir: string;
   rootDir: string;
-  save: boolean;
   map: boolean;
+  prod: boolean;
+  stripComments: boolean;
+  minify: boolean;
+  banner: string;
+  save: boolean;
+  watch: boolean;
   svelte: any;
 }
 export interface ISSvelteCompilerOptionalParams {
-  watch?: boolean;
+  input?: string | string[];
   outputDir?: string;
   rootDir?: string;
-  save?: boolean;
   map?: boolean;
+  prod?: boolean;
+  stripComments?: boolean;
+  minify?: boolean;
+  banner?: string;
+  save?: boolean;
+  watch?: boolean;
   svelte?: any;
 }
 
 export interface ISSvelteCompiler extends ISCompiler {}
 
 class SSvelteCompiler extends __SCompiler {
+  static interfaces = {
+    params: {
+      apply: false,
+      class: __SSvelteCompilerParamsInterface
+    }
+  };
+
+  /**
+   * @name      svelteCompilerSettings
+   * @type      ISSvelteCompilerSettings
+   * @get
+   *
+   * Access to the svelte compiler settings
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get svelteCompilerSettings(): ISSvelteCompilerSettings {
+    return (<any>this._settings).svelteCompiler;
+  }
+
   /**
    * @name      constructor
    * @type      Function
@@ -132,7 +74,7 @@ class SSvelteCompiler extends __SCompiler {
    * Constructor
    *
    * @since     2.0.0
-   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(
     initialParams: ISSvelteCompilerOptionalParams,
@@ -142,7 +84,7 @@ class SSvelteCompiler extends __SCompiler {
       initialParams,
       __deepMerge(
         {
-          scssCompiler: {}
+          svelteCompiler: {}
         },
         settings || {}
       )

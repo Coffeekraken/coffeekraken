@@ -95,9 +95,6 @@ class SCompiler extends __SEventEmitter implements ISCompiler {
    */
   compile(params: any, settings: any = {}) {
     settings = __deepMerge(this._settings, settings);
-
-    // @todo    apply the params interface on the params
-
     params = this.applyInterface('params', params);
 
     // @ts-ignore

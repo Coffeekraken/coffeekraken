@@ -51,18 +51,38 @@ export = class SError extends Error {
       finalStackArray = [];
     const packageRoot = __packageRoot();
     if (stack) {
-      stackArray = stack.split(' at ').slice(1);
+      stackArray = stack.split('\n').slice(1);
       stackArray
         .filter((l) => {
           if (l.trim() === 'Error') return false;
           if (l.trim() === '') return false;
           return true;
         })
+        .map((l) => {
+          l = l.trim();
+
+          l = l
+            .replace(
+              /at\s(.*)\(([a-zA-Z0-9\/-_\.]+:[0-9]{1,10}:[0-9]{1,10})\)$/,
+              '\n<cyan>|</cyan> <magenta>$1</magenta>\n<cyan>|</cyan> <cyan>$2</cyan>'
+            )
+            .replace(`${__packageRoot(process.cwd(), true)}/`, '');
+
+          if (l.match(/^at\s/)) {
+            l = `\n<cyan>|</cyan> <cyan>${l.replace('at ', '')}</cyan>`;
+          }
+          if (l.match(/^->/)) {
+            l = `\n<yellow>|---></yellow><yellow>${l.replace(
+              '-> ',
+              ''
+            )}</yellow>`;
+          }
+
+          return l;
+        })
         .forEach((l) => {
           if (l.trim() === '') return;
-          finalStackArray.push(
-            `<cyan>│</cyan> at <cyan>${l.replace(packageRoot, '')}</cyan>`
-          );
+          finalStackArray.push(l);
         });
     }
 

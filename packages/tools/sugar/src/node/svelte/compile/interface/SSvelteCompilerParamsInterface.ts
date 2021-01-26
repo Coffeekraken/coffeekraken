@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import __SInterface from '../../../interface/SInterface';
 import __sugarConfig from '../../../config/sugar';
 
@@ -10,8 +8,7 @@ import __sugarConfig from '../../../config/sugar';
  * @extends             SInterface
  * @wip
  *
- * This class represent the interface that describe the requirement
- * needed for a svelte compilation process.
+ * This class represent the interface that describe parameters of the SSvelteCompiler
  *
  * @todo      interface
  * @todo      doc
@@ -36,27 +33,16 @@ class SSvelteCompilerParamsInterface extends __SInterface {
       type: 'String',
       default: __sugarConfig('svelte.compile.rootDir')
     },
-    save: {
-      type: 'Boolean',
-      default: false
-    },
-    watch: {
-      type: 'Boolean',
-      default: false
-    },
-    style: {
-      type: 'String',
-      alias: 's',
-      description: 'Output style (nested,expanded,compact,compressed)',
-      default: __sugarConfig('svelte.compile.style') || 'expanded',
-      level: 1
-    },
     map: {
       type: 'Boolean',
       alias: 'm',
       description: 'Generate a sourcemap file',
       default: __sugarConfig('svelte.compile.map') || true,
       level: 1
+    },
+    prod: {
+      type: 'Boolean',
+      default: __sugarConfig('svelte.compile.prod')
     },
     stripComments: {
       type: 'Boolean',
@@ -66,15 +52,19 @@ class SSvelteCompilerParamsInterface extends __SInterface {
       type: 'Boolean',
       default: __sugarConfig('svelte.compile.minify')
     },
-    prod: {
-      type: 'Boolean',
-      default: __sugarConfig('svelte.compile.prod')
-    },
     banner: {
       type: 'String',
       description:
         'Specify a banner (usually a comment) that you want to put on top of your generated code',
       default: __sugarConfig('svelte.compile.banner')
+    },
+    save: {
+      type: 'Boolean',
+      default: __sugarConfig('svelte.compile.save')
+    },
+    watch: {
+      type: 'Boolean',
+      default: __sugarConfig('svelte.compile.watch')
     },
     svelte: {
       type: 'Object',

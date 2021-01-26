@@ -5,7 +5,7 @@ import __getRegisteredProcessed from './getRegisteredProcesses';
 import __clear from 'clear';
 import __fkill from 'fkill';
 import __hotkey from '../keyboard/hotkey';
-import __parseHtml from '../terminal/parseHtml';
+import __parseHtml from '../console/parseHtml';
 import __keypress from 'keypress';
 import __wait from '../time/wait';
 import __SBlessedOutput from '../blessed/SBlessedOutput';

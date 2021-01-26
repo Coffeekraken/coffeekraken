@@ -129,8 +129,12 @@ class SStdio extends __SClass implements ISStdio {
     if (component.id === undefined && as === null) {
       throw `Sorry but you try to register a component that does not have a built-in static "id" property and you don't have passed the "as" argument to override it...`;
     }
+
+    if (!this.registeredComponents[this.name])
+      this.registeredComponents[this.name] = {};
+
     // save the component inside the stack
-    this.registeredComponents[as || component.id || 'default'] = {
+    this.registeredComponents[this.name][as || component.id || 'default'] = {
       component,
       settings: settings || {},
       as
@@ -313,9 +317,9 @@ class SStdio extends __SClass implements ISStdio {
       }
 
       // get the correct component to pass to the _log method
-      const componentObj = this.constructor.registeredComponents[
-        log.type || 'default'
-      ];
+      let componentObj = this.constructor.registeredComponents[
+        this.constructor.name
+      ][log.type || 'default'];
       if (!componentObj)
         throw new Error(
           `Sorry but the requested "<yellow>${
@@ -331,7 +335,7 @@ class SStdio extends __SClass implements ISStdio {
         );
       }
 
-      // this._log(log, component);
+      this._log(log, componentObj.component);
     });
   }
 }

@@ -59,7 +59,7 @@
     "sugar.node.terminal.parseHtml": {
       "name": "parseHtml",
       "namespace": "sugar.node.terminal",
-      "path": "node/terminal/parseHtml.md",
+      "path": "node/console/parseHtml.md",
       "filename": "parseHtml.md",
       "title": "```js parseHtml ```"
     },
@@ -4780,7 +4780,7 @@
           "parseHtml": {
             "name": "parseHtml",
             "namespace": "sugar.node.terminal",
-            "path": "node/terminal/parseHtml.md",
+            "path": "node/console/parseHtml.md",
             "filename": "parseHtml.md",
             "title": "```js parseHtml ```"
           },

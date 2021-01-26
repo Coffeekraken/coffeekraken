@@ -6,7 +6,9 @@ function compileScss(stringArgs = '') {
   const pro = new SScssCompileProcess(
     {},
     {
-      stdio: 'inherit'
+      process: {
+        stdio: 'blessed'
+      }
     }
   );
   pro.run(stringArgs);

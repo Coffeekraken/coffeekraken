@@ -10,12 +10,14 @@ import __toString from '../string/toString';
 import __wait from '../time/wait';
 import __getFilename from '../fs/filename';
 
+const __svelte = require('svelte/compiler');
+
 import __SInterface from '../interface/SInterface';
 import {
   ISSvelteCompilerParams,
-  ISSvelteCompilerOptionalParams,
-  SSvelteCompilerParamsInterface
+  ISSvelteCompilerOptionalParams
 } from './compile/SSvelteCompiler';
+import __SSvelteCompilerParamsInterface from './compile/interface/SSvelteCompilerParamsInterface';
 
 /**
  * @name          SSvelteFileSettingsInterface
@@ -99,7 +101,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
   static interfaces = {
     compilerParams: {
       apply: false,
-      class: SSvelteCompilerParamsInterface
+      class: __SSvelteCompilerParamsInterface
     }
     // _settings: {
     //   apply: true,
@@ -184,7 +186,9 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
           <ISSvelteCompilerParams>this._currentCompilationParams
         );
         this.emit('log', {
-          value: `<blue>[updated]</blue> "<cyan>${file.relPath}</cyan>"`
+          type: 'file',
+          action: 'update',
+          file
         });
       }
     });
@@ -242,22 +246,13 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
       }
       this._isCompiling = true;
 
-      // svelte settings
-      const svelteSettings = {
-        sourceMap:
-          params.map !== undefined
-            ? params.map
-            : __sugarConfig('scss.compile.map'),
-        ...(params.svelte || {})
-      };
-
       emit('log', {
         type: 'separator'
       });
 
       // notify start
       emit('log', {
-        value: `Starting "<cyan>${this.relPath}</cyan>" compilation`
+        value: `<yellow>[start]</yellow> Starting "<cyan>${this.relPath}</cyan>" compilation`
       });
 
       const duration = new __SDuration();
@@ -266,15 +261,29 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
 
       let toCompile = this.content;
 
-      let renderObj;
       try {
         emit('log', {
-          value: `<yellow>[compiling]</yellow> "<cyan>${this.relPath}</cyan>"`
+          value: `<yellow>[compiling]</yellow> file "<cyan>${this.relPath}</cyan>"`
         });
 
         // RENDERING HERE
+        const result = __svelte.compile(toCompile, {
+          filename: this.name,
+          dev: !params.prod,
+          preserveComments: !params.stripComments,
+          preserveWhitespace: !params.prod,
+          outputFilename: this.name,
+          cssOutputFilename: this.name,
+          ...(params.svelte || {})
+        });
 
-        let result = renderObj.js.toString();
+        result.warnings.forEach((warning) => {
+          emit('warn', {
+            value: warning.toString()
+          });
+        });
+
+        // nativeConsole.log(result);
 
         // check if need to save
         if (params.save && params.outputDir) {
@@ -286,32 +295,39 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
               .replace(/\.svelte$/, '.js')
           );
           emit('log', {
-            value: `Saving the file "<cyan>${
-              this.relPath
-            }</cyan>" to "<magenta>${savePath.replace(
-              `${__sugarConfig('storage.rootDir')}/`,
-              ''
-            )}</magenta>" `
+            type: 'file',
+            file: this,
+            to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+            action: 'save'
           });
-          this.writeSync(result, {
+          this.writeSync(result.js.code, {
             path: savePath
+          });
+
+          // notify end
+          const time = duration.end();
+
+          emit('log', {
+            type: 'file',
+            action: 'saved',
+            to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+            file: this
           });
         }
 
-        // notify end
-        const time = duration.end();
-        emit('log', {
-          value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
-        });
+        // emit('log', {
+        //   value: `<green>[success]</green> File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
+        // });
 
         if (params.watch) {
           emit('log', {
-            value: `<blue>Watching for changes...</blue>`
+            value: `<blue>[watch] </blue>Watching for changes...`
           });
         }
 
         return resolve(result);
       } catch (e) {
+        console.log(e);
         // .log(e);
         return reject(e.toString());
       }

@@ -3,7 +3,7 @@
 const __SAuthAdapter = require('./SAuthAdapter');
 const __blessed = require('blessed');
 const __terminalKit = require('terminal-kit');
-const __parseHtml = require('../../../terminal/parseHtml');
+const __parseHtml = require('../../../console/parseHtml');
 const __ora = require('ora');
 
 /**

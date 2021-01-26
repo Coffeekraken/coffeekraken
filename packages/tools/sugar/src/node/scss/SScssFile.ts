@@ -366,7 +366,9 @@ class SScssFile extends __SFile implements ISScssFile {
           <ISScssCompilerParams>this._currentCompilationParams
         );
         this.emit('log', {
-          value: `<blue>[updated]</blue> "<cyan>${file.relPath}</cyan>"`
+          type: 'file',
+          action: 'update',
+          file
         });
       }
     });
@@ -421,6 +423,10 @@ class SScssFile extends __SFile implements ISScssFile {
       }
       this._isCompiling = true;
 
+      emit('error', {
+        value: 'wie fiowefiuwhe ifuhwe uifhweiuh '
+      });
+
       // sass settings
       const sassSettings = {
         outputStyle: params.style || __sugarConfig('scss.compile.style'),
@@ -446,7 +452,7 @@ class SScssFile extends __SFile implements ISScssFile {
 
       // notify start
       emit('log', {
-        value: `Starting "<cyan>${this.relPath}</cyan>" compilation`
+        value: `<yellow>[start]</yellow> Starting "<cyan>${this.relPath}</cyan>" compilation`
       });
 
       const duration = new __SDuration();
@@ -505,7 +511,7 @@ class SScssFile extends __SFile implements ISScssFile {
         SScssFile.COMPILED_CSS[this.path] = result;
 
         emit('log', {
-          value: `<green>[from cache]</green> "<cyan>${this.relPath}</cyan>"`
+          value: `<magenta>[cache]</magenta> "<cyan>${this.relPath}</cyan>"`
         });
 
         if (this._import.type === 'main') {
@@ -529,12 +535,10 @@ class SScssFile extends __SFile implements ISScssFile {
               .replace(/\.s[ac]ss$/, '.css')
           );
           emit('log', {
-            value: `Saving the file "<cyan>${
-              this.relPath
-            }</cyan>" to "<magenta>${savePath.replace(
-              `${__sugarConfig('storage.rootDir')}/`,
-              ''
-            )}</magenta>" `
+            type: 'file',
+            action: 'save',
+            to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+            file: this
           });
           this.writeSync(result, {
             path: savePath
@@ -543,12 +547,15 @@ class SScssFile extends __SFile implements ISScssFile {
           // notify end
           const time = duration.end();
           emit('log', {
-            value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
+            type: 'file',
+            action: 'saved',
+            to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+            file: this
           });
 
           if (params.watch) {
             emit('log', {
-              value: `<blue>Watching for changes...</blue>`
+              value: `<blue>[watch]</blue> Watching for changes...`
             });
           }
         }
@@ -602,12 +609,10 @@ class SScssFile extends __SFile implements ISScssFile {
                 .replace(/\.s[ac]ss$/, '.css')
             );
             emit('log', {
-              value: `Saving the file "<cyan>${
-                this.relPath
-              }</cyan>" to "<magenta>${savePath.replace(
-                `${__sugarConfig('storage.rootDir')}/`,
-                ''
-              )}</magenta>" `
+              type: 'file',
+              action: 'save',
+              to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+              file: this
             });
             this.writeSync(result, {
               path: savePath
@@ -622,7 +627,7 @@ class SScssFile extends __SFile implements ISScssFile {
 
           if (params.watch) {
             emit('log', {
-              value: `<blue>Watching for changes...</blue>`
+              value: `<blue>[watch]</blue> Watching for changes...`
             });
           }
 
@@ -630,7 +635,7 @@ class SScssFile extends __SFile implements ISScssFile {
         } else {
           if (params.watch) {
             emit('log', {
-              value: `<blue>Watching for changes...</blue>`
+              value: `<blue>[watch]</blue> Watching for changes...`
             });
           }
 

@@ -342,6 +342,9 @@ function applyInterface(ctx: any, name: string, on: any = null) {
       __deepMerge(ctx, res.value);
       return ctx;
     } else {
+      // if (typeof interfaceObj.on !== 'string') {
+      //   nativeConsole.trace('COCO', interfaceObj.on);
+      // }
       res = interfaceObj.class.apply(onValue, {
         id: applyId,
         complete: true,
@@ -355,7 +358,7 @@ function applyInterface(ctx: any, name: string, on: any = null) {
         ctx[interfaceObj.on] = __deepMerge(ctx[interfaceObj.on], res.value);
         return ctx[interfaceObj.on];
       } else if (ctx[name] !== undefined) {
-        ctx[name] = __deepMerge(ctx[name], res.value);
+        // ctx[name] = __deepMerge(ctx[name], res.value);
         return ctx[name];
       } else {
         throw `You try to apply the interface "<yellow>${interfaceObj.class.name}</yellow>" on a data "<cyan>${interfaceObj.on}</cyan>" that seems to be inexistant`;

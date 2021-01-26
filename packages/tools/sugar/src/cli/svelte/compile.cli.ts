@@ -6,7 +6,9 @@ function compileSvelte(stringArgs = '') {
   const pro = new SSvelteCompileProcess(
     {},
     {
-      stdio: 'inherit'
+      process: {
+        stdio: 'inherit'
+      }
     }
   );
   pro.run(stringArgs);

@@ -4,7 +4,7 @@ import __blessed from 'neo-blessed';
 import __SBlessedComponent from '../../blessed/SBlessedComponent';
 import __deepMerge from '../../object/deepMerge';
 import __SBlessedOutput from '../../blessed/SBlessedOutput';
-import __parseHtml from '../../terminal/parseHtml';
+import __parseHtml from '../../console/parseHtml';
 
 /**
  * @name            SSugarAppModuleTerminalUi

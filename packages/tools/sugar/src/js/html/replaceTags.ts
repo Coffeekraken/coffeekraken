@@ -34,7 +34,6 @@ function replaceTags(text, tags) {
   let oneLineText = text.replace(/\r\n/g, '|rn|');
   oneLineText = oneLineText.replace(/\n/g, '|n|');
   oneLineText = oneLineText.replace(/\r/g, '|r|');
-
   // loop on the tags
   Object.keys(tags).forEach((tagName) => {
     // create the match regex

@@ -141,7 +141,11 @@ class SBlessedComponent extends __blessed.box implements ISBlessedComponent {
         container: true,
         framerate: null,
         attach: undefined,
-        blessed: {}
+        blessed: {
+          scrollable: true,
+          mouse: true,
+          keys: true
+        }
       },
       settings
     );
@@ -200,7 +204,7 @@ class SBlessedComponent extends __blessed.box implements ISBlessedComponent {
       this.setFramerate(settings.framerate);
     }
 
-    if (this._settings.attach !== false && SBlessedComponent.screen) {
+    if (this._settings.attach === true && SBlessedComponent.screen) {
       SBlessedComponent.screen.append(this);
     }
 

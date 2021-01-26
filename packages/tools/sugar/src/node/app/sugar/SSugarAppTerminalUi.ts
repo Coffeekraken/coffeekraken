@@ -6,7 +6,7 @@ import __SBlessedComponent from '../../blessed/SBlessedComponent';
 import __sugarHeading from '../../ascii/sugarHeading';
 import __sugarConfig from '../../config/sugar';
 import __blessed from 'blessed';
-import __parseHtml from '../../terminal/parseHtml';
+import __parseHtml from '../../console/parseHtml';
 import __countLine from '../../string/countLine';
 import __SBlessedStdio from '../../blessed/stdio/SBlessedStdio';
 import __color from '../../color/color';

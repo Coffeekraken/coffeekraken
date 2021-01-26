@@ -25,8 +25,12 @@ export interface ISTerminalStdioCtorSettings {
   terminalStdio?: ISTerminalStdioOptionalSettings;
 }
 
-export interface ISTerminalStdioOptionalSettings {}
-export interface ISTerminalStdioSettings {}
+export interface ISTerminalStdioOptionalSettings {
+  actionPrefix?: boolean;
+}
+export interface ISTerminalStdioSettings {
+  actionPrefix: boolean;
+}
 
 export interface ISTerminalStdio {}
 
@@ -63,7 +67,10 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
       sources,
       __deepMerge(
         {
-          terminalStdio: {}
+          terminalStdio: {
+            actionPrefix: true,
+            icons: true
+          }
         },
         settings || {}
       )
@@ -84,13 +91,22 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _log(logObj, component) {
-    console.log('COCO');
-    return component.render(logObj);
+    console.log(component.render(logObj, this._settings));
   }
 }
 
 import __defaultTerminalStdioComponent from './components/defaultTerminalStdioComponent';
+import __headingTerminalStdioComponent from './components/headingTerminalStdioComponent';
+import __separatorTerminalStdioComponent from './components/separatorTerminalStdioComponent';
+import __errorTerminalStdioComponent from './components/errorTerminalStdioComponent';
+import __fileTerminalStdioComponent from './components/fileTerminalStdioComponent';
+import __warningTerminalStdioComponent from './components/warningTerminalStdioComponent';
 
 STerminalStdio.registerComponent(__defaultTerminalStdioComponent);
+STerminalStdio.registerComponent(__separatorTerminalStdioComponent);
+STerminalStdio.registerComponent(__headingTerminalStdioComponent);
+STerminalStdio.registerComponent(__errorTerminalStdioComponent);
+STerminalStdio.registerComponent(__fileTerminalStdioComponent);
+STerminalStdio.registerComponent(__warningTerminalStdioComponent);
 
 export default STerminalStdio;

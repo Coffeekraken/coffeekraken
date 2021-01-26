@@ -4,7 +4,7 @@ import __copy from '../clipboard/copy';
 import __isChildProcess from '../is/childProcess';
 import __packageRoot from '../path/packageRoot';
 import __SError from '../error/SError';
-import __parseHtml from '../terminal/parseHtml';
+import __parseHtml from '../console/parseHtml';
 import __keypress from 'keypress';
 import __hotkey from '../keyboard/hotkey';
 import __toString from '../string/toString';
@@ -71,14 +71,12 @@ function __handleMainProcessErrors(error) {
       const stringErrorReg = /\s?message:\s?((.|\n)*)\s?name:\s/gm;
       const stringErrorMatches = error.match(stringErrorReg);
       console.log(error);
-      return;
     } else if (typeof error === 'object' && error.name && error.message) {
       console.log([error.name, error.message, error.stack].join('\n\n'));
-      return;
     } else {
       console.log(__toString(error));
-      return;
     }
+    process.exit(1);
   }, 50);
 }
 export = handleError;

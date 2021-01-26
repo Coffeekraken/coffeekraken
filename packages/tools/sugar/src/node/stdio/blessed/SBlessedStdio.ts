@@ -19,15 +19,13 @@ import __parseHtml from '../../console/parseHtml';
 import __countLine from '../../string/countLine';
 import __chalk from 'chalk';
 import __minimatch from 'minimatch';
+import __SStdio from '../SStdio';
 
+import { ILog } from '../../../log/log';
 import { ISStdio } from '../SStdio';
 import __SBlessedComponent, {
   ISBlessedComponent
 } from '../../blessed/SBlessedComponent';
-import __SDefaultBlessedStdioComponent from './components/SDefaultBlessedStdioComponent';
-import __SErrorBlessedStdioComponent from './components/SErrorBlessedStdioComponent';
-import __SWarningBlessedStdioComponent from './components/SWarningBlessedStdioComponent';
-import __SHeadingBlessedStdioComponent from './components/SHeadingBlessedStdioComponent';
 import {
   ISBlessedStdioComponentCtor,
   ISBlessedStdioComponentSettings
@@ -37,6 +35,7 @@ import {
  * @name                  SBlessedStdio
  * @namespace           sugar.node.blessed.Stdio
  * @type                  Class
+ * @extends             SStdio
  * @wip
  *
  * This class is a simple SPanel extended one that accesp an SStdio instance
@@ -88,61 +87,17 @@ export interface ISBlessedStdioCtor {
 
 export interface ISBlessedStdio extends ISBlessedComponent, ISStdio {}
 
-class SBlessedStdio extends __SBlessedComponent implements ISBlessedStdio {
+class SBlessedStdio extends __SStdio implements ISBlessedStdio {
   /**
-   * @name          registeredComponents
-   * @type          Object<SBlessedStdioComponent>
-   * @static
+   * @name        $container
+   * @type        SBlessedComponent
    *
-   * Store the registered Stdio components
+   * Store the main blessed container for this blessed stdio instance
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static registeredComponents = {};
-
-  /**
-   * @name          registerComponent
-   * @type          Function
-   * @static
-   *
-   * This static method allows you to register a new Stdio component
-   * that you will be able to use then through the "type" property of
-   * the logObj passed to the SBlessedStdio instance.
-   *
-   * @param     {ISBlessedStdioComponentCtor}      component     The component you want to register
-   * @param     {string}      [as=null]           Specify the id you want to use for this component. Overrides the static "id" property of the component itself
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  static registerComponent(
-    component: ISBlessedStdioComponentCtor,
-    settings?: ISBlessedStdioComponentSettings,
-    as?: string
-  ) {
-    // make sure this component has an "id" specified
-    if (component.id === undefined && as === null) {
-      throw `Sorry but you try to register a component that does not have a built-in static "id" property and you don't have passed the "as" argument to override it...`;
-    }
-    // save the component inside the stack
-    SBlessedStdio.registeredComponents[as || component.id || 'default'] = {
-      component,
-      settings: settings || {},
-      as
-    };
-  }
-
-  /**
-   * @name      stack
-   * @type      Object[]
-   *
-   * Store all the "containers" that handle components etc...
-   *
-   * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  stack: Object[] = [];
+  public $container: __SBlessedComponent;
 
   /**
    * @name          constructor
@@ -156,60 +111,30 @@ class SBlessedStdio extends __SBlessedComponent implements ISBlessedStdio {
   constructor(sources, settings = {}) {
     // extends SPanel
     super(
+      sources,
       __deepMerge(
         {
-          filter: null,
-          maxItems: -1,
-          maxItemsByGroup: 1,
-          spaceBetween: 0,
-          spaceAround: 0,
-          events: [
-            'log',
-            '*.log',
-            'warn',
-            '*.warn',
-            'error',
-            '*.error',
-            'reject',
-            '*.reject',
-            'resolve',
-            '*.resolve'
-          ],
-          mapTypesToEvents: {
-            heading: [],
-            error: [
-              'error',
-              '*.error',
-              'reject',
-              '*.reject',
-              'cancel',
-              '*.cancel'
-            ],
-            warning: ['warn', '*.warn']
-          },
-          metas: {
-            spaceRight: 1,
-            width: 9,
-            time: false
-          },
-          blessed: {
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            width: '100%',
-            height: '100%',
-            mouse: true,
-            keys: true,
-            scrollable: true,
-            alwaysScroll: true,
-            scrollbar: {
-              ch: ' ',
-              inverse: true
-            },
-            style: {
+          blessedStdio: {
+            actionPrefix: true,
+            blessed: {
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              width: '100%',
+              height: '100%',
+              mouse: true,
+              keys: true,
+              scrollable: true,
+              alwaysScroll: true,
               scrollbar: {
-                bg: 'yellow'
+                ch: ' ',
+                inverse: true
+              },
+              style: {
+                scrollbar: {
+                  bg: 'yellow'
+                }
               }
             }
           }
@@ -218,88 +143,26 @@ class SBlessedStdio extends __SBlessedComponent implements ISBlessedStdio {
       )
     );
 
-    this._sources = Array.isArray(sources) ? sources : [sources];
-
-    // listen for resizing
-    this.on('resize', () => {
-      clearTimeout(this._resizeTimeout);
-      this._resizeTimeout = setTimeout(() => {
-        // this._applyTops();
-      }, 1000);
+    this.$container = new __SBlessedComponent({
+      screen: true,
+      attach: true,
+      blessed: this._settings.blessedStdio.blessed || {}
     });
 
-    this._sources.forEach((s) => {
-      // subscribe to the process
-      this.registerSource(s);
-    });
+    // // listen for resizing
+    // this.on('resize', () => {
+    //   clearTimeout(this._resizeTimeout);
+    //   this._resizeTimeout = setTimeout(() => {
+    //     // this._applyTops();
+    //   }, 1000);
+    // });
 
-    this._logsBuffer = [];
-    this.on('attach', () => {
-      this._logBuffer();
-    });
+    // this._logsBuffer = [];
+    // this.on('attach', () => {
+    //   this._logBuffer();
+    // });
 
     this._logsEncryptedStack = [];
-  }
-
-  /**
-   * @name          _logBuffer
-   * @type          Function
-   * @private
-   *
-   * This method simply take the buffered logs and log them in the feed
-   *
-   * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _logBuffer() {
-    this._logsBuffer = this._logsBuffer.filter((log) => {
-      this.log(log);
-      return false;
-    });
-  }
-
-  /**
-   * @name          registerSource
-   * @type          Function
-   *
-   * This method simply listen to the process and log the values getted
-   * from it into the panel
-   *
-   * @param     {SPromise}      source        The source to register
-   * @param     {ISBlessedStdioSettings}     [settings={}]
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  registerSource(source, settings: ISBlessedStdioSettings = {}) {
-    settings = __deepMerge(this._settings, settings) as ISBlessedStdioSettings;
-    // subscribe to data
-    source.on((settings.events || []).join(','), (data, metas) => {
-      // protection
-
-      if (data === undefined || data === null) return;
-      // handle the type depending on the passed stack
-      const types = Object.keys(settings.mapTypesToEvents);
-      for (let i = 0; i < types.length; i++) {
-        const stacks = settings.mapTypesToEvents[types[i]];
-        const stacksGlob =
-          Array.isArray(stacks) && stacks.length
-            ? `*(${stacks.join('|')})`
-            : stacks;
-        if (stacksGlob.length && __minimatch(metas.event, stacksGlob)) {
-          if (typeof data !== 'object') {
-            data = {
-              type: types[i],
-              value: data
-            };
-          } else if (!data.type) {
-            data.type = types[i];
-          }
-          break;
-        }
-      }
-
-      this.log(data);
-    });
   }
 
   /**
@@ -313,16 +176,18 @@ class SBlessedStdio extends __SBlessedComponent implements ISBlessedStdio {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   clear() {
-    this._isClearing = true;
-    // remove all items from the display list
-    this.children.forEach(($component) => {
-      $component.detach();
-    });
-    // reset the stack
-    this.setContent('');
-    this.stack = [];
-    this._isClearing = false;
+    // this._isClearing = true;
+    // // remove all items from the display list
+    // this.children.forEach(($component) => {
+    //   $component.detach();
+    // });
+    // // reset the stack
+    // this.setContent('');
+    // this.stack = [];
+    // this._isClearing = false;
   }
+
+  stack: any[] = [];
 
   /**
    * @name          log
@@ -334,139 +199,33 @@ class SBlessedStdio extends __SBlessedComponent implements ISBlessedStdio {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _currentModuleId = null;
-
-  async log(...args) {
-    if (!this.isDisplayed()) {
-      this._logsBuffer = [...this._logsBuffer, ...args];
-      return;
-    }
-
-    const logs = __parseAndFormatLog(args);
-
+  async _log(logObj: ILog, component) {
     // @ts-ignore
-    for (let i = 0; i < logs.length; i++) {
-      const logObj = logs[i];
-      let $lastContainer;
-      // clear
-      if (logObj.clear === true) {
-        this.clear();
-      } else {
-        $lastContainer = this.stack.length ? this.stack.pop() : undefined;
-      }
-
-      // make sure the wanted component declared in "type" is registered
-      // otherwise, fallback to "default"
-      const type =
-        SBlessedStdio.registeredComponents[logObj.type] !== undefined
-          ? logObj.type
-          : 'default';
-      // instanciate a new component
-      const $component = new SBlessedStdio.registeredComponents[type].component(
-        logObj,
-        SBlessedStdio.registeredComponents[type].settings
-      );
-
-      // container
-      const $container = __blessed.box({
-        width: `100%-${this._settings.spaceAround * 2}`,
-        top: 0,
-        left: this._settings.spaceAround,
-        scrollable: true,
-        style: {
-          // bg: 'cyan'
-        }
-      });
-      let $metas,
-        metasHeight = 0;
-
-      // build metas
-      const metasObj: ISBlessedStdioMetas = __deepMerge(
-        this._settings.metas,
-        logObj.metas
-      ) as ISBlessedStdioMetas;
-      if (metasObj !== undefined) {
-        let content = [metasObj.content || ''];
-        if (metasObj.time === true) {
-          const now = new Date();
-          let hours: any = now.getHours(),
-            minutes: any = now.getMinutes(),
-            seconds: any = now.getSeconds();
-          if (hours < 10) hours = `0${hours}`;
-          if (minutes < 10) minutes = `0${minutes}`;
-          if (seconds < 10) seconds = `0${seconds}`;
-          content = [
-            `<cyan>${hours + ':' + minutes + ':' + seconds}</cyan>`,
-            metasObj.content || ''
-          ];
-        }
-        content = content.map((c) => {
-          c = __parseHtml(c);
-          c = ' '.repeat(metasObj.width - 1 - __countLine(c.trim())) + c;
-          return c;
-        });
-
-        content = content.filter((c) => c.trim() !== '');
-
-        metasHeight = content.length;
-
-        if (content.length > 0) {
-          $metas = __blessed.box({
-            content: content.join('\n'),
-            width: metasObj.width,
-            height: 'shrink',
-            top: 0,
-            left: 0,
-            style: {
-              // bg: 'red'
-            }
-          });
-        }
-      }
-
-      if (metasObj !== undefined && $metas !== undefined) {
-        $component.left = metasObj.width + metasObj.spaceRight;
-      }
-
-      $container.append($component);
-      if ($metas !== undefined) {
-        $container.append($metas);
-        $container.$metas = $metas;
-      }
-      $container.$component = $component;
-
-      // append the log into the stack
-      this.append($container);
-      this.stack.push($container);
-
-      // calculate the height to apply
-      let contentHeight = 0;
-      try {
-        contentHeight = $component.getScrollHeight();
-      } catch (e) {}
-      let containerHeight =
-        contentHeight > metasHeight ? contentHeight : metasHeight;
-
-      // append the component to the feed
-      if ($lastContainer !== undefined) {
-        $container.top =
-          // @ts-ignore
-          $lastContainer.top +
-          // @ts-ignore
-          $lastContainer.getScrollHeight() +
-          this._settings.spaceBetween;
-      }
-      $container.height = containerHeight;
+    let $lastComponent;
+    // clear
+    if (logObj.clear === true) {
+      this.clear();
+    } else {
+      $lastComponent = this.stack.length ? this.stack.pop() : undefined;
     }
+
+    const type = logObj.type || 'default';
+    const $component = component.render(logObj, this._settings);
+    this.stack.push($component);
+    if ($lastComponent) {
+      $component.top = $lastComponent.top + $lastComponent.realHeight;
+    }
+    this.$container.append($component);
+    $component.height = $component.realHeight;
 
     // scroll to bottom
     clearTimeout(this._updateTimeout);
     this._updateTimeout = setTimeout(() => {
       try {
-        this.setScrollPerc(100);
+        this.$container.setScrollPerc(100);
       } catch (e) {}
       // update display
-      this.update();
+      this.$container.update();
     }, 200);
   }
 
@@ -487,10 +246,19 @@ class SBlessedStdio extends __SBlessedComponent implements ISBlessedStdio {
 }
 
 // register default components
-SBlessedStdio.registerComponent(__SDefaultBlessedStdioComponent);
-SBlessedStdio.registerComponent(__SErrorBlessedStdioComponent);
-SBlessedStdio.registerComponent(__SWarningBlessedStdioComponent);
-SBlessedStdio.registerComponent(__SHeadingBlessedStdioComponent);
+import __defaultBlessedStdioComponent from './components/defaultBlessedStdioComponent';
+import __errorBlessedStdioComponent from './components/errorBlessedStdioComponent';
+import __fileBlessedStdioComponent from './components/fileBlessedStdioComponent';
+import __headingBlessedStdioComponent from './components/headingBlessedStdioComponent';
+import __separatorBlessedStdioComponent from './components/separatorBlessedStdioComponent';
+import __warningBlessedStdioComponent from './components/warningBlessedStdioComponent';
+
+SBlessedStdio.registerComponent(__defaultBlessedStdioComponent);
+SBlessedStdio.registerComponent(__errorBlessedStdioComponent);
+SBlessedStdio.registerComponent(__fileBlessedStdioComponent);
+SBlessedStdio.registerComponent(__headingBlessedStdioComponent);
+SBlessedStdio.registerComponent(__separatorBlessedStdioComponent);
+SBlessedStdio.registerComponent(__warningBlessedStdioComponent);
 
 const cls: ISBlessedStdioCtor = SBlessedStdio;
 

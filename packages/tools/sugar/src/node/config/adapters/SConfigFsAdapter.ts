@@ -5,7 +5,7 @@ import __deepMerge from '../../object/deepMerge';
 import __writeFileSync from '../../fs/writeFileSync';
 import __diff from '../../object/diff';
 import __SConfigAdapter from './SConfigAdapter';
-import __localDir from '../../fs/localDir';
+import __localDir from '../../path/localDir';
 
 /**
  * @name                  SConfigFsAdapter

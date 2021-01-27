@@ -213,7 +213,7 @@ class SPromise extends __SClass.extends(Promise) {
             ? executorFnOrSettings
             : null;
         if (executorFn) {
-          resolve(executorFn(_api));
+          executorFn(_api);
         }
       }
     );

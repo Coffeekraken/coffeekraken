@@ -18,14 +18,15 @@ module.exports = {
      * @name              outputDir
      * @namespace         config.svelte.compile
      * @type              String
-     * @default           [config.storage.distDir]/js
+     * @default           undefined
      *
-     * Specify the destination folder where to put the compiled files in
+     * Specify the destination folder where to put the compiled files in.
+     * If undefined, the files will be saved alongside the source one.
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outputDir: `[config.storage.distDir]/js`,
+    outputDir: undefined,
 
     /**
      * @name            rootDir

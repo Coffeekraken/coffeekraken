@@ -1,0 +1,1 @@
+{"version":3,"names":[],"sources":["component.svelte"],"sourcesContent":["<script>\n\tconsole.log('Hello world');\n</script>\n\n<style>\n\th1 {\n\t\tbackground: red;\n\t}\n</style>\n\n<div>\n\t<h1>Hello worlc</h1>\n</div>"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CACC,OAAO,CAAC,GAAG,CAAC,aAAa;;;;;;;;;;;;;;;;;;;;;;;;;"}

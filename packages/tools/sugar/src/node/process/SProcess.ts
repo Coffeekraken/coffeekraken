@@ -13,6 +13,7 @@ import __SIpcClient from '../ipc/SIpcClient';
 import __SError from '../error/SError';
 import __buildCommandLine from '../cli/buildCommandLine';
 import __parseArgs from '../cli/parseArgs';
+import __argsToObject from '../cli/argsToObject';
 import __childProcess from 'child_process';
 import __stdio from '../stdio/stdio';
 import __stackTrace from 'stack-trace';
@@ -321,21 +322,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     this._initialParams = initialParams;
 
     // get the definition from interface or settings
-
     this.paramsInterface = this.getInterface('params');
     if (this.processSettings.paramsInterface !== undefined)
       this.paramsInterface = this.processSettings.paramsInterface;
-
-    // if ((<any>this.constructor).interface !== undefined) {
-    //   // console.log((<any>this.constructor).interface.definition);
-    //   this._initialParams = (<any>this.constructor).interface.apply(
-    //     this._initialParams,
-    //     {
-    //       complete: true,
-    //       throwOnMissingRequiredProp: true
-    //     }
-    //   ).value;
-    // }
 
     // handle process exit
     __onProcessExit(async (state) => {
@@ -426,9 +415,11 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     if (this.currentExecutionObj !== undefined) {
       if (processSettings.throw === true) {
-        throw `Sorry but you can not execute multiple process of the "<yellow>${
-          this.name || this.id || this.constructor.name
-        }</yellow>" SProcess instance...`;
+        throw new Error(
+          `Sorry but you can not execute multiple process of the "<yellow>${
+            this.name || this.id || this.constructor.name
+          }</yellow>" SProcess instance...`
+        );
       }
       return;
     }
@@ -467,43 +458,19 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     await __wait(50);
 
-    let paramsObj = paramsOrStringArgs;
-    if (typeof paramsObj === 'string') {
-      paramsObj = __parseArgs(paramsObj, {
-        definition: {
-          ...(this.paramsInterface !== undefined
-            ? this.paramsInterface.definition
-            : {}),
-          processPath: {
-            type: 'String'
-          }
+    let paramsObj = __argsToObject(paramsOrStringArgs, {
+      definition: {
+        ...(this.paramsInterface !== undefined
+          ? this.paramsInterface.definition
+          : {}),
+        processPath: {
+          type: 'String'
         }
-      });
-    } else if (typeof paramsObj === 'object') {
-      paramsObj = __completeArgsObject(paramsObj, {
-        definition:
-          this.paramsInterface !== undefined
-            ? this.paramsInterface.definition
-            : {}
-      });
-    }
+      }
+    });
 
     // save current process params
     this._params = Object.assign({}, paramsObj);
-    // apply the interface on the params
-    // if ((<any>this.constructor).interface !== undefined) {
-    //   const interfaceRes = (<any>this.constructor).interface.apply(
-    //     this._params,
-    //     {
-    //       throwOnError: true
-    //     }
-    //   );
-    //   if (interfaceRes.hasIssues()) {
-    //     this.log({
-    //       value: interfaceRes.toString()
-    //     });
-    //   }
-    // }
 
     // update state
     this.state('running');
@@ -540,20 +507,20 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       });
     } else {
       // handle ipc connection
-      let ipcClient;
-      if (__isChildProcess() && __SIpcClient.hasParentServer()) {
-        ipcClient = await __SIpcClient.connectToParent();
-      }
+      // let ipcClient;
+      // if (__isChildProcess() && __SIpcClient.hasParentServer()) {
+      //   ipcClient = await __SIpcClient.connectToParent();
+      // }
 
       // run the actual process using the "process" method
       this._processPromise = (<any>this).process(this._params, settings);
 
-      if (__isChildProcess() && ipcClient) {
-        this._processPromise &&
-          this._processPromise.on('*', (data, metas) => {
-            ipcClient.emit(metas.event, data);
-          });
-      }
+      // if (__isChildProcess() && ipcClient) {
+      //   this._processPromise &&
+      //     this._processPromise.on('*', (data, metas) => {
+      //       ipcClient.emit(metas.event, data);
+      //     });
+      // }
     }
 
     this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {
@@ -605,7 +572,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     // listen for "data" and "log" events
     this._processPromise &&
-      this._processPromise.on('log,log', (data, metas) => {
+      this._processPromise.on('log', (data, metas) => {
         if (this.currentExecutionObj) {
           this.currentExecutionObj.stdout.push(data);
         }
@@ -644,7 +611,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       );
 
     this._processPromise &&
-      this._processPromise.on('finally', () => {
+      this._processPromise.on('finally', (value, metas) => {
         // @ts-ignore
         if (this.processSettings.exitAtEnd === true) {
           process.exit();
@@ -662,7 +629,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         value
       ) === -1
     ) {
-      throw new __SError(
+      throw new Error(
         `Sorry but the "<yellow>state</yellow>" property setted to "<magenta>${__toString(
           value
         )}</magenta>" of your "<cyan>${

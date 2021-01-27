@@ -1,14 +1,14 @@
 // @ts-nocheck
 
 import SProcess from '../../process/SProcess';
-import ISCompileTsProcess, {
-  ISCompileTsProcessParams,
-  ISCompileTsProcessSettings,
-  ISCompileTsProcessCtor
-} from './interface/ISCompileTsProcess';
-import __SCompileTsProcessInterface from './interface/SCompileTsProcessInterface';
-
 import __STsCompiler from './STsCompiler';
+
+import __STsCompilerParamsInterface from './interface/STsCompilerParamsInterface';
+import { ISTsCompilerParams } from './STsCompiler';
+import {
+  ISProcessSettings,
+  ISProcessOptionalSettings
+} from '../../process/SProcess';
 
 /**
  * @name            STypescriptToJsProcess
@@ -26,11 +26,21 @@ import __STsCompiler from './STsCompiler';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-const Cls: ISCompileTsProcessCtor = class SCompileTsProcess
-  extends SProcess
-  implements ISCompileTsProcess {
+
+export interface ISTsCompileProcessOptionalSettings
+  extends ISProcessOptionalSettings {}
+export interface ISTsCompileProcessSettings extends ISProcessSettings {}
+
+class STsCompilerProcess extends SProcess implements ISCompileTsProcess {
   static interfaces = {
-    this: __SCompileTsProcessInterface
+    // initialParams: {
+    //   apply: false,
+    //   class: __SSvelteCompilerParamsInterface
+    // },
+    params: {
+      apply: false,
+      class: __STsCompilerParamsInterface
+    }
   };
 
   /**
@@ -66,17 +76,13 @@ const Cls: ISCompileTsProcessCtor = class SCompileTsProcess
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   process(
-    params?: ISCompileTsProcessParams,
+    params?: ISTsCompilerParams,
     settings?: ISCompileTsProcessSettings
   ): Promise<any> {
-    const input = params.input;
-    delete params.input;
-
-    return this._tsCompiler.compile(input, {
-      ...settings,
-      ...params
-    });
+    this.processSettings.exitAtEnd = !params.watch;
+    const promise = this._tsCompiler.compile(params, settings);
+    return promise;
   }
-};
+}
 
-export = Cls;
+export default STsCompilerProcess;

@@ -89,7 +89,6 @@ interface ISSvelteFileCtorSettings {
 }
 
 interface ISSvelteFile {
-  _fileCache: __SFileCache;
   compile(
     params: ISSvelteCompilerParams,
     settings?: ISSvelteFileOptionalSettings
@@ -102,11 +101,12 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
     compilerParams: {
       apply: false,
       class: __SSvelteCompilerParamsInterface
+    },
+    settings: {
+      apply: true,
+      on: '_settings',
+      class: SSvelteFileCtorSettingsInterface
     }
-    // _settings: {
-    //   apply: true,
-    //   class: SSvelteFileCtorSettingsInterface
-    // }
   };
 
   /**
@@ -122,11 +122,6 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
   get svelteFileSettings(): ISSvelteFileSettings {
     return (<any>this._settings).svelteFile;
   }
-
-  _fileCache: __SFileCache;
-
-  static COMPILED_SVELTE: any = {};
-  static FILES: any = {};
 
   /**
    * @name        constructor
@@ -149,11 +144,6 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
         settings
       )
     );
-
-    // store this instance in a stack to avoid creating multiple instances of the same file
-    SSvelteFile.FILES[this.path] = this;
-
-    this._fileCache = new __SFileCache(this.constructor.name);
   }
 
   /**
@@ -283,17 +273,22 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
           });
         });
 
-        // nativeConsole.log(result);
+        // nativeConsole.log(result.js.map.toString());
 
         // check if need to save
-        if (params.save && params.outputDir) {
+        if (params.save) {
           // build the save path
-          const savePath = __path.resolve(
-            params.outputDir,
-            this.path
-              .replace(`${params.rootDir}/`, '')
-              .replace(/\.svelte$/, '.js')
-          );
+          let savePath;
+          if (params.outputDir === undefined) {
+            savePath = this.path.replace(/\.svelte$/, '.js');
+          } else {
+            savePath = __path.resolve(
+              params.outputDir,
+              this.path
+                .replace(`${params.rootDir}/`, '')
+                .replace(/\.svelte$/, '.js')
+            );
+          }
           emit('log', {
             type: 'file',
             file: this,
@@ -303,6 +298,19 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
           this.writeSync(result.js.code, {
             path: savePath
           });
+          if (params.map) {
+            this.writeSync(result.js.map.toString(), {
+              path: savePath.replace(/\.js$/, '.js.map')
+            });
+            emit('log', {
+              type: 'file',
+              action: 'saved',
+              to: savePath
+                .replace(/\.js$/, '.js.map')
+                .replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+              file: this
+            });
+          }
 
           // notify end
           const time = duration.end();
@@ -315,10 +323,6 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
           });
         }
 
-        // emit('log', {
-        //   value: `<green>[success]</green> File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
-        // });
-
         if (params.watch) {
           emit('log', {
             value: `<blue>[watch] </blue>Watching for changes...`
@@ -327,54 +331,12 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
 
         return resolve(result);
       } catch (e) {
-        console.log(e);
-        // .log(e);
         return reject(e.toString());
       }
 
       return true;
     });
   }
-
-  update() {
-    super.update();
-  }
 }
-
-// import getExtendsStack from '../class/getExtendsStack';
-
-// class Sup {
-//   static coco = {
-//     hello: 'world'
-//   };
-//   constructor() {
-//     console.log(
-//       getExtendsStack(this, {
-//         includeBaseClass: true
-//       })
-//     );
-//   }
-// }
-
-// class Middle extends Sup {
-//   static coco = {
-//     plop: 'OPOP',
-//     hello: 'HELLO'
-//   };
-//   constructor() {
-//     super();
-//   }
-// }
-
-// class Sub extends Middle {
-//   static coco = {
-//     plop: 'rop',
-//     hello: 'hello'
-//   };
-//   constructor() {
-//     super();
-//   }
-// }
-// const sub = new Sub();
 
 export default SSvelteFile;

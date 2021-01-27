@@ -12,6 +12,12 @@ import __SError from '../error/SError';
 import __packageRoot from '../path/packageRoot';
 import __ensureDirSync from './ensureDirSync';
 import __SInterface from '../interface/SInterface';
+import __tmpDir from '../path/tmpDir';
+import __localDir from '../path/localDir';
+import __rootDir from '../path/rootDir';
+import __srcDir from '../path/srcDir';
+import __distDir from '../path/distDir';
+import __cacheDir from '../path/cacheDir';
 
 /**
  * @name          SFileReadSettingsInterface
@@ -399,11 +405,38 @@ class SFile extends __SEventEmitter implements ISFile {
    * @type        String
    *
    * Store the full file path
+   * Some tokens can be used in the file path like:
+   * - %tmpDir: return the absolute tmp package directory path
+   * - %localDir: return the absolute .local package directory path
+   * - %cacheDir: return the absolute cache package directory path
+   * - %rootDir: return the absolute package root directory path
+   * - %srcDir: return the absolute source package directory path
+   * - %distDir: return the absolute dist package directory path
    *
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  path;
+  _path: string;
+  get path(): string {
+    let path = this._path;
+    path = path.replace('%tmpDir', __tmpDir());
+    path = path.replace('%localDir', __localDir());
+    path = path.replace('%cacheDir', __cacheDir());
+    path = path.replace('%rootDir', __rootDir());
+    path = path.replace('%srcDir', __srcDir());
+    path = path.replace('%distDir', __distDir());
+    path = path.replace(/\/\//gm, '/');
+
+    if (
+      !__path.isAbsolute(path) &&
+      this.fileSettings.cwd &&
+      !path.includes(this.fileSettings.cwd)
+    ) {
+      path = __path.resolve(this.fileSettings.cwd, path);
+    }
+
+    return path;
+  }
 
   /**
    * @name        cwd
@@ -432,6 +465,7 @@ class SFile extends __SEventEmitter implements ISFile {
   /**
    * @name        relPath
    * @type        String
+   * @get
    *
    * Store the path relative to the ```cwd``` property. To have access to this property, you MUST
    * specify the settings.cwd through the constructor
@@ -439,18 +473,23 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  relPath;
+  get relPath(): string {
+    return __path.relative(this.cwd, this.path);
+  }
 
   /**
    * @name        dirPath
    * @type        String
+   * @get
    *
    * Store the path to the folder where the file lives
    *
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  dirPath;
+  get dirPath(): string {
+    return __path.dirname(this.path);
+  }
 
   /**
    * @name        extension
@@ -504,28 +543,21 @@ class SFile extends __SEventEmitter implements ISFile {
       value: null
     });
 
-    if (this.fileSettings.cwd && !filepath.includes(this.fileSettings.cwd)) {
-      filepath = __path.resolve(this.fileSettings.cwd, filepath);
-    }
-
     // check if the file exists
     this.exists = __fs.existsSync(filepath);
 
+    // save the file path
+    this.cwd = this.fileSettings.cwd;
+    this._path = filepath;
+    this._name = __getFilename(filepath);
+    this.extension = __extension(this.path).toLowerCase();
+
     // check if need to check for the file existence or not...
     if (this.fileSettings.checkExistence && !this.exists) {
-      throw new __SError(
-        `The passed filepath "<cyan>${filepath}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`
+      throw new Error(
+        `The passed filepath "<cyan>${this.path}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`
       );
     }
-
-    this.cwd = this.fileSettings.cwd;
-    this.relPath = __path.relative(this.cwd, filepath);
-
-    // save the file path
-    this.path = filepath;
-    this._name = __getFilename(filepath);
-    this.extension = __extension(filepath).toLowerCase();
-    this.dirPath = __path.dirname(filepath);
 
     if (this.fileSettings.watch === true) {
       this.startWatch();

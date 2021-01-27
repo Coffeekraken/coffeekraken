@@ -75,12 +75,12 @@ export default function spawn(
       settings
     );
 
-    if (settings.ipc === true) {
-      ipcServer = await __SIpcServer.getGlobalServer();
-      ipcServer.on(`${uniquid}.*`, (data, metas) => {
-        emit(metas.stack.replace(uniquid + '.', ''), data);
-      });
-    }
+    // if (settings.ipc === true) {
+    //   ipcServer = await __SIpcServer.getGlobalServer();
+    //   ipcServer.on(`${uniquid}.*`, (data, metas) => {
+    //     emit(metas.stack.replace(uniquid + '.', ''), data);
+    //   });
+    // }
 
     const stderr = [],
       stdout = [];
@@ -101,7 +101,7 @@ export default function spawn(
           ? 'ignore'
           : settings.stdio !== undefined
           ? settings.stdio
-          : null,
+          : 'pipe',
       env: {
         ...process.env,
         CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
@@ -117,19 +117,21 @@ export default function spawn(
       childProcess.kill();
     });
 
-    emit('start');
-
     // listen for errors etc...
     if (childProcess.stdout) {
       childProcess.stdout.on('data', (data) => {
         stdout.push(data.toString());
-        emit('log', data.toString());
+        emit('log', {
+          value: data.toString()
+        });
       });
     }
     if (childProcess.stderr) {
       childProcess.stderr.on('data', (data) => {
         stderr.push(data.toString());
-        emit('error', data.toString());
+        emit('error', {
+          value: data.toString()
+        });
       });
     }
 
@@ -138,7 +140,6 @@ export default function spawn(
         code,
         signal
       });
-
       if (stderr.length) {
         emit('close.error');
         reject(stderr.join('\n'));

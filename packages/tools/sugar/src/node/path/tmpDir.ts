@@ -1,14 +1,12 @@
 // @ts-nocheck
 
-import ITmpDir, { ITmpDirSettings } from './interface/ITmpDir';
-
 import __tmpDir from 'temp-dir';
 import __sugarConfig from '../config/sugar';
-import __ensureDirSync from './ensureDirSync';
+import __ensureDirSync from '../fs/ensureDirSync';
 
 /**
  * @name                            tmpDir
- * @namespace           sugar.node.fs
+ * @namespace           sugar.node.path
  * @type                            Function
  * @stable
  *
@@ -31,13 +29,22 @@ import __ensureDirSync from './ensureDirSync';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+export interface ITmpDirSettings {
+  scope?: 'local' | 'global';
+}
+
+export interface ITmpDir {
+  (settings?: ITmpDirSettings): string;
+}
+
 const fn: ITmpDir = function (settings: ITmpDirSettings = {}) {
   settings = {
     scope: 'local',
     ...settings
   };
   if (settings.scope === 'local') {
-    const tmpDir = __sugarConfig('storage.tempDir');
+    const tmpDir = __sugarConfig('storage.tmpDir');
     if (tmpDir !== undefined) {
       __ensureDirSync(tmpDir);
       return tmpDir;

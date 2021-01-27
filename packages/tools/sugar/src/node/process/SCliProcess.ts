@@ -40,9 +40,14 @@ export interface ISCliProcessCtorSettings {
   cliProcess?: ISCliProcessSettings;
 }
 
-export interface ISCliProcessOptionalSettings
-  extends ISProcessOptionalSettings {}
-export interface ISCliProcessSettings extends ISProcessSettings {}
+export interface ISCliProcessOptionalSettings {
+  definition?: any;
+  spawn?: any;
+}
+export interface ISCliProcessSettings {
+  definition: any;
+  spawn: any;
+}
 
 export interface ISCliProcessCtor {
   new (command: string, settings?: ISCliProcessSettings): ISCliProcess;
@@ -74,7 +79,7 @@ class SCliProcess extends __SProcess implements ISCliProcess {
    * @since     2.0.0
    *
    */
-  get cliProcessSettings() {
+  get cliProcessSettings(): ISCliProcessSettings {
     return (<any>this._settings).cliProcess;
   }
 
@@ -90,6 +95,7 @@ class SCliProcess extends __SProcess implements ISCliProcess {
    */
   constructor(command: string, settings: ISCliProcessCtorSettings = {}) {
     super(
+      {},
       __deepMerge(
         {
           cliProcess: {}
@@ -126,14 +132,15 @@ class SCliProcess extends __SProcess implements ISCliProcess {
 
     // build the command line
     const command = __buildCommandLine(this.command, params, {
-      definition: this.paramsInterface?.definition,
+      definition:
+        cliProcessSettings.definition || this.paramsInterface?.definition,
       alias: false
     });
 
     // @ts-ignore
     const pro = __spawn(command, [], {
       ipc: false,
-      ...(this.processSettings.spawnSettings || {})
+      ...(this.cliProcessSettings.spawn || this.processSettings.spawn || {})
     });
 
     // @ts-ignore

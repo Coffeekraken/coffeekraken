@@ -26,9 +26,9 @@ import {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-interface ISSvelteCompileProcessOptionalSettings
+export interface ISSvelteCompileProcessOptionalSettings
   extends ISProcessOptionalSettings {}
-interface ISSvelteCompileProcessSettings extends ISProcessSettings {}
+export interface ISSvelteCompileProcessSettings extends ISProcessSettings {}
 
 class SSvelteCompileProcess extends SProcess {
   static interfaces = {
@@ -120,4 +120,4 @@ class SSvelteCompileProcess extends SProcess {
   }
 }
 
-export = SSvelteCompileProcess;
+export default SSvelteCompileProcess;

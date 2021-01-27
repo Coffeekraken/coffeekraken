@@ -67,7 +67,7 @@ module.exports = {
   cacheDir: `[config.storage.localDir]/cache`,
 
   /**
-   * @name            tempDir
+   * @name            tmpDir
    * @namespace       config.storage
    * @type            String
    * @default         [config.storage.localDir]/cache
@@ -77,5 +77,5 @@ module.exports = {
    * @since         2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  tempDir: `[config.storage.localDir]/temp`
+  tmpDir: `[config.storage.localDir]/temp`
 };

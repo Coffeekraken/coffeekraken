@@ -28,6 +28,6 @@ export default {
       `<${color}>${character.repeat(process.stdout.columns)}</${color}>`
     );
 
-    return __parseHtml(logStrArray.join('\n'));
+    return __parseHtml(`\n${logStrArray.join('\n')}\n`);
   }
 };

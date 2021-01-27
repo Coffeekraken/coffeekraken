@@ -8,6 +8,7 @@ import __SSvelteFile from '../SSvelteFile';
 import __SPromise from '../../promise/SPromise';
 import __absolute from '../../path/absolute';
 import __isGlob from '../../is/glob';
+import __glob from 'glob';
 
 import __SSvelteCompilerParamsInterface from './interface/SSvelteCompilerParamsInterface';
 

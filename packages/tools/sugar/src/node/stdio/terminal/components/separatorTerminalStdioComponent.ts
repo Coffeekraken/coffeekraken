@@ -20,17 +20,12 @@ export default {
 
     const separator = logObj.separator ? logObj.separator.slice(0, 1) : '-';
     if (value) {
-      return;
-      '\n' +
-        `${value} ${separator.repeat(
-          process.stdout.columns - __countLine(value) - 1
-        )}`;
+      return `${value} ${separator.repeat(
+        process.stdout.columns - __countLine(value) - 1
+      )}`;
     } else {
-      return (
-        '\n' +
-        __parseHtml(
-          `<${color}>${separator.repeat(process.stdout.columns)}</${color}>`
-        )
+      return __parseHtml(
+        `<${color}>${separator.repeat(process.stdout.columns)}</${color}>`
       );
     }
   }

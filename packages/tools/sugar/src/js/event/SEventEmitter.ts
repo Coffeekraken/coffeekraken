@@ -142,6 +142,13 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         if (Array.isArray(res) && res.length === 2) {
           value = res[0];
           metas = res[1];
+        } else if (
+          typeof res === 'object' &&
+          res.value !== undefined &&
+          res.metas !== undefined
+        ) {
+          value = res.value;
+          metas = res.metas;
         } else {
           value = res;
         }

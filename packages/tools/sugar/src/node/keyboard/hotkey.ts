@@ -1,11 +1,10 @@
-// @ts-nocheck
-
 import __SPromise from '../promise/SPromise';
 import __uniqid from '../string/uniqid';
 import __keypress from 'keypress';
 import __activeSpace from '../core/activeSpace';
 // import __SIpc from '../ipc/SIpc';
 import __isChildProcess from '../is/childProcess';
+import __SInterface from '../interface/SInterface';
 
 /**
  * @name                hotkey
@@ -19,7 +18,7 @@ import __isChildProcess from '../is/childProcess';
  * @param        {String}       hotkey          The hotkey to detect
  * @param         {Object}      [settings={}]    An option object to configure your hotkey. Here's the list of available settings:
  * - once (false) {Boolean}: Specify if you want to detect the keyboard event just once
- * - splitKey (+) {String}: Specify the split key to use in the sequences like "ctrl+a"
+ * - splitChar (+) {String}: Specify the split key to use in the sequences like "ctrl+a"
  * - systemWide (false) {Boolean}: Specify if the listener have to listen for the application only events, or for the system level ones
  * @return      {SPromise}                       An SPromise instance on which you can register for "key" stack event
  *
@@ -27,6 +26,7 @@ import __isChildProcess from '../is/childProcess';
  * @todo      doc
  * @todo      tests
  * @todo      {Feature}       Add IPC support to allow listen for key press in child processes
+ * @todo      {Feature}       Add the system wide support
  *
  * @example         js
  * import hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
@@ -42,9 +42,32 @@ const hotkeyStack = {};
 let isListenerAlreadyAdded = false;
 let isSystemWideAlreadyAdded = false;
 
+export interface IHotkeyOptionalSettings {
+  once?: boolean;
+}
+export interface IHotkeySettings {
+  once: boolean;
+}
+
+export class HotkeySettingsInterface extends __SInterface {
+  static definition = {
+    once: {
+      type: 'Boolean',
+      description: 'Specify if you want to capture the hotkey just once',
+      default: false
+    },
+    splitChar: {
+      type: 'String',
+      description: 'Define the character to use to split shortcuts',
+      default: '+'
+    }
+  };
+}
+
 function _handleKeypress(ch, keyObj) {
   if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
     // process.stdin.pause();
+    // @ts-ignore
     process.emit('custom_exit', 'killed');
   }
 
@@ -52,17 +75,13 @@ function _handleKeypress(ch, keyObj) {
   Object.keys(hotkeyStack).forEach((id) => {
     const obj = hotkeyStack[id];
     if (!obj || !obj.key) return;
-    // check if an activeSpace is specified
-    if (obj.settings.disableWhenEditingForm) {
-      if (__activeSpace.is('**.form.*')) return;
-    }
-    if (obj.settings.activeSpace) {
-      if (!__activeSpace.is(obj.settings.activeSpace)) return;
-    }
-    // check if an "active" function exists
-    if (obj.settings.active && typeof obj.settings.active === 'function') {
-      if (!obj.settings.active(obj.key)) return;
-    }
+    // // check if an activeSpace is specified
+    // if (obj.settings.disableWhenEditingForm) {
+    //   if (__activeSpace.is('**.form.*')) return;
+    // }
+    // if (obj.settings.activeSpace) {
+    //   if (!__activeSpace.is(obj.settings.activeSpace)) return;
+    // }
 
     obj.key
       .toString()
@@ -70,12 +89,6 @@ function _handleKeypress(ch, keyObj) {
       .map((m) => m.trim())
       .forEach((key) => {
         if (ch && ch.toString() === key) {
-          obj.promise.emit('key', {
-            key,
-            ctrl: keyObj ? keyObj.ctrl : false,
-            meta: keyObj ? keyObj.meta : false,
-            shift: keyObj ? keyObj.shift : false
-          });
           obj.promise.emit('press', {
             key,
             ctrl: keyObj ? keyObj.ctrl : false,
@@ -89,19 +102,13 @@ function _handleKeypress(ch, keyObj) {
 
         let pressedKey = keyObj.name;
         if (keyObj.ctrl)
-          pressedKey = `ctrl${obj.settings.splitKey}${pressedKey}`;
+          pressedKey = `ctrl${obj.settings.splitChar}${pressedKey}`;
         if (keyObj.shift)
-          pressedKey = `shift${obj.settings.splitKey}${pressedKey}`;
+          pressedKey = `shift${obj.settings.splitChar}${pressedKey}`;
         if (keyObj.meta)
-          pressedKey = `alt${obj.settings.splitKey}${pressedKey}`;
+          pressedKey = `alt${obj.settings.splitChar}${pressedKey}`;
 
         if (pressedKey === key) {
-          obj.promise.emit('key', {
-            key,
-            ctrl: keyObj ? keyObj.ctrl : false,
-            meta: keyObj ? keyObj.meta : false,
-            shift: keyObj ? keyObj.shift : false
-          });
           obj.promise.emit('press', {
             key,
             ctrl: keyObj ? keyObj.ctrl : false,
@@ -113,51 +120,27 @@ function _handleKeypress(ch, keyObj) {
   });
 }
 
-function hotkey(key, settings = {}) {
-  // extends the settings
-  settings = {
-    once: false,
-    splitKey: '+',
-    systemWide: false,
-    activeSpace: null,
-    disableWhenEditingForm: true,
-    ipc: true,
-    ...settings
-  };
+function hotkey(key, settings?: IHotkeyOptionalSettings) {
+  const set: IHotkeySettings = HotkeySettingsInterface.apply(settings).value;
+
+  const promise = new __SPromise({
+    id: 'hotkey'
+  });
 
   if (!__isChildProcess()) {
     const uniqid = `hotkey.${__uniqid()}`;
 
-    if (!isListenerAlreadyAdded || !isSystemWideAlreadyAdded) {
-      if (settings.systemWide && !isSystemWideAlreadyAdded) {
-        isSystemWideAlreadyAdded = true;
-        // @TODO      implement system wide hotkeys
-        throw `System wide hotkeys are not implemented yet...`;
-
-        // // __ioHook.on('keydown', function (event) {
-        //
-        // //   __ioHook.start();
-        // // });
-        // __ioHook.registerShortcut([30], (keys) => {
-
-        // });
-        __ioHook.start();
-      } else if (!isListenerAlreadyAdded) {
-        isListenerAlreadyAdded = true;
-        __keypress(process.stdin);
-        process.stdin.on('keypress', _handleKeypress);
-        // process.stdin.setRawMode(true);
-        // process.stdin.resume();
-      }
+    if (!isListenerAlreadyAdded) {
+      isListenerAlreadyAdded = true;
+      __keypress(process.stdin);
+      process.stdin.on('keypress', _handleKeypress);
+      // process.stdin.setRawMode(true);
+      // process.stdin.resume();
     }
-
-    const promise = new __SPromise({
-      id: 'hotkey'
-    });
 
     promise
       .on('press', (key) => {
-        if (settings.once) {
+        if (set.once) {
           promise.cancel();
         }
       })
@@ -172,36 +155,11 @@ function hotkey(key, settings = {}) {
       promise,
       settings
     };
-
-    // return the promise
-    return promise;
   }
 
-  // else if (settings.ipc) {
-  //   const promise = new __SPromise({
-  //     id: 'hotkey'
-  //   });
-  //   // child process
-  //   __SIpc.on(`keypress.${key}`, (keyObj) => {
-  //     promise.emit('key', keyObj);
-  //     promise.emit('press', keyObj);
-  //   });
-  //   setTimeout(() => {
-  //     __SIpc.emit(`keypress`, {
-  //       key,
-  //       settings
-  //     });
-  //   }, 2000);
-  //   return promise;
-  // }
+  // return the promise
+  return promise;
 }
 
-// if (!__isChildProcess()) {
-//   __SIpc.on('keypress', (keyObj) => {
-//     hotkey(keyObj.key).on('press', (pressedKeyObj) => {
-//       __SIpc.emit(`keypress.${keyObj.key}`, pressedKeyObj);
-//     });
-//   });
-// }
-
-export = hotkey;
+export { HotkeySettingsInterface as SettingsInterface };
+export default hotkey;

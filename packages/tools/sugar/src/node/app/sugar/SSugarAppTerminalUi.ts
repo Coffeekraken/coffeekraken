@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import __path from 'path';
 import __upperFirst from '../../string/upperFirst';
 import __SBlessedComponent from '../../blessed/SBlessedComponent';
@@ -8,7 +7,7 @@ import __sugarConfig from '../../config/sugar';
 import __blessed from 'blessed';
 import __parseHtml from '../../console/parseHtml';
 import __countLine from '../../string/countLine';
-import __SBlessedStdio from '../../blessed/stdio/SBlessedStdio';
+import __SBlessedStdio from '../../stdio/blessed/SBlessedStdio';
 import __color from '../../color/color';
 import __hotkey from '../../keyboard/hotkey';
 import __packageJson from '../../package/json';

@@ -1,6 +1,5 @@
-// @ts-nocheck
+import __SInterface from '../../../interface/SInterface';
 
-const __SInterface = require('../../../interface/SInterface');
 /**
  * @name                SSugarAppModuleSettingsInterface
  * @namespace           sugar.node.ui.sugar.interface
@@ -17,6 +16,6 @@ const __SInterface = require('../../../interface/SInterface');
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SSugarAppModuleSettingsInterface extends __SInterface {
+export default class SSugarAppModuleSettingsInterface extends __SInterface {
   static definition = {};
-};
+}

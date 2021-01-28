@@ -12,7 +12,9 @@ import __glob from 'glob';
 
 import __SSvelteCompilerParamsInterface from './interface/SSvelteCompilerParamsInterface';
 
-export interface ISSvelteCompilerCtorSettings {}
+export interface ISSvelteCompilerCtorSettings {
+  svelteCompiler?: ISSvelteCompilerOptionalSettings;
+}
 export interface ISSvelteCompilerOptionalSettings {}
 export interface ISSvelteCompilerSettings {}
 
@@ -45,6 +47,33 @@ export interface ISSvelteCompilerOptionalParams {
 
 export interface ISSvelteCompiler extends ISCompiler {}
 
+/**
+ * @name                SSvelteCompiler
+ * @namespace           sugar.node.svelte
+ * @type                Class
+ * @extends             SCompiler
+ * @wip
+ *
+ * This class wrap the "svelte" compiler with some additional features which are:
+ *
+ * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
+ *
+ * @param         {ISSvelteCompilerOptionalParams}      [initialParams={}]      Some parameters to use for your compilation process
+ * @param           {ISSvelteCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example         js
+ * import SSvelteCompiler from '@coffeekraken/sugar/node/scss/compile/SSvelteCompiler';
+ * const compiler = new SSvelteCompiler();
+ * const compiledFile = await compiler.compile('my/cool/code.svelte');
+ *
+ * @see             https://svelte.dev/docs#Compile_time
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 class SSvelteCompiler extends __SCompiler {
   static interfaces = {
     params: {
@@ -115,8 +144,8 @@ class SSvelteCompiler extends __SCompiler {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _compile(
-    params: ISScssCompilerParams,
-    settings: ISScssCompilerOptionalSettings = {}
+    params: ISSvelteCompilerParams,
+    settings: ISSvelteCompilerOptionalSettings = {}
   ) {
     return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
       settings = __deepMerge(this.svelteCompilerSettings, {}, settings);

@@ -27,16 +27,16 @@ class STsCompilerParamsInterface extends __SInterface {
     input: {
       type: 'String|Array<String>',
       alias: 'i',
-      default: `${__sugarConfig('ts.compile.input')}`
+      default: __sugarConfig('ts.compile.input')
     },
     outputDir: {
       type: 'String',
       alias: 'o',
-      default: `${__sugarConfig('ts.compile.outputDir')}`
+      default: __sugarConfig('ts.compile.outputDir')
     },
     rootDir: {
       type: 'String',
-      default: `${__sugarConfig('ts.compile.rootDir')}`
+      default: __sugarConfig('ts.compile.rootDir')
     },
     map: {
       type: 'Boolean|String',
@@ -45,6 +45,7 @@ class STsCompilerParamsInterface extends __SInterface {
     },
     prod: {
       type: 'Boolean',
+      alias: 'p',
       default: __sugarConfig('ts.compile.prod')
     },
     stripComments: {
@@ -65,6 +66,7 @@ class STsCompilerParamsInterface extends __SInterface {
     },
     watch: {
       type: 'Boolean',
+      alias: 'w',
       default: __sugarConfig('ts.compile.watch')
     },
     stacks: {

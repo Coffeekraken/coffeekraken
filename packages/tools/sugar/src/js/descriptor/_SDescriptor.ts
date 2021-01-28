@@ -282,6 +282,9 @@ class SDescriptor implements ISDescriptor {
     // handle settings
     settings = __deepMerge(this._settings, settings);
 
+    // ensure we can apply the descriptor
+    if (value === undefined || value === null) value = {};
+
     // need to be before the instanciation of the
     // descriptorResult for references reasons... to check when have time
     const valuesObjToProcess = {},
@@ -372,7 +375,9 @@ class SDescriptor implements ISDescriptor {
       });
     } else {
       nativeConsole.warn(value);
-      throw `Sorry but the support for values other than objects has not been integrated for not...`;
+      throw new Error(
+        `You can apply an <yellow>SDescriptor</yellow> only on an Object like value...`
+      );
       // validate the object property
       // const validationResult = this._validate(
       //   value,

@@ -491,7 +491,7 @@ class SPromise extends __SClass.extends(Promise) {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  cancel(arg, stacksOrder = 'cancel,finally') {
+  cancel(arg?: any, stacksOrder = 'cancel,finally') {
     return this._cancel(arg, stacksOrder);
   }
 

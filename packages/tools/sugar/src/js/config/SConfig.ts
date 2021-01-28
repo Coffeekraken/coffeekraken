@@ -284,7 +284,6 @@ export = class SConfig {
     if (__isPlainObject(value)) {
       value = __deepMap(value, (val, prop, fullPath) => {
         // check if we get some things to use as variable
-
         const isArray = Array.isArray(val);
         if (!isArray) val = [val];
 

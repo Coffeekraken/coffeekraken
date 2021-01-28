@@ -1,5 +1,6 @@
 // @shared
 
+import __deepAssign from '../object/deepAssign';
 import __deepMerge from '../object/deepMerge';
 import __isPlain from '../is/plainObject';
 import __get from '../object/get';
@@ -258,6 +259,11 @@ function getInterfaceObj(ctx: any, name: string): any {
     }
   }
 
+  if (name === 'settings' && interfaceObj.on === undefined) {
+    if (ctx.settings !== undefined) interfaceObj.on = 'settings';
+    else if (ctx._settings !== undefined) interfaceObj.on = '_settings';
+  }
+
   return interfaceObj;
 }
 
@@ -280,10 +286,11 @@ function applyInterfaces(ctx: any) {
         {},
         {
           apply: true,
-          on: undefined,
+          on: name === 'this' ? ctx : undefined,
           ...interfaceObj
         }
       );
+
       if (settings.apply !== true) return;
       if (settings.on) {
         if (
@@ -339,7 +346,8 @@ function applyInterface(ctx: any, name: string, on: any = null) {
         complete: true,
         throw: true
       });
-      __deepMerge(ctx, res.value);
+      console.log(ctx.constructor.name);
+      __deepAssign(ctx, res.value);
       return ctx;
     } else {
       // if (typeof interfaceObj.on !== 'string') {
@@ -352,16 +360,16 @@ function applyInterface(ctx: any, name: string, on: any = null) {
       });
 
       if (interfaceObj.on && typeof interfaceObj.on === 'object') {
-        const returnValue = __deepMerge(interfaceObj.on, res.value);
+        const returnValue = __deepAssign(interfaceObj.on, res.value);
         return returnValue;
       } else if (interfaceObj.on && typeof interfaceObj.on === 'string') {
-        ctx[interfaceObj.on] = __deepMerge(ctx[interfaceObj.on], res.value);
+        ctx[interfaceObj.on] = __deepAssign(ctx[interfaceObj.on], res.value);
         return ctx[interfaceObj.on];
       } else if (ctx[name] !== undefined) {
-        // ctx[name] = __deepMerge(ctx[name], res.value);
         return ctx[name];
-      } else {
-        throw `You try to apply the interface "<yellow>${interfaceObj.class.name}</yellow>" on a data "<cyan>${interfaceObj.on}</cyan>" that seems to be inexistant`;
+      } else if (!res.hasIssues()) {
+        return res.value;
+        // throw `You try to apply the interface "<yellow>${interfaceObj.class.name}</yellow>" on a data "<cyan>${interfaceObj.on}</cyan>" that seems to be inexistant`;
       }
     }
   }

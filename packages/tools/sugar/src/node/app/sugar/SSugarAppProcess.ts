@@ -1,5 +1,4 @@
-// @ts-nocheck
-
+import __deepMerge from '../../object/deepMerge';
 import __isClass from '../../is/class';
 import __SError from '../../error/SError';
 import __SPromise from '../../promise/SPromise';
@@ -28,14 +27,40 @@ import __SSugarAppModule from './SSugarAppModule';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+export interface ISSugarAppCtorSettings {
+  app: ISSugarAppOptionalSettings;
+}
+export interface ISSugarAppOptionalSettings {}
+export interface ISSugarAppSettings {}
+
+export interface ISSugarAppModulesDescriptor {
+  [key: string]: ISSugarAppModuleDescriptor;
+}
+export interface ISSugarAppModuleDescriptor {
+  id: string;
+  name: string;
+  description: string;
+  autoRun?: boolean;
+  processPath: string;
+  modulePath?: string;
+  params?: any;
+  settings?: any;
+  stdio?: any;
+  instance?: __SSugarAppModule;
+}
+
 export default class SSugarAppProcess extends __SProcess {
   static interfaces = {
-    this: __SSugarAppInterface
+    this: {
+      apply: true,
+      class: __SSugarAppInterface
+    }
   };
 
   /**
-   * @name              modulesObjs
-   * @type              Object<Object>
+   * @name              modules
+   * @type              ISSugarAppModulesDescriptor
    * @private
    *
    * Store the registered modules objects
@@ -43,7 +68,18 @@ export default class SSugarAppProcess extends __SProcess {
    * @since           2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  modulesObjs = {};
+  modules?: ISSugarAppModulesDescriptor;
+
+  /**
+   * @name              loadedModules
+   * @type              ISSugarAppModulesDescriptor
+   *
+   * Store the loaded modules objects
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  loadedModules: ISSugarAppModulesDescriptor = {};
 
   /**
    * @name              modulesInError
@@ -55,7 +91,21 @@ export default class SSugarAppProcess extends __SProcess {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  modulesInError = [];
+  modulesInError: any[] = [];
+
+  /**
+   * @name      sugarAppSettings
+   * @type      ISSugarAppSettings
+   * @get
+   *
+   * Access the sugar app settings
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get sugarAppSettings(): ISSugarAppSettings {
+    return (<any>this._settings).sugarApp;
+  }
 
   /**
    * @name          constructor
@@ -66,42 +116,49 @@ export default class SSugarAppProcess extends __SProcess {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
-    super({
-      id: 'SSugarAppProcess',
-      name: 'Sugar App Process',
-      app: __sugarConfig('sugar-app'),
-      ...settings
-    });
+  constructor(settings: ISSugarAppCtorSettings) {
+    super(
+      {},
+      __deepMerge(
+        {
+          id: 'SSugarAppProcess',
+          name: 'Sugar App Process',
+          sugarApp: {}
+        },
+        settings
+      )
+    );
 
     // load and check each modules
-    this.modulesObjs = this._loadModules(this._settings.app.modules);
+    this.loadedModules = this._loadModules(this.modules);
+
+    // console.log(this.modulesObjs);
 
     // Pipe all the modules "events"
-    Object.keys(this.modulesObjs).forEach((moduleIdx) => {
-      const moduleObj = this.modulesObjs[moduleIdx];
-      __SPromise.pipe(moduleObj.instance, this, {
-        processor: (value, metas) => {
-          if (typeof value === 'object') {
-            value.module = {
-              id: moduleObj.id,
-              name: moduleObj.name,
-              idx: moduleIdx
-            };
-          } else {
-            value = {
-              module: {
-                id: moduleObj.id,
-                name: moduleObj.name,
-                idx: moduleIdx
-              },
-              value
-            };
-          }
-          return [value, metas];
-        }
-      });
-    });
+    // Object.keys(this.modulesObjs).forEach((moduleIdx) => {
+    //   const moduleObj = this.modulesObjs[moduleIdx];
+    //   __SPromise.pipe(moduleObj.instance, this, {
+    //     processor: (value, metas) => {
+    //       if (typeof value === 'object') {
+    //         value.module = {
+    //           id: moduleObj.id,
+    //           name: moduleObj.name,
+    //           idx: moduleIdx
+    //         };
+    //       } else {
+    //         value = {
+    //           module: {
+    //             id: moduleObj.id,
+    //             name: moduleObj.name,
+    //             idx: moduleIdx
+    //           },
+    //           value
+    //         };
+    //       }
+    //       return [value, metas];
+    //     }
+    //   });
+    // });
   }
 
   /**
@@ -160,18 +217,18 @@ export default class SSugarAppProcess extends __SProcess {
    * This method simply load and check all the registered modules
    * before being able to continue the process...
    *
-   * @param       {Object}      modulesObj        An object of SSugarAppModuleInterface compatible modules
+   * @param       {ISSugarAppModulesDescriptor}      modules        An object of SSugarAppModuleInterface compatible modules
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _loadModules(modulesObj) {
+  _loadModules(modules) {
     // track how many modules are ready
     let readyModulesCount = 0;
     const returnedModulesObj = {};
     // loop on all registered modules
-    Object.keys(modulesObj).forEach((moduleIdx) => {
-      const moduleObj = modulesObj[moduleIdx];
+    Object.keys(modules).forEach((moduleIdx) => {
+      const moduleObj: ISSugarAppModuleDescriptor = modules[moduleIdx];
 
       if (moduleObj.params === undefined) moduleObj.params = {};
       if (moduleObj.settings === undefined) moduleObj.settings = {};
@@ -199,16 +256,16 @@ export default class SSugarAppProcess extends __SProcess {
       // });
 
       // require and instanciate the module class
-      const moduleClass = require(moduleObj.modulePath);
+      const moduleClass = require(<string>moduleObj.modulePath);
       if (!__isClass(moduleClass)) {
-        throw new __SError(
+        throw new Error(
           `The passed module file "<cyan>${moduleObj.modulePath}</cyan>" does not export a <green>proper Class</green> for the module "<yellow>${moduleObj.name}</yellow>"...`
         );
       }
 
       const moduleInstance = new moduleClass(moduleObj);
       if (!(moduleInstance instanceof __SSugarAppModule)) {
-        throw new __SError(
+        throw new Error(
           `It seems that the passed class for your module "<yellow>${moduleObj.name}</yellow>" does not extends the sugar "<green>SSugarAppModule</green>" one...`
         );
       }
@@ -220,7 +277,7 @@ export default class SSugarAppProcess extends __SProcess {
           // update module ready count
           readyModulesCount++;
           // when all the modules are loaded, call the _modulesReady method
-          if (readyModulesCount >= Object.keys(modulesObj).length) {
+          if (readyModulesCount >= Object.keys(modules).length) {
             this._modulesReady();
           }
         } else if (state === 'error') {

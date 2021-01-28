@@ -1,7 +1,7 @@
-// @ts-nocheck
 import __SBlessedStdio from './blessed/SBlessedStdio';
 import __STerminalStdio from './terminal/STerminalStdio';
 import __isClass from '../is/class';
+import __isPath from '../is/path';
 
 /**
  * @name            stdio
@@ -31,20 +31,21 @@ import __isClass from '../is/class';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = (sources, settings = {}) => {
+export = (sources, stdio, settings = {}) => {
   if (!Array.isArray(sources)) sources = [sources];
 
   let stdioInstance: any;
 
-  if (__isClass(settings.class)) {
-    stdioInstance = new settings.class(this._sources, settings);
-  } else if (typeof settings.type === 'string') {
-    switch (settings.type) {
+  if (__isClass(stdio)) {
+    stdioInstance = new stdio(sources, settings);
+  } else if (__isPath(stdio, true)) {
+    const Cls = require(stdio);
+    stdioInstance = new Cls(sources, settings);
+  } else if (typeof stdio === 'string') {
+    switch (stdio) {
       case 'inherit':
       case 'terminal':
-        stdioInstance = new __STerminalStdio(sources, {
-          ...settings
-        });
+        stdioInstance = new __STerminalStdio(sources, settings);
         break;
       case 'blessed':
         stdioInstance = new __SBlessedStdio(sources, {

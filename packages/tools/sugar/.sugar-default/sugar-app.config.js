@@ -14,16 +14,16 @@ module.exports = {
         __dirname
       )}/src/node/server/frontend/SFrontendServerProcess`,
       stdio: ['terminal', 'socket'],
-      params: '[config.frontend]',
-      presets: {
-        prod: {
-          name: 'Build production',
-          key: 'p',
-          params: {
-            hostname: 'localhost'
-          }
-        }
-      }
+      params: '[config.frontend]'
+      // presets: {
+      //   prod: {
+      //     name: 'Build production',
+      //     key: 'p',
+      //     params: {
+      //       hostname: 'localhost'
+      //     }
+      //   }
+      // }
     }
     // compileTs: {
     //   id: 'compileTs',

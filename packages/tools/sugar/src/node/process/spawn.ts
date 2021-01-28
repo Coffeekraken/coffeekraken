@@ -120,7 +120,17 @@ export default function spawn(
     // listen for errors etc...
     if (childProcess.stdout) {
       childProcess.stdout.on('data', (data) => {
-        stdout.push(data.toString());
+        // const dataArray = data.toString().split('\n');
+        // while (dataArray[dataArray.length - 1] === '') {
+        //   dataArray.pop();
+        // }
+        // dataArray.forEach((line) => {
+        //   stdout.push(line);
+        //   emit('log', {
+        //     value: line
+        //   });
+        // });
+        stderr.push(data.toString());
         emit('log', {
           value: data.toString()
         });

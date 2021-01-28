@@ -53,6 +53,7 @@
     "aggregation": "^1.2.6",
     "ansi-escapes": "^4.3.1",
     "app-root-path": "^3.0.0",
+    "assign-deep": "^1.0.1",
     "async-exit-hook": "^2.0.1",
     "async-helpers": "^0.3.17",
     "autoprefixer": "^10.1.0",

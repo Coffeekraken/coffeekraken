@@ -425,9 +425,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     }
 
     if (!__isChildProcess() && processSettings.stdio && !this.stdio) {
-      this.stdio = __stdio(this, {
-        type: processSettings.stdio
-      });
+      this.stdio = __stdio(this, processSettings.stdio, {});
     }
 
     // init the currentExecution object

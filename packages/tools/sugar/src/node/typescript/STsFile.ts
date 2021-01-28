@@ -9,49 +9,15 @@ import __SFileCache from '../cache/SFileCache';
 import __toString from '../string/toString';
 import __wait from '../time/wait';
 import __getFilename from '../fs/filename';
+import __STsCompiler from './compile/STsCompiler';
 
 import __SInterface from '../interface/SInterface';
+import __STsFileInterface from './interface/STsFileInterface';
 import {
   ISTsCompilerParams,
   ISTsCompilerOptionalParams
 } from './compile/STsCompiler';
 import __STsCompilerParamsInterface from './compile/interface/STsCompilerParamsInterface';
-
-/**
- * @name          STsFileSettingsInterface
- * @type            Class
- * @extends         SInterface
- * @beta
- *
- * The interface describing the tsFile settings
- *
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export class STsFileSettingsInterface extends __SInterface {
-  static definition: {};
-}
-
-/**
- * @name          STsFileCtorSettingsInterface
- * @type            Class
- * @extends         SInterface
- * @beta
- *
- * The interface describing the tsFile settings
- *
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export class STsFileCtorSettingsInterface extends __SInterface {
-  static definition: {
-    tsFile: {
-      interface: STsFileSettingsInterface;
-      type: 'Object';
-      required: true;
-    };
-  };
-}
 
 /**
  * @name            STsFile
@@ -85,22 +51,19 @@ interface ISTsFileSettings {
 interface ISTsFileCtorSettings {
   tsFile?: ISTsFileOptionalSettings;
 }
-
 interface ISTsFile {
-  compile(params: ISTsCompilerParams, settings?: ISTsFileOptionalSettings);
+  compile(
+    params: ISTsCompilerOptionalParams,
+    settings?: ISTsFileOptionalSettings
+  );
 }
 
 // @ts-ignore
 class STsFile extends __SFile implements ISTsFile {
   static interfaces = {
-    compilerParams: {
-      apply: false,
-      class: __STsCompilerParamsInterface
-    },
-    settings: {
+    this: {
       apply: true,
-      on: '_settings',
-      class: STsFileCtorSettingsInterface
+      class: __STsFileInterface
     }
   };
 
@@ -142,44 +105,6 @@ class STsFile extends __SFile implements ISTsFile {
   }
 
   /**
-   * @name        _watch
-   * @type        Function
-   * @private
-   *
-   * Start to watch the file. Does this only once
-   * to avoid multiple compilation and logs
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _alreadyWatch = false;
-  private _watch() {
-    if (this._alreadyWatch) return;
-    this._alreadyWatch = true;
-
-    if (!this._currentCompilationParams) return;
-
-    // start watching the file if needed
-    if (this._currentCompilationParams.watch) {
-      this.startWatch();
-    }
-
-    // listen for change event
-    this.on('update', (file, metas) => {
-      if (this._currentCompilationParams.watch) {
-        const promise = this.compile(
-          <ISTsCompilerParams>this._currentCompilationParams
-        );
-        this.emit('log', {
-          type: 'file',
-          action: 'update',
-          file
-        });
-      }
-    });
-  }
-
-  /**
    * @name              compile
    * @type              Function
    *
@@ -190,139 +115,53 @@ class STsFile extends __SFile implements ISTsFile {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _isCompiling = false;
-  _currentCompilationSettings: ISTsFileOptionalSettings = {};
-  _currentCompilationParams: ISTsCompilerOptionalParams = {};
-  compile(params: ISTsCompilerParams, settings?: ISTsFileOptionalSettings) {
+  compile(
+    params: ISTsCompilerOptionalParams,
+    settings?: ISTsFileOptionalSettings
+  ) {
     settings = __deepMerge(this.tsFileSettings, settings);
-    this._currentCompilationParams = Object.assign({}, params);
-    this._currentCompilationSettings = Object.assign({}, settings);
-
-    params = this.applyInterface('compilerParams', params);
-
-    if (params.watch) {
-      this._watch();
-    }
 
     // init the promise
-    return new __SPromise(async ({ resolve, reject, emit, pipeTo, on }) => {
-      // listen for the end
-      on('finally', () => {
-        this._isCompiling = false;
-      });
+    return new __SPromise(
+      async ({ resolve, reject, emit, pipeFrom, pipeTo, on }) => {
+        pipeTo(this);
 
-      pipeTo(this);
-
-      if (this._isCompiling) {
-        emit('warn', {
-          value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
-        });
-        return;
-      }
-      this._isCompiling = true;
-
-      emit('log', {
-        type: 'separator'
-      });
-
-      // notify start
-      emit('log', {
-        value: `<yellow>[start]</yellow> Starting "<cyan>${this.relPath}</cyan>" compilation`
-      });
-
-      const duration = new __SDuration();
-
-      await __wait(0);
-
-      let toCompile = this.content;
-
-      try {
         emit('log', {
-          value: `<yellow>[compiling]</yellow> file "<cyan>${this.relPath}</cyan>"`
+          type: 'separator'
         });
 
-        const result = true;
+        // notify start
+        emit('log', {
+          value: `<yellow>[start]</yellow> Starting "<cyan>${this.relPath}</cyan>" compilation`
+        });
 
-        // RENDERING HERE
-        // const result = __svelte.compile(toCompile, {
-        //   filename: this.name,
-        //   dev: !params.prod,
-        //   preserveComments: !params.stripComments,
-        //   preserveWhitespace: !params.prod,
-        //   outputFilename: this.name,
-        //   cssOutputFilename: this.name,
-        //   ...(params.tsconfig || {})
-        // });
+        const duration = new __SDuration();
 
-        // result.warnings.forEach((warning) => {
-        //   emit('warn', {
-        //     value: warning.toString()
-        //   });
-        // });
+        await __wait(0);
 
-        // nativeConsole.log(result.js.map.toString());
+        try {
+          emit('log', {
+            value: `<yellow>[compiling]</yellow> file "<cyan>${this.relPath}</cyan>"`
+          });
 
-        // check if need to save
-        // if (params.save) {
-        //   // build the save path
-        //   let savePath;
-        //   if (params.outputDir === undefined) {
-        //     savePath = this.path.replace(/\.svelte$/, '.js');
-        //   } else {
-        //     savePath = __path.resolve(
-        //       params.outputDir,
-        //       this.path
-        //         .replace(`${params.rootDir}/`, '')
-        //         .replace(/\.svelte$/, '.js')
-        //     );
-        //   }
-        //   emit('log', {
-        //     type: 'file',
-        //     file: this,
-        //     to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-        //     action: 'save'
-        //   });
-        //   this.writeSync(result.js.code, {
-        //     path: savePath
-        //   });
-        //   if (params.map) {
-        //     this.writeSync(result.js.map.toString(), {
-        //       path: savePath.replace(/\.js$/, '.js.map')
-        //     });
-        //     emit('log', {
-        //       type: 'file',
-        //       action: 'saved',
-        //       to: savePath
-        //         .replace(/\.js$/, '.js.map')
-        //         .replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-        //       file: this
-        //     });
-        //   }
+          const compiler = new __STsCompiler();
+          pipeFrom(compiler);
 
-        //   // notify end
-        //   const time = duration.end();
+          const res = await compiler.compile(
+            {
+              ...params
+            },
+            this.tsFileSettings.compile || {}
+          );
 
-        //   emit('log', {
-        //     type: 'file',
-        //     action: 'saved',
-        //     to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-        //     file: this
-        //   });
-        // }
+          return resolve(res);
+        } catch (e) {
+          return reject(e.toString());
+        }
 
-        // if (params.watch) {
-        //   emit('log', {
-        //     value: `<blue>[watch] </blue>Watching for changes...`
-        //   });
-        // }
-
-        return resolve(result);
-      } catch (e) {
-        return reject(e.toString());
+        return true;
       }
-
-      return true;
-    });
+    );
   }
 }
 

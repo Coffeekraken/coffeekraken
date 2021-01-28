@@ -99,7 +99,7 @@ class SCompiler extends __SEventEmitter implements ISCompiler {
 
     // @ts-ignore
     const promise = this._compile(params, settings);
-    // this.pipe(promise);
+    this.pipe(promise);
     return promise;
   }
 }

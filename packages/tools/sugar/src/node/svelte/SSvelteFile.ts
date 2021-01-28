@@ -55,26 +55,6 @@ export class SSvelteFileCtorSettingsInterface extends __SInterface {
   };
 }
 
-/**
- * @name            SSvelteFile
- * @namespace       sugar.node.svelte
- * @type            Class
- * @extends         SFile
- * @beta
- *
- * This represent a svelte file
- *
- * @param       {String}            path            The path to the scss file
- * @param       {ISSvelteFileSettings}     [settings={}]       Some settings to configure your file
- *
- * @example         js
- * import SSvelteFile from '@coffeekraken/sugar/node/svelte/SSvelteFile';
- * const file = new SSvelteFile('/my/cool/file.svelte');
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-
 interface ISSvelteFileCompileOptionalSettings {}
 interface ISSvelteFileCompileSettings {}
 
@@ -95,6 +75,25 @@ interface ISSvelteFile {
   );
 }
 
+/**
+ * @name            SSvelteFile
+ * @namespace       sugar.node.svelte
+ * @type            Class
+ * @extends         SFile
+ * @beta
+ *
+ * This represent a svelte file
+ *
+ * @param       {String}            path            The path to the scss file
+ * @param       {ISSvelteFileSettings}     [settings={}]       Some settings to configure your file
+ *
+ * @example         js
+ * import SSvelteFile from '@coffeekraken/sugar/node/svelte/SSvelteFile';
+ * const file = new SSvelteFile('/my/cool/file.svelte');
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 // @ts-ignore
 class SSvelteFile extends __SFile implements ISSvelteFile {
   static interfaces = {

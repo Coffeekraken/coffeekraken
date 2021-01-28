@@ -26,67 +26,73 @@ import __set from '../../../object/set';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SSugarAppInterface extends __SInterface {
-  static definition = {};
+  static definition = {
+    modules: {
+      type: 'Object',
+      required: true,
+      default: __sugarConfig('sugar-app.modules')
+    }
+  };
 }
 
-const modules = __sugarConfig('sugar-app.modules');
-Object.keys(modules).forEach((moduleId) => {
-  const moduleObj = modules[moduleId];
-  const interfacePath = moduleObj.interface;
-  let ModuleInterface;
-  if (interfacePath) {
-    ModuleInterface = require(interfacePath);
-  } else {
-    const folderPath = __folderPath(
-      moduleObj.processPath || moduleObj.modulePath
-    );
-    const filename = __getFilename(
-      moduleObj.processPath || moduleObj.modulePath
-    );
-    const toTry = [
-      `${folderPath}/interface/${filename.replace(
-        /Process(\.js)?$/,
-        'Interface.js'
-      )}`,
-      `${folderPath}/interface/${filename.replace(
-        /Module(\.js)?$/,
-        'Interface.js'
-      )}`,
-      `${folderPath}/${filename.replace(/Process(\.js)?$/, 'Interface.js')}`,
-      `${folderPath}/${filename.replace(/Module(\.js)?$/, 'Interface.js')}`
-    ].filter((path) => {
-      if (!path.match(/\.js$/)) return false;
-      if (!__fs.existsSync(path)) return false;
-      return true;
-    });
-    if (!toTry.length) return;
-    ModuleInterface = require(toTry[0]);
-  }
+// const modules = __sugarConfig('sugar-app.modules');
+// Object.keys(modules).forEach((moduleId) => {
+//   const moduleObj = modules[moduleId];
+//   const interfacePath = moduleObj.interface;
+//   let ModuleInterface;
+//   if (interfacePath) {
+//     ModuleInterface = require(interfacePath);
+//   } else {
+//     const folderPath = __folderPath(
+//       moduleObj.processPath || moduleObj.modulePath
+//     );
+//     const filename = __getFilename(
+//       moduleObj.processPath || moduleObj.modulePath
+//     );
+//     const toTry = [
+//       `${folderPath}/interface/${filename.replace(
+//         /Process(\.js)?$/,
+//         'Interface.js'
+//       )}`,
+//       `${folderPath}/interface/${filename.replace(
+//         /Module(\.js)?$/,
+//         'Interface.js'
+//       )}`,
+//       `${folderPath}/${filename.replace(/Process(\.js)?$/, 'Interface.js')}`,
+//       `${folderPath}/${filename.replace(/Module(\.js)?$/, 'Interface.js')}`
+//     ].filter((path) => {
+//       if (!path.match(/\.js$/)) return false;
+//       if (!__fs.existsSync(path)) return false;
+//       return true;
+//     });
+//     if (!toTry.length) return;
+//     ModuleInterface = require(toTry[0]);
+//   }
 
-  Object.keys(ModuleInterface.definition).forEach((argName) => {
-    // params
-    SSugarAppInterface.definition[
-      `modules.${moduleId}.params.${argName}`
-    ] = Object.assign({}, ModuleInterface.definition[argName]);
-    if (
-      SSugarAppInterface.definition[`modules.${moduleId}.params.${argName}`]
-        .default === undefined
-    ) {
-      const defaultValue = __get(moduleObj, `params.${argName}`);
-      if (defaultValue !== undefined) {
-        SSugarAppInterface.definition[
-          `modules.${moduleId}.params.${argName}`
-        ].default = defaultValue;
-      }
-    }
-    // presets
-    SSugarAppInterface.definition[
-      `modules.${moduleId}.presets.*.params.${argName}`
-    ] = Object.assign({}, ModuleInterface.definition[argName]);
-    delete SSugarAppInterface.definition[
-      `modules.${moduleId}.presets.*.params.${argName}`
-    ].required;
-  });
-});
+//   Object.keys(ModuleInterface.definition).forEach((argName) => {
+//     // params
+//     SSugarAppInterface.definition[
+//       `modules.${moduleId}.params.${argName}`
+//     ] = Object.assign({}, ModuleInterface.definition[argName]);
+//     if (
+//       SSugarAppInterface.definition[`modules.${moduleId}.params.${argName}`]
+//         .default === undefined
+//     ) {
+//       const defaultValue = __get(moduleObj, `params.${argName}`);
+//       if (defaultValue !== undefined) {
+//         SSugarAppInterface.definition[
+//           `modules.${moduleId}.params.${argName}`
+//         ].default = defaultValue;
+//       }
+//     }
+//     // presets
+//     SSugarAppInterface.definition[
+//       `modules.${moduleId}.presets.*.params.${argName}`
+//     ] = Object.assign({}, ModuleInterface.definition[argName]);
+//     delete SSugarAppInterface.definition[
+//       `modules.${moduleId}.presets.*.params.${argName}`
+//     ].required;
+//   });
+// });
 
 export = SSugarAppInterface;

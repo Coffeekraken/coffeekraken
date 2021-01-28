@@ -14,7 +14,7 @@ import __toString from '../../../string/toString';
 export default {
   id: 'default',
   render(logObj, settings = {}) {
-    const value = logObj.value || logObj;
+    const value = logObj.value !== undefined ? logObj.value : logObj;
     return __parseHtml(__toString(value));
   }
 };

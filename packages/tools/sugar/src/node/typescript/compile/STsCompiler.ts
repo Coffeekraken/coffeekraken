@@ -13,6 +13,7 @@ import __glob from 'glob';
 import __SCliProcess from '../../process/SCliProcess';
 import __md5 from '../../crypt/md5';
 import __packageRoot from '../../path/packageRoot';
+import __tmpDir from '../../path/tmpDir';
 
 import __TscInterface from './interface/TscInterface';
 import __STsCompilerParamsInterface from './interface/STsCompilerParamsInterface';
@@ -52,6 +53,33 @@ export interface ISTsCompilerOptionalParams {
 
 export interface ISTsCompiler extends ISCompiler {}
 
+/**
+ * @name                STsCompiler
+ * @namespace           sugar.node.typescript
+ * @type                Class
+ * @extends             SCompiler
+ * @wip
+ *
+ * This class wrap the "typescript" compiler with some additional features which are:
+ *
+ * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
+ *
+ * @param         {ISTsCompilerOptionalParams}      [initialParams={}]      Some parameters to use for your compilation process
+ * @param           {ISTsCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example         js
+ * import STsCompiler from '@coffeekraken/sugar/node/scss/compile/STsCompiler';
+ * const compiler = new STsCompiler();
+ * const compiledFile = await compiler.compile('my/cool/code.ts');
+ *
+ * @see             https://svelte.dev/docs#Compile_time
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 class STsCompiler extends __SCompiler {
   static interfaces = {
     params: {
@@ -85,11 +113,11 @@ class STsCompiler extends __SCompiler {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(
-    initialParams: ISTsCompilerOptionalParams,
-    settings: ISTsCompilerCtorSettings
+    initialParams?: ISTsCompilerOptionalParams,
+    settings?: ISTsCompilerCtorSettings
   ) {
     super(
-      initialParams,
+      initialParams || {},
       __deepMerge(
         {
           tsCompiler: {}
@@ -116,10 +144,10 @@ class STsCompiler extends __SCompiler {
    */
   _compile(
     params: ISScssCompilerParams,
-    settings: ISScssCompilerOptionalSettings = {}
+    settings?: ISScssCompilerOptionalSettings
   ) {
     return new __SPromise(async ({ resolve, reject, pipe, pipeFrom, emit }) => {
-      settings = __deepMerge(this.tsCompilerSettings, {}, settings);
+      settings = __deepMerge(this.tsCompilerSettings, {}, settings || {});
 
       let input = Array.isArray(params.input) ? params.input : [params.input];
 
@@ -134,7 +162,7 @@ class STsCompiler extends __SCompiler {
             stacks: undefined,
             input: stack
           });
-          // pipeFrom(compilePromise);
+          pipeFrom(compilePromise);
         });
         // stop execution here
         return;
@@ -185,10 +213,11 @@ class STsCompiler extends __SCompiler {
               ? `<green>${params.map === true ? 'true' : params.map}</green>`
               : '<red>false</red>'
           }`,
-          `      <yellow>│</yellow> Output directory: <cyan>${params.outputDir.replace(
-            `${__packageRoot()}/`,
-            ''
-          )}</cyan>`,
+          `      <yellow>│</yellow> Output directory: <cyan>${
+            params.outputDir
+              ? params.outputDir.replace(`${__packageRoot()}/`, '')
+              : 'undefined'
+          }</cyan>`,
           `      <yellow>│</yellow> Root directory: <cyan>${params.rootDir.replace(
             `${__packageRoot()}/`,
             ''
@@ -229,8 +258,6 @@ class STsCompiler extends __SCompiler {
         )}.tsconfig.json`;
       }
 
-      // handle params
-
       // ensure the tsconfig file is valid
       if (!tsconfig.files.length) delete tsconfig.files;
       if (!tsconfig.include.length) delete tsconfig.include;
@@ -244,17 +271,9 @@ class STsCompiler extends __SCompiler {
       });
       tmpConfigFile.writeSync(JSON.stringify(tsconfig, null, 4));
 
-      // instanciate a new process
-      // const def = {};
-      // Object.keys(def).forEach((prop) => {
-      //   if (__TscInterface.definition[prop] !== undefined) {
-      //     def[prop] = __STsCompilerParamsInterface.definition[prop];
-      //   }
-      // });
-
-      let command = `tsc --listEmittedFiles --pretty -p ${tmpConfigFile.path}`;
+      // build command line to execute
+      let command = `tsc --listEmittedFiles --pretty --noEmitOnError -p ${tmpConfigFile.path}`;
       if (params.watch) command += ' -w';
-      if (!params.save) command += ' --noEmit';
       if (params.map) {
         if (params.map === 'inline') {
           command += ' --inlineSourceMap';
@@ -263,137 +282,160 @@ class STsCompiler extends __SCompiler {
         }
       }
       if (params.rootDir) command += ` --rootDir ${params.rootDir}`;
-      if (params.outputDir) command += ` --outDir ${params.outputDir}`;
+      if (params.save && params.outputDir)
+        command += ` --outDir ${params.outputDir}`;
       if (params.stripComments) command += ' --removeComments';
 
+      if (!params.save) {
+        command += ` --outDir ${__tmpDir()}/ts/unsaved`;
+      }
+
+      // create the CLI process
       const pro = new __SCliProcess(command, {
         process: {
           stdio: false,
           decorators: false
         }
       });
+
+      // keep track of compiled files
+      const compiledFiles = [];
+
+      // pipe what comes from the cli process
       pipeFrom(pro, {
         events: 'log',
         filter: (value) => {
-          const val = value.value || value;
+          const val = value.value !== undefined ? value.value : value;
           if (val === '\u001bc') return false;
           if (val.match(/Starting\scompilation\sin\swatch\smode/)) return false;
-          if (val.trim().match(/TSFILE:\s.*\/undefined\/.*/)) {
-            return false;
-          }
           return true;
         },
         processor: (value, metas) => {
-          let strValue = value.value || value;
+          let strValue = value.value !== undefined ? value.value : value;
 
           let endSpace = false;
 
+          // removing clear character
           strValue = strValue.replace('\u001bc', '');
 
-          if (strValue.trim().match(/File\schange\sdetected/)) {
-            strValue = `<yellow>[update]</yellow> File change detected`;
-          } else if (strValue.trim().match(/Found\s[0-9]+\serror(s)?/)) {
-            const count = strValue.match(/.*([0-9]+).*/);
-            if (count && count.length === 2 && count[1] === '0') {
-              strValue = strValue.replace(
-                /.*Found\s([0-9]+)\serror.*/,
-                `<green>[ended]</green> Found <yellow>$1</yellow> error`
-              );
-            } else {
-              strValue = strValue.replace(
-                /.*Found\s([0-9]+)\serror.*/,
-                `<magenta>[ended]</magenta> Found <yellow>$1</yellow> error(s)`
-              );
-            }
-          } else if (strValue.trim().match(/.*:.*[0-9]+.*:.*[0-9]+.*\s/)) {
-            strValue = strValue
-              .split('\n')
-              .filter((line) => {
-                return !Array.isArray(line.trim().match(/^TSFILE:\s.*/));
-              })
-              .map((line) => {
-                return `      <red>│</red> ${line}`;
-              })
-              .filter((line) => {
-                return line.trim() !== '<red>│</red>';
-              });
-            strValue = strValue.join('\n');
-            strValue = `<red>[error]</red> ${strValue.trim().slice(13)}`;
-            endSpace = true;
-          } else if (strValue.trim().match(/TSFILE:\s/)) {
-            // error
-            if (strValue.trim().match(/TSFILE:\s.*\/undefined\/.*/)) {
-              strValue = '';
-              // strValue = strValue
-              //   .split('\n')
-              //   .filter((line) => {
-              //     return !Array.isArray(line.trim().match(/^TSFILE:\s.*/));
-              //   })
-              //   .map((line) => {
-              //     return `      <red>│</red> ${line}`;
-              //   })
-              //   .join('\n');
-              // strValue = `<red>[error]</red> Something went wrong\n${strValue}`;
-            } else {
-              // Emit file
-              strValue = `<green>[saved]</green> File "<cyan>${strValue
-                .replace('TSFILE: ', '')
-                .trim()
-                .replace(
-                  `${__packageRoot()}/`,
-                  ''
-                )}</cyan>" saved <green>successfully</green>`;
-            }
-          }
+          let lines = strValue.split('\n');
 
-          strValue = strValue.trim();
+          let currentLogType;
+          const logsArray: string[] = [];
+
+          lines.forEach((line) => {
+            let strToAdd = '';
+
+            if (currentLogType === 'error') {
+              // console.log({ line });
+              // strToAdd = `      <red>│</red> ${line}`;
+              // logsArray.push(strToAdd);
+              return;
+            }
+
+            if (line.trim().match(/File\schange\sdetected/)) {
+              currentLogType = 'update';
+              strToAdd = `<yellow>[update]</yellow> File change detected`;
+              logsArray.push(strToAdd);
+            } else if (line.trim().match(/Found\s[0-9]+\serror(s)?/)) {
+              currentLogType = 'errorFound';
+              const count = line.match(/.*([0-9]+).*/);
+              if (count && count.length === 2 && count[1] === '0') {
+                strToAdd = line.replace(
+                  /.*Found\s([0-9]+)\serror.*/,
+                  `<green>[ended]</green> Found <yellow>$1</yellow> error`
+                );
+              } else {
+                strToAdd = line.replace(
+                  /.*Found\s([0-9]+)\serror.*/,
+                  `<magenta>[ended]</magenta> Found <yellow>$1</yellow> error(s)`
+                );
+              }
+              logsArray.push(strToAdd);
+            } else if (line.trim().match(/TSFILE:\s/)) {
+              // Emit file
+              currentLogType = 'save';
+              let filesArray: string[] = [];
+              line.split('TSFILE: ').forEach((fileStr) => {
+                if (fileStr.trim() === '') return;
+
+                // add to compiled files array
+                const filePath = fileStr.trim();
+                if (compiledFiles.indexOf(filePath) === -1)
+                  compiledFiles.push(filePath);
+
+                if (params.save) {
+                  filesArray.push(
+                    `<green>[saved]</green> File "<cyan>${fileStr
+                      .trim()
+                      .replace(
+                        `${__packageRoot()}/`,
+                        ''
+                      )}</cyan>" saved <green>successfully</green>`
+                  );
+                }
+              });
+              strToAdd = filesArray.join('\n');
+              logsArray.push(strToAdd);
+            } else if (line.trim().match(/.*:.*[0-9]+.*:.*[0-9]+.*\s/)) {
+              currentLogType = 'error';
+              // console.log({ line });
+              // const lns = line
+              //   .split('\n')
+              //   .filter((l) => {
+              //     return !Array.isArray(l.trim().match(/^TSFILE:\s.*/));
+              //   })
+              //   .map((l) => {
+              //     return `      <red>│</red> ${l}`;
+              //   })
+              //   .filter((l) => {
+              //     return l.trim() !== '<red>│</red>';
+              //   });
+              strToAdd = `<red>[error]</red> ${strValue.trim()}`;
+              logsArray.push(strToAdd);
+            }
+          });
+
+          strValue = logsArray.join('\n');
+
+          // strValue = strValue.trim();
           // if (endSpace) strValue = `${strValue} \n`;
 
-          if (value.value) value.value = strValue;
+          if (value.value !== undefined) value.value = strValue;
           else value = strValue;
 
           return [value, metas];
         }
       });
-      // pro.on('log', (value, metas) => {
-      //   console.log('LFLFLF', value);
-      // });
       await pro.run(params);
 
-      resolve();
+      // gather all the compiled files
+      const resultFiles = {};
+      const resultCode = {};
+      compiledFiles.forEach((filePath) => {
+        const file = new __SFile(filePath);
+        resultFiles[file.relPath] = file;
+        if (!resultCode.js && !filePath.match(/\.map$/)) {
+          resultCode.js = file.content;
+        } else if (!resultCode.map && filePath.match(/\.map$/)) {
+          resultCode.map = file.content;
+        }
+      });
 
-      //   for (let i = 0; i < filesPaths.length; i++) {
-      //     let filePath = filesPaths[i];
-      //     let file = new __STsFile(filePath, {
-      //       tsFile: {
-      //         compile: settings
-      //       }
-      //     });
-      //     pipe(file);
+      const resultObj = {
+        startTime: startTime,
+        endTime: Date.now(),
+        duration: Date.now() - startTime
+      };
 
-      //     const resPromise = file.compile(params, {
-      //       ...settings
-      //     });
-      //     const res = await resPromise;
-      //     resultsObj[file.path] = res;
-      //   }
+      if (params.save) {
+        resultObj.files = resultFiles;
+      }
+      if (compiledFiles.length <= 2) {
+        resultObj.code = resultCode;
+      }
 
-      //   // resolve with the compilation result
-      //   if (!params.watch) {
-      //     resolve({
-      //       files: resultsObj,
-      //       startTime: startTime,
-      //       endTime: Date.now(),
-      //       duration: Date.now() - startTime
-      //     });
-      //   } else {
-      //     emit('files', {
-      //       files: resultsObj,
-      //       startTime: startTime,
-      //       endTime: Date.now(),
-      //       duration: Date.now() - startTime
-      //     });
-      //   }
+      resolve(resultObj);
     });
   }
 

@@ -1,9 +1,10 @@
-// @ts-nocheck
-
+import __SClass from '../../class/SClass';
 import __isPath from '../../is/path';
+import __isClass from '../../is/class';
+import __isPlain from '../../is/plainObject';
 import __getFilename from '../../fs/filename';
-import __SBlessedStdio from '../../blessed/stdio/SBlessedStdio';
-import __SPromise from '../../promise/SPromise';
+import __SBlessedStdio from '../../stdio/blessed/SBlessedStdio';
+import __SEventEmitter from '../../promise/SPromise';
 import __SError from '../../error/SError';
 import __toString from '../../string/toString';
 import __SSugarAppModuleSettingsInterface from './interface/SSugarAppModuleSettingsInterface';
@@ -12,12 +13,17 @@ import __hotkey from '../../keyboard/hotkey';
 // import __SIpc from '../../ipc/SIpc';
 import __SProcessManager from '../../process/SProcess';
 import __blessed from 'blessed';
+import __stdio from '../../stdio/stdio';
+
+import __SSugarAppModuleInterface from './interface/SSugarAppModuleInterface';
+import { ISClass } from '../../class/SClass';
+import { ISSugarAppModuleDescriptor } from './SSugarAppProcess';
 
 /**
  * @name            SSugarAppModule
  * @namespace           sugar.node.ui.sugar
  * @type            Class
- * @extends         SPromise
+ * @extends         SEventEmitter
  * @wip
  *
  * This class represent the process that expose every registered "modules"
@@ -31,7 +37,42 @@ import __blessed from 'blessed';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SSugarAppModule extends __SPromise {
+
+export interface ISSugarAppModuleCtorSettings {
+  sugarAppModule?: ISSugarAppModuleOptionalSettings;
+}
+export interface ISSugarAppModuleOptionalSettings {}
+export interface ISSugarAppModuleSettings {}
+
+export interface ISSugarAppModuleShortcuts {
+  [key: string]: ISSugarAppModuleShortcut;
+}
+export interface ISSugarAppModuleShortcut {
+  name: string;
+  params: any;
+  settings: any;
+  id?: string;
+  keys?: string;
+}
+
+export interface ISSugarAppModule {
+  id: string;
+  name: string;
+  description: string;
+  processPath: string;
+  params: any;
+}
+
+export default class SSugarAppModule
+  extends __SEventEmitter
+  implements ISSugarAppModule {
+  static interfaces = {
+    this: {
+      apply: true,
+      class: __SSugarAppModuleInterface
+    }
+  };
+
   /**
    * @name          state
    * @type          String
@@ -43,14 +84,25 @@ export default class SSugarAppModule extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _state = 'loading';
-  state(value = null) {
-    if (value === null) return this._state;
+  _state: string = 'loading';
+  state(value?: string) {
+    if (!value) return this._state;
     // emit an event
     this.emit(`state.${value}`, true);
     this.emit('state', value);
     this._state = value;
   }
+
+  /**
+   * @name          shortcuts
+   * @type          ISSugarAppModuleShortcuts
+   *
+   * Store the shortcuts provided
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  shortcuts: ISSugarAppModuleShortcuts = {};
 
   /**
    * @name          stdio
@@ -63,8 +115,8 @@ export default class SSugarAppModule extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _stdio = {};
-  stdio(id = 'terminal', value = undefined) {
-    if (value !== undefined) {
+  stdio(id: string = 'terminal', value?: any) {
+    if (value) {
       this._stdio[id] = value;
       this.emit('stdio', {
         id,
@@ -76,20 +128,6 @@ export default class SSugarAppModule extends __SPromise {
   }
 
   /**
-   * @name          id
-   * @type          Boolean
-   * @get
-   *
-   * Access the "settings.id" property
-   *
-   * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get id() {
-    return this._settings.id;
-  }
-
-  /**
    * @name          params
    * @type          Object
    *
@@ -98,7 +136,7 @@ export default class SSugarAppModule extends __SPromise {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  params = {};
+  params: any = {};
 
   /**
    * @name        _active
@@ -111,7 +149,19 @@ export default class SSugarAppModule extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _active = false;
+  private _active = false;
+
+  /**
+   * @name      _moduleObjDescriptor
+   * @type      ISSugarAppModuleDescriptor
+   * @private
+   *
+   * Store the passed module object descriptor from the constructor
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  private _moduleObjDescriptor: ISSugarAppModuleDescriptor;
 
   /**
    * @name      _moduleProcesses
@@ -123,7 +173,7 @@ export default class SSugarAppModule extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _moduleProcesses = {};
+  private _moduleProcesses = {};
 
   /**
    * @name          getRegisteredModules
@@ -156,7 +206,7 @@ export default class SSugarAppModule extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static getRegisteredModuleById(id) {
-    return this._registeredModulesArray.filter((module) => {
+    return this._registeredModulesArray.filter((module: ISSugarAppModule) => {
       return module.id === id;
     })[0];
   }
@@ -170,19 +220,23 @@ export default class SSugarAppModule extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(moduleObj, settings = {}) {
+  constructor(
+    moduleObjDescriptor: ISSugarAppModuleDescriptor,
+    settings: ISSugarAppModuleCtorSettings
+  ) {
     super(
       __deepMerge(
         {
-          mainProcessId: 'main',
-          processUsedForState: undefined,
-          processSettings: {}
+          sugarAppModule: {
+            mainProcessId: 'main',
+            processIdUsedForState: undefined
+          }
         },
-        settings
+        settings || {}
       )
     );
-    this._settings.id = `SSugarAppModule.${moduleObj.id}`;
-    this._moduleObj = moduleObj;
+    this._settings.id = `SSugarAppModule.${moduleObjDescriptor.id}`;
+    this._moduleObjDescriptor = moduleObjDescriptor;
 
     // __SIpc.on('sugar.ui.displayedModule', (moduleId) => {
     //   this._active = this.id === moduleId;
@@ -191,14 +245,10 @@ export default class SSugarAppModule extends __SPromise {
     // @todo    replace this with new interface class
     __SSugarAppModuleSettingsInterface.apply(this._settings);
 
-    if (this.constructor.interface) {
-      this.constructor.interface.apply(this._moduleObj);
-    }
-
     // register the module in the list
-    SSugarAppModule._registeredModulesArray.push(this);
+    SSugarAppModule._registeredModulesArray.push(<never>this);
     this.on('finally', () => {
-      const idx = SSugarAppModule._registeredModulesArray.indexOf(this);
+      const idx = SSugarAppModule._registeredModulesArray.indexOf(<never>this);
       if (idx === -1) return;
       SSugarAppModule._registeredModulesArray.splice(idx, 1);
     });
@@ -228,25 +278,32 @@ export default class SSugarAppModule extends __SPromise {
       });
 
       // init the Stdios
-      const stdios = Array.isArray(this._moduleObj.stdio)
-        ? this._moduleObj.stdio
-        : [this._moduleObj.stdio].map((i) => i !== undefined);
+      const stdios = Array.isArray(this._moduleObjDescriptor.stdio)
+        ? this._moduleObjDescriptor.stdio
+        : [this._moduleObjDescriptor.stdio].map((i) => i !== undefined);
       stdios.forEach((stdio) => {
-        if (stdio === 'terminal') {
-          this.stdio('terminal', new __SBlessedStdio(this, {}));
-        } else if (stdio === 'socket') {
-          // @todo      integrate socket stdio
-          // this.stdio('socket', undefined);
-        } else if (__isPath(stdio, true)) {
-          const Cls = require(stdio);
-          this.stdio(
-            __getFilename(stdio).split('.').slice(0, -1).join('.'),
-            new Cls(this, {})
-          );
+        let stdioSettings = {},
+          stdioId,
+          stdioArg = stdio;
+        if (__isPlain(stdio)) {
+          stdioArg = stdio.stdio;
+          stdioSettings = stdioSettings || {};
+          stdioId = stdio.id;
+        }
+        // define the stdioId
+        if (!stdioId) {
+          if (__isClass(stdioArg)) stdioId = stdioArg.name;
+          else if (__isPlain(stdio)) stdioId = stdio.id;
+          else if (typeof stdioArg === 'string') stdioId = stdioArg;
+        }
+
+        const stdioInstance = __stdio(this, stdioArg, stdioSettings);
+        if (stdioInstance) {
+          this.stdio(stdioId || 'unknown', stdioInstance);
         }
       });
-      if (this._moduleObj.autoRun === true) {
-        this.process.run(moduleObj.params || {});
+      if (this._moduleObjDescriptor.autoRun === true) {
+        this.process.run(this._moduleObjDescriptor.params || {});
       }
     });
   }
@@ -266,7 +323,7 @@ export default class SSugarAppModule extends __SPromise {
   }
 
   /**
-   * @name          processUsedForState
+   * @name          processIdUsedForState
    * @type          String
    * @get
    *
@@ -275,10 +332,10 @@ export default class SSugarAppModule extends __SPromise {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get processUsedForState() {
-    if (this._settings.processUsedForState === undefined)
+  get processIdUsedForState() {
+    if (this._settings.processIdUsedForState === undefined)
       return this._settings.mainProcessId;
-    return this._settings.processUsedForState;
+    return this._settings.processIdUsedForState;
   }
 
   /**
@@ -402,7 +459,7 @@ export default class SSugarAppModule extends __SPromise {
     if (this._moduleProcesses[id] !== undefined) {
       throw `Sorry but a process with the id "<yellow>${id}</yellow>" in the module "<cyan>${this.this.constructor.name}</cyan>" seem's to already exists...`;
     }
-    if (id === this.processUsedForState) {
+    if (id === this.processIdUsedForState) {
       pro.on('state', (d) => {
         setTimeout(() => {
           this.state(d.value);
@@ -410,7 +467,7 @@ export default class SSugarAppModule extends __SPromise {
       });
     }
     // Pipe the process
-    __SPromise.pipe(pro, this);
+    this.pipe(pro);
     // save the process in the stack
     this._moduleProcesses[id] = pro;
   }
@@ -448,15 +505,14 @@ export default class SSugarAppModule extends __SPromise {
    * @since     2.0.0
    */
   _initShortcuts() {
-    if (
-      this._moduleObj.shortcuts !== undefined &&
-      this.handleShortcuts === undefined
-    ) {
+    if (this.handleShortcuts === undefined) {
       throw `You have some shortcuts defined in the module "<yellow>${this.constructor.name}</yellow>" but you don't have the required "<cyan>handleShortcuts(shortcutObj, params, settings)</cyan>" method defined...`;
     }
 
-    Object.keys(this._moduleObj.shortcuts || {}).forEach((shortcut) => {
-      const shortcutObj = this._moduleObj.shortcuts[shortcut];
+    if (!Object.keys(this.shortcuts).length) return;
+
+    Object.keys(this.shortcuts).forEach((shortcut: string) => {
+      const shortcutObj: ISSugarAppModuleShortcut = this.shortcuts[shortcut];
       shortcutObj.keys = shortcut;
       if (shortcutObj.id === undefined) shortcutObj.id = shortcut;
       __hotkey(shortcut).on('press', () => {

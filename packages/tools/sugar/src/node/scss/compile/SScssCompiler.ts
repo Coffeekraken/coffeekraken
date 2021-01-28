@@ -27,42 +27,6 @@ import __SScssFile from '../SScssFile';
 import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';
 import { ISCompiler } from '../../compiler/SCompiler';
 
-/**
- * @name                SScssCompiler
- * @namespace           sugar.node.scss
- * @type                Class
- * @wip
- *
- * This class wrap the "sass" compiler with some additional features which are:
- *
- * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
- * @feature         2.0.0       Optimize the render time as much as 6x faster
- *
- * @param           {Object}            [settings={}]       An object of settings to configure your instance
- *
- * @setting         {String}        [id=this.constructor.name]          An id for your compiler. Used for cache, etc...
- * @setting         {Object}        [sass={}]        Pass the "sass" (https://www.npmjs.com/package/sass) options here. ! The "file" and "data" properties are overrided by the first parameter of the "compile" method
- * @setting         {Onject}       [optimizers={}]     Pass an object of optimizing settings
- * @setting         {Boolean}       [optimizers.split=true]     Specify if you want to make use of the splitting code technique to compile only what's really changed
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- * @todo            check for map output when no file path
- *
- * @example         js
- * import SScssCompiler from '@coffeekraken/sugar/node/scss/compile/SScssCompiler';
- * const compiler = new SScssCompiler();
- * const compiledFile = await compiler.compile('my/cool/code.scss');
- * const compiledCode = await compiler.compile(`
- *      \@include myCoolMixin();
- * `);
- *
- * @see             https://www.npmjs.com/package/sass
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-
 export interface ISScssCompilerParams {
   input: string | string[];
   outputDir: string;
@@ -113,6 +77,35 @@ export interface ISScssCompilerCtor {
 
 export interface ISScssCompiler extends ISCompiler {}
 
+/**
+ * @name                SScssCompiler
+ * @namespace           sugar.node.scss
+ * @type                Class
+ * @extends             SCompiler
+ * @wip
+ *
+ * This class wrap the "sass" compiler with some additional features which are:
+ *
+ * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
+ * @feature         2.0.0       Optimize the render time as much as 6x faster
+ *
+ * @param           {ISScssCompilerOptionalParams}        [initialParams={}]      Some initial parameters to configure your compilation process. Can be overrided thgouth the ```compile``` method
+ * @param           {ISScssCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ * @todo            check for map output when no file path
+ *
+ * @example         js
+ * import SScssCompiler from '@coffeekraken/sugar/node/scss/compile/SScssCompiler';
+ * const compiler = new SScssCompiler();
+ * const compiledFile = await compiler.compile('my/cool/code.scss');
+ *
+ * @see             https://www.npmjs.com/package/sass
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 class SScssCompiler extends __SCompiler implements ISCompiler {
   static interfaces = {
     params: {
@@ -131,7 +124,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get scssCompilerSettings() {
+  get scssCompilerSettings(): ISScssCompilerSettings {
     return (<any>this._settings).scssCompiler;
   }
 
@@ -158,14 +151,6 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
         settings || {}
       )
     );
-
-    // prod
-    if (this.scssCompilerSettings.prod) {
-      this.scssCompilerSettings.cache = false;
-      this.scssCompilerSettings.style = 'compressed';
-      this.scssCompilerSettings.minify = true;
-      this.scssCompilerSettings.stripComments = true;
-    }
   }
 
   /**
@@ -191,6 +176,14 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
       settings = __deepMerge(this.scssCompilerSettings, {}, settings);
 
       let input = Array.isArray(params.input) ? params.input : [params.input];
+
+      // prod
+      if (params.prod) {
+        params.cache = false;
+        params.style = 'compressed';
+        params.minify = true;
+        params.stripComments = true;
+      }
 
       const resultsObj = {};
 

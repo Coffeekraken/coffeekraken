@@ -15,10 +15,11 @@ import __SNotification from '../../blessed/notification/SNotification';
 import __ora from 'ora';
 import __clone from '../../object/clone';
 import __SPromise from '../../promise/SPromise';
+import __SStdio from '../../stdio/SStdio';
 // import __SIpc from '../../ipc/SIpc';
 
 /**
- * @name                SSugarAppTerminalUi
+ * @name                SSugarAppTerminalStdio
  * @namespace           sugar.node.ui.sugar
  * @type                Class
  * @extends             SBlessedComponent
@@ -36,7 +37,7 @@ import __SPromise from '../../promise/SPromise';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SSugarAppTerminalUi extends __SBlessedComponent {
+export default class SSugarAppTerminalStdio extends __SStdio {
   /**
    * @name        _shortcutsCallbackByModule
    * @type        Object
@@ -65,109 +66,111 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(sources: any, settings = {}) {
-    super({
-      screen: true
-    });
+    super(
+      sources,
+      __deepMerge(
+        {
+          sugarAppTerminalStdio: {}
+        },
+        settings
+      )
+    );
 
     this._displayedModuleId = 'welcome';
+    this._handlerInstance = this.sources[0];
 
-    if (!Array.isArray(sources)) sources = [sources];
-    this._handlerInstance = sources[0];
+    // this._appSettings = this._handlerInstance._settings.app;
+    // this._processSettings = this._handlerInstance._settings;
+    // this._params = Object.assign({}, this._processSettings.initialParams || {});
+    // const $welcome = this._initWelcome(this._params);
+    // const $summary = this._initSummary(this._params);
+    // this._modulesObjs = {
+    //   welcome: {
+    //     id: 'welcome',
+    //     name: 'Welcome',
+    //     state: 'ready',
+    //     $content: $welcome
+    //   },
+    //   summary: {
+    //     id: 'summary',
+    //     name: 'Summary',
+    //     state: 'ready',
+    //     $content: $summary
+    //   },
+    //   ...this._handlerInstance.modulesObjs
+    // };
 
-    this._appSettings = this._handlerInstance._settings.app;
-    this._processSettings = this._handlerInstance._settings;
-    this._sources = Array.isArray(sources) ? sources : [sources];
-    this._params = Object.assign({}, this._processSettings.initialParams || {});
-    const $welcome = this._initWelcome(this._params);
-    const $summary = this._initSummary(this._params);
-    this._modulesObjs = {
-      welcome: {
-        id: 'welcome',
-        name: 'Welcome',
-        state: 'ready',
-        $content: $welcome
-      },
-      summary: {
-        id: 'summary',
-        name: 'Summary',
-        state: 'ready',
-        $content: $summary
-      },
-      ...this._handlerInstance.modulesObjs
-    };
+    // Object.keys(this._modulesObjs).forEach((moduleName, i) => {
+    //   const moduleObj = this._modulesObjs[moduleName];
+    //   if (moduleObj.instance === undefined) return;
+    //   $summary.registerSource(moduleObj.instance);
+    // });
 
-    Object.keys(this._modulesObjs).forEach((moduleName, i) => {
-      const moduleObj = this._modulesObjs[moduleName];
-      if (moduleObj.instance === undefined) return;
-      $summary.registerSource(moduleObj.instance);
-    });
+    // this._serverSettings = this._modulesObjs[
+    //   this._appSettings.welcome.serverModule
+    // ];
 
-    this._serverSettings = this._modulesObjs[
-      this._appSettings.welcome.serverModule
-    ];
+    // this.$container = this._initContainer();
+    // this.$content = this._initContent();
+    // this.$topBar = this._initTopBar();
+    // this.$separator = this._initSeparator();
+    // this.$bottomBar = this._initBottomBar();
+    // this.$list = this._initModulesList();
+    // this._initModules(this.$content);
 
-    this.$container = this._initContainer();
-    this.$content = this._initContent();
-    this.$topBar = this._initTopBar();
-    this.$separator = this._initSeparator();
-    this.$bottomBar = this._initBottomBar();
-    this.$list = this._initModulesList();
-    this._initModules(this.$content);
+    // // show the welcome screen
+    // this._showModule('welcome');
 
-    // show the welcome screen
-    this._showModule('welcome');
+    // // set focus to list
+    // this.$list.focus();
 
-    // set focus to list
-    this.$list.focus();
+    // __hotkey('escape').on('press', () => {
+    //   this._showModule('welcome');
+    // });
 
-    __hotkey('escape').on('press', () => {
-      this._showModule('welcome');
-    });
+    // Object.keys(this._modulesObjs).forEach((moduleName, i) => {
+    //   const moduleObj = this._modulesObjs[moduleName];
+    //   __hotkey(`${i + 1}`).on('press', () => {
+    //     if (!this._modulesReady) return;
+    //     this._showModule(moduleObj.id);
+    //     this.$list.focus();
+    //   });
+    // });
 
-    Object.keys(this._modulesObjs).forEach((moduleName, i) => {
-      const moduleObj = this._modulesObjs[moduleName];
-      __hotkey(`${i + 1}`).on('press', () => {
-        if (!this._modulesReady) return;
-        this._showModule(moduleObj.id);
-        this.$list.focus();
-      });
-    });
+    // // listen app
+    // this._modulesReady = false;
+    // this._handlerInstance.on('state', (state: any) => {
+    //   if (state === 'ready') {
+    //     this._modulesReady = true;
+    //   }
+    // });
 
-    // listen app
-    this._modulesReady = false;
-    this._handlerInstance.on('state', (state: any) => {
-      if (state === 'ready') {
-        this._modulesReady = true;
-      }
-    });
+    // // listen modules
+    // this._handlerInstance.on('*.state', (state: any, metas: any) => {
+    //   this._moduleState(state, metas);
+    // });
+    // this._handlerInstance.on(
+    //   '*.notification',
+    //   (notificationObj: any, metas: any) => {
+    //     this._moduleNotification(notificationObj);
+    //   }
+    // );
+    // this._handlerInstance.on('*.start', (data: any, metas: any) => {
+    //   this._moduleStart(data, metas);
+    // });
+    // this._handlerInstance.on('*.success', (data: any, metas: any) => {
+    //   this._moduleSuccess(data, metas);
+    // });
+    // this._handlerInstance.on('*.error', (data: any, metas: any) => {
+    //   if (metas.stack === 'state.error') return;
+    //   this._moduleError(data, metas);
+    // });
 
-    // listen modules
-    this._handlerInstance.on('*.state', (state: any, metas: any) => {
-      this._moduleState(state, metas);
-    });
-    this._handlerInstance.on(
-      '*.notification',
-      (notificationObj: any, metas: any) => {
-        this._moduleNotification(notificationObj);
-      }
-    );
-    this._handlerInstance.on('*.start', (data: any, metas: any) => {
-      this._moduleStart(data, metas);
-    });
-    this._handlerInstance.on('*.success', (data: any, metas: any) => {
-      this._moduleSuccess(data, metas);
-    });
-    this._handlerInstance.on('*.error', (data: any, metas: any) => {
-      if (metas.stack === 'state.error') return;
-      this._moduleError(data, metas);
-    });
-
-    this.append(this.$topBar);
-    this.append(this.$bottomBar);
-    this.append(this.$container);
-    this.$container.append(this.$list);
-    this.$container.append(this.$content);
-    this.$container.append(this.$separator);
+    // this.$container.append(this.$topBar);
+    // this.$container.append(this.$bottomBar);
+    // this.$container.append(this.$list);
+    // this.$container.append(this.$content);
+    // this.$container.append(this.$separator);
   }
 
   _getDisplayedModuleObj() {
@@ -456,13 +459,16 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
   }
 
   _initContainer() {
-    const $container = __blessed.box({
-      top: 3,
-      left: 0,
-      right: 0,
-      bottom: 1,
-      width: '100%',
-      style: {}
+    const $container = new __SBlessedComponent({
+      attach: true,
+      blessed: {
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: '100%',
+        style: {}
+      }
     });
     return $container;
   }
@@ -481,38 +487,42 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
   }
 
   _initContent() {
-    const $content = __blessed.box({
-      left: '20%',
-      width: '80%',
-      height: '100%',
-      padding: {
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0
+    const $content = new __SBlessedComponent({
+      blessed: {
+        left: '20%',
+        width: '80%',
+        height: '100%',
+        padding: {
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0
+        }
       }
     });
     return $content;
   }
 
   _initTopBar() {
-    const $topBar = __blessed.box({
-      top: 0,
-      left: 0,
-      right: 0,
-      height: 3,
-      style: {
-        bg: 'yellow',
-        fg: 'black'
-      },
-      padding: {
-        top: 1,
-        left: 2,
-        right: 2
-      },
-      content: __parseHtml(
-        `<bgBlack><white> MIT </white></bgBlack><bgWhite><black> Sugar </black></bgWhite> 2.0.0`
-      )
+    const $topBar = new __SBlessedComponent({
+      blessed: {
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 3,
+        style: {
+          bg: 'yellow',
+          fg: 'black'
+        },
+        padding: {
+          top: 1,
+          left: 2,
+          right: 2
+        },
+        content: __parseHtml(
+          `<bgBlack><white> MIT </white></bgBlack><bgWhite><black> Sugar </black></bgWhite> 2.0.0`
+        )
+      }
     });
     return $topBar;
   }
@@ -528,13 +538,15 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _initBottomBar() {
-    const $bar = __blessed.box({
-      bottom: 0,
-      left: 0,
-      right: 0,
-      height: 1,
-      style: {
-        bg: 'yellow'
+    const $bar = new __SBlessedComponent({
+      blessed: {
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 1,
+        style: {
+          bg: 'yellow'
+        }
       }
     });
 
@@ -575,40 +587,48 @@ export default class SSugarAppTerminalUi extends __SBlessedComponent {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _initWelcome(params: any) {
-    const $container = __blessed.box({
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      style: {}
+    const $container = new __SBlessedComponent({
+      blessed: {
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        style: {}
+      }
     });
 
-    const $centeredBox = __blessed.box({
-      top: '50%-11',
-      left: 'center',
-      width: '100%',
-      height: 'shrink',
-      style: {}
+    const $centeredBox = new __SBlessedComponent({
+      blessed: {
+        top: '50%-11',
+        left: 'center',
+        width: '100%',
+        height: 'shrink',
+        style: {}
+      }
     });
 
     const logoString = __sugarHeading({
       borders: false
     });
-    const $logo = __blessed.box({
-      width: 'shrink',
-      height: 8,
-      top: 0,
-      left: 'center',
-      style: {},
-      content: logoString
+    const $logo = new __SBlessedComponent({
+      blessed: {
+        width: 'shrink',
+        height: 8,
+        top: 0,
+        left: 'center',
+        style: {},
+        content: logoString
+      }
     });
 
-    const $metasBox = __blessed.box({
-      width: 'shrink',
-      height: 'shrink',
-      top: logoString.split('\n').length,
-      left: 'center',
-      style: {}
+    const $metasBox = new __SBlessedComponent({
+      blessed: {
+        width: 'shrink',
+        height: 'shrink',
+        top: logoString.split('\n').length,
+        left: 'center',
+        style: {}
+      }
     });
 
     const spinner = __ora('Loading');

@@ -38,6 +38,7 @@ export = class SFrontendServerProcess extends __SProcess {
     super({
       id: 'SFrontendServerProcess',
       name: 'Frontend Server Process',
+      // exitAtEnd: false,
       ...settings
     });
   }

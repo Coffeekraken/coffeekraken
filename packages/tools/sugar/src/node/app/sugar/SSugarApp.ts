@@ -4,7 +4,7 @@ import __deepMerge from '../../object/deepMerge';
 import __SPromise from '../../promise/SPromise';
 import __sugarConfig from '../../config/sugar';
 import __SSugarAppProcess from './SSugarAppProcess';
-import __SSugarAppTerminalUi from './SSugarAppTerminalUi';
+import __SSugarAppTerminalStdio from './SSugarAppTerminalStdio';
 
 /**
  * @name            SSugarApp
@@ -56,7 +56,8 @@ export default class SSugarApp extends __SPromise {
     super(settings);
 
     this._process = new __SSugarAppProcess({
-      stdio: __SSugarAppTerminalUi
+      exitAtEnd: false,
+      stdio: __SSugarAppTerminalStdio
     });
     this._process.run(stringArgs);
   }

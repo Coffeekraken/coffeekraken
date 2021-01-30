@@ -115,6 +115,8 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
       __deepMerge(
         {
           blessedStdio: {
+            screen: true,
+            attach: true,
             actionPrefix: true,
             blessed: {
               top: 0,
@@ -144,8 +146,8 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
     );
 
     this.$container = new __SBlessedComponent({
-      screen: true,
-      attach: true,
+      screen: this._settings.blessedStdio.screen,
+      attach: this._settings.blessedStdio.attach,
       blessed: this._settings.blessedStdio.blessed || {}
     });
 

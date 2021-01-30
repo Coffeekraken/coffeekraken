@@ -135,7 +135,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   slug: '/homepage',
-
     //   /**
     //    * @name          title
     //    * @namespace     config.frontent.pages.homepage
@@ -149,7 +148,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   title: 'homepage | [title]',
-
     //   /**
     //    * @name            handler
     //    * @namespace       config.frontend.handlers.homepage
@@ -162,7 +160,6 @@ module.exports = {
     //    */
     //   handler: `${__dirname}/../src/node/server/frontend/handlers/homepage`
     // },
-
     // /**
     //  * @name            ts
     //  * @namespace       config.frontend.handlers
@@ -186,7 +183,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   extension: '.ts',
-
     //   /**
     //    * @name            handler
     //    * @namespace       config.frontend.handlers.sugar
@@ -199,7 +195,6 @@ module.exports = {
     //    */
     //   handler: `${__dirname}/../src/node/server/frontend/handlers/ts`
     // },
-
     // /**
     //  * @name            js
     //  * @namespace       config.frontend.handlers
@@ -223,7 +218,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   extension: '.js',
-
     //   /**
     //    * @name            handler
     //    * @namespace       config.frontend.handlers.sugar
@@ -236,44 +230,41 @@ module.exports = {
     //    */
     //   handler: `${__dirname}/../src/node/server/frontend/handlers/js`
     // },
-
-    /**
-     * @name            scss
-     * @namespace       config.frontend.handlers
-     * @type            Object
-     *
-     * Handler for .scss files
-     *
-     * @since         2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    scss: {
-      /**
-       * @name          extension
-       * @namespace     config.frontend.handlers.sugar
-       * @type          String
-       * @default       .scss
-       *
-       * Specify the url slug to use for this "section"
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      extension: '.scss',
-
-      /**
-       * @name            handler
-       * @namespace       config.frontend.handlers.sugar
-       * @type            Function
-       *
-       * Specify the handler function that will take care of responding to this "section"
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      handler: `${__dirname}/../src/node/server/frontend/handlers/scss`
-    },
-
+    // /**
+    //  * @name            scss
+    //  * @namespace       config.frontend.handlers
+    //  * @type            Object
+    //  *
+    //  * Handler for .scss files
+    //  *
+    //  * @since         2.0.0
+    //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //  */
+    // scss: {
+    //   /**
+    //    * @name          extension
+    //    * @namespace     config.frontend.handlers.sugar
+    //    * @type          String
+    //    * @default       .scss
+    //    *
+    //    * Specify the url slug to use for this "section"
+    //    *
+    //    * @since         2.0.0
+    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    */
+    //   extension: '.scss',
+    //   /**
+    //    * @name            handler
+    //    * @namespace       config.frontend.handlers.sugar
+    //    * @type            Function
+    //    *
+    //    * Specify the handler function that will take care of responding to this "section"
+    //    *
+    //    * @since         2.0.0
+    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    */
+    //   handler: `${__dirname}/../src/node/server/frontend/handlers/scss`
+    // },
     // /**
     //  * @name            sugar
     //  * @namespace       config.frontend.handlers
@@ -297,7 +288,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   slug: '/sugar',
-
     //   /**
     //    * @name          title
     //    * @namespace     config.frontent.pages.sugar
@@ -311,7 +301,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   title: 'Sugar | [title]',
-
     //   /**
     //    * @name            handler
     //    * @namespace       config.frontend.handlers.sugar
@@ -324,58 +313,54 @@ module.exports = {
     //    */
     //   handler: `${__dirname}/../src/node/server/frontend/handlers/sugar`
     // },
-
-    /**
-     * @name            views
-     * @namespace       config.frontend.handlers
-     * @type            Object
-     *
-     * Store all the "views" configuration access like the slug, the title, etc...
-     *
-     * @since         2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    views: {
-      /**
-       * @name          slug
-       * @namespace     config.frontend.handlers.views
-       * @type          String
-       * @default       /views
-       *
-       * Specify the url slug to use for this "section"
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      slug: '/views',
-
-      /**
-       * @name          title
-       * @namespace     config.frontent.pages.views
-       * @type          String
-       * @default       Views | [title]
-       *
-       * Specify the page title wanted. Accessible tokens:
-       * - [title]: Name of the view
-       *
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      title: 'Views | [title]',
-
-      /**
-       * @name            handler
-       * @namespace       config.frontend.handlers.views
-       * @type            Function
-       *
-       * Specify the handler function that will take care of responding to this "section"
-       *
-       * @since         2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      handler: `${__dirname}/../src/node/server/frontend/handlers/views`
-    }
-
+    // /**
+    //  * @name            views
+    //  * @namespace       config.frontend.handlers
+    //  * @type            Object
+    //  *
+    //  * Store all the "views" configuration access like the slug, the title, etc...
+    //  *
+    //  * @since         2.0.0
+    //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //  */
+    // views: {
+    //   /**
+    //    * @name          slug
+    //    * @namespace     config.frontend.handlers.views
+    //    * @type          String
+    //    * @default       /views
+    //    *
+    //    * Specify the url slug to use for this "section"
+    //    *
+    //    * @since         2.0.0
+    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    */
+    //   slug: '/views',
+    //   /**
+    //    * @name          title
+    //    * @namespace     config.frontent.pages.views
+    //    * @type          String
+    //    * @default       Views | [title]
+    //    *
+    //    * Specify the page title wanted. Accessible tokens:
+    //    * - [title]: Name of the view
+    //    *
+    //    * @since       2.0.0
+    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    */
+    //   title: 'Views | [title]',
+    //   /**
+    //    * @name            handler
+    //    * @namespace       config.frontend.handlers.views
+    //    * @type            Function
+    //    *
+    //    * Specify the handler function that will take care of responding to this "section"
+    //    *
+    //    * @since         2.0.0
+    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    */
+    //   handler: `${__dirname}/../src/node/server/frontend/handlers/views`
+    // }
     // /**
     //  * @name            docMap
     //  * @namespace       config.frontend.handlers
@@ -399,7 +384,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   slug: '/docMap',
-
     //   /**
     //    * @name          title
     //    * @namespace     config.frontent.pages.docMap
@@ -413,7 +397,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   title: 'docMap.json',
-
     //   /**
     //    * @name            handler
     //    * @namespace       config.frontend.handlers.docMap
@@ -426,7 +409,6 @@ module.exports = {
     //    */
     //   handler: `${__dirname}/../src/node/server/frontend/handlers/docMap`
     // },
-
     // /**
     //  * @name            doc
     //  * @namespace       config.frontend.handlers
@@ -450,7 +432,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   slug: '/doc',
-
     //   /**
     //    * @name            title
     //    * @namespace       config.frontend.handlers.doc
@@ -463,7 +444,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   title: 'Documentation | [title]',
-
     //   /**
     //    * @name            handler
     //    * @namespace       config.frontend.handlers.doc
@@ -476,7 +456,6 @@ module.exports = {
     //    */
     //   handler: `${__dirname}/../src/node/server/frontend/handlers/doc`
     // },
-
     // /**
     //  * @name            search
     //  * @namespace       config.frontend.handlers
@@ -500,7 +479,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   slug: '/search',
-
     //   /**
     //    * @name            title
     //    * @namespace       config.frontend.handlers.search
@@ -513,7 +491,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   title: 'Search | [title]',
-
     //   /**
     //    * @name            handler
     //    * @namespace       config.frontend.handlers.search
@@ -525,7 +502,6 @@ module.exports = {
     //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //    */
     //   handler: `${__dirname}/../src/node/server/frontend/handlers/search`,
-
     //   /**
     //    * @name        settings
     //    * @namespace   config.frontend.handlers.search

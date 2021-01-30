@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __SPromise from '../../../promise/SPromise';
-import __SScssCompiler from '../../../scss/SScssCompiler';
+import __SScssCompiler from '../../../scss/compile/SScssCompiler';
 import __SDuration from '../../../time/SDuration';
-import __SBuildScssInterface from '../../../scss/build/interface/SBuildScssInterface';
+import __SScssCompilerParamsInterface from '../../../scss/compile/interface/SScssCompilerParamsInterface';
 
 /**
  * @name                scss
@@ -28,13 +28,13 @@ export = function scss(req, res, settings = {}) {
   const promise = new __SPromise();
 
   (async () => {
-    const defaul9tValuesObj = __SBuildScssInterface.defaults();
+    const defaultValuesObj = __SScssCompilerParamsInterface.defaults();
     const compiler = new __SScssCompiler(defaultValuesObj);
     const duration = new __SDuration();
     const compilerPromise = compiler.compile(req.path, {
       ...(req.query || {})
     });
-    __SPromise.pipe(compilerPromise, promise);
+    promise.pipe(compilerPromise);
     compilerPromise.on('reject', (e) => {
       res.type('text/html');
       res.status(500);

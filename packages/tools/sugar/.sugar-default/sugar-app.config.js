@@ -13,7 +13,7 @@ module.exports = {
       processPath: `${__packageRoot(
         __dirname
       )}/src/node/server/frontend/SFrontendServerProcess`,
-      stdio: ['terminal', 'socket'],
+      stdio: ['blessed'],
       params: '[config.frontend]'
       // presets: {
       //   prod: {

@@ -311,7 +311,7 @@ class SStdio extends __SClass implements ISStdio {
       if (log.clear === true) {
         if (typeof this.clear !== 'function')
           throw new Error(
-            `You try to clear the "<yellow></yellow>" stdio but it does not implements the "<cyan>clear</cyan>" method`
+            `You try to clear the "<yellow>${this.constructor.name}</yellow>" stdio but it does not implements the "<cyan>clear</cyan>" method`
           );
         this.clear();
       }

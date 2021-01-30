@@ -56,11 +56,11 @@ export interface ISSugarAppModuleShortcut {
 }
 
 export interface ISSugarAppModule {
-  id: string;
-  name: string;
-  description: string;
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
   processPath: string;
-  params: any;
+  readonly params: any;
 }
 
 export default class SSugarAppModule
@@ -105,6 +105,59 @@ export default class SSugarAppModule
   shortcuts: ISSugarAppModuleShortcuts = {};
 
   /**
+   * @name          description
+   * @type          String
+   * @get
+   *
+   * Access the module description
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get description(): string {
+    return this._moduleObjDescriptor.description;
+  }
+
+  /**
+   * @name          params
+   * @type          Object
+   *
+   * Store the passed module parameters
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get params(): any {
+    return this._moduleObjDescriptor.params;
+  }
+
+  /**
+   * @name          settings
+   * @type          Object
+   *
+   * Store the passed module settings
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get settings(): any {
+    return this._moduleObjDescriptor.settings;
+  }
+
+  /**
+   * @name          processPath
+   * @type          String
+   *
+   * Store the passed module process path
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get processPath(): any {
+    return this._moduleObjDescriptor.processPath;
+  }
+
+  /**
    * @name          stdio
    * @type          Function
    * @get
@@ -126,17 +179,6 @@ export default class SSugarAppModule
     }
     return this._stdio[id];
   }
-
-  /**
-   * @name          params
-   * @type          Object
-   *
-   * Store the passed module parameters
-   *
-   * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  params: any = {};
 
   /**
    * @name        _active
@@ -257,55 +299,71 @@ export default class SSugarAppModule
     this._initShortcuts();
 
     // listen when ready
-    this.on('state.ready:1', () => {
-      // listen for presets
-      this.on('preset', (presetObj) => {
-        // kill the current process if already one
-        const processId = presetObj.process || this._settings.mainProcessId;
-        const pro = this.getProcess(processId);
-        if (pro.isRunning()) {
-          pro.kill(
-            `Killing the current "<yellow>${processId}</yellow>" process`
-          );
-        }
-        // merging the params with the preset params
-        const presetParams = __deepMerge(
-          this._moduleObj.params || {},
-          presetObj.params || {}
-        );
-        // running the process with the new params
-        pro.run(presetParams);
-      });
+    this.on('state.ready:1', this._onReady.bind(this));
+  }
 
-      // init the Stdios
-      const stdios = Array.isArray(this._moduleObjDescriptor.stdio)
-        ? this._moduleObjDescriptor.stdio
-        : [this._moduleObjDescriptor.stdio].map((i) => i !== undefined);
-      stdios.forEach((stdio) => {
-        let stdioSettings = {},
-          stdioId,
-          stdioArg = stdio;
-        if (__isPlain(stdio)) {
-          stdioArg = stdio.stdio;
-          stdioSettings = stdioSettings || {};
-          stdioId = stdio.id;
-        }
-        // define the stdioId
-        if (!stdioId) {
-          if (__isClass(stdioArg)) stdioId = stdioArg.name;
-          else if (__isPlain(stdio)) stdioId = stdio.id;
-          else if (typeof stdioArg === 'string') stdioId = stdioArg;
-        }
+  /**
+   * @name          _onReady
+   * @type          Function
+   * @private
+   *
+   * Called when the module is ready
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  private _onReady() {
+    // // listen for presets
+    // this.on('preset', (presetObj) => {
+    //   // kill the current process if already one
+    //   const processId = presetObj.process || this._settings.mainProcessId;
+    //   const pro = this.getProcess(processId);
+    //   if (pro.isRunning()) {
+    //     pro.kill(
+    //       `Killing the current "<yellow>${processId}</yellow>" process`
+    //     );
+    //   }
+    //   // merging the params with the preset params
+    //   const presetParams = __deepMerge(
+    //     this.params || {},
+    //     presetObj.params || {}
+    //   );
+    //   // running the process with the new params
+    //   pro.run(presetParams);
+    // });
 
-        const stdioInstance = __stdio(this, stdioArg, stdioSettings);
-        if (stdioInstance) {
-          this.stdio(stdioId || 'unknown', stdioInstance);
-        }
-      });
-      if (this._moduleObjDescriptor.autoRun === true) {
-        this.process.run(this._moduleObjDescriptor.params || {});
+    // init the Stdios
+    const stdios = Array.isArray(this._moduleObjDescriptor.stdio)
+      ? this._moduleObjDescriptor.stdio
+      : [this._moduleObjDescriptor.stdio].map((i) => i !== undefined);
+    stdios.forEach((stdio) => {
+      let stdioSettings: any = {
+          blessedStdio: {
+            attach: false
+          }
+        },
+        stdioId,
+        stdioArg = stdio;
+      if (__isPlain(stdio)) {
+        stdioArg = stdio.stdio;
+        stdioSettings = __deepMerge(stdioSettings, stdio.settings || {});
+        stdioId = stdio.id;
+      }
+      // define the stdioId
+      if (!stdioId) {
+        if (__isClass(stdioArg)) stdioId = stdioArg.name;
+        else if (__isPlain(stdio)) stdioId = stdio.id;
+        else if (typeof stdioArg === 'string') stdioId = stdioArg;
+      }
+
+      const stdioInstance = __stdio(this, stdioArg, stdioSettings);
+      if (stdioInstance) {
+        this.stdio(stdioId || 'unknown', stdioInstance);
       }
     });
+    if (this._moduleObjDescriptor.autoRun === true) {
+      this.process.run(this._moduleObjDescriptor.params || {});
+    }
   }
 
   /**
@@ -518,11 +576,11 @@ export default class SSugarAppModule
       __hotkey(shortcut).on('press', () => {
         if (!this.isActive()) return;
         const params = __deepMerge(
-          Object.assign({}, this._moduleObj.params || {}),
+          Object.assign({}, this.params || {}),
           Object.assign({}, shortcutObj.params || {})
         );
         const settings = __deepMerge(
-          Object.assign({}, this._moduleObj.settings || {}),
+          Object.assign({}, this.settings || {}),
           Object.assign({}, shortcutObj.settings || {})
         );
         delete shortcutObj.params;

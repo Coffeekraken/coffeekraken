@@ -77,6 +77,10 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
     );
   }
 
+  clear() {
+    console.log('clearing to be implemented');
+  }
+
   /**
    * @name          _log
    * @type          Function

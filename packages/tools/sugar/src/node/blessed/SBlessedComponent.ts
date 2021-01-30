@@ -222,6 +222,7 @@ class SBlessedComponent extends __blessed.box implements ISBlessedComponent {
   }
 
   get realHeight() {
+    if (!this.isDisplayed()) return 0;
     let height = this.height;
     if (typeof this.getScrollHeight === 'function') {
       try {

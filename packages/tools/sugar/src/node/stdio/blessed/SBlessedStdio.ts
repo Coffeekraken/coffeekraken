@@ -148,7 +148,37 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
     this.$container = new __SBlessedComponent({
       screen: this._settings.blessedStdio.screen,
       attach: this._settings.blessedStdio.attach,
-      blessed: this._settings.blessedStdio.blessed || {}
+      blessed: {
+        // width: '100%',
+        // height: '100%',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        padding: {
+          top: 1,
+          left: 2,
+          bottom: 1,
+          right: 2
+        },
+        style: {
+          bg: 'cyan'
+        },
+        ...(this._settings.blessedStdio.blessed || {})
+      }
+    });
+
+    this.$container.on('show', () => {
+      this.display();
+    });
+    this.$container.on('attach', () => {
+      this.display();
+    });
+    this.$container.on('hide', () => {
+      this.hide();
+    });
+    this.$container.on('detach', () => {
+      this.hide();
     });
 
     // // listen for resizing
@@ -206,7 +236,6 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
     let $lastComponent;
     // clear
     if (logObj.clear === true) {
-      this.clear();
     } else {
       $lastComponent = this.stack.length ? this.stack.pop() : undefined;
     }
@@ -218,7 +247,7 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
       $component.top = $lastComponent.top + $lastComponent.realHeight;
     }
     this.$container.append($component);
-    $component.height = $component.realHeight;
+    // $component.height = $component.realHeight;
 
     // scroll to bottom
     clearTimeout(this._updateTimeout);
@@ -229,6 +258,20 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
       // update display
       this.$container.update();
     }, 200);
+  }
+
+  /**
+   * @name          isDisplayed
+   * @type          Function
+   * @return        Boolean
+   *
+   * true if is displayed, false if not
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  isDisplayed() {
+    return this.$container && this.$container.parent !== null;
   }
 
   /**

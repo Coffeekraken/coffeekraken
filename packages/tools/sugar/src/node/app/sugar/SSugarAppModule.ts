@@ -3,17 +3,18 @@ import __isPath from '../../is/path';
 import __isClass from '../../is/class';
 import __isPlain from '../../is/plainObject';
 import __getFilename from '../../fs/filename';
-import __SBlessedStdio from '../../stdio/blessed/SBlessedStdio';
 import __SEventEmitter from '../../promise/SPromise';
 import __SError from '../../error/SError';
 import __toString from '../../string/toString';
 import __SSugarAppModuleSettingsInterface from './interface/SSugarAppModuleSettingsInterface';
 import __deepMerge from '../../object/deepMerge';
 import __hotkey from '../../keyboard/hotkey';
+import __SBlessedStdio from '../../stdio/blessed/SBlessedStdio';
 // import __SIpc from '../../ipc/SIpc';
 import __SProcessManager from '../../process/SProcess';
 import __blessed from 'blessed';
 import __stdio from '../../stdio/stdio';
+import __SBlessedComponent from '../../blessed/SBlessedComponent';
 
 import __SSugarAppModuleInterface from './interface/SSugarAppModuleInterface';
 import { ISClass } from '../../class/SClass';
@@ -167,17 +168,17 @@ export default class SSugarAppModule
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _stdio = {};
+  stdios = {};
   stdio(id: string = 'terminal', value?: any) {
     if (value) {
-      this._stdio[id] = value;
+      this.stdios[id] = value;
       this.emit('stdio', {
         id,
         instance: value
       });
       this.emit(`stdio.${id}`, value);
     }
-    return this._stdio[id];
+    return this.stdios[id];
   }
 
   /**
@@ -216,6 +217,17 @@ export default class SSugarAppModule
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   private _moduleProcesses = {};
+
+  /**
+   * @nane        $stdio
+   * @type        blessed.box|SBlessedStdio
+   *
+   * Store the stdio instance used to be displayed in the GUI
+   *
+   * @since       2.0.'0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  $stdio: any = undefined;
 
   /**
    * @name          getRegisteredModules
@@ -269,6 +281,7 @@ export default class SSugarAppModule
     super(
       __deepMerge(
         {
+          id: moduleObjDescriptor.id,
           sugarAppModule: {
             mainProcessId: 'main',
             processIdUsedForState: undefined
@@ -277,7 +290,6 @@ export default class SSugarAppModule
         settings || {}
       )
     );
-    this._settings.id = `SSugarAppModule.${moduleObjDescriptor.id}`;
     this._moduleObjDescriptor = moduleObjDescriptor;
 
     // __SIpc.on('sugar.ui.displayedModule', (moduleId) => {
@@ -297,6 +309,44 @@ export default class SSugarAppModule
 
     // init shortcuts
     this._initShortcuts();
+
+    // init the Stdios
+    const stdios = Array.isArray(this._moduleObjDescriptor.stdio)
+      ? this._moduleObjDescriptor.stdio
+      : [this._moduleObjDescriptor.stdio].map((i) => i !== undefined);
+    stdios.forEach((stdio) => {
+      let stdioSettings: any = {
+          blessedStdio: {
+            attach: false
+          }
+        },
+        stdioId,
+        stdioArg = stdio;
+      if (__isPlain(stdio)) {
+        stdioArg = stdio.stdio;
+        stdioSettings = __deepMerge(stdioSettings, stdio.settings || {});
+        stdioId = stdio.id;
+      }
+      // define the stdioId
+      if (!stdioId) {
+        if (__isClass(stdioArg)) stdioId = stdioArg.name;
+        else if (__isPlain(stdio)) stdioId = stdio.id;
+        else if (typeof stdioArg === 'string') stdioId = stdioArg;
+      }
+
+      const stdioInstance = __stdio(this, stdioArg, stdioSettings);
+
+      if (
+        stdioInstance instanceof __SBlessedStdio ||
+        stdioInstance instanceof __blessed.box
+      ) {
+        // @ts-ignore
+        this.$stdio = stdioInstance.$container || stdioInstance;
+      }
+      if (stdioInstance) {
+        this.stdio(stdioId || 'unknown', stdioInstance);
+      }
+    });
 
     // listen when ready
     this.on('state.ready:1', this._onReady.bind(this));
@@ -332,35 +382,6 @@ export default class SSugarAppModule
     //   pro.run(presetParams);
     // });
 
-    // init the Stdios
-    const stdios = Array.isArray(this._moduleObjDescriptor.stdio)
-      ? this._moduleObjDescriptor.stdio
-      : [this._moduleObjDescriptor.stdio].map((i) => i !== undefined);
-    stdios.forEach((stdio) => {
-      let stdioSettings: any = {
-          blessedStdio: {
-            attach: false
-          }
-        },
-        stdioId,
-        stdioArg = stdio;
-      if (__isPlain(stdio)) {
-        stdioArg = stdio.stdio;
-        stdioSettings = __deepMerge(stdioSettings, stdio.settings || {});
-        stdioId = stdio.id;
-      }
-      // define the stdioId
-      if (!stdioId) {
-        if (__isClass(stdioArg)) stdioId = stdioArg.name;
-        else if (__isPlain(stdio)) stdioId = stdio.id;
-        else if (typeof stdioArg === 'string') stdioId = stdioArg;
-      }
-
-      const stdioInstance = __stdio(this, stdioArg, stdioSettings);
-      if (stdioInstance) {
-        this.stdio(stdioId || 'unknown', stdioInstance);
-      }
-    });
     if (this._moduleObjDescriptor.autoRun === true) {
       this.process.run(this._moduleObjDescriptor.params || {});
     }

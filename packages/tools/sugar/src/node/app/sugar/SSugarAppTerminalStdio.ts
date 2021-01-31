@@ -1,6 +1,7 @@
 // @ts-nocheck
 import __path from 'path';
 import __upperFirst from '../../string/upperFirst';
+import __deepMerge from '../../object/deepMerge';
 import __SBlessedComponent from '../../blessed/SBlessedComponent';
 import __sugarHeading from '../../ascii/sugarHeading';
 import __sugarConfig from '../../config/sugar';
@@ -16,6 +17,7 @@ import __ora from 'ora';
 import __clone from '../../object/clone';
 import __SPromise from '../../promise/SPromise';
 import __SStdio from '../../stdio/SStdio';
+import __quotes from 'inspirational-quotes';
 // import __SIpc from '../../ipc/SIpc';
 
 /**
@@ -56,6 +58,18 @@ export default class SSugarAppTerminalStdio extends __SStdio {
   _shortcutsCallbackByModule = {};
 
   /**
+   * @name          $modulesContainer
+   * @type          SBlessedComponent
+   * @private
+   *
+   * Store the module container
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  $modulesContainer: any;
+
+  /**
    * @name            constructor
    * @type            Function
    * @constructor
@@ -77,145 +91,146 @@ export default class SSugarAppTerminalStdio extends __SStdio {
     );
 
     this._displayedModuleId = 'welcome';
-    this._handlerInstance = this.sources[0];
+    this._handlerProcess = this.sources[0];
 
-    // this._appSettings = this._handlerInstance._settings.app;
-    // this._processSettings = this._handlerInstance._settings;
+    // this._appSettings = this._handlerProcess._settings.app;
+    // this._processSettings = this._handlerProcess._settings;
     // this._params = Object.assign({}, this._processSettings.initialParams || {});
-    // const $welcome = this._initWelcome(this._params);
-    // const $summary = this._initSummary(this._params);
-    // this._modulesObjs = {
-    //   welcome: {
-    //     id: 'welcome',
-    //     name: 'Welcome',
-    //     state: 'ready',
-    //     $content: $welcome
-    //   },
-    //   summary: {
-    //     id: 'summary',
-    //     name: 'Summary',
-    //     state: 'ready',
-    //     $content: $summary
-    //   },
-    //   ...this._handlerInstance.modulesObjs
-    // };
+    const $welcome = this._initWelcome(this._handlerProcess.initialParams);
+    const $summary = this._initSummary(this._handlerProcess.initialParams);
+    this._modules = {
+      welcome: {
+        id: 'welcome',
+        name: 'Welcome',
+        state: 'ready',
+        $stdio: $welcome
+      },
+      // summary: {
+      //   id: 'summary',
+      //   name: 'Summary',
+      //   state: 'ready',
+      //   $stdio: $summary
+      // },
+      ...this._handlerProcess.loadedModules
+    };
 
-    // Object.keys(this._modulesObjs).forEach((moduleName, i) => {
-    //   const moduleObj = this._modulesObjs[moduleName];
-    //   if (moduleObj.instance === undefined) return;
-    //   $summary.registerSource(moduleObj.instance);
-    // });
-
-    // this._serverSettings = this._modulesObjs[
+    // this._serverSettings = this._modules[
     //   this._appSettings.welcome.serverModule
     // ];
 
-    // this.$container = this._initContainer();
-    // this.$content = this._initContent();
-    // this.$topBar = this._initTopBar();
-    // this.$separator = this._initSeparator();
-    // this.$bottomBar = this._initBottomBar();
-    // this.$list = this._initModulesList();
-    // this._initModules(this.$content);
+    this.$container = this._initContainer();
+    this.$stdio = this._initStdio();
+    this.$topBar = this._initTopBar();
+    this.$separator = this._initSeparator();
+    this.$bottomBar = this._initBottomBar();
+    this.$list = this._initModulesList();
 
-    // // show the welcome screen
-    // this._showModule('welcome');
+    Object.keys(this._modules).forEach((moduleName, i) => {
+      const moduleObj = this._modules[moduleName];
+      this._initModule(moduleName);
+      // $summary.registerSource(moduleObj.instance);
+    });
 
-    // // set focus to list
-    // this.$list.focus();
+    // show the welcome screen
+    // and listen for escape key to display welcome
+    this._showModule('welcome');
+    __hotkey('escape').on('press', () => {
+      this.$list.focus();
+      this._showModule('welcome');
+    });
 
-    // __hotkey('escape').on('press', () => {
-    //   this._showModule('welcome');
-    // });
+    // set focus to list
+    this.$list.focus();
+    Object.keys(this._modules).forEach((moduleName, i) => {
+      const moduleObj = this._modules[moduleName];
+      __hotkey(`${i + 1}`).on('press', () => {
+        if (!this._modulesReady) return;
+        this._showModule(moduleObj.id);
+        this.$list.focus();
+      });
+    });
 
-    // Object.keys(this._modulesObjs).forEach((moduleName, i) => {
-    //   const moduleObj = this._modulesObjs[moduleName];
-    //   __hotkey(`${i + 1}`).on('press', () => {
-    //     if (!this._modulesReady) return;
-    //     this._showModule(moduleObj.id);
-    //     this.$list.focus();
-    //   });
-    // });
-
-    // // listen app
-    // this._modulesReady = false;
-    // this._handlerInstance.on('state', (state: any) => {
-    //   if (state === 'ready') {
-    //     this._modulesReady = true;
-    //   }
-    // });
+    // listen app
+    this._modulesReady = false;
+    this._handlerProcess.on('state', (state: any) => {
+      if (state === 'ready') {
+        this._modulesReady = true;
+      }
+    });
 
     // // listen modules
-    // this._handlerInstance.on('*.state', (state: any, metas: any) => {
+    // this._handlerProcess.on('*.state', (state: any, metas: any) => {
     //   this._moduleState(state, metas);
     // });
-    // this._handlerInstance.on(
+    // this._handlerProcess.on(
     //   '*.notification',
     //   (notificationObj: any, metas: any) => {
     //     this._moduleNotification(notificationObj);
     //   }
     // );
-    // this._handlerInstance.on('*.start', (data: any, metas: any) => {
+    // this._handlerProcess.on('*.start', (data: any, metas: any) => {
     //   this._moduleStart(data, metas);
     // });
-    // this._handlerInstance.on('*.success', (data: any, metas: any) => {
+    // this._handlerProcess.on('*.success', (data: any, metas: any) => {
     //   this._moduleSuccess(data, metas);
     // });
-    // this._handlerInstance.on('*.error', (data: any, metas: any) => {
+    // this._handlerProcess.on('*.error', (data: any, metas: any) => {
     //   if (metas.stack === 'state.error') return;
     //   this._moduleError(data, metas);
     // });
 
-    // this.$container.append(this.$topBar);
-    // this.$container.append(this.$bottomBar);
-    // this.$container.append(this.$list);
-    // this.$container.append(this.$content);
-    // this.$container.append(this.$separator);
+    this.$container.append(this.$topBar);
+    this.$container.append(this.$bottomBar);
+    this.$container.append(this.$list);
+    this.$container.append(this.$stdio);
+    this.$container.append(this.$separator);
   }
 
   _getDisplayedModuleObj() {
     if (!this._displayedModuleId) return undefined;
     const moduleObj = this._findModuleObjById(this._displayedModuleId);
-    if (!moduleObj.$contentContainer.parent) return undefined;
+    if (!moduleObj.$stdioContainer.parent) return undefined;
     return moduleObj;
   }
 
   _showModule(moduleIdOrName: any) {
-    let moduleObj = this._findModuleObjById(moduleIdOrName);
-    if (!moduleObj) moduleObj = this._findModuleObjByName(moduleIdOrName);
-    if (!moduleObj || !moduleObj.$contentContainer) return;
+    let module = this._findModuleObj(moduleIdOrName);
+    if (!module || !module.$stdio) return;
 
-    this._displayedModuleId = moduleObj.id;
+    // this._displayedModuleId = module.id;
 
-    Object.keys(this._modulesObjs).forEach((moduleId, i) => {
-      const moduleObjToShowOrHide = this._modulesObjs[moduleId];
-
-      if (moduleObjToShowOrHide.id === moduleObj.id) {
-        if (moduleObjToShowOrHide.instance !== undefined)
-          moduleObjToShowOrHide.instance.activate();
+    Object.keys(this._modules).forEach((moduleId, i) => {
+      const mod = this._modules[moduleId];
+      if (mod.id === module.id) {
+        // module.activate();
         this.$list.select(i);
       } else {
-        if (moduleObjToShowOrHide.instance !== undefined)
-          moduleObjToShowOrHide.instance.unactivate();
+        // module.unactivate();
       }
     });
-    this.$content.children.forEach(($child: any) => {
+    this.$stdio.children.forEach(($child: any) => {
       $child.hide();
     });
-    moduleObj.$contentContainer.show();
+    module.$stdio.show();
+  }
+
+  _findModuleObj(idOrName: string) {
+    let moduleObj = this._findModuleObjById(idOrName);
+    if (!moduleObj) moduleObj = this._findModuleObjByName(idOrName);
+    return moduleObj;
   }
 
   _findModuleObjById(id: any) {
-    for (let i = 0; i < Object.keys(this._modulesObjs).length; i++) {
-      const moduleObj = this._modulesObjs[Object.keys(this._modulesObjs)[i]];
+    for (let i = 0; i < Object.keys(this._modules).length; i++) {
+      const moduleObj = this._modules[Object.keys(this._modules)[i]];
       if (moduleObj.id === id) return moduleObj;
     }
     return false;
   }
 
   _findModuleObjByName(name: any) {
-    for (let i = 0; i < Object.keys(this._modulesObjs).length; i++) {
-      const moduleObj = this._modulesObjs[Object.keys(this._modulesObjs)[i]];
+    for (let i = 0; i < Object.keys(this._modules).length; i++) {
+      const moduleObj = this._modules[Object.keys(this._modules)[i]];
       if (moduleObj.name === name) return moduleObj;
     }
     return false;
@@ -327,7 +342,7 @@ export default class SSugarAppTerminalStdio extends __SStdio {
   _moduleState(data: any, metas: any) {
     return;
 
-    const moduleObj = this._modulesObjs[data.module.idx];
+    const moduleObj = this._modules[data.module.idx];
     if (!moduleObj) return;
     clearTimeout(moduleObj._stateTimeout);
     moduleObj._stateTimeout = setTimeout(() => {
@@ -367,22 +382,31 @@ export default class SSugarAppTerminalStdio extends __SStdio {
 
   _initModulesList() {
     const listItems = [];
-    Object.keys(this._modulesObjs).forEach((moduleName, i) => {
-      const moduleObj = this._modulesObjs[moduleName];
-      listItems.push(`${i + 1}.${moduleObj.name}`);
+    Object.keys(this._modules).forEach((moduleName, i) => {
+      const moduleObj = this._modules[moduleName];
+      listItems.push(`${i + 1}.${moduleObj.id}`);
+    });
+
+    const $title = __blessed.box({
+      top: -2,
+      left: 0,
+      height: 1,
+      content: __parseHtml(
+        `<bgYellow><black> Sugar </black></bgYellow><bgCyan> 2.0.0 </bgCyan>`
+      )
     });
 
     const $list = __blessed.list({
-      top: 0,
+      top: 1,
       left: 0,
-      bottom: 0,
+      bottom: 1,
       width: '20%',
       mouse: true,
       keys: true,
       items: listItems,
       padding: {
-        top: 1,
-        left: 2,
+        top: 3,
+        left: 1,
         right: 2,
         bottom: 1
       },
@@ -393,9 +417,11 @@ export default class SSugarAppTerminalStdio extends __SStdio {
       }
     });
 
+    $list.append($title);
+
     $list.on('select', (item) => {
-      const name = item.content.split('.').pop();
-      const moduleObj = this._findModuleObjByName(name);
+      const id = item.content.split('.').pop();
+      const moduleObj = this._findModuleObj(id);
       this._showModule(moduleObj.id);
     });
 
@@ -407,12 +433,12 @@ export default class SSugarAppTerminalStdio extends __SStdio {
   }
 
   _updateModulesList() {
-    Object.keys(this._modulesObjs).forEach((moduleName, i) => {
+    Object.keys(this._modules).forEach((moduleName, i) => {
       let prefix = '',
         bg,
         fg;
 
-      const moduleObj = this._modulesObjs[moduleName];
+      const moduleObj = this._modules[moduleName];
       if (!moduleObj.spinner) moduleObj.spinner = __ora();
 
       switch (moduleObj.state) {
@@ -452,7 +478,7 @@ export default class SSugarAppTerminalStdio extends __SStdio {
 
       const moduleString = `${i + 1}.<${fg}>${prefix}</${fg}>${
         prefix !== '' ? '.' : ''
-      }${moduleObj.name}`;
+      }${moduleObj.id}`;
 
       this.$list.children[i].setContent(__parseHtml(moduleString));
     });
@@ -486,21 +512,23 @@ export default class SSugarAppTerminalStdio extends __SStdio {
     return $separator;
   }
 
-  _initContent() {
-    const $content = new __SBlessedComponent({
+  _initStdio() {
+    const $stdio = new __SBlessedComponent({
       blessed: {
-        left: '20%',
+        top: 1,
+        bottom: 1,
+        left: '20%+1',
         width: '80%',
-        height: '100%',
         padding: {
           top: 0,
           left: 0,
           bottom: 0,
           right: 0
-        }
+        },
+        style: {}
       }
     });
-    return $content;
+    return $stdio;
   }
 
   _initTopBar() {
@@ -509,19 +537,11 @@ export default class SSugarAppTerminalStdio extends __SStdio {
         top: 0,
         left: 0,
         right: 0,
-        height: 3,
+        height: 1,
         style: {
           bg: 'yellow',
           fg: 'black'
-        },
-        padding: {
-          top: 1,
-          left: 2,
-          right: 2
-        },
-        content: __parseHtml(
-          `<bgBlack><white> MIT </white></bgBlack><bgWhite><black> Sugar </black></bgWhite> 2.0.0`
-        )
+        }
       }
     });
     return $topBar;
@@ -566,12 +586,15 @@ export default class SSugarAppTerminalStdio extends __SStdio {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _initSummary(params: any) {
-    const $stdio = new __SBlessedStdio([], {});
-    $stdio.top = 0;
-    $stdio.left = 0;
-    $stdio.width = '100%';
-    $stdio.height = '100%';
-    return $stdio;
+    const blessedStdio = new __SBlessedStdio([], {
+      blessed: {
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%'
+      }
+    });
+    return blessedStdio.$container;
   }
 
   /**
@@ -599,7 +622,7 @@ export default class SSugarAppTerminalStdio extends __SStdio {
 
     const $centeredBox = new __SBlessedComponent({
       blessed: {
-        top: '50%-11',
+        top: '50%-9',
         left: 'center',
         width: '100%',
         height: 'shrink',
@@ -623,11 +646,14 @@ export default class SSugarAppTerminalStdio extends __SStdio {
 
     const $metasBox = new __SBlessedComponent({
       blessed: {
-        width: 'shrink',
-        height: 'shrink',
+        width: 50,
+        height: 8,
         top: logoString.split('\n').length,
         left: 'center',
-        style: {}
+        tags: true,
+        style: {
+          // bg: 'red'
+        }
       }
     });
 
@@ -636,49 +662,35 @@ export default class SSugarAppTerminalStdio extends __SStdio {
     const packageJson = __packageJson();
 
     const projectLine = `<bgWhite><black> ${packageJson.license} </black></bgWhite> <yellow>${packageJson.name}</yellow> <cyan>${packageJson.version}</cyan>`;
+    const projectLineWidth = __countLine(projectLine);
     const byLine = `By ${packageJson.author.split(/<|\(/)[0]}`;
-    const byLineSpaces =
-      Math.round((__countLine(projectLine) - __countLine(byLine)) / 2) - 1;
+    const byLineSpaces = Math.round(
+      (__countLine(projectLine) - __countLine(byLine)) / 2
+    );
 
     const projectLines = [
       `<yellow>${'-'.repeat(__countLine(projectLine) + 6)}</yellow>`,
       `<yellow>|</yellow>  ${projectLine}  <yellow>|</yellow>`,
-      ` <yellow>|</yellow>  ${' '.repeat(byLineSpaces)} ${byLine} ${' '.repeat(
+      `<yellow>|</yellow>  ${' '.repeat(byLineSpaces)} ${byLine} ${' '.repeat(
         byLineSpaces
-      )} <yellow>|</yellow>`,
+      )}<yellow>|</yellow>`,
       `<yellow>${'-'.repeat(__countLine(projectLine) + 6)}</yellow>`
-    ];
+    ].map((line) => `{center}${__parseHtml(line)}{/center}`);
 
-    // console.log(this._serverSettings);
+    const quote = __quotes.getRandomQuote();
 
     const updateContent = () => {
       let text = [...projectLines, '', spinner.frame()];
 
-      if (this._modulesReady) {
-        text = [
-          ...projectLines,
-          ``,
-          `WebUI <green>started</green> at`,
-          `<bgYellow><black> http://${this._serverSettings.hostname}:${this._serverSettings.port} </black></bgYellow>`,
-          '',
-          `<cyan>${Object.keys(this._modulesObjs).length}</cyan> module${
-            Object.keys(this._modulesObjs).length > 1 ? 's' : ''
-          } loaded`
-        ];
+      if (projectLineWidth < 60) {
+        $metasBox.width = 60;
+      } else {
+        $metasBox.width = projectLineWidth;
       }
-      let larger = 0;
-      text = text
-        .map((t) => {
-          t = __parseHtml(t);
-          const length = __countLine(t);
-          if (length > larger) larger = length;
-          return t;
-        })
-        .map((line) => {
-          line =
-            ' '.repeat(Math.round((larger - __countLine(line)) / 2)) + line;
-          return line;
-        });
+
+      if (this._modulesReady) {
+        text = [...projectLines, '', `{center}${quote}{/center}`];
+      }
 
       $metasBox.setContent(text.join('\n'));
       $metasBox.screen.render();
@@ -695,7 +707,7 @@ export default class SSugarAppTerminalStdio extends __SStdio {
   }
 
   /**
-   * @name             _initModules
+   * @name             _initModule
    * @type              Function
    * @private
    *
@@ -706,115 +718,119 @@ export default class SSugarAppTerminalStdio extends __SStdio {
    * @since             2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _initModules($in) {
-    Object.keys(this._modulesObjs).forEach((moduleName, i) => {
-      const moduleObj = this._modulesObjs[moduleName];
+  _initModule(moduleIdOrName) {
+    let module = this._findModuleObj(moduleIdOrName);
+    if (!module || !module.$stdio) return;
+    module.$stdio.hide();
+    this.$stdio.append(module.$stdio);
+    return module.$stdio;
 
-      if (moduleObj.presets) {
-        if (!moduleObj.presets.default)
-          moduleObj.presets.default = {
-            key: 'd',
-            ...(moduleObj.params || {})
-          };
-      }
+    // console.log(moduleObj.instance.stdios);
 
-      if (!moduleObj.$content && moduleObj.instance) {
-        moduleObj.instance.on('stdio.terminal:1', (stdio, metas) => {
-          moduleObj.$content = stdio;
-          moduleObj.$content.top = 0;
-          moduleObj.$content.left = 1;
-          moduleObj.$content.width = '100%-2';
-          moduleObj.$content.height =
-            moduleObj.presets !== undefined ? '100%-1' : '100%';
-          moduleObj.$content.padding = {
-            top: 1,
-            left: 2,
-            right: 2,
-            bottom: 0
-          };
-          moduleObj.$contentContainer.append(moduleObj.$content);
-        });
-      }
+    // if (moduleObj.presets) {
+    //   if (!moduleObj.presets.default)
+    //     moduleObj.presets.default = {
+    //       key: 'd',
+    //       ...(moduleObj.params || {})
+    //     };
+    // }
 
-      if (moduleObj.$contentContainer === undefined) {
-        const $contentContainer = __blessed.box({
-          width: '100%',
-          height: '100%',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          style: {}
-        });
-        moduleObj.$contentContainer = $contentContainer;
-      }
+    // if (!moduleObj.$stdio && moduleObj.instance) {
+    //   moduleObj.instance.on('stdio.terminal:1', (stdio, metas) => {
+    //     moduleObj.$stdio = stdio;
+    //     moduleObj.$stdio.top = 0;
+    //     moduleObj.$stdio.left = 1;
+    //     moduleObj.$stdio.width = '100%-2';
+    //     moduleObj.$stdio.height =
+    //       moduleObj.presets !== undefined ? '100%-1' : '100%';
+    //     moduleObj.$stdio.padding = {
+    //       top: 1,
+    //       left: 2,
+    //       right: 2,
+    //       bottom: 0
+    //     };
+    //     moduleObj.$stdioContainer.append(moduleObj.$stdio);
+    //   });
+    // }
 
-      if (moduleObj.$bottomBar === undefined) {
-        const $bottomBar = __blessed.box({
-          width: '100%',
-          height: 1,
-          bottom: 0,
-          left: 1,
-          right: 0,
-          style: {
-            bg: 'yellow'
-          }
-        });
-        moduleObj.$bottomBar = $bottomBar;
-      }
+    // if (moduleObj.$stdioContainer === undefined) {
+    //   const $stdioContainer = __blessed.box({
+    //     width: '100%',
+    //     height: '100%',
+    //     top: 0,
+    //     left: 0,
+    //     right: 0,
+    //     bottom: 0,
+    //     style: {}
+    //   });
+    //   moduleObj.$stdioContainer = $stdioContainer;
+    // }
 
-      if (moduleObj.presets && Object.keys(moduleObj.presets).length) {
-        Object.keys(moduleObj.presets).forEach((presetId, i) => {
-          const presetObj = moduleObj.presets[presetId];
+    // if (moduleObj.$bottomBar === undefined) {
+    //   const $bottomBar = __blessed.box({
+    //     width: '100%',
+    //     height: 1,
+    //     bottom: 0,
+    //     left: 1,
+    //     right: 0,
+    //     style: {
+    //       bg: 'yellow'
+    //     }
+    //   });
+    //   moduleObj.$bottomBar = $bottomBar;
+    // }
 
-          let left = 0;
-          moduleObj.$bottomBar.children.forEach(($child) => {
-            left += __countLine($child.content);
-          });
+    // if (moduleObj.presets && Object.keys(moduleObj.presets).length) {
+    //   Object.keys(moduleObj.presets).forEach((presetId, i) => {
+    //     const presetObj = moduleObj.presets[presetId];
 
-          const $preset = __blessed.box({
-            content: ` (${presetObj.key || i}) ${presetId} `,
-            height: 1,
-            left,
-            width: 'shrink',
-            style: {
-              fg: 'black',
-              bg: 'blue'
-            }
-          });
+    //     let left = 0;
+    //     moduleObj.$bottomBar.children.forEach(($child) => {
+    //       left += __countLine($child.content);
+    //     });
 
-          __hotkey(`ctrl+${presetObj.key}`).on('press', () => {
-            if (this._displayedModuleId !== moduleObj.id) return;
-            // emit a new event
-            moduleObj.instance.emit('preset', {
-              ...presetObj
-            });
-          });
+    //     const $preset = __blessed.box({
+    //       content: ` (${presetObj.key || i}) ${presetId} `,
+    //       height: 1,
+    //       left,
+    //       width: 'shrink',
+    //       style: {
+    //         fg: 'black',
+    //         bg: 'blue'
+    //       }
+    //     });
 
-          moduleObj.$bottomBar.append($preset);
-        });
-      }
+    //     __hotkey(`ctrl+${presetObj.key}`).on('press', () => {
+    //       if (this._displayedModuleId !== moduleObj.id) return;
+    //       // emit a new event
+    //       moduleObj.instance.emit('preset', {
+    //         ...presetObj
+    //       });
+    //     });
 
-      if (moduleObj.$content) {
-        moduleObj.$contentContainer.append(moduleObj.$content);
-        moduleObj.$content.top = 0;
-        moduleObj.$content.left = 1;
-        moduleObj.$content.width = '100%';
-        moduleObj.$content.height =
-          moduleObj.presets !== undefined ? '100%-1' : '100%';
+    //     moduleObj.$bottomBar.append($preset);
+    //   });
+    // }
 
-        moduleObj.$content.padding = {
-          top: 1,
-          left: 2,
-          right: 2,
-          bottom: 0
-        };
-      }
-      if (moduleObj.presets !== undefined) {
-        moduleObj.$contentContainer.append(moduleObj.$bottomBar);
-      }
-      $in.append(moduleObj.$contentContainer);
-      moduleObj.$contentContainer.hide();
-    });
+    // if (moduleObj.$stdio) {
+    //   moduleObj.$stdioContainer.append(moduleObj.$stdio);
+    //   moduleObj.$stdio.top = 0;
+    //   moduleObj.$stdio.left = 1;
+    //   moduleObj.$stdio.width = '100%';
+    //   moduleObj.$stdio.height =
+    //     moduleObj.presets !== undefined ? '100%-1' : '100%';
+
+    //   moduleObj.$stdio.padding = {
+    //     top: 1,
+    //     left: 2,
+    //     right: 2,
+    //     bottom: 0
+    //   };
+    // }
+    // if (moduleObj.presets !== undefined) {
+    //   moduleObj.$stdioContainer.append(moduleObj.$bottomBar);
+    // }
+    // // $in.append(moduleObj.$stdioContainer);
+    // moduleObj.$stdioContainer.hide();
   }
 }

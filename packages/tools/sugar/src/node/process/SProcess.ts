@@ -208,7 +208,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
   paramsInterface: any;
 
   /**
-   * @name      _initialParams
+   * @name      initialParams
    * @type      Object
    * @private
    *
@@ -217,7 +217,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _initialParams: Record<string, unknown>;
+  initialParams: Record<string, unknown>;
 
   /**
    * @name      _processPromise
@@ -319,7 +319,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     );
 
     // save initial params
-    this._initialParams = initialParams;
+    this.initialParams = Object.assign({}, initialParams);
 
     // get the definition from interface or settings
     this.paramsInterface = this.getInterface('params');

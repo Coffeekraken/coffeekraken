@@ -56,8 +56,10 @@ export default class SSugarApp extends __SPromise {
     super(settings);
 
     this._process = new __SSugarAppProcess({
-      exitAtEnd: false,
-      stdio: __SSugarAppTerminalStdio
+      process: {
+        stdio: __SSugarAppTerminalStdio
+        // stdio: 'inherit'
+      }
     });
     this._process.run(stringArgs);
   }

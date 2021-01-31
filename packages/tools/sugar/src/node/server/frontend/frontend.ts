@@ -44,112 +44,100 @@ const fn = function (args = {}) {
 
   let server;
 
-  const promise = new __SPromise({
-    id: 'frontendServer'
-  });
-
-  (async () => {
-    // static directories
-    Object.keys(settings.staticDirs).forEach((path) => {
-      const fsPath = settings.staticDirs[path];
-      app.use(path, __express.static(fsPath));
-    });
-
-    // load the middlewares
-    const middlewaresObj = settings.middlewares || {};
-    for (const [key, middleware] of Object.entries(middlewaresObj)) {
-      if (middleware.path.slice(-3) !== '.js') middleware.path += '.js';
-      middleware.path = __path.resolve(middleware.path);
-      if (!__fs.existsSync(middleware.path)) {
-        return promise.reject(
-          `The express middleware "<yellow>${key}</yellow>" targeted at "<cyan>${middleware.path}</cyan>" does not exists...`
-        );
-      }
-      // register the middleware
-      app.use(require(middleware.path)(middleware.settings || {}));
-    }
-
-    // loop on handlers
-    Object.keys(settings.handlers).forEach(async (pageName) => {
-      const handlerSettings = __deepMerge(
-        {
-          log: true
-        },
-        settings.handlers[pageName]
-      );
-      let handlerPath = handlerSettings.handler;
-      if (handlerPath.slice(-3) !== '.js') handlerPath += '.js';
-
-      if (!__fs.existsSync(handlerPath)) {
-        promise.emit('warn', {
-          value: `Frontend handler "<cyan>${__path.relative(
-            __packageRoot(),
-            handlerPath
-          )}</cyan>" does not exists...`
-        });
-      } else {
-        const handlerFn = require(handlerPath);
-
-        const method = handlerSettings.method || 'get';
-        let slug = handlerSettings.slug || '*';
-        const extension = handlerSettings.extension
-          ? Array.isArray(handlerSettings.extension)
-            ? Array.isArray(handlerSettings.extension)
-            : [handlerSettings.extension]
-          : null;
-
-        if (slug !== '*') {
-          slug = [`${slug}/*`, `${slug}`];
+  return new __SPromise(
+    async ({ resolve, reject, on, emit, pipe }) => {
+      // static directories
+      Object.keys(settings.staticDirs).forEach((path) => {
+        const fsPath = settings.staticDirs[path];
+        app.use(path, __express.static(fsPath));
+      });
+      // load the middlewares
+      const middlewaresObj = settings.middlewares || {};
+      for (const [key, middleware] of Object.entries(middlewaresObj)) {
+        if (middleware.path.slice(-3) !== '.js') middleware.path += '.js';
+        middleware.path = __path.resolve(middleware.path);
+        if (!__fs.existsSync(middleware.path)) {
+          return reject(
+            `The express middleware "<yellow>${key}</yellow>" targeted at "<cyan>${middleware.path}</cyan>" does not exists...`
+          );
         }
-
-        setTimeout(() => {
-          promise.emit('log', {
-            value: `Handler <cyan>${pageName}</cyan> "<yellow>${method}:${slug}</yellow>" registered <green>successfully</green>`
-          });
-        }, 1000);
-
-        app[method](slug, async (req, res, next) => {
-          const reqPathExtension = __extension(req.path);
-          if (extension) {
-            if (
-              extension.indexOf(reqPathExtension) === -1 &&
-              extension.indexOf('.' + reqPathExtension) === -1
-            ) {
-              return next();
-            }
-          }
-
-          const handlerPromise = handlerFn(req, res, handlerSettings);
-          __SPromise.pipe(handlerPromise, promise);
-        });
+        // register the middleware
+        app.use(require(middleware.path)(middleware.settings || {}));
       }
-    });
-
-    server = app
-      .listen(settings.port, settings.hostname, () => {
-        setTimeout(() => {
-          promise.emit('log', {
-            type: 'heading',
-            clear: true,
-            value: __trimLines(`Your <yellow>Frontend Express</yellow> server is <green>up and running</green>:
-
+      // loop on handlers
+      Object.keys(settings.handlers).forEach(async (pageName) => {
+        const handlerSettings = __deepMerge(
+          {
+            log: true
+          },
+          settings.handlers[pageName]
+        );
+        let handlerPath = handlerSettings.handler;
+        if (handlerPath.slice(-3) !== '.js') handlerPath += '.js';
+        if (!__fs.existsSync(handlerPath)) {
+          emit('warn', {
+            value: `Frontend handler "<cyan>${__path.relative(
+              __packageRoot(),
+              handlerPath
+            )}</cyan>" does not exists...`
+          });
+        } else {
+          const handlerFn = require(handlerPath);
+          const method = handlerSettings.method || 'get';
+          let slug = handlerSettings.slug || '*';
+          const extension = handlerSettings.extension
+            ? Array.isArray(handlerSettings.extension)
+              ? Array.isArray(handlerSettings.extension)
+              : [handlerSettings.extension]
+            : null;
+          if (slug !== '*') {
+            slug = [`${slug}/*`, `${slug}`];
+          }
+          setTimeout(() => {
+            emit('log', {
+              value: `Handler <cyan>${pageName}</cyan> "<yellow>${method}:${slug}</yellow>" registered <green>successfully</green>`
+            });
+          }, 1000);
+          app[method](slug, async (req, res, next) => {
+            const reqPathExtension = __extension(req.path);
+            if (extension) {
+              if (
+                extension.indexOf(reqPathExtension) === -1 &&
+                extension.indexOf('.' + reqPathExtension) === -1
+              ) {
+                return next();
+              }
+            }
+            const handlerPromise = handlerFn(req, res, handlerSettings);
+            pipe(handlerPromise);
+          });
+        }
+      });
+      server = app
+        .listen(settings.port, settings.hostname, () => {
+          setTimeout(() => {
+            emit('log', {
+              type: 'heading',
+              clear: true,
+              value: __trimLines(`Your <yellow>Frontend Express</yellow> server is <green>up and running</green>:
+                
                 - Hostname        : <yellow>${settings.hostname}</yellow>
                 - Port            : <yellow>${settings.port}</yellow>
-                - Root directory  : <yellow>${settings.rootDir}</yellow>
                 - URL             : <cyan>http://${settings.hostname}:${settings.port}</cyan>`)
-          });
-        }, 200);
-      })
-      .on('error', (e) => {
-        const string = e.toString();
-        promise.reject(string);
+            });
+          }, 200);
+        })
+        .on('error', (e) => {
+          const string = e.toString();
+          reject(string);
+        });
+      on('finally', () => {
+        server.close();
       });
-  })();
-
-  promise.on('finally', () => {
-    server.close();
-  });
-
-  return promise;
+    },
+    {
+      id: 'frontendServer'
+    }
+  );
 };
 export = fn;

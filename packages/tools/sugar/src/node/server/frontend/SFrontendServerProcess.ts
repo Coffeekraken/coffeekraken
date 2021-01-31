@@ -34,11 +34,10 @@ export = class SFrontendServerProcess extends __SProcess {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
-    super({
+  constructor(initialParams, settings = {}) {
+    super(initialParams, {
       id: 'SFrontendServerProcess',
       name: 'Frontend Server Process',
-      // exitAtEnd: false,
       ...settings
     });
   }

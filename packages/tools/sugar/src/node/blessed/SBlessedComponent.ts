@@ -11,6 +11,7 @@ import __toString from '../string/toString';
 import __parse from '../string/parse';
 import __onProcessExit from '../process/onProcessExit';
 import __blessedTypes from '@types/blessed';
+import __innerWidth from './utils/innerWidth';
 
 /**
  * @name                  SBlessedComponent
@@ -48,7 +49,7 @@ export interface ISBlessedComponent
   extends __blessedTypes.Widgets.BlessedElement {
   readonly realHeight: number;
   setFramerate(framerate: number): void;
-  update(): void;
+  on(event: string, callback: Function): void;
   isDisplayed(): boolean;
   isDestroyed(): boolean;
 }
@@ -161,6 +162,7 @@ class SBlessedComponent extends __blessed.box implements ISBlessedComponent {
       SBlessedComponent.screen = __blessed.screen({
         smartCSR: true,
         title: '[CK] Coffeekraken Sugar',
+        autoPadding: true,
         cursor: {
           artificial: true,
           shape: {
@@ -188,12 +190,18 @@ class SBlessedComponent extends __blessed.box implements ISBlessedComponent {
     // save screen reference
     this._screen = SBlessedComponent.screen;
 
+    // listen for screen resize
+    this._screen.on('resize', () => {
+      // update the component
+      if (this.isDisplayed()) this.update();
+    });
+
     // keep track of the component status
     this.on('attach', () => {
       this._isDisplayed = true;
       setTimeout(() => {
         if (this.isDisplayed()) this.update();
-      }, 200);
+      }, 50);
     });
     this.on('detach', () => {
       this._isDisplayed = false;
@@ -219,6 +227,21 @@ class SBlessedComponent extends __blessed.box implements ISBlessedComponent {
         });
       });
     }
+  }
+
+  /**
+   * @name        innerWidth
+   * @type        Integer
+   * @get
+   *
+   * Access the inner width of the component. This mean the actual width
+   * minus the left/right padding
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get innerWidth() {
+    return __innerWidth(this);
   }
 
   get realHeight() {
@@ -269,6 +292,7 @@ class SBlessedComponent extends __blessed.box implements ISBlessedComponent {
     if (this._screen) {
       this._screen.render();
     }
+    this.emit('update');
   }
 
   /**

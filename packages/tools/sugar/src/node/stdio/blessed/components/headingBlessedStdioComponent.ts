@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseHtml from '../../../console/parseHtml';
 import __toString from '../../../string/toString';
 import __SBlessedComponent from '../../../blessed/SBlessedComponent';
@@ -20,25 +22,23 @@ export default {
 
     const character = logObj.character ? logObj.character.slice(0, 1) : '-';
 
-    const logStrArray: string[] = [];
-    logStrArray.push(
-      `<${color}>${character.repeat(process.stdout.columns)}</${color}>`
-    );
-    logStrArray.push(value);
-    logStrArray.push(
-      `<${color}>${character.repeat(process.stdout.columns)}</${color}>`
-    );
-
-    const logStr = __parseHtml(logStrArray.join('\n'));
-
     const $component = new __SBlessedComponent({
       blessed: {
         width: '100%',
         height: 'shrink',
-        style: {},
-        content: logStr
+        style: {}
       }
     });
+
+    $component.on('update', () => {
+      let width = $component.parent?.innerWidth || process.stdout.columns;
+      $component.width = width;
+
+      const separator = `<${color}>${character.repeat(width)}</${color}>`;
+      const logStr = __parseHtml([separator, value, separator].join('\n'));
+      $component.setContent(logStr);
+    });
+
     return $component;
   }
 };

@@ -75,6 +75,7 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
         settings || {}
       )
     );
+    this.display();
   }
 
   clear() {

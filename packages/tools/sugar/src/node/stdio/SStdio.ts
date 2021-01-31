@@ -106,6 +106,18 @@ class SStdio extends __SClass implements ISStdio {
   _logsBuffer: ILog[] = [];
 
   /**
+   * @name        _isDisplayed
+   * @type        Boolean
+   * @private
+   *
+   * Keep track of the display status
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  private _isDisplayed = false;
+
+  /**
    * @name          registerComponent
    * @type          Function
    * @static
@@ -244,6 +256,36 @@ class SStdio extends __SClass implements ISStdio {
   }
 
   /**
+   * @name          display
+   * @type          Function
+   *
+   * This method tells the stdio instance that it has been showned.
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  display() {
+    // update the status
+    this._isDisplayed = true;
+    if (this.isDisplayed()) return;
+    // log the buffered logs
+    this._logBuffer();
+  }
+
+  /**
+   * @name          hide
+   * @type          Function
+   *
+   * This method tells the stdio instance that it has been hided
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  hide() {
+    this._isDisplayed = false;
+  }
+
+  /**
    * @name          registerSource
    * @type          Function
    *
@@ -305,6 +347,12 @@ class SStdio extends __SClass implements ISStdio {
    */
   log(...logObj: ILog[]) {
     logObj.forEach((log: ILog) => {
+      // put in buffer if not displayed
+      if (!this.isDisplayed()) {
+        this._logsBuffer.push(log);
+        return;
+      }
+
       log = __parseAndFormatLog(log);
 
       // clear
@@ -337,6 +385,19 @@ class SStdio extends __SClass implements ISStdio {
 
       this._log(log, componentObj.component);
     });
+  }
+
+  /**
+   * @name        isDisplayed
+   * @type        Boolean
+   *
+   * true if the stdio if actually displayed, false if not
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  isDisplayed() {
+    return this._isDisplayed;
   }
 }
 

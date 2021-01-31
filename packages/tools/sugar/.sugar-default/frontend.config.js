@@ -313,54 +313,54 @@ module.exports = {
     //    */
     //   handler: `${__dirname}/../src/node/server/frontend/handlers/sugar`
     // },
-    // /**
-    //  * @name            views
-    //  * @namespace       config.frontend.handlers
-    //  * @type            Object
-    //  *
-    //  * Store all the "views" configuration access like the slug, the title, etc...
-    //  *
-    //  * @since         2.0.0
-    //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //  */
-    // views: {
-    //   /**
-    //    * @name          slug
-    //    * @namespace     config.frontend.handlers.views
-    //    * @type          String
-    //    * @default       /views
-    //    *
-    //    * Specify the url slug to use for this "section"
-    //    *
-    //    * @since         2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   slug: '/views',
-    //   /**
-    //    * @name          title
-    //    * @namespace     config.frontent.pages.views
-    //    * @type          String
-    //    * @default       Views | [title]
-    //    *
-    //    * Specify the page title wanted. Accessible tokens:
-    //    * - [title]: Name of the view
-    //    *
-    //    * @since       2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   title: 'Views | [title]',
-    //   /**
-    //    * @name            handler
-    //    * @namespace       config.frontend.handlers.views
-    //    * @type            Function
-    //    *
-    //    * Specify the handler function that will take care of responding to this "section"
-    //    *
-    //    * @since         2.0.0
-    //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //    */
-    //   handler: `${__dirname}/../src/node/server/frontend/handlers/views`
-    // }
+    /**
+     * @name            views
+     * @namespace       config.frontend.handlers
+     * @type            Object
+     *
+     * Store all the "views" configuration access like the slug, the title, etc...
+     *
+     * @since         2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    views: {
+      /**
+       * @name          slug
+       * @namespace     config.frontend.handlers.views
+       * @type          String
+       * @default       /views
+       *
+       * Specify the url slug to use for this "section"
+       *
+       * @since         2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      slug: '/views',
+      /**
+       * @name          title
+       * @namespace     config.frontent.pages.views
+       * @type          String
+       * @default       Views | [title]
+       *
+       * Specify the page title wanted. Accessible tokens:
+       * - [title]: Name of the view
+       *
+       * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      title: 'Views | [title]',
+      /**
+       * @name            handler
+       * @namespace       config.frontend.handlers.views
+       * @type            Function
+       *
+       * Specify the handler function that will take care of responding to this "section"
+       *
+       * @since         2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       */
+      handler: `${__dirname}/../src/node/server/frontend/handlers/views`
+    }
     // /**
     //  * @name            docMap
     //  * @namespace       config.frontend.handlers

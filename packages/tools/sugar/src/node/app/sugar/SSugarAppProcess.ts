@@ -269,7 +269,6 @@ export default class SSugarAppProcess extends __SProcess {
           `It seems that the passed class for your module "<yellow>${moduleObj.name}</yellow>" does not extends the sugar "<green>SSugarAppModule</green>" one...`
         );
       }
-      moduleObj.instance = moduleInstance;
 
       moduleInstance.on('state', (state, metas) => {
         if (state === 'ready') {
@@ -288,7 +287,7 @@ export default class SSugarAppProcess extends __SProcess {
       });
 
       // add the validated module in the _modulesObjArray property
-      returnedModulesObj[moduleIdx] = moduleObj;
+      returnedModulesObj[moduleIdx] = moduleInstance;
     });
 
     return returnedModulesObj;

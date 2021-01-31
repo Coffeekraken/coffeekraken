@@ -55,17 +55,18 @@ export = class SSugarAppProcessModule extends __SSugarAppModule {
     );
 
     const ProcessClass = require(moduleObj.processPath);
-    const pro = new ProcessClass({
-      ...(this._settings.processSettings || {}),
-      metas: false,
-      stdio: false,
-      initialParams: Object.assign({}, moduleObj.params || {})
+    const pro = new ProcessClass(Object.assign({}, moduleObj.params || {}), {
+      process: {
+        ...(this._settings.processSettings || {}),
+        metas: false,
+        stdio: false
+      }
     });
 
     // register process
     this.registerProcess(pro);
 
-    // set the module as ready
+    // // set the module as ready
     this.ready();
   }
 

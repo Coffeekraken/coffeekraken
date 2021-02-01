@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseHtml from '../../../console/parseHtml';
 import __toString from '../../../string/toString';
 import __SBlessedComponent from '../../../blessed/SBlessedComponent';
@@ -16,15 +18,17 @@ export default {
   id: 'default',
   render(logObj, settings: any) {
     const value = logObj.value || logObj;
-    const logStr = __parseHtml(__toString(value));
+    const logStr = __parseHtml(__toString(value)).trim();
 
     const $component = new __SBlessedComponent({
       blessed: {
         width: '100%',
-        height: 'shrink',
-        style: {},
-        content: logStr
+        height: 0
       }
+    });
+    $component.on('update', () => {
+      $component.setContent(logStr);
+      $component.height = $component.realHeight;
     });
     return $component;
   }

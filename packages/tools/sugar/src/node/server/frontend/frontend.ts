@@ -117,15 +117,17 @@ const fn = function (args = {}) {
         .listen(settings.port, settings.hostname, () => {
           setTimeout(() => {
             emit('log', {
+              type: 'time'
+            });
+            emit('log', {
               type: 'heading',
-              clear: true,
+              mb: 1,
               value: __trimLines(`Your <yellow>Frontend Express</yellow> server is <green>up and running</green>:
-                
                 - Hostname        : <yellow>${settings.hostname}</yellow>
                 - Port            : <yellow>${settings.port}</yellow>
                 - URL             : <cyan>http://${settings.hostname}:${settings.port}</cyan>`)
             });
-          }, 200);
+          }, 0);
         })
         .on('error', (e) => {
           const string = e.toString();

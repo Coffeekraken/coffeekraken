@@ -37,6 +37,7 @@ export default {
       const separator = `<${color}>${character.repeat(width)}</${color}>`;
       const logStr = __parseHtml([separator, value, separator].join('\n'));
       $component.setContent(logStr);
+      $component.height = $component.realHeight;
     });
 
     return $component;

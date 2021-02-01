@@ -112,14 +112,14 @@ module.exports = {
      * @name          save
      * @namespace      config.svelte.compile
      * @type        Boolean
-     * @default     false
+     * @default     true
      *
      * Specify if you want your compiled file(s) to be saved by default
      *
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    save: false,
+    save: true,
 
     /**
      * @name          watch

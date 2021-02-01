@@ -314,6 +314,7 @@ export default class SSugarAppModule
     const stdios = Array.isArray(this._moduleObjDescriptor.stdio)
       ? this._moduleObjDescriptor.stdio
       : [this._moduleObjDescriptor.stdio].map((i) => i !== undefined);
+
     stdios.forEach((stdio) => {
       let stdioSettings: any = {
           blessedStdio: {
@@ -488,11 +489,11 @@ export default class SSugarAppModule
           return;
         }
 
-        this.emit('log', {
-          value: `<yellow>${
-            this._settings.name || this._settings.id
-          }</yellow> module is <green>ready</green>`
-        });
+        // this.emit('log', {
+        //   value: `<yellow>${
+        //     this._settings.name || this._settings.id
+        //   }</yellow> module is <green>ready</green>`
+        // });
       });
     });
   }

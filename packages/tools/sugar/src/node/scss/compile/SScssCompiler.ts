@@ -191,6 +191,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
 
       // make input absolute
       input = __absolute(input);
+
       // process inputs
       input.forEach((inputStr) => {
         if (__isGlob(inputStr)) {
@@ -218,10 +219,18 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
         resultsObj[file.path] = res;
       }
 
+      // aggregate the compiled files css
+      let aggregateStrArray: string[] = [];
+      Object.keys(resultsObj).forEach((path) => {
+        const cssRes = resultsObj[path];
+        aggregateStrArray.push(cssRes.css);
+      });
+
       // resolve with the compilation result
       if (!params.watch) {
         resolve({
           files: resultsObj,
+          css: aggregateStrArray.join('\n'),
           startTime: startTime,
           endTime: Date.now(),
           duration: Date.now() - startTime
@@ -229,6 +238,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
       } else {
         emit('files', {
           files: resultsObj,
+          css: aggregateStrArray.join('\n'),
           startTime: startTime,
           endTime: Date.now(),
           duration: Date.now() - startTime

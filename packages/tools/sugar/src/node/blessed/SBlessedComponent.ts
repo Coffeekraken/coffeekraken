@@ -143,9 +143,9 @@ class SBlessedComponent extends __blessed.box implements ISBlessedComponent {
         framerate: null,
         attach: undefined,
         blessed: {
-          scrollable: true,
-          mouse: true,
-          keys: true
+          scrollable: true
+          // mouse: true,
+          // keys: true
         }
       },
       settings

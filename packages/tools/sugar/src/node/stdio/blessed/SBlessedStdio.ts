@@ -67,6 +67,7 @@ import {
 export interface ISBlessedStdioSettings {
   events?: string[];
   mapTypesToEvents?: any;
+  logInterval?: number;
 }
 
 export interface ISBlessedStdioMetas {
@@ -100,6 +101,20 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
   public $container: __SBlessedComponent;
 
   /**
+   * @name          blessedStdioSettings
+   * @type          ISBlessedStdioSettings
+   * @get
+   *
+   * Access the blessedStdio settings
+   *
+   * @since         2.0.0
+   *
+   */
+  get blessedStdioSettings(): ISBlessedStdioSettings {
+    return (<any>this._settings).blessedStdio;
+  }
+
+  /**
    * @name          constructor
    * @type          Function
    * @constructor
@@ -117,69 +132,18 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
           blessedStdio: {
             screen: true,
             attach: true,
+            logInterval: 30,
             actionPrefix: true,
-            blessed: {
-              top: 0,
-              left: 0,
-              bottom: 0,
-              right: 0,
-              width: '100%',
-              height: '100%',
-              mouse: true,
-              keys: true,
-              scrollable: true,
-              alwaysScroll: true,
-              scrollbar: {
-                ch: ' ',
-                inverse: true
-              },
-              style: {
-                scrollbar: {
-                  bg: 'yellow'
-                }
-              }
-            }
+            blessed: {}
           }
         },
         settings
       )
     );
 
-    this.$container = new __SBlessedComponent({
-      screen: this._settings.blessedStdio.screen,
-      attach: this._settings.blessedStdio.attach,
-      blessed: {
-        // width: '100%',
-        // height: '100%',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        padding: {
-          top: 1,
-          left: 2,
-          bottom: 1,
-          right: 2
-        },
-        style: {
-          bg: 'cyan'
-        },
-        ...(this._settings.blessedStdio.blessed || {})
-      }
-    });
-
-    this.$container.on('show', () => {
-      this.display();
-    });
-    this.$container.on('attach', () => {
-      this.display();
-    });
-    this.$container.on('hide', () => {
-      this.hide();
-    });
-    this.$container.on('detach', () => {
-      this.hide();
-    });
+    this.$container = this._createContainer();
+    this.$innerContainer = this._createInnerContainer();
+    this.$container.append(this.$innerContainer);
 
     // // listen for resizing
     // this.on('resize', () => {
@@ -197,6 +161,76 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
     this._logsEncryptedStack = [];
   }
 
+  _createContainer() {
+    if (this.$container) return this.$container;
+
+    const $container = new __SBlessedComponent({
+      screen: this.blessedStdioSettings.screen,
+      attach: this.blessedStdioSettings.attach,
+      blessed: {
+        mouse: true,
+        scrollable: true,
+        alwaysScroll: true,
+        scrollbar: {
+          ch: ' ',
+          inverse: true
+        },
+        style: {
+          scrollbar: {
+            bg: 'yellow'
+          }
+        },
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        padding: {
+          top: 1,
+          left: 2,
+          right: 2,
+          bottom: 1
+        },
+        ...(this.blessedStdioSettings.blessed || {}),
+        style: {
+          // bg: 'red'
+        }
+      }
+    });
+
+    $container.on('show', () => {
+      this.display();
+    });
+    $container.on('attach', () => {
+      this.display();
+    });
+    $container.on('hide', () => {
+      this.hide();
+    });
+    $container.on('detach', () => {
+      this.hide();
+    });
+
+    return $container;
+  }
+
+  _createInnerContainer() {
+    const $container = new __SBlessedComponent({
+      screen: false,
+      attach: false,
+      blessed: {
+        height: 'shrink',
+        top: 0,
+        left: 0,
+        right: 0,
+        style: {
+          // bg: 'cyan'
+        }
+      }
+    });
+
+    return $container;
+  }
+
   /**
    *
    * @name          clear
@@ -207,19 +241,49 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  clear() {
-    // this._isClearing = true;
-    // // remove all items from the display list
-    // this.children.forEach(($component) => {
-    //   $component.detach();
-    // });
-    // // reset the stack
-    // this.setContent('');
-    // this.stack = [];
-    // this._isClearing = false;
-  }
+  async clear() {
+    this.$innerContainer.destroy();
+    this.$innerContainer = this._createInnerContainer();
+    this.$container.append(this.$innerContainer);
+    // this.$innerContainer.clearItems();
 
-  stack: any[] = [];
+    // this.$innerContainer.destroy();
+    // this.$innerContainer = this._createInnerContainer();
+    // this.$container.append(this.$innerContainer);
+
+    // const $parent = this.$container.parent;
+    // this.$container = this._createContainer();
+    // if ($parent) {
+    //   $parent.append(this.$container);
+    // }
+    // this.$container.children.forEach(($component, i) => {
+    //   $component.destroy();
+    // });
+    // this.$container.setContent('');
+    // this.$container.screen.clearRegion(
+    //   this.$container.aleft,
+    //   this.$container.aleft + this.$container.width,
+    //   this.$container.atop,
+    //   this.$container.atop + this.$container.height
+    // );
+    // this.$container.screen.render();
+
+    await __wait(0);
+
+    // nativeConsole.log(
+    //   this.$container.aleft,
+    //   this.$container.aleft + this.$container.width,
+    //   this.$container.atop,
+    //   this.$container.atop + this.$container.height
+    // );
+
+    // this.$container.style.bg = 'red';
+    // reset the stack
+    //
+    // this.$container.update();
+
+    return true;
+  }
 
   /**
    * @name          log
@@ -231,32 +295,36 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _timeout = 0;
+  _top = 0;
   async _log(logObj: ILog, component) {
-    // @ts-ignore
-    let $lastComponent;
-    // clear
-    if (logObj.clear === true) {
+    this._timeout += this.blessedStdioSettings.logInterval;
+    await __wait(this._timeout);
+    if (this._timeout >= this.blessedStdioSettings.logInterval)
+      this._timeout -= this.blessedStdioSettings.logInterval;
+
+    const $component = component.render(logObj, this._settings);
+    if (this.$innerContainer.realHeight === 1) {
+      $component.top = 0;
     } else {
-      $lastComponent = this.stack.length ? this.stack.pop() : undefined;
+      $component.top = this.$innerContainer.realHeight;
     }
 
-    const type = logObj.type || 'default';
-    const $component = component.render(logObj, this._settings);
-    this.stack.push($component);
-    if ($lastComponent) {
-      $component.top = $lastComponent.top + $lastComponent.realHeight;
-    }
-    this.$container.append($component);
-    // $component.height = $component.realHeight;
+    $component.on('update', () => {
+      if (logObj.mt) $component.top += logObj.mt;
+      if (logObj.mb) $component.height += logObj.mb;
+    });
+
+    this.$innerContainer.append($component);
 
     // scroll to bottom
     clearTimeout(this._updateTimeout);
     this._updateTimeout = setTimeout(() => {
       try {
-        this.$container.setScrollPerc(100);
+        this.$innerContainer.setScrollPerc(100);
       } catch (e) {}
       // update display
-      this.$container.update();
+      this.$container.screen.render();
     }, 200);
   }
 
@@ -297,6 +365,7 @@ import __fileBlessedStdioComponent from './components/fileBlessedStdioComponent'
 import __headingBlessedStdioComponent from './components/headingBlessedStdioComponent';
 import __separatorBlessedStdioComponent from './components/separatorBlessedStdioComponent';
 import __warningBlessedStdioComponent from './components/warningBlessedStdioComponent';
+import __timeBlessedStdioComponent from './components/timeBlessedStdioComponent';
 
 SBlessedStdio.registerComponent(__defaultBlessedStdioComponent);
 SBlessedStdio.registerComponent(__errorBlessedStdioComponent);
@@ -304,6 +373,7 @@ SBlessedStdio.registerComponent(__fileBlessedStdioComponent);
 SBlessedStdio.registerComponent(__headingBlessedStdioComponent);
 SBlessedStdio.registerComponent(__separatorBlessedStdioComponent);
 SBlessedStdio.registerComponent(__warningBlessedStdioComponent);
+SBlessedStdio.registerComponent(__timeBlessedStdioComponent);
 
 const cls: ISBlessedStdioCtor = SBlessedStdio;
 

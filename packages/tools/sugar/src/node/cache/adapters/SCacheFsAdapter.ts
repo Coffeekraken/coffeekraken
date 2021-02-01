@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __deepMerge from '../../object/deepMerge';
-import __tmpDir from '../../fs/tmpDir';
+import __tmpDir from '../../path/tmpDir';
 import __fs from 'fs';
 import __ensureDirSync from '../../fs/ensureDirSync';
 import __removeSync from '../../fs/removeSync';

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseHtml from '../../../console/parseHtml';
 import __toString from '../../../string/toString';
 import __SBlessedComponent from '../../../blessed/SBlessedComponent';
@@ -50,9 +52,11 @@ export default {
         break;
       case 'saved':
         color = 'green';
-        logStrArray.push(
-          `The file "<cyan>${file.relPath}</cyan>" has been <green>saved successfully</green>`
-        );
+        let str = `The file "<cyan>${file.relPath}</cyan>" has been <green>saved successfully</green>`;
+        if (logObj.to) {
+          str += ` to "<magenta>${logObj.to}</magenta>"`;
+        }
+        logStrArray.push(str);
         break;
       case 'delete':
         color = 'yellow';
@@ -85,10 +89,13 @@ export default {
     const $component = new __SBlessedComponent({
       blessed: {
         width: '100%',
-        height: 'shrink',
-        style: {},
-        content: logStr
+        height: 0,
+        style: {}
       }
+    });
+    $component.on('update', () => {
+      $component.setContent(logStr);
+      $component.height = $component.realHeight;
     });
     return $component;
   }

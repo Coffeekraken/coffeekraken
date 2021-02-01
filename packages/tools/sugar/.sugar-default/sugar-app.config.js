@@ -1,4 +1,6 @@
 const __packageRoot = require('../src/node/path/packageRoot');
+const __sugarConfig = require('../src/node/config/sugar');
+
 module.exports = {
   welcome: {
     serverModule: 'frontendServer'
@@ -7,9 +9,9 @@ module.exports = {
     frontendServer: {
       id: 'frontendServer',
       name: 'Frontend Server',
-      autoRun: true,
       description:
         'Expose an HTTP server using ExpressJs and serve requested files, views, etc...',
+      autoRun: true,
       processPath: `${__packageRoot(
         __dirname
       )}/src/node/server/frontend/SFrontendServerProcess`,
@@ -24,7 +26,48 @@ module.exports = {
       //     }
       //   }
       // }
+    },
+    scss: {
+      id: 'scss',
+      name: 'SCSS Compiler',
+      description:
+        'Watch and build the SCSS files to production ready CSS ones',
+      autoRun: true,
+      processPath: `${__packageRoot(
+        __dirname
+      )}/src/node/scss/compile/SScssCompilerProcess`,
+      stdio: ['blessed'],
+      params: '[config.scss.compile]'
+    },
+    svelte: {
+      id: 'svelte',
+      name: 'Svelte Compiler',
+      description: 'Watch and build the svelte files',
+      autoRun: true,
+      processPath: `${__packageRoot(
+        __dirname
+      )}/src/node/svelte/compile/SSvelteCompilerProcess`,
+      stdio: ['blessed'],
+      params: {
+        ...__sugarConfig('ts.svelte'),
+        watch: true
+      }
+    },
+    typescript: {
+      id: 'typescript',
+      name: 'Typescript Compiler',
+      description: 'Watch and build the typescript files',
+      autoRun: true,
+      processPath: `${__packageRoot(
+        __dirname
+      )}/src/node/typescript/compile/STsCompilerProcess`,
+      stdio: ['blessed'],
+      params: {
+        ...__sugarConfig('ts.compile'),
+        watch: true
+      }
     }
+
     // compileTs: {
     //   id: 'compileTs',
     //   name: 'Compile Typescript',

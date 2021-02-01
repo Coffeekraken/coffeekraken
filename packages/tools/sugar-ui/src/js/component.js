@@ -21,7 +21,7 @@ const file = "component.svelte";
 function add_css() {
 	var style = element("style");
 	style.id = "svelte-w73qe0-style";
-	style.textContent = "h1.svelte-w73qe0{background:red}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29tcG9uZW50LnN2ZWx0ZSIsInNvdXJjZXMiOlsiY29tcG9uZW50LnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0PlxuXHRjb25zb2xlLmxvZygnSGVsbG8gd29ybGQnKTtcbjwvc2NyaXB0PlxuXG48c3R5bGU+XG5cdGgxIHtcblx0XHRiYWNrZ3JvdW5kOiByZWQ7XG5cdH1cbjwvc3R5bGU+XG5cbjxkaXY+XG5cdDxoMT5IZWxsbyB3b3JsYzwvaDE+XG48L2Rpdj4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBS0MsRUFBRSxjQUFDLENBQUMsQUFDSCxVQUFVLENBQUUsR0FBRyxBQUNoQixDQUFDIn0= */";
+	style.textContent = "h1.svelte-w73qe0{background:red}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29tcG9uZW50LnN2ZWx0ZSIsInNvdXJjZXMiOlsiY29tcG9uZW50LnN2ZWx0ZSJdLCJzb3VyY2VzQ29udGVudCI6WyI8c2NyaXB0PlxuXHRjb25zb2xlLmxvZygnSGVsbG8gZmYgd29ybGQnKTtcbjwvc2NyaXB0PlxuXG48c3R5bGU+XG5cdGgxIHtcblx0XHRiYWNrZ3JvdW5kOiByZWQ7XG5cdH1cbjwvc3R5bGU+XG5cbjxkaXY+XG5cdDxoMT5IZWxsbyB3b3JsYzwvaDE+XG48L2Rpdj4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBS0MsRUFBRSxjQUFDLENBQUMsQUFDSCxVQUFVLENBQUUsR0FBRyxBQUNoQixDQUFDIn0= */";
 	append_dev(document.head, style);
 }
 
@@ -35,8 +35,8 @@ function create_fragment(ctx) {
 			h1 = element("h1");
 			h1.textContent = "Hello worlc";
 			attr_dev(h1, "class", "svelte-w73qe0");
-			add_location(h1, file, 11, 1, 102);
-			add_location(div, file, 10, 0, 95);
+			add_location(h1, file, 11, 1, 105);
+			add_location(div, file, 10, 0, 98);
 		},
 		l: function claim(nodes) {
 			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -67,7 +67,7 @@ function create_fragment(ctx) {
 function instance($$self, $$props) {
 	let { $$slots: slots = {}, $$scope } = $$props;
 	validate_slots("Component", slots, []);
-	console.log("Hello world");
+	console.log("Hello ff world");
 	const writable_props = [];
 
 	Object.keys($$props).forEach(key => {

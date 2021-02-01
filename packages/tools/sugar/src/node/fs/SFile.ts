@@ -370,6 +370,7 @@ export interface ISFile {
   toObject: ISFileToObjectFn;
   update(): void;
   startWatch(): void;
+  _startWatch(): void;
   stopWatch(): void;
   read: ISFileReadFn;
   readSync: ISFileReadSyncFn;
@@ -559,7 +560,7 @@ class SFile extends __SEventEmitter implements ISFile {
       );
     }
 
-    if (this.fileSettings.watch === true) {
+    if (this.fileSettings.watch !== false) {
       this.startWatch();
     }
   }
@@ -689,6 +690,7 @@ class SFile extends __SEventEmitter implements ISFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _watcher: any;
+  _startWatch() {}
   startWatch() {
     if (this._watcher) return;
     this._watcher = __fs.watchFile(
@@ -701,6 +703,9 @@ class SFile extends __SEventEmitter implements ISFile {
         this.emit('update', this);
       }
     );
+    if (this._startWatch && typeof this._startWatch === 'function') {
+      this._startWatch();
+    }
   }
 
   /**

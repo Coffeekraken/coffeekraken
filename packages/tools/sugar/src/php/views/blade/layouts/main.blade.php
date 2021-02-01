@@ -23,7 +23,7 @@ $package = $package ? json_decode($package) : null;
   @if ($frontspec->assets && $frontspec->assets->css)
     @foreach ($frontspec->assets->css as $name=>$css)
       @if (!$css->body)
-        <link rel="stylesheet" id="{{ $name }}" href="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $css->path) }}" />
+        <link rel="stylesheet" id="{{ $name }}" href="/{{ $css->path }}" />
       @endif
     @endforeach
   @endif
@@ -31,7 +31,7 @@ $package = $package ? json_decode($package) : null;
   @if ($frontspec->assets && $frontspec->assets->js)
     @foreach ($frontspec->assets->js as $name=>$js)
       @if (!$js->body)
-        <script type="{{ $js->type or 'text/javascript' }}" id="{{ $name }}" src="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $js->path) }}"></script>
+        <script type="{{ $js->type or 'text/javascript' }}" id="{{ $name }}" src="/{{ $js->path }}"></script>
       @endif
     @endforeach
   @endif
@@ -46,7 +46,7 @@ $package = $package ? json_decode($package) : null;
   @if ($frontspec->assets && $frontspec->assets->css)
     @foreach ($frontspec->assets->css as $name=>$css)
       @if ($css->body)
-        <link rel="stylesheet" id="{{ $name }}" href="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $css->path) }}" />
+        <link rel="stylesheet" id="{{ $name }}" href="/{{ $css->path }}" />
       @endif
     @endforeach
   @endif
@@ -54,7 +54,7 @@ $package = $package ? json_decode($package) : null;
   @if ($frontspec->assets && $frontspec->assets->js)
     @foreach ($frontspec->assets->js as $name=>$js)
       @if ($js->body)
-        <script type="{{ $js->type or 'text/javascript' }}" id="{{ $name }}" src="{{ str_replace($_SERVER['DOCUMENT_ROOT'], '', $js->path) }}"></script>
+        <script type="{{ $js->type or 'text/javascript' }}" id="{{ $name }}" src="/{{ $js->path }}"></script>
       @endif
     @endforeach
   @endif

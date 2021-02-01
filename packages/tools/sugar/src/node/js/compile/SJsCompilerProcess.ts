@@ -1,0 +1,122 @@
+import SProcess from '../../process/SProcess';
+import __SJsCompiler from './SJsCompiler';
+import __deepMerge from '../../object/deepMerge';
+
+import __SJsCompilerParamsInterface from './interface/SJsCompilerParamsInterface';
+import { ISJsCompiler, ISJsCompilerParams } from './SJsCompiler';
+import {
+  ISProcessSettings,
+  ISProcessOptionalSettings
+} from '../../process/SProcess';
+
+/**
+ * @name            SJsCompilerProcess
+ * @namespace           sugar.node.js.compile
+ * @type            Class
+ * @extends         SProcess
+ * @wip
+ *
+ * This class represent the js compilation process to compile raw js files to es2015 js one
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+export interface ISJsCompilerProcessOptionalSettings
+  extends ISProcessOptionalSettings {}
+export interface ISJsCompilerProcessSettings extends ISProcessSettings {}
+
+class SJsCompilerProcess extends SProcess {
+  static interfaces = {
+    initialParams: {
+      apply: false,
+      class: __SJsCompilerParamsInterface
+    },
+    params: {
+      apply: false,
+      class: __SJsCompilerParamsInterface
+    }
+  };
+
+  /**
+   * @name      jsCompileProcessSettings
+   * @type      ISJsCompilerProcessSettings
+   * @get
+   *
+   * Access the ```scssCompileProcess``` settings
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get jsCompileProcessSettings() {
+    return (<any>this._settings).jsCompileProcess;
+  }
+
+  /**
+   * @name      _jsCompiler
+   * @type      ISJsCompiler
+   * @private
+   *
+   * Store the compiler instance
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  private _jsCompiler: ISJsCompiler;
+
+  /**
+   * @name          constructor
+   * @type          Function
+   * @constructor
+   *
+   * Constructor
+   *
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  constructor(
+    initialParams: any,
+    settings: ISJsCompilerProcessOptionalSettings = {}
+  ) {
+    super(
+      initialParams,
+      __deepMerge(
+        {
+          jsCompileProcess: {}
+        },
+        {
+          id: 'SJsCompilerProcess',
+          name: 'Js Compiler Process'
+        },
+        settings
+      )
+    );
+
+    this._jsCompiler = new __SJsCompiler(initialParams, {});
+  }
+
+  /**
+   * @name              process
+   * @type              Function
+   *
+   * Method that actually execute the process
+   *
+   * @param       {Object}        params           The arguments object that will be passed to the underlined actions stream instance
+   * @param       {Object}        [settings={}]     An object of settings passed to the ```start``` method of the ```SBuildScssActionsStream``` instance
+   * @return      {Süromise}                        An SPomise instance representing the build process
+   *
+   * @since         2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  process(
+    params: ISJsCompilerParams,
+    settings: ISJsCompilerProcessOptionalSettings = {}
+  ) {
+    return this._jsCompiler.compile(params, settings);
+  }
+}
+
+export default SJsCompilerProcess;

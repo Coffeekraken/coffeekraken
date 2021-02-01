@@ -1,10 +1,13 @@
-@include Sugar.context-setup('my-cool-context', (
+@include Sugar.context-setup(
+  'my-cool-context',
+  (
     colors: (
-        default: (
-            color: #ff0000
-        )
+      default: (
+        color: #ff0000
+      )
     )
-));
+  )
+);
 
 // @include Sugar.classes('sugar.helper.block');
 // @include Sugar.classes('sugar.helper.border');
@@ -29,7 +32,7 @@
 // @include Sugar.classes('sugar.helper.vertical-align');
 
 .youhou {
-    content: 'plopissime';
+  content: 'plopissime';
 }
 
 @include Sugar.classes('sugar.component.ul');

@@ -283,7 +283,9 @@ class SScssFile extends __SFile implements ISScssFile {
         let useFile;
         if (SScssFile.FILES[realPath]) useFile = SScssFile.FILES[realPath];
         else
-          useFile = useFile = new SScssFile(realPath, {
+          useFile = new SScssFile(realPath, {
+            // @ts-ignore
+            file: this.fileSettings,
             scssFile: <ISScssFileSettings>(
               __deepMerge(
                 this.scssFileSettings,
@@ -291,6 +293,15 @@ class SScssFile extends __SFile implements ISScssFile {
               )
             )
           });
+
+        // pipe the update events
+        this.pipeFrom(useFile, {
+          events: 'update',
+          processor: (value, metas) => {
+            return [value, metas];
+          }
+        });
+
         [useFile, ...useFile.dependencies].forEach((depFile) => {
           // @ts-ignore
           hashesStrArray.push(depFile.hash);
@@ -337,7 +348,7 @@ class SScssFile extends __SFile implements ISScssFile {
   }
 
   /**
-   * @name        _watch
+   * @name        _startWatch
    * @type        Function
    * @private
    *
@@ -347,29 +358,25 @@ class SScssFile extends __SFile implements ISScssFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _alreadyWatch = false;
-  private _watch() {
-    if (this._alreadyWatch) return;
-    this._alreadyWatch = true;
-
-    if (!this._currentCompilationParams) return;
-
-    // start watching the file if needed
-    if (this._currentCompilationParams.watch) {
-      this.startWatch();
-    }
-
+  private _startWatch() {
     // listen for change event
     this.on('update', (file, metas) => {
       if (this._currentCompilationParams.watch) {
+        // if (file._import.type !== 'main') {
+        //   // console.log('NOT MAIN', file.relPath);
+        //   // file.emit('childUpdate', file);
+        //   return;
+        // }
+        if (this._import.type !== 'main') {
+          return;
+        }
         const promise = this.compile(
-          <ISScssCompilerParams>this._currentCompilationParams
+          <ISScssCompilerParams>this._currentCompilationParams,
+          {
+            // @ts-ignore
+            _updatedFile: file
+          }
         );
-        this.emit('log', {
-          type: 'file',
-          action: 'update',
-          file
-        });
       }
     });
   }
@@ -403,7 +410,7 @@ class SScssFile extends __SFile implements ISScssFile {
     params = this.applyInterface('compilerParams', params);
 
     if (params.watch) {
-      this._watch();
+      this.startWatch();
     }
 
     // init the promise
@@ -423,10 +430,6 @@ class SScssFile extends __SFile implements ISScssFile {
       }
       this._isCompiling = true;
 
-      emit('error', {
-        value: 'wie fiowefiuwhe ifuhwe uifhweiuh '
-      });
-
       // sass settings
       const sassSettings = {
         outputStyle: params.style || __sugarConfig('scss.compile.style'),
@@ -441,14 +444,20 @@ class SScssFile extends __SFile implements ISScssFile {
         ...(params.sass || {})
       };
 
-      // start watching the file if needed
-      if (params.watch) {
-        this.startWatch();
-      }
-
       emit('log', {
-        type: 'separator'
+        clear: true,
+        type: 'time'
       });
+
+      // @ts-ignore
+      if (settings._updatedFile) {
+        this.emit('log', {
+          type: 'file',
+          action: 'update',
+          // @ts-ignore
+          file: settings._updatedFile
+        });
+      }
 
       // notify start
       emit('log', {
@@ -456,8 +465,6 @@ class SScssFile extends __SFile implements ISScssFile {
       });
 
       const duration = new __SDuration();
-
-      await __wait(0);
 
       if (params.clearCache) await this._fileCache.clear();
       let toCompile = this.content;
@@ -507,23 +514,24 @@ class SScssFile extends __SFile implements ISScssFile {
         cachedValue.dependenciesHash === dependenciesHash &&
         params.cache
       ) {
-        let result = cachedValue.css;
-        SScssFile.COMPILED_CSS[this.path] = result;
+        let resultCss = cachedValue.css;
+        SScssFile.COMPILED_CSS[this.path] = resultCss;
 
         emit('log', {
-          value: `<magenta>[cache]</magenta> "<cyan>${this.relPath}</cyan>"`
+          value: `<magenta>[cached]</magenta> File "<cyan>${this.relPath}</cyan>"`
         });
 
         if (this._import.type === 'main') {
           // prepend all the compiled css
           // @ts-ignore
-          result = [...Object.values(SScssFile.COMPILED_CSS), result].join(
-            '\n'
-          );
+          resultCss = [
+            ...Object.values(SScssFile.COMPILED_CSS),
+            resultCss
+          ].join('\n');
         }
 
         // process the result
-        result = this._processResultCss(result, params);
+        resultCss = this._processResultCss(resultCss, params);
 
         // check if need to save
         if (this._import.type === 'main' && params.save && params.outputDir) {
@@ -534,33 +542,46 @@ class SScssFile extends __SFile implements ISScssFile {
               .replace(`${params.rootDir}/`, '')
               .replace(/\.s[ac]ss$/, '.css')
           );
-          emit('log', {
-            type: 'file',
-            action: 'save',
-            to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-            file: this
-          });
-          this.writeSync(result, {
+          // emit('log', {
+          //   type: 'file',
+          //   action: 'save',
+          //   to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+          //   file: this
+          // });
+          this.writeSync(resultCss, {
             path: savePath
           });
 
-          // notify end
-          const time = duration.end();
-          emit('log', {
-            type: 'file',
-            action: 'saved',
-            to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-            file: this
-          });
-
-          if (params.watch) {
-            emit('log', {
-              value: `<blue>[watch]</blue> Watching for changes...`
-            });
-          }
+          // // notify end
+          // emit('log', {
+          //   type: 'file',
+          //   action: 'saved',
+          //   to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+          //   file: this
+          // });
         }
 
-        return resolve(result);
+        // const durationEnd = duration.end();
+
+        // // notify end
+        // emit('log', {
+        //   value: `<green>[success]</green> File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${durationEnd.formatedDuration}s</yellow>`
+        // });
+
+        emit('log', {
+          type: 'separator'
+        });
+
+        if (params.watch) {
+          emit('log', {
+            value: `<blue>[watch]</blue> Watching for changes...`
+          });
+        }
+
+        return resolve({
+          css: resultCss,
+          ...duration.end()
+        });
       }
 
       if (this._sharedResources) {
@@ -590,14 +611,15 @@ class SScssFile extends __SFile implements ISScssFile {
         }
 
         if (this._import.type === 'main') {
-          let result = renderObj.css.toString();
+          let resultCss = renderObj.css.toString();
 
           // prepend all the compiled css
-          result = [...Object.values(SScssFile.COMPILED_CSS), result].join(
-            '\n'
-          );
+          resultCss = [
+            ...Object.values(SScssFile.COMPILED_CSS),
+            resultCss
+          ].join('\n');
 
-          result = this._processResultCss(result, params);
+          resultCss = this._processResultCss(resultCss, params);
 
           // check if need to save
           if (params.save && params.outputDir) {
@@ -614,15 +636,28 @@ class SScssFile extends __SFile implements ISScssFile {
               to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
               file: this
             });
-            this.writeSync(result, {
+            this.writeSync(resultCss, {
               path: savePath
+            });
+
+            // notify end
+            emit('log', {
+              type: 'file',
+              action: 'saved',
+              to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+              file: this
             });
           }
 
+          const durationEnd = duration.end();
+
           // notify end
-          const time = duration.end();
           emit('log', {
-            value: `File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${time}s</yellow>`
+            value: `<green>[success]</green> File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${durationEnd.formatedDuration}s</yellow>`
+          });
+
+          emit('log', {
+            type: 'separator'
           });
 
           if (params.watch) {
@@ -631,8 +666,15 @@ class SScssFile extends __SFile implements ISScssFile {
             });
           }
 
-          return resolve(result);
+          return resolve({
+            css: this._processResultCss(resultCss, params),
+            ...durationEnd
+          });
         } else {
+          emit('log', {
+            type: 'separator'
+          });
+
           if (params.watch) {
             emit('log', {
               value: `<blue>[watch]</blue> Watching for changes...`
@@ -640,13 +682,14 @@ class SScssFile extends __SFile implements ISScssFile {
           }
 
           SScssFile.COMPILED_CSS[this.path] = renderObj.css;
-          return resolve(
-            this._processResultCss(renderObj.css.toString(), params)
-          );
+          return resolve({
+            css: this._processResultCss(renderObj.css.toString(), params),
+            ...duration.end()
+          });
         }
       } catch (e) {
         // .log(e);
-        return reject(e.toString());
+        return reject(new Error(e.toString()));
       }
 
       return true;

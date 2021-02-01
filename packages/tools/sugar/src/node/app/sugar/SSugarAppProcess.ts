@@ -256,7 +256,7 @@ export default class SSugarAppProcess extends __SProcess {
       // });
 
       // require and instanciate the module class
-      const moduleClass = require(<string>moduleObj.modulePath);
+      const moduleClass = require(<string>moduleObj.modulePath).default;
       if (!__isClass(moduleClass)) {
         throw new Error(
           `The passed module file "<cyan>${moduleObj.modulePath}</cyan>" does not export a <green>proper Class</green> for the module "<yellow>${moduleObj.name}</yellow>"...`

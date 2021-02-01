@@ -167,6 +167,32 @@ module.exports = {
     minify: false,
 
     /**
+     * @name          watch
+     * @namespace      config.scss.compile
+     * @type        Boolean
+     * @default     true
+     *
+     * Specify if you want your compiled file(s) to be watchd by default
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    watch: true,
+
+    /**
+     * @name          save
+     * @namespace      config.scss.compile
+     * @type        Boolean
+     * @default     true
+     *
+     * Specify if you want your compiled file(s) to be saved by default
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    save: true,
+
+    /**
      * @name                frontspec
      * @namespace           config.scss.compile
      * @type                Boolean

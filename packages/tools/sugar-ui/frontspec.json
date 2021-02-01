@@ -1,0 +1,9 @@
+{
+  "assets": {
+    "css": {
+      "main": {
+        "path": "src/css/index.scss"
+      }
+    }
+  }
+}

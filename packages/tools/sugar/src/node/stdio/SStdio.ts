@@ -267,7 +267,7 @@ class SStdio extends __SClass implements ISStdio {
   display() {
     // update the status
     this._isDisplayed = true;
-    if (this.isDisplayed()) return;
+    // if (this.isDisplayed()) return;
     // log the buffered logs
     this._logBuffer();
   }
@@ -345,24 +345,40 @@ class SStdio extends __SClass implements ISStdio {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _isClearing = false;
+  // _isCleared = true;
   log(...logObj: ILog[]) {
-    logObj.forEach((log: ILog) => {
+    for (let i = 0; i < logObj.length; i++) {
+      let log: ILog = logObj[i];
+
+      // if (this._isCleared && logObj.clear) delete logObj.clear;
+      // this._isCleared = false;
+
       // put in buffer if not displayed
-      if (!this.isDisplayed()) {
+      if (!this.isDisplayed() || this._isClearing) {
         this._logsBuffer.push(log);
-        return;
+        continue;
       }
 
-      log = __parseAndFormatLog(log);
-
-      // clear
       if (log.clear === true) {
+        this._isClearing = true;
+        // console.log('CLEAR', log.type);
         if (typeof this.clear !== 'function')
           throw new Error(
             `You try to clear the "<yellow>${this.constructor.name}</yellow>" stdio but it does not implements the "<cyan>clear</cyan>" method`
           );
-        this.clear();
+        // this._logsBuffer.push(log);
+        (async () => {
+          await this.clear();
+          this._isClearing = false;
+          // this._isCleared = true;
+          this._logBuffer();
+        })();
+      } else {
+        // console.log(log.type);
       }
+
+      log = __parseAndFormatLog(log);
 
       // get the correct component to pass to the _log method
       let componentObj = this.constructor.registeredComponents[
@@ -384,7 +400,7 @@ class SStdio extends __SClass implements ISStdio {
       }
 
       this._log(log, componentObj.component);
-    });
+    }
   }
 
   /**

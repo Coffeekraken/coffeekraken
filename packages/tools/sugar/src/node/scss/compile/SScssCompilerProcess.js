@@ -2,11 +2,12 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const SProcess_1 = __importDefault(require("../../process/SProcess"));
 const SScssCompiler_1 = __importDefault(require("./SScssCompiler"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const SScssCompilerParamsInterface_1 = __importDefault(require("./interface/SScssCompilerParamsInterface"));
-class SScssCompileProcess extends SProcess_1.default {
+class SScssCompilerProcess extends SProcess_1.default {
     /**
      * @name          constructor
      * @type          Function
@@ -20,14 +21,14 @@ class SScssCompileProcess extends SProcess_1.default {
         super(initialParams, deepMerge_1.default({
             scssCompileProcess: {}
         }, {
-            id: 'SScssCompileProcess',
+            id: 'SScssCompilerProcess',
             name: 'Compile Scss Process'
         }, settings));
         this._scssCompiler = new SScssCompiler_1.default(initialParams, {});
     }
     /**
      * @name      scssCompileProcessSettings
-     * @type      ISScssCompileProcessSettings
+     * @type      ISScssCompilerProcessSettings
      * @get
      *
      * Access the ```scssCompileProcess``` settings
@@ -52,11 +53,10 @@ class SScssCompileProcess extends SProcess_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     process(params, settings = {}) {
-        this.processSettings.exitAtEnd = !params.watch;
         return this._scssCompiler.compile(params, settings);
     }
 }
-SScssCompileProcess.interfaces = {
+SScssCompilerProcess.interfaces = {
     initialParams: {
         apply: false,
         class: SScssCompilerParamsInterface_1.default
@@ -66,5 +66,5 @@ SScssCompileProcess.interfaces = {
         class: SScssCompilerParamsInterface_1.default
     }
 };
-module.exports = SScssCompileProcess;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Njc3NDb21waWxlUHJvY2Vzcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNTY3NzQ29tcGlsZVByb2Nlc3MudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHNFQUE4QztBQUM5QyxvRUFBOEM7QUFDOUMsdUVBQWlEO0FBRWpELDRHQUFzRjtBQTRCdEYsTUFBTSxtQkFBb0IsU0FBUSxrQkFBUTtJQXNDeEM7Ozs7Ozs7O09BUUc7SUFDSCxZQUNFLGFBQWtCLEVBQ2xCLFdBQWlELEVBQUU7UUFFbkQsS0FBSyxDQUNILGFBQWEsRUFDYixtQkFBVyxDQUNUO1lBQ0Usa0JBQWtCLEVBQUUsRUFBRTtTQUN2QixFQUNEO1lBQ0UsRUFBRSxFQUFFLHFCQUFxQjtZQUN6QixJQUFJLEVBQUUsc0JBQXNCO1NBQzdCLEVBQ0QsUUFBUSxDQUNULENBQ0YsQ0FBQztRQUVGLElBQUksQ0FBQyxhQUFhLEdBQUcsSUFBSSx1QkFBZSxDQUFDLGFBQWEsRUFBRSxFQUFFLENBQUMsQ0FBQztJQUM5RCxDQUFDO0lBdEREOzs7Ozs7Ozs7T0FTRztJQUNILElBQUksMEJBQTBCO1FBQzVCLE9BQWEsSUFBSSxDQUFDLFNBQVUsQ0FBQywwQkFBMEIsQ0FBQztJQUMxRCxDQUFDO0lBNENEOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILE9BQU8sQ0FDTCxNQUE0QixFQUM1QixXQUFpRCxFQUFFO1FBRW5ELElBQUksQ0FBQyxlQUFlLENBQUMsU0FBUyxHQUFHLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQztRQUMvQyxPQUFPLElBQUksQ0FBQyxhQUFhLENBQUMsT0FBTyxDQUFDLE1BQU0sRUFBRSxRQUFRLENBQUMsQ0FBQztJQUN0RCxDQUFDOztBQXRGTSw4QkFBVSxHQUFHO0lBQ2xCLGFBQWEsRUFBRTtRQUNiLEtBQUssRUFBRSxLQUFLO1FBQ1osS0FBSyxFQUFFLHNDQUE4QjtLQUN0QztJQUNELE1BQU0sRUFBRTtRQUNOLEtBQUssRUFBRSxLQUFLO1FBQ1osS0FBSyxFQUFFLHNDQUE4QjtLQUN0QztDQUNGLENBQUM7QUFnRkosaUJBQVMsbUJBQW1CLENBQUMifQ==
+exports.default = SScssCompilerProcess;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1Njc3NDb21waWxlclByb2Nlc3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTU2Nzc0NvbXBpbGVyUHJvY2Vzcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLHNFQUE4QztBQUM5QyxvRUFBOEM7QUFDOUMsdUVBQWlEO0FBRWpELDRHQUFzRjtBQTRCdEYsTUFBTSxvQkFBcUIsU0FBUSxrQkFBUTtJQXNDekM7Ozs7Ozs7O09BUUc7SUFDSCxZQUNFLGFBQWtCLEVBQ2xCLFdBQWtELEVBQUU7UUFFcEQsS0FBSyxDQUNILGFBQWEsRUFDYixtQkFBVyxDQUNUO1lBQ0Usa0JBQWtCLEVBQUUsRUFBRTtTQUN2QixFQUNEO1lBQ0UsRUFBRSxFQUFFLHNCQUFzQjtZQUMxQixJQUFJLEVBQUUsc0JBQXNCO1NBQzdCLEVBQ0QsUUFBUSxDQUNULENBQ0YsQ0FBQztRQUVGLElBQUksQ0FBQyxhQUFhLEdBQUcsSUFBSSx1QkFBZSxDQUFDLGFBQWEsRUFBRSxFQUFFLENBQUMsQ0FBQztJQUM5RCxDQUFDO0lBdEREOzs7Ozs7Ozs7T0FTRztJQUNILElBQUksMEJBQTBCO1FBQzVCLE9BQWEsSUFBSSxDQUFDLFNBQVUsQ0FBQywwQkFBMEIsQ0FBQztJQUMxRCxDQUFDO0lBNENEOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILE9BQU8sQ0FDTCxNQUE0QixFQUM1QixXQUFrRCxFQUFFO1FBRXBELE9BQU8sSUFBSSxDQUFDLGFBQWEsQ0FBQyxPQUFPLENBQUMsTUFBTSxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBQ3RELENBQUM7O0FBckZNLCtCQUFVLEdBQUc7SUFDbEIsYUFBYSxFQUFFO1FBQ2IsS0FBSyxFQUFFLEtBQUs7UUFDWixLQUFLLEVBQUUsc0NBQThCO0tBQ3RDO0lBQ0QsTUFBTSxFQUFFO1FBQ04sS0FBSyxFQUFFLEtBQUs7UUFDWixLQUFLLEVBQUUsc0NBQThCO0tBQ3RDO0NBQ0YsQ0FBQztBQStFSixrQkFBZSxvQkFBb0IsQ0FBQyJ9

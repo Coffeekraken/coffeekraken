@@ -1,16 +1,13 @@
 // @ts-nocheck
 
-import STsCompileProcess from '../../node/typescript/compile/STsCompileProcess';
-import __sugarConfig from '../../node/config/sugar';
-import __STsFile from '../../node/typescript/STsFile';
+import STsCompilerProcess from '../../node/typescript/compile/STsCompilerProcess';
 
 function compileTs(stringArgs = '') {
-  const pro = new STsCompileProcess(
+  const pro = new STsCompilerProcess(
     {},
     {
       process: {
-        stdio: 'inherit',
-        exitAtEnd: true
+        stdio: 'inherit'
       }
     }
   );

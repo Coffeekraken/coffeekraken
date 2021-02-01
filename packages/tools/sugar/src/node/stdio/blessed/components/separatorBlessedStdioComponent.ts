@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __parseHtml from '../../../console/parseHtml';
 import __toString from '../../../string/toString';
 import __SBlessedComponent from '../../../blessed/SBlessedComponent';
@@ -24,13 +26,20 @@ export default {
     const $component = new __SBlessedComponent({
       blessed: {
         width: '100%',
-        height: 'shrink',
-        style: {},
-        content: __parseHtml(
-          `\n<${color}>${character.repeat(process.stdout.columns)}</${color}>\n`
-        )
+        height: 1,
+        style: {}
       }
     });
+
+    $component.on('update', () => {
+      let width = $component.parent?.innerWidth || process.stdout.columns;
+      $component.width = width;
+      const separator = `<${color}>${character.repeat(width)}</${color}>`;
+      const logStr = __parseHtml(separator);
+      $component.setContent(logStr);
+      $component.height = 1;
+    });
+
     return $component;
   }
 };

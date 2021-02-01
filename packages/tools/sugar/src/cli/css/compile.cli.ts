@@ -1,13 +1,13 @@
 // @ts-nocheck
 
-import SScssCompileProcess from '../../node/scss/compile/SScssCompileProcess';
+import SScssCompilerProcess from '../../node/scss/compile/SScssCompilerProcess';
 
 function compileScss(stringArgs = '') {
-  const pro = new SScssCompileProcess(
+  const pro = new SScssCompilerProcess(
     {},
     {
       process: {
-        stdio: 'blessed'
+        stdio: 'inherit'
       }
     }
   );

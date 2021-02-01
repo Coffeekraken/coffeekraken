@@ -32,6 +32,14 @@ import __convert from './convert';
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
+
+export interface ISDurationObject {
+  startTime: number;
+  endTime: number;
+  duration: number;
+  formatedDuration: string;
+}
+
 export = class SDuration {
   /**
    * @name            _settings
@@ -70,6 +78,18 @@ export = class SDuration {
   endTime = null;
 
   /**
+   * @name            duration
+   * @type            Number
+   * @private
+   *
+   * Store the duration in miliseconds
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  duration = null;
+
+  /**
    * @name            constructor
    * @type            Function
    * @constructor
@@ -91,6 +111,40 @@ export = class SDuration {
   }
 
   /**
+   * @name      toObject
+   * @type      Function
+   *
+   * This method end the duration if needed and return an object with these properties:
+   * - startTime: the start timestamp
+   * - endTime: the end timestamp
+   * - duration: the duration in miliseconds
+   * - formatedDuration: the duration formated
+   *
+   * @return      {ISDurationObject}        The duration object
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  toObject(settings = {}): ISDurationObject {
+    settings = __deepMerge(this._settings, settings);
+
+    if (!this.endTime || !this.startTime) this.end();
+
+    const durationMs = this.endTime - this.startTime;
+    const durationConverted = __convert(durationMs, settings.format);
+    const formatedDuration = settings.suffix
+      ? durationConverted
+      : parseFloat(durationConverted);
+
+    return <ISDurationObject>{
+      startTime: this.startTime || -1,
+      endTime: this.endTime || -1,
+      duration: this.duration || -1,
+      formatedDuration
+    };
+  }
+
+  /**
    * @name      start
    * @type      Function
    *
@@ -103,6 +157,7 @@ export = class SDuration {
    */
   start(startTime = null) {
     this.startTime = startTime || Date.now();
+    return this;
   }
 
   /**
@@ -120,10 +175,6 @@ export = class SDuration {
   end(settings = {}) {
     settings = __deepMerge(this._settings, settings);
     this.endTime = Date.now();
-
-    const durationMs = this.endTime - this.startTime;
-    const durationConverted = __convert(durationMs, settings.format);
-
-    return settings.suffix ? durationConverted : parseFloat(durationConverted);
+    return this.toObject(settings);
   }
 };

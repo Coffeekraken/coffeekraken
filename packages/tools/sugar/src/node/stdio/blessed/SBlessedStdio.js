@@ -15,6 +15,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const childProcess_1 = __importDefault(require("../../is/childProcess"));
+const wait_1 = __importDefault(require("../../time/wait"));
 const SStdio_1 = __importDefault(require("../SStdio"));
 const SBlessedComponent_1 = __importDefault(require("../../blessed/SBlessedComponent"));
 class SBlessedStdio extends SStdio_1.default {
@@ -33,58 +34,26 @@ class SBlessedStdio extends SStdio_1.default {
             blessedStdio: {
                 screen: true,
                 attach: true,
+                logInterval: 30,
                 actionPrefix: true,
-                blessed: {
-                    top: 0,
-                    left: 0,
-                    bottom: 0,
-                    right: 0,
-                    width: '100%',
-                    height: '100%',
-                    mouse: true,
-                    keys: true,
-                    scrollable: true,
-                    alwaysScroll: true,
-                    scrollbar: {
-                        ch: ' ',
-                        inverse: true
-                    },
-                    style: {
-                        scrollbar: {
-                            bg: 'yellow'
-                        }
-                    }
-                }
+                blessed: {}
             }
         }, settings));
-        this.stack = [];
-        this.$container = new SBlessedComponent_1.default({
-            screen: this._settings.blessedStdio.screen,
-            attach: this._settings.blessedStdio.attach,
-            blessed: Object.assign({ 
-                // width: '100%',
-                // height: '100%',
-                top: 0, left: 0, right: 0, bottom: 0, padding: {
-                    top: 1,
-                    left: 2,
-                    bottom: 1,
-                    right: 2
-                }, style: {
-                    bg: 'cyan'
-                } }, (this._settings.blessedStdio.blessed || {}))
-        });
-        this.$container.on('show', () => {
-            this.display();
-        });
-        this.$container.on('attach', () => {
-            this.display();
-        });
-        this.$container.on('hide', () => {
-            this.hide();
-        });
-        this.$container.on('detach', () => {
-            this.hide();
-        });
+        /**
+         * @name          log
+         * @type          Function
+         *
+         * This method simply log the passed arguments
+         *
+         * @param       {Mixed}         ...args         The arguments you want to log
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this._timeout = 0;
+        this._top = 0;
+        this.$container = this._createContainer();
+        this.$innerContainer = this._createInnerContainer();
+        this.$container.append(this.$innerContainer);
         // // listen for resizing
         // this.on('resize', () => {
         //   clearTimeout(this._resizeTimeout);
@@ -99,6 +68,71 @@ class SBlessedStdio extends SStdio_1.default {
         this._logsEncryptedStack = [];
     }
     /**
+     * @name          blessedStdioSettings
+     * @type          ISBlessedStdioSettings
+     * @get
+     *
+     * Access the blessedStdio settings
+     *
+     * @since         2.0.0
+     *
+     */
+    get blessedStdioSettings() {
+        return this._settings.blessedStdio;
+    }
+    _createContainer() {
+        if (this.$container)
+            return this.$container;
+        const $container = new SBlessedComponent_1.default({
+            screen: this.blessedStdioSettings.screen,
+            attach: this.blessedStdioSettings.attach,
+            blessed: Object.assign(Object.assign({ mouse: true, scrollable: true, alwaysScroll: true, scrollbar: {
+                    ch: ' ',
+                    inverse: true
+                }, style: {
+                    scrollbar: {
+                        bg: 'yellow'
+                    }
+                }, top: 0, left: 0, right: 0, bottom: 0, padding: {
+                    top: 1,
+                    left: 2,
+                    right: 2,
+                    bottom: 1
+                } }, (this.blessedStdioSettings.blessed || {})), { style: {
+                // bg: 'red'
+                } })
+        });
+        $container.on('show', () => {
+            this.display();
+        });
+        $container.on('attach', () => {
+            this.display();
+        });
+        $container.on('hide', () => {
+            this.hide();
+        });
+        $container.on('detach', () => {
+            this.hide();
+        });
+        return $container;
+    }
+    _createInnerContainer() {
+        const $container = new SBlessedComponent_1.default({
+            screen: false,
+            attach: false,
+            blessed: {
+                height: 'shrink',
+                top: 0,
+                left: 0,
+                right: 0,
+                style: {
+                // bg: 'cyan'
+                }
+            }
+        });
+        return $container;
+    }
+    /**
      *
      * @name          clear
      * @type          Function
@@ -109,53 +143,73 @@ class SBlessedStdio extends SStdio_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     clear() {
-        // this._isClearing = true;
-        // // remove all items from the display list
-        // this.children.forEach(($component) => {
-        //   $component.detach();
-        // });
-        // // reset the stack
-        // this.setContent('');
-        // this.stack = [];
-        // this._isClearing = false;
+        return __awaiter(this, void 0, void 0, function* () {
+            this.$innerContainer.destroy();
+            this.$innerContainer = this._createInnerContainer();
+            this.$container.append(this.$innerContainer);
+            // this.$innerContainer.clearItems();
+            // this.$innerContainer.destroy();
+            // this.$innerContainer = this._createInnerContainer();
+            // this.$container.append(this.$innerContainer);
+            // const $parent = this.$container.parent;
+            // this.$container = this._createContainer();
+            // if ($parent) {
+            //   $parent.append(this.$container);
+            // }
+            // this.$container.children.forEach(($component, i) => {
+            //   $component.destroy();
+            // });
+            // this.$container.setContent('');
+            // this.$container.screen.clearRegion(
+            //   this.$container.aleft,
+            //   this.$container.aleft + this.$container.width,
+            //   this.$container.atop,
+            //   this.$container.atop + this.$container.height
+            // );
+            // this.$container.screen.render();
+            yield wait_1.default(0);
+            // nativeConsole.log(
+            //   this.$container.aleft,
+            //   this.$container.aleft + this.$container.width,
+            //   this.$container.atop,
+            //   this.$container.atop + this.$container.height
+            // );
+            // this.$container.style.bg = 'red';
+            // reset the stack
+            //
+            // this.$container.update();
+            return true;
+        });
     }
-    /**
-     * @name          log
-     * @type          Function
-     *
-     * This method simply log the passed arguments
-     *
-     * @param       {Mixed}         ...args         The arguments you want to log
-     *
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
     _log(logObj, component) {
         return __awaiter(this, void 0, void 0, function* () {
-            // @ts-ignore
-            let $lastComponent;
-            // clear
-            if (logObj.clear === true) {
+            this._timeout += this.blessedStdioSettings.logInterval;
+            yield wait_1.default(this._timeout);
+            if (this._timeout >= this.blessedStdioSettings.logInterval)
+                this._timeout -= this.blessedStdioSettings.logInterval;
+            const $component = component.render(logObj, this._settings);
+            if (this.$innerContainer.realHeight === 1) {
+                $component.top = 0;
             }
             else {
-                $lastComponent = this.stack.length ? this.stack.pop() : undefined;
+                $component.top = this.$innerContainer.realHeight;
             }
-            const type = logObj.type || 'default';
-            const $component = component.render(logObj, this._settings);
-            this.stack.push($component);
-            if ($lastComponent) {
-                $component.top = $lastComponent.top + $lastComponent.realHeight;
-            }
-            this.$container.append($component);
-            // $component.height = $component.realHeight;
+            $component.on('update', () => {
+                if (logObj.mt)
+                    $component.top += logObj.mt;
+                if (logObj.mb)
+                    $component.height += logObj.mb;
+            });
+            this.$innerContainer.append($component);
             // scroll to bottom
             clearTimeout(this._updateTimeout);
             this._updateTimeout = setTimeout(() => {
                 try {
-                    this.$container.setScrollPerc(100);
+                    this.$innerContainer.setScrollPerc(100);
                 }
                 catch (e) { }
                 // update display
-                this.$container.update();
+                this.$container.screen.render();
             }, 200);
         });
     }
@@ -196,12 +250,14 @@ const fileBlessedStdioComponent_1 = __importDefault(require("./components/fileBl
 const headingBlessedStdioComponent_1 = __importDefault(require("./components/headingBlessedStdioComponent"));
 const separatorBlessedStdioComponent_1 = __importDefault(require("./components/separatorBlessedStdioComponent"));
 const warningBlessedStdioComponent_1 = __importDefault(require("./components/warningBlessedStdioComponent"));
+const timeBlessedStdioComponent_1 = __importDefault(require("./components/timeBlessedStdioComponent"));
 SBlessedStdio.registerComponent(defaultBlessedStdioComponent_1.default);
 SBlessedStdio.registerComponent(errorBlessedStdioComponent_1.default);
 SBlessedStdio.registerComponent(fileBlessedStdioComponent_1.default);
 SBlessedStdio.registerComponent(headingBlessedStdioComponent_1.default);
 SBlessedStdio.registerComponent(separatorBlessedStdioComponent_1.default);
 SBlessedStdio.registerComponent(warningBlessedStdioComponent_1.default);
+SBlessedStdio.registerComponent(timeBlessedStdioComponent_1.default);
 const cls = SBlessedStdio;
 exports.default = SBlessedStdio;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0JsZXNzZWRTdGRpby5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNCbGVzc2VkU3RkaW8udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7O0FBSWQsdUVBQWlEO0FBSWpELHlFQUFxRDtBQWFyRCx1REFBaUM7QUFJakMsd0ZBRXlDO0FBOER6QyxNQUFNLGFBQWMsU0FBUSxnQkFBUTtJQVlsQzs7Ozs7Ozs7T0FRRztJQUNILFlBQVksT0FBTyxFQUFFLFFBQVEsR0FBRyxFQUFFO1FBQ2hDLGlCQUFpQjtRQUNqQixLQUFLLENBQ0gsT0FBTyxFQUNQLG1CQUFXLENBQ1Q7WUFDRSxZQUFZLEVBQUU7Z0JBQ1osTUFBTSxFQUFFLElBQUk7Z0JBQ1osTUFBTSxFQUFFLElBQUk7Z0JBQ1osWUFBWSxFQUFFLElBQUk7Z0JBQ2xCLE9BQU8sRUFBRTtvQkFDUCxHQUFHLEVBQUUsQ0FBQztvQkFDTixJQUFJLEVBQUUsQ0FBQztvQkFDUCxNQUFNLEVBQUUsQ0FBQztvQkFDVCxLQUFLLEVBQUUsQ0FBQztvQkFDUixLQUFLLEVBQUUsTUFBTTtvQkFDYixNQUFNLEVBQUUsTUFBTTtvQkFDZCxLQUFLLEVBQUUsSUFBSTtvQkFDWCxJQUFJLEVBQUUsSUFBSTtvQkFDVixVQUFVLEVBQUUsSUFBSTtvQkFDaEIsWUFBWSxFQUFFLElBQUk7b0JBQ2xCLFNBQVMsRUFBRTt3QkFDVCxFQUFFLEVBQUUsR0FBRzt3QkFDUCxPQUFPLEVBQUUsSUFBSTtxQkFDZDtvQkFDRCxLQUFLLEVBQUU7d0JBQ0wsU0FBUyxFQUFFOzRCQUNULEVBQUUsRUFBRSxRQUFRO3lCQUNiO3FCQUNGO2lCQUNGO2FBQ0Y7U0FDRixFQUNELFFBQVEsQ0FDVCxDQUNGLENBQUM7UUE0RUosVUFBSyxHQUFVLEVBQUUsQ0FBQztRQTFFaEIsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLDJCQUFtQixDQUFDO1lBQ3hDLE1BQU0sRUFBRSxJQUFJLENBQUMsU0FBUyxDQUFDLFlB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0JsZXNzZWRTdGRpby5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNCbGVzc2VkU3RkaW8udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7O0FBSWQsdUVBQWlEO0FBSWpELHlFQUFxRDtBQU1yRCwyREFBcUM7QUFPckMsdURBQWlDO0FBSWpDLHdGQUV5QztBQStEekMsTUFBTSxhQUFjLFNBQVEsZ0JBQVE7SUEwQmxDOzs7Ozs7OztPQVFHO0lBQ0gsWUFBWSxPQUFPLEVBQUUsUUFBUSxHQUFHLEVBQUU7UUFDaEMsaUJBQWlCO1FBQ2pCLEtBQUssQ0FDSCxPQUFPLEVBQ1AsbUJBQVcsQ0FDVDtZQUNFLFlBQVksRUFBRTtnQkFDWixNQUFNLEVBQUUsSUFBSTtnQkFDWixNQUFNLEVBQUUsSUFBSTtnQkFDWixXQUFXLEVBQUUsRUFBRTtnQkFDZixZQUFZLEVBQUUsSUFBSTtnQkFDbEIsT0FBTyxFQUFFLEVBQUU7YUFDWjtTQUNGLEVBQ0QsUUFBUSxDQUNULENBQ0YsQ0FBQztRQWtKSjs7Ozs7Ozs7O1dBU0c7UUFDSCxhQUFRLEdBQUcsQ0FBQyxDQUFDO1FBQ2IsU0FBSSxHQUFHLENBQUMsQ0FBQztRQTNKUCxJQUFJLENBQUMsVUFBVSxHQUFHLElBQUksQ0FBQyxnQkFBZ0IsRUFBRSxDQUFDO1FBQzFDLElBQUksQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDLHFCQUFxQixFQUFFLENBQUM7UUFDcEQsSUFBSSxDQUFDLFVBQVUsQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxDQUFDO1FBRTdDLHlCQUF5QjtRQUN6Qiw0QkFBNEI7UUFDNUIsdUNBQXVDO1FBQ3ZDLDZDQUE2QztRQUM3Qyw0QkFBNEI7UUFDNUIsY0FBYztRQUNkLE1BQU07UUFFTix5QkFBeUI7UUFDekIsNEJBQTRCO1FBQzVCLHVCQUF1QjtRQUN2QixNQUFNO1FBRU4sSUFBSSxDQUFDLG1CQUFtQixHQUFHLEVBQUUsQ0FBQztJQUNoQyxD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

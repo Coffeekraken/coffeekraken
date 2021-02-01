@@ -1,22 +1,22 @@
 import SProcess from '../../process/SProcess';
-import __SSvelteCompiler from './SSvelteCompiler';
+import __SScssCompiler from './SScssCompiler';
 import __deepMerge from '../../object/deepMerge';
 
-import __SSvelteCompilerParamsInterface from './interface/SSvelteCompilerParamsInterface';
-import { ISSvelteCompiler, ISSvelteCompilerParams } from './SSvelteCompiler';
+import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';
+import { ISScssCompiler, ISScssCompilerParams } from './SScssCompiler';
 import {
   ISProcessSettings,
   ISProcessOptionalSettings
 } from '../../process/SProcess';
 
 /**
- * @name            SSvelteCompileProcess
- * @namespace           sugar.node.svelte.compile
+ * @name            SScssCompilerProcess
+ * @namespace           sugar.node.scss.compile
  * @type            Class
  * @extends         SProcess
  * @wip
  *
- * This class represent the svelte compilation process to compile svelte files to js
+ * This class represent the tsc compilation process to compile typescript to js
  *
  * @todo      interface
  * @todo      doc
@@ -26,25 +26,25 @@ import {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISSvelteCompileProcessOptionalSettings
+interface ISScssCompilerProcessOptionalSettings
   extends ISProcessOptionalSettings {}
-export interface ISSvelteCompileProcessSettings extends ISProcessSettings {}
+interface ISScssCompilerProcessSettings extends ISProcessSettings {}
 
-class SSvelteCompileProcess extends SProcess {
+class SScssCompilerProcess extends SProcess {
   static interfaces = {
     initialParams: {
       apply: false,
-      class: __SSvelteCompilerParamsInterface
+      class: __SScssCompilerParamsInterface
     },
     params: {
       apply: false,
-      class: __SSvelteCompilerParamsInterface
+      class: __SScssCompilerParamsInterface
     }
   };
 
   /**
-   * @name      svelteCompileProcessSettings
-   * @type      ISSvelteCompileProcessSettings
+   * @name      scssCompileProcessSettings
+   * @type      ISScssCompilerProcessSettings
    * @get
    *
    * Access the ```scssCompileProcess``` settings
@@ -52,13 +52,13 @@ class SSvelteCompileProcess extends SProcess {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  get svelteCompileProcessSettings() {
-    return (<any>this._settings).svelteCompileProcess;
+  get scssCompileProcessSettings() {
+    return (<any>this._settings).scssCompileProcessSettings;
   }
 
   /**
-   * @name      _svelteCompiler
-   * @type      ISSvelteCompiler
+   * @name      _scssCompiler
+   * @type      ISScssCompiler
    * @private
    *
    * Store the compiler instance
@@ -66,7 +66,7 @@ class SSvelteCompileProcess extends SProcess {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  private _svelteCompiler: ISSvelteCompiler;
+  private _scssCompiler: ISScssCompiler;
 
   /**
    * @name          constructor
@@ -79,23 +79,23 @@ class SSvelteCompileProcess extends SProcess {
    */
   constructor(
     initialParams: any,
-    settings: ISSvelteCompileProcessOptionalSettings = {}
+    settings: ISScssCompilerProcessOptionalSettings = {}
   ) {
     super(
       initialParams,
       __deepMerge(
         {
-          svelteCompileProcess: {}
+          scssCompileProcess: {}
         },
         {
-          id: 'SSvelteCompileProcess',
-          name: 'Compile Svelte Process'
+          id: 'SScssCompilerProcess',
+          name: 'Compile Scss Process'
         },
         settings
       )
     );
 
-    this._svelteCompiler = new __SSvelteCompiler(initialParams, {});
+    this._scssCompiler = new __SScssCompiler(initialParams, {});
   }
 
   /**
@@ -112,12 +112,11 @@ class SSvelteCompileProcess extends SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   process(
-    params: ISSvelteCompilerParams,
-    settings: ISSvelteCompileProcessOptionalSettings = {}
+    params: ISScssCompilerParams,
+    settings: ISScssCompilerProcessOptionalSettings = {}
   ) {
-    this.processSettings.exitAtEnd = !params.watch;
-    return this._svelteCompiler.compile(params, settings);
+    return this._scssCompiler.compile(params, settings);
   }
 }
 
-export default SSvelteCompileProcess;
+export default SScssCompilerProcess;

@@ -7,7 +7,7 @@ const SProcess_1 = __importDefault(require("../../process/SProcess"));
 const SSvelteCompiler_1 = __importDefault(require("./SSvelteCompiler"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const SSvelteCompilerParamsInterface_1 = __importDefault(require("./interface/SSvelteCompilerParamsInterface"));
-class SSvelteCompileProcess extends SProcess_1.default {
+class SSvelteCompilerProcess extends SProcess_1.default {
     /**
      * @name          constructor
      * @type          Function
@@ -21,14 +21,14 @@ class SSvelteCompileProcess extends SProcess_1.default {
         super(initialParams, deepMerge_1.default({
             svelteCompileProcess: {}
         }, {
-            id: 'SSvelteCompileProcess',
-            name: 'Compile Svelte Process'
+            id: 'SSvelteCompilerProcess',
+            name: 'Svelte Compiler Process'
         }, settings));
         this._svelteCompiler = new SSvelteCompiler_1.default(initialParams, {});
     }
     /**
      * @name      svelteCompileProcessSettings
-     * @type      ISSvelteCompileProcessSettings
+     * @type      ISSvelteCompilerProcessSettings
      * @get
      *
      * Access the ```scssCompileProcess``` settings
@@ -53,11 +53,10 @@ class SSvelteCompileProcess extends SProcess_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     process(params, settings = {}) {
-        this.processSettings.exitAtEnd = !params.watch;
         return this._svelteCompiler.compile(params, settings);
     }
 }
-SSvelteCompileProcess.interfaces = {
+SSvelteCompilerProcess.interfaces = {
     initialParams: {
         apply: false,
         class: SSvelteCompilerParamsInterface_1.default
@@ -67,5 +66,5 @@ SSvelteCompileProcess.interfaces = {
         class: SSvelteCompilerParamsInterface_1.default
     }
 };
-exports.default = SSvelteCompileProcess;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1N2ZWx0ZUNvbXBpbGVQcm9jZXNzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1N2ZWx0ZUNvbXBpbGVQcm9jZXNzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsc0VBQThDO0FBQzlDLHdFQUFrRDtBQUNsRCx1RUFBaUQ7QUFFakQsZ0hBQTBGO0FBNEIxRixNQUFNLHFCQUFzQixTQUFRLGtCQUFRO0lBc0MxQzs7Ozs7Ozs7T0FRRztJQUNILFlBQ0UsYUFBa0IsRUFDbEIsV0FBbUQsRUFBRTtRQUVyRCxLQUFLLENBQ0gsYUFBYSxFQUNiLG1CQUFXLENBQ1Q7WUFDRSxvQkFBb0IsRUFBRSxFQUFFO1NBQ3pCLEVBQ0Q7WUFDRSxFQUFFLEVBQUUsdUJBQXVCO1lBQzNCLElBQUksRUFBRSx3QkFBd0I7U0FDL0IsRUFDRCxRQUFRLENBQ1QsQ0FDRixDQUFDO1FBRUYsSUFBSSxDQUFDLGVBQWUsR0FBRyxJQUFJLHlCQUFpQixDQUFDLGFBQWEsRUFBRSxFQUFFLENBQUMsQ0FBQztJQUNsRSxDQUFDO0lBdEREOzs7Ozs7Ozs7T0FTRztJQUNILElBQUksNEJBQTRCO1FBQzlCLE9BQWEsSUFBSSxDQUFDLFNBQVUsQ0FBQyxvQkFBb0IsQ0FBQztJQUNwRCxDQUFDO0lBNENEOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILE9BQU8sQ0FDTCxNQUE4QixFQUM5QixXQUFtRCxFQUFFO1FBRXJELElBQUksQ0FBQyxlQUFlLENBQUMsU0FBUyxHQUFHLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQztRQUMvQyxPQUFPLElBQUksQ0FBQyxlQUFlLENBQUMsT0FBTyxDQUFDLE1BQU0sRUFBRSxRQUFRLENBQUMsQ0FBQztJQUN4RCxDQUFDOztBQXRGTSxnQ0FBVSxHQUFHO0lBQ2xCLGFBQWEsRUFBRTtRQUNiLEtBQUssRUFBRSxLQUFLO1FBQ1osS0FBSyxFQUFFLHdDQUFnQztLQUN4QztJQUNELE1BQU0sRUFBRTtRQUNOLEtBQUssRUFBRSxLQUFLO1FBQ1osS0FBSyxFQUFFLHdDQUFnQztLQUN4QztDQUNGLENBQUM7QUFnRkosa0JBQWUscUJBQXFCLENBQUMifQ==
+exports.default = SSvelteCompilerProcess;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1N2ZWx0ZUNvbXBpbGVyUHJvY2Vzcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNTdmVsdGVDb21waWxlclByb2Nlc3MudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSxzRUFBOEM7QUFDOUMsd0VBQWtEO0FBQ2xELHVFQUFpRDtBQUVqRCxnSEFBMEY7QUE0QjFGLE1BQU0sc0JBQXVCLFNBQVEsa0JBQVE7SUFzQzNDOzs7Ozs7OztPQVFHO0lBQ0gsWUFDRSxhQUFrQixFQUNsQixXQUFvRCxFQUFFO1FBRXRELEtBQUssQ0FDSCxhQUFhLEVBQ2IsbUJBQVcsQ0FDVDtZQUNFLG9CQUFvQixFQUFFLEVBQUU7U0FDekIsRUFDRDtZQUNFLEVBQUUsRUFBRSx3QkFBd0I7WUFDNUIsSUFBSSxFQUFFLHlCQUF5QjtTQUNoQyxFQUNELFFBQVEsQ0FDVCxDQUNGLENBQUM7UUFFRixJQUFJLENBQUMsZUFBZSxHQUFHLElBQUkseUJBQWlCLENBQUMsYUFBYSxFQUFFLEVBQUUsQ0FBQyxDQUFDO0lBQ2xFLENBQUM7SUF0REQ7Ozs7Ozs7OztPQVNHO0lBQ0gsSUFBSSw0QkFBNEI7UUFDOUIsT0FBYSxJQUFJLENBQUMsU0FBVSxDQUFDLG9CQUFvQixDQUFDO0lBQ3BELENBQUM7SUE0Q0Q7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsT0FBTyxDQUNMLE1BQThCLEVBQzlCLFdBQW9ELEVBQUU7UUFFdEQsT0FBTyxJQUFJLENBQUMsZUFBZSxDQUFDLE9BQU8sQ0FBQyxNQUFNLEVBQUUsUUFBUSxDQUFDLENBQUM7SUFDeEQsQ0FBQzs7QUFyRk0saUNBQVUsR0FBRztJQUNsQixhQUFhLEVBQUU7UUFDYixLQUFLLEVBQUUsS0FBSztRQUNaLEtBQUssRUFBRSx3Q0FBZ0M7S0FDeEM7SUFDRCxNQUFNLEVBQUU7UUFDTixLQUFLLEVBQUUsS0FBSztRQUNaLEtBQUssRUFBRSx3Q0FBZ0M7S0FDeEM7Q0FDRixDQUFDO0FBK0VKLGtCQUFlLHNCQUFzQixDQUFDIn0=

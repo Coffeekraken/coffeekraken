@@ -20,7 +20,7 @@ import __SFrontendServerInterface from './interface/SFrontendServerInterface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SFrontendServerProcess extends __SProcess {
+class SFrontendServerProcess extends __SProcess {
   static interfaces = {
     this: __SFrontendServerInterface
   };
@@ -58,4 +58,6 @@ export = class SFrontendServerProcess extends __SProcess {
   process(params, settings = {}) {
     return __frontendServer(params);
   }
-};
+}
+
+export default SFrontendServerProcess;

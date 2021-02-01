@@ -11,8 +11,8 @@ import {
 } from '../../process/SProcess';
 
 /**
- * @name            STypescriptToJsProcess
- * @namespace           sugar.node.typescript
+ * @name            STsCompilerProcess
+ * @namespace           sugar.node.typescript.compile
  * @type            Class
  * @extends         SProcess
  * @wip
@@ -33,10 +33,6 @@ export interface ISTsCompileProcessSettings extends ISProcessSettings {}
 
 class STsCompilerProcess extends SProcess implements ISCompileTsProcess {
   static interfaces = {
-    // initialParams: {
-    //   apply: false,
-    //   class: __SSvelteCompilerParamsInterface
-    // },
     params: {
       apply: false,
       class: __STsCompilerParamsInterface
@@ -52,14 +48,14 @@ class STsCompilerProcess extends SProcess implements ISCompileTsProcess {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings?: ISCompileTsProcessSettings) {
-    super({
-      id: 'STsCompileProcess',
-      name: 'Compile TS Process',
+  constructor(initialParams: any, settings?: ISCompileTsProcessSettings) {
+    super(initialParams, {
+      id: 'STsCompilerProcess',
+      name: 'TS Compiler Process',
       ...(settings || {})
     });
 
-    this._tsCompiler = new __STsCompiler({});
+    this._tsCompiler = new __STsCompiler();
   }
 
   /**
@@ -79,7 +75,6 @@ class STsCompilerProcess extends SProcess implements ISCompileTsProcess {
     params?: ISTsCompilerParams,
     settings?: ISCompileTsProcessSettings
   ): Promise<any> {
-    this.processSettings.exitAtEnd = !params.watch;
     const promise = this._tsCompiler.compile(params, settings);
     return promise;
   }

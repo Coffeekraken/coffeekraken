@@ -191,12 +191,17 @@ class STsCompiler extends __SCompiler {
         } else if (this.getStack(inputStr)) {
           const stackObj = this.getStack(inputStr);
           // set the temp file name
-          tmpConfigFileName = inputStr + '.tsconfig.js';
+          tmpConfigFileName = inputSBlessedtr + '.tsconfig.js';
           // const stackPromise = this.compile();
           tsconfig = __deepMerge(tsconfig, stackObj);
         } else {
           tsconfig.files.push(inputStr);
         }
+      });
+
+      emit('log', {
+        clear: true,
+        type: 'time'
       });
 
       emit('log', {
@@ -343,15 +348,18 @@ class STsCompiler extends __SCompiler {
               if (count && count.length === 2 && count[1] === '0') {
                 strToAdd = line.replace(
                   /.*Found\s([0-9]+)\serror.*/,
-                  `<green>[ended]</green> Found <yellow>$1</yellow> error`
+                  `<green>[success]</green> Found <yellow>$1</yellow> error`
                 );
               } else {
                 strToAdd = line.replace(
                   /.*Found\s([0-9]+)\serror.*/,
-                  `<magenta>[ended]</magenta> Found <yellow>$1</yellow> error(s)`
+                  `<red>[error]</red> Found <yellow>$1</yellow> error(s)`
                 );
               }
               logsArray.push(strToAdd);
+              if (params.watch) {
+                logsArray.push(`<blue>[watch] </blue>Watching for changes...`);
+              }
             } else if (line.trim().match(/TSFILE:\s/)) {
               // Emit file
               currentLogType = 'save';

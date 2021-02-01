@@ -38,11 +38,11 @@ class SScssCompilerParamsInterface extends __SInterface {
     },
     save: {
       type: 'Boolean',
-      default: false
+      default: __sugarConfig('scss.compile.save')
     },
     watch: {
       type: 'Boolean',
-      default: false
+      default: __sugarConfig('scss.compile.watch')
     },
     style: {
       type: 'String',

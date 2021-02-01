@@ -146,7 +146,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
   }
 
   /**
-   * @name        _watch
+   * @name        _startWatch
    * @type        Function
    * @private
    *
@@ -156,18 +156,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _alreadyWatch = false;
-  private _watch() {
-    if (this._alreadyWatch) return;
-    this._alreadyWatch = true;
-
-    if (!this._currentCompilationParams) return;
-
-    // start watching the file if needed
-    if (this._currentCompilationParams.watch) {
-      this.startWatch();
-    }
-
+  private _startWatch() {
     // listen for change event
     this.on('update', (file, metas) => {
       if (this._currentCompilationParams.watch) {
@@ -175,6 +164,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
           <ISSvelteCompilerParams>this._currentCompilationParams
         );
         this.emit('log', {
+          clear: true,
           type: 'file',
           action: 'update',
           file
@@ -215,7 +205,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
     params = this.applyInterface('compilerParams', params);
 
     if (params.watch) {
-      this._watch();
+      this.startWatch();
     }
 
     // init the promise
@@ -236,7 +226,8 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
       this._isCompiling = true;
 
       emit('log', {
-        type: 'separator'
+        clear: true,
+        type: 'time'
       });
 
       // notify start
@@ -321,6 +312,10 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
             file: this
           });
         }
+
+        emit('log', {
+          type: 'separator'
+        });
 
         if (params.watch) {
           emit('log', {

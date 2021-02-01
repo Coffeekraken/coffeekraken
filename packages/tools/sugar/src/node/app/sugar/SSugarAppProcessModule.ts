@@ -19,7 +19,7 @@ import __deepMerge from '../../object/deepMerge';
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export = class SSugarAppProcessModule extends __SSugarAppModule {
+class SSugarAppProcessModule extends __SSugarAppModule {
   // static interfaces = { this: __SFrontendServerInterface };
 
   /**
@@ -54,12 +54,12 @@ export = class SSugarAppProcessModule extends __SSugarAppModule {
       __deepMerge(settings)
     );
 
-    const ProcessClass = require(moduleObj.processPath);
+    const ProcessClass = require(moduleObj.processPath).default;
     const pro = new ProcessClass(Object.assign({}, moduleObj.params || {}), {
       process: {
         ...(this._settings.processSettings || {}),
-        metas: false,
-        stdio: false
+        stdio: false,
+        decorators: false
       }
     });
 
@@ -84,4 +84,6 @@ export = class SSugarAppProcessModule extends __SSugarAppModule {
         break;
     }
   }
-};
+}
+
+export default SSugarAppProcessModule;

@@ -55,7 +55,6 @@ function absolute(
     } else if (__isPath(p)) return __path.resolve(from, p);
     return p;
   });
-
   if (isArray) return path;
   return path[0];
 }

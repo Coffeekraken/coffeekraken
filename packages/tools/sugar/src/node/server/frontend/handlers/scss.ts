@@ -31,8 +31,10 @@ export = function scss(req, res, settings = {}) {
     const defaultValuesObj = __SScssCompilerParamsInterface.defaults();
     const compiler = new __SScssCompiler(defaultValuesObj);
     const duration = new __SDuration();
-    const compilerPromise = compiler.compile(req.path, {
-      ...(req.query || {})
+    const compilerPromise = compiler.compile({
+      ...(req.query || {}),
+      save: true,
+      input: req.path.slice(1)
     });
     promise.pipe(compilerPromise);
     compilerPromise.on('reject', (e) => {

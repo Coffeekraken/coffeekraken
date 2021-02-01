@@ -28,9 +28,7 @@ import __SPromise, { reject } from '../../../promise/SPromise';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export = function views(req, res, settings = {}) {
-  const promise = new __SPromise();
-
-  (async () => {
+  return new __SPromise(async ({ resolve, reject, pipe }) => {
     let params = req.params[0].split('/');
 
     const duration = new __SDuration();
@@ -54,9 +52,9 @@ export = function views(req, res, settings = {}) {
           const resultPromise = templateInstance.render({
             ...(res.templateData || {})
           });
-          __SPromise.pipe(resultPromise, promise);
+          pipe(resultPromise);
           const resultObj = await resultPromise;
-          promise.resolve(
+          resolve(
             `<bgGreen><black> views </black></bgGreen> file "<yellow>${
               req.path
             }</yellow> served in <cyan>${duration.end()}s</cyan>"`
@@ -90,8 +88,6 @@ export = function views(req, res, settings = {}) {
     res.status(404);
     res.type('text/html');
     res.send(notFoundObj.content);
-    promise.reject(notFoundObj.content);
-  })();
-
-  return promise;
+    reject(notFoundObj.content);
+  });
 };

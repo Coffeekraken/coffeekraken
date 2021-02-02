@@ -1,3 +1,5 @@
+const __ipAddress = require('../src/node/network/ipAddress');
+
 module.exports = {
   compile: {
     /**
@@ -12,7 +14,7 @@ module.exports = {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: '[config.storage.srcDir]/js/**/*.js',
+    input: '[config.storage.srcDir]/js/*.js',
 
     /**
      * @name              outputDir
@@ -40,6 +42,19 @@ module.exports = {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     rootDir: '[config.storage.srcDir]/js',
+
+    /**
+     * @name              bundle
+     * @namespace         config.js.compile
+     * @type              Boolean
+     * @default           false
+     *
+     * Specify if you want bundle files into 1 final file
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    bundle: false,
 
     /**
      * @name              map
@@ -133,6 +148,45 @@ module.exports = {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     watch: false,
+
+    /**
+     * @name          serve
+     * @namespace      config.js.compile
+     * @type        Boolean
+     * @default     false
+     *
+     * Specify if you want to start a server that serve the compiled files or not
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    serve: false,
+
+    /**
+     * @name          host
+     * @namespace      config.js.compile
+     * @type        String
+     * @default     ipAddress
+     *
+     * Specify the host you want in case of a local server
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    host: __ipAddress(),
+
+    /**
+     * @name          port
+     * @namespace      config.js.compile
+     * @type        Integer
+     * @default     8888
+     *
+     * Specify the port you want in case of a local server
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    port: 8888,
 
     /**
      * @name                esbuild

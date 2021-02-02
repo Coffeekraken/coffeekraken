@@ -31,7 +31,13 @@ class SJsCompilerParamsInterface extends __SInterface {
     },
     rootDir: {
       type: 'String',
+      alias: 'r',
       default: __sugarConfig('js.compile.rootDir')
+    },
+    bundle: {
+      type: 'Boolean',
+      alias: 'b',
+      default: __sugarConfig('js.compile.bundle')
     },
     map: {
       type: 'Boolean',
@@ -42,6 +48,7 @@ class SJsCompilerParamsInterface extends __SInterface {
     },
     prod: {
       type: 'Boolean',
+      alias: 'p',
       default: __sugarConfig('js.compile.prod')
     },
     stripComments: {
@@ -64,7 +71,20 @@ class SJsCompilerParamsInterface extends __SInterface {
     },
     watch: {
       type: 'Boolean',
+      alias: 'w',
       default: __sugarConfig('js.compile.watch')
+    },
+    serve: {
+      type: 'Boolean',
+      default: __sugarConfig('js.compile.serve')
+    },
+    host: {
+      type: 'String',
+      default: __sugarConfig('js.compile.host')
+    },
+    port: {
+      type: 'Integer',
+      default: __sugarConfig('js.compile.port')
     },
     esbuild: {
       type: 'Object',

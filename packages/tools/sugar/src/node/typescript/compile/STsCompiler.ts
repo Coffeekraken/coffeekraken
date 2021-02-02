@@ -88,6 +88,8 @@ class STsCompiler extends __SCompiler {
     }
   };
 
+  static _serveServer: any;
+
   /**
    * @name      tsCompilerSettings
    * @type      ISTsCompilerSettings
@@ -318,7 +320,9 @@ class STsCompiler extends __SCompiler {
         processor: (value, metas) => {
           let strValue = value.value !== undefined ? value.value : value;
 
-          let endSpace = false;
+          let clear = false,
+            type = 'default',
+            separator = false;
 
           // removing clear character
           strValue = strValue.replace('\u001bc', '');
@@ -339,6 +343,7 @@ class STsCompiler extends __SCompiler {
             }
 
             if (line.trim().match(/File\schange\sdetected/)) {
+              clear = true;
               currentLogType = 'update';
               strToAdd = `<yellow>[update]</yellow> File change detected`;
               logsArray.push(strToAdd);
@@ -358,6 +363,7 @@ class STsCompiler extends __SCompiler {
               }
               logsArray.push(strToAdd);
               if (params.watch) {
+                separator = true;
                 logsArray.push(`<blue>[watch] </blue>Watching for changes...`);
               }
             } else if (line.trim().match(/TSFILE:\s/)) {
@@ -409,10 +415,41 @@ class STsCompiler extends __SCompiler {
           // strValue = strValue.trim();
           // if (endSpace) strValue = `${strValue} \n`;
 
+          // if (separator) {
+          //   emit('log', {
+          //     type: 'separator'
+          //   });
+          // }
+          // if (type) value.type = type;
+          // if (clear) {
+          //   emit('log', {
+          //     value: '',
+          //     clear: true
+          //   });
+          // }
+
           if (value.value !== undefined) value.value = strValue;
           else value = strValue;
 
-          return [value, metas];
+          if (clear) {
+            emit('log', {
+              type: 'time'
+            });
+          }
+
+          if (separator) {
+            emit('log', {
+              type: 'separator'
+            });
+          }
+
+          emit('log', {
+            type,
+            clear,
+            value: strValue
+          });
+
+          // return [value, metas];
         }
       });
       await pro.run(params);

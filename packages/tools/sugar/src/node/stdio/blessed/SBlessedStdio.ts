@@ -132,8 +132,7 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
           blessedStdio: {
             screen: true,
             attach: true,
-            logInterval: 30,
-            actionPrefix: true,
+            logInterval: 50,
             blessed: {}
           }
         },
@@ -296,7 +295,6 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _timeout = 0;
-  _top = 0;
   async _log(logObj: ILog, component) {
     this._timeout += this.blessedStdioSettings.logInterval;
     await __wait(this._timeout);
@@ -305,7 +303,11 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
 
     const $component = component.render(logObj, this._settings);
     if (this.$innerContainer.realHeight === 1) {
-      $component.top = 0;
+      if (this.$innerContainer.children.length) {
+        $component.top = 1;
+      } else {
+        $component.top = 0;
+      }
     } else {
       $component.top = this.$innerContainer.realHeight;
     }

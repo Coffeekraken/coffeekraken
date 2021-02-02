@@ -9,9 +9,14 @@ import __SFileCache from '../cache/SFileCache';
 import __toString from '../string/toString';
 import __wait from '../time/wait';
 import __getFilename from '../fs/filename';
+import * as __esbuild from 'esbuild';
+import __resolve from 'resolve';
+import __filter from '../object/filter';
+import __esbuildScssLoaderPlugin from './compile/plugins/esbuild/esbuildScssLoaderPlugin';
+import __SEventEmitter from '../event/SEventEmitter';
 
 import __SInterface from '../interface/SInterface';
-import {
+import __SJsCompiler, {
   ISJsCompilerParams,
   ISJsCompilerOptionalParams
 } from './compile/SJsCompiler';
@@ -60,9 +65,11 @@ interface ISJsFileOptionalSettings {
   compile?: ISJsFileCompileOptionalSettings;
 }
 interface ISJsFileSettings {
+  plugins: any[];
   compile: ISJsFileCompileOptionalSettings;
 }
 interface ISJsFileCtorSettings {
+  plugins?: any[];
   jsFile?: ISJsFileOptionalSettings;
 }
 
@@ -133,11 +140,18 @@ class SJsFile extends __SFile implements ISJsFile {
       __deepMerge(
         {
           id: __getFilename(path),
-          jsFile: {}
+          jsFile: {
+            plugins: []
+          }
         },
         settings
       )
     );
+
+    this.jsFileSettings.plugins.unshift(
+      (<any>this.constructor)._resolverPlugin
+    );
+    // this.jsFileSettings.plugins.unshift(__esbuildScssLoaderPlugin);
   }
 
   /**
@@ -190,18 +204,18 @@ class SJsFile extends __SFile implements ISJsFile {
   _currentCompilationSettings: ISJsFileOptionalSettings = {};
   _currentCompilationParams: ISJsCompilerOptionalParams = {};
   compile(params: ISJsCompilerParams, settings?: ISJsFileOptionalSettings) {
-    settings = __deepMerge(this.jsFileSettings, settings);
-    this._currentCompilationParams = Object.assign({}, params);
-    this._currentCompilationSettings = Object.assign({}, settings);
-
-    params = this.applyInterface('compilerParams', params);
-
-    if (params.watch) {
-      this.startWatch();
-    }
-
     // init the promise
     return new __SPromise(async ({ resolve, reject, emit, pipeTo, on }) => {
+      settings = __deepMerge(this.jsFileSettings, settings);
+      this._currentCompilationParams = Object.assign({}, params);
+      this._currentCompilationSettings = Object.assign({}, settings);
+
+      params = this.applyInterface('compilerParams', params);
+
+      if (params.watch) {
+        this.startWatch();
+      }
+
       // listen for the end
       on('finally', () => {
         this._isCompiling = false;
@@ -231,94 +245,108 @@ class SJsFile extends __SFile implements ISJsFile {
 
       await __wait(0);
 
-      let toCompile = this.content;
+      emit('log', {
+        value: `<yellow>[compiling]</yellow> file "<cyan>${this.relPath}</cyan>"`
+      });
 
-      try {
-        emit('log', {
-          value: `<yellow>[compiling]</yellow> file "<cyan>${this.relPath}</cyan>"`
-        });
-
-        // RENDERING HERE
-        // const result = __esbuild.compile(toCompile, {
-        //   filename: this.name,
-        //   dev: !params.prod,
-        //   preserveComments: !params.stripComments,
-        //   preserveWhitespace: !params.prod,
-        //   outputFilename: this.name,
-        //   cssOutputFilename: this.name,
-        //   ...(params.esbuild || {})
-        // });
-
-        result.warnings.forEach((warning) => {
-          emit('warn', {
-            value: warning.toString()
-          });
-        });
-
-        // nativeConsole.log(result.js.map.toString());
-
-        // check if need to save
-        if (params.save) {
-          // build the save path
-          let savePath;
-          if (params.outputDir === undefined) {
-            savePath = this.path.replace(/\.js$/, '.compiled.js');
-          } else {
-            savePath = __path.resolve(
-              params.outputDir,
-              this.path.replace(`${params.rootDir}/`, '')
-            );
-          }
-          emit('log', {
-            type: 'file',
-            file: this,
-            to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-            action: 'save'
-          });
-          this.writeSync(result.js.code, {
-            path: savePath
-          });
-          if (params.map) {
-            this.writeSync(result.js.map.toString(), {
-              path: savePath.replace(/\.js$/, '.js.map')
-            });
-            emit('log', {
-              type: 'file',
-              action: 'saved',
-              to: savePath
-                .replace(/\.js$/, '.js.map')
-                .replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-              file: this
-            });
-          }
-
-          // notify end
-          const time = duration.end();
-
-          emit('log', {
-            type: 'file',
-            action: 'saved',
-            to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-            file: this
-          });
-        }
-
-        emit('log', {
-          type: 'separator'
-        });
-
-        if (params.watch) {
-          emit('log', {
-            value: `<blue>[watch] </blue>Watching for changes...`
-          });
-        }
-
-        return resolve(result);
-      } catch (e) {
-        return reject(e.toString());
+      // prod
+      if (params.prod || params.bundle) {
+        params.minify = true;
+        params.stripComments = true;
+        params.map = false;
       }
 
-      return true;
+      let esbuildParams: any = {
+        charset: 'utf8',
+        logLevel: 'silent',
+        ...__filter(params, (key, value) => {
+          if (Array.isArray(value) && !value.length) return false;
+          return __SJsCompiler._esbuildAcceptedSettings.indexOf(key) !== -1;
+        }),
+        entryPoints: [this.path],
+        bundle: params.bundle,
+        write: false,
+        minify: params.minify,
+        sourcemap: params.map,
+        ...params.esbuild
+      };
+
+      const buildPromise = new Promise(async (buildResolve, buildReject) => {
+        const buildService = await __esbuild.startService();
+        buildService
+          .build(esbuildParams)
+          .then((resultObj) => {
+            buildResolve(resultObj);
+          })
+          .catch((e) => buildReject(e));
+      });
+
+      const resultObj: any = await buildPromise;
+
+      const resultJs = [
+        params.banner || '',
+        'let process = {};' + resultObj.outputFiles[0].text
+      ].join('\n');
+
+      // check if need to save
+      if (params.save) {
+        // build the save path
+        let savePath;
+        if (params.outputDir === undefined) {
+          savePath = this.path.replace(/\.js$/, '.builded.js');
+        } else {
+          savePath = __path.resolve(
+            params.outputDir,
+            this.path.replace(`${params.rootDir}/`, '')
+          );
+        }
+        emit('log', {
+          type: 'file',
+          file: this,
+          to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+          action: 'save'
+        });
+        this.writeSync(resultJs, {
+          path: savePath
+        });
+        if (params.map) {
+          // this.writeSync(result.js.map.toString(), {
+          //   path: savePath.replace(/\.js$/, '.js.map')
+          // });
+          // emit('log', {
+          //   type: 'file',
+          //   action: 'saved',
+          //   to: savePath
+          //     .replace(/\.js$/, '.js.map')
+          //     .replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+          //   file: this
+          // });
+        }
+
+        emit('log', {
+          type: 'file',
+          action: 'saved',
+          to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+          file: this
+        });
+      }
+
+      emit('log', {
+        type: 'separator'
+      });
+
+      if (params.watch) {
+        emit('log', {
+          value: `<blue>[watch] </blue>Watching for changes...`
+        });
+      }
+
+      return resolve({
+        js: resultJs,
+        map: undefined, // @todo      handle map
+        esbuild: resultObj,
+        ...duration.end()
+      });
     });
   }
 }

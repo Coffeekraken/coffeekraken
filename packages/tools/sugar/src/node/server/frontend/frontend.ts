@@ -123,6 +123,7 @@ const fn = function (args = {}) {
               type: 'heading',
               mb: 1,
               value: __trimLines(`Your <yellow>Frontend Express</yellow> server is <green>up and running</green>:
+              
                 - Hostname        : <yellow>${settings.hostname}</yellow>
                 - Port            : <yellow>${settings.port}</yellow>
                 - URL             : <cyan>http://${settings.hostname}:${settings.port}</cyan>`)

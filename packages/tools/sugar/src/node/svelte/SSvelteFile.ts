@@ -55,8 +55,12 @@ export class SSvelteFileCtorSettingsInterface extends __SInterface {
   };
 }
 
-interface ISSvelteFileCompileOptionalSettings {}
-interface ISSvelteFileCompileSettings {}
+interface ISSvelteFileCompileOptionalSettings {
+  _updatedFile?: any;
+}
+interface ISSvelteFileCompileSettings {
+  _updatedFile: any;
+}
 
 interface ISSvelteFileOptionalSettings {
   compile?: ISSvelteFileCompileOptionalSettings;
@@ -71,7 +75,7 @@ interface ISSvelteFileCtorSettings {
 interface ISSvelteFile {
   compile(
     params: ISSvelteCompilerParams,
-    settings?: ISSvelteFileOptionalSettings
+    settings: ISSvelteFileCompileOptionalSettings
   );
 }
 
@@ -158,17 +162,14 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
    */
   private _startWatch() {
     // listen for change event
-    this.on('update', (file, metas) => {
+    this.on('update', async (file, metas) => {
       if (this._currentCompilationParams.watch) {
         const promise = this.compile(
-          <ISSvelteCompilerParams>this._currentCompilationParams
+          <ISSvelteCompilerParams>this._currentCompilationParams,
+          {
+            _updatedFile: file
+          }
         );
-        this.emit('log', {
-          clear: true,
-          type: 'file',
-          action: 'update',
-          file
-        });
       }
     });
   }
@@ -192,15 +193,13 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _isCompiling = false;
-  _currentCompilationSettings: ISSvelteFileOptionalSettings = {};
   _currentCompilationParams: ISSvelteCompilerOptionalParams = {};
   compile(
     params: ISSvelteCompilerParams,
-    settings?: ISSvelteFileOptionalSettings
+    settings: ISSvelteFileCompileOptionalSettings = {}
   ) {
-    settings = __deepMerge(this.svelteFileSettings, settings);
+    settings = __deepMerge(this.svelteFileSettings.compile, settings);
     this._currentCompilationParams = Object.assign({}, params);
-    this._currentCompilationSettings = Object.assign({}, settings);
 
     params = this.applyInterface('compilerParams', params);
 
@@ -230,6 +229,15 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
         type: 'time'
       });
 
+      if (settings._updatedFile) {
+        emit('log', {
+          clear: true,
+          type: 'file',
+          action: 'update',
+          file: this
+        });
+      }
+
       // notify start
       emit('log', {
         value: `<yellow>[start]</yellow> Starting "<cyan>${this.relPath}</cyan>" compilation`
@@ -243,7 +251,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
 
       try {
         emit('log', {
-          value: `<yellow>[compiling]</yellow> file "<cyan>${this.relPath}</cyan>"`
+          value: `<yellow>[compiling]</yellow> File "<cyan>${this.relPath}</cyan>"`
         });
 
         // RENDERING HERE

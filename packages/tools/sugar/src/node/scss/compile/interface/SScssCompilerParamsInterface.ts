@@ -92,6 +92,18 @@ class SScssCompilerParamsInterface extends __SInterface {
         'Specify a banner (usually a comment) that you want to put on top of your generated code',
       default: __sugarConfig('scss.compile.banner')
     },
+    serve: {
+      type: 'Boolean',
+      default: __sugarConfig('scss.compile.serve')
+    },
+    host: {
+      type: 'String',
+      default: __sugarConfig('scss.compile.host')
+    },
+    port: {
+      type: 'Integer',
+      default: __sugarConfig('scss.compile.port')
+    },
     sass: {
       type: 'Object',
       description: 'Object passed to the sass compiler',

@@ -27,6 +27,20 @@ module.exports = {
       //   }
       // }
     },
+    js: {
+      id: 'js',
+      name: 'Javascript Compiler',
+      description: 'Watch and build the javascript files',
+      autoRun: true,
+      processPath: `${__packageRoot(
+        __dirname
+      )}/src/node/js/compile/SJsCompilerProcess`,
+      stdio: ['blessed'],
+      params: {
+        ...__sugarConfig('js.compile'),
+        serve: true
+      }
+    },
     scss: {
       id: 'scss',
       name: 'SCSS Compiler',
@@ -37,7 +51,11 @@ module.exports = {
         __dirname
       )}/src/node/scss/compile/SScssCompilerProcess`,
       stdio: ['blessed'],
-      params: '[config.scss.compile]'
+      params: {
+        ...__sugarConfig('scss.compile'),
+        watch: true,
+        serve: true
+      }
     },
     svelte: {
       id: 'svelte',
@@ -53,8 +71,8 @@ module.exports = {
         watch: true
       }
     },
-    typescript: {
-      id: 'typescript',
+    ts: {
+      id: 'ts',
       name: 'Typescript Compiler',
       description: 'Watch and build the typescript files',
       autoRun: true,

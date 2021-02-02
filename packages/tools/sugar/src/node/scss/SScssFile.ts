@@ -444,10 +444,12 @@ class SScssFile extends __SFile implements ISScssFile {
         ...(params.sass || {})
       };
 
-      emit('log', {
-        clear: true,
-        type: 'time'
-      });
+      if (!params.serve) {
+        emit('log', {
+          clear: true,
+          type: 'time'
+        });
+      }
 
       // @ts-ignore
       if (settings._updatedFile) {
@@ -580,6 +582,7 @@ class SScssFile extends __SFile implements ISScssFile {
 
         return resolve({
           css: resultCss,
+          map: undefined, // @todo       handle map
           ...duration.end()
         });
       }
@@ -684,6 +687,7 @@ class SScssFile extends __SFile implements ISScssFile {
           SScssFile.COMPILED_CSS[this.path] = renderObj.css;
           return resolve({
             css: this._processResultCss(renderObj.css.toString(), params),
+            map: undefined, // @todo       handle map
             ...duration.end()
           });
         }

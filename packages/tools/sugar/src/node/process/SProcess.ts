@@ -267,7 +267,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
           process: {
             asyncStart: false,
             stdio: 'inherit',
-            decorators: true,
+            decorators: false,
             throw: true,
             exitAtEnd: false,
             runAsChild: false,

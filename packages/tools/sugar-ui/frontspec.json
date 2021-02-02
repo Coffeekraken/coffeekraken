@@ -2,7 +2,12 @@
   "assets": {
     "css": {
       "main": {
-        "path": "src/css/index.scss"
+        "path": "http://localhost:3333/index.css"
+      }
+    },
+    "js": {
+      "main": {
+        "path": "http://localhost:8888/index.js"
       }
     }
   }

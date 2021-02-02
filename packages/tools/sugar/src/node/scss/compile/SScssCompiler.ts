@@ -23,6 +23,7 @@ import __SCompiler from '../../compiler/SCompiler';
 import __absolute from '../../path/absolute';
 import __ensureDirSync from '../../fs/ensureDirSync';
 import __SScssFile from '../SScssFile';
+import __express from 'express';
 
 import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';
 import { ISCompiler } from '../../compiler/SCompiler';
@@ -41,6 +42,9 @@ export interface ISScssCompilerParams {
   prod: boolean;
   sharedResources: string;
   banner: string;
+  serve: boolean;
+  host: string;
+  port: number;
   sass: any;
   watch: boolean;
 }
@@ -58,6 +62,9 @@ export interface ISScssCompilerOptionalParams {
   prod?: boolean;
   sharedResources?: string;
   banner?: string;
+  serve?: boolean;
+  host?: string;
+  port?: number;
   sass?: any;
   watch?: boolean;
 }
@@ -113,6 +120,8 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
       class: __SScssCompilerParamsInterface
     }
   };
+
+  static _serveServer: any;
 
   /**
    * @name          scssCompilerSettings
@@ -200,6 +209,75 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
           filesPaths.push(inputStr);
         }
       });
+
+      const serverPromise = new Promise((serverResolve, serverReject) => {
+        if (params.serve && !SScssCompiler._serveServer) {
+          const server = __express();
+
+          filesPaths.forEach((path) => {
+            const filename = __getFilename(path).replace(/\.s[ac]ss$/, '.css');
+
+            const relPath = __path
+              .relative(params.rootDir, path)
+              .replace(/\.s[ac]ss$/, '.css');
+            const destPath = __path.resolve(params.outputDir, relPath);
+
+            server.get(`/${filename}`, (req, res) => {
+              const content = __fs.readFileSync(destPath, 'utf8');
+              res.type('text/css');
+              res.status(200);
+              res.send(content);
+            });
+          });
+
+          const serverLogStrArray: string[] = [
+            `Your <yellow>Scss</yellow> server is <green>up and running</green>:`,
+            '',
+            `- Hostname        : <yellow>${params.host}</yellow>`,
+            `- Port            : <yellow>${params.port}</yellow>`,
+            `- URL's           : <cyan>http://${params.host}:${params.port}</cyan>`
+          ];
+
+          filesPaths.forEach((path) => {
+            serverLogStrArray.push(
+              `                  : <cyan>${`http://${params.host}:${
+                params.port
+              }/${__getFilename(path).replace(
+                /\.s[ac]ss$/,
+                '.css'
+              )}`.trim()} </cyan>`
+            );
+          });
+
+          server
+            .listen(params.port, () => {
+              emit('log', {
+                type: 'time'
+              });
+              emit('log', {
+                clear: true,
+                mb: 1,
+                type: 'heading',
+                value: serverLogStrArray.join('\n')
+              });
+
+              setTimeout(() => {
+                serverResolve(true);
+              }, 500);
+            })
+            .on('error', (e) => {
+              SScssCompiler._serveServer = undefined;
+              const string = e.toString();
+              reject(string);
+            });
+
+          SScssCompiler._serveServer = server;
+        } else {
+          serverResolve(true);
+        }
+      });
+
+      await serverPromise;
 
       const startTime = Date.now();
 

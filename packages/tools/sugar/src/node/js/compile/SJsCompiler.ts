@@ -1,5 +1,7 @@
 // @ts-nocheck
 
+import __getFilename from '../../fs/filename';
+import __onProcessExit from '../../process/onProcessExit';
 import __deepMerge from '../../object/deepMerge';
 import __SInterface from '../../interface/SInterface';
 import __sugarConfig from '../../config/sugar';
@@ -9,6 +11,13 @@ import __SPromise from '../../promise/SPromise';
 import __absolute from '../../path/absolute';
 import __isGlob from '../../is/glob';
 import __glob from 'glob';
+import __path from 'path';
+import __SDuration from '../../time/SDuration';
+import __filter from '../../object/filter';
+import __resolve from 'resolve';
+import __packageRoot from '../../path/packageRoot';
+import __builtInNodeModules from '../../module/buildInNodeModules';
+import * as __esbuild from 'esbuild';
 
 import __SJsCompilerParamsInterface from './interface/SJsCompilerParamsInterface';
 
@@ -22,6 +31,7 @@ export interface ISJsCompilerParams {
   input: string | string[];
   outputDir: string;
   rootDir: string;
+  bundle: boolean;
   map: boolean;
   prod: boolean;
   stripComments: boolean;
@@ -29,12 +39,16 @@ export interface ISJsCompilerParams {
   banner: string;
   save: boolean;
   watch: boolean;
+  serve: boolean;
+  port: number;
+  host: string;
   esbuild: any;
 }
 export interface ISJsCompilerOptionalParams {
   input?: string | string[];
   outputDir?: string;
   rootDir?: string;
+  bundle?: boolean;
   map?: boolean;
   prod?: boolean;
   stripComments?: boolean;
@@ -42,6 +56,9 @@ export interface ISJsCompilerOptionalParams {
   banner?: string;
   save?: boolean;
   watch?: boolean;
+  serve?: boolean;
+  port?: number;
+  host?: string;
   esbuild?: any;
 }
 
@@ -83,6 +100,98 @@ class SJsCompiler extends __SCompiler {
   };
 
   /**
+   * @name            _resolverPlugin
+   * @type            Object
+   * @static
+   *
+   * ESBuild resolver plugin
+   *
+   * @since       2.0.0
+   */
+  static _resolverPlugin = {
+    name: 'SJsFileEsBuildResolvePlugin',
+    setup(build) {
+      Object.keys(__builtInNodeModules).forEach((path) => {
+        const builtInObj = __builtInNodeModules[path];
+        if (builtInObj.polyfill && builtInObj.polyfill.browser) {
+          build.onResolve({ filter: new RegExp(`^${path}$`) }, (args) => {
+            let resolvedPath = __resolve.sync(builtInObj.polyfill.browser, {
+              basedir: _rootDir,
+              moduleDirectory: [
+                'node_modules',
+                __path.resolve(__packageRoot(__dirname), 'node_modules')
+              ],
+              // @ts-ignore
+              includeCoreModules: false,
+              preserveSymlinks: true,
+              packageFilter: (pkg, dir) => {
+                if (pkg.browser) {
+                  if (typeof pkg.browser === 'string') {
+                    pkg.main = pkg.browser;
+                  } else if (typeof pkg.browser === 'object') {
+                    pkg.main = pkg.browser[Object.keys(pkg.browser)[0]];
+                  }
+                }
+                return pkg;
+              }
+            });
+            return { path: resolvedPath };
+          });
+        }
+      });
+    }
+  };
+
+  /**
+   * @name            _esbuildAcceptedSettings
+   * @type            Array
+   * @static
+   *
+   * This static property store all the accepted esbuild options keys
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _esbuildAcceptedSettings = [
+    'bundle',
+    'define',
+    'external',
+    'format',
+    'globalName',
+    'inject',
+    'jsxFactory',
+    'jsxFragment',
+    'platform',
+    'loader',
+    'minify',
+    'outdir',
+    'outfile',
+    'sourcemap',
+    'target',
+    'write',
+    'avoidTDZ',
+    // 'banner',
+    'charset',
+    'color',
+    'errorLimit',
+    'footer',
+    'keepNames',
+    'logLevel',
+    'mainFields',
+    'metafile',
+    'outExtension',
+    'plugins',
+    'outbase',
+    'publicPath',
+    'pure',
+    'resolveExtensions',
+    'sourcefile',
+    'stdin',
+    'tsconfig',
+    'tsconfigRaw'
+  ];
+
+  /**
    * @name      jsCompilerSettings
    * @type      ISJsCompilerSettings
    * @get
@@ -119,12 +228,6 @@ class SJsCompiler extends __SCompiler {
         settings || {}
       )
     );
-
-    // prod
-    if (this.jsCompilerSettings.prod) {
-      this.jsCompilerSettings.minify = true;
-      this.jsCompilerSettings.stripComments = true;
-    }
   }
 
   /**
@@ -151,10 +254,30 @@ class SJsCompiler extends __SCompiler {
 
       let input = Array.isArray(params.input) ? params.input : [params.input];
 
-      const resultsObj = {};
+      // prod
+      if (params.prod || params.bundle) {
+        params.minify = true;
+        params.stripComments = true;
+        params.map = false;
+      }
+
+      let esbuildParams: any = {
+        charset: 'utf8',
+        logLevel: 'silent',
+        ...__filter(params, (key, value) => {
+          if (Array.isArray(value) && !value.length) return false;
+          return (
+            (<any>this.constructor)._esbuildAcceptedSettings.indexOf(key) !== -1
+          );
+        }),
+        bundle: params.bundle,
+        write: false,
+        minify: params.minify,
+        sourcemap: params.map,
+        ...params.esbuild
+      };
 
       let filesPaths: string[] = [];
-
       // make input absolute
       input = __absolute(input);
       // process inputs
@@ -166,7 +289,58 @@ class SJsCompiler extends __SCompiler {
         }
       });
 
-      const startTime = Date.now();
+      // set the entrypoints
+      esbuildParams.entryPoints = filesPaths;
+
+      if (params.serve) {
+        const serverLogStrArray: string[] = [
+          `Your <yellow>Esbuild Js</yellow> server is <green>up and running</green>:`,
+          '',
+          `- Hostname        : <yellow>${params.host}</yellow>`,
+          `- Port            : <yellow>${params.port}</yellow>`,
+          `- URL's           : <cyan>http://${params.host}:${params.port}</cyan>`
+        ];
+
+        filesPaths.forEach((path) => {
+          serverLogStrArray.push(
+            `                  : <cyan>${`http://${params.host}:${
+              params.port
+            }/${__getFilename(path)}`.trim()} </cyan>`
+          );
+        });
+
+        emit('log', {
+          type: 'time'
+        });
+        emit('log', {
+          clear: true,
+          type: 'heading',
+          value: serverLogStrArray.join('\n')
+        });
+
+        __esbuild
+          .serve(
+            {
+              host: params.host,
+              port: params.port
+            },
+            {
+              ...esbuildParams
+            }
+          )
+          .then((server) => {
+            __onProcessExit(() => {
+              server.stop();
+            });
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+        return;
+      }
+
+      const resultsObj = {};
+      const duration = new __SDuration();
 
       for (let i = 0; i < filesPaths.length; i++) {
         let filePath = filesPaths[i];
@@ -188,16 +362,12 @@ class SJsCompiler extends __SCompiler {
       if (!params.watch) {
         resolve({
           files: resultsObj,
-          startTime: startTime,
-          endTime: Date.now(),
-          duration: Date.now() - startTime
+          ...duration.end()
         });
       } else {
         emit('files', {
           files: resultsObj,
-          startTime: startTime,
-          endTime: Date.now(),
-          duration: Date.now() - startTime
+          ...duration.end()
         });
       }
     });

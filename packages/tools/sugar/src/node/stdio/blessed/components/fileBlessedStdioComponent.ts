@@ -48,11 +48,13 @@ export default {
     switch (action) {
       case 'save':
         color = 'yellow';
-        logStrArray.push(`Saving the file "<cyan>${file.relPath}</cyan>"`);
+        logStrArray.push(
+          `<yellow>[save]</yellow> File "<cyan>${file.relPath}</cyan>"`
+        );
         break;
       case 'saved':
         color = 'green';
-        let str = `The file "<cyan>${file.relPath}</cyan>" has been <green>saved successfully</green>`;
+        let str = `<green>[save]</green> File "<cyan>${file.relPath}</cyan>" <green>saved successfully</green>`;
         if (logObj.to) {
           str += ` to "<magenta>${logObj.to}</magenta>"`;
         }
@@ -61,20 +63,20 @@ export default {
       case 'delete':
         color = 'yellow';
         logStrArray.push(
-          `<red>Deleting</red> the file "<cyan>${file.relPath}</cyan>"`
+          `<yellow>[delete]</yellow> File "<cyan>${file.relPath}</cyan>"`
         );
         break;
       case 'deleted':
         color = 'red';
         logStrArray.push(
-          `The file "<cyan>${file.relPath}</cyan>" has been <red>deleted successfully</red>`
+          `<green>[delete]</green> File "<cyan>${file.relPath}</cyan>" <red>deleted successfully</red>`
         );
         break;
       case 'update':
       case 'updated':
         color = 'yellow';
         logStrArray.push(
-          `The file "<cyan>${file.relPath}</cyan>" has been <yellow>updated</yellow>`
+          `<yellow>[update]</yellow> File "<cyan>${file.relPath}</cyan>"`
         );
         break;
     }

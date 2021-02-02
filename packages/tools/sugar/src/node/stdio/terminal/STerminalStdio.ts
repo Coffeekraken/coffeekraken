@@ -79,7 +79,7 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
   }
 
   clear() {
-    console.log('clearing to be implemented');
+    // console.log('clearing to be implemented');
   }
 
   /**
@@ -106,6 +106,7 @@ import __separatorTerminalStdioComponent from './components/separatorTerminalStd
 import __errorTerminalStdioComponent from './components/errorTerminalStdioComponent';
 import __fileTerminalStdioComponent from './components/fileTerminalStdioComponent';
 import __warningTerminalStdioComponent from './components/warningTerminalStdioComponent';
+import __timeTerminalStdioComponent from './components/timeTerminalStdioComponent';
 
 STerminalStdio.registerComponent(__defaultTerminalStdioComponent);
 STerminalStdio.registerComponent(__separatorTerminalStdioComponent);
@@ -113,5 +114,6 @@ STerminalStdio.registerComponent(__headingTerminalStdioComponent);
 STerminalStdio.registerComponent(__errorTerminalStdioComponent);
 STerminalStdio.registerComponent(__fileTerminalStdioComponent);
 STerminalStdio.registerComponent(__warningTerminalStdioComponent);
+STerminalStdio.registerComponent(__timeTerminalStdioComponent);
 
 export default STerminalStdio;

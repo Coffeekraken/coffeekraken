@@ -27,6 +27,19 @@ module.exports = {
       //   }
       // }
     },
+    docMap: {
+      id: 'docMap',
+      name: 'docMap.json file builder',
+      description: 'Build docMap.json file',
+      autoRun: false,
+      processPath: `${__packageRoot(
+        __dirname
+      )}/src/node/docMap/SBuildDocMapProcess`,
+      stdio: ['blessed'],
+      params: {
+        ...__sugarConfig('docMap')
+      }
+    },
     js: {
       id: 'js',
       name: 'Javascript Compiler',

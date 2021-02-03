@@ -21,10 +21,11 @@ import __isDirectory from '../is/directory';
  * This function simply resolve the passed glob pattern(s) and resolve his promise
  * with an Array of SFile instances to work with
  *
- * @param       {String|Array<String>}          globs        The glob pattern(s) to search files for
+ * @param       {String|Array<String>}          globs        The glob pattern(s) to search files for when using some "**" pattern
  * @param       {Object}            [settings={}]           An object of settings to configure your glob process
  * @return      {SPromise}                                  An SPromise instance that will be resolved once the search process has been fully finished
  *
+ * @setting     {Number}        [maxDepth=-1]               Specify the maximum depth to use when
  * @setting     {String}        rootDir                     The root directory where to start the glob search process
  * @setting     {Object}        ...glob                     All the glob (https://www.npmjs.com/package/glob) options are supported
  * @setting     {RegExp}        [contentRegex=null]         Specify a regex that will be used to filter the results by searching in the content
@@ -92,9 +93,58 @@ function resolveGlob(globs, settings = {}) {
 
         globPattern = `+(${directoryName})/${globPattern}`;
 
-        let pathes = __glob.sync(globPattern, {
-          cwd: finalRootDir,
-          ...settings
+        let finalPatterns = [];
+
+        // handle "maxDepth"
+        const maxDepthMatch = globPattern.match(
+          /\/?\*\*\{(([0-9]+,[0-9]+|[0-9]+))\}\/?/gm
+        );
+        if (maxDepthMatch) {
+          const minMaxStr = maxDepthMatch[0]
+            .replace('**{', '')
+            .replace('}', '')
+            .replace(/[\{\}\/]/g, '');
+
+          let toReplace = maxDepthMatch[0].replace(/\//g, '');
+
+          const spl = minMaxStr.split(',');
+          let min = 0;
+          let max = parseInt(spl[0]);
+          if (spl.length === 2) {
+            min = parseInt(spl[0]);
+            max = parseInt(spl[1]);
+          }
+          let foldersArray = [
+            ...'* '
+              .repeat(min)
+              .split(' ')
+              .filter((l) => l !== '')
+          ];
+          for (let i = min; i < max; i++) {
+            finalPatterns.push(
+              globPattern
+                .replace(toReplace, foldersArray.join('/'))
+                .replace(/\/\//g, '/')
+            );
+            foldersArray.push('*');
+          }
+          finalPatterns.push(
+            globPattern
+              .replace(toReplace, foldersArray.join('/'))
+              .replace(/\/\//g, '/')
+          );
+        } else {
+          finalPatterns.push(globPattern);
+        }
+
+        let pathes = [];
+        finalPatterns.forEach((pattern) => {
+          pathes = pathes.concat(
+            __glob.sync(pattern, {
+              cwd: finalRootDir,
+              ...settings
+            })
+          );
         });
 
         // check if need to search for inline content

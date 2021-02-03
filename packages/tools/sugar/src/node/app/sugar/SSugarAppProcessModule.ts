@@ -71,6 +71,8 @@ class SSugarAppProcessModule extends __SSugarAppModule {
   }
 
   handleShortcuts(shortcutObj, params, settings) {
+    console.log(shortcutObj);
+
     switch (shortcutObj.id) {
       case 'exit':
         if (!this.process.isRunning()) return;

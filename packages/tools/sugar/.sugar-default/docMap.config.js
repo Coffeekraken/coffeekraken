@@ -1,10 +1,10 @@
 const __packageRoot = require('../src/node/path/packageRoot');
 
 module.exports = {
-  generate: {
+  build: {
     /**
      * @name            globs
-     * @namespace       config.docMap.generate
+     * @namespace       config.docMap.build
      * @type                Array<String>
      *
      * Specify the input globs to use in order to find files that will
@@ -15,11 +15,11 @@ module.exports = {
      * @since           2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    globs: [`src/*/*/*/*:/.*@namespace.*/gm`],
+    globs: [`src/**{5}/*:/.*@namespace.*/gm`],
 
     /**
      * @name        output
-     * @namespace   config.docMap.generate
+     * @namespace   config.docMap.build
      * @type         String
      * @default       [config.storage.rootDir]/docMap.json
      *
@@ -32,11 +32,11 @@ module.exports = {
 
     /**
      * @name        exclude
-     * @namespace   config.docMap.generate
+     * @namespace   config.docMap.build
      * @type        Object<String>
      *
      * Specify some regex to apply on different docblock and path properties
-     * to exclude some files from the generated docMap json
+     * to exclude some files from the buildd docMap json
      *
      * @example     js
      * {
@@ -75,7 +75,7 @@ module.exports = {
      * @type        Object<String>
      *
      * Specify some regex to apply path properties
-     * to exclude some files from the generated docMap json
+     * to exclude some files from the buildd docMap json
      *
      * @example     js
      * {

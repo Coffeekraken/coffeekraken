@@ -9,6 +9,7 @@ import __stdio from '../stdio/stdio';
 import __toString from '../string/toString';
 import __parseHtml from '../console/parseHtml';
 import __isChildProcess from '../is/childProcess';
+import __wait from '../time/wait';
 
 import {
   ISProcess,
@@ -160,86 +161,72 @@ class SProcessPipe extends __SEventEmitter implements ISProcessPipe {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   run(params = {}, settings: ISProcessPipeOptionalSettings = {}) {
-    const promise = new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-      // extends settings
-      const processPipeSettings = <ISProcessPipeSettings>(
-        __deepMerge(this.processPipeSettings, settings)
-      );
+    // extends settings
+    const processPipeSettings = <ISProcessPipeSettings>(
+      __deepMerge(this.processPipeSettings, settings)
+    );
 
-      if (!Array.isArray(this._processes)) {
-        throw `Sorry but you've passed an "<yellow>${__typeof(
-          this._processes
-        )}</yellow>" as "<cyan>SProcessManager.pipe</cyan>" argument but it needs to be an <green>Array</green>`;
-      }
+    const promise = new __SPromise(
+      async ({ resolve, reject, emit, pipe, pipeTo }) => {
+        if (!Array.isArray(this._processes)) {
+          throw `Sorry but you've passed an "<yellow>${__typeof(
+            this._processes
+          )}</yellow>" as "<cyan>SProcessManager.pipe</cyan>" argument but it needs to be an <green>Array</green>`;
+        }
 
-      // @ts-ignore
-      if (!__isChildProcess() && processPipeSettings.stdio && !this.stdio) {
-        this.stdio = __stdio(this, {
-          stdio: processPipeSettings.stdio
-        });
-      }
+        // loop on each processes passed
+        for (let i = 0; i < this._processes.length; i++) {
+          const pro: any = this._processes[i];
 
-      // loop on each processes passed
-      for (let i = 0; i < this._processes.length; i++) {
-        const pro: any = this._processes[i];
+          let processInstance: ISProcess,
+            processParams: any = {},
+            processSettings: ISProcessSettings =
+              processPipeSettings.processesSettings;
 
-        let processInstance: ISProcess,
-          processParams: any = {},
-          processSettings: ISProcessSettings =
-            processPipeSettings.processesSettings;
-
-        // check the type of the process
-        if (__isClass(pro)) {
-          processInstance = new pro({
-            ...(processPipeSettings.processesSettings || {}),
-            stdio: false
-          });
-        } else if (typeof pro === 'function') {
-          // emit('log', {
-          //   type: 'separator',
-          //   separator: '#',
-          //   value: 'Processing params'
-          // });
-          params = pro(params);
-          // emit('log', {
-          //   type: 'separator',
-          //   value: ''
-          // });
-        } else if (typeof pro === 'object') {
-          processSettings = pro.settings || {};
-          processParams = pro.params || {};
-          if (!pro.process) {
-            emit('warn', {
-              value: `You have passed an "<yellow>Object</yellow>" as process parameter in the "<cyan>SProcessManager.pipe</cyan>" static method but you don't have specified the "<magenta>process</magenta>" property with either an SProcess instance, or directly the SProcess class you want`
-            });
-            continue;
-          }
-          if (__isClass(pro.process)) {
-            processInstance = new pro.process({
-              ...processSettings,
+          // check the type of the process
+          if (__isClass(pro)) {
+            processInstance = new pro({
+              ...(processPipeSettings.processesSettings || {}),
               stdio: false
             });
+          } else if (typeof pro === 'function') {
+            params = pro(params);
+          } else if (typeof pro === 'object') {
+            processSettings = pro.settings || {};
+            processParams = pro.params || {};
+            if (!pro.process) {
+              emit('warn', {
+                value: `You have passed an "<yellow>Object</yellow>" as process parameter in the "<cyan>SProcessManager.pipe</cyan>" static method but you don't have specified the "<magenta>process</magenta>" property with either an SProcess instance, or directly the SProcess class you want`
+              });
+              continue;
+            }
+            if (__isClass(pro.process)) {
+              processInstance = new pro.process({
+                ...processSettings,
+                stdio: false
+              });
+            }
+          }
+
+          // execute the process
+          // @ts-ignore
+          if (processInstance) {
+            emit('log', {
+              type: 'heading',
+              value: processInstance.formattedName
+            });
+            const resPromise = processInstance.run(params, processSettings);
+            pipe(resPromise);
+            const res = await resPromise;
           }
         }
-
-        // execute the process
-        // @ts-ignore
-        if (processInstance) {
-          emit('log', {
-            type: 'separator',
-            value: processInstance.formattedName
-          });
-          pipe(processInstance);
-          const res = await processInstance.run(params, processSettings);
-          emit('log', {
-            type: 'separator',
-            value: ''
-          });
-        }
       }
-    });
+    );
 
-    this.pipe(<ISEventEmitter>(<unknown>promise));
+    // @ts-ignore
+    // if (!__isChildProcess() && processPipeSettings.stdio && !this.stdio) {
+    //   this.stdio = __stdio(promise, processPipeSettings.stdio, {});
+    // }
 
     return promise;
   }

@@ -523,9 +523,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {
       filter: (value, metas) => {
-        if (metas.event.match(/error$/)) {
-          return false;
-        }
+        // if (metas.event.match(/error$/)) {
+        //   return false;
+        // }
         return true;
       }
     });

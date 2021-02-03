@@ -5,17 +5,19 @@ BladeOne is a standalone version of Blade Template Engine that uses a single PHP
 
 Бладеоне-это отдельная версия ядра Blade-шаблонов, которая использует один PHP-файл и может быть портирована и использована в различных проектах. Он позволяет использовать шаблон Blade за пределами laravel.    
 
-[![Build Status](https://travis-ci.org/EFTEC/BladeOne.svg?branch=master)](https://travis-ci.org/EFTEC/BladeOne)
+
 [![Packagist](https://img.shields.io/packagist/v/eftec/bladeone.svg)](https://packagist.org/packages/eftec/bladeone)
 [![Total Downloads](https://poser.pugx.org/eftec/bladeone/downloads)](https://packagist.org/packages/eftec/bladeone)
-[![Maintenance](https://img.shields.io/maintenance/yes/2020.svg)]()
+[![Maintenance](https://img.shields.io/maintenance/yes/2021.svg)]()
 [![composer](https://img.shields.io/badge/composer-%3E1.6-blue.svg)]()
 [![php](https://img.shields.io/badge/php->5.6-green.svg)]()
 [![php](https://img.shields.io/badge/php-7.x-green.svg)]()
+[![php](https://img.shields.io/badge/php-8.x-green.svg)]()
 [![CocoaPods](https://img.shields.io/badge/docs-70%25-yellow.svg)]()
 
 
 NOTE: So far it's apparently the only one project that it's updated with the latest version of **Blade 7 (March 2020)**. It misses some commands [missing](#missing) but nothing more.
+
 
 Примечание: до сих пор это, видимо, только один проект, который обновляется с последней версией ** Blade 7 (2020 Марта) **. Он пропускает некоторые команды [отсутствует](#missing), но ничего больше.
 
@@ -47,6 +49,7 @@ I will try to answer all and every one of the question (in my limited time).
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | <img src="https://camo.githubusercontent.com/3c938f71f46a90eb85bb104f0f396fcba62b8f4a/68747470733a2f2f74686570726163746963616c6465762e73332e616d617a6f6e6177732e636f6d2f692f3436696b7061376661717677726533797537706a2e6a7067" alt="example php bladeone" width="200"/> | <img src="https://github.com/EFTEC/example.cupcakes/raw/master/docs/result.jpg" alt="example php bladeone cupcakes" width="200"/> | <img src="https://github.com/EFTEC/example-search/raw/master/img/search_bootstrap.jpg" alt="example php bladeone search" width="200"/> | <img src="https://github.com/EFTEC/example-php-editablegrid/raw/master/docs/final.jpg" alt="example php bladeone search" width="200"/> |
 
+[https://www.southprojects.com](https://www.southprojects.com)
 
 
 ## Manual
@@ -54,9 +57,10 @@ I will try to answer all and every one of the question (in my limited time).
 * [BladeOne Manual](https://github.com/EFTEC/BladeOne/wiki/BladeOne-Manual)    
 * [Template tags (views)](https://github.com/EFTEC/BladeOne/wiki/Template-tags)    
     * [Template variables](https://github.com/EFTEC/BladeOne/wiki/Template-variables)     
-    * [Template inheritance](https://github.com/EFTEC/BladeOne/wiki/Template-inheritance)      
+    * [Template inheritance](https://github.com/EFTEC/BladeOne/wiki/Template-inheritance)  
+    * [Template component](https://github.com/EFTEC/BladeOne/wiki/Template-Component)            
     * [Template stack](https://github.com/EFTEC/BladeOne/wiki/Template-stack)
-    * [Template asset links](https://github.com/EFTEC/BladeOne/wiki/Template-Asset-Links)
+    * [Template asset, relative, base, current and canonical links](https://github.com/EFTEC/BladeOne/wiki/Template-Asset,-Relative,-Base-and-Canonical-Links)
     * [Template calling methods](https://github.com/EFTEC/BladeOne/wiki/Template-calling-methods) 
     * [Template logic](https://github.com/EFTEC/BladeOne/wiki/Template-logic)    
     * [Template loop](https://github.com/EFTEC/BladeOne/wiki/Template-loop)    
@@ -71,7 +75,19 @@ I will try to answer all and every one of the question (in my limited time).
 * [Changes between 2.x and 3.0 and TODO](https://github.com/EFTEC/BladeOne/wiki/Changes-between-2.x-and-3.0-and-TODO)   
 * [Code Protection (Sourceguardian and similars)](https://github.com/EFTEC/BladeOne/wiki/Code-Protection-(Sourceguardian-and-similars))   
 
+## Why does it support PHP 5.x?
 
+As for today (January 2021), PHP 5.x is still strong even when it is discontinued, but my main problem is the performance.
+
+* PHP 7.x 60.2%
+* PHP 5.x 39.5%
+* PHP 8.x 00.1%
+
+* PHP 7.0 brings some new features and definitions. One is the use of type-hinting. While it could be useful, but it affects the performance
+so there is not reason to use it for this library (we use PHPDOC and it doesn't affect the performance).   
+* PHP 7.0 adds some new features such as is_countable(). However, it is slower than the method used here. 
+* We could also use Null Coalescing Operator, but it is not slower or faster than a ternary operator. 
+* PHP 8.0 also adds str_contains(), but it doesn't bring a sustancial performance but syntax sugar. 
 
 
 ## Laravel blade tutorial
@@ -464,6 +480,6 @@ You are welcome to use it, share it, ask for changes and whatever you want to. J
 
 ## License
 MIT License.
-BladeOne (c) 2016-2020 Jorge Patricio Castro Castillo
+BladeOne (c) 2016-2021 Jorge Patricio Castro Castillo
 Blade (c) 2012 Laravel Team (This code is based and inspired in the work of the team of Laravel, however BladeOne is mostly a original work)
 

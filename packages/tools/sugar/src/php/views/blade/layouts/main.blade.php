@@ -5,6 +5,7 @@
 *
 * Main layout that handle things like scripts import, stylesheets import, etc...
 *
+* @since            2.0.0
 * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
 -->
 <?php
@@ -23,7 +24,7 @@ $package = $package ? json_decode($package) : null;
   @if ($frontspec->assets && $frontspec->assets->css)
     @foreach ($frontspec->assets->css as $name=>$css)
       @if (!$css->body)
-        @if (Sugar\path\is_absolute($css->path) || Sugar\url\is_urlsss($css->path))
+        @if (Sugar\path\is_absolute($css->path) || Sugar\url\is_url($css->path))
           <link rel="stylesheet" id="{{ $name }}" href="{{ $css->path }}" />
         @else
           <link rel="stylesheet" id="{{ $name }}" href="/{{ $css->path }}" />
@@ -35,7 +36,7 @@ $package = $package ? json_decode($package) : null;
   @if ($frontspec->assets && $frontspec->assets->js)
     @foreach ($frontspec->assets->js as $name=>$js)
       @if (!$js->body)
-        @if (Sugar\path\is_absolute($js->path) || Sugar\url\is_urlsss($js->path))
+        @if (Sugar\path\is_absolute($js->path) || Sugar\url\is_url($js->path))
           <script type="{{ $js->type or 'text/javascript' }}" id="{{ $name }}" src="{{ $js->path }}"></script>
         @else
           <script type="{{ $js->type or 'text/javascript' }}" id="{{ $name }}" src="/{{ $js->path }}"></script>
@@ -54,7 +55,7 @@ $package = $package ? json_decode($package) : null;
   @if ($frontspec->assets && $frontspec->assets->css)
     @foreach ($frontspec->assets->css as $name=>$css)
       @if ($css->body)
-        @if (Sugar\path\is_absolute($css->path) || Sugar\url\is_urlsss($css->path)) {
+        @if (Sugar\path\is_absolute($css->path) || Sugar\url\is_url($css->path)) {
           <link rel="stylesheet" id="{{ $name }}" href="{{ $css->path }}" />
         @else
           <link rel="stylesheet" id="{{ $name }}" href="/{{ $css->path }}" />
@@ -66,7 +67,7 @@ $package = $package ? json_decode($package) : null;
   @if ($frontspec->assets && $frontspec->assets->js)
     @foreach ($frontspec->assets->js as $name=>$js)
       @if ($js->body)
-        @if (Sugar\path\is_absolute($js->path) || Sugar\url\is_urlsss($js->path))
+        @if (Sugar\path\is_absolute($js->path) || Sugar\url\is_url($js->path))
           <script type="{{ $js->type or 'text/javascript' }}" id="{{ $name }}" src="{{ $js->path }}"></script>
         @else
           <script type="{{ $js->type or 'text/javascript' }}" id="{{ $name }}" src="/{{ $js->path }}"></script>

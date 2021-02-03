@@ -153,7 +153,7 @@ function hotkey(key, settings?: IHotkeyOptionalSettings) {
     hotkeyStack[uniqid] = {
       key,
       promise,
-      settings
+      settings: set
     };
   }
 

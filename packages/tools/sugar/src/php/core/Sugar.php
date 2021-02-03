@@ -1,4 +1,7 @@
 <?php
+
+require_once dirname(__FILE__).'/../array/merge_deep.php';
+
 /**
  * @class
  * @name 	Sugar
@@ -40,28 +43,36 @@ class Sugar {
 	 */
 	public static function requireFolder($folder, $settings = []) {
 		// generate settings
-		$settings = array_merge_recursive([
+		$settings = Sugar\ar\merge_deep([
 			'recursive' => false,
 			'exclude' => []
 		], $settings);
-	
+
+
 		// loop on each "folders" and "files"
-		foreach (scandir($folder) as $name) {
+		foreach (glob($folder."/*") as $path) {
 
+			
 			// do not process . and .. "folders"
-			if ($name == '.' or $name == '..') continue;
-
-			// create the path
-			$path = $folder . '/' . $name;
-
+			// if ($name == '.' or $name == '..') continue;
+			
 			// filter excludes files/directories
 			if (in_array($path, $settings['exclude'])) continue;
+			
+			// echo $settings['recursive'];
+			// if ($settings['recursive']) {
+			// 	echo 'PLLOP';
+			// }
+			// if (is_dir($path)) {
+			// 	echo '___PA';
+			// }
 
-			if (is_dir($path) && $settings['recursive'] == true) {
+			if (is_dir($path) && $settings['recursive']) {
 				Sugar::requireFolder($path);
 			} else if (is_file($path)) {
 				$info = pathinfo($path);
 				if ($info['extension'] != 'php') return;
+				echo $path."\n";
 				require_once $path;
 			}
 		}

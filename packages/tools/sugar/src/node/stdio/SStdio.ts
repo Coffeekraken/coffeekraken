@@ -195,11 +195,11 @@ class SStdio extends __SClass implements ISStdio {
               'warn',
               '*.warn',
               'error',
-              '*.error',
-              'reject',
-              '*.reject',
-              'resolve',
-              '*.resolve'
+              '*.error'
+              // 'reject',
+              // '*.reject',
+              // 'resolve',
+              // '*.resolve'
             ],
             mapTypesToEvents: {
               heading: [],

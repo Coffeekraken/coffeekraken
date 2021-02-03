@@ -13,7 +13,10 @@ import __removeSync from '../fs/removeSync';
 import __getFilename from '../fs/filename';
 import __unique from '../array/unique';
 import __SGlob from '../glob/SGlob';
+import __SClass from '../class/SClass';
 import __sugarConfig from '../config/sugar';
+import __SDocMapSettingsInterface from './interface/SDocMapSettingsInterface';
+import __wait from '../time/wait';
 
 /**
  * @name                SDocMap
@@ -22,7 +25,7 @@ import __sugarConfig from '../config/sugar';
  * @extends             SPromise
  * @wip
  *
- * This class represent the ```docMap.json``` file and allows you to generate it from some sources (glob pattern(s))
+ * This class represent the ```docMap.json``` file and allows you to build it from some sources (glob pattern(s))
  * and save it inside a directory you choose.
  *
  * @param           {Object}        [settings={}]           An object of settings to configure your docMap instance:
@@ -44,7 +47,14 @@ import __sugarConfig from '../config/sugar';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SDocMap extends __SPromise {
+export = class SDocMap extends __SClass {
+  static interfaces = {
+    settings: {
+      apply: true,
+      class: __SDocMapSettingsInterface
+    }
+  };
+
   /**
    * @name          _entries
    * @type           Array<Object>
@@ -71,17 +81,7 @@ export = class SDocMap extends __SPromise {
     super(
       __deepMerge(
         {
-          id: 'SDocMap',
-          generate: {
-            globs: __sugarConfig('docMap.generate.globs'),
-            output: __sugarConfig('docMap.generate.output'),
-            exclude: __sugarConfig('docMap.generate.exclude')
-          },
-          find: {
-            globs: __sugarConfig('docMap.find.globs'),
-            exclude: __sugarConfig('docMap.find.exclude')
-          },
-          cache: true
+          id: 'SDocMap'
         },
         settings
       )
@@ -107,7 +107,7 @@ export = class SDocMap extends __SPromise {
     settings = __deepMerge(this._settings, {}, settings);
     return new __SPromise(
       async ({ resolve, reject, emit }) => {
-        // generate the glob pattern to use
+        // build the glob pattern to use
         const patterns = settings.find.globs;
 
         let files = [];
@@ -193,11 +193,11 @@ export = class SDocMap extends __SPromise {
   }
 
   /**
-   * @name          generate
+   * @name          build
    * @type          Function
    *
    * This method allows you to specify one or more glob patterns to scan files for "@namespace" docblock tags
-   * and extract all the necessary informations to generate the docMap.json file
+   * and extract all the necessary informations to build the docMap.json file
    *
    * @param         {String|Array<String>}          sources         The glob pattern(s) you want to scan files in
    * @return        {SPromise}                                     A promise resolved once the scan process has been finished
@@ -205,11 +205,11 @@ export = class SDocMap extends __SPromise {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  generate(settings = {}) {
+  build(settings = {}) {
     settings = __deepMerge(this._settings, {}, settings);
     return new __SPromise(
       async ({ resolve, reject, emit }) => {
-        let globs = settings.generate.globs;
+        let globs = settings.build.globs;
         if (!Array.isArray(globs)) globs = [globs];
 
         emit('log', {
@@ -224,12 +224,9 @@ export = class SDocMap extends __SPromise {
           // scan for files
           let files = await __SGlob.resolve(glob, {});
           files = files.filter((file) => {
-            if (
-              !settings.generate.exclude ||
-              settings.generate.exclude === undefined
-            )
+            if (!settings.build.exclude || settings.build.exclude === undefined)
               return true;
-            return !file.path.match(settings.generate.exclude.path);
+            return !file.path.match(settings.build.exclude.path);
           });
 
           emit('log', {
@@ -250,18 +247,17 @@ export = class SDocMap extends __SPromise {
             docblocks.forEach((docblock) => {
               if (!docblock.namespace) return;
 
-              for (let i = 0; i < Object.keys(settings.generate.exclude); i++) {
+              for (let i = 0; i < Object.keys(settings.build.exclude); i++) {
                 const excludeReg =
-                  settings.generate.exclude[
-                    Object.keys(settings.generate.exclude)[i]
+                  settings.build.exclude[
+                    Object.keys(settings.build.exclude)[i]
                   ];
-                const value =
-                  docblock[Object.keys(settings.generate.exclude)[i]];
+                const value = docblock[Object.keys(settings.build.exclude)[i]];
                 if (value === undefined) continue;
                 if (value.match(excludeReg)) return;
               }
 
-              const outputDir = __folderPath(settings.generate.output);
+              const outputDir = __folderPath(settings.build.output);
               const path = __path.relative(outputDir, filepath);
               const filename = __getFilename(filepath);
               const docblockObj = {
@@ -287,13 +283,13 @@ export = class SDocMap extends __SPromise {
         emit('log', {
           value: `<green>${
             Object.keys(this._entries).length
-          }</green> entries generated for this docMap`
+          }</green> entries buildd for this docMap`
         });
 
         resolve(this._entries);
       },
       {
-        id: settings.id + '.generate'
+        id: settings.id + '.build'
       }
     );
   }
@@ -315,24 +311,27 @@ export = class SDocMap extends __SPromise {
     let output;
     if (typeof outputOrSettings === 'object') {
       settings = __deepMerge(this._settings, {}, outputOrSettings);
-      output = settings.generate.output;
+      output = settings.build.output;
     } else if (typeof outputOrSettings === 'string') {
       output = outputOrSettings;
     }
     settings = __deepMerge(this._settings, {}, settings);
 
     return new __SPromise(
-      async ({ resolve, emit, pipe }) => {
+      async ({ resolve, emit, pipe, pipeFrom }) => {
         let entries = this._entries;
 
         if (!this._entries.length) {
-          const generatePromise = this.generate(settings);
-          pipe(generatePromise);
-          entries = await generatePromise;
+          const buildPromise = this.build(settings);
+          pipe(buildPromise);
+          entries = await buildPromise;
         }
 
         emit('log', {
-          value: `Saving the docMap file to "<cyan>${output}</cyan>"`
+          value: `Saving the docMap file to "<cyan>${output.replace(
+            `${__packageRoot()}/`,
+            ''
+          )}</cyan>"`
         });
 
         __removeSync(output);

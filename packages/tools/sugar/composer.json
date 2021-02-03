@@ -1,6 +1,11 @@
 {
-    "require": {
-        "jenssegers/blade": "^1.3",
-        "eftec/bladeone": "^3.46"
-    }
+  "autoload": {
+    "files": [
+      "src/php/autoload.php"
+    ]
+  },
+  "require": {
+    "jenssegers/blade": "^1.3",
+    "eftec/bladeone": "^3.46"
+  }
 }

@@ -3,12 +3,12 @@
 // get the Thorin class
 require_once 'core/Sugar.php';
 
-Sugar::requireFolder(dirname(__FILE__), [
+Sugar::requireFolder(__DIR__, [
     'recursive' => true,
     'exclude' => [
-        dirname(__FILE__).'/core/Sugar.php',
-        dirname(__FILE__).'/__wip__',
-        dirname(__FILE__).'/autoload.php',
-        dirname(__FILE__).'/views/blade'    
+        __DIR__.'/core/Sugar.php',
+        __DIR__.'/__wip__',
+        __DIR__.'/autoload.php',
+        __DIR__.'/views/blade'    
     ]
 ]);

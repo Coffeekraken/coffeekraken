@@ -3,7 +3,7 @@
 require_once realpath(__DIR__.'/../../../../../vendor/autoload.php');
 // require Sugar php
 require_once realpath(__DIR__.'/../../../../php/autoload.php');
-// use Jenssegers\Blade\Blade;
+use Jenssegers\Blade\Blade;
 use eftec\bladeone\BladeOne;
 function compile($viewsPath, $view, $data, $tmpPath) {
 
@@ -16,10 +16,14 @@ function compile($viewsPath, $view, $data, $tmpPath) {
 	$views = $viewsPath;
   $cache = $tmpPath;
 
-  $blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
-  try {
-    return $blade->run($view, $data);
-  } catch(Exception $e) {
-    return var_dump('<pre>' . $e . '</pre>');
-  }
+  // $blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
+  // try {
+  //   return $blade->run($view, $data);
+  // } catch(Exception $e) {
+  //   return var_dump('<pre>' . $e . '</pre>');
+  // }
+
+    $blade = new Blade($views, $cache);
+    return $blade->render($view, $data);
+
 }

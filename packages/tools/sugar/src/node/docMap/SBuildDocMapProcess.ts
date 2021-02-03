@@ -2,7 +2,7 @@
 
 import __SBuildDocMapActionsStream from './SBuildDocMapActionsStream';
 import __SProcess from '../process/SProcess';
-import __SBuildDocMapInterface from './interface/SBuildDocMapInterface';
+import __SDocMapSettingsInterface from './interface/SDocMapSettingsInterface';
 import __SDocMap from './SDocMap';
 
 /**
@@ -16,9 +16,11 @@ import __SDocMap from './SDocMap';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SBuildDocMapProcess extends __SProcess {
+class SBuildDocMapProcess extends __SProcess {
   static interfaces = {
-    this: __SBuildDocMapInterface
+    params: {
+      class: __SDocMapSettingsInterface
+    }
   };
 
   /**
@@ -30,8 +32,8 @@ module.exports = class SBuildDocMapProcess extends __SProcess {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
-    super({
+  constructor(initialParams = {}, settings = {}) {
+    super(initialParams, {
       id: 'SBuildDocMapProcess',
       name: 'Build docMap.json Process',
       ...settings
@@ -58,4 +60,6 @@ module.exports = class SBuildDocMapProcess extends __SProcess {
     const promise = docMap.save();
     return promise;
   }
-};
+}
+
+export default SBuildDocMapProcess;

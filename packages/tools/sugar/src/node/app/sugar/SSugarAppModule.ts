@@ -192,7 +192,7 @@ export default class SSugarAppModule
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  private _active = false;
+  protected _active = false;
 
   /**
    * @name      _moduleObjDescriptor
@@ -429,8 +429,9 @@ export default class SSugarAppModule
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   activate() {
-    if (this._active === true) return;
+    console.log(this.id + ' active');
     this._active = true;
+    if (this._active === true) return;
     this.emit('activate', true);
   }
 
@@ -445,8 +446,9 @@ export default class SSugarAppModule
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   unactivate() {
-    if (this._active === false) return;
     this._active = false;
+    console.log('UN ' + this.id);
+    if (this._active === false) return;
     this.emit('unactivate', true);
   }
 
@@ -589,26 +591,38 @@ export default class SSugarAppModule
       throw `You have some shortcuts defined in the module "<yellow>${this.constructor.name}</yellow>" but you don't have the required "<cyan>handleShortcuts(shortcutObj, params, settings)</cyan>" method defined...`;
     }
 
-    if (!Object.keys(this.shortcuts).length) return;
+    if (
+      !this._moduleObjDescriptor.shortcuts ||
+      !Object.keys(this._moduleObjDescriptor.shortcuts).length
+    )
+      return;
 
-    Object.keys(this.shortcuts).forEach((shortcut: string) => {
-      const shortcutObj: ISSugarAppModuleShortcut = this.shortcuts[shortcut];
+    for (const shortcut in this._moduleObjDescriptor.shortcuts) {
+      const shortcutObj: ISSugarAppModuleShortcut = this._moduleObjDescriptor
+        .shortcuts[shortcut];
       shortcutObj.keys = shortcut;
       if (shortcutObj.id === undefined) shortcutObj.id = shortcut;
       __hotkey(shortcut).on('press', () => {
-        if (!this.isActive()) return;
-        const params = __deepMerge(
-          Object.assign({}, this.params || {}),
-          Object.assign({}, shortcutObj.params || {})
-        );
-        const settings = __deepMerge(
-          Object.assign({}, this.settings || {}),
-          Object.assign({}, shortcutObj.settings || {})
-        );
-        delete shortcutObj.params;
-        delete shortcutObj.settings;
-        this.handleShortcuts(shortcutObj, params, settings);
+        setTimeout(() => {
+          console.log(this.id);
+
+          if (this.isActive() !== true) return;
+
+          console.log('RRR');
+
+          const params = __deepMerge(
+            Object.assign({}, this.params || {}),
+            Object.assign({}, shortcutObj.params || {})
+          );
+          const settings = __deepMerge(
+            Object.assign({}, this.settings || {}),
+            Object.assign({}, shortcutObj.settings || {})
+          );
+          delete shortcutObj.params;
+          delete shortcutObj.settings;
+          this.handleShortcuts(shortcutObj, params, settings);
+        }, 1000);
       });
-    });
+    }
   }
 }

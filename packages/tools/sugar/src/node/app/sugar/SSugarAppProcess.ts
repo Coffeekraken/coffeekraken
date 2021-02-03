@@ -7,7 +7,9 @@ import __SSugarApp from './SSugarApp';
 import __SSugarAppInterface from './interface/SSugarAppInterface';
 import __sugarConfig from '../../config/sugar';
 import __SSugarAppModuleObjInterface from './interface/SSugarAppModuleObjInterface';
-import __SSugarAppModule from './SSugarAppModule';
+import __SSugarAppModule, {
+  ISSugarAppModuleShortcuts
+} from './SSugarAppModule';
 
 /**
  * @name            SSugarAppProcess
@@ -47,6 +49,7 @@ export interface ISSugarAppModuleDescriptor {
   params?: any;
   settings?: any;
   stdio?: any;
+  shortcuts?: ISSugarAppModuleShortcuts;
   instance?: __SSugarAppModule;
 }
 

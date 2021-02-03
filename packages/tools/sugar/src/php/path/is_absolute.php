@@ -3,7 +3,7 @@
 namespace Sugar\path;
 
 /**
- * @name        is_absolute
+ * @name        Sugar\path\is_absolute
  * @namespace   sugar.php.path
  * @type        Function
  * 

@@ -25,13 +25,6 @@ class SDocMapSettingsInterface extends __SInterface {
       default: __sugarConfig('docMap.build.globs'),
       level: 1
     },
-    'build.output': {
-      type: 'String',
-      alias: 'o',
-      description: 'Output file path',
-      default: __sugarConfig('docMap.build.output'),
-      level: 1
-    },
     'build.exclude': {
       type: 'Object',
       description:
@@ -51,6 +44,13 @@ class SDocMapSettingsInterface extends __SInterface {
       description:
         'Specify some regexp used to exclude files from searching docMaps',
       default: __sugarConfig('docMap.find.exclude'),
+      level: 1
+    },
+    'save.path': {
+      type: 'String',
+      alias: 'p',
+      description: 'Output file path',
+      default: __sugarConfig('docMap.save.path'),
       level: 1
     }
   };

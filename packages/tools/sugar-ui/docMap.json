@@ -4,8 +4,6 @@
         "namespace": "sugar-ui.js.webcomponents",
         "filename": "SSugarUiWebComponent.js",
         "extension": "js",
-        "relPath": "src/js/webcomponents/SSugarUiWebComponent.js",
-        "directory": "src/js/webcomponents",
         "type": "Webcomponent",
         "description": "Represent the search based navigation in the sugar ui",
         "since": "2.0.0"

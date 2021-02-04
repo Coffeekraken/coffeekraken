@@ -1,5 +1,7 @@
 // @ts-nocheck
 
+import __folderPath from './folderPath';
+import __ensureDirSync from './ensureDirSync';
 import __fs from 'fs-extra';
 
 /**
@@ -29,6 +31,8 @@ import __fs from 'fs-extra';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function writeJsonSync(path, data, options = {}) {
+  const folderPath = __folderPath(path);
+  __ensureDirSync(folderPath);
   __fs.outputJsonSync(path, data, options);
 }
 export = writeJsonSync;

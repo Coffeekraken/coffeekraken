@@ -18,19 +18,6 @@ module.exports = {
     globs: [`src/**{5}/*:/.*@namespace.*/gm`],
 
     /**
-     * @name        output
-     * @namespace   config.docMap.build
-     * @type         String
-     * @default       [config.storage.rootDir]/docMap.json
-     *
-     * Specify where you want to output the file
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    output: `[config.storage.rootDir]/docMap.json`,
-
-    /**
      * @name        exclude
      * @namespace   config.docMap.build
      * @type        Object<String>
@@ -53,6 +40,21 @@ module.exports = {
     }
   },
 
+  save: {
+    /**
+     * @name        path
+     * @namespace   config.docMap.save
+     * @type         String
+     * @default       [config.storage.rootDir]/docMap.json
+     *
+     * Specify where you want to path the file
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    path: `[config.storage.rootDir]/docMap.json`
+  },
+
   find: {
     /**
      * @name                globs
@@ -64,10 +66,7 @@ module.exports = {
      * @since           2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    globs: [
-      'docMap.json'
-      // `${__packageRoot()}/node_modules/*/*/*/docMap.json`
-    ],
+    globs: ['docMap.json', `node_modules/**{4}/docMap.json`],
 
     /**
      * @name        exclude

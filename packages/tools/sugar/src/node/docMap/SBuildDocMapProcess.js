@@ -1,5 +1,14 @@
 "use strict";
 // @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -7,6 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const SProcess_1 = __importDefault(require("../process/SProcess"));
 const SDocMapSettingsInterface_1 = __importDefault(require("./interface/SDocMapSettingsInterface"));
 const SDocMap_1 = __importDefault(require("./SDocMap"));
+const SPromise_1 = __importDefault(require("../promise/SPromise"));
 /**
  * @name            SBuildDocMapProcess
  * @namespace           sugar.node.build.docMap
@@ -45,9 +55,13 @@ class SBuildDocMapProcess extends SProcess_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     process(params, settings = {}) {
-        const docMap = new SDocMap_1.default(Object.assign({}, params));
-        const promise = docMap.save();
-        return promise;
+        return new SPromise_1.default(({ resolve, pipe }) => __awaiter(this, void 0, void 0, function* () {
+            const docMap = new SDocMap_1.default({
+                docMap: params
+            });
+            yield pipe(docMap.build());
+            resolve(yield pipe(docMap.save()));
+        }));
     }
 }
 SBuildDocMapProcess.interfaces = {
@@ -56,4 +70,4 @@ SBuildDocMapProcess.interfaces = {
     }
 };
 exports.default = SBuildDocMapProcess;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0J1aWxkRG9jTWFwUHJvY2Vzcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNCdWlsZERvY01hcFByb2Nlc3MudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBR2QsbUVBQTZDO0FBQzdDLG9HQUE4RTtBQUM5RSx3REFBa0M7QUFFbEM7Ozs7Ozs7Ozs7R0FVRztBQUNILE1BQU0sbUJBQW9CLFNBQVEsa0JBQVU7SUFPMUM7Ozs7Ozs7O09BUUc7SUFDSCxZQUFZLGFBQWEsR0FBRyxFQUFFLEVBQUUsUUFBUSxHQUFHLEVBQUU7UUFDM0MsS0FBSyxDQUFDLGFBQWEsa0JBQ2pCLEVBQUUsRUFBRSxxQkFBcUIsRUFDekIsSUFBSSxFQUFFLDJCQUEyQixJQUM5QixRQUFRLEVBQ1gsQ0FBQztJQUNMLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7O09BWUc7SUFDSCxPQUFPLENBQUMsTUFBTSxFQUFFLFFBQVEsR0FBRyxFQUFFO1FBQzNCLE1BQU0sTUFBTSxHQUFHLElBQUksaUJBQVMsbUJBQ3ZCLE1BQU0sRUFDVCxDQUFDO1FBQ0gsTUFBTSxPQUFPLEdBQUcsTUFBTSxDQUFDLElBQUksRUFBRSxDQUFDO1FBQzlCLE9BQU8sT0FBTyxDQUFDO0lBQ2pCLENBQUM7O0FBMUNNLDhCQUFVLEdBQUc7SUFDbEIsTUFBTSxFQUFFO1FBQ04sS0FBSyxFQUFFLGtDQUEwQjtLQUNsQztDQUNGLENBQUM7QUF5Q0osa0JBQWUsbUJBQW1CLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0J1aWxkRG9jTWFwUHJvY2Vzcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNCdWlsZERvY01hcFByb2Nlc3MudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7O0FBR2QsbUVBQTZDO0FBQzdDLG9HQUE4RTtBQUM5RSx3REFBa0M7QUFDbEMsbUVBQTZDO0FBRTdDOzs7Ozs7Ozs7O0dBVUc7QUFDSCxNQUFNLG1CQUFvQixTQUFRLGtCQUFVO0lBTzFDOzs7Ozs7OztPQVFHO0lBQ0gsWUFBWSxhQUFhLEdBQUcsRUFBRSxFQUFFLFFBQVEsR0FBRyxFQUFFO1FBQzNDLEtBQUssQ0FBQyxhQUFhLGtCQUNqQixFQUFFLEVBQUUscUJBQXFCLEVBQ3pCLElBQUksRUFBRSwyQkFBMkIsSUFDOUIsUUFBUSxFQUNYLENBQUM7SUFDTCxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsT0FBTyxDQUFDLE1BQU0sRUFBRSxRQUFRLEdBQUcsRUFBRTtRQUMzQixPQUFPLElBQUksa0JBQVUsQ0FBQyxDQUFPLEVBQUUsT0FBTyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7WUFDaEQsTUFBTSxNQUFNLEdBQUcsSUFBSSxpQkFBUyxDQUFDO2dCQUMzQixNQUFNLEVBQUUsTUFBTTthQUNmLENBQUMsQ0FBQztZQUNILE1BQU0sSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLEVBQUUsQ0FBQyxDQUFDO1lBQzNCLE9BQU8sQ0FBQyxNQUFNLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQyxDQUFDO1FBQ3JDLENBQUMsQ0FBQSxDQUFDLENBQUM7SUFDTCxDQUFDOztBQTVDTSw4QkFBVSxHQUFHO0lBQ2xCLE1BQU0sRUFBRTtRQUNOLEtBQUssRUFBRSxrQ0FBMEI7S0FDbEM7Q0FDRixDQUFDO0FBMkNKLGtCQUFlLG1CQUFtQixDQUFDIn0=

@@ -7,7 +7,7 @@ const SBuildDocMapProcess_1 = __importDefault(require("../../node/docMap/SBuildD
 module.exports = (stringArgs = '') => {
     const pro = new SBuildDocMapProcess_1.default({}, {
         process: {
-            stdio: 'blessed'
+            stdio: 'inherit'
         }
     });
     pro.run(stringArgs);

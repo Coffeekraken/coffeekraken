@@ -1,6 +1,7 @@
 // @shared
 // @ts-nocheck
 
+import __getMethods from '../class/getMethods';
 import __minimatch from 'minimatch';
 import __deepMerge from '../object/deepMerge';
 import __uniqid from '../string/uniqid';
@@ -190,35 +191,27 @@ class SPromise extends __SClass.extends(Promise) {
         }).catch((e) => {
           this.emit('catch', e);
         });
-
-        const _api = new Proxy(
-          {},
-          {
-            get(target, prop) {
-              if (_this !== undefined) {
-                return _this[prop];
-              } else {
-                return async (...args) => {
-                  await __wait(0);
-                  const fn = _this[prop].bind(_this);
-                  return fn(...args);
-                };
-              }
-            }
-          }
-        );
-
-        executorFn =
-          typeof executorFnOrSettings === 'function'
-            ? executorFnOrSettings
-            : null;
-        if (executorFn) {
-          executorFn(_api);
-        }
       }
     );
 
-    _this = this;
+    // _this = this;
+
+    // const _api = new Proxy(
+    //   {},
+    //   {
+    //     get(target, prop) {
+    //       if (_this !== undefined) {
+    //         return _this[prop];
+    //       } else {
+    //         return async (...args) => {
+    //           await __wait(0);
+    //           const fn = _this[prop].bind(_this);
+    //           return fn(...args);
+    //         };
+    //       }
+    //     }
+    //   }
+    // );
 
     this.expose(
       new __SEventEmitter({
@@ -242,6 +235,19 @@ class SPromise extends __SClass.extends(Promise) {
           this._destroy();
         }, (<ISPromiseConstructorSettings>this._settings).promise.destroyTimeout);
       });
+    }
+
+    // start the promise executor by passing it
+    // an API correctly bound to this instance
+    executorFn =
+      typeof executorFnOrSettings === 'function' ? executorFnOrSettings : null;
+    if (executorFn) {
+      const api = {};
+      __getMethods(this).forEach((func) => {
+        if (func.slice(0, 1) === '_') return;
+        api[func] = this[func].bind(this);
+      });
+      executorFn(api);
     }
   }
 

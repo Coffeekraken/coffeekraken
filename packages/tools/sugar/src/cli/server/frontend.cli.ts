@@ -4,10 +4,20 @@ import __SFrontendServerProcess from '../../node/server/frontend/SFrontendServer
 import __SProcessManager from '../../node/process/SProcessManager';
 
 export = (stringArgs = '') => {
-  const manager = new __SProcessManager(__SFrontendServerProcess, {
-    autoRun: true,
-    processSettings: {
-      runAsChild: true
+  // const manager = new __SProcessManager(, {
+  //   autoRun: true,
+  //   processSettings: {
+  //     runAsChild: true
+  //   }
+  // });
+
+  const pro = new __SFrontendServerProcess(
+    {},
+    {
+      process: {
+        stdio: 'inherit'
+      }
     }
-  });
+  );
+  pro.run();
 };

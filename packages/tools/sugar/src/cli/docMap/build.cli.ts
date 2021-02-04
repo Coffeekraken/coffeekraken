@@ -7,7 +7,7 @@ export = (stringArgs = '') => {
     {},
     {
       process: {
-        stdio: 'blessed'
+        stdio: 'inherit'
       }
     }
   );

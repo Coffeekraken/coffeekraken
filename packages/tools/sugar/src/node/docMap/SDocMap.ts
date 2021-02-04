@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import __folderPath from '../fs/folderPath';
 import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
@@ -17,6 +15,9 @@ import __SClass from '../class/SClass';
 import __sugarConfig from '../config/sugar';
 import __SDocMapSettingsInterface from './interface/SDocMapSettingsInterface';
 import __wait from '../time/wait';
+import __SFile from '../fs/SFile';
+import __clone from '../object/clone';
+import __writeFileSync from '../fs/writeFileSync';
 
 /**
  * @name                SDocMap
@@ -47,17 +48,82 @@ import __wait from '../time/wait';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SDocMap extends __SClass {
+
+export interface ISDocMapExcludeSetting {
+  [key: string]: RegExp;
+}
+
+export interface ISDocMapBuildOptionalSettings {
+  globs?: string[];
+  exclude?: ISDocMapExcludeSetting;
+}
+export interface ISDocMapBuildSettings {
+  globs: string[];
+  exclude: ISDocMapExcludeSetting;
+}
+export interface ISDocMapFindOptionalSettings {
+  globs?: string[];
+  exclude?: ISDocMapExcludeSetting;
+}
+export interface ISDocMapFindSettings {
+  globs: string[];
+  exclude: ISDocMapExcludeSetting;
+}
+export interface ISDocMapSaveOptionalSettings {
+  path?: string;
+  build?: ISDocMapBuildOptionalSettings;
+}
+export interface ISDocMapSaveSettings {
+  path: string;
+  build: ISDocMapBuildSettings;
+}
+export interface ISDocMapOptionalSettings {
+  build?: ISDocMapBuildOptionalSettings;
+  find?: ISDocMapFindOptionalSettings;
+  save?: ISDocMapSaveOptionalSettings;
+}
+export interface ISDocMapSettings {
+  build: ISDocMapBuildSettings;
+  find: ISDocMapFindSettings;
+  save: ISDocMapSaveSettings;
+}
+export interface ISDocMapCtorSettings {
+  docMap?: ISDocMapOptionalSettings;
+}
+
+export interface ISDocMapEntry {
+  name: string;
+  namespace: string;
+  filename: string;
+  extension: string;
+  relPath?: string;
+  directory?: string;
+  type: string;
+  description: string;
+  extends?: boolean;
+  static?: boolean;
+  since?: string;
+}
+export interface ISDocMapEntries {
+  [key: string]: ISDocMapEntry;
+}
+
+export interface ISDocMap {
+  _entries: ISDocMapEntries;
+}
+
+class SDocMap extends __SClass implements ISDocMap {
   static interfaces = {
     settings: {
       apply: true,
+      on: '_settings.docMap',
       class: __SDocMapSettingsInterface
     }
   };
 
   /**
    * @name          _entries
-   * @type           Array<Object>
+   * @type           ISDocMapEntries
    * @private
    *
    * This store the docMap.json entries
@@ -65,7 +131,21 @@ export = class SDocMap extends __SClass {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _entries = {};
+  _entries: ISDocMapEntries = {};
+
+  /**
+   * @name        docMapSettings
+   * @type        Object
+   * @get
+   *
+   * Access the docMap settings
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get docMapSettings(): ISDocMapSettings {
+    return <any>this._settings.docMap;
+  }
 
   /**
    * @name            constructor
@@ -77,13 +157,14 @@ export = class SDocMap extends __SClass {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(settings: ISDocMapCtorSettings) {
     super(
       __deepMerge(
         {
-          id: 'SDocMap'
+          id: 'SDocMap',
+          docMap: {}
         },
-        settings
+        settings || {}
       )
     );
   }
@@ -103,38 +184,49 @@ export = class SDocMap extends __SClass {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  find(settings = {}) {
-    settings = __deepMerge(this._settings, {}, settings);
+  find(settings?: ISDocMapFindOptionalSettings) {
+    const findSettings = <ISDocMapFindSettings>(
+      __deepMerge(this.docMapSettings.find, settings || {})
+    );
+
     return new __SPromise(
       async ({ resolve, reject, emit }) => {
         // build the glob pattern to use
-        const patterns = settings.find.globs;
+        const patterns: string[] = findSettings.globs;
 
-        let files = [];
+        let files: __SFile[] = [];
 
+        await __wait(1);
+
+        const searchStrArray: string[] = ['Searching docMaps using globs:'];
+        patterns.forEach((pat) => {
+          searchStrArray.push(`- <yellow>${pat}</yellow>`);
+        });
         emit('log', {
-          value: `Searching docMaps using globs:\n- <yellow>${patterns.join(
-            '</yellow>\n- '
-          )}</yellow>`
+          value: searchStrArray.join('\n')
         });
 
         for (let i = 0; i < patterns.length; i++) {
-          const foundedFiles = await __SGlob.resolve(patterns[i]);
+          const foundedFiles: __SFile[] = <any>(
+            await __SGlob.resolve(patterns[i])
+          );
           files = [...files, ...foundedFiles];
         }
 
+        const findedStrArray: string[] = [
+          `Found <yellow>${files.length}</yellow> docMap file(s):`
+        ];
+        files.forEach((file) => {
+          findedStrArray.push(`- <cyan>${file.relPath}</cyan>`);
+        });
         emit('log', {
-          value: `Found <yellow>${
-            files.length
-          }</yellow> docMap file(s):\n- <cyan>${files.join(
-            '</cyan>\n- '
-          )}</cyan>`
+          value: findedStrArray.join('\n')
         });
 
         resolve(files);
       },
       {
-        id: settings.id + '.find'
+        id: this.id + '.find'
       }
     );
   }
@@ -156,8 +248,7 @@ export = class SDocMap extends __SClass {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  read(settings = {}) {
-    settings = __deepMerge(this._settings, {}, settings);
+  read(settings: ISDocMapFindOptionalSettings) {
     return new __SPromise(
       async ({ resolve, pipe }) => {
         const filesPromise = this.find(settings);
@@ -187,7 +278,7 @@ export = class SDocMap extends __SClass {
         resolve(docMapJson);
       },
       {
-        id: settings.id + '.read'
+        id: this.id + '.read'
       }
     );
   }
@@ -205,11 +296,13 @@ export = class SDocMap extends __SClass {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  build(settings = {}) {
-    settings = __deepMerge(this._settings, {}, settings);
+  build(settings: ISDocMapBuildOptionalSettings) {
+    const buildSettings = <ISDocMapBuildSettings>(
+      __deepMerge(this.docMapSettings.build, settings)
+    );
     return new __SPromise(
       async ({ resolve, reject, emit }) => {
-        let globs = settings.build.globs;
+        let globs = buildSettings.globs;
         if (!Array.isArray(globs)) globs = [globs];
 
         emit('log', {
@@ -224,9 +317,9 @@ export = class SDocMap extends __SClass {
           // scan for files
           let files = await __SGlob.resolve(glob, {});
           files = files.filter((file) => {
-            if (!settings.build.exclude || settings.build.exclude === undefined)
+            if (!buildSettings.exclude || buildSettings.exclude === undefined)
               return true;
-            return !file.path.match(settings.build.exclude.path);
+            return !file.path.match(buildSettings.exclude.path);
           });
 
           emit('log', {
@@ -247,26 +340,32 @@ export = class SDocMap extends __SClass {
             docblocks.forEach((docblock) => {
               if (!docblock.namespace) return;
 
-              for (let i = 0; i < Object.keys(settings.build.exclude); i++) {
+              for (
+                let i = 0;
+                i < Object.keys(buildSettings.exclude).length;
+                i++
+              ) {
                 const excludeReg =
-                  settings.build.exclude[
-                    Object.keys(settings.build.exclude)[i]
-                  ];
-                const value = docblock[Object.keys(settings.build.exclude)[i]];
+                  buildSettings.exclude[Object.keys(buildSettings.exclude)[i]];
+                const value = docblock[Object.keys(buildSettings.exclude)[i]];
                 if (value === undefined) continue;
                 if (value.match(excludeReg)) return;
               }
 
-              const outputDir = __folderPath(settings.build.output);
-              const path = __path.relative(outputDir, filepath);
+              // const path = __path.relative(outputDir, filepath);
               const filename = __getFilename(filepath);
-              const docblockObj = {
+              const docblockObj: ISDocMapEntry = {
+                __fullPath: filepath, // this property will be used in the save method to generate the correct pathes relative to this
                 name: docblock.name,
                 namespace: docblock.namespace,
                 filename,
                 extension: filename.split('.').slice(1)[0],
-                relPath: path,
-                directory: path.replace(`/${__getFilename(filepath)}`, ''),
+                path: __path.relative(__packageRoot(), filepath),
+                directory: __path
+                  .relative(__packageRoot(), filepath)
+                  .replace(`/${__getFilename(filepath)}`, ''),
+                // relPath will be generated in the save method
+                // relDirectory will be generated in the save method
                 type: docblock.type,
                 description: docblock.description
               };
@@ -283,13 +382,13 @@ export = class SDocMap extends __SClass {
         emit('log', {
           value: `<green>${
             Object.keys(this._entries).length
-          }</green> entries buildd for this docMap`
+          }</green> entries gathered for this docMap`
         });
 
         resolve(this._entries);
       },
       {
-        id: settings.id + '.build'
+        id: this.id + '.build'
       }
     );
   }
@@ -307,25 +406,26 @@ export = class SDocMap extends __SClass {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  save(outputOrSettings = null, settings = {}) {
-    let output;
-    if (typeof outputOrSettings === 'object') {
-      settings = __deepMerge(this._settings, {}, outputOrSettings);
-      output = settings.build.output;
-    } else if (typeof outputOrSettings === 'string') {
+  save(
+    outputOrSettings: string | ISDocMapSaveOptionalSettings,
+    settings?: ISDocMapSaveOptionalSettings
+  ): __SPromise {
+    let output, saveSettings: ISDocMapSaveSettings;
+    if (typeof outputOrSettings === 'string') {
       output = outputOrSettings;
+      saveSettings = this.docMapSettings.save;
+    } else {
+      saveSettings = <ISDocMapSaveSettings>(
+        __deepMerge(this.docMapSettings.save, outputOrSettings)
+      );
+      output = saveSettings.path;
     }
-    settings = __deepMerge(this._settings, {}, settings);
+
+    const outputDir = output.replace(`/${__getFilename(output)}`, '');
 
     return new __SPromise(
-      async ({ resolve, emit, pipe, pipeFrom }) => {
-        let entries = this._entries;
-
-        if (!this._entries.length) {
-          const buildPromise = this.build(settings);
-          pipe(buildPromise);
-          entries = await buildPromise;
-        }
+      ({ resolve, emit, pipe, pipeFrom }) => {
+        let entries: ISDocMapEntries = __clone(this._entries, { deep: true });
 
         emit('log', {
           value: `Saving the docMap file to "<cyan>${output.replace(
@@ -334,13 +434,35 @@ export = class SDocMap extends __SClass {
           )}</cyan>"`
         });
 
+        // add relPath and directory property depending on the output
+        Object.keys(entries).forEach((namespace) => {
+          const obj = entries[namespace];
+          const relPath = __path.relative(outputDir, obj.__fullPath);
+          const relDirectory = relPath.replace(
+            `/${__getFilename(relPath)}`,
+            ''
+          );
+          obj.relPath = relPath;
+          obj.relDirectory = relDirectory;
+          delete obj.__fullPath;
+        });
+
         __removeSync(output);
-        __fs.writeFileSync(output, JSON.stringify(entries, null, 4));
+        __writeFileSync(output, JSON.stringify(entries, null, 4));
+
+        emit('log', {
+          value: `<green>[save]</green> DocMap file "<yellow>${__getFilename(
+            output
+          )}</yellow>" <green>saved successfully</green> under "<cyan>${output}</cyan>"`
+        });
+
         resolve(entries);
       },
       {
-        id: settings.id + '.save'
+        id: this.id + '.save'
       }
     );
   }
-};
+}
+
+export default SDocMap;

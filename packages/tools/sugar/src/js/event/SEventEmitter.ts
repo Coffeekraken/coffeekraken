@@ -265,7 +265,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    */
   pipe(input: ISEventEmitter, settings?: ISEventEmitterPipeSettings) {
     SEventEmitter.pipe(input, <any>this, settings);
-    return this;
+    return input;
   }
 
   /**

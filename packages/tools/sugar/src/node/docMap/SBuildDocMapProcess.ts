@@ -4,6 +4,7 @@ import __SBuildDocMapActionsStream from './SBuildDocMapActionsStream';
 import __SProcess from '../process/SProcess';
 import __SDocMapSettingsInterface from './interface/SDocMapSettingsInterface';
 import __SDocMap from './SDocMap';
+import __SPromise from '../promise/SPromise';
 
 /**
  * @name            SBuildDocMapProcess
@@ -54,11 +55,13 @@ class SBuildDocMapProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   process(params, settings = {}) {
-    const docMap = new __SDocMap({
-      ...params
+    return new __SPromise(async ({ resolve, pipe }) => {
+      const docMap = new __SDocMap({
+        docMap: params
+      });
+      await pipe(docMap.build());
+      resolve(await pipe(docMap.save()));
     });
-    const promise = docMap.save();
-    return promise;
   }
 }
 

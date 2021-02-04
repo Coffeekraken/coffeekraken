@@ -4,6 +4,7 @@ import __SPromise from '../../../promise/SPromise';
 import __SScssCompiler from '../../../scss/compile/SScssCompiler';
 import __SDuration from '../../../time/SDuration';
 import __SScssCompilerParamsInterface from '../../../scss/compile/interface/SScssCompilerParamsInterface';
+import __SDocMap from '../../../docMap/SDocMap';
 
 /**
  * @name                doc
@@ -26,6 +27,10 @@ import __SScssCompilerParamsInterface from '../../../scss/compile/interface/SScs
  */
 export = function doc(req, res, settings = {}) {
   return new __SPromise(async ({ resolve, reject, pipe }) => {
+    const docMap = new __SDocMap();
+    const files = await docMap.find();
+    console.log(files);
+
     // nativeConsole.log(req);
     res.type('text/html');
     res.status(200);

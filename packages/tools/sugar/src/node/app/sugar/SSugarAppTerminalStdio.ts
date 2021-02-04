@@ -114,8 +114,6 @@ export default class SSugarAppTerminalStdio extends __SStdio {
       ...this._handlerProcess.loadedModules
     };
 
-    nativeConsole.log(this._modules);
-
     // this._serverSettings = this._modules[
     //   this._appSettings.welcome.serverModule
     // ];
@@ -199,18 +197,13 @@ export default class SSugarAppTerminalStdio extends __SStdio {
     let module = this._findModuleObj(moduleIdOrName);
     if (!module || !module.$stdio) return;
 
-    // this._displayedModuleId = module.id;
-
     Object.keys(this._modules).forEach((moduleId, i) => {
       const mod = this._modules[moduleId];
-
-      console.log('D', mod.id, module.id);
-
       if (mod.id === module.id) {
         module.activate && module.activate();
         this.$list.select(i);
       } else {
-        module.unactivate && module.unactivate();
+        mod.unactivate && mod.unactivate();
       }
     });
     this.$stdio.children.forEach(($child: any) => {

@@ -4,7 +4,7 @@
  * @name                putUseStatementsOnTop
  * @namespace           sugar.node.scss.utils
  * @type                Function
- * @beta
+ * @status              beta
  *
  * This function simply search for "@use" statements in the passed content
  * and put them on top of the string

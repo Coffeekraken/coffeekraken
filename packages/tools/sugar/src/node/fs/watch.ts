@@ -14,7 +14,7 @@ import __treatAsValue from '../promise/treatAsValue';
  * @namespace           sugar.node.fs
  * @type                Function
  * @async
- * @beta
+ * @status              beta
  *
  * This function wrap the "chokidar" awesome library into an SPromise based "api" with some
  * cool features like getting back an SFile instance for each files updated, etc...

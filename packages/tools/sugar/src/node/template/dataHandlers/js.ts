@@ -6,7 +6,7 @@ import __SPromise from '../../promise/SPromise';
  * @name          js
  * @namespace     sugar.node.template.dataHandlers
  * @type          Function
- * @beta
+ * @status              beta
  *
  * This function simply take the .data.js file path and return
  * the resulting object

@@ -8,7 +8,7 @@ import __dedupe from '../../string/dedupe';
  * @name            ensureNoDuplicateImportStatements
  * @namespace       sugar.node.scss.utils
  * @type            Function
- * @beta
+ * @status              beta
  *
  * This function simply parse the passed string and make sure their's no duplicate import and use statements
  *
@@ -36,10 +36,7 @@ import __dedupe from '../../string/dedupe';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function ensureNoDuplicateImportStatements(
-  string,
-  settings = {}
-) {
+function ensureNoDuplicateImportStatements(string, settings = {}) {
   settings = __deepMerge(
     {
       use: true,

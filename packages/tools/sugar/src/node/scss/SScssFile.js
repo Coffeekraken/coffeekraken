@@ -38,7 +38,7 @@ const SScssCompilerParamsInterface_1 = __importDefault(require("./compile/interf
  * @name      SScssFileSettingsInterface
  * @type      Class
  * @extends     SInterface
- * @beta
+ * @status              beta
  *
  * Scss file settings interface
  *
@@ -53,7 +53,7 @@ SScssFileSettingsInterface.definition = {};
  * @name      SScssFileCtorSettingsInterface
  * @type      Class
  * @extends     SInterface
- * @beta
+ * @status              beta
  *
  * Scss file constructor settings interface
  *

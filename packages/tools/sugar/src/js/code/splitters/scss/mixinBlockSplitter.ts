@@ -5,7 +5,7 @@
  * @name                mixinBlockSplitter
  * @namespace           sugar.js.code.splitters.scss
  * @type                Object
- * @wip
+ * @status              wip
  *
  * This represent the SCSS mixin splitter.
  * It will match all the mixin blocks like "@mixin something(...) { ... }", etc...

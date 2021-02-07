@@ -10,7 +10,7 @@ import __minimatch from 'minimatch';
  * @namespace           sugar.node.process
  * @type              Function
  * @async
- * @wip
+ * @status              wip
  *
  * This function simply cleanup all the processes and other things that stay alive after that
  * the main process has been terminated

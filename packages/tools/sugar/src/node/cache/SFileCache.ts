@@ -8,7 +8,7 @@ import __sugarConfig from '../config/sugar';
  * @namespace       sugar.node.cache
  * @type            Class
  * @extends         SCache
- * @beta
+ * @status              beta
  *
  * This class can be used to cache some files.
  * It featured all the capabilities of the SCache class

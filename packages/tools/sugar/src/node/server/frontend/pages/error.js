@@ -8,7 +8,7 @@ const deepMerge_1 = __importDefault(require("../../../object/deepMerge"));
  * @name                error
  * @namespace           sugar.node.server.frontend.pages
  * @type                Function
- * @wip
+ * @status              wip
  *
  * This function simply return the 404 page content to send to the user
  * with the passed data object described here:

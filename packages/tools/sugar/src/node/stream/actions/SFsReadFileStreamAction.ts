@@ -25,7 +25,7 @@ class SFsReadFileStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
- * @beta
+ * @status              beta
  *
  * This class is a stream action that allows you to read file(s) to the filesystem
  *

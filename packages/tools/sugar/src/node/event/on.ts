@@ -6,7 +6,7 @@ import __SPromise from '../promise/SPromise';
  * @name        on
  * @namespace           sugar.node.event
  * @type          Function
- * @beta
+ * @status              beta
  *
  * This function allows you to subscribe to global events emited by the "sugar.node.event.dispatch" function
  * It use under the hood an SPromise instance

@@ -24,7 +24,7 @@ import __writeFileSync from '../fs/writeFileSync';
  * @namespace           sugar.node.doc
  * @type                Class
  * @extends             SPromise
- * @wip
+ * @status              wip
  *
  * This class represent the ```docMap.json``` file and allows you to build it from some sources (glob pattern(s))
  * and save it inside a directory you choose.
@@ -92,17 +92,20 @@ export interface ISDocMapCtorSettings {
 }
 
 export interface ISDocMapEntry {
+  __fullPath?: string;
   name: string;
-  namespace: string;
-  filename: string;
-  extension: string;
+  namespace?: string;
+  filename?: string;
+  extension?: string;
   relPath?: string;
   directory?: string;
+  relDirectory?: string;
   type: string;
   description: string;
   extends?: boolean;
   static?: boolean;
   since?: string;
+  status?: string;
 }
 export interface ISDocMapEntries {
   [key: string]: ISDocMapEntry;
@@ -337,9 +340,10 @@ class SDocMap extends __SClass implements ISDocMap {
 
             if (!docblocks || !docblocks.length) continue;
 
-            docblocks.forEach((docblock) => {
-              if (!docblock.namespace) return;
+            let docblockObj: any = {};
+            const children: any = {};
 
+            docblocks.forEach((docblock) => {
               for (
                 let i = 0;
                 i < Object.keys(buildSettings.exclude).length;
@@ -352,30 +356,44 @@ class SDocMap extends __SClass implements ISDocMap {
                 if (value.match(excludeReg)) return;
               }
 
+              if (docblock.name && docblock.name.slice(0, 1) === '_') return;
+              if (docblock.private) return;
+
               // const path = __path.relative(outputDir, filepath);
               const filename = __getFilename(filepath);
-              const docblockObj: ISDocMapEntry = {
-                __fullPath: filepath, // this property will be used in the save method to generate the correct pathes relative to this
+              let docblockEntryObj: ISDocMapEntry = {
                 name: docblock.name,
-                namespace: docblock.namespace,
-                filename,
-                extension: filename.split('.').slice(1)[0],
-                path: __path.relative(__packageRoot(), filepath),
-                directory: __path
-                  .relative(__packageRoot(), filepath)
-                  .replace(`/${__getFilename(filepath)}`, ''),
-                // relPath will be generated in the save method
-                // relDirectory will be generated in the save method
                 type: docblock.type,
                 description: docblock.description
               };
-              if (docblock.extends) docblockObj.extends = docblock.extends;
-              if (docblock.static) docblockObj.static = true;
-              if (docblock.since) docblockObj.since = docblock.since;
-              this._entries[
-                `${docblock.namespace}.${docblock.name}`
-              ] = docblockObj;
+              if (docblock.namespace)
+                docblockEntryObj.namespace = docblock.namespace;
+              if (docblock.extends) docblockEntryObj.extends = docblock.extends;
+              if (docblock.status) docblockEntryObj.status = docblock.status;
+              if (docblock.static) docblockEntryObj.static = true;
+              if (docblock.since) docblockEntryObj.since = docblock.since;
+
+              if (docblock.namespace) {
+                docblockObj = {
+                  ...docblockEntryObj,
+                  __fullPath: filepath, // this property will be used in the save method to generate the correct pathes relative to this
+                  filename,
+                  extension: filename.split('.').slice(1)[0],
+                  path: __path.relative(__packageRoot(), filepath),
+                  directory: __path
+                    .relative(__packageRoot(), filepath)
+                    .replace(`/${__getFilename(filepath)}`, '')
+                  // relPath will be generated in the save method
+                  // relDirectory will be generated in the save method
+                };
+                this._entries[
+                  `${docblock.namespace}.${docblock.name}`
+                ] = docblockObj;
+              } else {
+                children[docblock.name] = docblockEntryObj;
+              }
             });
+            docblockObj.children = children;
           }
         }
 
@@ -437,6 +455,7 @@ class SDocMap extends __SClass implements ISDocMap {
         // add relPath and directory property depending on the output
         Object.keys(entries).forEach((namespace) => {
           const obj = entries[namespace];
+          // @ts-ignore
           const relPath = __path.relative(outputDir, obj.__fullPath);
           const relDirectory = relPath.replace(
             `/${__getFilename(relPath)}`,
@@ -444,6 +463,7 @@ class SDocMap extends __SClass implements ISDocMap {
           );
           obj.relPath = relPath;
           obj.relDirectory = relDirectory;
+          // @ts-ignore
           delete obj.__fullPath;
         });
 

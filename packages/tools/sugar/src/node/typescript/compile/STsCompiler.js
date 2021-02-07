@@ -31,7 +31,7 @@ const STsCompilerParamsInterface_1 = __importDefault(require("./interface/STsCom
  * @namespace           sugar.node.typescript
  * @type                Class
  * @extends             SCompiler
- * @wip
+ * @status              wip
  *
  * This class wrap the "typescript" compiler with some additional features which are:
  *

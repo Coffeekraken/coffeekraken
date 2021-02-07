@@ -5,7 +5,7 @@
  * @name                selectorBlockSplitter
  * @namespace           sugar.js.code.splitters.scss
  * @type                Object
- * @wip
+ * @status              wip
  *
  * This represent the SCSS selectors splitter.
  * It will match all the selectors blocks like ".hello #world, p:before { ... }", etc...

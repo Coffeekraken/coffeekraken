@@ -5,7 +5,7 @@
  * @name              example
  * @namespace           sugar.js.docblock.tags
  * @type              Function
- * @wip
+ * @status              wip
  *
  * Parse the example tag
  *

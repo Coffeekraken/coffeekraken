@@ -4,7 +4,7 @@
  * @name            isAtTopLevel
  * @namespace       sugar.node.babel.ast
  * @type            Function
- * @wip
+ * @status              wip
  *
  * Check if the passed path is at top level of the AST or not
  *

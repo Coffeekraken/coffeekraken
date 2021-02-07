@@ -8,7 +8,7 @@ const __sugarConfig = require('../../../config/sugar');
  * @namespace           sugar.node.ui.sugar.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe a sugar ui module object
  * structure and requirements

@@ -5,7 +5,7 @@ const __SDependency = require('./SDependency');
  * @name                    SPhpDependency
  * @namespace           sugar.node.dependency
  * @type                    Class
- * @wip
+ * @status              wip
  *
  * This class is the one that take care of installing php on your system depending on the platform on which you are.
  *

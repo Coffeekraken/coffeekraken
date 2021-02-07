@@ -19,7 +19,7 @@ class SJestStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
- * @wip
+ * @status              wip
  *
  * This class is a stream action that allows you execute attached jest tests ([filename.test.js|__tests__/[filename].test.js])
  *

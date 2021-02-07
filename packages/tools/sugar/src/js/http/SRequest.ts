@@ -13,7 +13,7 @@ import __deepMerge from '../object/deepMerge';
  * @name 		                    SRequest
  * @namespace           sugar.js.http
  * @type                        Class
- * @wip
+ * @status              wip
  *
  * Class that allows to simply handle ajax requests with ease.
  * This class give some useful features like :

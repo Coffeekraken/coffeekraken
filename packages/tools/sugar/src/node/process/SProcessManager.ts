@@ -22,7 +22,7 @@ import __toString from '../string/toString';
  * @type            Class
  * @extends         SPromise
  * @implements      SProcessManagerInterface
- * @wip
+ * @status              wip
  *
  * This class represent a process handler class that will fire up some SProcess processes
  *

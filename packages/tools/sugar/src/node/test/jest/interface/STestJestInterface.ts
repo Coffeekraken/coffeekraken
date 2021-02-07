@@ -10,7 +10,7 @@ import __deepMerge from '../../../object/deepMerge';
  * @namespace           sugar.node.test.jest.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe the cli parameters for the
  * test jest process.

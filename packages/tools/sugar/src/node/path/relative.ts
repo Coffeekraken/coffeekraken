@@ -7,7 +7,7 @@ import __packageRoot from './packageRoot';
  * @name            relative
  * @namespace       sugar.js.path
  * @type            Function
- * @beta
+ * @status              beta
  *
  * This function take as input either a string or an array of string and transform the pathes to relative
  * depending on the second argument which is the "from" one.

@@ -10,7 +10,7 @@ const env_1 = __importDefault(require("../core/env"));
  * @namespace             sugar.js.path
  * @type                  Function
  * @env                   development
- * @beta
+ * @status              beta
  *
  * This function return the path where stands the package in the filesystem.
  * !!! This function works only in development mode cause it will be dangerous to

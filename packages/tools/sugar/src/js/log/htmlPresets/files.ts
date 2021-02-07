@@ -7,7 +7,7 @@ import __replaceTags from '../../html/replaceTags';
  * @name                              files
  * @namespace           sugar.js.log.htmlPresets
  * @type                              Function
- * @wip
+ * @status              wip
  *
  * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for the files
  *

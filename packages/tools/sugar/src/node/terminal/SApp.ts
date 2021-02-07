@@ -15,7 +15,7 @@ import __packageRoot from '../path/packageRoot';
  * @name                    SApp
  * @namespace           sugar.node.terminal
  * @type                    Class
- * @wip
+ * @status              wip
  *
  * This class define an application in the terminal that you can easily configure to have the look and feel that you want
  * through simple settings described bellow.

@@ -15,7 +15,7 @@ import {
  * @namespace           sugar.node.typescript.compile
  * @type            Class
  * @extends         SProcess
- * @wip
+ * @status              wip
  *
  * This class represent the tsc compilation process to compile typescript to js
  *

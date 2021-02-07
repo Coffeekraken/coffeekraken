@@ -8,7 +8,7 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * @name        emit
  * @namespace           sugar.node.event
  * @type          Function
- * @beta
+ * @status              beta
  *
  * This function can ben used to emit an event globally.
  * You can subscribe to these events using the "sugar.node.event.subscribe" function

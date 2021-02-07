@@ -12,7 +12,7 @@ import __toString from '../string/toString';
  * @name                                SCache
  * @namespace           sugar.js.cache
  * @type                                Class
- * @beta
+ * @status              beta
  *
  * Gives you the ability to manage cache through some defaults available adapters or using yours.
  * This cache class take care of these features:

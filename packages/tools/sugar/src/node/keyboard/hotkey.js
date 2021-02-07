@@ -14,7 +14,7 @@ const SInterface_1 = __importDefault(require("../interface/SInterface"));
  * @name                hotkey
  * @namespace           sugar.node.keyboard
  * @type                Function
- * @beta
+ * @status              beta
  *
  * This function allows you to add keyboard listening process and subscribe to some sequences
  * using the SPromise instance returned.

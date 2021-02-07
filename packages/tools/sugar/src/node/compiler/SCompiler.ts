@@ -9,7 +9,7 @@ import { ISInterfaceResult } from '../interface/SInterfaceResult';
  * @namespace           sugar.node.compiler
  * @type                Class
  * @extends             SEventEmitter
- * @wip
+ * @status              wip
  *
  * This represent the main compiler class that has to be extended for compilers like typescript, scss, etc...
  * His main goal is to provide basic features like storing the inputs, settings, etc...

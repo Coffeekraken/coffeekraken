@@ -13,7 +13,7 @@ import __path from 'path';
  * @namespace           sugar.node.build.scss.actions
  * @type                Class
  * @extends             SActionsStreamAction
- * @wip
+ * @status              wip
  *
  * This function is responsible of rendering the sass string in the "data" property
  *

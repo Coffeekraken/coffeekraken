@@ -10,7 +10,7 @@ import __SDescriptor from '../descriptor/SDescriptor';
  * @name                completeArgsObject
  * @namespace          sugar.js.cli
  * @type                Function
- * @beta
+ * @status              beta
  *
  * This function take an arguments object and complete it with the definition object default values
  * for missing args

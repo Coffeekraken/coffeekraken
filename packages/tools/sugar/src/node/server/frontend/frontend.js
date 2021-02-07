@@ -25,7 +25,7 @@ const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
  * @name                express
  * @namespace           sugar.node.server.frontend
  * @type                Function
- * @wip
+ * @status              wip
  *
  * This function take care of starting a frontend express based server
  *

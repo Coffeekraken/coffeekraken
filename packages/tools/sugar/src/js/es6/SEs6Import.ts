@@ -8,7 +8,7 @@ import __parseEs6Imports from 'parse-es6-imports';
  * @name            SEs6Import
  * @namespace       sugar.js.es6
  * @type            Class
- * @wip
+ * @status              wip
  *
  * This class represent an es6 import statement with properties like:
  * - path {String}: The import path
@@ -183,4 +183,4 @@ export = class SEs6Import {
     string += `from "${this.path}";`;
     return string;
   }
-}
+};

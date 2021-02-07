@@ -16,7 +16,7 @@ import __escapeStack from '../../terminal/escapeStack';
  * @name                  SBlessedWindowBox
  * @namespace           sugar.node.blessed.box
  * @type                  Class
- * @wip
+ * @status              wip
  *
  * This class gives you the ability to display windowed style boxes with a header, a body and a footer
  *

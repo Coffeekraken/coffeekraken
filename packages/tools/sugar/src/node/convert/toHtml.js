@@ -12,7 +12,7 @@ const htmlFromDocblocks_1 = __importDefault(require("./html/htmlFromDocblocks"))
  * @name            toHtml
  * @namespace       sugar.js.convert
  * @type            Function
- * @wip
+ * @status              wip
  *
  * Take a string as input and convert it to HTML.
  *

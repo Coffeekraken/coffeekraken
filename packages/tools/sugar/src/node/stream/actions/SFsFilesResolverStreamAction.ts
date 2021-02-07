@@ -29,7 +29,7 @@ class SFsFilesResolverStreamActionInterface extends __SInterface {
  * @namespace       node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
- * @beta
+ * @status              beta
  *
  * This class is a stream action that allows you search inside files for a certain string/pattern
  * And get back the list of founded files.

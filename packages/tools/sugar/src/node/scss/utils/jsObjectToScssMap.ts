@@ -5,7 +5,7 @@ import __deepMerge from '../../object/deepMerge';
 import __isPlainObject from '../../is/plainObject';
 
 /**
- * @wip
+ * @status              wip
  * @todo      interface
  * @todo      doc
  * @todo      tests

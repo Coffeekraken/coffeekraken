@@ -11,7 +11,7 @@ const extension_1 = __importDefault(require("../../../fs/extension"));
  * @name            resolveExtensionFreePath
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
- * @wip
+ * @status              wip
  *
  * This function will try to resolve extension free requests like node modules, etc...
  *

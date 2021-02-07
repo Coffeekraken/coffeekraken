@@ -14,7 +14,7 @@ import __SDocblock from './SDocblock';
  * @namespace           sugar.node.docblock
  * @type                  Function
  * @async
- * @wip
+ * @status              wip
  *
  * This function search in the passed folder for files containing a "@namespace" tag (and an "@name" optional one)
  * and generate a SNav instance with all these founded files as sources...

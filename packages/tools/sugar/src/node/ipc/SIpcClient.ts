@@ -13,7 +13,7 @@ import __isPlainObject from '../is/plainObject';
  * @name            SIpcClient
  * @namespace       sugar.node.ipc
  * @type            Class
- * @wip
+ * @status              wip
  *
  * This script check if a global ipc server exists aulready and if it is not the case,
  * it will start one that you can use to communicate between your child process, etc...

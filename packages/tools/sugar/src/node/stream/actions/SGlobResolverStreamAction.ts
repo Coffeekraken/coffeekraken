@@ -22,7 +22,7 @@ class SGlobResolverStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
- * @wip
+ * @status              wip
  *
  * This class is a stream action that allows you resolve glob pattern by specifying the streamObj property that
  * is one. It will then return an array of streamObj handled normally by the SActionsStream instance

@@ -89,7 +89,7 @@ export interface ISScssCompiler extends ISCompiler {}
  * @namespace           sugar.node.scss
  * @type                Class
  * @extends             SCompiler
- * @wip
+ * @status              wip
  *
  * This class wrap the "sass" compiler with some additional features which are:
  *

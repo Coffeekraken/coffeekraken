@@ -6,7 +6,7 @@ import _get from 'lodash/get';
  * @name        propertyProxy
  * @namespace           sugar.js.object
  * @type      Function
- * @beta
+ * @status              beta
  *
  * Create a proxy for and object property.
  * This gives you the possibility to process the data of the property

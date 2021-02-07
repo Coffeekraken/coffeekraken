@@ -9,7 +9,7 @@ const parseAuthorString_1 = __importDefault(require("./parseAuthorString"));
  * @name            standardizeJson
  * @namespace       sugar.js.npm
  * @type            Function
- * @beta
+ * @status              beta
  *
  * This function simply take a package.json JSON formatted object and standardize
  * some fields like the "author" one to be sure it is an object at the end,

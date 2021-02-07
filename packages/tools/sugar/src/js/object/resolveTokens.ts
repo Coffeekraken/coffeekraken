@@ -8,7 +8,7 @@ import __get from './get';
  * @name                      resolveTokens
  * @namespace           sugar.js.object
  * @type                      Function
- * @wip
+ * @status              wip
  *
  * This function take an object and propare it to accept tokens like:
  * - '{this.something.else}'

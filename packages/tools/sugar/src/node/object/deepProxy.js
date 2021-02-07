@@ -12,7 +12,7 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  * @name                            deepProxy
  * @namespace           sugar.js.object
  * @type                            Function
- * @wip
+ * @status              wip
  *
  * This function allows you to add Proxy to an object in deep fashion.
  * Normally the Proxy process only the level on which it has been added. Here we add Proxy to all the

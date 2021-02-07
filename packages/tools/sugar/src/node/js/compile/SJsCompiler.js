@@ -54,7 +54,7 @@ const SJsCompilerParamsInterface_1 = __importDefault(require("./interface/SJsCom
  * @namespace           sugar.node.js.compile
  * @type                Class
  * @extends             SCompiler
- * @wip
+ * @status              wip
  *
  * This class wrap the "esbuild" compiler with some additional features which are:
  *

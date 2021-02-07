@@ -7,7 +7,7 @@ import __deepMerge from '../object/deepMerge';
  * @name              SCodeSplitter
  * @namespace         sugar.js.code
  * @type              Class
- * @wip
+ * @status              wip
  *
  * This class allows you to specify some "splitters" that will be used to split the code accordingly.
  * A "splitter" is an object of these properties:

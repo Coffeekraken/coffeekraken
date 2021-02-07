@@ -7,7 +7,7 @@ import __isNode from '../is/node';
  * @name          SValidation
  * @namespace     sugar.js.validation.value.validation
  * @type          Class
- * @wip
+ * @status              wip
  *
  * This class represent the base validation class
  * that can be extended to create some validations like the "required" one, etc...

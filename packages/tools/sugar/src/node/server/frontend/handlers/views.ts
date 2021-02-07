@@ -12,7 +12,7 @@ import __SPromise, { reject } from '../../../promise/SPromise';
  * @name                views
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
- * @wip
+ * @status              wip
  *
  * This function is responsible of responding to express requests made on the "views" section
  *

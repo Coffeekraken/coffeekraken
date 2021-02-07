@@ -14,7 +14,7 @@ import {
  * @namespace           sugar.node.js.compile
  * @type            Class
  * @extends         SProcess
- * @wip
+ * @status              wip
  *
  * This class represent the js compilation process to compile raw js files to es2015 js one
  *

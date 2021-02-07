@@ -7,7 +7,7 @@ import __SRequest from './SRequest';
  * @name                              request
  * @namespace           sugar.js.http
  * @type                              Function
- * @wip
+ * @status              wip
  *
  * Easily create and send an http request. This will return an instance of the SAjax class.
  *

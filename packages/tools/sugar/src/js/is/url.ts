@@ -5,7 +5,7 @@
  * @name        isUrl
  * @namespace           sugar.js.is
  * @type      Function
- * @beta
+ * @status              beta
  *
  * Check if the passed value is a valid url
  *

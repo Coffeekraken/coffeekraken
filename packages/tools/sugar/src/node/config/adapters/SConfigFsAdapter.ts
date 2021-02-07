@@ -11,7 +11,7 @@ import __localDir from '../../path/localDir';
  * @name                  SConfigFsAdapter
  * @namespace           sugar.node.config.adapters
  * @type                  Class
- * @beta
+ * @status              beta
  *
  * The JSON data adapter for the SConfig class that let you define a filename where you want to save your configs, how you want to encrypt/decrypt it
  * and then you just have to use the SConfig class and that's it...

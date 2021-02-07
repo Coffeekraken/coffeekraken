@@ -23,7 +23,7 @@ import __isChildProcess from '../is/childProcess';
  * @namespace           sugar.js.stream
  * @type          Class
  * @extends       SPromise
- * @beta
+ * @status              beta
  *
  * This class represent the base of a actions stream.
  * An action stream if simply some functions that are called one after the other

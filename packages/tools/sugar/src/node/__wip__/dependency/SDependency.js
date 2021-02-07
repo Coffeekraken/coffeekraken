@@ -20,7 +20,7 @@ const __awaitSpawn = require('await-spawn');
  * @name                    SDependency
  * @namespace           sugar.node.dependency
  * @type                    Class
- * @wip
+ * @status              wip
  *
  * This class is the base one for dependencys like PHP, Node, etc... It allows you to check if you have already the dependency installed,
  * if you can update it, etc...

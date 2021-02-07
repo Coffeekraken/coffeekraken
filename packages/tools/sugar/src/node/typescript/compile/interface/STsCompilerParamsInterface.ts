@@ -9,7 +9,7 @@ import __TscInterface from './TscInterface';
  * @namespace           sugar.node.typescript.compile.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe the minimum requirement
  * needed for a typescript compilation.

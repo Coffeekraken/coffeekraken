@@ -15,7 +15,7 @@ import { SpawnOptions } from 'child_process';
  * @namespace       sugar.node.process
  * @type            Function
  * @async
- * @wip
+ * @status              wip
  *
  * This function allows you to spawn a new child process just like the native ```spawn``` node function
  * but add the support for SPromise and SIpc communication layers

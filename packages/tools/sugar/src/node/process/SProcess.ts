@@ -38,7 +38,7 @@ import { ISInterface, ISInterfaceCtor } from '../interface/SInterface';
  * @namespace           sugar.node.process
  * @type                Class
  * @extends             SEventEmitter
- * @wip
+ * @status              wip
  *
  * This class represent an SProcess run iteration that store things like
  * the value, the startTime, endTime, duration, state, etc...

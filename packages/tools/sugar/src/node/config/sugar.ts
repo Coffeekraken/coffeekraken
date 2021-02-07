@@ -10,7 +10,7 @@ import __resolveTokens from '../object/resolveTokens';
  * @name                  sugar
  * @namespace           sugar.node.config
  * @type                  Function
- * @beta
+ * @status              beta
  *
  * This function allows you to access easily the configurations stored in the ```sugar.config.js```.
  * The returned configuration is the result of the default sugar config stored in the toolkit and the

@@ -7,7 +7,7 @@ import __convert from '../time/convert';
  * @name 	              	SRequestConfig
  * @namespace           sugar.js.http
  * @type                  Class
- * @wip
+ * @status              wip
  *
  * Class that represent an ajax request that will be passed to an SRequest instance.
  * All the axios settings are supported by this class

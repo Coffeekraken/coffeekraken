@@ -11,7 +11,7 @@ import __localDir from '../../path/localDir';
  * @name                  SConfigFolderAdapter
  * @namespace           sugar.node.config.adapters
  * @type                  Class
- * @beta
+ * @status              beta
  *
  * This adapter let you specify a folder in which to put all the config files and access it normaly as you would with the SConfig system.
  * Each file in the folder will be the first level of the final config object like for example the file "colors.config.js" will be stored

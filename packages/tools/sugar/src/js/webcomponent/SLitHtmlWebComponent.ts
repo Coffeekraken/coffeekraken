@@ -24,7 +24,7 @@ import __canHaveChildren from '../dom/canHaveChildren';
  * @namespace           sugar.js.webcomponent
  * @type              Class
  * @extends           SWebComponent
- * @wip
+ * @status              wip
  *
  * // TODO: example
  *

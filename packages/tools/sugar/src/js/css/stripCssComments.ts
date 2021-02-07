@@ -8,7 +8,7 @@ import __stripCssComments from 'strip-css-comments';
  * @name          stripCssComments
  * @namespace     sugar.js.css
  * @type          Function
- * @wip
+ * @status              wip
  *
  * This function simply remove all the css comments like:
  * - Multiline blocks css comments begining with /* *, ending with * /

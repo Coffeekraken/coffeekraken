@@ -10,7 +10,7 @@ import __countLine from '../string/countLine';
  * @name                    SHeader
  * @namespace           sugar.node.terminal
  * @type                    Class
- * @wip
+ * @status              wip
  *
  * This class define a "header" in the terminal that you can easily configure to have the look and feel that you want
  * through simple settings described bellow.

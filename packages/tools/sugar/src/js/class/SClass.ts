@@ -12,7 +12,7 @@ import { ISInterface } from '../interface/SInterface';
  * @name            SClass
  * @namespace       sugar.js.class
  * @type            Class
- * @beta
+ * @status              beta
  *
  * This class is a simple and effective one that manage the ```_settings``` property
  * and some others features that will be documented asap

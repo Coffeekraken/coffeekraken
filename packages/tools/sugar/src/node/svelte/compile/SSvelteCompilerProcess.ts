@@ -14,7 +14,7 @@ import {
  * @namespace           sugar.node.svelte.compile
  * @type            Class
  * @extends         SProcess
- * @wip
+ * @status              wip
  *
  * This class represent the svelte compilation process to compile svelte files to js
  *

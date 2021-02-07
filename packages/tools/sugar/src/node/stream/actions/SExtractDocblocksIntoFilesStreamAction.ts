@@ -29,7 +29,7 @@ class SExtractDocblocksIntoFilesInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
- * @wip
+ * @status              wip
  *
  * This actions allows you to extract the docblocks into separated files depending on their "namespace" tag
  *

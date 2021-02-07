@@ -11,7 +11,7 @@ import __SBuildFrontspecStreamAction from './actions/SBuildFrontspecStreamAction
  * @namespace           sugar.node.build.frontspec
  * @type            Class
  * @extends         SActionsStream
- * @wip
+ * @status              wip
  *
  * This class represent a pre-configured action stream to build easily frontspec files
  *

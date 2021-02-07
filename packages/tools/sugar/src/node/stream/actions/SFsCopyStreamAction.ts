@@ -23,7 +23,7 @@ class SFsCopyStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
- * @wip
+ * @status              wip
  *
  * This class is a stream action that allows you to copy some files or folders from one location to another
  *

@@ -5,7 +5,7 @@
  * @name                includeInlineSplitter
  * @namespace           sugar.js.code.splitters.scss
  * @type                Object
- * @wip
+ * @status              wip
  *
  * This represent the SCSS "@include..." splitter.
  * It will match all the inline includes like "@include something('hello');", etc...

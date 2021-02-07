@@ -12,7 +12,7 @@ import __fs from 'fs';
  * @name                resolveDependency
  * @namespace           sugar.node.scss.utils
  * @type                Function
- * @beta
+ * @status              beta
  *
  * This function simply take an scss import or use path and resolve it using the passed includePaths array
  *

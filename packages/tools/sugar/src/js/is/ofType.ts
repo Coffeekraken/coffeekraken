@@ -7,7 +7,7 @@ import __SType from '../type/SType';
  * @name              ofType
  * @namespace           sugar.js.is
  * @type              Function
- * @beta
+ * @status              beta
  *
  * This function take the value to check and an argument type definition string like "String", "Array<String>", etc... and return true or false depending
  * if the value pass the test or not...

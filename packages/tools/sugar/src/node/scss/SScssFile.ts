@@ -33,7 +33,7 @@ import __SScssCompilerParamsInterface from './compile/interface/SScssCompilerPar
  * @name      SScssFileSettingsInterface
  * @type      Class
  * @extends     SInterface
- * @beta
+ * @status              beta
  *
  * Scss file settings interface
  *
@@ -48,7 +48,7 @@ export class SScssFileSettingsInterface extends __SInterface {
  * @name      SScssFileCtorSettingsInterface
  * @type      Class
  * @extends     SInterface
- * @beta
+ * @status              beta
  *
  * Scss file constructor settings interface
  *
@@ -70,7 +70,7 @@ export class SScssFileCtorSettingsInterface extends __SInterface {
  * @namespace       sugar.node.scss
  * @type            Class
  * @extends         SFile
- * @beta
+ * @status              beta
  *
  * This represent an scss file with some additional properties like "dependencies", etc...
  *

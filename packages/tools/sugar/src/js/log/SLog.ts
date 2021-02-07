@@ -10,7 +10,7 @@ import __isPlainObject from '../is/plainObject';
  * @name                    SLog
  * @namespace           sugar.js.log
  * @type                    Class
- * @beta
+ * @status              beta
  *
  * This class allows you to log your messages, errors, etc... easily through some adapters that cover some targets like "console" of course,
  * "mail", "slack", etc...

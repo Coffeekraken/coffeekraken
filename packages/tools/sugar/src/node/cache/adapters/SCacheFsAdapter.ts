@@ -13,7 +13,7 @@ import __SCacheAdapter from './SCacheAdapter';
  * @name                                SCacheFsAdapter
  * @namespace           sugar.node.fs.cacheAdapters
  * @type                                Class
- * @beta
+ * @status              beta
  *
  * A filesystem SCache adapter that allows you to store your cache items on the user system
  *

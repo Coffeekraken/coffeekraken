@@ -8,7 +8,7 @@ const packageRoot_1 = __importDefault(require("../path/packageRoot"));
  * @name          rootPath
  * @namespace     sugar.node.package
  * @type          Function
- * @beta
+ * @status              beta
  *
  * This function return the absolute path of your current working package
  *

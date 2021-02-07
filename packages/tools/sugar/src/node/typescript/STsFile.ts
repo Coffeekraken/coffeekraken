@@ -24,7 +24,7 @@ import __STsCompilerParamsInterface from './compile/interface/STsCompilerParamsI
  * @namespace       sugar.node.typescript
  * @type            Class
  * @extends         SFile
- * @beta
+ * @status              beta
  *
  * This represent a typescript file
  *

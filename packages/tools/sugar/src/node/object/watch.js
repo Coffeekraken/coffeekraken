@@ -9,7 +9,7 @@ const SWatch_1 = __importDefault(require("./SWatch"));
  * @name                      watch
  * @namespace           sugar.js.object
  * @type                      Function
- * @wip
+ * @status              wip
  *
  * This method is a simple wrapper around the SWatch class that allows you to watch some action on object and arrays
  *

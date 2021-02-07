@@ -8,7 +8,7 @@ import _folderPath from '../fs/folderPath';
  * @namespace       sugar.node.monorepo
  * @type            Function
  * @async
- * @beta
+ * @status              beta
  *
  * This function simply let you search for packages (that are not dependencies) inside
  * the passed folder and returns a object with relative paths as keys and package.json

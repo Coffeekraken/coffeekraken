@@ -5,7 +5,7 @@
  * @name                includeBlockSplitter
  * @namespace           sugar.js.code.splitters.scss
  * @type                Object
- * @wip
+ * @status              wip
  *
  * This represent the SCSS "@include... { ... }" block splitter.
  * It will match all the include blocks like "@include something('hello') { ... }", etc...

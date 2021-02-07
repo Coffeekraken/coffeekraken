@@ -9,7 +9,7 @@ const uniqid_1 = __importDefault(require("../string/uniqid"));
  * @name                  proxy
  * @namespace           sugar.js.array
  * @type                  Function
- * @wip
+ * @status              wip
  *
  * This function override the passed array prototype to intercept changes made through
  *

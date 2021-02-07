@@ -11,7 +11,7 @@ import __onProcessExit from '../process/onProcessExit';
  * @type                Class
  * @extends             SPromise
  * @implments           SDeamonInterface
- * @wip
+ * @status              wip
  *
  * This class is the base one for all the "Deamons" classes like SFsDeamon, etc...
  *

@@ -8,7 +8,7 @@ import __SPromise from '../../../promise/SPromise';
  * @name                js
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
- * @wip
+ * @status              wip
  *
  * This function is responsible of responding to express requests made on the home page
  *

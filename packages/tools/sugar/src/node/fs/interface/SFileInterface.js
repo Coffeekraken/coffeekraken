@@ -11,7 +11,7 @@ const SInterface_1 = __importDefault(require("../../class/SInterface"));
  * @namespace           sugar.node.fs.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe the minimum requirement
  * needed for a "file" descriptor element

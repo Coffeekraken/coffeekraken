@@ -6,7 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const plainObject_1 = __importDefault(require("../../is/plainObject"));
 /**
- * @wip
+ * @status              wip
  * @todo      interface
  * @todo      doc
  * @todo      tests

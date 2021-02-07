@@ -10,7 +10,7 @@ const standardizeJson_1 = __importDefault(require("../../../npm/standardizeJson"
  * @name            packageJsonMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
- * @beta
+ * @status              beta
  *
  * This function describe the middleware that will fetch the ```package.json``` file at the root of
  * your server directory and add it to the template data sended to the rendered view

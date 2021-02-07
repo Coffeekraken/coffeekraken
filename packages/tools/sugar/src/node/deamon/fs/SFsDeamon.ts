@@ -9,7 +9,7 @@ import __SFsDeamonProcess from './SFsDeamonProcess';
  * @namespace       sugar.node.deamon.fs
  * @type            Class
  * @extends         SDeamon
- * @wip
+ * @status              wip
  *
  * This class is a wrapper of the SFsDeamonCli and the SFsDeamonProcess to allows you to
  * start quickly some watch processes and kill them with ease
@@ -115,4 +115,4 @@ export = class SFsDeamon extends __SDeamon {
     // return the current promise
     return super.watch(watchProcess);
   }
-}
+};

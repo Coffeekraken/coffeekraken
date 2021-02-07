@@ -13,7 +13,7 @@ import __SFsDeamonInterface from './interface/SFsDeamonInterface';
  * @namespace           sugar.node.deamon.fs
  * @type                Class
  * @extends             SProcess
- * @wip
+ * @status              wip
  *
  * This class allows you to simply launch some watch processes in order to be notified when some files are
  * updated, deleted or created on the filesystem.

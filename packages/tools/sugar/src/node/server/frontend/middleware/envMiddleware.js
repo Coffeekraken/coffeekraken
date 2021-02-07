@@ -8,7 +8,7 @@ const env_1 = __importDefault(require("../../../core/env"));
  * @name            envMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
- * @beta
+ * @status              beta
  *
  * This function describe the middleware that will add the "env" property to the ```res.templateData``` object
  *

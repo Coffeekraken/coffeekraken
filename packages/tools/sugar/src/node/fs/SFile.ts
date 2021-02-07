@@ -23,7 +23,7 @@ import __cacheDir from '../path/cacheDir';
  * @name          SFileReadSettingsInterface
  * @type          Class
  * @extends       SInterface
- * @beta
+ * @status              beta
  *
  * Watch settings interface
  *
@@ -65,7 +65,7 @@ export class SFileReadSettingsInterface extends __SInterface {
  * @name          SFileWriteSettingsInterface
  * @type          Class
  * @extends       SInterface
- * @beta
+ * @status              beta
  *
  * Watch settings interface
  *
@@ -116,7 +116,7 @@ export class SFileWriteSettingsInterface extends __SInterface {
  * @name          SFileWatchSettingsInterface
  * @type          Class
  * @extends       SInterface
- * @beta
+ * @status              beta
  *
  * Watch settings interface
  *
@@ -137,7 +137,7 @@ export class SFileWatchSettingsInterface extends __SInterface {
  * @name          SFileSettingsInterface
  * @type          Class
  * @extends       SInterface
- * @beta
+ * @status              beta
  *
  * Settings infertage
  *
@@ -199,7 +199,7 @@ export class SFileCtorSettingsInterface extends __SInterface {
  * @type            Class
  * @implements      SFileInterface
  * @extends         SPromise
- * @beta
+ * @status              beta
  *
  * This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,
  * and get access to all the nice meta data like:

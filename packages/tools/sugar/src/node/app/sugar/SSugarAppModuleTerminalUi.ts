@@ -11,7 +11,7 @@ import __parseHtml from '../../console/parseHtml';
  * @namespace       sugar.node.app.sugar
  * @type            Class
  * @extends         SBlessedComponent
- * @wip
+ * @status              wip
  *
  * This class represent the main one to create some UI that fit in the SSugarAppTerminalUi
  * based terminal interface

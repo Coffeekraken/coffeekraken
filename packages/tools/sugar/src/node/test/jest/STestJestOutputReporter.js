@@ -6,7 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const filename_1 = __importDefault(require("../../fs/filename"));
 const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
 /**
- * @wip
+ * @status              wip
  * @todo      interface
  * @todo      doc
  * @todo      tests

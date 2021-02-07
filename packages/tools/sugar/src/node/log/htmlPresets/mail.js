@@ -9,7 +9,7 @@ const replaceTags_1 = __importDefault(require("../../html/replaceTags"));
  * @name                              mail
  * @namespace           sugar.js.log.htmlPresets
  * @type                              Function
- * @wip
+ * @status              wip
  *
  * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for mail formating
  *

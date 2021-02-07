@@ -11,7 +11,7 @@ const sugar_1 = __importDefault(require("../config/sugar"));
  * @name          namespace
  * @namespace     sugar.node.package
  * @type          Function
- * @wip
+ * @status              wip
  *
  * This function take a string as parameter like a path, or a doted string like "something.cool" and return you
  * a proper namespace build using the package name, your passed string sanitized, etc...

@@ -4,7 +4,7 @@
  * @name              getRegisteredProcesses
  * @namespace           sugar.node.process
  * @type              Function
- * @wip
+ * @status              wip
  *
  * This function gives you back the processes stack registered using the "registerProcess" function.
  *

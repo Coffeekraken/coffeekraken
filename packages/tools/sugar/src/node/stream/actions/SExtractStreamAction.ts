@@ -18,7 +18,7 @@ class SExtractStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
- * @wip
+ * @status              wip
  *
  * This actions allows you to extract some data from the specified streamObj property using custom comments syntax like "/* extract:propName *\/ ... /* extract *\/".
  * This "propName" specify in which streamObj property you want to save the extracted content.

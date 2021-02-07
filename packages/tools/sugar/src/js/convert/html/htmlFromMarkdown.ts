@@ -9,7 +9,7 @@ import __marked from 'marked';
  * @name            htmlFromMarkdown
  * @namespace       sugar.js.convert
  * @type            Function
- * @wip
+ * @status              wip
  *
  * Take a markdown string as input and convert it to HTML.
  *

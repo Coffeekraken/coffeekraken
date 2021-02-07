@@ -52,7 +52,7 @@ export interface ISSvelteCompiler extends ISCompiler {}
  * @namespace           sugar.node.svelte
  * @type                Class
  * @extends             SCompiler
- * @wip
+ * @status              wip
  *
  * This class wrap the "svelte" compiler with some additional features which are:
  *

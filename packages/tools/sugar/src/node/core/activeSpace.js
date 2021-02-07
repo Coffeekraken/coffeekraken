@@ -11,7 +11,7 @@ const is_glob_1 = __importDefault(require("is-glob"));
  * @name                    activeSpace
  * @namespace           sugar.js.core
  * @type                    Object
- * @wip
+ * @status              wip
  *
  * This object expose some functions that are usefull to manage the "active" space of your application.
  * An active space is represented by a string formated like so "something.cool.hello". This mean that your app is

@@ -18,7 +18,7 @@ const isPortFree_1 = __importDefault(require("./isPortFree"));
  * @namespace       sugar.node.http
  * @type            Function
  * @async
- * @beta
+ * @status              beta
  *
  * This function simply returns you a free port.
  * You can pass a port to check as parameter and if it is free, you will get it back as result

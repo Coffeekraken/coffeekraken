@@ -24,7 +24,7 @@ import __authorPartial from './html/partials/author';
  * @name            SDocblockHtmlOutput
  * @namespace       sugar.js.docblock.outputs
  * @type            Class
- * @wip
+ * @status              wip
  *
  * This class represent an SDocblock output like "html", "html", etc...
  * Supported docblock tags:

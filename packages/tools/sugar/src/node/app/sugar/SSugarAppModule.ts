@@ -25,7 +25,7 @@ import { ISSugarAppModuleDescriptor } from './SSugarAppProcess';
  * @namespace           sugar.node.ui.sugar
  * @type            Class
  * @extends         SEventEmitter
- * @wip
+ * @status              wip
  *
  * This class represent the process that expose every registered "modules"
  * through through a socket connection and handle the talk between

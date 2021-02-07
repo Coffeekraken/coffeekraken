@@ -12,7 +12,7 @@ import __activeSpace from '../../core/activeSpace';
  * @name                  SBlessedInput
  * @namespace           sugar.node.blessed.input
  * @type                  Class
- * @wip
+ * @status              wip
  *
  * This class represent a simple input
  *

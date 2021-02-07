@@ -14,7 +14,7 @@ const parseHtml_1 = __importDefault(require("../../console/parseHtml"));
  * @namespace       sugar.node.app.sugar
  * @type            Class
  * @extends         SBlessedComponent
- * @wip
+ * @status              wip
  *
  * This class represent the main one to create some UI that fit in the SSugarAppTerminalUi
  * based terminal interface

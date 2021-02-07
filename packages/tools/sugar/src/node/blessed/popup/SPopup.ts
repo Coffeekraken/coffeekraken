@@ -13,7 +13,7 @@ import __SPromise from '../../promise/SPromise';
  * @name                  SBlessedPopup
  * @namespace           sugar.node.blessed.popup
  * @type                  Class
- * @wip
+ * @status              wip
  *
  * This class is the base one for all the sugar blessed components like input, panel, etc...
  *

@@ -36,7 +36,7 @@ const _validationsObj = {
  * @name          validateValue
  * @namespace     sugar.js.validation.value
  * @type          Function
- * @wip
+ * @status              wip
  *
  * This function take a value and check if it correspond to the passed definition object.
  * If the value pass the test, the function will return true, otherwise it will return

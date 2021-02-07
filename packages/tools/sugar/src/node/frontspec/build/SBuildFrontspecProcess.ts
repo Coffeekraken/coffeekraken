@@ -10,7 +10,7 @@ import __SBuildFrontspecInterface from './interface/SBuildFrontspecInterface';
  * @namespace           sugar.node.build.frontspec
  * @type            Class
  * @extends         SProcess
- * @wip
+ * @status              wip
  *
  * This class represent the process that build the frontspec.json file
  *

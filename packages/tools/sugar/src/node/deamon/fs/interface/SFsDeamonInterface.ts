@@ -8,7 +8,7 @@ import __SDeamonInterface from '../../interface/SDeamonInterface';
  * @namespace           sugar.node.deamon.fs.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe the minimum requirement
  * needed for an element that is capable of "watching" some events/actions, and respond

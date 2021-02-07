@@ -10,7 +10,7 @@ import __STestJestProcess from './STestJestProcess';
  * @namespace           sugar.node.test.jest
  * @type            Class
  * @extends         SCli
- * @wip
+ * @status              wip
  *
  * This class represent the tests jest cli
  *

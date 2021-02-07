@@ -36,7 +36,7 @@ const SPromise_1 = __importDefault(require("../../promise/SPromise"));
  * @name          json
  * @namespace     sugar.node.template.dataHandlers
  * @type          Function
- * @beta
+ * @status              beta
  *
  * This function simply take the .data.json file path and return
  * the resulting object

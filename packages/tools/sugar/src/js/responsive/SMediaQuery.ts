@@ -7,7 +7,7 @@ import __SPromise from '../promise/SPromise';
  * @namespace           sugar.js.responsive
  * @type                Class
  * @extends             SPromise
- * @wip
+ * @status              wip
  *
  * This class expose some nice and easy methods to get the active media query defined in the config.media.queries configuration
  * stack, as well as register to some events list "match" or "unmatch".

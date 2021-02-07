@@ -28,7 +28,7 @@ import __SMediaQuery from '../responsive/SMediaQuery';
  * @namespace           sugar.js.webcomponent
  * @type              Class
  * @extends           HTMLElement
- * @wip
+ * @status              wip
  *
  * // TODO: example
  *

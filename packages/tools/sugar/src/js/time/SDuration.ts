@@ -8,7 +8,7 @@ import __convert from './convert';
  * @name                SDuration
  * @namespace           sugar.js.time
  * @type                Class
- * @beta
+ * @status              beta
  *
  * This class represent a duration tracking process. Simply instanciate it,
  * then call the ```instance.get()``` method and you will get back

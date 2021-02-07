@@ -5,7 +5,7 @@
  * @name          typeDefinitionArrayObjectToString
  * @namespace     sugar.js.value
  * @type          Function
- * @beta
+ * @status              beta
  *
  * This function take as parameter a type definition object like this one:
  * {

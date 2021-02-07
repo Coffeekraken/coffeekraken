@@ -9,7 +9,7 @@ import __extractNoneGlob from './extractNoneGlob';
  * @name                SGlob
  * @namespace           sugar.node.glob
  * @type                Class
- * @beta
+ * @status              beta
  *
  * This class represent a glob pattern and can be used to resolve some globs and get back
  * an array of SFile instances or to extract some part of the pattern, etc...
@@ -181,4 +181,4 @@ export = class SGlob {
       SGlob.extractNoneGlob(glob);
     });
   }
-}
+};

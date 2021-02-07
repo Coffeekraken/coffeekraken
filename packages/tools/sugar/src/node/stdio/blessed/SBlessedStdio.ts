@@ -36,7 +36,7 @@ import {
  * @namespace           sugar.node.blessed.Stdio
  * @type                  Class
  * @extends             SStdio
- * @wip
+ * @status              wip
  *
  * This class is a simple SPanel extended one that accesp an SStdio instance
  * to log the data's from and display an simple UI depending on the SStdio configured keys

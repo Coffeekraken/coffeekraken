@@ -5,7 +5,7 @@
  * @name                                splitEvery
  * @namespace           sugar.js.array
  * @type                                Function
- * @beta
+ * @status              beta
  *
  * Split an array every N items
  *

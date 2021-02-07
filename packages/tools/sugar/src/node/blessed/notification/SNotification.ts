@@ -11,7 +11,7 @@ import __SBlessedComponent from '../SBlessedComponent';
  * @name                    SBlessedNotification
  * @namespace           sugar.node.blessed.notification
  * @type                    Class
- * @wip
+ * @status              wip
  *
  * This class represent a notification that will be in a corner of the terminal
  * with some features like:

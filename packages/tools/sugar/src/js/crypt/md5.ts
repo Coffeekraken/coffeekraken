@@ -11,7 +11,7 @@ const __encryptedMessages = {};
  * @name            md5
  * @namespace           sugar.js.crypt
  * @type            Object
- * @wip
+ * @status              wip
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the md5 algorithm
  *

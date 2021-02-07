@@ -15,7 +15,7 @@ interface ITypeofSettings {
  * @name          typeof
  * @namespace          sugar.js.value
  * @type          Function
- * @beta
+ * @status              beta
  *
  * This function return the correct type of the passed value.
  * It support the recognition of arrays and return 'Array' as property type.

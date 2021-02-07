@@ -9,7 +9,7 @@ const countLine_1 = __importDefault(require("../string/countLine"));
  * @name                                    center
  * @namespace           sugar.node.terminal
  * @type                                    Function
- * @beta
+ * @status              beta
  *
  *
  * Allow to center one or more lines in the terminal depending on the process.env.STDOUT_PADDING environment variable

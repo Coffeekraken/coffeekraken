@@ -28,7 +28,7 @@ class SFsCacheStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
- * @wip
+ * @status              wip
  *
  * This action allows you to make profit of the filesystem cache.
  * You can specify which streamObj property will be the cache id as well as

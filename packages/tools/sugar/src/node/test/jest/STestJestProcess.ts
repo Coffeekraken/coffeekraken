@@ -14,7 +14,7 @@ import __childProces from 'child_process';
  * @namespace           sugar.node.test.jest
  * @type            Class
  * @extends         SProcess
- * @wip
+ * @status              wip
  *
  * This class represent the process that launch the tests on javascript files
  *

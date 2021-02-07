@@ -8,7 +8,7 @@ const parseHtml_1 = __importDefault(require("./parseHtml"));
  * @name                                parseMarkdown
  * @namespace           sugar.node.terminal
  * @type                                Function
- * @wip
+ * @status              wip
  *
  * Parse the simple markdown tags to format the terminal message
  *

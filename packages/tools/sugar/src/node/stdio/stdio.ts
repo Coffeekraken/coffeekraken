@@ -7,7 +7,7 @@ import __isPath from '../is/path';
  * @name            stdio
  * @namespace           sugar.node.stdio
  * @type            Function
- * @wip
+ * @status              wip
  *
  * This function simply take a SProcess compatible process instance and display the Stdio
  * accordingly to the context where this process is running. If the Stdio is in a childProcess,

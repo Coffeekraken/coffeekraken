@@ -25,7 +25,7 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * @name          STemplate
  * @namespace     sugar.node.template
  * @type          Class
- * @wip
+ * @status              wip
  *
  * This class represent a template that can be rendered using all the supported render engines listed in the features bellow.
  *

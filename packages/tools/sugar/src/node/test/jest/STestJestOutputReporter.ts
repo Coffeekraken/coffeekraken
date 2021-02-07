@@ -4,7 +4,7 @@ import __getFilename from '../../fs/filename';
 import __packageRoot from '../../path/packageRoot';
 
 /**
- * @wip
+ * @status              wip
  * @todo      interface
  * @todo      doc
  * @todo      tests

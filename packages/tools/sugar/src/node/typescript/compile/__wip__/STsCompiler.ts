@@ -35,7 +35,7 @@ import __SCliProcess from '../../process/SCliProcess';
  * @namespace           sugar.node.typescript
  * @type                Class
  * @extends             SCompiler
- * @wip
+ * @status              wip
  *
  * This class wrap the "ts" compiler with some additional features which are:
  *

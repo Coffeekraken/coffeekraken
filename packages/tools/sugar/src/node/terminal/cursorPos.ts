@@ -8,7 +8,7 @@ import { terminal as __terminalKit } from 'terminal-kit';
  * @name                                      cursorPos
  * @namespace           sugar.node.terminal
  * @type                                      Function
- * @wip
+ * @status              wip
  *
  * Return the terminal cursor position in {x,y} format.
  *

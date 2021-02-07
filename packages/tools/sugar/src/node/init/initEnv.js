@@ -8,7 +8,7 @@ const packageRoot_1 = __importDefault(require("../path/packageRoot"));
  * @name                initEnv
  * @namespace           sugar.node.init
  * @type                Function
- * @wip
+ * @status              wip
  *
  * This function "simply" init some environment variables that can be useful.
  * Here's the list of added environment variables available:

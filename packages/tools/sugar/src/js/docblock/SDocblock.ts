@@ -1,20 +1,22 @@
-// @ts-nocheck
 // @shared
 
+import __SClass from '../class/SClass';
 import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';
-import __SDocblockBlock from './SDocblockBlock';
+import __SDocblockBlock, { ISDocblockBlock } from './SDocblockBlock';
 import __handlebars from 'handlebars';
 // import __markdown from './markdown/index';
 import __isNode from '../is/node';
 import __isPath from '../is/path';
 import __fs from 'fs';
+import SDocblockBlock from './SDocblockBlock';
 
 /**
  * @name                  Dockblock
  * @namespace           sugar.js.docblock
  * @type                  Class
- * @wip
+ * @extends             SClass
+ * @status              wip
  *
  * This is the main class that expose the methods like "parse", etc...
  * You have to instanciate it by passing a settings object. Here's the available options:
@@ -36,18 +38,30 @@ import __fs from 'fs';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-export = class SDocblock {
-  /**
-   * @name              _settings
-   * @type              Object
-   * @private
-   *
-   * Store this instance settings
-   *
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-   */
-  _settings = {};
 
+export interface ISDocblockSortFnSetting {
+  (a: any, b: any);
+}
+
+export interface ISDocblockOptionalSettings {
+  filepath?: string;
+  sortFunction?: ISDocblockSortFnSetting;
+}
+export interface ISDocblockSettings {
+  filepath?: string;
+  sortFunction?: ISDocblockSortFnSetting;
+}
+export interface ISDocblockCtorSettings {
+  docblock?: ISDocblockOptionalSettings;
+}
+
+export interface ISDocblock {
+  new (source: string, settings?: ISDocblockCtorSettings);
+  _source: string;
+}
+
+// @ts-ignore
+class SDocblock extends __SClass implements ISDocblock {
   /**
    * @name            _source
    * @type            String|Array<Object>
@@ -57,7 +71,7 @@ export = class SDocblock {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
-  _source = null;
+  _source: string;
 
   /**
    * @name            _blocks
@@ -68,18 +82,21 @@ export = class SDocblock {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
-  _blocks = null;
+  _blocks: any[] = [];
 
   /**
-   * @name          _to
-   * @type          String
-   * @private
+   * @name          docblockSettings
+   * @type          ISDocblockSettings
+   * @get
    *
-   * Store the format in which the docblocks have to be converted
+   * Access the docblock settings
    *
+   * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
-  _to = null;
+  get docblockSettings(): ISDocblockSettings {
+    return (<any>this._settings).docblock;
+  }
 
   /**
    * @name            constructor
@@ -89,43 +106,47 @@ export = class SDocblock {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
-  constructor(source, settings = {}) {
-    this._settings = __deepMerge(
-      {
-        sortFunction: (a, b) => {
-          let res = 0;
+  constructor(source: string, settings?: ISDocblockCtorSettings) {
+    super(
+      __deepMerge(
+        {
+          docblock: {
+            sortFunction: (a, b) => {
+              let res = 0;
 
-          if (!b || !a) return res;
+              if (!b || !a) return res;
 
-          const aObj = a.toObject(),
-            bObj = b.toObject();
+              const aObj = a.toObject(),
+                bObj = b.toObject();
 
-          // if (.object.namespace && !aObj.namespace) res -= 1;
-          if (bObj.namespace) res += 1;
-          if (bObj.type && bObj.type.toLowerCase() === 'class') res += 1;
-          if (bObj.constructor) res += 1;
-          if (bObj.private) res += 1;
-          if (bObj.type && bObj.type.toLowerCase() === 'function') res += 1;
-          if (aObj.name && bObj.name && bObj.name.length > aObj.name.length)
-            res += 1;
-          return res;
+              // if (.object.namespace && !aObj.namespace) res -= 1;
+              if (bObj.namespace) res += 1;
+              if (bObj.type && bObj.type.toLowerCase() === 'class') res += 1;
+              if (bObj.constructor) res += 1;
+              if (bObj.private) res += 1;
+              if (bObj.type && bObj.type.toLowerCase() === 'function') res += 1;
+              if (aObj.name && bObj.name && bObj.name.length > aObj.name.length)
+                res += 1;
+              return res;
+            },
+            filepath: null,
+            to: {
+              // markdown: __markdown
+            }
+          }
         },
-        filepath: null,
-        to: {
-          // markdown: __markdown
-        }
-      },
-      settings
+        settings || {}
+      )
     );
 
     // check if the source is path
     if (__isPath(source)) {
       if (!__isNode())
-        throw new __SError(
+        throw new Error(
           `Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`
         );
       if (!__fs.existsSync(source))
-        throw new __SError(
+        throw new Error(
           `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`
         );
       this._source = __fs.readFileSync(source, 'utf8');
@@ -134,7 +155,7 @@ export = class SDocblock {
     }
 
     // parsing the source
-    this.parse();
+    this._blocks = this.parse();
   }
 
   /**
@@ -150,8 +171,8 @@ export = class SDocblock {
    * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
-  sort(sortFunction = null) {
-    if (!sortFunction) sortFunction = this._settings.sortFunction;
+  sort(sortFunction?: ISDocblockSortFnSetting) {
+    if (!sortFunction) sortFunction = this.docblockSettings.sortFunction;
     this._blocks = this._blocks.sort(sortFunction);
     return this;
   }
@@ -177,36 +198,51 @@ export = class SDocblock {
    * and get back the object version of it
    *
    * @param       {String}        [string=this._source]        The string to parse
-   * @return      {SDocblock}                     The class instance itself to maintain chainability
+   * @return      {Array<SDocblockBlock>}                       An array of SDocblockBlock instances
    *
    * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  parse(string = this._source) {
+  parse(string = this._source): any[] {
     // extract each docblocks
     const reg = /(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g;
     // extracting blocks
-    let blocksArray = string.match(reg);
+    // @ts-ignore
+    let blocksArrayStr: string[] = string.match(reg);
 
-    if (!Array.isArray(blocksArray)) {
-      blocksArray = [];
-    } else if (Array.isArray(blocksArray) && blocksArray.length) {
-      blocksArray = blocksArray.map((t) => t.trim());
-      if (!blocksArray || !blocksArray.length) return [];
-      blocksArray = blocksArray.map((block) => {
-        return new __SDocblockBlock(block || ' ', {
-          filepath: this._settings.filepath || ''
+    let blocks: __SDocblockBlock[] = [];
+
+    if (!Array.isArray(blocksArrayStr)) {
+      blocksArrayStr = [];
+    } else if (Array.isArray(blocksArrayStr) && blocksArrayStr.length) {
+      blocksArrayStr = blocksArrayStr.map((t) => t.trim());
+      if (!blocksArrayStr || !blocksArrayStr.length) return [];
+
+      blocks = blocksArrayStr
+        .filter((blockStr) => {
+          const lines = blockStr.split('\n');
+          for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            if (line.trim().slice(0, 2) === '//') return false;
+          }
+          return true;
+        })
+        .map((block) => {
+          return new __SDocblockBlock(block || ' ', {
+            filepath: this.docblockSettings.filepath || ''
+          });
         });
-      });
     }
-    // save the blocks
-    this._blocks = blocksArray;
 
-    // sort the blocks
+    if (blocks && blocks.length) {
+      this._blocks = blocks;
+    }
+
+    // sort
     this.sort();
 
     // return the class instance itself
-    return this;
+    return this._blocks;
   }
 
   /**
@@ -223,4 +259,6 @@ export = class SDocblock {
       return block.toObject();
     });
   }
-};
+}
+
+export default SDocblock;

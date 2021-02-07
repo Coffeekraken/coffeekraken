@@ -14,7 +14,7 @@ const SConfigAdapter_1 = __importDefault(require("./adapters/SConfigAdapter"));
  * @name                                            config
  * @namespace           sugar.js.config
  * @type                                            Class
- * @beta
+ * @status              beta
  *
  * This class allows you to quickly access/update some configuration depending on the data adapters specified.
  * The base available data adapters are:

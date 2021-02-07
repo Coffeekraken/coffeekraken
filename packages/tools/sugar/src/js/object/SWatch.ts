@@ -16,7 +16,7 @@ import __clone from '../object/clone';
  * @name 		            SWatch
  * @namespace           sugar.js.object
  * @type                Class
- * @wip
+ * @status              wip
  *
  * This class allows you to easily monitor some object properties and get the new and old value of it
  *

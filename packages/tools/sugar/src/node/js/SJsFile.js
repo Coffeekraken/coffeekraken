@@ -49,7 +49,7 @@ const SJsCompilerParamsInterface_1 = __importDefault(require("./compile/interfac
  * @name          SJsFileSettingsInterface
  * @type            Class
  * @extends         SInterface
- * @beta
+ * @status              beta
  *
  * The interface describing the jsFile settings
  *
@@ -63,7 +63,7 @@ exports.SJsFileSettingsInterface = SJsFileSettingsInterface;
  * @name          SJsFileCtorSettingsInterface
  * @type            Class
  * @extends         SInterface
- * @beta
+ * @status              beta
  *
  * The interface describing the jsFile settings
  *
@@ -78,7 +78,7 @@ exports.SJsFileCtorSettingsInterface = SJsFileCtorSettingsInterface;
  * @namespace       sugar.node.js
  * @type            Class
  * @extends         SFile
- * @beta
+ * @status              beta
  *
  * This represent a javascript file
  *

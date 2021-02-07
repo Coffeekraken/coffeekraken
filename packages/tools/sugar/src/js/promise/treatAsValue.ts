@@ -4,7 +4,7 @@
  * @name           treatAsValue
  * @namespace       sugar.js.promise
  * @type            Function
- * @beta
+ * @status              beta
  *
  * This function allows you to wrap a promise in a ```resolve``` call to prevent
  * this promise to be treated as a "chaining" promise but to be treated as

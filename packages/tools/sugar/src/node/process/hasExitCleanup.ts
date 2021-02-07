@@ -4,7 +4,7 @@
  * @name                hasExitCleanup
  * @namespace           sugar.node.process
  * @type                Function
- * @wip
+ * @status              wip
  *
  * This function return simply if the exit cleanup process using the "node.process.hasExitCleanup" function has been inited
  *

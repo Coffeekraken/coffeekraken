@@ -7,7 +7,7 @@ import __upperFirst from '../../string/upperFirst';
  * @name              return
  * @namespace           sugar.js.docblock.tags
  * @type              Function
- * @wip
+ * @status              wip
  *
  * Parse the return tag
  *

@@ -10,7 +10,7 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  * @name                completeArgsObject
  * @namespace          sugar.js.cli
  * @type                Function
- * @beta
+ * @status              beta
  *
  * This function take an arguments object and complete it with the definition object default values
  * for missing args

@@ -10,7 +10,7 @@ import __parseSchema from './parseSchema';
  * @name            SUrl
  * @namespace           sugar.js.url
  * @type            Class
- * @wip
+ * @status              wip
  *
  * Simple class that is useful to parse a URL (or the current browser URL) and gives you back
  * an instance that has all these values availables as well as functions to modify the instancied URL:

@@ -5,7 +5,7 @@
  * @name              author
  * @namespace           sugar.js.docblock.tags
  * @type              Function
- * @wip
+ * @status              wip
  *
  * Parse the author tag
  *

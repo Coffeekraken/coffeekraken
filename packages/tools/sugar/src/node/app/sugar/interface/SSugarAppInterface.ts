@@ -13,7 +13,7 @@ import __set from '../../../object/set';
  * @namespace           sugar.node.ui.sugar.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe de arguments supported
  * when using the SSugarCli class

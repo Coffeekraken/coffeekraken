@@ -6,7 +6,7 @@ import __sugarConfig from '../../../config/sugar';
  * @namespace           sugar.node.js.compile.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe parameters of the SJsCompiler
  *

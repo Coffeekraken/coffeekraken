@@ -10,7 +10,7 @@ const __mkdirp = require('mkdirp');
  * @namespace           sugar.node.github
  * @type            Function
  * @async
- * @beta
+ * @status              beta
  *
  * Provide the ability to download all the files in a particular folder of a specific repository
  *

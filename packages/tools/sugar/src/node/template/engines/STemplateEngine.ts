@@ -8,7 +8,7 @@ import __sugarConfig from '../../config/sugar';
  * @name          STemplateEngine
  * @namespace     sugar.node.template.engines
  * @type          Class
- * @wip
+ * @status              wip
  *
  * This class represent the base for a compatible ```STemplate``` engine
  * A template engine class MUST have some basic methods like:

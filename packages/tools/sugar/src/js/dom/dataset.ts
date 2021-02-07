@@ -8,7 +8,7 @@ import __toString from '../string/toString';
  * @name      dataset
  * @namespace           sugar.js.dom
  * @type      Function
- * @wip
+ * @status              wip
  *
  * Get or set a value on the passed element with the passed name
  *

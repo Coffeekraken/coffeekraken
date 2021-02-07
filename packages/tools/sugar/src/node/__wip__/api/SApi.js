@@ -25,7 +25,7 @@ const plainObject_1 = __importDefault(require("../is/plainObject"));
  * @name                            SApi
  * @namespace           sugar.node.api
  * @type                            Class
- * @wip
+ * @status              wip
  *
  * Base class that extends all the S...Api classes. This class gives some features like:
  * - Caching requests

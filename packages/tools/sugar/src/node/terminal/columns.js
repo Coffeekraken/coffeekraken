@@ -10,7 +10,7 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  * @name                                          columns
  * @namespace           sugar.node.terminal
  * @type                                          Function
- * @beta
+ * @status              beta
  *
  * Display your content using columns. The number of columns is defined by the number of items in the content array
  *

@@ -10,7 +10,7 @@ const sugar_1 = __importDefault(require("../../../config/sugar"));
  * @namespace           sugar.node.svelte.compile.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe parameters of the SSvelteCompiler
  *

@@ -22,7 +22,7 @@ class SFsOutputStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
- * @beta
+ * @status              beta
  *
  * This class is a stream action that allows you to save file(s) to the filesystem
  * @param       {Object}        streamObj          The streamObj object with the properties described bellow:

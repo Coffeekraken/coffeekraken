@@ -5,7 +5,7 @@ import __SInterface from '../../interface/SInterface';
  * @namespace       sugar.node.typescript.interface
  * @type            Class
  * @extends         SInterface
- * @beta
+ * @status              beta
  *
  * The interface describing the tsFile instance
  *
@@ -26,7 +26,7 @@ export default class STsFileInterface extends __SInterface {
  * @name          STsFileSettingsInterface
  * @type            Class
  * @extends         SInterface
- * @beta
+ * @status              beta
  *
  * The interface describing the tsFile settings
  *

@@ -5,7 +5,7 @@
  * @namespace       sugar.node.http
  * @type            Function
  * @async
- * @beta
+ * @status              beta
  *
  * This function simply check if the passed port is free or not
  *

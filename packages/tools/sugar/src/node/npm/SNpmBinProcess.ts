@@ -9,7 +9,7 @@ import _deepMerge from '../object/deepMerge';
  * @namespace         sugar.node.npm
  * @type              Class
  * @extends           SProcess
- * @wip
+ * @status              wip
  *
  * This class represent the npm bin capabilities like install a bin globally or locally, uninstall it, etc...
  *

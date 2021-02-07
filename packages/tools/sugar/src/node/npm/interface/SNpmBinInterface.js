@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a;
 /**
- * @wip
+ * @status              wip
  * @todo      interface
  * @todo      doc
  * @todo      tests

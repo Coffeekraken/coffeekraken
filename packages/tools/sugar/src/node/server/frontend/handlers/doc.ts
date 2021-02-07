@@ -10,7 +10,7 @@ import __SDocMap from '../../../docMap/SDocMap';
  * @name                doc
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
- * @wip
+ * @status              wip
  *
  * This function is responsible of responding to express requests made on the doc pages
  *

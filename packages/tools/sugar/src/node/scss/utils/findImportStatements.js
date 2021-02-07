@@ -8,7 +8,7 @@ const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
  * @name            findImportStatements
  * @namespace       sugar.node.scss.utils
  * @type            Function
- * @beta
+ * @status              beta
  *
  * This function simply parse the passed string to extract all the @import and @use statements
  *

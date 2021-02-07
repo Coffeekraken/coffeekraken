@@ -23,7 +23,7 @@ import __SSvelteCompilerParamsInterface from './compile/interface/SSvelteCompile
  * @name          SSvelteFileSettingsInterface
  * @type            Class
  * @extends         SInterface
- * @beta
+ * @status              beta
  *
  * The interface describing the svelteFile settings
  *
@@ -38,7 +38,7 @@ export class SSvelteFileSettingsInterface extends __SInterface {
  * @name          SSvelteFileCtorSettingsInterface
  * @type            Class
  * @extends         SInterface
- * @beta
+ * @status              beta
  *
  * The interface describing the svelteFile settings
  *
@@ -84,7 +84,7 @@ interface ISSvelteFile {
  * @namespace       sugar.node.svelte
  * @type            Class
  * @extends         SFile
- * @beta
+ * @status              beta
  *
  * This represent a svelte file
  *

@@ -18,7 +18,7 @@ import __packageRoot from '../../path/packageRoot';
  * @name                express
  * @namespace           sugar.node.server.frontend
  * @type                Function
- * @wip
+ * @status              wip
  *
  * This function take care of starting a frontend express based server
  *

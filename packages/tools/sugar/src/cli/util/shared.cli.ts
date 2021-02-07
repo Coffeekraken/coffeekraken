@@ -9,7 +9,7 @@ import __getFilename from '../../node/fs/filename';
 import __childProcess from 'child_process';
 
 /**
- * @wip
+ * @status              wip
  * @todo    Enhance the process and maybe rename it...
  */
 

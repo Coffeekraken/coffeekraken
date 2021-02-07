@@ -8,7 +8,7 @@ import __SProcessManagerInterface from '../../process/SProcessManager';
  * @namespace           sugar.node.blessed.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe the minimum requirement
  * needed for an element passed to the SOutput ```log``` method.

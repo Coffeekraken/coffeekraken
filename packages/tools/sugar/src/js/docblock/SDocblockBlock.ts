@@ -1,6 +1,6 @@
-// @ts-nocheck
 // @shared
 
+import __SClass from '../class/SClass';
 import __deepMege from '../object/deepMerge';
 import __map from '../object/map';
 import __handlebars from 'handlebars';
@@ -23,6 +23,7 @@ import __SDocblock from './SDocblock';
  * @name          SDocblockBlock
  * @namespace           sugar.js.docblock
  * @type          Class
+ * @extends     SClass
  *
  * This class represent a docblock object that contains all the "tags" values and some features like:
  * - Converting the block to markdown
@@ -43,7 +44,31 @@ import __SDocblock from './SDocblock';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-export = class SDocblockBlock {
+
+export interface ISDocblockBlockTagsMap {
+  [key: string]: Function;
+}
+
+export interface ISDocblockBlockOptionalSettings {
+  filepath?: string;
+  tags?: ISDocblockBlockTagsMap;
+}
+export interface ISDocblockBlockSettings {
+  filepath?: string;
+  tags: ISDocblockBlockTagsMap;
+}
+export interface ISDocblockBlockCtorSettings {
+  docblockBlock?: ISDocblockBlockOptionalSettings;
+}
+
+export interface ISDocblockBlock {
+  new (source: string, settings: ISDocblockBlockCtorSettings);
+  _source: string;
+  _blockObj: any;
+}
+
+// @ts-ignore
+class SDocblockBlock extends __SClass implements ISDocblockBlock {
   /**
    * @name            tagsMap
    * @type            Object
@@ -53,100 +78,7 @@ export = class SDocblockBlock {
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
    */
-  static tagsMap = {
-    author: __authorTag,
-
-    abstract: __simpleValueTag,
-    final: __simpleValueTag,
-    async: __simpleValueTag,
-    generator: __simpleValueTag,
-    global: __simpleValueTag,
-    constructor: __simpleValueTag,
-    hideconstructor: __simpleValueTag,
-    ignore: __simpleValueTag,
-    inheritdoc: __simpleValueTag,
-    inner: __simpleValueTag,
-    instance: __simpleValueTag,
-    mixin: __simpleValueTag,
-    override: __simpleValueTag,
-    access: __simpleValueTag,
-    category: __simpleValueTag,
-    copyright: __simpleValueTag,
-    deprecated: __simpleValueTag,
-    alias: __simpleValueTag,
-    augments: __simpleValueTag,
-    callback: __simpleValueTag,
-    class: __simpleValueTag,
-    classdesc: __simpleValueTag,
-    constant: __simpleValueTag,
-    constructs: __simpleValueTag,
-    copyright: __simpleValueTag,
-    default: __simpleValueTag,
-    deprecated: __simpleValueTag,
-    exports: __simpleValueTag,
-    external: __simpleValueTag,
-    host: __simpleValueTag,
-    file: __simpleValueTag,
-    function: __simpleValueTag,
-    func: __simpleValueTag,
-    method: __simpleValueTag,
-    implements: __simpleValueTag,
-    interface: __simpleValueTag,
-    kind: __simpleValueTag,
-    lends: __simpleValueTag,
-    license: __simpleValueTag,
-    memberof: __simpleValueTag,
-    'memberof!': __simpleValueTag,
-    mixes: __simpleValueTag,
-    module: __simpleValueTag,
-    name: __simpleValueTag,
-    namespace: __simpleValueTag,
-    package: __simpleValueTag,
-    private: __simpleValueTag,
-    protected: __simpleValueTag,
-    public: __simpleValueTag,
-    readonly: __simpleValueTag,
-    requires: __simpleValueTag,
-    see: __simpleValueTag,
-    since: __simpleValueTag,
-    static: __simpleValueTag,
-    summary: __simpleValueTag,
-    this: __simpleValueTag,
-    todo: __simpleValueTag,
-    tutorial: __simpleValueTag,
-    type: __simpleValueTag,
-    variation: __simpleValueTag,
-    version: __simpleValueTag,
-    enum: __simpleValueTag,
-    src: __simpleValueTag,
-
-    description: __descriptionTag,
-    desc: __descriptionTag,
-
-    // yields: __yieldsTag,
-
-    // typedef: __typedefTag,
-
-    // throws: __throwsTag,
-
-    return: __returnTag,
-
-    param: __paramTag,
-    property: __paramTag,
-    prop: __paramTag,
-
-    // listens: __listensTag,
-
-    // member: __memberTag,
-    // var: __memberTag,
-
-    // event: __eventTag,
-
-    // borrows: __borrowsTag,
-
-    snippet: __snippetTag,
-    example: __exampleTag
-  };
+  static tagsMap: ISDocblockBlockTagsMap = {};
 
   /**
    * @name          _source
@@ -157,18 +89,7 @@ export = class SDocblockBlock {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
    */
-  _source = null;
-
-  /**
-   * @name          _settings
-   * @type          Object
-   * @private
-   *
-   * Store this instance settings
-   *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
-   */
-  _settings = {};
+  _source: string;
 
   /**
    * @name        _blockObj
@@ -179,7 +100,45 @@ export = class SDocblockBlock {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
    */
-  _blockObj = {};
+  _blockObj: any;
+
+  /**
+   * @name          registerTag
+   * @type          Function
+   * @static
+   *
+   * This static method allows you to register a new tag that will
+   * be recognized by the SDocblockBlock class.
+   *
+   * @param     {String}      tagName       The tag you want to register without the @
+   * @param     {Function}    parser    A function that will be called with the string tag content. You can parse this string and return an object that represent the tag data
+   *
+   * @since         2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
+   */
+  static registerTag(tagName: string, parser: Function): void {
+    // check the params
+    if (typeof parser !== 'function')
+      throw new Error(
+        `The "<yellow>parser</yellow>" parameter of the static "<cyan>SDocblockBlock</cyan>" class method needs to be a "<green>Function</green>"`
+      );
+    // register the tag
+    SDocblockBlock.tagsMap[tagName] = parser;
+  }
+
+  /**
+   * @name        docblockBlockSettings
+   * @type        ISDocblockBlockSettings
+   * @get
+   *
+   * Access the docblockBlock settings
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get docblockBlockSettings(): ISDocblockBlockSettings {
+    return (<any>this._settings).docblockBlock;
+  }
 
   /**
    * @name          constructor
@@ -191,16 +150,19 @@ export = class SDocblockBlock {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(source, settings = {}) {
-    this._source = source.trim();
-    this._settings = __deepMege(
-      {
-        filepath: null,
-        parse: {
-          tags: SDocblockBlock.tagsMap
-        }
-      },
-      settings
+    super(
+      __deepMege(
+        {
+          docblockBlock: {
+            filepath: null,
+            tags: SDocblockBlock.tagsMap
+          }
+        },
+        settings
+      )
     );
+
+    this._source = source.trim();
     // parse the docblock string
     this._blockObj = this.parse();
   }
@@ -246,10 +208,10 @@ export = class SDocblockBlock {
    */
   parse() {
     // some variables
-    let currentTag = null;
-    let currentContent = [];
-    let currentObj = {};
-    let docblockObj = {};
+    let currentTag: string;
+    let currentContent: string[] = [];
+    let currentObj: any = {};
+    let docblockObj: any = {};
     let previousWasEmptyLine = false;
 
     function add() {
@@ -269,7 +231,8 @@ export = class SDocblockBlock {
       }
       currentObj = {};
       currentContent = [];
-      currentTag = null;
+      // @ts-ignore
+      currentTag = undefined;
     }
 
     // split the block by tags
@@ -323,20 +286,24 @@ export = class SDocblockBlock {
 
     docblockObj = __map(docblockObj, (value, prop) => {
       if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_') return value;
-      if (this._settings.parse.tags[prop] && prop !== 'src')
-        return this._settings.parse.tags[prop](value);
+      if (this.docblockBlockSettings.tags[prop] && prop !== 'src')
+        return this.docblockBlockSettings.tags[prop](value);
       return __simpleValueTag(value);
     });
 
-    if (docblockObj['src'] && __isNode() && this._settings.filepath) {
+    if (
+      docblockObj['src'] &&
+      __isNode() &&
+      this.docblockBlockSettings.filepath
+    ) {
       const absoluteFilepath = __path.resolve(
-        this._settings.filepath,
+        this.docblockBlockSettings.filepath,
         docblockObj['src']
       );
 
       const srcValue = __fs.readFileSync(absoluteFilepath, 'utf8');
       const srcDocblockInstance = new __SDocblock(srcValue);
-      const srcBlocks = srcDocblockInstance.parse();
+      const srcBlocks: any[] = srcDocblockInstance.parse();
       if (srcBlocks.length) {
         const tags = srcBlocks[0].parse();
         docblockObj = __deepMege(docblockObj, tags);
@@ -350,3 +317,86 @@ export = class SDocblockBlock {
     return docblockObj;
   }
 }
+
+SDocblockBlock.registerTag('author', __authorTag);
+SDocblockBlock.registerTag('abstract', __simpleValueTag);
+SDocblockBlock.registerTag('final', __simpleValueTag);
+SDocblockBlock.registerTag('async', __simpleValueTag);
+SDocblockBlock.registerTag('generator', __simpleValueTag);
+SDocblockBlock.registerTag('global', __simpleValueTag);
+SDocblockBlock.registerTag('constructor', __simpleValueTag);
+SDocblockBlock.registerTag('hideconstructor', __simpleValueTag);
+SDocblockBlock.registerTag('ignore', __simpleValueTag);
+SDocblockBlock.registerTag('inheritdoc', __simpleValueTag);
+SDocblockBlock.registerTag('inner', __simpleValueTag);
+SDocblockBlock.registerTag('instance', __simpleValueTag);
+SDocblockBlock.registerTag('mixin', __simpleValueTag);
+SDocblockBlock.registerTag('override', __simpleValueTag);
+SDocblockBlock.registerTag('access', __simpleValueTag);
+SDocblockBlock.registerTag('category', __simpleValueTag);
+SDocblockBlock.registerTag('copyright', __simpleValueTag);
+SDocblockBlock.registerTag('deprecated', __simpleValueTag);
+SDocblockBlock.registerTag('alias', __simpleValueTag);
+SDocblockBlock.registerTag('augments', __simpleValueTag);
+SDocblockBlock.registerTag('callback', __simpleValueTag);
+SDocblockBlock.registerTag('class', __simpleValueTag);
+SDocblockBlock.registerTag('classdesc', __simpleValueTag);
+SDocblockBlock.registerTag('constant', __simpleValueTag);
+SDocblockBlock.registerTag('constructs', __simpleValueTag);
+SDocblockBlock.registerTag('copyright', __simpleValueTag);
+SDocblockBlock.registerTag('default', __simpleValueTag);
+SDocblockBlock.registerTag('deprecated', __simpleValueTag);
+SDocblockBlock.registerTag('exports', __simpleValueTag);
+SDocblockBlock.registerTag('external', __simpleValueTag);
+SDocblockBlock.registerTag('host', __simpleValueTag);
+SDocblockBlock.registerTag('file', __simpleValueTag);
+SDocblockBlock.registerTag('function', __simpleValueTag);
+SDocblockBlock.registerTag('func', __simpleValueTag);
+SDocblockBlock.registerTag('method', __simpleValueTag);
+SDocblockBlock.registerTag('implements', __simpleValueTag);
+SDocblockBlock.registerTag('interface', __simpleValueTag);
+SDocblockBlock.registerTag('kind', __simpleValueTag);
+SDocblockBlock.registerTag('lends', __simpleValueTag);
+SDocblockBlock.registerTag('license', __simpleValueTag);
+SDocblockBlock.registerTag('memberof', __simpleValueTag);
+SDocblockBlock.registerTag('memberof', __simpleValueTag);
+SDocblockBlock.registerTag('mixes', __simpleValueTag);
+SDocblockBlock.registerTag('module', __simpleValueTag);
+SDocblockBlock.registerTag('name', __simpleValueTag);
+SDocblockBlock.registerTag('namespace', __simpleValueTag);
+SDocblockBlock.registerTag('package', __simpleValueTag);
+SDocblockBlock.registerTag('private', __simpleValueTag);
+SDocblockBlock.registerTag('protected', __simpleValueTag);
+SDocblockBlock.registerTag('public', __simpleValueTag);
+SDocblockBlock.registerTag('readonly', __simpleValueTag);
+SDocblockBlock.registerTag('requires', __simpleValueTag);
+SDocblockBlock.registerTag('see', __simpleValueTag);
+SDocblockBlock.registerTag('since', __simpleValueTag);
+SDocblockBlock.registerTag('static', __simpleValueTag);
+SDocblockBlock.registerTag('summary', __simpleValueTag);
+SDocblockBlock.registerTag('this', __simpleValueTag);
+SDocblockBlock.registerTag('todo', __simpleValueTag);
+SDocblockBlock.registerTag('tutorial', __simpleValueTag);
+SDocblockBlock.registerTag('type', __simpleValueTag);
+SDocblockBlock.registerTag('variation', __simpleValueTag);
+SDocblockBlock.registerTag('version', __simpleValueTag);
+SDocblockBlock.registerTag('enum', __simpleValueTag);
+SDocblockBlock.registerTag('src', __simpleValueTag);
+SDocblockBlock.registerTag('description', __descriptionTag);
+SDocblockBlock.registerTag('desc', __descriptionTag);
+// SDocblockBlock.registerTag('yields', __yieldsTag);
+// SDocblockBlock.registerTag('typedef', __typedefTag);
+// SDocblockBlock.registerTag('throws', __throwsTag);
+SDocblockBlock.registerTag('return', __returnTag);
+SDocblockBlock.registerTag('param', __paramTag);
+SDocblockBlock.registerTag('property', __paramTag);
+SDocblockBlock.registerTag('prop', __paramTag);
+// SDocblockBlock.registerTag('listens', __listensTag);
+// SDocblockBlock.registerTag('member', __memberTag);
+// SDocblockBlock.registerTag('var', __memberTag);
+// SDocblockBlock.registerTag('event', __eventTag);
+// SDocblockBlock.registerTag('borrows', __borrowsTag);
+SDocblockBlock.registerTag('snippet', __snippetTag);
+SDocblockBlock.registerTag('example', __exampleTag);
+
+export default SDocblockBlock;

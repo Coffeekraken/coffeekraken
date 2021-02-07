@@ -17,7 +17,7 @@ import __SIpc from '../ipc/SIpc';
  * @name                    handleError
  * @namespace               sugar.node.error
  * @type                    Function
- * @wip
+ * @status              wip
  *
  * This function take a thrown error and try to display it the best way possible.
  * Simply add the "uncaughtException" and the "unhandledRejection" listeners on the process object,

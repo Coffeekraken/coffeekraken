@@ -10,7 +10,7 @@ import __deepMerge from '../object/deepMerge';
  * @namespace           sugar.js.time
  * @type                  Class
  * @extends               SPromise
- * @beta
+ * @status              beta
  *
  * Class that let you create and handle timer with ease.
  * With this class you can set some callback function that will be

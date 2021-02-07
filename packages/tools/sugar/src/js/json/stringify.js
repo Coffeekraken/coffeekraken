@@ -10,7 +10,7 @@ const json_cyclic_1 = require("json-cyclic");
  * @name            stringify
  * @namespace       sugar.js.json
  * @type            Function
- * @beta
+ * @status              beta
  *
  * This function do the same as the ```JSON.stringify``` one but add some features.
  *

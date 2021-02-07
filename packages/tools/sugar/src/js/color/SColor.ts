@@ -18,7 +18,7 @@ import __convert from './convert';
  * @name 		SColor
  * @namespace           sugar.js.color
  * @type    Class
- * @beta
+ * @status              beta
  *
  * Class that provide complete and simple to use color manupilation capabilities like:
  * - Modifiers

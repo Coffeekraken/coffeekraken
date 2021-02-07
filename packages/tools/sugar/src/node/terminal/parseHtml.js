@@ -14,7 +14,7 @@ chalk_1.default.level = 3;
  * @name                                parseHtml
  * @namespace           sugar.node.terminal
  * @type                                Function
- * @wip
+ * @status              wip
  *
  * Parse the simple html tags to format the terminal message
  *

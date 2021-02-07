@@ -6,7 +6,7 @@ import __SValidation from '../../SValidation';
  * @name          SRequiredValidation
  * @namespace     sugar.js.validation.value.validation
  * @type          Class
- * @wip
+ * @status              wip
  *
  * This class represent the "required" validation
  *

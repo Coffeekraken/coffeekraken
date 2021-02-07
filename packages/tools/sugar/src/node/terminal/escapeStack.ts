@@ -7,7 +7,7 @@ import __hotkey from '../keyboard/hotkey';
  * @name                          escapeStack
  * @namespace           sugar.node.blessed
  * @type                          Function
- * @wip
+ * @status              wip
  *
  * This function allows you to register a callback to know when it's time to "close" or do whatever you want on escape click.
  * The principle is that when you register a callback, the system will save the "index" at which you have registered this callback

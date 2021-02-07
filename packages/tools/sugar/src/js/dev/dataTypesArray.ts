@@ -7,7 +7,7 @@ import __isNode from '../is/node';
  * @name                    dataTypesArray
  * @namespace           sugar.js.dev
  * @type                    Array
- * @wip
+ * @status              wip
  *
  * This is just a list of data types available in the
  * current language (node/js)

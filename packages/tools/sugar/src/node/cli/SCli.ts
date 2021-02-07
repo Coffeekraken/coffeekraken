@@ -24,7 +24,7 @@ import __SProcessManager from '../process/SProcessManager';
  * @namespace           sugar.node.cli
  * @implements          SCliInterface
  * @type                Class
- * @wip
+ * @status              wip
  *
  * This class represent a basic CLI command with his definition object, his command string, etc...
  *

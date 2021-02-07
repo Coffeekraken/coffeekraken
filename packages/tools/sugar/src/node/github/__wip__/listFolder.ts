@@ -7,7 +7,7 @@ const __getAuthToken = require('./getAuthToken');
  * @name            listFolder
  * @namespace           sugar.node.github
  * @type            Function
- * @beta
+ * @status              beta
  *
  * List a github folder and return the JSON formated github API response
  *

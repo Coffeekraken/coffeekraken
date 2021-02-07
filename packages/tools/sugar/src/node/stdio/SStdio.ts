@@ -45,7 +45,7 @@ export interface ISStdio extends ISClass {
  * @name          SStdio
  * @namespace     sugar.node.stdio
  * @type          Class
- * @wip
+ * @status              wip
  *
  * This class represent the base one for all the "Stdio"
  * compatible setting.

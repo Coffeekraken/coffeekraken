@@ -10,7 +10,7 @@ import __deepMap from '../../../object/deepMap';
  * @name            frontspecMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
- * @wip
+ * @status              wip
  *
  * This function describe the middleware that will fetch the ```frontspec.json``` file at the root of
  * your server directory and add it to the template data sended to the rendered view

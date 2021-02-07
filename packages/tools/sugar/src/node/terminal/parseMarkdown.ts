@@ -6,7 +6,7 @@ import __parseHtml from './parseHtml';
  * @name                                parseMarkdown
  * @namespace           sugar.node.terminal
  * @type                                Function
- * @wip
+ * @status              wip
  *
  * Parse the simple markdown tags to format the terminal message
  *

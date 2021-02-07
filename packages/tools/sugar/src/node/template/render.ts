@@ -17,7 +17,7 @@ import __unique from '../array/unique';
  * @namespace         sugar.node.template
  * @type              Function
  * @async
- * @wip
+ * @status              wip
  *
  * This function take a view path, a data object and optionaly a settings object to compile
  * the view and return a simple Promise that will be resolved or rejected depending on the

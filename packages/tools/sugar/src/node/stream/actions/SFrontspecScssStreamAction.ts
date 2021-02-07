@@ -18,7 +18,7 @@ class SFrontspecScssStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
- * @wip
+ * @status              wip
  *
  * This action take care of integrating the previous finded "frontspec.json" files
  * into the actual codebase handled by this stream action.

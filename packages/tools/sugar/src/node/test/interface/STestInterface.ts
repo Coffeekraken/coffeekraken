@@ -9,7 +9,7 @@ import __deepMerge from '../../object/deepMerge';
  * @namespace           sugar.node.test.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe the cli parameters for the
  * test process.

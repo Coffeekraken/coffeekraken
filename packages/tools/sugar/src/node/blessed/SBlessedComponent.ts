@@ -17,7 +17,7 @@ import __innerWidth from './utils/innerWidth';
  * @name                  SBlessedComponent
  * @namespace           sugar.node.blessed
  * @type                  Class
- * @wip
+ * @status              wip
  *
  * This class is the base one for all the sugar blessed components like input, panel, etc...
  *

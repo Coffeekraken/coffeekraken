@@ -58,7 +58,7 @@ export interface ISTsCompiler extends ISCompiler {}
  * @namespace           sugar.node.typescript
  * @type                Class
  * @extends             SCompiler
- * @wip
+ * @status              wip
  *
  * This class wrap the "typescript" compiler with some additional features which are:
  *

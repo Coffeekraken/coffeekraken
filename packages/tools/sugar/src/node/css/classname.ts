@@ -6,7 +6,7 @@ import __sugarConfig from '../config/sugar';
  * @name            classname
  * @namespace       sugar.node.css
  * @type            Function
- * @beta
+ * @status              beta
  *
  * This function take a classname you want to generate and returns you the prefixed (if prefix exists in config.classes) classname
  *

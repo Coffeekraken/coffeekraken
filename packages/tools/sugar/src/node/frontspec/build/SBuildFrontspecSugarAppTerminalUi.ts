@@ -7,7 +7,7 @@ import __SSugarAppModuleTerminalUi from '../../app/sugar/SSugarAppModuleTerminal
  * @namespace       sugar.node.build.frontspec
  * @type            Class
  * @extends         SSugarAppModuleTerminalUi
- * @wip
+ * @status              wip
  *
  * This class represent the display of the build js module for the terminal
  *
@@ -34,4 +34,4 @@ export = class SBuildFrontspecSugarAppTerminalUi extends __SSugarAppModuleTermin
   constructor(sources, settings = {}) {
     super(sources, settings);
   }
-}
+};

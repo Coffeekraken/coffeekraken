@@ -10,7 +10,7 @@ import __deepMerge from '../../object/deepMerge';
  * @namespace           sugar.node.app.sugar
  * @type                Class
  * @extends             SSugarAppModule
- * @wip
+ * @status              wip
  *
  * This class represent the simple process module for the Sugar UI.
  *

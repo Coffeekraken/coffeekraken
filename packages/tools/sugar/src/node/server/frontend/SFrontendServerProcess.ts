@@ -9,7 +9,7 @@ import __SFrontendServerInterface from './interface/SFrontendServerInterface';
  * @namespace           sugar.node.server.frontend
  * @type            Class
  * @extends         SProcess
- * @wip
+ * @status              wip
  *
  * This class represent the frontend server Cli based on the express server one
  *

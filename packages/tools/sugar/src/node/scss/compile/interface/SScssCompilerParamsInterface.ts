@@ -8,7 +8,7 @@ import __sugarConfig from '../../../config/sugar';
  * @namespace           sugar.node.scss.compile.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe the minimum requirement
  * needed for an express server process.

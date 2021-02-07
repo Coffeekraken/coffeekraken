@@ -9,7 +9,7 @@ import __toString from '../../string/toString';
  * @name                validateObjectOutputString
  * @namespace           sugar.js.validation.object
  * @type                Function
- * @wip
+ * @status              wip
  *
  * This function take the resulting object of the ```validateObject``` one and transform it into
  * a nice human readable string.

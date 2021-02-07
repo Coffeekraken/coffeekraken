@@ -25,7 +25,7 @@ import __quotes from 'inspirational-quotes';
  * @namespace           sugar.node.ui.sugar
  * @type                Class
  * @extends             SBlessedComponent
- * @wip
+ * @status              wip
  *
  * This class represent the Sugar UI interface in the terminal.
  *

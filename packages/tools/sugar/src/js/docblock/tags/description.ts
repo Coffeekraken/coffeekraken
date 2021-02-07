@@ -5,7 +5,7 @@
  * @name              description
  * @namespace           sugar.js.docblock.tags
  * @type              Function
- * @wip
+ * @status              wip
  *
  * Parse the description tag
  *

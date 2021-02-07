@@ -8,7 +8,7 @@ const uniqid_1 = __importDefault(require("../string/uniqid"));
  * @name              registerProcess
  * @namespace           sugar.node.process
  * @type              Function
- * @wip
+ * @status              wip
  *
  * This function register a (child) process in a global stack.
  * You can access these registered processes using the "getRegisteredProcesses" function.

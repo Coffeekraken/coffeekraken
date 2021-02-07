@@ -13,7 +13,7 @@ const SSugarAppTerminalStdio_1 = __importDefault(require("./SSugarAppTerminalStd
  * @namespace       sugar.node.ui.sugar
  * @type            Class
  * @extends         SPromise
- * @wip
+ * @status              wip
  *
  * This class represent the main sugar ui one. His work it to:
  * - Aggregate all the wanted modules registered through the ```sugar-app.config.js``` file

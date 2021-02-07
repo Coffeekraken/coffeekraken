@@ -14,7 +14,7 @@ const STemplate_2 = __importDefault(require("../../../template/STemplate"));
  * @name                sugar
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
- * @wip
+ * @status              wip
  *
  * This function is responsible of responding to express requests made on the sugar home page
  *

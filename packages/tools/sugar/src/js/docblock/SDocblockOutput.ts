@@ -17,7 +17,7 @@ import __fs from 'fs';
  * @name            SDocblockOutput
  * @namespace       sugar.js.docblock
  * @type            Class
- * @wip
+ * @status              wip
  *
  * This class represent an SDocblock output like "markdown", "html", etc...
  *

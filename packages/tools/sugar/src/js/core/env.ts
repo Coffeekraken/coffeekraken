@@ -11,7 +11,7 @@ import __parse from '../string/parse';
  * @name                    env
  * @namespace           sugar.js.core
  * @type                    Function
- * @wip
+ * @status              wip
  *
  * This function allows you to access environment variables through the same method in node and javascript
  *

@@ -8,7 +8,7 @@ const ip_1 = __importDefault(require("ip"));
  * @name              ipAddress
  * @namespace         sugar.node.network
  * @type              Function
- * @beta
+ * @status              beta
  *
  * This function allows you to get your ip address
  *

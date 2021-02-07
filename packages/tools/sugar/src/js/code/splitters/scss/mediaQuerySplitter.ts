@@ -5,7 +5,7 @@
  * @name                mediaQuerySplitter
  * @namespace           sugar.js.code.splitters.scss
  * @type                Object
- * @wip
+ * @status              wip
  *
  * This represent the SCSS media queries splitter.
  * It will match all the media queries blocks like "@media (...) { ... }", etc...

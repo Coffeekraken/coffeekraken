@@ -7,7 +7,7 @@ import __isClass from '../../../is/class';
  * @name          SStaticValidation
  * @namespace     sugar.js.validation.value.validation
  * @type          Class
- * @wip
+ * @status              wip
  *
  * This class represent the "static" validation
  *

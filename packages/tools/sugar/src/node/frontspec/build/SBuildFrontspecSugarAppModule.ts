@@ -10,7 +10,7 @@ import __SBuildFrontspecProcess from './SBuildFrontspecProcess';
  * @namespace           sugar.node.build.scss
  * @type                Class
  * @extends             SSugarAppModule
- * @wip
+ * @status              wip
  *
  * This class represent the build SCSS module for the Sugar UI.
  *

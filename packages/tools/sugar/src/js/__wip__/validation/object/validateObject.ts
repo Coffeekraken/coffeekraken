@@ -21,7 +21,7 @@ const _validationsObj = {
  * @name            validateObject
  * @namespace           sugar.js.validation.object
  * @type            Function
- * @wip
+ * @status              wip
  *
  * This function take an object, a definition object and validate this one depending on the definition...
  * A definition object is a plain object that specify for each properties, some requirerments like the type, if it is required or not, etc...

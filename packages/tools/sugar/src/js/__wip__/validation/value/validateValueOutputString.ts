@@ -9,7 +9,7 @@ import __isNode from '../../is/node';
  * @name                validateValueOutputString
  * @namespace           sugar.js.validation.value
  * @type                Function
- * @wip
+ * @status              wip
  *
  * This function take the resulting object of the ```validateValue``` one and transform it into
  * a nice human readable string.

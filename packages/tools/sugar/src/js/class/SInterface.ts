@@ -4,7 +4,7 @@
  * @name              SInterface
  * @namespace           sugar.js.class
  * @type              Function
- * @wip
+ * @status              wip
  *
  * This class allows you to define an interface that you can later apply to an object instance
  * to make sure this particular instance has all the features, methods and properties you want.

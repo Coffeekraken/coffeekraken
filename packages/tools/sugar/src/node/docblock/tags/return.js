@@ -9,7 +9,7 @@ const upperFirst_1 = __importDefault(require("../../string/upperFirst"));
  * @name              return
  * @namespace           sugar.js.docblock.tags
  * @type              Function
- * @wip
+ * @status              wip
  *
  * Parse the return tag
  *

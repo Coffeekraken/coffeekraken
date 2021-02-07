@@ -14,7 +14,7 @@ import __namespace from '../package/namespace';
  * @name              SSearchResultItem
  * @namespace           sugar.node.search
  * @type              Class
- * @wip
+ * @status              wip
  *
  * This class represent a search result with all his fields, etc...
  *
@@ -148,4 +148,4 @@ export = class SSearchResultItem {
       action: this.action.toJson()
     };
   }
-}
+};

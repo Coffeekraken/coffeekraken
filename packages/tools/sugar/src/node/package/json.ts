@@ -7,7 +7,7 @@ import __fs from 'fs';
  * @name          json
  * @namespace     sugar.node.package
  * @type          Function
- * @beta
+ * @status              beta
  *
  * This function return you the package.json of the current working package into object format
  *

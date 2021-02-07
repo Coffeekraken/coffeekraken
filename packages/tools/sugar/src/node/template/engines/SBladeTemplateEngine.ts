@@ -17,7 +17,7 @@ import __unique from '../../array/unique';
  * @name          SBladeTemplateEngine
  * @namespace     sugar.node.template.engines
  * @type          Class
- * @wip
+ * @status              wip
  *
  * This class represent the blade php template engine that you can use by itself through this class, or through the ```STemplate``` class
  * that take care of a lot of works for you...

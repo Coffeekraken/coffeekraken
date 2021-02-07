@@ -5,7 +5,7 @@
  * @name                            getArgsNames
  * @namespace           sugar.js.dev
  * @type                            Function
- * @wip
+ * @status              wip
  *
  * Get the arguments names of the passed function. Return an array of the arguments names
  *

@@ -2,7 +2,7 @@
 // @shared
 
 /**
- * @wip
+ * @status              wip
  * @todo      interface
  * @todo      doc
  */

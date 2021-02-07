@@ -18,7 +18,7 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * @namespace           sugar.node.cli
  * @implements          SCliInterface
  * @type                Class
- * @wip
+ * @status              wip
  *
  * This class represent a basic CLI command with his definition object, his command string, etc...
  *

@@ -8,7 +8,7 @@ import __terminalKit from 'terminal-kit';
  * @name            onProcessExit
  * @namespace       sugar.node.process
  * @type            Function
- * @beta
+ * @status              beta
  *
  * This function allows you to register a callback to execute when the process
  * is exiting by one of these events:

@@ -9,7 +9,7 @@ import __deepMerge from '../../../object/deepMerge';
  * @namespace           sugar.node.build.scss.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe the minimum requirement
  * needed for an express server process.

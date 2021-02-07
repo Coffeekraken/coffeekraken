@@ -12,7 +12,7 @@ const jsObjectToScssMap_1 = __importDefault(require("./jsObjectToScssMap"));
  * @name            getScssSharedResourcesString
  * @namespace       sugar.node.scss.utils
  * @type            Function
- * @wip
+ * @status              wip
  *
  * This function simply check the @config.build.scss.imports config and return the correct imports array
  *

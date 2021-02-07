@@ -6,7 +6,7 @@ import __upperFirst from '../../string/upperFirst';
  * @name              parseTypeDefinitionString
  * @namespace           sugar.js.validation.utils
  * @type              Function
- * @wip
+ * @status              wip
  *
  * Thia function take an argument type definition string like "String", "Array<String>", "Array|String", etc... and return an object that represent this.
  *

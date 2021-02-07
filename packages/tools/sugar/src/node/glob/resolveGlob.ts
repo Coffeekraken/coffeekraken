@@ -16,7 +16,7 @@ import __isDirectory from '../is/directory';
  * @namespace       sugar.node.glob
  * @type            Function
  * @async
- * @beta
+ * @status              beta
  *
  * This function simply resolve the passed glob pattern(s) and resolve his promise
  * with an Array of SFile instances to work with

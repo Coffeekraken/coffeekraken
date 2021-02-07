@@ -10,7 +10,7 @@ hotkeys.filter = function (event) {
  * @name 		hotkey
  * @namespace           sugar.js.keyboard
  * @type      Function
- * @beta
+ * @status              beta
  *
  * Simple function to add a hotkey like "ctrl+a" and an handler function that will be called when the hotkey has been pressed
  * The following keys are supported:

@@ -15,7 +15,7 @@ import __treatAsValue from '../promise/treatAsValue';
  * @namespace       sugar.node.ipc
  * @type            Class
  * @extends         SPromise
- * @wip
+ * @status              wip
  *
  * This script check if a global ipc server exists aulready and if it is not the case,
  * it will start one that you can use to communicate between your child process, etc...

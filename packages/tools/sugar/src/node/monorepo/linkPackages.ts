@@ -12,7 +12,7 @@ import _fs from 'fs';
  * @namespace       sugar.node.monorepo
  * @type            Function
  * @async
- * @beta
+ * @status              beta
  *
  * This function simply check all the packages available in the monorepo
  * and link then together using symbolic links in each node_modules folders

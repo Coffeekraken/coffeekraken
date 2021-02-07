@@ -17,7 +17,7 @@ import __sugarConfig from '../config/sugar';
  * @namespace           sugar.node.doc
  * @type                Class
  * @extends             SPromise
- * @wip
+ * @status              wip
  *
  * This class represent the ```frontspec.json``` file and allows you to generate it from some sources (glob pattern(s))
  * and save it inside a directory you choose.

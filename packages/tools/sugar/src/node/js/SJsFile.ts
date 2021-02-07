@@ -26,7 +26,7 @@ import __SJsCompilerParamsInterface from './compile/interface/SJsCompilerParamsI
  * @name          SJsFileSettingsInterface
  * @type            Class
  * @extends         SInterface
- * @beta
+ * @status              beta
  *
  * The interface describing the jsFile settings
  *
@@ -41,7 +41,7 @@ export class SJsFileSettingsInterface extends __SInterface {
  * @name          SJsFileCtorSettingsInterface
  * @type            Class
  * @extends         SInterface
- * @beta
+ * @status              beta
  *
  * The interface describing the jsFile settings
  *
@@ -82,7 +82,7 @@ interface ISJsFile {
  * @namespace       sugar.node.js
  * @type            Class
  * @extends         SFile
- * @beta
+ * @status              beta
  *
  * This represent a javascript file
  *

@@ -12,7 +12,7 @@ import __SUrlAction from '../../action/browser/SUrlAction';
  * @name                search
  * @namespace           sugar.node.search.handlers
  * @type                Function
- * @wip
+ * @status              wip
  *
  * This function is responsible of handling the docMap search
  * by filtering the docMap and send back the serch result json.

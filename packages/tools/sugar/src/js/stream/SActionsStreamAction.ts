@@ -11,7 +11,7 @@ import __validatedefinitionect from '../validation/object/validatedefinitionect'
  * @namespace           sugar.js.stream
  * @type          Class
  * @extends       SPromise
- * @beta
+ * @status              beta
  *
  * This class represent the base of a actions stream action.
  * An action stream action represent an action that you can register in the SActionsStream instance and

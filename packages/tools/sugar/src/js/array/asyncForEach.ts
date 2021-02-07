@@ -5,7 +5,7 @@
  * @name                              asyncForEach
  * @namespace           sugar.js.array
  * @type                              Function
- * @beta
+ * @status              beta
  *
  * Allow to make some async foreach on your arrays
  *

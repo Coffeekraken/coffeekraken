@@ -29,7 +29,7 @@ const SScssCompilerParamsInterface_1 = __importDefault(require("./interface/SScs
  * @namespace           sugar.node.scss
  * @type                Class
  * @extends             SCompiler
- * @wip
+ * @status              wip
  *
  * This class wrap the "sass" compiler with some additional features which are:
  *

@@ -10,7 +10,7 @@ import __parse from '../string/parse';
  * @name                  argsToString
  * @namespace           sugar.js.cli
  * @type                  Function
- * @beta
+ * @status              beta
  *
  * This function take a simple object, a definition object and return you the string version that you can pass
  * directly to the command line interface

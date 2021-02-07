@@ -7,7 +7,7 @@ import __isOfType from '../../../is/ofType';
  * @name          SValuesValidation
  * @namespace     sugar.js.validation.value.validation
  * @type          Class
- * @wip
+ * @status              wip
  *
  * This class represent the "values" validation
  *

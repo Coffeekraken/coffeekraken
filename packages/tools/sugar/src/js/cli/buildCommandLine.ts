@@ -9,7 +9,7 @@ import __parse from '../string/parse';
  * @name            buildCommandLine
  * @namespace           sugar.js.cli
  * @type            Function
- * @beta
+ * @status              beta
  *
  * This function takes as parameters a command line (with tokens), an arguments object and a definition object to
  * generate the final command line string to launch.

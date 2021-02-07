@@ -6,7 +6,7 @@ import __ip from 'ip';
  * @name              ipAddress
  * @namespace         sugar.node.network
  * @type              Function
- * @beta
+ * @status              beta
  *
  * This function allows you to get your ip address
  *

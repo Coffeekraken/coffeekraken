@@ -19,7 +19,7 @@ class SFsUnlinkStreamActionInterface extends __SInterface {
  * @namespace           sugar.node.stream.actions
  * @type            Class
  * @extends         SActionsStreamAction
- * @beta
+ * @status              beta
  *
  * This class is an action that allows you to delete some files / folders depending on the "unlink" property of the streamObj.
  * You can specify some glob patterns if you want

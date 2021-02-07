@@ -11,7 +11,7 @@ import __SFrontendServerProcess from '../../server/frontend/SFrontendServerProce
  * @namespace           sugar.node.server.frontend
  * @type                Class
  * @extends             SSugarAppModule
- * @wip
+ * @status              wip
  *
  * This class represent the frontend server module for the Sugar UI.
  *

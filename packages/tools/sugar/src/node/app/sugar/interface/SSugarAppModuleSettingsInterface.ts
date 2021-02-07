@@ -5,7 +5,7 @@ import __SInterface from '../../../interface/SInterface';
  * @namespace           sugar.node.ui.sugar.interface
  * @type                Class
  * @extends             SInterface
- * @wip
+ * @status              wip
  *
  * This class represent the interface that describe the base Sugar UI module settings object
  *

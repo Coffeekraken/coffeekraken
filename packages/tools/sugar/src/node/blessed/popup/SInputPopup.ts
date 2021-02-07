@@ -10,7 +10,7 @@ import __activeSpace from '../../core/activeSpace';
  * @namespace           sugar.node.blessed.popup
  * @type                  Class
  * @extends               SBlessedPopup
- * @wip
+ * @status              wip
  *
  * This class represent a simple input in a popup
  *
@@ -72,4 +72,4 @@ export = class SBlessedInputPopup extends __SBlessedPopup {
     super.update();
     this.height = this.$content.getScrollHeight() + 5;
   }
-}
+};

@@ -26,7 +26,7 @@ const cacheDir_1 = __importDefault(require("../path/cacheDir"));
  * @name          SFileReadSettingsInterface
  * @type          Class
  * @extends       SInterface
- * @beta
+ * @status              beta
  *
  * Watch settings interface
  *
@@ -68,7 +68,7 @@ SFileReadSettingsInterface.definition = {
  * @name          SFileWriteSettingsInterface
  * @type          Class
  * @extends       SInterface
- * @beta
+ * @status              beta
  *
  * Watch settings interface
  *
@@ -119,7 +119,7 @@ SFileWriteSettingsInterface.definition = {
  * @name          SFileWatchSettingsInterface
  * @type          Class
  * @extends       SInterface
- * @beta
+ * @status              beta
  *
  * Watch settings interface
  *
@@ -140,7 +140,7 @@ SFileWatchSettingsInterface.definition = {
  * @name          SFileSettingsInterface
  * @type          Class
  * @extends       SInterface
- * @beta
+ * @status              beta
  *
  * Settings infertage
  *

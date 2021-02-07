@@ -40,7 +40,7 @@ const SPromise_1 = __importDefault(require("../promise/SPromise"));
  * @name              objectProperties
  * @namespace           sugar.node.transition
  * @type              Function
- * @beta
+ * @status              beta
  *
  * This function take a start object and a target object and proceed to the transition of all properties
  * depending on the passed settings object that is documented bellow.

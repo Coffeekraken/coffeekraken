@@ -4,7 +4,7 @@
  * @name            injectStyle
  * @namespace           sugar.js.css
  * @type            Function
- * @wip
+ * @status              wip
  *
  * Inject a passed style string in the DOM
  *

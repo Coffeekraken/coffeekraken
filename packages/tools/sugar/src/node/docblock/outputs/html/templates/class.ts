@@ -1,1 +1,0 @@
-../../../../../../js/docblock/outputs/html/templates/class.ts

@@ -48,4 +48,6 @@ if (!action) {
 }
 
 // const pkg = require(`./${stack}/${action}.cli.js`);
-require(`./${stack}/${action}.cli.js`)(args);
+let fn = require(`./${stack}/${action}.cli.js`);
+if (fn.default) fn = fn.default;
+fn(args);

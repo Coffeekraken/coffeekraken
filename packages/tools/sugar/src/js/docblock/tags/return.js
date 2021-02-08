@@ -18,7 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name              return
      * @namespace           sugar.js.docblock.tags
      * @type              Function
-     * @wip
+     * @status              wip
      *
      * Parse the return tag
      *
@@ -42,4 +42,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return returnTag;
 });
-//# sourceMappingURL=return.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmV0dXJuLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicmV0dXJuLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7Ozs7OztJQUVWLHVFQUFtRDtJQUVuRDs7Ozs7Ozs7Ozs7Ozs7OztPQWdCRztJQUNILFNBQVMsU0FBUyxDQUFDLElBQUk7UUFDckIsSUFBTSxXQUFXLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLEVBQUUsQ0FBQyxLQUFLLENBQUMsYUFBYSxDQUFDLENBQUM7UUFDM0QsT0FBTztZQUNMLElBQUksRUFBRSxXQUFXLENBQUMsQ0FBQyxDQUFDO2dCQUNsQixDQUFDLENBQUMsb0JBQVksQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxFQUFFLENBQUMsQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUFFLEVBQUUsQ0FBQyxDQUFDLElBQUksRUFBRSxDQUFDO2dCQUN2RSxDQUFDLENBQUMsRUFBRTtZQUNOLFdBQVcsRUFBRSxXQUFXLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUFJLEVBQUUsQ0FBQyxDQUFDLENBQUMsRUFBRTtTQUN6RCxDQUFDO0lBQ0osQ0FBQztJQUNELE9BQVMsU0FBUyxDQUFDIn0=

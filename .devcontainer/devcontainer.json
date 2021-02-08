@@ -27,6 +27,7 @@
 		"gruntfuggly.todo-tree",
 		"coenraads.bracket-pair-colorizer-2",
 		"svelte.svelte-vscode",
-		"ardenivanov.svelte-intellisense"
+		"ardenivanov.svelte-intellisense",
+		"andrejunges.handlebars"
 	]
 }

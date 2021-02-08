@@ -30,7 +30,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name          SValuesValidation
      * @namespace     sugar.js.validation.value.validation
      * @type          Class
-     * @wip
+     * @status              wip
      *
      * This class represent the "values" validation
      *
@@ -54,4 +54,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SValidation_1.default));
     return SValuesValidation;
 });
-//# sourceMappingURL=SValuesValidation.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1ZhbHVlc1ZhbGlkYXRpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTVmFsdWVzVmFsaWRhdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFFZCxrRUFBOEM7SUFHOUM7Ozs7Ozs7Ozs7Ozs7O09BY0c7SUFDSDtRQUFnQyxxQ0FBYTtRQUE3Qzs7UUFNQSxDQUFDO1FBSFEsc0JBQUksR0FBWCxVQUFZLEtBQUssRUFBRSxNQUFNO1lBQ3ZCLE9BQU8sTUFBTSxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztRQUN0QyxDQUFDO1FBSk0seUJBQU8sR0FDWix3RkFBd0YsQ0FBQztRQUk3Rix3QkFBQztLQUFBLEFBTkQsQ0FBZ0MscUJBQWEsR0FNNUM7SUFFRCxPQUFTLGlCQUFpQixDQUFDIn0=

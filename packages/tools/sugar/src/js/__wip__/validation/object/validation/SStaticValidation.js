@@ -31,7 +31,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name          SStaticValidation
      * @namespace     sugar.js.validation.value.validation
      * @type          Class
-     * @wip
+     * @status              wip
      *
      * This class represent the "static" validation
      *
@@ -65,4 +65,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SValidation_1.default));
     return SStaticValidation;
 });
-//# sourceMappingURL=SStaticValidation.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1N0YXRpY1ZhbGlkYXRpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTU3RhdGljVmFsaWRhdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFFZCxrRUFBOEM7SUFDOUMsNERBQTBDO0lBRTFDOzs7Ozs7Ozs7Ozs7OztPQWNHO0lBQ0g7UUFBZ0MscUNBQWE7UUFBN0M7O1FBYUEsQ0FBQztRQVZRLHNCQUFJLEdBQVgsVUFBWSxLQUFLLEVBQUUsTUFBTSxFQUFFLFFBQVE7WUFDakMsSUFBSSxlQUFTLENBQUMsTUFBTSxDQUFDLEVBQUU7Z0JBQ3JCLElBQUksQ0FBQyxNQUFNLENBQUMsUUFBUSxDQUFDO29CQUFFLE9BQU8sS0FBSyxDQUFDO2dCQUNwQyxPQUFPLElBQUksQ0FBQzthQUNiO2lCQUFNLElBQUksTUFBTSxDQUFDLFdBQVcsRUFBRTtnQkFDN0IsSUFBSSxDQUFDLE1BQU0sQ0FBQyxXQUFXLENBQUMsUUFBUSxDQUFDO29CQUFFLE9BQU8sS0FBSyxDQUFDO2dCQUNoRCxPQUFPLElBQUksQ0FBQzthQUNiO1lBQ0QsT0FBTyxDQUFDLEtBQUssRUFBRSxNQUFNLEVBQUUsUUFBUSxDQUFDLENBQUM7UUFDbkMsQ0FBQztRQVhNLHlCQUFPLEdBQ1osaUZBQWlGLENBQUM7UUFXdEYsd0JBQUM7S0FBQSxBQWJELENBQWdDLHFCQUFhLEdBYTVDO0lBRUQsT0FBUyxpQkFBaUIsQ0FBQyJ9

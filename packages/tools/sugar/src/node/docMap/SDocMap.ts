@@ -147,7 +147,7 @@ class SDocMap extends __SClass implements ISDocMap {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get docMapSettings(): ISDocMapSettings {
-    return <any>this._settings.docMap;
+    return (<any>this._settings).docMap;
   }
 
   /**
@@ -198,7 +198,6 @@ class SDocMap extends __SClass implements ISDocMap {
         const patterns: string[] = findSettings.globs;
 
         let files: __SFile[] = [];
-
         await __wait(1);
 
         const searchStrArray: string[] = ['Searching docMaps using globs:'];

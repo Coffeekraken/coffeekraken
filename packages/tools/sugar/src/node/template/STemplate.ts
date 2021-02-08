@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import __unique from '../array/unique';
 import __deepMerge from '../object/deepMerge';
 import __sugarConfig from '../config/sugar';
@@ -8,7 +6,10 @@ import __fs from 'fs';
 import __SError from '../error/SError';
 import __glob from 'glob';
 import __STemplateEngine from './engines/STemplateEngine';
-import __SPromise from '../promise/SPromise';
+import __SClass from '../class/SClass';
+
+import __SPromise, { ISPromise } from '../promise/SPromise';
+import { ISTemplateEngine } from './engines/STemplateEngine';
 
 /**
  * @name          STemplate
@@ -46,23 +47,57 @@ import __SPromise from '../promise/SPromise';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class STemplate {
-  /**
-   * @name      _settings
-   * @type      Object
-   * @private
-   *
-   * Store the passed settings
-   *
-   * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _settings = {};
 
+export interface ISTemplateOptionalSettings {
+  rootDirs?: string[];
+  engine?: string | ISTemplateEngine;
+  engineSettings?: any;
+  defaultData?: any;
+}
+export interface ISTemplateSettings {
+  rootDirs: string[];
+  engine: string | ISTemplateEngine;
+  engineSettings?: any;
+  defaultData?: any;
+}
+export interface ISTemplateCtorSettings {
+  template?: ISTemplateOptionalSettings;
+}
+
+export interface ISTemplateViewInfo {
+  path: string;
+  relPath: string;
+  type: string;
+}
+
+export interface ISTemplateEngines {
+  [key: string]: ISTemplateEngine;
+}
+
+export interface ISTemplateDataHandler {
+  (filePath: string): ISPromise;
+}
+export interface ISTemplateDataHandlers {
+  [key: string]: ISTemplateDataHandler;
+}
+
+export interface ISTemplateCtor {
+  engines: ISTemplateEngines;
+  dataHandlers;
+}
+
+export interface ISTemplate {
+  _viewPath?: string;
+  _templateString?: string;
+  _engineInstance?: ISTemplateEngine;
+}
+
+// @ts-ignore
+class STemplate extends __SClass implements ISTemplate {
   /**
    * @name      _viewPath
    * @type      String
-   * @default   null
+   * @default   undefined
    * @private
    *
    * Store the view doted path if the passed parameter is a valid path
@@ -70,12 +105,12 @@ class STemplate {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _viewPath = null;
+  private _viewPath?: string;
 
   /**
    * @name      _templateString
    * @type      String
-   * @default    null
+   * @default    undefined
    * @private
    *
    * Store the template string if the passed view is a template string and not a view path
@@ -83,11 +118,12 @@ class STemplate {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _templateString = null;
+  private _templateString?: string;
 
   /**
    * @name      _engineInstance
    * @type      __STemplateEngine
+   * @default     undefined
    * @private
    *
    * Store the engine instance used to render the passed template
@@ -95,7 +131,7 @@ class STemplate {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _engineInstance = null;
+  private _engineInstance?: ISTemplateEngine;
 
   /**
    * @name       engines
@@ -132,7 +168,7 @@ class STemplate {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static defaultRootDirs = [
+  static defaultRootDirs: string[] = [
     __sugarConfig('views.rootDir'),
     __path.resolve(__dirname, '../../php/views/blade')
   ];
@@ -149,7 +185,7 @@ class STemplate {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static getRootDirs(rootDirs = []) {
+  static getRootDirs(rootDirs = []): string[] {
     return __unique([
       ...(Array.isArray(rootDirs) ? rootDirs : [rootDirs]),
       ...STemplate.defaultRootDirs
@@ -170,16 +206,31 @@ class STemplate {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static registerEngine(extension, enginePath) {
-    if (enginePath.slice(-3) !== '.js') enginePath += '.js';
+  static registerEngine(enginePath: string): void {
+    if (!enginePath.match(/\.js$/)) enginePath += '.js';
     // make sure the engine path exists
     if (!__fs.existsSync(enginePath)) {
       throw new __SError(
-        `Sorry but the engine "<yellow>${extension}</yellow>" that you want to register using the path "<cyan>${enginePath}</cyan>" does not exists...`
+        `Sorry but the engine "<yellow>${enginePath}</yellow>" that you want to register does not exists...`
       );
     }
-    // register the engine in the stack
-    STemplate.engines[extension] = enginePath;
+    // get the engine class
+    const EngineClass = require(enginePath);
+    // make sure we have names defined
+    if (
+      !EngineClass.names ||
+      !Array.isArray(EngineClass.names) ||
+      !EngineClass.names.length
+    ) {
+      throw new Error(
+        `You try to register an STemplate engine with the class "<yellow>${EngineClass.name}</yellow>" but you forgot to specify the static property "<cyan>names</cyan>" with something like "<green>['twig.js','twig']</green>"...`
+      );
+    }
+    // register the engine under each names
+    EngineClass.names.forEach((name) => {
+      // register the engine in the stack
+      STemplate.engines[name] = EngineClass;
+    });
   }
 
   /**
@@ -190,22 +241,36 @@ class STemplate {
    * This static method can be used to register a compatible __STemplateEngine engine class
    * into the available STemplate engines.
    *
-   * @param       {String}        extension       The file extension to detect the engine. For example "blade.php" will be used to render all the files names "%name.blade.php"
    * @param       {String}        handlerPath      The absolute path to the engine class file
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static registerDataHandler(extension, handlerPath) {
+  static registerDataHandler(handlerPath: string): void {
     if (handlerPath.slice(-3) !== '.js') handlerPath += '.js';
     // make sure the engine path exists
     if (!__fs.existsSync(handlerPath)) {
       throw new __SError(
-        `Sorry but the data handler "<yellow>${extension}</yellow>" that you want to register using the path "<cyan>${handlerPath}</cyan>" does not exists...`
+        `Sorry but the data handler "<yellow>${handlerPath}</yellow>" that you want to register does not exists...`
       );
     }
-    // register the engine in the stack
-    STemplate.dataHandlers[extension] = handlerPath;
+    // get the engine class
+    const HandlerClass = require(handlerPath).default;
+    // make sure we have extensions defined
+    if (
+      !HandlerClass.extensions ||
+      !Array.isArray(HandlerClass.extensions) ||
+      !HandlerClass.extensions.length
+    ) {
+      throw new Error(
+        `You try to register an STemplate data handler with the class "<yellow>${HandlerClass.name}</yellow>" but you forgot to specify the property "<cyan>extensions</cyan>" with something like "<green>['json','js']</green>"...`
+      );
+    }
+    // register the engine under each names
+    HandlerClass.extensions.forEach((extension) => {
+      // register the engine in the stack
+      STemplate.dataHandlers[extension] = HandlerClass;
+    });
   }
 
   /**
@@ -223,7 +288,7 @@ class STemplate {
    * @since
    * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static getViewInfo(viewPath) {
+  static getViewInfo(viewPath: string): ISTemplateViewInfo | false {
     const viewsDir = __sugarConfig('views.rootDir');
 
     let path = `${viewsDir}/${viewPath}`;
@@ -263,6 +328,20 @@ class STemplate {
   }
 
   /**
+   * @name      templateSettings
+   * @type      ISTemplateSettings
+   * @get
+   *
+   * Access the template settings
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get templateSettings(): ISTemplateSettings {
+    return (<any>this._settings).template;
+  }
+
+  /**
    * @name      constructor
    * @type      Function
    * @constructor
@@ -272,20 +351,24 @@ class STemplate {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(viewPathOrTemplateString, settings = {}) {
+  constructor(viewPathOrTemplateString, settings?: ISTemplateCtorSettings) {
     // save the settings
-    this._settings = __deepMerge(
-      {
-        id: 'STemplate',
-        rootDirs: [],
-        engine: null,
-        engineSettings: {},
-        defaultData: {}
-      },
-      settings
+    super(
+      __deepMerge(
+        {
+          id: 'STemplate',
+          template: {
+            rootDirs: [],
+            engine: null,
+            engineSettings: {},
+            defaultData: {}
+          }
+        },
+        settings || {}
+      )
     );
-    this._settings.rootDirs = this.constructor.getRootDirs(
-      settings.rootDirs || []
+    this.templateSettings.rootDirs = (<any>this.constructor).getRootDirs(
+      this.templateSettings.rootDirs || []
     );
 
     Object.keys(STemplate.engines).forEach((ext) => {
@@ -296,8 +379,11 @@ class STemplate {
     });
 
     // if the "engine" setting is an instance, save it as engineInstance
-    if (this._settings.engine instanceof __STemplateEngine) {
-      this._engineInstance = this._settings.engine;
+    if (
+      typeof this.templateSettings.engine !== 'string' &&
+      this.templateSettings.engine instanceof __STemplateEngine
+    ) {
+      this._engineInstance = this.templateSettings.engine;
     }
 
     // detect and save the view doted path or the view template string
@@ -315,8 +401,8 @@ class STemplate {
         this._viewPath = viewPathOrTemplateString;
       } else if (!viewPathOrTemplateString.match(/\//gm)) {
         // doted path
-        for (let i = 0; i < this._settings.rootDirs.length; i++) {
-          const rootDir = this._settings.rootDirs[i];
+        for (let i = 0; i < this.templateSettings.rootDirs.length; i++) {
+          const rootDir = this.templateSettings.rootDirs[i];
           const viewPath = `${rootDir}/${viewPathOrTemplateString
             .split('.')
             .join('/')}.[!data]*`;
@@ -324,7 +410,8 @@ class STemplate {
           if (matches && matches.length) {
             this._viewPath = matches[0];
             const extension = this._viewPath.split('.').slice(1).join('.');
-            if (!this._settings.engine) this._settings.engine = extension;
+            if (!this.templateSettings.engine)
+              this.templateSettings.engine = extension;
             break;
           }
         }
@@ -341,6 +428,29 @@ class STemplate {
   }
 
   /**
+   * @name          _getEngineByName
+   * @type          Function
+   * @private
+   *
+   * This method take an engine name and tries to returns you the engine instance
+   * registered in the stack
+   *
+   * @param     {String}    name    The engine name wanted
+   * @return    {STemplateEngine|undefined}     The engine class or undefined
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  private _getEngineByName(name: string): ISTemplateEngine | undefined {
+    if (STemplate.engines[name] !== undefined) return STemplate.engines[name];
+    else if (name.includes('.')) {
+      const engineName = name.split('.')[0];
+      if (STemplate.engines[engineName]) return STemplate.engines[engineName];
+    }
+    return undefined;
+  }
+
+  /**
    * @name          render
    * @type          Function
    * @async
@@ -354,13 +464,15 @@ class STemplate {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  render(data = {}, settings = {}) {
+  render(data = {}, settings?: ISTemplateOptionalSettings) {
     return new __SPromise(
       async ({ resolve, reject, emit }) => {
-        settings = __deepMerge(this._settings, settings);
-        data = __deepMerge(settings.defaultData, data);
+        const renderSettings = <ISTemplateSettings>(
+          __deepMerge(this.templateSettings, settings || {})
+        );
+        data = __deepMerge(renderSettings.defaultData, data);
         if (this._templateString) {
-          if (!settings.engine) {
+          if (!renderSettings.engine) {
             // loop on the engines to get the better one
             for (let i = 0; i < Object.keys(STemplate.engines).length; i++) {
               const enginePath =
@@ -370,18 +482,22 @@ class STemplate {
                 EngineClass.input === 'string' &&
                 EngineClass.canRender(this._templateString)
               ) {
-                settings.engine = Object.keys(STemplate.engines)[i];
+                renderSettings.engine = Object.keys(STemplate.engines)[i];
                 break;
               }
             }
-          } else if (this._settings.engine instanceof __STemplateEngine) {
-            if (!settings.engine.constructor.canRender(this._templateString)) {
+          } else if (<any>renderSettings.engine instanceof __STemplateEngine) {
+            if (
+              !(<any>renderSettings.engine).constructor.canRender(
+                this._templateString
+              )
+            ) {
               return reject(
                 `It seems that you've passed directly an __STemplateEngine engine as the settings.engine option but this engine cannot render your passed template string...`
               );
             }
           }
-          if (!settings.engine) {
+          if (!renderSettings.engine) {
             return reject(
               `Sorry but it seems that the passed template string cannot be rendered using any of the available engines:\n- ${Object.keys(
                 STemplate.engines
@@ -394,7 +510,7 @@ class STemplate {
           }
         } else if (this._viewPath) {
           const viewPathWithoutExtension = this._viewPath.replace(
-            `.${settings.engine}`,
+            `.${renderSettings.engine}`,
             ''
           );
 
@@ -415,51 +531,60 @@ class STemplate {
           }
         }
 
-        if (!this._engineInstance) {
+        if (
+          !this._engineInstance &&
+          typeof renderSettings.engine === 'string'
+        ) {
           // get the engine class
-          const EngineClass = require(STemplate.engines[settings.engine]);
-          this._engineInstance = new EngineClass({
-            ...settings.engineSettings
-          });
+          const EngineClass = this._getEngineByName(renderSettings.engine);
+          if (EngineClass) {
+            this._engineInstance = new EngineClass(
+              renderSettings.engineSettings || {}
+            );
+          }
         }
 
-        const renderPromise = this._engineInstance.render(
-          this._viewPath || this._templateString,
-          data,
-          settings
-        );
-        const result = await renderPromise;
+        if (this._engineInstance) {
+          const renderPromise = this._engineInstance.render(
+            this._viewPath || this._templateString || '',
+            data,
+            renderSettings
+          );
+          const result = await renderPromise;
 
-        if (renderPromise.isRejected()) {
-          return reject({
+          if (renderPromise.isRejected()) {
+            return reject({
+              view: this._viewPath,
+              engine: renderSettings.engine,
+              content: '0cc'
+            });
+          }
+
+          // resolve the render process
+          resolve({
             view: this._viewPath,
-            engine: settings.engine,
-            content: '0cc'
+            engine: renderSettings.engine,
+            content: result
           });
         }
-
-        // resolve the render process
-        resolve({
-          view: this._viewPath,
-          engine: settings.engine,
-          content: result
-        });
       },
       {
-        id: settings.id + '.render'
+        id: this.id + '.render'
       }
     );
   }
 }
 
 const defaultEngines = __sugarConfig('views.engines') || {};
-Object.keys(defaultEngines).forEach((extension) => {
-  STemplate.registerEngine(extension, defaultEngines[extension]);
+Object.keys(defaultEngines).forEach((name) => {
+  STemplate.registerEngine(defaultEngines[name]);
 });
 
 const defaultDataHandlers = __sugarConfig('views.dataHandlers') || {};
-Object.keys(defaultDataHandlers).forEach((extension) => {
-  STemplate.registerDataHandler(extension, defaultDataHandlers[extension]);
+Object.keys(defaultDataHandlers).forEach((name) => {
+  STemplate.registerDataHandler(defaultDataHandlers[name]);
 });
 
-export = STemplate;
+const cls: ISTemplateCtor = STemplate;
+
+export default STemplate;

@@ -31,7 +31,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name          STypeValidation
      * @namespace     sugar.js.validation.value.validation
      * @type          Class
-     * @wip
+     * @status              wip
      *
      * This class represent the "type" validation
      *
@@ -58,4 +58,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SValidation_1.default));
     return STypeValidation;
 });
-//# sourceMappingURL=STypeValidation.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1R5cGVWYWxpZGF0aW9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1R5cGVWYWxpZGF0aW9uLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUVkLGtFQUE4QztJQUM5Qyw4REFBNEM7SUFFNUM7Ozs7Ozs7Ozs7Ozs7O09BY0c7SUFDSDtRQUE4QixtQ0FBYTtRQUEzQzs7UUFRQSxDQUFDO1FBTFEsb0JBQUksR0FBWCxVQUFZLEtBQUssRUFBRSxJQUFJO1lBQ3JCLElBQU0sTUFBTSxHQUFHLGdCQUFVLENBQUMsS0FBSyxFQUFFLElBQUksQ0FBQyxDQUFDO1lBQ3ZDLElBQUksTUFBTSxLQUFLLElBQUk7Z0JBQUUsT0FBTyxJQUFJLENBQUM7WUFDakMsT0FBTyxDQUFDLEtBQUssRUFBRSxJQUFJLEVBQUUsTUFBTSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUM3QyxDQUFDO1FBTk0sdUJBQU8sR0FDWix3SEFBd0gsQ0FBQztRQU03SCxzQkFBQztLQUFBLEFBUkQsQ0FBOEIscUJBQWEsR0FRMUM7SUFFRCxPQUFTLGVBQWUsQ0FBQyJ9

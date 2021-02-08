@@ -3,11 +3,15 @@
 import __STemplateEngineInterface from './interface/STemplateEngineInterface';
 import __deepMerge from '../../object/deepMerge';
 import __sugarConfig from '../../config/sugar';
+import __SClass from '../../class/SClass';
+
+import { ISPromise } from '../../promise/SPromise';
 
 /**
  * @name          STemplateEngine
  * @namespace     sugar.node.template.engines
  * @type          Class
+ * @extends       SClass
  * @status              wip
  *
  * This class represent the base for a compatible ```STemplate``` engine
@@ -45,19 +49,25 @@ import __sugarConfig from '../../config/sugar';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class STemplateEngine {
-  /**
-   * @name      _settings
-   * @type      Object
-   * @private
-   *
-   * Store the settings passed in the constructor
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _settings = {};
 
+export interface ISTemplateEngineOptionalSettings {}
+export interface ISTemplateEngineSettings {}
+export interface ISTemplateEngineCtorSettings {
+  templateEngine: ISTemplateEngineOptionalSettings;
+}
+
+export interface ISTemplateEngineRenderResult {}
+
+export interface ISTemplateEngine {
+  new (settings?: ISTemplateEngineCtorSettings);
+  render(
+    view: string,
+    data: any,
+    settings: ISTemplateEngineOptionalSettings
+  ): ISPromise<ISTemplateEngineRenderResult>;
+}
+
+class STemplateEngine extends __SClass implements ISTemplateEngine {
   /**
    * @name      constructor
    * @type      Function
@@ -68,7 +78,16 @@ export = class STemplateEngine {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
-    this._settings = __deepMerge({}, settings);
+  constructor(settings?: ISTemplateEngineCtorSettings) {
+    super(
+      __deepMerge(
+        {
+          templateEngine: {}
+        },
+        settings
+      )
+    );
   }
-};
+}
+
+export default STemplateEngine;

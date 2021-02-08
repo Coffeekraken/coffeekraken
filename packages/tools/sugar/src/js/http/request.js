@@ -18,7 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name                              request
      * @namespace           sugar.js.http
      * @type                              Function
-     * @wip
+     * @status              wip
      *
      * Easily create and send an http request. This will return an instance of the SAjax class.
      *
@@ -57,4 +57,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return request;
 });
-//# sourceMappingURL=request.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVxdWVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlcXVlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLFVBQVU7Ozs7Ozs7Ozs7Ozs7O0lBRVYsd0RBQW9DO0lBRXBDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQW1DRztJQUNILFNBQVMsT0FBTyxDQUFDLFFBQWE7UUFBYix5QkFBQSxFQUFBLGFBQWE7UUFDNUIsSUFBTSxPQUFPLEdBQUcsSUFBSSxrQkFBVSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQ3pDLE9BQU8sT0FBTyxDQUFDLElBQUksRUFBRSxDQUFDO0lBQ3hCLENBQUM7SUFDRCxPQUFTLE9BQU8sQ0FBQyJ9

@@ -14,7 +14,7 @@ module.exports = function (stringArgs = '') {
   }
   console.log(`Killing process on port "${port}"`);
   try {
-    __execSync(`kill $()`);
+    __execSync(`kill ${processId}`);
   } catch (e) {
     console.log(e);
     return;

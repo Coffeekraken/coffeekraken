@@ -528,6 +528,7 @@ class SFile extends __SEventEmitter implements ISFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(filepath: string, settings?: ISFileCtorSettings) {
+    // console.log('ss', settings);
     super(
       __deepMerge(
         {
@@ -555,6 +556,7 @@ class SFile extends __SEventEmitter implements ISFile {
 
     // check if need to check for the file existence or not...
     if (this.fileSettings.checkExistence && !this.exists) {
+      console.log(this._settings);
       throw new Error(
         `The passed filepath "<cyan>${this.path}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`
       );

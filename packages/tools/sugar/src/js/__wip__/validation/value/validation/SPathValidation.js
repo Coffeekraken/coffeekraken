@@ -31,7 +31,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name          SPathValidation
      * @namespace     sugar.js.validation.value.validation
      * @type          Class
-     * @wip
+     * @status              wip
      *
      * This class represent the "path" validation
      *
@@ -56,4 +56,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SValidation_1.default));
     return SPathValidation;
 });
-//# sourceMappingURL=SPathValidation.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1BhdGhWYWxpZGF0aW9uLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1BhdGhWYWxpZGF0aW9uLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUVkLGtFQUE4QztJQUM5QywwREFBd0M7SUFHeEM7Ozs7Ozs7Ozs7Ozs7O09BY0c7SUFDSDtRQUE4QixtQ0FBYTtRQUEzQzs7UUFNQSxDQUFDO1FBSFEsb0JBQUksR0FBWCxVQUFZLEtBQUssRUFBRSxjQUFxQjtZQUFyQiwrQkFBQSxFQUFBLHFCQUFxQjtZQUN0QyxPQUFPLGNBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztRQUN6QixDQUFDO1FBSk0sdUJBQU8sR0FDWixxRkFBcUYsQ0FBQztRQUkxRixzQkFBQztLQUFBLEFBTkQsQ0FBOEIscUJBQWEsR0FNMUM7SUFFRCxPQUFTLGVBQWUsQ0FBQyJ9

@@ -21,14 +21,17 @@ import __SPromise from '../../promise/SPromise';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function js(filePath) {
-  return new __SPromise(
-    async ({ resolve }) => {
-      resolve(await import(filePath));
-    },
-    {
-      id: 'templateJsDataHandler'
-    }
-  );
-}
-export = js;
+export default {
+  name: 'JsDataHandler',
+  extensions: ['js', 'json'],
+  handler: function (filePath) {
+    return new __SPromise(
+      async ({ resolve }) => {
+        resolve(await import(filePath));
+      },
+      {
+        id: 'templateJsDataHandler'
+      }
+    );
+  }
+};

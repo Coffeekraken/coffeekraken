@@ -13,7 +13,7 @@
      * @name            injectStyle
      * @namespace           sugar.js.css
      * @type            Function
-     * @wip
+     * @status              wip
      *
      * Inject a passed style string in the DOM
      *
@@ -41,4 +41,4 @@
     }
     return injectStyle;
 });
-//# sourceMappingURL=injectStyle.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5qZWN0U3R5bGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmplY3RTdHlsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7OztJQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FxQkc7SUFDSCxTQUFTLFdBQVcsQ0FBQyxLQUFLLEVBQUUsSUFBb0I7UUFBcEIscUJBQUEsRUFBQSxPQUFPLFFBQVEsQ0FBQyxJQUFJO1FBQzlDLElBQU0sSUFBSSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDN0MsSUFBSSxDQUFDLElBQUksR0FBRyxVQUFVLENBQUM7UUFDdkIsSUFBSSxDQUFDLFNBQVMsR0FBRyxLQUFLLENBQUM7UUFDdkIsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUN2QixPQUFPLElBQUksQ0FBQztJQUNkLENBQUM7SUFDRCxPQUFTLFdBQVcsQ0FBQyJ9

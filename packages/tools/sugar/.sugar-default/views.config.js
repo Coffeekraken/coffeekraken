@@ -41,7 +41,7 @@ module.exports = {
    */
   engines: {
     /**
-     * @name          blade.php
+     * @name          blade
      * @namespace     config.views.engines
      * @type          String
      *
@@ -50,7 +50,7 @@ module.exports = {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    'blade.php': __path.resolve(
+    blade: __path.resolve(
       __dirname,
       '../src/node/template/engines/SBladeTemplateEngine'
     )
@@ -69,33 +69,15 @@ module.exports = {
    */
   dataHandlers: {
     /**
-     * @name          data.js
+     * @name          js
      * @namespace     config.views.dataHandlers
      * @type          String
      *
-     * Store the path where to find the data.js data handler
+     * Store the path where to find the data.js|json data handler
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    'data.js': __path.resolve(
-      __dirname,
-      '../src/node/template/dataHandlers/js.js'
-    ),
-
-    /**
-     * @name          data.json
-     * @namespace     config.views.dataHandlers
-     * @type          String
-     *
-     * Store the path where to find the data.json data handler
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    'data.json': __path.resolve(
-      __dirname,
-      '../src/node/template/dataHandlers/json.js'
-    )
+    js: __path.resolve(__dirname, '../src/node/template/dataHandlers/js.js')
   }
 };

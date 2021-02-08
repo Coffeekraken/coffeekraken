@@ -297,6 +297,12 @@ class SDescriptor implements ISDescriptor {
       Object.assign({}, settings)
     );
 
+    // flatten the rules
+    const rules = __flatten(settings.rules, {
+      excludeProps: ['default', 'interface'],
+      keepLastIntact: true
+    });
+
     // check the passed value type correspond to the descriptor type
     if (!__isOfType(value, settings.type)) {
       throw `Sorry but this descriptor "<yellow>${
@@ -317,39 +323,41 @@ class SDescriptor implements ISDescriptor {
       value !== undefined
     ) {
       // loop on each object properties
-      Object.keys(settings.rules).forEach((propName) => {
-        const ruleObj = __get(settings.rules, propName);
+      Object.keys(rules).forEach((propName) => {
+        const ruleObj = rules[propName];
 
-        if (__isGlob(propName)) {
-          const globPropValue = __getGlob(value, `${propName}.*`, {
-            deepize: false
-          });
-          if (Object.keys(globPropValue).length) {
-            Object.keys(globPropValue).forEach((propName) => {
-              valuesObjToProcess[propName] = globPropValue[propName];
-              settings.rules[propName] = ruleObj;
-            });
-          }
+        if (__isGlob(propName) && value) {
+          // const globPropValue = __getGlob(value, `${propName}.*`, {
+          //   deepize: false
+          // });
+          // if (Object.keys(globPropValue).length) {
+          //   Object.keys(globPropValue).forEach((propName) => {
+          //     valuesObjToProcess[propName] = globPropValue[propName];
+          //     rules[propName] = ruleObj;
+          //   });
+          // }
         } else {
           valuesObjToProcess[propName] = __get(value, propName);
         }
       });
 
-      Object.keys(valuesObjToProcess).forEach((propName) => {
-        const ruleObj = __get(settings.rules, propName);
+      // nativeConsole.log('aa', valuesObjToProcess);
 
+      Object.keys(valuesObjToProcess).forEach((propName) => {
+        let ruleObj = rules[propName];
         // complete
         if (
-          __get(valuesObjToProcess, propName) === undefined &&
+          valuesObjToProcess[propName] === undefined &&
           settings.complete &&
           ruleObj.default !== undefined
         ) {
-          __set(valuesObjToProcess, propName, ruleObj.default);
+          valuesObjToProcess[propName] = ruleObj.default;
         }
 
         // interface
         if (ruleObj.interface !== undefined) {
-          const interfaceValue = __get(valuesObjToProcess, propName);
+          const interfaceValue = valuesObjToProcess[propName];
+          // nativeConsole.log('VAL', valuesObjToProcess[propName], propName);
           const interfaceRes = ruleObj.interface.apply(interfaceValue || {}, {
             complete: true,
             throw: false
@@ -357,7 +365,7 @@ class SDescriptor implements ISDescriptor {
           if (interfaceRes.hasIssues()) {
             console.log(interfaceRes.toString());
           } else {
-            __set(valuesObjToProcess, propName, interfaceRes.value);
+            valuesObjToProcess[propName] = interfaceRes.value;
           }
         }
 
@@ -378,13 +386,6 @@ class SDescriptor implements ISDescriptor {
       throw new Error(
         `You can apply an <yellow>SDescriptor</yellow> only on an Object like value...`
       );
-      // validate the object property
-      // const validationResult = this._validate(
-      //   value,
-      //   undefined,
-      //   undefined,
-      //   settings
-      // );
     }
 
     // if (this._descriptorResult.hasIssues() && settings.throw) {
@@ -439,8 +440,10 @@ class SDescriptor implements ISDescriptor {
         const ruleSettings =
           ruleObj.settings !== undefined ? ruleObj.settings : {};
         // check if the rule accept this type of value
+        // nativeConsole.log('AAA', propName, value, params);
         if (ruleObj.accept && __isOfType(value, ruleObj.accept) !== true)
           return;
+        // console.log('CC', propName, value, params);
         const ruleResult = ruleObj.apply(value, params, ruleSettings, {
           ...settings,
           name: `${settings.name}.${propName}`
@@ -449,6 +452,7 @@ class SDescriptor implements ISDescriptor {
         const obj = ruleResult === false ? {} : ruleResult;
         obj.__ruleObj = ruleObj;
         obj.__propName = propName;
+        // nativeConsole.log(obj);
         this._descriptorResult.add(obj);
       }
     });

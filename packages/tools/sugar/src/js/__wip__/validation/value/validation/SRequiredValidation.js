@@ -30,7 +30,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name          SRequiredValidation
      * @namespace     sugar.js.validation.value.validation
      * @type          Class
-     * @wip
+     * @status              wip
      *
      * This class represent the "required" validation
      *
@@ -54,4 +54,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SValidation_1.default));
     return SRequiredValidation;
 });
-//# sourceMappingURL=SRequiredValidation.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1JlcXVpcmVkVmFsaWRhdGlvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNSZXF1aXJlZFZhbGlkYXRpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsa0VBQThDO0lBRTlDOzs7Ozs7Ozs7Ozs7OztPQWNHO0lBQ0g7UUFBa0MsdUNBQWE7UUFBL0M7O1FBTUEsQ0FBQztRQUhRLHdCQUFJLEdBQVgsVUFBWSxLQUFLO1lBQ2YsT0FBTyxLQUFLLEtBQUssSUFBSSxJQUFJLEtBQUssS0FBSyxTQUFTLENBQUM7UUFDL0MsQ0FBQztRQUpNLDJCQUFPLEdBQ1osNEVBQTRFLENBQUM7UUFJakYsMEJBQUM7S0FBQSxBQU5ELENBQWtDLHFCQUFhLEdBTTlDO0lBRUQsT0FBUyxtQkFBbUIsQ0FBQyJ9

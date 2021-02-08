@@ -19,7 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name            htmlFromDocblocks
      * @namespace       sugar.js.convert
      * @type            Function
-     * @wip
+     * @status              wip
      *
      * Take a markdown string as input and convert it to HTML.
      *
@@ -50,4 +50,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return htmlFromDocblocks;
 });
-//# sourceMappingURL=htmlFromDocblocks.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaHRtbEZyb21Eb2NibG9ja3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJodG1sRnJvbURvY2Jsb2Nrcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7Ozs7Ozs7Ozs7SUFHVixxRUFBaUQ7SUFDakQsdUVBQW1EO0lBRW5EOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTBCRztJQUNILFNBQVMsaUJBQWlCLENBQUMsV0FBVyxFQUFFLFFBQWE7UUFBYix5QkFBQSxFQUFBLGFBQWE7UUFDbkQsUUFBUSxHQUFHLG1CQUFXLENBQUMsRUFBRSxFQUFFLFFBQVEsQ0FBQyxDQUFDO1FBQ3JDLElBQU0sU0FBUyxHQUFHLElBQUksbUJBQVcsQ0FBQyxXQUFXLEVBQUUsUUFBUSxDQUFDLENBQUM7UUFDekQsT0FBTyxTQUFTLENBQUMsTUFBTSxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQ3BDLENBQUM7SUFDRCxPQUFTLGlCQUFpQixDQUFDIn0=

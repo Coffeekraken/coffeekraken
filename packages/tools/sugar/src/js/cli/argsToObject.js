@@ -19,7 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name                  argsToObject
      * @namespace           sugar.js.cli
      * @type                  Function
-     * @beta
+     * @status              beta
      *
      * This function take a simple object, a definition object and return you the string version that you can pass
      * directly to the command line interface
@@ -69,4 +69,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return argsToObject;
 });
-//# sourceMappingURL=argsToObject.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXJnc1RvT2JqZWN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXJnc1RvT2JqZWN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7Ozs7OztJQUVWLDBEQUFzQztJQUN0Qyw0RUFBd0Q7SUFFeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTBDRztJQUNILFNBQVMsWUFBWSxDQUFDLE9BQU8sRUFBRSxRQUFhO1FBQWIseUJBQUEsRUFBQSxhQUFhO1FBQzFDLElBQUksT0FBTyxPQUFPLEtBQUssUUFBUSxFQUFFO1lBQy9CLE9BQU8sbUJBQVcsQ0FBQyxPQUFPLEVBQUU7Z0JBQzFCLFVBQVUsRUFBRSxRQUFRLENBQUMsVUFBVTthQUNoQyxDQUFDLENBQUM7U0FDSjtRQUVELE9BQU8sNEJBQW9CLENBQUMsT0FBTyxJQUFJLEVBQUUsRUFBRSxRQUFRLENBQUMsQ0FBQztJQUN2RCxDQUFDO0lBQ0QsT0FBUyxZQUFZLENBQUMifQ==

@@ -308,6 +308,8 @@ class SInterface implements ISInterface {
 
     const descriptorResult: ISDescriptorResult = descriptor.apply(instance);
 
+    // nativeConsole.log('in', this._definition);
+
     // instanciate a new interface result object
     const interfaceResult: ISInterfaceResult = new __SInterfaceResult({
       descriptorResult

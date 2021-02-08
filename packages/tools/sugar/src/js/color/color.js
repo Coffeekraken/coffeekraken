@@ -35,4 +35,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return color;
 });
-//# sourceMappingURL=color.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29sb3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjb2xvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7Ozs7Ozs7Ozs7SUFFVixvREFBZ0M7SUFFaEM7Ozs7Ozs7Ozs7Ozs7OztPQWVHO0lBQ0gsU0FBUyxLQUFLLENBQUMsS0FBSztRQUNsQixPQUFPLElBQUksZ0JBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUM3QixDQUFDO0lBQ0QsT0FBUyxLQUFLLENBQUMifQ==

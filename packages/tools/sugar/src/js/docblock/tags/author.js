@@ -14,7 +14,7 @@
      * @name              author
      * @namespace           sugar.js.docblock.tags
      * @type              Function
-     * @wip
+     * @status              wip
      *
      * Parse the author tag
      *
@@ -39,4 +39,4 @@
     }
     return author;
 });
-//# sourceMappingURL=author.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXV0aG9yLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXV0aG9yLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7OztJQUVWOzs7Ozs7Ozs7Ozs7Ozs7O09BZ0JHO0lBQ0gsU0FBUyxNQUFNLENBQUMsSUFBSTtRQUNsQixJQUFNLFNBQVMsR0FBRyw2REFBNkQsQ0FBQyxJQUFJLENBQ2xGLElBQUksQ0FBQyxLQUFLLENBQ1gsQ0FBQztRQUNGLElBQUksQ0FBQyxTQUFTO1lBQUUsT0FBTyxJQUFJLENBQUM7UUFFNUIsT0FBTztZQUNMLElBQUksRUFBRSxTQUFTLENBQUMsQ0FBQyxDQUFDO1lBQ2xCLEtBQUssRUFBRSxTQUFTLENBQUMsQ0FBQyxDQUFDO1lBQ25CLEdBQUcsRUFBRSxTQUFTLENBQUMsQ0FBQyxDQUFDO1NBQ2xCLENBQUM7SUFDSixDQUFDO0lBQ0QsT0FBUyxNQUFNLENBQUMifQ==

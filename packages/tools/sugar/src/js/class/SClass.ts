@@ -4,6 +4,7 @@ import __deepAssign from '../object/deepAssign';
 import __deepMerge from '../object/deepMerge';
 import __isPlain from '../is/plainObject';
 import __get from '../object/get';
+import __set from '../object/set';
 import __getExtendsStack from '../class/getExtendsStack';
 
 import { ISInterface } from '../interface/SInterface';
@@ -324,11 +325,11 @@ function applyInterface(ctx: any, name: string, on: any = null) {
   if (__isPlain(interfaceObj)) {
     let onValue;
     if (interfaceObj.on && typeof interfaceObj.on === 'string') {
-      onValue = ctx[interfaceObj.on];
+      onValue = __get(ctx, interfaceObj.on);
     } else if (interfaceObj.on && typeof interfaceObj.on === 'object') {
       onValue = interfaceObj.on;
     } else {
-      onValue = ctx[name];
+      onValue = __get(ctx, name);
     }
 
     let applyId = ctx.constructor.name;
@@ -341,12 +342,11 @@ function applyInterface(ctx: any, name: string, on: any = null) {
 
     let res;
     if (name === 'this') {
-      res = interfaceObj.class.apply(onValue, {
+      res = interfaceObj.class.apply(onValue || {}, {
         id: applyId,
         complete: true,
         throw: true
       });
-      console.log(ctx.constructor.name);
       __deepAssign(ctx, res.value);
       return ctx;
     } else {
@@ -363,8 +363,7 @@ function applyInterface(ctx: any, name: string, on: any = null) {
         const returnValue = __deepAssign(interfaceObj.on, res.value);
         return returnValue;
       } else if (interfaceObj.on && typeof interfaceObj.on === 'string') {
-        ctx[interfaceObj.on] = __deepAssign(ctx[interfaceObj.on], res.value);
-        return ctx[interfaceObj.on];
+        return __deepAssign(__get(ctx, interfaceObj.on), res.value);
       } else if (ctx[name] !== undefined) {
         return ctx[name];
       } else if (!res.hasIssues()) {

@@ -19,7 +19,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name          stripCssComments
      * @namespace     sugar.js.css
      * @type          Function
-     * @wip
+     * @status              wip
      *
      * This function simply remove all the css comments like:
      * - Multiline blocks css comments begining with /* *, ending with * /
@@ -67,4 +67,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return stripCssComments;
 });
-//# sourceMappingURL=stripCssComments.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RyaXBDc3NDb21tZW50cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN0cmlwQ3NzQ29tbWVudHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLFVBQVU7Ozs7Ozs7Ozs7Ozs7O0lBRVYsa0VBQThDO0lBQzlDLDBFQUFvRDtJQUVwRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FnQ0c7SUFDSCxTQUFTLGdCQUFnQixDQUFDLEdBQUcsRUFBRSxRQUFhO1FBQWIseUJBQUEsRUFBQSxhQUFhO1FBQzFDLFFBQVEsR0FBRyxtQkFBVyxDQUNwQjtZQUNFLEtBQUssRUFBRSxJQUFJO1lBQ1gsSUFBSSxFQUFFLElBQUk7U0FDWCxFQUNELFFBQVEsQ0FDVCxDQUFDO1FBQ0YsSUFBSSxRQUFRLENBQUMsS0FBSyxFQUFFO1lBQ2xCLG1EQUFtRDtZQUNuRCxHQUFHLEdBQUcsNEJBQWtCLENBQUMsR0FBRyxFQUFFO2dCQUM1QixRQUFRLEVBQUUsS0FBSzthQUNoQixDQUFDLENBQUM7U0FDSjtRQUNELElBQUksUUFBUSxDQUFDLElBQUksRUFBRTtZQUNqQixHQUFHLEdBQUcsR0FBRyxDQUFDLE9BQU8sQ0FBQyw0QkFBNEIsRUFBRSxFQUFFLENBQUMsQ0FBQztTQUNyRDtRQUNELE9BQU8sR0FBRyxDQUFDO0lBQ2IsQ0FBQztJQUNELE9BQVMsZ0JBQWdCLENBQUMifQ==

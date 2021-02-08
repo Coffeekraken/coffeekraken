@@ -81,4 +81,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
  *
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-//# sourceMappingURL=SEvent.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0V2ZW50LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0V2ZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7O0lBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTJCRztJQUNILDhEQUF1QztJQUN2QyxPQUFTLHNCQUFXLENBQUM7O0FBRXJCOzs7Ozs7Ozs7O0dBVUc7QUFFSDs7Ozs7Ozs7R0FRRztBQUVIOzs7Ozs7OztHQVFHO0FBRUg7Ozs7Ozs7O0dBUUcifQ==

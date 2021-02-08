@@ -33,7 +33,7 @@ import __toString from '../string/toString';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SCache {
+class SCache implements ISCache {
   /**
    * @name                              _name
    * @type                              String
@@ -414,4 +414,6 @@ export = class SCache {
   _stringify(object) {
     return this._settings.stringify(object);
   }
-};
+}
+
+export default SCache;

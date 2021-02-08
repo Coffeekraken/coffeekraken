@@ -1,5 +1,4 @@
 "use strict";
-// @ts-nocheck
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -12,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const unique_1 = __importDefault(require("../array/unique"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const sugar_1 = __importDefault(require("../config/sugar"));
@@ -20,44 +20,10 @@ const fs_1 = __importDefault(require("fs"));
 const SError_1 = __importDefault(require("../error/SError"));
 const glob_1 = __importDefault(require("glob"));
 const STemplateEngine_1 = __importDefault(require("./engines/STemplateEngine"));
+const SClass_1 = __importDefault(require("../class/SClass"));
 const SPromise_1 = __importDefault(require("../promise/SPromise"));
-/**
- * @name          STemplate
- * @namespace     sugar.node.template
- * @type          Class
- * @status              wip
- *
- * This class represent a template that can be rendered using all the supported render engines listed in the features bellow.
- *
- * @feature       2.0.0         Support for ```bladePhp``` render engine
- * @feature       2.0.0         Simply render your template using the ```render``` method that returns you back a nice SPromise instance resolved once the template has been rendered correctly
- *
- * @param       {String}        viewPathOrTemplateString      The view doted file path relative to the ```rootDir``` setting, or directly a template string to render using the engine specify in ```engine``` setting...
- * @param       {Object}        [settings={}]           An object of settings to configure your template rendering process:
- * - rootDir (@config.views.rootDir) {String}: Specify either 1 rootDir in which to search for your view, or an Array of rootDir to search in
- * - engine (null) {String|STemplateEngine}: Specify the engine to use in order to render your template. By default it will try to automatically detect the engine but you can specify it yourself. Can be a string like "blade.php" that identify a registered template engine, or directly an STemplateEngine based template engine instance
- * - engineSettings ({}) {Object}: Specify some settings that will be passed to the corresponding engine
- * - defaultData ({}) {Object}: A data object to use by default when calling the ```render``` method. Can be overrided obviously in the ```render``` method
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import STemplate from '@coffeekraken/sugar/node/template/STemplate';
- * const myTemplate = new STemplate('my.cool.view', {
- *    title: 'Hello'
- * }, {
- *    engine: 'blade'
- * });
- * const result = await myTemplate.render({
- *    title: 'World'
- * });
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class STemplate {
+// @ts-ignore
+class STemplate extends SClass_1.default {
     /**
      * @name      constructor
      * @type      Function
@@ -68,68 +34,25 @@ class STemplate {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(viewPathOrTemplateString, settings = {}) {
-        /**
-         * @name      _settings
-         * @type      Object
-         * @private
-         *
-         * Store the passed settings
-         *
-         * @since     2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this._settings = {};
-        /**
-         * @name      _viewPath
-         * @type      String
-         * @default   null
-         * @private
-         *
-         * Store the view doted path if the passed parameter is a valid path
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this._viewPath = null;
-        /**
-         * @name      _templateString
-         * @type      String
-         * @default    null
-         * @private
-         *
-         * Store the template string if the passed view is a template string and not a view path
-         *
-         * @since     2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this._templateString = null;
-        /**
-         * @name      _engineInstance
-         * @type      __STemplateEngine
-         * @private
-         *
-         * Store the engine instance used to render the passed template
-         *
-         * @since     2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this._engineInstance = null;
+    constructor(viewPathOrTemplateString, settings) {
         // save the settings
-        this._settings = deepMerge_1.default({
+        super(deepMerge_1.default({
             id: 'STemplate',
-            rootDirs: [],
-            engine: null,
-            engineSettings: {},
-            defaultData: {}
-        }, settings);
-        this._settings.rootDirs = this.constructor.getRootDirs(settings.rootDirs || []);
+            template: {
+                rootDirs: [],
+                engine: null,
+                engineSettings: {},
+                defaultData: {}
+            }
+        }, settings || {}));
+        this.templateSettings.rootDirs = this.constructor.getRootDirs(this.templateSettings.rootDirs || []);
         Object.keys(STemplate.engines).forEach((ext) => {
             viewPathOrTemplateString = viewPathOrTemplateString.replace(`.${ext}`, '');
         });
         // if the "engine" setting is an instance, save it as engineInstance
-        if (this._settings.engine instanceof STemplateEngine_1.default) {
-            this._engineInstance = this._settings.engine;
+        if (typeof this.templateSettings.engine !== 'string' &&
+            this.templateSettings.engine instanceof STemplateEngine_1.default) {
+            this._engineInstance = this.templateSettings.engine;
         }
         // detect and save the view doted path or the view template string
         if (viewPathOrTemplateString.split(' ').length === 1 &&
@@ -143,8 +66,8 @@ class STemplate {
             }
             else if (!viewPathOrTemplateString.match(/\//gm)) {
                 // doted path
-                for (let i = 0; i < this._settings.rootDirs.length; i++) {
-                    const rootDir = this._settings.rootDirs[i];
+                for (let i = 0; i < this.templateSettings.rootDirs.length; i++) {
+                    const rootDir = this.templateSettings.rootDirs[i];
                     const viewPath = `${rootDir}/${viewPathOrTemplateString
                         .split('.')
                         .join('/')}.[!data]*`;
@@ -152,8 +75,8 @@ class STemplate {
                     if (matches && matches.length) {
                         this._viewPath = matches[0];
                         const extension = this._viewPath.split('.').slice(1).join('.');
-                        if (!this._settings.engine)
-                            this._settings.engine = extension;
+                        if (!this.templateSettings.engine)
+                            this.templateSettings.engine = extension;
                         break;
                     }
                 }
@@ -200,15 +123,26 @@ class STemplate {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static registerEngine(extension, enginePath) {
-        if (enginePath.slice(-3) !== '.js')
+    static registerEngine(enginePath) {
+        if (!enginePath.match(/\.js$/))
             enginePath += '.js';
         // make sure the engine path exists
         if (!fs_1.default.existsSync(enginePath)) {
-            throw new SError_1.default(`Sorry but the engine "<yellow>${extension}</yellow>" that you want to register using the path "<cyan>${enginePath}</cyan>" does not exists...`);
+            throw new SError_1.default(`Sorry but the engine "<yellow>${enginePath}</yellow>" that you want to register does not exists...`);
         }
-        // register the engine in the stack
-        STemplate.engines[extension] = enginePath;
+        // get the engine class
+        const EngineClass = require(enginePath);
+        // make sure we have names defined
+        if (!EngineClass.names ||
+            !Array.isArray(EngineClass.names) ||
+            !EngineClass.names.length) {
+            throw new Error(`You try to register an STemplate engine with the class "<yellow>${EngineClass.name}</yellow>" but you forgot to specify the static property "<cyan>names</cyan>" with something like "<green>['twig.js','twig']</green>"...`);
+        }
+        // register the engine under each names
+        EngineClass.names.forEach((name) => {
+            // register the engine in the stack
+            STemplate.engines[name] = EngineClass;
+        });
     }
     /**
      * @name      registerDataHandler
@@ -218,21 +152,31 @@ class STemplate {
      * This static method can be used to register a compatible __STemplateEngine engine class
      * into the available STemplate engines.
      *
-     * @param       {String}        extension       The file extension to detect the engine. For example "blade.php" will be used to render all the files names "%name.blade.php"
      * @param       {String}        handlerPath      The absolute path to the engine class file
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static registerDataHandler(extension, handlerPath) {
+    static registerDataHandler(handlerPath) {
         if (handlerPath.slice(-3) !== '.js')
             handlerPath += '.js';
         // make sure the engine path exists
         if (!fs_1.default.existsSync(handlerPath)) {
-            throw new SError_1.default(`Sorry but the data handler "<yellow>${extension}</yellow>" that you want to register using the path "<cyan>${handlerPath}</cyan>" does not exists...`);
+            throw new SError_1.default(`Sorry but the data handler "<yellow>${handlerPath}</yellow>" that you want to register does not exists...`);
         }
-        // register the engine in the stack
-        STemplate.dataHandlers[extension] = handlerPath;
+        // get the engine class
+        const HandlerClass = require(handlerPath).default;
+        // make sure we have extensions defined
+        if (!HandlerClass.extensions ||
+            !Array.isArray(HandlerClass.extensions) ||
+            !HandlerClass.extensions.length) {
+            throw new Error(`You try to register an STemplate data handler with the class "<yellow>${HandlerClass.name}</yellow>" but you forgot to specify the property "<cyan>extensions</cyan>" with something like "<green>['json','js']</green>"...`);
+        }
+        // register the engine under each names
+        HandlerClass.extensions.forEach((extension) => {
+            // register the engine in the stack
+            STemplate.dataHandlers[extension] = HandlerClass;
+        });
     }
     /**
      * @name					getViewInfo
@@ -284,6 +228,43 @@ class STemplate {
         return infoObj;
     }
     /**
+     * @name      templateSettings
+     * @type      ISTemplateSettings
+     * @get
+     *
+     * Access the template settings
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get templateSettings() {
+        return this._settings.template;
+    }
+    /**
+     * @name          _getEngineByName
+     * @type          Function
+     * @private
+     *
+     * This method take an engine name and tries to returns you the engine instance
+     * registered in the stack
+     *
+     * @param     {String}    name    The engine name wanted
+     * @return    {STemplateEngine|undefined}     The engine class or undefined
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _getEngineByName(name) {
+        if (STemplate.engines[name] !== undefined)
+            return STemplate.engines[name];
+        else if (name.includes('.')) {
+            const engineName = name.split('.')[0];
+            if (STemplate.engines[engineName])
+                return STemplate.engines[engineName];
+        }
+        return undefined;
+    }
+    /**
      * @name          render
      * @type          Function
      * @async
@@ -297,29 +278,29 @@ class STemplate {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    render(data = {}, settings = {}) {
+    render(data = {}, settings) {
         return new SPromise_1.default(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
-            settings = deepMerge_1.default(this._settings, settings);
-            data = deepMerge_1.default(settings.defaultData, data);
+            const renderSettings = (deepMerge_1.default(this.templateSettings, settings || {}));
+            data = deepMerge_1.default(renderSettings.defaultData, data);
             if (this._templateString) {
-                if (!settings.engine) {
+                if (!renderSettings.engine) {
                     // loop on the engines to get the better one
                     for (let i = 0; i < Object.keys(STemplate.engines).length; i++) {
                         const enginePath = STemplate.engines[Object.keys(STemplate.engines)[i]];
                         const EngineClass = require(enginePath);
                         if (EngineClass.input === 'string' &&
                             EngineClass.canRender(this._templateString)) {
-                            settings.engine = Object.keys(STemplate.engines)[i];
+                            renderSettings.engine = Object.keys(STemplate.engines)[i];
                             break;
                         }
                     }
                 }
-                else if (this._settings.engine instanceof STemplateEngine_1.default) {
-                    if (!settings.engine.constructor.canRender(this._templateString)) {
+                else if (renderSettings.engine instanceof STemplateEngine_1.default) {
+                    if (!renderSettings.engine.constructor.canRender(this._templateString)) {
                         return reject(`It seems that you've passed directly an __STemplateEngine engine as the settings.engine option but this engine cannot render your passed template string...`);
                     }
                 }
-                if (!settings.engine) {
+                if (!renderSettings.engine) {
                     return reject(`Sorry but it seems that the passed template string cannot be rendered using any of the available engines:\n- ${Object.keys(STemplate.engines)
                         .map((l) => {
                         return `<yellow>${l}</yellow>`;
@@ -328,7 +309,7 @@ class STemplate {
                 }
             }
             else if (this._viewPath) {
-                const viewPathWithoutExtension = this._viewPath.replace(`.${settings.engine}`, '');
+                const viewPathWithoutExtension = this._viewPath.replace(`.${renderSettings.engine}`, '');
                 // loop on each dataHandlers available
                 let dataHandlerFn, dataFilePath;
                 Object.keys(STemplate.dataHandlers).forEach((extension) => {
@@ -345,28 +326,33 @@ class STemplate {
                     data = deepMerge_1.default(dataObj, data);
                 }
             }
-            if (!this._engineInstance) {
+            if (!this._engineInstance &&
+                typeof renderSettings.engine === 'string') {
                 // get the engine class
-                const EngineClass = require(STemplate.engines[settings.engine]);
-                this._engineInstance = new EngineClass(Object.assign({}, settings.engineSettings));
+                const EngineClass = this._getEngineByName(renderSettings.engine);
+                if (EngineClass) {
+                    this._engineInstance = new EngineClass(renderSettings.engineSettings || {});
+                }
             }
-            const renderPromise = this._engineInstance.render(this._viewPath || this._templateString, data, settings);
-            const result = yield renderPromise;
-            if (renderPromise.isRejected()) {
-                return reject({
+            if (this._engineInstance) {
+                const renderPromise = this._engineInstance.render(this._viewPath || this._templateString || '', data, renderSettings);
+                const result = yield renderPromise;
+                if (renderPromise.isRejected()) {
+                    return reject({
+                        view: this._viewPath,
+                        engine: renderSettings.engine,
+                        content: '0cc'
+                    });
+                }
+                // resolve the render process
+                resolve({
                     view: this._viewPath,
-                    engine: settings.engine,
-                    content: '0cc'
+                    engine: renderSettings.engine,
+                    content: result
                 });
             }
-            // resolve the render process
-            resolve({
-                view: this._viewPath,
-                engine: settings.engine,
-                content: result
-            });
         }), {
-            id: settings.id + '.render'
+            id: this.id + '.render'
         });
     }
 }
@@ -408,12 +394,13 @@ STemplate.defaultRootDirs = [
     path_1.default.resolve(__dirname, '../../php/views/blade')
 ];
 const defaultEngines = sugar_1.default('views.engines') || {};
-Object.keys(defaultEngines).forEach((extension) => {
-    STemplate.registerEngine(extension, defaultEngines[extension]);
+Object.keys(defaultEngines).forEach((name) => {
+    STemplate.registerEngine(defaultEngines[name]);
 });
 const defaultDataHandlers = sugar_1.default('views.dataHandlers') || {};
-Object.keys(defaultDataHandlers).forEach((extension) => {
-    STemplate.registerDataHandler(extension, defaultDataHandlers[extension]);
+Object.keys(defaultDataHandlers).forEach((name) => {
+    STemplate.registerDataHandler(defaultDataHandlers[name]);
 });
-module.exports = STemplate;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1RlbXBsYXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1RlbXBsYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7O0FBRWQsNkRBQXVDO0FBQ3ZDLG9FQUE4QztBQUM5Qyw0REFBNEM7QUFDNUMsZ0RBQTBCO0FBQzFCLDRDQUFzQjtBQUN0Qiw2REFBdUM7QUFDdkMsZ0RBQTBCO0FBQzFCLGdGQUEwRDtBQUMxRCxtRUFBNkM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUNHO0FBQ0gsTUFBTSxTQUFTO0lBd05iOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksd0JBQXdCLEVBQUUsUUFBUSxHQUFHLEVBQUU7UUFqT25EOzs7Ozs7Ozs7V0FTRztRQUNILGNBQVMsR0FBRyxFQUFFLENBQUM7UUFFZjs7Ozs7Ozs7OztXQVVHO1FBQ0gsY0FBUyxHQUFHLElBQUksQ0FBQztRQUVqQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsb0JBQWUsR0FBRyxJQUFJLENBQUM7UUFFdkI7Ozs7Ozs7OztXQVNHO1FBQ0gsb0JBQWUsR0FBRyxJQUFJLENBQUM7UUFrTHJCLG9CQUFvQjtRQUNwQixJQUFJLENBQUMsU0FBUyxHQUFHLG1CQUFXLENBQzFCO1lBQ0UsRUFBRSxFQUFFLFdBQVc7WUFDZixRQUFRLEVBQUUsRUFBRTtZQUNaLE1BQU0sRUFBRSxJQUFJO1lBQ1osY0FBYyxFQUFFLEVBQUU7WUFDbEIsV0FBVyxFQUFFLEVBQUU7U0FDaEIsRUFDRCxRQUFRLENBQ1QsQ0FBQztRQUNGLElBQUksQ0FBQyxTQUFTLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxXQUFXLENBQUMsV0FBVyxDQUNwRCxRQUFRLENBQUMsUUFBUSxJQUFJLEVBQUUsQ0FDeEIsQ0FBQztRQUVGLE1BQU0sQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLEdBQUcsRUFBRSxFQUFFO1lB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
+const cls = STemplate;
+exports.default = STemplate;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1RlbXBsYXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1RlbXBsYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsNkRBQXVDO0FBQ3ZDLG9FQUE4QztBQUM5Qyw0REFBNEM7QUFDNUMsZ0RBQTBCO0FBQzFCLDRDQUFzQjtBQUN0Qiw2REFBdUM7QUFDdkMsZ0RBQTBCO0FBQzFCLGdGQUEwRDtBQUMxRCw2REFBdUM7QUFFdkMsbUVBQTREO0FBb0Y1RCxhQUFhO0FBQ2IsTUFBTSxTQUFVLFNBQVEsZ0JBQVE7SUF3UDlCOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksd0JBQXdCLEVBQUUsUUFBaUM7UUFDckUsb0JBQW9CO1FBQ3BCLEtBQUssQ0FDSCxtQkFBVyxDQUNUO1lBQ0UsRUFBRSxFQUFFLFdBQVc7WUFDZixRQUFRLEVBQUU7Z0JBQ1IsUUFBUSxFQUFFLEVBQUU7Z0JBQ1osTUFBTSxFQUFFLElBQUk7Z0JBQ1osY0FBYyxFQUFFLEVBQUU7Z0JBQ2xCLFdBQVcsRUFBRSxFQUFFO2FBQ2hCO1NBQ0YsRUFDRCxRQUFRLElBQUksRUFBRSxDQUNmLENBQ0YsQ0FBQztRQUNGLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxRQUFRLEdBQVMsSUFBSSxDQUFDLFdBQVksQ0FBQyxXQUFXLENBQ2xFLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxRQUFRLElBQUksRUFBRSxDQUNyQyxDQUFDO1FBRUYsTUFBTSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsT0FBTyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUU7WUFDN0Msd0JBQXdCLEdBQUcsd0JBQXdCLENBQUMsT0FBTyxDQUN6RCxJQUFJLEdBQUcsRUFBRSxFQUNULEVBQUUsQ0FDSCxDQUFDO1FBQ0osQ0FBQyxDQUFDLENBQUM7UUFFSCxvRUFBb0U7UUFDcEUsSUFDRSxPQUFPLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxNQUFNLEtBQUssUUFBUTtZQUNoRCxJ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

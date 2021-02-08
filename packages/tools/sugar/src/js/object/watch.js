@@ -18,7 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @name                      watch
      * @namespace           sugar.js.object
      * @type                      Function
-     * @wip
+     * @status              wip
      *
      * This method is a simple wrapper around the SWatch class that allows you to watch some action on object and arrays
      *
@@ -49,4 +49,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     return watch;
 });
-//# sourceMappingURL=watch.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2F0Y2guanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ3YXRjaC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7Ozs7Ozs7Ozs7SUFFVixvREFBZ0M7SUFHaEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTJCRztJQUNILFNBQVMsS0FBSyxDQUFDLE1BQU0sRUFBRSxRQUFhO1FBQWIseUJBQUEsRUFBQSxhQUFhO1FBQ2xDLElBQU0sVUFBVSxHQUFHLElBQUksZ0JBQVEsQ0FBQyxNQUFNLEVBQUUsUUFBUSxDQUFDLENBQUM7UUFDbEQsT0FBTyxVQUFVLENBQUM7SUFDcEIsQ0FBQztJQUNELE9BQVMsS0FBSyxDQUFDIn0=

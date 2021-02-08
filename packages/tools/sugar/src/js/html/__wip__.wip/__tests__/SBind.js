@@ -1,4 +1,4 @@
 "use strict";
 module.exports = function (__SBind) {
 };
-//# sourceMappingURL=SBind.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0JpbmQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQmluZC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsTUFBTSxDQUFDLE9BQU8sR0FBRyxVQUFDLE9BQU87QUFJekIsQ0FBQyxDQUFBIn0=

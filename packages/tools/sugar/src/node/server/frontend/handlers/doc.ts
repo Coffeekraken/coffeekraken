@@ -5,6 +5,9 @@ import __SScssCompiler from '../../../scss/compile/SScssCompiler';
 import __SDuration from '../../../time/SDuration';
 import __SScssCompilerParamsInterface from '../../../scss/compile/interface/SScssCompilerParamsInterface';
 import __SDocMap from '../../../docMap/SDocMap';
+import __page404 from '../../../template/pages/404';
+import __SDocblock from '../../../docblock/SDocblock';
+import __SDocblockHtmlRenderer from '../../../docblock/renderers/SDocblockHtmlRenderer';
 
 /**
  * @name                doc
@@ -28,13 +31,30 @@ import __SDocMap from '../../../docMap/SDocMap';
 export = function doc(req, res, settings = {}) {
   return new __SPromise(async ({ resolve, reject, pipe }) => {
     const docMap = new __SDocMap();
-    const files = await docMap.find();
-    console.log(files);
+    const namespace = req.path.replace('/doc/', '').trim();
+    const docMapJson = await docMap.read();
+    if (!docMapJson[namespace]) {
+      const html = await __page404({
+        title: `Documentation "${namespace}" not found`,
+        body: `The documentation "${namespace}" you requested does not exists...`
+      });
+      res.type('text/html');
+      res.status(404);
+      res.send(html);
+      return reject(html);
+    }
+
+    // generate the docblocks
+    const docblock = new __SDocblock(docMapJson[namespace].path);
+
+    // render them into html
+    const htmlRenderer = new __SDocblockHtmlRenderer(docblock);
+    const html = await htmlRenderer.render();
 
     // nativeConsole.log(req);
     res.type('text/html');
     res.status(200);
-    res.send('yop');
-    resolve('yop');
+    res.send(html);
+    resolve(html);
   });
 };

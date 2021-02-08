@@ -54,33 +54,40 @@ function flatten(object, settings = {}) {
     arrayWithDots: false,
     quoteSeparatedProperties: true,
     quoteCharacter: '"',
+    excludeProps: [],
     keepLastIntact: false,
     ...settings
   };
 
-  for (const i in object) {
-    if (object[i] === undefined) continue;
+  for (const key in object) {
+    if (object[key] === undefined) continue;
 
-    if (object[i] === null) {
-      toReturn[i] = null;
+    if (object[key] === null) {
+      toReturn[key] = null;
+      continue;
+    }
+
+    if (settings.excludeProps.indexOf(key) !== -1) {
+      toReturn[key] = object[key];
       continue;
     }
 
     if (
-      (Array.isArray(object[i]) && settings.array) ||
-      (!Array.isArray(object[i]) && typeof object[i]) == 'object'
+      (Array.isArray(object[key]) && settings.array) ||
+      (!Array.isArray(object[key]) && typeof object[key]) == 'object'
     ) {
-      // if (object[i].__isFlattened === true) {
-      //   toReturn[i] = object[i];
+      // if (object[key].__isFlattened === true) {
+      //   toReturn[key] = object[key];
       //   continue;
       // }
 
-      const isArray = Array.isArray(object[i]);
-      const flatObject = flatten(object[i], {
+      const isArray = Array.isArray(object[key]);
+
+      const flatObject = flatten(object[key], {
         ...settings,
         keepLastIntact: false
       });
-      // delete object[i].__isFlattened;
+      // delete object[key].__isFlattened;
 
       for (const x in flatObject) {
         if (flatObject[x] === undefined) continue;
@@ -90,30 +97,30 @@ function flatten(object, settings = {}) {
 
         if (isArray) {
           if (settings.arrayWithDots) {
-            toReturn[`${i}.${x}`] = flatObject[x];
+            toReturn[`${key}.${x}`] = flatObject[x];
           } else {
-            toReturn[`${i}[${x}]`] = flatObject[x];
+            toReturn[`${key}[${x}]`] = flatObject[x];
           }
         } else {
-          let part = i;
+          let part = key;
           if (
             settings.quoteSeparatedProperties &&
             part.includes(settings.separator)
           ) {
             toReturn[
-              `${settings.quoteCharacter}${i}${settings.quoteCharacter}` +
+              `${settings.quoteCharacter}${key}${settings.quoteCharacter}` +
                 settings.separator +
                 x
             ] = flatObject[x];
           } else {
-            toReturn[i + settings.separator + x] = flatObject[x];
+            toReturn[key + settings.separator + x] = flatObject[x];
           }
         }
       }
       continue;
     }
 
-    toReturn[i] = object[i];
+    toReturn[key] = object[key];
   }
 
   // console.log('BE', toReturn);

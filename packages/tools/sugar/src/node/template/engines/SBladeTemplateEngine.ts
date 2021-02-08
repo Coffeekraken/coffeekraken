@@ -53,6 +53,19 @@ export = class SBladeTemplateEngine extends __STemplateEngine {
   static input = 'string';
 
   /**
+   * @name      names
+   * @type      Array<String>
+   * @default   ['blade.php','blade']
+   * @static
+   *
+   * Store all the names under which this engine is available
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static names = ['blade.php', 'blade'];
+
+  /**
    * @name      canRender
    * @type      Function
    * @static

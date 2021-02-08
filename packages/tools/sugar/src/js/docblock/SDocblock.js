@@ -1,5 +1,17 @@
-// @ts-nocheck
 // @shared
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -9,18 +21,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../error/SError", "../object/deepMerge", "./SDocblockBlock", "../is/node", "../is/path", "fs"], factory);
+        define(["require", "exports", "../class/SClass", "../object/deepMerge", "./SDocblockBlock", "../is/node", "../is/path", "fs"], factory);
     }
 })(function (require, exports) {
     "use strict";
-    var SError_1 = __importDefault(require("../error/SError"));
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var SClass_1 = __importDefault(require("../class/SClass"));
     var deepMerge_1 = __importDefault(require("../object/deepMerge"));
     var SDocblockBlock_1 = __importDefault(require("./SDocblockBlock"));
     // import __markdown from './markdown/index';
     var node_1 = __importDefault(require("../is/node"));
     var path_1 = __importDefault(require("../is/path"));
     var fs_1 = __importDefault(require("fs"));
-    return /** @class */ (function () {
+    // @ts-ignore
+    var SDocblock = /** @class */ (function (_super) {
+        __extends(SDocblock, _super);
         /**
          * @name            constructor
          * @type            Function
@@ -30,27 +45,34 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @author 	Olivier Bossel <olivier.bossel@gmail.com>
          */
         function SDocblock(source, settings) {
-            if (settings === void 0) { settings = {}; }
-            /**
-             * @name              _settings
-             * @type              Object
-             * @private
-             *
-             * Store this instance settings
-             *
-             * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-             */
-            this._settings = {};
-            /**
-             * @name            _source
-             * @type            String|Array<Object>
-             * @private
-             *
-             * Store the passed source
-             *
-             * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-             */
-            this._source = null;
+            var _this = _super.call(this, deepMerge_1.default({
+                docblock: {
+                    sortFunction: function (a, b) {
+                        var res = 0;
+                        if (!b || !a)
+                            return res;
+                        var aObj = a.toObject(), bObj = b.toObject();
+                        // if (.object.namespace && !aObj.namespace) res -= 1;
+                        if (bObj.namespace)
+                            res += 1;
+                        if (bObj.type && bObj.type.toLowerCase() === 'class')
+                            res += 1;
+                        if (bObj.constructor)
+                            res += 1;
+                        if (bObj.private)
+                            res += 1;
+                        if (bObj.type && bObj.type.toLowerCase() === 'function')
+                            res += 1;
+                        if (aObj.name && bObj.name && bObj.name.length > aObj.name.length)
+                            res += 1;
+                        return res;
+                    },
+                    filepath: null,
+                    to: {
+                    // markdown: __markdown
+                    }
+                }
+            }, settings || {})) || this;
             /**
              * @name            _blocks
              * @type            Array<Object>
@@ -60,57 +82,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
              *
              * @author 	Olivier Bossel <olivier.bossel@gmail.com>
              */
-            this._blocks = null;
-            /**
-             * @name          _to
-             * @type          String
-             * @private
-             *
-             * Store the format in which the docblocks have to be converted
-             *
-             * @author 	Olivier Bossel <olivier.bossel@gmail.com>
-             */
-            this._to = null;
-            this._settings = deepMerge_1.default({
-                sortFunction: function (a, b) {
-                    var res = 0;
-                    if (!b || !a)
-                        return res;
-                    var aObj = a.toObject(), bObj = b.toObject();
-                    // if (.object.namespace && !aObj.namespace) res -= 1;
-                    if (bObj.namespace)
-                        res += 1;
-                    if (bObj.type && bObj.type.toLowerCase() === 'class')
-                        res += 1;
-                    if (bObj.constructor)
-                        res += 1;
-                    if (bObj.private)
-                        res += 1;
-                    if (bObj.type && bObj.type.toLowerCase() === 'function')
-                        res += 1;
-                    if (aObj.name && bObj.name && bObj.name.length > aObj.name.length)
-                        res += 1;
-                    return res;
-                },
-                filepath: null,
-                to: {
-                // markdown: __markdown
-                }
-            }, settings);
+            _this._blocks = [];
             // check if the source is path
             if (path_1.default(source)) {
                 if (!node_1.default())
-                    throw new SError_1.default("Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like \"<yellow>" + source + "</yellow>\"...");
+                    throw new Error("Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like \"<yellow>" + source + "</yellow>\"...");
                 if (!fs_1.default.existsSync(source))
-                    throw new SError_1.default("Sorry but the passed source path \"<yellow>" + source + "</yellow>\" does not exists on the filesystem...");
-                this._source = fs_1.default.readFileSync(source, 'utf8');
+                    throw new Error("Sorry but the passed source path \"<yellow>" + source + "</yellow>\" does not exists on the filesystem...");
+                _this._source = fs_1.default.readFileSync(source, 'utf8');
             }
             else {
-                this._source = source;
+                _this._source = source;
             }
             // parsing the source
-            this.parse();
+            _this._blocks = _this.parse();
+            return _this;
         }
+        Object.defineProperty(SDocblock.prototype, "docblockSettings", {
+            /**
+             * @name          docblockSettings
+             * @type          ISDocblockSettings
+             * @get
+             *
+             * Access the docblock settings
+             *
+             * @since       2.0.0
+             * @author 	Olivier Bossel <olivier.bossel@gmail.com>
+             */
+            get: function () {
+                return this._settings.docblock;
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * @name        sort
          * @type        Function
@@ -125,9 +129,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * @author 	Olivier Bossel <olivier.bossel@gmail.com>
          */
         SDocblock.prototype.sort = function (sortFunction) {
-            if (sortFunction === void 0) { sortFunction = null; }
             if (!sortFunction)
-                sortFunction = this._settings.sortFunction;
+                sortFunction = this.docblockSettings.sortFunction;
             this._blocks = this._blocks.sort(sortFunction);
             return this;
         };
@@ -156,7 +159,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * and get back the object version of it
          *
          * @param       {String}        [string=this._source]        The string to parse
-         * @return      {SDocblock}                     The class instance itself to maintain chainability
+         * @return      {Array<SDocblockBlock>}                       An array of SDocblockBlock instances
          *
          * @since       2.0.0
          * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -167,26 +170,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             // extract each docblocks
             var reg = /(<!--|\/\*{2})([\s\S]+?)(\*\/|-->)/g;
             // extracting blocks
-            var blocksArray = string.match(reg);
-            if (!Array.isArray(blocksArray)) {
-                blocksArray = [];
+            // @ts-ignore
+            var blocksArrayStr = string.match(reg);
+            var blocks = [];
+            if (!Array.isArray(blocksArrayStr)) {
+                blocksArrayStr = [];
             }
-            else if (Array.isArray(blocksArray) && blocksArray.length) {
-                blocksArray = blocksArray.map(function (t) { return t.trim(); });
-                if (!blocksArray || !blocksArray.length)
+            else if (Array.isArray(blocksArrayStr) && blocksArrayStr.length) {
+                blocksArrayStr = blocksArrayStr.map(function (t) { return t.trim(); });
+                if (!blocksArrayStr || !blocksArrayStr.length)
                     return [];
-                blocksArray = blocksArray.map(function (block) {
+                blocks = blocksArrayStr
+                    .filter(function (blockStr) {
+                    var lines = blockStr.split('\n');
+                    for (var i = 0; i < lines.length; i++) {
+                        var line = lines[i];
+                        if (line.trim().slice(0, 2) === '//')
+                            return false;
+                    }
+                    return true;
+                })
+                    .map(function (block) {
                     return new SDocblockBlock_1.default(block || ' ', {
-                        filepath: _this._settings.filepath || ''
+                        filepath: _this.docblockSettings.filepath || ''
                     });
                 });
             }
-            // save the blocks
-            this._blocks = blocksArray;
-            // sort the blocks
+            if (blocks && blocks.length) {
+                this._blocks = blocks;
+            }
+            // sort
             this.sort();
             // return the class instance itself
-            return this;
+            return this._blocks;
         };
         /**
          * @name          toObject
@@ -203,6 +219,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             });
         };
         return SDocblock;
-    }());
+    }(SClass_1.default));
+    exports.default = SDocblock;
 });
-//# sourceMappingURL=SDocblock.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0RvY2Jsb2NrLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU0RvY2Jsb2NrLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFVBQVU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFFViwyREFBdUM7SUFFdkMsa0VBQThDO0lBQzlDLG9FQUFxRTtJQUVyRSw2Q0FBNkM7SUFDN0Msb0RBQWtDO0lBQ2xDLG9EQUFrQztJQUNsQywwQ0FBc0I7SUFzRHRCLGFBQWE7SUFDYjtRQUF3Qiw2QkFBUTtRQXFDOUI7Ozs7Ozs7V0FPRztRQUNILG1CQUFZLE1BQWMsRUFBRSxRQUFpQztZQUE3RCxZQUNFLGtCQUNFLG1CQUFXLENBQ1Q7Z0JBQ0UsUUFBUSxFQUFFO29CQUNSLFlBQVksRUFBRSxVQUFDLENBQUMsRUFBRSxDQUFDO3dCQUNqQixJQUFJLEdBQUcsR0FBRyxDQUFDLENBQUM7d0JBRVosSUFBSSxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUM7NEJBQUUsT0FBTyxHQUFHLENBQUM7d0JBRXpCLElBQU0sSUFBSSxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFDdkIsSUFBSSxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQzt3QkFFdEIsc0RBQXNEO3dCQUN0RCxJQUFJLElBQUksQ0FBQyxTQUFTOzRCQUFFLEdBQUcsSUFBSSxDQUFDLENBQUM7d0JBQzdCLElBQUksSUFBSSxDQUFDLElBQUksSUFBSSxJQUFJLENBQUMsSUFBSSxDQUFDLFdBQVcsRUFBRSxLQUFLLE9BQU87NEJBQUUsR0FBRyxJQUFJLENBQUMsQ0FBQzt3QkFDL0QsSUFBSSxJQUFJLENBQUMsV0FBVzs0QkFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO3dCQUMvQixJQUFJLElBQUksQ0FBQyxPQUFPOzRCQUFFLEdBQUcsSUFBSSxDQUFDLENBQUM7d0JBQzNCLElBQUksSUFBSSxDQUFDLElBQUksSUFBSSxJQUFJLENBQUMsSUFBSSxDQUFDLFdBQVcsRUFBRSxLQUFLLFVBQVU7NEJB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

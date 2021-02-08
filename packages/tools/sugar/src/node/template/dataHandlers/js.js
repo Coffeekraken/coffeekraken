@@ -31,6 +31,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const SPromise_1 = __importDefault(require("../../promise/SPromise"));
 /**
  * @name          js
@@ -51,12 +52,15 @@ const SPromise_1 = __importDefault(require("../../promise/SPromise"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function js(filePath) {
-    return new SPromise_1.default(({ resolve }) => __awaiter(this, void 0, void 0, function* () {
-        resolve(yield Promise.resolve().then(() => __importStar(require(filePath))));
-    }), {
-        id: 'templateJsDataHandler'
-    });
-}
-module.exports = js;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJqcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFFZCxzRUFBZ0Q7QUFFaEQ7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILFNBQVMsRUFBRSxDQUFDLFFBQVE7SUFDbEIsT0FBTyxJQUFJLGtCQUFVLENBQ25CLENBQU8sRUFBRSxPQUFPLEVBQUUsRUFBRSxFQUFFO1FBQ3BCLE9BQU8sQ0FBQyx3REFBYSxRQUFRLEdBQUMsQ0FBQyxDQUFDO0lBQ2xDLENBQUMsQ0FBQSxFQUNEO1FBQ0UsRUFBRSxFQUFFLHVCQUF1QjtLQUM1QixDQUNGLENBQUM7QUFDSixDQUFDO0FBQ0QsaUJBQVMsRUFBRSxDQUFDIn0=
+exports.default = {
+    name: 'JsDataHandler',
+    extensions: ['js', 'json'],
+    handler: function (filePath) {
+        return new SPromise_1.default(({ resolve }) => __awaiter(this, void 0, void 0, function* () {
+            resolve(yield Promise.resolve().then(() => __importStar(require(filePath))));
+        }), {
+            id: 'templateJsDataHandler'
+        });
+    }
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJqcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBRWQsc0VBQWdEO0FBRWhEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSCxrQkFBZTtJQUNiLElBQUksRUFBRSxlQUFlO0lBQ3JCLFVBQVUsRUFBRSxDQUFDLElBQUksRUFBRSxNQUFNLENBQUM7SUFDMUIsT0FBTyxFQUFFLFVBQVUsUUFBUTtRQUN6QixPQUFPLElBQUksa0JBQVUsQ0FDbkIsQ0FBTyxFQUFFLE9BQU8sRUFBRSxFQUFFLEVBQUU7WUFDcEIsT0FBTyxDQUFDLHdEQUFhLFFBQVEsR0FBQyxDQUFDLENBQUM7UUFDbEMsQ0FBQyxDQUFBLEVBQ0Q7WUFDRSxFQUFFLEVBQUUsdUJBQXVCO1NBQzVCLENBQ0YsQ0FBQztJQUNKLENBQUM7Q0FDRixDQUFDIn0=

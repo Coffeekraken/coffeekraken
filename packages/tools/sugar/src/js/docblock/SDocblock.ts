@@ -56,8 +56,10 @@ export interface ISDocblockCtorSettings {
 }
 
 export interface ISDocblock {
-  new (source: string, settings?: ISDocblockCtorSettings);
+  // new (source: string, settings?: ISDocblockCtorSettings);
   _source: string;
+  blocks: ISDocblockBlock[];
+  toObject(): any;
 }
 
 // @ts-ignore

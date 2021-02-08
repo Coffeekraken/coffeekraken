@@ -14,7 +14,7 @@
      * @name              simpleValue
      * @namespace           sugar.js.docblock.tags
      * @type              Function
-     * @wip
+     * @status              wip
      *
      * Parse the simpleValue tag
      *
@@ -38,4 +38,4 @@
     }
     return simpleValue;
 });
-//# sourceMappingURL=simpleValue.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2ltcGxlVmFsdWUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzaW1wbGVWYWx1ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7Ozs7Ozs7SUFFVjs7Ozs7Ozs7Ozs7Ozs7OztPQWdCRztJQUNILFNBQVMsV0FBVyxDQUFDLElBQUk7UUFDdkIsSUFDRSxJQUFJO1lBQ0osSUFBSSxDQUFDLEtBQUs7WUFDVixPQUFPLElBQUksQ0FBQyxLQUFLLEtBQUssUUFBUTtZQUM5QixJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksRUFBRSxLQUFLLEVBQUUsRUFDeEI7WUFDQSxPQUFPLElBQUksQ0FBQztTQUNiO1FBQ0QsT0FBTyxJQUFJLENBQUMsS0FBSyxDQUFDO0lBQ3BCLENBQUM7SUFDRCxPQUFTLFdBQVcsQ0FBQyJ9

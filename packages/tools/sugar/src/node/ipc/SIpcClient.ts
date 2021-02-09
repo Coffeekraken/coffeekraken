@@ -260,4 +260,4 @@ class SIpcClient {
   // }
 }
 
-export = SIpcClient;
+export default SIpcClient;

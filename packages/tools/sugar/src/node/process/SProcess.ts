@@ -77,7 +77,7 @@ export interface ISProcessNotificationSettings {
 }
 
 export interface ISProcessCtorSettings {
-  process?: ISProcessOptionalSettings;
+  process?: Partial<ISProcessSettings>;
 }
 
 export interface ISProcessProcessObj {
@@ -89,20 +89,6 @@ export interface ISProcessProcessObj {
   stderr: any[];
 }
 
-export interface ISProcessOptionalSettings {
-  asyncStart?: boolean;
-  stdio?: ISStdio;
-  throw?: boolean;
-  runAsChild?: boolean;
-  paramsInterface?: ISInterface | ISInterfaceCtor;
-  processPath?: string;
-  notifications?: ISProcessNotificationSettings;
-  env?: Record<string, unknown>;
-  spawn?: Record<string, unknown>;
-  decorators?: boolean;
-  spawnSettings?: ISpawnSettings;
-  exitAtEnd?: boolean;
-}
 export interface ISProcessSettings {
   asyncStart: boolean;
   stdio: ISStdio;
@@ -408,7 +394,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async run(paramsOrStringArgs = {}, settings: ISProcessOptionalSettings = {}) {
+  async run(
+    paramsOrStringArgs = {},
+    settings: Partial<ISProcessSettings> = {}
+  ) {
     const processSettings = <ISProcessSettings>(
       __deepMerge(this.processSettings, settings)
     );

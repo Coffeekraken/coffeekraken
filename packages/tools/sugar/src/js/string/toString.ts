@@ -138,4 +138,4 @@ function fn(value, settings = {}) {
   }
   return returnString;
 }
-export = fn;
+export default fn;

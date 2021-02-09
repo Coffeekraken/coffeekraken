@@ -72,4 +72,4 @@ function inViewportPercentage(elm) {
   // calculate the percentage in total
   return Math.round((100 / (100 * 100)) * (percentageWidth * percentageHeight));
 }
-export = inViewportPercentage;
+export default inViewportPercentage;

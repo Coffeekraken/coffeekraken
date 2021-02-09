@@ -34,4 +34,4 @@ function registerProcess(pro, name = __uniquid()) {
     });
   }
 }
-export = registerProcess;
+export default registerProcess;

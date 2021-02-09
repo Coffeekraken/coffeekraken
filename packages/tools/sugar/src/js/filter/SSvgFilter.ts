@@ -32,7 +32,7 @@ import uniqid from '../util/uniqid';
  * @since           1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SSvgFilter {
+export default class SSvgFilter {
   /**
    * @name          constructor
    * @type          Function

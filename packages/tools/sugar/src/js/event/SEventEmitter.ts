@@ -86,6 +86,7 @@ export interface ISEventEmitterSettings {
   defaultCallTime: ISEventEmitterSettingsCallTime;
   bufferTimeout: number;
   bufferedEvents: string[];
+  asyncStart: boolean;
 }
 
 export interface ISEventEmitterCtor {}
@@ -186,6 +187,18 @@ class SEventEmitter extends SClass implements ISEventEmitter {
   }
 
   /**
+   * @name          _asyncStarted
+   * @type          Boolean
+   * @private
+   *
+   * Store the async start status defined by the setting "async"
+   *
+   * @since         2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  private _asyncStarted = false;
+
+  /**
    * @name          _buffer
    * @type          Array
    * @private
@@ -214,6 +227,20 @@ class SEventEmitter extends SClass implements ISEventEmitter {
   _settings: ISEventEmitterConstructorSettings;
 
   /**
+   * @name            eventEmitterSettings
+   * @type            ISEventEmitterSettings
+   * @get
+   *
+   * Access the event emitter settings
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  get eventEmitterSettings(): ISEventEmitterSettings {
+    return (<any>this._settings).eventEmitter;
+  }
+
+  /**
    * @name                  constructor
    * @type                  Function
    *
@@ -238,6 +265,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       __deepMerge(
         {
           eventEmitter: {
+            asyncStart: false,
             defaultCallTime: {},
             bufferTimeout: 1000,
             bufferedEvents: []
@@ -297,6 +325,26 @@ class SEventEmitter extends SClass implements ISEventEmitter {
   pipeTo(dest: ISEventEmitter, settings?: ISEventEmitterPipeSettings) {
     SEventEmitter.pipe(<any>this, dest, settings);
     return this;
+  }
+
+  /**
+   * @name          start
+   * @type          Function
+   *
+   * This method has to be called when you want to start the event emissions.
+   * This is usefull only if you set the setting ```asyncStart``` to true.
+   * Untill you call this method, all the emitted events (those specified in the settings.bufferedEvents stack)
+   * are store in memory and emitted after.
+   *
+   * @since         2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  start() {
+    if (!this.eventEmitterSettings.asyncStart) return;
+    // update the asyncStarted status
+    this._asyncStarted = true;
+    // process the buffer
+    this._processBuffer();
   }
 
   /**
@@ -383,10 +431,10 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     if (
       callNumber === undefined &&
       // @ts-ignore
-      this._settings.eventEmitter.defaultCallTime[event] !== undefined
+      this.eventEmitterSettings.defaultCallTime[event] !== undefined
     ) {
       // @ts-ignore
-      callNumber = this._settings.eventEmitter.defaultCallTime[event];
+      callNumber = this.eventEmitterSettings.defaultCallTime[event];
     } else if (callNumber === undefined) {
       callNumber = -1;
     }
@@ -399,22 +447,38 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         called: 0
       });
 
+    // process buffer
+    this._processBuffer();
+
+    // maintain chainability
+    return this;
+  }
+
+  /**
+   * @name          _processBuffer
+   * @type          Function
+   * @private
+   *
+   * This method simply take care of empty the buffer by emitting
+   * all the buffered events
+   *
+   * @since         2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  _processBuffer() {
     // check if a buffer exists for this particular stack
     if (this._buffer.length > 0) {
       setTimeout(() => {
         this._buffer = this._buffer.filter((item) => {
-          if (__minimatch(item.event, event)) {
-            this.emit(item.event, item.value);
-            return false;
-          }
-          return true;
+          // if (__minimatch(item.event, event)) {
+          //   return false;
+          // }
+          this.emit(item.event, item.value);
+          return false;
         });
         // @ts-ignore
-      }, this._settings.eventEmitter.bufferTimeout);
+      }, this.eventEmitterSettings.bufferTimeout);
     }
-
-    // maintain chainability
-    return this;
   }
 
   /**
@@ -441,8 +505,17 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     if (!this._eventsStacks || Object.keys(this._eventsStacks).length === 0)
       return currentCallbackReturnedValue;
 
-    // make sure the event exist
+    // check async start
+    if (!this._asyncStarted && this.eventEmitterSettings.asyncStart) {
+      this._buffer.push({
+        event,
+        value: initialValue
+      });
+      return initialValue;
+    }
+
     if (!this._eventsStacks[event]) {
+      // make sure the event exist
       this._registerNewEventsStacks(event);
     }
 
@@ -473,11 +546,11 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       for (
         let i = 0;
         // @ts-ignore
-        i < this._settings.eventEmitter.bufferedEvents.length;
+        i < this.eventEmitterSettings.bufferedEvents.length;
         i++
       ) {
         // @ts-ignore
-        const bufferedStack = this._settings.eventEmitter.bufferedEvents[i];
+        const bufferedStack = this.eventEmitterSettings.bufferedEvents[i];
         if (bufferedStack && __minimatch(event, bufferedStack)) {
           this._buffer.push({
             event,

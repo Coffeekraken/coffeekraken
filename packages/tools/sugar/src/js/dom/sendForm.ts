@@ -75,4 +75,4 @@ function sendForm(form) {
   // return the promise
   return promise;
 }
-export = sendForm;
+export default sendForm;

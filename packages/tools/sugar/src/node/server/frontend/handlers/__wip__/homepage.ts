@@ -79,4 +79,4 @@ function homepage(req, res, settings = {}) {
     }
   );
 }
-export = homepage;
+export default homepage;

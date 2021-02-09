@@ -39,4 +39,4 @@ function hex2rgba(hex) {
     a: a
   };
 }
-export = hex2rgba;
+export default hex2rgba;

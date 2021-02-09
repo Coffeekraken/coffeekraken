@@ -36,7 +36,7 @@ import __SFsDeamonProcess from './SFsDeamonProcess';
  * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SFsDeamon extends __SDeamon {
+export default class SFsDeamon extends __SDeamon {
   /**
    * @name          _watchPromisesStack
    * @type          Array<SPromise>
@@ -115,4 +115,4 @@ export = class SFsDeamon extends __SDeamon {
     // return the current promise
     return super.watch(watchProcess);
   }
-};
+}

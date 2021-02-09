@@ -28,4 +28,4 @@ import __isPath from '../fs/isPath';
 function path(path, checkExistence = false) {
   return __isPath(path, checkExistence);
 }
-export = path;
+export default path;

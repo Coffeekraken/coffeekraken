@@ -30,7 +30,7 @@ import __countLine from '../string/countLine';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SHeader extends __blessed.box {
+export default class SHeader extends __blessed.box {
   /**
    * @name              _title
    * @type              String
@@ -96,4 +96,4 @@ export = class SHeader extends __blessed.box {
     // render the screen
     if (this.screen) this.screen.render();
   }
-};
+}

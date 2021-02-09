@@ -47,13 +47,6 @@ import { ISTemplateEngine } from './engines/STemplateEngine';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
-export interface ISTemplateOptionalSettings {
-  rootDirs?: string[];
-  engine?: string | ISTemplateEngine;
-  engineSettings?: any;
-  defaultData?: any;
-}
 export interface ISTemplateSettings {
   rootDirs: string[];
   engine: string | ISTemplateEngine;
@@ -61,7 +54,7 @@ export interface ISTemplateSettings {
   defaultData?: any;
 }
 export interface ISTemplateCtorSettings {
-  template?: ISTemplateOptionalSettings;
+  template?: Partial<ISTemplateSettings>;
 }
 
 export interface ISTemplateViewInfo {
@@ -464,7 +457,7 @@ class STemplate extends __SClass implements ISTemplate {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  render(data = {}, settings?: ISTemplateOptionalSettings) {
+  render(data = {}, settings?: Partial<ISTemplateSettings>) {
     return new __SPromise(
       async ({ resolve, reject, emit }) => {
         const renderSettings = <ISTemplateSettings>(

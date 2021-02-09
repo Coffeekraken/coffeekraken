@@ -37,4 +37,4 @@ function methodExists(instance, ...methods) {
   });
   return !missingMethodsArray.length ? true : missingMethodsArray;
 }
-export = methodExists;
+export default methodExists;

@@ -9,7 +9,7 @@ import _fs from 'fs';
 import _path from 'path';
 import _findPackages from '../../node/monorepo/findPackages';
 
-export = async function bin(stringArgs = '') {
+export default async function bin(stringArgs = '') {
   const argsObj = _parseArgs(stringArgs, {
     definition: _SNpmBinCliInterface.definition
   });
@@ -84,4 +84,4 @@ export = async function bin(stringArgs = '') {
       }
     });
   }
-};
+}

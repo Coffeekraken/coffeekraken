@@ -28,4 +28,4 @@
 function isFunction(value) {
   return value && {}.toString.call(value) === '[object Function]';
 }
-export = isFunction;
+export default isFunction;

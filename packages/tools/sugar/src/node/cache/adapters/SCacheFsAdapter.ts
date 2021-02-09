@@ -32,7 +32,7 @@ import __SCacheAdapter from './SCacheAdapter';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SCacheFsAdapter extends __SCacheAdapter {
+export default class SCacheFsAdapter extends __SCacheAdapter {
   /**
    * @name                              constructor
    * @type                              Function
@@ -151,4 +151,4 @@ export = class SCacheFsAdapter extends __SCacheAdapter {
     // read the json file
     return __removeSync(`${this._settings.rootDir}/${this.cache.name}`);
   }
-};
+}

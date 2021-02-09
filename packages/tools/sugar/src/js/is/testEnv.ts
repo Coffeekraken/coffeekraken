@@ -31,4 +31,4 @@ function isTestEnv() {
     typeof global.it === 'function'
   );
 }
-export = isTestEnv;
+export default isTestEnv;

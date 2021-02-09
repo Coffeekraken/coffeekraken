@@ -30,4 +30,4 @@ function exitFullscreen() {
     return document.webkitCancelFullScreen();
   }
 }
-export = exitFullscreen;
+export default exitFullscreen;

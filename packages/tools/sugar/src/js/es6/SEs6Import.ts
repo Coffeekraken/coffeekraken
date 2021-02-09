@@ -30,7 +30,7 @@ import __parseEs6Imports from 'parse-es6-imports';
  * @since           2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
-export = class SEs6Import {
+export default class SEs6Import {
   /**
    * @name            parseCode
    * @type            Function
@@ -183,4 +183,4 @@ export = class SEs6Import {
     string += `from "${this.path}";`;
     return string;
   }
-};
+}

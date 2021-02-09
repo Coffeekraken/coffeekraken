@@ -48,4 +48,4 @@ function isInViewport(elm, offset = 50) {
   const isRightIn = rect.right - offsetLeft >= 0;
   return isTopIn && isBottomIn && isLeftIn && isRightIn;
 }
-export = isInViewport;
+export default isInViewport;

@@ -47,4 +47,4 @@ function packageJsonMiddleware(settings = {}) {
     next();
   };
 }
-export = packageJsonMiddleware;
+export default packageJsonMiddleware;

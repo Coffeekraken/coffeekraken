@@ -43,4 +43,4 @@ function isDirectory(path, settings = {}) {
   }
   return isMatching;
 }
-export = isDirectory;
+export default isDirectory;

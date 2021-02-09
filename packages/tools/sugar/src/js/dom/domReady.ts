@@ -38,4 +38,4 @@ function domReady(cb = null) {
     });
   });
 }
-export = domReady;
+export default domReady;

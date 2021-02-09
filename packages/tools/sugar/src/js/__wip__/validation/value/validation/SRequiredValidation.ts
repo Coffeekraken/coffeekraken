@@ -25,4 +25,4 @@ class SRequiredValidation extends __SValidation {
   }
 }
 
-export = SRequiredValidation;
+export default SRequiredValidation;

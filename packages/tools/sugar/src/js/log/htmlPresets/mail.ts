@@ -62,4 +62,4 @@ function mail(text) {
     br: (tag, content) => '<br />'
   });
 }
-export = mail;
+export default mail;

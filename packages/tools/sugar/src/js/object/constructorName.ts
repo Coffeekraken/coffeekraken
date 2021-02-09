@@ -30,4 +30,4 @@
 function constructorName(obj) {
   return obj.constructor && obj.constructor.name ? obj.constructor.name : null;
 }
-export = constructorName;
+export default constructorName;

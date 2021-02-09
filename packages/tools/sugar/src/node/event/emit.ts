@@ -34,4 +34,4 @@ function emit(name, value) {
   // emit to the event
   global._sugarEventSPromise.emit(name, value);
 }
-export = emit;
+export default emit;

@@ -64,4 +64,4 @@ function resolveExtensionFreePath(settings = {}) {
     next();
   };
 }
-export = resolveExtensionFreePath;
+export default resolveExtensionFreePath;

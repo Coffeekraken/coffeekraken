@@ -3,31 +3,48 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a;
+Object.defineProperty(exports, "__esModule", { value: true });
 const SInterface_1 = __importDefault(require("../../../class/SInterface"));
-module.exports = (_a = class STemplateEngineInterface extends SInterface_1.default {
+/**
+ * @name                STemplateEngineInterface
+ * @namespace           sugar.node.template.engines.interface
+ * @type                Class
+ * @extends             SInterface
+ * @status              wip
+ *
+ * This class represent the interface that describe the minimum requirement
+ * needed for a STemplateEngine based class
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class STemplateEngineInterface extends SInterface_1.default {
+}
+exports.default = STemplateEngineInterface;
+STemplateEngineInterface.definition = {
+    input: {
+        type: 'String',
+        required: true,
+        values: ['path', 'string'],
+        static: true,
+        description: 'Specify if the template engine class support a view path as input, or a template string',
+        default: 'path',
+        level: 1
     },
-    _a.definition = {
-        input: {
-            type: 'String',
-            required: true,
-            values: ['path', 'string'],
-            static: true,
-            description: 'Specify if the template engine class support a view path as input, or a template string',
-            default: 'path',
-            level: 1
-        },
-        canRender: {
-            type: 'Function',
-            required: true,
-            static: true,
-            description: 'A simple method that take parameter a templateString and must return true if it can handle it, false if not'
-        },
-        render: {
-            type: 'Function',
-            required: true,
-            description: 'Main render method that must return an SPromise instance resolved once the rendering process has been successfully completed'
-        }
+    canRender: {
+        type: 'Function',
+        required: true,
+        static: true,
+        description: 'A simple method that take parameter a templateString and must return true if it can handle it, false if not'
     },
-    _a);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1RlbXBsYXRlRW5naW5lSW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1RlbXBsYXRlRW5naW5lSW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDJFQUFxRDtBQW9CckQsdUJBQVMsTUFBTSx3QkFBeUIsU0FBUSxvQkFBWTtLQTBCM0Q7SUF6QlEsYUFBVSxHQUFHO1FBQ2xCLEtBQUssRUFBRTtZQUNMLElBQUksRUFBRSxRQUFRO1lBQ2QsUUFBUSxFQUFFLElBQUk7WUFDZCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsUUFBUSxDQUFDO1lBQzFCLE1BQU0sRUFBRSxJQUFJO1lBQ1osV0FBVyxFQUNULHlGQUF5RjtZQUMzRixPQUFPLEVBQUUsTUFBTTtZQUNmLEtBQUssRUFBRSxDQUFDO1NBQ1Q7UUFDRCxTQUFTLEVBQUU7WUFDVCxJQUFJLEVBQUUsVUFBVTtZQUNoQixRQUFRLEVBQUUsSUFBSTtZQUNkLE1BQU0sRUFBRSxJQUFJO1lBQ1osV0FBVyxFQUNULDZHQUE2RztTQUNoSDtRQUNELE1BQU0sRUFBRTtZQUNOLElBQUksRUFBRSxVQUFVO1lBQ2hCLFFBQVEsRUFBRSxJQUFJO1lBQ2QsV0FBVyxFQUNULDhIQUE4SDtTQUNqSTtLQUNEO1FBQ0YifQ==
+    render: {
+        type: 'Function',
+        required: true,
+        description: 'Main render method that must return an SPromise instance resolved once the rendering process has been successfully completed'
+    }
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1RlbXBsYXRlRW5naW5lSW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1RlbXBsYXRlRW5naW5lSW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDJFQUFxRDtBQUdyRDs7Ozs7Ozs7Ozs7Ozs7OztHQWdCRztBQUNILE1BQXFCLHdCQUF5QixTQUFRLG9CQUFZOztBQUFsRSwyQ0EwQkM7QUF6QlEsbUNBQVUsR0FBRztJQUNsQixLQUFLLEVBQUU7UUFDTCxJQUFJLEVBQUUsUUFBUTtRQUNkLFFBQVEsRUFBRSxJQUFJO1FBQ2QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLFFBQVEsQ0FBQztRQUMxQixNQUFNLEVBQUUsSUFBSTtRQUNaLFdBQVcsRUFDVCx5RkFBeUY7UUFDM0YsT0FBTyxFQUFFLE1BQU07UUFDZixLQUFLLEVBQUUsQ0FBQztLQUNUO0lBQ0QsU0FBUyxFQUFFO1FBQ1QsSUFBSSxFQUFFLFVBQVU7UUFDaEIsUUFBUSxFQUFFLElBQUk7UUFDZCxNQUFNLEVBQUUsSUFBSTtRQUNaLFdBQVcsRUFDVCw2R0FBNkc7S0FDaEg7SUFDRCxNQUFNLEVBQUU7UUFDTixJQUFJLEVBQUUsVUFBVTtRQUNoQixRQUFRLEVBQUUsSUFBSTtRQUNkLFdBQVcsRUFDVCw4SEFBOEg7S0FDakk7Q0FDRixDQUFDIn0=

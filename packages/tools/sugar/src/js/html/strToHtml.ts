@@ -35,4 +35,4 @@ function strToHtml(string) {
   }
   return string;
 }
-export = strToHtml;
+export default strToHtml;

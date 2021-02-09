@@ -35,4 +35,4 @@ function copy(text) {
     __ncp.copy(text);
   }
 }
-export = copy;
+export default copy;

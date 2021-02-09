@@ -50,4 +50,4 @@ function ensureNoDuplicateImportStatements(string, settings = {}) {
   });
   return string;
 }
-export = ensureNoDuplicateImportStatements;
+export default ensureNoDuplicateImportStatements;

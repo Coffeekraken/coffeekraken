@@ -27,4 +27,4 @@ import __uniqid from 'uniqid';
 function uniqid() {
   return __uniqid();
 }
-export = uniqid;
+export default uniqid;

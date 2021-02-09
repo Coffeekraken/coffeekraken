@@ -29,4 +29,4 @@ function simpleValue(data) {
   }
   return data.value;
 }
-export = simpleValue;
+export default simpleValue;

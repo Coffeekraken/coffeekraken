@@ -269,4 +269,4 @@ const activeSpaceApi = {
   }
 };
 
-export = activeSpaceApi;
+export default activeSpaceApi;

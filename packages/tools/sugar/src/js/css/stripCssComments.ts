@@ -56,4 +56,4 @@ function stripCssComments(css, settings = {}) {
   }
   return css;
 }
-export = stripCssComments;
+export default stripCssComments;

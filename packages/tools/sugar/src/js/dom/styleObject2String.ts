@@ -44,4 +44,4 @@ function styleObject2String(styleObj) {
   // return the css text
   return propertiesArray.join(' ');
 }
-export = styleObject2String;
+export default styleObject2String;

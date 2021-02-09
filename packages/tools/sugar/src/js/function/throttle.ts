@@ -44,4 +44,4 @@ function throttle(fn, threshhold) {
   };
 }
 /*eslint-enable */
-export = throttle;
+export default throttle;

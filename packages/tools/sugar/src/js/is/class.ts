@@ -35,4 +35,4 @@ function cls(cls) {
   }
   return true;
 }
-export = cls;
+export default cls;

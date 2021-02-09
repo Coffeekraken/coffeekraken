@@ -44,7 +44,7 @@ class SExtractDocblocksIntoFilesInterface extends __SInterface {
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SExtractDocblocksIntoFiles extends __SActionsStreamAction {
+export default class SExtractDocblocksIntoFiles extends __SActionsStreamAction {
   /**
    * @name            definition
    * @type             Object
@@ -135,4 +135,4 @@ export = class SExtractDocblocksIntoFiles extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-};
+}

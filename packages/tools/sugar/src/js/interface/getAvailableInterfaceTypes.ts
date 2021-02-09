@@ -27,4 +27,4 @@ function getAvailableInterfaceTypes() {
   else if (window !== undefined) return window._registeredInterfacesTypes || {};
   else return {};
 }
-export = getAvailableInterfaceTypes;
+export default getAvailableInterfaceTypes;

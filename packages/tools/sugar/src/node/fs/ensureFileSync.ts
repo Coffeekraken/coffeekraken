@@ -29,4 +29,4 @@ import __fs from 'fs-extra';
 function ensureFileSync(file) {
   __fs.ensureFileSync(file);
 }
-export = ensureFileSync;
+export default ensureFileSync;

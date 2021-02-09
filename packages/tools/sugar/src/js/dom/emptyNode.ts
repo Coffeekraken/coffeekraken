@@ -28,4 +28,4 @@ function emptyNode(node) {
   }
   return node;
 }
-export = emptyNode;
+export default emptyNode;

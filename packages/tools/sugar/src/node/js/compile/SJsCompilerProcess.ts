@@ -4,10 +4,7 @@ import __deepMerge from '../../object/deepMerge';
 
 import __SJsCompilerParamsInterface from './interface/SJsCompilerParamsInterface';
 import { ISJsCompiler, ISJsCompilerParams } from './SJsCompiler';
-import {
-  ISProcessSettings,
-  ISProcessOptionalSettings
-} from '../../process/SProcess';
+import { ISProcessSettings } from '../../process/SProcess';
 
 /**
  * @name            SJsCompilerProcess
@@ -26,8 +23,7 @@ import {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISJsCompilerProcessOptionalSettings
-  extends ISProcessOptionalSettings {}
+export interface ISJsCompilerProcessSettings extends ISProcessSettings {}
 export interface ISJsCompilerProcessSettings extends ISProcessSettings {}
 
 class SJsCompilerProcess extends SProcess {
@@ -79,7 +75,7 @@ class SJsCompilerProcess extends SProcess {
    */
   constructor(
     initialParams: any,
-    settings: ISJsCompilerProcessOptionalSettings = {}
+    settings: Partial<ISJsCompilerProcessSettings> = {}
   ) {
     super(
       initialParams,
@@ -113,9 +109,10 @@ class SJsCompilerProcess extends SProcess {
    */
   process(
     params: ISJsCompilerParams,
-    settings: ISJsCompilerProcessOptionalSettings = {}
+    settings: Partial<ISJsCompilerProcessSettings> = {}
   ) {
-    return this._jsCompiler.compile(params, settings);
+    const promise = this._jsCompiler.compile(params, settings);
+    return promise;
   }
 }
 

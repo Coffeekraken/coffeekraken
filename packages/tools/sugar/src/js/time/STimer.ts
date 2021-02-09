@@ -50,7 +50,7 @@ import __deepMerge from '../object/deepMerge';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class STimer extends __SPromise {
+export default class STimer extends __SPromise {
   /**
    * @name          _duration
    * @type          Number
@@ -461,4 +461,4 @@ export = class STimer extends __SPromise {
   isStarted() {
     return this._startTime && !this._pauseTime;
   }
-};
+}

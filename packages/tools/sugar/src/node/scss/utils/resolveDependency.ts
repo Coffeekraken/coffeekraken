@@ -78,4 +78,4 @@ function resolveDependency(path, settings: IResolveDependencySettings = {}) {
   }
 }
 
-export = resolveDependency;
+export default resolveDependency;

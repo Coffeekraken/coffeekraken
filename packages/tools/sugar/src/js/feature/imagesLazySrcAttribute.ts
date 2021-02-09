@@ -44,4 +44,4 @@ function imagesLazySrcAttribute(settings = {}) {
     });
   });
 }
-export = imagesLazySrcAttribute;
+export default imagesLazySrcAttribute;

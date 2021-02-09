@@ -37,4 +37,4 @@ function writeFile(path, data, options = {}) {
   __ensureDirSync(folderPath);
   return __fs.outputFile(path, data, options);
 }
-export = writeFile;
+export default writeFile;

@@ -100,4 +100,4 @@ class STestJestOutputReporter {
   }
 }
 
-export = STestJestOutputReporter;
+export default STestJestOutputReporter;

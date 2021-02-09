@@ -33,4 +33,4 @@ function packageRoot() {
   if (environment !== 'development' && environment !== 'test') return '';
   return __env('package_root') || '';
 }
-export = packageRoot;
+export default packageRoot;

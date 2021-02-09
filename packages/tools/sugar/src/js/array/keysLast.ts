@@ -39,4 +39,4 @@ function keysLast(array, keys) {
   return res;
 }
 
-export = keysLast;
+export default keysLast;

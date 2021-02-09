@@ -3,11 +3,42 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const blessed_1 = __importDefault(require("blessed"));
 const SBlessedComponent_1 = __importDefault(require("../SBlessedComponent"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const color_1 = __importDefault(require("../../color/color"));
-module.exports = class SBlessedWindowBox extends SBlessedComponent_1.default {
+/**
+ * @name                  SBlessedWindowBox
+ * @namespace           sugar.node.blessed.box
+ * @type                  Class
+ * @status              wip
+ *
+ * This class gives you the ability to display windowed style boxes with a header, a body and a footer
+ *
+ * @param         {Array}          $content               A content to display inside the window. Must be a child of blessed.node class
+ * @param        {Object}         [settings = {}]         A settings object to configure your this. Here's the available settings:
+ * - title (null) {String|blessed.node}: The box title to display
+ * - titleRight (null) {String|blessed.node}: The box title displayed to the right
+ * - footer (null) {String|blessed.node}: The box footer to display
+ * - footerRight (null) {String|blessed.node}: The box footer displayed to the right
+ * - colors ({}) {Object}: The colors to use for the window
+ *    - fg (black) {Color}: The foreground color to use
+ *    - bg (__color('terminal.primary').toString()) {Color}: The background color to use
+ * - ...blessed.box settings
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example       js
+ * import SBlessedWindowBox from '@coffeekraken/sugar/node/blessed/box/SBlessedWindowBox';
+ * const box = new SBlessedWindowBox(myCoolContent, {});
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class SBlessedWindowBox extends SBlessedComponent_1.default {
     /**
      * @name                  constructor
      * @type                  Function
@@ -52,5 +83,6 @@ module.exports = class SBlessedWindowBox extends SBlessedComponent_1.default {
             super.update();
         });
     }
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1dpbmRvd0JveC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNXaW5kb3dCb3gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7QUFFZCxzREFBZ0M7QUFDaEMsNkVBQXVEO0FBQ3ZELHVFQUFpRDtBQUlqRCw4REFBd0M7QUFvQ3hDLGlCQUFTLE1BQU0saUJBQWtCLFNBQVEsMkJBQW1CO0lBQzFEOzs7Ozs7OztPQVFHO0lBQ0gsWUFBWSxRQUFRLEVBQUUsUUFBUSxHQUFHLEVBQUU7UUFDakMsS0FBSyxDQUNILG1CQUFXLENBQ1Q7WUFDRSxPQUFPLEVBQUU7Z0JBQ1AsS0FBSyxFQUFFO29CQUNMLEVBQUUsRUFBRSxPQUFPO29CQUNYLEVBQUUsRUFBRSxlQUFPLENBQUMsa0JBQWtCLENBQUMsQ0FBQyxRQUFRLEVBQUU7aUJBQzNDO2dCQUNELE9BQU8sRUFBRTtvQkFDUCxHQUFHLEVBQUUsQ0FBQztvQkFDTixJQUFJLEVBQUUsQ0FBQztvQkFDUCxLQUFLLEVBQUUsQ0FBQztvQkFDUixNQUFNLEVBQUUsQ0FBQztpQkFDVjthQUNGO1NBQ0YsRUFDRCxRQUFRLENBQ1QsQ0FDRixDQUFDO1FBRUYsSUFBSSxDQUFDLE1BQU0sR0FBRyxpQkFBUyxDQUFDLEdBQUcsQ0FBQztZQUMxQixLQUFLLEVBQUUsTUFBTTtZQUNiLE1BQU0sRUFBRSxNQUFNO1lBQ2QsUUFBUSxFQUFFO2dCQUNSLEdBQUcsRUFBRSxDQUFDO2dCQUNOLElBQUksRUFBRSxDQUFDO2FBQ1I7WUFDRCxLQUFLLEVBQUU7Z0JBQ0wsRUFBRSxFQUFFLE9BQU87Z0JBQ1gsRUFBRSxFQUFFLE9BQU87YUFDWjtTQUNGLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBRXpCLElBQUksQ0FBQyxNQUFNLEVBQUUsQ0FBQztJQUNoQixDQUFDO0lBRUQsTUFBTTtRQUNKLFVBQVUsQ0FBQyxHQUFHLEVBQUU7WUFDZCxLQUFLLENBQUMsTUFBTSxFQUFFLENBQUM7UUFDakIsQ0FBQyxDQUFDLENBQUM7SUFDTCxDQUFDO0NBQ0YsQ0FBQyJ9
+}
+exports.default = SBlessedWindowBox;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1dpbmRvd0JveC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNXaW5kb3dCb3gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBRWQsc0RBQWdDO0FBQ2hDLDZFQUF1RDtBQUN2RCx1RUFBaUQ7QUFJakQsOERBQXdDO0FBTXhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTZCRztBQUNILE1BQXFCLGlCQUFrQixTQUFRLDJCQUFtQjtJQUNoRTs7Ozs7Ozs7T0FRRztJQUNILFlBQVksUUFBUSxFQUFFLFFBQVEsR0FBRyxFQUFFO1FBQ2pDLEtBQUssQ0FDSCxtQkFBVyxDQUNUO1lBQ0UsT0FBTyxFQUFFO2dCQUNQLEtBQUssRUFBRTtvQkFDTCxFQUFFLEVBQUUsT0FBTztvQkFDWCxFQUFFLEVBQUUsZUFBTyxDQUFDLGtCQUFrQixDQUFDLENBQUMsUUFBUSxFQUFFO2lCQUMzQztnQkFDRCxPQUFPLEVBQUU7b0JBQ1AsR0FBRyxFQUFFLENBQUM7b0JBQ04sSUFBSSxFQUFFLENBQUM7b0JBQ1AsS0FBSyxFQUFFLENBQUM7b0JBQ1IsTUFBTSxFQUFFLENBQUM7aUJBQ1Y7YUFDRjtTQUNGLEVBQ0QsUUFBUSxDQUNULENBQ0YsQ0FBQztRQUVGLElBQUksQ0FBQyxNQUFNLEdBQUcsaUJBQVMsQ0FBQyxHQUFHLENBQUM7WUFDMUIsS0FBSyxFQUFFLE1BQU07WUFDYixNQUFNLEVBQUUsTUFBTTtZQUNkLFFBQVEsRUFBRTtnQkFDUixHQUFHLEVBQUUsQ0FBQztnQkFDTixJQUFJLEVBQUUsQ0FBQzthQUNSO1lBQ0QsS0FBSyxFQUFFO2dCQUNMLEVBQUUsRUFBRSxPQUFPO2dCQUNYLEVBQUUsRUFBRSxPQUFPO2FBQ1o7U0FDRixDQUFDLENBQUM7UUFFSCxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUV6QixJQUFJLENBQUMsTUFBTSxFQUFFLENBQUM7SUFDaEIsQ0FBQztJQUVELE1BQU07UUFDSixVQUFVLENBQUMsR0FBRyxFQUFFO1lBQ2QsS0FBSyxDQUFDLE1BQU0sRUFBRSxDQUFDO1FBQ2pCLENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQztDQUNGO0FBdERELG9DQXNEQyJ9

@@ -216,7 +216,10 @@ class SPromise extends __SClass.extends(Promise) {
     this.expose(
       new __SEventEmitter({
         id: this.id,
-        ...this._settings
+        ...this._settings,
+        eventEmitter: {
+          // asyncStart: true
+        }
       }),
       {
         as: 'eventEmitter',
@@ -247,7 +250,10 @@ class SPromise extends __SClass.extends(Promise) {
         if (func.slice(0, 1) === '_') return;
         api[func] = this[func].bind(this);
       });
-      executorFn(api);
+      setTimeout(() => {
+        executorFn(api);
+        // this.eventEmitter.start();
+      });
     }
   }
 

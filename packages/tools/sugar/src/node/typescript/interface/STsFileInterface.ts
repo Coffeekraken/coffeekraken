@@ -34,10 +34,5 @@ export default class STsFileInterface extends __SInterface {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export class STsFileSettingsInterface extends __SInterface {
-  static definition: {
-    something: {
-      type: 'Boolean';
-      required: true;
-    };
-  };
+  static definition: {};
 }

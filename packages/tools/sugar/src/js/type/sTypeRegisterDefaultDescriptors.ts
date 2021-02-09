@@ -37,4 +37,4 @@ __SType.registerType(__weaksetTypeDescriptor);
 __SType.registerType(__setTypeDescriptor);
 __SType.registerType(__classTypeDescriptor);
 
-export = __SType;
+export default __SType;

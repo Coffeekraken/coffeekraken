@@ -30,4 +30,4 @@ function constrain(value, min = null, max = null) {
   if (max !== null && value > max) value = max;
   return value;
 }
-export = constrain;
+export default constrain;

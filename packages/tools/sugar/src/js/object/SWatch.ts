@@ -45,7 +45,7 @@ import __clone from '../object/clone';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SWatch {
+export default class SWatch {
   /**
    * @name                    _watchStack
    * @type                    Object
@@ -174,4 +174,4 @@ export = class SWatch {
     // revoke proxy on the proxied object
     return this._proxiedObject.revoke();
   }
-};
+}

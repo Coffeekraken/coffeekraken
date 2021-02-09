@@ -69,4 +69,4 @@ function param(data) {
   });
   return res;
 }
-export = param;
+export default param;

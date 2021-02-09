@@ -193,4 +193,4 @@ class SDeamon extends __SPromise {
   }
 }
 
-export = SDeamon;
+export default SDeamon;

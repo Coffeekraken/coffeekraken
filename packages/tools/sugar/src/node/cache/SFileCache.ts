@@ -118,4 +118,4 @@ class SFileCache extends __SCache {
   }
 }
 
-export = SFileCache;
+export default SFileCache;

@@ -65,4 +65,4 @@ function convert(from, to = 'px', $elm) {
       break;
   }
 }
-export = convert;
+export default convert;

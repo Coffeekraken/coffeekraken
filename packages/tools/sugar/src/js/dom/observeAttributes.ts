@@ -67,4 +67,4 @@ function observeAttributes(target, settings = {}) {
  * @type 		{Array}
  * @default 	null
  */
-export = observeAttributes;
+export default observeAttributes;

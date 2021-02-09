@@ -29,4 +29,4 @@ function prependChild(elm, refElm) {
     refElm.insertBefore(elm, refElm.firstChild);
   }
 }
-export = prependChild;
+export default prependChild;

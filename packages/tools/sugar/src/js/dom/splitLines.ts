@@ -90,4 +90,4 @@ function _splitLines(elm, tag, tagClass) {
     })
     .join('');
 }
-export = splitLines;
+export default splitLines;

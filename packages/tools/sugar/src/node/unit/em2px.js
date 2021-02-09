@@ -1,6 +1,7 @@
 "use strict";
 // @ts-nocheck
 // @shared
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                    em2px
  * @namespace           sugar.js.unit
@@ -27,5 +28,5 @@
 function em2px(em, $elm = document.documentElement) {
     return em * parseFloat(getComputedStyle($elm).fontSize || '16px');
 }
-module.exports = em2px;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW0ycHguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJlbTJweC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYztBQUNkLFVBQVU7QUFFVjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsS0FBSyxDQUFDLEVBQUUsRUFBRSxJQUFJLEdBQUcsUUFBUSxDQUFDLGVBQWU7SUFDaEQsT0FBTyxFQUFFLEdBQUcsVUFBVSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxDQUFDLFFBQVEsSUFBSSxNQUFNLENBQUMsQ0FBQztBQUNwRSxDQUFDO0FBQ0QsaUJBQVMsS0FBSyxDQUFDIn0=
+exports.default = em2px;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW0ycHguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJlbTJweC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYztBQUNkLFVBQVU7O0FBRVY7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxTQUFTLEtBQUssQ0FBQyxFQUFFLEVBQUUsSUFBSSxHQUFHLFFBQVEsQ0FBQyxlQUFlO0lBQ2hELE9BQU8sRUFBRSxHQUFHLFVBQVUsQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsQ0FBQyxRQUFRLElBQUksTUFBTSxDQUFDLENBQUM7QUFDcEUsQ0FBQztBQUNELGtCQUFlLEtBQUssQ0FBQyJ9

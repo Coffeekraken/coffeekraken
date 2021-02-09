@@ -155,4 +155,4 @@ function whenVisible(elm, cb = null) {
     _cb();
   });
 }
-export = whenVisible;
+export default whenVisible;

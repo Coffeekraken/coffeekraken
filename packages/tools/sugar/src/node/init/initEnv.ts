@@ -23,4 +23,4 @@ import __packageRoot from '../path/packageRoot';
 function initEnv() {
   process.env.PACKAGE_ROOT = __packageRoot();
 }
-export = initEnv;
+export default initEnv;

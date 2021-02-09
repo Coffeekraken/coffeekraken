@@ -30,4 +30,4 @@ function linux() {
   }
   return navigator.platform.toUpperCase().indexOf('LINUX') >= 0;
 }
-export = linux;
+export default linux;

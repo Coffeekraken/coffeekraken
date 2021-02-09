@@ -32,4 +32,4 @@ function toStringFn(html, deep = true) {
   }
   return html;
 }
-export = toStringFn;
+export default toStringFn;

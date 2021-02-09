@@ -48,4 +48,4 @@ class SSugarAppModulePresetInterface extends __SInterface {
   };
 }
 SSugarAppModulePresetInterface.makeAvailableAsType();
-export = SSugarAppModulePresetInterface;
+export default SSugarAppModulePresetInterface;

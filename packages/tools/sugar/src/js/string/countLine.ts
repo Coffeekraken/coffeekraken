@@ -54,4 +54,4 @@ function countLine(line, count = {}) {
 
   return newLine.length;
 }
-export = countLine;
+export default countLine;

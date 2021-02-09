@@ -30,4 +30,4 @@ function childProcess() {
     global.process.ppid
   );
 }
-export = childProcess;
+export default childProcess;

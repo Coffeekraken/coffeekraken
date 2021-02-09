@@ -88,4 +88,4 @@ function querySelector(selector, settings = {}) {
   // return the element
   return elm;
 }
-export = querySelector;
+export default querySelector;

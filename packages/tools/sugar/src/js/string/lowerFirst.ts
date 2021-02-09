@@ -26,4 +26,4 @@
 function lowerFirst(string) {
   return string.charAt(0).toLowerCase() + string.slice(1);
 }
-export = lowerFirst;
+export default lowerFirst;

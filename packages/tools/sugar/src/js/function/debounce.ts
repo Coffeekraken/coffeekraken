@@ -43,4 +43,4 @@ function debounce(fn, delay) {
   };
 }
 /*eslint-enable */
-export = debounce;
+export default debounce;

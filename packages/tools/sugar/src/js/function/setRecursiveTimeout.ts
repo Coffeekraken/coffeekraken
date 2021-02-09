@@ -54,4 +54,4 @@ function setRecursiveTimeout(fn, timeout, duration, spread = 0) {
     clearTimeout(timeoutFn);
   };
 }
-export = setRecursiveTimeout;
+export default setRecursiveTimeout;

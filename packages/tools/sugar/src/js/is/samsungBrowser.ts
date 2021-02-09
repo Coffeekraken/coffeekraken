@@ -27,4 +27,4 @@
 function isSamsumgBrowser(ua = navigator.userAgent) {
   return ua.match(/SamsungBrowser/i) !== null;
 }
-export = isSamsumgBrowser;
+export default isSamsumgBrowser;

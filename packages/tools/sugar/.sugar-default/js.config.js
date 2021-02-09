@@ -14,7 +14,7 @@ module.exports = {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: '[config.storage.srcDir]/js/*.js',
+    input: '[config.storage.srcDir]/js/index.js',
 
     /**
      * @name              outputDir

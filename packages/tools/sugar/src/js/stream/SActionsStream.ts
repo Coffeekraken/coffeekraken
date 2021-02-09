@@ -51,7 +51,7 @@ import __isChildProcess from '../is/childProcess';
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SActionStream extends __SPromise {
+export default class SActionStream extends __SPromise {
   /**
    * @name            _actionsObj
    * @type            Object
@@ -889,4 +889,4 @@ export = class SActionStream extends __SPromise {
       }
     });
   }
-};
+}

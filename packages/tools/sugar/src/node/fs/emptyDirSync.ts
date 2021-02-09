@@ -29,4 +29,4 @@ import __fs from 'fs-extra';
 function emptyDirSync(dir) {
   __fs.emptyDirSync(dir);
 }
-export = emptyDirSync;
+export default emptyDirSync;

@@ -44,4 +44,4 @@ function imagesLoadedAttribute(settings = {}) {
     });
   });
 }
-export = imagesLoadedAttribute;
+export default imagesLoadedAttribute;

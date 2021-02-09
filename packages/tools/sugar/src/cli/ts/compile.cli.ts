@@ -14,4 +14,4 @@ function compileTs(stringArgs = '') {
   pro.run(stringArgs);
 }
 
-export = compileTs;
+export default compileTs;

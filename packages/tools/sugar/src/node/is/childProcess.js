@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                            childProcess
  * @namespace           sugar.node.is
@@ -24,5 +25,5 @@
 function isChildProcess() {
     return (process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined);
 }
-module.exports = isChildProcess;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hpbGRQcm9jZXNzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2hpbGRQcm9jZXNzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsU0FBUyxjQUFjO0lBQ3JCLE9BQU8sQ0FDTCxPQUFPLENBQUMsSUFBSSxLQUFLLFNBQVMsSUFBSSxPQUFPLENBQUMsR0FBRyxDQUFDLGdCQUFnQixLQUFLLFNBQVMsQ0FDekUsQ0FBQztBQUNKLENBQUM7QUFDRCxpQkFBUyxjQUFjLENBQUMifQ==
+exports.default = isChildProcess;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hpbGRQcm9jZXNzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2hpbGRQcm9jZXNzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILFNBQVMsY0FBYztJQUNyQixPQUFPLENBQ0wsT0FBTyxDQUFDLElBQUksS0FBSyxTQUFTLElBQUksT0FBTyxDQUFDLEdBQUcsQ0FBQyxnQkFBZ0IsS0FBSyxTQUFTLENBQ3pFLENBQUM7QUFDSixDQUFDO0FBQ0Qsa0JBQWUsY0FBYyxDQUFDIn0=

@@ -39,4 +39,4 @@ function closestNotVisible(elm) {
   }
   return null;
 }
-export = closestNotVisible;
+export default closestNotVisible;

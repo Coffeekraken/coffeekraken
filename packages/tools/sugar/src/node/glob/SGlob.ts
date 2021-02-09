@@ -30,7 +30,7 @@ import __extractNoneGlob from './extractNoneGlob';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SGlob {
+export default class SGlob {
   /**
    * @name            _settings
    * @type            Object
@@ -181,4 +181,4 @@ export = class SGlob {
       SGlob.extractNoneGlob(glob);
     });
   }
-};
+}

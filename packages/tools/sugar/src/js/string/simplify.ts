@@ -77,4 +77,4 @@ function simplify(string, settings = {}) {
 
   return string;
 }
-export = simplify;
+export default simplify;

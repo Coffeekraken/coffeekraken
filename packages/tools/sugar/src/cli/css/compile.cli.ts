@@ -14,4 +14,4 @@ function compileScss(stringArgs = '') {
   pro.run(stringArgs);
 }
 
-export = compileScss;
+export default compileScss;

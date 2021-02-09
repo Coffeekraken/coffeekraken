@@ -28,7 +28,7 @@ import __copy from '../../clipboard/copy';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class STestJestProcess extends __SChildProcessManager {
+export default class STestJestProcess extends __SChildProcessManager {
   static interfaces = {
     this: __STestJestInterface
   };
@@ -117,4 +117,4 @@ export = class STestJestProcess extends __SChildProcessManager {
   kill() {
     super.kill();
   }
-};
+}

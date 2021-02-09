@@ -33,7 +33,7 @@ class SJestStreamActionInterface extends __SInterface {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SJestStreamAction extends __SActionsStreamAction {
+export default class SJestStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -102,4 +102,4 @@ export = class SJestStreamAction extends __SActionsStreamAction {
       // })
     });
   }
-};
+}

@@ -38,4 +38,4 @@ function offset(elm) {
     left: Math.round(left)
   };
 }
-export = offset;
+export default offset;

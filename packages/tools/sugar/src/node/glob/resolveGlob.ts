@@ -183,4 +183,4 @@ function resolveGlob(globs, settings = {}) {
     }
   );
 }
-export = resolveGlob;
+export default resolveGlob;

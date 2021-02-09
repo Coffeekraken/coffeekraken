@@ -31,4 +31,4 @@ function wait(timeout) {
     }, timeout);
   });
 }
-export = wait;
+export default wait;

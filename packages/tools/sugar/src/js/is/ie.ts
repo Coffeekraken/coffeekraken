@@ -27,4 +27,4 @@
 function isIe(ua = navigator.userAgent) {
   return ua.indexOf('MSIE') > -1;
 }
-export = isIe;
+export default isIe;

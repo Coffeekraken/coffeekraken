@@ -22,12 +22,9 @@ import { ISEventEmitter } from '../../event/SEventEmitter';
  */
 
 export interface ISTerminalStdioCtorSettings {
-  terminalStdio?: ISTerminalStdioOptionalSettings;
+  terminalStdio?: Partial<ISTerminalStdioSettings>;
 }
 
-export interface ISTerminalStdioOptionalSettings {
-  actionPrefix?: boolean;
-}
 export interface ISTerminalStdioSettings {
   actionPrefix: boolean;
 }

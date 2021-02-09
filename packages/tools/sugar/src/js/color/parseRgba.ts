@@ -37,4 +37,4 @@ function parseRgba(rgbaString) {
     a: parseInt(array[3])
   };
 }
-export = parseRgba;
+export default parseRgba;

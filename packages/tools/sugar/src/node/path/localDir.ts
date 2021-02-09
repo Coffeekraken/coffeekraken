@@ -28,4 +28,4 @@ const fn: ILocalDir = function () {
   __ensureDirSync(path);
   return path;
 };
-export = fn;
+export default fn;

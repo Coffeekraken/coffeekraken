@@ -26,6 +26,6 @@ import __aggregation from 'aggregation/es5';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = (...classes) => {
+export default (...classes) => {
   return __aggregation(...classes);
 };

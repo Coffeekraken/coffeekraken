@@ -32,7 +32,7 @@ import __activeSpace from '../../core/activeSpace';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SBlessedInput extends __SBlessedComponent {
+export default class SBlessedInput extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function
@@ -168,4 +168,4 @@ export = class SBlessedInput extends __SBlessedComponent {
 
     this.append(this.$input);
   }
-};
+}

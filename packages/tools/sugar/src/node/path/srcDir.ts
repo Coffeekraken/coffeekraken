@@ -32,7 +32,7 @@ export default interface ISrcDir {
   (settings?: ISrcDirSettings): string;
 }
 
-const fn: ISrcDir = function (settings: ISrcDirSettings = {}) {
+export default function (settings: ISrcDirSettings = {}) {
   settings = {
     ...settings
   };
@@ -42,5 +42,4 @@ const fn: ISrcDir = function (settings: ISrcDirSettings = {}) {
     return srcDir;
   }
   return undefined;
-};
-export = fn;
+}

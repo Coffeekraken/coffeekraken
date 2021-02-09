@@ -22,4 +22,4 @@ import __SColor from './SColor';
 function color(color) {
   return new __SColor(color);
 }
-export = color;
+export default color;

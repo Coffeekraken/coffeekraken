@@ -36,4 +36,4 @@ function parseHsv(hsvString) {
     v: parseFloat(array[2])
   };
 }
-export = parseHsv;
+export default parseHsv;

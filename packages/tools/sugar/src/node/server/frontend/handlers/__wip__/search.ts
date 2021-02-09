@@ -64,4 +64,4 @@ function search(req, server) {
     });
   });
 }
-export = search;
+export default search;

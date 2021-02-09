@@ -92,4 +92,4 @@ function findImportStatements(string, settings = {}) {
 
   return statements;
 }
-export = findImportStatements;
+export default findImportStatements;

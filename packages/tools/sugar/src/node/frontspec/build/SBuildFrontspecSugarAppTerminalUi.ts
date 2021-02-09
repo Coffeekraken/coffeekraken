@@ -20,7 +20,7 @@ import __SSugarAppModuleTerminalUi from '../../app/sugar/SSugarAppModuleTerminal
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SBuildFrontspecSugarAppTerminalUi extends __SSugarAppModuleTerminalUi {
+export default class SBuildFrontspecSugarAppTerminalUi extends __SSugarAppModuleTerminalUi {
   /**
    * @name            constructor
    * @type            Function
@@ -34,4 +34,4 @@ export = class SBuildFrontspecSugarAppTerminalUi extends __SSugarAppModuleTermin
   constructor(sources, settings = {}) {
     super(sources, settings);
   }
-};
+}

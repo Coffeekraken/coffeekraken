@@ -31,4 +31,4 @@ function isColor(value) {
   ele.style.color = value;
   return ele.style.color.split(/\s+/).join('').toLowerCase() !== '';
 }
-export = isColor;
+export default isColor;

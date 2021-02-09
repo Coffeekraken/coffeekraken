@@ -38,4 +38,4 @@ const descriptor: ISTypeDescriptor = {
   }
 };
 
-export = descriptor;
+export default descriptor;

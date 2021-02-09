@@ -48,4 +48,4 @@ function style(elm, styleObj) {
   // return the style
   return elm.style;
 }
-export = style;
+export default style;

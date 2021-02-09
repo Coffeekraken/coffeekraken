@@ -29,4 +29,4 @@ function injectStyle(style, node = document.head) {
   node.appendChild($tag);
   return $tag;
 }
-export = injectStyle;
+export default injectStyle;

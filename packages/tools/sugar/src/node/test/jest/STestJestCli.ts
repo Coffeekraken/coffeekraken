@@ -21,7 +21,7 @@ import __STestJestProcess from './STestJestProcess';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class STestJestCli extends __SCli {
+export default class STestJestCli extends __SCli {
   /**
    * @name          command
    * @type          String
@@ -78,4 +78,4 @@ export = class STestJestCli extends __SCli {
       )
     );
   }
-};
+}

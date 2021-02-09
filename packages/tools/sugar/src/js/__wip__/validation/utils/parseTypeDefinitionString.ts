@@ -86,4 +86,4 @@ function parseTypeDefinitionString(argTypeString) {
 
   return returnArray;
 }
-export = parseTypeDefinitionString;
+export default parseTypeDefinitionString;

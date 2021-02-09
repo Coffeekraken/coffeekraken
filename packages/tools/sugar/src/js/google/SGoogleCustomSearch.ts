@@ -36,7 +36,7 @@ import __SRequest from '../http/SRequest';
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export = class SGoogleCustomSearch {
+export default class SGoogleCustomSearch {
   /**
    * @name              _apiKey
    * @type              String
@@ -248,4 +248,4 @@ export = class SGoogleCustomSearch {
       page: this._page - (this._page <= 1 ? 0 : 1)
     });
   }
-};
+}

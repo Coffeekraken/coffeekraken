@@ -26,6 +26,6 @@ import __isGlob from 'is-glob';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = (string) => {
+export default (string) => {
   return __isGlob(string);
 };

@@ -39,4 +39,4 @@ function envMiddleware(settings = {}) {
     next();
   };
 }
-export = envMiddleware;
+export default envMiddleware;

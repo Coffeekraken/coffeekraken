@@ -37,4 +37,4 @@ function folderSize(folderPath, rawFormat = false) {
     });
   });
 }
-export = folderSize;
+export default folderSize;

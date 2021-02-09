@@ -30,4 +30,4 @@ function isInIframe() {
     return true;
   }
 }
-export = isInIframe;
+export default isInIframe;

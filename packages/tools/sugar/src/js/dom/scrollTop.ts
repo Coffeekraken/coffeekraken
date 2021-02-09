@@ -22,4 +22,4 @@
 function scrollTop() {
   return window.pageYOffset || document.scrollTop || document.body.scrollTop;
 }
-export = scrollTop;
+export default scrollTop;

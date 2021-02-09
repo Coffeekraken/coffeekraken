@@ -32,7 +32,7 @@ export default interface ICacheDir {
   (settings?: ICacheDirSettings): string;
 }
 
-const fn: ICacheDir = function (settings: ICacheDirSettings = {}) {
+export default function (settings: ICacheDirSettings = {}) {
   settings = {
     ...settings
   };
@@ -42,5 +42,4 @@ const fn: ICacheDir = function (settings: ICacheDirSettings = {}) {
     return cacheDir;
   }
   return undefined;
-};
-export = fn;
+}

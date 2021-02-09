@@ -29,7 +29,7 @@ import __convert from '../time/convert';
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export = class SRequestConfig {
+export default class SRequestConfig {
   /**
    * @name                    url
    * @type                    String
@@ -196,4 +196,4 @@ export = class SRequestConfig {
     // set the parameters
     Object.assign(this, params);
   }
-};
+}

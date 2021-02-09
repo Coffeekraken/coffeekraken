@@ -34,4 +34,4 @@ function ltrim(string, needle, trimResult = true) {
   // nothing to trim
   return string;
 }
-export = ltrim;
+export default ltrim;

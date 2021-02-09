@@ -2,6 +2,6 @@
 
 import monorepo from './monorepo.cli';
 
-export = (stringArgs = '') => {
+export default (stringArgs = '') => {
   monorepo(stringArgs);
 };

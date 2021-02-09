@@ -41,4 +41,4 @@ function on(name, callback) {
     window._sugarEventSPromise.off(name, callback);
   };
 }
-export = on;
+export default on;

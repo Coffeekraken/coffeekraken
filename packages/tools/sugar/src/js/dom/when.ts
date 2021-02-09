@@ -93,4 +93,4 @@ function when($node, state, settings = {}) {
     });
   });
 }
-export = when;
+export default when;

@@ -32,4 +32,4 @@ function camelize(text) {
   res = res.substr(0, 1).toLowerCase() + res.slice(1);
   return res.trim();
 }
-export = camelize;
+export default camelize;

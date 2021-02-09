@@ -32,4 +32,4 @@ function appendStylesheetLink(href) {
   document.head.appendChild($link);
   return linkLoaded($link);
 }
-export = appendStylesheetLink;
+export default appendStylesheetLink;

@@ -140,4 +140,4 @@ function querySelectorLive(selector, cb, settings = {}) {
  * @default 	true
  */
 
-export = querySelectorLive;
+export default querySelectorLive;

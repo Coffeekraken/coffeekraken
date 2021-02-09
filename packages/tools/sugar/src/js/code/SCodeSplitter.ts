@@ -39,7 +39,7 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SCodeSplitter {
+export default class SCodeSplitter {
   /**
    * @name        _settings
    * @type        Object
@@ -212,4 +212,4 @@ export = class SCodeSplitter {
 
     return blocks;
   }
-};
+}

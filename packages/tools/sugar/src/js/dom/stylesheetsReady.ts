@@ -98,4 +98,4 @@ function stylesheetsReady(links, cb = null) {
     }
   });
 }
-export = stylesheetsReady;
+export default stylesheetsReady;

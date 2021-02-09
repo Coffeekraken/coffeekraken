@@ -49,16 +49,12 @@ export interface ISDocblockBlockTagsMap {
   [key: string]: Function;
 }
 
-export interface ISDocblockBlockOptionalSettings {
-  filepath?: string;
-  tags?: ISDocblockBlockTagsMap;
-}
 export interface ISDocblockBlockSettings {
   filepath?: string;
   tags: ISDocblockBlockTagsMap;
 }
 export interface ISDocblockBlockCtorSettings {
-  docblockBlock?: ISDocblockBlockOptionalSettings;
+  docblockBlock?: Partial<ISDocblockBlockSettings>;
 }
 
 export interface ISDocblockBlock {

@@ -55,4 +55,4 @@ function imagesLoaded($imgs) {
     });
   });
 }
-export = imagesLoaded;
+export default imagesLoaded;

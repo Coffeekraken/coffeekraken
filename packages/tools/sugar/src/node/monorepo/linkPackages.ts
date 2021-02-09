@@ -42,7 +42,7 @@ interface ILinkPackagesEmitFn {
 interface ILinkPackagesCancelFn {
   (value: any): any;
 }
-export = function linkPackages(settings = {}): Promise<null> {
+export default function linkPackages(settings = {}): Promise<null> {
   settings = {
     rootDir: process.cwd(),
     ...settings
@@ -110,4 +110,4 @@ export = function linkPackages(settings = {}): Promise<null> {
       resolve();
     }
   );
-};
+}

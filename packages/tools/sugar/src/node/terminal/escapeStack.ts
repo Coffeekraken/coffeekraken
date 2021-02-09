@@ -93,4 +93,4 @@ function escapeStack(callback = null) {
 
   return;
 }
-export = escapeStack;
+export default escapeStack;

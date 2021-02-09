@@ -69,4 +69,4 @@ function sugarHeading(settings: ISugarHeadingSettings = {}): string {
   return value;
 }
 
-export = sugarHeading;
+export default sugarHeading;

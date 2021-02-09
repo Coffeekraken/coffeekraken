@@ -11,7 +11,7 @@ import __fs from 'fs';
 import __SScssCompiler from '../../../../scss/SScssCompiler';
 import __tmpDir from '../../../../fs/tmpDir';
 
-export = {
+export default {
   name: 'esbuildScssLoaderPlugin',
   setup(build) {
     // Load ".txt" files and return an array of words

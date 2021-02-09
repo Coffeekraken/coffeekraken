@@ -222,4 +222,4 @@ function getArgNameByAlias(alias, definition) {
   }
   return null;
 }
-export = parseArgsString;
+export default parseArgsString;

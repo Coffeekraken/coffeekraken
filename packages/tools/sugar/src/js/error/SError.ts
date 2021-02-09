@@ -12,7 +12,7 @@ import __toString from '../string/toString';
  * @todo      tests
  */
 
-export = class SError extends Error {
+export default class SError extends Error {
   constructor(messageOrError) {
     let stack, message, originalMessage;
 
@@ -112,4 +112,4 @@ export = class SError extends Error {
     // });
     // this.stack = __trimLines(__parseHtml(stack.join('')));
   }
-};
+}

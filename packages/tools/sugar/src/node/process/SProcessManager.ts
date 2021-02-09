@@ -329,4 +329,4 @@ class SProcessManager extends __SPromise {
     return this.currentProcess;
   }
 }
-export = SProcessManager;
+export default SProcessManager;

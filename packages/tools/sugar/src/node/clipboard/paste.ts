@@ -30,4 +30,4 @@ import __clipboardy from 'clipboardy';
 function paste(text) {
   return __clipboardy.readSync();
 }
-export = paste;
+export default paste;

@@ -47,4 +47,4 @@ function env(dotPath, value) {
   return __parse(__get(targetObj, dotPath.toUpperCase()));
 }
 
-export = env;
+export default env;

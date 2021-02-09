@@ -32,7 +32,7 @@ import __validatedefinitionect from '../validation/object/validatedefinitionect'
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SActionStreamAction extends __SPromise {
+export default class SActionStreamAction extends __SPromise {
   /**
    * @name            _skipNextActions
    * @type            Number|Array<String>
@@ -267,4 +267,4 @@ export = class SActionStreamAction extends __SPromise {
       }
     });
   }
-};
+}

@@ -32,4 +32,4 @@ import __sprintf from 'sprintf-js';
 function _printf(...args) {
   return __sprintf.sprintf.apply(null, args);
 }
-export = _printf;
+export default _printf;

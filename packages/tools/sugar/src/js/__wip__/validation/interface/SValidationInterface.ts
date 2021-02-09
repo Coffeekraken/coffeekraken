@@ -14,7 +14,7 @@ import __SInterface from '../../class/SInterface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SValidationInterface extends __SInterface {
+export default class SValidationInterface extends __SInterface {
   static definition = {
     apply: {
       type: 'Function',
@@ -31,4 +31,4 @@ export = class SValidationInterface extends __SInterface {
       static: true
     }
   };
-};
+}

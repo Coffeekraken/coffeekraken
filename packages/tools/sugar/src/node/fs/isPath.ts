@@ -42,4 +42,4 @@ function isPath(path, checkExistence = false) {
   // otherwise, all is ok
   return true;
 }
-export = isPath;
+export default isPath;

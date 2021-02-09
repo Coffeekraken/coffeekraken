@@ -43,4 +43,4 @@ function putUseStatementsOnTop(content) {
   }
   return content;
 }
-export = putUseStatementsOnTop;
+export default putUseStatementsOnTop;

@@ -87,4 +87,4 @@ function deepMap(object, processor, settings = {}, _path = []) {
   });
   return object;
 }
-export = deepMap;
+export default deepMap;

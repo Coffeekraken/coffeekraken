@@ -31,4 +31,4 @@ function forceRedraw($elm) {
   $elm.style.display = display;
   return $elm;
 }
-export = forceRedraw;
+export default forceRedraw;

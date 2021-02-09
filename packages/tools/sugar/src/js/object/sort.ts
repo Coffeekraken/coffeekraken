@@ -56,4 +56,4 @@ function sort(object, sort) {
   // return the result sorted object
   return resultObj;
 }
-export = sort;
+export default sort;

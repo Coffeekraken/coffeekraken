@@ -2,12 +2,12 @@
   "assets": {
     "css": {
       "main": {
-        "path": "http://localhost:3333/index.css"
+        "path": "http://%localIp:3333/index.css"
       }
     },
     "js": {
       "main": {
-        "path": "http://localhost:8888/index.js"
+        "path": "http://%localIp:8888/index.js"
       }
     }
   }

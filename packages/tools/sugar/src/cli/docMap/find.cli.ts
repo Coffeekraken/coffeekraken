@@ -5,7 +5,7 @@ import __stdio from '../../node/stdio/stdio';
 import __SDocMapSettingsInterface from '../../node/docMap/interface/SDocMapSettingsInterface';
 import __argsToObject from '../../node/cli/argsToObject';
 
-export = async (stringArgs = '') => {
+export default async (stringArgs = '') => {
   const settings = __argsToObject(stringArgs, {
     definition: __SDocMapSettingsInterface.definition
   });

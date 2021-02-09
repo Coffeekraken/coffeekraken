@@ -56,4 +56,4 @@ function argsToObject(argsObj, settings = {}) {
 
   return __completeArgsObject(argsObj || {}, settings);
 }
-export = argsToObject;
+export default argsToObject;

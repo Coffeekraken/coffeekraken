@@ -16,10 +16,7 @@ import __esbuildScssLoaderPlugin from './compile/plugins/esbuild/esbuildScssLoad
 import __SEventEmitter from '../event/SEventEmitter';
 
 import __SInterface from '../interface/SInterface';
-import __SJsCompiler, {
-  ISJsCompilerParams,
-  ISJsCompilerOptionalParams
-} from './compile/SJsCompiler';
+import __SJsCompiler, { ISJsCompilerParams } from './compile/SJsCompiler';
 import __SJsCompilerParamsInterface from './compile/interface/SJsCompilerParamsInterface';
 
 /**
@@ -58,23 +55,19 @@ export class SJsFileCtorSettingsInterface extends __SInterface {
   };
 }
 
-interface ISJsFileCompileOptionalSettings {}
 interface ISJsFileCompileSettings {}
 
-interface ISJsFileOptionalSettings {
-  compile?: ISJsFileCompileOptionalSettings;
-}
 interface ISJsFileSettings {
   plugins: any[];
-  compile: ISJsFileCompileOptionalSettings;
+  compile: Partial<ISJsFileCompileSettings>;
 }
 interface ISJsFileCtorSettings {
   plugins?: any[];
-  jsFile?: ISJsFileOptionalSettings;
+  jsFile?: Partial<ISJsFileSettings>;
 }
 
 interface ISJsFile {
-  compile(params: ISJsCompilerParams, settings?: ISJsFileOptionalSettings);
+  compile(params: ISJsCompilerParams, settings?: Partial<ISJsFileSettings>);
 }
 
 /**
@@ -201,9 +194,9 @@ class SJsFile extends __SFile implements ISJsFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _isCompiling = false;
-  _currentCompilationSettings: ISJsFileOptionalSettings = {};
-  _currentCompilationParams: ISJsCompilerOptionalParams = {};
-  compile(params: ISJsCompilerParams, settings?: ISJsFileOptionalSettings) {
+  _currentCompilationSettings: Partial<ISJsFileSettings> = {};
+  _currentCompilationParams: Partial<ISJsCompilerParams> = {};
+  compile(params: ISJsCompilerParams, settings?: Partial<ISJsFileSettings>) {
     // init the promise
     return new __SPromise(async ({ resolve, reject, emit, pipeTo, on }) => {
       settings = __deepMerge(this.jsFileSettings, settings);

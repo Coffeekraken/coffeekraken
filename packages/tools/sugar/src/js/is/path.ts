@@ -31,4 +31,4 @@ function path(path) {
   // otherwise, all is ok
   return true;
 }
-export = path;
+export default path;

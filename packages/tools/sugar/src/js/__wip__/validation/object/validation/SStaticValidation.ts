@@ -33,4 +33,4 @@ class SStaticValidation extends __SValidation {
   }
 }
 
-export = SStaticValidation;
+export default SStaticValidation;

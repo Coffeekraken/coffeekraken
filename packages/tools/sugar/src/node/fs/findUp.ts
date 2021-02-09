@@ -81,4 +81,4 @@ const fn: IFindUp = function findUp(
   });
 };
 
-export = fn;
+export default fn;

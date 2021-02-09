@@ -45,4 +45,4 @@ function removeClassOnAnimationEnd($elm, cls) {
     }
   );
 }
-export = removeClassOnAnimationEnd;
+export default removeClassOnAnimationEnd;

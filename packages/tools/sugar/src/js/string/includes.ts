@@ -36,4 +36,4 @@ function includes(string, values) {
   if (valuesThatExists.length) return valuesThatExists;
   return false;
 }
-export = includes;
+export default includes;

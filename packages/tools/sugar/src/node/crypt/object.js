@@ -4,8 +4,23 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const object_encode_1 = __importDefault(require("object-encode"));
-module.exports = {
+/**
+ * @name            object
+ * @namespace           sugar.js.crypt
+ * @type            Object
+ * @status              wip
+ *
+ * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the object algorithm
+ *
+ * @todo        interface
+ * @todo        doc
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+exports.default = {
     /**
      * @name        encrypt
      * @type        Function
@@ -37,4 +52,4 @@ module.exports = {
         return object_encode_1.default.decode_object(encodedObject, 'base64', salt);
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2JqZWN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsib2JqZWN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTs7OztBQUVWLGtFQUEyQztBQWdCM0MsaUJBQVM7SUFDUDs7Ozs7Ozs7Ozs7T0FXRztJQUNILE9BQU8sRUFBRSxVQUFVLE1BQU0sRUFBRSxJQUFJLEdBQUcsaUNBQWlDO1FBQ2pFLE9BQU8sdUJBQWMsQ0FBQyxhQUFhLENBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxJQUFJLENBQUMsQ0FBQztJQUM5RCxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7O09BV0c7SUFDSCxPQUFPLEVBQUUsVUFBVSxhQUFhLEVBQUUsSUFBSSxHQUFHLGlDQUFpQztRQUN4RSxPQUFPLHVCQUFjLENBQUMsYUFBYSxDQUFDLGFBQWEsRUFBRSxRQUFRLEVBQUUsSUFBSSxDQUFDLENBQUM7SUFDckUsQ0FBQztDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2JqZWN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsib2JqZWN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7QUFFVixrRUFBMkM7QUFFM0M7Ozs7Ozs7Ozs7Ozs7R0FhRztBQUNILGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7O09BV0c7SUFDSCxPQUFPLEVBQUUsVUFBVSxNQUFNLEVBQUUsSUFBSSxHQUFHLGlDQUFpQztRQUNqRSxPQUFPLHVCQUFjLENBQUMsYUFBYSxDQUFDLE1BQU0sRUFBRSxRQUFRLEVBQUUsSUFBSSxDQUFDLENBQUM7SUFDOUQsQ0FBQztJQUVEOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsT0FBTyxFQUFFLFVBQVUsYUFBYSxFQUFFLElBQUksR0FBRyxpQ0FBaUM7UUFDeEUsT0FBTyx1QkFBYyxDQUFDLGFBQWEsQ0FBQyxhQUFhLEVBQUUsUUFBUSxFQUFFLElBQUksQ0FBQyxDQUFDO0lBQ3JFLENBQUM7Q0FDRixDQUFDIn0=

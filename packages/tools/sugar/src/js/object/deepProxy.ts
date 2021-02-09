@@ -203,4 +203,4 @@ function deepProxy(object, handlerFn, settings = {}) {
   }
   return proxify(object, []);
 }
-export = deepProxy;
+export default deepProxy;

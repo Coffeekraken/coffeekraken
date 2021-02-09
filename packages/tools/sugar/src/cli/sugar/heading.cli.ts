@@ -3,7 +3,7 @@
 import _sugarHeading from '../../node/ascii/sugarHeading';
 import _packageJson from '../../node/package/json';
 
-function heading (stringArgs = '') {
+function heading(stringArgs = '') {
   console.log(
     _sugarHeading({
       version: _packageJson(__dirname).version
@@ -11,4 +11,4 @@ function heading (stringArgs = '') {
   );
 }
 
-export = heading;
+export default heading;

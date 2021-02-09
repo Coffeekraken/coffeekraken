@@ -196,4 +196,4 @@ class SGradientSvgFilter extends SSvgFilter {
 }
 
 // export modules
-export = SGradientSvgFilter;
+export default SGradientSvgFilter;

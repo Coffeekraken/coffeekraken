@@ -76,4 +76,4 @@ function toHtml(inputString, settings = {}) {
 
   return converterFn(inputString, settings);
 }
-export = toHtml;
+export default toHtml;

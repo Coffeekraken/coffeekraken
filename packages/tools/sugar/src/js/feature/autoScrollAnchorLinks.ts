@@ -66,4 +66,4 @@ function autoScrollAnchorLinks(
     });
   });
 }
-export = autoScrollAnchorLinks;
+export default autoScrollAnchorLinks;

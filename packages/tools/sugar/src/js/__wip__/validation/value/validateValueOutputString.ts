@@ -64,4 +64,4 @@ function validateValueOutputString(validateValueResultObj, settings = {}) {
 
   return __parseHtml(issuesArray.join('\n')) + '\n';
 }
-export = validateValueOutputString;
+export default validateValueOutputString;

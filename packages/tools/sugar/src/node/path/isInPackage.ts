@@ -22,11 +22,7 @@ import __fs from 'fs';
  * @see       https://www.npmjs.com/package/find-package-json
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isInPackage(
-  name,
-  from = process.cwd(),
-  highest = false
-) {
+function isInPackage(name, from = process.cwd(), highest = false) {
   const packageRoot = __packageRoot(from);
   if (!packageRoot) return false;
 
@@ -54,4 +50,4 @@ function isInPackage(
 
   return false;
 }
-export = isInPackage;
+export default isInPackage;

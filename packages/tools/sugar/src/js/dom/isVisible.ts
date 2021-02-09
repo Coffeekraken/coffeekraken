@@ -37,4 +37,4 @@ function isVisible(elm) {
   return '0' !== opacity && 'none' !== display && 'hidden' !== visibility;
 }
 window.__isVisible = isVisible;
-export = isVisible;
+export default isVisible;

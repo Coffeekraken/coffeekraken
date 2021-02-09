@@ -42,17 +42,12 @@ import SDocblockBlock from './SDocblockBlock';
 export interface ISDocblockSortFnSetting {
   (a: any, b: any);
 }
-
-export interface ISDocblockOptionalSettings {
-  filepath?: string;
-  sortFunction?: ISDocblockSortFnSetting;
-}
 export interface ISDocblockSettings {
   filepath?: string;
   sortFunction?: ISDocblockSortFnSetting;
 }
 export interface ISDocblockCtorSettings {
-  docblock?: ISDocblockOptionalSettings;
+  docblock?: Partial<ISDocblockSettings>;
 }
 
 export interface ISDocblock {

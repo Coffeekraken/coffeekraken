@@ -65,4 +65,4 @@ function inViewportStatusChange($elm) {
     isFinished = true;
   });
 }
-export = inViewportStatusChange;
+export default inViewportStatusChange;

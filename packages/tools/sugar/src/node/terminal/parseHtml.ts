@@ -65,4 +65,4 @@ function parseHtml(message) {
   if (isArray) return message;
   return message[0];
 }
-export = parseHtml;
+export default parseHtml;

@@ -46,7 +46,7 @@ import __sugarConfig from '../config/sugar';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SFrontspec extends __SPromise {
+export default class SFrontspec extends __SPromise {
   /**
    * @name          _entries
    * @type           Array<Object>
@@ -229,4 +229,4 @@ export = class SFrontspec extends __SPromise {
       }
     );
   }
-};
+}

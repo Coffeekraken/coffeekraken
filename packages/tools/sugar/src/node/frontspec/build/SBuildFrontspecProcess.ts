@@ -21,7 +21,7 @@ import __SBuildFrontspecInterface from './interface/SBuildFrontspecInterface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SBuildFrontspecProcess extends __SProcess {
+export default class SBuildFrontspecProcess extends __SProcess {
   static interfaces = {
     this: __SBuildFrontspecInterface
   };
@@ -65,4 +65,4 @@ export = class SBuildFrontspecProcess extends __SProcess {
     const actionStreamProcess = actionStream.start(params);
     return actionStreamProcess;
   }
-};
+}

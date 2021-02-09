@@ -36,4 +36,4 @@ function addAnimationClass($elm, cls) {
   // remove the class at the end of the animation
   return __removeClassesOnAnimationEnd($elm, cls);
 }
-export = addAnimationClass;
+export default addAnimationClass;

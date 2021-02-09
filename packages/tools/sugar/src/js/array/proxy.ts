@@ -151,4 +151,4 @@ function proxy(array) {
   // return the processed array
   return array;
 }
-export = proxy;
+export default proxy;

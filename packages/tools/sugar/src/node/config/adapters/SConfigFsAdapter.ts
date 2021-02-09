@@ -32,7 +32,7 @@ import __localDir from '../../path/localDir';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export = class SConfigFsAdapter extends __SConfigAdapter {
+export default class SConfigFsAdapter extends __SConfigAdapter {
   constructor(settings = {}) {
     settings = __deepMerge(
       {
@@ -120,4 +120,4 @@ export = class SConfigFsAdapter extends __SConfigAdapter {
 
     return true;
   }
-};
+}

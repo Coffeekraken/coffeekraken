@@ -46,4 +46,4 @@ function circleConstrain(center, radius, point) {
     };
   }
 }
-export = circleConstrain;
+export default circleConstrain;

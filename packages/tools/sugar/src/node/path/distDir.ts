@@ -32,7 +32,7 @@ export default interface IDistDir {
   (settings?: IDistDirSettings): string;
 }
 
-const fn: IDistDir = function (settings: IDistDirSettings = {}) {
+export default function (settings: IDistDirSettings = {}) {
   settings = {
     ...settings
   };
@@ -42,5 +42,4 @@ const fn: IDistDir = function (settings: IDistDirSettings = {}) {
     return distDir;
   }
   return undefined;
-};
-export = fn;
+}

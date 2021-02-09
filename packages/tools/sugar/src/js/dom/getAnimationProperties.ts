@@ -66,4 +66,4 @@ function getAnimationProperties(elm) {
   props.totalDuration = totalDuration;
   return props;
 }
-export = getAnimationProperties;
+export default getAnimationProperties;

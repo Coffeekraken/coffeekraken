@@ -27,4 +27,4 @@
 function isOdd(value) {
   return value % 2 === 1;
 }
-export = isOdd;
+export default isOdd;

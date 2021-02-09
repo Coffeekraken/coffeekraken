@@ -29,4 +29,4 @@ function unique(array) {
   }
   return a;
 }
-export = unique;
+export default unique;

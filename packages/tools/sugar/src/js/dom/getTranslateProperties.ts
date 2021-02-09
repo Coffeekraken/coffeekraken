@@ -141,4 +141,4 @@ function getTranslateProperties($elm, unit = 'px') {
     z: 0
   };
 }
-export = getTranslateProperties;
+export default getTranslateProperties;

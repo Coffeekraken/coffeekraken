@@ -3,26 +3,43 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a;
+Object.defineProperty(exports, "__esModule", { value: true });
 const SInterface_1 = __importDefault(require("../../class/SInterface"));
-module.exports = (_a = class SCliInterface extends SInterface_1.default {
+/**
+ * @name                SCliInterface
+ * @namespace           sugar.node.blessed.interface
+ * @type                Class
+ * @extends             SInterface
+ * @status              wip
+ *
+ * This class represent the interface that describe the minimum requirement
+ * needed for an element passed to the SOutput ```log``` method.
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class SCliInterface extends SInterface_1.default {
+}
+exports.default = SCliInterface;
+SCliInterface.definition = {
+    interface: {
+        type: 'SInterface',
+        required: true,
+        static: true
     },
-    _a.definition = {
-        interface: {
-            type: 'SInterface',
-            required: true,
-            static: true
-        },
-        processClass: {
-            type: 'SProcessManager',
-            required: true,
-            static: true
-        },
-        command: {
-            type: 'String',
-            required: true,
-            static: true
-        }
+    processClass: {
+        type: 'SProcessManager',
+        required: true,
+        static: true
     },
-    _a);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NsaUludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDbGlJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBRWQsd0VBQWtEO0FBb0JsRCx1QkFBUyxNQUFNLGFBQWMsU0FBUSxvQkFBWTtLQWtCaEQ7SUFqQlEsYUFBVSxHQUFHO1FBQ2xCLFNBQVMsRUFBRTtZQUNULElBQUksRUFBRSxZQUFZO1lBQ2xCLFFBQVEsRUFBRSxJQUFJO1lBQ2QsTUFBTSxFQUFFLElBQUk7U0FDYjtRQUNELFlBQVksRUFBRTtZQUNaLElBQUksRUFBRSxpQkFBaUI7WUFDdkIsUUFBUSxFQUFFLElBQUk7WUFDZCxNQUFNLEVBQUUsSUFBSTtTQUNiO1FBQ0QsT0FBTyxFQUFFO1lBQ1AsSUFBSSxFQUFFLFFBQVE7WUFDZCxRQUFRLEVBQUUsSUFBSTtZQUNkLE1BQU0sRUFBRSxJQUFJO1NBQ2I7S0FDRDtRQUNGIn0=
+    command: {
+        type: 'String',
+        required: true,
+        static: true
+    }
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NsaUludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDbGlJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBRWQsd0VBQWtEO0FBR2xEOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBQ0gsTUFBcUIsYUFBYyxTQUFRLG9CQUFZOztBQUF2RCxnQ0FrQkM7QUFqQlEsd0JBQVUsR0FBRztJQUNsQixTQUFTLEVBQUU7UUFDVCxJQUFJLEVBQUUsWUFBWTtRQUNsQixRQUFRLEVBQUUsSUFBSTtRQUNkLE1BQU0sRUFBRSxJQUFJO0tBQ2I7SUFDRCxZQUFZLEVBQUU7UUFDWixJQUFJLEVBQUUsaUJBQWlCO1FBQ3ZCLFFBQVEsRUFBRSxJQUFJO1FBQ2QsTUFBTSxFQUFFLElBQUk7S0FDYjtJQUNELE9BQU8sRUFBRTtRQUNQLElBQUksRUFBRSxRQUFRO1FBQ2QsUUFBUSxFQUFFLElBQUk7UUFDZCxNQUFNLEVBQUUsSUFBSTtLQUNiO0NBQ0YsQ0FBQyJ9

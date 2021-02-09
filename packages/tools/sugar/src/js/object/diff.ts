@@ -122,4 +122,4 @@ function diff(object1, object2, settings = {}) {
 
   return finalObj;
 }
-export = diff;
+export default diff;

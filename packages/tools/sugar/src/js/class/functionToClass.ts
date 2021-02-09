@@ -26,4 +26,4 @@ import __funcToClass from 'func-to-classes';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = __funcToClass;
+export default __funcToClass;

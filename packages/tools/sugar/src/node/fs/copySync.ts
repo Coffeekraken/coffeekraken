@@ -30,4 +30,4 @@ import __fs from 'fs-extra';
 function copySync(src, dest) {
   __fs.copySync(src, dest);
 }
-export = copySync;
+export default copySync;

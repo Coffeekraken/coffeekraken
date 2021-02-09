@@ -33,4 +33,4 @@ function isJson(value) {
   }
   return true;
 }
-export = isJson;
+export default isJson;

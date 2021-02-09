@@ -55,4 +55,4 @@ function del(object, dotPath) {
   }
   return object;
 }
-export = del;
+export default del;

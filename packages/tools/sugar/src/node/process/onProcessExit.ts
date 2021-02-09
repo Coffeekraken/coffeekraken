@@ -67,4 +67,4 @@ function onProcessExit(callback) {
   if (__onProcessExitCallbacks.indexOf(callback) !== -1) return;
   __onProcessExitCallbacks.push(callback);
 }
-export = onProcessExit;
+export default onProcessExit;

@@ -21,7 +21,7 @@ const __SSugarAppModulePresetInterface = require('./SSugarAppModulePresetInterfa
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SSugarAppModuleObjInterface extends __SInterface {
+export default class SSugarAppModuleObjInterface extends __SInterface {
   static definition = {
     id: {
       type: 'String',
@@ -83,4 +83,4 @@ export = class SSugarAppModuleObjInterface extends __SInterface {
       default: {}
     }
   };
-};
+}

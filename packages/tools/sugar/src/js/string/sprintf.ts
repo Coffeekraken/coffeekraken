@@ -33,4 +33,4 @@ import { sprintf as _sprintf } from 'sprintf-js';
 function sprintf() {
   return _sprintf.apply(this, arguments);
 }
-export = sprintf;
+export default sprintf;

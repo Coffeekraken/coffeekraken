@@ -30,4 +30,4 @@ function pad(number, width, character = '0') {
     ? number
     : new Array(width - number.length + 1).join(character) + number;
 }
-export = pad;
+export default pad;

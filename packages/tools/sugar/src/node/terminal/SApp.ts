@@ -35,7 +35,7 @@ import __packageRoot from '../path/packageRoot';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SApp extends __blessed.screen {
+export default class SApp extends __blessed.screen {
   /**
    * @name              _name
    * @type              String
@@ -298,4 +298,4 @@ export = class SApp extends __blessed.screen {
     // render the screen
     this.render();
   }
-};
+}

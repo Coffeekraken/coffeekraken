@@ -31,9 +31,8 @@ import __SSugarAppModule, {
  */
 
 export interface ISSugarAppCtorSettings {
-  app: ISSugarAppOptionalSettings;
+  app: Partial<ISSugarAppSettings>;
 }
-export interface ISSugarAppOptionalSettings {}
 export interface ISSugarAppSettings {}
 
 export interface ISSugarAppModulesDescriptor {

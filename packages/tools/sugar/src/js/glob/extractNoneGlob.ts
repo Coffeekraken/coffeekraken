@@ -30,4 +30,4 @@ function extractNoneGlob(string) {
   const parent = __globParent(string);
   return parent;
 }
-export = extractNoneGlob;
+export default extractNoneGlob;

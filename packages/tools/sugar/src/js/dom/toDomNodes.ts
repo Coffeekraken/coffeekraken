@@ -76,4 +76,4 @@ function toDomNodes(source) {
     return processNodeElm(tpl);
   }
 }
-export = toDomNodes;
+export default toDomNodes;

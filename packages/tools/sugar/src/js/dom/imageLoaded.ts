@@ -63,4 +63,4 @@ function imageLoaded($img, callback = null) {
     imgErrorHandler && $img.removeEventListener('error', imgErrorHandler);
   });
 }
-export = imageLoaded;
+export default imageLoaded;

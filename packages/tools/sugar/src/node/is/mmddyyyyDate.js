@@ -1,6 +1,7 @@
 "use strict";
 // @ts-nocheck
 // @shared
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isMmddyyyyDate
  * @namespace           sugar.js.is
@@ -29,5 +30,5 @@
 function isMmddyyyyDate(date) {
     return /^(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.]\d\d\d\d$/.test(date);
 }
-module.exports = isMmddyyyyDate;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW1kZHl5eXlEYXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW1kZHl5eXlEYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTtBQUVWOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLGNBQWMsQ0FBQyxJQUFJO0lBQzFCLE9BQU8saUVBQWlFLENBQUMsSUFBSSxDQUMzRSxJQUFJLENBQ0wsQ0FBQztBQUNKLENBQUM7QUFDRCxpQkFBUyxjQUFjLENBQUMifQ==
+exports.default = isMmddyyyyDate;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW1kZHl5eXlEYXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW1kZHl5eXlEYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTs7QUFFVjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxjQUFjLENBQUMsSUFBSTtJQUMxQixPQUFPLGlFQUFpRSxDQUFDLElBQUksQ0FDM0UsSUFBSSxDQUNMLENBQUM7QUFDSixDQUFDO0FBQ0Qsa0JBQWUsY0FBYyxDQUFDIn0=

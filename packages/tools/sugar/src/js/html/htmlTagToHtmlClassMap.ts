@@ -18,7 +18,7 @@
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = {
+export default {
   a: HTMLAnchorElement,
   audio: HTMLAudioElement,
   body: HTMLBodyElement,

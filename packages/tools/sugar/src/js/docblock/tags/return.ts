@@ -29,4 +29,4 @@ function returnTag(data) {
     description: stringArray[1] ? stringArray[1].trim() : ''
   };
 }
-export = returnTag;
+export default returnTag;

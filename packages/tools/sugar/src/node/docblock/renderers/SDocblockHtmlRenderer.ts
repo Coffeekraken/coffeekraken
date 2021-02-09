@@ -45,9 +45,8 @@ import { ISDocblock } from '../SDocblock';
  */
 
 export interface ISDocblockHtmlRendererCtorSettings {
-  docblockHtmlRenderer?: ISDocblockHtmlRendererOptionalSettings;
+  docblockHtmlRenderer?: Partial<ISDocblockHtmlRendererSettings>;
 }
-export interface ISDocblockHtmlRendererOptionalSettings {}
 export interface ISDocblockHtmlRendererSettings {}
 
 export interface ISDocblockHtmlRenderer {}

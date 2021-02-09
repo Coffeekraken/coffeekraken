@@ -31,4 +31,4 @@ import __fs from 'fs-extra';
 function ensureFile(file) {
   return __fs.ensureFile(file);
 }
-export = ensureFile;
+export default ensureFile;

@@ -79,4 +79,4 @@ function sugar(req, res, settings = {}) {
     }
   );
 }
-export = sugar;
+export default sugar;

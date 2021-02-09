@@ -16,7 +16,7 @@ import __tmpDir from '../path/tmpDir';
 import __localDir from '../path/localDir';
 import __rootDir from '../path/rootDir';
 import __srcDir from '../path/srcDir';
-import __distDir from '../path/distDir';
+import cacheD from '../path/distDir';
 import __cacheDir from '../path/cacheDir';
 
 /**
@@ -241,17 +241,9 @@ export interface ISFileWatchSettings {
 }
 
 export interface ISFileCtorSettings {
-  file?: ISFileOptionalSettings;
+  file?: Partial<ISFileSettings>;
 }
 
-export interface ISFileOptionalSettings {
-  checkExistence?: boolean;
-  cwd?: string;
-  shrinkSizesTo?: number;
-  watch?: boolean | ISFileOptionalWatchSettings;
-  writeSettings?: ISFileWriteOptionalSettings;
-  readSettings?: ISFileReadOptionalSettings;
-}
 export interface ISFileSettings {
   checkExistence: boolean;
   cwd: string;
@@ -261,22 +253,6 @@ export interface ISFileSettings {
   readSettings: ISFileReadSettings;
 }
 
-export interface ISFileReadOptionalSettings {
-  encoding?:
-    | 'utf8'
-    | 'ascii'
-    | 'utf-8'
-    | 'utf16le'
-    | 'ucs2'
-    | 'ucs-2'
-    | 'base64'
-    | 'latin1'
-    | 'binary'
-    | 'hex'
-    | null;
-  flag?: string;
-  cast?: boolean;
-}
 export interface ISFileReadSettings {
   encoding:
     | 'utf8'
@@ -294,25 +270,6 @@ export interface ISFileReadSettings {
   cast: boolean;
 }
 
-export interface ISFileWriteOptionalSettings {
-  encoding?:
-    | 'utf8'
-    | 'ascii'
-    | 'utf-8'
-    | 'utf16le'
-    | 'ucs2'
-    | 'ucs-2'
-    | 'base64'
-    | 'latin1'
-    | 'binary'
-    | 'hex'
-    | null
-    | undefined;
-  mode?: number;
-  flag?: string;
-  cast?: boolean;
-  path?: string;
-}
 export interface ISFileWriteSettings {
   encoding:
     | 'utf8'
@@ -425,7 +382,7 @@ class SFile extends __SEventEmitter implements ISFile {
     path = path.replace('%cacheDir', __cacheDir());
     path = path.replace('%rootDir', __rootDir());
     path = path.replace('%srcDir', __srcDir());
-    path = path.replace('%distDir', __distDir());
+    path = path.replace('%distDir', cacheD());
     path = path.replace(/\/\//gm, '/');
 
     if (
@@ -753,7 +710,7 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  read(settings: ISFileReadOptionalSettings = {}): Promise<string> {
+  read(settings: Partial<ISFileReadSettings> = {}): Promise<string> {
     return new Promise((resolve, reject) => {
       if (this.exists === false) {
         return reject(
@@ -794,7 +751,7 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  readSync(settings: ISFileReadOptionalSettings = {}): string {
+  readSync(settings: Partial<ISFileReadSettings> = {}): string {
     if (this.exists === false) {
       throw `You try to read the file "<yellow>${this.path}</yellow>" but this file does not exists on the filesystem`;
     }
@@ -828,7 +785,7 @@ class SFile extends __SEventEmitter implements ISFile {
    */
   write(
     data: string,
-    settings: ISFileWriteOptionalSettings = {}
+    settings: Partial<ISFileWriteSettings> = {}
   ): Promise<any> {
     return new Promise((resolve, reject) => {
       const set: ISFileWriteSettings = {
@@ -869,7 +826,7 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  writeSync(data: string, settings: ISFileWriteOptionalSettings = {}): any {
+  writeSync(data: string, settings: Partial<ISFileWriteSettings> = {}): any {
     const set: ISFileWriteSettings = {
       ...this.fileSettings.writeSettings,
       path: this.path,

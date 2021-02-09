@@ -30,4 +30,4 @@ function isTablet(ua = navigator.userAgent) {
   const md = new MobileDetect(ua);
   return md.tablet() !== null;
 }
-export = isTablet;
+export default isTablet;

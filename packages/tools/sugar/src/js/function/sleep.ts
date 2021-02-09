@@ -32,4 +32,4 @@ function sleep(time) {
     setTimeout(resolve, time);
   });
 }
-export = sleep;
+export default sleep;

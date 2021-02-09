@@ -42,4 +42,4 @@ function wrapInner($parent, $wrapper) {
     $wrapper.appendChild($parent.firstChild);
   }
 }
-export = wrapInner;
+export default wrapInner;

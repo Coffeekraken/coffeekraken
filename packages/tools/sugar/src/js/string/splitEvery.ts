@@ -116,4 +116,4 @@ function splitEvery(text, every, splitWords = false) {
     return lines;
   }
 }
-export = splitEvery;
+export default splitEvery;

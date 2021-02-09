@@ -31,4 +31,4 @@ import __fs from 'fs-extra';
 function emptyDir(dir) {
   return __fs.emptyDir(dir);
 }
-export = emptyDir;
+export default emptyDir;

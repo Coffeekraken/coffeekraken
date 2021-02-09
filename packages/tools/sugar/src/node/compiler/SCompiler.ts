@@ -34,11 +34,10 @@ import { ISInterfaceResult } from '../interface/SInterfaceResult';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISCompilerOptionalSettings {}
 export interface ISCompilerSettings {}
 
 export interface ISCompilerCtorSettings {
-  compiler?: ISCompilerOptionalSettings;
+  compiler?: Partial<ISCompilerSettings>;
 }
 
 export interface ISCompiler {

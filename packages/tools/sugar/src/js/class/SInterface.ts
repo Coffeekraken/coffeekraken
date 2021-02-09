@@ -40,7 +40,7 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
  */
-export = class SInterface {
+export default class SInterface {
   /**
    * @name              settings
    * @type              Object
@@ -489,4 +489,4 @@ export = class SInterface {
   //   );
   //   return ExtendedInterface;
   // }
-};
+}

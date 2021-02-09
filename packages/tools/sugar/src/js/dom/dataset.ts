@@ -48,4 +48,4 @@ function dataset($elm, key, value = null) {
     return $elm;
   }
 }
-export = dataset;
+export default dataset;

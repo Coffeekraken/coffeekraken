@@ -4,6 +4,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const marked_1 = __importDefault(require("marked"));
 /**
@@ -39,5 +40,5 @@ function htmlFromMarkdown(inputString, settings = {}) {
     marked_1.default.setOptions(settings);
     return marked_1.default(inputString);
 }
-module.exports = htmlFromMarkdown;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaHRtbEZyb21NYXJrZG93bi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImh0bWxGcm9tTWFya2Rvd24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFDZCxVQUFVOzs7O0FBR1YsdUVBQWlEO0FBQ2pELG9EQUE4QjtBQUU5Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsU0FBUyxnQkFBZ0IsQ0FBQyxXQUFXLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDbEQsUUFBUSxHQUFHLG1CQUFXLENBQUMsRUFBRSxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBQ3JDLGdCQUFRLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQzlCLE9BQU8sZ0JBQVEsQ0FBQyxXQUFXLENBQUMsQ0FBQztBQUMvQixDQUFDO0FBQ0QsaUJBQVMsZ0JBQWdCLENBQUMifQ==
+exports.default = htmlFromMarkdown;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaHRtbEZyb21NYXJrZG93bi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImh0bWxGcm9tTWFya2Rvd24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFDZCxVQUFVOzs7OztBQUdWLHVFQUFpRDtBQUNqRCxvREFBOEI7QUFFOUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTJCRztBQUNILFNBQVMsZ0JBQWdCLENBQUMsV0FBVyxFQUFFLFFBQVEsR0FBRyxFQUFFO0lBQ2xELFFBQVEsR0FBRyxtQkFBVyxDQUFDLEVBQUUsRUFBRSxRQUFRLENBQUMsQ0FBQztJQUNyQyxnQkFBUSxDQUFDLFVBQVUsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUM5QixPQUFPLGdCQUFRLENBQUMsV0FBVyxDQUFDLENBQUM7QUFDL0IsQ0FBQztBQUNELGtCQUFlLGdCQUFnQixDQUFDIn0=

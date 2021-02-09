@@ -29,7 +29,7 @@ import __activeSpace from '../../core/activeSpace';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SBlessedInputPopup extends __SBlessedPopup {
+export default class SBlessedInputPopup extends __SBlessedPopup {
   /**
    * @name                  constructor
    * @type                  Function
@@ -72,4 +72,4 @@ export = class SBlessedInputPopup extends __SBlessedPopup {
     super.update();
     this.height = this.$content.getScrollHeight() + 5;
   }
-};
+}

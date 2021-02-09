@@ -88,4 +88,4 @@ function replaceTags(text, tags) {
 
   return oneLineText;
 }
-export = replaceTags;
+export default replaceTags;

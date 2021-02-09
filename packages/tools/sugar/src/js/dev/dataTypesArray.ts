@@ -20,7 +20,7 @@ import __isNode from '../is/node';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 if (__isNode()) {
-  export = [
+  export default [
     'Number',
     'String',
     'Symbol',
@@ -33,7 +33,7 @@ if (__isNode()) {
     'Function'
   ];
 } else {
-  export = [
+  export default [
     'Number',
     'String',
     'Symbol',

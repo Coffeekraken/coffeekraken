@@ -122,4 +122,4 @@ function columns(content, settings = {}) {
 
   return lines.join('\n');
 }
-export = columns;
+export default columns;

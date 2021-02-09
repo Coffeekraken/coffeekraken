@@ -32,4 +32,4 @@ function extractGlob(string) {
   if (final.slice(0, 1) === '/') final = final.slice(1);
   return final;
 }
-export = extractGlob;
+export default extractGlob;

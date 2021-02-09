@@ -38,4 +38,4 @@ function next(elm, selector) {
   }
   return false;
 }
-export = next;
+export default next;

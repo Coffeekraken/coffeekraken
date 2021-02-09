@@ -52,4 +52,4 @@ function consoleFn(text) {
     br: (tag, content) => '\n'
   });
 }
-export = consoleFn;
+export default consoleFn;

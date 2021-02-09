@@ -44,7 +44,7 @@ import __SBlessedComponent from '../SBlessedComponent';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SBlessedNotification extends __SBlessedComponent {
+export default class SBlessedNotification extends __SBlessedComponent {
   static displayStacks = {
     tl: [],
     tr: [],
@@ -171,4 +171,4 @@ export = class SBlessedNotification extends __SBlessedComponent {
     SBlessedNotification.update();
     super.update();
   }
-};
+}

@@ -43,4 +43,4 @@ function request(settings = {}) {
   const request = new __SRequest(settings);
   return request.send();
 }
-export = request;
+export default request;

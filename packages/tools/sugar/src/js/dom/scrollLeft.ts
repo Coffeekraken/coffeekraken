@@ -22,4 +22,4 @@
 function scrollLeft() {
   return window.pageXOffset || document.scrollLeft || document.body.scrollLeft;
 }
-export = scrollLeft;
+export default scrollLeft;

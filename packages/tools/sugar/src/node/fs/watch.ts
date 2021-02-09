@@ -114,4 +114,4 @@ const fn: IWatch = function watch(
 
   return promise;
 };
-export = fn;
+export default fn;

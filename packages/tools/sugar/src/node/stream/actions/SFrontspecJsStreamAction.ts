@@ -33,7 +33,7 @@ class SFrontspecJsStreamActionInterface extends __SInterface {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SFrontspecJsStreamAction extends __SActionsStreamAction {
+export default class SFrontspecJsStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -151,4 +151,4 @@ export = class SFrontspecJsStreamAction extends __SActionsStreamAction {
 
     return frontspecCodeString;
   }
-};
+}

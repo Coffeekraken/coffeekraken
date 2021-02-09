@@ -27,4 +27,4 @@ function extension(path) {
   if (!lastPart.includes('.')) return '';
   return path.split('.').pop();
 }
-export = extension;
+export default extension;

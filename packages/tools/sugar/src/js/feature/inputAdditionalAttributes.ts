@@ -109,4 +109,4 @@ function inputAdditionalAttributes(settings = {}) {
   document.addEventListener('reset', handleFormSubmitOrReset);
   document.addEventListener('submit', handleFormSubmitOrReset);
 }
-export = inputAdditionalAttributes;
+export default inputAdditionalAttributes;

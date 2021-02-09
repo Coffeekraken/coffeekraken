@@ -46,4 +46,4 @@ function filter(object, filter) {
   // return the filtered object
   return result;
 }
-export = filter;
+export default filter;

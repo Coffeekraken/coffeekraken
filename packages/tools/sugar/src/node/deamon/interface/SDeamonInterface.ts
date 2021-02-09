@@ -20,7 +20,7 @@ import __SInterface from '../../class/SInterface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SDeamonInterface extends __SInterface {
+export default class SDeamonInterface extends __SInterface {
   static extendsArray = ['SPromise'];
   static definition = {
     logs: {
@@ -37,4 +37,4 @@ export = class SDeamonInterface extends __SInterface {
       values: ['idle', 'watching', 'error']
     }
   };
-};
+}

@@ -46,4 +46,4 @@ function extractSame(string1, string2, multiple = false) {
   }
   return multiple ? extractedArray : extractedArray[0];
 }
-export = extractSame;
+export default extractSame;

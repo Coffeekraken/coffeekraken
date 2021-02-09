@@ -36,11 +36,7 @@ import getStyleProperty from './getStyleProperty';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function querySelectorAllWithStyle(
-  selector,
-  style,
-  settings = {}
-) {
+function querySelectorAllWithStyle(selector, style, settings = {}) {
   // extend settings
   settings = {
     rootNode: document.body,
@@ -96,4 +92,4 @@ function querySelectorAllWithStyle(
  * @type 		{HTMLElement}
  * @default 	document
  */
-export = querySelectorAllWithStyle;
+export default querySelectorAllWithStyle;

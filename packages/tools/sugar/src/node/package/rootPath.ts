@@ -28,4 +28,4 @@ import __packageRoot from '../path/packageRoot';
 function rootPath(from = process.cwd(), highest = false) {
   return __packageRoot(from, highest);
 }
-export = rootPath;
+export default rootPath;

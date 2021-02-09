@@ -29,4 +29,4 @@ function classname(classname) {
   if (prefix) return `${prefix}-${classname}`;
   return classname;
 }
-export = classname;
+export default classname;

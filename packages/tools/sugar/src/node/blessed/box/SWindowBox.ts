@@ -42,7 +42,7 @@ import __escapeStack from '../../terminal/escapeStack';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SBlessedWindowBox extends __SBlessedComponent {
+export default class SBlessedWindowBox extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function
@@ -96,4 +96,4 @@ export = class SBlessedWindowBox extends __SBlessedComponent {
       super.update();
     });
   }
-};
+}

@@ -1,9 +1,23 @@
-<script>
-	console.log('Hello ff world');
+<script type="text/ts">
+
+	import __SSvelteComponent from '@coffeekraken/sugar/js/svelte/SSvelteComponent';
+
+	class MyCoolComponent extends __SSvelteComponent {
+		constructor() {
+			super({
+				svelteComponent: {}
+			});
+			console.log('COM^=');
+		}
+	}
+
+	new MyCoolComponent();
+
 </script>
 
-<style>
+<style type="text/scss">
 	h1 {
+		color: Sugar.color(primary);
 		background: red;
 	}
 </style>

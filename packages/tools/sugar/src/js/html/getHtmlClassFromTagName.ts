@@ -37,4 +37,4 @@ function getHtmlClassFromTagName(tagName) {
 
   return HTMLElement;
 }
-export = getHtmlClassFromTagName;
+export default getHtmlClassFromTagName;

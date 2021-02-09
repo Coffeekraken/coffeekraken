@@ -27,4 +27,4 @@
 function isOpera(ua = navigator.userAgent) {
   return ua.toLowerCase().indexOf('op') > -1;
 }
-export = isOpera;
+export default isOpera;

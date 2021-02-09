@@ -26,4 +26,4 @@ function isAtTopLevel(path: any) {
   if (!path.scope || !path.scope.path || !path.scope.path.type) return false;
   return path.scope.path.type === 'Program';
 }
-export = isAtTopLevel;
+export default isAtTopLevel;

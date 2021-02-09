@@ -42,4 +42,4 @@ function clone(object, settings = {}) {
   }
   return __clone(object);
 }
-export = clone;
+export default clone;

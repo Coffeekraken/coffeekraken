@@ -69,4 +69,4 @@ function parseMarkdown(message) {
   if (isArray) return message;
   return message[0];
 }
-export = parseMarkdown;
+export default parseMarkdown;

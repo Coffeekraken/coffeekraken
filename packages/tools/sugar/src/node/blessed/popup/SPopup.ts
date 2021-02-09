@@ -33,7 +33,7 @@ import __SPromise from '../../promise/SPromise';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SBlessedPopup extends __SBlessedComponent {
+export default class SBlessedPopup extends __SBlessedComponent {
   /**
    * @name                  constructor
    * @type                  Function
@@ -193,4 +193,4 @@ export = class SBlessedPopup extends __SBlessedComponent {
 
     super.update();
   }
-};
+}

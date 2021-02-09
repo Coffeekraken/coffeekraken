@@ -62,4 +62,4 @@ function uid(obj, settings = {}) {
       break;
   }
 }
-export = uid;
+export default uid;

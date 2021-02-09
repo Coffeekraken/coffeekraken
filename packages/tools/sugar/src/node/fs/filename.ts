@@ -32,4 +32,4 @@ function filename(path, withExtension = true) {
   }
   return filename;
 }
-export = filename;
+export default filename;

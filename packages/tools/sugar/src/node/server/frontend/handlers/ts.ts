@@ -24,7 +24,7 @@ import __STsCompileInterface from '../../../typescript/compile/interface/STsComp
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = function ts(req, res, settings = {}) {
+export default function ts(req, res, settings = {}) {
   const promise = new __SPromise();
 
   (async () => {
@@ -65,4 +65,4 @@ export = function ts(req, res, settings = {}) {
   })();
 
   return promise;
-};
+}

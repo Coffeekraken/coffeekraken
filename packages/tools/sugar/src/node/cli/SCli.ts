@@ -372,4 +372,4 @@ class SCli extends __SPromise {
     } catch (e) {}
   }
 }
-export = __SCliInterface.implements(SCli);
+export default __SCliInterface.implements(SCli);

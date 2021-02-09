@@ -27,4 +27,4 @@
 function isEven(value) {
   return value % 2 === 0;
 }
-export = isEven;
+export default isEven;

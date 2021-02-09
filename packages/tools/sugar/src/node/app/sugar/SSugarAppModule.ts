@@ -40,9 +40,8 @@ import { ISSugarAppModuleDescriptor } from './SSugarAppProcess';
  */
 
 export interface ISSugarAppModuleCtorSettings {
-  sugarAppModule?: ISSugarAppModuleOptionalSettings;
+  sugarAppModule?: Partial<ISSugarAppModuleSettings>;
 }
-export interface ISSugarAppModuleOptionalSettings {}
 export interface ISSugarAppModuleSettings {}
 
 export interface ISSugarAppModuleShortcuts {

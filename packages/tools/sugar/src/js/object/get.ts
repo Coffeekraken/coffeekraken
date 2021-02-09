@@ -62,4 +62,4 @@ function get(obj, path, settings = {}) {
 //   )
 // );
 
-export = get;
+export default get;

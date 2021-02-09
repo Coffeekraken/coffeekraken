@@ -36,7 +36,7 @@ export default interface IRootDir {
   (settings?: IRootDirSettings): string;
 }
 
-const fn: IrootDir = function (settings: IRootDirSettings = {}) {
+export default function (settings: IRootDirSettings = {}) {
   settings = {
     scope: 'local',
     ...settings
@@ -49,5 +49,4 @@ const fn: IrootDir = function (settings: IRootDirSettings = {}) {
     }
   }
   return '/';
-};
-export = fn;
+}

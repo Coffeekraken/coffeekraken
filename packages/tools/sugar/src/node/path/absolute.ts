@@ -59,4 +59,4 @@ function absolute(
   return path[0];
 }
 
-export = absolute;
+export default absolute;

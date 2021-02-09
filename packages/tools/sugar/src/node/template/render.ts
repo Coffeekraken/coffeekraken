@@ -74,4 +74,4 @@ function render(viewPath, data = null, settings = {}) {
     }
   );
 }
-export = render;
+export default render;

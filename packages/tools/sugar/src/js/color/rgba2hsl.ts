@@ -64,4 +64,4 @@ function rgba2hsl(r, g, b, a = 1) {
     l: Math.floor(l * 100)
   };
 }
-export = rgba2hsl;
+export default rgba2hsl;

@@ -30,4 +30,4 @@ function isPhone(ua = navigator.userAgent) {
   const md = new MobileDetect(ua);
   return md.phone() !== null;
 }
-export = isPhone;
+export default isPhone;

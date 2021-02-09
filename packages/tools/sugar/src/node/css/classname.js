@@ -3,6 +3,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const sugar_1 = __importDefault(require("../config/sugar"));
 /**
  * @name            classname
@@ -32,5 +33,5 @@ function classname(classname) {
         return `${prefix}-${classname}`;
     return classname;
 }
-module.exports = classname;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3NuYW1lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2xhc3NuYW1lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7O0FBRWQsNERBQTRDO0FBRTVDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxTQUFTO0lBQzFCLE1BQU0sTUFBTSxHQUFHLGVBQWEsQ0FBQyx5QkFBeUIsQ0FBQyxDQUFDO0lBQ3hELElBQUksTUFBTTtRQUFFLE9BQU8sR0FBRyxNQUFNLElBQUksU0FBUyxFQUFFLENBQUM7SUFDNUMsT0FBTyxTQUFTLENBQUM7QUFDbkIsQ0FBQztBQUNELGlCQUFTLFNBQVMsQ0FBQyJ9
+exports.default = classname;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3NuYW1lLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2xhc3NuYW1lLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDREQUE0QztBQUU1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxTQUFTLENBQUMsU0FBUztJQUMxQixNQUFNLE1BQU0sR0FBRyxlQUFhLENBQUMseUJBQXlCLENBQUMsQ0FBQztJQUN4RCxJQUFJLE1BQU07UUFBRSxPQUFPLEdBQUcsTUFBTSxJQUFJLFNBQVMsRUFBRSxDQUFDO0lBQzVDLE9BQU8sU0FBUyxDQUFDO0FBQ25CLENBQUM7QUFDRCxrQkFBZSxTQUFTLENBQUMifQ==

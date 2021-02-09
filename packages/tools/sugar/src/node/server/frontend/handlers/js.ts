@@ -23,7 +23,7 @@ import __SPromise from '../../../promise/SPromise';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = function js(req, res, settings = {}) {
+export default function js(req, res, settings = {}) {
   const promise = new __SPromise();
 
   (async () => {
@@ -52,4 +52,4 @@ export = function js(req, res, settings = {}) {
   })();
 
   return promise;
-};
+}

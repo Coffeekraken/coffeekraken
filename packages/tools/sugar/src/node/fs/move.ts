@@ -31,4 +31,4 @@ import __fs from 'fs-extra';
 function move(src, dest) {
   return __fs.move(src, dest);
 }
-export = move;
+export default move;

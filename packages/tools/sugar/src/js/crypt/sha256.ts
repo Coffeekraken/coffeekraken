@@ -21,7 +21,7 @@ const __encryptedMessages = {};
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = {
+export default {
   /**
    * @name        encrypt
    * @type          Function

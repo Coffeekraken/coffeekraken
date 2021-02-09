@@ -117,4 +117,4 @@ function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
   // return the value
   return val;
 }
-export = propertyProxy;
+export default propertyProxy;

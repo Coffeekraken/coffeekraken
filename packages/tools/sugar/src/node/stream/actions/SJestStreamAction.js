@@ -12,7 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a;
+Object.defineProperty(exports, "__esModule", { value: true });
 const SActionsStreamAction_1 = __importDefault(require("../SActionsStreamAction"));
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const SInterface_1 = __importDefault(require("../../class/SInterface"));
@@ -20,60 +20,79 @@ const STestJestProcessManager_1 = __importDefault(require("../../test/jest/STest
 class SJestStreamActionInterface extends SInterface_1.default {
 }
 SJestStreamActionInterface.definition = {};
-module.exports = (_a = class SJestStreamAction extends SActionsStreamAction_1.default {
-        /**
-         * @name            constructor
-         * @type            Function
-         * @constructor
-         *
-         * Constructor
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        constructor(settings = {}) {
-            super(deepMerge_1.default({
-                id: 'SJestStreamAction'
-            }, settings));
-        }
-        /**
-         * @name          run
-         * @type          Function
-         * @async
-         *
-         * Override the base class run method
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        run(streamObj, settings = this._settings) {
-            return super.run(streamObj, ({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
-                // if (!streamObj.pack) return resolve(streamObj);
-                const input = streamObj.updatedFilePath || streamObj.input;
-                const jestProcess = new STestJestProcessManager_1.default({}, {
-                    deamon: null
-                });
-                const promise = jestProcess.run({
-                    input
-                });
-                //   promise.catch((e) => {
-                //     reject(e);
-                //   });
-                const result = yield promise;
-                // const cli = new __STestJestCli({
-                // })
-            }));
-        }
-    },
+/**
+ * @name            SJestStreamAction
+ * @namespace           sugar.node.stream.actions
+ * @type            Class
+ * @extends         SActionsStreamAction
+ * @status              wip
+ *
+ * This class is a stream action that allows you execute attached jest tests ([filename.test.js|__tests__/[filename].test.js])
+ *
+ * @param       {Object}        streamObj          The streamObj object with the properties described bellow:
+ * @return      {Promise}                         A simple promise that will be resolved when the process is finished
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class SJestStreamAction extends SActionsStreamAction_1.default {
     /**
-     * @name            interface
-     * @type             Object
-     * @static
+     * @name            constructor
+     * @type            Function
+     * @constructor
      *
-     * Store the definition object that specify the streamObj required properties, types, etc...
+     * Constructor
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _a.interfaces = {
-        this: SJestStreamActionInterface
-    },
-    _a);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0plc3RTdHJlYW1BY3Rpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTSmVzdFN0cmVhbUFjdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7QUFFZCxtRkFBNkQ7QUFLN0QsdUVBQWlEO0FBQ2pELHdFQUFrRDtBQUVsRCxzR0FBeUU7QUFFekUsTUFBTSwwQkFBMkIsU0FBUSxvQkFBWTs7QUFDNUMscUNBQVUsR0FBRyxFQUFFLENBQUM7QUFzQnpCLHVCQUFTLE1BQU0saUJBQWtCLFNBQVEsOEJBQXNCO1FBYzdEOzs7Ozs7OztXQVFHO1FBQ0gsWUFBWSxRQUFRLEdBQUcsRUFBRTtZQUN2QixLQUFLLENBQ0gsbUJBQVcsQ0FDVDtnQkFDRSxFQUFFLEVBQUUsbUJBQW1CO2FBQ3hCLEVBQ0QsUUFBUSxDQUNULENBQ0YsQ0FBQztRQUNKLENBQUM7UUFFRDs7Ozs7Ozs7V0FRRztRQUNILEdBQUcsQ0FBQyxTQUFTLEVBQUUsUUFBUSxHQUFHLElBQUksQ0FBQyxTQUFTO1lBQ3RDLE9BQU8sS0FBSyxDQUFDLEdBQUcsQ0FBQyxTQUFTLEVBQUUsQ0FBTyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRSxFQUFFO2dCQUN4RCxrREFBa0Q7Z0JBRWxELE1BQU0sS0FBSyxHQUFHLFNBQVMsQ0FBQyxlQUFlLElBQUksU0FBUyxDQUFDLEtBQUssQ0FBQztnQkFFM0QsTUFBTSxXQUFXLEdBQUcsSUFBSSxpQ0FBa0IsQ0FDeEMsRUFBRSxFQUNGO29CQUNFLE1BQU0sRUFBRSxJQUFJO2lCQUNiLENBQ0YsQ0FBQztnQkFFRixNQUFNLE9BQU8sR0FBRyxXQUFXLENBQUMsR0FBRyxDQUFDO29CQUM5QixLQUFLO2lCQUNOLENBQUMsQ0FBQztnQkFDSCwyQkFBMkI7Z0JBQzNCLGlCQUFpQjtnQkFDakIsUUFBUTtnQkFDUixNQUFNLE1BQU0sR0FBRyxNQUFNLE9BQU8sQ0FBQztnQkFFN0IsbUNBQW1DO2dCQUVuQyxLQUFLO1lBQ1AsQ0FBQyxDQUFBLENBQUMsQ0FBQztRQUNMLENBQUM7S0FDRjtJQXBFQzs7Ozs7Ozs7T0FRRztJQUNJLGFBQVUsR0FBRztRQUNsQixJQUFJLEVBQUUsMEJBQTBCO0tBQ2hDO1FBeURGIn0=
+    constructor(settings = {}) {
+        super(deepMerge_1.default({
+            id: 'SJestStreamAction'
+        }, settings));
+    }
+    /**
+     * @name          run
+     * @type          Function
+     * @async
+     *
+     * Override the base class run method
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    run(streamObj, settings = this._settings) {
+        return super.run(streamObj, ({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
+            // if (!streamObj.pack) return resolve(streamObj);
+            const input = streamObj.updatedFilePath || streamObj.input;
+            const jestProcess = new STestJestProcessManager_1.default({}, {
+                deamon: null
+            });
+            const promise = jestProcess.run({
+                input
+            });
+            //   promise.catch((e) => {
+            //     reject(e);
+            //   });
+            const result = yield promise;
+            // const cli = new __STestJestCli({
+            // })
+        }));
+    }
+}
+exports.default = SJestStreamAction;
+/**
+ * @name            interface
+ * @type             Object
+ * @static
+ *
+ * Store the definition object that specify the streamObj required properties, types, etc...
+ *
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+SJestStreamAction.interfaces = {
+    this: SJestStreamActionInterface
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0plc3RTdHJlYW1BY3Rpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTSmVzdFN0cmVhbUFjdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7QUFFZCxtRkFBNkQ7QUFLN0QsdUVBQWlEO0FBQ2pELHdFQUFrRDtBQUVsRCxzR0FBeUU7QUFFekUsTUFBTSwwQkFBMkIsU0FBUSxvQkFBWTs7QUFDNUMscUNBQVUsR0FBRyxFQUFFLENBQUM7QUFHekI7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILE1BQXFCLGlCQUFrQixTQUFRLDhCQUFzQjtJQWNuRTs7Ozs7Ozs7T0FRRztJQUNILFlBQVksUUFBUSxHQUFHLEVBQUU7UUFDdkIsS0FBSyxDQUNILG1CQUFXLENBQ1Q7WUFDRSxFQUFFLEVBQUUsbUJBQW1CO1NBQ3hCLEVBQ0QsUUFBUSxDQUNULENBQ0YsQ0FBQztJQUNKLENBQUM7SUFFRDs7Ozs7Ozs7T0FRRztJQUNILEdBQUcsQ0FBQyxTQUFTLEVBQUUsUUFBUSxHQUFHLElBQUksQ0FBQyxTQUFTO1FBQ3RDLE9BQU8sS0FBSyxDQUFDLEdBQUcsQ0FBQyxTQUFTLEVBQUUsQ0FBTyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRSxFQUFFO1lBQ3hELGtEQUFrRDtZQUVsRCxNQUFNLEtBQUssR0FBRyxTQUFTLENBQUMsZUFBZSxJQUFJLFNBQVMsQ0FBQyxLQUFLLENBQUM7WUFFM0QsTUFBTSxXQUFXLEdBQUcsSUFBSSxpQ0FBa0IsQ0FDeEMsRUFBRSxFQUNGO2dCQUNFLE1BQU0sRUFBRSxJQUFJO2FBQ2IsQ0FDRixDQUFDO1lBRUYsTUFBTSxPQUFPLEdBQUcsV0FBVyxDQUFDLEdBQUcsQ0FBQztnQkFDOUIsS0FBSzthQUNOLENBQUMsQ0FBQztZQUNILDJCQUEyQjtZQUMzQixpQkFBaUI7WUFDakIsUUFBUTtZQUNSLE1BQU0sTUFBTSxHQUFHLE1BQU0sT0FBTyxDQUFDO1lBRTdCLG1DQUFtQztZQUVuQyxLQUFLO1FBQ1AsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNMLENBQUM7O0FBcEVILG9DQXFFQztBQXBFQzs7Ozs7Ozs7R0FRRztBQUNJLDRCQUFVLEdBQUc7SUFDbEIsSUFBSSxFQUFFLDBCQUEwQjtDQUNqQyxDQUFDIn0=

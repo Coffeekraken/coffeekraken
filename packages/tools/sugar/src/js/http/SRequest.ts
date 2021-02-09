@@ -43,7 +43,7 @@ import __deepMerge from '../object/deepMerge';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SRequest {
+export default class SRequest {
   /**
    * @name                      _defaultRequestSettings
    * @type                      {SRequestConfig}
@@ -286,4 +286,4 @@ export = class SRequest {
       this._send(requestSettings);
     });
   }
-};
+}

@@ -33,4 +33,4 @@ function nodeIndex(node) {
   }
   return index;
 }
-export = nodeIndex;
+export default nodeIndex;

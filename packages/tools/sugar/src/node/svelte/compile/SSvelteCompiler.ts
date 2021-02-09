@@ -13,9 +13,8 @@ import __glob from 'glob';
 import __SSvelteCompilerParamsInterface from './interface/SSvelteCompilerParamsInterface';
 
 export interface ISSvelteCompilerCtorSettings {
-  svelteCompiler?: ISSvelteCompilerOptionalSettings;
+  svelteCompiler?: Partial<ISSvelteCompilerSettings>;
 }
-export interface ISSvelteCompilerOptionalSettings {}
 export interface ISSvelteCompilerSettings {}
 
 export interface ISSvelteCompilerParams {
@@ -31,19 +30,6 @@ export interface ISSvelteCompilerParams {
   watch: boolean;
   svelte: any;
 }
-export interface ISSvelteCompilerOptionalParams {
-  input?: string | string[];
-  outputDir?: string;
-  rootDir?: string;
-  map?: boolean;
-  prod?: boolean;
-  stripComments?: boolean;
-  minify?: boolean;
-  banner?: string;
-  save?: boolean;
-  watch?: boolean;
-  svelte?: any;
-}
 
 export interface ISSvelteCompiler extends ISCompiler {}
 
@@ -58,7 +44,7 @@ export interface ISSvelteCompiler extends ISCompiler {}
  *
  * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
  *
- * @param         {ISSvelteCompilerOptionalParams}      [initialParams={}]      Some parameters to use for your compilation process
+ * @param         {Partial<ISSvelteCompilerParams>}      [initialParams={}]      Some parameters to use for your compilation process
  * @param           {ISSvelteCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
  *
  * @todo      interface
@@ -107,7 +93,7 @@ class SSvelteCompiler extends __SCompiler {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(
-    initialParams: ISSvelteCompilerOptionalParams,
+    initialParams: Partial<ISSvelteCompilerParams>,
     settings: ISSvelteCompilerCtorSettings
   ) {
     super(
@@ -145,7 +131,7 @@ class SSvelteCompiler extends __SCompiler {
    */
   _compile(
     params: ISSvelteCompilerParams,
-    settings: ISSvelteCompilerOptionalSettings = {}
+    settings: Partial<ISSvelteCompilerSettings> = {}
   ) {
     return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
       settings = __deepMerge(this.svelteCompilerSettings, {}, settings);

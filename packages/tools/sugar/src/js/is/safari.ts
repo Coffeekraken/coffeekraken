@@ -27,4 +27,4 @@
 function isSafari(ua = navigator.userAgent) {
   return ua.indexOf('Safari') != -1 && ua.indexOf('Chrome') == -1;
 }
-export = isSafari;
+export default isSafari;

@@ -203,4 +203,4 @@ function flatten(object, settings = {}) {
 //   )
 // );
 
-export = flatten;
+export default flatten;

@@ -32,4 +32,4 @@ function offsetParent(elm) {
     left: offset.left - parentOffset.left
   };
 }
-export = offsetParent;
+export default offsetParent;

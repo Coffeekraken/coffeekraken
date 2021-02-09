@@ -28,7 +28,9 @@ import _folderPath from '../fs/folderPath';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = async function findPackages(rootDir = process.cwd()): Promise<object> {
+export default async function findPackages(
+  rootDir = process.cwd()
+): Promise<object> {
   interface IPackagesObj {
     [key: string]: string;
   }
@@ -43,4 +45,4 @@ export = async function findPackages(rootDir = process.cwd()): Promise<object> {
     packagesObj[_folderPath(path)] = require(`${rootDir}/${path}`);
   });
   return packagesObj;
-};
+}

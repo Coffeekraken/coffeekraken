@@ -36,4 +36,4 @@ function dispatchEvent($target, name, data = null) {
   });
   $target.dispatchEvent(e);
 }
-export = dispatchEvent;
+export default dispatchEvent;

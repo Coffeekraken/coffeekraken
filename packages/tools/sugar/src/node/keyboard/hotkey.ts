@@ -42,9 +42,6 @@ const hotkeyStack = {};
 let isListenerAlreadyAdded = false;
 let isSystemWideAlreadyAdded = false;
 
-export interface IHotkeyOptionalSettings {
-  once?: boolean;
-}
 export interface IHotkeySettings {
   once: boolean;
 }
@@ -120,7 +117,7 @@ function _handleKeypress(ch, keyObj) {
   });
 }
 
-function hotkey(key, settings?: IHotkeyOptionalSettings) {
+function hotkey(key, settings?: Partial<IHotkeySettings>) {
   const set: IHotkeySettings = HotkeySettingsInterface.apply(settings).value;
 
   const promise = new __SPromise({

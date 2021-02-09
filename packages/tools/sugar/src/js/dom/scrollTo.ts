@@ -116,4 +116,4 @@ scrollTo.step = function () {
   }
 };
 
-export = scrollTo;
+export default scrollTo;

@@ -14,12 +14,12 @@ import __SCliProcess from '../../process/SCliProcess';
 import __md5 from '../../crypt/md5';
 import __packageRoot from '../../path/packageRoot';
 import __tmpDir from '../../path/tmpDir';
+import __stripAnsi from '../../string/stripAnsi';
 
 import __TscInterface from './interface/TscInterface';
 import __STsCompilerParamsInterface from './interface/STsCompilerParamsInterface';
 
 export interface ISTsCompilerCtorSettings {}
-export interface ISTsCompilerOptionalSettings {}
 export interface ISTsCompilerSettings {}
 
 export interface ISTsCompilerParams {
@@ -33,22 +33,9 @@ export interface ISTsCompilerParams {
   banner: string;
   save: boolean;
   watch: boolean;
+  target: string;
   stacks: string[];
   tsconfig: any;
-}
-export interface ISTsCompilerOptionalParams {
-  input?: string | string[];
-  outputDir?: string;
-  rootDir?: string;
-  map?: boolean;
-  prod?: boolean;
-  stripComments?: boolean;
-  minify?: boolean;
-  banner?: string;
-  save?: boolean;
-  watch?: boolean;
-  stacks?: string[];
-  tsconfig?: any;
 }
 
 export interface ISTsCompiler extends ISCompiler {}
@@ -64,7 +51,7 @@ export interface ISTsCompiler extends ISCompiler {}
  *
  * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
  *
- * @param         {ISTsCompilerOptionalParams}      [initialParams={}]      Some parameters to use for your compilation process
+ * @param         {Partial<ISTsCompilerParams>}      [initialParams={}]      Some parameters to use for your compilation process
  * @param           {ISTsCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
  *
  * @todo      interface
@@ -115,7 +102,7 @@ class STsCompiler extends __SCompiler {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(
-    initialParams?: ISTsCompilerOptionalParams,
+    initialParams?: Partial<ISTsCompilerParams>,
     settings?: ISTsCompilerCtorSettings
   ) {
     super(
@@ -146,7 +133,7 @@ class STsCompiler extends __SCompiler {
    */
   _compile(
     params: ISScssCompilerParams,
-    settings?: ISScssCompilerOptionalSettings
+    settings?: Partial<ISScssCompilerSettings>
   ) {
     return new __SPromise(async ({ resolve, reject, pipe, pipeFrom, emit }) => {
       settings = __deepMerge(this.tsCompilerSettings, {}, settings || {});
@@ -276,6 +263,17 @@ class STsCompiler extends __SCompiler {
           checkExistence: false
         }
       });
+
+      // apply target
+      const availableTargets = __sugarConfig('ts.targets');
+      if (params.target && availableTargets[params.target]) {
+        tsconfig.compilerOptions = __deepMerge(
+          tsconfig.compilerOptions,
+          availableTargets[params.target]
+        );
+      }
+
+      // write the temp file to compile
       tmpConfigFile.writeSync(JSON.stringify(tsconfig, null, 4));
 
       // build command line to execute
@@ -322,7 +320,8 @@ class STsCompiler extends __SCompiler {
 
           let clear = false,
             type = 'default',
-            separator = false;
+            separator = false,
+            event = 'log';
 
           // removing clear character
           strValue = strValue.replace('\u001bc', '');
@@ -335,20 +334,27 @@ class STsCompiler extends __SCompiler {
           lines.forEach((line) => {
             let strToAdd = '';
 
-            if (currentLogType === 'error') {
-              // console.log({ line });
-              // strToAdd = `      <red>│</red> ${line}`;
-              // logsArray.push(strToAdd);
-              return;
-            }
+            // console.log('L', line);
 
-            if (line.trim().match(/File\schange\sdetected/)) {
+            if (
+              __stripAnsi(line.trim()).match(
+                /.*:[0-9]{1,10}:[0-9]{1,10}\s-\serror\s/gm
+              )
+            ) {
+              event = 'error';
+              strToAdd = `<red>[error]</red> ${line.trim()}\n`;
+              logsArray.push(strToAdd);
+            } else if (__stripAnsi(line.trim()).match(/^error\s/)) {
+              event = 'error';
+              strToAdd = `<red>[error]</red> ${line
+                .trim()
+                .replace(/^error\s/, '')}\n`;
+              logsArray.push(strToAdd);
+            } else if (line.trim().match(/File\schange\sdetected/)) {
               clear = true;
-              currentLogType = 'update';
               strToAdd = `<yellow>[update]</yellow> File change detected`;
               logsArray.push(strToAdd);
             } else if (line.trim().match(/Found\s[0-9]+\serror(s)?/)) {
-              currentLogType = 'errorFound';
               const count = line.match(/.*([0-9]+).*/);
               if (count && count.length === 2 && count[1] === '0') {
                 strToAdd = line.replace(
@@ -368,7 +374,6 @@ class STsCompiler extends __SCompiler {
               }
             } else if (line.trim().match(/TSFILE:\s/)) {
               // Emit file
-              currentLogType = 'save';
               let filesArray: string[] = [];
               line.split('TSFILE: ').forEach((fileStr) => {
                 if (fileStr.trim() === '') return;
@@ -391,42 +396,12 @@ class STsCompiler extends __SCompiler {
               });
               strToAdd = filesArray.join('\n');
               logsArray.push(strToAdd);
-            } else if (line.trim().match(/.*:.*[0-9]+.*:.*[0-9]+.*\s/)) {
-              currentLogType = 'error';
-              // console.log({ line });
-              // const lns = line
-              //   .split('\n')
-              //   .filter((l) => {
-              //     return !Array.isArray(l.trim().match(/^TSFILE:\s.*/));
-              //   })
-              //   .map((l) => {
-              //     return `      <red>│</red> ${l}`;
-              //   })
-              //   .filter((l) => {
-              //     return l.trim() !== '<red>│</red>';
-              //   });
-              strToAdd = `<red>[error]</red> ${strValue.trim()}`;
-              logsArray.push(strToAdd);
             }
           });
 
+          if (!logsArray.length) return;
+
           strValue = logsArray.join('\n');
-
-          // strValue = strValue.trim();
-          // if (endSpace) strValue = `${strValue} \n`;
-
-          // if (separator) {
-          //   emit('log', {
-          //     type: 'separator'
-          //   });
-          // }
-          // if (type) value.type = type;
-          // if (clear) {
-          //   emit('log', {
-          //     value: '',
-          //     clear: true
-          //   });
-          // }
 
           if (value.value !== undefined) value.value = strValue;
           else value = strValue;
@@ -443,7 +418,7 @@ class STsCompiler extends __SCompiler {
             });
           }
 
-          emit('log', {
+          emit(event, {
             type,
             clear,
             value: strValue
@@ -452,7 +427,16 @@ class STsCompiler extends __SCompiler {
           // return [value, metas];
         }
       });
-      await pro.run(params);
+      const result = await pro.run(params);
+
+      // handle error rejection
+      if (
+        result &&
+        typeof result === 'string' &&
+        __stripAnsi(result.trim()).match(/^error\s/)
+      ) {
+        return reject();
+      }
 
       // gather all the compiled files
       const resultFiles = {};
@@ -467,7 +451,7 @@ class STsCompiler extends __SCompiler {
         }
       });
 
-      const resultObj = {
+      let resultObj = {
         startTime: startTime,
         endTime: Date.now(),
         duration: Date.now() - startTime
@@ -477,7 +461,10 @@ class STsCompiler extends __SCompiler {
         resultObj.files = resultFiles;
       }
       if (compiledFiles.length <= 2) {
-        resultObj.code = resultCode;
+        resultObj = {
+          ...resultObj,
+          ...resultCode
+        };
       }
 
       resolve(resultObj);

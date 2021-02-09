@@ -28,7 +28,7 @@ import __unquote from '../string/unquote';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = (obj, path, value, settings = {}) => {
+export default (obj, path, value, settings = {}) => {
   settings = {
     ...settings
   };

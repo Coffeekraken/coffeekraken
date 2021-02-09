@@ -69,6 +69,11 @@ class STsCompilerParamsInterface extends __SInterface {
       alias: 'w',
       default: __sugarConfig('ts.compile.watch')
     },
+    target: {
+      type: 'String',
+      alias: 't',
+      default: __sugarConfig('ts.compile.target')
+    },
     stacks: {
       type: 'Array<String>',
       alias: 's',

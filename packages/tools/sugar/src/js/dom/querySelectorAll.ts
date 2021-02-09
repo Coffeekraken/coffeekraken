@@ -91,4 +91,4 @@ function querySelectorAll(selector, settings = {}) {
   // return the elements
   return results;
 }
-export = querySelectorAll;
+export default querySelectorAll;

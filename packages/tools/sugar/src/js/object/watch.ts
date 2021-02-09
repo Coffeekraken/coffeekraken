@@ -36,4 +36,4 @@ function watch(target, settings = {}) {
   const watchedObj = new __SWatch(target, settings);
   return watchedObj;
 }
-export = watch;
+export default watch;

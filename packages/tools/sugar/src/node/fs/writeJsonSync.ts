@@ -35,4 +35,4 @@ function writeJsonSync(path, data, options = {}) {
   __ensureDirSync(folderPath);
   __fs.outputJsonSync(path, data, options);
 }
-export = writeJsonSync;
+export default writeJsonSync;

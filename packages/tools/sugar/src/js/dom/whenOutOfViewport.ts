@@ -99,4 +99,4 @@ function whenOutOfViewport(elm, offset = 50) {
     }
   });
 }
-export = whenOutOfViewport;
+export default whenOutOfViewport;

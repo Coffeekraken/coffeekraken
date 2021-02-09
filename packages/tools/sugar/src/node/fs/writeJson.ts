@@ -37,4 +37,4 @@ function writeJson(path, data, options = {}) {
   __ensureDirSync(folderPath);
   return __fs.outputJson(path, data, options);
 }
-export = writeJson;
+export default writeJson;

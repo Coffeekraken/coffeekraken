@@ -34,7 +34,7 @@ class SExtractStreamActionInterface extends __SInterface {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SExtractStreamAction extends __SActionsStreamAction {
+export default class SExtractStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -97,4 +97,4 @@ export = class SExtractStreamAction extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-};
+}

@@ -286,4 +286,4 @@ function validateObject(
 
   return issuesObj;
 }
-export = validateObject;
+export default validateObject;

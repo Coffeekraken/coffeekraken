@@ -42,4 +42,4 @@ function getMethods(toCheck) {
     if (e != arr[i + 1] && typeof toCheck[e] == 'function') return true;
   });
 }
-export = getMethods;
+export default getMethods;

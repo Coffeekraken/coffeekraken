@@ -31,4 +31,4 @@ function isBase64(value) {
   const reg = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
   return reg.test(value);
 }
-export = isBase64;
+export default isBase64;

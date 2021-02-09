@@ -3,7 +3,7 @@
 import __SFrontendServerProcess from '../../node/server/frontend/SFrontendServerProcess';
 import __SProcessManager from '../../node/process/SProcessManager';
 
-export = (stringArgs = '') => {
+export default (stringArgs = '') => {
   // const manager = new __SProcessManager(, {
   //   autoRun: true,
   //   processSettings: {

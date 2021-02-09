@@ -30,7 +30,7 @@ import __filesPreset from '../htmlPresets/files';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SLogFilesAdapter {
+export default class SLogFilesAdapter {
   /**
    * @name          _settings
    * @type          Object
@@ -95,4 +95,4 @@ export = class SLogFilesAdapter {
       resolve();
     });
   }
-};
+}

@@ -59,4 +59,4 @@ function autoCast(string) {
     return string;
   }
 }
-export = autoCast;
+export default autoCast;

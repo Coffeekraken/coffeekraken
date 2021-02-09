@@ -154,4 +154,4 @@ class SMediaQuery extends __SPromise {
 // start listener
 SMediaQuery.startListener();
 
-export = SMediaQuery;
+export default SMediaQuery;

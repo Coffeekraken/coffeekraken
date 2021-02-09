@@ -72,4 +72,4 @@ function hotkey(hotkey, settings = {}) {
     hotkeys.unbind(hotkey);
   });
 }
-export = hotkey;
+export default hotkey;

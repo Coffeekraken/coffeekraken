@@ -79,4 +79,4 @@ function __handleMainProcessErrors(error) {
     process.exit(1);
   }, 50);
 }
-export = handleError;
+export default handleError;

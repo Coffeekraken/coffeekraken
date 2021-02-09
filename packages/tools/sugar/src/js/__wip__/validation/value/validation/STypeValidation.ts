@@ -28,4 +28,4 @@ class STypeValidation extends __SValidation {
   }
 }
 
-export = STypeValidation;
+export default STypeValidation;

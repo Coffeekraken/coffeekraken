@@ -36,4 +36,4 @@ function toggleFullscreen(elm) {
     return exitFullscreen();
   }
 }
-export = toggleFullscreen;
+export default toggleFullscreen;

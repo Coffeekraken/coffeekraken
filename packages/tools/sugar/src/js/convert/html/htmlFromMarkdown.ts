@@ -38,4 +38,4 @@ function htmlFromMarkdown(inputString, settings = {}) {
   __marked.setOptions(settings);
   return __marked(inputString);
 }
-export = htmlFromMarkdown;
+export default htmlFromMarkdown;

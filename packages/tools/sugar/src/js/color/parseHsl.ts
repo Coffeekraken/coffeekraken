@@ -36,4 +36,4 @@ function parseHsl(hslString) {
     l: parseFloat(array[2])
   };
 }
-export = parseHsl;
+export default parseHsl;

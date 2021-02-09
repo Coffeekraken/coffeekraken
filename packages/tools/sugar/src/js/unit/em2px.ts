@@ -27,4 +27,4 @@
 function em2px(em, $elm = document.documentElement) {
   return em * parseFloat(getComputedStyle($elm).fontSize || '16px');
 }
-export = em2px;
+export default em2px;

@@ -52,4 +52,4 @@ function rgba2hex(r, g, b, a = 1) {
     alpha
   );
 }
-export = rgba2hex;
+export default rgba2hex;

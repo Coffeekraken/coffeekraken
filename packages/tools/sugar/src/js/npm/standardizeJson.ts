@@ -65,4 +65,4 @@ function standardizeJson(json) {
 
   return json;
 }
-export = standardizeJson;
+export default standardizeJson;

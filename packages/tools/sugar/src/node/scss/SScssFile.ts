@@ -22,11 +22,8 @@ import __wait from '../time/wait';
 import __getFilename from '../fs/filename';
 
 import __SInterface from '../interface/SInterface';
-import { ISFile, ISFileSettings } from '../fs/SFile';
-import {
-  ISScssCompilerParams,
-  ISScssCompilerOptionalParams
-} from './compile/SScssCompiler';
+import { ISFile, ISFileSettings, ISFileCtorSettings } from '../fs/SFile';
+import { ISScssCompilerParams } from './compile/SScssCompiler';
 import __SScssCompilerParamsInterface from './compile/interface/SScssCompilerParamsInterface';
 
 /**
@@ -85,17 +82,13 @@ export class SScssFileCtorSettingsInterface extends __SInterface {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-interface ISScssFileCompileOptionalSettings {}
 interface ISScssFileCompileSettings {}
 
-interface ISScssFileOptionalSettings {
-  compile?: ISScssFileCompileOptionalSettings;
-}
 interface ISScssFileSettings {
-  compile: ISScssFileCompileOptionalSettings;
+  compile: Partial<ISScssFileCompileSettings>;
 }
-interface ISScssFileCtorSettings {
-  scssFile?: ISScssFileOptionalSettings;
+interface ISScssFileCtorSettings extends ISFileCtorSettings {
+  scssFile?: Partial<ISScssFileSettings>;
 }
 
 interface ISScssFile {
@@ -103,7 +96,10 @@ interface ISScssFile {
   _sharedResources: string;
   mixinsAndVariables: string;
   dependencies: Array<ISScssFile>;
-  compile(params: ISScssCompilerParams, settings?: ISScssFileOptionalSettings);
+  compile(
+    params: Partial<ISScssCompilerParams>,
+    settings?: Partial<ISScssFileSettings>
+  );
 }
 
 // @ts-ignore
@@ -400,16 +396,22 @@ class SScssFile extends __SFile implements ISScssFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _isCompiling = false;
-  _currentCompilationSettings: ISScssFileOptionalSettings = {};
-  _currentCompilationParams: ISScssCompilerOptionalParams = {};
-  compile(params: ISScssCompilerParams, settings?: ISScssFileOptionalSettings) {
+  _currentCompilationSettings: Partial<ISScssFileSettings> = {};
+  _currentCompilationParams: Partial<ISScssCompilerParams> = {};
+  compile(
+    params: Partial<ISScssCompilerParams>,
+    settings?: Partial<ISScssFileSettings>
+  ) {
     settings = __deepMerge(this.scssFileSettings, settings);
     this._currentCompilationParams = Object.assign({}, params);
     this._currentCompilationSettings = Object.assign({}, settings);
 
-    params = this.applyInterface('compilerParams', params);
+    const completeParams: ISScssCompilerParams = this.applyInterface(
+      'compilerParams',
+      params
+    );
 
-    if (params.watch) {
+    if (completeParams.watch) {
       this.startWatch();
     }
 
@@ -432,19 +434,20 @@ class SScssFile extends __SFile implements ISScssFile {
 
       // sass settings
       const sassSettings = {
-        outputStyle: params.style || __sugarConfig('scss.compile.style'),
+        outputStyle:
+          completeParams.style || __sugarConfig('scss.compile.style'),
         sourceMap:
-          params.map !== undefined
-            ? params.map
+          completeParams.map !== undefined
+            ? completeParams.map
             : __sugarConfig('scss.compile.map'),
         includePaths: [
           this.dirPath,
           ...__sugarConfig('scss.compile.includePaths')
         ],
-        ...(params.sass || {})
+        ...(completeParams.sass || {})
       };
 
-      if (!params.serve) {
+      if (!completeParams.serve) {
         emit('log', {
           clear: true,
           type: 'time'
@@ -468,13 +471,13 @@ class SScssFile extends __SFile implements ISScssFile {
 
       const duration = new __SDuration();
 
-      if (params.clearCache) await this._fileCache.clear();
+      if (completeParams.clearCache) await this._fileCache.clear();
       let toCompile = this.content;
 
       // @ts-ignore
       this._sharedResources = __getSharedResourcesString(
         // @ts-ignore
-        params.sharedResources
+        completeParams.sharedResources
       );
 
       if (this._import.type === 'main') {
@@ -492,7 +495,7 @@ class SScssFile extends __SFile implements ISScssFile {
         // compile the dependency
         const res = await depFile.compile(
           {
-            ...params,
+            ...completeParams,
             clearCache: false
           },
           settings
@@ -514,7 +517,7 @@ class SScssFile extends __SFile implements ISScssFile {
       if (
         cachedValue &&
         cachedValue.dependenciesHash === dependenciesHash &&
-        params.cache
+        completeParams.cache
       ) {
         let resultCss = cachedValue.css;
         SScssFile.COMPILED_CSS[this.path] = resultCss;
@@ -533,15 +536,19 @@ class SScssFile extends __SFile implements ISScssFile {
         }
 
         // process the result
-        resultCss = this._processResultCss(resultCss, params);
+        resultCss = this._processResultCss(resultCss, completeParams);
 
         // check if need to save
-        if (this._import.type === 'main' && params.save && params.outputDir) {
+        if (
+          this._import.type === 'main' &&
+          completeParams.save &&
+          completeParams.outputDir
+        ) {
           // build the save path
           const savePath = __path.resolve(
-            params.outputDir,
+            completeParams.outputDir,
             this.path
-              .replace(`${params.rootDir}/`, '')
+              .replace(`${completeParams.rootDir}/`, '')
               .replace(/\.s[ac]ss$/, '.css')
           );
           // emit('log', {
@@ -574,7 +581,7 @@ class SScssFile extends __SFile implements ISScssFile {
           type: 'separator'
         });
 
-        if (params.watch) {
+        if (completeParams.watch) {
           emit('log', {
             value: `<blue>[watch]</blue> Watching for changes...`
           });
@@ -605,7 +612,7 @@ class SScssFile extends __SFile implements ISScssFile {
         });
 
         // save in cache
-        if (params.cache) {
+        if (completeParams.cache) {
           // @ts-ignore
           await this._fileCache.set(this.path, {
             dependenciesHash,
@@ -622,15 +629,15 @@ class SScssFile extends __SFile implements ISScssFile {
             resultCss
           ].join('\n');
 
-          resultCss = this._processResultCss(resultCss, params);
+          resultCss = this._processResultCss(resultCss, completeParams);
 
           // check if need to save
-          if (params.save && params.outputDir) {
+          if (completeParams.save && completeParams.outputDir) {
             // build the save path
             const savePath = __path.resolve(
-              params.outputDir,
+              completeParams.outputDir,
               this.path
-                .replace(`${params.rootDir}/`, '')
+                .replace(`${completeParams.rootDir}/`, '')
                 .replace(/\.s[ac]ss$/, '.css')
             );
             emit('log', {
@@ -663,14 +670,14 @@ class SScssFile extends __SFile implements ISScssFile {
             type: 'separator'
           });
 
-          if (params.watch) {
+          if (completeParams.watch) {
             emit('log', {
               value: `<blue>[watch]</blue> Watching for changes...`
             });
           }
 
           return resolve({
-            css: this._processResultCss(resultCss, params),
+            css: this._processResultCss(resultCss, completeParams),
             ...durationEnd
           });
         } else {
@@ -678,7 +685,7 @@ class SScssFile extends __SFile implements ISScssFile {
             type: 'separator'
           });
 
-          if (params.watch) {
+          if (completeParams.watch) {
             emit('log', {
               value: `<blue>[watch]</blue> Watching for changes...`
             });
@@ -686,7 +693,10 @@ class SScssFile extends __SFile implements ISScssFile {
 
           SScssFile.COMPILED_CSS[this.path] = renderObj.css;
           return resolve({
-            css: this._processResultCss(renderObj.css.toString(), params),
+            css: this._processResultCss(
+              renderObj.css.toString(),
+              completeParams
+            ),
             map: undefined, // @todo       handle map
             ...duration.end()
           });

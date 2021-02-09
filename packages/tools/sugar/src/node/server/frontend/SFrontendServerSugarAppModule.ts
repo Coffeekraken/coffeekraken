@@ -20,7 +20,7 @@ import __SFrontendServerProcess from '../../server/frontend/SFrontendServerProce
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export = class SFrontendServerSugarAppModule extends __SSugarAppModule {
+export default class SFrontendServerSugarAppModule extends __SSugarAppModule {
   static interfaces = {
     this: __SFrontendServerInterface
   };
@@ -64,4 +64,4 @@ export = class SFrontendServerSugarAppModule extends __SSugarAppModule {
     });
     return super.start(pro);
   }
-};
+}

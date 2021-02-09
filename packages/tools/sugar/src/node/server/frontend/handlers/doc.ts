@@ -28,7 +28,7 @@ import __SDocblockHtmlRenderer from '../../../docblock/renderers/SDocblockHtmlRe
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = function doc(req, res, settings = {}) {
+export default function doc(req, res, settings = {}) {
   return new __SPromise(async ({ resolve, reject, pipe }) => {
     const docMap = new __SDocMap();
     const namespace = req.path.replace('/doc/', '').trim();
@@ -57,4 +57,4 @@ export = function doc(req, res, settings = {}) {
     res.send(html);
     resolve(html);
   });
-};
+}

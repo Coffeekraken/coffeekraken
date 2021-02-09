@@ -47,4 +47,4 @@ function replaceTokens(string, argsObj, settings = {}) {
   }
   return string;
 }
-export = replaceTokens;
+export default replaceTokens;

@@ -26,4 +26,4 @@ class SValuesValidation extends __SValidation {
   }
 }
 
-export = SValuesValidation;
+export default SValuesValidation;

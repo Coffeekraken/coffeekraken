@@ -4,6 +4,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const env_1 = __importDefault(require("../core/env"));
 /**
  * @name          testEnv
@@ -31,5 +32,5 @@ function isTestEnv() {
         env_1.default('JEST_WORKER_ID') !== undefined ||
         typeof global.it === 'function');
 }
-module.exports = isTestEnv;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGVzdEVudi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRlc3RFbnYudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFDZCxVQUFVOzs7O0FBRVYsc0RBQWdDO0FBRWhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILFNBQVMsU0FBUztJQUNoQixPQUFPLENBQ0wsYUFBSyxDQUFDLFVBQVUsQ0FBQyxLQUFLLE1BQU07UUFDNUIsYUFBSyxDQUFDLGdCQUFnQixDQUFDLEtBQUssU0FBUztRQUNyQyxPQUFPLE1BQU0sQ0FBQyxFQUFFLEtBQUssVUFBVSxDQUNoQyxDQUFDO0FBQ0osQ0FBQztBQUNELGlCQUFTLFNBQVMsQ0FBQyJ9
+exports.default = isTestEnv;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGVzdEVudi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRlc3RFbnYudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFDZCxVQUFVOzs7OztBQUVWLHNEQUFnQztBQUVoQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFDSCxTQUFTLFNBQVM7SUFDaEIsT0FBTyxDQUNMLGFBQUssQ0FBQyxVQUFVLENBQUMsS0FBSyxNQUFNO1FBQzVCLGFBQUssQ0FBQyxnQkFBZ0IsQ0FBQyxLQUFLLFNBQVM7UUFDckMsT0FBTyxNQUFNLENBQUMsRUFBRSxLQUFLLFVBQVUsQ0FDaEMsQ0FBQztBQUNKLENBQUM7QUFDRCxrQkFBZSxTQUFTLENBQUMifQ==

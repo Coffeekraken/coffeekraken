@@ -1053,4 +1053,4 @@ class SColor {
 // });
 
 // export class
-export = SColor;
+export default SColor;

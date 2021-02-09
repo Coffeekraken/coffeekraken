@@ -65,4 +65,4 @@ function whenAttribute(elm, attrName, checkFn = null) {
     });
   });
 }
-export = whenAttribute;
+export default whenAttribute;

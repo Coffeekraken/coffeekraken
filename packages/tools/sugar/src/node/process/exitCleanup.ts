@@ -59,4 +59,4 @@ function exitCleanup(settings = {}) {
     })();
   });
 }
-export = exitCleanup;
+export default exitCleanup;

@@ -46,4 +46,4 @@ function getStyleProperty(elm, property) {
   }
   return null;
 }
-export = getStyleProperty;
+export default getStyleProperty;

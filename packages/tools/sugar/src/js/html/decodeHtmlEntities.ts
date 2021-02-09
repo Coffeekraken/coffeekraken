@@ -28,4 +28,4 @@ function decodeHtmlEntities(string) {
   txt.innerHTML = string;
   return txt.value;
 }
-export = decodeHtmlEntities;
+export default decodeHtmlEntities;

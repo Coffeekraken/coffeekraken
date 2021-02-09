@@ -2,6 +2,6 @@
 
 import _link from './link.cli';
 
-export = async (stringArgs = '') => {
+export default async (stringArgs = '') => {
   await _link(stringArgs);
 };

@@ -14,4 +14,4 @@ function compileJs(stringArgs = '') {
   pro.run(stringArgs);
 }
 
-export = compileJs;
+export default compileJs;

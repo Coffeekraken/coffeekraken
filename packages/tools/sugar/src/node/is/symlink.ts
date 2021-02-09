@@ -29,4 +29,4 @@ import __fs from 'fs';
 function isSymlink(path) {
   return __fs.existsSync(path) && __fs.lstatSync(path).isSymbolicLink();
 }
-export = isSymlink;
+export default isSymlink;

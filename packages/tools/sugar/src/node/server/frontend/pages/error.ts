@@ -66,4 +66,4 @@ function error(data = {}) {
     packageJson: __standardizeJson(require(__packageRoot() + '/package.json'))
   };
 }
-export = error;
+export default error;

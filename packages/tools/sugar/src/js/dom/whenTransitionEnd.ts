@@ -36,4 +36,4 @@ function whenTransitionEnd(elm, cb = null) {
     }, transition.totalDuration);
   });
 }
-export = whenTransitionEnd;
+export default whenTransitionEnd;

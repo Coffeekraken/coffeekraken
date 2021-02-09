@@ -63,7 +63,7 @@ import __SCliProcess from '../../process/SCliProcess';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class STsCompiler extends __SCompiler {
+export default class STsCompiler extends __SCompiler {
   static interfaces = {
     this: __STsCompileInterface
   };
@@ -410,4 +410,4 @@ export = class STsCompiler extends __SCompiler {
     if (!tsconfig.stacks) return false;
     return tsconfig.stacks[stack] !== undefined;
   }
-};
+}

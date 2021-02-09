@@ -24,7 +24,7 @@ import __SScssCompilerParamsInterface from '../../../scss/compile/interface/SScs
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = function scss(req, res, settings = {}) {
+export default function scss(req, res, settings = {}) {
   const promise = new __SPromise();
 
   (async () => {
@@ -55,4 +55,4 @@ export = function scss(req, res, settings = {}) {
   })();
 
   return promise;
-};
+}

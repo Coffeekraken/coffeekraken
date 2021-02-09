@@ -13,7 +13,7 @@ import __childProcess from 'child_process';
  * @todo    Enhance the process and maybe rename it...
  */
 
-export = async (stringArgs = '') => {
+export default async (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
     definition: {
       source: {

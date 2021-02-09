@@ -29,4 +29,4 @@ import __fs from 'fs-extra';
 function removeSync(path) {
   return __fs.removeSync(path);
 }
-export = removeSync;
+export default removeSync;

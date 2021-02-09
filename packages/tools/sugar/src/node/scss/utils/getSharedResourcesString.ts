@@ -56,4 +56,4 @@ function getScssSharedResourcesString(array: string[] = []) {
 
   return importsStrings;
 }
-export = getScssSharedResourcesString;
+export default getScssSharedResourcesString;

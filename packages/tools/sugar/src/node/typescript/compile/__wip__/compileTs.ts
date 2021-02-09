@@ -304,4 +304,4 @@ const fn: ICompileTs = function compileTs(
   return promise;
 };
 
-export = fn;
+export default fn;

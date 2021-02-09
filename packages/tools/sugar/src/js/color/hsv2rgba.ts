@@ -77,4 +77,4 @@ function hsv2rgba(h, s, v, a = 1) {
     a: a
   };
 }
-export = hsv2rgba;
+export default hsv2rgba;

@@ -37,4 +37,4 @@ function cursorPos() {
     } catch (e) {}
   });
 }
-export = cursorPos;
+export default cursorPos;

@@ -22,7 +22,7 @@ import __SDocMap from '../../../doc/SDocMap';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = async function docMap(req, res, settings = {}) {
+export default async function docMap(req, res, settings = {}) {
   const promise = new __SPromise();
 
   (async () => {
@@ -43,4 +43,4 @@ export = async function docMap(req, res, settings = {}) {
   })();
 
   return promise;
-};
+}

@@ -37,4 +37,4 @@ function keysFirst(array: any[], keys: any[]): any[] {
   return res;
 }
 
-export = keysFirst;
+export default keysFirst;

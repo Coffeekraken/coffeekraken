@@ -36,4 +36,4 @@ function rtrim(string, needle, trimResult = true) {
   // nothing to trim
   return string;
 }
-export = rtrim;
+export default rtrim;

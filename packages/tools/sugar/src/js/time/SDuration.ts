@@ -40,7 +40,7 @@ export interface ISDurationObject {
   formatedDuration: string;
 }
 
-export = class SDuration {
+export default class SDuration {
   /**
    * @name            _settings
    * @type            Object
@@ -177,4 +177,4 @@ export = class SDuration {
     this.endTime = Date.now();
     return this.toObject(settings);
   }
-};
+}

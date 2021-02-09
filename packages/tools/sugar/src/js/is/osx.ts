@@ -30,4 +30,4 @@ function osx() {
   }
   return navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 }
-export = osx;
+export default osx;

@@ -59,4 +59,4 @@ class SOutlineSvgFilter extends SSvgFilter {
 }
 
 // export modules
-export = SOutlineSvgFilter;
+export default SOutlineSvgFilter;

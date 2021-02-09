@@ -50,4 +50,4 @@ function deepize(object) {
 //   })
 // );
 
-export = deepize;
+export default deepize;

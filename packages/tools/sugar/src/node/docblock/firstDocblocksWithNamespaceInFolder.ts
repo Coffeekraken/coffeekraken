@@ -35,7 +35,7 @@ import __SDocblock from './SDocblock';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = async function firstDocblockWithNamespaceInFolder(
+export default async function firstDocblockWithNamespaceInFolder(
   directory,
   settings = {}
 ) {
@@ -75,4 +75,4 @@ export = async function firstDocblockWithNamespaceInFolder(
   });
 
   return namespaceObj;
-};
+}

@@ -69,4 +69,4 @@ function getTransitionProperties(elm) {
   props.totalDuration = totalDuration;
   return props;
 }
-export = getTransitionProperties;
+export default getTransitionProperties;

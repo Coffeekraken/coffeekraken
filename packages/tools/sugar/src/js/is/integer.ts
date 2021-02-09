@@ -32,4 +32,4 @@ function isInteger(data) {
     })(parseFloat(data))
   );
 }
-export = isInteger;
+export default isInteger;

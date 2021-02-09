@@ -4,10 +4,7 @@ import __deepMerge from '../../object/deepMerge';
 
 import __SSvelteCompilerParamsInterface from './interface/SSvelteCompilerParamsInterface';
 import { ISSvelteCompiler, ISSvelteCompilerParams } from './SSvelteCompiler';
-import {
-  ISProcessSettings,
-  ISProcessOptionalSettings
-} from '../../process/SProcess';
+import { ISProcessSettings } from '../../process/SProcess';
 
 /**
  * @name            SSvelteCompilerProcess
@@ -26,8 +23,7 @@ import {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISSvelteCompilerProcessOptionalSettings
-  extends ISProcessOptionalSettings {}
+export interface ISSvelteCompilerProcessSettings extends ISProcessSettings {}
 export interface ISSvelteCompilerProcessSettings extends ISProcessSettings {}
 
 class SSvelteCompilerProcess extends SProcess {
@@ -79,7 +75,7 @@ class SSvelteCompilerProcess extends SProcess {
    */
   constructor(
     initialParams: any,
-    settings: ISSvelteCompilerProcessOptionalSettings = {}
+    settings: Partial<ISSvelteCompilerProcessSettings> = {}
   ) {
     super(
       initialParams,
@@ -113,7 +109,7 @@ class SSvelteCompilerProcess extends SProcess {
    */
   process(
     params: ISSvelteCompilerParams,
-    settings: ISSvelteCompilerProcessOptionalSettings = {}
+    settings: Partial<ISSvelteCompilerProcessSettings> = {}
   ) {
     return this._svelteCompiler.compile(params, settings);
   }

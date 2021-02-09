@@ -44,7 +44,7 @@ class SFsFilesResolverStreamActionInterface extends __SInterface {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SFindInFileStreamAction extends __SActionsStreamAction {
+export default class SFindInFileStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -218,4 +218,4 @@ export = class SFindInFileStreamAction extends __SActionsStreamAction {
       }
     });
   }
-};
+}

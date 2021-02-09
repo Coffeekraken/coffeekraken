@@ -29,4 +29,4 @@ function hasExitCleanup() {
     ? process.env.EXIT_CLEANUP
     : false;
 }
-export = hasExitCleanup;
+export default hasExitCleanup;

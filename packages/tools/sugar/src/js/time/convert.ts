@@ -137,4 +137,4 @@ convert.DAY = 'd';
 convert.WEEK = 'w';
 convert.MONTH = 'month';
 convert.YEAR = 'y';
-export = convert;
+export default convert;

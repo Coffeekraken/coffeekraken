@@ -63,4 +63,4 @@ function relative(
   return path[0];
 }
 
-export = relative;
+export default relative;

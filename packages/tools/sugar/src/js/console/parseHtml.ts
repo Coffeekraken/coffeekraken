@@ -23,7 +23,7 @@ import __replaceTags from '../html/replaceTags';
  */
 function parseHtml(message) {
   if (__isTerminal()) {
-    const fn = require(`${__dirname}/../../node/terminal/parseHtml`);
+    const fn = require(`${__dirname}/../../node/terminal/parseHtml`).default;
     return fn(message);
   }
 

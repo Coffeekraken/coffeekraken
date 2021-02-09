@@ -119,4 +119,4 @@ class SGooeySvgFilter extends SSvgFilter {
 }
 
 // export modules
-export = SGooeySvgFilter;
+export default SGooeySvgFilter;

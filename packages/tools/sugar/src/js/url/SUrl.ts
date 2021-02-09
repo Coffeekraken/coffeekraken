@@ -59,7 +59,7 @@ import __parseSchema from './parseSchema';
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export = class SUrl {
+export default class SUrl {
   /**
    * @name                _settings
    * @type                Object
@@ -412,4 +412,4 @@ export = class SUrl {
   toString() {
     return this._parsedUrl.toString();
   }
-};
+}

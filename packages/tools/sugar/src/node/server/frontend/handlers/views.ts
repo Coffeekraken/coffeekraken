@@ -27,7 +27,7 @@ import __SPromise, { reject } from '../../../promise/SPromise';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = function views(req, res, settings = {}) {
+export default function views(req, res, settings = {}) {
   return new __SPromise(async ({ resolve, reject, pipe }) => {
     let params = req.params[0].split('/');
 
@@ -90,4 +90,4 @@ export = function views(req, res, settings = {}) {
     res.send(notFoundObj.content);
     reject(notFoundObj.content);
   });
-};
+}

@@ -35,4 +35,4 @@ function appendStyleTag(
   }
   $parent.appendChild($style);
 }
-export = appendStyleTag;
+export default appendStyleTag;

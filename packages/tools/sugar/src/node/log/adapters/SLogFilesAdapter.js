@@ -12,11 +12,37 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const prepend_file_1 = __importDefault(require("prepend-file"));
 const make_dir_1 = __importDefault(require("make-dir"));
 const files_1 = __importDefault(require("../htmlPresets/files"));
-module.exports = class SLogFilesAdapter {
+/**
+ * @name                    SLogFilesAdapter
+ * @namespace           js.log
+ * @type                    Class
+ * @status              wip
+ *
+ * This class allows you to log your messages, errors, etc... easily and store them in some files where you want on your file system.
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example               js
+ * import SLog from '@coffeekraken/sugar/js/log/SLog';
+ * import SLogFilesAdapter from '@coffeekraken/sugar/node/log/adapters/SLogFilesAdapter';
+ * const logger = new SLog({
+ *    adapters: [
+ *      new SLogFilesAdapter()
+ *    ]
+ * });
+ * logger.log('Something cool happend...');
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class SLogFilesAdapter {
     /**
      * @name          constructor
      * @type          Function
@@ -74,5 +100,6 @@ module.exports = class SLogFilesAdapter {
             });
         });
     }
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0xvZ0ZpbGVzQWRhcHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNMb2dGaWxlc0FkYXB0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7QUFFZCx1RUFBaUQ7QUFDakQsZ0VBQXlDO0FBQ3pDLHdEQUFpQztBQUNqQyxpRUFBaUQ7QUEyQmpELGlCQUFTLE1BQU0sZ0JBQWdCO0lBYTdCOzs7Ozs7Ozs7O09BVUc7SUFDSCxZQUFZLFFBQVEsR0FBRyxFQUFFO1FBdkJ6Qjs7Ozs7Ozs7O1dBU0c7UUFDSCxjQUFTLEdBQUcsRUFBRSxDQUFDO1FBY2Isa0JBQWtCO1FBQ2xCLElBQUksQ0FBQyxTQUFTLEdBQUcsbUJBQVcsQ0FDMUI7WUFDRSxJQUFJLEVBQUUsT0FBTyxDQUFDLEdBQUcsRUFBRSxHQUFHLFFBQVE7U0FDL0IsRUFDRCxRQUFRLENBQ1QsQ0FBQztJQUNKLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7Ozs7O09BZUc7SUFDRyxHQUFHLENBQUMsT0FBTyxFQUFFLEtBQUs7O1lBQ3RCLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRSxFQUFFO2dCQUN6QyxpQ0FBaUM7Z0JBQ2pDLGtCQUFTLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUM7Z0JBRXBDLHNCQUFzQjtnQkFDdEIsTUFBTSxNQUFNLEdBQUcsS0FBSyxJQUFJLElBQUksRUFBRSxDQUFDLFdBQVcsRUFBRSxPQUFPLGVBQWEsQ0FDOUQsT0FBTyxDQUNSLE1BQU0sQ0FBQztnQkFDUixzQkFBYSxDQUFDLElBQUksQ0FBQyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxJQUFJLEtBQUssTUFBTSxFQUFFLE1BQU0sQ0FBQyxDQUFDO2dCQUVsRSw2QkFBNkI7Z0JBQzdCLE9BQU8sRUFBRSxDQUFDO1lBQ1osQ0FBQyxDQUFDLENBQUM7UUFDTCxDQUFDO0tBQUE7Q0FDRixDQUFDIn0=
+}
+exports.default = SLogFilesAdapter;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0xvZ0ZpbGVzQWRhcHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNMb2dGaWxlc0FkYXB0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7O0FBRWQsdUVBQWlEO0FBQ2pELGdFQUF5QztBQUN6Qyx3REFBaUM7QUFDakMsaUVBQWlEO0FBRWpEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxNQUFxQixnQkFBZ0I7SUFhbkM7Ozs7Ozs7Ozs7T0FVRztJQUNILFlBQVksUUFBUSxHQUFHLEVBQUU7UUF2QnpCOzs7Ozs7Ozs7V0FTRztRQUNILGNBQVMsR0FBRyxFQUFFLENBQUM7UUFjYixrQkFBa0I7UUFDbEIsSUFBSSxDQUFDLFNBQVMsR0FBRyxtQkFBVyxDQUMxQjtZQUNFLElBQUksRUFBRSxPQUFPLENBQUMsR0FBRyxFQUFFLEdBQUcsUUFBUTtTQUMvQixFQUNELFFBQVEsQ0FDVCxDQUFDO0lBQ0osQ0FBQztJQUVEOzs7Ozs7Ozs7Ozs7Ozs7T0FlRztJQUNHLEdBQUcsQ0FBQyxPQUFPLEVBQUUsS0FBSzs7WUFDdEIsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFDLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxFQUFFLEVBQUU7Z0JBQ3pDLGlDQUFpQztnQkFDakMsa0JBQVMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztnQkFFcEMsc0JBQXNCO2dCQUN0QixNQUFNLE1BQU0sR0FBRyxLQUFLLElBQUksSUFBSSxFQUFFLENBQUMsV0FBVyxFQUFFLE9BQU8sZUFBYSxDQUM5RCxPQUFPLENBQ1IsTUFBTSxDQUFDO2dCQUNSLHNCQUFhLENBQUMsSUFBSSxDQUFDLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLElBQUksS0FBSyxNQUFNLEVBQUUsTUFBTSxDQUFDLENBQUM7Z0JBRWxFLDZCQUE2QjtnQkFDN0IsT0FBTyxFQUFFLENBQUM7WUFDWixDQUFDLENBQUMsQ0FBQztRQUNMLENBQUM7S0FBQTtDQUNGO0FBakVELG1DQWlFQyJ9

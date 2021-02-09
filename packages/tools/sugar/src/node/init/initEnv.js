@@ -3,6 +3,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 /**
  * @name                initEnv
@@ -25,5 +26,5 @@ const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 function initEnv() {
     process.env.PACKAGE_ROOT = packageRoot_1.default();
 }
-module.exports = initEnv;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5pdEVudi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImluaXRFbnYudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7QUFFZCxzRUFBZ0Q7QUFFaEQ7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBQ0gsU0FBUyxPQUFPO0lBQ2QsT0FBTyxDQUFDLEdBQUcsQ0FBQyxZQUFZLEdBQUcscUJBQWEsRUFBRSxDQUFDO0FBQzdDLENBQUM7QUFDRCxpQkFBUyxPQUFPLENBQUMifQ==
+exports.default = initEnv;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5pdEVudi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImluaXRFbnYudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBRWQsc0VBQWdEO0FBRWhEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUNILFNBQVMsT0FBTztJQUNkLE9BQU8sQ0FBQyxHQUFHLENBQUMsWUFBWSxHQUFHLHFCQUFhLEVBQUUsQ0FBQztBQUM3QyxDQUFDO0FBQ0Qsa0JBQWUsT0FBTyxDQUFDIn0=

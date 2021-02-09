@@ -27,4 +27,4 @@ import __ip from 'ip';
 function ipAddress() {
   return __ip.address();
 }
-export = ipAddress;
+export default ipAddress;

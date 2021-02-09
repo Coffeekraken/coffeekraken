@@ -48,31 +48,10 @@ export interface ISScssCompilerParams {
   sass: any;
   watch: boolean;
 }
-export interface ISScssCompilerOptionalParams {
-  input?: string | string[];
-  outputDir?: string;
-  rootDir?: string;
-  save?: boolean;
-  style?: string;
-  map?: boolean;
-  cache?: boolean;
-  clearCache?: boolean;
-  stripComments?: boolean;
-  minify?: boolean;
-  prod?: boolean;
-  sharedResources?: string;
-  banner?: string;
-  serve?: boolean;
-  host?: string;
-  port?: number;
-  sass?: any;
-  watch?: boolean;
-}
 
 export interface ISScssCompilerCtorSettings {
-  scssCompiler?: ISScssCompilerOptionalSettings;
+  scssCompiler?: Partial<ISScssCompilerSettings>;
 }
-export interface ISScssCompilerOptionalSettings {}
 export interface ISScssCompilerSettings {}
 
 export interface ISScssCompilerCtor {
@@ -96,7 +75,7 @@ export interface ISScssCompiler extends ISCompiler {}
  * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
  * @feature         2.0.0       Optimize the render time as much as 6x faster
  *
- * @param           {ISScssCompilerOptionalParams}        [initialParams={}]      Some initial parameters to configure your compilation process. Can be overrided thgouth the ```compile``` method
+ * @param           {Partial<ISScssCompilerParams>}        [initialParams={}]      Some initial parameters to configure your compilation process. Can be overrided thgouth the ```compile``` method
  * @param           {ISScssCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
  *
  * @todo      interface
@@ -148,7 +127,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(
-    initialParams: ISScssCompilerOptionalParams,
+    initialParams: Partial<ISScssCompilerParams>,
     settings: ISScssCompilerCtorSettings
   ) {
     super(
@@ -179,7 +158,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
    */
   _compile(
     params: ISScssCompilerParams,
-    settings: ISScssCompilerOptionalSettings = {}
+    settings: Partial<ISScssCompilerSettings> = {}
   ) {
     return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
       settings = __deepMerge(this.scssCompilerSettings, {}, settings);
@@ -290,9 +269,9 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
         });
         pipe(file);
 
-        const resPromise = file.compile(params, {
-          ...settings
-        });
+        // @todo    {Clean}     remove the ts-ignore
+        // @ts-ignore
+        const resPromise = file.compile(params, settings);
         const res = await resPromise;
         resultsObj[file.path] = res;
       }

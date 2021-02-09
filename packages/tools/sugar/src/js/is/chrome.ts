@@ -27,4 +27,4 @@
 function isChrome(ua = navigator.userAgent) {
   return ua.indexOf('Chrome') > -1;
 }
-export = isChrome;
+export default isChrome;

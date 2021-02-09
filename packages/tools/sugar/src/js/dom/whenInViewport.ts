@@ -40,4 +40,4 @@ function whenInViewport(elm, offset = 50) {
     );
   });
 }
-export = whenInViewport;
+export default whenInViewport;

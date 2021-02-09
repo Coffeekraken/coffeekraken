@@ -36,4 +36,4 @@ function uncamelize(text, separator = '-') {
 
   return res;
 }
-export = uncamelize;
+export default uncamelize;

@@ -62,4 +62,4 @@ function observeMutations($target, settings = {}) {
     mutationObserver && mutationObserver.disconnect();
   });
 }
-export = observeMutations;
+export default observeMutations;

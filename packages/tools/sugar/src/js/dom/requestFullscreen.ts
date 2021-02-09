@@ -33,4 +33,4 @@ function requestFullscreen(elm) {
     return elm.msRequestFullscreen();
   }
 }
-export = requestFullscreen;
+export default requestFullscreen;

@@ -37,7 +37,7 @@ import __deepMerge from '../../object/deepMerge';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SCacheAdapter {
+export default class SCacheAdapter {
   /**
    * @name                              _settings
    * @type                              Object
@@ -75,4 +75,4 @@ export = class SCacheAdapter {
     this._settings = settings;
     this.cache = cache;
   }
-};
+}

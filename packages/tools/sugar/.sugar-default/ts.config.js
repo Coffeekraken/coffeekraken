@@ -143,6 +143,20 @@ module.exports = {
     watch: false,
 
     /**
+     * @name          target
+     * @namespace     config.ts.compile
+     * @type          String
+     * @default       browser
+     *
+     * Specify which target you want to apply. By default, the browser target is applied.
+     * Targets are defines under ```config.ts.targets``` and are just some "compilerOptions" presets
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    target: 'browser',
+
+    /**
      * @name          stacks
      * @namespace     config.ts.compile
      * @type          Array<String>
@@ -168,10 +182,10 @@ module.exports = {
      */
     tsconfig: {
       include: [],
-      exclude: [],
+      exclude: ['**/*.js'],
       files: [],
       compilerOptions: {
-        allowJs: true,
+        allowJs: false,
         strict: true,
         esModuleInterop: true,
         skipLibCheck: true,
@@ -181,26 +195,31 @@ module.exports = {
         allowSyntheticDefaultImports: true,
         incremental: false,
         // tsBuildInfoFile: '[config.storage.tmpDir]/ts/.tsbuildinfo',
-        types: ['node']
+        types: ['node'],
+        moduleResolution: 'node'
       }
     }
   },
+
+  targets: {
+    browser: {
+      target: 'es6',
+      module: 'ESNext'
+    },
+    node: {
+      target: 'es6',
+      module: 'commonjs'
+    }
+  },
+
   stacks: {
-    js: {
+    browser: {
       include: ['src/js/**/*.ts'],
-      compilerOptions: {
-        target: 'es5',
-        module: 'umd',
-        moduleResolution: 'node'
-      }
+      compilerOptions: '[config.ts.targets.browser]'
     },
     node: {
       include: ['src/cli/**/*.ts', 'src/node/**/*.ts'],
-      compilerOptions: {
-        module: 'commonjs',
-        target: 'es6',
-        moduleResolution: 'node'
-      }
+      compilerOptions: '[config.ts.targets.node]'
     }
   }
 };

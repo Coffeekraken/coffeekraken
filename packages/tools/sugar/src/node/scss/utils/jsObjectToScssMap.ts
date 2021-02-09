@@ -95,4 +95,4 @@ function isNotUndefined(value) {
   return typeof value !== 'undefined';
 }
 
-export = jsObjectToScssMap;
+export default jsObjectToScssMap;

@@ -28,4 +28,4 @@ function windows() {
   }
   return navigator.platform.toUpperCase().indexOf('WIN') > -1;
 }
-export = windows;
+export default windows;

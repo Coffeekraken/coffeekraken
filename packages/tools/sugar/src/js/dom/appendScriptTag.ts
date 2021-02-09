@@ -30,4 +30,4 @@ function appendScriptTag(src, $parent = document.body) {
   $parent.appendChild($script);
   return scriptLoaded($script);
 }
-export = appendScriptTag;
+export default appendScriptTag;

@@ -53,4 +53,4 @@ const fn: ITmpDir = function (settings: ITmpDirSettings = {}) {
   __ensureDirSync(__tmpDir);
   return __tmpDir;
 };
-export = fn;
+export default fn;

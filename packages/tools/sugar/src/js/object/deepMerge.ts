@@ -92,4 +92,4 @@ function deepMerge(...args) {
 
   return currentObj;
 }
-export = deepMerge;
+export default deepMerge;

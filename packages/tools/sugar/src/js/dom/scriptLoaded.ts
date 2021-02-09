@@ -67,4 +67,4 @@ function loadScript($script) {
     $script.onerror = null;
   });
 }
-export = loadScript;
+export default loadScript;

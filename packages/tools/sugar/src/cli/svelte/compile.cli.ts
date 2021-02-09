@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import SSvelteCompileProcess from '../../node/svelte/compile/SSvelteCompileProcess';
+import SSvelteCompilerProcess from '../../node/svelte/compile/SSvelteCompilerProcess';
 
 function compileSvelte(stringArgs = '') {
-  const pro = new SSvelteCompileProcess(
+  const pro = new SSvelteCompilerProcess(
     {},
     {
       process: {
@@ -14,4 +14,4 @@ function compileSvelte(stringArgs = '') {
   pro.run(stringArgs);
 }
 
-export = compileSvelte;
+export default compileSvelte;

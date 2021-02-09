@@ -40,4 +40,4 @@ function distanceBetween(point1, point2) {
 
   return Math.sqrt(xs + ys);
 }
-export = distanceBetween;
+export default distanceBetween;

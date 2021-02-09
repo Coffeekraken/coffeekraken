@@ -123,4 +123,4 @@ const fn: IMapFn = function (stack, callback, settings = {}) {
   }
   return settings.newStack ? newStack : stack;
 };
-export = fn;
+export default fn;

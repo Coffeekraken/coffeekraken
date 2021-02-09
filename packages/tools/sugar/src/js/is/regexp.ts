@@ -28,4 +28,4 @@
 function isRegexp(value) {
   return value && typeof value === 'object' && value.constructor === RegExp;
 }
-export = isRegexp;
+export default isRegexp;

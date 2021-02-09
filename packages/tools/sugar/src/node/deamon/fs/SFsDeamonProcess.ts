@@ -38,7 +38,7 @@ import __SFsDeamonInterface from './interface/SFsDeamonInterface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SFsDeamonProcess extends __SProcess {
+export default class SFsDeamonProcess extends __SProcess {
   static interfaces = {
     this: __SFsDeamonInterface
   };
@@ -177,4 +177,4 @@ export = class SFsDeamonProcess extends __SProcess {
     }
     return file;
   }
-};
+}

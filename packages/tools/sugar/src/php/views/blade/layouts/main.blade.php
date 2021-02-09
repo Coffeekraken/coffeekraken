@@ -25,9 +25,9 @@ $package = $package ? json_decode($package) : null;
     @foreach ($frontspec->assets->css as $name=>$css)
       @if (!$css->body)
         @if (Sugar\path\is_absolute($css->path) || Sugar\url\is_url($css->path))
-          <link rel="stylesheet" id="{{ $name }}" href="{{ $css->path }}" />
+          <link rel="stylesheet" id="{{ $name }}" href="{{ Sugar\string\replace_tokens($css->path) }}" />
         @else
-          <link rel="stylesheet" id="{{ $name }}" href="/{{ $css->path }}" />
+          <link rel="stylesheet" id="{{ $name }}" href="/{{ Sugar\string\replace_tokens($css->path) }}" />
         @endif
       @endif
     @endforeach
@@ -37,9 +37,9 @@ $package = $package ? json_decode($package) : null;
     @foreach ($frontspec->assets->js as $name=>$js)
       @if (!$js->body)
         @if (Sugar\path\is_absolute($js->path) || Sugar\url\is_url($js->path))
-          <script type="{{ $js->type or 'text/javascript' }}" id="{{ $name }}" src="{{ $js->path }}"></script>
+          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="{{ Sugar\string\replace_tokens($js->path) }}"></script>
         @else
-          <script type="{{ $js->type or 'text/javascript' }}" id="{{ $name }}" src="/{{ $js->path }}"></script>
+          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="/{{ Sugar\string\replace_tokens($js->path) }}"></script>
         @endif
       @endif
     @endforeach
@@ -56,9 +56,9 @@ $package = $package ? json_decode($package) : null;
     @foreach ($frontspec->assets->css as $name=>$css)
       @if ($css->body)
         @if (Sugar\path\is_absolute($css->path) || Sugar\url\is_url($css->path)) {
-          <link rel="stylesheet" id="{{ $name }}" href="{{ $css->path }}" />
+          <link rel="stylesheet" id="{{ $name }}" href="{{ Sugar\string\replace_tokens($css->path) }}" />
         @else
-          <link rel="stylesheet" id="{{ $name }}" href="/{{ $css->path }}" />
+          <link rel="stylesheet" id="{{ $name }}" href="/{{ Sugar\string\replace_tokens($css->path) }}" />
         @endif
       @endif
     @endforeach
@@ -68,9 +68,9 @@ $package = $package ? json_decode($package) : null;
     @foreach ($frontspec->assets->js as $name=>$js)
       @if ($js->body)
         @if (Sugar\path\is_absolute($js->path) || Sugar\url\is_url($js->path))
-          <script type="{{ $js->type or 'text/javascript' }}" id="{{ $name }}" src="{{ $js->path }}"></script>
+          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="{{ Sugar\string\replace_tokens($js->path) }}"></script>
         @else
-          <script type="{{ $js->type or 'text/javascript' }}" id="{{ $name }}" src="/{{ $js->path }}"></script>
+          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="/{{ Sugar\string\replace_tokens($js->path) }}"></script>
         @endif
       @endif
     @endforeach

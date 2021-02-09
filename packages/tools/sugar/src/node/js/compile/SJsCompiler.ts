@@ -18,13 +18,13 @@ import __resolve from 'resolve';
 import __packageRoot from '../../path/packageRoot';
 import __builtInNodeModules from '../../module/buildInNodeModules';
 import * as __esbuild from 'esbuild';
+import __wait from '../../time/wait';
 
 import __SJsCompilerParamsInterface from './interface/SJsCompilerParamsInterface';
 
 export interface ISJsCompilerCtorSettings {
-  jsCompiler?: ISJsCompilerOptionalSettings;
+  jsCompiler?: Partial<ISJsCompilerSettings>;
 }
-export interface ISJsCompilerOptionalSettings {}
 export interface ISJsCompilerSettings {}
 
 export interface ISJsCompilerParams {
@@ -44,23 +44,6 @@ export interface ISJsCompilerParams {
   host: string;
   esbuild: any;
 }
-export interface ISJsCompilerOptionalParams {
-  input?: string | string[];
-  outputDir?: string;
-  rootDir?: string;
-  bundle?: boolean;
-  map?: boolean;
-  prod?: boolean;
-  stripComments?: boolean;
-  minify?: boolean;
-  banner?: string;
-  save?: boolean;
-  watch?: boolean;
-  serve?: boolean;
-  port?: number;
-  host?: string;
-  esbuild?: any;
-}
 
 export interface ISJsCompiler extends ISCompiler {}
 
@@ -75,7 +58,7 @@ export interface ISJsCompiler extends ISCompiler {}
  *
  * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
  *
- * @param         {ISJsCompilerOptionalParams}      [initialParams={}]      Some parameters to use for your compilation process
+ * @param         {Partial<ISJsCompilerParams>}      [initialParams={}]      Some parameters to use for your compilation process
  * @param           {ISJsCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
  *
  * @todo      interface
@@ -216,7 +199,7 @@ class SJsCompiler extends __SCompiler {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(
-    initialParams: ISJsCompilerOptionalParams,
+    initialParams: Partial<ISJsCompilerParams>,
     settings: ISJsCompilerCtorSettings
   ) {
     super(
@@ -247,129 +230,94 @@ class SJsCompiler extends __SCompiler {
    */
   _compile(
     params: ISJsCompilerParams,
-    settings: ISJsCompilerOptionalSettings = {}
+    settings: Partial<ISJsCompilerSettings> = {}
   ) {
-    return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
-      settings = __deepMerge(this.jsCompilerSettings, {}, settings);
+    return new __SPromise(({ resolve, reject, pipe, emit }) => {
+      (async () => {
+        settings = __deepMerge(this.jsCompilerSettings, {}, settings);
 
-      let input = Array.isArray(params.input) ? params.input : [params.input];
+        let input = Array.isArray(params.input) ? params.input : [params.input];
 
-      // prod
-      if (params.prod || params.bundle) {
-        params.minify = true;
-        params.stripComments = true;
-        params.map = false;
-      }
-
-      let esbuildParams: any = {
-        charset: 'utf8',
-        logLevel: 'silent',
-        ...__filter(params, (key, value) => {
-          if (Array.isArray(value) && !value.length) return false;
-          return (
-            (<any>this.constructor)._esbuildAcceptedSettings.indexOf(key) !== -1
-          );
-        }),
-        bundle: params.bundle,
-        write: false,
-        minify: params.minify,
-        sourcemap: params.map,
-        ...params.esbuild
-      };
-
-      let filesPaths: string[] = [];
-      // make input absolute
-      input = __absolute(input);
-      // process inputs
-      input.forEach((inputStr) => {
-        if (__isGlob(inputStr)) {
-          filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
-        } else {
-          filesPaths.push(inputStr);
+        // prod
+        if (params.prod || params.bundle) {
+          params.minify = true;
+          params.stripComments = true;
+          params.map = false;
         }
-      });
 
-      // set the entrypoints
-      esbuildParams.entryPoints = filesPaths;
+        let esbuildParams: any = {
+          charset: 'utf8',
+          format: 'iife',
+          logLevel: 'silent',
+          ...__filter(params, (key, value) => {
+            if (Array.isArray(value) && !value.length) return false;
+            return (
+              (<any>this.constructor)._esbuildAcceptedSettings.indexOf(key) !==
+              -1
+            );
+          }),
+          bundle: params.bundle,
+          write: params.save,
+          // outfile: 'out.js',
+          outdir: params.outputDir,
+          minify: params.minify,
+          sourcemap: params.map,
+          ...params.esbuild
+        };
 
-      if (params.serve) {
-        const serverLogStrArray: string[] = [
-          `Your <yellow>Esbuild Js</yellow> server is <green>up and running</green>:`,
-          '',
-          `- Hostname        : <yellow>${params.host}</yellow>`,
-          `- Port            : <yellow>${params.port}</yellow>`,
-          `- URL's           : <cyan>http://${params.host}:${params.port}</cyan>`
-        ];
-
-        filesPaths.forEach((path) => {
-          serverLogStrArray.push(
-            `                  : <cyan>${`http://${params.host}:${
-              params.port
-            }/${__getFilename(path)}`.trim()} </cyan>`
-          );
-        });
-
-        emit('log', {
-          type: 'time'
-        });
-        emit('log', {
-          clear: true,
-          type: 'heading',
-          value: serverLogStrArray.join('\n')
-        });
-
-        __esbuild
-          .serve(
-            {
-              host: params.host,
-              port: params.port
-            },
-            {
-              ...esbuildParams
-            }
-          )
-          .then((server) => {
-            __onProcessExit(() => {
-              server.stop();
-            });
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-        return;
-      }
-
-      const resultsObj = {};
-      const duration = new __SDuration();
-
-      for (let i = 0; i < filesPaths.length; i++) {
-        let filePath = filesPaths[i];
-        let file = new __SJsFile(filePath, {
-          jsFile: {
-            compile: settings
+        let filesPaths: string[] = [];
+        // make input absolute
+        input = __absolute(input);
+        // process inputs
+        input.forEach((inputStr) => {
+          if (__isGlob(inputStr)) {
+            filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
+          } else {
+            filesPaths.push(inputStr);
           }
         });
-        pipe(file);
 
-        const resPromise = file.compile(params, {
-          ...settings
-        });
-        const res = await resPromise;
-        resultsObj[file.path] = res;
-      }
+        // set the entrypoints
+        esbuildParams.entryPoints = filesPaths;
 
-      // resolve with the compilation result
-      if (!params.watch) {
-        resolve({
-          files: resultsObj,
-          ...duration.end()
-        });
-      } else {
-        emit('files', {
-          files: resultsObj,
-          ...duration.end()
-        });
-      }
+        console.log(esbuildParams);
+
+        const esbuildService = await __esbuild.startService();
+        const esbuildResult = await esbuildService.build(esbuildParams);
+        console.log(esbuildResult);
+
+        const resultsObj = {};
+        const duration = new __SDuration();
+
+        // for (let i = 0; i < filesPaths.length; i++) {
+        //   let filePath = filesPaths[i];
+        //   let file = new __SJsFile(filePath, {
+        //     jsFile: {
+        //       compile: settings
+        //     }
+        //   });
+        //   pipe(file);
+
+        //   const resPromise = file.compile(params, {
+        //     ...settings
+        //   });
+        //   const res = await resPromise;
+        //   resultsObj[file.path] = res;
+        // }
+
+        // resolve with the compilation result
+        if (!params.watch) {
+          resolve({
+            files: resultsObj,
+            ...duration.end()
+          });
+        } else {
+          emit('files', {
+            files: resultsObj,
+            ...duration.end()
+          });
+        }
+      })();
     });
   }
 }

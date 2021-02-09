@@ -5,10 +5,7 @@ import __STsCompiler from './STsCompiler';
 
 import __STsCompilerParamsInterface from './interface/STsCompilerParamsInterface';
 import { ISTsCompilerParams } from './STsCompiler';
-import {
-  ISProcessSettings,
-  ISProcessOptionalSettings
-} from '../../process/SProcess';
+import { ISProcessSettings } from '../../process/SProcess';
 
 /**
  * @name            STsCompilerProcess
@@ -27,8 +24,7 @@ import {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISTsCompileProcessOptionalSettings
-  extends ISProcessOptionalSettings {}
+export interface ISTsCompileProcessSettings extends ISProcessSettings {}
 export interface ISTsCompileProcessSettings extends ISProcessSettings {}
 
 class STsCompilerProcess extends SProcess implements ISCompileTsProcess {

@@ -29,4 +29,4 @@ import { paramCase } from 'param-case';
 function paramCaseFn(string) {
   return paramCase(string);
 }
-export = paramCaseFn;
+export default paramCaseFn;

@@ -27,4 +27,4 @@ function mapToObject(map: any): object {
   for (let [k, v] of map) obj[k] = v;
   return obj;
 }
-export = mapToObject;
+export default mapToObject;

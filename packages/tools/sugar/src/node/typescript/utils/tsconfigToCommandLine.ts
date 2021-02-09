@@ -71,4 +71,4 @@ const fn = function (tsconfigPath) {
 
   return cli;
 };
-export = fn;
+export default fn;

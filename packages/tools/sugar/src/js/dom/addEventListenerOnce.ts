@@ -71,4 +71,4 @@ function addEventListenerOnce(
 
   return globalPromise;
 }
-export = addEventListenerOnce;
+export default addEventListenerOnce;

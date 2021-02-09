@@ -28,4 +28,4 @@ function snippet(data) {
     code: Array.isArray(data.content) ? data.content.join('\n') : data.content
   };
 }
-export = snippet;
+export default snippet;

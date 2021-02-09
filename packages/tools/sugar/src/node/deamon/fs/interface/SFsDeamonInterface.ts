@@ -21,7 +21,7 @@ import __SDeamonInterface from '../../interface/SDeamonInterface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SFsDeamonInterface extends __SInterface {
+export default class SFsDeamonInterface extends __SInterface {
   static implementsArray = [__SDeamonInterface];
 
   static definition = {
@@ -33,4 +33,4 @@ export = class SFsDeamonInterface extends __SInterface {
       level: 1
     }
   };
-};
+}

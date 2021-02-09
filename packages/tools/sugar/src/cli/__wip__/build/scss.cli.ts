@@ -3,7 +3,7 @@
 import __SBuildScssProcess from '../../node/scss/build/SBuildScssProcess';
 import __SProcessManager from '../../node/process/SProcessManager';
 
-export = (stringArgs = '') => {
+export default (stringArgs = '') => {
   new __SProcessManager(__SBuildScssProcess, {
     autoRun: true,
     initialParams: stringArgs,

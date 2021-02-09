@@ -135,4 +135,4 @@ function objectProperties(startObj, targetObj, settings = {}) {
     }
   );
 }
-export = objectProperties;
+export default objectProperties;

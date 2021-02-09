@@ -107,4 +107,4 @@ function search(searchString, settings = {}) {
     resolve(results);
   });
 }
-export = search;
+export default search;

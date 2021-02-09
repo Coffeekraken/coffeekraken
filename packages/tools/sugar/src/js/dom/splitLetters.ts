@@ -73,11 +73,7 @@ function _decodeHtml(html) {
  * @since       1.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function splitLetters(
-  elm,
-  tag = 'span',
-  tagClass = 'split-letters'
-) {
+function splitLetters(elm, tag = 'span', tagClass = 'split-letters') {
   let string = elm._splitLettersOriginalString;
   if (!string) {
     string = elm.innerHTML;
@@ -115,4 +111,4 @@ function splitLetters(
 
   return elm;
 }
-export = splitLetters;
+export default splitLetters;

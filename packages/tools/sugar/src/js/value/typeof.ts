@@ -127,4 +127,4 @@ function typeOf(value: any, settings: ITypeofSettings = {}): string {
 
   return type;
 }
-export = typeOf;
+export default typeOf;

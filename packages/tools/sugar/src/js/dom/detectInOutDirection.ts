@@ -113,4 +113,4 @@ function calculateDirection(e) {
     direction = null;
   }
 }
-export = detectInOutDirection;
+export default detectInOutDirection;

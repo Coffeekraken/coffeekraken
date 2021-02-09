@@ -60,4 +60,4 @@ function frontspecMiddleware(settings = {}) {
     next();
   };
 }
-export = frontspecMiddleware;
+export default frontspecMiddleware;

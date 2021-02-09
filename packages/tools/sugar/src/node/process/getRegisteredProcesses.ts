@@ -25,4 +25,4 @@ function getRegisteredProcesses() {
   if (!global._registeredProcesses) global._registeredProcesses = {};
   return global._registeredProcesses;
 }
-export = getRegisteredProcesses;
+export default getRegisteredProcesses;

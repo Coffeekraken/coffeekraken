@@ -30,4 +30,4 @@ function author(data) {
     url: authorNfo[3]
   };
 }
-export = author;
+export default author;

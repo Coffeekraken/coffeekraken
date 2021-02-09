@@ -145,4 +145,4 @@ function crop(text, length, settings = {}) {
 
   return result;
 }
-export = crop;
+export default crop;

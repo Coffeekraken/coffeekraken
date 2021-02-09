@@ -45,4 +45,4 @@ function closest($elm, selector) {
   }
   return null;
 }
-export = closest;
+export default closest;

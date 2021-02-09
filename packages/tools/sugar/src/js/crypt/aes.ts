@@ -20,7 +20,7 @@ import parse from '../string/parse';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = {
+export default {
   /**
    * @name        encrypt
    * @type        Function

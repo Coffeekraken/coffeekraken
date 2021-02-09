@@ -43,7 +43,7 @@ import __SConfigAdapter from './adapters/SConfigAdapter';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 const _SConfigLoadingByAdapter = {};
-export = class SConfig {
+export default class SConfig {
   /**
    * @name              _name
    * @type              {String}
@@ -418,4 +418,4 @@ export = class SConfig {
     // return true
     return true;
   }
-};
+}

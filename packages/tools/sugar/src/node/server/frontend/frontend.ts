@@ -143,4 +143,4 @@ const fn = function (args = {}) {
     }
   );
 };
-export = fn;
+export default fn;

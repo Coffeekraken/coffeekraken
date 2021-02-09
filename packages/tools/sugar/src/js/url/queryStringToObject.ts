@@ -43,4 +43,4 @@ function queryStringToObject(str) {
   }
   return obj;
 }
-export = queryStringToObject;
+export default queryStringToObject;

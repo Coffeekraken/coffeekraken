@@ -46,4 +46,4 @@ function wrap($elm, $wrapper) {
   }
   return $wrapper.appendChild($elm);
 }
-export = wrap;
+export default wrap;

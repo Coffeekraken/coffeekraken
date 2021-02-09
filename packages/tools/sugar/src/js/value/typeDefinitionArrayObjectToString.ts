@@ -56,4 +56,4 @@ function typeDefinitionArrayObjectToString(typeDefinitionArrayObj) {
 
   return parts.join('|');
 }
-export = typeDefinitionArrayObjectToString;
+export default typeDefinitionArrayObjectToString;

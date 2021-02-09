@@ -46,4 +46,4 @@ function parseAuthorString(string) {
   }
   return authorObj;
 }
-export = parseAuthorString;
+export default parseAuthorString;

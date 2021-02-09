@@ -34,7 +34,7 @@ import __deepMerge from '../../object/deepMerge';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SConfigAdapter {
+export default class SConfigAdapter {
   /**
    * @name                              _settings
    * @type                              Object
@@ -101,4 +101,4 @@ export = class SConfigAdapter {
   get settings() {
     return this._settings;
   }
-};
+}

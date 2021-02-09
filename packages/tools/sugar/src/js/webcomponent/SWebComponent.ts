@@ -1100,4 +1100,4 @@ function SWebComponentGenerator(extendsSettings = {}) {
   };
 }
 
-export = SWebComponentGenerator;
+export default SWebComponentGenerator;

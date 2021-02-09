@@ -37,4 +37,4 @@ function getFreePort(port = null) {
     resolve(port);
   });
 }
-export = getFreePort;
+export default getFreePort;

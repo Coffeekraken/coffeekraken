@@ -26,4 +26,4 @@
 function isUcBrowser(ua = navigator.userAgent) {
   return ua.match(/UCBrowser/i) !== null;
 }
-export = isUcBrowser;
+export default isUcBrowser;

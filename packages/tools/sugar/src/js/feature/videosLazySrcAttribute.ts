@@ -40,4 +40,4 @@ function videoLazySrcAttribute(settings = {}) {
     });
   });
 }
-export = videoLazySrcAttribute;
+export default videoLazySrcAttribute;

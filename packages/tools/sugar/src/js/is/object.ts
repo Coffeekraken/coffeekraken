@@ -28,4 +28,4 @@
 function isObject(value) {
   return value && typeof value === 'object' && value.constructor === Object;
 }
-export = isObject;
+export default isObject;

@@ -37,4 +37,4 @@ function htmlFromDocblocks(inputString, settings = {}) {
   const sDocblock = new __SDocblock(inputString, settings);
   return sDocblock.toHtml(settings);
 }
-export = htmlFromDocblocks;
+export default htmlFromDocblocks;

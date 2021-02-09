@@ -7,7 +7,7 @@ interface IPathRootOptions {
   highest?: boolean;
 }
 
-export = async (stringArgs = '') => {
+export default async (stringArgs = '') => {
   const args: IPathRootOptions = __parseArgs(stringArgs, {
     definition: {
       highest: {

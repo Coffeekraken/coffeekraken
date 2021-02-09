@@ -35,4 +35,4 @@ function writeFileSync(path, data, options = {}) {
   __ensureDirSync(folderPath);
   return __fs.outputFileSync(path, data, options);
 }
-export = writeFileSync;
+export default writeFileSync;

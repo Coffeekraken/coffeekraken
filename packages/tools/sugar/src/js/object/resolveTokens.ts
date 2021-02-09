@@ -67,4 +67,4 @@ function resolveTokens(object) {
   // return the proxied object
   return proxiedObject;
 }
-export = resolveTokens;
+export default resolveTokens;

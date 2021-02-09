@@ -27,7 +27,7 @@ import __path from 'path';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SBuildFrontspecStreamAction extends __SActionsStreamAction {
+export default class SBuildFrontspecStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -108,4 +108,4 @@ export = class SBuildFrontspecStreamAction extends __SActionsStreamAction {
       resolve(streamObj);
     });
   }
-};
+}

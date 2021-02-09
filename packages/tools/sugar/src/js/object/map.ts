@@ -44,4 +44,4 @@ function map(object, processor) {
   });
   return object;
 }
-export = map;
+export default map;

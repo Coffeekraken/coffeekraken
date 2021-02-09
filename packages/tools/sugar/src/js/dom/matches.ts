@@ -41,4 +41,4 @@ function matches(el, selector) {
     };
   return f.call(el, selector);
 }
-export = matches;
+export default matches;

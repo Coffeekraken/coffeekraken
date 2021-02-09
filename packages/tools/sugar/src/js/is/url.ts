@@ -40,4 +40,4 @@ function isUrl(data) {
   const re = new RegExp(strRegex);
   return re.test(data);
 }
-export = isUrl;
+export default isUrl;

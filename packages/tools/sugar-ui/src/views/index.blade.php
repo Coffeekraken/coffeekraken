@@ -8,17 +8,9 @@
 
   <p>{!! $content !!}</p>
 
-  <script src="/src/js/index.ts"></script>
+  <my-element>WEFWEFWEF</my-element>
 
-  <s-sugar-ui></s-sugar-ui>
-
-  <style>
-    [class^="s-bg-"] {
-      width: 100px; height: 100px;
-    }
-  </style>
-
-  <div class="s-bg-primary--900"></div>
+  {{-- <div class="s-bg-primary--900"></div>
   <div class="s-bg-primary--800"></div>
   <div class="s-bg-primary--700"></div>
   <div class="s-bg-primary--600"></div>
@@ -38,6 +30,6 @@
   <div class="s-bg-secondary--300"></div>
   <div class="s-bg-secondary--200"></div>
   <div class="s-bg-secondary--100"></div>
-  <div class="s-bg-secondary--50"></div>
+  <div class="s-bg-secondary--50"></div> --}}
 
 @endsection

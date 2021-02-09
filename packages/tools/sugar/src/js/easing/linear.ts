@@ -22,4 +22,4 @@
 function ease(t) {
   return t;
 }
-export = ease;
+export default ease;

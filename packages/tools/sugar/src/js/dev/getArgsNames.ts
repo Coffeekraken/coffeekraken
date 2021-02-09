@@ -57,4 +57,4 @@ function getArgsNames(func) {
 
   return params;
 }
-export = getArgsNames;
+export default getArgsNames;

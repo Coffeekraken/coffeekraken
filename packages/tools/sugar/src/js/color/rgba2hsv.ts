@@ -63,4 +63,4 @@ function rgba2hsv(r, g, b, a = 1) {
     v: v
   };
 }
-export = rgba2hsv;
+export default rgba2hsv;

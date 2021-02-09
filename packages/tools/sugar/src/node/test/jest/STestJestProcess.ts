@@ -25,7 +25,7 @@ import __childProces from 'child_process';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class STestJestProcess extends __SProcess {
+export default class STestJestProcess extends __SProcess {
   static interfaces = {
     this: __STestJestInterface
   };
@@ -104,4 +104,4 @@ export = class STestJestProcess extends __SProcess {
       }
     });
   }
-};
+}

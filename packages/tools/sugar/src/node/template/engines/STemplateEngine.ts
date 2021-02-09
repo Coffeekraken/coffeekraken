@@ -29,7 +29,7 @@ import { ISPromise } from '../../promise/SPromise';
  *
  * @example     js
  * import STemplateEngine from '@coffeekraken/sugar/node/template/engines/STemplateEngine';
- * export = class MyTemplateEngine extends STemplateEngine {
+ * export default class MyTemplateEngine extends STemplateEngine {
  *    static input = 'path';
  *    static canRender(templateString) {
  *      // ...
@@ -50,10 +50,9 @@ import { ISPromise } from '../../promise/SPromise';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISTemplateEngineOptionalSettings {}
 export interface ISTemplateEngineSettings {}
 export interface ISTemplateEngineCtorSettings {
-  templateEngine: ISTemplateEngineOptionalSettings;
+  templateEngine: Partial<ISTemplateEngineSettings>;
 }
 
 export interface ISTemplateEngineRenderResult {}
@@ -63,7 +62,7 @@ export interface ISTemplateEngine {
   render(
     view: string,
     data: any,
-    settings: ISTemplateEngineOptionalSettings
+    settings: Partial<ISTemplateEngineSettings>
   ): ISPromise<ISTemplateEngineRenderResult>;
 }
 

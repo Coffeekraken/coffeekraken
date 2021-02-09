@@ -53,34 +53,18 @@ export interface ISDocMapExcludeSetting {
   [key: string]: RegExp;
 }
 
-export interface ISDocMapBuildOptionalSettings {
-  globs?: string[];
-  exclude?: ISDocMapExcludeSetting;
-}
 export interface ISDocMapBuildSettings {
   globs: string[];
   exclude: ISDocMapExcludeSetting;
-}
-export interface ISDocMapFindOptionalSettings {
-  globs?: string[];
-  exclude?: ISDocMapExcludeSetting;
 }
 export interface ISDocMapFindSettings {
   globs: string[];
   exclude: ISDocMapExcludeSetting;
 }
-export interface ISDocMapSaveOptionalSettings {
-  path?: string;
-  build?: ISDocMapBuildOptionalSettings;
-}
+
 export interface ISDocMapSaveSettings {
   path: string;
   build: ISDocMapBuildSettings;
-}
-export interface ISDocMapOptionalSettings {
-  build?: ISDocMapBuildOptionalSettings;
-  find?: ISDocMapFindOptionalSettings;
-  save?: ISDocMapSaveOptionalSettings;
 }
 export interface ISDocMapSettings {
   build: ISDocMapBuildSettings;
@@ -88,7 +72,7 @@ export interface ISDocMapSettings {
   save: ISDocMapSaveSettings;
 }
 export interface ISDocMapCtorSettings {
-  docMap?: ISDocMapOptionalSettings;
+  docMap?: Partial<ISDocMapSettings>;
 }
 
 export interface ISDocMapEntry {
@@ -187,7 +171,7 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  find(settings?: ISDocMapFindOptionalSettings) {
+  find(settings?: Partial<ISDocMapFindSettings>) {
     const findSettings = <ISDocMapFindSettings>(
       __deepMerge(this.docMapSettings.find, settings || {})
     );
@@ -195,7 +179,7 @@ class SDocMap extends __SClass implements ISDocMap {
     return new __SPromise(
       async ({ resolve, reject, emit }) => {
         // build the glob pattern to use
-        const patterns: string[] = findSettings.globs;
+        const patterns: string[] = findSettings.globs || [];
 
         let files: __SFile[] = [];
         await __wait(1);
@@ -250,7 +234,7 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  read(settings: ISDocMapFindOptionalSettings) {
+  read(settings: Partial<ISDocMapFindSettings>) {
     return new __SPromise(
       async ({ resolve, pipe }) => {
         const filesPromise = this.find(settings);
@@ -298,13 +282,13 @@ class SDocMap extends __SClass implements ISDocMap {
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  build(settings: ISDocMapBuildOptionalSettings) {
+  build(settings: Partial<ISDocMapBuildSettings>) {
     const buildSettings = <ISDocMapBuildSettings>(
       __deepMerge(this.docMapSettings.build, settings)
     );
     return new __SPromise(
       async ({ resolve, reject, emit }) => {
-        let globs = buildSettings.globs;
+        let globs: string[] = buildSettings.globs || [];
         if (!Array.isArray(globs)) globs = [globs];
 
         emit('log', {
@@ -345,11 +329,17 @@ class SDocMap extends __SClass implements ISDocMap {
             docblocks.forEach((docblock) => {
               for (
                 let i = 0;
+                // @todo    {Clean}   remove ts-ignore
+                // @ts-ignore
                 i < Object.keys(buildSettings.exclude).length;
                 i++
               ) {
                 const excludeReg =
+                  // @todo    {Clean}   remove ts-ignore
+                  // @ts-ignore
                   buildSettings.exclude[Object.keys(buildSettings.exclude)[i]];
+                // @todo    {Clean}   remove ts-ignore
+                // @ts-ignore
                 const value = docblock[Object.keys(buildSettings.exclude)[i]];
                 if (value === undefined) continue;
                 if (value.match(excludeReg)) return;
@@ -424,8 +414,8 @@ class SDocMap extends __SClass implements ISDocMap {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   save(
-    outputOrSettings: string | ISDocMapSaveOptionalSettings,
-    settings?: ISDocMapSaveOptionalSettings
+    outputOrSettings: string | Partial<ISDocMapSaveSettings>,
+    settings?: Partial<ISDocMapSaveSettings>
   ): __SPromise {
     let output, saveSettings: ISDocMapSaveSettings;
     if (typeof outputOrSettings === 'string') {

@@ -185,4 +185,4 @@ function argsToString(args, settings = {}) {
 
   return cliArray.join(' ').replace(/(\s){2,999999}/gm, ' ');
 }
-export = argsToString;
+export default argsToString;

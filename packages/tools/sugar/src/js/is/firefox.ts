@@ -27,4 +27,4 @@
 function isFirefox(ua = navigator.userAgent) {
   return ua.indexOf('Firefox') > -1;
 }
-export = isFirefox;
+export default isFirefox;

@@ -26,4 +26,4 @@ function isChildProcess() {
     process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined
   );
 }
-export = isChildProcess;
+export default isChildProcess;

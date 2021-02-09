@@ -32,7 +32,7 @@ import __isPlainObject from '../is/plainObject';
  * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SLog {
+export default class SLog {
   /**
    * @name          _settings
    * @type          Object
@@ -340,4 +340,4 @@ export = class SLog {
     // call the internal _log method and return his result
     return this._log(...args, 'trace');
   }
-};
+}

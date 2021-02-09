@@ -10,7 +10,7 @@ import __parseArgs from '../../node/cli/parseArgs';
 import __parse from '../../node/docblock/parse';
 import __includes from '../../node/string/includes';
 
-export = async (stringArgs = '') => {
+export default async (stringArgs = '') => {
   const args = __parseArgs(stringArgs, {
     definition: {
       source: {

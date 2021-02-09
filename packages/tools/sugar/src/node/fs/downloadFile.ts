@@ -69,4 +69,4 @@ function downloadFileFn(
     );
   });
 }
-export = downloadFileFn;
+export default downloadFileFn;

@@ -27,4 +27,4 @@
 function isHover($elm) {
   return $elm.parentElement.querySelector(':hover') === $elm;
 }
-export = isHover;
+export default isHover;

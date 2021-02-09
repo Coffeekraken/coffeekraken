@@ -4,10 +4,7 @@ import __deepMerge from '../../object/deepMerge';
 
 import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';
 import { ISScssCompiler, ISScssCompilerParams } from './SScssCompiler';
-import {
-  ISProcessSettings,
-  ISProcessOptionalSettings
-} from '../../process/SProcess';
+import { ISProcessSettings } from '../../process/SProcess';
 
 /**
  * @name            SScssCompilerProcess
@@ -26,8 +23,7 @@ import {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-interface ISScssCompilerProcessOptionalSettings
-  extends ISProcessOptionalSettings {}
+interface ISScssCompilerProcessSettings extends ISProcessSettings {}
 interface ISScssCompilerProcessSettings extends ISProcessSettings {}
 
 class SScssCompilerProcess extends SProcess {
@@ -79,7 +75,7 @@ class SScssCompilerProcess extends SProcess {
    */
   constructor(
     initialParams: any,
-    settings: ISScssCompilerProcessOptionalSettings = {}
+    settings: Partial<ISScssCompilerProcessSettings> = {}
   ) {
     super(
       initialParams,
@@ -113,7 +109,7 @@ class SScssCompilerProcess extends SProcess {
    */
   process(
     params: ISScssCompilerParams,
-    settings: ISScssCompilerProcessOptionalSettings = {}
+    settings: Partial<ISScssCompilerProcessSettings> = {}
   ) {
     return this._scssCompiler.compile(params, settings);
   }

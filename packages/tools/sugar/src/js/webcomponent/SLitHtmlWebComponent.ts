@@ -185,4 +185,4 @@ function SLitHtmlWebComponentGenerator(extendSettings = {}) {
   };
 }
 
-export = SLitHtmlWebComponentGenerator;
+export default SLitHtmlWebComponentGenerator;

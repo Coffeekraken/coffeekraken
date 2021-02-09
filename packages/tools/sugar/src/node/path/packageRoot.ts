@@ -41,4 +41,4 @@ function packageRoot(from = process.cwd(), highest = false) {
   }
   return false;
 }
-export = packageRoot;
+export default packageRoot;

@@ -1,5 +1,5 @@
 // @ts-nocheck
 
-export = () => {
+export default () => {
   require('./node.cli')();
 };

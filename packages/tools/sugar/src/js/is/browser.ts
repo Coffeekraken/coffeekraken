@@ -27,4 +27,4 @@
 function isBrowser(value) {
   return typeof window !== 'undefined';
 }
-export = isBrowser;
+export default isBrowser;

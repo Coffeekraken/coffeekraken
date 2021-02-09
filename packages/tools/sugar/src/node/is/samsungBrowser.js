@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isSamsumgBrowser
  * @namespace           sugar.js.is
@@ -27,5 +28,5 @@
 function isSamsumgBrowser(ua = navigator.userAgent) {
     return ua.match(/SamsungBrowser/i) !== null;
 }
-module.exports = isSamsumgBrowser;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Ftc3VuZ0Jyb3dzZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzYW1zdW5nQnJvd3Nlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsZ0JBQWdCLENBQUMsRUFBRSxHQUFHLFNBQVMsQ0FBQyxTQUFTO0lBQ2hELE9BQU8sRUFBRSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxLQUFLLElBQUksQ0FBQztBQUM5QyxDQUFDO0FBQ0QsaUJBQVMsZ0JBQWdCLENBQUMifQ==
+exports.default = isSamsumgBrowser;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Ftc3VuZ0Jyb3dzZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzYW1zdW5nQnJvd3Nlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLGdCQUFnQixDQUFDLEVBQUUsR0FBRyxTQUFTLENBQUMsU0FBUztJQUNoRCxPQUFPLEVBQUUsQ0FBQyxLQUFLLENBQUMsaUJBQWlCLENBQUMsS0FBSyxJQUFJLENBQUM7QUFDOUMsQ0FBQztBQUNELGtCQUFlLGdCQUFnQixDQUFDIn0=

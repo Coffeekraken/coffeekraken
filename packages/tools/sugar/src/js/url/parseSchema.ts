@@ -194,4 +194,4 @@ function parseSchema(url, schema) {
     url: rawUrlString
   };
 }
-export = parseSchema;
+export default parseSchema;

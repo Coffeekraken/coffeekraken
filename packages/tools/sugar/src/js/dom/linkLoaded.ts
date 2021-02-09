@@ -77,4 +77,4 @@ function linkLoaded(link, callback = null) {
     }
   });
 }
-export = linkLoaded;
+export default linkLoaded;

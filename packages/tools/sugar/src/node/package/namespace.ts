@@ -61,4 +61,4 @@ function namespace(path, settings = {}) {
     .join('.');
   return resultNamespace;
 }
-export = namespace;
+export default namespace;

@@ -78,4 +78,4 @@ function validateObjectOutputString(validateObjectResultObj, settings = {}) {
 
   return __parseHtml(stringsArray.join('\n\n'));
 }
-export = validateObjectOutputString;
+export default validateObjectOutputString;

@@ -34,4 +34,4 @@ function realHeight(elm) {
   // return the height
   return height;
 }
-export = realHeight;
+export default realHeight;

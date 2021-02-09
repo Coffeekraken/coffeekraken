@@ -31,4 +31,4 @@ function insertAfter(elm, refElm) {
     refElm.parentNode.insertBefore(elm, nextSibling);
   }
 }
-export = insertAfter;
+export default insertAfter;

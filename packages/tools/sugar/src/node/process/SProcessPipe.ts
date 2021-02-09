@@ -15,8 +15,7 @@ import {
   ISProcess,
   ISProcessCtor,
   ISProcessObject,
-  ISProcessSettings,
-  ISProcessOptionalSettings
+  ISProcessSettings
 } from './SProcess';
 import { ISEventEmitter } from '../../js/event/SEventEmitter';
 
@@ -56,11 +55,6 @@ import { ISEventEmitter } from '../../js/event/SEventEmitter';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISProcessPipeOptionalSettings {
-  processesSettings?: ISProcessSettings;
-  stdio?: any;
-  [key: string]: any;
-}
 export interface ISProcessPipeSettings {
   processesSettings: ISProcessSettings;
   stdio: any;
@@ -68,11 +62,11 @@ export interface ISProcessPipeSettings {
 }
 
 export interface ISProcessPipeCtorSettings {
-  processPipe?: ISProcessPipeOptionalSettings;
+  processPipe?: Partial<ISProcessPipeSettings>;
 }
 
 export interface ISProcessPipeObject {
-  settings?: ISProcessOptionalSettings;
+  settings?: Partial<ISProcessSettings>;
   params?: any;
   process: ISProcessCtor;
 }
@@ -80,7 +74,7 @@ export interface ISProcessPipeObject {
 export interface ISProcessPipeCtor {
   new (
     processes: ISProcessCtor | ISProcessCtor[],
-    settings: ISProcessPipeOptionalSettings
+    settings: Partial<ISProcessPipeSettings>
   );
 }
 
@@ -160,7 +154,7 @@ class SProcessPipe extends __SEventEmitter implements ISProcessPipe {
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(params = {}, settings: ISProcessPipeOptionalSettings = {}) {
+  run(params = {}, settings: Partial<ISProcessPipeSettings> = {}) {
     // extends settings
     const processPipeSettings = <ISProcessPipeSettings>(
       __deepMerge(this.processPipeSettings, settings)

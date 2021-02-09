@@ -31,7 +31,7 @@ import _deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SNpmBinProcess extends _SProcess {
+export default class SNpmBinProcess extends _SProcess {
   static interfaces = {
     this: _SNpmBinInterface
   };
@@ -83,4 +83,4 @@ export = class SNpmBinProcess extends _SProcess {
       this.bindSPromise(this._buildJsActionStream);
     }, 1000);
   }
-};
+}

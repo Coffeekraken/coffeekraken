@@ -68,4 +68,4 @@ function inputAdditionalEvents(settings = {}) {
   document.addEventListener('change', handleInputAttributes);
   document.addEventListener('keyup', handleInputAttributes);
 }
-export = inputAdditionalEvents;
+export default inputAdditionalEvents;

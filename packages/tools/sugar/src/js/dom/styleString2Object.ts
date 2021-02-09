@@ -44,4 +44,4 @@ function styleString2Object(style) {
   // return the style object
   return obj;
 }
-export = styleString2Object;
+export default styleString2Object;

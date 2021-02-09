@@ -27,4 +27,4 @@ class SPathValidation extends __SValidation {
   }
 }
 
-export = SPathValidation;
+export default SPathValidation;

@@ -34,7 +34,7 @@ import __sugarConfig from '../config/sugar';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SSimpleApp extends __SApp {
+export default class SSimpleApp extends __SApp {
   /**
    * @name              constructor
    * @type              Function
@@ -95,4 +95,4 @@ export = class SSimpleApp extends __SApp {
     // return the container
     return container;
   }
-};
+}

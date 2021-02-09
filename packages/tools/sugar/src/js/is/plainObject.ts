@@ -35,4 +35,4 @@ function plainObject(object) {
   if (object.constructor !== Object) return false;
   return true;
 }
-export = plainObject;
+export default plainObject;

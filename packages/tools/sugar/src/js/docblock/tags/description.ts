@@ -28,4 +28,4 @@ function description(data) {
     .join('\n')
     .trim();
 }
-export = description;
+export default description;

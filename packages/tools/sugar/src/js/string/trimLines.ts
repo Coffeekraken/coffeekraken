@@ -61,4 +61,4 @@ function trimLines(string, settings = {}) {
 
   return string;
 }
-export = trimLines;
+export default trimLines;

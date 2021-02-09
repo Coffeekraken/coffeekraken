@@ -13,10 +13,7 @@ import __STsCompiler from './compile/STsCompiler';
 
 import __SInterface from '../interface/SInterface';
 import __STsFileInterface from './interface/STsFileInterface';
-import {
-  ISTsCompilerParams,
-  ISTsCompilerOptionalParams
-} from './compile/STsCompiler';
+import { ISTsCompilerParams } from './compile/STsCompiler';
 import __STsCompilerParamsInterface from './compile/interface/STsCompilerParamsInterface';
 
 /**
@@ -39,22 +36,18 @@ import __STsCompilerParamsInterface from './compile/interface/STsCompilerParamsI
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-interface ISTsFileCompileOptionalSettings {}
 interface ISTsFileCompileSettings {}
 
-interface ISTsFileOptionalSettings {
-  compile?: ISTsFileCompileOptionalSettings;
-}
 interface ISTsFileSettings {
-  compile: ISTsFileCompileOptionalSettings;
+  compile: Partial<ISTsFileCompileSettings>;
 }
 interface ISTsFileCtorSettings {
-  tsFile?: ISTsFileOptionalSettings;
+  tsFile?: Partial<ISTsFileSettings>;
 }
 interface ISTsFile {
   compile(
-    params: ISTsCompilerOptionalParams,
-    settings?: ISTsFileOptionalSettings
+    params: Partial<ISTsCompilerParams>,
+    settings?: Partial<ISTsFileSettings>
   );
 }
 
@@ -116,8 +109,8 @@ class STsFile extends __SFile implements ISTsFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   compile(
-    params: ISTsCompilerOptionalParams,
-    settings?: ISTsFileOptionalSettings
+    params: Partial<ISTsCompilerParams>,
+    settings?: Partial<ISTsFileSettings>
   ) {
     settings = __deepMerge(this.tsFileSettings, settings);
 

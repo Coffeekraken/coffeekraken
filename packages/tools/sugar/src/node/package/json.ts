@@ -30,4 +30,4 @@ function json(from = process.cwd(), highest = false) {
   if (!__fs.existsSync(path)) return false;
   return require(path);
 }
-export = json;
+export default json;

@@ -9,7 +9,7 @@
 
 import _SInterface from '../../class/SInterface';
 
-export = class SNpmBinInterface extends _SInterface {
+export default class SNpmBinInterface extends _SInterface {
   static definition = {
     action: {
       type: 'String',
@@ -41,4 +41,4 @@ export = class SNpmBinInterface extends _SInterface {
       default: null
     }
   };
-};
+}

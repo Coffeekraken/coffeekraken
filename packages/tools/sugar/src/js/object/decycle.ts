@@ -27,4 +27,4 @@ import { decycle as __decycle } from 'json-cyclic';
 function decycle(obj) {
   return __decycle(obj);
 }
-export = decycle;
+export default decycle;

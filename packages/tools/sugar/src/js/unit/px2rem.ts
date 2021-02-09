@@ -29,4 +29,4 @@ function px2rem(px) {
     parseFloat(getComputedStyle(document.documentElement).fontSize || '16px')
   );
 }
-export = px2rem;
+export default px2rem;

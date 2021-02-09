@@ -45,7 +45,7 @@ class SFsCacheStreamActionInterface extends __SInterface {
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SFsCacheStreamAction extends __SActionsStreamAction {
+export default class SFsCacheStreamAction extends __SActionsStreamAction {
   /**
    * @name            interface
    * @type             Object
@@ -156,4 +156,4 @@ export = class SFsCacheStreamAction extends __SActionsStreamAction {
       });
     });
   }
-};
+}

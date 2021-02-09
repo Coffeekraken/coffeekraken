@@ -7,7 +7,7 @@ interface IProcessRunChildOptions {
   processPath: string;
 }
 
-export = (stringArgs = '') => {
+export default (stringArgs = '') => {
   const args: IProcessRunChildOptions = __parseArgs(stringArgs);
   if (!args.processPath) {
     throw `Sorry but to use this endpont you have to specify at least a "--processPath" parameter...`;

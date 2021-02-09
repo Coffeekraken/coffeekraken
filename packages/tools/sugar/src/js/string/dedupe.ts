@@ -40,4 +40,4 @@ function dedupe(str, statement) {
     .reverse()
     .join('');
 }
-export = dedupe;
+export default dedupe;

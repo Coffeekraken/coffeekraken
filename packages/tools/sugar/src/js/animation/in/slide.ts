@@ -8,7 +8,7 @@ import __querySelectorLive from '../../dom/querySelectorLive';
  * @todo        documentation
  */
 
-export = (() => {
+export default (() => {
   __querySelectorLive('[slide-in]', ($item) => {
     // generate a unique id for this node
     const uniqClass = `slide-in-${__uniqid()}`;

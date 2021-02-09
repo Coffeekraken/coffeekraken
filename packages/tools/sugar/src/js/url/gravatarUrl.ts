@@ -30,4 +30,4 @@ import __md5 from '../crypt/md5';
 function gravatarUrl(email, size = 200) {
   return `https://www.gravatar.com/avatar/${__md5.encrypt(email)}?s=${size}`;
 }
-export = gravatarUrl;
+export default gravatarUrl;

@@ -34,4 +34,4 @@ function availableEasingsArray() {
     'easeOutQuint'
   ];
 }
-export = availableEasingsArray;
+export default availableEasingsArray;

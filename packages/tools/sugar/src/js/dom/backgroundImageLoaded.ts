@@ -60,4 +60,4 @@ function backgroundImageLoaded($elm) {
   promise.__$img = $img;
   return promise;
 }
-export = backgroundImageLoaded;
+export default backgroundImageLoaded;

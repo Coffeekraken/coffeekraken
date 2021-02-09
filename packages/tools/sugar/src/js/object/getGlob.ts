@@ -35,7 +35,7 @@ import __unquote from '../string/unquote';
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = function getGlob(obj, glob, settings = {}) {
+export default function getGlob(obj, glob, settings = {}) {
   settings = {
     deepize: true,
     ...settings
@@ -57,7 +57,7 @@ export = function getGlob(obj, glob, settings = {}) {
 
   if (settings.deepize === true) return __deepize(resultObj);
   return resultObj;
-};
+}
 
 // console.log(
 //   getGlob(

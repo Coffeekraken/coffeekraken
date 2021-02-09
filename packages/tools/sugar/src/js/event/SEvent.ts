@@ -29,7 +29,7 @@
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 import customEvent from 'custom-event';
-export = customEvent;
+export default customEvent;
 
 /**
  * @name                        constructor

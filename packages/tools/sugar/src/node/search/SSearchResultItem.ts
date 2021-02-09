@@ -32,7 +32,7 @@ import __namespace from '../package/namespace';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SSearchResultItem {
+export default class SSearchResultItem {
   /**
    * @name        _settings
    * @type        Object
@@ -148,4 +148,4 @@ export = class SSearchResultItem {
       action: this.action.toJson()
     };
   }
-};
+}

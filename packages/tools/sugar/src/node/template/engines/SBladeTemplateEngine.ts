@@ -39,7 +39,7 @@ import __unique from '../../array/unique';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SBladeTemplateEngine extends __STemplateEngine {
+export default class SBladeTemplateEngine extends __STemplateEngine {
   /**
    * @name      input
    * @type      String
@@ -194,4 +194,4 @@ export = class SBladeTemplateEngine extends __STemplateEngine {
       }
     );
   }
-};
+}

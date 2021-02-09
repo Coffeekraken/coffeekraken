@@ -35,4 +35,4 @@ function getHtmlhtmlClassFromHtmlClass(htmlClass) {
 
   return false;
 }
-export = getHtmlhtmlClassFromHtmlClass;
+export default getHtmlhtmlClassFromHtmlClass;

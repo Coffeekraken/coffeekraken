@@ -344,4 +344,4 @@ function innerHtml(node, content, settings = {}) {
     }
   });
 }
-export = innerHtml;
+export default innerHtml;

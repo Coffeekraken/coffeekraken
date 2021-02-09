@@ -50,4 +50,4 @@ function files(text) {
     br: (tag, content) => '\n'
   });
 }
-export = files;
+export default files;

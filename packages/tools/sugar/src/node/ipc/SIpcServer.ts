@@ -292,4 +292,4 @@ class SIpcServer extends __SPromise {
   // }
 }
 
-export = SIpcServer;
+export default SIpcServer;

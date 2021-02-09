@@ -50,4 +50,4 @@ function stringify(obj, replacerOrSettings = null, settings = {}) {
   if (settings.decircular) newObj = decycle(newObj);
   return JSON.stringify(newObj, replacer, settings.space);
 }
-export = stringify;
+export default stringify;

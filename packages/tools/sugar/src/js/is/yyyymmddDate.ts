@@ -31,4 +31,4 @@ function isYyyymmddDate(date) {
     date
   );
 }
-export = isYyyymmddDate;
+export default isYyyymmddDate;

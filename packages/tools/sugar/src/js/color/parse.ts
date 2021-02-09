@@ -61,4 +61,4 @@ function parse(color, format = 'rgba') {
       break;
   }
 }
-export = parse;
+export default parse;

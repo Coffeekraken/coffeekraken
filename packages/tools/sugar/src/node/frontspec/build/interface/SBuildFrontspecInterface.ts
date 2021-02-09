@@ -21,7 +21,7 @@ import __deepMerge from '../../../object/deepMerge';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SBuildScssInterface extends __SInterface {
+export default class SBuildScssInterface extends __SInterface {
   static definition = {
     outputDir: {
       type: 'String',
@@ -63,4 +63,4 @@ export = class SBuildScssInterface extends __SInterface {
       level: 1
     }
   };
-};
+}

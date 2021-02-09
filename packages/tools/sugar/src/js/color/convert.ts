@@ -82,4 +82,4 @@ function convert(input, format = 'rgba') {
   // if nothing supported
   return undefined;
 }
-export = convert;
+export default convert;

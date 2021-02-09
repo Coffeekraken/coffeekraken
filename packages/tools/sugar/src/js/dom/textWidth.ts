@@ -72,4 +72,4 @@ function textWidth(source) {
   // return the width
   return width;
 }
-export = textWidth;
+export default textWidth;

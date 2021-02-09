@@ -29,7 +29,7 @@
 interface IAsyncForEach {
   (value: any, index: number, array: any[]): void;
 }
-export = async function asyncForEach(
+export default async function asyncForEach(
   array: any[],
   asyncFn: IAsyncForEach
 ): Promise<any> {
@@ -39,4 +39,4 @@ export = async function asyncForEach(
     }
     resolve();
   });
-};
+}

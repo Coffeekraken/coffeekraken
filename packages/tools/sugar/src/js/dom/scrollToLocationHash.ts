@@ -27,11 +27,7 @@ import __easeing from '../easing/easeInOutQuint';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) (https://olivierbossel.com)
  */
-function scrollToLocationHash(
-  duration = 500,
-  offset = 0,
-  easing = __easeing
-) {
+function scrollToLocationHash(duration = 500, offset = 0, easing = __easeing) {
   // check if we have an hash in the url
   const hash = document.location.hash;
 
@@ -52,4 +48,4 @@ function scrollToLocationHash(
   // scroll to target
   __scrollTo(targetElm, duration, easing, offset, 'top');
 }
-export = scrollToLocationHash;
+export default scrollToLocationHash;

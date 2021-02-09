@@ -23,7 +23,7 @@
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = (value) => {
+export default (value) => {
   if (typeof value !== 'string') return value;
   value = value.split('⠀').join('').trim();
   try {

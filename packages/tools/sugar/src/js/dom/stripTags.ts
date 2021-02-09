@@ -27,4 +27,4 @@ function stripTags(html) {
   tmp.innerHTML = html;
   return tmp.textContent || tmp.innerText || '';
 }
-export = stripTags;
+export default stripTags;

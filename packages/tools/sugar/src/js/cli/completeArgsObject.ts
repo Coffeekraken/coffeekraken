@@ -60,4 +60,4 @@ function completeArgsObject(argsObj, settings = {}) {
   // return the argsObj
   return __deepize(argsObj);
 }
-export = completeArgsObject;
+export default completeArgsObject;

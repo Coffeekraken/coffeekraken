@@ -15,7 +15,6 @@ export interface ISStdioCtorSettings {
   stdio?: ISStdioSettings;
 }
 
-export interface ISStdioOptionalSettings {}
 export interface ISStdioSettings {}
 
 export interface ISStdioCtor {
@@ -297,7 +296,7 @@ class SStdio extends __SClass implements ISStdio {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  registerSource(source, settings: ISStdioOptionalSettings) {
+  registerSource(source, settings: Partial<ISStdioSettings>) {
     settings = __deepMerge(
       this._settings.stdio || {},
       settings

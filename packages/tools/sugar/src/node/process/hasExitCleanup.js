@@ -1,5 +1,6 @@
 "use strict";
 // @ts-nocheck
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                hasExitCleanup
  * @namespace           sugar.node.process
@@ -29,5 +30,5 @@ function hasExitCleanup() {
         ? process.env.EXIT_CLEANUP
         : false;
 }
-module.exports = hasExitCleanup;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaGFzRXhpdENsZWFudXAuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJoYXNFeGl0Q2xlYW51cC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsY0FBYztJQUNyQixPQUFPLE9BQU8sQ0FBQyxHQUFHLENBQUMsWUFBWSxLQUFLLFNBQVM7UUFDM0MsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsWUFBWTtRQUMxQixDQUFDLENBQUMsS0FBSyxDQUFDO0FBQ1osQ0FBQztBQUNELGlCQUFTLGNBQWMsQ0FBQyJ9
+exports.default = hasExitCleanup;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaGFzRXhpdENsZWFudXAuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJoYXNFeGl0Q2xlYW51cC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLGNBQWM7SUFDckIsT0FBTyxPQUFPLENBQUMsR0FBRyxDQUFDLFlBQVksS0FBSyxTQUFTO1FBQzNDLENBQUMsQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLFlBQVk7UUFDMUIsQ0FBQyxDQUFDLEtBQUssQ0FBQztBQUNaLENBQUM7QUFDRCxrQkFBZSxjQUFjLENBQUMifQ==

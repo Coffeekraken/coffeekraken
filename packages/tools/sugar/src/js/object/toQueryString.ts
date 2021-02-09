@@ -38,4 +38,4 @@ function toQueryString(obj) {
       .join('&')
   );
 }
-export = toQueryString;
+export default toQueryString;

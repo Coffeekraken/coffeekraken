@@ -18,7 +18,7 @@
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = {
+export default {
   type: 'include.inline',
   prefix: /@include\s[a-zA-Z0-9-_\.]+/,
   suffix: /;/,

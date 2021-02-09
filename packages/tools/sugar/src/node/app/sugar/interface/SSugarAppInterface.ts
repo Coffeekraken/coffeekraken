@@ -35,4 +35,4 @@ class SSugarAppInterface extends __SInterface {
   };
 }
 
-export = SSugarAppInterface;
+export default SSugarAppInterface;

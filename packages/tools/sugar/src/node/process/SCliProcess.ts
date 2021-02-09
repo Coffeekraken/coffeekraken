@@ -4,11 +4,7 @@ import __onProcessExit from './onProcessExit';
 import __spawn from './spawn';
 import __deepMerge from '../object/deepMerge';
 
-import {
-  ISProcess,
-  ISProcessSettings,
-  ISProcessOptionalSettings
-} from './SProcess';
+import { ISProcess, ISProcessSettings } from './SProcess';
 import { ISpawnSettings } from './spawn';
 
 /**
@@ -40,10 +36,6 @@ export interface ISCliProcessCtorSettings {
   cliProcess?: ISCliProcessSettings;
 }
 
-export interface ISCliProcessOptionalSettings {
-  definition?: any;
-  spawn?: any;
-}
 export interface ISCliProcessSettings {
   definition: any;
   spawn: any;
@@ -124,7 +116,7 @@ class SCliProcess extends __SProcess implements ISCliProcess {
    */
   process(
     params: Record<string, unknown>,
-    settings: ISCliProcessOptionalSettings = {}
+    settings: Partial<ISCliProcessSettings> = {}
   ): Promise<any> {
     const cliProcessSettings = <ISCliProcessSettings>(
       __deepMerge(this.cliProcessSettings, settings)

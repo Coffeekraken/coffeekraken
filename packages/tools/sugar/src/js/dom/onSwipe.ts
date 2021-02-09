@@ -80,4 +80,4 @@ function onSwipe(elm, cb, threshold = 100) {
     }
   }
 }
-export = onSwipe;
+export default onSwipe;

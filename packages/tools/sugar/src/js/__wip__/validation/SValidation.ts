@@ -69,4 +69,4 @@ class SValidation {
    */
 }
 
-export = SValidation;
+export default SValidation;

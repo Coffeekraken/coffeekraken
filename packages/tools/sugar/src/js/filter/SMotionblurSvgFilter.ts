@@ -26,7 +26,7 @@ import forceRedraw from '../dom/forceRedraw';
  * @since         1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SMotionblurSvgFilter extends SSvgFilter {
+export default class SMotionblurSvgFilter extends SSvgFilter {
   /**
    * @name        amount
    * @type        Number

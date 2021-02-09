@@ -36,4 +36,4 @@ function toPlainObject(theClass) {
     return classAsObj;
   }, {});
 }
-export = toPlainObject;
+export default toPlainObject;

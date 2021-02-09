@@ -39,4 +39,4 @@ function extractValues(arrayOfObjects, keyName) {
   });
   return finalArray;
 }
-export = extractValues;
+export default extractValues;

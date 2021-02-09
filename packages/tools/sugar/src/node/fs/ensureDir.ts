@@ -31,4 +31,4 @@ import __fs from 'fs-extra';
 function ensureDir(dir) {
   return __fs.ensureDir(dir);
 }
-export = ensureDir;
+export default ensureDir;

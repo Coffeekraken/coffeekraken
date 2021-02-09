@@ -32,4 +32,4 @@ import __fs from 'fs-extra';
 function copy(src, dest) {
   return __fs.copy(src, dest);
 }
-export = copy;
+export default copy;

@@ -77,4 +77,4 @@ function addEventListener(
 
   return promise;
 }
-export = addEventListener;
+export default addEventListener;

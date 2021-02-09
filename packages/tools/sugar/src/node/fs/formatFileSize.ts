@@ -30,4 +30,4 @@ import __filesize from 'filesize';
 function formatFileSize(size, settings = {}) {
   return __filesize(size, settings);
 }
-export = formatFileSize;
+export default formatFileSize;

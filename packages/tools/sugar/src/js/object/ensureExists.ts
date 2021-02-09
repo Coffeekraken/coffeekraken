@@ -29,7 +29,7 @@ import __set from './set';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = (obj, path, value = {}) => {
+export default (obj, path, value = {}) => {
   const v = __get(obj, path);
   if (v === undefined) {
     __set(obj, path, value);

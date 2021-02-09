@@ -30,4 +30,4 @@ import __fs from 'fs-extra';
 function remove(path) {
   return __fs.remove(path);
 }
-export = remove;
+export default remove;

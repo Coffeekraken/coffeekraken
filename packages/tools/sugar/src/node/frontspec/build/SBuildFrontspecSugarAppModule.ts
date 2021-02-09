@@ -23,7 +23,7 @@ import __SBuildFrontspecProcess from './SBuildFrontspecProcess';
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export = class SBuildFrontspecSugarAppModule extends __SSugarAppModule {
+export default class SBuildFrontspecSugarAppModule extends __SSugarAppModule {
   static interfaces = {
     this: __SBuildFrontspecInterface
   };
@@ -58,4 +58,4 @@ export = class SBuildFrontspecSugarAppModule extends __SSugarAppModule {
     );
     return super.start(pro);
   }
-};
+}

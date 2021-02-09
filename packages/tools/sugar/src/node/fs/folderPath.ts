@@ -37,4 +37,4 @@ function folderPath(path, checkExistence = false) {
   }
   return parts.slice(0, -1).join('/');
 }
-export = folderPath;
+export default folderPath;

@@ -30,4 +30,4 @@ function isMobile(ua = navigator.userAgent) {
   const md = new MobileDetect(ua);
   return md.mobile() !== null;
 }
-export = isMobile;
+export default isMobile;

@@ -148,4 +148,4 @@ function validateValue(value, definition, settings = {}) {
   }
   return issueObj;
 }
-export = validateValue;
+export default validateValue;

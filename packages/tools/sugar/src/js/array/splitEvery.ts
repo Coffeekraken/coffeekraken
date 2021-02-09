@@ -28,4 +28,4 @@ function splitEvery(array: any[], every: number): any[] {
   }
   return finalArray;
 }
-export = splitEvery;
+export default splitEvery;

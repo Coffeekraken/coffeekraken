@@ -70,4 +70,4 @@ function parseAndFormatLog(
   if (isArray === true) return logObjArray;
   return logObjArray[0];
 }
-export = parseAndFormatLog;
+export default parseAndFormatLog;

@@ -32,7 +32,7 @@ import __localDir from '../../path/localDir';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class SConfigFolderAdapter extends __SConfigAdapter {
+export default class SConfigFolderAdapter extends __SConfigAdapter {
   constructor(settings = {}) {
     super(settings);
     this.settings.foldername = this.settings.foldername.replace(
@@ -197,4 +197,4 @@ export = class SConfigFolderAdapter extends __SConfigAdapter {
 
     return true;
   }
-};
+}

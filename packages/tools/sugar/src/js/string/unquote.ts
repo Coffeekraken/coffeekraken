@@ -41,4 +41,4 @@ function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
   // return the processed string
   return string;
 }
-export = unquote;
+export default unquote;

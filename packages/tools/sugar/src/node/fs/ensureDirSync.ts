@@ -30,4 +30,4 @@ import __fs from 'fs-extra';
 function ensureDirSync(dir) {
   __fs.ensureDirSync(dir);
 }
-export = ensureDirSync;
+export default ensureDirSync;

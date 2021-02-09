@@ -4,6 +4,7 @@
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 const SRequest_1 = __importDefault(require("./SRequest"));
 /**
  * @name                              request
@@ -45,5 +46,5 @@ function request(settings = {}) {
     const request = new SRequest_1.default(settings);
     return request.send();
 }
-module.exports = request;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVxdWVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlcXVlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFDZCxVQUFVOzs7O0FBRVYsMERBQW9DO0FBRXBDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1DRztBQUNILFNBQVMsT0FBTyxDQUFDLFFBQVEsR0FBRyxFQUFFO0lBQzVCLE1BQU0sT0FBTyxHQUFHLElBQUksa0JBQVUsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUN6QyxPQUFPLE9BQU8sQ0FBQyxJQUFJLEVBQUUsQ0FBQztBQUN4QixDQUFDO0FBQ0QsaUJBQVMsT0FBTyxDQUFDIn0=
+exports.default = request;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVxdWVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlcXVlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFDZCxVQUFVOzs7OztBQUVWLDBEQUFvQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FtQ0c7QUFDSCxTQUFTLE9BQU8sQ0FBQyxRQUFRLEdBQUcsRUFBRTtJQUM1QixNQUFNLE9BQU8sR0FBRyxJQUFJLGtCQUFVLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDekMsT0FBTyxPQUFPLENBQUMsSUFBSSxFQUFFLENBQUM7QUFDeEIsQ0FBQztBQUNELGtCQUFlLE9BQU8sQ0FBQyJ9

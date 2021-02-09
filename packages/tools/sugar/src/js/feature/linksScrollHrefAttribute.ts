@@ -48,4 +48,4 @@ function linksScrollHrefAttribute(settings = {}) {
     });
   });
 }
-export = linksScrollHrefAttribute;
+export default linksScrollHrefAttribute;

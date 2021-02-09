@@ -2,7 +2,7 @@
 
 import __SBuildDocMapProcess from '../../node/docMap/SBuildDocMapProcess';
 
-export = (stringArgs = '') => {
+export default (stringArgs = '') => {
   const pro = new __SBuildDocMapProcess(
     {},
     {

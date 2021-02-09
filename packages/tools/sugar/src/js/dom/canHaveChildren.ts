@@ -37,4 +37,4 @@ function canHaveChildren(element) {
     return true;
   return false;
 }
-export = canHaveChildren;
+export default canHaveChildren;

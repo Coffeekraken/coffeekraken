@@ -20,7 +20,7 @@ import __sugarConfig from '../../../config/sugar';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export = class STemplateEngineInterface extends __SInterface {
+export default class STemplateEngineInterface extends __SInterface {
   static definition = {
     input: {
       type: 'String',
@@ -46,4 +46,4 @@ export = class STemplateEngineInterface extends __SInterface {
         'Main render method that must return an SPromise instance resolved once the rendering process has been successfully completed'
     }
   };
-};
+}

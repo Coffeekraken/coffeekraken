@@ -56,4 +56,4 @@ function sugar(dotPath) {
     throwErrorOnUndefinedConfig: false
   });
 }
-export = sugar;
+export default sugar;

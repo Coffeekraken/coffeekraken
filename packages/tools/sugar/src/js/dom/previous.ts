@@ -38,4 +38,4 @@ function previous(elm, selector) {
   }
   return false;
 }
-export = previous;
+export default previous;

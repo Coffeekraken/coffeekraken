@@ -79,9 +79,11 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
           return;
         if (this._defaultConfig[file.replace('.config.js', '')] !== undefined)
           return;
-        this._defaultConfig[
-          file.replace('.config.js', '')
-        ] = require(`${this.settings.defaultConfigPath}/${file}`);
+        const configData = require(`${this.settings.defaultConfigPath}/${file}`);
+        this._defaultConfig[file.replace('.config.js', '')] =
+          Object.keys(configData).length === 1 && configData.default
+            ? configData.default
+            : configData;
       });
       process.env[
         `SConfigFolderAdapter-${this.settings.defaultConfigPath}`
@@ -110,9 +112,11 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
       __fs.readdirSync(this.settings.appConfigPath).forEach((file) => {
         if (!file.includes(this.settings.filename.replace('[name]', '')))
           return;
-        this._appConfig[
-          file.replace('.config.js', '')
-        ] = require(`${this.settings.appConfigPath}/${file}`);
+        const configData = require(`${this.settings.appConfigPath}/${file}`);
+        this._appConfig[file.replace('.config.js', '')] =
+          Object.keys(configData).length === 1 && configData.default
+            ? configData.default
+            : configData;
       });
       process.env[
         `SConfigFolderAdapter-${this.settings.appConfigPath}`
@@ -145,9 +149,11 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
       __fs.readdirSync(this.settings.userConfigPath).forEach((file) => {
         if (!file.includes(this.settings.filename.replace('[name]', '')))
           return;
-        this._userConfig[
-          file.replace('.config.js', '')
-        ] = require(`${this.settings.userConfigPath}/${file}`);
+        const configData = require(`${this.settings.userConfigPath}/${file}`);
+        this._userConfig[file.replace('.config.js', '')] =
+          Object.keys(configData).length === 1 && configData.default
+            ? configData.default
+            : configData;
       });
       process.env[
         `SConfigFolderAdapter-${this.settings.userConfigPath}`

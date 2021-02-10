@@ -77,7 +77,11 @@ export default class SConfigFsAdapter extends __SConfigAdapter {
       this.settings.defaultConfigPath &&
       __fs.existsSync(this.settings.defaultConfigPath)
     ) {
-      this._defaultConfig = require(`${this.settings.defaultConfigPath}`);
+      const configData = require(`${this.settings.defaultConfigPath}`);
+      this._defaultConfig =
+        Object.keys(configData).length === 1 && configData.default
+          ? configData.default
+          : configData;
     }
 
     // load the app config if exists
@@ -85,7 +89,11 @@ export default class SConfigFsAdapter extends __SConfigAdapter {
       this.settings.appConfigPath &&
       __fs.existsSync(this.settings.appConfigPath)
     ) {
-      this._appConfig = require(`${this.settings.appConfigPath}`);
+      const configData = require(`${this.settings.appConfigPath}`);
+      this._appConfig =
+        Object.keys(configData).length === 1 && configData.default
+          ? configData.default
+          : configData;
     }
 
     // load the user config
@@ -93,7 +101,11 @@ export default class SConfigFsAdapter extends __SConfigAdapter {
       this.settings.userConfigPath &&
       __fs.existsSync(this.settings.userConfigPath)
     ) {
-      this._userConfig = require(`${this.settings.userConfigPath}`);
+      const configData = require(`${this.settings.userConfigPath}`);
+      this._userConfig =
+        Object.keys(configData).length === 1 && configData.default
+          ? configData.default
+          : configData;
     }
 
     // mix the configs and save them in the instance

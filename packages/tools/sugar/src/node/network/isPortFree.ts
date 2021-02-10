@@ -1,5 +1,7 @@
 // @ts-nocheck
 
+import server from 'http';
+
 /**
  * @name            isPortFree
  * @namespace       sugar.node.http
@@ -26,7 +28,6 @@
  */
 function isPortFree(port) {
   return new Promise(async (resolve) => {
-    const server = require('http');
     server
       .createServer()
       .listen(port, () => {

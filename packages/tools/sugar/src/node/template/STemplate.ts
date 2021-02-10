@@ -208,7 +208,8 @@ class STemplate extends __SClass implements ISTemplate {
       );
     }
     // get the engine class
-    const EngineClass = require(enginePath);
+    let EngineClass = require(enginePath);
+    EngineClass = EngineClass.default || EngineClass;
     // make sure we have names defined
     if (
       !EngineClass.names ||
@@ -470,7 +471,8 @@ class STemplate extends __SClass implements ISTemplate {
             for (let i = 0; i < Object.keys(STemplate.engines).length; i++) {
               const enginePath =
                 STemplate.engines[Object.keys(STemplate.engines)[i]];
-              const EngineClass = require(enginePath);
+              let EngineClass = require(enginePath);
+              EngineClass = EngineClass.default || EngineClass;
               if (
                 EngineClass.input === 'string' &&
                 EngineClass.canRender(this._templateString)

@@ -39,4 +39,4 @@ function example(data) {
     .filter((item) => item !== null);
   return data;
 }
-export default example;
+export = example;

@@ -41,10 +41,7 @@ function sugar(dotPath) {
           name: 'sugar',
           foldername: '.sugar',
           filename: '[name].config.js',
-          defaultConfigPath: __path.resolve(
-            __dirname,
-            '../../../.sugar-default'
-          ),
+          defaultConfigPath: __path.resolve(__dirname, '../../config'),
           appConfigPath: `${__packageRoot(process.cwd())}/[foldername]`,
           userConfigPath: `${__packageRoot(process.cwd())}/.local/[foldername]`
         })

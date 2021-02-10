@@ -62,7 +62,10 @@ const fn = function (args = {}) {
           );
         }
         // register the middleware
-        app.use(require(middleware.path)(middleware.settings || {}));
+        const middlewareData = require(middleware.path);
+        app.use(
+          (middlewareData.default || middlewareData)(middleware.settings || {})
+        );
       }
       // loop on handlers
       Object.keys(settings.handlers).forEach(async (pageName) => {
@@ -82,7 +85,8 @@ const fn = function (args = {}) {
             )}</cyan>" does not exists...`
           });
         } else {
-          const handlerFn = require(handlerPath);
+          let handlerFn = require(handlerPath);
+          handlerFn = handlerFn.default || handlerFn;
           const method = handlerSettings.method || 'get';
           let slug = handlerSettings.slug || '*';
           const extension = handlerSettings.extension

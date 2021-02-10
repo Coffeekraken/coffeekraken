@@ -1,24 +1,4 @@
 "use strict";
-// @ts-nocheck
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -32,19 +12,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
-const SCompiler_1 = __importDefault(require("../../compiler/SCompiler"));
-const SPromise_1 = __importDefault(require("../../promise/SPromise"));
-const absolute_1 = __importDefault(require("../../path/absolute"));
-const glob_1 = __importDefault(require("../../is/glob"));
-const glob_2 = __importDefault(require("glob"));
 const path_1 = __importDefault(require("path"));
-const SDuration_1 = __importDefault(require("../../time/SDuration"));
-const filter_1 = __importDefault(require("../../object/filter"));
-const resolve_1 = __importDefault(require("resolve"));
-const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
-const buildInNodeModules_1 = __importDefault(require("../../module/buildInNodeModules"));
-const __esbuild = __importStar(require("esbuild"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+const SPromise_1 = __importDefault(require("../../promise/SPromise"));
+const filename_1 = __importDefault(require("../../fs/filename"));
+const fs_1 = __importDefault(require("fs"));
+const glob_1 = __importDefault(require("glob"));
+const is_glob_1 = __importDefault(require("is-glob"));
+const SCompiler_1 = __importDefault(require("../../compiler/SCompiler"));
+const absolute_1 = __importDefault(require("../../path/absolute"));
+const SJsFile_1 = __importDefault(require("../SJsFile"));
+const express_1 = __importDefault(require("express"));
 const SJsCompilerParamsInterface_1 = __importDefault(require("./interface/SJsCompilerParamsInterface"));
 /**
  * @name                SJsCompiler
@@ -53,54 +31,54 @@ const SJsCompilerParamsInterface_1 = __importDefault(require("./interface/SJsCom
  * @extends             SCompiler
  * @status              wip
  *
- * This class wrap the "esbuild" compiler with some additional features which are:
+ * This class wrap the "js" compiler with some additional features which are:
  *
  * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
  *
- * @param         {Partial<ISJsCompilerParams>}      [initialParams={}]      Some parameters to use for your compilation process
+ * @param           {Partial<ISJsCompilerParams>}        [initialParams={}]      Some initial parameters to configure your compilation process. Can be overrided thgouth the ```compile``` method
  * @param           {ISJsCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
  *
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ * @todo            check for map output when no file path
  *
  * @example         js
- * import SJsCompiler from '@coffeekraken/sugar/node/scss/compile/SJsCompiler';
+ * import SJsCompiler from '@coffeekraken/sugar/node/js/compile/SJsCompiler';
  * const compiler = new SJsCompiler();
- * const compiledFile = await compiler.compile('my/cool/code.esbuild');
+ * const compiledFile = await compiler.compile('my/cool/code.js');
  *
- * @see             https://www.npmjs.com/package/esbuild
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SJsCompiler extends SCompiler_1.default {
     /**
-     * @name      constructor
-     * @type      Function
+     * @name            constructor
+     * @type             Function
      * @constructor
      *
      * Constructor
      *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @since           2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(initialParams, settings) {
         super(initialParams, deepMerge_1.default({
-            esbuildCompiler: {}
+            jsCompiler: {}
         }, settings || {}));
     }
     /**
-     * @name      jsCompilerSettings
-     * @type      ISJsCompilerSettings
+     * @name          jsCompilerSettings
+     * @type          ISJsCompilerSettings
      * @get
      *
-     * Access to the esbuild compiler settings
+     * Access the js compiler settings
      *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get jsCompilerSettings() {
-        return this._settings.esbuildCompiler;
+        return this._settings.jsCompiler;
     }
     /**
      * @name              _compile
@@ -118,116 +96,126 @@ class SJsCompiler extends SCompiler_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _compile(params, settings = {}) {
-        return new SPromise_1.default(({ resolve, reject, pipe, emit }) => {
-            (() => __awaiter(this, void 0, void 0, function* () {
-                settings = deepMerge_1.default(this.jsCompilerSettings, {}, settings);
-                let input = Array.isArray(params.input) ? params.input : [params.input];
-                // prod
-                if (params.prod || params.bundle) {
-                    params.minify = true;
-                    params.stripComments = true;
-                    params.map = false;
-                }
-                let esbuildParams = Object.assign(Object.assign(Object.assign({ charset: 'utf8', format: 'iife', logLevel: 'silent' }, filter_1.default(params, (key, value) => {
-                    if (Array.isArray(value) && !value.length)
-                        return false;
-                    return (this.constructor._esbuildAcceptedSettings.indexOf(key) !==
-                        -1);
-                })), { bundle: params.bundle, write: params.save, 
-                    // outfile: 'out.js',
-                    outdir: params.outputDir, minify: params.minify, sourcemap: params.map }), params.esbuild);
-                let filesPaths = [];
-                // make input absolute
-                input = absolute_1.default(input);
-                // process inputs
-                input.forEach((inputStr) => {
-                    if (glob_1.default(inputStr)) {
-                        filesPaths = [...filesPaths, ...glob_2.default.sync(inputStr)];
-                    }
-                    else {
-                        filesPaths.push(inputStr);
-                    }
-                });
-                // set the entrypoints
-                esbuildParams.entryPoints = filesPaths;
-                console.log(esbuildParams);
-                const esbuildService = yield __esbuild.startService();
-                const esbuildResult = yield esbuildService.build(esbuildParams);
-                console.log(esbuildResult);
-                const resultsObj = {};
-                const duration = new SDuration_1.default();
-                // for (let i = 0; i < filesPaths.length; i++) {
-                //   let filePath = filesPaths[i];
-                //   let file = new __SJsFile(filePath, {
-                //     jsFile: {
-                //       compile: settings
-                //     }
-                //   });
-                //   pipe(file);
-                //   const resPromise = file.compile(params, {
-                //     ...settings
-                //   });
-                //   const res = await resPromise;
-                //   resultsObj[file.path] = res;
-                // }
-                // resolve with the compilation result
-                if (!params.watch) {
-                    resolve(Object.assign({ files: resultsObj }, duration.end()));
+        return new SPromise_1.default(({ resolve, reject, pipe, emit }) => __awaiter(this, void 0, void 0, function* () {
+            const compileSettings = deepMerge_1.default(this.jsCompilerSettings, {}, settings);
+            let input = Array.isArray(params.input) ? params.input : [params.input];
+            // prod
+            if (params.prod) {
+                params.minify = true;
+                params.stripComments = true;
+                params.map = false;
+            }
+            const resultsObj = {};
+            let filesPaths = [];
+            // make input absolute
+            input = absolute_1.default(input);
+            // process inputs
+            input.forEach((inputStr) => {
+                if (is_glob_1.default(inputStr)) {
+                    filesPaths = [...filesPaths, ...glob_1.default.sync(inputStr)];
                 }
                 else {
-                    emit('files', Object.assign({ files: resultsObj }, duration.end()));
+                    filesPaths.push(inputStr);
                 }
-            }))();
-        });
+            });
+            const serverPromise = new Promise((serverResolve, serverReject) => {
+                if (params.serve && !SJsCompiler._serveServer) {
+                    const server = express_1.default();
+                    filesPaths.forEach((path) => {
+                        const filename = filename_1.default(path);
+                        const relPath = path_1.default.relative(params.rootDir, path);
+                        const destPath = path_1.default.resolve(params.outputDir, relPath);
+                        server.get(`/${filename}`, (req, res) => {
+                            const content = fs_1.default.readFileSync(destPath, 'utf8');
+                            res.type('text/javascript');
+                            res.status(200);
+                            res.send(content);
+                        });
+                    });
+                    const serverLogStrArray = [
+                        `Your <yellow>Js</yellow> server is <green>up and running</green>:`,
+                        '',
+                        `- Hostname        : <yellow>${params.host}</yellow>`,
+                        `- Port            : <yellow>${params.port}</yellow>`,
+                        `- URL's           : <cyan>http://${params.host}:${params.port}</cyan>`
+                    ];
+                    filesPaths.forEach((path) => {
+                        serverLogStrArray.push(`                  : <cyan>${`http://${params.host}:${params.port}/${filename_1.default(path)}`.trim()} </cyan>`);
+                    });
+                    server
+                        .listen(params.port, () => {
+                        emit('log', {
+                            type: 'time'
+                        });
+                        emit('log', {
+                            clear: true,
+                            mb: 1,
+                            type: 'heading',
+                            value: serverLogStrArray.join('\n')
+                        });
+                        setTimeout(() => {
+                            serverResolve(true);
+                        }, 500);
+                    })
+                        .on('error', (e) => {
+                        SJsCompiler._serveServer = undefined;
+                        const string = e.toString();
+                        reject(string);
+                    });
+                    SJsCompiler._serveServer = server;
+                }
+                else {
+                    serverResolve(true);
+                }
+            });
+            yield serverPromise;
+            const startTime = Date.now();
+            for (let i = 0; i < filesPaths.length; i++) {
+                let filePath = filesPaths[i];
+                let file = new SJsFile_1.default(filePath, {
+                    jsFile: {
+                        compile: compileSettings
+                    }
+                });
+                pipe(file);
+                // @todo    {Clean}     remove the ts-ignore
+                // @ts-ignore
+                const resPromise = file.compile(params, compileSettings);
+                const res = yield resPromise;
+                resultsObj[file.path] = res;
+            }
+            // aggregate the compiled files css
+            let aggregateStrArray = [];
+            Object.keys(resultsObj).forEach((path) => {
+                const jsRes = resultsObj[path];
+                aggregateStrArray.push(jsRes.js);
+            });
+            // resolve with the compilation result
+            if (!params.watch) {
+                resolve({
+                    files: resultsObj,
+                    js: aggregateStrArray.join('\n'),
+                    startTime: startTime,
+                    endTime: Date.now(),
+                    duration: Date.now() - startTime
+                });
+            }
+            else {
+                emit('files', {
+                    files: resultsObj,
+                    js: aggregateStrArray.join('\n'),
+                    startTime: startTime,
+                    endTime: Date.now(),
+                    duration: Date.now() - startTime
+                });
+            }
+        }));
     }
 }
 SJsCompiler.interfaces = {
     params: {
         apply: false,
         class: SJsCompilerParamsInterface_1.default
-    }
-};
-/**
- * @name            _resolverPlugin
- * @type            Object
- * @static
- *
- * ESBuild resolver plugin
- *
- * @since       2.0.0
- */
-SJsCompiler._resolverPlugin = {
-    name: 'SJsFileEsBuildResolvePlugin',
-    setup(build) {
-        Object.keys(buildInNodeModules_1.default).forEach((path) => {
-            const builtInObj = buildInNodeModules_1.default[path];
-            if (builtInObj.polyfill && builtInObj.polyfill.browser) {
-                build.onResolve({ filter: new RegExp(`^${path}$`) }, (args) => {
-                    let resolvedPath = resolve_1.default.sync(builtInObj.polyfill.browser, {
-                        basedir: _rootDir,
-                        moduleDirectory: [
-                            'node_modules',
-                            path_1.default.resolve(packageRoot_1.default(__dirname), 'node_modules')
-                        ],
-                        // @ts-ignore
-                        includeCoreModules: false,
-                        preserveSymlinks: true,
-                        packageFilter: (pkg, dir) => {
-                            if (pkg.browser) {
-                                if (typeof pkg.browser === 'string') {
-                                    pkg.main = pkg.browser;
-                                }
-                                else if (typeof pkg.browser === 'object') {
-                                    pkg.main = pkg.browser[Object.keys(pkg.browser)[0]];
-                                }
-                            }
-                            return pkg;
-                        }
-                    });
-                    return { path: resolvedPath };
-                });
-            }
-        });
     }
 };
 /**
@@ -279,4 +267,4 @@ SJsCompiler._esbuildAcceptedSettings = [
     'tsconfigRaw'
 ];
 exports.default = SJsCompiler;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0pzQ29tcGlsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTSnNDb21waWxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBSWQsdUVBQWlEO0FBR2pELHlFQUFtRTtBQUVuRSxzRUFBZ0Q7QUFDaEQsbUVBQTZDO0FBQzdDLHlEQUFxQztBQUNyQyxnREFBMEI7QUFDMUIsZ0RBQTBCO0FBQzFCLHFFQUErQztBQUMvQyxpRUFBMkM7QUFDM0Msc0RBQWdDO0FBQ2hDLHlFQUFtRDtBQUNuRCx5RkFBbUU7QUFDbkUsbURBQXFDO0FBR3JDLHdHQUFrRjtBQTJCbEY7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsTUFBTSxXQUFZLFNBQVEsbUJBQVc7SUFrSG5DOzs7Ozs7Ozs7T0FTRztJQUNILFlBQ0UsYUFBMEMsRUFDMUMsUUFBa0M7UUFFbEMsS0FBSyxDQUNILGFBQWEsRUFDYixtQkFBVyxDQUNUO1lBQ0UsZUFBZSxFQUFFLEVBQUU7U0FDcEIsRUFDRCxRQUFRLElBQUksRUFBRSxDQUNmLENBQ0YsQ0FBQztJQUNKLENBQUM7SUFyQ0Q7Ozs7Ozs7OztPQVNHO0lBQ0gsSUFBSSxrQkFBa0I7UUFDcEIsT0FBYSxJQUFJLENBQUMsU0FBVSxDQUFDLGVBQWUsQ0FBQztJQUMvQyxDQUFDO0lBMkJEOzs7Ozs7Ozs7Ozs7OztPQWNHO0lBQ0gsUUFBUSxDQUNOLE1BQTBCLEVBQzFCLFdBQTBDLEVBQUU7UUFFNUMsT0FBTyxJQUFJLGtCQUFVLENBQUMsQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7WUFDeEQsQ0FBQyxHQUFTLEVBQUU7Z0JBQ1YsUUFBUSxHQUFHLG1CQUFXLENBQUMsSUFBSSxDQUFDLGtCQUFrQixFQUFFLEVBQUUsRUFBRSxRQUFRLENBQUMsQ0FBQztnQkFFOUQsSUFBSSxLQUFLLEdB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0pzQ29tcGlsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTSnNDb21waWxlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztBQUlBLGdEQUEwQjtBQUcxQix1RUFBaUQ7QUFDakQsc0VBQWdEO0FBSWhELGlFQUE4QztBQUU5Qyw0Q0FBc0I7QUFDdEIsZ0RBQTBCO0FBRTFCLHNEQUErQjtBQUUvQix5RUFBbUQ7QUFDbkQsbUVBQTZDO0FBRTdDLHlEQUFtQztBQUNuQyxzREFBZ0M7QUFFaEMsd0dBQWtGO0FBZ0NsRjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxNQUFNLFdBQVksU0FBUSxtQkFBVztJQXlFbkM7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFDRSxhQUEwQyxFQUMxQyxRQUFrQztRQUVsQyxLQUFLLENBQ0gsYUFBYSxFQUNiLG1CQUFXLENBQ1Q7WUFDRSxVQUFVLEVBQUUsRUFBRTtTQUNmLEVBQ0QsUUFBUSxJQUFJLEVBQUUsQ0FDZixDQUNGLENBQUM7SUFDSixDQUFDO0lBckNEOzs7Ozs7Ozs7T0FTRztJQUNILElBQUksa0JBQWtCO1FBQ3BCLE9BQWEsSUFBSSxDQUFDLFNBQVUsQ0FBQyxVQUFVLENBQUM7SUFDMUMsQ0FBQztJQTJCRDs7Ozs7Ozs7Ozs7Ozs7T0FjRztJQUNILFFBQVEsQ0FDTixNQUEwQixFQUMxQixXQUEwQyxFQUFFO1FBRTVDLE9BQU8sSUFBSSxrQkFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1lBQzlELE1BQU0sZUFBZSxHQUFHLG1CQUFXLENBQ2pDLElBQUksQ0FBQyxrQkFBa0IsRUFDdkIsRUFBRSxFQUNGLFFBQVEsQ0FDVCxDQUFDO1lBRUYsSUFBSSxLQUFLLEdBQUcsS0FBSyxDQUFDLE9BQU8sQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxLQUFL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

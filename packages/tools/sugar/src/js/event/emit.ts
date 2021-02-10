@@ -19,7 +19,7 @@ import __SPromise from '../promise/SPromise';
  * @todo      tests
  *
  * @example       js
- * const emit = require('@coffeekraken/sugar/js/event/emit');
+ * import emit from '@coffeekraken/sugar/js/event/emit';
  * emit('something', 'Hello world');
  *
  * @since       2.0.0

@@ -20,7 +20,7 @@ import __SPromise from '../promise/SPromise';
  * @todo      tests
  *
  * @example       js
- * const on = require('@coffeekraken/sugar/js/event/on');
+ * import on from '@coffeekraken/sugar/js/event/on';
  * on('something', () => {
  *    // do something
  * });

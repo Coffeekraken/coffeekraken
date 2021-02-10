@@ -31,7 +31,7 @@ const is_glob_1 = __importDefault(require("is-glob"));
  * @todo        rethink scope and potential utility of this
  *
  * @example           js
- * const activeSpace = require('@coffeekraken/sugar/core/activeSpace');
+ * import activeSpace from '@coffeekraken/sugar/core/activeSpace';
  * activeSpace.set('hello.world');
  * activeSpace.get(); // => hello.world
  * activeSpace.is('hello'); // => false

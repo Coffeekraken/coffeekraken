@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-const __SInterface = require('../../../interface/SInterface');
-const __sugarConfig = require('../../../config/sugar');
-const __SSugarAppModulePresetInterface = require('./SSugarAppModulePresetInterface');
+import __SInterface from '../../../interface/SInterface';
+import __sugarConfig from '../../../config/sugar';
+import __SSugarAppModulePresetInterface from './SSugarAppModulePresetInterface';
 
 /**
  * @name                SSugarAppModuleObjInterface

@@ -190,7 +190,7 @@ export default class SFrontspec extends __SPromise {
           if (!files) resolve(frontspecJson);
           const rootFilePath = `${__packageRoot()}/${settings.filename}`;
           if (files.indexOf(rootFilePath) !== -1) {
-            frontspecJson = require(rootFilePath);
+            frontspecJson = require(rootFilePath).default;
             frontspecJson.package = __packageJson();
             frontspecJson.children = {};
           }
@@ -209,7 +209,7 @@ export default class SFrontspec extends __SPromise {
               if (relPath === outPath) return;
 
               // reading the file
-              const content = require(filePath);
+              const content = require(filePath).default;
 
               // relPath = relPath
               //   .replace(`/${settings.filename}`, '')

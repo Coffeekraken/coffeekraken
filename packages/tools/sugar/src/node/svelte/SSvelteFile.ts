@@ -355,6 +355,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
           const result = __svelte.compile(preprocessResult.code, {
             filename: this.name,
             dev: !params.prod,
+            customElement: true,
             preserveComments: !params.stripComments,
             preserveWhitespace: !params.prod,
             outputFilename: this.name,

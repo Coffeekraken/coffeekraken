@@ -14,6 +14,7 @@ import __resolve from 'resolve';
 import __filter from '../object/filter';
 import __esbuildScssLoaderPlugin from './compile/plugins/esbuild/esbuildScssLoaderPlugin';
 import __SEventEmitter from '../event/SEventEmitter';
+import __onProcessExit from '../process/onProcessExit';
 
 import __SInterface from '../interface/SInterface';
 import __SJsCompiler, { ISJsCompilerParams } from './compile/SJsCompiler';
@@ -67,6 +68,7 @@ interface ISJsFileCtorSettings {
 }
 
 interface ISJsFile {
+  _watchEsbuildProcess: any;
   compile(params: ISJsCompilerParams, settings?: Partial<ISJsFileSettings>);
 }
 
@@ -145,6 +147,10 @@ class SJsFile extends __SFile implements ISJsFile {
       (<any>this.constructor)._resolverPlugin
     );
     // this.jsFileSettings.plugins.unshift(__esbuildScssLoaderPlugin);
+
+    __onProcessExit(() => {
+      if (this._watchEsbuildProcess) this._watchEsbuildProcess.stop();
+    });
   }
 
   /**
@@ -194,6 +200,7 @@ class SJsFile extends __SFile implements ISJsFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _isCompiling = false;
+  _watchEsbuildProcess: any = null;
   _currentCompilationSettings: Partial<ISJsFileSettings> = {};
   _currentCompilationParams: Partial<ISJsCompilerParams> = {};
   compile(params: ISJsCompilerParams, settings?: Partial<ISJsFileSettings>) {
@@ -205,9 +212,9 @@ class SJsFile extends __SFile implements ISJsFile {
 
       params = this.applyInterface('compilerParams', params);
 
-      if (params.watch) {
-        this.startWatch();
-      }
+      // if (params.watch) {
+      //   this.startWatch();
+      // }
 
       // listen for the end
       on('finally', () => {
@@ -249,8 +256,19 @@ class SJsFile extends __SFile implements ISJsFile {
         params.map = false;
       }
 
+      let savePath;
+      if (params.outputDir === undefined) {
+        savePath = this.path.replace(/\.js$/, '.compiled.js');
+      } else {
+        savePath = __path.resolve(
+          params.outputDir,
+          this.path.replace(`${params.rootDir}/`, '')
+        );
+      }
+
       let esbuildParams: any = {
         charset: 'utf8',
+        format: 'iife',
         logLevel: 'silent',
         ...__filter(params, (key, value) => {
           if (Array.isArray(value) && !value.length) return false;
@@ -258,7 +276,57 @@ class SJsFile extends __SFile implements ISJsFile {
         }),
         entryPoints: [this.path],
         bundle: params.bundle,
-        write: false,
+        write: false, // write to disk bellow
+        watch: params.watch
+          ? {
+              onRebuild: (error, result) => {
+                this._watchEsbuildProcess = result;
+
+                emit('log', {
+                  clear: true,
+                  type: 'time'
+                });
+
+                if (error) {
+                  emit('error', {
+                    value: error
+                  });
+                  return;
+                }
+
+                const logStrArray: string[] = [];
+
+                logStrArray.push(
+                  `<green>[compiled]</green> File "<cyan>${this.relPath}</cyan>" <green>compiled successfully</green>`
+                );
+
+                if (params.save) {
+                  logStrArray.push(
+                    `<green>[saved]</green> File "<cyan>${
+                      this.relPath
+                    }</cyan>" <green>saved successfully</green> to "<magenta>${savePath.replace(
+                      `${__sugarConfig('storage.rootDir')}/`,
+                      ''
+                    )}</magenta>"`
+                  );
+                }
+
+                emit('log', {
+                  value: logStrArray.join('\n')
+                });
+
+                emit('log', {
+                  type: 'separator'
+                });
+
+                if (params.watch) {
+                  emit('log', {
+                    value: `<blue>[watch] </blue>Watching for changes...`
+                  });
+                }
+              }
+            }
+          : false,
         minify: params.minify,
         sourcemap: params.map,
         ...params.esbuild
@@ -284,15 +352,6 @@ class SJsFile extends __SFile implements ISJsFile {
       // check if need to save
       if (params.save) {
         // build the save path
-        let savePath;
-        if (params.outputDir === undefined) {
-          savePath = this.path.replace(/\.js$/, '.builded.js');
-        } else {
-          savePath = __path.resolve(
-            params.outputDir,
-            this.path.replace(`${params.rootDir}/`, '')
-          );
-        }
         emit('log', {
           type: 'file',
           file: this,

@@ -1,100 +1,82 @@
+"use strict";
 // @shared
 // @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../parseHtml", "chalk"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var parseHtml_1 = __importDefault(require("../parseHtml"));
-    var chalk_1 = __importDefault(require("chalk"));
-    chalk_1.default.level = 3;
-    /**
-     * @name        tagsMap
-     * @namespace   sugar.js.console.html
-     * @type        Object
-     *
-     * Store the tag->function map used in ```parseHtml``` function for example
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    var tagsMap = {
-        black: function (tag, content) { return chalk_1.default.black(content); },
-        red: function (tag, content) { return chalk_1.default.red(content); },
-        green: function (tag, content) { return chalk_1.default.green(content); },
-        yellow: function (tag, content) { return chalk_1.default.yellow(content); },
-        blue: function (tag, content) { return chalk_1.default.blue(content); },
-        magenta: function (tag, content) { return chalk_1.default.magenta(content); },
-        cyan: function (tag, content) { return chalk_1.default.cyan(content); },
-        white: function (tag, content) { return chalk_1.default.white(content); },
-        grey: function (tag, content) { return chalk_1.default.grey(content); },
-        bgBlack: function (tag, content) { return chalk_1.default.bgBlack(content); },
-        bgRed: function (tag, content) { return chalk_1.default.bgRed(content); },
-        bgGreen: function (tag, content) { return chalk_1.default.bgGreen(content); },
-        bgYellow: function (tag, content) { return chalk_1.default.bgYellow(content); },
-        bgBlue: function (tag, content) { return chalk_1.default.bgBlue(content); },
-        bgMagenta: function (tag, content) { return chalk_1.default.bgMagenta(content); },
-        bgCyan: function (tag, content) { return chalk_1.default.bgCyan(content); },
-        bgWhite: function (tag, content) { return chalk_1.default.bgWhite(content); },
-        bold: function (tag, content) { return chalk_1.default.bold(content); },
-        dim: function (tag, content) { return chalk_1.default.dim(content); },
-        italic: function (tag, content) { return chalk_1.default.italic(content); },
-        underline: function (tag, content) { return chalk_1.default.underline(content); },
-        strike: function (tag, content) { return chalk_1.default.strike(content); },
-        h1: function (tag, content) {
-            return chalk_1.default.underline(chalk_1.default.bold(content)) + '\n\n';
-        },
-        h2: function (tag, content) {
-            return chalk_1.default.bold(content) + '\n';
-        },
-        iWarn: function (tag, content) { return parseHtml_1.default('<yellow>⚠</yellow>'); },
-        iCheck: function (tag, content) { return parseHtml_1.default("<green>\u2713</green>"); },
-        iSuccess: function (tag, content) { return parseHtml_1.default("<green>\u2713</green>"); },
-        iError: function (tag, content) { return parseHtml_1.default("<red>\u2716</red>"); },
-        iCross: function (tag, content) { return parseHtml_1.default("<red>\u2716</red>"); },
-        iClose: function (tag, content) { return "\u2716"; },
-        iStart: function (tag, content) { return parseHtml_1.default("<green>\u2023</green>"); },
-        date: function (tag, content) {
-            return new Date().getDate().toString().padStart('0', 2) +
-                '-' +
-                (new Date().getMonth() + 1).toString().padStart('0', 2) +
-                '-' +
-                new Date().getFullYear().toString().padStart('0', 2);
-        },
-        time: function (tag, content) {
-            return new Date().getHours().toString().padStart('0', 2) +
-                ':' +
-                new Date().getMinutes().toString().padStart('0', 2) +
-                ':' +
-                new Date().getMinutes().toString().padStart('0', 2);
-        },
-        day: function (tag, content) { return new Date().getDate().toString().padStart('0', 2); },
-        days: function (tag, content) { return new Date().getDate().toString().padStart('0', 2); },
-        month: function (tag, content) { return new Date().getMonth().toString().padStart('0', 2); },
-        months: function (tag, content) { return new Date().getMonth().toString().padStart('0', 2); },
-        year: function (tag, content) { return new Date().getFullYear().toString().padStart('0', 2); },
-        years: function (tag, content) { return new Date().getFullYear().toString().padStart('0', 2); },
-        hour: function (tag, content) { return new Date().getHours().toString().padStart('0', 2); },
-        hours: function (tag, content) { return new Date().getHours().toString().padStart('0', 2); },
-        minute: function (tag, content) { return new Date().getMinutes().toString().padStart('0', 2); },
-        minutes: function (tag, content) {
-            return new Date().getMinutes().toString().padStart('0', 2);
-        },
-        second: function (tag, content) { return new Date().getSeconds().toString().padStart('0', 2); },
-        seconds: function (tag, content) {
-            return new Date().getSeconds().toString().padStart('0', 2);
-        },
-        br: function (tag, content) { return '\n'; }
-    };
-    exports.default = tagsMap;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGFnc01hcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRhZ3NNYXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsVUFBVTtBQUNWLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLDJEQUF1QztJQUN2QyxnREFBNEI7SUFDNUIsZUFBTyxDQUFDLEtBQUssR0FBRyxDQUFDLENBQUM7SUFFbEI7Ozs7Ozs7OztPQVNHO0lBQ0gsSUFBTSxPQUFPLEdBQUc7UUFDZCxLQUFLLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTyxJQUFLLE9BQUEsZUFBTyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsRUFBdEIsQ0FBc0I7UUFDL0MsR0FBRyxFQUFFLFVBQUMsR0FBRyxFQUFFLE9BQU8sSUFBSyxPQUFBLGVBQU8sQ0FBQyxHQUFHLENBQUMsT0FBTyxDQUFDLEVBQXBCLENBQW9CO1FBQzNDLEtBQUssRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxlQUFPLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxFQUF0QixDQUFzQjtRQUMvQyxNQUFNLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTyxJQUFLLE9BQUEsZUFBTyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsRUFBdkIsQ0FBdUI7UUFDakQsSUFBSSxFQUFFLFVBQUMsR0FBRyxFQUFFLE9BQU8sSUFBSyxPQUFBLGVBQU8sQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLEVBQXJCLENBQXFCO1FBQzdDLE9BQU8sRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxlQUFPLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxFQUF4QixDQUF3QjtRQUNuRCxJQUFJLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTyxJQUFLLE9BQUEsZUFBTyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsRUFBckIsQ0FBcUI7UUFDN0MsS0FBSyxFQUFFLFVBQUMsR0FBRyxFQUFFLE9BQU8sSUFBSyxPQUFBLGVBQU8sQ0FB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LEVBQUUsQ0FBQyxDQUFDO1FBSm5ELENBSW1EO1FBQ3JELEdBQUcsRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxJQUFJLElBQUksRUFBRSxDQUFDLE9BQU8sRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLEVBQWhELENBQWdEO1FBQ3ZFLElBQUksRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxJQUFJLElBQUksRUFBRSxDQUFDLE9BQU8sRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLEVBQWhELENBQWdEO1FBQ3hFLEtBQUssRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxJQUFJLElBQUksRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLEVBQWpELENBQWlEO1FBQzFFLE1BQU0sRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxJQUFJLElBQUksRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLEVBQWpELENBQWlEO1FBQzNFLElBQUksRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxJQUFJLElBQUksRUFBRSxDQUFDLFdBQVcsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLEVBQXBELENBQW9EO1FBQzVFLEtBQUssRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxJQUFJLElBQUksRUFBRSxDQUFDLFdBQVcsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLEVBQXBELENBQW9EO1FBQzdFLElBQUksRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxJQUFJLElBQUksRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLEVBQWpELENBQWlEO1FBQ3pFLEtBQUssRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxJQUFJLElBQUksRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLEVBQWpELENBQWlEO1FBQzFFLE1BQU0sRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxJQUFJLElBQUksRUFBRSxDQUFDLFVBQVUsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLEVBQW5ELENBQW1EO1FBQzdFLE9BQU8sRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPO1lBQ3BCLE9BQUEsSUFBSSxJQUFJLEVBQUUsQ0FBQyxVQUFVLEVBQUUsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxRQUFRLENBQUMsR0FBRyxFQUFFLENBQUMsQ0FBQztRQUFuRCxDQUFtRDtRQUNyRCxNQUFNLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTyxJQUFLLE9BQUEsSUFBSSxJQUFJLEVBQUUsQ0FBQyxVQUFVLEVBQUUsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxRQUFRLENBQUMsR0FBRyxFQUFFLENBQUMsQ0FBQyxFQUFuRCxDQUFtRDtRQUM3RSxPQUFPLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTztZQUNwQixPQUFBLElBQUksSUFBSSxFQUFFLENBQUMsVUFBVSxFQUFFLENBQUMsUUFBUSxFQUFFLENBQUMsUUFBUSxDQUFDLEdBQUcsRUFBRSxDQUFDLENBQUM7UUFBbkQsQ0FBbUQ7UUFFckQsRUFBRSxFQUFFLFVBQUMsR0FBRyxFQUFFLE9BQU8sSUFBSyxPQUFBLElBQUksRUFBSixDQUFJO0tBQzNCLENBQUM7SUFDRixrQkFBZSxPQUFPLENBQUMifQ==
+Object.defineProperty(exports, "__esModule", { value: true });
+const parseHtml_1 = __importDefault(require("../parseHtml"));
+const chalk_1 = __importDefault(require("chalk"));
+chalk_1.default.level = 3;
+/**
+ * @name        tagsMap
+ * @namespace   sugar.js.console.html
+ * @type        Object
+ *
+ * Store the tag->function map used in ```parseHtml``` function for example
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+const tagsMap = {
+    black: (tag, content) => chalk_1.default.black(content),
+    red: (tag, content) => chalk_1.default.red(content),
+    green: (tag, content) => chalk_1.default.green(content),
+    yellow: (tag, content) => chalk_1.default.yellow(content),
+    blue: (tag, content) => chalk_1.default.blue(content),
+    magenta: (tag, content) => chalk_1.default.magenta(content),
+    cyan: (tag, content) => chalk_1.default.cyan(content),
+    white: (tag, content) => chalk_1.default.white(content),
+    grey: (tag, content) => chalk_1.default.grey(content),
+    bgBlack: (tag, content) => chalk_1.default.bgBlack(content),
+    bgRed: (tag, content) => chalk_1.default.bgRed(content),
+    bgGreen: (tag, content) => chalk_1.default.bgGreen(content),
+    bgYellow: (tag, content) => chalk_1.default.bgYellow(content),
+    bgBlue: (tag, content) => chalk_1.default.bgBlue(content),
+    bgMagenta: (tag, content) => chalk_1.default.bgMagenta(content),
+    bgCyan: (tag, content) => chalk_1.default.bgCyan(content),
+    bgWhite: (tag, content) => chalk_1.default.bgWhite(content),
+    bold: (tag, content) => chalk_1.default.bold(content),
+    dim: (tag, content) => chalk_1.default.dim(content),
+    italic: (tag, content) => chalk_1.default.italic(content),
+    underline: (tag, content) => chalk_1.default.underline(content),
+    strike: (tag, content) => chalk_1.default.strike(content),
+    h1: (tag, content) => {
+        return chalk_1.default.underline(chalk_1.default.bold(content)) + '\n\n';
+    },
+    h2: (tag, content) => {
+        return chalk_1.default.bold(content) + '\n';
+    },
+    iWarn: (tag, content) => parseHtml_1.default('<yellow>⚠</yellow>'),
+    iCheck: (tag, content) => parseHtml_1.default(`<green>✓</green>`),
+    iSuccess: (tag, content) => parseHtml_1.default(`<green>✓</green>`),
+    iError: (tag, content) => parseHtml_1.default(`<red>✖</red>`),
+    iCross: (tag, content) => parseHtml_1.default(`<red>✖</red>`),
+    iClose: (tag, content) => `✖`,
+    iStart: (tag, content) => parseHtml_1.default(`<green>‣</green>`),
+    date: (tag, content) => new Date().getDate().toString().padStart('0', 2) +
+        '-' +
+        (new Date().getMonth() + 1).toString().padStart('0', 2) +
+        '-' +
+        new Date().getFullYear().toString().padStart('0', 2),
+    time: (tag, content) => new Date().getHours().toString().padStart('0', 2) +
+        ':' +
+        new Date().getMinutes().toString().padStart('0', 2) +
+        ':' +
+        new Date().getMinutes().toString().padStart('0', 2),
+    day: (tag, content) => new Date().getDate().toString().padStart('0', 2),
+    days: (tag, content) => new Date().getDate().toString().padStart('0', 2),
+    month: (tag, content) => new Date().getMonth().toString().padStart('0', 2),
+    months: (tag, content) => new Date().getMonth().toString().padStart('0', 2),
+    year: (tag, content) => new Date().getFullYear().toString().padStart('0', 2),
+    years: (tag, content) => new Date().getFullYear().toString().padStart('0', 2),
+    hour: (tag, content) => new Date().getHours().toString().padStart('0', 2),
+    hours: (tag, content) => new Date().getHours().toString().padStart('0', 2),
+    minute: (tag, content) => new Date().getMinutes().toString().padStart('0', 2),
+    minutes: (tag, content) => new Date().getMinutes().toString().padStart('0', 2),
+    second: (tag, content) => new Date().getSeconds().toString().padStart('0', 2),
+    seconds: (tag, content) => new Date().getSeconds().toString().padStart('0', 2),
+    br: (tag, content) => '\n'
+};
+exports.default = tagsMap;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGFnc01hcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRhZ3NNYXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLFVBQVU7QUFDVixjQUFjOzs7OztBQUVkLDZEQUF1QztBQUN2QyxrREFBNEI7QUFDNUIsZUFBTyxDQUFDLEtBQUssR0FBRyxDQUFDLENBQUM7QUFFbEI7Ozs7Ozs7OztHQVNHO0FBQ0gsTUFBTSxPQUFPLEdBQUc7SUFDZCxLQUFLLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQztJQUMvQyxHQUFHLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsR0FBRyxDQUFDLE9BQU8sQ0FBQztJQUMzQyxLQUFLLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQztJQUMvQyxNQUFNLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQztJQUNqRCxJQUFJLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQztJQUM3QyxPQUFPLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQztJQUNuRCxJQUFJLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQztJQUM3QyxLQUFLLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQztJQUMvQyxJQUFJLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQztJQUU3QyxPQUFPLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQztJQUNuRCxLQUFLLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQztJQUMvQyxPQUFPLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQztJQUNuRCxRQUFRLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQztJQUNyRCxNQUFNLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQztJQUNqRCxTQUFTLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQztJQUN2RCxNQUFNLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQztJQUNqRCxPQUFPLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQztJQUVuRCxJQUFJLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQztJQUM3QyxHQUFHLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxlQUFPLENBQUMsR0FBRyxDQUFDLE9BQU8sQ0FBQztJQUMzQyxNQUFNLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFF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QUksSUFBSSxFQUFFLENBQUMsT0FBTyxFQUFFLENBQUMsUUFBUSxFQUFFLENBQUMsUUFBUSxDQUFDLEdBQUcsRUFBRSxDQUFDLENBQUM7SUFDeEUsS0FBSyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsSUFBSSxJQUFJLEVBQUUsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxRQUFRLENBQUMsR0FBRyxFQUFFLENBQUMsQ0FBQztJQUMxRSxNQUFNLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxJQUFJLElBQUksRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDO0lBQzNFLElBQUksRUFBRSxDQUFDLEdBQUcsRUFBRSxPQUFPLEVBQUUsRUFBRSxDQUFDLElBQUksSUFBSSxFQUFFLENBQUMsV0FBVyxFQUFFLENBQUMsUUFBUSxFQUFFLENBQUMsUUFBUSxDQUFDLEdBQUcsRUFBRSxDQUFDLENBQUM7SUFDNUUsS0FBSyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsSUFBSSxJQUFJLEVBQUUsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxRQUFRLENBQUMsR0FBRyxFQUFFLENBQUMsQ0FBQztJQUM3RSxJQUFJLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxJQUFJLElBQUksRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDO0lBQ3pFLEtBQUssRUFBRSxDQUFDLEdBQUcsRUFBRSxPQUFPLEVBQUUsRUFBRSxDQUFDLElBQUksSUFBSSxFQUFFLENBQUMsUUFBUSxFQUFFLENBQUMsUUFBUSxFQUFFLENBQUMsUUFBUSxDQUFDLEdBQUcsRUFBRSxDQUFDLENBQUM7SUFDMUUsTUFBTSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsSUFBSSxJQUFJLEVBQUUsQ0FBQyxVQUFVLEVBQUUsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxRQUFRLENBQUMsR0FBRyxFQUFFLENBQUMsQ0FBQztJQUM3RSxPQUFPLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FDeEIsSUFBSSxJQUFJLEVBQUUsQ0FBQyxVQUFVLEVBQUUsQ0FBQyxRQUFRLEVBQUUsQ0FBQyxRQUFRLENBQUMsR0FBRyxFQUFFLENBQUMsQ0FBQztJQUNyRCxNQUFNLEVBQUUsQ0FBQyxHQUFHLEVBQUUsT0FBTyxFQUFFLEVBQUUsQ0FBQyxJQUFJLElBQUksRUFBRSxDQUFDLFVBQVUsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDO0lBQzdFLE9BQU8sRUFBRSxDQUFDLEdBQUcsRUFBRSxPQUFPLEVBQUUsRUFBRSxDQUN4QixJQUFJLElBQUksRUFBRSxDQUFDLFVBQVUsRUFBRSxDQUFDLFFBQVEsRUFBRSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDO0lBRXJELEVBQUUsRUFBRSxDQUFDLEdBQUcsRUFBRSxPQUFPLEVBQUUsRUFBRSxDQUFDLElBQUk7Q0FDM0IsQ0FBQztBQUNGLGtCQUFlLE9BQU8sQ0FBQyJ9

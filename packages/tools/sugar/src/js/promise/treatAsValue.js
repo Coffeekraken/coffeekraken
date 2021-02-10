@@ -1,55 +1,33 @@
+"use strict";
 // @shared
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var fn = function treatAsValue(promise, settings) {
-        if (settings === void 0) { settings = {}; }
-        settings = __assign({ during: -1 }, settings);
-        var during = settings.during || -1;
-        try {
-            var proxy_1 = Proxy.revocable(promise, {
-                get: function (target, prop, receiver) {
-                    if (prop === 'then') {
-                        return target;
-                    }
-                    if (during > 0)
-                        during--;
-                    else if (during === 0) {
-                        proxy_1.revoke();
-                    }
-                    // @ts-ignore
-                    return Reflect.get.apply(Reflect, arguments);
+Object.defineProperty(exports, "__esModule", { value: true });
+const fn = function treatAsValue(promise, settings = {}) {
+    settings = Object.assign({ during: -1 }, settings);
+    let during = settings.during || -1;
+    try {
+        const proxy = Proxy.revocable(promise, {
+            get(target, prop, receiver) {
+                if (prop === 'then') {
+                    return target;
                 }
-            });
-            proxy_1.proxy.restorePromiseBehavior = function () {
-                proxy_1.revoke();
-                return promise;
-            };
-            return proxy_1.proxy;
-        }
-        catch (e) {
+                if (during > 0)
+                    during--;
+                else if (during === 0) {
+                    proxy.revoke();
+                }
+                // @ts-ignore
+                return Reflect.get(...arguments);
+            }
+        });
+        proxy.proxy.restorePromiseBehavior = () => {
+            proxy.revoke();
             return promise;
-        }
-    };
-    exports.default = fn;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHJlYXRBc1ZhbHVlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidHJlYXRBc1ZhbHVlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFVBQVU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBc0NWLElBQU0sRUFBRSxHQUFrQixTQUFTLFlBQVksQ0FDN0MsT0FBWSxFQUNaLFFBQW9DO1FBQXBDLHlCQUFBLEVBQUEsYUFBb0M7UUFFcEMsUUFBUSxjQUNOLE1BQU0sRUFBRSxDQUFDLENBQUMsSUFDUCxRQUFRLENBQ1osQ0FBQztRQUNGLElBQUksTUFBTSxHQUFXLFFBQVEsQ0FBQyxNQUFNLElBQUksQ0FBQyxDQUFDLENBQUM7UUFDM0MsSUFBSTtZQUNGLElBQU0sT0FBSyxHQUFHLEtBQUssQ0FBQyxTQUFTLENBQUMsT0FBTyxFQUFFO2dCQUNyQyxHQUFHLFlBQUMsTUFBTSxFQUFFLElBQUksRUFBRSxRQUFRO29CQUN4QixJQUFJLElBQUksS0FBSyxNQUFNLEVBQUU7d0JBQ25CLE9BQU8sTUFBTSxDQUFDO3FCQUNmO29CQUNELElBQUksTUFBTSxHQUFHLENBQUM7d0JBQUUsTUFBTSxFQUFFLENBQUM7eUJBQ3BCLElBQUksTUFBTSxLQUFLLENBQUMsRUFBRTt3QkFDckIsT0FBSyxDQUFDLE1BQU0sRUFBRSxDQUFDO3FCQUNoQjtvQkFDRCxhQUFhO29CQUNiLE9BQU8sT0FBTyxDQUFDLEdBQUcsT0FBWCxPQUFPLEVBQVEsU0FBUyxFQUFFO2dCQUNuQyxDQUFDO2FBQ0YsQ0FBQyxDQUFDO1lBQ0gsT0FBSyxDQUFDLEtBQUssQ0FBQyxzQkFBc0IsR0FBRztnQkFDbkMsT0FBSyxDQUFDLE1BQU0sRUFBRSxDQUFDO2dCQUNmLE9BQU8sT0FBTyxDQUFDO1lBQ2pCLENBQUMsQ0FBQztZQUNGLE9BQU8sT0FBSyxDQUFDLEtBQUssQ0FBQztTQUNwQjtRQUFDLE9BQU8sQ0FBQyxFQUFFO1lBQ1YsT0FBTyxPQUFPLENBQUM7U0FDaEI7SUFDSCxDQUFDLENBQUM7SUFDRixrQkFBZSxFQUFFLENBQUMifQ==
+        };
+        return proxy.proxy;
+    }
+    catch (e) {
+        return promise;
+    }
+};
+exports.default = fn;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHJlYXRBc1ZhbHVlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidHJlYXRBc1ZhbHVlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxVQUFVOztBQXNDVixNQUFNLEVBQUUsR0FBa0IsU0FBUyxZQUFZLENBQzdDLE9BQVksRUFDWixXQUFrQyxFQUFFO0lBRXBDLFFBQVEsbUJBQ04sTUFBTSxFQUFFLENBQUMsQ0FBQyxJQUNQLFFBQVEsQ0FDWixDQUFDO0lBQ0YsSUFBSSxNQUFNLEdBQVcsUUFBUSxDQUFDLE1BQU0sSUFBSSxDQUFDLENBQUMsQ0FBQztJQUMzQyxJQUFJO1FBQ0YsTUFBTSxLQUFLLEdBQUcsS0FBSyxDQUFDLFNBQVMsQ0FBQyxPQUFPLEVBQUU7WUFDckMsR0FBRyxDQUFDLE1BQU0sRUFBRSxJQUFJLEVBQUUsUUFBUTtnQkFDeEIsSUFBSSxJQUFJLEtBQUssTUFBTSxFQUFFO29CQUNuQixPQUFPLE1BQU0sQ0FBQztpQkFDZjtnQkFDRCxJQUFJLE1BQU0sR0FBRyxDQUFDO29CQUFFLE1BQU0sRUFBRSxDQUFDO3FCQUNwQixJQUFJLE1BQU0sS0FBSyxDQUFDLEVBQUU7b0JBQ3JCLEtBQUssQ0FBQyxNQUFNLEVBQUUsQ0FBQztpQkFDaEI7Z0JBQ0QsYUFBYTtnQkFDYixPQUFPLE9BQU8sQ0FBQyxHQUFHLENBQUMsR0FBRyxTQUFTLENBQUMsQ0FBQztZQUNuQyxDQUFDO1NBQ0YsQ0FBQyxDQUFDO1FBQ0gsS0FBSyxDQUFDLEtBQUssQ0FBQyxzQkFBc0IsR0FBRyxHQUFHLEVBQUU7WUFDeEMsS0FBSyxDQUFDLE1BQU0sRUFBRSxDQUFDO1lBQ2YsT0FBTyxPQUFPLENBQUM7UUFDakIsQ0FBQyxDQUFDO1FBQ0YsT0FBTyxLQUFLLENBQUMsS0FBSyxDQUFDO0tBQ3BCO0lBQUMsT0FBTyxDQUFDLEVBQUU7UUFDVixPQUFPLE9BQU8sQ0FBQztLQUNoQjtBQUNILENBQUMsQ0FBQztBQUNGLGtCQUFlLEVBQUUsQ0FBQyJ9

@@ -91,13 +91,13 @@ export default class SLog {
     Object.keys(this._settings.adapters).forEach(async (adapterName) => {
       if (typeof this._settings.adapters[adapterName] === 'string') {
         const cls = require(this._settings.adapters[adapterName]);
-        this._settings.adapters[adapterName] = new cls();
+        this._settings.adapters[adapterName] = new (cls.default || cls)();
       }
     });
 
     // if needed, override the native console
     if (this._settings.overrideNativeConsole) {
-      this._overrideNativeConsole();
+      // this._overrideNativeConsole();
     }
   }
 

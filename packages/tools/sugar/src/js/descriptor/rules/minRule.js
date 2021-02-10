@@ -1,43 +1,33 @@
+"use strict";
 // @ts-nocheck
 // @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../_SDescriptor"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var _SDescriptor_1 = __importDefault(require("../_SDescriptor"));
-    var ruleObj = {
-        name: 'Min',
-        id: 'min',
-        settings: {},
-        accept: 'Number',
-        message: function (resultObj) {
-            return "This value has to be minimum \"<yellow>" + resultObj.min + "</yellow>\". Received \"<red>" + resultObj.received + "</red>\"";
-        },
-        processParams: function (params) {
-            return { value: params };
-        },
-        apply: function (value, params, ruleSettings, settings) {
-            if (value < params.value) {
-                return {
-                    min: params.value,
-                    received: value
-                };
-            }
-            return true;
+Object.defineProperty(exports, "__esModule", { value: true });
+const _SDescriptor_1 = __importDefault(require("../_SDescriptor"));
+const ruleObj = {
+    name: 'Min',
+    id: 'min',
+    settings: {},
+    accept: 'Number',
+    message: (resultObj) => {
+        return `This value has to be minimum "<yellow>${resultObj.min}</yellow>". Received "<red>${resultObj.received}</red>"`;
+    },
+    processParams: (params) => {
+        return { value: params };
+    },
+    apply: (value, params, ruleSettings, settings) => {
+        if (value < params.value) {
+            return {
+                min: params.value,
+                received: value
+            };
         }
-    };
-    // register the new rule
-    _SDescriptor_1.default.registerRule(ruleObj);
-    exports.default = ruleObj;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWluUnVsZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm1pblJ1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLFVBQVU7Ozs7Ozs7Ozs7Ozs7OztJQVFWLGlFQUEwQztJQWlCMUMsSUFBTSxPQUFPLEdBQXFCO1FBQ2hDLElBQUksRUFBRSxLQUFLO1FBQ1gsRUFBRSxFQUFFLEtBQUs7UUFDVCxRQUFRLEVBQUUsRUFBRTtRQUNaLE1BQU0sRUFBRSxRQUFRO1FBQ2hCLE9BQU8sRUFBRSxVQUFDLFNBQWM7WUFDdEIsT0FBTyw0Q0FBeUMsU0FBUyxDQUFDLEdBQUcscUNBQThCLFNBQVMsQ0FBQyxRQUFRLGFBQVMsQ0FBQztRQUN6SCxDQUFDO1FBQ0QsYUFBYSxFQUFFLFVBQUMsTUFBYztZQUM1QixPQUFPLEVBQUUsS0FBSyxFQUFFLE1BQU0sRUFBRSxDQUFDO1FBQzNCLENBQUM7UUFDRCxLQUFLLEVBQUUsVUFDTCxLQUFVLEVBQ1YsTUFBZSxFQUNmLFlBQTJCLEVBQzNCLFFBQThCO1lBRTlCLElBQUksS0FBSyxHQUFHLE1BQU0sQ0FBQyxLQUFLLEVBQUU7Z0JBQ3hCLE9BQU87b0JBQ0wsR0FBRyxFQUFFLE1BQU0sQ0FBQyxLQUFLO29CQUNqQixRQUFRLEVBQUUsS0FBSztpQkFDaEIsQ0FBQzthQUNIO1lBQ0QsT0FBTyxJQUFJLENBQUM7UUFDZCxDQUFDO0tBQ0YsQ0FBQztJQUVGLHdCQUF3QjtJQUN4QixzQkFBVyxDQUFDLFlBQVksQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUVsQyxrQkFBZSxPQUFPLENBQUMifQ==
+        return true;
+    }
+};
+// register the new rule
+_SDescriptor_1.default.registerRule(ruleObj);
+exports.default = ruleObj;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWluUnVsZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm1pblJ1bGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFDZCxVQUFVOzs7OztBQVFWLG1FQUEwQztBQWlCMUMsTUFBTSxPQUFPLEdBQXFCO0lBQ2hDLElBQUksRUFBRSxLQUFLO0lBQ1gsRUFBRSxFQUFFLEtBQUs7SUFDVCxRQUFRLEVBQUUsRUFBRTtJQUNaLE1BQU0sRUFBRSxRQUFRO0lBQ2hCLE9BQU8sRUFBRSxDQUFDLFNBQWMsRUFBVSxFQUFFO1FBQ2xDLE9BQU8seUNBQXlDLFNBQVMsQ0FBQyxHQUFHLDhCQUE4QixTQUFTLENBQUMsUUFBUSxTQUFTLENBQUM7SUFDekgsQ0FBQztJQUNELGFBQWEsRUFBRSxDQUFDLE1BQWMsRUFBRSxFQUFFO1FBQ2hDLE9BQU8sRUFBRSxLQUFLLEVBQUUsTUFBTSxFQUFFLENBQUM7SUFDM0IsQ0FBQztJQUNELEtBQUssRUFBRSxDQUNMLEtBQVUsRUFDVixNQUFlLEVBQ2YsWUFBMkIsRUFDM0IsUUFBOEIsRUFDQSxFQUFFO1FBQ2hDLElBQUksS0FBSyxHQUFHLE1BQU0sQ0FBQyxLQUFLLEVBQUU7WUFDeEIsT0FBTztnQkFDTCxHQUFHLEVBQUUsTUFBTSxDQUFDLEtBQUs7Z0JBQ2pCLFFBQVEsRUFBRSxLQUFLO2FBQ2hCLENBQUM7U0FDSDtRQUNELE9BQU8sSUFBSSxDQUFDO0lBQ2QsQ0FBQztDQUNGLENBQUM7QUFFRix3QkFBd0I7QUFDeEIsc0JBQVcsQ0FBQyxZQUFZLENBQUMsT0FBTyxDQUFDLENBQUM7QUFFbEMsa0JBQWUsT0FBTyxDQUFDIn0=

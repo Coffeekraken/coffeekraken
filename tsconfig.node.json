@@ -1,6 +1,10 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["packages/*/*/src/cli/**/*.ts", "packages/*/*/src/node/**/*.ts"],
+  "include": [
+    "packages/*/*/src/cli/**/*.ts",
+    "packages/*/*/src/node/**/*.ts",
+    "packages/*/*/src/config/**/*.ts"
+  ],
   "compilerOptions": {
     "module": "commonjs",
     "target": "es6",

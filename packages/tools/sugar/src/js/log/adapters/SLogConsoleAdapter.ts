@@ -34,7 +34,7 @@ import __formatObject from 'fmt-obj';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SLogConsoleAdapter {
+export = class SLogConsoleAdapter {
   /**
    * @name          _settings
    * @type          Object
@@ -135,4 +135,4 @@ export default class SLogConsoleAdapter {
       resolve();
     });
   }
-}
+};

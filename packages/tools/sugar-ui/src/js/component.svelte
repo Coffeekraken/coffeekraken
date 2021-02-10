@@ -1,3 +1,5 @@
+<svelte:options tag="my-element" />
+
 <script type="text/ts">
 
 	import __SSvelteComponent from '@coffeekraken/sugar/js/svelte/SSvelteComponent';
@@ -12,6 +14,8 @@
 	}
 
 	new MyCoolComponent();
+
+	// console.log('DFF')
 
 </script>
 

@@ -39,7 +39,8 @@ export default (sources, stdio, settings = {}) => {
   if (__isClass(stdio)) {
     stdioInstance = new stdio(sources, settings);
   } else if (__isPath(stdio, true)) {
-    const Cls = require(stdio);
+    let Cls = require(stdio);
+    Cls = Cls.default || Cls;
     stdioInstance = new Cls(sources, settings);
   } else if (typeof stdio === 'string') {
     switch (stdio) {

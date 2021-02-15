@@ -10,6 +10,7 @@
     }
 })(function (require, exports) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name        isYyyymmddDate
      * @namespace           sugar.js.is
@@ -38,6 +39,6 @@
     function isYyyymmddDate(date) {
         return /^\d{4}[\-\/\s\.]?((((0[13578])|(1[02]))[\-\/\s\.]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\-\/\s\.]?(([0-2][0-9])|(30)))|(02[\-\/\s\.]?[0-2][0-9]))$/.test(date);
     }
-    return isYyyymmddDate;
+    exports.default = isYyyymmddDate;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoieXl5eW1tZGREYXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsieXl5eW1tZGREYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7OztJQUVWOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F3Qkc7SUFDSCxTQUFTLGNBQWMsQ0FBQyxJQUFJO1FBQzFCLE9BQU8sdUpBQXVKLENBQUMsSUFBSSxDQUNqSyxJQUFJLENBQ0wsQ0FBQztJQUNKLENBQUM7SUFDRCxPQUFTLGNBQWMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoieXl5eW1tZGREYXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsieXl5eW1tZGREYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7Ozs7SUFFVjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Bd0JHO0lBQ0gsU0FBUyxjQUFjLENBQUMsSUFBSTtRQUMxQixPQUFPLHVKQUF1SixDQUFDLElBQUksQ0FDakssSUFBSSxDQUNMLENBQUM7SUFDSixDQUFDO0lBQ0Qsa0JBQWUsY0FBYyxDQUFDIn0=

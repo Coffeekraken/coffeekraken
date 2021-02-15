@@ -228,6 +228,7 @@ class SType implements ISType {
       },
       settings
     );
+
     // save the instance into the instanciated stack
     this.constructor._instanciatedTypes[typeString] = this;
   }

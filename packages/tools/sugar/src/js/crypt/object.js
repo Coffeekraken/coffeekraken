@@ -13,8 +13,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var object_encode_1 = __importDefault(require("object-encode"));
-    return {
+    /**
+     * @name            object
+     * @namespace           sugar.js.crypt
+     * @type            Object
+     * @status              wip
+     *
+     * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the object algorithm
+     *
+     * @todo        interface
+     * @todo        doc
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    exports.default = {
         /**
          * @name        encrypt
          * @type        Function
@@ -49,4 +64,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         }
     };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2JqZWN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsib2JqZWN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7Ozs7OztJQUVWLGdFQUEyQztJQWdCM0MsT0FBUztRQUNQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsT0FBTyxFQUFFLFVBQVUsTUFBTSxFQUFFLElBQXdDO1lBQXhDLHFCQUFBLEVBQUEsd0NBQXdDO1lBQ2pFLE9BQU8sdUJBQWMsQ0FBQyxhQUFhLENBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxJQUFJLENBQUMsQ0FBQztRQUM5RCxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxPQUFPLEVBQUUsVUFBVSxhQUFhLEVBQUUsSUFBd0M7WUFBeEMscUJBQUEsRUFBQSx3Q0FBd0M7WUFDeEUsT0FBTyx1QkFBYyxDQUFDLGFBQWEsQ0FBQyxhQUFhLEVBQUUsUUFBUSxFQUFFLElBQUksQ0FBQyxDQUFDO1FBQ3JFLENBQUM7S0FDRixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2JqZWN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsib2JqZWN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7Ozs7Ozs7SUFFVixnRUFBMkM7SUFFM0M7Ozs7Ozs7Ozs7Ozs7T0FhRztJQUNILGtCQUFlO1FBQ2I7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxPQUFPLEVBQUUsVUFBVSxNQUFNLEVBQUUsSUFBd0M7WUFBeEMscUJBQUEsRUFBQSx3Q0FBd0M7WUFDakUsT0FBTyx1QkFBYyxDQUFDLGFBQWEsQ0FBQyxNQUFNLEVBQUUsUUFBUSxFQUFFLElBQUksQ0FBQyxDQUFDO1FBQzlELENBQUM7UUFFRDs7Ozs7Ozs7Ozs7V0FXRztRQUNILE9BQU8sRUFBRSxVQUFVLGFBQWEsRUFBRSxJQUF3QztZQUF4QyxxQkFBQSxFQUFBLHdDQUF3QztZQUN4RSxPQUFPLHVCQUFjLENBQUMsYUFBYSxDQUFDLGFBQWEsRUFBRSxRQUFRLEVBQUUsSUFBSSxDQUFDLENBQUM7UUFDckUsQ0FBQztLQUNGLENBQUMifQ==

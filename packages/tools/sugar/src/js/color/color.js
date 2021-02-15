@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var SColor_1 = __importDefault(require("./SColor"));
     /**
      * @name                color
@@ -33,6 +34,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     function color(color) {
         return new SColor_1.default(color);
     }
-    return color;
+    exports.default = color;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29sb3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjb2xvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7Ozs7Ozs7Ozs7SUFFVixvREFBZ0M7SUFFaEM7Ozs7Ozs7Ozs7Ozs7OztPQWVHO0lBQ0gsU0FBUyxLQUFLLENBQUMsS0FBSztRQUNsQixPQUFPLElBQUksZ0JBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUM3QixDQUFDO0lBQ0QsT0FBUyxLQUFLLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29sb3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjb2xvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7Ozs7Ozs7Ozs7O0lBRVYsb0RBQWdDO0lBRWhDOzs7Ozs7Ozs7Ozs7Ozs7T0FlRztJQUNILFNBQVMsS0FBSyxDQUFDLEtBQUs7UUFDbEIsT0FBTyxJQUFJLGdCQUFRLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDN0IsQ0FBQztJQUNELGtCQUFlLEtBQUssQ0FBQyJ9

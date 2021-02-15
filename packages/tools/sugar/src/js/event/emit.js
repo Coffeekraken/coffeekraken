@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var SPromise_1 = __importDefault(require("../promise/SPromise"));
     /**
      * @name        emit
@@ -30,7 +31,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @todo      tests
      *
      * @example       js
-     * const emit = require('@coffeekraken/sugar/js/event/emit');
+     * import emit from '@coffeekraken/sugar/js/event/emit';
      * emit('something', 'Hello world');
      *
      * @since       2.0.0
@@ -45,6 +46,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         // emit to the event
         window._sugarEventSPromise.emit(name, value);
     }
-    return emit;
+    exports.default = emit;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW1pdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImVtaXQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7SUFFZCxpRUFBNkM7SUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FzQkc7SUFDSCxTQUFTLElBQUksQ0FBQyxJQUFJLEVBQUUsS0FBSztRQUN2Qix3Q0FBd0M7UUFDeEMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxtQkFBbUI7WUFDN0IsTUFBTSxDQUFDLG1CQUFtQixHQUFHLElBQUksa0JBQVUsQ0FBQztnQkFDMUMsRUFBRSxFQUFFLG9CQUFvQjthQUN6QixDQUFDLENBQUM7UUFDTCxvQkFBb0I7UUFDcEIsTUFBTSxDQUFDLG1CQUFtQixDQUFDLElBQUksQ0FBQyxJQUFJLEVBQUUsS0FBSyxDQUFDLENBQUM7SUFDL0MsQ0FBQztJQUNELE9BQVMsSUFBSSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW1pdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImVtaXQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsaUVBQTZDO0lBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Bc0JHO0lBQ0gsU0FBUyxJQUFJLENBQUMsSUFBSSxFQUFFLEtBQUs7UUFDdkIsd0NBQXdDO1FBQ3hDLElBQUksQ0FBQyxNQUFNLENBQUMsbUJBQW1CO1lBQzdCLE1BQU0sQ0FBQyxtQkFBbUIsR0FBRyxJQUFJLGtCQUFVLENBQUM7Z0JBQzFDLEVBQUUsRUFBRSxvQkFBb0I7YUFDekIsQ0FBQyxDQUFDO1FBQ0wsb0JBQW9CO1FBQ3BCLE1BQU0sQ0FBQyxtQkFBbUIsQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFLEtBQUssQ0FBQyxDQUFDO0lBQy9DLENBQUM7SUFDRCxrQkFBZSxJQUFJLENBQUMifQ==

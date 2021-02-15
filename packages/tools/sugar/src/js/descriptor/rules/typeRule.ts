@@ -47,6 +47,7 @@ const ruleObj: ISDescriptorRule = {
     const res = __ofType(value, params.value, {
       name: settings.name
     });
+
     if (res !== true) return res;
     return true;
   }

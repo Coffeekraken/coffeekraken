@@ -269,7 +269,7 @@ class SJsFile extends __SFile implements ISJsFile {
       let esbuildParams: any = {
         charset: 'utf8',
         format: 'iife',
-        logLevel: 'silent',
+        // logLevel: 'silent',
         ...__filter(params, (key, value) => {
           if (Array.isArray(value) && !value.length) return false;
           return __SJsCompiler._esbuildAcceptedSettings.indexOf(key) !== -1;

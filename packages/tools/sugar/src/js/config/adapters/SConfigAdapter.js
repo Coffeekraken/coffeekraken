@@ -10,7 +10,39 @@
     }
 })(function (require, exports) {
     "use strict";
-    return /** @class */ (function () {
+    Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * @name                                SConfigAdapter
+     * @namespace           sugar.js.config.adapters
+     * @type                                Class
+     * @status              beta
+     *
+     * Base class for SCache adapters
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @example             js
+     * class SConfigCoolAdapter extends SConfigAdapter {
+     *    constructor(settings = {}) {
+     *      super(settings);
+     *      // settings are accessible through this._settings
+     *    }
+     *    async load() {
+     *      // load the config the way you want and return it in Object format
+     *      return {};
+     *    }
+     *    async save(newConfig) {
+     *      // save the newConfig object the way you want and return true when all it ok
+     *      return true;
+     *    }
+     * }
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    var SConfigAdapter = /** @class */ (function () {
         /**
          * @name                              constructor
          * @type                              Function
@@ -81,5 +113,6 @@
         });
         return SConfigAdapter;
     }());
+    exports.default = SConfigAdapter;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbmZpZ0FkYXB0ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQ29uZmlnQWRhcHRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7Ozs7Ozs7SUFtQ1Y7UUFZRTs7Ozs7Ozs7Ozs7V0FXRztRQUNILHdCQUFZLFFBQWE7WUFBYix5QkFBQSxFQUFBLGFBQWE7WUF2QnpCOzs7Ozs7OztlQVFHO1lBQ0gsY0FBUyxHQUFHLEVBQUUsQ0FBQztZQWViLElBQUksUUFBUSxDQUFDLElBQUksSUFBSSxDQUFDLG9CQUFvQixDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLEVBQUU7Z0JBQzlELE1BQU0sSUFBSSxLQUFLLENBQ2Isd0ZBQXdGLENBQ3pGLENBQUM7YUFDSDtZQUNELHFCQUFxQjtZQUNyQixJQUFJLENBQUMsU0FBUyxHQUFHLFFBQVEsQ0FBQztRQUM1QixDQUFDO1FBV0Qsc0JBQUksZ0NBQUk7WUFUUjs7Ozs7Ozs7ZUFRRztpQkFDSDtnQkFDRSxPQUFPLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDO1lBQzdCLENBQUM7aUJBQ0QsVUFBUyxLQUFLO2dCQUNaLElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEVBQUU7b0JBQ3JDLE1BQU0sSUFBSSxLQUFLLENBQ2Isd0ZBQXdGLENBQ3pGLENBQUM7aUJBQ0g7Z0JBQ0QsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLEdBQUcsS0FBSyxDQUFDO1lBQzlCLENBQUM7OztXQVJBO1FBbUJELHNCQUFJLG9DQUFRO1lBVFo7Ozs7Ozs7O2VBUUc7aUJBQ0g7Z0JBQ0UsT0FBTyxJQUFJLENBQUMsU0FBUyxDQUFDO1lBQ3hCLENBQUM7OztXQUFBO1FBQ0gscUJBQUM7SUFBRCxDQUFDLEFBbkVRLElBbUVQIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbmZpZ0FkYXB0ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQ29uZmlnQWRhcHRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7Ozs7Ozs7O0lBSVY7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQThCRztJQUNIO1FBWUU7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCx3QkFBWSxRQUFhO1lBQWIseUJBQUEsRUFBQSxhQUFhO1lBdkJ6Qjs7Ozs7Ozs7ZUFRRztZQUNILGNBQVMsR0FBRyxFQUFFLENBQUM7WUFlYixJQUFJLFFBQVEsQ0FBQyxJQUFJLElBQUksQ0FBQyxvQkFBb0IsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxFQUFFO2dCQUM5RCxNQUFNLElBQUksS0FBSyxDQUNiLHdGQUF3RixDQUN6RixDQUFDO2FBQ0g7WUFDRCxxQkFBcUI7WUFDckIsSUFBSSxDQUFDLFNBQVMsR0FBRyxRQUFRLENBQUM7UUFDNUIsQ0FBQztRQVdELHNCQUFJLGdDQUFJO1lBVFI7Ozs7Ozs7O2VBUUc7aUJBQ0g7Z0JBQ0UsT0FBTyxJQUFJLENBQUMsU0FBUyxDQUFDLElBQUksQ0FBQztZQUM3QixDQUFDO2lCQUNELFVBQVMsS0FBSztnQkFDWixJQUFJLENBQUMsb0JBQW9CLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxFQUFFO29CQUNyQyxNQUFNLElBQUksS0FBSyxDQUNiLHdGQUF3RixDQUN6RixDQUFDO2lCQUNIO2dCQUNELElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxHQUFHLEtBQUssQ0FBQztZQUM5QixDQUFDOzs7V0FSQTtRQW1CRCxzQkFBSSxvQ0FBUTtZQVRaOzs7Ozs7OztlQVFHO2lCQUNIO2dCQUNFLE9BQU8sSUFBSSxDQUFDLFNBQVMsQ0FBQztZQUN4QixDQUFDOzs7V0FBQTtRQUNILHFCQUFDO0lBQUQsQ0FBQyxBQW5FRCxJQW1FQyJ9

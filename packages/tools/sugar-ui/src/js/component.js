@@ -29,8 +29,8 @@ function create_fragment(ctx) {
 			h1 = element("h1");
 			h1.textContent = "Hello worlc";
 			this.c = noop;
-			add_location(h1, file, 21, 1, 450);
-			add_location(div, file, 20, 0, 443);
+			add_location(h1, file, 20, 1, 418);
+			add_location(div, file, 19, 0, 411);
 		},
 		l: function claim(nodes) {
 			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -65,10 +65,10 @@ function instance($$self, $$props, $$invalidate) {
 	class MyCoolComponent extends __SSvelteComponent {
 		constructor() {
 			super({ svelteComponent: {} });
-			console.log("COM^=");
 		}
 	}
 
+	console.log("DFF");
 	new MyCoolComponent();
 	const writable_props = [];
 

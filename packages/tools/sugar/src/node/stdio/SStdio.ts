@@ -185,6 +185,7 @@ class SStdio extends __SClass implements ISStdio {
         {
           stdio: {
             filter: null,
+            process: null,
             maxItems: -1,
             spaceBetween: 0,
             spaceAround: 0,
@@ -302,33 +303,47 @@ class SStdio extends __SClass implements ISStdio {
       settings
     ) as ISStdioSettings;
     // subscribe to data
-    source.on((settings.events || []).join(','), (data, metas) => {
-      // protection
+    source.on(
+      (settings.events || []).join(','),
+      (data, metas) => {
+        // protection
 
-      if (data === undefined || data === null) return;
-      // handle the type depending on the passed stack
-      const types = Object.keys(settings.mapTypesToEvents);
-      for (let i = 0; i < types.length; i++) {
-        const stacks = settings.mapTypesToEvents[types[i]];
-        const stacksGlob =
-          Array.isArray(stacks) && stacks.length
-            ? `*(${stacks.join('|')})`
-            : stacks;
-        if (stacksGlob.length && __minimatch(metas.event, stacksGlob)) {
-          if (typeof data !== 'object') {
-            data = {
-              type: types[i],
-              value: data
-            };
-          } else if (!data.type) {
-            data.type = types[i];
+        // if (settings.filter && typeof settings.filter === 'function') {
+        //   if (settings.filter(data, metas) === false) return;
+        // }
+        // if (settings.process && typeof settings.process === 'function') {
+
+        // }
+
+        if (data === undefined || data === null) return;
+        // handle the type depending on the passed stack
+        const types = Object.keys(settings.mapTypesToEvents);
+        for (let i = 0; i < types.length; i++) {
+          const stacks = settings.mapTypesToEvents[types[i]];
+          const stacksGlob =
+            Array.isArray(stacks) && stacks.length
+              ? `*(${stacks.join('|')})`
+              : stacks;
+          if (stacksGlob.length && __minimatch(metas.event, stacksGlob)) {
+            if (typeof data !== 'object') {
+              data = {
+                type: types[i],
+                value: data
+              };
+            } else if (!data.type) {
+              data.type = types[i];
+            }
+            break;
           }
-          break;
         }
-      }
 
-      this.log(data);
-    });
+        this.log(data);
+      },
+      {
+        filter: settings.filter,
+        processor: settings.processor
+      }
+    );
   }
 
   /**

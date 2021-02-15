@@ -17,6 +17,7 @@
     "forceConsistentCasingInFileNames": false,
     "noImplicitAny": false,
     "noStrictGenericChecks": false,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true
   }
 }

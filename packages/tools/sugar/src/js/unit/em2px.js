@@ -10,6 +10,7 @@
     }
 })(function (require, exports) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     /**
      * @name                    em2px
      * @namespace           sugar.js.unit
@@ -37,6 +38,6 @@
         if ($elm === void 0) { $elm = document.documentElement; }
         return em * parseFloat(getComputedStyle($elm).fontSize || '16px');
     }
-    return em2px;
+    exports.default = em2px;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW0ycHguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJlbTJweC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7Ozs7Ozs7SUFFVjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXNCRztJQUNILFNBQVMsS0FBSyxDQUFDLEVBQUUsRUFBRSxJQUErQjtRQUEvQixxQkFBQSxFQUFBLE9BQU8sUUFBUSxDQUFDLGVBQWU7UUFDaEQsT0FBTyxFQUFFLEdBQUcsVUFBVSxDQUFDLGdCQUFnQixDQUFDLElBQUksQ0FBQyxDQUFDLFFBQVEsSUFBSSxNQUFNLENBQUMsQ0FBQztJQUNwRSxDQUFDO0lBQ0QsT0FBUyxLQUFLLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW0ycHguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJlbTJweC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7Ozs7Ozs7O0lBRVY7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FzQkc7SUFDSCxTQUFTLEtBQUssQ0FBQyxFQUFFLEVBQUUsSUFBK0I7UUFBL0IscUJBQUEsRUFBQSxPQUFPLFFBQVEsQ0FBQyxlQUFlO1FBQ2hELE9BQU8sRUFBRSxHQUFHLFVBQVUsQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsQ0FBQyxRQUFRLElBQUksTUFBTSxDQUFDLENBQUM7SUFDcEUsQ0FBQztJQUNELGtCQUFlLEtBQUssQ0FBQyJ9

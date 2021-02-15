@@ -19,179 +19,8 @@ import __srcDir from '../path/srcDir';
 import cacheD from '../path/distDir';
 import __cacheDir from '../path/cacheDir';
 
-/**
- * @name          SFileReadSettingsInterface
- * @type          Class
- * @extends       SInterface
- * @status              beta
- *
- * Watch settings interface
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export class SFileReadSettingsInterface extends __SInterface {
-  static definition = {
-    encoding: {
-      type: 'String',
-      values: [
-        'utf8',
-        'ascii',
-        'utf-8',
-        'utf16le',
-        'ucs2',
-        'ucs-2',
-        'base64',
-        'latin1',
-        'binary',
-        'hex'
-      ],
-      required: true,
-      default: 'utf8'
-    },
-    flag: {
-      type: 'String',
-      required: false
-    },
-    cast: {
-      type: 'Boolean',
-      required: true,
-      default: true
-    }
-  };
-}
-
-/**
- * @name          SFileWriteSettingsInterface
- * @type          Class
- * @extends       SInterface
- * @status              beta
- *
- * Watch settings interface
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export class SFileWriteSettingsInterface extends __SInterface {
-  static definition = {
-    encoding: {
-      type: 'String',
-      values: [
-        'utf8',
-        'ascii',
-        'utf-8',
-        'utf16le',
-        'ucs2',
-        'ucs-2',
-        'base64',
-        'latin1',
-        'binary',
-        'hex'
-      ],
-      required: true,
-      default: 'utf8'
-    },
-    flag: {
-      type: 'String',
-      required: false
-    },
-    mode: {
-      type: 'Number',
-      required: true,
-      default: 0o666
-    },
-    cast: {
-      type: 'Boolean',
-      required: true,
-      default: true
-    },
-    path: {
-      type: 'String',
-      required: true
-    }
-  };
-}
-
-/**
- * @name          SFileWatchSettingsInterface
- * @type          Class
- * @extends       SInterface
- * @status              beta
- *
- * Watch settings interface
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export class SFileWatchSettingsInterface extends __SInterface {
-  static definition = {
-    pollingInterval: {
-      type: 'Number',
-      required: true,
-      default: 500
-    }
-  };
-}
-
-/**
- * @name          SFileSettingsInterface
- * @type          Class
- * @extends       SInterface
- * @status              beta
- *
- * Settings infertage
- *
- * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-export class SFileSettingsInterface extends __SInterface {
-  static definition = {
-    checkExistence: {
-      type: 'Boolean',
-      required: true,
-      default: true
-    },
-    cwd: {
-      type: 'String',
-      required: true,
-      default: process.cwd()
-    },
-    shrinkSizesTo: {
-      type: 'Integer',
-      required: true,
-      default: 4
-    },
-    watch: {
-      interface: SFileWatchSettingsInterface,
-      type: 'Boolean|Object',
-      required: true
-    },
-    writeSettings: {
-      interface: SFileWriteSettingsInterface.override({
-        path: {
-          required: false
-        }
-      }),
-      type: 'Object',
-      required: true
-    },
-    readSettings: {
-      interface: SFileReadSettingsInterface,
-      type: 'Object',
-      required: true
-    }
-  };
-}
-
-export class SFileCtorSettingsInterface extends __SInterface {
-  static definition = {
-    file: {
-      interface: SFileSettingsInterface,
-      type: 'Object',
-      required: true
-    }
-  };
-}
+// import SFileCtorSettingsInterface from './interface/SFileCtorSettingsInterface';
+import SFileSettingsInterface from './interface/SFileSettingsInterface';
 
 /**
  * @name            SFile
@@ -336,13 +165,14 @@ export interface ISFile {
 }
 
 class SFile extends __SEventEmitter implements ISFile {
-  static interfaces = {
-    settings: {
-      apply: true,
-      on: '_settings',
-      class: SFileCtorSettingsInterface
-    }
-  };
+  // static interfaces = {
+  //   // settings: {
+  //   //   apply: true,
+  //   //   on: '_settings.file',
+  //   //   class: SFileSettingsInterface
+  //   //   // class: SFileCtorSettingsInterface
+  //   // }
+  // };
 
   /**
    * @name        name
@@ -485,11 +315,29 @@ class SFile extends __SEventEmitter implements ISFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   constructor(filepath: string, settings?: ISFileCtorSettings) {
-    // console.log('ss', settings);
     super(
       __deepMerge(
         {
-          file: {}
+          file: {
+            checkExistence: true,
+            cwd: process.cwd(),
+            shrinkSizesTo: 4,
+            watch: {
+              pollingInterval: 500
+            },
+            writeSettings: {
+              encoding: 'utf8',
+              flag: undefined,
+              mode: 0x666,
+              cast: true,
+              path: undefined
+            },
+            readSettings: {
+              encoding: 'utf8',
+              flag: undefined,
+              cast: true
+            }
+          }
         },
         settings || {}
       )

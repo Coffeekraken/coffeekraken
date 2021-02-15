@@ -244,43 +244,7 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
     this.$innerContainer.destroy();
     this.$innerContainer = this._createInnerContainer();
     this.$container.append(this.$innerContainer);
-    // this.$innerContainer.clearItems();
-
-    // this.$innerContainer.destroy();
-    // this.$innerContainer = this._createInnerContainer();
-    // this.$container.append(this.$innerContainer);
-
-    // const $parent = this.$container.parent;
-    // this.$container = this._createContainer();
-    // if ($parent) {
-    //   $parent.append(this.$container);
-    // }
-    // this.$container.children.forEach(($component, i) => {
-    //   $component.destroy();
-    // });
-    // this.$container.setContent('');
-    // this.$container.screen.clearRegion(
-    //   this.$container.aleft,
-    //   this.$container.aleft + this.$container.width,
-    //   this.$container.atop,
-    //   this.$container.atop + this.$container.height
-    // );
-    // this.$container.screen.render();
-
     await __wait(0);
-
-    // nativeConsole.log(
-    //   this.$container.aleft,
-    //   this.$container.aleft + this.$container.width,
-    //   this.$container.atop,
-    //   this.$container.atop + this.$container.height
-    // );
-
-    // this.$container.style.bg = 'red';
-    // reset the stack
-    //
-    // this.$container.update();
-
     return true;
   }
 

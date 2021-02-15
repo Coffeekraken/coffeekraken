@@ -293,6 +293,7 @@ function applyInterfaces(ctx: any) {
       );
 
       if (settings.apply !== true) return;
+
       if (settings.on) {
         if (
           typeof settings.on === 'string' &&

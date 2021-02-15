@@ -26,6 +26,7 @@ import { ISProcessSettings } from '../../process/SProcess';
 export interface ISSvelteCompilerProcessSettings extends ISProcessSettings {}
 export interface ISSvelteCompilerProcessSettings extends ISProcessSettings {}
 
+// @ts-ignore
 class SSvelteCompilerProcess extends SProcess {
   static interfaces = {
     initialParams: {

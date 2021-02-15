@@ -105,18 +105,14 @@ export default class SSugarAppTerminalStdio extends __SStdio {
         state: 'ready',
         $stdio: $welcome
       },
-      // summary: {
-      //   id: 'summary',
-      //   name: 'Summary',
-      //   state: 'ready',
-      //   $stdio: $summary
-      // },
+      summary: {
+        id: 'summary',
+        name: 'Summary',
+        state: 'ready',
+        $stdio: $summary
+      },
       ...this._handlerProcess.loadedModules
     };
-
-    // this._serverSettings = this._modules[
-    //   this._appSettings.welcome.serverModule
-    // ];
 
     this.$container = this._initContainer();
     this.$stdio = this._initStdio();
@@ -128,6 +124,9 @@ export default class SSugarAppTerminalStdio extends __SStdio {
     Object.keys(this._modules).forEach((moduleName, i) => {
       const moduleObj = this._modules[moduleName];
       this._initModule(moduleName);
+      if (moduleObj.on && typeof moduleObj.on === 'function') {
+        this._summaryStdio.registerSource(moduleObj);
+      }
       // $summary.registerSource(moduleObj.instance);
     });
 
@@ -584,7 +583,30 @@ export default class SSugarAppTerminalStdio extends __SStdio {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _initSummary(params: any) {
-    const blessedStdio = new __SBlessedStdio([], {
+    let currentOut;
+    const summaryBlessedStdio = new __SBlessedStdio([], {
+      stdio: {
+        filter: (value, metas) => {
+          if (value && value.type === 'separator') return false;
+          if (value && value.type === 'time') return false;
+          return true;
+        },
+        processor: (value, metas) => {
+          value = __clone(value, { deep: true });
+
+          const id = metas.path.split('.').pop();
+          if (id !== currentOut && value && value.value) {
+            value.value =
+              '<yellow>_</yellow>\n' +
+              [`<bgYellow> <black>${id}</black> </bgYellow>`, value.value].join(
+                '\n'
+              );
+            currentOut = id;
+          }
+          if (value && value.clear) delete value.clear;
+          return [value, metas];
+        }
+      },
       blessed: {
         top: 0,
         left: 0,
@@ -592,7 +614,8 @@ export default class SSugarAppTerminalStdio extends __SStdio {
         height: '100%'
       }
     });
-    return blessedStdio.$container;
+    this._summaryStdio = summaryBlessedStdio;
+    return summaryBlessedStdio.$container;
   }
 
   /**

@@ -9,13 +9,12 @@
 			super({
 				svelteComponent: {}
 			});
-			console.log('COM^=');
 		}
 	}
 
-	new MyCoolComponent();
+	console.log('DFF')
 
-	// console.log('DFF')
+	new MyCoolComponent();
 
 </script>
 

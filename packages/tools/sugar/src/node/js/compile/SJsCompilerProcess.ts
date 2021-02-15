@@ -26,6 +26,7 @@ import { ISProcessSettings } from '../../process/SProcess';
 export interface ISJsCompilerProcessSettings extends ISProcessSettings {}
 export interface ISJsCompilerProcessSettings extends ISProcessSettings {}
 
+// @ts-ignore
 class SJsCompilerProcess extends SProcess {
   static interfaces = {
     initialParams: {

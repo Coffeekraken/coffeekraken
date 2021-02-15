@@ -442,6 +442,8 @@ class SPromise extends __SClass.extends(Promise) {
     });
   }
 
+  then<R, E2 = E>(f: (r: T) => R): Promisish<R, E>;
+
   /**
    * @name          reject
    * @type          Function

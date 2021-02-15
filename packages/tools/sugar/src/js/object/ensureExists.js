@@ -13,14 +13,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var get_1 = __importDefault(require("./get"));
     var set_1 = __importDefault(require("./set"));
-    return function (obj, path, value) {
+    /**
+     * @name                        ensureExists
+     * @namespace           sugar.js.object
+     * @type                        Function
+     * @stable
+     *
+     * Pass a string like "my.cool.object" and the value it has to be and this function will ensure that this deep object exist
+     *
+     * @param           {Object}            obj                           The object on which to check the path existence
+     * @param           {String}            path                           The dotted object path to check
+     * @param           {Mixed}             value                         The value to set to the object path created if not already exist
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @example           js
+     * import ensureExists from '@coffeekraken/sugar/js/object/ensureExists';
+     * const myObj = { hello: 'world' }«
+     * ensureExists(myObj, 'cool.object', {});
+     * // { hello: 'world', cool: { object: {} } }
+     *
+     * @since       2.0.0
+     * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    exports.default = (function (obj, path, value) {
         if (value === void 0) { value = {}; }
         var v = get_1.default(obj, path);
         if (v === undefined) {
             set_1.default(obj, path, value);
         }
-    };
+    });
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW5zdXJlRXhpc3RzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZW5zdXJlRXhpc3RzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7Ozs7OztJQUVWLDhDQUEwQjtJQUMxQiw4Q0FBMEI7SUEyQjFCLE9BQVMsVUFBQyxHQUFHLEVBQUUsSUFBSSxFQUFFLEtBQVU7UUFBVixzQkFBQSxFQUFBLFVBQVU7UUFDN0IsSUFBTSxDQUFDLEdBQUcsYUFBSyxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsQ0FBQztRQUMzQixJQUFJLENBQUMsS0FBSyxTQUFTLEVBQUU7WUFDbkIsYUFBSyxDQUFDLEdBQUcsRUFBRSxJQUFJLEVBQUUsS0FBSyxDQUFDLENBQUM7U0FDekI7SUFDSCxDQUFDLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW5zdXJlRXhpc3RzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZW5zdXJlRXhpc3RzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7Ozs7Ozs7SUFFViw4Q0FBMEI7SUFDMUIsOENBQTBCO0lBRTFCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F3Qkc7SUFDSCxtQkFBZSxVQUFDLEdBQUcsRUFBRSxJQUFJLEVBQUUsS0FBVTtRQUFWLHNCQUFBLEVBQUEsVUFBVTtRQUNuQyxJQUFNLENBQUMsR0FBRyxhQUFLLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxDQUFDO1FBQzNCLElBQUksQ0FBQyxLQUFLLFNBQVMsRUFBRTtZQUNuQixhQUFLLENBQUMsR0FBRyxFQUFFLElBQUksRUFBRSxLQUFLLENBQUMsQ0FBQztTQUN6QjtJQUNILENBQUMsRUFBQyJ9

@@ -13,11 +13,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
     var sha512_1 = __importDefault(require("crypto-js/sha512"));
     var toString_1 = __importDefault(require("../string/toString"));
     var parse_1 = __importDefault(require("../string/parse"));
     var __encryptedMessages = {};
-    return {
+    /**
+     * @name            sha512
+     * @namespace           sugar.js.crypt
+     * @type            Object
+     * @status              wip
+     *
+     * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the sha512 algorithm
+     *
+     * @todo        interface
+     * @todo        doc
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    exports.default = {
         /**
          * @name        encrypt
          * @type          Function
@@ -58,4 +73,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         }
     };
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2hhNTEyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2hhNTEyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7Ozs7OztJQUVWLDREQUFzQztJQUN0QyxnRUFBMEM7SUFDMUMsMERBQW9DO0lBRXBDLElBQU0sbUJBQW1CLEdBQUcsRUFBRSxDQUFDO0lBZ0IvQixPQUFTO1FBQ1A7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxVQUFVLE9BQU87WUFDeEIsSUFBSSxPQUFPLE9BQU8sS0FBSyxRQUFRO2dCQUFFLE9BQU8sR0FBRyxrQkFBUSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1lBQzdELElBQU0sTUFBTSxHQUFHLGdCQUFNLENBQUMsT0FBTyxDQUFDLENBQUMsUUFBUSxFQUFFLENBQUM7WUFDMUMsbUJBQW1CLENBQUMsTUFBTSxDQUFDLEdBQUcsT0FBTyxDQUFDO1lBQ3RDLE9BQU8sTUFBTSxDQUFDO1FBQ2hCLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLFVBQVUsT0FBTztZQUN4QixJQUFJLENBQUMsbUJBQW1CLENBQUMsT0FBTyxDQUFDLEVBQUU7Z0JBQ2pDLE9BQU8sQ0FBQyxJQUFJLENBQUMsbUJBQWdCLE9BQU8sOEJBQTBCLENBQUMsQ0FBQztnQkFDaEUsT0FBTzthQUNSO1lBQ0QsSUFBTSxNQUFNLEdBQUcsbUJBQW1CLENBQUMsT0FBTyxDQUFDLENBQUM7WUFDNUMsT0FBTyxtQkFBbUIsQ0FBQyxPQUFPLENBQUMsQ0FBQztZQUNwQyxPQUFPLGVBQUssQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUN2QixDQUFDO0tBQ0YsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2hhNTEyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2hhNTEyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7Ozs7Ozs7SUFFViw0REFBc0M7SUFDdEMsZ0VBQTBDO0lBQzFDLDBEQUFvQztJQUVwQyxJQUFNLG1CQUFtQixHQUFHLEVBQUUsQ0FBQztJQUUvQjs7Ozs7Ozs7Ozs7OztPQWFHO0lBQ0gsa0JBQWU7UUFDYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLFVBQVUsT0FBTztZQUN4QixJQUFJLE9BQU8sT0FBTyxLQUFLLFFBQVE7Z0JBQUUsT0FBTyxHQUFHLGtCQUFRLENBQUMsT0FBTyxDQUFDLENBQUM7WUFDN0QsSUFBTSxNQUFNLEdBQUcsZ0JBQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztZQUMxQyxtQkFBbUIsQ0FBQyxNQUFNLENBQUMsR0FBRyxPQUFPLENBQUM7WUFDdEMsT0FBTyxNQUFNLENBQUM7UUFDaEIsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsVUFBVSxPQUFPO1lBQ3hCLElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxPQUFPLENBQUMsRUFBRTtnQkFDakMsT0FBTyxDQUFDLElBQUksQ0FBQyxtQkFBZ0IsT0FBTyw4QkFBMEIsQ0FBQyxDQUFDO2dCQUNoRSxPQUFPO2FBQ1I7WUFDRCxJQUFNLE1BQU0sR0FBRyxtQkFBbUIsQ0FBQyxPQUFPLENBQUMsQ0FBQztZQUM1QyxPQUFPLG1CQUFtQixDQUFDLE9BQU8sQ0FBQyxDQUFDO1lBQ3BDLE9BQU8sZUFBSyxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBQ3ZCLENBQUM7S0FDRixDQUFDIn0=

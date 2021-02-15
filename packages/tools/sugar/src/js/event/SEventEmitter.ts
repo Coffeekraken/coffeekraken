@@ -39,8 +39,15 @@ export interface ISEventEmitterPipeSettings {
   filter?: ISEventEmitterPipeSettingsFilterFn;
 }
 
+export interface ISEventEmitterOnSettings {
+  processor: ISEventEmitterPipeSettingsProcessorFn;
+  filter: ISEventEmitterPipeSettingsFilterFn;
+}
+
 export interface ISEventEmitterCallbackSettings {
   callNumber?: number;
+  filter?: ISEventEmitterPipeSettingsFilterFn;
+  processor?: ISEventEmitterPipeSettingsProcessorFn;
 }
 
 export interface ISEventEmitterMetas {
@@ -64,6 +71,8 @@ export interface ISEventEmitterEventStackItem {
   callback: ISEventEmitterCallbackFn;
   callNumber: number;
   called: number;
+  filter: ISEventEmitterPipeSettingsFilterFn;
+  processor: ISEventEmitterPipeSettingsProcessorFn;
 }
 
 export interface ISEventEmitterEventsStacks {
@@ -410,6 +419,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
   ) {
     settings = {
       callNumber: undefined,
+      filter: undefined,
+      processor: undefined,
       ...settings
     };
 
@@ -444,6 +455,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       eventStackObj.callStack.push({
         callback,
         callNumber,
+        filter: settings.filter,
+        processor: settings.processor,
         called: 0
       });
 
@@ -570,7 +583,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         return false;
       }
     );
-    const metasObj: ISEventEmitterMetas = <ISEventEmitterMetas>__deepMerge(
+    let metasObj: ISEventEmitterMetas = <ISEventEmitterMetas>__deepMerge(
       <ISEventEmitterMetas>{
         event: event,
         name: event,
@@ -587,6 +600,28 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       const item: ISEventEmitterEventStackItem = eventStackArray[i];
       // make sure the stack exist
       if (!item.callback) return currentCallbackReturnedValue;
+
+      // check if we have a filter setted
+      if (item.filter && !item.filter(currentCallbackReturnedValue, metasObj))
+        continue;
+      // check if need to process the value
+      if (item.processor) {
+        const res = item.processor(currentCallbackReturnedValue, metasObj);
+        if (Array.isArray(res) && res.length === 2) {
+          currentCallbackReturnedValue = res[0];
+          metasObj = res[1];
+        } else if (
+          typeof res === 'object' &&
+          res.value !== undefined &&
+          res.metas !== undefined
+        ) {
+          currentCallbackReturnedValue = res.value;
+          metasObj = res.metas;
+        } else {
+          currentCallbackReturnedValue = res;
+        }
+      }
+
       // call the callback function
       let callbackResult = item.callback(
         currentCallbackReturnedValue,
@@ -671,13 +706,22 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    */
   on(
     events: string | string[],
-    callback: ISEventEmitterCallbackFn
+    callback: ISEventEmitterCallbackFn,
+    settings?: Partial<ISEventEmitterOnSettings>
   ): ISEventEmitter {
     // if (this._isDestroyed) {
     //   throw new Error(
     //     `Sorry but you can't call the "on" method on this SEventEmitter cause it has been destroyed...`
     //   );
     // }
+
+    const set = <ISEventEmitterOnSettings>__deepMerge(
+      {
+        filter: undefined,
+        processor: undefined
+      },
+      settings
+    );
 
     if (typeof events === 'string')
       events = events.split(',').map((s) => s.trim());
@@ -693,7 +737,9 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       }
       // calling the registration method
       this._registerCallbackInEventStack(name, callback, {
-        callNumber
+        callNumber,
+        filter: set.filter,
+        processor: set.processor
       });
     });
 

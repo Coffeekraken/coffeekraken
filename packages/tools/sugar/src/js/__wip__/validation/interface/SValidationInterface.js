@@ -25,16 +25,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
 })(function (require, exports) {
     "use strict";
-    var _a;
+    Object.defineProperty(exports, "__esModule", { value: true });
     var SInterface_1 = __importDefault(require("../../class/SInterface"));
-    return (_a = /** @class */ (function (_super) {
-            __extends(SValidationInterface, _super);
-            function SValidationInterface() {
-                return _super !== null && _super.apply(this, arguments) || this;
-            }
-            return SValidationInterface;
-        }(SInterface_1.default)),
-        _a.definition = {
+    /**
+     * @name                SValidationInterface
+     * @namespace           sugar.js.validation.interface
+     * @type                Class
+     * @extends             SInterface
+     *
+     * This class represent the interface that describe the minimum requirements
+     * for a validation class that extends the SValueValidation one
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    var SValidationInterface = /** @class */ (function (_super) {
+        __extends(SValidationInterface, _super);
+        function SValidationInterface() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        SValidationInterface.definition = {
             apply: {
                 type: 'Function',
                 required: true,
@@ -47,7 +57,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                 description: 'This is the method that will be called to validate the passed value. This method has to return true of false depending on the check result',
                 static: true
             }
-        },
-        _a);
+        };
+        return SValidationInterface;
+    }(SInterface_1.default));
+    exports.default = SValidationInterface;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1ZhbGlkYXRpb25JbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTVmFsaWRhdGlvbkludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsc0VBQWtEO0lBY2xEO1lBQTRDLHdDQUFZO1lBQS9DOztZQWlCVCxDQUFDO1lBQUQsMkJBQUM7UUFBRCxDQUFDLEFBakJRLENBQW1DLG9CQUFZO1FBQy9DLGFBQVUsR0FBRztZQUNsQixLQUFLLEVBQUU7Z0JBQ0wsSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLFFBQVEsRUFBRSxJQUFJO2dCQUNkLFdBQVcsRUFDVCx5RUFBeUU7Z0JBQzNFLE1BQU0sRUFBRSxJQUFJO2FBQ2I7WUFDRCxJQUFJLEVBQUU7Z0JBQ0osSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLFFBQVEsRUFBRSxJQUFJO2dCQUNkLFdBQVcsRUFDVCw0SUFBNEk7Z0JBQzlJLE1BQU0sRUFBRSxJQUFJO2FBQ2I7U0FDRDtZQUNGIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1ZhbGlkYXRpb25JbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTVmFsaWRhdGlvbkludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsc0VBQWtEO0lBRWxEOzs7Ozs7Ozs7OztPQVdHO0lBQ0g7UUFBa0Qsd0NBQVk7UUFBOUQ7O1FBaUJBLENBQUM7UUFoQlEsK0JBQVUsR0FBRztZQUNsQixLQUFLLEVBQUU7Z0JBQ0wsSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLFFBQVEsRUFBRSxJQUFJO2dCQUNkLFdBQVcsRUFDVCx5RUFBeUU7Z0JBQzNFLE1BQU0sRUFBRSxJQUFJO2FBQ2I7WUFDRCxJQUFJLEVBQUU7Z0JBQ0osSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLFFBQVEsRUFBRSxJQUFJO2dCQUNkLFdBQVcsRUFDVCw0SUFBNEk7Z0JBQzlJLE1BQU0sRUFBRSxJQUFJO2FBQ2I7U0FDRixDQUFDO1FBQ0osMkJBQUM7S0FBQSxBQWpCRCxDQUFrRCxvQkFBWSxHQWlCN0Q7c0JBakJvQixvQkFBb0IifQ==

@@ -32,7 +32,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     if (node_1.default()) {
-        export = [
+        export default [
             'Number',
             'String',
             'Symbol',
@@ -46,7 +46,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         ];
     }
     else {
-        export = [
+        export default [
             'Number',
             'String',
             'Symbol',
@@ -60,4 +60,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         ];
     }
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGF0YVR5cGVzQXJyYXkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkYXRhVHlwZXNBcnJheS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7Ozs7Ozs7Ozs7O0lBRVYsb0RBQWtDO0lBRWxDOzs7Ozs7Ozs7Ozs7Ozs7T0FlRztJQUNILElBQUksY0FBUSxFQUFFLEVBQUU7UUFDZCxTQUFTO1lBQ1AsUUFBUTtZQUNSLFFBQVE7WUFDUixRQUFRO1lBQ1IsU0FBUztZQUNULE1BQU07WUFDTixXQUFXO1lBQ1gsUUFBUTtZQUNSLE9BQU87WUFDUCxNQUFNO1lBQ04sVUFBVTtTQUNYLENBQUM7S0FDSDtTQUFNO1FBQ0wsU0FBUztZQUNQLFFBQVE7WUFDUixRQUFRO1lBQ1IsUUFBUTtZQUNSLFNBQVM7WUFDVCxNQUFNO1lBQ04sV0FBVztZQUNYLFFBQVE7WUFDUixPQUFPO1lBQ1AsTUFBTTtZQUNOLFVBQVU7U0FDWCxDQUFDO0tBQ0gifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGF0YVR5cGVzQXJyYXkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkYXRhVHlwZXNBcnJheS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7Ozs7Ozs7Ozs7O0lBRVYsb0RBQWtDO0lBRWxDOzs7Ozs7Ozs7Ozs7Ozs7T0FlRztJQUNILElBQUksY0FBUSxFQUFFLEVBQUU7UUFDZCxlQUFlO1lBQ2IsUUFBUTtZQUNSLFFBQVE7WUFDUixRQUFRO1lBQ1IsU0FBUztZQUNULE1BQU07WUFDTixXQUFXO1lBQ1gsUUFBUTtZQUNSLE9BQU87WUFDUCxNQUFNO1lBQ04sVUFBVTtTQUNYLENBQUM7S0FDSDtTQUFNO1FBQ0wsZUFBZTtZQUNiLFFBQVE7WUFDUixRQUFRO1lBQ1IsUUFBUTtZQUNSLFNBQVM7WUFDVCxNQUFNO1lBQ04sV0FBVztZQUNYLFFBQVE7WUFDUixPQUFPO1lBQ1AsTUFBTTtZQUNOLFVBQVU7U0FDWCxDQUFDO0tBQ0gifQ==

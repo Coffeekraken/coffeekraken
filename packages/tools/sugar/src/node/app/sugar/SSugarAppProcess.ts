@@ -52,6 +52,7 @@ export interface ISSugarAppModuleDescriptor {
   instance?: __SSugarAppModule;
 }
 
+// @ts-ignore
 export default class SSugarAppProcess extends __SProcess {
   static interfaces = {
     this: {

@@ -97,7 +97,7 @@ export default class SLog {
 
     // if needed, override the native console
     if (this._settings.overrideNativeConsole) {
-      // this._overrideNativeConsole();
+      this._overrideNativeConsole();
     }
   }
 

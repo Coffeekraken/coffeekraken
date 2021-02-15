@@ -24,6 +24,8 @@ import __spawn from './spawn';
 import __parseHtml from '../console/parseHtml';
 import __uniqid from '../string/uniqid';
 import __SEventEmitter from '../event/SEventEmitter';
+import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
+import __SNotification from '../notification/SNotification';
 
 import { ILog } from '../log/log';
 import { ISpawnSettings } from './spawn';
@@ -61,19 +63,8 @@ export interface ISProcessObject {
   value: any;
 }
 
-export interface ISProcessNotification {
-  title: string;
-  message: string;
-  icon: string;
-}
 export interface ISProcessNotificationSettings {
   enable: boolean;
-  start: ISProcessNotification;
-  success: ISProcessNotification;
-  error: ISProcessNotification;
-  cancel: ISProcessNotification;
-  process: ISProcessNotification;
-  kill: ISProcessNotification;
 }
 
 export interface ISProcessCtorSettings {
@@ -96,7 +87,7 @@ export interface ISProcessSettings {
   runAsChild: boolean;
   paramsInterface: ISInterface | ISInterfaceCtor;
   processPath: string;
-  notifications: ISProcessNotificationSettings;
+  notification: ISProcessNotificationSettings;
   env: Record<string, unknown>;
   spawn: Record<string, unknown>;
   decorators: boolean;
@@ -121,6 +112,14 @@ export interface ISProcess extends ISProcessInternal {
 }
 
 class SProcess extends __SEventEmitter implements ISProcessInternal {
+  static interfaces = {
+    settings: {
+      apply: true,
+      on: '_settings.process',
+      class: __SProcessSettingsInterface
+    }
+  };
+
   /**
    * @name      params
    * @type      String
@@ -157,6 +156,18 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _state = 'idle';
+
+  /**
+   * @name      _notifier
+   * @type      SNotification
+   * @private
+   *
+   * Store the SNotification instance used for this process
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _notifier: __SNotification;
 
   /**
    * @name      executionsStack
@@ -250,59 +261,15 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     super(
       __deepMerge(
         {
-          process: {
-            asyncStart: false,
-            stdio: 'inherit',
-            decorators: false,
-            throw: true,
-            exitAtEnd: false,
-            runAsChild: false,
-            definition: undefined,
-            processPath: null,
-            notifications: {
-              enable: true,
-              process: {
-                title: null,
-                message: `Notification from process...`,
-                icon: `${__packageRoot(
-                  __dirname
-                )}/src/data/notifications/ck_start.png`
-              },
-              start: {
-                title: null,
-                message: `Process is running...`,
-                icon: `${__packageRoot(
-                  __dirname
-                )}/src/data/notifications/ck_start.png`
-              },
-              success: {
-                title: null,
-                message: `Process has finish successfully`,
-                icon: `${__packageRoot(
-                  __dirname
-                )}/src/data/notifications/ck_success.png`
-              },
-              error: {
-                title: null,
-                message: `Something went wrong...`,
-                icon: `${__packageRoot(
-                  __dirname
-                )}/src/data/notifications/ck_error.png`
-              },
-              kill: {
-                title: null,
-                message: `Process killed...`,
-                icon: `${__packageRoot(
-                  __dirname
-                )}/src/data/notifications/ck_error.png`
-              }
-            },
-            env: {}
-          }
+          process: {}
         },
         settings
       )
     );
+
+    this._notifier = new __SNotification({
+      enable: this.processSettings.notification.enable
+    });
 
     // save initial params
     this.initialParams = Object.assign({}, initialParams);
@@ -328,19 +295,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       throw new __SError(
         `An SProcess instance MUST have a "<yellow>processPath</yellow>" property either populated automatically if possible, or specified in the "<cyan>settings.processPath</cyan>" property...`
       );
-    }
-
-    if (!this.processSettings.notifications.start.title) {
-      this.processSettings.notifications.start.title = `${this.name} (${this.id})`;
-    }
-    if (!this.processSettings.notifications.success.title) {
-      this.processSettings.notifications.success.title = `${this.name} (${this.id})`;
-    }
-    if (!this.processSettings.notifications.error.title) {
-      this.processSettings.notifications.error.title = `${this.name} (${this.id})`;
-    }
-    if (!this.processSettings.notifications.kill.title) {
-      this.processSettings.notifications.kill.title = `${this.name} (${this.id})`;
     }
 
     // ready if not an asyncStart process
@@ -520,42 +474,13 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     });
 
     // listen for notification
-    if (
-      this.processSettings.notifications.enable === true &&
-      this.processSettings.notifications.process !== undefined
-    ) {
-      this._processPromise &&
-        this._processPromise.on('notification', (notificationObj, metas) => {
-          let icon = `${__packageRoot(
-            __dirname
-          )}/src/data/notifications/ck_start.png`;
-
-          let id = notificationObj.id || __uniqid();
-
-          if (notificationObj.type === 'success')
-            icon = `${__packageRoot(
-              __dirname
-            )}/src/data/notifications/ck_success.png`;
-          else if (notificationObj.type === 'error')
-            icon = `${__packageRoot(
-              __dirname
-            )}/src/data/notifications/ck_error.png`;
-          else if (notificationObj.type === 'warn')
-            icon = `${__packageRoot(
-              __dirname
-            )}/src/data/notifications/ck_start.png`;
-          __notifier.notify({
-            ...this.processSettings.notifications.process,
-            icon,
-            ...notificationObj,
-            id,
-            message:
-              notificationObj.value ||
-              notificationObj.message ||
-              this.processSettings.notifications.process.message
-          });
+    this._processPromise &&
+      this._processPromise.on('notification', (notificationObj, metas) => {
+        this._notifier.notify({
+          title: `${this.id}`,
+          ...notificationObj
         });
-    }
+      });
 
     // listen for "data" and "log" events
     this._processPromise &&
@@ -712,86 +637,99 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     const strArray: string[] = [];
     if (
       !__isChildProcess() &&
-      this._settings && // @todo      check why this is causing context problem after 2 or 3 kill run...
-      this.processSettings.decorators === true
+      this._settings // @todo      check why this is causing context problem after 2 or 3 kill run...
     ) {
       switch (state) {
         case 'success':
-          this.log({
-            color: 'green',
-            type: 'heading',
-            value: `The <yellow>${this.name || 'process'}</yellow> <cyan>${
-              this.id
-            }</cyan> execution has finished <green>successfully</green> in <yellow>${__convert(
-              this.currentExecutionObj.duration,
-              __convert.SECOND
-            )}s</yellow>`
-          });
-          if (this.processSettings.notifications.enable) {
-            __notifier.notify(this.processSettings.notifications.success);
+          if (this.processSettings.decorators === true) {
+            this.log({
+              color: 'green',
+              type: 'heading',
+              value: `The <yellow>${this.name || 'process'}</yellow> <cyan>${
+                this.id
+              }</cyan> execution has finished <green>successfully</green> in <yellow>${__convert(
+                this.currentExecutionObj.duration,
+                __convert.SECOND
+              )}s</yellow>`
+            });
           }
+          this._notifier.notify({
+            type: 'success',
+            title: `${this.id} success`
+          });
           break;
         case 'running':
-          // log a start message
-          this.log({
-            type: 'heading',
-            value: `Starting the <yellow>${
-              this.name || 'process'
-            }</yellow> <cyan>${this.id}</cyan> execution...`
-          });
-          if (this.processSettings.notifications.enable) {
-            __notifier.notify(this.processSettings.notifications.start);
+          if (this.processSettings.decorators === true) {
+            // log a start message
+            this.log({
+              type: 'heading',
+              value: `Starting the <yellow>${
+                this.name || 'process'
+              }</yellow> <cyan>${this.id}</cyan> execution...`
+            });
           }
+          this._notifier.notify({
+            type: 'start',
+            title: `${this.id} starting`
+          });
           break;
         case 'error':
-          data = this.currentExecutionObj.stderr.toString();
-          strArray.push(' ');
-          strArray.push(`<red>${'-'.repeat(process.stdout.columns - 4)}</red>`);
-          strArray.push(
-            `<red>Something went wrong</red> during the <yellow>${
-              this.name || 'process'
-            }</yellow> <cyan>${this.id}</cyan> execution.`
-          );
-          if (this.currentExecutionObj.stderr.length) {
-            strArray.push(`Here's some details:`);
-            strArray.push(data);
+          if (this.processSettings.decorators === true) {
+            data = this.currentExecutionObj.stderr.toString();
+            strArray.push(' ');
+            strArray.push(
+              `<red>${'-'.repeat(process.stdout.columns - 4)}</red>`
+            );
+            strArray.push(
+              `<red>Something went wrong</red> during the <yellow>${
+                this.name || 'process'
+              }</yellow> <cyan>${this.id}</cyan> execution.`
+            );
+            if (this.currentExecutionObj.stderr.length) {
+              strArray.push(`Here's some details:`);
+              strArray.push(data);
+            }
+            strArray.push(
+              `<red>${'-'.repeat(process.stdout.columns - 4)}</red>`
+            );
+            strArray.push(' ');
+            this.log({
+              value: strArray.join('\n')
+            });
           }
-          strArray.push(`<red>${'-'.repeat(process.stdout.columns - 4)}</red>`);
-          strArray.push(' ');
-          this.log({
-            value: strArray.join('\n')
+          this._notifier.notify({
+            type: 'error',
+            title: `${this.id} error`
           });
-          if (
-            this.processSettings.notifications.enable &&
-            this.processSettings.notifications.cancel
-          ) {
-            __notifier.notify(this.processSettings.notifications.cancel);
-          }
           break;
         case 'killed':
-          data = this.currentExecutionObj.stderr.toString();
-          strArray.push(' ');
-          strArray.push(`<red>${'-'.repeat(process.stdout.columns - 4)}</red>`);
-          strArray.push(
-            `The <yellow>${this.name || 'process'}</yellow> <cyan>${
-              this.id
-            }</cyan> execution has been <red>killed</red>.`
-          );
-          if (this.currentExecutionObj.stderr.length) {
-            strArray.push(`Here's some details:`);
-            strArray.push(data);
+          if (this.processSettings.decorators === true) {
+            data = this.currentExecutionObj.stderr.toString();
+            strArray.push(' ');
+            strArray.push(
+              `<red>${'-'.repeat(process.stdout.columns - 4)}</red>`
+            );
+            strArray.push(
+              `The <yellow>${this.name || 'process'}</yellow> <cyan>${
+                this.id
+              }</cyan> execution has been <red>killed</red>.`
+            );
+            if (this.currentExecutionObj.stderr.length) {
+              strArray.push(`Here's some details:`);
+              strArray.push(data);
+            }
+            strArray.push(
+              `<red>${'-'.repeat(process.stdout.columns - 4)}</red>`
+            );
+            strArray.push(' ');
+            this.log({
+              value: strArray.join('\n')
+            });
           }
-          strArray.push(`<red>${'-'.repeat(process.stdout.columns - 4)}</red>`);
-          strArray.push(' ');
-          this.log({
-            value: strArray.join('\n')
+          this._notifier.notify({
+            type: 'error',
+            title: `${this.id} killed`
           });
-          if (
-            this.processSettings.notifications.enable &&
-            this.processSettings.notifications.cancel !== undefined
-          ) {
-            __notifier.notify(this.processSettings.notifications.cancel);
-          }
           break;
       }
     }

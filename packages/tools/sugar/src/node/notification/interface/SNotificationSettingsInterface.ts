@@ -1,0 +1,1 @@
+../../../js/notification/interface/SNotificationSettingsInterface.ts

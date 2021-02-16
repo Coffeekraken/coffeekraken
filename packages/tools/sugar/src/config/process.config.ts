@@ -72,14 +72,14 @@ export default {
    * @name          runAsChild
    * @namespace     config.process
    * @type          Boolean
-   * @default       false
+   * @default       true
    *
    * Specify if you want the process to be runned into a child process
    *
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  runAsChild: false,
+  runAsChild: true,
 
   /**
    * @name          definition

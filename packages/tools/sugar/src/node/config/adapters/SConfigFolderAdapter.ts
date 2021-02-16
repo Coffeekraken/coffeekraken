@@ -61,12 +61,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
     this._appConfig = {};
     this._userConfig = {};
 
-    // load the default config if exists
-    // if (
-    //   !process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`] &&
-    //   this.settings.defaultConfigPath &&
-    //   __fs.existsSync(this.settings.defaultConfigPath)
-    // ) {
     if (
       this.settings.defaultConfigPath &&
       __fs.existsSync(this.settings.defaultConfigPath)
@@ -96,13 +90,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
       );
     }
 
-    // load the app config if exists
-    // if (
-    //   !process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`] &&
-    //   this.settings.defaultConfigPath !== this.settings.appConfigPath &&
-    //   this.settings.appConfigPath &&
-    //   __fs.existsSync(this.settings.appConfigPath)
-    // ) {
     if (
       this.settings.defaultConfigPath !== this.settings.appConfigPath &&
       this.settings.appConfigPath &&
@@ -129,14 +116,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
       );
     }
 
-    // load the user config
-    // if (
-    //   !process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`] &&
-    //   this.settings.defaultConfigPath !== this.settings.userConfigPath &&
-    //   this.settings.appConfigPath !== this.settings.userConfigPath &&
-    //   this.settings.userConfigPath &&
-    //   __fs.existsSync(this.settings.userConfigPath)
-    // ) {
     if (
       this.settings.defaultConfigPath !== this.settings.userConfigPath &&
       this.settings.appConfigPath !== this.settings.userConfigPath &&

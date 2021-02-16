@@ -155,9 +155,8 @@ export interface ISFile {
   content: string;
   toObject: ISFileToObjectFn;
   update(): void;
-  startWatch(): void;
-  _startWatch(): void;
-  stopWatch(): void;
+  watch(): void;
+  unwatch(): void;
   read: ISFileReadFn;
   readSync: ISFileReadSyncFn;
   write: ISFileWriteFn;
@@ -361,14 +360,13 @@ class SFile extends __SEventEmitter implements ISFile {
 
     // check if need to check for the file existence or not...
     if (this.fileSettings.checkExistence && !this.exists) {
-      console.log(this._settings);
       throw new Error(
         `The passed filepath "<cyan>${this.path}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`
       );
     }
 
     if (this.fileSettings.watch !== false) {
-      this.startWatch();
+      this.watch();
     }
   }
 
@@ -488,7 +486,7 @@ class SFile extends __SEventEmitter implements ISFile {
   }
 
   /**
-   * @name        startWatch
+   * @name        watch
    * @type        Function
    *
    * This method allows you to start watching the file for events like "update", etc...
@@ -497,8 +495,7 @@ class SFile extends __SEventEmitter implements ISFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _watcher: any;
-  _startWatch() {}
-  startWatch() {
+  watch() {
     if (this._watcher) return;
     this._watcher = __fs.watchFile(
       this.path,
@@ -510,13 +507,13 @@ class SFile extends __SEventEmitter implements ISFile {
         this.emit('update', this);
       }
     );
-    if (this._startWatch && typeof this._startWatch === 'function') {
-      this._startWatch();
-    }
+    setTimeout(() => {
+      this.emit('watch', this);
+    });
   }
 
   /**
-   * @name        stopWatch
+   * @name        unwatch
    * @type        Function
    *
    * This method allows you to stop the watching process of the file
@@ -524,10 +521,11 @@ class SFile extends __SEventEmitter implements ISFile {
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  stopWatch() {
+  unwatch() {
     if (!this._watcher) return;
     this._watcher.close();
     this._watcher = undefined;
+    this.emit('unwatch', this);
   }
 
   /**

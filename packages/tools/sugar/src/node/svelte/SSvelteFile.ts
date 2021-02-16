@@ -140,20 +140,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
         settings
       )
     );
-  }
 
-  /**
-   * @name        _startWatch
-   * @type        Function
-   * @private
-   *
-   * Start to watch the file. Does this only once
-   * to avoid multiple compilation and logs
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  private _startWatch() {
     // listen for change event
     this.on('update', async (file, metas) => {
       if (this._currentCompilationParams.watch) {
@@ -196,20 +183,9 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
 
     params = this.applyInterface('compilerParams', params);
 
-    if (params.watch) {
-      this.startWatch();
-    }
-
     // init the promise
     return new __SPromise(
       async ({ resolve, reject, emit, pipe, pipeTo, on }) => {
-        // listen for the end
-        on('finally', () => {
-          this._isCompiling = false;
-        });
-
-        pipeTo(this);
-
         if (this._isCompiling) {
           emit('warn', {
             value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
@@ -217,6 +193,21 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
           return;
         }
         this._isCompiling = true;
+
+        if (params.watch) {
+          this.watch();
+        }
+
+        emit('notification', {
+          title: `${this.id} compilation started`
+        });
+
+        // listen for the end
+        on('finally', () => {
+          this._isCompiling = false;
+        });
+
+        pipeTo(this);
 
         emit('log', {
           clear: true,
@@ -228,7 +219,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
             clear: true,
             type: 'file',
             action: 'update',
-            file: this
+            file: this.toObject()
           });
         }
 
@@ -369,8 +360,6 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
             });
           });
 
-          // nativeConsole.log(result.js.map.toString());
-
           // check if need to save
           if (params.save) {
             // build the save path
@@ -387,7 +376,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
             }
             emit('log', {
               type: 'file',
-              file: this,
+              file: this.toObject(),
               to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
               action: 'save'
             });
@@ -404,7 +393,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
                 to: savePath
                   .replace(/\.js$/, '.js.map')
                   .replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-                file: this
+                file: this.toObject()
               });
             }
 
@@ -415,7 +404,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
               type: 'file',
               action: 'saved',
               to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-              file: this
+              file: this.toObject()
             });
           }
 
@@ -424,11 +413,20 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
           });
 
           if (params.watch) {
+            emit('notification', {
+              type: 'success',
+              title: `${this.id} compilation success`
+            });
+
             emit('log', {
               value: `<blue>[watch] </blue>Watching for changes...`
             });
+
+            this._isCompiling = false;
+            return;
           }
 
+          // resolve only if not watching
           return resolve(result);
         } catch (e) {
           return reject(e.toString());

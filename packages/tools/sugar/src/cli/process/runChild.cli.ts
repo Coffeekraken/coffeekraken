@@ -12,9 +12,8 @@ export default (stringArgs = '') => {
   if (!args.processPath) {
     throw `Sorry but to use this endpont you have to specify at least a "--processPath" parameter...`;
   }
-  const ProcessClass = require(args.processPath);
-
-  if (ProcessClass instanceof __SProcess) {
+  const ProcessClass = require(args.processPath).default;
+  if (ProcessClass.prototype instanceof __SProcess) {
     const processInstance = new ProcessClass();
     processInstance.run(stringArgs);
   }

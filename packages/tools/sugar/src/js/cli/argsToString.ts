@@ -75,6 +75,7 @@ function argsToString(args, settings = {}) {
 
   if (!settings.definition) {
     let string = '';
+
     Object.keys(args).forEach((key) => {
       const argValue = args[key];
       let str = '';
@@ -145,10 +146,10 @@ function argsToString(args, settings = {}) {
         if (val === true) {
           valueStr = '';
         } else {
-          valueStr =
-            val.toString !== undefined && typeof val.toString === 'function'
-              ? val.toString()
-              : __toString(val);
+          valueStr = __toString(value, {
+            beautify: false,
+            hihglight: false
+          });
           if (defObj.type && defObj.type.toLowerCase() === 'string')
             valueStr = `"${valueStr}"`;
           // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
@@ -165,10 +166,10 @@ function argsToString(args, settings = {}) {
       if (value === true) {
         valueStr = '';
       } else {
-        valueStr =
-          value.toString !== undefined && typeof value.toString === 'function'
-            ? value.toString()
-            : __toString(value);
+        valueStr = __toString(value, {
+          beautify: false,
+          hihglight: false
+        });
         if (defObj.type && defObj.type.toLowerCase() === 'string')
           valueStr = `"${valueStr}"`;
         // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
@@ -179,6 +180,7 @@ function argsToString(args, settings = {}) {
           valueStr = `"${valueStr.split('"').join("'")}"`;
         }
       }
+      // console.log(prefix, valueStr);
       cliArray.push(`${prefix} ${valueStr}`);
     }
   });

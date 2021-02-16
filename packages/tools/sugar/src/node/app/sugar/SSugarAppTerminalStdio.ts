@@ -12,7 +12,7 @@ import __SBlessedStdio from '../../stdio/blessed/SBlessedStdio';
 import __color from '../../color/color';
 import __hotkey from '../../keyboard/hotkey';
 import __packageJson from '../../package/json';
-import __SNotification from '../../blessed/notification/SNotification';
+import __SNotification from '../../notification/SNotification';
 import __ora from 'ora';
 import __clone from '../../object/clone';
 import __SPromise from '../../promise/SPromise';
@@ -114,6 +114,12 @@ export default class SSugarAppTerminalStdio extends __SStdio {
       ...this._handlerProcess.loadedModules
     };
 
+    this._notifier = new __SNotification({
+      notification: {
+        adapters: ['node', 'blessed']
+      }
+    });
+
     this.$container = this._initContainer();
     this.$stdio = this._initStdio();
     this.$topBar = this._initTopBar();
@@ -126,8 +132,13 @@ export default class SSugarAppTerminalStdio extends __SStdio {
       this._initModule(moduleName);
       if (moduleObj.on && typeof moduleObj.on === 'function') {
         this._summaryStdio.registerSource(moduleObj);
+        // listen notifications
+        moduleObj.on('notification', (value, metas) => {
+          this._notifier.notify(value).on('click', () => {
+            this._showModule(moduleObj.id);
+          });
+        });
       }
-      // $summary.registerSource(moduleObj.instance);
     });
 
     // show the welcome screen

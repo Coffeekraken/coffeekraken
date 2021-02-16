@@ -20,6 +20,8 @@ import __SNotificationSettingsInterface from './interface/SNotificationSettingsI
  *
  * @param       {ISNotificationSettings}            [settings={}]           Specify some settings to configure your notification instance
  *
+ * @todo        doc
+ *
  * @example         js
  * import SNotification from '@coffeekraken/sugar/js/notification/SNotification';
  * const notif = new SNotification();
@@ -40,14 +42,7 @@ export interface ISNotificationSettings {
 }
 
 export interface ISNotificationObj {
-  type?:
-    | 'success'
-    | 'error'
-    | 'warning'
-    | 'start'
-    | 'kill'
-    | 'default'
-    | undefined;
+  type?: 'success' | 'error' | 'warning' | 'kill' | 'default' | undefined;
   title?: string;
   message?: string;
   icon?: string;
@@ -215,10 +210,12 @@ class SNotification extends __SClass implements ISNotification {
       } else if (!notificationObj.title) baseNotificationObj.title = ' ';
 
       // loop on each adapters
-      for (let i = 0; i < set.adapters.length; i++) {
-        const adapterId = set.adapters[i];
+      set.adapters.forEach(async (adapterId) => {
         // get the adapter
         const adapter = SNotification.getAdapter(adapterId);
+
+        // console.log(adapter.id);
+
         // get the adapter settings if exists
         const adapterSettings: any =
           this.notificationSettings.adaptersSettings[adapterId] || {};
@@ -231,8 +228,7 @@ class SNotification extends __SClass implements ISNotification {
           adapterSettings
         );
         pipeFrom(adapterPromise);
-        await adapterPromise;
-      }
+      });
 
       // resolve the notification process
       resolve(true);

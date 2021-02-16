@@ -193,7 +193,7 @@ export default {
         noImplicitAny: false,
         noStrictGenericChecks: false,
         allowSyntheticDefaultImports: true,
-        incremental: false,
+        // incremental: true,
         // tsBuildInfoFile: '[config.storage.tmpDir]/ts/.tsbuildinfo',
         types: ['node'],
         moduleResolution: 'node'

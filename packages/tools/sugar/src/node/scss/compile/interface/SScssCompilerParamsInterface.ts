@@ -79,7 +79,7 @@ class SScssCompilerParamsInterface extends __SInterface {
       default: __sugarConfig('scss.compile.prod')
     },
     sharedResources: {
-      type: 'String|Array<String>',
+      type: 'Array<String>',
       alias: 'r',
       description:
         'Specify some files to load in every imported files using @use or @import',

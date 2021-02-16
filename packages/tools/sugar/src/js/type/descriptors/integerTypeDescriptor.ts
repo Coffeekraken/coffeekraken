@@ -26,9 +26,12 @@ const descriptor: ISTypeDescriptor = {
   id: 'integer',
   is: (value: any) => Number.isInteger(value),
   cast: (value: any) => {
-    if (typeof value !== 'string') {
-      return new Error(`Sorry but only strings can be casted to integers...`);
+    if (typeof value !== 'string' && typeof value !== 'number') {
+      return new Error(
+        `Sorry but only strings and numbers can be casted to integers... Passed value: ${value}`
+      );
     }
+    // @ts-ignore
     const res = parseInt(value);
     if (isNaN(res))
       return new Error(

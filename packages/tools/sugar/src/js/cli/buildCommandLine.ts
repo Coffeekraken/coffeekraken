@@ -4,6 +4,7 @@ import __toString from '../string/toString';
 import __argsToString from './argsToString';
 import __deepMerge from '../object/deepMerge';
 import __parse from '../string/parse';
+import __stripAnsi from '../string/stripAnsi';
 
 /**
  * @name            buildCommandLine
@@ -90,6 +91,7 @@ const fn: IBuildCommandLineFn = function buildCommandLine(
   const definition = Object.assign({}, settings.definition);
   // get all the tokens
   const tokens = command.match(/\[[a-zA-Z0-9-_]+\]/gm) || [];
+
   tokens.forEach((token) => {
     const tokenName = token.replace('[', '').replace(']', '');
     if (tokenName === 'arguments') return;
@@ -105,6 +107,7 @@ const fn: IBuildCommandLineFn = function buildCommandLine(
       command = command.replace(token, '');
       return;
     }
+
     let tokenValueString = '';
     if (Array.isArray(tokenValue)) {
       tokenValue.forEach((tValue) => {
@@ -132,7 +135,12 @@ const fn: IBuildCommandLineFn = function buildCommandLine(
   });
 
   // args to string
-  const argsString = __argsToString(args, settings).trim();
+  let argsString = __argsToString(args, settings).trim();
+
+  // sanitize the string
+  argsString = __stripAnsi(argsString);
+
+  // replace the command token
   command = command.replace('[arguments]', argsString);
 
   return command.trim();

@@ -67,14 +67,14 @@ exports.default = {
      * @name          runAsChild
      * @namespace     config.process
      * @type          Boolean
-     * @default       false
+     * @default       true
      *
      * Specify if you want the process to be runned into a child process
      *
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    runAsChild: false,
+    runAsChild: true,
     /**
      * @name          definition
      * @namespace     config.process
@@ -113,4 +113,4 @@ exports.default = {
      */
     notification: '[config.notification]'
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvY2Vzcy5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwcm9jZXNzLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUVBLGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILFVBQVUsRUFBRSxLQUFLO0lBRWpCOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILEtBQUssRUFBRSxTQUFTO0lBRWhCOzs7Ozs7Ozs7O09BVUc7SUFDSCxVQUFVLEVBQUUsS0FBSztJQUVqQjs7Ozs7Ozs7OztPQVVHO0lBQ0gsS0FBSyxFQUFFLElBQUk7SUFFWDs7Ozs7Ozs7OztPQVVHO0lBQ0gsU0FBUyxFQUFFLEtBQUs7SUFFaEI7Ozs7Ozs7Ozs7T0FVRztJQUNILFVBQVUsRUFBRSxLQUFLO0lBRWpCOzs7Ozs7Ozs7O09BVUc7SUFDSCxVQUFVLEVBQUUsU0FBUztJQUVyQjs7Ozs7Ozs7Ozs7T0FXRztJQUNILFdBQVcsRUFBRSxJQUFJO0lBRWpCOzs7Ozs7Ozs7O09BVUc7SUFDSCxZQUFZLEVBQUUsdUJBQXVCO0NBQ3RDLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvY2Vzcy5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwcm9jZXNzLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUVBLGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILFVBQVUsRUFBRSxLQUFLO0lBRWpCOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILEtBQUssRUFBRSxTQUFTO0lBRWhCOzs7Ozs7Ozs7O09BVUc7SUFDSCxVQUFVLEVBQUUsS0FBSztJQUVqQjs7Ozs7Ozs7OztPQVVHO0lBQ0gsS0FBSyxFQUFFLElBQUk7SUFFWDs7Ozs7Ozs7OztPQVVHO0lBQ0gsU0FBUyxFQUFFLEtBQUs7SUFFaEI7Ozs7Ozs7Ozs7T0FVRztJQUNILFVBQVUsRUFBRSxJQUFJO0lBRWhCOzs7Ozs7Ozs7O09BVUc7SUFDSCxVQUFVLEVBQUUsU0FBUztJQUVyQjs7Ozs7Ozs7Ozs7T0FXRztJQUNILFdBQVcsRUFBRSxJQUFJO0lBRWpCOzs7Ozs7Ozs7O09BVUc7SUFDSCxZQUFZLEVBQUUsdUJBQXVCO0NBQ3RDLENBQUMifQ==

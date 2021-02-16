@@ -5,7 +5,6 @@ import __wait from '../time/wait';
 import __isClass from '../is/class';
 import __onProcessExit from './onProcessExit';
 import __SPromise from '../promise/SPromise';
-import __notifier from 'node-notifier';
 import __deepMerge from '../object/deepMerge';
 import __packageRoot from '../path/packageRoot';
 import __isChildProcess from '../is/childProcess';
@@ -158,18 +157,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
   _state = 'idle';
 
   /**
-   * @name      _notifier
-   * @type      SNotification
-   * @private
-   *
-   * Store the SNotification instance used for this process
-   *
-   * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _notifier: __SNotification;
-
-  /**
    * @name      executionsStack
    * @type      ISProcessProcessObj[]
    *
@@ -266,10 +253,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         settings
       )
     );
-
-    this._notifier = new __SNotification({
-      enable: this.processSettings.notification.enable
-    });
 
     // save initial params
     this.initialParams = Object.assign({}, initialParams);
@@ -447,40 +430,26 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         // ipc: true
       });
     } else {
-      // handle ipc connection
-      // let ipcClient;
-      // if (__isChildProcess() && __SIpcClient.hasParentServer()) {
-      //   ipcClient = await __SIpcClient.connectToParent();
-      // }
-
       // run the actual process using the "process" method
       this._processPromise = (<any>this).process(this._params, settings);
 
-      // if (__isChildProcess() && ipcClient) {
-      //   this._processPromise &&
-      //     this._processPromise.on('*', (data, metas) => {
-      //       ipcClient.emit(metas.event, data);
-      //     });
-      // }
+      if (
+        __isChildProcess() &&
+        process.send &&
+        typeof process.send === 'function'
+      ) {
+        this._processPromise &&
+          this._processPromise.on('*', (value, metas) => {
+            process.send !== undefined &&
+              process.send({
+                value,
+                metas
+              });
+          });
+      }
     }
 
-    this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {
-      filter: (value, metas) => {
-        // if (metas.event.match(/error$/)) {
-        //   return false;
-        // }
-        return true;
-      }
-    });
-
-    // listen for notification
-    this._processPromise &&
-      this._processPromise.on('notification', (notificationObj, metas) => {
-        this._notifier.notify({
-          title: `${this.id}`,
-          ...notificationObj
-        });
-      });
+    this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
 
     // listen for "data" and "log" events
     this._processPromise &&
@@ -561,7 +530,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     }
 
     // emit an event
-    this.emit(`state.${value}`, true);
+    this.emit(`state.${value}`, undefined);
     this.emit('state', value);
 
     this._state = value;
@@ -653,7 +622,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
               )}s</yellow>`
             });
           }
-          this._notifier.notify({
+          this.emit('notification', {
             type: 'success',
             title: `${this.id} success`
           });
@@ -668,7 +637,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
               }</yellow> <cyan>${this.id}</cyan> execution...`
             });
           }
-          this._notifier.notify({
+          this.emit('notification', {
             type: 'start',
             title: `${this.id} starting`
           });
@@ -697,7 +666,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
               value: strArray.join('\n')
             });
           }
-          this._notifier.notify({
+          this.emit('notification', {
             type: 'error',
             title: `${this.id} error`
           });
@@ -726,7 +695,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
               value: strArray.join('\n')
             });
           }
-          this._notifier.notify({
+          this.emit('notification', {
             type: 'error',
             title: `${this.id} killed`
           });

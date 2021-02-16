@@ -4,8 +4,8 @@ import __uniquid from '../string/uniqid';
 import __deepMerge from '../object/deepMerge';
 import { spawn as __spawn } from 'child_process';
 import __SPromise from '../promise/SPromise';
-import __SIpcServer from '../ipc/SIpcServer';
 import __onProcessExit from './onProcessExit';
+import __SDuration from '../time/SDuration';
 
 import { ISPromise } from '../../promise/SPromise';
 import { SpawnOptions } from 'child_process';
@@ -18,14 +18,13 @@ import { SpawnOptions } from 'child_process';
  * @status              wip
  *
  * This function allows you to spawn a new child process just like the native ```spawn``` node function
- * but add the support for SPromise and SIpc communication layers
+ * but add the support for SEventEmitter communication layers
  *
  * @param       {String}          command         The command to spawn
  * @param       {String[]}        [args=[]]       Some string arguments to use in the command
  * @param       {ISpawnSettings}    [settings={}]     An object of settings to configure your spawn process
  * @return      {SPromise}                        An SPromise instance that will be resolved or rejected with the command result, and listen for some "events" emited like "close", etc...
  *
- * @setting     {Boolean}       [ipc=false]         Specify if you want to initialise an SIpcServer instance for this spawn process
  * @setting     {Any}           ...SpawnOptions     All the supported ```spawn``` options. see: https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
  *
  * @event       data        emited when some data have been pushed in the child process like console.log, etc...
@@ -48,7 +47,6 @@ import { SpawnOptions } from 'child_process';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export interface ISpawnSettings extends SpawnOptions {
-  ipc?: boolean;
   [key: string]: any;
 }
 
@@ -61,55 +59,30 @@ export default function spawn(
   args: string[] = [],
   settings: ISpawnSettings = {}
 ): ISPromise {
-  let uniquid = `SIpc.spawn.${__uniquid()}`;
   let childProcess;
-  let ipcServer,
-    serverData,
+  let serverData,
     isCancel = false;
 
   const promise = new __SPromise(async ({ resolve, reject, emit }) => {
-    settings = __deepMerge(
-      {
-        ipc: true
-      },
-      settings
-    );
+    settings = __deepMerge({}, settings);
 
-    // if (settings.ipc === true) {
-    //   ipcServer = await __SIpcServer.getGlobalServer();
-    //   ipcServer.on(`${uniquid}.*`, (data, metas) => {
-    //     emit(metas.stack.replace(uniquid + '.', ''), data);
-    //   });
-    // }
+    const duration = new __SDuration();
 
     const stderr = [],
       stdout = [];
 
-    let envIpc = {};
-    if (ipcServer !== undefined) {
-      envIpc = {
-        S_IPC_SERVER: JSON.stringify(ipcServer.connexionParams),
-        S_IPC_SPAWN_ID: uniquid
-      };
-    }
-
     childProcess = __spawn(command, [], {
       shell: true,
+      stdio: ['pipe', 'pipe', 'pipe', 'ipc'],
+      cwd: settings.cwd || process.cwd(),
       ...settings,
-      stdio:
-        settings.stdio === false
-          ? 'ignore'
-          : settings.stdio !== undefined
-          ? settings.stdio
-          : 'pipe',
       env: {
         ...process.env,
         CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
           ? process.env.CHILD_PROCESS_LEVEL + 1
           : 1,
         IS_CHILD_PROCESS: true,
-        ...(settings.env || {}),
-        ...envIpc
+        ...(settings.env || {})
       }
     });
 
@@ -117,20 +90,17 @@ export default function spawn(
       childProcess.kill();
     });
 
+    // handle the process.send pattern
+    childProcess.on('message', (dataObj) => {
+      if (!dataObj.value || !dataObj.metas) return;
+      emit(dataObj.metas.event, dataObj.value, dataObj.metas);
+    });
+
     // listen for errors etc...
     if (childProcess.stdout) {
       childProcess.stdout.on('data', (data) => {
-        // const dataArray = data.toString().split('\n');
-        // while (dataArray[dataArray.length - 1] === '') {
-        //   dataArray.pop();
-        // }
-        // dataArray.forEach((line) => {
-        //   stdout.push(line);
-        //   emit('log', {
-        //     value: line
-        //   });
-        // });
-        stderr.push(data.toString());
+        if (!data) return;
+        stdout.push(data.toString());
         emit('log', {
           value: data.toString()
         });
@@ -138,6 +108,7 @@ export default function spawn(
     }
     if (childProcess.stderr) {
       childProcess.stderr.on('data', (data) => {
+        if (!data) return;
         stderr.push(data.toString());
         emit('error', {
           value: data.toString()
@@ -145,35 +116,39 @@ export default function spawn(
       });
     }
 
+    let isEnded = false;
     childProcess.on('close', (code, signal) => {
-      emit('close', {
+      if (isEnded) return;
+      isEnded = true;
+
+      const resultObj = {
         code,
-        signal
-      });
+        signal,
+        stdout,
+        stderr,
+        ...duration.end()
+      };
+
+      emit('close', resultObj);
+
       if (stderr.length) {
-        emit('close.error');
-        reject(stderr.join('\n'));
+        emit('close.error', resultObj);
+        reject(resultObj);
+        // console.log('close.error');
       } else if (!code && signal) {
-        emit('close.killed');
-        reject();
+        emit('close.killed', resultObj);
+        resolve(resultObj);
+        // console.log('close.killed');
+        // console.log('ENDNDND', code, signal, resultObj);
       } else if (code === 0 && !signal) {
-        emit('close.success');
-        resolve();
+        emit('close.success', resultObj);
+        resolve(resultObj);
+        // console.log('close.success');
       } else {
-        emit('close.error');
-        reject();
+        emit('close.error', resultObj);
+        reject(resultObj);
       }
     });
-  });
-
-  // handle cancel
-  promise.on('finally', () => {
-    if (ipcServer !== undefined) {
-      ipcServer.stop();
-    }
-    if (childProcess !== undefined) {
-      childProcess.kill();
-    }
   });
 
   return promise;

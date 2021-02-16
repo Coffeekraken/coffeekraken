@@ -27,7 +27,9 @@
  */
 function isJson(value) {
   try {
-    JSON.parse(value);
+    const res = JSON.parse(value);
+    if (Object.keys(res).length) return true;
+    return false;
   } catch (e) {
     return false;
   }

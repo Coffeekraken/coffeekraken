@@ -154,34 +154,6 @@ class SJsFile extends __SFile implements ISJsFile {
   }
 
   /**
-   * @name        _startWatch
-   * @type        Function
-   * @private
-   *
-   * Start to watch the file. Does this only once
-   * to avoid multiple compilation and logs
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  private _startWatch() {
-    // listen for change event
-    this.on('update', (file, metas) => {
-      if (this._currentCompilationParams.watch) {
-        const promise = this.compile(
-          <ISJsCompilerParams>this._currentCompilationParams
-        );
-        this.emit('log', {
-          clear: true,
-          type: 'file',
-          action: 'update',
-          file
-        });
-      }
-    });
-  }
-
-  /**
    * @name              compile
    * @type              Function
    *
@@ -212,9 +184,13 @@ class SJsFile extends __SFile implements ISJsFile {
 
       params = this.applyInterface('compilerParams', params);
 
-      // if (params.watch) {
-      //   this.startWatch();
-      // }
+      if (this._isCompiling) {
+        emit('warn', {
+          value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
+        });
+        return;
+      }
+      this._isCompiling = true;
 
       // listen for the end
       on('finally', () => {
@@ -223,13 +199,9 @@ class SJsFile extends __SFile implements ISJsFile {
 
       pipeTo(this);
 
-      if (this._isCompiling) {
-        emit('warn', {
-          value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
-        });
-        return;
-      }
-      this._isCompiling = true;
+      emit('notification', {
+        title: `${this.id} compilation started`
+      });
 
       emit('log', {
         clear: true,
@@ -239,6 +211,10 @@ class SJsFile extends __SFile implements ISJsFile {
       // notify start
       emit('log', {
         value: `<yellow>[start]</yellow> Starting "<cyan>${this.relPath}</cyan>" compilation`
+      });
+
+      emit('log', {
+        value: Math.random().toString()
       });
 
       const duration = new __SDuration();
@@ -269,7 +245,7 @@ class SJsFile extends __SFile implements ISJsFile {
       let esbuildParams: any = {
         charset: 'utf8',
         format: 'iife',
-        // logLevel: 'silent',
+        logLevel: 'silent',
         ...__filter(params, (key, value) => {
           if (Array.isArray(value) && !value.length) return false;
           return __SJsCompiler._esbuildAcceptedSettings.indexOf(key) !== -1;
@@ -301,6 +277,13 @@ class SJsFile extends __SFile implements ISJsFile {
                 );
 
                 if (params.save) {
+                  const resultJs = [
+                    params.banner || '',
+                    'let process = {};' + result.outputFiles[0].text
+                  ].join('\n');
+                  this.writeSync(resultJs, {
+                    path: savePath
+                  });
                   logStrArray.push(
                     `<green>[saved]</green> File "<cyan>${
                       this.relPath
@@ -319,6 +302,11 @@ class SJsFile extends __SFile implements ISJsFile {
                   type: 'separator'
                 });
 
+                emit('notification', {
+                  type: 'success',
+                  title: `${this.id} compilation success`
+                });
+
                 if (params.watch) {
                   emit('log', {
                     value: `<blue>[watch] </blue>Watching for changes...`
@@ -333,8 +321,8 @@ class SJsFile extends __SFile implements ISJsFile {
       };
 
       const buildPromise = new Promise(async (buildResolve, buildReject) => {
-        const buildService = await __esbuild.startService();
-        buildService
+        // const buildService = await __esbuild.startService();
+        __esbuild
           .build(esbuildParams)
           .then((resultObj) => {
             buildResolve(resultObj);
@@ -354,7 +342,7 @@ class SJsFile extends __SFile implements ISJsFile {
         // build the save path
         emit('log', {
           type: 'file',
-          file: this,
+          file: this.toObject(),
           to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
           action: 'save'
         });
@@ -371,7 +359,7 @@ class SJsFile extends __SFile implements ISJsFile {
           //   to: savePath
           //     .replace(/\.js$/, '.js.map')
           //     .replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-          //   file: this
+          //   file: this.toObject()
           // });
         }
 
@@ -379,7 +367,7 @@ class SJsFile extends __SFile implements ISJsFile {
           type: 'file',
           action: 'saved',
           to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-          file: this
+          file: this.toObject()
         });
       }
 

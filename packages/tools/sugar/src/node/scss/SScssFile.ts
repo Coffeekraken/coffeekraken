@@ -177,6 +177,8 @@ class SScssFile extends __SFile implements ISScssFile {
     SScssFile.FILES[this.path] = this;
 
     this._fileCache = new __SFileCache(this.constructor.name);
+
+    this.on('watch', this._onWatch.bind(this));
   }
 
   /**
@@ -344,7 +346,7 @@ class SScssFile extends __SFile implements ISScssFile {
   }
 
   /**
-   * @name        _startWatch
+   * @name        _onWatch
    * @type        Function
    * @private
    *
@@ -354,7 +356,7 @@ class SScssFile extends __SFile implements ISScssFile {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  private _startWatch() {
+  private _onWatch() {
     // listen for change event
     this.on('update', (file, metas) => {
       if (this._currentCompilationParams.watch) {
@@ -412,7 +414,7 @@ class SScssFile extends __SFile implements ISScssFile {
     );
 
     if (completeParams.watch) {
-      this.startWatch();
+      this.watch();
     }
 
     // init the promise
@@ -555,7 +557,7 @@ class SScssFile extends __SFile implements ISScssFile {
           //   type: 'file',
           //   action: 'save',
           //   to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-          //   file: this
+          //   file: this.toObject()
           // });
           this.writeSync(resultCss, {
             path: savePath
@@ -566,7 +568,7 @@ class SScssFile extends __SFile implements ISScssFile {
           //   type: 'file',
           //   action: 'saved',
           //   to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-          //   file: this
+          //   file: this.toObject()
           // });
         }
 
@@ -644,7 +646,7 @@ class SScssFile extends __SFile implements ISScssFile {
               type: 'file',
               action: 'save',
               to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-              file: this
+              file: this.toObject()
             });
             this.writeSync(resultCss, {
               path: savePath
@@ -655,7 +657,7 @@ class SScssFile extends __SFile implements ISScssFile {
               type: 'file',
               action: 'saved',
               to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-              file: this
+              file: this.toObject()
             });
           }
 

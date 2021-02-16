@@ -23,11 +23,13 @@ import __SBlessedComponent from '../SBlessedComponent';
  * @param         {String}            body              The notification body
  * @param         {String}            [cta=null]        The call to action text
  * @param         {Object}            [settings={}]     An object of settings to configure your notification more in details:
- * - onClick (null) {Function}: Specify a function to call when the user click on the notification
- * - timeout (5000) {Number}: Specify a number of ms to display the notification. -1 if you want to keep it visible until the user click on it
- * - position (tr) {String}: Specify the position of the notification. Can be tl, tr, bl or br
- * - bg (yellow) {String}: Specify the background color to apply to the notification
- * - fg (black) {String}: Specify the foreground color to apply to the notification
+ *
+ * @setting     {Function}    [onClick=null]        Specify a function to call when the user click on the notification
+ * @setting     {Function}    [onTimeout=null]      Specify a function to call when the notification is timed out
+ * @setting     {Number}      [timeout=5000]     Specify a number of ms to display the notification. -1 if you want to keep it visible until the user click on it
+ * @setting     {String}     [position='tr']      Specify the position of the notification. Can be tl, tr, bl or br
+ * @setting    {Object}     [blessed={}]     Some blessed settings to handle display
+ * @setting     {String}    [type='default']    Specify the type. Can be "default", "success", "error", "warning", "kill"
  *
  * @todo      interface
  * @todo      doc
@@ -35,7 +37,7 @@ import __SBlessedComponent from '../SBlessedComponent';
  *
  * @example             js
  * import SBlessedNotification from '@coffeekraken/sugar/node/blessed/notification/SBlessedNotification';
- * const notification = new SBlessedNotification('Hello', 'This is a cool notif', null, {
+ * const notification = new SBlessedNotification('Hello', 'This is a cool notif', {
  *      onClick: () => {
  *          console.log('Clicked');
  *      }
@@ -95,48 +97,65 @@ export default class SBlessedNotification extends __SBlessedComponent {
     settings = __deepMerge(
       {
         onClick: null,
+        onTimeout: null,
         position: 'tr',
         timeout: 5000,
+        type: 'default',
         blessed: {
-          bg: 'yellow',
-          fg: 'black',
-          hover: {
-            bg: 'yellow',
-            fg: 'black'
+          style: {
+            bg: 'cyan',
+            fg: 'white'
           }
         }
       },
       settings
     );
 
+    switch (settings.type) {
+      case 'success':
+        settings.blessed.style.bg = 'green';
+        settings.blessed.style.fg = 'white';
+        break;
+      case 'warning':
+        settings.blessed.style.bg = 'yellow';
+        settings.blessed.style.fg = 'black';
+        break;
+      case 'error':
+      case 'kill':
+      case 'killed':
+        settings.blessed.style.bg = 'red';
+        settings.blessed.style.fg = 'white';
+        break;
+    }
+
     const position = settings.position;
     delete settings.position;
 
-    super({
-      ...settings,
-      blessed: {
-        width: 40,
-        height: 4,
-        style: {
-          bg: settings.blessed.bg,
-          fg: settings.blessed.fg,
-          hover: {
-            bg: settings.blessed.hover.bg,
-            fg: settings.blessed.hover.fg
+    super(
+      __deepMerge(
+        {
+          blessed: {
+            width: 30,
+            height: 4,
+            style: {
+              bg: settings.blessed.style.bg,
+              fg: settings.blessed.style.fg
+            },
+            padding: {
+              top: 1,
+              left: 2,
+              right: 2,
+              bottom: 0
+            },
+            clickable: settings.onClick !== null,
+            content: __parseHtml(
+              [`<bold>${title}</bold>`, `${body}`, ''].join('\n')
+            )
           }
         },
-        padding: {
-          top: 1,
-          left: 2,
-          right: 2,
-          bottom: 0
-        },
-        clickable: settings.onClick !== null,
-        content: __parseHtml(
-          [`<bold>${title}</bold>`, `${body}`, ''].join('\n')
-        )
-      }
-    });
+        settings.blessed
+      )
+    );
     this.on('attach', () => {
       const stack = SBlessedNotification.displayStacks[position];
       if (stack.indexOf(this) === -1) {
@@ -162,6 +181,8 @@ export default class SBlessedNotification extends __SBlessedComponent {
     // timeout
     if (settings.timeout !== -1) {
       setTimeout(() => {
+        if (this.isDestroyed()) return;
+        settings.onTimeout && settings.onTimeout();
         this.destroy();
       }, settings.timeout);
     }

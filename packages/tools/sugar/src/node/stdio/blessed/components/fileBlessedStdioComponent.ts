@@ -28,11 +28,6 @@ export default {
         `You must specify a "<yellow>file</yellow>" property in order to use the "<cyan>file</cyan>" log type.`
       );
     }
-    if (!(file instanceof __SFile)) {
-      throw new Error(
-        `The "<yellow>file</yellow>" property must be an instance of the "<cyan>SFile</cyan>" class`
-      );
-    }
 
     if (!action)
       throw new Error(

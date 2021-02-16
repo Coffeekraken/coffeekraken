@@ -7,7 +7,8 @@ function compileJs(stringArgs = '') {
     {},
     {
       process: {
-        stdio: 'inherit'
+        stdio: 'inherit',
+        runAsChild: true
       }
     }
   );

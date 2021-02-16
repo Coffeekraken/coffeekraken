@@ -1,5 +1,6 @@
 import __deepMerge from '../../object/deepMerge';
 import __SStdio from '../SStdio';
+import __SNotification from '../../notification/SNotification';
 
 import { ISEventEmitter } from '../../event/SEventEmitter';
 
@@ -72,10 +73,21 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
         settings || {}
       )
     );
+
+    this._notifier = new __SNotification({
+      adapters: ['node']
+    });
+    this.sources.forEach((source) => {
+      source.on('notification', (notificationObj, metas) => {
+        this._notifier.notify(notificationObj);
+      });
+    });
+
     this.display();
   }
 
   clear() {
+    process.stdout.write('\x1Bc');
     // console.log('clearing to be implemented');
   }
 

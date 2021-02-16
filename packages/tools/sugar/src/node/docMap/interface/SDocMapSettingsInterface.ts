@@ -19,7 +19,7 @@ import __deepMerge from '../../object/deepMerge';
 class SDocMapSettingsInterface extends __SInterface {
   static definition = {
     'build.globs': {
-      type: 'String|Array<String>',
+      type: 'Array<String>',
       alias: 'i',
       description: 'Input files glob pattern',
       default: __sugarConfig('docMap.build.globs'),
@@ -33,7 +33,7 @@ class SDocMapSettingsInterface extends __SInterface {
       level: 1
     },
     'find.globs': {
-      type: 'String|Array<String>',
+      type: 'Array<String>',
       alias: 'i',
       description: 'docMap.json files glob pattern',
       default: __sugarConfig('docMap.find.globs'),

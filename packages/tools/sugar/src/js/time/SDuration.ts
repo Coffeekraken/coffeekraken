@@ -131,15 +131,17 @@ export default class SDuration {
     if (!this.endTime || !this.startTime) this.end();
 
     const durationMs = this.endTime - this.startTime;
-    const durationConverted = __convert(durationMs, settings.format);
+    const convertedDuration = __convert(durationMs, settings.format);
     const formatedDuration = settings.suffix
-      ? durationConverted
-      : parseFloat(durationConverted);
+      ? convertedDuration +
+        (settings.suffix === true ? settings.format : settings.suffix)
+      : parseFloat(convertedDuration);
 
     return <ISDurationObject>{
       startTime: this.startTime || -1,
       endTime: this.endTime || -1,
       duration: this.duration || -1,
+      convertedDuration,
       formatedDuration
     };
   }

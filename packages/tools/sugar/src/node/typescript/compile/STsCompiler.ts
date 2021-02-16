@@ -15,6 +15,7 @@ import __md5 from '../../crypt/md5';
 import __packageRoot from '../../path/packageRoot';
 import __tmpDir from '../../path/tmpDir';
 import __stripAnsi from '../../string/stripAnsi';
+import __SDuration from '../../time/SDuration';
 
 import __TscInterface from './interface/TscInterface';
 import __STsCompilerParamsInterface from './interface/STsCompilerParamsInterface';
@@ -231,7 +232,7 @@ class STsCompiler extends __SCompiler {
       tsconfig.files = __absolute(tsconfig.files);
       tsconfig.include = __absolute(tsconfig.include);
 
-      const startTime = Date.now();
+      const duration = new __SDuration();
 
       if (tsconfig.files.length === 0 && tsconfig.include.length === 0) {
         return reject(
@@ -298,6 +299,7 @@ class STsCompiler extends __SCompiler {
       // create the CLI process
       const pro = new __SCliProcess(command, {
         process: {
+          runAsChild: false,
           stdio: false,
           decorators: false
         }
@@ -333,8 +335,6 @@ class STsCompiler extends __SCompiler {
 
           lines.forEach((line) => {
             let strToAdd = '';
-
-            // console.log('L', line);
 
             if (
               __stripAnsi(line.trim()).match(
@@ -435,7 +435,7 @@ class STsCompiler extends __SCompiler {
         typeof result === 'string' &&
         __stripAnsi(result.trim()).match(/^error\s/)
       ) {
-        return reject();
+        return reject(result);
       }
 
       // gather all the compiled files
@@ -452,9 +452,7 @@ class STsCompiler extends __SCompiler {
       });
 
       let resultObj = {
-        startTime: startTime,
-        endTime: Date.now(),
-        duration: Date.now() - startTime
+        ...duration.end()
       };
 
       if (params.save) {

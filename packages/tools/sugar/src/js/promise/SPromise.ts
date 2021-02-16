@@ -688,9 +688,6 @@ class SPromise extends __SClass.extends(Promise) {
   _destroy() {
     // update the status
     this._promiseState = 'destroyed';
-
-    // destroying all the callbacks stacks registered
-    this._settings.promise = undefined;
   }
 }
 

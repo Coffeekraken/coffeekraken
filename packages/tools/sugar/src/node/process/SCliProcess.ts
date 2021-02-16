@@ -90,6 +90,9 @@ class SCliProcess extends __SProcess implements ISCliProcess {
       {},
       __deepMerge(
         {
+          process: {
+            runAsChild: false
+          },
           cliProcess: {}
         },
         settings
@@ -131,7 +134,6 @@ class SCliProcess extends __SProcess implements ISCliProcess {
 
     // @ts-ignore
     const pro = __spawn(command, [], {
-      ipc: false,
       ...(this.cliProcessSettings.spawn || this.processSettings.spawn || {})
     });
 

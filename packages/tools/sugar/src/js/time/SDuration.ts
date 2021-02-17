@@ -131,6 +131,7 @@ export default class SDuration {
     if (!this.endTime || !this.startTime) this.end();
 
     const durationMs = this.endTime - this.startTime;
+    this.duration = durationMs;
     const convertedDuration = __convert(durationMs, settings.format);
     const formatedDuration = settings.suffix
       ? convertedDuration +

@@ -18,6 +18,7 @@ import __wait from '../time/wait';
 import __SFile from '../fs/SFile';
 import __clone from '../object/clone';
 import __writeFileSync from '../fs/writeFileSync';
+import __SCache from '../cache/SCache';
 
 /**
  * @name                SDocMap
@@ -67,6 +68,7 @@ export interface ISDocMapSaveSettings {
   build: ISDocMapBuildSettings;
 }
 export interface ISDocMapSettings {
+  cache: boolean;
   build: ISDocMapBuildSettings;
   find: ISDocMapFindSettings;
   save: ISDocMapSaveSettings;
@@ -121,6 +123,18 @@ class SDocMap extends __SClass implements ISDocMap {
   _entries: ISDocMapEntries = {};
 
   /**
+   * @name      _cache
+   * @type      SCache
+   * @private
+   *
+   * Store the SCache instance used for this instance
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _cache: __SCache;
+
+  /**
    * @name        docMapSettings
    * @type        Object
    * @get
@@ -154,6 +168,23 @@ class SDocMap extends __SClass implements ISDocMap {
         settings || {}
       )
     );
+
+    // init the cache
+    this._cache = new __SCache('SDocMap');
+  }
+
+  /**
+   * @name          clearCache
+   * @type          Function
+   * @async
+   *
+   * Clear the cached values
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  async clearCache() {
+    return await this._cache.clear();
   }
 
   /**
@@ -180,6 +211,13 @@ class SDocMap extends __SClass implements ISDocMap {
       async ({ resolve, reject, emit }) => {
         // build the glob pattern to use
         const patterns: string[] = findSettings.globs || [];
+
+        if (this.docMapSettings.cache) {
+          const cachedValue = await this._cache.get('find-files');
+          if (cachedValue) {
+            return resolve(cachedValue);
+          }
+        }
 
         let files: __SFile[] = [];
         await __wait(1);
@@ -208,6 +246,14 @@ class SDocMap extends __SClass implements ISDocMap {
         emit('log', {
           value: findedStrArray.join('\n')
         });
+
+        // save in cache if asked
+        if (this.docMapSettings.cache) {
+          await this._cache.set(
+            'find-files',
+            files.map((file) => file.toObject())
+          );
+        }
 
         resolve(files);
       },
@@ -290,6 +336,10 @@ class SDocMap extends __SClass implements ISDocMap {
       async ({ resolve, reject, emit }) => {
         let globs: string[] = buildSettings.globs || [];
         if (!Array.isArray(globs)) globs = [globs];
+
+        emit('notification', {
+          message: `${this.id} build started`
+        });
 
         emit('log', {
           value: `Searching files to use as docMap sources using globs:\n- <yellow>${globs.join(
@@ -390,6 +440,11 @@ class SDocMap extends __SClass implements ISDocMap {
           value: `<green>${
             Object.keys(this._entries).length
           }</green> entries gathered for this docMap`
+        });
+
+        emit('notification', {
+          type: 'success',
+          message: `${this.id} build success`
         });
 
         resolve(this._entries);

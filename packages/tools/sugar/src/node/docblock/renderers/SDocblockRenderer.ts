@@ -8,6 +8,9 @@ import __promisedHandlebars from 'promised-handlebars';
 import __packageRoot from '../../../node/path/packageRoot';
 import __packageJson from '../../../node/package/json';
 import __fs from 'fs';
+import __glob from 'glob';
+import __getFilename from '../../fs/filename';
+import __sugarConfig from '../../config/sugar';
 
 import { ISDocblock } from '../SDocblock';
 import { ISDocblockBlock } from '../SDocblockBlock';
@@ -42,10 +45,11 @@ import { ISDocblockBlock } from '../SDocblockBlock';
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISDocblockRenderedOptionalettings {}
-export interface ISDocblockRenderedSettings {}
+export interface ISDocblockRendererSettings {
+  rootDir?: string;
+}
 export interface ISDocblockRendererCtorSettings {
-  docblockRenderer?: ISDocblockRenderedOptionalettings;
+  docblockRenderer?: Partial<ISDocblockRendererSettings>;
 }
 
 export interface ISDocblockRendererRegisteredEntries {
@@ -116,12 +120,27 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Store the registered templates, blocks and partials
    *
    * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _registered: ISDocblockRendererRegisteredStacks = {
     templates: {},
     blocks: {},
     partials: {}
   };
+
+  /**
+   * @name        docblockRendererSettings
+   * @type        ISDocblockRendererSettings
+   * @get
+   *
+   * Access the docblock renderer settings
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get docblockRendererSettings(): ISDocblockRendererSettings {
+    return (<any>this._settings).docblockRenderer;
+  }
 
   /**
    * @name          _renderedBlocks
@@ -154,6 +173,10 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
       __deepMerge(
         {
           docblockRenderer: {
+            rootDir: undefined,
+            config: {
+              ...__sugarConfig('doc')
+            },
             templates: {},
             blocks: {},
             partials: {}
@@ -162,10 +185,13 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
         settings
       )
     );
+
     // save the docblock instance
     this._docblockInstance = docblockInstance;
     // init the handlebars helpers
     this._registerHandlerbarsHelpers();
+    // register helpers
+    this._registerHelpers();
   }
 
   /**
@@ -229,6 +255,42 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
       );
     }
     this._registered.partials[name] = path;
+  }
+
+  /**
+   * @name        _registerHelpers
+   * @type        Function
+   * @private
+   *
+   * Register all the helpers inside the "helpers" folders
+   *
+   * @since       2.0.0
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _registerHelpers() {
+    const files = __glob.sync(`${__dirname}/helpers/**/*.js`);
+    files.forEach((filePath) => {
+      const helperObj = require(filePath);
+      if (!helperObj.id || !helperObj.helper) return;
+      this._handlebars.registerHelper(
+        helperObj.id,
+        helperObj.helper.bind(this)
+      );
+    });
+    if (this.docblockRendererSettings.rootDir) {
+      console.log(`${this.docblockRendererSettings.rootDir}/helpers/**/*.js`);
+      const rendererFiles = __glob.sync(
+        `${this.docblockRendererSettings.rootDir}/helpers/**/*.js`
+      );
+      rendererFiles.forEach((filePath) => {
+        const helperObj = require(filePath).default;
+        if (!helperObj.id || !helperObj.helper) return;
+        this._handlebars.registerHelper(
+          helperObj.id,
+          helperObj.helper.bind(this)
+        );
+      });
+    }
   }
 
   /**

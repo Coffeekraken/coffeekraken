@@ -198,16 +198,16 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
           this.watch();
         }
 
-        emit('notification', {
-          title: `${this.id} compilation started`
-        });
-
         // listen for the end
         on('finally', () => {
           this._isCompiling = false;
         });
 
         pipeTo(this);
+
+        emit('notification', {
+          title: `${this.id} compilation started`
+        });
 
         emit('log', {
           clear: true,
@@ -317,6 +317,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
                   input: [tmpTsFile.path],
                   rootDir: tmpTsFile.dirPath,
                   save: false,
+                  transpileOnly: true,
                   target: 'browser',
                   map: false
                 });

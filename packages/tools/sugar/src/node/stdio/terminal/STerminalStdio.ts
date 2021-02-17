@@ -34,6 +34,18 @@ export interface ISTerminalStdio {}
 
 class STerminalStdio extends __SStdio implements ISTerminalStdio {
   /**
+   * @name      _notifier
+   * @type      SNotification
+   * @private
+   *
+   * Store the SNotification instance used in this class
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  _notifier: __SNotification;
+
+  /**
    * @name      terminalStdioSettings
    * @type      ISTerminalStdioSettings
    * @get

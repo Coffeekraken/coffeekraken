@@ -1,12 +1,18 @@
-// @ts-nocheck
 // @shared
 
+import __SClass from '../../class/SClass';
 import __deepMerge from '../../object/deepMerge';
+
+import { ISCache } from '../SCache';
+import { ISCacheSetSettings } from '../SCache';
 
 /**
  * @name                                SCacheAdapter
  * @namespace           sugar.js.cache.cacheAdapters
  * @type                                Class
+ * @extends             SClass
+ * @status            beta
+ * @abstract
  *
  * Base class for SCache adapters
  *
@@ -37,28 +43,31 @@ import __deepMerge from '../../object/deepMerge';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SCacheAdapter {
-  /**
-   * @name                              _settings
-   * @type                              Object
-   * @private
-   *
-   * Store the default settings of the SCacheAdapter instance
-   *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _settings = {};
 
+export interface ISCacheAdapter {
+  id: string;
+  cache: ISCache;
+  get(name: string): Promise<any>;
+  set(name: string, value: any, settings?: ISCacheSetSettings): Promise<any>;
+  delete(name: string): Promise<any>;
+  clear(): Promise<any>;
+  keys(): Promise<string[]>;
+  stringify?(value: any): string;
+  parse?(value: string): any;
+}
+
+export default abstract class SCacheAdapter extends __SClass {
   /**
    * @name            cache
-   * @type            SCache
+   * @type            ISCache
    *
-   * Store the cache instance which if used
+   * Store the cache instance which is used
    *
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  cache = null;
+  // @ts-ignore
+  cache: ISCache;
 
   /**
    * @name                              constructor
@@ -70,9 +79,98 @@ export default class SCacheAdapter {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(cache, settings = {}) {
-    // store the settings
-    this._settings = settings;
-    this.cache = cache;
+  constructor(settings = {}) {
+    super(
+      __deepMerge(
+        {
+          cacheAdapter: {}
+        },
+        settings
+      )
+    );
   }
+
+  /**
+   * @name        get
+   * @type        Function
+   * @async
+   * @abstract
+   *
+   * Get a cache item
+   *
+   * @param     {String}      name      The item name
+   * @return    {Promise}               A promise resolved when the item has been correctly getted
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  abstract get(name: string): Promise<any>;
+
+  /**
+   * @name        set
+   * @type        Function
+   * @async
+   * @abstract
+   *
+   * Set a cache item
+   *
+   * @param     {String}      name      The item name
+   * @param     {Any}       value       The value to save
+   * @param     {ISCacheSetSettings}    [settings={}]       Some settings associated with the saved item
+   * @return    {Promise}               A promise resolved when the item has been correctly saved
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  abstract set(
+    name: string,
+    value: any,
+    settings?: ISCacheSetSettings
+  ): Promise<any>;
+
+  /**
+   * @name        delete
+   * @type        Function
+   * @async
+   * @abstract
+   *
+   * Delete a cache item
+   *
+   * @param     {String}      name      The item name
+   * @return    {Promise}               A promise resolved when the item has been correctly deleted
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  abstract delete(name: string): Promise<any>;
+
+  /**
+   * @name        clear
+   * @type        Function
+   * @async
+   * @abstract
+   *
+   * Clear the entire cache
+   *
+   * @return    {Promise}               A promise resolved when the cache has been correctly cleared
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  abstract clear(): Promise<any>;
+
+  /**
+   * @name        keys
+   * @type        Function
+   * @async
+   * @abstract
+   *
+   * Get all the cache items keys
+   *
+   * @return    {Promise<string[]>}               A promise resolved with all the cache items keys
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  abstract keys(): Promise<string[]>;
 }

@@ -74,6 +74,10 @@ class STsCompilerParamsInterface extends __SInterface {
       alias: 't',
       default: __sugarConfig('ts.compile.target')
     },
+    transpileOnly: {
+      type: 'Boolean',
+      default: false
+    },
     stacks: {
       type: 'Array<String>',
       alias: 's',

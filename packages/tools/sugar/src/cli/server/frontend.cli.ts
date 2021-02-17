@@ -15,6 +15,7 @@ export default (stringArgs = '') => {
     {},
     {
       process: {
+        runAsChild: false,
         stdio: 'inherit'
       }
     }

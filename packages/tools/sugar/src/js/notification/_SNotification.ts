@@ -191,7 +191,9 @@ class SNotification extends __SClass implements ISNotification {
 
       let baseNotificationObj: Partial<ISNotificationObj> = {
         ...(notificationObj.type
-          ? notificationDefaultSettings.types[notificationObj.type] || {}
+          ? notificationDefaultSettings.types[
+              notificationObj.type || 'default'
+            ] || {}
           : {})
       };
 
@@ -213,8 +215,6 @@ class SNotification extends __SClass implements ISNotification {
       set.adapters.forEach(async (adapterId) => {
         // get the adapter
         const adapter = SNotification.getAdapter(adapterId);
-
-        // console.log(adapter.id);
 
         // get the adapter settings if exists
         const adapterSettings: any =

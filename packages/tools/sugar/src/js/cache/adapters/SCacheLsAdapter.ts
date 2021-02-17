@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __deepMerge from '../../object/deepMerge';
-import __SCacheAdapter from './SCacheAdapter';
+import { ISCacheAdapter } from './SCacheAdapter';
 
 /**
  * @name                                SCacheFsAdapter
@@ -24,6 +24,8 @@ import __SCacheAdapter from './SCacheAdapter';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SCacheLsAdapter extends __SCacheAdapter {
+  static id = 'ls';
+
   /**
    * @name                              constructor
    * @type                              Function
@@ -58,7 +60,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    */
   async set(name, value) {
     // store data into localStorage
-    window.localStorage.setItem(`${this.cache.name}.${name}`, value);
+    window.localStorage.setItem(`${this.cache.id}.${name}`, value);
     // write has been done correctly
     return true;
   }
@@ -78,7 +80,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async get(name) {
-    return window.localStorage.getItem(`${this.cache.name}.${name}`);
+    return window.localStorage.getItem(`${this.cache.id}.${name}`);
   }
 
   /**
@@ -97,7 +99,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    */
   async delete(name) {
     // delete the item from the localStorage
-    window.localStorage.removeItem(`${this.cache.name}.${name}`);
+    window.localStorage.removeItem(`${this.cache.id}.${name}`);
 
     // return true cause all went well
     return true;
@@ -122,7 +124,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
 
     // filter the keys to delete
     const keysToDelete = keys.filter((key) => {
-      return key.startsWith(`${this.cache.name}.`);
+      return key.startsWith(`${this.cache.id}.`);
     });
 
     // loop on each keys to delete
@@ -154,7 +156,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
 
     // filter the keys to get only the ones that bellongs to this cache instance
     const cacheKeys = keys.filter((key) => {
-      return key.startsWith(`${this.cache.name}.`);
+      return key.startsWith(`${this.cache.id}.`);
     });
 
     // return the cache keys

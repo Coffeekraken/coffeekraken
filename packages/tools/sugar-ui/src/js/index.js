@@ -3,7 +3,7 @@
 import './component';
 // console.log(Component);
 // customElements.define('my-element', Component);
-// console.log('ff');
+console.log('ff');
 // wefefe;
 // console.log 'd';
 //# sourceMappingURL=index.js.map

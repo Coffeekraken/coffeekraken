@@ -1,5 +1,7 @@
 // @ts-nocheck
 
+import __globWatcher from 'glob-watcher';
+import * as __ts from 'typescript';
 import __deepMerge from '../../object/deepMerge';
 import __SInterface from '../../interface/SInterface';
 import __sugarConfig from '../../config/sugar';
@@ -16,6 +18,9 @@ import __packageRoot from '../../path/packageRoot';
 import __tmpDir from '../../path/tmpDir';
 import __stripAnsi from '../../string/stripAnsi';
 import __SDuration from '../../time/SDuration';
+import __fs from 'fs';
+import __clone from '../../object/clone';
+import __path from 'path';
 
 import __TscInterface from './interface/TscInterface';
 import __STsCompilerParamsInterface from './interface/STsCompilerParamsInterface';
@@ -35,6 +40,7 @@ export interface ISTsCompilerParams {
   save: boolean;
   watch: boolean;
   target: string;
+  transpileOnly: boolean;
   stacks: string[];
   tsconfig: any;
 }
@@ -141,9 +147,17 @@ class STsCompiler extends __SCompiler {
 
       let input = Array.isArray(params.input) ? params.input : [params.input];
 
-      let tsconfig = {
-        ...params.tsconfig
-      };
+      let tsconfig = __clone(
+        {
+          ...params.tsconfig
+        },
+        {
+          deep: true
+        }
+      );
+      if (!tsconfig.exclude) tsconfig.exclude = [];
+      if (!tsconfig.files) tsconfig.files = [];
+      if (!tsconfig.include) tsconfig.include = [];
 
       if (params.stacks) {
         params.stacks.forEach((stack) => {
@@ -189,6 +203,175 @@ class STsCompiler extends __SCompiler {
         }
       });
 
+      // make sure all the files paths are absolute
+      tsconfig.files = __absolute(tsconfig.files);
+      tsconfig.include = __absolute(tsconfig.include);
+
+      const allAbsFilesPaths = [...tsconfig.files, ...tsconfig.include];
+
+      const duration = new __SDuration();
+
+      if (tsconfig.files.length === 0 && tsconfig.include.length === 0) {
+        return reject(
+          [
+            `Sorry but their's nothing to compile.`,
+            `In order to specify files/folders to compile, you have these choices:`,
+            `1. Specify some "stacks" to compile in your "<yellow>.sugar/ts.config.js</yellow>" file and launch the compilation using the "<cyan>-s {stack}</cyan>" argument.`,
+            `2. Specify a "<yellow>project</yellow>" tsconfig.json path using the standard "<cyan>-p|--project</cyan>" argument.`,
+            `3. Create a "<yellow>tsconfig.json</yellow>" file at your project root which is "<cyan>${__packageRoot()}</cyan>".`
+          ].join('\n')
+        );
+      }
+
+      // if no filename for the temp config file, generate one
+      if (!tmpConfigFileName) {
+        tmpConfigFileName = `${__md5.encrypt(
+          tsconfig.files.concat(tsconfig.include)
+        )}.tsconfig.json`;
+      }
+
+      // ensure the tsconfig file is valid
+      // if (!tsconfig.files.length) delete tsconfig.files;
+      // if (!tsconfig.include.length) delete tsconfig.include;
+      // if (!tsconfig.exclude.length) delete tsconfig.exclude;
+
+      // wrinting the temp config file
+      const tmpConfigFile = new __SFile(`%tmpDir/ts/${tmpConfigFileName}`, {
+        file: {
+          checkExistence: false
+        }
+      });
+
+      // apply target
+      const availableTargets = __sugarConfig('ts.targets');
+      if (params.target && availableTargets[params.target]) {
+        tsconfig.compilerOptions = __deepMerge(
+          tsconfig.compilerOptions,
+          availableTargets[params.target]
+        );
+      }
+
+      if (params.transpileOnly && params.watch) {
+        emit('log', {
+          clear: true,
+          type: 'time'
+        });
+        emit('log', {
+          type: 'heading',
+          value: `<yellow>Start</yellow> watching <blue>typescript</blue> files`
+        });
+
+        const watcher = __globWatcher(allAbsFilesPaths);
+        const watchCallbackFn = async (path, stats) => {
+          emit('notification', {
+            message: `${this.id} compilation starting`
+          });
+          emit('log', {
+            clear: true,
+            type: 'time'
+          });
+          emit('log', {
+            value: `<yellow>[update]</yellow> File "<cyan>${__path.relative(
+              process.cwd(),
+              path
+            )}</cyan>"`
+          });
+
+          const watchCompilePromise = this.compile(
+            {
+              ...params,
+              input: path,
+              watch: false
+            },
+            settings
+          );
+          pipeFrom(watchCompilePromise);
+          await watchCompilePromise;
+          emit('notification', {
+            type: 'success',
+            message: `${this.id} compilation success`
+          });
+          emit('log', {
+            type: 'separator'
+          });
+          emit('log', {
+            value: '<blue>[watch]</blue> Watching for changes'
+          });
+        };
+        watcher.on('change', watchCallbackFn);
+        watcher.on('add', watchCallbackFn);
+
+        emit('log', {
+          value: '<blue>[watch]</blue> Watching for changes'
+        });
+
+        return;
+      } else if (params.transpileOnly) {
+        const compiledFiles = {};
+        const allDuration = new __SDuration();
+        const allJs: string[] = [],
+          allTs: string[] = [];
+
+        allAbsFilesPaths.forEach((inputAbsPath) => {
+          const duration = new __SDuration();
+          const source = __fs.readFileSync(inputAbsPath, 'utf8');
+
+          emit('log', {
+            value: `<yellow>[compiling]</yellow> File "<cyan>${__path.relative(
+              process.cwd(),
+              inputAbsPath
+            )}</cyan>"`
+          });
+
+          let result = __ts.transpileModule(source, {
+            compilerOptions: tsconfig.compilerOptions
+          });
+          allJs.push(result.outputText);
+          allTs.push(source);
+
+          let savePath = __path
+            .relative(params.rootDir, inputAbsPath)
+            .replace(/\.tsx?$/, '.js');
+          if (params.outputDir) {
+            savePath = `${params.outputDir}/${savePath}`;
+          } else {
+            savePath = inputAbsPath.replace(/\.tsx?$/, '.js');
+          }
+
+          compiledFiles[__path.relative(process.cwd(), savePath)] = {
+            ts: source,
+            js: result.outputText,
+            map: result.sourceMaptext,
+            ...duration.end()
+          };
+
+          if (params.save) {
+            emit('log', {
+              value: `<green>[saved]</green> File "<cyan>${__path.relative(
+                process.cwd(),
+                inputAbsPath
+              )}</cyan>" <green>saved successfully</green> under "<magenta>${__path.relative(
+                process.cwd(),
+                savePath
+              )}</magenta>"`
+            });
+          }
+        });
+
+        const resultObj = {
+          ts: allTs.join('\n'),
+          js: allJs.join('\n'),
+          files: compiledFiles
+        };
+        resolve(resultObj);
+
+        return;
+      }
+
+      emit('notification', {
+        message: `${this.id} compilation started`
+      });
+
       emit('log', {
         clear: true,
         type: 'time'
@@ -228,51 +411,6 @@ class STsCompiler extends __SCompiler {
           ''
         ].join('\n')
       });
-
-      tsconfig.files = __absolute(tsconfig.files);
-      tsconfig.include = __absolute(tsconfig.include);
-
-      const duration = new __SDuration();
-
-      if (tsconfig.files.length === 0 && tsconfig.include.length === 0) {
-        return reject(
-          [
-            `Sorry but their's nothing to compile.`,
-            `In order to specify files/folders to compile, you have these choices:`,
-            `1. Specify some "stacks" to compile in your "<yellow>.sugar/ts.config.js</yellow>" file and launch the compilation using the "<cyan>-s {stack}</cyan>" argument.`,
-            `2. Specify a "<yellow>project</yellow>" tsconfig.json path using the standard "<cyan>-p|--project</cyan>" argument.`,
-            `3. Create a "<yellow>tsconfig.json</yellow>" file at your project root which is "<cyan>${__packageRoot()}</cyan>".`
-          ].join('\n')
-        );
-      }
-
-      // if no filename for the temp config file, generate one
-      if (!tmpConfigFileName) {
-        tmpConfigFileName = `${__md5.encrypt(
-          tsconfig.files.concat(tsconfig.include)
-        )}.tsconfig.json`;
-      }
-
-      // ensure the tsconfig file is valid
-      if (!tsconfig.files.length) delete tsconfig.files;
-      if (!tsconfig.include.length) delete tsconfig.include;
-      if (!tsconfig.exclude.length) delete tsconfig.exclude;
-
-      // wrinting the temp config file
-      const tmpConfigFile = new __SFile(`%tmpDir/ts/${tmpConfigFileName}`, {
-        file: {
-          checkExistence: false
-        }
-      });
-
-      // apply target
-      const availableTargets = __sugarConfig('ts.targets');
-      if (params.target && availableTargets[params.target]) {
-        tsconfig.compilerOptions = __deepMerge(
-          tsconfig.compilerOptions,
-          availableTargets[params.target]
-        );
-      }
 
       // write the temp file to compile
       tmpConfigFile.writeSync(JSON.stringify(tsconfig, null, 4));
@@ -407,6 +545,9 @@ class STsCompiler extends __SCompiler {
           else value = strValue;
 
           if (clear) {
+            emit('notification', {
+              message: `${this.id} compilation started`
+            });
             emit('log', {
               type: 'time'
             });
@@ -435,6 +576,10 @@ class STsCompiler extends __SCompiler {
         typeof result === 'string' &&
         __stripAnsi(result.trim()).match(/^error\s/)
       ) {
+        emit('notification', {
+          type: 'error',
+          message: `${this.id} compilation error`
+        });
         return reject(result);
       }
 
@@ -465,6 +610,10 @@ class STsCompiler extends __SCompiler {
         };
       }
 
+      emit('notification', {
+        type: 'success',
+        message: `${this.id} compilation success`
+      });
       resolve(resultObj);
     });
   }

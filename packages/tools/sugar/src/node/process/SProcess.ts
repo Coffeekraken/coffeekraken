@@ -622,10 +622,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
               )}s</yellow>`
             });
           }
-          this.emit('notification', {
-            type: 'success',
-            title: `${this.id} success`
-          });
+          // this.emit('notification', {
+          //   type: 'success',
+          //   title: `${this.id} success`
+          // });
           break;
         case 'running':
           if (this.processSettings.decorators === true) {
@@ -637,10 +637,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
               }</yellow> <cyan>${this.id}</cyan> execution...`
             });
           }
-          this.emit('notification', {
-            type: 'start',
-            title: `${this.id} starting`
-          });
+          // this.emit('notification', {
+          //   type: 'start',
+          //   title: `${this.id} starting`
+          // });
           break;
         case 'error':
           if (this.processSettings.decorators === true) {
@@ -666,10 +666,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
               value: strArray.join('\n')
             });
           }
-          this.emit('notification', {
-            type: 'error',
-            title: `${this.id} error`
-          });
+          // this.emit('notification', {
+          //   type: 'error',
+          //   title: `${this.id} error`
+          // });
           break;
         case 'killed':
           if (this.processSettings.decorators === true) {
@@ -695,10 +695,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
               value: strArray.join('\n')
             });
           }
-          this.emit('notification', {
-            type: 'error',
-            title: `${this.id} killed`
-          });
+          // this.emit('notification', {
+          //   type: 'error',
+          //   title: `${this.id} killed`
+          // });
           break;
       }
     }

@@ -3,6 +3,8 @@ import __fs from 'fs';
 import __deepMerge from '../object/deepMerge';
 import __sugarConfig from '../config/sugar';
 
+import { ISCacheSetSettings } from './SCache';
+
 /**
  * @name            SFileCache
  * @namespace       sugar.node.cache
@@ -26,7 +28,10 @@ import __sugarConfig from '../config/sugar';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-interface ISFileCacheSettings {
+interface ISFileCacheCtorSettings {
+  cache: Partial<ISFileCacheSettings>;
+}
+interface ISFileCacheSettings extends ISCacheSetSettings {
   rootDir?: string;
   [key: string]: any;
 }
@@ -42,8 +47,8 @@ class SFileCache extends __SCache {
    * @since           2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(name, settings: ISFileCacheSettings = {}) {
-    super(name, __deepMerge({}, settings));
+  constructor(name, settings?: ISFileCacheCtorSettings) {
+    super(name, __deepMerge({}, settings || {}));
   }
 
   /**
@@ -62,10 +67,10 @@ class SFileCache extends __SCache {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async get(path, settings: ISFileCacheSettings = {}) {
+  async get(path, settings?: Partial<ISFileCacheSettings>) {
     settings = {
       valueOnly: true,
-      ...settings
+      ...(settings || {})
     };
 
     // check if the file actually exists
@@ -90,8 +95,8 @@ class SFileCache extends __SCache {
    *
    * Set a value to the cache system using the specified adapter with some settings like described bellow
    *
-   * @param               {String|Array|Object}              name              The name of the item to get back from the cache. If not a string, will be hased using md5 encryption
-   * @param               {Mixed}               value             The value to set.
+   * @param               {String}              path              The path to the file to save in cache
+   * @param               {any}               value             The value to set.
    * @param               {Object}              [settings={}]
    * The settings for this particular item:
    * - ttl (-1) {Number}: Time to live in seconds
@@ -105,7 +110,11 @@ class SFileCache extends __SCache {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  async set(path, value = null, settings: ISFileCacheSettings = {}) {
+  async set(
+    path: string,
+    value: any = null,
+    settings?: Partial<ISFileCacheSettings>
+  ) {
     // check that the file actually exists
     if (!__fs.existsSync(path)) return false;
 

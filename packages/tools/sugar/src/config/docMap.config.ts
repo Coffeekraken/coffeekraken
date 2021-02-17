@@ -1,6 +1,19 @@
 import __packageRoot from '../node/path/packageRoot';
 
 export default {
+  /**
+   * @name        cache
+   * @namespace    config.docMap
+   * @type        Boolean
+   *
+   * Specify if you want to use the cache when read the files, find them, etc...
+   * You can alwπLsπays purge the cache using the ```purgeCache``` method on the SDocMap class
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  cache: true,
+
   build: {
     /**
      * @name            globs

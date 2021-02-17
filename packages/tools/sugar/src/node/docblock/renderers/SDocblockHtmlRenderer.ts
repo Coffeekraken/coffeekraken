@@ -97,6 +97,9 @@ class SDocblockHtmlRenderer
       docblockInstance,
       __deepMerge(
         {
+          docblockRenderer: {
+            rootDir: `${__dirname}/html`
+          },
           docblockHtmlRenderer: {}
         },
         settings || {}

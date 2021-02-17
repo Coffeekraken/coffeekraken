@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import __deepMerge from '../../object/deepMerge';
 import __tmpDir from '../../path/tmpDir';
 import __fs from 'fs';
@@ -8,6 +6,8 @@ import __removeSync from '../../fs/removeSync';
 import __sugarConfig from '../../config/sugar';
 import __toString from '../../string/toString';
 import __SCacheAdapter from './SCacheAdapter';
+
+import { ISCacheAdapter } from './SCacheAdapter';
 
 /**
  * @name                                SCacheFsAdapter
@@ -33,6 +33,22 @@ import __SCacheAdapter from './SCacheAdapter';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SCacheFsAdapter extends __SCacheAdapter {
+  static id = 'fs';
+
+  /**
+   * @name      fsCacheAdapter
+   * @type      any
+   * @get
+   *
+   * Access the fs cache adapter settings
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get fsCacheAdapterSettings(): any {
+    return (<any>this._settings).fsCacheAdapter;
+  }
+
   /**
    * @name                              constructor
    * @type                              Function
@@ -44,12 +60,13 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(cache, settings = {}) {
+  constructor(settings = {}) {
     super(
-      cache,
       __deepMerge(
         {
-          rootDir: __sugarConfig('storage.cacheDir') || `${__tmpDir()}/SCache`
+          fsCacheAdapter: {
+            rootDir: __sugarConfig('storage.cacheDir') || `${__tmpDir()}/SCache`
+          }
         },
         settings
       )
@@ -76,15 +93,21 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    */
   async set(name, value) {
     // generate the item fs name
-    const fsName = `${this.cache.name}/${name}.json`.replace(/\/\//gm, '/');
+    const fsName = `${this.cache.id}/${name}.json`.replace(/\/\//gm, '/');
 
     // ensure we have the folder
     __ensureDirSync(
-      `${this._settings.rootDir}/${fsName.split('/').slice(0, -1).join('/')}`
+      `${this.fsCacheAdapterSettings.rootDir}/${fsName
+        .split('/')
+        .slice(0, -1)
+        .join('/')}`
     );
 
     // write the json file
-    __fs.writeFileSync(`${this._settings.rootDir}/${fsName}`, value);
+    __fs.writeFileSync(
+      `${this.fsCacheAdapterSettings.rootDir}/${fsName}`,
+      value
+    );
     // write has been done correctly
     return true;
   }
@@ -106,11 +129,15 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
   async get(name) {
     // generate the item fs name
     if (name.slice(0, 1) === '/') name = name.slice(1);
-    const fsName = `${this.cache.name}/${name}.json`;
+    const fsName = `${this.cache.id}/${name}.json`;
     // check that the file exists
-    if (!__fs.existsSync(`${this._settings.rootDir}/${fsName}`)) return null;
+    if (!__fs.existsSync(`${this.fsCacheAdapterSettings.rootDir}/${fsName}`))
+      return null;
     // read the json file
-    return __fs.readFileSync(`${this._settings.rootDir}/${fsName}`, 'utf8');
+    return __fs.readFileSync(
+      `${this.fsCacheAdapterSettings.rootDir}/${fsName}`,
+      'utf8'
+    );
   }
 
   /**
@@ -129,9 +156,9 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    */
   async delete(name) {
     // generate the item fs name
-    const fsName = `${this.cache.name}/${name}.json`;
+    const fsName = `${this.cache.id}/${name}.json`;
     // read the json file
-    return __fs.unlinkSync(`${this._settings.rootDir}/${fsName}`);
+    return __fs.unlinkSync(`${this.fsCacheAdapterSettings.rootDir}/${fsName}`);
   }
 
   /**
@@ -143,12 +170,33 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    * @return            {Boolean}                               true if all of, false if not...
    *
    * @example           js
-   * await myCache.clear;
+   * await myCache.clear();
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   async clear() {
     // read the json file
-    return __removeSync(`${this._settings.rootDir}/${this.cache.name}`);
+    return __removeSync(
+      `${this.fsCacheAdapterSettings.rootDir}/${this.cache.id}`
+    );
+  }
+
+  /**
+   * @name                          keys
+   * @type                          Function
+   *
+   * Get all the items keys stored in cache
+   *
+   * @return            {Boolean}                               true if all of, false if not...
+   *
+   * @todo      implement this feature
+   *
+   * @example           js
+   * await myCache.keys();
+   *
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  async keys() {
+    return [];
   }
 }

@@ -1,42 +1,12 @@
 "use strict";
-// @ts-nocheck
 // @shared
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * @name                                SCacheAdapter
- * @namespace           sugar.js.cache.cacheAdapters
- * @type                                Class
- *
- * Base class for SCache adapters
- *
- * @todo        interface
- * @todo        doc
- *
- * @example             js
- * class SCacheCoolAdapter extends SCacheAdapter {
- *    constructor(settings = {}) {
- *      super(settings);
- *      // settings are accessible through this._settings
- *    }
- *    async set(name, value, settings = {}) {
- *      const objectToSave = this.processItem(name, value, settings);
- *      // make what you want with the objectToSave...
- *      return objectToSave; // return the objectToSave or false if something goes wrong
- *    }
- *    async get(name) {
- *      // make what you need to get back the cached item
- *      return objectOfCachedItem; // return the cached item in object format
- *    }
- *    async delete(name) {
- *      // make what you need to delete the cached item
- *      return true; // return true or false if something goes wrong
- *    }
- * }
- *
- * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SCacheAdapter {
+const SClass_1 = __importDefault(require("../../class/SClass"));
+const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
+class SCacheAdapter extends SClass_1.default {
     /**
      * @name                              constructor
      * @type                              Function
@@ -47,31 +17,11 @@ class SCacheAdapter {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(cache, settings = {}) {
-        /**
-         * @name                              _settings
-         * @type                              Object
-         * @private
-         *
-         * Store the default settings of the SCacheAdapter instance
-         *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this._settings = {};
-        /**
-         * @name            cache
-         * @type            SCache
-         *
-         * Store the cache instance which if used
-         *
-         * @since         2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        this.cache = null;
-        // store the settings
-        this._settings = settings;
-        this.cache = cache;
+    constructor(settings = {}) {
+        super(deepMerge_1.default({
+            cacheAdapter: {}
+        }, settings));
     }
 }
 exports.default = SCacheAdapter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlQWRhcHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDYWNoZUFkYXB0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFDZCxVQUFVOztBQUlWOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQ0c7QUFDSCxNQUFxQixhQUFhO0lBdUJoQzs7Ozs7Ozs7O09BU0c7SUFDSCxZQUFZLEtBQUssRUFBRSxRQUFRLEdBQUcsRUFBRTtRQWhDaEM7Ozs7Ozs7O1dBUUc7UUFDSCxjQUFTLEdBQUcsRUFBRSxDQUFDO1FBRWY7Ozs7Ozs7O1dBUUc7UUFDSCxVQUFLLEdBQUcsSUFBSSxDQUFDO1FBYVgscUJBQXFCO1FBQ3JCLElBQUksQ0FBQyxTQUFTLEdBQUcsUUFBUSxDQUFDO1FBQzFCLElBQUksQ0FBQyxLQUFLLEdBQUcsS0FBSyxDQUFDO0lBQ3JCLENBQUM7Q0FDRjtBQXRDRCxnQ0FzQ0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlQWRhcHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDYWNoZUFkYXB0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLFVBQVU7Ozs7O0FBRVYsZ0VBQTBDO0FBQzFDLHVFQUFpRDtBQXVEakQsTUFBOEIsYUFBYyxTQUFRLGdCQUFRO0lBYTFEOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksUUFBUSxHQUFHLEVBQUU7UUFDdkIsS0FBSyxDQUNILG1CQUFXLENBQ1Q7WUFDRSxZQUFZLEVBQUUsRUFBRTtTQUNqQixFQUNELFFBQVEsQ0FDVCxDQUNGLENBQUM7SUFDSixDQUFDO0NBcUZGO0FBckhELGdDQXFIQyJ9

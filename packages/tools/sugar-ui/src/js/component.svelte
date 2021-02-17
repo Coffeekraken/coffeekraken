@@ -12,7 +12,7 @@
 		}
 	}
 
-	console.log('DFF')
+	// console.log('DFF')
 
 	new MyCoolComponent();
 

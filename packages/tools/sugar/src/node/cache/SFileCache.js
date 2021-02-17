@@ -26,8 +26,8 @@ class SFileCache extends SCache_1.default {
      * @since           2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(name, settings = {}) {
-        super(name, deepMerge_1.default({}, settings));
+    constructor(name, settings) {
+        super(name, deepMerge_1.default({}, settings || {}));
     }
     /**
      * @name                            get
@@ -45,12 +45,12 @@ class SFileCache extends SCache_1.default {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    get(path, settings = {}) {
+    get(path, settings) {
         const _super = Object.create(null, {
             get: { get: () => super.get }
         });
         return __awaiter(this, void 0, void 0, function* () {
-            settings = Object.assign({ valueOnly: true }, settings);
+            settings = Object.assign({ valueOnly: true }, (settings || {}));
             // check if the file actually exists
             const metas = yield _super.get.call(this, path, Object.assign(Object.assign({}, settings), { valueOnly: false }));
             if (!metas)
@@ -71,8 +71,8 @@ class SFileCache extends SCache_1.default {
      *
      * Set a value to the cache system using the specified adapter with some settings like described bellow
      *
-     * @param               {String|Array|Object}              name              The name of the item to get back from the cache. If not a string, will be hased using md5 encryption
-     * @param               {Mixed}               value             The value to set.
+     * @param               {String}              path              The path to the file to save in cache
+     * @param               {any}               value             The value to set.
      * @param               {Object}              [settings={}]
      * The settings for this particular item:
      * - ttl (-1) {Number}: Time to live in seconds
@@ -86,7 +86,7 @@ class SFileCache extends SCache_1.default {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    set(path, value = null, settings = {}) {
+    set(path, value = null, settings) {
         const _super = Object.create(null, {
             set: { get: () => super.set }
         });
@@ -104,4 +104,4 @@ class SFileCache extends SCache_1.default {
     }
 }
 exports.default = SFileCache;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ZpbGVDYWNoZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNGaWxlQ2FjaGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7QUFBQSxzREFBZ0M7QUFDaEMsNENBQXNCO0FBQ3RCLG9FQUE4QztBQStCOUMsTUFBTSxVQUFXLFNBQVEsZ0JBQVE7SUFDL0I7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxJQUFJLEVBQUUsV0FBZ0MsRUFBRTtRQUNsRCxLQUFLLENBQUMsSUFBSSxFQUFFLG1CQUFXLENBQUMsRUFBRSxFQUFFLFFBQVEsQ0FBQyxDQUFDLENBQUM7SUFDekMsQ0FBQztJQUVEOzs7Ozs7Ozs7Ozs7Ozs7T0FlRztJQUNHLEdBQUcsQ0FBQyxJQUFJLEVBQUUsV0FBZ0MsRUFBRTs7Ozs7WUFDaEQsUUFBUSxtQkFDTixTQUFTLEVBQUUsSUFBSSxJQUNaLFFBQVEsQ0FDWixDQUFDO1lBRUYsb0NBQW9DO1lBQ3BDLE1BQU0sS0FBSyxHQUFHLE1BQU0sT0FBTSxHQUFHLFlBQUMsSUFBSSxrQ0FDN0IsUUFBUSxLQUNYLFNBQVMsRUFBRSxLQUFLLElBQ2hCLENBQUM7WUFDSCxJQUFJLENBQUMsS0FBSztnQkFBRSxPQUFPLElBQUksQ0FBQztZQUN4QixxQkFBcUI7WUFDckIsTUFBTSxLQUFLLEdBQUcsWUFBSSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUNsQyxJQUFJLEtBQUssQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDLE9BQU8sRUFBRTtnQkFDakMsT0FBTyxJQUFJLENBQUM7YUFDYjtZQUNELG1CQUFtQjtZQUNuQixPQUFPLFFBQVEsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQztRQUNsRCxDQUFDO0tBQUE7SUFFRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BcUJHO0lBQ0csR0FBRyxDQUFDLElBQUksRUFBRSxLQUFLLEdBQUcsSUFBSSxFQUFFLFdBQWdDLEVBQUU7Ozs7O1lBQzlELHNDQUFzQztZQUN0QyxJQUFJLENBQUMsWUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUM7Z0JBQUUsT0FBTyxLQUFLLENBQUM7WUFFekMsZ0JBQWdCO1lBQ2hCLElBQUksT0FBTyxHQUFRLEtBQUssQ0FBQztZQUN6QixJQUFJLENBQUMsT0FBTztnQkFBRSxPQUFPLEdBQUcsWUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLEVBQUUsTUFBTSxDQUFDLENBQUM7WUFFeEQsd0JBQXdCO1lBQ3hCLE9BQU8sT0FBTSxHQUFHLFlBQUMsSUFBSSxFQUFFLE9BQU8sRUFBRSxRQUFRLEVBQUU7UUFDNUMsQ0FBQztLQUFBO0NBQ0Y7QUFFRCxrQkFBZSxVQUFVLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ZpbGVDYWNoZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNGaWxlQ2FjaGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7QUFBQSxzREFBZ0M7QUFDaEMsNENBQXNCO0FBQ3RCLG9FQUE4QztBQW9DOUMsTUFBTSxVQUFXLFNBQVEsZ0JBQVE7SUFDL0I7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxJQUFJLEVBQUUsUUFBa0M7UUFDbEQsS0FBSyxDQUFDLElBQUksRUFBRSxtQkFBVyxDQUFDLEVBQUUsRUFBRSxRQUFRLElBQUksRUFBRSxDQUFDLENBQUMsQ0FBQztJQUMvQyxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7Ozs7OztPQWVHO0lBQ0csR0FBRyxDQUFDLElBQUksRUFBRSxRQUF1Qzs7Ozs7WUFDckQsUUFBUSxtQkFDTixTQUFTLEVBQUUsSUFBSSxJQUNaLENBQUMsUUFBUSxJQUFJLEVBQUUsQ0FBQyxDQUNwQixDQUFDO1lBRUYsb0NBQW9DO1lBQ3BDLE1BQU0sS0FBSyxHQUFHLE1BQU0sT0FBTSxHQUFHLFlBQUMsSUFBSSxrQ0FDN0IsUUFBUSxLQUNYLFNBQVMsRUFBRSxLQUFLLElBQ2hCLENBQUM7WUFDSCxJQUFJLENBQUMsS0FBSztnQkFBRSxPQUFPLElBQUksQ0FBQztZQUN4QixxQkFBcUI7WUFDckIsTUFBTSxLQUFLLEdBQUcsWUFBSSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUNsQyxJQUFJLEtBQUssQ0FBQyxPQUFPLEdBQUcsS0FBSyxDQUFDLE9BQU8sRUFBRTtnQkFDakMsT0FBTyxJQUFJLENBQUM7YUFDYjtZQUNELG1CQUFtQjtZQUNuQixPQUFPLFFBQVEsQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQztRQUNsRCxDQUFDO0tBQUE7SUFFRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09BcUJHO0lBQ0csR0FBRyxDQUNQLElBQVksRUFDWixRQUFhLElBQUksRUFDakIsUUFBdUM7Ozs7O1lBRXZDLHNDQUFzQztZQUN0QyxJQUFJLENBQUMsWUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUM7Z0JBQUUsT0FBTyxLQUFLLENBQUM7WUFFekMsZ0JBQWdCO1lBQ2hCLElBQUksT0FBTyxHQUFRLEtBQUssQ0FBQztZQUN6QixJQUFJLENBQUMsT0FBTztnQkFBRSxPQUFPLEdBQUcsWUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLEVBQUUsTUFBTSxDQUFDLENBQUM7WUFFeEQsd0JBQXdCO1lBQ3hCLE9BQU8sT0FBTSxHQUFHLFlBQUMsSUFBSSxFQUFFLE9BQU8sRUFBRSxRQUFRLEVBQUU7UUFDNUMsQ0FBQztLQUFBO0NBQ0Y7QUFFRCxrQkFBZSxVQUFVLENBQUMifQ==

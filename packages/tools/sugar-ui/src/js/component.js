@@ -7,7 +7,6 @@ import {
 	detach_dev,
 	dispatch_dev,
 	element,
-	globals,
 	init,
 	insert_dev,
 	noop,
@@ -15,7 +14,6 @@ import {
 	validate_slots
 } from "svelte/internal";
 
-const { console: console_1 } = globals;
 import __SSvelteComponent from "@coffeekraken/sugar/js/svelte/SSvelteComponent";
 const file = "component.svelte";
 
@@ -29,8 +27,8 @@ function create_fragment(ctx) {
 			h1 = element("h1");
 			h1.textContent = "Hello worlc";
 			this.c = noop;
-			add_location(h1, file, 20, 1, 418);
-			add_location(div, file, 19, 0, 411);
+			add_location(h1, file, 20, 1, 420);
+			add_location(div, file, 19, 0, 413);
 		},
 		l: function claim(nodes) {
 			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -68,12 +66,13 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	console.log("DFF");
+	// console.log('DFF')
 	new MyCoolComponent();
+
 	const writable_props = [];
 
 	Object.keys($$props).forEach(key => {
-		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1.warn(`<my-element> was created with unknown prop '${key}'`);
+		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<my-element> was created with unknown prop '${key}'`);
 	});
 
 	$$self.$capture_state = () => ({ __SSvelteComponent, MyCoolComponent });

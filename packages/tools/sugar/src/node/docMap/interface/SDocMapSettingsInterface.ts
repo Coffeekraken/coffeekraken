@@ -18,6 +18,11 @@ import __deepMerge from '../../object/deepMerge';
  */
 class SDocMapSettingsInterface extends __SInterface {
   static definition = {
+    cache: {
+      type: 'Boolean',
+      default: __sugarConfig('docMap.cache'),
+      level: 1
+    },
     'build.globs': {
       type: 'Array<String>',
       alias: 'i',

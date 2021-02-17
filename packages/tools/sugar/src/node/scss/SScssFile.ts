@@ -426,6 +426,10 @@ class SScssFile extends __SFile implements ISScssFile {
 
       pipeTo(this);
 
+      emit('notification', {
+        title: `${this.id} compilation started`
+      });
+
       if (this._isCompiling) {
         emit('warn', {
           value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
@@ -462,7 +466,7 @@ class SScssFile extends __SFile implements ISScssFile {
           type: 'file',
           action: 'update',
           // @ts-ignore
-          file: settings._updatedFile
+          file: settings._updatedFile.toObject()
         });
       }
 
@@ -589,6 +593,11 @@ class SScssFile extends __SFile implements ISScssFile {
           });
         }
 
+        emit('notification', {
+          type: 'success',
+          title: `${this.id} compilation success`
+        });
+
         return resolve({
           css: resultCss,
           map: undefined, // @todo       handle map
@@ -678,6 +687,11 @@ class SScssFile extends __SFile implements ISScssFile {
             });
           }
 
+          emit('notification', {
+            type: 'success',
+            title: `${this.id} compilation success`
+          });
+
           return resolve({
             css: this._processResultCss(resultCss, completeParams),
             ...durationEnd
@@ -693,6 +707,11 @@ class SScssFile extends __SFile implements ISScssFile {
             });
           }
 
+          emit('notification', {
+            type: 'success',
+            title: `${this.id} compilation success`
+          });
+
           SScssFile.COMPILED_CSS[this.path] = renderObj.css;
           return resolve({
             css: this._processResultCss(
@@ -704,7 +723,10 @@ class SScssFile extends __SFile implements ISScssFile {
           });
         }
       } catch (e) {
-        // .log(e);
+        emit('notification', {
+          type: 'error',
+          title: `${this.id} compilation error`
+        });
         return reject(new Error(e.toString()));
       }
 

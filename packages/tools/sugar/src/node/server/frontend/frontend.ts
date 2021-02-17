@@ -120,6 +120,11 @@ const fn = function (args = {}) {
       server = app
         .listen(settings.port, settings.hostname, () => {
           setTimeout(() => {
+            emit('notification', {
+              type: 'success',
+              title: `frontendServer started`
+            });
+
             emit('log', {
               type: 'time'
             });
@@ -136,6 +141,10 @@ const fn = function (args = {}) {
         })
         .on('error', (e) => {
           const string = e.toString();
+          emit('notification', {
+            type: 'error',
+            title: `frontendServer errpr`
+          });
           reject(string);
         });
       on('finally', () => {

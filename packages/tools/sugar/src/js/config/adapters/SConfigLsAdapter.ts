@@ -27,16 +27,30 @@ import __diff from '../../object/diff';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-module.exports = class SConfigLsAdapter extends (
-  __SConfigAdapter
-) {
-  constructor(settings = {}) {
-    super(settings);
+export interface ISConfigLsAdapterSettings {}
+export interface ISConfigLsAdapterCtorSettings {
+  configLsAdapter?: Partial<ISConfigLsAdapterSettings>;
+}
+
+class SConfigLsAdapter extends __SConfigAdapter {
+  get configLsAdapterSettings(): ISConfigLsAdapterSettings {
+    return (<any>this.configLsAdapterSettings).configLsAdapter;
+  }
+
+  constructor(settings: ISConfigLsAdapterCtorSettings) {
+    super(
+      __deepMerge(
+        {
+          configLsAdapter: {}
+        },
+        settings || {}
+      )
+    );
   }
 
   load() {
     // try to get the config from the localstorage
-    const config = __parse(localStorage.getItem(this._settings.name)) || {};
+    const config = __parse(localStorage.getItem(this.name)) || {};
 
     // mix the configs and save them in the instance
     return __deepMerge(
@@ -48,17 +62,19 @@ module.exports = class SConfigLsAdapter extends (
 
   save(newConfig = {}) {
     const baseConfig = __deepMerge(
-      this._settings.defaultConfig,
-      this._settings.appConfig
+      this.configLsAdapterSettings.defaultConfig,
+      this.configLsAdapterSettings.appConfig
     );
     localStorage.setItem(
-      this._settings.name,
+      this.name,
       __toString({
-        default: this._settings.defaultConfig,
-        app: this._settings.appConfig,
+        default: this.configLsAdapterSettings.defaultConfig,
+        app: this.configLsAdapterSettings.appConfig,
         user: __diff(baseConfig, newConfig)
       })
     );
     return true;
   }
-};
+}
+
+export default SConfigLsAdapter;

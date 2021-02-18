@@ -2,11 +2,14 @@
 // @shared
 
 import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../object/deepMerge';
+import __SEventEmitter from '../../event/SEventEmitter';
 
 /**
  * @name                                SConfigAdapter
  * @namespace           sugar.js.config.adapters
  * @type                                Class
+ * @extends                   SEventEmitter
  * @status              beta
  *
  * Base class for SCache adapters
@@ -34,17 +37,26 @@ import __deepMerge from '../../object/deepMerge';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SConfigAdapter {
+
+export interface ISConfigAdapterSettings {}
+export interface ISConfigAdapterCtorSettings {
+  configAdapter?: Partial<ISConfigAdapterSettings>;
+}
+
+export default class SConfigAdapter extends __SEventEmitter {
   /**
-   * @name                              _settings
-   * @type                              Object
-   * @private
+   * @name        configAdapterSettings
+   * @type        ISConfigAdapterSettings
+   * @get
    *
-   * Store the default settings of the SConfigAdapter instance
+   * Access the config adapter settings
    *
+   * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _settings = {};
+  get configAdapterSettings(): ISConfigAdapterSettings {
+    return (<any>this._settings).configAdapter;
+  }
 
   /**
    * @name                              constructor
@@ -58,14 +70,21 @@ export default class SConfigAdapter {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(settings = {}) {
+  constructor(settings: ISConfigAdapterCtorSettings) {
+    super(
+      __deepMerge(
+        {
+          configAdapter: {}
+        },
+        settings || {}
+      )
+    );
+
     if (settings.name && !/^[a-zA-Z0-9_\-:]+$/.test(settings.name)) {
       throw new Error(
         `The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`
       );
     }
-    // store the settings
-    this._settings = settings;
   }
 
   /**
@@ -78,7 +97,7 @@ export default class SConfigAdapter {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get name() {
-    return this._settings.name;
+    return this.configAdapterSettings.name;
   }
   set name(value) {
     if (!/^[a-zA-Z0-9_\-:]+$/.test(value)) {
@@ -86,19 +105,6 @@ export default class SConfigAdapter {
         `The name of an SConfigAdapter instance can contain only letters like [a-zA-Z0-9_-:]...`
       );
     }
-    this._settings.name = value;
-  }
-
-  /**
-   * @name                  settings
-   * @type                  Object
-   * @get
-   *
-   * Access the adapter setted settings
-   *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get settings() {
-    return this._settings;
+    this._settings.configAdapter.name = value;
   }
 }

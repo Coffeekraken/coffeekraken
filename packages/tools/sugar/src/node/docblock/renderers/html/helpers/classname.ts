@@ -1,7 +1,23 @@
 export default {
   id: 'classname',
-  helper: function classname(object, propertyName, defaultValue, options) {
-    console.log(this._coco);
-    return 'coco';
+  args: {
+    classes: ''
+  },
+  helper: function classname({ classes, settings }) {
+    if (
+      !settings.scope ||
+      typeof settings.scope !== 'string' ||
+      settings.scope === ''
+    )
+      return classes;
+
+    const processedClasses = classes
+      .split(/\s+/)
+      .map((cls) => {
+        return `${settings.scope}-${cls}`;
+      })
+      .join(' ');
+
+    return processedClasses;
   }
 };

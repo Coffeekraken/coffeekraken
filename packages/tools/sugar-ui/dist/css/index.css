@@ -1,5 +1,12 @@
+body {
+  content: "Hello world";
+  background: blue;
+}
 .youhou {
   content: "plopissime";
+}
+body {
+  font-size: 16 px;
 }
 .ul.ul--0 {
   display: block;
@@ -242,6 +249,9 @@
   top: 0;
   left: 0;
   text-align: right;
+}
+body {
+  font-size: 16 px;
 }
 .ol.ol--0 {
   display: block;
@@ -496,6 +506,9 @@
   left: 0;
   text-align: right;
 }
+body {
+  font-size: 16 px;
+}
 .text-format h1,
 .h1 {
   display: block;
@@ -532,6 +545,9 @@
   font-size: smaller;
   font-family: "Titillium Web";
 }
+body {
+  font-size: 16 px;
+}
 .text-format p.default,
 .p {
   display: block;
@@ -543,6 +559,9 @@
   display: block;
   font-size: medium;
   font-family: "Titillium Web";
+}
+body {
+  font-size: 16 px;
 }
 .text-format button,
 .btn {
@@ -1382,6 +1401,9 @@
 .bg-extension--dmg {
   background-color: #f2bc2b;
 }
+body {
+  font-size: 16 px;
+}
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap");
 html,
@@ -1759,7 +1781,7 @@ textarea {
   --sugar-colors-extension-modifiers-aac: #B1C5C9;
   --sugar-colors-extension-modifiers-zip: #9CC04E;
   --sugar-colors-extension-modifiers-dmg: #E36E4B;
-  --sugar-fonts-defaultFontSize: 40;
+  --sugar-fonts-defaultFontSize: 16;
   --sugar-fonts-defaultFontFamily: "default";
   --sugar-fonts-families-default-font-family: "Titillium Web";
   --sugar-fonts-families-default-font-weight: 400;
@@ -1839,7 +1861,7 @@ textarea {
   --sugar-sizes-90: 36px;
   --sugar-sizes-100: 40px;
   --sugar-typography-font-family: "default";
-  --sugar-typography-font-size: 40;
+  --sugar-typography-font-size: 16;
   --sugar-typography-line-letters-count: 55;
   --sugar-typography-text-format-class: "text-format";
   --sugar-typography-vertical-rhythm-class: "vertical-rhythm";
@@ -1907,7 +1929,7 @@ body {
   }
 }
 html {
-  font-size: 40;
+  font-size: 16;
   color: #848e91;
 }
 .s-sugar-ui {
@@ -2008,14 +2030,14 @@ html {
   border-right: 0.3em solid rgba(242, 188, 43, 0.2);
   border-bottom: 0.3em solid rgba(242, 188, 43, 0.2);
   border-left: 0.3em solid #f2bc2b;
-  animation: spinner-utzqapp 1s linear 0s infinite;
+  animation: spinner-uunhxu9 1s linear 0s infinite;
 }
 .s-sugar-ui-input-navigation__list-loading-icon, .s-sugar-ui-input-navigation__list-loading-icon:after {
   border-radius: 50%;
   width: 1em;
   height: 1em;
 }
-@keyframes spinner-utzqapp {
+@keyframes spinner-uunhxu9 {
   0% {
     transform: rotate(0deg);
   }

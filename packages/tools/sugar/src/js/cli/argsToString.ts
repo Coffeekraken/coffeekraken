@@ -72,10 +72,8 @@ function argsToString(args, settings = {}) {
       definition: settings.definition
     });
   }
-
   if (!settings.definition) {
     let string = '';
-
     Object.keys(args).forEach((key) => {
       const argValue = args[key];
       let str = '';
@@ -129,12 +127,13 @@ function argsToString(args, settings = {}) {
       settings.definition[argName].default
     )
       value = settings.definition[argName].default;
+
     if (
       value === undefined ||
-      value === null ||
-      (defObj.type &&
-        defObj.type.toLowerCase() === 'boolean' &&
-        value === false)
+      value === null
+      // (defObj.type &&
+      //   defObj.type.toLowerCase() === 'boolean' &&
+      //   value === false)
     ) {
       return;
     }

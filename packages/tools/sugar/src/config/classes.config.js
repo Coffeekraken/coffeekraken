@@ -27,7 +27,7 @@ exports.default = {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        prefix: null,
+        prefix: '[config.scope.prefix]',
         /**
          * @name          namespace
          * @namespace     config.classes.generate
@@ -58,4 +58,4 @@ exports.default = {
         icons: ['fa-user', 'fa-star']
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjbGFzc2VzLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGtCQUFlO0lBQ2IsUUFBUSxFQUFFO1FBQ1I7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxLQUFLLEVBQUUsQ0FBQyxLQUFLLENBQUM7UUFFZDs7Ozs7Ozs7Ozs7V0FXRztRQUNILE1BQU0sRUFBRSxJQUFJO1FBRVo7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxTQUFTLEVBQUUsQ0FBQyxPQUFPLENBQUM7UUFFcEI7Ozs7Ozs7Ozs7Ozs7V0FhRztRQUNILEtBQUssRUFBRSxDQUFDLFNBQVMsRUFBRSxTQUFTLENBQUM7S0FDOUI7Q0FDRixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJjbGFzc2VzLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGtCQUFlO0lBQ2IsUUFBUSxFQUFFO1FBQ1I7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxLQUFLLEVBQUUsQ0FBQyxLQUFLLENBQUM7UUFFZDs7Ozs7Ozs7Ozs7V0FXRztRQUNILE1BQU0sRUFBRSx1QkFBdUI7UUFFL0I7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxTQUFTLEVBQUUsQ0FBQyxPQUFPLENBQUM7UUFFcEI7Ozs7Ozs7Ozs7Ozs7V0FhRztRQUNILEtBQUssRUFBRSxDQUFDLFNBQVMsRUFBRSxTQUFTLENBQUM7S0FDOUI7Q0FDRixDQUFDIn0=

@@ -38,12 +38,18 @@ function sugar(dotPath) {
     sugarConfigInstance = new __SConfig('sugar', {
       adapters: [
         new __SConfigFolderAdapter({
-          name: 'sugar',
-          foldername: '.sugar',
-          filename: '[name].config.js',
-          defaultConfigPath: __path.resolve(__dirname, '../../config'),
-          appConfigPath: `${__packageRoot(process.cwd())}/[foldername]`,
-          userConfigPath: `${__packageRoot(process.cwd())}/.local/[foldername]`
+          configAdapter: {
+            name: 'sugar'
+          },
+          configFolderAdapter: {
+            folderName: '.sugar',
+            fileName: '[name].config.js',
+            defaultConfigPath: __path.resolve(__dirname, '../../config'),
+            appConfigPath: `${__packageRoot(process.cwd())}/[foldername]`,
+            userConfigPath: `${__packageRoot(
+              process.cwd()
+            )}/.local/[foldername]`
+          }
         })
       ]
     });

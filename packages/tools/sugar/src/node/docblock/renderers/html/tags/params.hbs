@@ -1,0 +1,29 @@
+{{#if param}}
+  <div class="{{ classname 'db-parameters' }}">
+    <ol class="{{ classname 'ul' }}">
+      {{#each param}}
+      <li class="{{ classname 'm-b-small' }}">
+        <p class="{{ classname 'p f-bold' }}">{{name}}</p>
+        {{#if default}}
+          <span class="{{ classname 'db-default' }}">{{default}}</span>
+        {{/if}}
+        {{#if type}}
+          <span class="{{ classname 'db-type' }}">
+          \{{{type}}\}
+          </span>
+        {{/if}}
+        {{#if description}}
+          <p class="{{ classname 'p' }}">
+            {{description}}
+          </p>
+        {{/if}}
+        {{#if content}}
+          <div class="{{ classname 'db-content' }}">
+            {{{content}}}
+          </div>
+        {{/if}}
+      </li>
+      {{/each}}
+    </ol>
+  </div>
+{{/if}}

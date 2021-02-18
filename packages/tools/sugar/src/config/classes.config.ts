@@ -26,7 +26,7 @@ export default {
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    prefix: null,
+    prefix: '[config.scope.prefix]',
 
     /**
      * @name          namespace

@@ -9,108 +9,127 @@ const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
 const writeFileSync_1 = __importDefault(require("../../fs/writeFileSync"));
 const diff_1 = __importDefault(require("../../object/diff"));
 const SConfigAdapter_1 = __importDefault(require("./SConfigAdapter"));
-/**
- * @name                  SConfigFolderAdapter
- * @namespace           sugar.node.config.adapters
- * @type                  Class
- * @status              beta
- *
- * This adapter let you specify a folder in which to put all the config files and access it normaly as you would with the SConfig system.
- * Each file in the folder will be the first level of the final config object like for example the file "colors.config.js" will be stored
- * in the final object under ```{ colors: ... }```.
- *
- * @param                   {Object}                    [settings={}]         The adapter settings that let you work with the good data storage solution...
- * - name (null) {String}: This specify the config name that you want to use.
- * - filename ('[name].config.js') {String}: Specify the filename to use for the file that will store the configs
- * - defaultConfigPath (null) {String}: This specify the path to the "default" config file.
- * - appConfigPath (${process.cwd()}/[filename]) {String}: This specify the path to the "app" config file
- * - userConfigPath (${__localDir()}/[filename]) {String}: This specify the path to the "user" config file
- * @return                  {Promise}                                         A promise that will be resolved once the data has been getted/saved...
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
+const packageRoot_1 = __importDefault(require("../../path/packageRoot"));
+const path_1 = __importDefault(require("path"));
+const chokidar_1 = __importDefault(require("chokidar"));
 class SConfigFolderAdapter extends SConfigAdapter_1.default {
-    constructor(settings = {}) {
-        super(settings);
-        this.settings.foldername = this.settings.foldername.replace('[name]', this.name);
-        if (this.settings.defaultConfigPath)
-            this.settings.defaultConfigPath = this.settings.defaultConfigPath.replace('[foldername]', this.settings.foldername);
-        if (this.settings.appConfigPath)
-            this.settings.appConfigPath = this.settings.appConfigPath.replace('[foldername]', this.settings.foldername);
-        if (this.settings.userConfigPath)
-            this.settings.userConfigPath = this.settings.userConfigPath.replace('[foldername]', this.settings.foldername);
+    get configFolderAdapterSettings() {
+        return this._settings.configFolderAdapter;
+    }
+    constructor(settings) {
+        super(deepMerge_1.default({
+            configFolderAdapter: {
+                fileName: '[name].config.js',
+                folderName: '.sugar',
+                defaultConfigPath: path_1.default.resolve(__dirname, '../../config'),
+                appConfigPath: `${packageRoot_1.default(process.cwd())}/[folderName]`,
+                userConfigPath: `${packageRoot_1.default(process.cwd())}/.local/[folderName]`
+            }
+        }, settings || {}));
+        this.configFolderAdapterSettings.folderName = this.configFolderAdapterSettings.folderName.replace('[name]', this.name);
+        if (this.configFolderAdapterSettings.defaultConfigPath)
+            this.configFolderAdapterSettings.defaultConfigPath = this.configFolderAdapterSettings.defaultConfigPath.replace('[folderName]', this.configFolderAdapterSettings.folderName);
+        if (this.configFolderAdapterSettings.appConfigPath)
+            this.configFolderAdapterSettings.appConfigPath = this.configFolderAdapterSettings.appConfigPath.replace('[folderName]', this.configFolderAdapterSettings.folderName);
+        if (this.configFolderAdapterSettings.userConfigPath)
+            this.configFolderAdapterSettings.userConfigPath = this.configFolderAdapterSettings.userConfigPath.replace('[folderName]', this.configFolderAdapterSettings.folderName);
+        // watch for changes
+        const watchPaths = [];
+        if (this.configFolderAdapterSettings.defaultConfigPath &&
+            fs_1.default.existsSync(this.configFolderAdapterSettings.defaultConfigPath)) {
+            watchPaths.push(this.configFolderAdapterSettings.defaultConfigPath);
+        }
+        if (this.configFolderAdapterSettings.appConfigPath &&
+            fs_1.default.existsSync(this.configFolderAdapterSettings.appConfigPath)) {
+            watchPaths.push(this.configFolderAdapterSettings.appConfigPath);
+        }
+        if (this.configFolderAdapterSettings.userConfigPath &&
+            fs_1.default.existsSync(this.configFolderAdapterSettings.userConfigPath)) {
+            watchPaths.push(this.configFolderAdapterSettings.userConfigPath);
+        }
+        chokidar_1.default
+            .watch(watchPaths, {
+            ignoreInitial: true
+        })
+            .on('change', (p) => this.emit('update', p))
+            .on('unlink', (p) => this.emit('update', p))
+            .on('add', (p) => this.emit('update', p));
     }
     load() {
         this._defaultConfig = {};
         this._appConfig = {};
         this._userConfig = {};
-        if (this.settings.defaultConfigPath &&
-            fs_1.default.existsSync(this.settings.defaultConfigPath)) {
-            process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`] = true;
-            fs_1.default.readdirSync(this.settings.defaultConfigPath).forEach((file) => {
-                if (!file.includes(this.settings.filename.replace('[name]', '')))
+        if (this.configFolderAdapterSettings.defaultConfigPath &&
+            fs_1.default.existsSync(this.configFolderAdapterSettings.defaultConfigPath)) {
+            process.env[`SConfigFolderAdapter-${this.configFolderAdapterSettings.defaultConfigPath}`] = true;
+            fs_1.default
+                .readdirSync(this.configFolderAdapterSettings.defaultConfigPath)
+                .forEach((file) => {
+                if (!file.includes(this.configFolderAdapterSettings.fileName.replace('[name]', '')))
                     return;
                 if (this._defaultConfig[file.replace('.config.js', '')] !== undefined)
                     return;
-                const configData = require(`${this.settings.defaultConfigPath}/${file}`);
+                const configData = require(`${this.configFolderAdapterSettings.defaultConfigPath}/${file}`);
                 this._defaultConfig[file.replace('.config.js', '')] =
                     Object.keys(configData).length === 1 && configData.default
                         ? configData.default
                         : configData;
             });
-            process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`] = JSON.stringify(this._defaultConfig);
+            process.env[`SConfigFolderAdapter-${this.configFolderAdapterSettings.defaultConfigPath}`] = JSON.stringify(this._defaultConfig);
         }
-        else if (process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`]) {
-            this._defaultConfig = JSON.parse(process.env[`SConfigFolderAdapter-${this.settings.defaultConfigPath}`]);
+        else if (process.env[`SConfigFolderAdapter-${this.configFolderAdapterSettings.defaultConfigPath}`]) {
+            this._defaultConfig = JSON.parse(process.env[`SConfigFolderAdapter-${this.configFolderAdapterSettings.defaultConfigPath}`]);
         }
-        if (this.settings.defaultConfigPath !== this.settings.appConfigPath &&
-            this.settings.appConfigPath &&
-            fs_1.default.existsSync(this.settings.appConfigPath)) {
-            process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`] = true; // intermediate value
-            fs_1.default.readdirSync(this.settings.appConfigPath).forEach((file) => {
-                if (!file.includes(this.settings.filename.replace('[name]', '')))
+        if (this.configFolderAdapterSettings.defaultConfigPath !==
+            this.configFolderAdapterSettings.appConfigPath &&
+            this.configFolderAdapterSettings.appConfigPath &&
+            fs_1.default.existsSync(this.configFolderAdapterSettings.appConfigPath)) {
+            process.env[`SConfigFolderAdapter-${this.configFolderAdapterSettings.appConfigPath}`] = true; // intermediate value
+            fs_1.default
+                .readdirSync(this.configFolderAdapterSettings.appConfigPath)
+                .forEach((file) => {
+                if (!file.includes(this.configFolderAdapterSettings.fileName.replace('[name]', '')))
                     return;
-                const configData = require(`${this.settings.appConfigPath}/${file}`);
+                const configData = require(`${this.configFolderAdapterSettings.appConfigPath}/${file}`);
                 this._appConfig[file.replace('.config.js', '')] =
                     Object.keys(configData).length === 1 && configData.default
                         ? configData.default
                         : configData;
             });
-            process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`] = JSON.stringify(this._appConfig);
+            process.env[`SConfigFolderAdapter-${this.configFolderAdapterSettings.appConfigPath}`] = JSON.stringify(this._appConfig);
         }
-        else if (process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`]) {
-            this._appConfig = JSON.parse(process.env[`SConfigFolderAdapter-${this.settings.appConfigPath}`]);
+        else if (process.env[`SConfigFolderAdapter-${this.configFolderAdapterSettings.appConfigPath}`]) {
+            this._appConfig = JSON.parse(process.env[`SConfigFolderAdapter-${this.configFolderAdapterSettings.appConfigPath}`]);
         }
-        if (this.settings.defaultConfigPath !== this.settings.userConfigPath &&
-            this.settings.appConfigPath !== this.settings.userConfigPath &&
-            this.settings.userConfigPath &&
-            fs_1.default.existsSync(this.settings.userConfigPath)) {
-            process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`] = true; // intermediate value
-            fs_1.default.readdirSync(this.settings.userConfigPath).forEach((file) => {
-                if (!file.includes(this.settings.filename.replace('[name]', '')))
+        if (this.configFolderAdapterSettings.defaultConfigPath !==
+            this.configFolderAdapterSettings.userConfigPath &&
+            this.configFolderAdapterSettings.appConfigPath !==
+                this.configFolderAdapterSettings.userConfigPath &&
+            this.configFolderAdapterSettings.userConfigPath &&
+            fs_1.default.existsSync(this.configFolderAdapterSettings.userConfigPath)) {
+            process.env[`SConfigFolderAdapter-${this.configFolderAdapterSettings.userConfigPath}`] = true; // intermediate value
+            fs_1.default
+                .readdirSync(this.configFolderAdapterSettings.userConfigPath)
+                .forEach((file) => {
+                if (!file.includes(this.configFolderAdapterSettings.fileName.replace('[name]', '')))
                     return;
-                const configData = require(`${this.settings.userConfigPath}/${file}`);
+                const configData = require(`${this.configFolderAdapterSettings.userConfigPath}/${file}`);
                 this._userConfig[file.replace('.config.js', '')] =
                     Object.keys(configData).length === 1 && configData.default
                         ? configData.default
                         : configData;
             });
-            process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`] = JSON.stringify(this._userConfig);
+            process.env[`SConfigFolderAdapter-${this.configFolderAdapterSettings.userConfigPath}`] = JSON.stringify(this._userConfig);
         }
-        else if (process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`]) {
-            this._userConfig = JSON.parse(process.env[`SConfigFolderAdapter-${this.settings.userConfigPath}`]);
+        else if (process.env[`SConfigFolderAdapter-${this.configFolderAdapterSettings.userConfigPath}`]) {
+            this._userConfig = JSON.parse(process.env[`SConfigFolderAdapter-${this.configFolderAdapterSettings.userConfigPath}`]);
         }
         // mix the configs and save them in the instance
         const n = deepMerge_1.default(this._defaultConfig, this._appConfig, this._userConfig);
         return n;
     }
     save(newConfig = {}) {
-        if (!this.settings.userConfigPath) {
+        if (!this.configFolderAdapterSettings.userConfigPath) {
             throw new Error(`You try to save the config "${this.name}" but the "settings.userConfigPath" is not set...`);
         }
         const baseConfig = deepMerge_1.default(this._defaultConfig, this._appConfig);
@@ -120,12 +139,12 @@ class SConfigFolderAdapter extends SConfigAdapter_1.default {
       module.exports = ${JSON.stringify(configToSave)};
     `;
             // write the new config file
-            writeFileSync_1.default(this.settings.userConfigPath +
+            writeFileSync_1.default(this.configFolderAdapterSettings.userConfigPath +
                 '/' +
-                this.settings.filename.replace('[name]', name), newConfigString);
+                this.configFolderAdapterSettings.fileName.replace('[name]', name), newConfigString);
         });
         return true;
     }
 }
 exports.default = SConfigFolderAdapter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbmZpZ0ZvbGRlckFkYXB0ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQ29uZmlnRm9sZGVyQWRhcHRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCw0Q0FBc0I7QUFDdEIsdUVBQWlEO0FBQ2pELDJFQUFxRDtBQUNyRCw2REFBdUM7QUFDdkMsc0VBQWdEO0FBR2hEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxNQUFxQixvQkFBcUIsU0FBUSx3QkFBZ0I7SUFDaEUsWUFBWSxRQUFRLEdBQUcsRUFBRTtRQUN2QixLQUFLLENBQUMsUUFBUSxDQUFDLENBQUM7UUFDaEIsSUFBSSxDQUFDLFFBQVEsQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQUMsT0FBTyxDQUN6RCxRQUFRLEVBQ1IsSUFBSSxDQUFDLElBQUksQ0FDVixDQUFDO1FBQ0YsSUFBSSxJQUFJLENBQUMsUUFBUSxDQUFDLGlCQUFpQjtZQUNqQyxJQUFJLENBQUMsUUFBUSxDQUFDLGlCQUFpQixHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsaUJBQWlCLENBQUMsT0FBTyxDQUN2RSxjQUFjLEVBQ2QsSUFBSSxDQUFDLFFBQVEsQ0FBQyxVQUFVLENBQ3pCLENBQUM7UUFDSixJQUFJLElBQUksQ0FBQyxRQUFRLENBQUMsYUFBYTtZQUM3QixJQUFJLENBQUMsUUFBUSxDQUFDLGFBQWEsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyxPQUFPLENBQy9ELGNBQWMsRUFDZCxJQUFJLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FDekIsQ0FBQztRQUNKLElBQUksSUFBSSxDQUFDLFFBQVEsQ0FBQyxjQUFjO1lBQzlCLElBQUksQ0FBQyxRQUFRLENBQUMsY0FBYyxHQUFHLElBQUksQ0FBQyxRQUFRLENBQUMsY0FBYyxDQUFDLE9BQU8sQ0FDakUsY0FBYyxFQUNkLElBQUksQ0FBQyxRQUFRLENBQUMs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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbmZpZ0ZvbGRlckFkYXB0ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQ29uZmlnRm9sZGVyQWRhcHRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCw0Q0FBc0I7QUFDdEIsdUVBQWlEO0FBQ2pELDJFQUFxRDtBQUNyRCw2REFBdUM7QUFDdkMsc0VBQWdEO0FBRWhELHlFQUFtRDtBQUNuRCxnREFBMEI7QUFDMUIsd0RBQWtDO0FBbUNsQyxNQUFxQixvQkFBcUIsU0FBUSx3QkFBZ0I7SUFDaEUsSUFBSSwyQkFBMkI7UUFDN0IsT0FBYSxJQUFJLENBQUMsU0FBVSxDQUFDLG1CQUFtQixDQUFDO0lBQ25ELENBQUM7SUFFRCxZQUFZLFFBQTJDO1FBQ3JELEtBQUssQ0FDSCxtQkFBVyxDQUNUO1lBQ0UsbUJBQW1CLEVBQUU7Z0JBQ25CLFFBQVEsRUFBRSxrQkFBa0I7Z0JBQzVCLFVBQVUsRUFBRSxRQUFRO2dCQUNwQixpQkFBaUIsRUFBRSxjQUFNLENBQUMsT0FBTyxDQUFDLFNBQVMsRUFBRSxjQUFjLENBQUM7Z0JBQzVELGFBQWEsRUFBRSxHQUFHLHFCQUFhLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxDQUFDLGVBQWU7Z0JBQzdELGNBQWMsRUFBRSxHQUFHLHFCQUFhLENBQzlCLE9BQU8sQ0FBQyxHQUFHLEVBQUUsQ0FDZCxzQkFBc0I7YUFDeEI7U0FDRixFQUNELFFBQVEsSUFBSSxFQUFFLENBQ2YsQ0FDRixDQUFDO1FBQ0YsSUFBSSxDQUFDLDJCQUEyQixDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsMkJBQTJCLENBQUMsVUFBVSxDQUFDLE9BQU8sQ0FDL0YsUUFBUSxFQUNSLElBQUksQ0FBQyxJQUFJLENBQ1YsQ0FBQztRQUNGLElBQUksSUFBSSxDQUFDLDJCQUEyQixDQUFDLGlCQUFpQjtZQUNwRCxJQUFJLENBQUMsMkJBQTJCLENBQUMsaUJBQWlCLEdBQUcsSUFBSSxDQUFDLDJCQUEyQixDQUFD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

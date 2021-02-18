@@ -180,7 +180,12 @@ class SCache extends __SClass implements ISCache {
     }
 
     // set the cache property of the adapter if not set already
-    if (this._adapter && !this._adapter.cache) this._adapter.cache = this;
+    this._adapter &&
+      this._adapter.setCache({
+        id: this.id,
+        settings: Object.assign({}, this.cacheSettings)
+      });
+    // if (this._adapter && !this._adapter.cache) this._adapter.cache = this;
 
     return <ISCacheAdapter>this._adapter;
   }

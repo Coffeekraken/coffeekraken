@@ -105,26 +105,6 @@ class SDocblockHtmlRenderer
         settings || {}
       )
     );
-
-    // Templates
-    this.registerTemplate('default', `${__dirname}/html/templates/default.hbs`);
-    this.registerTemplate('class', `${__dirname}/html/templates/class.hbs`);
-    this.registerTemplate(
-      'function',
-      `${__dirname}/html/templates/function.hbs`
-    );
-
-    // Blocks
-    this.registerBlock('default', `${__dirname}/html/blocks/default.hbs`);
-    this.registerBlock('class', `${__dirname}/html/blocks/class.hbs`);
-    this.registerBlock('function', `${__dirname}/html/blocks/function.hbs`);
-
-    // Partials
-    this.registerPartial('author', `${__dirname}/html/partials/author.hbs`);
-    this.registerPartial('heading', `${__dirname}/html/partials/heading.hbs`);
-    this.registerPartial('example', `${__dirname}/html/partials/example.hbs`);
-    this.registerPartial('params', `${__dirname}/html/partials/params.hbs`);
-    this.registerPartial('sharings', `${__dirname}/html/partials/sharings.hbs`);
   }
 }
 

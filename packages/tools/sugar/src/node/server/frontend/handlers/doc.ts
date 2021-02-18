@@ -8,6 +8,7 @@ import __SDocMap from '../../../docMap/SDocMap';
 import __page404 from '../../../template/pages/404';
 import __SDocblock from '../../../docblock/SDocblock';
 import __SDocblockHtmlRenderer from '../../../docblock/renderers/SDocblockHtmlRenderer';
+import __render from '../../../template/render';
 
 /**
  * @name                doc
@@ -51,10 +52,16 @@ export default function doc(req, res, settings = {}) {
     const htmlRenderer = new __SDocblockHtmlRenderer(docblock);
     const html = await htmlRenderer.render();
 
+    // render the proper template
+    const pageHtml = await __render('pages.doc', {
+      ...(res.templateData || {}),
+      body: html
+    });
+
     // nativeConsole.log(req);
     res.type('text/html');
     res.status(200);
-    res.send(html);
-    resolve(html);
+    res.send(pageHtml.content);
+    resolve(pageHtml.content);
   });
 }

@@ -44,11 +44,12 @@ $package = $package ? json_decode($package) : null;
       @endif
     @endforeach
   @endif
+  @yield('head')
 </head>
 <body>
 
   <div class="container">
-    @yield('content')
+    @yield('body')
   </div>
 
   <!-- body stylesheets -->

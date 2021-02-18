@@ -3,7 +3,6 @@
 import __SClass from '../../class/SClass';
 import __deepMerge from '../../object/deepMerge';
 
-import { ISCache } from '../SCache';
 import { ISCacheSetSettings } from '../SCache';
 
 /**
@@ -44,9 +43,14 @@ import { ISCacheSetSettings } from '../SCache';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
+export interface ISCacheAdapterCache {
+  id: string;
+  settings: any;
+}
+
 export interface ISCacheAdapter {
   id: string;
-  cache: ISCache;
+  cache: ISCacheAdapterCache;
   get(name: string): Promise<any>;
   set(name: string, value: any, settings?: ISCacheSetSettings): Promise<any>;
   delete(name: string): Promise<any>;
@@ -54,20 +58,12 @@ export interface ISCacheAdapter {
   keys(): Promise<string[]>;
   stringify?(value: any): string;
   parse?(value: string): any;
+  setCache(cache: ISCacheAdapterCache): void;
 }
 
 export default abstract class SCacheAdapter extends __SClass {
-  /**
-   * @name            cache
-   * @type            ISCache
-   *
-   * Store the cache instance which is used
-   *
-   * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
   // @ts-ignore
-  cache: ISCache;
+  cache: ISCacheAdapterCache;
 
   /**
    * @name                              constructor
@@ -88,6 +84,10 @@ export default abstract class SCacheAdapter extends __SClass {
         settings
       )
     );
+  }
+
+  setCache(cache: ISCacheAdapterCache) {
+    this.cache = cache;
   }
 
   /**

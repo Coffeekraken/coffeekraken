@@ -2,29 +2,29 @@
   {{#if name}}<!-- @name    {{name}} -->{{/if}}
 
 {{#if name}}
-<h1 class="s-h1 s-m-b">
+<h1 class="{{ classname 'h1 m-b' }}">
   {{#if static}}
-    <span class="s-db-static">Static</span>span>
+    <span class="{{ classname 'db-static' }}">Static</span>span>
   {{/if}}
   {{#if get}}
-    <span class="s-db-get">get</span>
+    <span class="{{ classname 'db-get' }}">get</span>
   {{/if}}
   {{#if set}}
-    <span class="s-db-set">set</span>
+    <span class="{{ classname 'db-set' }}">set</span>
   {{/if}}
-  <span class="s-db-name">
+  <span class="{{ classname 'db-name' }}">
     {{name}}
   </span>
 </h1>
 {{/if}}
 {{#if since}}
-<h2 class="s-h3 s-m-b-small">
-  <span class="s-db-since">Since: {{since}}</span>
+<h2 class="{{ classname 'h3 m-b-small' }}">
+  <span class="{{ classname 'db-since' }}">Since: {{since}}</span>
 </h2>
 {{/if}}
 
 {{> sharings}}
 
 {{#if description}}
-<p class="s-p">{{description}}</p>
+<p class="{{ classname 'p' }}">{{description}}</p>
 {{/if}}

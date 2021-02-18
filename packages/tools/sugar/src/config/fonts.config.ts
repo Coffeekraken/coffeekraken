@@ -3,7 +3,7 @@ export default {
    * @name            defaultFontSize
    * @namespace       config.fonts
    * @type            String|Number
-   * @default         40
+   * @default         16
    *
    * Specify which of the font-sizes values is the default one.
    * The default one mean that it's the base font-size applied to
@@ -12,7 +12,7 @@ export default {
    * @since           2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  defaultFontSize: 40,
+  defaultFontSize: 16,
 
   /**
    * @name            defaultFontFamily

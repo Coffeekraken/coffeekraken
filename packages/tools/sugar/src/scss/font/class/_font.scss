@@ -14,6 +14,10 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
  */
 @mixin font-classes() {
+  body {
+    font-size: setting('fonts.defaultFontSize') px;
+  }
+
   @if class-match-namespace('sugar.font.family') {
     @each $name, $font in setting('fonts.families') {
       @if class-match-namespace('sugar.font.family.#{$name}') {

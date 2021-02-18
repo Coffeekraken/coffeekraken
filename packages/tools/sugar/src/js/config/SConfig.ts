@@ -5,7 +5,7 @@ import __deepMerge from '../object/deepMerge';
 import __get from '../object/get';
 import __set from '../object/set';
 import __resolveTokens from '../object/resolveTokens';
-
+import __md5 from '../crypt/md5';
 import __isPlainObject from '../is/plainObject';
 import __deepMap from '../object/deepMap';
 import __SConfigAdapter from './adapters/SConfigAdapter';
@@ -120,6 +120,7 @@ export = class SConfig {
       allowNew: false,
       autoLoad: true,
       autoSave: true,
+      updateTimeout: 500,
       throwErrorOnUndefinedConfig: true,
       ...settings
     };
@@ -153,6 +154,19 @@ export = class SConfig {
     if (!this._settings.defaultAdapter) {
       this._settings.defaultAdapter = Object.keys(this._adapters)[0];
     }
+
+    Object.keys(this._adapters).forEach((adapterName) => {
+      const adapterObj = this._adapters[adapterName];
+      let timeout;
+      if (!adapterObj.instance) return;
+      adapterObj.instance.on('update', (path) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          // load the updated config
+          this.load();
+        }, this._settings.updateTimeout);
+      });
+    });
 
     // load the config from the default adapter if the setting "autoLoad" is true
     if (this._settings.autoLoad) {
@@ -198,6 +212,10 @@ export = class SConfig {
         config.then((c) => {
           if (Object.keys(this._adapters[adapter].config).length === 0 && c) {
             this._adapters[adapter].config = c;
+            this._adapters[adapter].config.$ = {
+              hash: __md5.encrypt(c),
+              loadedAt: Date.now()
+            };
             return resolve(c);
           }
           return resolve(this._adapters[adapter].config);
@@ -205,6 +223,10 @@ export = class SConfig {
       });
     } else if (__isPlainObject(config)) {
       this._adapters[adapter].config = config;
+      this._adapters[adapter].config.$ = {
+        hash: __md5.encrypt(config),
+        loadedAt: Date.now()
+      };
       return config;
     } else if (config !== null && config !== undefined) {
       throw new Error(

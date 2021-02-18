@@ -36,8 +36,8 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(cache, settings = {}) {
-    super(cache, __deepMerge({}, settings));
+  constructor(settings = {}) {
+    super(__deepMerge({}, settings));
   }
 
   /**

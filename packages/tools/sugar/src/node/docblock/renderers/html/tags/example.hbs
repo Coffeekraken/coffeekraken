@@ -1,0 +1,13 @@
+{{#if example}}{{#example}}
+<div class="{{ classname 'db-example' }}">
+  <h2 class="{{ 'h2 m-t m-b-small' }}">
+    Example <span class="{{ classname 'db-language' }}">{{language}}</span>
+  </h2>
+
+  <pre class="{{ classname 'pre pre--{{language}}' }}">
+    <code class="{{ classname 'code' }}">
+      {{code}}
+    </code>
+  </pre>
+</div>
+{{/example}}{{/if}}

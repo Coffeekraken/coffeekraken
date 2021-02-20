@@ -7,6 +7,7 @@ export default {
   helper: function classname({ title, description, settings, render }) {
     const lines = [];
     if (title) {
+      // @ts-ignore
       lines.push(`<h2 class="{{ classname 'db-h2' }}">${title}</h2>`);
     }
 

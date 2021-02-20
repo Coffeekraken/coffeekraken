@@ -11,7 +11,7 @@ import __path from 'path';
 import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
 import __sugarConfig from '../config/sugar';
-import __SFileCache from '../cache/SFileCache';
+import __SCache from '../cache/SCache';
 import __putUseStatementsOnTop from './utils/putUseStatementsOnTop';
 import __toString from '../string/toString';
 import __csso from 'csso';
@@ -92,7 +92,7 @@ interface ISScssFileCtorSettings extends ISFileCtorSettings {
 }
 
 interface ISScssFile {
-  _fileCache: __SFileCache;
+  _cache: __SCache;
   _sharedResources: string;
   mixinsAndVariables: string;
   dependencies: Array<ISScssFile>;
@@ -145,7 +145,7 @@ class SScssFile extends __SFile implements ISScssFile {
     type: 'main'
   };
 
-  _fileCache: __SFileCache;
+  _cache: __SCache;
   _sharedResources;
 
   static COMPILED_CSS: any = {};
@@ -173,140 +173,7 @@ class SScssFile extends __SFile implements ISScssFile {
       )
     );
 
-    // store this instance in a stack to avoid creating multiple instances of the same file
-    SScssFile.FILES[this.path] = this;
-
-    this._fileCache = new __SFileCache(this.constructor.name);
-
-    this.on('watch', this._onWatch.bind(this));
-  }
-
-  /**
-   * @name        dependencies
-   * @type        Object<SScssFile>
-   * @get
-   *
-   * Get the dependencies of this file
-   *
-   * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  _dependencies: any;
-  get dependencies() {
-    // cache
-    if (this._dependencies) return this._dependencies;
-
-    // read the file
-    const content = this.readSync();
-
-    // find dependencies
-    let deps: any = __findImportStatements(content);
-
-    deps = deps
-      .map((dep) => {
-        const f = __resolveDependency(dep.path, {
-          from: this.path
-        });
-        return {
-          path: f,
-          import: dep
-        };
-      })
-      .filter((p) => p.path !== undefined)
-      .map((obj) => {
-        let file;
-        if (SScssFile.FILES[obj.path]) file = SScssFile.FILES[obj.path];
-        else {
-          file = new SScssFile(obj.path, {
-            scssFile: <ISScssFileSettings>(
-              __deepMerge(
-                this.scssFileSettings,
-                this._currentCompilationSettings
-              )
-            )
-          });
-          file.pipeTo(this, {
-            events: 'update'
-          });
-        }
-        file._import = obj.import;
-        return file;
-      });
-
-    if (Object.keys(deps).length) {
-      this._dependencies = deps;
-    }
-
-    return this._dependencies || [];
-  }
-
-  /**
-   * @name          dependenciesHash
-   * @type          String
-   * @get
-   *
-   * Parse the content of the file to find the dependencies like import and use statements,
-   * then generate a hash depending on these dependencies
-   *
-   * @since        2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get dependenciesHash() {
-    const hashesStrArray = [];
-    // @ts-ignore
-    const content = [this._sharedResources || '', this.content].join('\n');
-    const imports = __findImportStatements(content)
-      // .filter(
-      //   // @ts-ignore
-      //   (importObj) => importObj.type === 'use'
-      // )
-      .forEach((useObj) => {
-        // @ts-ignore
-        const realPath: string = __resolveDependency(useObj.path, {
-          from: this.path
-        });
-        if (!realPath) {
-          // @ts-ignore
-          this.emit('warn', {
-            value: [
-              `It seems that you're trying to load a file that does not exists:`,
-              `- From: <cyan>${this.path}</cyan>`,
-              // @ts-ignore
-              `- ${useObj.raw}`
-            ].join('\n')
-          });
-          return;
-        }
-
-        let useFile;
-        if (SScssFile.FILES[realPath]) useFile = SScssFile.FILES[realPath];
-        else
-          useFile = new SScssFile(realPath, {
-            // @ts-ignore
-            file: this.fileSettings,
-            scssFile: <ISScssFileSettings>(
-              __deepMerge(
-                this.scssFileSettings,
-                this._currentCompilationSettings
-              )
-            )
-          });
-
-        // pipe the update events
-        // this.pipeFrom(useFile, {
-        //   events: 'update',
-        //   processor: (value, metas) => {
-        //     return [value, metas];
-        //   }
-        // });
-
-        [useFile, ...useFile.dependencies].forEach((depFile) => {
-          // @ts-ignore
-          hashesStrArray.push(depFile.hash);
-        });
-      });
-
-    return __md5.encrypt(hashesStrArray.join('-'));
+    this._cache = new __SCache(this.constructor.name);
   }
 
   /**
@@ -346,35 +213,6 @@ class SScssFile extends __SFile implements ISScssFile {
   }
 
   /**
-   * @name        _onWatch
-   * @type        Function
-   * @private
-   *
-   * Start to watch the file. Does this only once
-   * to avoid multiple compilation and logs
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  private _onWatch() {
-    // listen for change event
-    this.on('update', (file, metas) => {
-      if (this._currentCompilationParams.watch) {
-        if (this._isCompiling) return;
-        if (this._import.type !== 'main') return;
-
-        const promise = this.compile(
-          <ISScssCompilerParams>this._currentCompilationParams,
-          {
-            // @ts-ignore
-            _updatedFile: file.toObject()
-          }
-        );
-      }
-    });
-  }
-
-  /**
    * @name              compile
    * @type              Function
    *
@@ -407,14 +245,6 @@ class SScssFile extends __SFile implements ISScssFile {
       'compilerParams',
       params
     );
-
-    // if (settings._updatedFile) {
-    //   console.log('comp', this.relPath, settings._updatedFile.relPath);
-    // }
-
-    if (completeParams.watch) {
-      this.watch();
-    }
 
     // init the promise
     return new __SPromise(async ({ resolve, reject, emit, pipeTo, on }) => {
@@ -452,23 +282,6 @@ class SScssFile extends __SFile implements ISScssFile {
         ...(completeParams.sass || {})
       };
 
-      if (!completeParams.serve) {
-        emit('log', {
-          clear: true,
-          type: 'time'
-        });
-      }
-
-      // @ts-ignore
-      if (settings._updatedFile) {
-        this.emit('log', {
-          type: 'file',
-          action: 'update',
-          // @ts-ignore
-          file: settings._updatedFile
-        });
-      }
-
       // notify start
       emit('log', {
         value: `<yellow>[start]</yellow> Starting "<cyan>${this.relPath}</cyan>" compilation`
@@ -476,8 +289,19 @@ class SScssFile extends __SFile implements ISScssFile {
 
       const duration = new __SDuration();
 
-      if (completeParams.clearCache) await this._fileCache.clear();
+      if (completeParams.clearCache) await this._cache.clear();
       let toCompile = this.content;
+
+      // get all the imports from the toCompile string
+      const imports = __findImportStatements(toCompile, {
+        import: true,
+        use: false
+      });
+
+      imports.forEach((importObj) => {
+        // @ts-ignore
+        toCompile = toCompile.replace(importObj.raw, `// ${importObj.raw}`);
+      });
 
       // @ts-ignore
       this._sharedResources = __getSharedResourcesString(
@@ -485,265 +309,123 @@ class SScssFile extends __SFile implements ISScssFile {
         completeParams.sharedResources
       );
 
-      if (this._import.type === 'main') {
-        SScssFile.COMPILED_CSS = [];
-      }
-
-      const depsArray = this.dependencies;
-      for (let i = 0; i < depsArray.length; i++) {
-        const depFile = depsArray[i];
-        // avoid compiling @use statements
-        if (depFile._import && depFile._import.type === 'use') {
-          continue;
-        }
-
-        // compile the dependency
-        const res = await depFile.compile(
-          {
-            ...completeParams,
-            clearCache: false
-          },
-          settings
-        );
-
-        // replace the import in the content
-        toCompile = toCompile.replace(depFile._import.raw, ``);
-      }
-
-      // check if we are loaded through a "use"
-      if (this._import.type === 'use') {
-        return resolve(`@use "${this.path}" as ${this._import.as}`);
-      }
-
-      const dependenciesHash = this.dependenciesHash;
-
-      // check cache
-      if (params.cache) {
-        const cachedValue = await this._fileCache.get(this.path, {
-          context: {
-            configHash: __sugarConfig('$.hash')
-          }
-        });
-        if (
-          cachedValue &&
-          cachedValue.dependenciesHash === dependenciesHash &&
-          completeParams.cache
-        ) {
-          let resultCss = cachedValue.css;
-          SScssFile.COMPILED_CSS[this.path] = resultCss;
-
-          emit('log', {
-            value: `<magenta>[cached]</magenta> File "<cyan>${this.relPath}</cyan>"`
-          });
-
-          if (this._import.type === 'main') {
-            // prepend all the compiled css
-            // @ts-ignore
-            resultCss = [
-              ...Object.values(SScssFile.COMPILED_CSS),
-              resultCss
-            ].join('\n');
-          }
-
-          // process the result
-          resultCss = this._processResultCss(resultCss, completeParams);
-
-          // check if need to save
-          if (
-            this._import.type === 'main' &&
-            completeParams.save &&
-            completeParams.outputDir
-          ) {
-            // build the save path
-            const savePath = __path.resolve(
-              completeParams.outputDir,
-              this.path
-                .replace(`${completeParams.rootDir}/`, '')
-                .replace(/\.s[ac]ss$/, '.css')
-            );
-            // emit('log', {
-            //   type: 'file',
-            //   action: 'save',
-            //   to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-            //   file: this.toObject()
-            // });
-            this.writeSync(resultCss, {
-              path: savePath
-            });
-
-            // // notify end
-            // emit('log', {
-            //   type: 'file',
-            //   action: 'saved',
-            //   to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-            //   file: this.toObject()
-            // });
-          }
-
-          // const durationEnd = duration.end();
-
-          // // notify end
-          // emit('log', {
-          //   value: `<green>[success]</green> File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${durationEnd.formatedDuration}s</yellow>`
-          // });
-
-          emit('log', {
-            type: 'separator'
-          });
-
-          if (completeParams.watch) {
-            emit('log', {
-              value: `<blue>[watch]</blue> Watching for changes...`
-            });
-          }
-
-          emit('notification', {
-            type: 'success',
-            title: `${this.id} compilation success`
-          });
-
-          return resolve({
-            css: resultCss,
-            map: undefined, // @todo       handle map
-            ...duration.end()
-          });
-        }
-      }
-
       if (this._sharedResources) {
         toCompile = [this._sharedResources, toCompile].join('\n');
       }
 
       toCompile = __putUseStatementsOnTop(toCompile);
 
-      let renderObj;
-      try {
-        emit('log', {
-          value: `<yellow>[compiling]</yellow> "<cyan>${this.relPath}</cyan>"`
+      // leverage cache
+      if (completeParams.cache) {
+        const cachedValue = await this._cache.get(this.path, {
+          context: {
+            toCompile
+            // params: completeParams
+          }
         });
 
-        renderObj = __sass.renderSync({
-          ...sassSettings,
-          data: toCompile
-        });
-
-        // save in cache
-        if (completeParams.cache) {
-          // @ts-ignore
-          await this._fileCache.set(
-            this.path,
-            {
-              dependenciesHash,
-              css: renderObj.css.toString()
-            },
-            {
-              context: {
-                configHash: __sugarConfig('$.hash')
-              }
-            }
-          );
-        }
-
-        if (this._import.type === 'main') {
-          let resultCss = renderObj.css.toString();
-
-          // prepend all the compiled css
-          resultCss = [
-            ...Object.values(SScssFile.COMPILED_CSS),
-            resultCss
-          ].join('\n');
-
-          resultCss = this._processResultCss(resultCss, completeParams);
-
-          // check if need to save
-          if (completeParams.save && completeParams.outputDir) {
-            // build the save path
-            const savePath = __path.resolve(
-              completeParams.outputDir,
-              this.path
-                .replace(`${completeParams.rootDir}/`, '')
-                .replace(/\.s[ac]ss$/, '.css')
-            );
-            emit('log', {
-              type: 'file',
-              action: 'save',
-              to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-              file: this.toObject()
-            });
-            this.writeSync(resultCss, {
-              path: savePath
-            });
-
-            // notify end
-            emit('log', {
-              type: 'file',
-              action: 'saved',
-              to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-              file: this.toObject()
-            });
-          }
-
-          const durationEnd = duration.end();
-
-          // notify end
+        if (cachedValue && cachedValue.css) {
           emit('log', {
-            value: `<green>[success]</green> File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${durationEnd.formatedDuration}s</yellow>`
+            value: `<magenta>[cached]</magenta> "<cyan>${this.relPath}</cyan>"`
           });
-
-          emit('log', {
-            type: 'separator'
-          });
-
-          if (completeParams.watch) {
-            emit('log', {
-              value: `<blue>[watch]</blue> Watching for changes...`
-            });
-          }
-
-          emit('notification', {
-            type: 'success',
-            title: `${this.id} compilation success`
-          });
-
           return resolve({
-            css: this._processResultCss(resultCss, completeParams),
-            ...durationEnd
-          });
-        } else {
-          emit('log', {
-            type: 'separator'
-          });
-
-          if (completeParams.watch) {
-            emit('log', {
-              value: `<blue>[watch]</blue> Watching for changes...`
-            });
-          }
-
-          emit('notification', {
-            type: 'success',
-            title: `${this.id} compilation success`
-          });
-
-          SScssFile.COMPILED_CSS[this.path] = renderObj.css;
-          return resolve({
-            css: this._processResultCss(
-              renderObj.css.toString(),
-              completeParams
-            ),
-            map: undefined, // @todo       handle map
+            css: this._processResultCss(cachedValue.css, completeParams),
             ...duration.end()
           });
         }
-      } catch (e) {
-        emit('notification', {
-          type: 'error',
-          title: `${this.id} compilation error`
-        });
-        return reject(new Error(e.toString()));
       }
 
-      return true;
+      let renderObj;
+      emit('log', {
+        value: `<yellow>[compiling]</yellow> "<cyan>${this.relPath}</cyan>"`
+      });
+
+      renderObj = __sass.renderSync({
+        ...sassSettings,
+        data: toCompile
+      });
+
+      // save in cache
+      if (completeParams.cache) {
+        // @ts-ignore
+        await this._cache.set(
+          this.path,
+          {
+            css: renderObj.css.toString()
+          },
+          {
+            context: {
+              toCompile
+              // params: completeParams
+            }
+          }
+        );
+      }
+
+      let resultCss = renderObj.css.toString();
+
+      // replace the imports
+      resultCss = [
+        ...imports.map((importObj) => {
+          let path = `@import '${importObj.path.replace(
+            /\.s[ca]ss$/,
+            '.css'
+          )}';`;
+          if (!path.match(/\.css';$/)) {
+            path = path.replace(`';`, `.css';`);
+          }
+          return path;
+        }),
+        resultCss
+      ].join('\n');
+
+      resultCss = this._processResultCss(resultCss, completeParams);
+
+      // check if need to save
+      if (completeParams.save && completeParams.outputDir) {
+        // build the save path
+        const savePath = __path.resolve(
+          completeParams.outputDir,
+          this.path
+            .replace(`${completeParams.rootDir}/`, '')
+            .replace(/\.s[ac]ss$/, '.css')
+        );
+
+        emit('log', {
+          type: 'file',
+          action: 'save',
+          to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+          file: this.toObject()
+        });
+        this.writeSync(resultCss, {
+          path: savePath
+        });
+
+        // notify end
+        emit('log', {
+          type: 'file',
+          action: 'saved',
+          to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+          file: this.toObject()
+        });
+      }
+
+      const durationEnd = duration.end();
+
+      // notify end
+      emit('log', {
+        value: `<green>[success]</green> File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${durationEnd.formatedDuration}</yellow>`
+      });
+
+      emit('notification', {
+        type: 'success',
+        title: `${this.id} compilation success`
+      });
+
+      return resolve({
+        css: this._processResultCss(resultCss, completeParams),
+        ...durationEnd
+      });
     });
   }
 
@@ -769,7 +451,6 @@ class SScssFile extends __SFile implements ISScssFile {
 
   update() {
     this._mixinsAndVariables = undefined;
-    this._dependencies = undefined;
     super.update();
   }
 }

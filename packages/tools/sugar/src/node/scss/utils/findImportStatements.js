@@ -1,52 +1,14 @@
 "use strict";
-// @ts-nocheck
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const deepMerge_1 = __importDefault(require("../../object/deepMerge"));
-/**
- * @name            findImportStatements
- * @namespace       sugar.node.scss.utils
- * @type            Function
- * @status              beta
- *
- * This function simply parse the passed string to extract all the @import and @use statements
- *
- * @param       {String}          string          The string to parse
- * @param       {Object}        [settings={}]     An object of settings to configure your parsing
- * @return      {Array<Object>}                   An array of object describing each founded statements
- *
- * @setting      {Boolean}       [use=true]      Specify if you want to extract the @use statements
- * @setting      {Boolean}      [imports=true]    Specify if you want to extract the @import statements
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import findImportStatements from '@coffeekraken/sugar/node/scss/utils/findImportStatements';
- * findImportStatements(`
- *    @use 'something/cool' as Hello;
- *    @import 'other/cool/thing';
- * `);
- * // [{
- * //   type: 'use',
- * //   path: 'something/cool',
- * //   as: 'Hello'
- * // }, {
- * //   type: 'import',
- * //   path: 'other/cool/thing'
- * // }]
- *
- * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function findImportStatements(string, settings = {}) {
-    settings = deepMerge_1.default({
+function findImportStatements(string, settings) {
+    const set = deepMerge_1.default({
         use: true,
         import: true
-    }, settings);
+    }, settings || {});
     // split lines
     const lines = string.split('\n');
     const reg = /^(\s+)?@(use|import)\s*['"](.*?)['"](\sas\s([a-zA-Z0-9-_]+))?/g;
@@ -58,30 +20,32 @@ function findImportStatements(string, settings = {}) {
             return;
         matches.forEach((match) => {
             match = match.trim();
-            const statementObj = {
-                raw: match + ';'
-            };
+            const raw = match + ';';
+            let type = 'use', path, as = undefined, line = index;
             if (match.match(/^@import\s/)) {
-                statementObj.type = 'import';
-            }
-            else {
-                statementObj.type = 'use';
+                type = 'import';
             }
             match = match.replace(/^@import\s/, '').replace(/^@use\s/, '');
-            if (statementObj.type === 'use' && match.match(/\sas\s/)) {
+            if (type === 'use' && match.match(/\sas\s/)) {
                 const parts = match.split(' as ');
-                statementObj.path = parts[0];
-                statementObj.as = parts[1];
+                path = parts[0];
+                as = parts[1];
             }
             else {
-                statementObj.path = match;
+                path = match;
             }
-            statementObj.line = index;
-            statementObj.path = statementObj.path.slice(1, -1);
-            if (settings.use && statementObj.type === 'use') {
+            path = path.slice(1, -1);
+            const statementObj = {
+                raw,
+                type,
+                path,
+                as,
+                line
+            };
+            if (set.use && type === 'use') {
                 statements.push(statementObj);
             }
-            else if (settings.import && statementObj.type === 'import') {
+            else if (set.import && statementObj.type === 'import') {
                 statements.push(statementObj);
             }
         });
@@ -89,4 +53,4 @@ function findImportStatements(string, settings = {}) {
     return statements;
 }
 exports.default = findImportStatements;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmluZEltcG9ydFN0YXRlbWVudHMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaW5kSW1wb3J0U3RhdGVtZW50cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCx1RUFBaUQ7QUFFakQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9DRztBQUNILFNBQVMsb0JBQW9CLENBQUMsTUFBTSxFQUFFLFFBQVEsR0FBRyxFQUFFO0lBQ2pELFFBQVEsR0FBRyxtQkFBVyxDQUNwQjtRQUNFLEdBQUcsRUFBRSxJQUFJO1FBQ1QsTUFBTSxFQUFFLElBQUk7S0FDYixFQUNELFFBQVEsQ0FDVCxDQUFDO0lBRUYsY0FBYztJQUNkLE1BQU0sS0FBSyxHQUFHLE1BQU0sQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUM7SUFFakMsTUFBTSxHQUFHLEdBQUcsZ0VBQWdFLENBQUM7SUFFN0UsTUFBTSxVQUFVLEdBQUcsRUFBRSxDQUFDO0lBRXRCLHFCQUFxQjtJQUNyQixLQUFLLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEtBQUssRUFBRSxFQUFFO1FBQzVCLE1BQU0sT0FBTyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUM7UUFFaEMsSUFBSSxDQUFDLE9BQU87WUFBRSxPQUFPO1FBQ3JCLE9BQU8sQ0FBQyxPQUFPLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtZQUN4QixLQUFLLEdBQUcsS0FBSyxDQUFDLElBQUksRUFBRSxDQUFDO1lBQ3JCLE1BQU0sWUFBWSxHQUFHO2dCQUNuQixHQUFHLEVBQUUsS0FBSyxHQUFHLEdBQUc7YUFDakIsQ0FBQztZQUNGLElBQUksS0FBSyxDQUFDLEtBQUssQ0FBQyxZQUFZLENBQUMsRUFBRTtnQkFDN0IsWUFBWSxDQUFDLElBQUksR0FBRyxRQUFRLENBQUM7YUFDOUI7aUJBQU07Z0JBQ0wsWUFBWSxDQUFDLElBQUksR0FBRyxLQUFLLENBQUM7YUFDM0I7WUFDRCxLQUFLLEdBQUcsS0FBSyxDQUFDLE9BQU8sQ0FBQyxZQUFZLEVBQUUsRUFBRSxDQUFDLENBQUMsT0FBTyxDQUFDLFNBQVMsRUFBRSxFQUFFLENBQUMsQ0FBQztZQUMvRCxJQUFJLFlBQVksQ0FBQyxJQUFJLEtBQUssS0FBSyxJQUFJLEtBQUssQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLEVBQUU7Z0JBQ3hELE1BQU0sS0FBSyxHQUFHLEtBQUssQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUM7Z0JBQ2xDLFlBQVksQ0FBQyxJQUFJLEdBQUcsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO2dCQUM3QixZQUFZLENBQUMsRUFBRSxHQUFHLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQzthQUM1QjtpQkFBTTtnQkFDTCxZQUFZLENBQUMsSUFBSSxHQUFHLEtBQUssQ0FBQzthQUMzQjtZQUNELFlBQVksQ0FBQyxJQUFJLEdBQUcsS0FBSyxDQUFDO1lBRTFCLFlBQVksQ0FBQyxJQUFJLEdBQUcsWUFBWSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFFbkQsSUFBSSxRQUFRLENBQUMsR0FBRyxJQUFJLFlBQVksQ0FBQyxJQUFJLEtBQUssS0FBSyxFQUFFO2dCQUMvQyxVQUFVLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDO2FBQy9CO2lCQUFNLElBQUksUUFBUSxDQUFDLE1BQU0sSUFBSSxZQUFZLENBQUMsSUFBSSxLQUFLLFFBQVEsRUFBRTtnQkFDNUQsVUFBVSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQzthQUMvQjtRQUNILENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQyxDQUFDLENBQUM7SUFFSCxPQUFPLFVBQVUsQ0FBQztBQUNwQixDQUFDO0FBQ0Qsa0JBQWUsb0JBQW9CLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmluZEltcG9ydFN0YXRlbWVudHMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaW5kSW1wb3J0U3RhdGVtZW50cy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLHVFQUFpRDtBQXFEakQsU0FBUyxvQkFBb0IsQ0FDM0IsTUFBYyxFQUNkLFFBQWlEO0lBRWpELE1BQU0sR0FBRyxHQUFrQyxtQkFBVyxDQUNwRDtRQUNFLEdBQUcsRUFBRSxJQUFJO1FBQ1QsTUFBTSxFQUFFLElBQUk7S0FDYixFQUNELFFBQVEsSUFBSSxFQUFFLENBQ2YsQ0FBQztJQUVGLGNBQWM7SUFDZCxNQUFNLEtBQUssR0FBRyxNQUFNLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBRWpDLE1BQU0sR0FBRyxHQUFHLGdFQUFnRSxDQUFDO0lBRTdFLE1BQU0sVUFBVSxHQUErQixFQUFFLENBQUM7SUFFbEQscUJBQXFCO0lBQ3JCLEtBQUssQ0FBQyxPQUFPLENBQUMsQ0FBQyxJQUFJLEVBQUUsS0FBSyxFQUFFLEVBQUU7UUFDNUIsTUFBTSxPQUFPLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUVoQyxJQUFJLENBQUMsT0FBTztZQUFFLE9BQU87UUFDckIsT0FBTyxDQUFDLE9BQU8sQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO1lBQ3hCLEtBQUssR0FBRyxLQUFLLENBQUMsSUFBSSxFQUFFLENBQUM7WUFFckIsTUFBTSxHQUFHLEdBQUcsS0FBSyxHQUFHLEdBQUcsQ0FBQztZQUN4QixJQUFJLElBQUksR0FBVyxLQUFLLEVBQ3RCLElBQVksRUFDWixFQUFFLEdBQXVCLFNBQVMsRUFDbEMsSUFBSSxHQUFXLEtBQUssQ0FBQztZQUN2QixJQUFJLEtBQUssQ0FBQyxLQUFLLENBQUMsWUFBWSxDQUFDLEVBQUU7Z0JBQzdCLElBQUksR0FBRyxRQUFRLENBQUM7YUFDakI7WUFDRCxLQUFLLEdBQUcsS0FBSyxDQUFDLE9BQU8sQ0FBQyxZQUFZLEVBQUUsRUFBRSxDQUFDLENBQUMsT0FBTyxDQUFDLFNBQVMsRUFBRSxFQUFFLENBQUMsQ0FBQztZQUMvRCxJQUFJLElBQUksS0FBSyxLQUFLLElBQUksS0FBSyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsRUFBRTtnQkFDM0MsTUFBTSxLQUFLLEdBQUcsS0FBSyxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUMsQ0FBQztnQkFDbEMsSUFBSSxHQUFHLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDaEIsRUFBRSxHQUFHLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQzthQUNmO2lCQUFNO2dCQUNMLElBQUksR0FBRyxLQUFLLENBQUM7YUFDZDtZQUNELElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBRXpCLE1BQU0sWUFBWSxHQUE2QjtnQkFDN0MsR0FBRztnQkFDSCxJQUFJO2dCQUNKLElBQUk7Z0JBQ0osRUFBRTtnQkFDRixJQUFJO2FBQ0wsQ0FBQztZQUVGLElBQUksR0FBRyxDQUFDLEdBQUcsSUFBSSxJQUFJLEtBQUssS0FBSyxFQUFFO2dCQUM3QixVQUFVLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDO2FBQy9CO2lCQUFNLElBQUksR0FBRyxDQUFDLE1BQU0sSUFBSSxZQUFZLENBQUMsSUFBSSxLQUFLLFFBQVEsRUFBRTtnQkFDdkQsVUFBVSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQzthQUMvQjtRQUNILENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQyxDQUFDLENBQUM7SUFFSCxPQUFPLFVBQVUsQ0FBQztBQUNwQixDQUFDO0FBQ0Qsa0JBQWUsb0JBQW9CLENBQUMifQ==

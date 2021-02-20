@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import __deepMerge from '../../object/deepMerge';
 
 /**
@@ -39,13 +37,30 @@ import __deepMerge from '../../object/deepMerge';
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function findImportStatements(string, settings = {}) {
-  settings = __deepMerge(
+
+export interface IFindImportStatementsObj {
+  type: string;
+  path: string;
+  raw: string;
+  as?: string;
+  line: number;
+}
+
+export interface IFindImportStatementsSettings {
+  use: boolean;
+  import: boolean;
+}
+
+function findImportStatements(
+  string: string,
+  settings?: Partial<IFindImportStatementsSettings>
+): IFindImportStatementsObj[] {
+  const set = <IFindImportStatementsSettings>__deepMerge(
     {
       use: true,
       import: true
     },
-    settings
+    settings || {}
   );
 
   // split lines
@@ -53,7 +68,7 @@ function findImportStatements(string, settings = {}) {
 
   const reg = /^(\s+)?@(use|import)\s*['"](.*?)['"](\sas\s([a-zA-Z0-9-_]+))?/g;
 
-  const statements = [];
+  const statements: IFindImportStatementsObj[] = [];
 
   // loop on each lines
   lines.forEach((line, index) => {
@@ -62,29 +77,36 @@ function findImportStatements(string, settings = {}) {
     if (!matches) return;
     matches.forEach((match) => {
       match = match.trim();
-      const statementObj = {
-        raw: match + ';'
-      };
+
+      const raw = match + ';';
+      let type: string = 'use',
+        path: string,
+        as: string | undefined = undefined,
+        line: number = index;
       if (match.match(/^@import\s/)) {
-        statementObj.type = 'import';
-      } else {
-        statementObj.type = 'use';
+        type = 'import';
       }
       match = match.replace(/^@import\s/, '').replace(/^@use\s/, '');
-      if (statementObj.type === 'use' && match.match(/\sas\s/)) {
+      if (type === 'use' && match.match(/\sas\s/)) {
         const parts = match.split(' as ');
-        statementObj.path = parts[0];
-        statementObj.as = parts[1];
+        path = parts[0];
+        as = parts[1];
       } else {
-        statementObj.path = match;
+        path = match;
       }
-      statementObj.line = index;
+      path = path.slice(1, -1);
 
-      statementObj.path = statementObj.path.slice(1, -1);
+      const statementObj: IFindImportStatementsObj = {
+        raw,
+        type,
+        path,
+        as,
+        line
+      };
 
-      if (settings.use && statementObj.type === 'use') {
+      if (set.use && type === 'use') {
         statements.push(statementObj);
-      } else if (settings.import && statementObj.type === 'import') {
+      } else if (set.import && statementObj.type === 'import') {
         statements.push(statementObj);
       }
     });

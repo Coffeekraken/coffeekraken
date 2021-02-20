@@ -24,7 +24,6 @@ import __absolute from '../../path/absolute';
 import __ensureDirSync from '../../fs/ensureDirSync';
 import __SScssFile from '../SScssFile';
 import __express from 'express';
-import __chokidar from 'chokidar';
 
 import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';
 import { ISCompiler } from '../../compiler/SCompiler';
@@ -177,84 +176,124 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
       const resultsObj = {};
 
       let filesPaths: string[] = [];
-      let scssFiles: Record<string, __SScssFile> = {};
 
-      if (params.watch) {
-        __chokidar.watch(input).on('change', async (path) => {
-          let file: __SScssFile = scssFiles[path];
-          if (!file) {
-            file = new __SScssFile(path, {
-              scssFile: {
-                compile: settings
-              }
+      // make input absolute
+      input = __absolute(input);
+
+      // process inputs
+      input.forEach((inputStr) => {
+        if (__isGlob(inputStr)) {
+          filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
+        } else {
+          filesPaths.push(inputStr);
+        }
+      });
+
+      const serverPromise = new Promise((serverResolve, serverReject) => {
+        if (params.serve && !SScssCompiler._serveServer) {
+          const server = __express();
+
+          filesPaths.forEach((path) => {
+            const filename = __getFilename(path).replace(/\.s[ac]ss$/, '.css');
+
+            const relPath = __path
+              .relative(params.rootDir, path)
+              .replace(/\.s[ac]ss$/, '.css');
+            const destPath = __path.resolve(params.outputDir, relPath);
+
+            server.get(`/${filename}`, (req, res) => {
+              const content = __fs.readFileSync(destPath, 'utf8');
+              res.type('text/css');
+              res.status(200);
+              res.send(content);
             });
-            scssFiles[path] = file;
-            pipe(file);
+          });
+
+          const serverLogStrArray: string[] = [
+            `Your <yellow>Scss</yellow> server is <green>up and running</green>:`,
+            '',
+            `- Hostname        : <yellow>${params.host}</yellow>`,
+            `- Port            : <yellow>${params.port}</yellow>`,
+            `- URL's           : <cyan>http://${params.host}:${params.port}</cyan>`
+          ];
+
+          filesPaths.forEach((path) => {
+            serverLogStrArray.push(
+              `                  : <cyan>${`http://${params.host}:${
+                params.port
+              }/${__getFilename(path).replace(
+                /\.s[ac]ss$/,
+                '.css'
+              )}`.trim()} </cyan>`
+            );
+          });
+
+          server
+            .listen(params.port, () => {
+              emit('log', {
+                type: 'time'
+              });
+              emit('log', {
+                clear: true,
+                mb: 1,
+                type: 'heading',
+                value: serverLogStrArray.join('\n')
+              });
+
+              setTimeout(() => {
+                serverResolve(true);
+              }, 500);
+            })
+            .on('error', (e) => {
+              SScssCompiler._serveServer = undefined;
+              const string = e.toString();
+              reject(string);
+            });
+
+          SScssCompiler._serveServer = server;
+        } else {
+          serverResolve(true);
+        }
+      });
+
+      await serverPromise;
+
+      const startTime = Date.now();
+
+      for (let i = 0; i < filesPaths.length; i++) {
+        let filePath = filesPaths[i];
+        let file = new __SScssFile(filePath, {
+          scssFile: {
+            compile: settings
           }
-          // compile the file
-          await file.compile(
-            {
-              ...params,
-              watch: false
-            },
-            settings
-          );
-
-          emit('log', {
-            type: 'separator'
-          });
-          emit('log', {
-            value: `<blue>[watch]</blue> Watching for changes...`
-          });
         });
+        pipe(file);
 
-        emit('log', {
-          value: `<blue>[watch]</blue> Watching for changes...`
+        // @todo    {Clean}     remove the ts-ignore
+        // @ts-ignore
+        const resPromise = file.compile(params, settings);
+        const res = await resPromise;
+        resultsObj[file.path] = res;
+      }
+
+      // aggregate the compiled files css
+      let aggregateStrArray: string[] = [];
+      Object.keys(resultsObj).forEach((path) => {
+        const cssRes = resultsObj[path];
+        aggregateStrArray.push(cssRes.css);
+      });
+
+      // resolve with the compilation result
+      if (!params.watch) {
+        resolve({
+          files: resultsObj,
+          css: aggregateStrArray.join('\n'),
+          startTime: startTime,
+          endTime: Date.now(),
+          duration: Date.now() - startTime
         });
       } else {
-        input = __absolute(input);
-        // process inputs
-        input.forEach((inputStr) => {
-          if (__isGlob(inputStr)) {
-            filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
-          } else {
-            filesPaths.push(inputStr);
-          }
-        });
-        filesPaths.forEach((path) => {
-          const file = new __SScssFile(path, {
-            scssFile: {
-              compile: settings
-            }
-          });
-          scssFiles[file.path] = file;
-          pipe(file);
-        });
-
-        const resultsObj: Record<string, string> = {};
-        for (let i = 0; i < Object.keys(scssFiles).length; i++) {
-          const file = scssFiles[Object.keys(scssFiles)[i]];
-          // @todo    {Clean}     remove the ts-ignore
-          // @ts-ignore
-          const resPromise = file.compile(
-            {
-              ...params,
-              watch: false
-            },
-            settings
-          );
-          const res = await resPromise;
-          resultsObj[file.path] = res.css;
-        }
-
-        let aggregateStrArray: string[] = [];
-        Object.keys(resultsObj).forEach((path) => {
-          const cssRes = resultsObj[path];
-          aggregateStrArray.push(cssRes);
-        });
-
-        const startTime = Date.now();
-        resolve({
+        emit('files', {
           files: resultsObj,
           css: aggregateStrArray.join('\n'),
           startTime: startTime,

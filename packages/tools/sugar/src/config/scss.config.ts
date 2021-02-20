@@ -23,7 +23,7 @@ export default {
      * @name              input
      * @namespace         config.scss.compile
      * @type              String
-     * @default           [config.storage.srcDir]/scss/[^_]*.scss
+     * @default           [config.storage.srcDir]/scss/** /*.scss
      *
      * Specify the root folder (or file) to check for .scss|sass files to build.
      * Glob patterns can be used
@@ -31,7 +31,7 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: '[config.storage.srcDir]/{css,scss}/[^_]*.scss',
+    input: '[config.storage.srcDir]/{css,scss}/**/*.scss',
 
     /**
      * @name              outputDir

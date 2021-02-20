@@ -62,9 +62,6 @@ import SFileSettingsInterface from './interface/SFileSettingsInterface';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISFileOptionalWatchSettings {
-  pollingInterval?: number;
-}
 export interface ISFileWatchSettings {
   pollingInterval: number;
 }
@@ -77,7 +74,7 @@ export interface ISFileSettings {
   checkExistence: boolean;
   cwd: string;
   shrinkSizesTo: number;
-  watch: boolean | ISFileOptionalWatchSettings;
+  watch: boolean | Partial<ISFileWatchSettings>;
   writeSettings: ISFileWriteSettings;
   readSettings: ISFileReadSettings;
 }
@@ -500,7 +497,12 @@ class SFile extends __SEventEmitter implements ISFile {
     this._watcher = __fs.watchFile(
       this.path,
       {
-        interval: 1000
+        interval:
+          // @ts-ignore
+          this.fileSettings.watch && this.fileSettings.watch.pollingInterval
+            ? // @ts-ignore
+              this.fileSettings.watch.pollingInterval
+            : 1000
       },
       (event) => {
         this.update();

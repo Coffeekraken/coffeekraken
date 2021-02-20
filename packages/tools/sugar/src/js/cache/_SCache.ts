@@ -234,10 +234,16 @@ class SCache extends __SClass implements ISCache {
     }
 
     // check context hash
+
+    // nativeConsole.trace('SETTINGS', set);
+
+    // console.log('ghet hash', __toString(set.context));
+
     if (set.context && value.contextHash) {
-      const contextHash = __md5.encrypt(__toString(set.context));
+      const contextHash = __md5.encrypt(set.context);
+      // console.log('SSSSSS', contextHash);
       if (contextHash !== value.contextHash) return null;
-    }
+    } else if (set.context) return null;
 
     // check if the item is too old...
     if (value.deleteAt !== -1 && value.deleteAt < new Date().getTime()) {
@@ -296,8 +302,9 @@ class SCache extends __SClass implements ISCache {
 
     let contextHash = null;
     if (set.context !== undefined) {
-      contextHash = __md5.encrypt(__toString(set.context));
+      contextHash = __md5.encrypt(set.context);
     }
+    // console.log('set hash', contextHash);
 
     // get the adapter
     const adapter = this.adapter;

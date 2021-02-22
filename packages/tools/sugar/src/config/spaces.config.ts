@@ -1,79 +1,144 @@
 export default {
   /**
-   * @name            smaller
+   * @name            0
    * @namespace       config.spaces
    * @type            String
    * @default         0.5rem
    *
-   * Specify the <primary>smaller</primary> space used for paddings and margins
+   * Specify the <primary>0</primary> space used for paddings and margins
    *
    * @since           1.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  smaller: '0.5rem',
+  0: '0rem',
 
   /**
-   * @name            small
+   * @name            10
+   * @namespace       config.spaces
+   * @type            String
+   * @default         0.2rem
+   *
+   * Specify the <primary>10</primary> space used for paddings and margins
+   *
+   * @since           1.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  10: '0.2rem',
+
+  /**
+   * @name            20
+   * @namespace       config.spaces
+   * @type            String
+   * @default         0.4rem
+   *
+   * Specify the <primary>20</primary> space used for paddings and margins
+   *
+   * @since           1.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  20: '0.4rem',
+
+  /**
+   * @name            30
+   * @namespace       config.spaces
+   * @type            String
+   * @default         0.3rem
+   *
+   * Specify the <primary>30</primary> space used for paddings and margins
+   *
+   * @since           1.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  30: '0.6rem',
+
+  /**
+   * @name            40
+   * @namespace       config.spaces
+   * @type            String
+   * @default         0.5rem
+   *
+   * Specify the <primary>40</primary> space used for paddings and margins
+   *
+   * @since           1.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  40: '0.8rem',
+
+  /**
+   * @name            50
    * @namespace       config.spaces
    * @type            String
    * @default         1rem
    *
-   * Specify the <primary>small</primary> space used for paddings and margins
+   * Specify the <primary>50</primary> space used for paddings and margins
    *
    * @since           1.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  small: '1rem',
+  50: '1rem',
 
   /**
-   * @name            default
+   * @name            60
+   * @namespace       config.spaces
+   * @type            String
+   * @default         1.2rem
+   *
+   * Specify the <primary>0</primary> space used for paddings and margins
+   *
+   * @since           1.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  60: '1.2rem',
+
+  /**
+   * @name            70
+   * @namespace       config.spaces
+   * @type            String
+   * @default         1.4rem
+   *
+   * Specify the <primary>70</primary> space used for paddings and margins
+   *
+   * @since           1.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  70: '1.4rem',
+
+  /**
+   * @name            80
+   * @namespace       config.spaces
+   * @type            String
+   * @default         1.6rem
+   *
+   * Specify the <primary>80</primary> space used for paddings and margins
+   *
+   * @since           1.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  80: '1.6rem',
+
+  /**
+   * @name            90
+   * @namespace       config.spaces
+   * @type            String
+   * @default         1.8rem
+   *
+   * Specify the <primary>90</primary> space used for paddings and margins
+   *
+   * @since           1.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  90: '1.8rem',
+
+  /**
+   * @name            100
    * @namespace       config.spaces
    * @type            String
    * @default         2rem
    *
-   * Specify the <primary>default</primary> space used for paddings and margins
+   * Specify the <primary>100</primary> space used for paddings and margins
    *
    * @since           1.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  default: '2rem',
-
-  /**
-   * @name            medium
-   * @namespace       config.spaces
-   * @type            String
-   * @default         4rem
-   *
-   * Specify the <primary>medium</primary> space used for paddings and margins
-   *
-   * @since           1.0.0
-   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  medium: '4rem',
-
-  /**
-   * @name            big
-   * @namespace       config.spaces
-   * @type            String
-   * @default         8rem
-   *
-   * Specify the <primary>big</primary> space used for paddings and margins
-   *
-   * @since           1.0.0
-   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  big: '8rem',
-
-  /**
-   * @name            bigger
-   * @namespace       config.spaces
-   * @type            String
-   * @default         16rem
-   *
-   * Specify the <primary>bigger</primary> space used for paddings and margins
-   *
-   * @since           1.0.0
-   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  bigger: '16rem'
+  100: '2rem'
 };

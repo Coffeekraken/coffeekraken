@@ -25,6 +25,10 @@
     $context: null;
   }
 
+  @if not map-get($__settings, 'allowSettingVar') {
+    @return setting($path, $context, $default);
+  }
+
   // check if has a component
   @if $context {
     $path: 'contexts.#{$context}.#{$path}';
@@ -45,11 +49,6 @@
 
   // return the var statement
   @return unquote('var(#{$var-name})');
-
-  // check if the variable is already in the generated ones
-  // @if list-index($__generated-vars, $var-name) == null {
-
-  // }
 
   // return the value
   @return $value;

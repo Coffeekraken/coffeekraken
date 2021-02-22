@@ -20,14 +20,14 @@
   * @since       2.0.0
   * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
-  @mixin paragraph-classes(
-    $names: map-keys(setting('components.paragraph')),
-    $scope: null,
-    $name: 'p'
-  ) {
-    @if class-match-namespace('sugar.component.paragraph') {
-      @each $n in $names {
-        /**
+@mixin paragraph-classes(
+  $names: map-keys(setting('components.paragraph')),
+  $scope: null,
+  $name: 'p'
+) {
+  @if class-match-namespace('sugar.component.paragraph') {
+    @each $n in $names {
+      /**
       * @name              .#{sel(#{$name}--#{$n})}, .#{sel(#{tf-class()})} #{sel('p.#{$n}', null)}
       * @namespace         sugar.scss.component
       * @type              Classname
@@ -40,11 +40,10 @@
       * @since       2.0.0
       * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
-        .#{sel(#{tf-class()})} #{$name}.#{$n},
-        .#{sel(#{$name}--#{$n})} {
-          @include paragraph($name: $n, $scope: $scope);
-        }
+      .#{sel(#{tf-class()})} #{$name}.#{$n},
+      .#{sel(#{$name}--#{$n})} {
+        @include paragraph($name: $n, $scope: $scope);
       }
     }
   }
-  
+}

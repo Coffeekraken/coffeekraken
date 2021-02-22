@@ -20,6 +20,8 @@ import __repl from 'repl';
 import __getSharedResourcesString from './utils/getSharedResourcesString';
 import __wait from '../time/wait';
 import __getFilename from '../fs/filename';
+import __postcssPresetEnv from 'postcss-preset-env';
+import _tmpDir from '../path/tmpDir';
 
 import __SInterface from '../interface/SInterface';
 import { ISFile, ISFileSettings, ISFileCtorSettings } from '../fs/SFile';
@@ -73,6 +75,8 @@ export class SScssFileCtorSettingsInterface extends __SInterface {
  *
  * @param       {String}            path            The path to the scss file
  * @param       {ISScssFileSettings}     [settings={}]       Some settings to configure your file
+ *
+ * @todo        {Feature}       adding cache capabilities
  *
  * @example         js
  * import SScssFile from '@coffeekraken/sugar/node/scss/SScssFile';
@@ -289,7 +293,7 @@ class SScssFile extends __SFile implements ISScssFile {
 
       const duration = new __SDuration();
 
-      if (completeParams.clearCache) await this._cache.clear();
+      // if (completeParams.clearCache) await this._cache.clear();
       let toCompile = this.content;
 
       // get all the imports from the toCompile string
@@ -315,25 +319,25 @@ class SScssFile extends __SFile implements ISScssFile {
 
       toCompile = __putUseStatementsOnTop(toCompile);
 
-      // leverage cache
-      if (completeParams.cache) {
-        const cachedValue = await this._cache.get(this.path, {
-          context: {
-            toCompile
-            // params: completeParams
-          }
-        });
+      // // leverage cache
+      // if (completeParams.cache) {
+      //   const cachedValue = await this._cache.get(this.path, {
+      //     context: {
+      //       toCompile
+      //       // params: completeParams
+      //     }
+      //   });
 
-        if (cachedValue && cachedValue.css) {
-          emit('log', {
-            value: `<magenta>[cached]</magenta> "<cyan>${this.relPath}</cyan>"`
-          });
-          return resolve({
-            css: this._processResultCss(cachedValue.css, completeParams),
-            ...duration.end()
-          });
-        }
-      }
+      //   if (cachedValue && cachedValue.css) {
+      //     emit('log', {
+      //       value: `<magenta>[cached]</magenta> "<cyan>${this.relPath}</cyan>"`
+      //     });
+      //     return resolve({
+      //       css: this._processResultCss(cachedValue.css, completeParams),
+      //       ...duration.end()
+      //     });
+      //   }
+      // }
 
       let renderObj;
       emit('log', {
@@ -345,24 +349,37 @@ class SScssFile extends __SFile implements ISScssFile {
         data: toCompile
       });
 
-      // save in cache
-      if (completeParams.cache) {
-        // @ts-ignore
-        await this._cache.set(
-          this.path,
-          {
-            css: renderObj.css.toString()
-          },
-          {
-            context: {
-              toCompile
-              // params: completeParams
-            }
-          }
-        );
-      }
-
       let resultCss = renderObj.css.toString();
+
+      const tmpFile = new __SFile(`%tmpDir/scss/compile.scss`, {
+        file: {
+          checkExistence: false
+        }
+      });
+      await tmpFile.writeSync(resultCss);
+
+      // post css
+      resultCss = await __postcssPresetEnv.process(resultCss, {
+        from: tmpFile.path,
+        to: tmpFile.path
+      });
+
+      // save in cache
+      // if (completeParams.cache) {
+      //   // @ts-ignore
+      //   await this._cache.set(
+      //     this.path,
+      //     {
+      //       css: renderObj.css.toString()
+      //     },
+      //     {
+      //       context: {
+      //         toCompile
+      //         // params: completeParams
+      //       }
+      //     }
+      //   );
+      // }
 
       // replace the imports
       resultCss = [
@@ -389,6 +406,7 @@ class SScssFile extends __SFile implements ISScssFile {
           this.path
             .replace(`${completeParams.rootDir}/`, '')
             .replace(/\.s[ac]ss$/, '.css')
+            .replace(/_([a-zA-Z0-9-_\.]+\.css)$/, '$1')
         );
 
         emit('log', {

@@ -1,12 +1,9 @@
+@use 'sass:map';
+
 // @TODO    documentation
 @function font-size($size) {
   $fontSizes: setting('fonts.sizes');
-  @if type-of($size) == number {
-    $name: '#{$size}';
-    @if map-has-key($fontSizes, $name) {
-      @return map-get($fontSizes, $name);
-    }
-  } @else if type-of($size) == string {
+  @if type-of($size) == number or type-of($size) == string {
     @if map-has-key($fontSizes, $size) {
       @return map-get($fontSizes, $size);
     }

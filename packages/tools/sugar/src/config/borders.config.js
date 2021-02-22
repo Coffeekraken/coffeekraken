@@ -204,7 +204,7 @@ exports.default = {
          * @type              Number
          * @default           10px
          *
-         * Specify the <primary>40</primary> border radius
+         * Specify the <primary>50</primary> border radius
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -264,7 +264,7 @@ exports.default = {
          * @type              Number
          * @default           20px
          *
-         * Specify the <primary>0</primary> border radius
+         * Specify the <primary>100</primary> border radius
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

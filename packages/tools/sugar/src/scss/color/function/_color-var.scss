@@ -1,0 +1,58 @@
+@use "sass:color";
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
+
+/**
+ * @name      color-var
+ * @namespace           sugar.scss.core.color
+ * @type      function
+ *
+ * Get a registered color by name or wrap a new color into a sugar.color call
+ * to manipulate it with ease.
+ * Supported modifier :
+ * - hue {Deg}
+ * - lighten {Percent}
+ * - darken {Percent}
+ * - saturate {Percent}
+ * - desaturate {Percent}
+ * - grayscale {Boolean}
+ * - complement {Boolean}
+ * - invert {Boolean}
+ * - opacity {Percent}
+ * - mix {Color}
+ * - lightness {Percent}
+ * - saturation {Percent}
+ *
+ * @param 		{String|Color} 		$color 				The color name or the color value to manipulate
+ * @param 		{String} 			[$modifier=null] 	The color modifier to apply. See color-mod css function signature for more infos: https://www.digitalocean.com/community/tutorials/css-color-function
+ * @return 		{Color} 									The actual color value
+ *
+ * @example 	 	scss
+ * // default color (settings.colors.default)
+ * $myColor : Sugar.color-var(default);
+ *
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function color-var($name, $modifier: null) {
+  // test parameters
+  $name: test-argument('color-var', 'name', 'color|string', $name);
+  $modifier: test-argument('color-var', 'modifier', 'string|number', $modifier);
+
+  @if is($name, color) {
+    @return $name;
+  }
+
+  $variableName: '';
+  @if type-of($name) == string or type-of($name) == number {
+    @if not setting('colors.#{$name}.color') {
+      @error ('Sorry but the resquested color "#{$name}" is not registered');
+    }
+    $variableName: 'sugar-colors-#{$name}';
+  }
+  @if $modifier and setting('colors.#{$name}.modifiers.#{$modifier}') {
+    $variableName: '#{$variableName}-#{$modifier}';
+  }
+
+  @return var(--#{$variableName});
+}

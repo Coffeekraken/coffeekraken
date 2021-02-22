@@ -1,6 +1,6 @@
 export default {
   /**
-   * @name          defaultSize
+   * @name          default
    * @namespace     config.margins
    * @type          String|Number
    * @default       30
@@ -10,7 +10,7 @@ export default {
    * @since       2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  defaultSize: 30,
+  default: 30,
 
   /**
    * @name            sizes

@@ -49,6 +49,7 @@ const fn = function (args = {}) {
       // static directories
       Object.keys(settings.staticDirs).forEach((path) => {
         const fsPath = settings.staticDirs[path];
+        console.log(path, fsPath);
         app.use(path, __express.static(fsPath));
       });
       // load the middlewares

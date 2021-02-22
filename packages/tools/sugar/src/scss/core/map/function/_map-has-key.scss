@@ -21,6 +21,6 @@
  */
 @function map-has-key($map, $key) {
   $map: test-argument('Sugar.map-has-key', 'map', map, $map);
-  $key: test-argument('Sugar.map-has-key', 'key', string, $key);
+  $key: test-argument('Sugar.map-has-key', 'key', 'string|number', $key);
   @return map.has-key($map, $key);
 }

@@ -2,24 +2,24 @@
   {{#if name}}<!-- @name    {{name}} -->{{/if}}
 
 {{#if name}}
-<h1 class="{{ classname 'h1 m-b' }}">
+<h1 class="{{ classname 'h1 mar-b' }}">
   {{#if static}}
-    <span class="{{ classname 'db-static' }}">Static</span>span>
+    <span class="{{ classname 'db-tag-static' }}">Static</span>span>
   {{/if}}
   {{#if get}}
-    <span class="{{ classname 'db-get' }}">get</span>
+    <span class="{{ classname 'db-tag-get' }}">get</span>
   {{/if}}
   {{#if set}}
-    <span class="{{ classname 'db-set' }}">set</span>
+    <span class="{{ classname 'db-tag-set' }}">set</span>
   {{/if}}
-  <span class="{{ classname 'db-name' }}">
+  <span class="{{ classname 'db-tag-name' }}">
     {{name}}
   </span>
 </h1>
 {{/if}}
 {{#if since}}
-<h2 class="{{ classname 'h3 m-b-small' }}">
-  <span class="{{ classname 'db-since' }}">Since: {{since}}</span>
+<h2 class="{{ classname 'h3 mar-b-30' }}">
+  <span class="{{ classname 'db-tag-since' }}">Since: {{since}}</span>
 </h2>
 {{/if}}
 

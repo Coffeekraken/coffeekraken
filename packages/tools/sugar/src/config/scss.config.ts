@@ -329,20 +329,18 @@ export default {
   sharedResources: ['sugar'],
 
   /**
-   * @name          settingsMode
+   * @name          allowSettingVar
    * @namespace     config.scss
-   * @type          String
-   * @values        inline, variables
-   * @default       variables
+   * @type          Boolean
+   * @default       true
    *
-   * Set the settings mode to use.
-   * - inline: The values will be put directly in the css
-   * - variables: The values will be passed using the var(...) css function
+   * Specify if you allow the use of the "setting-var" function to get
+   * settings in variables string like so: "var(--something)"
    *
    * @since         2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  settingsMode: 'variables',
+  allowSettingVar: true,
 
   /**
    * @name          unit

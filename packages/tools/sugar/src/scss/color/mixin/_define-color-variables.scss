@@ -1,0 +1,22 @@
+/**
+ * @name            define-color-variables
+ * @namespace       sugar.scss.color.mixin
+ * @type            Mixin
+ * 
+ * This mixin simply define correctly the color variables
+ *
+ * @param       {Map}       $colors         The settings colors map to define
+ * 
+ * @since       2.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin define-color-variables() {
+  @each $name, $value in map-get($__settings, 'colors') {
+    $res: var-define('colors-#{$name}', color($name));
+    @each $modName,
+      $modValue in map-get($__settings, 'colors.#{$name}.modifiers')
+    {
+      $res: var-define('colors-#{$name}-#{$modName}', color($name, $modName));
+    }
+  }
+}

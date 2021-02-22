@@ -14,7 +14,7 @@ export default {
     const processedClasses = classes
       .split(/\s+/)
       .map((cls) => {
-        return `${settings.scope}-${cls}`;
+        return `${settings.scope}${cls}`;
       })
       .join(' ');
 

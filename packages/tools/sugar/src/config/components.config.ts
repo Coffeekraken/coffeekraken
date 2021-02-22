@@ -2,45 +2,45 @@ export default {
   title: {
     h1: {
       'font-family': 'title',
-      'font-size': 'bigger',
-      'vr-margin-bottom': 'medium'
+      'font-size': 100,
+      'vr-margin-bottom': 50
     },
     h2: {
       'font-family': 'title',
-      'font-size': 'big',
-      'vr-margin-bottom': 'medium'
+      'font-size': 90,
+      'vr-margin-bottom': 50
     },
     h3: {
       'font-family': 'title',
-      'font-size': 'medium',
-      'vr-margin-bottom': 'default'
+      'font-size': 80,
+      'vr-margin-bottom': 40
     },
     h4: {
       'font-family': 'title',
-      'font-size': 'default',
-      'vr-margin-bottom': 'default'
+      'font-size': 70,
+      'vr-margin-bottom': 40
     },
     h5: {
       'font-family': 'title',
-      'font-size': 'small',
-      'vr-margin-bottom': 'small'
+      'font-size': 60,
+      'vr-margin-bottom': 30
     },
     h6: {
       'font-family': 'title',
-      'font-size': 'smaller',
-      'vr-margin-bottom': 'small'
+      'font-size': 50,
+      'vr-margin-bottom': 20
     }
   },
   paragraph: {
     default: {
       'font-family': 'default',
-      'font-size': 'default',
-      'vr-margin-bottom': 'small'
+      'font-size': 50,
+      'vr-margin-bottom': 50
     },
     head: {
       'font-family': 'default',
-      'font-size': 'medium',
-      'vr-margin-bottom': 'small'
+      'font-size': 70,
+      'vr-margin-bottom': 50
     }
   },
 

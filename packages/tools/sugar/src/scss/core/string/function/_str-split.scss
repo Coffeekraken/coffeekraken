@@ -18,6 +18,10 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 @function str-split($string, $delimiter: '') {
+  @if is($string, number) {
+    $string: '#{$string}';
+  }
+
   $string: test-argument('Sugar.str-split', 'string', string, $string);
   $delimiter: test-argument('Sugar.str-split', 'delimiter', string, $delimiter);
 

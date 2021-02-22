@@ -51,9 +51,9 @@ export default {
      */
     default: {
       'font-family': 'Titillium Web',
-      'font-weight': 400,
+      'font-weight': 40,
       import:
-        'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap'
+        'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@40&display=swap'
     },
 
     /**
@@ -68,9 +68,9 @@ export default {
      */
     title: {
       'font-family': 'Titillium Web',
-      'font-weight': 700,
+      'font-weight': 70,
       import:
-        'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap'
+        'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@70&display=swap'
     },
 
     /**

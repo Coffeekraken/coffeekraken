@@ -14,15 +14,19 @@
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin paragraph($name: default, $font-size: null, $font-family: null, $vr-margin-bottom: null, $scope: null) {
+@mixin paragraph(
+  $name: default,
+  $font-size: null,
+  $font-family: null,
+  $vr-margin-bottom: null,
+  $scope: null
+) {
   @include context('components.paragraph.#{$name}') {
-   
     @if not setting('.') {
       @error 'The passed "#{$name}" paragraph does not exist in the "settings.components.paragraph" configuration map...';
     }
 
     @include scope('bare', $scope) {
-
       @if not $font-size {
         $font-size: setting('font-size');
       }
@@ -34,13 +38,10 @@
       font-size: font-size($font-size);
 
       @include vr-scope() {
-        margin-bottom: space(
-          $vr-margin-bottom
-        );
+        margin-bottom: space($vr-margin-bottom);
       }
     }
     @include scope('style', $scope) {
-
       @if not $font-family {
         $font-family: setting('font-family');
       }

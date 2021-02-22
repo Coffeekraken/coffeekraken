@@ -22,7 +22,7 @@
     $prefix: setting('classes.generate.prefix');
   }
   @if $prefix != '' and $prefix != false and $prefix != null {
-    $selector: '#{$prefix}-#{$selector}';
+    $selector: '#{$prefix}#{$selector}';
   }
   $selector: str-replace($selector, '--default', '');
   $selector: str-replace($selector, '-default', '');

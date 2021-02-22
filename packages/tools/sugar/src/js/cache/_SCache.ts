@@ -214,7 +214,7 @@ class SCache extends __SClass implements ISCache {
 
     // check the name
     if (typeof name !== 'string') {
-      name = __md5(__toString(name)).toString();
+      name = __md5.encrypt(__toString(name));
     }
     // get the adapter
     const adapter = this.adapter;
@@ -229,21 +229,17 @@ class SCache extends __SClass implements ISCache {
       : this._parse(rawValue);
 
     // check the hash
-    if (set.hash && value.hash && set.hash !== value.hash) {
+    let contextHash: string | undefined = undefined;
+    if (set.context !== undefined) contextHash = __md5.encrypt(set.context);
+
+    if (
+      contextHash &&
+      value.contextHash !== undefined &&
+      contextHash !== value.contextHash
+    ) {
+      await adapter.delete(name);
       return null;
     }
-
-    // check context hash
-
-    // nativeConsole.trace('SETTINGS', set);
-
-    // console.log('ghet hash', __toString(set.context));
-
-    if (set.context && value.contextHash) {
-      const contextHash = __md5.encrypt(set.context);
-      // console.log('SSSSSS', contextHash);
-      if (contextHash !== value.contextHash) return null;
-    } else if (set.context) return null;
 
     // check if the item is too old...
     if (value.deleteAt !== -1 && value.deleteAt < new Date().getTime()) {
@@ -291,26 +287,17 @@ class SCache extends __SClass implements ISCache {
       name = __md5(__toString(name)).toString();
     }
 
-    // generate a hash
-    let hash = null;
-    let settingsHash = set.hash
-      ? !Array.isArray(set.hash)
-        ? [set.hash]
-        : set.hash
-      : [];
-    hash = __md5.encrypt(name + `${settingsHash.join('.')}`);
-
     let contextHash = null;
     if (set.context !== undefined) {
       contextHash = __md5.encrypt(set.context);
     }
-    // console.log('set hash', contextHash);
 
     // get the adapter
     const adapter = this.adapter;
 
     // try to get the value to update it
     const existingValue = await this.get(name, {
+      ...set,
       valueOnly: false
     });
 
@@ -334,10 +321,10 @@ class SCache extends __SClass implements ISCache {
               : finalSettings.ttl,
             'ms'
           );
+
     const valueToSave = {
       name,
       value,
-      hash,
       contextHash,
       created: existingValue ? existingValue.created : new Date().getTime(),
       updated: new Date().getTime(),

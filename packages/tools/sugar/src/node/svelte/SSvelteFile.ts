@@ -257,6 +257,10 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
                 //   };
                 // }
 
+                if (input.content.trim() === '') {
+                  return '';
+                }
+
                 // create a temp file
                 const tmpSScssFile = new __SScssFile(
                   '%tmpDir/svelte/compile.scss',

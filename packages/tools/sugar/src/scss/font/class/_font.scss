@@ -14,15 +14,11 @@
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
  */
 @mixin font-classes() {
-  body {
-    font-size: setting('fonts.defaultFontSize') px;
-  }
-
   @if class-match-namespace('sugar.font.family') {
     @each $name, $font in setting('fonts.families') {
       @if class-match-namespace('sugar.font.family.#{$name}') {
         /**
-          * @name       	  #{sel(ft-#{$name})}
+          * @name       	  #{sel(f-#{$name})}
           * @namespace       sugar.scss.font.class
           * @class-namespace           sugar.font.family.#{$name}
           * @type        Classname
@@ -30,14 +26,14 @@
           * Apply the font family **#{$name}**
           *
           * @example 	html
-          * <div class="#{sel(ft-#{$name})}">
+          * <div class="#{sel(f-#{$name})}">
           * 	I have the font family "#{$name}" applied
           * </div>
           *
           * @since       1.0.0
           * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        #{sel("ft-#{$name}")} {
+        .#{sel('f-#{$name}')} {
           @include font($name);
         }
       }
@@ -47,7 +43,7 @@
     @each $name, $size in setting('fonts.sizes') {
       @if class-match-namespace('sugar.font.size.#{$name}') {
         /**
-          * @name       	  #{sel(ft-#{$name})}
+          * @name       	  #{sel(f-#{$name})}
           * @namespace       sugar.scss.font.class
           * @class-namespace           sugar.font.size.#{$name}
           * @type        Classname
@@ -55,14 +51,14 @@
           * Apply the font size **#{$name}** (**#{$size}**)
           *
           * @example 	html
-          * <div class="#{sel(ft-#{$name})}">
+          * <div class="#{sel(f-#{$name})}">
           * 	I have the font size "#{$name}" applied
           * </div>
           *
           * @since       1.0.0
           * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
           */
-        #{sel("ft-#{$name}")} {
+        .#{sel('f-#{$name}')} {
           font-size: font-size($name);
         }
       }

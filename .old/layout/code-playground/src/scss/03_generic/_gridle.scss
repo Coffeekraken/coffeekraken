@@ -1,9 +1,0 @@
-@use "@coffeekraken/gridle/index" as gridle;
-
-// generate classes
-@include gridle.classes();
-
-// container
-.container {
-	padding:0 10px;
-}

@@ -1,8 +1,0 @@
-@use '@coffeekraken/tooltip-style/index' as tooltip-style;
-
-@include tooltip-style.classes(
-	$colors : default primary secondary
-);
-.tooltip {
-	white-space: nowrap;
-}

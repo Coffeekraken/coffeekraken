@@ -1,5 +1,0 @@
-@use '@coffeekraken/form-style/index' as form-style;
-
-@include form-style.classes(
-	$colors : default primary secondary
-);

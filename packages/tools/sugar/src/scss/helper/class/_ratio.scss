@@ -15,20 +15,9 @@
  */
 @mixin helper-ratio-classes() {
   $ratios: setting('ratios');
-  @each $name in $ratios {
+  @each $name, $value in $ratios {
     @if class-match-namespace('sugar.helper.ratio.#{$name}') {
-      $n: str-replace($name, '/', '-');
-      $splits: str-split($name, '/');
-      $ratio: 1;
-      @if list-length($splits) == 2 {
-        $width: to-number(list-nth($splits, 1));
-        $height: to-number(list-nth($splits, 2));
-        $ratio: $width / $height;
-      } @else if list-length($splits) == 1 {
-        $ratio: to-number(list-nth($splits, 1));
-      }
-
-      $cname: selector('ratio-#{$n}');
+      $cname: selector('#{$name}');
       /**
         * @name       	#{$cname}
         * @namespace       sugar.scss.helper.class
@@ -46,7 +35,7 @@
         * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
       .#{$cname} {
-        @include ratio($ratio);
+        @include ratio($value);
       }
     }
   }

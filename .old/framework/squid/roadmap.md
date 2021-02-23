@@ -1,5 +1,0 @@
-- uglify js
-- npm compression
-- client side rendering
-- nginx for static files
-- cache

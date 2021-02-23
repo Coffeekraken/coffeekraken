@@ -1,0 +1,82 @@
+/**
+ * @name            margin
+ * @namespace       sugar.scss.helpers.function
+ * @type            Function
+ *
+ * This function allows you to get margin values just like the ```margin``` property but using the margins.config values
+ *
+ * @param       {Number|List}           $values         The margins you want to get back. 1 value, 2 values = top/bottom - left/right, 3 values = top - left/right - bottom, 4 values = top - right - bottom - left
+ * @return      {String|List}                           The margin value(s)
+ *
+ * @example         scss
+ * div {
+ *    margin: Sugar.margin(100);
+ *    margin: Sugar.margin(50 100);
+ * }
+ *
+ * @since       2.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function margin($values) {
+  @if is($values, list) {
+    @if list-length($values) == 2 {
+      $x: list-nth($values, 1);
+      $y: list-nth($values, 2);
+      $xv: setting('margins.sizes.#{$x}');
+      $yv: setting('margins.sizes.#{$y}');
+      @if not $xv {
+        @error ('Sorry but the requested x margin "<yellow>#{$x}</yellow>" does not exists.');
+      }
+      @if not $yv {
+        @error ('Sorry but the requested y margin "<yellow>#{$y}</yellow>" does not exists.');
+      }
+      @return $xv $yv;
+    } @else if list-length($values) == 3 {
+      $t: list-nth($values, 1);
+      $x: list-nth($values, 2);
+      $b: list-nth($values, 3);
+      $tv: setting('margins.sizes.#{$t}');
+      $xv: setting('margins.sizes.#{$x}');
+      $bv: setting('margins.sizes.#{$b}');
+      @if not $tv {
+        @error ('Sorry but the requested top margin "<yellow>#{$t}</yellow>" does not exists.');
+      }
+      @if not $xv {
+        @error ('Sorry but the requested x margin "<yellow>#{$x}</yellow>" does not exists.');
+      }
+      @if not $bv {
+        @error ('Sorry but the requested bottom margin "<yellow>#{$b}</yellow>" does not exists.');
+      }
+      @return $tv $xv $bv;
+    } @else if list-length($values) == 4 {
+      $t: list-nth($values, 1);
+      $r: list-nth($values, 2);
+      $b: list-nth($values, 3);
+      $l: list-nth($values, 4);
+      $tv: setting('margins.sizes.#{$t}');
+      $rv: setting('margins.sizes.#{$r}');
+      $bv: setting('margins.sizes.#{$b}');
+      $lv: setting('margins.sizes.#{$l}');
+      @if not $tv {
+        @error ('Sorry but the requested top margin "<yellow>#{$t}</yellow>" does not exists.');
+      }
+      @if not $rv {
+        @error ('Sorry but the requested right margin "<yellow>#{$r}</yellow>" does not exists.');
+      }
+      @if not $bv {
+        @error ('Sorry but the requested bottom margin "<yellow>#{$b}</yellow>" does not exists.');
+      }
+      @if not $lv {
+        @error ('Sorry but the requested l margin "<yellow>#{$l}</yellow>" does not exists.');
+      }
+      @return $tv $rv $bv $lv;
+    } @else {
+    }
+  } @else {
+    $v: setting('margins.sizes.#{$values}');
+    @if not $v {
+      @error ('Sorry but the requested margin "<yellow>#{$values}</yellow>" does not exists.');
+    }
+    @return $v;
+  }
+}

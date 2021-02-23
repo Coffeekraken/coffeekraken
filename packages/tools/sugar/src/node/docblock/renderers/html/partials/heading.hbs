@@ -4,7 +4,7 @@
 {{#if name}}
 <h1 class="{{ classname 'h1 mar-b' }}">
   {{#if static}}
-    <span class="{{ classname 'db-tag-static' }}">Static</span>span>
+    <span class="{{ classname 'db-tag-static' }}">Static</span>
   {{/if}}
   {{#if get}}
     <span class="{{ classname 'db-tag-get' }}">get</span>
@@ -12,19 +12,14 @@
   {{#if set}}
     <span class="{{ classname 'db-tag-set' }}">set</span>
   {{/if}}
-  <span class="{{ classname 'db-tag-name' }}">
+  <span class="{{ classname 'db-tag-name f-80' }}">
     {{name}}
   </span>
 </h1>
 {{/if}}
-{{#if since}}
-<h2 class="{{ classname 'h3 mar-b-30' }}">
-  <span class="{{ classname 'db-tag-since' }}">Since: {{since}}</span>
-</h2>
-{{/if}}
 
-{{> sharings}}
+{{ tag 'since' }}
 
-{{#if description}}
-<p class="{{ classname 'p' }}">{{description}}</p>
-{{/if}}
+{{ tag 'description' }}
+
+{{!-- {{> sharings}} --}}

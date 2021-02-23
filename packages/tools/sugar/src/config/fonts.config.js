@@ -51,8 +51,8 @@ exports.default = {
          */
         default: {
             'font-family': 'Titillium Web',
-            'font-weight': 40,
-            import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@40&display=swap'
+            'font-weight': 400,
+            import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap'
         },
         /**
          * @name            title
@@ -66,8 +66,8 @@ exports.default = {
          */
         title: {
             'font-family': 'Titillium Web',
-            'font-weight': 70,
-            import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@70&display=swap'
+            'font-weight': 700,
+            import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap'
         },
         /**
          * @name            quote
@@ -179,74 +179,74 @@ exports.default = {
          * @name          50
          * @namespace     config.fonts.sizes
          * @type          String
-         * @default       20px
+         * @default       24px
          *
          * Declare the font size <primary>50</primary>
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        50: '20px',
+        50: '24px',
         /**
          * @name          60
          * @namespace     config.fonts.sizes
          * @type          String
-         * @default       24px
+         * @default       32px
          *
          * Declare the font size <primary>60</primary>
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        60: '24px',
+        60: '32px',
         /**
          * @name          70
          * @namespace     config.fonts.sizes
          * @type          String
-         * @default       32px
+         * @default       40px
          *
          * Declare the font size <primary>70</primary>
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        70: '32px',
+        70: '40px',
         /**
          * @name          80
          * @namespace     config.fonts.sizes
          * @type          String
-         * @default       40px
+         * @default       48px
          *
          * Declare the font size <primary>80</primary>
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        80: '40px',
+        80: '48px',
         /**
          * @name          90
          * @namespace     config.fonts.sizes
          * @type          String
-         * @default       52px
+         * @default       56px
          *
          * Declare the font size <primary>90</primary>
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        90: '52px',
+        90: '56px',
         /**
          * @name          100
          * @namespace     config.fonts.sizes
          * @type          String
-         * @default       68px
+         * @default       64px
          *
          * Declare the font size <primary>100</primary>
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        100: '68px'
+        100: '64px'
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9udHMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZm9udHMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWU7SUFDYjs7Ozs7Ozs7Ozs7O09BWUc7SUFDSCxlQUFlLEVBQUUsRUFBRTtJQUVuQjs7Ozs7Ozs7Ozs7T0FXRztJQUNILGlCQUFpQixFQUFFLFNBQVM7SUFFNUI7Ozs7Ozs7OztPQVNHO0lBQ0gsUUFBUSxFQUFFO1FBQ1I7Ozs7Ozs7OztXQVNHO1FBQ0gsT0FBTyxFQUFFO1lBQ1AsYUFBYSxFQUFFLGVBQWU7WUFDOUIsYUFBYSxFQUFFLEVBQUU7WUFDakIsTUFBTSxFQUNKLDZFQUE2RTtTQUNoRjtRQUVEOzs7Ozs7Ozs7V0FTRztRQUNILEtBQUssRUFBRTtZQUNMLGFBQWEsRUFBRSxlQUFlO1lBQzlCLGFBQWEsRUFBRSxFQUFFO1lBQ2pCLE1BQU0sRUFDSiw2RUFBNkU7U0FDaEY7UUFFRDs7Ozs7Ozs7O1dBU0c7UUFDSCxLQUFLLEVBQUU7WUFDTCxhQUFhLEVBQUUsaUNBQWlDO1lBQ2hELGFBQWEsRUFBRSxRQUFRO1lBQ3ZCLFlBQVksRUFBRSxRQUFRO1lBQ3RCLGNBQWMsRUFBRSxNQUFNO1lBQ3RCLFlBQVksRUFBRSxJQUFJO1NBQ25CO1FBRUQ7Ozs7Ozs7OztXQVNHO1FBQ0gsSUFBSSxFQUFFO1lBQ0osYUFBYSxFQUFFLGlEQUFpRDtZQUNoRSxhQUFhLEVBQUUsUUFBUTtZQUN2QixZQUFZLEVBQUUsUUFBUTtZQUN0QixjQUFjLEVBQUUsTUFBTTtZQUN0QixZQUFZLEVBQUUsSUFBSTtTQUNuQjtLQUNGO0lBRUQ7Ozs7Ozs7OztPQVNHO0lBQ0gsS0FBSyxFQUFFO1FBQ0w7Ozs7Ozs7Ozs7V0FVRztRQUNILENBQUMsRUFBRSxLQUFLO1FBRVI7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxLQUFLO1FBRVQ7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxLQUFLO1FBRVQ7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEdBQUcsRUFBRSxNQUFNO0tBQ1o7Q0FDRixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9udHMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZm9udHMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWU7SUFDYjs7Ozs7Ozs7Ozs7O09BWUc7SUFDSCxlQUFlLEVBQUUsRUFBRTtJQUVuQjs7Ozs7Ozs7Ozs7T0FXRztJQUNILGlCQUFpQixFQUFFLFNBQVM7SUFFNUI7Ozs7Ozs7OztPQVNHO0lBQ0gsUUFBUSxFQUFFO1FBQ1I7Ozs7Ozs7OztXQVNHO1FBQ0gsT0FBTyxFQUFFO1lBQ1AsYUFBYSxFQUFFLGVBQWU7WUFDOUIsYUFBYSxFQUFFLEdBQUc7WUFDbEIsTUFBTSxFQUNKLDhFQUE4RTtTQUNqRjtRQUVEOzs7Ozs7Ozs7V0FTRztRQUNILEtBQUssRUFBRTtZQUNMLGFBQWEsRUFBRSxlQUFlO1lBQzlCLGFBQWEsRUFBRSxHQUFHO1lBQ2xCLE1BQU0sRUFDSiw4RUFBOEU7U0FDakY7UUFFRDs7Ozs7Ozs7O1dBU0c7UUFDSCxLQUFLLEVBQUU7WUFDTCxhQUFhLEVBQUUsaUNBQWlDO1lBQ2hELGFBQWEsRUFBRSxRQUFRO1lBQ3ZCLFlBQVksRUFBRSxRQUFRO1lBQ3RCLGNBQWMsRUFBRSxNQUFNO1lBQ3RCLFlBQVksRUFBRSxJQUFJO1NBQ25CO1FBRUQ7Ozs7Ozs7OztXQVNHO1FBQ0gsSUFBSSxFQUFFO1lBQ0osYUFBYSxFQUFFLGlEQUFpRDtZQUNoRSxhQUFhLEVBQUUsUUFBUTtZQUN2QixZQUFZLEVBQUUsUUFBUTtZQUN0QixjQUFjLEVBQUUsTUFBTTtZQUN0QixZQUFZLEVBQUUsSUFBSTtTQUNuQjtLQUNGO0lBRUQ7Ozs7Ozs7OztPQVNHO0lBQ0gsS0FBSyxFQUFFO1FBQ0w7Ozs7Ozs7Ozs7V0FVRztRQUNILENBQUMsRUFBRSxLQUFLO1FBRVI7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxLQUFLO1FBRVQ7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxLQUFLO1FBRVQ7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRSxNQUFNO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEdBQUcsRUFBRSxNQUFNO0tBQ1o7Q0FDRixDQUFDIn0=

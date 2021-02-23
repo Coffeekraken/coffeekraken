@@ -1,5 +1,0 @@
-@use "@coffeekraken/sugar/index" as sugar;
-
-.ratio-5-1 {
-	@include sugar.ratio(5);
-}

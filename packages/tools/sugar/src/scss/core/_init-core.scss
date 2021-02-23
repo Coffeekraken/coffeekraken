@@ -1,0 +1,7 @@
+@mixin init-core() {
+  // dom settings
+  @include init-dom-settings();
+
+  // css variables
+  @include init-settings-to-css-variables();
+}

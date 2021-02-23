@@ -40,11 +40,15 @@
   $modifiers: test-argument(
     'color',
     'modifiers',
-    'string|list|number',
+    'string|list|number|color',
     $modifiers
   );
 
   $colorColor: null;
+
+  @if $modifiers and is($modifiers, color) {
+    @return $modifiers;
+  }
 
   @if is($name, color) {
     $colorColor: $name;

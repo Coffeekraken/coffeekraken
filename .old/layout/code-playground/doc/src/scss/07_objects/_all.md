@@ -1,5 +1,0 @@
-# @import
-
-Objects
-All the objects styling.
-An object response to the same rules has the blocks, unless they cannot contain any other objects or blocks.

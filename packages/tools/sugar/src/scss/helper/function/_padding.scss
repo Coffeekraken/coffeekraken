@@ -1,0 +1,82 @@
+/**
+ * @name            padding
+ * @namespace       sugar.scss.helpers.function
+ * @type            Function
+ *
+ * This function allows you to get padding values just like the ```padding``` property but using the paddings.config values
+ *
+ * @param       {Number|List}           $values         The paddings you want to get back. 1 value, 2 values = top/bottom - left/right, 3 values = top - left/right - bottom, 4 values = top - right - bottom - left
+ * @return      {String|List}                           The padding value(s)
+ *
+ * @example         scss
+ * div {
+ *    padding: Sugar.padding(100);
+ *    padding: Sugar.padding(50 100);
+ * }
+ *
+ * @since       2.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function padding($values) {
+  @if is($values, list) {
+    @if list-length($values) == 2 {
+      $x: list-nth($values, 1);
+      $y: list-nth($values, 2);
+      $xv: setting('paddings.sizes.#{$x}');
+      $yv: setting('paddings.sizes.#{$y}');
+      @if not $xv {
+        @error ('Sorry but the requested x padding "<yellow>#{$x}</yellow>" does not exists.');
+      }
+      @if not $yv {
+        @error ('Sorry but the requested y padding "<yellow>#{$y}</yellow>" does not exists.');
+      }
+      @return $xv $yv;
+    } @else if list-length($values) == 3 {
+      $t: list-nth($values, 1);
+      $x: list-nth($values, 2);
+      $b: list-nth($values, 3);
+      $tv: setting('paddings.sizes.#{$t}');
+      $xv: setting('paddings.sizes.#{$x}');
+      $bv: setting('paddings.sizes.#{$b}');
+      @if not $tv {
+        @error ('Sorry but the requested top padding "<yellow>#{$t}</yellow>" does not exists.');
+      }
+      @if not $xv {
+        @error ('Sorry but the requested x padding "<yellow>#{$x}</yellow>" does not exists.');
+      }
+      @if not $bv {
+        @error ('Sorry but the requested bottom padding "<yellow>#{$b}</yellow>" does not exists.');
+      }
+      @return $tv $xv $bv;
+    } @else if list-length($values) == 4 {
+      $t: list-nth($values, 1);
+      $r: list-nth($values, 2);
+      $b: list-nth($values, 3);
+      $l: list-nth($values, 4);
+      $tv: setting('paddings.sizes.#{$t}');
+      $rv: setting('paddings.sizes.#{$r}');
+      $bv: setting('paddings.sizes.#{$b}');
+      $lv: setting('paddings.sizes.#{$l}');
+      @if not $tv {
+        @error ('Sorry but the requested top padding "<yellow>#{$t}</yellow>" does not exists.');
+      }
+      @if not $rv {
+        @error ('Sorry but the requested right padding "<yellow>#{$r}</yellow>" does not exists.');
+      }
+      @if not $bv {
+        @error ('Sorry but the requested bottom padding "<yellow>#{$b}</yellow>" does not exists.');
+      }
+      @if not $lv {
+        @error ('Sorry but the requested l padding "<yellow>#{$l}</yellow>" does not exists.');
+      }
+      @return $tv $rv $bv $lv;
+    } @else {
+    }
+  } @else {
+    $v: setting('paddings.sizes.#{$values}');
+    @if not $v {
+      @error ('Sorry but the requested padding "<yellow>#{$values}</yellow>" does not exists.');
+    }
+    @return $v;
+  }
+}

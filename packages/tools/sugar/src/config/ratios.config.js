@@ -1,4 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = ['21/9', '9/21', '16/9', '9/16', '4/3', '3/4', '1/1'];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmF0aW9zLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJhdGlvcy5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxrQkFBZSxDQUFDLE1BQU0sRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLE1BQU0sRUFBRSxLQUFLLEVBQUUsS0FBSyxFQUFFLEtBQUssQ0FBQyxDQUFDIn0=
+exports.default = {
+    'ratio-21-9': 21 / 9,
+    'ratio-9-21': 9 / 21,
+    'ratio-16-9': 16 / 9,
+    'ratio-9-16': 9 / 16,
+    'ratio-4-3': 4 / 3,
+    'ratio-3-4': 3 / 4,
+    'ratio-1': 1
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmF0aW9zLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJhdGlvcy5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxrQkFBZTtJQUNiLFlBQVksRUFBRSxFQUFFLEdBQUcsQ0FBQztJQUNwQixZQUFZLEVBQUUsQ0FBQyxHQUFHLEVBQUU7SUFDcEIsWUFBWSxFQUFFLEVBQUUsR0FBRyxDQUFDO0lBQ3BCLFlBQVksRUFBRSxDQUFDLEdBQUcsRUFBRTtJQUNwQixXQUFXLEVBQUUsQ0FBQyxHQUFHLENBQUM7SUFDbEIsV0FBVyxFQUFFLENBQUMsR0FBRyxDQUFDO0lBQ2xCLFNBQVMsRUFBRSxDQUFDO0NBQ2IsQ0FBQyJ9

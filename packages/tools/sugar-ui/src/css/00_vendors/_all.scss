@@ -2,32 +2,3 @@
  * Vendors
  * All external librarie needed in the project.
  */
-
- $something: 'cool';
-
- @mixin hello($arg: null) {
-   body {
-     background-color: red;
-   }
- }
-
-$else: (
-  something: (
-    coco: 'hello'
-  )
-);
-
-@mixin plop() {
-
-  @include coco($arg1) {
-    body {
-      background-color: green;
-    }
-  }
-
-}
-
- body {
-   content: 'Hello world';
-   background: blue;
- }

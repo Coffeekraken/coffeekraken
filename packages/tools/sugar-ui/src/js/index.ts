@@ -2,6 +2,7 @@
 // __SSugarUiWebComponent.define();
 
 import './component';
+import './prettier';
 // console.log(Component);
 // customElements.define('my-element', Component);
 console.log('ff');

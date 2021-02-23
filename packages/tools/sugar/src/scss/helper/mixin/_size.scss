@@ -19,7 +19,13 @@
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin size($size-width, $height: null, $position: absolute) {
+@mixin size(
+  $size-width,
+  $height: null,
+  $position: absolute,
+  $align: left,
+  $valign: top
+) {
   @if type-of($size-width) != number {
     $size-width: test-argument(
       'Sugar.size',

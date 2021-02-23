@@ -1,7 +1,0 @@
-@use "@coffeekraken/sugar/index" as sugar;
-
-@include sugar.setup((
-	look-and-feel : (
-		border-radius : .3em
-	)
-));

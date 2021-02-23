@@ -9,6 +9,7 @@ import __SPromise from '../../promise/SPromise';
 import __absolute from '../../path/absolute';
 import __isGlob from '../../is/glob';
 import __glob from 'glob';
+import __chokidar from 'chokidar';
 
 import __SSvelteCompilerParamsInterface from './interface/SSvelteCompilerParamsInterface';
 
@@ -141,47 +142,88 @@ class SSvelteCompiler extends __SCompiler {
       const resultsObj = {};
 
       let filesPaths: string[] = [];
+      let svelteFiles: Record<string, __SSvelteFile> = {};
 
-      // make input absolute
-      input = __absolute(input);
-      // process inputs
-      input.forEach((inputStr) => {
-        if (__isGlob(inputStr)) {
-          filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
-        } else {
-          filesPaths.push(inputStr);
-        }
-      });
-
-      const startTime = Date.now();
-
-      for (let i = 0; i < filesPaths.length; i++) {
-        let filePath = filesPaths[i];
-        let file = new __SSvelteFile(filePath, {
-          svelteFile: {
-            compile: settings
+      if (params.watch) {
+        __chokidar.watch(input).on('change', async (path) => {
+          let file: __SSvelteFile = svelteFiles[path];
+          if (!file) {
+            file = new __SSvelteFile(path, {
+              svelteFile: {
+                compile: settings
+              }
+            });
+            svelteFiles[path] = file;
+            pipe(file);
           }
-        });
-        pipe(file);
+          // compile the file
+          await file.compile(
+            {
+              ...params,
+              watch: false
+            },
+            settings
+          );
 
-        const resPromise = file.compile(params, {
-          ...settings
+          emit('log', {
+            type: 'separator'
+          });
+          emit('log', {
+            value: `<blue>[watch]</blue> Watching for changes...`
+          });
         });
-        const res = await resPromise;
-        resultsObj[file.path] = res;
-      }
 
-      // resolve with the compilation result
-      if (!params.watch) {
-        resolve({
-          files: resultsObj,
-          startTime: startTime,
-          endTime: Date.now(),
-          duration: Date.now() - startTime
+        emit('log', {
+          value: `<blue>[watch]</blue> Watching for changes...`
         });
       } else {
-        emit('files', {
+        // make input absolute
+        input = __absolute(input);
+        // process inputs
+        input.forEach((inputStr) => {
+          if (__isGlob(inputStr)) {
+            filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
+          } else {
+            filesPaths.push(inputStr);
+          }
+        });
+
+        filesPaths.forEach((path) => {
+          const file = new __SSvelteFile(path, {
+            svelteFile: {
+              compile: settings
+            }
+          });
+          svelteFiles[file.path] = file;
+          pipe(file);
+        });
+
+        const resultsObj: Record<string, string> = {};
+        for (let i = 0; i < Object.keys(svelteFiles).length; i++) {
+          const file = svelteFiles[Object.keys(svelteFiles)[i]];
+          // @todo    {Clean}     remove the ts-ignore
+          // @ts-ignore
+          const resPromise = file.compile(
+            {
+              ...params,
+              watch: false
+            },
+            settings
+          );
+          const res = await resPromise;
+          resultsObj[file.path] = res.js;
+        }
+
+        let aggregateStrArray: string[] = [];
+        Object.keys(resultsObj).forEach((path) => {
+          const jsRes = resultsObj[path];
+          aggregateStrArray.push(jsRes);
+        });
+
+        const startTime = Date.now();
+        resolve({
           files: resultsObj,
+          js: aggregateStrArray.join('\n'),
           startTime: startTime,
           endTime: Date.now(),
           duration: Date.now() - startTime

@@ -51,9 +51,9 @@ export default {
      */
     default: {
       'font-family': 'Titillium Web',
-      'font-weight': 40,
+      'font-weight': 400,
       import:
-        'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@40&display=swap'
+        'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap'
     },
 
     /**
@@ -68,9 +68,9 @@ export default {
      */
     title: {
       'font-family': 'Titillium Web',
-      'font-weight': 70,
+      'font-weight': 700,
       import:
-        'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@70&display=swap'
+        'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap'
     },
 
     /**
@@ -190,78 +190,78 @@ export default {
      * @name          50
      * @namespace     config.fonts.sizes
      * @type          String
-     * @default       20px
+     * @default       24px
      *
      * Declare the font size <primary>50</primary>
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    50: '20px',
+    50: '24px',
 
     /**
      * @name          60
      * @namespace     config.fonts.sizes
      * @type          String
-     * @default       24px
+     * @default       32px
      *
      * Declare the font size <primary>60</primary>
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    60: '24px',
+    60: '32px',
 
     /**
      * @name          70
      * @namespace     config.fonts.sizes
      * @type          String
-     * @default       32px
+     * @default       40px
      *
      * Declare the font size <primary>70</primary>
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    70: '32px',
+    70: '40px',
 
     /**
      * @name          80
      * @namespace     config.fonts.sizes
      * @type          String
-     * @default       40px
+     * @default       48px
      *
      * Declare the font size <primary>80</primary>
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    80: '40px',
+    80: '48px',
 
     /**
      * @name          90
      * @namespace     config.fonts.sizes
      * @type          String
-     * @default       52px
+     * @default       56px
      *
      * Declare the font size <primary>90</primary>
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    90: '52px',
+    90: '56px',
 
     /**
      * @name          100
      * @namespace     config.fonts.sizes
      * @type          String
-     * @default       68px
+     * @default       64px
      *
      * Declare the font size <primary>100</primary>
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    100: '68px'
+    100: '64px'
   }
 };

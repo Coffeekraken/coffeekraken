@@ -1,16 +1,19 @@
 {{#if author}}{{#author}}
 <div class="{{ classname 'db-tag-author' }}">
-  <h3 class="{{ classname 'h3 mar-t mar-b-30' }}">
+  <h3 class="{{ classname 'h3 mar-b-30 f-50' }}">
     Author
   </h3>
-  <span class="{{ classname 'db-tag-name' }}">{{name}}</span>
+  <span class="{{ classname 'db-tag-author__avatar' }}">
+    <img class="{{ classname 'db-tag-author__avatar-img' }}" src="{{ gravatar email }}" />
+  </span>
+  <span class="{{ classname 'db-tag-author__name' }}">{{name}}</span>
   {{#if email}}
-    <a class="{{ classname 'db-tag-email' }}" href="mailto:{{email}}">
+    <a class="{{ classname 'db-tag-author__email' }}" href="mailto:{{email}}">
       {{email}}
     </a>
   {{/if}}
   {{#if url}}
-    <a class="{{ classname 'db-tag-url' }}" href="{{url}}" target="_blank">
+    <a class="{{ classname 'db-tag-author__url' }}" href="{{url}}" target="_blank">
       {{url}}
     </a>
   {{/if}}

@@ -6,7 +6,7 @@ import __handleError from './error/handleError';
 import __initEnv from './init/initEnv';
 import __onProcessExit from './process/onProcessExit';
 import __exitCleanup from './process/exitCleanup';
-import __SBlessedComponent from './blessed/SBlessedComponent';
+import __registerSFileClasses from './fs/registerSFileClasses';
 
 /**
  * @name                    index
@@ -30,6 +30,9 @@ __handleError();
 __onProcessExit(() => {
   return __exitCleanup;
 });
+
+// SFile classes
+__registerSFileClasses();
 
 // Logging
 new __SLog(__sugarConfig('log'));

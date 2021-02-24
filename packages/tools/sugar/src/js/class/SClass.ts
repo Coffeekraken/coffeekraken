@@ -312,6 +312,11 @@ function applyInterfaces(ctx: any) {
 
 function applyInterface(ctx: any, name: string, on: any = null) {
   let interfaceObj = getInterfaceObj(ctx, `${name}`);
+  if (!interfaceObj) {
+    throw new Error(
+      `You try to apply the interface named "<yellow>${name}</yellow>" on the context "<cyan>${ctx.name}</cyan>" but it does not exists...`
+    );
+  }
   if (on !== undefined) interfaceObj.on = on;
 
   if (!interfaceObj) {

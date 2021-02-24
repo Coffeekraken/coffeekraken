@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const folderPath_1 = __importDefault(require("./folderPath"));
 const ensureDirSync_1 = __importDefault(require("./ensureDirSync"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
+const replacePathTokens_1 = __importDefault(require("../path/replacePathTokens"));
 /**
  * @name        writeJsonSync
  * @namespace           sugar.node.fs
@@ -14,6 +15,7 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @stabée
  *
  * Write a JSON file. If don't exist, will be created as well as the directory structure if needed... (sync)
+ * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              path           The file path to write
  * @param       {String}              object          The object to write in the JSON file
@@ -34,9 +36,10 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function writeJsonSync(path, data, options = {}) {
+    path = replacePathTokens_1.default(path);
     const folderPath = folderPath_1.default(path);
     ensureDirSync_1.default(folderPath);
     fs_extra_1.default.outputJsonSync(path, data, options);
 }
 exports.default = writeJsonSync;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid3JpdGVKc29uU3luYy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIndyaXRlSnNvblN5bmMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBRWQsOERBQXdDO0FBQ3hDLG9FQUE4QztBQUM5Qyx3REFBNEI7QUFFNUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxTQUFTLGFBQWEsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sR0FBRyxFQUFFO0lBQzdDLE1BQU0sVUFBVSxHQUFHLG9CQUFZLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDdEMsdUJBQWUsQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUM1QixrQkFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0FBQzNDLENBQUM7QUFDRCxrQkFBZSxhQUFhLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid3JpdGVKc29uU3luYy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIndyaXRlSnNvblN5bmMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBRWQsOERBQXdDO0FBQ3hDLG9FQUE4QztBQUM5Qyx3REFBNEI7QUFDNUIsa0ZBQTREO0FBRTVEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQVMsYUFBYSxDQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsT0FBTyxHQUFHLEVBQUU7SUFDN0MsSUFBSSxHQUFHLDJCQUFtQixDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ2pDLE1BQU0sVUFBVSxHQUFHLG9CQUFZLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDdEMsdUJBQWUsQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUM1QixrQkFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0FBQzNDLENBQUM7QUFDRCxrQkFBZSxhQUFhLENBQUMifQ==

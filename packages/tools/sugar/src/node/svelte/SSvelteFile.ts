@@ -10,7 +10,7 @@ import __toString from '../string/toString';
 import __wait from '../time/wait';
 import __getFilename from '../fs/filename';
 import __SScssFile from '../scss/SScssFile';
-import __STsCompiler from '../typescript/compile/STsCompiler';
+import __STsFile from '../typescript/STsFile';
 
 const __svelte = require('svelte/compiler');
 
@@ -244,18 +244,15 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
             toCompile,
             {
               style: async (input) => {
-                // if (
-                //   !input.attributes ||
-                //   !input.attributes.type ||
-                //   input.attributes.type !== 'text/scss'
-                // ) {
-                //   emit('log', {
-                //     value: 'No scss'
-                //   });
-                //   return {
-                //     code: input.content
-                //   };
-                // }
+                if (
+                  !input.attributes ||
+                  !input.attributes.type ||
+                  input.attributes.type !== 'text/scss'
+                ) {
+                  return {
+                    code: input.content
+                  };
+                }
 
                 if (input.content.trim() === '') {
                   return '';
@@ -305,7 +302,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
                 }
 
                 // create a temp file
-                const tmpTsFile = new __SFile('%tmpDir/ts/compile.ts', {
+                const tmpTsFile = new __STsFile('%tmpDir/ts/compile.ts', {
                   file: {
                     checkExistence: false
                   }
@@ -316,20 +313,24 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
                   value: `<yellow>[ts]</yellow> Processing typescript`
                 });
 
-                const compiler = new __STsCompiler();
-                const compilePromise = compiler.compile({
-                  input: [tmpTsFile.path],
-                  rootDir: tmpTsFile.dirPath,
+                const compilePromise = tmpTsFile.compile({
                   save: false,
-                  transpileOnly: true,
                   target: 'browser',
                   map: false
                 });
+                // const compiler = new __STsCompiler();
+                // const compilePromise = compiler.compile({
+                //   input: [tmpTsFile.path],
+                //   rootDir: tmpTsFile.dirPath,
+                //   save: false,
+                //   transpileOnly: true,
+                //   target: 'browser',
+                //   map: false
+                // });
                 pipe(compilePromise, {
                   events: 'error'
                 });
                 const compileRes = await compilePromise;
-
                 if (compileRes.js) {
                   emit('log', {
                     value: `<green>[ts]</green> Typescript processed <green>successfully</green>`
@@ -339,7 +340,6 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
                     code: compileRes.js
                   };
                 } else {
-                  console.log(compileRes);
                   return compileRes;
                 }
               }
@@ -417,12 +417,12 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
             type: 'separator'
           });
 
-          if (params.watch) {
-            emit('notification', {
-              type: 'success',
-              title: `${this.id} compilation success`
-            });
+          emit('notification', {
+            type: 'success',
+            title: `${this.id} compilation success`
+          });
 
+          if (params.watch) {
             emit('log', {
               value: `<blue>[watch] </blue>Watching for changes...`
             });

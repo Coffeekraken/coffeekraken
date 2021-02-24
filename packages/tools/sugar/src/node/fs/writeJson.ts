@@ -3,6 +3,7 @@
 import __folderPath from './folderPath';
 import __ensureDirSync from './ensureDirSync';
 import __fs from 'fs-extra';
+import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        writeJson
@@ -12,6 +13,7 @@ import __fs from 'fs-extra';
  * @stable
  *
  * Write a JSON file. If don't exist, will be created as well as the directory structure if needed... ( (async)
+ * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              path           The file path to write
  * @param       {String}              object          The object to write in the JSON file
@@ -33,6 +35,7 @@ import __fs from 'fs-extra';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function writeJson(path, data, options = {}) {
+  path = __replacePathTokens(path);
   const folderPath = __folderPath(path);
   __ensureDirSync(folderPath);
   return __fs.outputJson(path, data, options);

@@ -10,7 +10,7 @@ exports.default = {
          * @name              input
          * @namespace         config.js.compile
          * @type              String
-         * @default           [config.storage.srcDir]/js/** *.js
+         * @default           [config.storage.srcDir]/js/** / *.js
          *
          * Specify the root folder (or file) to check for .js files to build.
          * Glob patterns can be used
@@ -18,7 +18,7 @@ exports.default = {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        input: '[config.storage.srcDir]/js/index.js',
+        input: '[config.storage.srcDir]/js/**/*.js',
         /**
          * @name              outputDir
          * @namespace         config.js.compile
@@ -44,6 +44,19 @@ exports.default = {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         rootDir: '[config.storage.srcDir]/js',
+        /**
+         * @name        format
+         * @namespace     config.js.compile
+         * @type          String
+         * @values        iife, cjs, esm
+         * @default       esm
+         *
+         * Specify the format you want for your js files
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        format: 'esm',
         /**
          * @name              bundle
          * @namespace         config.js.compile
@@ -191,4 +204,4 @@ exports.default = {
         esbuild: {}
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsianMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMEVBQW9EO0FBRXBELGtCQUFlO0lBQ2IsT0FBTyxFQUFFO1FBQ1A7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxLQUFLLEVBQUUscUNBQXFDO1FBRTVDOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsU0FBUyxFQUFFLDZCQUE2QjtRQUV4Qzs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLDRCQUE0QjtRQUVyQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsR0FBRyxFQUFFLElBQUk7UUFFVDs7Ozs7Ozs7Ozs7V0FXRztRQUNILElBQUksRUFBRSxLQUFLO1FBRVg7Ozs7Ozs7Ozs7V0FVRztRQUNILGFBQWEsRUFBRSxJQUFJO1FBRW5COzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsS0FBSztRQUViOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQ0osdUdBQXVHO1FBRXpHOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsSUFBSTtRQUVWOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsS0FBSztRQUVaOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsS0FBSztRQUVaOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsbUJBQVcsRUFBRTtRQUVuQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLElBQUk7UUFFVjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLEVBQUU7S0FDWjtDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsianMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMEVBQW9EO0FBRXBELGtCQUFlO0lBQ2IsT0FBTyxFQUFFO1FBQ1A7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxLQUFLLEVBQUUsb0NBQW9DO1FBRTNDOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsU0FBUyxFQUFFLDZCQUE2QjtRQUV4Qzs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLDRCQUE0QjtRQUVyQzs7Ozs7Ozs7Ozs7V0FXRztRQUNILE1BQU0sRUFBRSxLQUFLO1FBRWI7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxLQUFLO1FBRWI7Ozs7Ozs7Ozs7V0FVRztRQUNILEdBQUcsRUFBRSxJQUFJO1FBRVQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxJQUFJLEVBQUUsS0FBSztRQUVYOzs7Ozs7Ozs7O1dBVUc7UUFDSCxhQUFhLEVBQUUsSUFBSTtRQUVuQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUNKLHVHQUF1RztRQUV6Rzs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLElBQUk7UUFFVjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLEtBQUs7UUFFWjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLEtBQUs7UUFFWjs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLG1CQUFXLEVBQUU7UUFFbkI7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxJQUFJO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxFQUFFO0tBQ1o7Q0FDRixDQUFDIn0=

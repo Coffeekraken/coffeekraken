@@ -3,6 +3,7 @@
 import __folderPath from './folderPath';
 import __ensureDirSync from './ensureDirSync';
 import __fs from 'fs-extra';
+import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        writeFile
@@ -12,6 +13,7 @@ import __fs from 'fs-extra';
  * @stable
  *
  * CWrite a file. If don't exist, will be created as well as the directory structure if needed... ( (async)
+ * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              path           The file path to write
  * @param       {String}              data          The data to write in the file
@@ -33,6 +35,7 @@ import __fs from 'fs-extra';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function writeFile(path, data, options = {}) {
+  path = __replacePathTokens(path);
   const folderPath = __folderPath(path);
   __ensureDirSync(folderPath);
   return __fs.outputFile(path, data, options);

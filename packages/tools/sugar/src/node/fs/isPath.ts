@@ -2,6 +2,7 @@
 
 import __isValidPath from 'is-valid-path';
 import __fs from 'fs';
+import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name                            isPath
@@ -10,6 +11,7 @@ import __fs from 'fs';
  * @stable
  *
  * Check if the passed string is a valid path or not
+ * Support the ```replacePathTokens``` tokens
  *
  * @param         {String}            path              The path to check
  * @param         {Boolean}           [checkExistence=false]      Specify if you want to check that the passed path actually exist
@@ -28,6 +30,8 @@ import __fs from 'fs';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isPath(path, checkExistence = false) {
+  path = __replacePathTokens(path);
+
   // check if we have some /
   if (!path.includes('/')) return false;
 

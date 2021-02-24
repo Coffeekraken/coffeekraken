@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
+import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        emptyDirSync
@@ -9,6 +10,7 @@ import __fs from 'fs-extra';
  * @stable
  *
  * Empty a directory (sync)
+ * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              dir           The directory path to empty
  *
@@ -27,6 +29,7 @@ import __fs from 'fs-extra';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function emptyDirSync(dir) {
+  dir = __replacePathTokens(dir);
   __fs.emptyDirSync(dir);
 }
 export default emptyDirSync;

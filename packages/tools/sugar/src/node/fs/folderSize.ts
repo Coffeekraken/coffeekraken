@@ -2,6 +2,7 @@
 
 import __getSize from 'get-folder-size';
 import __filesize from 'filesize';
+import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name                            folderSize
@@ -11,6 +12,7 @@ import __filesize from 'filesize';
  * @stable
  *
  * Calculate the size of the passed folder and return it through a promise, either in raw format, either in human readdable one...
+ * Support the ```replacePathTokens``` tokens
  *
  * @param             {String}                folderPath                  The folder path to calculate the size
  * @param             {Boolean}               [rawFormat=false]           If true, will return the folder size in raw format
@@ -30,6 +32,8 @@ import __filesize from 'filesize';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function folderSize(folderPath, rawFormat = false) {
+  folderPath = __replacePathTokens(folderPath);
+
   return new Promise(({ resolve, reject }) => {
     __getSize(folderPath, (error, size) => {
       if (error) throw error;

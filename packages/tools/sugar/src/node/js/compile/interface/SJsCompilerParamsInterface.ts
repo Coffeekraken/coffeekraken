@@ -34,6 +34,12 @@ class SJsCompilerParamsInterface extends __SInterface {
       alias: 'r',
       default: __sugarConfig('js.compile.rootDir')
     },
+    format: {
+      type: 'String',
+      alias: 'f',
+      values: ['iife', 'cjs', 'esm'],
+      default: __sugarConfig('js.compile.format')
+    },
     bundle: {
       type: 'Boolean',
       alias: 'b',

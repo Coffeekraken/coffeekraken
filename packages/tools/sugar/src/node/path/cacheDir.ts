@@ -1,8 +1,7 @@
 // @ts-nocheck
 
 import __sugarConfig from '../config/sugar';
-import __ensureDirSync from '../fs/ensureDirSync';
-
+import __fs from 'fs-extra';
 /**
  * @name                            cacheDir
  * @namespace               sugar.node.path
@@ -38,7 +37,7 @@ export default function (settings: ICacheDirSettings = {}) {
   };
   const cacheDir = __sugarConfig('storage.cacheDir');
   if (cacheDir !== undefined) {
-    __ensureDirSync(cacheDir);
+    __fs.ensureDirSync(cacheDir);
     return cacheDir;
   }
   return undefined;

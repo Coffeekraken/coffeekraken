@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
+import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        ensureDir
@@ -10,6 +11,7 @@ import __fs from 'fs-extra';
  * @stable
  *
  * Ensure that the passed directory exists. If not, will be created recursively... (async)
+ * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              dir           The directory to ensure that it exists...
  * @return      {Promise}                           A promise that will be resolved once the directory has been created if needed...
@@ -29,6 +31,7 @@ import __fs from 'fs-extra';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function ensureDir(dir) {
+  dir = __replacePathTokens(dir);
   return __fs.ensureDir(dir);
 }
 export default ensureDir;

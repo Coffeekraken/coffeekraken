@@ -25,6 +25,8 @@ import __ensureDirSync from '../../fs/ensureDirSync';
 import __SScssFile from '../SScssFile';
 import __express from 'express';
 import __chokidar from 'chokidar';
+import __SDuration from '../../time/SDuration';
+import __fsPool from '../../fs/pool';
 
 import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';
 import { ISCompiler } from '../../compiler/SCompiler';
@@ -161,7 +163,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
     params: ISScssCompilerParams,
     settings: Partial<ISScssCompilerSettings> = {}
   ) {
-    return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
+    return new __SPromise(async ({ resolve, reject, pipe, emit, on }) => {
       settings = __deepMerge(this.scssCompilerSettings, {}, settings);
 
       let input = Array.isArray(params.input) ? params.input : [params.input];
@@ -174,94 +176,63 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
         params.stripComments = true;
       }
 
-      const resultsObj = {};
+      const duration = new __SDuration();
 
-      let filesPaths: string[] = [];
-      let scssFiles: Record<string, __SScssFile> = {};
+      const pool = __fsPool(input, {
+        watch: params.watch
+      });
+
+      on('cancel', () => {
+        console.log('CAN');
+        pool.cancel();
+      });
 
       if (params.watch) {
-        __chokidar.watch(input).on('change', async (path) => {
-          let file: __SScssFile = scssFiles[path];
-          if (!file) {
-            file = new __SScssFile(path, {
-              scssFile: {
-                compile: settings
-              }
-            });
-            scssFiles[path] = file;
-            pipe(file);
-          }
-          // compile the file
-          await file.compile(
-            {
-              ...params,
-              watch: false
-            },
-            settings
-          );
-
-          emit('log', {
-            type: 'separator'
-          });
-          emit('log', {
-            value: `<blue>[watch]</blue> Watching for changes...`
-          });
-        });
-
         emit('log', {
           value: `<blue>[watch]</blue> Watching for changes...`
         });
-      } else {
-        input = __absolute(input);
-        // process inputs
-        input.forEach((inputStr) => {
-          if (__isGlob(inputStr)) {
-            filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
-          } else {
-            filesPaths.push(inputStr);
-          }
-        });
-        filesPaths.forEach((path) => {
-          const file = new __SScssFile(path, {
-            scssFile: {
-              compile: settings
-            }
-          });
-          scssFiles[file.path] = file;
-          pipe(file);
-        });
+      }
 
-        const resultsObj: Record<string, string> = {};
-        for (let i = 0; i < Object.keys(scssFiles).length; i++) {
-          const file = scssFiles[Object.keys(scssFiles)[i]];
-          // @todo    {Clean}     remove the ts-ignore
-          // @ts-ignore
-          const resPromise = file.compile(
+      pool.on(params.watch ? 'update' : 'files', async (files) => {
+        files = Array.isArray(files) ? files : [files];
+
+        const resultsObj = {};
+        let aggregateStrArray: string[] = [];
+
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const compilePromise = file.compile(
             {
               ...params,
               watch: false
             },
             settings
           );
-          const res = await resPromise;
-          resultsObj[file.path] = res.css;
+          try {
+            pipe(compilePromise);
+            let compileRes = await compilePromise;
+            resultsObj[file.path] = compileRes;
+            aggregateStrArray.push(compileRes.css);
+            emit('file', compileRes);
+          } catch (e) {
+            emit('warn', {
+              value: e.toString()
+            });
+          }
         }
 
-        let aggregateStrArray: string[] = [];
-        Object.keys(resultsObj).forEach((path) => {
-          const cssRes = resultsObj[path];
-          aggregateStrArray.push(cssRes);
-        });
-
-        const startTime = Date.now();
-        resolve({
-          files: resultsObj,
-          css: aggregateStrArray.join('\n'),
-          startTime: startTime,
-          endTime: Date.now(),
-          duration: Date.now() - startTime
-        });
-      }
+        if (params.watch) {
+          emit('log', {
+            value: `<blue>[watch]</blue> Watching for changes...`
+          });
+        } else {
+          resolve({
+            files: resultsObj,
+            css: aggregateStrArray.join('\n'),
+            ...duration.end()
+          });
+        }
+      });
     });
   }
 }

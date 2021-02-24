@@ -2,7 +2,7 @@
 
 import __tmpDir from 'temp-dir';
 import __sugarConfig from '../config/sugar';
-import __ensureDirSync from '../fs/ensureDirSync';
+import __fs from 'fs-extra';
 
 /**
  * @name                            tmpDir
@@ -46,11 +46,11 @@ const fn: ITmpDir = function (settings: ITmpDirSettings = {}) {
   if (settings.scope === 'local') {
     const tmpDir = __sugarConfig('storage.tmpDir');
     if (tmpDir !== undefined) {
-      __ensureDirSync(tmpDir);
+      __fs.ensureDirSync(tmpDir);
       return tmpDir;
     }
   }
-  __ensureDirSync(__tmpDir);
+  __fs.ensureDirSync(__tmpDir);
   return __tmpDir;
 };
 export default fn;

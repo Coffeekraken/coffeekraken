@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
+import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        ensureFile
@@ -10,6 +11,7 @@ import __fs from 'fs-extra';
  * @stable
  *
  * Ensure that the passed file exists. If not, it will be created... (async)
+ * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              file           The file to ensure that it exists...
  * @return      {Promise}                           A promise that will be resolved once the file has been created if needed...
@@ -29,6 +31,7 @@ import __fs from 'fs-extra';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function ensureFile(file) {
+  file = __replacePathTokens(file);
   return __fs.ensureFile(file);
 }
 export default ensureFile;

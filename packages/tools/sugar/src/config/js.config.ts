@@ -6,7 +6,7 @@ export default {
      * @name              input
      * @namespace         config.js.compile
      * @type              String
-     * @default           [config.storage.srcDir]/js/** *.js
+     * @default           [config.storage.srcDir]/js/** / *.js
      *
      * Specify the root folder (or file) to check for .js files to build.
      * Glob patterns can be used
@@ -14,7 +14,7 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: '[config.storage.srcDir]/js/index.js',
+    input: '[config.storage.srcDir]/js/**/*.js',
 
     /**
      * @name              outputDir
@@ -42,6 +42,20 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     rootDir: '[config.storage.srcDir]/js',
+
+    /**
+     * @name        format
+     * @namespace     config.js.compile
+     * @type          String
+     * @values        iife, cjs, esm
+     * @default       esm
+     *
+     * Specify the format you want for your js files
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    format: 'esm',
 
     /**
      * @name              bundle

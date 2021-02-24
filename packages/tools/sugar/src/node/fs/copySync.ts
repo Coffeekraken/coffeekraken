@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
+import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        copySync
@@ -9,6 +10,7 @@ import __fs from 'fs-extra';
  * @stable
  *
  * Copy a file or directory (sync)
+ * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              src           The source path to copy
  * @param       {String}              dest          The destination path
@@ -28,6 +30,8 @@ import __fs from 'fs-extra';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function copySync(src, dest) {
+  src = __replacePathTokens(src);
+  dest = __replacePathTokens(dest);
   __fs.copySync(src, dest);
 }
 export default copySync;

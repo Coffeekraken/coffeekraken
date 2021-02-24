@@ -159,7 +159,7 @@ exports.default = {
          */
         stacks: undefined,
         /**
-         * @name                tsconfig
+         * @name                compilerOptions
          * @namespace           config.ts.compile
          * @type                Object
          * @default             {}
@@ -169,24 +169,19 @@ exports.default = {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        tsconfig: {
-            include: [],
-            exclude: ['**/*.js'],
-            files: [],
-            compilerOptions: {
-                allowJs: false,
-                strict: true,
-                esModuleInterop: true,
-                skipLibCheck: true,
-                forceConsistentCasingInFileNames: false,
-                noImplicitAny: false,
-                noStrictGenericChecks: false,
-                allowSyntheticDefaultImports: true,
-                // incremental: true,
-                // tsBuildInfoFile: '[config.storage.tmpDir]/ts/.tsbuildinfo',
-                types: ['node'],
-                moduleResolution: 'node'
-            }
+        compilerOptions: {
+            allowJs: false,
+            strict: true,
+            esModuleInterop: true,
+            skipLibCheck: true,
+            forceConsistentCasingInFileNames: false,
+            noImplicitAny: false,
+            noStrictGenericChecks: false,
+            allowSyntheticDefaultImports: true,
+            // incremental: true,
+            // tsBuildInfoFile: '[config.storage.tmpDir]/ts/.tsbuildinfo',
+            types: ['node'],
+            moduleResolution: 'node'
         }
     },
     targets: {
@@ -198,16 +193,16 @@ exports.default = {
             target: 'es6',
             module: 'commonjs'
         }
-    },
-    stacks: {
-        browser: {
-            include: ['src/js/**/*.ts'],
-            compilerOptions: '[config.ts.targets.browser]'
-        },
-        node: {
-            include: ['src/cli/**/*.ts', 'src/node/**/*.ts'],
-            compilerOptions: '[config.ts.targets.node]'
-        }
     }
+    // stacks: {
+    //   browser: {
+    //     include: ['src/js/**/*.ts'],
+    //     compilerOptions: '[config.ts.targets.browser]'
+    //   },
+    //   node: {
+    //     include: ['src/cli/**/*.ts', 'src/node/**/*.ts'],
+    //     compilerOptions: '[config.ts.targets.node]'
+    //   }
+    // }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidHMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWU7SUFDYixPQUFPLEVBQUU7UUFDUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEtBQUssRUFBRSxvQ0FBb0M7UUFFM0M7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxTQUFTLEVBQUUsU0FBUztRQUVwQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLDRCQUE0QjtRQUVyQzs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxHQUFHLEVBQUUsSUFBSTtRQUVUOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsSUFBSSxFQUFFLEtBQUs7UUFFWDs7Ozs7Ozs7OztXQVVHO1FBQ0gsYUFBYSxFQUFFLEtBQUs7UUFFcEI7Ozs7Ozs7Ozs7Ozs7V0FhRztRQUNILE1BQU0sRUFBRSxLQUFLO1FBRWI7Ozs7Ozs7Ozs7Ozs7V0FhRztRQUNILE1BQU0sRUFDSiwwR0FBMEc7UUFFNUc7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxJQUFJO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxLQUFLO1FBRVo7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxNQUFNLEVBQUUsU0FBUztRQUVqQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLFNBQVM7UUFFakI7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRTtZQUNSLE9BQU8sRUFBRSxFQUFFO1lBQ1gsT0FBTyxFQUFFLENBQUMsU0FBUyxDQUFDO1lBQ3BCLEtBQUssRUFBRSxFQUFFO1lBQ1QsZUFBZSxFQUFFO2dCQUNmLE9BQU8sRUFBRSxLQUFLO2dCQUNkLE1BQU0sRUFBRSxJQUFJO2dCQUNaLGVBQWUsRUFBRSxJQUFJO2dCQUNyQixZQUFZLEVBQUUsSUFBSTtnQkFDbEIsZ0NBQWdDLEVBQUUsS0FBSztnQkFDdkMsYUFBYSxFQUFFLEtBQUs7Z0JBQ3BCLHFCQUFxQixFQUFFLEtBQUs7Z0JBQzVCLDRCQUE0QixFQUFFLElBQUk7Z0JBQ2xDLHFCQUFxQjtnQkFDckIsOERBQThEO2dCQUM5RCxLQUFLLEVBQUUsQ0FBQyxNQUFNLENBQUM7Z0JBQ2YsZ0JBQWdCLEVBQUUsTUFBTTthQUN6QjtTQUNGO0tBQ0Y7SUFFRCxPQUFPLEVBQUU7UUFDUCxPQUFPLEVBQUU7WUFDUCxNQUFNLEVBQUUsS0FBSztZQUNiLE1BQU0sRUFBRSxRQUFRO1NBQ2pCO1FBQ0QsSUFBSSxFQUFFO1lBQ0osTUFBTSxFQUFFLEtBQUs7WUFDYixNQUFNLEVBQUUsVUFBVTtTQUNuQjtLQUNGO0lBRUQsTUFBTSxFQUFFO1FBQ04sT0FBTyxFQUFFO1lBQ1AsT0FBTyxFQUFFLENBQUMsZ0JBQWdCLENBQUM7WUFDM0IsZUFBZSxFQUFFLDZCQUE2QjtTQUMvQztRQUNELElBQUksRUFBRTtZQUNKLE9BQU8sRUFBRSxDQUFDLGlCQUFpQixFQUFFLGtCQUFrQixDQUFDO1lBQ2hELGVBQWUsRUFBRSwwQkFBMEI7U0FDNUM7S0FDRjtDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidHMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWU7SUFDYixPQUFPLEVBQUU7UUFDUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEtBQUssRUFBRSxvQ0FBb0M7UUFFM0M7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxTQUFTLEVBQUUsU0FBUztRQUVwQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLDRCQUE0QjtRQUVyQzs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxHQUFHLEVBQUUsSUFBSTtRQUVUOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsSUFBSSxFQUFFLEtBQUs7UUFFWDs7Ozs7Ozs7OztXQVVHO1FBQ0gsYUFBYSxFQUFFLEtBQUs7UUFFcEI7Ozs7Ozs7Ozs7Ozs7V0FhRztRQUNILE1BQU0sRUFBRSxLQUFLO1FBRWI7Ozs7Ozs7Ozs7Ozs7V0FhRztRQUNILE1BQU0sRUFDSiwwR0FBMEc7UUFFNUc7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxJQUFJO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxLQUFLO1FBRVo7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxNQUFNLEVBQUUsU0FBUztRQUVqQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLFNBQVM7UUFFakI7Ozs7Ozs7Ozs7V0FVRztRQUNILGVBQWUsRUFBRTtZQUNmLE9BQU8sRUFBRSxLQUFLO1lBQ2QsTUFBTSxFQUFFLElBQUk7WUFDWixlQUFlLEVBQUUsSUFBSTtZQUNyQixZQUFZLEVBQUUsSUFBSTtZQUNsQixnQ0FBZ0MsRUFBRSxLQUFLO1lBQ3ZDLGFBQWEsRUFBRSxLQUFLO1lBQ3BCLHFCQUFxQixFQUFFLEtBQUs7WUFDNUIsNEJBQTRCLEVBQUUsSUFBSTtZQUNsQyxxQkFBcUI7WUFDckIsOERBQThEO1lBQzlELEtBQUssRUFBRSxDQUFDLE1BQU0sQ0FBQztZQUNmLGdCQUFnQixFQUFFLE1BQU07U0FDekI7S0FDRjtJQUVELE9BQU8sRUFBRTtRQUNQLE9BQU8sRUFBRTtZQUNQLE1BQU0sRUFBRSxLQUFLO1lBQ2IsTUFBTSxFQUFFLFFBQVE7U0FDakI7UUFDRCxJQUFJLEVBQUU7WUFDSixNQUFNLEVBQUUsS0FBSztZQUNiLE1BQU0sRUFBRSxVQUFVO1NBQ25CO0tBQ0Y7SUFFRCxZQUFZO0lBQ1osZUFBZTtJQUNmLG1DQUFtQztJQUNuQyxxREFBcUQ7SUFDckQsT0FBTztJQUNQLFlBQVk7SUFDWix3REFBd0Q7SUFDeEQsa0RBQWtEO0lBQ2xELE1BQU07SUFDTixJQUFJO0NBQ0wsQ0FBQyJ9

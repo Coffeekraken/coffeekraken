@@ -13,6 +13,8 @@
         console.log('MOUNTED');
 	});
 
+    console.log('PLOP');
+
 	// import __SSvelteComponent from '@coffeekraken/sugar/js/svelte/SSvelteComponent';
 
 	// class SPrettierComponent extends __SSvelteComponent {
@@ -25,8 +27,8 @@
 
 	// new SPrettierComponent();
 
-    import prettier from "https://unpkg.com/prettier@2.2.1/esm/standalone.mjs";
-  import parserBabel from "https://unpkg.com/prettier@2.2.1/esm/parser-babel.mjs";
+//     import prettier from "https://unpkg.com/prettier@2.2.1/esm/standalone.mjs";
+//   import parserBabel from "https://unpkg.com/prettier@2.2.1/esm/parser-babel.mjs";
 
 
 
@@ -38,7 +40,7 @@
 </script>
 
 <style type="text/scss">
-    
+    background: red;
 </style>
 
 <div>

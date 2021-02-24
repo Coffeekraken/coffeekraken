@@ -1,8 +1,7 @@
 // @ts-nocheck
 
 import __sugarConfig from '../config/sugar';
-import __ensureDirSync from '../fs/ensureDirSync';
-
+import __fs from 'fs-extra';
 /**
  * @name                            distDir
  * @namespace               sugar.node.path
@@ -38,7 +37,7 @@ export default function (settings: IDistDirSettings = {}) {
   };
   const distDir = __sugarConfig('storage.distDir');
   if (distDir !== undefined) {
-    __ensureDirSync(distDir);
+    __fs.ensureDirSync(distDir);
     return distDir;
   }
   return undefined;

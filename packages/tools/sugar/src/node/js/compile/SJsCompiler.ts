@@ -1,3 +1,5 @@
+import __fsPool from '../../fs/pool';
+import __SDuration from '../../time/SDuration';
 import __extension from '../../fs/extension';
 import __SCache from '../../cache/SCache';
 import __SFileCache from '../../cache/SFileCache';
@@ -31,6 +33,7 @@ export interface ISJsCompilerParams {
   outputDir: string;
   rootDir: string;
   bundle: boolean;
+  format: 'iife' | 'cjs' | 'esm';
   map: boolean;
   prod: boolean;
   stripComments: boolean;
@@ -38,9 +41,6 @@ export interface ISJsCompilerParams {
   banner: string;
   save: boolean;
   watch: boolean;
-  serve: boolean;
-  port: number;
-  host: string;
   esbuild: any;
 }
 
@@ -199,7 +199,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
     params: ISJsCompilerParams,
     settings: Partial<ISJsCompilerSettings> = {}
   ) {
-    return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
+    return new __SPromise(async ({ resolve, reject, pipe, emit, on }) => {
       const compileSettings = __deepMerge(
         this.jsCompilerSettings,
         {},
@@ -215,129 +215,62 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
         params.map = false;
       }
 
-      const resultsObj = {};
+      const duration = new __SDuration();
 
-      let filesPaths: string[] = [];
-
-      // make input absolute
-      input = __absolute(input);
-
-      // process inputs
-      input.forEach((inputStr) => {
-        if (__isGlob(inputStr)) {
-          filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
-        } else {
-          filesPaths.push(inputStr);
-        }
+      const pool = __fsPool(input, {
+        watch: params.watch
       });
 
-      const serverPromise = new Promise((serverResolve, serverReject) => {
-        if (params.serve && !SJsCompiler._serveServer) {
-          const server = __express();
-
-          filesPaths.forEach((path) => {
-            const filename = __getFilename(path);
-
-            const relPath = __path.relative(params.rootDir, path);
-            const destPath = __path.resolve(params.outputDir, relPath);
-
-            server.get(`/${filename}`, (req, res) => {
-              const content = __fs.readFileSync(destPath, 'utf8');
-              res.type('text/javascript');
-              res.status(200);
-              res.send(content);
-            });
-          });
-
-          const serverLogStrArray: string[] = [
-            `Your <yellow>Js</yellow> server is <green>up and running</green>:`,
-            '',
-            `- Hostname        : <yellow>${params.host}</yellow>`,
-            `- Port            : <yellow>${params.port}</yellow>`,
-            `- URL's           : <cyan>http://${params.host}:${params.port}</cyan>`
-          ];
-
-          filesPaths.forEach((path) => {
-            serverLogStrArray.push(
-              `                  : <cyan>${`http://${params.host}:${
-                params.port
-              }/${__getFilename(path)}`.trim()} </cyan>`
-            );
-          });
-
-          server
-            .listen(params.port, () => {
-              emit('log', {
-                type: 'time'
-              });
-              emit('log', {
-                clear: true,
-                mb: 1,
-                type: 'heading',
-                value: serverLogStrArray.join('\n')
-              });
-
-              setTimeout(() => {
-                serverResolve(true);
-              }, 500);
-            })
-            .on('error', (e) => {
-              SJsCompiler._serveServer = undefined;
-              const string = e.toString();
-              reject(string);
-            });
-
-          SJsCompiler._serveServer = server;
-        } else {
-          serverResolve(true);
-        }
+      on('cancel', () => {
+        pool.cancel();
       });
 
-      await serverPromise;
+      if (params.watch) {
+        emit('log', {
+          value: `<blue>[watch]</blue> Watching for changes...`
+        });
+      }
 
-      const startTime = Date.now();
+      pool.on(params.watch ? 'update' : 'files', async (files) => {
+        files = Array.isArray(files) ? files : [files];
 
-      for (let i = 0; i < filesPaths.length; i++) {
-        let filePath = filesPaths[i];
-        let file = new __SJsFile(filePath, {
-          jsFile: {
-            compile: compileSettings
+        const resultsObj = {};
+        let aggregateStrArray: string[] = [];
+
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const compilePromise = file.compile(
+            {
+              ...params,
+              watch: false
+            },
+            settings
+          );
+          try {
+            pipe(compilePromise);
+            let compileRes = await compilePromise;
+            resultsObj[file.path] = compileRes;
+            aggregateStrArray.push(compileRes.js);
+            emit('file', compileRes);
+          } catch (e) {
+            emit('warn', {
+              value: e.toString()
+            });
           }
-        });
-        pipe(file);
+        }
 
-        // @todo    {Clean}     remove the ts-ignore
-        // @ts-ignore
-        const resPromise = file.compile(params, compileSettings);
-        const res = await resPromise;
-        resultsObj[file.path] = res;
-      }
-
-      // aggregate the compiled files css
-      let aggregateStrArray: string[] = [];
-      Object.keys(resultsObj).forEach((path) => {
-        const jsRes = resultsObj[path];
-        aggregateStrArray.push(jsRes.js);
+        if (params.watch) {
+          emit('log', {
+            value: `<blue>[watch]</blue> Watching for changes...`
+          });
+        } else {
+          resolve({
+            files: resultsObj,
+            js: aggregateStrArray.join('\n'),
+            ...duration.end()
+          });
+        }
       });
-
-      // resolve with the compilation result
-      if (!params.watch) {
-        resolve({
-          files: resultsObj,
-          js: aggregateStrArray.join('\n'),
-          startTime: startTime,
-          endTime: Date.now(),
-          duration: Date.now() - startTime
-        });
-      } else {
-        emit('files', {
-          files: resultsObj,
-          js: aggregateStrArray.join('\n'),
-          startTime: startTime,
-          endTime: Date.now(),
-          duration: Date.now() - startTime
-        });
-      }
     });
   }
 }

@@ -170,7 +170,7 @@ export default {
     stacks: undefined,
 
     /**
-     * @name                tsconfig
+     * @name                compilerOptions
      * @namespace           config.ts.compile
      * @type                Object
      * @default             {}
@@ -180,24 +180,19 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    tsconfig: {
-      include: [],
-      exclude: ['**/*.js'],
-      files: [],
-      compilerOptions: {
-        allowJs: false,
-        strict: true,
-        esModuleInterop: true,
-        skipLibCheck: true,
-        forceConsistentCasingInFileNames: false,
-        noImplicitAny: false,
-        noStrictGenericChecks: false,
-        allowSyntheticDefaultImports: true,
-        // incremental: true,
-        // tsBuildInfoFile: '[config.storage.tmpDir]/ts/.tsbuildinfo',
-        types: ['node'],
-        moduleResolution: 'node'
-      }
+    compilerOptions: {
+      allowJs: false,
+      strict: true,
+      esModuleInterop: true,
+      skipLibCheck: true,
+      forceConsistentCasingInFileNames: false,
+      noImplicitAny: false,
+      noStrictGenericChecks: false,
+      allowSyntheticDefaultImports: true,
+      // incremental: true,
+      // tsBuildInfoFile: '[config.storage.tmpDir]/ts/.tsbuildinfo',
+      types: ['node'],
+      moduleResolution: 'node'
     }
   },
 
@@ -210,16 +205,16 @@ export default {
       target: 'es6',
       module: 'commonjs'
     }
-  },
-
-  stacks: {
-    browser: {
-      include: ['src/js/**/*.ts'],
-      compilerOptions: '[config.ts.targets.browser]'
-    },
-    node: {
-      include: ['src/cli/**/*.ts', 'src/node/**/*.ts'],
-      compilerOptions: '[config.ts.targets.node]'
-    }
   }
+
+  // stacks: {
+  //   browser: {
+  //     include: ['src/js/**/*.ts'],
+  //     compilerOptions: '[config.ts.targets.browser]'
+  //   },
+  //   node: {
+  //     include: ['src/cli/**/*.ts', 'src/node/**/*.ts'],
+  //     compilerOptions: '[config.ts.targets.node]'
+  //   }
+  // }
 };

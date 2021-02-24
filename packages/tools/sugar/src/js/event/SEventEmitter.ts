@@ -136,7 +136,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       events: '*',
       prefixEvent: false,
       processor: undefined,
-      exclude: ['finally', 'resolve', 'reject', 'cancel'],
+      exclude: ['finally', 'resolve', 'reject', 'cancel', 'catch'],
       filter: undefined,
       ...(settings || {})
     };

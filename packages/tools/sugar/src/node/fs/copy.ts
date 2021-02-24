@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __replacePathTokens from '../path/replacePathTokens';
 import __fs from 'fs-extra';
 
 /**
@@ -10,6 +11,7 @@ import __fs from 'fs-extra';
  * @stable
  *
  * Copy a file or directory (async)
+ * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              src           The source path to copy
  * @param       {String}              dest          The destination path
@@ -30,6 +32,8 @@ import __fs from 'fs-extra';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function copy(src, dest) {
+  src = __replacePathTokens(src);
+  dest = __replacePathTokens(dest);
   return __fs.copy(src, dest);
 }
 export default copy;

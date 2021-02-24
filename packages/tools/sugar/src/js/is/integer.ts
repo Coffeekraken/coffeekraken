@@ -26,6 +26,7 @@
  */
 function isInteger(data) {
   return (
+    typeof data === 'number' &&
     !isNaN(data) &&
     (function (x) {
       return (x | 0) === x;

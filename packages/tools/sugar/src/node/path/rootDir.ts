@@ -1,8 +1,7 @@
 // @ts-nocheck
 
 import __sugarConfig from '../config/sugar';
-import __ensureDirSync from '../fs/ensureDirSync';
-
+import __fs from 'fs-extra';
 /**
  * @name                            rootDir
  * @namespace           sugar.node.path
@@ -44,7 +43,7 @@ export default function (settings: IRootDirSettings = {}) {
   if (settings.scope === 'local') {
     const rootDir = __sugarConfig('storage.rootDir');
     if (rootDir !== undefined) {
-      __ensureDirSync(rootDir);
+      __fs.ensureDirSync(rootDir);
       return rootDir;
     }
   }

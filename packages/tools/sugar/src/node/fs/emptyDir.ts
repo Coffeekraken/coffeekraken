@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
+import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        emptyDir
@@ -10,6 +11,7 @@ import __fs from 'fs-extra';
  * @stable
  *
  * Empty a directory (async)
+ * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              dir           The directory path to empty
  * @return      {Promise}                           A promise that will be resolved once the directory has been cleaned
@@ -29,6 +31,7 @@ import __fs from 'fs-extra';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function emptyDir(dir) {
+  dir = __replacePathTokens(dir);
   return __fs.emptyDir(dir);
 }
 export default emptyDir;

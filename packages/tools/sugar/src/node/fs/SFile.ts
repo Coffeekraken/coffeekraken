@@ -12,12 +12,7 @@ import __SError from '../error/SError';
 import __packageRoot from '../path/packageRoot';
 import __ensureDirSync from './ensureDirSync';
 import __SInterface from '../interface/SInterface';
-import __tmpDir from '../path/tmpDir';
-import __localDir from '../path/localDir';
-import __rootDir from '../path/rootDir';
-import __srcDir from '../path/srcDir';
-import cacheD from '../path/distDir';
-import __cacheDir from '../path/cacheDir';
+import __replacePathTokens from '../path/replacePathTokens';
 
 // import SFileCtorSettingsInterface from './interface/SFileCtorSettingsInterface';
 import SFileSettingsInterface from './interface/SFileSettingsInterface';
@@ -142,6 +137,7 @@ export interface ISFileCtor {
 }
 
 export interface ISFile {
+  new (filepath: string, settings?: ISFileCtorSettings);
   name: string;
   path: string;
   relPath: string;
@@ -160,6 +156,7 @@ export interface ISFile {
   writeSync: ISFileWriteSyncFn;
 }
 
+// @ts-ignore
 class SFile extends __SEventEmitter implements ISFile {
   // static interfaces = {
   //   // settings: {
@@ -169,6 +166,68 @@ class SFile extends __SEventEmitter implements ISFile {
   //   //   // class: SFileCtorSettingsInterface
   //   // }
   // };
+
+  /**
+   * @name        _registeredClasses
+   * @type        Record<string, SFile>
+   * @static
+   *
+   * Store the registered classes map
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _registeredClasses: Record<string, ISFile> = {};
+
+  /**
+   * @name        registerClass
+   * @type      Function
+   * @static
+   *
+   * This method allows you to register an SFile(...) class with an extension
+   * to allows you to instanciate the best one using the ```instanciate``` static
+   * method.
+   *
+   * @param     {String|Array<String>}      extension     Extension(s) to register. Can be a string, a comma separated string or an array of strings
+   * @param     {SFile}                     cls           The class to associate to this/these extension(s)
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static registerClass(extension: string | string[], cls: any) {
+    let exts: string[] = [];
+    if (Array.isArray(extension)) exts = extension;
+    else if (typeof extension === 'string') {
+      exts = extension.split(',').map((l) => l.trim());
+    }
+    exts.forEach((ext) => {
+      this._registeredClasses[ext.toLowerCase()] = cls;
+    });
+  }
+
+  /**
+   * @name        instanciate
+   * @type      Function
+   * @static
+   *
+   * This function take as parameter a file path and an object of settings
+   * to instanciate the proper SFile(...) class depending on the file extension.
+   * If the extension does not correspond to any registered SFile(...) class,
+   * the file will be instanciated using the SFile class itself.
+   *
+   * To register a new SFile(...) class mapping, use the ```registerClass``` static
+   * method.
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static instanciate(path: string, settings?: ISFileCtorSettings): SFile {
+    const ext = __extension(path).toLowerCase();
+    if (this._registeredClasses[ext]) {
+      return new this._registeredClasses[ext](path, settings);
+    }
+    return new SFile(path, settings);
+  }
 
   /**
    * @name        name
@@ -202,14 +261,7 @@ class SFile extends __SEventEmitter implements ISFile {
    */
   _path: string;
   get path(): string {
-    let path = this._path;
-    path = path.replace('%tmpDir', __tmpDir());
-    path = path.replace('%localDir', __localDir());
-    path = path.replace('%cacheDir', __cacheDir());
-    path = path.replace('%rootDir', __rootDir());
-    path = path.replace('%srcDir', __srcDir());
-    path = path.replace('%distDir', cacheD());
-    path = path.replace(/\/\//gm, '/');
+    let path = <string>__replacePathTokens(this._path);
 
     if (
       !__path.isAbsolute(path) &&
@@ -339,6 +391,8 @@ class SFile extends __SEventEmitter implements ISFile {
       )
     );
 
+    this._path = filepath;
+
     Object.defineProperty(this, '_stats', {
       enumerable: false,
       configurable: true,
@@ -351,7 +405,6 @@ class SFile extends __SEventEmitter implements ISFile {
 
     // save the file path
     this.cwd = this.fileSettings.cwd;
-    this._path = filepath;
     this._name = __getFilename(filepath);
     this.extension = __extension(this.path).toLowerCase();
 
@@ -543,6 +596,46 @@ class SFile extends __SEventEmitter implements ISFile {
    */
   toString() {
     return this.path;
+  }
+
+  /**
+   * @name      unlink
+   * @type      Function
+   * @async
+   *
+   * This method allows you to unlink the file asyncronously
+   *
+   * @return    {Promise<boolean|Error}       A promise that will be resolved with true if all good, and rejected with an Error if not
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  unlink(): Promise<boolean | Error> {
+    return new Promise((resolve, reject) => {
+      __fs.unlink(this.path, (error) => {
+        if (error) return reject(error);
+        this.update();
+        resolve(true);
+      });
+    });
+  }
+
+  /**
+   * @name      unlinkSync
+   * @type      Function
+   * @async
+   *
+   * This method allows you to unlinkSync the file syncronously
+   *
+   * @return      {Boolean|Error}     true if deleted properly, throw an error if not
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  unlinkSync(): boolean {
+    __fs.unlinkSync(this.path);
+    this.update();
+    return true;
   }
 
   /**

@@ -187,7 +187,10 @@ class SPromise extends __SClass.extends(Promise) {
       (resolve, reject) => {
         resolvers.resolve = resolve;
         new Promise((rejectPromiseResolve, rejectPromiseReject) => {
-          resolvers.reject = rejectPromiseReject;
+          resolvers.reject = (...args) => {
+            rejectPromiseReject(...args);
+            reject(...args);
+          };
         }).catch((e) => {
           this.emit('catch', e);
         });

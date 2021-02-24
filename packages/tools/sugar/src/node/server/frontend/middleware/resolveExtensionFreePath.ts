@@ -55,8 +55,9 @@ function resolveExtensionFreePath(settings = {}) {
       const ext = settings.extensions[i];
       const potentialFilePath = `${rootDir}/${filePath}.${ext}`;
       if (__fs.existsSync(potentialFilePath)) {
-        req.path = `/${filePath}.${ext}`;
-        req.url = `/${filePath}.${ext}`;
+        // req.path = `/${filePath}.${ext}`;
+        // req.url = `/${filePath}.${ext}`;
+        res.redirect(`/${filePath}.${ext}`);
         break;
       }
     }

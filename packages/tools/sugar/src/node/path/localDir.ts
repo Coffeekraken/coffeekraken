@@ -1,7 +1,6 @@
 // @ts-nocheck
 import __sugarConfig from '../config/sugar';
-import __ensureDirSync from '../fs/ensureDirSync';
-
+import __fs from 'fs-extra';
 /**
  * @name                            localDir
  * @namespace           sugar.node.fs
@@ -25,7 +24,7 @@ import __ensureDirSync from '../fs/ensureDirSync';
  */
 const fn: ILocalDir = function () {
   const path = __sugarConfig('storage.localDir');
-  __ensureDirSync(path);
+  __fs.ensureDirSync(path);
   return path;
 };
 export default fn;

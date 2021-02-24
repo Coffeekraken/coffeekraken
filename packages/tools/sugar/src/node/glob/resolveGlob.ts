@@ -10,6 +10,7 @@ import __isPath from '../is/path';
 import __fs from 'fs';
 import __toRegex from 'to-regex';
 import __isDirectory from '../is/directory';
+import __expandGlob from './expandGlob';
 
 /**
  * @name            resolveGlob
@@ -26,7 +27,7 @@ import __isDirectory from '../is/directory';
  * @return      {SPromise}                                  An SPromise instance that will be resolved once the search process has been fully finished
  *
  * @setting     {Number}        [maxDepth=-1]               Specify the maximum depth to use when
- * @setting     {String}        rootDir                     The root directory where to start the glob search process
+ * @setting     {String}        cwd                         The root directory where to start the glob search process
  * @setting     {Object}        ...glob                     All the glob (https://www.npmjs.com/package/glob) options are supported
  * @setting     {RegExp}        [contentRegex=null]         Specify a regex that will be used to filter the results by searching in the content
  *
@@ -48,7 +49,7 @@ function resolveGlob(globs, settings = {}) {
     ({ resolve, reject, emit }) => {
       settings = __deepMerge(
         {
-          rootDir: settings.cwd || process.cwd(),
+          cwd: settings.cwd || process.cwd(),
           symlinks: true,
           nodir: true
         },
@@ -62,12 +63,12 @@ function resolveGlob(globs, settings = {}) {
       for (let i = 0; i < globs.length; i++) {
         const glob = globs[i];
 
-        let rootDir = settings.rootDir,
+        let cwd = settings.cwd,
           globPattern,
           searchReg = settings.contentRegex;
 
         const splits = glob.split(':').map((split) => {
-          return split.replace(`${rootDir}/`, '').replace(rootDir, '');
+          return split.replace(`${cwd}/`, '').replace(cwd, '');
         });
 
         globPattern = splits[0];
@@ -88,60 +89,15 @@ function resolveGlob(globs, settings = {}) {
           }
         });
 
-        const finalRootDir = rootDir.split('/').slice(0, -1).join('/');
-        const directoryName = rootDir.split('/').slice(-1).join('');
+        globPattern = `${cwd}/${globPattern}`;
 
-        globPattern = `+(${directoryName})/${globPattern}`;
-
-        let finalPatterns = [];
-
-        // handle "maxDepth"
-        const maxDepthMatch = globPattern.match(
-          /\/?\*\*\{(([0-9]+,[0-9]+|[0-9]+))\}\/?/gm
-        );
-        if (maxDepthMatch) {
-          const minMaxStr = maxDepthMatch[0]
-            .replace('**{', '')
-            .replace('}', '')
-            .replace(/[\{\}\/]/g, '');
-
-          let toReplace = maxDepthMatch[0].replace(/\//g, '');
-
-          const spl = minMaxStr.split(',');
-          let min = 0;
-          let max = parseInt(spl[0]);
-          if (spl.length === 2) {
-            min = parseInt(spl[0]);
-            max = parseInt(spl[1]);
-          }
-          let foldersArray = [
-            ...'* '
-              .repeat(min)
-              .split(' ')
-              .filter((l) => l !== '')
-          ];
-          for (let i = min; i < max; i++) {
-            finalPatterns.push(
-              globPattern
-                .replace(toReplace, foldersArray.join('/'))
-                .replace(/\/\//g, '/')
-            );
-            foldersArray.push('*');
-          }
-          finalPatterns.push(
-            globPattern
-              .replace(toReplace, foldersArray.join('/'))
-              .replace(/\/\//g, '/')
-          );
-        } else {
-          finalPatterns.push(globPattern);
-        }
+        let finalPatterns = __expandGlob(globPattern);
 
         let pathes = [];
         finalPatterns.forEach((pattern) => {
           pathes = pathes.concat(
             __glob.sync(pattern, {
-              cwd: finalRootDir,
+              cwd,
               ...settings
             })
           );
@@ -151,10 +107,7 @@ function resolveGlob(globs, settings = {}) {
         if (searchReg) {
           pathes = pathes.filter((path) => {
             if (__isDirectory(path)) return false;
-            const content = __fs.readFileSync(
-              `${finalRootDir}/${path}`,
-              'utf8'
-            );
+            const content = __fs.readFileSync(`${finalCwd}/${path}`, 'utf8');
             const matches = content.match(searchReg);
             if (matches) {
               return true;
@@ -163,16 +116,14 @@ function resolveGlob(globs, settings = {}) {
           });
         }
 
-        pathes
-          .map((path) => {
-            return path.split('/').slice(1).join('/');
-          })
-          .forEach((path) => {
-            const sFile = new __SFile(path, {
-              rootDir
-            });
-            filesArray.push(sFile);
+        pathes.forEach((path) => {
+          const sFile = __SFile.instanciate(path, {
+            file: {
+              cwd
+            }
           });
+          filesArray.push(sFile);
+        });
       }
 
       // resolve the promise

@@ -29,8 +29,8 @@ function create_fragment(ctx) {
 			h1 = element("h1");
 			h1.textContent = "Hello worlc";
 			this.c = noop;
-			add_location(h1, file, 21, 1, 464);
-			add_location(div, file, 20, 0, 457);
+			add_location(h1, file, 33, 1, 903);
+			add_location(div, file, 32, 0, 896);
 		},
 		l: function claim(nodes) {
 			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -70,6 +70,7 @@ function instance($$self, $$props, $$invalidate) {
 		console.log("MOUNTED");
 	});
 
+	console.log("PLOP");
 	const writable_props = [];
 
 	Object.keys($$props).forEach(key => {

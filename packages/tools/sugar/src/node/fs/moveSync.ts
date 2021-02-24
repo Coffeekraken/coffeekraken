@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
+import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        moveSync
@@ -9,6 +10,7 @@ import __fs from 'fs-extra';
  * @stable
  *
  * Moves a file or directory, even across devices (sync)
+ * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              src           The source path to moveSync
  * @param       {String}              dest          The destination path
@@ -28,6 +30,8 @@ import __fs from 'fs-extra';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function moveSync(src, dest) {
+  src = __replacePathTokens(src);
+  dest = __replacePathTokens(dest);
   _fs.moveSync(src, dest);
 }
 export default moveSync;

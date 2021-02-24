@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // @ts-nocheck
 const sugar_1 = __importDefault(require("../config/sugar"));
-const ensureDirSync_1 = __importDefault(require("../fs/ensureDirSync"));
+const fs_extra_1 = __importDefault(require("fs-extra"));
 /**
  * @name                            localDir
  * @namespace           sugar.node.fs
@@ -29,8 +29,8 @@ const ensureDirSync_1 = __importDefault(require("../fs/ensureDirSync"));
  */
 const fn = function () {
     const path = sugar_1.default('storage.localDir');
-    ensureDirSync_1.default(path);
+    fs_extra_1.default.ensureDirSync(path);
     return path;
 };
 exports.default = fn;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9jYWxEaXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJsb2NhbERpci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLGNBQWM7QUFDZCw0REFBNEM7QUFDNUMsd0VBQWtEO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILE1BQU0sRUFBRSxHQUFjO0lBQ3BCLE1BQU0sSUFBSSxHQUFHLGVBQWEsQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO0lBQy9DLHVCQUFlLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDdEIsT0FBTyxJQUFJLENBQUM7QUFDZCxDQUFDLENBQUM7QUFDRixrQkFBZSxFQUFFLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9jYWxEaXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJsb2NhbERpci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLGNBQWM7QUFDZCw0REFBNEM7QUFDNUMsd0RBQTRCO0FBQzVCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILE1BQU0sRUFBRSxHQUFjO0lBQ3BCLE1BQU0sSUFBSSxHQUFHLGVBQWEsQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO0lBQy9DLGtCQUFJLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3pCLE9BQU8sSUFBSSxDQUFDO0FBQ2QsQ0FBQyxDQUFDO0FBQ0Ysa0JBQWUsRUFBRSxDQUFDIn0=

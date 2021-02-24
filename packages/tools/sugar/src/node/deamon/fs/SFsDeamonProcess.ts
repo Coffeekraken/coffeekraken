@@ -172,7 +172,7 @@ export default class SFsDeamonProcess extends __SProcess {
       file = this._filesCache[filepath];
       file.update();
     } else {
-      file = new __SFile(filepath);
+      file = __SFile.instanciate(filepath);
       this._filesCache[filepath] = file;
     }
     return file;

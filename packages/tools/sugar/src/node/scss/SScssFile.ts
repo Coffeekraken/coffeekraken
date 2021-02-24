@@ -252,6 +252,18 @@ class SScssFile extends __SFile implements ISScssFile {
 
     // init the promise
     return new __SPromise(async ({ resolve, reject, emit, pipeTo, on }) => {
+      if (this._isCompiling) {
+        emit('warn', {
+          value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
+        });
+        return;
+      }
+      this._isCompiling = true;
+
+      if (params.watch) {
+        this.watch();
+      }
+
       // listen for the end
       on('finally', () => {
         this._isCompiling = false;
@@ -263,13 +275,10 @@ class SScssFile extends __SFile implements ISScssFile {
         title: `${this.id} compilation started`
       });
 
-      if (this._isCompiling) {
-        emit('warn', {
-          value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
-        });
-        return;
-      }
-      this._isCompiling = true;
+      emit('log', {
+        clear: true,
+        type: 'time'
+      });
 
       // sass settings
       const sassSettings = {
@@ -344,10 +353,14 @@ class SScssFile extends __SFile implements ISScssFile {
         value: `<yellow>[compiling]</yellow> "<cyan>${this.relPath}</cyan>"`
       });
 
-      renderObj = __sass.renderSync({
-        ...sassSettings,
-        data: toCompile
-      });
+      try {
+        renderObj = __sass.renderSync({
+          ...sassSettings,
+          data: toCompile
+        });
+      } catch (e) {
+        return reject(e);
+      }
 
       let resultCss = renderObj.css.toString();
 
@@ -435,10 +448,23 @@ class SScssFile extends __SFile implements ISScssFile {
         value: `<green>[success]</green> File "<cyan>${this.relPath}</cyan>" compiled <green>successfully</green> in <yellow>${durationEnd.formatedDuration}</yellow>`
       });
 
+      emit('log', {
+        type: 'separator'
+      });
+
       emit('notification', {
         type: 'success',
         title: `${this.id} compilation success`
       });
+
+      if (params.watch) {
+        emit('log', {
+          value: `<blue>[watch]</blue> Watching for changes...`
+        });
+
+        this._isCompiling = false;
+        return;
+      }
 
       return resolve({
         css: this._processResultCss(resultCss, completeParams),

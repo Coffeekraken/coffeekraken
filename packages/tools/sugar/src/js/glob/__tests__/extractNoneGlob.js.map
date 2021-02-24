@@ -1,0 +1,1 @@
+{"version":3,"file":"extractNoneGlob.js","sourceRoot":"","sources":["extractNoneGlob.ts"],"names":[],"mappings":";AAAA,MAAM,CAAC,OAAO,GAAG,UAAC,iBAAiB;IACjC,QAAQ,CAAC,+BAA+B,EAAE;QACxC,EAAE,CAAC,yCAAyC,EAAE;YAC5C,MAAM,CAAC,iBAAiB,CAAC,sBAAsB,CAAC,CAAC,CAAC,IAAI,CAAC,cAAc,CAAC,CAAC;QACzE,CAAC,CAAC,CAAC;IACL,CAAC,CAAC,CAAC;AACL,CAAC,CAAC"}

@@ -1,8 +1,7 @@
 // @ts-nocheck
 
 import __sugarConfig from '../config/sugar';
-import __ensureDirSync from '../fs/ensureDirSync';
-
+import __fs from 'fs-extra';
 /**
  * @name                            srcDir
  * @namespace               sugar.node.path
@@ -38,7 +37,7 @@ export default function (settings: ISrcDirSettings = {}) {
   };
   const srcDir = __sugarConfig('storage.srcDir');
   if (srcDir !== undefined) {
-    __ensureDirSync(srcDir);
+    __fs.ensureDirSync(srcDir);
     return srcDir;
   }
   return undefined;

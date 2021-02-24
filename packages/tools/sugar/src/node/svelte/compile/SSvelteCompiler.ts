@@ -10,6 +10,8 @@ import __absolute from '../../path/absolute';
 import __isGlob from '../../is/glob';
 import __glob from 'glob';
 import __chokidar from 'chokidar';
+import __fsPool from '../../fs/pool';
+import __SDuration from '../../time/SDuration';
 
 import __SSvelteCompilerParamsInterface from './interface/SSvelteCompilerParamsInterface';
 
@@ -106,13 +108,6 @@ class SSvelteCompiler extends __SCompiler {
         settings || {}
       )
     );
-
-    // prod
-    if (this.svelteCompilerSettings.prod) {
-      this.svelteCompilerSettings.style = 'compressed';
-      this.svelteCompilerSettings.minify = true;
-      this.svelteCompilerSettings.stripComments = true;
-    }
   }
 
   /**
@@ -134,101 +129,74 @@ class SSvelteCompiler extends __SCompiler {
     params: ISSvelteCompilerParams,
     settings: Partial<ISSvelteCompilerSettings> = {}
   ) {
-    return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
+    return new __SPromise(async ({ resolve, reject, pipe, emit, on }) => {
       settings = __deepMerge(this.svelteCompilerSettings, {}, settings);
 
       let input = Array.isArray(params.input) ? params.input : [params.input];
 
-      const resultsObj = {};
+      // prod
+      if (params.prod) {
+        params.style = 'compressed';
+        params.minify = true;
+        params.stripComments = true;
+      }
 
-      let filesPaths: string[] = [];
-      let svelteFiles: Record<string, __SSvelteFile> = {};
+      const resultsObj = {};
+      let aggregateStrArray: string[] = [];
+      const duration = new __SDuration();
+
+      const pool = __fsPool(input, {
+        watch: params.watch
+      });
+
+      on('cancel', () => {
+        pool.cancel();
+      });
 
       if (params.watch) {
-        __chokidar.watch(input).on('change', async (path) => {
-          let file: __SSvelteFile = svelteFiles[path];
-          if (!file) {
-            file = new __SSvelteFile(path, {
-              svelteFile: {
-                compile: settings
-              }
-            });
-            svelteFiles[path] = file;
-            pipe(file);
-          }
-          // compile the file
-          await file.compile(
-            {
-              ...params,
-              watch: false
-            },
-            settings
-          );
-
-          emit('log', {
-            type: 'separator'
-          });
-          emit('log', {
-            value: `<blue>[watch]</blue> Watching for changes...`
-          });
-        });
-
         emit('log', {
           value: `<blue>[watch]</blue> Watching for changes...`
         });
-      } else {
-        // make input absolute
-        input = __absolute(input);
-        // process inputs
-        input.forEach((inputStr) => {
-          if (__isGlob(inputStr)) {
-            filesPaths = [...filesPaths, ...__glob.sync(inputStr)];
-          } else {
-            filesPaths.push(inputStr);
-          }
-        });
+      }
 
-        filesPaths.forEach((path) => {
-          const file = new __SSvelteFile(path, {
-            svelteFile: {
-              compile: settings
-            }
-          });
-          svelteFiles[file.path] = file;
-          pipe(file);
-        });
+      pool.on(params.watch ? 'update' : 'files', async (files) => {
+        files = Array.isArray(files) ? files : [files];
 
-        const resultsObj: Record<string, string> = {};
-        for (let i = 0; i < Object.keys(svelteFiles).length; i++) {
-          const file = svelteFiles[Object.keys(svelteFiles)[i]];
-          // @todo    {Clean}     remove the ts-ignore
-          // @ts-ignore
-          const resPromise = file.compile(
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const compilePromise = file.compile(
             {
               ...params,
               watch: false
             },
             settings
           );
-          const res = await resPromise;
-          resultsObj[file.path] = res.js;
+
+          try {
+            pipe(compilePromise);
+            let compileRes = await compilePromise;
+            resultsObj[file.path] = compileRes;
+            aggregateStrArray.push(compileRes.js);
+            emit('file', compileRes);
+          } catch (e) {
+            emit('warn', {
+              value: e.toString()
+            });
+          }
         }
 
-        let aggregateStrArray: string[] = [];
-        Object.keys(resultsObj).forEach((path) => {
-          const jsRes = resultsObj[path];
-          aggregateStrArray.push(jsRes);
-        });
-
-        const startTime = Date.now();
-        resolve({
-          files: resultsObj,
-          js: aggregateStrArray.join('\n'),
-          startTime: startTime,
-          endTime: Date.now(),
-          duration: Date.now() - startTime
-        });
-      }
+        if (params.watch) {
+          emit('log', {
+            value: `<blue>[watch]</blue> Watching for changes...`
+          });
+        } else {
+          resolve({
+            files: resultsObj,
+            js: aggregateStrArray.join('\n'),
+            ...duration.end()
+          });
+        }
+      });
     });
   }
 }

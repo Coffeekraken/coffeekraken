@@ -15,6 +15,10 @@ import __filter from '../object/filter';
 import __esbuildScssLoaderPlugin from './compile/plugins/esbuild/esbuildScssLoaderPlugin';
 import __SEventEmitter from '../event/SEventEmitter';
 import __onProcessExit from '../process/onProcessExit';
+import {
+  getImportMapFromNodeModules,
+  generateImportMapForProject
+} from '@jsenv/node-module-import-map';
 
 import __SInterface from '../interface/SInterface';
 import __SJsCompiler, { ISJsCompilerParams } from './compile/SJsCompiler';
@@ -213,16 +217,12 @@ class SJsFile extends __SFile implements ISJsFile {
         value: `<yellow>[start]</yellow> Starting "<cyan>${this.relPath}</cyan>" compilation`
       });
 
-      emit('log', {
-        value: Math.random().toString()
-      });
-
       const duration = new __SDuration();
 
       await __wait(0);
 
       emit('log', {
-        value: `<yellow>[compiling]</yellow> file "<cyan>${this.relPath}</cyan>"`
+        value: `<yellow>[compiling]</yellow> File "<cyan>${this.relPath}</cyan>"`
       });
 
       // prod
@@ -244,8 +244,8 @@ class SJsFile extends __SFile implements ISJsFile {
 
       let esbuildParams: any = {
         charset: 'utf8',
-        format: 'iife',
-        logLevel: 'silent',
+        format: params.format,
+        logLevel: 'info',
         ...__filter(params, (key, value) => {
           if (Array.isArray(value) && !value.length) return false;
           return __SJsCompiler._esbuildAcceptedSettings.indexOf(key) !== -1;
@@ -253,84 +253,19 @@ class SJsFile extends __SFile implements ISJsFile {
         entryPoints: [this.path],
         bundle: params.bundle,
         write: false, // write to disk bellow
-        watch: params.watch
-          ? {
-              onRebuild: (error, result) => {
-                this._watchEsbuildProcess = result;
-
-                emit('log', {
-                  clear: true,
-                  type: 'time'
-                });
-
-                if (error) {
-                  emit('error', {
-                    value: error
-                  });
-                  return;
-                }
-
-                const logStrArray: string[] = [];
-
-                logStrArray.push(
-                  `<green>[compiled]</green> File "<cyan>${this.relPath}</cyan>" <green>compiled successfully</green>`
-                );
-
-                if (params.save) {
-                  const resultJs = [
-                    params.banner || '',
-                    'let process = {};' + result.outputFiles[0].text
-                  ].join('\n');
-                  this.writeSync(resultJs, {
-                    path: savePath
-                  });
-                  logStrArray.push(
-                    `<green>[saved]</green> File "<cyan>${
-                      this.relPath
-                    }</cyan>" <green>saved successfully</green> to "<magenta>${savePath.replace(
-                      `${__sugarConfig('storage.rootDir')}/`,
-                      ''
-                    )}</magenta>"`
-                  );
-                }
-
-                emit('log', {
-                  value: logStrArray.join('\n')
-                });
-
-                emit('log', {
-                  type: 'separator'
-                });
-
-                emit('notification', {
-                  type: 'success',
-                  title: `${this.id} compilation success`
-                });
-
-                if (params.watch) {
-                  emit('log', {
-                    value: `<blue>[watch] </blue>Watching for changes...`
-                  });
-                }
-              }
-            }
-          : false,
+        errorLimit: 100,
         minify: params.minify,
         sourcemap: params.map,
         ...params.esbuild
       };
 
-      const buildPromise = new Promise(async (buildResolve, buildReject) => {
-        // const buildService = await __esbuild.startService();
-        __esbuild
-          .build(esbuildParams)
-          .then((resultObj) => {
-            buildResolve(resultObj);
-          })
-          .catch((e) => buildReject(e));
-      });
+      let resultObj: any;
 
-      const resultObj: any = await buildPromise;
+      try {
+        resultObj = __esbuild.buildSync(esbuildParams);
+      } catch (e) {
+        return reject(e);
+      }
 
       const resultJs = [
         params.banner || '',

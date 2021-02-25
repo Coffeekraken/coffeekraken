@@ -1,79 +1,57 @@
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../string/toString"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var toString_1 = __importDefault(require("../string/toString"));
+import __toString from '../string/toString';
+/**
+ * @name          SValidation
+ * @namespace     sugar.js.validation.value.validation
+ * @type          Class
+ * @status              wip
+ *
+ * This class represent the base validation class
+ * that can be extended to create some validations like the "required" one, etc...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class SValidation {
     /**
-     * @name          SValidation
-     * @namespace     sugar.js.validation.value.validation
-     * @type          Class
-     * @status              wip
+     * @name          apply
+     * @type          Function
+     * @static
      *
-     * This class represent the base validation class
-     * that can be extended to create some validations like the "required" one, etc...
+     * This static method is the main one when you want to apply a certain
+     * validation on your value. Simply call this method and pass your value to validate.
+     * By default, if the value does not pass the test, this method will
+     * throw an error by using the "message" static property of the
+     * validation class. If you don't want that but getting the string message back
+     * insteaf, simply pass in the settings object the property "throw" to false
      *
-     * @todo      interface
-     * @todo      doc
-     * @todo      tests
-     *
-     * @since       2.0.0
+     * @since         2.0.0
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    var SValidation = /** @class */ (function () {
-        function SValidation() {
-        }
-        /**
-         * @name          apply
-         * @type          Function
-         * @static
-         *
-         * This static method is the main one when you want to apply a certain
-         * validation on your value. Simply call this method and pass your value to validate.
-         * By default, if the value does not pass the test, this method will
-         * throw an error by using the "message" static property of the
-         * validation class. If you don't want that but getting the string message back
-         * insteaf, simply pass in the settings object the property "throw" to false
-         *
-         * @since         2.0.0
-         * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        SValidation.apply = function () {
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i] = arguments[_i];
+    static apply(...args) {
+        const checkResult = this.exec(...args);
+        if (checkResult === true)
+            return true;
+        let message = this.message;
+        const finalArgs = Array.isArray(checkResult) ? checkResult : args;
+        finalArgs.forEach((arg, i) => {
+            let value = __toString(arg);
+            if (Array.isArray(arg)) {
+                value = arg.join(',');
             }
-            var checkResult = this.exec.apply(this, args);
-            if (checkResult === true)
-                return true;
-            var message = this.message;
-            var finalArgs = Array.isArray(checkResult) ? checkResult : args;
-            finalArgs.forEach(function (arg, i) {
-                var value = toString_1.default(arg);
-                if (Array.isArray(arg)) {
-                    value = arg.join(',');
-                }
-                message = message.replace("%" + i, value);
-                // if (__isNode()) {
-                //   const packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
-                //   message = message.replace(`${packageRoot(__dirname)}/`, '');
-                //   message = message.replace(`${packageRoot()}/`, '');
-                // }
-            });
-            return message;
-        };
-        return SValidation;
-    }());
-    exports.default = SValidation;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1ZhbGlkYXRpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTVmFsaWRhdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCxnRUFBNEM7SUFHNUM7Ozs7Ozs7Ozs7Ozs7OztPQWVHO0lBQ0g7UUFBQTtRQWdEQSxDQUFDO1FBL0NDOzs7Ozs7Ozs7Ozs7OztXQWNHO1FBQ0ksaUJBQUssR0FBWjtZQUFhLGNBQU87aUJBQVAsVUFBTyxFQUFQLHFCQUFPLEVBQVAsSUFBTztnQkFBUCx5QkFBTzs7WUFDbEIsSUFBTSxXQUFXLEdBQUcsSUFBSSxDQUFDLElBQUksT0FBVCxJQUFJLEVBQVMsSUFBSSxDQUFDLENBQUM7WUFDdkMsSUFBSSxXQUFXLEtBQUssSUFBSTtnQkFBRSxPQUFPLElBQUksQ0FBQztZQUN0QyxJQUFJLE9BQU8sR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDO1lBQzNCLElBQU0sU0FBUyxHQUFHLEtBQUssQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDO1lBQ2xFLFNBQVMsQ0FBQyxPQUFPLENBQUMsVUFBQyxHQUFHLEVBQUUsQ0FBQztnQkFDdkIsSUFBSSxLQUFLLEdBQUcsa0JBQVUsQ0FBQyxHQUFHLENBQUMsQ0FBQztnQkFDNUIsSUFBSSxLQUFLLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxFQUFFO29CQUN0QixLQUFLLEdBQUcsR0FBRyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztpQkFDdkI7Z0JBQ0QsT0FBTyxHQUFHLE9BQU8sQ0FBQyxPQUFPLENBQUMsTUFBSSxDQUFHLEVBQUUsS0FBSyxDQUFDLENBQUM7Z0JBQzFDLG9CQUFvQjtnQkFDcEIsOEVBQThFO2dCQUM5RSxpRUFBaUU7Z0JBQ2pFLHdEQUF3RDtnQkFDeEQsSUFBSTtZQUNOLENBQUMsQ0FBQyxDQUFDO1lBQ0gsT0FBTyxPQUFPLENBQUM7UUFDakIsQ0FBQztRQWNILGtCQUFDO0lBQUQsQ0FBQyxBQWhERCxJQWdEQztJQUVELGtCQUFlLFdBQVcsQ0FBQyJ9
+            message = message.replace(`%${i}`, value);
+            // if (__isNode()) {
+            //   const packageRoot = require('@coffeekraken/sugar/node/path/packageRoot');
+            //   message = message.replace(`${packageRoot(__dirname)}/`, '');
+            //   message = message.replace(`${packageRoot()}/`, '');
+            // }
+        });
+        return message;
+    }
+}
+export default SValidation;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1ZhbGlkYXRpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTVmFsaWRhdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxVQUFVLE1BQU0sb0JBQW9CLENBQUM7QUFHNUM7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsTUFBTSxXQUFXO0lBQ2Y7Ozs7Ozs7Ozs7Ozs7O09BY0c7SUFDSCxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsSUFBSTtRQUNsQixNQUFNLFdBQVcsR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsSUFBSSxDQUFDLENBQUM7UUFDdkMsSUFBSSxXQUFXLEtBQUssSUFBSTtZQUFFLE9BQU8sSUFBSSxDQUFDO1FBQ3RDLElBQUksT0FBTyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUM7UUFDM0IsTUFBTSxTQUFTLEdBQUcsS0FBSyxDQUFDLE9BQU8sQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUM7UUFDbEUsU0FBUyxDQUFDLE9BQU8sQ0FBQyxDQUFDLEdBQUcsRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUMzQixJQUFJLEtBQUssR0FBRyxVQUFVLENBQUMsR0FBRyxDQUFDLENBQUM7WUFDNUIsSUFBSSxLQUFLLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxFQUFFO2dCQUN0QixLQUFLLEdBQUcsR0FBRyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQzthQUN2QjtZQUNELE9BQU8sR0FBRyxPQUFPLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxFQUFFLEVBQUUsS0FBSyxDQUFDLENBQUM7WUFDMUMsb0JBQW9CO1lBQ3BCLDhFQUE4RTtZQUM5RSxpRUFBaUU7WUFDakUsd0RBQXdEO1lBQ3hELElBQUk7UUFDTixDQUFDLENBQUMsQ0FBQztRQUNILE9BQU8sT0FBTyxDQUFDO0lBQ2pCLENBQUM7Q0FjRjtBQUVELGVBQWUsV0FBVyxDQUFDIn0=

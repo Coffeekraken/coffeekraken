@@ -6,10 +6,6 @@
       }
     },
     "js": {
-      "importmap": {
-        "type": "importmap",
-        "path": "/dist/package.importmap"
-      },
       "main": {
         "type": "module",
         "path": "/dist/js/index.js"

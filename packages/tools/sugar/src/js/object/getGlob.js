@@ -1,13 +1,8 @@
-"use strict";
 // @ts-nocheck
 // @shared
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const minimatch_1 = __importDefault(require("minimatch"));
-const flatten_1 = __importDefault(require("./flatten"));
-const deepize_1 = __importDefault(require("./deepize"));
+import __minimatch from 'minimatch';
+import __flatten from './flatten';
+import __deepize from './deepize';
 /**
  * @name                          getGlob
  * @namespace           sugar.js.object
@@ -36,12 +31,12 @@ const deepize_1 = __importDefault(require("./deepize"));
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function getGlob(obj, glob, settings = {}) {
+export default function getGlob(obj, glob, settings = {}) {
     settings = Object.assign({ deepize: true }, settings);
-    const flat = flatten_1.default(obj);
+    const flat = __flatten(obj);
     const resultObj = {};
     Object.keys(flat).forEach((path) => {
-        if (minimatch_1.default(path, glob)) {
+        if (__minimatch(path, glob)) {
             resultObj[path] = flat[path];
         }
     });
@@ -49,10 +44,9 @@ function getGlob(obj, glob, settings = {}) {
     //   console.log('GLOB', resultObj);
     // }
     if (settings.deepize === true)
-        return deepize_1.default(resultObj);
+        return __deepize(resultObj);
     return resultObj;
 }
-exports.default = getGlob;
 // console.log(
 //   getGlob(
 //     {
@@ -69,4 +63,4 @@ exports.default = getGlob;
 //     'world.*'
 //   )
 // );
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0R2xvYi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImdldEdsb2IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFDZCxVQUFVOzs7OztBQUVWLDBEQUFvQztBQUNwQyx3REFBa0M7QUFDbEMsd0RBQWtDO0FBSWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQkc7QUFDSCxTQUF3QixPQUFPLENBQUMsR0FBRyxFQUFFLElBQUksRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUN0RCxRQUFRLG1CQUNOLE9BQU8sRUFBRSxJQUFJLElBQ1YsUUFBUSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxpQkFBUyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBRTVCLE1BQU0sU0FBUyxHQUFHLEVBQUUsQ0FBQztJQUVyQixNQUFNLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1FBQ2pDLElBQUksbUJBQVcsQ0FBQyxJQUFJLEVBQUUsSUFBSSxDQUFDLEVBQUU7WUFDM0IsU0FBUyxDQUFDLElBQUksQ0FBQyxHQUFHLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUM5QjtJQUNILENBQUMsQ0FBQyxDQUFDO0lBRUgsMEJBQTBCO0lBQzFCLG9DQUFvQztJQUNwQyxJQUFJO0lBRUosSUFBSSxRQUFRLENBQUMsT0FBTyxLQUFLLElBQUk7UUFBRSxPQUFPLGlCQUFTLENBQUMsU0FBUyxDQUFDLENBQUM7SUFDM0QsT0FBTyxTQUFTLENBQUM7QUFDbkIsQ0FBQztBQXRCRCwwQkFzQkM7QUFFRCxlQUFlO0FBQ2YsYUFBYTtBQUNiLFFBQVE7QUFDUixvQkFBb0I7QUFDcEIsd0JBQXdCO0FBQ3hCLFdBQVc7QUFDWCxrQ0FBa0M7QUFDbEMsaUJBQWlCO0FBQ2pCLHlCQUF5QjtBQUN6Qiw0QkFBNEI7QUFDNUIsWUFBWTtBQUNaLFVBQVU7QUFDVixTQUFTO0FBQ1QsZ0JBQWdCO0FBQ2hCLE1BQU07QUFDTixLQUFLIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0R2xvYi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImdldEdsb2IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLFVBQVU7QUFFVixPQUFPLFdBQVcsTUFBTSxXQUFXLENBQUM7QUFDcEMsT0FBTyxTQUFTLE1BQU0sV0FBVyxDQUFDO0FBQ2xDLE9BQU8sU0FBUyxNQUFNLFdBQVcsQ0FBQztBQUlsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxPQUFPLENBQUMsR0FBRyxFQUFFLElBQUksRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUN0RCxRQUFRLG1CQUNOLE9BQU8sRUFBRSxJQUFJLElBQ1YsUUFBUSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxTQUFTLENBQUMsR0FBRyxDQUFDLENBQUM7SUFFNUIsTUFBTSxTQUFTLEdBQUcsRUFBRSxDQUFDO0lBRXJCLE1BQU0sQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDakMsSUFBSSxXQUFXLENBQUMsSUFBSSxFQUFFLElBQUksQ0FBQyxFQUFFO1lBQzNCLFNBQVMsQ0FBQyxJQUFJLENBQUMsR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7U0FDOUI7SUFDSCxDQUFDLENBQUMsQ0FBQztJQUVILDBCQUEwQjtJQUMxQixvQ0FBb0M7SUFDcEMsSUFBSTtJQUVKLElBQUksUUFBUSxDQUFDLE9BQU8sS0FBSyxJQUFJO1FBQUUsT0FBTyxTQUFTLENBQUMsU0FBUyxDQUFDLENBQUM7SUFDM0QsT0FBTyxTQUFTLENBQUM7QUFDbkIsQ0FBQztBQUVELGVBQWU7QUFDZixhQUFhO0FBQ2IsUUFBUTtBQUNSLG9CQUFvQjtBQUNwQix3QkFBd0I7QUFDeEIsV0FBVztBQUNYLGtDQUFrQztBQUNsQyxpQkFBaUI7QUFDakIseUJBQXlCO0FBQ3pCLDRCQUE0QjtBQUM1QixZQUFZO0FBQ1osVUFBVTtBQUNWLFNBQVM7QUFDVCxnQkFBZ0I7QUFDaEIsTUFBTTtBQUNOLEtBQUsifQ==

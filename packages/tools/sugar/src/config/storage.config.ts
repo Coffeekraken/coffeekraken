@@ -77,5 +77,18 @@ export default {
    * @since         2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  tmpDir: `[config.storage.localDir]/temp`
+  tmpDir: `[config.storage.localDir]/temp`,
+
+  /**
+   * @name            nodeModulesDir
+   * @namespace       config.storage
+   * @type            String
+   * @default         [config.storage.rootDir]/node_modules
+   *
+   * Configure where is located the "node_modules" folder
+   *
+   * @since         2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  nodeModulesDir: `[config.storage.rootDir]/node_modules`
 };

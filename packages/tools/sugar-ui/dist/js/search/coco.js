@@ -8,7 +8,7 @@ let process = {};import {
   noop,
   safe_not_equal,
   validate_slots
-} from "svelte/internal";
+} from "/node_modules/svelte/internal/index.mjs";
 const file = "coco.svelte";
 function create_fragment(ctx) {
   const block = {

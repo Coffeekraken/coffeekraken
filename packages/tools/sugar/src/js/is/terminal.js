@@ -1,6 +1,4 @@
-"use strict";
 // @shared
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name            isTerminal
  * @namespace       sugar.js.is
@@ -17,10 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function isTerminal() {
+export default function isTerminal() {
     if (process && process.stdout && process.stdout.isTTY)
         return true;
     return false;
 }
-exports.default = isTerminal;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGVybWluYWwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0ZXJtaW5hbC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsVUFBVTs7QUFFVjs7Ozs7Ozs7Ozs7Ozs7O0dBZUc7QUFDSCxTQUF3QixVQUFVO0lBQ2hDLElBQUksT0FBTyxJQUFJLE9BQU8sQ0FBQyxNQUFNLElBQUksT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLO1FBQUUsT0FBTyxJQUFJLENBQUM7SUFDbkUsT0FBTyxLQUFLLENBQUM7QUFDZixDQUFDO0FBSEQsNkJBR0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGVybWluYWwuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0ZXJtaW5hbC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxVQUFVO0FBRVY7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxVQUFVO0lBQ2hDLElBQUksT0FBTyxJQUFJLE9BQU8sQ0FBQyxNQUFNLElBQUksT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLO1FBQUUsT0FBTyxJQUFJLENBQUM7SUFDbkUsT0FBTyxLQUFLLENBQUM7QUFDZixDQUFDIn0=

@@ -1,372 +1,43 @@
 // @ts-nocheck
 // @shared
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../object/deepMerge", "../object/get", "../object/set", "../is/plainObject", "../object/deepMap", "./adapters/SConfigAdapter"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
-    var get_1 = __importDefault(require("../object/get"));
-    var set_1 = __importDefault(require("../object/set"));
-    var plainObject_1 = __importDefault(require("../is/plainObject"));
-    var deepMap_1 = __importDefault(require("../object/deepMap"));
-    var SConfigAdapter_1 = __importDefault(require("./adapters/SConfigAdapter"));
-    /**
-     * @name                                            config
-     * @namespace           sugar.js.config
-     * @type                                            Class
-     * @status              beta
-     *
-     * This class allows you to quickly access/update some configuration depending on the data adapters specified.
-     * The base available data adapters are:
-     * - For node:
-     *  - File system adapter: @coffeekraken/sugar/node/config/adapters/SConfigFsAdapter
-     * - For js:
-     *  - Localstorage adapter: @coffeekraken/sugar/js/config/adapters/SConfigLsAdapter
-     *
-     * @todo      interface
-     * @todo      doc
-     * @todo      tests
-     * @todo      Add a "catch" method that allows to get the saving errors, etc...
-     *
-     * @example             js
-     * import SConfig from '@coffeekraken/sugar/js/config/SConfig';
-     * import SConfigLsAdapter from '@coffeekraken/sugar/js/config/adapters/SConfigLsAdapter';
-     * const config = new SConfig({
-     *   adapters: [
-     *    new SConfigLsAdapter()
-     *   ]
-     * });
-     * await config.get('log.frontend.mail.host'); // => gmail.google.com
-     * await config.set('log.frontend.mail.host', 'mailchimp.com');
-     *
-     * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    var _SConfigLoadingByAdapter = {};
-    var SConfig = /** @class */ (function () {
-        /**
-         * @name                  constructor
-         * @type                  Function
-         *
-         * Init the config instance by passing a name and a settings object to configure your instance
-         *
-         * @param                 {String}                    name                  The name of the config
-         * @param                {Object}                    [settings={}]
-         * An object to configure your SConfig instance. See the list above
-         * The available settings are:
-         * - adapters ([]) {Array}: An array of adapters instances to use for this SConfig instance
-         * - defaultAdapter (null) {String}: This specify which adapter you want to use as default one. If not set, take the first adapter in the adapters list
-         * - allowSave (true) {Boolean}: Specify if this instance can save the updated configs
-         * - allowSet (true) {Boolean}: Specify if you can change the configs during the process or not
-         * - allowReset (true) {Boolean}: Specify if you can rest the configs during the process or not
-         * - allowNew (false) {Boolean}: Specify you can create new configs with this instance or not
-         * - autoLoad (true) {Boolean}: Specify if you want the config to be loaded automatically at instanciation
-         * - autoSave (true) {Boolean}: Specify if you want the setting to be saved through the adapters directly on "set" action
-         * - throwErrorOnUndefinedConfig (true) {Boolean}: Specify if you want the class to throw some errors when get undefined configs
-         *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        function SConfig(name, settings) {
-            var _this = this;
-            if (settings === void 0) { settings = {}; }
-            /**
-             * @name              _name
-             * @type              {String}
-             * @private
-             *
-             * The name of the config
-             *
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            this._name = null;
-            /**
-             * @name            _adapters
-             * @type            {Object}
-             * @private
-             *
-             * Save the registered adapters instances
-             *
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            this._adapters = {};
-            /**
-             * @name             _settings
-             * @type              {Object}
-             * @private
-             *
-             * Store the actual settings object
-             *
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            this._settings = {};
-            // store the name
-            if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
-                throw new Error("The name of an SConfig instance can contain only letters like [a-zA-Z0-9_-]...");
-            }
-            // save the settings name
-            this._name = name;
-            // save the settings
-            this._settings = __assign({ adapters: [], defaultAdapter: null, allowSave: true, allowSet: true, allowReset: true, allowNew: false, autoLoad: true, autoSave: true, throwErrorOnUndefinedConfig: true }, settings);
-            // init all the adapters if needed
-            this._settings.adapters.forEach(function (adapter) {
-                if (!adapter instanceof SConfigAdapter_1.default) {
-                    throw new Error("You have specified the adapter \"" + (adapter.name || 'unknown') + "\" as adapter for your \"" + _this._name + "\" SConfig instance but this adapter does not extends the SConfigAdapter class...");
-                }
-                // make sure we have a name for this adapter
-                if (!adapter.name) {
-                    adapter.name = _this._name + ':' + adapter.constructor.name;
-                }
-                else {
-                    adapter.name = _this._name + ':' + adapter.name;
-                }
-                _this._adapters[adapter.name] = {
-                    instance: adapter,
-                    config: {}
-                };
-            });
-            // set the default get adapter if it has not been specified in the settings
-            if (!this._settings.defaultAdapter) {
-                this._settings.defaultAdapter = Object.keys(this._adapters)[0];
-            }
-            // load the config from the default adapter if the setting "autoLoad" is true
-            if (this._settings.autoLoad) {
-                this.load();
-            }
-        }
-        /**
-         * @name                                load
-         * @type                                Function
-         *
-         * Load the config from the default adapter or from the passed adapter
-         *
-         * @param           {String}            [adapter=this._settings.defaultAdapter]         The adapter to use to load the config
-         * @return          {Promise}                                                           A promise that will be resolved with the loaded config
-         *
-         * @example           js
-         * const config = await config.load();
-         *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        SConfig.prototype.load = function (adapter) {
-            // make sure we load only once the config
-            // if (_SConfigLoadingByAdapter[adapter]) {
-            //   return null;
-            // }
-            // _SConfigLoadingByAdapter[adapter] = true;
-            var _this = this;
-            if (adapter === void 0) { adapter = this._settings.defaultAdapter; }
-            if (!this._adapters[adapter]) {
-                throw new Error("You try to load the config from the adapter \"" + adapter + "\" but this adapter does not exists...");
-            }
-            if (Object.keys(this._adapters[adapter].config).length !== 0) {
-                return this._adapters[adapter].config;
-            }
-            var config = this._adapters[adapter].instance.load();
-            if (config instanceof Promise) {
-                return new Promise(function (resolve) {
-                    config.then(function (c) {
-                        if (Object.keys(_this._adapters[adapter].config).length === 0 && c) {
-                            _this._adapters[adapter].config = c;
-                            return resolve(c);
-                        }
-                        return resolve(_this._adapters[adapter].config);
-                    });
-                });
-            }
-            else if (plainObject_1.default(config)) {
-                this._adapters[adapter].config = config;
-                return config;
-            }
-            else if (config !== null && config !== undefined) {
-                throw new Error("SConfig: Your \"load\" method of the \"" + adapter + "\" adapter has to return either a plain object, or a Promise resolved with a plain object. The returned value is \"" + config + "\" which is of type \"" + typeof config + "\"...");
-            }
-        };
-        /**
-         * @name                          save
-         * @type                          Function
-         *
-         * Save the config through all the registered adapters or just the one specify in params
-         *
-         * @param           {String|Array}          [adapters=Object.keys(this._adapters)]        The adapters to save the config through
-         * @return          {Promise}                                                              A promise once all the adapters have correctly saved the config
-         *
-         * @example           js
-         * await config.save();
-         *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        SConfig.prototype.save = function (adapters) {
-            if (adapters === void 0) { adapters = Object.keys(this._adapters); }
-            if (!this._settings.allowSave) {
-                throw new Error("You try to save the config on the \"" + this._name + "\" SConfig instance but this instance does not allow to save configs... Set the \"settings.allowSave\" property to allow this action...");
-            }
-            for (var i = 0; i < adapters.length; i++) {
-                var adapter = adapters[i];
-                if (adapter && !this._adapters[adapter]) {
-                    throw new Error("You try to save the config on the \"" + this._name + "\" SConfig instance using the adapter \"" + adapter + "\" but this adapter does not exists...");
-                }
-                this._adapters[adapter].instance.save(this._adapters[adapter].config);
-            }
-            // all saved correctly
-            return true;
-        };
-        /**
-         * @name                                get
-         * @type                                Function
-         *
-         * Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one
-         *
-         * @param                 {String}                      path                 The dotted object path for the value wanted
-         * @param                 {String}                      [adapter=null]       The data adapter that you want to use to retreive this value
-         * @param                 {Object}                      [settings={}]         The same object settings that you can pass in the constructor but just for this get process
-         * @return                {Mixed}                                            The value getted
-         *
-         * @example               js
-         * await config.get('log.frontend.mail.host'); // => gmail.google.com
-         *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        SConfig.prototype.get = function (path, adapter, settings) {
-            var _this = this;
-            if (adapter === void 0) { adapter = this._settings.defaultAdapter; }
-            if (settings === void 0) { settings = {}; }
-            settings = deepMerge_1.default(this._settings, settings);
-            if (adapter && !this._adapters[adapter]) {
-                throw new Error("You try to get the config value \"" + path + "\" using the adapter \"" + adapter + "\" but this adapter does not exists...");
-            }
-            if (Object.keys(this._adapters[adapter].config).length === 0) {
-                this.load();
-            }
-            var value = get_1.default(this._adapters[adapter].config, path);
-            if (plainObject_1.default(value)) {
-                value = deepMap_1.default(value, function (val, prop, fullPath) {
-                    // check if we get some things to use as variable
-                    var isArray = Array.isArray(val);
-                    if (!isArray)
-                        val = [val];
-                    val = val.map(function (v) {
-                        if (typeof v === 'string') {
-                            var reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
-                            var matches = v.match(reg);
-                            if (matches && matches.length) {
-                                if (matches.length === 1 && v === matches[0]) {
-                                    v = _this.get(matches[0].replace('[config.', '').replace(']', ''), adapter);
-                                    return v;
-                                }
-                                else {
-                                    matches.forEach(function (match) {
-                                        v = v.replace(match, _this.get(match.replace('[config.', '').replace(']', ''), adapter));
-                                    });
-                                    return v;
-                                }
-                            }
-                        }
-                        return v;
-                    });
-                    if (!isArray)
-                        return val[0];
-                    return val;
-                });
-            }
-            else if (typeof value === 'string' || Array.isArray(value)) {
-                var isArray = Array.isArray(value);
-                var val = isArray ? value : [value];
-                val = val.map(function (v) {
-                    if (typeof v !== 'string')
-                        return v;
-                    var reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
-                    var matches = v.match(reg);
-                    if (matches) {
-                        if (matches.length === 1 && v === matches[0]) {
-                            v = _this.get(matches[0].replace('[config.', '').replace(']', ''), adapter);
-                            return v;
-                        }
-                        else {
-                            matches.forEach(function (match) {
-                                v = v.replace(match, _this.get(match.replace('[config.', '').replace(']', ''), adapter));
-                            });
-                            return v;
-                        }
-                    }
-                    else {
-                        return v;
-                    }
-                });
-                if (!isArray)
-                    value = val[0];
-                else
-                    value = val;
-            }
-            if (settings.throwErrorOnUndefinedConfig && value === undefined) {
-                throw new Error("You try to get the config \"" + path + "\" on the \"" + this._name + "\" SConfig instance but this config does not exists...");
-            }
-            return value;
-        };
-        /**
-         * @name                                set
-         * @namespace           node.config.SConfig
-         * @type                                Function
-         *
-         * Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one
-         *
-         * @param                 {String}                      path                 The dotted object path for the value wanted
-         * @param                 {Mixed}                       value                 The value to set
-         * @param                 {String|Array}                      [adapters=Object.keys(this._adapters)]       The adapter you want to use or an array of adapters
-         * @return                {Promise}                                           A promise resolved once the setting has been correctly set (and save depending on your instance config)
-         *
-         * @example               js
-         * config.set('log.frontend.mail.host', 'coffeekraken.io');
-         *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        SConfig.prototype.set = function (path, value, adapters) {
-            var _this = this;
-            if (adapters === void 0) { adapters = Object.keys(this._adapters); }
-            if (!this._settings.allowSet) {
-                throw new Error("You try to set a config value on the \"" + this._name + "\" SConfig instance but this instance does not allow to set values... Set the \"settings.allowSet\" property to allow this action...");
-            }
-            // check if we allow new config or not
-            if (!this._settings.allowNew &&
-                get_1.default(this._adapters[this._settings.defaultAdapter].config, path) ===
-                    undefined) {
-                throw new Error("You try to set the config \"" + path + "\" on the \"" + this._name + "\" SConfig instance but this config does not exists and this instance does not allow for new config creation...");
-            }
-            adapters.forEach(function (adapter) {
-                if (adapter && !_this._adapters[adapter]) {
-                    throw new Error("You try to set the config value \"" + path + "\" using the adapter \"" + adapter + "\" but this adapter does not exists...");
-                }
-                set_1.default(_this._adapters[adapter].config, path, value);
-            });
-            // check if need to autoSave or not
-            if (this._settings.autoSave) {
-                return this.save(adapters);
-            }
-            // return true
-            return true;
-        };
-        return SConfig;
-    }());
-    exports.default = SConfig;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLFVBQVU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRVYsa0VBQThDO0lBQzlDLHNEQUFrQztJQUNsQyxzREFBa0M7SUFHbEMsa0VBQWdEO0lBQ2hELDhEQUEwQztJQUMxQyw2RUFBeUQ7SUFFekQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0ErQkc7SUFDSCxJQUFNLHdCQUF3QixHQUFHLEVBQUUsQ0FBQztJQUNwQztRQWtDRTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1dBcUJHO1FBQ0gsaUJBQVksSUFBSSxFQUFFLFFBQWE7WUFBL0IsaUJBMkRDO1lBM0RpQix5QkFBQSxFQUFBLGFBQWE7WUF2RC9COzs7Ozs7OztlQVFHO1lBQ0gsVUFBSyxHQUFHLElBQUksQ0FBQztZQUViOzs7Ozs7OztlQVFHO1lBQ0gsY0FBUyxHQUFHLEVBQUUsQ0FBQztZQUVmOzs7Ozs7OztlQVFHO1lBQ0gsY0FBUyxHQUFHLEVBQUUsQ0FBQztZQXlCYixpQkFBaUI7WUFDakIsSUFBSSxDQUFDLGtCQUFrQixDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsRUFBRTtnQkFDbEMsTUFBTSxJQUFJLEtBQUssQ0FDYixnRkFBZ0YsQ0FDakYsQ0FBQzthQUNIO1lBRUQseUJBQXlCO1lBQ3pCLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDO1lBRWxCLG9CQUFvQjtZQUNwQixJQUFJLENBQUMsU0FBUyxjQUNaLFFBQVEsRUFBRSxFQUFFLEVBQ1osY0FBYyxFQUFFLElBQUksRUFDcEIsU0FBUyxFQUFFLElBQUksRUFDZixRQUFRLEVBQUUsSUFBSSxFQUNkLFVBQVUsRUFBRSxJQUFJLEVBQ2hCLFFBQVEsRUFBRSxLQUFLLEVBQ2YsUUFBUSxFQUFFLElBQUksRUFDZCxRQUFRLEVBQUUsSUFBSSxFQUNkLDJCQUEyQixFQUFFLElB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
+import __deepMerge from '../object/deepMerge';
+import __get from '../object/get';
+import __set from '../object/set';
+import __md5 from '../crypt/md5';
+import __isPlainObject from '../is/plainObject';
+import __deepMap from '../object/deepMap';
+import __SConfigAdapter from './adapters/SConfigAdapter';
+/**
+ * @name                                            config
+ * @namespace           sugar.js.config
+ * @type                                            Class
+ * @status              beta
+ *
+ * This class allows you to quickly access/update some configuration depending on the data adapters specified.
+ * The base available data adapters are:
+ * - For node:
+ *  - File system adapter: @coffeekraken/sugar/node/config/adapters/SConfigFsAdapter
+ * - For js:
+ *  - Localstorage adapter: @coffeekraken/sugar/js/config/adapters/SConfigLsAdapter
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ * @todo      Add a "catch" method that allows to get the saving errors, etc...
+ *
+ * @example             js
+ * import SConfig from '@coffeekraken/sugar/js/config/SConfig';
+ * import SConfigLsAdapter from '@coffeekraken/sugar/js/config/adapters/SConfigLsAdapter';
+ * const config = new SConfig({
+ *   adapters: [
+ *    new SConfigLsAdapter()
+ *   ]
+ * });
+ * await config.get('log.frontend.mail.host'); // => gmail.google.com
+ * await config.set('log.frontend.mail.host', 'mailchimp.com');
+ *
+ * @since         2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+const _SConfigLoadingByAdapter = {};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLFVBQVU7QUFFVixPQUFPLFdBQVcsTUFBTSxxQkFBcUIsQ0FBQztBQUM5QyxPQUFPLEtBQUssTUFBTSxlQUFlLENBQUM7QUFDbEMsT0FBTyxLQUFLLE1BQU0sZUFBZSxDQUFDO0FBRWxDLE9BQU8sS0FBSyxNQUFNLGNBQWMsQ0FBQztBQUNqQyxPQUFPLGVBQWUsTUFBTSxtQkFBbUIsQ0FBQztBQUNoRCxPQUFPLFNBQVMsTUFBTSxtQkFBbUIsQ0FBQztBQUMxQyxPQUFPLGdCQUFnQixNQUFNLDJCQUEyQixDQUFDO0FBRXpEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBK0JHO0FBQ0gsTUFBTSx3QkFBd0IsR0FBRyxFQUFFLENBQUMifQ==

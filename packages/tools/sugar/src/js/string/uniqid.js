@@ -1,11 +1,6 @@
-"use strict";
 // @ts-nocheck
 // @shared
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const uniqid_1 = __importDefault(require("uniqid"));
+import __uniqid from 'uniqid';
 /**
  * @name          uniqid
  * @namespace           sugar.js.string
@@ -29,7 +24,7 @@ const uniqid_1 = __importDefault(require("uniqid"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function uniqid() {
-    return uniqid_1.default();
+    return __uniqid();
 }
-exports.default = uniqid;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5pcWlkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidW5pcWlkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7QUFFVixvREFBOEI7QUFDOUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILFNBQVMsTUFBTTtJQUNiLE9BQU8sZ0JBQVEsRUFBRSxDQUFDO0FBQ3BCLENBQUM7QUFDRCxrQkFBZSxNQUFNLENBQUMifQ==
+export default uniqid;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5pcWlkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidW5pcWlkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVO0FBRVYsT0FBTyxRQUFRLE1BQU0sUUFBUSxDQUFDO0FBQzlCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFDSCxTQUFTLE1BQU07SUFDYixPQUFPLFFBQVEsRUFBRSxDQUFDO0FBQ3BCLENBQUM7QUFDRCxlQUFlLE1BQU0sQ0FBQyJ9

@@ -1,107 +1,80 @@
 // @ts-nocheck
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./isVisible", "./isInViewport", "./closestNotVisible"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var isVisible_1 = __importDefault(require("./isVisible"));
-    var isInViewport_1 = __importDefault(require("./isInViewport"));
-    var closestNotVisible_1 = __importDefault(require("./closestNotVisible"));
-    /**
-     * @name      querySelector
-     * @namespace           sugar.js.dom
-     * @type      Function
-     * @stable
-     *
-     * Enhanced proxy of the Element.querySelector function that let you specify
-     * if you want an element that is visible, or even that is in the viewport
-     *
-     * @param 		{String} 			selector 			The css selector to search
-     * @param 		{Object} 			settings	 		The settings of the query
-     * @return 		{HTMLElement} 							The founded element
-     *
-     * @todo      interface
-     * @todo      doc
-     * @todo      tests
-     *
-     * @example 	js
-     * import querySelector from '@coffeekraken/sugar/js/dom/querySelector';
-     * // simple query
-     * const elm = querySelector('.a-cool-css-selector');
-     *
-     * // get an element that is in the viewport
-     * const elm = querySelector('.a-cool-css-selector', {
-     * 		inViewport : true
-     * });
-     *
-     * @since         1.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    /**
-     * If we want only a visible element
-     * @setting
-     * @name 		visible
-     * @type 		{Boolean}
-     * @default 	false
-     */
-    /**
-     * If we want only an element that is in the viewport
-     * @setting
-     * @name 		inViewport
-     * @type 		{Boolean}
-     * @default 	false
-     */
-    /**
-     * The root node to start the query from
-     * @setting
-     * @name 		rootNode
-     * @type 		{HTMLElement}
-     * @default 	document.body
-     */
-    function querySelector(selector, settings) {
-        if (settings === void 0) { settings = {}; }
-        // extend settings
-        settings = __assign({ visible: null, inViewport: null, rootNode: document.body }, settings);
-        // grab the element into the dom
-        var elm = settings.rootNode.querySelector(selector);
-        // if no element, stop here
-        if (!elm)
+import __isVisible from './isVisible';
+import __isInViewport from './isInViewport';
+import __closestNotVisible from './closestNotVisible';
+/**
+ * @name      querySelector
+ * @namespace           sugar.js.dom
+ * @type      Function
+ * @stable
+ *
+ * Enhanced proxy of the Element.querySelector function that let you specify
+ * if you want an element that is visible, or even that is in the viewport
+ *
+ * @param 		{String} 			selector 			The css selector to search
+ * @param 		{Object} 			settings	 		The settings of the query
+ * @return 		{HTMLElement} 							The founded element
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example 	js
+ * import querySelector from '@coffeekraken/sugar/js/dom/querySelector';
+ * // simple query
+ * const elm = querySelector('.a-cool-css-selector');
+ *
+ * // get an element that is in the viewport
+ * const elm = querySelector('.a-cool-css-selector', {
+ * 		inViewport : true
+ * });
+ *
+ * @since         1.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+/**
+ * If we want only a visible element
+ * @setting
+ * @name 		visible
+ * @type 		{Boolean}
+ * @default 	false
+ */
+/**
+ * If we want only an element that is in the viewport
+ * @setting
+ * @name 		inViewport
+ * @type 		{Boolean}
+ * @default 	false
+ */
+/**
+ * The root node to start the query from
+ * @setting
+ * @name 		rootNode
+ * @type 		{HTMLElement}
+ * @default 	document.body
+ */
+function querySelector(selector, settings = {}) {
+    // extend settings
+    settings = Object.assign({ visible: null, inViewport: null, rootNode: document.body }, settings);
+    // grab the element into the dom
+    const elm = settings.rootNode.querySelector(selector);
+    // if no element, stop here
+    if (!elm)
+        return null;
+    // state tracking
+    const isVisible = true;
+    const isInViewport = true;
+    // check settings
+    if (settings.visible) {
+        if (!__isVisible(elm) || !__closestNotVisible(elm))
             return null;
-        // state tracking
-        var isVisible = true;
-        var isInViewport = true;
-        // check settings
-        if (settings.visible) {
-            if (!isVisible_1.default(elm) || !closestNotVisible_1.default(elm))
-                return null;
-        }
-        if (settings.inViewport) {
-            if (!isInViewport_1.default(elm))
-                return null;
-        }
-        // return the element
-        return elm;
     }
-    exports.default = querySelector;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicXVlcnlTZWxlY3Rvci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInF1ZXJ5U2VsZWN0b3IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFFZCwwREFBc0M7SUFDdEMsZ0VBQTRDO0lBQzVDLDBFQUFzRDtJQUV0RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0E2Qkc7SUFFSDs7Ozs7O09BTUc7SUFFSDs7Ozs7O09BTUc7SUFFSDs7Ozs7O09BTUc7SUFFSCxTQUFTLGFBQWEsQ0FBQyxRQUFRLEVBQUUsUUFBYTtRQUFiLHlCQUFBLEVBQUEsYUFBYTtRQUM1QyxrQkFBa0I7UUFDbEIsUUFBUSxjQUNOLE9BQU8sRUFBRSxJQUFJLEVBQ2IsVUFBVSxFQUFFLElBQUksRUFDaEIsUUFBUSxFQUFFLFFBQVEsQ0FBQyxJQUFJLElBQ3BCLFFBQVEsQ0FDWixDQUFDO1FBRUYsZ0NBQWdDO1FBQ2hDLElBQU0sR0FBRyxHQUFHLFFBQVEsQ0FBQyxRQUFRLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQyxDQUFDO1FBQ3RELDJCQUEyQjtRQUMzQixJQUFJLENBQUMsR0FBRztZQUFFLE9BQU8sSUFBSSxDQUFDO1FBRXRCLGlCQUFpQjtRQUNqQixJQUFNLFNBQVMsR0FBRyxJQUFJLENBQUM7UUFDdkIsSUFBTSxZQUFZLEdBQUcsSUFBSSxDQUFDO1FBRTFCLGlCQUFpQjtRQUNqQixJQUFJLFFBQVEsQ0FBQyxPQUFPLEVBQUU7WUFDcEIsSUFBSSxDQUFDLG1CQUFXLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQywyQkFBbUIsQ0FBQyxHQUFHLENBQUM7Z0JBQUUsT0FBTyxJQUFJLENBQUM7U0FDakU7UUFDRCxJQUFJLFFBQVEsQ0FBQyxVQUFVLEVBQUU7WUFDdkIsSUFBSSxDQUFDLHNCQUFjLENBQUMsR0FBRyxDQUFDO2dCQUFFLE9BQU8sSUFBSSxDQUFDO1NBQ3ZDO1FBRUQscUJBQXFCO1FBQ3JCLE9BQU8sR0FBRyxDQUFDO0lBQ2IsQ0FBQztJQUNELGtCQUFlLGFBQWEsQ0FBQyJ9
+    if (settings.inViewport) {
+        if (!__isInViewport(elm))
+            return null;
+    }
+    // return the element
+    return elm;
+}
+export default querySelector;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicXVlcnlTZWxlY3Rvci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInF1ZXJ5U2VsZWN0b3IudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sV0FBVyxNQUFNLGFBQWEsQ0FBQztBQUN0QyxPQUFPLGNBQWMsTUFBTSxnQkFBZ0IsQ0FBQztBQUM1QyxPQUFPLG1CQUFtQixNQUFNLHFCQUFxQixDQUFDO0FBRXREOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTZCRztBQUVIOzs7Ozs7R0FNRztBQUVIOzs7Ozs7R0FNRztBQUVIOzs7Ozs7R0FNRztBQUVILFNBQVMsYUFBYSxDQUFDLFFBQVEsRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUM1QyxrQkFBa0I7SUFDbEIsUUFBUSxtQkFDTixPQUFPLEVBQUUsSUFBSSxFQUNiLFVBQVUsRUFBRSxJQUFJLEVBQ2hCLFFBQVEsRUFBRSxRQUFRLENBQUMsSUFBSSxJQUNwQixRQUFRLENBQ1osQ0FBQztJQUVGLGdDQUFnQztJQUNoQyxNQUFNLEdBQUcsR0FBRyxRQUFRLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUN0RCwyQkFBMkI7SUFDM0IsSUFBSSxDQUFDLEdBQUc7UUFBRSxPQUFPLElBQUksQ0FBQztJQUV0QixpQkFBaUI7SUFDakIsTUFBTSxTQUFTLEdBQUcsSUFBSSxDQUFDO0lBQ3ZCLE1BQU0sWUFBWSxHQUFHLElBQUksQ0FBQztJQUUxQixpQkFBaUI7SUFDakIsSUFBSSxRQUFRLENBQUMsT0FBTyxFQUFFO1FBQ3BCLElBQUksQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxHQUFHLENBQUM7WUFBRSxPQUFPLElBQUksQ0FBQztLQUNqRTtJQUNELElBQUksUUFBUSxDQUFDLFVBQVUsRUFBRTtRQUN2QixJQUFJLENBQUMsY0FBYyxDQUFDLEdBQUcsQ0FBQztZQUFFLE9BQU8sSUFBSSxDQUFDO0tBQ3ZDO0lBRUQscUJBQXFCO0lBQ3JCLE9BQU8sR0FBRyxDQUFDO0FBQ2IsQ0FBQztBQUNELGVBQWUsYUFBYSxDQUFDIn0=

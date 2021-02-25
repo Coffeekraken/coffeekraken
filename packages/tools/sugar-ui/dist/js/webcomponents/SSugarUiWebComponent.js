@@ -1,9 +1,9 @@
 /* Compiled using Coffeekraken Sugar SJsCompiler class which stand over the AMAZING esbuild module */
-let process = {};import __deepMerge from "@coffeekraken/sugar/js/object/deepMerge";
-import __SRequest from "@coffeekraken/sugar/js/http/SRequest";
-import __hotkey from "@coffeekraken/sugar/js/keyboard/hotkey";
-import __SLitHtmlWebComponent from "@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent";
-import __SFiltrableInputWebComponent from "@coffeekraken/s-filtrable-input";
+let process = {};import __deepMerge from "/node_modules/@coffeekraken/sugar/js/object/deepMerge.js";
+import __SRequest from "/node_modules/@coffeekraken/sugar/js/http/SRequest.js";
+import __hotkey from "/node_modules/@coffeekraken/sugar/js/keyboard/hotkey.js";
+import __SLitHtmlWebComponent from "/node_modules/@coffeekraken/sugar/js/webcomponent/SLitHtmlWebComponent.js";
+import __SFiltrableInputWebComponent from "/node_modules/@coffeekraken/s-filtrable-input/src/js/index.js";
 __SFiltrableInputWebComponent.define({
   name: "SSugarUiInputNavigation"
 });

@@ -1,12 +1,7 @@
-"use strict";
 // @ts-nocheck
 // @shared
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = __importDefault(require("../object/deepMerge"));
-const json_cyclic_1 = require("json-cyclic");
+import __deepMerge from '../object/deepMerge';
+import { decycle } from 'json-cyclic';
 /**
  * @name            stringify
  * @namespace       sugar.js.json
@@ -37,7 +32,7 @@ const json_cyclic_1 = require("json-cyclic");
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function stringify(obj, replacerOrSettings = null, settings = {}) {
-    settings = deepMerge_1.default({
+    settings = __deepMerge({
         space: null,
         decircular: true
     }, replacerOrSettings !== null && typeof replacerOrSettings === 'object'
@@ -46,8 +41,8 @@ function stringify(obj, replacerOrSettings = null, settings = {}) {
     const replacer = typeof replacerOrSettings === 'function' ? replacerOrSettings : null;
     let newObj = Object.assign({}, obj);
     if (settings.decircular)
-        newObj = json_cyclic_1.decycle(newObj);
+        newObj = decycle(newObj);
     return JSON.stringify(newObj, replacer, settings.space);
 }
-exports.default = stringify;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RyaW5naWZ5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3RyaW5naWZ5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7QUFFVixvRUFBOEM7QUFDOUMsNkNBQXNDO0FBRXRDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNEJHO0FBQ0gsU0FBUyxTQUFTLENBQUMsR0FBRyxFQUFFLGtCQUFrQixHQUFHLElBQUksRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUM5RCxRQUFRLEdBQUcsbUJBQVcsQ0FDcEI7UUFDRSxLQUFLLEVBQUUsSUFBSTtRQUNYLFVBQVUsRUFBRSxJQUFJO0tBQ2pCLEVBQ0Qsa0JBQWtCLEtBQUssSUFBSSxJQUFJLE9BQU8sa0JBQWtCLEtBQUssUUFBUTtRQUNuRSxDQUFDLENBQUMsa0JBQWtCO1FBQ3BCLENBQUMsQ0FBQyxRQUFRLENBQ2IsQ0FBQztJQUNGLE1BQU0sUUFBUSxHQUNaLE9BQU8sa0JBQWtCLEtBQUssVUFBVSxDQUFDLENBQUMsQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDO0lBRXZFLElBQUksTUFBTSxHQUFHLE1BQU0sQ0FBQyxNQUFNLENBQUMsRUFBRSxFQUFFLEdBQUcsQ0FBQyxDQUFDO0lBQ3BDLElBQUksUUFBUSxDQUFDLFVBQVU7UUFBRSxNQUFNLEdBQUcscUJBQU8sQ0FBQyxNQUFNLENBQUMsQ0FBQztJQUNsRCxPQUFPLElBQUksQ0FBQyxTQUFTLENBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUM7QUFDMUQsQ0FBQztBQUNELGtCQUFlLFNBQVMsQ0FBQyJ9
+export default stringify;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RyaW5naWZ5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3RyaW5naWZ5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVO0FBRVYsT0FBTyxXQUFXLE1BQU0scUJBQXFCLENBQUM7QUFDOUMsT0FBTyxFQUFFLE9BQU8sRUFBRSxNQUFNLGFBQWEsQ0FBQztBQUV0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILFNBQVMsU0FBUyxDQUFDLEdBQUcsRUFBRSxrQkFBa0IsR0FBRyxJQUFJLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDOUQsUUFBUSxHQUFHLFdBQVcsQ0FDcEI7UUFDRSxLQUFLLEVBQUUsSUFBSTtRQUNYLFVBQVUsRUFBRSxJQUFJO0tBQ2pCLEVBQ0Qsa0JBQWtCLEtBQUssSUFBSSxJQUFJLE9BQU8sa0JBQWtCLEtBQUssUUFBUTtRQUNuRSxDQUFDLENBQUMsa0JBQWtCO1FBQ3BCLENBQUMsQ0FBQyxRQUFRLENBQ2IsQ0FBQztJQUNGLE1BQU0sUUFBUSxHQUNaLE9BQU8sa0JBQWtCLEtBQUssVUFBVSxDQUFDLENBQUMsQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDO0lBRXZFLElBQUksTUFBTSxHQUFHLE1BQU0sQ0FBQyxNQUFNLENBQUMsRUFBRSxFQUFFLEdBQUcsQ0FBQyxDQUFDO0lBQ3BDLElBQUksUUFBUSxDQUFDLFVBQVU7UUFBRSxNQUFNLEdBQUcsT0FBTyxDQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQ2xELE9BQU8sSUFBSSxDQUFDLFNBQVMsQ0FBQyxNQUFNLEVBQUUsUUFBUSxFQUFFLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztBQUMxRCxDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==

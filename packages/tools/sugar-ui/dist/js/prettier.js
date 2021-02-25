@@ -1,2 +1,90 @@
 /* Compiled using Coffeekraken Sugar SJsCompiler class which stand over the AMAZING esbuild module */
-let process = {};function l(){}function y(t,e,n,o,r){t.__svelte_meta={loc:{file:e,line:n,column:o,char:r}}}function M(t){return t()}function j(){return Object.create(null)}function _(t){t.forEach(M)}function Y(t){return typeof t=="function"}function A(t,e){return t!=t?e==e:t!==e||t&&typeof t=="object"||typeof t=="function"}function J(t){return Object.keys(t).length===0}var ft=typeof window!="undefined";var dt=new Set;function V(t,e){t.appendChild(e)}function G(t,e,n){t.insertBefore(e,n||null)}function R(t){t.parentNode.removeChild(t)}function F(t){return document.createElement(t)}function K(t){return Array.from(t.childNodes)}function Q(t,e){let n=document.createEvent("CustomEvent");return n.initCustomEvent(t,!1,!1,e),n}function T(t){let e={};for(let n of t)e[n.name]=n.value;return e}var _t=new Set;var h;function p(t){h=t}function X(){if(!h)throw new Error("Function called outside component initialization");return h}function m(t){X().$$.on_mount.push(t)}var f=[];var q=[],g=[],N=[],Z=Promise.resolve(),b=!1;function tt(){b||(b=!0,Z.then(P))}function $(t){g.push(t)}var w=!1,v=new Set;function P(){if(!w){w=!0;do{for(let t=0;t<f.length;t+=1){let e=f[t];p(e),et(e.$$)}for(p(null),f.length=0;q.length;)q.pop()();for(let t=0;t<g.length;t+=1){let e=g[t];v.has(e)||(v.add(e),e())}g.length=0}while(f.length);for(;N.length;)N.pop()();b=!1,w=!1,v.clear()}}function et(t){if(t.fragment!==null){t.update(),_(t.before_update);let e=t.dirty;t.dirty=[-1],t.fragment&&t.fragment.p(t.ctx,e),t.after_update.forEach($)}}var nt=new Set;function ot(t,e){t&&t.i&&(nt.delete(t),t.i(e))}var L=typeof window!="undefined"?window:typeof globalThis!="undefined"?globalThis:global;var ht=new Set(["allowfullscreen","allowpaymentrequest","async","autofocus","autoplay","checked","controls","default","defer","disabled","formnovalidate","hidden","ismap","loop","multiple","muted","nomodule","novalidate","open","playsinline","readonly","required","reversed","selected"]);function it(t,e,n){let{fragment:o,on_mount:r,on_destroy:s,after_update:c}=t.$$;o&&o.m(e,n),$(()=>{let a=r.map(M).filter(Y);s?s.push(...a):_(a),t.$$.on_mount=[]}),c.forEach($)}function rt(t,e){let n=t.$$;n.fragment!==null&&(_(n.on_destroy),n.fragment&&n.fragment.d(e),n.on_destroy=n.fragment=null,n.ctx=[])}function st(t,e){t.$$.dirty[0]===-1&&(f.push(t),tt(),t.$$.dirty.fill(0)),t.$$.dirty[e/31|0]|=1<<e%31}function z(t,e,n,o,r,s,c=[-1]){let a=h;p(t);let i=t.$$={fragment:null,ctx:null,props:s,update:l,not_equal:r,bound:j(),on_mount:[],on_destroy:[],before_update:[],after_update:[],context:new Map(a?a.$$.context:[]),callbacks:j(),dirty:c,skip_bound:!1},S=!1;if(i.ctx=n?n(t,e.props||{},(u,O,...C)=>{let D=C.length?C[0]:O;return i.ctx&&r(i.ctx[u],i.ctx[u]=D)&&(!i.skip_bound&&i.bound[u]&&i.bound[u](D),S&&st(t,u)),O}):[],i.update(),S=!0,_(i.before_update),i.fragment=o?o(i.ctx):!1,e.target){if(e.hydrate){let u=K(e.target);i.fragment&&i.fragment.l(u),u.forEach(R)}else i.fragment&&i.fragment.c();e.intro&&ot(t.$$.fragment),it(t,e.target,e.anchor),P()}p(a)}var k;typeof HTMLElement=="function"&&(k=class extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"})}connectedCallback(){for(let t in this.$$.slotted)this.appendChild(this.$$.slotted[t])}attributeChangedCallback(t,e,n){this[t]=n}$destroy(){rt(this,1),this.$destroy=l}$on(t,e){let n=this.$$.callbacks[t]||(this.$$.callbacks[t]=[]);return n.push(e),()=>{let o=n.indexOf(e);o!==-1&&n.splice(o,1)}}$set(t){this.$$set&&!J(t)&&(this.$$.skip_bound=!0,this.$$set(t),this.$$.skip_bound=!1)}});function d(t,e){document.dispatchEvent(Q(t,Object.assign({version:"3.32.1"},e)))}function B(t,e){d("SvelteDOMInsert",{target:t,node:e}),V(t,e)}function x(t,e,n){d("SvelteDOMInsert",{target:t,node:e,anchor:n}),G(t,e,n)}function U(t){d("SvelteDOMRemove",{node:t}),R(t)}function H(t,e,n){for(let o of Object.keys(e))~n.indexOf(o)||console.warn(`<${t}> received an unexpected slot "${o}".`)}var{console:ct}=L,I="prettier.svelte";function W(t){let e,n,o={c:function(){e=F("div"),n=F("h1"),n.textContent="Hello worlc",this.c=l,y(n,I,33,1,903),y(e,I,32,0,896)},l:function(s){throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option")},m:function(s,c){x(s,e,c),B(e,n)},p:l,i:l,o:l,d:function(s){s&&U(e)}};return d("SvelteRegisterBlock",{block:o,id:W.name,type:"component",source:"",ctx:t}),o}function ut(t,e,n){let{$$slots:o={},$$scope:r}=e;H("s-prettier",o,[]),m(()=>{console.log("MOUNTED")}),console.log("PLOP");let s=[];return Object.keys(e).forEach(c=>{!~s.indexOf(c)&&c.slice(0,2)!=="$$"&&ct.warn(`<s-prettier> was created with unknown prop '${c}'`)}),t.$capture_state=()=>({onMount:m}),[]}var E=class extends k{constructor(e){super();z(this,{target:this.shadowRoot,props:T(this.attributes)},ut,W,A,{}),e&&e.target&&x(e.target,this,e.anchor)}};customElements.define("s-prettier",E);var lt=E;export{lt as default};
+let process = {};import {
+  SvelteElement,
+  add_location,
+  append_dev,
+  attribute_to_object,
+  detach_dev,
+  dispatch_dev,
+  element,
+  globals,
+  init,
+  insert_dev,
+  noop,
+  safe_not_equal,
+  validate_slots
+} from "/node_modules/svelte/internal/index.mjs";
+const {console: console_1} = globals;
+import {onMount} from "/node_modules/svelte/index.mjs";
+const file = "prettier.svelte";
+function create_fragment(ctx) {
+  let div;
+  let h1;
+  const block = {
+    c: function create() {
+      div = element("div");
+      h1 = element("h1");
+      h1.textContent = "Hello worlc";
+      this.c = noop;
+      add_location(h1, file, 33, 1, 903);
+      add_location(div, file, 32, 0, 896);
+    },
+    l: function claim(nodes) {
+      throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    },
+    m: function mount(target, anchor) {
+      insert_dev(target, div, anchor);
+      append_dev(div, h1);
+    },
+    p: noop,
+    i: noop,
+    o: noop,
+    d: function destroy(detaching) {
+      if (detaching)
+        detach_dev(div);
+    }
+  };
+  dispatch_dev("SvelteRegisterBlock", {
+    block,
+    id: create_fragment.name,
+    type: "component",
+    source: "",
+    ctx
+  });
+  return block;
+}
+function instance($$self, $$props, $$invalidate) {
+  let {$$slots: slots = {}, $$scope} = $$props;
+  validate_slots("s-prettier", slots, []);
+  onMount(() => {
+    console.log("MOUNTED");
+  });
+  console.log("PLOP");
+  const writable_props = [];
+  Object.keys($$props).forEach((key) => {
+    if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$")
+      console_1.warn(`<s-prettier> was created with unknown prop '${key}'`);
+  });
+  $$self.$capture_state = () => ({onMount});
+  return [];
+}
+class Prettier extends SvelteElement {
+  constructor(options) {
+    super();
+    init(this, {
+      target: this.shadowRoot,
+      props: attribute_to_object(this.attributes)
+    }, instance, create_fragment, safe_not_equal, {});
+    if (options) {
+      if (options.target) {
+        insert_dev(options.target, this, options.anchor);
+      }
+    }
+  }
+}
+customElements.define("s-prettier", Prettier);
+var prettier_default = Prettier;
+export {
+  prettier_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsic3JjL2pzL3ByZXR0aWVyLmpzIl0sCiAgInNvdXJjZXNDb250ZW50IjogWyIvKiBwcmV0dGllci5zdmVsdGUgZ2VuZXJhdGVkIGJ5IFN2ZWx0ZSB2My4zMi4wICovXG5pbXBvcnQge1xuXHRTdmVsdGVFbGVtZW50LFxuXHRhZGRfbG9jYXRpb24sXG5cdGFwcGVuZF9kZXYsXG5cdGF0dHJpYnV0ZV90b19vYmplY3QsXG5cdGRldGFjaF9kZXYsXG5cdGRpc3BhdGNoX2Rldixcblx0ZWxlbWVudCxcblx0Z2xvYmFscyxcblx0aW5pdCxcblx0aW5zZXJ0X2Rldixcblx0bm9vcCxcblx0c2FmZV9ub3RfZXF1YWwsXG5cdHZhbGlkYXRlX3Nsb3RzXG59IGZyb20gXCJzdmVsdGUvaW50ZXJuYWxcIjtcblxuY29uc3QgeyBjb25zb2xlOiBjb25zb2xlXzEgfSA9IGdsb2JhbHM7XG5pbXBvcnQgeyBvbk1vdW50IH0gZnJvbSBcInN2ZWx0ZVwiO1xuY29uc3QgZmlsZSA9IFwicHJldHRpZXIuc3ZlbHRlXCI7XG5cbmZ1bmN0aW9uIGNyZWF0ZV9mcmFnbWVudChjdHgpIHtcblx0bGV0IGRpdjtcblx0bGV0IGgxO1xuXG5cdGNvbnN0IGJsb2NrID0ge1xuXHRcdGM6IGZ1bmN0aW9uIGNyZWF0ZSgpIHtcblx0XHRcdGRpdiA9IGVsZW1lbnQoXCJkaXZcIik7XG5cdFx0XHRoMSA9IGVsZW1lbnQoXCJoMVwiKTtcblx0XHRcdGgxLnRleHRDb250ZW50ID0gXCJIZWxsbyB3b3JsY1wiO1xuXHRcdFx0dGhpcy5jID0gbm9vcDtcblx0XHRcdGFkZF9sb2NhdGlvbihoMSwgZmlsZSwgMzMsIDEsIDkwMyk7XG5cdFx0XHRhZGRfbG9jYXRpb24oZGl2LCBmaWxlLCAzMiwgMCwgODk2KTtcblx0XHR9LFxuXHRcdGw6IGZ1bmN0aW9uIGNsYWltKG5vZGVzKSB7XG5cdFx0XHR0aHJvdyBuZXcgRXJyb3IoXCJvcHRpb25zLmh5ZHJhdGUgb25seSB3b3JrcyBpZiB0aGUgY29tcG9uZW50IHdhcyBjb21waWxlZCB3aXRoIHRoZSBgaHlkcmF0YWJsZTogdHJ1ZWAgb3B0aW9uXCIpO1xuXHRcdH0sXG5cdFx0bTogZnVuY3Rpb24gbW91bnQodGFyZ2V0LCBhbmNob3IpIHtcblx0XHRcdGluc2VydF9kZXYodGFyZ2V0LCBkaXYsIGFuY2hvcik7XG5cdFx0XHRhcHBlbmRfZGV2KGRpdiwgaDEpO1xuXHRcdH0sXG5cdFx0cDogbm9vcCxcblx0XHRpOiBub29wLFxuXHRcdG86IG5vb3AsXG5cdFx0ZDogZnVuY3Rpb24gZGVzdHJveShkZXRhY2hpbmcpIHtcblx0XHRcdGlmIChkZXRhY2hpbmcpIGRldGFjaF9kZXYoZGl2KTtcblx0XHR9XG5cdH07XG5cblx0ZGlzcGF0Y2hfZGV2KFwiU3ZlbHRlUmVnaXN0ZXJCbG9ja1wiLCB7XG5cdFx0YmxvY2ssXG5cdFx0aWQ6IGNyZWF0ZV9mcmFnbWVudC5uYW1lLFxuXHRcdHR5cGU6IFwiY29tcG9uZW50XCIsXG5cdFx0c291cmNlOiBcIlwiLFxuXHRcdGN0eFxuXHR9KTtcblxuXHRyZXR1cm4gYmxvY2s7XG59XG5cbmZ1bmN0aW9uIGluc3RhbmNlKCQkc2VsZiwgJCRwcm9wcywgJCRpbnZhbGlkYXRlKSB7XG5cdGxldCB7ICQkc2xvdHM6IHNsb3RzID0ge30sICQkc2NvcGUgfSA9ICQkcHJvcHM7XG5cdHZhbGlkYXRlX3Nsb3RzKFwicy1wcmV0dGllclwiLCBzbG90cywgW10pO1xuXG5cdG9uTW91bnQoKCkgPT4ge1xuXHRcdC8vIGNvbnN0IGludGVydmFsID0gc2V0SW50ZXJ2YWwoKCkgPT4ge1xuXHRcdC8vIFx0Y29uc29sZS5sb2coJ2JlZXAnKTtcblx0XHQvLyB9LCAxMDAwKTtcblx0XHQvLyByZXR1cm4gKCkgPT4gY2xlYXJJbnRlcnZhbChpbnRlcnZhbCk7XG5cdFx0Y29uc29sZS5sb2coXCJNT1VOVEVEXCIpO1xuXHR9KTtcblxuXHRjb25zb2xlLmxvZyhcIlBMT1BcIik7XG5cdGNvbnN0IHdyaXRhYmxlX3Byb3BzID0gW107XG5cblx0T2JqZWN0LmtleXMoJCRwcm9wcykuZm9yRWFjaChrZXkgPT4ge1xuXHRcdGlmICghfndyaXRhYmxlX3Byb3BzLmluZGV4T2Yoa2V5KSAmJiBrZXkuc2xpY2UoMCwgMikgIT09IFwiJCRcIikgY29uc29sZV8xLndhcm4oYDxzLXByZXR0aWVyPiB3YXMgY3JlYXRlZCB3aXRoIHVua25vd24gcHJvcCAnJHtrZXl9J2ApO1xuXHR9KTtcblxuXHQkJHNlbGYuJGNhcHR1cmVfc3RhdGUgPSAoKSA9PiAoeyBvbk1vdW50IH0pO1xuXHRyZXR1cm4gW107XG59XG5cbmNsYXNzIFByZXR0aWVyIGV4dGVuZHMgU3ZlbHRlRWxlbWVudCB7XG5cdGNvbnN0cnVjdG9yKG9wdGlvbnMpIHtcblx0XHRzdXBlcigpO1xuXG5cdFx0aW5pdChcblx0XHRcdHRoaXMsXG5cdFx0XHR7XG5cdFx0XHRcdHRhcmdldDogdGhpcy5zaGFkb3dSb290LFxuXHRcdFx0XHRwcm9wczogYXR0cmlidXRlX3RvX29iamVjdCh0aGlzLmF0dHJpYnV0ZXMpXG5cdFx0XHR9LFxuXHRcdFx0aW5zdGFuY2UsXG5cdFx0XHRjcmVhdGVfZnJhZ21lbnQsXG5cdFx0XHRzYWZlX25vdF9lcXVhbCxcblx0XHRcdHt9XG5cdFx0KTtcblxuXHRcdGlmIChvcHRpb25zKSB7XG5cdFx0XHRpZiAob3B0aW9ucy50YXJnZXQpIHtcblx0XHRcdFx0aW5zZXJ0X2RldihvcHRpb25zLnRhcmdldCwgdGhpcywgb3B0aW9ucy5hbmNob3IpO1xuXHRcdFx0fVxuXHRcdH1cblx0fVxufVxuXG5jdXN0b21FbGVtZW50cy5kZWZpbmUoXCJzLXByZXR0aWVyXCIsIFByZXR0aWVyKTtcbmV4cG9ydCBkZWZhdWx0IFByZXR0aWVyOyJdLAogICJtYXBwaW5ncyI6ICJBQUNBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQWdCQSxNQUFNLENBQUUsU0FBUyxhQUFjO0FBQy9CO0FBQ0EsTUFBTSxPQUFPO0FBRWIseUJBQXlCO0FBQ3hCLE1BQUk7QUFDSixNQUFJO0FBRUosUUFBTSxRQUFRO0FBQUEsSUFDYixHQUFHO0FBQ0YsWUFBTSxRQUFRO0FBQ2QsV0FBSyxRQUFRO0FBQ2IsU0FBRyxjQUFjO0FBQ2pCLFdBQUssSUFBSTtBQUNULG1CQUFhLElBQUksTUFBTSxJQUFJLEdBQUc7QUFDOUIsbUJBQWEsS0FBSyxNQUFNLElBQUksR0FBRztBQUFBO0FBQUEsSUFFaEMsR0FBRyxlQUFlO0FBQ2pCLFlBQU0sSUFBSSxNQUFNO0FBQUE7QUFBQSxJQUVqQixHQUFHLGVBQWUsUUFBUTtBQUN6QixpQkFBVyxRQUFRLEtBQUs7QUFDeEIsaUJBQVcsS0FBSztBQUFBO0FBQUEsSUFFakIsR0FBRztBQUFBLElBQ0gsR0FBRztBQUFBLElBQ0gsR0FBRztBQUFBLElBQ0gsR0FBRyxpQkFBaUI7QUFDbkIsVUFBSTtBQUFXLG1CQUFXO0FBQUE7QUFBQTtBQUk1QixlQUFhLHVCQUF1QjtBQUFBLElBQ25DO0FBQUEsSUFDQSxJQUFJLGdCQUFnQjtBQUFBLElBQ3BCLE1BQU07QUFBQSxJQUNOLFFBQVE7QUFBQSxJQUNSO0FBQUE7QUFHRCxTQUFPO0FBQUE7QUFHUixrQkFBa0IsUUFBUSxTQUFTO0FBQ2xDLE1BQUksQ0FBRSxTQUFTLFFBQVEsSUFBSSxXQUFZO0FBQ3ZDLGlCQUFlLGNBQWMsT0FBTztBQUVwQyxVQUFRO0FBS1AsWUFBUSxJQUFJO0FBQUE7QUFHYixVQUFRLElBQUk7QUFDWixRQUFNLGlCQUFpQjtBQUV2QixTQUFPLEtBQUssU0FBUyxRQUFRO0FBQzVCLFFBQUksQ0FBQyxDQUFDLGVBQWUsUUFBUSxRQUFRLElBQUksTUFBTSxHQUFHLE9BQU87QUFBTSxnQkFBVSxLQUFLLCtDQUErQztBQUFBO0FBRzlILFNBQU8saUJBQWlCLE1BQU8sRUFBRTtBQUNqQyxTQUFPO0FBQUE7QUFoRlIsdUJBbUZ1QjtBQUFBLEVBQ3RCLFlBQVk7QUFDWDtBQUVBLFNBQ0MsTUFDQTtBQUFBLE1BQ0MsUUFBUSxLQUFLO0FBQUEsTUFDYixPQUFPLG9CQUFvQixLQUFLO0FBQUEsT0FFakMsVUFDQSxpQkFDQSxnQkFDQTtBQUdELFFBQUk7QUFDSCxVQUFJLFFBQVE7QUFDWCxtQkFBVyxRQUFRLFFBQVEsTUFBTSxRQUFRO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFNN0MsZUFBZSxPQUFPLGNBQWM7QUFDcEMsSUFBTyxtQkFBUTsiLAogICJuYW1lcyI6IFtdCn0K

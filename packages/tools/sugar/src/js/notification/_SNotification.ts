@@ -3,7 +3,7 @@
 import __deepMerge from '../object/deepMerge';
 import __SClass from '../class/SClass';
 import __isNode from '../is/node';
-import __sugarConfig from '../config/sugar';
+import __sugarConfig from '../../node/config/sugar';
 import __SPromise, { ISPromise } from '../promise/SPromise';
 
 import __SNotificationSettingsInterface from './interface/SNotificationSettingsInterface';

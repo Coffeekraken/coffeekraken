@@ -13,9 +13,9 @@ let process = {};import {
   noop,
   safe_not_equal,
   validate_slots
-} from "svelte/internal";
+} from "/node_modules/svelte/internal/index.mjs";
 const {console: console_1} = globals;
-import __SSvelteComponent from "@coffeekraken/sugar/js/svelte/SSvelteComponent";
+import __SSvelteComponent from "/node_modules/@coffeekraken/sugar/js/svelte/SSvelteComponent.js";
 const file = "component.svelte";
 function create_fragment(ctx) {
   let div;

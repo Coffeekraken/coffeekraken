@@ -1,16 +1,5 @@
 // @ts-nocheck
 // @shared
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -20,276 +9,227 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "../http/SRequest"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var SRequest_1 = __importDefault(require("../http/SRequest"));
+import __SRequest from '../http/SRequest';
+/**
+ * @name 		                SGoogleCustomSearch
+ * @namespace           sugar.js.google
+ * @type                    Class
+ * @stable
+ *
+ * This class let you make with ease search requests to the google custom search service
+ * with useful features like:
+ * - Simple pagination system
+ * - Promise support
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example 	            js
+ * // create a google search instance
+ * const googleSearch = new SGoogleCustomSearch('myApiKey', 'myCustomSearchContextKey');
+ *
+ * // make a search...
+ * googleSearch.search('hello world').then((response) => {
+ * 		// do something with the google response...
+ * });
+ *
+ * // get the nexts results
+ * googleSearch.next().then((response) => {
+ * 		// do something with the new response...
+ * });
+ *
+ * @see 		https://developers.google.com/custom-search/
+ * @since       2.0.0
+ * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+ */
+export default class SGoogleCustomSearch {
     /**
-     * @name 		                SGoogleCustomSearch
-     * @namespace           sugar.js.google
-     * @type                    Class
-     * @stable
+     * @name                constructor
+     * @type                Function
      *
-     * This class let you make with ease search requests to the google custom search service
-     * with useful features like:
-     * - Simple pagination system
-     * - Promise support
+     * Constructor
      *
-     * @todo      interface
-     * @todo      doc
-     * @todo      tests
+     * @param 	        {String} 	        apiKey 		          The google api key to reach the services
+     * @param 	        {String}        	cx 		            	The google custom search context
      *
-     * @example 	            js
-     * // create a google search instance
-     * const googleSearch = new SGoogleCustomSearch('myApiKey', 'myCustomSearchContextKey');
-     *
-     * // make a search...
-     * googleSearch.search('hello world').then((response) => {
-     * 		// do something with the google response...
-     * });
-     *
-     * // get the nexts results
-     * googleSearch.next().then((response) => {
-     * 		// do something with the new response...
-     * });
-     *
-     * @see 		https://developers.google.com/custom-search/
-     * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    var SGoogleCustomSearch = /** @class */ (function () {
+    constructor(apiKey, cx) {
         /**
-         * @name                constructor
-         * @type                Function
-         *
-         * Constructor
-         *
-         * @param 	        {String} 	        apiKey 		          The google api key to reach the services
-         * @param 	        {String}        	cx 		            	The google custom search context
-         *
-         * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-         */
-        function SGoogleCustomSearch(apiKey, cx) {
-            /**
-             * @name              _apiKey
-             * @type              String
-             * @private
-             *
-             * Store the api key used to reach the google services
-             *
-             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-             */
-            this._apiKey = null;
-            /**
-             * @name              _cx
-             * @type              String
-             * @private
-             *
-             * Store the context key used to reach the good google search instance
-             *
-             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-             */
-            this._cx = null;
-            /**
-             * @name              _settings
-             * @type              Object
-             * @private
-             *
-             * Store the actual query object to be able to call
-             * next page etc...
-             *
-             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-             */
-            this._settings = {
-                /**
-                 * @name              num
-                 * @type              Number
-                 * @default           10
-                 *
-                 * How many results by page wanted
-                 * Can be between 1 and 10
-                 *
-                 * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-                 */
-                num: 10,
-                /**
-                 * @name                page
-                 * @type                Number
-                 * @default             1
-                 *
-                 * The page to request
-                 *
-                 * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-                 */
-                page: 1
-            };
-            /**
-             * @name            _searchUrl
-             * @type            String
-             * @private
-             *
-             * Store the google search url
-             *
-             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-             */
-            this._searchUrl = 'https://www.googleapis.com/customsearch/v1';
-            /**
-             * @name              _page
-             * @type              Number
-             * @private
-             *
-             * Store the current page
-             *
-             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-             */
-            this._page = 1;
-            /**
-             * @name        _keywords
-             * @type        String
-             * @private
-             *
-             * The keywords searched
-             *
-             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-             */
-            this._keywords = null;
-            // save the props
-            this._apiKey = apiKey;
-            this._cx = cx;
-        }
-        /**
-         * @name            _generateSearchUrl
-         * @type            Function
+         * @name              _apiKey
+         * @type              String
          * @private
          *
-         * Generate and return the correct search url depending on
-         * parameters like the current page, etc...
-         *
-         * @return 	{String} 	The generated url
+         * Store the api key used to reach the google services
          *
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
-        SGoogleCustomSearch.prototype._generateSearchUrl = function () {
-            // construct url
-            var queryString = '';
-            for (var key in this._settings) {
-                queryString += "&" + key + "=" + this._settings[key];
-            }
-            queryString = queryString.substr(1);
-            queryString = "?" + queryString;
-            // process the url
-            return this._searchUrl + queryString;
-        };
+        this._apiKey = null;
         /**
-         * @name              search
-         * @type              Function
-         * @async
+         * @name              _cx
+         * @type              String
+         * @private
          *
-         * Launch a search
-         *
-         * @param 	      {String} 	          keywords 	            The keywords to search
-         * @param       	{Object} 	          settings            	The settings object
-         * @return      	{Promise} 		                        		A promise of results
-         */
-        SGoogleCustomSearch.prototype.search = function (keywords, settings) {
-            if (settings === void 0) { settings = {}; }
-            return __awaiter(this, void 0, void 0, function () {
-                var num, url, ajx;
-                return __generator(this, function (_a) {
-                    // save the keywords into the instance
-                    this._keywords = keywords;
-                    // reset the page count
-                    this._page = settings.page || 1;
-                    num = settings.num || 10;
-                    this._settings = __assign({ key: this._apiKey, cx: this._cx, q: keywords, num: num, start: (this._page - 1) * num + 1 }, settings);
-                    url = this._generateSearchUrl();
-                    ajx = new SRequest_1.default({
-                        method: 'GET',
-                        url: url
-                    });
-                    // launch the request end send back the promise
-                    return [2 /*return*/, ajx.send()];
-                });
-            });
-        };
-        /**
-         * @name            next
-         * @type            Function
-         * @async
-         *
-         * Load the next page
-         *
-         * @return 		{Promise} 		The promise of next page results
+         * Store the context key used to reach the good google search instance
          *
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
-        SGoogleCustomSearch.prototype.next = function () {
-            return __awaiter(this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    // update the page count
-                    return [2 /*return*/, this.search(this._keywords, __assign(__assign({}, this._settings), { page: this._page + 1 }))];
-                });
-            });
-        };
+        this._cx = null;
         /**
-         * @name            previous
-         * @type            Function
-         * @async
+         * @name              _settings
+         * @type              Object
+         * @private
          *
-         * Load the previous page
-         *
-         * @return 		{Promise} 		The promise of previous page results
+         * Store the actual query object to be able to call
+         * next page etc...
          *
          * @author 		Olivier Bossel<olivier.bossel@gmail.com>
          */
-        SGoogleCustomSearch.prototype.previous = function () {
-            return __awaiter(this, void 0, void 0, function () {
-                return __generator(this, function (_a) {
-                    // update the page count
-                    return [2 /*return*/, this.search(this._keywords, __assign(__assign({}, this._settings), { page: this._page - (this._page <= 1 ? 0 : 1) }))];
-                });
-            });
+        this._settings = {
+            /**
+             * @name              num
+             * @type              Number
+             * @default           10
+             *
+             * How many results by page wanted
+             * Can be between 1 and 10
+             *
+             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+             */
+            num: 10,
+            /**
+             * @name                page
+             * @type                Number
+             * @default             1
+             *
+             * The page to request
+             *
+             * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+             */
+            page: 1
         };
-        return SGoogleCustomSearch;
-    }());
-    exports.default = SGoogleCustomSearch;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0dvb2dsZUN1c3RvbVNlYXJjaC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNHb29nbGVDdXN0b21TZWFyY2gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLFVBQVU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRVYsOERBQTBDO0lBRTFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQWdDRztJQUNIO1FBMkZFOzs7Ozs7Ozs7O1dBVUc7UUFDSCw2QkFBWSxNQUFNLEVBQUUsRUFBRTtZQXJHdEI7Ozs7Ozs7O2VBUUc7WUFDSCxZQUFPLEdBQUcsSUFBSSxDQUFDO1lBRWY7Ozs7Ozs7O2VBUUc7WUFDSCxRQUFHLEdBQUcsSUFBSSxDQUFDO1lBRVg7Ozs7Ozs7OztlQVNHO1lBQ0gsY0FBUyxHQUFHO2dCQUNWOzs7Ozs7Ozs7bUJBU0c7Z0JBQ0gsR0FBRyxFQUFFLEVBQUU7Z0JBRVA7Ozs7Ozs7O21CQVFHO2dCQUNILElBQUksRUFBRSxDQUFDO2FBQ1IsQ0FBQztZQUVGOzs7Ozs7OztlQVFHO1lBQ0gsZUFBVSxHQUFHLDRDQUE0QyxDQUFDO1lBRTFEOzs7Ozs7OztlQVFHO1lBQ0gsVUFBSyxHQUFHLENBQUMsQ0FBQztZQUVWOzs7Ozs7OztlQVFHO1lBQ0gsY0FBUyxHQUFHLElBQUksQ0FBQztZQWNmLGlCQUFpQjtZQUNqQixJQUFJLENBQUMsT0FBTyxHQUFHLE1BQU0sQ0FBQztZQUN0QixJQUFJLENBQUMsR0FBRyxHQUFHLEVBQUUsQ0FBQztRQUNoQixDQUFDO1FBRUQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxnREFBa0IsR0FBbEI7WUFDRSxnQkFBZ0I7WUFDaEIsSUFBSSxXQUFXLEdBQUcsRUFBRSxDQUFDO1lBQ3JCLEtBQUssSUFBTSxHQUFHLElBQUksSUFBSSxDQUFDLFNBQVMsRUFBRTtnQkFDaEMsV0FBVyxJQUFJLE1BQUksR0FBRyxTQUFJLElBQUksQ0FBQyxTQUFTLENBQUMsR0FBRyxDQUFHLENBQUM7YUFDakQ7WUFDRCxXQUFXLEdBQUcsV0FBVyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNwQyxXQUFXLEdBQUcsTUFBSSxXQUFhLENBQUM7WUFFaEMsa0JBQWtCO1lBQ2xCLE9BQU8sSUFBSSxDQUFDLFVBQVUsR0FBRyxXQUFXLENBQUM7UUFDdkMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDRyxvQ0FBTSxHQUFaLFVBQWEsUUFBUSxFQUFFLFFBQWE7WUFBYix5QkFBQSxFQUFBLGFBQWE7Ozs7b0JBQ2xDLHNDQUFzQztvQkFDdEMsSUFBSSxDQUFDLFNBQVMsR0FBRyxRQUFRLENBQUM7b0JBRTFCLHVCQUF1QjtvQkFDdkIsSUFBSSxDQUFDLEtBQUssR0FBRyxRQUFRLENBQUMsSUFBSSxJQUFJLENBQUMsQ0FBQztvQkFHMUIsR0FBRyxHQUFHLFFBQVEsQ0FBQyxHQUFHLElBQUksRUFBRSxDQUFDO29CQUMvQixJQUFJLENBQUMsU0FBUyxjQUNaLEdBQUcsRUFBRSxJQUFJLENBQUMsT0FBTyxFQUNqQixFQUFFLEVBQUUsSUFBSSxDQUFDLEdBQUcsRUFDWixDQUFDLEVBQUUsUUFBUSxFQUNYLEdBQUcsRUFBRSxHQUFHLEVBQ1IsS0FBSyxFQUFFLENBQUMsSUFBSSxDQUFDLEtBQUssR0FBRyxDQUFDLENBQUMsR0FBRyxHQUFHLEdBQUcsQ0FBQyxJQUM5QixRQUFRLENBQ1osQ0FBQztvQkFHSSxHQUFHLEdBQUcsSUFBSSxDQUFDLGtCQUFrQixFQUFFLENBQUM7b0JBR2hDLEdBQUcsR0FBRyxJQUFJLGtCQUFVLENBQUM7d0JBQ3pCLE1BQU0sRUFBRSxLQUFLO3dCQUNiLEdBQUcsS0FBQTtxQkFDSixDQUFDLENBQUM7b0JBRUgsK0NBQStDO29CQUMvQyxzQkFBTyxHQUFHLENBQUMsSUFBSSxFQUFFLEVBQUM7OztTQUNuQjtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDRyxrQ0FBSSxHQUFWOzs7b0JBQ0Usd0JBQXdCO29CQUN4QixzQkFBTyxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxTQUFTLHdCQUM1QixJQUFJLENBQUMsU0FBUyxLQUNqQixJQUFJLEVBQUUsSUFBSSxDQUFDLEtBQUssR0FBRyxDQUFDLElBQ3BCLEVBQUM7OztTQUNKO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNHLHNDQUFRLEdBQWQ7OztvQkFDRSx3QkFBd0I7b0JBQ3hCLHNCQUFPLElBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsd0JBQzVCLElBQUksQ0FBQyxTQUFTLEtBQ2pCLElBQUksRUFBRSxJQUFJLENBQUMsS0FBSyxHQUFHLENBQUMsSUFBSSxDQUFDLEtBQUssSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQzVDLEVBQUM7OztTQUNKO1FBQ0gsMEJBQUM7SUFBRCxDQUFDLEFBcE5ELElBb05DIn0=
+        /**
+         * @name            _searchUrl
+         * @type            String
+         * @private
+         *
+         * Store the google search url
+         *
+         * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+         */
+        this._searchUrl = 'https://www.googleapis.com/customsearch/v1';
+        /**
+         * @name              _page
+         * @type              Number
+         * @private
+         *
+         * Store the current page
+         *
+         * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+         */
+        this._page = 1;
+        /**
+         * @name        _keywords
+         * @type        String
+         * @private
+         *
+         * The keywords searched
+         *
+         * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+         */
+        this._keywords = null;
+        // save the props
+        this._apiKey = apiKey;
+        this._cx = cx;
+    }
+    /**
+     * @name            _generateSearchUrl
+     * @type            Function
+     * @private
+     *
+     * Generate and return the correct search url depending on
+     * parameters like the current page, etc...
+     *
+     * @return 	{String} 	The generated url
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    _generateSearchUrl() {
+        // construct url
+        let queryString = '';
+        for (const key in this._settings) {
+            queryString += `&${key}=${this._settings[key]}`;
+        }
+        queryString = queryString.substr(1);
+        queryString = `?${queryString}`;
+        // process the url
+        return this._searchUrl + queryString;
+    }
+    /**
+     * @name              search
+     * @type              Function
+     * @async
+     *
+     * Launch a search
+     *
+     * @param 	      {String} 	          keywords 	            The keywords to search
+     * @param       	{Object} 	          settings            	The settings object
+     * @return      	{Promise} 		                        		A promise of results
+     */
+    search(keywords, settings = {}) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // save the keywords into the instance
+            this._keywords = keywords;
+            // reset the page count
+            this._page = settings.page || 1;
+            // construct query object
+            const num = settings.num || 10;
+            this._settings = Object.assign({ key: this._apiKey, cx: this._cx, q: keywords, num: num, start: (this._page - 1) * num + 1 }, settings);
+            // get the url
+            const url = this._generateSearchUrl();
+            // process to the ajax query
+            const ajx = new __SRequest({
+                method: 'GET',
+                url
+            });
+            // launch the request end send back the promise
+            return ajx.send();
+        });
+    }
+    /**
+     * @name            next
+     * @type            Function
+     * @async
+     *
+     * Load the next page
+     *
+     * @return 		{Promise} 		The promise of next page results
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    next() {
+        return __awaiter(this, void 0, void 0, function* () {
+            // update the page count
+            return this.search(this._keywords, Object.assign(Object.assign({}, this._settings), { page: this._page + 1 }));
+        });
+    }
+    /**
+     * @name            previous
+     * @type            Function
+     * @async
+     *
+     * Load the previous page
+     *
+     * @return 		{Promise} 		The promise of previous page results
+     *
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    previous() {
+        return __awaiter(this, void 0, void 0, function* () {
+            // update the page count
+            return this.search(this._keywords, Object.assign(Object.assign({}, this._settings), { page: this._page - (this._page <= 1 ? 0 : 1) }));
+        });
+    }
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0dvb2dsZUN1c3RvbVNlYXJjaC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNHb29nbGVDdXN0b21TZWFyY2gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLFVBQVU7Ozs7Ozs7Ozs7QUFFVixPQUFPLFVBQVUsTUFBTSxrQkFBa0IsQ0FBQztBQUUxQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQ0c7QUFDSCxNQUFNLENBQUMsT0FBTyxPQUFPLG1CQUFtQjtJQTJGdEM7Ozs7Ozs7Ozs7T0FVRztJQUNILFlBQVksTUFBTSxFQUFFLEVBQUU7UUFyR3RCOzs7Ozs7OztXQVFHO1FBQ0gsWUFBTyxHQUFHLElBQUksQ0FBQztRQUVmOzs7Ozs7OztXQVFHO1FBQ0gsUUFBRyxHQUFHLElBQUksQ0FBQztRQUVYOzs7Ozs7Ozs7V0FTRztRQUNILGNBQVMsR0FBRztZQUNWOzs7Ozs7Ozs7ZUFTRztZQUNILEdBQUcsRUFBRSxFQUFFO1lBRVA7Ozs7Ozs7O2VBUUc7WUFDSCxJQUFJLEVBQUUsQ0FBQztTQUNSLENBQUM7UUFFRjs7Ozs7Ozs7V0FRRztRQUNILGVBQVUsR0FBRyw0Q0FBNEMsQ0FBQztRQUUxRDs7Ozs7Ozs7V0FRRztRQUNILFVBQUssR0FBRyxDQUFDLENBQUM7UUFFVjs7Ozs7Ozs7V0FRRztRQUNILGNBQVMsR0FBRyxJQUFJLENBQUM7UUFjZixpQkFBaUI7UUFDakIsSUFBSSxDQUFDLE9BQU8sR0FBRyxNQUFNLENBQUM7UUFDdEIsSUFBSSxDQUFDLEdBQUcsR0FBRyxFQUFFLENBQUM7SUFDaEIsQ0FBQztJQUVEOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsa0JBQWtCO1FBQ2hCLGdCQUFnQjtRQUNoQixJQUFJLFdBQVcsR0FBRyxFQUFFLENBQUM7UUFDckIsS0FBSyxNQUFNLEdBQUcsSUFBSSxJQUFJLENBQUMsU0FBUyxFQUFFO1lBQ2hDLFdBQVcsSUFBSSxJQUFJLEdBQUcsSUFBSSxJQUFJLENBQUMsU0FBUyxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUM7U0FDakQ7UUFDRCxXQUFXLEdBQUcsV0FBVyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNwQyxXQUFXLEdBQUcsSUFBSSxXQUFXLEVBQUUsQ0FBQztRQUVoQyxrQkFBa0I7UUFDbEIsT0FBTyxJQUFJLENBQUMsVUFBVSxHQUFHLFdBQVcsQ0FBQztJQUN2QyxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7T0FVRztJQUNHLE1BQU0sQ0FBQyxRQUFRLEVBQUUsUUFBUSxHQUFHLEVBQUU7O1lBQ2xDLHNDQUFzQztZQUN0QyxJQUFJLENBQUMsU0FBUyxHQUFHLFFBQVEsQ0FBQztZQUUxQix1QkFBdUI7WUFDdkIsSUFBSSxDQUFDLEtBQUssR0FBRyxRQUFRLENBQUMsSUFBSSxJQUFJLENBQUMsQ0FBQztZQUVoQyx5QkFBeUI7WUFDekIsTUFBTSxHQUFHLEdBQUcsUUFBUSxDQUFDLEdBQUcsSUFBSSxFQUFFLENBQUM7WUFDL0IsSUFBSSxDQUFDLFNBQVMsbUJBQ1osR0FBRyxFQUFFLElBQUksQ0FBQyxPQUFPLEVBQ2pCLEVBQUUsRUFBRSxJQUFJLENBQUMsR0FBRyxFQUNaLENBQUMsRUFBRSxRQUFRLEVBQ1gsR0FBRyxFQUFFLEdBQUcsRUFDUixLQUFLLEVBQUUsQ0FBQyxJQUFJLENBQUMsS0FBSyxHQUFHLENBQUMsQ0FBQyxHQUFHLEdBQUcsR0FBRyxDQUFDLElBQzlCLFFBQVEsQ0FDWixDQUFDO1lBRUYsY0FBYztZQUNkLE1BQU0sR0FBRyxHQUFHLElBQUksQ0FBQyxrQkFBa0IsRUFBRSxDQUFDO1lBRXRDLDRCQUE0QjtZQUM1QixNQUFNLEdBQUcsR0FBRyxJQUFJLFVBQVUsQ0FBQztnQkFDekIsTUFBTSxFQUFFLEtBQUs7Z0JBQ2IsR0FBRzthQUNKLENBQUMsQ0FBQztZQUVILCtDQUErQztZQUMvQyxPQUFPLEdBQUcsQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUNwQixDQUFDO0tBQUE7SUFFRDs7Ozs7Ozs7OztPQVVHO0lBQ0csSUFBSTs7WUFDUix3QkFBd0I7WUFDeEIsT0FBTyxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxTQUFTLGtDQUM1QixJQUFJLENBQUMsU0FBUyxLQUNqQixJQUFJLEVBQUUsSUFBSSxDQUFDLEtBQUssR0FBRyxDQUFDLElBQ3BCLENBQUM7UUFDTCxDQUFDO0tBQUE7SUFFRDs7Ozs7Ozs7OztPQVVHO0lBQ0csUUFBUTs7WUFDWix3QkFBd0I7WUFDeEIsT0FBTyxJQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxTQUFTLGtDQUM1QixJQUFJLENBQUMsU0FBUyxLQUNqQixJQUFJLEVBQUUsSUFBSSxDQUFDLEtBQUssR0FBRyxDQUFDLElBQUksQ0FBQyxLQUFLLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxJQUM1QyxDQUFDO1FBQ0wsQ0FBQztLQUFBO0NBQ0YifQ==

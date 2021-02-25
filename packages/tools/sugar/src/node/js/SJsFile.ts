@@ -1,6 +1,7 @@
 import __SFile from '../fs/SFile';
 import __md5 from '../crypt/md5';
 import __SDuration from '../time/SDuration';
+import __fs from 'fs';
 import __path from 'path';
 import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
@@ -10,15 +11,11 @@ import __toString from '../string/toString';
 import __wait from '../time/wait';
 import __getFilename from '../fs/filename';
 import * as __esbuild from 'esbuild';
-import __resolve from 'resolve';
 import __filter from '../object/filter';
 import __esbuildScssLoaderPlugin from './compile/plugins/esbuild/esbuildScssLoaderPlugin';
 import __SEventEmitter from '../event/SEventEmitter';
 import __onProcessExit from '../process/onProcessExit';
-import {
-  getImportMapFromNodeModules,
-  generateImportMapForProject
-} from '@jsenv/node-module-import-map';
+import __resolve from '../module/resolve';
 
 import __SInterface from '../interface/SInterface';
 import __SJsCompiler, { ISJsCompilerParams } from './compile/SJsCompiler';
@@ -242,6 +239,17 @@ class SJsFile extends __SFile implements ISJsFile {
         );
       }
 
+      // let exampleOnResolvePlugin = {
+      //   name: 'example',
+      //   setup(build) {
+      //     build.onResolve({ filter: /.*/ }, (args) => {
+      //       console.log(args.path);
+      //       return { path: __path.join(args.resolveDir, args.path) };
+      //       // return { path: path.join(args.resolveDir, 'public', args.path) };
+      //     });
+      //   }
+      // };
+
       let esbuildParams: any = {
         charset: 'utf8',
         format: params.format,
@@ -256,21 +264,51 @@ class SJsFile extends __SFile implements ISJsFile {
         errorLimit: 100,
         minify: params.minify,
         sourcemap: params.map,
+        // plugins: [exampleOnResolvePlugin],
         ...params.esbuild
       };
 
       let resultObj: any;
 
       try {
-        resultObj = __esbuild.buildSync(esbuildParams);
+        resultObj = await __esbuild.build(esbuildParams);
       } catch (e) {
         return reject(e);
       }
 
-      const resultJs = [
-        params.banner || '',
-        'let process = {};' + resultObj.outputFiles[0].text
-      ].join('\n');
+      function rewriteImports(code) {
+        const reg = /\sfrom\s['"`](.*)['"`];?/gm;
+        let match = reg.exec(code);
+        do {
+          if (!match) continue;
+          if (match[1].match(/^[\.\/]/)) continue;
+
+          // const absPath = `${__sugarConfig('storage.nodeModulesDir')}/${match[1]}`;
+          // if (__fs.existsSync())
+
+          const res = __resolve(match[1], {
+            fields:
+              params.format === 'esm'
+                ? ['module', 'main', 'browser']
+                : ['main', 'browser', 'module']
+          });
+
+          if (res) {
+            code = code.replace(
+              match[0],
+              ` from "${res.replace(__sugarConfig('storage.rootDir'), '')}";`
+            );
+          }
+        } while ((match = reg.exec(code)) !== null);
+        return code;
+      }
+
+      const resultJs = rewriteImports(
+        [
+          params.banner || '',
+          'let process = {};' + resultObj.outputFiles[0].text
+        ].join('\n')
+      );
 
       // check if need to save
       if (params.save) {

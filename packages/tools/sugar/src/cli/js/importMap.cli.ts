@@ -10,12 +10,13 @@ export default async () => {
   await generateImportMapForProject(
     [
       getImportMapFromNodeModules({
-        projectDirectoryUrl
+        projectDirectoryUrl,
+        projectPackageDevDependenciesIncluded: true
       })
     ],
     {
       projectDirectoryUrl,
-      importMapFileRelativeUrl: './dist/package.importmap'
+      importMapFileRelativeUrl: './dist/importmap.json'
     }
   );
 };

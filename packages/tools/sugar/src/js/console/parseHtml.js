@@ -1,13 +1,8 @@
-"use strict";
 // @ts-nocheck
 // @shared
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const tagsMap_1 = __importDefault(require("./html/tagsMap"));
-const terminal_1 = __importDefault(require("../is/terminal"));
-const replaceTags_1 = __importDefault(require("../html/replaceTags"));
+import __tagsMap from './html/tagsMap';
+import __isTerminal from '../is/terminal';
+import __replaceTags from '../html/replaceTags';
 /**
  * @name                                parseHtml
  * @namespace          sugar.js.console
@@ -25,7 +20,7 @@ const replaceTags_1 = __importDefault(require("../html/replaceTags"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function parseHtml(message) {
-    if (terminal_1.default()) {
+    if (__isTerminal()) {
         const fn = require(`${__dirname}/../../node/terminal/parseHtml`).default;
         return fn(message);
     }
@@ -37,11 +32,11 @@ function parseHtml(message) {
         message = [message];
     }
     message = message.map((m) => {
-        return replaceTags_1.default(m, tagsMap_1.default);
+        return __replaceTags(m, __tagsMap);
     });
     if (isArray)
         return message;
     return message[0];
 }
-exports.default = parseHtml;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyc2VIdG1sLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFyc2VIdG1sLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7QUFFViw2REFBdUM7QUFDdkMsOERBQTBDO0FBQzFDLHNFQUFnRDtBQUVoRDs7Ozs7Ozs7Ozs7Ozs7O0dBZUc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxPQUFPO0lBQ3hCLElBQUksa0JBQVksRUFBRSxFQUFFO1FBQ2xCLE1BQU0sRUFBRSxHQUFHLE9BQU8sQ0FBQyxHQUFHLFNBQVMsZ0NBQWdDLENBQUMsQ0FBQyxPQUFPLENBQUM7UUFDekUsT0FBTyxFQUFFLENBQUMsT0FBTyxDQUFDLENBQUM7S0FDcEI7SUFFRCxJQUFJLE9BQU8sR0FBRyxLQUFLLENBQUM7SUFDcEIsSUFBSSxLQUFLLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQzFCLE9BQU8sR0FBRyxJQUFJLENBQUM7S0FDaEI7U0FBTTtRQUNMLE9BQU8sR0FBRyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0tBQ3JCO0lBRUQsT0FBTyxHQUFHLE9BQU8sQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRTtRQUMxQixPQUFPLHFCQUFhLENBQUMsQ0FBQyxFQUFFLGlCQUFTLENBQUMsQ0FBQztJQUNyQyxDQUFDLENBQUMsQ0FBQztJQUVILElBQUksT0FBTztRQUFFLE9BQU8sT0FBTyxDQUFDO0lBQzVCLE9BQU8sT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDO0FBQ3BCLENBQUM7QUFDRCxrQkFBZSxTQUFTLENBQUMifQ==
+export default parseHtml;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyc2VIdG1sLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicGFyc2VIdG1sLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVO0FBRVYsT0FBTyxTQUFTLE1BQU0sZ0JBQWdCLENBQUM7QUFDdkMsT0FBTyxZQUFZLE1BQU0sZ0JBQWdCLENBQUM7QUFDMUMsT0FBTyxhQUFhLE1BQU0scUJBQXFCLENBQUM7QUFFaEQ7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsU0FBUyxTQUFTLENBQUMsT0FBTztJQUN4QixJQUFJLFlBQVksRUFBRSxFQUFFO1FBQ2xCLE1BQU0sRUFBRSxHQUFHLE9BQU8sQ0FBQyxHQUFHLFNBQVMsZ0NBQWdDLENBQUMsQ0FBQyxPQUFPLENBQUM7UUFDekUsT0FBTyxFQUFFLENBQUMsT0FBTyxDQUFDLENBQUM7S0FDcEI7SUFFRCxJQUFJLE9BQU8sR0FBRyxLQUFLLENBQUM7SUFDcEIsSUFBSSxLQUFLLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQzFCLE9BQU8sR0FBRyxJQUFJLENBQUM7S0FDaEI7U0FBTTtRQUNMLE9BQU8sR0FBRyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0tBQ3JCO0lBRUQsT0FBTyxHQUFHLE9BQU8sQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRTtRQUMxQixPQUFPLGFBQWEsQ0FBQyxDQUFDLEVBQUUsU0FBUyxDQUFDLENBQUM7SUFDckMsQ0FBQyxDQUFDLENBQUM7SUFFSCxJQUFJLE9BQU87UUFBRSxPQUFPLE9BQU8sQ0FBQztJQUM1QixPQUFPLE9BQU8sQ0FBQyxDQUFDLENBQUMsQ0FBQztBQUNwQixDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==

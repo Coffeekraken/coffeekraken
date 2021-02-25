@@ -1,6 +1,6 @@
 "use strict";
 // @ts-nocheck
-var __SUrlAction = require('./browser/SUrlAction');
+const __SUrlAction = require('./browser/SUrlAction');
 /**
  * @name            typeMap
  * @namespace       sugar.js.action
@@ -16,4 +16,4 @@ module.exports = {
         url: __SUrlAction
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHlwZU1hcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInR5cGVNYXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFFZCxJQUFNLFlBQVksR0FBRyxPQUFPLENBQUMsc0JBQXNCLENBQUMsQ0FBQztBQUVyRDs7Ozs7Ozs7O0dBU0c7QUFDSCxNQUFNLENBQUMsT0FBTyxHQUFHO0lBQ2YsT0FBTyxFQUFFO1FBQ1AsR0FBRyxFQUFFLFlBQVk7S0FDbEI7Q0FDRixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHlwZU1hcC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInR5cGVNYXAudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFFZCxNQUFNLFlBQVksR0FBRyxPQUFPLENBQUMsc0JBQXNCLENBQUMsQ0FBQztBQUVyRDs7Ozs7Ozs7O0dBU0c7QUFDSCxNQUFNLENBQUMsT0FBTyxHQUFHO0lBQ2YsT0FBTyxFQUFFO1FBQ1AsR0FBRyxFQUFFLFlBQVk7S0FDbEI7Q0FDRixDQUFDIn0=

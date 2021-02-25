@@ -20,6 +20,7 @@ $package = $package ? json_decode($package) : null;
   <meta name="robots" content="{{ $env === 'production' ? 'all' : 'noindex, nofollow' }}" />
   <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
   <title>{{ $title ? $title : $package->name }}</title>
+  
   <!-- stylesheets -->
   @if ($frontspec->assets && $frontspec->assets->css)
     @foreach ($frontspec->assets->css as $name=>$css)

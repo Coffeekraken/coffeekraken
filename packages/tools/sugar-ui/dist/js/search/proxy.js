@@ -1,6 +1,6 @@
 /* Compiled using Coffeekraken Sugar SJsCompiler class which stand over the AMAZING esbuild module */
-let process = {};import __request from "@coffeekraken/sugar/js/http/request";
-import __SWebComponent from "@coffeekraken/sugar/js/webcomponent/SWebComponent";
+let process = {};import __request from "/node_modules/@coffeekraken/sugar/js/http/request.js";
+import __SWebComponent from "/node_modules/@coffeekraken/sugar/js/webcomponent/SWebComponent.js";
 __SWebComponent.on("s-filtrable-input.ready", ({target, value}) => {
   target.on("input", (value2) => {
     __request({

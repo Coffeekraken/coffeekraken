@@ -1,44 +1,32 @@
 // @ts-nocheck
 // @shared
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    /**
-     * @name        isMmddyyyyDate
-     * @namespace           sugar.js.is
-     * @type      Function
-     * @stable
-     *
-     * Check if is a valid mm.dd.yyyy date
-     * This will match : mm.dd.yyyy | mm/dd/yyyy | mm-dd-yyyy | mm dd yyyy
-     *
-     * @param    {String}    date    The date to check
-     * @return    {Boolean}    true if is valid, false if not
-     *
-     * @todo      interface
-     * @todo      doc
-     * @todo      tests
-     *
-     * @example    js
-     * import isMmddyyyyDate from '@coffeekraken/sugar/js/is/mmddyyyyDate'
-     * if (isMmddyyyyDate('12.25.2018')) {
-     *     // do something cool
-     * }
-     *
-     * @since       1.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    function isMmddyyyyDate(date) {
-        return /^(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.]\d\d\d\d$/.test(date);
-    }
-    exports.default = isMmddyyyyDate;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW1kZHl5eXlEYXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW1kZHl5eXlEYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7Ozs7SUFFVjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Bd0JHO0lBQ0gsU0FBUyxjQUFjLENBQUMsSUFBSTtRQUMxQixPQUFPLGlFQUFpRSxDQUFDLElBQUksQ0FDM0UsSUFBSSxDQUNMLENBQUM7SUFDSixDQUFDO0lBQ0Qsa0JBQWUsY0FBYyxDQUFDIn0=
+/**
+ * @name        isMmddyyyyDate
+ * @namespace           sugar.js.is
+ * @type      Function
+ * @stable
+ *
+ * Check if is a valid mm.dd.yyyy date
+ * This will match : mm.dd.yyyy | mm/dd/yyyy | mm-dd-yyyy | mm dd yyyy
+ *
+ * @param    {String}    date    The date to check
+ * @return    {Boolean}    true if is valid, false if not
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example    js
+ * import isMmddyyyyDate from '@coffeekraken/sugar/js/is/mmddyyyyDate'
+ * if (isMmddyyyyDate('12.25.2018')) {
+ *     // do something cool
+ * }
+ *
+ * @since       1.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function isMmddyyyyDate(date) {
+    return /^(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.]\d\d\d\d$/.test(date);
+}
+export default isMmddyyyyDate;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW1kZHl5eXlEYXRlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW1kZHl5eXlEYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVO0FBRVY7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsY0FBYyxDQUFDLElBQUk7SUFDMUIsT0FBTyxpRUFBaUUsQ0FBQyxJQUFJLENBQzNFLElBQUksQ0FDTCxDQUFDO0FBQ0osQ0FBQztBQUNELGVBQWUsY0FBYyxDQUFDIn0=

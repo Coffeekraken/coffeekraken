@@ -1,4 +1,4 @@
-import __SNotification from './__SNotification';
+import __SNotification from './_SNotification';
 
 // @todo        develop the "browser" default adapter
 

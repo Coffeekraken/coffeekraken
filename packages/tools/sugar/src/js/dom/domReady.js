@@ -1,57 +1,41 @@
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "domready"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    /**
-     * @name      domReady
-     * @namespace           sugar.js.dom
-     * @type      Function
-     * @stable
-     *
-     * Wait that the dom is ready before resolving the promise
-     *
-     * @param 		{Function} 		cb 			An optional callback that will be called when the dom is ready
-     * @return 		{Promise} 					A promise that will be resolved when the dom is ready
-     *
-     * @todo      interface
-     * @todo      doc
-     * @todo      tests
-     *
-     * @example  	js
-     * import domReady from '@coffeekraken/sugar/js/dom/domReady'
-     * // using callback
-     * domReady(() => {
-     * 		// do something
-     * });
-     * // using promise
-     * domReady().then(() => {
-     * 		// do something
-     * });
-     *
-     * @since           1.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    var domready_1 = __importDefault(require("domready"));
-    function domReady(cb) {
-        if (cb === void 0) { cb = null; }
-        return new Promise(function (resolve, reject) {
-            domready_1.default(function () {
-                cb && cb();
-                resolve();
-            });
+/**
+ * @name      domReady
+ * @namespace           sugar.js.dom
+ * @type      Function
+ * @stable
+ *
+ * Wait that the dom is ready before resolving the promise
+ *
+ * @param 		{Function} 		cb 			An optional callback that will be called when the dom is ready
+ * @return 		{Promise} 					A promise that will be resolved when the dom is ready
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example  	js
+ * import domReady from '@coffeekraken/sugar/js/dom/domReady'
+ * // using callback
+ * domReady(() => {
+ * 		// do something
+ * });
+ * // using promise
+ * domReady().then(() => {
+ * 		// do something
+ * });
+ *
+ * @since           1.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+import __domReady from 'domready';
+function domReady(cb = null) {
+    return new Promise((resolve, reject) => {
+        __domReady(() => {
+            cb && cb();
+            resolve();
         });
-    }
-    exports.default = domReady;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9tcmVhZHkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkb21yZWFkeS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQTRCRztJQUNILHNEQUFrQztJQUNsQyxTQUFTLFFBQVEsQ0FBQyxFQUFTO1FBQVQsbUJBQUEsRUFBQSxTQUFTO1FBQ3pCLE9BQU8sSUFBSSxPQUFPLENBQUMsVUFBQyxPQUFPLEVBQUUsTUFBTTtZQUNqQyxrQkFBVSxDQUFDO2dCQUNULEVBQUUsSUFBSSxFQUFFLEVBQUUsQ0FBQztnQkFDWCxPQUFPLEVBQUUsQ0FBQztZQUNaLENBQUMsQ0FBQyxDQUFDO1FBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDTCxDQUFDO0lBQ0Qsa0JBQWUsUUFBUSxDQUFDIn0=
+    });
+}
+export default domReady;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9tcmVhZHkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkb21yZWFkeS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E0Qkc7QUFDSCxPQUFPLFVBQVUsTUFBTSxVQUFVLENBQUM7QUFDbEMsU0FBUyxRQUFRLENBQUMsRUFBRSxHQUFHLElBQUk7SUFDekIsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRTtRQUNyQyxVQUFVLENBQUMsR0FBRyxFQUFFO1lBQ2QsRUFBRSxJQUFJLEVBQUUsRUFBRSxDQUFDO1lBQ1gsT0FBTyxFQUFFLENBQUM7UUFDWixDQUFDLENBQUMsQ0FBQztJQUNMLENBQUMsQ0FBQyxDQUFDO0FBQ0wsQ0FBQztBQUNELGVBQWUsUUFBUSxDQUFDIn0=

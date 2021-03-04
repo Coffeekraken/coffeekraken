@@ -1,8 +1,14 @@
+"use strict";
 // @shared
-import __SDescriptor from '../descriptor/SDescriptor';
-import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
-import __deepMerge from '../object/deepMerge';
-import __SInterfaceResult from './SInterfaceResult';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SDescriptor_1 = __importDefault(require("../descriptor/SDescriptor"));
+const getAvailableInterfaceTypes_1 = __importDefault(require("./getAvailableInterfaceTypes"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SInterfaceResult_1 = __importDefault(require("./SInterfaceResult"));
+const SInterfaceTerminalRenderer_1 = __importDefault(require("./renderers/SInterfaceTerminalRenderer"));
 // @ts-ignore
 (global || window)._registeredInterfacesTypes = {};
 class SInterface {
@@ -19,7 +25,7 @@ class SInterface {
     constructor(settings = {}) {
         /**
          * @name              _definition
-         * @type              ISDescriptorRules
+         * @type              ISInterfaceDefinitionMap
          * @private
          *
          * This property store all the SDescriptor rules that this interface
@@ -31,7 +37,7 @@ class SInterface {
         this._definition = {};
         /**
          * @name              _settings
-         * @type              ISDescriptorRules
+         * @type              ISInterfaceSettings
          * @private
          *
          * This property store all the settings for your SInterface instance
@@ -45,11 +51,30 @@ class SInterface {
             complete: true
         };
         // @ts-ignore
-        this._settings = __deepMerge(this.constructor.settings, this._settings, settings);
+        this._settings = deepMerge_1.default(this.constructor.settings, this._settings, settings);
         if (this._settings.name === undefined)
             this._settings.name =
                 this.constructor.overridedName || this.constructor.name;
         this._definition = this.constructor.definition;
+    }
+    static get definition() {
+        if (!this._definition.help) {
+            this._definition.help = {
+                type: 'Boolean',
+                description: `Display the help for this "<yellow>${this.name}</yellow>" interface...`,
+                default: false
+            };
+        }
+        return this._definition;
+    }
+    static set definition(value) {
+        this._definition = value;
+    }
+    static registerRenderer(rendererClass) {
+        if (!rendererClass.id) {
+            throw new Error(`Sorry but the interface renderer "<yellow>${rendererClass.name}</yellow>" that you want to register is missing the required <yellow>static</yellow> <green>id</green> property...`);
+        }
+        this._registeredRenderers[rendererClass.id] = rendererClass;
     }
     /**
      * @name      overrie
@@ -70,7 +95,7 @@ class SInterface {
         class SInterfaceOverrided extends this {
         }
         SInterfaceOverrided.overridedName = `${_this.name} (overrided)`;
-        SInterfaceOverrided.definition = __deepMerge(_this.definition, definition);
+        SInterfaceOverrided.definition = deepMerge_1.default(_this.definition, definition);
         return SInterfaceOverrided;
     }
     /**
@@ -87,7 +112,7 @@ class SInterface {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static getAvailableTypes() {
-        return __getAvailableInterfaceTypes();
+        return getAvailableInterfaceTypes_1.default();
     }
     /**
      * @name            makeAvailableAsType
@@ -161,6 +186,38 @@ class SInterface {
         return int.apply(instance, settings);
     }
     /**
+     * @name            help
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to get back the help using the
+     * passed renderer. Awailable rendered are for now:
+     * - terminal (default): The default terminal renderer
+     * - more to come depending on needs...
+     *
+     * @param         {String}          [renderer="terminal"]        The registered renderer you want to use.
+     * @param         {ISInterfaceRendererSettings}     [settings={}]     Some settings to configure your render
+     *
+     * @setting     {'terminal'}        [renderer="terminal"]       The renderer you want to use.
+     * @setting     {Array<String>}     [exclude=['help']]                An array of properties you don't want to render
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static render(renderer = 'terminal', settings) {
+        const set = deepMerge_1.default({
+            renderer: 'terminal',
+            exclude: ['help']
+        }, settings);
+        // check that the renderer is registered
+        if (!this._registeredRenderers[renderer]) {
+            throw new Error(`Sorry but the requested renderer "<yellow>${renderer}</yellow>" does not exists... Here's the available renderers: <green>${Object.keys(this._registeredRenderers).join(', ')}</green>`);
+        }
+        // instanciate the renderer and render the interface
+        const rendererInstance = new this._registeredRenderers[renderer](this, set);
+        return rendererInstance.render();
+    }
+    /**
      * @name              apply
      * @type              Function
      *
@@ -177,12 +234,12 @@ class SInterface {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     apply(instance, settings = {}) {
-        settings = __deepMerge(this._settings, settings);
-        const descriptor = new __SDescriptor(Object.assign({ id: settings.id, name: settings.name, type: 'Object', rules: this._definition, arrayAsValue: settings.arrayAsValue, complete: settings.complete === undefined ? true : settings.complete, throw: false }, (settings.descriptorSettings || {})));
+        settings = deepMerge_1.default(this._settings, settings);
+        const descriptor = new SDescriptor_1.default(Object.assign({ id: settings.id, name: settings.name, type: 'Object', rules: this._definition, arrayAsValue: settings.arrayAsValue, complete: settings.complete === undefined ? true : settings.complete, throw: false }, (settings.descriptorSettings || {})));
         const descriptorResult = descriptor.apply(instance);
         // nativeConsole.log('in', this._definition);
         // instanciate a new interface result object
-        const interfaceResult = new __SInterfaceResult({
+        const interfaceResult = new SInterfaceResult_1.default({
             descriptorResult
         });
         if (interfaceResult.hasIssues() && settings.throw) {
@@ -203,10 +260,26 @@ class SInterface {
  * @since             2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-SInterface.definition = {};
+// static definition: ISDescriptorRules = {};
+// @ts-ignore
+SInterface._definition = {};
+/**
+ * @name      registerRenderer
+ * @type      Function
+ * @static
+ *
+ * This static method allows you to register a renderer that you can then
+ * use through the ```interface.render('{rendererId}')``` interface method
+ *
+ * @param     {SInterfaceRenderer}      rendererClass       The renderer class you want to register
+ *
+ * @since     2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+SInterface._registeredRenderers = {};
 /**
  * @name              settings
- * @type              ISDescriptorRules
+ * @type              ISInterfaceSettings
  * @static
  *
  * This property store all the settings for your SInterface class. These settings
@@ -216,6 +289,7 @@ SInterface.definition = {};
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 SInterface.settings = {};
-const Cls = SInterface;
-export default SInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsVUFBVTtBQUdWLE9BQU8sYUFBYSxNQUFNLDJCQUEyQixDQUFDO0FBQ3RELE9BQU8sNEJBQTRCLE1BQU0sOEJBQThCLENBQUM7QUFDeEUsT0FBTyxXQUFXLE1BQU0scUJBQXFCLENBQUM7QUFPOUMsT0FBTyxrQkFBeUMsTUFBTSxvQkFBb0IsQ0FBQztBQW1FM0UsYUFBYTtBQUNiLENBQUMsTUFBTSxJQUFJLE1BQU0sQ0FBQyxDQUFDLDBCQUEwQixHQUFHLEVBQUUsQ0FBQztBQUNuRCxNQUFNLFVBQVU7SUE4S2Q7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxXQUFnQyxFQUFFO1FBdEc5Qzs7Ozs7Ozs7OztXQVVHO1FBQ0gsZ0JBQVcsR0FBc0IsRUFBRSxDQUFDO1FBZXBDOzs7Ozs7Ozs7V0FTRztRQUNILGNBQVMsR0FBd0I7WUFDL0IsWUFBWSxFQUFFLEtBQUs7WUFDbkIsS0FBSyxFQUFFLEtBQUs7WUFDWixRQUFRLEVBQUUsSUFBSTtTQUNmLENBQUM7UUErREEsYUFBYTtRQUNiLElBQUksQ0FBQyxTQUFTLEdBQUcsV0FBVyxDQUNwQixJQUFLLENBQUMsV0FBVyxDQUFDLFFBQVEsRUFDaEMsSUFBSSxDQUFDLFNBQVMsRUFDZCxRQUFRLENBQ1QsQ0FBQztRQUNGLElBQUksSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLEtBQUssU0FBUztZQUNuQyxJQUFJLENBQUMsU0FBUyxDQUFDLElBQUk7Z0JBQ1gsSUFBSSxDQUFDLFdBQVksQ0FBQyxhQUFhLElBQUksSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUM7UUFDbkUsSUFBSSxDQUFDLFdBQVcsR0FBUyxJQUFLLENBQUMsV0FBVyxDQUFDLFVBQVUsQ0FBQztJQUN4RCxDQUFDO0lBckxEOzs7Ozs7Ozs7Ozs7O09BYUc7SUFDSCxNQUFNLENBQUMsUUFBUSxDQUFDLFVB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
+// register renderers
+SInterface.registerRenderer(SInterfaceTerminalRenderer_1.default);
+exports.default = SInterface;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0ludGVyZmFjZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNJbnRlcmZhY2UudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLFVBQVU7Ozs7O0FBR1YsNEVBQXNEO0FBQ3RELDhGQUF3RTtBQUN4RSxvRUFBOEM7QUFXOUMsMEVBQTJFO0FBRTNFLHdHQUFrRjtBQXVFbEYsYUFBYTtBQUNiLENBQUMsTUFBTSxJQUFJLE1BQU0sQ0FBQyxDQUFDLDBCQUEwQixHQUFHLEVBQUUsQ0FBQztBQUNuRCxNQUFNLFVBQVU7SUFvUWQ7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxXQUFnQyxFQUFFO1FBdEo5Qzs7Ozs7Ozs7OztXQVVHO1FBQ0gsZ0JBQVcsR0FBNkIsRUFBRSxDQUFDO1FBZTNDOzs7Ozs7Ozs7V0FTRztRQUNILGNBQVMsR0FBd0I7WUFDL0IsWUFBWSxFQUFFLEtBQUs7WUFDbkIsS0FBSyxFQUFFLEtBQUs7WUFDWixRQUFRLEVBQUUsSUFBSTtTQUNmLENBQUM7UUErR0EsYUFBYTtRQUNiLElBQUksQ0FBQyxTQUFTLEdBQUcsbUJBQVcsQ0FDcEIsSUFBSyxDQUFDLFdBQVcsQ0FBQyxRQUFRLEVBQ2hDLElBQUksQ0FBQyxTQUFTLEVBQ2QsUUFBUSxDQUNULENBQUM7UUFDRixJQUFJLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxLQUFLLFNBQVM7WUFDbkMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJO2dCQUNYLElBQUksQ0FBQyxXQUFZLENBQUMsYUFBYSxJQUFJLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDO1FBRW5FLElBQUksQ0FBQyxXQUFXLEdBQVMsSUFBSyxDQUFDLFdBQVcsQ0FBQyxVQUFVLENBQUM7SUFDeEQsQ0FBQztJQTNRRCxNQUFNLEtBQUssVUFBVTtRQUNuQixJQUFJLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLEVBQUU7WUFDMUIsSUFBSSxDQUFDLFdBQVcsQ0FBQyxJQUFJLEdBQUc7Z0JBQ3RCLElBQUks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

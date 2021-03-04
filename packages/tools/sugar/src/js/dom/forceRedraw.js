@@ -1,33 +1,48 @@
 // @ts-nocheck
-import __getStyleProperty from './getStyleProperty';
-/**
- * @name      forceRedraw
- * @namespace           sugar.js.dom
- * @type      Function
- * @stable
- *
- * Force the element to be painted again in case of visual issues
- *
- * @param    {HTMLElement}    $elm    The HTMLElement to force the redraw on
- * @return    {HTMLElement}    The HTMLElement to maintain chainability
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import forceRedraw from '@coffeekraken/sugar/js/dom/forceRedraw'
- * forceRedraw($elm)
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function forceRedraw($elm) {
-    const display = __getStyleProperty($elm, 'display');
-    $elm.style.display = 'none';
-    $elm.offsetHeight;
-    $elm.style.display = display;
-    return $elm;
-}
-export default forceRedraw;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9yY2VSZWRyYXcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmb3JjZVJlZHJhdy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxrQkFBa0IsTUFBTSxvQkFBb0IsQ0FBQztBQUVwRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxXQUFXLENBQUMsSUFBSTtJQUN2QixNQUFNLE9BQU8sR0FBRyxrQkFBa0IsQ0FBQyxJQUFJLEVBQUUsU0FBUyxDQUFDLENBQUM7SUFDcEQsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLEdBQUcsTUFBTSxDQUFDO0lBQzVCLElBQUksQ0FBQyxZQUFZLENBQUM7SUFDbEIsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLEdBQUcsT0FBTyxDQUFDO0lBQzdCLE9BQU8sSUFBSSxDQUFDO0FBQ2QsQ0FBQztBQUNELGVBQWUsV0FBVyxDQUFDIn0=
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "./getStyleProperty"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var getStyleProperty_1 = __importDefault(require("./getStyleProperty"));
+    /**
+     * @name      forceRedraw
+     * @namespace           sugar.js.dom
+     * @type      Function
+     * @stable
+     *
+     * Force the element to be painted again in case of visual issues
+     *
+     * @param    {HTMLElement}    $elm    The HTMLElement to force the redraw on
+     * @return    {HTMLElement}    The HTMLElement to maintain chainability
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @example    js
+     * import forceRedraw from '@coffeekraken/sugar/js/dom/forceRedraw'
+     * forceRedraw($elm)
+     *
+     * @since       1.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    function forceRedraw($elm) {
+        var display = getStyleProperty_1.default($elm, 'display');
+        $elm.style.display = 'none';
+        $elm.offsetHeight;
+        $elm.style.display = display;
+        return $elm;
+    }
+    exports.default = forceRedraw;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9yY2VSZWRyYXcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmb3JjZVJlZHJhdy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCx3RUFBb0Q7SUFFcEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXFCRztJQUNILFNBQVMsV0FBVyxDQUFDLElBQUk7UUFDdkIsSUFBTSxPQUFPLEdBQUcsMEJBQWtCLENBQUMsSUFBSSxFQUFFLFNBQVMsQ0FBQyxDQUFDO1FBQ3BELElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxHQUFHLE1BQU0sQ0FBQztRQUM1QixJQUFJLENBQUMsWUFBWSxDQUFDO1FBQ2xCLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxHQUFHLE9BQU8sQ0FBQztRQUM3QixPQUFPLElBQUksQ0FBQztJQUNkLENBQUM7SUFDRCxrQkFBZSxXQUFXLENBQUMifQ==

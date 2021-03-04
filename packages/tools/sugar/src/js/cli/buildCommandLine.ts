@@ -22,7 +22,7 @@ import __stripAnsi from '../string/stripAnsi';
  * @param       {Object}      definition   The definition object of the command to launch
  * @param       {Object}      [args={}]       An optional arguments/values object to override definition default value
  * @param       {Object}      [settings={}]     An object of settings to configure your command line buildine process:
- * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
+ * - includeAllParams (true) {Boolean}: Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
  * - alias (true) {Boolean}: Specify if you want to make use of the aliases in your generated command
  * @return      {String}                      The builded command string
  *
@@ -64,31 +64,31 @@ import __stripAnsi from '../string/stripAnsi';
  */
 
 export interface IBuildCommandLineSettings {
-  definition?: Record<string, unknown>;
-  includeAllArgs?: boolean;
-  alias?: boolean;
+  definition: Record<string, unknown>;
+  includeAllParams: boolean;
+  alias: boolean;
 }
 
 export interface IBuildCommandLineFn {
   (
     command: string,
     args?: Record<string, unknown>,
-    settings?: IBuildCommandLineSettings
+    settings?: Partial<IBuildCommandLineSettings>
   ): string;
 }
 
 const fn: IBuildCommandLineFn = function buildCommandLine(
   command: string,
   args: Record<string, unknown> = {},
-  settings: IBuildCommandLineSettings = {}
+  settings?: Partial<IBuildCommandLineSettings>
 ) {
-  settings = {
+  const set = <IBuildCommandLineSettings>{
     definition: undefined,
-    includeAllArgs: true,
+    includeAllParams: true,
     alias: true,
-    ...settings
+    ...(settings || {})
   };
-  const definition = Object.assign({}, settings.definition);
+  const definition = Object.assign({}, set.definition);
   // get all the tokens
   const tokens = command.match(/\[[a-zA-Z0-9-_]+\]/gm) || [];
 

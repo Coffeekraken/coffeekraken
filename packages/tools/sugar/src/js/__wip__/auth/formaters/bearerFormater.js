@@ -1,6 +1,6 @@
 "use strict";
 // @ts-nocheck
-const __base64 = require('../../crypt/base64');
+var __base64 = require('../../crypt/base64');
 /**
  * @name                          bearerFormater
  * @namespace           node.auth.formaters
@@ -18,8 +18,8 @@ module.exports = function bearerFormater(authInfo) {
     return {
         token: authInfo.token,
         headers: {
-            Authorization: `Bearer ${authInfo.token}`
+            Authorization: "Bearer " + authInfo.token
         }
     };
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmVhcmVyRm9ybWF0ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJiZWFyZXJGb3JtYXRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYztBQUVkLE1BQU0sUUFBUSxHQUFHLE9BQU8sQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDO0FBRS9DOzs7Ozs7Ozs7OztHQVdHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sR0FBRyxTQUFTLGNBQWMsQ0FBQyxRQUFRO0lBQy9DLGlDQUFpQztJQUNqQyxPQUFPO1FBQ0wsS0FBSyxFQUFFLFFBQVEsQ0FBQyxLQUFLO1FBQ3JCLE9BQU8sRUFBRTtZQUNQLGFBQWEsRUFBRSxVQUFVLFFBQVEsQ0FBQyxLQUFLLEVBQUU7U0FDMUM7S0FDRixDQUFDO0FBQ0osQ0FBQyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmVhcmVyRm9ybWF0ZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJiZWFyZXJGb3JtYXRlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYztBQUVkLElBQU0sUUFBUSxHQUFHLE9BQU8sQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDO0FBRS9DOzs7Ozs7Ozs7OztHQVdHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sR0FBRyxTQUFTLGNBQWMsQ0FBQyxRQUFRO0lBQy9DLGlDQUFpQztJQUNqQyxPQUFPO1FBQ0wsS0FBSyxFQUFFLFFBQVEsQ0FBQyxLQUFLO1FBQ3JCLE9BQU8sRUFBRTtZQUNQLGFBQWEsRUFBRSxZQUFVLFFBQVEsQ0FBQyxLQUFPO1NBQzFDO0tBQ0YsQ0FBQztBQUNKLENBQUMsQ0FBQyJ9

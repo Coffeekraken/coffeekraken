@@ -1,5 +1,7 @@
+"use strict";
 // @ts-nocheck
 // @shared
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isMap
  * @namespace           sugar.js.is
@@ -28,5 +30,5 @@
 function isMap(value) {
     return value instanceof Map;
 }
-export default isMap;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibWFwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVO0FBRVY7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsS0FBSyxDQUFDLEtBQUs7SUFDbEIsT0FBTyxLQUFLLFlBQVksR0FBRyxDQUFDO0FBQzlCLENBQUM7QUFDRCxlQUFlLEtBQUssQ0FBQyJ9
+exports.default = isMap;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibWFwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTs7QUFFVjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxLQUFLLENBQUMsS0FBSztJQUNsQixPQUFPLEtBQUssWUFBWSxHQUFHLENBQUM7QUFDOUIsQ0FBQztBQUNELGtCQUFlLEtBQUssQ0FBQyJ9

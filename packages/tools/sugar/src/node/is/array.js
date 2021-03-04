@@ -1,5 +1,7 @@
+"use strict";
 // @ts-nocheck
 // @shared
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isArray
  * @namespace           sugar.js.is
@@ -27,5 +29,5 @@
 function isArray(value) {
     return value && typeof value === 'object' && value.constructor === Array;
 }
-export default isArray;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXJyYXkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJhcnJheS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBQ2QsVUFBVTtBQUVWOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsT0FBTyxDQUFDLEtBQUs7SUFDcEIsT0FBTyxLQUFLLElBQUksT0FBTyxLQUFLLEtBQUssUUFBUSxJQUFJLEtBQUssQ0FBQyxXQUFXLEtBQUssS0FBSyxDQUFDO0FBQzNFLENBQUM7QUFDRCxlQUFlLE9BQU8sQ0FBQyJ9
+exports.default = isArray;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXJyYXkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJhcnJheS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYztBQUNkLFVBQVU7O0FBRVY7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBUyxPQUFPLENBQUMsS0FBSztJQUNwQixPQUFPLEtBQUssSUFBSSxPQUFPLEtBQUssS0FBSyxRQUFRLElBQUksS0FBSyxDQUFDLFdBQVcsS0FBSyxLQUFLLENBQUM7QUFDM0UsQ0FBQztBQUNELGtCQUFlLE9BQU8sQ0FBQyJ9

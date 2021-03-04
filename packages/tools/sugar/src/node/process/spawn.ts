@@ -47,6 +47,7 @@ import { SpawnOptions } from 'child_process';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export interface ISpawnSettings extends SpawnOptions {
+  supportSPromise: boolean;
   [key: string]: any;
 }
 
@@ -64,9 +65,15 @@ export default function spawn(
     isCancel = false;
 
   const promise = new __SPromise(async ({ resolve, reject, emit }) => {
-    settings = __deepMerge({}, settings);
+    settings = __deepMerge(
+      {
+        supportSPromise: true
+      },
+      settings
+    );
 
     const duration = new __SDuration();
+    let resolveValue: any, rejectValue: any;
 
     const stderr = [],
       stdout = [];
@@ -91,10 +98,20 @@ export default function spawn(
     });
 
     // handle the process.send pattern
-    childProcess.on('message', (dataObj) => {
-      if (!dataObj.value || !dataObj.metas) return;
-      emit(dataObj.metas.event, dataObj.value, dataObj.metas);
-    });
+    if (settings.supportSPromise) {
+      childProcess.on('message', (dataObj) => {
+        if (!dataObj.value || !dataObj.metas) return;
+        if (dataObj.metas.event === 'resolve') {
+          resolveValue = dataObj.value;
+          childProcess.kill('SIGINT');
+        } else if (dataObj.metas.event === 'reject') {
+          rejectValue = dataObj.value;
+          childProcess.kill('SIGINT');
+        } else {
+          emit(dataObj.metas.event, dataObj.value, dataObj.metas);
+        }
+      });
+    }
 
     // listen for errors etc...
     if (childProcess.stdout) {
@@ -121,32 +138,43 @@ export default function spawn(
       if (isEnded) return;
       isEnded = true;
 
+      // build the result object
       const resultObj = {
         code,
         signal,
+        value: resolveValue || rejectValue,
         stdout,
         stderr,
+        spawn: true,
         ...duration.end()
       };
 
+      // generic close event
       emit('close', resultObj);
 
+      // handle resolve and reject
+      if (resolveValue) {
+        emit('close.success', resultObj);
+        return resolve(resultObj);
+      } else if (rejectValue) {
+        emit('close.error', resultObj);
+        return reject(resultObj);
+      }
+
+      // handle other cases
       if (stderr.length) {
         emit('close.error', resultObj);
-        reject(resultObj);
-        // console.log('close.error');
+        return reject(resultObj);
       } else if (!code && signal) {
         emit('close.killed', resultObj);
-        resolve(resultObj);
-        // console.log('close.killed');
-        // console.log('ENDNDND', code, signal, resultObj);
+        return resolve(resultObj);
       } else if (code === 0 && !signal) {
+        console.log('SUCCESS?);');
         emit('close.success', resultObj);
-        resolve(resultObj);
-        // console.log('close.success');
+        return resolve(resultObj);
       } else {
         emit('close.error', resultObj);
-        reject(resultObj);
+        return reject(resultObj);
       }
     });
   });

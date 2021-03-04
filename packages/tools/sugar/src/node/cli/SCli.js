@@ -4,55 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const class_1 = __importDefault(require("../is/class"));
 const buildCommandLine_1 = __importDefault(require("./buildCommandLine"));
-const SChildProcessManager_1 = __importDefault(require("../process/SChildProcessManager"));
 const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const argsToObject_1 = __importDefault(require("../cli/argsToObject"));
-const childProcess_1 = __importDefault(require("../is/childProcess"));
-const output_1 = __importDefault(require("../process/output"));
-const parseArgs_1 = __importDefault(require("../cli/parseArgs"));
-const SCliInterface_1 = __importDefault(require("./interface/SCliInterface"));
-const SPromise_1 = __importDefault(require("../promise/SPromise"));
-/**
- * @name                SCli
- * @namespace           sugar.node.cli
- * @implements          SCliInterface
- * @type                Class
- * @status              wip
- *
- * This class represent a basic CLI command with his definition object, his command string, etc...
- *
- * @param       {Object}        [settings={}]           An object of settings to configure your SCli instance:
- * - id (constructor.name) {String}: A uniqid for your instance.
- * - name (null) {String}: A name for your SCli instance like "Build SCSS", etc...
- * - includeAllArgs (true) {Boolean}: Specify if you want to include all arguments when for example you generate the command string, etc...
- * - output (false) {Boolean|Object}: Specify if you want your SCli instance to display automatically a nice output using the SOutput class, or you can specify this to false and handle all of this yourself using the SPromise events emited
- * - defaultParams ({}) {Object}: Specify some defaults for your accepted and described params of the definition object
- * - childProcess: ({}) {Object}: Specify some settings to pass to the SChildProcess instance like "pipe", etc...
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example         js
- * import SCli from '@coffeekraken/sugar/js/cli/SCli';
- * class MyCli extends SCli {
- *    static command = 'php %hostname:%port %rootDir %arguments';
- *    static interfaces = {
- *      this: MyCoolSInterface
- *    };
- *    constructor(settings = {}) {
- *      super(settings);
- *    }
- * }
- * const myCli = new MyCli();
- * myCli.command; // => php localhost:8888 .
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SCli extends SPromise_1.default {
+const SClass_1 = __importDefault(require("../class/SClass"));
+class SCli extends SClass_1.default {
     /**
      * @name        constructor
      * @type        Function
@@ -62,20 +18,12 @@ class SCli extends SPromise_1.default {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(initialParams = {}, settings = {}) {
-        // save the settings
-        settings = deepMerge_1.default({
+    constructor(initialParams = {}, settings) {
+        super(deepMerge_1.default({
             id: 'SCli',
-            name: null,
             includeAllParams: true,
-            output: false,
-            defaultParams: {},
-            processSettings: {},
-            childProcessSettings: {
-                emitParent: true
-            }
-        }, settings);
-        super(settings);
+            childProcessSettings: {}
+        }, settings || {}));
         /**
          * @name          _runningProcess
          * @type          SPromise
@@ -96,62 +44,35 @@ class SCli extends SPromise_1.default {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         this._runningParamsObj = {};
-        if (!this._settings.id)
-            this._settings.id = this.constructor.name;
-        this._paramsObj = argsToObject_1.default(initialParams, this.interface.definition);
-        this._paramsObj = deepMerge_1.default(this._settings.defaultParams, this._paramsObj);
-        if (!this._paramsObj.forceChildProcess || !this.command) {
-            // run the process
-            const SProcessManagerInstance = this.constructor.processClass;
-            this._processManagerInstance = new SProcessManagerInstance(this._paramsObj, this._settings.processSettings);
-            if (settings.childProcessSettings.emitParent) {
-                const stacks = Array.isArray(settings.childProcessSettings.emitParent)
-                    ? settings.childProcessSettings.emitParent.join(',')
-                    : '*';
-                this._processManagerInstance.on(stacks, (value, metas) => {
-                    SChildProcessManager_1.default.emitParent(metas.stack, value, metas);
-                });
-            }
+        // make sure the SCli based class is correctly implemented
+        // @ts-ignore
+        if (!this.constructor.command) {
+            throw new Error(`You must specify a "<yellow>static command: string;</yellow>" property in your "<cyan>${this.constructor.name}</cyan>" SCli based class`);
         }
-        else {
-            const childProcessManager = new SChildProcessManager_1.default(this.command, Object.assign({ id: settings.id, definition: this.interface.definition, defaultParams: settings.defaultParams }, settings.childProcessSettings));
-            // childProcessManager.on('state', (state) => {
-            //   this.state = state;
-            // });
-            this._processManagerInstance = childProcessManager;
-        }
-        if (!childProcess_1.default()) {
-            if (settings.output) {
-                if (class_1.default(settings.output)) {
-                    const outputInstance = new settings.output(this._processManagerInstance, this._paramsObj);
-                }
-                else {
-                    const outputSettings = typeof settings.output === 'object' ? settings.output : {};
-                    output_1.default(this._processManagerInstance, outputSettings);
-                }
-            }
-        }
-        SPromise_1.default.pipe(this._processManagerInstance, this);
+        this._initialParams = argsToObject_1.default(initialParams, 
+        // @ts-ignore
+        this.interface.definition);
     }
     /**
-     * @name        parseArgs
-     * @type        Function
-     * @static
+     * @name        interface
+     * @type        SInterface
+     * @get
      *
-     * This static method take a simple cli configuration string and returns you
-     * an object representing each values passed.
-     * This methods uses the static definition object of the class to do his job.
+     * Access the interface used to format arguments, etc...
+     * Take it first from the ```settings.interface``` setting, then check in the
+     * static class property called ```interfaces.cli```.
      *
-     * @param     {String}          cliString         The cli string you want to parse
-     * @return    {Object}                            The object of configuration values
-     *
-     * @since       2.0.0
+     * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static parseArgs(cliString) {
-        return parseArgs_1.default(cliString, {
-            definition: this.interface.definition
-        });
+    get interface() {
+        const int = 
+        // @ts-ignore
+        this._settings.interface || this.constructor.interfaces.cli;
+        if (!int) {
+            throw new Error(`Your "<yellow>SCli</yellow>" based class called "<cyan>${this.constructor.name}</cyan>" does not have any interface specified under the "<magenta>settings.interface</magenta>" setting, or under the static "<magenta>interfaces.cli</magenta>" property.`);
+        }
+        return int;
     }
     /**
      * @name        command
@@ -163,26 +84,8 @@ class SCli extends SPromise_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get command() {
+        // @ts-ignore
         return this.constructor.command;
-    }
-    /**
-     * @name        interface
-     * @type        String
-     * @get
-     *
-     * Access the definition object
-     *
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    get interface() {
-        const int = this.constructor.interface;
-        int.definition.forceChildProcess = {
-            type: 'Boolean',
-            required: true,
-            default: true,
-            description: 'Allows you to force the SCli class to start a new child process even if the SCli instance already runs inside one'
-        };
-        return int;
     }
     /**
      * @name        runningParamsObj
@@ -223,45 +126,38 @@ class SCli extends SPromise_1.default {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    run(paramsObj = {}, settings = {}) {
+    run(paramsObj = {}, settings) {
         if (this._runningProcess) {
-            throw new Error(`You cannot spawn multiple "${this.constructor.name}" process at the same time. Please kill the currently running one using the "kill" method...`);
+            throw new Error(`You cannot spawn multiple "${this.id}" process at the same time. Please kill the currently running one using the "kill" method...`);
         }
-        settings = deepMerge_1.default(this._settings, settings);
+        const set = deepMerge_1.default(this._settings, settings || {});
         if (typeof paramsObj === 'string') {
-            paramsObj = argsToObject_1.default(paramsObj, this.interface.definition);
+            paramsObj = argsToObject_1.default(paramsObj, {
+                // @ts-ignore
+                definition: this.interface.definition
+            });
         }
         else if (!paramsObj) {
-            paramsObj = Object.assign({}, this._paramsObj);
+            paramsObj = Object.assign({}, this._initialParams);
         }
-        paramsObj = deepMerge_1.default(Object.assign({}, this._paramsObj || {}), paramsObj);
-        if (this._processManagerInstance instanceof SChildProcessManager_1.default) {
-            paramsObj.forceChildProcess = false;
+        paramsObj = deepMerge_1.default(Object.assign({}, this._initialParams || {}), paramsObj);
+        if (this.process && typeof this.process === 'function') {
+            return this.process();
         }
-        this._runningProcess = this._processManagerInstance.run(paramsObj, settings.processSettings);
-        this._runningProcess.on('close', (args) => {
-            this._runningProcess = null;
-        });
+        // build the command line
+        const command = this.toString(paramsObj);
+        console.log('com', command);
+        return;
+        // this._runningProcess = __spawn();
+        // this._runningProcess.on('close', (args) => {
+        //   this._runningProcess = null;
+        // });
         // this._runningProcess.on('*', (d, v) => {
         // });
         // ${__sugarHeading({
         //   version: __packageJson(__dirname).version
         // })}\n\n
-        if (!childProcess_1.default()) {
-            const launchingLogObj = {
-                temp: true,
-                value: `Launching the SCli "<primary>${this._settings.name || this._settings.id}</primary>" process...`
-            };
-            this._processManagerInstance.emit('log', launchingLogObj);
-        }
-        // save running process params
-        this._runningParamsObj = paramsObj;
-        // listen for some events on the process
-        this._runningProcess.on('finally', () => {
-            this._runningProcess = null;
-            this._runningParamsObj = null;
-        });
-        return this._runningProcess;
+        // return this._runningProcess;
     }
     /**
      * @name          toString
@@ -276,7 +172,11 @@ class SCli extends SPromise_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     toString(paramsObj = {}, includeAllParams = this._settings.includeAllParams) {
-        return buildCommandLine_1.default(this.command, this.interface.definition, paramsObj, includeAllParams);
+        return buildCommandLine_1.default(this.command, paramsObj, {
+            // @ts-ignore
+            definition: this.interface.definition,
+            includeAllParams
+        });
     }
     /**
      * @name        isRunning
@@ -298,14 +198,7 @@ class SCli extends SPromise_1.default {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    kill() {
-        if (!this._runningProcess)
-            return;
-        try {
-            this._runningProcess.kill();
-        }
-        catch (e) { }
-    }
+    kill() { }
 }
-exports.default = SCliInterface_1.default.implements(SCli);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NsaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDbGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBSWQsd0RBQW9DO0FBRXBDLDBFQUFvRDtBQUNwRCwyRkFBcUU7QUFDckUsb0VBQThDO0FBQzlDLHVFQUFpRDtBQUNqRCxzRUFBa0Q7QUFDbEQsK0RBQXlDO0FBQ3pDLGlFQUEyQztBQUczQyw4RUFBd0Q7QUFHeEQsbUVBQTZDO0FBRzdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUNHO0FBQ0gsTUFBTSxJQUFLLFNBQVEsa0JBQVU7SUF1QjNCOzs7Ozs7OztPQVFHO0lBQ0gsWUFBWSxhQUFhLEdBQUcsRUFBRSxFQUFFLFFBQVEsR0FBRyxFQUFFO1FBQzNDLG9CQUFvQjtRQUNwQixRQUFRLEdBQUcsbUJBQVcsQ0FDcEI7WUFDRSxFQUFFLEVBQUUsTUFBTTtZQUNWLElBQUksRUFBRSxJQUFJO1lBQ1YsZ0JBQWdCLEVBQUUsSUFBSTtZQUN0QixNQUFNLEVBQUUsS0FBSztZQUNiLGFBQWEsRUFBRSxFQUFFO1lBQ2pCLGVBQWUsRUFBRSxFQUFFO1lBQ25CLG9CQUFvQixFQUFFO2dCQUNwQixVQUFVLEVBQUUsSUFBSTthQUNqQjtTQUNGLEVBQ0QsUUFBUSxDQUNULENBQUM7UUFFRixLQUFLLENBQUMsUUFBUSxDQUFDLENBQUM7UUFoRGxCOzs7Ozs7OztXQVFHO1FBQ0gsb0JBQWUsR0FBRyxJQUFJLENBQUM7UUFFdkI7Ozs7Ozs7O1dBUUc7UUFDSCxzQkFBaUIsR0FBRyxFQUFFLENBQUM7UUE4QnJCLElBQUksQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLEVBQUU7WUFBRSxJQUFJLENBQUMsU0FBUyxDQUFDLEVBQUUsR0FBRyxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQztRQUVsRSxJQUFJLENBQUMsVUFBVSxHQUFHLHNCQUFjLENBQUMsYUFBYSxFQUFFLElBQUksQ0FBQyxTQUFTLENB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
+exports.default = SCli;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NsaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDbGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7Ozs7O0FBTWQsMEVBQW9EO0FBQ3BELG9FQUE4QztBQUM5Qyx1RUFBaUQ7QUFPakQsNkRBQXVDO0FBMkN2QyxNQUFNLElBQUssU0FBUSxnQkFBUTtJQTJEekI7Ozs7Ozs7O09BUUc7SUFDSCxZQUFZLGFBQWEsR0FBRyxFQUFFLEVBQUUsUUFBaUM7UUFDL0QsS0FBSyxDQUNILG1CQUFXLENBQ1Q7WUFDRSxFQUFFLEVBQUUsTUFBTTtZQUNWLGdCQUFnQixFQUFFLElBQUk7WUFDdEIsb0JBQW9CLEVBQUUsRUFBRTtTQUN6QixFQUNELFFBQVEsSUFBSSxFQUFFLENBQ2YsQ0FDRixDQUFDO1FBN0VKOzs7Ozs7OztXQVFHO1FBQ0gsb0JBQWUsR0FBRyxJQUFJLENBQUM7UUFFdkI7Ozs7Ozs7O1dBUUc7UUFDSCxzQkFBaUIsR0FBUSxFQUFFLENBQUM7UUEyRDFCLDBEQUEwRDtRQUMxRCxhQUFhO1FBQ2IsSUFBSSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsT0FBTyxFQUFFO1lBQzdCLE1BQU0sSUFBSSxLQUFLLENBQ2IseUZBQXlGLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSwyQkFBMkIsQ0FDMUksQ0FBQztTQUNIO1FBRUQsSUFBSSxDQUFDLGNBQWMsR0FBRyxzQkFBYyxDQUNsQyxhQUFhO1FBQ2IsYUFBYTtRQUNiLElBQUksQ0FBQyxTQUFTLENBQUMsVUFBVSxDQUMxQixDQUFDO0lBQ0osQ0FBQztJQTFERDs7Ozs7Ozs7Ozs7T0FXRztJQUNILElBQUksU0FBUztRQUNYLE1BQU0sR0FBRztRQUNQLGFBQWE7UUFDYixJQUFJLENBQUMsU0FBUyxDQUFDLFNBQVMsSUFBSSxJQUFJLENBQUMsV0FBVyxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUM7UUFDOUQsSUFBSSxDQUFDLEdBQUcsRUFBRTtZQUNSLE1BQU0sSUFBSSxLQUFLLENB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

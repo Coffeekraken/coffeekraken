@@ -1,51 +1,66 @@
 // @ts-nocheck
 // @shared
-import __replaceTags from '../../html/replaceTags';
-import __chalk from 'chalk';
-__chalk.level = 3;
-/**
- * @name                              console
- * @namespace           sugar.js.log.htmlPresets
- * @type                              Function
- * @status              wip
- *
- * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for the terminal
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @param                   {String}                      text                        The text to process
- * @return                  {String}                                                  The processed text ready for the terminal
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function consoleFn(text) {
-    return __replaceTags(text, {
-        black: (tag, content) => __chalk.black(content),
-        red: (tag, content) => __chalk.red(content),
-        green: (tag, content) => __chalk.green(content),
-        yellow: (tag, content) => __chalk.yellow(content),
-        blue: (tag, content) => __chalk.blue(content),
-        magenta: (tag, content) => __chalk.magenta(content),
-        cyan: (tag, content) => __chalk.cyan(content),
-        white: (tag, content) => __chalk.white(content),
-        bgBlack: (tag, content) => __chalk.bgBlack(content),
-        bgRed: (tag, content) => __chalk.bgRed(content),
-        bgGreen: (tag, content) => __chalk.bgGreen(content),
-        bgYellow: (tag, content) => __chalk.bgYellow(content),
-        bgBlue: (tag, content) => __chalk.bgBlue(content),
-        bgMagenta: (tag, content) => __chalk.bgMagenta(content),
-        bgCyan: (tag, content) => __chalk.bgCyan(content),
-        bgWhite: (tag, content) => __chalk.bgWhite(content),
-        bold: (tag, content) => __chalk.bold(content),
-        dim: (tag, content) => __chalk.dim(content),
-        italic: (tag, content) => __chalk.italic(content),
-        underline: (tag, content) => __chalk.underline(content),
-        strike: (tag, content) => __chalk.strike(content),
-        br: (tag, content) => '\n'
-    });
-}
-export default consoleFn;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uc29sZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvbnNvbGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLFVBQVU7QUFFVixPQUFPLGFBQWEsTUFBTSx3QkFBd0IsQ0FBQztBQUNuRCxPQUFPLE9BQU8sTUFBTSxPQUFPLENBQUM7QUFDNUIsT0FBTyxDQUFDLEtBQUssR0FBRyxDQUFDLENBQUM7QUFFbEI7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBQ0gsU0FBUyxTQUFTLENBQUMsSUFBSTtJQUNyQixPQUFPLGFBQWEsQ0FBQyxJQUFJLEVBQUU7UUFDekIsS0FBSyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUM7UUFDL0MsR0FBRyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUM7UUFDM0MsS0FBSyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUM7UUFDL0MsTUFBTSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUM7UUFDakQsSUFBSSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUM7UUFDN0MsT0FBTyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUM7UUFDbkQsSUFBSSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUM7UUFDN0MsS0FBSyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUM7UUFFL0MsT0FBTyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUM7UUFDbkQsS0FBSyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUM7UUFDL0MsT0FBTyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUM7UUFDbkQsUUFBUSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUM7UUFDckQsTUFBTSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUM7UUFDakQsU0FBUyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLFNBQVMsQ0FBQyxPQUFPLENBQUM7UUFDdkQsTUFBTSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUM7UUFDakQsT0FBTyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUM7UUFFbkQsSUFBSSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUM7UUFDN0MsR0FBRyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUM7UUFDM0MsTUFBTSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUM7UUFDakQsU0FBUyxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLFNBQVMsQ0FBQyxPQUFPLENBQUM7UUFDdkQsTUFBTSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUM7UUFFakQsRUFBRSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsSUFBSTtLQUMzQixDQUFDLENBQUM7QUFDTCxDQUFDO0FBQ0QsZUFBZSxTQUFTLENBQUMifQ==
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "../../html/replaceTags", "chalk"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var replaceTags_1 = __importDefault(require("../../html/replaceTags"));
+    var chalk_1 = __importDefault(require("chalk"));
+    chalk_1.default.level = 3;
+    /**
+     * @name                              console
+     * @namespace           sugar.js.log.htmlPresets
+     * @type                              Function
+     * @status              wip
+     *
+     * Replace all the "log" html tags like "<red>", "<bold>", etc... with the corresponding syntax for the terminal
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @param                   {String}                      text                        The text to process
+     * @return                  {String}                                                  The processed text ready for the terminal
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    function consoleFn(text) {
+        return replaceTags_1.default(text, {
+            black: function (tag, content) { return chalk_1.default.black(content); },
+            red: function (tag, content) { return chalk_1.default.red(content); },
+            green: function (tag, content) { return chalk_1.default.green(content); },
+            yellow: function (tag, content) { return chalk_1.default.yellow(content); },
+            blue: function (tag, content) { return chalk_1.default.blue(content); },
+            magenta: function (tag, content) { return chalk_1.default.magenta(content); },
+            cyan: function (tag, content) { return chalk_1.default.cyan(content); },
+            white: function (tag, content) { return chalk_1.default.white(content); },
+            bgBlack: function (tag, content) { return chalk_1.default.bgBlack(content); },
+            bgRed: function (tag, content) { return chalk_1.default.bgRed(content); },
+            bgGreen: function (tag, content) { return chalk_1.default.bgGreen(content); },
+            bgYellow: function (tag, content) { return chalk_1.default.bgYellow(content); },
+            bgBlue: function (tag, content) { return chalk_1.default.bgBlue(content); },
+            bgMagenta: function (tag, content) { return chalk_1.default.bgMagenta(content); },
+            bgCyan: function (tag, content) { return chalk_1.default.bgCyan(content); },
+            bgWhite: function (tag, content) { return chalk_1.default.bgWhite(content); },
+            bold: function (tag, content) { return chalk_1.default.bold(content); },
+            dim: function (tag, content) { return chalk_1.default.dim(content); },
+            italic: function (tag, content) { return chalk_1.default.italic(content); },
+            underline: function (tag, content) { return chalk_1.default.underline(content); },
+            strike: function (tag, content) { return chalk_1.default.strike(content); },
+            br: function (tag, content) { return '\n'; }
+        });
+    }
+    exports.default = consoleFn;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uc29sZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvbnNvbGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLFVBQVU7Ozs7Ozs7Ozs7Ozs7OztJQUVWLHVFQUFtRDtJQUNuRCxnREFBNEI7SUFDNUIsZUFBTyxDQUFDLEtBQUssR0FBRyxDQUFDLENBQUM7SUFFbEI7Ozs7Ozs7Ozs7Ozs7Ozs7O09BaUJHO0lBQ0gsU0FBUyxTQUFTLENBQUMsSUFBSTtRQUNyQixPQUFPLHFCQUFhLENBQUMsSUFBSSxFQUFFO1lBQ3pCLEtBQUssRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxlQUFPLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxFQUF0QixDQUFzQjtZQUMvQyxHQUFHLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTyxJQUFLLE9BQUEsZUFBTyxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsRUFBcEIsQ0FBb0I7WUFDM0MsS0FBSyxFQUFFLFVBQUMsR0FBRyxFQUFFLE9BQU8sSUFBSyxPQUFBLGVBQU8sQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEVBQXRCLENBQXNCO1lBQy9DLE1BQU0sRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxlQUFPLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxFQUF2QixDQUF1QjtZQUNqRCxJQUFJLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTyxJQUFLLE9BQUEsZUFBTyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsRUFBckIsQ0FBcUI7WUFDN0MsT0FBTyxFQUFFLFVBQUMsR0FBRyxFQUFFLE9BQU8sSUFBSyxPQUFBLGVBQU8sQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLEVBQXhCLENBQXdCO1lBQ25ELElBQUksRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxlQUFPLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxFQUFyQixDQUFxQjtZQUM3QyxLQUFLLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTyxJQUFLLE9BQUEsZUFBTyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsRUFBdEIsQ0FBc0I7WUFFL0MsT0FBTyxFQUFFLFVBQUMsR0FBRyxFQUFFLE9BQU8sSUFBSyxPQUFBLGVBQU8sQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLEVBQXhCLENBQXdCO1lBQ25ELEtBQUssRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxlQUFPLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxFQUF0QixDQUFzQjtZQUMvQyxPQUFPLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTyxJQUFLLE9BQUEsZUFBTyxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsRUFBeEIsQ0FBd0I7WUFDbkQsUUFBUSxFQUFFLFVBQUMsR0FBRyxFQUFFLE9BQU8sSUFBSyxPQUFBLGVBQU8sQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLEVBQXpCLENBQXlCO1lBQ3JELE1BQU0sRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxlQUFPLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxFQUF2QixDQUF1QjtZQUNqRCxTQUFTLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTyxJQUFLLE9BQUEsZUFBTyxDQUFDLFNBQVMsQ0FBQyxPQUFPLENBQUMsRUFBMUIsQ0FBMEI7WUFDdkQsTUFBTSxFQUFFLFVBQUMsR0FBRyxFQUFFLE9BQU8sSUFBSyxPQUFBLGVBQU8sQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLEVBQXZCLENBQXVCO1lBQ2pELE9BQU8sRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxlQUFPLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxFQUF4QixDQUF3QjtZQUVuRCxJQUFJLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTyxJQUFLLE9BQUEsZUFBTyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsRUFBckIsQ0FBcUI7WUFDN0MsR0FBRyxFQUFFLFVBQUMsR0FBRyxFQUFFLE9BQU8sSUFBSyxPQUFBLGVBQU8sQ0FBQyxHQUFHLENBQUMsT0FBTyxDQUFDLEVBQXBCLENBQW9CO1lBQzNDLE1BQU0sRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxlQUFPLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxFQUF2QixDQUF1QjtZQUNqRCxTQUFTLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTyxJQUFLLE9BQUEsZUFBTyxDQUFDLFNBQVMsQ0FBQyxPQUFPLENBQUMsRUFBMUIsQ0FBMEI7WUFDdkQsTUFBTSxFQUFFLFVBQUMsR0FBRyxFQUFFLE9BQU8sSUFBSyxPQUFBLGVBQU8sQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLEVBQXZCLENBQXVCO1lBRWpELEVBQUUsRUFBRSxVQUFDLEdBQUcsRUFBRSxPQUFPLElBQUssT0FBQSxJQUFJLEVBQUosQ0FBSTtTQUMzQixDQUFDLENBQUM7SUFDTCxDQUFDO0lBQ0Qsa0JBQWUsU0FBUyxDQUFDIn0=

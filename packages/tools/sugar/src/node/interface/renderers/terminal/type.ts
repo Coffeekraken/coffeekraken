@@ -1,0 +1,1 @@
+../../../../js/interface/renderers/terminal/type.ts

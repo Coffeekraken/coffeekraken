@@ -5,36 +5,28 @@ import __tmp from 'tmp';
 import __isClass from '../is/class';
 import __packageJson from '../package/json';
 import __buildCommandLine from './buildCommandLine';
-import __SChildProcessManager from '../process/SChildProcessManager';
 import __deepMerge from '../object/deepMerge';
 import __argsToObject from '../cli/argsToObject';
 import __isChildProcess from '../is/childProcess';
-import __output from '../process/output';
 import __parseArgs from '../cli/parseArgs';
 import __toString from '../string/toString';
-import __SProcessManagerInterface from '../process/interface/SProcessManagerInterface';
 import __SCliInterface from './interface/SCliInterface';
-import __SInterface from '../class/SInterface';
+import __SInterface from '../interface/SInterface';
 import __sugarHeading from '../ascii/sugarHeading';
+import __SClass from '../class/SClass';
 import __SPromise from '../promise/SPromise';
-import __SProcessManager from '../process/SProcessManager';
+import __spawn from '../process/spawn';
 
 /**
  * @name                SCli
  * @namespace           sugar.node.cli
- * @implements          SCliInterface
  * @type                Class
+ * @extends             SClass
  * @status              wip
  *
  * This class represent a basic CLI command with his definition object, his command string, etc...
  *
  * @param       {Object}        [settings={}]           An object of settings to configure your SCli instance:
- * - id (constructor.name) {String}: A uniqid for your instance.
- * - name (null) {String}: A name for your SCli instance like "Build SCSS", etc...
- * - includeAllArgs (true) {Boolean}: Specify if you want to include all arguments when for example you generate the command string, etc...
- * - output (false) {Boolean|Object}: Specify if you want your SCli instance to display automatically a nice output using the SOutput class, or you can specify this to false and handle all of this yourself using the SPromise events emited
- * - defaultParams ({}) {Object}: Specify some defaults for your accepted and described params of the definition object
- * - childProcess: ({}) {Object}: Specify some settings to pass to the SChildProcess instance like "pipe", etc...
  *
  * @todo      interface
  * @todo      doc
@@ -57,7 +49,14 @@ import __SProcessManager from '../process/SProcessManager';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SCli extends __SPromise {
+
+export interface ISCliSettings {
+  definition?: any;
+}
+
+export interface ISCli {}
+
+class SCli extends __SClass implements ISCli {
   /**
    * @name          _runningProcess
    * @type          SPromise
@@ -78,7 +77,43 @@ class SCli extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _runningParamsObj = {};
+  _runningParamsObj: any = {};
+
+  /**
+   * @nane      _initialParams
+   * @type      any
+   * @private
+   *
+   * Store the initial params
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  private _initialParams: any;
+
+  /**
+   * @name        interface
+   * @type        SInterface
+   * @get
+   *
+   * Access the interface used to format arguments, etc...
+   * Take it first from the ```settings.interface``` setting, then check in the
+   * static class property called ```interfaces.cli```.
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  get interface(): __SInterface {
+    const int: __SInterface =
+      // @ts-ignore
+      this._settings.interface || this.constructor.interfaces.cli;
+    if (!int) {
+      throw new Error(
+        `Your "<yellow>SCli</yellow>" based class called "<cyan>${this.constructor.name}</cyan>" does not have any interface specified under the "<magenta>settings.interface</magenta>" setting, or under the static "<magenta>interfaces.cli</magenta>" property.`
+      );
+    }
+    return int;
+  }
 
   /**
    * @name        constructor
@@ -89,102 +124,31 @@ class SCli extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(initialParams = {}, settings = {}) {
-    // save the settings
-    settings = __deepMerge(
-      {
-        id: 'SCli',
-        name: null,
-        includeAllParams: true,
-        output: false,
-        defaultParams: {},
-        processSettings: {},
-        childProcessSettings: {
-          emitParent: true
-        }
-      },
-      settings
+  constructor(initialParams = {}, settings?: Partial<ISCliSettings>) {
+    super(
+      __deepMerge(
+        {
+          id: 'SCli',
+          includeAllParams: true,
+          childProcessSettings: {}
+        },
+        settings || {}
+      )
     );
 
-    super(settings);
-
-    if (!this._settings.id) this._settings.id = this.constructor.name;
-
-    this._paramsObj = __argsToObject(initialParams, this.interface.definition);
-
-    this._paramsObj = __deepMerge(
-      this._settings.defaultParams,
-      this._paramsObj
-    );
-
-    if (!this._paramsObj.forceChildProcess || !this.command) {
-      // run the process
-      const SProcessManagerInstance = this.constructor.processClass;
-
-      this._processManagerInstance = new SProcessManagerInstance(
-        this._paramsObj,
-        this._settings.processSettings
+    // make sure the SCli based class is correctly implemented
+    // @ts-ignore
+    if (!this.constructor.command) {
+      throw new Error(
+        `You must specify a "<yellow>static command: string;</yellow>" property in your "<cyan>${this.constructor.name}</cyan>" SCli based class`
       );
-
-      if (settings.childProcessSettings.emitParent) {
-        const stacks = Array.isArray(settings.childProcessSettings.emitParent)
-          ? settings.childProcessSettings.emitParent.join(',')
-          : '*';
-        this._processManagerInstance.on(stacks, (value, metas) => {
-          __SChildProcessManager.emitParent(metas.stack, value, metas);
-        });
-      }
-    } else {
-      const childProcessManager = new __SChildProcessManager(this.command, {
-        id: settings.id,
-        definition: this.interface.definition,
-        defaultParams: settings.defaultParams,
-        ...settings.childProcessSettings
-      });
-      // childProcessManager.on('state', (state) => {
-      //   this.state = state;
-      // });
-
-      this._processManagerInstance = childProcessManager;
     }
 
-    if (!__isChildProcess()) {
-      if (settings.output) {
-        if (__isClass(settings.output)) {
-          const outputInstance = new settings.output(
-            this._processManagerInstance,
-            this._paramsObj
-          );
-        } else {
-          const outputSettings =
-            typeof settings.output === 'object' ? settings.output : {};
-          __output(this._processManagerInstance, outputSettings);
-        }
-      }
-    }
-
-    __SPromise.pipe(this._processManagerInstance, this);
-  }
-
-  /**
-   * @name        parseArgs
-   * @type        Function
-   * @static
-   *
-   * This static method take a simple cli configuration string and returns you
-   * an object representing each values passed.
-   * This methods uses the static definition object of the class to do his job.
-   *
-   * @param     {String}          cliString         The cli string you want to parse
-   * @return    {Object}                            The object of configuration values
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  static parseArgs(cliString) {
-    return __parseArgs(cliString, {
-      definition: this.interface.definition
-    });
+    this._initialParams = __argsToObject(
+      initialParams,
+      // @ts-ignore
+      this.interface.definition
+    );
   }
 
   /**
@@ -197,28 +161,8 @@ class SCli extends __SPromise {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get command() {
+    // @ts-ignore
     return this.constructor.command;
-  }
-
-  /**
-   * @name        interface
-   * @type        String
-   * @get
-   *
-   * Access the definition object
-   *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  get interface() {
-    const int = this.constructor.interface;
-    int.definition.forceChildProcess = {
-      type: 'Boolean',
-      required: true,
-      default: true,
-      description:
-        'Allows you to force the SCli class to start a new child process even if the SCli instance already runs inside one'
-    };
-    return int;
   }
 
   /**
@@ -261,37 +205,44 @@ class SCli extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  run(paramsObj = {}, settings = {}) {
+  run(paramsObj: any = {}, settings?: Partial<ISCliSettings>) {
     if (this._runningProcess) {
       throw new Error(
-        `You cannot spawn multiple "${this.constructor.name}" process at the same time. Please kill the currently running one using the "kill" method...`
+        `You cannot spawn multiple "${this.id}" process at the same time. Please kill the currently running one using the "kill" method...`
       );
     }
 
-    settings = __deepMerge(this._settings, settings);
+    const set = <ISCliSettings>__deepMerge(this._settings, settings || {});
 
     if (typeof paramsObj === 'string') {
-      paramsObj = __argsToObject(paramsObj, this.interface.definition);
+      paramsObj = __argsToObject(paramsObj, {
+        // @ts-ignore
+        definition: this.interface.definition
+      });
     } else if (!paramsObj) {
-      paramsObj = Object.assign({}, this._paramsObj);
+      paramsObj = Object.assign({}, this._initialParams);
     }
     paramsObj = __deepMerge(
-      Object.assign({}, this._paramsObj || {}),
+      Object.assign({}, this._initialParams || {}),
       paramsObj
     );
 
-    if (this._processManagerInstance instanceof __SChildProcessManager) {
-      paramsObj.forceChildProcess = false;
+    if (this.process && typeof this.process === 'function') {
+      return this.process();
     }
 
-    this._runningProcess = this._processManagerInstance.run(
-      paramsObj,
-      settings.processSettings
-    );
+    // build the command line
+    const command = this.toString(paramsObj);
 
-    this._runningProcess.on('close', (args) => {
-      this._runningProcess = null;
-    });
+    console.log('com', command);
+
+    return;
+
+    // this._runningProcess = __spawn();
+
+    // this._runningProcess.on('close', (args) => {
+    //   this._runningProcess = null;
+    // });
 
     // this._runningProcess.on('*', (d, v) => {
 
@@ -301,26 +252,7 @@ class SCli extends __SPromise {
     //   version: __packageJson(__dirname).version
     // })}\n\n
 
-    if (!__isChildProcess()) {
-      const launchingLogObj = {
-        temp: true,
-        value: `Launching the SCli "<primary>${
-          this._settings.name || this._settings.id
-        }</primary>" process...`
-      };
-      this._processManagerInstance.emit('log', launchingLogObj);
-    }
-
-    // save running process params
-    this._runningParamsObj = paramsObj;
-
-    // listen for some events on the process
-    this._runningProcess.on('finally', () => {
-      this._runningProcess = null;
-      this._runningParamsObj = null;
-    });
-
-    return this._runningProcess;
+    // return this._runningProcess;
   }
 
   /**
@@ -335,13 +267,15 @@ class SCli extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  toString(paramsObj = {}, includeAllParams = this._settings.includeAllParams) {
-    return __buildCommandLine(
-      this.command,
-      this.interface.definition,
-      paramsObj,
+  toString(
+    paramsObj: any = {},
+    includeAllParams: boolean = this._settings.includeAllParams
+  ) {
+    return __buildCommandLine(this.command, paramsObj, {
+      // @ts-ignore
+      definition: this.interface.definition,
       includeAllParams
-    );
+    });
   }
 
   /**
@@ -365,11 +299,6 @@ class SCli extends __SPromise {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  kill() {
-    if (!this._runningProcess) return;
-    try {
-      this._runningProcess.kill();
-    } catch (e) {}
-  }
+  kill() {}
 }
-export default __SCliInterface.implements(SCli);
+export default SCli;

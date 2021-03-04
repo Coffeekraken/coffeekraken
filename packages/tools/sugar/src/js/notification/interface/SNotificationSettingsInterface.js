@@ -1,40 +1,73 @@
 // @shared
-import __sugarConfig from '../../../node/config/sugar';
-import __SInterface from '../../interface/SInterface';
-/**
- * @name            SNotificationSettingsInterface
- * @namespace       sugar.js.notification.interface
- * @type            Class
- * @extends         SInterface
- *
- * Interface that describe the settings object you can pass to the SNofication constructor
- *
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SNotificationSettingsInterface extends __SInterface {
-}
-SNotificationSettingsInterface.definition = {
-    adapters: {
-        type: 'Array<String>',
-        required: true,
-        default: __sugarConfig('notification.adapters')
-    },
-    adaptersSettings: {
-        type: 'Object',
-        required: true,
-        default: __sugarConfig('notification.adaptersSettings')
-    },
-    enable: {
-        type: 'Boolean',
-        required: true,
-        default: __sugarConfig('notification.enable')
-    },
-    types: {
-        type: 'Object',
-        required: true,
-        default: __sugarConfig('notification.types')
-    }
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-export default SNotificationSettingsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU05vdGlmaWNhdGlvblNldHRpbmdzSW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU05vdGlmaWNhdGlvblNldHRpbmdzSW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFVBQVU7QUFFVixPQUFPLGFBQWEsTUFBTSw0QkFBNEIsQ0FBQztBQUV2RCxPQUFPLFlBQVksTUFBTSw0QkFBNEIsQ0FBQztBQUV0RDs7Ozs7Ozs7OztHQVVHO0FBQ0gsTUFBTSw4QkFBK0IsU0FBUSxZQUFZOztBQUNoRCx5Q0FBVSxHQUFHO0lBQ2xCLFFBQVEsRUFBRTtRQUNSLElBQUksRUFBRSxlQUFlO1FBQ3JCLFFBQVEsRUFBRSxJQUFJO1FBQ2QsT0FBTyxFQUFFLGFBQWEsQ0FBQyx1QkFBdUIsQ0FBQztLQUNoRDtJQUNELGdCQUFnQixFQUFFO1FBQ2hCLElBQUksRUFBRSxRQUFRO1FBQ2QsUUFBUSxFQUFFLElBQUk7UUFDZCxPQUFPLEVBQUUsYUFBYSxDQUFDLCtCQUErQixDQUFDO0tBQ3hEO0lBQ0QsTUFBTSxFQUFFO1FBQ04sSUFBSSxFQUFFLFNBQVM7UUFDZixRQUFRLEVBQUUsSUFBSTtRQUNkLE9BQU8sRUFBRSxhQUFhLENBQUMscUJBQXFCLENBQUM7S0FDOUM7SUFDRCxLQUFLLEVBQUU7UUFDTCxJQUFJLEVBQUUsUUFBUTtRQUNkLFFBQVEsRUFBRSxJQUFJO1FBQ2QsT0FBTyxFQUFFLGFBQWEsQ0FBQyxvQkFBb0IsQ0FBQztLQUM3QztDQUNGLENBQUM7QUFFSixlQUFlLDhCQUE4QixDQUFDIn0=
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "../../../node/config/sugar", "../../interface/SInterface"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var sugar_1 = __importDefault(require("../../../node/config/sugar"));
+    var SInterface_1 = __importDefault(require("../../interface/SInterface"));
+    /**
+     * @name            SNotificationSettingsInterface
+     * @namespace       sugar.js.notification.interface
+     * @type            Class
+     * @extends         SInterface
+     *
+     * Interface that describe the settings object you can pass to the SNofication constructor
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    var SNotificationSettingsInterface = /** @class */ (function (_super) {
+        __extends(SNotificationSettingsInterface, _super);
+        function SNotificationSettingsInterface() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        SNotificationSettingsInterface.definition = {
+            adapters: {
+                type: 'Array<String>',
+                required: true,
+                default: sugar_1.default('notification.adapters')
+            },
+            adaptersSettings: {
+                type: 'Object',
+                required: true,
+                default: sugar_1.default('notification.adaptersSettings')
+            },
+            enable: {
+                type: 'Boolean',
+                required: true,
+                default: sugar_1.default('notification.enable')
+            },
+            types: {
+                type: 'Object',
+                required: true,
+                default: sugar_1.default('notification.types')
+            }
+        };
+        return SNotificationSettingsInterface;
+    }(SInterface_1.default));
+    exports.default = SNotificationSettingsInterface;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU05vdGlmaWNhdGlvblNldHRpbmdzSW50ZXJmYWNlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU05vdGlmaWNhdGlvblNldHRpbmdzSW50ZXJmYWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFVBQVU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFFVixxRUFBdUQ7SUFFdkQsMEVBQXNEO0lBRXREOzs7Ozs7Ozs7O09BVUc7SUFDSDtRQUE2QyxrREFBWTtRQUF6RDs7UUF1QkEsQ0FBQztRQXRCUSx5Q0FBVSxHQUFHO1lBQ2xCLFFBQVEsRUFBRTtnQkFDUixJQUFJLEVBQUUsZUFBZTtnQkFDckIsUUFBUSxFQUFFLElBQUk7Z0JBQ2QsT0FBTyxFQUFFLGVBQWEsQ0FBQyx1QkFBdUIsQ0FBQzthQUNoRDtZQUNELGdCQUFnQixFQUFFO2dCQUNoQixJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsSUFBSTtnQkFDZCxPQUFPLEVBQUUsZUFBYSxDQUFDLCtCQUErQixDQUFDO2FBQ3hEO1lBQ0QsTUFBTSxFQUFFO2dCQUNOLElBQUksRUFBRSxTQUFTO2dCQUNmLFFBQVEsRUFBRSxJQUFJO2dCQUNkLE9BQU8sRUFBRSxlQUFhLENBQUMscUJBQXFCLENBQUM7YUFDOUM7WUFDRCxLQUFLLEVBQUU7Z0JBQ0wsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsUUFBUSxFQUFFLElBQUk7Z0JBQ2QsT0FBTyxFQUFFLGVBQWEsQ0FBQyxvQkFBb0IsQ0FBQzthQUM3QztTQUNGLENBQUM7UUFDSixxQ0FBQztLQUFBLEFBdkJELENBQTZDLG9CQUFZLEdBdUJ4RDtJQUNELGtCQUFlLDhCQUE4QixDQUFDIn0=

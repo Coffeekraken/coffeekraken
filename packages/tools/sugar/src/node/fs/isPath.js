@@ -1,7 +1,12 @@
+"use strict";
 // @ts-nocheck
-import __isValidPath from 'is-valid-path';
-import __fs from 'fs';
-import __replacePathTokens from '../path/replacePathTokens';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const is_valid_path_1 = __importDefault(require("is-valid-path"));
+const fs_1 = __importDefault(require("fs"));
+const replacePathTokens_1 = __importDefault(require("../path/replacePathTokens"));
 /**
  * @name                            isPath
  * @namespace           sugar.node.fs
@@ -28,20 +33,20 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isPath(path, checkExistence = false) {
-    path = __replacePathTokens(path);
+    path = replacePathTokens_1.default(path);
     // check if we have some /
     if (!path.includes('/'))
         return false;
     // check if the path is valid or not
-    if (!__isValidPath(path))
+    if (!is_valid_path_1.default(path))
         return false;
     // if we have to check the path existence
     if (checkExistence) {
-        if (!__fs.existsSync(path))
+        if (!fs_1.default.existsSync(path))
             return false;
     }
     // otherwise, all is ok
     return true;
 }
-export default isPath;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaXNQYXRoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaXNQYXRoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSxlQUFlLENBQUM7QUFDMUMsT0FBTyxJQUFJLE1BQU0sSUFBSSxDQUFDO0FBQ3RCLE9BQU8sbUJBQW1CLE1BQU0sMkJBQTJCLENBQUM7QUFFNUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsTUFBTSxDQUFDLElBQUksRUFBRSxjQUFjLEdBQUcsS0FBSztJQUMxQyxJQUFJLEdBQUcsbUJBQW1CLENBQUMsSUFBSSxDQUFDLENBQUM7SUFFakMsMEJBQTBCO0lBQzFCLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQztRQUFFLE9BQU8sS0FBSyxDQUFDO0lBRXRDLG9DQUFvQztJQUNwQyxJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQztRQUFFLE9BQU8sS0FBSyxDQUFDO0lBRXZDLHlDQUF5QztJQUN6QyxJQUFJLGNBQWMsRUFBRTtRQUNsQixJQUFJLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUM7WUFBRSxPQUFPLEtBQUssQ0FBQztLQUMxQztJQUVELHVCQUF1QjtJQUN2QixPQUFPLElBQUksQ0FBQztBQUNkLENBQUM7QUFDRCxlQUFlLE1BQU0sQ0FBQyJ9
+exports.default = isPath;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaXNQYXRoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaXNQYXRoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGtFQUEwQztBQUMxQyw0Q0FBc0I7QUFDdEIsa0ZBQTREO0FBRTVEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLE1BQU0sQ0FBQyxJQUFJLEVBQUUsY0FBYyxHQUFHLEtBQUs7SUFDMUMsSUFBSSxHQUFHLDJCQUFtQixDQUFDLElBQUksQ0FBQyxDQUFDO0lBRWpDLDBCQUEwQjtJQUMxQixJQUFJLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxHQUFHLENBQUM7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUV0QyxvQ0FBb0M7SUFDcEMsSUFBSSxDQUFDLHVCQUFhLENBQUMsSUFBSSxDQUFDO1FBQUUsT0FBTyxLQUFLLENBQUM7SUFFdkMseUNBQXlDO0lBQ3pDLElBQUksY0FBYyxFQUFFO1FBQ2xCLElBQUksQ0FBQyxZQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQztZQUFFLE9BQU8sS0FBSyxDQUFDO0tBQzFDO0lBRUQsdUJBQXVCO0lBQ3ZCLE9BQU8sSUFBSSxDQUFDO0FBQ2QsQ0FBQztBQUNELGtCQUFlLE1BQU0sQ0FBQyJ9

@@ -1,145 +1,179 @@
 // @ts-nocheck
-import __SPromise from '../promise/SPromise';
-/**
- * @name                SMediaQuery
- * @namespace           sugar.js.responsive
- * @type                Class
- * @extends             SPromise
- * @status              wip
- *
- * This class expose some nice and easy methods to get the active media query defined in the config.media.queries configuration
- * stack, as well as register to some events list "match" or "unmatch".
- *
- * @param           {String}            mediaName           The media name you want to track. Can be an array of names or simple "*" to track every media queries
- * @param           {Object}            [settings={}]       An object of settings to configure your media query instance
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example             js
- * import SMediaQuery from '@coffeekraken/sugar/js/responsive/SMediaQuery';
- * const mediaQuery = new SMediaQuery('mobile');
- * mediaQuery.on('match', media => {
- *      // do something
- * });
- * SMediaQuery.getActiveMedia(); // => mobile
- *
- * @since           2.0.0
- * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-class SMediaQuery extends __SPromise {
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "../promise/SPromise"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var SPromise_1 = __importDefault(require("../promise/SPromise"));
     /**
-     * @name                constructor
-     * @type                Function
-     * @constructor
+     * @name                SMediaQuery
+     * @namespace           sugar.js.responsive
+     * @type                Class
+     * @extends             SPromise
+     * @status              wip
      *
-     * Constructor
+     * This class expose some nice and easy methods to get the active media query defined in the config.media.queries configuration
+     * stack, as well as register to some events list "match" or "unmatch".
+     *
+     * @param           {String}            mediaName           The media name you want to track. Can be an array of names or simple "*" to track every media queries
+     * @param           {Object}            [settings={}]       An object of settings to configure your media query instance
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @example             js
+     * import SMediaQuery from '@coffeekraken/sugar/js/responsive/SMediaQuery';
+     * const mediaQuery = new SMediaQuery('mobile');
+     * mediaQuery.on('match', media => {
+     *      // do something
+     * });
+     * SMediaQuery.getActiveMedia(); // => mobile
      *
      * @since           2.0.0
      * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(mediaName, settings = {}) {
-        if (!Array.isArray(mediaName))
-            mediaName = [mediaName];
-        const name = mediaName.join(' ');
-        super(settings, {
-            id: `SMediaQuery.${name.split(' ').join('-')}`
-        });
-        if (!this.constructor._promisesStack[name])
-            this.constructor._promisesStack[name] = [];
-        this.constructor._promisesStack[name].push(this);
-    }
-    /**
-     * @name              startListener
-     * @type              Function
-     * @static
-     *
-     * Add the global listener based on the "init-body-media-queries" scss mixin
-     *
-     * @since             2.0.0
-     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    static getActiveMedia() {
-        return this._activeMedia;
-    }
-    /**
-     * @name              startListener
-     * @type              Function
-     * @static
-     *
-     * Add the global listener based on the "init-body-media-queries" scss mixin
-     *
-     * @since             2.0.0
-     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    static startListener() {
-        document.addEventListener('animationend', (e) => {
-            const mediaName = e.animationName.replace(/^mq-/, '');
-            const previousActiveMedia = this._activeMedia;
-            // keep track of the active media
-            this._activeMedia = mediaName;
-            Object.keys(this._promisesStack).forEach((name) => {
-                const nameArray = name.split(' ');
-                if (previousActiveMedia) {
-                    if (nameArray.indexOf(previousActiveMedia) !== -1) {
-                        const promises = this._promisesStack[name];
-                        promises.forEach((promise) => {
-                            promise.emit('unmatch', {
-                                name: previousActiveMedia
+    var SMediaQuery = /** @class */ (function (_super) {
+        __extends(SMediaQuery, _super);
+        /**
+         * @name                constructor
+         * @type                Function
+         * @constructor
+         *
+         * Constructor
+         *
+         * @since           2.0.0
+         * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        function SMediaQuery(mediaName, settings) {
+            if (settings === void 0) { settings = {}; }
+            var _this = this;
+            if (!Array.isArray(mediaName))
+                mediaName = [mediaName];
+            var name = mediaName.join(' ');
+            _this = _super.call(this, settings, {
+                id: "SMediaQuery." + name.split(' ').join('-')
+            }) || this;
+            if (!_this.constructor._promisesStack[name])
+                _this.constructor._promisesStack[name] = [];
+            _this.constructor._promisesStack[name].push(_this);
+            return _this;
+        }
+        /**
+         * @name              startListener
+         * @type              Function
+         * @static
+         *
+         * Add the global listener based on the "init-body-media-queries" scss mixin
+         *
+         * @since             2.0.0
+         * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        SMediaQuery.getActiveMedia = function () {
+            return this._activeMedia;
+        };
+        /**
+         * @name              startListener
+         * @type              Function
+         * @static
+         *
+         * Add the global listener based on the "init-body-media-queries" scss mixin
+         *
+         * @since             2.0.0
+         * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        SMediaQuery.startListener = function () {
+            var _this = this;
+            document.addEventListener('animationend', function (e) {
+                var mediaName = e.animationName.replace(/^mq-/, '');
+                var previousActiveMedia = _this._activeMedia;
+                // keep track of the active media
+                _this._activeMedia = mediaName;
+                Object.keys(_this._promisesStack).forEach(function (name) {
+                    var nameArray = name.split(' ');
+                    if (previousActiveMedia) {
+                        if (nameArray.indexOf(previousActiveMedia) !== -1) {
+                            var promises = _this._promisesStack[name];
+                            promises.forEach(function (promise) {
+                                promise.emit('unmatch', {
+                                    name: previousActiveMedia
+                                });
+                            });
+                        }
+                    }
+                    if (nameArray.indexOf(mediaName) !== -1) {
+                        var promise = _this._promisesStack[name];
+                        var promises = _this._promisesStack[name];
+                        promises.forEach(function (promise) {
+                            promise.emit('match', {
+                                name: mediaName
                             });
                         });
                     }
-                }
-                if (nameArray.indexOf(mediaName) !== -1) {
-                    const promise = this._promisesStack[name];
-                    const promises = this._promisesStack[name];
-                    promises.forEach((promise) => {
-                        promise.emit('match', {
+                });
+                if (_this._promisesStack['*']) {
+                    var allPromises = _this._promisesStack['*'];
+                    allPromises.forEach(function (allPromise) {
+                        if (previousActiveMedia) {
+                            allPromise.emit('unmatch', {
+                                name: previousActiveMedia
+                            });
+                        }
+                        allPromise.emit('match', {
                             name: mediaName
                         });
                     });
                 }
             });
-            if (this._promisesStack['*']) {
-                const allPromises = this._promisesStack['*'];
-                allPromises.forEach((allPromise) => {
-                    if (previousActiveMedia) {
-                        allPromise.emit('unmatch', {
-                            name: previousActiveMedia
-                        });
-                    }
-                    allPromise.emit('match', {
-                        name: mediaName
-                    });
-                });
-            }
-        });
-    }
-}
-/**
- * @name                this._activeMedia
- * @type                String
- * @static
- *
- * Store the active media name
- *
- * @since           2.0.0
- * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-SMediaQuery._activeMedia = 'desktop';
-/**
- * @name                _promisesStack
- * @type                Object
- * @static
- *
- * Store all the promises for each media
- *
- * @since           2.0.0
- * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-SMediaQuery._promisesStack = {};
-// start listener
-SMediaQuery.startListener();
-export default SMediaQuery;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU01lZGlhUXVlcnkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTTWVkaWFRdWVyeS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxVQUFVLE1BQU0scUJBQXFCLENBQUM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTJCRztBQUNILE1BQU0sV0FBWSxTQUFRLFVBQVU7SUFnR2xDOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksU0FBUyxFQUFFLFFBQVEsR0FBRyxFQUFFO1FBQ2xDLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLFNBQVMsQ0FBQztZQUFFLFNBQVMsR0FBRyxDQUFDLFNBQVMsQ0FBQyxDQUFDO1FBRXZELE1BQU0sSUFBSSxHQUFHLFNBQVMsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7UUFFakMsS0FBSyxDQUFDLFFBQVEsRUFBRTtZQUNkLEVBQUUsRUFBRSxlQUFlLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFO1NBQy9DLENBQUMsQ0FBQztRQUVILElBQUksQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUM7WUFDeEMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxDQUFDO1FBQzdDLElBQUksQ0FBQyxXQUFXLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNuRCxDQUFDO0lBN0ZEOzs7Ozs7Ozs7T0FTRztJQUNILE1BQU0sQ0FBQyxjQUFjO1FBQ25CLE9BQU8sSUFBSSxDQUFDLFlBQVksQ0FBQztJQUMzQixDQUFDO0lBRUQ7Ozs7Ozs7OztPQVNHO0lBQ0gsTUFBTSxDQUFDLGFBQWE7UUFDbEIsUUFBUSxDQUFDLGdCQUFnQixDQUFDLGNBQWMsRUFBRSxDQUFDLENBQUMsRUFBRSxF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
+        };
+        /**
+         * @name                this._activeMedia
+         * @type                String
+         * @static
+         *
+         * Store the active media name
+         *
+         * @since           2.0.0
+         * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        SMediaQuery._activeMedia = 'desktop';
+        /**
+         * @name                _promisesStack
+         * @type                Object
+         * @static
+         *
+         * Store all the promises for each media
+         *
+         * @since           2.0.0
+         * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        SMediaQuery._promisesStack = {};
+        return SMediaQuery;
+    }(SPromise_1.default));
+    // start listener
+    SMediaQuery.startListener();
+    exports.default = SMediaQuery;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU01lZGlhUXVlcnkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTTWVkaWFRdWVyeS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsaUVBQTZDO0lBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0EyQkc7SUFDSDtRQUEwQiwrQkFBVTtRQWdHbEM7Ozs7Ozs7OztXQVNHO1FBQ0gscUJBQVksU0FBUyxFQUFFLFFBQWE7WUFBYix5QkFBQSxFQUFBLGFBQWE7WUFBcEMsaUJBWUM7WUFYQyxJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxTQUFTLENBQUM7Z0JBQUUsU0FBUyxHQUFHLENBQUMsU0FBUyxDQUFDLENBQUM7WUFFdkQsSUFBTSxJQUFJLEdBQUcsU0FBUyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUVqQyxRQUFBLGtCQUFNLFFBQVEsRUFBRTtnQkFDZCxFQUFFLEVBQUUsaUJBQWUsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFHO2FBQy9DLENBQUMsU0FBQztZQUVILElBQUksQ0FBQyxLQUFJLENBQUMsV0FBVyxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUM7Z0JBQ3hDLEtBQUksQ0FBQyxXQUFXLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUUsQ0FBQztZQUM3QyxLQUFJLENBQUMsV0FBVyxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLENBQUMsS0FBSSxDQUFDLENBQUM7O1FBQ25ELENBQUM7UUE3RkQ7Ozs7Ozs7OztXQVNHO1FBQ0ksMEJBQWMsR0FBckI7WUFDRSxPQUFPLElBQUksQ0FBQyxZQUFZLENBQUM7UUFDM0IsQ0FBQztRQUVEOzs7Ozs7Ozs7V0FTRztRQUNJLHlCQUFhLEdBQXBCO1lBQUEsaUJBNkNDO1lBNUNDLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FB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

@@ -1,10 +1,15 @@
+"use strict";
 // @ts-nocheck
 // @shared
-import __isNode from '../is/node';
-import __get from '../object/get';
-import __set from '../object/set';
-import __delete from '../object/delete';
-import __parse from '../string/parse';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const node_1 = __importDefault(require("../is/node"));
+const get_1 = __importDefault(require("../object/get"));
+const set_1 = __importDefault(require("../object/set"));
+const delete_1 = __importDefault(require("../object/delete"));
+const parse_1 = __importDefault(require("../string/parse"));
 /**
  * @name                    env
  * @namespace           sugar.js.core
@@ -29,22 +34,22 @@ import __parse from '../string/parse';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function env(dotPath, value) {
-    if (!__isNode()) {
+    if (!node_1.default()) {
         if (!window.process)
             window.process = {};
         if (!window.process.env)
             window.process.env = {};
     }
-    const targetObj = __isNode() ? global.process.env : window.process.env;
+    const targetObj = node_1.default() ? global.process.env : window.process.env;
     if (value === null) {
         // delete the variable
-        __delete(targetObj, dotPath.toUpperCase());
+        delete_1.default(targetObj, dotPath.toUpperCase());
     }
     else if (value !== undefined) {
-        __set(targetObj, dotPath.toUpperCase(), __parse(value));
+        set_1.default(targetObj, dotPath.toUpperCase(), parse_1.default(value));
     }
     // return the variable value
-    return __parse(__get(targetObj, dotPath.toUpperCase()));
+    return parse_1.default(get_1.default(targetObj, dotPath.toUpperCase()));
 }
-export default env;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW52LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZW52LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVO0FBRVYsT0FBTyxRQUFRLE1BQU0sWUFBWSxDQUFDO0FBQ2xDLE9BQU8sS0FBSyxNQUFNLGVBQWUsQ0FBQztBQUNsQyxPQUFPLEtBQUssTUFBTSxlQUFlLENBQUM7QUFDbEMsT0FBTyxRQUFRLE1BQU0sa0JBQWtCLENBQUM7QUFDeEMsT0FBTyxPQUFPLE1BQU0saUJBQWlCLENBQUM7QUFFdEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxTQUFTLEdBQUcsQ0FBQyxPQUFPLEVBQUUsS0FBSztJQUN6QixJQUFJLENBQUMsUUFBUSxFQUFFLEVBQUU7UUFDZixJQUFJLENBQUMsTUFBTSxDQUFDLE9BQU87WUFBRSxNQUFNLENBQUMsT0FBTyxHQUFHLEVBQUUsQ0FBQztRQUN6QyxJQUFJLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHO1lBQUUsTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHLEdBQUcsRUFBRSxDQUFDO0tBQ2xEO0lBQ0QsTUFBTSxTQUFTLEdBQUcsUUFBUSxFQUFFLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQztJQUV2RSxJQUFJLEtBQUssS0FBSyxJQUFJLEVBQUU7UUFDbEIsc0JBQXNCO1FBQ3RCLFFBQVEsQ0FBQyxTQUFTLEVBQUUsT0FBTyxDQUFDLFdBQVcsRUFBRSxDQUFDLENBQUM7S0FDNUM7U0FBTSxJQUFJLEtBQUssS0FBSyxTQUFTLEVBQUU7UUFDOUIsS0FBSyxDQUFDLFNBQVMsRUFBRSxPQUFPLENBQUMsV0FBVyxFQUFFLEVBQUUsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7S0FDekQ7SUFDRCw0QkFBNEI7SUFDNUIsT0FBTyxPQUFPLENBQUMsS0FBSyxDQUFDLFNBQVMsRUFBRSxPQUFPLENBQUMsV0FBVyxFQUFFLENBQUMsQ0FBQyxDQUFDO0FBQzFELENBQUM7QUFFRCxlQUFlLEdBQUcsQ0FBQyJ9
+exports.default = env;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW52LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZW52LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTs7Ozs7QUFFVixzREFBa0M7QUFDbEMsd0RBQWtDO0FBQ2xDLHdEQUFrQztBQUNsQyw4REFBd0M7QUFDeEMsNERBQXNDO0FBRXRDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBUyxHQUFHLENBQUMsT0FBTyxFQUFFLEtBQUs7SUFDekIsSUFBSSxDQUFDLGNBQVEsRUFBRSxFQUFFO1FBQ2YsSUFBSSxDQUFDLE1BQU0sQ0FBQyxPQUFPO1lBQUUsTUFBTSxDQUFDLE9BQU8sR0FBRyxFQUFFLENBQUM7UUFDekMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsR0FBRztZQUFFLE1BQU0sQ0FBQyxPQUFPLENBQUMsR0FBRyxHQUFHLEVBQUUsQ0FBQztLQUNsRDtJQUNELE1BQU0sU0FBUyxHQUFHLGNBQVEsRUFBRSxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUM7SUFFdkUsSUFBSSxLQUFLLEtBQUssSUFBSSxFQUFFO1FBQ2xCLHNCQUFzQjtRQUN0QixnQkFBUSxDQUFDLFNBQVMsRUFBRSxPQUFPLENBQUMsV0FBVyxFQUFFLENBQUMsQ0FBQztLQUM1QztTQUFNLElBQUksS0FBSyxLQUFLLFNBQVMsRUFBRTtRQUM5QixhQUFLLENBQUMsU0FBUyxFQUFFLE9BQU8sQ0FBQyxXQUFXLEVBQUUsRUFBRSxlQUFPLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztLQUN6RDtJQUNELDRCQUE0QjtJQUM1QixPQUFPLGVBQU8sQ0FBQyxhQUFLLENBQUMsU0FBUyxFQUFFLE9BQU8sQ0FBQyxXQUFXLEVBQUUsQ0FBQyxDQUFDLENBQUM7QUFDMUQsQ0FBQztBQUVELGtCQUFlLEdBQUcsQ0FBQyJ9

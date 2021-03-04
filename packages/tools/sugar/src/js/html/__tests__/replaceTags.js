@@ -1,28 +1,14 @@
 "use strict";
-module.exports = (__replaceTags) => {
-    describe('sugar.js.html.replaceTags', () => {
-        const html = `
-  <div>
-    <bold>Hello world</bold>
-    <h1>
-      How are you?
-    </h1>
-  </div>
-`;
-        const res = __replaceTags(html, {
-            bold: (tag, content) => `<yop>${content}</yop>`,
-            h1: (tag, content) => content
+module.exports = function (__replaceTags) {
+    describe('sugar.js.html.replaceTags', function () {
+        var html = "\n  <div>\n    <bold>Hello world</bold>\n    <h1>\n      How are you?\n    </h1>\n  </div>\n";
+        var res = __replaceTags(html, {
+            bold: function (tag, content) { return "<yop>" + content + "</yop>"; },
+            h1: function (tag, content) { return content; }
         });
-        it('Should have replace the tags correctly', () => {
-            expect(res.replace(/\s/g, '')).toBe(`
-<div>
-<yop>Hello world</yop>
-
-  How are you?
-
-</div>
-`.replace(/\s/g, ''));
+        it('Should have replace the tags correctly', function () {
+            expect(res.replace(/\s/g, '')).toBe("\n<div>\n<yop>Hello world</yop>\n\n  How are you?\n\n</div>\n".replace(/\s/g, ''));
         });
     });
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVwbGFjZVRhZ3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyZXBsYWNlVGFncy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsTUFBTSxDQUFDLE9BQU8sR0FBRyxDQUFDLGFBQWEsRUFBRSxFQUFFO0lBRWpDLFFBQVEsQ0FBQywyQkFBMkIsRUFBRSxHQUFHLEVBQUU7UUFFekMsTUFBTSxJQUFJLEdBQUc7Ozs7Ozs7Q0FPaEIsQ0FBQztRQUVFLE1BQU0sR0FBRyxHQUFHLGFBQWEsQ0FBQyxJQUFJLEVBQUU7WUFDOUIsSUFBSSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsUUFBUSxPQUFPLFFBQVE7WUFDL0MsRUFBRSxFQUFFLENBQUMsR0FBRyxFQUFFLE9BQU8sRUFBRSxFQUFFLENBQUMsT0FBTztTQUM5QixDQUFDLENBQUM7UUFFSCxFQUFFLENBQUMsd0NBQXdDLEVBQUUsR0FBRyxFQUFFO1lBQ2hELE1BQU0sQ0FBQyxHQUFHLENBQUMsT0FBTyxDQUFDLEtBQUssRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQzs7Ozs7OztDQU96QyxDQUFDLE9BQU8sQ0FBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQztRQUNsQixDQUFDLENBQUMsQ0FBQztJQUVMLENBQUMsQ0FBQyxDQUFDO0FBRUwsQ0FBQyxDQUFBIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVwbGFjZVRhZ3MuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJyZXBsYWNlVGFncy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsTUFBTSxDQUFDLE9BQU8sR0FBRyxVQUFDLGFBQWE7SUFFN0IsUUFBUSxDQUFDLDJCQUEyQixFQUFFO1FBRXBDLElBQU0sSUFBSSxHQUFHLDhGQU9oQixDQUFDO1FBRUUsSUFBTSxHQUFHLEdBQUcsYUFBYSxDQUFDLElBQUksRUFBRTtZQUM5QixJQUFJLEVBQUUsVUFBQyxHQUFHLEVBQUUsT0FBTyxJQUFLLE9BQUEsVUFBUSxPQUFPLFdBQVEsRUFBdkIsQ0FBdUI7WUFDL0MsRUFBRSxFQUFFLFVBQUMsR0FBRyxFQUFFLE9BQU8sSUFBSyxPQUFBLE9BQU8sRUFBUCxDQUFPO1NBQzlCLENBQUMsQ0FBQztRQUVILEVBQUUsQ0FBQyx3Q0FBd0MsRUFBRTtZQUMzQyxNQUFNLENBQUMsR0FBRyxDQUFDLE9BQU8sQ0FBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsK0RBT3pDLENBQUMsT0FBTyxDQUFDLEtBQUssRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDO1FBQ2xCLENBQUMsQ0FBQyxDQUFDO0lBRUwsQ0FBQyxDQUFDLENBQUM7QUFFTCxDQUFDLENBQUEifQ==

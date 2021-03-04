@@ -1,8 +1,13 @@
+"use strict";
 // @ts-nocheck
-import __SConfig from './SConfig';
-import __SConfigFolderAdapter from './adapters/SConfigFolderAdapter';
-import __path from 'path';
-import __packageRoot from '../path/packageRoot';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const SConfig_1 = __importDefault(require("./SConfig"));
+const SConfigFolderAdapter_1 = __importDefault(require("./adapters/SConfigFolderAdapter"));
+const path_1 = __importDefault(require("path"));
+const packageRoot_1 = __importDefault(require("../path/packageRoot"));
 /**
  * @name                  sugar
  * @namespace           sugar.node.config
@@ -31,18 +36,18 @@ import __packageRoot from '../path/packageRoot';
 let sugarConfigInstance;
 function sugar(dotPath) {
     if (!sugarConfigInstance) {
-        sugarConfigInstance = new __SConfig('sugar', {
+        sugarConfigInstance = new SConfig_1.default('sugar', {
             adapters: [
-                new __SConfigFolderAdapter({
+                new SConfigFolderAdapter_1.default({
                     configAdapter: {
                         name: 'sugar'
                     },
                     configFolderAdapter: {
                         folderName: '.sugar',
                         fileName: '[name].config.js',
-                        defaultConfigPath: __path.resolve(__dirname, '../../config'),
-                        appConfigPath: `${__packageRoot(process.cwd())}/[foldername]`,
-                        userConfigPath: `${__packageRoot(process.cwd())}/.local/[foldername]`
+                        defaultConfigPath: path_1.default.resolve(__dirname, '../../config'),
+                        appConfigPath: `${packageRoot_1.default(process.cwd())}/[foldername]`,
+                        userConfigPath: `${packageRoot_1.default(process.cwd())}/.local/[foldername]`
                     }
                 })
             ]
@@ -53,5 +58,5 @@ function sugar(dotPath) {
         throwErrorOnUndefinedConfig: false
     });
 }
-export default sugar;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3VnYXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdWdhci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxTQUFTLE1BQU0sV0FBVyxDQUFDO0FBQ2xDLE9BQU8sc0JBQXNCLE1BQU0saUNBQWlDLENBQUM7QUFDckUsT0FBTyxNQUFNLE1BQU0sTUFBTSxDQUFDO0FBQzFCLE9BQU8sYUFBYSxNQUFNLHFCQUFxQixDQUFDO0FBR2hEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxJQUFJLG1CQUFtQixDQUFDO0FBRXhCLFNBQVMsS0FBSyxDQUFDLE9BQU87SUFDcEIsSUFBSSxDQUFDLG1CQUFtQixFQUFFO1FBQ3hCLG1CQUFtQixHQUFHLElBQUksU0FBUyxDQUFDLE9BQU8sRUFBRTtZQUMzQyxRQUFRLEVBQUU7Z0JBQ1IsSUFBSSxzQkFBc0IsQ0FBQztvQkFDekIsYUFBYSxFQUFFO3dCQUNiLElBQUksRUFBRSxPQUFPO3FCQUNkO29CQUNELG1CQUFtQixFQUFFO3dCQUNuQixVQUFVLEVBQUUsUUFBUTt3QkFDcEIsUUFBUSxFQUFFLGtCQUFrQjt3QkFDNUIsaUJBQWlCLEVBQUUsTUFBTSxDQUFDLE9BQU8sQ0FBQyxTQUFTLEVBQUUsY0FBYyxDQUFDO3dCQUM1RCxhQUFhLEVBQUUsR0FBRyxhQUFhLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxDQUFDLGVBQWU7d0JBQzdELGNBQWMsRUFBRSxHQUFHLGFBQWEsQ0FDOUIsT0FBTyxDQUFDLEdBQUcsRUFBRSxDQUNkLHNCQUFzQjtxQkFDeEI7aUJBQ0YsQ0FBQzthQUNIO1NBQ0YsQ0FBQyxDQUFDO0tBQ0o7SUFDRCxpQkFBaUI7SUFDakIsT0FBTyxtQkFBbUIsQ0FBQyxHQUFHLENBQUMsT0FBTyxFQUFFLFNBQVMsRUFBRTtRQUNqRCwyQkFBMkIsRUFBRSxLQUFLO0tBQ25DLENBQUMsQ0FBQztBQUNMLENBQUM7QUFDRCxlQUFlLEtBQUssQ0FBQyJ9
+exports.default = sugar;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3VnYXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdWdhci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7QUFFZCx3REFBa0M7QUFDbEMsMkZBQXFFO0FBQ3JFLGdEQUEwQjtBQUMxQixzRUFBZ0Q7QUFHaEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILElBQUksbUJBQW1CLENBQUM7QUFFeEIsU0FBUyxLQUFLLENBQUMsT0FBTztJQUNwQixJQUFJLENBQUMsbUJBQW1CLEVBQUU7UUFDeEIsbUJBQW1CLEdBQUcsSUFBSSxpQkFBUyxDQUFDLE9BQU8sRUFBRTtZQUMzQyxRQUFRLEVBQUU7Z0JBQ1IsSUFBSSw4QkFBc0IsQ0FBQztvQkFDekIsYUFBYSxFQUFFO3dCQUNiLElBQUksRUFBRSxPQUFPO3FCQUNkO29CQUNELG1CQUFtQixFQUFFO3dCQUNuQixVQUFVLEVBQUUsUUFBUTt3QkFDcEIsUUFBUSxFQUFFLGtCQUFrQjt3QkFDNUIsaUJBQWlCLEVBQUUsY0FBTSxDQUFDLE9BQU8sQ0FBQyxTQUFTLEVBQUUsY0FBYyxDQUFDO3dCQUM1RCxhQUFhLEVBQUUsR0FBRyxxQkFBYSxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUUsQ0FBQyxlQUFlO3dCQUM3RCxjQUFjLEVBQUUsR0FBRyxxQkFBYSxDQUM5QixPQUFPLENBQUMsR0FBRyxFQUFFLENBQ2Qsc0JBQXNCO3FCQUN4QjtpQkFDRixDQUFDO2FBQ0g7U0FDRixDQUFDLENBQUM7S0FDSjtJQUNELGlCQUFpQjtJQUNqQixPQUFPLG1CQUFtQixDQUFDLEdBQUcsQ0FBQyxPQUFPLEVBQUUsU0FBUyxFQUFFO1FBQ2pELDJCQUEyQixFQUFFLEtBQUs7S0FDbkMsQ0FBQyxDQUFDO0FBQ0wsQ0FBQztBQUNELGtCQUFlLEtBQUssQ0FBQyJ9

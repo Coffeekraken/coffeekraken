@@ -63,14 +63,21 @@ type ISPromiseStateType =
   | 'canceled'
   | 'destroyed';
 
+export interface ISPromiseProxies {
+  resolve: function[];
+  reject: function[];
+}
+
 export interface ISPromiseSettings {
   destroyTimeout: number;
+  proxies: ISPromiseProxies;
+  treatCancelAs: string;
   [key: string]: any;
 }
 
 export interface ISPromiseConstructorSettings {
   [key: string]: any;
-  promise: ISPromiseSettings;
+  promise: Partial<ISPromiseSettings>;
 }
 
 export interface ISPromiseResolveFn {
@@ -81,14 +88,6 @@ export interface ISPromiseRejectFn {
 }
 export interface ISPromiseCancelFn {
   (arg: any): void;
-}
-
-export interface ISPromiseExecutorFn {
-  (
-    resolve: ISPromiseResolveFn,
-    reject: ISPromiseRejectFn,
-    api: ISPromise
-  ): void;
 }
 
 export interface ISPromiseResolvers {
@@ -178,7 +177,11 @@ class SPromise extends __SClass.extends(Promise) {
         {
           promise: {
             treatCancelAs: 'resolve',
-            destroyTimeout: 5000
+            destroyTimeout: 5000,
+            proxies: {
+              resolve: [],
+              reject: []
+            }
           }
         },
         typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {},
@@ -196,25 +199,6 @@ class SPromise extends __SClass.extends(Promise) {
         });
       }
     );
-
-    // _this = this;
-
-    // const _api = new Proxy(
-    //   {},
-    //   {
-    //     get(target, prop) {
-    //       if (_this !== undefined) {
-    //         return _this[prop];
-    //       } else {
-    //         return async (...args) => {
-    //           await __wait(0);
-    //           const fn = _this[prop].bind(_this);
-    //           return fn(...args);
-    //         };
-    //       }
-    //     }
-    //   }
-    // );
 
     this.expose(
       new __SEventEmitter({
@@ -308,6 +292,21 @@ class SPromise extends __SClass.extends(Promise) {
    */
   treatAsValue(settings: ITreatAsValueSettings = {}): ITreatAsValueProxy {
     return __treatAsValue(this, settings);
+  }
+
+  /**
+   * @name             registerProxy
+   * @type              Function
+   *
+   * ALlows you to register a proxy at a certain point of the promise lifecycle like:
+   * - resolve: Allows you to edit the value that will be sent to the resolve point
+   * - reject: Allows you to edit the value that will be sent to the reject point
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
+  registerProxy(point: 'resolve' | 'reject', proxy: function): void {
+    this._settings.promise.proxies[point].push(proxy);
   }
 
   /**
@@ -434,10 +433,11 @@ class SPromise extends __SClass.extends(Promise) {
       // update the status
       this._promiseState = 'resolved';
       // exec the wanted stacks
-      const stacksResult = await this.eventEmitter._emitEvents(
-        stacksOrder,
-        arg
-      );
+      let stacksResult = await this.eventEmitter._emitEvents(stacksOrder, arg);
+      // execute proxies
+      for (let proxyFn of this._settings.promise.proxies.resolve || []) {
+        stacksResult = await proxyFn(stacksResult);
+      }
       // resolve the master promise
       this._resolvers.resolve(stacksResult);
       // return the stack result
@@ -484,10 +484,11 @@ class SPromise extends __SClass.extends(Promise) {
       // update the status
       this._promiseState = 'rejected';
       // exec the wanted stacks
-      const stacksResult = await this.eventEmitter._emitEvents(
-        stacksOrder,
-        arg
-      );
+      let stacksResult = await this.eventEmitter._emitEvents(stacksOrder, arg);
+      // execute proxies
+      for (let proxyFn of this._settings.promise.proxies.reject || []) {
+        stacksResult = await proxyFn(stacksResult);
+      }
       // resolve the master promise
       this._resolvers.reject(stacksResult);
       // return the stack result

@@ -1,57 +1,73 @@
 // @ts-nocheck
 // @shared
-import __parseArgs from './parseArgs';
-import __completeArgsObject from './completeArgsObject';
-/**
- * @name                  argsToObject
- * @namespace           sugar.js.cli
- * @type                  Function
- * @status              beta
- *
- * This function take a simple object, a definition object and return you the string version that you can pass
- * directly to the command line interface
- *
- * @param       {Object|String}        argsObj        The arguments object or string
- * @param       {Object}            [settings]        The settings object to configure your conversion process:
- * - definition (null) {Object}: Specify a definition to use
- * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
- * @return      {Object}                              The final values object
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example       js
- * import argsToObject from '@coffeekraken/sugar/js/cli/argsToObject';
- * argsToObject('-a Yop, {
- *    definition: {
- *      arg1: {
- *       type: 'String',
- *       alias: 'a',
- *       default: 'Plop'
- *     },
- *     myOtherArg: {
- *       type: 'String'
- *     },
- *     lastArg: {
- *       type: 'String',
- *       alias: 'l',
- *       default: 'Nelson'
- *     }
- *  }
- * });
- * // => { arg1: 'Yop', lastArg: 'Nelson' }
- *
- * @since       2.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function argsToObject(argsObj, settings = {}) {
-    if (typeof argsObj === 'string') {
-        return __parseArgs(argsObj, {
-            definition: settings.definition
-        });
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
     }
-    return __completeArgsObject(argsObj || {}, settings);
-}
-export default argsToObject;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXJnc1RvT2JqZWN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXJnc1RvT2JqZWN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVO0FBRVYsT0FBTyxXQUFXLE1BQU0sYUFBYSxDQUFDO0FBQ3RDLE9BQU8sb0JBQW9CLE1BQU0sc0JBQXNCLENBQUM7QUFFeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBDRztBQUNILFNBQVMsWUFBWSxDQUFDLE9BQU8sRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUMxQyxJQUFJLE9BQU8sT0FBTyxLQUFLLFFBQVEsRUFBRTtRQUMvQixPQUFPLFdBQVcsQ0FBQyxPQUFPLEVBQUU7WUFDMUIsVUFBVSxFQUFFLFFBQVEsQ0FBQyxVQUFVO1NBQ2hDLENBQUMsQ0FBQztLQUNKO0lBRUQsT0FBTyxvQkFBb0IsQ0FBQyxPQUFPLElBQUksRUFBRSxFQUFFLFFBQVEsQ0FBQyxDQUFDO0FBQ3ZELENBQUM7QUFDRCxlQUFlLFlBQVksQ0FBQyJ9
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "./parseArgs", "./completeArgsObject"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var parseArgs_1 = __importDefault(require("./parseArgs"));
+    var completeArgsObject_1 = __importDefault(require("./completeArgsObject"));
+    /**
+     * @name                  argsToObject
+     * @namespace           sugar.js.cli
+     * @type                  Function
+     * @status              beta
+     *
+     * This function take a simple object, a definition object and return you the string version that you can pass
+     * directly to the command line interface
+     *
+     * @param       {Object|String}        argsObj        The arguments object or string
+     * @param       {Object}            [settings]        The settings object to configure your conversion process:
+     * - definition (null) {Object}: Specify a definition to use
+     * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails
+     * @return      {Object}                              The final values object
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @example       js
+     * import argsToObject from '@coffeekraken/sugar/js/cli/argsToObject';
+     * argsToObject('-a Yop, {
+     *    definition: {
+     *      arg1: {
+     *       type: 'String',
+     *       alias: 'a',
+     *       default: 'Plop'
+     *     },
+     *     myOtherArg: {
+     *       type: 'String'
+     *     },
+     *     lastArg: {
+     *       type: 'String',
+     *       alias: 'l',
+     *       default: 'Nelson'
+     *     }
+     *  }
+     * });
+     * // => { arg1: 'Yop', lastArg: 'Nelson' }
+     *
+     * @since       2.0.0
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    function argsToObject(argsObj, settings) {
+        if (settings === void 0) { settings = {}; }
+        if (typeof argsObj === 'string') {
+            return parseArgs_1.default(argsObj, {
+                definition: settings.definition
+            });
+        }
+        return completeArgsObject_1.default(argsObj || {}, settings);
+    }
+    exports.default = argsToObject;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXJnc1RvT2JqZWN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXJnc1RvT2JqZWN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxVQUFVOzs7Ozs7Ozs7Ozs7Ozs7SUFFViwwREFBc0M7SUFDdEMsNEVBQXdEO0lBRXhEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0EwQ0c7SUFDSCxTQUFTLFlBQVksQ0FBQyxPQUFPLEVBQUUsUUFBYTtRQUFiLHlCQUFBLEVBQUEsYUFBYTtRQUMxQyxJQUFJLE9BQU8sT0FBTyxLQUFLLFFBQVEsRUFBRTtZQUMvQixPQUFPLG1CQUFXLENBQUMsT0FBTyxFQUFFO2dCQUMxQixVQUFVLEVBQUUsUUFBUSxDQUFDLFVBQVU7YUFDaEMsQ0FBQyxDQUFDO1NBQ0o7UUFFRCxPQUFPLDRCQUFvQixDQUFDLE9BQU8sSUFBSSxFQUFFLEVBQUUsUUFBUSxDQUFDLENBQUM7SUFDdkQsQ0FBQztJQUNELGtCQUFlLFlBQVksQ0FBQyJ9

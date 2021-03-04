@@ -9,12 +9,39 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const __machineIdSync = require('node-machine-id').machineIdSync;
-const __deepMerge = require('../object/deepMerge');
-const __fs = require('fs');
-const __SAuthTerminalAdapter = require('./adapters/SAuthTerminalAdapter');
-const __SCache = require('../cache/SCache');
-const __cryptObject = require('../crypt/object');
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+var __machineIdSync = require('node-machine-id').machineIdSync;
+var __deepMerge = require('../object/deepMerge');
+var __fs = require('fs');
+var __SAuthTerminalAdapter = require('./adapters/SAuthTerminalAdapter');
+var __SCache = require('../cache/SCache');
+var __cryptObject = require('../crypt/object');
 /**
  * @name                            SAuth
  * @namespace           node.auth
@@ -28,7 +55,7 @@ const __cryptObject = require('../crypt/object');
  *
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-module.exports = class SAuth {
+module.exports = /** @class */ (function () {
     /**
      * @name                          constructor
      * @type                          Function
@@ -47,7 +74,8 @@ module.exports = class SAuth {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(name, settings = {}) {
+    function SAuth(name, settings) {
+        if (settings === void 0) { settings = {}; }
         /**
          * @name                          _name
          * @type                          String
@@ -80,7 +108,7 @@ module.exports = class SAuth {
         this._settings = null;
         // store the name
         if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
-            throw new Error(`The name of an SAuth instance can contain only letters like [a-zA-Z0-9_-]...`);
+            throw new Error("The name of an SAuth instance can contain only letters like [a-zA-Z0-9_-]...");
         }
         this._name = name;
         // handle settings
@@ -89,7 +117,7 @@ module.exports = class SAuth {
             title: null,
             info: null,
             adapter: new __SAuthTerminalAdapter(),
-            cache: new __SCache(`SAuth-${name}`, {}),
+            cache: new __SCache("SAuth-" + name, {}),
             validator: null
         }, settings);
         // save the adapter
@@ -97,22 +125,26 @@ module.exports = class SAuth {
         // process validator
         if (this._settings.validator &&
             typeof this._settings.validator === 'string') {
-            if (__fs.existsSync(`${__dirname}/validators/${this._settings.validator}Validator.js`)) {
-                this._settings.validator = require(`${__dirname}/validators/${this._settings.validator}Validator.js`);
+            if (__fs.existsSync(__dirname + "/validators/" + this._settings.validator + "Validator.js")) {
+                this._settings.validator = require(__dirname + "/validators/" + this._settings.validator + "Validator.js");
             }
         }
     }
-    /**
-     * @name                          type
-     * @type                          String
-     *
-     * Access the auth type like "basic", "bearer", "oauth2", etc...
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    get type() {
-        return this._settings.type;
-    }
+    Object.defineProperty(SAuth.prototype, "type", {
+        /**
+         * @name                          type
+         * @type                          String
+         *
+         * Access the auth type like "basic", "bearer", "oauth2", etc...
+         *
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        get: function () {
+            return this._settings.type;
+        },
+        enumerable: false,
+        configurable: true
+    });
     /**
      * @name                          authInfo
      * @type                          Object
@@ -131,29 +163,38 @@ module.exports = class SAuth {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    authInfo(settings = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-            settings = __deepMerge({
-                type: this.type,
-                title: this._settings.title,
-                info: this._settings.info,
-                error: null
-            }, settings);
-            // return the cached info in memory
-            if (this._authInfo)
-                return this._authInfo;
-            // check if we have already the infos in cache
-            const cachedInfos = yield this._settings.cache.get(settings.type);
-            if (cachedInfos) {
-                const decryptedValue = __cryptObject.decrypt(cachedInfos, __machineIdSync());
-                return decryptedValue;
-            }
-            // ask the user for his credentials
-            const authInfo = yield this.ask(settings);
-            // return the getted infos
-            return authInfo;
+    SAuth.prototype.authInfo = function (settings) {
+        if (settings === void 0) { settings = {}; }
+        return __awaiter(this, void 0, void 0, function () {
+            var cachedInfos, decryptedValue, authInfo;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        settings = __deepMerge({
+                            type: this.type,
+                            title: this._settings.title,
+                            info: this._settings.info,
+                            error: null
+                        }, settings);
+                        // return the cached info in memory
+                        if (this._authInfo)
+                            return [2 /*return*/, this._authInfo];
+                        return [4 /*yield*/, this._settings.cache.get(settings.type)];
+                    case 1:
+                        cachedInfos = _a.sent();
+                        if (cachedInfos) {
+                            decryptedValue = __cryptObject.decrypt(cachedInfos, __machineIdSync());
+                            return [2 /*return*/, decryptedValue];
+                        }
+                        return [4 /*yield*/, this.ask(settings)];
+                    case 2:
+                        authInfo = _a.sent();
+                        // return the getted infos
+                        return [2 /*return*/, authInfo];
+                }
+            });
         });
-    }
+    };
     /**
      * @name                          inject
      * @type                          Function
@@ -172,18 +213,19 @@ module.exports = class SAuth {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    inject(injector, requestConfig, authInfo = this._authInfo) {
+    SAuth.prototype.inject = function (injector, requestConfig, authInfo) {
+        if (authInfo === void 0) { authInfo = this._authInfo; }
         // if we don't have any auth info, return the request object untouched
         if (!authInfo)
             return requestConfig;
         // init the final request config variable that will be hooked
-        let finalRequestConfig = {};
+        var finalRequestConfig = {};
         // check if the injector is a string
         if (typeof injector === 'string') {
-            if (!__fs.existsSync(`${__dirname}/injectors/${injector}Injector.js`)) {
-                throw new Error(`You try to inject the auth info using the injector "${injector}" but it does not exists...`);
+            if (!__fs.existsSync(__dirname + "/injectors/" + injector + "Injector.js")) {
+                throw new Error("You try to inject the auth info using the injector \"" + injector + "\" but it does not exists...");
             }
-            finalRequestConfig = require(`${__dirname}/injectors/${injector}Injector.js`)(Object.assign(requestConfig), authInfo);
+            finalRequestConfig = require(__dirname + "/injectors/" + injector + "Injector.js")(Object.assign(requestConfig), authInfo);
         }
         else if (typeof injector === 'function') {
             finalRequestConfig = injector(Object.assign(requestConfig), authInfo);
@@ -194,7 +236,7 @@ module.exports = class SAuth {
         delete finalRequestConfig.type;
         // return the requestConfig untouched as fallback
         return finalRequestConfig;
-    }
+    };
     /**
      * @name                          ask
      * @type                          Function
@@ -222,59 +264,73 @@ module.exports = class SAuth {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    ask(settings = {}) {
-        return __awaiter(this, void 0, void 0, function* () {
-            settings = __deepMerge({
-                type: this.type,
-                title: this._settings.title,
-                info: this._settings.info,
-                error: null
-            }, settings);
-            // check that the requested auth type is handled by the adapter
-            if (this._adapter.supportedAuthTypes.indexOf(settings.type) === -1) {
-                throw new Error(`You try to ask the auth informations of type "${settings.type}" through the "${this._name}" SAuth instance but the setted adapter does not handle this auth type...`);
-            }
-            // ask the adapter for the auth infos
-            const rawInfos = yield this._adapter.ask(settings);
-            // format the auth infos using the corresponsing formater
-            let formatedInfos = rawInfos;
-            if (__fs.existsSync(`${__dirname}/formaters/${settings.type}Formater.js`)) {
-                formatedInfos = require(`${__dirname}/formaters/${settings.type}Formater.js`)(rawInfos);
-            }
-            // add the common formated auth object info
-            formatedInfos = __deepMerge({
-                type: settings.type,
-                name: `${this._name}.${settings.type}`
-            }, formatedInfos);
-            // validate the getted infos if possible
-            if (this._settings.validator) {
-                // display validation message
-                if (this._adapter._validation) {
-                    this._adapter._validation();
+    SAuth.prototype.ask = function (settings) {
+        if (settings === void 0) { settings = {}; }
+        return __awaiter(this, void 0, void 0, function () {
+            var rawInfos, formatedInfos, validationResult, askSettings, cryptedInfos;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        settings = __deepMerge({
+                            type: this.type,
+                            title: this._settings.title,
+                            info: this._settings.info,
+                            error: null
+                        }, settings);
+                        // check that the requested auth type is handled by the adapter
+                        if (this._adapter.supportedAuthTypes.indexOf(settings.type) === -1) {
+                            throw new Error("You try to ask the auth informations of type \"" + settings.type + "\" through the \"" + this._name + "\" SAuth instance but the setted adapter does not handle this auth type...");
+                        }
+                        return [4 /*yield*/, this._adapter.ask(settings)];
+                    case 1:
+                        rawInfos = _a.sent();
+                        formatedInfos = rawInfos;
+                        if (__fs.existsSync(__dirname + "/formaters/" + settings.type + "Formater.js")) {
+                            formatedInfos = require(__dirname + "/formaters/" + settings.type + "Formater.js")(rawInfos);
+                        }
+                        // add the common formated auth object info
+                        formatedInfos = __deepMerge({
+                            type: settings.type,
+                            name: this._name + "." + settings.type
+                        }, formatedInfos);
+                        if (!this._settings.validator) return [3 /*break*/, 3];
+                        // display validation message
+                        if (this._adapter._validation) {
+                            this._adapter._validation();
+                        }
+                        return [4 /*yield*/, this._settings.validator(formatedInfos)];
+                    case 2:
+                        validationResult = _a.sent();
+                        if (validationResult !== true) {
+                            askSettings = Object.assign(settings);
+                            askSettings.error =
+                                typeof validationResult === 'string'
+                                    ? validationResult
+                                    : 'Your credentials have been declined. Please try again...';
+                            return [2 /*return*/, this.ask(askSettings)];
+                        }
+                        _a.label = 3;
+                    case 3:
+                        if (!this._adapter._success) return [3 /*break*/, 5];
+                        return [4 /*yield*/, this._adapter._success()];
+                    case 4:
+                        _a.sent();
+                        _a.label = 5;
+                    case 5:
+                        cryptedInfos = __cryptObject.encrypt(formatedInfos, __machineIdSync());
+                        // the infos are ok so we save them in cache
+                        return [4 /*yield*/, this._settings.cache.set(settings.type, cryptedInfos, {})];
+                    case 6:
+                        // the infos are ok so we save them in cache
+                        _a.sent();
+                        // save the auth info into memory
+                        this._authInfo = formatedInfos;
+                        // return the getted infos
+                        return [2 /*return*/, formatedInfos];
                 }
-                const validationResult = yield this._settings.validator(formatedInfos);
-                if (validationResult !== true) {
-                    const askSettings = Object.assign(settings);
-                    askSettings.error =
-                        typeof validationResult === 'string'
-                            ? validationResult
-                            : 'Your credentials have been declined. Please try again...';
-                    return this.ask(askSettings);
-                }
-            }
-            // display validation message
-            if (this._adapter._success) {
-                yield this._adapter._success();
-            }
-            // crypt the infos before saving them into cache
-            const cryptedInfos = __cryptObject.encrypt(formatedInfos, __machineIdSync());
-            // the infos are ok so we save them in cache
-            yield this._settings.cache.set(settings.type, cryptedInfos, {});
-            // save the auth info into memory
-            this._authInfo = formatedInfos;
-            // return the getted infos
-            return formatedInfos;
+            });
         });
-    }
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0F1dGguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQXV0aC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7Ozs7OztBQUVkLE1BQU0sZUFBZSxHQUFHLE9BQU8sQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDLGFBQWEsQ0FBQztBQUVqRSxNQUFNLFdBQVcsR0FBRyxPQUFPLENBQUMscUJBQXFCLENBQUMsQ0FBQztBQUNuRCxNQUFNLElBQUksR0FBRyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7QUFFM0IsTUFBTSxzQkFBc0IsR0FBRyxPQUFPLENBQUMsaUNBQWlDLENBQUMsQ0FBQztBQUMxRSxNQUFNLFFBQVEsR0FBRyxPQUFPLENBQUMsaUJBQWlCLENBQUMsQ0FBQztBQUM1QyxNQUFNLGFBQWEsR0FBRyxPQUFPLENBQUMsaUJBQWlCLENBQUMsQ0FBQztBQUVqRDs7Ozs7Ozs7Ozs7O0dBWUc7QUFDSCxNQUFNLENBQUMsT0FBTyxHQUFHLE1BQU0sS0FBSztJQWtDMUI7Ozs7Ozs7Ozs7Ozs7Ozs7O09BaUJHO0lBQ0gsWUFBWSxJQUFJLEVBQUUsUUFBUSxHQUFHLEVBQUU7UUFuRC9COzs7Ozs7OztXQVFHO1FBQ0gsVUFBSyxHQUFHLElBQUksQ0FBQztRQUViOzs7Ozs7OztXQVFHO1FBQ0gsYUFBUSxHQUFHLElBQUksQ0FBQztRQUVoQjs7Ozs7Ozs7V0FRRztRQUNILGNBQVMsR0FBRyxJQUFJLENBQUM7UUFxQmYsaUJBQWlCO1FBQ2pCLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLEVBQUU7WUFDbEMsTUFBTSxJQUFJLEtBQUssQ0FDYiw4RUFBOEUsQ0FDL0UsQ0FBQztTQUNIO1FBQ0QsSUFBSSxDQUFDLEtBQUssR0FBRyxJQUFJLENBQUM7UUFFbEIsa0JBQWtCO1FBQ2xCLElBQUksQ0FBQyxTQUFTLEdBQUcsV0FBVyxDQUMxQjtZQUNFLElBQUksRUFBRSxPQUFPO1lBQ2IsS0FBSyxFQUFFLElBQUk7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
+    };
+    return SAuth;
+}());
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0F1dGguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTQXV0aC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUVkLElBQU0sZUFBZSxHQUFHLE9BQU8sQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDLGFBQWEsQ0FBQztBQUVqRSxJQUFNLFdBQVcsR0FBRyxPQUFPLENBQUMscUJBQXFCLENBQUMsQ0FBQztBQUNuRCxJQUFNLElBQUksR0FBRyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7QUFFM0IsSUFBTSxzQkFBc0IsR0FBRyxPQUFPLENBQUMsaUNBQWlDLENBQUMsQ0FBQztBQUMxRSxJQUFNLFFBQVEsR0FBRyxPQUFPLENBQUMsaUJBQWlCLENBQUMsQ0FBQztBQUM1QyxJQUFNLGFBQWEsR0FBRyxPQUFPLENBQUMsaUJBQWlCLENBQUMsQ0FBQztBQUVqRDs7Ozs7Ozs7Ozs7O0dBWUc7QUFDSCxNQUFNLENBQUMsT0FBTztJQWtDWjs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FpQkc7SUFDSCxlQUFZLElBQUksRUFBRSxRQUFhO1FBQWIseUJBQUEsRUFBQSxhQUFhO1FBbkQvQjs7Ozs7Ozs7V0FRRztRQUNILFVBQUssR0FBRyxJQUFJLENBQUM7UUFFYjs7Ozs7Ozs7V0FRRztRQUNILGFBQVEsR0FBRyxJQUFJLENBQUM7UUFFaEI7Ozs7Ozs7O1dBUUc7UUFDSCxjQUFTLEdBQUcsSUFBSSxDQUFDO1FBcUJmLGlCQUFpQjtRQUNqQixJQUFJLENBQUMsa0JBQWtCLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxFQUFFO1lBQ2xDLE1BQU0sSUFBSSxLQUFLLENBQ2IsOEVBQThFLENBQy9FLENBQUM7U0FDSDtRQUNELElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDO1FBRWxCLGtCQUFrQjtRQUNsQixJQUFJLENBQUMsU0FBUyxHQUFHLFdBQVcsQ0FDMUI7WUFDRSxJQUFJLEVBQUUsT0FB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

@@ -1,6 +1,6 @@
 "use strict";
 // @ts-nocheck
-const __base64 = require('../../../crypt/base64');
+var __base64 = require('../../../crypt/base64');
 /**
  * @name                          basicFormater
  * @namespace           node.auth.formaters
@@ -15,13 +15,13 @@ const __base64 = require('../../../crypt/base64');
  */
 module.exports = function basicFormater(authInfo) {
     // build the username:password info
-    let tokenString = __base64.encrypt(`${authInfo.username}:${authInfo.password}`);
+    var tokenString = __base64.encrypt(authInfo.username + ":" + authInfo.password);
     // build the formated auth object
     return {
         token: tokenString,
         headers: {
-            Authorization: `Basic ${tokenString}`
+            Authorization: "Basic " + tokenString
         }
     };
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzaWNGb3JtYXRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJhc2ljRm9ybWF0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFFZCxNQUFNLFFBQVEsR0FBRyxPQUFPLENBQUMsdUJBQXVCLENBQUMsQ0FBQztBQUVsRDs7Ozs7Ozs7Ozs7R0FXRztBQUNILE1BQU0sQ0FBQyxPQUFPLEdBQUcsU0FBUyxhQUFhLENBQUMsUUFBUTtJQUM5QyxtQ0FBbUM7SUFDbkMsSUFBSSxXQUFXLEdBQUcsUUFBUSxDQUFDLE9BQU8sQ0FDaEMsR0FBRyxRQUFRLENBQUMsUUFBUSxJQUFJLFFBQVEsQ0FBQyxRQUFRLEVBQUUsQ0FDNUMsQ0FBQztJQUVGLGlDQUFpQztJQUNqQyxPQUFPO1FBQ0wsS0FBSyxFQUFFLFdBQVc7UUFDbEIsT0FBTyxFQUFFO1lBQ1AsYUFBYSxFQUFFLFNBQVMsV0FBVyxFQUFFO1NBQ3RDO0tBQ0YsQ0FBQztBQUNKLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzaWNGb3JtYXRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJhc2ljRm9ybWF0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFFZCxJQUFNLFFBQVEsR0FBRyxPQUFPLENBQUMsdUJBQXVCLENBQUMsQ0FBQztBQUVsRDs7Ozs7Ozs7Ozs7R0FXRztBQUNILE1BQU0sQ0FBQyxPQUFPLEdBQUcsU0FBUyxhQUFhLENBQUMsUUFBUTtJQUM5QyxtQ0FBbUM7SUFDbkMsSUFBSSxXQUFXLEdBQUcsUUFBUSxDQUFDLE9BQU8sQ0FDN0IsUUFBUSxDQUFDLFFBQVEsU0FBSSxRQUFRLENBQUMsUUFBVSxDQUM1QyxDQUFDO0lBRUYsaUNBQWlDO0lBQ2pDLE9BQU87UUFDTCxLQUFLLEVBQUUsV0FBVztRQUNsQixPQUFPLEVBQUU7WUFDUCxhQUFhLEVBQUUsV0FBUyxXQUFhO1NBQ3RDO0tBQ0YsQ0FBQztBQUNKLENBQUMsQ0FBQyJ9

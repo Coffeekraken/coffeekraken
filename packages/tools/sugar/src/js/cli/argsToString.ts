@@ -128,13 +128,7 @@ function argsToString(args, settings = {}) {
     )
       value = settings.definition[argName].default;
 
-    if (
-      value === undefined ||
-      value === null
-      // (defObj.type &&
-      //   defObj.type.toLowerCase() === 'boolean' &&
-      //   value === false)
-    ) {
+    if (value === undefined || value === null) {
       return;
     }
 
@@ -145,13 +139,13 @@ function argsToString(args, settings = {}) {
         if (val === true) {
           valueStr = '';
         } else {
-          valueStr = __toString(value, {
+          valueStr = __toString(val, {
             beautify: false,
             hihglight: false
           });
-          if (defObj.type && defObj.type.toLowerCase() === 'string')
+          if (defObj.type && defObj.type.toLowerCase() === 'string') {
             valueStr = `"${valueStr}"`;
-          // if (defObj.type.toLowerCase() === 'boolean') valueStr = '';
+          }
           if (
             (defObj.type && defObj.type.toLowerCase().includes('object')) ||
             (defObj.type && defObj.type.toLowerCase().includes('array'))

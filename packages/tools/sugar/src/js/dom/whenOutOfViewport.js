@@ -1,94 +1,110 @@
 // @ts-nocheck
-import __isInViewport from './isInViewport';
-import __throttle from '../function/throttle';
-import __closest from './closest';
-// TODO tests
-/**
- * @name      whenOutOfViewport
- * @namespace           sugar.js.dom
- * @type      Function
- * @stable
- *
- * Monitor an HTMLElement to be notified when it exit the viewport
- *
- * @param 		{HTMLElement} 				elm 				The element to monitor
- * @param 		{Number} 					[offset=50] 		An offset that represent the distance before entering the viewport for the detection
- * @return 		(Promise) 										The promise that will be resolved when the element exit the viewport
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example 	js
- * import whenOutOfViewport from '@coffeekraken/sugar/js/dom/whenOutOfViewport'
- * whenOutOfViewport(myCoolHTMLElement).then((elm) => {
- * 		// do something with your element that has exit the viewport...
- * });
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function whenOutOfViewport(elm, offset = 50) {
-    return new Promise((resolve, reject) => {
-        if (window.IntersectionObserver) {
-            let isInViewport = false;
-            const _cb = () => {
-                if (!isInViewport) {
-                    observer.disconnect();
-                    resolve(elm);
-                }
-            };
-            const observer = new IntersectionObserver((entries, observer) => {
-                if (!entries.length)
-                    return;
-                const entry = entries[0];
-                if (entry.intersectionRatio > 0) {
-                    isInViewport = true;
-                }
-                else {
-                    isInViewport = false;
-                }
-                _cb();
-            }, {
-                root: null,
-                rootMargin: `${offset}px`,
-                threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-            });
-            observer.observe(elm);
-        }
-        else {
-            // try to get the closest element that has an overflow
-            let scrollContainerElm = document;
-            if (!elm._inViewportContainer) {
-                const overflowContainer = __closest(elm, '[data-in-viewport-container]');
-                if (overflowContainer) {
-                    scrollContainerElm = overflowContainer;
-                    elm._inViewportContainer = overflowContainer;
-                }
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "./isInViewport", "../function/throttle", "./closest"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var isInViewport_1 = __importDefault(require("./isInViewport"));
+    var throttle_1 = __importDefault(require("../function/throttle"));
+    var closest_1 = __importDefault(require("./closest"));
+    // TODO tests
+    /**
+     * @name      whenOutOfViewport
+     * @namespace           sugar.js.dom
+     * @type      Function
+     * @stable
+     *
+     * Monitor an HTMLElement to be notified when it exit the viewport
+     *
+     * @param 		{HTMLElement} 				elm 				The element to monitor
+     * @param 		{Number} 					[offset=50] 		An offset that represent the distance before entering the viewport for the detection
+     * @return 		(Promise) 										The promise that will be resolved when the element exit the viewport
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @example 	js
+     * import whenOutOfViewport from '@coffeekraken/sugar/js/dom/whenOutOfViewport'
+     * whenOutOfViewport(myCoolHTMLElement).then((elm) => {
+     * 		// do something with your element that has exit the viewport...
+     * });
+     *
+     * @since         1.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    function whenOutOfViewport(elm, offset) {
+        if (offset === void 0) { offset = 50; }
+        return new Promise(function (resolve, reject) {
+            if (window.IntersectionObserver) {
+                var isInViewport_2 = false;
+                var _cb_1 = function () {
+                    if (!isInViewport_2) {
+                        observer_1.disconnect();
+                        resolve(elm);
+                    }
+                };
+                var observer_1 = new IntersectionObserver(function (entries, observer) {
+                    if (!entries.length)
+                        return;
+                    var entry = entries[0];
+                    if (entry.intersectionRatio > 0) {
+                        isInViewport_2 = true;
+                    }
+                    else {
+                        isInViewport_2 = false;
+                    }
+                    _cb_1();
+                }, {
+                    root: null,
+                    rootMargin: offset + "px",
+                    threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+                });
+                observer_1.observe(elm);
             }
             else {
-                scrollContainerElm = elm._inViewportContainer;
-            }
-            let isInViewport = true;
-            const _cb = () => {
-                if (!isInViewport) {
-                    scrollContainerElm.removeEventListener('scroll', checkViewport);
-                    window.removeEventListener('resize', checkViewport);
-                    resolve(elm);
+                // try to get the closest element that has an overflow
+                var scrollContainerElm_1 = document;
+                if (!elm._inViewportContainer) {
+                    var overflowContainer = closest_1.default(elm, '[data-in-viewport-container]');
+                    if (overflowContainer) {
+                        scrollContainerElm_1 = overflowContainer;
+                        elm._inViewportContainer = overflowContainer;
+                    }
                 }
-            };
-            const checkViewport = __throttle((e) => {
-                isInViewport = __isInViewport(elm, offset);
-                _cb();
-            }, 100);
-            // listen for resize
-            scrollContainerElm.addEventListener('scroll', checkViewport);
-            window.addEventListener('resize', checkViewport);
-            setTimeout(() => {
-                checkViewport(null);
-            });
-        }
-    });
-}
-export default whenOutOfViewport;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2hlbk91dE9mVmlld3BvcnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ3aGVuT3V0T2ZWaWV3cG9ydC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxjQUFjLE1BQU0sZ0JBQWdCLENBQUM7QUFDNUMsT0FBTyxVQUFVLE1BQU0sc0JBQXNCLENBQUM7QUFDOUMsT0FBTyxTQUFTLE1BQU0sV0FBVyxDQUFDO0FBRWxDLGFBQWE7QUFFYjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxpQkFBaUIsQ0FBQyxHQUFHLEVBQUUsTUFBTSxHQUFHLEVBQUU7SUFDekMsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRTtRQUNyQyxJQUFJLE1BQU0sQ0FBQyxvQkFBb0IsRUFBRTtZQUMvQixJQUFJLFlBQVksR0FBRyxLQUFLLENBQUM7WUFDekIsTUFBTSxHQUFHLEdBQUcsR0FBRyxFQUFFO2dCQUNmLElBQUksQ0FBQyxZQUFZLEVBQUU7b0JBQ2pCLFFBQVEsQ0FBQyxVQUFVLEVBQUUsQ0FBQztvQkFDdEIsT0FBTyxDQUFDLEdBQUcsQ0FBQyxDQUFDO2lCQUNkO1lBQ0gsQ0FBQyxDQUFDO1lBRUYsTUFBTSxRQUFRLEdBQUcsSUFBSSxvQkFBb0IsQ0FDdkMsQ0FBQyxPQUFPLEVBQUUsUUFBUSxFQUFFLEVBQUU7Z0JBQ3BCLElBQUksQ0FBQyxPQUFPLENBQUMsTUFBTTtvQkFBRSxPQUFPO2dCQUM1QixNQUFNLEtBQUssR0FBRyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7Z0JBQ3pCLElBQUksS0FBSyxDQUFDLGlCQUFpQixHQUFHLENBQUMsRUFBRTtvQkFDL0IsWUFBWSxHQUFHLElBQUksQ0FBQztpQkFDckI7cUJBQU07b0JBQ0wsWUFBWSxHQUFHLEtBQUssQ0FBQztpQkFDdEI7Z0JBQ0QsR0FBRyxFQUFFLENBQUM7WUFDUixDQUFDLEVBQ0Q7Z0JBQ0UsSUFBSSxFQUFFLElBQUk7Z0JBQ1YsVUFBVSxFQUFFLEdBQUcsTUFBTSxJQUFJO2dCQUN6QixTQUFTLEVBQUUsQ0FBQyxDQUFDLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsQ0FBQyxDQUFDO2FBQy9ELENBQ0YsQ0FBQztZQUVGLFFBQVEsQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLENBQUM7U0FDdkI7YUFBTTtZQUNMLHNEQUFzRDtZQUN0RCxJQUFJLGtCQUFrQixHQUFHLFFBQVEsQ0FBQztZQUNsQyxJQUFJLENBQUMsR0FBRyxDQUFDLG9CQUFvQixFQUFFO2dCQUM3QixNQUFNLGlCQUFpQixHQUFHLFNBQVMsQ0FDakMsR0FBRyxFQUNILDhCQUE4QixDQUMvQixDQUFDO2dCQUNGLElBQUksaUJBQWlCLEVBQUU7b0JBQ3JCLGtCQUFrQixHQUFHLGlCQUFpQixDQUFDO29CQUN2QyxHQUFHLENBQUMsb0JBQW9CLEdBQUcsaUJBQWlCLENBQUM7aUJBQzlDO2FBQ0Y7aUJBQU07Z0JBQ0wsa0JBQWtCLEdBQUcsR0FBRyxDQUFDLG9CQUFvQixDQUFDO2FBQy9DO1lBRUQsSUFBSSxZQUFZLEdBQUcsSUFBSSxDQUFDO1lBQ3hCLE1BQU0sR0FBRyxHQUFHLEdBQUcsRUFBRTtnQkFDZixJQUFJLENBQUMsWUFBWSxFQUFFO29CQUNqQixrQkFBa0IsQ0FBQyxtQkFBbUIsQ0FBQyxRQUFRLEVBQUUsYUFBYSxDQUFDLENBQUM7b0JBQ2hFLE1BQU0sQ0FBQyxtQkFBbUIsQ0FBQyxRQUFRLEVBQUUsYUFBYSxDQUFDLENBQUM7b0JBQ3BELE9BQU8sQ0FBQyxHQUFHLENBQUMsQ0FBQztpQkFDZDtZQUNILENBQUMsQ0FBQztZQUNGLE1BQU0sYUFBYSxHQUFHLFVBQVUsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFO2dCQUNyQyxZQUFZLEdBQUcsY0FBYyxDQUFDLEdBQUcsRUFBRSxNQUFNLENBQUMsQ0FBQztnQkFDM0MsR0FBRyxFQUFFLENBQUM7WUFDUixDQUFDLEVBQUUsR0FBRyxDQUFDLENBQUM7WUFFUixvQkFBb0I7WUFDcEIsa0JBQWtCLENBQUMsZ0JBQWdCLENBQUMsUUFBUSxFQUFFLGFBQWEsQ0FBQyxDQUFDO1lBQzdELE1BQU0sQ0FBQyxnQkFBZ0IsQ0FBQyxRQUFRLEVBQUUsYUFBYSxDQUFDLENBQUM7WUFDakQsVUFBVSxDQUFDLEdBQUcsRUFBRTtnQkFDZCxhQUFhLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDdEIsQ0FBQyxDQUFDLENBQUM7U0FDSjtJQUNILENBQUMsQ0FBQyxDQUFDO0FBQ0wsQ0FBQztBQUNELGVBQWUsaUJBQWlCLENBQUMifQ==
+                else {
+                    scrollContainerElm_1 = elm._inViewportContainer;
+                }
+                var isInViewport_3 = true;
+                var _cb_2 = function () {
+                    if (!isInViewport_3) {
+                        scrollContainerElm_1.removeEventListener('scroll', checkViewport_1);
+                        window.removeEventListener('resize', checkViewport_1);
+                        resolve(elm);
+                    }
+                };
+                var checkViewport_1 = throttle_1.default(function (e) {
+                    isInViewport_3 = isInViewport_1.default(elm, offset);
+                    _cb_2();
+                }, 100);
+                // listen for resize
+                scrollContainerElm_1.addEventListener('scroll', checkViewport_1);
+                window.addEventListener('resize', checkViewport_1);
+                setTimeout(function () {
+                    checkViewport_1(null);
+                });
+            }
+        });
+    }
+    exports.default = whenOutOfViewport;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid2hlbk91dE9mVmlld3BvcnQuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ3aGVuT3V0T2ZWaWV3cG9ydC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCxnRUFBNEM7SUFDNUMsa0VBQThDO0lBQzlDLHNEQUFrQztJQUVsQyxhQUFhO0lBRWI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXdCRztJQUNILFNBQVMsaUJBQWlCLENBQUMsR0FBRyxFQUFFLE1BQVc7UUFBWCx1QkFBQSxFQUFBLFdBQVc7UUFDekMsT0FBTyxJQUFJLE9BQU8sQ0FBQyxVQUFDLE9BQU8sRUFBRSxNQUFNO1lBQ2pDLElBQUksTUFBTSxDQUFDLG9CQUFvQixFQUFFO2dCQUMvQixJQUFJLGNBQVksR0FBRyxLQUFLLENBQUM7Z0JBQ3pCLElBQU0sS0FBRyxHQUFHO29CQUNWLElBQUksQ0FBQyxjQUFZLEVBQUU7d0JBQ2pCLFVBQVEsQ0FBQyxVQUFVLEVBQUUsQ0FBQzt3QkFDdEIsT0FBTyxDQUFDLEdBQUcsQ0FBQyxDQUFDO3FCQUNkO2dCQUNILENBQUMsQ0FBQztnQkFFRixJQUFNLFVBQVEsR0FBRyxJQUFJLG9CQUFvQixDQUN2QyxVQUFDLE9BQU8sRUFBRSxRQUFRO29CQUNoQixJQUFJLENBQUMsT0FBTyxDQUFDLE1BQU07d0JBQUUsT0FBTztvQkFDNUIsSUFBTSxLQUFLLEdBQUcsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDO29CQUN6QixJQUFJLEtBQUssQ0FBQyxpQkFBaUIsR0FBRyxDQUFDLEVBQUU7d0JBQy9CLGNBQVksR0FBRyxJQUFJLENBQUM7cUJBQ3JCO3lCQUFNO3dCQUNMLGNBQVksR0FBRyxLQUFLLENBQUM7cUJBQ3RCO29CQUNELEtBQUcsRUFBRSxDQUFDO2dCQUNSLENBQUMsRUFDRDtvQkFDRSxJQUFJLEVBQUUsSUFBSTtvQkFDVixVQUFVLEVBQUssTUFBTSxPQUFJO29CQUN6QixTQUFTLEVBQUUsQ0FBQyxDQUFDLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsQ0FBQyxDQUFDO2lCQUMvRCxDQUNGLENBQUM7Z0JBRUYsVUFBUSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsQ0FBQzthQUN2QjtpQkFBTTtnQkFDTCxzREFBc0Q7Z0JBQ3RELElBQUksb0JBQWtCLEdBQUcsUUFBUSxDQUFDO2dCQUNsQyxJQUFJLENBQUMsR0FBRyxDQUFDLG9CQUFvQixFQUFFO29CQUM3QixJQUFNLGlCQUFpQixHQUFHLGlCQUFTLENBQ2pDLEdBQUcsRUFDSCw4QkFBOEIsQ0FDL0IsQ0FBQztvQkFDRixJQUFJLGlCQUFpQixFQUFFO3dCQUNyQixvQkFBa0IsR0FBRyxpQkFBaUIsQ0FBQzt3QkFDdkMsR0FBRyxDQUFDLG9CQUFvQixHQUFHLGlCQUFpQixDQUFDO3FCQUM5QztpQkFDRjtxQkFBTTtvQkFDTCxvQkFBa0IsR0FBRyxHQUFHLENBQUMsb0JBQW9CLENBQUM7aUJBQy9DO2dCQUVELElBQUksY0FBWSxHQUFHLElBQUksQ0FBQztnQkFDeEIsSUFBTSxLQUFHLEdBQUc7b0JBQ1YsSUFBSSxDQUFDLGNBQVksRUFBRTt3QkFDakIsb0JBQWtCLENBQUMsbUJBQW1CLENBQUMsUUFBUSxFQUFFLGVBQWEsQ0FBQyxDQUFDO3dCQUNoRSxNQUFNLENBQUMsbUJBQW1CLENBQUMsUUFBUSxFQUFFLGVBQWEsQ0FBQyxDQUFDO3dCQUNwRCxPQUFPLENBQUMsR0FBRyxDQUFDLENBQUM7cUJBQ2Q7Z0JBQ0gsQ0FBQyxDQUFDO2dCQUNGLElBQU0sZUFBYSxHQUFHLGtCQUFVLENBQUMsVUFBQyxDQUFDO29CQUNqQyxjQUFZLEdBQUcsc0JBQWMsQ0FBQyxHQUFHLEVBQUUsTUFBTSxDQUFDLENBQUM7b0JBQzNDLEtBQUcsRUFBRSxDQUFDO2dCQUNSLENBQUMsRUFBRSxHQUFHLENBQUMsQ0FBQztnQkFFUixvQkFBb0I7Z0JBQ3BCLG9CQUFrQixDQUFDLGdCQUFnQixDQUFDLFFBQVEsRUFBRSxlQUFhLENBQUMsQ0FBQztnQkFDN0QsTUFBTSxDQUFDLGdCQUFnQixDQUFDLFFBQVEsRUFBRSxlQUFhLENBQUMsQ0FBQztnQkFDakQsVUFBVSxDQUFDO29CQUNULGVBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQztnQkFDdEIsQ0FBQyxDQUFDLENBQUM7YUFDSjtRQUNILENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQztJQUNELGtCQUFlLGlCQUFpQixDQUFDIn0=

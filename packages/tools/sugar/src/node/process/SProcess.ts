@@ -25,6 +25,7 @@ import __uniqid from '../string/uniqid';
 import __SEventEmitter from '../event/SEventEmitter';
 import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
 import __SNotification from '../notification/SNotification';
+import __SDuration from '../time/SDuration';
 
 import { ILog } from '../log/log';
 import { ISpawnSettings } from './spawn';
@@ -331,6 +332,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _duration: any;
   async run(
     paramsOrStringArgs = {},
     settings: Partial<ISProcessSettings> = {}
@@ -354,35 +356,37 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       this.stdio = __stdio(this, processSettings.stdio, {});
     }
 
+    this._duration = new __SDuration();
+
     // init the currentExecution object
+    // @ts-ignore
     this.currentExecutionObj = {
-      startTime: Date.now(),
-      endTime: -1,
-      duration: -1,
       state: 'idle',
       stdout: [],
       stderr: []
     };
-    this.currentExecutionObj.stdout.toString = () => {
-      if (!this.currentExecutionObj) return '';
-      return this.currentExecutionObj.stdout
-        .map((item) => {
-          return __toString(item);
-        })
-        .join('\n');
-    };
-    this.currentExecutionObj.stderr.toString = () => {
-      if (!this.currentExecutionObj) return '';
-      return this.currentExecutionObj.stderr
-        .map((item) => {
-          return __toString(item);
-        })
-        .join('\n');
-    };
+    if (this.currentExecutionObj) {
+      this.currentExecutionObj.stdout.toString = () => {
+        if (!this.currentExecutionObj) return '';
+        return this.currentExecutionObj.stdout
+          .map((item) => {
+            return __toString(item);
+          })
+          .join('\n');
+      };
+      this.currentExecutionObj.stderr.toString = () => {
+        if (!this.currentExecutionObj) return '';
+        return this.currentExecutionObj.stderr
+          .map((item) => {
+            return __toString(item);
+          })
+          .join('\n');
+      };
+    }
 
     await __wait(50);
 
-    let paramsObj = __argsToObject(paramsOrStringArgs, {
+    let paramsObj: any = __argsToObject(paramsOrStringArgs, {
       definition: {
         ...(this.paramsInterface !== undefined
           ? this.paramsInterface.definition
@@ -392,6 +396,19 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         }
       }
     });
+
+    console.log(this.constructor.name, this.paramsInterface, paramsObj);
+
+    // check if asking for the help
+    if (paramsObj.help === true && this.paramsInterface !== undefined) {
+      // new __SPromise(({ resolve }) => {
+      //   console.log('DDDD');
+      const helpString = this.paramsInterface.render();
+      console.log(helpString);
+      // resolve(helpString);
+      // });
+      return;
+    }
 
     // save current process params
     this._params = Object.assign({}, paramsObj);
@@ -427,7 +444,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       // run child process
       this._processPromise = __spawn(commandToRun, [], {
         ...(processSettings.spawnSettings || {})
-        // ipc: true
       });
     } else {
       // run the actual process using the "process" method
@@ -472,11 +488,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       this._processPromise.on(
         [
           'resolve:1',
-          'child.resolve:1',
           'reject:1',
-          'child.reject:1',
           'cancel:1',
-          'child.cancel:1',
           'close.error:1',
           'close.killed:1'
         ].join(','),
@@ -498,6 +511,16 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
           process.exit();
         }
       });
+
+    // register some proxies
+    this._processPromise?.registerProxy('resolve', (value) => {
+      if (value.spawn && value.value !== undefined) value = value.value;
+      return {
+        value,
+        ...this.executionsStack.pop()
+      };
+      return value;
+    });
 
     // return the process promise
     return this._processPromise;
@@ -596,10 +619,11 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     this.currentExecutionObj.state = state;
 
     // check if is the end of the process
-    if (state === 'killed' || state === 'error') {
-      this.currentExecutionObj.endTime = Date.now();
-      this.currentExecutionObj.duration =
-        this.currentExecutionObj.endTime - this.currentExecutionObj.startTime;
+    if (state === 'killed' || state === 'error' || state === 'success') {
+      this.currentExecutionObj = {
+        ...this.currentExecutionObj,
+        ...this._duration.end()
+      };
     }
 
     let data;
@@ -617,7 +641,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
               value: `The <yellow>${this.name || 'process'}</yellow> <cyan>${
                 this.id
               }</cyan> execution has finished <green>successfully</green> in <yellow>${__convert(
-                this.currentExecutionObj.duration,
+                this.currentExecutionObj?.duration,
                 __convert.SECOND
               )}s</yellow>`
             });
@@ -644,6 +668,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
           break;
         case 'error':
           if (this.processSettings.decorators === true) {
+            // @ts-ignore
             data = this.currentExecutionObj.stderr.toString();
             strArray.push(' ');
             strArray.push(
@@ -654,7 +679,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                 this.name || 'process'
               }</yellow> <cyan>${this.id}</cyan> execution.`
             );
-            if (this.currentExecutionObj.stderr.length) {
+            if (
+              this.currentExecutionObj &&
+              this.currentExecutionObj.stderr.length
+            ) {
               strArray.push(`Here's some details:`);
               strArray.push(data);
             }
@@ -673,6 +701,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
           break;
         case 'killed':
           if (this.processSettings.decorators === true) {
+            // @ts-ignore
             data = this.currentExecutionObj.stderr.toString();
             strArray.push(' ');
             strArray.push(
@@ -683,7 +712,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                 this.id
               }</cyan> execution has been <red>killed</red>.`
             );
-            if (this.currentExecutionObj.stderr.length) {
+            if (
+              this.currentExecutionObj &&
+              this.currentExecutionObj.stderr.length
+            ) {
               strArray.push(`Here's some details:`);
               strArray.push(data);
             }

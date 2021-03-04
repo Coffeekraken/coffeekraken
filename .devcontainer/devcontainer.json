@@ -1,33 +1,28 @@
 {
-	"name": "Coffeekraken",
-	"dockerFile": "Dockerfile",
-	"forwardPorts": [
-		666
-	],
-	"runArgs": [
-		"--name=coffeekraken",
-		"--memory=16G",
-		"--memory-swap=16G"
-	],
-	"extensions": [
-		"editorconfig.editorconfig",
-		"cjhowe7.laravel-blade",
-		"bierner.lit-html",
-		"pkief.material-icon-theme",
-		"shinnn.stylelint",
-		"msjsdiag.debugger-for-chrome",
-		"firefox-devtools.vscode-firefox-debug",
-		"esbenp.prettier-vscode",
-		"rvest.vs-code-prettier-eslint",
-		"mblode.twig-language-2",
-		"robbowen.synthwave-vscode",
-		"adpyke.codesnap",
-		"formulahendry.code-runner",
-		"eg2.vscode-npm-script",
-		"gruntfuggly.todo-tree",
-		"coenraads.bracket-pair-colorizer-2",
-		"svelte.svelte-vscode",
-		"ardenivanov.svelte-intellisense",
-		"andrejunges.handlebars"
-	]
+  "name": "Coffeekraken",
+  "dockerFile": "Dockerfile",
+  "forwardPorts": [666],
+  "runArgs": ["--name=coffeekraken", "--memory=16G", "--memory-swap=16G"],
+  "extensions": [
+	"editorconfig.editorconfig",
+	"cjhowe7.laravel-blade",
+	"bierner.lit-html",
+	"pkief.material-icon-theme",
+	"shinnn.stylelint",
+	"msjsdiag.debugger-for-chrome",
+	"firefox-devtools.vscode-firefox-debug",
+	"esbenp.prettier-vscode",
+	"rvest.vs-code-prettier-eslint",
+	"mblode.twig-language-2",
+	"adpyke.codesnap",
+	"formulahendry.code-runner",
+	"eg2.vscode-npm-script",
+	"gruntfuggly.todo-tree",
+	"coenraads.bracket-pair-colorizer-2",
+	"svelte.svelte-vscode",
+	"ardenivanov.svelte-intellisense",
+	"andrejunges.handlebars",
+	"arcticicestudio.nord-visual-studio-code",
+	"whizkydee.material-palenight-theme"
+]
 }

@@ -1,6 +1,11 @@
+"use strict";
 // shared
-import __isString from '../../is/string';
-import __toString from '../../string/toString';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const string_1 = __importDefault(require("../../is/string"));
+const toString_1 = __importDefault(require("../../string/toString"));
 /**
  * @name              stringTypeDescriptor
  * @namespace         sugar.js.type.descriptor
@@ -23,10 +28,10 @@ import __toString from '../../string/toString';
 const descriptor = {
     name: 'String',
     id: 'string',
-    is: (value) => __isString(value),
-    cast: (value) => __toString(value, {
+    is: (value) => string_1.default(value),
+    cast: (value) => toString_1.default(value, {
         beautify: true
     })
 };
-export default descriptor;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RyaW5nVHlwZURlc2NyaXB0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdHJpbmdUeXBlRGVzY3JpcHRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxTQUFTO0FBRVQsT0FBTyxVQUFVLE1BQU0saUJBQWlCLENBQUM7QUFDekMsT0FBTyxVQUFVLE1BQU0sdUJBQXVCLENBQUM7QUFJL0M7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILE1BQU0sVUFBVSxHQUFxQjtJQUNuQyxJQUFJLEVBQUUsUUFBUTtJQUNkLEVBQUUsRUFBRSxRQUFRO0lBQ1osRUFBRSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUUsQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDO0lBQ3JDLElBQUksRUFBRSxDQUFDLEtBQVUsRUFBRSxFQUFFLENBQ25CLFVBQVUsQ0FBQyxLQUFLLEVBQUU7UUFDaEIsUUFBUSxFQUFFLElBQUk7S0FDZixDQUFDO0NBQ0wsQ0FBQztBQUVGLGVBQWUsVUFBVSxDQUFDIn0=
+exports.default = descriptor;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RyaW5nVHlwZURlc2NyaXB0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdHJpbmdUeXBlRGVzY3JpcHRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsU0FBUzs7Ozs7QUFFVCw2REFBeUM7QUFDekMscUVBQStDO0FBSS9DOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSCxNQUFNLFVBQVUsR0FBcUI7SUFDbkMsSUFBSSxFQUFFLFFBQVE7SUFDZCxFQUFFLEVBQUUsUUFBUTtJQUNaLEVBQUUsRUFBRSxDQUFDLEtBQVUsRUFBRSxFQUFFLENBQUMsZ0JBQVUsQ0FBQyxLQUFLLENBQUM7SUFDckMsSUFBSSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUUsQ0FDbkIsa0JBQVUsQ0FBQyxLQUFLLEVBQUU7UUFDaEIsUUFBUSxFQUFFLElBQUk7S0FDZixDQUFDO0NBQ0wsQ0FBQztBQUVGLGtCQUFlLFVBQVUsQ0FBQyJ9

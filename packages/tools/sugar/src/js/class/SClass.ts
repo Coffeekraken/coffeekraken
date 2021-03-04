@@ -383,6 +383,7 @@ function applyInterface(ctx: any, name: string, on: any = null) {
 function setSettings(ctx: any, settings: any = {}) {
   // saving the settings
   ctx._settings = settings;
+  if (!ctx._settings.id) ctx._settings.id = ctx.constructor.name;
 }
 
 // const cls: ISClass = SClass;

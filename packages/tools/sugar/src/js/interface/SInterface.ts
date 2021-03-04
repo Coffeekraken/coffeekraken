@@ -5,12 +5,18 @@ import __SDescriptor from '../descriptor/SDescriptor';
 import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
 import __deepMerge from '../object/deepMerge';
 
+import __SInterfaceRenderer, {
+  ISInterfaceRenderer,
+  ISInterfaceRendererSettings
+} from './renderers/SInterfaceRenderer';
 import {
   ISDescriptorRules,
   ISDescriptorSettings
 } from '../descriptor/SDescriptor';
 import { ISDescriptorResult } from '../descriptor/SDescriptorResult';
 import __SInterfaceResult, { ISInterfaceResult } from './SInterfaceResult';
+
+import __SInterfaceTerminalRenderer from './renderers/SInterfaceTerminalRenderer';
 
 /**
  * @name            SInterface
@@ -59,21 +65,25 @@ export interface ISInterfaceResultData {
   instance: any;
 }
 
-export interface ISInterfaceDefinition {
+export interface ISInterfaceDefinitionProperty {
+  type: string;
+  description?: string;
+  default?: any;
+  alias?: string;
   [key: string]: any;
 }
-export interface ISInterfaceDefinitionMap {
-  [key: string]: ISInterfaceDefinition;
+export interface ISInterfaceDefinitionMap extends ISDescriptorRules {
+  [key: string]: ISInterfaceDefinitionProperty;
 }
 
 export interface ISInterfaceCtor {
   new (settings?: ISInterfaceSettings): ISInterface;
-  definition: ISInterfaceDefinitionMap | ISInterfaceDefinition;
+  definition: ISInterfaceDefinitionMap;
   settings: ISInterfaceSettings;
   defaults(): any;
 }
 export interface ISInterface {
-  _definition: ISInterfaceDefinitionMap | ISInterfaceDefinition;
+  _definition: ISInterfaceDefinitionMap;
   _settings: ISInterfaceSettings;
 }
 
@@ -91,7 +101,45 @@ class SInterface implements ISInterface {
    * @since             2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  static definition: ISDescriptorRules = {};
+  // static definition: ISDescriptorRules = {};
+  // @ts-ignore
+  static _definition: ISDescriptorRules = {};
+  static get definition() {
+    if (!this._definition.help) {
+      this._definition.help = {
+        type: 'Boolean',
+        description: `Display the help for this "<yellow>${this.name}</yellow>" interface...`,
+        default: false
+      };
+    }
+    return this._definition;
+  }
+  static set definition(value) {
+    this._definition = value;
+  }
+
+  /**
+   * @name      registerRenderer
+   * @type      Function
+   * @static
+   *
+   * This static method allows you to register a renderer that you can then
+   * use through the ```interface.render('{rendererId}')``` interface method
+   *
+   * @param     {SInterfaceRenderer}      rendererClass       The renderer class you want to register
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static _registeredRenderers: Record<string, any> = {};
+  static registerRenderer(rendererClass: any): void {
+    if (!rendererClass.id) {
+      throw new Error(
+        `Sorry but the interface renderer "<yellow>${rendererClass.name}</yellow>" that you want to register is missing the required <yellow>static</yellow> <green>id</green> property...`
+      );
+    }
+    this._registeredRenderers[rendererClass.id] = rendererClass;
+  }
 
   /**
    * @name      overrie
@@ -163,7 +211,7 @@ class SInterface implements ISInterface {
 
   /**
    * @name              _definition
-   * @type              ISDescriptorRules
+   * @type              ISInterfaceDefinitionMap
    * @private
    *
    * This property store all the SDescriptor rules that this interface
@@ -172,11 +220,11 @@ class SInterface implements ISInterface {
    * @since             2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _definition: ISDescriptorRules = {};
+  _definition: ISInterfaceDefinitionMap = {};
 
   /**
    * @name              settings
-   * @type              ISDescriptorRules
+   * @type              ISInterfaceSettings
    * @static
    *
    * This property store all the settings for your SInterface class. These settings
@@ -189,7 +237,7 @@ class SInterface implements ISInterface {
 
   /**
    * @name              _settings
-   * @type              ISDescriptorRules
+   * @type              ISInterfaceSettings
    * @private
    *
    * This property store all the settings for your SInterface instance
@@ -254,6 +302,54 @@ class SInterface implements ISInterface {
   }
 
   /**
+   * @name            help
+   * @type            Function
+   * @static
+   *
+   * This static method allows you to get back the help using the
+   * passed renderer. Awailable rendered are for now:
+   * - terminal (default): The default terminal renderer
+   * - more to come depending on needs...
+   *
+   * @param         {String}          [renderer="terminal"]        The registered renderer you want to use.
+   * @param         {ISInterfaceRendererSettings}     [settings={}]     Some settings to configure your render
+   *
+   * @setting     {'terminal'}        [renderer="terminal"]       The renderer you want to use.
+   * @setting     {Array<String>}     [exclude=['help']]                An array of properties you don't want to render
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static render(
+    renderer: string = 'terminal',
+    settings?: Partial<ISInterfaceRendererSettings>
+  ): string {
+    const set = <ISInterfaceRendererSettings>__deepMerge(
+      {
+        renderer: 'terminal',
+        exclude: ['help']
+      },
+      settings
+    );
+
+    // check that the renderer is registered
+    if (!(<any>this)._registeredRenderers[renderer]) {
+      throw new Error(
+        `Sorry but the requested renderer "<yellow>${renderer}</yellow>" does not exists... Here's the available renderers: <green>${Object.keys(
+          (<any>this)._registeredRenderers
+        ).join(', ')}</green>`
+      );
+    }
+
+    // instanciate the renderer and render the interface
+    const rendererInstance = new (<any>this)._registeredRenderers[renderer](
+      this,
+      set
+    );
+    return rendererInstance.render();
+  }
+
+  /**
    * @name              constructor
    * @type              Function
    * @constructor
@@ -273,6 +369,7 @@ class SInterface implements ISInterface {
     if (this._settings.name === undefined)
       this._settings.name =
         (<any>this.constructor).overridedName || this.constructor.name;
+
     this._definition = (<any>this).constructor.definition;
   }
 
@@ -323,5 +420,8 @@ class SInterface implements ISInterface {
     return interfaceResult;
   }
 }
-const Cls: ISInterfaceCtor = SInterface;
+
+// register renderers
+SInterface.registerRenderer(__SInterfaceTerminalRenderer);
+
 export default SInterface;

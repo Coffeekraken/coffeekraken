@@ -1,35 +1,47 @@
 // @ts-nocheck
-/**
- * @name      exitFullscreen
- * @namespace           sugar.js.dom
- * @type      Function
- * @stable
- *
- * Exit the fullscreen mode
- *
- * @return    {Promise}    Returns a Promise which is resolved once full-screen mode has been desactivated.
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example    js
- * import exitFullscreen from '@coffeekraken/sugar/js/dom/exitFullscreen'
- * exitFullscreen()
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function exitFullscreen() {
-    if (document.cancelFullScreen) {
-        return document.cancelFullScreen();
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
     }
-    else if (document.mozCancelFullScreen) {
-        return document.mozCancelFullScreen();
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports"], factory);
     }
-    else if (document.webkitCancelFullScreen) {
-        return document.webkitCancelFullScreen();
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    /**
+     * @name      exitFullscreen
+     * @namespace           sugar.js.dom
+     * @type      Function
+     * @stable
+     *
+     * Exit the fullscreen mode
+     *
+     * @return    {Promise}    Returns a Promise which is resolved once full-screen mode has been desactivated.
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @example    js
+     * import exitFullscreen from '@coffeekraken/sugar/js/dom/exitFullscreen'
+     * exitFullscreen()
+     *
+     * @since       1.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    function exitFullscreen() {
+        if (document.cancelFullScreen) {
+            return document.cancelFullScreen();
+        }
+        else if (document.mozCancelFullScreen) {
+            return document.mozCancelFullScreen();
+        }
+        else if (document.webkitCancelFullScreen) {
+            return document.webkitCancelFullScreen();
+        }
     }
-}
-export default exitFullscreen;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhpdEZ1bGxzY3JlZW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJleGl0RnVsbHNjcmVlbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsU0FBUyxjQUFjO0lBQ3JCLElBQUksUUFBUSxDQUFDLGdCQUFnQixFQUFFO1FBQzdCLE9BQU8sUUFBUSxDQUFDLGdCQUFnQixFQUFFLENBQUM7S0FDcEM7U0FBTSxJQUFJLFFBQVEsQ0FBQyxtQkFBbUIsRUFBRTtRQUN2QyxPQUFPLFFBQVEsQ0FBQyxtQkFBbUIsRUFBRSxDQUFDO0tBQ3ZDO1NBQU0sSUFBSSxRQUFRLENBQUMsc0JBQXNCLEVBQUU7UUFDMUMsT0FBTyxRQUFRLENBQUMsc0JBQXNCLEVBQUUsQ0FBQztLQUMxQztBQUNILENBQUM7QUFDRCxlQUFlLGNBQWMsQ0FBQyJ9
+    exports.default = exitFullscreen;
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhpdEZ1bGxzY3JlZW4uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJleGl0RnVsbHNjcmVlbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7SUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FvQkc7SUFDSCxTQUFTLGNBQWM7UUFDckIsSUFBSSxRQUFRLENBQUMsZ0JBQWdCLEVBQUU7WUFDN0IsT0FBTyxRQUFRLENBQUMsZ0JBQWdCLEVBQUUsQ0FBQztTQUNwQzthQUFNLElBQUksUUFBUSxDQUFDLG1CQUFtQixFQUFFO1lBQ3ZDLE9BQU8sUUFBUSxDQUFDLG1CQUFtQixFQUFFLENBQUM7U0FDdkM7YUFBTSxJQUFJLFFBQVEsQ0FBQyxzQkFBc0IsRUFBRTtZQUMxQyxPQUFPLFFBQVEsQ0FBQyxzQkFBc0IsRUFBRSxDQUFDO1NBQzFDO0lBQ0gsQ0FBQztJQUNELGtCQUFlLGNBQWMsQ0FBQyJ9

@@ -1,0 +1,1 @@
+../../../../js/interface/renderers/terminal/default.ts

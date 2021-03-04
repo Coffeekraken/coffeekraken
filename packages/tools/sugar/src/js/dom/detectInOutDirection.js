@@ -1,110 +1,126 @@
 // @ts-nocheck
-import __SPromise from '../promise/SPromise';
-/**
- * @name      detectInOutDirection
- * @namespace           sugar.js.dom
- * @type      Function
- * @status              wip
- *
- * Detect the mouse direction when entered on the passed element. The direction can be up, down, left or right and will be passed to the two callbacks available.
- * The first one is the `onIn` callback, and the second one is the `onOut`.
- *
- * @param    {HTMLElement}    $elm    The element to listen for mouseover and mouseout on
- * @param    {Function}    onIn    The onIn callback. The direction and the $elm will be passed to it
- * @param    {Function}    onOut    The onOut callback. The direction and the $elm will be passed to it
- * @return    {HTMLElement}    The $elm to maintain chainability
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example     js
- * import detectInOutDirection from '@coffeekraken/sugar/js/dom/detectInOutDirection'
- * const detect = detectInOutDirection(myElm).in(direction => {
- *    // do something...
- * }).out(direction => {
- *    // do something...
- * }).then(value => {
- *    // do something
- *    console.log(value); // => { action: 'in', direction: 'up' };
- * });
- *
- * // cancel the detection process
- * detect.cancel();
- *
- * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-function detectInOutDirection($elm) {
-    let mouseEnterHandler, mouseLeaveHandler;
-    const promise = new __SPromise(({ resolve, reject, emit }) => {
-        mouseEnterHandler = (e) => {
-            emit('in', direction);
-            emit('then', {
-                action: 'in',
-                direction
-            });
-        };
-        mouseLeaveHandler = (e) => {
-            emit('out', direction);
-            emit('then', {
-                action: 'out',
-                direction
-            });
-        };
-        // detect when mouseenter/leave the element
-        $elm.addEventListener('mouseenter', mouseEnterHandler);
-        $elm.addEventListener('mouseleave', mouseLeaveHandler);
-    }, {
-        id: 'detectInOutDirection'
-    }).on('finally', () => {
-        $elm.removeEventListener('mouseenter', mouseEnterHandler);
-        $elm.removeEventListener('mouseleave', mouseLeaveHandler);
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+(function (factory) {
+    if (typeof module === "object" && typeof module.exports === "object") {
+        var v = factory(require, exports);
+        if (v !== undefined) module.exports = v;
+    }
+    else if (typeof define === "function" && define.amd) {
+        define(["require", "exports", "../promise/SPromise"], factory);
+    }
+})(function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var SPromise_1 = __importDefault(require("../promise/SPromise"));
+    /**
+     * @name      detectInOutDirection
+     * @namespace           sugar.js.dom
+     * @type      Function
+     * @status              wip
+     *
+     * Detect the mouse direction when entered on the passed element. The direction can be up, down, left or right and will be passed to the two callbacks available.
+     * The first one is the `onIn` callback, and the second one is the `onOut`.
+     *
+     * @param    {HTMLElement}    $elm    The element to listen for mouseover and mouseout on
+     * @param    {Function}    onIn    The onIn callback. The direction and the $elm will be passed to it
+     * @param    {Function}    onOut    The onOut callback. The direction and the $elm will be passed to it
+     * @return    {HTMLElement}    The $elm to maintain chainability
+     *
+     * @todo      interface
+     * @todo      doc
+     * @todo      tests
+     *
+     * @example     js
+     * import detectInOutDirection from '@coffeekraken/sugar/js/dom/detectInOutDirection'
+     * const detect = detectInOutDirection(myElm).in(direction => {
+     *    // do something...
+     * }).out(direction => {
+     *    // do something...
+     * }).then(value => {
+     *    // do something
+     *    console.log(value); // => { action: 'in', direction: 'up' };
+     * });
+     *
+     * // cancel the detection process
+     * detect.cancel();
+     *
+     * @since       1.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    function detectInOutDirection($elm) {
+        var mouseEnterHandler, mouseLeaveHandler;
+        var promise = new SPromise_1.default(function (_a) {
+            var resolve = _a.resolve, reject = _a.reject, emit = _a.emit;
+            mouseEnterHandler = function (e) {
+                emit('in', direction);
+                emit('then', {
+                    action: 'in',
+                    direction: direction
+                });
+            };
+            mouseLeaveHandler = function (e) {
+                emit('out', direction);
+                emit('then', {
+                    action: 'out',
+                    direction: direction
+                });
+            };
+            // detect when mouseenter/leave the element
+            $elm.addEventListener('mouseenter', mouseEnterHandler);
+            $elm.addEventListener('mouseleave', mouseLeaveHandler);
+        }, {
+            id: 'detectInOutDirection'
+        }).on('finally', function () {
+            $elm.removeEventListener('mouseenter', mouseEnterHandler);
+            $elm.removeEventListener('mouseleave', mouseLeaveHandler);
+        });
+        return promise;
+    }
+    var oldX = 0, oldY = 0, direction = null;
+    var threshold = 0;
+    document.addEventListener('mousemove', function (e) {
+        calculateDirection(e);
     });
-    return promise;
-}
-let oldX = 0, oldY = 0, direction = null;
-const threshold = 0;
-document.addEventListener('mousemove', (e) => {
-    calculateDirection(e);
+    document.addEventListener('touchstart', function (e) {
+        calculateDirection(e);
+    });
+    function calculateDirection(e) {
+        var directionX = 0, directionY = 0, diffX = 0, diffY = 0;
+        if (e.pageX < oldX - threshold) {
+            directionX = 'left';
+            diffX = oldX - e.pageX;
+            oldX = e.pageX;
+        }
+        else if (e.pageX > oldX + threshold) {
+            directionX = 'right';
+            diffX = e.pageX - oldX;
+            oldX = e.pageX;
+        }
+        if (e.pageY < oldY - threshold) {
+            directionY = 'up';
+            diffY = oldY - e.pageY;
+            oldY = e.pageY;
+        }
+        else if (e.pageY > oldY + threshold) {
+            directionY = 'down';
+            diffY = e.pageY - oldY;
+            oldY = e.pageY;
+        }
+        if (directionX && directionY) {
+            direction = diffX > diffY ? directionX : directionY;
+        }
+        else if (directionX) {
+            direction = directionX;
+        }
+        else if (directionY) {
+            direction = directionY;
+        }
+        else {
+            direction = null;
+        }
+    }
+    exports.default = detectInOutDirection;
 });
-document.addEventListener('touchstart', (e) => {
-    calculateDirection(e);
-});
-function calculateDirection(e) {
-    let directionX = 0, directionY = 0, diffX = 0, diffY = 0;
-    if (e.pageX < oldX - threshold) {
-        directionX = 'left';
-        diffX = oldX - e.pageX;
-        oldX = e.pageX;
-    }
-    else if (e.pageX > oldX + threshold) {
-        directionX = 'right';
-        diffX = e.pageX - oldX;
-        oldX = e.pageX;
-    }
-    if (e.pageY < oldY - threshold) {
-        directionY = 'up';
-        diffY = oldY - e.pageY;
-        oldY = e.pageY;
-    }
-    else if (e.pageY > oldY + threshold) {
-        directionY = 'down';
-        diffY = e.pageY - oldY;
-        oldY = e.pageY;
-    }
-    if (directionX && directionY) {
-        direction = diffX > diffY ? directionX : directionY;
-    }
-    else if (directionX) {
-        direction = directionX;
-    }
-    else if (directionY) {
-        direction = directionY;
-    }
-    else {
-        direction = null;
-    }
-}
-export default detectInOutDirection;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGV0ZWN0SW5PdXREaXJlY3Rpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkZXRlY3RJbk91dERpcmVjdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxVQUFVLE1BQU0scUJBQXFCLENBQUM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQ0c7QUFDSCxTQUFTLG9CQUFvQixDQUFDLElBQUk7SUFDaEMsSUFBSSxpQkFBaUIsRUFBRSxpQkFBaUIsQ0FBQztJQUV6QyxNQUFNLE9BQU8sR0FBRyxJQUFJLFVBQVUsQ0FDNUIsQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUM1QixpQkFBaUIsR0FBRyxDQUFDLENBQUMsRUFBRSxFQUFFO1lBQ3hCLElBQUksQ0FBQyxJQUFJLEVBQUUsU0FBUyxDQUFDLENBQUM7WUFDdEIsSUFBSSxDQUFDLE1BQU0sRUFBRTtnQkFDWCxNQUFNLEVBQUUsSUFBSTtnQkFDWixTQUFTO2FBQ1YsQ0FBQyxDQUFDO1FBQ0wsQ0FBQyxDQUFDO1FBQ0YsaUJBQWlCLEdBQUcsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUN4QixJQUFJLENBQUMsS0FBSyxFQUFFLFNBQVMsQ0FBQyxDQUFDO1lBQ3ZCLElBQUksQ0FBQyxNQUFNLEVBQUU7Z0JBQ1gsTUFBTSxFQUFFLEtBQUs7Z0JBQ2IsU0FBUzthQUNWLENBQUMsQ0FBQztRQUNMLENBQUMsQ0FBQztRQUNGLDJDQUEyQztRQUMzQyxJQUFJLENBQUMsZ0JBQWdCLENBQUMsWUFBWSxFQUFFLGlCQUFpQixDQUFDLENBQUM7UUFDdkQsSUFBSSxDQUFDLGdCQUFnQixDQUFDLFlBQVksRUFBRSxpQkFBaUIsQ0FBQyxDQUFDO0lBQ3pELENBQUMsRUFDRDtRQUNFLEVBQUUsRUFBRSxzQkFBc0I7S0FDM0IsQ0FDRixDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUUsR0FBRyxFQUFFO1FB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGV0ZWN0SW5PdXREaXJlY3Rpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkZXRlY3RJbk91dERpcmVjdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7SUFFZCxpRUFBNkM7SUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FrQ0c7SUFDSCxTQUFTLG9CQUFvQixDQUFDLElBQUk7UUFDaEMsSUFBSSxpQkFBaUIsRUFBRSxpQkFBaUIsQ0FBQztRQUV6QyxJQUFNLE9BQU8sR0FBRyxJQUFJLGtCQUFVLENBQzVCLFVBQUMsRUFBeUI7Z0JBQXZCLE9BQU8sYUFBQSxFQUFFLE1BQU0sWUFBQSxFQUFFLElBQUksVUFBQTtZQUN0QixpQkFBaUIsR0FBRyxVQUFDLENBQUM7Z0JBQ3BCLElBQUksQ0FBQyxJQUFJLEVBQUUsU0FBUyxDQUFDLENBQUM7Z0JBQ3RCLElBQUksQ0FBQyxNQUFNLEVBQUU7b0JBQ1gsTUFBTSxFQUFFLElBQUk7b0JBQ1osU0FBUyxXQUFBO2lCQUNWLENBQUMsQ0FBQztZQUNMLENBQUMsQ0FBQztZQUNGLGlCQUFpQixHQUFHLFVBQUMsQ0FBQztnQkFDcEIsSUFBSSxDQUFDLEtBQUssRUFBRSxTQUFTLENBQUMsQ0FBQztnQkFDdkIsSUFBSSxDQUFDLE1BQU0sRUFBRTtvQkFDWCxNQUFNLEVBQUUsS0FBSztvQkFDYixTQUFTLFdBQUE7aUJBQ1YsQ0FBQyxDQUFDO1lBQ0wsQ0FBQyxDQUFDO1lBQ0YsMkNBQTJDO1lBQzNDLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxZQUFZLEVBQUUsaUJBQWlCLENBQUMsQ0FBQztZQUN2RCxJQUFJLENBQUMsZ0JBQWdCLENBQUMsWUFBWSxFQUFFLGlCQUFpQixDQUFDLENBQUM7UUFDekQsQ0FBQyxFQUNEO1lBQ0UsRUFBRSxFQUFFLHNCQUFzQjtTQUMzQixDQUNGLENBQUMsRUFBRSxDQUFDLFNBQVMsRUFBRTtZQUNkLElBQUksQ0FB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

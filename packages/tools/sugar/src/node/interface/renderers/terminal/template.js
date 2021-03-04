@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const parseHtml_1 = __importDefault(require("../../../console/parseHtml"));
+const countLine_1 = __importDefault(require("../../../string/countLine"));
 /**
  * @name                layout
  * @namespace           sugar.js.interface.renderers.terminal
@@ -24,37 +25,26 @@ const parseHtml_1 = __importDefault(require("../../../console/parseHtml"));
  */
 function default_1({ interfaceClass, properties }) {
     let tpl = [];
-    tpl = tpl.concat(['', `<yellow>${interfaceClass.name}</yellow> help`, '']);
+    tpl = tpl.concat([
+        '',
+        `<yellow>${interfaceClass.name}</yellow> interface help`,
+        ''
+    ]);
     if (interfaceClass.description) {
         tpl.push(interfaceClass.description);
         tpl.push('');
     }
     for (let propKey in properties) {
         const propertyObj = properties[propKey];
-        const propStr = [];
-        let titleStr = `${propertyObj.name} ${propertyObj.type}`;
-        tpl.push('');
-        propStr.push(titleStr);
-        if (propertyObj.alias) {
-            propStr.push(`Alias: ${propertyObj.alias}`);
+        let titleStr = `--${propertyObj.name} ${propertyObj.alias ? `(${propertyObj.alias})` : ''} ${propertyObj.type} ${propertyObj.default && countLine_1.default(propertyObj.default) <= 20
+            ? propertyObj.default
+            : ''} ${propertyObj.description || ''}`;
+        tpl.push(titleStr.replace(/\s{2,999}/gm, ' '));
+        if (propertyObj.default && countLine_1.default(propertyObj.default) > 20) {
+            tpl.push(propertyObj.default);
         }
-        if (propertyObj.description) {
-            // propStr.push('');
-            propStr.push(`${propertyObj.description}`);
-        }
-        if (propertyObj.default) {
-            // propStr.push('');
-            propStr.push(`<magenta>Default</magenta>: ${propertyObj.default}`);
-        }
-        tpl.push(propStr
-            .join('\n')
-            .split('\n')
-            .map((line) => {
-            return `│ ${line}`;
-        })
-            .join('\n'));
     }
     return parseHtml_1.default(tpl.join('\n'));
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGVtcGxhdGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0ZW1wbGF0ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsVUFBVTs7Ozs7QUFFViwyRUFBcUQ7QUFFckQ7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFDSCxtQkFBeUIsRUFBRSxjQUFjLEVBQUUsVUFBVSxFQUFFO0lBQ3JELElBQUksR0FBRyxHQUFhLEVBQUUsQ0FBQztJQUV2QixHQUFHLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FBQyxDQUFDLEVBQUUsRUFBRSxXQUFXLGNBQWMsQ0FBQyxJQUFJLGdCQUFnQixFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUM7SUFFM0UsSUFBSSxjQUFjLENBQUMsV0FBVyxFQUFFO1FBQzlCLEdBQUcsQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQ3JDLEdBQUcsQ0FBQyxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUM7S0FDZDtJQUVELEtBQUssSUFBSSxPQUFPLElBQUksVUFBVSxFQUFFO1FBQzlCLE1BQU0sV0FBVyxHQUFHLFVBQVUsQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUV4QyxNQUFNLE9BQU8sR0FBYSxFQUFFLENBQUM7UUFFN0IsSUFBSSxRQUFRLEdBQUcsR0FBRyxXQUFXLENBQUMsSUFBSSxJQUFJLFdBQVcsQ0FBQyxJQUFJLEVBQUUsQ0FBQztRQUN6RCxHQUFHLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQ2IsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUV2QixJQUFJLFdBQVcsQ0FBQyxLQUFLLEVBQUU7WUFDckIsT0FBTyxDQUFDLElBQUksQ0FBQyxVQUFVLFdBQVcsQ0FBQyxLQUFLLEVBQUUsQ0FBQyxDQUFDO1NBQzdDO1FBQ0QsSUFBSSxXQUFXLENBQUMsV0FBVyxFQUFFO1lBQzNCLG9CQUFvQjtZQUNwQixPQUFPLENBQUMsSUFBSSxDQUFDLEdBQUcsV0FBVyxDQUFDLFdBQVcsRUFBRSxDQUFDLENBQUM7U0FDNUM7UUFDRCxJQUFJLFdBQVcsQ0FBQyxPQUFPLEVBQUU7WUFDdkIsb0JBQW9CO1lBQ3BCLE9BQU8sQ0FBQyxJQUFJLENBQUMsK0JBQStCLFdBQVcsQ0FBQyxPQUFPLEVBQUUsQ0FBQyxDQUFDO1NBQ3BFO1FBRUQsR0FBRyxDQUFDLElBQUksQ0FDTixPQUFPO2FBQ0osSUFBSSxDQUFDLElBQUksQ0FBQzthQUNWLEtBQUssQ0FBQyxJQUFJLENBQUM7YUFDWCxHQUFHLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtZQUNaLE9BQU8sS0FBSyxJQUFJLEVBQUUsQ0FBQztRQUNyQixDQUFDLENBQUM7YUFDRCxJQUFJLENBQUMsSUFBSSxDQUFDLENBQ2QsQ0FBQztLQUNIO0lBRUQsT0FBTyxtQkFBVyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztBQUNyQyxDQUFDO0FBM0NELDRCQTJDQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGVtcGxhdGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0ZW1wbGF0ZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsVUFBVTs7Ozs7QUFFViwyRUFBcUQ7QUFDckQsMEVBQW9EO0FBRXBEOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBQ0gsbUJBQXlCLEVBQUUsY0FBYyxFQUFFLFVBQVUsRUFBRTtJQUNyRCxJQUFJLEdBQUcsR0FBYSxFQUFFLENBQUM7SUFFdkIsR0FBRyxHQUFHLEdBQUcsQ0FBQyxNQUFNLENBQUM7UUFDZixFQUFFO1FBQ0YsV0FBVyxjQUFjLENBQUMsSUFBSSwwQkFBMEI7UUFDeEQsRUFBRTtLQUNILENBQUMsQ0FBQztJQUVILElBQUksY0FBYyxDQUFDLFdBQVcsRUFBRTtRQUM5QixHQUFHLENBQUMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxXQUFXLENBQUMsQ0FBQztRQUNyQyxHQUFHLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxDQUFDO0tBQ2Q7SUFFRCxLQUFLLElBQUksT0FBTyxJQUFJLFVBQVUsRUFBRTtRQUM5QixNQUFNLFdBQVcsR0FBRyxVQUFVLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDeEMsSUFBSSxRQUFRLEdBQUcsS0FBSyxXQUFXLENBQUMsSUFBSSxJQUNsQyxXQUFXLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxJQUFJLFdBQVcsQ0FBQyxLQUFLLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFDakQsSUFBSSxXQUFXLENBQUMsSUFBSSxJQUNsQixXQUFXLENBQUMsT0FBTyxJQUFJLG1CQUFXLENBQUMsV0FBVyxDQUFDLE9BQU8sQ0FBQyxJQUFJLEVBQUU7WUFDM0QsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxPQUFPO1lBQ3JCLENBQUMsQ0FBQyxFQUNOLElBQUksV0FBVyxDQUFDLFdBQVcsSUFBSSxFQUFFLEVBQUUsQ0FBQztRQUNwQyxHQUFHLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsYUFBYSxFQUFFLEdBQUcsQ0FBQyxDQUFDLENBQUM7UUFDL0MsSUFBSSxXQUFXLENBQUMsT0FBTyxJQUFJLG1CQUFXLENBQUMsV0FBVyxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUUsRUFBRTtZQUNoRSxHQUFHLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxPQUFPLENBQUMsQ0FBQztTQUMvQjtLQUNGO0lBRUQsT0FBTyxtQkFBVyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztBQUNyQyxDQUFDO0FBOUJELDRCQThCQyJ9

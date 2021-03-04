@@ -1,11 +1,11 @@
 // @shared
 
 /**
- * @name                type
+ * @name                alias
  * @namespace           sugar.js.interface.renderers.terminal
- * @type                Function
+ * @name                Function
  *
- * Render the "type" field.
+ * Render the "alias" field.
  *
  * @param       {ISInterfaceRendererRenderPropertyObj}          propertyObj             The property object to render
  * @return              String                  The renderer template string
@@ -14,5 +14,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({ value, interfaceClass }) {
-  return `<cyan>${value}</cyan>`;
+  return `-${value}`;
 }

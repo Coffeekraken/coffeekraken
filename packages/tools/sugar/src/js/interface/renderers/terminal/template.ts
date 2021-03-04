@@ -1,6 +1,7 @@
 // @shared
 
 import __parseHtml from '../../../console/parseHtml';
+import __countLine from '../../../string/countLine';
 
 /**
  * @name                layout
@@ -22,7 +23,11 @@ import __parseHtml from '../../../console/parseHtml';
 export default function ({ interfaceClass, properties }) {
   let tpl: string[] = [];
 
-  tpl = tpl.concat(['', `<yellow>${interfaceClass.name}</yellow> help`, '']);
+  tpl = tpl.concat([
+    '',
+    `<yellow>${interfaceClass.name}</yellow> interface help`,
+    ''
+  ]);
 
   if (interfaceClass.description) {
     tpl.push(interfaceClass.description);
@@ -31,34 +36,17 @@ export default function ({ interfaceClass, properties }) {
 
   for (let propKey in properties) {
     const propertyObj = properties[propKey];
-
-    const propStr: string[] = [];
-
-    let titleStr = `${propertyObj.name} ${propertyObj.type}`;
-    tpl.push('');
-    propStr.push(titleStr);
-
-    if (propertyObj.alias) {
-      propStr.push(`Alias: ${propertyObj.alias}`);
+    let titleStr = `--${propertyObj.name} ${
+      propertyObj.alias ? `(${propertyObj.alias})` : ''
+    } ${propertyObj.type} ${
+      propertyObj.default && __countLine(propertyObj.default) <= 20
+        ? propertyObj.default
+        : ''
+    } ${propertyObj.description || ''}`;
+    tpl.push(titleStr.replace(/\s{2,999}/gm, ' '));
+    if (propertyObj.default && __countLine(propertyObj.default) > 20) {
+      tpl.push(propertyObj.default);
     }
-    if (propertyObj.description) {
-      // propStr.push('');
-      propStr.push(`${propertyObj.description}`);
-    }
-    if (propertyObj.default) {
-      // propStr.push('');
-      propStr.push(`<magenta>Default</magenta>: ${propertyObj.default}`);
-    }
-
-    tpl.push(
-      propStr
-        .join('\n')
-        .split('\n')
-        .map((line) => {
-          return `│ ${line}`;
-        })
-        .join('\n')
-    );
   }
 
   return __parseHtml(tpl.join('\n'));

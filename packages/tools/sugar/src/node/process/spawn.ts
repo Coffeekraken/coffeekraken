@@ -169,7 +169,6 @@ export default function spawn(
         emit('close.killed', resultObj);
         return resolve(resultObj);
       } else if (code === 0 && !signal) {
-        console.log('SUCCESS?);');
         emit('close.success', resultObj);
         return resolve(resultObj);
       } else {

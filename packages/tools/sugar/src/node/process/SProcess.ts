@@ -397,8 +397,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       }
     });
 
-    console.log(this.constructor.name, this.paramsInterface, paramsObj);
-
     // check if asking for the help
     if (paramsObj.help === true && this.paramsInterface !== undefined) {
       // new __SPromise(({ resolve }) => {

@@ -286,7 +286,7 @@ function applyInterfaces(ctx: any) {
       const settings: ISClassOptionalInterfaceObj = Object.assign(
         {},
         {
-          apply: true,
+          apply: false,
           on: name === 'this' ? ctx : undefined,
           ...interfaceObj
         }

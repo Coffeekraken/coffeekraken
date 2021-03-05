@@ -21,6 +21,7 @@
     "build.js": "rm -rf dist && babel src/js -d ./src/node/_js --copy-files --config-file ./dev/sugar.babel.config.js -w --ignore 'src/**/*.spec.js','src/**/*.test.js'"
   },
   "dependencies": {
+    "@11ty/dependency-tree": "^1.0.0",
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@babel/generator": "^7.12.11",
@@ -103,6 +104,7 @@
     "deep-diff": "^1.0.2",
     "deep-map": "^2.0.0",
     "deepmerge": "^4.2.2",
+    "dependency-tree": "^8.0.0",
     "document-register-element": "^1.14.10",
     "domready": "^1.0.8",
     "dotenv": "^8.2.0",

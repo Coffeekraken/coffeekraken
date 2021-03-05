@@ -5,7 +5,6 @@
   "homepage": "https://coffeekraken.io",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "del dist"
   },
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
@@ -15,6 +14,7 @@
     "@coffeekraken/sugar": "file:../sugar",
     "@snowpack/plugin-babel": "^2.1.4",
     "codemirror": "^5.58.2",
+    "dependency-tree": "^8.0.0",
     "esbuild": "^0.8.29",
     "parcel-bundler": "^1.12.4",
     "postcss": "8.1.4",

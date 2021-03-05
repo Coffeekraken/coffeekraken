@@ -1,6 +1,6 @@
 #!/usr/bin/env node --trace-warnings --trace-uncaught
 
-// @ts-nocheck
+import __SProcess from '../node/process/SProcess';
 
 require('../node/index');
 // const __exitCleanup = require('../node/process/exitCleanup');
@@ -48,6 +48,17 @@ if (!action) {
 }
 
 // const pkg = require(`./${stack}/${action}.cli.js`);
-let fn = require(`./${stack}/${action}.cli.js`);
-if (fn.default) fn = fn.default;
-fn(args);
+let cliApi = require(`./${stack}/${action}.cli.js`).default;
+
+(async () => {
+  // SProcess classes
+  if (cliApi.prototype && cliApi.prototype instanceof __SProcess) {
+    const processInstance = new cliApi({});
+    return await processInstance.run(args);
+  } else if (typeof cliApi === 'function') {
+    return await cliApi(args);
+  }
+})();
+
+// if (fn.default) fn = fn.default;
+// fn(args);

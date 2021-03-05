@@ -233,6 +233,29 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
   }
 
   /**
+   * @name            run
+   * @type            Function
+   * @static
+   * @async
+   *
+   * Static "run" function to use as a shortcut of the new, and run call
+   *
+   * @param     {String|Record<string, any>}        [paramsOrStringArgs={}]     Either a cli string arguments like "--arg1 value1 --arg2 value2" that will be transformed to an object using the "params" interface, or directly an object representing your parameters
+   * @param     {Partial<ISProcessSettings>}        [settings={}]             Some process settings to override if needed
+   * @return    {SPromise}                                                  An SPromise instance through which you can listen for logs, and that will be resolved once the process is over
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  static async run(
+    paramsOrStringArgs: String | Record<string, any> = {},
+    settings: Partial<ISProcessSettings> = {}
+  ) {
+    const instance = new this({});
+    return instance.run(paramsOrStringArgs, settings);
+  }
+
+  /**
    * @name            constructor
    * @type            Function
    * @constructor
@@ -327,7 +350,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * SProcess class (if exists).
    * Take care of starting timers for duration tracking, etc...
    *
-   * @todo      Doc
+   * @param     {String|Record<string, any>}        [paramsOrStringArgs={}]     Either a cli string arguments like "--arg1 value1 --arg2 value2" that will be transformed to an object using the "params" interface, or directly an object representing your parameters
+   * @param     {Partial<ISProcessSettings>}        [settings={}]             Some process settings to override if needed
+   * @return    {SPromise}                                                  An SPromise instance through which you can listen for logs, and that will be resolved once the process is over
    *
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -399,12 +424,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     // check if asking for the help
     if (paramsObj.help === true && this.paramsInterface !== undefined) {
-      // new __SPromise(({ resolve }) => {
-      //   console.log('DDDD');
       const helpString = this.paramsInterface.render();
-      console.log(helpString);
-      // resolve(helpString);
-      // });
+      this.emit('log', {
+        value: helpString
+      });
       return;
     }
 

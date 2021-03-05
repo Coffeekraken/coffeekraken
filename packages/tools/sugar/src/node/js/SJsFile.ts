@@ -7,6 +7,7 @@ import __SPromise from '../promise/SPromise';
 import __deepMerge from '../object/deepMerge';
 import __sugarConfig from '../config/sugar';
 import __SFileCache from '../cache/SFileCache';
+import __folderPath from '../fs/folderPath';
 import __toString from '../string/toString';
 import __wait from '../time/wait';
 import __getFilename from '../fs/filename';
@@ -16,6 +17,8 @@ import __esbuildScssLoaderPlugin from './compile/plugins/esbuild/esbuildScssLoad
 import __SEventEmitter from '../event/SEventEmitter';
 import __onProcessExit from '../process/onProcessExit';
 import __resolve from '../module/resolve';
+import __dependencyTree from '../module/dependencyTree';
+import __deepMap from '../object/deepMap';
 
 import __SInterface from '../interface/SInterface';
 import __SJsCompiler, { ISJsCompilerParams } from './compile/SJsCompiler';
@@ -178,189 +181,205 @@ class SJsFile extends __SFile implements ISJsFile {
   _currentCompilationParams: Partial<ISJsCompilerParams> = {};
   compile(params: ISJsCompilerParams, settings?: Partial<ISJsFileSettings>) {
     // init the promise
-    return new __SPromise(async ({ resolve, reject, emit, pipeTo, on }) => {
-      settings = __deepMerge(this.jsFileSettings, settings);
-      this._currentCompilationParams = Object.assign({}, params);
-      this._currentCompilationSettings = Object.assign({}, settings);
+    return new __SPromise(
+      async ({ resolve, reject, emit, pipeFrom, pipeTo, on }) => {
+        settings = __deepMerge(this.jsFileSettings, settings);
+        this._currentCompilationParams = Object.assign({}, params);
+        this._currentCompilationSettings = Object.assign({}, settings);
 
-      params = this.applyInterface('compilerParams', params);
-
-      if (this._isCompiling) {
-        emit('warn', {
-          value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
-        });
+        const tree = await __dependencyTree(this.path);
+        console.log(tree);
         return;
-      }
-      this._isCompiling = true;
 
-      // listen for the end
-      on('finally', () => {
-        this._isCompiling = false;
-      });
+        params = this.applyInterface('compilerParams', params);
 
-      pipeTo(this);
-
-      emit('notification', {
-        title: `${this.id} compilation started`
-      });
-
-      emit('log', {
-        clear: true,
-        type: 'time'
-      });
-
-      // notify start
-      emit('log', {
-        value: `<yellow>[start]</yellow> Starting "<cyan>${this.relPath}</cyan>" compilation`
-      });
-
-      const duration = new __SDuration();
-
-      await __wait(0);
-
-      emit('log', {
-        value: `<yellow>[compiling]</yellow> File "<cyan>${this.relPath}</cyan>"`
-      });
-
-      // prod
-      if (params.prod || params.bundle) {
-        params.minify = true;
-        params.stripComments = true;
-        params.map = false;
-      }
-
-      let savePath;
-      if (params.outputDir === undefined) {
-        savePath = this.path.replace(/\.js$/, '.compiled.js');
-      } else {
-        savePath = __path.resolve(
-          params.outputDir,
-          this.path.replace(`${params.rootDir}/`, '')
-        );
-      }
-
-      // let exampleOnResolvePlugin = {
-      //   name: 'example',
-      //   setup(build) {
-      //     build.onResolve({ filter: /.*/ }, (args) => {
-      //       console.log(args.path);
-      //       return { path: __path.join(args.resolveDir, args.path) };
-      //       // return { path: path.join(args.resolveDir, 'public', args.path) };
-      //     });
-      //   }
-      // };
-
-      let esbuildParams: any = {
-        charset: 'utf8',
-        format: params.format,
-        logLevel: 'info',
-        ...__filter(params, (key, value) => {
-          if (Array.isArray(value) && !value.length) return false;
-          return __SJsCompiler._esbuildAcceptedSettings.indexOf(key) !== -1;
-        }),
-        entryPoints: [this.path],
-        bundle: params.bundle,
-        write: false, // write to disk bellow
-        errorLimit: 100,
-        minify: params.minify,
-        sourcemap: params.map,
-        // plugins: [exampleOnResolvePlugin],
-        ...params.esbuild
-      };
-
-      let resultObj: any;
-
-      try {
-        resultObj = await __esbuild.build(esbuildParams);
-      } catch (e) {
-        return reject(e);
-      }
-
-      function rewriteImports(code) {
-        const reg = /\sfrom\s['"`](.*)['"`];?/gm;
-        let match = reg.exec(code);
-        do {
-          if (!match) continue;
-          if (match[1].match(/^[\.\/]/)) continue;
-
-          // const absPath = `${__sugarConfig('storage.nodeModulesDir')}/${match[1]}`;
-          // if (__fs.existsSync())
-
-          const res = __resolve(match[1], {
-            fields:
-              params.format === 'esm'
-                ? ['module', 'main', 'browser']
-                : ['main', 'browser', 'module']
+        if (this._isCompiling) {
+          emit('warn', {
+            value: `This file is compiling at this time. Please wait the end of the compilation before running another one...`
           });
+          return;
+        }
+        this._isCompiling = true;
 
-          if (res) {
-            code = code.replace(
-              match[0],
-              ` from "${res.replace(__sugarConfig('storage.rootDir'), '')}";`
-            );
-          }
-        } while ((match = reg.exec(code)) !== null);
-        return code;
-      }
+        // listen for the end
+        on('finally', () => {
+          this._isCompiling = false;
+        });
 
-      const resultJs = rewriteImports(
-        [
-          params.banner || '',
-          'let process = {};' + resultObj.outputFiles[0].text
-        ].join('\n')
-      );
+        pipeTo(this);
 
-      // check if need to save
-      if (params.save) {
-        // build the save path
+        emit('notification', {
+          title: `${this.id} compilation started`
+        });
+
         emit('log', {
-          type: 'file',
-          file: this.toObject(),
-          to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-          action: 'save'
+          clear: true,
+          type: 'time'
         });
-        this.writeSync(resultJs, {
-          path: savePath
+
+        // notify start
+        emit('log', {
+          value: `<yellow>[start]</yellow> Starting "<cyan>${this.relPath}</cyan>" compilation`
         });
-        if (params.map) {
-          // this.writeSync(result.js.map.toString(), {
-          //   path: savePath.replace(/\.js$/, '.js.map')
-          // });
-          // emit('log', {
-          //   type: 'file',
-          //   action: 'saved',
-          //   to: savePath
-          //     .replace(/\.js$/, '.js.map')
-          //     .replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-          //   file: this.toObject()
-          // });
+
+        const duration = new __SDuration();
+
+        await __wait(0);
+
+        emit('log', {
+          value: `<yellow>[compiling]</yellow> File "<cyan>${this.relPath}</cyan>"`
+        });
+
+        // prod
+        if (params.prod || params.bundle) {
+          params.minify = true;
+          params.stripComments = true;
+          params.map = false;
+        }
+
+        let savePath;
+        if (params.outputDir === undefined) {
+          savePath = this.path.replace(/\.js$/, '.compiled.js');
+        } else {
+          savePath = __path.resolve(
+            params.outputDir,
+            this.path.replace(`${params.rootDir}/`, '')
+          );
+        }
+
+        // let exampleOnResolvePlugin = {
+        //   name: 'example',
+        //   setup(build) {
+        //     build.onResolve({ filter: /.*/ }, (args) => {
+        //       console.log(args.path);
+        //       return { path: __path.join(args.resolveDir, args.path) };
+        //       // return { path: path.join(args.resolveDir, 'public', args.path) };
+        //     });
+        //   }
+        // };
+
+        let esbuildParams: any = {
+          charset: 'utf8',
+          format: params.format,
+          logLevel: 'info',
+          ...__filter(params, (key, value) => {
+            if (Array.isArray(value) && !value.length) return false;
+            return __SJsCompiler._esbuildAcceptedSettings.indexOf(key) !== -1;
+          }),
+          entryPoints: [this.path],
+          bundle: params.bundle,
+          write: false, // write to disk bellow
+          errorLimit: 100,
+          minify: params.minify,
+          sourcemap: params.map,
+          // plugins: [exampleOnResolvePlugin],
+          ...params.esbuild
+        };
+
+        let resultObj: any;
+
+        try {
+          resultObj = await __esbuild.build(esbuildParams);
+        } catch (e) {
+          return reject(e);
+        }
+
+        async function rewriteImports(code) {
+          return '';
+
+          // const reg = /\sfrom\s['"`](.*)['"`];?/gm;
+          // let match = reg.exec(code);
+          // do {
+          //   if (!match) continue;
+          //   if (match[1].match(/^[\.\/]/)) continue;
+
+          //   // const absPath = `${__sugarConfig('storage.nodeModulesDir')}/${match[1]}`;
+          //   // if (__fs.existsSync())
+
+          //   const res = __resolve(match[1], {
+          //     fields:
+          //       params.format === 'esm'
+          //         ? ['module', 'main', 'browser']
+          //         : ['main', 'browser', 'module']
+          //   });
+
+          //   if (res) {
+          //     const list = await pipeFrom(
+          //       __dependencyTree(res, {
+          //         // cache: true
+          //       })
+          //     );
+
+          //     nativeConsole.log(list);
+
+          //     code = code.replace(
+          //       match[0],
+          //       ` from "${res.replace(__sugarConfig('storage.rootDir'), '')}";`
+          //     );
+          //   }
+          // } while ((match = reg.exec(code)) !== null);
+          // return code;
+        }
+
+        const resultJs = await rewriteImports(
+          [
+            params.banner || '',
+            'let process = {};' + resultObj.outputFiles[0].text
+          ].join('\n')
+        );
+
+        // check if need to save
+        if (params.save) {
+          // build the save path
+          emit('log', {
+            type: 'file',
+            file: this.toObject(),
+            to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+            action: 'save'
+          });
+          this.writeSync(resultJs, {
+            path: savePath
+          });
+          if (params.map) {
+            // this.writeSync(result.js.map.toString(), {
+            //   path: savePath.replace(/\.js$/, '.js.map')
+            // });
+            // emit('log', {
+            //   type: 'file',
+            //   action: 'saved',
+            //   to: savePath
+            //     .replace(/\.js$/, '.js.map')
+            //     .replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+            //   file: this.toObject()
+            // });
+          }
+
+          emit('log', {
+            type: 'file',
+            action: 'saved',
+            to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+            file: this.toObject()
+          });
         }
 
         emit('log', {
-          type: 'file',
-          action: 'saved',
-          to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-          file: this.toObject()
+          type: 'separator'
+        });
+
+        if (params.watch) {
+          emit('log', {
+            value: `<blue>[watch] </blue>Watching for changes...`
+          });
+        }
+
+        return resolve({
+          js: resultJs,
+          map: undefined, // @todo      handle map
+          esbuild: resultObj,
+          ...duration.end()
         });
       }
-
-      emit('log', {
-        type: 'separator'
-      });
-
-      if (params.watch) {
-        emit('log', {
-          value: `<blue>[watch] </blue>Watching for changes...`
-        });
-      }
-
-      return resolve({
-        js: resultJs,
-        map: undefined, // @todo      handle map
-        esbuild: resultObj,
-        ...duration.end()
-      });
-    });
+    );
   }
 }
 

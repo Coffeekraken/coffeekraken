@@ -1,21 +1,21 @@
-// import __SSugarUiWebComponent from './webcomponents/SSugarUiWebComponent';
-// __SSugarUiWebComponent.define();
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./component", "./prettier"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    require("./component");
-    require("./prettier");
-    // console.log(Component);
-    // customElements.define('my-element', Component);
-    console.log('ff');
-});
-// console.log 'd';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSw2RUFBNkU7QUFDN0UsbUNBQW1DOzs7Ozs7Ozs7Ozs7SUFFbkMsdUJBQXFCO0lBQ3JCLHNCQUFvQjtJQUNwQiwwQkFBMEI7SUFDMUIsa0RBQWtEO0lBQ2xELE9BQU8sQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLENBQUM7O0FBQ2xCLG1CQUFtQiJ9
+import lodash from "dependency-tree";
+
+import defaultExport from "module-name";
+import * as name from "module-name";
+import { export1 } from "module-name";
+import { export1 as alias1 } from "module-name";
+import { export1, export2 } from "module-name";
+import { foo, bar } from "module-name/path/to/specific/un-exported/file";
+import { export1, export2 as alias2 } from "module-name";
+import defaultExport, { export1 } from "module-name";
+import defaultExport, * as name from "module-name";
+
+import defaultExport, * as name from "module-name";
+
+import "module-name";
+var promise = import("module-name");
+
+const config = require("/path/to/file");
+const { something } = require("other/thinsf");
+const { something } = require("other/thinsf.ts");
+const { something } = require("other");

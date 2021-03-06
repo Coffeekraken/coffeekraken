@@ -187,9 +187,9 @@ class SJsFile extends __SFile implements ISJsFile {
         this._currentCompilationParams = Object.assign({}, params);
         this._currentCompilationSettings = Object.assign({}, settings);
 
-        const tree = await __dependencyTree(this.path);
-        console.log(tree);
-        return;
+        // const tree = await __dependencyTree(this.path);
+        // console.log(tree);
+        // return;
 
         params = this.applyInterface('compilerParams', params);
 
@@ -247,16 +247,16 @@ class SJsFile extends __SFile implements ISJsFile {
           );
         }
 
-        // let exampleOnResolvePlugin = {
-        //   name: 'example',
-        //   setup(build) {
-        //     build.onResolve({ filter: /.*/ }, (args) => {
-        //       console.log(args.path);
-        //       return { path: __path.join(args.resolveDir, args.path) };
-        //       // return { path: path.join(args.resolveDir, 'public', args.path) };
-        //     });
-        //   }
-        // };
+        let exampleOnResolvePlugin = {
+          name: 'example',
+          setup(build) {
+            build.onResolve({ filter: /.*/ }, (args) => {
+              console.log(args.path);
+              return { path: __path.join(args.resolveDir, args.path) };
+              // return { path: path.join(args.resolveDir, 'public', args.path) };
+            });
+          }
+        };
 
         let esbuildParams: any = {
           charset: 'utf8',
@@ -272,7 +272,7 @@ class SJsFile extends __SFile implements ISJsFile {
           errorLimit: 100,
           minify: params.minify,
           sourcemap: params.map,
-          // plugins: [exampleOnResolvePlugin],
+          plugins: [exampleOnResolvePlugin],
           ...params.esbuild
         };
 
@@ -284,49 +284,49 @@ class SJsFile extends __SFile implements ISJsFile {
           return reject(e);
         }
 
-        async function rewriteImports(code) {
-          return '';
+        // async function rewriteImports(code) {
+        //   return '';
 
-          // const reg = /\sfrom\s['"`](.*)['"`];?/gm;
-          // let match = reg.exec(code);
-          // do {
-          //   if (!match) continue;
-          //   if (match[1].match(/^[\.\/]/)) continue;
+        //   // const reg = /\sfrom\s['"`](.*)['"`];?/gm;
+        //   // let match = reg.exec(code);
+        //   // do {
+        //   //   if (!match) continue;
+        //   //   if (match[1].match(/^[\.\/]/)) continue;
 
-          //   // const absPath = `${__sugarConfig('storage.nodeModulesDir')}/${match[1]}`;
-          //   // if (__fs.existsSync())
+        //   //   // const absPath = `${__sugarConfig('storage.nodeModulesDir')}/${match[1]}`;
+        //   //   // if (__fs.existsSync())
 
-          //   const res = __resolve(match[1], {
-          //     fields:
-          //       params.format === 'esm'
-          //         ? ['module', 'main', 'browser']
-          //         : ['main', 'browser', 'module']
-          //   });
+        //   //   const res = __resolve(match[1], {
+        //   //     fields:
+        //   //       params.format === 'esm'
+        //   //         ? ['module', 'main', 'browser']
+        //   //         : ['main', 'browser', 'module']
+        //   //   });
 
-          //   if (res) {
-          //     const list = await pipeFrom(
-          //       __dependencyTree(res, {
-          //         // cache: true
-          //       })
-          //     );
+        //   //   if (res) {
+        //   //     const list = await pipeFrom(
+        //   //       __dependencyTree(res, {
+        //   //         // cache: true
+        //   //       })
+        //   //     );
 
-          //     nativeConsole.log(list);
+        //   //     nativeConsole.log(list);
 
-          //     code = code.replace(
-          //       match[0],
-          //       ` from "${res.replace(__sugarConfig('storage.rootDir'), '')}";`
-          //     );
-          //   }
-          // } while ((match = reg.exec(code)) !== null);
-          // return code;
-        }
+        //   //     code = code.replace(
+        //   //       match[0],
+        //   //       ` from "${res.replace(__sugarConfig('storage.rootDir'), '')}";`
+        //   //     );
+        //   //   }
+        //   // } while ((match = reg.exec(code)) !== null);
+        //   // return code;
+        // }
 
-        const resultJs = await rewriteImports(
-          [
-            params.banner || '',
-            'let process = {};' + resultObj.outputFiles[0].text
-          ].join('\n')
-        );
+        // const resultJs = await rewriteImports(
+        //   [
+        //     params.banner || '',
+        //     'let process = {};' + resultObj.outputFiles[0].text
+        //   ].join('\n')
+        // );
 
         // check if need to save
         if (params.save) {

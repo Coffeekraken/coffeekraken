@@ -3,6 +3,7 @@
 import SClass, { ISClass } from '../class/SClass';
 import __minimatch from 'minimatch';
 import __deepMerge from '../object/deepMerge';
+import __uniqid from '../string/uniqid';
 
 /**
  * @name                  SEventEmitter
@@ -126,7 +127,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  static pipe(
+  static async pipe(
     sourceSEventEmitter: ISEventEmitter,
     destSEventEmitter: ISEventEmitter,
     settings?: ISEventEmitterPipeSettings
@@ -140,8 +141,14 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       filter: undefined,
       ...(settings || {})
     };
+
     // listen for all on the source promise
-    sourceSEventEmitter.on(set.events || '*', (value, metas) => {
+    sourceSEventEmitter.on(set.events || '*', async (value, metas) => {
+      // avoid repeating the "answer...." events
+      if (metas.event.match(/^answer\..*/)) {
+        return;
+      }
+
       // check excluded stacks
       if (set.exclude && set.exclude.indexOf(metas.event) !== -1) return;
       // check if we have a filter setted
@@ -186,6 +193,13 @@ class SEventEmitter extends SClass implements ISEventEmitter {
           }
           metas.event = emitStack;
         }
+
+        if (metas.askId) {
+          destSEventEmitter.on(`${metas.event}:1`, (value, onMetas) => {
+            sourceSEventEmitter.emit(`answer.${metas.askId}`, value);
+          });
+        }
+
         // emit on the destination promise
         destSEventEmitter.emit(metas.event, value, {
           ...metas,
@@ -283,6 +297,10 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         settings || {}
       )
     );
+
+    // this.on('answer', (value) => {
+    //   console.log('ANSEER', value);
+    // });
   }
 
   /**
@@ -359,6 +377,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
   /**
    * @name          emit
    * @type          Function
+   * @async
    *
    * This is the method that allows you to emit the callbacks like "catch", "finally", etc... without actually resolving the Promise itself
    *
@@ -370,10 +389,31 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  emit(event: string, value: any, metas?: ISEventEmitterMetas): ISEventEmitter {
-    // triger the passed event
-    this._emitEvents(event, value, metas);
-    return <any>this;
+  emit(event: string, value: any, metas?: ISEventEmitterMetas): any {
+    return new Promise(async (resolve, reject) => {
+      const finalMetas = {
+        ...(metas || {})
+      };
+      let isFirstLevel = !finalMetas.level;
+
+      // check if is an asking
+      if (!finalMetas.askId && isFirstLevel) {
+        if ((value && value.ask === true) || event === 'ask') {
+          finalMetas.askId = __uniqid();
+          finalMetas.ask = true;
+        }
+      }
+
+      if (isFirstLevel && finalMetas.askId) {
+        this.on(`answer.${finalMetas.askId}:1`, (value, finalMetas) => {
+          resolve(value);
+        });
+        this._emitEvents(event, value, finalMetas);
+      } else {
+        const res = await this._emitEvents(event, value, finalMetas);
+        return resolve(res);
+      }
+    });
   }
 
   /**
@@ -590,7 +630,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         source: (<any>this).id,
         path: undefined,
         time: Date.now(),
-        level: 1
+        level: 1,
+        id: __uniqid()
       },
       metas
     );
@@ -623,19 +664,19 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       }
 
       // call the callback function
-      let callbackResult = item.callback(
+      let callbackResult = await item.callback(
         currentCallbackReturnedValue,
         metasObj
       );
-      //   // check if the callback result is a promise
-      //   if (callbackResult && !callbackResult.restorePromiseBehavior) {
-      //     callbackResult = await callbackResult;
-      //   }
 
       if (callbackResult !== undefined) {
         // if the settings tells that we have to pass each returned value to the next callback
         currentCallbackReturnedValue = callbackResult;
       }
+    }
+
+    if (!eventStackArray.length && metasObj.askId) {
+      this.emit(`answer.${metasObj.askId}`, currentCallbackReturnedValue);
     }
 
     return currentCallbackReturnedValue;

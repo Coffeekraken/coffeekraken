@@ -1,6 +1,8 @@
 import __deepMerge from '../../object/deepMerge';
 import __SStdio from '../SStdio';
 import __SNotification from '../../notification/SNotification';
+import __wait from '../../time/wait';
+import __inquirer from 'inquirer';
 
 import { ISEventEmitter } from '../../event/SEventEmitter';
 
@@ -92,6 +94,22 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
     this.sources.forEach((source) => {
       source.on('notification', (notificationObj, metas) => {
         this._notifier.notify(notificationObj);
+      });
+    });
+
+    // "ask" event
+    this.sources.forEach((source) => {
+      source.on('ask', async (askObj, metas) => {
+        switch (askObj.type.toLowerCase()) {
+          case 'boolean':
+            const res = await __inquirer.prompt({
+              ...askObj,
+              type: 'confirm',
+              name: 'value'
+            });
+            return res.value;
+            break;
+        }
       });
     });
 

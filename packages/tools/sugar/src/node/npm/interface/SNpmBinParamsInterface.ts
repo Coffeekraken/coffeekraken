@@ -7,9 +7,9 @@
  * @todo      tests
  */
 
-import _SInterface from '../../class/SInterface';
+import _SInterface from '../../interface/SInterface';
 
-export default class SNpmBinInterface extends _SInterface {
+export default class SNpmBinParamsInterface extends _SInterface {
   static definition = {
     action: {
       type: 'String',

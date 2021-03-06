@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import _SProcess from '../process/SProcess';
-import _SNpmBinInterface from './interface/SNpmBinInterface';
+import _SNpmBinParamsInterface from './interface/SNpmBinParamsInterfaceamsInterface';
 import _deepMerge from '../object/deepMerge';
 
 /**
@@ -33,7 +33,7 @@ import _deepMerge from '../object/deepMerge';
  */
 export default class SNpmBinProcess extends _SProcess {
   static interfaces = {
-    this: _SNpmBinInterface
+    this: _SNpmBinParamsInterface
   };
 
   /**

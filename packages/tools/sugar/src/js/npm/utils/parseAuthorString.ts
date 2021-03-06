@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example       js
- * import parseAuthorString from '@coffeekraken/sugar/js/npm/parseAuthorString';
+ * import parseAuthorString from '@coffeekraken/sugar/js/npm/utils/parseAuthorString';
  * parseAuthorString("Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)")
  * // => {
  *   "name": "Olivier Bossel",

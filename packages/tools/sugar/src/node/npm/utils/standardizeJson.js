@@ -27,7 +27,7 @@ const parseAuthorString_1 = __importDefault(require("./parseAuthorString"));
  * @todo      tests
  *
  * @example       js
- * import standardizeJson from '@coffeekraken/sugar/js/npm/standardizeJson';
+ * import standardizeJson from '@coffeekraken/sugar/js/npm/utils/standardizeJson';
  * standardizeJson({
  *    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)"
  * }); // => {

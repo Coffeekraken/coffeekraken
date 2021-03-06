@@ -2,7 +2,7 @@
 
 import __packageRoot from '../../../path/packageRoot';
 import __fs from 'fs';
-import __standardizeJson from '../../../npm/standardizeJson';
+import __standardizeJson from '../../../npm/utils/standardizeJson';
 
 /**
  * @name            packageJsonMiddleware

@@ -28,7 +28,7 @@ import __isClass from '../is/class';
  * @todo        tests
  *
  * @example             js
- * import SCache from '@coffeekraken/sugar/js/cache/SCache';
+ * import SCache from '@coffeekraken/s-cache';
  * const cache = new SCache({
  *  ttl: '10s' // 10 seconds
  * });

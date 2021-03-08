@@ -7,7 +7,7 @@ import __parseHtml from '../../console/parseHtml';
 import __color from '../../color/color';
 import __escapeStack from '../../terminal/escapeStack';
 import __activeSpace from '../../core/activeSpace';
-import __SPromise from '../../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name                  SBlessedPopup

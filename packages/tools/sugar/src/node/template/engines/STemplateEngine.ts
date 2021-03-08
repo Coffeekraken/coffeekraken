@@ -5,7 +5,7 @@ import __deepMerge from '../../object/deepMerge';
 import __sugarConfig from '../../config/sugar';
 import __SClass from '../../class/SClass';
 
-import { ISPromise } from '../../promise/SPromise';
+import { ISPromise } from '@coffeekraken/s-promise';
 
 /**
  * @name          STemplateEngine

@@ -1,5 +1,5 @@
 import __folderPath from '../fs/folderPath';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '../object/deepMerge';
 import __packageRoot from '../path/packageRoot';
 import __glob from 'glob';
@@ -18,7 +18,7 @@ import __wait from '../time/wait';
 import __SFile from '../fs/SFile';
 import __clone from '../object/clone';
 import __writeFileSync from '../fs/writeFileSync';
-import __SCache from '../cache/SCache';
+import __SCache from '@coffeekraken/s-cache';
 
 /**
  * @name                SDocMap

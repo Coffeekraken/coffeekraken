@@ -15,7 +15,7 @@ import __packageJson from '../../package/json';
 import __SNotification from '../../notification/SNotification';
 import __ora from 'ora';
 import __clone from '../../object/clone';
-import __SPromise from '../../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __SStdio from '../../stdio/SStdio';
 import __quotes from 'inspirational-quotes';
 // import __SIpc from '../../ipc/SIpc';

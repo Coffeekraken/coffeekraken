@@ -1,7 +1,7 @@
 import { ISNotificationAdapter, ISNotificationObj } from '../SNotification';
 import __SBlessedNotification from '../../blessed/notification/SBlessedNotification';
 import __uniqid from '../../string/uniqid';
-import __SPromise from '../../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name            blessedSNotificationAdapter

@@ -1,7 +1,7 @@
 import { ISNotificationAdapter, ISNotificationObj } from '../SNotification';
 import __notifier from 'node-notifier';
 import __uniqid from '../../string/uniqid';
-import __SPromise from '../../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name            nodeSNotificationAdapter

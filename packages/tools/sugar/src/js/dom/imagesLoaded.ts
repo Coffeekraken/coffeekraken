@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __imageLoaded from './imageLoaded';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name      imagesLoaded

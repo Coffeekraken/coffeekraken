@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __uniqid from '../string/uniqid';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import { IPC as __IPC } from 'node-ipc';
 import __deepMerge from '../object/deepMerge';
 import __isChildProcess from '../is/childProcess';

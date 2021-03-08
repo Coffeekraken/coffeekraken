@@ -8,7 +8,7 @@ import __glob from 'glob';
 import __STemplateEngine from './engines/STemplateEngine';
 import __SClass from '../class/SClass';
 
-import __SPromise, { ISPromise } from '../promise/SPromise';
+import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
 import { ISTemplateEngine } from './engines/STemplateEngine';
 
 /**

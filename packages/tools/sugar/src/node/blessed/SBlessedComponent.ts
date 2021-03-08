@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __blessed from 'blessed';
 import __deepMerge from '../object/deepMerge';
 import __color from '../color/color';

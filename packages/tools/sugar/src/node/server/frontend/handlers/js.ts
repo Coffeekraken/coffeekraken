@@ -2,7 +2,7 @@
 
 import __SDuration from '../../../time/SDuration';
 import __SJsCompiler from '../../../js/SJsCompiler';
-import __SPromise from '../../../promise/SPromise';
+import __SPromise from '../@coffeekraken/s-promise';
 
 /**
  * @name                js

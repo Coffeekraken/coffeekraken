@@ -2,7 +2,7 @@
 
 import __STemplateEngine from './STemplateEngine';
 import __deepMerge from '../../object/deepMerge';
-import __SPromise from '../../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __sugarConfig from '../../config/sugar';
 import __fs from 'fs';
 import __execPhp from 'exec-php';

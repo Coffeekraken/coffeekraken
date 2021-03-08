@@ -1,3 +1,5 @@
+import __isNode from '../node/is/node';
+
 export default {
   resolve: {
     /**
@@ -37,6 +39,32 @@ export default {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    fields: ['main', 'module', 'browser']
+    fields: ['main', 'module', 'browser'],
+
+    /**
+     * @mame          builtInModules
+     * @namespace     sugar.config.module.resolve
+     * @type          Boolean
+     * @default       isNode() ? true : false
+     *
+     * Specify if you want to take care of built-in modules for node like "fs", "path", etc...
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    builtInModules: __isNode() ? true : false,
+
+    /**
+     * @mame          preferExports
+     * @namespace     sugar.config.module.resolve
+     * @type          Boolean
+     * @default       true
+     *
+     * Specify if you want to check the "exports" field before the specified ones in the "fields" setting
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    preferExports: true
   }
 };

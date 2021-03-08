@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SPromise from '../../../promise/SPromise';
+import __SPromise from '../@coffeekraken/s-promise';
 import __STsCompiler from '../../../typescript/compile/STsCompiler';
 import __SDuration from '../../../time/SDuration';
 import __STsCompileInterface from '../../../typescript/compile/interface/STsCompileInterface';

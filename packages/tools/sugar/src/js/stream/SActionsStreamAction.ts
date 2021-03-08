@@ -2,7 +2,7 @@
 // @shared
 
 import __deepMerge from '../object/deepMerge';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __uniqid from '../string/uniqid';
 import __validatedefinitionect from '../validation/object/validatedefinitionect';
 

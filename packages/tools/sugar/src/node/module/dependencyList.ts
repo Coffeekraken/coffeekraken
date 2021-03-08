@@ -1,4 +1,4 @@
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __dependencyTree from './dependencyTree';
 import __deepMap from '../object/deepMap';
 

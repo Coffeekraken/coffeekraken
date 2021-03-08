@@ -2,7 +2,7 @@
 // @shared
 
 import __convert from './convert';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '../object/deepMerge';
 
 /**

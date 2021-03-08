@@ -7,7 +7,7 @@ import __path from 'path';
 import __getExt from '../fs/extension';
 import __deepMerge from '../object/deepMerge';
 import __toString from '../string/toString';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __SError from '../error/SError';
 import __STemplate from './STemplate';
 import __unique from '../array/unique';

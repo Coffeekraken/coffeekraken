@@ -31,7 +31,7 @@ import __isPath from '../is/path';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default (sources, stdio, settings = {}) => {
+export default (sources, stdio: any = 'inherit', settings = {}) => {
   if (!Array.isArray(sources)) sources = [sources];
 
   let stdioInstance: any;

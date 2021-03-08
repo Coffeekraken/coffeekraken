@@ -1,1 +1,0 @@
-../../../js/promise/__tests__/SPromise.test.ts

@@ -3,7 +3,7 @@ import __isPath from '../../is/path';
 import __isClass from '../../is/class';
 import __isPlain from '../../is/plainObject';
 import __getFilename from '../../fs/filename';
-import __SEventEmitter from '../../promise/SPromise';
+import __SEventEmitter from '@coffeekraken/s-promise';
 import __SError from '../../error/SError';
 import __toString from '../../string/toString';
 import __SSugarAppModuleSettingsInterface from './interface/SSugarAppModuleSettingsInterface';

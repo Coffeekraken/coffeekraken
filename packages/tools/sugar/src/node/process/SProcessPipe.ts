@@ -1,7 +1,7 @@
 // @to-work
 import __isClass from '../is/class';
 import __SProcess from './SProcess';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __SEventEmitter from '../event/SEventEmitter';
 import __deepMerge from '../object/deepMerge';
 import __typeof from '../value/typeof';

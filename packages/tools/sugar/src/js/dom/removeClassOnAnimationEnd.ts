@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __addEventListenerOnce from './addEventListenerOnce';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name      removeClassOnAnimationEnd

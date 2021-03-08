@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __copy from '../clipboard/copy';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '../object/deepMerge';
 import __packageRoot from '../path/packageRoot';
 import __packageJson from '../package/json';

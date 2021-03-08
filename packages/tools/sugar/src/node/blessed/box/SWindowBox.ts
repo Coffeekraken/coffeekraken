@@ -7,7 +7,7 @@ import __parseHtml from '../../console/parseHtml';
 import __countLine from '../../string/countLine';
 import __hotkey from '../../keyboard/hotkey';
 import __color from '../../color/color';
-import __SPromise from '../../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __multiple from '../../class/multipleExtends';
 import __activeSpace from '../../core/activeSpace';
 import __escapeStack from '../../terminal/escapeStack';

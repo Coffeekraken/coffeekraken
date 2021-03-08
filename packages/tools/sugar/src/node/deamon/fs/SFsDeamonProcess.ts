@@ -2,7 +2,7 @@
 
 import __SProcess from '../../process/SProcess';
 import __chokidar from 'chokidar';
-import __SPromise from '../../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '../../object/deepMerge';
 import __SFile from '../../fs/SFile';
 import __packageRoot from '../../path/packageRoot';

@@ -1,0 +1,1 @@
+../../js/adapters/SCacheAdapter.ts

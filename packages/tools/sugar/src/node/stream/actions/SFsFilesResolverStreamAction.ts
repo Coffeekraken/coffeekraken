@@ -6,7 +6,7 @@ import __glob from 'glob';
 import __deepMerge from '../../object/deepMerge';
 import __fs from 'fs';
 import __packageRoot from '../../path/packageRoot';
-import __SPromise from '../../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __SError from '../../error/SError';
 import __SInterface from '../../class/SInterface';
 import __extractGlob from '../../glob/extractGlob';

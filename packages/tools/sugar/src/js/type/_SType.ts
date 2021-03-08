@@ -3,7 +3,7 @@
 
 import __SError from '../error/SError';
 import __map from '../iterable/map';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __getExtendsStack from '../class/getExtendsStack';
 import __typeOf from '../value/typeof';
 import __uniquid from '../string/uniqid';

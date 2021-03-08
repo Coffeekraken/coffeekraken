@@ -9,7 +9,7 @@ import __deepMerge from '../object/deepMerge';
 import __parseString from '../string/parse';
 import __uniqid from '../string/uniqid';
 import __micromatch from 'micromatch';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __clone from '../object/clone';
 
 /**

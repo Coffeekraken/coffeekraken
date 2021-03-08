@@ -3,11 +3,11 @@
 import __uniquid from '../string/uniqid';
 import __deepMerge from '../object/deepMerge';
 import { spawn as __spawn } from 'child_process';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __onProcessExit from './onProcessExit';
 import __SDuration from '../time/SDuration';
 
-import { ISPromise } from '../../promise/SPromise';
+import { ISPromise } from '@coffeekraken/s-promise';
 import { SpawnOptions } from 'child_process';
 
 /**

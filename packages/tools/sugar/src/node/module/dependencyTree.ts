@@ -1,5 +1,5 @@
-import __SPromise from '../promise/SPromise';
-import __SCache from '../cache/SCache';
+import __SPromise from '@coffeekraken/s-promise';
+import __SCache from '@coffeekraken/s-cache';
 import __dependencyTree from 'dependency-tree';
 import __deepMerge from '../object/deepMerge';
 import __fs from 'fs';

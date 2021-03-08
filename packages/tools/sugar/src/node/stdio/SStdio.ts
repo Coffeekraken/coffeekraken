@@ -2,7 +2,7 @@
 
 import __deepMerge from '../object/deepMerge';
 import __minimatch from 'minimatch';
-import __SPromise, { ISPromise } from '../promise/SPromise';
+import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
 import __SClass, { ISClass } from '../class/SClass';
 import __SEventEmitter, { ISEventEmitter } from '../event/SEventEmitter';
 import __SBlessedStdio from './blessed/SBlessedStdio';

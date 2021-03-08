@@ -25,6 +25,14 @@ class ResolveSettingsInterface extends __SInterface {
     fields: {
       type: 'Array<String>',
       default: __sugarConfig('module.resolve.fields')
+    },
+    buildInModules: {
+      type: 'Boolean',
+      default: __sugarConfig('module.resolve.builtInModules')
+    },
+    preferExports: {
+      type: 'Boolean',
+      default: __sugarConfig('module.resolve.preferExports')
     }
   };
 }

@@ -6,7 +6,7 @@ import __render from '../../../template/render';
 import __STemplate from '../../../template/STemplate';
 import __fs from 'fs';
 import __SDuration from '../../../time/SDuration';
-import __SPromise, { reject } from '../../../promise/SPromise';
+import __SPromise, { reject } from '../@coffeekraken/s-promise';
 
 /**
  * @name                views

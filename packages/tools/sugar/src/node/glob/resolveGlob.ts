@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __deepMerge from '../object/deepMerge';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __glob from 'glob';
 import __SFile from '../fs/SFile';
 import __extractGlob from './extractGlob';
@@ -107,7 +107,7 @@ function resolveGlob(globs, settings = {}) {
         if (searchReg) {
           pathes = pathes.filter((path) => {
             if (__isDirectory(path)) return false;
-            const content = __fs.readFileSync(`${finalCwd}/${path}`, 'utf8');
+            const content = __fs.readFileSync(path, 'utf8');
             const matches = content.match(searchReg);
             if (matches) {
               return true;

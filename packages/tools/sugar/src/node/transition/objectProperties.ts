@@ -4,7 +4,7 @@ import __deepMerge from '../object/deepMerge';
 import __convert from '../time/convert';
 import __STimer from '../time/STimer';
 import __availableEasingsArray from '../easing/availableEasingsArray';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name              objectProperties

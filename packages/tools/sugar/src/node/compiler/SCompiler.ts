@@ -1,4 +1,4 @@
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '../object/deepMerge';
 import __SEventEmitter from '../event/SEventEmitter';
 
@@ -18,7 +18,7 @@ import { ISInterfaceResult } from '../interface/SInterfaceResult';
  *
  * @example         js
  * import SCompiler from '@coffeekraken/sugar/node/compiler/SCompiler';
- * import SPromise from '@coffeekraken/sugar/node/promise/SPromise';
+ * import SPromise from '@coffeekraken/s-promise';
  * class MyCompiler extends SCompiler {
  *      constructor(settings = {}) {
  *          super(settings);

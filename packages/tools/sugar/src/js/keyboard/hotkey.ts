@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import hotkeys from 'hotkeys-js/dist/hotkeys.common';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 hotkeys.filter = function (event) {
   return true;
 };

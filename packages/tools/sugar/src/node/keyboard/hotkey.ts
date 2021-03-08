@@ -1,4 +1,4 @@
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __uniqid from '../string/uniqid';
 import __keypress from 'keypress';
 import __activeSpace from '../core/activeSpace';

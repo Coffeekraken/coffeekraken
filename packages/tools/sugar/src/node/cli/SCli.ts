@@ -14,7 +14,7 @@ import __SCliInterface from './interface/SCliInterface';
 import __SInterface from '../interface/SInterface';
 import __sugarHeading from '../ascii/sugarHeading';
 import __SClass from '../class/SClass';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __spawn from '../process/spawn';
 
 /**

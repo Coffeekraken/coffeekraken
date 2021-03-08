@@ -3,7 +3,7 @@
 import __getStyleProperty from './getStyleProperty';
 import __imageLoaded from './imageLoaded';
 import __unquote from '../string/unquote';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name        backgroundImageLoaded

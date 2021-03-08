@@ -5,7 +5,7 @@ import __sugarConfig from '../../config/sugar';
 import __deepMerge from '../../object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
-import __SPromise from '../../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __express from 'express';
 import __trimLines from '../../string/trimLines';
 import __SError from '../../error/SError';

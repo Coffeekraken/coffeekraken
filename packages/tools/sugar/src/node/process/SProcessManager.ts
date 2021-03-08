@@ -5,7 +5,7 @@ import __argsToObject from '../cli/argsToObject';
 import __isClass from '../is/class';
 import __isChildProcess from '../is/childProcess';
 import __packageRoot from '../path/packageRoot';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __SProcessManagerInterface from './interface/SProcessManagerInterface';
 import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';

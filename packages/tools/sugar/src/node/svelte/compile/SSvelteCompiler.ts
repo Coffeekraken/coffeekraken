@@ -5,7 +5,7 @@ import __SInterface from '../../interface/SInterface';
 import __sugarConfig from '../../config/sugar';
 import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
 import __SSvelteFile from '../SSvelteFile';
-import __SPromise from '../../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __absolute from '../../path/absolute';
 import __isGlob from '../../is/glob';
 import __glob from 'glob';

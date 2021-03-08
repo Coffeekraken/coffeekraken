@@ -1,4 +1,4 @@
-import { ISPromise } from '../../promise/SPromise';
+import { ISPromise } from '@coffeekraken/s-promise';
 
 export interface IWatchSettings {
   SFile?: boolean;

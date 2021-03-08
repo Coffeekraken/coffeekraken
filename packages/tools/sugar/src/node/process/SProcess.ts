@@ -4,7 +4,7 @@ import __convert from '../time/convert';
 import __wait from '../time/wait';
 import __isClass from '../is/class';
 import __onProcessExit from './onProcessExit';
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '../object/deepMerge';
 import __packageRoot from '../path/packageRoot';
 import __isChildProcess from '../is/childProcess';
@@ -31,7 +31,7 @@ import { ILog } from '../log/log';
 import { ISpawnSettings } from './spawn';
 import { ISClass as __ISClass } from '../class/SClass';
 import { ISStdio } from '../stdio/SStdio';
-import { ISPromise } from '../promise/SPromise';
+import { ISPromise } from '@coffeekraken/s-promise';
 import { ISEventEmitter } from '../event/SEventEmitter';
 import { ISInterface, ISInterfaceCtor } from '../interface/SInterface';
 

@@ -8,7 +8,7 @@ import __sugarConfig from '../../config/sugar';
 import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
 import __STsFile from '../STsFile';
 import __SFile from '../../fs/SFile';
-import __SPromise from '../../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __absolute from '../../path/absolute';
 import __isGlob from '../../is/glob';
 import __glob from 'glob';

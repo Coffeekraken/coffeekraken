@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SPromise from '../promise/SPromise';
+import __SPromise from '@coffeekraken/s-promise';
 import __isInViewport from './isInViewport';
 import __whenInViewport from './whenInViewport';
 import __whenOutOfViewport from './whenOutOfViewport';

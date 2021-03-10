@@ -33,6 +33,16 @@ class ResolveSettingsInterface extends __SInterface {
     preferExports: {
       type: 'Boolean',
       default: __sugarConfig('module.resolve.preferExports')
+    },
+    method: {
+      type: 'String',
+      values: ['import', 'require'],
+      default: __sugarConfig('module.resolve.method')
+    },
+    target: {
+      type: 'String',
+      values: ['node', 'default'],
+      default: __sugarConfig('module.resolve.target')
     }
   };
 }

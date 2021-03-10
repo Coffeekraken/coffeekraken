@@ -29,7 +29,7 @@ export interface IExistsSettings {
   file: boolean;
   symlink: boolean;
 }
-export default function exists(
+export default function existsSync(
   path: string,
   settings?: Partial<IExistsSettings>
 ): boolean {
@@ -47,7 +47,9 @@ export default function exists(
     stats = __fs.statSync(path);
     if (!stats) return false;
     isSymlink = stats.isSymbolicLink();
-  } catch (e) {}
+  } catch (e) {
+    return false;
+  }
 
   if (isSymlink && !set.symlink) return false;
   if (stats.isDirectory() && !set.directory) return false;

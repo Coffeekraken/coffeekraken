@@ -7,7 +7,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __onProcessExit from './onProcessExit';
 import __SDuration from '../time/SDuration';
 
-import { ISPromise } from '@coffeekraken/s-promise';
+import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
 import { SpawnOptions } from 'child_process';
 
 /**
@@ -59,7 +59,7 @@ export default function spawn(
   command: string,
   args: string[] = [],
   settings: ISpawnSettings = {}
-): ISPromise {
+): __SPromise {
   let childProcess;
   let serverData,
     isCancel = false;

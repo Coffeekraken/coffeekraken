@@ -115,6 +115,7 @@ export interface ISPromise extends Promise, ISEventEmitter {
   resolve: ISPromiseResolveFn;
   reject: ISPromiseRejectFn;
   cancel: ISPromiseCancelFn;
+  on(event: string, callback: function): ISEventEmitter;
   catch(...args: any): ISPromise;
   finally(...args: any): ISPromise;
   resolved(...args: any): ISPromise;
@@ -122,7 +123,9 @@ export interface ISPromise extends Promise, ISEventEmitter {
   canceled(...args: any): ISPromise;
 }
 
-class SPromise extends __SClass.extends(Promise) {
+class SPromise
+  extends __SClass.extends(Promise)
+  implements ISPromise, ISEventEmitter {
   /**
    * @name        treatAsValue
    * @type        Function
@@ -147,6 +150,8 @@ class SPromise extends __SClass.extends(Promise) {
 
   private _promiseState: ISPromiseStateType = 'pending';
   private _resolvers: ISPromiseResolvers;
+
+  on: function;
 
   /**
    * @name                  constructor

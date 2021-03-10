@@ -182,7 +182,6 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
       });
 
       on('cancel', () => {
-        console.log('CAN');
         pool.cancel();
       });
 

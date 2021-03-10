@@ -2,6 +2,10 @@ import __minimatch from 'minimatch';
 import __isNode from '../is/node';
 import __isPlainObject from '../is/plainObject';
 import __sugarConfig from '../config/sugar';
+import __fs from 'fs';
+import __path from 'path';
+import __extension from '../fs/extension';
+import __checkPathWithMultipleExtensions from '../fs/checkPathWithMultipleExtensions';
 
 /**
  * @name        exportsMatch
@@ -26,6 +30,7 @@ import __sugarConfig from '../config/sugar';
  */
 export interface IExportsMatchSettings {
   method: 'require' | 'import';
+  target: 'node' | 'default';
   extensions: string;
 }
 export default function exportsMatch(
@@ -38,6 +43,7 @@ export default function exportsMatch(
 
   const set: IExportsMatchSettings = {
     method: 'import',
+    target: __isNode() ? 'node' : 'default',
     extensions: __sugarConfig('module.resolve.extensions'),
     ...(settings || {})
   };
@@ -65,12 +71,13 @@ export default function exportsMatch(
       Object.keys(modulesSubpaths).indexOf('default') !== -1
     ) {
       // check "node" and "default" keys
-      if (__isNode() && modulesSubpaths.node !== undefined) {
+      if (set.target === 'node' && modulesSubpaths.node !== undefined) {
         modulesSubpaths = modulesSubpaths.node;
       } else if (modulesSubpaths.default) {
         modulesSubpaths = modulesSubpaths.default;
       }
-    } else if (
+    }
+    if (
       Object.keys(modulesSubpaths).indexOf('import') !== -1 ||
       Object.keys(modulesSubpaths).indexOf('require') !== -1
     ) {
@@ -80,11 +87,67 @@ export default function exportsMatch(
       } else if (modulesSubpaths.require) {
         modulesSubpaths = modulesSubpaths.require;
       }
-    } else if (__isPlainObject(modulesSubpaths)) {
+    }
+    if (__isPlainObject(modulesSubpaths)) {
       // check if a key match
       for (let key in modulesSubpaths) {
         if (__minimatch(modulePath, key.replace(/^\.\//, ''))) {
-          modulesSubpaths = modulesSubpaths[key];
+          // console.log('MATCH', modulePath, key);
+          const matchStr = key.replace(/^\.\//, '').replace(/\/\*$/, '');
+
+          const modulePathExt = __extension(modulePath);
+          const internalPackageSubPathExt = __extension(modulesSubpaths[key]);
+
+          // check extension match
+          if (
+            internalPackageSubPathExt &&
+            modulePathExt &&
+            internalPackageSubPathExt !== modulePathExt
+          )
+            continue;
+
+          const internalPath = modulesSubpaths[key]
+            .replace(/^\.\//, '')
+            .replace(/\/\*(\.[a-zA-Z0-9]+)?/, '');
+
+          const realPath = modulePath
+            .replace(`${matchStr}/`, '')
+            .replace(matchStr, '');
+
+          let potentialPath: string;
+
+          // check if a file exists
+          if (internalPackageSubPathExt) {
+            const potentialPathArray = [packageDir];
+            if (internalPath && internalPath.trim() !== '')
+              potentialPathArray.push(internalPath);
+            if (realPath && realPath.trim() !== '')
+              potentialPathArray.push(realPath);
+            potentialPath = potentialPathArray.join('/');
+            if (!modulePathExt)
+              potentialPath += `.${internalPackageSubPathExt}`;
+          } else {
+            // if modulePath has extension
+            const potentialPathArray = [packageDir];
+            if (internalPath && internalPath.trim() !== '')
+              potentialPathArray.push(internalPath);
+            if (realPath && realPath.trim() !== '')
+              potentialPathArray.push(realPath);
+            potentialPath = potentialPathArray.join('/');
+
+            // try to get a file that correspond to this path
+            potentialPath = __checkPathWithMultipleExtensions(
+              potentialPath,
+              set.extensions
+            );
+          }
+
+          if (!potentialPath) return undefined;
+
+          // check if the potential image exists and return it
+          if (__fs.existsSync(potentialPath)) return potentialPath;
+
+          modulesSubpaths = matchStr;
           break;
         }
       }
@@ -102,23 +165,12 @@ export default function exportsMatch(
     }
   }
 
-  console.log('found', modulesSubpaths, internalMathPath);
-
   if (typeof modulesSubpaths === 'string') {
+    const potentialPath = __path.resolve(packageDir, modulesSubpaths);
+    // check is the file exists inside the package
+    if (__fs.existsSync(potentialPath)) return potentialPath;
   }
 
-  //   let internalMathPath: string;
-
-  //   if (__isPlainObject(modulesSubpaths)) {
-
-  //   } else if (typeof modulesSubpaths === 'string') {
-  //       internalMathPath = modulesSubpaths;
-  //   }
-
-  //   // if we don't have any match, return undefined
-  //   if (!internalMathPath) return;
-
-  // check if the matched internal
-
-  return 'coco';
+  // nothing has been found so we return undefined
+  return undefined;
 }

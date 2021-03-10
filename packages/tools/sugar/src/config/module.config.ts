@@ -65,6 +65,32 @@ export default {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    preferExports: true
+    preferExports: true,
+
+    /**
+     * @mame          method
+     * @namespace     sugar.config.module.resolve
+     * @type          String
+     * @default       import
+     *
+     * Specify the default method to use when requesting to resolve a path. Can be "import" or "require"
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    method: 'import',
+
+    /**
+     * @mame          target
+     * @namespace     sugar.config.module.resolve
+     * @type          String
+     * @default       isNode() ? 'node' : 'default'
+     *
+     * Specify the default target to use when requesting to resolve a path. Can be "node" or "default"
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    target: __isNode() ? 'node' : 'default'
   }
 };

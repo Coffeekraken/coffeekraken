@@ -58,6 +58,8 @@ export interface ISEventEmitterMetas {
   path?: string;
   time?: number;
   level?: number;
+  ask?: boolean;
+  askId?: string;
 }
 
 export interface ISEventEmitterCallbackFn {
@@ -391,7 +393,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    */
   emit(event: string, value: any, metas?: ISEventEmitterMetas): any {
     return new Promise(async (resolve, reject) => {
-      const finalMetas = {
+      const finalMetas: any = {
         ...(metas || {})
       };
       let isFirstLevel = !finalMetas.level;

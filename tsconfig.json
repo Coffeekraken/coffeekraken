@@ -10,14 +10,14 @@
   "compilerOptions": {
     "allowJs": true,
     "strict": true,
-    // "sourceMap": true,
+    "traceResolutions": true,
+    "preserveSymlinks": true,
     "inlineSourceMap": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": false,
     "noImplicitAny": false,
     "noStrictGenericChecks": false,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
+    "allowSyntheticDefaultImports": true
   }
 }

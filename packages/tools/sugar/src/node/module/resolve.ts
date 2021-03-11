@@ -131,8 +131,10 @@ export default function resolve(
   }
 
   // abs path
+  // @ts-ignore
   if (absPath && __isFile(absPath)) return absPath;
 
+  // @ts-ignore
   if (packageJson && moduleDirPath) {
     function exportsMatch() {
       const matchPath = __exportsMatch(

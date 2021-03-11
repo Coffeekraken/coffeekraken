@@ -33,7 +33,7 @@ export interface IExistsSettings {
 export default async function exists(
   path: string,
   settings?: Partial<IExistsSettings>
-): boolean {
+): Promise<boolean> {
   const set: IExistsSettings = {
     directory: true,
     file: true,

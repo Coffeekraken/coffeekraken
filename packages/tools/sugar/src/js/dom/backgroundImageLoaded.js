@@ -8,7 +8,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./getStyleProperty", "./imageLoaded", "../string/unquote", "../promise/SPromise"], factory);
+        define(["require", "exports", "./getStyleProperty", "./imageLoaded", "../string/unquote", "@coffeekraken/s-promise"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -16,7 +16,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     var getStyleProperty_1 = __importDefault(require("./getStyleProperty"));
     var imageLoaded_1 = __importDefault(require("./imageLoaded"));
     var unquote_1 = __importDefault(require("../string/unquote"));
-    var SPromise_1 = __importDefault(require("../promise/SPromise"));
+    var s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
     /**
      * @name        backgroundImageLoaded
      * @namespace           sugar.js.dom
@@ -43,7 +43,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function backgroundImageLoaded($elm) {
         var isCancelled = false, $img;
-        var promise = new SPromise_1.default(function (_a) {
+        var promise = new s_promise_1.default(function (_a) {
             var resolve = _a.resolve, reject = _a.reject, emit = _a.emit;
             // get the background-image property from computed style
             var backgroundImage = getStyleProperty_1.default($elm, 'background-image');
@@ -72,4 +72,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = backgroundImageLoaded;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFja2dyb3VuZEltYWdlTG9hZGVkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYmFja2dyb3VuZEltYWdlTG9hZGVkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLHdFQUFvRDtJQUNwRCw4REFBMEM7SUFDMUMsOERBQTBDO0lBQzFDLGlFQUE2QztJQUU3Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F1Qkc7SUFDSCxTQUFTLHFCQUFxQixDQUFDLElBQUk7UUFDakMsSUFBSSxXQUFXLEdBQUcsS0FBSyxFQUNyQixJQUFJLENBQUM7UUFDUCxJQUFNLE9BQU8sR0FBRyxJQUFJLGtCQUFVLENBQzVCLFVBQUMsRUFBeUI7Z0JBQXZCLE9BQU8sYUFBQSxFQUFFLE1BQU0sWUFBQSxFQUFFLElBQUksVUFBQTtZQUN0Qix3REFBd0Q7WUFDeEQsSUFBTSxlQUFlLEdBQUcsMEJBQWtCLENBQUMsSUFBSSxFQUFFLGtCQUFrQixDQUFDLENBQUM7WUFDckUsSUFBTSxPQUFPLEdBQUcsZUFBZSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDO1lBQ3pELElBQUksQ0FBQyxPQUFPLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLEVBQUU7Z0JBQzNCLE1BQU0sQ0FBQyxrQ0FBa0MsQ0FBQyxDQUFDO2dCQUMzQyxPQUFPO2FBQ1I7WUFDRCxjQUFjO1lBQ2QsSUFBTSxHQUFHLEdBQUcsaUJBQVMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNsQyxzQ0FBc0M7WUFDdEMsSUFBSSxHQUFHLElBQUksS0FBSyxFQUFFLENBQUM7WUFDbkIsSUFBSSxDQUFDLEdBQUcsR0FBRyxHQUFHLENBQUM7WUFDZixxQ0FBcUM7WUFDckMscUJBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLENBQUM7Z0JBQ3ZCLElBQUksQ0FBQyxXQUFXO29CQUFFLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUNsQyxDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsRUFDRDtZQUNFLEVBQUUsRUFBRSx1QkFBdUI7U0FDNUIsQ0FDRixDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUU7WUFDZCxXQUFXLEdBQUcsSUFBSSxDQUFDO1FBQ3JCLENBQUMsQ0FBQyxDQUFDO1FBQ0gsT0FBTyxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUM7UUFDdEIsT0FBTyxPQUFPLENBQUM7SUFDakIsQ0FBQztJQUNELGtCQUFlLHFCQUFxQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFja2dyb3VuZEltYWdlTG9hZGVkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYmFja2dyb3VuZEltYWdlTG9hZGVkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUVkLHdFQUFvRDtJQUNwRCw4REFBMEM7SUFDMUMsOERBQTBDO0lBQzFDLHNFQUFpRDtJQUVqRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0F1Qkc7SUFDSCxTQUFTLHFCQUFxQixDQUFDLElBQUk7UUFDakMsSUFBSSxXQUFXLEdBQUcsS0FBSyxFQUNyQixJQUFJLENBQUM7UUFDUCxJQUFNLE9BQU8sR0FBRyxJQUFJLG1CQUFVLENBQzVCLFVBQUMsRUFBeUI7Z0JBQXZCLE9BQU8sYUFBQSxFQUFFLE1BQU0sWUFBQSxFQUFFLElBQUksVUFBQTtZQUN0Qix3REFBd0Q7WUFDeEQsSUFBTSxlQUFlLEdBQUcsMEJBQWtCLENBQUMsSUFBSSxFQUFFLGtCQUFrQixDQUFDLENBQUM7WUFDckUsSUFBTSxPQUFPLEdBQUcsZUFBZSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDO1lBQ3pELElBQUksQ0FBQyxPQUFPLElBQUksQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLEVBQUU7Z0JBQzNCLE1BQU0sQ0FBQyxrQ0FBa0MsQ0FBQyxDQUFDO2dCQUMzQyxPQUFPO2FBQ1I7WUFDRCxjQUFjO1lBQ2QsSUFBTSxHQUFHLEdBQUcsaUJBQVMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUNsQyxzQ0FBc0M7WUFDdEMsSUFBSSxHQUFHLElBQUksS0FBSyxFQUFFLENBQUM7WUFDbkIsSUFBSSxDQUFDLEdBQUcsR0FBRyxHQUFHLENBQUM7WUFDZixxQ0FBcUM7WUFDckMscUJBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLENBQUM7Z0JBQ3ZCLElBQUksQ0FBQyxXQUFXO29CQUFFLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUNsQyxDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsRUFDRDtZQUNFLEVBQUUsRUFBRSx1QkFBdUI7U0FDNUIsQ0FDRixDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUU7WUFDZCxXQUFXLEdBQUcsSUFBSSxDQUFDO1FBQ3JCLENBQUMsQ0FBQyxDQUFDO1FBQ0gsT0FBTyxDQUFDLE1BQU0sR0FBRyxJQUFJLENBQUM7UUFDdEIsT0FBTyxPQUFPLENBQUM7SUFDakIsQ0FBQztJQUNELGtCQUFlLHFCQUFxQixDQUFDIn0=

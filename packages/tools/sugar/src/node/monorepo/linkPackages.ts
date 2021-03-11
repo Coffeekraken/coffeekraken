@@ -2,7 +2,7 @@
 
 import _ensureDirSync from '../fs/ensureDirSync';
 import _path from 'path';
-import _SPromise from '@coffeekraken/s-promise';
+import __parseHtml from '../console/parseHtml';
 import _findPackages from './findPackages';
 import _childProcess from 'child_process';
 import _fs from 'fs';
@@ -47,7 +47,7 @@ export default function linkPackages(settings = {}): Promise<null> {
     rootDir: process.cwd(),
     ...settings
   };
-  return new _SPromise(async ({ resolve, reject, emit }) => {
+  return new Promise(async (resolve, reject) => {
     // make sure we are in a package
     if (!_fs.existsSync(`${settings.rootDir}/package.json`)) {
       return reject(
@@ -61,9 +61,11 @@ export default function linkPackages(settings = {}): Promise<null> {
       // get json
       const packageJson = packagesObj[packagePath];
       // logs
-      emit('log', {
-        value: `<yellow>${packageJson.name}</yellow> (<cyan>${packageJson.version}</cyan>)`
-      });
+      console.log(
+        __parseHtml(
+          `\n<yellow>${packageJson.name}</yellow> ${packageJson.license} (<cyan>${packageJson.version}</cyan>)`
+        )
+      );
       // loop again in the packagesObj to create symlink in every
       // node_modules packages folders
       Object.keys(packagesObj).forEach((path) => {
@@ -96,9 +98,11 @@ export default function linkPackages(settings = {}): Promise<null> {
           `cd ${symlinkFolderPath} && rm -rf ${nameFolder} && ln -s ${relPathToDestinationModule} ${nameFolder}`
         );
         // logs
-        emit('log', {
-          value: `- Symlinked package <green>${json.name}</green>`
-        });
+        console.log(
+          __parseHtml(
+            `- Symlinked package <green>${json.name}</green> ${json.license} (<cyan>${json.version}</cyan>)`
+          )
+        );
       });
     });
     // resolvee

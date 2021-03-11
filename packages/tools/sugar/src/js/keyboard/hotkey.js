@@ -19,13 +19,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "hotkeys-js/dist/hotkeys.common", "../promise/SPromise"], factory);
+        define(["require", "exports", "hotkeys-js/dist/hotkeys.common", "@coffeekraken/s-promise"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var hotkeys_common_1 = __importDefault(require("hotkeys-js/dist/hotkeys.common"));
-    var SPromise_1 = __importDefault(require("../promise/SPromise"));
+    var s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
     hotkeys_common_1.default.filter = function (event) {
         return true;
     };
@@ -70,7 +70,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      */
     function hotkey(hotkey, settings) {
         if (settings === void 0) { settings = {}; }
-        return new SPromise_1.default(function (_a) {
+        return new s_promise_1.default(function (_a) {
             var resolve = _a.resolve, reject = _a.reject, emit = _a.emit, cancel = _a.cancel;
             // merge default settings with passed ones:
             settings = __assign({ element: null, keyup: false, keydown: true, once: false, splitKey: '+' }, settings);
@@ -90,4 +90,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = hotkey;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaG90a2V5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaG90a2V5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsa0ZBQXFEO0lBQ3JELGlFQUE2QztJQUM3Qyx3QkFBTyxDQUFDLE1BQU0sR0FBRyxVQUFVLEtBQUs7UUFDOUIsT0FBTyxJQUFJLENBQUM7SUFDZCxDQUFDLENBQUM7SUFFRjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FzQ0c7SUFDSCxTQUFTLE1BQU0sQ0FBQyxNQUFNLEVBQUUsUUFBYTtRQUFiLHlCQUFBLEVBQUEsYUFBYTtRQUNuQyxPQUFPLElBQUksa0JBQVUsQ0FDbkIsVUFBQyxFQUFpQztnQkFBL0IsT0FBTyxhQUFBLEVBQUUsTUFBTSxZQUFBLEVBQUUsSUFBSSxVQUFBLEVBQUUsTUFBTSxZQUFBO1lBQzlCLDJDQUEyQztZQUMzQyxRQUFRLGNBQ04sT0FBTyxFQUFFLElBQUksRUFDYixLQUFLLEVBQUUsS0FBSyxFQUNaLE9BQU8sRUFBRSxJQUFJLEVBQ2IsSUFBSSxFQUFFLEtBQUssRUFDWCxRQUFRLEVBQUUsR0FBRyxJQUNWLFFBQVEsQ0FDWixDQUFDO1lBQ0Ysa0JBQWtCO1lBQ2xCLHdCQUFPLENBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxVQUFDLENBQUMsRUFBRSxDQUFDO2dCQUM3Qiw0QkFBNEI7Z0JBQzVCLElBQUksQ0FBQyxPQUFPLEVBQUUsQ0FBQyxDQUFDLENBQUM7Z0JBQ2pCLDhCQUE4QjtnQkFDOUIsSUFBSSxRQUFRLENBQUMsSUFBSTtvQkFBRSxNQUFNLEVBQUUsQ0FBQztZQUM5QixDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsRUFDRDtZQUNFLEVBQUUsRUFBRSxRQUFRO1NBQ2IsQ0FDRixDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUU7WUFDZCx3QkFBTyxDQUFDLE1BQU0sQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUN6QixDQUFDLENBQUMsQ0FBQztJQUNMLENBQUM7SUFDRCxrQkFBZSxNQUFNLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaG90a2V5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaG90a2V5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsa0ZBQXFEO0lBQ3JELHNFQUFpRDtJQUNqRCx3QkFBTyxDQUFDLE1BQU0sR0FBRyxVQUFVLEtBQUs7UUFDOUIsT0FBTyxJQUFJLENBQUM7SUFDZCxDQUFDLENBQUM7SUFFRjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FzQ0c7SUFDSCxTQUFTLE1BQU0sQ0FBQyxNQUFNLEVBQUUsUUFBYTtRQUFiLHlCQUFBLEVBQUEsYUFBYTtRQUNuQyxPQUFPLElBQUksbUJBQVUsQ0FDbkIsVUFBQyxFQUFpQztnQkFBL0IsT0FBTyxhQUFBLEVBQUUsTUFBTSxZQUFBLEVBQUUsSUFBSSxVQUFBLEVBQUUsTUFBTSxZQUFBO1lBQzlCLDJDQUEyQztZQUMzQyxRQUFRLGNBQ04sT0FBTyxFQUFFLElBQUksRUFDYixLQUFLLEVBQUUsS0FBSyxFQUNaLE9BQU8sRUFBRSxJQUFJLEVBQ2IsSUFBSSxFQUFFLEtBQUssRUFDWCxRQUFRLEVBQUUsR0FBRyxJQUNWLFFBQVEsQ0FDWixDQUFDO1lBQ0Ysa0JBQWtCO1lBQ2xCLHdCQUFPLENBQUMsTUFBTSxFQUFFLFFBQVEsRUFBRSxVQUFDLENBQUMsRUFBRSxDQUFDO2dCQUM3Qiw0QkFBNEI7Z0JBQzVCLElBQUksQ0FBQyxPQUFPLEVBQUUsQ0FBQyxDQUFDLENBQUM7Z0JBQ2pCLDhCQUE4QjtnQkFDOUIsSUFBSSxRQUFRLENBQUMsSUFBSTtvQkFBRSxNQUFNLEVBQUUsQ0FBQztZQUM5QixDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsRUFDRDtZQUNFLEVBQUUsRUFBRSxRQUFRO1NBQ2IsQ0FDRixDQUFDLEVBQUUsQ0FBQyxTQUFTLEVBQUU7WUFDZCx3QkFBTyxDQUFDLE1BQU0sQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUN6QixDQUFDLENBQUMsQ0FBQztJQUNMLENBQUM7SUFDRCxrQkFBZSxNQUFNLENBQUMifQ==

@@ -8,13 +8,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./addEventListenerOnce", "../promise/SPromise"], factory);
+        define(["require", "exports", "./addEventListenerOnce", "@coffeekraken/s-promise"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var addEventListenerOnce_1 = __importDefault(require("./addEventListenerOnce"));
-    var SPromise_1 = __importDefault(require("../promise/SPromise"));
+    var s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
     /**
      * @name      removeClassOnAnimationEnd
      * @namespace           sugar.js.dom
@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     function removeClassOnAnimationEnd($elm, cls) {
-        return new SPromise_1.default(function (_a) {
+        return new s_promise_1.default(function (_a) {
             var resolve = _a.resolve;
             // listen for animation end on the element just once
             addEventListenerOnce_1.default($elm, 'animationend', function (e) {
@@ -58,4 +58,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = removeClassOnAnimationEnd;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVtb3ZlQ2xhc3NPbkFuaW1hdGlvbkVuZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlbW92ZUNsYXNzT25BbmltYXRpb25FbmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsZ0ZBQTREO0lBQzVELGlFQUE2QztJQUU3Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXNCRztJQUNILFNBQVMseUJBQXlCLENBQUMsSUFBSSxFQUFFLEdBQUc7UUFDMUMsT0FBTyxJQUFJLGtCQUFVLENBQ25CLFVBQUMsRUFBVztnQkFBVCxPQUFPLGFBQUE7WUFDUixvREFBb0Q7WUFDcEQsOEJBQXNCLENBQUMsSUFBSSxFQUFFLGNBQWMsRUFBRSxVQUFDLENBQUM7Z0JBQzdDLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQztvQkFBRSxHQUFHLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQztnQkFDckMsaUJBQWlCO2dCQUNqQixHQUFHLENBQUMsT0FBTyxDQUFDLFVBQUMsSUFBSTtvQkFDZixJQUFJLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQztnQkFDOUIsQ0FBQyxDQUFDLENBQUM7Z0JBQ0gsc0JBQXNCO2dCQUN0QixPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDYixDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsRUFDRDtZQUNFLEVBQUUsRUFBRSwyQkFBMkI7U0FDaEMsQ0FDRixDQUFDO0lBQ0osQ0FBQztJQUNELGtCQUFlLHlCQUF5QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVtb3ZlQ2xhc3NPbkFuaW1hdGlvbkVuZC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlbW92ZUNsYXNzT25BbmltYXRpb25FbmQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsZ0ZBQTREO0lBQzVELHNFQUFpRDtJQUVqRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQXNCRztJQUNILFNBQVMseUJBQXlCLENBQUMsSUFBSSxFQUFFLEdBQUc7UUFDMUMsT0FBTyxJQUFJLG1CQUFVLENBQ25CLFVBQUMsRUFBVztnQkFBVCxPQUFPLGFBQUE7WUFDUixvREFBb0Q7WUFDcEQsOEJBQXNCLENBQUMsSUFBSSxFQUFFLGNBQWMsRUFBRSxVQUFDLENBQUM7Z0JBQzdDLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQztvQkFBRSxHQUFHLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQztnQkFDckMsaUJBQWlCO2dCQUNqQixHQUFHLENBQUMsT0FBTyxDQUFDLFVBQUMsSUFBSTtvQkFDZixJQUFJLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQztnQkFDOUIsQ0FBQyxDQUFDLENBQUM7Z0JBQ0gsc0JBQXNCO2dCQUN0QixPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDYixDQUFDLENBQUMsQ0FBQztRQUNMLENBQUMsRUFDRDtZQUNFLEVBQUUsRUFBRSwyQkFBMkI7U0FDaEMsQ0FDRixDQUFDO0lBQ0osQ0FBQztJQUNELGtCQUFlLHlCQUF5QixDQUFDIn0=

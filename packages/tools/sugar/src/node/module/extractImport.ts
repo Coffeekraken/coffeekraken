@@ -2,12 +2,19 @@ import __isPath from '../is/path';
 import __fs from 'fs';
 import __path from 'path';
 import __deepMerge from '../object/deepMerge';
-import __unified from 'unified';
+import * as __acorn from 'acorn';
+import {
+  parse as __parse,
+  find as __find,
+  walk as __walk
+} from 'abstract-syntax-tree';
+import __toString from '../string/toString';
 
 /**
  * @name            extractImport
  * @namespace       sugar.node.module
  * @type            Function
+ * @status          beta
  *
  * This function simply parse a file content or a passed string directly and
  * build the list of finded "import ... from ..." as well as commonjs "require(...)".
@@ -19,6 +26,7 @@ import __unified from 'unified';
  * @return      {IExtractImportItem[]}                          An array of extracted items objects
  *
  * @todo        Enhance example
+ * @todo        Tests
  *
  * @example         js
  * import extractImports from '@coffeekraken/sugar/node/module/extractImport';
@@ -31,7 +39,12 @@ export interface IExtractImportSettings {
   import: boolean;
   require: boolean;
 }
-export interface IExtractImportItem {}
+export interface IExtractImportItem {
+  type: 'import' | 'require';
+  path: string;
+  imported: string;
+  local: string;
+}
 
 export default function extractImport(
   stringOrFilePath,
@@ -52,29 +65,71 @@ export default function extractImport(
     content = __fs.readFileSync(stringOrFilePath);
   }
 
+  const ast = __acorn.parse(content, {
+    ecmaVersion: 2020,
+    sourceType: 'module'
+  });
+
+  const finalImportsArray: IExtractImportItem[] = [];
+
   // imports
   if (set.import) {
-    const importReg = /import\s(.*)\sfrom\s['"´](.*)['"´];?/gm;
+    const importsAst = __find(ast, 'ImportDeclaration');
 
-    const importMatches = content.match(importReg);
-
-    const imports: any[] = [];
-
-    console.log(__unified.parse(importMatches.join('\n')));
-
-    importMatches.forEach((importString) => {
-      const splits = importString
-        .split(/import|from|;/)
-        .filter((l) => l.trim() !== '')
-        .map((l) => l.trim());
-      console.log(splits);
-
-      // imports.push({
-      //     type: 'import',
-
-      // })
+    importsAst.forEach((importAst) => {
+      const importObj: Partial<IExtractImportItem> = {
+        type: 'import',
+        path: importAst.source.value
+      };
+      importAst.specifiers.forEach((specifier) => {
+        const obj = Object.assign({}, importObj);
+        switch (specifier.type) {
+          case 'ImportSpecifier':
+            obj.imported = specifier.imported.name;
+            obj.local = specifier.local.name;
+            finalImportsArray.push(<IExtractImportItem>obj);
+            break;
+          case 'ImportNamespaceSpecifier':
+            obj.imported = '*';
+            obj.local = specifier.local.name;
+            finalImportsArray.push(<IExtractImportItem>obj);
+            break;
+          case 'ImportDefaultSpecifier':
+            obj.imported = 'default';
+            obj.local = specifier.local.name;
+            finalImportsArray.push(<IExtractImportItem>obj);
+            break;
+        }
+      });
     });
-  }
 
-  return [];
+    if (set.require) {
+      const variablesDeclarations = __find(ast, 'VariableDeclarator');
+
+      variablesDeclarations.forEach((varObj) => {
+        if (!varObj.init || varObj.init.type !== 'CallExpression') return;
+        const callee = varObj.init.callee;
+        if (callee.name !== 'require') return;
+
+        const requireObj: Partial<IExtractImportItem> = {
+          type: 'require',
+          path: varObj.init.arguments[0].value
+        };
+
+        if (varObj.id.type === 'Identifier') {
+          requireObj.imported = 'default';
+          requireObj.local = varObj.id.name;
+          finalImportsArray.push(<IExtractImportItem>requireObj);
+        } else if (varObj.id.type === 'ObjectPattern') {
+          varObj.id.properties.forEach((propObj) => {
+            const obj = Object.assign({}, requireObj);
+            obj.imported = propObj.key.name;
+            obj.local = propObj.key.name;
+            finalImportsArray.push(<IExtractImportItem>obj);
+          });
+        }
+      });
+    }
+  }
+  return finalImportsArray;
 }

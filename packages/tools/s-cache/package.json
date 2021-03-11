@@ -14,6 +14,6 @@
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/sugar": "^2.0.0"
+    "@coffeekraken/sugar": "file:../sugar"
   }
 }

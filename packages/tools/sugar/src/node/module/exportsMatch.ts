@@ -31,7 +31,7 @@ import __checkPathWithMultipleExtensions from '../fs/checkPathWithMultipleExtens
 export interface IExportsMatchSettings {
   method: 'require' | 'import';
   target: 'node' | 'default';
-  extensions: string;
+  extensions: string[];
 }
 export default function exportsMatch(
   packageDir: string,
@@ -114,7 +114,7 @@ export default function exportsMatch(
             .replace(`${matchStr}/`, '')
             .replace(matchStr, '');
 
-          let potentialPath: string;
+          let potentialPath: string | undefined;
 
           // check if a file exists
           if (internalPackageSubPathExt) {

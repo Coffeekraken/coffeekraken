@@ -290,16 +290,18 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "jest --silent",
-    "build.js": "rm -rf dist && babel src/js -d ./src/node/_js --copy-files --config-file ./dev/sugar.babel.config.js -w --ignore 'src/**/*.spec.js','src/**/*.test.js'"
+    "test": "jest --silent"
   },
   "toInstall": {},
   "dependencies": {
-    "@coffeekraken/s-promise": "^1.0.0",
     "@11ty/dependency-tree": "^1.0.0",
+    "@coffeekraken/s-cache": "file:../s-cache",
+    "@coffeekraken/s-promise": "file:../s-promise",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@types/blessed": "^0.1.17",
     "@types/node": "^14.14.14",
+    "abstract-syntax-tree": "^2.17.1",
+    "acorn": "^8.1.0",
     "aggregation": "^1.2.6",
     "app-root-path": "^3.0.0",
     "assign-deep": "^1.0.1",
@@ -540,12 +542,6 @@
     "yargs-parser": "^20.2.3"
   },
   "globalDependencies": {
-    "typescript": "^4.1.2"
-  },
-  "devDependencies": {
-    "prettier": "^2.2.1",
-    "snowpack": "^2.18.4",
-    "ts-loader": "^8.0.12",
-    "typescript": "^4.1.3"
+    "typescript": "^4.2.3"
   }
 }

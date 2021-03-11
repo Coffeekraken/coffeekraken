@@ -1,10 +1,5 @@
 #!/usr/bin/env node --trace-warnings --trace-uncaught
 
-import __SProcess from '../node/process/SProcess';
-
-require('../node/index');
-// const __exitCleanup = require('../node/process/exitCleanup');
-
 /**
  * @name            sugar.cli
  * @namespace           cli
@@ -47,10 +42,22 @@ if (!action) {
   }
 }
 
-// const pkg = require(`./${stack}/${action}.cli.js`);
-let cliApi = require(`./${stack}/${action}.cli.js`).default;
-
 (async () => {
+  if (stack === 'monorepo' && action === 'link') {
+    require('./monorepo/link.cli.js').default(args);
+    return;
+  }
+  if (stack === 'npm' && action === 'exports') {
+    require('./npm/exports.cli.js').default(args);
+    return;
+  }
+
+  require('../node/index');
+  const __SProcess = require('../node/process/SProcess').default;
+
+  // const pkg = require(`./${stack}/${action}.cli.js`);
+  let cliApi = require(`./${stack}/${action}.cli.js`).default;
+
   // SProcess classes
   if (cliApi.prototype && cliApi.prototype instanceof __SProcess) {
     const processInstance = new cliApi({});
@@ -59,6 +66,3 @@ let cliApi = require(`./${stack}/${action}.cli.js`).default;
     return await cliApi(args);
   }
 })();
-
-// if (fn.default) fn = fn.default;
-// fn(args);

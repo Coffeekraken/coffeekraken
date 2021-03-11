@@ -25,7 +25,8 @@ import { ISProcessSettings } from '../../process/SProcess';
  */
 
 export interface ISTsCompileProcessSettings extends ISProcessSettings {}
-export interface ISTsCompileProcessSettings extends ISProcessSettings {}
+
+export interface ISCompileTsProcess {}
 
 class STsCompilerProcess extends SProcess implements ISCompileTsProcess {
   static interfaces = {
@@ -44,7 +45,7 @@ class STsCompilerProcess extends SProcess implements ISCompileTsProcess {
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  constructor(initialParams: any, settings?: ISCompileTsProcessSettings) {
+  constructor(initialParams: any, settings?: ISTsCompileProcessSettings) {
     super(initialParams, {
       id: 'STsCompilerProcess',
       name: 'TS Compiler Process',
@@ -69,7 +70,7 @@ class STsCompilerProcess extends SProcess implements ISCompileTsProcess {
    */
   process(
     params?: ISTsCompilerParams,
-    settings?: ISCompileTsProcessSettings
+    settings?: ISTsCompileProcessSettings
   ): Promise<any> {
     const promise = this._tsCompiler.compile(params, settings);
     return promise;

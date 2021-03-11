@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import __SClass from '../../class/SClass';
 import __isPath from '../../is/path';
 import __isClass from '../../is/class';
@@ -584,6 +586,8 @@ export default class SSugarAppModule
    * @since     2.0.0
    */
   _initShortcuts() {
+    // @wip
+    // @ts-ignore
     if (this.handleShortcuts === undefined) {
       throw `You have some shortcuts defined in the module "<yellow>${this.constructor.name}</yellow>" but you don't have the required "<cyan>handleShortcuts(shortcutObj, params, settings)</cyan>" method defined...`;
     }
@@ -612,7 +616,7 @@ export default class SSugarAppModule
         );
         delete shortcutObj.params;
         delete shortcutObj.settings;
-        this.handleShortcuts(shortcutObj, params, settings);
+        // this.handleShortcuts(shortcutObj, params, settings);
       });
     }
   }

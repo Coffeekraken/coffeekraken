@@ -18,6 +18,7 @@ import __onProcessExit from '../process/onProcessExit';
 import __resolve from '../module/resolve';
 import __dependencyTree from '../module/dependencyTree';
 import __deepMap from '../object/deepMap';
+import __extractImport from '../module/extractImport';
 
 import __SInterface from '../interface/SInterface';
 import __SJsCompiler, { ISJsCompilerParams } from './compile/SJsCompiler';
@@ -246,11 +247,20 @@ class SJsFile extends __SFile implements ISJsFile {
           );
         }
 
+        const _this = this;
         let exampleOnResolvePlugin = {
           name: 'example',
           setup(build) {
             build.onResolve({ filter: /.*/ }, (args) => {
-              console.log(args.path);
+              // if (args.path === _this.path) return { path: args.path };
+
+              // const depFile = new SJsFile(args.path, _this._settings);
+
+              const imports = __extractImport(_this.content);
+
+              console.log(imports);
+
+              return { path: args.path };
               return { path: __path.join(args.resolveDir, args.path) };
               // return { path: path.join(args.resolveDir, 'public', args.path) };
             });
@@ -274,6 +284,8 @@ class SJsFile extends __SFile implements ISJsFile {
           plugins: [exampleOnResolvePlugin],
           ...params.esbuild
         };
+
+        // return;
 
         let resultObj: any;
 
@@ -327,56 +339,56 @@ class SJsFile extends __SFile implements ISJsFile {
         //   ].join('\n')
         // );
 
-        // check if need to save
-        if (params.save) {
-          // build the save path
-          emit('log', {
-            type: 'file',
-            file: this.toObject(),
-            to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-            action: 'save'
-          });
-          this.writeSync(resultJs, {
-            path: savePath
-          });
-          if (params.map) {
-            // this.writeSync(result.js.map.toString(), {
-            //   path: savePath.replace(/\.js$/, '.js.map')
-            // });
-            // emit('log', {
-            //   type: 'file',
-            //   action: 'saved',
-            //   to: savePath
-            //     .replace(/\.js$/, '.js.map')
-            //     .replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-            //   file: this.toObject()
-            // });
-          }
+        // // check if need to save
+        // if (params.save) {
+        //   // build the save path
+        //   emit('log', {
+        //     type: 'file',
+        //     file: this.toObject(),
+        //     to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+        //     action: 'save'
+        //   });
+        //   this.writeSync(resultJs, {
+        //     path: savePath
+        //   });
+        //   if (params.map) {
+        //     // this.writeSync(result.js.map.toString(), {
+        //     //   path: savePath.replace(/\.js$/, '.js.map')
+        //     // });
+        //     // emit('log', {
+        //     //   type: 'file',
+        //     //   action: 'saved',
+        //     //   to: savePath
+        //     //     .replace(/\.js$/, '.js.map')
+        //     //     .replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+        //     //   file: this.toObject()
+        //     // });
+        //   }
 
-          emit('log', {
-            type: 'file',
-            action: 'saved',
-            to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
-            file: this.toObject()
-          });
-        }
+        //   emit('log', {
+        //     type: 'file',
+        //     action: 'saved',
+        //     to: savePath.replace(`${__sugarConfig('storage.rootDir')}/`, ''),
+        //     file: this.toObject()
+        //   });
+        // }
 
-        emit('log', {
-          type: 'separator'
-        });
+        // emit('log', {
+        //   type: 'separator'
+        // });
 
-        if (params.watch) {
-          emit('log', {
-            value: `<blue>[watch] </blue>Watching for changes...`
-          });
-        }
+        // if (params.watch) {
+        //   emit('log', {
+        //     value: `<blue>[watch] </blue>Watching for changes...`
+        //   });
+        // }
 
-        return resolve({
-          js: resultJs,
-          map: undefined, // @todo      handle map
-          esbuild: resultObj,
-          ...duration.end()
-        });
+        // return resolve({
+        //   js: resultJs,
+        //   map: undefined, // @todo      handle map
+        //   esbuild: resultObj,
+        //   ...duration.end()
+        // });
       }
     );
   }

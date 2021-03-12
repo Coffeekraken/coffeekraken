@@ -19,6 +19,7 @@ import __resolve from '../module/resolve';
 import __dependencyTree from '../module/dependencyTree';
 import __deepMap from '../object/deepMap';
 import __extractImport from '../module/extractImport';
+import __esbuildAggregateLibsPlugin from '../esbuild/plugins/aggregateLibs';
 
 import __SInterface from '../interface/SInterface';
 import __SJsCompiler, { ISJsCompilerParams } from './compile/SJsCompiler';
@@ -60,18 +61,18 @@ export class SJsFileCtorSettingsInterface extends __SInterface {
   };
 }
 
-interface ISJsFileCompileSettings {}
+export interface ISJsFileCompileSettings {}
 
-interface ISJsFileSettings {
+export interface ISJsFileSettings {
   plugins: any[];
   compile: Partial<ISJsFileCompileSettings>;
 }
-interface ISJsFileCtorSettings {
+export interface ISJsFileCtorSettings {
   plugins?: any[];
   jsFile?: Partial<ISJsFileSettings>;
 }
 
-interface ISJsFile {
+export interface ISJsFile {
   _watchEsbuildProcess: any;
   compile(params: ISJsCompilerParams, settings?: Partial<ISJsFileSettings>);
 }
@@ -139,6 +140,9 @@ class SJsFile extends __SFile implements ISJsFile {
       __deepMerge(
         {
           id: __getFilename(path),
+          file: {
+            sourcesExtensions: [path.match(/\.jsx?$/) ? 'ts' : '']
+          },
           jsFile: {
             plugins: []
           }
@@ -251,12 +255,12 @@ class SJsFile extends __SFile implements ISJsFile {
         let exampleOnResolvePlugin = {
           name: 'example',
           setup(build) {
-            build.onResolve({ filter: /.*/ }, (args) => {
-              // if (args.path === _this.path) return { path: args.path };
+            build.onResolve({ filter: /.*/ }, function (args) {
+              let content = _this.sourcesFiles.ts
+                ? _this.sourcesFiles.ts.content
+                : _this.content;
 
-              // const depFile = new SJsFile(args.path, _this._settings);
-
-              const imports = __extractImport(_this.content);
+              const imports = __extractImport(content);
 
               console.log(imports);
 
@@ -281,7 +285,7 @@ class SJsFile extends __SFile implements ISJsFile {
           errorLimit: 100,
           minify: params.minify,
           sourcemap: params.map,
-          plugins: [exampleOnResolvePlugin],
+          plugins: [__esbuildAggregateLibsPlugin],
           ...params.esbuild
         };
 
@@ -383,15 +387,28 @@ class SJsFile extends __SFile implements ISJsFile {
         //   });
         // }
 
-        // return resolve({
-        //   js: resultJs,
-        //   map: undefined, // @todo      handle map
-        //   esbuild: resultObj,
-        //   ...duration.end()
-        // });
+        return resolve({
+          js: 'efewf',
+          map: undefined, // @todo      handle map
+          esbuild: resultObj,
+          ...duration.end()
+        });
       }
     );
   }
+
+  /**
+   * @name            ast
+   * @type            Function
+   * @status        wip
+   *
+   * This method parse the file and return his AST (abstract syntax tree)
+   *
+   * @param       {ISJsFileAstSettings}         [settings={}]       Some settings to configure your AST generation. Support all the acorn.parse settings
+   * @return      {Any}                                             The AST representation of this file
+   *
+   * @todo        implement this method
+   */
 }
 
 export default SJsFile;

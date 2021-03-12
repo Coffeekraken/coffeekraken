@@ -2,7 +2,7 @@ import __isPath from '../is/path';
 import __fs from 'fs';
 import __path from 'path';
 import __deepMerge from '../object/deepMerge';
-import * as __acorn from 'acorn';
+import * as __acorn from 'acorn-loose';
 import {
   parse as __parse,
   find as __find,
@@ -43,7 +43,7 @@ export interface IExtractImportItem {
   type: 'import' | 'require';
   path: string;
   imported: string;
-  local: string;
+  local: string | undefined;
 }
 
 export default function extractImport(
@@ -66,8 +66,7 @@ export default function extractImport(
   }
 
   const ast = __acorn.parse(content, {
-    ecmaVersion: 2020,
-    sourceType: 'module'
+    ecmaVersion: 'latest'
   });
 
   const finalImportsArray: IExtractImportItem[] = [];
@@ -126,6 +125,31 @@ export default function extractImport(
             obj.imported = propObj.key.name;
             obj.local = propObj.key.name;
             finalImportsArray.push(<IExtractImportItem>obj);
+          });
+        }
+      });
+
+      const callDeclarations = __find(ast, 'CallExpression');
+      callDeclarations.forEach((callObj) => {
+        if (!callObj.callee || callObj.callee.name !== 'require') return;
+        if (
+          !callObj.arguments ||
+          callObj.arguments[0].type !== 'Literal' ||
+          !callObj.arguments[0].value
+        )
+          return;
+
+        let exists = false;
+        finalImportsArray.forEach((importsObj) => {
+          if (exists) return;
+          if (importsObj.path === callObj.arguments[0].value) exists = true;
+        });
+        if (!exists) {
+          finalImportsArray.push({
+            type: 'require',
+            path: callObj.arguments[0].value,
+            imported: '*',
+            local: undefined
           });
         }
       });

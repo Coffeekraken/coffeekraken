@@ -1,15 +1,15 @@
 // @shared
 
-import __uniqid from '@coffeekraken/sugar/string/uniqid';
-import __SClass from '@coffeekraken/sugar/class/SClass';
-import __deepMerge from '@coffeekraken/sugar/object/deepMerge';
+import __uniqid from '@coffeekraken/sugar/js/string/uniqid';
+import __SClass from '@coffeekraken/sugar/js/class/SClass';
+import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
 import __SCacheAdapter, { ISCacheAdapter } from './adapters/SCacheAdapter';
-import __convert from '@coffeekraken/sugar/time/convert';
-import __isNode from '@coffeekraken/sugar/is/node';
-import __md5 from '@coffeekraken/sugar/crypt/md5';
-import __toString from '@coffeekraken/sugar/string/toString';
+import __convert from '@coffeekraken/sugar/js/time/convert';
+import __isNode from '@coffeekraken/sugar/js/is/node';
+import __md5 from '@coffeekraken/sugar/js/crypt/md5';
+import __toString from '@coffeekraken/sugar/js/string/toString';
 import __SCacheSettingsInterface from './interface/SCacheSettingsInterface';
-import __isClass from '@coffeekraken/sugar/is/class';
+import __isClass from '@coffeekraken/sugar/js/is/class';
 
 /**
  * @name                                SCache

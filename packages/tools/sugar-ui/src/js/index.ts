@@ -1,9 +1,3 @@
-// import __SSugarUiWebComponent from './webcomponents/SSugarUiWebComponent';
-// __SSugarUiWebComponent.define();
+import SInterface from '@coffeekraken/sugar/node/interface/SInterface';
 
-import './component';
-import './prettier';
-// console.log(Component);
-// customElements.define('my-element', Component);
-console.log('ff');
-// console.log 'd';
+console.log(SInterface);

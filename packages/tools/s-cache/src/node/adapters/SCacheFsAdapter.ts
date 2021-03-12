@@ -1,10 +1,10 @@
-import __deepMerge from '@coffeekraken/sugar/object/deepMerge';
-import __tmpDir from '@coffeekraken/sugar/path/tmpDir';
+import __deepMerge from '@coffeekraken/sugar/node/object/deepMerge';
+import __tmpDir from '@coffeekraken/sugar/node/path/tmpDir';
 import __fs from 'fs';
-import __ensureDirSync from '@coffeekraken/sugar/fs/ensureDirSync';
-import __removeSync from '@coffeekraken/sugar/fs/removeSync';
-import __sugarConfig from '@coffeekraken/sugar/config/sugar';
-import __toString from '@coffeekraken/sugar/string/toString';
+import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
+import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
+import __sugarConfig from '@coffeekraken/sugar/node/config/sugar';
+import __toString from '@coffeekraken/sugar/node/string/toString';
 import __SCacheAdapter from './SCacheAdapter';
 
 import { ISCacheAdapter } from './SCacheAdapter';
@@ -46,7 +46,7 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get fsCacheAdapterSettings(): any {
-    return (<any>this._settings).fsCacheAdapter;
+    return (<any>this)._settings.fsCacheAdapter;
   }
 
   /**

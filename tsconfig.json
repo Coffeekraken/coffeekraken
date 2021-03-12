@@ -10,7 +10,7 @@
   "compilerOptions": {
     "allowJs": true,
     "strict": true,
-    "traceResolutions": true,
+    "traceResolution": false,
     "preserveSymlinks": true,
     "inlineSourceMap": true,
     "esModuleInterop": true,

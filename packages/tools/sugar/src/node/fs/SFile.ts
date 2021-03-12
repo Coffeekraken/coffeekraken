@@ -69,6 +69,7 @@ export interface ISFileSettings {
   checkExistence: boolean;
   cwd: string;
   shrinkSizesTo: number;
+  sourcesExtensions: string[];
   watch: boolean | Partial<ISFileWatchSettings>;
   writeSettings: ISFileWriteSettings;
   readSettings: ISFileReadSettings;
@@ -204,6 +205,17 @@ class SFile extends __SEventEmitter implements ISFile {
       this._registeredClasses[ext.toLowerCase()] = cls;
     });
   }
+
+  /**
+   * @name      sourcesFiles
+   * @type      Record<string, SFile>
+   *
+   * Store the sources files found using the specified sourcesExtensions in the settings
+   *
+   * @since     2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  sourcesFiles: Record<string, SFile> = {};
 
   /**
    * @name        instanciate
@@ -413,6 +425,20 @@ class SFile extends __SEventEmitter implements ISFile {
       throw new Error(
         `The passed filepath "<cyan>${this.path}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`
       );
+    }
+
+    // check if some sourcesExtensions have been specified
+    if (
+      this.fileSettings.sourcesExtensions &&
+      this.fileSettings.sourcesExtensions.length
+    ) {
+      this.fileSettings.sourcesExtensions.forEach((ext) => {
+        const replaceReg = new RegExp(`\.${this.extension}$`);
+        const potentialPath = this.path.replace(replaceReg, `.${ext}`);
+        if (__fs.existsSync(potentialPath)) {
+          this.sourcesFiles[ext] = SFile.instanciate(potentialPath);
+        }
+      });
     }
 
     if (this.fileSettings.watch !== false) {

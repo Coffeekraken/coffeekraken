@@ -32,6 +32,10 @@ export default class SFileSettingsInterface extends __SInterface {
       required: true,
       default: 4
     },
+    sourcesExtensions: {
+      type: "Array<String>",
+      default: []
+    },
     watch: {
       interface: SFileWatchSettingsInterface,
       type: 'Boolean|Object',

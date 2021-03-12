@@ -314,6 +314,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
 
                 const compilePromise = tmpTsFile.compile({
                   save: false,
+                  // @ts-ignore
                   target: 'browser',
                   map: false
                 });

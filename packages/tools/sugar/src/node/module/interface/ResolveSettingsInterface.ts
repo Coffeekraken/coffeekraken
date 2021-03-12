@@ -1,4 +1,5 @@
 import __SInterface from '../../interface/SInterface';
+import __packageRoot from '../../path/packageRoot';
 import __sugarConfig from '../../config/sugar';
 
 /**
@@ -43,6 +44,10 @@ class ResolveSettingsInterface extends __SInterface {
       type: 'String',
       values: ['node', 'default'],
       default: __sugarConfig('module.resolve.target')
+    },
+    rootDir: {
+      type: 'String',
+      default: __packageRoot()
     }
   };
 }

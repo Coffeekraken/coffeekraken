@@ -49,6 +49,7 @@ export interface IResolveSettings {
   preferExports: boolean;
   method: 'import' | 'require';
   target: 'node' | 'default';
+  rootDir: string;
 }
 
 export default function resolve(
@@ -62,85 +63,154 @@ export default function resolve(
     settings || {}
   );
 
+  // make sure we are in a node module package
+  if (!__fs.existsSync(`${set.rootDir}/package.json`)) {
+    throw new Error(
+      `[resolve] Sorry but the "<yellow>resolve</yellow>" function can be used only inside a package with a proper "<cyan>package.json</cyan>" file at his root`
+    );
+  }
+
+  const rootPackageJson = require(`${set.rootDir}/package.json`);
+
+  // // if is an absolute or relative path
+  // if (moduleName.match(/^[\.\/]/)) {
+  //   console.log('abs or relative path', moduleName);¨
+  //   return moduleName;
+  // }
+
   // build in modules
   const builtInModulesArray = Object.keys(__builtInNodeModules);
   if (builtInModulesArray.indexOf(moduleName) !== -1 && set.builtInModules)
     return moduleName;
 
-  let moduleDirPath: string,
-    internalModulePath: string,
+  let requestedModuleDirPath: string,
+    requestedModuleName: string | undefined,
+    requestedInternalModulePath: string,
     absPath: string,
-    packageJson: any;
+    requestedModulePackageJson: any;
+
+  // check in packageJson dependencies
+  const allDependencies = {
+    ...(rootPackageJson.dependencies || {}),
+    ...(rootPackageJson.devDependencies || {})
+  };
+  for (let i = 0; i < Object.keys(allDependencies).length; i++) {
+    const dep = Object.keys(allDependencies)[i];
+    if (moduleName.slice(0, dep.length - 1)[0] === dep) {
+      requestedModuleName = dep;
+      break;
+    }
+  }
 
   // loop on directories
-  for (let i = 0; i < set.dirs.length; i++) {
-    const dirPath = set.dirs[i];
+  if (!requestedModuleName) {
+    for (let i = 0; i < set.dirs.length; i++) {
+      const dirPath = set.dirs[i];
 
-    // if moduleName starts with a "." or a "/"
-    // this mean that we do not target a module in the "node_modules" folder
-    if (!moduleName.match(/^[\.\/]/)) {
-      // find the module directory by checking for the two first something/else
-      const parts = moduleName.split('/');
+      // if moduleName starts with a "." or a "/"
+      // this mean that we do not target a module in the "node_modules" folder
+      if (!moduleName.match(/^[\.\/]/)) {
+        // find the module directory by checking for the two first something/else
+        const parts = moduleName.split('/');
 
-      if (
-        parts.length >= 1 &&
-        __existsSync(__path.resolve(dirPath, parts[0], 'package.json'))
-      ) {
-        packageJson = require(__path.resolve(
-          dirPath,
-          parts[0],
-          'package.json'
-        ));
-        moduleDirPath = __path.resolve(dirPath, parts[0]);
-        internalModulePath = parts.slice(1).join('/');
-      } else if (
-        parts.length >= 2 &&
-        __existsSync(
-          __path.resolve(dirPath, parts[0], parts[1], 'package.json')
-        )
-      ) {
-        packageJson = require(__path.resolve(
-          dirPath,
-          parts[0],
-          parts[1],
-          'package.json'
-        ));
-        moduleDirPath = __path.resolve(dirPath, parts[0], parts[1]);
-        internalModulePath = parts.slice(2).join('/');
-      }
-    } else {
-      // check if is a file in the dir using the extensions
-      const filePath = __checkPathWithMultipleExtensions(
-        __path.resolve(dirPath, moduleName),
-        set.extensions
-      );
-      if (filePath) return filePath;
-
-      // check if the passed moduleName is a node module
-      if (__existsSync(__path.resolve(dirPath, moduleName, 'package.json'))) {
-        packageJson = require(__path.resolve(
-          dirPath,
-          moduleName,
-          'package.json'
-        ));
-        moduleDirPath = __path.resolve(dirPath, moduleName);
+        if (
+          parts.length >= 1 &&
+          __existsSync(__path.resolve(dirPath, parts[0], 'package.json'))
+        ) {
+          requestedModulePackageJson = require(__path.resolve(
+            dirPath,
+            parts[0],
+            'package.json'
+          ));
+          requestedModuleName = requestedModulePackageJson.name;
+          requestedModuleDirPath = __path.resolve(dirPath, parts[0]);
+          requestedInternalModulePath = parts.slice(1).join('/');
+        } else if (
+          parts.length >= 2 &&
+          __existsSync(
+            __path.resolve(dirPath, parts[0], parts[1], 'package.json')
+          )
+        ) {
+          requestedModulePackageJson = require(__path.resolve(
+            dirPath,
+            parts[0],
+            parts[1],
+            'package.json'
+          ));
+          requestedModuleName = requestedModulePackageJson.name;
+          requestedModuleDirPath = __path.resolve(dirPath, parts[0], parts[1]);
+          requestedInternalModulePath = parts.slice(2).join('/');
+        }
       } else {
-        absPath = __path.resolve(dirPath, moduleName);
+        // check if is a file in the dir using the extensions
+        const filePath = __checkPathWithMultipleExtensions(
+          __path.resolve(dirPath, moduleName),
+          set.extensions
+        );
+        if (filePath) return filePath;
+
+        // check if the passed moduleName is a node module
+        if (__existsSync(__path.resolve(dirPath, moduleName, 'package.json'))) {
+          requestedModulePackageJson = require(__path.resolve(
+            dirPath,
+            moduleName,
+            'package.json'
+          ));
+          requestedModuleName = requestedModulePackageJson.name;
+          requestedModuleDirPath = __path.resolve(dirPath, moduleName);
+        } else {
+          absPath = __path.resolve(dirPath, moduleName);
+        }
       }
     }
+  }
+
+  if (!requestedModuleName) {
+    throw new Error(
+      `[resolve] Sorry but the requested package "<yellow>${moduleName}</yellow>" se`
+    );
   }
 
   // abs path
   // @ts-ignore
   if (absPath && __isFile(absPath)) return absPath;
 
+  let depPath;
+  if (
+    rootPackageJson.dependencies &&
+    rootPackageJson.dependencies[requestedModulePackageJson.name]
+  ) {
+    depPath = rootPackageJson.dependencies[requestedModulePackageJson.name];
+  }
+  if (
+    rootPackageJson.devDependencies &&
+    rootPackageJson.devDependencies[requestedModulePackageJson.name]
+  ) {
+    depPath = rootPackageJson.devDependencies[requestedModulePackageJson.name];
+  }
+  if (depPath && depPath.match(/^file:/)) {
+    requestedModuleDirPath = __path.resolve(
+      set.rootDir,
+      depPath.replace(/^file:/, '')
+    );
+  }
+
   // @ts-ignore
-  if (packageJson && moduleDirPath) {
+  if (requestedModulePackageJson && requestedModuleDirPath) {
+    // if internal module path exists
+    if (requestedInternalModulePath) {
+      const potentialPath = __checkPathWithMultipleExtensions(
+        __path.resolve(requestedModuleDirPath, requestedInternalModulePath),
+        set.extensions
+      );
+      if (potentialPath) return potentialPath;
+    }
+
     function exportsMatch() {
       const matchPath = __exportsMatch(
-        moduleDirPath,
-        packageJson.exports,
-        internalModulePath,
+        requestedModuleDirPath,
+        requestedModulePackageJson.exports,
+        requestedInternalModulePath,
         {
           extensions: set.extensions,
           method: set.method,
@@ -150,8 +220,8 @@ export default function resolve(
       if (matchPath) return matchPath;
     }
 
-    // exports field with an internalModulePath
-    if (packageJson.exports !== undefined && set.preferExports) {
+    // exports field with an requestedInternalModulePath
+    if (requestedModulePackageJson.exports !== undefined && set.preferExports) {
       const exportsRes = exportsMatch();
       if (exportsRes) return exportsRes;
     }
@@ -159,22 +229,29 @@ export default function resolve(
     // "fields" check
     for (let j = 0; j < set.fields.length; j++) {
       const field = set.fields[j];
-      if (!packageJson[field]) continue;
-      const filePath = __path.resolve(moduleDirPath, packageJson[field]);
+      if (!requestedModulePackageJson[field]) continue;
+      const filePath = __path.resolve(
+        requestedModuleDirPath,
+        requestedModulePackageJson[field]
+      );
       if (!__isFile(filePath)) continue;
       return filePath;
     }
 
-    // exports field with an internalModulePath
-    if (packageJson.exports !== undefined && !set.preferExports) {
+    // exports field with an requestedInternalModulePath
+    if (
+      requestedModulePackageJson.exports !== undefined &&
+      !set.preferExports
+    ) {
       const exportsRes = exportsMatch();
       if (exportsRes) return exportsRes;
     }
   }
 
-  // console.log('packageJson', packageJson);
-  // console.log('internalModulePath', internalModulePath);
-  // console.log('moduleDirPath', moduleDirPath);
+  // console.log('requestedModulePackageJson', requestedModulePackageJson);
+  // console.log('requestedModuleName', requestedModuleName);
+  // console.log('requestedInternalModulePath', requestedInternalModulePath);
+  // console.log('requestedModuleDirPath', requestedModuleDirPath);
   // console.log('absPath', absPath);
 
   // nothing found

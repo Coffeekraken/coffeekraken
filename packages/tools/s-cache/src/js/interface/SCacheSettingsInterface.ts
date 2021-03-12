@@ -1,8 +1,7 @@
 // @shared
 
-import __isNode from '@coffeekraken/sugar/is/node';
-// import __SInterface from '@coffeekraken/sugar/interface/SInterface';
-import __SInterface from '@coffeekraken/sugar/interface/SInterface';
+import __isNode from '@coffeekraken/sugar/js/is/node';
+import __SInterface from '@coffeekraken/sugar/js/interface/SInterface';
 
 /**
  * @name            SCacheSettingsInterface

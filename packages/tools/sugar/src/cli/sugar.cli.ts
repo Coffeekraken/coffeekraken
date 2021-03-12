@@ -47,10 +47,6 @@ if (!action) {
     require('./monorepo/link.cli.js').default(args);
     return;
   }
-  if (stack === 'npm' && action === 'exports') {
-    require('./npm/exports.cli.js').default(args);
-    return;
-  }
 
   require('../node/index');
   const __SProcess = require('../node/process/SProcess').default;

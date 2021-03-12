@@ -1,13 +1,13 @@
 // @shared
 // @ts-nocheck
 
-import __getMethods from '@coffeekraken/sugar/class/getMethods';
+import __getMethods from '@coffeekraken/sugar/js/class/getMethods';
 import __minimatch from 'minimatch';
-import __deepMerge from '@coffeekraken/sugar/object/deepMerge';
-import __uniqid from '@coffeekraken/sugar/string/uniqid';
-import __wait from '@coffeekraken/sugar/time/wait';
-import __toString from '@coffeekraken/sugar/string/toString';
-import __env from '@coffeekraken/sugar/core/env';
+import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
+import __uniqid from '@coffeekraken/sugar/js/string/uniqid';
+import __wait from '@coffeekraken/sugar/js/time/wait';
+import __toString from '@coffeekraken/sugar/js/string/toString';
+import __env from '@coffeekraken/sugar/js/core/env';
 import __treatAsValue, {
   ITreatAsValue,
   ITreatAsValueProxy,
@@ -15,8 +15,8 @@ import __treatAsValue, {
 } from './treatAsValue';
 import __SEventEmitter, {
   ISEventEmitter
-} from '@coffeekraken/sugar/event/SEventEmitter';
-import __SClass from '@coffeekraken/sugar/class/SClass';
+} from '@coffeekraken/sugar/js/event/SEventEmitter';
+import __SClass from '@coffeekraken/sugar/js/class/SClass';
 
 /**
  * @name                  SPromise

@@ -1,7 +1,7 @@
 // @shared
 
-import __SClass from '@coffeekraken/sugar/class/SClass';
-import __deepMerge from '@coffeekraken/sugar/object/deepMerge';
+import __SClass from '@coffeekraken/sugar/js/class/SClass';
+import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
 
 import { ISCacheSetSettings } from '../SCache';
 

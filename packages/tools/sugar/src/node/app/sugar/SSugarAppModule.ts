@@ -1,15 +1,15 @@
 // @ts-nocheck
 
-import __SClass from '../../class/SClass';
-import __isPath from '../../is/path';
-import __isClass from '../../is/class';
-import __isPlain from '../../is/plainObject';
+import __SClass from '../../../shared/class/SClass';
+import __isPath from '../../../shared/is/path';
+import __isClass from '../../../shared/is/class';
+import __isPlain from '../../../shared/is/plainObject';
 import __getFilename from '../../fs/filename';
 import __SEventEmitter from '@coffeekraken/s-promise';
-import __SError from '../../error/SError';
-import __toString from '../../string/toString';
+import __SError from '../../../shared/error/SError';
+import __toString from '../../../shared/string/toString';
 import __SSugarAppModuleSettingsInterface from './interface/SSugarAppModuleSettingsInterface';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __hotkey from '../../keyboard/hotkey';
 import __SBlessedStdio from '../../stdio/blessed/SBlessedStdio';
 // import __SIpc from '../../ipc/SIpc';
@@ -19,7 +19,7 @@ import __stdio from '../../stdio/stdio';
 import __SBlessedComponent from '../../blessed/SBlessedComponent';
 
 import __SSugarAppModuleInterface from './interface/SSugarAppModuleInterface';
-import { ISClass } from '../../class/SClass';
+import { ISClass } from '../../../shared/class/SClass';
 import { ISSugarAppModuleDescriptor } from './SSugarAppProcess';
 
 /**

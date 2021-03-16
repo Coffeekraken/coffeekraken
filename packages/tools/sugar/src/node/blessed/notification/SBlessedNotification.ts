@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __blessed from 'blessed';
-import __color from '../../color/color';
+import __color from '../../../shared/color/color';
 import __hotkey from '../../keyboard/hotkey';
-import __parseHtml from '../../console/parseHtml';
+import __parseHtml from '../../../shared/console/parseHtml';
 import __SBlessedComponent from '../SBlessedComponent';
 
 /**

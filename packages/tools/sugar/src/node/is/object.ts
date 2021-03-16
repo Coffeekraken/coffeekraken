@@ -1,1 +1,0 @@
-../../../js/is/object.ts

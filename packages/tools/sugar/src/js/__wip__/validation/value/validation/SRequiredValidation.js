@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -55,4 +57,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SValidation_1.default));
     exports.default = SRequiredValidation;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1JlcXVpcmVkVmFsaWRhdGlvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNSZXF1aXJlZFZhbGlkYXRpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUVkLGtFQUE4QztJQUU5Qzs7Ozs7Ozs7Ozs7Ozs7T0FjRztJQUNIO1FBQWtDLHVDQUFhO1FBQS9DOztRQU1BLENBQUM7UUFIUSx3QkFBSSxHQUFYLFVBQVksS0FBSztZQUNmLE9BQU8sS0FBSyxLQUFLLElBQUksSUFBSSxLQUFLLEtBQUssU0FBUyxDQUFDO1FBQy9DLENBQUM7UUFKTSwyQkFBTyxHQUNaLDRFQUE0RSxDQUFDO1FBSWpGLDBCQUFDO0tBQUEsQUFORCxDQUFrQyxxQkFBYSxHQU05QztJQUVELGtCQUFlLG1CQUFtQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1JlcXVpcmVkVmFsaWRhdGlvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNSZXF1aXJlZFZhbGlkYXRpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsa0VBQThDO0lBRTlDOzs7Ozs7Ozs7Ozs7OztPQWNHO0lBQ0g7UUFBa0MsdUNBQWE7UUFBL0M7O1FBTUEsQ0FBQztRQUhRLHdCQUFJLEdBQVgsVUFBWSxLQUFLO1lBQ2YsT0FBTyxLQUFLLEtBQUssSUFBSSxJQUFJLEtBQUssS0FBSyxTQUFTLENBQUM7UUFDL0MsQ0FBQztRQUpNLDJCQUFPLEdBQ1osNEVBQTRFLENBQUM7UUFJakYsMEJBQUM7S0FBQSxBQU5ELENBQWtDLHFCQUFhLEdBTTlDO0lBRUQsa0JBQWUsbUJBQW1CLENBQUMifQ==

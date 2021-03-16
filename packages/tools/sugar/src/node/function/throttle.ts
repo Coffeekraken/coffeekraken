@@ -1,1 +1,0 @@
-../../../js/function/throttle.ts

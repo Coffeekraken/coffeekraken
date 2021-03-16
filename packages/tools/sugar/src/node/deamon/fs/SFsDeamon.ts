@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __SDeamon from '../SDeamon';
 import __SFsDeamonProcess from './SFsDeamonProcess';
 

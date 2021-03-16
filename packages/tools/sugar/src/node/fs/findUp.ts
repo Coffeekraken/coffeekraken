@@ -3,7 +3,7 @@
 import IFindUp, { IFindUpSettings } from './interface/IFindUp';
 import __findUp from 'find-up';
 import __glob from 'glob';
-import __isGlob from '../is/glob';
+import __isGlob from '../../shared/is/glob';
 import __fs from 'fs';
 import __SFile from './SFile';
 

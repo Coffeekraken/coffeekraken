@@ -2,9 +2,9 @@
 
 import __SWebComponent from './SWebComponent';
 import { render, html } from 'lit-html';
-import __throttle from '../function/throttle';
+import __throttle from '../../shared/function/throttle';
 import __insertAfter from '../dom/insertAfter';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import { asyncReplace } from 'lit-html/directives/async-replace.js';
 import { asyncAppend } from 'lit-html/directives/async-append.js';
 import { cache } from 'lit-html/directives/cache.js';

@@ -1,5 +1,8 @@
 // @ts-nocheck
 
+import __folderPath from '../fs/folderPath';
+import __isFolder from '../is/folder';
+import __isFile from '../is/file';
 import __findPkgJson from 'find-package-json';
 
 /**
@@ -8,6 +11,9 @@ import __findPkgJson from 'find-package-json';
  * @type                    Function
  *
  * Return the path to either the first finded package root going up the folders, or the highest package root finded
+ *
+ * @feature         Support file path as input
+ * @feature         Allows you to specify if you want the highest package.json founded using the ```highest``` parameter
  *
  * @param           {String}              [from=process.cwd()]    Specify from where the research has to be done
  * @param           {Boolean}             [highest=false]         Specify if you want the highest package root or the first finded
@@ -21,6 +27,8 @@ import __findPkgJson from 'find-package-json';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function packageRoot(from = process.cwd(), highest = false) {
+  if (__isFile(from)) from = __folderPath(from);
+
   const f = __findPkgJson(from);
   let file = f.next();
 

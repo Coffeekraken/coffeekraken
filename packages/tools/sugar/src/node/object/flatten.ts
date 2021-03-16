@@ -1,1 +1,0 @@
-../../../js/object/flatten.ts

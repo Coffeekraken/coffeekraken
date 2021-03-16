@@ -1,1 +1,0 @@
-../../js/type/STypeResult.ts

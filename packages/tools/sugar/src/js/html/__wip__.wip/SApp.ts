@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __get from '../object/get';
-import __isBase64 from '../is/base64';
-import __base64 from '../crypt/base64';
+import __get from '../../shared/object/get';
+import __isBase64 from '../../shared/is/base64';
+import __base64 from '../../shared/crypt/base64';
 
 let __decryptedConfig, __decryptedMeta;
 

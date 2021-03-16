@@ -1,1 +1,0 @@
-../../../js/is/firefox.ts

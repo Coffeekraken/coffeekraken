@@ -1,5 +1,5 @@
-import __SClass from '../class/SClass';
-import __deepMerge from '../object/deepMerge';
+import __SClass from '../../shared/class/SClass';
+import __deepMerge from '../../shared/object/deepMerge';
 
 export interface ISSvelteComponentCtorSettings {
   svelteComponent?: Partial<ISSvelteComponentSettings>;

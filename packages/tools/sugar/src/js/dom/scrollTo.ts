@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import easeInOutQuad from '../easing/easeInOutQuad';
+import easeInOutQuad from '../../shared/easing/easeInOutQuad';
 import requestAnimationFrame from './requestAnimationFrame';
 /**
  * @name      scrollTo

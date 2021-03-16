@@ -1,12 +1,12 @@
 // @ts-nocheck
 
-import __SInterface from '../../../interface/SInterface';
+import __SInterface from '../../../../shared/interface/SInterface';
 import __sugarConfig from '../../../config/sugar';
 import __folderPath from '../../../fs/folderPath';
 import __getFilename from '../../../fs/filename';
 import __fs from 'fs';
-import __get from '../../../object/get';
-import __set from '../../../object/set';
+import __get from '../../../../shared/object/get';
+import __set from '../../../../shared/object/set';
 
 /**
  * @name                SSugarAppInterface

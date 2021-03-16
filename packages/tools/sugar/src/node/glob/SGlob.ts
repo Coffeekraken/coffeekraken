@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __resolveGlob from './resolveGlob';
 import __extractGlob from './extractGlob';
 import __extractNoneGlob from './extractNoneGlob';

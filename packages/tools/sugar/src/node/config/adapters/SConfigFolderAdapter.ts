@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __fs from 'fs';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __writeFileSync from '../../fs/writeFileSync';
-import __diff from '../../object/diff';
+import __diff from '../../../shared/object/diff';
 import __SConfigAdapter from './SConfigAdapter';
 import __localDir from '../../path/localDir';
 import __packageRoot from '../../path/packageRoot';

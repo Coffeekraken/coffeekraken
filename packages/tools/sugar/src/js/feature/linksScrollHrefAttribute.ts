@@ -2,7 +2,7 @@
 
 import querySelectorLive from '../dom/querySelectorLive';
 import scrollTo from '../dom/scrollTo';
-import easeInOutQuint from '../easing/easeInOutQuint';
+import easeInOutQuint from '../../shared/easing/easeInOutQuint';
 
 /**
  * @name 		linksScrollHrefAttribute

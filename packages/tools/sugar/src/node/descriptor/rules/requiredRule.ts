@@ -1,1 +1,0 @@
-../../../js/descriptor/rules/requiredRule.ts

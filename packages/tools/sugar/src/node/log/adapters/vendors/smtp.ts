@@ -1,1 +1,0 @@
-../../../../../js/log/adapters/vendors/smtp.ts

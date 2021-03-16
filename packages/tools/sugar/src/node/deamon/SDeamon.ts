@@ -2,7 +2,7 @@
 
 import __SPromise from '@coffeekraken/s-promise';
 import __SDeamonInterface from './interface/SDeamonInterface';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __onProcessExit from '../process/onProcessExit';
 
 /**

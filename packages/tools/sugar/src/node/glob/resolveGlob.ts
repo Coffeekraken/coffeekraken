@@ -1,12 +1,12 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
 import __glob from 'glob';
 import __SFile from '../fs/SFile';
 import __extractGlob from './extractGlob';
-import __isGlob from '../is/glob';
-import __isPath from '../is/path';
+import __isGlob from '../../shared/is/glob';
+import __isPath from '../../shared/is/path';
 import __fs from 'fs';
 import __toRegex from 'to-regex';
 import __isDirectory from '../is/directory';

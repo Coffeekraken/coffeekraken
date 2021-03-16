@@ -1,1 +1,0 @@
-../../js/descriptor/SDescriptorResult.ts

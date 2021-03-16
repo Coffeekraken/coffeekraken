@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __uncamelize from '../string/uncamelize';
-import __autoCast from '../string/autoCast';
-import __toString from '../string/toString';
+import __uncamelize from '../../shared/string/uncamelize';
+import __autoCast from '../../shared/string/autoCast';
+import __toString from '../../shared/string/toString';
 
 /**
  * @name      dataset

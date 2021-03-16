@@ -1,16 +1,16 @@
 // @ts-nocheck
 
 import __copy from '../clipboard/copy';
-import __isChildProcess from '../is/childProcess';
+import __isChildProcess from '../../shared/is/childProcess';
 import __packageRoot from '../path/packageRoot';
-import __SError from '../error/SError';
-import __parseHtml from '../console/parseHtml';
+import __SError from '../../shared/error/SError';
+import __parseHtml from '../../shared/console/parseHtml';
 import __keypress from 'keypress';
 import __hotkey from '../keyboard/hotkey';
-import __toString from '../string/toString';
-import __parse from '../string/parse';
+import __toString from '../../shared/string/toString';
+import __parse from '../../shared/string/parse';
 import __blessed from 'blessed';
-import __color from '../color/color';
+import __color from '../../shared/color/color';
 import __SIpc from '../ipc/SIpc';
 
 /**

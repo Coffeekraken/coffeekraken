@@ -1,1 +1,0 @@
-../../../js/color/SColor.ts

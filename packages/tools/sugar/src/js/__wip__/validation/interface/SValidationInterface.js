@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -62,4 +64,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SInterface_1.default));
     exports.default = SValidationInterface;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1ZhbGlkYXRpb25JbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTVmFsaWRhdGlvbkludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsc0VBQWtEO0lBRWxEOzs7Ozs7Ozs7OztPQVdHO0lBQ0g7UUFBa0Qsd0NBQVk7UUFBOUQ7O1FBaUJBLENBQUM7UUFoQlEsK0JBQVUsR0FBRztZQUNsQixLQUFLLEVBQUU7Z0JBQ0wsSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLFFBQVEsRUFBRSxJQUFJO2dCQUNkLFdBQVcsRUFDVCx5RUFBeUU7Z0JBQzNFLE1BQU0sRUFBRSxJQUFJO2FBQ2I7WUFDRCxJQUFJLEVBQUU7Z0JBQ0osSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLFFBQVEsRUFBRSxJQUFJO2dCQUNkLFdBQVcsRUFDVCw0SUFBNEk7Z0JBQzlJLE1BQU0sRUFBRSxJQUFJO2FBQ2I7U0FDRixDQUFDO1FBQ0osMkJBQUM7S0FBQSxBQWpCRCxDQUFrRCxvQkFBWSxHQWlCN0Q7c0JBakJvQixvQkFBb0IifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1ZhbGlkYXRpb25JbnRlcmZhY2UuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTVmFsaWRhdGlvbkludGVyZmFjZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7SUFFZCxzRUFBa0Q7SUFFbEQ7Ozs7Ozs7Ozs7O09BV0c7SUFDSDtRQUFrRCx3Q0FBWTtRQUE5RDs7UUFpQkEsQ0FBQztRQWhCUSwrQkFBVSxHQUFHO1lBQ2xCLEtBQUssRUFBRTtnQkFDTCxJQUFJLEVBQUUsVUFBVTtnQkFDaEIsUUFBUSxFQUFFLElBQUk7Z0JBQ2QsV0FBVyxFQUNULHlFQUF5RTtnQkFDM0UsTUFBTSxFQUFFLElBQUk7YUFDYjtZQUNELElBQUksRUFBRTtnQkFDSixJQUFJLEVBQUUsVUFBVTtnQkFDaEIsUUFBUSxFQUFFLElBQUk7Z0JBQ2QsV0FBVyxFQUNULDRJQUE0STtnQkFDOUksTUFBTSxFQUFFLElBQUk7YUFDYjtTQUNGLENBQUM7UUFDSiwyQkFBQztLQUFBLEFBakJELENBQWtELG9CQUFZLEdBaUI3RDtzQkFqQm9CLG9CQUFvQiJ9

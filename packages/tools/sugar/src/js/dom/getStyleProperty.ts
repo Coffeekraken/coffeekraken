@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import camelize from '../string/camelize';
-import autoCast from '../string/autoCast';
+import camelize from '../../shared/string/camelize';
+import autoCast from '../../shared/string/autoCast';
 
 /**
  * @name      getStyleProperty

@@ -1,8 +1,8 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __SEventEmitter from '../event/SEventEmitter';
 
-import { ISInterfaceResult } from '../interface/SInterfaceResult';
+import { ISInterfaceResult } from '../../shared/interface/SInterfaceResult';
 
 /**
  * @name                SCompiler

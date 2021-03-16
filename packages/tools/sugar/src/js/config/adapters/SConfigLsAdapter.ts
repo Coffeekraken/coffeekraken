@@ -1,13 +1,13 @@
 // @ts-nocheck
 
-import __set from '../../object/set';
-import __get from '../../object/get';
-import __toString from '../../string/toString';
-import __parse from '../../string/parse';
+import __set from '../../../shared/object/set';
+import __get from '../../../shared/object/get';
+import __toString from '../../../shared/string/toString';
+import __parse from '../../../shared/string/parse';
 import __stringifyObject from 'stringify-object';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __SConfigAdapter from './SConfigAdapter';
-import __diff from '../../object/diff';
+import __diff from '../../../shared/object/diff';
 
 /**
  * @name                  SConfigLsAdapter

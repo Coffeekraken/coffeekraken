@@ -21,12 +21,12 @@
  * @author		Olivier Bossel<olivier.bossel@gmail.com>
  */
 
-import SWatch from '../object/SWatch';
-import __camelize from '../string/camelize';
-import __uncamelize from '../string/uncamelize';
-import __autoCast from '../string/autoCast';
-import __uniqid from '../util/uniqid';
-import __set from '../object/set';
+import SWatch from '../../shared/object/SWatch';
+import __camelize from '../../shared/string/camelize';
+import __uncamelize from '../../shared/string/uncamelize';
+import __autoCast from '../../shared/string/autoCast';
+import __uniqid from '../../shared/string/uniqid';
+import __set from '../../shared/object/set';
 import __dispatchEvent from '../dom/dispatchEvent';
 
 export default class SBind {

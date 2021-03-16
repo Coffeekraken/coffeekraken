@@ -251,26 +251,6 @@ class SJsFile extends __SFile implements ISJsFile {
           );
         }
 
-        const _this = this;
-        let exampleOnResolvePlugin = {
-          name: 'example',
-          setup(build) {
-            build.onResolve({ filter: /.*/ }, function (args) {
-              let content = _this.sourcesFiles.ts
-                ? _this.sourcesFiles.ts.content
-                : _this.content;
-
-              const imports = __extractImport(content);
-
-              console.log(imports);
-
-              return { path: args.path };
-              return { path: __path.join(args.resolveDir, args.path) };
-              // return { path: path.join(args.resolveDir, 'public', args.path) };
-            });
-          }
-        };
-
         let esbuildParams: any = {
           charset: 'utf8',
           format: params.format,
@@ -285,19 +265,25 @@ class SJsFile extends __SFile implements ISJsFile {
           errorLimit: 100,
           minify: params.minify,
           sourcemap: params.map,
-          plugins: [__esbuildAggregateLibsPlugin],
+          plugins: [
+            __esbuildAggregateLibsPlugin({
+              outputDir: params.outputDir,
+              rootDir: params.rootDir
+            })
+          ],
           ...params.esbuild
         };
-
-        // return;
 
         let resultObj: any;
 
         try {
           resultObj = await __esbuild.build(esbuildParams);
         } catch (e) {
+          console.log(e);
           return reject(e);
         }
+
+        return resolve(true);
 
         // async function rewriteImports(code) {
         //   return '';

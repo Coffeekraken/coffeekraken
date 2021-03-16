@@ -1,8 +1,8 @@
 // @shared
 
 import __path from 'path';
-import __SClass from '../../class/SClass';
-import __deepMerge from '../../object/deepMerge';
+import __SClass from '../../../shared/class/SClass';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
 import __handlebars from 'handlebars';
 import __promisedHandlebars from 'promised-handlebars';
@@ -12,7 +12,7 @@ import __fs from 'fs';
 import __glob from 'glob';
 import __getFilename from '../../fs/filename';
 import __sugarConfig from '../../config/sugar';
-import __md5 from '../../crypt/md5';
+import __md5 from '../../../shared/crypt/md5';
 
 import __SDocblockRendererSettingsInterface from './interface/SDocblockRendererSettingsInterface';
 import { ISDocblock } from '../SDocblock';

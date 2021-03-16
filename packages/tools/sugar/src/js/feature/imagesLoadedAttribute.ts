@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __imageLoaded from '../dom/imageLoaded';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name 		imagesLoadedAttribute

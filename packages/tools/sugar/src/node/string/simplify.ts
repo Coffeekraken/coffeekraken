@@ -1,1 +1,0 @@
-../../../js/string/simplify.ts

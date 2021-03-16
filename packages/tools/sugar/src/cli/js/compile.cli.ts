@@ -6,10 +6,7 @@ function compileJs(stringArgs = '') {
   const pro = new SJsCompilerProcess(
     {},
     {
-      process: {
-        stdio: 'inherit',
-        runAsChild: true
-      }
+      process: {}
     }
   );
   pro.run(stringArgs);

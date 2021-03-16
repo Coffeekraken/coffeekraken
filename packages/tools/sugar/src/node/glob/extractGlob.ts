@@ -1,1 +1,0 @@
-../../../js/glob/extractGlob.ts

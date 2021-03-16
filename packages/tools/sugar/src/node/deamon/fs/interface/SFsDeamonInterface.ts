@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SInterface from '../../../class/SInterface';
+import __SInterface from '../../../../shared/class/SInterface';
 import __SDeamonInterface from '../../interface/SDeamonInterface';
 
 /**

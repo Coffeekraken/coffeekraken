@@ -3,6 +3,7 @@ import __fs from 'fs';
 import __path from 'path';
 import __deepMerge from '../object/deepMerge';
 import * as __acorn from 'acorn-loose';
+import { generate as __astring } from 'astring';
 import {
   parse as __parse,
   find as __find,
@@ -42,6 +43,7 @@ export interface IExtractImportSettings {
 export interface IExtractImportItem {
   type: 'import' | 'require';
   path: string;
+  raw: string;
   imported: string;
   local: string | undefined;
 }
@@ -78,7 +80,8 @@ export default function extractImport(
     importsAst.forEach((importAst) => {
       const importObj: Partial<IExtractImportItem> = {
         type: 'import',
-        path: importAst.source.value
+        path: importAst.source.value,
+        raw: __astring(importAst)
       };
       importAst.specifiers.forEach((specifier) => {
         const obj = Object.assign({}, importObj);
@@ -112,7 +115,8 @@ export default function extractImport(
 
         const requireObj: Partial<IExtractImportItem> = {
           type: 'require',
-          path: varObj.init.arguments[0].value
+          path: varObj.init.arguments[0].value,
+          raw: __astring(ast)
         };
 
         if (varObj.id.type === 'Identifier') {
@@ -148,6 +152,7 @@ export default function extractImport(
           finalImportsArray.push({
             type: 'require',
             path: callObj.arguments[0].value,
+            raw: __astring(ast),
             imported: '*',
             local: undefined
           });

@@ -1,5 +1,5 @@
 import __sugarConfig from '../../../config/sugar';
-import __SInterface from '../../../interface/SInterface';
+import __SInterface from '../../../../shared/interface/SInterface';
 import __path from 'path';
 
 /**

@@ -7,6 +7,8 @@ var __extends = (this && this.__extends) || (function () {
         return extendStatics(d, b);
     };
     return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
@@ -21,13 +23,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "@coffeekraken/sugar/class/SClass", "@coffeekraken/sugar/object/deepMerge"], factory);
+        define(["require", "exports", "@coffeekraken/sugar/js/class/SClass", "@coffeekraken/sugar/js/object/deepMerge"], factory);
     }
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var SClass_1 = __importDefault(require("@coffeekraken/sugar/class/SClass"));
-    var deepMerge_1 = __importDefault(require("@coffeekraken/sugar/object/deepMerge"));
+    var SClass_1 = __importDefault(require("@coffeekraken/sugar/js/class/SClass"));
+    var deepMerge_1 = __importDefault(require("@coffeekraken/sugar/js/object/deepMerge"));
     var SCacheAdapter = /** @class */ (function (_super) {
         __extends(SCacheAdapter, _super);
         /**
@@ -53,4 +55,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }(SClass_1.default));
     exports.default = SCacheAdapter;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlQWRhcHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDYWNoZUFkYXB0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsVUFBVTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUVWLDRFQUF3RDtJQUN4RCxtRkFBK0Q7SUE0RC9EO1FBQW9ELGlDQUFRO1FBSTFEOzs7Ozs7Ozs7V0FTRztRQUNILHVCQUFZLFFBQWE7WUFBYix5QkFBQSxFQUFBLGFBQWE7bUJBQ3ZCLGtCQUNFLG1CQUFXLENBQ1Q7Z0JBQ0UsWUFBWSxFQUFFLEVBQUU7YUFDakIsRUFDRCxRQUFRLENBQ1QsQ0FDRjtRQUNILENBQUM7UUFFRCxnQ0FBUSxHQUFSLFVBQVMsS0FBMEI7WUFDakMsSUFBSSxDQUFDLEtBQUssR0FBRyxLQUFLLENBQUM7UUFDckIsQ0FBQztRQXFGSCxvQkFBQztJQUFELENBQUMsQUFoSEQsQ0FBb0QsZ0JBQVEsR0FnSDNEIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0NhY2hlQWRhcHRlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNDYWNoZUFkYXB0ZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsVUFBVTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0lBRVYsK0VBQTJEO0lBQzNELHNGQUFrRTtJQTREbEU7UUFBb0QsaUNBQVE7UUFJMUQ7Ozs7Ozs7OztXQVNHO1FBQ0gsdUJBQVksUUFBYTtZQUFiLHlCQUFBLEVBQUEsYUFBYTttQkFDdkIsa0JBQ0UsbUJBQVcsQ0FDVDtnQkFDRSxZQUFZLEVBQUUsRUFBRTthQUNqQixFQUNELFFBQVEsQ0FDVCxDQUNGO1FBQ0gsQ0FBQztRQUVELGdDQUFRLEdBQVIsVUFBUyxLQUEwQjtZQUNqQyxJQUFJLENBQUMsS0FBSyxHQUFHLEtBQUssQ0FBQztRQUNyQixDQUFDO1FBcUZILG9CQUFDO0lBQUQsQ0FBQyxBQWhIRCxDQUFvRCxnQkFBUSxHQWdIM0QifQ==

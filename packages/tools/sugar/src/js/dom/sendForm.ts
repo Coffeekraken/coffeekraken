@@ -7,7 +7,7 @@ import __formSerialize from 'form-serialize';
  * @name      sendForm
  * @namespace           sugar.js.dom
  * @type      Function
- * @stable
+ * @status        wip
  *
  * Send a form through an ajax call and return back a promise resolved with the server response
  *

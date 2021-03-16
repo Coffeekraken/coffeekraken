@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __findInFiles from 'find-in-files';
 import __minimatch from 'minimatch';
 import __fs from 'fs';

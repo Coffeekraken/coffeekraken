@@ -1,1 +1,0 @@
-../../../../js/interface/renderers/terminal/alias.ts

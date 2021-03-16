@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __autoCast from '../string/autoCast';
+import __autoCast from '../../shared/string/autoCast';
 import __observeAttribute from './observeAttributes';
 
 /**

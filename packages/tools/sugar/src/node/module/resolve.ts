@@ -26,6 +26,7 @@ import __checkPathWithMultipleExtensions from '../fs/checkPathWithMultipleExtens
  * @feature     Nested conditions       (https://nodejs.org/api/packages.html#packages_subpath_exports)
  * @feature     Conditions Definitions      (https://nodejs.org/api/packages.html#packages_subpath_exports)
  *
+ * @todo        Nested node_modules
  * @todo        Exports sugar         (https://nodejs.org/api/packages.html#packages_subpath_exports)
  * @todo        Subpath folder mappings         (https://nodejs.org/api/packages.html#packages_subpath_exports)
  * @todo        Subpath imports       (https://nodejs.org/api/packages.html#packages_subpath_exports)
@@ -198,6 +199,7 @@ export default function resolve(
   // @ts-ignore
   if (requestedModulePackageJson && requestedModuleDirPath) {
     // if internal module path exists
+    // @ts-ignore
     if (requestedInternalModulePath) {
       const potentialPath = __checkPathWithMultipleExtensions(
         __path.resolve(requestedModuleDirPath, requestedInternalModulePath),
@@ -206,6 +208,7 @@ export default function resolve(
       if (potentialPath) return potentialPath;
     }
 
+    // @ts-ignore
     function exportsMatch() {
       const matchPath = __exportsMatch(
         requestedModuleDirPath,

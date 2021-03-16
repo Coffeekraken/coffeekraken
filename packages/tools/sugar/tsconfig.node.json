@@ -1,0 +1,15 @@
+{
+  "extends": "../../../tsconfig.json",
+  "include": [
+    "src/cli/**/*.ts",
+    "src/node/**/*.ts",
+    "src/shared/**/*.ts",
+    "src/config/**/*.ts"
+  ],
+  "compilerOptions": {
+    "outDir": "node",
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node"
+  }
+}

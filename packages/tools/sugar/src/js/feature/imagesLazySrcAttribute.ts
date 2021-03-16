@@ -2,7 +2,7 @@
 
 import whenInViewport from '../dom/whenInViewport';
 import querySelectorLive from '../dom/querySelectorLive';
-import deepMerge from '../object/deepMerge';
+import deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name 		imagesLazySrcAttribute

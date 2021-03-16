@@ -2,11 +2,11 @@
 
 import __blessed from 'blessed';
 import __SBlessedComponent from '../SBlessedComponent';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
-import __color from '../../color/color';
+import __color from '../../../shared/color/color';
 import __escapeStack from '../../terminal/escapeStack';
-import __activeSpace from '../../core/activeSpace';
+import __activeSpace from '../../../shared/core/activeSpace';
 
 /**
  * @name                  SBlessedInput

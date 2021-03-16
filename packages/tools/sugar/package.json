@@ -32,6 +32,7 @@
     "aggregation": "^1.2.6",
     "app-root-path": "^3.0.0",
     "assign-deep": "^1.0.1",
+    "astring": "^1.7.0",
     "autoprefixer": "^10.1.0",
     "await-spawn": "^4.0.1",
     "await-to-js": "^2.1.1",

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __deepMerge from '../../object/deepMerge';
-import __SPromise from '../@coffeekraken/s-promise';
+import __deepMerge from '../../../shared/object/deepMerge';
+import __SPromise from '@coffeekraken/s-promise';
 import __sugarConfig from '../../config/sugar';
 import __SSugarAppProcess from './SSugarAppProcess';
 import __SSugarAppTerminalStdio from './SSugarAppTerminalStdio';

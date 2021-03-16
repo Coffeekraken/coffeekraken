@@ -1,17 +1,17 @@
-import __toString from '../string/toString';
-import __deepMerge from '../object/deepMerge';
+import __toString from '../../shared/string/toString';
+import __deepMerge from '../../shared/object/deepMerge';
 import __SEventEmitter from '../event/SEventEmitter';
 // import __SFileInterface from './interface/SFileInterface';
 import __fs from 'fs';
 import __path from 'path';
-import __md5 from '../crypt/md5';
+import __md5 from '../../shared/crypt/md5';
 import __extension from './extension';
 import __folderPath from './folderPath';
 import __getFilename from './filename';
-import __SError from '../error/SError';
+import __SError from '../../shared/error/SError';
 import __packageRoot from '../path/packageRoot';
 import __ensureDirSync from './ensureDirSync';
-import __SInterface from '../interface/SInterface';
+import __SInterface from '../../shared/interface/SInterface';
 import __replacePathTokens from '../path/replacePathTokens';
 
 // import SFileCtorSettingsInterface from './interface/SFileCtorSettingsInterface';

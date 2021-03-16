@@ -1,1 +1,0 @@
-{"version":3,"file":"emptyNode.js","sourceRoot":"","sources":["emptyNode.ts"],"names":[],"mappings":"AAAA,cAAc;;;;;;;;;;;IAEd;;;;;;;;;;;;;;;;;;;;;OAqBG;IACH,SAAS,SAAS,CAAC,IAAI;QACrB,OAAO,IAAI,CAAC,UAAU,EAAE;YACtB,IAAI,CAAC,WAAW,CAAC,IAAI,CAAC,UAAU,CAAC,CAAC;SACnC;QACD,OAAO,IAAI,CAAC;IACd,CAAC;IACD,OAAS,SAAS,CAAC"}

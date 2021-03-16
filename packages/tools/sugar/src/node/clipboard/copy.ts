@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __clipboardy from 'clipboardy';
-import __toString from '../string/toString';
+import __toString from '../../shared/string/toString';
 import __ncp from 'copy-paste';
 
 /**

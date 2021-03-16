@@ -7,6 +7,7 @@ import __innerHtml from '../dom/innerHtml';
  * @name            syncDom
  * @namespace           sugar.js.socket
  * @type            Function
+ * @status        wip
  *
  * Simply connect to a backend socket.io server and listen for specifics messages from it to refresh automatically the DOM.
  * The messages that are listened are:

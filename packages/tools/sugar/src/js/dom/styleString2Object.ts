@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __camelize from '../string/camelize';
-import __autoCast from '../string/autoCast';
+import __camelize from '../../shared/string/camelize';
+import __autoCast from '../../shared/string/autoCast';
 
 /**
  * @name      styleString2Object

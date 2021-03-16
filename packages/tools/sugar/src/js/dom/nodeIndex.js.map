@@ -1,1 +1,0 @@
-{"version":3,"file":"nodeIndex.js","sourceRoot":"","sources":["nodeIndex.ts"],"names":[],"mappings":"AAAA,cAAc;;;;;;;;;;;IAEd;;;;;;;;;;;;;;;;;;;;;;;;;OAyBG;IACH,SAAS,SAAS,CAAC,IAAI;QACrB,IAAI,KAAK,GAAG,CAAC,CAAC;QACd,OAAO,CAAC,IAAI,GAAG,IAAI,CAAC,sBAAsB,CAAC,EAAE;YAC3C,KAAK,EAAE,CAAC;SACT;QACD,OAAO,KAAK,CAAC;IACf,CAAC;IACD,OAAS,SAAS,CAAC"}

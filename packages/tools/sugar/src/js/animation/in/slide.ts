@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __uniqid from '../../string/uniqid';
-import __parseArgs from '../../string/parseArgs';
+import __uniqid from '../../../shared/string/uniqid';
+import __parseArgs from '../../../shared/string/parseArgs';
 import __querySelectorLive from '../../dom/querySelectorLive';
 
 /**

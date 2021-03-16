@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import _map from 'lodash/map';
-import __throttle from '../function/throttle';
+import __throttle from '../../shared/function/throttle';
 
 /**
  * @name      splitLines

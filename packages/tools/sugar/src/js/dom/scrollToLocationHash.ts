@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __scrollTo from './scrollTo';
-import __easeing from '../easing/easeInOutQuint';
+import __easeing from '../../shared/easing/easeInOutQuint';
 
 /**
  * @name      scrollToLocationHash

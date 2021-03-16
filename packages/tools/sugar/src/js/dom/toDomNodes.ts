@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __strToHtml from '../string/strToHtml';
+import __strToHtml from '../../shared/string/strToHtml';
 
 function processString(string) {
   return string

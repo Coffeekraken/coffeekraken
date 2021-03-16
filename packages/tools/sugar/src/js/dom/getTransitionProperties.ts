@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __getStyleProperty from './getStyleProperty';
-import __convert from '../time/convert';
+import __convert from '../../shared/time/convert';
 
 /**
  * @name      getTransitionProperties

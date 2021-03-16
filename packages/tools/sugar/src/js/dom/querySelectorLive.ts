@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import uniqid from '../util/uniqid';
+import uniqid from '../../shared/string/uniqid';
 import matches from './matches';
 
 /**

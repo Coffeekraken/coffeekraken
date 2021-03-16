@@ -1,1 +1,0 @@
-{"version":3,"file":"interfaceTypeDescriptor.js","sourceRoot":"","sources":["interfaceTypeDescriptor.ts"],"names":[],"mappings":"AAAA,SAAS;;;;;;;;;;;IAIT;;;;;;;;;;;;;;;;;;OAkBG;IACH,IAAM,UAAU,GAAqB;QACnC,IAAI,EAAE,YAAY;QAClB,EAAE,EAAE,YAAY;QAChB,EAAE,EAAE,UAAC,KAAU,IAAM,CAAC;QACtB,IAAI,EAAE,UAAC,KAAU;YACf,OAAO,IAAI,CAAC;QACd,CAAC;KACF,CAAC;IAEF,OAAS,UAAU,CAAC"}

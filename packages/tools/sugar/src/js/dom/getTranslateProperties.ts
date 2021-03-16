@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __convert from '../unit/convert';
+import __convert from '../../shared/unit/convert';
 
 /**
  * @name      getTranslateProperties

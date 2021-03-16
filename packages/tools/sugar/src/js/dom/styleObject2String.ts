@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __uncamelize from '../string/uncamelize';
+import __uncamelize from '../../shared/string/uncamelize';
 
 /**
  * @name      styleObject2String

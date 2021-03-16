@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __easing from '../easing/easeInOutQuint';
+import __easing from '../../shared/easing/easeInOutQuint';
 import querySelectorLive from './querySelectorLive';
 import urlParse from 'url-parse';
 import scrollTo from './scrollTo';

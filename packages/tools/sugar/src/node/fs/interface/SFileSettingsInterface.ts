@@ -1,4 +1,4 @@
-import __SInterface from '../../interface/SInterface';
+import __SInterface from '../../../shared/interface/SInterface';
 
 import SFileWatchSettingsInterface from './SFileWatchSettingsInterface';
 import SFileWriteSettingsInterface from './SFileWriteSettingsInterface';
@@ -33,7 +33,7 @@ export default class SFileSettingsInterface extends __SInterface {
       default: 4
     },
     sourcesExtensions: {
-      type: "Array<String>",
+      type: 'Array<String>',
       default: []
     },
     watch: {

@@ -2,14 +2,14 @@
 
 import __blessed from 'blessed';
 import __SBlessedComponent from '../SBlessedComponent';
-import __deepMerge from '../../object/deepMerge';
-import __parseHtml from '../../console/parseHtml';
-import __countLine from '../../string/countLine';
+import __deepMerge from '../../../shared/object/deepMerge';
+import __parseHtml from '../../../shared/console/parseHtml';
+import __countLine from '../../../shared/string/countLine';
 import __hotkey from '../../keyboard/hotkey';
-import __color from '../../color/color';
+import __color from '../../../shared/color/color';
 import __SPromise from '@coffeekraken/s-promise';
-import __multiple from '../../class/multipleExtends';
-import __activeSpace from '../../core/activeSpace';
+import __multiple from '../../../shared/class/multipleExtends';
+import __activeSpace from '../../../shared/core/activeSpace';
 import __escapeStack from '../../terminal/escapeStack';
 
 /**

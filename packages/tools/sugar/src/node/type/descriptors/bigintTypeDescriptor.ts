@@ -1,1 +1,0 @@
-../../../js/type/descriptors/bigintTypeDescriptor.ts

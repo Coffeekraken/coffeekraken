@@ -1,1 +1,0 @@
-../../../js/npm/utils/parseAuthorString.ts

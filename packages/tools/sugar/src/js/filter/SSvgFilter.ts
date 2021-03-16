@@ -1,12 +1,12 @@
 // @ts-nocheck
 
-import uniqid from '../util/uniqid';
+import uniqid from '../../shared/string/uniqid';
 
 /**
  * @name 		          SGooeySvgFilter
  * @namespace           sugar.js.filter
  * @type             Class
- * @stable
+ * @status          wip
  *
  * This class allows you to create with ease some complexe SVG filters and to apply it on any HTMLElement that you want
  * by extending this class like so

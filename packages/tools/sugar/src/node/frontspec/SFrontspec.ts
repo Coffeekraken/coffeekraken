@@ -2,14 +2,14 @@
 
 import __copy from '../clipboard/copy';
 import __SPromise from '@coffeekraken/s-promise';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __packageRoot from '../path/packageRoot';
 import __packageJson from '../package/json';
 import __glob from 'glob';
-import __toString from '../string/toString';
+import __toString from '../../shared/string/toString';
 import __fs from 'fs';
 import __path from 'path';
-import __unique from '../array/unique';
+import __unique from '../../shared/array/unique';
 import __sugarConfig from '../config/sugar';
 
 /**

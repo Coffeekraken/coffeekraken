@@ -1,1 +1,0 @@
-{"version":3,"file":"isInIframe.js","sourceRoot":"","sources":["isInIframe.ts"],"names":[],"mappings":"AAAA,cAAc;;;;;;;;;;;IAEd;;;;;;;;;;;;;;;;;;;;;;OAsBG;IACH,SAAS,UAAU;QACjB,IAAI;YACF,OAAO,MAAM,CAAC,IAAI,KAAK,MAAM,CAAC,GAAG,CAAC;SACnC;QAAC,OAAO,CAAC,EAAE;YACV,OAAO,IAAI,CAAC;SACb;IACH,CAAC;IACD,OAAS,UAAU,CAAC"}

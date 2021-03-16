@@ -245,6 +245,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
             },
             settings
           );
+
           try {
             pipe(compilePromise);
             let compileRes = await compilePromise;
@@ -252,6 +253,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
             aggregateStrArray.push(compileRes.js);
             emit('file', compileRes);
           } catch (e) {
+            console.log(e);
             emit('warn', {
               value: e.toString()
             });

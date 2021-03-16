@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "lerna bootstrap --hoist",
     "dev": "npm run dev.js; npm run dev.node",
-    "dev.js": "tsc -p tsconfig.js.json --watch",
+    "dev.js": "tsc -p tsconfig.js.json",
     "dev.node": "tsc -p tsconfig.node.json --watch",
     "container": "docker exec --workdir /workspaces/coffeekraken -it coffeekraken /bin/bash"
   },

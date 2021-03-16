@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __SInput from '../form/SInput';
 import __SBlessedPopup from './SBlessedPopup';
-import __activeSpace from '../../core/activeSpace';
+import __activeSpace from '../../../shared/core/activeSpace';
 
 /**
  * @name                  SBlessedInputPopup

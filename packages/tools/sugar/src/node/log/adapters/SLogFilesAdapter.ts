@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __prependFile from 'prepend-file';
 import __makeDir from 'make-dir';
 import __filesPreset from '../htmlPresets/files';

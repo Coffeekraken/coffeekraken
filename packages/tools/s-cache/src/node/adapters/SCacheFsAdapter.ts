@@ -1,13 +1,10 @@
-import __deepMerge from '@coffeekraken/sugar/node/object/deepMerge';
-import __tmpDir from '@coffeekraken/sugar/node/path/tmpDir';
+import __sugarConfig from '@coffeekraken/sugar/src/node/config/sugar';
+import __ensureDirSync from '@coffeekraken/sugar/src/node/fs/ensureDirSync';
+import __removeSync from '@coffeekraken/sugar/src/node/fs/removeSync';
+import __tmpDir from '@coffeekraken/sugar/src/node/path/tmpDir';
+import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
 import __fs from 'fs';
-import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
-import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
-import __sugarConfig from '@coffeekraken/sugar/node/config/sugar';
-import __toString from '@coffeekraken/sugar/node/string/toString';
 import __SCacheAdapter from './SCacheAdapter';
-
-import { ISCacheAdapter } from './SCacheAdapter';
 
 /**
  * @name                                SCacheFsAdapter

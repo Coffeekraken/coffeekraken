@@ -1,4 +1,4 @@
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../shared/object/deepMerge';
 import __ResolveSettingsInterface from './interface/ResolveSettingsInterface';
 import __fs from 'fs';
 import __path from 'path';

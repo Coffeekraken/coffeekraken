@@ -1,10 +1,9 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __uniqid from '../string/uniqid';
 import __keypress from 'keypress';
-import __activeSpace from '../core/activeSpace';
+import __SInterface from '../../shared/interface/_SInterface';
+import __uniqid from '../../shared/string/uniqid';
 // import __SIpc from '../ipc/SIpc';
 import __isChildProcess from '../is/childProcess';
-import __SInterface from '../interface/SInterface';
 
 /**
  * @name                hotkey
@@ -40,7 +39,7 @@ import __SInterface from '../interface/SInterface';
  */
 const hotkeyStack = {};
 let isListenerAlreadyAdded = false;
-let isSystemWideAlreadyAdded = false;
+const isSystemWideAlreadyAdded = false;
 
 export interface IHotkeySettings {
   once: boolean;

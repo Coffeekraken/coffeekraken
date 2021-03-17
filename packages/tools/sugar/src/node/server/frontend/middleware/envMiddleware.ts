@@ -2,7 +2,7 @@
 
 import __packageRoot from '../../../path/packageRoot';
 import __fs from 'fs';
-import __env from '../../../core/env';
+import __env from '../../../../shared/core/env';
 
 /**
  * @name            envMiddleware

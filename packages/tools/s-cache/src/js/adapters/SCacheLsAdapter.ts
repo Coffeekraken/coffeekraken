@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
-import { ISCacheAdapter } from './SCacheAdapter';
+import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
 
 /**
  * @name                                SCacheFsAdapter

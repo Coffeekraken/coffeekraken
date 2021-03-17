@@ -1,12 +1,12 @@
-import __unique from '../array/unique';
-import __deepMerge from '../object/deepMerge';
+import __unique from '../../shared/array/unique';
+import __deepMerge from '../../shared/object/deepMerge';
 import __sugarConfig from '../config/sugar';
 import __path from 'path';
 import __fs from 'fs';
-import __SError from '../error/SError';
+import __SError from '../../shared/error/SError';
 import __glob from 'glob';
 import __STemplateEngine from './engines/STemplateEngine';
-import __SClass from '../class/SClass';
+import __SClass from '../../shared/class/SClass';
 
 import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
 import { ISTemplateEngine } from './engines/STemplateEngine';

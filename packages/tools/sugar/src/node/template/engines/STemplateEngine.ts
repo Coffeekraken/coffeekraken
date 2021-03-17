@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __STemplateEngineInterface from './interface/STemplateEngineInterface';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __sugarConfig from '../../config/sugar';
-import __SClass from '../../class/SClass';
+import __SClass from '../../../shared/class/SClass';
 
 import { ISPromise } from '@coffeekraken/s-promise';
 

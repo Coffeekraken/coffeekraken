@@ -1,7 +1,7 @@
 import __SBlessedStdio from './blessed/SBlessedStdio';
 import __STerminalStdio from './terminal/STerminalStdio';
-import __isClass from '../is/class';
-import __isPath from '../is/path';
+import __isClass from '../../shared/is/class';
+import __isPath from '../../shared/is/path';
 
 /**
  * @name            stdio

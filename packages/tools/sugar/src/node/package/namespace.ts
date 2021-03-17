@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __json from './json';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __getFilename from '../fs/filename';
 import __sugarConfig from '../config/sugar';
 

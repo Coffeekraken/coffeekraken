@@ -1,25 +1,18 @@
 // @ts-nocheck
 
-import __getFilename from '../../fs/filename';
-import __onProcessExit from '../../process/onProcessExit';
-import __deepMerge from '../../object/deepMerge';
-import __SInterface from '../../interface/SInterface';
-import __sugarConfig from '../../config/sugar';
-import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
-import __SJsFile from '../SJsFile';
 import __SPromise from '@coffeekraken/s-promise';
-import __absolute from '../../path/absolute';
-import __isGlob from '../../is/glob';
+import * as __esbuild from 'esbuild';
 import __glob from 'glob';
 import __path from 'path';
-import __SDuration from '../../time/SDuration';
-import __filter from '../../object/filter';
 import __resolve from 'resolve';
-import __packageRoot from '../../path/packageRoot';
+import __isGlob from '../../../shared/is/glob';
+import __deepMerge from '../../../shared/object/deepMerge';
+import __filter from '../../../shared/object/filter';
+import __absolute from '../../../shared/path/absolute';
+import __SDuration from '../../../shared/time/SDuration';
+import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
 import __builtInNodeModules from '../../module/buildInNodeModules';
-import * as __esbuild from 'esbuild';
-import __wait from '../../time/wait';
-
+import __packageRoot from '../../path/packageRoot';
 import __SJsCompilerParamsInterface from './interface/SJsCompilerParamsInterface';
 
 export interface ISJsCompilerCtorSettings {
@@ -45,7 +38,7 @@ export interface ISJsCompilerParams {
   esbuild: any;
 }
 
-export interface ISJsCompiler extends ISCompiler {}
+export type ISJsCompiler = ISCompiler;
 
 /**
  * @name                SJsCompiler
@@ -98,7 +91,7 @@ class SJsCompiler extends __SCompiler {
         const builtInObj = __builtInNodeModules[path];
         if (builtInObj.polyfill && builtInObj.polyfill.browser) {
           build.onResolve({ filter: new RegExp(`^${path}$`) }, (args) => {
-            let resolvedPath = __resolve.sync(builtInObj.polyfill.browser, {
+            const resolvedPath = __resolve.sync(builtInObj.polyfill.browser, {
               basedir: _rootDir,
               moduleDirectory: [
                 'node_modules',
@@ -245,7 +238,7 @@ class SJsCompiler extends __SCompiler {
           params.map = false;
         }
 
-        let esbuildParams: any = {
+        const esbuildParams: any = {
           charset: 'utf8',
           format: 'iife',
           logLevel: 'silent',

@@ -1,5 +1,5 @@
-import __parseHtml from '../../../console/parseHtml';
-import __toString from '../../../string/toString';
+import __parseHtml from '../../../../shared/console/parseHtml';
+import __toString from '../../../../shared/string/toString';
 
 /**
  * @name        defaultTerminalStdioComponent

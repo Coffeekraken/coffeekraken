@@ -6,7 +6,7 @@ import __SNpmUnusedParamsInterface from './interface/SNpmUnusedParamsInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __depCheck from 'depcheck';
 import __packageRoot from '../path/packageRoot';
-import __toString from '../string/toString';
+import __toString from '../../shared/string/toString';
 import __packageJson from './utils/packageJson';
 
 /**

@@ -1,15 +1,15 @@
 // @to-work
-import __isClass from '../is/class';
+import __isClass from '../../shared/is/class';
 import __SProcess from './SProcess';
 import __SPromise from '@coffeekraken/s-promise';
-import __SEventEmitter from '../event/SEventEmitter';
-import __deepMerge from '../object/deepMerge';
-import __typeof from '../value/typeof';
+import __SEventEmitter from '../../shared/event/SEventEmitter';
+import __deepMerge from '../../shared/object/deepMerge';
+import __typeof from '../../shared/value/typeof';
 import __stdio from '../stdio/stdio';
-import __toString from '../string/toString';
-import __parseHtml from '../console/parseHtml';
+import __toString from '../../shared/string/toString';
+import __parseHtml from '../../shared/console/parseHtml';
 import __isChildProcess from '../is/childProcess';
-import __wait from '../time/wait';
+import __wait from '../../shared/time/wait';
 
 import {
   ISProcess,

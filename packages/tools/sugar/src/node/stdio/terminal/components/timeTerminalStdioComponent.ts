@@ -1,6 +1,6 @@
-import __parseHtml from '../../../console/parseHtml';
-import __toString from '../../../string/toString';
-import __upperFirst from '../../../string/upperFirst';
+import __parseHtml from '../../../../shared/console/parseHtml';
+import __toString from '../../../../shared/string/toString';
+import __upperFirst from '../../../../shared/string/upperFirst';
 
 /**
  * @name        timeTerminalStdioComponent

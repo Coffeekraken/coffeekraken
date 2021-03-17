@@ -1,8 +1,7 @@
 // @ts-nocheck
 
-import __SInterface from '../../../shared/interface/SInterface';
+import __SInterface from '../../../shared/interface/_SInterface';
 import __sugarConfig from '../../config/sugar';
-import __deepMerge from '../../../shared/object/deepMerge';
 
 /**
  * @name                SDocMapSettingsInterface

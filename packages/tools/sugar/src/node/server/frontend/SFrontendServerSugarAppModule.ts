@@ -3,7 +3,7 @@
 import __SSugarAppModule from '../../app/sugar/SSugarAppModule';
 import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 import __frontend from '../../server/frontend/frontend';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __SFrontendServerProcess from '../../server/frontend/SFrontendServerProcess';
 
 /**

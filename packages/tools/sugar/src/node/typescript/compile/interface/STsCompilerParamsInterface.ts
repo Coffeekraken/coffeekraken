@@ -1,8 +1,7 @@
 // @ts-nocheck
 
-import __SInterface from '../../../interface/SInterface';
+import __SInterface from '../../../../shared/interface/_SInterface';
 import __sugarConfig from '../../../config/sugar';
-import __TscInterface from './TscInterface';
 
 /**
  * @name                STsCompilerParamsInterface

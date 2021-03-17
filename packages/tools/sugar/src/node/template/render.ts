@@ -5,12 +5,12 @@ import __getFilename from '../fs/filename';
 import __fs from 'fs';
 import __path from 'path';
 import __getExt from '../fs/extension';
-import __deepMerge from '../object/deepMerge';
-import __toString from '../string/toString';
+import __deepMerge from '../../shared/object/deepMerge';
+import __toString from '../../shared/string/toString';
 import __SPromise from '@coffeekraken/s-promise';
-import __SError from '../error/SError';
+import __SError from '../../shared/error/SError';
 import __STemplate from './STemplate';
-import __unique from '../array/unique';
+import __unique from '../../shared/array/unique';
 
 /**
  * @name              render

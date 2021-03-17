@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __SInterface from '../../../../shared/interface/SInterface';
-import __sugarConfig from '../../../config/sugar';
+import __SInterface from '../../../../shared/interface/_SInterface';
 
 /**
  * @name                SSugarAppModulePresetInterface

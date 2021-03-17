@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __uniquid from '../string/uniqid';
+import __uniquid from '../../shared/string/uniqid';
 
 /**
  * @name              registerProcess

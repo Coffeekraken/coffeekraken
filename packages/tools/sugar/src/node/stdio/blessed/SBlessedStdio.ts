@@ -1,27 +1,27 @@
 // @ts-nocheck
 
-import __md5 from '../../crypt/md5';
+import __md5 from '../../../shared/crypt/md5';
 import __packageRoot from '../../path/packageRoot';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __blessed from 'blessed';
-import __color from '../../color/color';
+import __color from '../../../shared/color/color';
 import __parseMarkdown from '../../terminal/parseMarkdown';
 import __isChildProcess from '../../is/childProcess';
-import __parse from '../../string/parse';
-import __toString from '../../string/toString';
+import __parse from '../../../shared/string/parse';
+import __toString from '../../../shared/string/toString';
 import __stripAnsi from 'strip-ansi';
-import __trimLines from '../../string/trimLines';
-import __extractValues from '../../object/extractValues';
-import __wait from '../../time/wait';
-import __parseArgs from '../../cli/parseArgs';
-import __parseAndFormatLog from '../../log/parseAndFormatLog';
-import __parseHtml from '../../console/parseHtml';
-import __countLine from '../../string/countLine';
+import __trimLines from '../../../shared/string/trimLines';
+import __extractValues from '../../../shared/object/extractValues';
+import __wait from '../../../shared/time/wait';
+import __parseArgs from '../../../shared/cli/parseArgs';
+import __parseAndFormatLog from '../../../shared/log/parseAndFormatLog';
+import __parseHtml from '../../../shared/console/parseHtml';
+import __countLine from '../../../shared/string/countLine';
 import __chalk from 'chalk';
 import __minimatch from 'minimatch';
 import __SStdio from '../SStdio';
 
-import { ILog } from '../../../log/log';
+import { ILog } from '../../../../shared/log/log';
 import { ISStdio } from '../SStdio';
 import __SBlessedComponent, {
   ISBlessedComponent

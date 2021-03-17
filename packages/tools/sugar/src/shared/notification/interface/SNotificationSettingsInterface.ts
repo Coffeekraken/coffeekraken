@@ -1,8 +1,7 @@
 // @shared
 
 import __sugarConfig from '../../../node/config/sugar';
-import __isNode from '../../is/node';
-import __SInterface from '../../interface/SInterface';
+import __SInterface from '../../interface/_SInterface';
 
 /**
  * @name            SNotificationSettingsInterface

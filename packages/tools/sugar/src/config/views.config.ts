@@ -1,5 +1,4 @@
 import __path from 'path';
-import __packageRoot from '../node/path/packageRoot';
 
 export default {
   /**

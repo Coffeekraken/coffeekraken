@@ -1,6 +1,6 @@
 import SProcess from '../../process/SProcess';
 import __SJsCompiler from './SJsCompiler';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 
 import __SJsCompilerParamsInterface from './interface/SJsCompilerParamsInterface';
 import { ISJsCompiler, ISJsCompilerParams } from './SJsCompiler';

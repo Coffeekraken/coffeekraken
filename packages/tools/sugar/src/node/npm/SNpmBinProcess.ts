@@ -2,7 +2,7 @@
 
 import _SProcess from '../process/SProcess';
 import _SNpmBinParamsInterface from './interface/SNpmBinParamsInterfaceamsInterface';
-import _deepMerge from '../object/deepMerge';
+import _deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name              SNpmBinProcess

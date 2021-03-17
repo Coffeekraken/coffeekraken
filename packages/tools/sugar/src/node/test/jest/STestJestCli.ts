@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SCli from '../../cli/SCli';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __STestJestCliInterface from './interface/STestJestInterface';
 import __STestJestProcess from './STestJestProcess';
 

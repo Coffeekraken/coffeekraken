@@ -2,12 +2,12 @@
 
 import __SApp from './SApp';
 import __SHeader from './SHeader';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../shared/object/deepMerge';
 import __blessed from 'blessed';
 import __parseHtml from './parseHtml';
-import __splitEvery from '../string/splitEvery';
-import __countLine from '../string/countLine';
-import __parseSchema from '../url/parseSchema';
+import __splitEvery from '../../shared/string/splitEvery';
+import __countLine from '../../shared/string/countLine';
+import __parseSchema from '../../shared/url/parseSchema';
 import __sugarConfig from '../config/sugar';
 
 /**

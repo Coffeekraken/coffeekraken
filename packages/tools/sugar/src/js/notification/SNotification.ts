@@ -1,6 +1,6 @@
-import __SNotification from './_SNotification';
+import SNotification from '../../shared/notification/_SNotification';
 
 // @todo        develop the "browser" default adapter
 
-export * from './_SNotification';
-export default __SNotification;
+export * from '../../shared/notification/_SNotification';
+export default SNotification;

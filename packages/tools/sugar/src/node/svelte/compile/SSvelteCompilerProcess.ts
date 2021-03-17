@@ -1,6 +1,6 @@
 import SProcess from '../../process/SProcess';
 import __SSvelteCompiler from './SSvelteCompiler';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 
 import __SSvelteCompilerParamsInterface from './interface/SSvelteCompilerParamsInterface';
 import { ISSvelteCompiler, ISSvelteCompilerParams } from './SSvelteCompiler';

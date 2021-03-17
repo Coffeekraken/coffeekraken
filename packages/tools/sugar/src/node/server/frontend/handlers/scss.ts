@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __SPromise from '../@coffeekraken/s-promise';
+import __SPromise from '@coffeekraken/s-promise';
 import __SScssCompiler from '../../../scss/compile/SScssCompiler';
-import __SDuration from '../../../time/SDuration';
+import __SDuration from '../../../../shared/time/SDuration';
 import __SScssCompilerParamsInterface from '../../../scss/compile/interface/SScssCompilerParamsInterface';
 
 /**

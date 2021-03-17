@@ -1,15 +1,17 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __minimatch from 'minimatch';
 import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
-import __SClass, { ISClass } from '../class/SClass';
-import __SEventEmitter, { ISEventEmitter } from '../event/SEventEmitter';
+import __SClass, { ISClass } from '../../shared/class/SClass';
+import __SEventEmitter, {
+  ISEventEmitter
+} from '../../shared/event/SEventEmitter';
 import __SBlessedStdio from './blessed/SBlessedStdio';
-import __isClass from '../is/class';
-import __parseAndFormatLog from '../log/parseAndFormatLog';
+import __isClass from '../../shared/is/class';
+import __parseAndFormatLog from '../../shared/log/parseAndFormatLog';
 
-import { ILog } from '../log/log';
+import { ILog } from '../../shared/log/log';
 
 export interface ISStdioCtorSettings {
   stdio?: ISStdioSettings;

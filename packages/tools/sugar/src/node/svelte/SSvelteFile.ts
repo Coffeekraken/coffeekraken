@@ -1,21 +1,19 @@
-import __SFile from '../fs/SFile';
-import __md5 from '../crypt/md5';
-import __SDuration from '../time/SDuration';
-import __path from 'path';
 import __SPromise from '@coffeekraken/s-promise';
-import __deepMerge from '../object/deepMerge';
+import __path from 'path';
+import __SInterface from '../../shared/interface/_SInterface';
+import __deepMerge from '../../shared/object/deepMerge';
+import __SDuration from '../../shared/time/SDuration';
+import __wait from '../../shared/time/wait';
 import __sugarConfig from '../config/sugar';
-import __toString from '../string/toString';
-import __wait from '../time/wait';
 import __getFilename from '../fs/filename';
+import __SFile from '../fs/SFile';
 import __SScssFile from '../scss/SScssFile';
 import __STsFile from '../typescript/STsFile';
-
-const __svelte = require('svelte/compiler');
-
-import __SInterface from '../interface/SInterface';
-import { ISSvelteCompilerParams } from './compile/SSvelteCompiler';
 import __SSvelteCompilerParamsInterface from './compile/interface/SSvelteCompilerParamsInterface';
+import { ISSvelteCompilerParams } from './compile/SSvelteCompiler';
+
+// @ts-ignore
+const __svelte = require('svelte/compiler'); // eslint-disable-line
 
 /**
  * @name          SSvelteFileSettingsInterface
@@ -231,7 +229,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
 
         await __wait(0);
 
-        let toCompile = this.content;
+        const toCompile = this.content;
 
         try {
           emit('log', {
@@ -401,9 +399,6 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
                 file: this.toObject()
               });
             }
-
-            // notify end
-            const time = duration.end();
 
             emit('log', {
               type: 'file',

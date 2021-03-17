@@ -1,29 +1,11 @@
 // @ts-nocheck
 
-import __globWatcher from 'glob-watcher';
-import * as __ts from 'typescript';
-import __deepMerge from '../../object/deepMerge';
-import __SInterface from '../../interface/SInterface';
-import __sugarConfig from '../../config/sugar';
-import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
-import __STsFile from '../STsFile';
-import __SFile from '../../fs/SFile';
 import __SPromise from '@coffeekraken/s-promise';
-import __absolute from '../../path/absolute';
-import __isGlob from '../../is/glob';
-import __glob from 'glob';
-import __SCliProcess from '../../process/SCliProcess';
-import __md5 from '../../crypt/md5';
-import __packageRoot from '../../path/packageRoot';
-import __tmpDir from '../../path/tmpDir';
-import __stripAnsi from '../../string/stripAnsi';
-import __SDuration from '../../time/SDuration';
-import __fs from 'fs';
-import __clone from '../../object/clone';
-import __path from 'path';
+import __deepMerge from '../../../shared/object/deepMerge';
+import __SDuration from '../../../shared/time/SDuration';
+import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
+import __sugarConfig from '../../config/sugar';
 import __fsPool from '../../fs/pool';
-
-import __TscInterface from './interface/TscInterface';
 import __STsCompilerParamsInterface from './interface/STsCompilerParamsInterface';
 
 export interface ISTsCompilerCtorSettings {}
@@ -47,7 +29,7 @@ export interface ISTsCompilerParams {
   // tsconfig: any;
 }
 
-export interface ISTsCompiler extends ISCompiler {}
+export type ISTsCompiler = ISCompiler;
 
 /**
  * @name                STsCompiler
@@ -148,10 +130,12 @@ class STsCompiler extends __SCompiler {
       async ({ resolve, reject, pipe, pipeFrom, emit, on }) => {
         settings = __deepMerge(this.tsCompilerSettings, {}, settings || {});
 
-        let input = Array.isArray(params.input) ? params.input : [params.input];
+        const input = Array.isArray(params.input)
+          ? params.input
+          : [params.input];
 
         const resultsObj = {};
-        let aggregateStrArray: string[] = [];
+        const aggregateStrArray: string[] = [];
         const duration = new __SDuration();
 
         const pool = __fsPool(input, {
@@ -183,7 +167,7 @@ class STsCompiler extends __SCompiler {
 
             try {
               pipe(compilePromise);
-              let compileRes = await compilePromise;
+              const compileRes = await compilePromise;
               resultsObj[file.path] = compileRes;
               aggregateStrArray.push(compileRes.js);
               emit('file', compileRes);

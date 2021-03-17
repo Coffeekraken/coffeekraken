@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
-import __convert from '../time/convert';
-import __STimer from '../time/STimer';
-import __availableEasingsArray from '../easing/availableEasingsArray';
+import __deepMerge from '../../shared/object/deepMerge';
+import __convert from '../../shared/time/convert';
+import __STimer from '../../shared/time/STimer';
+import __availableEasingsArray from '../../shared/easing/availableEasingsArray';
 import __SPromise from '@coffeekraken/s-promise';
 
 /**

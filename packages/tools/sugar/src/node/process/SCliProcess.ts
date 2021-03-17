@@ -1,8 +1,8 @@
 import __SProcess from './SProcess';
-import __buildCommandLine from '../cli/buildCommandLine';
+import __buildCommandLine from '../../shared/cli/buildCommandLine';
 import __onProcessExit from './onProcessExit';
 import __spawn from './spawn';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 
 import { ISProcess, ISProcessSettings } from './SProcess';
 import { ISpawnSettings } from './spawn';

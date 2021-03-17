@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __SInterface from '../../class/SInterface';
+import __SInterface from '../../../shared/class/SInterface';
 import __sugarConfig from '../../config/sugar';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 
 /**
  * @name                STestInterface

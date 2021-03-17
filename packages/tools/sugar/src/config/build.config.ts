@@ -1,6 +1,3 @@
-import __packageRoot from '../node/path/packageRoot';
-import __packageJson from '../node/package/json';
-
 export default {
   /**
    * @name                useFrontspec
@@ -99,7 +96,7 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    get input() {
+    get input(): string {
       return `[config.build.inputDir]/js/${
         this.bundle === true ? '*' : '**/*'
       }.js`;

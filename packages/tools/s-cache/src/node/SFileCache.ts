@@ -1,9 +1,6 @@
-import __SCache from './SCache';
+import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
 import __fs from 'fs';
-import __deepMerge from '@coffeekraken/sugar/node/object/deepMerge';
-import __sugarConfig from '@coffeekraken/sugar/node/config/sugar';
-
-import { ISCacheSetSettings } from './SCache';
+import __SCache, { ISCacheSetSettings } from './SCache';
 
 /**
  * @name            SFileCache
@@ -21,7 +18,7 @@ import { ISCacheSetSettings } from './SCache';
  * @param         {Object}          [settings={}]         The settings for the SCache instance
  *
  * @example       js
- * import SFileCache from '@coffeekraken/sugar/node/cache/SFileCache';
+ * import SFileCache from '@coffeekraken/sugar/src/shared/cache/SFileCache';
  * const cache = new SFileCache('myCoolCache');
  * cache.set('/my/cool/file.ts');
  *

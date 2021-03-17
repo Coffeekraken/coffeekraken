@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __blessed from 'blessed';
 import __parseHtml from './parseHtml';
-import __splitEvery from '../string/splitEvery';
-import __countLine from '../string/countLine';
+import __splitEvery from '../../shared/string/splitEvery';
+import __countLine from '../../shared/string/countLine';
 
 /**
  * @name                    SHeader

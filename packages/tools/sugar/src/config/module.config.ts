@@ -1,4 +1,4 @@
-import __isNode from '../node/is/node';
+import __isNode from '../shared/is/node';
 
 export default {
   resolve: {

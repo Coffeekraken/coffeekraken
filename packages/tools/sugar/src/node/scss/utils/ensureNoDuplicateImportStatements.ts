@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __findImportStatements from './findImportStatements';
-import __dedupe from '../../string/dedupe';
+import __dedupe from '../../../shared/string/dedupe';
 
 /**
  * @name            ensureNoDuplicateImportStatements

@@ -1,39 +1,28 @@
-import __completeArgsObject from '../cli/completeArgsObject';
+import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
 import __path from 'path';
-import __convert from '../time/convert';
-import __wait from '../time/wait';
-import __isClass from '../is/class';
-import __onProcessExit from './onProcessExit';
-import __SPromise from '@coffeekraken/s-promise';
-import __deepMerge from '../object/deepMerge';
-import __packageRoot from '../path/packageRoot';
-import __isChildProcess from '../is/childProcess';
-import __SIpcClient from '../ipc/SIpcClient';
-import __SError from '../error/SError';
-import __buildCommandLine from '../cli/buildCommandLine';
-import __parseArgs from '../cli/parseArgs';
-import __argsToObject from '../cli/argsToObject';
-import __childProcess from 'child_process';
-import __stdio from '../stdio/stdio';
 import __stackTrace from 'stack-trace';
-import __argsToString from '../cli/argsToString';
-import __toString from '../string/toString';
-import __copy from '../clipboard/copy';
-import __spawn from './spawn';
-import __parseHtml from '../console/parseHtml';
-import __uniqid from '../string/uniqid';
-import __SEventEmitter from '../event/SEventEmitter';
-import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
-import __SNotification from '../notification/SNotification';
-import __SDuration from '../time/SDuration';
-
-import { ILog } from '../log/log';
-import { ISpawnSettings } from './spawn';
-import { ISClass as __ISClass } from '../class/SClass';
+import { ISClass as __ISClass } from '../../shared/class/SClass';
+import __argsToObject from '../../shared/cli/argsToObject';
+import __buildCommandLine from '../../shared/cli/buildCommandLine';
+import __SError from '../../shared/error/SError';
+import __SEventEmitter from '../../shared/event/SEventEmitter';
+import {
+  ISInterface,
+  ISInterfaceCtor
+} from '../../shared/interface/_SInterface';
+import { ILog } from '../../shared/log/log';
+import __deepMerge from '../../shared/object/deepMerge';
+import __toString from '../../shared/string/toString';
+import __convert from '../../shared/time/convert';
+import __SDuration from '../../shared/time/SDuration';
+import __wait from '../../shared/time/wait';
+import { ISEventEmitter } from '../event/../shared/SEventEmitter';
+import __isChildProcess from '../is/childProcess';
 import { ISStdio } from '../stdio/SStdio';
-import { ISPromise } from '@coffeekraken/s-promise';
-import { ISEventEmitter } from '../event/SEventEmitter';
-import { ISInterface, ISInterfaceCtor } from '../interface/SInterface';
+import __stdio from '../stdio/stdio';
+import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
+import __onProcessExit from './onProcessExit';
+import __spawn, { ISpawnSettings } from './spawn';
 
 /**
  * @name                SProcess
@@ -248,7 +237,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   static async run(
-    paramsOrStringArgs: String | Record<string, any> = {},
+    paramsOrStringArgs: string | Record<string, any> = {},
     settings: Partial<ISProcessSettings> = {}
   ) {
     const instance = new this({});
@@ -292,7 +281,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     });
 
     this._processPath = this.processSettings.processPath;
-    for (var callSite of __stackTrace.get()) {
+    for (const callSite of __stackTrace.get()) {
       if (callSite.getFunctionName() === this.constructor.name) {
         this._processPath = callSite.getFileName();
         break;
@@ -411,7 +400,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     await __wait(50);
 
-    let paramsObj: any = __argsToObject(paramsOrStringArgs, {
+    const paramsObj: any = __argsToObject(paramsOrStringArgs, {
       definition: {
         ...(this.paramsInterface !== undefined
           ? this.paramsInterface.definition

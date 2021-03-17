@@ -2,7 +2,7 @@
 
 import __extension from '../../fs/extension';
 import __fs from 'fs';
-import __buildCommandLine from '../../cli/buildCommandLine';
+import __buildCommandLine from '../../../shared/cli/buildCommandLine';
 import __STestJestInterface from './interface/STestJestInterface';
 import __folderPath from '../../fs/folderPath';
 import __getFilename from '../../fs/filename';

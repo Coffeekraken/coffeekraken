@@ -2,7 +2,7 @@
 
 import __psList from 'ps-list';
 import __fkill from 'fkill';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __minimatch from 'minimatch';
 
 /**

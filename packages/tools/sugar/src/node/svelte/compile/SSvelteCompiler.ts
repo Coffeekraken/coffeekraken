@@ -1,18 +1,10 @@
 // @ts-nocheck
 
-import __deepMerge from '../../object/deepMerge';
-import __SInterface from '../../interface/SInterface';
-import __sugarConfig from '../../config/sugar';
-import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
-import __SSvelteFile from '../SSvelteFile';
 import __SPromise from '@coffeekraken/s-promise';
-import __absolute from '../../path/absolute';
-import __isGlob from '../../is/glob';
-import __glob from 'glob';
-import __chokidar from 'chokidar';
+import __deepMerge from '../../../shared/object/deepMerge';
+import __SDuration from '../../../shared/time/SDuration';
+import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
 import __fsPool from '../../fs/pool';
-import __SDuration from '../../time/SDuration';
-
 import __SSvelteCompilerParamsInterface from './interface/SSvelteCompilerParamsInterface';
 
 export interface ISSvelteCompilerCtorSettings {
@@ -34,7 +26,7 @@ export interface ISSvelteCompilerParams {
   svelte: any;
 }
 
-export interface ISSvelteCompiler extends ISCompiler {}
+export type ISSvelteCompiler = ISCompiler;
 
 /**
  * @name                SSvelteCompiler
@@ -132,7 +124,7 @@ class SSvelteCompiler extends __SCompiler {
     return new __SPromise(async ({ resolve, reject, pipe, emit, on }) => {
       settings = __deepMerge(this.svelteCompilerSettings, {}, settings);
 
-      let input = Array.isArray(params.input) ? params.input : [params.input];
+      const input = Array.isArray(params.input) ? params.input : [params.input];
 
       // prod
       if (params.prod) {
@@ -142,7 +134,7 @@ class SSvelteCompiler extends __SCompiler {
       }
 
       const resultsObj = {};
-      let aggregateStrArray: string[] = [];
+      const aggregateStrArray: string[] = [];
       const duration = new __SDuration();
 
       const pool = __fsPool(input, {
@@ -174,7 +166,7 @@ class SSvelteCompiler extends __SCompiler {
 
           try {
             pipe(compilePromise);
-            let compileRes = await compilePromise;
+            const compileRes = await compilePromise;
             resultsObj[file.path] = compileRes;
             aggregateStrArray.push(compileRes.js);
             emit('file', compileRes);

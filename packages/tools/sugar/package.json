@@ -258,6 +258,8 @@
     "to-regex": "^3.0.2",
     "tree-kill": "^1.2.2",
     "ttf2woff2": "^3.0.0",
+    "typescript": "^4.2.3",
+    "typescript-transpile-only": "0.0.4",
     "uglify-js": "^3.12.2",
     "unified": "^9.2.1",
     "uniqid": "^5.2.0",
@@ -271,5 +273,8 @@
   },
   "globalDependencies": {
     "typescript": "^4.2.3"
+  },
+  "devDependencies": {
+    "tsconfig-paths": "^3.9.0"
   }
 }

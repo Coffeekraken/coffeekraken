@@ -109,207 +109,6 @@ exports.default = {
         }
     },
     handlers: {
-        // /**
-        //  * @name            homepage
-        //  * @namespace       config.frontend.handlers
-        //  * @type            Object
-        //  *
-        //  * Store all the "homepage" configuration access like the slug, the title, etc...
-        //  *
-        //  * @since         2.0.0
-        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //  */
-        // homepage: {
-        //   /**
-        //    * @name          slug
-        //    * @namespace     config.frontend.handlers.homepage
-        //    * @type          String
-        //    * @default       /homepage
-        //    *
-        //    * Specify the url slug to use for this "section"
-        //    *
-        //    * @since         2.0.0
-        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //    */
-        //   slug: '/homepage',
-        //   /**
-        //    * @name          title
-        //    * @namespace     config.frontent.pages.homepage
-        //    * @type          String
-        //    * @default       homepage | [title]
-        //    *
-        //    * Specify the page title wanted. Accessible tokens:
-        //    * - [title]: Name of the view
-        //    *
-        //    * @since       2.0.0
-        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //    */
-        //   title: 'homepage | [title]',
-        //   /**
-        //    * @name            handler
-        //    * @namespace       config.frontend.handlers.homepage
-        //    * @type            Function
-        //    *
-        //    * Specify the handler function that will take care of responding to this "section"
-        //    *
-        //    * @since         2.0.0
-        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //    */
-        //   handler: `${__dirname}/../node/server/frontend/handlers/homepage`
-        // },
-        // /**
-        //  * @name            ts
-        //  * @namespace       config.frontend.handlers
-        //  * @type            Object
-        //  *
-        //  * Handler for .ts files
-        //  *
-        //  * @since         2.0.0
-        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //  */
-        // ts: {
-        //   /**
-        //    * @name          extension
-        //    * @namespace     config.frontend.handlers.sugar
-        //    * @type          String
-        //    * @default       .ts
-        //    *
-        //    * Specify the url slug to use for this "section"
-        //    *
-        //    * @since         2.0.0
-        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //    */
-        //   extension: '.ts',
-        //   /**
-        //    * @name            handler
-        //    * @namespace       config.frontend.handlers.sugar
-        //    * @type            Function
-        //    *
-        //    * Specify the handler function that will take care of responding to this "section"
-        //    *
-        //    * @since         2.0.0
-        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //    */
-        //   handler: `${__dirname}/../node/server/frontend/handlers/ts`
-        // },
-        // /**
-        //  * @name            js
-        //  * @namespace       config.frontend.handlers
-        //  * @type            Object
-        //  *
-        //  * Handler for .js files
-        //  *
-        //  * @since         2.0.0
-        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //  */
-        // js: {
-        //   /**
-        //    * @name          extension
-        //    * @namespace     config.frontend.handlers.sugar
-        //    * @type          String
-        //    * @default       .js
-        //    *
-        //    * Specify the url slug to use for this "section"
-        //    *
-        //    * @since         2.0.0
-        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //    */
-        //   extension: '.js',
-        //   /**
-        //    * @name            handler
-        //    * @namespace       config.frontend.handlers.sugar
-        //    * @type            Function
-        //    *
-        //    * Specify the handler function that will take care of responding to this "section"
-        //    *
-        //    * @since         2.0.0
-        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //    */
-        //   handler: `${__dirname}/../node/server/frontend/handlers/js`
-        // },
-        // /**
-        //  * @name            scss
-        //  * @namespace       config.frontend.handlers
-        //  * @type            Object
-        //  *
-        //  * Handler for .scss files
-        //  *
-        //  * @since         2.0.0
-        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //  */
-        // scss: {
-        //   /**
-        //    * @name          extension
-        //    * @namespace     config.frontend.handlers.sugar
-        //    * @type          String
-        //    * @default       .scss
-        //    *
-        //    * Specify the url slug to use for this "section"
-        //    *
-        //    * @since         2.0.0
-        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //    */
-        //   extension: '.scss',
-        //   /**
-        //    * @name            handler
-        //    * @namespace       config.frontend.handlers.sugar
-        //    * @type            Function
-        //    *
-        //    * Specify the handler function that will take care of responding to this "section"
-        //    *
-        //    * @since         2.0.0
-        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //    */
-        //   handler: `${__dirname}/../node/server/frontend/handlers/scss`
-        // },
-        // /**
-        //  * @name            sugar
-        //  * @namespace       config.frontend.handlers
-        //  * @type            Object
-        //  *
-        //  * Store all the "sugar" configuration access like the slug, the title, etc...
-        //  *
-        //  * @since         2.0.0
-        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //  */
-        // sugar: {
-        //   /**
-        //    * @name          slug
-        //    * @namespace     config.frontend.handlers.sugar
-        //    * @type          String
-        //    * @default       /sugar
-        //    *
-        //    * Specify the url slug to use for this "section"
-        //    *
-        //    * @since         2.0.0
-        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //    */
-        //   slug: '/sugar',
-        //   /**
-        //    * @name          title
-        //    * @namespace     config.frontent.pages.sugar
-        //    * @type          String
-        //    * @default       sugar | [title]
-        //    *
-        //    * Specify the page title wanted. Accessible tokens:
-        //    * - [title]: Name of the view
-        //    *
-        //    * @since       2.0.0
-        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //    */
-        //   title: 'Sugar | [title]',
-        //   /**
-        //    * @name            handler
-        //    * @namespace       config.frontend.handlers.sugar
-        //    * @type            Function
-        //    *
-        //    * Specify the handler function that will take care of responding to this "section"
-        //    *
-        //    * @since         2.0.0
-        //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //    */
-        //   handler: `${__dirname}/../node/server/frontend/handlers/sugar`
-        // },
         /**
          * @name            views
          * @namespace       config.frontend.handlers
@@ -337,7 +136,7 @@ exports.default = {
              * @name          title
              * @namespace     config.frontent.pages.views
              * @type          String
-             * @default       Views | [title]
+             * @default       Views | [title]
              *
              * Specify the page title wanted. Accessible tokens:
              * - [title]: Name of the view
@@ -345,7 +144,7 @@ exports.default = {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            title: 'Views | [title]',
+            title: 'Views | [title]',
             /**
              * @name            handler
              * @namespace       config.frontend.handlers.views
@@ -385,7 +184,7 @@ exports.default = {
              * @name          title
              * @namespace     config.frontent.pages.views
              * @type          String
-             * @default       Views | [title]
+             * @default       Views | [title]
              *
              * Specify the page title wanted. Accessible tokens:
              * - [title]: Name of the view
@@ -393,7 +192,7 @@ exports.default = {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            title: 'Doc | [title]',
+            title: 'Doc | [title]',
             /**
              * @name            handler
              * @namespace       config.frontend.handlers.views
@@ -433,7 +232,7 @@ exports.default = {
         //    * @name          title
         //    * @namespace     config.frontent.pages.docMap
         //    * @type          String
-        //    * @default       docMap | [title]
+        //    * @default       docMap | [title]
         //    *
         //    * Specify the page title wanted. Accessible tokens:
         //    * - [title]: Name of the view
@@ -481,14 +280,14 @@ exports.default = {
         //    * @name            title
         //    * @namespace       config.frontend.handlers.doc
         //    * @type            String
-        //    * @default         Documentation | [title]
+        //    * @default         Documentation | [title]
         //    *
         //    * Specify the title to use for this "section"
         //    *
         //    * @since         2.0.0
         //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         //    */
-        //   title: 'Documentation | [title]',
+        //   title: 'Documentation | [title]',
         //   /**
         //    * @name            handler
         //    * @namespace       config.frontend.handlers.doc
@@ -528,14 +327,14 @@ exports.default = {
         //    * @name            title
         //    * @namespace       config.frontend.handlers.search
         //    * @type            String
-        //    * @default         Search | [title]
+        //    * @default         Search | [title]
         //    *
         //    * Specify the title to use for this "section"
         //    *
         //    * @since         2.0.0
         //    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         //    */
-        //   title: 'Search | [title]',
+        //   title: 'Search | [title]',
         //   /**
         //    * @name            handler
         //    * @namespace       config.frontend.handlers.search
@@ -573,4 +372,4 @@ exports.default = {
         // }
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmQuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmQuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMEVBQW9EO0FBR3BELGtCQUFlO0lBQ2IsTUFBTSxFQUFFLGlCQUFpQjtJQUV6Qjs7Ozs7Ozs7OztPQVVHO0lBQ0gsSUFBSSxFQUFFLElBQUk7SUFFVjs7Ozs7Ozs7OztPQVVHO0lBQ0gsUUFBUSxFQUFFLG1CQUFXLEVBQUU7SUFFdkI7Ozs7Ozs7Ozs7T0FVRztJQUNILE9BQU8sRUFBRSwwQkFBMEI7SUFFbkM7Ozs7Ozs7Ozs7T0FVRztJQUNILFVBQVUsRUFBRTtRQUNWLE9BQU8sRUFBRSwrQkFBK0I7UUFDeEMsZUFBZSxFQUFFLHVDQUF1QztLQUN6RDtJQUVEOzs7Ozs7Ozs7O09BVUc7SUFDSCxRQUFRLEVBQUUsb0NBQW9DO0lBRTlDLFdBQVcsRUFBRTtRQUNYLHdCQUF3QixFQUFFO1lBQ3hCLElBQUksRUFBRSxHQUFHLFNBQVMsOERBQThEO1lBQ2hGLFFBQVEsRUFBRTtnQkFDUixPQUFPLEVBQUUsQ0FBQyxTQUFTLENBQUM7Z0JBQ3BCLFVBQVUsRUFBRTtvQkFDVixJQUFJO29CQUNKLEtBQUs7b0JBQ0wsTUFBTTtvQkFDTixJQUFJO29CQUNKLEtBQUs7b0JBQ0wsS0FBSztvQkFDTCxLQUFLO29CQUNMLEtBQUs7b0JBQ0wsTUFBTTtvQkFDTixNQUFNO29CQUNOLEtBQUs7b0JBQ0wsTUFBTTtvQkFDTixLQUFLO29CQUNMLEtBQUs7b0JBQ0wsS0FBSztvQkFDTCxNQUFNO29CQUNOLEtBQUs7aUJBQ047YUFDRjtTQUNGO1FBQ0QsU0FBUyxFQUFFO1lBQ1QsSUFBSSxFQUFFLEdBQUcsU0FBUyx5REFBeUQ7WUFDM0UsUUFBUSxFQUFFLEVBQUU7U0FDYjtRQUNELEdBQUcsRUFBRTtZQUNILElBQUksRUFBRSxHQUFHLFNBQVMsbURBQW1EO1lBQ3JFLFFBQVEsRUFBRSxFQUFFO1NBQ2I7UUFD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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmQuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmQuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMEVBQW9EO0FBRXBELGtCQUFlO0lBQ2IsTUFBTSxFQUFFLGlCQUFpQjtJQUV6Qjs7Ozs7Ozs7OztPQVVHO0lBQ0gsSUFBSSxFQUFFLElBQUk7SUFFVjs7Ozs7Ozs7OztPQVVHO0lBQ0gsUUFBUSxFQUFFLG1CQUFXLEVBQUU7SUFFdkI7Ozs7Ozs7Ozs7T0FVRztJQUNILE9BQU8sRUFBRSwwQkFBMEI7SUFFbkM7Ozs7Ozs7Ozs7T0FVRztJQUNILFVBQVUsRUFBRTtRQUNWLE9BQU8sRUFBRSwrQkFBK0I7UUFDeEMsZUFBZSxFQUFFLHVDQUF1QztLQUN6RDtJQUVEOzs7Ozs7Ozs7O09BVUc7SUFDSCxRQUFRLEVBQUUsb0NBQW9DO0lBRTlDLFdBQVcsRUFBRTtRQUNYLHdCQUF3QixFQUFFO1lBQ3hCLElBQUksRUFBRSxHQUFHLFNBQVMsOERBQThEO1lBQ2hGLFFBQVEsRUFBRTtnQkFDUixPQUFPLEVBQUUsQ0FBQyxTQUFTLENBQUM7Z0JBQ3BCLFVBQVUsRUFBRTtvQkFDVixJQUFJO29CQUNKLEtBQUs7b0JBQ0wsTUFBTTtvQkFDTixJQUFJO29CQUNKLEtBQUs7b0JBQ0wsS0FBSztvQkFDTCxLQUFLO29CQUNMLEtBQUs7b0JBQ0wsTUFBTTtvQkFDTixNQUFNO29CQUNOLEtBQUs7b0JBQ0wsTUFBTTtvQkFDTixLQUFLO29CQUNMLEtBQUs7b0JBQ0wsS0FBSztvQkFDTCxNQUFNO29CQUNOLEtBQUs7aUJBQ047YUFDRjtTQUNGO1FBQ0QsU0FBUyxFQUFFO1lBQ1QsSUFBSSxFQUFFLEdBQUcsU0FBUyx5REFBeUQ7WUFDM0UsUUFBUSxFQUFFLEVBQUU7U0FDYjtRQUNELEdBQUcsRUFBRTtZQUNILElBQUksRUFBRSxHQUFHLFNBQVMsbURBQW1EO1lBQ3JFLFFBQVEsRUFBRSxFQUFFO1NBQ2I7UUFD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

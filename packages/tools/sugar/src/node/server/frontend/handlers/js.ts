@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __SDuration from '../../../time/SDuration';
+import __SDuration from '../../../../shared/time/SDuration';
 import __SJsCompiler from '../../../js/SJsCompiler';
-import __SPromise from '../@coffeekraken/s-promise';
+import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name                js

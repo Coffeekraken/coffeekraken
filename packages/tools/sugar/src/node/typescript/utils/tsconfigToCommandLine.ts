@@ -1,8 +1,8 @@
 import __TscInterface from '../compile/interface/TscInterface';
-import __buildCommandLine from '../../cli/buildCommandLine';
+import __buildCommandLine from '../../../shared/cli/buildCommandLine';
 import __fs from 'fs';
 import __path from 'path';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __folderPath from '../../fs/folderPath';
 
 /**

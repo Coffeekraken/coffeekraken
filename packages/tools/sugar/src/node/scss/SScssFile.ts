@@ -1,32 +1,26 @@
-import __SFile from '../fs/SFile';
-import __findImportStatements from './utils/findImportStatements';
-import __resolveDependency from './utils/resolveDependency';
-import { parse as __parseScss } from 'scss-parser';
-import { stringify as __stringifyScss } from 'scss-parser';
+import __SCache from '@coffeekraken/s-cache';
+import __SPromise from '@coffeekraken/s-promise';
+import __csso from 'csso';
+import __path from 'path';
+import __postcssPresetEnv from 'postcss-preset-env';
 import __createQueryWrapper from 'query-ast';
 import __sass from 'sass';
-import __md5 from '../crypt/md5';
-import __SDuration from '../time/SDuration';
-import __path from 'path';
-import __SPromise from '@coffeekraken/s-promise';
-import __deepMerge from '../object/deepMerge';
+import {
+  parse as __parseScss,
+  stringify as __stringifyScss
+} from 'scss-parser';
+import __stripCssComments from '../../shared/css/stripCssComments';
+import __SInterface from '../../shared/interface/_SInterface';
+import __deepMerge from '../../shared/object/deepMerge';
+import __SDuration from '../../shared/time/SDuration';
 import __sugarConfig from '../config/sugar';
-import __SCache from '@coffeekraken/s-cache';
-import __putUseStatementsOnTop from './utils/putUseStatementsOnTop';
-import __toString from '../string/toString';
-import __csso from 'csso';
-import __stripCssComments from '../css/stripCssComments';
-import __repl from 'repl';
-import __getSharedResourcesString from './utils/getSharedResourcesString';
-import __wait from '../time/wait';
 import __getFilename from '../fs/filename';
-import __postcssPresetEnv from 'postcss-preset-env';
-import _tmpDir from '../path/tmpDir';
-
-import __SInterface from '../interface/SInterface';
-import { ISFile, ISFileSettings, ISFileCtorSettings } from '../fs/SFile';
-import { ISScssCompilerParams } from './compile/SScssCompiler';
+import __SFile, { ISFileCtorSettings } from '../fs/SFile';
 import __SScssCompilerParamsInterface from './compile/interface/SScssCompilerParamsInterface';
+import { ISScssCompilerParams } from './compile/SScssCompiler';
+import __findImportStatements from './utils/findImportStatements';
+import __getSharedResourcesString from './utils/getSharedResourcesString';
+import __putUseStatementsOnTop from './utils/putUseStatementsOnTop';
 
 /**
  * @name      SScssFileSettingsInterface

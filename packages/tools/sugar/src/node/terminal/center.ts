@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
-import __countLine from '../string/countLine';
+import __deepMerge from '../../shared/object/deepMerge';
+import __countLine from '../../shared/string/countLine';
 
 /**
  * @name                                    center

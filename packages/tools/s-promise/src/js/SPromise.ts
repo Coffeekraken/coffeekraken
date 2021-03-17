@@ -1,22 +1,16 @@
 // @shared
 // @ts-nocheck
 
-import __getMethods from '@coffeekraken/sugar/js/class/getMethods';
-import __minimatch from 'minimatch';
-import __deepMerge from '@coffeekraken/sugar/js/object/deepMerge';
-import __uniqid from '@coffeekraken/sugar/js/string/uniqid';
-import __wait from '@coffeekraken/sugar/js/time/wait';
-import __toString from '@coffeekraken/sugar/js/string/toString';
-import __env from '@coffeekraken/sugar/js/core/env';
+import __getMethods from '@coffeekraken/sugar/src/shared/class/getMethods';
+import __SClass from '@coffeekraken/sugar/src/shared/class/SClass';
+import __SEventEmitter, {
+  ISEventEmitter
+} from '@coffeekraken/sugar/src/shared/event/SEventEmitter';
+import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
 import __treatAsValue, {
-  ITreatAsValue,
   ITreatAsValueProxy,
   ITreatAsValueSettings
 } from './treatAsValue';
-import __SEventEmitter, {
-  ISEventEmitter
-} from '@coffeekraken/sugar/js/event/SEventEmitter';
-import __SClass from '@coffeekraken/sugar/js/class/SClass';
 
 /**
  * @name                  SPromise
@@ -442,7 +436,7 @@ class SPromise
       // exec the wanted stacks
       let stacksResult = await this.eventEmitter._emitEvents(stacksOrder, arg);
       // execute proxies
-      for (let proxyFn of this._settings.promise.proxies.resolve || []) {
+      for (const proxyFn of this._settings.promise.proxies.resolve || []) {
         stacksResult = await proxyFn(stacksResult);
       }
       // resolve the master promise
@@ -493,7 +487,7 @@ class SPromise
       // exec the wanted stacks
       let stacksResult = await this.eventEmitter._emitEvents(stacksOrder, arg);
       // execute proxies
-      for (let proxyFn of this._settings.promise.proxies.reject || []) {
+      for (const proxyFn of this._settings.promise.proxies.reject || []) {
         stacksResult = await proxyFn(stacksResult);
       }
       // resolve the master promise

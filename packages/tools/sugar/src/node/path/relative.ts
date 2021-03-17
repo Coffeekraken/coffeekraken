@@ -1,5 +1,5 @@
-import __isGlob from '../is/glob';
-import __isPath from '../is/path';
+import __isGlob from '../../shared/is/glob';
+import __isPath from '../../shared/is/path';
 import __path from 'path';
 import __packageRoot from './packageRoot';
 

@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __copy from '../../clipboard/copy';
-import __deepMerge from '../../object/deepMerge';
-import __isPlainObject from '../../is/plainObject';
+import __deepMerge from '../../../shared/object/deepMerge';
+import __isPlainObject from '../../../shared/is/plainObject';
 
 /**
  * @status              wip

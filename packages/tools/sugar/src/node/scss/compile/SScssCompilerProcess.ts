@@ -1,6 +1,6 @@
 import SProcess from '../../process/SProcess';
 import __SScssCompiler from './SScssCompiler';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 
 import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';
 import { ISScssCompiler, ISScssCompilerParams } from './SScssCompiler';

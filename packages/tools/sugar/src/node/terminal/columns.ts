@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __splitLineEvery from './__wip__/splitLineEvery';
-import __countLine from '../string/countLine';
-import __deepMerge from '../object/deepMerge';
+import __countLine from '../../shared/string/countLine';
+import __deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name                                          columns

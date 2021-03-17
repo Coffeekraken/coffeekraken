@@ -1,23 +1,18 @@
 // @ts-nocheck
-import __path from 'path';
-import __upperFirst from '../../../shared/string/upperFirst';
-import __deepMerge from '../../../shared/object/deepMerge';
-import __SBlessedComponent from '../../blessed/SBlessedComponent';
-import __sugarHeading from '../../ascii/sugarHeading';
-import __sugarConfig from '../../config/sugar';
 import __blessed from 'blessed';
+import __quotes from 'inspirational-quotes';
+import __ora from 'ora';
 import __parseHtml from '../../../shared/console/parseHtml';
+import __SNotification from '../../../shared/notification/_SNotification';
+import __clone from '../../../shared/object/clone';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __countLine from '../../../shared/string/countLine';
-import __SBlessedStdio from '../../stdio/blessed/SBlessedStdio';
-import __color from '../../../shared/color/color';
+import __sugarHeading from '../../ascii/sugarHeading';
+import __SBlessedComponent from '../../blessed/SBlessedComponent';
 import __hotkey from '../../keyboard/hotkey';
 import __packageJson from '../../package/json';
-import __SNotification from '../../../shared/notification/SNotification';
-import __ora from 'ora';
-import __clone from '../../../shared/object/clone';
-import __SPromise from '@coffeekraken/s-promise';
+import __SBlessedStdio from '../../stdio/blessed/SBlessedStdio';
 import __SStdio from '../../stdio/SStdio';
-import __quotes from 'inspirational-quotes';
 // import __SIpc from '../../ipc/SIpc';
 
 /**
@@ -204,7 +199,7 @@ export default class SSugarAppTerminalStdio extends __SStdio {
   }
 
   _showModule(moduleIdOrName: any) {
-    let module = this._findModuleObj(moduleIdOrName);
+    const module = this._findModuleObj(moduleIdOrName);
     if (!module || !module.$stdio) return;
 
     Object.keys(this._modules).forEach((moduleId, i) => {
@@ -751,7 +746,7 @@ export default class SSugarAppTerminalStdio extends __SStdio {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _initModule(moduleIdOrName) {
-    let module = this._findModuleObj(moduleIdOrName);
+    const module = this._findModuleObj(moduleIdOrName);
     if (!module || !module.$stdio) return;
     module.$stdio.hide();
     this.$stdio.append(module.$stdio);

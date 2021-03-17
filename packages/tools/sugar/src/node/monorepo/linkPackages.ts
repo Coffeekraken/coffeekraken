@@ -2,7 +2,7 @@
 
 import _ensureDirSync from '../fs/ensureDirSync';
 import _path from 'path';
-import __parseHtml from '../console/parseHtml';
+import __parseHtml from '../../shared/console/parseHtml';
 import _findPackages from './findPackages';
 import _childProcess from 'child_process';
 import _fs from 'fs';

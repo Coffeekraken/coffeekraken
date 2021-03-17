@@ -1,4 +1,4 @@
-import __SInterface from '../../../shared/interface/SInterface';
+import __SInterface from '../../../shared/interface/_SInterface';
 
 /**
  * @name          SFileReadSettingsInterface

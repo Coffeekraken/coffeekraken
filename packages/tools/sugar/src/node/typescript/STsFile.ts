@@ -1,12 +1,8 @@
-import __SJsFile from '../js/SJsFile';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __getFilename from '../fs/filename';
-
-import __STsFileInterface from './interface/STsFileInterface';
-import { ISTsCompilerParams } from './compile/STsCompiler';
 import { ISFileCtorSettings } from '../fs/SFile';
-import __STsCompilerParamsInterface from './compile/interface/STsCompilerParamsInterface';
-import { ISJsFileCompileSettings } from '../js/SJsFile';
+import __SJsFile, { ISJsFileCompileSettings } from '../js/SJsFile';
+import { ISTsCompilerParams } from './compile/STsCompiler';
 
 /**
  * @name            STsFile
@@ -28,7 +24,7 @@ import { ISJsFileCompileSettings } from '../js/SJsFile';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-interface ISTsFileCompileSettings extends ISJsFileCompileSettings {}
+type ISTsFileCompileSettings = ISJsFileCompileSettings;
 
 interface ISTsFileSettings {
   compile: Partial<ISTsFileCompileSettings>;
@@ -67,7 +63,7 @@ class STsFile extends __SJsFile implements ISTsFile {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get tsFileSettings(): ISTsFileSettings {
-    return (<any>this._settings).tsFile;
+    return (<any>this)._settings.tsFile;
   }
 
   /**

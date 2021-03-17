@@ -1,12 +1,12 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
-import __isPath from '../is/path';
+import __deepMerge from '../shared/object/deepMerge';
+import __isPath from '../../shared/is/path';
 import __fs from 'fs';
-import __SDocblock from '../docblock/SDocblock';
+import __SDocblock from '../../shared/docblock/SDocblock';
 import __path from 'path';
 import __packageRoot from '../path/packageRoot';
-import __stripTags from '../html/striptags';
+import __stripTags from '../../shared/html/striptags';
 import __getFilename from '../fs/filename';
 import __namespace from '../package/namespace';
 

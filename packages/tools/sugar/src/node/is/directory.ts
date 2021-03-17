@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __fs from 'fs';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name            directory

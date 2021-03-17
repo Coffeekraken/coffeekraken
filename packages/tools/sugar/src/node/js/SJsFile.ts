@@ -1,29 +1,17 @@
-import __SFile from '../fs/SFile';
-import __md5 from '../crypt/md5';
-import __SDuration from '../time/SDuration';
-import __fs from 'fs';
-import __path from 'path';
 import __SPromise from '@coffeekraken/s-promise';
-import __deepMerge from '../object/deepMerge';
-import __sugarConfig from '../config/sugar';
-import __folderPath from '../fs/folderPath';
-import __toString from '../string/toString';
-import __wait from '../time/wait';
-import __getFilename from '../fs/filename';
 import * as __esbuild from 'esbuild';
-import __filter from '../object/filter';
-import __esbuildScssLoaderPlugin from './compile/plugins/esbuild/esbuildScssLoaderPlugin';
-import __SEventEmitter from '../event/SEventEmitter';
-import __onProcessExit from '../process/onProcessExit';
-import __resolve from '../module/resolve';
-import __dependencyTree from '../module/dependencyTree';
-import __deepMap from '../object/deepMap';
-import __extractImport from '../module/extractImport';
+import __path from 'path';
+import __SInterface from '../../shared/interface/_SInterface';
+import __deepMerge from '../../shared/object/deepMerge';
+import __filter from '../../shared/object/filter';
+import __SDuration from '../../shared/time/SDuration';
+import __wait from '../../shared/time/wait';
 import __esbuildAggregateLibsPlugin from '../esbuild/plugins/aggregateLibs';
-
-import __SInterface from '../interface/SInterface';
-import __SJsCompiler, { ISJsCompilerParams } from './compile/SJsCompiler';
+import __getFilename from '../fs/filename';
+import __SFile from '../fs/SFile';
+import __onProcessExit from '../process/onProcessExit';
 import __SJsCompilerParamsInterface from './compile/interface/SJsCompilerParamsInterface';
+import __SJsCompiler, { ISJsCompilerParams } from './compile/SJsCompiler';
 
 /**
  * @name          SJsFileSettingsInterface
@@ -251,7 +239,7 @@ class SJsFile extends __SFile implements ISJsFile {
           );
         }
 
-        let esbuildParams: any = {
+        const esbuildParams: any = {
           charset: 'utf8',
           format: params.format,
           logLevel: 'info',

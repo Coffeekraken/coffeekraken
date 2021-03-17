@@ -23,6 +23,12 @@
 	"ardenivanov.svelte-intellisense",
 	"andrejunges.handlebars",
 	"arcticicestudio.nord-visual-studio-code",
-	"whizkydee.material-palenight-theme"
+	"whizkydee.material-palenight-theme",
+	"janeriklysander.npm-dependency-check",
+	"dbaeumer.vscode-eslint",
+	"streetsidesoftware.code-spell-checker",
+	"christian-kohler.path-intellisense",
+	"robbowen.synthwave-vscode",
+	"rbbit.typescript-hero"
 ]
 }

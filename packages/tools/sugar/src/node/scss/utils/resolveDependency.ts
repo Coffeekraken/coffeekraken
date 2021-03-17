@@ -5,7 +5,7 @@ import __extension from '../../fs/extension';
 import __getFilename from '../../fs/filename';
 import __folderPath from '../../fs/folderPath';
 import __SScssFile from '../SScssFile';
-import __deepMerge from '../../object/deepMerge';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __fs from 'fs';
 
 /**

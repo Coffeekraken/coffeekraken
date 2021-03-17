@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import __parseHtml from '../../../console/parseHtml';
-import __toString from '../../../string/toString';
+import __parseHtml from '../../../../shared/console/parseHtml';
+import __toString from '../../../../shared/string/toString';
 import __SBlessedComponent from '../../../blessed/SBlessedComponent';
-import __upperFirst from '../../../string/upperFirst';
+import __upperFirst from '../../../../shared/string/upperFirst';
 
 /**
  * @name        timeBlessedStdioComponent

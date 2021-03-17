@@ -1,6 +1,6 @@
-import __parseHtml from '../../../console/parseHtml';
-import __toString from '../../../string/toString';
-import __countLine from '../../../string/countLine';
+import __parseHtml from '../../../../shared/console/parseHtml';
+import __toString from '../../../../shared/string/toString';
+import __countLine from '../../../../shared/string/countLine';
 
 /**
  * @name        separatorTerminalStdioComponent

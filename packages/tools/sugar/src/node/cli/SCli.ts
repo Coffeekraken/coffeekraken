@@ -1,21 +1,10 @@
 // @ts-nocheck
 
-import __fs from 'fs';
-import __tmp from 'tmp';
-import __isClass from '../../shared/is/class';
-import __packageJson from '../package/json';
-import __buildCommandLine from './buildCommandLine';
-import __deepMerge from '../../shared/object/deepMerge';
-import __argsToObject from '../../shared/cli/argsToObject';
-import __isChildProcess from '../../shared/is/childProcess';
-import __parseArgs from '../../shared/cli/parseArgs';
-import __toString from '../../shared/string/toString';
-import __SCliInterface from './interface/SCliInterface';
-import __SInterface from '../../shared/interface/SInterface';
-import __sugarHeading from '../../shared/ascii/sugarHeading';
 import __SClass from '../../shared/class/SClass';
-import __SPromise from '@coffeekraken/s-promise';
-import __spawn from '../process/spawn';
+import __argsToObject from '../../shared/cli/argsToObject';
+import __SInterface from '../../shared/interface/_SInterface';
+import __deepMerge from '../../shared/object/deepMerge';
+import __buildCommandLine from './buildCommandLine';
 
 /**
  * @name                SCli

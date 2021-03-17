@@ -1,13 +1,13 @@
 // @ts-nocheck
 
-import __uniqid from '../string/uniqid';
+import __uniqid from '../../shared/string/uniqid';
 import __SPromise from '@coffeekraken/s-promise';
 import { IPC as __IPC } from 'node-ipc';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
 import __isChildProcess from '../is/childProcess';
 import __onProcessExit from '../process/onProcessExit';
 import __getFreePort from '../network/getFreePort';
-import __isPlainObject from '../is/plainObject';
+import __isPlainObject from '../../shared/is/plainObject';
 
 /**
  * @name            SIpcClient

@@ -1,0 +1,6 @@
+{
+  "include": ["src/shared/**/*.ts"],
+  "compilerOptions": {
+    "composite": true
+  }
+}

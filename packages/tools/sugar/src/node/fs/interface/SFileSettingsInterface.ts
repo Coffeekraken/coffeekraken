@@ -1,8 +1,7 @@
-import __SInterface from '../../../shared/interface/SInterface';
-
+import __SInterface from '../../../shared/interface/_SInterface';
+import SFileReadSettingsInterface from './SFileReadSettingsInterface';
 import SFileWatchSettingsInterface from './SFileWatchSettingsInterface';
 import SFileWriteSettingsInterface from './SFileWriteSettingsInterface';
-import SFileReadSettingsInterface from './SFileReadSettingsInterface';
 
 /**
  * @name          SFileSettingsInterface

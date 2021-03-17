@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import __uniquid from '../string/uniqid';
-import __deepMerge from '../object/deepMerge';
+import __uniquid from '../../shared/string/uniqid';
+import __deepMerge from '../../shared/object/deepMerge';
 import { spawn as __spawn } from 'child_process';
 import __SPromise from '@coffeekraken/s-promise';
 import __onProcessExit from './onProcessExit';
-import __SDuration from '../time/SDuration';
+import __SDuration from '../../shared/time/SDuration';
 
 import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
 import { SpawnOptions } from 'child_process';

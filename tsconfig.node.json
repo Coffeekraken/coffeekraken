@@ -3,7 +3,6 @@
   "include": [
     "packages/*/*/src/cli/**/*.ts",
     "packages/*/*/src/node/**/*.ts",
-    "packages/*/*/src/shared/**/*.ts",
     "packages/*/*/src/config/**/*.ts"
   ],
   "compilerOptions": {

@@ -32,7 +32,7 @@ if (!stack) {
 
 // if no action, try to get the default one
 if (!action) {
-  const config = require(`./${stack}/config.json`);
+  const config = require(`./${stack}/config.json`); // eslint-disable-line
   if (!config.default) {
     throw new Error(
       `Sorry but you have to specify an action to make on the module "${stack}}"...`
@@ -44,15 +44,15 @@ if (!action) {
 
 (async () => {
   if (stack === 'monorepo' && action === 'link') {
-    require('./monorepo/link.cli.js').default(args);
+    require('./monorepo/link.cli.js').default(args); // eslint-disable-line
     return;
   }
 
   require('../node/index');
-  const __SProcess = require('../node/process/SProcess').default;
+  const __SProcess = require('../node/process/SProcess').default; // eslint-disable-line
 
   // const pkg = require(`./${stack}/${action}.cli.js`);
-  let cliApi = require(`./${stack}/${action}.cli.js`).default;
+  const cliApi = require(`./${stack}/${action}.cli.js`).default; // eslint-disable-line
 
   // SProcess classes
   if (cliApi.prototype && cliApi.prototype instanceof __SProcess) {

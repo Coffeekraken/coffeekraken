@@ -1,10 +1,15 @@
-import __deepMerge from '../../object/deepMerge';
-import __SStdio from '../SStdio';
-import __SNotification from '../../notification/SNotification';
-import __wait from '../../time/wait';
 import __inquirer from 'inquirer';
-
-import { ISEventEmitter } from '../../event/SEventEmitter';
+import { ISEventEmitter } from '../../../shared/event/SEventEmitter';
+import __SNotification from '../../../shared/notification/_SNotification';
+import __deepMerge from '../../../shared/object/deepMerge';
+import __SStdio from '../SStdio';
+import __defaultTerminalStdioComponent from './components/defaultTerminalStdioComponent';
+import __errorTerminalStdioComponent from './components/errorTerminalStdioComponent';
+import __fileTerminalStdioComponent from './components/fileTerminalStdioComponent';
+import __headingTerminalStdioComponent from './components/headingTerminalStdioComponent';
+import __separatorTerminalStdioComponent from './components/separatorTerminalStdioComponent';
+import __timeTerminalStdioComponent from './components/timeTerminalStdioComponent';
+import __warningTerminalStdioComponent from './components/warningTerminalStdioComponent';
 
 /**
  * @name            STerminalStdio
@@ -138,14 +143,6 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
     console.log(component.render(logObj, this._settings));
   }
 }
-
-import __defaultTerminalStdioComponent from './components/defaultTerminalStdioComponent';
-import __headingTerminalStdioComponent from './components/headingTerminalStdioComponent';
-import __separatorTerminalStdioComponent from './components/separatorTerminalStdioComponent';
-import __errorTerminalStdioComponent from './components/errorTerminalStdioComponent';
-import __fileTerminalStdioComponent from './components/fileTerminalStdioComponent';
-import __warningTerminalStdioComponent from './components/warningTerminalStdioComponent';
-import __timeTerminalStdioComponent from './components/timeTerminalStdioComponent';
 
 STerminalStdio.registerComponent(__defaultTerminalStdioComponent);
 STerminalStdio.registerComponent(__separatorTerminalStdioComponent);

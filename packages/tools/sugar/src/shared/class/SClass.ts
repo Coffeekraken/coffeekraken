@@ -1,13 +1,11 @@
 // @shared
 
+import __getExtendsStack from '../class/getExtendsStack';
+import { ISInterface } from '../interface/_SInterface';
+import __isPlain from '../is/plainObject';
 import __deepAssign from '../object/deepAssign';
 import __deepMerge from '../object/deepMerge';
-import __isPlain from '../is/plainObject';
 import __get from '../object/get';
-import __set from '../object/set';
-import __getExtendsStack from '../class/getExtendsStack';
-
-import { ISInterface } from '../interface/SInterface';
 
 /**
  * @name            SClass
@@ -269,7 +267,7 @@ function getInterfaceObj(ctx: any, name: string): any {
 }
 
 function getInterface(ctx: any, name: string): any {
-  let interfaceObj = getInterfaceObj(ctx, name);
+  const interfaceObj = getInterfaceObj(ctx, name);
 
   if (__isPlain(interfaceObj)) return interfaceObj.class;
   return interfaceObj;
@@ -311,7 +309,7 @@ function applyInterfaces(ctx: any) {
 }
 
 function applyInterface(ctx: any, name: string, on: any = null) {
-  let interfaceObj = getInterfaceObj(ctx, `${name}`);
+  const interfaceObj = getInterfaceObj(ctx, `${name}`);
   if (!interfaceObj) {
     throw new Error(
       `You try to apply the interface named "<yellow>${name}</yellow>" on the context "<cyan>${ctx.name}</cyan>" but it does not exists...`

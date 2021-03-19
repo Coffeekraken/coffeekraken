@@ -1,6 +1,5 @@
 "use strict";
 // @ts-nocheck
-// @shared
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isMap
@@ -31,4 +30,4 @@ function isMap(value) {
     return value instanceof Map;
 }
 exports.default = isMap;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibWFwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjO0FBQ2QsVUFBVTs7QUFFVjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxLQUFLLENBQUMsS0FBSztJQUNsQixPQUFPLEtBQUssWUFBWSxHQUFHLENBQUM7QUFDOUIsQ0FBQztBQUNELGtCQUFlLEtBQUssQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFwLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibWFwLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLEtBQUssQ0FBQyxLQUFLO0lBQ2xCLE9BQU8sS0FBSyxZQUFZLEdBQUcsQ0FBQztBQUM5QixDQUFDO0FBQ0Qsa0JBQWUsS0FBSyxDQUFDIn0=

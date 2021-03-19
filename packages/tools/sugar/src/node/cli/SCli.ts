@@ -2,8 +2,8 @@
 
 import __SClass from '../../shared/class/SClass';
 import __argsToObject from '../../shared/cli/argsToObject';
-import __SInterface from '../../shared/interface/_SInterface';
 import __deepMerge from '../../shared/object/deepMerge';
+import __SInterface from '../interface/SInterface';
 import __buildCommandLine from './buildCommandLine';
 
 /**

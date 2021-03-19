@@ -1,9 +1,7 @@
-// @shared
-
 import __deepMerge from '../../../shared/object/deepMerge';
 import __SDocblockRenderer from './SDocblockRenderer';
 
-import { ISDocblock } from '../SDocblock';
+import { ISDocblock } from '../../../shared/docblock/SDocblock';
 
 /**
  * @name            SDocblockHtmlRenderer

@@ -1,0 +1,1 @@
+{"version":3,"file":"ensureFileSync.js","sourceRoot":"","sources":["ensureFileSync.ts"],"names":[],"mappings":";AAAA,cAAc;;;;;AAEd,wDAA4B;AAC5B,kFAA4D;AAE5D;;;;;;;;;;;;;;;;;;;;;;;;GAwBG;AACH,SAAS,cAAc,CAAC,IAAI;IAC1B,IAAI,GAAG,2BAAmB,CAAC,IAAI,CAAC,CAAC;IACjC,kBAAI,CAAC,cAAc,CAAC,IAAI,CAAC,CAAC;AAC5B,CAAC;AACD,kBAAe,cAAc,CAAC"}

@@ -1,5 +1,3 @@
-// @shared
-
 /**
  * @name            expandGlob
  * @namespace       sugar.js.glob

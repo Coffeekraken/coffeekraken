@@ -1,5 +1,3 @@
-// @shared
-
 import __SPromise from '@coffeekraken/s-promise';
 import __sugarConfig from '../../node/config/sugar';
 import __SClass from '../class/SClass';

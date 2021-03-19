@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __constructorName from './constructorName';
 import __get from './get';

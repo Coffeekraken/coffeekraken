@@ -5,11 +5,10 @@ import __path from 'path';
 import __fs from 'fs';
 import __SError from '../../shared/error/SError';
 import __glob from 'glob';
-import __STemplateEngine from './engines/STemplateEngine';
+import __STemplateEngine, { ISTemplateEngine } from './engines/STemplateEngine';
 import __SClass from '../../shared/class/SClass';
 
 import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
-import { ISTemplateEngine } from './engines/STemplateEngine';
 
 /**
  * @name          STemplate
@@ -332,7 +331,7 @@ class STemplate extends __SClass implements ISTemplate {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get templateSettings(): ISTemplateSettings {
-    return (<any>this._settings).template;
+    return (<any>this)._settings.template;
   }
 
   /**

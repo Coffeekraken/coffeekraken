@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __isNode from '../is/node';
 

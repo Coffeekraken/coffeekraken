@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __parseRgba from './parseRgba';
 import __parseHsv from './parseHsv';

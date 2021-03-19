@@ -1,22 +1,20 @@
-import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
+import __SPromise from '@coffeekraken/s-promise';
 import __path from 'path';
 import __stackTrace from 'stack-trace';
 import { ISClass as __ISClass } from '../../shared/class/SClass';
 import __argsToObject from '../../shared/cli/argsToObject';
 import __buildCommandLine from '../../shared/cli/buildCommandLine';
 import __SError from '../../shared/error/SError';
-import __SEventEmitter from '../../shared/event/SEventEmitter';
-import {
-  ISInterface,
-  ISInterfaceCtor
-} from '../../shared/interface/_SInterface';
+import __SEventEmitter, {
+  ISEventEmitter
+} from '../../shared/event/SEventEmitter';
 import { ILog } from '../../shared/log/log';
 import __deepMerge from '../../shared/object/deepMerge';
 import __toString from '../../shared/string/toString';
 import __convert from '../../shared/time/convert';
 import __SDuration from '../../shared/time/SDuration';
 import __wait from '../../shared/time/wait';
-import { ISEventEmitter } from '../event/../shared/SEventEmitter';
+import { ISInterface, ISInterfaceCtor } from '../interface/SInterface';
 import __isChildProcess from '../is/childProcess';
 import { ISStdio } from '../stdio/SStdio';
 import __stdio from '../stdio/stdio';
@@ -71,6 +69,7 @@ export interface ISProcessProcessObj {
 
 export interface ISProcessSettings {
   asyncStart: boolean;
+  killOnError: boolean;
   stdio: ISStdio;
   throw: boolean;
   runAsChild: boolean;
@@ -218,7 +217,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
   private _processPath?: string;
 
   get processSettings(): ISProcessSettings {
-    return (<any>this._settings).process;
+    return (<any>this)._settings.process;
   }
 
   /**
@@ -490,6 +489,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         if (this.currentExecutionObj) {
           this.currentExecutionObj.stderr.push(data);
         }
+        if (!this.processSettings.killOnError && metas.event === 'error')
+          return;
         this.kill(data);
       });
 

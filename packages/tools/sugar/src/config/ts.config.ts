@@ -1,10 +1,23 @@
 export default {
+  /**
+   * @name               tsconfigTemplatesDir
+   * @namespace         config.ts
+   * @type              String
+   * @default           [config.storage.sugarDir]/src/templates/tsconfig
+   *
+   * Specify where we can find the tsconfig templates files
+   *
+   * @since       2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  tsconfigTemplatesDir: '[config.storage.sugarDir]/src/templates/tsconfig',
+
   compile: {
     /**
      * @name              input
      * @namespace         config.ts.compile
      * @type              String
-     * @default           [config.storage.srcDir]/js/** *.ts
+     * @default           ['[config.ts.tsconfigTemplatesDir]/tsconfig.js.js','[config.ts.tsconfigTemplatesDir]/tsconfig.node.js','[config.ts.tsconfigTemplatesDir]/tsconfig.shared.js']
      *
      * Specify the root folder (or file) to check for .scss|sass files to build.
      * Glob patterns can be used
@@ -12,7 +25,11 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: `[config.storage.srcDir]/js/**/*.ts`,
+    input: [
+      '[config.ts.tsconfigTemplatesDir]/tsconfig.js.js',
+      '[config.ts.tsconfigTemplatesDir]/tsconfig.node.js',
+      '[config.ts.tsconfigTemplatesDir]/tsconfig.shared.js'
+    ],
 
     /**
      * @name              outputDir
@@ -32,14 +49,14 @@ export default {
      * @name            rootDir
      * @namespace       config.ts.compile
      * @type            String
-     * @default         [config.storage.srcDir]/js
+     * @default         process.cwd()
      *
      * Specify the root directory from where the compiler will try to resolve modules
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: '[config.storage.srcDir]/js',
+    rootDir: process.cwd(),
 
     /**
      * @name              map
@@ -54,50 +71,28 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    map: true,
+    map: 'inline',
 
     /**
-     * @name              prod
+     * @name              stack
      * @namespace         config.ts.compile
-     * @type              Boolean
-     * @default           false
+     * @type              Array<String>
+     * @default           undefined
      *
-     * Specify if you want also the <primary>production</primary> versions of the compiled files.
-     * The production version are named ```[filename].prod.css```
+     * Specify which stack you want to compile.
+     * A stack is a single name that will target the file "tsconfig.{stack}.json"
+     * at the root of your project or by using the tsconfig template files from
+     * the sugar package.
+     * If specified, will override the "input" parameter using the founded tsconfig files...
+     * Available stacks in the sugar package are:
+     * - js : Compile files for the browser
+     * - node : Compile files for node runtime
+     * - shared : Compile files for node and the browser
      *
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    prod: false,
-
-    /**
-     * @name              stripComments
-     * @namespace         config.ts.compile
-     * @type              Boolean
-     * @default           true
-     *
-     * Specify if you want to stripComments the generated css or not
-     *
-     * @since             2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    stripComments: false,
-
-    /**
-     * @name              minify
-     * @namespace         config.ts.compile
-     * @type              Boolean
-     * @default           false
-     * @wip
-     *
-     * Specify if you want to minify the generated css or not
-     *
-     * @todo        check for integration of this feature
-     *
-     * @since             2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    minify: false,
+    stack: undefined,
 
     /**
      * @name              banner
@@ -117,19 +112,6 @@ export default {
       '/* Compiled using Coffeekraken Sugar STsCompiler class which stand over the AMAZING typescript module */',
 
     /**
-     * @name          save
-     * @namespace      config.ts.compile
-     * @type        Boolean
-     * @default     true
-     *
-     * Specify if you want your compiled file(s) to be saved by default
-     *
-     * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    save: true,
-
-    /**
      * @name          watch
      * @namespace      config.ts.compile
      * @type        Boolean
@@ -143,33 +125,6 @@ export default {
     watch: false,
 
     /**
-     * @name          target
-     * @namespace     config.ts.compile
-     * @type          String
-     * @default       browser
-     *
-     * Specify which target you want to apply. By default, the browser target is applied.
-     * Targets are defines under ```config.ts.targets``` and are just some "compilerOptions" presets
-     *
-     * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    target: 'browser',
-
-    /**
-     * @name          stacks
-     * @namespace     config.ts.compile
-     * @type          Array<String>
-     * @default       undefined
-     *
-     * Specify which stacks (defined at the root of this config file) you want to compile
-     *
-     * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    stacks: undefined,
-
-    /**
      * @name                compilerOptions
      * @namespace           config.ts.compile
      * @type                Object
@@ -180,41 +135,6 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    compilerOptions: {
-      allowJs: false,
-      strict: true,
-      esModuleInterop: true,
-      skipLibCheck: true,
-      forceConsistentCasingInFileNames: false,
-      noImplicitAny: false,
-      noStrictGenericChecks: false,
-      allowSyntheticDefaultImports: true,
-      // incremental: true,
-      // tsBuildInfoFile: '[config.storage.tmpDir]/ts/.tsbuildinfo',
-      types: ['node'],
-      moduleResolution: 'node'
-    }
-  },
-
-  targets: {
-    browser: {
-      target: 'es6',
-      module: 'ESNext'
-    },
-    node: {
-      target: 'es6',
-      module: 'commonjs'
-    }
+    compilerOptions: {}
   }
-
-  // stacks: {
-  //   browser: {
-  //     include: ['src/js/**/*.ts'],
-  //     compilerOptions: '[config.ts.targets.browser]'
-  //   },
-  //   node: {
-  //     include: ['src/cli/**/*.ts', 'src/node/**/*.ts'],
-  //     compilerOptions: '[config.ts.targets.node]'
-  //   }
-  // }
 };

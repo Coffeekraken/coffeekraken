@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __SWatch from './SWatch';
 import __uniqid from '../string/uniqid';

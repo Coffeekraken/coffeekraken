@@ -1,5 +1,3 @@
-// @shared
-
 import __SClass from '../class/SClass';
 import __deepMege from '../object/deepMerge';
 import __map from '../object/map';

@@ -1,5 +1,3 @@
-// @shared
-
 import __SType from './_SType';
 import __stringTypeDescriptor from './descriptors/stringTypeDescriptor';
 import __mapTypeDescriptor from './descriptors/mapTypeDescriptor';

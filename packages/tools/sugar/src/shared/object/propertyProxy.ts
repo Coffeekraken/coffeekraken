@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import _get from 'lodash/get';
 /**

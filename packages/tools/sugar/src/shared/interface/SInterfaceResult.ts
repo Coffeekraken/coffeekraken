@@ -1,5 +1,3 @@
-// @shared
-
 import __deepMerge from '../object/deepMerge';
 import __isNode from '../is/node';
 

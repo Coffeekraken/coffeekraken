@@ -1,23 +1,16 @@
 // @ts-nocheck
-// @shared
 
 import __SError from '../error/SError';
 import __map from '../iterable/map';
-import __SPromise from '@coffeekraken/s-promise';
 import __getExtendsStack from '../class/getExtendsStack';
 import __typeOf from '../value/typeof';
-import __uniquid from '../string/uniqid';
-import __upperFirst from '../string/upperFirst';
-import __toString from '../string/toString';
-import __isOfType from '../is/ofType';
 import __deepMerge from '../object/deepMerge';
 import __parseHtml from '../console/parseHtml';
-import __parseTypeString from './parseTypeString';
+import __parseTypeString, {
+  IParseTypeStringResultObj
+} from './parseTypeString';
 import __STypeResult from './STypeResult';
 import __getAvailableInterfaceTypes from '../interface/getAvailableInterfaceTypes';
-import descriptor from './descriptors/stringTypeDescriptor';
-
-import { IParseTypeStringResultObj } from './parseTypeString';
 
 /**
  * @name                SType
@@ -250,7 +243,7 @@ class SType implements ISType {
   is(value: any, settings: ISTypeSettings = {}): boolean {
     settings = __deepMerge(this._settings, settings);
 
-    let issues = {};
+    const issues = {};
 
     // loop on each types
     for (let i = 0; i < this.types.length; i++) {
@@ -426,7 +419,7 @@ class SType implements ISType {
     settings = __deepMerge(this._settings, settings);
 
     // store exceptions coming from descriptors
-    let verboseObj = {
+    const verboseObj = {
       value,
       issues: {},
       settings
@@ -493,7 +486,7 @@ class SType implements ISType {
 
     // our value has not bein casted
     if (settings.throw) {
-      let stack = [
+      const stack = [
         `Sorry but the value of type "<cyan>${__typeOf(
           value
         )}</cyan>" passed to be casted in type "<yellow>${

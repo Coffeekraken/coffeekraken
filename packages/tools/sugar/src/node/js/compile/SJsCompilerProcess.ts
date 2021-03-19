@@ -1,10 +1,8 @@
-import SProcess from '../../process/SProcess';
-import __SJsCompiler from './SJsCompiler';
+import SProcess, { ISProcessSettings } from '../../process/SProcess';
+import __SJsCompiler, { ISJsCompiler, ISJsCompilerParams } from './SJsCompiler';
 import __deepMerge from '../../../shared/object/deepMerge';
 
 import __SJsCompilerParamsInterface from './interface/SJsCompilerParamsInterface';
-import { ISJsCompiler, ISJsCompilerParams } from './SJsCompiler';
-import { ISProcessSettings } from '../../process/SProcess';
 
 /**
  * @name            SJsCompilerProcess
@@ -23,8 +21,7 @@ import { ISProcessSettings } from '../../process/SProcess';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISJsCompilerProcessSettings extends ISProcessSettings {}
-export interface ISJsCompilerProcessSettings extends ISProcessSettings {}
+export type ISJsCompilerProcessSettings = ISProcessSettings;
 
 // @ts-ignore
 class SJsCompilerProcess extends SProcess {
@@ -50,7 +47,7 @@ class SJsCompilerProcess extends SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get jsCompileProcessSettings() {
-    return (<any>this._settings).jsCompileProcess;
+    return (<any>this)._settings.jsCompileProcess;
   }
 
   /**

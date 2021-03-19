@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __get from './get';
 import __unquote from '../string/unquote';

@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __chalk from 'chalk';
 import __deepMap from '../object/deepMap';

@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __funcToClass from 'func-to-classes';
 

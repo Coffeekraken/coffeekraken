@@ -1,8 +1,5 @@
-import __SPromise from '@coffeekraken/s-promise';
 import __deepMerge from '../../shared/object/deepMerge';
-import __SEventEmitter from '../event/SEventEmitter';
-
-import { ISInterfaceResult } from '../../shared/interface/SInterfaceResult';
+import __SEventEmitter from '../../shared/event/SEventEmitter';
 
 /**
  * @name                SCompiler
@@ -93,12 +90,15 @@ class SCompiler extends __SEventEmitter implements ISCompiler {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   compile(params: any, settings: any = {}) {
-    settings = __deepMerge(this._settings, settings);
-    params = this.applyInterface('params', params);
+    settings = __deepMerge((<any>this)._settings, settings);
+
+    // @weird:ts-compilation-issue
+    params = (<any>this).applyInterface('params', params);
 
     // @ts-ignore
     const promise = this._compile(params, settings);
-    this.pipe(promise);
+    // @weird:ts-compilation-issue
+    (<any>this).pipe(promise);
     return promise;
   }
 }

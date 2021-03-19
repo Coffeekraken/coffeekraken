@@ -2,13 +2,10 @@
 
 import __uniquid from '../../shared/string/uniqid';
 import __deepMerge from '../../shared/object/deepMerge';
-import { spawn as __spawn } from 'child_process';
-import __SPromise from '@coffeekraken/s-promise';
+import { spawn as __spawn, SpawnOptions } from 'child_process';
+import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
 import __onProcessExit from './onProcessExit';
 import __SDuration from '../../shared/time/SDuration';
-
-import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
-import { SpawnOptions } from 'child_process';
 
 /**
  * @name            spawn
@@ -51,7 +48,7 @@ export interface ISpawnSettings extends SpawnOptions {
   [key: string]: any;
 }
 
-export default interface ISpawn {
+export interface ISpawn {
   (command: string, args: string[], settings: ISpawnSettings): ISPromise;
 }
 

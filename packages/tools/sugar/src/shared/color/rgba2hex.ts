@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 /**
  * @name                rgba2hex

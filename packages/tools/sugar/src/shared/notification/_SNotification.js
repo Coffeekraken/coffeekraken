@@ -1,30 +1,4 @@
-// @shared
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,206 +8,153 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
+Object.defineProperty(exports, "__esModule", { value: true });
+const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+const sugar_1 = __importDefault(require("../../node/config/sugar"));
+const SClass_1 = __importDefault(require("../class/SClass"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+const SNotificationSettingsInterface_1 = __importDefault(require("./interface/SNotificationSettingsInterface"));
+class SNotification extends SClass_1.default {
+    /**
+     * @name        constructor
+     * @type        Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(settings) {
+        super(deepMerge_1.default({
+            notification: {}
+        }, settings || {}));
     }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "@coffeekraken/s-promise", "../../node/config/sugar", "../class/SClass", "../object/deepMerge", "./interface/SNotificationSettingsInterface"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
-    var sugar_1 = __importDefault(require("../../node/config/sugar"));
-    var SClass_1 = __importDefault(require("../class/SClass"));
-    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
-    var SNotificationSettingsInterface_1 = __importDefault(require("./interface/SNotificationSettingsInterface"));
-    var SNotification = /** @class */ (function (_super) {
-        __extends(SNotification, _super);
-        /**
-         * @name        constructor
-         * @type        Function
-         * @constructor
-         *
-         * Constructor
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        function SNotification(settings) {
-            return _super.call(this, deepMerge_1.default({
-                notification: {}
-            }, settings || {})) || this;
+    /**
+     * @name            registerAdapter
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to register a new adapter to make use
+     * of it easily through the SNotification instance
+     *
+     * @param       {ISNotificationAdapter}     adapter         The adapter you want to register
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static registerAdapter(adapter) {
+        if (this._registeredAdapters[adapter.id]) {
+            throw new Error(`Sorry but the "<yellow>${adapter.id}</yellow>" SNotification adapter you try to register already exists...`);
         }
-        /**
-         * @name            registerAdapter
-         * @type            Function
-         * @static
-         *
-         * This static method allows you to register a new adapter to make use
-         * of it easily through the SNotification instance
-         *
-         * @param       {ISNotificationAdapter}     adapter         The adapter you want to register
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        SNotification.registerAdapter = function (adapter) {
-            if (this._registeredAdapters[adapter.id]) {
-                throw new Error("Sorry but the \"<yellow>" + adapter.id + "</yellow>\" SNotification adapter you try to register already exists...");
+        this._registeredAdapters[adapter.id] = adapter;
+    }
+    /**
+     * @name            getAdapter
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to get a registered adapter by his id
+     *
+     * @param       {String}     adapterId          The adapter id you want to get back
+     * @return      {ISNotificationAdapter}       The adapter requested
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static getAdapter(adapterId) {
+        if (!this._registeredAdapters[adapterId]) {
+            throw new Error(`Sorry but the "<yellow>${adapterId}</yellow>" SNotification adapter you try to get does not exists...`);
+        }
+        return this._registeredAdapters[adapterId];
+    }
+    /**
+     * @name        notificationSettings
+     * @type        ISNotificationSettings
+     * @get
+     *
+     * Access the notification settings
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get notificationSettings() {
+        return this._settings.notification;
+    }
+    /**
+     * @name          notify
+     * @type          Function
+     * @async
+     *
+     * This method allows you to emit a notification using the specified adapters in the settings.
+     * You can override the settings by passing a new ISNotificationSettings argument that will
+     * be used only for this notify process.
+     *
+     * @param     {ISNotificationObj}       notificationObj       The notification object you want to emit
+     * @param     {Partial<ISNotificationSettings>}     [settings={}]     Some settings you want to override for this particular notification emition
+     * @return    {Promise}                                    A promise that will be resolved once the notification has been emited
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    notify(notificationObj, settings) {
+        return new s_promise_1.default(({ resolve, reject, pipeFrom }) => __awaiter(this, void 0, void 0, function* () {
+            // mix settings
+            const set = (deepMerge_1.default(this.notificationSettings, settings));
+            // check if this instance is enabled
+            if (!set.enable)
+                return resolve();
+            const notificationDefaultSettings = sugar_1.default('notification');
+            const baseNotificationObj = Object.assign({}, (notificationObj.type
+                ? notificationDefaultSettings.types[notificationObj.type || 'default'] || {}
+                : {}));
+            // handle tokens
+            if (baseNotificationObj.message && notificationObj.message) {
+                notificationObj.message = baseNotificationObj.message.replace('[message]', notificationObj.message);
             }
-            this._registeredAdapters[adapter.id] = adapter;
-        };
-        /**
-         * @name            getAdapter
-         * @type            Function
-         * @static
-         *
-         * This static method allows you to get a registered adapter by his id
-         *
-         * @param       {String}     adapterId          The adapter id you want to get back
-         * @return      {ISNotificationAdapter}       The adapter requested
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        SNotification.getAdapter = function (adapterId) {
-            if (!this._registeredAdapters[adapterId]) {
-                throw new Error("Sorry but the \"<yellow>" + adapterId + "</yellow>\" SNotification adapter you try to get does not exists...");
+            else if (!notificationObj.message)
+                baseNotificationObj.message = ' ';
+            if (baseNotificationObj.title && notificationObj.title) {
+                notificationObj.title = baseNotificationObj.title.replace('[title]', notificationObj.title);
             }
-            return this._registeredAdapters[adapterId];
-        };
-        Object.defineProperty(SNotification.prototype, "notificationSettings", {
-            /**
-             * @name        notificationSettings
-             * @type        ISNotificationSettings
-             * @get
-             *
-             * Access the notification settings
-             *
-             * @since     2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            get: function () {
-                return this._settings.notification;
-            },
-            enumerable: false,
-            configurable: true
-        });
-        /**
-         * @name          notify
-         * @type          Function
-         * @async
-         *
-         * This method allows you to emit a notification using the specified adapters in the settings.
-         * You can override the settings by passing a new ISNotificationSettings argument that will
-         * be used only for this notify process.
-         *
-         * @param     {ISNotificationObj}       notificationObj       The notification object you want to emit
-         * @param     {Partial<ISNotificationSettings>}     [settings={}]     Some settings you want to override for this particular notification emition
-         * @return    {Promise}                                    A promise that will be resolved once the notification has been emited
-         *
-         * @since     2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        SNotification.prototype.notify = function (notificationObj, settings) {
-            var _this = this;
-            return new s_promise_1.default(function (_a) {
-                var resolve = _a.resolve, reject = _a.reject, pipeFrom = _a.pipeFrom;
-                return __awaiter(_this, void 0, void 0, function () {
-                    var set, notificationDefaultSettings, baseNotificationObj;
-                    var _this = this;
-                    return __generator(this, function (_b) {
-                        set = (deepMerge_1.default(this.notificationSettings, settings));
-                        // check if this instance is enabled
-                        if (!set.enable)
-                            return [2 /*return*/, resolve()];
-                        notificationDefaultSettings = sugar_1.default('notification');
-                        baseNotificationObj = __assign({}, (notificationObj.type
-                            ? notificationDefaultSettings.types[notificationObj.type || 'default'] || {}
-                            : {}));
-                        // handle tokens
-                        if (baseNotificationObj.message && notificationObj.message) {
-                            notificationObj.message = baseNotificationObj.message.replace('[message]', notificationObj.message);
-                        }
-                        else if (!notificationObj.message)
-                            baseNotificationObj.message = ' ';
-                        if (baseNotificationObj.title && notificationObj.title) {
-                            notificationObj.title = baseNotificationObj.title.replace('[title]', notificationObj.title);
-                        }
-                        else if (!notificationObj.title)
-                            baseNotificationObj.title = ' ';
-                        // loop on each adapters
-                        set.adapters.forEach(function (adapterId) { return __awaiter(_this, void 0, void 0, function () {
-                            var adapter, adapterSettings, adapterPromise;
-                            return __generator(this, function (_a) {
-                                adapter = SNotification.getAdapter(adapterId);
-                                adapterSettings = this.notificationSettings.adaptersSettings[adapterId] || {};
-                                adapterPromise = adapter.notify(__assign(__assign({}, baseNotificationObj), notificationObj), adapterSettings);
-                                pipeFrom(adapterPromise);
-                                return [2 /*return*/];
-                            });
-                        }); });
-                        // resolve the notification process
-                        resolve(true);
-                        return [2 /*return*/];
-                    });
-                });
-            });
-        };
-        SNotification.interfaces = {
-            settings: {
-                apply: true,
-                on: '_settings.notification',
-                class: SNotificationSettingsInterface_1.default
-            }
-        };
-        /**
-         * @name            _registeredAdapters
-         * @type            Object<ISNotificationAdapter>
-         * @static
-         * @private
-         *
-         * Store all the registered adapters
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        SNotification._registeredAdapters = {};
-        return SNotification;
-    }(SClass_1.default));
-    exports.default = SNotification;
-});
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiX1NOb3RpZmljYXRpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJfU05vdGlmaWNhdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxVQUFVOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztJQUVWLHNFQUFpRDtJQUNqRCxrRUFBb0Q7SUFDcEQsMkRBQXVDO0lBQ3ZDLGtFQUE4QztJQUM5Qyw4R0FBMEY7SUFtRDFGO1FBQTRCLGlDQUFRO1FBZ0ZsQzs7Ozs7Ozs7O1dBU0c7UUFDSCx1QkFBWSxRQUEwQzttQkFDcEQsa0JBQ0UsbUJBQVcsQ0FDVDtnQkFDRSxZQUFZLEVBQUUsRUFBRTthQUNqQixFQUNELFFBQVEsSUFBSSxFQUFFLENBQ2YsQ0FDRjtRQUNILENBQUM7UUE3RUQ7Ozs7Ozs7Ozs7OztXQVlHO1FBQ0ksNkJBQWUsR0FBdEIsVUFBdUIsT0FBOEI7WUFDbkQsSUFBSSxJQUFJLENBQUMsbUJBQW1CLENBQUMsT0FBTyxDQUFDLEVBQUUsQ0FBQyxFQUFFO2dCQUN4QyxNQUFNLElBQUksS0FBSyxDQUNiLDZCQUEwQixPQUFPLENBQUMsRUFBRSw0RUFBd0UsQ0FDN0csQ0FBQzthQUNIO1lBQ0QsSUFBSSxDQUFDLG1CQUFtQixDQUFDLE9BQU8sQ0FBQyxFQUFFLENBQUMsR0FBRyxPQUFPLENBQUM7UUFDakQsQ0FBQztRQUVEOzs7Ozs7Ozs7Ozs7V0FZRztRQUNJLHdCQUFVLEdBQWpCLFVBQWtCLFNBQWlCO1lBQ2pDLElBQUksQ0FBQyxJQUFJLENBQUMsbUJBQW1CLENBQUMsU0FBUyxDQUFDLEVBQUU7Z0JBQ3hDLE1BQU0sSUFBSSxLQUFLLENBQ2IsNkJBQTBCLFNBQVMsd0VBQW9FLENBQ3hHLENBQUM7YUFDSDtZQUNELE9BQU8sSUFBSSxDQUFDLG1CQUFtQixDQUFDLFNBQVMsQ0FBQyxDQUFDO1FBQzdDLENBQUM7UUFZRCxzQkFBSSwrQ0FB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
+            else if (!notificationObj.title)
+                baseNotificationObj.title = ' ';
+            // loop on each adapters
+            set.adapters.forEach((adapterId) => __awaiter(this, void 0, void 0, function* () {
+                // get the adapter
+                const adapter = SNotification.getAdapter(adapterId);
+                // get the adapter settings if exists
+                const adapterSettings = this.notificationSettings.adaptersSettings[adapterId] || {};
+                // call the notify adapter function
+                const adapterPromise = adapter.notify(Object.assign(Object.assign({}, baseNotificationObj), notificationObj), adapterSettings);
+                pipeFrom(adapterPromise);
+            }));
+            // resolve the notification process
+            resolve(true);
+        }));
+    }
+}
+SNotification.interfaces = {
+    settings: {
+        apply: true,
+        on: '_settings.notification',
+        class: SNotificationSettingsInterface_1.default
+    }
+};
+/**
+ * @name            _registeredAdapters
+ * @type            Object<ISNotificationAdapter>
+ * @static
+ * @private
+ *
+ * Store all the registered adapters
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+SNotification._registeredAdapters = {};
+exports.default = SNotification;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiX1NOb3RpZmljYXRpb24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJfU05vdGlmaWNhdGlvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7OztBQUFBLHdFQUFpRDtBQUNqRCxvRUFBb0Q7QUFDcEQsNkRBQXVDO0FBQ3ZDLG9FQUE4QztBQUM5QyxnSEFBMEY7QUFtRDFGLE1BQU0sYUFBYyxTQUFRLGdCQUFRO0lBZ0ZsQzs7Ozs7Ozs7O09BU0c7SUFDSCxZQUFZLFFBQTBDO1FBQ3BELEtBQUssQ0FDSCxtQkFBVyxDQUNUO1lBQ0UsWUFBWSxFQUFFLEVBQUU7U0FDakIsRUFDRCxRQUFRLElBQUksRUFBRSxDQUNmLENBQ0YsQ0FBQztJQUNKLENBQUM7SUE3RUQ7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsTUFBTSxDQUFDLGVBQWUsQ0FBQyxPQUE4QjtRQUNuRCxJQUFJLElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxPQUFPLENBQUMsRUFBRSxDQUFDLEVBQUU7WUFDeEMsTUFBTSxJQUFJLEtBQUssQ0FDYiwwQkFBMEIsT0FBTyxDQUFDLEVBQUUsd0VBQXdFLENBQzdHLENBQUM7U0FDSDtRQUNELElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxPQUFPLENBQUMsRUFBRSxDQUFDLEdBQUcsT0FBTyxDQUFDO0lBQ2pELENBQUM7SUFFRDs7Ozs7Ozs7Ozs7O09BWUc7SUFDSCxNQUFNLENBQUMsVUFBVSxDQUFDLFNBQWlCO1FBQ2pDLElBQUksQ0FBQyxJQUFJLENBQUMsbUJBQW1CLENBQUMsU0FBUyxDQUFDLEVBQUU7WUFDeEMsTUFBTSxJQUFJLEtBQUssQ0FDYiwwQkFBMEIsU0FBUyxvRUFBb0UsQ0FDeEcsQ0FBQztTQUNIO1FBQ0QsT0FBTyxJQUFJLENBQUMsbUJBQW1CLENBQUMsU0FBUyxDQUFDLENBQUM7SUFDN0MsQ0FBQztJQUVEOzs7Ozs7Ozs7T0FTRztJQUNILElBQUksb0JBQW9CO1FBQ3RCLE9BQWEsSUFBSSxDQUFDLFNBQVUsQ0FBQyxZQUFZLENBQUM7SUFDNUMsQ0FBQztJQXVCRDs7Ozs7Ozs7Ozs7Ozs7O09BZUc7SUFDSCxNQUFNLENBQ0osZUFBMkMsRUFDM0MsUUFBMEM7UUFFMUMsT0FBTyxJQUFJLG1CQUFVLENBQUMsQ0FBTyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsUUFBUSxFQUFFLEVBQUUsRUFBRTtZQUM1RCxlQUFlO1lBQ2YsTUFBTSxHQUFHLEdBQTJCLENBQ2xDLG1CQUFXLENBQUMsSUFBSSxDQUFDLG9CQUFvQixFQUFFLFFBQVEsQ0FBQyxDQUNqRCxDQUFDO1lBRUYsb0NBQW9DO1lBQ3BDLElBQUksQ0FBQyxHQUFHLENBQUMsTUFBTTtnQkFBRSxPQUFPLE9BQU8sRUFBRSxDQUFDO1lBRWxDLE1BQU0sMkJBQTJCLEdBQUcsZUFBYSxDQUFDLGNBQWMsQ0FBQyxDQUFDO1lBRWxFLE1BQU0sbUJBQW1CLHFCQUNwQixDQUFDLGVBQWUsQ0FBQyxJQUFJO2dCQUN0QixDQUFDLENBQUMsMkJBQTJCLENBQUMsS0FBSyxDQUMvQixlQUFlLENBQUMsSUFBSSxJQUFJLFNBQVMsQ0FDbEMsSUFBSSxFQUFFO2dCQUNULENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FDUixDQUFDO1lBRUYsZ0JBQWdCO1lBQ2hCLElBQUksbUJBQW1CLENBQUMsT0FBTyxJQUFJLGVBQWUsQ0FBQyxPQUFPLEVBQUU7Z0JBQzFELGVBQWUsQ0FBQyxPQUFPLEdBQUcsbUJBQW1CLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FDM0QsV0FBVyxFQUNYLGVBQWUsQ0FBQyxPQUFPLENBQ3hCLENBQUM7YUFDSDtpQkFBTSxJQUFJLENBQUMsZUFBZSxDQUFDLE9BQU87Z0JBQUUsbUJBQW1CLENBQUMsT0FBTyxHQUFHLEdBQUcsQ0FBQztZQUN2RSxJQUFJLG1CQUFtQixDQUFDLEtBQUssSUFBSSxlQUFlLENBQUMsS0FBSyxFQUFFO2dCQUN0RCxlQUFlLENBQUMsS0FBSyxHQUFHLG1CQUFtQixDQUFDLEtBQUssQ0FBQyxPQUFPLENBQ3ZELFNBQVMsRUFDVCxlQUFlLENBQUMsS0FBSyxDQUN0QixDQUFDO2FBQ0g7aUJBQU0sSUFBSSxDQUFDLGVBQWUsQ0FBQyxLQUFLO2dCQUFFLG1CQUFtQixDQUFDLEtBQUssR0FBRyxHQUFHLENBQUM7WUFFbkUsd0JBQXdCO1lBQ3hCLEdBQUcsQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLENBQU8sU0FBUyxFQUFFLEVBQUU7Z0JBQ3ZDLGtCQUFrQjtnQkFDbEIsTUFBTSxPQUFPLEdBQUcsYUFBYSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsQ0FBQztnQkFFcEQscUNBQXFDO2dCQUNyQyxNQUFNLGVBQWUsR0FDbkIsSUFBSSxDQUFDLG9CQUFvQixDQUFDLGdCQUFnQixDQUFDLFNBQVMsQ0FBQyxJQUFJLEVBQUUsQ0FBQztnQkFDOUQsbUNBQW1DO2dCQUNuQyxNQUFNLGNBQWMsR0FBRyxPQUFPLENBQUMsTUFBTSxpQ0FFOUIsbUJBQW1CLEdBQ25CLGVBQWUsR0FFcEIsZUFBZSxDQUNoQixDQUFDO2dCQUNGLFFBQVEsQ0FBQyxjQUFjLENBQUMsQ0FBQztZQUMzQixDQUFDLENBQUEsQ0FBQyxDQUFDO1lBRUgsbUNBQW1DO1lBQ25DLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUNoQixDQUFDLENBQUEsQ0FBQyxDQUFDO0lBQ0wsQ0FBQzs7QUEvS00sd0JBQVUsR0FBRztJQUNsQixRQUFRLEVBQUU7UUFDUixLQUFLLEVBQUUsSUFBSTtRQUNYLEVBQUUsRUFBRSx3QkFBd0I7UUFDNUIsS0FBSyxFQUFFLHdDQUFnQztLQUN4QztDQUNGLENBQUM7QUFFRjs7Ozs7Ozs7OztHQVVHO0FBQ0ksaUNBQW1CLEdBQTBDLEVBQUUsQ0FBQztBQStKekUsa0JBQWUsYUFBYSxDQUFDIn0=

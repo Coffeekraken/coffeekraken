@@ -1,23 +1,10 @@
 // @to-work
 import __isClass from '../../shared/is/class';
-import __SProcess from './SProcess';
+import { ISProcess, ISProcessCtor, ISProcessSettings } from './SProcess';
 import __SPromise from '@coffeekraken/s-promise';
 import __SEventEmitter from '../../shared/event/SEventEmitter';
 import __deepMerge from '../../shared/object/deepMerge';
 import __typeof from '../../shared/value/typeof';
-import __stdio from '../stdio/stdio';
-import __toString from '../../shared/string/toString';
-import __parseHtml from '../../shared/console/parseHtml';
-import __isChildProcess from '../is/childProcess';
-import __wait from '../../shared/time/wait';
-
-import {
-  ISProcess,
-  ISProcessCtor,
-  ISProcessObject,
-  ISProcessSettings
-} from './SProcess';
-import { ISEventEmitter } from '../../js/event/SEventEmitter';
 
 /**
  * @name            SProcessPipe
@@ -110,7 +97,7 @@ class SProcessPipe extends __SEventEmitter implements ISProcessPipe {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   public get processPipeSettings() {
-    return (<any>this._settings).processPipe;
+    return (<any>this)._settings.processPipe;
   }
 
   /**

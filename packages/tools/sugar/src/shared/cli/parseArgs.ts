@@ -1,21 +1,10 @@
 // @ts-nocheck
-// @shared
 
-import __map from '../iterable/map';
-import __typeOf from '../value/typeof';
+import __ofType from '../is/ofType';
 import __deepMerge from '../object/deepMerge';
 import __parse from '../string/parse';
-import __set from '../object/set';
-import __get from '../object/get';
-import __delete from '../object/delete';
-import __parseHtml from '../console/parseHtml';
-import __isPlainObject from '../is/plainObject';
-import __deepMap from '../object/deepMap';
-import __completeArgsObject from './completeArgsObject';
 import __unquote from '../string/unquote';
-import __parseTypeString from '../type/parseTypeString';
-import __ofType from '../is/ofType';
-import __SType from '../type/SType';
+import __completeArgsObject from './completeArgsObject';
 
 /**
  * @name                        parseArgs
@@ -67,7 +56,6 @@ function parseArgsString(string, settings = {}) {
     {
       throw: true,
       definition: null,
-      cast: true,
       complete: true,
       defaultObj: {}
     },
@@ -111,7 +99,7 @@ function parseArgsString(string, settings = {}) {
   }
 
   let currentArgName = null;
-  let rawArgsMap = {
+  const rawArgsMap = {
     __orphan: []
   };
 
@@ -151,7 +139,6 @@ function parseArgsString(string, settings = {}) {
     if (currentArgName === null) currentArgName = '__orphan';
 
     // cast the value
-
     const value = __parse(part);
 
     // save the value into the raw args stack
@@ -185,24 +172,6 @@ function parseArgsString(string, settings = {}) {
           finalArgsMap[argName] = value;
           break;
         }
-      }
-    });
-  }
-
-  // cast params
-  if (settings.cast === true) {
-    finalArgsMap = __map(finalArgsMap, (key, value, idx) => {
-      // validate and cast value
-      if (settings.definition && settings.definition[key]) {
-        const definitionObj = settings.definition[key];
-        const sTypeInstance = new __SType(definitionObj.type);
-        const res = sTypeInstance.cast(value, {
-          throw: settings.throw
-        });
-        if (res instanceof Error) {
-          return value;
-        }
-        return res;
       }
     });
   }

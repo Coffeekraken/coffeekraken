@@ -2,7 +2,7 @@
 
 export default {
   adapters: {
-    console: `${__dirname}/../node/log/adapters/SLogConsoleAdapter`
+    console: `${__dirname}/../shared/log/adapters/SLogConsoleAdapter`
   },
   adaptersByLevel: {
     log: null,

@@ -18,14 +18,13 @@ import __glob from 'glob';
 import __csso from 'csso';
 import __isGlob from 'is-glob';
 import __unique from '../../../shared/array/unique';
-import __SCompiler from '../../compiler/SCompiler';
+import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
 import __absolute from '../../path/absolute';
 import __ensureDirSync from '../../fs/ensureDirSync';
 import __SScssFile from '../SScssFile';
 import __express from 'express';
 
 import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';
-import { ISCompiler } from '../../compiler/SCompiler';
 
 export interface ISScssCompilerParams {
   input: string | string[];
@@ -60,7 +59,7 @@ export interface ISScssCompilerCtor {
   ): ISScssCompiler;
 }
 
-export interface ISScssCompiler extends ISCompiler {}
+export type ISScssCompiler = ISCompiler;
 
 /**
  * @name                SScssCompiler
@@ -112,7 +111,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get scssCompilerSettings(): ISScssCompilerSettings {
-    return (<any>this._settings).scssCompiler;
+    return (<any>this)._settings.scssCompiler;
   }
 
   /**
@@ -260,8 +259,8 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
       const startTime = Date.now();
 
       for (let i = 0; i < filesPaths.length; i++) {
-        let filePath = filesPaths[i];
-        let file = new __SScssFile(filePath, {
+        const filePath = filesPaths[i];
+        const file = new __SScssFile(filePath, {
           scssFile: {
             compile: settings
           }
@@ -276,7 +275,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
       }
 
       // aggregate the compiled files css
-      let aggregateStrArray: string[] = [];
+      const aggregateStrArray: string[] = [];
       Object.keys(resultsObj).forEach((path) => {
         const cssRes = resultsObj[path];
         aggregateStrArray.push(cssRes.css);

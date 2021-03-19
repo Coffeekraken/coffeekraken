@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __replaceTags from '../html/replaceTags';
+import __replaceTags from '../../shared/html/replaceTags';
 import __sugarConfig from '../config/sugar';
 import __upperFirst from '../../shared/string/upperFirst';
 import __chalk from 'chalk';

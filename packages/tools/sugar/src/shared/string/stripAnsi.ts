@@ -1,5 +1,3 @@
-// @shared
-
 import __stripAnsi from 'strip-ansi';
 
 /**

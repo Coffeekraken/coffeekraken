@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 /**
  * @name      easeInOutQuint

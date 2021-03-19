@@ -1,9 +1,8 @@
 // @ts-nocheck
-// @shared
 
 import __typescript from 'typescript';
-import __SInterface from '../../../../shared/interface/_SInterface';
 import __upperFirst from '../../../../shared/string/upperFirst';
+import __SInterface from '../../../interface/SInterface';
 
 const _definition = {};
 __typescript.optionDeclarations.forEach((argObj) => {

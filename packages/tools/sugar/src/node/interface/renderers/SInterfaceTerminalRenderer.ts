@@ -1,8 +1,7 @@
-import __deepMerge from '../../object/deepMerge';
 import __SInterfaceRenderer from './SInterfaceRenderer';
 import __SInterface from '../SInterface';
 
-import { ISInterfaceRendererSettings } from './SInterfaceRenderer';
+import { ISInterfaceRendererSettings } from '../../../shared/interface/renderers/ISInterfaceRenderer';
 
 /**
  * @name            SInterfaceTerminalRenderer

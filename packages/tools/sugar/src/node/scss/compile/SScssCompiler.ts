@@ -18,7 +18,7 @@ import __glob from 'glob';
 import __csso from 'csso';
 import __isGlob from 'is-glob';
 import __unique from '../../../shared/array/unique';
-import __SCompiler from '../../compiler/SCompiler';
+import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
 import __absolute from '../../path/absolute';
 import __ensureDirSync from '../../fs/ensureDirSync';
 import __SScssFile from '../SScssFile';
@@ -28,7 +28,6 @@ import __SDuration from '../../../shared/time/SDuration';
 import __fsPool from '../../fs/pool';
 
 import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';
-import { ISCompiler } from '../../compiler/SCompiler';
 
 export interface ISScssCompilerParams {
   input: string | string[];
@@ -63,7 +62,7 @@ export interface ISScssCompilerCtor {
   ): ISScssCompiler;
 }
 
-export interface ISScssCompiler extends ISCompiler {}
+export type ISScssCompiler = ISCompiler;
 
 /**
  * @name                SScssCompiler
@@ -115,7 +114,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get scssCompilerSettings(): ISScssCompilerSettings {
-    return (<any>this._settings).scssCompiler;
+    return (<any>this)._settings.scssCompiler;
   }
 
   /**
@@ -165,7 +164,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
     return new __SPromise(async ({ resolve, reject, pipe, emit, on }) => {
       settings = __deepMerge(this.scssCompilerSettings, {}, settings);
 
-      let input = Array.isArray(params.input) ? params.input : [params.input];
+      const input = Array.isArray(params.input) ? params.input : [params.input];
 
       // prod
       if (params.prod) {
@@ -195,7 +194,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
         files = Array.isArray(files) ? files : [files];
 
         const resultsObj = {};
-        let aggregateStrArray: string[] = [];
+        const aggregateStrArray: string[] = [];
 
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
@@ -208,7 +207,7 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
           );
           try {
             pipe(compilePromise);
-            let compileRes = await compilePromise;
+            const compileRes = await compilePromise;
             resultsObj[file.path] = compileRes;
             aggregateStrArray.push(compileRes.css);
             emit('file', compileRes);

@@ -1,3 +1,5 @@
+import __packageRoot from '../node/path/packageRoot';
+
 export default {
   /**
    * @name                useFrontspec

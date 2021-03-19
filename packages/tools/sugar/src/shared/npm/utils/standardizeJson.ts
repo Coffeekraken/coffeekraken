@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __parseAuthorString from './parseAuthorString';
 

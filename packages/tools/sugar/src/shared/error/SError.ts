@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __parseHtml from '../console/parseHtml';
 import __trimLines from '../string/trimLines.js';

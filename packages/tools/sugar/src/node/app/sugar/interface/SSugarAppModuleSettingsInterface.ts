@@ -1,4 +1,4 @@
-import __SInterface from '../../../../shared/interface/_SInterface';
+import __SInterface from '../../../interface/SInterface';
 
 /**
  * @name                SSugarAppModuleSettingsInterface

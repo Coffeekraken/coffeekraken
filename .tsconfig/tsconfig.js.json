@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["../packages/*/*/src/js/**/*.ts"],
+  "compilerOptions": {
+    "target": "es5",
+    "module": "umd",
+    "moduleResolution": "node"
+  }
+}

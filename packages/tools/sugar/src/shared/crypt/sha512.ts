@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import sha512 from 'crypto-js/sha512';
 import toString from '../string/toString';

@@ -1,10 +1,9 @@
 "use strict";
-// @shared
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const toString_1 = __importDefault(require("../../../string/toString"));
+const toString_1 = __importDefault(require("../../../../shared/string/toString"));
 /**
  * @name                default
  * @namespace           sugar.js.interface.renderers.terminal
@@ -22,4 +21,4 @@ function default_1({ value, interfaceClass }) {
     return `<green>${toString_1.default(value, {})}</green>`;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVmYXVsdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRlZmF1bHQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLFVBQVU7Ozs7O0FBRVYsd0VBQWtEO0FBRWxEOzs7Ozs7Ozs7Ozs7R0FZRztBQUNILG1CQUF5QixFQUFFLEtBQUssRUFBRSxjQUFjLEVBQUU7SUFDaEQsT0FBTyxVQUFVLGtCQUFVLENBQUMsS0FBSyxFQUFFLEVBQUUsQ0FBQyxVQUFVLENBQUM7QUFDbkQsQ0FBQztBQUZELDRCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGVmYXVsdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRlZmF1bHQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7QUFBQSxrRkFBNEQ7QUFFNUQ7Ozs7Ozs7Ozs7OztHQVlHO0FBQ0gsbUJBQXlCLEVBQUUsS0FBSyxFQUFFLGNBQWMsRUFBRTtJQUNoRCxPQUFPLFVBQVUsa0JBQVUsQ0FBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLFVBQVUsQ0FBQztBQUNuRCxDQUFDO0FBRkQsNEJBRUMifQ==

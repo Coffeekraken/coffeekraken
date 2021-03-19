@@ -4,11 +4,11 @@ import ISInterfaceRenderer, {
   ISInterfaceRendererRenderPropertyObj,
   ISInterfaceRendererSettings
 } from '../../../shared/interface/renderers/ISInterfaceRenderer';
-import __SInterface, {
-  ISInterfaceDefinitionProperty
-} from '../../../shared/interface/_SInterface';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __upperFirst from '../../../shared/string/upperFirst';
+import __SInterface, {
+  ISInterfaceDefinitionProperty
+} from '../../interface/SInterface';
 
 /**
  * @name            SInterfaceRenderer

@@ -1,11 +1,8 @@
-import __SProcess from './SProcess';
+import __SProcess, { ISProcess, ISProcessSettings } from './SProcess';
 import __buildCommandLine from '../../shared/cli/buildCommandLine';
 import __onProcessExit from './onProcessExit';
-import __spawn from './spawn';
+import __spawn, { ISpawnSettings } from './spawn';
 import __deepMerge from '../../shared/object/deepMerge';
-
-import { ISProcess, ISProcessSettings } from './SProcess';
-import { ISpawnSettings } from './spawn';
 
 /**
  * @name          SCliProcess
@@ -72,7 +69,7 @@ class SCliProcess extends __SProcess implements ISCliProcess {
    *
    */
   get cliProcessSettings(): ISCliProcessSettings {
-    return (<any>this._settings).cliProcess;
+    return (<any>this)._settings.cliProcess;
   }
 
   /**

@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __isPlainObject from '../is/plainObject';
 import __deepMerge from '../object/deepMerge';

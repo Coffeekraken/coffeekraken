@@ -23,7 +23,7 @@ export interface ISStdioCtor {
   new (sources: ISPromise | ISPromise[], settings: ISStdioSettings): ISStdio;
 }
 
-export interface ISStdioLog extends ILog {}
+export type ISStdioLog = ILog;
 
 export interface ISStdioRegisteredComponents {
   [key: string]: ISStdioComponent;
@@ -165,7 +165,7 @@ class SStdio extends __SClass implements ISStdio {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get stdioSettings(): ISStdioSettings {
-    return (<any>this._settings).stdio;
+    return (<any>this)._settings.stdio;
   }
 
   /**
@@ -397,7 +397,7 @@ class SStdio extends __SClass implements ISStdio {
       log = __parseAndFormatLog(log);
 
       // get the correct component to pass to the _log method
-      let componentObj = this.constructor.registeredComponents[
+      const componentObj = this.constructor.registeredComponents[
         this.constructor.name
       ][log.type || 'default'];
       if (!componentObj)

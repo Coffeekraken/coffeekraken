@@ -178,7 +178,7 @@ class SJsCompiler extends __SCompiler {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get jsCompilerSettings(): ISJsCompilerSettings {
-    return (<any>this._settings).esbuildCompiler;
+    return (<any>this)._settings.esbuildCompiler;
   }
 
   /**

@@ -10,12 +10,12 @@ import {
   stringify as __stringifyScss
 } from 'scss-parser';
 import __stripCssComments from '../../shared/css/stripCssComments';
-import __SInterface from '../../shared/interface/_SInterface';
 import __deepMerge from '../../shared/object/deepMerge';
 import __SDuration from '../../shared/time/SDuration';
 import __sugarConfig from '../config/sugar';
 import __getFilename from '../fs/filename';
 import __SFile, { ISFileCtorSettings } from '../fs/SFile';
+import __SInterface from '../interface/SInterface';
 import __SScssCompilerParamsInterface from './compile/interface/SScssCompilerParamsInterface';
 import { ISScssCompilerParams } from './compile/SScssCompiler';
 import __findImportStatements from './utils/findImportStatements';
@@ -125,7 +125,7 @@ class SScssFile extends __SFile implements ISScssFile {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get scssFileSettings(): ISScssFileSettings {
-    return (<any>this._settings).scssFile;
+    return (<any>this)._settings.scssFile;
   }
 
   /**
@@ -239,7 +239,8 @@ class SScssFile extends __SFile implements ISScssFile {
     this._currentCompilationParams = Object.assign({}, params);
     this._currentCompilationSettings = Object.assign({}, settings);
 
-    const completeParams: ISScssCompilerParams = this.applyInterface(
+    // @weird:ts-compilation-issue
+    const completeParams: ISScssCompilerParams = (<any>this).applyInterface(
       'compilerParams',
       params
     );
@@ -266,7 +267,8 @@ class SScssFile extends __SFile implements ISScssFile {
       pipeTo(this);
 
       emit('notification', {
-        title: `${this.id} compilation started`
+        // @weird:ts-compilation-issue
+        title: `${(<any>this).id} compilation started`
       });
 
       emit('log', {
@@ -448,7 +450,8 @@ class SScssFile extends __SFile implements ISScssFile {
 
       emit('notification', {
         type: 'success',
-        title: `${this.id} compilation success`
+        // @weird:ts-compilation-issue
+        title: `${(<any>this).id} compilation success`
       });
 
       if (params.watch) {

@@ -4,8 +4,7 @@ import __fs from 'fs';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __writeFileSync from '../../fs/writeFileSync';
 import __diff from '../../../shared/object/diff';
-import __SConfigAdapter from './SConfigAdapter';
-import __localDir from '../../path/localDir';
+import __SConfigAdapter from '../../../shared/config/adapters/SConfigAdapter';
 import __packageRoot from '../../path/packageRoot';
 import __path from 'path';
 import __chokidar from 'chokidar';
@@ -45,7 +44,7 @@ export interface ISConfigFolderAdapterCtorSettings {
 
 export default class SConfigFolderAdapter extends __SConfigAdapter {
   get configFolderAdapterSettings(): ISConfigFolderAdapterSettings {
-    return (<any>this._settings).configFolderAdapter;
+    return (<any>this)._settings.configFolderAdapter;
   }
 
   constructor(settings: ISConfigFolderAdapterCtorSettings) {

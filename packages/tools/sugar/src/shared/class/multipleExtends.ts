@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __aggregation from 'aggregation/es5';
 

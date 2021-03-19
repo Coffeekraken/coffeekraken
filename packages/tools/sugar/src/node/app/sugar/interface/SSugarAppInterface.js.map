@@ -1,0 +1,1 @@
+{"version":3,"file":"SSugarAppInterface.js","sourceRoot":"","sources":["SSugarAppInterface.ts"],"names":[],"mappings":";AAAA,cAAc;;;;;AAEd,2FAAoE;AACpE,kEAAkD;AAElD;;;;;;;;;;;;;;;;GAgBG;AACH,MAAM,kBAAmB,SAAQ,qBAAY;;AACpC,6BAAU,GAAG;IAClB,OAAO,EAAE;QACP,IAAI,EAAE,QAAQ;QACd,QAAQ,EAAE,IAAI;QACd,OAAO,EAAE,eAAa,CAAC,mBAAmB,CAAC;KAC5C;CACF,CAAC;AAGJ,kBAAe,kBAAkB,CAAC"}

@@ -1,9 +1,8 @@
-// @shared
-
-import SClass, { ISClass } from '../class/SClass';
 import __minimatch from 'minimatch';
+import SClass, { ISClass } from '../class/SClass';
 import __deepMerge from '../object/deepMerge';
 import __uniqid from '../string/uniqid';
+import __stripAnsi from '../string/stripAnsi';
 
 /**
  * @name                  SEventEmitter
@@ -35,6 +34,10 @@ export interface ISEventEmitterPipeSettingsFilterFn {
 export interface ISEventEmitterPipeSettings {
   events?: string;
   prefixEvent?: boolean;
+  prefixValue?: string;
+  stripAnsi?: boolean;
+  trim?: boolean;
+  keepLineBreak?: boolean;
   processor?: ISEventEmitterPipeSettingsProcessorFn;
   exclude?: string[];
   filter?: ISEventEmitterPipeSettingsFilterFn;
@@ -102,7 +105,7 @@ export interface ISEventEmitterSettings {
 }
 
 export interface ISEventEmitterCtor {}
-export interface ISEventEmitter {
+export interface ISEventEmitter extends ISClass {
   _settings: ISEventEmitterInstanceSettings;
   _buffer: ISEventEmitterBufferItem[];
   _eventsStacks: ISEventEmitterEventsStacks;
@@ -138,6 +141,10 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     const set: ISEventEmitterPipeSettings = {
       events: '*',
       prefixEvent: false,
+      prefixValue: undefined,
+      stripAnsi: false,
+      trim: true,
+      keepLineBreak: true,
       processor: undefined,
       exclude: ['finally', 'resolve', 'reject', 'cancel', 'catch'],
       filter: undefined,
@@ -155,6 +162,29 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       if (set.exclude && set.exclude.indexOf(metas.event) !== -1) return;
       // check if we have a filter setted
       if (set.filter && !set.filter(value, metas)) return;
+
+      // strip ansi
+      if (set.stripAnsi) {
+        if (value && value.value && typeof value.value === 'string')
+          value.value = __stripAnsi(value.value);
+        else if (typeof value === 'string') value = __stripAnsi(value);
+      }
+
+      // trim
+      if (set.trim) {
+        if (value && value.value && typeof value.value === 'string')
+          value.value = value.value.trim();
+        else if (typeof value === 'string') value = value.trim();
+      }
+
+      // line breaks
+      if (set.keepLineBreak === false) {
+        if (value && value.value && typeof value.value === 'string')
+          value.value = value.value.replace(/\r?\n|\r/g, '');
+        else if (typeof value === 'string')
+          value = value.replace(/\r?\n|\r/g, '');
+      }
+
       // check if need to process the value
       if (set.processor) {
         const res = set.processor(value, metas);
@@ -172,6 +202,15 @@ class SEventEmitter extends SClass implements ISEventEmitter {
           value = res;
         }
       }
+
+      if (set.prefixValue) {
+        if (value && value.value && typeof value.value === 'string') {
+          value.value = `${set.prefixValue}${value.value}`;
+        } else if (typeof value === 'string') {
+          value = `${set.prefixValue}${value}`;
+        }
+      }
+
       if (metas && metas.event) {
         // append the source promise id to the stack
         let emitStack = metas.event;
@@ -396,7 +435,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       const finalMetas: any = {
         ...(metas || {})
       };
-      let isFirstLevel = !finalMetas.level;
+      const isFirstLevel = !finalMetas.level;
 
       // check if is an asking
       if (!finalMetas.askId && isFirstLevel) {
@@ -477,7 +516,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       this._registerNewEventsStacks(event);
     }
 
-    let eventStackObj = this._eventsStacks[event];
+    const eventStackObj = this._eventsStacks[event];
     let callNumber = settings.callNumber;
 
     // process the args
@@ -575,7 +614,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     }
 
     let eventStackArray = <any>[];
-    let eventStackObj = this._eventsStacks[event];
+    const eventStackObj = this._eventsStacks[event];
 
     if (eventStackObj && eventStackObj.callStack) {
       eventStackArray = <any>[...eventStackArray, ...eventStackObj.callStack];
@@ -666,7 +705,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       }
 
       // call the callback function
-      let callbackResult = await item.callback(
+      const callbackResult = await item.callback(
         currentCallbackReturnedValue,
         metasObj
       );
@@ -716,7 +755,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       let currentStackResult = initialValue;
 
       for (let i = 0; i < events.length; i++) {
-        let stackResult = await this._emitEventStack(
+        const stackResult = await this._emitEventStack(
           events[i],
           currentStackResult,
           metas
@@ -773,7 +812,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     events.forEach((name) => {
       // check if it has a callNumber specified using name:1
       const splitedName = name.split(':');
-      let callNumber: number = -1;
+      let callNumber = -1;
       if (splitedName.length === 2) {
         name = splitedName[0];
         callNumber = parseInt(splitedName[1]);
@@ -811,7 +850,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     }
 
     // get the stack
-    let eventStackObj = this._eventsStacks[event];
+    const eventStackObj = this._eventsStacks[event];
     if (!eventStackObj) return <any>this;
     // loop on the stack registered callback to finc the one to delete
     eventStackObj.callStack = eventStackObj.callStack.filter((item) => {

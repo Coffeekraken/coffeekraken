@@ -74,7 +74,7 @@ class SSvelteCompiler extends __SCompiler {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get svelteCompilerSettings(): ISSvelteCompilerSettings {
-    return (<any>this._settings).svelteCompiler;
+    return (<any>this)._settings.svelteCompiler;
   }
 
   /**

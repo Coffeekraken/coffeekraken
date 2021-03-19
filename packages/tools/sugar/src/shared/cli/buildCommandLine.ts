@@ -1,5 +1,3 @@
-// @shared
-
 import __toString from '../string/toString';
 import __argsToString from './argsToString';
 import __deepMerge from '../object/deepMerge';

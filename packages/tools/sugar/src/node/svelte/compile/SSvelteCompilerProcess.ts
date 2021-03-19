@@ -1,10 +1,11 @@
-import SProcess from '../../process/SProcess';
-import __SSvelteCompiler from './SSvelteCompiler';
+import SProcess, { ISProcessSettings } from '../../process/SProcess';
+import __SSvelteCompiler, {
+  ISSvelteCompiler,
+  ISSvelteCompilerParams
+} from './SSvelteCompiler';
 import __deepMerge from '../../../shared/object/deepMerge';
 
 import __SSvelteCompilerParamsInterface from './interface/SSvelteCompilerParamsInterface';
-import { ISSvelteCompiler, ISSvelteCompilerParams } from './SSvelteCompiler';
-import { ISProcessSettings } from '../../process/SProcess';
 
 /**
  * @name            SSvelteCompilerProcess
@@ -23,8 +24,7 @@ import { ISProcessSettings } from '../../process/SProcess';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISSvelteCompilerProcessSettings extends ISProcessSettings {}
-export interface ISSvelteCompilerProcessSettings extends ISProcessSettings {}
+export type ISSvelteCompilerProcessSettings = ISProcessSettings;
 
 // @ts-ignore
 class SSvelteCompilerProcess extends SProcess {
@@ -50,7 +50,7 @@ class SSvelteCompilerProcess extends SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get svelteCompileProcessSettings() {
-    return (<any>this._settings).svelteCompileProcess;
+    return (<any>this)._settings.svelteCompileProcess;
   }
 
   /**

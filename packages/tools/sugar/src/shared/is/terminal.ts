@@ -1,5 +1,3 @@
-// @shared
-
 /**
  * @name            isTerminal
  * @namespace       sugar.js.is

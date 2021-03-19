@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __deepMerge from '../../node/object/deepMerge';
 

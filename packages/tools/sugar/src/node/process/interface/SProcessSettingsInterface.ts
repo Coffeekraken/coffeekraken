@@ -1,5 +1,5 @@
-import __SInterface from '../../../shared/interface/_SInterface';
 import __sugarConfig from '../../config/sugar';
+import __SInterface from '../../interface/SInterface';
 
 /**
  * @name                SProcessSettingsInterface
@@ -19,6 +19,10 @@ class SProcessSettingsInterface extends __SInterface {
       type: 'Boolean',
       alias: 'a',
       default: __sugarConfig('process.asyncStart')
+    },
+    killOnError: {
+      type: 'Boolean',
+      default: __sugarConfig('process.killOnError')
     },
     stdio: {
       type: 'String|SStdio|Boolean',
@@ -43,8 +47,7 @@ class SProcessSettingsInterface extends __SInterface {
     runAsChild: {
       type: 'Boolean',
       alias: 'c',
-      //default: __sugarConfig('process.runAsChild')
-      default: false
+      default: __sugarConfig('process.runAsChild')
     },
     definition: {
       type: 'Object',

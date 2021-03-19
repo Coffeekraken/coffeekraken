@@ -1,7 +1,5 @@
-// @shared
-
-import __parseHtml from '../../../console/parseHtml';
-import __countLine from '../../../string/countLine';
+import __parseHtml from '../../../../shared/console/parseHtml';
+import __countLine from '../../../../shared/string/countLine';
 
 /**
  * @name                layout
@@ -34,9 +32,9 @@ export default function ({ interfaceClass, properties }) {
     tpl.push('');
   }
 
-  for (let propKey in properties) {
+  for (const propKey in properties) {
     const propertyObj = properties[propKey];
-    let titleStr = `--${propertyObj.name} ${
+    const titleStr = `--${propertyObj.name} ${
       propertyObj.alias ? `(${propertyObj.alias})` : ''
     } ${propertyObj.type} ${
       propertyObj.default && __countLine(propertyObj.default) <= 20

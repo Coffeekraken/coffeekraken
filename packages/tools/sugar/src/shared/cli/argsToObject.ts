@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __parseArgs from './parseArgs';
 import __completeArgsObject from './completeArgsObject';

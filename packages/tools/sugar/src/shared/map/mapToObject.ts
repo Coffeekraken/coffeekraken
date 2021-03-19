@@ -1,5 +1,3 @@
-// @shared
-
 /**
  * @name          mapToObject
  * @namespace     sugar.js.map

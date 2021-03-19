@@ -1,0 +1,4 @@
+"use strict";
+const __throttle = require('../throttle');
+require('./throttle')(__throttle);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhyb3R0bGUudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRocm90dGxlLnRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE1BQU0sVUFBVSxHQUFHLE9BQU8sQ0FBQyxhQUFhLENBQUMsQ0FBQztBQUMxQyxPQUFPLENBQUMsWUFBWSxDQUFDLENBQUMsVUFBVSxDQUFDLENBQUMifQ==

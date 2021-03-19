@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __minimatch from 'minimatch';
 import __flatten from './flatten';

@@ -145,7 +145,7 @@ class SDocMap extends __SClass implements ISDocMap {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get docMapSettings(): ISDocMapSettings {
-    return (<any>this._settings).docMap;
+    return (<any>this)._settings.docMap;
   }
 
   /**
@@ -400,7 +400,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
               // const path = __path.relative(outputDir, filepath);
               const filename = __getFilename(filepath);
-              let docblockEntryObj: ISDocMapEntry = {
+              const docblockEntryObj: ISDocMapEntry = {
                 name: docblock.name,
                 type: docblock.type,
                 description: docblock.description
@@ -487,7 +487,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
     return new __SPromise(
       ({ resolve, emit, pipe, pipeFrom }) => {
-        let entries: ISDocMapEntries = __clone(this._entries, { deep: true });
+        const entries: ISDocMapEntries = __clone(this._entries, { deep: true });
 
         emit('log', {
           value: `Saving the docMap file to "<cyan>${output.replace(

@@ -1,5 +1,3 @@
-// @shared
-
 import __getExtendsStack from '../class/getExtendsStack';
 import { ISInterface } from '../interface/_SInterface';
 import __isPlain from '../is/plainObject';

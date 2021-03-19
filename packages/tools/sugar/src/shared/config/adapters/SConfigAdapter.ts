@@ -1,8 +1,7 @@
 // @ts-nocheck
-// @shared
 
 import __deepMerge from '../../object/deepMerge';
-import __deepMerge from '../../object/deepMerge';
+
 import __SEventEmitter from '../../event/SEventEmitter';
 
 /**

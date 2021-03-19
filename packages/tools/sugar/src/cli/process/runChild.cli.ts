@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __parseArgs from '../../node/cli/parseArgs';
+import __parseArgs from '../../shared/cli/parseArgs';
 import __SProcess from '../../node/process/SProcess';
 
 interface IProcessRunChildOptions {

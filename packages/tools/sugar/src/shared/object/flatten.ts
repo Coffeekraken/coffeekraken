@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __isPlain from '../is/plainObject';
 import __unquote from '../string/unquote';

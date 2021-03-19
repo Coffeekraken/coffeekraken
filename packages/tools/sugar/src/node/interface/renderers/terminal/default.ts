@@ -1,6 +1,4 @@
-// @shared
-
-import __toString from '../../../string/toString';
+import __toString from '../../../../shared/string/toString';
 
 /**
  * @name                default

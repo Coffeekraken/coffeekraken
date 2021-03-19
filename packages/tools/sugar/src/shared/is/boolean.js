@@ -1,6 +1,5 @@
 "use strict";
 // @ts-nocheck
-// @shared
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        isBoolean
@@ -30,4 +29,4 @@ function isBoolean(value) {
     return typeof value === 'boolean';
 }
 exports.default = isBoolean;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYm9vbGVhbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJvb2xlYW4udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7QUFDZCxVQUFVOztBQUVWOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsU0FBUyxDQUFDLEtBQUs7SUFDdEIsT0FBTyxPQUFPLEtBQUssS0FBSyxTQUFTLENBQUM7QUFDcEMsQ0FBQztBQUNELGtCQUFlLFNBQVMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYm9vbGVhbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImJvb2xlYW4udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLGNBQWM7O0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBUyxTQUFTLENBQUMsS0FBSztJQUN0QixPQUFPLE9BQU8sS0FBSyxLQUFLLFNBQVMsQ0FBQztBQUNwQyxDQUFDO0FBQ0Qsa0JBQWUsU0FBUyxDQUFDIn0=

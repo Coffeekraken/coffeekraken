@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __tagsMap from './html/tagsMap';
 import __isTerminal from '../is/terminal';

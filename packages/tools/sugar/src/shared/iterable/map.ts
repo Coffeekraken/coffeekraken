@@ -1,5 +1,3 @@
-// @shared
-
 import __typeOf from '../value/typeof';
 import IMapFn, { IMapCallbackFn, IMapFnSettings } from './interface/IMap';
 

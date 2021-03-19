@@ -1,4 +1,3 @@
-// @shared
 import __deepMerge from '../object/deepMerge';
 import __isNode from '../is/node';
 import __toString from '../string/toString';
@@ -246,7 +245,7 @@ class STypeResult implements ISTypeResult {
     Object.keys(this._data.issues).forEach((ruleId) => {
       // @ts-ignore
       const issueObj = this._data.issues[ruleId];
-      let message: string[] = [];
+      const message: string[] = [];
       if (issueObj.expected.type) {
         message.push(`- Expected "<yellow>${issueObj.expected.type}</yellow>"`);
       }

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __SInterface from '../../../../shared/interface/_SInterface';
 import __sugarConfig from '../../../config/sugar';
+import __SInterface from '../../../interface/SInterface';
 
 /**
  * @name                STsCompilerParamsInterface
@@ -24,7 +24,7 @@ class STsCompilerParamsInterface extends __SInterface {
   static definition = {
     // ...__TscInterface.definition,
     input: {
-      type: 'String|Array<String>',
+      type: 'Array<String>',
       alias: 'i',
       default: __sugarConfig('ts.compile.input')
     },
@@ -38,55 +38,28 @@ class STsCompilerParamsInterface extends __SInterface {
       default: __sugarConfig('ts.compile.rootDir')
     },
     map: {
-      type: 'Boolean|String',
+      type: 'String|Boolean',
       values: [true, false, 'inline'],
       default: __sugarConfig('ts.compile.map')
     },
-    prod: {
-      type: 'Boolean',
-      alias: 'p',
-      default: __sugarConfig('ts.compile.prod')
-    },
-    stripComments: {
-      type: 'Boolean',
-      default: __sugarConfig('ts.compile.stripComments')
-    },
-    minify: {
-      type: 'Boolean',
-      default: __sugarConfig('ts.compile.minify')
+    stack: {
+      type: 'String',
+      alias: 's',
+      default: __sugarConfig('ts.compile.stack')
     },
     banner: {
       type: 'String',
       default: __sugarConfig('ts.compile.banner')
-    },
-    save: {
-      type: 'Boolean',
-      default: __sugarConfig('ts.compile.save')
     },
     watch: {
       type: 'Boolean',
       alias: 'w',
       default: __sugarConfig('ts.compile.watch')
     },
-    target: {
-      type: 'String',
-      alias: 't',
-      default: __sugarConfig('ts.compile.target')
-    },
     compilerOptions: {
       type: 'Object',
       default: __sugarConfig('ts.compile.compilerOptions')
     }
   };
-  //   stacks: {
-  //     type: 'Array<String>',
-  //     alias: 's',
-  //     default: __sugarConfig('ts.compile.stacks')
-  //   },
-  //   tsconfig: {
-  //     type: 'Object',
-  //     default: __sugarConfig('ts.compile.tsconfig')
-  //   }
-  // };
 }
 export default STsCompilerParamsInterface;

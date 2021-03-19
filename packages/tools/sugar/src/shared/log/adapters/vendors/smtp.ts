@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 /* SmtpJS.com - v3.0.0 */
 const Email = {

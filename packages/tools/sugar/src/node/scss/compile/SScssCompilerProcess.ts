@@ -1,10 +1,11 @@
-import SProcess from '../../process/SProcess';
-import __SScssCompiler from './SScssCompiler';
+import SProcess, { ISProcessSettings } from '../../process/SProcess';
+import __SScssCompiler, {
+  ISScssCompiler,
+  ISScssCompilerParams
+} from './SScssCompiler';
 import __deepMerge from '../../../shared/object/deepMerge';
 
 import __SScssCompilerParamsInterface from './interface/SScssCompilerParamsInterface';
-import { ISScssCompiler, ISScssCompilerParams } from './SScssCompiler';
-import { ISProcessSettings } from '../../process/SProcess';
 
 /**
  * @name            SScssCompilerProcess
@@ -23,8 +24,7 @@ import { ISProcessSettings } from '../../process/SProcess';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-interface ISScssCompilerProcessSettings extends ISProcessSettings {}
-interface ISScssCompilerProcessSettings extends ISProcessSettings {}
+type ISScssCompilerProcessSettings = ISProcessSettings;
 
 // @ts-ignore
 class SScssCompilerProcess extends SProcess {
@@ -50,7 +50,7 @@ class SScssCompilerProcess extends SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get scssCompileProcessSettings() {
-    return (<any>this._settings).scssCompileProcessSettings;
+    return (<any>this)._settings.scssCompileProcessSettings;
   }
 
   /**

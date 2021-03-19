@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __urlParse from 'url-parse';
 import __deepMerge from '../object/deepMerge';

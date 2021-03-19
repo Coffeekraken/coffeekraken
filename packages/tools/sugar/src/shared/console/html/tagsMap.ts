@@ -1,4 +1,3 @@
-// @shared
 // @ts-nocheck
 
 import __parseHtml from '../parseHtml';

@@ -1,0 +1,4 @@
+"use strict";
+const __parseAuthorString = require('../parseAuthorString');
+require('./parseAuthorString')(__parseAuthorString);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFyc2VBdXRob3JTdHJpbmcudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInBhcnNlQXV0aG9yU3RyaW5nLnRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLE1BQU0sbUJBQW1CLEdBQUcsT0FBTyxDQUFDLHNCQUFzQixDQUFDLENBQUM7QUFDNUQsT0FBTyxDQUFDLHFCQUFxQixDQUFDLENBQUMsbUJBQW1CLENBQUMsQ0FBQyJ9

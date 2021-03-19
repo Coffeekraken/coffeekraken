@@ -62,7 +62,6 @@ function onProcessExit(callback) {
     process.on('SIGUSR1', () => exitHandler('killed'));
     process.on('SIGUSR2', () => exitHandler('killed'));
     process.on('uncaughtException', () => exitHandler('error'));
-    process.on('unhandledRejection', () => exitHandler('error'));
   }
   if (__onProcessExitCallbacks.indexOf(callback) !== -1) return;
   __onProcessExitCallbacks.push(callback);

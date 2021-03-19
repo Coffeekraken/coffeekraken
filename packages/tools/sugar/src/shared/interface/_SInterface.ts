@@ -1,5 +1,3 @@
-// @shared
-
 import __SDescriptor, {
   ISDescriptorRules,
   ISDescriptorSettings
@@ -40,8 +38,6 @@ import __SInterfaceResult, { ISInterfaceResult } from './SInterfaceResult';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
-// @shared
 
 export interface ISInterfaceSettings {
   name?: string;

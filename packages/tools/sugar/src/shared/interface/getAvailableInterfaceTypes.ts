@@ -1,5 +1,3 @@
-// @shared
-
 /**
  * @name                getAvailableInterfaceTypes
  * @namespace           sugar.js.interface

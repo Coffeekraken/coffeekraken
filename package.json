@@ -4,9 +4,13 @@
   "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
   "scripts": {
     "postinstall": "lerna bootstrap --hoist",
-    "dev": "npm run dev.js; npm run dev.node",
-    "dev.js": "tsc -p tsconfig.js.json",
-    "dev.node": "tsc -p tsconfig.node.json --watch",
+    "dev.js": "tsc -p .tsconfig/tsconfig.js.json --watch",
+    "dev.node": "tsc -p .tsconfig/tsconfig.node.json --watch",
+    "dev.shared": "tsc -p .tsconfig/tsconfig.shared.json --watch",
+    "sugar.dev": "sugar-dev ts.compile --watch",
+    "sugar.dev.js": "sugar-dev ts.compile --stack js --watch",
+    "sugar.dev.node": "sugar-dev ts.compile --stack node --watch",
+    "sugar.dev.shared": "sugar-dev ts.compile --stack shared --watch",
     "container": "docker exec --workdir /workspaces/coffeekraken -it coffeekraken /bin/bash"
   },
   "pre-commit": [],

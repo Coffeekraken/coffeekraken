@@ -1,12 +1,12 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __path from 'path';
-import __SInterface from '../../shared/interface/_SInterface';
 import __deepMerge from '../../shared/object/deepMerge';
 import __SDuration from '../../shared/time/SDuration';
 import __wait from '../../shared/time/wait';
 import __sugarConfig from '../config/sugar';
 import __getFilename from '../fs/filename';
-import __SFile from '../fs/SFile';
+import __SFile, { ISFile } from '../fs/SFile';
+import __SInterface from '../interface/SInterface';
 import __SScssFile from '../scss/SScssFile';
 import __STsFile from '../typescript/STsFile';
 import __SSvelteCompilerParamsInterface from './compile/interface/SSvelteCompilerParamsInterface';
@@ -62,7 +62,7 @@ interface ISSvelteFileCtorSettings {
   svelteFile?: Partial<ISSvelteFileSettings>;
 }
 
-interface ISSvelteFile {
+interface ISSvelteFile extends ISFile {
   compile(
     params: ISSvelteCompilerParams,
     settings: Partial<ISSvelteFileCompileSettings>
@@ -113,7 +113,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get svelteFileSettings(): ISSvelteFileSettings {
-    return (<any>this._settings).svelteFile;
+    return (<any>this)._settings.svelteFile;
   }
 
   /**
@@ -139,7 +139,8 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
     );
 
     // listen for change event
-    this.on('update', async (file, metas) => {
+    // @weird:ts-compilation-issue
+    (<any>this).on('update', async (file, metas) => {
       if (this._currentCompilationParams.watch) {
         const promise = this.compile(
           <ISSvelteCompilerParams>this._currentCompilationParams,
@@ -178,7 +179,8 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
     settings = __deepMerge(this.svelteFileSettings.compile, settings);
     this._currentCompilationParams = Object.assign({}, params);
 
-    params = this.applyInterface('compilerParams', params);
+    // @weird:ts-compilation-issue
+    params = (<any>this).applyInterface('compilerParams', params);
 
     // init the promise
     return new __SPromise(
@@ -203,7 +205,8 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
         pipeTo(this);
 
         emit('notification', {
-          title: `${this.id} compilation started`
+          // @weird:ts-compilation-issue
+          title: `${(<any>this).id} compilation started`
         });
 
         emit('log', {
@@ -414,7 +417,8 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
 
           emit('notification', {
             type: 'success',
-            title: `${this.id} compilation success`
+            // @weird:ts-compilation-issue
+            title: `${(<any>this).id} compilation success`
           });
 
           if (params.watch) {

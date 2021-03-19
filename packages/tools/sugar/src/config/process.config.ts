@@ -13,6 +13,19 @@ export default {
   asyncStart: false,
 
   /**
+   * @name            killOnError
+   * @namespace       config.process
+   * @type            Boolean
+   * @default         true
+   *
+   * Specify if the process has to be killed (rejected) on error
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  killOnError: true,
+
+  /**
    * @name              stdio
    * @namespace         config.process
    * @type              String

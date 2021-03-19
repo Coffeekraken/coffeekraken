@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import distanceBetween from './distanceBetween';
 

@@ -47,7 +47,6 @@ if (!action) {
     require('./monorepo/link.cli.js').default(args); // eslint-disable-line
     return;
   }
-
   require('../node/index');
   const __SProcess = require('../node/process/SProcess').default; // eslint-disable-line
 

@@ -14,6 +14,18 @@ exports.default = {
      */
     asyncStart: false,
     /**
+     * @name            killOnError
+     * @namespace       config.process
+     * @type            Boolean
+     * @default         true
+     *
+     * Specify if the process has to be killed (rejected) on error
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    killOnError: true,
+    /**
      * @name              stdio
      * @namespace         config.process
      * @type              String
@@ -113,4 +125,4 @@ exports.default = {
      */
     notification: '[config.notification]'
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvY2Vzcy5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwcm9jZXNzLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILFVBQVUsRUFBRSxLQUFLO0lBRWpCOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILEtBQUssRUFBRSxTQUFTO0lBRWhCOzs7Ozs7Ozs7O09BVUc7SUFDSCxVQUFVLEVBQUUsS0FBSztJQUVqQjs7Ozs7Ozs7OztPQVVHO0lBQ0gsS0FBSyxFQUFFLElBQUk7SUFFWDs7Ozs7Ozs7OztPQVVHO0lBQ0gsU0FBUyxFQUFFLEtBQUs7SUFFaEI7Ozs7Ozs7Ozs7T0FVRztJQUNILFVBQVUsRUFBRSxJQUFJO0lBRWhCOzs7Ozs7Ozs7O09BVUc7SUFDSCxVQUFVLEVBQUUsU0FBUztJQUVyQjs7Ozs7Ozs7Ozs7T0FXRztJQUNILFdBQVcsRUFBRSxJQUFJO0lBRWpCOzs7Ozs7Ozs7O09BVUc7SUFDSCxZQUFZLEVBQUUsdUJBQXVCO0NBQ3RDLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHJvY2Vzcy5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwcm9jZXNzLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLGtCQUFlO0lBQ2I7Ozs7Ozs7Ozs7T0FVRztJQUNILFVBQVUsRUFBRSxLQUFLO0lBRWpCOzs7Ozs7Ozs7O09BVUc7SUFDSCxXQUFXLEVBQUUsSUFBSTtJQUVqQjs7Ozs7Ozs7Ozs7O09BWUc7SUFDSCxLQUFLLEVBQUUsU0FBUztJQUVoQjs7Ozs7Ozs7OztPQVVHO0lBQ0gsVUFBVSxFQUFFLEtBQUs7SUFFakI7Ozs7Ozs7Ozs7T0FVRztJQUNILEtBQUssRUFBRSxJQUFJO0lBRVg7Ozs7Ozs7Ozs7T0FVRztJQUNILFNBQVMsRUFBRSxLQUFLO0lBRWhCOzs7Ozs7Ozs7O09BVUc7SUFDSCxVQUFVLEVBQUUsSUFBSTtJQUVoQjs7Ozs7Ozs7OztPQVVHO0lBQ0gsVUFBVSxFQUFFLFNBQVM7SUFFckI7Ozs7Ozs7Ozs7O09BV0c7SUFDSCxXQUFXLEVBQUUsSUFBSTtJQUVqQjs7Ozs7Ozs7OztPQVVHO0lBQ0gsWUFBWSxFQUFFLHVCQUF1QjtDQUN0QyxDQUFDIn0=

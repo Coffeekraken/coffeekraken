@@ -1,31 +1,10 @@
 import __fsPool from '../../fs/pool';
-import __SDuration from '../../time/SDuration';
-import __extension from '../../fs/extension';
-import __SCache from '@coffeekraken/s-cache';
-import __unquote from '../../string/unquote';
-import __path from 'path';
-import __stripCssComments from '../../css/stripCssComments';
-import __folderPath from '../../fs/folderPath';
-import __deepMerge from '../../object/deepMerge';
+import __SDuration from '../../../shared/time/SDuration';
+import __deepMerge from '../../../shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
-import __md5 from '../../crypt/md5';
-import __sass from 'sass';
-import __packageRoot from '../../path/packageRoot';
-import __getFilename from '../../fs/filename';
-import __isPath from '../../is/path';
-import __fs from 'fs';
-import __glob from 'glob';
-import __csso from 'csso';
-import __isGlob from 'is-glob';
-import __unique from '../../array/unique';
-import __SCompiler from '../../compiler/SCompiler';
-import __absolute from '../../path/absolute';
-import __ensureDirSync from '../../fs/ensureDirSync';
-import __SJsFile from '../SJsFile';
-import __express from 'express';
+import __SCompiler, { ISCompiler } from '../../compiler/SCompiler';
 
 import __SJsCompilerParamsInterface from './interface/SJsCompilerParamsInterface';
-import { ISCompiler } from '../../compiler/SCompiler';
 
 export interface ISJsCompilerParams {
   input: string | string[];
@@ -52,7 +31,7 @@ export interface ISJsCompilerCtor {
   new (initialParams: any, settings?: ISJsCompilerCtorSettings): ISJsCompiler;
 }
 
-export interface ISJsCompiler extends ISCompiler {}
+export type ISJsCompiler = ISCompiler;
 
 /**
  * @name                SJsCompiler
@@ -151,7 +130,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get jsCompilerSettings(): ISJsCompilerSettings {
-    return (<any>this._settings).jsCompiler;
+    return (<any>this)._settings.jsCompiler;
   }
 
   /**
@@ -205,7 +184,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
         settings
       );
 
-      let input = Array.isArray(params.input) ? params.input : [params.input];
+      const input = Array.isArray(params.input) ? params.input : [params.input];
 
       // prod
       if (params.prod) {
@@ -234,7 +213,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
         files = Array.isArray(files) ? files : [files];
 
         const resultsObj = {};
-        let aggregateStrArray: string[] = [];
+        const aggregateStrArray: string[] = [];
 
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
@@ -248,7 +227,7 @@ class SJsCompiler extends __SCompiler implements ISCompiler {
 
           try {
             pipe(compilePromise);
-            let compileRes = await compilePromise;
+            const compileRes = await compilePromise;
             resultsObj[file.path] = compileRes;
             aggregateStrArray.push(compileRes.js);
             emit('file', compileRes);

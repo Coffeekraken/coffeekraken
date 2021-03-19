@@ -1,4 +1,4 @@
-import __SInterface from '../../../shared/interface/_SInterface';
+import __SInterface from '../../interface/SInterface';
 import SFileReadSettingsInterface from './SFileReadSettingsInterface';
 import SFileWatchSettingsInterface from './SFileWatchSettingsInterface';
 import SFileWriteSettingsInterface from './SFileWriteSettingsInterface';

@@ -1,5 +1,3 @@
-// @shared
-
 /**
  * @name                description
  * @namespace           sugar.js.interface.renderers.terminal

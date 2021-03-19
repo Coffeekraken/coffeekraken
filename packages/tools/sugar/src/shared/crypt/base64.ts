@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __isJson from '../is/json';
 import toString from '../string/toString';

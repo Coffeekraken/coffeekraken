@@ -1,5 +1,4 @@
 "use strict";
-// @shared
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -21,4 +20,4 @@ require("./rules/minRule");
 require("./rules/maxRule");
 __exportStar(require("./_SDescriptor"), exports);
 exports.default = _SDescriptor_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Rlc2NyaXB0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTRGVzY3JpcHRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsVUFBVTs7Ozs7Ozs7Ozs7Ozs7O0FBRVYsa0VBQXlDO0FBQ3pDLGdDQUE4QjtBQUM5Qiw0QkFBMEI7QUFDMUIsMkJBQXlCO0FBQ3pCLDJCQUF5QjtBQUV6QixpREFBK0I7QUFDL0Isa0JBQWUsc0JBQVcsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0Rlc2NyaXB0b3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJTRGVzY3JpcHRvci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7QUFBQSxrRUFBeUM7QUFDekMsZ0NBQThCO0FBQzlCLDRCQUEwQjtBQUMxQiwyQkFBeUI7QUFDekIsMkJBQXlCO0FBRXpCLGlEQUErQjtBQUMvQixrQkFBZSxzQkFBVyxDQUFDIn0=

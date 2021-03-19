@@ -29,6 +29,8 @@
 	"streetsidesoftware.code-spell-checker",
 	"christian-kohler.path-intellisense",
 	"robbowen.synthwave-vscode",
-	"rbbit.typescript-hero"
+	"rbbit.typescript-hero",
+	"michelemelluso.code-beautifier",
+	"ms-vscode.vscode-typescript-next"
 ]
 }

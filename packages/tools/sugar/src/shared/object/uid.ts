@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __encryptObject from '../crypt/object';
 import __filter from '../object/filter';

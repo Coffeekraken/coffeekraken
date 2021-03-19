@@ -1,7 +1,6 @@
 import __SPromise from '@coffeekraken/s-promise';
 import * as __esbuild from 'esbuild';
 import __path from 'path';
-import __SInterface from '../../shared/interface/_SInterface';
 import __deepMerge from '../../shared/object/deepMerge';
 import __filter from '../../shared/object/filter';
 import __SDuration from '../../shared/time/SDuration';
@@ -9,6 +8,7 @@ import __wait from '../../shared/time/wait';
 import __esbuildAggregateLibsPlugin from '../esbuild/plugins/aggregateLibs';
 import __getFilename from '../fs/filename';
 import __SFile from '../fs/SFile';
+import __SInterface from '../interface/SInterface';
 import __onProcessExit from '../process/onProcessExit';
 import __SJsCompilerParamsInterface from './compile/interface/SJsCompilerParamsInterface';
 import __SJsCompiler, { ISJsCompilerParams } from './compile/SJsCompiler';
@@ -109,7 +109,7 @@ class SJsFile extends __SFile implements ISJsFile {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get jsFileSettings(): ISJsFileSettings {
-    return (<any>this._settings).jsFile;
+    return (<any>this)._settings.jsFile;
   }
 
   /**
@@ -183,7 +183,8 @@ class SJsFile extends __SFile implements ISJsFile {
         // console.log(tree);
         // return;
 
-        params = this.applyInterface('compilerParams', params);
+        // @weird:ts-compilation-issue
+        params = (<any>this).applyInterface('compilerParams', params);
 
         if (this._isCompiling) {
           emit('warn', {
@@ -201,7 +202,8 @@ class SJsFile extends __SFile implements ISJsFile {
         pipeTo(this);
 
         emit('notification', {
-          title: `${this.id} compilation started`
+          // @weird:ts-compilation-issue
+          title: `${(<any>this).id} compilation started`
         });
 
         emit('log', {

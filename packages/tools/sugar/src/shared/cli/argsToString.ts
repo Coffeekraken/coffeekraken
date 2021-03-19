@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __toString from '../string/toString';
 import __parseArgs from './parseArgs';

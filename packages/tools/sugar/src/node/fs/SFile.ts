@@ -4,7 +4,9 @@ import __path from 'path';
 import __md5 from '../../shared/crypt/md5';
 import __deepMerge from '../../shared/object/deepMerge';
 import __toString from '../../shared/string/toString';
-import __SEventEmitter from '../event/SEventEmitter';
+import __SEventEmitter, {
+  ISEventEmitter
+} from '../../shared/event/SEventEmitter';
 import __replacePathTokens from '../path/replacePathTokens';
 import __ensureDirSync from './ensureDirSync';
 import __extension from './extension';
@@ -131,7 +133,7 @@ export interface ISFileCtor {
   new (filepath: string, settings?: ISFileSettings): ISFile;
 }
 
-export interface ISFile {
+export interface ISFile extends ISEventEmitter {
   new (filepath: string, settings?: ISFileCtorSettings);
   name: string;
   path: string;
@@ -355,7 +357,7 @@ class SFile extends __SEventEmitter implements ISFile {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get fileSettings(): ISFileSettings {
-    return (<any>this._settings).file;
+    return (<any>this)._settings.file;
   }
 
   /**
@@ -579,11 +581,13 @@ class SFile extends __SEventEmitter implements ISFile {
       },
       (event) => {
         this.update();
-        this.emit('update', this);
+        // @weird:ts-compilation-issue
+        (<any>this).emit('update', this);
       }
     );
     setTimeout(() => {
-      this.emit('watch', this);
+      // @weird:ts-compilation-issue
+      (<any>this).emit('watch', this);
     });
   }
 
@@ -600,7 +604,8 @@ class SFile extends __SEventEmitter implements ISFile {
     if (!this._watcher) return;
     this._watcher.close();
     this._watcher = undefined;
-    this.emit('unwatch', this);
+    // @weird:ts-compilation-issue
+    (<any>this).emit('unwatch', this);
   }
 
   /**

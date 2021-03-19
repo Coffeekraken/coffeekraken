@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __upperFirst from '../../string/upperFirst';
 

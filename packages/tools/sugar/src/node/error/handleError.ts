@@ -1,17 +1,9 @@
 // @ts-nocheck
 
-import __copy from '../clipboard/copy';
-import __isChildProcess from '../../shared/is/childProcess';
-import __packageRoot from '../path/packageRoot';
-import __SError from '../../shared/error/SError';
 import __parseHtml from '../../shared/console/parseHtml';
-import __keypress from 'keypress';
-import __hotkey from '../keyboard/hotkey';
+import __SError from '../../shared/error/SError';
+import __isChildProcess from '../../shared/is/childProcess';
 import __toString from '../../shared/string/toString';
-import __parse from '../../shared/string/parse';
-import __blessed from 'blessed';
-import __color from '../../shared/color/color';
-import __SIpc from '../ipc/SIpc';
 
 /**
  * @name                    handleError
@@ -51,7 +43,7 @@ function __handleChildProcessErrors(error) {
   if (error.instanceId) return;
   if (!error) return;
   const errorStringArray = [error.stack];
-  console.log(errorStringArray.join('\n'));
+  console.log(__parseHtml(errorStringArray.join('\n')));
 }
 
 function __handleMainProcessErrors(error) {
@@ -68,13 +60,13 @@ function __handleMainProcessErrors(error) {
 
   setTimeout(() => {
     if (typeof error === 'string') {
-      const stringErrorReg = /\s?message:\s?((.|\n)*)\s?name:\s/gm;
-      const stringErrorMatches = error.match(stringErrorReg);
-      console.log(error);
+      console.log(__parseHtml(error));
     } else if (typeof error === 'object' && error.name && error.message) {
-      console.log([error.name, error.message, error.stack].join('\n\n'));
+      console.log(
+        __parseHtml([error.name, error.message, error.stack].join('\n\n'))
+      );
     } else {
-      console.log(__toString(error));
+      console.log(__parseHtml(__toString(error)));
     }
     process.exit(1);
   }, 50);

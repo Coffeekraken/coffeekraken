@@ -7,12 +7,25 @@ export default {
    * @type            String
    * @default         ${__packageRoot()}
    *
-   * Configure where is located the ".local" folder in which are stored usually some things like cache, etc...
+   * Configure the root directory. Usually the package root dir
    *
    * @since         2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   rootDir: `${__packageRoot()}`,
+
+  /**
+   * @name            sugarDir
+   * @namespace       config.storage
+   * @type            String
+   * @default         ${__packageRoot()}
+   *
+   * Configure where is located sugar package directory. Usually in the node_modules/@coffeekraken/sugar folder
+   *
+   * @since         2.0.0
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   */
+  sugarDir: `${__packageRoot(__dirname)}`,
 
   /**
    * @name            localDir

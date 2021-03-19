@@ -1,5 +1,3 @@
-// @shared
-
 import __SClass from '../class/SClass';
 import __SError from '../error/SError';
 import __deepMerge from '../object/deepMerge';

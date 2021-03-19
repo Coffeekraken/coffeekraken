@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __convert from './convert';
 import __SPromise from '@coffeekraken/s-promise';

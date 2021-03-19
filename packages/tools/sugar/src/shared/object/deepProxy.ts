@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __proxy from '../array/proxy';
 import __deepMap from '../object/deepMap';

@@ -1,5 +1,3 @@
-// @shared
-
 import SDescriptor from './_SDescriptor';
 import './rules/requiredRule';
 import './rules/typeRule';

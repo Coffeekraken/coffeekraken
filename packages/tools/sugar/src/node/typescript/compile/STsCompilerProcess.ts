@@ -1,11 +1,9 @@
 // @ts-nocheck
 
-import SProcess from '../../process/SProcess';
-import __STsCompiler from './STsCompiler';
+import SProcess, { ISProcessSettings } from '../../process/SProcess';
+import __STsCompiler, { ISTsCompilerParams } from './STsCompiler';
 
 import __STsCompilerParamsInterface from './interface/STsCompilerParamsInterface';
-import { ISTsCompilerParams } from './STsCompiler';
-import { ISProcessSettings } from '../../process/SProcess';
 
 /**
  * @name            STsCompilerProcess
@@ -24,7 +22,7 @@ import { ISProcessSettings } from '../../process/SProcess';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISTsCompileProcessSettings extends ISProcessSettings {}
+export type ISTsCompileProcessSettings = ISProcessSettings;
 
 export interface ISCompileTsProcess {}
 
@@ -49,7 +47,10 @@ class STsCompilerProcess extends SProcess implements ISCompileTsProcess {
     super(initialParams, {
       id: 'STsCompilerProcess',
       name: 'TS Compiler Process',
-      ...(settings || {})
+      ...(settings || {}),
+      process: {
+        runAsChild: true
+      }
     });
 
     this._tsCompiler = new __STsCompiler();

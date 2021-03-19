@@ -63,7 +63,7 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get terminalStdioSettings(): ISTerminalStdioSettings {
-    return (<any>this._settings).terminalStdio;
+    return (<any>this)._settings.terminalStdio;
   }
 
   /**

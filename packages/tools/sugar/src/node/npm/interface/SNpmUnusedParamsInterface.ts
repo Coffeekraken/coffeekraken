@@ -1,4 +1,4 @@
-import _SInterface from '../../../shared/interface/_SInterface';
+import _SInterface from '../../interface/SInterface';
 
 /**
  * @name            SNpmUnusedParamsInterface

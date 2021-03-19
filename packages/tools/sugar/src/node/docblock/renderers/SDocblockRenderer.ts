@@ -1,5 +1,3 @@
-// @shared
-
 import __path from 'path';
 import __SClass from '../../../shared/class/SClass';
 import __deepMerge from '../../../shared/object/deepMerge';
@@ -7,16 +5,13 @@ import __SPromise from '@coffeekraken/s-promise';
 import __handlebars from 'handlebars';
 import __promisedHandlebars from 'promised-handlebars';
 import __packageRoot from '../../../node/path/packageRoot';
-import __packageJson from '../../../node/package/json';
 import __fs from 'fs';
 import __glob from 'glob';
-import __getFilename from '../../fs/filename';
-import __sugarConfig from '../../config/sugar';
 import __md5 from '../../../shared/crypt/md5';
 
 import __SDocblockRendererSettingsInterface from './interface/SDocblockRendererSettingsInterface';
-import { ISDocblock } from '../SDocblock';
-import { ISDocblockBlock } from '../SDocblockBlock';
+import { ISDocblock } from '../../../shared/docblock/SDocblock';
+import { ISDocblockBlock } from '../../../shared/docblock/SDocblockBlock';
 
 /**
  * @name            SDocblockRenderer
@@ -139,7 +134,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get docblockRendererSettings(): ISDocblockRendererSettings {
-    return (<any>this._settings).docblockRenderer;
+    return (<any>this)._settings.docblockRenderer;
   }
 
   /**
@@ -406,7 +401,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
     let compiledTemplateFn;
 
     // get template object
-    let templateObj: any = await this.getTemplateObj(template);
+    const templateObj: any = await this.getTemplateObj(template);
 
     compiledTemplateFn = this._handlebars.compile(templateObj.content, {
       noEscape: true
@@ -441,7 +436,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
     let compiledTemplateFn;
 
     // get template object
-    let templateObj: any = await this.getTemplateObj(template);
+    const templateObj: any = await this.getTemplateObj(template);
 
     compiledTemplateFn = this._handlebars.compile(templateObj.content, {
       noEscape: true

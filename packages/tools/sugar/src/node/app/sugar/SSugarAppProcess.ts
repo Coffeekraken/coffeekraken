@@ -107,7 +107,7 @@ export default class SSugarAppProcess extends __SProcess {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get sugarAppSettings(): ISSugarAppSettings {
-    return (<any>this._settings).sugarApp;
+    return (<any>this)._settings.sugarApp;
   }
 
   /**

@@ -1,4 +1,4 @@
-import __SDocblock from '../../node/docblock/SDocblock';
+import __SDocblock from '../../shared/docblock/SDocblock';
 import __SDocblockHtmlRenderer from '../../node/docblock/renderers/SDocblockHtmlRenderer';
 import __fs from 'fs';
 

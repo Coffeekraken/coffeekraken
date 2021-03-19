@@ -19,10 +19,10 @@ import __parseHtml from '../../../shared/console/parseHtml';
 import __countLine from '../../../shared/string/countLine';
 import __chalk from 'chalk';
 import __minimatch from 'minimatch';
-import __SStdio from '../SStdio';
+import __SStdio, { ISStdio } from '../SStdio';
 
 import { ILog } from '../../../../shared/log/log';
-import { ISStdio } from '../SStdio';
+
 import __SBlessedComponent, {
   ISBlessedComponent
 } from '../../blessed/SBlessedComponent';
@@ -111,7 +111,7 @@ class SBlessedStdio extends __SStdio implements ISBlessedStdio {
    *
    */
   get blessedStdioSettings(): ISBlessedStdioSettings {
-    return (<any>this._settings).blessedStdio;
+    return (<any>this)._settings.blessedStdio;
   }
 
   /**

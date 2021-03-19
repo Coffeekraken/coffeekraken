@@ -1,5 +1,4 @@
 "use strict";
-// @shared
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                type
@@ -18,4 +17,4 @@ function default_1({ value, interfaceClass }) {
     return `<cyan>${value}</cyan>`;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHlwZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInR5cGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLFVBQVU7O0FBRVY7Ozs7Ozs7Ozs7OztHQVlHO0FBQ0gsbUJBQXlCLEVBQUUsS0FBSyxFQUFFLGNBQWMsRUFBRTtJQUNoRCxPQUFPLFNBQVMsS0FBSyxTQUFTLENBQUM7QUFDakMsQ0FBQztBQUZELDRCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHlwZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInR5cGUudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7QUFDSCxtQkFBeUIsRUFBRSxLQUFLLEVBQUUsY0FBYyxFQUFFO0lBQ2hELE9BQU8sU0FBUyxLQUFLLFNBQVMsQ0FBQztBQUNqQyxDQUFDO0FBRkQsNEJBRUMifQ==

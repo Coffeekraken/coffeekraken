@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __SType from '../type/SType';
 

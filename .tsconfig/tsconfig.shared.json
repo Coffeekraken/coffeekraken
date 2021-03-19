@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["../packages/*/*/src/shared/**/*.ts"],
+  "compilerOptions": {
+    "target": "es6",
+    "module": "umd",
+    "moduleResolution": "node"
+  }
+}

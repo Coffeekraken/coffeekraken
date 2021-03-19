@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __deepProxy from './deepProxy';
 import __get from './get';

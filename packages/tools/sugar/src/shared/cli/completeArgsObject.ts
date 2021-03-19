@@ -1,5 +1,4 @@
 // @ts-nocheck
-// @shared
 
 import __deepize from '../object/deepize';
 import __deepMerge from '../object/deepMerge';

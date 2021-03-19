@@ -1,5 +1,3 @@
-// @shared
-
 import __sugarConfig from '../../../node/config/sugar';
 import __SInterface from '../../interface/_SInterface';
 

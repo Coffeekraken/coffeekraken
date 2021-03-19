@@ -1,5 +1,3 @@
-// @shared
-
 import { decycle as __decycle } from 'json-cyclic';
 
 /**

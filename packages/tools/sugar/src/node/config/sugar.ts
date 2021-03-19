@@ -1,10 +1,9 @@
 // @ts-nocheck
 
-import __SConfig from './SConfig';
+import __SConfig from '../../shared/config/SConfig';
 import __SConfigFolderAdapter from './adapters/SConfigFolderAdapter';
 import __path from 'path';
 import __packageRoot from '../path/packageRoot';
-import __resolveTokens from '../../shared/object/resolveTokens';
 
 /**
  * @name                  sugar

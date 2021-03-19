@@ -7,7 +7,7 @@
  * @todo      tests
  */
 
-import _SInterface from '../../../shared/interface/_SInterface';
+import _SInterface from '../../interface/SInterface';
 
 export default class SNpmBinParamsInterface extends _SInterface {
   static definition = {

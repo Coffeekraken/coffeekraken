@@ -1,5 +1,3 @@
-// @shared
-
 import __SType, { ISType } from './_SType';
 
 /**
@@ -47,7 +45,7 @@ export interface IParseTypeString {
 function parseSingleTypeString(
   typeString: string
 ): IParseTypeStringSingleResultObj {
-  let ofStr: string = '',
+  let ofStr = '',
     typeStr: string = typeString;
 
   const ofPartsString = typeString.match(/<(.+)>$/gm);

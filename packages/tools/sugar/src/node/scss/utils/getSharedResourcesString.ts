@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '../../config/sugar';
+import __sugarConfig from '../../../shared/config/sugar';
 import __isInPackage from '../../path/isInPackage';
 import __packageRoot from '../../path/packageRoot';
 import __path from 'path';

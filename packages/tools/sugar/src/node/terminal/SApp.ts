@@ -7,7 +7,7 @@ import __parseHtml from './parseHtml';
 import __splitEvery from '../../shared/string/splitEvery';
 import __countLine from '../../shared/string/countLine';
 import __parseSchema from '../url/../shared/parseSchema';
-import __sugarConfig from '../config/sugar';
+import __sugarConfig from '../../shared/config/sugar';
 import __SPanel from '../terminal/SPanel';
 import __packageRoot from '../path/packageRoot';
 

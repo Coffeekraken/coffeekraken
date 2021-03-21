@@ -194,7 +194,7 @@ class SProcessPipe extends __SEventEmitter implements ISProcessPipe {
           if (processInstance) {
             emit('log', {
               type: 'heading',
-              value: processInstance.formattedName
+              value: processInstance.metas.formattedName
             });
             const resPromise = processInstance.run(params, processSettings);
             pipe(resPromise);

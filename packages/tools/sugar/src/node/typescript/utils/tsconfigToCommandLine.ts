@@ -1,4 +1,4 @@
-import __TscInterface from '../compile/interface/TscInterface';
+import __STscInterface from '../interface/STscInterface';
 import __buildCommandLine from '../../../shared/cli/buildCommandLine';
 import __fs from 'fs';
 import __path from 'path';
@@ -60,13 +60,13 @@ const fn = function (tsconfigPath) {
   if (config.compilerOptions !== null) {
     Object.keys(config.compilerOptions).forEach((key) => {
       const value = config.compilerOptions[key];
-      if (__TscInterface.definition[key] === undefined) return;
+      if (__STscInterface.definition[key] === undefined) return;
       params[key] = value;
     });
   }
 
   const cli = __buildCommandLine('[arguments]', params, {
-    definition: __TscInterface.definition
+    definition: __STscInterface.definition
   });
 
   return cli;

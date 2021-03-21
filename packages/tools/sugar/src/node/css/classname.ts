@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '../config/sugar';
+import __sugarConfig from '../../shared/config/sugar';
 
 /**
  * @name            classname

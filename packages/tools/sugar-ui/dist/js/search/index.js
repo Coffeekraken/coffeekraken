@@ -1,4 +1,0 @@
-/* Compiled using Coffeekraken Sugar SJsCompiler class which stand over the AMAZING esbuild module */
-let process = {};import __SSugarUi from "./webcomponents/SSugarUiWebComponent";
-__SSugarUi.define();
-//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsic3JjL2pzL3NlYXJjaC9pbmRleC5qcyJdLAogICJzb3VyY2VzQ29udGVudCI6IFsiaW1wb3J0IF9fU1N1Z2FyVWkgZnJvbSAnLi93ZWJjb21wb25lbnRzL1NTdWdhclVpV2ViQ29tcG9uZW50Jztcbl9fU1N1Z2FyVWkuZGVmaW5lKCk7XG4iXSwKICAibWFwcGluZ3MiOiAiQUFBQTtBQUNBLFdBQVc7IiwKICAibmFtZXMiOiBbXQp9Cg==

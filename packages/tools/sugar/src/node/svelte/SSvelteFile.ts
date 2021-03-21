@@ -3,7 +3,7 @@ import __path from 'path';
 import __deepMerge from '../../shared/object/deepMerge';
 import __SDuration from '../../shared/time/SDuration';
 import __wait from '../../shared/time/wait';
-import __sugarConfig from '../config/sugar';
+import __sugarConfig from '../../shared/config/sugar';
 import __getFilename from '../fs/filename';
 import __SFile, { ISFile } from '../fs/SFile';
 import __SInterface from '../interface/SInterface';

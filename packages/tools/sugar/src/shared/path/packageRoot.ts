@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __env from '../core/env';
+import __isNode from '../is/node';
 
 /**
  * @name                  packageRoot
@@ -27,9 +28,15 @@ import __env from '../core/env';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com
  */
-function packageRoot() {
-  const environment = __env('node_env') || __env('environment') || __env('env');
-  if (environment !== 'development' && environment !== 'test') return '';
-  return __env('package_root') || '';
+function packageRoot(...args) {
+  if (__isNode()) {
+    const packageRootFn = require('../../node/path/packageRoot').default; // eslint-disable-line
+    return packageRootFn(...args);
+  } else {
+    const environment =
+      __env('node_env') || __env('environment') || __env('env');
+    if (environment !== 'development' && environment !== 'test') return '';
+    return __env('package_root') || '';
+  }
 }
 export default packageRoot;

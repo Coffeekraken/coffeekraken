@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '../config/sugar';
+import __sugarConfig from '../../shared/config/sugar';
 import __getFilename from '../fs/filename';
 import __fs from 'fs';
 import __path from 'path';

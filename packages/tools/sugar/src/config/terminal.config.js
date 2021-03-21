@@ -37,93 +37,7 @@ exports.default = {
          * @since               2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        black: {
-            color: '#343a43'
-        },
-        /**
-         * @name                red
-         * @namespace           config.terminal.colors
-         * @type                Color
-         * @default             #e78287
-         *
-         * Specify the "red" terminal color value
-         *
-         * @since               2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        red: {
-            color: '#e78287'
-        },
-        /**
-         * @name                green
-         * @namespace           config.terminal.colors
-         * @type                Color
-         * @default             #a7cb8b
-         *
-         * Specify the "green" terminal color value
-         *
-         * @since               2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        green: {
-            color: '#a7cb8b'
-        },
-        /**
-         * @name                yellow
-         * @namespace           config.terminal.colors
-         * @type                Color
-         * @default             #ffdc89
-         *
-         * Specify the "yellow" terminal color value
-         *
-         * @since               2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        yellow: {
-            color: '#ffdc89'
-        },
-        /**
-         * @name                blue
-         * @namespace           config.terminal.colors
-         * @type                Color
-         * @default             #71bdf2
-         *
-         * Specify the "blue" terminal color value
-         *
-         * @since               2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        blue: {
-            color: '#71bdf2'
-        },
-        /**
-         * @name                magenta
-         * @namespace           config.terminal.colors
-         * @type                Color
-         * @default             #d190e3
-         *
-         * Specify the "magenta" terminal color value
-         *
-         * @since               2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        magenta: {
-            color: '#d190e3'
-        },
-        /**
-         * @name                cyan
-         * @namespace           config.terminal.colors
-         * @type                Color
-         * @default             #65c1cd
-         *
-         * Specify the "cyan" terminal color value
-         *
-         * @since               2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        cyan: {
-            color: '#65c1cd'
-        },
+        black: '#343a43',
         /**
          * @name                white
          * @namespace           config.terminal.colors
@@ -135,9 +49,103 @@ exports.default = {
          * @since               2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        white: {
-            color: '#e2e5e9'
-        }
+        white: '#e2e5e9',
+        /**
+         * @name                red
+         * @namespace           config.terminal.colors
+         * @type                Color
+         * @default             #e78287
+         *
+         * Specify the "red" terminal color value
+         *
+         * @since               2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        red: '#e78287',
+        /**
+         * @name                green
+         * @namespace           config.terminal.colors
+         * @type                Color
+         * @default             #a7cb8b
+         *
+         * Specify the "green" terminal color value
+         *
+         * @since               2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        green: '#a7cb8b',
+        /**
+         * @name                yellow
+         * @namespace           config.terminal.colors
+         * @type                Color
+         * @default             #ffdc89
+         *
+         * Specify the "yellow" terminal color value
+         *
+         * @since               2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        yellow: '#ffdc89',
+        /**
+         * @name                blue
+         * @namespace           config.terminal.colors
+         * @type                Color
+         * @default             #71bdf2
+         *
+         * Specify the "blue" terminal color value
+         *
+         * @since               2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        blue: '#71bdf2',
+        /**
+         * @name                magenta
+         * @namespace           config.terminal.colors
+         * @type                Color
+         * @default             #d190e3
+         *
+         * Specify the "magenta" terminal color value
+         *
+         * @since               2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        magenta: '#d190e3',
+        /**
+         * @name                cyan
+         * @namespace           config.terminal.colors
+         * @type                Color
+         * @default             #65c1cd
+         *
+         * Specify the "cyan" terminal color value
+         *
+         * @since               2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        cyan: '#65c1cd',
+        /**
+         * @name                grey
+         * @namespace           config.terminal.colors
+         * @type                Color
+         * @default             #e2e5e9
+         *
+         * Specify the "grey" terminal color value
+         *
+         * @since               2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        grey: '#e2e5e9',
+        /**
+         * @name                gray
+         * @namespace           config.terminal.colors
+         * @type                Color
+         * @default             [config.terminal.colors.grey]
+         *
+         * Specify the "gray" terminal color value
+         *
+         * @since               2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        gray: '[config.terminal.colors.grey]'
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGVybWluYWwuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGVybWluYWwuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWU7SUFDYixNQUFNLEVBQUU7UUFDTjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLGlDQUFpQztRQUUxQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsU0FBUyxFQUFFLCtCQUErQjtRQUUxQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFO1lBQ0wsS0FBSyxFQUFFLFNBQVM7U0FDakI7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsR0FBRyxFQUFFO1lBQ0gsS0FBSyxFQUFFLFNBQVM7U0FDakI7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFO1lBQ0wsS0FBSyxFQUFFLFNBQVM7U0FDakI7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFO1lBQ04sS0FBSyxFQUFFLFNBQVM7U0FDakI7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFO1lBQ0osS0FBSyxFQUFFLFNBQVM7U0FDakI7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFO1lBQ1AsS0FBSyxFQUFFLFNBQVM7U0FDakI7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFO1lBQ0osS0FBSyxFQUFFLFNBQVM7U0FDakI7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFO1lBQ0wsS0FBSyxFQUFFLFNBQVM7U0FDakI7S0FDRjtDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGVybWluYWwuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGVybWluYWwuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWU7SUFDYixNQUFNLEVBQUU7UUFDTjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLGlDQUFpQztRQUUxQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsU0FBUyxFQUFFLCtCQUErQjtRQUUxQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLFNBQVM7UUFFaEI7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxTQUFTO1FBRWhCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxHQUFHLEVBQUUsU0FBUztRQUVkOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUUsU0FBUztRQUVoQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLFNBQVM7UUFFakI7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxTQUFTO1FBRWY7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSxTQUFTO1FBRWxCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsU0FBUztRQUVmOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsU0FBUztRQUVmOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsK0JBQStCO0tBQ3RDO0NBQ0YsQ0FBQyJ9

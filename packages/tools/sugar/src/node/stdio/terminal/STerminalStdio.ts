@@ -1,6 +1,6 @@
 import __inquirer from 'inquirer';
 import { ISEventEmitter } from '../../../shared/event/SEventEmitter';
-import __SNotification from '../../../shared/notification/_SNotification';
+import __SNotification from '../../notification/SNotification';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __SStdio from '../SStdio';
 import __defaultTerminalStdioComponent from './components/defaultTerminalStdioComponent';

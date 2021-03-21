@@ -12,7 +12,7 @@ import {
 import __stripCssComments from '../../shared/css/stripCssComments';
 import __deepMerge from '../../shared/object/deepMerge';
 import __SDuration from '../../shared/time/SDuration';
-import __sugarConfig from '../config/sugar';
+import __sugarConfig from '../../shared/config/sugar';
 import __getFilename from '../fs/filename';
 import __SFile, { ISFileCtorSettings } from '../fs/SFile';
 import __SInterface from '../interface/SInterface';

@@ -5,7 +5,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SProcess from '../../process/SProcess';
 import __SSugarApp from './SSugarApp';
 import __SSugarAppInterface from './interface/SSugarAppInterface';
-import __sugarConfig from '../../config/sugar';
+import __sugarConfig from '../../../shared/config/sugar';
 import __SSugarAppModuleObjInterface from './interface/SSugarAppModuleObjInterface';
 import __SSugarAppModule, {
   ISSugarAppModuleShortcuts

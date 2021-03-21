@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var em2px_1 = __importDefault(require("./em2px"));
-    var em2px_2 = __importDefault(require("./em2px"));
-    var px2em_1 = __importDefault(require("./px2em"));
-    var px2rem_1 = __importDefault(require("./px2rem"));
+    const em2px_1 = __importDefault(require("./em2px"));
+    const em2px_2 = __importDefault(require("./em2px"));
+    const px2em_1 = __importDefault(require("./px2em"));
+    const px2rem_1 = __importDefault(require("./px2rem"));
     /**
      * @name                  convert
      * @namespace           sugar.js.unit
@@ -40,14 +40,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    function convert(from, to, $elm) {
-        if (to === void 0) { to = 'px'; }
-        var fromUnit = 'px';
+    function convert(from, to = 'px', $elm) {
+        let fromUnit = 'px';
         if (typeof from === 'string' && parseFloat(from).toString() !== from) {
             fromUnit = from.replace(/[0-9.,]+/g, '');
         }
-        var fromNumber = parseFloat(from);
-        var pxValue;
+        const fromNumber = parseFloat(from);
+        let pxValue;
         switch (fromUnit) {
             case 'px':
                 pxValue = fromNumber;
@@ -79,4 +78,4 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     }
     exports.default = convert;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29udmVydC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvbnZlcnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsa0RBQThCO0lBQzlCLGtEQUErQjtJQUMvQixrREFBOEI7SUFDOUIsb0RBQWdDO0lBRWhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Bc0JHO0lBQ0gsU0FBUyxPQUFPLENBQUMsSUFBSSxFQUFFLEVBQVMsRUFBRSxJQUFJO1FBQWYsbUJBQUEsRUFBQSxTQUFTO1FBQzlCLElBQUksUUFBUSxHQUFHLElBQUksQ0FBQztRQUNwQixJQUFJLE9BQU8sSUFBSSxLQUFLLFFBQVEsSUFBSSxVQUFVLENBQUMsSUFBSSxDQUFDLENBQUMsUUFBUSxFQUFFLEtBQUssSUFBSSxFQUFFO1lBQ3BFLFFBQVEsR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLFdBQVcsRUFBRSxFQUFFLENBQUMsQ0FBQztTQUMxQztRQUNELElBQU0sVUFBVSxHQUFHLFVBQVUsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUNwQyxJQUFJLE9BQU8sQ0FBQztRQUNaLFFBQVEsUUFBUSxFQUFFO1lBQ2hCLEtBQUssSUFBSTtnQkFDUCxPQUFPLEdBQUcsVUFBVSxDQUFDO2dCQUNyQixNQUFNO1lBQ1IsS0FBSyxLQUFLO2dCQUNSLE9BQU8sR0FBRyxlQUFRLENBQUMsVUFBVSxDQUFDLENBQUM7Z0JBQy9CLE1BQU07WUFDUixLQUFLLElBQUk7Z0JBQ1AsT0FBTyxHQUFHLGVBQU8sQ0FBQyxVQUFVLEVBQUUsSUFBSSxDQUFDLENBQUM7Z0JBQ3BDLE1BQU07WUFDUjtnQkFDRSxPQUFPLElBQUksQ0FBQztnQkFDWixNQUFNO1NBQ1Q7UUFDRCxRQUFRLEVBQUUsRUFBRTtZQUNWLEtBQUssSUFBSTtnQkFDUCxPQUFPLE9BQU8sQ0FBQztnQkFDZixNQUFNO1lBQ1IsS0FBSyxLQUFLO2dCQUNSLE9BQU8sZ0JBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQztnQkFDekIsTUFBTTtZQUNSLEtBQUssSUFBSTtnQkFDUCxPQUFPLGVBQU8sQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDLENBQUM7Z0JBQzlCLE1BQU07WUFDUjtnQkFDRSxPQUFPLElBQUksQ0FBQztnQkFDWixNQUFNO1NBQ1Q7SUFDSCxDQUFDO0lBQ0Qsa0JBQWUsT0FBTyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29udmVydC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvbnZlcnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7Ozs7Ozs7O0lBRWQsb0RBQThCO0lBQzlCLG9EQUErQjtJQUMvQixvREFBOEI7SUFDOUIsc0RBQWdDO0lBRWhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Bc0JHO0lBQ0gsU0FBUyxPQUFPLENBQUMsSUFBSSxFQUFFLEVBQUUsR0FBRyxJQUFJLEVBQUUsSUFBSTtRQUNwQyxJQUFJLFFBQVEsR0FBRyxJQUFJLENBQUM7UUFDcEIsSUFBSSxPQUFPLElBQUksS0FBSyxRQUFRLElBQUksVUFBVSxDQUFDLElBQUksQ0FBQyxDQUFDLFFBQVEsRUFBRSxLQUFLLElBQUksRUFBRTtZQUNwRSxRQUFRLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxXQUFXLEVBQUUsRUFBRSxDQUFDLENBQUM7U0FDMUM7UUFDRCxNQUFNLFVBQVUsR0FBRyxVQUFVLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDcEMsSUFBSSxPQUFPLENBQUM7UUFDWixRQUFRLFFBQVEsRUFBRTtZQUNoQixLQUFLLElBQUk7Z0JBQ1AsT0FBTyxHQUFHLFVBQVUsQ0FBQztnQkFDckIsTUFBTTtZQUNSLEtBQUssS0FBSztnQkFDUixPQUFPLEdBQUcsZUFBUSxDQUFDLFVBQVUsQ0FBQyxDQUFDO2dCQUMvQixNQUFNO1lBQ1IsS0FBSyxJQUFJO2dCQUNQLE9BQU8sR0FBRyxlQUFPLENBQUMsVUFBVSxFQUFFLElBQUksQ0FBQyxDQUFDO2dCQUNwQyxNQUFNO1lBQ1I7Z0JBQ0UsT0FBTyxJQUFJLENBQUM7Z0JBQ1osTUFBTTtTQUNUO1FBQ0QsUUFBUSxFQUFFLEVBQUU7WUFDVixLQUFLLElBQUk7Z0JBQ1AsT0FBTyxPQUFPLENBQUM7Z0JBQ2YsTUFBTTtZQUNSLEtBQUssS0FBSztnQkFDUixPQUFPLGdCQUFRLENBQUMsT0FBTyxDQUFDLENBQUM7Z0JBQ3pCLE1BQU07WUFDUixLQUFLLElBQUk7Z0JBQ1AsT0FBTyxlQUFPLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQyxDQUFDO2dCQUM5QixNQUFNO1lBQ1I7Z0JBQ0UsT0FBTyxJQUFJLENBQUM7Z0JBQ1osTUFBTTtTQUNUO0lBQ0gsQ0FBQztJQUNELGtCQUFlLE9BQU8sQ0FBQyJ9

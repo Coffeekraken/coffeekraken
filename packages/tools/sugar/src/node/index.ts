@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from './config/sugar';
+import __sugarConfig from '../shared/config/sugar';
 import __SLog from '../shared/log/SLog';
 import __handleError from './error/handleError';
 import __initEnv from './init/initEnv';

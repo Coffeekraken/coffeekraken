@@ -32,7 +32,7 @@ exports.default = {
             '[config.ts.tsconfigTemplatesDir]/tsconfig.shared.js'
         ],
         /**
-         * @name              outputDir
+         * @name              outDir
          * @namespace         config.ts.compile
          * @type              String
          * @default           undefined
@@ -43,7 +43,7 @@ exports.default = {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        outputDir: undefined,
+        outDir: undefined,
         /**
          * @name            rootDir
          * @namespace       config.ts.compile
@@ -131,4 +131,4 @@ exports.default = {
         compilerOptions: {}
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidHMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWU7SUFDYjs7Ozs7Ozs7OztPQVVHO0lBQ0gsb0JBQW9CLEVBQUUsa0RBQWtEO0lBRXhFLE9BQU8sRUFBRTtRQUNQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsS0FBSyxFQUFFO1lBQ0wsaURBQWlEO1lBQ2pELG1EQUFtRDtZQUNuRCxxREFBcUQ7U0FDdEQ7UUFFRDs7Ozs7Ozs7Ozs7V0FXRztRQUNILFNBQVMsRUFBRSxTQUFTO1FBRXBCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsT0FBTyxDQUFDLEdBQUcsRUFBRTtRQUV0Qjs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxHQUFHLEVBQUUsUUFBUTtRQUViOzs7Ozs7Ozs7Ozs7Ozs7Ozs7V0FrQkc7UUFDSCxLQUFLLEVBQUUsU0FBUztRQUVoQjs7Ozs7Ozs7Ozs7OztXQWFHO1FBQ0gsTUFBTSxFQUNKLDBHQUEwRztRQUU1Rzs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLEtBQUs7UUFFWjs7Ozs7Ozs7OztXQVVHO1FBQ0gsZUFBZSxFQUFFLEVBQUU7S0FDcEI7Q0FDRixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidHMuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidHMuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWU7SUFDYjs7Ozs7Ozs7OztPQVVHO0lBQ0gsb0JBQW9CLEVBQUUsa0RBQWtEO0lBRXhFLE9BQU8sRUFBRTtRQUNQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsS0FBSyxFQUFFO1lBQ0wsaURBQWlEO1lBQ2pELG1EQUFtRDtZQUNuRCxxREFBcUQ7U0FDdEQ7UUFFRDs7Ozs7Ozs7Ozs7V0FXRztRQUNILE1BQU0sRUFBRSxTQUFTO1FBRWpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsT0FBTyxDQUFDLEdBQUcsRUFBRTtRQUV0Qjs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxHQUFHLEVBQUUsUUFBUTtRQUViOzs7Ozs7Ozs7Ozs7Ozs7Ozs7V0FrQkc7UUFDSCxLQUFLLEVBQUUsU0FBUztRQUVoQjs7Ozs7Ozs7Ozs7OztXQWFHO1FBQ0gsTUFBTSxFQUNKLDBHQUEwRztRQUU1Rzs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLEtBQUs7UUFFWjs7Ozs7Ozs7OztXQVVHO1FBQ0gsZUFBZSxFQUFFLEVBQUU7S0FDcEI7Q0FDRixDQUFDIn0=

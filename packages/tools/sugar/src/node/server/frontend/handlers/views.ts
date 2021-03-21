@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __sugarConfig from '../../../config/sugar';
+import __sugarConfig from '../../../../shared/config/sugar';
 import __path from 'path';
 import __render from '../../../template/render';
 import __STemplate from '../../../template/STemplate';
@@ -29,11 +29,11 @@ import __SPromise, { reject } from '@coffeekraken/s-promise';
  */
 export default function views(req, res, settings = {}) {
   return new __SPromise(async ({ resolve, reject, pipe }) => {
-    let params = req.params[0].split('/');
+    const params = req.params[0].split('/');
 
     const duration = new __SDuration();
 
-    let rootDirs = __STemplate.getRootDirs(settings.rootDir || []);
+    const rootDirs = __STemplate.getRootDirs(settings.rootDir || []);
 
     for (let i = 0; i < rootDirs.length; i++) {
       const rootDir = rootDirs[i];

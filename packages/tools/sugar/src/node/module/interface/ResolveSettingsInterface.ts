@@ -1,4 +1,4 @@
-import __sugarConfig from '../../config/sugar';
+import __sugarConfig from '../../../shared/config/sugar';
 import __SInterface from '../../interface/SInterface';
 import __packageRoot from '../../path/packageRoot';
 

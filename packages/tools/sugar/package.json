@@ -21,6 +21,8 @@
   "toInstall": {},
   "dependencies": {
     "@11ty/dependency-tree": "^1.0.0",
+    "@coffeekraken/s-svelte-compiler": "file:../../compilers/s-svelte-compiler",
+    "@coffeekraken/s-ts-compiler": "file:../../compilers/s-ts-compiler",
     "@coffeekraken/s-cache": "file:../s-cache",
     "@coffeekraken/s-promise": "file:../s-promise",
     "@rollup/plugin-node-resolve": "^10.0.0",

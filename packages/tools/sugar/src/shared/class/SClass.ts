@@ -4,6 +4,8 @@ import __isPlain from '../is/plainObject';
 import __deepAssign from '../object/deepAssign';
 import __deepMerge from '../object/deepMerge';
 import __get from '../object/get';
+import __availableColors from '../dev/colors/availableColors';
+import __pickRandom from '../array/pickRandom';
 
 /**
  * @name            SClass
@@ -27,32 +29,28 @@ import __get from '../object/get';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+export interface ISClassMetas {
+  id: string;
+  name: string;
+  formattedName: string;
+  color: string;
+}
 export interface ISClassSettings {
-  id?: string;
+  metas?: ISClassMetas;
   [key: string]: any;
 }
 export interface ISClassCtor {
-  new (settings?: ISClassSettings);
-  mix(mixins: any[], Cls?: any): any;
+  new (settings?: Partial<ISClassSettings>);
+  extends(cls: any): any;
   interface?: ISInterface;
   settingsInterface?: ISInterface;
   _sClassAsName?: string;
 }
 
-export interface ISClassOptionalInterfaceObj {
-  class?: ISInterface;
-  apply?: boolean;
-  on?: string;
-}
 export interface ISClassInterfaceObj {
   class: ISInterface;
   apply: boolean;
   on: string;
-}
-
-export interface ISClassStaticMixinSettings {
-  initFnName?: string;
-  as?: string;
 }
 
 export interface ISClassExposeSettings {
@@ -62,9 +60,7 @@ export interface ISClassExposeSettings {
 
 export interface ISClass {
   _settings: ISClassSettings;
-  id: string;
-  name: string;
-  formattedName: string;
+  metas: ISClassMetas;
 }
 
 class SClass implements ISClass {
@@ -93,36 +89,29 @@ class SClass implements ISClass {
   public _interfacesStack: any = {};
 
   /**
-   * @name            id
+   * @name            metas
    * @type            String
    * @get
    *
-   * Access the id setted in the ```_settings.id```
-   * By default, the id will be the ```constructor.name```
+   * Access the metas in the ```_settings.metas```
    *
    * @since           2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  public get id() {
-    return this._settings.id || this.constructor.name;
-  }
+  public get metas(): ISClassMetas {
+    let name = `<yellow>${this._settings.metas?.name || ''}</yellow>`;
+    if (this._settings.metas?.id) {
+      name += ` <cyan>${this._settings.metas.id}</cyan>`;
+    }
 
-  /**
-   * @name            name
-   * @type            String
-   * @get
-   *
-   * Access the name setted in the ```_settings.name```
-   * By default, the name will be the ```constructor.name```
-   *
-   * @since           2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  public set name(value) {
-    this._settings.name = value;
-  }
-  public get name() {
-    return this._settings.name || this.constructor.name;
+    const metasObj = {
+      id: this._settings.metas?.id ?? this.constructor.name,
+      name: this._settings.metas?.name ?? this.constructor.name,
+      formattedName: name,
+      color: this._settings.metas?.color ?? 'yellow'
+    };
+
+    return metasObj;
   }
 
   /**
@@ -136,20 +125,17 @@ class SClass implements ISClass {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get formattedName() {
-    let name = `<yellow>${this.name || ''}</yellow>`;
-    if (this.id) {
-      name += ` <cyan>${this.id}</cyan>`;
+    let name = `<yellow>${this.metas.name || ''}</yellow>`;
+    if (this.metas.id) {
+      name += ` <cyan>${this.metas.id}</cyan>`;
     }
     return name;
   }
 
   static extends(Cls: any) {
     class SClass extends Cls {
-      public get id() {
-        return this._settings.id || this.constructor.name;
-      }
-      public get name() {
-        return this._settings.name || this.constructor.name;
+      public get metas() {
+        return this._settings.metas;
       }
       protected _settings: ISClassSettings = {};
       protected _interfacesStack: any = {};
@@ -279,7 +265,7 @@ function applyInterfaces(ctx: any) {
 
     Object.keys(interfacesObj).forEach((name) => {
       const interfaceObj = interfacesObj[name];
-      const settings: ISClassOptionalInterfaceObj = Object.assign(
+      const settings: Partial<ISClassInterfaceObj> = Object.assign(
         {},
         {
           apply: false,
@@ -379,7 +365,15 @@ function applyInterface(ctx: any, name: string, on: any = null) {
 function setSettings(ctx: any, settings: any = {}) {
   // saving the settings
   ctx._settings = settings;
-  if (!ctx._settings.id) ctx._settings.id = ctx.constructor.name;
+  // make sure a "metas" property is available
+  if (!ctx._settings.metas) ctx._settings.metas = {};
+  // make sure we have an id
+  if (!ctx._settings.id && !ctx._settings.metas?.id)
+    ctx._settings.metas.id = ctx.constructor.name;
+  if (!ctx.constructor.name.match(/^SConfig/)) {
+    if (!ctx._settings.metas.color)
+      ctx._settings.metas.color = __pickRandom(__availableColors());
+  } else if (!ctx._settings.metas.color) ctx._settings.metas.color = 'yellow';
 }
 
 // const cls: ISClass = SClass;

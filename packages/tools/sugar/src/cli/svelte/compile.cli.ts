@@ -1,17 +1,3 @@
 // @ts-nocheck
-
-import SSvelteCompilerProcess from '../../node/svelte/compile/SSvelteCompilerProcess';
-
-function compileSvelte(stringArgs = '') {
-  const pro = new SSvelteCompilerProcess(
-    {},
-    {
-      process: {
-        stdio: 'inherit'
-      }
-    }
-  );
-  pro.run(stringArgs);
-}
-
-export default compileSvelte;
+import { process as SSvelteCompilerProcess } from '@coffeekraken/s-svelte-compiler';
+export default SSvelteCompilerProcess;

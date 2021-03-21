@@ -358,7 +358,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       if (processSettings.throw === true) {
         throw new Error(
           `Sorry but you can not execute multiple process of the "<yellow>${
-            this.name || this.id || this.constructor.name
+            this.metas.name || this.metas.id || this.constructor.name
           }</yellow>" SProcess instance...`
         );
       }
@@ -649,8 +649,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             this.log({
               color: 'green',
               type: 'heading',
-              value: `The <yellow>${this.name || 'process'}</yellow> <cyan>${
-                this.id
+              value: `The <yellow>${
+                this.metas.name || 'process'
+              }</yellow> <cyan>${
+                this.metas.id
               }</cyan> execution has finished <green>successfully</green> in <yellow>${__convert(
                 this.currentExecutionObj?.duration,
                 __convert.SECOND
@@ -659,7 +661,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
           }
           // this.emit('notification', {
           //   type: 'success',
-          //   title: `${this.id} success`
+          //   title: `${this.metas.id} success`
           // });
           break;
         case 'running':
@@ -668,13 +670,13 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             this.log({
               type: 'heading',
               value: `Starting the <yellow>${
-                this.name || 'process'
-              }</yellow> <cyan>${this.id}</cyan> execution...`
+                this.metas.name || 'process'
+              }</yellow> <cyan>${this.metas.id}</cyan> execution...`
             });
           }
           // this.emit('notification', {
           //   type: 'start',
-          //   title: `${this.id} starting`
+          //   title: `${this.metas.id} starting`
           // });
           break;
         case 'error':
@@ -687,8 +689,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             );
             strArray.push(
               `<red>Something went wrong</red> during the <yellow>${
-                this.name || 'process'
-              }</yellow> <cyan>${this.id}</cyan> execution.`
+                this.metas.name || 'process'
+              }</yellow> <cyan>${this.metas.id}</cyan> execution.`
             );
             if (
               this.currentExecutionObj &&
@@ -707,7 +709,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
           }
           // this.emit('notification', {
           //   type: 'error',
-          //   title: `${this.id} error`
+          //   title: `${this.metas.id} error`
           // });
           break;
         case 'killed':
@@ -719,8 +721,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
               `<red>${'-'.repeat(process.stdout.columns - 4)}</red>`
             );
             strArray.push(
-              `The <yellow>${this.name || 'process'}</yellow> <cyan>${
-                this.id
+              `The <yellow>${this.metas.name || 'process'}</yellow> <cyan>${
+                this.metas.id
               }</cyan> execution has been <red>killed</red>.`
             );
             if (
@@ -740,7 +742,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
           }
           // this.emit('notification', {
           //   type: 'error',
-          //   title: `${this.id} killed`
+          //   title: `${this.metas.id} killed`
           // });
           break;
       }

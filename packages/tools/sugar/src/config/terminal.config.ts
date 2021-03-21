@@ -37,99 +37,7 @@ export default {
      * @since               2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    black: {
-      color: '#343a43'
-    },
-
-    /**
-     * @name                red
-     * @namespace           config.terminal.colors
-     * @type                Color
-     * @default             #e78287
-     *
-     * Specify the "red" terminal color value
-     *
-     * @since               2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    red: {
-      color: '#e78287'
-    },
-
-    /**
-     * @name                green
-     * @namespace           config.terminal.colors
-     * @type                Color
-     * @default             #a7cb8b
-     *
-     * Specify the "green" terminal color value
-     *
-     * @since               2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    green: {
-      color: '#a7cb8b'
-    },
-
-    /**
-     * @name                yellow
-     * @namespace           config.terminal.colors
-     * @type                Color
-     * @default             #ffdc89
-     *
-     * Specify the "yellow" terminal color value
-     *
-     * @since               2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    yellow: {
-      color: '#ffdc89'
-    },
-
-    /**
-     * @name                blue
-     * @namespace           config.terminal.colors
-     * @type                Color
-     * @default             #71bdf2
-     *
-     * Specify the "blue" terminal color value
-     *
-     * @since               2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    blue: {
-      color: '#71bdf2'
-    },
-
-    /**
-     * @name                magenta
-     * @namespace           config.terminal.colors
-     * @type                Color
-     * @default             #d190e3
-     *
-     * Specify the "magenta" terminal color value
-     *
-     * @since               2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    magenta: {
-      color: '#d190e3'
-    },
-
-    /**
-     * @name                cyan
-     * @namespace           config.terminal.colors
-     * @type                Color
-     * @default             #65c1cd
-     *
-     * Specify the "cyan" terminal color value
-     *
-     * @since               2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    cyan: {
-      color: '#65c1cd'
-    },
+    black: '#343a43',
 
     /**
      * @name                white
@@ -142,8 +50,110 @@ export default {
      * @since               2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    white: {
-      color: '#e2e5e9'
-    }
+    white: '#e2e5e9',
+
+    /**
+     * @name                red
+     * @namespace           config.terminal.colors
+     * @type                Color
+     * @default             #e78287
+     *
+     * Specify the "red" terminal color value
+     *
+     * @since               2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    red: '#e78287',
+
+    /**
+     * @name                green
+     * @namespace           config.terminal.colors
+     * @type                Color
+     * @default             #a7cb8b
+     *
+     * Specify the "green" terminal color value
+     *
+     * @since               2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    green: '#a7cb8b',
+
+    /**
+     * @name                yellow
+     * @namespace           config.terminal.colors
+     * @type                Color
+     * @default             #ffdc89
+     *
+     * Specify the "yellow" terminal color value
+     *
+     * @since               2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    yellow: '#ffdc89',
+
+    /**
+     * @name                blue
+     * @namespace           config.terminal.colors
+     * @type                Color
+     * @default             #71bdf2
+     *
+     * Specify the "blue" terminal color value
+     *
+     * @since               2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    blue: '#71bdf2',
+
+    /**
+     * @name                magenta
+     * @namespace           config.terminal.colors
+     * @type                Color
+     * @default             #d190e3
+     *
+     * Specify the "magenta" terminal color value
+     *
+     * @since               2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    magenta: '#d190e3',
+
+    /**
+     * @name                cyan
+     * @namespace           config.terminal.colors
+     * @type                Color
+     * @default             #65c1cd
+     *
+     * Specify the "cyan" terminal color value
+     *
+     * @since               2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    cyan: '#65c1cd',
+
+    /**
+     * @name                grey
+     * @namespace           config.terminal.colors
+     * @type                Color
+     * @default             #e2e5e9
+     *
+     * Specify the "grey" terminal color value
+     *
+     * @since               2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    grey: '#e2e5e9',
+
+    /**
+     * @name                gray
+     * @namespace           config.terminal.colors
+     * @type                Color
+     * @default             [config.terminal.colors.grey]
+     *
+     * Specify the "gray" terminal color value
+     *
+     * @since               2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    gray: '[config.terminal.colors.grey]'
   }
 };

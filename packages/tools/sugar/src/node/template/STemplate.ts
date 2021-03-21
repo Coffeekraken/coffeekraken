@@ -1,6 +1,6 @@
 import __unique from '../../shared/array/unique';
 import __deepMerge from '../../shared/object/deepMerge';
-import __sugarConfig from '../config/sugar';
+import __sugarConfig from '../../shared/config/sugar';
 import __path from 'path';
 import __fs from 'fs';
 import __SError from '../../shared/error/SError';
@@ -563,7 +563,7 @@ class STemplate extends __SClass implements ISTemplate {
         }
       },
       {
-        id: this.id + '.render'
+        id: this.metas.id + '.render'
       }
     );
   }

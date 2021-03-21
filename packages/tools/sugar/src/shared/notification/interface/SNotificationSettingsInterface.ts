@@ -1,4 +1,4 @@
-import __sugarConfig from '../../../node/config/sugar';
+import __sugarConfig from '../../config/sugar';
 import __SInterface from '../../interface/_SInterface';
 
 /**

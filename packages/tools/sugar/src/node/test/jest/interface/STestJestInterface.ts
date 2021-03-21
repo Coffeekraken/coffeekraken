@@ -2,7 +2,7 @@
 
 import __SInterface from '../../../../shared/class/SInterface';
 import __STestInterface from '../../../shared/interface/STestInterface';
-import __sugarConfig from '../../../config/sugar';
+import __sugarConfig from '../../../../shared/config/sugar';
 import __deepMerge from '../../../../shared/object/deepMerge';
 
 /**

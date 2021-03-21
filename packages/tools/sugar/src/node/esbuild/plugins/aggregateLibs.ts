@@ -5,7 +5,7 @@ import __path from 'path';
 import __packageRoot from '../../path/packageRoot';
 import __SFile from '../../fs/SFile';
 import __deepMerge from '../../../shared/object/deepMerge';
-import __sugarConfig from '../../config/sugar';
+import __sugarConfig from '../../../shared/config/sugar';
 import __folderPath from '../../fs/folderPath';
 import __ensureDirSync from '../../fs/ensureDirSync';
 import * as __esbuild from 'esbuild';

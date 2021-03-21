@@ -8,7 +8,7 @@ import __parseHtml from './parseHtml';
 import __splitEvery from '../../shared/string/splitEvery';
 import __countLine from '../../shared/string/countLine';
 import __parseSchema from '../../shared/url/parseSchema';
-import __sugarConfig from '../config/sugar';
+import __sugarConfig from '../../shared/config/sugar';
 
 /**
  * @name                    SSimpleApp
@@ -75,7 +75,7 @@ export default class SSimpleApp extends __SApp {
         : `<black> ${menuObj.title} </black>`;
     });
 
-    let headerContent =
+    const headerContent =
       `<black>Coffeekraken Sugar</black>\n` + `{right}${menuString}{/right}`;
 
     const header = new __SHeader(headerContent, {

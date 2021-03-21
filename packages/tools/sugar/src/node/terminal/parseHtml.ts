@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __replaceTags from '../../shared/html/replaceTags';
-import __sugarConfig from '../config/sugar';
+import __sugarConfig from '../../shared/config/sugar';
 import __upperFirst from '../../shared/string/upperFirst';
 import __chalk from 'chalk';
 import __tagsMap from '../../shared/console/html/tagsMap';
@@ -45,10 +45,10 @@ function parseHtml(message) {
   const terminalColors = Object.keys(__sugarConfig('terminal.colors'));
   const colorsObj = {};
   sugarColors.forEach((name) => {
-    colorsObj[name] = __sugarConfig(`colors.${name}.color`);
+    colorsObj[name] = __sugarConfig(`colors.${name}`);
   });
   terminalColors.forEach((name) => {
-    colorsObj[name] = __sugarConfig(`terminal.colors.${name}.color`);
+    colorsObj[name] = __sugarConfig(`terminal.colors.${name}`);
   });
 
   message = message.map((m) => {

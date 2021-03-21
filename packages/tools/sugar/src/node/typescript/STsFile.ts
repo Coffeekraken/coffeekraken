@@ -2,7 +2,7 @@ import __deepMerge from '../../shared/object/deepMerge';
 import __getFilename from '../fs/filename';
 import { ISFileCtorSettings } from '../fs/SFile';
 import __SJsFile, { ISJsFileCompileSettings } from '../js/SJsFile';
-import { ISTsCompilerParams } from './compile/STsCompiler';
+import { ISTsCompilerParams } from '@coffeekraken/s-ts-compiler';
 
 /**
  * @name            STsFile

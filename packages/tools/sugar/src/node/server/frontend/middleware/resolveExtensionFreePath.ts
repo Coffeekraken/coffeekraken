@@ -2,7 +2,7 @@
 
 import __packageRoot from '../../../path/packageRoot';
 import __fs from 'fs';
-import __sugarConfig from '../../../config/sugar';
+import __sugarConfig from '../../../../shared/config/sugar';
 import __deepMerge from '../../../../shared/object/deepMerge';
 import __deepMap from '../../../../shared/object/deepMap';
 import __extension from '../../../fs/extension';
@@ -48,7 +48,8 @@ function resolveExtensionFreePath(settings = {}) {
     if (pathExtension) return next();
 
     const rootDir = __sugarConfig('frontend.rootDir');
-    let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
+    const filePath =
+      req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
 
     // check if the file is on filesystem using the extensions listed in the frontend.config.js file
     for (let i = 0; i < settings.extensions.length; i++) {

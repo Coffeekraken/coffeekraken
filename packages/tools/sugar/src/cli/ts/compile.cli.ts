@@ -1,17 +1,3 @@
 // @ts-nocheck
-
-import STsCompilerProcess from '../../node/typescript/compile/STsCompilerProcess';
-
-function compileTs(stringArgs = '') {
-  const pro = new STsCompilerProcess(
-    {},
-    {
-      process: {
-        stdio: 'inherit'
-      }
-    }
-  );
-  pro.run(stringArgs);
-}
-
-export default compileTs;
+import { process as STsCompilerProcess } from '@coffeekraken/s-ts-compiler';
+export default STsCompilerProcess;

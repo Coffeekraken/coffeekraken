@@ -10,7 +10,7 @@ import __toString from '../../shared/string/toString';
 import __fs from 'fs';
 import __path from 'path';
 import __unique from '../../shared/array/unique';
-import __sugarConfig from '../config/sugar';
+import __sugarConfig from '../../shared/config/sugar';
 
 /**
  * @name                SFrontspec

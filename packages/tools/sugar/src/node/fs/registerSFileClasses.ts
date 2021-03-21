@@ -1,5 +1,5 @@
 import __SFile from './SFile';
-import __sugarConfig from '../config/sugar';
+import __sugarConfig from '../../shared/config/sugar';
 
 /**
  * @name            registerSFileClasses

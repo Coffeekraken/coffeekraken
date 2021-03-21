@@ -32,7 +32,7 @@ export default {
     ],
 
     /**
-     * @name              outputDir
+     * @name              outDir
      * @namespace         config.ts.compile
      * @type              String
      * @default           undefined
@@ -43,7 +43,7 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outputDir: undefined,
+    outDir: undefined,
 
     /**
      * @name            rootDir

@@ -1,5 +1,5 @@
 import __packageRoot from '../node/path/packageRoot';
-import __sugarConfig from '../node/config/sugar';
+import __sugarConfig from '../shared/config/sugar';
 
 export default {
   welcome: {

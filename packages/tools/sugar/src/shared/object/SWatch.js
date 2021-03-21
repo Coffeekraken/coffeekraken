@@ -13,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 })(function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    var deepProxy_1 = __importDefault(require("./deepProxy"));
-    var deepMerge_1 = __importDefault(require("../object/deepMerge"));
-    var s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+    const deepProxy_1 = __importDefault(require("./deepProxy"));
+    const deepMerge_1 = __importDefault(require("../object/deepMerge"));
+    const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
     /**
      * @name 		            SWatch
      * @namespace           sugar.js.object
@@ -49,7 +49,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    var SWatch = /** @class */ (function () {
+    class SWatch {
         /**
          * @name                      constructor
          * @type                      Function
@@ -58,9 +58,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        function SWatch(object, settings) {
-            var _this = this;
-            if (settings === void 0) { settings = {}; }
+        constructor(object, settings = {}) {
             /**
              * @name                    _watchStack
              * @type                    Object
@@ -91,32 +89,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             this._promise = new s_promise_1.default({
                 id: 'SWatch'
             });
-            this._proxiedObject = deepProxy_1.default(object, function (obj) {
-                var path = obj.path;
-                var value = obj.value;
-                var oldValue = obj.oldValue;
+            this._proxiedObject = deepProxy_1.default(object, (obj) => {
+                let path = obj.path;
+                const value = obj.value;
+                const oldValue = obj.oldValue;
                 if (path.slice(0, 1) === '.')
                     path = path.slice(1);
                 // build the object to pass to the handler
-                var watchResult = {
-                    object: _this._proxiedObject,
-                    path: path,
+                const watchResult = {
+                    object: this._proxiedObject,
+                    path,
                     action: obj.action,
-                    oldValue: oldValue,
-                    value: value
+                    oldValue,
+                    value
                 };
                 if (watchResult.action === 'get' &&
                     (path === 'on' || path === 'unwatch'))
                     return;
                 // emit event through promise
-                setTimeout(function () {
+                setTimeout(() => {
                     // this._promise.emit(`${path}`, watchResult);
-                    _this._promise.emit(path + ":" + watchResult.action, watchResult);
+                    this._promise.emit(`${path}:${watchResult.action}`, watchResult);
                 });
             }, {
                 deep: this._settings.deep
             });
-            var onPropertyObj = {
+            const onPropertyObj = {
                 writable: true,
                 configurable: false,
                 enumerable: false,
@@ -132,7 +130,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
                     on: onPropertyObj
                 });
             }
-            var unwatchPropertyObj = {
+            const unwatchPropertyObj = {
                 writable: true,
                 configurable: false,
                 enumerable: false,
@@ -158,14 +156,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
             });
             return this._proxiedObject;
         }
-        SWatch.prototype.unwatch = function () {
+        unwatch() {
             // cancel the promise
             this._promise.cancel();
             // revoke proxy on the proxied object
             return this._proxiedObject.revoke();
-        };
-        return SWatch;
-    }());
+        }
+    }
     exports.default = SWatch;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1dhdGNoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1dhdGNoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUtkLDBEQUFzQztJQUN0QyxrRUFBOEM7SUFJOUMsc0VBQWlEO0lBR2pEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQWdDRztJQUNIO1FBd0JFOzs7Ozs7O1dBT0c7UUFDSCxnQkFBWSxNQUFNLEVBQUUsUUFBYTtZQUFqQyxpQkF5RkM7WUF6Rm1CLHlCQUFBLEVBQUEsYUFBYTtZQS9CakM7Ozs7Ozs7O2VBUUc7WUFDSCxnQkFBVyxHQUFHLEVBQUUsQ0FBQztZQUVqQjs7Ozs7Ozs7O2VBU0c7WUFDSCxjQUFTLEdBQUcsRUFBRSxDQUFDO1lBV2IsMkRBQTJEO1lBQzNELElBQUksTUFBTSxDQUFDLFNBQVM7Z0JBQUUsT0FBTyxNQUFNLENBQUM7WUFFcEMsSUFBSSxDQUFDLFNBQVMsR0FBRyxtQkFBVyxDQUMxQjtnQkFDRSxJQUFJLEVBQUUsSUFBSTthQUNYLEVBQ0QsUUFBUSxDQUNULENBQUM7WUFFRixJQUFJLENBQUMsUUFBUSxHQUFHLElBQUksbUJBQVUsQ0FBQztnQkFDN0IsRUFBRSxFQUFFLFFBQVE7YUFDYixDQUFDLENBQUM7WUFFSCxJQUFJLENBQUMsY0FBYyxHQUFHLG1CQUFXLENBQy9CLE1BQU0sRUFDTixVQUFDLEdBQUc7Z0JBQ0YsSUFBSSxJQUFJLEdBQUcsR0FBRyxDQUFDLElBQUksQ0FBQztnQkFDcEIsSUFBTSxLQUFLLEdBQUcsR0FBRyxDQUFDLEtBQUssQ0FBQztnQkFDeEIsSUFBTSxRQUFRLEdBQUcsR0FBRyxDQUFDLFFBQVEsQ0FBQztnQkFDOUIsSUFBSSxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsS0FBSyxHQUFHO29CQUFFLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO2dCQUNuRCwwQ0FB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1dhdGNoLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1dhdGNoLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7Ozs7OztJQUtkLDREQUFzQztJQUN0QyxvRUFBOEM7SUFJOUMsd0VBQWlEO0lBR2pEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQWdDRztJQUNILE1BQXFCLE1BQU07UUF3QnpCOzs7Ozs7O1dBT0c7UUFDSCxZQUFZLE1BQU0sRUFBRSxRQUFRLEdBQUcsRUFBRTtZQS9CakM7Ozs7Ozs7O2VBUUc7WUFDSCxnQkFBVyxHQUFHLEVBQUUsQ0FBQztZQUVqQjs7Ozs7Ozs7O2VBU0c7WUFDSCxjQUFTLEdBQUcsRUFBRSxDQUFDO1lBV2IsMkRBQTJEO1lBQzNELElBQUksTUFBTSxDQUFDLFNBQVM7Z0JBQUUsT0FBTyxNQUFNLENBQUM7WUFFcEMsSUFBSSxDQUFDLFNBQVMsR0FBRyxtQkFBVyxDQUMxQjtnQkFDRSxJQUFJLEVBQUUsSUFBSTthQUNYLEVBQ0QsUUFBUSxDQUNULENBQUM7WUFFRixJQUFJLENBQUMsUUFBUSxHQUFHLElBQUksbUJBQVUsQ0FBQztnQkFDN0IsRUFBRSxFQUFFLFFBQVE7YUFDYixDQUFDLENBQUM7WUFFSCxJQUFJLENBQUMsY0FBYyxHQUFHLG1CQUFXLENBQy9CLE1BQU0sRUFDTixDQUFDLEdBQUcsRUFBRSxFQUFFO2dCQUNOLElBQUksSUFBSSxHQUFHLEdBQUcsQ0FBQyxJQUFJLENBQUM7Z0JBQ3BCLE1BQU0sS0FBSyxHQUFHLEdBQUcsQ0FBQyxLQUFLLENBQUM7Z0JBQ3hCLE1BQU0sUUFBUSxHQUFHLEdBQUcsQ0FBQyxRQUFRLENBQUM7Z0JBQzlCLElBQUksSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEtBQUssR0FBRztvQkFBRSxJQUFJLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDbkQsMENBQTBDO2dC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

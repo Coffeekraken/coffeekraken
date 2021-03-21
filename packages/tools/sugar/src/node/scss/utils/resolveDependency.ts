@@ -1,4 +1,4 @@
-import __sugarConfig from '../../config/sugar';
+import __sugarConfig from '../../../shared/config/sugar';
 import __path from 'path';
 import __glob from 'glob';
 import __extension from '../../fs/extension';

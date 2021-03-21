@@ -12,7 +12,7 @@ import __getFilename from '../fs/filename';
 import __unique from '../../shared/array/unique';
 import __SGlob from '../glob/SGlob';
 import __SClass from '../../shared/class/SClass';
-import __sugarConfig from '../config/sugar';
+import __sugarConfig from '../../shared/config/sugar';
 import __SDocMapSettingsInterface from './interface/SDocMapSettingsInterface';
 import __wait from '../../shared/time/wait';
 import __SFile from '../fs/SFile';
@@ -258,7 +258,7 @@ class SDocMap extends __SClass implements ISDocMap {
         resolve(files);
       },
       {
-        id: this.id + '.find'
+        id: this.metas.id + '.find'
       }
     );
   }
@@ -310,7 +310,7 @@ class SDocMap extends __SClass implements ISDocMap {
         resolve(docMapJson);
       },
       {
-        id: this.id + '.read'
+        id: this.metas.id + '.read'
       }
     );
   }
@@ -338,7 +338,7 @@ class SDocMap extends __SClass implements ISDocMap {
         if (!Array.isArray(globs)) globs = [globs];
 
         emit('notification', {
-          message: `${this.id} build started`
+          message: `${this.metas.id} build started`
         });
 
         emit('log', {
@@ -444,13 +444,13 @@ class SDocMap extends __SClass implements ISDocMap {
 
         emit('notification', {
           type: 'success',
-          message: `${this.id} build success`
+          message: `${this.metas.id} build success`
         });
 
         resolve(this._entries);
       },
       {
-        id: this.id + '.build'
+        id: this.metas.id + '.build'
       }
     );
   }
@@ -523,7 +523,7 @@ class SDocMap extends __SClass implements ISDocMap {
         resolve(entries);
       },
       {
-        id: this.id + '.save'
+        id: this.metas.id + '.save'
       }
     );
   }

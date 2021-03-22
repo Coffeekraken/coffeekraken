@@ -8,6 +8,7 @@ import __SCompiler, {
   ISCompiler,
   ISCompilerSettings
 } from '@coffeekraken/sugar/node/compiler/SCompiler';
+import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
@@ -36,6 +37,7 @@ export interface ISTsCompilerParams {
   banner: string;
   watch: boolean;
   stack: string;
+  config: string;
   compilerOptions: Record<string, any>;
   // transpileOnly: boolean;
   // tsconfig: any;
@@ -149,6 +151,7 @@ class STsCompiler extends __SCompiler {
         settings = __deepMerge(this.tsCompilerSettings, {}, settings || {});
 
         let input = Array.isArray(params.input) ? params.input : [params.input];
+        let config;
 
         let stacks: any = undefined;
         if (params.stack) {
@@ -186,18 +189,51 @@ class STsCompiler extends __SCompiler {
           });
         }
 
+        if (params.config && typeof params.config === 'string') {
+          let configPath;
+          if (
+            __fs.existsSync(`${__rootDir()}/tsconfig.${params.config}.json`)
+          ) {
+            configPath = `${__rootDir()}/tsconfig.${params.config}.json`;
+          } else if (
+            __fs.existsSync(`${__rootDir()}/tsconfig.${params.config}.js`)
+          ) {
+            configPath = `${__rootDir()}/tsconfig.${params.config}.js`;
+          } else if (
+            __fs.existsSync(
+              `${__sugarConfig('ts.tsconfigTemplatesDir')}/tsconfig.${
+                params.config
+              }.js`
+            )
+          ) {
+            configPath = `${__sugarConfig(
+              'ts.tsconfigTemplatesDir'
+            )}/tsconfig.${params.config}.js`;
+          }
+          if (!configPath) {
+            throw new Error(
+              `Sorry but the passed "<yellow>${params.config}</yellow>" config parameter does not resolve to any valid tsconfig file...`
+            );
+          } else {
+            if (configPath.match(/\.js$/)) {
+              config = require(configPath);
+            } else {
+              const jsonFile = new __SFile(configPath);
+              config = jsonFile.content;
+            }
+          }
+        } else if (__isPlainObject(params.config)) {
+          config = params.config;
+        }
+
+        nativeConsole.log(configPath);
+
         const colors = __availableColors();
 
         // clear
         if (params.clear && params.outDir) {
           emit('log', {
-            value: `<bg${__upperFirst(this.metas.color)}><black> ${
-              this.metas.id
-            } </black></bg${__upperFirst(
-              this.metas.color
-            )}> Clearing the outDir "<yellow>${
-              params.outDir
-            }</yellow>" before compilation`
+            value: `Clearing the outDir "<yellow>${params.outDir}</yellow>" before compilation`
           });
           const outDirPath = __path.resolve(
             params.rootDir || process.cwd(),
@@ -208,197 +244,222 @@ class STsCompiler extends __SCompiler {
 
         // loop on inputs
         input.forEach((inputPath, i) => {
-          if (inputPath.match(/.*\/tsconfig(\..*)?\.js(on)?$/)) {
-            const inputPathToDisplay = inputPath
-              .replace(`${__sugarDir()}/src/templates/tsconfig/`, 'sugar/')
+          let tsconfigJson = {},
+            inputPathToDisplay;
+
+          const isTsConfigInput = inputPath.match(
+            /.*\/tsconfig(\..*)?\.js(on)?$/
+          );
+
+          if (!isTsConfigInput && inputPath.match(/\.tsx?$/)) {
+            if (!config) {
+              throw new Error(
+                `Sorry but to compile the passed "<cyan>${inputPath}</cyan>" input, you MUST specify a valid config to use like "js", "node", "shared", or a full tsconfig file path`
+              );
+            }
+            tsconfigJson = config;
+          } else if (isTsConfigInput) {
+            inputPathToDisplay = inputPath
+              .replace(`${__sugarDir()}/src/templates/tsconfig/`, 'sugar:')
               .replace(`${__packageRoot()}/`, '')
               .replace('tsconfig.', '')
               .replace(/\.js(on)?$/, '');
 
-            let tsconfigJson = {};
             if (inputPath.match(/\.js$/)) {
               tsconfigJson = require(inputPath);
             } else {
               const jsonFile = new __SFile(inputPath);
               tsconfigJson = jsonFile.content;
             }
+          } else {
+            throw new Error(
+              'Sorry but the input "<yellow>${input}</yellow> seems to be invalid...'
+            );
+          }
 
-            // extends
-            if (tsconfigJson.extends) {
-              const extendsPath = __path.resolve(
-                __folderPath(inputPath),
-                tsconfigJson.extends
-              );
-              let extendsJson = {};
-              // reading the file
-              if (extendsPath.match(/\.json$/)) {
-                const extendsFile = new __SFile(extendsPath);
-                extendsJson = extendsFile.content;
-              } else if (extendsPath.match(/\.js$/)) {
-                extendsJson = require(extendsPath);
-              } else {
-                emit('warn', {
-                  value: `<bg${__upperFirst(this.metas.color)}><black> ${
-                    this.metas.id
-                  } </black></bg${__upperFirst(
-                    this.metas.color
-                  )}> THe tsconfig file "<cyan>${inputPath}</cyan>" extends property "<yellow>${
-                    tsconfigJson.extends
-                  }</yellow>" seems to be incorrect...`
-                });
-              }
-              delete tsconfigJson.extends;
-              // extends the config
-              tsconfigJson = __deepMerge(extendsJson, tsconfigJson);
+          // extends
+          if (tsconfigJson.extends) {
+            const extendsPath = __path.resolve(
+              __folderPath(inputPath),
+              tsconfigJson.extends
+            );
+            let extendsJson = {};
+            // reading the file
+            if (extendsPath.match(/\.json$/)) {
+              const extendsFile = new __SFile(extendsPath);
+              extendsJson = extendsFile.content;
+            } else if (extendsPath.match(/\.js$/)) {
+              extendsJson = require(extendsPath);
+            } else {
+              emit('warn', {
+                value: `<bg${__upperFirst(this.metas.color)}><black> ${
+                  this.metas.id
+                } </black></bg${__upperFirst(
+                  this.metas.color
+                )}> THe tsconfig file "<cyan>${inputPath}</cyan>" extends property "<yellow>${
+                  tsconfigJson.extends
+                }</yellow>" seems to be incorrect...`
+              });
             }
+            delete tsconfigJson.extends;
+            // extends the config
+            tsconfigJson = __deepMerge(extendsJson, tsconfigJson);
+          }
 
-            // include
+          // include (only for non tsconfig input)
+          if (!isTsConfigInput) {
             if (!tsconfigJson.include && tsconfigJson._include) {
               tsconfigJson.include = tsconfigJson._include;
             }
-            delete tsconfigJson._include;
-            if (tsconfigJson.include) {
-              tsconfigJson.include = tsconfigJson.include.map((path) => {
-                if (__path.isAbsolute(path)) return path;
-                return __path.resolve(__folderPath(inputPath), path);
-              });
-            }
-
-            // exclude
-            if (!tsconfigJson.exclude && tsconfigJson._exclude) {
-              tsconfigJson.exclude = tsconfigJson._exclude;
-            }
-            delete tsconfigJson._exclude;
-
-            // rootDir
-            if (params.rootDir) {
-              if (!__path.isAbsolute(params.rootDir)) {
-                throw new Error(
-                  `Sorry but the parameter "<yellow>rootDir</yellow>" MUST be an absolute path. You've passed "<cyan>${params.rootDir}</cyan>"`
-                );
-              }
-              tsconfigJson.rootDir = params.rootDir;
-            }
-
-            // outDir
-            if (params.outDir) {
-              tsconfigJson.compilerOptions.outDir = __path.resolve(
-                params.rootDir || process.cwd(),
-                params.outDir
-              );
-            }
-
-            // compilerOptions
-            if (!tsconfigJson.compilerOptions)
-              tsconfigJson.compilerOptions = {};
-
-            if (params.compilerOptions) {
-              tsconfigJson.compilerOptions = __deepMerge(
-                tsconfigJson.compilerOptions || {},
-                params.compilerOptions
-              );
-            }
-
-            // map
-            if (params.map === false) {
-              delete tsconfigJson.compilerOptions.sourceMap;
-              delete tsconfigJson.compilerOptions.inlineSourceMap;
-            } else if (params.map === true) {
-              tsconfigJson.compilerOptions.sourceMap = true;
-              delete tsconfigJson.compilerOptions.inlineSourceMap;
-            } else if (params.map === 'inline') {
-              delete tsconfigJson.compilerOptions.sourceMap;
-              tsconfigJson.compilerOptions.inlineSourceMap = true;
-            }
-
-            // writing the tsconfig file
-            const tmpFilePath =
-              `${__tmpDir()}/STsCompiler/${__getFilename(inputPath)}`
-                .split('.')
-                .slice(0, -1)
-                .join('.') + '.json';
-            __ensureDirSync(__folderPath(tmpFilePath));
-            __fs.writeFileSync(
-              tmpFilePath,
-              JSON.stringify(tsconfigJson, null, 4)
-            );
-
-            // build command line
-            const commandLineArray: string[] = [];
-            commandLineArray.push(`-p ${tmpFilePath}`);
-            if (params.watch) commandLineArray.push('--watch');
-
-            // spawn new process
-            try {
-              const pro = __spawn(`tsc ${commandLineArray.join(' ')}`, [], {
-                cwd: params.rootDir || process.cwd()
-              });
-
-              pipeFrom(pro, {
-                processor: (value, metas) => {
-                  let txtValue;
-                  if (value.value && typeof value.value === 'string')
-                    txtValue = value.value;
-                  else if (typeof value === 'string') txtValue = value;
-
-                  if (txtValue) {
-                    txtValue = txtValue.replace(
-                      /[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}\s[AP]M\s-\s/,
-                      ''
-                    );
-                  }
-
-                  if (
-                    txtValue &&
-                    txtValue.match(/No inputs were found in config file/g)
-                  ) {
-                    if (value.value) value.value = `No file found...`;
-                    else value = 'No file found...';
-                  } else if (txtValue) {
-                    if (value.value) value.value = txtValue;
-                    else value = txtValue;
-                  }
-                  return [value, metas];
-                },
-                filter: (value, metas) => {
-                  if (!metas.event.match(/^close/)) return true;
-                  if (
-                    value.stdout &&
-                    value.stdout
-                      .join(' ')
-                      .match(/No inputs were found in config file/g)
-                  )
-                    return false;
-                  return true;
-                },
-                stripAnsi: true,
-                prefixValue: `<bg${__upperFirst(this.metas.color)}><black> ${
-                  this.metas.id
-                } </black></bg${__upperFirst(this.metas.color)}> <${
-                  colors[i] || 'yellow'
-                }>[${inputPathToDisplay}]</${colors[i] || 'yellow'}> `
-              });
-
-              pro.on('close', (value) => {
-                if (value.code === 0) {
-                  pro.emit('log', {
-                    value: `Compilation <green>successfull</green> in <yellow>${value.formatedDuration}</yellow>`
-                  });
-                }
-              });
-
-              pro.emit('log', {
-                value: `Starting compilation process`
-              });
-            } catch (e) {
-              console.log(e);
-            }
           } else {
-            throw new Error(
-              'Sorry but the functionality to compile single file or files is not implemented yet. Please pass as input a "tsconfig.json" file...'
+            tsconfigJson.include = [inputPath];
+          }
+          delete tsconfigJson._include;
+
+          // make sure includes are absolute
+          if (tsconfigJson.include) {
+            tsconfigJson.include = tsconfigJson.include.map((path) => {
+              if (__path.isAbsolute(path)) return path;
+              return __path.resolve(__folderPath(inputPath), path);
+            });
+          }
+
+          // exclude
+          if (!tsconfigJson.exclude && tsconfigJson._exclude) {
+            tsconfigJson.exclude = tsconfigJson._exclude;
+          }
+          delete tsconfigJson._exclude;
+
+          // rootDir
+          if (params.rootDir) {
+            if (!__path.isAbsolute(params.rootDir)) {
+              throw new Error(
+                `Sorry but the parameter "<yellow>rootDir</yellow>" MUST be an absolute path. You've passed "<cyan>${params.rootDir}</cyan>"`
+              );
+            }
+            tsconfigJson.rootDir = params.rootDir;
+          }
+
+          // outDir
+          if (params.outDir) {
+            tsconfigJson.compilerOptions.outDir = __path.resolve(
+              params.rootDir || process.cwd(),
+              params.outDir
             );
           }
+
+          // compilerOptions
+          if (!tsconfigJson.compilerOptions) tsconfigJson.compilerOptions = {};
+
+          if (params.compilerOptions) {
+            tsconfigJson.compilerOptions = __deepMerge(
+              tsconfigJson.compilerOptions || {},
+              params.compilerOptions
+            );
+          }
+
+          // map
+          if (params.map === false) {
+            delete tsconfigJson.compilerOptions.sourceMap;
+            delete tsconfigJson.compilerOptions.inlineSourceMap;
+          } else if (params.map === true) {
+            tsconfigJson.compilerOptions.sourceMap = true;
+            delete tsconfigJson.compilerOptions.inlineSourceMap;
+          } else if (params.map === 'inline') {
+            delete tsconfigJson.compilerOptions.sourceMap;
+            tsconfigJson.compilerOptions.inlineSourceMap = true;
+          }
+
+          // writing the tsconfig file
+          const tmpFilePath =
+            `${__tmpDir()}/STsCompiler/${__getFilename(inputPath)}`
+              .split('.')
+              .slice(0, -1)
+              .join('.') + '.json';
+          __ensureDirSync(__folderPath(tmpFilePath));
+          __fs.writeFileSync(
+            tmpFilePath,
+            JSON.stringify(tsconfigJson, null, 4)
+          );
+
+          // build command line
+          const commandLineArray: string[] = [];
+          commandLineArray.push(`-p ${tmpFilePath}`);
+          if (params.watch) commandLineArray.push('--watch');
+
+          console.log(commandLineArray.join(' '));
+
+          return;
+          // spawn new process
+          try {
+            const pro = __spawn(`tsc ${commandLineArray.join(' ')}`, [], {
+              cwd: params.rootDir || process.cwd()
+            });
+
+            pipeFrom(pro, {
+              processor: (value, metas) => {
+                let txtValue;
+                if (value.value && typeof value.value === 'string')
+                  txtValue = value.value;
+                else if (typeof value === 'string') txtValue = value;
+
+                if (txtValue) {
+                  txtValue = txtValue.replace(
+                    /[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}\s[AP]M\s-\s/,
+                    ''
+                  );
+                }
+
+                if (
+                  txtValue &&
+                  txtValue.match(/No inputs were found in config file/g)
+                ) {
+                  if (value.value) value.value = `No file found...`;
+                  else value = 'No file found...';
+                } else if (txtValue) {
+                  if (value.value) value.value = txtValue;
+                  else value = txtValue;
+                }
+                return [value, metas];
+              },
+              filter: (value, metas) => {
+                if (!metas.event.match(/^close/)) return true;
+                if (
+                  value.stdout &&
+                  value.stdout
+                    .join(' ')
+                    .match(/No inputs were found in config file/g)
+                )
+                  return false;
+                return true;
+              },
+              stripAnsi: true,
+              prefixValue: `<${
+                colors[i] || 'yellow'
+              }>[${inputPathToDisplay}]</${colors[i] || 'yellow'}> `
+            });
+
+            pro.on('close', (value) => {
+              if (value.code === 0) {
+                pro.emit('log', {
+                  value: `Compilation <green>successfull</green> in <yellow>${value.formatedDuration}</yellow>`
+                });
+              }
+            });
+
+            pro.emit('log', {
+              value: `Starting compilation process`
+            });
+          } catch (e) {
+            console.log(e);
+          }
         });
+      },
+      {
+        eventEmitter: {
+          bind: this
+        },
+        metas: this.metas
       }
     );
   }

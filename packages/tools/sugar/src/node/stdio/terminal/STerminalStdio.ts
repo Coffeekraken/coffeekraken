@@ -10,6 +10,8 @@ import __headingTerminalStdioComponent from './components/headingTerminalStdioCo
 import __separatorTerminalStdioComponent from './components/separatorTerminalStdioComponent';
 import __timeTerminalStdioComponent from './components/timeTerminalStdioComponent';
 import __warningTerminalStdioComponent from './components/warningTerminalStdioComponent';
+import __upperFirst from '../../../shared/string/upperFirst';
+import __parseHtml from '../../../shared/console/parseHtml';
 
 /**
  * @name            STerminalStdio
@@ -34,6 +36,7 @@ export interface ISTerminalStdioCtorSettings {
 }
 
 export interface ISTerminalStdioSettings {
+  metas: boolean;
   actionPrefix: boolean;
 }
 
@@ -85,6 +88,7 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
       __deepMerge(
         {
           terminalStdio: {
+            metas: true,
             actionPrefix: true,
             icons: true
           }
@@ -140,7 +144,21 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   _log(logObj, component) {
-    console.log(component.render(logObj, this._settings));
+    // handle empty logs
+    if (!logObj || !logObj.value) return;
+    // render the component
+    let renderedStr = component.render(logObj, this._settings);
+    // handle metas if needed
+    if (this.terminalStdioSettings.metas && logObj.metas?.emitter) {
+      const idStr = `<bg${__upperFirst(
+        logObj.metas.emitter.metas.color || 'yellow'
+      )}><black> ${logObj.metas.emitter.metas.id} </black></bg${__upperFirst(
+        logObj.metas.emitter.metas.color || 'yellow'
+      )}>`;
+      renderedStr = `${idStr} ${renderedStr}`;
+    }
+    // log the string
+    console.log(__parseHtml(renderedStr));
   }
 }
 

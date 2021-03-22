@@ -99,7 +99,7 @@ function fn(value, settings = {}) {
       value = decycle(value);
     } catch (e) {}
 
-    value = __deepMap(value, (value, prop, fullPath) => {
+    value = __deepMap(value, ({ value }) => {
       if (value instanceof Map) return __mapToObj(value);
       return value;
     });

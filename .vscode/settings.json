@@ -6,9 +6,7 @@
     "**/*.js": {
       "when": "$(basename).ts"
     },
-    "**/*.js.map": {
-      "when": "$(basename).ts"
-    }
+    "**/*.js.map": true
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true

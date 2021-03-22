@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __mimeTypes from 'mime-types';
 import __sugarConfig from '../../../shared/config/sugar';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __fs from 'fs';
@@ -8,9 +7,6 @@ import __path from 'path';
 import __SPromise from '@coffeekraken/s-promise';
 import __express from 'express';
 import __trimLines from '../../../shared/string/trimLines';
-import __SError from '../../../shared/error/SError';
-import __STemplate from '../../template/STemplate';
-import __deepMap from '../../../shared/object/deepMap';
 import __extension from '../../fs/extension';
 import __packageRoot from '../../path/packageRoot';
 

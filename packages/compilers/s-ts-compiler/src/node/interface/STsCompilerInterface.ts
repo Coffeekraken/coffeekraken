@@ -42,7 +42,6 @@ class STsCompilerInterface extends __SInterface {
       type: 'Boolean',
       description:
         'Specify if you want to clear the "outDir" before compiling the new files. Works only if "outDir" is specified',
-      alias: 'c',
       default: false
     },
     map: {
@@ -55,6 +54,13 @@ class STsCompilerInterface extends __SInterface {
       type: 'String',
       alias: 's',
       default: __sugarConfig('ts.compile.stack')
+    },
+    config: {
+      type: 'String',
+      alias: 'c',
+      description:
+        'Specify either a full tsconfig file path to use as config, or a pre-build config name like "js", "node", etc...',
+      default: __sugarConfig('ts.compile.config')
     },
     banner: {
       type: 'String',

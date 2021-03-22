@@ -8,6 +8,10 @@ import __SCompiler, {
 } from '@coffeekraken/sugar/node/compiler/SCompiler';
 import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __SSvelteCompilerInterface from './interface/SSvelteCompilerInterface';
+import __STsCompiler from '@coffeekraken/s-ts-compiler';
+
+// @ts-ignore
+const __svelte = require('svelte/compiler'); // eslint-disable-line
 
 export interface ISSvelteCompilerCtorSettings {
   svelteCompiler?: Partial<ISSvelteCompilerSettings>;
@@ -123,75 +127,225 @@ class SSvelteCompiler extends __SCompiler {
     params: ISSvelteCompilerParams,
     settings: Partial<ISSvelteCompilerSettings> = {}
   ) {
-    return new __SPromise(async ({ resolve, reject, pipe, emit, on }) => {
-      settings = __deepMerge(this.svelteCompilerSettings, {}, settings);
+    return new __SPromise(
+      async ({ resolve, reject, pipe, emit, on }) => {
+        settings = __deepMerge(this.svelteCompilerSettings, {}, settings);
 
-      const input = Array.isArray(params.input) ? params.input : [params.input];
+        const input = Array.isArray(params.input)
+          ? params.input
+          : [params.input];
 
-      // prod
-      if (params.prod) {
-        params.style = 'compressed';
-        params.minify = true;
-        params.stripComments = true;
-      }
+        // prod
+        if (params.prod) {
+          params.style = 'compressed';
+          params.minify = true;
+          params.stripComments = true;
+        }
 
-      const resultsObj = {};
-      const aggregateStrArray: string[] = [];
-      const duration = new __SDuration();
-
-      const pool = __fsPool(input, {
-        watch: params.watch
-      });
-
-      on('cancel', () => {
-        pool.cancel();
-      });
-
-      if (params.watch) {
-        emit('log', {
-          value: `<blue>[watch]</blue> Watching for changes...`
+        const pool = __fsPool(input, {
+          watch: params.watch
         });
-      }
 
-      pool.on(params.watch ? 'update' : 'files', async (files) => {
-        files = Array.isArray(files) ? files : [files];
+        // handle cancel
+        on('cancel', () => {
+          pool.cancel();
+        });
 
-        for (let i = 0; i < files.length; i++) {
-          const file = files[i];
-          const compilePromise = file.compile(
-            {
-              ...params,
-              watch: false
-            },
-            settings
-          );
+        pool.on(params.watch ? 'update' : 'files', async (files) => {
+          files = Array.isArray(files) ? files : [files];
 
-          try {
-            pipe(compilePromise);
-            const compileRes = await compilePromise;
-            resultsObj[file.path] = compileRes;
-            aggregateStrArray.push(compileRes.js);
-            emit('file', compileRes);
-          } catch (e) {
-            emit('warn', {
-              value: e.toString()
+          for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+
+            console.log(file.content);
+
+            console.log(params);
+
+            // preprocess
+            const preprocessResult = await __svelte.preprocess(
+              file.content,
+              {
+                style: async (input) => {
+                  return {
+                    code: input.content
+                  };
+
+                  // if (
+                  //   !input.attributes ||
+                  //   !input.attributes.type ||
+                  //   input.attributes.type !== 'text/scss'
+                  // ) {
+                  //   return {
+                  //     code: input.content
+                  //   };
+                  // }
+
+                  // if (input.content.trim() === '') {
+                  //   return '';
+                  // }
+
+                  // // create a temp file
+                  // const tmpSScssFile = new __SScssFile(
+                  //   '%tmpDir/svelte/compile.scss',
+                  //   {
+                  //     file: {
+                  //       checkExistence: false
+                  //     }
+                  //   }
+                  // );
+                  // tmpSScssFile.writeSync(input.content);
+
+                  // emit('log', {
+                  //   value: `<yellow>[scss]</yellow> Processing scss`
+                  // });
+
+                  // const compileRes = await tmpSScssFile.compile({
+                  //   save: false,
+                  //   map: false
+                  // });
+
+                  // if (compileRes.css) {
+                  //   emit('log', {
+                  //     value: `<green>[scss]</green> Scss processed <green>successfully</green>`
+                  //   });
+
+                  //   return {
+                  //     code: compileRes.css
+                  //   };
+                  // } else {
+                  //   return compileRes;
+                  // }
+                },
+                script: async (input) => {
+                  if (
+                    !input.attributes ||
+                    !input.attributes.type ||
+                    input.attributes.type !== 'text/ts'
+                  ) {
+                    return {
+                      code: input.content
+                    };
+                  }
+
+                  const compiler = new __STsCompiler();
+
+                  // // create a temp file
+                  // const tmpTsFile = new __STsFile('%tmpDir/ts/compile.ts', {
+                  //   file: {
+                  //     checkExistence: false
+                  //   }
+                  // });
+                  // tmpTsFile.writeSync(input.content);
+
+                  // emit('log', {
+                  //   value: `<yellow>[ts]</yellow> Processing typescript`
+                  // });
+
+                  // const compilePromise = tmpTsFile.compile({
+                  //   save: false,
+                  //   // @ts-ignore
+                  //   target: 'browser',
+                  //   map: false
+                  // });
+                  // // const compiler = new __STsCompiler();
+                  // // const compilePromise = compiler.compile({
+                  // //   input: [tmpTsFile.path],
+                  // //   rootDir: tmpTsFile.dirPath,
+                  // //   save: false,
+                  // //   transpileOnly: true,
+                  // //   target: 'browser',
+                  // //   map: false
+                  // // });
+                  // pipe(compilePromise, {
+                  //   events: 'error'
+                  // });
+                  // const compileRes = await compilePromise;
+                  // if (compileRes.js) {
+                  //   emit('log', {
+                  //     value: `<green>[ts]</green> Typescript processed <green>successfully</green>`
+                  //   });
+
+                  //   return {
+                  //     code: compileRes.js
+                  //   };
+                  // } else {
+                  //   return compileRes;
+                  // }
+                }
+              },
+              {}
+            );
+
+            // render svelte
+            const result = __svelte.compile(preprocessResult.code, {
+              filename: file.name,
+              dev: !params.prod,
+              customElement: true,
+              preserveComments: !params.stripComments,
+              preserveWhitespace: !params.prod,
+              outputFilename: file.name,
+              cssOutputFilename: file.name,
+              ...(params.svelte || {})
             });
-          }
-        }
 
-        if (params.watch) {
-          emit('log', {
-            value: `<blue>[watch]</blue> Watching for changes...`
-          });
-        } else {
-          resolve({
-            files: resultsObj,
-            js: aggregateStrArray.join('\n'),
-            ...duration.end()
-          });
+            result.warnings.forEach((warning) => {
+              emit('warn', {
+                value: warning.toString()
+              });
+            });
+
+            // const compilePromise = file.compile(
+            //   {
+            //     ...params,
+            //     watch: false
+            //   },
+            //   settings
+            // );
+
+            // try {
+            //   pipe(compilePromise);
+            //   const compileRes = await compilePromise;
+            //   resultsObj[file.path] = compileRes;
+            //   aggregateStrArray.push(compileRes.js);
+            //   emit('file', compileRes);
+            // } catch (e) {
+            //   emit('warn', {
+            //     value: e.toString()
+            //   });
+            // }
+          }
+
+          // if (params.watch) {
+          //   emit('log', {
+          //     value: `<blue>[watch]</blue> Watching for changes...`
+          //   });
+          // } else {
+          //   resolve({
+          //     files: resultsObj,
+          //     js: aggregateStrArray.join('\n'),
+          //     ...duration.end()
+          //   });
+          // }
+        });
+
+        // const resultsObj = {};
+        // const aggregateStrArray: string[] = [];
+        // const duration = new __SDuration();
+
+        //
+
+        // if (params.watch) {
+        //   emit('log', {
+        //     value: `<blue>[watch]</blue> Watching for changes...`
+        //   });
+        // }
+      },
+      {
+        eventEmitter: {
+          bind: this
         }
-      });
-    });
+      }
+    );
   }
 }
 

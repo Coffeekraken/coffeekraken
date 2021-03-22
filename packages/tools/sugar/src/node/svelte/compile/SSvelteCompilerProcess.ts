@@ -84,10 +84,6 @@ class SSvelteCompilerProcess extends SProcess {
         {
           svelteCompileProcess: {}
         },
-        {
-          id: 'SSvelteCompilerProcess',
-          name: 'Svelte Compiler Process'
-        },
         settings
       )
     );

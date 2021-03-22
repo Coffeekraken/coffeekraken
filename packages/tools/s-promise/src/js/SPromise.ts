@@ -167,7 +167,7 @@ class SPromise
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
-  constructor(executorFnOrSettings = {}, settings = {}) {
+  constructor(executorFnOrSettings = {}, settings?) {
     // @ts-ignore
     let executorFn,
       _this,
@@ -186,7 +186,7 @@ class SPromise
           }
         },
         typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {},
-        settings
+        settings ?? {}
       ),
       (resolve, reject) => {
         resolvers.resolve = resolve;
@@ -202,13 +202,15 @@ class SPromise
     );
 
     this.expose(
-      new __SEventEmitter({
-        id: this.id,
-        ...this._settings,
-        eventEmitter: {
-          // asyncStart: true
-        }
-      }),
+      new __SEventEmitter(
+        __deepMerge(
+          {
+            metas: this.metas,
+            eventEmitter: {}
+          },
+          this._settings
+        )
+      ),
       {
         as: 'eventEmitter',
         props: ['on', 'off', 'emit', 'pipe', 'pipeFrom', 'pipeTo']

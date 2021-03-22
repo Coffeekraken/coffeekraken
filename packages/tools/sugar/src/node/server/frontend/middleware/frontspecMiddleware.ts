@@ -43,7 +43,7 @@ function frontspecMiddleware(settings = {}) {
       frontspec = __deepMerge(frontspec, frontspecFile);
     }
 
-    frontspec = __deepMap(frontspec, (value, prop, fullPath) => {
+    frontspec = __deepMap(frontspec, ({ value }) => {
       if (typeof value === 'string') {
         return value
           .replace(`${__packageRoot()}/`, '')

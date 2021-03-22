@@ -95,6 +95,30 @@ export default {
     stack: undefined,
 
     /**
+     * @name              config
+     * @namespace         config.ts.compile
+     * @type              Array<String>
+     * @default           shared
+     *
+     * Specify which config you want to compile the passed none tsconfig... input with.
+     * A config is a single name that will target the file "tsconfig.{config}.json"
+     * at the root of your project or by using the tsconfig template files from
+     * the sugar package.
+     * If specified, the tsconfig file that match with the config will be used as
+     * configuration to compile your passed input. This mean that the properties
+     * like "include" and "files" from the tsconfig file will not bein used at all.
+     * If you want to use these fields, check the "stack" parameter.
+     * Available configs in the sugar package are:
+     * - js : Compile files for the browser
+     * - node : Compile files for node runtime
+     * - shared : Compile files for node and the browser
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    config: 'shared',
+
+    /**
      * @name              banner
      * @namespace         config.ts.compile
      * @type              String

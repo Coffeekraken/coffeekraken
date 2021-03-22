@@ -300,15 +300,15 @@ export = class SConfig {
       this.load();
     }
 
-    let value = __get(this._adapters[adapter].config, path);
+    let originalValue = __get(this._adapters[adapter].config, path);
 
-    if (__isPlainObject(value)) {
-      value = __deepMap(value, (val, prop, fullPath) => {
+    if (__isPlainObject(originalValue)) {
+      originalValue = __deepMap(originalValue, ({ value }) => {
         // check if we get some things to use as variable
-        const isArray = Array.isArray(val);
-        if (!isArray) val = [val];
+        const isArray = Array.isArray(value);
+        if (!isArray) value = [value];
 
-        val = val.map((v) => {
+        value = value.map((v) => {
           if (typeof v === 'string') {
             const reg = /\[config.[a-zA-Z0-9.\-_]+\]/gm;
 
@@ -338,12 +338,15 @@ export = class SConfig {
           return v;
         });
 
-        if (!isArray) return val[0];
-        return val;
+        if (!isArray) return value[0];
+        return value;
       });
-    } else if (typeof value === 'string' || Array.isArray(value)) {
-      const isArray = Array.isArray(value);
-      let val = isArray ? value : [value];
+    } else if (
+      typeof originalValue === 'string' ||
+      Array.isArray(originalValue)
+    ) {
+      const isArray = Array.isArray(originalValue);
+      let val = isArray ? originalValue : [originalValue];
 
       val = val.map((v) => {
         if (typeof v !== 'string') return v;
@@ -373,17 +376,17 @@ export = class SConfig {
         }
       });
 
-      if (!isArray) value = val[0];
-      else value = val;
+      if (!isArray) originalValue = val[0];
+      else originalValue = val;
     }
 
-    if (settings.throwErrorOnUndefinedConfig && value === undefined) {
+    if (settings.throwErrorOnUndefinedConfig && originalValue === undefined) {
       throw new Error(
         `You try to get the config "${path}" on the "${this._name}" SConfig instance but this config does not exists...`
       );
     }
 
-    return value;
+    return originalValue;
   }
 
   /**

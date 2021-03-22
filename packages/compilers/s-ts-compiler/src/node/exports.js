@@ -18,5 +18,7 @@ const STsCompilerProcess_1 = __importDefault(require("./STsCompilerProcess"));
 exports.process = STsCompilerProcess_1.default;
 const STsCompilerInterface_1 = __importDefault(require("./interface/STsCompilerInterface"));
 exports.interface = STsCompilerInterface_1.default;
+const STsCompiler_1 = __importDefault(require("./STsCompiler"));
 __exportStar(require("./STsCompiler"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDhFQUF3RDtBQUd2QixrQkFIMUIsNEJBQW9CLENBR2E7QUFGeEMsNEZBQXNFO0FBRUYsb0JBRjdELDhCQUFzQixDQUVnRDtBQUM3RSxnREFBOEIifQ==
+exports.default = STsCompiler_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLDhFQUF3RDtBQUl2QixrQkFKMUIsNEJBQW9CLENBSWE7QUFIeEMsNEZBQXNFO0FBR0Ysb0JBSDdELDhCQUFzQixDQUdnRDtBQUY3RSxnRUFBMEM7QUFHMUMsZ0RBQThCO0FBQzlCLGtCQUFlLHFCQUFhLENBQUMifQ==

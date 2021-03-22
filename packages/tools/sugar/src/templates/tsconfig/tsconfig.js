@@ -9,6 +9,7 @@ module.exports = {
     '/**/*.test.js'
   ],
   compilerOptions: {
+    incremental: false,
     allowJs: true,
     strict: true,
     traceResolution: false,

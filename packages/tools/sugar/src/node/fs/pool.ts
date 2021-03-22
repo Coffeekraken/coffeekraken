@@ -126,7 +126,7 @@ function pool(input, settings?: Partial<IPoolSettings>) {
       });
     },
     {
-      id: 'sugar.node.fs.pool'
+      eventEmitter: {}
     }
   );
 }

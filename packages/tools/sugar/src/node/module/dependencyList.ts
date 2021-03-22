@@ -1,8 +1,8 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __dependencyTree from './dependencyTree';
+import __dependencyTree, {
+  IDependencyTreeExtendedSettings
+} from './dependencyTree';
 import __deepMap from '../../shared/object/deepMap';
-
-import { IDependencyTreeExtendedSettings } from './dependencyTree';
 
 /**
  * @name                dependencyList
@@ -32,12 +32,12 @@ export default function dependencyList(
   filePath: string,
   settings?: Partial<IDependencyTreeExtendedSettings>
 ): any {
-  return new __SPromise(async ({ resolve, reject, pipe }) => {
+  return new __SPromise(async ({ resolve, pipe }) => {
     const tree = await pipe(__dependencyTree(filePath, settings));
     const list: string[] = [];
     __deepMap(
       tree,
-      (value, prop, fullPath) => {
+      ({ prop, value }) => {
         if (list.indexOf(prop) === -1) list.push(prop);
         return value;
       },

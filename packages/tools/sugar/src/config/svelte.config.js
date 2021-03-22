@@ -16,7 +16,7 @@ exports.default = {
          */
         input: '[config.storage.srcDir]/js/**/*.svelte',
         /**
-         * @name              outputDir
+         * @name              outDir
          * @namespace         config.svelte.compile
          * @type              String
          * @default           undefined
@@ -27,7 +27,7 @@ exports.default = {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        outputDir: undefined,
+        outDir: undefined,
         /**
          * @name            rootDir
          * @namespace       config.svelte.compile
@@ -126,6 +126,20 @@ exports.default = {
          */
         watch: false,
         /**
+         * @name             tsconfig
+         * @namespace       config.svelte.compile
+         * @type            Object | String
+         * @default         [config.ts.tsconfigTemplatesDir]/tsconfig.svelte.js
+         *
+         * Specify a tsconfig file to use for compiler options, targets, etc...
+         * The settings like outDir will not be used cause the result will be put directly inside
+         * the output .js file
+         *
+         * @since             2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        tsconfig: '[config.ts.tsconfigTemplatesDir]/tsconfig.svelte.js',
+        /**
          * @name                svelte
          * @namespace           config.svelte.compile
          * @type                Object
@@ -139,4 +153,4 @@ exports.default = {
         svelte: {}
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3ZlbHRlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN2ZWx0ZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxrQkFBZTtJQUNiLE9BQU8sRUFBRTtRQUNQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsS0FBSyxFQUFFLHdDQUF3QztRQUUvQzs7Ozs7Ozs7Ozs7V0FXRztRQUNILFNBQVMsRUFBRSxTQUFTO1FBRXBCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsNEJBQTRCO1FBRXJDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxHQUFHLEVBQUUsSUFBSTtRQUVUOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsSUFBSSxFQUFFLEtBQUs7UUFFWDs7Ozs7Ozs7OztXQVVHO1FBQ0gsYUFBYSxFQUFFLElBQUk7UUFFbkI7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxLQUFLO1FBRWI7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFDSiwwR0FBMEc7UUFFNUc7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxJQUFJO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxLQUFLO1FBRVo7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxFQUFFO0tBQ1g7Q0FDRixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3ZlbHRlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN2ZWx0ZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxrQkFBZTtJQUNiLE9BQU8sRUFBRTtRQUNQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsS0FBSyxFQUFFLHdDQUF3QztRQUUvQzs7Ozs7Ozs7Ozs7V0FXRztRQUNILE1BQU0sRUFBRSxTQUFTO1FBRWpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsNEJBQTRCO1FBRXJDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxHQUFHLEVBQUUsSUFBSTtRQUVUOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsSUFBSSxFQUFFLEtBQUs7UUFFWDs7Ozs7Ozs7OztXQVVHO1FBQ0gsYUFBYSxFQUFFLElBQUk7UUFFbkI7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxLQUFLO1FBRWI7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFDSiwwR0FBMEc7UUFFNUc7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxJQUFJO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxLQUFLO1FBRVo7Ozs7Ozs7Ozs7OztXQVlHO1FBQ0gsUUFBUSxFQUFFLHFEQUFxRDtRQUUvRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEVBQUU7S0FDWDtDQUNGLENBQUMifQ==

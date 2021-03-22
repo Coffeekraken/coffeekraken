@@ -2,6 +2,7 @@
 
 import __isPlainObject from '../is/plainObject';
 import __deepMerge from '../object/deepMerge';
+import __isClassInstance from '../is/classInstance';
 
 /**
  * @name            deepMap
@@ -14,9 +15,9 @@ import __deepMerge from '../object/deepMerge';
  * @param         {Object}        object          The object you want to map through
  * @param         {Function}      processor       The processor function that take as parameter the actual property value, the current property name and the full dotted path to the current property
  * @param         {Object}        [settings={}]     An object of settings to configure your deepMap process:
- * - processObjects (false) {Boolean}: Specify if you want the objects to be processed the same as other values
+ * - classInstances (false) {Boolean}: Specify if you want the objects to be processed the same as other values
  * - deepFirst (true) {Boolean}: Specify if you want to process deep values first
- * - handleArray (true) {Boolean}: Specify if we have to treat array like simple value to process of treat them as an object and continue our map down
+ * - array (true) {Boolean}: Specify if we have to treat array like simple value to process of treat them as an object and continue our map down
  *
  * @todo      interface
  * @todo      doc
@@ -26,7 +27,7 @@ import __deepMerge from '../object/deepMerge';
  * import deepMap from '@coffeekraken/sugar/js/object/deepMap';
  * deepMap({
  *    hello: 'world'
- * }, (value, prop, fullPath) => {
+ * }, ({object, prop, value, path}) => {
  *    return '~ ' + value;
  * });
  *
@@ -37,50 +38,73 @@ function deepMap(object, processor, settings = {}, _path = []) {
   settings = __deepMerge(
     {
       deepFirst: false,
-      processObjects: false,
-      handleArray: true
+      classInstances: false,
+      array: true,
+      privateProps: false,
+      cloneFirst: true
     },
     settings
   );
-  Object.keys(object).forEach((prop) => {
-    const descriptor = Object.getOwnPropertyDescriptor(object, prop);
 
-    if (
-      descriptor.get &&
-      typeof descriptor.get === 'function' &&
-      !descriptor.set
-    ) {
+  if (settings.cloneFirst) {
+    object = Object.assign({}, object);
+  }
+
+  Object.keys(object).forEach((prop) => {
+    if (!settings.privateProps && prop.match(/^_/)) {
+      delete object[prop];
       return;
     }
+
+    // const descriptor = Object.getOwnPropertyDescriptor(object, prop);
+    // if (
+    //   descriptor.get &&
+    //   typeof descriptor.get === 'function' &&
+    //   !descriptor.set
+    // ) {
+    //   return;
+    // }
 
     if (!settings.deepFirst) {
       if (
         __isPlainObject(object[prop]) ||
-        (Array.isArray(object[prop]) && settings.handleArray)
+        (__isClassInstance(object[prop]) && settings.classInstances) ||
+        (Array.isArray(object[prop]) && settings.array)
       ) {
         object[prop] = deepMap(object[prop], processor, settings, [
           ..._path,
           prop
         ]);
-        if (!settings.processObjects) return;
+        // if (!settings.classInstances) return;
       }
-      const res = processor(object[prop], prop, [..._path, prop].join('.'));
+
+      const res = processor({
+        object,
+        prop,
+        value: object[prop],
+        path: [..._path, prop].join('.')
+      });
       if (res === -1) delete object[prop];
       else object[prop] = res;
     } else {
-      const res = processor(object[prop], prop, [..._path, prop].join('.'));
+      const res = processor({
+        object,
+        prop,
+        value: object[prop],
+        path: [..._path, prop].join('.')
+      });
       if (res === -1) delete object[prop];
       else object[prop] = res;
-
       if (
         __isPlainObject(object[prop]) ||
-        (Array.isArray(object[prop]) && settings.handleArray)
+        (__isClassInstance(object[prop]) && settings.classInstances) ||
+        (Array.isArray(object[prop]) && settings.array)
       ) {
         object[prop] = deepMap(object[prop], processor, settings, [
           ..._path,
           prop
         ]);
-        if (!settings.processObjects) return;
+        // if (!settings.classInstances) return;
       }
     }
   });

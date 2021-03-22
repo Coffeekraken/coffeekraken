@@ -6,6 +6,7 @@ import __deepMerge from '../object/deepMerge';
 import __get from '../object/get';
 import __availableColors from '../dev/colors/availableColors';
 import __pickRandom from '../array/pickRandom';
+import __toJson from '../object/toJson';
 
 /**
  * @name            SClass
@@ -98,21 +99,22 @@ class SClass implements ISClass {
    * @since           2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  public get metas(): ISClassMetas {
-    let name = `<yellow>${this._settings.metas?.name || ''}</yellow>`;
-    if (this._settings.metas?.id) {
-      name += ` <cyan>${this._settings.metas.id}</cyan>`;
-    }
+  metas: ISClassMetas;
+  // public get metas(): ISClassMetas {
+  //   let name = `<yellow>${this._settings.metas?.name || ''}</yellow>`;
+  //   if (this._settings.metas?.id) {
+  //     name += ` <cyan>${this._settings.metas.id}</cyan>`;
+  //   }
 
-    const metasObj = {
-      id: this._settings.metas?.id ?? this.constructor.name,
-      name: this._settings.metas?.name ?? this.constructor.name,
-      formattedName: name,
-      color: this._settings.metas?.color ?? 'yellow'
-    };
+  //   const metasObj = {
+  //     id: this._settings.metas?.id ?? this.constructor.name,
+  //     name: this._settings.metas?.name ?? this.constructor.name,
+  //     formattedName: name,
+  //     color: this._settings.metas?.color ?? 'yellow'
+  //   };
 
-    return metasObj;
-  }
+  //   return metasObj;
+  // }
 
   /**
    * @name      formattedName
@@ -125,18 +127,18 @@ class SClass implements ISClass {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   get formattedName() {
-    let name = `<yellow>${this.metas.name || ''}</yellow>`;
-    if (this.metas.id) {
-      name += ` <cyan>${this.metas.id}</cyan>`;
+    let name = `<yellow>${this.metas?.name || ''}</yellow>`;
+    if (this.metas?.id) {
+      name += ` <cyan>${this.metas?.id}</cyan>`;
     }
     return name;
   }
 
   static extends(Cls: any) {
     class SClass extends Cls {
-      public get metas() {
-        return this._settings.metas;
-      }
+      // public get metas(): ISClassMetas {
+
+      // }
       protected _settings: ISClassSettings = {};
       protected _interfacesStack: any = {};
       get formattedName() {
@@ -153,6 +155,13 @@ class SClass implements ISClass {
         setSettings(this, settings);
         // interface
         applyInterfaces(this);
+        // define metas enumarable
+        // @weird: Check why metas is not enumarable by default
+        this.metas = getMetas(this);
+        Object.defineProperty(this, 'metas', {
+          enumerable: true,
+          value: getMetas(this)
+        });
       }
       expose(instance: any, settings: ISClassExposeSettings) {
         return expose(this, instance, settings);
@@ -162,6 +171,9 @@ class SClass implements ISClass {
       }
       getInterface(name: string): any {
         return getInterface(this, name);
+      }
+      toPlainObject(): any {
+        return toPlainObject(this);
       }
     }
     return SClass;
@@ -183,6 +195,12 @@ class SClass implements ISClass {
     setSettings(this, settings);
     // interface
     applyInterfaces(this);
+    // define metas enumarable
+    this.metas = getMetas(this);
+    Object.defineProperty(this, 'metas', {
+      enumerable: true,
+      value: getMetas(this)
+    });
   }
   expose(instance: any, settings: ISClassExposeSettings) {
     return expose(this, instance, settings);
@@ -193,6 +211,24 @@ class SClass implements ISClass {
   getInterface(name: string): any {
     return getInterface(this, name);
   }
+  toPlainObject(): any {
+    return toPlainObject(this);
+  }
+}
+
+function getMetas(ctx: any): ISClassMetas {
+  let name = `<yellow>${ctx._settings.metas?.name || ''}</yellow>`;
+  if (ctx._settings.metas?.id) {
+    name += ` <cyan>${ctx._settings.metas.id}</cyan>`;
+  }
+  const metasObj = {
+    id: ctx._settings.metas?.id ?? ctx.constructor.name,
+    name: ctx._settings.metas?.name ?? ctx.constructor.name,
+    formattedName: name,
+    color: ctx._settings.metas?.color ?? 'yellow'
+  };
+
+  return metasObj;
 }
 
 function generateInterfacesStack(ctx: any) {
@@ -248,6 +284,10 @@ function getInterfaceObj(ctx: any, name: string): any {
   }
 
   return interfaceObj;
+}
+
+function toPlainObject(ctx: any): any {
+  return __toJson(ctx);
 }
 
 function getInterface(ctx: any, name: string): any {
@@ -368,8 +408,7 @@ function setSettings(ctx: any, settings: any = {}) {
   // make sure a "metas" property is available
   if (!ctx._settings.metas) ctx._settings.metas = {};
   // make sure we have an id
-  if (!ctx._settings.id && !ctx._settings.metas?.id)
-    ctx._settings.metas.id = ctx.constructor.name;
+  if (!ctx._settings.metas?.id) ctx._settings.metas.id = ctx.constructor.name;
   if (!ctx.constructor.name.match(/^SConfig/)) {
     if (!ctx._settings.metas.color)
       ctx._settings.metas.color = __pickRandom(__availableColors());

@@ -167,19 +167,19 @@ function deepProxy(object, handlerFn, settings = {}) {
         // mark the proxy as revoked
         isRevoked = true;
         // sanitize the copy
-        __copy = __deepMap(__copy, (val, key, path) => {
-          if (key === 'revoke' && typeof val === 'function') {
+        __copy = __deepMap(__copy, ({ value, prop }) => {
+          if (prop === 'revoke' && typeof value === 'function') {
             return -1;
           }
-          return val;
+          return value;
         });
         // deep revoke the proxies
         setTimeout(() => {
           __deepMap(
             p.proxy,
-            (val, key, path) => {
-              if (key === 'revoke' && typeof val === 'function') {
-                val();
+            ({ value, prop }) => {
+              if (prop === 'revoke' && typeof value === 'function') {
+                value();
               }
             },
             {}

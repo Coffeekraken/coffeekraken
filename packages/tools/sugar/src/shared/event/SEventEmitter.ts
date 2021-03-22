@@ -3,6 +3,7 @@ import SClass, { ISClass } from '../class/SClass';
 import __deepMerge from '../object/deepMerge';
 import __uniqid from '../string/uniqid';
 import __stripAnsi from '../string/stripAnsi';
+import __isPlainObject from '../is/plainObject';
 
 /**
  * @name                  SEventEmitter
@@ -37,6 +38,7 @@ export interface ISEventEmitterPipeSettings {
   prefixValue?: string;
   stripAnsi?: boolean;
   trim?: boolean;
+  overrideEmitter?: boolean | 'bind';
   keepLineBreak?: boolean;
   processor?: ISEventEmitterPipeSettingsProcessorFn;
   exclude?: string[];
@@ -57,8 +59,8 @@ export interface ISEventEmitterCallbackSettings {
 export interface ISEventEmitterMetas {
   event: string;
   name?: string;
-  source?: string;
-  path?: string;
+  emitter?: any;
+  originalEmitter?: any;
   time?: number;
   level?: number;
   ask?: boolean;
@@ -91,7 +93,7 @@ export interface ISEventEmitterBufferItem {
 }
 
 export interface ISEventEmitterConstructorSettings {
-  eventEmitter?: ISEventEmitterSettings;
+  eventEmitter?: Partial<ISEventEmitterSettings>;
 }
 export interface ISEventEmitterInstanceSettings {
   eventEmitter: ISEventEmitterSettings;
@@ -102,6 +104,9 @@ export interface ISEventEmitterSettings {
   bufferTimeout: number;
   bufferedEvents: string[];
   asyncStart: boolean;
+  defaults: Record<string, any>;
+  forceObject: boolean | string[];
+  bind: any;
 }
 
 export interface ISEventEmitterCtor {}
@@ -109,6 +114,7 @@ export interface ISEventEmitter extends ISClass {
   _settings: ISEventEmitterInstanceSettings;
   _buffer: ISEventEmitterBufferItem[];
   _eventsStacks: ISEventEmitterEventsStacks;
+  eventEmitterSettings: ISEventEmitterSettings;
   on(stack: string, callback: ISEventEmitterCallbackFn): ISEventEmitter;
   emit(stack: string, value: any, metas?: ISEventEmitterMetas): ISEventEmitter;
 }
@@ -145,10 +151,11 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       stripAnsi: false,
       trim: true,
       keepLineBreak: true,
+      overrideEmitter: 'bind',
       processor: undefined,
       exclude: ['finally', 'resolve', 'reject', 'cancel', 'catch'],
       filter: undefined,
-      ...(settings || {})
+      ...(settings ?? {})
     };
 
     // listen for all on the source promise
@@ -214,23 +221,23 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       if (metas && metas.event) {
         // append the source promise id to the stack
         let emitStack = metas.event;
-        // source
-        if (!metas.source) {
-          metas.source = (<any>sourceSEventEmitter).id;
+        // emitter
+        if (!metas.emitter) {
+          metas.emitter = this;
         }
         // path
-        if (!metas.path) {
-          metas.path = `${(<any>sourceSEventEmitter).id}.${
-            (<any>destSEventEmitter).id
-          }`;
-        } else {
-          metas.path = `${metas.path}.${(<any>sourceSEventEmitter).id}`;
-        }
+        // if (!metas.path) {
+        //   metas.path = `${(<any>sourceSEventEmitter).id}.${
+        //     (<any>destSEventEmitter).id
+        //   }`;
+        // } else {
+        //   metas.path = `${metas.path}.${(<any>sourceSEventEmitter).id}`;
+        // }
         if (set.prefixEvent) {
           if (typeof set.prefixEvent === 'string') {
             emitStack = `${set.prefixEvent}.${metas.event}`;
           } else {
-            emitStack = `${metas.path}.${metas.name}`;
+            emitStack = `${metas.name}`;
           }
           metas.event = emitStack;
         }
@@ -242,10 +249,19 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         }
 
         // emit on the destination promise
-        destSEventEmitter.emit(metas.event, value, {
+        const emitMetas = {
           ...metas,
           level: metas && metas.level ? metas.level + 1 : 1
-        });
+        };
+        if (
+          set.overrideEmitter === 'bind' &&
+          destSEventEmitter.eventEmitterSettings.bind
+        ) {
+          emitMetas.emitter = destSEventEmitter.eventEmitterSettings.bind;
+        } else if (set.overrideEmitter === true) {
+          emitMetas.emitter = destSEventEmitter;
+        }
+        destSEventEmitter.emit(metas.event, value, emitMetas);
       }
     });
   }
@@ -301,7 +317,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   get eventEmitterSettings(): ISEventEmitterSettings {
-    return (<any>this._settings).eventEmitter;
+    return (<any>this)._settings.eventEmitter;
   }
 
   /**
@@ -332,7 +348,10 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             asyncStart: false,
             defaultCallTime: {},
             bufferTimeout: 1000,
-            bufferedEvents: []
+            bufferedEvents: [],
+            forceObject: ['log', 'warn', 'error'],
+            defaults: {},
+            bind: undefined
           }
         },
         settings || {}
@@ -437,6 +456,28 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       };
       const isFirstLevel = !finalMetas.level;
 
+      // check if need to force object
+      if (
+        (this.eventEmitterSettings.forceObject === true ||
+          (Array.isArray(this.eventEmitterSettings.forceObject) &&
+            this.eventEmitterSettings.forceObject.indexOf(event) !== -1)) &&
+        !__isPlainObject(value)
+      ) {
+        value = {
+          value
+        };
+      }
+
+      // defaults
+      if (__isPlainObject(value)) {
+        // get the default object to extends
+        Object.keys(this.eventEmitterSettings.defaults).forEach((key) => {
+          const parts = key.split(',').map((l) => l.trim());
+          if (parts.indexOf(event) === -1 && parts.indexOf('*') === -1) return;
+          value = __deepMerge(value, this.eventEmitterSettings.defaults?.[key]);
+        });
+      }
+
       // check if is an asking
       if (!finalMetas.askId && isFirstLevel) {
         if ((value && value.ask === true) || event === 'ask') {
@@ -446,7 +487,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       }
 
       if (isFirstLevel && finalMetas.askId) {
-        this.on(`answer.${finalMetas.askId}:1`, (value, finalMetas) => {
+        this.on(`answer.${finalMetas.askId}:1`, (value) => {
           resolve(value);
         });
         this._emitEvents(event, value, finalMetas);
@@ -668,8 +709,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
       <ISEventEmitterMetas>{
         event: event,
         name: event,
-        source: (<any>this).id,
-        path: undefined,
+        emitter: this.eventEmitterSettings.bind ?? metas?.emitter ?? this,
+        originalEmitter: metas?.originalEmitter ?? this,
         time: Date.now(),
         level: 1,
         id: __uniqid()

@@ -21,6 +21,7 @@ import __stdio from '../stdio/stdio';
 import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
 import __onProcessExit from './onProcessExit';
 import __spawn, { ISpawnSettings } from './spawn';
+import __toJson from '../../shared/object/toJson';
 
 /**
  * @name                SProcess
@@ -410,6 +411,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
       }
     });
 
+    console.log(paramsObj);
+
     // check if asking for the help
     if (paramsObj.help === true && this.paramsInterface !== undefined) {
       const helpString = this.paramsInterface.render();
@@ -466,10 +469,12 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         this._processPromise &&
           this._processPromise.on('*', (value, metas) => {
             process.send !== undefined &&
-              process.send({
-                value,
-                metas
-              });
+              process.send(
+                __toJson({
+                  value,
+                  metas
+                })
+              );
           });
       }
     }

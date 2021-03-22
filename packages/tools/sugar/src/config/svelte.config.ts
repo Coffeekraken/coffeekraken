@@ -15,7 +15,7 @@ export default {
     input: '[config.storage.srcDir]/js/**/*.svelte',
 
     /**
-     * @name              outputDir
+     * @name              outDir
      * @namespace         config.svelte.compile
      * @type              String
      * @default           undefined
@@ -26,7 +26,7 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    outputDir: undefined,
+    outDir: undefined,
 
     /**
      * @name            rootDir
@@ -133,6 +133,21 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     watch: false,
+
+    /**
+     * @name             tsconfig
+     * @namespace       config.svelte.compile
+     * @type            Object | String
+     * @default         [config.ts.tsconfigTemplatesDir]/tsconfig.svelte.js
+     *
+     * Specify a tsconfig file to use for compiler options, targets, etc...
+     * The settings like outDir will not be used cause the result will be put directly inside
+     * the output .js file
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    tsconfig: '[config.ts.tsconfigTemplatesDir]/tsconfig.svelte.js',
 
     /**
      * @name                svelte

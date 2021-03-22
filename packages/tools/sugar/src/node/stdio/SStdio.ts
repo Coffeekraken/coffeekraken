@@ -339,6 +339,9 @@ class SStdio extends __SClass implements ISStdio {
           }
         }
 
+        // save metas into logObj
+        data.metas = metas;
+
         this.log(data);
       },
       {

@@ -66,6 +66,12 @@ class SSvelteCompilerParamsInterface extends __SInterface {
       type: 'Boolean',
       default: __sugarConfig('svelte.compile.watch')
     },
+    tsconfig: {
+      type: 'String|Object',
+      description:
+        'Specify either directly a tsconfig object or a tsconfig valid path',
+      default: __sugarConfig('svelte.compile.tsconfig')
+    },
     svelte: {
       type: 'Object',
       description: 'Object passed to the svelte compiler',

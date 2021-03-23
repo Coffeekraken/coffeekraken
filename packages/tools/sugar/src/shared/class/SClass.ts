@@ -299,6 +299,7 @@ function getInterface(ctx: any, name: string): any {
 
 function applyInterfaces(ctx: any) {
   const keys = Object.keys(ctx._interfacesStack);
+
   for (let i = keys.length - 1; i >= 0; i--) {
     const interfacesObj = ctx._interfacesStack[keys[i]];
     const className = keys[i];
@@ -379,7 +380,7 @@ function applyInterface(ctx: any, name: string, on: any = null) {
       return ctx;
     } else {
       // if (typeof interfaceObj.on !== 'string') {
-      //   nativeConsole.trace('COCO', interfaceObj.on);
+      //   _console.trace('COCO', interfaceObj.on);
       // }
       res = interfaceObj.class.apply(onValue, {
         id: applyId,

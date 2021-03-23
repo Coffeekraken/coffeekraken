@@ -47,7 +47,8 @@ class SProcessSettingsInterface extends __SInterface {
     runAsChild: {
       type: 'Boolean',
       alias: 'c',
-      default: __sugarConfig('process.runAsChild')
+      // default: __sugarConfig('process.runAsChild'),
+      default: false
     },
     definition: {
       type: 'Object',

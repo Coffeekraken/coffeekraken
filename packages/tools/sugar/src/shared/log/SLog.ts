@@ -106,7 +106,7 @@ export default class SLog {
    * @private
    *
    * Override the native console object to call the SLog methods instead of the normal once.
-   * Store the native console inside the global/window variable called "nativeConsole"
+   * Store the native console inside the global/window variable called "_console"
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -114,7 +114,7 @@ export default class SLog {
     // check if need to override the native console methods
     const _this = this; // eslint-disable-line
     const newConsole = (function (oldCons) {
-      (global || window).nativeConsole = Object.assign({}, oldCons);
+      (global || window)._console = Object.assign({}, oldCons);
       return {
         log: function (...args) {
           _this.log(...args);

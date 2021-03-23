@@ -20,33 +20,45 @@ import __SInterface from '@coffeekraken/sugar/node/interface/SInterface';
 class SSvelteCompilerParamsInterface extends __SInterface {
   static definition = {
     input: {
-      type: 'String|Array<String>',
+      type: {
+        type: 'Array<String>',
+        plop: true
+      },
+      // path: 'absolute',
       default: __sugarConfig('svelte.compile.input'),
       alias: 'i'
     },
-    outputDir: {
+    inDir: {
       type: 'String',
-      default: __sugarConfig('svelte.compile.outputDir'),
+      // path: 'absolute',
+      default: __sugarConfig('svelte.compile.inDir')
+    },
+    outDir: {
+      type: 'String',
+      // path: {
+      //   absolute: true
+      // },
+      default: __sugarConfig('svelte.compile.outDir'),
       alias: 'o'
     },
     rootDir: {
       type: 'String',
+      path: {
+        absolute: true
+      },
+      // path: 'absolute',
       default: __sugarConfig('svelte.compile.rootDir')
     },
     map: {
       type: 'Boolean',
       alias: 'm',
       description: 'Generate a sourcemap file',
-      default: __sugarConfig('svelte.compile.map') || true,
+      default: __sugarConfig('svelte.compile.map') ?? true,
       level: 1
     },
     prod: {
       type: 'Boolean',
       default: __sugarConfig('svelte.compile.prod')
-    },
-    stripComments: {
-      type: 'Boolean',
-      default: __sugarConfig('svelte.compile.stripComments')
     },
     minify: {
       type: 'Boolean',
@@ -64,6 +76,7 @@ class SSvelteCompilerParamsInterface extends __SInterface {
     },
     watch: {
       type: 'Boolean',
+      alias: 'w',
       default: __sugarConfig('svelte.compile.watch')
     },
     tsconfig: {

@@ -1,16 +1,16 @@
 // @ts-nocheck
 
-import __uniquid from '../string/uniqid';
 import __isOfType from '../is/ofType';
 import __typeof from '../value/typeof';
-import __SDescriptorResult from './SDescriptorResult';
+import __SDescriptorResult, {
+  ISDescriptorResult,
+  ISDescriptorResultObj
+} from './SDescriptorResult';
 import __get from '../object/get';
 import __isGlob from '../is/glob';
-import __getGlob from '../object/getGlob';
 import __flatten from '../object/flatten';
 import __set from '../object/set';
 import __deepMerge from '../object/deepMerge';
-import { ISDescriptorResult } from './SDescriptorResult';
 
 /**
  * @name                SDescriptor
@@ -165,7 +165,7 @@ class SDescriptor implements ISDescriptor {
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com>
    */
-  static type: string = 'Object';
+  static type = 'Object';
 
   /**
    * @name         settings
@@ -297,10 +297,11 @@ class SDescriptor implements ISDescriptor {
     );
 
     // flatten the rules
-    const rules = __flatten(settings.rules, {
-      excludeProps: ['default', 'interface'],
-      keepLastIntact: true
-    });
+    // const rules = __flatten(settings.rules, {
+    //   excludeProps: ['default', 'interface'],
+    //   keepLastIntact: true
+    // });
+    const rules = settings.rules;
 
     // check the passed value type correspond to the descriptor type
     if (!__isOfType(value, settings.type)) {
@@ -340,10 +341,8 @@ class SDescriptor implements ISDescriptor {
         }
       });
 
-      // nativeConsole.log('aa', valuesObjToProcess);
-
       Object.keys(valuesObjToProcess).forEach((propName) => {
-        let ruleObj = rules[propName];
+        const ruleObj = rules[propName];
         // complete
         if (
           valuesObjToProcess[propName] === undefined &&
@@ -356,7 +355,7 @@ class SDescriptor implements ISDescriptor {
         // interface
         if (ruleObj.interface !== undefined) {
           const interfaceValue = valuesObjToProcess[propName];
-          // nativeConsole.log('VAL', valuesObjToProcess[propName], propName);
+          // _console.log('VAL', valuesObjToProcess[propName], propName);
           const interfaceRes = ruleObj.interface.apply(interfaceValue || {}, {
             complete: true,
             throw: false
@@ -381,7 +380,7 @@ class SDescriptor implements ISDescriptor {
         }
       });
     } else {
-      nativeConsole.warn(value);
+      _console.warn(value);
       throw new Error(
         `You can apply an <yellow>SDescriptor</yellow> only on an Object like value...`
       );
@@ -439,20 +438,28 @@ class SDescriptor implements ISDescriptor {
         const ruleSettings =
           ruleObj.settings !== undefined ? ruleObj.settings : {};
         // check if the rule accept this type of value
-        // nativeConsole.log('AAA', propName, value, params);
-        if (ruleObj.accept && __isOfType(value, ruleObj.accept) !== true)
-          return;
+        // _console.log('AAA', propName, value, params);
+        // if (ruleObj.accept && __isOfType(value, ruleObj.accept) !== true)
+        //   return;
         // console.log('CC', propName, value, params);
         const ruleResult = ruleObj.apply(value, params, ruleSettings, {
           ...settings,
           name: `${settings.name}.${propName}`
         });
+        if (propName === 'input') {
+          _console.log('res', ruleResult);
+        }
         if (ruleResult === true) return value;
-        const obj = ruleResult === false ? {} : ruleResult;
-        obj.__ruleObj = ruleObj;
-        obj.__propName = propName;
-        // nativeConsole.log(obj);
-        this._descriptorResult.add(obj);
+        else if (ruleResult instanceof Error) {
+          console.log('ERROR', ruleResult);
+          const obj = ruleResult === false ? {} : ruleResult;
+          obj.__ruleObj = ruleObj;
+          obj.__propName = propName;
+          // _console.log(obj);
+          this._descriptorResult.add(obj);
+        } else {
+          return ruleResult;
+        }
       }
     });
 

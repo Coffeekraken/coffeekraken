@@ -9,6 +9,17 @@ import __SCompiler, {
 import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __SSvelteCompilerInterface from './interface/SSvelteCompilerInterface';
 import __STsCompiler from '@coffeekraken/s-ts-compiler';
+import __tmpDir from '@coffeekraken/sugar/node/path/tmpDir';
+import __fs from 'fs';
+import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
+import __path from 'path';
+import __uglify from 'uglify-js';
+import __cleanCss from 'clean-css';
+import __availableColors from '@coffeekraken/sugar/shared/dev/colors/availableColors';
+import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
+import __getFilename from '@coffeekraken/sugar/node/fs/filename';
+import defaultTerminalStdioComponent from '@coffeekraken/sugar/node/stdio/terminal/components/defaultTerminalStdioComponent';
 
 // @ts-ignore
 const __svelte = require('svelte/compiler'); // eslint-disable-line
@@ -101,6 +112,9 @@ class SSvelteCompiler extends __SCompiler {
       initialParams,
       __deepMerge(
         {
+          metas: {
+            color: 'red'
+          },
           svelteCompiler: {}
         },
         settings || {}
@@ -123,6 +137,7 @@ class SSvelteCompiler extends __SCompiler {
    * @since             2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
+  _filesColor: Record<string, string> = {};
   _compile(
     params: ISSvelteCompilerParams,
     settings: Partial<ISSvelteCompilerSettings> = {}
@@ -131,15 +146,25 @@ class SSvelteCompiler extends __SCompiler {
       async ({ resolve, reject, pipe, emit, on }) => {
         settings = __deepMerge(this.svelteCompilerSettings, {}, settings);
 
+        console.log(params);
+
         const input = Array.isArray(params.input)
           ? params.input
           : [params.input];
 
+        emit('log', {
+          value: 'Starting <red>Svelte</red> file(s) compilation...'
+        });
+
+        if (params.watch) {
+          emit('log', {
+            value: `<blue>[watch]</blue> Watching for changes...`
+          });
+        }
+
         // prod
         if (params.prod) {
-          params.style = 'compressed';
           params.minify = true;
-          params.stripComments = true;
         }
 
         const pool = __fsPool(input, {
@@ -147,19 +172,29 @@ class SSvelteCompiler extends __SCompiler {
         });
 
         // handle cancel
-        on('cancel', () => {
+        on('finally', () => {
           pool.cancel();
         });
 
         pool.on(params.watch ? 'update' : 'files', async (files) => {
+          const compiledFiles = [];
+
+          const duration = new __SDuration();
+
           files = Array.isArray(files) ? files : [files];
 
           for (let i = 0; i < files.length; i++) {
             const file = files[i];
 
-            console.log(file.content);
+            const color =
+              this._filesColor[file.path] ?? __pickRandom(__availableColors());
+            this._filesColor[file.path] = color;
 
-            console.log(params);
+            emit('log', {
+              value: `<${color}>[${__getFilename(
+                file.path
+              )}]</${color}> Starting compilation`
+            });
 
             // preprocess
             const preprocessResult = await __svelte.preprocess(
@@ -169,52 +204,6 @@ class SSvelteCompiler extends __SCompiler {
                   return {
                     code: input.content
                   };
-
-                  // if (
-                  //   !input.attributes ||
-                  //   !input.attributes.type ||
-                  //   input.attributes.type !== 'text/scss'
-                  // ) {
-                  //   return {
-                  //     code: input.content
-                  //   };
-                  // }
-
-                  // if (input.content.trim() === '') {
-                  //   return '';
-                  // }
-
-                  // // create a temp file
-                  // const tmpSScssFile = new __SScssFile(
-                  //   '%tmpDir/svelte/compile.scss',
-                  //   {
-                  //     file: {
-                  //       checkExistence: false
-                  //     }
-                  //   }
-                  // );
-                  // tmpSScssFile.writeSync(input.content);
-
-                  // emit('log', {
-                  //   value: `<yellow>[scss]</yellow> Processing scss`
-                  // });
-
-                  // const compileRes = await tmpSScssFile.compile({
-                  //   save: false,
-                  //   map: false
-                  // });
-
-                  // if (compileRes.css) {
-                  //   emit('log', {
-                  //     value: `<green>[scss]</green> Scss processed <green>successfully</green>`
-                  //   });
-
-                  //   return {
-                  //     code: compileRes.css
-                  //   };
-                  // } else {
-                  //   return compileRes;
-                  // }
                 },
                 script: async (input) => {
                   if (
@@ -227,50 +216,30 @@ class SSvelteCompiler extends __SCompiler {
                     };
                   }
 
+                  // write a temp file to compile
+                  const tmpTsFilePath = `${__tmpDir()}/SSvelteCompiler/${Date.now()}.ts`;
+                  __writeFileSync(`${tmpTsFilePath}`, input.content);
+
                   const compiler = new __STsCompiler();
 
-                  // // create a temp file
-                  // const tmpTsFile = new __STsFile('%tmpDir/ts/compile.ts', {
-                  //   file: {
-                  //     checkExistence: false
-                  //   }
-                  // });
-                  // tmpTsFile.writeSync(input.content);
+                  const res = await compiler.compile({
+                    input: [tmpTsFilePath],
+                    config: 'js',
+                    save: false
+                  });
 
-                  // emit('log', {
-                  //   value: `<yellow>[ts]</yellow> Processing typescript`
-                  // });
+                  if (!res || !res.files || !res.files.length) {
+                    return {
+                      code: input.content
+                    };
+                  }
 
-                  // const compilePromise = tmpTsFile.compile({
-                  //   save: false,
-                  //   // @ts-ignore
-                  //   target: 'browser',
-                  //   map: false
-                  // });
-                  // // const compiler = new __STsCompiler();
-                  // // const compilePromise = compiler.compile({
-                  // //   input: [tmpTsFile.path],
-                  // //   rootDir: tmpTsFile.dirPath,
-                  // //   save: false,
-                  // //   transpileOnly: true,
-                  // //   target: 'browser',
-                  // //   map: false
-                  // // });
-                  // pipe(compilePromise, {
-                  //   events: 'error'
-                  // });
-                  // const compileRes = await compilePromise;
-                  // if (compileRes.js) {
-                  //   emit('log', {
-                  //     value: `<green>[ts]</green> Typescript processed <green>successfully</green>`
-                  //   });
+                  // remove temp file
+                  __removeSync(tmpTsFilePath);
 
-                  //   return {
-                  //     code: compileRes.js
-                  //   };
-                  // } else {
-                  //   return compileRes;
-                  // }
+                  return {
+                    code: res.files[0].content
+                  };
                 }
               },
               {}
@@ -294,51 +263,101 @@ class SSvelteCompiler extends __SCompiler {
               });
             });
 
-            // const compilePromise = file.compile(
-            //   {
-            //     ...params,
-            //     watch: false
-            //   },
-            //   settings
-            // );
+            let outputPath = file.path;
+            if (params.outDir) {
+              const relPath = __path.relative(params.inDir, file.path);
+              outputPath = `${__path.resolve(params.outDir, relPath)}`;
+            }
+            outputPath = outputPath.replace(/\.svelte$/, '.js');
 
-            // try {
-            //   pipe(compilePromise);
-            //   const compileRes = await compilePromise;
-            //   resultsObj[file.path] = compileRes;
-            //   aggregateStrArray.push(compileRes.js);
-            //   emit('file', compileRes);
-            // } catch (e) {
-            //   emit('warn', {
-            //     value: e.toString()
-            //   });
-            // }
+            emit('log', {
+              value: `<${color}>[${__getFilename(
+                file.path
+              )}]</${color}> Compilation <green>successfull</green>`
+            });
+
+            // check if need to save file
+            if (params.save) {
+              if (result.js.code) {
+                if (params.minify) {
+                  result.js.code = __uglify.minify(result.js.code).code;
+                }
+                emit('log', {
+                  value: `<${color}>[${__getFilename(
+                    file.path
+                  )}]</${color}> Saving <cyan>js</cyan> file under "<cyan>${__path.relative(
+                    params.rootDir,
+                    outputPath
+                  )}</cyan>"`
+                });
+                __writeFileSync(outputPath, result.js.code);
+                if (params.map && result.js.map) {
+                  emit('log', {
+                    value: `<${color}>[${__getFilename(
+                      file.path
+                    )}]</${color}> Saving <yellow>map</yellow> file under "<cyan>${__path.relative(
+                      params.rootDir,
+                      outputPath
+                    )}.map</cyan>"`
+                  });
+                  __writeFileSync(
+                    outputPath + '.map',
+                    JSON.stringify(result.js.map, null, 4)
+                  );
+                }
+              }
+              if (result.css.code) {
+                if (params.minify) {
+                  result.css.code = new __cleanCss({}).minify(result.css.code);
+                }
+                emit('log', {
+                  value: `<${color}>[${__getFilename(
+                    file.path
+                  )}]</${color}> Saving <yellow>css</yellow> file under "<cyan>${__path.relative(
+                    params.rootDir,
+                    outputPath.replace(/\.js$/, '.css')
+                  )}</cyan>"`
+                });
+                __writeFileSync(
+                  outputPath.replace(/\.js$/, '.css'),
+                  result.css.code
+                );
+                if (params.map && result.css.map) {
+                  emit('log', {
+                    value: `<${color}>[${__getFilename(
+                      file.path
+                    )}]</${color}> Saving <yellow>map</yellow> file under "<cyan>${__path.relative(
+                      params.rootDir,
+                      outputPath.replace(/\.js$/, '.css')
+                    )}.map</cyan>"`
+                  });
+                  __writeFileSync(
+                    outputPath.replace(/\.js$/, '.css') + '.map',
+                    JSON.stringify(result.css.map, null, 4)
+                  );
+                }
+              }
+            }
+
+            compiledFiles.push({
+              path: outputPath,
+              js: result.js.code,
+              css: result.css.code,
+              warnings: result.warnings
+            });
           }
 
-          // if (params.watch) {
-          //   emit('log', {
-          //     value: `<blue>[watch]</blue> Watching for changes...`
-          //   });
-          // } else {
-          //   resolve({
-          //     files: resultsObj,
-          //     js: aggregateStrArray.join('\n'),
-          //     ...duration.end()
-          //   });
-          // }
+          if (params.watch) {
+            emit('log', {
+              value: `<blue>[watch]</blue> Watching for changes...`
+            });
+          } else {
+            resolve({
+              files: compiledFiles,
+              ...duration.end()
+            });
+          }
         });
-
-        // const resultsObj = {};
-        // const aggregateStrArray: string[] = [];
-        // const duration = new __SDuration();
-
-        //
-
-        // if (params.watch) {
-        //   emit('log', {
-        //     value: `<blue>[watch]</blue> Watching for changes...`
-        //   });
-        // }
       },
       {
         eventEmitter: {

@@ -1,12 +1,11 @@
 // @ts-nocheck
 
-import __ofType from '../../is/ofType';
-import {
+import __SType from '../../type/SType';
+import { ISDescriptorResultObj } from '../SDescriptorResult';
+import SDescriptor, {
   ISDescriptorRule,
-  ISDescriptorResultObj,
   ISDescriptorSettings
-} from '../interface/ISDescriptor';
-import SDescriptor from '../_SDescriptor';
+} from '../_SDescriptor';
 
 /**
  * @name          typeRule
@@ -34,8 +33,17 @@ const ruleObj: ISDescriptorRule = {
   message: (resultObj: any): string => {
     return `This value has to be of type "<yellow>${resultObj.expected.type}</yellow>". Received "<red>${resultObj.received.type}</red>"`;
   },
-  processParams: (params: boolean) => {
-    return { value: params };
+  processParams: (params: any) => {
+    if (!params?.type && typeof params !== 'string') {
+      throw new Error(
+        `<yellow>[sugar.shared.type.descriptors.typeRule]</yellow> Sorry but to use the <magenta>type</magenta> descriptor rule you need to specify a type string either directly under the "type" property, or in an object under the "type.type" property...`
+      );
+    }
+    return {
+      type: params.type ?? params,
+      cast: params.cast ?? true,
+      plop: params.plop
+    };
   },
   apply: (
     value: any,
@@ -43,12 +51,23 @@ const ruleObj: ISDescriptorRule = {
     ruleSettings: IRuleSettings,
     settings: ISDescriptorSettings
   ): ISDescriptorResultObj | true => {
-    const res = __ofType(value, params.value, {
-      name: settings.name
+    const type = new __SType(params.type, {
+      metas: {
+        id: settings.id
+      }
     });
 
-    if (res !== true) return res;
-    return true;
+    if (params.cast && !type.is(value)) {
+      value = type.cast(value);
+      if (params.plop) {
+        console.log('CC', params, value);
+      }
+    }
+
+    if (!type.is(value)) {
+      return new Error('Something false');
+    }
+    return value;
   }
 };
 

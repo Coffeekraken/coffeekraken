@@ -6,7 +6,7 @@ exports.default = {
          * @name              input
          * @namespace         config.svelte.compile
          * @type              String
-         * @default           [config.storage.srcDir]/js/** *.svelte
+         * @default           [config.svelte.compile.inDir]/** *.svelte
          *
          * Specify the root folder (or file) to check for .scss|sass files to build.
          * Glob patterns can be used
@@ -14,7 +14,19 @@ exports.default = {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        input: '[config.storage.srcDir]/js/**/*.svelte',
+        input: '[config.svelte.compile.inDir]/**/*.svelte',
+        /**
+         * @name              inDir
+         * @namespace         config.svelte.compile
+         * @type              String
+         * @default           [config.storage.srcDir]/js
+         *
+         * Specify the destination folder from where to search for svelte files to compile
+         *
+         * @since             2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        inDir: '[config.storage.srcDir]/js',
         /**
          * @name              outDir
          * @namespace         config.svelte.compile
@@ -32,14 +44,14 @@ exports.default = {
          * @name            rootDir
          * @namespace       config.svelte.compile
          * @type            String
-         * @default         [config.storage.srcDir]/js
+         * @default         [config.storage.rootDir]
          *
          * Specify the root directory from where the compiler will try to resolve modules
          *
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        rootDir: '[config.storage.srcDir]/js',
+        rootDir: '[config.storage.rootDir]',
         /**
          * @name              map
          * @namespace         config.svelte.compile
@@ -65,18 +77,6 @@ exports.default = {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         prod: false,
-        /**
-         * @name              stripComments
-         * @namespace         config.svelte.compile
-         * @type              Boolean
-         * @default           true
-         *
-         * Specify if you want to stripComments the generated css or not
-         *
-         * @since             2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        stripComments: true,
         /**
          * @name              minify
          * @namespace         config.svelte.compile
@@ -153,4 +153,4 @@ exports.default = {
         svelte: {}
     }
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3ZlbHRlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN2ZWx0ZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxrQkFBZTtJQUNiLE9BQU8sRUFBRTtRQUNQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsS0FBSyxFQUFFLHdDQUF3QztRQUUvQzs7Ozs7Ozs7Ozs7V0FXRztRQUNILE1BQU0sRUFBRSxTQUFTO1FBRWpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsNEJBQTRCO1FBRXJDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxHQUFHLEVBQUUsSUFBSTtRQUVUOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsSUFBSSxFQUFFLEtBQUs7UUFFWDs7Ozs7Ozs7OztXQVVHO1FBQ0gsYUFBYSxFQUFFLElBQUk7UUFFbkI7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSxLQUFLO1FBRWI7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFDSiwwR0FBMEc7UUFFNUc7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxJQUFJO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxLQUFLO1FBRVo7Ozs7Ozs7Ozs7OztXQVlHO1FBQ0gsUUFBUSxFQUFFLHFEQUFxRDtRQUUvRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEVBQUU7S0FDWDtDQUNGLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3ZlbHRlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInN2ZWx0ZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxrQkFBZTtJQUNiLE9BQU8sRUFBRTtRQUNQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsS0FBSyxFQUFFLDJDQUEyQztRQUVsRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLDRCQUE0QjtRQUVuQzs7Ozs7Ozs7Ozs7V0FXRztRQUNILE1BQU0sRUFBRSxTQUFTO1FBRWpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsMEJBQTBCO1FBRW5DOzs7Ozs7Ozs7O1dBVUc7UUFDSCxHQUFHLEVBQUUsSUFBSTtRQUVUOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsSUFBSSxFQUFFLEtBQUs7UUFFWDs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLEtBQUs7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUNKLDBHQUEwRztRQUU1Rzs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLElBQUk7UUFFVjs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLEtBQUs7UUFFWjs7Ozs7Ozs7Ozs7O1dBWUc7UUFDSCxRQUFRLEVBQUUscURBQXFEO1FBRS9EOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsRUFBRTtLQUNYO0NBQ0YsQ0FBQyJ9

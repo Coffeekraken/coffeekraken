@@ -26,7 +26,10 @@ import __SType from '../_SType';
 const descriptor: ISTypeDescriptor = {
   name: 'Array',
   id: 'array',
-  is: (value: any) => Array.isArray(value),
+  is: (value: any) => {
+    // _console.log('CHeck', value, Array.isArray(value));
+    return Array.isArray(value);
+  },
   cast: (value: any) => {
     if (Array.isArray(value)) return value;
     return [value];

@@ -36,6 +36,8 @@ import __isNode from '../is/node';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
+export interface ISDescriptorResultObj {}
+
 export interface ISDescriptorResultRule {
   __ruleObj: ISDescriptorRule;
   [key: string]: any;
@@ -222,7 +224,7 @@ class SDescriptorResult implements ISDescriptorResult {
     const issuesArray: string[] = [];
     Object.keys(this._issues).forEach((ruleId) => {
       const ruleResult = this._issues[ruleId];
-      let message: string = '';
+      let message = '';
       if (
         ruleResult.__ruleObj.message !== undefined &&
         typeof ruleResult.__ruleObj.message === 'function'

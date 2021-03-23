@@ -1,1 +1,11 @@
-{"version":3,"names":[],"sources":["coco.svelte"],"sourcesContent":[""],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"}
+{
+    "version": 3,
+    "names": [],
+    "sources": [
+        "coco.svelte"
+    ],
+    "sourcesContent": [
+        "<svelte:options tag=\"my-element\" />\n\n<script>\nconsole.log('ploefefep');\n    </script>"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CAGA,OAAO,CAAC,GAAG,CAAC,WAAW;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"
+}

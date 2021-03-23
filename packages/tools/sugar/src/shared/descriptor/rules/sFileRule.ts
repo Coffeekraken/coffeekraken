@@ -1,11 +1,10 @@
 // @ts-nocheck
 
-import {
+import { ISDescriptorResultObj } from '../SDescriptorResult';
+import SDescriptor, {
   ISDescriptorRule,
-  ISDescriptorResultObj,
   ISDescriptorSettings
-} from '../interface/ISDescriptor';
-import SDescriptor from '../_SDescriptor';
+} from '../_SDescriptor';
 
 /**
  * @name          sFileRule
@@ -18,7 +17,7 @@ import SDescriptor from '../_SDescriptor';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com>
  */
-export interface IParams {
+export interface IRuleParams {
   value: boolean;
 }
 export interface IRuleSettings {
@@ -37,7 +36,7 @@ const ruleObj: ISDescriptorRule = {
   },
   apply: (
     value: any,
-    params: IParams,
+    params: IRuleParams,
     ruleSettings: IRuleSettings,
     settings: ISDescriptorSettings
   ): ISDescriptorResultObj | true => {

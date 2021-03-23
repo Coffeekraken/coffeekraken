@@ -227,20 +227,44 @@ class SType implements ISType {
   }
 
   /**
-   * @name        is
-   * @type        Function
+   * @name      is
+   * @type      Function
    *
-   * This method allows you to make sure the passed value correspond with the type(s)
-   * this instance represent
+   * This method make a simple check to see if the passed value correspond to the
+   * type that this instance represent.
+   * Same as the ```check``` method, but return only a Boolean.
    *
    * @param     {Any}       value       The value to check
    * @param     {ISTypeSettings}        [settings={}]     Some settings to configure your check
    * @return    {Boolean}               true if correspond, false if not
    *
-   * @since     2.0.0
+   * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com>
    */
   is(value: any, settings: ISTypeSettings = {}): boolean {
+    const res = this.check(value, settings);
+    if (res === true) return true;
+    else if (res instanceof __STypeResult) return !res.hasIssues();
+    return true;
+  }
+
+  /**
+   * @name        check
+   * @type        Function
+   *
+   * This method allows you to make sure the passed value correspond with the type(s)
+   * this instance represent
+   * If all is ok, return true, otherwise return an instance of the STypeResult class that
+   * describe what is wrong
+   *
+   * @param     {Any}       value       The value to check
+   * @param     {ISTypeSettings}        [settings={}]     Some settings to configure your check
+   * @return    {Boolean|STypeResult}               true if correspond, an instance of the STypeResult class if not
+   *
+   * @since     2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com>
+   */
+  check(value: any, settings: ISTypeSettings = {}): boolean | __STypeResult {
     settings = __deepMerge(this._settings, settings);
 
     const issues = {};
@@ -321,22 +345,6 @@ class SType implements ISType {
       }
     }
 
-    // if (settings.throw === true) {
-    //   throw __parseHtml(
-    //     [
-    //       `Sorry but the value passed:`,
-    //       '',
-    //       __toString(value),
-    //       '',
-    //       `which is of type "<red>${__typeOf(
-    //         value
-    //       )}</red>" does not correspond to the requested type(s) "<green>${
-    //         this.typeString
-    //       }</green>"`
-    //     ].join('\n')
-    //   );
-    // }
-
     const res = new __STypeResult({
       typeString: this.typeString,
       value,
@@ -349,7 +357,8 @@ class SType implements ISType {
       issues,
       settings
     });
-    if (settings.throw === true) throw res.toString();
+
+    if (settings.throw === true) throw new Error(res.toString());
     return res;
   }
 
@@ -418,6 +427,8 @@ class SType implements ISType {
   cast(value: any, settings: ISTypeSettings): any {
     settings = __deepMerge(this._settings, settings);
 
+    _console.trace('cast', value);
+
     // store exceptions coming from descriptors
     const verboseObj = {
       value,
@@ -469,7 +480,7 @@ class SType implements ISType {
         verboseObj.issues[typeId] = issueStr;
       } else if (typeObj.of !== undefined) {
         const sTypeInstance = new SType(typeObj.of.join('|'));
-        castedValue = __map(castedValue, (key, value, idx) => {
+        castedValue = __map(castedValue, ({ key, value, idx }) => {
           return sTypeInstance.cast(value, settings);
         });
       }

@@ -279,7 +279,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
 
     add();
 
-    docblockObj = __map(docblockObj, (value, prop) => {
+    docblockObj = __map(docblockObj, ({ value, prop }) => {
       if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_') return value;
       if (this.docblockBlockSettings.tags[prop] && prop !== 'src')
         return this.docblockBlockSettings.tags[prop](value);

@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __isPath from '../../is/path';
 import { ISDescriptorResultObj } from '../SDescriptorResult';
 import SDescriptor, {
   ISDescriptorRule,
@@ -7,7 +8,7 @@ import SDescriptor, {
 } from '../_SDescriptor';
 
 /**
- * @name          minRule
+ * @name          maxRule
  * @namespace     sugar.js.descriptor.rules
  * @type          ISDescriptorRule
  *
@@ -22,12 +23,12 @@ export interface IRuleParams {
 export interface IRuleSettings {}
 
 const ruleObj: ISDescriptorRule = {
-  name: 'Min',
-  id: 'min',
+  name: 'Path',
+  id: 'path',
   settings: {},
-  accept: 'Number',
+  accept: 'Object|String|Array<String>',
   message: (resultObj: any): string => {
-    return `This value has to be minimum "<yellow>${resultObj.min}</yellow>". Received "<red>${resultObj.received}</red>"`;
+    return `This value has to be maximum "<yellow>${resultObj.max}</yellow>". Received "<red>${resultObj.received}</red>"`;
   },
   processParams: (params: number) => {
     return { value: params };
@@ -38,12 +39,8 @@ const ruleObj: ISDescriptorRule = {
     ruleSettings: IRuleSettings,
     settings: ISDescriptorSettings
   ): ISDescriptorResultObj | true => {
-    if (value < params.value) {
-      return {
-        min: params.value,
-        received: value
-      };
-    }
+    console.log('PATH', value, params, ruleSettings, settings);
+    if (!__isPath(value)) return false;
     return true;
   }
 };

@@ -136,6 +136,19 @@ export default {
       '/* Compiled using Coffeekraken Sugar STsCompiler class which stand over the AMAZING typescript module */',
 
     /**
+     * @name          save
+     * @namespace      config.ts.compile
+     * @type        Boolean
+     * @default     true
+     *
+     * Specify if you want your compiled file(s) to be saved by default
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    save: true,
+
+    /**
      * @name          watch
      * @namespace      config.ts.compile
      * @type        Boolean

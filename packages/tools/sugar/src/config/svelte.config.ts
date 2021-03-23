@@ -4,7 +4,7 @@ export default {
      * @name              input
      * @namespace         config.svelte.compile
      * @type              String
-     * @default           [config.storage.srcDir]/js/** *.svelte
+     * @default           [config.svelte.compile.inDir]/** *.svelte
      *
      * Specify the root folder (or file) to check for .scss|sass files to build.
      * Glob patterns can be used
@@ -12,7 +12,20 @@ export default {
      * @since             2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    input: '[config.storage.srcDir]/js/**/*.svelte',
+    input: '[config.svelte.compile.inDir]/**/*.svelte',
+
+    /**
+     * @name              inDir
+     * @namespace         config.svelte.compile
+     * @type              String
+     * @default           [config.storage.srcDir]/js
+     *
+     * Specify the destination folder from where to search for svelte files to compile
+     *
+     * @since             2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    inDir: '[config.storage.srcDir]/js',
 
     /**
      * @name              outDir
@@ -32,14 +45,14 @@ export default {
      * @name            rootDir
      * @namespace       config.svelte.compile
      * @type            String
-     * @default         [config.storage.srcDir]/js
+     * @default         [config.storage.rootDir]
      *
      * Specify the root directory from where the compiler will try to resolve modules
      *
      * @since         2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    rootDir: '[config.storage.srcDir]/js',
+    rootDir: '[config.storage.rootDir]',
 
     /**
      * @name              map
@@ -67,19 +80,6 @@ export default {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     prod: false,
-
-    /**
-     * @name              stripComments
-     * @namespace         config.svelte.compile
-     * @type              Boolean
-     * @default           true
-     *
-     * Specify if you want to stripComments the generated css or not
-     *
-     * @since             2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    stripComments: true,
 
     /**
      * @name              minify

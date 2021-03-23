@@ -43,7 +43,7 @@ function create_fragment(ctx) {
 function instance($$self, $$props) {
 	let { $$slots: slots = {}, $$scope } = $$props;
 	validate_slots("my-element", slots, []);
-	console.log("ploefefep");
+	console.log("plop");
 	const writable_props = [];
 
 	Object.keys($$props).forEach(key => {

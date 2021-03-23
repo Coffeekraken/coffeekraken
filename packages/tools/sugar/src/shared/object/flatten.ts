@@ -101,7 +101,7 @@ function flatten(object, settings = {}) {
             toReturn[`${key}[${x}]`] = flatObject[x];
           }
         } else {
-          let part = key;
+          const part = key;
           if (
             settings.quoteSeparatedProperties &&
             part.includes(settings.separator)
@@ -124,45 +124,45 @@ function flatten(object, settings = {}) {
 
   // console.log('BE', toReturn);
 
-  if (settings.keepLastIntact) {
-    const returnWithLastIntact = {};
-    Object.keys(toReturn).forEach((path) => {
-      // split paths
-      const a = path
-        .split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm)
-        .map((p) => __unquote(p));
+  // if (settings.keepLastIntact) {
+  //   const returnWithLastIntact = {};
+  //   Object.keys(toReturn).forEach((path) => {
+  //     // split paths
+  //     const a = path
+  //       .split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm)
+  //       .map((p) => __unquote(p));
 
-      // single part path
-      if (a.length <= 1)
-        return (returnWithLastIntact[a.join(settings.separator)] =
-          toReturn[path]);
+  //     // single part path
+  //     if (a.length <= 1)
+  //       return (returnWithLastIntact[a.join(settings.separator)] =
+  //         toReturn[path]);
 
-      let propName = a.slice(-1)[0];
-      let p = a
-        .slice(0, -1)
-        .map((t) => {
-          if (t.includes(settings.separator))
-            return `${settings.quoteCharacter}${t}${settings.quoteCharacter}`;
-          return t;
-        })
-        .join(settings.separator);
-      p = __unquote(p);
+  //     const propName = a.slice(-1)[0];
+  //     let p = a
+  //       .slice(0, -1)
+  //       .map((t) => {
+  //         if (t.includes(settings.separator))
+  //           return `${settings.quoteCharacter}${t}${settings.quoteCharacter}`;
+  //         return t;
+  //       })
+  //       .join(settings.separator);
+  //     p = __unquote(p);
 
-      // if (propName === '__isFlattened') return;
+  //     // if (propName === '__isFlattened') return;
 
-      if (propName.match(/\[[0-9]+\]$/gm)) {
-        p = p += `${settings.separator}${propName.split('[')[0]}`;
-        if (returnWithLastIntact[p] === undefined) returnWithLastIntact[p] = [];
-        returnWithLastIntact[p].push(toReturn[path]);
-      } else {
-        if (returnWithLastIntact[p] === undefined) returnWithLastIntact[p] = {};
-        returnWithLastIntact[p][propName] = toReturn[path];
-      }
-    });
-    // console.log('LA', returnWithLastIntact);
+  //     if (propName.match(/\[[0-9]+\]$/gm)) {
+  //       p = p += `${settings.separator}${propName.split('[')[0]}`;
+  //       if (returnWithLastIntact[p] === undefined) returnWithLastIntact[p] = [];
+  //       returnWithLastIntact[p].push(toReturn[path]);
+  //     } else {
+  //       if (returnWithLastIntact[p] === undefined) returnWithLastIntact[p] = {};
+  //       returnWithLastIntact[p][propName] = toReturn[path];
+  //     }
+  //   });
+  //   // console.log('LA', returnWithLastIntact);
 
-    return returnWithLastIntact;
-  }
+  //   return returnWithLastIntact;
+  // }
 
   // console.log(toReturn);
 

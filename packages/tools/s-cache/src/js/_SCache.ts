@@ -280,7 +280,7 @@ class SCache extends __SClass implements ISCache {
 
     // check the name
     if (typeof name !== 'string') {
-      name = __md5(__toString(name)).toString();
+      name = __md5.encrypt(__toString(name)).toString();
     }
 
     let contextHash = null;

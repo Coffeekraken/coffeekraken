@@ -15,10 +15,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
 const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepMerge"));
+const SDuration_1 = __importDefault(require("@coffeekraken/sugar/shared/time/SDuration"));
 const SCompiler_1 = __importDefault(require("@coffeekraken/sugar/node/compiler/SCompiler"));
 const pool_1 = __importDefault(require("@coffeekraken/sugar/node/fs/pool"));
 const SSvelteCompilerInterface_1 = __importDefault(require("./interface/SSvelteCompilerInterface"));
 const s_ts_compiler_1 = __importDefault(require("@coffeekraken/s-ts-compiler"));
+const tmpDir_1 = __importDefault(require("@coffeekraken/sugar/node/path/tmpDir"));
+const writeFileSync_1 = __importDefault(require("@coffeekraken/sugar/node/fs/writeFileSync"));
+const removeSync_1 = __importDefault(require("@coffeekraken/sugar/node/fs/removeSync"));
+const path_1 = __importDefault(require("path"));
+const uglify_js_1 = __importDefault(require("uglify-js"));
+const clean_css_1 = __importDefault(require("clean-css"));
+const availableColors_1 = __importDefault(require("@coffeekraken/sugar/shared/dev/colors/availableColors"));
+const pickRandom_1 = __importDefault(require("@coffeekraken/sugar/shared/array/pickRandom"));
+const filename_1 = __importDefault(require("@coffeekraken/sugar/node/fs/filename"));
 // @ts-ignore
 const __svelte = require('svelte/compiler'); // eslint-disable-line
 /**
@@ -61,8 +71,27 @@ class SSvelteCompiler extends SCompiler_1.default {
      */
     constructor(initialParams, settings) {
         super(initialParams, deepMerge_1.default({
+            metas: {
+                color: 'red'
+            },
             svelteCompiler: {}
         }, settings || {}));
+        /**
+         * @name              _compile
+         * @type              Function
+         * @async
+         *
+         * This method is the main one that allows you to actually compile the
+         * code you pass either inline, either a file path.
+         *
+         * @param         {String}            source          The source you want to compile. Can be a file path or some inline codes
+         * @param         {Object}            [settings={}]       An object of settings to override the instance ones
+         * @return        {SPromise}                          An SPromise instance that will be resolved (or rejected) when the compilation is finished
+         *
+         * @since             2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        this._filesColor = {};
     }
     /**
      * @name      svelteCompilerSettings
@@ -77,91 +106,50 @@ class SSvelteCompiler extends SCompiler_1.default {
     get svelteCompilerSettings() {
         return this._settings.svelteCompiler;
     }
-    /**
-     * @name              _compile
-     * @type              Function
-     * @async
-     *
-     * This method is the main one that allows you to actually compile the
-     * code you pass either inline, either a file path.
-     *
-     * @param         {String}            source          The source you want to compile. Can be a file path or some inline codes
-     * @param         {Object}            [settings={}]       An object of settings to override the instance ones
-     * @return        {SPromise}                          An SPromise instance that will be resolved (or rejected) when the compilation is finished
-     *
-     * @since             2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
     _compile(params, settings = {}) {
         return new s_promise_1.default(({ resolve, reject, pipe, emit, on }) => __awaiter(this, void 0, void 0, function* () {
             settings = deepMerge_1.default(this.svelteCompilerSettings, {}, settings);
+            console.log(params);
             const input = Array.isArray(params.input)
                 ? params.input
                 : [params.input];
+            emit('log', {
+                value: 'Starting <red>Svelte</red> file(s) compilation...'
+            });
+            if (params.watch) {
+                emit('log', {
+                    value: `<blue>[watch]</blue> Watching for changes...`
+                });
+            }
             // prod
             if (params.prod) {
-                params.style = 'compressed';
                 params.minify = true;
-                params.stripComments = true;
             }
             const pool = pool_1.default(input, {
                 watch: params.watch
             });
             // handle cancel
-            on('cancel', () => {
+            on('finally', () => {
                 pool.cancel();
             });
             pool.on(params.watch ? 'update' : 'files', (files) => __awaiter(this, void 0, void 0, function* () {
+                var _a;
+                const compiledFiles = [];
+                const duration = new SDuration_1.default();
                 files = Array.isArray(files) ? files : [files];
                 for (let i = 0; i < files.length; i++) {
                     const file = files[i];
-                    console.log(file.content);
-                    console.log(params);
+                    const color = (_a = this._filesColor[file.path]) !== null && _a !== void 0 ? _a : pickRandom_1.default(availableColors_1.default());
+                    this._filesColor[file.path] = color;
+                    emit('log', {
+                        value: `<${color}>[${filename_1.default(file.path)}]</${color}> Starting compilation`
+                    });
                     // preprocess
                     const preprocessResult = yield __svelte.preprocess(file.content, {
                         style: (input) => __awaiter(this, void 0, void 0, function* () {
                             return {
                                 code: input.content
                             };
-                            // if (
-                            //   !input.attributes ||
-                            //   !input.attributes.type ||
-                            //   input.attributes.type !== 'text/scss'
-                            // ) {
-                            //   return {
-                            //     code: input.content
-                            //   };
-                            // }
-                            // if (input.content.trim() === '') {
-                            //   return '';
-                            // }
-                            // // create a temp file
-                            // const tmpSScssFile = new __SScssFile(
-                            //   '%tmpDir/svelte/compile.scss',
-                            //   {
-                            //     file: {
-                            //       checkExistence: false
-                            //     }
-                            //   }
-                            // );
-                            // tmpSScssFile.writeSync(input.content);
-                            // emit('log', {
-                            //   value: `<yellow>[scss]</yellow> Processing scss`
-                            // });
-                            // const compileRes = await tmpSScssFile.compile({
-                            //   save: false,
-                            //   map: false
-                            // });
-                            // if (compileRes.css) {
-                            //   emit('log', {
-                            //     value: `<green>[scss]</green> Scss processed <green>successfully</green>`
-                            //   });
-                            //   return {
-                            //     code: compileRes.css
-                            //   };
-                            // } else {
-                            //   return compileRes;
-                            // }
                         }),
                         script: (input) => __awaiter(this, void 0, void 0, function* () {
                             if (!input.attributes ||
@@ -171,46 +159,25 @@ class SSvelteCompiler extends SCompiler_1.default {
                                     code: input.content
                                 };
                             }
+                            // write a temp file to compile
+                            const tmpTsFilePath = `${tmpDir_1.default()}/SSvelteCompiler/${Date.now()}.ts`;
+                            writeFileSync_1.default(`${tmpTsFilePath}`, input.content);
                             const compiler = new s_ts_compiler_1.default();
-                            // // create a temp file
-                            // const tmpTsFile = new __STsFile('%tmpDir/ts/compile.ts', {
-                            //   file: {
-                            //     checkExistence: false
-                            //   }
-                            // });
-                            // tmpTsFile.writeSync(input.content);
-                            // emit('log', {
-                            //   value: `<yellow>[ts]</yellow> Processing typescript`
-                            // });
-                            // const compilePromise = tmpTsFile.compile({
-                            //   save: false,
-                            //   // @ts-ignore
-                            //   target: 'browser',
-                            //   map: false
-                            // });
-                            // // const compiler = new __STsCompiler();
-                            // // const compilePromise = compiler.compile({
-                            // //   input: [tmpTsFile.path],
-                            // //   rootDir: tmpTsFile.dirPath,
-                            // //   save: false,
-                            // //   transpileOnly: true,
-                            // //   target: 'browser',
-                            // //   map: false
-                            // // });
-                            // pipe(compilePromise, {
-                            //   events: 'error'
-                            // });
-                            // const compileRes = await compilePromise;
-                            // if (compileRes.js) {
-                            //   emit('log', {
-                            //     value: `<green>[ts]</green> Typescript processed <green>successfully</green>`
-                            //   });
-                            //   return {
-                            //     code: compileRes.js
-                            //   };
-                            // } else {
-                            //   return compileRes;
-                            // }
+                            const res = yield compiler.compile({
+                                input: [tmpTsFilePath],
+                                config: 'js',
+                                save: false
+                            });
+                            if (!res || !res.files || !res.files.length) {
+                                return {
+                                    code: input.content
+                                };
+                            }
+                            // remove temp file
+                            removeSync_1.default(tmpTsFilePath);
+                            return {
+                                code: res.files[0].content
+                            };
                         })
                     }, {});
                     // render svelte
@@ -220,46 +187,64 @@ class SSvelteCompiler extends SCompiler_1.default {
                             value: warning.toString()
                         });
                     });
-                    // const compilePromise = file.compile(
-                    //   {
-                    //     ...params,
-                    //     watch: false
-                    //   },
-                    //   settings
-                    // );
-                    // try {
-                    //   pipe(compilePromise);
-                    //   const compileRes = await compilePromise;
-                    //   resultsObj[file.path] = compileRes;
-                    //   aggregateStrArray.push(compileRes.js);
-                    //   emit('file', compileRes);
-                    // } catch (e) {
-                    //   emit('warn', {
-                    //     value: e.toString()
-                    //   });
-                    // }
+                    let outputPath = file.path;
+                    if (params.outDir) {
+                        const relPath = path_1.default.relative(params.inDir, file.path);
+                        outputPath = `${path_1.default.resolve(params.outDir, relPath)}`;
+                    }
+                    outputPath = outputPath.replace(/\.svelte$/, '.js');
+                    emit('log', {
+                        value: `<${color}>[${filename_1.default(file.path)}]</${color}> Compilation <green>successfull</green>`
+                    });
+                    // check if need to save file
+                    if (params.save) {
+                        if (result.js.code) {
+                            if (params.minify) {
+                                result.js.code = uglify_js_1.default.minify(result.js.code).code;
+                            }
+                            emit('log', {
+                                value: `<${color}>[${filename_1.default(file.path)}]</${color}> Saving <cyan>js</cyan> file under "<cyan>${path_1.default.relative(params.rootDir, outputPath)}</cyan>"`
+                            });
+                            writeFileSync_1.default(outputPath, result.js.code);
+                            if (params.map && result.js.map) {
+                                emit('log', {
+                                    value: `<${color}>[${filename_1.default(file.path)}]</${color}> Saving <yellow>map</yellow> file under "<cyan>${path_1.default.relative(params.rootDir, outputPath)}.map</cyan>"`
+                                });
+                                writeFileSync_1.default(outputPath + '.map', JSON.stringify(result.js.map, null, 4));
+                            }
+                        }
+                        if (result.css.code) {
+                            if (params.minify) {
+                                result.css.code = new clean_css_1.default({}).minify(result.css.code);
+                            }
+                            emit('log', {
+                                value: `<${color}>[${filename_1.default(file.path)}]</${color}> Saving <yellow>css</yellow> file under "<cyan>${path_1.default.relative(params.rootDir, outputPath.replace(/\.js$/, '.css'))}</cyan>"`
+                            });
+                            writeFileSync_1.default(outputPath.replace(/\.js$/, '.css'), result.css.code);
+                            if (params.map && result.css.map) {
+                                emit('log', {
+                                    value: `<${color}>[${filename_1.default(file.path)}]</${color}> Saving <yellow>map</yellow> file under "<cyan>${path_1.default.relative(params.rootDir, outputPath.replace(/\.js$/, '.css'))}.map</cyan>"`
+                                });
+                                writeFileSync_1.default(outputPath.replace(/\.js$/, '.css') + '.map', JSON.stringify(result.css.map, null, 4));
+                            }
+                        }
+                    }
+                    compiledFiles.push({
+                        path: outputPath,
+                        js: result.js.code,
+                        css: result.css.code,
+                        warnings: result.warnings
+                    });
                 }
-                // if (params.watch) {
-                //   emit('log', {
-                //     value: `<blue>[watch]</blue> Watching for changes...`
-                //   });
-                // } else {
-                //   resolve({
-                //     files: resultsObj,
-                //     js: aggregateStrArray.join('\n'),
-                //     ...duration.end()
-                //   });
-                // }
+                if (params.watch) {
+                    emit('log', {
+                        value: `<blue>[watch]</blue> Watching for changes...`
+                    });
+                }
+                else {
+                    resolve(Object.assign({ files: compiledFiles }, duration.end()));
+                }
             }));
-            // const resultsObj = {};
-            // const aggregateStrArray: string[] = [];
-            // const duration = new __SDuration();
-            //
-            // if (params.watch) {
-            //   emit('log', {
-            //     value: `<blue>[watch]</blue> Watching for changes...`
-            //   });
-            // }
         }), {
             eventEmitter: {
                 bind: this
@@ -274,4 +259,4 @@ SSvelteCompiler.interfaces = {
     }
 };
 exports.default = SSvelteCompiler;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1N2ZWx0ZUNvbXBpbGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1N2ZWx0ZUNvbXBpbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLHdFQUFpRDtBQUNqRCw0RkFBc0U7QUFFdEUsNEZBRXFEO0FBQ3JELDRFQUF3RDtBQUN4RCxvR0FBOEU7QUFDOUUsZ0ZBQXdEO0FBRXhELGFBQWE7QUFDYixNQUFNLFFBQVEsR0FBRyxPQUFPLENBQUMsaUJBQWlCLENBQUMsQ0FBQyxDQUFDLHNCQUFzQjtBQXVCbkU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsTUFBTSxlQUFnQixTQUFRLG1CQUFXO0lBc0J2Qzs7Ozs7Ozs7O09BU0c7SUFDSCxZQUNFLGFBQThDLEVBQzlDLFFBQXNDO1FBRXRDLEtBQUssQ0FDSCxhQUFhLEVBQ2IsbUJBQVcsQ0FDVDtZQUNFLGNBQWMsRUFBRSxFQUFFO1NBQ25CLEVBQ0QsUUFBUSxJQUFJLEVBQUUsQ0FDZixDQUNGLENBQUM7SUFDSixDQUFDO0lBckNEOzs7Ozs7Ozs7T0FTRztJQUNILElBQUksc0JBQXNCO1FBQ3hCLE9BQWEsSUFBSyxDQUFDLFNBQVMsQ0FBQyxjQUFjLENBQUM7SUFDOUMsQ0FBQztJQTJCRDs7Ozs7Ozs7Ozs7Ozs7T0FjRztJQUNILFFBQVEsQ0FDTixNQUE4QixFQUM5QixXQUE4QyxFQUFFO1FBRWhELE9BQU8sSUFBSSxtQkFBVSxDQUNuQixDQUFPLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRSxFQUFFLEVBQUU7WUFDNUMsUUFBUSxHQUFHLG1CQUFXLENBQUMsSUFBSSxDQUFDLHNCQUFzQixFQUFFLEVBQUUsRUFBRSxRQUFRLENBQUMsQ0FBQztZQUVsRSxNQUFNLEtBQUssR0FBRyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUM7Z0JBQ3ZDLENBQUMs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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1N2ZWx0ZUNvbXBpbGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiU1N2ZWx0ZUNvbXBpbGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLHdFQUFpRDtBQUNqRCw0RkFBc0U7QUFDdEUsMEZBQW9FO0FBQ3BFLDRGQUVxRDtBQUNyRCw0RUFBd0Q7QUFDeEQsb0dBQThFO0FBQzlFLGdGQUF3RDtBQUN4RCxrRkFBNEQ7QUFFNUQsOEZBQXdFO0FBQ3hFLHdGQUFrRTtBQUNsRSxnREFBMEI7QUFDMUIsMERBQWlDO0FBQ2pDLDBEQUFtQztBQUNuQyw0R0FBc0Y7QUFDdEYsNkZBQXVFO0FBQ3ZFLG9GQUFpRTtBQUdqRSxhQUFhO0FBQ2IsTUFBTSxRQUFRLEdBQUcsT0FBTyxDQUFDLGlCQUFpQixDQUFDLENBQUMsQ0FBQyxzQkFBc0I7QUF1Qm5FOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILE1BQU0sZUFBZ0IsU0FBUSxtQkFBVztJQXNCdkM7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFDRSxhQUE4QyxFQUM5QyxRQUFzQztRQUV0QyxLQUFLLENBQ0gsYUFBYSxFQUNiLG1CQUFXLENBQ1Q7WUFDRSxLQUFLLEVBQUU7Z0JBQ0wsS0FBSyxFQUFFLEtBQUs7YUFDYjtZQUNELGNBQWMsRUFBRSxFQUFFO1NBQ25CLEVBQ0QsUUFBUSxJQUFJLEVBQUUsQ0FDZixDQUNGLENBQUM7UUFHSjs7Ozs7Ozs7Ozs7Ozs7V0FjRztRQUNILGdCQUFXLEdBQTJCLEVBQUUsQ0FBQztJQWpCekMsQ0FBQztJQXhDRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLHNCQUFzQjtRQUN4QixPQUFhLElBQUssQ0FBQyxTQUFTLENBQUMsY0FBYyxDQUFDO0lBQzlDLENBQUM7SUE4Q0QsUUFBUSxDQUNOLE1BQThCLEVBQzlCLFdBQThDLEVBQUU7UUFFaEQsT0FBTyxJQUFJLG1CQUFVLENBQ25CLENBQU8sRUFBRSxPQUFPLEVB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

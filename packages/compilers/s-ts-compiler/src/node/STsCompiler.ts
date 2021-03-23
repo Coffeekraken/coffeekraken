@@ -8,6 +8,7 @@ import __SCompiler, {
   ISCompiler,
   ISCompilerSettings
 } from '@coffeekraken/sugar/node/compiler/SCompiler';
+import __SDuration from '@coffeekraken/sugar/shared/time/SDuration';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __sugarConfig from '@coffeekraken/sugar/shared/config/sugar';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
@@ -23,6 +24,9 @@ import __STsCompilerParamsInterface from './interface/STsCompilerInterface';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
 import __availableColors from '@coffeekraken/sugar/shared/dev/colors/availableColors';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
+import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
+import __resolveGlob from '@coffeekraken/sugar/node/glob/resolveGlob';
+import tsconfig = require('@coffeekraken/sugar/templates/tsconfig/tsconfig');
 
 export interface ISTsCompilerCtorSettings {
   tsCompiler: Partial<ISTsCompilerSettings>;
@@ -153,6 +157,8 @@ class STsCompiler extends __SCompiler {
         let input = Array.isArray(params.input) ? params.input : [params.input];
         let config;
 
+        const duration = new __SDuration();
+
         let stacks: any = undefined;
         if (params.stack) {
           if (!Array.isArray(params.stack)) stacks = [params.stack];
@@ -226,8 +232,6 @@ class STsCompiler extends __SCompiler {
           config = params.config;
         }
 
-        nativeConsole.log(configPath);
-
         const colors = __availableColors();
 
         // clear
@@ -243,7 +247,7 @@ class STsCompiler extends __SCompiler {
         }
 
         // loop on inputs
-        input.forEach((inputPath, i) => {
+        input.forEach(async (inputPath, i) => {
           let tsconfigJson = {},
             inputPathToDisplay;
 
@@ -257,6 +261,7 @@ class STsCompiler extends __SCompiler {
                 `Sorry but to compile the passed "<cyan>${inputPath}</cyan>" input, you MUST specify a valid config to use like "js", "node", "shared", or a full tsconfig file path`
               );
             }
+            inputPathToDisplay = __getFilename(inputPath);
             tsconfigJson = config;
           } else if (isTsConfigInput) {
             inputPathToDisplay = inputPath
@@ -308,11 +313,11 @@ class STsCompiler extends __SCompiler {
 
           // include (only for non tsconfig input)
           if (!isTsConfigInput) {
+            tsconfigJson.include = [inputPath];
+          } else {
             if (!tsconfigJson.include && tsconfigJson._include) {
               tsconfigJson.include = tsconfigJson._include;
             }
-          } else {
-            tsconfigJson.include = [inputPath];
           }
           delete tsconfigJson._include;
 
@@ -320,7 +325,11 @@ class STsCompiler extends __SCompiler {
           if (tsconfigJson.include) {
             tsconfigJson.include = tsconfigJson.include.map((path) => {
               if (__path.isAbsolute(path)) return path;
-              return __path.resolve(__folderPath(inputPath), path);
+              if (isTsConfigInput) {
+                return __path.resolve(__folderPath(inputPath), path);
+              } else {
+                return __path.resolve(path);
+              }
             });
           }
 
@@ -337,7 +346,7 @@ class STsCompiler extends __SCompiler {
                 `Sorry but the parameter "<yellow>rootDir</yellow>" MUST be an absolute path. You've passed "<cyan>${params.rootDir}</cyan>"`
               );
             }
-            tsconfigJson.rootDir = params.rootDir;
+            tsconfigJson.compilerOptions.rootDir = params.rootDir;
           }
 
           // outDir
@@ -346,6 +355,7 @@ class STsCompiler extends __SCompiler {
               params.rootDir || process.cwd(),
               params.outDir
             );
+            delete tsconfigJson.compilerOptions.rootDir;
           }
 
           // compilerOptions
@@ -370,26 +380,33 @@ class STsCompiler extends __SCompiler {
             tsconfigJson.compilerOptions.inlineSourceMap = true;
           }
 
+          // save or not
+          if (!params.save) {
+            tsconfigJson.compilerOptions.outDir = `${__tmpDir()}/STsCompiler/${Date.now()}`;
+          }
+
+          const tmpConfigPath = `${__tmpDir()}/STsCompiler/${__getFilename(
+            inputPath
+          )}.${__md5.encrypt(inputPath)}.json`;
+
           // writing the tsconfig file
-          const tmpFilePath =
-            `${__tmpDir()}/STsCompiler/${__getFilename(inputPath)}`
-              .split('.')
-              .slice(0, -1)
-              .join('.') + '.json';
-          __ensureDirSync(__folderPath(tmpFilePath));
+          __ensureDirSync(__folderPath(tmpConfigPath));
           __fs.writeFileSync(
-            tmpFilePath,
+            tmpConfigPath,
             JSON.stringify(tsconfigJson, null, 4)
           );
 
           // build command line
           const commandLineArray: string[] = [];
-          commandLineArray.push(`-p ${tmpFilePath}`);
+          commandLineArray.push(`-p ${tmpConfigPath}`);
           if (params.watch) commandLineArray.push('--watch');
 
-          console.log(commandLineArray.join(' '));
+          // setup resultObj
+          const resultObj = {
+            tsconfig: tsconfigJson,
+            params
+          };
 
-          return;
           // spawn new process
           try {
             const pro = __spawn(`tsc ${commandLineArray.join(' ')}`, [], {
@@ -439,19 +456,64 @@ class STsCompiler extends __SCompiler {
               }>[${inputPathToDisplay}]</${colors[i] || 'yellow'}> `
             });
 
-            pro.on('close', (value) => {
+            pro.on('close', async (value) => {
               if (value.code === 0) {
                 pro.emit('log', {
                   value: `Compilation <green>successfull</green> in <yellow>${value.formatedDuration}</yellow>`
                 });
+
+                // save or not
+                if (!params.save) {
+                  const files = (
+                    await __resolveGlob(
+                      `${tsconfigJson.compilerOptions.outDir}/**/*.js`
+                    )
+                  ).map((file) => {
+                    return {
+                      path: __path.relative(
+                        tsconfigJson.compilerOptions.outDir,
+                        file.path
+                      ),
+                      content: file.content
+                    };
+                  });
+
+                  // set files in result obj
+                  resultObj.files = files;
+                }
+
+                // resolve the promise
+                resolve({
+                  ...resultObj,
+                  ...duration.end()
+                });
+              } else {
+                // reject the promise
+                reject({
+                  ...resultObj,
+                  error: value.stderr.join('\n'),
+                  ...duration.end()
+                });
               }
+
+              // delete the temp directory if needed
+              if (!params.save) {
+                __removeSync(tsconfigJson.compilerOptions.outDir);
+              }
+
+              // delete the config file
+              __removeSync(tmpConfigPath);
             });
 
             pro.emit('log', {
               value: `Starting compilation process`
             });
           } catch (e) {
-            console.log(e);
+            reject({
+              ...resultObj,
+              error: e,
+              ...duration.end()
+            });
           }
         });
       },

@@ -117,15 +117,15 @@ export = class SLogConsoleAdapter {
 
       // log the message
       if (typeof message === 'string') {
-        ((global || window).nativeConsole || console)[consoleMethod](
+        ((global || window)._console || console)[consoleMethod](
           __toString(message, {}) + '⠀'
         );
       } else if (typeof message === 'object') {
-        ((global || window).nativeConsole || console)[consoleMethod](
+        ((global || window)._console || console)[consoleMethod](
           __toString(message, {}) + '⠀'
         );
       } else {
-        ((global || window).nativeConsole || console)[consoleMethod](
+        ((global || window)._console || console)[consoleMethod](
           __toString(message, {}) + '⠀'
         );
       }

@@ -47,11 +47,9 @@ class STsCompilerProcess extends SProcess implements ISCompileTsProcess {
    */
   constructor(initialParams: any, settings?: ISTsCompileProcessSettings) {
     super(initialParams, {
-      id: 'STsCompilerProcess',
-      name: 'TS Compiler Process',
       ...(settings || {}),
       process: {
-        runAsChild: true
+        // runAsChild: true
       }
     });
 

@@ -4,13 +4,11 @@ import __deepMerge from '../../shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
 import __glob from 'glob';
 import __SFile from '../fs/SFile';
-import __extractGlob from './extractGlob';
 import __isGlob from '../../shared/is/glob';
-import __isPath from '../../shared/is/path';
 import __fs from 'fs';
 import __toRegex from 'to-regex';
 import __isDirectory from '../is/directory';
-import __expandGlob from './expandGlob';
+import __expandGlob from '../../shared/glob/expandGlob';
 
 /**
  * @name            resolveGlob
@@ -26,7 +24,6 @@ import __expandGlob from './expandGlob';
  * @param       {Object}            [settings={}]           An object of settings to configure your glob process
  * @return      {SPromise}                                  An SPromise instance that will be resolved once the search process has been fully finished
  *
- * @setting     {Number}        [maxDepth=-1]               Specify the maximum depth to use when
  * @setting     {String}        cwd                         The root directory where to start the glob search process
  * @setting     {Object}        ...glob                     All the glob (https://www.npmjs.com/package/glob) options are supported
  * @setting     {RegExp}        [contentRegex=null]         Specify a regex that will be used to filter the results by searching in the content
@@ -56,7 +53,7 @@ function resolveGlob(globs, settings = {}) {
         settings
       );
 
-      let filesArray = [];
+      const filesArray = [];
 
       if (!Array.isArray(globs)) globs = [globs];
 
@@ -90,14 +87,14 @@ function resolveGlob(globs, settings = {}) {
         });
 
         globPattern = `${cwd}/${globPattern}`;
-
-        let finalPatterns = __expandGlob(globPattern);
+        const finalPatterns = __expandGlob(globPattern);
 
         let pathes = [];
         finalPatterns.forEach((pattern) => {
           pathes = pathes.concat(
             __glob.sync(pattern, {
               cwd,
+              dot: true,
               ...settings
             })
           );

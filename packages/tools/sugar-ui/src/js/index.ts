@@ -1,4 +1,5 @@
-// import SInterface from '@coffeekraken/sugar/js/interface/SInterface';
+// import SInterface from '@coffeekraken/sugar/shared/interface/SInterface';
 
+console.log('cpl');
 // console.log(SInterface);
-console.log('ff');
+// console.log(SInterface);

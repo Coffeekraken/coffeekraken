@@ -7,7 +7,11 @@
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
   "license": "MIT",
   "dependencies": {
+    "@coffeekraken/s-ts-compiler": "file:../s-ts-compiler",
     "@coffeekraken/sugar": "file:../../tools/sugar",
-    "@coffeekraken/s-ts-compiler": "file:../s-ts-compiler"
+    "uglify-js": "^3.13.2",
+    "clean-css": "^5.1.2"
+  },
+  "devDependencies": {
   }
 }

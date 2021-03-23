@@ -24,7 +24,7 @@
  *    hello: 'world',
  *    cat: 'Nelson'
  * };
- * map(myObject, (value, prop) => {
+ * map(myObject, ({value, prop}) => {
  *    return prop === 'hello' ? 'universe' : value;
  * });
  * {
@@ -36,8 +36,8 @@
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function map(object, processor) {
-  Object.keys(object).forEach((prop) => {
-    const res = processor(object[prop], prop);
+  Object.keys(object).forEach((prop, i) => {
+    const res = processor({ value: object[prop], key: prop, prop, i, idx: i });
     if (res === -1) delete object[prop];
     else object[prop] = res;
   });

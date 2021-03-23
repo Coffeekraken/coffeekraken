@@ -93,7 +93,7 @@ export default function esbuildAggregateLibsPlugin(
           //     entryPoints: [path]
           //   });
 
-          //   nativeConsole.log(resultObj);
+          //   _console.log(resultObj);
 
           // write the new file
           //   __ensureDirSync(__folderPath(savePath));

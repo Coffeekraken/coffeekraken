@@ -5,6 +5,8 @@ import __deepMerge from '../object/deepMerge';
 import __parse from '../string/parse';
 import __unquote from '../string/unquote';
 import __completeArgsObject from './completeArgsObject';
+import __map from '../object/map';
+import __SType from '../type/SType';
 
 /**
  * @name                        parseArgs
@@ -57,7 +59,8 @@ function parseArgsString(string, settings = {}) {
       throw: true,
       definition: null,
       complete: true,
-      defaultObj: {}
+      defaultObj: {},
+      cast: true
     },
     settings
   );
@@ -172,6 +175,24 @@ function parseArgsString(string, settings = {}) {
           finalArgsMap[argName] = value;
           break;
         }
+      }
+    });
+  }
+
+  // cast params
+  if (settings.cast) {
+    finalArgsMap = __map(finalArgsMap, ({ key, value }) => {
+      // validate and cast value
+      if (settings.definition && settings.definition[key]) {
+        const definitionObj = settings.definition[key];
+        const sTypeInstance = new __SType(definitionObj.type);
+        const res = sTypeInstance.cast(value, {
+          throw: settings.throw
+        });
+        if (res instanceof Error) {
+          return value;
+        }
+        return res;
       }
     });
   }

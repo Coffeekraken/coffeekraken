@@ -67,6 +67,11 @@ class STsCompilerInterface extends __SInterface {
       alias: 'b',
       default: __sugarConfig('ts.compile.banner')
     },
+    save: {
+      type: 'Boolean',
+      alias: 's',
+      default: __sugarConfig('ts.compile.save')
+    },
     watch: {
       type: 'Boolean',
       alias: 'w',

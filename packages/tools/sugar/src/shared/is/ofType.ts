@@ -37,9 +37,8 @@ function ofType(value, typeString, settings = {}) {
     verbose: false,
     ...settings
   };
-  // console.log(typeString, value);
   const typeInstance = new __SType(typeString, settings);
-  const res: boolean | object = typeInstance.is(value);
+  const res: boolean = typeInstance.is(value);
   return res;
 }
 export default ofType;

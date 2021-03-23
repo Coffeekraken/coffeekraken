@@ -301,7 +301,7 @@ class SJsFile extends __SFile implements ISJsFile {
         //   //       })
         //   //     );
 
-        //   //     nativeConsole.log(list);
+        //   //     _console.log(list);
 
         //   //     code = code.replace(
         //   //       match[0],

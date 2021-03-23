@@ -18,9 +18,9 @@
 
 </script>
 
-<style type="text/scss">
+<style>
 	h1 {
-		color: Sugar.color(primary);
+		color: blue;
 		background: red;
 	}
 </style>

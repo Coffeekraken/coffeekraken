@@ -393,7 +393,7 @@ class SInterface implements ISInterface {
 
     const descriptorResult: ISDescriptorResult = descriptor.apply(instance);
 
-    // nativeConsole.log('in', this._definition);
+    // _console.log('in', this._definition);
 
     // instanciate a new interface result object
     const interfaceResult: ISInterfaceResult = new __SInterfaceResult({
@@ -401,7 +401,7 @@ class SInterface implements ISInterface {
     });
 
     if (interfaceResult.hasIssues() && settings.throw) {
-      throw interfaceResult.toString();
+      throw new Error(interfaceResult.toString());
     }
 
     // return new result object

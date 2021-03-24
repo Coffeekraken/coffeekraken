@@ -13,7 +13,7 @@ import { ISTsCompilerParams } from '@coffeekraken/s-ts-compiler';
  *
  * This represent a typescript file
  *
- * @param       {String}            path            The path to the scss file
+ * @param       {String}            path            The path to the scss file
  * @param       {ISTsFileSettings}     [settings={}]       Some settings to configure your file
  *
  * @example         js

@@ -12,7 +12,7 @@
  *
  * @param           {Object}            object          The object to process
  * @param           {Function}          processor       The processor function that will take as parameters the current property value and the property name
- * @return          {Object}                            The processed object
+ * @return          {Object}                            The processed object
  *
  * @todo      interface
  * @todo      doc

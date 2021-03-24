@@ -13,9 +13,9 @@ const extension_1 = __importDefault(require("./extension"));
  *
  * Return the filename from the passed path with or without the extension
  *
- * @param           {String}              path              The path to take the filename from
+ * @param           {String}              path              The path to take the filename from
  * @param           {Boolean}             [withExtension=true]        Tell if we want the filename with or without the extension
- * @return          {String}                                  The requested filename
+ * @return          {String}                                  The requested filename
  *
  * @todo      interface
  * @todo      doc

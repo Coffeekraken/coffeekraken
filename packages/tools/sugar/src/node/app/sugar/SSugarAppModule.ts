@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SClass from '../../../shared/class/SClass';
+import __SClass, { ISClass } from '../@coffeekraken/s-class';
 import __isPath from '../../../shared/is/path';
 import __isClass from '../../../shared/is/class';
 import __isPlain from '../../../shared/is/plainObject';
@@ -19,7 +19,7 @@ import __stdio from '../../stdio/stdio';
 import __SBlessedComponent from '../../blessed/SBlessedComponent';
 
 import __SSugarAppModuleInterface from './interface/SSugarAppModuleInterface';
-import { ISClass } from '../../../shared/class/SClass';
+
 import { ISSugarAppModuleDescriptor } from './SSugarAppProcess';
 
 /**
@@ -86,7 +86,7 @@ export default class SSugarAppModule
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
-  _state: string = 'loading';
+  _state = 'loading';
   state(value?: string) {
     if (!value) return this._state;
     // emit an event
@@ -170,7 +170,7 @@ export default class SSugarAppModule
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
   stdios = {};
-  stdio(id: string = 'terminal', value?: any) {
+  stdio(id = 'terminal', value?: any) {
     if (value) {
       this.stdios[id] = value;
       this.emit('stdio', {
@@ -457,7 +457,7 @@ export default class SSugarAppModule
    *
    * This method simply return true or false depending on the active module state
    *
-   * @return    {Boolean}       true if the module is active (displayed), false if not
+   * @return    {Boolean}       true if the module is active (displayed), false if not
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -530,7 +530,7 @@ export default class SSugarAppModule
    * This method allows you to register a new process "SProcess" based instance
    * that you will be able to use later on by calling the "run" or "stop" module method.
    *
-   * @param       {SProcess}        pro       The process instance you want to register
+   * @param       {SProcess}        pro       The process instance you want to register
    * @param       {String}      [id='main']      An id for your instance to use later
    *
    * @since       2.0.0

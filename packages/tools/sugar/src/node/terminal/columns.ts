@@ -14,7 +14,7 @@ import __deepMerge from '../../shared/object/deepMerge';
  *
  * @param                 {Array}                       content                     The columns content stored in an Array
  * @param                 {Object}                      [settings={}]               An object of settings descripbed above
- * - width (process.env.STDOUT_COLUMNS || process.stdout.columns) {Number}: The base width on which to calculate the columns
+ * - width (process.env.STDOUT_COLUMNS || process.stdout.columns) {Number}: The base width on which to calculate the columns
  * - padding (process.env.STDOUT_PADDING || 3) {Number}: The padding to apply on the sides
  * @return                {String}                                                  The string to log in the terminal
  *

@@ -10,8 +10,8 @@ import __isValidPath from 'is-valid-path';
  *
  * Check if the passed string is a valid path or not
  *
- * @param         {String}            path              The path to check
- * @return        {Boolean}                             true if the path is valide, false if not
+ * @param         {String}            path              The path to check
+ * @return        {Boolean}                             true if the path is valide, false if not
  *
  * @todo      interface
  * @todo      doc

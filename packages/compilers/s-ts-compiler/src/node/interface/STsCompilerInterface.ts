@@ -22,19 +22,30 @@ import __SInterface from '@coffeekraken/sugar/node/interface/SInterface';
  */
 class STsCompilerInterface extends __SInterface {
   static definition = {
-    // ...__TscInterface.definition,
     input: {
       type: 'Array<String>',
+      path: {
+        absolute: true,
+        glob: 'resolve'
+      },
       alias: 'i',
       default: __sugarConfig('ts.compile.input')
     },
     outDir: {
       type: 'String',
+      path: {
+        absolute: true,
+        exists: true
+      },
       alias: 'o',
       default: __sugarConfig('ts.compile.outDir')
     },
     rootDir: {
       type: 'String',
+      path: {
+        absolute: true,
+        exists: true
+      },
       alias: 'r',
       default: __sugarConfig('ts.compile.rootDir')
     },

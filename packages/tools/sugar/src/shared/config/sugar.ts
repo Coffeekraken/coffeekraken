@@ -1,4 +1,4 @@
-import __SConfig from './SConfig';
+import __SConfig from '@coffeekraken/s-config';
 import __isNode from '../is/node';
 import __packageRoot from '../path/packageRoot';
 

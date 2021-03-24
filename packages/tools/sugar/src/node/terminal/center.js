@@ -19,7 +19,7 @@ const countLine_1 = __importDefault(require("../../shared/string/countLine"));
  *
  * @param                 {String|Array}                  text                    The text to center or array of strings to center
  * @param                 {Object}                  [settings={}]           An object of settings
- * @return                {String}                                          The centered text
+ * @return                {String}                                          The centered text
  *
  * @todo      interface
  * @todo      doc

@@ -17,7 +17,7 @@ import __stripAnsi from 'strip-ansi';
  * - htmlTags (false) {Boolean}: Specify if you want to count the html tags or not
  * - terminalSpecialChars (false) {Boolean}: Specify if you want to count the terminal specials chars like "\u001b[30m", etc...
  * - newLineChars (false) {Boolean}: Specify if you want to count the new line special char "\n" or not
- * @return          {Number}                                How many characters their is in the line
+ * @return          {Number}                                How many characters their is in the line
  *
  * @todo      interface
  * @todo      doc

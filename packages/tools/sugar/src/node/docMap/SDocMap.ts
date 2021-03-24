@@ -11,7 +11,7 @@ import __removeSync from '../fs/removeSync';
 import __getFilename from '../fs/filename';
 import __unique from '../../shared/array/unique';
 import __SGlob from '../glob/SGlob';
-import __SClass from '../../shared/class/SClass';
+import __SClass from '@coffeekraken/s-class';
 import __sugarConfig from '../../shared/config/sugar';
 import __SDocMapSettingsInterface from './interface/SDocMapSettingsInterface';
 import __wait from '../../shared/time/wait';
@@ -196,7 +196,7 @@ class SDocMap extends __SClass implements ISDocMap {
    *
    * @todo      update documentation
    *
-   * @param       {Object}        [settings={}]       A settings object to override the instance level ones
+   * @param       {Object}        [settings={}]       A settings object to override the instance level ones
    * @return      {SPromise}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
    *
    * @since       2.0.0
@@ -274,7 +274,7 @@ class SDocMap extends __SClass implements ISDocMap {
    * @todo      update documentation
    * @todo      integrate the "cache" feature
    *
-   * @param       {Object}        [settings={}]       A settings object to override the instance level ones
+   * @param       {Object}        [settings={}]       A settings object to override the instance level ones
    * @return      {SPromise}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
    *
    * @since       2.0.0
@@ -351,7 +351,7 @@ class SDocMap extends __SClass implements ISDocMap {
           const glob = globs[i];
 
           // scan for files
-          let files = await __SGlob.resolve(glob, {});
+          let files = __SGlob.resolve(glob, {});
           files = files.filter((file) => {
             if (!buildSettings.exclude || buildSettings.exclude === undefined)
               return true;
@@ -462,8 +462,8 @@ class SDocMap extends __SClass implements ISDocMap {
    * This method save the docMap.json file in the outputDir setted in the settings.
    * You can specify an output path as parameter to use this instead of the instance level settings.
    *
-   * @param         {String}            [output=null]           A full output file path where to save the file
-   * @return        {SPromise}                                  An SPromise instance resolved once the file has been saved
+   * @param         {String}            [output=null]           A full output file path where to save the file
+   * @return        {SPromise}                                  An SPromise instance resolved once the file has been saved
    *
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

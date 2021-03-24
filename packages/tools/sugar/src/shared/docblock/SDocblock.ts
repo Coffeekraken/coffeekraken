@@ -1,13 +1,10 @@
-import __SClass from '../class/SClass';
-import __SError from '../error/SError';
+import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '../object/deepMerge';
 import __SDocblockBlock, { ISDocblockBlock } from './SDocblockBlock';
-import __handlebars from 'handlebars';
 // import __markdown from './markdown/index';
 import __isNode from '../is/node';
 import __isPath from '../is/path';
 import __fs from 'fs';
-import SDocblockBlock from './SDocblockBlock';
 
 /**
  * @name                  Dockblock
@@ -161,7 +158,7 @@ class SDocblock extends __SClass implements ISDocblock {
    * blocks back when using the methods like get blocks, etc...
    *
    * @param       {Function}      [sortFunction=null]       Specify a custom sort function you want to use. If not set, use the ```sortFunction``` setting.
-   * @return      {SDocblock}                                   The class instance itself to maintain chainability
+   * @return      {SDocblock}                                   The class instance itself to maintain chainability
    *
    * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com>
@@ -193,7 +190,7 @@ class SDocblock extends __SClass implements ISDocblock {
    * and get back the object version of it
    *
    * @param       {String}        [string=this._source]        The string to parse
-   * @return      {Array<SDocblockBlock>}                       An array of SDocblockBlock instances
+   * @return      {Array<SDocblockBlock>}                       An array of SDocblockBlock instances
    *
    * @since       2.0.0
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

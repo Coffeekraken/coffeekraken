@@ -41,7 +41,7 @@ export default async (stringArgs = '') => {
     )
   );
 
-  const files = await __resolveGlob(`${src}/**/*.ts`, {
+  const files = __resolveGlob(`${src}/**/*.ts`, {
     contentRegex: /\/\/\s?@shared/gm,
     glob: {
       ignore: ['**/node_modules/**']

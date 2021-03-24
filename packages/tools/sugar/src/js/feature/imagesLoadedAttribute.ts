@@ -12,7 +12,7 @@ import __deepMerge from '../../shared/object/deepMerge';
  * Add on every images the attribute "loaded" when it has been fully loaded. This is useful
  * for styling purposes and for others thinks as well.
  *
- * @param     {Object}        [settings={}]       An object of settings to configure your feature
+ * @param     {Object}        [settings={}]       An object of settings to configure your feature
  *
  * @todo            interface
  * @todo            doc

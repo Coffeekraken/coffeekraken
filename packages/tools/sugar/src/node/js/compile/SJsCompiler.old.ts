@@ -52,7 +52,7 @@ export type ISJsCompiler = ISCompiler;
  * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
  *
  * @param         {Partial<ISJsCompilerParams>}      [initialParams={}]      Some parameters to use for your compilation process
- * @param           {ISJsCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
+ * @param           {ISJsCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
  *
  * @todo      interface
  * @todo      doc
@@ -214,8 +214,8 @@ class SJsCompiler extends __SCompiler {
    * This method is the main one that allows you to actually compile the
    * code you pass either inline, either a file path.
    *
-   * @param         {String}            source          The source you want to compile. Can be a file path or some inline codes
-   * @param         {Object}            [settings={}]       An object of settings to override the instance ones
+   * @param         {String}            source          The source you want to compile. Can be a file path or some inline codes
+   * @param         {Object}            [settings={}]       An object of settings to override the instance ones
    * @return        {SPromise}                          An SPromise instance that will be resolved (or rejected) when the compilation is finished
    *
    * @since             2.0.0

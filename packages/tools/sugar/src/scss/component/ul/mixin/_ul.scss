@@ -9,17 +9,20 @@
  * @param       {String}      [$size=default]                 The size you want to for your list
  * @param       {String}      [$bullet='setting.bullet']         The bullet you want to use
  * @param       {Number}      [$line-height='setting.look-and-feel.line-height']      Specify the line height you want to use
- * @param       {String}      [$scope=null]         The scope you want to generate. "bare" or "style"
+ * @param       {String}      [$scope=null]         The scope you want to generate. "bare" or "style"
  *
  * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-@mixin ul($color: default, $size: default, $bullet: null, $line-height: null, $scope: null) {
-
+@mixin ul(
+  $color: default,
+  $size: default,
+  $bullet: null,
+  $line-height: null,
+  $scope: null
+) {
   @include context('components.ul') {
-
     @if scope('bare', $scope) {
-
       @if not $line-height {
         $line-height: setting('look-and-feel.line-height');
       }
@@ -29,13 +32,12 @@
     }
 
     @if scope('style', $scope) {
-
       @if not $bullet {
         $bullet: setting('bullet');
       }
 
       list-style: none;
-      
+
       & > li {
         padding-left: 2.5em;
         position: relative;

@@ -22,7 +22,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      *
      * Easily create and send an http request. This will return an instance of the SAjax class.
      *
-     * @param           {Object}              [settings={}]             The request settings. This support these settings and all the axio ones:
+     * @param           {Object}              [settings={}]             The request settings. This support these settings and all the axio ones:
      * - url (null) {String}: The url on which to make the request
      * - baseURL (null) {String}: The base url on which to make the request.
      * - method (get) {String}: The method with the one to make the request. Can be GET,DELETE,HEAD,OPTIONS,POST,PUT,PATCH

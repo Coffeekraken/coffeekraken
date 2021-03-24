@@ -91,7 +91,7 @@ export default class SFsDeamonProcess extends __SProcess {
    *
    * @param         {String|Array<String>}          input           The input glob pattern(s) to specify what to watch
    * @param         {Object}                      [settings={}]     A settings object to override the one passed in the constructor if wanted
-   * @return        {SPromise}                                      An SPromise instance to subscribe to some events described above
+   * @return        {SPromise}                                      An SPromise instance to subscribe to some events described above
    *
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

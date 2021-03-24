@@ -11,7 +11,7 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  *
  * @param    {HTMLElement}    $elm    The element to take care of
  * @param    {String|Array}    cls    The class or classes (Array) to apply
- * @return    {Promise}               A promise that will be resolved once the class have been removed and the animation finished
+ * @return    {Promise}               A promise that will be resolved once the class have been removed and the animation finished
  *
  * @todo        interface
  * @todo        doc

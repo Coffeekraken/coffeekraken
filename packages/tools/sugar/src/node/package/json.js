@@ -14,7 +14,7 @@ const fs_1 = __importDefault(require("fs"));
  *
  * This function return you the package.json of the current working package into object format
  *
- * @param     {String}      [from=process.cwd()]      The path from where to search upward for the package.json file
+ * @param     {String}      [from=process.cwd()]      The path from where to search upward for the package.json file
  * @return    {Object}          The package.json into object format
  *
  * @todo      interface

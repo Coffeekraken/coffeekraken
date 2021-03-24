@@ -9,8 +9,10 @@ import __SFile, { ISFile } from '../fs/SFile';
 import __SInterface from '../interface/SInterface';
 import __SScssFile from '../scss/SScssFile';
 import __STsFile from '../typescript/STsFile';
-import __SSvelteCompilerParamsInterface from './compile/interface/SSvelteCompilerParamsInterface';
-import { ISSvelteCompilerParams } from './compile/SSvelteCompiler';
+import {
+  interface as __SSvelteCompilerParamsInterface,
+  ISSvelteCompilerParams
+} from '@coffeekraken/s-svelte-compiler';
 
 // @ts-ignore
 const __svelte = require('svelte/compiler'); // eslint-disable-line
@@ -78,7 +80,7 @@ interface ISSvelteFile extends ISFile {
  *
  * This represent a svelte file
  *
- * @param       {String}            path            The path to the scss file
+ * @param       {String}            path            The path to the scss file
  * @param       {ISSvelteFileSettings}     [settings={}]       Some settings to configure your file
  *
  * @example         js
@@ -165,7 +167,7 @@ class SSvelteFile extends __SFile implements ISSvelteFile {
    * @setting       {Boolean}              [cache=true]             Specify if you want to make use of the cache or not
    * @setting       {Boolean}           [clearCache=false]          Specify if you want to clear the cache before compilation
    * @setting       {String}            [sharedResources=null]      Specify some scss code that you want to be present in every compiled files
-   * @setting       {Object}            [sass={}]               Specify some settings that will be passed to the ```sass``` compiler
+   * @setting       {Object}            [sass={}]               Specify some settings that will be passed to the ```sass``` compiler
    *
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

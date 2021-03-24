@@ -13,8 +13,8 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  *
  * This function take a string and trim each lines
  *
- * @param       {String}        string        The string to trim lines of
- * @param       {Object}        [settings={}]     An object settings. Here's the object properties:
+ * @param       {String}        string        The string to trim lines of
+ * @param       {Object}        [settings={}]     An object settings. Here's the object properties:
  * - leftPadding (0) {Number}: Specify a left padding to set. 1 padding represent 1 space character
  * - rightPadding (0) {Number}: Specify a right padding to set.
  * - keepEmptyLines (true) {Boolean}: Specify if you want to keep empty lines or not

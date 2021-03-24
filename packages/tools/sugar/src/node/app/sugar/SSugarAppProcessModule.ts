@@ -18,7 +18,7 @@ import __SSugarAppModule from './SSugarAppModule';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 class SSugarAppProcessModule extends __SSugarAppModule {
-  // static interfaces = { this: __SFrontendServerInterface };
+  // static interfaces = { this: __SFrontendServerInterface };
 
   /**
    * @name            constructor

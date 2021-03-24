@@ -17,7 +17,7 @@ import __findPkgJson from 'find-package-json';
  *
  * @param           {String}              [from=process.cwd()]    Specify from where the research has to be done
  * @param           {Boolean}             [highest=false]         Specify if you want the highest package root or the first finded
- * @return          {String}                                      The finded package path or false if not finded
+ * @return          {String}                                      The finded package path or false if not finded
  *
  * @example         js
  * import packageRoot from '@coffeekraken/sugar/node/path/packageRoot';

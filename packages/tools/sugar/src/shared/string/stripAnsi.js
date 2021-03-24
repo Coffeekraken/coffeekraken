@@ -11,8 +11,8 @@ const strip_ansi_1 = __importDefault(require("strip-ansi"));
  *
  * This function simply strip all the ansi characters in a string
  *
- * @param       {String}        string          The string to strip ansi from
- * @return      {String}                        The new string without any ansi characters
+ * @param       {String}        string          The string to strip ansi from
+ * @return      {String}                        The new string without any ansi characters
  *
  * @example     js
  * import stripAnsi from '@coffeekraken/sugar/js/string/stripAnsi';

@@ -14,7 +14,7 @@ import __isEqual from 'is-equal';
  *
  * @param         {Object}          object1            The first object used for the diff process
  * @param         {Object}          object2            The second object used for the diff process
- * @param         {Object}          [settings={}]      An object of settings to configure the diff process:
+ * @param         {Object}          [settings={}]      An object of settings to configure the diff process:
  * - deep (true) {Boolean}: Specify if you want a deep diff or a simple one level diff
  * - added (true) {Boolean}: Specify if you want to include the props that does not exist on the object1 but exists on the object2
  * - deleted (false) {Boolean}: Specify if you want to include the props that exists on the object1 but no more on the object2

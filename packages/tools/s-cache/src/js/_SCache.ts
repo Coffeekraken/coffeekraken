@@ -99,7 +99,7 @@ class SCache extends __SClass implements ISCache {
    * This static method allows you to register a new adapter
    * that you can use later
    *
-   * @param       {ISCacheAdapter}      adapter       The adapter class
+   * @param       {ISCacheAdapter}      adapter       The adapter class
    *
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -114,8 +114,8 @@ class SCache extends __SClass implements ISCache {
    *
    * Construct the SCache instance with the settings passed in object format. See description bellow.
    *
-   * @param         {String}        id                  An id for your cache instance. Can have only these characters: [a-zA-Z0-9_-]
-   * @param         {Object}          [settings={}]         The settings for the SCache instance
+   * @param         {String}        id                  An id for your cache instance. Can have only these characters: [a-zA-Z0-9_-]
+   * @param         {Object}          [settings={}]         The settings for the SCache instance
    * - ttl (-1) {Number|String}: Time to live for each cache items in seconds or in String like '10s', '20h', '300ms', etc...
    * - deleteOnExpire (true) {Boolean}: Specify if you want that the items are deleted on expire
    * - adapter (fs) {String|SCacheAdapter}: Specify the adapter to use as default one. Can be a simple string like "fs" (filesystem) or an instance of an SCacheAdapter class. Here's the available ones:
@@ -259,8 +259,8 @@ class SCache extends __SClass implements ISCache {
    * Set a value to the cache system using the specified adapter with some settings like described bellow
    *
    * @param               {String|Array|Object}              name              The name of the item to get back from the cache. If not a string, will be hased using md5 encryption
-   * @param               {Mixed}               value             The value to set.
-   * @param               {Partial<ISCacheSetSettings>}              [settings={}]
+   * @param               {Mixed}               value             The value to set.
+   * @param               {Partial<ISCacheSetSettings>}              [settings={}]
    * The settings for this particular item:
    * - ttl (-1) {Number}: Time to live in seconds
    * - deleteOnExpire (true) {Boolean}: Specify if this item has to be deleted on expire on not
@@ -344,7 +344,7 @@ class SCache extends __SClass implements ISCache {
    *
    * Check if the passed cache item id exists
    *
-   * @param                 {String}               name               The name of the item to check
+   * @param                 {String}               name               The name of the item to check
    * @return                {Boolean}                             true if exists, false if not
    *
    * @example           js
@@ -366,7 +366,7 @@ class SCache extends __SClass implements ISCache {
    *
    * Delete an item in the cache by his name
    *
-   * @param                 {String}               name               The name of the item to delete
+   * @param                 {String}               name               The name of the item to delete
    * @return                {Promise}                                  A promise that will return true if correctly deleted, false if not
    *
    * @example           js
@@ -410,7 +410,7 @@ class SCache extends __SClass implements ISCache {
    * You can hook how this method will act by specify the "settings.parse" property to a different function
    *
    * @param               {String}                      rawValue                    The raw value to transform into an object
-   * @return              {Object}                                                  The object format of the value getted back from the cache system
+   * @return              {Object}                                                  The object format of the value getted back from the cache system
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -427,7 +427,7 @@ class SCache extends __SClass implements ISCache {
    * You can hook how this method will act by specify the "settings.stringify" property to a different function
    *
    * @param               {Object}                      object                       The object to save to the cache system that have to transformed in string before...
-   * @return              {String}                                                  The string format of the item to save to cache
+   * @return              {String}                                                  The string format of the item to save to cache
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */

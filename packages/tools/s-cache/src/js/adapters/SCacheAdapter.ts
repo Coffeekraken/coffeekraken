@@ -4,7 +4,6 @@ import __SClass from '@coffeekraken/sugar/src/shared/class/SClass';
 import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
 import { ISCacheSetSettings } from '../SCache';
 
-
 /**
  * @name                                SCacheAdapter
  * @namespace           sugar.js.cache.cacheAdapters
@@ -20,7 +19,7 @@ import { ISCacheSetSettings } from '../SCache';
  *
  * @example             js
  * class SCacheCoolAdapter extends SCacheAdapter {
- *    constructor(settings = {}) {
+ *    constructor(settings = {}) {
  *      super(settings);
  *      // settings are accessible through this._settings
  *    }
@@ -71,7 +70,7 @@ export default abstract class SCacheAdapter extends __SClass {
    *
    * Construct the SCacheAdapter instance with the settings passed in object format. See description bellow.
    *
-   * @param         {Object}          [settings={}]             An object to configure the SCacheAdapter instance. This is specific to each adapters.settings.settings...
+   * @param         {Object}          [settings={}]             An object to configure the SCacheAdapter instance. This is specific to each adapters.settings.settings...
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -98,7 +97,7 @@ export default abstract class SCacheAdapter extends __SClass {
    *
    * Get a cache item
    *
-   * @param     {String}      name      The item name
+   * @param     {String}      name      The item name
    * @return    {Promise}               A promise resolved when the item has been correctly getted
    *
    * @since     2.0.0
@@ -114,7 +113,7 @@ export default abstract class SCacheAdapter extends __SClass {
    *
    * Set a cache item
    *
-   * @param     {String}      name      The item name
+   * @param     {String}      name      The item name
    * @param     {Any}       value       The value to save
    * @param     {ISCacheSetSettings}    [settings={}]       Some settings associated with the saved item
    * @return    {Promise}               A promise resolved when the item has been correctly saved
@@ -136,7 +135,7 @@ export default abstract class SCacheAdapter extends __SClass {
    *
    * Delete a cache item
    *
-   * @param     {String}      name      The item name
+   * @param     {String}      name      The item name
    * @return    {Promise}               A promise resolved when the item has been correctly deleted
    *
    * @since     2.0.0

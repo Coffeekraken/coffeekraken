@@ -83,7 +83,7 @@ exports.SJsFileCtorSettingsInterface = SJsFileCtorSettingsInterface;
  *
  * This represent a javascript file
  *
- * @param       {String}            path            The path to the scss file
+ * @param       {String}            path            The path to the scss file
  * @param       {ISJsFileSettings}     [settings={}]       Some settings to configure your file
  *
  * @example         js
@@ -128,7 +128,7 @@ class SJsFile extends SFile_1.default {
          * @setting       {Boolean}              [cache=true]             Specify if you want to make use of the cache or not
          * @setting       {Boolean}           [clearCache=false]          Specify if you want to clear the cache before compilation
          * @setting       {String}            [sharedResources=null]      Specify some scss code that you want to be present in every compiled files
-         * @setting       {Object}            [sass={}]               Specify some settings that will be passed to the ```sass``` compiler
+         * @setting       {Object}            [sass={}]               Specify some settings that will be passed to the ```sass``` compiler
          *
          * @since         2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

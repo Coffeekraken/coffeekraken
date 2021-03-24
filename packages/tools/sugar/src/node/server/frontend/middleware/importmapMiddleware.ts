@@ -15,8 +15,8 @@ import __deepMap from '../../../../shared/object/deepMap';
  * This function describe the middleware that will fetch the ```importmap.json``` file at the root of
  * your server directory or at the root of your dist directory and add it to the template data sended to the rendered view
  *
- * @param           {Object}            req             The request made on the express server
- * @param           {Object}            res             The response object of the express server
+ * @param           {Object}            req             The request made on the express server
+ * @param           {Object}            res             The response object of the express server
  * @param           {Function}          next            The next function to call when the middleware has finished his job
  *
  * @todo      interface

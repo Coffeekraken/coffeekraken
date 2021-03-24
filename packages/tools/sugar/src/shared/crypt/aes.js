@@ -38,7 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * Encrypt
          *
-         * @param       {String}       message        The message to encrypt
+         * @param       {String}       message        The message to encrypt
          * @param       {String}       [key='coffeekraken.sugar.crypt.aes']       The secret key to encrypt
          * @return      {String}                       The encrypted message
          *

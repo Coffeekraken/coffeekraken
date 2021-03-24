@@ -15,7 +15,7 @@ const uniqid_1 = __importDefault(require("../../shared/string/uniqid"));
  * You can access these registered processes using the "getRegisteredProcesses" function.
  *
  * @param       {Process}         pro         The process you want to register
- * @param       {String}      [name=null]       A specific name for your process. By default a uniqid will be generated
+ * @param       {String}      [name=null]       A specific name for your process. By default a uniqid will be generated
  *
  * @todo      interface
  * @todo      doc

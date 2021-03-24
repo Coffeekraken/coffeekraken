@@ -30,7 +30,7 @@ Sugar provide a nice stack for webcomponent development. This stack is basically
 Here's how to use the `SWebComponent` class :
 
 ```js
-import SWebComponent from "@coffeekraken/sugar/js/core/SWebComponent";
+import SWebComponent from '@coffeekraken/sugar/js/core/SWebComponent';
 class MyCoolComponent extends SWebComponent {
   /**
    * Default state
@@ -110,7 +110,7 @@ class MyCoolComponent extends SWebComponent {
 }
 
 // define your component
-MyCoolComponent.define("my-cool-component", MyCoolComponent);
+MyCoolComponent.define('my-cool-component', MyCoolComponent);
 ```
 
 <a name="lifecycle"></a>
@@ -135,7 +135,7 @@ Each component will have his own lifecycle. Here it is:
 
 Each component expose his "state" through the `this.props` object. These props are reachable and settable through several methods:
 
-#### Set a prop :
+#### Set a prop :
 
 1. **`<my-component {propName}="{propValue}"></my-component>`**
 2. **`this.setProp(prop, value)`**
@@ -155,7 +155,7 @@ Each component expose his "state" through the `this.props` object. These props a
 
 Each component expose his internal state through the `this.state` object. These props are reachable and settable through several methods:
 
-#### Set the state :
+#### Set the state :
 
 1. **`this.setStateValue(prop, value)`**
 2. **`this.setState(stateObj)`**
@@ -194,10 +194,10 @@ class MyCoolComponent extends SWebComponent {
   static get mountDependencies() {
     // return an array of promised that represent your dependencies...
     return [
-      function() {
+      function () {
         // here, the "this" will refer to the component instance
         // !!! do not use the arrow => function notation, otherwise the "this" will not be correctly bound...
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
           // your dependency logid here...
           setTimeout(resolve, 2000);
         });
@@ -239,11 +239,11 @@ class MyCoolComponent extends SWebComponent {
 The custom elements specification allows to extend native DOM elements. You can has well do that through the `SWebComponent` class. Here's how to process:
 
 ```js
-import native from "@coffeekraken/sugar/js/core/sNativeWebComponent";
+import native from '@coffeekraken/sugar/js/core/sNativeWebComponent';
 class MyCoolInputComponent extends native(HTMLInputElement) {
   // component implementation...
 }
-MyCoolInputComponent.define("my-cool-input", MyCoolInputComponent, "input");
+MyCoolInputComponent.define('my-cool-input', MyCoolInputComponent, 'input');
 ```
 
 You can see two things here:

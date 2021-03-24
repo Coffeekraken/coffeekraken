@@ -3,7 +3,7 @@
 import __STemplateEngineInterface from './interface/STemplateEngineInterface';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __sugarConfig from '../../../shared/config/sugar';
-import __SClass from '../../../shared/class/SClass';
+import __SClass from '../@coffeekraken/s-class';
 
 import { ISPromise } from '@coffeekraken/s-promise';
 

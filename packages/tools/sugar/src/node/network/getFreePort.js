@@ -25,7 +25,7 @@ const isPortFree_1 = __importDefault(require("./isPortFree"));
  * You can pass a port to check as parameter and if it is free, you will get it back as result
  *
  * @param           {Number}        [port=null]         A port to challenge before starting generating random ones
- * @return          {Promise}                           A promise that will be resolved once a free port has been found
+ * @return          {Promise}                           A promise that will be resolved once a free port has been found
  *
  * @todo      interface
  * @todo      doc

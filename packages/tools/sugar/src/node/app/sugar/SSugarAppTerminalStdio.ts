@@ -25,7 +25,7 @@ import __SStdio from '../../stdio/SStdio';
  * This class represent the Sugar UI interface in the terminal.
  *
  * @param           {SPromise}          source        The source from where to get data
- * @param           {Object}          [params={}]        An object of initial params
+ * @param           {Object}          [params={}]        An object of initial params
  *
  * @todo      interface
  * @todo      doc
@@ -583,7 +583,7 @@ export default class SSugarAppTerminalStdio extends __SStdio {
    *
    * This method init the sumarry stream
    *
-   * @param         {Object}        params       An object of initial params used to launch the sugar ui
+   * @param         {Object}        params       An object of initial params used to launch the sugar ui
    *
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -631,7 +631,7 @@ export default class SSugarAppTerminalStdio extends __SStdio {
    *
    * This method init the welcome screen
    *
-   * @param         {Object}        params       An object of initial params used to launch the sugar ui
+   * @param         {Object}        params       An object of initial params used to launch the sugar ui
    *
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

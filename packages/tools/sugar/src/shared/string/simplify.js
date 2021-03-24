@@ -24,7 +24,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * version like "éàddö" to "eaddo"
      *
      * @param       {String}        string        The string to simplyfy
-     * @param       {Object}        [settings={}]       An object of settings to simplify your string as you want:
+     * @param       {Object}        [settings={}]       An object of settings to simplify your string as you want:
      * - specialChars (true) {Boolean}: Specify if you want to get rid of the special chars like é, è, etc...
      * - lowerCase (true) {Boolean}: Specify if you want your returned string to be lowercased
      * - dashSpace (true) {Boolean}: Specify if you want to replace the "_|-" by a space

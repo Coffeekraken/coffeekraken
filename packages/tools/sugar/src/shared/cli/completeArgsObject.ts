@@ -14,7 +14,7 @@ import __SDescriptor from '../descriptor/SDescriptor';
  * This function take an arguments object and complete it with the definition object default values
  * for missing args
  *
- * @param             {Object}            argsObj         The arguments object to complete
+ * @param             {Object}            argsObj         The arguments object to complete
  * @param             {Object}            [settings={}]       An object of settings to configure your process:
  * - definition ({}) {Object}: Specify a definition to use
  * - throw (true) {Boolean}: Specify if you want to throw an error when the validation process fails

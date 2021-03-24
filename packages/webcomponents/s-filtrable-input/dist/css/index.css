@@ -3,8 +3,8 @@
    v2.0-modified | 20110126
    License: none (public domain)
 */
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 /**
  * @name        __settings
  * @type        {String}
@@ -112,7 +112,7 @@
  * Setup sugar toolkit by overriding the default [settings](../_settings.scss)
  * This has to be called **BEFORE** the [s-init mixin](./_s-init.scss)
  *
- * @param 			{Map} 			$newSettings 		The settings to override the default one with
+ * @param 			{Map} 			$newSettings 		The settings to override the default one with
  *
  * @example       scss
  * \@include Sugar.setup((
@@ -810,7 +810,7 @@
  *
  * @param       {Map}       $map          The map to flatten
  * @param       {String}    [$separator="-"]      The separator to use in final map keys
- * @return      {Map}                 The flattened map
+ * @return      {Map}                 The flattened map
  *
  * @example       scss
  * $map: (
@@ -1075,7 +1075,7 @@
  *
  * Convert the passed unitless angle to degree
  *
- * @param         {Number}        $angle      The angle to convert to degree
+ * @param         {Number}        $angle      The angle to convert to degree
  * @return        {Number}                    The degree version of the angle
  *
  * @example     scss
@@ -1123,7 +1123,7 @@
  *
  * Convert the passed unitless angle to gradian
  *
- * @param         {Number}        $angle      The angle to convert to gradian
+ * @param         {Number}        $angle      The angle to convert to gradian
  * @return        {Number}                    The gradian version of the angle
  *
  * @example     scss
@@ -1188,7 +1188,7 @@
  *
  * Convert the passed unitless angle to radian
  *
- * @param         {Number}        $angle      The angle to convert to radian
+ * @param         {Number}        $angle      The angle to convert to radian
  * @return        {Number}                    The radian version of the angle
  *
  * @example     scss
@@ -1207,7 +1207,7 @@
  * @param       {Number}      [$limit:null]     The limit to generate a number under that
  * @return      {Number}                        The generated number
  *
- * @example     scss
+ * @example     scss
  * Sugar.math-random(); // => 0.2821251858
  *
  * @since       1.0.0
@@ -1312,7 +1312,7 @@
  *
  * Return the square root of the passed number
  *
- * @param         {Number}        $number       The number to process
+ * @param         {Number}        $number       The number to process
  * @return        {Number}                      The square root of the passed number
  *
  * @example   scss
@@ -1347,7 +1347,7 @@
  *
  * Convert the passed unitless angle to turn
  *
- * @param         {Number}        $angle      The angle to convert to turn
+ * @param         {Number}        $angle      The angle to convert to turn
  * @return        {Number}                    The turn version of the angle
  *
  * @example     scss
@@ -1525,7 +1525,7 @@
  * Returns the slice of $string starting at index $start-at and ending at index $end-at (both inclusive).
  *
  * @param         {String}        $string         The string to slice
- * @param         {Number}        $start-at       Where to start slice the string
+ * @param         {Number}        $start-at       Where to start slice the string
  * @param         {Number}        [$end-at=-1]    Where to end to slice the string
  *
  * @param       scss
@@ -1670,7 +1670,7 @@
  *
  * This mixin simply print out the variables that you have defined in your project
  *
- * @param       {String}        [scope=":root"]       The scope of the variables you want to set
+ * @param       {String}        [scope=":root"]       The scope of the variables you want to set
  *
  * @example       scss
  * @include var-output():
@@ -1953,7 +1953,7 @@
    *
    * This mixin generate all the bare classes depending on the parameters you set.
    *
-   * @param       {String}      [$name='card']                         The name to use for the generation of the classes
+   * @param       {String}      [$name='card']                         The name to use for the generation of the classes
    *
    * @since       2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1966,7 +1966,7 @@
    * This mixin generate all the style classes depending on the parameters you set.
    *
    * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
-   * @param       {String}      [$name='card']                         The name to use for the generation of the classes
+   * @param       {String}      [$name='card']                         The name to use for the generation of the classes
    *
    * @since       2.0.0
    * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -2043,7 +2043,7 @@
   *
   * @param       {List}      [$colors:map-keys(setting('colors'))]       The colors you want to generate
   * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
-  * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
+  * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
   * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
   * @param       {String}        [$name='btn']       The className to use for the generation
   *
@@ -2066,7 +2066,7 @@
  *
  * @param       {String}      [$color:primary]       The color you want to generate
  * @param       {String}      [$size:default]       The size you want to generate
- * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
+ * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
  * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
  * @param       {String}        [$scope:null]       The scope you want to generate. Can be "bare" or "style"
  *
@@ -2093,15 +2093,24 @@
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 @font-face {
-  font-family: "Font Awesome 5 Brands";
+  font-family: 'Font Awesome 5 Brands';
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.eot");
-  src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.woff2") format("woff2"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.woff") format("woff"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.ttf") format("truetype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.svg#fontawesome") format("svg");
+  src: url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.eot');
+  src: url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.woff2')
+      format('woff2'),
+    url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.woff')
+      format('woff'),
+    url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.ttf')
+      format('truetype'),
+    url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-brands-400.svg#fontawesome')
+      format('svg');
 }
 .fab {
-  font-family: "Font Awesome 5 Brands";
+  font-family: 'Font Awesome 5 Brands';
   font-weight: 400;
 }
 
@@ -2110,15 +2119,24 @@
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 @font-face {
-  font-family: "Font Awesome 5 Free";
+  font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 400;
   font-display: block;
-  src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.eot");
-  src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.woff2") format("woff2"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.woff") format("woff"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.ttf") format("truetype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.svg#fontawesome") format("svg");
+  src: url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.eot');
+  src: url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.woff2')
+      format('woff2'),
+    url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.woff')
+      format('woff'),
+    url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.ttf')
+      format('truetype'),
+    url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-regular-400.svg#fontawesome')
+      format('svg');
 }
 .far {
-  font-family: "Font Awesome 5 Free";
+  font-family: 'Font Awesome 5 Free';
   font-weight: 400;
 }
 
@@ -2127,16 +2145,25 @@
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
  */
 @font-face {
-  font-family: "Font Awesome 5 Free";
+  font-family: 'Font Awesome 5 Free';
   font-style: normal;
   font-weight: 900;
   font-display: block;
-  src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.eot");
-  src: url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.woff2") format("woff2"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.woff") format("woff"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.ttf") format("truetype"), url("https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.svg#fontawesome") format("svg");
+  src: url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.eot');
+  src: url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.woff2')
+      format('woff2'),
+    url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.woff')
+      format('woff'),
+    url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.ttf')
+      format('truetype'),
+    url('https://use.fontawesome.com/releases/v5.13.1/webfonts/fa-solid-900.svg#fontawesome')
+      format('svg');
 }
 .fa,
 .fas {
-  font-family: "Font Awesome 5 Free";
+  font-family: 'Font Awesome 5 Free';
   font-weight: 900;
 }
 
@@ -2202,7 +2229,7 @@
   * @param       {List}      [$sizes:map-keys(setting('sizes'))]       The sizes you want to generate
   * @param       {String}    [separator='settings.components.ol.separator']    The separator you want to use
   * @param       {Number}    [$line-height='settings.components.ol.look-and-feel.line-height | settings.look-and-feel.line-height']      The line-height you want to use
-  * @param       {String}    [$scope=null]         The scope you want to generate. Can be "bare" or "style"
+  * @param       {String}    [$scope=null]         The scope you want to generate. Can be "bare" or "style"
   *
   * @example         html
   * <ol class="sel(ol)">
@@ -2232,7 +2259,7 @@
  * @param       {String}    [$size=default]                 The size you want to generate
  * @param       {String}    [separator='settings.components.ol.separator']    The separator you want to use
  * @param       {Number}    [$line-height='settings.components.ol.look-and-feel.line-height | settings.look-and-feel.line-height']      The line-height you want to use
- * @param       {String}    [$scope=null]         The scope you want to generate. Can be "bare" or "style"
+ * @param       {String}    [$scope=null]         The scope you want to generate. Can be "bare" or "style"
  *
  * @since           2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -2266,10 +2293,10 @@
  *
  * This mixin generate all the properties for a paragraph depending on the parameters you set.
  *
- * @param         {Number}        [$name=default]          The paragraph "type" you want to generate. These can be found in the 'settings.components.paragraph' settings
- * @param         {Number}        [$font-size='settings.components.title.hlevel.font-size']      Specify the font size for the title
- * @param         {String}        [$font-family='settings.components.title.hlevel.font-family']      Specify the font family for the title
- * @param         {Number}        [$vr-margin-bottom='settings.components.title.hlevel.vr-margin-bottom']      Specify the margin bottom in vertical rhythm context
+ * @param         {Number}        [$name=default]          The paragraph "type" you want to generate. These can be found in the 'settings.components.paragraph' settings
+ * @param         {Number}        [$font-size='settings.components.title.hlevel.font-size']      Specify the font size for the title
+ * @param         {String}        [$font-family='settings.components.title.hlevel.font-family']      Specify the font family for the title
+ * @param         {Number}        [$vr-margin-bottom='settings.components.title.hlevel.vr-margin-bottom']      Specify the margin bottom in vertical rhythm context
  * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"            
  *
  * @since       2.0.0
@@ -2303,10 +2330,10 @@
  *
  * This mixin generate all the properties for a title depending on the parameters you set.
  *
- * @param         {Number}        $level          The title level you want to generate. 1, 2, 3, 4, 5, 6
- * @param         {Number}        [$font-size='settings.components.title.hlevel.font-size']      Specify the font size for the title
- * @param         {String}        [$font-family='settings.components.title.hlevel.font-family']      Specify the font family for the title
- * @param         {Number}        [$vr-margin-bottom='settings.components.title.hlevel.vr-margin-bottom']      Specify the margin bottom in vertical rhythm context
+ * @param         {Number}        $level          The title level you want to generate. 1, 2, 3, 4, 5, 6
+ * @param         {Number}        [$font-size='settings.components.title.hlevel.font-size']      Specify the font size for the title
+ * @param         {String}        [$font-family='settings.components.title.hlevel.font-family']      Specify the font family for the title
+ * @param         {Number}        [$vr-margin-bottom='settings.components.title.hlevel.vr-margin-bottom']      Specify the margin bottom in vertical rhythm context
  * @param         {List<String>}    [$scope=null]       The scope you want to generate. Usually "all", "bare" or "style"            
  *
  * @since       2.0.0
@@ -2354,7 +2381,7 @@
  * @param       {String}      [$size=default]                 The size you want to for your list
  * @param       {String}      [$bullet='setting.bullet']         The bullet you want to use
  * @param       {Number}      [$line-height='setting.look-and-feel.line-height']      Specify the line height you want to use
- * @param       {String}      [$scope=null]         The scope you want to generate. "bare" or "style"
+ * @param       {String}      [$scope=null]         The scope you want to generate. "bare" or "style"
  *
  * @since           2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -2763,7 +2790,7 @@
  * - pt
  * - rem
  * - em
- * - percent | %
+ * - percent | %
  * - vw
  * - vh
  * - ex
@@ -2772,16 +2799,16 @@
  * - mm
  * - in
  * - pc
- * - s | second
- * - boolean | bool
+ * - s | second
+ * - boolean | bool
  * - function
  * - number
- * - int | integer
+ * - int | integer
  * - string
  * - color
  * - list
  * - map
- * - deg | degree
+ * - deg | degree
  * - list-{type} => check if is a list of the specified type
  * - map-{type} => check if is a map of the specified type
  *
@@ -4158,7 +4185,7 @@
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 /**
- * @name      margin-map
+ * @name      margin-map
  * @namespace           sugar.scss.util.function
  * @type      function
  *
@@ -4226,7 +4253,7 @@
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 .hello {
-  content: "world";
+  content: 'world';
 }
 
 html,
@@ -4356,7 +4383,7 @@ blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
+  content: '';
   content: none;
 }
 
@@ -4365,15 +4392,15 @@ table {
   border-spacing: 0;
 }
 
-input[type=search]::-webkit-search-cancel-button,
-input[type=search]::-webkit-search-decoration,
-input[type=search]::-webkit-search-results-button,
-input[type=search]::-webkit-search-results-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
-input[type=search] {
+input[type='search'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   -webkit-box-sizing: content-box;
@@ -4545,9 +4572,9 @@ select {
 *    Known issue: inner spacing remains in IE 6.
 */
 button,
-html input[type=button],
-input[type=reset],
-input[type=submit] {
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
   -webkit-appearance: button;
   /* 2 */
   cursor: pointer;
@@ -4570,8 +4597,8 @@ html input[disabled] {
 * 3. Remove excess padding in IE 7.
 *    Known issue: excess padding remains in IE 6.
 */
-input[type=checkbox],
-input[type=radio] {
+input[type='checkbox'],
+input[type='radio'] {
   box-sizing: border-box;
   /* 1 */
   padding: 0;
@@ -4587,7 +4614,7 @@ input[type=radio] {
 * 2. Address `box-sizing` set to `border-box` in Safari 5 and Chrome
 *    (include `-moz` to future-proof).
 */
-input[type=search] {
+input[type='search'] {
   -webkit-appearance: textfield;
   /* 1 */
   -moz-box-sizing: content-box;
@@ -4600,8 +4627,8 @@ input[type=search] {
 * Remove inner padding and search cancel button in Safari 5 and Chrome
 * on OS X.
 */
-input[type=search]::-webkit-search-cancel-button,
-input[type=search]::-webkit-search-decoration {
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -4716,7 +4743,7 @@ html {
 }
 
 html {
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-size: 1rem;
 }
 
@@ -4724,7 +4751,9 @@ html {
   background: white;
   border-radius: 0.2em;
   border: 2px solid white;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08),0 2px 4px rgba(0, 0, 0, 0.08),0 4px 8px rgba(0, 0, 0, 0.08),0 8px 16px rgba(0, 0, 0, 0.08),0 16px 32px rgba(0, 0, 0, 0.08),0 32px 64px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.08),
+    0 4px 8px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.08),
+    0 16px 32px rgba(0, 0, 0, 0.08), 0 32px 64px rgba(0, 0, 0, 0.08);
   /* The emerging W3C standard
    that is currently Firefox-only */
   /* Works on Chrome/Edge/Safari */

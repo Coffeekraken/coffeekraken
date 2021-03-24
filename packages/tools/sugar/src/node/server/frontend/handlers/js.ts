@@ -12,9 +12,9 @@ import __SPromise from '@coffeekraken/s-promise';
  *
  * This function is responsible of responding to express requests made on the home page
  *
- * @param         {Object}          req             The express request object
- * @param         {Object}          res             The express response object
- * @param         {Object}         [settings={}]    The handler settings
+ * @param         {Object}          req             The express request object
+ * @param         {Object}          res             The express response object
+ * @param         {Object}         [settings={}]    The handler settings
  *
  * @todo      interface
  * @todo      doc
@@ -27,7 +27,8 @@ export default function js(req, res, settings = {}) {
   const promise = new __SPromise();
 
   (async () => {
-    let filePath = req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
+    const filePath =
+      req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
     const duration = new __SDuration();
 
     const compiler = new __SJsCompiler({});

@@ -287,7 +287,7 @@ class SColor {
    * Constructor
    *
    * @param   {object}    color     The color description like (#ff0000 | rgba(...) | hsl(...) | hsv(...) | {r:255,r:140,b:23,a:40})
-   * @param       {Object}        [settings={}]         The settings to configure the SColor instance. Here's the available settings:
+   * @param       {Object}        [settings={}]         The settings to configure the SColor instance. Here's the available settings:
    * - returnNewInstance (false) {Boolean}: Specify if you want by default a new instance back when calling methods like "saturate", "desaturate", etc...
    * - defaultFormat (hex) {String}: Specify the default format for this instance. This is used in the "toString" method for example...
    * @return    {object}            The color instance

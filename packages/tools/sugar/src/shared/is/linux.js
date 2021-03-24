@@ -19,7 +19,7 @@
      *
      * Check if the app run on linux
      *
-     * @return        {Boolean}                             true if linux, false if not
+     * @return        {Boolean}                             true if linux, false if not
      *
      * @todo      interface
      * @todo      doc

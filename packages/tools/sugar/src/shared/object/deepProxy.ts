@@ -25,7 +25,7 @@ import __deepMerge from '../object/deepMerge';
  * - delete: An object property deleted
  * - push: An item has been added inside an array
  * - {methodName}: Every array actions
- * @param         {Object}                [settings={}]         An object of settings to configure your proxy:
+ * @param         {Object}                [settings={}]         An object of settings to configure your proxy:
  * - deep (true) {Boolean}: Specify if you want to watch the passed object deeply or juste the first level
  * - handleSet (true) {Boolean}: Specify if you want to handle the "set" action
  * - handleGet (false) {Boolean}: Specify if you want to handle the "get" action

@@ -17,7 +17,7 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              src           The source path to copy
- * @param       {String}              dest          The destination path
+ * @param       {String}              dest          The destination path
  * @return      {Promise}                           A promise that will be resolved when the copy is completed
  *
  * @todo      interface

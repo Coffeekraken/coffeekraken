@@ -28,7 +28,7 @@ import __checkPathWithMultipleExtensions from '../fs/checkPathWithMultipleExtens
  * @todo        Subpath folder mappings         (https://nodejs.org/api/packages.html#packages_subpath_exports)
  * @todo        Subpath imports       (https://nodejs.org/api/packages.html#packages_subpath_exports)
  *
- * @param       {String}        module          The module to resolve
+ * @param       {String}        module          The module to resolve
  * @param       {IResolveSettings}      [settings={}]       Some settings to configure your resolve process
  * @return      {String}                                The path to the module to actually load
  *

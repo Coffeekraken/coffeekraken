@@ -9,7 +9,7 @@ namespace Sugar\url;
  * 
  * This function simply check if the passed string a an url or not
  * 
- * @param       {String}        $url            The url to check
+ * @param       {String}        $url            The url to check
  * @return      {Boolean}                       true if a valid url, false if not
  * 
  * @example         php

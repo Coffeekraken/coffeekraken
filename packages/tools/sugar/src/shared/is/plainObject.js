@@ -10,7 +10,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Check if the passed object (or array of objects) is/are plain object(s)
  *
  * @param         {Object|Array}            object                  The object(s) to check
- * @return        {Boolean}                                         true if is plain object(s), false if not
+ * @return        {Boolean}                                         true if is plain object(s), false if not
  *
  * @todo      interface
  * @todo      doc

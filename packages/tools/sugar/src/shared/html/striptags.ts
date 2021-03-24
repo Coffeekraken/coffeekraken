@@ -13,7 +13,7 @@ import __striptags from 'striptags';
  *
  * @param    {String}    html    The html string to process
  * @param    {String}    allowableTags    The tags that are allowed like <h1><h2>...
- * @param     {String}    tagReplacement    A string with which you want to replace the tags
+ * @param     {String}    tagReplacement    A string with which you want to replace the tags
  * @return    {String}    The processed string without tags
  *
  * @todo      interface

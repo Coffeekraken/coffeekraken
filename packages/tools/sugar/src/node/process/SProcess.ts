@@ -1,13 +1,11 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __path from 'path';
 import __stackTrace from 'stack-trace';
-import { ISClass as __ISClass } from '../../shared/class/SClass';
+import { ISClass as __ISClass } from '@coffeekraken/s-class';
 import __argsToObject from '../../shared/cli/argsToObject';
 import __buildCommandLine from '../../shared/cli/buildCommandLine';
 import __SError from '../../shared/error/SError';
-import __SEventEmitter, {
-  ISEventEmitter
-} from '../../shared/event/SEventEmitter';
+import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import { ILog } from '../../shared/log/log';
 import __deepMerge from '../../shared/object/deepMerge';
 import __toString from '../../shared/string/toString';
@@ -855,7 +853,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    *
    * This method allows you to log a message that will be catched by the parent manager class
    *
-   * @param       {String}        message           The message you want to log
+   * @param       {String}        message           The message you want to log
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -874,7 +872,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
    *
    * This method allows you to error a message that will be catched by the parent manager class
    *
-   * @param       {String}        message           The message you want to error
+   * @param       {String}        message           The message you want to error
    *
    * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */

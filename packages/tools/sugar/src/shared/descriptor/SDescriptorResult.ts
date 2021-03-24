@@ -39,6 +39,7 @@ import __isNode from '../is/node';
 export interface ISDescriptorResultObj {}
 
 export interface ISDescriptorResultRule {
+  __error: Error;
   __ruleObj: ISDescriptorRule;
   [key: string]: any;
 }
@@ -225,7 +226,9 @@ class SDescriptorResult implements ISDescriptorResult {
     Object.keys(this._issues).forEach((ruleId) => {
       const ruleResult = this._issues[ruleId];
       let message = '';
-      if (
+      if (ruleResult.__error && ruleResult.__error instanceof Error) {
+        message = ruleResult.__error.message;
+      } else if (
         ruleResult.__ruleObj.message !== undefined &&
         typeof ruleResult.__ruleObj.message === 'function'
       ) {

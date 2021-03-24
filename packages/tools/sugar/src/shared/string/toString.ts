@@ -9,10 +9,7 @@ import __isFunction from '../is/function';
 import __isJson from '../is/json';
 import __isObject from '../is/object';
 import __deepMerge from '../object/deepMerge';
-import __stringify from '../json/stringify';
 import __mapToObj from '../map/mapToObject';
-import __highlightJs from 'highlight.js';
-import __stringifyObject from 'stringify-object';
 import { highlight as __cliHighlight } from 'cli-highlight';
 import { decycle } from 'json-cyclic';
 

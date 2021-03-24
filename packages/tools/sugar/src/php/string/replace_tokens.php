@@ -12,7 +12,7 @@ namespace Sugar\string;
  * - %serverIp: Server ip address
  * - %clientIp: Client ip address
  * 
- * @param       {String}        $string         The string to process
+ * @param       {String}        $string         The string to process
  * @return      {String}                        The processed string
  * 
  * @example         php

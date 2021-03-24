@@ -66,7 +66,7 @@ export interface ISTsCompiler extends ISCompiler {
  * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
  *
  * @param         {Partial<ISTsCompilerParams>}      [initialParams={}]      Some parameters to use for your compilation process
- * @param           {ISTsCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
+ * @param           {ISTsCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
  *
  * @todo      support for compiling single file or glob targeted files
  * @todo      interface
@@ -139,8 +139,8 @@ class STsCompiler extends __SCompiler {
    * This method is the main one that allows you to actually compile the
    * code you pass either inline, either a file path.
    *
-   * @param         {String}            source          The source you want to compile. Can be a file path or some inline codes
-   * @param         {Object}            [settings={}]       An object of settings to override the instance ones
+   * @param         {String}            source          The source you want to compile. Can be a file path or some inline codes
+   * @param         {Object}            [settings={}]       An object of settings to override the instance ones
    * @return        {SPromise}                          An SPromise instance that will be resolved (or rejected) when the compilation is finished
    *
    * @since             2.0.0
@@ -532,7 +532,7 @@ class STsCompiler extends __SCompiler {
    *
    * Check if the passed string is the name of a defined stack or not
    *
-   * @param     {String}      stack       The stack to check
+   * @param     {String}      stack       The stack to check
    * @return    {Object}                 The stack object defined in the configuration
    *
    * @since     2.0.0

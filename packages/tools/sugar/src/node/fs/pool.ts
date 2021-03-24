@@ -22,7 +22,7 @@ import __replacePathTokens from '../path/replacePathTokens';
  *
  * @param       {String|Array<String>}          input           The input glob(s)
  * @param       {IPoolSettings}             [settings={}]       Some settings to configure your pool. Support all the chokidar settings
- * @return      {SPromise}                                      An SPromise instance through which you can subscribe to events and cancel the pool
+ * @return      {SPromise}                                      An SPromise instance through which you can subscribe to events and cancel the pool
  *
  * @example         js
  * import pool from '@coffeekraken/sugar/node/fs/pool';
@@ -61,6 +61,9 @@ function pool(input, settings?: Partial<IPoolSettings>) {
       );
 
       if (!Array.isArray(input)) input = [input];
+      input = input.map((i) => {
+        return i.path ?? i;
+      });
       input = __replacePathTokens(input);
 
       // expand glob

@@ -15,8 +15,8 @@ import __parseAuthorString from './parseAuthorString';
  * 1. Transform the string version of the "author" field into an object with the properties "name", "email" and "url"
  * 2. Transform the string version of the "contributors" field into an object with the properties "name", "email" and "url"
  *
- * @param       {Object}        json        The json to process
- * @return      {Object}                    The standardized json
+ * @param       {Object}        json        The json to process
+ * @return      {Object}                    The standardized json
  *
  * @todo      interface
  * @todo      doc

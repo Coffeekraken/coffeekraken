@@ -23,7 +23,7 @@ export default {
    *
    * Encrypt
    *
-   * @param       {Object}       object         The object to encrypt
+   * @param       {Object}       object         The object to encrypt
    * @param       {String}       [salt="coffeekraken.sugar.crypt.object"]   The salt to encode the object. Needed to decode correctly the object
    * @return      {String}                       The encrypted object
    *
@@ -40,7 +40,7 @@ export default {
    * Decrypt
    *
    * @param       {String}      encodedObject          The object to decrypt
-   * @param       {String}      [salt='coffeekraken.sugar.crypt.object']        The salt to decode the object
+   * @param       {String}      [salt='coffeekraken.sugar.crypt.object']        The salt to decode the object
    * @return      {Object}                      The decrypted object
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

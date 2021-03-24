@@ -18,10 +18,10 @@ const SType_1 = __importDefault(require("../type/SType"));
  *
  * Parse a string to find the provided arguments into the list and return a corresponding object.
  *
- * @param             {String}                    string                      The string to parse
+ * @param             {String}                    string                      The string to parse
  * @param             {Object}                    definition                   The arguments object description
  * @param             {Object}                    [settings={}]               A settings object that configure how the string will be parsed. Here's the settings options:
- * @return            {Object}                                                The object of funded arguments and their values
+ * @return            {Object}                                                The object of funded arguments and their values
  *
  * @todo      interface
  * @todo      doc

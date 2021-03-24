@@ -18,8 +18,8 @@ import __set from './set';
  *    }
  * }
  *
- * @param       {Object}        object        The object to convert
- * @return      {Object}                      The converted object
+ * @param       {Object}        object        The object to convert
+ * @return      {Object}                      The converted object
  *
  * @todo      interface
  * @todo      doc

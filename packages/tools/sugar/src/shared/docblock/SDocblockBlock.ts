@@ -1,7 +1,6 @@
-import __SClass from '../class/SClass';
+import __SClass from '@coffeekraken/s-class';
 import __deepMege from '../object/deepMerge';
 import __map from '../object/map';
-import __handlebars from 'handlebars';
 import __isNode from '../is/node';
 
 import __authorTag from './tags/author';

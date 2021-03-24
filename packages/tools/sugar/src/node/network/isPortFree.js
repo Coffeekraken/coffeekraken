@@ -23,7 +23,7 @@ const http_1 = __importDefault(require("http"));
  *
  * This function simply check if the passed port is free or not
  *
- * @param           {Number}            port            The port to check
+ * @param           {Number}            port            The port to check
  * @return          {Promise}                           A promise resolved with the result when the check has been done
  *
  * @todo      interface

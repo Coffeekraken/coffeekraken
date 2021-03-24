@@ -77,7 +77,7 @@ export type ISScssCompiler = ISCompiler;
  * @feature         2.0.0       Optimize the render time as much as 6x faster
  *
  * @param           {Partial<ISScssCompilerParams>}        [initialParams={}]      Some initial parameters to configure your compilation process. Can be overrided thgouth the ```compile``` method
- * @param           {ISScssCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
+ * @param           {ISScssCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
  *
  * @todo      interface
  * @todo      doc
@@ -150,8 +150,8 @@ class SScssCompiler extends __SCompiler implements ISCompiler {
    * This method is the main one that allows you to actually compile the
    * code you pass either inline, either a file path.
    *
-   * @param         {String}            source          The source you want to compile. Can be a file path or some inline codes
-   * @param         {Object}            [settings={}]       An object of settings to override the instance ones
+   * @param         {String}            source          The source you want to compile. Can be a file path or some inline codes
+   * @param         {Object}            [settings={}]       An object of settings to override the instance ones
    * @return        {SPromise}                          An SPromise instance that will be resolved (or rejected) when the compilation is finished
    *
    * @since             2.0.0

@@ -27,7 +27,7 @@ import __STemplate from '../STemplate';
   });
   // const template = new __STemplate(
   //   `
-  //   <h1>{{ $hello }}</h1>
+  //   <h1>{{ $hello }}</h1>
   //   <p>{{ $world }}</p>
   // `,
   //   {

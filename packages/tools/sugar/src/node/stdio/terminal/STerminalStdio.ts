@@ -1,5 +1,5 @@
 import __inquirer from 'inquirer';
-import { ISEventEmitter } from '../../../shared/event/SEventEmitter';
+import { ISEventEmitter } from '../@coffeekraken/s-event-emitter';
 import __SNotification from '../../notification/SNotification';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __SStdio from '../SStdio';
@@ -137,7 +137,7 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
    *
    * Method that actually log the passed log object with the passed component
    *
-   * @param         {ILog}        logObj            The log object to log
+   * @param         {ILog}        logObj            The log object to log
    * @param         {ISStdioComponent}      component       The component to use for logging
    *
    * @since         2.0.0

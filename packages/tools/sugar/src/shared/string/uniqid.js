@@ -13,7 +13,7 @@ const uniqid_1 = __importDefault(require("uniqid"));
  *
  * Generate a uniqid string of 8 bytes. Work using the [uniqid](https://www.npmjs.com/package/uniqid) npm package under the hood.
  *
- * @return          {String}                A 8 bytes uniqid string
+ * @return          {String}                A 8 bytes uniqid string
  *
  * @todo      interface
  * @todo      doc

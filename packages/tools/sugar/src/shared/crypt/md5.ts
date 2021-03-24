@@ -27,7 +27,7 @@ export default {
    *
    * Encrypt
    *
-   * @param       {String}      message         The message to encrypt
+   * @param       {String}      message         The message to encrypt
    * @return      {String}                      The encrypted string
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -46,7 +46,7 @@ export default {
    * Decrypt
    *
    * @param       {String}        message         The message to decrypt
-   * @return      {String}                        The decrypted message
+   * @return      {String}                        The decrypted message
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */

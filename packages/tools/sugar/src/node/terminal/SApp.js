@@ -119,8 +119,8 @@ class SApp extends blessed_1.default.screen {
      *
      * Get the route configuration object depending on the current url
      *
-     * @param         {String}            url             The current url
-     * @return        {Object}                            The corresponding route object
+     * @param         {String}            url             The current url
+     * @return        {Object}                            The corresponding route object
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
@@ -179,7 +179,7 @@ class SApp extends blessed_1.default.screen {
      *
      * This method allows you to change the "page" by passing a simple url like 'build/scss' depending on the registered routes in your app.
      *
-     * @param         {String}          url           The url to go to
+     * @param         {String}          url           The url to go to
      * @return        {Boolean}                       true if ok, false if something goes wrong like the page does not exist, etc...
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -201,7 +201,7 @@ class SApp extends blessed_1.default.screen {
      *
      * This method allows you to check if the passed url is the active one
      *
-     * @param       {String}        url            The url to check
+     * @param       {String}        url            The url to check
      * @return      {Boolean}                       true if is the active one, false if not
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -216,7 +216,7 @@ class SApp extends blessed_1.default.screen {
      *
      * Render the layout with the current content defined by the current route object passed
      *
-     * @param           {Object}          routeObj            The current route object to render with the layout
+     * @param           {Object}          routeObj            The current route object to render with the layout
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */

@@ -13,7 +13,7 @@ import SDescriptor, {
  * @type          ISDescriptorRule
  *
  * This rule allows you to make sure a value does match the passed type like:
- * - String | Array<String>
+ * - String | Array<String>
  * - Boolean
  * - Number
  * - etc...
@@ -25,7 +25,6 @@ export interface IParams {
   value: boolean;
 }
 export interface IRuleSettings {}
-
 const ruleObj: ISDescriptorRule = {
   name: 'Type',
   id: 'type',
@@ -56,14 +55,9 @@ const ruleObj: ISDescriptorRule = {
         id: settings.id
       }
     });
-
     if (params.cast && !type.is(value)) {
       value = type.cast(value);
-      if (params.plop) {
-        console.log('CC', params, value);
-      }
     }
-
     if (!type.is(value)) {
       return new Error('Something false');
     }

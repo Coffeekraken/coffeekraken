@@ -18,7 +18,7 @@ const hotkey_1 = __importDefault(require("../keyboard/hotkey"));
  * registered at the new index will be called.
  *
  * @param         {Function}          callback        The function you want to call on escape click
- * @param         {Number}            [index=null]    Optionally the index under which you want to register your callback. If not specified, will be automatically setted
+ * @param         {Number}            [index=null]    Optionally the index under which you want to register your callback. If not specified, will be automatically setted
  *
  * @todo      interface
  * @todo      doc

@@ -1,5 +1,5 @@
 import __deepMerge from '../../shared/object/deepMerge';
-import __SEventEmitter from '../../shared/event/SEventEmitter';
+import __SEventEmitter from '@coffeekraken/s-event-emitter';
 
 /**
  * @name                SCompiler

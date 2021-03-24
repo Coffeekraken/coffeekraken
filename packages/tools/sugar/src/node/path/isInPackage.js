@@ -16,7 +16,7 @@ const fs_1 = __importDefault(require("fs"));
  * @param           {String|Array}              name             The package name to check or a string comma separated like "myPackage,another"
  * @param           {String}              [from=process.cwd()]    Specify from where the research has to be done
  * @param           {Boolean}             [highest=false]         Specify if you want the highest package root or the first finded
- * @return          {String}                                      The finded package path or false if not finded
+ * @return          {String}                                      The finded package path or false if not finded
  *
  * @example         js
  * import isInPackage from '@coffeekraken/sugar/node/path/isInPackage';

@@ -38,7 +38,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * Encrypt
          *
-         * @param       {String}      message         The message to encrypt
+         * @param       {String}      message         The message to encrypt
          * @return      {String}                      The encrypted string
          *
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -57,7 +57,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * Decrypt
          *
          * @param       {String}        message         The message to decrypt
-         * @return      {String}                        The decrypted message
+         * @return      {String}                        The decrypted message
          *
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */

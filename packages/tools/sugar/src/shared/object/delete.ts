@@ -11,7 +11,7 @@ import __set from './set';
  * Delete an object property using a dotPath like "something.else"
  *
  * @param         {Object}          object            The object on which you want to delete the property
- * @param         {String}          dotPath           The dotpath to the property you want to delete
+ * @param         {String}          dotPath           The dotpath to the property you want to delete
  *
  * @todo      interface
  * @todo      doc

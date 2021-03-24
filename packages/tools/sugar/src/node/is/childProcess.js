@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * Check if the current script is running as a child process or not by checking if the ```process.send``` exists, or is the environment variable ```IS_CHILD_PROCESS``` is true.
  *
- * @return        {Boolean}                             true if the process is running as a child process, false if not
+ * @return        {Boolean}                             true if the process is running as a child process, false if not
  *
  * @todo      interface
  * @todo      doc

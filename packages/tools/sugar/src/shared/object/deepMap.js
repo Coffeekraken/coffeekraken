@@ -17,7 +17,7 @@ const classInstance_1 = __importDefault(require("../is/classInstance"));
  *
  * @param         {Object}        object          The object you want to map through
  * @param         {Function}      processor       The processor function that take as parameter the actual property value, the current property name and the full dotted path to the current property
- * @param         {Object}        [settings={}]     An object of settings to configure your deepMap process:
+ * @param         {Object}        [settings={}]     An object of settings to configure your deepMap process:
  * - classInstances (false) {Boolean}: Specify if you want the objects to be processed the same as other values
  * - deepFirst (true) {Boolean}: Specify if you want to process deep values first
  * - array (true) {Boolean}: Specify if we have to treat array like simple value to process of treat them as an object and continue our map down

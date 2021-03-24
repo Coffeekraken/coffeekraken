@@ -15,7 +15,7 @@ import __parse from '../string/parse';
  * directly to the command line interface
  *
  * @param       {Object}        args        The arguments object
- * @param       {Object}      [settings={}]               A settings object to configure your command build process:
+ * @param       {Object}      [settings={}]               A settings object to configure your command build process:
  * - includeAllArgs (true) {Boolean}: Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
  * - alias (true) {Boolean}: Specify if you want to use the aliases or not in the generated command
  * - definition (null) {Object}: Specify a definition object to use

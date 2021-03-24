@@ -13,7 +13,7 @@ import __convert from './convert';
  * then call the ```instance.get()``` method and you will get back
  * the duration between the instanciation and the ```get``` method call
  *
- * @param       {Object}            [settings={}]           An object of settings to use
+ * @param       {Object}            [settings={}]           An object of settings to use
  *
  * @setting      {String}           [format='s']            Specify the format you want for your instance. Can be 'ms|millisecond(s)', 's|second(s)', 'm|minute(s)', 'h|hour(s)', 'd|day', 'w|week(s)', 'month(s)', 'y|year(s)'
  * @setting      {Boolean}          [suffix=true]             Specify if you want the duration returned with the corresponding suffix like 'ms', 's', etc...
@@ -152,7 +152,7 @@ export default class SDuration {
    *
    * Start the duration process either with the current timestamp, or with a passed timestamp you prefer
    *
-   * @param         {Number}            [startTime=null]            Specify the timestamp you want
+   * @param         {Number}            [startTime=null]            Specify the timestamp you want
    *
    * @since         2.0.0
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -168,7 +168,7 @@ export default class SDuration {
    *
    * Stop the duration counter and return the result in the passed format or in the format setted in the settings
    *
-   * @param       {Object}            [settings={}]           An object of settings to use
+   * @param       {Object}            [settings={}]           An object of settings to use
    * @return        {Mixed}                         Return the duration depending on your settings
    *
    * @since         2.0.0

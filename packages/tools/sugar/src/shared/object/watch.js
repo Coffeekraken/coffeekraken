@@ -23,7 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      * This method is a simple wrapper around the SWatch class that allows you to watch some action on object and arrays
      *
      * @param       {Object|Array}        target          The array or object to watch
-     * @param       {Object}          [settings={}]       A settings object to configure your watch process. Check the SWatch class documentation for more.
+     * @param       {Object}          [settings={}]       A settings object to configure your watch process. Check the SWatch class documentation for more.
      * @return      {Object}                              Return the proxied object on which you can make all the updates that you want
      *
      * @todo      interface

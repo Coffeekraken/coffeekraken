@@ -8,8 +8,8 @@
  *
  * Parse a string and convert it into his native data type like date, number, boolean, etc...
  *
- * @param             {String}                        value                                 The value to convert
- * @return            {Mixed}                                                               The converted value
+ * @param             {String}                        value                                 The value to convert
+ * @return            {Mixed}                                                               The converted value
  *
  * @todo      interface
  * @todo      doc

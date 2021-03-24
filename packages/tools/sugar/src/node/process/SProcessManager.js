@@ -20,7 +20,7 @@ const stdio_1 = __importDefault(require("../stdio/stdio"));
  *
  * This class represent a process handler class that will fire up some SProcess processes
  *
- * @param         {Object}          [settings={}]           An object of settings to configure your process instance:
+ * @param         {Object}          [settings={}]           An object of settings to configure your process instance:
  * - id (processHandler.unnamed) {String}: Specify a unique id for your particular process instance
  * - name (Unnamed Process Handler) {String}: Specify a name for your process instance
  *

@@ -137,7 +137,7 @@ class SInterface implements ISInterface {
    * This static method is usefull to make a duplicate of the base interface with some updates
    * in the definition object.
    *
-   * @param     {Object}      definition      A definition object to override or extends the base one
+   * @param     {Object}      definition      A definition object to override or extends the base one
    * @return    {SInterface}                  A new interface overrided with your new values
    *
    * @since     2.0.0
@@ -272,7 +272,7 @@ class SInterface implements ISInterface {
    * true returned when all is ok, or a string describing the current issue by specify the "settings.throw" property to false.
    *
    * @param       {Any}                instance              The instance to apply the interface on
-   * @param       {ISInterfaceSettings}               [settings={}]         An object of settings to configure your apply process
+   * @param       {ISInterfaceSettings}               [settings={}]         An object of settings to configure your apply process
    * - throw (false) {Boolean}: Specify if you want that an error is throwned if the test does not pass
    * - return (String) {String}: Specify in which return you want the result back. Can be "String" of "Object".
    * @return      {Boolean|String}                              true if all is ok, a string describing the issue if not...
@@ -371,7 +371,7 @@ class SInterface implements ISInterface {
    * true returned when all is ok, or a string describing the current issue by specify the "settings.throw" property to false.
    *
    * @param       {Any}                instance              The instance to apply the interface on
-   * @param       {ISInterfaceSettings}               [settings={}]         An object of settings to configure your apply process
+   * @param       {ISInterfaceSettings}               [settings={}]         An object of settings to configure your apply process
    * @return      {Boolean|String}                              true if all is ok, a string describing the issue if not...
    *
    * @since       2.0.0

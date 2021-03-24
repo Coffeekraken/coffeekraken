@@ -10,7 +10,6 @@ import __fsPool from '@coffeekraken/sugar/node/fs/pool';
 import __SSvelteCompilerInterface from './interface/SSvelteCompilerInterface';
 import __STsCompiler from '@coffeekraken/s-ts-compiler';
 import __tmpDir from '@coffeekraken/sugar/node/path/tmpDir';
-import __fs from 'fs';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
 import __path from 'path';
@@ -19,7 +18,6 @@ import __cleanCss from 'clean-css';
 import __availableColors from '@coffeekraken/sugar/shared/dev/colors/availableColors';
 import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
-import defaultTerminalStdioComponent from '@coffeekraken/sugar/node/stdio/terminal/components/defaultTerminalStdioComponent';
 
 // @ts-ignore
 const __svelte = require('svelte/compiler'); // eslint-disable-line
@@ -57,7 +55,7 @@ export type ISSvelteCompiler = ISCompiler;
  * @feature         2.0.0       Expose a simple API that return SPromise instances for convinience
  *
  * @param         {Partial<ISSvelteCompilerParams>}      [initialParams={}]      Some parameters to use for your compilation process
- * @param           {ISSvelteCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
+ * @param           {ISSvelteCompilerCtorSettings}            [settings={}]       An object of settings to configure your instance
  *
  * @todo      interface
  * @todo      doc
@@ -130,8 +128,8 @@ class SSvelteCompiler extends __SCompiler {
    * This method is the main one that allows you to actually compile the
    * code you pass either inline, either a file path.
    *
-   * @param         {String}            source          The source you want to compile. Can be a file path or some inline codes
-   * @param         {Object}            [settings={}]       An object of settings to override the instance ones
+   * @param         {String}            source          The source you want to compile. Can be a file path or some inline codes
+   * @param         {Object}            [settings={}]       An object of settings to override the instance ones
    * @return        {SPromise}                          An SPromise instance that will be resolved (or rejected) when the compilation is finished
    *
    * @since             2.0.0
@@ -145,8 +143,6 @@ class SSvelteCompiler extends __SCompiler {
     return new __SPromise(
       async ({ resolve, reject, pipe, emit, on }) => {
         settings = __deepMerge(this.svelteCompilerSettings, {}, settings);
-
-        console.log(params);
 
         const input = Array.isArray(params.input)
           ? params.input
@@ -206,6 +202,10 @@ class SSvelteCompiler extends __SCompiler {
                   };
                 },
                 script: async (input) => {
+                  // return {
+                  //   code: input.content
+                  // };
+
                   if (
                     !input.attributes ||
                     !input.attributes.type ||

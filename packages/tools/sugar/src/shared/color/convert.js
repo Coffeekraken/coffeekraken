@@ -21,7 +21,7 @@ const rgba2hex_1 = __importDefault(require("./rgba2hex"));
  *
  * @param           {Mixed}               input           The input color to convert
  * @param           {String}              [format="rgba"]     The format wanted
- * @return          {Mixed}                               The converted color
+ * @return          {Mixed}                               The converted color
  *
  * @todo      interface
  * @todo      doc

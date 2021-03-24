@@ -15,7 +15,8 @@ import {
 	validate_slots
 } from "svelte/internal";
 
-const { Object: Object_1, console: console_1 } = globals;
+const { console: console_1 } = globals;
+import __SSvelteComponent from "@coffeekraken/sugar/js/svelte/SSvelteComponent";
 const file = "component.svelte";
 
 function create_fragment(ctx) {
@@ -28,8 +29,8 @@ function create_fragment(ctx) {
 			h1 = element("h1");
 			h1.textContent = "Hello worlc";
 			this.c = noop;
-			add_location(h1, file, 54, 1, 1998);
-			add_location(div, file, 53, 0, 1991);
+			add_location(h1, file, 28, 1, 390);
+			add_location(div, file, 27, 0, 383);
 		},
 		l: function claim(nodes) {
 			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -61,78 +62,21 @@ function instance($$self, $$props, $$invalidate) {
 	let { $$slots: slots = {}, $$scope } = $$props;
 	validate_slots("my-element", slots, []);
 
-	var __extends = this && this.__extends || (function () {
-		var extendStatics = function (d, b) {
-			extendStatics = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (d, b) {
-				d.__proto__ = b;
-			} || function (d, b) {
-				for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
-			};
-
-			return extendStatics(d, b);
-		};
-
-		return function (d, b) {
-			if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-			extendStatics(d, b);
-
-			function __() {
-				this.constructor = d;
-			}
-
-			d.prototype = b === null
-			? Object.create(b)
-			: (__.prototype = b.prototype, new __());
-		};
-	})();
-
-	var __importDefault = this && this.__importDefault || function (mod) {
-		return mod && mod.__esModule ? mod : { "default": mod };
-	};
-
-	(function (factory) {
-		if (typeof module === "object" && typeof module.exports === "object") {
-			var v = factory(require, exports);
-			if (v !== undefined) module.exports = v;
-		} else if (typeof define === "function" && define.amd) {
-			define(["require", "exports", "@coffeekraken/sugar/js/svelte/SSvelteComponent"], factory);
+	class MyCoolComponent extends __SSvelteComponent {
+		constructor() {
+			super({ svelteComponent: {} });
 		}
-	})(function (require, exports) {
-		"use strict";
-		Object.defineProperty(exports, "__esModule", { value: true });
-		var SSvelteComponent_1 = __importDefault(require("@coffeekraken/sugar/js/svelte/SSvelteComponent"));
+	}
 
-		var MyCoolComponent = /** @class */ (function (_super) {
-			__extends(MyCoolComponent, _super);
-
-			function MyCoolComponent() {
-				return _super.call(this, { svelteComponent: {} }) || this;
-			}
-
-			return MyCoolComponent;
-		})(SSvelteComponent_1.default);
-
-		console.log("DFF");
-		new MyCoolComponent();
-	});
-
+	console.log("DFF");
+	new MyCoolComponent();
 	const writable_props = [];
 
-	Object_1.keys($$props).forEach(key => {
+	Object.keys($$props).forEach(key => {
 		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1.warn(`<my-element> was created with unknown prop '${key}'`);
 	});
 
-	$$self.$capture_state = () => ({ __extends, __importDefault });
-
-	$$self.$inject_state = $$props => {
-		if ("__extends" in $$props) __extends = $$props.__extends;
-		if ("__importDefault" in $$props) __importDefault = $$props.__importDefault;
-	};
-
-	if ($$props && "$$inject" in $$props) {
-		$$self.$inject_state($$props.$$inject);
-	}
-
+	$$self.$capture_state = () => ({ __SSvelteComponent, MyCoolComponent });
 	return [];
 }
 

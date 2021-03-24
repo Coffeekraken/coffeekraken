@@ -12,7 +12,7 @@
  *
  * @param               {Object}                object                The object to filter
  * @param               {Function}              filter                The filter function that take as parameter the property itself, and the property name
- * @return              {Object}                                      The filtered object
+ * @return              {Object}                                      The filtered object
  *
  * @todo      interface
  * @todo      doc

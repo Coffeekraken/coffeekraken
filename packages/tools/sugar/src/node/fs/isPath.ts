@@ -13,9 +13,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * Check if the passed string is a valid path or not
  * Support the ```replacePathTokens``` tokens
  *
- * @param         {String}            path              The path to check
+ * @param         {String}            path              The path to check
  * @param         {Boolean}           [checkExistence=false]      Specify if you want to check that the passed path actually exist
- * @return        {Boolean}                             true if the path is valide, false if not
+ * @return        {Boolean}                             true if the path is valide, false if not
  *
  * @todo      interface
  * @todo      doc

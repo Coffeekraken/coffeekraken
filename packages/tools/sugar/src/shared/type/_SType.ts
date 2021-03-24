@@ -234,7 +234,7 @@ class SType implements ISType {
    * type that this instance represent.
    * Same as the ```check``` method, but return only a Boolean.
    *
-   * @param     {Any}       value       The value to check
+   * @param     {Any}       value       The value to check
    * @param     {ISTypeSettings}        [settings={}]     Some settings to configure your check
    * @return    {Boolean}               true if correspond, false if not
    *
@@ -257,7 +257,7 @@ class SType implements ISType {
    * If all is ok, return true, otherwise return an instance of the STypeResult class that
    * describe what is wrong
    *
-   * @param     {Any}       value       The value to check
+   * @param     {Any}       value       The value to check
    * @param     {ISTypeSettings}        [settings={}]     Some settings to configure your check
    * @return    {Boolean|STypeResult}               true if correspond, an instance of the STypeResult class if not
    *
@@ -426,9 +426,6 @@ class SType implements ISType {
    */
   cast(value: any, settings: ISTypeSettings): any {
     settings = __deepMerge(this._settings, settings);
-
-    _console.trace('cast', value);
-
     // store exceptions coming from descriptors
     const verboseObj = {
       value,
@@ -480,7 +477,7 @@ class SType implements ISType {
         verboseObj.issues[typeId] = issueStr;
       } else if (typeObj.of !== undefined) {
         const sTypeInstance = new SType(typeObj.of.join('|'));
-        castedValue = __map(castedValue, ({ key, value, idx }) => {
+        castedValue = __map(castedValue, ({ value }) => {
           return sTypeInstance.cast(value, settings);
         });
       }

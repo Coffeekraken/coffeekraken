@@ -20,7 +20,7 @@ const terminal_kit_1 = require("terminal-kit");
  *
  * Return the terminal cursor position in {x,y} format.
  *
- * @return              {Promise}                         A promise resolved once the position has been getted
+ * @return              {Promise}                         A promise resolved once the position has been getted
  *
  * @todo      interface
  * @todo      doc

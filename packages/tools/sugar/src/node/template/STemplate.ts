@@ -6,7 +6,7 @@ import __fs from 'fs';
 import __SError from '../../shared/error/SError';
 import __glob from 'glob';
 import __STemplateEngine, { ISTemplateEngine } from './engines/STemplateEngine';
-import __SClass from '../../shared/class/SClass';
+import __SClass from '@coffeekraken/s-class';
 
 import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
 
@@ -21,7 +21,7 @@ import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
  * @feature       2.0.0         Support for ```bladePhp``` render engine
  * @feature       2.0.0         Simply render your template using the ```render``` method that returns you back a nice SPromise instance resolved once the template has been rendered correctly
  *
- * @param       {String}        viewPathOrTemplateString      The view doted file path relative to the ```rootDir``` setting, or directly a template string to render using the engine specify in ```engine``` setting...
+ * @param       {String}        viewPathOrTemplateString      The view doted file path relative to the ```rootDir``` setting, or directly a template string to render using the engine specify in ```engine``` setting...
  * @param       {Object}        [settings={}]           An object of settings to configure your template rendering process:
  * - rootDir (@config.views.rootDir) {String}: Specify either 1 rootDir in which to search for your view, or an Array of rootDir to search in
  * - engine (null) {String|STemplateEngine}: Specify the engine to use in order to render your template. By default it will try to automatically detect the engine but you can specify it yourself. Can be a string like "blade.php" that identify a registered template engine, or directly an STemplateEngine based template engine instance
@@ -275,7 +275,7 @@ class STemplate extends __SClass implements ISTemplate {
    * back an object that describe the view with infos like "type", "path", "extension", etc...
    * If nothing is found, you will get ```false``` back.
    *
-   * @param       {String}      viewPath        The view path to check. Either a relative path to the @config.frontend.viewsDir configuration, or an absolute path
+   * @param       {String}      viewPath        The view path to check. Either a relative path to the @config.frontend.viewsDir configuration, or an absolute path
    * @return      {Object|Boolean}              Return an object describing the view or ```false``` if not found
    *
    * @since
@@ -428,8 +428,8 @@ class STemplate extends __SClass implements ISTemplate {
    * This method take an engine name and tries to returns you the engine instance
    * registered in the stack
    *
-   * @param     {String}    name    The engine name wanted
-   * @return    {STemplateEngine|undefined}     The engine class or undefined
+   * @param     {String}    name    The engine name wanted
+   * @return    {STemplateEngine|undefined}     The engine class or undefined
    *
    * @since     2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -450,8 +450,8 @@ class STemplate extends __SClass implements ISTemplate {
    *
    * Main method to render your view by passing it an object of data to use as well as an object of settings to override the default passed onces
    *
-   * @param       {Object}        [data={}]       An object of data to use to render the view.
-   * @param       {Object}        [settings={}]     An object of settings that will be passed to the render engine method to use to override the default onces passed in the constructor. Check the used engine render documentation
+   * @param       {Object}        [data={}]       An object of data to use to render the view.
+   * @param       {Object}        [settings={}]     An object of settings that will be passed to the render engine method to use to override the default onces passed in the constructor. Check the used engine render documentation
    * @return      {SPromise}                    An SPromise instance that will be resolved once the rendering process has correctly finished
    *
    * @since       2.0.0

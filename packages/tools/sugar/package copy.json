@@ -11,280 +11,6 @@
       "url": "http://olivierbossel.com"
     }
   ],
-  "exports": {
-    "./app/*": {
-      "node": "./src/node/app/*.js"
-    },
-    "./animation/*": {
-      "default": "./src/js/animation/*.js"
-    },
-    "./array/*": {
-      "node": "./src/node/array/*.js",
-      "default": "./src/js/array/*.js"
-    },
-    "./ascii/*": {
-      "node": "./src/node/ascii/*.js",
-      "default": "./src/js/ascii/*.js"
-    },
-    "./blessed/*": {
-      "node": "./src/node/blessed/*.js"
-    },
-    "./class/*": {
-      "node": "./src/node/class/*.js",
-      "default": "./src/js/class/*.js"
-    },
-    "./cli/*": {
-      "node": "./src/node/cli/*.js",
-      "default": "./src/js/cli/*.js"
-    },
-    "./clipboard/*": {
-      "node": "./src/node/clipboard/*.js"
-    },
-    "./color/*": {
-      "node": "./src/node/color/*.js",
-      "default": "./src/js/color/*.js"
-    },
-    "./compiler/*": {
-      "node": "./src/node/compiler/*.js"
-    },
-    "./config/*": {
-      "node": "./src/node/config/*.js",
-      "default": "./src/js/config/*.js"
-    },
-    "./console/*": {
-      "node": "./src/node/console/*.js",
-      "default": "./src/js/console/*.js"
-    },
-    "./convert/*": {
-      "node": "./src/node/convert/*.js",
-      "default": "./src/js/convert/*.js"
-    },
-    "./core/*": {
-      "node": "./src/node/core/*.js",
-      "default": "./src/js/core/*.js"
-    },
-    "./crypt/*": {
-      "node": "./src/node/crypt/*.js",
-      "default": "./src/js/crypt/*.js"
-    },
-    "./css/*": {
-      "node": "./src/node/css/*.js",
-      "default": "./src/js/css/*.js"
-    },
-    "./deamon/*": {
-      "node": "./src/node/deamon/*.js"
-    },
-    "./descriptor/*": {
-      "node": "./src/node/descriptor/*.js",
-      "default": "./src/js/descriptor/*.js"
-    },
-    "./dev/*": {
-      "node": "./src/node/dev/*.js",
-      "default": "./src/js/dev/*.js"
-    },
-    "./docblock/*": {
-      "node": "./src/node/docblock/*.js",
-      "default": "./src/js/docblock/*.js"
-    },
-    "./docMap/*": {
-      "node": "./src/node/docMap/*.js"
-    },
-    "./dom/*": {
-      "default": "./src/js/dom/*.js"
-    },
-    "./easing/*": {
-      "node": "./src/node/easing/*.js",
-      "default": "./src/js/easing/*.js"
-    },
-    "./error/*": {
-      "node": "./src/node/error/*.js",
-      "default": "./src/js/error/*.js"
-    },
-    "./es6/*": {
-      "node": "./src/node/es6/*.js",
-      "default": "./src/js/es6/*.js"
-    },
-    "./event/*": {
-      "node": "./src/node/event/*.js",
-      "default": "./src/js/event/*.js"
-    },
-    "./frontspec/*": {
-      "node": "./src/node/frontspec/*.js"
-    },
-    "./fs/*": {
-      "node": "./src/node/fs/*.js"
-    },
-    "./feature/*": {
-      "default": "./src/js/feature/*.js"
-    },
-    "./filter/*": {
-      "default": "./src/js/filter/*.js"
-    },
-    "./function/*": {
-      "node": "./src/node/function/*.js",
-      "default": "./src/js/function/*.js"
-    },
-    "./geom/*": {
-      "node": "./src/node/geom/*.js",
-      "default": "./src/js/geom/*.js"
-    },
-    "./github/*": {
-      "node": "./src/node/github/*.js"
-    },
-    "./glob/*": {
-      "node": "./src/node/glob/*.js",
-      "default": "./src/js/glob/*.js"
-    },
-    "./google/*": {
-      "node": "./src/node/google/*.js"
-    },
-    "./html/*": {
-      "node": "./src/node/html/*.js",
-      "default": "./src/js/html/*.js"
-    },
-    "./http/*": {
-      "node": "./src/node/http/*.js",
-      "default": "./src/js/http/*.js"
-    },
-    "./init/*": {
-      "node": "./src/node/init/*.js"
-    },
-    "./interface/*": {
-      "node": "./src/node/interface/*.js",
-      "default": "./src/js/interface/*.js"
-    },
-    "./ipc/*": {
-      "node": "./src/node/ipc/*.js"
-    },
-    "./is/*": {
-      "node": "./src/node/is/*.js",
-      "default": "./src/js/is/*.js"
-    },
-    "./iterable/*": {
-      "node": "./src/node/iterable/*.js",
-      "default": "./src/js/iterable/*.js"
-    },
-    "./js/*": {
-      "node": "./src/node/js/*.js"
-    },
-    "./json/*": {
-      "node": "./src/node/json/*.js",
-      "default": "./src/js/json/*.js"
-    },
-    "./keyboard/*": {
-      "node": "./src/node/keyboard/*.js",
-      "default": "./src/js/keyboard/*.js"
-    },
-    "./log/*": {
-      "node": "./src/node/log/*.js",
-      "default": "./src/js/log/*.js"
-    },
-    "./map/*": {
-      "node": "./src/node/map/*.js",
-      "default": "./src/js/map/*.js"
-    },
-    "./module/*": {
-      "node": "./src/node/module/*.js"
-    },
-    "./monorepo/*": {
-      "node": "./src/node/monorepo/*.js"
-    },
-    "./network/*": {
-      "node": "./src/node/network/*.js"
-    },
-    "./notification/*": {
-      "node": "./src/node/notification/*.js",
-      "default": "./src/js/notification/*.js"
-    },
-    "./npm/*": {
-      "node": "./src/node/npm/*.js",
-      "default": "./src/js/npm/*.js"
-    },
-    "./number/*": {
-      "node": "./src/node/number/*.js",
-      "default": "./src/js/number/*.js"
-    },
-    "./object/*": {
-      "node": "./src/node/object/*.js",
-      "default": "./src/js/object/*.js"
-    },
-    "./package/*": {
-      "node": "./src/node/package/*.js"
-    },
-    "./path/*": {
-      "node": "./src/node/path/*.js",
-      "default": "./src/js/path/*.js"
-    },
-    "./process/*": {
-      "node": "./src/node/process/*.js"
-    },
-    "./responsive/*": {
-      "default": "./src/js/responsive/*.js"
-    },
-    "./scss/*": {
-      "node": "./src/node/scss/*.js"
-    },
-    "./search/*": {
-      "node": "./src/node/search/*.js"
-    },
-    "./server/*": {
-      "node": "./src/node/server/*.js"
-    },
-    "./stdio/*": {
-      "node": "./src/node/stdio/*.js"
-    },
-    "./stream/*": {
-      "node": "./src/node/stream/*.js",
-      "default": "./src/js/stream/*.js"
-    },
-    "./string/*": {
-      "node": "./src/node/string/*.js",
-      "default": "./src/js/string/*.js"
-    },
-    "./svelte/*": {
-      "node": "./src/node/svelte/*.js",
-      "default": "./src/js/svelte/*.js"
-    },
-    "./template/*": {
-      "node": "./src/node/template/*.js"
-    },
-    "./terminal/*": {
-      "node": "./src/node/terminal/*.js"
-    },
-    "./test/*": {
-      "node": "./src/node/test/*.js"
-    },
-    "./time/*": {
-      "node": "./src/node/time/*.js",
-      "default": "./src/js/time/*.js"
-    },
-    "./transition/*": {
-      "node": "./src/node/transition/*.js"
-    },
-    "./type/*": {
-      "node": "./src/node/type/*.js",
-      "default": "./src/js/type/*.js"
-    },
-    "./typescript/*": {
-      "node": "./src/node/typescript/*.js"
-    },
-    "./unit/*": {
-      "node": "./src/node/unit/*.js",
-      "default": "./src/js/unit/*.js"
-    },
-    "./url/*": {
-      "node": "./src/node/url/*.js",
-      "default": "./src/js/url/*.js"
-    },
-    "./value/*": {
-      "node": "./src/node/value/*.js",
-      "default": "./src/js/value/*.js"
-    },
-    "./webcomponent/*": {
-      "node": "./src/node/webcomponent/*.js",
-      "default": "./src/js/webcomponent/*.js"
-    }
-  },
   "bin": {
     "sugar": "./src/cli/sugar.cli.js"
   },
@@ -295,16 +21,21 @@
   "toInstall": {},
   "dependencies": {
     "@11ty/dependency-tree": "^1.0.0",
+    "@coffeekraken/s-class": "file:../../core/s-class",
+    "@coffeekraken/s-config": "file:../../core/s-config",
+    "@coffeekraken/s-event-emitter": "file:../../core/s-event-emitter",
     "@coffeekraken/s-cache": "file:../s-cache",
-    "@coffeekraken/s-promise": "file:../s-promise",
+    "@coffeekraken/s-promise": "file:../../core/s-promise",
     "@rollup/plugin-node-resolve": "^10.0.0",
     "@types/blessed": "^0.1.17",
     "@types/node": "^14.14.14",
     "abstract-syntax-tree": "^2.17.1",
     "acorn": "^8.1.0",
+    "acorn-loose": "^8.0.2",
     "aggregation": "^1.2.6",
     "app-root-path": "^3.0.0",
     "assign-deep": "^1.0.1",
+    "astring": "^1.7.0",
     "autoprefixer": "^10.1.0",
     "await-spawn": "^4.0.1",
     "await-to-js": "^2.1.1",
@@ -513,35 +244,23 @@
     "snowpack-plugin-rollup-bundle": "^0.3.3",
     "snowpack-resolve-alias": "^1.2.7",
     "sprintf-js": "^1.1.2",
-    "stringify-object": "^3.3.0",
     "strip-ansi": "^6.0.0",
     "strip-css-comments": "^4.1.0",
     "striptags": "^3.1.1",
-    "style-loader": "^2.0.0",
     "svelte": "^3.32.0",
-    "svelte-preprocess-sass": "^1.0.0",
     "temp-dir": "^2.0.0",
     "terminal-kit": "^1.44.0",
-    "terminal-link": "^2.1.1",
-    "terminal-overwrite": "^2.0.1",
-    "terser": "^5.5.1",
-    "through2": "^4.0.2",
     "tmp": "^0.2.1",
     "to-regex": "^3.0.2",
-    "tree-kill": "^1.2.2",
-    "ttf2woff2": "^3.0.0",
+    "typescript": "^4.2.3",
     "uglify-js": "^3.12.2",
-    "unified": "^9.2.1",
     "uniqid": "^5.2.0",
-    "unquote": "^1.1.1",
-    "url-parse": "^1.4.7",
-    "webpack": "^5.11.0",
-    "winston": "^3.3.3",
-    "winston-mail": "^2.0.0",
-    "winston-slack-webhook-transport": "^2.0.0",
-    "yargs-parser": "^20.2.3"
+    "url-parse": "^1.4.7"
   },
   "globalDependencies": {
     "typescript": "^4.2.3"
+  },
+  "devDependencies": {
+    "tsconfig-paths": "^3.9.0"
   }
 }

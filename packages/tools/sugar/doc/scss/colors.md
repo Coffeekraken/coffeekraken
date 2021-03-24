@@ -4,7 +4,7 @@ Sugar provide a nice way map your colors to names in order to use them inside yo
 
 ## Features
 
-- Default customizable colors - default / title / text / link / primary / secondary / success / warning / error / info
+- Default customizable colors - default / title / text / link / primary / secondary / success / warning / error / info
 - Register more colors if needed
 - Color modifiers - Allows you to make a variant of a color by changing his opacity, lightness, etc...
 - Simple `s-color($name, $modifier)` function to access your colors
@@ -36,13 +36,15 @@ To register of modify an existing color, you have to use the [s-setup](../src/sc
 @include s-setup(
   (
     colors: (
-      // update existing color
-        primary: (color: #ff4455),
-      // create your own color
-        cool: (
+         // update existing co
+      primary: (color: #ff4455),
+         // create your own co
+      cool:
+        (
           color: #f3f5f7,
-          // register named modifiers
-            modifiers: (
+             // register named modifi
+          modifiers:
+            (
               light: -lighten 10%,
               dark: -darken 10%
             )

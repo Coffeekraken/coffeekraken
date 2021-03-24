@@ -8,8 +8,8 @@ const json_cyclic_1 = require("json-cyclic");
  *
  * This method simply remove the circular references in the passed object
  *
- * @param     {Object}      obj         The object to process
- * @return    {Object}                  The new object circular references free
+ * @param     {Object}      obj         The object to process
+ * @return    {Object}                  The new object circular references free
  *
  * @example     js
  * import decycle from '@coffeekraken/sugar/js/object/decycle';

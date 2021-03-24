@@ -24,7 +24,7 @@ import __sugarConfig from '../../shared/config/sugar';
  *
  * @param           {Object}        [settings={}]           An object of settings to configure your docMap instance:
  *
- * @setting       {String}      [filename='frontspec.json']       Specify the filename you want
+ * @setting       {String}      [filename='frontspec.json']       Specify the filename you want
  * @setting       {String}      [outputDir=packageRoot()]         Specify the directory where you want to save your docMap.json file when using the ```save``` method
  * @setting       {Integer}     [dirDepth=3]                      Specify the maximum directories the scan will go down
  * @setting       {Boolean}     [cache=false]                     Specify if you want to take advantage of some cache or not
@@ -95,7 +95,7 @@ export default class SFrontspec extends __SPromise {
    *
    * @todo      update documentation
    *
-   * @param       {Object}        [settings={}]       A settings object to configure your reading process
+   * @param       {Object}        [settings={}]       A settings object to configure your reading process
    *
    * @return      {SPromise}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
    *
@@ -165,8 +165,8 @@ export default class SFrontspec extends __SPromise {
    * Generate the frontspec JSON by searching for "childs" one as well as generating the "root" one
    * stored at the root of your package.
    *
-   * @param       {Object}        [settings={}]         A setting object to override the instance ones passed in the constructor
-   * @return      {SPromise}                            An SPromise instance that will be resolved with the frontspec JSON once jsond
+   * @param       {Object}        [settings={}]         A setting object to override the instance ones passed in the constructor
+   * @return      {SPromise}                            An SPromise instance that will be resolved with the frontspec JSON once jsond
    *
    * @since 					2.0.0
    * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -199,7 +199,7 @@ export default class SFrontspec extends __SPromise {
             // checking if it's the root one
             if (filePath !== rootFilePath) {
               // build the relative path to the package
-              let relPath = __path.relative(__packageRoot(), filePath);
+              const relPath = __path.relative(__packageRoot(), filePath);
               const outPath = __path.relative(
                 __packageRoot(),
                 `${this._settings.outputDir}/${this._settings.filename}`

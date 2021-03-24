@@ -14,11 +14,11 @@ import __crypto from 'crypto';
  * The uid is hashed into a SHA256 32bits string but you can specify it using the "format" parameter described above
  *
  * @param       {Object}            object          The object you want use to generate the uniqid
- * @param       {String}            [format='sha256']    The uid format that you want. Here's the available values:
+ * @param       {String}            [format='sha256']    The uid format that you want. Here's the available values:
  * - sha256: return a SHA256 64 characters formated string
  * - full: return the full length uid. The length can vary depending on the objects passed
  * @param       {String}            [key='sugar.js.object.uid']     The key used to encrypt the object
- * @return      {String}                                The uniqid generate based on the objects passed
+ * @return      {String}                                The uniqid generate based on the objects passed
  *
  * @todo      interface
  * @todo      doc

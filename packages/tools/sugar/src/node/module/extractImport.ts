@@ -22,7 +22,7 @@ import __toString from '../../shared/string/toString';
  * You will get back an array of object containing all the imformations about each
  * import and require statements
  *
- * @param       {String}        stringOrFilePath            A string to parse, or a file path
+ * @param       {String}        stringOrFilePath            A string to parse, or a file path
  * @param       {IExtractImportSettings}        [settings={}]           Some settings to configure your extraction process
  * @return      {IExtractImportItem[]}                          An array of extracted items objects
  *

@@ -296,11 +296,6 @@ class SDescriptor implements ISDescriptor {
       Object.assign({}, settings)
     );
 
-    // flatten the rules
-    // const rules = __flatten(settings.rules, {
-    //   excludeProps: ['default', 'interface'],
-    //   keepLastIntact: true
-    // });
     const rules = settings.rules;
 
     // check the passed value type correspond to the descriptor type
@@ -315,7 +310,9 @@ class SDescriptor implements ISDescriptor {
     // check the type to validate correctly the value
     if (Array.isArray(value) && !settings.arrayAsValue) {
       // loop on each items
-      throw `Sorry but the support for arrays like values has not been integrated for not...`;
+      throw new Error(
+        `Sorry but the support for arrays like values has not been integrated for not...`
+      );
       value.forEach((item) => {});
     } else if (
       typeof value === 'object' &&
@@ -361,7 +358,7 @@ class SDescriptor implements ISDescriptor {
             throw: false
           });
           if (interfaceRes.hasIssues()) {
-            console.log(interfaceRes.toString());
+            throw new Error(interfaceRes.toString());
           } else {
             valuesObjToProcess[propName] = interfaceRes.value;
           }
@@ -386,9 +383,9 @@ class SDescriptor implements ISDescriptor {
       );
     }
 
-    // if (this._descriptorResult.hasIssues() && settings.throw) {
-    //   throw this._descriptorResult.toString();
-    // }
+    if (this._descriptorResult.hasIssues() && settings.throw) {
+      throw new Error(this._descriptorResult.toString());
+    }
 
     return this._descriptorResult;
   }
@@ -418,6 +415,8 @@ class SDescriptor implements ISDescriptor {
       if (value === undefined || value === null) return value;
     }
 
+    let resultValue = value;
+
     // loop on the rules object
     Object.keys(rulesObj).forEach((ruleName) => {
       // do not take care of "default" rule name
@@ -442,29 +441,61 @@ class SDescriptor implements ISDescriptor {
         // if (ruleObj.accept && __isOfType(value, ruleObj.accept) !== true)
         //   return;
         // console.log('CC', propName, value, params);
-        const ruleResult = ruleObj.apply(value, params, ruleSettings, {
-          ...settings,
-          name: `${settings.name}.${propName}`
-        });
-        if (propName === 'input') {
-          _console.log('res', ruleResult);
-        }
-        if (ruleResult === true) return value;
-        else if (ruleResult instanceof Error) {
-          console.log('ERROR', ruleResult);
-          const obj = ruleResult === false ? {} : ruleResult;
-          obj.__ruleObj = ruleObj;
-          obj.__propName = propName;
-          // _console.log(obj);
-          this._descriptorResult.add(obj);
+
+        if (ruleSettings.mapOnArray && Array.isArray(resultValue)) {
+          let newResultValue: any[] = [];
+          resultValue.forEach((v) => {
+            const processedValue = this._processRule(
+              v,
+              ruleObj,
+              propName,
+              params,
+              ruleSettings,
+              settings
+            );
+            if (Array.isArray(processedValue)) {
+              newResultValue = [...newResultValue, ...processedValue];
+            } else {
+              newResultValue.push(processedValue);
+            }
+          });
+          resultValue = newResultValue;
         } else {
-          return ruleResult;
+          const processedValue = this._processRule(
+            resultValue,
+            ruleObj,
+            propName,
+            params,
+            ruleSettings,
+            settings
+          );
+          resultValue = processedValue;
         }
       }
     });
 
     // return the value that can have been processed
-    return value;
+    return resultValue;
+  }
+
+  _processRule(value, ruleObj, propName, params, ruleSettings, settings) {
+    const ruleResult = ruleObj.apply(value, params, ruleSettings, {
+      ...settings,
+      propName,
+      name: `${settings.name}.${propName}`
+    });
+
+    if (ruleResult === true) return value;
+    else if (ruleResult instanceof Error) {
+      const obj = ruleResult === false ? {} : ruleResult;
+      obj.__error = ruleResult;
+      obj.__ruleObj = ruleObj;
+      obj.__propName = propName;
+      this._descriptorResult.add(obj);
+      return value;
+    } else {
+      return ruleResult;
+    }
   }
 }
 

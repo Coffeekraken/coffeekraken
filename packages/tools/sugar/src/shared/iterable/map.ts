@@ -1,5 +1,4 @@
 import __typeOf from '../value/typeof';
-import IMapFn, { IMapCallbackFn, IMapFnSettings } from './interface/IMap';
 
 /**
  * @name            map
@@ -16,7 +15,7 @@ import IMapFn, { IMapCallbackFn, IMapFnSettings } from './interface/IMap';
  * @example       js
  * import map from '@coffeekraken/sugar/js/iterable/map';
  * const myStack = ['hello', 'world'];
- * map(myStack, (key, value) => {
+ * map(myStack, ({key, value}) => {
  *    return `${value} coco`;
  * });
  * // ['hello coco', 'world coco']
@@ -24,6 +23,31 @@ import IMapFn, { IMapCallbackFn, IMapFnSettings } from './interface/IMap';
  * @since         2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+export interface IMapFnSettings {
+  newStack?: boolean;
+}
+
+export interface IMapCallbackObj {
+  key: any;
+  prop: any;
+  value: any;
+  i: number;
+  idx: number;
+}
+
+export interface IMapCallbackFn {
+  (metas: IMapCallbackObj): any;
+}
+
+export interface IMapFn {
+  (
+    stack: Iterable<any>,
+    callback: IMapCallbackFn,
+    settings?: IMapFnSettings
+  ): Promise<Iterable<any>>;
+}
+
 const fn: IMapFn = function (stack, callback, settings = {}) {
   settings = {
     newStack: false,
@@ -63,7 +87,7 @@ const fn: IMapFn = function (stack, callback, settings = {}) {
   let value: any;
   let newValue: any;
 
-  let _get: Function = (s, k) => {
+  const _get: Function = (s, k) => {
     switch (__typeOf(s).toLowerCase()) {
       case 'array':
       case 'object':
@@ -84,7 +108,7 @@ const fn: IMapFn = function (stack, callback, settings = {}) {
         break;
     }
   };
-  let _set: Function = (s, k, v) => {
+  const _set: Function = (s, k, v) => {
     switch (__typeOf(s).toLowerCase()) {
       case 'array':
         if (settings.newStack === true) s.push(v);
@@ -108,9 +132,9 @@ const fn: IMapFn = function (stack, callback, settings = {}) {
   };
 
   for (let i = 0; i < loopOnKeys.length; i++) {
-    let key = loopOnKeys[i];
+    const key = loopOnKeys[i];
     value = _get(stack, key);
-    newValue = callback(key, value, i);
+    newValue = callback({ key, prop: key, value, i, idx: i });
     if (newValue === -1) break;
     // @ts-ignore
     _set(settings.newStack ? newStack : stack, key, newValue);

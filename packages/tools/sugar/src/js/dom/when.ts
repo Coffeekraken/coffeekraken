@@ -24,10 +24,10 @@
  * - visible : Detect when the element become visible
  * --- settings.callback : An optional callback function if you prefer instead of the promise
  *
- * @param               {HTMLElement}                 $node               The HTMLElement to check
- * @param               {String}                      state               The state to check on the HTMLElement
- * @param               {Object}                      [settings={}]       The settings to configure the check process
- * @return              {Promise}                                         A promise that will be resolved when the state is detected
+ * @param               {HTMLElement}                 $node               The HTMLElement to check
+ * @param               {String}                      state               The state to check on the HTMLElement
+ * @param               {Object}                      [settings={}]       The settings to configure the check process
+ * @return              {Promise}                                         A promise that will be resolved when the state is detected
  *
  * @todo      interface
  * @todo      doc

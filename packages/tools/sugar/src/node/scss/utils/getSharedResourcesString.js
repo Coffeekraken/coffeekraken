@@ -17,7 +17,7 @@ const jsObjectToScssMap_1 = __importDefault(require("./jsObjectToScssMap"));
  *
  * This function simply check the @config.build.scss.imports config and return the correct imports array
  *
- * @param       {Array}        [array=null]        Specify the imports array you want to use, otherwise will take the default config in build.scss.imports
+ * @param       {Array}        [array=null]        Specify the imports array you want to use, otherwise will take the default config in build.scss.imports
  * @return      {Object}                           An object containing two strings. The first is "prepend" and the second "append" depending on where we have to add the imports string in the code
  *
  * @todo      interface

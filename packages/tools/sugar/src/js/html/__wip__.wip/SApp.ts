@@ -134,7 +134,7 @@ export default class SApp {
    * Log a message using the transports log system.
    *
    * @param           {String}              message                   The message to log
-   * @param           {String}              [type="info"]             The type of log. Can be "error", "warn", "info", "http", "verbose", "debug", "silly"
+   * @param           {String}              [type="info"]             The type of log. Can be "error", "warn", "info", "http", "verbose", "debug", "silly"
    * @param           {Array}               [transports=null]         The transports that you want to use for this log process. If null, use all the transports configured in the squid config for the type of log passed
    * @return          {Promise}                                       A promise resolved once the log process is finished
    *

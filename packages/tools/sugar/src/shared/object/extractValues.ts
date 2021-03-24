@@ -11,7 +11,7 @@
  *
  * @param       {Array<Object>}         arrayOfObjects            An array of objects as source
  * @param       {String}                keyName                   The key name you want to extract of the objects
- * @return      {Array}                                           An array containing only the values of the property specified
+ * @return      {Array}                                           An array containing only the values of the property specified
  *
  * @todo      interface
  * @todo      doc

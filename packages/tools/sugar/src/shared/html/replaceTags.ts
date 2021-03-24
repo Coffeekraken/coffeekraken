@@ -12,7 +12,7 @@ import __toString from '../string/toString';
  *
  * @param               {String}                 text                           The text in which replace all the tags
  * @param               {Object}                 tags                           An object of tags to replace which have as value the replacement function that take the tag name, the tag content and must return the replacement content
- * @return              {String}                                                The new text
+ * @return              {String}                                                The new text
  *
  * @todo      interface
  * @todo      doc

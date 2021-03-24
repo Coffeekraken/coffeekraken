@@ -13,7 +13,7 @@ import __packageRoot from './packageRoot';
  * depending on the second argument which is the "from" one.
  *
  * @param       {String|Array<String>}          path            The path(s) to transform into relative ones
- * @param       {String}                [from=__packageRoot()]                    The path to the base directory from which transform the path(s) to relative
+ * @param       {String}                [from=__packageRoot()]                    The path to the base directory from which transform the path(s) to relative
  * @param       {IAbsoluteSettings}     [settings={}]           Some settings to configure your transform process
  * @return      {String|Array<String>}                          The new transformed paths
  *
@@ -31,8 +31,8 @@ import __packageRoot from './packageRoot';
  */
 
 interface IAbsoluteSettings {
-  glob?: Boolean;
-  relative?: Boolean;
+  glob?: boolean;
+  relative?: boolean;
 }
 
 function absolute(

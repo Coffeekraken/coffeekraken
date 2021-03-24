@@ -23,9 +23,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      *
      * Allows you to crop a string at a certain length (this length take care of the croping characters like "...")
      *
-     * @param               {String}                  text                      The text to crop
+     * @param               {String}                  text                      The text to crop
      * @param               {Number}                  length                    The text length to have after the croping process
-     * @param               {Object}                  [settings={}]             An object of settings described bellow:
+     * @param               {Object}                  [settings={}]             An object of settings described bellow:
      * - chars (...) {String}: The characters to use to signal the crop
      * - splitWords (false) {Boolean}: Specify if you want to split words or not. If not, the function will make sure the final text does not exceeds the wanted length
      * @return              {String}                                            The cropped text

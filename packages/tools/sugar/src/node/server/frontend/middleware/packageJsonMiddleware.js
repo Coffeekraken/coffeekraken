@@ -16,8 +16,8 @@ const standardizeJson_1 = __importDefault(require("../../../npm/utils/standardiz
  * This function describe the middleware that will fetch the ```package.json``` file at the root of
  * your server directory and add it to the template data sended to the rendered view
  *
- * @param           {Object}            req             The request made on the express server
- * @param           {Object}            res             The response object of the express server
+ * @param           {Object}            req             The request made on the express server
+ * @param           {Object}            res             The response object of the express server
  * @param           {Function}          next            The next function to call when the middleware has finished his job
  *
  * @todo      interface

@@ -89,7 +89,7 @@ class STerminalStdio extends SStdio_1.default {
      *
      * Method that actually log the passed log object with the passed component
      *
-     * @param         {ILog}        logObj            The log object to log
+     * @param         {ILog}        logObj            The log object to log
      * @param         {ISStdioComponent}      component       The component to use for logging
      *
      * @since         2.0.0

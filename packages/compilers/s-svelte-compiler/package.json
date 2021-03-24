@@ -8,10 +8,10 @@
   "license": "MIT",
   "dependencies": {
     "@coffeekraken/s-ts-compiler": "file:../s-ts-compiler",
+    "@coffeekraken/s-promise": "file:../../core/s-promise",
     "@coffeekraken/sugar": "file:../../tools/sugar",
     "uglify-js": "^3.13.2",
     "clean-css": "^5.1.2"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

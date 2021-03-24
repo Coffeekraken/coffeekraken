@@ -28,7 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      *
      * @param               {Object}                 obj                The object in which to set the value
      * @param               {String}                path                The dotted object path to get
-     * @param               {Object}            [settings={}]           A settings object to configure your glob get process
+     * @param               {Object}            [settings={}]           A settings object to configure your glob get process
      * @return              {Mixed}                                     The getted value or "undefined" if nothing found...
      *
      * @setting         {Boolean}               [deepize=true]          Specify if you want the result object to be deepized using the ```deepize``` sugar function

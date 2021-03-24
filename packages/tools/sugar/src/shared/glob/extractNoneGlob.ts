@@ -10,7 +10,7 @@ import __globParent from 'glob-parent';
  *
  * This function simply return you the none glob part of a passed string
  *
- * @param       {String}            string          The string from which to extract the none glob part
+ * @param       {String}            string          The string from which to extract the none glob part
  * @return      {String}                            The none glob part of the passed string
  *
  * @todo      interface

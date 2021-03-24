@@ -67,7 +67,7 @@ export class SScssFileCtorSettingsInterface extends __SInterface {
  *
  * This represent an scss file with some additional properties like "dependencies", etc...
  *
- * @param       {String}            path            The path to the scss file
+ * @param       {String}            path            The path to the scss file
  * @param       {ISScssFileSettings}     [settings={}]       Some settings to configure your file
  *
  * @todo        {Feature}       adding cache capabilities
@@ -223,7 +223,7 @@ class SScssFile extends __SFile implements ISScssFile {
    * @setting       {Boolean}              [cache=true]             Specify if you want to make use of the cache or not
    * @setting       {Boolean}           [clearCache=false]          Specify if you want to clear the cache before compilation
    * @setting       {String}            [sharedResources=null]      Specify some scss code that you want to be present in every compiled files
-   * @setting       {Object}            [sass={}]               Specify some settings that will be passed to the ```sass``` compiler
+   * @setting       {Object}            [sass={}]               Specify some settings that will be passed to the ```sass``` compiler
    *
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

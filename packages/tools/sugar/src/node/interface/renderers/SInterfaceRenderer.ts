@@ -1,5 +1,5 @@
 import __fs from 'fs';
-import __SClass from '../../../shared/class/SClass';
+import __SClass from '../@coffeekraken/s-class';
 import ISInterfaceRenderer, {
   ISInterfaceRendererRenderPropertyObj,
   ISInterfaceRendererSettings

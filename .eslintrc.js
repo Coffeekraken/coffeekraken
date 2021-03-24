@@ -23,7 +23,8 @@ module.exports = {
     'import/namespace': 2,
     'import/no-absolute-path': 2,
     '@typescript-eslint/ban-ts-comment': 0,
-    '@typescript-eslint/no-unused-vars': 'error'
+    '@typescript-eslint/no-unused-vars': 'error',
+    '@typescript-eslint/no-empty-interface': 0
   },
   settings: {
     'import/parsers': {

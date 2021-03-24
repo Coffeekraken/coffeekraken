@@ -19,7 +19,7 @@ import __namespace from '../package/namespace';
  * This class represent a search result with all his fields, etc...
  *
  * @param      {String}       source      The source to generate the docMap item. Can be a simple string or a file path
- * @param      {Object}       [settings={}]     A settings object with these properties availble:
+ * @param      {Object}       [settings={}]     A settings object with these properties availble:
  *
  * @todo      interface
  * @todo      doc

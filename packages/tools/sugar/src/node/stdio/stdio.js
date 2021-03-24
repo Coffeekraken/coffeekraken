@@ -20,7 +20,7 @@ const path_1 = __importDefault(require("../is/path"));
  * and displayed nicely.
  *
  * @param         {SProcess}          proc        The process to display Stdio for
- * @param         {Object}            [settings={}]     An object of blessed settings that will be passed to the main blessed.box instance
+ * @param         {Object}            [settings={}]     An object of blessed settings that will be passed to the main blessed.box instance
  *
  * @todo      interface
  * @todo      doc

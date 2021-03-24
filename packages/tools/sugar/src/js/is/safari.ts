@@ -8,7 +8,7 @@
  *
  * Detect if is safari
  *
- * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+ * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
  * @return    {Boolean}    true if is safari, false if not
  *
  * @todo      interface

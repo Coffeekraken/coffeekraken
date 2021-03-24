@@ -22,8 +22,8 @@ const set_1 = __importDefault(require("./set"));
  *    }
  * }
  *
- * @param       {Object}        object        The object to convert
- * @return      {Object}                      The converted object
+ * @param       {Object}        object        The object to convert
+ * @return      {Object}                      The converted object
  *
  * @todo      interface
  * @todo      doc

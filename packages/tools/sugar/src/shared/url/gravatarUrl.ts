@@ -10,9 +10,9 @@ import __md5 from '../crypt/md5';
  *
  * Return a gravatar url depending on the passed user email and size
  *
- * @param           {String}            email             The user email
+ * @param           {String}            email             The user email
  * @param           {Number}            [size=200]        The wanted image size. From 1 to 2048
- * @return          {String}                              The generated gravatar url
+ * @return          {String}                              The generated gravatar url
  *
  * @todo      interface
  * @todo      doc

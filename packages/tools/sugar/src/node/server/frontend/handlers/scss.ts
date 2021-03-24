@@ -13,9 +13,9 @@ import __SScssCompilerParamsInterface from '../../../scss/compile/interface/SScs
  *
  * This function is responsible of responding to express requests made on the home page
  *
- * @param         {Object}          req             The express request object
- * @param         {Object}          res             The express response object
- * @param         {Object}         [settings={}]    The handler settings
+ * @param         {Object}          req             The express request object
+ * @param         {Object}          res             The express response object
+ * @param         {Object}         [settings={}]    The handler settings
  *
  * @todo      interface
  * @todo      doc

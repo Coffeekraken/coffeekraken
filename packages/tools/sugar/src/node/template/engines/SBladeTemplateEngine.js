@@ -91,8 +91,8 @@ class SBladeTemplateEngine extends STemplateEngine_1.default {
      * Main render method
      *
      * @param       {String}      viewPath      The view path to render. Has to be an absolute file path
-     * @param       {Object}      [data={}]     An object of data to use for the render
-     * @param       {Object}      [settings={}]     An object of settings to override the default one passed in the contructor
+     * @param       {Object}      [data={}]     An object of data to use for the render
+     * @param       {Object}      [settings={}]     An object of settings to override the default one passed in the contructor
      * @return      {SPromise}                  An SPromise instance that will be resolved once the render has finished
      *
      * @since       2.0.0

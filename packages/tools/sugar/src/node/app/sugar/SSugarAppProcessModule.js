@@ -21,7 +21,7 @@ const SSugarAppModule_1 = __importDefault(require("./SSugarAppModule"));
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 class SSugarAppProcessModule extends SSugarAppModule_1.default {
-    // static interfaces = { this: __SFrontendServerInterface };
+    // static interfaces = { this: __SFrontendServerInterface };
     /**
      * @name            constructor
      * @type             Function

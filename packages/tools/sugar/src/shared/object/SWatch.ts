@@ -19,8 +19,8 @@ import __clone from '../object/clone';
  *
  * This class allows you to easily monitor some object properties and get the new and old value of it
  *
- * @param       {Object}      object        The object to watch
- * @param       {Object}      [settings={}]       An object of settings to configure your watch process
+ * @param       {Object}      object        The object to watch
+ * @param       {Object}      [settings={}]       An object of settings to configure your watch process
  * - deep (true) {Boolean}: Specify if you want to watch the object deeply or just the first level
  *
  * @todo      interface

@@ -39,8 +39,10 @@
 
 </script>
 
-<style type="text/scss">
-    background: red;
+<style type="text/css">
+	body {
+    	background: red;
+	}
 </style>
 
 <div>

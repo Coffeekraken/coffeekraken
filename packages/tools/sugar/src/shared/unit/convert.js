@@ -25,7 +25,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
      *
      * Convert a passed unit to the wanted one. If the passed unit is a number and not a string like "10rem", the unit is take as pixels
      *
-     * @param         {String|Number}           from            The base value to convert
+     * @param         {String|Number}           from            The base value to convert
      * @param         {String}                  [to='px']       The value unit you want back
      * @return        {Number}                                  The converted value
      *

@@ -1,4 +1,4 @@
-import __SClass from '../../shared/class/SClass';
+import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '../../shared/object/deepMerge';
 
 export interface ISSvelteComponentCtorSettings {

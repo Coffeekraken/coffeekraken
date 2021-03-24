@@ -19,8 +19,8 @@
      *
      * This function transform a string into a param case one like so "something-cool"
      *
-     * @param       {String}        string          The string to convert
-     * @return      {String}                        The converted string
+     * @param       {String}        string          The string to convert
+     * @return      {String}                        The converted string
      *
      * @todo      interface
      * @todo      doc

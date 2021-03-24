@@ -9,7 +9,7 @@
  * This function simply search for "@use" statements in the passed content
  * and put them on top of the string
  *
- * @param       {String}            content             The content you want to process
+ * @param       {String}            content             The content you want to process
  * @return      {String}                                The processed content
  *
  * @todo      interface

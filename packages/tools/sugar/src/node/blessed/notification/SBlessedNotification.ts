@@ -21,8 +21,8 @@ import __SBlessedComponent from '../SBlessedComponent';
  *
  * @param         {String}             title            The notification title
  * @param         {String}            body              The notification body
- * @param         {String}            [cta=null]        The call to action text
- * @param         {Object}            [settings={}]     An object of settings to configure your notification more in details:
+ * @param         {String}            [cta=null]        The call to action text
+ * @param         {Object}            [settings={}]     An object of settings to configure your notification more in details:
  *
  * @setting     {Function}    [onClick=null]        Specify a function to call when the user click on the notification
  * @setting     {Function}    [onTimeout=null]      Specify a function to call when the notification is timed out

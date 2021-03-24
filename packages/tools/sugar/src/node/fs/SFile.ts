@@ -4,9 +4,7 @@ import __path from 'path';
 import __md5 from '../../shared/crypt/md5';
 import __deepMerge from '../../shared/object/deepMerge';
 import __toString from '../../shared/string/toString';
-import __SEventEmitter, {
-  ISEventEmitter
-} from '../../shared/event/SEventEmitter';
+import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import __replacePathTokens from '../path/replacePathTokens';
 import __ensureDirSync from './ensureDirSync';
 import __extension from './extension';
@@ -186,7 +184,7 @@ class SFile extends __SEventEmitter implements ISFile {
    * method.
    *
    * @param     {String|Array<String>}      extension     Extension(s) to register. Can be a string, a comma separated string or an array of strings
-   * @param     {SFile}                     cls           The class to associate to this/these extension(s)
+   * @param     {SFile}                     cls           The class to associate to this/these extension(s)
    *
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -495,7 +493,7 @@ class SFile extends __SEventEmitter implements ISFile {
    *
    * This method transform this instance into a plain object
    *
-   * @return        {Object}        A plain object version of this instance
+   * @return        {Object}        A plain object version of this instance
    *
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

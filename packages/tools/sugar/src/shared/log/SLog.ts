@@ -53,7 +53,7 @@ export default class SLog {
    *
    * Constructor
    *
-   * @param         {Object}        [settings={}]           The settings object to configure your SLog instance. Here's the settings available:
+   * @param         {Object}        [settings={}]           The settings object to configure your SLog instance. Here's the settings available:
    * - adapters ({}) {Object}: An object of adapters that you want to use in this SLog instance. The format is { adapterName: adapterInstance, etc... }
    * - overrideNativeConsole (false) {Boolean}: This will override the console.log, warn, etc... methods
    * - adaptersByLevel ({}) (Object): Specify which adapter you want to use by level. Can be an Array like ['console','mail'] or a comma separated string like "console,mail". The object format is { adapterName: adaptersList }
@@ -147,7 +147,7 @@ export default class SLog {
    * Internal log method that make the actual call to all the adapters, etc...
    *
    * @param         {Mixed}         ...args         The actual message(s) to log or the level wanted like "log", "warn", "info", "debug" or "error"
-   * @return        {Promise}                             A promise that will be resolved once all the adapters have correctly log the message
+   * @return        {Promise}                             A promise that will be resolved once all the adapters have correctly log the message
    *
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
    */
@@ -227,7 +227,7 @@ export default class SLog {
    *
    * The main log method that log a normal message
    *
-   * @param           {Mixed}           ...args             The message(s) to log
+   * @param           {Mixed}           ...args             The message(s) to log
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
    *
    * @example         js
@@ -247,7 +247,7 @@ export default class SLog {
    *
    * The info method that log a message with the "info" level
    *
-   * @param           {Mixed}           ...args             The message(s) to log
+   * @param           {Mixed}           ...args             The message(s) to log
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
    *
    * @example         js
@@ -267,7 +267,7 @@ export default class SLog {
    *
    * The warn method that log a message with the "warn" level
    *
-   * @param           {Mixed}           ...args             The message(s) to log
+   * @param           {Mixed}           ...args             The message(s) to log
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
    *
    * @example         js
@@ -287,7 +287,7 @@ export default class SLog {
    *
    * The debug method that log a message with the "debug" level
    *
-   * @param           {Mixed}           ...args             The message(s) to log
+   * @param           {Mixed}           ...args             The message(s) to log
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
    *
    * @example         js
@@ -307,7 +307,7 @@ export default class SLog {
    *
    * The error method that log a message with the "error" level
    *
-   * @param           {Mixed}           ...args             The message(s) to log
+   * @param           {Mixed}           ...args             The message(s) to log
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
    *
    * @example         js
@@ -327,7 +327,7 @@ export default class SLog {
    *
    * The trace method that log a message with the "trace" level
    *
-   * @param           {Mixed}           ...args             The message(s) to log
+   * @param           {Mixed}           ...args             The message(s) to log
    * @return          {Promise}                             A promise that will be resolved once the message has been correctly logged through all adapters
    *
    * @example         js

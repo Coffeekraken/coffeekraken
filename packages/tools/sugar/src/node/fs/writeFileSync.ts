@@ -15,7 +15,7 @@ import __replacePathTokens from '../path/replacePathTokens';
  * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              path           The file path to write
- * @param       {String}              data          The data to write in the file
+ * @param       {String}              data          The data to write in the file
  * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeFileSync()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
  *
  * @todo      interface

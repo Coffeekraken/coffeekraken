@@ -15,7 +15,7 @@ import deepMerge from '../../shared/object/deepMerge';
  *
  * @param       {Object}        [settings={}]         An object of settings to configure your feature
  *
- * @setting       {Number}      [offset=50]         The offset before entering in the viewport to set the "src" attribute
+ * @setting       {Number}      [offset=50]         The offset before entering in the viewport to set the "src" attribute
  *
  * @todo            interface
  * @todo            doc

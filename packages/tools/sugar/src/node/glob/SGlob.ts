@@ -24,8 +24,8 @@ import __extractNoneGlob from './extractNoneGlob';
  * @example         js
  * import SGlob from '@coffeekraken/sugar/node/glob/SGlob';
  * const glob = new SGlob('my/cool/glob/*.js');
- * const files = await glob.resolve();
- * await SGlob.resolve('my/cool/glob/*.js');
+ * const files = glob.resolve();
+ * SGlob.resolve('my/cool/glob/*.js');
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -58,14 +58,13 @@ export default class SGlob {
   /**
    * @name                resolve
    * @type                Function
-   * @async
    * @static
    *
    * Alias to the ```resolveGlob``` function available under "node/glob/resolveGlob"
    *
    * @param       {String|Array<String>}          globs        The glob pattern(s) to search files for
-   * @param       {Object}            [settings={}]           An object of settings to configure your glob process
-   * @return      {SPromise}                                  An SPromise instance that will be resolved once the search process has been fully finished
+   * @param       {Object}            [settings={}]           An object of settings to configure your glob process
+   * @return      {SPromise}                                  An SPromise instance that will be resolved once the search process has been fully finished
    *
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -81,7 +80,7 @@ export default class SGlob {
    *
    * Alias to the ```extractGlob``` function available under "node/glob/extractGlob"
    *
-   * @param       {String}            string          The string from which to extract the glob part
+   * @param       {String}            string          The string from which to extract the glob part
    * @return      {String}                            The glob part of the passed string
    *
    * @since         2.0.0
@@ -98,7 +97,7 @@ export default class SGlob {
    *
    * Alias to the ```extractNoneGlob``` function available under "node/glob/extractNoneGlob"
    *
-   * @param       {String}            string          The string from which to extract the none glob part
+   * @param       {String}            string          The string from which to extract the none glob part
    * @return      {String}                            The none glob part of the passed string
    *
    * @since         2.0.0
@@ -131,8 +130,8 @@ export default class SGlob {
    *
    * Alias to the ```resolveGlob``` function available under "node/glob/resolveGlob"
    *
-   * @param       {Object}            [settings={}]           An object of settings to configure your glob process
-   * @return      {SPromise}                                  An SPromise instance that will be resolved once the search process has been fully finished
+   * @param       {Object}            [settings={}]           An object of settings to configure your glob process
+   * @return      {SPromise}                                  An SPromise instance that will be resolved once the search process has been fully finished
    *
    * @since         2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

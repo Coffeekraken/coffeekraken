@@ -150,7 +150,7 @@ class SSocketDom {
   /**
    * Handle the 'body' event
    *
-   * @param         {String}          data        The data passed with the event
+   * @param         {String}          data        The data passed with the event
    * @param         {Object}          settings    Tge settubgs passed with the event
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -162,7 +162,7 @@ class SSocketDom {
   /**
    * Handle the 'content' event
    *
-   * @param         {String}          data        The data passed with the event
+   * @param         {String}          data        The data passed with the event
    * @param         {Object}          settings    Tge settubgs passed with the event
    *
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -203,7 +203,7 @@ class SSocketDom {
    * Register a new event with an handler function that will handle the event content
    *
    * @param         {String}        event         The event name that you want to listen from the server
-   * @param          {Function}     handlerFn      The function that will handle the event content.
+   * @param          {Function}     handlerFn      The function that will handle the event content.
    * @return         {SSocketDom}                  The SSocketDom instance to maintain chainability
    *
    * @example     js

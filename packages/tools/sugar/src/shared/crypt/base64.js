@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * Encrypt
          *
-         * @param       {String}       message        The message to encrypt
+         * @param       {String}       message        The message to encrypt
          * @return      {String}                       The encrypted message
          *
          * @since       2.0.0

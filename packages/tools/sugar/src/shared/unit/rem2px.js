@@ -19,7 +19,7 @@
      * Convert rem value to a px one
      *
      * @param         {Number}          rem           The rem value to convert
-     * @return        {Number}                        The pixel value
+     * @return        {Number}                        The pixel value
      *
      * @todo      interface
      * @todo      doc

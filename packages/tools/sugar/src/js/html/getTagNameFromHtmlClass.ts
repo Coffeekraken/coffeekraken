@@ -12,8 +12,8 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * This function simply return the tagname depending on the passed HTML class
  * like HTMLAnchorElement, HTMLLinkElement, etc...
  *
- * @param       {HTMLElement}      htmlClass       The htmlClass to get the tag for
- * @return      {String}               The tagname that correspond to the passed HTMLElement class
+ * @param       {HTMLElement}      htmlClass       The htmlClass to get the tag for
+ * @return      {String}               The tagname that correspond to the passed HTMLElement class
  *
  * @todo      interface
  * @todo      doc

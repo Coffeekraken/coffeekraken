@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SClass from '../../shared/class/SClass';
+import __SClass from '@coffeekraken/s-class';
 import __argsToObject from '../../shared/cli/argsToObject';
 import __deepMerge from '../../shared/object/deepMerge';
 import __SInterface from '../interface/SInterface';
@@ -182,7 +182,7 @@ class SCli extends __SClass implements ISCli {
    * - log: emited when some data are pushed in the stdout channel
    *
    * @param       {Object}        [paramsObj={}]      An argument object to override the default values of the definition object
-   * @param       {Object}        [settings={}]       Same settings object as in the constructor but for this process only
+   * @param       {Object}        [settings={}]       Same settings object as in the constructor but for this process only
    * @return      {SPromise}                        An SPromise instance on which you can subscribe for "events" described above
    *
    * @example       js

@@ -1,5 +1,5 @@
 import __path from 'path';
-import __SClass from '../../../shared/class/SClass';
+import __SClass from '../@coffeekraken/s-class';
 import __deepMerge from '../../../shared/object/deepMerge';
 import __SPromise from '@coffeekraken/s-promise';
 import __handlebars from 'handlebars';
@@ -381,7 +381,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * and the passed block object data
    *
    * @param       {Object}          blockObj          The object representing the block to render
-   * @param       {Object}        [settings={}]       An object of settings to override the one passed in the constructor
+   * @param       {Object}        [settings={}]       An object of settings to override the one passed in the constructor
    * @return      {String}                            The rendered block
    *
    * @since       2.0.0
@@ -420,7 +420,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * and the passed block object data
    *
    * @param       {Object}          blockObj          The object representing the block to render
-   * @param       {Object}        [settings={}]       An object of settings to override the one passed in the constructor
+   * @param       {Object}        [settings={}]       An object of settings to override the one passed in the constructor
    * @return      {String}                            The rendered block
    *
    * @since       2.0.0
@@ -457,7 +457,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * This method take the layout url setted in the settings object and
    * resolve it to get back a full layout object with the path and the stats if we are in node context
    *
-   * @param         {String}        layoutPath        The template path to get
+   * @param         {String}        layoutPath        The template path to get
    * @return      {ISDocblockRendererTemplateObj}                          The template object with the path and the stats if we are in node context
    *
    * @since       2.0.0

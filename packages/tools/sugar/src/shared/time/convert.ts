@@ -9,8 +9,8 @@
  * This function allows you to convert time like seconds, ms, hours, minutes, etc... from one format to another
  *
  * @param           {String|Number}             from                  The value to start from like "10s", "20ms", "2h", etc...
- * @param           {String}                    [to='ms']             The format you want to get back
- * @return          {Number}                                          The converted value
+ * @param           {String}                    [to='ms']             The format you want to get back
+ * @return          {Number}                                          The converted value
  *
  * @todo      interface
  * @todo      doc

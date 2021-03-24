@@ -49,7 +49,7 @@ class SLogFilesAdapter {
      *
      * Constructor
      *
-     * @param         {Object}        [settings={}]           The settings object to configure your SLogFilesAdapter instance. Here's the settings available:
+     * @param         {Object}        [settings={}]           The settings object to configure your SLogFilesAdapter instance. Here's the settings available:
      * - path (process.cwd() + '/.logs') {String}: Where you want to store the logs. This must be a path to a writable folder
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -79,8 +79,8 @@ class SLogFilesAdapter {
      * This is the main method of the logger. It actually log the message passed as parameter to the confilesole
      *
      * @param         {Mixed}          message            The message to log
-     * @param         {String}         level              The log level. Can be "log", "info", "error", "debug" or "warn"
-     * @return        {Promise}                           A promise that will be resolved once the message has been logged correctly
+     * @param         {String}         level              The log level. Can be "log", "info", "error", "debug" or "warn"
+     * @return        {Promise}                           A promise that will be resolved once the message has been logged correctly
      *
      * @example         js
      * await consoleAdapter.log('hello world');

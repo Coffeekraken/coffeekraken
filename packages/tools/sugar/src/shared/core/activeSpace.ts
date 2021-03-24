@@ -48,7 +48,7 @@ const activeSpaceApi = {
    *
    * This function allows you to get the current active space
    *
-   * @return      {String}                  The current active space
+   * @return      {String}                  The current active space
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -63,10 +63,10 @@ const activeSpaceApi = {
    *
    * This function allows you to set the current active space
    *
-   * @param       {String}      activeSpace       The active space to set
+   * @param       {String}      activeSpace       The active space to set
    * @param       {Boolean}       [history=true]    Specify if you want that this action make en new entry in history or not
    * @param       {Boolean}     [silent=false]    Specify if you want to have errors throwed or not
-   * @return      {String}                  The current active space
+   * @return      {String}                  The current active space
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -98,9 +98,9 @@ const activeSpaceApi = {
    *
    * This function take the current activeSpace string and add the passed one to set the new activeSpace string
    *
-   * @param       {String}      activeSpace         The activeSpace to append
+   * @param       {String}      activeSpace         The activeSpace to append
    * @param       {Boolean}       [history=true]    Specify if you want that this action make en new entry in history or not
-   * @return      {String}                          Return the current active space
+   * @return      {String}                          Return the current active space
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -132,7 +132,7 @@ const activeSpaceApi = {
    *
    * @param       {String}        toRemove          The string to remove
    * @param       {Boolean}       [history=true]    Specify if you want that this action make en new entry in history or not
-   * @return      {String}                          Return the current active space
+   * @return      {String}                          Return the current active space
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -161,7 +161,7 @@ const activeSpaceApi = {
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   * @return      {String}                          Return the current active space
+   * @return      {String}                          Return the current active space
    */
   previous: () => {
     if (_activeSpaceStack.length <= 1) return;
@@ -177,9 +177,9 @@ const activeSpaceApi = {
    * This function allows you to check if the active space string that you pass match with the current active space or not.
    * The checking process is done using the "minimatch" package that let you use cool features like "*", "**", etc...
    *
-   * @param       {String}        activeSpaceToCheck          The active space string that you want to check
-   * @param       {String}        [currentActiveSpace=activeSpaceApi.get()]       The current active space to check against the passed one
-   * @return      {Boolean}                                   true if the passed active space string match the current one, false if not
+   * @param       {String}        activeSpaceToCheck          The active space string that you want to check
+   * @param       {String}        [currentActiveSpace=activeSpaceApi.get()]       The current active space to check against the passed one
+   * @return      {Boolean}                                   true if the passed active space string match the current one, false if not
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -196,10 +196,10 @@ const activeSpaceApi = {
    * This function allows you to register a callback linked with an activeSpace string
    * that will be called once the activeSpace is matched
    *
-   * @param         {String}        activeSpaceToCheck        The active space to check
+   * @param         {String}        activeSpaceToCheck        The active space to check
    * @param         {Function}      callback                  The callback function to call when the activeSpace is matched
    * @param         {Object}        [settings={}]             A settings object to configure your activeSpace callback behavior:
-   * - once (false) {Boolean}: Specify if you want the callback to be called only once. This will just set the "count" setting to 1
+   * - once (false) {Boolean}: Specify if you want the callback to be called only once. This will just set the "count" setting to 1
    * - count (-1) {Number}: Specify how many times you want the callback to be called. -1 mean unlimited.
    *
    * @since       2.0.0

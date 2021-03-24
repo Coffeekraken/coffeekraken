@@ -30,7 +30,7 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  * - destroy: emited when the timer has been destroyed
  *
  * @param     {Number|String}     duration      The duration of the timer. Can be a Number that will be treated as miliseconds, or a string like "1s", "2m", etc...
- * @param     {Object}            [settings={}]     A settings object to configure your timer more deeply:
+ * @param     {Object}            [settings={}]     A settings object to configure your timer more deeply:
  * - tickInterval (1000) {Number}: Specify the interval wanted between each ticks in miliseconds
  * - tickCount (null) {Number}: Specify how many ticks you want during the timer process
  * - loop (false) {Boolean}: Specify if you want the timer to loop or not.
@@ -60,7 +60,7 @@ class STimer extends s_promise_1.default {
      * Constructor
      *
      * @param 	{number} 	[duration=1000] 		The duration of the timer. Can be a number of milliseconds of a string time like '1s', '2m', etc...
-     * @param 	{Object} 	settings 		The settings for the timer
+     * @param 	{Object} 	settings 		The settings for the timer
      *
      * @example         js
      * import STimer from '@coffeekraken/sugar/js/time/STimer';

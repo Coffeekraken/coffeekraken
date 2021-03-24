@@ -8,7 +8,7 @@
  *
  * Detect if is the samsung stock browser that is running the page
  *
- * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
+ * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
  * @return      {Boolean}                                       true if is a samsung browser, false if not
  *
  * @todo      interface

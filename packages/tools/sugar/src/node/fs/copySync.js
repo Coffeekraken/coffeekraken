@@ -16,7 +16,7 @@ const replacePathTokens_1 = __importDefault(require("../path/replacePathTokens")
  * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              src           The source path to copy
- * @param       {String}              dest          The destination path
+ * @param       {String}              dest          The destination path
  *
  * @todo      interface
  * @todo      doc

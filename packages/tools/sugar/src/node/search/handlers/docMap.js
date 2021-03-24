@@ -48,9 +48,9 @@ const SUrlAction_1 = __importDefault(require("../../action/browser/SUrlAction"))
  * This function is responsible of handling the docMap search
  * by filtering the docMap and send back the serch result json.
  *
- * @param         {String}        searchString        The searching string
- * @param         {Object}        [settings={}]       A settings object to configure your search process. Here's the available settings:
- * @return        {Promise}                         A promise that will be resolved with an array of SSearchResultItem object either as full instances, or in JSON format depending on the settings.format property
+ * @param         {String}        searchString        The searching string
+ * @param         {Object}        [settings={}]       A settings object to configure your search process. Here's the available settings:
+ * @return        {Promise}                         A promise that will be resolved with an array of SSearchResultItem object either as full instances, or in JSON format depending on the settings.format property
  *
  * @todo      interface
  * @todo      doc

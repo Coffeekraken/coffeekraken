@@ -19,7 +19,7 @@
      *
      * Check if the app run on mac OS X or not
      *
-     * @return        {Boolean}                             true if mac OS X, false if not
+     * @return        {Boolean}                             true if mac OS X, false if not
      *
      * @todo      interface
      * @todo      doc

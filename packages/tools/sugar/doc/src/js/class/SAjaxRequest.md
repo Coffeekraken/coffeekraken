@@ -4,37 +4,31 @@
 
 Type : **{ Class }**
 
-
 Class that represent an ajax request that will be passed to an SAjax instance
 
-
 ### Example
+
 ```js
-	const request = new SAjaxRequest({
- 	url : '/api/...',
- 	method : 'GET',
- 	data : {
- 		myVar : 'myVal'
- 	}
+const request = new SAjaxRequest({
+  url: '/api/...',
+  method: 'GET',
+  data: {
+    myVar: 'myVal'
+  }
 });
 ```
-Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.com)
 
+Author : Olivier Bossel [olivier.bossel@gmail.com](mailto:olivier.bossel@gmail.com)
 
 ## Constructor
 
-
 #### Parameters
-Name  |  Type  |  Description  |  Status  |  Default
-------------  |  ------------  |  ------------  |  ------------  |  ------------
-params  |  **{ [Object](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Object) }**  |  The request params  |  required  |
 
-
-
-
+| Name   | Type                                                                                                   | Description        | Status   | Default |
+| ------ | ------------------------------------------------------------------------------------------------------ | ------------------ | -------- | ------- |
+| params | **{ [Object](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Object) }** | The request params | required |
 
 ## Properties
-
 
 ### url
 
@@ -44,7 +38,6 @@ Type : **{ [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Referen
 
 Default : **null**
 
-
 ### method
 
 The request method to use like GET, POST, DELETE or PUT
@@ -52,7 +45,6 @@ The request method to use like GET, POST, DELETE or PUT
 Type : **{ [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/String) }**
 
 Default : **GET**
-
 
 ### cors
 
@@ -62,7 +54,6 @@ Type : **{ [Boolean](https://developer.mozilla.org/fr/docs/Web/JavaScript/Refere
 
 Default : **true**
 
-
 ### cache
 
 Use the cache or not
@@ -70,7 +61,6 @@ Use the cache or not
 Type : **{ [Boolean](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Boolean) }**
 
 Default : **true**
-
 
 ### data
 
@@ -80,16 +70,14 @@ Type : **{ [Object](https://developer.mozilla.org/fr/docs/Web/JavaScript/Referen
 
 Default : **null**
 
-
 ### dataType
 
 The data type expected from the response
-Accepted dataType are : text | json | html
+Accepted dataType are : text | json | html
 
 Type : **{ [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/String) }**
 
 Default : **text**
-
 
 ### contentType
 
@@ -99,7 +87,6 @@ Type : **{ [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Referen
 
 Default : **null**
 
-
 ### requestedWith
 
 Set the X-Requested-With header
@@ -108,7 +95,6 @@ Type : **{ [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Referen
 
 Default : **XMLHttpRequest**
 
-
 ### auth
 
 Set the Authorization header
@@ -116,7 +102,6 @@ Set the Authorization header
 Type : **{ [String](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/String) }**
 
 Default : **null**
-
 
 ### headers
 

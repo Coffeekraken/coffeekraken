@@ -10,7 +10,7 @@
  *
  * @param                 {Object}                  object                The object to sort
  * @param                 {Function}                sort                  The sort function to use
- * @return                {Object}                                        The sorted object
+ * @return                {Object}                                        The sorted object
  *
  * @todo      interface
  * @todo      doc

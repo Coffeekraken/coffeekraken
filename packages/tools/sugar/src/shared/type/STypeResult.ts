@@ -222,7 +222,7 @@ class STypeResult implements ISTypeResult {
    * This method simply returns you a terminal compatible string
    * of the interface checking result
    *
-   * @return        {String}                A string compatible with the terminal
+   * @return        {String}                A string compatible with the terminal
    *
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

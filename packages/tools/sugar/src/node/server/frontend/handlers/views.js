@@ -26,9 +26,9 @@ const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
  *
  * This function is responsible of responding to express requests made on the "views" section
  *
- * @param         {Object}          req             The express request object
- * @param         {Object}          server          The express server instance
- * @return        {Promise}                         A promise that will be resolved with the response to send to the client
+ * @param         {Object}          req             The express request object
+ * @param         {Object}          server          The express server instance
+ * @return        {Promise}                         A promise that will be resolved with the response to send to the client
  *
  * @todo      interface
  * @todo      doc

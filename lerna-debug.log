@@ -1,0 +1,17 @@
+0 silly argv { _: [ 'bootstrap' ], lernaVersion: '4.0.0', '$0': 'lerna' }
+1 notice cli v4.0.0
+2 verbose rootPath /Users/olivierbossel/data/web/coffeekraken/coffeekraken
+3 info versioning independent
+4 error JSONError: Unexpected token "/" (0x2F) in JSON at position 583 while parsing near "...ree\": \"^1.0.0\",\n    // \"@coffeekraken/s-..." in packages/tools/sugar/package.json
+4 error
+4 error [0m [90m 22 | [39m  [32m"dependencies"[39m[33m:[39m {[0m
+4 error [0m [90m 23 | [39m    [32m"@11ty/dependency-tree"[39m[33m:[39m [32m"^1.0.0"[39m[33m,[39m[0m
+4 error [0m[31m[1m>[22m[39m[90m 24 | [39m    [90m// "@coffeekraken/s-class": "file:../../core/s-class",[39m[0m
+4 error [0m [90m    | [39m    [31m[1m^[22m[39m[0m
+4 error [0m [90m 25 | [39m    [90m// "@coffeekraken/s-config": "file:../../core/s-config",[39m[0m
+4 error [0m [90m 26 | [39m    [90m// "@coffeekraken/s-event-emitter": "file:../../core/s-event-emitter",[39m[0m
+4 error [0m [90m 27 | [39m    [90m// "@coffeekraken/s-svelte-compiler": "file:../../compilers/s-svelte-compiler",[39m[0m
+4 error
+4 error     at parseJson (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/node_modules/@lerna/project/node_modules/parse-json/index.js:29:21)
+4 error     at parse (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/node_modules/@lerna/project/node_modules/load-json-file/index.js:15:9)
+4 error     at module.exports (/Users/olivierbossel/data/web/coffeekraken/coffeekraken/node_modules/@lerna/project/node_modules/load-json-file/index.js:18:47)

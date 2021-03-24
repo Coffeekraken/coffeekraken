@@ -131,7 +131,7 @@ return [
     ],
     'zh' => [
         'isoName' => 'Chinese',
-        'nativeName' => '中文 (Zhōngwén), 汉语, 漢語',
+        'nativeName' => '中文 (Zhōngwén), 汉语, 漢語',
     ],
     'cv' => [
         'isoName' => 'Chuvash',
@@ -222,7 +222,7 @@ return [
         'nativeName' => 'Deutsch',
     ],
     'el' => [
-        'isoName' => 'Greek (modern)',
+        'isoName' => 'Greek (modern)',
         'nativeName' => 'ελληνικά',
     ],
     'gn' => [
@@ -242,7 +242,7 @@ return [
         'nativeName' => '(Hausa) هَوُسَ',
     ],
     'he' => [
-        'isoName' => 'Hebrew (modern)',
+        'isoName' => 'Hebrew (modern)',
         'nativeName' => 'עברית',
     ],
     'hz' => [
@@ -271,7 +271,7 @@ return [
     ],
     'ie' => [
         'isoName' => 'Interlingue',
-        'nativeName' => 'Originally called Occidental; then Interlingue after WWII',
+        'nativeName' => 'Originally called Occidental; then Interlingue after WWII',
     ],
     'ga' => [
         'isoName' => 'Irish',
@@ -303,7 +303,7 @@ return [
     ],
     'ja' => [
         'isoName' => 'Japanese',
-        'nativeName' => '日本語 (にほんご)',
+        'nativeName' => '日本語 (にほんご)',
     ],
     'jv' => [
         'isoName' => 'Javanese',
@@ -323,7 +323,7 @@ return [
     ],
     'ks' => [
         'isoName' => 'Kashmiri',
-        'nativeName' => 'कश्मीरी, كشميري‎',
+        'nativeName' => 'कश्मीरी, كشميري‎',
     ],
     'kk' => [
         'isoName' => 'Kazakh',
@@ -359,7 +359,7 @@ return [
     ],
     'ku' => [
         'isoName' => 'Kurdish',
-        'nativeName' => 'Kurdî, کوردی‎',
+        'nativeName' => 'Kurdî, کوردی‎',
     ],
     'kj' => [
         'isoName' => 'Kuanyama, Kwanyama',
@@ -415,7 +415,7 @@ return [
     ],
     'ms' => [
         'isoName' => 'Malay',
-        'nativeName' => 'Bahasa Melayu, بهاس ملايو‎',
+        'nativeName' => 'Bahasa Melayu, بهاس ملايو‎',
     ],
     'ml' => [
         'isoName' => 'Malayalam',
@@ -490,7 +490,7 @@ return [
         'nativeName' => 'ᐊᓂᔑᓈᐯᒧᐎᓐ',
     ],
     'cu' => [
-        'isoName' => 'Church Slavic, Church Slavonic, Old Church Slavonic, Old Slavonic, Old Bulgarian',
+        'isoName' => 'Church Slavic, Church Slavonic, Old Church Slavonic, Old Slavonic, Old Bulgarian',
         'nativeName' => 'ѩзыкъ словѣньскъ',
     ],
     'om' => [
@@ -559,7 +559,7 @@ return [
     ],
     'sd' => [
         'isoName' => 'Sindhi',
-        'nativeName' => 'सिन्धी, سنڌي، سندھی‎',
+        'nativeName' => 'सिन्धी, سنڌي، سندھی‎',
     ],
     'se' => [
         'isoName' => 'Northern Sami',
@@ -635,7 +635,7 @@ return [
     ],
     'tg' => [
         'isoName' => 'Tajik',
-        'nativeName' => 'тоҷикӣ, toçikī, تاجیکی‎',
+        'nativeName' => 'тоҷикӣ, toçikī, تاجیکی‎',
     ],
     'th' => [
         'isoName' => 'Thai',
@@ -662,7 +662,7 @@ return [
         'nativeName' => 'Setswana',
     ],
     'to' => [
-        'isoName' => 'Tongan (Tonga Islands)',
+        'isoName' => 'Tongan (Tonga Islands)',
         'nativeName' => 'Faka Tonga',
     ],
     'tr' => [
@@ -675,7 +675,7 @@ return [
     ],
     'tt' => [
         'isoName' => 'Tatar',
-        'nativeName' => 'татар теле, tatar tele',
+        'nativeName' => 'татар теле, tatar tele',
     ],
     'tw' => [
         'isoName' => 'Twi',
@@ -699,7 +699,7 @@ return [
     ],
     'uz' => [
         'isoName' => 'Uzbek',
-        'nativeName' => 'Oʻzbek, Ўзбек, أۇزبېك‎',
+        'nativeName' => 'Oʻzbek, Ўзбек, أۇزبېك‎',
     ],
     've' => [
         'isoName' => 'Venda',

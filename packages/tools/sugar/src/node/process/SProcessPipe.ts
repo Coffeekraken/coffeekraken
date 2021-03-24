@@ -2,7 +2,7 @@
 import __isClass from '../../shared/is/class';
 import { ISProcess, ISProcessCtor, ISProcessSettings } from './SProcess';
 import __SPromise from '@coffeekraken/s-promise';
-import __SEventEmitter from '../../shared/event/SEventEmitter';
+import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __deepMerge from '../../shared/object/deepMerge';
 import __typeof from '../../shared/value/typeof';
 

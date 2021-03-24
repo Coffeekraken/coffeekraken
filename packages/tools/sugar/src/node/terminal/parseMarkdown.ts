@@ -10,7 +10,7 @@ import __parseHtml from './parseHtml';
  *
  * Parse the simple markdown tags to format the terminal message
  *
- * @param           {String|Array}                  message                 The message to format of an array of messages to format
+ * @param           {String|Array}                  message                 The message to format of an array of messages to format
  * @return          {String}                                          The formated message
  *
  * @todo      interface

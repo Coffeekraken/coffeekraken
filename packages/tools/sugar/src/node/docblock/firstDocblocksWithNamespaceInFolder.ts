@@ -19,7 +19,7 @@ import __SDocblock from './SDocblock';
  * This function search in the passed folder for files containing a "@namespace" tag (and an "@name" optional one)
  * and generate a SNav instance with all these founded files as sources...
  *
- * @param         {String}          directory               The directory in which to search for files with the namespace tag
+ * @param         {String}          directory               The directory in which to search for files with the namespace tag
  * @param         {Object}          [settings={}]           A settings object to configure your navigation generation:
  * - exclude ('**\/+(__tests__ | __wip__)\/**') {String}: Specify a glob pattern representing the files to exclude from the generation
  * @return        {Object}                                    An object containing the docblocks holded in each namespaces as properties
@@ -48,7 +48,7 @@ export default async function firstDocblockWithNamespaceInFolder(
 
   if (!__fs.existsSync(directory)) return {};
 
-  let founded = await __findInFiles.find(`@namespace`, directory);
+  const founded = await __findInFiles.find(`@namespace`, directory);
 
   const namespaceObj = {};
 

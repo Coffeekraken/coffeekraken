@@ -93,7 +93,7 @@ export default class SFsDeamon extends __SDeamon {
    *
    * @param       {String|Array<String>}        input         The file(s) you want to watch by specifying a path, a glob pattern or an Array of these
    * @param       {Object}                  [settings={}]       An object of settings to override the default one passed in the constructor only for this watch process
-   * @return      {SPromise}                                   An SPromise instance on which you can subscribe for events like "update", "add" or "unlink"
+   * @return      {SPromise}                                   An SPromise instance on which you can subscribe for events like "update", "add" or "unlink"
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

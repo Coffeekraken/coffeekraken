@@ -8,7 +8,7 @@
  *
  * This function gives you back the processes stack registered using the "registerProcess" function.
  *
- * @return      {Object}              The registered processes stack
+ * @return      {Object}              The registered processes stack
  *
  * @todo      interface
  * @todo      doc

@@ -14,7 +14,7 @@ import __replacePathTokens from '../path/replacePathTokens';
  * Calculate the size of the passed folder and return it through a promise, either in raw format, either in human readdable one...
  * Support the ```replacePathTokens``` tokens
  *
- * @param             {String}                folderPath                  The folder path to calculate the size
+ * @param             {String}                folderPath                  The folder path to calculate the size
  * @param             {Boolean}               [rawFormat=false]           If true, will return the folder size in raw format
  * @return            {Promise}                                           A promise that will be resolved once the folder size has been calculated
  *

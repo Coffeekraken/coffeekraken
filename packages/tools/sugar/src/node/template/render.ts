@@ -23,9 +23,9 @@ import __unique from '../../shared/array/unique';
  * the view and return a simple Promise that will be resolved or rejected depending on the
  * process status.
  *
- * @param       {String}        viewPath        The view path to compile. This has to be a dotted path like "my.cool.view" relative to the @config.views.rootDir directory
- * @param       {Object}        [data={}]       An object of data to use to compile the view correctly
- * @param       {Object}        [settings={}]   An object of settings to configure your rendering process. Here's the list of available settings:
+ * @param       {String}        viewPath        The view path to compile. This has to be a dotted path like "my.cool.view" relative to the @config.views.rootDir directory
+ * @param       {Object}        [data={}]       An object of data to use to compile the view correctly
+ * @param       {Object}        [settings={}]   An object of settings to configure your rendering process. Here's the list of available settings:
  * - rootDir (__sugarConfig('views.rootDir')) {String|Array<String>}: Specify the root directory where to search for views. Can be an array of directories in which the engine will search through if needed
  *
  * @todo      interface

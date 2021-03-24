@@ -20,33 +20,37 @@ import __SInterface from '@coffeekraken/sugar/node/interface/SInterface';
 class SSvelteCompilerParamsInterface extends __SInterface {
   static definition = {
     input: {
-      type: {
-        type: 'Array<String>',
-        plop: true
+      type: 'Array<String>',
+      path: {
+        absolute: true,
+        glob: 'resolve'
       },
-      // path: 'absolute',
       default: __sugarConfig('svelte.compile.input'),
       alias: 'i'
     },
     inDir: {
       type: 'String',
-      // path: 'absolute',
+      path: {
+        absolute: true,
+        exists: true
+      },
       default: __sugarConfig('svelte.compile.inDir')
     },
     outDir: {
       type: 'String',
-      // path: {
-      //   absolute: true
-      // },
+      path: {
+        absolute: true,
+        exists: true
+      },
       default: __sugarConfig('svelte.compile.outDir'),
       alias: 'o'
     },
     rootDir: {
       type: 'String',
       path: {
-        absolute: true
+        absolute: true,
+        exists: true
       },
-      // path: 'absolute',
       default: __sugarConfig('svelte.compile.rootDir')
     },
     map: {

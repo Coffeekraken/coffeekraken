@@ -216,7 +216,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
      *
      * @param       {Object}        [settings={}]                 An object of settings to configure your component
      *
-     * @setting     {String}        [name=null]                   Specify the component name in CamelCase. MyCoolComponent => <my-cool-component />
+     * @setting     {String}        [name=null]                   Specify the component name in CamelCase. MyCoolComponent => <my-cool-component />
      *
      * @since 					2.0.0
      * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -416,8 +416,8 @@ function SWebComponentGenerator(extendsSettings = {}) {
      *
      * This method is a shortcut to the ```querySelector``` function
      *
-     * @param         {String}        path      The selector path
-     * @return        {HTMLElement}             The html element getted
+     * @param         {String}        path      The selector path
+     * @return        {HTMLElement}             The html element getted
      *
      * @since 					2.0.0
      * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -437,8 +437,8 @@ function SWebComponentGenerator(extendsSettings = {}) {
      *
      * This method is a shortcut to the ```querySelectorAll``` function
      *
-     * @param         {String}        path      The selector path
-     * @return        {HTMLElement}             The html element(s) getted
+     * @param         {String}        path      The selector path
+     * @return        {HTMLElement}             The html element(s) getted
      *
      * @since 					2.0.0
      * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -478,7 +478,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
      * The media parameter can be one of the media queries defined in the configuration config.media.queries
      *
      * @param       {String}      prop        The property name you want to set in camelcase
-     * @param       {Mixed}       value       The value to set
+     * @param       {Mixed}       value       The value to set
      * @param       {String}    [media=null]    The media for which you want to set the property. Work only on "responsive" defined props
      *
      * @since       2.0.0
@@ -766,9 +766,9 @@ function SWebComponentGenerator(extendsSettings = {}) {
      *    - The object format sended with the event is this one:
      *      - { prop: 'propName', action: 'update|remove|add', value: 'Something', previousValue: 'Other' }
      *
-     * @param       {String}        event         The event you want to subscribe to
+     * @param       {String}        event         The event you want to subscribe to
      * @param       {Function}      callback      The callback function that has to be called
-     * @return      {SPromise}                    The SPromise used in this instance
+     * @return      {SPromise}                    The SPromise used in this instance
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -793,9 +793,9 @@ function SWebComponentGenerator(extendsSettings = {}) {
      *
      * Method used to unsubscribe to a previously subscribed event
      *
-     * @param       {String}        event         The event you want to unsubscribe for
+     * @param       {String}        event         The event you want to unsubscribe for
      * @param       {Function}      callback      The callback function that has to be called
-     * @return      {SPromise}                    The SPromise used in this instance
+     * @return      {SPromise}                    The SPromise used in this instance
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -812,8 +812,8 @@ function SWebComponentGenerator(extendsSettings = {}) {
      * This method is used to dispatch events simultaneously through the SPromise internal instance on which you can subscribe using the "on" method,
      * and through the global "sugar.js.event.dispatch" function on which you can subscribe using the function "sugar.js.event.on"
      *
-     * @param       {String}        name          The event name to dispatch
-     * @param       {Mixed}         value         The value to attach to the event
+     * @param       {String}        name          The event name to dispatch
+     * @param       {Mixed}         value         The value to attach to the event
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -929,9 +929,9 @@ function SWebComponentGenerator(extendsSettings = {}) {
      *
      * Called when an attribute is removed, added or updated
      *
-     * @param     {String}      attrName      The attribute name
-     * @param     {Mixed}       oldVal        The old attribute value
-     * @param     {Mixed}       newVal        The new attribute value
+     * @param     {String}      attrName      The attribute name
+     * @param     {Mixed}       oldVal        The old attribute value
+     * @param     {Mixed}       newVal        The new attribute value
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
@@ -954,7 +954,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
      * webcomponent name
      *
      * @param       {String}      cls         The class name to use
-     * @return      {String}                  The generated class name
+     * @return      {String}                  The generated class name
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1009,7 +1009,7 @@ function SWebComponentGenerator(extendsSettings = {}) {
      *
      * This method simply trigger a prop|prop.{name} event through the SPromise instance.
      *
-     * @param     {String}      prop      The property name to trigger event for
+     * @param     {String}      prop      The property name to trigger event for
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */

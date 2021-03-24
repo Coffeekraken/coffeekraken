@@ -88,7 +88,7 @@ class SDeamon extends __SPromise {
    *
    * @param           {String|Array}      stacks        The stacks in which you want register your callback. Either an Array like ['then','finally'], or a String like "then,finally"
    * @param           {Function}        callback        The callback function to register
-   * @return          {SPromise}                  The SPromise instance to maintain chainability
+   * @return          {SPromise}                  The SPromise instance to maintain chainability
    *
    * @since       2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -112,7 +112,7 @@ class SDeamon extends __SPromise {
    * depending on the updated file, data, etc...
    *
    * @param         {Object}     updateObj           The update object given by the proper deamon type
-   * @return        {String}                          The generated update string
+   * @return        {String}                          The generated update string
    *
    * @since         2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

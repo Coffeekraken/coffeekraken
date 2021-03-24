@@ -144,7 +144,7 @@ class SIpcClient {
      *
      * This method can be used to connect to a running server using his id.
      *
-     * @param         {String|Object}        params            The server to connect to. Can be:
+     * @param         {String|Object}        params            The server to connect to. Can be:
      * - A serverId in String
      * - An object containing: id, host, port to connect to a net server
      * -
@@ -206,9 +206,9 @@ class SIpcClient {
      *
      * This method override the SPromise one to add the ipc "emit" functionality to it.
      *
-     * @param         {String|Array}        stack            The callbacks that you want to emit. Can be "then", "catch", "finally" or "cancel". You can emit multiple stacks by passing an Array like ['then','finally'], or a string like "then,finally"
+     * @param         {String|Array}        stack            The callbacks that you want to emit. Can be "then", "catch", "finally" or "cancel". You can emit multiple stacks by passing an Array like ['then','finally'], or a string like "then,finally"
      * @param         {Mixed}         data         The argument you want to pass to the callback
-     * @return        {Promise}                       A default Promise that will be resolved with the result of the stack execution
+     * @return        {Promise}                       A default Promise that will be resolved with the result of the stack execution
      *
      * @since         2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>

@@ -59,7 +59,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          *
          * Constructor
          *
-         * @param         {Object}        [settings={}]           The settings object to configure your SLogMailAdapter instance. Here's the settings available:
+         * @param         {Object}        [settings={}]           The settings object to configure your SLogMailAdapter instance. Here's the settings available:
          * - host (null) {String}: Your smtp server hostname
          * - username (null) {String}: Your smtp username if needed
          * - password (null) {String}: Your smtp password if needed
@@ -98,8 +98,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * This is the main method of the logger. It actually log the message passed as parameter to the console
          *
          * @param         {Mixed}          message            The message to log
-         * @param         {String}         level              The log level. Can be "log", "info", "error", "debug" or "warn"
-         * @return        {Promise}                           A promise that will be resolved once the message has been logged correctly
+         * @param         {String}         level              The log level. Can be "log", "info", "error", "debug" or "warn"
+         * @return        {Promise}                           A promise that will be resolved once the message has been logged correctly
          *
          * @example         js
          * await consoleAdapter.log('hello world');

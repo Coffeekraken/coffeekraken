@@ -46,9 +46,9 @@ class SSvelteCompilerProcess extends SProcess_1.default {
      *
      * Method that actually execute the process
      *
-     * @param       {Object}        params           The arguments object that will be passed to the underlined actions stream instance
-     * @param       {Object}        [settings={}]     An object of settings passed to the ```start``` method of the ```SBuildScssActionsStream``` instance
-     * @return      {Süromise}                        An SPomise instance representing the build process
+     * @param       {Object}        params           The arguments object that will be passed to the underlined actions stream instance
+     * @param       {Object}        [settings={}]     An object of settings passed to the ```start``` method of the ```SBuildScssActionsStream``` instance
+     * @return      {Süromise}                        An SPomise instance representing the build process
      *
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

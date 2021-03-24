@@ -1,4 +1,3 @@
-
 /**
  * @name              button
  * @namespace         sugar.scss.component.button.mixin
@@ -8,70 +7,66 @@
  *
  * @param       {String}      [$color:primary]       The color you want to generate
  * @param       {String}      [$size:default]       The size you want to generate
- * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
+ * @param       {Number}      [$base-padding: setting('look-and-feel.padding')]                 The base padding value used to interpolate the sizes
  * @param       {Number}       [$border-radius: settings('look-and-feel.border-radius')]       The border radius you want
  * @param       {String}        [$scope:null]       The scope you want to generate. Can be "bare" or "style"
  *
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
- @mixin button(
-    $color: primary,
-    $size: default,
-    $base-padding: setting('look-and-feel.padding'),
-    $border-radius: setting('look-and-feek.border-radius'),
-    $scope: null
-  ) {
-
-    @include context('components.button') {
-    
-        @if scope('bare', $scope) {
-        $sizes: setting('components.button.sizes');
-        $padding: $base-padding;
-          @if length($base-padding) == 2 {
-            $padding: interpolate(nth($base-padding, 1), $size)
-              interpolate(nth($base-padding, 2), $size);
-          } @else if length($base-padding) == 1 {
-            $padding: interpolate($base-padding, $size);
-          } @else {
-            @error ("Your $base-padding parameter has to be a list of 1 or 2 numbers...");
-          }
-          
-          @if scope('main', $scope) {
-            display: inline-block;
-            text-decoration: none;
-            padding: $padding;
-            font-size: font-size($size);
-          }
-          
-          padding: $padding;
-          
-          @if $size != default {
-            font-size: font-size($size);
-          }
-          
+@mixin button(
+  $color: primary,
+  $size: default,
+  $base-padding: setting('look-and-feel.padding'),
+  $border-radius: setting('look-and-feek.border-radius'),
+  $scope: null
+) {
+  @include context('components.button') {
+    @if scope('bare', $scope) {
+      $sizes: setting('components.button.sizes');
+      $padding: $base-padding;
+      @if length($base-padding) == 2 {
+        $padding: interpolate(nth($base-padding, 1), $size)
+          interpolate(nth($base-padding, 2), $size);
+      } @else if length($base-padding) == 1 {
+        $padding: interpolate($base-padding, $size);
+      } @else {
+        @error ("Your $base-padding parameter has to be a list of 1 or 2 numbers...");
       }
 
-      @if scope('style', $scope) {
+      @if scope('main', $scope) {
+        display: inline-block;
+        text-decoration: none;
+        padding: $padding;
+        font-size: font-size($size);
+      }
 
-        @if scope('main', $scope) {
-          border-radius: $border-radius;
-          color: white;
-          transition: transition(fast);
-          background-color: color($color);
-        
-          &:hover {
-            background-color: color($color, hover);
-          }
+      padding: $padding;
+
+      @if $size != default {
+        font-size: font-size($size);
+      }
+    }
+
+    @if scope('style', $scope) {
+      @if scope('main', $scope) {
+        border-radius: $border-radius;
+        color: white;
+        transition: transition(fast);
+        background-color: color($color);
+
+        &:hover {
+          background-color: color($color, hover);
         }
+      }
 
-        @if $color != primary {
-          background-color: color($color);
-        
-          &:hover {
-            background-color: color($color, hover);
-          }
+      @if $color != primary {
+        background-color: color($color);
+
+        &:hover {
+          background-color: color($color, hover);
         }
       }
     }
   }
+}

@@ -126,7 +126,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
          * This function simply parse the passed code and return an array of all the
          * founded es6 imports
          *
-         * @param       {String}            code            The code to parse
+         * @param       {String}            code            The code to parse
          * @return      {Array<SEs6Import}                  An array of all the founded es6 imports
          *
          * @since       2.0.0

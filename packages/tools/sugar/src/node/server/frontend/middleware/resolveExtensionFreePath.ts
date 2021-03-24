@@ -13,8 +13,8 @@ import __extension from '../../../fs/extension';
  *
  * This function will try to resolve extension free requests like node modules, etc...
  *
- * @param           {Object}            req             The request made on the express server
- * @param           {Object}            res             The response object of the express server
+ * @param           {Object}            req             The request made on the express server
+ * @param           {Object}            res             The response object of the express server
  * @param           {Function}          next            The next function to call when the middleware has finished his job
  *
  * @todo      interface

@@ -17,9 +17,9 @@ import __stripAnsi from '../string/stripAnsi';
  * A special token called "[arguments]" is needed if you want the passed arguments to be integrated to the builded command line.
  *
  * @param       {String}      command         The tokenized command line to use as base
- * @param       {Object}      definition   The definition object of the command to launch
+ * @param       {Object}      definition   The definition object of the command to launch
  * @param       {Object}      [args={}]       An optional arguments/values object to override definition default value
- * @param       {Object}      [settings={}]     An object of settings to configure your command line buildine process:
+ * @param       {Object}      [settings={}]     An object of settings to configure your command line buildine process:
  * - includeAllParams (true) {Boolean}: Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument
  * - alias (true) {Boolean}: Specify if you want to make use of the aliases in your generated command
  * @return      {String}                      The builded command string
